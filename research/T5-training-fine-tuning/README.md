@@ -1,7 +1,7 @@
 # T5: Training & Fine-Tuning
 
 Issue: #29 · Contract: 1.0.0 · Kinds: `training_framework`, `training_compute`, `training_dataset`, `fine_tuned_model`
-Status: draft · Last researched: 2026-10-16
+Status: ready for review · Last researched: 2026-10-16
 
 This is the workstream summary for T5. It consolidates the four component decision records and does not replace them. Every finding below is **draft research awaiting review**, and no handoff has been confirmed by a consuming owner yet.
 
