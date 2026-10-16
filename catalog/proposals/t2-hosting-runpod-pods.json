@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "id": "runpod-pods",
+  "kind": "hosting_platform",
+  "tier": "T2",
+  "name": "Runpod Pods",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot; datacenter stock and account entitlement unknown. No unscoped accelerator support array.",
+  "spec": {
+    "hosting_type": "cloud"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.runpod.io/pods/overview",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Dedicated container environment. Regions and private-networking property omitted because no scoped supported matrix was established."
+    },
+    {
+      "source_uri": "https://docs.runpod.io/pods/pricing",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Metered compute/storage; actual GPU rate comes from selected configuration."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}

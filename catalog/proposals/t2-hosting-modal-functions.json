@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "id": "modal-functions",
+  "kind": "hosting_platform",
+  "tier": "T2",
+  "name": "Modal Functions",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot of managed application hosting. Region names are Modal-specific; account capacity unknown.",
+  "spec": {
+    "hosting_type": "cloud",
+    "regions": [
+      "us",
+      "eu",
+      "ap",
+      "us-east",
+      "us-west"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://modal.com/docs/guide/region-selection",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Partial researched container-region set; not exhaustive. Container region, routing region and artifact residency are separate."
+    },
+    {
+      "source_uri": "https://modal.com/pricing",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Functions are metered by resource use. No private-networking assertion is made."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}

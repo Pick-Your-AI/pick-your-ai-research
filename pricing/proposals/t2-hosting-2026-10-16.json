@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0.0",
+  "id": "t2-hosting-2026-10-16",
+  "revision": 1,
+  "captured_at": "2026-10-16T12:39:46Z",
+  "rates": [
+    {
+      "id": "hf-aws-l4-replica-hour",
+      "catalog_item_id": "huggingface-endpoints-aws",
+      "catalog_item_version": "2026-10-16",
+      "meter": "gpu_hour",
+      "unit_price": {
+        "amount": "0.80",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T12:39:46Z",
+      "provenance": {
+        "source_uri": "https://huggingface.co/docs/inference-endpoints/pricing",
+        "checked_at": "2026-10-16T12:39:46Z",
+        "verification_status": "verified",
+        "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
+      },
+      "conditions": [
+        "One AWS L4 instance, one replica; displayed per hour, billed by minute including initializing/running resources.",
+        "Pricing table does not bind this rate to one AWS region; region is omitted rather than guessed.",
+        "GPU-region entitlement, quota, storage, transfer and any additional subscription or taxes are not certified."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "runpod-standard-small-us-ks-2",
+      "catalog_item_id": "runpod-network-standard-us-ks-2",
+      "catalog_item_version": "2026-10-16",
+      "meter": "storage_gb_month",
+      "unit_price": {
+        "amount": "0.07",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T12:39:46Z",
+      "provenance": {
+        "source_uri": "https://docs.runpod.io/storage/network-volumes",
+        "checked_at": "2026-10-16T12:39:46Z",
+        "verification_status": "verified",
+        "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
+      },
+      "conditions": [
+        "Standard network volume in researched US-KS-2; not a capacity reservation.",
+        "Use only for provisioned quantity strictly below 1 TB; do not use as an entire-volume rate above the threshold.",
+        "Vendor GB and month definitions retained; byte normalization unresolved. Storage continues when compute stops.",
+        "Detailed Pod pricing says hourly network-volume billing despite generic per-second wording; sub-hour invoice rounding unresolved."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "r2-standard-storage",
+      "catalog_item_id": "cloudflare-r2-standard",
+      "catalog_item_version": "2026-10-16",
+      "meter": "storage_gb_month",
+      "unit_price": {
+        "amount": "0.015",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T12:39:46Z",
+      "provenance": {
+        "source_uri": "https://developers.cloudflare.com/r2/pricing/",
+        "checked_at": "2026-10-16T12:39:46Z",
+        "verification_status": "verified",
+        "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
+      },
+      "conditions": [
+        "Standard storage class; location-neutral published list rate; exact bucket location not asserted.",
+        "Apply monthly 10 GB-month free allowance once per eligible billing scope; storage uses daily peaks averaged over billing period and rounds up to billing units.",
+        "Requests are separate classified meters; Internet egress is free for R2 itself; other services or source transfer can charge."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "r2-standard-class-a-request",
+      "catalog_item_id": "cloudflare-r2-standard",
+      "catalog_item_version": "2026-10-16",
+      "meter": "request",
+      "unit_price": {
+        "amount": "0.0000045",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T12:39:46Z",
+      "provenance": {
+        "source_uri": "https://developers.cloudflare.com/r2/pricing/",
+        "checked_at": "2026-10-16T12:39:46Z",
+        "verification_status": "verified",
+        "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
+      },
+      "conditions": [
+        "Class A operations only; exact conversion from USD 4.50 per million operations.",
+        "Monthly one-million Class A free allowance and vendor million-operation upward rounding apply; do not multiply raw requests without these conditions.",
+        "Separate from Class B operations and storage."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "r2-standard-class-b-request",
+      "catalog_item_id": "cloudflare-r2-standard",
+      "catalog_item_version": "2026-10-16",
+      "meter": "request",
+      "unit_price": {
+        "amount": "0.00000036",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T12:39:46Z",
+      "provenance": {
+        "source_uri": "https://developers.cloudflare.com/r2/pricing/",
+        "checked_at": "2026-10-16T12:39:46Z",
+        "verification_status": "verified",
+        "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
+      },
+      "conditions": [
+        "Class B operations only; exact conversion from USD 0.36 per million operations.",
+        "Monthly ten-million Class B free allowance and vendor million-operation upward rounding apply; do not multiply raw requests without these conditions.",
+        "Separate from Class A operations and storage."
+      ],
+      "price_type": "list"
+    }
+  ]
+}

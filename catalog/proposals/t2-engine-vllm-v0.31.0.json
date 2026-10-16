@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "id": "inference-vllm",
+  "kind": "inference_engine",
+  "tier": "T2",
+  "name": "vLLM",
+  "version": "v0.31.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Release-scoped research proposal at source commit db9527a46873454610df6dbedf79a36d6bf1a7f6. Conservative capability subsets; omitted support is unknown. See inference-engine.md for tuple, API, adapter and lifecycle conditions.",
+  "spec": {
+    "backends": [
+      "cuda",
+      "rocm",
+      "cpu",
+      "oneapi"
+    ],
+    "model_formats": [
+      "safetensors",
+      "pytorch"
+    ],
+    "supported_precisions": [
+      "fp32",
+      "fp16",
+      "bf16"
+    ]
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/README.md",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E02: documented backend inventory; per-build/device requirements apply. Checked source field, not independently reproduced runtime compatibility."
+    },
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/config/model.py",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E03: FP32/FP16/BF16 model dtype definitions; no quantization/hardware cross-product assertion. Checked source field, not independently reproduced runtime compatibility."
+    },
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/config/load.py",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E03: Safetensors/PyTorch loaders. GGUF requires a separately pinned plugin and is omitted. Checked source field, not independently reproduced runtime compatibility."
+    },
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E04: exact release Apache-2.0 source license; no model/service license inference. Checked source field, not independently reproduced runtime compatibility."
+    }
+  ],
+  "updated_at": "2026-10-16T12:52:17Z"
+}
