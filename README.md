@@ -13,6 +13,8 @@ The builder starts with workload and deployment mode (T0), then guides model sel
 T3, T4, and T5 are optional capabilities: a build may omit them entirely.
 
 - [Contributing and triage conventions](CONTRIBUTING.md) cover issue structure, labels, Project fields, priority and readiness criteria, and dependency semantics.
+- [Research submission workflow](docs/RESEARCH_WORKFLOW.md) explains notes, structured proposals, external evidence, and validation.
+- [Contract coverage](docs/CONTRACT_MAPPING.md) maps all 29 canonical kinds to existing issues; [contract adoption](contracts/v1/ADOPTION.md) explains the preserved v1 package.
 - The [research method](docs/RESEARCH_METHOD.md) defines evidence rules and the decision-record template.
 - The [dependency map](docs/DEPENDENCIES.md) links every component issue to its inputs, compatibility relationships, and ownership boundaries.
 

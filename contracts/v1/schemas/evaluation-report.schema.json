@@ -1,0 +1,176 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "catalog_snapshot_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "ruleset_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "ruleset_version": {
+      "$ref": "common.schema.json#/$defs/semver"
+    },
+    "dependency_graph_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "dependency_graph_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "evaluated_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "valid",
+        "invalid",
+        "indeterminate"
+      ]
+    },
+    "deployment_readiness": {
+      "type": "string",
+      "enum": [
+        "ready",
+        "blocked",
+        "needs_review"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "rule_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "unknown",
+              "skipped"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning",
+              "info"
+            ]
+          },
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{2,80}$"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          },
+          "remediation": {
+            "type": "string"
+          },
+          "selection_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/selection_id"
+            },
+            "uniqueItems": true
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "observed": {},
+                "expected": {},
+                "source_version": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        "required": [
+          "rule_id",
+          "outcome",
+          "severity",
+          "code",
+          "message",
+          "selection_ids"
+        ]
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknown": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "unknown",
+        "skipped"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "build_id",
+    "build_revision",
+    "catalog_snapshot_id",
+    "ruleset_id",
+    "ruleset_version",
+    "dependency_graph_id",
+    "dependency_graph_revision",
+    "evaluated_at",
+    "result",
+    "deployment_readiness",
+    "findings",
+    "summary"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/evaluation-report.schema.json",
+  "title": "Deterministic compatibility evaluation for a pinned build revision"
+}

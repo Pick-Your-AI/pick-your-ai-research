@@ -1,5 +1,7 @@
 # Research method
 
+Use the [submission workflow](RESEARCH_WORKFLOW.md), [canonical-kind mapping](CONTRACT_MAPPING.md), and [research note template](../templates/research-note.md). The frozen v1 contract supplies shared names and types; schema changes go through #40. Raw or incomplete findings do not need a complete CatalogItem yet. Never fill unknown required fields with invented values.
+
 Each component issue produces a decision record at `research/<workstream>/<component>.md` (the path is listed in the issue) with:
 
 1. **Decision to support:** the user choice or compatibility check being researched.

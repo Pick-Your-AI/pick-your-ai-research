@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Canonical component-kind registry. All agent implementations MUST use these identifiers.",
+  "kinds": {
+    "workload": {
+      "tier": "T0",
+      "cardinality": "one",
+      "activation": "always",
+      "notes": "Workload requirements drive all downstream choices."
+    },
+    "deployment_mode": {
+      "tier": "T0",
+      "cardinality": "one",
+      "activation": "always",
+      "notes": "Mode activates API vs self-hosted branches."
+    },
+    "model_provider": {
+      "tier": "T1",
+      "cardinality": "many",
+      "activation": "always",
+      "notes": "Model publisher or API serving provider, not necessarily host."
+    },
+    "model": {
+      "tier": "T1",
+      "cardinality": "many",
+      "activation": "always",
+      "notes": "A base generative or auxiliary model."
+    },
+    "context_policy": {
+      "tier": "T1",
+      "cardinality": "one",
+      "activation": "always",
+      "notes": "User-selected context and output reservations."
+    },
+    "hosting_platform": {
+      "tier": "T2",
+      "cardinality": "many",
+      "activation": "non_api",
+      "notes": "Infrastructure platform offered or owned."
+    },
+    "accelerator": {
+      "tier": "T2",
+      "cardinality": "many",
+      "activation": "self_hosted",
+      "notes": "Compute device capabilities, not an instance reservation."
+    },
+    "compute_profile": {
+      "tier": "T2",
+      "cardinality": "many",
+      "activation": "self_hosted",
+      "notes": "Provisionable host/instance SKU."
+    },
+    "inference_engine": {
+      "tier": "T2",
+      "cardinality": "many",
+      "activation": "self_hosted",
+      "notes": "Local or customer-managed model serving runtime."
+    },
+    "storage": {
+      "tier": "T2",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Storage can back knowledge, vector DB, agent memory, and model artifacts."
+    },
+    "data_source": {
+      "tier": "T3",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Source metadata; raw document content is not part of catalog."
+    },
+    "knowledge_base": {
+      "tier": "T3",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Logical curated corpus; sources may span connectors."
+    },
+    "embedding_model": {
+      "tier": "T3",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Produces vectors for retrieval and long-term memory."
+    },
+    "vector_database": {
+      "tier": "T3",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "A vector index is configured per selection with a fixed dimension."
+    },
+    "rag_pipeline": {
+      "tier": "T3",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Pipeline binds base model, knowledge, embedding, and retrieval storage."
+    },
+    "agent_framework": {
+      "tier": "T4",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Framework orchestration capabilities."
+    },
+    "tool": {
+      "tier": "T4",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Callable capability; mutating actions require policy review."
+    },
+    "mcp_server": {
+      "tier": "T4",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "MCP tool provider, subject to authorization and transport compatibility."
+    },
+    "memory_store": {
+      "tier": "T4",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Memory store shares storage or vector infrastructure across tiers."
+    },
+    "integration": {
+      "tier": "T4",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "External integrations can be callable via tools."
+    },
+    "training_framework": {
+      "tier": "T5",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Fine-tuning method/backend support."
+    },
+    "training_compute": {
+      "tier": "T5",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Training hardware provision reuses available compute profiles."
+    },
+    "training_dataset": {
+      "tier": "T5",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Training dataset governance and lineage."
+    },
+    "fine_tuned_model": {
+      "tier": "T5",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Derived model requires a traceable base, dataset, and training path."
+    },
+    "guardrail": {
+      "tier": "T6",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Safety and compliance controls at explicit enforcement points."
+    },
+    "evaluation_suite": {
+      "tier": "T6",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "A suite defines evaluation gates, not measured results."
+    },
+    "deployment_target": {
+      "tier": "T6",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "The deployment artifact and runtime target."
+    },
+    "monitoring_stack": {
+      "tier": "T6",
+      "cardinality": "many",
+      "activation": "optional",
+      "notes": "Central observability and resource/cost telemetry."
+    },
+    "cost_policy": {
+      "tier": "T6",
+      "cardinality": "one",
+      "activation": "optional",
+      "notes": "Budget controls applied to pricebook estimates."
+    }
+  }
+}

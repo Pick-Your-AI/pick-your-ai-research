@@ -1,0 +1,840 @@
+{
+  "schema_version": "1.0.0",
+  "id": "catalog.fixture.1",
+  "revision": 1,
+  "captured_at": "2026-10-16T09:00:00Z",
+  "items": [
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.workload.fixture",
+      "kind": "workload",
+      "tier": "T0",
+      "name": "FICTIONAL Workload",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "workload_type": "agentic",
+        "modalities": [
+          "text"
+        ],
+        "concurrency": 2,
+        "requests_per_day": 200,
+        "avg_input_tokens": 700,
+        "avg_output_tokens": 400,
+        "data_classification": "internal"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.deployment_mode.fixture",
+      "kind": "deployment_mode",
+      "tier": "T0",
+      "name": "FICTIONAL Deployment Mode",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "mode": "self_hosted",
+        "allowed_regions": [
+          "us-east-fixture"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.model_provider.fixture",
+      "kind": "model_provider",
+      "tier": "T1",
+      "name": "FICTIONAL Model Provider",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "supports_fine_tuning": true,
+        "supported_regions": [
+          "us-east-fixture"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.model.fixture",
+      "kind": "model",
+      "tier": "T1",
+      "name": "FICTIONAL Model",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "provider_ref": "cat.model_provider.fixture",
+        "model_type": "generative",
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ],
+        "context_window_tokens": 8192,
+        "max_output_tokens": 1024,
+        "supports_tool_calling": true,
+        "supports_json_schema": true,
+        "supports_fine_tuning": true,
+        "access_modes": [
+          "weights"
+        ],
+        "weight_access": "open",
+        "model_formats": [
+          "safetensors"
+        ],
+        "supported_precisions": [
+          "fp16",
+          "int8"
+        ],
+        "min_weights_vram_gb": 12
+      },
+      "license": {
+        "spdx_id": "TEST-ONLY",
+        "commercial_use_allowed": true,
+        "self_hosting_allowed": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.context_policy.fixture",
+      "kind": "context_policy",
+      "tier": "T1",
+      "name": "FICTIONAL Context Policy",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "max_allowed_tokens": 8192,
+        "supported_truncation": [
+          "reject",
+          "truncate_oldest"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.hosting_platform.fixture",
+      "kind": "hosting_platform",
+      "tier": "T2",
+      "name": "FICTIONAL Hosting Platform",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "hosting_type": "cloud",
+        "regions": [
+          "us-east-fixture"
+        ],
+        "accelerator_refs": [
+          "cat.accelerator.fixture"
+        ],
+        "supports_private_networking": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.accelerator.fixture",
+      "kind": "accelerator",
+      "tier": "T2",
+      "name": "FICTIONAL Accelerator",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "accelerator_type": "gpu",
+        "vendor": "Fixture Hardware Inc.",
+        "model_name": "Demo GPU 24",
+        "vram_gb": 24,
+        "backends": [
+          "cuda"
+        ],
+        "precisions": [
+          "fp16",
+          "int8"
+        ],
+        "interconnect": "pcie"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.compute_profile.fixture",
+      "kind": "compute_profile",
+      "tier": "T2",
+      "name": "FICTIONAL Compute Profile",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "metered",
+      "spec": {
+        "hosting_ref": "cat.hosting_platform.fixture",
+        "accelerator_ref": "cat.accelerator.fixture",
+        "accelerator_count": 1,
+        "cpu_cores": 8,
+        "ram_gb": 64,
+        "disk_gb": 300,
+        "region": "us-east-fixture"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.inference_engine.fixture",
+      "kind": "inference_engine",
+      "tier": "T2",
+      "name": "FICTIONAL Inference Engine",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "backends": [
+          "cuda"
+        ],
+        "model_formats": [
+          "safetensors"
+        ],
+        "supported_precisions": [
+          "fp16",
+          "int8"
+        ],
+        "supports_tool_calling": true,
+        "supports_multi_gpu": true,
+        "max_batch_size": 8
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.storage.fixture",
+      "kind": "storage",
+      "tier": "T2",
+      "name": "FICTIONAL Storage",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "metered",
+      "spec": {
+        "storage_type": "object",
+        "hosting_ref": "cat.hosting_platform.fixture",
+        "region": "us-east-fixture",
+        "encryption_at_rest": true,
+        "max_capacity_gb": 2000
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.data_source.fixture",
+      "kind": "data_source",
+      "tier": "T3",
+      "name": "FICTIONAL Data Source",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "source_type": "file",
+        "modalities": [
+          "text"
+        ],
+        "classification": "internal",
+        "refresh_supported": true,
+        "access_controlled": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.knowledge_base.fixture",
+      "kind": "knowledge_base",
+      "tier": "T3",
+      "name": "FICTIONAL Knowledge Base",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "data_source_refs": [
+          "cat.data_source.fixture"
+        ],
+        "supported_modalities": [
+          "text"
+        ],
+        "supports_acl": true,
+        "supports_incremental_sync": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.embedding_model.fixture",
+      "kind": "embedding_model",
+      "tier": "T3",
+      "name": "FICTIONAL Embedding Model",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "provider_ref": "cat.model_provider.fixture",
+        "embedding_dimensions": 768,
+        "max_input_tokens": 4096,
+        "similarity_metrics": [
+          "cosine"
+        ],
+        "supported_modalities": [
+          "text"
+        ],
+        "access_modes": [
+          "weights"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.vector_database.fixture",
+      "kind": "vector_database",
+      "tier": "T3",
+      "name": "FICTIONAL Vector Database",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "supported_metrics": [
+          "cosine",
+          "dot"
+        ],
+        "max_dimensions": 4096,
+        "supports_hybrid_search": true,
+        "supports_acl": true,
+        "regions": [
+          "us-east-fixture"
+        ],
+        "hosting_ref": "cat.hosting_platform.fixture"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.rag_pipeline.fixture",
+      "kind": "rag_pipeline",
+      "tier": "T3",
+      "name": "FICTIONAL Rag Pipeline",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "retrieval_mode": "dense",
+        "supports_rerank": true,
+        "supported_chunking": [
+          "fixed",
+          "semantic"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.agent_framework.fixture",
+      "kind": "agent_framework",
+      "tier": "T4",
+      "name": "FICTIONAL Agent Framework",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "programming_languages": [
+          "python"
+        ],
+        "supports_mcp": true,
+        "supports_memory": true,
+        "supports_multi_agent": true,
+        "supports_tool_execution": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.tool.fixture",
+      "kind": "tool",
+      "tier": "T4",
+      "name": "FICTIONAL Tool",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "protocol": "mcp",
+        "side_effect": "mutating",
+        "auth_methods": [
+          "oauth2"
+        ],
+        "required_scopes": [
+          "fixture.write"
+        ],
+        "is_networked": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.mcp_server.fixture",
+      "kind": "mcp_server",
+      "tier": "T4",
+      "name": "FICTIONAL Mcp Server",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "transport": "streamable_http",
+        "tool_refs": [
+          "cat.tool.fixture"
+        ],
+        "auth_methods": [
+          "oauth2"
+        ],
+        "trust_level": "internal"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.memory_store.fixture",
+      "kind": "memory_store",
+      "tier": "T4",
+      "name": "FICTIONAL Memory Store",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "memory_type": "long_term",
+        "backing_type": "vector",
+        "encryption_at_rest": true,
+        "supports_ttl": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.integration.fixture",
+      "kind": "integration",
+      "tier": "T4",
+      "name": "FICTIONAL Integration",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "integration_type": "api",
+        "auth_methods": [
+          "oauth2"
+        ],
+        "rate_limit_per_minute": 60,
+        "associated_tool_refs": [
+          "cat.tool.fixture"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.training_framework.fixture",
+      "kind": "training_framework",
+      "tier": "T5",
+      "name": "FICTIONAL Training Framework",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "methods": [
+          "lora",
+          "sft"
+        ],
+        "backends": [
+          "cuda"
+        ],
+        "model_formats": [
+          "safetensors"
+        ],
+        "distributed_supported": false
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.training_compute.fixture",
+      "kind": "training_compute",
+      "tier": "T5",
+      "name": "FICTIONAL Training Compute",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "compute_profile_ref": "cat.compute_profile.fixture",
+        "max_gpu_hours": 50,
+        "ephemeral": true,
+        "storage_ref": "cat.storage.fixture"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.training_dataset.fixture",
+      "kind": "training_dataset",
+      "tier": "T5",
+      "name": "FICTIONAL Training Dataset",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "data_source_refs": [
+          "cat.data_source.fixture"
+        ],
+        "example_count": 2000,
+        "data_classification": "internal",
+        "license_verified": true,
+        "privacy_approved": true,
+        "held_out_test_set": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.fine_tuned_model.fixture",
+      "kind": "fine_tuned_model",
+      "tier": "T5",
+      "name": "FICTIONAL Fine Tuned Model",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "base_model_ref": "cat.model.fixture",
+        "training_framework_ref": "cat.training_framework.fixture",
+        "training_dataset_ref": "cat.training_dataset.fixture",
+        "artifact_format": "safetensors",
+        "adapter_only": true,
+        "supported_access_modes": [
+          "weights"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.guardrail.fixture",
+      "kind": "guardrail",
+      "tier": "T6",
+      "name": "FICTIONAL Guardrail",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "targets": [
+          "input",
+          "output",
+          "retrieval",
+          "tool",
+          "training"
+        ],
+        "policies": [
+          "pii",
+          "prompt_injection",
+          "tool_permissions",
+          "secrets"
+        ],
+        "enforcement": "block"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.evaluation_suite.fixture",
+      "kind": "evaluation_suite",
+      "tier": "T6",
+      "name": "FICTIONAL Evaluation Suite",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "metric_names": [
+          "answer_quality",
+          "latency_ms",
+          "tool_safety"
+        ],
+        "mode": "both",
+        "gate_on_deployment": true,
+        "dataset_refs": [
+          "cat.training_dataset.fixture"
+        ]
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.deployment_target.fixture",
+      "kind": "deployment_target",
+      "tier": "T6",
+      "name": "FICTIONAL Deployment Target",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "target_type": "api_endpoint",
+        "hosting_ref": "cat.hosting_platform.fixture",
+        "region": "us-east-fixture",
+        "supports_autoscale": true,
+        "supports_rollback": true
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.monitoring_stack.fixture",
+      "kind": "monitoring_stack",
+      "tier": "T6",
+      "name": "FICTIONAL Monitoring Stack",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "signals": [
+          "latency",
+          "errors",
+          "token_usage",
+          "gpu_utilization",
+          "cost",
+          "traces",
+          "security"
+        ],
+        "pii_redaction": true,
+        "retention_days": 30,
+        "exporter": "otlp"
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    },
+    {
+      "schema_version": "1.0.0",
+      "id": "cat.cost_policy.fixture",
+      "kind": "cost_policy",
+      "tier": "T6",
+      "name": "FICTIONAL Cost Policy",
+      "version": "2026.10-demo",
+      "status": "active",
+      "billing_class": "included",
+      "spec": {
+        "default_currency": "USD",
+        "supports_hard_cap": true,
+        "alert_threshold_pct": 80
+      },
+      "provenance": [
+        {
+          "checked_at": "2026-10-16T09:00:00Z",
+          "verification_status": "user_supplied",
+          "notes": "FICTIONAL TEST FIXTURE. Not vendor specification or commercial pricing."
+        }
+      ],
+      "updated_at": "2026-10-16T09:00:00Z"
+    }
+  ]
+}

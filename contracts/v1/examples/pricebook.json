@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "id": "prices.fixture.1",
+  "revision": 1,
+  "captured_at": "2026-10-16T09:00:00Z",
+  "rates": [
+    {
+      "id": "rate.compute_profile.fixture",
+      "catalog_item_id": "cat.compute_profile.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "meter": "gpu_hour",
+      "region": "us-east-fixture",
+      "unit_price": {
+        "amount": "0.80",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T09:00:00Z",
+      "provenance": {
+        "checked_at": "2026-10-16T09:00:00Z",
+        "verification_status": "estimated",
+        "notes": "Illustrative price, NOT a live market quote."
+      },
+      "price_type": "estimate"
+    },
+    {
+      "id": "rate.storage.fixture",
+      "catalog_item_id": "cat.storage.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "meter": "storage_gb_month",
+      "region": "us-east-fixture",
+      "unit_price": {
+        "amount": "0.05",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T09:00:00Z",
+      "provenance": {
+        "checked_at": "2026-10-16T09:00:00Z",
+        "verification_status": "estimated",
+        "notes": "Illustrative price, NOT a live market quote."
+      },
+      "price_type": "estimate"
+    }
+  ]
+}

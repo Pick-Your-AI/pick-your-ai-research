@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "generated_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "estimates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "metric": {
+            "type": "string",
+            "enum": [
+              "inference.estimated_required_vram_gb",
+              "inference.estimated_peak_per_device_vram_gb",
+              "inference.estimated_tokens_per_second",
+              "compute.estimated_gpu_power_w",
+              "training.estimated_gpu_hours"
+            ]
+          },
+          "value": {
+            "$ref": "common.schema.json#/$defs/decimal"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "gb",
+              "tokens_per_second",
+              "watt",
+              "gpu_hour"
+            ]
+          },
+          "estimator_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "estimator_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "calibrated",
+              "estimated",
+              "unverified"
+            ]
+          },
+          "source_uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selection_ids": {
+            "type": "array",
+            "items": {
+              "$ref": "common.schema.json#/$defs/selection_id"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "metric",
+          "value",
+          "unit",
+          "estimator_id",
+          "estimator_version",
+          "confidence",
+          "assumptions",
+          "selection_ids"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "build_id",
+    "build_revision",
+    "generated_at",
+    "estimates"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/resource-estimate.schema.json",
+  "title": "Version-pinned external compute and model-capacity estimates"
+}

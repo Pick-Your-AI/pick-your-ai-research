@@ -1,0 +1,345 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "version": {
+      "$ref": "common.schema.json#/$defs/semver"
+    },
+    "published_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning",
+              "info"
+            ]
+          },
+          "applies_when": {
+            "$ref": "#/$defs/expression"
+          },
+          "assert": {
+            "$ref": "#/$defs/expression"
+          },
+          "on_unknown": {
+            "type": "string",
+            "enum": [
+              "block",
+              "review",
+              "defer"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          },
+          "remediation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "affected_kinds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "workload",
+                "deployment_mode",
+                "model_provider",
+                "model",
+                "context_policy",
+                "hosting_platform",
+                "accelerator",
+                "compute_profile",
+                "inference_engine",
+                "storage",
+                "data_source",
+                "knowledge_base",
+                "embedding_model",
+                "vector_database",
+                "rag_pipeline",
+                "agent_framework",
+                "tool",
+                "mcp_server",
+                "memory_store",
+                "integration",
+                "training_framework",
+                "training_compute",
+                "training_dataset",
+                "fine_tuned_model",
+                "guardrail",
+                "evaluation_suite",
+                "deployment_target",
+                "monitoring_stack",
+                "cost_policy"
+              ]
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "severity",
+          "applies_when",
+          "assert",
+          "on_unknown",
+          "message",
+          "remediation",
+          "affected_kinds"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "published_at",
+    "rules"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/ruleset.schema.json",
+  "title": "Declarative explainable cross-tier compatibility rules",
+  "$defs": {
+    "operand": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "literal": {}
+          },
+          "required": [
+            "literal"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "metric": {
+              "type": "string",
+              "enum": [
+                "context.total_requested_tokens",
+                "compute.total_selected_vram_gb",
+                "compute.min_selected_device_vram_gb",
+                "inference.estimated_required_vram_gb",
+                "inference.estimated_peak_per_device_vram_gb",
+                "tools.mutating_count",
+                "cost.monthly_total_amount"
+              ]
+            }
+          },
+          "required": [
+            "metric"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "ref": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "scope": {
+                  "type": "string",
+                  "enum": [
+                    "build",
+                    "catalog",
+                    "selection"
+                  ]
+                },
+                "pointer": {
+                  "type": "string",
+                  "pattern": "^/"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "workload",
+                    "deployment_mode",
+                    "model_provider",
+                    "model",
+                    "context_policy",
+                    "hosting_platform",
+                    "accelerator",
+                    "compute_profile",
+                    "inference_engine",
+                    "storage",
+                    "data_source",
+                    "knowledge_base",
+                    "embedding_model",
+                    "vector_database",
+                    "rag_pipeline",
+                    "agent_framework",
+                    "tool",
+                    "mcp_server",
+                    "memory_store",
+                    "integration",
+                    "training_framework",
+                    "training_compute",
+                    "training_dataset",
+                    "fine_tuned_model",
+                    "guardrail",
+                    "evaluation_suite",
+                    "deployment_target",
+                    "monitoring_stack",
+                    "cost_policy"
+                  ]
+                },
+                "role": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_-]{0,49}$"
+                },
+                "selection_id": {
+                  "$ref": "common.schema.json#/$defs/selection_id"
+                }
+              },
+              "required": [
+                "scope",
+                "pointer"
+              ]
+            }
+          },
+          "required": [
+            "ref"
+          ]
+        }
+      ]
+    },
+    "expression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "type": "string",
+              "enum": [
+                "eq",
+                "ne",
+                "lt",
+                "lte",
+                "gt",
+                "gte",
+                "in",
+                "contains",
+                "subset_of",
+                "intersects"
+              ]
+            },
+            "left": {
+              "$ref": "#/$defs/operand"
+            },
+            "right": {
+              "$ref": "#/$defs/operand"
+            }
+          },
+          "required": [
+            "op",
+            "left",
+            "right"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "exists"
+            },
+            "value": {
+              "$ref": "#/$defs/operand"
+            }
+          },
+          "required": [
+            "op",
+            "value"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "type": "string",
+              "enum": [
+                "all",
+                "any"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expression"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "not"
+            },
+            "arg": {
+              "$ref": "#/$defs/expression"
+            }
+          },
+          "required": [
+            "op",
+            "arg"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "op": {
+              "const": "implies"
+            },
+            "if": {
+              "$ref": "#/$defs/expression"
+            },
+            "then": {
+              "$ref": "#/$defs/expression"
+            }
+          },
+          "required": [
+            "op",
+            "if",
+            "then"
+          ]
+        }
+      ]
+    }
+  }
+}

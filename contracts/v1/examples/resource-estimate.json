@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "id": "resources.fixture.1",
+  "build_id": "build.fixture.1",
+  "build_revision": 1,
+  "generated_at": "2026-10-16T09:00:00Z",
+  "estimates": [
+    {
+      "metric": "inference.estimated_required_vram_gb",
+      "value": "20.0",
+      "unit": "gb",
+      "estimator_id": "fixture.estimator",
+      "estimator_version": "0.0-fixture",
+      "confidence": "estimated",
+      "assumptions": [
+        "Synthetic figure only. Includes fictitious model weights, KV cache and serving overhead at the selected context/concurrency."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    },
+    {
+      "metric": "inference.estimated_peak_per_device_vram_gb",
+      "value": "20.0",
+      "unit": "gb",
+      "estimator_id": "fixture.estimator",
+      "estimator_version": "0.0-fixture",
+      "confidence": "estimated",
+      "assumptions": [
+        "Synthetic per-device peak VRAM fixture, not a measured estimate."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    }
+  ]
+}

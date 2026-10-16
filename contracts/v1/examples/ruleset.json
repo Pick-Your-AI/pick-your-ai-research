@@ -1,0 +1,2503 @@
+{
+  "schema_version": "1.0.0",
+  "id": "rules.fixture.1",
+  "version": "1.0.0",
+  "published_at": "2026-10-16T09:00:00Z",
+  "rules": [
+    {
+      "id": "rule.required.foundation",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "literal": true
+        },
+        "right": {
+          "literal": true
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "workload",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "model",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "context_policy",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Required T0/T1 components are absent.",
+      "remediation": "Choose workload, deployment mode, primary model and context.",
+      "affected_kinds": [
+        "workload",
+        "deployment_mode",
+        "model",
+        "context_policy"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.model.provider.match",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/spec/provider_ref"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model_provider",
+            "role": "primary",
+            "pointer": "/catalog_item_id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Selected model belongs to a different provider.",
+      "remediation": "Select the corresponding model provider.",
+      "affected_kinds": [
+        "model",
+        "model_provider"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.model.context.fit",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/spec/context_window_tokens"
+          }
+        },
+        "right": {
+          "metric": "context.total_requested_tokens"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Requested total tokens exceed model context capacity.",
+      "remediation": "Reduce prompt/reserved output or select a model with a larger context window.",
+      "affected_kinds": [
+        "model",
+        "context_policy",
+        "compute_profile"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.model.output.limit",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/spec/max_output_tokens"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "context_policy",
+            "role": "primary",
+            "pointer": "/settings/reserved_output_tokens"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Requested output reservation exceeds model maximum.",
+      "remediation": "Reduce reserved output tokens or change model.",
+      "affected_kinds": [
+        "model",
+        "context_policy"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.selfhost.requires.infrastructure",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "deployment_mode",
+            "role": "primary",
+            "pointer": "/spec/mode"
+          }
+        },
+        "right": {
+          "literal": "self_hosted"
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "hosting_platform",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "accelerator",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "compute_profile",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Self-hosting requires hosting, compute, accelerator and inference engine.",
+      "remediation": "Choose compatible self-hosted infrastructure.",
+      "affected_kinds": [
+        "deployment_mode",
+        "hosting_platform",
+        "accelerator",
+        "compute_profile",
+        "inference_engine"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.selfhost.requires.weights",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "deployment_mode",
+            "role": "primary",
+            "pointer": "/spec/mode"
+          }
+        },
+        "right": {
+          "literal": "self_hosted"
+        }
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/spec/access_modes"
+          }
+        },
+        "right": {
+          "literal": "weights"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Model weights are unavailable for self-hosting.",
+      "remediation": "Choose a weights-access model or API mode.",
+      "affected_kinds": [
+        "deployment_mode",
+        "model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.engine.model.format",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "intersects",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/spec/model_formats"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "inference_engine",
+            "role": "primary",
+            "pointer": "/spec/model_formats"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Inference engine cannot load this model format.",
+      "remediation": "Change model format or inference engine.",
+      "affected_kinds": [
+        "model",
+        "inference_engine",
+        "fine_tuned_model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.engine.accelerator.backend",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "intersects",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/spec/backends"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "inference_engine",
+            "role": "primary",
+            "pointer": "/spec/backends"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Inference backend is incompatible with accelerator.",
+      "remediation": "Select a compatible runtime/backend or accelerator.",
+      "affected_kinds": [
+        "accelerator",
+        "inference_engine",
+        "hosting_platform"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.precision.engine",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "inference_engine",
+            "role": "primary",
+            "pointer": "/spec/supported_precisions"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/settings/precision"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Inference engine does not support selected model precision.",
+      "remediation": "Change precision or inference engine.",
+      "affected_kinds": [
+        "model",
+        "inference_engine"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.precision.accelerator",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "accelerator",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/spec/precisions"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/settings/precision"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Accelerator does not support selected precision.",
+      "remediation": "Change precision or accelerator.",
+      "affected_kinds": [
+        "model",
+        "accelerator"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.vram.estimate.fit",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "accelerator",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "metric": "compute.total_selected_vram_gb"
+        },
+        "right": {
+          "metric": "inference.estimated_required_vram_gb"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Available accelerator memory is below calibrated runtime requirement or estimate is missing.",
+      "remediation": "Provide a calibrated model+context+batch VRAM estimate; choose enough compatible GPU memory.",
+      "affected_kinds": [
+        "model",
+        "accelerator",
+        "context_policy",
+        "inference_engine",
+        "compute_profile"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.api.model.access",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "deployment_mode",
+            "role": "primary",
+            "pointer": "/spec/mode"
+          }
+        },
+        "right": {
+          "literal": "api"
+        }
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/spec/access_modes"
+          }
+        },
+        "right": {
+          "literal": "api"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Model cannot be served by API mode.",
+      "remediation": "Select an API-capable model or change deployment mode.",
+      "affected_kinds": [
+        "deployment_mode",
+        "model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.host.region",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "hosting_platform",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "selection",
+            "kind": "hosting_platform",
+            "role": "primary",
+            "pointer": "/settings/region"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "build",
+            "pointer": "/objectives/region"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Host region conflicts with build objective.",
+      "remediation": "Select a hosting region allowed by the workload.",
+      "affected_kinds": [
+        "hosting_platform",
+        "workload",
+        "deployment_target"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.embedding.dimension",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "embedding_model",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "vector_database",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "selection",
+            "kind": "embedding_model",
+            "role": "primary",
+            "pointer": "/settings/output_dimensions"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/settings/index_dimension"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Embedding and vector index dimensions do not match.",
+      "remediation": "Recreate compatible index or select a matching embedding dimension.",
+      "affected_kinds": [
+        "embedding_model",
+        "vector_database",
+        "memory_store",
+        "rag_pipeline"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.vector.dimension.support",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/spec/max_dimensions"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/settings/index_dimension"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Vector index dimension exceeds DB capability.",
+      "remediation": "Reduce dimensions or change vector database.",
+      "affected_kinds": [
+        "vector_database",
+        "embedding_model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.vector.distance.support",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/spec/supported_metrics"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/settings/similarity_metric"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Selected similarity metric unsupported by vector database.",
+      "remediation": "Change metric or vector DB.",
+      "affected_kinds": [
+        "vector_database",
+        "embedding_model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.embedding.distance.support",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "embedding_model",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "vector_database",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "embedding_model",
+            "role": "primary",
+            "pointer": "/spec/similarity_metrics"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/settings/similarity_metric"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Selected distance metric unsupported by embedding model.",
+      "remediation": "Choose compatible embedding model or metric.",
+      "affected_kinds": [
+        "embedding_model",
+        "vector_database"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.rag.knowledge",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "rag_pipeline",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "knowledge_base",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "RAG pipeline lacks a knowledge base.",
+      "remediation": "Select a knowledge base.",
+      "affected_kinds": [
+        "rag_pipeline",
+        "knowledge_base",
+        "data_source"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.rag.dense.dependencies",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "rag_pipeline",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "any",
+            "args": [
+              {
+                "op": "eq",
+                "left": {
+                  "ref": {
+                    "scope": "catalog",
+                    "kind": "rag_pipeline",
+                    "role": "primary",
+                    "pointer": "/spec/retrieval_mode"
+                  }
+                },
+                "right": {
+                  "literal": "dense"
+                }
+              },
+              {
+                "op": "eq",
+                "left": {
+                  "ref": {
+                    "scope": "catalog",
+                    "kind": "rag_pipeline",
+                    "role": "primary",
+                    "pointer": "/spec/retrieval_mode"
+                  }
+                },
+                "right": {
+                  "literal": "hybrid"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "embedding_model",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "vector_database",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Dense/hybrid retrieval requires an embedding model and vector database.",
+      "remediation": "Select embedding and index components, or change to keyword retrieval.",
+      "affected_kinds": [
+        "rag_pipeline",
+        "embedding_model",
+        "vector_database"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.agent.tools.framework",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "tool",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "agent_framework",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "agent_framework",
+                "role": "primary",
+                "pointer": "/spec/supports_tool_execution"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Tool execution is unsupported or no framework selected.",
+      "remediation": "Choose a framework with supported tool execution.",
+      "affected_kinds": [
+        "tool",
+        "agent_framework"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.agent.mcp.framework",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "mcp_server",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "agent_framework",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "agent_framework",
+                "role": "primary",
+                "pointer": "/spec/supports_mcp"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Selected framework does not support MCP.",
+      "remediation": "Change framework or disable MCP.",
+      "affected_kinds": [
+        "mcp_server",
+        "agent_framework",
+        "tool"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.memory.vector.storage",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "memory_store",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "memory_store",
+                "role": "primary",
+                "pointer": "/spec/backing_type"
+              }
+            },
+            "right": {
+              "literal": "vector"
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "vector_database",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Vector-backed memory requires a vector database.",
+      "remediation": "Select a vector database or change memory backend.",
+      "affected_kinds": [
+        "memory_store",
+        "vector_database"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.tool.mutation.guardrails",
+      "severity": "error",
+      "applies_when": {
+        "op": "gt",
+        "left": {
+          "metric": "tools.mutating_count"
+        },
+        "right": {
+          "literal": 0
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "guardrail",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "contains",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "guardrail",
+                "role": "primary",
+                "pointer": "/spec/policies"
+              }
+            },
+            "right": {
+              "literal": "tool_permissions"
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Mutating tools require tool-permission guardrails.",
+      "remediation": "Add a tool-permissions policy with enforceable actions.",
+      "affected_kinds": [
+        "tool",
+        "mcp_server",
+        "guardrail",
+        "agent_framework"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.training.model.capable",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "fine_tuned_model",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "training_framework",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "training_compute",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "training_dataset",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "model",
+                "role": "primary",
+                "pointer": "/spec/supports_fine_tuning"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Fine-tuning path or base-model capability is incomplete.",
+      "remediation": "Choose supported training framework, compute and dataset.",
+      "affected_kinds": [
+        "model",
+        "fine_tuned_model",
+        "training_framework",
+        "training_compute",
+        "training_dataset"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.training.dataset.governance",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "training_dataset",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "training_dataset",
+                "role": "primary",
+                "pointer": "/spec/license_verified"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "training_dataset",
+                "role": "primary",
+                "pointer": "/spec/privacy_approved"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Training dataset license/privacy approval not verified.",
+      "remediation": "Obtain approvals before training.",
+      "affected_kinds": [
+        "training_dataset",
+        "data_source",
+        "guardrail"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.training.base.lineage",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "fine_tuned_model",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "fine_tuned_model",
+            "role": "primary",
+            "pointer": "/spec/base_model_ref"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/catalog_item_id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Fine-tuning base model does not match selected model.",
+      "remediation": "Align fine-tuned model base lineage and active model selection.",
+      "affected_kinds": [
+        "fine_tuned_model",
+        "model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.training.method.support",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "training_framework",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "training_framework",
+            "role": "primary",
+            "pointer": "/spec/methods"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "training_framework",
+            "role": "primary",
+            "pointer": "/settings/method"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Selected training method unsupported by framework.",
+      "remediation": "Change training method.",
+      "affected_kinds": [
+        "training_framework",
+        "model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.training.backend.support",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "training_framework",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "accelerator",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "intersects",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "training_framework",
+            "role": "primary",
+            "pointer": "/spec/backends"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/spec/backends"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Training framework incompatible with accelerator backend.",
+      "remediation": "Select compatible training compute/backend.",
+      "affected_kinds": [
+        "training_framework",
+        "accelerator",
+        "training_compute"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.restricted.monitoring.redaction",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "build",
+            "pointer": "/objectives/data_classification"
+          }
+        },
+        "right": {
+          "literal": "restricted"
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "monitoring_stack",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "monitoring_stack",
+                "role": "primary",
+                "pointer": "/spec/pii_redaction"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Restricted data requires observability redaction.",
+      "remediation": "Enable PII redaction and audit its operation.",
+      "affected_kinds": [
+        "workload",
+        "monitoring_stack"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.production.gates",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "deployment_target",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "selection",
+                "kind": "deployment_target",
+                "role": "primary",
+                "pointer": "/settings/environment"
+              }
+            },
+            "right": {
+              "literal": "production"
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "evaluation_suite",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "monitoring_stack",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "guardrail",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Production deployment requires evaluation, monitoring and guardrails.",
+      "remediation": "Configure and enforce production gates.",
+      "affected_kinds": [
+        "deployment_target",
+        "evaluation_suite",
+        "monitoring_stack",
+        "guardrail"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.budget.monthly.cap",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "cost_policy",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "selection",
+                "kind": "cost_policy",
+                "role": "primary",
+                "pointer": "/settings/enforce_hard_cap"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "lte",
+        "left": {
+          "metric": "cost.monthly_total_amount"
+        },
+        "right": {
+          "ref": {
+            "scope": "build",
+            "pointer": "/objectives/monthly_budget_amount"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Estimated cost exceeds approved budget or pricing is incomplete.",
+      "remediation": "Adjust capacity, token usage, or budget; obtain full pricing.",
+      "affected_kinds": [
+        "cost_policy",
+        "model",
+        "compute_profile",
+        "storage",
+        "integration",
+        "training_compute"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.compute.sku.accelerator",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "compute_profile",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "compute_profile",
+            "role": "primary",
+            "pointer": "/spec/accelerator_ref"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/catalog_item_id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Compute SKU references another accelerator.",
+      "remediation": "Select a compute SKU with this accelerator.",
+      "affected_kinds": [
+        "compute_profile",
+        "accelerator"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.compute.sku.host",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "compute_profile",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "compute_profile",
+            "role": "primary",
+            "pointer": "/spec/hosting_ref"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "hosting_platform",
+            "role": "primary",
+            "pointer": "/catalog_item_id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Compute profile belongs to another hosting platform.",
+      "remediation": "Choose a compute SKU from the selected host.",
+      "affected_kinds": [
+        "compute_profile",
+        "hosting_platform"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.compute.accelerator.count",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "compute_profile",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "compute_profile",
+            "role": "primary",
+            "pointer": "/spec/accelerator_count"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/settings/device_count"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Compute SKU offers fewer accelerator devices than requested.",
+      "remediation": "Reduce device count or choose a larger SKU.",
+      "affected_kinds": [
+        "compute_profile",
+        "accelerator"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.host.accelerator.catalog",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "hosting_platform",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "hosting_platform",
+            "role": "primary",
+            "pointer": "/spec/accelerator_refs"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/catalog_item_id"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Selected hosting platform does not offer the accelerator.",
+      "remediation": "Choose a supported accelerator or host.",
+      "affected_kinds": [
+        "hosting_platform",
+        "accelerator"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.tensor.parallel.devices",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "ref": {
+            "scope": "selection",
+            "kind": "accelerator",
+            "role": "primary",
+            "pointer": "/settings/device_count"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "selection",
+            "kind": "inference_engine",
+            "role": "primary",
+            "pointer": "/settings/tensor_parallel_size"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Tensor-parallel size exceeds device count.",
+      "remediation": "Reduce tensor parallelism or provision more GPUs.",
+      "affected_kinds": [
+        "inference_engine",
+        "accelerator",
+        "compute_profile"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.context.policy.limit",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "context_policy",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "context_policy",
+            "role": "primary",
+            "pointer": "/spec/max_allowed_tokens"
+          }
+        },
+        "right": {
+          "metric": "context.total_requested_tokens"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Requested total context exceeds selected policy cap.",
+      "remediation": "Reduce requested token capacity or select a larger context policy.",
+      "affected_kinds": [
+        "context_policy",
+        "model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.model.serving.mode.selfhost",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "deployment_mode",
+            "role": "primary",
+            "pointer": "/spec/mode"
+          }
+        },
+        "right": {
+          "literal": "self_hosted"
+        }
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "selection",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/settings/serving_mode"
+          }
+        },
+        "right": {
+          "literal": "weights"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Self-hosted deployment requires weights serving mode.",
+      "remediation": "Select model serving_mode=weights.",
+      "affected_kinds": [
+        "deployment_mode",
+        "model"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.model.selfhost.license",
+      "severity": "error",
+      "applies_when": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "deployment_mode",
+            "role": "primary",
+            "pointer": "/spec/mode"
+          }
+        },
+        "right": {
+          "literal": "self_hosted"
+        }
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "model",
+            "role": "primary",
+            "pointer": "/license/self_hosting_allowed"
+          }
+        },
+        "right": {
+          "literal": true
+        }
+      },
+      "on_unknown": "block",
+      "message": "Model self-hosting rights not confirmed by verified license metadata.",
+      "remediation": "Verify model license before deploying or change model.",
+      "affected_kinds": [
+        "model",
+        "deployment_mode"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.deployment.target.region",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "deployment_target",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "selection",
+            "kind": "deployment_target",
+            "role": "primary",
+            "pointer": "/settings/region"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "build",
+            "pointer": "/objectives/region"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Deployment target region differs from residency objective.",
+      "remediation": "Select a compliant deployment region.",
+      "affected_kinds": [
+        "deployment_target",
+        "hosting_platform",
+        "workload"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.memory.framework.compatibility",
+      "severity": "error",
+      "applies_when": {
+        "op": "exists",
+        "value": {
+          "ref": {
+            "scope": "selection",
+            "kind": "memory_store",
+            "role": "primary",
+            "pointer": "/id"
+          }
+        }
+      },
+      "assert": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "agent_framework",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "agent_framework",
+                "role": "primary",
+                "pointer": "/spec/supports_memory"
+              }
+            },
+            "right": {
+              "literal": true
+            }
+          }
+        ]
+      },
+      "on_unknown": "block",
+      "message": "Selected framework does not support memory.",
+      "remediation": "Select a memory-capable framework or remove memory.",
+      "affected_kinds": [
+        "memory_store",
+        "agent_framework"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.training.artifact.engine",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "fine_tuned_model",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "contains",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "inference_engine",
+            "role": "primary",
+            "pointer": "/spec/model_formats"
+          }
+        },
+        "right": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "fine_tuned_model",
+            "role": "primary",
+            "pointer": "/spec/artifact_format"
+          }
+        }
+      },
+      "on_unknown": "block",
+      "message": "Fine-tuned artifact format is not supported by inference engine.",
+      "remediation": "Convert artifact or change engine.",
+      "affected_kinds": [
+        "fine_tuned_model",
+        "inference_engine"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.knowledge.restricted.acl",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "knowledge_base",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "any",
+            "args": [
+              {
+                "op": "eq",
+                "left": {
+                  "ref": {
+                    "scope": "build",
+                    "pointer": "/objectives/data_classification"
+                  }
+                },
+                "right": {
+                  "literal": "restricted"
+                }
+              },
+              {
+                "op": "eq",
+                "left": {
+                  "ref": {
+                    "scope": "build",
+                    "pointer": "/objectives/data_classification"
+                  }
+                },
+                "right": {
+                  "literal": "confidential"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "selection",
+            "kind": "knowledge_base",
+            "role": "primary",
+            "pointer": "/settings/acl_enforced"
+          }
+        },
+        "right": {
+          "literal": true
+        }
+      },
+      "on_unknown": "block",
+      "message": "Confidential/restricted knowledge must enforce access control.",
+      "remediation": "Enable knowledge-base ACL enforcement.",
+      "affected_kinds": [
+        "knowledge_base",
+        "workload",
+        "guardrail"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.vram.per.device.fit",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "accelerator",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "gte",
+        "left": {
+          "metric": "compute.min_selected_device_vram_gb"
+        },
+        "right": {
+          "metric": "inference.estimated_peak_per_device_vram_gb"
+        }
+      },
+      "on_unknown": "block",
+      "message": "Per-device VRAM is below the model runtime peak (multi-GPU aggregate is not sufficient).",
+      "remediation": "Provide per-device estimate or change sharding/quantization/GPU.",
+      "affected_kinds": [
+        "model",
+        "accelerator",
+        "context_policy",
+        "inference_engine",
+        "compute_profile"
+      ],
+      "owner": "compatibility-agent"
+    },
+    {
+      "id": "rule.tensor.parallel.engine.support",
+      "severity": "error",
+      "applies_when": {
+        "op": "all",
+        "args": [
+          {
+            "op": "eq",
+            "left": {
+              "ref": {
+                "scope": "catalog",
+                "kind": "deployment_mode",
+                "role": "primary",
+                "pointer": "/spec/mode"
+              }
+            },
+            "right": {
+              "literal": "self_hosted"
+            }
+          },
+          {
+            "op": "exists",
+            "value": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/id"
+              }
+            }
+          },
+          {
+            "op": "gt",
+            "left": {
+              "ref": {
+                "scope": "selection",
+                "kind": "inference_engine",
+                "role": "primary",
+                "pointer": "/settings/tensor_parallel_size"
+              }
+            },
+            "right": {
+              "literal": 1
+            }
+          }
+        ]
+      },
+      "assert": {
+        "op": "eq",
+        "left": {
+          "ref": {
+            "scope": "catalog",
+            "kind": "inference_engine",
+            "role": "primary",
+            "pointer": "/spec/supports_multi_gpu"
+          }
+        },
+        "right": {
+          "literal": true
+        }
+      },
+      "on_unknown": "block",
+      "message": "Inference runtime lacks multi-GPU tensor-parallel support.",
+      "remediation": "Choose a supported engine or use single-device tensor parallelism.",
+      "affected_kinds": [
+        "inference_engine",
+        "accelerator",
+        "compute_profile"
+      ],
+      "owner": "compatibility-agent"
+    }
+  ]
+}

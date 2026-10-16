@@ -1,0 +1,106 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "captured_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "rates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "catalog_item_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "catalog_item_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "meter": {
+            "type": "string",
+            "enum": [
+              "input_tokens_1m",
+              "output_tokens_1m",
+              "cached_input_tokens_1m",
+              "embedding_tokens_1m",
+              "request",
+              "gpu_hour",
+              "cpu_hour",
+              "storage_gb_month",
+              "vector_gb_month",
+              "agent_run",
+              "seat_month",
+              "license_month",
+              "one_time"
+            ]
+          },
+          "region": {
+            "type": "string"
+          },
+          "unit_price": {
+            "$ref": "common.schema.json#/$defs/money"
+          },
+          "valid_from": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          },
+          "valid_until": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          },
+          "provenance": {
+            "$ref": "common.schema.json#/$defs/provenance"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "price_type": {
+            "type": "string",
+            "enum": [
+              "list",
+              "contract",
+              "estimate"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "catalog_item_id",
+          "catalog_item_version",
+          "meter",
+          "unit_price",
+          "valid_from",
+          "provenance",
+          "price_type"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "captured_at",
+    "rates"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/pricebook.schema.json",
+  "title": "Versioned sourced metered prices"
+}

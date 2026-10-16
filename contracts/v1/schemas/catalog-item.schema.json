@@ -1,0 +1,2162 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "workload",
+        "deployment_mode",
+        "model_provider",
+        "model",
+        "context_policy",
+        "hosting_platform",
+        "accelerator",
+        "compute_profile",
+        "inference_engine",
+        "storage",
+        "data_source",
+        "knowledge_base",
+        "embedding_model",
+        "vector_database",
+        "rag_pipeline",
+        "agent_framework",
+        "tool",
+        "mcp_server",
+        "memory_store",
+        "integration",
+        "training_framework",
+        "training_compute",
+        "training_dataset",
+        "fine_tuned_model",
+        "guardrail",
+        "evaluation_suite",
+        "deployment_target",
+        "monitoring_stack",
+        "cost_policy"
+      ]
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "T0",
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 180
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "preview",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "billing_class": {
+      "type": "string",
+      "enum": [
+        "free",
+        "included",
+        "metered",
+        "unknown"
+      ]
+    },
+    "spec": {
+      "type": "object"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/provenance"
+      },
+      "minItems": 1
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "spdx_id": {
+          "type": "string"
+        },
+        "commercial_use_allowed": {
+          "type": "boolean"
+        },
+        "self_hosting_allowed": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "updated_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "kind",
+    "tier",
+    "name",
+    "version",
+    "status",
+    "billing_class",
+    "spec",
+    "provenance",
+    "updated_at"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/catalog-item.schema.json",
+  "title": "Typed catalog item",
+  "$defs": {
+    "spec_workload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "workload_type": {
+          "type": "string",
+          "enum": [
+            "chat",
+            "completion",
+            "rag",
+            "agentic",
+            "embedding",
+            "fine_tuning",
+            "batch",
+            "multimodal"
+          ]
+        },
+        "modalities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "structured"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "concurrency": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "requests_per_day": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latency_budget_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "uptime_target_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "data_classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        }
+      },
+      "required": [
+        "workload_type",
+        "modalities"
+      ]
+    },
+    "spec_deployment_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "api",
+            "managed",
+            "self_hosted",
+            "hybrid"
+          ]
+        },
+        "allowed_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "spec_model_provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "api_base_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "supports_fine_tuning": {
+          "type": "boolean"
+        },
+        "supported_regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supported_auth": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "api_key",
+              "oauth2",
+              "service_account",
+              "none"
+            ]
+          }
+        }
+      },
+      "required": []
+    },
+    "spec_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind model_provider"
+        },
+        "model_type": {
+          "type": "string",
+          "enum": [
+            "generative",
+            "multimodal",
+            "reranker",
+            "embedding"
+          ]
+        },
+        "modalities_in": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "structured"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "modalities_out": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "structured"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "context_window_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "supports_tool_calling": {
+          "type": "boolean"
+        },
+        "supports_json_schema": {
+          "type": "boolean"
+        },
+        "supports_fine_tuning": {
+          "type": "boolean"
+        },
+        "access_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "api",
+              "weights"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "weight_access": {
+          "type": "string",
+          "enum": [
+            "open",
+            "restricted",
+            "none"
+          ]
+        },
+        "model_formats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "safetensors",
+              "gguf",
+              "onnx",
+              "pytorch",
+              "api_only",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "supported_precisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fp32",
+              "tf32",
+              "bf16",
+              "fp16",
+              "fp8",
+              "int8",
+              "int4"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "min_weights_vram_gb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "license_ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider_ref",
+        "model_type",
+        "modalities_in",
+        "modalities_out",
+        "context_window_tokens",
+        "max_output_tokens",
+        "access_modes",
+        "model_formats"
+      ]
+    },
+    "spec_context_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_allowed_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "supported_truncation": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "reject",
+              "truncate_oldest",
+              "summarize",
+              "sliding_window"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": []
+    },
+    "spec_hosting_platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hosting_type": {
+          "type": "string",
+          "enum": [
+            "cloud",
+            "on_prem",
+            "edge",
+            "colocation",
+            "managed_api"
+          ]
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "accelerator_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+            "description": "Reference to catalog kind accelerator"
+          },
+          "uniqueItems": true
+        },
+        "supports_private_networking": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "hosting_type"
+      ]
+    },
+    "spec_accelerator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accelerator_type": {
+          "type": "string",
+          "enum": [
+            "gpu",
+            "tpu",
+            "npu",
+            "cpu"
+          ]
+        },
+        "vendor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "vram_gb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "backends": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "cuda",
+              "rocm",
+              "oneapi",
+              "metal",
+              "tpu",
+              "cpu",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "precisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fp32",
+              "tf32",
+              "bf16",
+              "fp16",
+              "fp8",
+              "int8",
+              "int4"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "rated_power_w": {
+          "type": "number",
+          "minimum": 0
+        },
+        "interconnect": {
+          "type": "string",
+          "enum": [
+            "pcie",
+            "nvlink",
+            "ethernet",
+            "proprietary",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "accelerator_type",
+        "vendor",
+        "model_name",
+        "vram_gb",
+        "backends",
+        "precisions"
+      ]
+    },
+    "spec_compute_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "hosting_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind hosting_platform"
+        },
+        "accelerator_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind accelerator"
+        },
+        "accelerator_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cpu_cores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ram_gb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "disk_gb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "region": {
+          "type": "string",
+          "minLength": 1
+        },
+        "network_gbps": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "hosting_ref",
+        "cpu_cores",
+        "ram_gb",
+        "region"
+      ]
+    },
+    "spec_inference_engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "backends": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "cuda",
+              "rocm",
+              "oneapi",
+              "metal",
+              "tpu",
+              "cpu",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "model_formats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "safetensors",
+              "gguf",
+              "onnx",
+              "pytorch",
+              "api_only",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "supported_precisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fp32",
+              "tf32",
+              "bf16",
+              "fp16",
+              "fp8",
+              "int8",
+              "int4"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "supports_tool_calling": {
+          "type": "boolean"
+        },
+        "supports_multi_gpu": {
+          "type": "boolean"
+        },
+        "max_batch_size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "backends",
+        "model_formats",
+        "supported_precisions"
+      ]
+    },
+    "spec_storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "storage_type": {
+          "type": "string",
+          "enum": [
+            "object",
+            "block",
+            "file",
+            "relational",
+            "in_memory"
+          ]
+        },
+        "hosting_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind hosting_platform"
+        },
+        "region": {
+          "type": "string"
+        },
+        "encryption_at_rest": {
+          "type": "boolean"
+        },
+        "max_capacity_gb": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "storage_type"
+      ]
+    },
+    "spec_data_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "file",
+            "url",
+            "database",
+            "api",
+            "connector",
+            "event_stream"
+          ]
+        },
+        "modalities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "structured"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        },
+        "refresh_supported": {
+          "type": "boolean"
+        },
+        "access_controlled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_type",
+        "modalities",
+        "classification"
+      ]
+    },
+    "spec_knowledge_base": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data_source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+            "description": "Reference to catalog kind data_source"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "supported_modalities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "structured"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "supports_acl": {
+          "type": "boolean"
+        },
+        "supports_incremental_sync": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data_source_refs"
+      ]
+    },
+    "spec_embedding_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provider_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind model_provider"
+        },
+        "embedding_dimensions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_input_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "similarity_metrics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "cosine",
+              "dot",
+              "euclidean"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "supported_modalities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "text",
+              "image",
+              "audio",
+              "video",
+              "structured"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "access_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "api",
+              "weights"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "provider_ref",
+        "embedding_dimensions",
+        "max_input_tokens",
+        "similarity_metrics",
+        "supported_modalities",
+        "access_modes"
+      ]
+    },
+    "spec_vector_database": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supported_metrics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "cosine",
+              "dot",
+              "euclidean"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "max_dimensions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "supports_hybrid_search": {
+          "type": "boolean"
+        },
+        "supports_acl": {
+          "type": "boolean"
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hosting_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind hosting_platform"
+        }
+      },
+      "required": [
+        "supported_metrics"
+      ]
+    },
+    "spec_rag_pipeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "retrieval_mode": {
+          "type": "string",
+          "enum": [
+            "dense",
+            "sparse",
+            "hybrid",
+            "keyword"
+          ]
+        },
+        "supports_rerank": {
+          "type": "boolean"
+        },
+        "supported_chunking": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "fixed",
+              "semantic",
+              "recursive",
+              "none"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "retrieval_mode"
+      ]
+    },
+    "spec_agent_framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "programming_languages": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "python",
+              "typescript",
+              "javascript",
+              "go",
+              "rust",
+              "java",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "supports_mcp": {
+          "type": "boolean"
+        },
+        "supports_memory": {
+          "type": "boolean"
+        },
+        "supports_multi_agent": {
+          "type": "boolean"
+        },
+        "supports_tool_execution": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "programming_languages"
+      ]
+    },
+    "spec_tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "http",
+            "grpc",
+            "cli",
+            "embedded",
+            "mcp"
+          ]
+        },
+        "side_effect": {
+          "type": "string",
+          "enum": [
+            "read_only",
+            "mutating"
+          ]
+        },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "none",
+              "api_key",
+              "oauth2",
+              "service_account",
+              "mTLS"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "required_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_networked": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "protocol",
+        "side_effect"
+      ]
+    },
+    "spec_mcp_server": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transport": {
+          "type": "string",
+          "enum": [
+            "stdio",
+            "streamable_http",
+            "sse"
+          ]
+        },
+        "tool_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+            "description": "Reference to catalog kind tool"
+          },
+          "uniqueItems": true
+        },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "none",
+              "api_key",
+              "oauth2",
+              "mTLS"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "trust_level": {
+          "type": "string",
+          "enum": [
+            "internal",
+            "trusted_external",
+            "untrusted_external"
+          ]
+        }
+      },
+      "required": [
+        "transport"
+      ]
+    },
+    "spec_memory_store": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "memory_type": {
+          "type": "string",
+          "enum": [
+            "working",
+            "session",
+            "long_term"
+          ]
+        },
+        "backing_type": {
+          "type": "string",
+          "enum": [
+            "in_memory",
+            "relational",
+            "vector",
+            "object",
+            "file"
+          ]
+        },
+        "encryption_at_rest": {
+          "type": "boolean"
+        },
+        "supports_ttl": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "memory_type",
+        "backing_type"
+      ]
+    },
+    "spec_integration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "integration_type": {
+          "type": "string",
+          "enum": [
+            "api",
+            "webhook",
+            "event",
+            "connector"
+          ]
+        },
+        "auth_methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "none",
+              "api_key",
+              "oauth2",
+              "service_account",
+              "mTLS"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "rate_limit_per_minute": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "associated_tool_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+            "description": "Reference to catalog kind tool"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "integration_type"
+      ]
+    },
+    "spec_training_framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sft",
+              "lora",
+              "qlora",
+              "dpo",
+              "full_finetune",
+              "distillation"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "backends": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "cuda",
+              "rocm",
+              "oneapi",
+              "metal",
+              "tpu",
+              "cpu",
+              "other"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "model_formats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "safetensors",
+              "gguf",
+              "onnx",
+              "pytorch",
+              "api_only",
+              "other"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "distributed_supported": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "methods",
+        "backends"
+      ]
+    },
+    "spec_training_compute": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compute_profile_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind compute_profile"
+        },
+        "max_gpu_hours": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ephemeral": {
+          "type": "boolean"
+        },
+        "storage_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind storage"
+        }
+      },
+      "required": [
+        "compute_profile_ref"
+      ]
+    },
+    "spec_training_dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "data_source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+            "description": "Reference to catalog kind data_source"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "example_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "data_classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        },
+        "license_verified": {
+          "type": "boolean"
+        },
+        "privacy_approved": {
+          "type": "boolean"
+        },
+        "held_out_test_set": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data_source_refs",
+        "data_classification"
+      ]
+    },
+    "spec_fine_tuned_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "base_model_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind model"
+        },
+        "training_framework_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind training_framework"
+        },
+        "training_dataset_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind training_dataset"
+        },
+        "artifact_format": {
+          "type": "string",
+          "enum": [
+            "safetensors",
+            "gguf",
+            "onnx",
+            "pytorch",
+            "api_only",
+            "other"
+          ]
+        },
+        "adapter_only": {
+          "type": "boolean"
+        },
+        "supported_access_modes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "api",
+              "weights"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "base_model_ref",
+        "training_framework_ref",
+        "training_dataset_ref",
+        "artifact_format"
+      ]
+    },
+    "spec_guardrail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "input",
+              "output",
+              "retrieval",
+              "tool",
+              "training"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "pii",
+              "prompt_injection",
+              "toxicity",
+              "data_exfiltration",
+              "content",
+              "tool_permissions",
+              "secrets"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "enforcement": {
+          "type": "string",
+          "enum": [
+            "audit",
+            "block",
+            "redact",
+            "escalate"
+          ]
+        }
+      },
+      "required": [
+        "targets",
+        "policies",
+        "enforcement"
+      ]
+    },
+    "spec_evaluation_suite": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metric_names": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "offline",
+            "online",
+            "both"
+          ]
+        },
+        "gate_on_deployment": {
+          "type": "boolean"
+        },
+        "dataset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+            "description": "Reference to catalog kind training_dataset"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "metric_names",
+        "mode"
+      ]
+    },
+    "spec_deployment_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "target_type": {
+          "type": "string",
+          "enum": [
+            "api_endpoint",
+            "batch_worker",
+            "application",
+            "edge"
+          ]
+        },
+        "hosting_ref": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "description": "Reference to catalog kind hosting_platform"
+        },
+        "region": {
+          "type": "string"
+        },
+        "supports_autoscale": {
+          "type": "boolean"
+        },
+        "supports_rollback": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "target_type"
+      ]
+    },
+    "spec_monitoring_stack": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "latency",
+              "errors",
+              "token_usage",
+              "gpu_utilization",
+              "quality",
+              "drift",
+              "cost",
+              "traces",
+              "security"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "pii_redaction": {
+          "type": "boolean"
+        },
+        "retention_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "exporter": {
+          "type": "string",
+          "enum": [
+            "otlp",
+            "prometheus",
+            "vendor_api",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "signals"
+      ]
+    },
+    "spec_cost_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default_currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        },
+        "supports_hard_cap": {
+          "type": "boolean"
+        },
+        "alert_threshold_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "default_currency"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "workload"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T0"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_workload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "deployment_mode"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T0"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_deployment_mode"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "model_provider"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T1"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_model_provider"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "model"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T1"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "context_policy"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T1"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_context_policy"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "hosting_platform"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T2"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_hosting_platform"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "accelerator"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T2"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_accelerator"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "compute_profile"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T2"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_compute_profile"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "inference_engine"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T2"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_inference_engine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "storage"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T2"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_storage"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "data_source"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T3"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_data_source"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "knowledge_base"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T3"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_knowledge_base"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "embedding_model"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T3"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_embedding_model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "vector_database"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T3"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_vector_database"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "rag_pipeline"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T3"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_rag_pipeline"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "agent_framework"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T4"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_agent_framework"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "tool"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T4"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_tool"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "mcp_server"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T4"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_mcp_server"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "memory_store"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T4"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_memory_store"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "integration"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T4"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_integration"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "training_framework"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T5"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_training_framework"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "training_compute"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T5"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_training_compute"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "training_dataset"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T5"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_training_dataset"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "fine_tuned_model"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T5"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_fine_tuned_model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "guardrail"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T6"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_guardrail"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "evaluation_suite"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T6"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_evaluation_suite"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "deployment_target"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T6"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_deployment_target"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "monitoring_stack"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T6"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_monitoring_stack"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "cost_policy"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "tier": {
+            "const": "T6"
+          },
+          "spec": {
+            "$ref": "#/$defs/spec_cost_policy"
+          }
+        }
+      }
+    }
+  ]
+}

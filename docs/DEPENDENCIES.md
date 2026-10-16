@@ -43,10 +43,11 @@ The only native delivery blocker is **#42 blocked by #40**: a saved build serial
 | --- | --- | --- |
 | Builder catalog data (facts, prices, sources, reuse terms, freshness, evidence grades) | T0 #41 | Every component issue; #40 provenance fields; #39; #42 invalidation |
 | User knowledge data sources (connectors, rights, sync, deletion) | T3 #13 | Earlier versions listed "Data Sources (T4)" as a Knowledge Base input; this is now owned by T3. T4 tools (#26, #27) cover runtime actions and live API calls. |
-| Knowledge storage (documents, metadata, ACLs) | T3 #13 | Reused by #28 |
+| Infrastructure storage products (`storage`) | T2 #9 | Shared by #13, #15, #28, #31; storage pricing feeds #39 |
+| Knowledge storage semantics (documents, metadata, ACLs) | T3 #13 | Reused by #28; product catalog supplied by #9 |
 | Retrieval backend choice (keyword, vector, hybrid, graph, direct lookup) | T3 #16 | A vector database (#15) is one optional backend |
 | Vector database product evaluation | T3 #15 | Reused by #28; not re-evaluated in T4 |
-| Agent memory semantics (session vs durable, retention, consent) | T4 #28 | Storage from #13 / #15 |
+| Agent memory semantics (session vs durable, retention, consent) | T4 #28 | Storage products from #9; knowledge/retrieval semantics from #13 / #15 |
 | Model access (license, weight availability, provider terms) | T1 #5, #6 | #30 decides whether training is permitted |
 | Fine-tuned artifact definition and provenance | T5 #33 | Serving compatibility owned by #11; sizing by #10; evaluation by #36 |
 | Inference GPU sizing | T2 #10 | #31 reuses the accelerator catalog for training estimates |
@@ -56,4 +57,4 @@ The only native delivery blocker is **#42 blocked by #40**: a saved build serial
 
 ## Shared compatibility model
 
-Represent each configuration as typed selections with explicit versions and deployment mode. A rule identifies the participating fields, source, severity (`compatible`, `warning`, `incompatible`, or `unknown`), explanation, and suggested correction. Re-evaluate affected rules when a selection changes. Use ranges and assumptions for estimates such as throughput, memory, and cost. Research into this model is tracked in #40.
+Represent each configuration as typed selections with explicit versions and deployment mode. In the imported v1 contract, a rule identifies the participating fields, condition, severity (`info`, `warning`, or `error`), explanation, and suggested correction. Evaluation outcomes are separately `pass`, `fail`, `unknown`, or `skipped`. Re-evaluate affected rules when a selection changes. Use ranges and assumptions for estimates such as throughput, memory, and cost. Research into this model is tracked in #40; see [contract coverage](CONTRACT_MAPPING.md) for all 29 kinds and ownership boundaries.
