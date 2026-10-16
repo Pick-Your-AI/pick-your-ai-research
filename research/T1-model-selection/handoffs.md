@@ -42,3 +42,7 @@ T2's [merged handoff ledger](../T2-infrastructure/handoffs.md) requested exact m
 Request one coordinated review on the focused T1 PR from the six affected owners: @tynamite, @Mattycodes69, @zabyxc01, @CompleteDotTech, @appletechie and @PUSHINGSQUARES. Record actual comment/review URLs after they exist. Ask owners to **accept**, **accept with constraints**, or **reject** the specific consumer rows, with the reviewed SHA. Do not repeatedly request the same pending decision.
 
 Use `Refs #4`, `Refs #5`, `Refs #6`, `Refs #7` while confirmations/merge are pending. No changes to other assignees, acceptance criteria, native blockers or existing decisions are made. Project update access is a tracking limitation, not a newly invented issue dependency.
+
+## Requests actually published
+
+[PR #88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88) requests all six affected owners listed above; GitHub readback confirmed those requests and an empty submitted-review list at publication. [Parent request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4#issuecomment-6223171020) and [central #40 intake](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6223171381) identify the concrete artifacts and required dispositions. Requests leave all Pending rows pending. Existing signed-in browser access resolved the earlier Project API limitation; #4–7 Status is now In Review, with priorities/readiness/ownership preserved. No Done status or closure is claimed.
