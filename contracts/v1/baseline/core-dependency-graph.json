@@ -1,0 +1,479 @@
+{
+  "schema_version": "1.0.0",
+  "id": "dependencies.core.1",
+  "revision": 1,
+  "edges": [
+    {
+      "id": "dep.model.deployment_mode",
+      "dependent_kind": "model",
+      "depends_on_kind": "deployment_mode",
+      "relationship": "constrains",
+      "activation": "always",
+      "rationale": "model selection must be reevaluated when deployment_mode changes."
+    },
+    {
+      "id": "dep.model.model_provider",
+      "dependent_kind": "model",
+      "depends_on_kind": "model_provider",
+      "relationship": "requires",
+      "activation": "always",
+      "rationale": "model selection must be reevaluated when model_provider changes."
+    },
+    {
+      "id": "dep.context_policy.model",
+      "dependent_kind": "context_policy",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "always",
+      "rationale": "context_policy selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.accelerator.model",
+      "dependent_kind": "accelerator",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "self_hosted",
+      "rationale": "accelerator selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.accelerator.context_policy",
+      "dependent_kind": "accelerator",
+      "depends_on_kind": "context_policy",
+      "relationship": "constrains",
+      "activation": "self_hosted",
+      "rationale": "accelerator selection must be reevaluated when context_policy changes."
+    },
+    {
+      "id": "dep.compute_profile.accelerator",
+      "dependent_kind": "compute_profile",
+      "depends_on_kind": "accelerator",
+      "relationship": "requires",
+      "activation": "self_hosted",
+      "rationale": "compute_profile selection must be reevaluated when accelerator changes."
+    },
+    {
+      "id": "dep.compute_profile.hosting_platform",
+      "dependent_kind": "compute_profile",
+      "depends_on_kind": "hosting_platform",
+      "relationship": "requires",
+      "activation": "self_hosted",
+      "rationale": "compute_profile selection must be reevaluated when hosting_platform changes."
+    },
+    {
+      "id": "dep.compute_profile.model",
+      "dependent_kind": "compute_profile",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "self_hosted",
+      "rationale": "compute_profile selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.inference_engine.model",
+      "dependent_kind": "inference_engine",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "self_hosted",
+      "rationale": "inference_engine selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.inference_engine.accelerator",
+      "dependent_kind": "inference_engine",
+      "depends_on_kind": "accelerator",
+      "relationship": "constrains",
+      "activation": "self_hosted",
+      "rationale": "inference_engine selection must be reevaluated when accelerator changes."
+    },
+    {
+      "id": "dep.inference_engine.fine_tuned_model",
+      "dependent_kind": "inference_engine",
+      "depends_on_kind": "fine_tuned_model",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "inference_engine selection must be reevaluated when fine_tuned_model changes."
+    },
+    {
+      "id": "dep.hosting_platform.deployment_mode",
+      "dependent_kind": "hosting_platform",
+      "depends_on_kind": "deployment_mode",
+      "relationship": "constrains",
+      "activation": "non_api",
+      "rationale": "hosting_platform selection must be reevaluated when deployment_mode changes."
+    },
+    {
+      "id": "dep.storage.hosting_platform",
+      "dependent_kind": "storage",
+      "depends_on_kind": "hosting_platform",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "storage selection must be reevaluated when hosting_platform changes."
+    },
+    {
+      "id": "dep.knowledge_base.data_source",
+      "dependent_kind": "knowledge_base",
+      "depends_on_kind": "data_source",
+      "relationship": "requires",
+      "activation": "if_selected",
+      "rationale": "knowledge_base selection must be reevaluated when data_source changes."
+    },
+    {
+      "id": "dep.embedding_model.model_provider",
+      "dependent_kind": "embedding_model",
+      "depends_on_kind": "model_provider",
+      "relationship": "requires",
+      "activation": "if_selected",
+      "rationale": "embedding_model selection must be reevaluated when model_provider changes."
+    },
+    {
+      "id": "dep.vector_database.embedding_model",
+      "dependent_kind": "vector_database",
+      "depends_on_kind": "embedding_model",
+      "relationship": "constrains",
+      "activation": "rag_enabled",
+      "rationale": "vector_database selection must be reevaluated when embedding_model changes."
+    },
+    {
+      "id": "dep.vector_database.storage",
+      "dependent_kind": "vector_database",
+      "depends_on_kind": "storage",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "vector_database selection must be reevaluated when storage changes."
+    },
+    {
+      "id": "dep.vector_database.hosting_platform",
+      "dependent_kind": "vector_database",
+      "depends_on_kind": "hosting_platform",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "vector_database selection must be reevaluated when hosting_platform changes."
+    },
+    {
+      "id": "dep.rag_pipeline.knowledge_base",
+      "dependent_kind": "rag_pipeline",
+      "depends_on_kind": "knowledge_base",
+      "relationship": "requires",
+      "activation": "rag_enabled",
+      "rationale": "rag_pipeline selection must be reevaluated when knowledge_base changes."
+    },
+    {
+      "id": "dep.rag_pipeline.embedding_model",
+      "dependent_kind": "rag_pipeline",
+      "depends_on_kind": "embedding_model",
+      "relationship": "requires",
+      "activation": "rag_enabled",
+      "rationale": "rag_pipeline selection must be reevaluated when embedding_model changes."
+    },
+    {
+      "id": "dep.rag_pipeline.vector_database",
+      "dependent_kind": "rag_pipeline",
+      "depends_on_kind": "vector_database",
+      "relationship": "requires",
+      "activation": "rag_enabled",
+      "rationale": "rag_pipeline selection must be reevaluated when vector_database changes."
+    },
+    {
+      "id": "dep.rag_pipeline.model",
+      "dependent_kind": "rag_pipeline",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "rag_enabled",
+      "rationale": "rag_pipeline selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.agent_framework.model",
+      "dependent_kind": "agent_framework",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "agents_enabled",
+      "rationale": "agent_framework selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.agent_framework.rag_pipeline",
+      "dependent_kind": "agent_framework",
+      "depends_on_kind": "rag_pipeline",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "agent_framework selection must be reevaluated when rag_pipeline changes."
+    },
+    {
+      "id": "dep.agent_framework.tool",
+      "dependent_kind": "agent_framework",
+      "depends_on_kind": "tool",
+      "relationship": "constrains",
+      "activation": "agents_enabled",
+      "rationale": "agent_framework selection must be reevaluated when tool changes."
+    },
+    {
+      "id": "dep.mcp_server.agent_framework",
+      "dependent_kind": "mcp_server",
+      "depends_on_kind": "agent_framework",
+      "relationship": "constrains",
+      "activation": "agents_enabled",
+      "rationale": "mcp_server selection must be reevaluated when agent_framework changes."
+    },
+    {
+      "id": "dep.mcp_server.tool",
+      "dependent_kind": "mcp_server",
+      "depends_on_kind": "tool",
+      "relationship": "requires",
+      "activation": "if_selected",
+      "rationale": "mcp_server selection must be reevaluated when tool changes."
+    },
+    {
+      "id": "dep.mcp_server.hosting_platform",
+      "dependent_kind": "mcp_server",
+      "depends_on_kind": "hosting_platform",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "mcp_server selection must be reevaluated when hosting_platform changes."
+    },
+    {
+      "id": "dep.integration.tool",
+      "dependent_kind": "integration",
+      "depends_on_kind": "tool",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "integration selection must be reevaluated when tool changes."
+    },
+    {
+      "id": "dep.memory_store.agent_framework",
+      "dependent_kind": "memory_store",
+      "depends_on_kind": "agent_framework",
+      "relationship": "constrains",
+      "activation": "agents_enabled",
+      "rationale": "memory_store selection must be reevaluated when agent_framework changes."
+    },
+    {
+      "id": "dep.memory_store.vector_database",
+      "dependent_kind": "memory_store",
+      "depends_on_kind": "vector_database",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "memory_store selection must be reevaluated when vector_database changes."
+    },
+    {
+      "id": "dep.memory_store.storage",
+      "dependent_kind": "memory_store",
+      "depends_on_kind": "storage",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "memory_store selection must be reevaluated when storage changes."
+    },
+    {
+      "id": "dep.training_framework.model",
+      "dependent_kind": "training_framework",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "fine_tuning_enabled",
+      "rationale": "training_framework selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.training_compute.training_framework",
+      "dependent_kind": "training_compute",
+      "depends_on_kind": "training_framework",
+      "relationship": "constrains",
+      "activation": "fine_tuning_enabled",
+      "rationale": "training_compute selection must be reevaluated when training_framework changes."
+    },
+    {
+      "id": "dep.training_compute.compute_profile",
+      "dependent_kind": "training_compute",
+      "depends_on_kind": "compute_profile",
+      "relationship": "requires",
+      "activation": "fine_tuning_enabled",
+      "rationale": "training_compute selection must be reevaluated when compute_profile changes."
+    },
+    {
+      "id": "dep.training_dataset.data_source",
+      "dependent_kind": "training_dataset",
+      "depends_on_kind": "data_source",
+      "relationship": "requires",
+      "activation": "fine_tuning_enabled",
+      "rationale": "training_dataset selection must be reevaluated when data_source changes."
+    },
+    {
+      "id": "dep.fine_tuned_model.model",
+      "dependent_kind": "fine_tuned_model",
+      "depends_on_kind": "model",
+      "relationship": "requires",
+      "activation": "fine_tuning_enabled",
+      "rationale": "fine_tuned_model selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.fine_tuned_model.training_dataset",
+      "dependent_kind": "fine_tuned_model",
+      "depends_on_kind": "training_dataset",
+      "relationship": "requires",
+      "activation": "fine_tuning_enabled",
+      "rationale": "fine_tuned_model selection must be reevaluated when training_dataset changes."
+    },
+    {
+      "id": "dep.fine_tuned_model.training_framework",
+      "dependent_kind": "fine_tuned_model",
+      "depends_on_kind": "training_framework",
+      "relationship": "requires",
+      "activation": "fine_tuning_enabled",
+      "rationale": "fine_tuned_model selection must be reevaluated when training_framework changes."
+    },
+    {
+      "id": "dep.guardrail.tool",
+      "dependent_kind": "guardrail",
+      "depends_on_kind": "tool",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "guardrail selection must be reevaluated when tool changes."
+    },
+    {
+      "id": "dep.guardrail.rag_pipeline",
+      "dependent_kind": "guardrail",
+      "depends_on_kind": "rag_pipeline",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "guardrail selection must be reevaluated when rag_pipeline changes."
+    },
+    {
+      "id": "dep.guardrail.model",
+      "dependent_kind": "guardrail",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "always",
+      "rationale": "guardrail selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.evaluation_suite.model",
+      "dependent_kind": "evaluation_suite",
+      "depends_on_kind": "model",
+      "relationship": "constrains",
+      "activation": "always",
+      "rationale": "evaluation_suite selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.evaluation_suite.rag_pipeline",
+      "dependent_kind": "evaluation_suite",
+      "depends_on_kind": "rag_pipeline",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "evaluation_suite selection must be reevaluated when rag_pipeline changes."
+    },
+    {
+      "id": "dep.evaluation_suite.agent_framework",
+      "dependent_kind": "evaluation_suite",
+      "depends_on_kind": "agent_framework",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "evaluation_suite selection must be reevaluated when agent_framework changes."
+    },
+    {
+      "id": "dep.evaluation_suite.fine_tuned_model",
+      "dependent_kind": "evaluation_suite",
+      "depends_on_kind": "fine_tuned_model",
+      "relationship": "constrains",
+      "activation": "if_selected",
+      "rationale": "evaluation_suite selection must be reevaluated when fine_tuned_model changes."
+    },
+    {
+      "id": "dep.deployment_target.hosting_platform",
+      "dependent_kind": "deployment_target",
+      "depends_on_kind": "hosting_platform",
+      "relationship": "constrains",
+      "activation": "non_api",
+      "rationale": "deployment_target selection must be reevaluated when hosting_platform changes."
+    },
+    {
+      "id": "dep.deployment_target.model",
+      "dependent_kind": "deployment_target",
+      "depends_on_kind": "model",
+      "relationship": "requires",
+      "activation": "always",
+      "rationale": "deployment_target selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.deployment_target.agent_framework",
+      "dependent_kind": "deployment_target",
+      "depends_on_kind": "agent_framework",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "deployment_target selection must be reevaluated when agent_framework changes."
+    },
+    {
+      "id": "dep.deployment_target.guardrail",
+      "dependent_kind": "deployment_target",
+      "depends_on_kind": "guardrail",
+      "relationship": "constrains",
+      "activation": "production_only",
+      "rationale": "deployment_target selection must be reevaluated when guardrail changes."
+    },
+    {
+      "id": "dep.deployment_target.evaluation_suite",
+      "dependent_kind": "deployment_target",
+      "depends_on_kind": "evaluation_suite",
+      "relationship": "constrains",
+      "activation": "production_only",
+      "rationale": "deployment_target selection must be reevaluated when evaluation_suite changes."
+    },
+    {
+      "id": "dep.monitoring_stack.deployment_target",
+      "dependent_kind": "monitoring_stack",
+      "depends_on_kind": "deployment_target",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "monitoring_stack selection must be reevaluated when deployment_target changes."
+    },
+    {
+      "id": "dep.monitoring_stack.model",
+      "dependent_kind": "monitoring_stack",
+      "depends_on_kind": "model",
+      "relationship": "informs",
+      "activation": "always",
+      "rationale": "monitoring_stack selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.monitoring_stack.compute_profile",
+      "dependent_kind": "monitoring_stack",
+      "depends_on_kind": "compute_profile",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "monitoring_stack selection must be reevaluated when compute_profile changes."
+    },
+    {
+      "id": "dep.cost_policy.model",
+      "dependent_kind": "cost_policy",
+      "depends_on_kind": "model",
+      "relationship": "informs",
+      "activation": "always",
+      "rationale": "cost_policy selection must be reevaluated when model changes."
+    },
+    {
+      "id": "dep.cost_policy.compute_profile",
+      "dependent_kind": "cost_policy",
+      "depends_on_kind": "compute_profile",
+      "relationship": "informs",
+      "activation": "self_hosted",
+      "rationale": "cost_policy selection must be reevaluated when compute_profile changes."
+    },
+    {
+      "id": "dep.cost_policy.storage",
+      "dependent_kind": "cost_policy",
+      "depends_on_kind": "storage",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "cost_policy selection must be reevaluated when storage changes."
+    },
+    {
+      "id": "dep.cost_policy.integration",
+      "dependent_kind": "cost_policy",
+      "depends_on_kind": "integration",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "cost_policy selection must be reevaluated when integration changes."
+    },
+    {
+      "id": "dep.cost_policy.training_compute",
+      "dependent_kind": "cost_policy",
+      "depends_on_kind": "training_compute",
+      "relationship": "informs",
+      "activation": "if_selected",
+      "rationale": "cost_policy selection must be reevaluated when training_compute changes."
+    }
+  ]
+}

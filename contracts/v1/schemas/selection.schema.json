@@ -1,0 +1,1313 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/selection_id"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "workload",
+        "deployment_mode",
+        "model_provider",
+        "model",
+        "context_policy",
+        "hosting_platform",
+        "accelerator",
+        "compute_profile",
+        "inference_engine",
+        "storage",
+        "data_source",
+        "knowledge_base",
+        "embedding_model",
+        "vector_database",
+        "rag_pipeline",
+        "agent_framework",
+        "tool",
+        "mcp_server",
+        "memory_store",
+        "integration",
+        "training_framework",
+        "training_compute",
+        "training_dataset",
+        "fine_tuned_model",
+        "guardrail",
+        "evaluation_suite",
+        "deployment_target",
+        "monitoring_stack",
+        "cost_policy"
+      ]
+    },
+    "catalog_item_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "catalog_item_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,49}$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "settings": {
+      "type": "object"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "catalog_item_id",
+    "catalog_item_version",
+    "role",
+    "enabled",
+    "settings"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/selection.schema.json",
+  "title": "Typed, version-pinned build component selection",
+  "$defs": {
+    "settings_workload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concurrency": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "requests_per_day": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latency_budget_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": []
+    },
+    "settings_deployment_mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {},
+      "required": []
+    },
+    "settings_model_provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "region": {
+          "type": "string"
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "api_base_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": []
+    },
+    "settings_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "top_p": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "precision": {
+          "type": "string",
+          "enum": [
+            "fp32",
+            "tf32",
+            "bf16",
+            "fp16",
+            "fp8",
+            "int8",
+            "int4"
+          ]
+        },
+        "serving_mode": {
+          "type": "string",
+          "enum": [
+            "api",
+            "weights"
+          ]
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "weights_uri": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": []
+    },
+    "settings_context_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "requested_context_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reserved_output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "truncation_strategy": {
+          "type": "string",
+          "enum": [
+            "reject",
+            "truncate_oldest",
+            "summarize",
+            "sliding_window"
+          ]
+        },
+        "kv_cache_precision": {
+          "type": "string",
+          "enum": [
+            "fp32",
+            "bf16",
+            "fp16",
+            "fp8",
+            "int8",
+            "int4"
+          ]
+        }
+      },
+      "required": [
+        "requested_context_tokens",
+        "reserved_output_tokens"
+      ]
+    },
+    "settings_hosting_platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "region": {
+          "type": "string"
+        },
+        "account_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "network_isolation": {
+          "type": "string",
+          "enum": [
+            "public",
+            "private",
+            "air_gapped"
+          ]
+        }
+      },
+      "required": []
+    },
+    "settings_accelerator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "device_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "tensor_parallel_groups": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "device_count"
+      ]
+    },
+    "settings_compute_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "instances": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reserved_hours_per_month": {
+          "type": "number",
+          "minimum": 0
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "instances"
+      ]
+    },
+    "settings_inference_engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tensor_parallel_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_batch_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "precision": {
+          "type": "string",
+          "enum": [
+            "fp32",
+            "tf32",
+            "bf16",
+            "fp16",
+            "fp8",
+            "int8",
+            "int4"
+          ]
+        },
+        "quantization": {
+          "type": "string",
+          "enum": [
+            "none",
+            "awq",
+            "gptq",
+            "gguf",
+            "bitsandbytes",
+            "other"
+          ]
+        }
+      },
+      "required": []
+    },
+    "settings_storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "provisioned_gb": {
+          "type": "number",
+          "minimum": 0
+        },
+        "region": {
+          "type": "string"
+        },
+        "encryption_key_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        }
+      },
+      "required": []
+    },
+    "settings_data_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connector_secret_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "refresh_minutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "settings_knowledge_base": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "chunk_size_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "chunk_overlap_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "refresh_minutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "acl_enforced": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "settings_embedding_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "output_dimensions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "settings_vector_database": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "index_dimension": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "similarity_metric": {
+          "type": "string",
+          "enum": [
+            "cosine",
+            "dot",
+            "euclidean"
+          ]
+        },
+        "region": {
+          "type": "string"
+        },
+        "index_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        }
+      },
+      "required": [
+        "index_dimension",
+        "similarity_metric"
+      ]
+    },
+    "settings_rag_pipeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "top_k": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_chunks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rerank_enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "settings_agent_framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agent_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_iterations": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": []
+    },
+    "settings_tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "allowed_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        }
+      },
+      "required": []
+    },
+    "settings_mcp_server": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "read_only": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "settings_memory_store": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ttl_hours": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_entries": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "encryption_key_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        }
+      },
+      "required": []
+    },
+    "settings_integration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri"
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        },
+        "rate_limit_per_minute": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": []
+    },
+    "settings_training_framework": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "sft",
+            "lora",
+            "qlora",
+            "dpo",
+            "full_finetune",
+            "distillation"
+          ]
+        },
+        "epochs": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "batch_size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": []
+    },
+    "settings_training_compute": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "gpu_hours_budget": {
+          "type": "number",
+          "minimum": 0
+        },
+        "spot_allowed": {
+          "type": "boolean"
+        },
+        "checkpoint_interval_minutes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": []
+    },
+    "settings_training_dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "train_split": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "eval_split": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "test_split": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "redaction_enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "settings_fine_tuned_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "use_adapter": {
+          "type": "boolean"
+        },
+        "artifact_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "revision": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "settings_guardrail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enforcement": {
+          "type": "string",
+          "enum": [
+            "audit",
+            "block",
+            "redact",
+            "escalate"
+          ]
+        },
+        "failure_action": {
+          "type": "string",
+          "enum": [
+            "fail_closed",
+            "fail_open"
+          ]
+        }
+      },
+      "required": []
+    },
+    "settings_evaluation_suite": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minimum_score": {
+          "type": "number"
+        },
+        "gate_required": {
+          "type": "boolean"
+        },
+        "dataset_size": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": []
+    },
+    "settings_deployment_target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environment": {
+          "type": "string",
+          "enum": [
+            "development",
+            "staging",
+            "production"
+          ]
+        },
+        "replicas_min": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "replicas_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "region": {
+          "type": "string"
+        },
+        "approval_ticket": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "settings_monitoring_stack": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sample_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "retention_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "credential_ref": {
+          "type": "string",
+          "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+          "description": "Opaque secret manager reference, never the credential"
+        }
+      },
+      "required": []
+    },
+    "settings_cost_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "monthly_budget_amount": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]{1,12})?$",
+          "description": "Non-negative base-10 decimal encoded as a string"
+        },
+        "per_request_budget_amount": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]{1,12})?$",
+          "description": "Non-negative base-10 decimal encoded as a string"
+        },
+        "enforce_hard_cap": {
+          "type": "boolean"
+        },
+        "notify_at_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": []
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "workload"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_workload"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "deployment_mode"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_deployment_mode"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "model_provider"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_model_provider"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "model"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "context_policy"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_context_policy"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "hosting_platform"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_hosting_platform"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "accelerator"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_accelerator"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "compute_profile"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_compute_profile"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "inference_engine"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_inference_engine"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "storage"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_storage"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "data_source"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_data_source"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "knowledge_base"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_knowledge_base"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "embedding_model"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_embedding_model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "vector_database"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_vector_database"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "rag_pipeline"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_rag_pipeline"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "agent_framework"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_agent_framework"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "tool"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_tool"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "mcp_server"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_mcp_server"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "memory_store"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_memory_store"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "integration"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_integration"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "training_framework"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_training_framework"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "training_compute"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_training_compute"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "training_dataset"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_training_dataset"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "fine_tuned_model"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_fine_tuned_model"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "guardrail"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_guardrail"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "evaluation_suite"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_evaluation_suite"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "deployment_target"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_deployment_target"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "monitoring_stack"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_monitoring_stack"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "cost_policy"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "settings": {
+            "$ref": "#/$defs/settings_cost_policy"
+          }
+        }
+      }
+    }
+  ]
+}

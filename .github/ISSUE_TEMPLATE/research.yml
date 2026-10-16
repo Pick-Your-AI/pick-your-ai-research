@@ -4,6 +4,11 @@ title: "Research: "
 labels: ["type: research"]
 body:
   - type: textarea
+    id: contract
+    attributes:
+      label: Related issue and canonical component kinds
+      description: Link the component issue and use docs/CONTRACT_MAPPING.md. Follow docs/RESEARCH_WORKFLOW.md for notes and structured submissions; unknown required facts may remain in a draft note.
+  - type: textarea
     id: decision
     attributes:
       label: User decision or compatibility rule

@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Preserve the exact bytes recorded in the upstream import manifest.
+contracts/v1/** -text

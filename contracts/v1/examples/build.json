@@ -1,0 +1,555 @@
+{
+  "schema_version": "1.0.0",
+  "id": "build.fixture.1",
+  "revision": 1,
+  "name": "FICTIONAL Full-Stack AI Build",
+  "owner_ref": "team.fixture",
+  "lifecycle": "draft",
+  "created_at": "2026-10-16T09:00:00Z",
+  "updated_at": "2026-10-16T09:00:00Z",
+  "objectives": {
+    "region": "us-east-fixture",
+    "currency": "USD",
+    "monthly_budget_amount": "1000.00",
+    "requests_per_day": 200,
+    "avg_input_tokens": 700,
+    "avg_output_tokens": 400,
+    "max_concurrency": 2,
+    "data_classification": "internal",
+    "max_latency_ms": 6000
+  },
+  "locks": {
+    "catalog_snapshot_id": "catalog.fixture.1",
+    "ruleset_id": "rules.fixture.1",
+    "ruleset_version": "1.0.0",
+    "dependency_graph_id": "dependencies.core.1",
+    "dependency_graph_revision": 1,
+    "pricebook_id": "prices.fixture.1"
+  },
+  "selections": [
+    {
+      "id": "sel_workload",
+      "kind": "workload",
+      "catalog_item_id": "cat.workload.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "concurrency": 2,
+        "requests_per_day": 200,
+        "avg_input_tokens": 700,
+        "avg_output_tokens": 400
+      }
+    },
+    {
+      "id": "sel_deployment_mode",
+      "kind": "deployment_mode",
+      "catalog_item_id": "cat.deployment_mode.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {}
+    },
+    {
+      "id": "sel_model_provider",
+      "kind": "model_provider",
+      "catalog_item_id": "cat.model_provider.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {}
+    },
+    {
+      "id": "sel_model",
+      "kind": "model",
+      "catalog_item_id": "cat.model.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "serving_mode": "weights",
+        "precision": "fp16",
+        "max_output_tokens": 512,
+        "temperature": 0.4
+      }
+    },
+    {
+      "id": "sel_context_policy",
+      "kind": "context_policy",
+      "catalog_item_id": "cat.context_policy.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "requested_context_tokens": 4096,
+        "reserved_output_tokens": 512,
+        "truncation_strategy": "reject"
+      }
+    },
+    {
+      "id": "sel_hosting_platform",
+      "kind": "hosting_platform",
+      "catalog_item_id": "cat.hosting_platform.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "region": "us-east-fixture",
+        "network_isolation": "private"
+      }
+    },
+    {
+      "id": "sel_accelerator",
+      "kind": "accelerator",
+      "catalog_item_id": "cat.accelerator.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "device_count": 1,
+        "tensor_parallel_groups": 1
+      }
+    },
+    {
+      "id": "sel_compute_profile",
+      "kind": "compute_profile",
+      "catalog_item_id": "cat.compute_profile.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "instances": 1,
+        "region": "us-east-fixture",
+        "reserved_hours_per_month": 720
+      }
+    },
+    {
+      "id": "sel_inference_engine",
+      "kind": "inference_engine",
+      "catalog_item_id": "cat.inference_engine.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "precision": "fp16",
+        "tensor_parallel_size": 1,
+        "max_batch_tokens": 4096
+      }
+    },
+    {
+      "id": "sel_storage",
+      "kind": "storage",
+      "catalog_item_id": "cat.storage.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "provisioned_gb": 50,
+        "region": "us-east-fixture"
+      }
+    },
+    {
+      "id": "sel_data_source",
+      "kind": "data_source",
+      "catalog_item_id": "cat.data_source.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "enabled": true
+      }
+    },
+    {
+      "id": "sel_knowledge_base",
+      "kind": "knowledge_base",
+      "catalog_item_id": "cat.knowledge_base.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "chunk_size_tokens": 300,
+        "chunk_overlap_tokens": 30,
+        "acl_enforced": true
+      }
+    },
+    {
+      "id": "sel_embedding_model",
+      "kind": "embedding_model",
+      "catalog_item_id": "cat.embedding_model.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "output_dimensions": 768
+      }
+    },
+    {
+      "id": "sel_vector_database",
+      "kind": "vector_database",
+      "catalog_item_id": "cat.vector_database.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "index_dimension": 768,
+        "similarity_metric": "cosine",
+        "region": "us-east-fixture",
+        "index_name": "fixture-collection"
+      }
+    },
+    {
+      "id": "sel_rag_pipeline",
+      "kind": "rag_pipeline",
+      "catalog_item_id": "cat.rag_pipeline.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "top_k": 5,
+        "max_chunks": 8
+      }
+    },
+    {
+      "id": "sel_agent_framework",
+      "kind": "agent_framework",
+      "catalog_item_id": "cat.agent_framework.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "agent_count": 2,
+        "max_iterations": 8
+      }
+    },
+    {
+      "id": "sel_tool",
+      "kind": "tool",
+      "catalog_item_id": "cat.tool.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "enabled": true,
+        "allowed_scopes": [
+          "fixture.write"
+        ]
+      }
+    },
+    {
+      "id": "sel_mcp_server",
+      "kind": "mcp_server",
+      "catalog_item_id": "cat.mcp_server.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "read_only": false
+      }
+    },
+    {
+      "id": "sel_memory_store",
+      "kind": "memory_store",
+      "catalog_item_id": "cat.memory_store.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "ttl_hours": 720
+      }
+    },
+    {
+      "id": "sel_integration",
+      "kind": "integration",
+      "catalog_item_id": "cat.integration.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "enabled": true,
+        "rate_limit_per_minute": 60
+      }
+    },
+    {
+      "id": "sel_training_framework",
+      "kind": "training_framework",
+      "catalog_item_id": "cat.training_framework.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "method": "lora",
+        "epochs": 3,
+        "batch_size": 2
+      }
+    },
+    {
+      "id": "sel_training_compute",
+      "kind": "training_compute",
+      "catalog_item_id": "cat.training_compute.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "gpu_hours_budget": 25
+      }
+    },
+    {
+      "id": "sel_training_dataset",
+      "kind": "training_dataset",
+      "catalog_item_id": "cat.training_dataset.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "train_split": 0.8,
+        "eval_split": 0.1,
+        "test_split": 0.1,
+        "redaction_enabled": true
+      }
+    },
+    {
+      "id": "sel_fine_tuned_model",
+      "kind": "fine_tuned_model",
+      "catalog_item_id": "cat.fine_tuned_model.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "use_adapter": true
+      }
+    },
+    {
+      "id": "sel_guardrail",
+      "kind": "guardrail",
+      "catalog_item_id": "cat.guardrail.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "enforcement": "block",
+        "failure_action": "fail_closed"
+      }
+    },
+    {
+      "id": "sel_evaluation_suite",
+      "kind": "evaluation_suite",
+      "catalog_item_id": "cat.evaluation_suite.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "gate_required": true,
+        "minimum_score": 0.85
+      }
+    },
+    {
+      "id": "sel_deployment_target",
+      "kind": "deployment_target",
+      "catalog_item_id": "cat.deployment_target.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "environment": "production",
+        "replicas_min": 1,
+        "replicas_max": 2,
+        "region": "us-east-fixture"
+      }
+    },
+    {
+      "id": "sel_monitoring_stack",
+      "kind": "monitoring_stack",
+      "catalog_item_id": "cat.monitoring_stack.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "sample_rate": 0.1,
+        "retention_days": 30
+      }
+    },
+    {
+      "id": "sel_cost_policy",
+      "kind": "cost_policy",
+      "catalog_item_id": "cat.cost_policy.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "monthly_budget_amount": "1000.00",
+        "enforce_hard_cap": true,
+        "notify_at_pct": 80
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "link.01",
+      "from_selection_id": "sel_model",
+      "to_selection_id": "sel_model_provider",
+      "relation": "provided_by"
+    },
+    {
+      "id": "link.02",
+      "from_selection_id": "sel_model",
+      "to_selection_id": "sel_context_policy",
+      "relation": "uses"
+    },
+    {
+      "id": "link.03",
+      "from_selection_id": "sel_compute_profile",
+      "to_selection_id": "sel_hosting_platform",
+      "relation": "runs_on"
+    },
+    {
+      "id": "link.04",
+      "from_selection_id": "sel_compute_profile",
+      "to_selection_id": "sel_accelerator",
+      "relation": "uses"
+    },
+    {
+      "id": "link.05",
+      "from_selection_id": "sel_model",
+      "to_selection_id": "sel_inference_engine",
+      "relation": "served_by"
+    },
+    {
+      "id": "link.06",
+      "from_selection_id": "sel_inference_engine",
+      "to_selection_id": "sel_compute_profile",
+      "relation": "runs_on"
+    },
+    {
+      "id": "link.07",
+      "from_selection_id": "sel_knowledge_base",
+      "to_selection_id": "sel_data_source",
+      "relation": "reads_from"
+    },
+    {
+      "id": "link.08",
+      "from_selection_id": "sel_rag_pipeline",
+      "to_selection_id": "sel_knowledge_base",
+      "relation": "reads_from"
+    },
+    {
+      "id": "link.09",
+      "from_selection_id": "sel_rag_pipeline",
+      "to_selection_id": "sel_embedding_model",
+      "relation": "uses"
+    },
+    {
+      "id": "link.10",
+      "from_selection_id": "sel_rag_pipeline",
+      "to_selection_id": "sel_vector_database",
+      "relation": "indexes_with"
+    },
+    {
+      "id": "link.11",
+      "from_selection_id": "sel_vector_database",
+      "to_selection_id": "sel_storage",
+      "relation": "stored_in"
+    },
+    {
+      "id": "link.12",
+      "from_selection_id": "sel_memory_store",
+      "to_selection_id": "sel_vector_database",
+      "relation": "stored_in"
+    },
+    {
+      "id": "link.13",
+      "from_selection_id": "sel_agent_framework",
+      "to_selection_id": "sel_rag_pipeline",
+      "relation": "uses"
+    },
+    {
+      "id": "link.14",
+      "from_selection_id": "sel_agent_framework",
+      "to_selection_id": "sel_tool",
+      "relation": "calls"
+    },
+    {
+      "id": "link.15",
+      "from_selection_id": "sel_agent_framework",
+      "to_selection_id": "sel_mcp_server",
+      "relation": "calls"
+    },
+    {
+      "id": "link.16",
+      "from_selection_id": "sel_mcp_server",
+      "to_selection_id": "sel_tool",
+      "relation": "exposes"
+    },
+    {
+      "id": "link.17",
+      "from_selection_id": "sel_integration",
+      "to_selection_id": "sel_tool",
+      "relation": "exposes"
+    },
+    {
+      "id": "link.18",
+      "from_selection_id": "sel_fine_tuned_model",
+      "to_selection_id": "sel_model",
+      "relation": "derived_from"
+    },
+    {
+      "id": "link.19",
+      "from_selection_id": "sel_fine_tuned_model",
+      "to_selection_id": "sel_training_dataset",
+      "relation": "trained_on"
+    },
+    {
+      "id": "link.20",
+      "from_selection_id": "sel_fine_tuned_model",
+      "to_selection_id": "sel_training_framework",
+      "relation": "uses"
+    },
+    {
+      "id": "link.21",
+      "from_selection_id": "sel_training_compute",
+      "to_selection_id": "sel_compute_profile",
+      "relation": "runs_on"
+    },
+    {
+      "id": "link.22",
+      "from_selection_id": "sel_training_dataset",
+      "to_selection_id": "sel_data_source",
+      "relation": "reads_from"
+    },
+    {
+      "id": "link.23",
+      "from_selection_id": "sel_deployment_target",
+      "to_selection_id": "sel_hosting_platform",
+      "relation": "runs_on"
+    },
+    {
+      "id": "link.24",
+      "from_selection_id": "sel_deployment_target",
+      "to_selection_id": "sel_model",
+      "relation": "deploys_to"
+    },
+    {
+      "id": "link.25",
+      "from_selection_id": "sel_agent_framework",
+      "to_selection_id": "sel_guardrail",
+      "relation": "secured_by"
+    },
+    {
+      "id": "link.26",
+      "from_selection_id": "sel_agent_framework",
+      "to_selection_id": "sel_evaluation_suite",
+      "relation": "evaluated_by"
+    },
+    {
+      "id": "link.27",
+      "from_selection_id": "sel_agent_framework",
+      "to_selection_id": "sel_monitoring_stack",
+      "relation": "observed_by"
+    }
+  ],
+  "policy": {
+    "fail_on_unknown": true,
+    "require_evaluations_for_production": true,
+    "allow_unverified_catalog_items": true,
+    "min_resource_confidence": "estimated"
+  }
+}

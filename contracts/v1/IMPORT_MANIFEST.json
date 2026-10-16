@@ -1,0 +1,221 @@
+{
+  "package": "ai-builder-contract-v1",
+  "contract_version": "1.0.0",
+  "files": [
+    {
+      "source_path": "AGENTS.md",
+      "path": "docs/IMPLEMENTATION_AGENTS.md",
+      "sha256": "646ff4792d6386ba92ba6b21167fa216372968900afd95dab5e8dd14df778b3a"
+    },
+    {
+      "source_path": "HANDOFF_PROMPT.md",
+      "path": "docs/IMPLEMENTATION_HANDOFF.md",
+      "sha256": "3214a7fe3552c32f859a6d9939cedea7b41976f9840b2e03a6ab964374586f5c"
+    },
+    {
+      "source_path": "README.md",
+      "path": "README.md",
+      "sha256": "12cb302ea7b87e39489f1f443890dd34435ddab543cce0c3bb23bf9db1cca4fd"
+    },
+    {
+      "source_path": "api/openapi.yaml",
+      "path": "api/openapi.yaml",
+      "sha256": "6a08d7230c23576889167da6cff48d95093da9dc04d4bfa6ece443ff35089a79"
+    },
+    {
+      "source_path": "baseline/core-dependency-graph.json",
+      "path": "baseline/core-dependency-graph.json",
+      "sha256": "e9b3bca19a9cf8241fd74f6618824882a3413649822add88be1ac93cb3f1bacc"
+    },
+    {
+      "source_path": "baseline/core-ruleset.json",
+      "path": "baseline/core-ruleset.json",
+      "sha256": "e60e43c0abc3c5d927e10c578a39fdedfa76e00fce6242e2db3a46e4b1da907e"
+    },
+    {
+      "source_path": "docs/AGENT_PROTOCOL.md",
+      "path": "docs/AGENT_PROTOCOL.md",
+      "sha256": "f431cd0f8fa679c9aa9babf744791f3c08f66399f9a07320818a4ffa20efd309"
+    },
+    {
+      "source_path": "docs/COMPONENTS.md",
+      "path": "docs/COMPONENTS.md",
+      "sha256": "27f2016696ca9466dc09cd4d84641f02e43252151bdc2c038bb673baa9b345fe"
+    },
+    {
+      "source_path": "docs/DEPENDENCIES.md",
+      "path": "docs/DEPENDENCIES.md",
+      "sha256": "542154f672ea1e08449122e04b33ac9f210ce38adf41a70a4c9ab29408b9d903"
+    },
+    {
+      "source_path": "docs/PRICING_AND_GATES.md",
+      "path": "docs/PRICING_AND_GATES.md",
+      "sha256": "59db419d25bfbbc6695ad4548b6c406d26343b97cb9ed5544d56b2b1f5425943"
+    },
+    {
+      "source_path": "examples/build.json",
+      "path": "examples/build.json",
+      "sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864"
+    },
+    {
+      "source_path": "examples/catalog.json",
+      "path": "examples/catalog.json",
+      "sha256": "2e9120db823faef3e1e330a7d2e8067b3ab064328e2faed699d15cf41880fbf8"
+    },
+    {
+      "source_path": "examples/cost-estimate.json",
+      "path": "examples/cost-estimate.json",
+      "sha256": "4b7c3889881d3c424ed98cc47b146b25b05df21c5459c9558717f21b6198b7e4"
+    },
+    {
+      "source_path": "examples/dependency-graph.json",
+      "path": "examples/dependency-graph.json",
+      "sha256": "e9b3bca19a9cf8241fd74f6618824882a3413649822add88be1ac93cb3f1bacc"
+    },
+    {
+      "source_path": "examples/deployment-manifest.json",
+      "path": "examples/deployment-manifest.json",
+      "sha256": "c05603388efc50a15274d1e6fa8e25dac3c205377a1989bfb5b3a3e64face8ab"
+    },
+    {
+      "source_path": "examples/evaluation-report.json",
+      "path": "examples/evaluation-report.json",
+      "sha256": "039626962ef0f2c4f706614d775ad47eda1d148c58f736c98ad169fc153221f3"
+    },
+    {
+      "source_path": "examples/event.json",
+      "path": "examples/event.json",
+      "sha256": "ed0a9e96da773bc74bceb774f576971275f6da525fa9b425c3b8d6e5f7406068"
+    },
+    {
+      "source_path": "examples/pricebook.json",
+      "path": "examples/pricebook.json",
+      "sha256": "716a848822fc2b182d226c597f7e50f4b00a0fe01ba5c03879e858ca6f0c9b46"
+    },
+    {
+      "source_path": "examples/quality-evaluation-run.json",
+      "path": "examples/quality-evaluation-run.json",
+      "sha256": "bc0abc0b33e2b6bf77fc4609ac88a73981068eac6fabf604c255f58fec954a6d"
+    },
+    {
+      "source_path": "examples/resource-estimate.json",
+      "path": "examples/resource-estimate.json",
+      "sha256": "41469a377c0b428e779c269eb052fa8f455b4768e2add3c137b5e465a79a362f"
+    },
+    {
+      "source_path": "examples/ruleset.json",
+      "path": "examples/ruleset.json",
+      "sha256": "05474568204fdbfd407cb4e4cfc9334e22fdf24e75111bed8990868926fab418"
+    },
+    {
+      "source_path": "reference/create_examples.py",
+      "path": "reference/create_examples.py",
+      "sha256": "a59e488eded39c2d38151b55ac2522136a90a35adcd069f517d4fd4761eaf45a"
+    },
+    {
+      "source_path": "reference/evaluate.py",
+      "path": "reference/evaluate.py",
+      "sha256": "092c8a99495f9b5ae960df40b27e33f15eefe6d1a7cd80119658fdc79ada1a5a"
+    },
+    {
+      "source_path": "reference/generate_component_docs.py",
+      "path": "reference/generate_component_docs.py",
+      "sha256": "b0b81f9b596acf1f5b8859ab0c65c758b36d43587051d7bb095ad3bf21fbc9e7"
+    },
+    {
+      "source_path": "reference/generate_schemas.py",
+      "path": "reference/generate_schemas.py",
+      "sha256": "07186d2cb57b9861670f5265071e3fa2d75bd2dd62b6074a4f8b55c681c1b01a"
+    },
+    {
+      "source_path": "reference/validate_payload.py",
+      "path": "reference/validate_payload.py",
+      "sha256": "5ecbb2b9d8ffd72eb38fde0a45064cdde24f82ef251e30df37c638f45aed4cd5"
+    },
+    {
+      "source_path": "schemas/build.schema.json",
+      "path": "schemas/build.schema.json",
+      "sha256": "1beacb0b01fcdea0b8b47357cdf2e99d80a10b8a4218aaac9e3b6af55391b42a"
+    },
+    {
+      "source_path": "schemas/catalog-item.schema.json",
+      "path": "schemas/catalog-item.schema.json",
+      "sha256": "81c960c6e7dfe046634062e3f9ce5a1089b1d88adbd9fd45d9a67dcfc0339a25"
+    },
+    {
+      "source_path": "schemas/catalog-snapshot.schema.json",
+      "path": "schemas/catalog-snapshot.schema.json",
+      "sha256": "a5af428386768b698d280a18bf99c0e52364ee397a2075685213b3d0762693a4"
+    },
+    {
+      "source_path": "schemas/common.schema.json",
+      "path": "schemas/common.schema.json",
+      "sha256": "0342ce2f1114e7276fc7f6a08ff5b86e8727caadd83ae4f443de9a7e1431c43c"
+    },
+    {
+      "source_path": "schemas/component-registry.json",
+      "path": "schemas/component-registry.json",
+      "sha256": "cd60070e912a60504f605f2fd9f86c64520160cce7f4184c8ea200209c6b1918"
+    },
+    {
+      "source_path": "schemas/cost-estimate.schema.json",
+      "path": "schemas/cost-estimate.schema.json",
+      "sha256": "ef7cf8c0492022c1a8a1f971e49eb86dfad5b66ce6a4b2cf72a965fc9ba81259"
+    },
+    {
+      "source_path": "schemas/dependency-graph.schema.json",
+      "path": "schemas/dependency-graph.schema.json",
+      "sha256": "fb6a8bb42a9424d4ff2b520301f816c247789a3d70d1124afea1a8dc5ed5bd75"
+    },
+    {
+      "source_path": "schemas/deployment-manifest.schema.json",
+      "path": "schemas/deployment-manifest.schema.json",
+      "sha256": "86bc716c906aca1299d9129eec08abec44378c26b5a97317d6310afe84d6b374"
+    },
+    {
+      "source_path": "schemas/evaluation-report.schema.json",
+      "path": "schemas/evaluation-report.schema.json",
+      "sha256": "78935ec78848de7655bd972851aa0357c4426f6870fc028ba81739c85040359b"
+    },
+    {
+      "source_path": "schemas/event.schema.json",
+      "path": "schemas/event.schema.json",
+      "sha256": "e169ad8d2f7417580ef63a5098f8ec54dd514af3ce609c59bdb7780b89d6039a"
+    },
+    {
+      "source_path": "schemas/pricebook.schema.json",
+      "path": "schemas/pricebook.schema.json",
+      "sha256": "169e1a48847bee8b6af4b266a55bcebe317b5655dd6abb7718e06331b1df6288"
+    },
+    {
+      "source_path": "schemas/quality-evaluation-run.schema.json",
+      "path": "schemas/quality-evaluation-run.schema.json",
+      "sha256": "ed6b3f60805428e3788ce27fa224fb3d5008998f0637f24723bf65eea546a959"
+    },
+    {
+      "source_path": "schemas/resource-estimate.schema.json",
+      "path": "schemas/resource-estimate.schema.json",
+      "sha256": "39ab5d061f9021ce14e1f987717441cff04d1a40f76db5582d343d599a5d876c"
+    },
+    {
+      "source_path": "schemas/ruleset.schema.json",
+      "path": "schemas/ruleset.schema.json",
+      "sha256": "b251e49774d7e6a34522555adefd40f56f5e647a8a2b4a69a0be0a4618b1a8d3"
+    },
+    {
+      "source_path": "schemas/selection.schema.json",
+      "path": "schemas/selection.schema.json",
+      "sha256": "f8f189c6555fec41e616c32f081d06fab9f966b0fa4891ddca55580f577d51a8"
+    },
+    {
+      "source_path": "sql/postgres_reference.sql",
+      "path": "sql/postgres_reference.sql",
+      "sha256": "72d9fbde25f47fb9aa6f79ab33dd0be7588b7556b019a9c75c44f28949e8bb53"
+    },
+    {
+      "source_path": "tests/test_contract.py",
+      "path": "tests/test_contract.py",
+      "sha256": "237fef187e553cac3e7e42c8dd38f5ac0a76e9166e5851d3c75ff1eb32135f77"
+    }
+  ]
+}

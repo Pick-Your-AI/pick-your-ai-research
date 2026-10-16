@@ -1,5 +1,7 @@
 # Research method
 
+Use the [submission workflow](RESEARCH_WORKFLOW.md), [canonical-kind mapping](CONTRACT_MAPPING.md), and [research note template](../templates/research-note.md). The frozen v1 contract supplies shared names and types; schema changes go through #40. Raw or incomplete findings do not need a complete CatalogItem yet. Never fill unknown required fields with invented values.
+
 Each component issue produces a decision record at `research/<workstream>/<component>.md` (the path is listed in the issue) with:
 
 1. **Decision to support:** the user choice or compatibility check being researched.
@@ -14,7 +16,7 @@ Avoid presenting model performance, context limits, GPU fit, or price as univers
 
 ## Evidence grades
 
-Until [#41](https://github.com/Pick-Your-AI/research/issues/41) finalises the policy, label each claim with one of:
+Until [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) finalises the policy, label each claim with one of:
 
 - **Primary documentation:** publisher's own docs, pricing page, model card, license, or specification.
 - **Vendor claim:** a performance or capability statement by the vendor that has not been independently reproduced.
@@ -23,7 +25,7 @@ Until [#41](https://github.com/Pick-Your-AI/research/issues/41) finalises the po
 
 ## Completion criteria
 
-A research issue is **complete** when its decision record is merged and the acceptance criteria in the issue are met: candidate fields, compatibility rules in the shared format ([#40](https://github.com/Pick-Your-AI/research/issues/40)), source links, and unresolved questions are documented, and handoffs are confirmed by the consuming owners. A parent workstream is complete when its sub-issues are complete and its cross-workstream assumptions have been reviewed with the affected owners.
+A research issue is **complete** when its decision record is merged and the acceptance criteria in the issue are met: candidate fields, compatibility rules in the shared format ([#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40)), source links, and unresolved questions are documented, and handoffs are confirmed by the consuming owners. A parent workstream is complete when its sub-issues are complete and its cross-workstream assumptions have been reviewed with the affected owners.
 
 Research completion is not implementation completion. Describing a task, or opening a draft, does not complete research.
 

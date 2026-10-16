@@ -1,6 +1,6 @@
 # Pick Your AI research
 
-[Research Project](https://github.com/orgs/Pick-Your-AI/projects/1) · [Issues](https://github.com/Pick-Your-AI/research/issues) · [Organization](https://github.com/Pick-Your-AI)
+[Research Project](https://github.com/orgs/Pick-Your-AI/projects/1) · [Issues](https://github.com/Pick-Your-AI/pick-your-ai-research/issues) · [Organization](https://github.com/Pick-Your-AI)
 
 Research workspace for an AI system builder inspired by [PCPartPicker](https://pcpartpicker.com/). The intended product lets a user choose compatible AI components, understand tradeoffs and estimated costs, save and share a configuration, and inspect evidence behind each recommendation.
 
@@ -13,6 +13,8 @@ The builder starts with workload and deployment mode (T0), then guides model sel
 T3, T4, and T5 are optional capabilities: a build may omit them entirely.
 
 - [Contributing and triage conventions](CONTRIBUTING.md) cover issue structure, labels, Project fields, priority and readiness criteria, and dependency semantics.
+- [Research submission workflow](docs/RESEARCH_WORKFLOW.md) explains notes, structured proposals, external evidence, and validation.
+- [Contract coverage](docs/CONTRACT_MAPPING.md) maps all 29 canonical kinds to existing issues; [contract adoption](contracts/v1/ADOPTION.md) explains the preserved v1 package.
 - The [research method](docs/RESEARCH_METHOD.md) defines evidence rules and the decision-record template.
 - The [dependency map](docs/DEPENDENCIES.md) links every component issue to its inputs, compatibility relationships, and ownership boundaries.
 
@@ -20,21 +22,21 @@ GitHub Issues hold the research tasks: T0–T6 are parent issues and each compon
 
 | Workstream | Owner |
 | --- | --- |
-| [T0: Configuration](https://github.com/Pick-Your-AI/research/issues/1) | @CompleteDotTech |
-| [T1: Model Selection](https://github.com/Pick-Your-AI/research/issues/4) | @zwright8 |
-| [T2: Infrastructure](https://github.com/Pick-Your-AI/research/issues/8) | @Mattycodes69 |
-| [T3: Knowledge & Retrieval](https://github.com/Pick-Your-AI/research/issues/12) (optional) | @zabyxc01 |
-| [T4: Agents & Integrations](https://github.com/Pick-Your-AI/research/issues/24) (optional) | @CompleteDotTech |
-| [T5: Training & Fine-Tuning](https://github.com/Pick-Your-AI/research/issues/29) (optional) | @appletechie |
-| [T6: Deployment & Operations](https://github.com/Pick-Your-AI/research/issues/34) | @PUSHINGSQUARES |
+| [T0: Configuration](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1) | @CompleteDotTech |
+| [T1: Model Selection](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4) | @zwright8 |
+| [T2: Infrastructure](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) | @Mattycodes69 |
+| [T3: Knowledge & Retrieval](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12) (optional) | @zabyxc01 |
+| [T4: Agents & Integrations](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24) (optional) | @CompleteDotTech |
+| [T5: Training & Fine-Tuning](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29) (optional) | @appletechie |
+| [T6: Deployment & Operations](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) | @PUSHINGSQUARES |
 
 ## Product research questions
 
-- Which component categories and attributes are needed to make useful selections for API, managed, and self-hosted deployments? (component issues; schema in [#40](https://github.com/Pick-Your-AI/research/issues/40))
-- How should compatibility, unknowns, warnings, and hard conflicts be represented and explained? ([#40](https://github.com/Pick-Your-AI/research/issues/40))
-- How should users compare candidates using current, sourced prices and capability data without implying false precision? ([#39](https://github.com/Pick-Your-AI/research/issues/39), [#41](https://github.com/Pick-Your-AI/research/issues/41))
-- What should a build summary, saved configuration, and shareable link contain, and what happens when data changes? ([#42](https://github.com/Pick-Your-AI/research/issues/42))
-- Which data sources permit automated updates, and how will stale or conflicting facts be handled? ([#41](https://github.com/Pick-Your-AI/research/issues/41))
+- Which component categories and attributes are needed to make useful selections for API, managed, and self-hosted deployments? (component issues; schema in [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40))
+- How should compatibility, unknowns, warnings, and hard conflicts be represented and explained? ([#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40))
+- How should users compare candidates using current, sourced prices and capability data without implying false precision? ([#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41))
+- What should a build summary, saved configuration, and shareable link contain, and what happens when data changes? ([#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42))
+- Which data sources permit automated updates, and how will stale or conflicting facts be handled? ([#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41))
 
 ## Inspiration and boundaries
 

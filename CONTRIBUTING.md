@@ -38,6 +38,8 @@ GitHub **Assignees** are the source of truth for ownership. Do not duplicate own
 
 - Put decision records at `research/<workstream-slug>/<component-slug>.md`. The exact path is in each issue's Deliverable section, e.g. `research/T2-infrastructure/gpu-compute.md`.
 - Put workstream summaries at `research/<workstream-slug>/README.md`.
+- Follow [the submission workflow](docs/RESEARCH_WORKFLOW.md) and [canonical-kind mapping](docs/CONTRACT_MAPPING.md). Put complete catalog JSON proposals in `catalog/proposals/`, dated pricebooks in `pricing/proposals/`, and metadata for external artifacts in `evidence/`. Incomplete findings remain research notes.
+- Run the workflow's validation commands. Schema validity does not certify source accuracy or complete the issue's review requirements.
 - Deliver research by pull request that references the issue (`Closes #n` once acceptance criteria are met). Ask the owners of affected handoff issues to review.
 - Never commit fabricated findings, prices, or citations. Every factual or numeric claim needs a primary source with an access date (see the research method).
 

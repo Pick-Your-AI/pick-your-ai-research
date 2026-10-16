@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "id": "manifest.fixture.1",
+  "build_id": "build.fixture.1",
+  "build_revision": 1,
+  "deployment_target_selection_id": "sel_deployment_target",
+  "compatibility_report_id": "evaluation.build.fixture.1.r1",
+  "quality_run_id": "quality.fixture.1",
+  "cost_estimate_id": "estimate.fixture.1",
+  "resource_estimate_id": "resources.fixture.1",
+  "approvals": [
+    {
+      "approver_ref": "user.fixture",
+      "decision": "pending",
+      "scope": "owner"
+    }
+  ],
+  "rollout_strategy": "canary",
+  "requested_at": "2026-10-16T09:00:00Z",
+  "status": "proposed",
+  "notes": [
+    "Not approved or deployed. All evidence is synthetic."
+  ]
+}

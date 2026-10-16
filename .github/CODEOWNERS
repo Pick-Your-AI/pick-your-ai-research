@@ -1,0 +1,13 @@
+# Default reviewer: organization owner. Later, more specific rules take precedence.
+*                                          @CompleteDotTech
+/contracts/                                @CompleteDotTech
+/schemas/                                  @CompleteDotTech
+
+# Per-tier research paths: tier owner from the parent issue on the Project.
+/research/T0-configuration/                @tynamite
+/research/T1-model-selection/              @zwright8
+/research/T2-infrastructure/               @Mattycodes69
+/research/T3-knowledge-retrieval/          @zabyxc01
+/research/T4-agents-integrations/          @CompleteDotTech
+/research/T5-training-fine-tuning/         @appletechie
+/research/T6-deployment-operations/        @PUSHINGSQUARES

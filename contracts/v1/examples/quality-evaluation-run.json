@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "id": "quality.fixture.1",
+  "build_id": "build.fixture.1",
+  "build_revision": 1,
+  "evaluation_suite_selection_id": "sel_evaluation_suite",
+  "started_at": "2026-10-16T09:00:00Z",
+  "finished_at": "2026-10-16T09:00:00Z",
+  "status": "passed",
+  "evaluator_version": "0.0-fixture",
+  "dataset_revision": "fixture-synthetic-dataset-v1",
+  "sample_size": 100,
+  "measurements": [
+    {
+      "metric": "answer_quality",
+      "observed": 0.91,
+      "threshold": 0.85,
+      "comparator": "gte",
+      "unit": "score",
+      "passed": true
+    }
+  ],
+  "artifacts": [],
+  "notes": [
+    "TEST FIXTURE: synthetic score, not an actual evaluation."
+  ]
+}
