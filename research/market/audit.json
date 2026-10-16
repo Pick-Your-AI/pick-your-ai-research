@@ -1,0 +1,354 @@
+{
+  "access_date": "2026-10-16",
+  "issues": [
+    {
+      "number": 1,
+      "title": "T0: Configuration",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "tynamite"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 2,
+      "title": "T0: Workload / Use Case",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "tynamite"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 3,
+      "title": "T0: Deployment Mode",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "tynamite"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 4,
+      "title": "T1: Model Selection",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zwright8"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 5,
+      "title": "T1: Model Provider",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zwright8"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 6,
+      "title": "T1: AI Model",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zwright8"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 7,
+      "title": "T1: Context Window",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zwright8"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 8,
+      "title": "T2: Infrastructure",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "Mattycodes69"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 9,
+      "title": "T2: Hosting",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "Mattycodes69"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 10,
+      "title": "T2: GPU / Compute",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "Mattycodes69"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 11,
+      "title": "T2: Inference Engine",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "Mattycodes69"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 12,
+      "title": "T3: Knowledge & Retrieval",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zabyxc01"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 13,
+      "title": "T3: Knowledge Base",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zabyxc01"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 14,
+      "title": "T3: Embedding Model",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zabyxc01"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 15,
+      "title": "T3: Vector Database",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zabyxc01"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 16,
+      "title": "T3: RAG & Retrieval Backends",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "zabyxc01"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 24,
+      "title": "T4: Agents & Integrations",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "CompleteDotTech"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 25,
+      "title": "T4: Agent Framework",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "CompleteDotTech"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 26,
+      "title": "T4: Tools & APIs",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "CompleteDotTech"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 27,
+      "title": "T4: MCP Servers",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "CompleteDotTech"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 28,
+      "title": "T4: Agent Memory",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "CompleteDotTech"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 29,
+      "title": "T5: Training & Fine-Tuning",
+      "classification": "Existing and active",
+      "owners": [
+        "appletechie"
+      ],
+      "rationale": "Relevant draft PR exists (#46 for training, #44 for contracts); no acceptance inferred."
+    },
+    {
+      "number": 30,
+      "title": "T5: Training Framework",
+      "classification": "Existing and active",
+      "owners": [
+        "appletechie"
+      ],
+      "rationale": "Relevant draft PR exists (#46 for training, #44 for contracts); no acceptance inferred."
+    },
+    {
+      "number": 31,
+      "title": "T5: Training Compute",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "appletechie"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 32,
+      "title": "T5: Training Dataset",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "appletechie"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 33,
+      "title": "T5: Fine-Tuned Model",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "appletechie"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 34,
+      "title": "T6: Deployment & Operations",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "PUSHINGSQUARES"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 35,
+      "title": "T6: Guardrails",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "PUSHINGSQUARES"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 36,
+      "title": "T6: Evaluation",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "PUSHINGSQUARES"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 37,
+      "title": "T6: Deployment",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "PUSHINGSQUARES"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 38,
+      "title": "T6: Monitoring",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "PUSHINGSQUARES"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 39,
+      "title": "T6: Cost Estimate",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "PUSHINGSQUARES"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 40,
+      "title": "T0: Component Schema & Compatibility Rules",
+      "classification": "Existing and active",
+      "owners": [
+        "tynamite"
+      ],
+      "rationale": "Relevant draft PR exists (#46 for training, #44 for contracts); no acceptance inferred."
+    },
+    {
+      "number": 41,
+      "title": "T0: Catalog Data Sources & Freshness",
+      "classification": "Existing and unstarted",
+      "owners": [
+        "tynamite"
+      ],
+      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+    },
+    {
+      "number": 42,
+      "title": "T0: Saved, Shared & Compared Builds",
+      "classification": "Blocked",
+      "owners": [
+        "tynamite"
+      ],
+      "rationale": "Native prerequisite #40 remains open."
+    }
+  ],
+  "reviewed_prs": [
+    44,
+    45,
+    46
+  ],
+  "technical_project": 1,
+  "market_project": 2,
+  "existing_complete": 0,
+  "exact_duplicates": 0,
+  "scope_overlaps": {
+    "MR-05": [
+      2,
+      3
+    ],
+    "MR-08": [
+      41
+    ],
+    "MR-09": [
+      10,
+      11,
+      16,
+      36,
+      39,
+      40
+    ],
+    "MR-11": [
+      42
+    ]
+  },
+  "notes": [
+    "PR #45 owns broader vision/governance proposals; market strategy is evidence input, not replacement.",
+    "Project #1 contains stale Ready filter status:Todo and older field references; reported without modifying unrelated Project.",
+    "PR #46 handoff text names CompleteDotTech for T0; live T0 assignee is tynamite. Preserve live assignment."
+  ]
+}

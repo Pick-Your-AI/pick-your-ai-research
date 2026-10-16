@@ -35,6 +35,8 @@ Shared decisions are tracked in [#40: schemas and compatibility](https://github.
 
 [Program #47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) coordinates competition, customer demand, monetization, and product scope. Market findings use the issue's evidence format; they only become component catalog records when that format applies.
 
+Read the [market research guide](docs/market-research/README.md), [competitive landscape](docs/market-research/competitive-landscape.md), and [research synthesis](research/market/synthesis.md). These records distinguish reviewed partial research from pending validation and owner decisions.
+
 | Workstream | Lead issue assignee |
 | --- | --- |
 | [MR-01: Competitive landscape](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48) | @appletechie |

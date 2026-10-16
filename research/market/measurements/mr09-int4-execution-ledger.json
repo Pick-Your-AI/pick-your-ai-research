@@ -1,0 +1,80 @@
+[
+  {
+    "Cell": "D4",
+    "Repetition": 1,
+    "PreflightUtc": "2026-10-16T13:56:23.9582949Z",
+    "SmiFreeMiB": 4088,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "int4",
+    "PromptTokens": 2048,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D4",
+    "Repetition": 2,
+    "PreflightUtc": "2026-10-16T13:58:30.4012968Z",
+    "SmiFreeMiB": 3961,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "int4",
+    "PromptTokens": 2048,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D4",
+    "Repetition": 3,
+    "PreflightUtc": "2026-10-16T13:59:07.4037241Z",
+    "SmiFreeMiB": 3967,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "int4",
+    "PromptTokens": 2048,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D5",
+    "Repetition": 1,
+    "PreflightUtc": "2026-10-16T13:59:45.0458774Z",
+    "SmiFreeMiB": 4131,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "int4",
+    "PromptTokens": 2048,
+    "ActiveSequences": 2,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D5",
+    "Repetition": 2,
+    "PreflightUtc": "2026-10-16T14:00:15.2815750Z",
+    "SmiFreeMiB": 4101,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "int4",
+    "PromptTokens": 2048,
+    "ActiveSequences": 2,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D5",
+    "Repetition": 3,
+    "PreflightUtc": "2026-10-16T14:00:42.9691051Z",
+    "SmiFreeMiB": 4163,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "int4",
+    "PromptTokens": 2048,
+    "ActiveSequences": 2,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  }
+]
