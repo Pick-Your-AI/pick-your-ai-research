@@ -1,0 +1,38 @@
+{
+  "existing_issues_reviewed": 35,
+  "new_issues": 20,
+  "native_subissues": 19,
+  "existing_issues_reused_as_handoff_targets": 19,
+  "duplicates_closed": 0,
+  "duplicates_consolidated": 0,
+  "existing_issues_split": 0,
+  "new_validation_outcomes_split": 7,
+  "assigned": 20,
+  "priority_counts": {
+    "P1": 11,
+    "P0": 5,
+    "P2": 4,
+    "P3": 0
+  },
+  "readiness_counts": {
+    "Ready": 18,
+    "Needs Input": 1,
+    "Awaiting Decision": 1
+  },
+  "status_counts": {
+    "In Review": 13,
+    "Ready": 5,
+    "Blocked": 1,
+    "In Progress": 1
+  },
+  "unassigned": 0,
+  "untriaged": 0,
+  "total_issues_reviewed": 55,
+  "evidence_confidence_counts": {
+    "Low": 10,
+    "Medium": 4,
+    "Unverified": 6
+  },
+  "native_blocking_links": 2,
+  "last_triage": "2026-10-16 second pass: live readback of 55 issues and PRs #43-#77"
+}
