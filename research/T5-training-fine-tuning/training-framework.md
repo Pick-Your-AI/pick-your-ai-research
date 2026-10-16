@@ -1,7 +1,7 @@
 # T5: Training Framework
 
 Issue: #30 · Contract: 1.0.0 · Kinds: `training_framework`
-Status: draft · Last researched: 2026-10-16
+Status: ready for review · Last researched: 2026-10-16
 
 ## User decision
 
