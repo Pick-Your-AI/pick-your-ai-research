@@ -1,6 +1,6 @@
 # Market research method and phase limits
 
-This extends the existing research method for market notes; it does not change the frozen v1 component contract. JSON under `research/market/` serializes incomplete analyst observations and tracking records, not production CatalogItems, Pricebooks or runtime outputs. No second canonical component catalog is created. Complete facts and prices must later use the existing proposal workflow. PR #44 remains the pending source of that workflow.
+This extends the existing research method for market notes; it does not change the frozen v1 component contract. JSON under `research/market/` serializes incomplete analyst observations and tracking records, not production CatalogItems, Pricebooks or runtime outputs. No second canonical component catalog is created. Complete facts and prices must later use the existing proposal workflow. That workflow was adopted in #44 (merged) and is documented in `docs/RESEARCH_WORKFLOW.md`.
 
 ## Bounded phases
 
@@ -31,4 +31,4 @@ Ready requires a coherent question, owner, output path, acceptance criteria and 
 
 Project #1 currently uses Critical/High/Medium/Low priorities and Tier, not the older CONTRIBUTING labels. Market P0/P1/P2/P3 map to those four priorities conceptually; fields remain separate. Market Research Readiness maps to technical Readiness. Do not alter technical status or assignments from market inference. `type: workstream` is reserved for T0–T6 by existing guidance; new market items use `type: research`, with hierarchy and Work Type distinguishing epics.
 
-Native blockers represent genuine execution constraints only; information inputs and validation gates are linked in bodies and handoffs. The existing #42 blocked-by #40 relation is preserved. Initial market tasks can investigate in parallel; accepted synthesis follows evidence review, so no artificial circular graph is introduced.
+Native blockers represent genuine execution constraints only; information inputs and validation gates are linked in bodies and handoffs. The existing #42 blocked-by #40 relation is preserved. Initial market tasks can investigate in parallel; accepted synthesis follows evidence review, so no artificial circular graph is introduced. The only market blockers are #57 (differentiation) and #58 (MVP), each blocked by #66: a direct substitute satisfying the scenario would change both conclusions, so neither can be accepted first. Drafting and review continue in parallel.

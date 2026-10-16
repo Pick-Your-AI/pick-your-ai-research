@@ -12,7 +12,7 @@ Model-card documentation supports structured metadata and intended-use context. 
 Hub access is not a blanket model or dataset license. Each checkpoint and dataset requires its own terms review, including gating and use restrictions.
 
 ## Strategic implication and next test
-Prefer metadata links and exact revisions to copying model assets. Pair #6 and #41 on source provenance; reuse existing #30/PR #46 training work rather than creating another framework inventory.
+Prefer metadata links and exact revisions to copying model assets. Pair #6 and #41 on source provenance; reuse existing #30/PR #68 training work (PR #46 was superseded by #68) rather than creating another framework inventory.
 
 ## Evidence
 - [https://huggingface.co/models](https://huggingface.co/models) — accessed 2026-10-16.

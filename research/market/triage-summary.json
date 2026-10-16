@@ -20,11 +20,19 @@
     "Awaiting Decision": 1
   },
   "status_counts": {
-    "In Review": 14,
+    "In Review": 13,
     "Ready": 5,
-    "Triage": 1
+    "Blocked": 1,
+    "In Progress": 1
   },
   "unassigned": 0,
   "untriaged": 0,
-  "total_issues_reviewed": 55
+  "total_issues_reviewed": 55,
+  "evidence_confidence_counts": {
+    "Low": 10,
+    "Medium": 4,
+    "Unverified": 6
+  },
+  "native_blocking_links": 2,
+  "last_triage": "2026-10-16 second pass: live readback of 55 issues and PRs #43-#77"
 }

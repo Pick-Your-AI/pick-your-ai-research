@@ -39,7 +39,7 @@
     "score": 4.1,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 47,
@@ -47,7 +47,10 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBO_oo",
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "deliverables": [
+      "synthesis.md"
+    ]
   },
   {
     "title": "MR-01 — Competitive Landscape Discovery",
@@ -229,7 +232,7 @@
     "score": 2.95,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 51,
@@ -276,7 +279,7 @@
     "score": 4.25,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 52,
@@ -320,7 +323,7 @@
     "score": 3.65,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 53,
@@ -364,7 +367,7 @@
     "score": 3.55,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 54,
@@ -421,7 +424,10 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAZE",
     "parent_number": 47,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "labels_added": [
+      "topic: data-governance"
+    ]
   },
   {
     "title": "MR-09 — Technical Feasibility",
@@ -464,7 +470,7 @@
     "score": 4.4,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 56,
@@ -509,7 +515,7 @@
     "score": 4.3,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 57,
@@ -518,7 +524,10 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAms",
     "parent_number": 47,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "blocked_by": [
+      66
+    ]
   },
   {
     "title": "MR-11 — MVP Definition & Prioritization",
@@ -559,7 +568,7 @@
     "score": 4.1,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 58,
@@ -568,14 +577,17 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAsg",
     "parent_number": 47,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "blocked_by": [
+      66
+    ]
   },
   {
     "title": "MR-12 — Research Quality, Synthesis & Handoffs",
     "workstream": "MR-12",
     "area": "Strategy",
     "owner": "CompleteDotTech",
-    "deliverable": "synthesis.md",
+    "deliverable": "handoffs.md",
     "question": "Are conclusions traceable and ready for technical-owner decisions?",
     "scores": [
       4,
@@ -620,7 +632,7 @@
     "score": 4.1,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Medium",
+    "evidence_confidence": "Low",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 59,
@@ -629,7 +641,13 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPA0o",
     "parent_number": 47,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "deliverables": [
+      "handoffs.md",
+      "handoffs.json",
+      "audit.json",
+      "risk-register.md"
+    ]
   },
   {
     "title": "MR-08: Validate commercial display and redistribution rights",
@@ -663,7 +681,7 @@
     "score": 4.3,
     "priority": "P0",
     "priority_rationale": "Sequence by weighted rubric. Override: unresolved data rights could invalidate the proposed product and all feed integrations.",
-    "evidence_confidence": "Low",
+    "evidence_confidence": "Unverified",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 60,
@@ -672,7 +690,10 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPA6E",
     "parent_number": 55,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "labels_added": [
+      "topic: data-governance"
+    ]
   },
   {
     "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
@@ -708,7 +729,7 @@
     "score": 4.4,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Low",
+    "evidence_confidence": "Unverified",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 61,
@@ -752,7 +773,7 @@
     "score": 3.95,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Low",
+    "evidence_confidence": "Unverified",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 62,
@@ -789,7 +810,7 @@
       "Capture current alternatives and recent decisions",
       "Test willingness to pay without leading questions"
     ],
-    "status": "Triage",
+    "status": "Blocked",
     "readiness": "Awaiting Decision",
     "work_type": "Validation",
     "parent_key": "MR-05",
@@ -797,7 +818,7 @@
     "score": null,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. Provisional P1 by strategic need; do not assign zero to missing evidence availability.",
-    "evidence_confidence": "Low",
+    "evidence_confidence": "Unverified",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 63,
@@ -842,7 +863,7 @@
     "score": 4.2,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Low",
+    "evidence_confidence": "Unverified",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 64,
@@ -851,7 +872,10 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBRM",
     "parent_number": 54,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "labels_added": [
+      "topic: pricing"
+    ]
   },
   {
     "title": "MR-09: Review RAG interoperability market claims",
@@ -889,7 +913,7 @@
     "score": 3.2,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
-    "evidence_confidence": "Low",
+    "evidence_confidence": "Unverified",
     "opportunity_impact": "Unknown",
     "effort": "Unknown",
     "number": 65,
@@ -926,11 +950,11 @@
       "Inspect saved or exported configuration claims",
       "Record counterexamples and pivot recommendation"
     ],
-    "status": "In Review",
+    "status": "In Progress",
     "readiness": "Ready",
     "work_type": "Validation",
     "parent_key": "MR-03",
-    "next_action": "Review the completed Flocci browser scenario in PR #67; next test contradictory constraints, actual deployment/export behavior and another substitute.",
+    "next_action": "Run the contradictory-constraints scenario on Flocci Stack Builder, then repeat the common scenario on a second substitute (ModelFit or llmfit).",
     "score": 4.75,
     "priority": "P0",
     "priority_rationale": "Sequence by weighted rubric. P0 invalidation risk: a direct substitute may already satisfy the proposed MVP; this test can change or stop downstream positioning.",
@@ -943,6 +967,10 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBd4",
     "parent_number": 50,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "blocking": [
+      57,
+      58
+    ]
   }
 ]

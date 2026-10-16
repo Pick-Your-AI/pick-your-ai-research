@@ -1,5 +1,7 @@
 # Initial market research synthesis
 
+Owner: [#47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) (executive synthesis and program recommendation). Inputs: the evidence audit, handoff ledger and risk register owned by [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59).
+
 Status: draft for review, not accepted research. Access date: 2026-10-16.
 
 The market already offers model discovery, benchmark comparisons, hardware-fit advice, workflow assembly and compute execution. The [32-resource catalog](competitors.json), [48-dimension matrix](features.json) and [13 desk profiles](competitors/README.md) establish meaningful overlap. They do not prove complete coverage or absence of an end-to-end competitor.
@@ -10,6 +12,6 @@ Recommend validating a bounded hybrid decision workflow with evidence, uncertain
 
 Demand remains the largest unresolved business question. Public developer evidence supports investigating verifiability, but no study here measures paying demand. [Scenarios](market-sizing.md) explicitly use assumptions; [personas](customers.md) are hypotheses. Source access is not redistribution permission, and software licenses do not automatically cover aggregated data.
 
-The Project separates desk-research review from independent validation. No issue is Done until evidence is merged, criteria are met and consuming owners accept handoffs. [Traceability](handoffs.md) preserves existing technical ownership; existing PR #46 remains the training-framework source rather than being duplicated.
+The Project separates desk-research review from independent validation. No issue is Done until evidence is merged, criteria are met and consuming owners accept handoffs. [Traceability](handoffs.md) preserves existing technical ownership; existing PR #68 (which superseded closed PR #46) remains the training-framework source rather than being duplicated.
 
 A subsequent free Flocci Stack Builder test generated ordered RAG component advice with constraints and uncertainty. This strengthens the direct-competition finding: guided workflow output alone is not a distinctive proposition. Test actual reproducibility, error correction and trusted compatibility as narrower hypotheses.

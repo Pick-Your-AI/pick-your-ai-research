@@ -15,6 +15,6 @@ Status: draft. Each row has a concrete validation owner in the Project; no risk 
 | Provider-specific behavior | Connector availability is insufficient | Runtime failure | Interoperability review; #16/#25/#27 |
 | Monetization incentives | Affiliate and sponsorship models | User trust | Publish neutral ranking policy; MR-07 |
 | Authenticated UX gap | PCPartPicker list inaccessible in current session | Incomplete reference study | Authorized walkthrough; MR-04 |
-| Schema adoption unresolved | PR #44 open | Submission tooling | Validate against pinned proposal and retarget after merge |
+| Schema adoption | Resolved: PR #44 merged; PR #67 rebased onto `main` | None remaining | Use `docs/RESEARCH_WORKFLOW.md` for any catalog/pricebook proposals |
 
 Owner decisions: approve customer recruitment/consent; define experiment success thresholds; resolve display/data licensing; accept or reject bounded MVP hypothesis; accept technical handoffs. No deadlines are invented.

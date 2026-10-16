@@ -13,4 +13,8 @@ Market validation checks identifiers, evidence references, matrix coverage, boun
 
 GitHub verification uses authenticated API readback, including filtered item queries for every view, assignments, parent relationships and metadata. The anonymous browser cannot display this private Project. Evidence limitations and failed website access are retained in the research notes.
 
-The research is submitted for review; a passing check does not make any issue Done. The PR is stacked on PR #44 and must follow its adoption/retargeting decision.
+The research is submitted for review; a passing check does not make any issue Done. PR #44 has since merged; the PR is rebased onto `main` (see below).
+
+## Revalidation after rebase onto `main` — 2026-10-16
+
+Rerun after rebasing onto `main` (#44 and #45 merged). Results are recorded in the PR description. These checks still do not verify market truth, rights, benchmark accuracy or owner acceptance.
