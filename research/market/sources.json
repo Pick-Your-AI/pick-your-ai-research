@@ -1,0 +1,533 @@
+[
+  {
+    "id": "src-benchlm",
+    "url": "https://benchlm.ai/",
+    "supporting_urls": [
+      "https://benchlm.ai/data/access",
+      "https://benchlm.ai/methodology"
+    ],
+    "publisher": "BenchLM",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-harness-bench",
+    "url": "https://www.harness-bench.ai/",
+    "supporting_urls": [
+      "https://github.com/Qihoo360/harness-bench",
+      "https://arxiv.org/abs/2605.27922"
+    ],
+    "publisher": "Harness Bench Team / Qihoo360 repository",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-llmfit",
+    "url": "https://www.llmfit.org/",
+    "supporting_urls": [
+      "https://github.com/AlexsJones/llmfit",
+      "https://raw.githubusercontent.com/AlexsJones/llmfit/main/LICENSE"
+    ],
+    "publisher": "AlexsJones repository; seed-site operator unconfirmed",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-local-ai-planner",
+    "url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+    "supporting_urls": [],
+    "publisher": "Logarithmic Spirals",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-flocci",
+    "url": "https://aitools.flocci.in/ask",
+    "supporting_urls": [
+      "https://aitools.flocci.in/",
+      "https://aitools.flocci.in/stack"
+    ],
+    "publisher": "Flocci Technologies",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-artificial-analysis",
+    "url": "https://artificialanalysis.ai/",
+    "supporting_urls": [
+      "https://artificialanalysis.ai/api-reference",
+      "https://artificialanalysis.ai/methodology"
+    ],
+    "publisher": "Artificial Analysis",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-openrouter",
+    "url": "https://openrouter.ai/models",
+    "supporting_urls": [
+      "https://openrouter.ai/docs/guides/overview/models",
+      "https://openrouter.ai/pricing"
+    ],
+    "publisher": "OpenRouter",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-hugging-face",
+    "url": "https://huggingface.co/models",
+    "supporting_urls": [
+      "https://huggingface.co/docs/hub/model-cards"
+    ],
+    "publisher": "Hugging Face",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-arena",
+    "url": "https://arena.ai/",
+    "supporting_urls": [],
+    "publisher": "Arena",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-llm-stats",
+    "url": "https://llm-stats.com/",
+    "supporting_urls": [],
+    "publisher": "LLM Stats; legal entity unconfirmed",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-models-dev",
+    "url": "https://models.dev/",
+    "supporting_urls": [
+      "https://github.com/anomalyco/models.dev",
+      "https://raw.githubusercontent.com/anomalyco/models.dev/dev/LICENSE"
+    ],
+    "publisher": "OpenCode / anomalyco",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-canrun",
+    "url": "https://canrunllm.com/",
+    "supporting_urls": [],
+    "publisher": "CanRun; legal entity unconfirmed",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-canitrun",
+    "url": "https://canitrun.dev/",
+    "supporting_urls": [],
+    "publisher": "CanItRun; legal entity unconfirmed",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-modelfit",
+    "url": "https://modelfit.io/",
+    "supporting_urls": [
+      "https://modelfit.io/data/"
+    ],
+    "publisher": "ModelFit / @wecko-ai package",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-ollama",
+    "url": "https://ollama.com/library",
+    "supporting_urls": [],
+    "publisher": "Ollama",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-gpus-io",
+    "url": "https://gpus.io/",
+    "supporting_urls": [],
+    "publisher": "GPUs.io; legal entity unconfirmed",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-vast",
+    "url": "https://vast.ai/",
+    "supporting_urls": [],
+    "publisher": "Vast.ai",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-runpod",
+    "url": "https://www.runpod.io/",
+    "supporting_urls": [
+      "https://www.runpod.io/pricing"
+    ],
+    "publisher": "Runpod",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-dify",
+    "url": "https://dify.ai/",
+    "supporting_urls": [
+      "https://docs.dify.ai/en/home",
+      "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
+    ],
+    "publisher": "LangGenius",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-langflow",
+    "url": "https://www.langflow.org/",
+    "supporting_urls": [],
+    "publisher": "Langflow",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-flowise",
+    "url": "https://flowiseai.com/",
+    "supporting_urls": [],
+    "publisher": "Flowise",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-n8n",
+    "url": "https://n8n.io/",
+    "supporting_urls": [
+      "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
+      "https://n8n.io/pricing/"
+    ],
+    "publisher": "n8n",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-skypilot",
+    "url": "https://skypilot.co/",
+    "supporting_urls": [
+      "https://docs.skypilot.ai/en/latest/docs/index.html"
+    ],
+    "publisher": "SkyPilot",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-bentoml",
+    "url": "https://www.bentoml.com/",
+    "supporting_urls": [],
+    "publisher": "BentoML",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-langfuse",
+    "url": "https://langfuse.com/",
+    "supporting_urls": [],
+    "publisher": "Langfuse",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-ragas",
+    "url": "https://docs.ragas.io/en/stable/",
+    "supporting_urls": [],
+    "publisher": "Ragas maintainers",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-llamaindex",
+    "url": "https://www.llamaindex.ai/",
+    "supporting_urls": [],
+    "publisher": "LlamaIndex",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-langchain",
+    "url": "https://www.langchain.com/",
+    "supporting_urls": [],
+    "publisher": "LangChain",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-qdrant-bench",
+    "url": "https://qdrant.tech/benchmarks/",
+    "supporting_urls": [],
+    "publisher": "Qdrant",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-lm-eval",
+    "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+    "supporting_urls": [],
+    "publisher": "EleutherAI",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-mcp-registry",
+    "url": "https://github.com/modelcontextprotocol/registry",
+    "supporting_urls": [
+      "https://registry.modelcontextprotocol.io/docs"
+    ],
+    "publisher": "Model Context Protocol maintainers",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-unsloth",
+    "url": "https://unsloth.ai/",
+    "supporting_urls": [],
+    "publisher": "Unsloth",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-survey-knowledge",
+    "url": "https://survey.stackoverflow.co/2026/knowledge",
+    "supporting_urls": [],
+    "publisher": "Stack Overflow",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Source attribution matters to survey respondents; not product willingness to pay.",
+    "version": "2026 report",
+    "region": "Global / survey population; not all buyers",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-survey-method",
+    "url": "https://survey.stackoverflow.co/2026/methodology",
+    "supporting_urls": [],
+    "publisher": "Stack Overflow",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Community recruitment and validity rules limit generalization.",
+    "version": "2026 report",
+    "region": "Global / survey population; not all buyers",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-survey-trust",
+    "url": "https://survey.stackoverflow.co/2026/ai/data/ai-trust",
+    "supporting_urls": [],
+    "publisher": "Stack Overflow",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Conditional trust question; do not infer purchasing demand.",
+    "version": "2026 report",
+    "region": "Global / survey population; not all buyers",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-ai-index",
+    "url": "https://hai.stanford.edu/assets/files/ai_index_report_2026.pdf",
+    "supporting_urls": [],
+    "publisher": "Stanford HAI",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Adoption context only; not the product TAM.",
+    "version": "2026 report",
+    "region": "Global / survey population; not all buyers",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-vllm-parallel",
+    "url": "https://docs.vllm.ai/en/latest/serving/parallelism_scaling/",
+    "supporting_urls": [],
+    "publisher": "vLLM",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Parallelism constraints require runtime-specific validation.",
+    "version": "Public page on access date",
+    "region": "Global / survey population; not all buyers",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-pcpartpicker",
+    "url": "https://pcpartpicker.com/list/",
+    "supporting_urls": [],
+    "publisher": "PCPartPicker",
+    "access_date": "2026-10-16",
+    "access_status": "unverified-access-blocked",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Web request 403; browser redirected to login. List workflow unverified.",
+    "version": "Public page on access date",
+    "region": "Global / survey population; not all buyers",
+    "confidence": "Low"
+  }
+]

@@ -4,6 +4,8 @@
 
 Research workspace for an AI system builder inspired by [PCPartPicker](https://pcpartpicker.com/). The intended product lets a user choose compatible AI components, understand tradeoffs and estimated costs, save and share a configuration, and inspect evidence behind each recommendation.
 
+The separate [Market Research & Competitive Intelligence Project](https://github.com/orgs/Pick-Your-AI/projects/2) tests customer demand, competitive overlap and product strategy. See [market research evidence and triage](docs/market-research/README.md); its draft findings do not replace technical component research.
+
 This repository gathers evidence and decisions before implementation. It does not endorse a provider, model, or hosting platform by default.
 
 ## Scope

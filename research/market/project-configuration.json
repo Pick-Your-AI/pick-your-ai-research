@@ -1,0 +1,779 @@
+{
+  "id": "PVT_kwDOFHg4Xc4BnViW",
+  "number": 2,
+  "title": "Pick Your AI — Market Research & Competitive Intelligence",
+  "url": "https://github.com/orgs/Pick-Your-AI/projects/2",
+  "shortDescription": "Comprehensive competitive intelligence, market validation, customer research, data-source discovery, product differentiation, and strategic planning for Pick Your AI—the PCPartPicker for AI.",
+  "readme": "## Mission and boundary\nValidate or falsify demand for a dependency-aware AI stack builder. Research evidence lives in Pick-Your-AI/pick-your-ai-research. Technical component decisions remain in [Research Project #1](https://github.com/orgs/Pick-Your-AI/projects/1); preserve its live owners. This project coordinates market evidence, not implementation.\n\n## Method and evidence\nRecord primary URL, publisher, access date, version/region, claim type, confidence and limitations. Marketing is a vendor claim, not an independent measurement. Unknown capability is not unsupported capability. No fabricated pricing or adoption figures. Data access does not confer redistribution rights. Findings become candidate requirements only after evidence review and consumer-owner acceptance.\n\n## Workstreams\nMR-01 landscape; MR-02 feature matrix; MR-03 deep dives; MR-04 PCPartPicker experience; MR-05 customers; MR-06 market demand; MR-07 monetization; MR-08 data rights/integrations; MR-09 feasibility; MR-10 differentiation; MR-11 MVP; MR-12 quality and handoffs.\n\n## Workflow\nInbox = new; Triage = missing qualification; Ready = scoped, assigned, startable; In Progress = active work; In Review = relevant PR open; Blocked = genuine execution prerequisite; Done = merged evidence, criteria met and handoff accepted. No automatic closure-to-acceptance assumption. Review state manually when PRs change; no workflow automation has been configured.\n\n## Priority and readiness\nP0 foundation; P1 core decision; P2 supporting; P3 exploratory. Weight strategic value 25%, downstream impact 20%, user relevance 20%, evidence availability 15%, feasibility 10%, urgency/change risk 10%; score each 1–5. Unknown inputs remain null. Record qualitative overrides. P0 is not vendor quality. Research Readiness: Ready, Needs Input, Blocked, Awaiting Decision. Effort stays Unknown absent an owner estimate.\n\n## Ownership and triage\nAssignees are authoritative. CompleteDotTech coordinates market work; preserve T0 tynamite and the other live technical owners. Deduplicate against issues, PRs and research notes before creation. One outcome per research issue; native subissues for separately reviewed outcomes; checklists for steps. Native blockers only for genuine prerequisites, never compatibility cycles.\n\n## Phased execution limits\nA: one current audit before mutations. B: one dedicated project, nine requested fields, twelve functional views. C: initial 30–40 distinct candidates, 10–15 desk profiles; unavailable sites remain unverified. D/E: one program, twelve workstreams, at most eight independently justified validation subissues in the initial pass. F: one reviewable evidence PR; no paid API calls, deployments, mass scraping, or customer outreach in this pass. G: read back all changes and run repository checks. Expand only for material evidence gaps; record expansion reasons. These limits control breadth, not permission to omit verification. No invented deadlines or estimates.\n\n## Completion and handoffs\nDrafts are not Done. Link the consuming technical issue, exact evidence, requested decision and owner response. Refs rather than Closes while acceptance is pending. #40 owns contracts, #41 evidence/freshness, #39 cost semantics. PR #44 remains open at initial audit; its frozen contracts must not be modified by market research.\n",
+  "public": false,
+  "fields": {
+    "nodes": [
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+        "name": "Title"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+        "name": "Assignees"
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6oWo",
+        "name": "Status",
+        "options": [
+          {
+            "id": "ac77843e",
+            "name": "Inbox"
+          },
+          {
+            "id": "1fac92e7",
+            "name": "Triage"
+          },
+          {
+            "id": "08017cf3",
+            "name": "Ready"
+          },
+          {
+            "id": "1a975b37",
+            "name": "In Progress"
+          },
+          {
+            "id": "180326a1",
+            "name": "In Review"
+          },
+          {
+            "id": "9dd5a876",
+            "name": "Blocked"
+          },
+          {
+            "id": "08629308",
+            "name": "Done"
+          }
+        ]
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWs",
+        "name": "Labels"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWw",
+        "name": "Linked pull requests"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oW0",
+        "name": "Milestone"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oW4",
+        "name": "Repository"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXE",
+        "name": "Reviewers"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXM",
+        "name": "Parent issue"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXU",
+        "name": "Sub-issues progress"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXY",
+        "name": "Created"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXg",
+        "name": "Updated"
+      },
+      {
+        "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXo",
+        "name": "Closed"
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+        "name": "Priority",
+        "options": [
+          {
+            "id": "843ff0e7",
+            "name": "P0"
+          },
+          {
+            "id": "fd8a27b8",
+            "name": "P1"
+          },
+          {
+            "id": "f1241911",
+            "name": "P2"
+          },
+          {
+            "id": "14b1daa8",
+            "name": "P3"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6orw",
+        "name": "Research Area",
+        "options": [
+          {
+            "id": "651ce41a",
+            "name": "Competition"
+          },
+          {
+            "id": "abd64288",
+            "name": "Market"
+          },
+          {
+            "id": "31cde4ae",
+            "name": "Customers"
+          },
+          {
+            "id": "efbbd128",
+            "name": "Product"
+          },
+          {
+            "id": "4a65afdc",
+            "name": "Technology"
+          },
+          {
+            "id": "b74a83c8",
+            "name": "Data"
+          },
+          {
+            "id": "002909b6",
+            "name": "Commercial"
+          },
+          {
+            "id": "98d83887",
+            "name": "Strategy"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+        "name": "Workstream",
+        "options": [
+          {
+            "id": "c98878fc",
+            "name": "MR-01"
+          },
+          {
+            "id": "950ab609",
+            "name": "MR-02"
+          },
+          {
+            "id": "3a44051f",
+            "name": "MR-03"
+          },
+          {
+            "id": "858eb615",
+            "name": "MR-04"
+          },
+          {
+            "id": "4c7a2c5e",
+            "name": "MR-05"
+          },
+          {
+            "id": "6e60e148",
+            "name": "MR-06"
+          },
+          {
+            "id": "b4989745",
+            "name": "MR-07"
+          },
+          {
+            "id": "0fdce32a",
+            "name": "MR-08"
+          },
+          {
+            "id": "754d2f1a",
+            "name": "MR-09"
+          },
+          {
+            "id": "99f42dce",
+            "name": "MR-10"
+          },
+          {
+            "id": "79e89aa8",
+            "name": "MR-11"
+          },
+          {
+            "id": "ba6df6e1",
+            "name": "MR-12"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6oto",
+        "name": "Work Type",
+        "options": [
+          {
+            "id": "f12d5f6a",
+            "name": "Epic"
+          },
+          {
+            "id": "ece91e9a",
+            "name": "Research"
+          },
+          {
+            "id": "2b1710a6",
+            "name": "Validation"
+          },
+          {
+            "id": "e3db4ec2",
+            "name": "Dataset"
+          },
+          {
+            "id": "553c6167",
+            "name": "Analysis"
+          },
+          {
+            "id": "aa2d2bf1",
+            "name": "Decision"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+        "name": "Evidence Confidence",
+        "options": [
+          {
+            "id": "c50bd7b7",
+            "name": "Unverified"
+          },
+          {
+            "id": "474fbf7f",
+            "name": "Low"
+          },
+          {
+            "id": "0cb67206",
+            "name": "Medium"
+          },
+          {
+            "id": "520304c7",
+            "name": "High"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+        "name": "Research Readiness",
+        "options": [
+          {
+            "id": "bcccd43f",
+            "name": "Ready"
+          },
+          {
+            "id": "4f956760",
+            "name": "Needs Input"
+          },
+          {
+            "id": "398d4a85",
+            "name": "Blocked"
+          },
+          {
+            "id": "2087a91d",
+            "name": "Awaiting Decision"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6oxc",
+        "name": "Opportunity Impact",
+        "options": [
+          {
+            "id": "5632db42",
+            "name": "High"
+          },
+          {
+            "id": "b8d5dedc",
+            "name": "Medium"
+          },
+          {
+            "id": "287a5e2d",
+            "name": "Low"
+          },
+          {
+            "id": "671a1b44",
+            "name": "Unknown"
+          }
+        ]
+      },
+      {
+        "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6oyo",
+        "name": "Effort",
+        "options": [
+          {
+            "id": "9fe4db64",
+            "name": "High"
+          },
+          {
+            "id": "fd83b8af",
+            "name": "Medium"
+          },
+          {
+            "id": "a97871ef",
+            "name": "Low"
+          },
+          {
+            "id": "49a4bbec",
+            "name": "Unknown"
+          }
+        ]
+      }
+    ]
+  },
+  "views": {
+    "nodes": [
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8cg",
+        "number": 13,
+        "name": "01 — Executive Overview",
+        "layout": "BOARD_LAYOUT",
+        "filter": "",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Workstream"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8ck",
+        "number": 14,
+        "name": "02 — Triage Inbox",
+        "layout": "TABLE_LAYOUT",
+        "filter": "-status:Ready,\"In Progress\",\"In Review\",Blocked,Done",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Research Readiness"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8cw",
+        "number": 15,
+        "name": "03 — Research Roadmap",
+        "layout": "TABLE_LAYOUT",
+        "filter": "-status:Done",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Workstream"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8c8",
+        "number": 16,
+        "name": "04 — Kanban Board",
+        "layout": "BOARD_LAYOUT",
+        "filter": "-status:Done",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Workstream"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8dQ",
+        "number": 17,
+        "name": "05 — Competitive Intelligence",
+        "layout": "TABLE_LAYOUT",
+        "filter": "research-area:Competition",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+              "name": "Evidence Confidence"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Workstream"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8dk",
+        "number": 18,
+        "name": "06 — Market & Customers",
+        "layout": "TABLE_LAYOUT",
+        "filter": "research-area:Market,Customers",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+              "name": "Evidence Confidence"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Research Area"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8d0",
+        "number": 19,
+        "name": "07 — Product Opportunities",
+        "layout": "TABLE_LAYOUT",
+        "filter": "research-area:Product,Strategy",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+              "name": "Evidence Confidence"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6oxc",
+              "name": "Opportunity Impact"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Opportunity Impact"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8d8",
+        "number": 20,
+        "name": "08 — Data & Integrations",
+        "layout": "TABLE_LAYOUT",
+        "filter": "research-area:Data,Technology",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+              "name": "Evidence Confidence"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Workstream"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8eE",
+        "number": 21,
+        "name": "09 — Blockers & Dependencies",
+        "layout": "TABLE_LAYOUT",
+        "filter": "research-readiness:Blocked,\"Needs Input\",\"Awaiting Decision\"",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oXM",
+              "name": "Parent issue"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ovo",
+              "name": "Research Readiness"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Research Readiness"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8eQ",
+        "number": 22,
+        "name": "10 — Owner Workload",
+        "layout": "TABLE_LAYOUT",
+        "filter": "-status:Done",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6oWo",
+              "name": "Status"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Assignees"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8eY",
+        "number": 23,
+        "name": "11 — Evidence Review",
+        "layout": "TABLE_LAYOUT",
+        "filter": "status:\"In Review\"",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ors",
+              "name": "Priority"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+              "name": "Evidence Confidence"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Evidence Confidence"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PVTV_lADOFHg4Xc4BnViWzgMF8ec",
+        "number": 24,
+        "name": "12 — Completed Research",
+        "layout": "TABLE_LAYOUT",
+        "filter": "status:Done",
+        "fields": {
+          "nodes": [
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWg",
+              "name": "Title"
+            },
+            {
+              "id": "PVTF_lADOFHg4Xc4BnViWzhl6oWk",
+              "name": "Assignees"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6osQ",
+              "name": "Workstream"
+            },
+            {
+              "id": "PVTSSF_lADOFHg4Xc4BnViWzhl6ots",
+              "name": "Evidence Confidence"
+            }
+          ]
+        },
+        "groupByFields": {
+          "nodes": [
+            {
+              "name": "Workstream"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

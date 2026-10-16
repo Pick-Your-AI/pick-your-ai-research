@@ -1,0 +1,152 @@
+[
+  {
+    "product_id": "models-dev",
+    "investigation_rank": 1,
+    "access": "Documented JSON; no credentials required for public endpoints",
+    "rights": "MIT repo; review upstream metadata provenance",
+    "maintenance": "Moderate: aliases, provider/model identity and changing modalities",
+    "next_action": "Prototype mapping in research only; no production ingestion approved",
+    "source_ids": [
+      "src-models-dev"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "modelfit",
+    "investigation_rank": 2,
+    "access": "Dataset page and JSON export documented",
+    "rights": "Dataset page states CC BY 4.0; CLI is separate",
+    "maintenance": "Moderate: estimated memory and model identity must be reconciled",
+    "next_action": "Validate exact export license and scope with #41",
+    "source_ids": [
+      "src-modelfit"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "llmfit",
+    "investigation_rank": 3,
+    "access": "CLI/JSON and local REST documented",
+    "rights": "MIT code; metadata and weight rights separate",
+    "maintenance": "Moderate/high: hardware-specific estimation and versioning",
+    "next_action": "Compare pinned estimator against measurements with #10",
+    "source_ids": [
+      "src-llmfit"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "openrouter",
+    "investigation_rank": 4,
+    "access": "Public model API documented",
+    "rights": "Public metadata access; redistribution scope not established",
+    "maintenance": "High: provider endpoint changes, billing and modality filters",
+    "next_action": "Verify terms and provider-specific source mappings",
+    "source_ids": [
+      "src-openrouter"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "mcp-registry",
+    "investigation_rank": 5,
+    "access": "Registry HTTP API documented",
+    "rights": "Code and package/server rights must be reviewed separately",
+    "maintenance": "High: metadata freshness and publisher assertions",
+    "next_action": "Use as discovery input, not compatibility/security certification",
+    "source_ids": [
+      "src-mcp-registry"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "hugging-face",
+    "investigation_rank": 6,
+    "access": "Public model cards and metadata",
+    "rights": "Per-repository and artifact licenses",
+    "maintenance": "High: mutable cards, aliases and gated artifacts",
+    "next_action": "Pin revisions and follow primary publisher provenance",
+    "source_ids": [
+      "src-hugging-face"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "artificial-analysis",
+    "investigation_rank": 7,
+    "access": "Keyed free API and commercial offering",
+    "rights": "Attribution and data terms; commercial display requires review",
+    "maintenance": "Moderate/high: changing index and benchmark coverage",
+    "next_action": "Review complete terms before API/key acquisition",
+    "source_ids": [
+      "src-artificial-analysis"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "benchlm",
+    "investigation_rank": 8,
+    "access": "API/MCP access plans documented",
+    "rights": "Separate commercial display/redistribution agreement explicitly required",
+    "maintenance": "High: source mix, license lineage and snapshot history",
+    "next_action": "Rights task precedes any customer-facing display",
+    "source_ids": [
+      "src-benchlm"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "harness-bench",
+    "investigation_rank": 9,
+    "access": "Public repository and study",
+    "rights": "No repository license detected; paper rights separate",
+    "maintenance": "High: suite identity conflict and controlled reproduction",
+    "next_action": "Reconcile release and obtain reuse clarity",
+    "source_ids": [
+      "src-harness-bench"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  },
+  {
+    "product_id": "gpus-io",
+    "investigation_rank": 10,
+    "access": "Public comparison page; API unknown",
+    "rights": "Reuse terms unverified",
+    "maintenance": "High: spot availability, location and unit semantics",
+    "next_action": "Use discovery links; verify each provider quote directly",
+    "source_ids": [
+      "src-gpus-io"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16"
+  }
+]
