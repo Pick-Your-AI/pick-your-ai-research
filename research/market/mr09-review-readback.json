@@ -1,0 +1,37 @@
+{
+  "classification": "observed GitHub review and merge metadata, not empirical or handoff acceptance",
+  "observed_on": "2026-10-16",
+  "publisher": "GitHub / Pick-Your-AI",
+  "source": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79",
+  "pr": 79,
+  "state": "closed",
+  "merged": true,
+  "merged_at": "2026-10-16T14:19:18Z",
+  "merged_by": "PUSHINGSQUARES",
+  "merge_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+  "head_commit": "380c2955210c82a455b8d367def995fa307cd524",
+  "base_branch": "research/market-intelligence",
+  "upstream_pr": 67,
+  "upstream_state": "open",
+  "upstream_head": "6511dea2a5102b13df1e47378a31f31230ecb494",
+  "canonical_main_merge": false,
+  "reviews": [
+    {
+      "reviewer": "PUSHINGSQUARES",
+      "state": "APPROVED",
+      "submitted_at": "2026-10-16T14:18:27Z",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+      "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+      "body": "",
+      "scope_disposition": "General PR approval; individual #56-to-#36/#39 handoff dispositions not named, so retained pending explicit confirmation."
+    }
+  ],
+  "ci": {
+    "conclusion": "success",
+    "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/actions/runs/38914663005/job/117018939668",
+    "commit": "380c2955210c82a455b8d367def995fa307cd524"
+  },
+  "limitations": "PR79 merged into the still-proposed PR67 branch, not main. Human coordinator acceptance, explicit consumer dispositions and remaining empirical/child gates remain unmet. Snapshot only.",
+  "confidence": "High for readback metadata; no claim for empirical validity or handoff acceptance",
+  "reuse": "Sanitized public repository metadata and original research notes; no private content or datasets."
+}

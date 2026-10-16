@@ -1,0 +1,438 @@
+[
+  {
+    "product_id": "models-dev",
+    "investigation_rank": 1,
+    "access": "Documented JSON; no credentials required for public endpoints",
+    "rights": "MIT licence covers the repository, including its model/provider data files",
+    "maintenance": "Moderate: aliases, provider/model identity and changing modalities",
+    "next_action": "Prototype a research-only mapping to #5/#6 records; production ingestion still needs coordinator approval",
+    "source_ids": [
+      "src-models-dev"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://github.com/anomalyco/models.dev/blob/dev/LICENSE"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Public repository and site JSON",
+        "basis": "MIT licence (GitHub licence API: MIT)"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "None",
+        "basis": "MIT licence"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "Keep the MIT copyright and permission notice with copied data",
+        "basis": "MIT licence"
+      },
+      "redistribution": {
+        "value": "yes",
+        "conditions": "Keep the MIT copyright and permission notice",
+        "basis": "MIT licence"
+      }
+    },
+    "update_cadence": "Continuous; repository last pushed 2026-10-16",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "modelfit",
+    "investigation_rank": 2,
+    "access": "Free JSON export at /api/dataset/; CSV and JSON mirrors on GitHub and Hugging Face",
+    "rights": "Dataset licensed CC BY 4.0 by the publisher; CLI separately MIT",
+    "maintenance": "Moderate: estimated memory and model identity must be reconciled",
+    "next_action": "Confirm the GitHub mirror's licence file matches the page (GitHub reports it as unrecognised) before bulk import; memory figures are ModelFit estimates, not measurements",
+    "source_ids": [
+      "src-modelfit"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://modelfit.io/data/",
+      "https://creativecommons.org/licenses/by/4.0/"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Use the documented export or mirrors",
+        "basis": "Dataset page offers a machine-readable export under CC BY 4.0"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "None",
+        "basis": "CC BY 4.0"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "Credit 'ModelFit (modelfit.io)', link the licence, indicate changes",
+        "basis": "CC BY 4.0, as stated on the dataset page"
+      },
+      "redistribution": {
+        "value": "yes",
+        "conditions": "Same attribution; keep the licence notice",
+        "basis": "CC BY 4.0"
+      }
+    },
+    "update_cadence": "Dataset page shows 'Updated 2026-10-13'; GitHub mirror last pushed 2026-10-16",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "llmfit",
+    "investigation_rank": 3,
+    "access": "CLI/JSON and local REST documented",
+    "rights": "MIT licence covers the repository, including its bundled model list",
+    "maintenance": "Moderate/high: hardware-specific estimation and versioning",
+    "next_action": "Compare its pinned estimator against #61 measurements with #10; its figures are estimates",
+    "source_ids": [
+      "src-llmfit"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://github.com/AlexsJones/llmfit/blob/main/LICENSE"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Repository, local CLI JSON or local REST (/api/v1/models)",
+        "basis": "MIT licence (GitHub licence API: MIT)"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "None",
+        "basis": "MIT licence"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "Keep the MIT notice; use repository data, not llmfit.org website content",
+        "basis": "MIT licence covers the repository only"
+      },
+      "redistribution": {
+        "value": "yes",
+        "conditions": "Keep the MIT notice",
+        "basis": "MIT licence"
+      }
+    },
+    "update_cadence": "Frequent; repository last pushed 2026-10-15, MODELS.md updated 2026-08-30",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "openrouter",
+    "investigation_rank": 4,
+    "access": "Public model API documented",
+    "rights": "Terms prohibit automated scraping or copying of site or service information; no licence to republish",
+    "maintenance": "High: provider endpoint changes, billing and modality filters",
+    "next_action": "Ask OpenRouter for written permission if model metadata is needed; otherwise use provider sources directly",
+    "source_ids": [
+      "src-openrouter"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://openrouter.ai/terms"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "no",
+        "conditions": "Needs written permission, including for collecting model metadata through the public API",
+        "basis": "Terms (last updated 2026-08-31) prohibit crawlers or other automated means to scrape or copy information on the Site or Services; a stated limitation beats an API's existence (#41 conflict order, step 4)"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "Manual reading; short paraphrase with link",
+        "basis": "Ordinary use of the site"
+      },
+      "display": {
+        "value": "no",
+        "conditions": "Link only",
+        "basis": "No licence to republish content; terms bar transferring access or Materials"
+      },
+      "redistribution": {
+        "value": "no",
+        "conditions": "None",
+        "basis": "Same terms"
+      }
+    },
+    "update_cadence": "Continuous (live catalogue)",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "mcp-registry",
+    "investigation_rank": 5,
+    "access": "Registry HTTP API documented; designed for downstream ETL",
+    "rights": "Code Apache-2.0 (legacy MIT), docs CC-BY-4.0; registry design expects aggregators and subregistries to ETL, cache and serve its metadata",
+    "maintenance": "High: metadata freshness and publisher assertions",
+    "next_action": "Use as discovery input for #27; server code and packages keep their own licences",
+    "source_ids": [
+      "src-mcp-registry"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://github.com/modelcontextprotocol/registry/blob/main/LICENSE",
+      "https://github.com/modelcontextprotocol/registry/blob/main/docs/design/ecosystem-vision.md",
+      "https://github.com/modelcontextprotocol/registry/blob/main/docs/design/design-principles.md"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Respect rate limits; cache (design tolerates 24h downtime)",
+        "basis": "Design docs expect ETL jobs from subregistries and consumers to cache data"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "None",
+        "basis": "Public API"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "A listing is not a compatibility or security certification; keep our annotations separate from publisher metadata",
+        "basis": "Design docs: consumers serve the metadata to end-users and make their own curation decisions"
+      },
+      "redistribution": {
+        "value": "yes",
+        "conditions": "As a downstream registry; credit the official registry; same separation",
+        "basis": "Design docs: subregistries ETL from the official registry and add annotations"
+      }
+    },
+    "update_cadence": "Continuous; repository last pushed 2026-10-14",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "hugging-face",
+    "investigation_rank": 6,
+    "access": "Public model cards and metadata",
+    "rights": "Hub ToS licenses public content to users only through Hugging Face's services; content under an open licence stays under that licence",
+    "maintenance": "High: mutable cards, aliases and gated artifacts",
+    "next_action": "Pin repository revisions and record each repository's declared licence alongside any displayed fact",
+    "source_ids": [
+      "src-hugging-face"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://huggingface.co/terms-of-service"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Documented Hub API; respect rate limits; exclude gated and private repositories unless their terms are accepted",
+        "basis": "Documented public API; no scraping prohibition found in the ToS"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "None",
+        "basis": "ToS"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "Factual identifiers only (repository id, revision, declared licence, size) with a link; model-card text and files only as the repository's licence allows",
+        "basis": "ToS grant covers use through Hugging Face's services; per-repository licences govern the content"
+      },
+      "redistribution": {
+        "value": "no",
+        "conditions": "Allowed per repository only where its licence permits",
+        "basis": "ToS grant is limited to Hugging Face's services"
+      }
+    },
+    "update_cadence": "Continuous; pin revisions",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "artificial-analysis",
+    "investigation_rank": 7,
+    "access": "Keyed free API (1,000 requests/day, attribution required); Pro and Commercial tiers",
+    "rights": "Site licence is personal and noncommercial; Data Platform Terms bar using the Data for third-party products whose primary purpose is model or provider selection guidance without written consent",
+    "maintenance": "Moderate/high: changing index and benchmark coverage",
+    "next_action": "Ask for written consent only if the coordinator decides AA data is essential; otherwise link only",
+    "source_ids": [
+      "src-artificial-analysis"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://artificialanalysis.ai/docs/legal/Terms-of-Use.pdf",
+      "https://artificialanalysiscdn.com/legal/ProDataPlatformTerms.pdf",
+      "https://artificialanalysis.ai/api-reference"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "no",
+        "conditions": "Needs written consent",
+        "basis": "Data Platform Terms s2.5 (all tiers, including the free API) bar using the Data to develop, operate or improve a third-party product whose primary purpose includes model/provider selection guidance; site ToS (v1.0, 2024-04-28) prohibits scraping"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "Manual reading and citation of public pages for market research only; not to develop the builder",
+        "basis": "Site ToS licence for personal, noncommercial use"
+      },
+      "display": {
+        "value": "no",
+        "conditions": "Link only",
+        "basis": "Data Platform Terms s2.5 and s2.4"
+      },
+      "redistribution": {
+        "value": "no",
+        "conditions": "None",
+        "basis": "Data Platform Terms s2.4"
+      }
+    },
+    "update_cadence": "Continuous",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "benchlm",
+    "investigation_rank": 8,
+    "access": "API/MCP access plans documented",
+    "rights": "Free, Pro and Research plans cover queries and internal analysis only; commercial display and redistribution need separate agreements",
+    "maintenance": "High: source mix, license lineage and snapshot history",
+    "next_action": "Source benchmark results from their original publishers, whose measurements keep their own rights; request a display agreement only if BenchLM-owned outputs are essential",
+    "source_ids": [
+      "src-benchlm"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://benchlm.ai/data/access"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "REST or MCP with an account key, within plan limits",
+        "basis": "Data access page"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "None",
+        "basis": "Plans cover queries and internal analysis"
+      },
+      "display": {
+        "value": "no",
+        "conditions": "Needs a separate display agreement; individual quotations and attributed embeds keep their existing permissions",
+        "basis": "Data access page, commercial-use section"
+      },
+      "redistribution": {
+        "value": "no",
+        "conditions": "Needs separately agreed scope",
+        "basis": "Data access page, commercial-use section"
+      }
+    },
+    "update_cadence": "Continuous; history depth depends on plan",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "harness-bench",
+    "investigation_rank": 9,
+    "access": "Public repository and study",
+    "rights": "Repository has no licence; the arXiv paper is CC BY 4.0",
+    "maintenance": "High: suite identity conflict and controlled reproduction",
+    "next_action": "Reconcile release versions (#62) before displaying any paper result; ask maintainers for a repository licence if task data is needed",
+    "source_ids": [
+      "src-harness-bench"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://github.com/Qihoo360/harness-bench",
+      "https://arxiv.org/abs/2605.27922"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Public git clone and arXiv, for internal research only",
+        "basis": "Public repository and paper"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "Cite via CITATION.cff and the pinned paper version",
+        "basis": "Public sources"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "Results and text published in the paper only, with attribution and version (v2); not repository tasks, trajectories or catalogue files",
+        "basis": "Paper licence CC BY 4.0; repository has no licence (GitHub licence API: none)"
+      },
+      "redistribution": {
+        "value": "no",
+        "conditions": "Repository content stays no; the paper itself may be shared under CC BY 4.0",
+        "basis": "Repository has no licence"
+      }
+    },
+    "update_cadence": "Repository updated 2026-10-09 (Harness-Bench 3.0); paper v2 revised 2026-10-15",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  },
+  {
+    "product_id": "gpus-io",
+    "investigation_rank": 10,
+    "access": "Public comparison site; documented API under paid plans",
+    "rights": "API licence covers internal use and values shown inside your own product with attribution; no resale, redistribution or competing comparison service",
+    "maintenance": "High: spot availability, location and unit semantics",
+    "next_action": "#39 to decide whether the cost feature could count as a competing comparison service before using GPUs.io data; verify quotes with providers directly",
+    "source_ids": [
+      "src-gpus-io"
+    ],
+    "review_owner": "tynamite",
+    "consumer_issue": 41,
+    "status": "Not approved for integration",
+    "access_date": "2026-10-16",
+    "terms_urls": [
+      "https://gpus.io/en/terms"
+    ],
+    "reuse_permitted": {
+      "automated_retrieval": {
+        "value": "yes",
+        "conditions": "Through the API under a plan only; no scraping or bulk extraction outside it",
+        "basis": "Terms (last updated 2026-06-05)"
+      },
+      "internal_research": {
+        "value": "yes",
+        "conditions": "No attribution needed for purely internal use",
+        "basis": "Terms"
+      },
+      "display": {
+        "value": "yes",
+        "conditions": "Through the API; credit 'Pricing data by GPUs.io' with a link; values inside a build's cost estimate, not a standalone GPU price comparison (terms bar competing comparison services); users must not be able to bulk-extract the data",
+        "basis": "Terms: licence for use within your own applications and products; anti-competition clause"
+      },
+      "redistribution": {
+        "value": "no",
+        "conditions": "None",
+        "basis": "Terms: no resale or redistribution as a dataset, feed or comparison service"
+      }
+    },
+    "update_cadence": "Live; the page showed data updated 21 minutes before access",
+    "rights_evidence_grade": "Primary documentation",
+    "last_checked": "2026-10-16"
+  }
+]

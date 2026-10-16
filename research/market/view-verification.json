@@ -1,0 +1,212 @@
+[
+  {
+    "view": "01 — Executive Overview",
+    "number": 13,
+    "filter": "",
+    "count": 20,
+    "issues": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ]
+  },
+  {
+    "view": "02 — Triage Inbox",
+    "number": 14,
+    "filter": "-status:Ready,\"In Progress\",\"In Review\",Blocked,Done",
+    "count": 1,
+    "issues": [
+      63
+    ]
+  },
+  {
+    "view": "03 — Research Roadmap",
+    "number": 15,
+    "filter": "-status:Done",
+    "count": 20,
+    "issues": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ]
+  },
+  {
+    "view": "04 — Kanban Board",
+    "number": 16,
+    "filter": "-status:Done",
+    "count": 20,
+    "issues": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ]
+  },
+  {
+    "view": "05 — Competitive Intelligence",
+    "number": 17,
+    "filter": "research-area:Competition",
+    "count": 4,
+    "issues": [
+      48,
+      49,
+      50,
+      66
+    ]
+  },
+  {
+    "view": "06 — Market & Customers",
+    "number": 18,
+    "filter": "research-area:Market,Customers",
+    "count": 3,
+    "issues": [
+      52,
+      53,
+      63
+    ]
+  },
+  {
+    "view": "07 — Product Opportunities",
+    "number": 19,
+    "filter": "research-area:Product,Strategy",
+    "count": 5,
+    "issues": [
+      47,
+      51,
+      57,
+      58,
+      59
+    ]
+  },
+  {
+    "view": "08 — Data & Integrations",
+    "number": 20,
+    "filter": "research-area:Data,Technology",
+    "count": 6,
+    "issues": [
+      55,
+      56,
+      60,
+      61,
+      62,
+      65
+    ]
+  },
+  {
+    "view": "09 — Blockers & Dependencies",
+    "number": 21,
+    "filter": "research-readiness:Blocked,\"Needs Input\",\"Awaiting Decision\"",
+    "count": 2,
+    "issues": [
+      51,
+      63
+    ]
+  },
+  {
+    "view": "10 — Owner Workload",
+    "number": 22,
+    "filter": "-status:Done",
+    "count": 20,
+    "issues": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ]
+  },
+  {
+    "view": "11 — Evidence Review",
+    "number": 23,
+    "filter": "status:\"In Review\"",
+    "count": 14,
+    "issues": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      66
+    ]
+  },
+  {
+    "view": "12 — Completed Research",
+    "number": 24,
+    "filter": "status:Done",
+    "count": 0,
+    "issues": []
+  }
+]

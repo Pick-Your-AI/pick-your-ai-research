@@ -1,0 +1,1188 @@
+[
+  {
+    "market_issue": 48,
+    "workstream": "MR-01",
+    "consumer_issue": 6,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/competitors.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 48,
+    "workstream": "MR-01",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/competitors.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 48,
+    "workstream": "MR-01",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/competitors.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 48,
+    "workstream": "MR-01",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/competitors.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 6,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 7,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 16,
+    "consumer_owner": [
+      "zabyxc01"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 27,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 33,
+    "consumer_owner": [
+      "appletechie"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 36,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 49,
+    "workstream": "MR-02",
+    "consumer_issue": 42,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/features.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 50,
+    "workstream": "MR-03",
+    "consumer_issue": 6,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/competitors/README.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 50,
+    "workstream": "MR-03",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/competitors/README.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 50,
+    "workstream": "MR-03",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/competitors/README.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 50,
+    "workstream": "MR-03",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/competitors/README.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 50,
+    "workstream": "MR-03",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/competitors/README.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 51,
+    "workstream": "MR-04",
+    "consumer_issue": 2,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/pcpartpicker.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 51,
+    "workstream": "MR-04",
+    "consumer_issue": 3,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/pcpartpicker.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 51,
+    "workstream": "MR-04",
+    "consumer_issue": 40,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/pcpartpicker.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 51,
+    "workstream": "MR-04",
+    "consumer_issue": 42,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/pcpartpicker.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 52,
+    "workstream": "MR-05",
+    "consumer_issue": 2,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/customers.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 52,
+    "workstream": "MR-05",
+    "consumer_issue": 3,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/customers.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 52,
+    "workstream": "MR-05",
+    "consumer_issue": 16,
+    "consumer_owner": [
+      "zabyxc01"
+    ],
+    "artifact": "research/market/customers.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 52,
+    "workstream": "MR-05",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/customers.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 52,
+    "workstream": "MR-05",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/customers.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 53,
+    "workstream": "MR-06",
+    "consumer_issue": 2,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/market-sizing.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 53,
+    "workstream": "MR-06",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/market-sizing.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 54,
+    "workstream": "MR-07",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/monetization.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 54,
+    "workstream": "MR-07",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/monetization.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 55,
+    "workstream": "MR-08",
+    "consumer_issue": 5,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/integrations.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 55,
+    "workstream": "MR-08",
+    "consumer_issue": 6,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/integrations.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 55,
+    "workstream": "MR-08",
+    "consumer_issue": 9,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/integrations.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 55,
+    "workstream": "MR-08",
+    "consumer_issue": 27,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/integrations.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 55,
+    "workstream": "MR-08",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/integrations.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 55,
+    "workstream": "MR-08",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/integrations.json",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 7,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review context limits versus actual tokens, weight versus KV precision, and active-sequence semantics.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 11,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review versioned runtime/counter/cache/offload support and execution exclusions; process/device usage is not allocator memory.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 16,
+    "consumer_owner": [
+      "zabyxc01"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged retrieval scope; substantive dimension/metric/authentication/workload results remain with #65.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged agent scope and #62 system/harness/complete-delivery evidence requirements.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 27,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged MCP scope; advertised connector/transport presence does not establish an authenticated successful workload.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 33,
+    "consumer_owner": [
+      "appletechie"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged fine-tuned artifact scope and the base/adapter/merged lineage boundary.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 36,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review #62 release/result identity gap, internal v2 abstract/body discrepancy, contamination/overlap and replication limits.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred.",
+      "review_events": [
+        {
+          "reviewer": "PUSHINGSQUARES",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+          "date": "2026-10-16",
+          "submitted_at_utc": "2026-10-16T14:18:27Z",
+          "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+          "scope": "General PR approval; empty body does not specify individual row dispositions. Reviewed, pending explicit scope confirmation."
+        }
+      ]
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review conditional workload/utilization/idle/energy/amortization/storage/egress/operating-effort scope using #39 semantics and #64 validation; no new rates.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred.",
+      "review_events": [
+        {
+          "reviewer": "PUSHINGSQUARES",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+          "date": "2026-10-16",
+          "submitted_at_utc": "2026-10-16T14:18:27Z",
+          "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+          "scope": "General PR approval; empty body does not specify individual row dispositions. Reviewed, pending explicit scope confirmation."
+        }
+      ]
+    }
+  },
+  {
+    "market_issue": 56,
+    "workstream": "MR-09",
+    "consumer_issue": 40,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/technical-feasibility.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review note-only findings, canonical contract mapping, central compatibility review and absence of schema/ResourceEstimate changes.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 57,
+    "workstream": "MR-10",
+    "consumer_issue": 2,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/differentiation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 57,
+    "workstream": "MR-10",
+    "consumer_issue": 40,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/differentiation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 57,
+    "workstream": "MR-10",
+    "consumer_issue": 42,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/differentiation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 2,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 3,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 6,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 11,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 40,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 58,
+    "workstream": "MR-11",
+    "consumer_issue": 42,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/mvp-analysis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 2,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 3,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 5,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 6,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 7,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 9,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 11,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 16,
+    "consumer_owner": [
+      "zabyxc01"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 26,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 27,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 33,
+    "consumer_owner": [
+      "appletechie"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 36,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 37,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 40,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 59,
+    "workstream": "MR-12",
+    "consumer_issue": 42,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/synthesis.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 61,
+    "workstream": "MR-09",
+    "consumer_issue": 7,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/sizing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review context limits versus actual tokens, weight versus KV precision, and active-sequence semantics.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review context limits versus actual tokens, weight versus KV precision, and active-sequence semantics.",
+      "evidence": [
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Actual execution coverage is reported separately; protocol, agent review and review request are not acceptance.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 61,
+    "workstream": "MR-09",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/sizing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+      "evidence": [
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Actual execution coverage is reported separately; protocol, agent review and review request are not acceptance.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 61,
+    "workstream": "MR-09",
+    "consumer_issue": 11,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/sizing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review versioned runtime/counter/cache/offload support and execution exclusions; process/device usage is not allocator memory.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review versioned runtime/counter/cache/offload support and execution exclusions; process/device usage is not allocator memory.",
+      "evidence": [
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Actual execution coverage is reported separately; protocol, agent review and review request are not acceptance.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  }
+]

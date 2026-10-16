@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-l40s",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA L40S",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Physical PCIe GPU specification snapshot; no host allocation, price or model compatibility promise.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "L40S",
+    "vram_gb": 48,
+    "backends": ["cuda"],
+    "precisions": ["fp32", "tf32", "bf16", "fp16", "fp8", "int8", "int4"],
+    "rated_power_w": 350,
+    "interconnect": "pcie"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/en-us/data-center/l40s/",
+      "checked_at": "2026-10-16T12:39:54Z",
+      "verification_status": "verified",
+      "notes": "C01 in gpu-compute.md. Checked /name and /spec accelerator_type,vendor,model_name,vram_gb,precisions,rated_power_w,interconnect against full specifications. 48 advertised GB, maximum power350W, PCIeGen4x16; not free runtime bytes. Published specification, not independent measurement. Native precision does not assert quantization/kernel compatibility. Snapshot status active means vendor currently describes product; billing classification unknown. Source material reuse requires #41 review; no page copy redistributed."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-16T12:39:54Z",
+      "verification_status": "verified",
+      "notes": "C04. /spec/backends=cuda; NVIDIA lists L40S as compute capability8.9. No claim about an installed driver/runtime or a joint model-engine deployment."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:54Z"
+}
