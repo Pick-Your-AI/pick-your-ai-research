@@ -1,0 +1,43 @@
+name: Market research finding
+description: Record customer, competitor, market, or product evidence for Project 2
+title: "Market research: "
+labels: ["type: research"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start from [Program #47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) and the [Market Research Project](https://github.com/orgs/Pick-Your-AI/projects/2). Search for an existing MR issue before creating a new outcome.
+        Follow the [research workflow](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/docs/RESEARCH_WORKFLOW.md). Component schemas apply when contributing component records; market notes may document hypotheses and missing evidence directly.
+  - type: textarea
+    id: scope
+    attributes:
+      label: Related MR issue and decision
+      description: Link the parent issue, describe the decision this evidence supports, and state the scope.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and source details
+      description: Include URLs, publishers, access dates, versions or regions, claim types, and conditions. Distinguish observed behavior, vendor claims, measurements, estimates, and hypotheses. State any evidence gaps.
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings, confidence, and limitations
+      description: Explain what the evidence supports and what remains unknown. Do not infer absence from missing documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Deliverable and acceptance criteria
+      description: Identify the existing research file or proposed path and the independently reviewable outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: handoffs
+    attributes:
+      label: Handoffs and follow-up
+      description: Link consuming technical or market issues and name open decisions. Assignees and status are managed on the issue and Project.
