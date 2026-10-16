@@ -1,7 +1,7 @@
 # T5: Training Dataset
 
 Issue: #32 · Contract: 1.0.0 · Kinds: `training_dataset`
-Status: draft · Last researched: 2026-10-16
+Status: ready for review · Last researched: 2026-10-16
 
 ## User decision
 
