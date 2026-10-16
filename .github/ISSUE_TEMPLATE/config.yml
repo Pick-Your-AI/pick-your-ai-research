@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Researcher starting point and canonical schemas
+    url: https://github.com/Pick-Your-AI/pick-your-ai-research#start-here
+    about: Read the shared workflow and submission formats before opening a finding.
+  - name: Technical research Project
+    url: https://github.com/orgs/Pick-Your-AI/projects/1
+    about: Find existing T0–T6 component issues and their assignees.
+  - name: Market research Project
+    url: https://github.com/orgs/Pick-Your-AI/projects/2
+    about: Find existing customer, competitor, and market workstreams.

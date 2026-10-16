@@ -3,11 +3,18 @@ description: Capture evidence for an AI Builder component or compatibility rule 
 title: "Research: "
 labels: ["type: research"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Start with the [research workflow](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/docs/RESEARCH_WORKFLOW.md), [canonical v1 schemas](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/main/contracts/v1/schemas), and [issue-to-kind mapping](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/docs/CONTRACT_MAPPING.md).
+        Search existing issues first. Small steps belong in the existing component issue; separate findings should link their parent and evidence.
   - type: textarea
     id: contract
     attributes:
       label: Related issue and canonical component kinds
       description: Link the component issue and use docs/CONTRACT_MAPPING.md. Follow docs/RESEARCH_WORKFLOW.md for notes and structured submissions; unknown required facts may remain in a draft note.
+    validations:
+      required: true
   - type: textarea
     id: decision
     attributes:

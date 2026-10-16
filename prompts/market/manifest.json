@@ -1,0 +1,782 @@
+{
+  "schema_version": 1,
+  "purpose": "Prompt coverage metadata only; not a research result, Project export or canonical component catalog.",
+  "prepared_date": "2026-10-16",
+  "repository": "Pick-Your-AI/pick-your-ai-research",
+  "project_url": "https://github.com/orgs/Pick-Your-AI/projects/2",
+  "observed_main_sha": "d4bdca479f78439b3b98e7418b37acbaccbaa63c",
+  "coverage_method": "GitHub issue search using project:Pick-Your-AI/2 and organization scope, followed by individual reads of issues 47 through 66.",
+  "coverage_limit": "Covers the 20 retrieved issue items, not uninspected draft cards, archived cards or PR cards. Project UI and live custom-field IDs/options were not directly inspected.",
+  "remote_publication": "The original ZIP authoring session could not publish because its GitHub integration rejected branch creation with 403. Subsequent repository publication is recorded by Git history and the associated publication PR; this historical failure is not a claim about current publication state.",
+  "native_market_blocking_edges": [
+    {
+      "prerequisite": 66,
+      "dependent": 57
+    },
+    {
+      "prerequisite": 66,
+      "dependent": 58
+    }
+  ],
+  "references": {
+    "technical_prompts": "https://github.com/Pick-Your-AI/pick-your-ai-research/tree/docs/maintainer-research-prompts/prompts",
+    "technical_prompt_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74",
+    "market_proposal_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "measurement_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79",
+    "linked_uninspected_followup_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/80",
+    "contributor_instructions": "https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d4bdca479f78439b3b98e7418b37acbaccbaa63c/CONTRIBUTING.md",
+    "governance": "https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d4bdca479f78439b3b98e7418b37acbaccbaa63c/docs/governance.md",
+    "workflow": "https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d4bdca479f78439b3b98e7418b37acbaccbaa63c/docs/RESEARCH_WORKFLOW.md",
+    "market_methodology": "https://github.com/Pick-Your-AI/pick-your-ai-research/blob/6511dea2a5102b13df1e47378a31f31230ecb494/docs/market-research/research-methodology.md"
+  },
+  "issues": [
+    {
+      "issue": 47,
+      "title": "Market Research Program — Pick Your AI",
+      "parent": null,
+      "files": [
+        "research/market/synthesis.md"
+      ],
+      "criteria": [
+        "Coordinate twelve workstreams and independent validations",
+        "Preserve existing technical ownership and canonical evidence",
+        "Review all handoffs and unresolved decisions",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        1,
+        4,
+        8,
+        12,
+        24,
+        29,
+        34,
+        40,
+        41,
+        42
+      ],
+      "information": [
+        59
+      ],
+      "children": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-047.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47"
+    },
+    {
+      "issue": 48,
+      "title": "MR-01 — Competitive Landscape Discovery",
+      "parent": 47,
+      "files": [
+        "research/market/competitors.json",
+        "research/market/sources.json"
+      ],
+      "criteria": [
+        "Verify all five seeds",
+        "Classify at least 30 distinct resources",
+        "Record entity boundaries and unknowns",
+        "Select 10–15 material deep dives",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        6,
+        10,
+        25,
+        41
+      ],
+      "information": [
+        49,
+        50,
+        57
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-048.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48"
+    },
+    {
+      "issue": 49,
+      "title": "MR-02 — Competitive Feature Matrix",
+      "parent": 47,
+      "files": [
+        "research/market/features.json",
+        "research/market/feature-matrix.md"
+      ],
+      "criteria": [
+        "Define atomic capability tests",
+        "Link every supported cell to evidence",
+        "Keep silence Unknown",
+        "Review overlap and compare coverage",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        6,
+        7,
+        10,
+        16,
+        25,
+        27,
+        33,
+        36,
+        39,
+        42
+      ],
+      "information": [
+        48,
+        57,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-049.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49"
+    },
+    {
+      "issue": 50,
+      "title": "MR-03 — Competitor Deep Dives",
+      "parent": 47,
+      "files": [
+        "research/market/competitors/README.md"
+      ],
+      "criteria": [
+        "Review 10–15 profiles",
+        "Analyze workflow and architecture",
+        "Separate commercial access from reuse rights",
+        "Test material differentiation counterexamples",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        6,
+        10,
+        25,
+        39,
+        41
+      ],
+      "information": [
+        48,
+        57
+      ],
+      "children": [
+        66
+      ],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-050.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50"
+    },
+    {
+      "issue": 51,
+      "title": "MR-04 — PCPartPicker Product Experience",
+      "parent": 47,
+      "files": [
+        "research/market/pcpartpicker.md"
+      ],
+      "criteria": [
+        "Inspect public selection workflow",
+        "Document inaccessible authenticated steps",
+        "Translate original AI UX concepts",
+        "Separate observed behavior from proposed requirements",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        3,
+        40,
+        42
+      ],
+      "information": [
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-051.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51"
+    },
+    {
+      "issue": 52,
+      "title": "MR-05 — Customer Research & Personas",
+      "parent": 47,
+      "files": [
+        "research/market/customers.md"
+      ],
+      "criteria": [
+        "Map ten requested segments",
+        "Write evidence-qualified jobs to be done",
+        "Define neutral interview questions",
+        "Distinguish desk personas from validated customers",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        3,
+        16,
+        25,
+        39
+      ],
+      "information": [
+        53,
+        54,
+        58
+      ],
+      "children": [
+        63
+      ],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-052.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52"
+    },
+    {
+      "issue": 53,
+      "title": "MR-06 — Market Size, Demand & Trends",
+      "parent": 47,
+      "files": [
+        "research/market/market-sizing.md"
+      ],
+      "criteria": [
+        "Review dated adoption evidence",
+        "Distinguish use from purchase intent",
+        "Build explicit sizing scenarios",
+        "Record missing search and conversion evidence",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        39
+      ],
+      "information": [
+        52,
+        63,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-053.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53"
+    },
+    {
+      "issue": 54,
+      "title": "MR-07 — Pricing & Monetization",
+      "parent": 47,
+      "files": [
+        "research/market/monetization.md"
+      ],
+      "criteria": [
+        "Compare subscription and referral models",
+        "Review commercial offers without inventing rates",
+        "Assess neutrality conflicts",
+        "Propose willingness-to-pay validation",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        39,
+        41
+      ],
+      "information": [
+        52,
+        63,
+        58
+      ],
+      "children": [
+        64
+      ],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-054.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54"
+    },
+    {
+      "issue": 55,
+      "title": "MR-08 — Data Sources & Integration Opportunities",
+      "parent": 47,
+      "files": [
+        "research/market/integrations.json"
+      ],
+      "criteria": [
+        "Rank source candidates",
+        "Separate code and data rights",
+        "Record APIs update policies and missing terms",
+        "Route reuse decisions to the existing #41 owner",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        5,
+        6,
+        9,
+        27,
+        39,
+        41
+      ],
+      "information": [
+        58
+      ],
+      "children": [
+        60
+      ],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-055.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55"
+    },
+    {
+      "issue": 56,
+      "title": "MR-09 — Technical Feasibility",
+      "parent": 47,
+      "files": [
+        "research/market/technical-feasibility.md"
+      ],
+      "criteria": [
+        "Compare sizing assumptions",
+        "Assess context cache concurrency and multi-GPU limits",
+        "Define falsifiable measurement protocol",
+        "Reuse technical component decisions rather than duplicate them",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        7,
+        10,
+        11,
+        16,
+        25,
+        27,
+        33,
+        36,
+        39,
+        40
+      ],
+      "information": [
+        58
+      ],
+      "children": [
+        61,
+        62,
+        65
+      ],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-056.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56"
+    },
+    {
+      "issue": 57,
+      "title": "MR-10 — Competitive Differentiation",
+      "parent": 47,
+      "files": [
+        "research/market/differentiation.md"
+      ],
+      "criteria": [
+        "State falsifiable differentiation hypotheses",
+        "List counterexamples",
+        "Evaluate source provenance and explainability",
+        "Define kill and pivot criteria",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        40,
+        42
+      ],
+      "information": [
+        48,
+        49,
+        50,
+        63,
+        58
+      ],
+      "children": [],
+      "blocked_by": [
+        66
+      ],
+      "blocks": [],
+      "prompt": "issue-057.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57"
+    },
+    {
+      "issue": 58,
+      "title": "MR-11 — MVP Definition & Prioritization",
+      "parent": 47,
+      "files": [
+        "research/market/mvp-analysis.md"
+      ],
+      "criteria": [
+        "Compare all six launch approaches",
+        "Rank data and maintenance risks",
+        "Define minimum evidence requirements",
+        "Keep recommendation separate from implementation authorization",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        3,
+        6,
+        10,
+        11,
+        39,
+        40,
+        42
+      ],
+      "information": [
+        49,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        60,
+        61,
+        63,
+        64
+      ],
+      "children": [],
+      "blocked_by": [
+        66
+      ],
+      "blocks": [],
+      "prompt": "issue-058.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58"
+    },
+    {
+      "issue": 59,
+      "title": "MR-12 — Research Quality, Synthesis & Handoffs",
+      "parent": 47,
+      "files": [
+        "research/market/handoffs.md",
+        "research/market/audit.json",
+        "research/market/risk-register.md"
+      ],
+      "criteria": [
+        "Audit evidence conflicts and freshness",
+        "Verify issue metadata and hierarchy",
+        "Request affected-owner review",
+        "Publish unresolved decisions and executive synthesis",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        16,
+        25,
+        26,
+        27,
+        33,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42
+      ],
+      "information": [
+        47
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-059.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59"
+    },
+    {
+      "issue": 60,
+      "title": "MR-08: Validate commercial display and redistribution rights",
+      "parent": 55,
+      "files": [
+        "research/market/rights-validation.md"
+      ],
+      "criteria": [
+        "Inspect exact license scope per source",
+        "Record BenchLM agreement requirement",
+        "Confirm upstream rights for compiled data",
+        "Approve or reject each intended use",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        41
+      ],
+      "information": [
+        55,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-060.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60"
+    },
+    {
+      "issue": 61,
+      "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
+      "parent": 56,
+      "files": [
+        "research/market/sizing-validation.md"
+      ],
+      "criteria": [
+        "Design dense and MoE measurement matrix",
+        "Vary context cache precision and concurrency",
+        "Measure peak allocated and reserved memory",
+        "Report error bounds and failures without universal fit claims",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        7,
+        10,
+        11
+      ],
+      "information": [
+        56,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-061.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61"
+    },
+    {
+      "issue": 62,
+      "title": "MR-09: Validate benchmark comparability and harness effects",
+      "parent": 56,
+      "files": [
+        "research/market/benchmark-validation.md"
+      ],
+      "criteria": [
+        "Pin models harnesses budgets and task versions",
+        "Check contamination and task overlap",
+        "Separate mean score from complete delivery",
+        "Record replication limits and confidence",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        25,
+        36
+      ],
+      "information": [
+        56
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-062.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62"
+    },
+    {
+      "issue": 63,
+      "title": "MR-05: Validate customer demand and willingness to pay",
+      "parent": 52,
+      "files": [
+        "research/market/customer-validation.md"
+      ],
+      "criteria": [
+        "Approve recruitment and consent protocol",
+        "Recruit across distinct buyer roles",
+        "Capture current alternatives and recent decisions",
+        "Test willingness to pay without leading questions",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        3,
+        39
+      ],
+      "information": [
+        52,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-063.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63"
+    },
+    {
+      "issue": 64,
+      "title": "MR-07: Validate price freshness and total-cost scenarios",
+      "parent": 54,
+      "files": [
+        "research/market/pricing-validation.md"
+      ],
+      "criteria": [
+        "Pin provider region date and billing units",
+        "Include idle capacity storage egress and utilization",
+        "Recheck live rates before recommendations",
+        "Report ranges and invalidation triggers",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        9,
+        39,
+        41
+      ],
+      "information": [
+        54,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-064.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64"
+    },
+    {
+      "issue": 65,
+      "title": "MR-09: Review RAG interoperability market claims",
+      "parent": 56,
+      "files": [
+        "research/market/rag-validation.md"
+      ],
+      "criteria": [
+        "Inspect model embedding dimension and metric contracts",
+        "Check API and authentication boundaries",
+        "Separate connector existence from successful workloads",
+        "Hand findings to existing retrieval owners",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        14,
+        15,
+        16,
+        25,
+        27
+      ],
+      "information": [
+        56
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [],
+      "prompt": "issue-065.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65"
+    },
+    {
+      "issue": 66,
+      "title": "MR-03: Test direct stack-builder substitutes",
+      "parent": 50,
+      "files": [
+        "research/market/substitute-validation.md"
+      ],
+      "criteria": [
+        "Run a common public non-sensitive scenario",
+        "Check constraint handling and explanation quality",
+        "Inspect saved or exported configuration claims",
+        "Record counterexamples and pivot recommendation",
+        "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+        "Relevant technical owners review handoffs; unresolved decisions are named.",
+        "Repository checks pass; reviewer accepts the evidence before Done."
+      ],
+      "consumers": [
+        2,
+        40,
+        42
+      ],
+      "information": [
+        50,
+        57,
+        58
+      ],
+      "children": [],
+      "blocked_by": [],
+      "blocks": [
+        57,
+        58
+      ],
+      "prompt": "issue-066.md",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66"
+    }
+  ],
+  "publication_verification": {
+    "date": "2026-10-16",
+    "base_sha": "ec612eb",
+    "project_issue_numbers": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ],
+    "checks": [
+      "Live Project #2 issue membership",
+      "All twenty issue titles",
+      "All captured acceptance criteria present in live issue bodies",
+      "All declared deliverable paths present in live issue bodies"
+    ],
+    "scope": "Read-only issue and Project verification; no research acceptance or metadata changes."
+  }
+}

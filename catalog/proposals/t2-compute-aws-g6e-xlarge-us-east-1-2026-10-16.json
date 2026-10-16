@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "aws-ec2-g6e-xlarge-us-east-1",
+  "kind": "compute_profile",
+  "tier": "T2",
+  "name": "Amazon EC2 g6e.xlarge in us-east-1",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Documented default instance allocation and historical regional offering; current account quotas, free GPU memory and capacity unknown. CPU count is default cores, not vCPUs.",
+  "spec": {
+    "hosting_ref": "aws-ec2",
+    "accelerator_ref": "nvidia-l40s",
+    "accelerator_count": 1,
+    "cpu_cores": 2,
+    "ram_gb": 34.359738368,
+    "disk_gb": 250,
+    "region": "us-east-1"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://aws.amazon.com/ec2/instance-types/g6e/",
+      "checked_at": "2026-10-16T12:39:54Z",
+      "verification_status": "verified",
+      "notes": "C06 in gpu-compute.md. /name,/spec/hosting_ref,accelerator_ref,accelerator_count,disk_gb: g6e.xlarge,1L40S,250GB local storage. Host RAM source32GiB, converted to34.359738368GB using32*2^30/10^9; this is a unit conversion, not an estimated capacity.4vCPU retained in note. Network up-to20Gbps is not submitted as guaranteed network_gbps. Marketing48GB GPU capacity is distinct from runtime-free bytes. Current documented product active; purchase scenario/billing classification unknown."
+    },
+    {
+      "source_uri": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html",
+      "checked_at": "2026-10-16T12:39:54Z",
+      "verification_status": "verified",
+      "notes": "C07. /spec/cpu_cores=2 default CPU cores,2threads per core and4vCPU for g6e.xlarge. This is instance CPU allocation, not dedicated physical-host tenancy. CPU semantic convention proposed for #40 review."
+    },
+    {
+      "source_uri": "https://aws.amazon.com/about-aws/whats-new/2024/08/amazon-ec2-g6e-instances/",
+      "checked_at": "2026-10-16T12:39:54Z",
+      "verification_status": "verified",
+      "notes": "C08. /spec/region historical regional offering:2024-08-15 launch includes US East N.Virginia. No live capacity, quota or AZ stock claim."
+    },
+    {
+      "source_uri": "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html",
+      "checked_at": "2026-10-16T12:39:54Z",
+      "verification_status": "verified",
+      "notes": "C09. /spec/region maps N.Virginia to canonical AWS regionus-east-1. No assertion about user's account access."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:54Z"
+}

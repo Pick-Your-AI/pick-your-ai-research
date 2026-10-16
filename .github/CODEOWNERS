@@ -11,3 +11,25 @@
 /research/T4-agents-integrations/          @CompleteDotTech
 /research/T5-training-fine-tuning/         @appletechie
 /research/T6-deployment-operations/        @PUSHINGSQUARES
+
+# Market workstream deliverables. Live issue assignees remain authoritative.
+# Paths can be introduced by research PRs; unrelated files keep the default reviewer.
+/research/market/synthesis.md              @appletechie
+/research/market/competitors.json          @appletechie
+/research/market/github-verification.json  @appletechie
+/research/market/sources.json              @appletechie
+/research/market/competitors/              @appletechie
+/research/market/pcpartpicker.md           @appletechie
+/research/market/customers.md              @appletechie
+/research/market/market-sizing.md          @appletechie
+/research/market/monetization.md           @appletechie
+/research/market/differentiation.md        @appletechie
+/research/market/mvp-analysis.md           @appletechie
+/research/market/audit.json                @appletechie
+/research/market/handoffs.json             @appletechie
+/research/market/handoffs.md               @appletechie
+/research/market/risk-register.md          @appletechie
+/research/market/feature-matrix.md           @zwright8
+/research/market/features.json             @zwright8
+/research/market/integrations.json          @tynamite
+/research/market/technical-feasibility.md   @Mattycodes69
