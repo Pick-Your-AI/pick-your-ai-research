@@ -270,8 +270,8 @@ The builder must show the post-training serving cost next to the training cost. 
 ## Structured artifacts
 
 No CatalogItem, Pricebook or ResourceEstimate files in this draft:
-- `training_compute.spec.compute_profile_ref` must reference a `compute_profile` already in the catalog. T2 records merged to `main` in #75 (`ec612eb`) already cover some of what this note needs; the remaining gaps are listed under [Upstream T2 records](#upstream-t2-records). A `training_compute` item is not proposed here because it would bind a user's run to a profile, and only one profile exists.
-- Pricebook rates must reference catalog items and versions in this repository. The meter enum has `gpu_hour` but no per-training-token, job-minimum, training-hour or model-storage meter, so managed training prices cannot be expressed in v1.
+- `training_compute.spec.compute_profile_ref` must reference a `compute_profile` already in the catalog. T2 records merged to `main` in #75 (`ec612eb`) already cover some of what this note needs; the remaining gaps are listed under [Upstream T2 records](#upstream-t2-records). The existing profile is a valid reference for a component proposal; having only one profile is not a schema blocker. This submission remains a research note and does not propose a `training_compute` item.
+- Pricebook rates must reference catalog items and versions in this repository. The meter enum has `gpu_hour`, which can represent per-GPU-hour billing such as the Fireworks Dedicated Training API row once matching catalog references exist. The training-token, job-minimum, training-hour and model-month rows need separate meter review; these limitations do not exclude all managed training prices from v1.
 - ResourceEstimate has `training.estimated_gpu_hours` but no training-memory metric.
 
 The prices above are recorded with provenance so they can be converted once the missing items and meters exist.
