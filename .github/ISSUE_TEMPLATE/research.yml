@@ -1,7 +1,7 @@
 name: Research finding
-description: Capture evidence for an AI Builder component or compatibility rule
+description: Capture evidence for an AI Builder component or compatibility rule (link the related T0–T6 component issue)
 title: "Research: "
-labels: [research]
+labels: ["type: research"]
 body:
   - type: textarea
     id: decision
