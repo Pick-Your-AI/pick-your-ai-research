@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "id": "mcp_server.atlassian-remote",
+  "kind": "mcp_server",
+  "tier": "T4",
+  "name": "Atlassian Rovo MCP Server (remote)",
+  "version": "2.0.0",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Atlassian-hosted remote MCP server for Jira, Jira Service Management, Confluence, Bitbucket, Goals, Projects and Loom; actions respect the user's existing permissions; calls consume Rovo credits.",
+  "tags": [
+    "remote",
+    "vendor-hosted",
+    "work-management",
+    "metered"
+  ],
+  "spec": {
+    "transport": "streamable_http",
+    "auth_methods": [
+      "oauth2",
+      "api_key"
+    ],
+    "trust_level": "trusted_external"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://registry.modelcontextprotocol.io/v0.1/servers/com.atlassian%2Fatlassian-mcp-server/versions/latest",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Registry entry com.atlassian/atlassian-mcp-server version 2.0.0, status active, published 2026-09-09; two streamable-http remotes https://mcp.atlassian.com/v2/mcp and https://mcp.atlassian.com/v1/mcp/authv2. Supports version, transport. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
+    },
+    {
+      "source_uri": "https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Atlassian docs: OAuth 2.1 authorization is primary, API token authentication optional; actions respect existing access controls; MCP calls consume Rovo credits; from March 1, 2027 v1 usage automatically moves to v2 tools. Supports auth_methods; billing_class metered. auth_methods records the credential types the server accepts from the client or its environment: oauth2 = MCP authorization (OAuth 2.1) or an upstream OAuth login; api_key = a static bearer/personal/agent token passed by header or environment variable."
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z"
+}

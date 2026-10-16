@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "id": "mcp_server.github-local",
+  "kind": "mcp_server",
+  "tier": "T4",
+  "name": "GitHub MCP Server (local stdio)",
+  "version": "2.0.2",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Self-run packaging of github/github-mcp-server (OCI image ghcr.io/github/github-mcp-server or Go binary) over stdio. v1 workaround split from mcp_server.github-remote. Supports --read-only and toolset selection.",
+  "tags": [
+    "local",
+    "self-hosted",
+    "github",
+    "developer-platform",
+    "v1-transport-split"
+  ],
+  "spec": {
+    "transport": "stdio",
+    "auth_methods": [
+      "oauth2",
+      "api_key"
+    ],
+    "trust_level": "trusted_external"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.github%2Fgithub-mcp-server/versions/latest",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Registry packages[0]: registryType oci, identifier ghcr.io/github/github-mcp-server:2.0.2, transport stdio, optional GITHUB_PERSONAL_ACCESS_TOKEN (secret); omit it to log in with OAuth on first use. Supports version, transport. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
+    },
+    {
+      "source_uri": "https://github.com/github/github-mcp-server/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "README: local server via Docker or 'github-mcp-server stdio'; browser OAuth login with token kept in memory only, or PAT via GITHUB_PERSONAL_ACCESS_TOKEN (takes precedence); --read-only mode; GitHub App auth for non-interactive stdio. Supports auth_methods. auth_methods records the credential types the server accepts from the client or its environment: oauth2 = MCP authorization (OAuth 2.1) or an upstream OAuth login; api_key = a static bearer/personal/agent token passed by header or environment variable."
+    },
+    {
+      "source_uri": "https://github.com/github/github-mcp-server/blob/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "LICENSE is the MIT License (Copyright (c) 2025 GitHub). Supports license."
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}
