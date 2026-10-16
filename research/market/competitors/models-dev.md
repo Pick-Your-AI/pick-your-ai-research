@@ -1,22 +1,54 @@
-# Models.dev — desk-research profile
+# Models.dev — competitor profile
 
-Status: draft for owner review. Operator: OpenCode / anomalyco. Classification: Data source, Open-source integration candidate, Partial competitor (analyst judgement).
+Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `models-dev`. Classification: Data source, Open-source integration candidate, Partial competitor (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
-## Workflow and competitive overlap
-A reusable metadata layer may lower initial model-comparison research cost, but it does not supply a finished decision system.
+| Field | Value |
+| --- | --- |
+| Product | Models.dev open model/provider database (site, JSON endpoints, `@opencode-ai/models` SDK) |
+| Operator | OpenCode ("Created by OpenCode"); repository under the anomalyco GitHub organization |
+| URLs | [site](https://models.dev/), [repository](https://github.com/anomalyco/models.dev), [licence](https://github.com/anomalyco/models.dev/blob/dev/LICENSE) |
+| Access date | 2026-10-16 |
+| Version / revision | Default branch `dev`, head `3587a41` (2026-10-16 22:25 UTC) |
+| Access tier observed | Public site (first 400 KB of the HTML fetched to stay small) and repository metadata; no JSON endpoint downloaded |
+| robots.txt | None served (HTML fallback); no restriction recorded |
 
-## Technical evidence and limitations
-The site documents provider data, canonical-model data and a combined catalog through separate JSON endpoints. Specialized model types are omitted by default; an importer must choose scope explicitly.
+## Workflow
 
-## Economics, access and rights
-The repository carries MIT terms with notice retention. Upstream provenance, trademarks and per-provider data restrictions still require review; no wholesale feed is committed here.
+| Stage | Finding | Class | Source |
+| --- | --- | --- | --- |
+| Inputs | Search plus a sortable table of models, labs and providers | Observed | [site](https://models.dev/) |
+| Constraints | Columns for context, output, input modalities, reasoning, tool call, structured output, temperature, weights (open/closed), price, release and updated dates | Observed (table headers and rows) | [site](https://models.dev/) |
+| Selection logic | None; user sorts and filters | Observed | [site](https://models.dev/) |
+| Explanation | None beyond field values | Observed | [site](https://models.dev/) |
+| Save/share/export | `api.json`, `models.json`, `catalog.json` (`?type=all` for specialised types); SDK "exports the latest snapshot for offline use"; saved/share Unknown | Documented | [site](https://models.dev/) |
 
-## Strategic implication and next test
-Test identifier mapping, freshness and mismatches against primary provider docs. Keep market inventory IDs separate from production CatalogItem IDs and submit only complete component facts later.
+## Architecture and data
 
-## Evidence
-- [https://models.dev/](https://models.dev/) — accessed 2026-10-16.
-- [https://github.com/anomalyco/models.dev](https://github.com/anomalyco/models.dev) — accessed 2026-10-16.
-- [https://raw.githubusercontent.com/anomalyco/models.dev/dev/LICENSE](https://raw.githubusercontent.com/anomalyco/models.dev/dev/LICENSE) — accessed 2026-10-16.
+- Data stored as TOML files in GitHub "organized by provider and canonical model", edited by pull request. Documented, [site](https://models.dev/).
+- Provider records are separated from provider-agnostic canonical model records. Documented. Useful for mapping canonical identity apart from endpoints.
+- Freshness: repository commits on the access date; table shows per-row release and updated dates. Observed.
+- Specialised model types are omitted from JSON by default. Documented. An importer must set scope explicitly.
 
-Scope: public documentation and limited browser observation. No performance benchmark, paid trial, market-share measurement or commercial-rights approval was conducted. Confidence: Medium for the documented surface; Low for demand and comparative advantage. Related work: MR-03, MR-08, MR-09; exact technical consumers are in the handoff register.
+## Commercial access, code licence and data rights
+
+| Layer | Finding | Class | Source |
+| --- | --- | --- | --- |
+| (a) Commercial access | Free; no paid tier found | Observed (absence of pricing is not proof) | [site](https://models.dev/) |
+| (b) Code licence | SPDX `MIT` (`gh api repos/anomalyco/models.dev/license`) | Observed | [licence](https://github.com/anomalyco/models.dev/blob/dev/LICENSE) |
+| (c) Data reuse | Data lives in the MIT repository; provider logos and upstream provider facts may carry trademark or provider terms | Observed / hypothesis for upstream | [repository](https://github.com/anomalyco/models.dev) |
+
+Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes with the MIT notice. This profile agrees; logos and trademarks remain a #41 question.
+
+## Counterexample
+
+- **Suffices (hypothesis, observed table):** a developer comparing hosted models on context, tool-call support and price can sort one table and pull JSON. For catalogue lookup Pick Your AI is redundant, and models.dev is a likely input rather than a rival.
+- **Falls short (observed):** no workload intake, recommendation, explanation, hardware or self-hosting dimension.
+
+## Matrix consistency
+
+Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_search`, `model_compare`, `model_versions`, `context`, `api_pricing`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
+
+## Open questions and routing
+
+- #5/#6: identifier mapping and mismatches against primary provider docs; keep market IDs separate from CatalogItem IDs.
+- #41: trademark/logo use and per-provider data restrictions.
