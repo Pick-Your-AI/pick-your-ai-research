@@ -1,16 +1,27 @@
 # T5: Training & Fine-Tuning
 
 Issue: #29 · Contract: 1.0.0 · Kinds: `training_framework`, `training_compute`, `training_dataset`, `fine_tuned_model`
-Status: ready for review · Last researched: 2026-10-16
+Status: **draft reconciliation, not ready to merge** · Last researched: 2026-10-16
 
 This is the workstream summary for T5. It consolidates the four component decision records and does not replace them. Every finding below is **draft research awaiting review**, and no handoff has been confirmed by a consuming owner yet.
 
-| Component | Issue | Decision record | PR | Structured proposals |
+**The four component records are not on `main`.** They exist only as open proposal PRs, each under change requests. The links below are pinned to the PR head commits that this draft was reconciled against, not to files in this branch. They will move as the PRs are corrected. Counts and labels in this summary describe those pinned heads and are provisional until the components merge and this summary is re-reconciled.
+
+Merging this summary would not accept the T5 workstream, any component record or any handoff. Acceptance stays with the issue owners.
+
+| Component | Issue | Decision record (pinned proposal head) | PR | Structured proposals |
 | --- | --- | --- | --- | --- |
-| Training Framework | #30 | [training-framework.md](training-framework.md) | #68 | 4 `training_framework` items (`catalog/proposals/training_framework-*.json`) |
-| Training Compute | #31 | [training-compute.md](training-compute.md) | #77 | none (blocked, see below) |
-| Training Dataset | #32 | [training-dataset.md](training-dataset.md) | #76 | none (blocked, see below) |
-| Fine-Tuned Model | #33 | [fine-tuned-model.md](fine-tuned-model.md) | #84 | none (user-specific artifact) |
+| Training Framework | #30 | [training-framework.md @ 4063552](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/40635525c66bbcfbc9a5a549c826c4cfa89ab2cd/research/T5-training-fine-tuning/training-framework.md) | #68 (open, changes requested) | 4 `training_framework` proposals on the PR branch (`catalog/proposals/training_framework-*.json`); none on `main` |
+| Training Compute | #31 | [training-compute.md @ 6396aec](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/6396aec760a5d6ac80577b107b7af1c47c575e84/research/T5-training-fine-tuning/training-compute.md) | #77 (open, changes requested) | none (see blockers) |
+| Training Dataset | #32 | [training-dataset.md @ daa9666](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/daa9666c3c241e00ed7ec59cd7151a0e603d6558/research/T5-training-fine-tuning/training-dataset.md) | #76 (open, changes requested) | none (see blockers) |
+| Fine-Tuned Model | #33 | [fine-tuned-model.md @ 3f8ad44](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3f8ad4473de359e727a2ff1bd01225161b67fa90/research/T5-training-fine-tuning/fine-tuned-model.md) | #84 (open, changes requested) | none (user-specific artifact) |
+
+Corrections pending in the component PRs, per their live reviews:
+
+- #68: its `Verified` label and the four `CatalogItem` provenance entries (`verification_status: verified`) conflict with the adopted checked-versus-verified evidence policy (see "Evidence labels" under Rules contributed to #40). #40/#2/#3 routing needs refreshing.
+- #76: `Verified` is defined as "cited text was read directly", which redefines verification. #40 routing needs refreshing. The `license_verified` field name is canonical and stays.
+- #77: it reports no T2 compute profiles, accelerators or hosting platforms, but #75 has merged T2 proposals into `main`. #40 routing needs refreshing.
+- #84: rule A-18 fails every distributed Apache-2.0 artifact lacking a NOTICE or change notice, without the applicability conditions of Apache-2.0 §4(b) and §4(d). It also needs the checked-versus-verified distinction.
 
 ## Scope and optionality
 
@@ -82,14 +93,18 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ## Rules contributed to #40
 
-| Series | Component | Count | Verified | Hypothesis / policy |
+**Evidence labels.** Under the interim #41 policy adopted in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), *checked* means provenance was confirmed against the cited primary source on its access date. *Verified* means independently reproduced (a second source or a reproducible test). None of these rules has been independently reproduced, so the table calls the components' `verified` labels **source-checked** and does not report any rule as verified. A rule may pass on checked evidence while its result stays "unverified".
+
+Counts below are taken from the pinned component heads and are **provisional**. They will change when #68, #76, #77 and #84 land their corrections (including the A-18 rewrite in #84) and this summary is re-reconciled.
+
+| Series | Component | Count | Source-checked (labelled `verified` in the component) | Hypothesis / policy / partial |
 | --- | --- | --- | --- | --- |
 | F-01 – F-24 | #30 | 24 | 21 | F-13 (policy), F-17 ("competing model" undefined), F-24 (AGPL scope) |
 | K-01 – K-09 | #31 | 9 | 5 | K-02 (fit threshold), K-06 (needs #10 dtype facts), K-08 (contract gap), K-09 (policy) |
 | D-01 – D-22 | #32 | 22 | 21 | D-20 (leakage policy, with #36) |
 | A-01 – A-20 | #33 | 20 | 18 | A-13 (classic-FAQ wording), A-20 (evaluation gate policy, with #36) |
 
-A-06 is counted as verified but carries a stated inference.
+A-06 is counted as source-checked but carries a stated inference. A-18 is counted but is under correction in #84.
 
 Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 - `training_framework` method enum values and fields;
@@ -112,15 +127,19 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 | Leakage method and eval-set freeze; pre-deployment evaluation gate | #32, #33 | #36 | @PUSHINGSQUARES |
 | Training price normalisation; post-training hosting next to training cost | #31, #33 | #39 | @PUSHINGSQUARES |
 | Fine-tune lifecycle at deployment (OpenAI shutdown with base; Foundry 15-day deletion) | #33 | #37 | @PUSHINGSQUARES |
-| User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @CompleteDotTech |
-| Rule format and contract changes; "competing model" policy | all | #40 | @CompleteDotTech |
-| Evidence grading, price freshness | all | #41 | @CompleteDotTech |
+| User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @tynamite |
+| Rule format and contract changes; "competing model" policy | all | #40 | @tynamite |
+| Evidence grading (checked vs verified), price freshness | all | #41 | @tynamite |
+
+Owners are the live GitHub assignees as of 2026-10-16 and are not duplicated elsewhere.
 
 ## Blockers on structured artifacts
 
-| Artifact | Blocked by |
+Upstream T2 records **do exist** on `main` since #75: `accelerator` (3), `compute_profile` (1, `aws-ec2-g6e-xlarge-us-east-1`), `hosting_platform` (5), `storage` (4) and `inference_engine` (3) proposals, plus a `gpu_hour` meter in `pricing/proposals/t2-hosting-2026-10-16.json`. They are proposals, not a published catalog. Whether they cover the SKUs, dtype facts (K-06) and regions that #31 prices has not been reconciled; that belongs to the #77 correction. Until it lands, this table lists only the training-specific gaps that #31 and #40 describe, not a missing upstream catalog.
+
+| Artifact | Blocked by (provisional, pending #77, #68, #76 and #84 corrections) |
 | --- | --- |
-| `training_compute` items, training Pricebooks, ResourceEstimates | No T2 `compute_profile` / `accelerator` / `hosting_platform` items yet (#9, #10); Pricebook has no training-token or job-minimum meters; no training-memory metric (#40) |
+| `training_compute` items, training Pricebooks, ResourceEstimates | Training-specific gaps only: the Pricebook has no training-token or job-minimum meters; there is no training-memory metric (#40). Whether the existing T2 `compute_profile` / `accelerator` proposals suffice for #31's priced SKUs is unreconciled (#77) |
 | `data_source` items from the source audit | `spec_data_source` has no licence, terms or opt-out fields; agreement needed with #13 and #40 |
 | Managed `training_framework` items | `backends` required but not user-visible for managed services (#40) |
 | `fine_tuned_model` items | User-specific; references require `model` and `training_dataset` items |
@@ -131,7 +150,7 @@ None of these is a native GitHub blocker; they are information dependencies unde
 
 | Question | Owner |
 | --- | --- |
-| What counts as a "competing model" under provider output terms (F-17, D-12–D-14) | #40 · @CompleteDotTech |
+| What counts as a "competing model" under provider output terms (F-17, D-12–D-14) | #40 · @tynamite |
 | BGH appeal I ZR 281/25 on natural-language TDM reservations (pending) | #32 · @appletechie |
 | Mistral Forge licensing and weight export (not public) | #30 · @appletechie |
 | ONNX export for any training framework | #30 · @appletechie |
