@@ -218,32 +218,32 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 
 ## Compatibility proposals
 
-These rules are proposed for review by #40 using the [rule proposal template](../../templates/rule-proposal.md). They refine the baseline `rule.training.dataset.governance`, which today requires `license_verified` and `privacy_approved` to be true and blocks on unknown. "Verified" means the cited text was read directly. When a required fact is missing, the rule returns `unknown`, never `pass`.
+These rules are proposed for review by #40 using the [rule proposal template](../../templates/rule-proposal.md). They refine the baseline `rule.training.dataset.governance`, which today requires `license_verified` and `privacy_approved` to be true and blocks on unknown. "Source checked" means the cited primary text was read on its access date and supports the assertion, with the limitations in the evidence table. It follows the interim "checked" definition in the owner's adopted #41 policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)). "Verified" (independently reproduced or confirmed by a second source) is not claimed for any rule here, and a result that passes on checked evidence stays unverified. Court rulings, guidance and codes are source-checked as documents; whether they apply to a given build is a legal question this note does not decide. When a required fact is missing, the rule returns `unknown`, never `pass`.
 
 | Rule | Participating fields | Assertion | Outcome / severity | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| D-01 | training compute vs base-model compute, EU market | Modification above one-third of original compute: a copyright policy (C2) and training summary (C3) are required | fail / error if missing | R1–R4 | verified (guidance threshold) |
-| D-02 | same, below threshold | Not a GPAI provider; deployer duties only | pass / info | R2 | verified |
-| D-03 | open-source licence, EU, GPAI provider | Art. 53(2) does not exempt (c) or (d) | pass / warning | R1 | verified |
-| D-04 | `data_source` crawl record, EU commercial | No recorded robots.txt / TDMRep status at crawl time | unknown / error | R1, R5, R6, R26 | verified |
-| D-05 | same | Recorded reservation (`tdm-reservation: 1` or robots disallow) | fail / error | R5, R6 | verified |
-| D-06 | same | Natural-language-only reservation | unknown / warning | R7, R26 | verified: OLG Hamburg left the question open and judged by 2021 technology; BGH appeal pending |
-| D-07 | source on a piracy or shadow-library list | Excluded | fail / error | R5, R12, R13 | verified |
-| D-08 | source licence = CC BY-NC or BY-NC-SA, commercial training or deployment | NC covers all stages | fail / error (unknown if an exception or fair use applies) | R16 | verified |
-| D-09 | source licence = CC BY-SA, weights published | ShareAlike may attach to weights where permission is needed | pass / warning | R16 | verified |
-| D-10 | source licence = CC BY, no attribution in model card | Attribution required (a link to the dataset may suffice) | pass / warning | R16 | verified |
-| D-11 | dataset licence ∈ {ODC-BY, ODbL, Common Crawl derivative}, no per-item licence | Licence covers the database, not the contents | unknown / warning | R17–R19 | verified |
-| D-12 | dataset contains Anthropic API outputs, purpose = competing model | Prohibited | fail / error | R20 | verified |
-| D-13 | dataset contains Gemini API outputs, purpose = competing model | Prohibited | fail / error | R21 | verified |
-| D-14 | dataset contains OpenAI outputs, purpose = competing model | Prohibited, except the Services Agreement "Permitted Exception": non-distributed classifiers/embeddings, or fine-tuning OpenAI's own models | fail / error (pass / info when the exception applies) | R22 | verified |
-| D-15 | synthetic data from DeepSeek-R1 (MIT), Qwen3 or gpt-oss (Apache-2.0) weights | Output reuse permitted; keep NOTICE | pass / info | R23 | verified |
-| D-16 | EU/UK personal data, no LIA or opt-out mechanism | Lawful basis not established | fail / error | R8, R9, R11 | verified (guidance) |
-| D-17 | personal data, no memorisation / re-identification test | Model presumed not anonymous; data subject rights reach weights | unknown / warning | R8, R10 | verified (guidance) |
-| D-18 | user-interaction data, GPAI provider | Must be disclosed in the training summary | pass / warning | R4 | verified |
-| D-19 | hosting-site licence label is the only licence evidence | Label alone is not sufficient | unknown / warning | R24 | verified |
+| D-01 | training compute vs base-model compute, EU market | Modification above one-third of original compute: a copyright policy (C2) and training summary (C3) are required | fail / error if missing | R1–R4 | source checked (non-binding guidance threshold) |
+| D-02 | same, below threshold | Not a GPAI provider; deployer duties only | pass / info | R2 | source checked |
+| D-03 | open-source licence, EU, GPAI provider | Art. 53(2) does not exempt (c) or (d) | pass / warning | R1 | source checked |
+| D-04 | `data_source` crawl record, EU commercial | No recorded robots.txt / TDMRep status at crawl time | unknown / error | R1, R5, R6, R26 | source checked |
+| D-05 | same | Recorded reservation (`tdm-reservation: 1` or robots disallow) | fail / error | R5, R6 | source checked |
+| D-06 | same | Natural-language-only reservation | unknown / warning | R7, R26 | source checked: OLG Hamburg left the question open and judged by 2021 technology; BGH appeal pending |
+| D-07 | source on a piracy or shadow-library list | Excluded | fail / error | R5, R12, R13 | source checked |
+| D-08 | source licence = CC BY-NC or BY-NC-SA, commercial training or deployment | NC covers all stages | fail / error (unknown if an exception or fair use applies) | R16 | source checked |
+| D-09 | source licence = CC BY-SA, weights published | ShareAlike may attach to weights where permission is needed | pass / warning | R16 | source checked |
+| D-10 | source licence = CC BY, no attribution in model card | Attribution required (a link to the dataset may suffice) | pass / warning | R16 | source checked |
+| D-11 | dataset licence ∈ {ODC-BY, ODbL, Common Crawl derivative}, no per-item licence | Licence covers the database, not the contents | unknown / warning | R17–R19 | source checked |
+| D-12 | dataset contains Anthropic API outputs, purpose = competing model | Prohibited | fail / error | R20 | source checked |
+| D-13 | dataset contains Gemini API outputs, purpose = competing model | Prohibited | fail / error | R21 | source checked |
+| D-14 | dataset contains OpenAI outputs, purpose = competing model | Prohibited, except the Services Agreement "Permitted Exception": non-distributed classifiers/embeddings, or fine-tuning OpenAI's own models | fail / error (pass / info when the exception applies) | R22 | source checked (archived Wayback snapshot; live pages not readable) |
+| D-15 | synthetic data from DeepSeek-R1 (MIT), Qwen3 or gpt-oss (Apache-2.0) weights | Output reuse permitted; keep NOTICE | pass / info | R23 | source checked |
+| D-16 | EU/UK personal data, no LIA or opt-out mechanism | Lawful basis not established | fail / error | R8, R9, R11 | source checked (guidance) |
+| D-17 | personal data, no memorisation / re-identification test | Model presumed not anonymous; data subject rights reach weights | unknown / warning | R8, R10 | source checked (guidance) |
+| D-18 | user-interaction data, GPAI provider | Must be disclosed in the training summary | pass / warning | R4 | source checked |
+| D-19 | hosting-site licence label is the only licence evidence | Label alone is not sufficient | unknown / warning | R24 | source checked (2023 Hub snapshot) |
 | D-20 | `held_out_test_set` = true, no recorded leakage check against #36's eval set | Leakage not established | unknown / warning | T11–T13 | policy proposal, needs agreement with #36 |
-| D-21 | eval-only source (e.g. a benchmark) included in training data | Excluded | fail / error | T11, T12, T15 | verified |
-| D-22 | format ∉ the selected framework/service formats (table above) | Incompatible | fail / error | T30–T38 | verified per row; v1 has no format field |
+| D-21 | eval-only source (e.g. a benchmark) included in training data | Excluded | fail / error | T11, T12, T15 | source checked |
+| D-22 | format ∉ the selected framework/service formats (table above) | Incompatible | fail / error | T30–T38 | source checked per row; v1 has no format field |
 
 ## Pricing and capacity
 
@@ -292,11 +292,11 @@ Before submitting `data_source` proposals from S1, agree with #13 and #40 on:
 | --- | --- |
 | Agree the leakage-check method (steps 3 and 6) and who freezes the eval set | #36 · @PUSHINGSQUARES |
 | Training vs retrieval rights boundary (C1–C4, C8, C11, C13 differ); shared `data_source` kind or a separate one | #13 · @zabyxc01 |
-| v1 fields: `format`, split counts and unit, dedup method, leakage method and hit counts, lineage URI; per-source licence and opt-out fields on `data_source`; replace the single `license_verified` / `privacy_approved` booleans with evidence references | #40 · @CompleteDotTech |
-| Who records the user attestations D-01, D-16 and D-18 need (EU market, compute, lawful basis)? | #2 / #3 · @CompleteDotTech |
+| v1 fields: `format`, split counts and unit, dedup method, leakage method and hit counts, lineage URI; per-source licence and opt-out fields on `data_source`; replace the single `license_verified` / `privacy_approved` booleans with evidence references | #40 · @tynamite |
+| Who records the user attestations D-01, D-16 and D-18 need (EU market, compute, lawful basis)? | #2 / #3 · @tynamite |
 | Primary text for the BGH appeal (I ZR 281/25) once decided; scope of the Bartz appeal notices | #32 · @appletechie |
 | Which of the S1 shortlist to propose as `data_source` items, after per-source verification | #32 · @appletechie, with #13 |
 | Format requirements consumed from #30 | #30 · @appletechie (PR #68) |
-| Evidence grading for court rulings and secondary legal reporting | #41 · @CompleteDotTech |
+| Evidence grading for court rulings and secondary legal reporting | #41 · @tynamite |
 
 None of the handoffs above is confirmed yet.
