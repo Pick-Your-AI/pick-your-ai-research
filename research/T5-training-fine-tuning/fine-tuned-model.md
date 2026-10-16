@@ -1,7 +1,7 @@
 # T5: Fine-Tuned Model
 
 Issue: #33 · Contract: 1.0.0 · Kinds: `fine_tuned_model`
-Status: draft · Last researched: 2026-10-16
+Status: ready for review · Last researched: 2026-10-16
 
 ## User decision
 
