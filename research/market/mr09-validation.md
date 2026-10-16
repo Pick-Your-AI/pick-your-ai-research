@@ -41,4 +41,17 @@ The publication audit caught a distinct Windows newline issue after the first fu
 
 ## Final integrated validation
 
-Pending integrated artifacts and focused verification. Record actual tested commit, results and any failed checks here; do not substitute the initial baseline pass.
+Tested code/data commit: **`36e774d5fdafcaf51af8139703bb52a57e629bb2`**, on 2026-10-16 with Python **3.12.14**. This is the corrected integrated submission, including explicit LF publication and its regression assertion. All commands ran from the repository root, using the PATH selection above.
+
+| Actual command | Result |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt` | Success; all six pinned dependencies already satisfied |
+| `python -m unittest discover -s contracts/v1/tests -v` | **21 passed** |
+| `python -m unittest discover -s tests -v` | **24 passed**, including 13 focused measurement/summary tests |
+| `python scripts/validate_research.py` | Passed; 0 CatalogItems / 0 Pricebooks; external weight manifest validated |
+| `python scripts/validate_market_research.py` | Passed; 32 entities, 1,536 cells, 20 issues |
+| `git diff --check` | Passed |
+
+Additional actual checks compared all 15 **committed Git blobs** to the summary's SHA-256 entries and compared the committed instrument/protocol bytes to every run's retained hashes: passed. The historical-field and verbatim-criterion comparison against PR #67's pinned base also passed: all prior fields unchanged, exactly three new #61 handoff rows, all 14 criteria retained. Independent recomputation confirmed every phase's sample count and min/median/max; all five cells have n=3, total 15 successes and 0 comparable competitor error pairs.
+
+Subsequent commits record this validation report and publication/review-request metadata only. They do not change measured counters, original protocol, measurement/analysis utilities or tests. Validate affected tracking consistency and whitespace after those edits; the PR's current-head CI remains visible in GitHub. No human acceptance, source-rights certification, empirical completion or merge is implied by these checks.
