@@ -22,6 +22,7 @@
     "supports_tool_calling": true,
     "supports_json_schema": true,
     "supports_fine_tuning": false,
+    "license_ref": "https://openai.com/policies/services-agreement/",
     "access_modes": [
       "api"
     ],

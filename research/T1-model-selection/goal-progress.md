@@ -11,7 +11,7 @@ Mandate: user launched the nine-section goal covering assigned issues #4–7 and
 | T1 #4 | Summary, acceptance map and handoff ledger | Prepared; children and owner confirmations must precede completion |
 | Market #49 | Existing PR #67 matrix and focused audit in isolated worktree | Active audit; preserve shared source/handoff ownership and existing program PR |
 | Delivery | Focused validated commits/PRs, reviews and canonical merge | Pending final checks and reviewable publication |
-| Projects #1/#2 | Existing issue items only | API denied: current CLI token lacks Project scopes; no values written or invented |
+| Projects #1/#2 | Existing issue items only | CLI lacks scopes; existing signed-in browser can read/edit. #4–7 Backlog/Ready read back; #49 In Review/Ready. Status updates will follow PR publication |
 
 Intake: clean `main` at `41d33f210e5229bb46aaf40fc9987f22b13e696a`; T1 branch `codex/t1-model-selection`. Existing PR #67 head `6511dea2a5102b13df1e47378a31f31230ecb494` was unmerged and owned by @CompleteDotTech; PR #74 proposed guidance was open. No active T1 PR or issue comment existed at intake. All five scoped issues were assigned to @zwright8. Native #4 children #5/#6/#7 and no blocked-by dependencies were verified. Repo permissions allow push/triage, not administration.
 
@@ -22,7 +22,7 @@ Market isolation: attached worktree `mr02-feature-audit`, branch `codex/mr02-fea
 1. Independent T1 research review and all specific consuming-owner decisions in [handoffs.md](handoffs.md); #30 license sufficiency and #10 KV agreement are explicit issue gates.
 2. #40 central rule/contract review; no baseline patch or approved-ruleset claim.
 3. #49 program coordinator review and required material technical handoffs, including #42's narrowed saved/share/export/version coverage request in [PR #67 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545).
-4. Project read/write access. Existing CLI scopes omit `read:project` and `project`; no account permission change attempted. An authorized existing browser session could be inspected separately; no browser edit is yet claimed.
+4. Project API scopes remain unavailable, but the existing signed-in Chrome session displays editable Project fields. Browser readback: #4/#5/#6 Critical, #7 High, all Tier=T1 Model Selection, Readiness=Ready, Status=Backlog; #49 P0, Workstream=MR-02, Research Readiness=Ready, Status=In Review. Preserve all other fields; update T1 Status after PR publication. No account permission change needed and no status write is yet claimed.
 5. Qualifying reviewed canonical merges, artifact/check verification, legitimate issue closure and board readback.
 
 Continue independent work while these are pending. Do not repeatedly send the same review request. At a true external stop, retain the branch/PR/patch and exact next owner actions; keep goal and issue completion separate from artifact readiness.

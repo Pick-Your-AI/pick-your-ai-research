@@ -41,4 +41,4 @@ Qwen/Gemini remain note-only model candidates where required max-output/combined
 
 All [41 criteria](acceptance-matrix.md) for assigned #4–7/#49 are tracked without equating prepared content with acceptance. Required T1 handoffs are [pending](handoffs.md). #49's matrix contribution remains separate from T1 and builds on unmerged PR #67. Parent #4 needs the three accepted/merged child records, this merged summary and its own confirmed cross-workstream assumptions before closure.
 
-See [goal progress](goal-progress.md) for exact branch/PR/check/access state. Project API access currently lacks `read:project`/`project`; board values and writes are not inferred. Normal independent reviews and owner decisions are required before claiming research completion.
+See [goal progress](goal-progress.md) for exact branch/PR/check/access state. The CLI lacks Project scopes, but an existing signed-in browser supplies actual board readback and editable controls; no account permission expansion is needed. Status changes follow review publication. Normal independent reviews and owner decisions are required before claiming research completion.

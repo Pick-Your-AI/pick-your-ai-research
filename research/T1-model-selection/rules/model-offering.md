@@ -2,7 +2,7 @@
 
 Issues: #5, #6 · Contract review: #40 · Status: proposed, not an approved ruleset
 
-Evidence IDs resolve in [evidence](../evidence.md). Existing v1 facts can supply necessary constraints; offering/account/region and architecture relations that lack fields remain note-level proposals. Verified documentation is distinguished from proposed builder policy. These rules do not certify measured quality or deployment approval.
+Evidence IDs resolve in [evidence](../evidence.md). Existing v1 facts can supply necessary constraints; offering/account/region and architecture relations that lack fields remain note-level proposals. Checked publisher documentation is distinguished from proposed builder policy and independently verified behavior. These rules do not certify measured quality or deployment approval.
 
 ## T1-O1: route and model identity
 

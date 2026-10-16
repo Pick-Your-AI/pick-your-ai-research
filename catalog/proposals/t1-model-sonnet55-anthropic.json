@@ -20,6 +20,7 @@
     "context_window_tokens": 1000000,
     "max_output_tokens": 128000,
     "supports_tool_calling": true,
+    "license_ref": "https://www.anthropic.com/legal/commercial-terms",
     "access_modes": [
       "api"
     ],

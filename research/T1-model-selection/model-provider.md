@@ -54,6 +54,8 @@ Default-view proposal: show the user's chosen currency and serving/billing regio
 
 See [offering and access rules](rules/model-offering.md). Facts checked against docs and proposed builder behavior are distinguished there. Missing account/region/terms evidence yields unknown, not a compatible offering.
 
+The actual API agreement references and conditional customization/output restrictions are recorded in [the model license section](ai-model.md#license-and-access-conditions-for-30), with O3/A6/G2/Q3 primary terms. They are source facts for #30 to review, not a universal right to train from service outputs. H2 additionally distinguishes published endpoint payload handling from30-day log retention; it is not a claim about a customer's negotiated agreement.
+
 ## Recommendation and rationale
 
 Keep model publisher, serving provider and distributor distinct. Normalize exact route IDs while preserving raw vendor IDs. Record privacy/retention and fine-tuning eligibility at offering/model/feature/account scope. API, managed and local offerings need different evidence, although they can share a publisher model identity.

@@ -14,7 +14,7 @@ Evidence IDs refer to [the source register](evidence.md); all facts below are pu
 | Candidate / identity | Delivery, lifecycle and capability | Architecture / license / context |
 | --- | --- | --- |
 | OpenAI GPT-5.4 / `gpt-5.4-2026-03-05` | Direct API; named snapshot still documented at capture. Text/image input to text; function calling and structured output documented; this model does not support fine-tuning (O1). | Closed API offering; weights, parameter count, internal architecture/precision and tokenizer internals not established here. Published context/output 1,050,000/128,000 tokens. Service terms require offering-level evidence (O2). |
-| Claude Sonnet 5.5 / `claude-sonnet-5-5` | Direct API and managed Bedrock variant; active release. Text/image input to text and tool use documented (A1, models overview linked by A1). Dateless fixed snapshot, not rolling latest (A2). | No downloadable-weight artifact established by these sources; internal parameters/precision unknown. Published standard context/output 1M/128K; distinct batch beta excluded (A1). Serving API/retention arrangements differ by route (A4/B2). |
+| Claude Sonnet 5.5 / `claude-sonnet-5-5` | Direct API and Bedrock on-demand API offering; active release. Text/image input to text and tool use documented (A1, models overview linked by A1). Dateless fixed snapshot, not rolling latest (A2). | No downloadable-weight artifact established by these sources; internal parameters/precision unknown. Published standard context/output 1M/128K; distinct batch beta excluded (A1). Serving API/retention arrangements differ by route (A4/B2). |
 | Gemini 2.5 Flash / `gemini-2.5-flash` | Legacy-access API candidate, existing active users only, not deprecated (G1). Text/image/video/audio input to text; publisher tool/schema claims. | Independent input 1,048,576 and output 65,536 budgets; no invented combined limit. Closed internals unknown. Note-only until context semantics map accepted by #40. Paid/unpaid terms differ (G2). |
 | Qwen3-8B / immutable repository revision | Self-hosted text-generation checkpoint; Apache-2.0 weights in public ungated source (Q1/Q3/Q4). Card claims agent/tool capability; not a measured end-to-end tool workflow. | 8.2B total dense parameters; 6.95B non-embedding is not active-parameter count. `Qwen3ForCausalLM`, BF16, Safetensors source. 36 layers, 32 query/8 KV heads, head dimension 128. Native 32,768 vs YaRN 131,072; config 40,960 is a separate field (Q1/Q2). |
 
@@ -55,6 +55,14 @@ See [model/offering/engine rules](rules/model-offering.md) and [context research
 ## Pricing and capacity
 
 Prices belong to the [provider record](model-provider.md) and Pricebook, not intrinsic model facts. Qwen's published architecture is an input to #10, not a memory guarantee. Native context, selected sequence budget, batch/concurrency, KV dtype, engine overhead and per-device allocation are separate. No local GPU workload or paid API call was run.
+
+## License and access conditions for #30
+
+O3 is the OpenAI Services Agreement effective January 1, 2026: it grants service access rather than model ownership. Section3.3(e) restricts use of output to develop competing models subject to defined Permitted Exceptions; those include specified non-distributed categorization/classification/organization models and customization through OpenAI services. This does not make GPT-5.4 fine-tuning available: O1 expressly says unsupported. The meaning of competition for a concrete proposed training use is a #30/#40 decision, not inferred here.
+
+A6 is Anthropic's Commercial Terms effective June17,2025: sectionsA/B cover service permission and customer input/output rights, and D.4 restricts competing products/models and reverse engineering absent the stated approval. Customer output rights are not a license to model weights or a generic training permission. Route/account-specific agreements and policies still apply; Bedrock delivery does not automatically inherit the direct API agreement.
+
+Qwen Q3 supplies this exact checkpoint's Apache-2.0 license; source conditions/notices and derivative lineage must travel with an artifact. G2 supplies Gemini API terms, including paid/unpaid and geographic distinctions. These linked sources and the typed field table supply #30's requested facts; #30 must confirm sufficiency and decide the proposed action. No agreement was accepted and no legal suitability determination was made during research.
 
 ## Structured artifacts
 
