@@ -1,0 +1,38 @@
+{
+  "project": 2,
+  "requested_project_role": "WRITER",
+  "repository_permissions_changed": false,
+  "result": {
+    "updateProjectV2Collaborators": {
+      "collaborators": {
+        "nodes": [
+          {
+            "login": "tynamite"
+          },
+          {
+            "login": "zwright8"
+          },
+          {
+            "login": "Mattycodes69"
+          },
+          {
+            "login": "zabyxc01"
+          },
+          {
+            "login": "appletechie"
+          },
+          {
+            "login": "PUSHINGSQUARES"
+          }
+        ]
+      }
+    }
+  },
+  "repository_link": {
+    "linkProjectV2ToRepository": {
+      "repository": {
+        "nameWithOwner": "Pick-Your-AI/pick-your-ai-research"
+      }
+    }
+  }
+}

@@ -1,0 +1,1641 @@
+[
+  {
+    "id": "benchlm",
+    "name": "BenchLM",
+    "website": "https://benchlm.ai/",
+    "organization": "BenchLM; operator not named in terms",
+    "classifications": [
+      "Partial competitor",
+      "Benchmark provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Model and provider comparison with benchmark, price and runtime evidence.",
+    "documented_features": [
+      "model_search",
+      "model_compare",
+      "benchmarks",
+      "api_pricing",
+      "api_access",
+      "explanation"
+    ],
+    "pricing": {
+      "summary": "Public comparison; paid data access and sponsorship. Commercial display requires a separate agreement.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://benchlm.ai/data/access",
+        "https://benchlm.ai/methodology"
+      ]
+    },
+    "deployment_support": "Hosted web application (observed in browser, 2026-10-16); self-hosted or local deployment Unknown.",
+    "apis_and_integrations": "Vendor claim: data access \"through API or MCP\" with 250 free monthly reads (site navigation on benchlm.ai/about, 2026-10-16); no key created, untested. Commercial display needs a separate agreement.",
+    "licensing": "Public comparison; paid data access and sponsorship. Commercial display requires a separate agreement.",
+    "source_ids": [
+      "src-benchlm",
+      "src-benchlm-legal"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "harness-bench",
+    "name": "Harness Bench",
+    "website": "https://www.harness-bench.ai/",
+    "organization": "Harness Bench Team / Qihoo360 repository",
+    "classifications": [
+      "Benchmark provider",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Model-harness evaluation in sandboxed tasks with final-artifact oracles.",
+    "documented_features": [
+      "benchmarks",
+      "harness_eval"
+    ],
+    "pricing": {
+      "summary": "Public research; commercial license permission not established.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://github.com/Qihoo360/harness-bench",
+        "https://arxiv.org/abs/2605.27922"
+      ]
+    },
+    "deployment_support": "Public website plus public repository Qihoo360/harness-bench (GitHub licence API returns no licence); benchmark not run.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Public research; commercial license permission not established.",
+    "source_ids": [
+      "src-harness-bench"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T4",
+      "T6"
+    ],
+    "related_issues": [
+      25,
+      26,
+      27,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "Paper abstract and website/repository suite sizes differ; see benchmark-validation.md. No license detected by GitHub license endpoint."
+    ]
+  },
+  {
+    "id": "llmfit",
+    "name": "llmfit",
+    "website": "https://www.llmfit.org/",
+    "organization": "Upstream: Alex Jones (GitHub AlexsJones), repository and llmfit.axjns.dev; llmfit.org operator unverified",
+    "classifications": [
+      "Partial competitor",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "Local model users",
+    "capabilities": "Hardware detection and model-fit recommendations across quantizations and runtimes.",
+    "documented_features": [
+      "model_search",
+      "model_compare",
+      "hardware_fit",
+      "quantization",
+      "context",
+      "multi_gpu",
+      "cpu",
+      "inference_engine",
+      "api_access",
+      "export",
+      "explanation"
+    ],
+    "pricing": {
+      "summary": "MIT upstream code; seed website has advertising; model-data rights require separate inspection.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://github.com/AlexsJones/llmfit",
+        "https://raw.githubusercontent.com/AlexsJones/llmfit/main/LICENSE"
+      ]
+    },
+    "deployment_support": "Primary documentation (llmfit.org and upstream README): local terminal tool installed via Scoop, Homebrew, an install script on llmfit.axjns.dev, container image ghcr.io/alexsjones/llmfit or source build. Not installed or run in this study.",
+    "apis_and_integrations": "Primary documentation: JSON CLI output (`recommend --json`) and a local REST API via `llmfit serve` (/health, /api/v1/system, /api/v1/models/top); lists Ollama, llama.cpp, MLX, Docker Model Runner and LM Studio as runtime providers. Untested.",
+    "licensing": "MIT upstream code; seed website has advertising; model-data rights require separate inspection.",
+    "source_ids": [
+      "src-llmfit",
+      "src-llmfit-upstream-pages"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "llmfit.org is not referenced by the upstream repository, whose own site is llmfit.axjns.dev; llmfit.org operator unverified."
+    ]
+  },
+  {
+    "id": "local-ai-planner",
+    "name": "Local AI VRAM Calculator / GPU Planner",
+    "website": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+    "organization": "Logarithmic Spirals (pseudonymous individual blog author)",
+    "classifications": [
+      "Partial competitor"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "Local model users",
+    "capabilities": "Goal-based fit estimates with weights, KV cache and runtime overhead.",
+    "documented_features": [
+      "hardware_fit",
+      "quantization",
+      "context",
+      "kv_cache",
+      "multi_gpu",
+      "cpu",
+      "inference_engine",
+      "constraints",
+      "explanation"
+    ],
+    "pricing": {
+      "summary": "Free web planner; API and redistribution permission unknown.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/"
+      ]
+    },
+    "deployment_support": "Browser tool, free without signup; controls observed in browser, output accuracy not verified.",
+    "apis_and_integrations": "Unknown: no public API, source licence or dataset terms established (profile, 2026-10-16).",
+    "licensing": "Free web planner; API and redistribution permission unknown.",
+    "source_ids": [
+      "src-local-ai-planner",
+      "src-local-ai-planner-about"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "flocci",
+    "name": "Flocci Ask / Stack Builder",
+    "website": "https://aitools.flocci.in/ask",
+    "organization": "Flocci Technologies",
+    "classifications": [
+      "Direct competitor",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Conversational discovery and generated ordered AI workflows with constraints, explanations and uncertainty statements.",
+    "documented_features": [
+      "natural_language",
+      "model_search",
+      "explanation",
+      "saved",
+      "guided_selection",
+      "workflow",
+      "rag",
+      "constraints"
+    ],
+    "pricing": {
+      "summary": "Free browsing; credits for AI features. One free Ask interaction returned explained tool recommendations.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://aitools.flocci.in/",
+        "https://aitools.flocci.in/stack"
+      ]
+    },
+    "deployment_support": "Hosted web application (Ask and Stack Builder exercised anonymously, 2026-10-16).",
+    "apis_and_integrations": "Unknown: no public API or executable export verified; Stack Builder returned on-screen advice only.",
+    "licensing": "Free browsing; credits for AI features. One free Ask interaction returned explained tool recommendations.",
+    "source_ids": [
+      "src-flocci"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T0",
+      "T1",
+      "T3",
+      "T4"
+    ],
+    "related_issues": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      16,
+      25,
+      26,
+      27,
+      40,
+      41,
+      42
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "One generated RAG workflow observed; compatibility, privacy and deployability not independently tested. Static and rendered catalog counts conflict."
+    ]
+  },
+  {
+    "id": "artificial-analysis",
+    "name": "Artificial Analysis",
+    "website": "https://artificialanalysis.ai/",
+    "organization": "Artificial Analysis",
+    "classifications": [
+      "Partial competitor",
+      "Benchmark provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Model/provider evaluation, speed, price and recommendation surfaces.",
+    "documented_features": [
+      "model_compare",
+      "benchmarks",
+      "api_pricing",
+      "api_access",
+      "explanation"
+    ],
+    "pricing": {
+      "summary": "Free keyed API and commercial data offering; attribution and terms apply.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://artificialanalysis.ai/api-reference",
+        "https://artificialanalysis.ai/methodology"
+      ]
+    },
+    "deployment_support": "Hosted web service.",
+    "apis_and_integrations": "Primary documentation: public API reference covering intelligence evaluations, output speed, time to first token and price; free keyed access requires attribution and data terms. No key created.",
+    "licensing": "Free keyed API and commercial data offering; attribution and terms apply.",
+    "source_ids": [
+      "src-artificial-analysis"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "website": "https://openrouter.ai/models",
+    "organization": "OpenRouter",
+    "classifications": [
+      "Partial competitor",
+      "Infrastructure provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Model directory plus unified provider-routing API.",
+    "documented_features": [
+      "model_search",
+      "model_compare",
+      "api_pricing",
+      "context",
+      "api_access",
+      "tool_calling",
+      "hosting"
+    ],
+    "pricing": {
+      "summary": "Usage-based model access and platform pricing; provider conditions vary.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://openrouter.ai/docs/guides/overview/models",
+        "https://openrouter.ai/pricing"
+      ]
+    },
+    "deployment_support": "Hosted routing service that forwards requests to third-party provider endpoints (vendor documentation).",
+    "apis_and_integrations": "Primary documentation: Models API with metadata and filtering, and a unified provider-routing API. No account used.",
+    "licensing": "Usage-based model access and platform pricing; provider conditions vary.",
+    "source_ids": [
+      "src-openrouter"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T4",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      25,
+      26,
+      27,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "hugging-face",
+    "name": "Hugging Face Hub",
+    "website": "https://huggingface.co/models",
+    "organization": "Hugging Face",
+    "classifications": [
+      "Partial competitor",
+      "Data source",
+      "Infrastructure provider"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Model discovery with task/library filters and model-card metadata.",
+    "documented_features": [
+      "model_search",
+      "model_compare",
+      "model_versions",
+      "licensing"
+    ],
+    "pricing": {
+      "summary": "Public Hub and commercial services; rights vary by repository.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://huggingface.co/docs/hub/model-cards"
+      ]
+    },
+    "deployment_support": "Hosted model hub (web).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Public Hub and commercial services; rights vary by repository.",
+    "source_ids": [
+      "src-hugging-face"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T3",
+      "T5"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      16,
+      33,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "arena",
+    "name": "Arena",
+    "website": "https://arena.ai/",
+    "organization": "Arena",
+    "classifications": [
+      "Benchmark provider",
+      "Partial competitor"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Public model ranking and comparison entry point; interactive evaluation not tested.",
+    "documented_features": [
+      "benchmarks",
+      "model_compare"
+    ],
+    "pricing": {
+      "summary": "Business model and data reuse terms unverified.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://arena.ai/"
+      ]
+    },
+    "deployment_support": "Hosted web application.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Business model and data reuse terms unverified.",
+    "source_ids": [
+      "src-arena"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "llm-stats",
+    "name": "LLM Stats",
+    "website": "https://llm-stats.com/",
+    "organization": "llm-stats (self-described two co-founders); legal entity unconfirmed",
+    "classifications": [
+      "Partial competitor",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Leaderboard comparing intelligence, speed and price.",
+    "documented_features": [
+      "model_compare",
+      "benchmarks",
+      "api_pricing"
+    ],
+    "pricing": {
+      "summary": "Pricing of access and reuse rights unknown.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://llm-stats.com/"
+      ]
+    },
+    "deployment_support": "Hosted web application.",
+    "apis_and_integrations": "Vendor claim: site navigation lists \"Data API / MCP\"; robots.txt disallows /api/. Not tested.",
+    "licensing": "Pricing of access and reuse rights unknown.",
+    "source_ids": [
+      "src-llm-stats",
+      "src-llm-stats-legal"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "models-dev",
+    "name": "Models.dev",
+    "website": "https://models.dev/",
+    "organization": "OpenCode / anomalyco",
+    "classifications": [
+      "Data source",
+      "Open-source integration candidate",
+      "Partial competitor"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Provider and canonical-model metadata with JSON endpoints.",
+    "documented_features": [
+      "model_search",
+      "model_compare",
+      "api_pricing",
+      "api_access",
+      "context",
+      "model_versions"
+    ],
+    "pricing": {
+      "summary": "MIT repository; verify upstream data provenance and retain notices.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://github.com/anomalyco/models.dev",
+        "https://raw.githubusercontent.com/anomalyco/models.dev/dev/LICENSE"
+      ]
+    },
+    "deployment_support": "Hosted website.",
+    "apis_and_integrations": "Primary documentation: separate JSON endpoints for provider data, canonical-model data and a combined catalog; specialized model types omitted by default.",
+    "licensing": "MIT repository; verify upstream data provenance and retain notices.",
+    "source_ids": [
+      "src-models-dev"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "canrun",
+    "name": "CanRun",
+    "website": "https://canrunllm.com/",
+    "organization": "CanRun (self-described independent project); legal entity unconfirmed",
+    "classifications": [
+      "Partial competitor"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "Local model users",
+    "capabilities": "Hardware and RAM calculator for local AI model fit.",
+    "documented_features": [
+      "hardware_fit"
+    ],
+    "pricing": {
+      "summary": "Commercial model, API and data rights unverified.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://canrunllm.com/"
+      ]
+    },
+    "deployment_support": "Primary documentation (privacy policy, effective 2026-10-06): calculator runs in the browser on Cloudflare Pages; unlisted models are fetched from Hugging Face directly by the browser.",
+    "apis_and_integrations": "Primary documentation: emits ready-to-run llama.cpp and Ollama commands for the chosen context length. Public API Unknown.",
+    "licensing": "Commercial model, API and data rights unverified.",
+    "source_ids": [
+      "src-canrun",
+      "src-canrun-about"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "canitrun",
+    "name": "CanItRun",
+    "website": "https://canitrun.dev/",
+    "organization": "CanItRun; legal entity unconfirmed",
+    "classifications": [
+      "Partial competitor"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "Local model users",
+    "capabilities": "GPU hardware checker and VRAM calculator.",
+    "documented_features": [
+      "hardware_fit"
+    ],
+    "pricing": {
+      "summary": "Commercial model, API and data rights unverified.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://canitrun.dev/"
+      ]
+    },
+    "deployment_support": "Hosted web calculator with no accounts (privacy policy, last updated 2026-08-16).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Commercial model, API and data rights unverified.",
+    "source_ids": [
+      "src-canitrun",
+      "src-canitrun-about"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "modelfit",
+    "name": "ModelFit",
+    "website": "https://modelfit.io/",
+    "organization": "ModelFit / @wecko-ai package",
+    "classifications": [
+      "Direct competitor",
+      "Data source",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "Local model users",
+    "capabilities": "Device-first local-model recommendations; CLI and documented JSON/MCP access.",
+    "documented_features": [
+      "hardware_fit",
+      "model_search",
+      "quantization",
+      "api_access",
+      "mcp",
+      "explanation"
+    ],
+    "pricing": {
+      "summary": "Free recommendation surface; sponsorship and affiliate disclosures. Dataset claims CC BY 4.0, CLI MIT.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://modelfit.io/data/"
+      ]
+    },
+    "deployment_support": "Web device/setup/results flow plus a CLI the publisher states is MIT-licensed.",
+    "apis_and_integrations": "Vendor claim / primary documentation: documented JSON and MCP access. Untested.",
+    "licensing": "Free recommendation surface; sponsorship and affiliate disclosures. Dataset claims CC BY 4.0, CLI MIT.",
+    "source_ids": [
+      "src-modelfit"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T0",
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      40,
+      41,
+      42
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "website": "https://ollama.com/library",
+    "organization": "Ollama",
+    "classifications": [
+      "Substitute workflow",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Discover and run model packages through a local-model ecosystem.",
+    "documented_features": [
+      "model_search",
+      "inference_engine"
+    ],
+    "pricing": {
+      "summary": "Model licenses differ; hosting and distribution terms need per-product checks.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://ollama.com/library"
+      ]
+    },
+    "deployment_support": "Local model runtime with a public model library (vendor documentation); not installed in this study.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Model licenses differ; hosting and distribution terms need per-product checks.",
+    "source_ids": [
+      "src-ollama"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      9,
+      10,
+      11,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "gpus-io",
+    "name": "GPUs.io",
+    "website": "https://gpus.io/",
+    "organization": "GPUs.io; legal entity unconfirmed",
+    "classifications": [
+      "Partial competitor",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Cloud GPU rental price comparison.",
+    "documented_features": [
+      "hosting_pricing"
+    ],
+    "pricing": {
+      "summary": "Listing reuse and affiliate terms unverified.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://gpus.io/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence. Recheck blocked by a 403 bot challenge.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Listing reuse and affiliate terms unverified.",
+    "source_ids": [
+      "src-gpus-io",
+      "src-gpus-io-recheck"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T2",
+      "T6"
+    ],
+    "related_issues": [
+      9,
+      10,
+      11,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "Recheck on 2026-10-16 returned 403 to anonymous retrieval; current capabilities and operator unverified."
+    ]
+  },
+  {
+    "id": "vast",
+    "name": "Vast.ai",
+    "website": "https://vast.ai/",
+    "organization": "Vast.ai",
+    "classifications": [
+      "Infrastructure provider",
+      "Potential partner"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "GPU rental marketplace.",
+    "documented_features": [
+      "hosting",
+      "hosting_pricing"
+    ],
+    "pricing": {
+      "summary": "Metered GPU rentals; instance-specific conditions and availability.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://vast.ai/"
+      ]
+    },
+    "deployment_support": "Hosted GPU rental marketplace (vendor documentation).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Metered GPU rentals; instance-specific conditions and availability.",
+    "source_ids": [
+      "src-vast"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T2",
+      "T6"
+    ],
+    "related_issues": [
+      9,
+      10,
+      11,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "runpod",
+    "name": "Runpod",
+    "website": "https://www.runpod.io/",
+    "organization": "Runpod",
+    "classifications": [
+      "Infrastructure provider",
+      "Potential partner"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "GPU cloud platform for AI workloads.",
+    "documented_features": [
+      "hosting",
+      "hosting_pricing",
+      "deployment"
+    ],
+    "pricing": {
+      "summary": "Metered cloud offerings; rate cards distinguish products and resources.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.runpod.io/pricing"
+      ]
+    },
+    "deployment_support": "Hosted GPU cloud platform (vendor documentation).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Metered cloud offerings; rate cards distinguish products and resources.",
+    "source_ids": [
+      "src-runpod"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T2",
+      "T6"
+    ],
+    "related_issues": [
+      9,
+      10,
+      11,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "dify",
+    "name": "Dify",
+    "website": "https://dify.ai/",
+    "organization": "LangGenius",
+    "classifications": [
+      "Adjacent competitor",
+      "Substitute workflow"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Visual agentic application and knowledge workflow platform.",
+    "documented_features": [
+      "workflow",
+      "rag",
+      "agents",
+      "deployment"
+    ],
+    "pricing": {
+      "summary": "Cloud plans and self-hosted code; modified Apache license has multitenancy and branding conditions.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://docs.dify.ai/en/home",
+        "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
+      ]
+    },
+    "deployment_support": "Primary documentation: cloud plans and self-hosting; source licence modifies Apache terms with multitenancy and frontend-branding conditions.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Cloud plans and self-hosted code; modified Apache license has multitenancy and branding conditions.",
+    "source_ids": [
+      "src-dify"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T3",
+      "T4",
+      "T6"
+    ],
+    "related_issues": [
+      16,
+      25,
+      26,
+      27,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "langflow",
+    "name": "Langflow",
+    "website": "https://www.langflow.org/",
+    "organization": "Langflow",
+    "classifications": [
+      "Adjacent competitor",
+      "Substitute workflow"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Low-code builder for agent and RAG applications.",
+    "documented_features": [
+      "workflow",
+      "rag",
+      "agents"
+    ],
+    "pricing": {
+      "summary": "Commercial hosting and exact source/data terms need review.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.langflow.org/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Commercial hosting and exact source/data terms need review.",
+    "source_ids": [
+      "src-langflow"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T3",
+      "T4"
+    ],
+    "related_issues": [
+      16,
+      25,
+      26,
+      27,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "flowise",
+    "name": "Flowise",
+    "website": "https://flowiseai.com/",
+    "organization": "Flowise",
+    "classifications": [
+      "Adjacent competitor",
+      "Substitute workflow"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Visual agent construction.",
+    "documented_features": [
+      "workflow",
+      "agents"
+    ],
+    "pricing": {
+      "summary": "Cloud and source offerings; exact deployment terms need review.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://flowiseai.com/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Cloud and source offerings; exact deployment terms need review.",
+    "source_ids": [
+      "src-flowise"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T3",
+      "T4"
+    ],
+    "related_issues": [
+      16,
+      25,
+      26,
+      27,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "n8n",
+    "name": "n8n",
+    "website": "https://n8n.io/",
+    "organization": "n8n",
+    "classifications": [
+      "Adjacent competitor",
+      "Substitute workflow"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Workflow automation with AI integrations.",
+    "documented_features": [
+      "workflow",
+      "agents",
+      "deployment"
+    ],
+    "pricing": {
+      "summary": "Cloud subscriptions; Sustainable Use License and separate enterprise code conditions.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
+        "https://n8n.io/pricing/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Cloud subscriptions; Sustainable Use License and separate enterprise code conditions.",
+    "source_ids": [
+      "src-n8n"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T4",
+      "T6"
+    ],
+    "related_issues": [
+      25,
+      26,
+      27,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "skypilot",
+    "name": "SkyPilot",
+    "website": "https://skypilot.co/",
+    "organization": "SkyPilot",
+    "classifications": [
+      "Substitute workflow",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Manage and execute AI compute across infrastructure providers.",
+    "documented_features": [
+      "hosting",
+      "deployment",
+      "export"
+    ],
+    "pricing": {
+      "summary": "Open-source and commercial platform surfaces; cloud bills remain separate.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://docs.skypilot.ai/en/latest/docs/index.html"
+      ]
+    },
+    "deployment_support": "Vendor documentation: launches and manages AI compute across infrastructure providers; capacity is not guaranteed.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Open-source and commercial platform surfaces; cloud bills remain separate.",
+    "source_ids": [
+      "src-skypilot"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T2",
+      "T5",
+      "T6"
+    ],
+    "related_issues": [
+      9,
+      10,
+      11,
+      33,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "bentoml",
+    "name": "BentoML / Bento",
+    "website": "https://www.bentoml.com/",
+    "organization": "BentoML",
+    "classifications": [
+      "Substitute workflow",
+      "Infrastructure provider"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Model inference deployment and scaling.",
+    "documented_features": [
+      "deployment",
+      "hosting"
+    ],
+    "pricing": {
+      "summary": "Commercial inference platform with source ecosystem; precise terms unverified.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.bentoml.com/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Commercial inference platform with source ecosystem; precise terms unverified.",
+    "source_ids": [
+      "src-bentoml"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T2",
+      "T6"
+    ],
+    "related_issues": [
+      9,
+      10,
+      11,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "langfuse",
+    "name": "Langfuse",
+    "website": "https://langfuse.com/",
+    "organization": "Langfuse",
+    "classifications": [
+      "Adjacent competitor",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Agent evaluation and observability.",
+    "documented_features": [
+      "evaluation",
+      "monitoring"
+    ],
+    "pricing": {
+      "summary": "Hosted and self-hosted offerings; detailed edition terms require review.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://langfuse.com/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Hosted and self-hosted offerings; detailed edition terms require review.",
+    "source_ids": [
+      "src-langfuse"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T6"
+    ],
+    "related_issues": [
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "ragas",
+    "name": "Ragas",
+    "website": "https://docs.ragas.io/en/stable/",
+    "organization": "Ragas maintainers",
+    "classifications": [
+      "Benchmark provider",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Evaluation tooling for LLM and RAG applications.",
+    "documented_features": [
+      "evaluation",
+      "rag"
+    ],
+    "pricing": {
+      "summary": "Documentation accessible; exact release and dataset licenses not validated.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://docs.ragas.io/en/stable/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Documentation accessible; exact release and dataset licenses not validated.",
+    "source_ids": [
+      "src-ragas"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T3",
+      "T6"
+    ],
+    "related_issues": [
+      16,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "llamaindex",
+    "name": "LlamaIndex",
+    "website": "https://www.llamaindex.ai/",
+    "organization": "LlamaIndex",
+    "classifications": [
+      "Adjacent competitor",
+      "Substitute workflow"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Document-oriented agent workflows and data processing.",
+    "documented_features": [
+      "rag",
+      "agents",
+      "workflow"
+    ],
+    "pricing": {
+      "summary": "Commercial services and framework ecosystem; component-specific terms.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.llamaindex.ai/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Commercial services and framework ecosystem; component-specific terms.",
+    "source_ids": [
+      "src-llamaindex"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T3",
+      "T4"
+    ],
+    "related_issues": [
+      16,
+      25,
+      26,
+      27,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "langchain",
+    "name": "LangChain",
+    "website": "https://www.langchain.com/",
+    "organization": "LangChain",
+    "classifications": [
+      "Adjacent competitor",
+      "Substitute workflow"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Agent development platform and ecosystem.",
+    "documented_features": [
+      "agents",
+      "workflow"
+    ],
+    "pricing": {
+      "summary": "Framework and platform offerings; licensing differs by component.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.langchain.com/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Framework and platform offerings; licensing differs by component.",
+    "source_ids": [
+      "src-langchain"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T4",
+      "T6"
+    ],
+    "related_issues": [
+      25,
+      26,
+      27,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "qdrant-bench",
+    "name": "Qdrant Vector Search Benchmarks",
+    "website": "https://qdrant.tech/benchmarks/",
+    "organization": "Qdrant",
+    "classifications": [
+      "Benchmark provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Vendor-published vector search comparisons.",
+    "documented_features": [
+      "benchmarks"
+    ],
+    "pricing": {
+      "summary": "Vendor evidence; independent reproduction and dataset rights required.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://qdrant.tech/benchmarks/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Vendor evidence; independent reproduction and dataset rights required.",
+    "source_ids": [
+      "src-qdrant-bench"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T3",
+      "T6"
+    ],
+    "related_issues": [
+      16,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "lm-eval",
+    "name": "LM Evaluation Harness",
+    "website": "https://github.com/EleutherAI/lm-evaluation-harness",
+    "organization": "EleutherAI",
+    "classifications": [
+      "Benchmark provider",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Framework for few-shot language-model evaluation.",
+    "documented_features": [
+      "benchmarks",
+      "evaluation"
+    ],
+    "pricing": {
+      "summary": "Source framework; test datasets and model licenses remain separate.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://github.com/EleutherAI/lm-evaluation-harness"
+      ]
+    },
+    "deployment_support": "Open-source framework run by the user (public GitHub repository).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Source framework; test datasets and model licenses remain separate.",
+    "source_ids": [
+      "src-lm-eval"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T6"
+    ],
+    "related_issues": [
+      5,
+      6,
+      7,
+      36,
+      37,
+      39,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "mcp-registry",
+    "name": "Official MCP Registry",
+    "website": "https://github.com/modelcontextprotocol/registry",
+    "organization": "Model Context Protocol maintainers",
+    "classifications": [
+      "Data source",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Community-maintained registry service for MCP server metadata.",
+    "documented_features": [
+      "mcp",
+      "api_access"
+    ],
+    "pricing": {
+      "summary": "Registry listings are not a compatibility or security certification.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://registry.modelcontextprotocol.io/docs"
+      ]
+    },
+    "deployment_support": "Open-source registry service (public GitHub repository).",
+    "apis_and_integrations": "Primary documentation: registry API serving MCP server metadata. Untested.",
+    "licensing": "Registry listings are not a compatibility or security certification.",
+    "source_ids": [
+      "src-mcp-registry"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T4"
+    ],
+    "related_issues": [
+      25,
+      26,
+      27,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  },
+  {
+    "id": "unsloth",
+    "name": "Unsloth",
+    "website": "https://unsloth.ai/",
+    "organization": "Unsloth",
+    "classifications": [
+      "Substitute workflow",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
+    "target_users": "AI developers and technical decision makers",
+    "capabilities": "Local model running and training tools.",
+    "documented_features": [
+      "fine_tuning",
+      "inference_engine"
+    ],
+    "pricing": {
+      "summary": "Reuse PR #46 for framework research; model and software terms separate.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://unsloth.ai/"
+      ]
+    },
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "licensing": "Reuse PR #46 for framework research; model and software terms separate.",
+    "source_ids": [
+      "src-unsloth"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T2",
+      "T5"
+    ],
+    "related_issues": [
+      9,
+      10,
+      11,
+      33,
+      41
+    ],
+    "limitations": [
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+    ]
+  }
+]
