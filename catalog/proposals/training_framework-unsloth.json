@@ -36,32 +36,32 @@
     {
       "source_uri": "https://pypi.org/project/unsloth/2026.10.6/",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "PyPI release 2026.10.6 uploaded 2026-10-15."
+      "verification_status": "unverified",
+      "notes": "PyPI release 2026.10.6 uploaded 2026-10-15. Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://github.com/unslothai/unsloth/blob/main/README.md",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Methods, hardware (NVIDIA, AMD, Intel, Apple MLX) and dual licence (Apache-2.0 core, AGPL-3.0 optional components)."
+      "verification_status": "unverified",
+      "notes": "Methods, hardware (NVIDIA, AMD, Intel, Apple MLX) and dual licence (Apache-2.0 core, AGPL-3.0 optional components). Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://unsloth.ai/docs/basics/inference-and-deployment/saving-to-gguf",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "save_pretrained_merged and save_pretrained_gguf."
+      "verification_status": "unverified",
+      "notes": "save_pretrained_merged and save_pretrained_gguf. Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://unsloth.ai/docs/get-started/fine-tuning-for-beginners/unsloth-requirements",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Hardware requirements; CPU limited to non-training recipes."
+      "verification_status": "unverified",
+      "notes": "Hardware requirements; CPU limited to non-training recipes. Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://github.com/unslothai/unsloth/releases/tag/v0.1.908-beta",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Release notes adding DeepSpeed ZeRO-2/3 multi-GPU."
+      "verification_status": "unverified",
+      "notes": "Release notes adding DeepSpeed ZeRO-2/3 multi-GPU. Source checked on the access date; not independently reproduced."
     }
   ],
   "license": {

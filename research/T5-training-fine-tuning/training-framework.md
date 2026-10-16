@@ -93,6 +93,8 @@ The issue lists `supported models`, `input data format` and `export path`. v1 ha
 
 All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Version and release dates come from the GitHub Releases API, the PyPI JSON API and the license files fetched on that date.
 
+Claims whose cited primary text was retrieved were source checked on the recorded access date; the limitations below remain unconfirmed. None of these claims is independently verified. The four CatalogItem proposals therefore carry `verification_status: unverified` for every provenance entry.
+
 The fetch work was split across three parallel research passes. Claims not retrieved directly from the page are marked in the Limitations column.
 
 ### Self-hosted frameworks (F)
@@ -213,7 +215,8 @@ The fetch work was split across three parallel research passes. Claims not retri
 
 These rules are proposed for review by #40 using the [rule proposal template](../../templates/rule-proposal.md). Each is written against `training_framework` × `model` (#6) × `model_provider` (#5).
 
-- **Verified** means the cited text was read directly and supports the assertion.
+- **Source checked** means the cited primary text was read on its access date and supports the assertion. This follows the interim "checked" definition in the owner's adopted #41 policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)). A rule may pass on source-checked evidence, and its result carries "unverified".
+- **Verified** is not claimed for any rule here. It would mean independently reproduced (a second source or a reproducible test). No such evidence exists yet.
 - **Hypothesis** means the assertion needs a definition, a re-fetch, or a contract field that does not exist yet.
 
 When a required license or method fact is missing, the outcome is `unknown` with severity `warning`. The rule must not default to pass.
@@ -222,34 +225,34 @@ When a required license or method fact is missing, the outcome is `unknown` with
 
 | Rule | Participating fields | Assertion | Outcome / severity | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| F-01 | `model.license`, `training_framework.spec.methods` | License ∈ {Apache-2.0, MIT, OpenMDW-1.1} permits every method; redistribution keeps the license and notices | pass / info | L4, L7, L14–L18, L20, L21 | verified |
-| F-02 | `model.license`, selection distributes a derivative | Llama 4 Community License: a distributed derivative must show "Built with Llama" and its name must begin with "Llama" | pass / warning | L1 §1.b.i | verified |
-| F-03 | `model.license`, user residency, `model` modality | Llama 4 multimodal model and an EU-domiciled licensee: the license grant does not apply (end users are exempt) | fail / error | L2 | verified; residency field needed from #2/#3 |
-| F-04 | `model.license`, organisation MAU | Llama 4 and over 700M MAU on the release date: a separate Meta license is required | fail / error | L1 §2 | verified; MAU is a user attestation, not a catalog fact |
-| F-05 | teacher `model.license`, `methods` contains `distillation` | Llama teacher and a distributed student: the student must carry the "Llama" name prefix | pass / warning | L1 §1.b.i | verified |
-| F-06 | `model.license` = Muse Model License | Every method allowed; the derivative carries "Built with Muse Spark Open" and the Usage Policy | pass / warning | L3 | verified |
-| F-07 | `model.license` ∈ {Muse, Qwen3.8-Max, Kimi K3}, Model-as-a-Service use, revenue | Serving as a Model as a Service above the stated revenue threshold ($20M / $50M / $20M in 12 months) needs a separate agreement | fail / error | L3, L13, L19 | verified; revenue is a user attestation |
-| F-08 | `model.license` = Gemma Terms (Gemma ≤3), `distillation` | A distilled student is a Model Derivative and inherits the Gemma Terms and Prohibited Use Policy | pass / warning | L5 §1.1(e), §3.1 | verified |
-| F-09 | `model.license` = Mistral Modified MIT, organisation revenue | Company monthly revenue over $20M: no rights to the model or its derivatives | fail / error | L9, L10 §2 | verified |
-| F-10 | `model.license` ∈ {MNPL-0.1, CC-BY-NC-4.0}, production deployment | Fine-tuning is allowed for non-production or non-commercial use only | fail / error when production | L11, L22 | verified |
-| F-11 | `model.license` = Qwen Community License 1.0, commercial MaaS or assistant use | Commercial Model-as-a-Service or "AI Work Assistant" use requires a separate license, with no revenue floor | fail / error | L12 §2 | verified |
-| F-12 | `model.license` = GLM-5.3 License, MaaS revenue over $10B | Z.AI security review is required | unknown / warning | L20 §2 | verified |
+| F-01 | `model.license`, `training_framework.spec.methods` | License ∈ {Apache-2.0, MIT, OpenMDW-1.1} permits every method; redistribution keeps the license and notices | pass / info | L4, L7, L14–L18, L20, L21 | source checked |
+| F-02 | `model.license`, selection distributes a derivative | Llama 4 Community License: a distributed derivative must show "Built with Llama" and its name must begin with "Llama" | pass / warning | L1 §1.b.i | source checked |
+| F-03 | `model.license`, user residency, `model` modality | Llama 4 multimodal model and an EU-domiciled licensee: the license grant does not apply (end users are exempt) | fail / error | L2 | source checked; residency field needed from #2/#3 |
+| F-04 | `model.license`, organisation MAU | Llama 4 and over 700M MAU on the release date: a separate Meta license is required | fail / error | L1 §2 | source checked; MAU is a user attestation, not a catalog fact |
+| F-05 | teacher `model.license`, `methods` contains `distillation` | Llama teacher and a distributed student: the student must carry the "Llama" name prefix | pass / warning | L1 §1.b.i | source checked |
+| F-06 | `model.license` = Muse Model License | Every method allowed; the derivative carries "Built with Muse Spark Open" and the Usage Policy | pass / warning | L3 | source checked |
+| F-07 | `model.license` ∈ {Muse, Qwen3.8-Max, Kimi K3}, Model-as-a-Service use, revenue | Serving as a Model as a Service above the stated revenue threshold ($20M / $50M / $20M in 12 months) needs a separate agreement | fail / error | L3, L13, L19 | source checked; revenue is a user attestation |
+| F-08 | `model.license` = Gemma Terms (Gemma ≤3), `distillation` | A distilled student is a Model Derivative and inherits the Gemma Terms and Prohibited Use Policy | pass / warning | L5 §1.1(e), §3.1 | source checked |
+| F-09 | `model.license` = Mistral Modified MIT, organisation revenue | Company monthly revenue over $20M: no rights to the model or its derivatives | fail / error | L9, L10 §2 | source checked |
+| F-10 | `model.license` ∈ {MNPL-0.1, CC-BY-NC-4.0}, production deployment | Fine-tuning is allowed for non-production or non-commercial use only | fail / error when production | L11, L22 | source checked |
+| F-11 | `model.license` = Qwen Community License 1.0, commercial MaaS or assistant use | Commercial Model-as-a-Service or "AI Work Assistant" use requires a separate license, with no revenue floor | fail / error | L12 §2 | source checked |
+| F-12 | `model.license` = GLM-5.3 License, MaaS revenue over $10B | Z.AI security review is required | unknown / warning | L20 §2 | source checked |
 | F-13 | `model.license` = null or unrecognised | No permission determination is possible | unknown / warning | — | policy proposal |
 
 ### Provider and access rules
 
 | Rule | Participating fields | Assertion | Outcome / severity | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| F-14 | `model.weights_available` = false (API-only), self-hosted framework selected | A self-hosted framework cannot customise an API-only model | fail / error | L24, L25, L34 | verified; the weight-access field name depends on #6 |
-| F-15 | API-only base model, required artifact = downloadable weights | Customised API models are hosted only; no weights are retrievable | fail / error | L24, L34, M13 | verified |
-| F-16 | teacher = OpenAI / Gemini / Anthropic / Cohere API, `distillation` or synthetic-data training, student competes with provider | Provider terms prohibit using outputs to train competing models. OpenAI API exception: fine-tuning OpenAI's own models, and classifiers/embeddings that are not distributed (L35) | fail / error (pass / info when the OpenAI exception applies) | L23, L35, L24, L25 D.4, L34 | verified clauses; "competing" remains undefined (see F-17) |
+| F-14 | `model.weights_available` = false (API-only), self-hosted framework selected | A self-hosted framework cannot customise an API-only model | fail / error | L24, L25, L34 | source checked; the weight-access field name depends on #6 |
+| F-15 | API-only base model, required artifact = downloadable weights | Customised API models are hosted only; no weights are retrievable | fail / error | L24, L34, M13 | source checked |
+| F-16 | teacher = OpenAI / Gemini / Anthropic / Cohere API, `distillation` or synthetic-data training, student competes with provider | Provider terms prohibit using outputs to train competing models. OpenAI API exception: fine-tuning OpenAI's own models, and classifiers/embeddings that are not distributed (L35) | fail / error (pass / info when the OpenAI exception applies) | L23, L35, L24, L25 D.4, L34 | source-checked clauses; "competing" remains undefined (see F-17) |
 | F-17 | same as F-16 with a student that is not clearly competing | No provider defines "competing" | unknown / warning | L23–L25, L34, L35 | hypothesis: needs a policy decision, not more evidence |
-| F-18 | provider = OpenAI, organisation fine-tuning history, date | New or inactive organisations are blocked now; everyone is blocked from 2027-01-06 | fail / error | M2 | verified; date-dependent, so it must be re-evaluated against the catalog snapshot date |
-| F-19 | provider = Gemini API or AI Studio, any tuning method | Not available; route to Vertex for the listed Gemini models | fail / error, with remediation "Vertex" | L26, M5 | verified |
-| F-20 | provider = Anthropic API or Bedrock, any tuning method on a Claude model | Not available on Anthropic's API. On Bedrock, the only listed Claude model (Claude 3 Haiku) is end-of-life, and Legacy models accept no new fine-tuning jobs | fail / error | L25, L30, M10 | verified |
-| F-21 | provider ∈ {Mistral API, Cohere}, self-serve tuning | Deprecated | fail / warning | M27, L33 | verified |
-| F-22 | framework = torchtune | Not maintained since 2025 | pass / warning (deprecated) | F29, F30 | verified |
-| F-23 | framework method/backend pair | A method is supported only on the backends the framework documents for it (e.g. Axolotl QLoRA unavailable on `metal`) | fail / error | F13 | verified for Axolotl; v1 cannot express per-method backend support |
+| F-18 | provider = OpenAI, organisation fine-tuning history, date | New or inactive organisations are blocked now; everyone is blocked from 2027-01-06 | fail / error | M2 | source checked; date-dependent, so it must be re-evaluated against the catalog snapshot date |
+| F-19 | provider = Gemini API or AI Studio, any tuning method | Not available; route to Vertex for the listed Gemini models | fail / error, with remediation "Vertex" | L26, M5 | source checked |
+| F-20 | provider = Anthropic API or Bedrock, any tuning method on a Claude model | Not available on Anthropic's API. On Bedrock, the only listed Claude model (Claude 3 Haiku) is end-of-life, and Legacy models accept no new fine-tuning jobs | fail / error | L25, L30, M10 | source checked |
+| F-21 | provider ∈ {Mistral API, Cohere}, self-serve tuning | Deprecated | fail / warning | M27, L33 | source checked |
+| F-22 | framework = torchtune | Not maintained since 2025 | pass / warning (deprecated) | F29, F30 | source checked |
+| F-23 | framework method/backend pair | A method is supported only on the backends the framework documents for it (e.g. Axolotl QLoRA unavailable on `metal`) | fail / error | F13 | source checked for Axolotl; v1 cannot express per-method backend support |
 | F-24 | framework license = AGPL-3.0 component used in a hosted product | Network-use source obligations apply (Unsloth Studio only) | pass / warning | F14 | hypothesis: the scope of the AGPL components needs confirming |
 
 ## Pricing and capacity
@@ -296,18 +299,18 @@ Not proposed yet:
 
 | Question | Follow-up issue / owner |
 | --- | --- |
-| Add v1 enum values for `methods` (`grpo`, `ppo`, `kto`, `orpo`, `rft`, `preference_optimization`, `continued_pretraining`, `dora`) and fields for `input_data_formats`, `export_path`, `supported_model_refs` and per-method backend support | #40 · @CompleteDotTech |
-| How should `backends` be represented for managed services where no backend is user-visible? | #40 · @CompleteDotTech |
+| Add v1 enum values for `methods` (`grpo`, `ppo`, `kto`, `orpo`, `rft`, `preference_optimization`, `continued_pretraining`, `dora`) and fields for `input_data_formats`, `export_path`, `supported_model_refs` and per-method backend support | #40 · @tynamite |
+| How should `backends` be represented for managed services where no backend is user-visible? | #40 · @tynamite |
 | #6 must carry per-checkpoint `license`, `weights_available` (gated / open / API-only), and the attribution or naming obligations used by F-01 to F-13 | #6 · @zwright8 |
 | #5 must carry managed fine-tuning availability and lifecycle dates (OpenAI 2027-01-06; Mistral and Cohere deprecated; Gemini API not tunable) | #5 · @zwright8 |
-| Revenue, MAU and residency are user attestations needed by F-03, F-04, F-07 and F-09. Where are they captured? | #2 / #3 · @CompleteDotTech |
-| Policy for "competing model" (F-17): no provider defines it | #40 · @CompleteDotTech |
+| Revenue, MAU and residency are user attestations needed by F-03, F-04, F-07 and F-09. Where are they captured? | #2 / #3 · @tynamite |
+| Policy for "competing model" (F-17): no provider defines it | #40 · @tynamite |
 | Mistral Forge licensing and weight export: not stated publicly; sales-led | #30 · @appletechie |
 | ONNX export support (GGUF is resolved: F34–F38) | #30 · @appletechie; consumed by #33 and #11 |
 | Input data formats per framework and service (see tables) | handoff to #32 · @appletechie |
 | Output artifact formats and portability (adapter vs merged, provider-locked) | handoff to #33 · @appletechie; serving support by #11 · @Mattycodes69 |
 | Distributed training capability and backend list for training sizing | handoff to #31 · @appletechie; accelerator catalog by #10 · @Mattycodes69 |
 | Price units for managed training | handoff to #39 · @PUSHINGSQUARES |
-| Evidence grading of the interim labels used here | #41 · @CompleteDotTech |
+| Evidence grading of the interim labels used here | #41 · @tynamite |
 
 None of the handoffs above is confirmed yet.

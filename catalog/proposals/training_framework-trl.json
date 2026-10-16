@@ -33,32 +33,32 @@
     {
       "source_uri": "https://github.com/huggingface/trl/releases/tag/v1.16.0",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Release v1.16.0 published 2026-10-15."
+      "verification_status": "unverified",
+      "notes": "Release v1.16.0 published 2026-10-15. Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://github.com/huggingface/trl/blob/main/README.md",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Trainers (SFT, DPO, GRPO, Reward, distillation); PEFT integration for LoRA/QLoRA; Accelerate DDP/DeepSpeed multi-node; AWS Trainium support (backend 'other')."
+      "verification_status": "unverified",
+      "notes": "Trainers (SFT, DPO, GRPO, Reward, distillation); PEFT integration for LoRA/QLoRA; Accelerate DDP/DeepSpeed multi-node; AWS Trainium support (backend 'other'). Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://raw.githubusercontent.com/huggingface/trl/main/docs/source/reducing_memory_usage.md",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "CUDA streams and PYTORCH_CUDA_ALLOC_CONF documented (backend 'cuda')."
+      "verification_status": "unverified",
+      "notes": "CUDA streams and PYTORCH_CUDA_ALLOC_CONF documented (backend 'cuda'). Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://raw.githubusercontent.com/huggingface/trl/main/docs/source/distributing_training.md",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Multi-node, DeepSpeed and FSDP documented."
+      "verification_status": "unverified",
+      "notes": "Multi-node, DeepSpeed and FSDP documented. Source checked on the access date; not independently reproduced."
     },
     {
       "source_uri": "https://github.com/huggingface/trl/blob/main/LICENSE",
       "checked_at": "2026-10-16T15:00:00Z",
-      "verification_status": "verified",
-      "notes": "Apache-2.0."
+      "verification_status": "unverified",
+      "notes": "Apache-2.0. Source checked on the access date; not independently reproduced."
     }
   ],
   "license": {
