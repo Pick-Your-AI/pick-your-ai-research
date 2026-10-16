@@ -9,7 +9,7 @@ import subprocess
 import time
 
 
-REPO = "CompleteDotTech/pickyour.ai"
+REPO = "Pick-Your-AI/research"
 WORKSTREAMS = [
     (
         "T0", "Configuration", "CompleteDotTech",
@@ -75,7 +75,7 @@ WORKSTREAMS = [
 
 
 def gh(*args, input_text=None):
-    result = subprocess.run(["gh", *args], input=input_text, text=True, capture_output=True)
+    result = subprocess.run(["gh", *args], input=input_text, text=True, encoding="utf-8", capture_output=True)
     if result.returncode:
         raise RuntimeError(f"gh {' '.join(args[:4])} failed: {result.stderr.strip()}")
     return json.loads(result.stdout) if result.stdout.strip() else None
@@ -100,7 +100,7 @@ def ensure_subissue(parent, child):
     children = gh("api", f"repos/{REPO}/issues/{parent['number']}/sub_issues?per_page=100")
     if any(item["id"] == child["id"] for item in children):
         return
-    gh("api", "-X", "POST", f"repos/{REPO}/issues/{parent['number']}/sub_issues", "-f", f"sub_issue_id={child['id']}")
+    gh("api", "-X", "POST", f"repos/{REPO}/issues/{parent['number']}/sub_issues", "-F", f"sub_issue_id={child['id']}")
     print(f"Linked #{child['number']} under #{parent['number']}", flush=True)
     time.sleep(0.7)
 
