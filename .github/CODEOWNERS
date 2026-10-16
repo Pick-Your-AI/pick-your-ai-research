@@ -1,0 +1,6 @@
+# Default reviewer: organization owner.
+# Per-tier research paths (research/<workstream-slug>/) can be added once the slugs
+# are confirmed, mapping each to the tier owner on the parent issue.
+*                      @CompleteDotTech
+/contracts/            @CompleteDotTech
+/schemas/              @CompleteDotTech
