@@ -105,7 +105,7 @@ These cover the CatalogItem envelope plus `spec_fine_tuned_model`. The issue's c
 | --- | --- | --- | --- | --- |
 | Llama 4 Community | Name must begin with "Llama"; display "Built with Llama" | Copy of the agreement plus the Meta notice | Yes (Acceptable Use Policy); >700M MAU needs a separate licence | G6, #30 L1 |
 | Gemma Terms (Gemma 1–3n) | — | Copy of the agreement; "prominent notices" on modified files; Gemma notice | Yes: §3.2 restrictions must be an enforceable provision downstream | G7, #30 L5 |
-| Gemma 4 / Apache-2.0 | — | §4(a) licence copy; §4(b) change notices; §4(c) keep notices; §4(d) carry NOTICE | No | G8, #30 L7 |
+| Gemma 4 / Apache-2.0 | — | §4(a) licence copy for every recipient; §4(b) change notices on modified files; §4(c) keep copyright, patent, trademark and attribution notices in the Source form of distributed Derivative Works; §4(d) carry the applicable NOTICE attributions only if the base distribution includes a NOTICE file (A-18a to A-18c) | No | G8, #30 L7 |
 | MIT | — | Copyright and permission notice | No | #30 L15, L18 |
 | CC BY-NC 4.0 (base or dataset) | Attribution | — | Yes: non-commercial only | G9, #32 R16 |
 | CC BY-SA (dataset) | Attribution | — | Creative Commons' guidance says publicly shared models "based on" SA content would need the same licence; whether this reaches weights is legally unsettled | #32 R16 |
@@ -147,7 +147,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | G5 | OpenSSF, https://github.com/sigstore/model-transparency ; https://pypi.org/project/model-signing/ | 2026-10-16 | 1.1.1 (2025-10-10) | Primary documentation | — |
 | G6 | Meta, https://dev.meta.ai/llama/llama4/license/ | 2026-10-16 | effective 2025-04-05 | Primary documentation | Acceptable Use Policy text not re-fetched here (#30 L2) |
 | G7 | Google, https://ai.google.dev/gemma/terms | 2026-10-16 | modified 2026-04-01 | Primary documentation | Gemma 1–3n only |
-| G8 | Apache Software Foundation, https://www.apache.org/licenses/LICENSE-2.0 ; Google, https://ai.google.dev/gemma/apache_2 | 2026-10-16 | 2.0 | Primary documentation | — |
+| G8 | Apache Software Foundation, https://www.apache.org/licenses/LICENSE-2.0 ; Google, https://ai.google.dev/gemma/apache_2 | 2026-10-16 | 2.0 | Primary documentation | Section 4(a)–(d) conditions re-read for A-18a to A-18c. The Google page was not re-fetched for that correction. Section 4(c) is not encoded as a rule |
 | G9 | Creative Commons, https://creativecommons.org/licenses/by-nc/4.0/legalcode.en | 2026-10-16 | 4.0 | Primary documentation | — |
 | G10 | OpenMDW, https://raw.githubusercontent.com/OpenMDW/OpenMDW/refs/heads/main/1.1/LICENSE.OpenMDW-1.1 | 2026-10-16 | 1.1 | Primary documentation | Derivatives not mentioned explicitly |
 
@@ -172,27 +172,31 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 
 When an artifact field is missing, the rule returns `unknown`, never `pass`.
 
+"Source checked" in the Status column means the cited primary text was read on its access date and supports the assertion. It follows the interim "checked" definition in the owner's adopted #41 policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)). Nothing here is independently verified (reproduced or confirmed by a second source), and a result that passes on checked evidence stays unverified. Licence rules state a document's conditions; whether they apply to a particular artifact is a legal question this note does not decide.
+
 | Rule | Participating fields | Assertion | Outcome / severity | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| A-01 | `adapter_only` = true, `inference_engine` = Ollama ≥0.34.1 | Adapters rejected; merge or convert to a full model first | fail / error | V7 | verified |
-| A-02 | `adapter.peft_variant` = dora, engine ∈ {vLLM, SGLang} | DoRA adapters rejected; merge first | fail / error | V1, V3 | verified |
-| A-03 | `added_tokens` = true or `modules_to_save` includes `embed_tokens` / `lm_head`, `adapter_only` = true | Adapter serving fails on SGLang, the llama.cpp converter, Fireworks and vLLM; serve merged weights | fail / error | V1, V3, V6, V13 | verified |
-| A-04 | `adapter.rank` > engine or provider max | Rejected (Fireworks r ∉ 4–64; vLLM above `max_lora_rank`, configurable) | fail / error (warning on vLLM: raise the limit) | V1, V13 | verified |
-| A-05 | adapter base id / revision ≠ served base | Lineage mismatch | fail / error | G2, V12 | verified (extends `rule.training.base.lineage` to revision) |
-| A-06 | `base_quantization` ∈ {nf4, int8}, merge into the quantised base | Rounding deviations expected; merge into the 16-bit base instead | pass / warning | V11 | verified warning; "merge into 16-bit" is an inference (no PEFT doc states it positively) |
-| A-07 | provider = Fireworks, deployment shape FP8/FP4, multi-LoRA | Add-ons unavailable; use BF16 or live merge | fail / error | V13 | verified |
-| A-08 | provider ∈ {Together, Fireworks}, `adapter_only` = true | No serverless serving; dedicated or on-demand cost applies | pass / warning (cost) | V12, V13 | verified |
-| A-09 | `artifact_format` = gguf, engine = vLLM | Experimental support | pass / warning | V2 | verified |
-| A-10 | engine = TGI | Maintenance mode, archived | pass / warning (deprecated) | V4 | verified |
-| A-11 | `supported_access_modes` = [`api`] and the build needs self-hosting or portability | Provider-locked artifact cannot move | fail / error | V14–V17 | verified |
-| A-12 | provider = OpenAI fine-tune, base model deprecation date | Fine-tune shuts down with its base | pass / warning (lifecycle) | V17 | verified |
+| A-01 | `adapter_only` = true, `inference_engine` = Ollama ≥0.34.1 | Adapters rejected; merge or convert to a full model first | fail / error | V7 | source checked |
+| A-02 | `adapter.peft_variant` = dora, engine ∈ {vLLM, SGLang} | DoRA adapters rejected; merge first | fail / error | V1, V3 | source checked |
+| A-03 | `added_tokens` = true or `modules_to_save` includes `embed_tokens` / `lm_head`, `adapter_only` = true | Adapter serving fails on SGLang, the llama.cpp converter, Fireworks and vLLM; serve merged weights | fail / error | V1, V3, V6, V13 | source checked |
+| A-04 | `adapter.rank` > engine or provider max | Rejected (Fireworks r ∉ 4–64; vLLM above `max_lora_rank`, configurable) | fail / error (warning on vLLM: raise the limit) | V1, V13 | source checked |
+| A-05 | adapter base id / revision ≠ served base | Lineage mismatch | fail / error | G2, V12 | source checked (extends `rule.training.base.lineage` to revision) |
+| A-06 | `base_quantization` ∈ {nf4, int8}, merge into the quantised base | Rounding deviations expected; merge into the 16-bit base instead | pass / warning | V11 | source checked warning; "merge into 16-bit" is an inference (no PEFT doc states it positively) |
+| A-07 | provider = Fireworks, deployment shape FP8/FP4, multi-LoRA | Add-ons unavailable; use BF16 or live merge | fail / error | V13 | source checked |
+| A-08 | provider ∈ {Together, Fireworks}, `adapter_only` = true | No serverless serving; dedicated or on-demand cost applies | pass / warning (cost) | V12, V13 | source checked |
+| A-09 | `artifact_format` = gguf, engine = vLLM | Experimental support | pass / warning | V2 | source checked |
+| A-10 | engine = TGI | Maintenance mode, archived | pass / warning (deprecated) | V4 | source checked |
+| A-11 | `supported_access_modes` = [`api`] and the build needs self-hosting or portability | Provider-locked artifact cannot move | fail / error | V14–V17 | source checked |
+| A-12 | provider = OpenAI fine-tune, base model deprecation date | Fine-tune shuts down with its base | pass / warning (lifecycle) | V17 | source checked |
 | A-13 | provider = Foundry, no calls for 15 days | Deployment auto-deleted; model kept | pass / info | V16 | partial: classic-FAQ wording |
-| A-14 | Bedrock Custom Model Import, architecture not listed or size/context limits exceeded | Import unsupported | fail / error | V15 | verified |
-| A-15 | `base_model_revision` is a branch, tag or short hash | Lineage not immutable | fail / error | G3 | verified (needs the proposed field) |
-| A-16 | base licence = Llama 4, distributed, name lacks the "Llama" prefix or "Built with Llama" is missing | Licence condition unmet | fail / error | G6 | verified |
-| A-17 | base licence = Gemma Terms (≤3n), distributed, downstream terms lack the §3.2 restrictions | Licence condition unmet | fail / error | G7 | verified |
-| A-18 | base licence = Apache-2.0, distributed, NOTICE or change notice missing | Licence condition unmet | fail / error | G8 | verified |
-| A-19 | base or any training-data licence = CC BY-NC, commercial use | Non-commercial restriction carries | fail / error | G9, #32 R16 | verified |
+| A-14 | Bedrock Custom Model Import, architecture not listed or size/context limits exceeded | Import unsupported | fail / error | V15 | source checked |
+| A-15 | `base_model_revision` is a branch, tag or short hash | Lineage not immutable | fail / error | G3 | source checked (needs the proposed field) |
+| A-16 | base licence = Llama 4, distributed, name lacks the "Llama" prefix or "Built with Llama" is missing | Licence condition unmet | fail / error | G6 | source checked |
+| A-17 | base licence = Gemma Terms (≤3n), distributed, downstream terms lack the §3.2 restrictions | Licence condition unmet | fail / error | G7 | source checked |
+| A-18a | established distribution of the Apache-2.0 Work or a Derivative Work; licence copy absent | Section 4(a): recipients of the Work or a Derivative Work must receive a copy of the licence | fail / error when applicable and missing; unknown / warning when applicability is unresolved; skipped / info when known not applicable | G8 | source checked; classification is not inferred from artifact format |
+| A-18b | established distribution of modified files of the Apache-2.0 Work; prominent change notices absent | Section 4(b): modified files must carry prominent notices stating that they were changed | fail / error when applicable and missing; skipped / info when no modified files are distributed; unknown / warning when modification or legal applicability is unresolved | G8 | source checked; neither modified-file status nor exemption follows from `adapter_only` |
+| A-18c | established distribution of an Apache-2.0 Derivative Work; the pinned base distribution includes a NOTICE file; applicable attribution notices absent | Section 4(d): preserve a readable copy of applicable NOTICE attributions in one of the permitted locations, excluding notices that do not pertain to the Derivative Work | fail / error when applicable and missing; skipped / info when known not applicable or the base includes no NOTICE; unknown / warning when applicability or base NOTICE presence is unresolved | G8 | source checked; needs the proposed `base_notice_file_present` fact |
+| A-19 | base or any training-data licence = CC BY-NC, commercial use | Non-commercial restriction carries | fail / error | G9, #32 R16 | source checked |
 | A-20 | `evaluation_report_ref` missing, or safety gate not passed (see handoff to #36) | Not deployable | unknown / error | Q1, Q3 | policy proposal for #36 |
 
 ## Pricing and capacity
@@ -239,8 +243,8 @@ No CatalogItem proposals. A `fine_tuned_model` is specific to the user and produ
 | VRAM for adapters (per loaded adapter) and merged models | #10 · @Mattycodes69 |
 | Evaluation gate: safety regression vs base, capability retention, task gain, training-data harm screen; thresholds and suites (HarmBench, AILuminate, lm-evaluation-harness) | #36 · @PUSHINGSQUARES |
 | Fine-tune serving and hosting costs next to training cost | #39 · @PUSHINGSQUARES |
-| Proposed fields: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature`; revision-pinned catalog references | #40 · @CompleteDotTech |
-| Base-model licence, revision and provider fine-tuning lifecycle facts | #6, #5 · @zwright8 |
+| Proposed fields: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature`, `base_notice_file_present` (needed by A-18c); revision-pinned catalog references | #40 · @tynamite |
+| Base-model licence, revision, whether the base distribution at that revision includes a NOTICE file, and provider fine-tuning lifecycle facts | #6, #5 · @zwright8 |
 | Deployment-time handling of lifecycle (OpenAI shutdown with base; Foundry 15-day deletion) | #37 · @PUSHINGSQUARES |
 | Unknowns: vLLM/SGLang LoRA on GGUF bases; SGLang on quantised bases; TGI and llama.cpp LoRA limits; Vertex PEFT_ADAPTER output form; Bedrock import of adapters; Fireworks retention; tuned-Gemini lifecycle on base deprecation | #33 · @appletechie |
 
