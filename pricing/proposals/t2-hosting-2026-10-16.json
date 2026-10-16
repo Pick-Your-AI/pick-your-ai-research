@@ -69,7 +69,7 @@
       },
       "conditions": [
         "Standard storage class; location-neutral published list rate; exact bucket location not asserted.",
-        "Apply monthly 10 GB-month free allowance once per eligible billing scope; storage uses daily peaks averaged over billing period and rounds up to billing units.",
+        "Apply monthly 10 GB-month free allowance once per eligible billing scope; the documented GB-month metric averages daily peak storage over a 30-day billing period and rounds up to billing units.",
         "Requests are separate classified meters; Internet egress is free for R2 itself; other services or source transfer can charge."
       ],
       "price_type": "list"
