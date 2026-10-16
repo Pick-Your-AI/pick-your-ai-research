@@ -43,7 +43,7 @@ To acknowledge, the owner should link the PR/commit and specify **accept**, **ac
 
 ## Related existing work
 
-[PR #68](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/68) contains T5 framework research and an output-artifact handoff to #33/#11; its note was read as an unmerged proposal, not promoted as authoritative vendor evidence. PR #46 is closed without merge. PR #67 market research remains open. Both active PRs still target the contract branch at intake; their maintainers own any retargeting.
+[PR #68](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/68) contains T5 framework research and an output-artifact handoff to #33/#11; its note was read as an unmerged proposal, not promoted as authoritative vendor evidence. PR #46 is closed without merge. The continuation check confirms #68 now targets `main`, while open [PR #67](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67) still targets `research-contract-v1`; their maintainers own retargeting. Related agent/MCP/memory PRs #69/#71/#72 contain proposed consumer requirements, with no submitted reviews or T2 handoff acknowledgements at this check. Their authors and proposal text do not replace live issue assignees or confirm acceptance.
 
 The canonical baseline comes from merged [PR #44](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44) and current `main`, not stale issue appendices. Scoped #8–#11 appendices were corrected without changing acceptance criteria, assignees, labels, or native relationships.
 
