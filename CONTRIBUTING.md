@@ -26,7 +26,7 @@ GitHub **Assignees** are the source of truth for ownership. Do not duplicate own
 
 | Workstream | Owner |
 | --- | --- |
-| T0 Configuration | @CompleteDotTech |
+| T0 Configuration | @tynamite |
 | T1 Model Selection | @zwright8 |
 | T2 Infrastructure | @Mattycodes69 |
 | T3 Knowledge & Retrieval (optional) | @zabyxc01 |
@@ -65,22 +65,26 @@ Add a topic label only when it is a primary concern of the issue, not because th
 
 | Field | Values | Rule |
 | --- | --- | --- |
-| Status | Todo · In Progress · In Review · Done | Set from evidence. *In Progress* when research is actively under way; *In Review* when a draft decision record PR is open; *Done* only when the PR is merged and acceptance criteria are met. Closing an issue moves it to Done automatically. |
-| Priority | P0 · P1 · P2 | Sequencing, see below |
-| Workstream | T0–T6 | Matches the parent issue |
-| Readiness | Ready · Needs input · Blocked · Awaiting decision | See below |
+| Status | Backlog · Ready · In Progress · In Review · Blocked · Done | Set from evidence. *Backlog* when not yet prepared or started; *Ready* when qualified and actionable but not started; *In Progress* when research is actively under way (including a draft PR); *In Review* when a decision record PR is open for owner / handoff review; *Blocked* when a real constraint prevents execution; *Done* only when the PR is merged and acceptance criteria are met. A merged partial contribution does not make an issue Done. |
+| Priority | Critical · High · Medium · Low | Sequencing, see below |
+| Tier | T0 Configuration … T6 Deployment & Operations | Matches the parent issue; T3–T5 option names include "(optional)" |
+| Readiness | Ready · Needs input · Blocked · Awaiting decision | See below; independent of Status |
+| Work Type | Epic · Research · Specification · Dataset · Validation | Epic for T0–T6 parents |
+| Research Confidence | Unverified · Low · Medium · High | Unverified until evidence has been reviewed |
+| Dependency Status | Unblocked · Waiting · Blocked | Mirrors native "blocked by" relationships |
 
-Built-in fields (Assignees, Labels, Parent issue, Sub-issues progress) are used as-is. No dates, estimates, or iterations are tracked; do not invent them.
+Built-in fields (Assignees, Labels, Parent issue, Sub-issues progress) are used as-is. Assignees are the source of truth for ownership. No dates, estimates, or iterations are tracked; do not invent them. Use the live field and option IDs from the Project, not names from older documents.
 
 ### Priority criteria
 
 Priority expresses **research sequencing**, not product importance.
 
-- **P0, foundation:** core build path (T0–T2) whose outputs most other issues consume: workload, deployment mode, component schema and rules, model and provider catalogs, GPU sizing, inference engines.
-- **P1, core:** needed for a complete core build summary and consumes P0 outputs: context window, hosting, catalog data sources, saved builds, guardrails, evaluation, deployment, cost estimate.
-- **P2, later:** optional capabilities (T3–T5) and operational depth (monitoring), sequenced after the core path.
+- **Critical, foundation:** core build path (T0–T2) whose outputs most other issues consume: workload, deployment mode, component schema and rules, model and provider catalogs, GPU sizing, inference engines.
+- **High, core:** needed for a complete core build summary and consumes Critical outputs: context window, hosting, catalog data sources, saved builds, guardrails, evaluation, deployment, cost estimate.
+- **Medium, later:** optional capabilities (T3–T5) and operational depth (monitoring), sequenced after the core path.
+- **Low:** lower-impact or nice-to-have research.
 
-Optional capabilities are P2 because they depend on core outputs, not because they matter less. If the product direction makes an optional capability part of the first release, raise its priority and record why in the issue.
+Optional capabilities are Medium because they depend on core outputs, not because they matter less. If the product direction makes an optional capability part of the first release, raise its priority and record why in the issue.
 
 ### Readiness criteria
 

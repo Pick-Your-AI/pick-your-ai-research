@@ -1,0 +1,57 @@
+[
+  {
+    "id": "bounded-hybrid",
+    "validation_rank": 1,
+    "hypothesis": "Versioned local-versus-API decision with explicit assumptions",
+    "counterexamples": [
+      "llmfit",
+      "modelfit",
+      "openrouter"
+    ],
+    "validation_question": "Would users repeatedly choose this over existing tools?",
+    "confidence": "Low",
+    "status": "Hypothesis; no implementation approval",
+    "issue": 58
+  },
+  {
+    "id": "evidence-collaboration",
+    "validation_rank": 2,
+    "hypothesis": "Shared configurations with source changes and review history",
+    "counterexamples": [
+      "models-dev",
+      "skypilot"
+    ],
+    "validation_question": "Does a team buy the shared artifact rather than maintain documents?",
+    "confidence": "Low",
+    "status": "Hypothesis; no implementation approval",
+    "issue": 58
+  },
+  {
+    "id": "rag-compatibility",
+    "validation_rank": 3,
+    "hypothesis": "Explain retrieval and agent integration constraints",
+    "counterexamples": [
+      "dify",
+      "langflow",
+      "flowise"
+    ],
+    "validation_question": "Can a narrow combination matrix stay correct economically?",
+    "confidence": "Low",
+    "status": "Hypothesis; no implementation approval",
+    "issue": 58
+  },
+  {
+    "id": "full-stack",
+    "validation_rank": 4,
+    "hypothesis": "Complete T0–T6 planning",
+    "counterexamples": [
+      "flocci",
+      "n8n",
+      "skypilot"
+    ],
+    "validation_question": "Is broader coverage more valuable than reliable narrow coverage?",
+    "confidence": "Low",
+    "status": "Hypothesis; no implementation approval",
+    "issue": 58
+  }
+]

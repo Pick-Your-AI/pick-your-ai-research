@@ -1,0 +1,401 @@
+{
+  "kind": "research-note-snapshot-not-contract-artifact",
+  "observed_on": "2026-10-16",
+  "observed_at_utc": "2026-10-16T13:42:46.1295173Z",
+  "publisher": "GitHub / Pick-Your-AI",
+  "source": "https://github.com/Pick-Your-AI/pick-your-ai-research",
+  "evidence_class": "observed repository metadata",
+  "confidence": "High for observed metadata only",
+  "limitations": "Snapshot, not research acceptance; Project #2 fields unavailable because CLI token lacks read:project. Historical project-configuration.json is not live readback.",
+  "reuse": "Sanitized issue/PR metadata with links; no dataset or model artifacts",
+  "issues": [
+    {
+      "number": 7,
+      "title": "T1: Context Window",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "zwright8"
+          }
+        ]
+      },
+      "parent": {
+        "number": 4
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 10,
+      "title": "T2: GPU / Compute",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "Mattycodes69"
+          }
+        ]
+      },
+      "parent": {
+        "number": 8
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 11,
+      "title": "T2: Inference Engine",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "Mattycodes69"
+          }
+        ]
+      },
+      "parent": {
+        "number": 8
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 16,
+      "title": "T3: RAG & Retrieval Backends",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "zabyxc01"
+          }
+        ]
+      },
+      "parent": {
+        "number": 12
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 25,
+      "title": "T4: Agent Framework",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "CompleteDotTech"
+          }
+        ]
+      },
+      "parent": {
+        "number": 24
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 27,
+      "title": "T4: MCP Servers",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "CompleteDotTech"
+          }
+        ]
+      },
+      "parent": {
+        "number": 24
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 33,
+      "title": "T5: Fine-Tuned Model",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "appletechie"
+          }
+        ]
+      },
+      "parent": {
+        "number": 29
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 36,
+      "title": "T6: Evaluation",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "PUSHINGSQUARES"
+          }
+        ]
+      },
+      "parent": {
+        "number": 34
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 39,
+      "title": "T6: Cost Estimate",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "PUSHINGSQUARES"
+          }
+        ]
+      },
+      "parent": {
+        "number": 34
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 40,
+      "title": "T0: Component Schema & Compatibility Rules",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "tynamite"
+          }
+        ]
+      },
+      "parent": {
+        "number": 1
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 56,
+      "title": "MR-09 — Technical Feasibility",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "Mattycodes69"
+          }
+        ]
+      },
+      "parent": {
+        "number": 47
+      },
+      "subIssues": {
+        "nodes": [
+          {
+            "number": 61,
+            "state": "OPEN"
+          },
+          {
+            "number": 62,
+            "state": "OPEN"
+          },
+          {
+            "number": 65,
+            "state": "OPEN"
+          }
+        ]
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 58,
+      "title": "MR-11 — MVP Definition & Prioritization",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": []
+      },
+      "parent": {
+        "number": 47
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": [
+          {
+            "number": 66
+          }
+        ]
+      }
+    },
+    {
+      "number": 61,
+      "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "Mattycodes69"
+          }
+        ]
+      },
+      "parent": {
+        "number": 56
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 62,
+      "title": "MR-09: Validate benchmark comparability and harness effects",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "PUSHINGSQUARES"
+          }
+        ]
+      },
+      "parent": {
+        "number": 56
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    },
+    {
+      "number": 65,
+      "title": "MR-09: Review RAG interoperability market claims",
+      "state": "OPEN",
+      "assignees": {
+        "nodes": [
+          {
+            "login": "zabyxc01"
+          }
+        ]
+      },
+      "parent": {
+        "number": 56
+      },
+      "subIssues": {
+        "nodes": []
+      },
+      "blockedBy": {
+        "nodes": []
+      }
+    }
+  ],
+  "criteria": {
+    "56": [
+      "Compare sizing assumptions",
+      "Assess context cache concurrency and multi-GPU limits",
+      "Define falsifiable measurement protocol",
+      "Reuse technical component decisions rather than duplicate them",
+      "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+      "Relevant technical owners review handoffs; unresolved decisions are named.",
+      "Repository checks pass; reviewer accepts the evidence before Done."
+    ],
+    "61": [
+      "Design dense and MoE measurement matrix",
+      "Vary context cache precision and concurrency",
+      "Measure peak allocated and reserved memory",
+      "Report error bounds and failures without universal fit claims",
+      "Deliverable links every significant conclusion to evidence or an explicit hypothesis.",
+      "Relevant technical owners review handoffs; unresolved decisions are named.",
+      "Repository checks pass; reviewer accepts the evidence before Done."
+    ]
+  },
+  "reference_prs": [
+    {
+      "baseRefName": "main",
+      "comments": [],
+      "headRefName": "research/market-intelligence",
+      "headRefOid": "075653aa4c0682c976ea9486d7d549d667118530",
+      "mergedAt": null,
+      "number": 67,
+      "reviews": [],
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    },
+    {
+      "baseRefName": "main",
+      "comments": [
+        {
+          "id": "IC_kwDOVMD-Bs8AAAABcoef_Q",
+          "author": {
+            "login": "Mattycodes69"
+          },
+          "authorAssociation": "MEMBER",
+          "body": "Follow-up source and independent integration audit is included in commits `7e39d0e`, `18ef033`, `c0ccf14`, and `30b9896`.\n\nThe three decision records now preserve storage funding/deletion/concurrent-write and billing conditions, immutable model metadata, AMD GB/GiB and AWS allocation distinctions, current/historical engine support, ROCm-package unknowns and strict tool-schema conditions. Estimator v0.2.0 clarifies reserve/cache-pool accounting and adds merged-only, boundary, unknown and API-only arithmetic examples. All 12 rule groups use fixed-severity clauses separate from outcomes.\n\nIndependent review found two issues (diagnostic wording and COMPUTE-04 passing-example applicability); both are fixed. Python 3.12.14: all 32 baseline tests, 16 catalog/one Pricebook intake, sizing arithmetic, explicit synthetic ResourceEstimate shape, 32 unchanged issue criteria and 116 exact-case local links pass. [Full validation and evidence-review limits](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/30b9896/research/T2-infrastructure/validation.md).\n\nExisting owner review requests remain pending. All 16 required handoffs still need actual owner acknowledgements, and no issue is closed. Project Status should be In Review, but the current token lacks Project scope and the browser is signed out; the administrator action remains documented. Proposed rules/gaps are submitted for #40 review, price conditions for #39, and source/freshness/reuse decisions for #41. No frozen v1 change or runtime compatibility approval is claimed.\n",
+          "createdAt": "2026-10-16T13:23:23Z",
+          "includesCreatedEdit": false,
+          "isMinimized": false,
+          "minimizedReason": "",
+          "reactionGroups": [],
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#issuecomment-6216458237",
+          "viewerDidAuthor": true
+        }
+      ],
+      "headRefName": "codex/t2-infrastructure-research",
+      "headRefOid": "9e66622a4b2698a9305274f05da9c15ae5d90b8c",
+      "mergedAt": null,
+      "number": 75,
+      "reviews": [],
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75"
+    }
+  ]
+}

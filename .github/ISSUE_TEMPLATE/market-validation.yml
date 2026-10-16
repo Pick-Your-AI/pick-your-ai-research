@@ -1,0 +1,47 @@
+name: Market evidence validation
+description: Independently test a material market claim, risk or source conflict.
+title: "MR-XX: Validate "
+labels: ["type: research"]
+body:
+  - type: textarea
+    id: claim
+    attributes:
+      label: User decision, claim and failure consequence
+      description: Link the claim, evidence note and affected decision. Include contradictory evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: protocol
+    attributes:
+      label: Scope, research question and validation protocol
+      description: State inputs, versions, comparison fields, method, falsification criteria and in/out scope. Avoid unapproved costs or personal data collection.
+    validations:
+      required: true
+  - type: input
+    id: output
+    attributes:
+      label: Deliverable path
+      description: Reuse the canonical note where possible; otherwise state a new independently reviewable output.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, native parent and consuming issues
+      description: Distinguish blockers from helpful inputs. Identify specialist reviewer without reassigning existing owners.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Evidence and acceptance criteria
+      description: Required sources, access dates, version/region, confidence, reproducibility, limitations and owner acceptance.
+    validations:
+      required: true
+  - type: textarea
+    id: triage
+    attributes:
+      label: Ownership, priority, readiness and open questions
+      description: Proposed assignee, workstream, six scores or unknown, override reason, next action and phase limit. Project fields must be set before Ready.
+    validations:
+      required: true

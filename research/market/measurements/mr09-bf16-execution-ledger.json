@@ -1,0 +1,93 @@
+[
+  {
+    "Cell": "D1",
+    "Repetition": 3,
+    "PreflightUtc": "2026-10-16T13:53:04.2896822Z",
+    "SmiFreeMiB": 4038,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 256,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D2",
+    "Repetition": 1,
+    "PreflightUtc": "2026-10-16T13:53:24.1090060Z",
+    "SmiFreeMiB": 4034,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 2048,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D2",
+    "Repetition": 2,
+    "PreflightUtc": "2026-10-16T13:53:43.8963742Z",
+    "SmiFreeMiB": 4053,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 2048,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D2",
+    "Repetition": 3,
+    "PreflightUtc": "2026-10-16T13:54:06.1954100Z",
+    "SmiFreeMiB": 3918,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 2048,
+    "ActiveSequences": 1,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D3",
+    "Repetition": 1,
+    "PreflightUtc": "2026-10-16T13:54:27.4426742Z",
+    "SmiFreeMiB": 3953,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 2048,
+    "ActiveSequences": 2,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D3",
+    "Repetition": 2,
+    "PreflightUtc": "2026-10-16T13:54:51.5561843Z",
+    "SmiFreeMiB": 4120,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 2048,
+    "ActiveSequences": 2,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  },
+  {
+    "Cell": "D3",
+    "Repetition": 3,
+    "PreflightUtc": "2026-10-16T13:55:12.7975480Z",
+    "SmiFreeMiB": 4105,
+    "SmiQuery": "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Cache": "bf16",
+    "PromptTokens": 2048,
+    "ActiveSequences": 2,
+    "QueuedRequests": 0,
+    "Status": "success",
+    "ProcessExitCode": 0
+  }
+]

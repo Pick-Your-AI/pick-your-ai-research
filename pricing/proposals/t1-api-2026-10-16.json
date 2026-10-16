@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0.0",
+  "id": "pricebook.t1_api_2026_10_16",
+  "revision": 1,
+  "captured_at": "2026-10-16T19:18:37Z",
+  "rates": [
+    {
+      "id": "rate.t1.gpt54.input.short",
+      "catalog_item_id": "cat.model.gpt54_openai",
+      "catalog_item_version": "gpt-5.4-2026-03-05",
+      "meter": "input_tokens_1m",
+      "unit_price": {
+        "amount": "2.50",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "OpenAI direct GPT-5.4 standard text-token billing; USD published list; no residency uplift, batch/flex/priority discount or tool charges included.",
+        "Prompt input <=272000 tokens; account eligibility and actual usage must be checked."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.gpt54.output.short",
+      "catalog_item_id": "cat.model.gpt54_openai",
+      "catalog_item_version": "gpt-5.4-2026-03-05",
+      "meter": "output_tokens_1m",
+      "unit_price": {
+        "amount": "15.00",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "OpenAI direct GPT-5.4 standard text-token billing; USD published list; no residency uplift, batch/flex/priority discount or tool charges included.",
+        "Prompt input <=272000 tokens; account eligibility and actual usage must be checked."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.gpt54.cache.short",
+      "catalog_item_id": "cat.model.gpt54_openai",
+      "catalog_item_version": "gpt-5.4-2026-03-05",
+      "meter": "cached_input_tokens_1m",
+      "unit_price": {
+        "amount": "0.25",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "OpenAI direct GPT-5.4 standard text-token billing; USD published list; no residency uplift, batch/flex/priority discount or tool charges included.",
+        "Prompt input <=272000 tokens; account eligibility and actual usage must be checked.",
+        "Only eligible cache-hit input tokens; not cache creation or a universal discount."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.gpt54.input.long",
+      "catalog_item_id": "cat.model.gpt54_openai",
+      "catalog_item_version": "gpt-5.4-2026-03-05",
+      "meter": "input_tokens_1m",
+      "unit_price": {
+        "amount": "5.00",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "OpenAI direct standard USD; prompt input >272000 tokens; full session input rate calculated2.50 x2 from publisher's stated multiplier.",
+        "No residency uplift or batch/flex/priority; cached-input long-context treatment remains uncovered."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.gpt54.output.long",
+      "catalog_item_id": "cat.model.gpt54_openai",
+      "catalog_item_version": "gpt-5.4-2026-03-05",
+      "meter": "output_tokens_1m",
+      "unit_price": {
+        "amount": "22.50",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "OpenAI direct standard USD; prompt input >272000 tokens; full session output rate calculated15.00 x1.5 from publisher's stated multiplier.",
+        "No residency uplift or batch/flex/priority; tools and other operations uncovered."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.sonnet55.input",
+      "catalog_item_id": "cat.model.sonnet55_anthropic",
+      "catalog_item_version": "claude-sonnet-5-5",
+      "meter": "input_tokens_1m",
+      "unit_price": {
+        "amount": "2.00",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "Anthropic first-party Claude Sonnet5.5 standard API USD list; no batch/residency modifier, cache writes or additional tools included.",
+        "Published full1M context at standard token rates; account/endpoint eligibility must be checked."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.sonnet55.output",
+      "catalog_item_id": "cat.model.sonnet55_anthropic",
+      "catalog_item_version": "claude-sonnet-5-5",
+      "meter": "output_tokens_1m",
+      "unit_price": {
+        "amount": "10.00",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "Anthropic first-party Claude Sonnet5.5 standard API USD list; no batch/residency modifier, cache writes or additional tools included.",
+        "Published full1M context at standard token rates; account/endpoint eligibility must be checked."
+      ],
+      "price_type": "list"
+    },
+    {
+      "id": "rate.t1.sonnet55.cache",
+      "catalog_item_id": "cat.model.sonnet55_anthropic",
+      "catalog_item_version": "claude-sonnet-5-5",
+      "meter": "cached_input_tokens_1m",
+      "unit_price": {
+        "amount": "0.10",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T19:18:37Z",
+      "provenance": {
+        "source_uri": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "checked_at": "2026-10-16T19:18:37Z",
+        "verification_status": "unverified",
+        "notes": "Published standard list rate captured on this date, not an observed invoice or guarantee of future availability. See conditions and unpriced coverage in model-provider.md."
+      },
+      "conditions": [
+        "Anthropic first-party Claude Sonnet5.5 standard API USD list; no batch/residency modifier, cache writes or additional tools included.",
+        "Published full1M context at standard token rates; account/endpoint eligibility must be checked.",
+        "Only cache reads;5-minute/1-hour writes are separate and uncovered."
+      ],
+      "price_type": "list"
+    }
+  ]
+}
