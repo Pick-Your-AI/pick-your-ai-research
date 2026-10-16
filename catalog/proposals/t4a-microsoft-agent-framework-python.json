@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.microsoft-agent-framework-python",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "Microsoft Agent Framework (Python)",
+  "version": "1.22.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true,
+    "supports_multi_agent": true
+  },
+  "description": "Successor to AutoGen and Semantic Kernel. Python package; .NET (Microsoft.Agents.AI 1.25.0) and Go (preview) are versioned separately. Python MCP client classes: MCPStdioTool, MCPStreamableHTTPTool, MCPWebsocketTool (need mcp --pre).",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/agent-framework/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "version 1.22.0 uploaded 2026-10-15; Python package"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/microsoft/agent-framework/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "license MIT"
+    },
+    {
+      "source_uri": "https://github.com/microsoft/agent-framework/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_multi_agent: graph-based workflows with sequential, concurrent, handoff and group patterns; OpenTelemetry built in"
+    },
+    {
+      "source_uri": "https://learn.microsoft.com/en-us/agent-framework/agents/tools/local-mcp-tools",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_mcp and supports_tool_execution: local MCP tool classes for stdio, Streamable HTTP and WebSocket"
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

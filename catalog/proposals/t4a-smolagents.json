@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.smolagents",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "Hugging Face smolagents",
+  "version": "1.26.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true,
+    "supports_multi_agent": true
+  },
+  "description": "Minimal agent library with CodeAgent (actions as Python code) and ToolCallingAgent (native tool calls). Local code execution is not fully sandboxed; remote sandboxes are supported.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/smolagents/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "version 1.26.0 uploaded 2026-05-29; requires_python >=3.10; mcp extra"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/huggingface/smolagents/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "license Apache-2.0"
+    },
+    {
+      "source_uri": "https://github.com/huggingface/smolagents/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_multi_agent (multi-agent hierarchies) and supports_tool_execution (CodeAgent, ToolCallingAgent)"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/huggingface/smolagents/main/docs/source/en/tutorials/tools.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_mcp: MCPClient over stdio, Streamable HTTP and SSE"
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

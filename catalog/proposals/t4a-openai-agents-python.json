@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.openai-agents-python",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "OpenAI Agents SDK (Python)",
+  "version": "0.24.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true,
+    "supports_multi_agent": true
+  },
+  "description": "Agent loop with handoffs, agents-as-tools, sessions, guardrails and human-in-the-loop. Responses API by default; Chat Completions and LiteLLM/any-llm adapters for other providers. Tracing exports to OpenAI by default.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/openai-agents/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "version 0.24.0 uploaded 2026-10-15; license MIT; requires_python >=3.10"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-python/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "license MIT"
+    },
+    {
+      "source_uri": "https://github.com/openai/openai-agents-python/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_multi_agent (handoffs, agents as tools) and supports_tool_execution (function, MCP, hosted tools)"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-python/main/docs/mcp.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_mcp: stdio, Streamable HTTP, SSE and OpenAI-hosted MCP; mcp>=1.19.0,<3"
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

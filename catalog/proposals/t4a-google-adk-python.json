@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.google-adk-python",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "Google Agent Development Kit (Python)",
+  "version": "2.12.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true,
+    "supports_multi_agent": true
+  },
+  "description": "Code-first agent framework optimized for Gemini but model-agnostic (LiteLLM, Ollama, vLLM connectors). Graph workflow runtime, tool confirmation, OpenTelemetry tracing. Java, Kotlin, Go and TypeScript ports are separate packages.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/google-adk/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "version 2.12.0 uploaded 2026-10-13; requires_python >=3.11"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/google/adk-python/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "license Apache-2.0"
+    },
+    {
+      "source_uri": "https://github.com/google/adk-python/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_multi_agent (modular multi-agent systems, workflow runtime) and supports_tool_execution (custom functions, OpenAPI, MCP tools)"
+    },
+    {
+      "source_uri": "https://adk.dev/tools-custom/mcp-tools/index.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_mcp: McpToolset client over stdio, SSE and Streamable HTTP"
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

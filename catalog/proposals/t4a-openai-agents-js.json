@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.openai-agents-js",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "OpenAI Agents SDK (JavaScript/TypeScript)",
+  "version": "0.20.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "typescript",
+      "javascript"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true,
+    "supports_multi_agent": true
+  },
+  "description": "TypeScript port of the OpenAI Agents SDK, versioned separately from the Python package.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://registry.npmjs.org/@openai/agents",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "@openai/agents 0.20.0 published 2026-10-08; license MIT"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-js/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "license MIT"
+    },
+    {
+      "source_uri": "https://github.com/openai/openai-agents-js/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "programming_languages JavaScript/TypeScript; supports_multi_agent and supports_tool_execution (functions, MCP, hosted tools)"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-js/main/docs/src/content/docs/guides/mcp.mdx",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "supports_mcp: hosted MCP, Streamable HTTP, stdio; SSE legacy"
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}
