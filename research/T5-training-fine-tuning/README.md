@@ -1,27 +1,18 @@
 # T5: Training & Fine-Tuning
 
 Issue: #29 · Contract: 1.0.0 · Kinds: `training_framework`, `training_compute`, `training_dataset`, `fine_tuned_model`
-Status: **draft reconciliation, not ready to merge** · Last researched: 2026-10-16
+Status: summary of the merged component records · Last researched: 2026-10-16
 
-This is the workstream summary for T5. It consolidates the four component decision records and does not replace them. Every finding below is **draft research awaiting review**, and no handoff has been confirmed by a consuming owner yet.
+This is the workstream summary for T5. It consolidates the four component decision records and does not replace them. The records are reviewed research; consuming-owner acceptance of their proposed handoffs remains pending.
 
-**The four component records are not on `main`.** They exist only as open proposal PRs, each under change requests. The links below are pinned to the PR head commits that this draft was reconciled against, not to files in this branch. They will move as the PRs are corrected. Counts and labels in this summary describe those pinned heads and are provisional until the components merge and this summary is re-reconciled.
+The four component records are merged into `main` (#68, #76, #77, #84). Merging this summary does not complete the T5 workstream or its component issues, confirm any handoff, or close any issue. Acceptance stays with the issue owners.
 
-Merging this summary would not accept the T5 workstream, any component record or any handoff. Acceptance stays with the issue owners.
-
-| Component | Issue | Decision record (pinned proposal head) | PR | Structured proposals |
+| Component | Issue | Decision record | PR | Structured proposals |
 | --- | --- | --- | --- | --- |
-| Training Framework | #30 | [training-framework.md @ 4063552](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/40635525c66bbcfbc9a5a549c826c4cfa89ab2cd/research/T5-training-fine-tuning/training-framework.md) | #68 (open, changes requested) | 4 `training_framework` proposals on the PR branch (`catalog/proposals/training_framework-*.json`); none on `main` |
-| Training Compute | #31 | [training-compute.md @ 6396aec](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/6396aec760a5d6ac80577b107b7af1c47c575e84/research/T5-training-fine-tuning/training-compute.md) | #77 (open, changes requested) | none (see blockers) |
-| Training Dataset | #32 | [training-dataset.md @ daa9666](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/daa9666c3c241e00ed7ec59cd7151a0e603d6558/research/T5-training-fine-tuning/training-dataset.md) | #76 (open, changes requested) | none (see blockers) |
-| Fine-Tuned Model | #33 | [fine-tuned-model.md @ 3f8ad44](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3f8ad4473de359e727a2ff1bd01225161b67fa90/research/T5-training-fine-tuning/fine-tuned-model.md) | #84 (open, changes requested) | none (user-specific artifact) |
-
-Corrections pending in the component PRs, per their live reviews:
-
-- #68: its `Verified` label and the four `CatalogItem` provenance entries (`verification_status: verified`) conflict with the adopted checked-versus-verified evidence policy (see "Evidence labels" under Rules contributed to #40). #40/#2/#3 routing needs refreshing.
-- #76: `Verified` is defined as "cited text was read directly", which redefines verification. #40 routing needs refreshing. The `license_verified` field name is canonical and stays.
-- #77: it reports no T2 compute profiles, accelerators or hosting platforms, but #75 has merged T2 proposals into `main`. #40 routing needs refreshing.
-- #84: rule A-18 fails every distributed Apache-2.0 artifact lacking a NOTICE or change notice, without the applicability conditions of Apache-2.0 §4(b) and §4(d). It also needs the checked-versus-verified distinction.
+| Training Framework | #30 | [training-framework.md](training-framework.md) | #68 (merged) | 4 `training_framework` proposals ([`catalog/proposals/training_framework-*.json`](../../catalog/proposals/)), all provenance `unverified` |
+| Training Compute | #31 | [training-compute.md](training-compute.md) | #77 (merged) | none (see blockers) |
+| Training Dataset | #32 | [training-dataset.md](training-dataset.md) | #76 (merged) | none (see blockers) |
+| Fine-Tuned Model | #33 | [fine-tuned-model.md](fine-tuned-model.md) | #84 (merged) | none (user-specific artifact) |
 
 ## Scope and optionality
 
@@ -33,6 +24,8 @@ This was checked with the v1 reference evaluator (`contracts/v1/reference/evalua
 - **Two shared rules list T5 kinds among affected kinds** (`rule.engine.model.format`, `rule.budget.monthly.cap`). Their outcomes do not change.
 - **No other rule's outcome changes.**
 - **Dependency graph:** 7 of the 10 baseline edges touching T5 kinds activate only under `fine_tuning_enabled`; the other 3 are `if_selected`.
+
+These results were reproduced in an independent rerun of the same fixture.
 
 The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a T5 selection exists. They are not yet in a versioned ruleset, so they have not been run through the evaluator.
 
@@ -81,6 +74,7 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
   - Ollama no longer accepts LoRA adapters (v0.34.1+).
   - TGI is archived.
   - Together and Fireworks serve adapters only on dedicated or on-demand deployments.
+  - Apache-2.0 notice duties are conditional, not blanket: §4(a) licence copy, §4(b) change notices on modified files, and §4(d) NOTICE attributions only if the base distribution includes a NOTICE file (A-18a to A-18c).
 - **Recommendation:**
   - Keep both an adapter and a merged checkpoint, pinned to the base's full commit SHA.
   - Merge into the 16-bit base, then quantise.
@@ -93,18 +87,22 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ## Rules contributed to #40
 
-**Evidence labels.** Under the interim #41 policy adopted in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), *checked* means provenance was confirmed against the cited primary source on its access date. *Verified* means independently reproduced (a second source or a reproducible test). None of these rules has been independently reproduced, so the table calls the components' `verified` labels **source-checked** and does not report any rule as verified. A rule may pass on checked evidence while its result stays "unverified".
+**Evidence labels.** Under the interim #41 policy adopted in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), *checked* means provenance was confirmed against the cited primary source on its access date. *Verified* means independently reproduced (a second source or a reproducible test). None of these rules has been independently reproduced, so the table reports rules as **source checked** and none as verified. A rule may pass on checked evidence while its result stays "unverified".
 
-Counts below are taken from the pinned component heads and are **provisional**. They will change when #68, #76, #77 and #84 land their corrections (including the A-18 rewrite in #84) and this summary is re-reconciled.
+Counts below were reconciled against the merged component notes.
 
-| Series | Component | Count | Source-checked (labelled `verified` in the component) | Hypothesis / policy / partial |
+| Series | Component | Rules | Source checked | Hypothesis / policy / partial |
 | --- | --- | --- | --- | --- |
 | F-01 – F-24 | #30 | 24 | 21 | F-13 (policy), F-17 ("competing model" undefined), F-24 (AGPL scope) |
 | K-01 – K-09 | #31 | 9 | 5 | K-02 (fit threshold), K-06 (needs #10 dtype facts), K-08 (contract gap), K-09 (policy) |
 | D-01 – D-22 | #32 | 22 | 21 | D-20 (leakage policy, with #36) |
-| A-01 – A-20 | #33 | 20 | 18 | A-13 (classic-FAQ wording), A-20 (evaluation gate policy, with #36) |
+| A-01 – A-20 (A-18 split into A-18a, A-18b, A-18c) | #33 | 22 | 20 | A-13 (partial: classic-FAQ wording), A-20 (evaluation gate policy, with #36) |
 
-A-06 is counted as source-checked but carries a stated inference. A-18 is counted but is under correction in #84.
+77 rules in total, 67 source checked.
+
+A-06 is counted as source checked but carries a stated inference: no PEFT document states "merge into the 16-bit base" positively. K-01 and K-04 are counted with limits their notes state (an estimated overhead factor; Axolotl only). The sources behind D-14 (an archived snapshot, because the live pages were not readable) and D-19 (a 2023 Hub snapshot) are limited as well.
+
+A-18a, A-18b and A-18c replace the single A-18, which failed every distributed Apache-2.0 artifact that lacked a NOTICE or change notice. They encode the §4(a) licence copy, §4(b) change notices on modified files and §4(d) NOTICE attributions. §4(d) applies only if the base distribution includes a NOTICE file, and §4(c) is not encoded as a rule. Each rule can return `unknown` when applicability is unresolved, and none infers applicability from `adapter_only` or artifact format.
 
 Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 - `training_framework` method enum values and fields;
@@ -114,13 +112,13 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 - a training-memory ResourceEstimate metric;
 - `training_dataset` and `data_source` provenance fields replacing the governance booleans.
 
-#33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref` and `signature`.
+#33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature` and `base_notice_file_present` (needed by A-18c), plus revision-pinned catalog references.
 
 ## Handoffs (none confirmed)
 
 | Handoff | From | To | Owner |
 | --- | --- | --- | --- |
-| Per-checkpoint licence, weight access, revision, provider fine-tuning lifecycle | #30, #33 | #6, #5 | @zwright8 |
+| Per-checkpoint licence, weight access, revision, whether the base distribution at that revision includes a NOTICE file, provider fine-tuning lifecycle | #30, #33 | #6, #5 | @zwright8 |
 | Accelerator facts (VRAM, dtype, peak FLOP/s), compute profiles, hosting regions; adapter and merged VRAM | #31, #33 | #10, #9 | @Mattycodes69 |
 | Adapter and format support facts for `inference_engine` items | #33 | #11 | @Mattycodes69 |
 | Training vs retrieval rights boundary; `data_source` for training sources | #32 | #13 | @zabyxc01 |
@@ -135,14 +133,14 @@ Owners are the live GitHub assignees as of 2026-10-16 and are not duplicated els
 
 ## Blockers on structured artifacts
 
-Upstream T2 records **do exist** on `main` since #75: `accelerator` (3), `compute_profile` (1, `aws-ec2-g6e-xlarge-us-east-1`), `hosting_platform` (5), `storage` (4) and `inference_engine` (3) proposals, plus a `gpu_hour` meter in `pricing/proposals/t2-hosting-2026-10-16.json`. They are proposals, not a published catalog. Whether they cover the SKUs, dtype facts (K-06) and regions that #31 prices has not been reconciled; that belongs to the #77 correction. Until it lands, this table lists only the training-specific gaps that #31 and #40 describe, not a missing upstream catalog.
+T2 proposals merged to `main` in #75 already supply part of what T5 references: three `accelerator` records (`nvidia-h100-sxm`, `nvidia-l40s`, `amd-mi300x`) with VRAM and precision inputs, one `compute_profile` (`aws-ec2-g6e-xlarge-us-east-1`), `hosting_platform` and `storage` records, and a `gpu_hour` meter. They are proposals under their own review, not approved catalog data. The one existing profile is a valid `compute_profile_ref` target, and having only one profile is not a schema blocker. The meter enum's `gpu_hour` can represent per-GPU-hour billing, such as the Fireworks Dedicated Training API row, once matching catalog references exist; the other managed training rows need separate meter review, and those limits do not exclude all managed training prices from v1. The remaining gaps are the records and fields that actually do not exist, listed in [Upstream T2 records](training-compute.md#upstream-t2-records).
 
-| Artifact | Blocked by (provisional, pending #77, #68, #76 and #84 corrections) |
+| Artifact | Blocked by |
 | --- | --- |
-| `training_compute` items, training Pricebooks, ResourceEstimates | Training-specific gaps only: the Pricebook has no training-token or job-minimum meters; there is no training-memory metric (#40). Whether the existing T2 `compute_profile` / `accelerator` proposals suffice for #31's priced SKUs is unreconciled (#77) |
+| `training_compute` items, training Pricebooks, ResourceEstimates | #31 proposes no `training_compute` item and no Pricebook or ResourceEstimate. Missing records: `compute_profile` for every priced SKU except `aws-ec2-g6e-xlarge-us-east-1` (#10), `accelerator` for A100 80 GB and RTX 4090 (#10), `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave and `storage` for S3 Standard (#9). Unresolved fields and meters: peak dense TFLOP/s per accelerator, training-token, job-minimum, training-hour and model-storage meters, optional `compute_profile_ref` for managed services, a training-memory ResourceEstimate metric (#40), and whether a multi-GPU instance-hour price maps to `gpu_hour` per GPU or per instance (#39) |
 | `data_source` items from the source audit | `spec_data_source` has no licence, terms or opt-out fields; agreement needed with #13 and #40 |
 | Managed `training_framework` items | `backends` required but not user-visible for managed services (#40) |
-| `fine_tuned_model` items | User-specific; references require `model` and `training_dataset` items |
+| `fine_tuned_model` items | User-specific; references require `model` and `training_dataset` items, and A-18c needs the proposed `base_notice_file_present` fact (#40, #6) |
 
 None of these is a native GitHub blocker; they are information dependencies under `docs/DEPENDENCIES.md`.
 
@@ -155,7 +153,7 @@ None of these is a native GitHub blocker; they are information dependencies unde
 | Mistral Forge licensing and weight export (not public) | #30 · @appletechie |
 | ONNX export for any training framework | #30 · @appletechie |
 | GRPO and distillation time and cost models; calibrate the Qwen3-8B example with a dry run | #31 · @appletechie |
-| vLLM/SGLang LoRA on GGUF bases; SGLang on quantised bases; TGI and llama.cpp LoRA limits; Vertex PEFT_ADAPTER output form; Bedrock import of adapters; tuned-Gemini lifecycle | #33 · @appletechie |
+| vLLM/SGLang LoRA on GGUF bases; SGLang on quantised bases; TGI and llama.cpp LoRA limits; Vertex PEFT_ADAPTER output form; Bedrock import of adapters; Fireworks retention; tuned-Gemini lifecycle | #33 · @appletechie |
 | Priority: P2 remains appropriate for all T5 issues; no product decision makes fine-tuning part of the first release | #29 · @appletechie |
 
 ## Secondary inputs
@@ -168,6 +166,6 @@ Where they disagreed with primary sources, the notes say so. For example, the gu
 
 ## Workstream done when
 
-- [ ] #30–#33 closed with merged decision records meeting their acceptance criteria
+- [ ] #30–#33 closed with merged decision records meeting their acceptance criteria (the four records are merged; component acceptance and handoffs remain pending)
 - [ ] Handoffs above confirmed by the consuming owners
 - [ ] This summary merged, with rules contributed to #40 and open questions current
