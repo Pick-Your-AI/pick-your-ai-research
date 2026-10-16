@@ -75,7 +75,7 @@ These are estimates and must be calibrated against the measured rows below.
 
 | ID | Source | Grade | Conditions | Result |
 | --- | --- | --- | --- | --- |
-| B1 | torchtune README | Primary documentation (PyTorch) | Llama 3.1 8B full FT, 1× RTX 4090, bs 2, packed 2048, `torch.compile` | 18.9 GiB, 1,650 tok/s. Recipe settings not stated; below the 16 B/param floor, so it relies on optimiser and offload tricks |
+| B1 | torchtune README | Primary documentation (PyTorch) | Llama 3.1 8B full FT, 1× RTX 4090, bs 2, packed 2048, `torch.compile`, measured over one epoch | 18.9 GiB, 1,650 tok/s. The README names no config. The only single-device full-FT config at the commit that added the row uses `PagedAdamW8bit`, `optimizer_in_bwd: True`, activation checkpointing and bf16 — which explains the figure being below the 16 B/param AdamW floor. Linking the row to that config is an inference |
 | B2 | torchtune README | Primary documentation | Same, LoRA, 1× RTX 4090 | 16.2 GiB, 3,083 tok/s |
 | B3 | torchtune README | Primary documentation | Same, QLoRA, 1× RTX 4090 | 7.4 GiB, 2,413 tok/s |
 | B4 | torchtune README | Primary documentation | Llama 3.2 3B, A100, bs 2, s 4096, bf16, compile, chunked cross-entropy, activation checkpointing and offload, 8-bit AdamW | full FT 17.6 GiB; LoRA 8.5 GiB; QLoRA 4.6 GiB |
@@ -124,7 +124,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | E6 | Korthikanti et al., https://arxiv.org/abs/2205.05198 | 2026-10-16 | — | Primary documentation | GPT-style block |
 | E7 | Wijmans et al., Cut Cross-Entropy, https://arxiv.org/abs/2411.09009 | 2026-10-16 | — | Independent measurement | Gemma 2 2B |
 | E8 | Hsu et al., Liger Kernel, https://arxiv.org/abs/2410.10989 | 2026-10-16 | — | Independent measurement | — |
-| E9 | Unsloth, https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide | 2026-10-16 | — | Vendor claim | The unsloth.ai/blog/grpo page returned 403 |
+| E9 | Unsloth, https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide ; blog https://web.archive.org/web/20251205171033/https://unsloth.ai/blog/grpo | 2026-10-16 | Blog dated 2025-02-20; Wayback snapshot 2025-12-05 | Vendor claim | Live blog returns 403. "5GB VRAM for Qwen2.5 (1.5B)" is stated without sequence length, rank or generation count; the 8B / 20K-context figures are fully specified |
 | E10 | ZeRO paper §5, Table 1 (E1) | 2026-10-16 | — | Primary documentation | — |
 | E11 | DeepSpeed, https://deepspeed.readthedocs.io/en/latest/memory.html | 2026-10-16 | — | Primary documentation | — |
 | E12 | Kaplan et al., https://arxiv.org/abs/2001.08361 | 2026-10-16 | — | Primary documentation | Non-embedding parameters |
@@ -140,7 +140,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
-| BS1 | PyTorch, https://github.com/meta-pytorch/torchtune/blob/main/README.md | 2026-10-16 | v0.6.1 (unmaintained, see #30) | Primary documentation | Recipe settings for B1 not stated |
+| BS1 | PyTorch, https://github.com/meta-pytorch/torchtune/blob/main/README.md ; config https://github.com/meta-pytorch/torchtune/blob/30b8519e86/recipes/configs/llama3_1/8B_full_single_device.yaml | 2026-10-16 | v0.6.1 (unmaintained, see #30); row added in commit 30b8519e86 (PR #1664) | Primary documentation | Config-to-row link is inferred (see B1) |
 | BS2 | NVIDIA, https://docs.nvidia.com/nemo-framework/user-guide/25.04/performance/performance_summary.html | 2026-10-16 | NeMo 25.04 | Vendor claim | FP8; older release than the current NeMo split |
 | BS3 | Unsloth, https://unsloth.ai/docs/basics/unsloth-benchmarks | 2026-10-16 | — | Vendor claim | — |
 | BS4 | Answer.AI, https://www.answer.ai/posts/2024-03-06-fsdp-qlora.html | 2026-10-16 | 2024-03-06 | Vendor claim | Alpha release; no measurements |
@@ -149,7 +149,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
-| P1 | Together AI, https://www.together.ai/pricing | 2026-10-16 | USD | Primary documentation | Which table is LoRA vs Full is inferred from tab order; post-training hosting fees not listed |
+| P1 | Together AI, https://www.together.ai/pricing ; https://docs.together.ai/docs/fine-tuning/pricing | 2026-10-16 | USD | Primary documentation | Tables labelled "LoRA fine-tuning" and "Full fine-tuning". After training, dedicated-endpoint hosting is billed per minute until the endpoint is stopped; no separate storage fee stated |
 | P2 | Fireworks AI, https://fireworks.ai/pricing | 2026-10-16 | USD | Primary documentation | No job minimum stated |
 | P3 | Google Cloud, https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing | 2026-10-16 | USD | Primary documentation | — |
 | P4 | AWS, https://aws.amazon.com/bedrock/pricing/ (values resolved from AWS price data files) | 2026-10-16 | USD; us-east-1 / us-west-2 | Primary documentation | Placeholders on the page; values from AWS price data |
@@ -285,7 +285,7 @@ The prices above are recorded with provenance so they can be converted once thos
 | Pricebook meters for `training_tokens_1m`, `training_tokens_1k`, `training_hour`, `job_minimum` and `model_storage_month`; a ResourceEstimate metric `training.estimated_peak_per_device_vram_gb`; `compute_profile_ref` optional for managed services | #40 · @CompleteDotTech |
 | Price normalisation: per-1k vs per-1M tokens, epochs and validation tokens, job minimums, and post-training hosting shown next to training cost | #39 · @PUSHINGSQUARES |
 | Training time and cost estimate for distillation and GRPO (only memory is sketched) | #31 · @appletechie |
-| Re-fetch the Unsloth GRPO blog (403) and confirm the torchtune B1 recipe settings | #31 · @appletechie |
+| Run a 20-step dry run to calibrate the Qwen3-8B worked example (no published measurement for it) | #31 · @appletechie |
 | Methods and frameworks consumed from #30 | #30 · @appletechie (PR #68) |
 | Freshness threshold for prices (they change faster than specifications) | #41 · @CompleteDotTech |
 
