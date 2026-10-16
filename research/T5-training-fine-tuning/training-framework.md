@@ -25,10 +25,10 @@ Compute sizing (#31) and dataset preparation (#32) are out of scope.
 | `peft` | 0.21.2 (2026-10-01) | Apache-2.0 | lora, qlora | DoRA, AdaLoRA, IA3, LoHa, LoKr, OFT/BOFT, VeRA, prompt/prefix tuning | cuda (implied), tpu, metal, cpu | safetensors (default), pytorch; merged weights via `merge_and_unload()` | yes (DeepSpeed, FSDP) | F5–F7 |
 | `axolotl` | 0.21.0 (2026-10-16) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo, distillation | continued pretraining, IPO, ORPO, SimPO/CPO, KTO, GRPO, reward models, QAT | cuda, rocm, metal (partial: no QLoRA or DeepSpeed on MPS), other (Ascend NPU, no parity) | safetensors (merged), gguf (`axolotl export`, merge first) | yes (FSDP/FSDP2, DeepSpeed, multi-node, TP/CP/EP) | F8–F13 |
 | `unsloth` | PyPI 2026.10.6 (2026-10-15) | Apache-2.0 core; AGPL-3.0 optional components (Studio UI) | sft, lora, qlora, full_finetune, dpo | pretraining, GRPO, GSPO, FP8 training | cuda, rocm, oneapi, metal (MLX); cpu for data recipes only, not training | LoRA adapters, merged 16-bit safetensors, gguf, NVFP4/FP8 | multi-GPU and DeepSpeed ZeRO-2/3; multi-node unknown | F14–F17 |
-| `llamafactory` | 0.9.5 (2026-05-30) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo | continued pretraining, reward modelling, PPO, KTO, ORPO, SimPO, freeze-tuning, OFT, DoRA | cuda, rocm, other (Ascend NPU) | merged weights via `llamafactory-cli export`; gguf unknown | yes (DeepSpeed ZeRO-3, FSDP, multi-node, Megatron-core) | F18–F20 |
-| `ms-swift` | 4.6.0 (2026-10-13) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo, distillation (GKD) | pretraining, DoRA, KTO, CPO, SimPO, ORPO, GRPO family, PPO | cuda, rocm, metal, cpu, other (Ascend, MetaX, MUSA) | merged safetensors; AWQ/GPTQ/FP8/BNB quantised export; gguf unknown | yes (DDP, DeepSpeed, FSDP/FSDP2, Megatron) | F21–F22 |
-| `nemo-megatron-bridge` | 0.6.2 (2026-09-18) | Apache-2.0 | sft, lora | pretraining, DoRA | cuda | HF-format export via `save_hf_pretrained` | yes (TP/PP/CP/EP, multi-node) | F23–F24 |
-| `nemo-automodel` | 0.6.0 (2026-08-26) | Apache-2.0 | sft, lora, qlora, distillation | pretraining, QAT | cuda | safetensors (HF-compatible), PyTorch DCP | yes (FSDP2, HSDP, TP, CP, SP, PP, multi-node) | F25–F26 |
+| `llamafactory` | 0.9.5 (2026-05-30) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo | continued pretraining, reward modelling, PPO, KTO, ORPO, SimPO, freeze-tuning, OFT, DoRA | cuda, rocm, other (Ascend NPU) | merged weights via `llamafactory-cli export` plus an Ollama Modelfile; no gguf (F36) | yes (DeepSpeed ZeRO-3, FSDP, multi-node, Megatron-core) | F18–F20 |
+| `ms-swift` | 4.6.0 (2026-10-13) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo, distillation (GKD) | pretraining, DoRA, KTO, CPO, SimPO, ORPO, GRPO family, PPO | cuda, rocm, metal, cpu, other (Ascend, MetaX, MUSA) | merged safetensors; AWQ/GPTQ/FP8/BNB quantised export, Ollama Modelfile; no gguf (F37) | yes (DDP, DeepSpeed, FSDP/FSDP2, Megatron) | F21–F22 |
+| `nemo-megatron-bridge` | 0.6.2 (2026-09-18) | Apache-2.0 | sft, lora | pretraining, DoRA | cuda | HF-format export via `save_hf_pretrained`; no gguf (F38) | yes (TP/PP/CP/EP, multi-node) | F23–F24 |
+| `nemo-automodel` | 0.6.0 (2026-08-26) | Apache-2.0 | sft, lora, qlora, distillation | pretraining, QAT | cuda | safetensors (HF-compatible), PyTorch DCP; gguf input only, no export (F38) | yes (FSDP2, HSDP, TP, CP, SP, PP, multi-node) | F25–F26 |
 | `nemo-rl` | 0.7.0 (2026-07-29) | Apache-2.0 | sft, lora, dpo, distillation | GRPO, DAPO, GDPO, GSPO, PPO | cuda | unknown | yes (FSDP2, Megatron, multi-node) | F27–F28 |
 | `torchtune` | 0.6.1 (2025-04-07) | BSD-3-Clause | sft, lora, qlora, full_finetune, dpo, distillation | PPO, GRPO, QAT | cuda, rocm, oneapi, metal, other (Ascend) | safetensors (HF format) | yes (FSDP2, multi-node) | F29–F31 |
 
@@ -43,7 +43,7 @@ Compute sizing (#31) and dataset preparation (#32) are out of scope.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `vertex-gemini-tuning` | active | sft | preference tuning (2.5 Flash, Flash-Lite only), RL fine-tuning (listed for 3.5 Flash), continuous tuning | Gemini 3.5 Flash, 3.1 Flash-Lite, 2.5 Pro / Flash / Flash-Lite | JSONL, documented minimum 100–500 examples | provider-hosted adapter-based model; no export documented | per 1,000 training tokens (dataset tokens × epochs) | M5, M6, M8 |
 | `vertex-open-model-tuning` | active | sft, lora (`PEFT_ADAPTER`), full_finetune (`FULL`), distillation | — | Gemma 4/3, Qwen 3.x, Llama 3.1–3.3, Llama 4 Scout, GLM 4.7 Flash; distillation teachers include DeepSeek R1/V3.2, GLM 5.2, Kimi K2 Thinking | JSONL (prompt-completion, chat `messages`, GenerateContent) | **portable**: safetensors written to the user's Cloud Storage | per 1,000,000 training tokens | M7, M8 |
-| `bedrock-customization` | active | sft, distillation | reinforcement fine-tuning (GRPO with Lambda or model-as-judge rewards), preference optimisation, full-rank fine-tuning, continued pretraining (Titan) | Nova family, Titan, Llama 3.1–3.3; RFT on Nova 2 Lite, gpt-oss-20B, Qwen3 32B; Claude 3 Haiku listed (see open questions) | `.jsonl`; SFT schema unknown | **provider-locked**: Provisioned Throughput or on-demand custom deployment; no export documented | per 1,000 training tokens; monthly storage; Provisioned Throughput per model unit-hour | M9–M14 |
+| `bedrock-customization` | active | sft, distillation | reinforcement fine-tuning (GRPO with Lambda or model-as-judge rewards), preference optimisation, full-rank fine-tuning, continued pretraining (Titan) | Nova family, Titan, Llama 3.1–3.3; RFT on Nova 2 Lite, gpt-oss-20B, Qwen3 32B; Claude 3 Haiku still listed but end-of-life in us-west-2 since 2026-09-10 (L30) | `.jsonl`; SFT schema unknown | **provider-locked**: Provisioned Throughput or on-demand custom deployment; no export documented | per 1,000 training tokens; monthly storage; Provisioned Throughput per model unit-hour | M9–M14 |
 | `foundry-fine-tuning` | active | sft, dpo, distillation (teacher-generated SFT data) | RFT (o4-mini; gpt-5 by invitation) | gpt-4o, gpt-4.1 family, gpt-4o-mini; gpt-oss-20b/120b, Llama-3.3-70B, Qwen3 family, Ministral-3B and others | chat JSONL `messages`, separate train and validation files | **provider-locked** for OpenAI models; LoRA adapters run on managed compute; download not documented | training per 1M tokens (per hour for RFT); hosting per hour | M15–M17 |
 | `together-fine-tuning` | active | sft, lora (default), full_finetune, dpo | GRPO (separate product) | DeepSeek V3.1/V4 Flash, GLM 5.x, Qwen 3.5–3.8, Kimi K2.x, Gemma 4, gpt-oss, Llama 3.x/4, Mixtral 8x7B | JSONL (conversational, instruction, preference, generic text) or tokenised Parquet; 100 GB file limit | **portable**: `checkpoint=merged` or `adapter` download | per 1M tokens, with a minimum charge per job | M18–M22 |
 | `fireworks-fine-tuning` | active | sft, lora (rank ≤32, power of 2), dpo, full_finetune (Training API) | ORPO, RL (Training API), vision SFT | most of the catalog for managed LoRA; full-parameter for DeepSeek V4, GLM 5.x, Kimi K3, Qwen3.x, Gemma 4 | OpenAI-compatible chat JSONL, 3 to 3M examples | **portable** for LoRA (`firectl model download`, needs the matching base model); full-weight download unknown | per 1M training tokens, tiered by model size and method | M23–M26 |
@@ -61,8 +61,8 @@ Compute sizing (#31) and dataset preparation (#32) are out of scope.
 | --- | --- | --- | --- | --- |
 | OpenAI | winding down (see above) | Microsoft Foundry | no | M2, M15 |
 | Google Gemini | not available in the Gemini API or AI Studio | Vertex AI (Gemini Enterprise Agent Platform) | no | L26, M5 |
-| Anthropic Claude | not available | Bedrock lists Claude 3 Haiku only; an AWS blog reports it reached end of life on 2026-09-10 (unverified) | no | M10, L30 |
-| Mistral | deprecated | Forge (sales-led) | unknown | M27, L31 |
+| Anthropic Claude | not available | none current: Bedrock's fine-tuning table still lists Claude 3 Haiku (us-west-2), but AWS's lifecycle page shows it reached end of life there on 2026-09-10, and Legacy models accept no new fine-tuning jobs | no | M10, L30 |
+| Mistral | deprecated | Forge (sales-led; pre-training, SFT, LoRA, DPO, RL; inference on private cloud, on-prem or Mistral compute) | unknown: no source states weight export or licence terms | M27, L31 |
 | Cohere | deprecated on 2025-09-15 | — | no | L33 |
 
 ## Comparison fields
@@ -82,7 +82,7 @@ The issue lists `supported models`, `input data format` and `export path`. v1 ha
 | `/license` | SPDX identifier where one exists | Apache-2.0, BSD-3-Clause; Unsloth is dual | F2, F14 | Framework license ≠ base-model license; both must be checked |
 | `/spec/methods` | array of enum `sft, lora, qlora, dpo, full_finetune, distillation`, min 1 | see the candidate tables | per row | v1 cannot express GRPO, PPO, KTO, ORPO, RFT, continued pretraining, preference optimisation or DoRA |
 | `/spec/backends` | array of enum `cuda, rocm, oneapi, metal, tpu, cpu, other`, min 1 | see the candidate tables | per row | Managed services have no user-visible backend. `other` hides Trainium and Ascend. Support levels differ by method |
-| `/spec/model_formats` | array of enum `safetensors, gguf, onnx, pytorch, api_only, other` | managed locked services = `api_only` | per row | ONNX output was not confirmed for any candidate. GGUF is confirmed only for axolotl and unsloth |
+| `/spec/model_formats` | array of enum `safetensors, gguf, onnx, pytorch, api_only, other` | managed locked services = `api_only` | per row | ONNX output was not confirmed for any candidate. Native GGUF export only in axolotl and unsloth; PEFT LoRA adapters from any framework convert with llama.cpp `convert_lora_to_gguf.py` (F34) |
 | `/spec/distributed_supported` | boolean | true for all self-hosted candidates; not applicable to managed | per row | The boolean cannot distinguish multi-GPU from multi-node (Unsloth multi-node is unknown) |
 | `supported models` (note only) | list of model catalog IDs (→ #6) | summarised per service | per row | Changes often; must be date-stamped |
 | `input data format` (note only) | enum proposal: `chat_messages_jsonl`, `prompt_completion_jsonl`, `preference_jsonl`, `alpaca`, `sharegpt`, `raw_text`, `tokenized_parquet` | see tables | per row | Handed to #32 |
@@ -132,6 +132,11 @@ The fetch work was split across three parallel research passes. Claims not retri
 | F31 | Meta PyTorch, https://raw.githubusercontent.com/meta-pytorch/torchtune/main/docs/source/deep_dives/checkpointer.rst | 2026-10-16 | main | Primary documentation | — |
 | F32 | NVIDIA, https://github.com/NVIDIA-NeMo/Speech/blob/main/README.md | 2026-10-16 | v3.0.0 | Primary documentation | — |
 | F33 | Meta PyTorch, https://github.com/meta-pytorch/torchforge/blob/main/README.md | 2026-10-16 | main | Primary documentation | — |
+| F34 | ggml-org, https://github.com/ggml-org/llama.cpp/blob/master/convert_lora_to_gguf.py | 2026-10-16 | master | Primary documentation | Takes a PEFT adapter directory (`adapter_config.json` + `adapter_model.safetensors` or `.bin`); `--outtype` f32, f16, bf16, q8_0, auto |
+| F35 | Hugging Face TRL, https://github.com/huggingface/trl/blob/main/docs/source/unsloth_integration.md | 2026-10-16 | main | Primary documentation | GGUF only via Unsloth's `save_pretrained_gguf` |
+| F36 | hiyouga, https://github.com/hiyouga/LlamaFactory/blob/main/README.md ; `src/llamafactory/train/tuner.py` | 2026-10-16 | main | Primary documentation | Export writes an Ollama Modelfile; no GGUF writer in source |
+| F37 | ModelScope, https://github.com/modelscope/ms-swift/blob/main/docs/source/Instruction/Frequently-asked-questions.md | 2026-10-16 | main | Primary documentation | FAQ: only Modelfile export is supported, not direct GGUF |
+| F38 | NVIDIA, https://github.com/NVIDIA-NeMo/Automodel/blob/main/nemo_automodel/components/checkpoint/utils.py ; Megatron-Bridge repository code search | 2026-10-16 | main | Primary documentation | AutoModel handles GGUF as input only; Megatron-Bridge has no GGUF writer |
 
 ### Managed services (M)
 
@@ -176,7 +181,7 @@ The fetch work was split across three parallel research passes. Claims not retri
 | L3 | Meta, https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B | 2026-10-16 | Muse Model License; released 2026-10-15 | Primary documentation | License text is shown in the access gate; re-check after the launch week |
 | L4 | Meta, https://huggingface.co/meta-models/Muse-Glimmer-30B | 2026-10-16 | Apache-2.0 | Primary documentation | — |
 | L5 | Google, https://ai.google.dev/gemma/terms | 2026-10-16 | Gemma Terms of Use, modified 2026-04-01 | Primary documentation | Applies to Gemma ≤3 |
-| L6 | Google, https://ai.google.dev/gemma/prohibited_use_policy | 2026-10-16 | 2024-02-21 | Primary documentation | Whether it applies to Gemma 4 is unknown |
+| L6 | Google, https://ai.google.dev/gemma/prohibited_use_policy | 2026-10-16 | 2024-02-21 | Primary documentation | Binds Gemma 1–3n through Terms §3.2. It does not bind Gemma 4: the Terms say "For Gemma 4 terms, see the Gemma 4 license", which is plain Apache-2.0 (L5, L7) |
 | L7 | Google, https://ai.google.dev/gemma/docs/gemma_4_license | 2026-10-16 | Apache-2.0 | Primary documentation | — |
 | L8 | Google, https://huggingface.co/google/gemma-4-31B-it | 2026-10-16 | — | Primary documentation | — |
 | L9 | Mistral AI, https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/raw/main/LICENSE | 2026-10-16 | Modified MIT | Primary documentation | — |
@@ -193,11 +198,12 @@ The fetch work was split across three parallel research passes. Claims not retri
 | L20 | Z.AI, https://huggingface.co/zai-org/GLM-5.3/raw/main/LICENSE | 2026-10-16 | GLM-5.3 License | Primary documentation | Other GLM-5.x checkpoints are MIT |
 | L21 | OpenMDW, https://openmdw.ai/license/1-1/ | 2026-10-16 | OpenMDW-1.1 | Primary documentation | NVIDIA Nemotron 3.5 |
 | L22 | Cohere Labs, https://huggingface.co/CohereLabs/tiny-aya-global, https://huggingface.co/CohereLabs/North-Small-Translate-1.0, https://huggingface.co/CohereLabs/North-Mini-Code-1.0 | 2026-10-16 | tiny-aya and North-Small-Translate: CC-BY-NC-4.0; North-Mini-Code and North-Micro-Vision: Apache-2.0 | Primary documentation | License varies per checkpoint within the North family |
-| L23 | OpenAI, https://openai.com/policies/row-terms-of-use/ | 2026-10-16 | — | Vendor claim (unverified) | Page returned 403; competing-model clause seen only in a search snippet. Must be re-fetched before rule F-16 leaves hypothesis |
+| L23 | OpenAI Terms of Use, https://web.archive.org/web/20261012151003/https://openai.com/policies/row-terms-of-use/ | 2026-10-16 | Effective 2026-01-01; Wayback snapshot 2026-10-12 | Primary documentation (archived) | Live page returns 403. Unnumbered clause: "Use Output to develop models that compete with OpenAI" |
+| L35 | OpenAI Services Agreement (API and business use), https://web.archive.org/web/20260213220105/https://openai.com/policies/services-agreement/ | 2026-10-16 | Effective 2026-01-01; Wayback snapshot 2026-02-13 | Primary documentation (archived) | §3.3(e) bars using Output to develop competing models "except for a Permitted Exception": non-distributed classifiers/embeddings, and fine-tuning OpenAI's own models |
 | L24 | Google, https://ai.google.dev/gemini-api/terms | 2026-10-16 | — | Primary documentation | — |
 | L25 | Anthropic, https://www.anthropic.com/legal/commercial-terms | 2026-10-16 | — | Primary documentation | Section D.4 |
 | L26 | Google, https://ai.google.dev/gemini-api/docs/model-tuning | 2026-10-16 | — | Primary documentation | — |
-| L30 | AWS, https://docs.aws.amazon.com/bedrock/latest/userguide/custom-model-supported.html | 2026-10-16 | — | Primary documentation | Page did not render; the Claude 3 Haiku end-of-life date comes from an AWS blog, not this page |
+| L30 | AWS, https://docs.aws.amazon.com/bedrock/latest/userguide/custom-model-fine-tuning.md (anchor `custom-model-supported`); https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.md | 2026-10-16 | Claude 3 Haiku: legacy 2026-03-10, EOL 2026-09-10 (us-west-2 and most regions); ap-northeast-2, ap-south-1, ap-southeast-1 EOL 2026-10-17 | Primary documentation | The fine-tuning table is stale: it still lists a model already at EOL |
 | L31 | Mistral AI, https://mistral.ai/products/forge/ | 2026-10-16 | — | Primary documentation | Licensing and export unknown |
 | L32 | Mistral AI, https://legal.mistral.ai/terms/commercial-terms-of-service | 2026-10-16 | — | Primary documentation | — |
 | L33 | Cohere, https://docs.cohere.com/docs/chat-starting-the-training | 2026-10-16 | — | Primary documentation | — |
@@ -236,11 +242,11 @@ When a required license or method fact is missing, the outcome is `unknown` with
 | --- | --- | --- | --- | --- | --- |
 | F-14 | `model.weights_available` = false (API-only), self-hosted framework selected | A self-hosted framework cannot customise an API-only model | fail / error | L24, L25, L34 | verified; the weight-access field name depends on #6 |
 | F-15 | API-only base model, required artifact = downloadable weights | Customised API models are hosted only; no weights are retrievable | fail / error | L24, L34, M13 | verified |
-| F-16 | teacher = OpenAI / Gemini / Anthropic / Cohere API, `distillation` or synthetic-data training, student competes with provider | Provider terms prohibit using outputs to train competing models | fail / error | L23, L24, L25 D.4, L34 | **hypothesis**: L23 is unverified and "competing" is undefined |
-| F-17 | same as F-16 with a non-competing student | Permission depends on an undefined term | unknown / warning | L23–L25, L34 | hypothesis |
+| F-16 | teacher = OpenAI / Gemini / Anthropic / Cohere API, `distillation` or synthetic-data training, student competes with provider | Provider terms prohibit using outputs to train competing models. OpenAI API exception: fine-tuning OpenAI's own models, and classifiers/embeddings that are not distributed (L35) | fail / error (pass / info when the OpenAI exception applies) | L23, L35, L24, L25 D.4, L34 | verified clauses; "competing" remains undefined (see F-17) |
+| F-17 | same as F-16 with a student that is not clearly competing | No provider defines "competing" | unknown / warning | L23–L25, L34, L35 | hypothesis: needs a policy decision, not more evidence |
 | F-18 | provider = OpenAI, organisation fine-tuning history, date | New or inactive organisations are blocked now; everyone is blocked from 2027-01-06 | fail / error | M2 | verified; date-dependent, so it must be re-evaluated against the catalog snapshot date |
 | F-19 | provider = Gemini API or AI Studio, any tuning method | Not available; route to Vertex for the listed Gemini models | fail / error, with remediation "Vertex" | L26, M5 | verified |
-| F-20 | provider = Anthropic API, any tuning method | Not available on Anthropic's API. On Bedrock, only Claude 3 Haiku is listed and is reported end-of-life | fail / error (API); unknown / warning (Bedrock) | L25, L30, M10 | partial: end-of-life date unverified |
+| F-20 | provider = Anthropic API or Bedrock, any tuning method on a Claude model | Not available on Anthropic's API. On Bedrock, the only listed Claude model (Claude 3 Haiku) is end-of-life, and Legacy models accept no new fine-tuning jobs | fail / error | L25, L30, M10 | verified |
 | F-21 | provider ∈ {Mistral API, Cohere}, self-serve tuning | Deprecated | fail / warning | M27, L33 | verified |
 | F-22 | framework = torchtune | Not maintained since 2025 | pass / warning (deprecated) | F29, F30 | verified |
 | F-23 | framework method/backend pair | A method is supported only on the backends the framework documents for it (e.g. Axolotl QLoRA unavailable on `metal`) | fail / error | F13 | verified for Axolotl; v1 cannot express per-method backend support |
@@ -261,7 +267,7 @@ No Pricebook proposal is made here. Priced scenarios belong to #31.
 - **Self-hosted default:** recommend `trl` + `peft` as the reference stack, with `axolotl` and `unsloth` as config-driven alternatives.
   - All four are Apache-2.0 at the core and actively released (last release within 16 days).
   - Each covers sft, lora, qlora and dpo.
-  - Only Axolotl and Unsloth have confirmed GGUF export, which matters for #11 and #33.
+  - Only Axolotl and Unsloth export GGUF natively, which matters for #11 and #33. TRL documents GGUF only through Unsloth (F35); PEFT, LLaMA-Factory, ms-swift and the NeMo repos have none (F36–F38). A PEFT LoRA adapter from any of them can be converted with llama.cpp `convert_lora_to_gguf.py` (F34).
   - Treat `ms-swift` as a strong alternative with the broadest documented hardware coverage. Treat the NVIDIA NeMo stack as CUDA-only, multi-node-first.
   - Do not recommend torchtune for new builds.
 - **Managed default:** prefer services that return a portable artifact when the user may later move off the provider: Vertex open-model tuning, Together, and Fireworks (LoRA).
@@ -295,11 +301,9 @@ Not proposed yet:
 | #6 must carry per-checkpoint `license`, `weights_available` (gated / open / API-only), and the attribution or naming obligations used by F-01 to F-13 | #6 · @zwright8 |
 | #5 must carry managed fine-tuning availability and lifecycle dates (OpenAI 2027-01-06; Mistral and Cohere deprecated; Gemini API not tunable) | #5 · @zwright8 |
 | Revenue, MAU and residency are user attestations needed by F-03, F-04, F-07 and F-09. Where are they captured? | #2 / #3 · @CompleteDotTech |
-| Re-fetch the OpenAI Terms of Use (L23); define "competing model" handling for F-16/F-17 | #30 · @appletechie |
-| Confirm the current Bedrock Claude fine-tuning list and the Claude 3 Haiku end-of-life date (L30) | #30 · @appletechie |
-| Does the Gemma Prohibited Use Policy apply to Apache-2.0 Gemma 4? | #30 · @appletechie |
-| Mistral Forge licensing and export path | #30 · @appletechie |
-| GGUF and ONNX export support for TRL, PEFT, LLaMA-Factory, ms-swift and NeMo | #30 · @appletechie; consumed by #33 and #11 |
+| Policy for "competing model" (F-17): no provider defines it | #40 · @CompleteDotTech |
+| Mistral Forge licensing and weight export: not stated publicly; sales-led | #30 · @appletechie |
+| ONNX export support (GGUF is resolved: F34–F38) | #30 · @appletechie; consumed by #33 and #11 |
 | Input data formats per framework and service (see tables) | handoff to #32 · @appletechie |
 | Output artifact formats and portability (adapter vs merged, provider-locked) | handoff to #33 · @appletechie; serving support by #11 · @Mattycodes69 |
 | Distributed training capability and backend list for training sizing | handoff to #31 · @appletechie; accelerator catalog by #10 · @Mattycodes69 |
