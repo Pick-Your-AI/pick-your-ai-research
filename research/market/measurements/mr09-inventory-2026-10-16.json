@@ -1,0 +1,51 @@
+{
+  "classification": "local discovery; not inference or sizing calibration",
+  "access_date": "2026-10-16",
+  "timestamp_precision": "date only for initial inventory samples",
+  "gpu": {
+    "count": 1,
+    "name": "NVIDIA GeForce RTX 5070 Ti",
+    "driver": "595.97",
+    "pci_bus": "00000000:02:00.0",
+    "nvidia_smi_command": "nvidia-smi --query-gpu=index,name,memory.total,memory.used,memory.free,driver_version,pci.bus_id --format=csv",
+    "nvidia_smi_initial_mib": {"total": 16303, "used": 12008, "free": 3990},
+    "nvidia_smi_followup_mib": {"total": 16303, "used": 11981, "free": 4017},
+    "process_memory": "N/A / insufficient permissions; identities intentionally omitted",
+    "topology": "one visible GPU; no multi-GPU topology inferred",
+    "usable_memory": "changing shared-device availability; no reserved exclusive allocation",
+    "cim_queries": "Win32_VideoController, Win32_ComputerSystem, Win32_OperatingSystem denied by sandbox"
+  },
+  "runtimes": [
+    {"locator": "$DEFAULT_PYTHON", "python": "3.14.3", "torch": "2.12.0+cpu", "torch_cuda_build": null,
+     "cuda_available": false, "device_count": 0, "transformers": "5.8.1", "accelerate": "1.13.0",
+     "huggingface_hub": "1.9.1", "safetensors": "0.7.0", "numpy": "2.4.4",
+     "disposition": "cannot perform CUDA inference; no CPU substitution"},
+    {"locator": "$CUDA_PYTHON (existing ComfyUI virtual environment)", "python": "3.12.11",
+     "torch": "2.10.0+cu130", "torch_cuda_build": "13.0", "cuda_available": true, "device_count": 1,
+     "transformers": "5.0.0", "accelerate": "1.13.0", "huggingface_hub": "1.3.5",
+     "safetensors": "0.7.0", "numpy": "2.4.1", "tokenizers": "0.22.2",
+     "disposition": "reuse without modifying installed packages; exact build recorded in each run"},
+    {"name": "Ollama", "version": "0.40.4", "ps": "no loaded Ollama models at discovery",
+     "sandbox_socket": "local socket initially forbidden; authorized read-only elevated query succeeded",
+     "disposition": "cached artifact discovery only; no PyTorch allocator-counter replacement"}
+  ],
+  "cached_model_artifacts": {
+    "huggingface_cache": "docling-project layout/model and PaddlePaddle OCR directories; no pinned causal LM identified",
+    "ollama": [
+      {"model": "gemma3:4b", "manifest_model_layer_bytes": 3338792448,
+       "digest": "sha256:aeda25e63ebd698fab8638ffb778e68bed908b960d39d0becc650fa981609d25"},
+      {"model": "qwen2.5-coder:latest", "manifest_model_layer_bytes": 4683074048,
+       "digest": "sha256:60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463"},
+      {"model": "gemma4:e4b", "manifest_model_layer_bytes": 9608338848,
+       "digest": "sha256:4c27e0f5b5adf02ac956c7322bd2ee7636fe3f45a8512c9aba5385242cb6e09a"}
+    ],
+    "limitations": "manifest metadata only; no cached-model inference, rights approval, source revision, or architecture inferred"
+  },
+  "access_and_scope": {
+    "paid_compute": "none provisioned or used",
+    "other_workloads": "preserved; no eviction or inspection of unrelated content",
+    "multi_gpu": "unavailable; one visible local GPU",
+    "moe": "full-resident pinned candidate exceeds bounded process cap and observed free memory; no weights downloaded",
+    "evidence_rights": "project-generated sanitized inventory; no weights, personal content, credentials, or raw datasets committed"
+  }
+}

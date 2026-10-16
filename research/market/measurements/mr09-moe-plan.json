@@ -1,0 +1,42 @@
+{
+  "classification": "pinned planned coverage; primary metadata only; no MoE execution",
+  "access_date": "2026-10-16",
+  "publisher": "Ai2 / allenai",
+  "model_id": "allenai/OLMoE-1B-7B-0924-Instruct",
+  "revision": "7f1c97f440f06ce36705e4f2b843edb5925f4498",
+  "branch_disposition": "main/DPO observed at access; immutable revision pinned for future use",
+  "format": "safetensors",
+  "weight_dtype": "bfloat16",
+  "weight_quantization": "none",
+  "license": "Apache-2.0",
+  "source_urls": {
+    "api": "https://huggingface.co/api/models/allenai/OLMoE-1B-7B-0924-Instruct",
+    "model_card": "https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/blob/7f1c97f440f06ce36705e4f2b843edb5925f4498/README.md",
+    "config": "https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/blob/7f1c97f440f06ce36705e4f2b843edb5925f4498/config.json",
+    "weight_index": "https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/blob/7f1c97f440f06ce36705e4f2b843edb5925f4498/model.safetensors.index.json"
+  },
+  "publisher_metadata": {
+    "parameter_elements": 6919161856,
+    "weight_index_tensor_bytes": 13838323712,
+    "layers": 16,
+    "attention_heads": 16,
+    "kv_heads": 16,
+    "head_dim_derived_from_hidden_over_heads": 128,
+    "experts": 64,
+    "experts_per_token": 8,
+    "max_position_embeddings": 4096
+  },
+  "planned_runtime": "same PyTorch2.10.0+cu130/Transformers5.0.0; actual Olmoe backend support still requires execution",
+  "planned_cells": [
+    {"id": "M1", "prompt_tokens": 256, "decode_forwards": 32, "active_sequences": 1, "kv": "bf16"},
+    {"id": "M2", "prompt_tokens": 2048, "decode_forwards": 32, "active_sequences": 1, "kv": "bf16"},
+    {"id": "M3", "prompt_tokens": 2048, "decode_forwards": 32, "active_sequences": 2, "kv": "bf16"},
+    {"id": "M4", "prompt_tokens": 2048, "decode_forwards": 32, "active_sequences": 1, "kv": "int4 if supported; otherwise unsupported outcome"}
+  ],
+  "status": "unexecuted",
+  "reason": "13,838,323,712 weight tensor bytes alone exceed ~2GiB process cap and observed ~4GiB free; no exclusive device reservation",
+  "required_owner_action": "Mattycodes69 and CompleteDotTech arrange an authorized sufficiently reserved GPU/runtime or approve a separately pinned offload design; measure actual load/context peaks before claiming fit",
+  "unknowns": "shard hashes not retrieved because weights not downloaded; runtime/cache support unexecuted; total16GB does not guarantee usable full-resident capacity",
+  "confidence": "high in publisher metadata transcription; no confidence claim for runtime fit",
+  "reuse_rights": "publisher labels Apache-2.0; only small metadata and project-derived protocol are redistributed"
+}

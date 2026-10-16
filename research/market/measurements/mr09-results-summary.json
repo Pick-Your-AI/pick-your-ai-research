@@ -1,0 +1,1129 @@
+{
+  "classification": "summary of real model inference; no universal fit/error bounds",
+  "status_counts": {
+    "success": 15
+  },
+  "run_count": 15,
+  "measured_script_hashes": [
+    "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8"
+  ],
+  "protocol_hashes": [
+    "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735"
+  ],
+  "comparable_competitor_error_pairs": 0,
+  "native_kv_errors_scope": "formula versus tensor-payload layout sanity check only; no competitor/runtime calibration",
+  "cells": {
+    "D1": {
+      "status_counts": {
+        "success": 3
+      },
+      "phases": {
+        "baseline": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          }
+        },
+        "loading": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          }
+        },
+        "warmup": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 280509440,
+            "median": 280509440,
+            "max": 280509440
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 304087040,
+            "median": 304087040,
+            "max": 304087040
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 279180288,
+            "median": 279180288,
+            "max": 279180288
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 304087040,
+            "median": 304087040,
+            "max": 304087040
+          }
+        },
+        "prefill": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 293047808,
+            "median": 293047808,
+            "max": 293047808
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 312475648,
+            "median": 312475648,
+            "max": 312475648
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 283573248,
+            "median": 283573248,
+            "max": 283573248
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 312475648,
+            "median": 312475648,
+            "max": 312475648
+          }
+        },
+        "decode": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 286668800,
+            "median": 286668800,
+            "max": 286668800
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 312475648,
+            "median": 312475648,
+            "max": 312475648
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 284212224,
+            "median": 284212224,
+            "max": 284212224
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 312475648,
+            "median": 312475648,
+            "max": 312475648
+          }
+        },
+        "steady_state": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 284212224,
+            "median": 284212224,
+            "max": 284212224
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 312475648,
+            "median": 312475648,
+            "max": 312475648
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 284212224,
+            "median": 284212224,
+            "max": 284212224
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 312475648,
+            "median": 312475648,
+            "max": 312475648
+          }
+        }
+      },
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "script_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+      "protocol_sha256": "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735",
+      "configuration": {
+        "weight_dtype": "bfloat16",
+        "weight_quantization": "none",
+        "kv_cache": "bf16",
+        "prompt_tokens_per_sequence": 256,
+        "decode_forwards_per_sequence": 32,
+        "active_sequences": 1,
+        "queued_requests": 0,
+        "seed": 6109,
+        "attention_backend": "sdpa",
+        "graph_capture": false,
+        "compile": false,
+        "device_map": {
+          "": "cuda:0"
+        },
+        "offload": false,
+        "tensor_parallel_size": 1,
+        "pipeline_parallel_size": 1
+      },
+      "initial_cuda_reported_free_bytes": {
+        "n": 3,
+        "min": 15769534464,
+        "median": 15769534464,
+        "max": 15769534464
+      },
+      "native_kv_prefill_payload_bytes": {
+        "n": 3,
+        "min": 5898240,
+        "median": 5898240,
+        "max": 5898240
+      },
+      "int4_kv_prefill_payload_bytes": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "failures": []
+    },
+    "D2": {
+      "status_counts": {
+        "success": 3
+      },
+      "phases": {
+        "baseline": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          }
+        },
+        "loading": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          }
+        },
+        "warmup": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 280523776,
+            "median": 280523776,
+            "max": 280523776
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 304087040,
+            "median": 304087040,
+            "max": 304087040
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 279194624,
+            "median": 279194624,
+            "max": 279194624
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 304087040,
+            "median": 304087040,
+            "max": 304087040
+          }
+        },
+        "prefill": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 714357760,
+            "median": 714357760,
+            "max": 714357760
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 771751936,
+            "median": 771751936,
+            "max": 771751936
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 324875264,
+            "median": 324875264,
+            "max": 324875264
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 771751936,
+            "median": 771751936,
+            "max": 771751936
+          }
+        },
+        "decode": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 344099840,
+            "median": 344099840,
+            "max": 344099840
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 771751936,
+            "median": 771751936,
+            "max": 771751936
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 325514240,
+            "median": 325514240,
+            "max": 325514240
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 771751936,
+            "median": 771751936,
+            "max": 771751936
+          }
+        },
+        "steady_state": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 325514240,
+            "median": 325514240,
+            "max": 325514240
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 771751936,
+            "median": 771751936,
+            "max": 771751936
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 325514240,
+            "median": 325514240,
+            "max": 325514240
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 771751936,
+            "median": 771751936,
+            "max": 771751936
+          }
+        }
+      },
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "script_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+      "protocol_sha256": "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735",
+      "configuration": {
+        "weight_dtype": "bfloat16",
+        "weight_quantization": "none",
+        "kv_cache": "bf16",
+        "prompt_tokens_per_sequence": 2048,
+        "decode_forwards_per_sequence": 32,
+        "active_sequences": 1,
+        "queued_requests": 0,
+        "seed": 6109,
+        "attention_backend": "sdpa",
+        "graph_capture": false,
+        "compile": false,
+        "device_map": {
+          "": "cuda:0"
+        },
+        "offload": false,
+        "tensor_parallel_size": 1,
+        "pipeline_parallel_size": 1
+      },
+      "initial_cuda_reported_free_bytes": {
+        "n": 3,
+        "min": 15769534464,
+        "median": 15769534464,
+        "max": 15769534464
+      },
+      "native_kv_prefill_payload_bytes": {
+        "n": 3,
+        "min": 47185920,
+        "median": 47185920,
+        "max": 47185920
+      },
+      "int4_kv_prefill_payload_bytes": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "failures": []
+    },
+    "D3": {
+      "status_counts": {
+        "success": 3
+      },
+      "phases": {
+        "baseline": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          }
+        },
+        "loading": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          }
+        },
+        "warmup": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 283440128,
+            "median": 283440128,
+            "max": 283440128
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 306184192,
+            "median": 306184192,
+            "max": 306184192
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 280814592,
+            "median": 280814592,
+            "max": 280814592
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 306184192,
+            "median": 306184192,
+            "max": 306184192
+          }
+        },
+        "prefill": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 1135920128,
+            "median": 1135920128,
+            "max": 1135920128
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 1235222528,
+            "median": 1235222528,
+            "max": 1235222528
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 376370176,
+            "median": 376370176,
+            "max": 376370176
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 1235222528,
+            "median": 1235222528,
+            "max": 1235222528
+          }
+        },
+        "decode": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 411351040,
+            "median": 411351040,
+            "max": 411351040
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 1235222528,
+            "median": 1235222528,
+            "max": 1235222528
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 376014848,
+            "median": 376014848,
+            "max": 376014848
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 1235222528,
+            "median": 1235222528,
+            "max": 1235222528
+          }
+        },
+        "steady_state": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 376014848,
+            "median": 376014848,
+            "max": 376014848
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 1235222528,
+            "median": 1235222528,
+            "max": 1235222528
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 376014848,
+            "median": 376014848,
+            "max": 376014848
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 1235222528,
+            "median": 1235222528,
+            "max": 1235222528
+          }
+        }
+      },
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "script_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+      "protocol_sha256": "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735",
+      "configuration": {
+        "weight_dtype": "bfloat16",
+        "weight_quantization": "none",
+        "kv_cache": "bf16",
+        "prompt_tokens_per_sequence": 2048,
+        "decode_forwards_per_sequence": 32,
+        "active_sequences": 2,
+        "queued_requests": 0,
+        "seed": 6109,
+        "attention_backend": "sdpa",
+        "graph_capture": false,
+        "compile": false,
+        "device_map": {
+          "": "cuda:0"
+        },
+        "offload": false,
+        "tensor_parallel_size": 1,
+        "pipeline_parallel_size": 1
+      },
+      "initial_cuda_reported_free_bytes": {
+        "n": 3,
+        "min": 15769534464,
+        "median": 15769534464,
+        "max": 15769534464
+      },
+      "native_kv_prefill_payload_bytes": {
+        "n": 3,
+        "min": 94371840,
+        "median": 94371840,
+        "max": 94371840
+      },
+      "int4_kv_prefill_payload_bytes": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "failures": []
+    },
+    "D4": {
+      "status_counts": {
+        "success": 3
+      },
+      "phases": {
+        "baseline": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          }
+        },
+        "loading": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          }
+        },
+        "warmup": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 279528448,
+            "median": 279528448,
+            "max": 279528448
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 304087040,
+            "median": 304087040,
+            "max": 304087040
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 278150144,
+            "median": 278150144,
+            "max": 278150144
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 304087040,
+            "median": 304087040,
+            "max": 304087040
+          }
+        },
+        "prefill": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 682015744,
+            "median": 682015744,
+            "max": 682015744
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 723517440,
+            "median": 723517440,
+            "max": 723517440
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 290960384,
+            "median": 290960384,
+            "max": 290960384
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 723517440,
+            "median": 723517440,
+            "max": 723517440
+          }
+        },
+        "decode": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 311782400,
+            "median": 311782400,
+            "max": 311782400
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 723517440,
+            "median": 723517440,
+            "max": 723517440
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 291599360,
+            "median": 291599360,
+            "max": 291599360
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 723517440,
+            "median": 723517440,
+            "max": 723517440
+          }
+        },
+        "steady_state": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 291599360,
+            "median": 291599360,
+            "max": 291599360
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 723517440,
+            "median": 723517440,
+            "max": 723517440
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 291599360,
+            "median": 291599360,
+            "max": 291599360
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 723517440,
+            "median": 723517440,
+            "max": 723517440
+          }
+        }
+      },
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "script_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+      "protocol_sha256": "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735",
+      "configuration": {
+        "weight_dtype": "bfloat16",
+        "weight_quantization": "none",
+        "kv_cache": "int4",
+        "prompt_tokens_per_sequence": 2048,
+        "decode_forwards_per_sequence": 32,
+        "active_sequences": 1,
+        "queued_requests": 0,
+        "seed": 6109,
+        "attention_backend": "sdpa",
+        "graph_capture": false,
+        "compile": false,
+        "device_map": {
+          "": "cuda:0"
+        },
+        "offload": false,
+        "tensor_parallel_size": 1,
+        "pipeline_parallel_size": 1
+      },
+      "initial_cuda_reported_free_bytes": {
+        "n": 3,
+        "min": 15769534464,
+        "median": 15769534464,
+        "max": 15769534464
+      },
+      "native_kv_prefill_payload_bytes": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "int4_kv_prefill_payload_bytes": {
+        "n": 3,
+        "min": 13271040,
+        "median": 13271040,
+        "max": 13271040
+      },
+      "failures": []
+    },
+    "D5": {
+      "status_counts": {
+        "success": 3
+      },
+      "phases": {
+        "baseline": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          }
+        },
+        "loading": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 269054464,
+            "median": 269054464,
+            "max": 269054464
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 301989888,
+            "median": 301989888,
+            "max": 301989888
+          }
+        },
+        "warmup": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 281449472,
+            "median": 281449472,
+            "max": 281449472
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 306184192,
+            "median": 306184192,
+            "max": 306184192
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 278725632,
+            "median": 278725632,
+            "max": 278725632
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 306184192,
+            "median": 306184192,
+            "max": 306184192
+          }
+        },
+        "prefill": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 1067992064,
+            "median": 1067992064,
+            "max": 1067992064
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 1130364928,
+            "median": 1130364928,
+            "max": 1130364928
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 304346112,
+            "median": 304346112,
+            "max": 304346112
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 1130364928,
+            "median": 1130364928,
+            "max": 1130364928
+          }
+        },
+        "decode": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 344936448,
+            "median": 344936448,
+            "max": 344936448
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 1132462080,
+            "median": 1132462080,
+            "max": 1132462080
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 305624064,
+            "median": 305624064,
+            "max": 305624064
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 1132462080,
+            "median": 1132462080,
+            "max": 1132462080
+          }
+        },
+        "steady_state": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 305624064,
+            "median": 305624064,
+            "max": 305624064
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 1132462080,
+            "median": 1132462080,
+            "max": 1132462080
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 305624064,
+            "median": 305624064,
+            "max": 305624064
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 1132462080,
+            "median": 1132462080,
+            "max": 1132462080
+          }
+        }
+      },
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+      "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+      "script_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+      "protocol_sha256": "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735",
+      "configuration": {
+        "weight_dtype": "bfloat16",
+        "weight_quantization": "none",
+        "kv_cache": "int4",
+        "prompt_tokens_per_sequence": 2048,
+        "decode_forwards_per_sequence": 32,
+        "active_sequences": 2,
+        "queued_requests": 0,
+        "seed": 6109,
+        "attention_backend": "sdpa",
+        "graph_capture": false,
+        "compile": false,
+        "device_map": {
+          "": "cuda:0"
+        },
+        "offload": false,
+        "tensor_parallel_size": 1,
+        "pipeline_parallel_size": 1
+      },
+      "initial_cuda_reported_free_bytes": {
+        "n": 3,
+        "min": 15769534464,
+        "median": 15769534464,
+        "max": 15769534464
+      },
+      "native_kv_prefill_payload_bytes": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "int4_kv_prefill_payload_bytes": {
+        "n": 3,
+        "min": 26542080,
+        "median": 26542080,
+        "max": 26542080
+      },
+      "failures": []
+    }
+  },
+  "input_checksums": [
+    {
+      "file": "mr09-D1-r1.json",
+      "sha256": "468dd086831b4dcedd6657c11c64d7fd4a5ec840455ac75c2d4600edf5166ed5"
+    },
+    {
+      "file": "mr09-D1-r2.json",
+      "sha256": "99b5ba2874baa98699be2ce08baf924a0886a636528d95666ca22fee8e3d4585"
+    },
+    {
+      "file": "mr09-D1-r3.json",
+      "sha256": "c3ed189fd2f664fb44df9d853a7f97be01b7e617558704ed7c1b7ab26726150f"
+    },
+    {
+      "file": "mr09-D2-r1.json",
+      "sha256": "741695e94eec7005955bc2d4693e46a8ba1269a0b0f7613d8432c12d84807c41"
+    },
+    {
+      "file": "mr09-D2-r2.json",
+      "sha256": "37703acee09e718c4643a92381f71cd077b19884496876369fd348896eac005c"
+    },
+    {
+      "file": "mr09-D2-r3.json",
+      "sha256": "315f85d93818022a1e9690233b041924cda0369639e934cb753245c83c1d5476"
+    },
+    {
+      "file": "mr09-D3-r1.json",
+      "sha256": "0fc3df921b17eef1cd9ce0d34aa9c471b5750e2c4692f86d7e8bc5ad780c5cdd"
+    },
+    {
+      "file": "mr09-D3-r2.json",
+      "sha256": "faabc0b9ff1f489b56ec58fafa5d410d16948b2ab07daa0b302aaaf0b8ccf54b"
+    },
+    {
+      "file": "mr09-D3-r3.json",
+      "sha256": "1b140e47112cab9a3907a3779b0eae1109ac79628ef32a3e70fc491a58156152"
+    },
+    {
+      "file": "mr09-D4-r1.json",
+      "sha256": "27761b1af929609530cddc6963285381b5d06ac28842c2f3556b214491be086b"
+    },
+    {
+      "file": "mr09-D4-r2.json",
+      "sha256": "e6026e045d6cfbd98eb4eb5da80945e0849f03201e25f58085ef26db7c151c18"
+    },
+    {
+      "file": "mr09-D4-r3.json",
+      "sha256": "95a1aee504d4d9930e150706b173ca2e741e0faf21cd812e42317dbd48e1e53f"
+    },
+    {
+      "file": "mr09-D5-r1.json",
+      "sha256": "0ec07a31c5c2e2c04ea3105c06f5288bb89f2c05e2436e4058c59a30363e34aa"
+    },
+    {
+      "file": "mr09-D5-r2.json",
+      "sha256": "21a22b6f2145e02bbc366d8b95ed620770c55a3526eb0dfad512271cd1bc0d13"
+    },
+    {
+      "file": "mr09-D5-r3.json",
+      "sha256": "0c443e57a5c85500d572d416b21302d1dfd5c9302270da7fb478518cd2bf9fef"
+    }
+  ]
+}

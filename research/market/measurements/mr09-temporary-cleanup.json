@@ -1,0 +1,27 @@
+{
+  "cleanupUtc": "2026-10-16T14:06:43.3966436Z",
+  "records": [
+    {
+      "taskTemporaryDirectory": "mr09-smollm2-135m",
+      "resolvedRoot": "$TEMP",
+      "bytesBefore": 271172949.0,
+      "existsAfter": false,
+      "scope": "Only task-created MR09 temporary model/package files; all measurement processes exited before cleanup"
+    },
+    {
+      "taskTemporaryDirectory": "mr09-quanto-package",
+      "resolvedRoot": "$TEMP",
+      "bytesBefore": 666353.0,
+      "existsAfter": false,
+      "scope": "Only task-created MR09 temporary model/package files; all measurement processes exited before cleanup"
+    },
+    {
+      "taskTemporaryDirectory": "mr09-quanto-download",
+      "resolvedRoot": "$TEMP",
+      "bytesBefore": 165285.0,
+      "existsAfter": false,
+      "scope": "Only task-created MR09 temporary model/package files; all measurement processes exited before cleanup"
+    }
+  ],
+  "preserved": "All user caches, preexisting models, installed environments and unrelated workloads preserved"
+}

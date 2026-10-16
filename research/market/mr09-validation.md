@@ -1,0 +1,44 @@
+# MR-09 validation and evidence-review record
+
+Research date: 2026-10-16. Branch: `codex/mr09-feasibility-validation`. Base: PR #67 commit `075653aa4c0682c976ea9486d7d549d667118530`. Validation belongs to this submission; earlier #67/#75 results are historical inputs only.
+
+## Environment and commands
+
+Windows / PowerShell, from the `Pick-Your-AI/pick-your-ai-research` repository root (`$REPO` in sanitized execution records). Repository `.venv\Scripts\python.exe` is **Python 3.12.14**, isolated from the default Python 3.14.3. Prepend `.venv\Scripts` to PATH in the current shell so the exact required `python` commands select 3.12.14. Dependencies were already installed at the pinned versions; the installation command was nevertheless run for this submission.
+
+```powershell
+$env:PATH = (Join-Path (Get-Location) '.venv\Scripts') + ';' + $env:PATH
+python --version
+python -m pip install -r requirements-research.txt
+python -m unittest discover -s contracts/v1/tests -v
+python -m unittest discover -s tests -v
+python scripts/validate_research.py
+python scripts/validate_market_research.py
+git diff --check
+```
+
+Initial baseline run on this branch: dependency installation succeeded; 21 contract tests and 11 research tests passed; research validator passed (0 catalog proposals / 0 pricebooks); market validator passed (32 entities, 1,536 cells, 20 issues); `git diff --check` passed. **A final run against integrated changes is recorded below before submission.**
+
+The market validator exists because this submission is stacked on #67. It was executed here, not silently omitted or copied without its dependent market records.
+
+## What automation establishes
+
+Contract tests/intake cover frozen import integrity, generator consistency, canonical mapping, schema shape, reference/unit/date consistency and external artifact metadata. Market validation covers identifiers, evidence references in the existing feature matrix, paths, priority arithmetic, hierarchy and the presence of fields needed for a recorded Done state. It does **not** inspect every new prose claim, validate the handoff ledger, establish actual owner acceptance or certify that empirical criteria are met. Focused checks and independent evidence review below address the new material separately.
+
+Reviewers still assess source accuracy, freshness, reuse rights, experimental validity, hardware interference, quantity comparability, counter availability, completeness and acceptance. Synthetic contract fixtures remain in the contract test/example paths. No new ResourceEstimate, model weights, credentials, customer content, raw dataset or large download is submitted.
+
+## Independent contributor review
+
+A separate evidence-review contributor checked the baseline, validator limitations, handoff/parent gates and primary sources. It independently reproduced the bounded ModelFit engine observation and verified source hashes, llmfit/planner assumptions and the within-v2 Harness Bench discrepancy. It independently recomputed all 15 published input hashes and every per-cell/per-phase min/median/max/count without using its own summary code. All six phase counters, token counts, BF16/INT4 payload sums and serial non-overlapping execution intervals were consistent.
+
+The contributor also authored stricter summary guards and related synthetic tests; root independently inspected those two files, so that authorship is not represented as an independent review of its own code. Thirteen focused tests passed on Python 3.12.14. Fixes covered artifact identity before reuse, ledger preservation/singleton handling, incompatible summary signatures, duplicate repetitions, missing/invalid phases, failure exclusion, privacy and fresh-directory reproduction. Known pilot/ledger limitations are retained in the measurement note, with no fabricated timestamps. The measured runner and original protocol stayed unchanged; their LF file bytes and hashes match the Git newline policy and every observation.
+
+A separate integrity contributor checked 43 prospective files: 29 JSON files parsed, all 14 criteria appeared verbatim exactly once, every original field of 78 handoff and 20 backlog records was preserved, and 135 relative Markdown links resolved with exact case in that snapshot. Targeted text/name/size scans found no unexpected binaries, model/archive files, credential-shaped strings, private paths or hardware UUIDs. Remote URL/anchor contents were excluded, and these scans cannot guarantee secret absence. Later root additions use the same verified local targets; final consistency checks accompany publication.
+
+This is quality control, **not human evidence acceptance**. Human handoff dispositions remain in [handoffs.md](handoffs.md). The one-off preservation checker initially decoded Git output with the Windows default encoding, causing a false comparison failure; explicit UTF-8 decoding resolved it without changing historical data. An initial sandbox TEMP-permission failure in focused tests was rerun with normal temporary-directory access. Required final validation is recorded below.
+
+The publication audit caught a distinct Windows newline issue after the first full test pass: result-file checksums matched CRLF working-tree bytes, while Git's existing `eol=lf` policy normalized the committed blobs. The summary publisher now writes explicit LF before hashing, with a regression assertion for portable published hashes. All 15 result hashes were regenerated; counters, timestamps, conditions and measured source/protocol pins are unchanged. Final verification compares hashes with actual Git blobs, not only local files. The first private commit was corrected before publication, and the required suite was rerun against the corrected content.
+
+## Final integrated validation
+
+Pending integrated artifacts and focused verification. Record actual tested commit, results and any failed checks here; do not substitute the initial baseline pass.
