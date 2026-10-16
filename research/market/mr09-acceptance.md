@@ -2,6 +2,8 @@
 
 Issues: [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56), [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Research date: 2026-10-16. Submission uses **Refs #56; Refs #61**. Neither issue is complete.
 
+Review submission: **[PR #79](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79)**. [Posted owner requests](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110) cover all 13 required receiving-owner rows; six external reviewer requests were verified by GitHub readback. **Accepted dispositions: 0.** The [#58 handoff](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6217454289) is posted and remains pending coordinator review. Detailed request/response records are in [handoffs.md](handoffs.md).
+
 ## Refreshed baseline and branch dependency
 
 [Sanitized live snapshot](mr09-baseline.json) records GitHub issue ownership, native relationships, exact criteria and PR reviews. GitHub metadata is observed repository state, not accepted research. #56/#61 remain assigned to **Mattycodes69**. #62 belongs to **PUSHINGSQUARES** and #65 to **zabyxc01**; both are open. #58 has no live assignee; **CompleteDotTech** coordinates its decision rather than being silently assigned here.

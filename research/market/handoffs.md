@@ -111,6 +111,17 @@ The final measurement offer is **15 successful real dense CUDA runs** (five cont
 
 Receiving owners should respond with **accepted**, **narrowed**, **rejected** or **pending**, naming the producer/consumer issue, exact artifact commit, retained unknowns and next action. Record the actual public comment/review URL and date after a response exists. Coordinator CompleteDotTech must separately accept the evidence. Authoring this ledger does not speak for any owner.
 
+### Posted review requests — not acceptance
+
+On 2026-10-16, [PR #79](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79) was opened and attached to this research task. GitHub readback confirmed review requests to CompleteDotTech, zwright8, tynamite, zabyxc01, appletechie and PUSHINGSQUARES; Mattycodes69's internal T2 acknowledgements were explicitly requested in the comment below. The submitted-review list was empty at the request readback. Every disposition above remains pending.
+
+- [Scope-specific request covering all 13 #56/#61 receiving-owner rows](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110)
+- [#56 progress, children and Project-administrator action](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6217452787)
+- [#61 measured coverage, unexecuted cases and exact owner actions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6217453539)
+- [#58 conditional decision handoff to the coordinator](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6217454289)
+
+These are actual posted requests with links and dates, not receiving-owner review responses. Neither #56 nor #61 was closed; no Project field, assignee, label or native relationship was changed.
+
 ### Child workstreams: reviewed output availability and owner action
 
 No reviewed results are available from #62 or #65 at this refresh, so no such results were integrated or relabelled accepted. Their existing deliverables and ownership are preserved.
