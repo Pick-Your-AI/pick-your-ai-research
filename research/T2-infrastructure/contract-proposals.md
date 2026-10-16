@@ -29,6 +29,8 @@ The imported reference membership rules need special review: `precision.engine` 
 
 ## Requested review result
 
+Submitted to [#40 in this comment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6216107964) and [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75); linked [#39 pricing request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6216109139) and [#41 evidence request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6216108532). Submission and requested reviews are not approval.
+
 @tynamite should accept, narrow or reject each rule and T2-C01–C06, identify any facts needing another source or reproducible test, and link the central decision. #39 should approve the billing semantics; #41 should approve evidence/freshness/reuse policy. Retain open questions and unverified combinations until that occurs. Compatibility cycles remain informational relationships, not native `blockedBy` edges.
 
 All changes proposed here affect research representation. They authorize no runtime deployment, provisioning, training job, product implementation or production catalog publication.

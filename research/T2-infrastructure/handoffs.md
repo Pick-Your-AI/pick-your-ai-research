@@ -45,6 +45,18 @@ To acknowledge, the owner should link the PR/commit and specify **accept**, **ac
 
 The canonical baseline comes from merged [PR #44](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44) and current `main`, not stale issue appendices. Scoped #8–#11 appendices were corrected without changing acceptance criteria, assignees, labels, or native relationships.
 
+## Posted requests (not acknowledgements)
+
+- [Parent progress / Project access action](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8#issuecomment-6216105045)
+- [Hosting consumer requests](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6216105719)
+- [Compute consumer requests](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6216106309)
+- [Engine consumer requests](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6216107081)
+- [#40 rule and contract submission](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6216107964)
+- [#41 evidence/freshness/reuse request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6216108532)
+- [#39 price/quantity reconciliation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6216109139)
+
+[PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75) requests reviews from @CompleteDotTech, @zwright8, @tynamite, @zabyxc01, @appletechie and @PUSHINGSQUARES. GitHub metadata confirmed all six requests; the submitted-review list was empty. @Mattycodes69 is the PR author and must explicitly acknowledge internal T2 handoffs in a comment rather than requesting a self-review. These facts do not change any Pending cell above.
+
 ## Closure gates
 
 All three decision records and the T2 summary must be merged through the normal review process. Every required handoff above must have an actual consuming-owner acknowledgement, and all issue acceptance criteria must be satisfied. Until then use `Refs #n`, leave #8–#11 open, and report any Project update limitation explicitly.

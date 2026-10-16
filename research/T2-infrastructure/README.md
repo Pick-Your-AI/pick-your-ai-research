@@ -2,6 +2,8 @@
 
 Parent: [#8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) · Live owner: @Mattycodes69 · Contract: 1.0.0 · Research capture: 2026-10-16
 
+Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), open against `main`. All six affected owners' review requests were verified; no submitted owner review or handoff confirmation had been received at the publication check.
+
 **Status: prepared for owner review; research completion is not claimed.** The three decision records and this summary require reviewed merge and the consuming-owner confirmations below. No product implementation, runtime deployment, provisioning or training job is included.
 
 ## Decision records and artifacts

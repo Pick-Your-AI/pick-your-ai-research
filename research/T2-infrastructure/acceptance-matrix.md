@@ -39,6 +39,8 @@ Issue criteria copied verbatim from the live issues on 2026-10-16. `Prepared` me
 
 ## Baseline and tracking audit
 
+Publication: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), with issue-specific progress and handoff requests linked from [handoffs.md](handoffs.md#posted-requests-not-acknowledgements). No owner acceptance or merge is inferred from publication; every Pending status remains pending.
+
 - Default branch `main` at `324518ff8d9629fbb7cd4f2d6a27dcc219300fd4`; PR #44 merged at `9769fcd9ea380b1211669b2753181c7782444178` on 2026-10-16. PR #45 also merged; related #68 and #67 remain open on the old contract branch. No existing T2 records or proposals were present.
 - Native relationships read through GitHub GraphQL: #8 has #9/#10/#11; each child's parent is #8; none has `blockedBy` relationships. No relationships are changed.
 - Live assignees: #8–#11 @Mattycodes69. All scoped and consuming issue comments were read; no handoff acknowledgements existed at intake.

@@ -21,6 +21,8 @@ A sandboxed repeat of the research tests encountered Windows temporary-directory
 
 ## Independent review and corrections
 
+GitHub-hosted [Research validation run 38904722208](https://github.com/Pick-Your-AI/pick-your-ai-research/actions/runs/38904722208) completed successfully for initial submission commit `83a66fe2f9b59241e8cf3296780c040b32418967`. Latest checks and human review state are visible on [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75). Subsequent changes record publication/tracking links and do not change vendor facts or calculations.
+
 A separate agent, which authored none of the package, inspected the integrated records, canonical semantics and representative primary sources before owner review was requested. It found two actionable issues:
 
 1. Governance links used uppercase `GOVERNANCE.md` while the tracked path is `docs/governance.md`. The links were corrected and exact-case local link checking added to the integration review.
