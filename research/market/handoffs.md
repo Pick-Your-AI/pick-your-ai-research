@@ -134,3 +134,15 @@ The Harness Bench entries were accessed **2026-10-16**; publisher: the paper/rep
 ### #58 decision handoff and ownership
 
 #58 is **currently unassigned** in live GitHub; **CompleteDotTech** is the program coordinator. The #56 recommendation is conditional: proceed with reviewing an assumption-explicit decision workflow; narrow claims to evidenced model/runtime/workload envelopes; collect #61 allocator/comparison evidence and #62/#65 owner outputs before treating technical feasibility as established. Stop or pivot the proposed scope if required source rights or reproducible configuration support cannot be obtained, according to coordinator-defined product thresholds. No approved numeric success threshold, economic break-even result or implementation approval is invented. The more detailed decision input belongs in [technical-feasibility.md](technical-feasibility.md). Preserve #58's native #66 blocker; #61 is an information/validation gate.
+
+## #62 desk validation ledger — 2026-10-16
+
+This dated addendum adds the #62 rows without rewriting the tables above. Evidence offered: [benchmark validation](benchmark-validation.md), a desk pass with no benchmark run, prepared by a non-assignee contributor for the owner's review. None of the dispositions below has been accepted. The #36 receiver is also the #62 assignee, so the #36 acceptance must be recorded explicitly and cannot be inferred from that owner's review of #62. No review request has been posted yet.
+
+| Producer → consumer | Live receiving owner | Precise finding / offered scope | Disposition; review link/date | Unresolved decision and exact next action |
+| --- | --- | --- | --- | --- |
+| #62 → #25 | CompleteDotTech | No published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered; convention C2 | Pending; no receiving-owner response | Accept, narrow or reject C2; keep harnesses as candidates, not a ranking |
+| #62 → #36 | PUSHINGSQUARES | Release identities, grader conflict on 79 general tasks, contamination and overlap unknowns, noise floor, replication limits; gates and conventions C1 and C3 | Pending; explicit internal acknowledgement needed (#62 and #36 share assignee PUSHINGSQUARES) | Accept, narrow or replace the gates, C1 and C3; set the H1 margins; decide on a replication and its placement |
+| #62 → #40 | tynamite | v1 `spec_model` has no benchmark or quality field; any display rule needs a field proposal | Pending; no receiving-owner response | Accept or reject the finding; route any field proposal through versioned review |
+| #62 → #41 | tynamite | Convention C1; reuse rights for Harness Bench tasks and results (no license, all rights reserved), with #60 | Pending; no receiving-owner response | Accept, narrow or reject C1; decide permitted reuse scope |
+| #62 → #39 | PUSHINGSQUARES | Conditional: pricing of the prepared replication protocol, only if #36 wants a replication | Pending; conditional on #36 | Price endpoints or GPUs, judge calls and repeated runs if requested |

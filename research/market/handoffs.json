@@ -1162,5 +1162,135 @@
       "review_request_date": "2026-10-16",
       "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
     }
+  },
+  {
+    "market_issue": 62,
+    "workstream": "MR-09",
+    "consumer_issue": 25,
+    "consumer_owner": [
+      "CompleteDotTech"
+    ],
+    "artifact": "research/market/benchmark-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review the #62 desk validation: no published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered. Accept, narrow or reject convention C2 (benchmark evidence names the paired model, budget and task version).",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review the #62 desk validation: no published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered. Accept, narrow or reject convention C2 (benchmark evidence names the paired model, budget and task version).",
+      "evidence": [
+        "research/market/benchmark-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": null,
+      "note": "Desk validation prepared by a non-assignee contributor for owner review; no benchmark run and no human acceptance.",
+      "review_request_date": null,
+      "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 62,
+    "workstream": "MR-09",
+    "consumer_issue": 36,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/benchmark-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, noise floor and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, noise floor and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
+      "evidence": [
+        "research/market/benchmark-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": null,
+      "note": "Desk validation prepared by a non-assignee contributor for owner review; no benchmark run and no human acceptance. Producer #62 and consumer #36 share assignee PUSHINGSQUARES; an explicit internal acknowledgement is required and is not inferred.",
+      "review_request_date": null,
+      "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 62,
+    "workstream": "MR-09",
+    "consumer_issue": 40,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/benchmark-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review the finding that v1 spec_model has no benchmark or quality field and spec_evaluation_suite has only metric_names, mode, gate_on_deployment and dataset_refs; any benchmark display rule needs a field proposal through #40.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review the finding that v1 spec_model has no benchmark or quality field and spec_evaluation_suite has only metric_names, mode, gate_on_deployment and dataset_refs; any benchmark display rule needs a field proposal through #40.",
+      "evidence": [
+        "research/market/benchmark-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": null,
+      "note": "Desk validation prepared by a non-assignee contributor for owner review; no benchmark run and no human acceptance.",
+      "review_request_date": null,
+      "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 62,
+    "workstream": "MR-09",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite"
+    ],
+    "artifact": "research/market/benchmark-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Accept, narrow or reject convention C1 (show a benchmark figure only with its full tuple, otherwise unknown) and review reuse rights for Harness Bench tasks and results (no license; website reserves all rights), with #60.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Accept, narrow or reject convention C1 (show a benchmark figure only with its full tuple, otherwise unknown) and review reuse rights for Harness Bench tasks and results (no license; website reserves all rights), with #60.",
+      "evidence": [
+        "research/market/benchmark-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": null,
+      "note": "Desk validation prepared by a non-assignee contributor for owner review; no benchmark run and no human acceptance.",
+      "review_request_date": null,
+      "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 62,
+    "workstream": "MR-09",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/benchmark-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Only if #36 decides a replication is wanted: price the prepared replication protocol (model endpoints or local GPUs, judge calls, at least three runs per task).",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Only if #36 decides a replication is wanted: price the prepared replication protocol (model endpoints or local GPUs, judge calls, at least three runs per task).",
+      "evidence": [
+        "research/market/benchmark-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": null,
+      "note": "Desk validation prepared by a non-assignee contributor for owner review; no benchmark run and no human acceptance. Conditional on a #36 decision.",
+      "review_request_date": null,
+      "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
+    }
   }
 ]
