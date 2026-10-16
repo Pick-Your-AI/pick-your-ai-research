@@ -22,7 +22,7 @@ GitHub Issues hold the research tasks: T0–T6 are parent issues and each compon
 
 | Workstream | Owner |
 | --- | --- |
-| [T0: Configuration](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1) | @CompleteDotTech |
+| [T0: Configuration](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1) | @tynamite |
 | [T1: Model Selection](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4) | @zwright8 |
 | [T2: Infrastructure](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) | @Mattycodes69 |
 | [T3: Knowledge & Retrieval](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12) (optional) | @zabyxc01 |
