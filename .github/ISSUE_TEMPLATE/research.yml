@@ -1,0 +1,30 @@
+name: Research finding
+description: Capture evidence for an AI Builder component or compatibility rule
+title: "Research: "
+labels: [research]
+body:
+  - type: textarea
+    id: decision
+    attributes:
+      label: User decision or compatibility rule
+      description: What builder choice will this evidence support?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary evidence
+      description: Include publisher, URL, access date, version, and price region/currency if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings and conditions
+      description: Identify hard constraints, warnings, unknowns, assumptions, and tradeoffs.
+    validations:
+      required: true
+  - type: textarea
+    id: followup
+    attributes:
+      label: Open questions
