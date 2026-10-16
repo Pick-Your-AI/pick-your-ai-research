@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "deployment_target_selection_id": {
+      "$ref": "common.schema.json#/$defs/selection_id"
+    },
+    "compatibility_report_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "quality_run_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "cost_estimate_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "resource_estimate_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "approver_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "rejected",
+              "pending"
+            ]
+          },
+          "approved_at": {
+            "$ref": "common.schema.json#/$defs/timestamp"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "security",
+              "owner",
+              "finance",
+              "compliance"
+            ]
+          }
+        },
+        "required": [
+          "approver_ref",
+          "decision",
+          "scope"
+        ]
+      },
+      "minItems": 1
+    },
+    "rollout_strategy": {
+      "type": "string",
+      "enum": [
+        "canary",
+        "blue_green",
+        "rolling",
+        "manual"
+      ]
+    },
+    "rollback_artifact_uri": {
+      "type": "string",
+      "format": "uri"
+    },
+    "requested_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "proposed",
+        "approved",
+        "rejected",
+        "deployed",
+        "rolled_back"
+      ]
+    },
+    "deployment_reference": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "build_id",
+    "build_revision",
+    "deployment_target_selection_id",
+    "compatibility_report_id",
+    "quality_run_id",
+    "cost_estimate_id",
+    "resource_estimate_id",
+    "approvals",
+    "rollout_strategy",
+    "requested_at",
+    "status"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/deployment-manifest.schema.json",
+  "title": "Deployment evidence and explicit approval manifest"
+}

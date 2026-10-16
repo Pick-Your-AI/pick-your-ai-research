@@ -1,0 +1,144 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "build.created",
+        "build.selection.upserted",
+        "build.selection.removed",
+        "build.link.upserted",
+        "build.objectives.updated",
+        "build.validation.completed",
+        "build.cost.estimated",
+        "build.deployment.requested",
+        "build.deployed",
+        "catalog.item.published",
+        "catalog.snapshot.published",
+        "ruleset.published",
+        "pricebook.published"
+      ]
+    },
+    "occurred_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "subject_type": {
+      "type": "string",
+      "enum": [
+        "build",
+        "catalog_item",
+        "catalog_snapshot",
+        "ruleset",
+        "pricebook"
+      ]
+    },
+    "subject_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "subject_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "subject_version": {
+      "type": "string"
+    },
+    "actor_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "causation_id": {
+      "type": "string"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "selection_id": {
+          "$ref": "common.schema.json#/$defs/selection_id"
+        },
+        "catalog_item_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "affected_kinds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "workload",
+              "deployment_mode",
+              "model_provider",
+              "model",
+              "context_policy",
+              "hosting_platform",
+              "accelerator",
+              "compute_profile",
+              "inference_engine",
+              "storage",
+              "data_source",
+              "knowledge_base",
+              "embedding_model",
+              "vector_database",
+              "rag_pipeline",
+              "agent_framework",
+              "tool",
+              "mcp_server",
+              "memory_store",
+              "integration",
+              "training_framework",
+              "training_compute",
+              "training_dataset",
+              "fine_tuned_model",
+              "guardrail",
+              "evaluation_suite",
+              "deployment_target",
+              "monitoring_stack",
+              "cost_policy"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "evaluation_report_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "cost_estimate_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": []
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "type",
+    "occurred_at",
+    "subject_type",
+    "subject_id",
+    "subject_revision",
+    "actor_ref",
+    "correlation_id",
+    "idempotency_key",
+    "payload"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/event.schema.json",
+  "title": "Minimal idempotent, secret-free integration event"
+}

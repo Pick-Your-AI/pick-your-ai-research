@@ -1,0 +1,140 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "dependent_kind": {
+            "type": "string",
+            "enum": [
+              "workload",
+              "deployment_mode",
+              "model_provider",
+              "model",
+              "context_policy",
+              "hosting_platform",
+              "accelerator",
+              "compute_profile",
+              "inference_engine",
+              "storage",
+              "data_source",
+              "knowledge_base",
+              "embedding_model",
+              "vector_database",
+              "rag_pipeline",
+              "agent_framework",
+              "tool",
+              "mcp_server",
+              "memory_store",
+              "integration",
+              "training_framework",
+              "training_compute",
+              "training_dataset",
+              "fine_tuned_model",
+              "guardrail",
+              "evaluation_suite",
+              "deployment_target",
+              "monitoring_stack",
+              "cost_policy"
+            ]
+          },
+          "depends_on_kind": {
+            "type": "string",
+            "enum": [
+              "workload",
+              "deployment_mode",
+              "model_provider",
+              "model",
+              "context_policy",
+              "hosting_platform",
+              "accelerator",
+              "compute_profile",
+              "inference_engine",
+              "storage",
+              "data_source",
+              "knowledge_base",
+              "embedding_model",
+              "vector_database",
+              "rag_pipeline",
+              "agent_framework",
+              "tool",
+              "mcp_server",
+              "memory_store",
+              "integration",
+              "training_framework",
+              "training_compute",
+              "training_dataset",
+              "fine_tuned_model",
+              "guardrail",
+              "evaluation_suite",
+              "deployment_target",
+              "monitoring_stack",
+              "cost_policy"
+            ]
+          },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "requires",
+              "constrains",
+              "informs",
+              "produces"
+            ]
+          },
+          "activation": {
+            "type": "string",
+            "enum": [
+              "always",
+              "self_hosted",
+              "non_api",
+              "rag_enabled",
+              "agents_enabled",
+              "fine_tuning_enabled",
+              "if_selected",
+              "production_only"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "dependent_kind",
+          "depends_on_kind",
+          "relationship",
+          "activation",
+          "rationale"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "edges"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/dependency-graph.schema.json",
+  "title": "Bidirectional invalidation graph for component dependencies"
+}

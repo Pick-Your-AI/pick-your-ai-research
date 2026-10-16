@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/common.schema.json",
+  "title": "AI Builder common types",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._:-]{2,119}$"
+    },
+    "selection_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{2,79}$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "decimal": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]{1,12})?$",
+      "description": "Non-negative base-10 decimal encoded as a string"
+    },
+    "money": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/decimal"
+        },
+        "currency": {
+          "$ref": "#/$defs/currency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ]
+    },
+    "secret_ref": {
+      "type": "string",
+      "pattern": "^secret://[A-Za-z0-9/_:.-]+$",
+      "description": "Opaque secret manager reference, never the credential"
+    },
+    "entity_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "checked_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "user_supplied",
+            "estimated",
+            "unverified"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "checked_at",
+        "verification_status"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Namespaced vendor or project extension fields only.",
+      "patternProperties": {
+        "^x_[a-z][a-z0-9_]*$": {}
+      },
+      "additionalProperties": false
+    }
+  }
+}

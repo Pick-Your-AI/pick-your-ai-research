@@ -1,0 +1,599 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation.build.fixture.1.r1",
+  "build_id": "build.fixture.1",
+  "build_revision": 1,
+  "catalog_snapshot_id": "catalog.fixture.1",
+  "ruleset_id": "rules.fixture.1",
+  "ruleset_version": "1.0.0",
+  "dependency_graph_id": "dependencies.core.1",
+  "dependency_graph_revision": 1,
+  "evaluated_at": "2026-10-16T09:00:00Z",
+  "result": "valid",
+  "deployment_readiness": "needs_review",
+  "findings": [
+    {
+      "rule_id": "rule.required.foundation",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_REQUIRED_FOUNDATION",
+      "message": "rule.required.foundation: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_context_policy",
+        "sel_deployment_mode",
+        "sel_model",
+        "sel_workload"
+      ]
+    },
+    {
+      "rule_id": "rule.model.provider.match",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MODEL_PROVIDER_MATCH",
+      "message": "rule.model.provider.match: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_model",
+        "sel_model_provider"
+      ]
+    },
+    {
+      "rule_id": "rule.model.context.fit",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MODEL_CONTEXT_FIT",
+      "message": "rule.model.context.fit: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_compute_profile",
+        "sel_context_policy",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.model.output.limit",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MODEL_OUTPUT_LIMIT",
+      "message": "rule.model.output.limit: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_context_policy",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.selfhost.requires.infrastructure",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_SELFHOST_REQUIRES_INFRASTRUCTURE",
+      "message": "rule.selfhost.requires.infrastructure: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile",
+        "sel_deployment_mode",
+        "sel_hosting_platform",
+        "sel_inference_engine"
+      ]
+    },
+    {
+      "rule_id": "rule.selfhost.requires.weights",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_SELFHOST_REQUIRES_WEIGHTS",
+      "message": "rule.selfhost.requires.weights: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_mode",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.engine.model.format",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_ENGINE_MODEL_FORMAT",
+      "message": "rule.engine.model.format: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_fine_tuned_model",
+        "sel_inference_engine",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.engine.accelerator.backend",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_ENGINE_ACCELERATOR_BACKEND",
+      "message": "rule.engine.accelerator.backend: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_hosting_platform",
+        "sel_inference_engine"
+      ]
+    },
+    {
+      "rule_id": "rule.precision.engine",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_PRECISION_ENGINE",
+      "message": "rule.precision.engine: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_inference_engine",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.precision.accelerator",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_PRECISION_ACCELERATOR",
+      "message": "rule.precision.accelerator: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.vram.estimate.fit",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_VRAM_ESTIMATE_FIT",
+      "message": "rule.vram.estimate.fit: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.api.model.access",
+      "outcome": "skipped",
+      "severity": "error",
+      "code": "RULE_API_MODEL_ACCESS",
+      "message": "rule.api.model.access: skipped",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_mode",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.host.region",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_HOST_REGION",
+      "message": "rule.host.region: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_target",
+        "sel_hosting_platform",
+        "sel_workload"
+      ]
+    },
+    {
+      "rule_id": "rule.embedding.dimension",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_EMBEDDING_DIMENSION",
+      "message": "rule.embedding.dimension: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_embedding_model",
+        "sel_memory_store",
+        "sel_rag_pipeline",
+        "sel_vector_database"
+      ]
+    },
+    {
+      "rule_id": "rule.vector.dimension.support",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_VECTOR_DIMENSION_SUPPORT",
+      "message": "rule.vector.dimension.support: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_embedding_model",
+        "sel_vector_database"
+      ]
+    },
+    {
+      "rule_id": "rule.vector.distance.support",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_VECTOR_DISTANCE_SUPPORT",
+      "message": "rule.vector.distance.support: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_embedding_model",
+        "sel_vector_database"
+      ]
+    },
+    {
+      "rule_id": "rule.embedding.distance.support",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_EMBEDDING_DISTANCE_SUPPORT",
+      "message": "rule.embedding.distance.support: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_embedding_model",
+        "sel_vector_database"
+      ]
+    },
+    {
+      "rule_id": "rule.rag.knowledge",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_RAG_KNOWLEDGE",
+      "message": "rule.rag.knowledge: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_data_source",
+        "sel_knowledge_base",
+        "sel_rag_pipeline"
+      ]
+    },
+    {
+      "rule_id": "rule.rag.dense.dependencies",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_RAG_DENSE_DEPENDENCIES",
+      "message": "rule.rag.dense.dependencies: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_embedding_model",
+        "sel_rag_pipeline",
+        "sel_vector_database"
+      ]
+    },
+    {
+      "rule_id": "rule.agent.tools.framework",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_AGENT_TOOLS_FRAMEWORK",
+      "message": "rule.agent.tools.framework: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_agent_framework",
+        "sel_tool"
+      ]
+    },
+    {
+      "rule_id": "rule.agent.mcp.framework",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_AGENT_MCP_FRAMEWORK",
+      "message": "rule.agent.mcp.framework: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_agent_framework",
+        "sel_mcp_server",
+        "sel_tool"
+      ]
+    },
+    {
+      "rule_id": "rule.memory.vector.storage",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MEMORY_VECTOR_STORAGE",
+      "message": "rule.memory.vector.storage: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_memory_store",
+        "sel_vector_database"
+      ]
+    },
+    {
+      "rule_id": "rule.tool.mutation.guardrails",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TOOL_MUTATION_GUARDRAILS",
+      "message": "rule.tool.mutation.guardrails: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_agent_framework",
+        "sel_guardrail",
+        "sel_mcp_server",
+        "sel_tool"
+      ]
+    },
+    {
+      "rule_id": "rule.training.model.capable",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TRAINING_MODEL_CAPABLE",
+      "message": "rule.training.model.capable: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_fine_tuned_model",
+        "sel_model",
+        "sel_training_compute",
+        "sel_training_dataset",
+        "sel_training_framework"
+      ]
+    },
+    {
+      "rule_id": "rule.training.dataset.governance",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TRAINING_DATASET_GOVERNANCE",
+      "message": "rule.training.dataset.governance: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_data_source",
+        "sel_guardrail",
+        "sel_training_dataset"
+      ]
+    },
+    {
+      "rule_id": "rule.training.base.lineage",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TRAINING_BASE_LINEAGE",
+      "message": "rule.training.base.lineage: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_fine_tuned_model",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.training.method.support",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TRAINING_METHOD_SUPPORT",
+      "message": "rule.training.method.support: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_model",
+        "sel_training_framework"
+      ]
+    },
+    {
+      "rule_id": "rule.training.backend.support",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TRAINING_BACKEND_SUPPORT",
+      "message": "rule.training.backend.support: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_training_compute",
+        "sel_training_framework"
+      ]
+    },
+    {
+      "rule_id": "rule.restricted.monitoring.redaction",
+      "outcome": "skipped",
+      "severity": "error",
+      "code": "RULE_RESTRICTED_MONITORING_REDACTION",
+      "message": "rule.restricted.monitoring.redaction: skipped",
+      "remediation": "",
+      "selection_ids": [
+        "sel_monitoring_stack",
+        "sel_workload"
+      ]
+    },
+    {
+      "rule_id": "rule.production.gates",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_PRODUCTION_GATES",
+      "message": "rule.production.gates: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_target",
+        "sel_evaluation_suite",
+        "sel_guardrail",
+        "sel_monitoring_stack"
+      ]
+    },
+    {
+      "rule_id": "rule.budget.monthly.cap",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_BUDGET_MONTHLY_CAP",
+      "message": "rule.budget.monthly.cap: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_compute_profile",
+        "sel_cost_policy",
+        "sel_integration",
+        "sel_model",
+        "sel_storage",
+        "sel_training_compute"
+      ]
+    },
+    {
+      "rule_id": "rule.compute.sku.accelerator",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_COMPUTE_SKU_ACCELERATOR",
+      "message": "rule.compute.sku.accelerator: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile"
+      ]
+    },
+    {
+      "rule_id": "rule.compute.sku.host",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_COMPUTE_SKU_HOST",
+      "message": "rule.compute.sku.host: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_compute_profile",
+        "sel_hosting_platform"
+      ]
+    },
+    {
+      "rule_id": "rule.compute.accelerator.count",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_COMPUTE_ACCELERATOR_COUNT",
+      "message": "rule.compute.accelerator.count: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile"
+      ]
+    },
+    {
+      "rule_id": "rule.host.accelerator.catalog",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_HOST_ACCELERATOR_CATALOG",
+      "message": "rule.host.accelerator.catalog: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_hosting_platform"
+      ]
+    },
+    {
+      "rule_id": "rule.tensor.parallel.devices",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TENSOR_PARALLEL_DEVICES",
+      "message": "rule.tensor.parallel.devices: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile",
+        "sel_inference_engine"
+      ]
+    },
+    {
+      "rule_id": "rule.context.policy.limit",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_CONTEXT_POLICY_LIMIT",
+      "message": "rule.context.policy.limit: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_context_policy",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.model.serving.mode.selfhost",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MODEL_SERVING_MODE_SELFHOST",
+      "message": "rule.model.serving.mode.selfhost: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_mode",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.model.selfhost.license",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MODEL_SELFHOST_LICENSE",
+      "message": "rule.model.selfhost.license: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_mode",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.deployment.target.region",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_DEPLOYMENT_TARGET_REGION",
+      "message": "rule.deployment.target.region: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_deployment_target",
+        "sel_hosting_platform",
+        "sel_workload"
+      ]
+    },
+    {
+      "rule_id": "rule.memory.framework.compatibility",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_MEMORY_FRAMEWORK_COMPATIBILITY",
+      "message": "rule.memory.framework.compatibility: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_agent_framework",
+        "sel_memory_store"
+      ]
+    },
+    {
+      "rule_id": "rule.training.artifact.engine",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_TRAINING_ARTIFACT_ENGINE",
+      "message": "rule.training.artifact.engine: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_fine_tuned_model",
+        "sel_inference_engine"
+      ]
+    },
+    {
+      "rule_id": "rule.knowledge.restricted.acl",
+      "outcome": "skipped",
+      "severity": "error",
+      "code": "RULE_KNOWLEDGE_RESTRICTED_ACL",
+      "message": "rule.knowledge.restricted.acl: skipped",
+      "remediation": "",
+      "selection_ids": [
+        "sel_guardrail",
+        "sel_knowledge_base",
+        "sel_workload"
+      ]
+    },
+    {
+      "rule_id": "rule.vram.per.device.fit",
+      "outcome": "pass",
+      "severity": "error",
+      "code": "RULE_VRAM_PER_DEVICE_FIT",
+      "message": "rule.vram.per.device.fit: pass",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_model"
+      ]
+    },
+    {
+      "rule_id": "rule.tensor.parallel.engine.support",
+      "outcome": "skipped",
+      "severity": "error",
+      "code": "RULE_TENSOR_PARALLEL_ENGINE_SUPPORT",
+      "message": "rule.tensor.parallel.engine.support: skipped",
+      "remediation": "",
+      "selection_ids": [
+        "sel_accelerator",
+        "sel_compute_profile",
+        "sel_inference_engine"
+      ]
+    }
+  ],
+  "summary": {
+    "passed": 41,
+    "failed": 0,
+    "unknown": 0,
+    "skipped": 4
+  }
+}

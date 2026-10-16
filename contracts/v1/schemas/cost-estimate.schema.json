@@ -1,0 +1,162 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "build_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "pricebook_id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "estimated_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "period_days": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "currency": {
+      "$ref": "common.schema.json#/$defs/currency"
+    },
+    "line_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "selection_id": {
+            "$ref": "common.schema.json#/$defs/selection_id"
+          },
+          "price_rate_id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "meter": {
+            "type": "string",
+            "enum": [
+              "input_tokens_1m",
+              "output_tokens_1m",
+              "cached_input_tokens_1m",
+              "embedding_tokens_1m",
+              "request",
+              "gpu_hour",
+              "cpu_hour",
+              "storage_gb_month",
+              "vector_gb_month",
+              "agent_run",
+              "seat_month",
+              "license_month",
+              "one_time"
+            ]
+          },
+          "quantity": {
+            "$ref": "common.schema.json#/$defs/decimal"
+          },
+          "unit_price": {
+            "$ref": "common.schema.json#/$defs/money"
+          },
+          "amount": {
+            "$ref": "common.schema.json#/$defs/money"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "measured",
+              "workload_projection",
+              "vendor_quote",
+              "manual_override"
+            ]
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "selection_id",
+          "price_rate_id",
+          "meter",
+          "quantity",
+          "unit_price",
+          "amount",
+          "method",
+          "confidence",
+          "assumptions"
+        ]
+      }
+    },
+    "subtotal": {
+      "$ref": "common.schema.json#/$defs/money"
+    },
+    "tax": {
+      "$ref": "common.schema.json#/$defs/money"
+    },
+    "total": {
+      "$ref": "common.schema.json#/$defs/money"
+    },
+    "coverage": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "partial",
+        "unknown"
+      ]
+    },
+    "unpriced_selection_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/selection_id"
+      },
+      "uniqueItems": true
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "build_id",
+    "build_revision",
+    "pricebook_id",
+    "estimated_at",
+    "period_days",
+    "currency",
+    "line_items",
+    "subtotal",
+    "tax",
+    "total",
+    "coverage",
+    "unpriced_selection_ids",
+    "warnings"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/cost-estimate.schema.json",
+  "title": "Auditable cost estimate based on pinned build and pricebook"
+}

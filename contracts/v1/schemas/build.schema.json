@@ -1,0 +1,223 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "owner_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "validated",
+        "ready",
+        "deployed",
+        "archived"
+      ]
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "updated_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "objectives": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "region": {
+          "type": "string",
+          "minLength": 1
+        },
+        "currency": {
+          "$ref": "common.schema.json#/$defs/currency"
+        },
+        "monthly_budget_amount": {
+          "$ref": "common.schema.json#/$defs/decimal"
+        },
+        "requests_per_day": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "avg_output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_concurrency": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "data_classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        },
+        "max_latency_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "region",
+        "currency",
+        "data_classification"
+      ]
+    },
+    "locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "catalog_snapshot_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "ruleset_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "ruleset_version": {
+          "$ref": "common.schema.json#/$defs/semver"
+        },
+        "dependency_graph_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "dependency_graph_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pricebook_id": {
+          "$ref": "common.schema.json#/$defs/id"
+        }
+      },
+      "required": [
+        "catalog_snapshot_id",
+        "ruleset_id",
+        "ruleset_version",
+        "dependency_graph_id",
+        "dependency_graph_revision"
+      ]
+    },
+    "selections": {
+      "type": "array",
+      "items": {
+        "$ref": "selection.schema.json"
+      },
+      "minItems": 2
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "from_selection_id": {
+            "$ref": "common.schema.json#/$defs/selection_id"
+          },
+          "to_selection_id": {
+            "$ref": "common.schema.json#/$defs/selection_id"
+          },
+          "relation": {
+            "type": "string",
+            "enum": [
+              "uses",
+              "provided_by",
+              "runs_on",
+              "served_by",
+              "stored_in",
+              "indexes_with",
+              "reads_from",
+              "derived_from",
+              "secured_by",
+              "evaluated_by",
+              "observed_by",
+              "deploys_to",
+              "trained_on",
+              "calls",
+              "exposes",
+              "feeds",
+              "other"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "from_selection_id",
+          "to_selection_id",
+          "relation"
+        ]
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fail_on_unknown": {
+          "type": "boolean"
+        },
+        "require_evaluations_for_production": {
+          "type": "boolean"
+        },
+        "allow_unverified_catalog_items": {
+          "type": "boolean"
+        },
+        "min_resource_confidence": {
+          "type": "string",
+          "enum": [
+            "estimated",
+            "calibrated",
+            "verified"
+          ]
+        }
+      },
+      "required": []
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "name",
+    "owner_ref",
+    "lifecycle",
+    "created_at",
+    "updated_at",
+    "objectives",
+    "locks",
+    "selections",
+    "links"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/build.schema.json",
+  "title": "AI Builder versioned build snapshot"
+}

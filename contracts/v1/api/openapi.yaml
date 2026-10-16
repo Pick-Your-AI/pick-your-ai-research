@@ -1,0 +1,347 @@
+openapi: 3.1.0
+info:
+  title: AI Builder Shared Configuration API
+  version: 1.0.0
+  description: |
+    Reference transport contract. Schemas in ../schemas/*.schema.json are canonical.
+    Do not infer production permission from compatibility alone. All write routes are
+    authenticated; deploy proposals do not execute deployment.
+servers:
+  - url: /v1
+security:
+  - bearerAuth: []
+paths:
+  /component-kinds:
+    get:
+      operationId: listComponentKinds
+      summary: Read canonical kind registry
+      responses:
+        '200':
+          description: Component kind metadata from component-registry.json
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [schema_version, kinds]
+                properties:
+                  schema_version: {type: string}
+                  kinds: {type: object, additionalProperties: {type: object}}
+  /catalog/snapshots/{snapshot_id}:
+    get:
+      operationId: readCatalogSnapshot
+      summary: Read an immutable sourced catalog snapshot
+      parameters:
+        - $ref: '#/components/parameters/snapshot_id'
+      responses:
+        '200':
+          description: Immutable catalog snapshot
+          content:
+            application/json:
+              schema: {$ref: '../schemas/catalog-snapshot.schema.json'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /dependencies/{dependency_id}:
+    get:
+      operationId: readDependencyGraph
+      summary: Read a versioned graph for invalidation
+      parameters:
+        - name: dependency_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Typed dependency graph
+          content:
+            application/json:
+              schema: {$ref: '../schemas/dependency-graph.schema.json'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /rulesets/{ruleset_id}:
+    get:
+      operationId: readRuleset
+      summary: Read a published immutable ruleset
+      parameters:
+        - name: ruleset_id
+          in: path
+          required: true
+          schema: {type: string}
+        - name: version
+          in: query
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Exact published ruleset version
+          content:
+            application/json:
+              schema: {$ref: '../schemas/ruleset.schema.json'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /pricebooks/{pricebook_id}:
+    get:
+      operationId: readPricebook
+      summary: Read a pinned sourced rate card
+      parameters:
+        - name: pricebook_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Pricebook with effective dates
+          content:
+            application/json:
+              schema: {$ref: '../schemas/pricebook.schema.json'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /builds:
+    post:
+      operationId: createBuild
+      summary: Create first immutable build revision
+      parameters:
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/build.schema.json'}
+      responses:
+        '201':
+          description: Created revision 1; Location and ETag headers returned
+          headers:
+            ETag:
+              schema: {type: string}
+          content:
+            application/json:
+              schema: {$ref: '../schemas/build.schema.json'}
+        '422': {$ref: '#/components/responses/Invalid'}
+  /builds/{build_id}:
+    get:
+      operationId: readBuild
+      summary: Read current immutable build head
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+      responses:
+        '200':
+          description: Current build snapshot
+          headers:
+            ETag:
+              schema: {type: string}
+          content:
+            application/json:
+              schema: {$ref: '../schemas/build.schema.json'}
+        '404': {$ref: '#/components/responses/NotFound'}
+    put:
+      operationId: replaceBuildIfRevisionMatches
+      summary: Atomic optimistic update, not last-write-wins
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - $ref: '#/components/parameters/ifMatch'
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/build.schema.json'}
+      responses:
+        '200':
+          description: New immutable build revision
+          headers:
+            ETag:
+              schema: {type: string}
+          content:
+            application/json:
+              schema: {$ref: '../schemas/build.schema.json'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/Invalid'}
+  /builds/{build_id}/evaluate:
+    post:
+      operationId: evaluateBuild
+      summary: Validate pinned build and catalog against canonical ruleset
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [build_revision]
+              properties:
+                build_revision: {type: integer, minimum: 1}
+                resource_estimate_id: {type: string}
+                cost_estimate_id: {type: string}
+      responses:
+        '200':
+          description: Rules and evidence evaluated for the named revision
+          content:
+            application/json:
+              schema: {$ref: '../schemas/evaluation-report.schema.json'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/Invalid'}
+  /builds/{build_id}/resource-estimates:
+    post:
+      operationId: publishResourceEstimate
+      summary: Store version-pinned compute/capacity estimator evidence
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/resource-estimate.schema.json'}
+      responses:
+        '201':
+          description: Immutable resource estimate created
+          content:
+            application/json:
+              schema: {$ref: '../schemas/resource-estimate.schema.json'}
+        '422': {$ref: '#/components/responses/Invalid'}
+  /builds/{build_id}/estimate-cost:
+    post:
+      operationId: estimateCost
+      summary: Compute quote for selected revision and pricebook
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [build_revision, pricebook_id, period_days]
+              properties:
+                build_revision: {type: integer, minimum: 1}
+                pricebook_id: {type: string}
+                period_days: {type: integer, minimum: 1}
+      responses:
+        '200':
+          description: Complete/partial cost estimate with explicit coverage
+          content:
+            application/json:
+              schema: {$ref: '../schemas/cost-estimate.schema.json'}
+        '422': {$ref: '#/components/responses/Invalid'}
+  /builds/{build_id}/quality-runs:
+    post:
+      operationId: recordQualityEvaluationRun
+      summary: Store measured benchmark/safety evaluation results
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/quality-evaluation-run.schema.json'}
+      responses:
+        '201':
+          description: Immutable evaluation run recorded
+          content:
+            application/json:
+              schema: {$ref: '../schemas/quality-evaluation-run.schema.json'}
+        '422': {$ref: '#/components/responses/Invalid'}
+  /builds/{build_id}/compatible-options:
+    get:
+      operationId: listCompatibleOptions
+      summary: Rank catalog alternatives with explainable compatibility status
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - name: kind
+          in: query
+          required: true
+          schema: {type: string}
+        - name: role
+          in: query
+          required: false
+          schema: {type: string, default: primary}
+      responses:
+        '200':
+          description: Results do not mutate the build
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required: [build_id, build_revision, kind, options]
+                properties:
+                  build_id: {type: string}
+                  build_revision: {type: integer}
+                  kind: {type: string}
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: false
+                      required: [catalog_item_id, catalog_item_version, verdict, rule_ids]
+                      properties:
+                        catalog_item_id: {type: string}
+                        catalog_item_version: {type: string}
+                        verdict: {type: string, enum: [compatible, incompatible, unknown]}
+                        rule_ids: {type: array, items: {type: string}}
+  /builds/{build_id}/deployment-proposals:
+    post:
+      operationId: proposeDeployment
+      summary: Validate evidence and open an approval manifest; never auto-deploy
+      parameters:
+        - $ref: '#/components/parameters/build_id'
+        - $ref: '#/components/parameters/idempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '../schemas/deployment-manifest.schema.json'}
+      responses:
+        '201':
+          description: Pending approval manifest
+          content:
+            application/json:
+              schema: {$ref: '../schemas/deployment-manifest.schema.json'}
+        '422': {$ref: '#/components/responses/Invalid'}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: OAuth2/JWT
+  parameters:
+    build_id: {name: build_id, in: path, required: true, schema: {type: string}}
+    snapshot_id: {name: snapshot_id, in: path, required: true, schema: {type: string}}
+    idempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: {type: string, minLength: 1}
+    ifMatch:
+      name: If-Match
+      in: header
+      required: true
+      description: Quoted current build revision; candidate body must use the next revision.
+      schema: {type: string}
+  schemas:
+    Error:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code: {type: string}
+        message: {type: string}
+        correlation_id: {type: string}
+        field_path: {type: string}
+  responses:
+    Invalid:
+      description: Invalid JSON Schema payload or failed semantic invariant
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    Conflict:
+      description: Stale revision or conflicting concurrent agent write
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    NotFound:
+      description: Requested immutable resource not found
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evt.fixture.1",
+  "type": "build.selection.upserted",
+  "occurred_at": "2026-10-16T09:00:00Z",
+  "subject_type": "build",
+  "subject_id": "build.fixture.1",
+  "subject_revision": 1,
+  "actor_ref": "agent.model-agent",
+  "correlation_id": "correlation.fixture.1",
+  "idempotency_key": "build.fixture.1.rev1.sel_model",
+  "payload": {
+    "selection_id": "sel_model",
+    "affected_kinds": [
+      "model",
+      "context_policy",
+      "compute_profile",
+      "inference_engine",
+      "rag_pipeline",
+      "agent_framework",
+      "cost_policy"
+    ]
+  }
+}

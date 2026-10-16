@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "captured_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "catalog-item.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "revision",
+    "captured_at",
+    "items"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.ai-builder.example/v1/catalog-snapshot.schema.json",
+  "title": "Versioned catalog snapshot"
+}
