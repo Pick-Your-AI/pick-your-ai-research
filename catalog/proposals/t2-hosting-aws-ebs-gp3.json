@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "id": "aws-ebs-gp3",
+  "kind": "storage",
+  "tier": "T2",
+  "name": "Amazon EBS General Purpose SSD gp3",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot. Region, encryption configuration, actual capacity and price quote require selection-specific evidence.",
+  "spec": {
+    "storage_type": "block",
+    "hosting_ref": "aws-ec2"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "EBS supplies block volumes for EC2."
+    },
+    {
+      "source_uri": "https://aws.amazon.com/ebs/pricing/",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "gp3 is metered provisioned storage. Conditional example is not promoted to a regional price."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}
