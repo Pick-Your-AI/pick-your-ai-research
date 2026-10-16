@@ -184,8 +184,23 @@
     "view": "11 — Evidence Review",
     "number": 23,
     "filter": "status:\"In Review\"",
-    "count": 0,
-    "issues": []
+    "count": 14,
+    "issues": [
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      66
+    ]
   },
   {
     "view": "12 — Completed Research",

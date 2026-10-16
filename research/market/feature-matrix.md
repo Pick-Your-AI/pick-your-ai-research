@@ -8,7 +8,7 @@ F = bounded feature exercised; P = narrower documented capability; N = explicitl
 | Harness Bench | ? | ? | ? | ? | ? | ? | ? | ? | ? | ? |
 | llmfit | ? | P | P | P | P | ? | ? | ? | ? | P |
 | Local AI VRAM Calculator / GPU Planner | ? | ? | ? | P | P | ? | ? | ? | ? | ? |
-| Flocci Ask / Stack Builder | F | P | ? | ? | ? | ? | ? | ? | ? | ? |
+| Flocci Ask / Stack Builder | F | P | ? | ? | ? | P | ? | ? | ? | ? |
 | Artificial Analysis | ? | ? | P | ? | ? | ? | ? | ? | P | ? |
 | OpenRouter | ? | P | P | ? | P | ? | ? | ? | P | ? |
 | Hugging Face Hub | ? | P | P | ? | ? | ? | ? | ? | ? | ? |

@@ -52,7 +52,11 @@ def validate():
         if item.get('parent_number'):
             assert item['parent_number'] in numbers
             parents[item['number']] = item['parent_number']
-        assert item['status'] != 'Done', 'initial draft must not claim acceptance'
+        if item['status'] == 'Done':
+            completion = item.get('completion_evidence', {})
+            assert all(completion.get(k) for k in
+                       ('accepted_commit', 'review_url', 'handoff_acceptance')), (
+                'Done requires recorded acceptance evidence')
     for start in parents:
         seen = set()
         current = start

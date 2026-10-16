@@ -11,3 +11,5 @@ Recommend validating a bounded hybrid decision workflow with evidence, uncertain
 Demand remains the largest unresolved business question. Public developer evidence supports investigating verifiability, but no study here measures paying demand. [Scenarios](market-sizing.md) explicitly use assumptions; [personas](customers.md) are hypotheses. Source access is not redistribution permission, and software licenses do not automatically cover aggregated data.
 
 The Project separates desk-research review from independent validation. No issue is Done until evidence is merged, criteria are met and consuming owners accept handoffs. [Traceability](handoffs.md) preserves existing technical ownership; existing PR #46 remains the training-framework source rather than being duplicated.
+
+A subsequent free Flocci Stack Builder test generated ordered RAG component advice with constraints and uncertainty. This strengthens the direct-competition finding: guided workflow output alone is not a distinctive proposition. Test actual reproducibility, error correction and trusted compatibility as narrower hypotheses.

@@ -20,10 +20,11 @@
     "Awaiting Decision": 1
   },
   "status_counts": {
-    "In Progress": 13,
-    "Ready": 6,
+    "In Review": 14,
+    "Ready": 5,
     "Triage": 1
   },
   "unassigned": 0,
-  "untriaged": 0
+  "untriaged": 0,
+  "total_issues_reviewed": 55
 }

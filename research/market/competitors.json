@@ -230,12 +230,16 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Conversational tool discovery; adjacent Stack Builder requires direct substitute testing.",
+    "capabilities": "Conversational discovery and generated ordered AI workflows with constraints, explanations and uncertainty statements.",
     "documented_features": [
       "natural_language",
       "model_search",
       "explanation",
-      "saved"
+      "saved",
+      "guided_selection",
+      "workflow",
+      "rag",
+      "constraints"
     ],
     "pricing": {
       "summary": "Free browsing; credits for AI features. One free Ask interaction returned explained tool recommendations.",
@@ -276,7 +280,7 @@
     ],
     "limitations": [
       "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
-      "Stack Builder browser page showed sign-in/free-allowance gate; only Ask response tested. Static and rendered catalog counts conflict."
+      "One generated RAG workflow observed; compatibility, privacy and deployability not independently tested. Static and rendered catalog counts conflict."
     ]
   },
   {

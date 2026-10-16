@@ -31,11 +31,11 @@
       "Preserve existing technical ownership and canonical evidence",
       "Review all handoffs and unresolved decisions"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Epic",
     "parent_key": null,
-    "next_action": "Review initial evidence PR and coordinate owners; no research is accepted yet.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.1,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -46,7 +46,8 @@
     "node_id": "I_kwDOVMD-Bs8AAAABXqz2qw",
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47",
-    "item_id": "PVTI_lADOFHg4Xc4BnViWzhBO_oo"
+    "item_id": "PVTI_lADOFHg4Xc4BnViWzhBO_oo",
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-01 — Competitive Landscape Discovery",
@@ -75,11 +76,11 @@
       "Record entity boundaries and unknowns",
       "Select 10–15 material deep dives"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.9,
     "priority": "P0",
     "priority_rationale": "Sequence by weighted rubric. P0 foundation: prevents false uniqueness claims across all downstream strategy.",
@@ -91,7 +92,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBO_xE",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-02 — Competitive Feature Matrix",
@@ -126,11 +128,11 @@
       "Keep silence Unknown",
       "Review overlap and compare coverage"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.65,
     "priority": "P0",
     "priority_rationale": "Sequence by weighted rubric. P0 foundation: a common evidence taxonomy is required before competitor coverage and gap claims can be compared reliably.",
@@ -142,7 +144,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBO_3Y",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-03 — Competitor Deep Dives",
@@ -172,11 +175,11 @@
       "Separate commercial access from reuse rights",
       "Test material differentiation counterexamples"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.45,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -188,7 +191,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBO_9o",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-04 — PCPartPicker Product Experience",
@@ -217,11 +221,11 @@
       "Translate original AI UX concepts",
       "Separate observed behavior from proposed requirements"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Needs Input",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Obtain an authorized PCPartPicker list walkthrough; independent AI UX hypotheses are drafted for review.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. An authorized PCPartPicker walkthrough is still needed.",
     "score": 2.95,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -233,7 +237,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPADE",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-05 — Customer Research & Personas",
@@ -263,11 +268,11 @@
       "Define neutral interview questions",
       "Distinguish desk personas from validated customers"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.25,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -279,7 +284,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAIg",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-06 — Market Size, Demand & Trends",
@@ -306,11 +312,11 @@
       "Build explicit sizing scenarios",
       "Record missing search and conversion evidence"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 3.65,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -322,7 +328,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPANE",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-07 — Pricing & Monetization",
@@ -349,11 +356,11 @@
       "Assess neutrality conflicts",
       "Propose willingness-to-pay validation"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 3.55,
     "priority": "P2",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -365,7 +372,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPASQ",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-08 — Data Sources & Integration Opportunities",
@@ -396,11 +404,11 @@
       "Record APIs update policies and missing terms",
       "Route reuse decisions to the existing #41 owner"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.55,
     "priority": "P0",
     "priority_rationale": "Sequence by weighted rubric. Override: unresolved data rights could invalidate the proposed product and all feed integrations.",
@@ -412,7 +420,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAZE",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-09 — Technical Feasibility",
@@ -447,11 +456,11 @@
       "Define falsifiable measurement protocol",
       "Reuse technical component decisions rather than duplicate them"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.4,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -463,7 +472,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAfU",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-10 — Competitive Differentiation",
@@ -491,11 +501,11 @@
       "Evaluate source provenance and explainability",
       "Define kill and pivot criteria"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.3,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -507,7 +517,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAms",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-11 — MVP Definition & Prioritization",
@@ -540,11 +551,11 @@
       "Define minimum evidence requirements",
       "Keep recommendation separate from implementation authorization"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.1,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -556,7 +567,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAsg",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-12 — Research Quality, Synthesis & Handoffs",
@@ -600,11 +612,11 @@
       "Request affected-owner review",
       "Publish unresolved decisions and executive synthesis"
     ],
-    "status": "In Progress",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Research",
     "parent_key": "program",
-    "next_action": "Review the initial desk-research draft and resolve named evidence gaps before acceptance.",
+    "next_action": "Review PR #67; confirm, reject or narrow the evidence and listed handoffs. Do not mark Done until acceptance criteria and consumer reviews are met.",
     "score": 4.1,
     "priority": "P1",
     "priority_rationale": "Sequence by weighted rubric. ",
@@ -616,7 +628,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPA0o",
-    "parent_number": 47
+    "parent_number": 47,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-08: Validate commercial display and redistribution rights",
@@ -658,7 +671,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPA6E",
-    "parent_number": 55
+    "parent_number": 55,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
@@ -702,7 +716,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPA_A",
-    "parent_number": 56
+    "parent_number": 56,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-09: Validate benchmark comparability and harness effects",
@@ -745,7 +760,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBEY",
-    "parent_number": 56
+    "parent_number": 56,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-05: Validate customer demand and willingness to pay",
@@ -789,7 +805,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBLI",
-    "parent_number": 52
+    "parent_number": 52,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-07: Validate price freshness and total-cost scenarios",
@@ -833,7 +850,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBRM",
-    "parent_number": 54
+    "parent_number": 54,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-09: Review RAG interoperability market claims",
@@ -879,7 +897,8 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBXw",
-    "parent_number": 56
+    "parent_number": 56,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   },
   {
     "title": "MR-03: Test direct stack-builder substitutes",
@@ -907,11 +926,11 @@
       "Inspect saved or exported configuration claims",
       "Record counterexamples and pivot recommendation"
     ],
-    "status": "Ready",
+    "status": "In Review",
     "readiness": "Ready",
     "work_type": "Validation",
     "parent_key": "MR-03",
-    "next_action": "Execute the documented validation protocol; initial research findings are starting inputs, not completed validation.",
+    "next_action": "Review the completed Flocci browser scenario in PR #67; next test contradictory constraints, actual deployment/export behavior and another substitute.",
     "score": 4.75,
     "priority": "P0",
     "priority_rationale": "Sequence by weighted rubric. P0 invalidation risk: a direct substitute may already satisfy the proposed MVP; this test can change or stop downstream positioning.",
@@ -923,6 +942,7 @@
     "created": true,
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPBd4",
-    "parent_number": 50
+    "parent_number": 50,
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
   }
 ]
