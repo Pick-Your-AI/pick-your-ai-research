@@ -14,6 +14,8 @@ No imported schema, generator, reference evaluator, baseline rule or canonical e
 
 Each proposal supplies participating fields, applicability, assertion/evidence, explanation/remediation, missing-data behavior and passing/failing/unknown/non-applicable examples. Outcomes are `pass`, `fail`, `unknown`, `skipped`; severities separately `info`, `warning`, `error`. Synthetic examples illustrate assertions only and are never vendor measurements. A sourced premise, a schema pass, an approved rule and a consuming-owner acceptance are separate milestones.
 
+The continuation audit makes the fixed-severity clause split explicit within the existing 12 groups: constraints, missing-evidence diagnostics and applicability diagnostics have separate proposed IDs where needed. No clause changes severity in response to its outcome. These notes remain proposals for #40, including any richer evidence predicates that v1 cannot express.
+
 ## Contract gaps requiring decisions
 
 | ID / proposed concept | Existing v1 limitation and concrete example | Proposed review scope / types and units | Owner and affected consumers | Version / migration implications |

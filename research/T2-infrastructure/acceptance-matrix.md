@@ -2,6 +2,8 @@
 
 Issue criteria copied verbatim from the live issues on 2026-10-16. `Prepared` means an artifact is supplied for review; it does not satisfy merged-work or owner-confirmation requirements. All issues remain open.
 
+Continuation audit: all **32 criteria** were compared verbatim against fresh #8–#11 issue bodies on 2026-10-16. The matrix still contains 24 prepared content criteria and eight unmet merge/parent-completion or owner-confirmation gates. None is promoted to accepted by passing automation or agent review. Source corrections and fixed-severity rule clauses are recorded in [validation.md](validation.md).
+
 | ID | Acceptance criterion (unchanged) | Artifact / evidence to inspect | Reviewer / consuming owner | Status |
 | --- | --- | --- | --- | --- |
 | 8.1 | All sub-issues are closed with merged decision records that meet their acceptance criteria | [README.md](README.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Pending merge / acceptance |
@@ -41,7 +43,7 @@ Issue criteria copied verbatim from the live issues on 2026-10-16. `Prepared` me
 
 Publication: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), with issue-specific progress and handoff requests linked from [handoffs.md](handoffs.md#posted-requests-not-acknowledgements). No owner acceptance or merge is inferred from publication; every Pending status remains pending.
 
-- Default branch `main` at `324518ff8d9629fbb7cd4f2d6a27dcc219300fd4`; PR #44 merged at `9769fcd9ea380b1211669b2753181c7782444178` on 2026-10-16. PR #45 also merged; related #68 and #67 remain open on the old contract branch. No existing T2 records or proposals were present.
+- Initial intake default branch `main` at `324518ff8d9629fbb7cd4f2d6a27dcc219300fd4`; PR #44 merged at `9769fcd9ea380b1211669b2753181c7782444178` on 2026-10-16. PR #45 also merged. No T2 records or proposals were present on that default-branch baseline. Continuation reuses existing PR #75 and its records rather than treating them as new findings.
 - Native relationships read through GitHub GraphQL: #8 has #9/#10/#11; each child's parent is #8; none has `blockedBy` relationships. No relationships are changed.
 - Live assignees: #8–#11 @Mattycodes69. All scoped and consuming issue comments were read; no handoff acknowledgements existed at intake.
 - Public Project UI was read on 2026-10-16: #8/#9/#10/#11 all `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`; priority #8/#10/#11 `Critical`, #9 `High`. These live values differ from the brief and CONTRIBUTING's earlier field names. Preserve priority and field definitions; do not create substitute labels or fields.

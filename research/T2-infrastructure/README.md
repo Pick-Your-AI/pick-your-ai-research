@@ -4,6 +4,8 @@ Parent: [#8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) · 
 
 Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), open against `main`. All six affected owners' review requests were verified; no submitted owner review or handoff confirmation had been received at the publication check.
 
+Continuation audit on 2026-10-16 re-read live issues, comments, native relationships and the existing PR. Hosting and engine researchers checked source conditions, and an independent compute researcher audited arithmetic. The orchestrator completed compute corrections and shared integration through this existing PR. See [validation.md](validation.md) for corrections and the independent integration review; owner acceptance remains pending.
+
 **Status: prepared for owner review; research completion is not claimed.** The three decision records and this summary require reviewed merge and the consuming-owner confirmations below. No product implementation, runtime deployment, provisioning or training job is included.
 
 ## Decision records and artifacts
@@ -31,9 +33,11 @@ One integrated review submission keeps the shared host/profile/accelerator refer
 
 There are 12 proposed assertion groups, with explicit applicability, fields, evidence, remediation and passing/failing/unknown examples:
 
-- [Three hosting rules](rules/hosting-rules.md): private-network capability, mounted-volume locality, offering membership and incomplete evidence.
-- [Five compute rules](rules/compute-capacity.md): per-device memory, joint backend support, context/KV, topology/inventory, API applicability.
-- [Four engine rules](rules/engine-compatibility.md): artifact/architecture loader, backend/precision implementation, adapter lineage, required API contract.
+- [Three hosting rule groups](rules/hosting-rules.md): private-network capability, mounted-volume locality, offering membership and incomplete evidence.
+- [Five compute rule groups](rules/compute-capacity.md): per-device memory, joint backend support, context/KV, topology/inventory, API applicability.
+- [Four engine rule groups](rules/engine-compatibility.md): artifact/architecture loader, backend/precision implementation, adapter lineage, required API contract.
+
+Rule groups separate fixed-severity constraints from evidence and applicability diagnostics. A rule's outcome does not change its severity; a `pass` on an `error` constraint is still a pass. The proposed clause splits do not publish an approved Ruleset.
 
 [contract-proposals.md](contract-proposals.md) records T2-C01–C06, examples, affected owners and migration implications: price dimensions/aggregation, capacity intervals, allocation/topology, conditional engine support, evidence completeness/mount relationships, and multi-version intake/freshness.
 
