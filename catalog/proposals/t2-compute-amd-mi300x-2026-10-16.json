@@ -26,11 +26,11 @@
       "notes": "C03 in gpu-compute.md. Copyright2025 datasheet pp1-2 supplies /name and /spec accelerator_type,vendor,model_name,vram_gb,precisions,rated_power_w,interconnect.192GB is advertised up-to capacity, maximum board power750W, Infinity Fabric encoded with v1 proprietary enum. Native arithmetic subset, not engine support. Billing unknown; product currently documented active. No PDF redistributed; terms/reuse unresolved with #41."
     },
     {
-      "source_uri": "https://rocm.docs.amd.com/en/docs-6.3.0/compatibility/compatibility-matrix.html",
-      "checked_at": "2026-10-16T12:39:54Z",
-      "verification_status": "unverified",
-      "notes": "C05. /spec/backends=rocm is documented for MI300X/gfx942 in official indexed compatibility matrix. Direct page rendering failed; no detailed OS/kernel claim. Field should be rechecked at review; does not assert joint model/runtime compatibility."
+      "source_uri": "https://rocm.docs.amd.com/projects/install-on-linux/en/docs-6.3.0/reference/system-requirements.html",
+      "checked_at": "2026-10-16T13:19:13Z",
+      "verification_status": "verified",
+      "notes": "C05. Directly inspected ROCm6.3.0 supported-GPU row:MI300X/CDNA3/gfx942. Supports /spec/backends=rocm only; exact engine/OS/kernel/driver tuple remains unverified. C22's hardware table labels192GiB while C03 datasheet says up-to192GB; catalog retains datasheet-advertised192 without implying exact free bytes or silently converting that conflicting label. Unit/allocatable-memory decision remains #40."
     }
   ],
-  "updated_at": "2026-10-16T12:39:54Z"
+  "updated_at": "2026-10-16T13:19:13Z"
 }

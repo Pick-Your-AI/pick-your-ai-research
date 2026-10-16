@@ -62,14 +62,30 @@ def main() -> None:
     assert two_device_peak > 80
     assert four_device_peak < 80
 
+    # Synthetic unchanged-shape/dtype merged checkpoint, loaded without the base.
+    merged_only = capacity_range(WEIGHT_BYTES, short_kv)
+    boundary_low = Decimal(41) / Decimal("0.9")
+    boundary_high = Decimal(41) / Decimal("0.8")
+    assert boundary_low < 48 < boundary_high
+
     result = {
         "classification": "project estimates; no device execution or calibrated error range",
         "estimator_id": "t2-dense-kv-memory",
-        "estimator_version": "0.1.0",
+        "estimator_version": "0.2.0",
         "A_bf16_short": capacity_range(WEIGHT_BYTES, short_kv),
         "B_bf16_loaded": capacity_range(WEIGHT_BYTES, loaded_kv),
         "C_hypothetical_int4": capacity_range(hypothetical_quant_bytes, loaded_kv),
         "D_hypothetical_lora": capacity_range(WEIGHT_BYTES, short_kv, all_lora),
+        "E_hypothetical_merged_only": merged_only,
+        "F_synthetic_headroom_boundary": {
+            "allocation_gb": "48",
+            "assumed_live_gb_including_runtime": "41",
+            "required_gb_at_10_percent_reserve": str(boundary_low),
+            "required_gb_at_20_percent_reserve": str(boundary_high),
+            "interpretation": "10% scenario clears screen;20% exceeds;not proven hardware incompatibility",
+        },
+        "G_missing_kv_geometry": {"outcome": "unknown", "reason": "required cache geometry absent"},
+        "H_provider_api_only": {"outcome": "skipped", "reason": "no customer-owned inference allocation"},
         "aws_ram_gb": str(32 * GIB / GB),
         "synthetic_two_gpu_peak_gb": str(two_device_peak),
         "synthetic_four_gpu_peak_gb": str(four_device_peak),
