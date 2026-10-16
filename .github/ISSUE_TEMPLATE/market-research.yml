@@ -1,0 +1,53 @@
+name: Market research finding
+description: Record customer, competitor, market, or product evidence for Project 2
+title: "Market research: "
+labels: ["type: research"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start from [Program #47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) and the [Market Research Project](https://github.com/orgs/Pick-Your-AI/projects/2). Search for an existing MR issue before creating a new outcome.
+        Follow the [research workflow](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/docs/RESEARCH_WORKFLOW.md). Component schemas apply when contributing component records; market notes may document hypotheses and missing evidence directly.
+  - type: textarea
+    id: scope
+    attributes:
+      label: Related MR issue and decision
+      description: Link the parent and related issues, describe the decision and falsifiable research question, state in/out scope, and explain overlap with existing work.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and source details
+      description: Include URLs, publishers, access dates, versions or regions, claim types, and conditions. Distinguish observed behavior, vendor claims, measurements, estimates, and hypotheses. State any evidence gaps.
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings, confidence, and limitations
+      description: Explain what the evidence supports and what remains unknown. Do not infer absence from missing documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Deliverable and acceptance criteria
+      description: Identify the existing research file or proposed path, independently reviewable outcome, checkable acceptance criteria, validation commands, and required owner review.
+    validations:
+      required: true
+  - type: textarea
+    id: handoffs
+    attributes:
+      label: Handoffs and follow-up
+      description: Link consuming technical or market issues, separate actual blockers from information inputs, and name open decisions and requested reviews. Assignees and status are managed on the issue and Project.
+  - type: textarea
+    id: triage
+    attributes:
+      label: Ownership, priority and readiness proposal
+      description: For a new deliverable, propose an assignee, MR workstream, priority rationale, readiness and next action. Triage must verify the live Project fields; these proposals do not change assignments.
+  - type: textarea
+    id: open_questions
+    attributes:
+      label: Open questions and phase limit
+      description: Record missing input, named owner decisions, the scope limit, and stopping or expansion conditions. A draft is not Done.

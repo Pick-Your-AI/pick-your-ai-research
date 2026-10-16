@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.context_policy.sonnet55_published_ceiling",
+  "kind": "context_policy",
+  "tier": "T1",
+  "name": "Claude Sonnet 5.5 published context ceiling (model-specific)",
+  "version": "claude-sonnet-5-5",
+  "status": "active",
+  "billing_class": "unknown",
+  "spec": {
+    "max_allowed_tokens": 1000000
+  },
+  "provenance": [
+    {
+      "source_uri": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+      "checked_at": "2026-10-16T19:18:37Z",
+      "verification_status": "unverified",
+      "notes": "Published model-specific context ceiling, not a user's requested token selection, effective-quality claim, billable independent product or permission to apply this ceiling to another model. v1 lacks model/offering binding; decision note and #40 review required."
+    }
+  ],
+  "updated_at": "2026-10-16T19:18:37Z"
+}

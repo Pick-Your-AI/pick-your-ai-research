@@ -1,0 +1,2149 @@
+{
+  "access_date": "2026-10-16",
+  "project_url": "https://github.com/orgs/Pick-Your-AI/projects/2",
+  "item_count": 20,
+  "native_subissues": 19,
+  "all_assignments_verified": true,
+  "all_nine_fields_verified": true,
+  "existing_35_issue_owners_parents_blockers_states_preserved": true,
+  "native_market_blockers": 0,
+  "native_cycles": 0,
+  "view_filters_tested": 12,
+  "accepted_items": 0,
+  "readback": {
+    "id": "PVT_kwDOFHg4Xc4BnViW",
+    "number": 2,
+    "url": "https://github.com/orgs/Pick-Your-AI/projects/2",
+    "items": {
+      "totalCount": 20,
+      "nodes": [
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBO_oo",
+          "content": {
+            "number": 47,
+            "title": "Market Research Program — Pick Your AI",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47",
+            "parent": null,
+            "subIssues": {
+              "nodes": [
+                {
+                  "number": 48
+                },
+                {
+                  "number": 49
+                },
+                {
+                  "number": 50
+                },
+                {
+                  "number": 51
+                },
+                {
+                  "number": 52
+                },
+                {
+                  "number": 53
+                },
+                {
+                  "number": 54
+                },
+                {
+                  "number": 55
+                },
+                {
+                  "number": 56
+                },
+                {
+                  "number": 57
+                },
+                {
+                  "number": 58
+                },
+                {
+                  "number": 59
+                }
+              ]
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Strategy",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-12",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Epic",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBO_xE",
+          "content": {
+            "number": 48,
+            "title": "MR-01 — Competitive Landscape Discovery",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P0",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Competition",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-01",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBO_3Y",
+          "content": {
+            "number": 49,
+            "title": "MR-02 — Competitive Feature Matrix",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "zwright8"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P0",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Competition",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-02",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBO_9o",
+          "content": {
+            "number": 50,
+            "title": "MR-03 — Competitor Deep Dives",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": [
+                {
+                  "number": 66
+                }
+              ]
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Competition",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-03",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPADE",
+          "content": {
+            "number": 51,
+            "title": "MR-04 — PCPartPicker Product Experience",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P2",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Product",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-04",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Needs Input",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPAIg",
+          "content": {
+            "number": 52,
+            "title": "MR-05 — Customer Research & Personas",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": [
+                {
+                  "number": 63
+                }
+              ]
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Customers",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-05",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPANE",
+          "content": {
+            "number": 53,
+            "title": "MR-06 — Market Size, Demand & Trends",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P2",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Market",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-06",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPASQ",
+          "content": {
+            "number": 54,
+            "title": "MR-07 — Pricing & Monetization",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": [
+                {
+                  "number": 64
+                }
+              ]
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P2",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Commercial",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-07",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPAZE",
+          "content": {
+            "number": 55,
+            "title": "MR-08 — Data Sources & Integration Opportunities",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": [
+                {
+                  "number": 60
+                }
+              ]
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "tynamite"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P0",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Data",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-08",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPAfU",
+          "content": {
+            "number": 56,
+            "title": "MR-09 — Technical Feasibility",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": [
+                {
+                  "number": 61
+                },
+                {
+                  "number": 62
+                },
+                {
+                  "number": 65
+                }
+              ]
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "Mattycodes69"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Technology",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-09",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPAms",
+          "content": {
+            "number": 57,
+            "title": "MR-10 — Competitive Differentiation",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Strategy",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-10",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPAsg",
+          "content": {
+            "number": 58,
+            "title": "MR-11 — MVP Definition & Prioritization",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Product",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-11",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPA0o",
+          "content": {
+            "number": 59,
+            "title": "MR-12 — Research Quality, Synthesis & Handoffs",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59",
+            "parent": {
+              "number": 47
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Strategy",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-12",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Research",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Medium",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPA6E",
+          "content": {
+            "number": 60,
+            "title": "MR-08: Validate commercial display and redistribution rights",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60",
+            "parent": {
+              "number": 55
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "tynamite"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P0",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Data",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-08",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPA_A",
+          "content": {
+            "number": 61,
+            "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61",
+            "parent": {
+              "number": 56
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "Mattycodes69"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Technology",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-09",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPBEY",
+          "content": {
+            "number": 62,
+            "title": "MR-09: Validate benchmark comparability and harness effects",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62",
+            "parent": {
+              "number": 56
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "PUSHINGSQUARES"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Technology",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-09",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPBLI",
+          "content": {
+            "number": 63,
+            "title": "MR-05: Validate customer demand and willingness to pay",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
+            "parent": {
+              "number": 52
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "Triage",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Customers",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-05",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Awaiting Decision",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPBRM",
+          "content": {
+            "number": 64,
+            "title": "MR-07: Validate price freshness and total-cost scenarios",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
+            "parent": {
+              "number": 54
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "PUSHINGSQUARES"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P1",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Commercial",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-07",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPBXw",
+          "content": {
+            "number": 65,
+            "title": "MR-09: Review RAG interoperability market claims",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
+            "parent": {
+              "number": 56
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "zabyxc01"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P2",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Technology",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-09",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "id": "PVTI_lADOFHg4Xc4BnViWzhBPBd4",
+          "content": {
+            "number": 66,
+            "title": "MR-03: Test direct stack-builder substitutes",
+            "state": "OPEN",
+            "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
+            "parent": {
+              "number": 50
+            },
+            "subIssues": {
+              "nodes": []
+            },
+            "assignees": {
+              "nodes": [
+                {
+                  "login": "CompleteDotTech"
+                }
+              ]
+            },
+            "blockedBy": {
+              "nodes": []
+            }
+          },
+          "fieldValues": {
+            "nodes": [
+              {},
+              {},
+              {},
+              {},
+              {
+                "name": "In Review",
+                "field": {
+                  "name": "Status"
+                }
+              },
+              {
+                "name": "P0",
+                "field": {
+                  "name": "Priority"
+                }
+              },
+              {
+                "name": "Competition",
+                "field": {
+                  "name": "Research Area"
+                }
+              },
+              {
+                "name": "MR-03",
+                "field": {
+                  "name": "Workstream"
+                }
+              },
+              {
+                "name": "Validation",
+                "field": {
+                  "name": "Work Type"
+                }
+              },
+              {
+                "name": "Low",
+                "field": {
+                  "name": "Evidence Confidence"
+                }
+              },
+              {
+                "name": "Ready",
+                "field": {
+                  "name": "Research Readiness"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Opportunity Impact"
+                }
+              },
+              {
+                "name": "Unknown",
+                "field": {
+                  "name": "Effort"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "views": {
+      "nodes": [
+        {
+          "number": 13,
+          "name": "01 — Executive Overview",
+          "layout": "BOARD_LAYOUT",
+          "filter": "",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Workstream"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": [
+              {
+                "name": "Status"
+              }
+            ]
+          }
+        },
+        {
+          "number": 14,
+          "name": "02 — Triage Inbox",
+          "layout": "TABLE_LAYOUT",
+          "filter": "-status:Ready,\"In Progress\",\"In Review\",Blocked,Done",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Research Readiness"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 15,
+          "name": "03 — Research Roadmap",
+          "layout": "TABLE_LAYOUT",
+          "filter": "-status:Done",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Workstream"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 16,
+          "name": "04 — Kanban Board",
+          "layout": "BOARD_LAYOUT",
+          "filter": "-status:Done",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Workstream"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": [
+              {
+                "name": "Status"
+              }
+            ]
+          }
+        },
+        {
+          "number": 17,
+          "name": "05 — Competitive Intelligence",
+          "layout": "TABLE_LAYOUT",
+          "filter": "research-area:Competition",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Workstream"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 18,
+          "name": "06 — Market & Customers",
+          "layout": "TABLE_LAYOUT",
+          "filter": "research-area:Market,Customers",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Research Area"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 19,
+          "name": "07 — Product Opportunities",
+          "layout": "TABLE_LAYOUT",
+          "filter": "research-area:Product,Strategy",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Opportunity Impact"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 20,
+          "name": "08 — Data & Integrations",
+          "layout": "TABLE_LAYOUT",
+          "filter": "research-area:Data,Technology",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Workstream"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 21,
+          "name": "09 — Blockers & Dependencies",
+          "layout": "TABLE_LAYOUT",
+          "filter": "research-readiness:Blocked,\"Needs Input\",\"Awaiting Decision\"",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Research Readiness"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 22,
+          "name": "10 — Owner Workload",
+          "layout": "TABLE_LAYOUT",
+          "filter": "-status:Done",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Assignees"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 23,
+          "name": "11 — Evidence Review",
+          "layout": "TABLE_LAYOUT",
+          "filter": "status:\"In Review\"",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Evidence Confidence"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        },
+        {
+          "number": 24,
+          "name": "12 — Completed Research",
+          "layout": "TABLE_LAYOUT",
+          "filter": "status:Done",
+          "sortByFields": {
+            "nodes": [
+              {
+                "direction": "ASC",
+                "field": {
+                  "name": "Priority"
+                }
+              }
+            ]
+          },
+          "groupByFields": {
+            "nodes": [
+              {
+                "name": "Workstream"
+              }
+            ]
+          },
+          "verticalGroupByFields": {
+            "nodes": []
+          }
+        }
+      ]
+    }
+  },
+  "priority_sort_verified_all_views": true
+}

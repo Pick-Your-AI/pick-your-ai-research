@@ -1,0 +1,26 @@
+{
+  "classification": "read-only capacity screen; not inference or a fit guarantee",
+  "observed_utc": "2026-10-16T14:01:41.771011+00:00",
+  "thresholds": {
+    "nvidia_smi_free_mib": 4096,
+    "available_host_ram_bytes": 12884901888,
+    "temporary_volume_free_bytes": 12884901888
+  },
+  "methods": [
+    "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Windows kernel32 GlobalMemoryStatusEx.ullAvailPhys",
+    "Python shutil.disk_usage(temporary_dir).free"
+  ],
+  "observed": {
+    "nvidia_smi_free_mib": 4132,
+    "available_host_ram_bytes": 17017819136,
+    "temporary_volume_free_bytes": 7223148544
+  },
+  "guards": {
+    "nvidia_smi_free_mib": true,
+    "available_host_ram_bytes": true,
+    "temporary_volume_free_bytes": false
+  },
+  "status": "unexecuted",
+  "reason": "one or more spare-capacity guards failed; no weights downloaded or other process changed"
+}

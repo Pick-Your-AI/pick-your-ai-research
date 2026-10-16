@@ -1,0 +1,9 @@
+{
+  "id": "mr09-smollm2-135m-instruct-safetensors",
+  "uri": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/model.safetensors",
+  "version": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c",
+  "access": "Public publisher artifact, retrieved 2026-10-16 without credentials. Download outside Git to reproduce; see scripts/mr09_measure.py and research/market/measurements/mr09-protocol-2026-10-16.md. No weights are included in this repository.",
+  "description": "External trained dense-model weight artifact used for bounded MR-09 CUDA observations. File size 269060552 bytes; locally observed SHA-256. Exact config/tokenizer checksums are retained in research/market/measurements/mr09-smollm2-artifacts.json. This locator and checksum do not establish fit, answer quality or estimator accuracy.",
+  "rights": "HuggingFaceTB publisher model card declares Apache-2.0; follow its license and attribution conditions. Only original sanitized commands, counters, summaries and artifact metadata are submitted here. No upstream weights are redistributed; checksum is identity evidence, not a grant of rights. Source: https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/blob/12fd25f77366fa6b3b4b768ec3050bf629380bac/README.md (accessed 2026-10-16)."
+}
