@@ -1,0 +1,225 @@
+{
+  "classification": "independent project measurement; bounded configuration",
+  "cell": "D4",
+  "repetition": 1,
+  "started_utc": "2026-10-16T13:56:24.582755+00:00",
+  "command_argv": [
+    "scripts/mr09_measure.py",
+    "--model-dir",
+    "$MODEL_DIR",
+    "--output",
+    "research\\market\\measurements\\mr09-D4-r1.json",
+    "--cell",
+    "D4",
+    "--repetition",
+    "1",
+    "--prompt-tokens",
+    "2048",
+    "--active-sequences",
+    "1",
+    "--cache",
+    "int4"
+  ],
+  "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+  "status": "success",
+  "phases": [
+    {
+      "phase": "baseline",
+      "elapsed_seconds": 4.449998959898949e-05,
+      "current_allocated_bytes": 0,
+      "current_reserved_bytes": 0,
+      "peak_allocated_bytes": 0,
+      "peak_reserved_bytes": 0,
+      "driver_free_bytes": 15769534464,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "loading",
+      "elapsed_seconds": 0.2823905000113882,
+      "current_allocated_bytes": 269054464,
+      "current_reserved_bytes": 301989888,
+      "peak_allocated_bytes": 269054464,
+      "peak_reserved_bytes": 301989888,
+      "driver_free_bytes": 15467544576,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "warmup",
+      "elapsed_seconds": 8.341531199985184,
+      "current_allocated_bytes": 278150144,
+      "current_reserved_bytes": 304087040,
+      "peak_allocated_bytes": 279528448,
+      "peak_reserved_bytes": 304087040,
+      "driver_free_bytes": 15402532864,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "prefill",
+      "elapsed_seconds": 0.17336910002632067,
+      "current_allocated_bytes": 290960384,
+      "current_reserved_bytes": 723517440,
+      "peak_allocated_bytes": 682015744,
+      "peak_reserved_bytes": 723517440,
+      "driver_free_bytes": 14983102464,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "decode",
+      "elapsed_seconds": 3.364512200001627,
+      "current_allocated_bytes": 291599360,
+      "current_reserved_bytes": 723517440,
+      "peak_allocated_bytes": 311782400,
+      "peak_reserved_bytes": 723517440,
+      "driver_free_bytes": 14983102464,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "steady_state",
+      "elapsed_seconds": 2.0299979951232672e-05,
+      "current_allocated_bytes": 291599360,
+      "current_reserved_bytes": 723517440,
+      "peak_allocated_bytes": 291599360,
+      "peak_reserved_bytes": 723517440,
+      "driver_free_bytes": 14983102464,
+      "driver_total_bytes": 17094475776
+    }
+  ],
+  "error_comparisons": [],
+  "configuration": {
+    "weight_dtype": "bfloat16",
+    "weight_quantization": "none",
+    "kv_cache": "int4",
+    "prompt_tokens_per_sequence": 2048,
+    "decode_forwards_per_sequence": 32,
+    "active_sequences": 1,
+    "queued_requests": 0,
+    "seed": 6109,
+    "attention_backend": "sdpa",
+    "graph_capture": false,
+    "compile": false,
+    "device_map": {
+      "": "cuda:0"
+    },
+    "offload": false,
+    "tensor_parallel_size": 1,
+    "pipeline_parallel_size": 1
+  },
+  "script_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+  "protocol_sha256": "d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735",
+  "environment": {
+    "python": "3.12.11 (main, Aug 18 2025, 19:17:54) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.10.0+cu130",
+    "cuda_build": "13.0",
+    "packages": {
+      "transformers": "5.0.0",
+      "accelerate": "1.13.0",
+      "safetensors": "0.7.0",
+      "numpy": "2.4.1",
+      "huggingface-hub": "1.3.5",
+      "tokenizers": "0.22.2",
+      "optimum-quanto": "0.2.7"
+    }
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "count": 1,
+    "properties": "_CudaDeviceProperties(name='NVIDIA GeForce RTX 5070 Ti', major=12, minor=0, total_memory=16302MB, multi_processor_count=70, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=48MB)",
+    "initial_driver_free_bytes": 15769534464,
+    "driver_total_bytes": 17094475776,
+    "process_allocator_limit_bytes": 2136809472,
+    "allocator_backend": "native",
+    "nvidia_smi_csv": "index, name, memory.total [MiB], memory.used [MiB], memory.free [MiB], driver_version, pci.bus_id\n0, NVIDIA GeForce RTX 5070 Ti, 16303 MiB, 12109 MiB, 3889 MiB, 595.97, 00000000:02:00.0"
+  },
+  "artifact_manifest": {
+    "model_id": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+    "license": "Apache-2.0",
+    "license_source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/blob/12fd25f77366fa6b3b4b768ec3050bf629380bac/README.md",
+    "reuse": "publisher labels Apache-2.0; weights are not redistributed in Git",
+    "publisher": "HuggingFaceTB",
+    "access_date": "2026-10-16",
+    "evidence_class": "primary documentation plus local checksum observation",
+    "model_format": "safetensors",
+    "artifacts": [
+      {
+        "file": "config.json",
+        "bytes": 861,
+        "sha256": "8eb740e8bbe4cff95ea7b4588d17a2432deb16e8075bc5828ff7ba9be94d982a",
+        "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/config.json"
+      },
+      {
+        "file": "generation_config.json",
+        "bytes": 132,
+        "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+        "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/generation_config.json"
+      },
+      {
+        "file": "tokenizer.json",
+        "bytes": 2104556,
+        "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+        "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/tokenizer.json"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "bytes": 3764,
+        "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+        "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/tokenizer_config.json"
+      },
+      {
+        "file": "special_tokens_map.json",
+        "bytes": 655,
+        "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+        "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/special_tokens_map.json"
+      },
+      {
+        "file": "model.safetensors",
+        "bytes": 269060552,
+        "sha256": "5af571cbf074e6d21a03528d2330792e532ca608f24ac70a143f6b369968ab8c",
+        "source_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/resolve/12fd25f77366fa6b3b4b768ec3050bf629380bac/model.safetensors"
+      }
+    ]
+  },
+  "model_geometry": {
+    "layers": 30,
+    "kv_heads": 3,
+    "head_dim": 64,
+    "max_position_embeddings": 8192,
+    "actual_unique_parameter_elements": 134515008,
+    "actual_parameter_payload_bytes": 269030016
+  },
+  "workload": {
+    "text": "The red bird rests near a quiet tree. Water flows past green fields. ",
+    "add_special_tokens": false,
+    "prompt_token_ids_sha256": "d59b653ef84801b9bf8f55a951e2e7459e5aab909985e9b8eed0121c2f898645",
+    "generation": "greedy argmax, no EOS early stop; only counters retained"
+  },
+  "warmup_reset": "released own outputs/cache, synchronize then empty_cache before prefill; weights preserved",
+  "int4_kv_prefill_payload": {
+    "packed_bytes": 11796480,
+    "scale_bytes": 737280,
+    "shift_bytes": 737280,
+    "residual_bytes": 0,
+    "total_physical_storage_bytes": 13271040,
+    "method": "unique physical backing storages of Quanto packed data/scales/shifts plus BF16 residual; no workspace/pool"
+  },
+  "actual_tokens": {
+    "prompt_per_sequence": 2048,
+    "decode_forwards_per_sequence": 32,
+    "greedy_tokens_produced_per_sequence": 33,
+    "cache_tokens_per_sequence": 2080,
+    "active_sequences": 1,
+    "queued_requests": 0,
+    "note": "prefill predicts first token;32 decode forwards predict32 more;last prediction not in cache"
+  },
+  "int4_kv_steady_payload": {
+    "packed_bytes": 11796480,
+    "scale_bytes": 737280,
+    "shift_bytes": 737280,
+    "residual_bytes": 737280,
+    "total_physical_storage_bytes": 14008320,
+    "method": "unique physical backing storages of Quanto packed data/scales/shifts plus BF16 residual; no workspace/pool"
+  },
+  "finished_utc": "2026-10-16T13:56:51.255804+00:00",
+  "publication_sanitization": "local paths replaced by named placeholders by runner; hardware UUID removed; LF line endings normalized for Git; counters/pins unchanged"
+}

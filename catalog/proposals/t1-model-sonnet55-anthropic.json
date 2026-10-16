@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.model.sonnet55_anthropic",
+  "kind": "model",
+  "tier": "T1",
+  "name": "Claude Sonnet 5.5 (Anthropic direct, standard output)",
+  "version": "claude-sonnet-5-5",
+  "status": "active",
+  "billing_class": "metered",
+  "spec": {
+    "provider_ref": "cat.model_provider.anthropic",
+    "model_type": "multimodal",
+    "modalities_in": [
+      "text",
+      "image"
+    ],
+    "modalities_out": [
+      "text"
+    ],
+    "context_window_tokens": 1000000,
+    "max_output_tokens": 128000,
+    "supports_tool_calling": true,
+    "license_ref": "https://www.anthropic.com/legal/commercial-terms",
+    "access_modes": [
+      "api"
+    ],
+    "model_formats": [
+      "api_only"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+      "checked_at": "2026-10-16T19:18:37Z",
+      "verification_status": "unverified",
+      "notes": "Published standard 1M context /128K output, text-image inputs and text outputs checked. Tool-use vendor claim from linked models overview, not measured workflow. Batch beta max output300K excluded. Fixed-release identity per publisher versioning documentation."
+    },
+    {
+      "source_uri": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "checked_at": "2026-10-16T19:18:37Z",
+      "verification_status": "unverified",
+      "notes": "Generation4.6-and-later dateless IDs name fixed snapshots. No invented dated alias."
+    }
+  ],
+  "updated_at": "2026-10-16T19:18:37Z"
+}
