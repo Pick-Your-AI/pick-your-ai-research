@@ -3,14 +3,14 @@
 Issue: #29 · Contract: 1.0.0 · Kinds: `training_framework`, `training_compute`, `training_dataset`, `fine_tuned_model`
 Status: ready for review · Last researched: 2026-10-16
 
-This is the workstream summary for T5. It consolidates the four component decision records and does not replace them. Every finding below is **draft research awaiting review**, and no handoff has been confirmed by a consuming owner yet.
+This is the workstream summary for T5. It consolidates the four component decision records and does not replace them. The four component records are merged to `main`. Merging a record or this summary does **not** accept the workstream or any handoff: no handoff has been confirmed by a consuming owner yet, and #29–#33 stay open until their acceptance criteria are met.
 
 | Component | Issue | Decision record | PR | Structured proposals |
 | --- | --- | --- | --- | --- |
-| Training Framework | #30 | [training-framework.md](training-framework.md) | #68 | 4 `training_framework` items (`catalog/proposals/training_framework-*.json`) |
-| Training Compute | #31 | [training-compute.md](training-compute.md) | #77 | none (blocked, see below) |
-| Training Dataset | #32 | [training-dataset.md](training-dataset.md) | #76 | none (blocked, see below) |
-| Fine-Tuned Model | #33 | [fine-tuned-model.md](fine-tuned-model.md) | #84 | none (user-specific artifact) |
+| Training Framework | #30 | [training-framework.md](training-framework.md) | #68 (merged) | 4 `training_framework` items (`catalog/proposals/training_framework-*.json`) |
+| Training Compute | #31 | [training-compute.md](training-compute.md) | #77 (merged) | none yet (see blockers below) |
+| Training Dataset | #32 | [training-dataset.md](training-dataset.md) | #76 (merged) | none (blocked, see below) |
+| Fine-Tuned Model | #33 | [fine-tuned-model.md](fine-tuned-model.md) | #84 (merged) | none (user-specific artifact) |
 
 ## Scope and optionality
 
@@ -82,14 +82,14 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ## Rules contributed to #40
 
-| Series | Component | Count | Verified | Hypothesis / policy |
+| Series | Component | Count | Source checked | Hypothesis / policy / partial |
 | --- | --- | --- | --- | --- |
 | F-01 – F-24 | #30 | 24 | 21 | F-13 (policy), F-17 ("competing model" undefined), F-24 (AGPL scope) |
 | K-01 – K-09 | #31 | 9 | 5 | K-02 (fit threshold), K-06 (needs #10 dtype facts), K-08 (contract gap), K-09 (policy) |
 | D-01 – D-22 | #32 | 22 | 21 | D-20 (leakage policy, with #36) |
-| A-01 – A-20 | #33 | 20 | 18 | A-13 (classic-FAQ wording), A-20 (evaluation gate policy, with #36) |
+| A-01 – A-20, with A-18 split into A-18a–c | #33 | 22 | 20 | A-13 (partial: classic-FAQ wording), A-20 (evaluation gate policy, with #36) |
 
-A-06 is counted as verified but carries a stated inference.
+**"Source checked"** follows the interim "checked" definition in the #41 owner's adopted policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)): the cited primary text was read on its access date and supports the assertion. None of these rules is independently verified (reproduced or confirmed by a second source). A-06 is source checked but carries a stated inference. A-18 was split during review so that Apache-2.0 obligations apply only under their conditions: §4(a) licence copy, §4(b) change notices on modified files, and §4(d) NOTICE attribution only when the base distribution includes a NOTICE file.
 
 Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 - `training_framework` method enum values and fields;
@@ -99,28 +99,28 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 - a training-memory ResourceEstimate metric;
 - `training_dataset` and `data_source` provenance fields replacing the governance booleans.
 
-#33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref` and `signature`.
+#33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature` and `base_notice_file_present` (for A-18c).
 
 ## Handoffs (none confirmed)
 
 | Handoff | From | To | Owner |
 | --- | --- | --- | --- |
-| Per-checkpoint licence, weight access, revision, provider fine-tuning lifecycle | #30, #33 | #6, #5 | @zwright8 |
-| Accelerator facts (VRAM, dtype, peak FLOP/s), compute profiles, hosting regions; adapter and merged VRAM | #31, #33 | #10, #9 | @Mattycodes69 |
+| Per-checkpoint licence, weight access, revision, whether the base distribution includes a NOTICE file, provider fine-tuning lifecycle | #30, #33 | #6, #5 | @zwright8 |
+| Missing accelerator and compute-profile records for the priced SKUs; a peak dense TFLOP/s field; missing hosting and storage records; adapter and merged VRAM | #31, #33 | #10, #9 | @Mattycodes69 |
 | Adapter and format support facts for `inference_engine` items | #33 | #11 | @Mattycodes69 |
 | Training vs retrieval rights boundary; `data_source` for training sources | #32 | #13 | @zabyxc01 |
 | Leakage method and eval-set freeze; pre-deployment evaluation gate | #32, #33 | #36 | @PUSHINGSQUARES |
 | Training price normalisation; post-training hosting next to training cost | #31, #33 | #39 | @PUSHINGSQUARES |
 | Fine-tune lifecycle at deployment (OpenAI shutdown with base; Foundry 15-day deletion) | #33 | #37 | @PUSHINGSQUARES |
-| User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @CompleteDotTech |
-| Rule format and contract changes; "competing model" policy | all | #40 | @CompleteDotTech |
-| Evidence grading, price freshness | all | #41 | @CompleteDotTech |
+| User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @tynamite |
+| Rule format and contract changes; "competing model" policy | all | #40 | @tynamite |
+| Evidence grading, price freshness | all | #41 | @tynamite |
 
 ## Blockers on structured artifacts
 
 | Artifact | Blocked by |
 | --- | --- |
-| `training_compute` items, training Pricebooks, ResourceEstimates | No T2 `compute_profile` / `accelerator` / `hosting_platform` items yet (#9, #10); Pricebook has no training-token or job-minimum meters; no training-memory metric (#40) |
+| `training_compute` items, training Pricebooks, ResourceEstimates | **Upstream T2 records exist** on `main` (merged in #75): one `compute_profile` (`aws-ec2-g6e-xlarge-us-east-1`, 1× `nvidia-l40s`), accelerators `nvidia-h100-sxm`, `nvidia-l40s` and `amd-mi300x`, hosting `aws-ec2` and `runpod-pods`, and storage including `aws-ebs-gp3`. So a `training_compute` proposal can already reference the g6e profile. Still blocking the rest: no compute profiles or accelerator records for the other priced SKUs (A100 80 GB, RTX 4090, 8× H100 instances), no peak-TFLOP/s field (#9, #10); no training-token, training-hour, job-minimum or model-storage meters in Pricebook, and no training-memory ResourceEstimate metric (#40, #39) |
 | `data_source` items from the source audit | `spec_data_source` has no licence, terms or opt-out fields; agreement needed with #13 and #40 |
 | Managed `training_framework` items | `backends` required but not user-visible for managed services (#40) |
 | `fine_tuned_model` items | User-specific; references require `model` and `training_dataset` items |
@@ -131,7 +131,7 @@ None of these is a native GitHub blocker; they are information dependencies unde
 
 | Question | Owner |
 | --- | --- |
-| What counts as a "competing model" under provider output terms (F-17, D-12–D-14) | #40 · @CompleteDotTech |
+| What counts as a "competing model" under provider output terms (F-17, D-12–D-14) | #40 · @tynamite |
 | BGH appeal I ZR 281/25 on natural-language TDM reservations (pending) | #32 · @appletechie |
 | Mistral Forge licensing and weight export (not public) | #30 · @appletechie |
 | ONNX export for any training framework | #30 · @appletechie |
