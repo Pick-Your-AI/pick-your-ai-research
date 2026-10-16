@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.model.gpt54_openai",
+  "kind": "model",
+  "tier": "T1",
+  "name": "GPT-5.4 (OpenAI direct snapshot)",
+  "version": "gpt-5.4-2026-03-05",
+  "status": "active",
+  "billing_class": "metered",
+  "spec": {
+    "provider_ref": "cat.model_provider.openai",
+    "model_type": "multimodal",
+    "modalities_in": [
+      "text",
+      "image"
+    ],
+    "modalities_out": [
+      "text"
+    ],
+    "context_window_tokens": 1050000,
+    "max_output_tokens": 128000,
+    "supports_tool_calling": true,
+    "supports_json_schema": true,
+    "supports_fine_tuning": false,
+    "access_modes": [
+      "api"
+    ],
+    "model_formats": [
+      "api_only"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+      "checked_at": "2026-10-16T19:18:37Z",
+      "verification_status": "unverified",
+      "notes": "Published snapshot/specifications and API support checked, not independent task-quality or account-entitlement measurement. Standard route only; context and pricing conditions are recorded in the decision notes."
+    }
+  ],
+  "updated_at": "2026-10-16T19:18:37Z"
+}
