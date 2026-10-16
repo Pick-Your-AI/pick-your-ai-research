@@ -50,7 +50,7 @@ class ContractAdoption(unittest.TestCase):
 class Intake(unittest.TestCase):
     def setUp(self):
         # Test-only data: these are never placed in the research proposal directories.
-        self.item = {'schema_version': '1.0.0', 'id': 'test.provider', 'kind': 'model_provider', 'tier': 'T1', 'name': 'Test provider', 'version': '1', 'status': 'active', 'billing_class': 'unknown', 'spec': {}, 'provenance': [{'source_uri': 'https://github.com/Pick-Your-AI/research', 'checked_at': '2026-10-16T09:00:00Z', 'verification_status': 'unverified'}], 'updated_at': '2026-10-16T09:00:00Z'}
+        self.item = {'schema_version': '1.0.0', 'id': 'test.provider', 'kind': 'model_provider', 'tier': 'T1', 'name': 'Test provider', 'version': '1', 'status': 'active', 'billing_class': 'unknown', 'spec': {}, 'provenance': [{'source_uri': 'https://github.com/Pick-Your-AI/pick-your-ai-research', 'checked_at': '2026-10-16T09:00:00Z', 'verification_status': 'unverified'}], 'updated_at': '2026-10-16T09:00:00Z'}
 
     def test_valid_shape_does_not_require_verified_claim(self):
         self.assertEqual(intake_errors([self.item], []), [])

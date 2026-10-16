@@ -6,34 +6,34 @@ This map records how research components relate. Most relationships mean **uses 
 
 | Workstream | Component | Issue | Information inputs | Compatibility (bidirectional) |
 | --- | --- | --- | --- | --- |
-| T0 Configuration | Workload / Use Case | [#2](https://github.com/Pick-Your-AI/research/issues/2) | User goals and constraints | — |
-| T0 Configuration | Deployment Mode | [#3](https://github.com/Pick-Your-AI/research/issues/3) | #2 | — |
-| T0 Configuration | Component Schema & Compatibility Rules | [#40](https://github.com/Pick-Your-AI/research/issues/40) | #2, #3; attributes from every component issue | #6, #10, #11 |
-| T0 Configuration | Catalog Data Sources & Freshness | [#41](https://github.com/Pick-Your-AI/research/issues/41) | — | — |
-| T0 Configuration | Saved, Shared & Compared Builds | [#42](https://github.com/Pick-Your-AI/research/issues/42) | #41, #39 · **blocked by #40** | — |
-| T1 Model Selection | Model Provider | [#5](https://github.com/Pick-Your-AI/research/issues/5) | #3, #40, #41 | #6 |
-| T1 Model Selection | AI Model | [#6](https://github.com/Pick-Your-AI/research/issues/6) | #2, #3, #5, #40, #41 | #7, #10, #11 |
-| T1 Model Selection | Context Window | [#7](https://github.com/Pick-Your-AI/research/issues/7) | #5, #6 | #10, #16 |
-| T2 Infrastructure | Hosting | [#9](https://github.com/Pick-Your-AI/research/issues/9) | #3, #10, #41 | — |
-| T2 Infrastructure | GPU / Compute | [#10](https://github.com/Pick-Your-AI/research/issues/10) | #2, #6, #7, #33 | #6, #11 |
-| T2 Infrastructure | Inference Engine | [#11](https://github.com/Pick-Your-AI/research/issues/11) | #6, #10, #33 | #6, #10, #33 |
-| T3 Knowledge & Retrieval | Knowledge Base | [#13](https://github.com/Pick-Your-AI/research/issues/13) | #2, #9 | — |
-| T3 Knowledge & Retrieval | Embedding Model | [#14](https://github.com/Pick-Your-AI/research/issues/14) | #5, #9, #13 | #15 |
-| T3 Knowledge & Retrieval | Vector Database (optional backend) | [#15](https://github.com/Pick-Your-AI/research/issues/15) | #9, #14, #16 | #14 |
-| T3 Knowledge & Retrieval | RAG & Retrieval Backends | [#16](https://github.com/Pick-Your-AI/research/issues/16) | #6, #7, #13, #14, #15 | #7 |
-| T4 Agents & Integrations | Agent Framework | [#25](https://github.com/Pick-Your-AI/research/issues/25) | #6, #11, #16 | #6, #27 |
-| T4 Agents & Integrations | Tools & APIs | [#26](https://github.com/Pick-Your-AI/research/issues/26) | #25, #35 | — |
-| T4 Agents & Integrations | MCP Servers | [#27](https://github.com/Pick-Your-AI/research/issues/27) | #9, #25, #26 | #25 |
-| T4 Agents & Integrations | Agent Memory | [#28](https://github.com/Pick-Your-AI/research/issues/28) | #7, #13, #15, #25 | — |
-| T5 Training & Fine-Tuning | Training Framework | [#30](https://github.com/Pick-Your-AI/research/issues/30) | #5, #6 | — |
-| T5 Training & Fine-Tuning | Training Compute | [#31](https://github.com/Pick-Your-AI/research/issues/31) | #9, #10, #30 | — |
-| T5 Training & Fine-Tuning | Training Dataset | [#32](https://github.com/Pick-Your-AI/research/issues/32) | #13, #30, #36 | — |
-| T5 Training & Fine-Tuning | Fine-Tuned Model | [#33](https://github.com/Pick-Your-AI/research/issues/33) | #30, #31, #32 | #5, #10, #11 |
-| T6 Deployment & Operations | Guardrails | [#35](https://github.com/Pick-Your-AI/research/issues/35) | #2, #6, #16, #26, #27, #28 | — |
-| T6 Deployment & Operations | Evaluation | [#36](https://github.com/Pick-Your-AI/research/issues/36) | #2, #6, #16, #25, #33, #35 | — |
-| T6 Deployment & Operations | Deployment | [#37](https://github.com/Pick-Your-AI/research/issues/37) | #3, #5, #9, #11, #13, #25, #27, #35, #36 | — |
-| T6 Deployment & Operations | Monitoring | [#38](https://github.com/Pick-Your-AI/research/issues/38) | All active components | — |
-| T6 Deployment & Operations | Cost Estimate | [#39](https://github.com/Pick-Your-AI/research/issues/39) | #2, #5, #7, #9, #10, #14, #15, #26, #31, #40, #41 | — |
+| T0 Configuration | Workload / Use Case | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | User goals and constraints | — |
+| T0 Configuration | Deployment Mode | [#3](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3) | #2 | — |
+| T0 Configuration | Component Schema & Compatibility Rules | [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | #2, #3; attributes from every component issue | #6, #10, #11 |
+| T0 Configuration | Catalog Data Sources & Freshness | [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) | — | — |
+| T0 Configuration | Saved, Shared & Compared Builds | [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | #41, #39 · **blocked by #40** | — |
+| T1 Model Selection | Model Provider | [#5](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5) | #3, #40, #41 | #6 |
+| T1 Model Selection | AI Model | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | #2, #3, #5, #40, #41 | #7, #10, #11 |
+| T1 Model Selection | Context Window | [#7](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7) | #5, #6 | #10, #16 |
+| T2 Infrastructure | Hosting | [#9](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | #3, #10, #41 | — |
+| T2 Infrastructure | GPU / Compute | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | #2, #6, #7, #33 | #6, #11 |
+| T2 Infrastructure | Inference Engine | [#11](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) | #6, #10, #33 | #6, #10, #33 |
+| T3 Knowledge & Retrieval | Knowledge Base | [#13](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13) | #2, #9 | — |
+| T3 Knowledge & Retrieval | Embedding Model | [#14](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14) | #5, #9, #13 | #15 |
+| T3 Knowledge & Retrieval | Vector Database (optional backend) | [#15](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15) | #9, #14, #16 | #14 |
+| T3 Knowledge & Retrieval | RAG & Retrieval Backends | [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) | #6, #7, #13, #14, #15 | #7 |
+| T4 Agents & Integrations | Agent Framework | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | #6, #11, #16 | #6, #27 |
+| T4 Agents & Integrations | Tools & APIs | [#26](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26) | #25, #35 | — |
+| T4 Agents & Integrations | MCP Servers | [#27](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27) | #9, #25, #26 | #25 |
+| T4 Agents & Integrations | Agent Memory | [#28](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/28) | #7, #13, #15, #25 | — |
+| T5 Training & Fine-Tuning | Training Framework | [#30](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30) | #5, #6 | — |
+| T5 Training & Fine-Tuning | Training Compute | [#31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31) | #9, #10, #30 | — |
+| T5 Training & Fine-Tuning | Training Dataset | [#32](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32) | #13, #30, #36 | — |
+| T5 Training & Fine-Tuning | Fine-Tuned Model | [#33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33) | #30, #31, #32 | #5, #10, #11 |
+| T6 Deployment & Operations | Guardrails | [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | #2, #6, #16, #26, #27, #28 | — |
+| T6 Deployment & Operations | Evaluation | [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | #2, #6, #16, #25, #33, #35 | — |
+| T6 Deployment & Operations | Deployment | [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | #3, #5, #9, #11, #13, #25, #27, #35, #36 | — |
+| T6 Deployment & Operations | Monitoring | [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | All active components | — |
+| T6 Deployment & Operations | Cost Estimate | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | #2, #5, #7, #9, #10, #14, #15, #26, #31, #40, #41 | — |
 
 The only native delivery blocker is **#42 blocked by #40**: a saved build serialises the schema, so its format cannot be defined first. Every other relationship is informational or a compatibility relationship and must not be modelled as blocking.
 

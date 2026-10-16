@@ -4,35 +4,35 @@ The existing issues cover all 29 canonical kinds. This mapping proposes artifact
 
 | Tier | Canonical kind | Research issue |
 | --- | --- | --- |
-| T0 | `workload` | [#2: T0: Workload / Use Case](https://github.com/Pick-Your-AI/research/issues/2) |
-| T0 | `deployment_mode` | [#3: T0: Deployment Mode](https://github.com/Pick-Your-AI/research/issues/3) |
-| T1 | `model_provider` | [#5: T1: Model Provider](https://github.com/Pick-Your-AI/research/issues/5) |
-| T1 | `model` | [#6: T1: AI Model](https://github.com/Pick-Your-AI/research/issues/6) |
-| T1 | `context_policy` | [#7: T1: Context Window](https://github.com/Pick-Your-AI/research/issues/7) |
-| T2 | `hosting_platform` | [#9: T2: Hosting](https://github.com/Pick-Your-AI/research/issues/9) |
-| T2 | `accelerator` | [#10: T2: GPU / Compute](https://github.com/Pick-Your-AI/research/issues/10) |
-| T2 | `compute_profile` | [#10: T2: GPU / Compute](https://github.com/Pick-Your-AI/research/issues/10) |
-| T2 | `inference_engine` | [#11: T2: Inference Engine](https://github.com/Pick-Your-AI/research/issues/11) |
-| T2 | `storage` | [#9: T2: Hosting](https://github.com/Pick-Your-AI/research/issues/9) |
-| T3 | `data_source` | [#13: T3: Knowledge Base](https://github.com/Pick-Your-AI/research/issues/13) |
-| T3 | `knowledge_base` | [#13: T3: Knowledge Base](https://github.com/Pick-Your-AI/research/issues/13) |
-| T3 | `embedding_model` | [#14: T3: Embedding Model](https://github.com/Pick-Your-AI/research/issues/14) |
-| T3 | `vector_database` | [#15: T3: Vector Database](https://github.com/Pick-Your-AI/research/issues/15) |
-| T3 | `rag_pipeline` | [#16: T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/research/issues/16) |
-| T4 | `agent_framework` | [#25: T4: Agent Framework](https://github.com/Pick-Your-AI/research/issues/25) |
-| T4 | `tool` | [#26: T4: Tools & APIs](https://github.com/Pick-Your-AI/research/issues/26) |
-| T4 | `mcp_server` | [#27: T4: MCP Servers](https://github.com/Pick-Your-AI/research/issues/27) |
-| T4 | `memory_store` | [#28: T4: Agent Memory](https://github.com/Pick-Your-AI/research/issues/28) |
-| T4 | `integration` | [#26: T4: Tools & APIs](https://github.com/Pick-Your-AI/research/issues/26) |
-| T5 | `training_framework` | [#30: T5: Training Framework](https://github.com/Pick-Your-AI/research/issues/30) |
-| T5 | `training_compute` | [#31: T5: Training Compute](https://github.com/Pick-Your-AI/research/issues/31) |
-| T5 | `training_dataset` | [#32: T5: Training Dataset](https://github.com/Pick-Your-AI/research/issues/32) |
-| T5 | `fine_tuned_model` | [#33: T5: Fine-Tuned Model](https://github.com/Pick-Your-AI/research/issues/33) |
-| T6 | `guardrail` | [#35: T6: Guardrails](https://github.com/Pick-Your-AI/research/issues/35) |
-| T6 | `evaluation_suite` | [#36: T6: Evaluation](https://github.com/Pick-Your-AI/research/issues/36) |
-| T6 | `deployment_target` | [#37: T6: Deployment](https://github.com/Pick-Your-AI/research/issues/37) |
-| T6 | `monitoring_stack` | [#38: T6: Monitoring](https://github.com/Pick-Your-AI/research/issues/38) |
-| T6 | `cost_policy` | [#39: T6: Cost Estimate](https://github.com/Pick-Your-AI/research/issues/39) |
+| T0 | `workload` | [#2: T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) |
+| T0 | `deployment_mode` | [#3: T0: Deployment Mode](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3) |
+| T1 | `model_provider` | [#5: T1: Model Provider](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5) |
+| T1 | `model` | [#6: T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) |
+| T1 | `context_policy` | [#7: T1: Context Window](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7) |
+| T2 | `hosting_platform` | [#9: T2: Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) |
+| T2 | `accelerator` | [#10: T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) |
+| T2 | `compute_profile` | [#10: T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) |
+| T2 | `inference_engine` | [#11: T2: Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) |
+| T2 | `storage` | [#9: T2: Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) |
+| T3 | `data_source` | [#13: T3: Knowledge Base](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13) |
+| T3 | `knowledge_base` | [#13: T3: Knowledge Base](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13) |
+| T3 | `embedding_model` | [#14: T3: Embedding Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14) |
+| T3 | `vector_database` | [#15: T3: Vector Database](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15) |
+| T3 | `rag_pipeline` | [#16: T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) |
+| T4 | `agent_framework` | [#25: T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) |
+| T4 | `tool` | [#26: T4: Tools & APIs](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26) |
+| T4 | `mcp_server` | [#27: T4: MCP Servers](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27) |
+| T4 | `memory_store` | [#28: T4: Agent Memory](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/28) |
+| T4 | `integration` | [#26: T4: Tools & APIs](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26) |
+| T5 | `training_framework` | [#30: T5: Training Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30) |
+| T5 | `training_compute` | [#31: T5: Training Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31) |
+| T5 | `training_dataset` | [#32: T5: Training Dataset](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32) |
+| T5 | `fine_tuned_model` | [#33: T5: Fine-Tuned Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33) |
+| T6 | `guardrail` | [#35: T6: Guardrails](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) |
+| T6 | `evaluation_suite` | [#36: T6: Evaluation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) |
+| T6 | `deployment_target` | [#37: T6: Deployment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) |
+| T6 | `monitoring_stack` | [#38: T6: Monitoring](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) |
+| T6 | `cost_policy` | [#39: T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) |
 
 ## Shared contracts
 
