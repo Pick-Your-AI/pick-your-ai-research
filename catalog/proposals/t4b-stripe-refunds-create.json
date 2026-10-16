@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "tool.stripe.refunds-create",
+  "kind": "tool",
+  "tier": "T4",
+  "name": "Stripe API create refund",
+  "version": "2026-09-30.endive",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Refund-creation operation family of the Stripe API. Moves money; card refunds can be cancelled only briefly and only from the Dashboard.",
+  "tags": [
+    "payments",
+    "stripe"
+  ],
+  "spec": {
+    "protocol": "http",
+    "side_effect": "mutating",
+    "auth_methods": [
+      "api_key"
+    ],
+    "is_networked": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.stripe.com/api/versioning",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports version: 'The current version is 2026-09-30.endive'."
+    },
+    {
+      "source_uri": "https://docs.stripe.com/api/refunds/create",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports POST /v1/refunds; a fully refunded charge cannot be refunded again."
+    },
+    {
+      "source_uri": "https://docs.stripe.com/api/idempotent_requests",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "All v1 POST requests accept Idempotency-Key (up to 255 chars, prunable after 24 hours); parameter mismatch on reuse errors."
+    },
+    {
+      "source_uri": "https://docs.stripe.com/keys",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "auth_methods api_key: restricted API keys (rk_) recommended; agent-tagged restricted keys are subject to approval rules covering refunds and payouts. required_scopes omitted: restricted-key permission names were not fetched."
+    }
+  ],
+  "updated_at": "2026-10-16T12:00:00Z",
+  "extensions": {
+    "x_side_effect_class": "irreversible",
+    "x_operation_family": "refunds.create",
+    "x_idempotency": "Idempotency-Key header"
+  }
+}
