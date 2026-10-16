@@ -23,7 +23,7 @@ Compute sizing (#31) and dataset preparation (#32) are out of scope.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `trl` | 1.16.0 (2026-10-15) | Apache-2.0 | sft, dpo, distillation; lora/qlora via PEFT | GRPO, KTO, reward modelling, RLOO; experimental CPO, GKD, online DPO, ORPO | cuda (implied), other (AWS Trainium) | HF checkpoints, PEFT adapters | yes (DDP, DeepSpeed, FSDP, multi-node) | F1–F4 |
 | `peft` | 0.21.2 (2026-10-01) | Apache-2.0 | lora, qlora | DoRA, AdaLoRA, IA3, LoHa, LoKr, OFT/BOFT, VeRA, prompt/prefix tuning | cuda (implied), tpu, metal, cpu | safetensors (default), pytorch; merged weights via `merge_and_unload()` | yes (DeepSpeed, FSDP) | F5–F7 |
-| `axolotl` | 0.20.0 (2026-09-30) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo, distillation | continued pretraining, IPO, ORPO, SimPO/CPO, KTO, GRPO, reward models, QAT | cuda, rocm, metal (partial: no QLoRA or DeepSpeed on MPS), other (Ascend NPU, no parity) | safetensors (merged), gguf (`axolotl export`, merge first) | yes (FSDP/FSDP2, DeepSpeed, multi-node, TP/CP/EP) | F8–F13 |
+| `axolotl` | 0.21.0 (2026-10-16) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo, distillation | continued pretraining, IPO, ORPO, SimPO/CPO, KTO, GRPO, reward models, QAT | cuda, rocm, metal (partial: no QLoRA or DeepSpeed on MPS), other (Ascend NPU, no parity) | safetensors (merged), gguf (`axolotl export`, merge first) | yes (FSDP/FSDP2, DeepSpeed, multi-node, TP/CP/EP) | F8–F13 |
 | `unsloth` | PyPI 2026.10.6 (2026-10-15) | Apache-2.0 core; AGPL-3.0 optional components (Studio UI) | sft, lora, qlora, full_finetune, dpo | pretraining, GRPO, GSPO, FP8 training | cuda, rocm, oneapi, metal (MLX); cpu for data recipes only, not training | LoRA adapters, merged 16-bit safetensors, gguf, NVFP4/FP8 | multi-GPU and DeepSpeed ZeRO-2/3; multi-node unknown | F14–F17 |
 | `llamafactory` | 0.9.5 (2026-05-30) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo | continued pretraining, reward modelling, PPO, KTO, ORPO, SimPO, freeze-tuning, OFT, DoRA | cuda, rocm, other (Ascend NPU) | merged weights via `llamafactory-cli export`; gguf unknown | yes (DeepSpeed ZeRO-3, FSDP, multi-node, Megatron-core) | F18–F20 |
 | `ms-swift` | 4.6.0 (2026-10-13) | Apache-2.0 | sft, lora, qlora, full_finetune, dpo, distillation (GKD) | pretraining, DoRA, KTO, CPO, SimPO, ORPO, GRPO family, PPO | cuda, rocm, metal, cpu, other (Ascend, MetaX, MUSA) | merged safetensors; AWQ/GPTQ/FP8/BNB quantised export; gguf unknown | yes (DDP, DeepSpeed, FSDP/FSDP2, Megatron) | F21–F22 |
@@ -106,7 +106,7 @@ The fetch work was split across three parallel research passes. Claims not retri
 | F5 | Hugging Face, https://github.com/huggingface/peft/releases/tag/v0.21.2 | 2026-10-16 | v0.21.2 | Primary documentation | — |
 | F6 | Hugging Face, https://github.com/huggingface/peft/blob/main/README.md | 2026-10-16 | main | Primary documentation | Hardware listed via Accelerate |
 | F7 | Hugging Face, https://raw.githubusercontent.com/huggingface/peft/main/docs/source/developer_guides/checkpoint.md | 2026-10-16 | main | Primary documentation | — |
-| F8 | Axolotl, https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.20.0 | 2026-10-16 | v0.20.0 | Primary documentation | — |
+| F8 | Axolotl, https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.21.0 | 2026-10-16 | v0.21.0 (released 2026-10-16; capabilities checked against v0.20.0 docs and the current README) | Primary documentation | — |
 | F9 | Axolotl, https://github.com/axolotl-ai-cloud/axolotl/blob/main/README.md | 2026-10-16 | main | Primary documentation | — |
 | F10 | Axolotl, https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/support-matrix.qmd | 2026-10-16 | main | Primary documentation | — |
 | F11 | Axolotl, https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/dataset-formats/index.qmd | 2026-10-16 | main | Primary documentation | — |
@@ -271,12 +271,20 @@ No Pricebook proposal is made here. Priced scenarios belong to #31.
 
 ## Structured artifacts
 
-No CatalogItem or Pricebook proposals are included in this draft:
-- PR #44 (contract v1 and submission workflow) is still under review, and the catalog intake rules may change.
-- Several required envelope fields (`tier`, `billing_class`, lifecycle `status`) need agreement with #40 for managed services, which have no user-visible `backends`.
-- Methods v1 cannot express (GRPO, RFT, preference optimisation, KTO, ORPO, continued pretraining) would be lost in JSON.
+CatalogItem proposals for the recommended self-hosted stack, validated with `scripts/validate_research.py`:
 
-Once #44 merges, the first proposals planned are self-hosted `trl`, `peft`, `axolotl` and `unsloth`. Their required facts (`methods`, `backends`, public provenance) are complete.
+| File | ID | Version |
+| --- | --- | --- |
+| `catalog/proposals/training_framework-trl.json` | `cat.training_framework.trl` | 1.16.0 |
+| `catalog/proposals/training_framework-peft.json` | `cat.training_framework.peft` | 0.21.2 |
+| `catalog/proposals/training_framework-axolotl.json` | `cat.training_framework.axolotl` | 0.21.0 |
+| `catalog/proposals/training_framework-unsloth.json` | `cat.training_framework.unsloth` | 2026.10.6 |
+
+Each entry lists only methods, backends and formats documented in its provenance sources. Methods that v1 cannot express (GRPO, KTO, ORPO, RFT, continued pretraining) are named in `description` rather than invented as enum values.
+
+Not proposed yet:
+- **Managed services:** `backends` is required and they have no user-visible backend; `tier`, `billing_class` and lifecycle `status` mapping also needs #40.
+- **Other self-hosted frameworks:** `llamafactory`, `ms-swift` and the NeMo repos have unconfirmed output formats; `torchtune` would be `deprecated`.
 
 ## Open questions and handoffs
 

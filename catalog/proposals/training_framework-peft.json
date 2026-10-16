@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.training_framework.peft",
+  "kind": "training_framework",
+  "tier": "T5",
+  "name": "Hugging Face PEFT",
+  "version": "0.21.2",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "methods": [
+      "lora",
+      "qlora"
+    ],
+    "backends": [
+      "cuda",
+      "tpu",
+      "metal",
+      "cpu"
+    ],
+    "model_formats": [
+      "safetensors",
+      "pytorch"
+    ],
+    "distributed_supported": true
+  },
+  "description": "Parameter-efficient adapter library (LoRA and variants, IA3, OFT, prompt tuning and others), used by trainers rather than a trainer itself. Saves adapter_model.safetensors by default; merge_and_unload() produces merged weights.",
+  "tags": [
+    "self_hosted",
+    "open_source",
+    "adapter_library"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://github.com/huggingface/peft/releases/tag/v0.21.2",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "Release v0.21.2 published 2026-10-01."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/peft/blob/main/README.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "Accelerate support for GPUs, TPUs and Apple Silicon; CPU usage documented."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/huggingface/peft/main/docs/source/developer_guides/checkpoint.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "adapter_model.safetensors default, adapter_model.bin (pytorch) alternative; merge_and_unload()."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/peft/blob/main/LICENSE",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "Apache-2.0."
+    }
+  ],
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-16T15:00:00Z"
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.training_framework.unsloth",
+  "kind": "training_framework",
+  "tier": "T5",
+  "name": "Unsloth",
+  "version": "2026.10.6",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "methods": [
+      "sft",
+      "lora",
+      "qlora",
+      "full_finetune",
+      "dpo"
+    ],
+    "backends": [
+      "cuda",
+      "rocm",
+      "oneapi",
+      "metal"
+    ],
+    "model_formats": [
+      "safetensors",
+      "gguf"
+    ],
+    "distributed_supported": true
+  },
+  "description": "Fine-tuning library with fused kernels and offloaded gradient checkpointing. The core package is Apache-2.0; optional components such as the Studio UI are AGPL-3.0. CPU support is for chat/data recipes only, not training. Multi-GPU and DeepSpeed ZeRO-2/3 supported; multi-node unconfirmed.",
+  "tags": [
+    "self_hosted",
+    "open_source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/project/unsloth/2026.10.6/",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "PyPI release 2026.10.6 uploaded 2026-10-15."
+    },
+    {
+      "source_uri": "https://github.com/unslothai/unsloth/blob/main/README.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "Methods, hardware (NVIDIA, AMD, Intel, Apple MLX) and dual licence (Apache-2.0 core, AGPL-3.0 optional components)."
+    },
+    {
+      "source_uri": "https://unsloth.ai/docs/basics/inference-and-deployment/saving-to-gguf",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "save_pretrained_merged and save_pretrained_gguf."
+    },
+    {
+      "source_uri": "https://unsloth.ai/docs/get-started/fine-tuning-for-beginners/unsloth-requirements",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "Hardware requirements; CPU limited to non-training recipes."
+    },
+    {
+      "source_uri": "https://github.com/unslothai/unsloth/releases/tag/v0.1.908-beta",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "verified",
+      "notes": "Release notes adding DeepSpeed ZeRO-2/3 multi-GPU."
+    }
+  ],
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-16T15:00:00Z"
+}
