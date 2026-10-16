@@ -479,7 +479,31 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPAfU",
     "parent_number": 47,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "mr09_submission_2026_10_16": {
+      "branch": "codex/mr09-feasibility-validation",
+      "base_pr": 67,
+      "base_commit": "075653aa4c0682c976ea9486d7d549d667118530",
+      "reference_only_pr": 75,
+      "reference_commit": "9e66622a4b2698a9305274f05da9c15ae5d90b8c",
+      "acceptance_matrix": "research/market/mr09-acceptance.md",
+      "pr_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79",
+      "human_evidence_acceptance": "pending",
+      "project_write_applied": false,
+      "project_limitation": "No live Project field readback: token lacks read:project; original triage fields are preserved historical metadata.",
+      "next_action": "Review this focused submission and explicit handoff requests; finish missing empirical/child coverage, obtain human acceptance, and merge before Done.",
+      "handoff_request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "progress_comment_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6217452787",
+      "measured_dense_runs": 15,
+      "matched_competitor_runtime_pairs": 0,
+      "remaining_gates": [
+        "MoE/multi-GPU coverage or explicit owner-reviewed scope disposition",
+        "Matched estimator/runtime evidence or explicit reviewed narrowing",
+        "13 receiving-owner dispositions and coordinator evidence acceptance",
+        "PR #67 dependency, review and merge",
+        "Completion of children #61, #62 and #65"
+      ]
+    }
   },
   {
     "title": "MR-10 — Competitive Differentiation",
@@ -738,7 +762,30 @@
     "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61",
     "item_id": "PVTI_lADOFHg4Xc4BnViWzhBPA_A",
     "parent_number": 56,
-    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    "review_pr": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+    "mr09_submission_2026_10_16": {
+      "branch": "codex/mr09-feasibility-validation",
+      "base_pr": 67,
+      "base_commit": "075653aa4c0682c976ea9486d7d549d667118530",
+      "reference_only_pr": 75,
+      "reference_commit": "9e66622a4b2698a9305274f05da9c15ae5d90b8c",
+      "acceptance_matrix": "research/market/mr09-acceptance.md",
+      "pr_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79",
+      "human_evidence_acceptance": "pending",
+      "project_write_applied": false,
+      "project_limitation": "No live Project field readback: token lacks read:project; original triage fields are preserved historical metadata.",
+      "next_action": "Review this focused submission and explicit handoff requests; finish missing empirical/child coverage, obtain human acceptance, and merge before Done.",
+      "handoff_request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "progress_comment_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6217453539",
+      "measured_dense_runs": 15,
+      "matched_competitor_runtime_pairs": 0,
+      "remaining_gates": [
+        "MoE/multi-GPU coverage or explicit owner-reviewed scope disposition",
+        "Matched estimator/runtime evidence or explicit reviewed narrowing",
+        "13 receiving-owner dispositions and coordinator evidence acceptance",
+        "PR #67 dependency, review and merge"
+      ]
+    }
   },
   {
     "title": "MR-09: Validate benchmark comparability and harness effects",

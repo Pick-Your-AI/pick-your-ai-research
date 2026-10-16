@@ -465,7 +465,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review context limits versus actual tokens, weight versus KV precision, and active-sequence semantics.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -477,7 +492,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -489,7 +519,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review versioned runtime/counter/cache/offload support and execution exclusions; process/device usage is not allocator memory.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -501,7 +546,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged retrieval scope; substantive dimension/metric/authentication/workload results remain with #65.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -513,7 +573,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged agent scope and #62 system/harness/complete-delivery evidence requirements.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -525,7 +600,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged MCP scope; advertised connector/transport presence does not establish an authenticated successful workload.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -537,7 +627,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review unchanged fine-tuned artifact scope and the base/adapter/merged lineage boundary.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -549,7 +654,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review #62 release/result identity gap, internal v2 abstract/body discrepancy, contamination/overlap and replication limits.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -561,7 +681,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review conditional workload/utilization/idle/energy/amortization/storage/egress/operating-effort scope using #39 semantics and #64 validation; no new rates.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 56,
@@ -573,7 +708,22 @@
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review note-only findings, canonical contract mapping, central compatibility review and absence of schema/ResourceEstimate changes.",
+      "evidence": [
+        "research/market/technical-feasibility.md",
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   },
   {
     "market_issue": 57,
@@ -934,5 +1084,83 @@
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
     "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable."
+  },
+  {
+    "market_issue": 61,
+    "workstream": "MR-09",
+    "consumer_issue": 7,
+    "consumer_owner": [
+      "zwright8"
+    ],
+    "artifact": "research/market/sizing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review context limits versus actual tokens, weight versus KV precision, and active-sequence semantics.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review context limits versus actual tokens, weight versus KV precision, and active-sequence semantics.",
+      "evidence": [
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Actual execution coverage is reported separately; protocol, agent review and review request are not acceptance.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 61,
+    "workstream": "MR-09",
+    "consumer_issue": 10,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/sizing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+      "evidence": [
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Actual execution coverage is reported separately; protocol, agent review and review request are not acceptance.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
+  },
+  {
+    "market_issue": 61,
+    "workstream": "MR-09",
+    "consumer_issue": 11,
+    "consumer_owner": [
+      "Mattycodes69"
+    ],
+    "artifact": "research/market/sizing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Not yet confirmed",
+    "requested_action": "Review versioned runtime/counter/cache/offload support and execution exclusions; process/device usage is not allocator memory.",
+    "mr09_review_2026_10_16": {
+      "finding_and_requested_action": "Review versioned runtime/counter/cache/offload support and execution exclusions; process/device usage is not allocator memory.",
+      "evidence": [
+        "research/market/sizing-validation.md",
+        "research/market/mr09-acceptance.md"
+      ],
+      "disposition": "pending",
+      "review_response_url": null,
+      "review_response_date": null,
+      "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
+      "note": "Actual execution coverage is reported separately; protocol, agent review and review request are not acceptance.",
+      "review_request_date": "2026-10-16",
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+    }
   }
 ]
