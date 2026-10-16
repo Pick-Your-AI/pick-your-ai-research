@@ -23,7 +23,7 @@ P0 >= 4.6; P1 >= 3.8; P2 >= 2.8; P3 below 2.8. Unknown criterion yields an unkno
 
 ## Evidence and readiness
 
-Use claim-level URL, publisher, accessed date, version/region and evidence type. Verified Full is bounded by an exercised definition; Verified Partial is narrower documented support; Unsupported requires explicit negative evidence; Unknown records missing verification. No feature is absent merely because marketing omits it. Vendor descriptions and public tests are not independent performance measurements.
+Use claim-level URL, publisher, accessed date, version/region and evidence type. Exercised (F) is bounded by an exercised definition; Documented (P) is narrower documented support, including unverified vendor claims; Unsupported (N) requires explicit negative evidence; Unknown (?) records missing verification. These replace the misleading Verified Full/Verified Partial labels without promoting documentation to independent reproduction. No feature is absent merely because marketing omits it. Vendor descriptions and public tests are not independent performance measurements.
 
 Ready requires a coherent question, owner, output path, acceptance criteria and sufficient starting inputs. Needs Input names missing information; Blocked identifies a genuine access/prerequisite constraint; Awaiting Decision names the deciding owner. Creating an issue is not starting work. In Review requires a relevant open PR; Done requires merged accepted evidence and handoffs. Parent completion additionally requires children. Assignees are authoritative.
 

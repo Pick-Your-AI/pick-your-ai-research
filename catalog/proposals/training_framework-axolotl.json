@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.training_framework.axolotl",
+  "kind": "training_framework",
+  "tier": "T5",
+  "name": "Axolotl",
+  "version": "0.21.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "methods": [
+      "sft",
+      "lora",
+      "qlora",
+      "full_finetune",
+      "dpo",
+      "distillation"
+    ],
+    "backends": [
+      "cuda",
+      "rocm",
+      "metal",
+      "other"
+    ],
+    "model_formats": [
+      "safetensors",
+      "gguf"
+    ],
+    "distributed_supported": true
+  },
+  "description": "Config-driven fine-tuning framework. Metal (MPS) support is partial: no QLoRA or DeepSpeed on MPS. 'other' = Ascend NPU without feature parity. GGUF via `axolotl export` after merging LoRA.",
+  "tags": [
+    "self_hosted",
+    "open_source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.21.0",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Release v0.21.0 published 2026-10-16. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://github.com/axolotl-ai-cloud/axolotl/blob/main/README.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "NVIDIA GPU (Ampere+ for bf16/FA) or AMD GPU; FSDP/DeepSpeed/multi-node; GGUF export. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/support-matrix.qmd",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Method support matrix including kd (distillation) and Ascend NPU. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/mac.qmd",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "MPS partial: no QLoRA, no DeepSpeed. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/export.qmd",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "GGUF export; adapter-only directories must be merged first. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://github.com/axolotl-ai-cloud/axolotl/blob/main/LICENSE",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Apache-2.0. Source checked on the access date; not independently reproduced."
+    }
+  ],
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-16T15:00:00Z"
+}

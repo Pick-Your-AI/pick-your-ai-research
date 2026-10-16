@@ -3,7 +3,7 @@
     "id": "benchlm",
     "name": "BenchLM",
     "website": "https://benchlm.ai/",
-    "organization": "BenchLM",
+    "organization": "BenchLM; operator not named in terms",
     "classifications": [
       "Partial competitor",
       "Benchmark provider",
@@ -29,11 +29,12 @@
         "https://benchlm.ai/methodology"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted web application (observed in browser, 2026-10-16); self-hosted or local deployment Unknown.",
+    "apis_and_integrations": "Vendor claim: data access \"through API or MCP\" with 250 free monthly reads (site navigation on benchlm.ai/about, 2026-10-16); no key created, untested. Commercial display needs a separate agreement.",
     "licensing": "Public comparison; paid data access and sponsorship. Commercial display requires a separate agreement.",
     "source_ids": [
-      "src-benchlm"
+      "src-benchlm",
+      "src-benchlm-legal"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -79,8 +80,8 @@
         "https://arxiv.org/abs/2605.27922"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Public website plus public repository Qihoo360/harness-bench (GitHub licence API returns no licence); benchmark not run.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Public research; commercial license permission not established.",
     "source_ids": [
       "src-harness-bench"
@@ -109,7 +110,7 @@
     "id": "llmfit",
     "name": "llmfit",
     "website": "https://www.llmfit.org/",
-    "organization": "AlexsJones repository; seed-site operator unconfirmed",
+    "organization": "Upstream: Alex Jones (GitHub AlexsJones), repository and llmfit.axjns.dev; llmfit.org operator unverified",
     "classifications": [
       "Partial competitor",
       "Open-source integration candidate"
@@ -139,11 +140,12 @@
         "https://raw.githubusercontent.com/AlexsJones/llmfit/main/LICENSE"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Primary documentation (llmfit.org and upstream README): local terminal tool installed via Scoop, Homebrew, an install script on llmfit.axjns.dev, container image ghcr.io/alexsjones/llmfit or source build. Not installed or run in this study.",
+    "apis_and_integrations": "Primary documentation: JSON CLI output (`recommend --json`) and a local REST API via `llmfit serve` (/health, /api/v1/system, /api/v1/models/top); lists Ollama, llama.cpp, MLX, Docker Model Runner and LM Studio as runtime providers. Untested.",
     "licensing": "MIT upstream code; seed website has advertising; model-data rights require separate inspection.",
     "source_ids": [
-      "src-llmfit"
+      "src-llmfit",
+      "src-llmfit-upstream-pages"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -161,14 +163,15 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "llmfit.org is not referenced by the upstream repository, whose own site is llmfit.axjns.dev; llmfit.org operator unverified."
     ]
   },
   {
     "id": "local-ai-planner",
     "name": "Local AI VRAM Calculator / GPU Planner",
     "website": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
-    "organization": "Logarithmic Spirals",
+    "organization": "Logarithmic Spirals (pseudonymous individual blog author)",
     "classifications": [
       "Partial competitor"
     ],
@@ -194,11 +197,12 @@
         "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Browser tool, free without signup; controls observed in browser, output accuracy not verified.",
+    "apis_and_integrations": "Unknown: no public API, source licence or dataset terms established (profile, 2026-10-16).",
     "licensing": "Free web planner; API and redistribution permission unknown.",
     "source_ids": [
-      "src-local-ai-planner"
+      "src-local-ai-planner",
+      "src-local-ai-planner-about"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -250,8 +254,8 @@
         "https://aitools.flocci.in/stack"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted web application (Ask and Stack Builder exercised anonymously, 2026-10-16).",
+    "apis_and_integrations": "Unknown: no public API or executable export verified; Stack Builder returned on-screen advice only.",
     "licensing": "Free browsing; credits for AI features. One free Ask interaction returned explained tool recommendations.",
     "source_ids": [
       "src-flocci"
@@ -312,8 +316,8 @@
         "https://artificialanalysis.ai/methodology"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted web service.",
+    "apis_and_integrations": "Primary documentation: public API reference covering intelligence evaluations, output speed, time to first token and price; free keyed access requires attribution and data terms. No key created.",
     "licensing": "Free keyed API and commercial data offering; attribution and terms apply.",
     "source_ids": [
       "src-artificial-analysis"
@@ -368,8 +372,8 @@
         "https://openrouter.ai/pricing"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted routing service that forwards requests to third-party provider endpoints (vendor documentation).",
+    "apis_and_integrations": "Primary documentation: Models API with metadata and filtering, and a unified provider-routing API. No account used.",
     "licensing": "Usage-based model access and platform pricing; provider conditions vary.",
     "source_ids": [
       "src-openrouter"
@@ -424,8 +428,8 @@
         "https://huggingface.co/docs/hub/model-cards"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted model hub (web).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Public Hub and commercial services; rights vary by repository.",
     "source_ids": [
       "src-hugging-face"
@@ -473,8 +477,8 @@
         "https://arena.ai/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted web application.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Business model and data reuse terms unverified.",
     "source_ids": [
       "src-arena"
@@ -502,7 +506,7 @@
     "id": "llm-stats",
     "name": "LLM Stats",
     "website": "https://llm-stats.com/",
-    "organization": "LLM Stats; legal entity unconfirmed",
+    "organization": "llm-stats (self-described two co-founders); legal entity unconfirmed",
     "classifications": [
       "Partial competitor",
       "Data source"
@@ -523,11 +527,12 @@
         "https://llm-stats.com/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted web application.",
+    "apis_and_integrations": "Vendor claim: site navigation lists \"Data API / MCP\"; robots.txt disallows /api/. Not tested.",
     "licensing": "Pricing of access and reuse rights unknown.",
     "source_ids": [
-      "src-llm-stats"
+      "src-llm-stats",
+      "src-llm-stats-legal"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -578,8 +583,8 @@
         "https://raw.githubusercontent.com/anomalyco/models.dev/dev/LICENSE"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted website.",
+    "apis_and_integrations": "Primary documentation: separate JSON endpoints for provider data, canonical-model data and a combined catalog; specialized model types omitted by default.",
     "licensing": "MIT repository; verify upstream data provenance and retain notices.",
     "source_ids": [
       "src-models-dev"
@@ -607,7 +612,7 @@
     "id": "canrun",
     "name": "CanRun",
     "website": "https://canrunllm.com/",
-    "organization": "CanRun; legal entity unconfirmed",
+    "organization": "CanRun (self-described independent project); legal entity unconfirmed",
     "classifications": [
       "Partial competitor"
     ],
@@ -625,11 +630,12 @@
         "https://canrunllm.com/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Primary documentation (privacy policy, effective 2026-10-06): calculator runs in the browser on Cloudflare Pages; unlisted models are fetched from Hugging Face directly by the browser.",
+    "apis_and_integrations": "Primary documentation: emits ready-to-run llama.cpp and Ollama commands for the chosen context length. Public API Unknown.",
     "licensing": "Commercial model, API and data rights unverified.",
     "source_ids": [
-      "src-canrun"
+      "src-canrun",
+      "src-canrun-about"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -672,11 +678,12 @@
         "https://canitrun.dev/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted web calculator with no accounts (privacy policy, last updated 2026-08-16).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Commercial model, API and data rights unverified.",
     "source_ids": [
-      "src-canitrun"
+      "src-canitrun",
+      "src-canitrun-about"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -726,8 +733,8 @@
         "https://modelfit.io/data/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Web device/setup/results flow plus a CLI the publisher states is MIT-licensed.",
+    "apis_and_integrations": "Vendor claim / primary documentation: documented JSON and MCP access. Untested.",
     "licensing": "Free recommendation surface; sponsorship and affiliate disclosures. Dataset claims CC BY 4.0, CLI MIT.",
     "source_ids": [
       "src-modelfit"
@@ -780,8 +787,8 @@
         "https://ollama.com/library"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Local model runtime with a public model library (vendor documentation); not installed in this study.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Model licenses differ; hosting and distribution terms need per-product checks.",
     "source_ids": [
       "src-ollama"
@@ -828,11 +835,12 @@
         "https://gpus.io/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence. Recheck blocked by a 403 bot challenge.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Listing reuse and affiliate terms unverified.",
     "source_ids": [
-      "src-gpus-io"
+      "src-gpus-io",
+      "src-gpus-io-recheck"
     ],
     "last_verification": "2026-10-16",
     "confidence": "Medium",
@@ -850,7 +858,8 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "Recheck on 2026-10-16 returned 403 to anonymous retrieval; current capabilities and operator unverified."
     ]
   },
   {
@@ -877,8 +886,8 @@
         "https://vast.ai/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted GPU rental marketplace (vendor documentation).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Metered GPU rentals; instance-specific conditions and availability.",
     "source_ids": [
       "src-vast"
@@ -927,8 +936,8 @@
         "https://www.runpod.io/pricing"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Hosted GPU cloud platform (vendor documentation).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Metered cloud offerings; rate cards distinguish products and resources.",
     "source_ids": [
       "src-runpod"
@@ -979,8 +988,8 @@
         "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Primary documentation: cloud plans and self-hosting; source licence modifies Apache terms with multitenancy and frontend-branding conditions.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Cloud plans and self-hosted code; modified Apache license has multitenancy and branding conditions.",
     "source_ids": [
       "src-dify"
@@ -1031,8 +1040,8 @@
         "https://www.langflow.org/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Commercial hosting and exact source/data terms need review.",
     "source_ids": [
       "src-langflow"
@@ -1078,8 +1087,8 @@
         "https://flowiseai.com/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Cloud and source offerings; exact deployment terms need review.",
     "source_ids": [
       "src-flowise"
@@ -1127,8 +1136,8 @@
         "https://n8n.io/pricing/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Cloud subscriptions; Sustainable Use License and separate enterprise code conditions.",
     "source_ids": [
       "src-n8n"
@@ -1177,8 +1186,8 @@
         "https://docs.skypilot.ai/en/latest/docs/index.html"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Vendor documentation: launches and manages AI compute across infrastructure providers; capacity is not guaranteed.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Open-source and commercial platform surfaces; cloud bills remain separate.",
     "source_ids": [
       "src-skypilot"
@@ -1228,8 +1237,8 @@
         "https://www.bentoml.com/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Commercial inference platform with source ecosystem; precise terms unverified.",
     "source_ids": [
       "src-bentoml"
@@ -1277,8 +1286,8 @@
         "https://langfuse.com/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Hosted and self-hosted offerings; detailed edition terms require review.",
     "source_ids": [
       "src-langfuse"
@@ -1322,8 +1331,8 @@
         "https://docs.ragas.io/en/stable/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Documentation accessible; exact release and dataset licenses not validated.",
     "source_ids": [
       "src-ragas"
@@ -1370,8 +1379,8 @@
         "https://www.llamaindex.ai/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Commercial services and framework ecosystem; component-specific terms.",
     "source_ids": [
       "src-llamaindex"
@@ -1417,8 +1426,8 @@
         "https://www.langchain.com/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Framework and platform offerings; licensing differs by component.",
     "source_ids": [
       "src-langchain"
@@ -1465,8 +1474,8 @@
         "https://qdrant.tech/benchmarks/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Vendor evidence; independent reproduction and dataset rights required.",
     "source_ids": [
       "src-qdrant-bench"
@@ -1512,8 +1521,8 @@
         "https://github.com/EleutherAI/lm-evaluation-harness"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Open-source framework run by the user (public GitHub repository).",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Source framework; test datasets and model licenses remain separate.",
     "source_ids": [
       "src-lm-eval"
@@ -1561,8 +1570,8 @@
         "https://registry.modelcontextprotocol.io/docs"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Open-source registry service (public GitHub repository).",
+    "apis_and_integrations": "Primary documentation: registry API serving MCP server metadata. Untested.",
     "licensing": "Registry listings are not a compatibility or security certification.",
     "source_ids": [
       "src-mcp-registry"
@@ -1606,8 +1615,8 @@
         "https://unsloth.ai/"
       ]
     },
-    "deployment_support": "See feature evidence; complete deployment coverage unknown",
-    "apis_and_integrations": "See documented_features and source-specific profile; unknown where no evidence",
+    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
     "licensing": "Reuse PR #46 for framework research; model and software terms separate.",
     "source_ids": [
       "src-unsloth"

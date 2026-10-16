@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.model_provider.openai",
+  "kind": "model_provider",
+  "tier": "T1",
+  "name": "OpenAI",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "unknown",
+  "spec": {},
+  "provenance": [
+    {
+      "source_uri": "https://developers.openai.com/api/docs/models/gpt-5.4",
+      "checked_at": "2026-10-16T19:18:37Z",
+      "verification_status": "unverified",
+      "notes": "Identity/distribution role checked against primary source. Optional unchecked capabilities omitted; see research/T1-model-selection/model-provider.md for offering-specific terms. Version denotes research capture, not vendor software release."
+    }
+  ],
+  "updated_at": "2026-10-16T19:18:37Z"
+}

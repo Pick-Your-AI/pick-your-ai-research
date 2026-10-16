@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.training_framework.trl",
+  "kind": "training_framework",
+  "tier": "T5",
+  "name": "Hugging Face TRL",
+  "version": "1.16.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "methods": [
+      "sft",
+      "dpo",
+      "distillation",
+      "lora",
+      "qlora"
+    ],
+    "backends": [
+      "cuda",
+      "other"
+    ],
+    "model_formats": [
+      "safetensors"
+    ],
+    "distributed_supported": true
+  },
+  "description": "Post-training library (SFT, DPO, GRPO, KTO, reward modelling, distillation) on Hugging Face Transformers. LoRA/QLoRA through the PEFT integration. GRPO, KTO, RLOO and reward modelling are documented but have no v1 method enum value.",
+  "tags": [
+    "self_hosted",
+    "open_source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://github.com/huggingface/trl/releases/tag/v1.16.0",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Release v1.16.0 published 2026-10-15. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/trl/blob/main/README.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Trainers (SFT, DPO, GRPO, Reward, distillation); PEFT integration for LoRA/QLoRA; Accelerate DDP/DeepSpeed multi-node; AWS Trainium support (backend 'other'). Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/huggingface/trl/main/docs/source/reducing_memory_usage.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "CUDA streams and PYTORCH_CUDA_ALLOC_CONF documented (backend 'cuda'). Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/huggingface/trl/main/docs/source/distributing_training.md",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Multi-node, DeepSpeed and FSDP documented. Source checked on the access date; not independently reproduced."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/trl/blob/main/LICENSE",
+      "checked_at": "2026-10-16T15:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Apache-2.0. Source checked on the access date; not independently reproduced."
+    }
+  ],
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-16T15:00:00Z"
+}

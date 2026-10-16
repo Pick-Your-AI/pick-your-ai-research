@@ -1,25 +1,55 @@
-# Harness Bench — desk-research profile
+# Harness Bench — competitor profile
 
-Status: draft for owner review. Operator: Harness Bench Team / Qihoo360 repository. Classification: Benchmark provider, Open-source integration candidate (analyst judgement).
+Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `harness-bench`. Classification: Benchmark provider, Open-source integration candidate (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
-## Workflow and competitive overlap
-System-level evaluation is relevant because the same model can perform differently within different execution harnesses.
+| Field | Value |
+| --- | --- |
+| Product | Harness Bench model-harness benchmark (site, leaderboard, repository, paper) |
+| Operator | Harness Bench team; repository under the Qihoo360 GitHub organization |
+| URLs | [site](https://www.harness-bench.ai/), [repository](https://github.com/Qihoo360/harness-bench), [arXiv abstract](https://arxiv.org/abs/2605.27922) |
+| Access date | 2026-10-16 |
+| Version / revision | Repository `main` head `b8d8963` (2026-10-09), no tagged releases; arXiv v2 (revised 2026-10-15) |
+| Access tier observed | Public site, public repository metadata via GitHub API, arXiv abstract page; nothing executed |
+| robots.txt | harness-bench.ai serves no robots.txt (HTML fallback); arXiv allows `/abs` with crawl delay |
 
-## Technical evidence and limitations
-Repository describes sandboxed workflows, preserved native harness behavior and final-artifact grading. These conditions bound the reported result; no benchmark was rerun here.
+## Workflow
 
-## Economics, access and rights
-The linked repository is public, but the GitHub license endpoint returned 404. Public access is not an affirmative reuse license. Request clarification before incorporating tasks.
+Harness Bench is not a selection tool. Its user workflow is reading results.
 
-## Strategic implication and next test
-Use #36 to assess reproducibility, contamination, task coverage and the difference between partial-credit scores and finished deliverables. Treat the paper as a study, not a general model ranking.
+| Stage | Finding | Class | Source |
+| --- | --- | --- | --- |
+| Inputs | None from the user; the reader browses categories, tasks and a leaderboard | Observed | [site](https://www.harness-bench.ai/) |
+| Constraints | Fixed by the benchmark: shared task inputs, 200K-token context threshold, 150-turn limit, recorded token use and API cost | Documented | [site](https://www.harness-bench.ai/) |
+| Selection logic | None; results are reported per model × harness pairing (7 harnesses × 10 model backends on the general suite) | Documented | [site](https://www.harness-bench.ai/) |
+| Explanation | Key findings, e.g. "No Harness Is Best on Every Model" and the gap between ≥0.80 partial credit and full credit | Observed (page content); results are publisher measurements, not reproduced | [site](https://www.harness-bench.ai/) |
+| Save/share/export | Repository contains `catalog`, `suites`, `tasks`, `dashboard` directories and `CITATION.cff`; no build save/share | Observed (repository tree) | [repository](https://github.com/Qihoo360/harness-bench) |
 
-## Evidence
-- [https://www.harness-bench.ai/](https://www.harness-bench.ai/) — accessed 2026-10-16.
-- [https://github.com/Qihoo360/harness-bench](https://github.com/Qihoo360/harness-bench) — accessed 2026-10-16.
-- [https://arxiv.org/abs/2605.27922](https://arxiv.org/abs/2605.27922) — accessed 2026-10-16.
+## Architecture and data
 
-Scope: public documentation and limited browser observation. No performance benchmark, paid trial, market-share measurement or commercial-rights approval was conducted. Confidence: Medium for the documented surface; Low for demand and comparative advantage. Related work: MR-03, MR-08, MR-09; exact technical consumers are in the handoff register.
+- Tasks are reconstructed as sandboxed workspaces from "de-identified user logs, public workflows, and resource collections"; hidden task-specific oracles score final artifacts with no LLM judge. Documented, [site](https://www.harness-bench.ai/).
+- Source conflict (retained from the prior profile): the site describes 300 tasks (274 general, 26 multimodal) and 20,454 runs; the arXiv v2 abstract describes 106 tasks and 5,194 trajectories. Record them as separate releases; see [benchmark validation](../benchmark-validation.md).
+- Freshness: repository pushed 2026-10-11; site and paper carry no shared release identifier. Observed.
 
-## Source conflict requiring review
-The retrieved arXiv v2 abstract describes 106 tasks and 5,194 trajectories; the website/repository describe a 300-task suite. Both were accessed on 2026-10-16. Record separate release identities; do not combine counts or treat published rankings as a reproduced result. See [benchmark validation](../benchmark-validation.md).
+## Commercial access, code licence and data rights
+
+| Layer | Finding | Class | Source |
+| --- | --- | --- | --- |
+| (a) Commercial access | Free public site and repository; no paid tier found | Observed (no pricing page found; not proof of absence) | [site](https://www.harness-bench.ai/) |
+| (b) Code licence | `gh api repos/Qihoo360/harness-bench/license` returned 404; repository metadata `license: null`. No licence grant | Observed | [repository](https://github.com/Qihoo360/harness-bench) |
+| (c) Data reuse | Paper is CC BY 4.0 (arXiv licence link). Repository tasks, trajectories and catalogue carry no licence | Observed | [arXiv](https://arxiv.org/abs/2605.27922) |
+
+Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): display only results and text published in the paper, attributed and pinned to v2; repository content not reusable. This profile agrees.
+
+## Counterexample
+
+- **Suffices (hypothesis):** a team that has already chosen a model and must pick a coding-agent harness for repository or operations work can read the per-model harness results directly. Pick Your AI adds nothing for that narrow question unless it reuses these results.
+- **Falls short (hypothesis):** it takes no user constraints, covers seven harnesses and ten backends, and does not address hardware, retrieval, hosting or cost for the user's workload. It is evidence for #36, not a substitute for a configuration decision.
+
+## Matrix consistency
+
+Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `benchmarks` and `harness_eval` Documented; `saved`, `share`, `export`, `model_versions` Unknown. Agrees. The repository tree is a code artifact, not a build export.
+
+## Open questions and routing
+
+- #36/#62: reproducibility, contamination and which release (paper v2 or site 300-task suite) a citation uses.
+- #41/#60: request licence clarification before any task reuse.
