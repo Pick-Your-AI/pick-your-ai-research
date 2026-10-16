@@ -129,6 +129,16 @@ No handoff is confirmed yet. Each row needs a linked comment or PR review from t
 | all | #40 Compatibility Schema | Rule proposals and the contract findings above | @tynamite | Pending |
 | all | #41 Data Freshness | Versioning of hosted services; grading of vendor docs and JavaScript-rendered pages | @tynamite | Pending |
 
+### Reconciliation with merged T2 research
+
+T2 Infrastructure research merged in PR #75 after this summary was drafted. It lists reciprocal handoffs to T4, all still pending acknowledgment by the T4 owner (@CompleteDotTech):
+
+- **#9 to #27:** T2 classifies a local MCP process and a remote MCP HTTP service as hosting placements and leaves transport, authentication and trust to #27. This matches the three hosting categories in [mcp-servers.md](mcp-servers.md). T2 pinned the 2025-11-25 transport document and asked #27 to decide which protocol versions to retain; mcp-servers.md answers that the catalog must track version sets, with 2026-07-28 current.
+- **#11 to #25:** T2 records that tool calling depends on engine version, model revision, chat template, parser, request fields, strictness and streaming mode, and asks #25 for consumer acceptance fixtures. This is consistent with the engine prerequisites in [agent-framework.md](agent-framework.md). The fixtures are not yet written.
+- **#9 to #28:** T2 asks #28 to confirm that T2 storage describes infrastructure only, while session and durable memory semantics, retention and deletion stay with T4. This matches the storage boundary in [agent-memory.md](agent-memory.md).
+
+Acknowledging these handoffs is the T4 owner's decision. This summary records only that the T4 drafts do not contradict them.
+
 ## Data-source provenance
 
 Every factual claim in the component notes cites a primary source accessed on 2026-10-16, with an evidence ID (prefixes A, B, C, D by component). Versions were read from PyPI, npm, GitHub release pages and vendor documentation. Evidence grades follow `docs/RESEARCH_METHOD.md` until #41 finalises the policy. One pricebook rate (Anthropic web search, USD 10 per 1,000 searches) was re-checked against the vendor page during consolidation.
