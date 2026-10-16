@@ -98,7 +98,7 @@ These cover the CatalogItem envelope plus `spec_training_compute`. The issue's c
 
 | Field / JSON pointer | Type and unit | Candidate finding | Evidence ID | Conditions / unknowns |
 | --- | --- | --- | --- | --- |
-| `/spec/compute_profile_ref` | `compute_profile` catalog ID | Must reference a compute SKU already in the catalog (T2) | contract | No T2 compute profiles exist yet (#9, #10) |
+| `/spec/compute_profile_ref` | `compute_profile` catalog ID | Must reference a compute SKU already in the catalog (T2) | contract; T2 records on `main` | One `compute_profile` exists: `aws-ec2-g6e-xlarge-us-east-1` (1× `nvidia-l40s` on `aws-ec2`, us-east-1). The other SKUs priced below have no profile record. See [Upstream T2 records](#upstream-t2-records) |
 | `/spec/max_gpu_hours` | number ≥0, GPU-hours | Cap from the time estimate | E14 | Managed per-token services have no GPU-hour meter |
 | `/spec/ephemeral` | boolean | True for rented capacity released after the run | — | — |
 | `/spec/storage_ref` | `storage` catalog ID | Checkpoint store | E15, E16 | Size from the storage formula |
@@ -179,17 +179,17 @@ S1 claims re-checked:
 
 ## Compatibility proposals
 
-These rules are proposed for review by #40 using the [rule proposal template](../../templates/rule-proposal.md). Rules that depend on the estimator return `unknown` when an input is missing, never `pass`.
+These rules are proposed for review by #40 using the [rule proposal template](../../templates/rule-proposal.md). Rules that depend on the estimator return `unknown` when an input is missing, never `pass`. "Source checked" means the cited primary text was read on its access date; it follows the interim "checked" definition in the owner's adopted #41 policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)). Nothing here is independently verified (reproduced or confirmed by a second source), and a result that passes on checked evidence stays unverified.
 
 | Rule | Participating fields | Assertion | Outcome / severity | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
-| K-01 | estimated peak per-device memory, `accelerator.spec.vram_gb` | Estimate > VRAM | fail / error | E1–E11 | verified formula components; overhead factor is an estimate |
+| K-01 | estimated peak per-device memory, `accelerator.spec.vram_gb` | Estimate > VRAM | fail / error | E1–E11 | source checked formula components; overhead factor is an estimate |
 | K-02 | same | Estimate within 15% of VRAM | pass / warning ("may not fit; dry-run recommended") | — | hypothesis: threshold is a policy choice |
-| K-03 | method = full_finetune, single device, no ZeRO / offload | 16·N exceeds VRAM | fail / error, with remediation "LoRA / QLoRA, ZeRO-3 or offload" | E1, E10 | verified |
-| K-04 | method = qlora, framework / accelerator backend | QLoRA requires bitsandbytes-style 4-bit kernels on the backend; Axolotl documents no QLoRA on `metal` | fail / error | #30 F13 | verified for Axolotl; others unknown |
-| K-05 | method = dpo, reference model not precomputed, full FT | Adds 2·N for the reference model | pass / warning | E17 | verified |
+| K-03 | method = full_finetune, single device, no ZeRO / offload | 16·N exceeds VRAM | fail / error, with remediation "LoRA / QLoRA, ZeRO-3 or offload" | E1, E10 | source checked |
+| K-04 | method = qlora, framework / accelerator backend | QLoRA requires bitsandbytes-style 4-bit kernels on the backend; Axolotl documents no QLoRA on `metal` | fail / error | #30 F13 | source checked for Axolotl; others unknown |
+| K-05 | method = dpo, reference model not precomputed, full FT | Adds 2·N for the reference model | pass / warning | E17 | source checked |
 | K-06 | accelerator lacks bf16 (e.g. T4 / V100 class) | fp16 with loss scaling only; bf16 recipes fail or overflow | pass / warning | — | hypothesis: needs #10 accelerator dtype facts |
-| K-07 | multi-device, framework `distributed_supported` = false | Cannot use more than one device | fail / error | #30 | verified for listed frameworks |
+| K-07 | multi-device, framework `distributed_supported` = false | Cannot use more than one device | fail / error | #30 | source checked for listed frameworks |
 | K-08 | managed service selected, `training_compute.compute_profile_ref` set | Managed per-token services have no user compute profile; use a price-only selection | unknown / warning | P1–P6 | contract gap: `compute_profile_ref` is required in v1 |
 | K-09 | estimate confidence = `estimated` and no calibration row for the model family / method | Show the estimate as a range with assumptions | pass / info | B1–B11 | policy proposal |
 
@@ -270,23 +270,48 @@ The builder must show the post-training serving cost next to the training cost. 
 ## Structured artifacts
 
 No CatalogItem, Pricebook or ResourceEstimate files in this draft:
-- `training_compute.spec.compute_profile_ref` must reference a `compute_profile` already in the catalog. No T2 compute profiles, accelerators or hosting platforms exist yet (#9, #10).
-- Pricebook rates must reference catalog items and versions in this repository. The meter enum also has no per-training-token, job-minimum or training-hour meter, so managed training prices cannot be expressed in v1.
+- `training_compute.spec.compute_profile_ref` must reference a `compute_profile` already in the catalog. T2 records merged to `main` in #75 (`ec612eb`) already cover some of what this note needs; the remaining gaps are listed under [Upstream T2 records](#upstream-t2-records). A `training_compute` item is not proposed here because it would bind a user's run to a profile, and only one profile exists.
+- Pricebook rates must reference catalog items and versions in this repository. The meter enum has `gpu_hour` but no per-training-token, job-minimum, training-hour or model-storage meter, so managed training prices cannot be expressed in v1.
 - ResourceEstimate has `training.estimated_gpu_hours` but no training-memory metric.
 
-The prices above are recorded with provenance so they can be converted once those items exist.
+The prices above are recorded with provenance so they can be converted once the missing items and meters exist.
+
+### Upstream T2 records
+
+Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals under their own review, not approved catalog data. The first table lists what this note can already reference. The second separates records that do not exist from fields and meters that are unresolved.
+
+| Need in this note | Record on `main` (`catalog/proposals/`) | Notes |
+| --- | --- | --- |
+| H100 80 GB accelerator (P7–P12 rows) | `nvidia-h100-sxm`: `vram_gb` 80, backend `cuda`, precisions incl. `bf16`, `fp8`, interconnect `nvlink` | Provides the VRAM and dtype inputs for K-01, K-03, K-06 |
+| L40S 48 GB accelerator (g6e.xlarge row) | `nvidia-l40s`: `vram_gb` 48, `cuda`, precisions incl. `bf16`, `fp8`, `int4` | Same |
+| MI300X accelerator | `amd-mi300x`: `vram_gb` 192, backend `rocm` | Not priced in this note |
+| `aws g6e.xlarge` (1× L40S, $1.861/h, P7) | `compute_profile` `aws-ec2-g6e-xlarge-us-east-1`: `hosting_ref` `aws-ec2`, `accelerator_ref` `nvidia-l40s`, count 1, region `us-east-1` | The only existing `compute_profile`. It is a valid `compute_profile_ref` target. The T2 pricebook has no rate for it yet |
+| AWS and RunPod hosting | `hosting_platform` `aws-ec2` (`us-east-1`), `runpod-pods`; also `runpod-serverless`, `modal-functions`, `huggingface-endpoints-aws` | Hosting records exist for two of the self-run providers priced here |
+| Checkpoint storage (`storage_ref`) | `storage` `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | The S3 Standard row (P13) has no matching `storage` record |
+
+| Gap | Kind | Route |
+| --- | --- | --- |
+| `compute_profile` for `p5.48xlarge`, `p4de.24xlarge`, `a3-highgpu-8g`, `Standard_ND96isr_H100_v5`, Lambda, RunPod and CoreWeave SKUs | Missing record. Required spec fields: `hosting_ref`, `cpu_cores`, `ram_gb`, `region`. The price evidence here records SKU, GPU count and price; it was not collected for CPU and RAM, and P11 states no RunPod region. Those fields need their own sources | #10 owns profiles. This note supplies the SKU and price list only |
+| Accelerator records for A100 80 GB and RTX 4090 | Missing record (B2, B3 use the 4090) | #10 |
+| `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave | Missing record | #9 |
+| `storage` record for S3 Standard | Missing record | #9 |
+| Peak dense TFLOP/s per accelerator, needed by the time formula | Unresolved field: `spec_accelerator` has `vram_gb` and `precisions` but no throughput field | Contract proposal through #40, with #10 |
+| Training-token, job-minimum, training-hour and model-storage meters; `compute_profile_ref` optional for managed services | Unresolved meters and field (v1 contract) | #40 and #39 |
+| `training.estimated_peak_per_device_vram_gb` | Unresolved ResourceEstimate metric | #40, with #10 |
+| Whether a multi-GPU instance-hour price maps to the `gpu_hour` meter per GPU or per instance | Unresolved pricing semantics | #39 |
+| Training memory, time and throughput for the existing profiles | Training-specific estimates; T2's `gpu-compute.md` leaves these to #31 and none of its inference estimates apply | #31 (this note's estimator), calibrated against B1–B12 |
 
 ## Open questions and handoffs
 
 | Question | Follow-up issue / owner |
 | --- | --- |
-| Accelerator facts the estimator needs (VRAM, bf16/fp8 support, peak dense TFLOP/s) and compute profiles for the SKUs priced here | #10 · @Mattycodes69 |
-| Hosting platforms and regions for the GPU price rows | #9 · @Mattycodes69 |
-| Pricebook meters for `training_tokens_1m`, `training_tokens_1k`, `training_hour`, `job_minimum` and `model_storage_month`; a ResourceEstimate metric `training.estimated_peak_per_device_vram_gb`; `compute_profile_ref` optional for managed services | #40 · @CompleteDotTech |
+| Accelerator and compute-profile records still missing for the SKUs priced here (A100 80 GB, RTX 4090, and profiles for every SKU except `aws-ec2-g6e-xlarge-us-east-1`); a peak dense TFLOP/s field. VRAM and bf16/fp8 inputs already exist for H100 SXM, L40S and MI300X. See Upstream T2 records | #10 · @Mattycodes69 |
+| Hosting platform records for Google Cloud, Azure, Lambda and CoreWeave, and a `storage` record for S3 Standard. `aws-ec2` and `runpod-pods` already exist | #9 · @Mattycodes69 |
+| Pricebook meters for `training_tokens_1m`, `training_tokens_1k`, `training_hour`, `job_minimum` and `model_storage_month`; a ResourceEstimate metric `training.estimated_peak_per_device_vram_gb`; `compute_profile_ref` optional for managed services | #40 · @tynamite |
 | Price normalisation: per-1k vs per-1M tokens, epochs and validation tokens, job minimums, and post-training hosting shown next to training cost | #39 · @PUSHINGSQUARES |
 | Training time and cost estimate for distillation and GRPO (only memory is sketched) | #31 · @appletechie |
 | Run a 20-step dry run to calibrate the Qwen3-8B worked example (no published measurement for it) | #31 · @appletechie |
 | Methods and frameworks consumed from #30 | #30 · @appletechie (PR #68) |
-| Freshness threshold for prices (they change faster than specifications) | #41 · @CompleteDotTech |
+| Freshness threshold for prices (they change faster than specifications) | #41 · @tynamite |
 
 None of the handoffs above is confirmed yet.
