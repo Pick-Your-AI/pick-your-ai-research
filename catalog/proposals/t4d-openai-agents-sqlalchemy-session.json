@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "memory_store.openai-agents.sqlalchemy-session",
+  "kind": "memory_store",
+  "tier": "T4",
+  "name": "OpenAI Agents SDK SQLAlchemySession",
+  "version": "0.24.0",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Client-side conversation history for the OpenAI Agents SDK stored in any SQLAlchemy-supported database (extra 'sqlalchemy'). Scope is the application-chosen session_id.",
+  "tags": [
+    "session-state",
+    "conversation-history",
+    "self-hosted",
+    "library"
+  ],
+  "spec": {
+    "memory_type": "session",
+    "backing_type": "relational"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/openai-agents/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports version 0.24.0 (uploaded 2026-10-15) and the 'sqlalchemy' extra; the 0.24.0 wheel contains agents/extensions/memory/sqlalchemy_session.py."
+    },
+    {
+      "source_uri": "https://openai.github.io/openai-agents-python/sessions/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports memory_type session (history across runs keyed by session_id; clear_session and pop_item) and backing_type relational ('SQLAlchemySession: For production apps using any SQLAlchemy-supported database'). TTL and encryption are only documented for the EncryptedSession wrapper and DaprSession, so supports_ttl and encryption_at_rest are omitted."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-python/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports license MIT."
+    }
+  ],
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-16T12:00:00Z"
+}

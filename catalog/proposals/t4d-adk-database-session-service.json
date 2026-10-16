@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "memory_store.google-adk.database-session-service",
+  "kind": "memory_store",
+  "tier": "T4",
+  "name": "Google ADK DatabaseSessionService",
+  "version": "2.12.0",
+  "status": "active",
+  "billing_class": "free",
+  "description": "ADK session and state persistence in a relational database (PostgreSQL, MySQL, SQLite via async driver). Session state, user: state (per user across sessions) and app: state (per app) persist; temp: state never persists.",
+  "tags": [
+    "session-state",
+    "user-state",
+    "self-hosted",
+    "library"
+  ],
+  "spec": {
+    "memory_type": "session",
+    "backing_type": "relational"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/google-adk/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports version 2.12.0 (uploaded 2026-10-13) and the 'db' extra."
+    },
+    {
+      "source_uri": "https://adk.dev/sessions/session/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports backing_type relational ('Connects to a relational database (e.g., PostgreSQL, MySQL, SQLite)') and delete_session. memory_type session is the primary use; user: and app: prefixes also persist across sessions (adk.dev/sessions/state/), which v1 memory_type cannot express."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/google/adk-python/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "verified",
+      "notes": "Supports license Apache-2.0."
+    }
+  ],
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-16T12:00:00Z"
+}
