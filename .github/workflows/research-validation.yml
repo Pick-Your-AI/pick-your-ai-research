@@ -20,3 +20,4 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python scripts/validate_research.py
       - run: python scripts/validate_market_research.py
+      - run: python prompts/mobile/validate_prompts.py

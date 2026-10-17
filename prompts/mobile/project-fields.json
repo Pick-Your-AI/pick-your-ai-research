@@ -1,0 +1,909 @@
+{
+  "note": "Read-only publication snapshot. Refresh field IDs/options before any mutation; no fields changed by prompt publication.",
+  "projects": [
+    {
+      "platform": "android",
+      "project": 4,
+      "id": "PVT_kwDOFHg4Xc4BnbMJ",
+      "program": 34,
+      "issues": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162
+      ],
+      "fields": [
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5VE",
+          "name": "Title",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5VI",
+          "name": "Assignees",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5VM",
+          "name": "Status",
+          "options": [
+            {
+              "id": "f75ad846",
+              "name": "Backlog"
+            },
+            {
+              "id": "ff0ddf81",
+              "name": "Ready"
+            },
+            {
+              "id": "47fc9ee4",
+              "name": "In Progress"
+            },
+            {
+              "id": "e60e9963",
+              "name": "In Review"
+            },
+            {
+              "id": "c32e119e",
+              "name": "Blocked"
+            },
+            {
+              "id": "98236657",
+              "name": "Done"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5VQ",
+          "name": "Labels",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5VU",
+          "name": "Linked pull requests",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5VY",
+          "name": "Milestone",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5Vc",
+          "name": "Repository",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5Vk",
+          "name": "Reviewers",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5Vo",
+          "name": "Parent issue",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5Vs",
+          "name": "Sub-issues progress",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5Vw",
+          "name": "Created",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5V0",
+          "name": "Updated",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbMJzhl_5V4",
+          "name": "Closed",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5V8",
+          "name": "Priority",
+          "options": [
+            {
+              "id": "d6c963fe",
+              "name": "P0"
+            },
+            {
+              "id": "8c5df2c8",
+              "name": "P1"
+            },
+            {
+              "id": "7f66aae4",
+              "name": "P2"
+            },
+            {
+              "id": "50f3612b",
+              "name": "P3"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5Wc",
+          "name": "Phase",
+          "options": [
+            {
+              "id": "6bf5942b",
+              "name": "Discovery"
+            },
+            {
+              "id": "636cbbeb",
+              "name": "Foundation"
+            },
+            {
+              "id": "7479f0da",
+              "name": "Preview alpha"
+            },
+            {
+              "id": "f52091ec",
+              "name": "Real-data beta"
+            },
+            {
+              "id": "88e3bbcc",
+              "name": "Launch"
+            },
+            {
+              "id": "16c02009",
+              "name": "Operations"
+            },
+            {
+              "id": "8928fa6f",
+              "name": "Expansion"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5W8",
+          "name": "Workstream",
+          "options": [
+            {
+              "id": "c991ee71",
+              "name": "Program"
+            },
+            {
+              "id": "d0369bc1",
+              "name": "01 Product scope and decision records"
+            },
+            {
+              "id": "1c8b6b28",
+              "name": "02 Android application foundation"
+            },
+            {
+              "id": "9de234d3",
+              "name": "03 Shared contracts and mobile conformance"
+            },
+            {
+              "id": "7d5ca517",
+              "name": "04 Research-to-production catalog pipeline"
+            },
+            {
+              "id": "49edba54",
+              "name": "05 Shared application services"
+            },
+            {
+              "id": "7f014090",
+              "name": "06 Mobile experience and design system"
+            },
+            {
+              "id": "f4188888",
+              "name": "07 Discover and compare AI components"
+            },
+            {
+              "id": "4d00703f",
+              "name": "08 AI stack configuration"
+            },
+            {
+              "id": "2538567e",
+              "name": "09 Evidence-based compatibility and capacity"
+            },
+            {
+              "id": "4f1f55fc",
+              "name": "10 Transparent cost estimation"
+            },
+            {
+              "id": "b2b35d4e",
+              "name": "11 Save, compare, import and share builds"
+            },
+            {
+              "id": "829a7bd9",
+              "name": "12 Offline data and synchronization"
+            },
+            {
+              "id": "d4d7387c",
+              "name": "13 Optional tiers and operational catalog depth"
+            },
+            {
+              "id": "80435d15",
+              "name": "14 Privacy, security and trust"
+            },
+            {
+              "id": "b2077bec",
+              "name": "15 Integrated quality and performance"
+            },
+            {
+              "id": "8e5e358a",
+              "name": "16 Google Play distribution and launch"
+            },
+            {
+              "id": "4ebbc095",
+              "name": "17 Sustainable product and data operations"
+            },
+            {
+              "id": "f0edc2dc",
+              "name": "18 Decision-dependent growth capabilities"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5YQ",
+          "name": "Readiness",
+          "options": [
+            {
+              "id": "28d70dca",
+              "name": "Needs owner"
+            },
+            {
+              "id": "465ed6e9",
+              "name": "Needs input"
+            },
+            {
+              "id": "2b94f46e",
+              "name": "Awaiting decision"
+            },
+            {
+              "id": "ccfb5885",
+              "name": "Ready"
+            },
+            {
+              "id": "4ff47eee",
+              "name": "Blocked"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5YU",
+          "name": "Acceptance Gate",
+          "options": [
+            {
+              "id": "364cabbc",
+              "name": "Decision accepted"
+            },
+            {
+              "id": "c47079c6",
+              "name": "Prototype verified"
+            },
+            {
+              "id": "54c46beb",
+              "name": "Production evidence accepted"
+            },
+            {
+              "id": "1bf32650",
+              "name": "Integrated behavior verified"
+            },
+            {
+              "id": "44a36c35",
+              "name": "Release verified"
+            },
+            {
+              "id": "32f8f6d5",
+              "name": "Operational readiness"
+            },
+            {
+              "id": "d2551a4b",
+              "name": "Scope approval"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbMJzhl_5YY",
+          "name": "Level",
+          "options": [
+            {
+              "id": "602edf0c",
+              "name": "Program"
+            },
+            {
+              "id": "5279e1f1",
+              "name": "Epic"
+            },
+            {
+              "id": "e12bc128",
+              "name": "Feature"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        }
+      ]
+    },
+    {
+      "platform": "apple",
+      "project": 5,
+      "id": "PVT_kwDOFHg4Xc4BnbQs",
+      "program": 163,
+      "issues": [
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291
+      ],
+      "fields": [
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jE",
+          "name": "Title",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jI",
+          "name": "Assignees",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9jM",
+          "name": "Status",
+          "options": [
+            {
+              "id": "f75ad846",
+              "name": "Backlog"
+            },
+            {
+              "id": "ff0ddf81",
+              "name": "Ready"
+            },
+            {
+              "id": "47fc9ee4",
+              "name": "In Progress"
+            },
+            {
+              "id": "e60e9963",
+              "name": "In Review"
+            },
+            {
+              "id": "c32e119e",
+              "name": "Blocked"
+            },
+            {
+              "id": "98236657",
+              "name": "Done"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jQ",
+          "name": "Labels",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jU",
+          "name": "Linked pull requests",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jY",
+          "name": "Milestone",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jc",
+          "name": "Repository",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jk",
+          "name": "Reviewers",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jo",
+          "name": "Parent issue",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9js",
+          "name": "Sub-issues progress",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9jw",
+          "name": "Created",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9j0",
+          "name": "Updated",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTF_lADOFHg4Xc4BnbQszhl_9j4",
+          "name": "Closed",
+          "type": "ProjectV2Field"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9j8",
+          "name": "Priority",
+          "options": [
+            {
+              "id": "d6c963fe",
+              "name": "P0"
+            },
+            {
+              "id": "8c5df2c8",
+              "name": "P1"
+            },
+            {
+              "id": "7f66aae4",
+              "name": "P2"
+            },
+            {
+              "id": "50f3612b",
+              "name": "P3"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9kA",
+          "name": "Phase",
+          "options": [
+            {
+              "id": "6bf5942b",
+              "name": "Discovery"
+            },
+            {
+              "id": "636cbbeb",
+              "name": "Foundation"
+            },
+            {
+              "id": "7479f0da",
+              "name": "Preview alpha"
+            },
+            {
+              "id": "f52091ec",
+              "name": "Real-data beta"
+            },
+            {
+              "id": "88e3bbcc",
+              "name": "Launch"
+            },
+            {
+              "id": "16c02009",
+              "name": "Operations"
+            },
+            {
+              "id": "8928fa6f",
+              "name": "Expansion"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9kE",
+          "name": "Workstream",
+          "options": [
+            {
+              "id": "c991ee71",
+              "name": "Program"
+            },
+            {
+              "id": "d0369bc1",
+              "name": "01 Product scope and decisions"
+            },
+            {
+              "id": "1c8b6b28",
+              "name": "02 Apple application foundation"
+            },
+            {
+              "id": "9de234d3",
+              "name": "03 Shared contracts and mobile conformance"
+            },
+            {
+              "id": "7d5ca517",
+              "name": "04 Research-to-production catalog pipeline"
+            },
+            {
+              "id": "49edba54",
+              "name": "05 Shared application services"
+            },
+            {
+              "id": "7f014090",
+              "name": "06 Mobile experience and design system"
+            },
+            {
+              "id": "f4188888",
+              "name": "07 Component discovery and comparison"
+            },
+            {
+              "id": "4d00703f",
+              "name": "08 AI stack builder"
+            },
+            {
+              "id": "2538567e",
+              "name": "09 Compatibility and capacity"
+            },
+            {
+              "id": "4f1f55fc",
+              "name": "10 Cost estimation"
+            },
+            {
+              "id": "b2b35d4e",
+              "name": "11 Saved builds, comparison and sharing"
+            },
+            {
+              "id": "829a7bd9",
+              "name": "12 Offline storage and synchronization"
+            },
+            {
+              "id": "d4d7387c",
+              "name": "13 Optional tiers and operational capabilities"
+            },
+            {
+              "id": "80435d15",
+              "name": "14 Privacy, security and trust"
+            },
+            {
+              "id": "b2077bec",
+              "name": "15 Quality and performance"
+            },
+            {
+              "id": "8e5e358a",
+              "name": "16 TestFlight, App Store delivery and launch"
+            },
+            {
+              "id": "4ebbc095",
+              "name": "17 Product and data operations"
+            },
+            {
+              "id": "f0edc2dc",
+              "name": "18 Decision-dependent expansion"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9kI",
+          "name": "Readiness",
+          "options": [
+            {
+              "id": "28d70dca",
+              "name": "Needs owner"
+            },
+            {
+              "id": "465ed6e9",
+              "name": "Needs input"
+            },
+            {
+              "id": "2b94f46e",
+              "name": "Awaiting decision"
+            },
+            {
+              "id": "ccfb5885",
+              "name": "Ready"
+            },
+            {
+              "id": "4ff47eee",
+              "name": "Blocked"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9kM",
+          "name": "Acceptance Gate",
+          "options": [
+            {
+              "id": "364cabbc",
+              "name": "Decision accepted"
+            },
+            {
+              "id": "c47079c6",
+              "name": "Prototype verified"
+            },
+            {
+              "id": "54c46beb",
+              "name": "Production evidence accepted"
+            },
+            {
+              "id": "1bf32650",
+              "name": "Integrated behavior verified"
+            },
+            {
+              "id": "44a36c35",
+              "name": "Release verified"
+            },
+            {
+              "id": "32f8f6d5",
+              "name": "Operational readiness"
+            },
+            {
+              "id": "d2551a4b",
+              "name": "Scope approval"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        },
+        {
+          "id": "PVTSSF_lADOFHg4Xc4BnbQszhl_9kQ",
+          "name": "Level",
+          "options": [
+            {
+              "id": "602edf0c",
+              "name": "Program"
+            },
+            {
+              "id": "5279e1f1",
+              "name": "Epic"
+            },
+            {
+              "id": "e12bc128",
+              "name": "Feature"
+            }
+          ],
+          "type": "ProjectV2SingleSelectField"
+        }
+      ]
+    }
+  ]
+}
