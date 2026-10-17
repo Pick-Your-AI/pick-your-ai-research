@@ -25,8 +25,11 @@ Execution prerequisites between issues are tracked with GitHub's native blocking
 
 The [Apple/iOS plan](APPLE_DELIVERY_PLAN.md) uses the Android plan's **1 program →
 18 epics → 110 feature/task work packages → subtasks** hierarchy. It supersedes the
-earlier 19-workstream Apple outline with a documented coverage mapping. The plan
-does not create a GitHub Project, assign work or establish completion.
+earlier 19-workstream Apple outline with a documented coverage mapping.
+[Project #5](https://github.com/orgs/Pick-Your-AI/projects/5) and
+[program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163) now track delivery;
+the [publication index](APPLE_DELIVERY_TRACKING.md) records structure and triage.
+This does not assign work or establish implementation completion.
 
 | Phase | Gate |
 | --- | --- |

@@ -62,3 +62,7 @@ The component-level relationships are documented in [DEPENDENCIES.md](DEPENDENCI
 Production web/mobile runtime code, operating backend services, user-account and
 payment implementation, and unsupported claims that a particular stack is recommended.
 Delivery planning may live here; it does not override research ownership or frozen v1.
+
+Apple delivery structure and canonical shared handoffs are indexed in
+[APPLE_DELIVERY_TRACKING.md](APPLE_DELIVERY_TRACKING.md). Its dated snapshot does not
+replace live GitHub status, ownership or dependency relationships.

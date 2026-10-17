@@ -1,0 +1,2356 @@
+{
+  "publication": "2026-10-17 UTC",
+  "purpose": "Dated per-issue review/change ledger; live GitHub owns mutable metadata. No implementation acceptance asserted.",
+  "baseline": {
+    "program": 1,
+    "epics": 18,
+    "features": 110,
+    "parents": 128,
+    "prerequisites": 213
+  },
+  "review": [
+    {
+      "coordinate": "IOS-PROGRAM",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "parent": null,
+      "outcome": "program release evidence index",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "69455f346828c6cd95dabd7f116542cb62344b46fad434c128845b5a1cf03524",
+      "body_sha256_after": "9d2771eb793b6c2272d8b8617d4c2df5ad05584f95d87e31ec2a524e6935f0c5",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 01",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "5f54f7a1c1dfb678cef3d6260be1548e0cd38e2eb845f519ce6a4e21824e86ca",
+      "body_sha256_after": "154dc190425c446a9d125e25867b32c75a283c25e323ea65238ca6940de7a9b6",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 02",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "56dccbb8dc330a03c391608317e052176591089ba36fcf6e4ae658945f85ff6e",
+      "body_sha256_after": "a71174ff09958ed564c1edf81b1f9c9665bf8e01a789da9cbbb9572e69d03481",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 03",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "288c52139385187ead1657813dbbb20c22e629b3aaef55171bb4c6fb0650413d",
+      "body_sha256_after": "fd1ab1d7c4c27b5d0cc355acf89c510272dcc54aa641242456663155234e574d",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 04",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "709679119a55fc6eb716b05ecd8c43abaee1bdf363cebb231423e6615c8e4c04",
+      "body_sha256_after": "c912c201735972376946ea6a784e755c97d347ccddb5293890689ac384a84b88",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 05",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "1f42ea178109b8031fde740685099913da85ad5303ac8edea1d2b225ef447524",
+      "body_sha256_after": "8fb5a3ca3da698f91abf31d1b9d47616be1e4d9bd05c20578c4410a4cd56c5a9",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 06",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "625479217233d173f1a13556e785bb7c765d72e35e83f5a24fecfae90493939f",
+      "body_sha256_after": "33066859a3e5e29877f4f7a32193c62a89e5d52c8b37a60e843b8c9f8e3c1cb2",
+      "labels_added": [
+        "accessibility"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-07",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/170",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 07",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "f701dd8715c42e8d0710d9d6bd31df3fb7e5336e16303f0645e72ac4ccc16590",
+      "body_sha256_after": "83a42ace02b6d3785b7983bd64eb892b45c4aa6c234083714f4b4872b42889d4",
+      "labels_added": [
+        "area:catalog"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 08",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "ab5e728d4bbe02c268a444f3baff9698024b7d8befd207540eff656f56032482",
+      "body_sha256_after": "a4040bd412c03329938464d4a493df9f81649e8194c7544bd8cc9a7d9f091cba",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 09",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "3d69b97a77517892a2f87b41f7121d3f1792b8992af77bf91272d7add5401304",
+      "body_sha256_after": "b60e70a07aa7f654c016858bf554d8c429f8b76910bd2c402e4edfc1712d9b3f",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-10",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/173",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 10",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "50c526ae216545e6c4da43e0c9fa71faaeda5cdb5cadffa72ab6e7e68aaefc18",
+      "body_sha256_after": "b8886595f44d530da5d74b5019edc977e3dc1cf9a7009002d185352d25a97ffb",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 11",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "8bbdef497f3a9ce26b078c396f1ef3a36755e3473c0c8c072f3693f478dd7b52",
+      "body_sha256_after": "acf16a8e3eab21c1413e016223b156f46153cab08bc326326d7dc1ce105b6b8e",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-12",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 12",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "cfa442bb494ff3aa0eeb2a2ed283fe59ae79fd5862467e210c43745e02c21735",
+      "body_sha256_after": "7ebe346aec7be7269cb834ae0daed41dd94d2178a20a4dd11174e8ed9ef2223d",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 13",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "061ad6e55a13432ff78ef04769486a335383eddbfcd5384c2bb2e022d51f7d4e",
+      "body_sha256_after": "5f16d3e5e5c04a58d2461da5f209a47cd303452640d1c0f5cea32ce9b83773c2",
+      "labels_added": [],
+      "field_changes": {
+        "Priority": {
+          "before": "P2",
+          "after": "P1"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-14",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 14",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "c375d516b10bd6a56d9da3fcbea58ff797850aa9670e503861d1973c86dd5b32",
+      "body_sha256_after": "9ec316616e5a0eb8ba4969f24b7af657c3b284ccc6184947036f3737fa7b1d3a",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 15",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "7378ee22e5f8938bad4784da839e1ff10ec9eedfb464116926cb7532a2a527b2",
+      "body_sha256_after": "3b3978e5ab586f840cee3c7aec07e8e48911c3c45d590de368798370c0c29015",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-16",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 16",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "1da6f6618ff7e8f3ada99f938032b90b7f2a02ee2f05fa2873aded74b06153a0",
+      "body_sha256_after": "231d21eef183626a8e01c69e3b1cf116c2c946e4834342d071fc54d1c4b49710",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-17",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/180",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 17",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "6f5e5d0f0150e419590cfb45f8b7784784b0a73d89f30a7f0294fa69cff07f44",
+      "body_sha256_after": "604fa5dcc2a8bf4369ff5cefba3d8764e4d6dd070d80a21362e9afcecbf26755",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/163",
+      "outcome": "integrated epic evidence record for 18",
+      "required_negative_recovery_evidence": "Demonstrate the release-selected child outcomes together; an excluded conditional child needs a scope disposition, and research/other-client completion cannot substitute for Apple behavioral evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "a7f58df948c394eab2d2409a97398d8f731efb073e338afb6b18d86f2433260c",
+      "body_sha256_after": "2efb084f2c8f879c161d53b74f2e53ddfebca53efcec811dc440af7b4c8af91d",
+      "labels_added": [
+        "optional capability",
+        "question"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-01.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/182",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "outcome": "journey map and evidence/assumption register",
+      "required_negative_recovery_evidence": "Compare a guest on a compact iPhone and an iPad keyboard user who abandons an unfinished stack; document recovery and unsupported journeys without treating desk research as participant validation.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "5e2a4aac6229b913db3e993d378d3c0119e99159b82dbf878a77b4e308851c2c",
+      "body_sha256_after": "689d30e09af722ebbd30f4f625b4be46b404a0b92d47c3314c9f3ba5d90ff945",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-01.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/183",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "outcome": "release inclusion matrix and first supported configuration tuple",
+      "required_negative_recovery_evidence": "Trace every candidate capability to core, deferred or conditional scope; a missing research field must remain a documented gap rather than silently expanding MVP or inventing coverage.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "6717b8dbe423c42d98c6732d9b5b6213617867d899855a66dab1fb17678b362f",
+      "body_sha256_after": "5aade2f0d75f2068f78f3744456b36c70ab28a9002771ced5c7483237f94ab6c",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-01.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/184",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "outcome": "platform/framework/repository ADR",
+      "required_negative_recovery_evidence": "Compare offline persistence, accessibility, toolchain support and maintainability for the candidate frameworks; record minimum OS/device targets, repository/module placement and rejected alternatives before scaffolding.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "3bfee2eabb76555424ccdabfbb4136cb418548b416a890b2b3b2b536d6279c2f",
+      "body_sha256_after": "3c521d20ca6b402b4a3121591fe1b913ae4e6c9fe79ef8701190f5a9c2a448bd",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-01.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/185",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "outcome": "shared hosting/API responsibility ADR and Apple requirements delta",
+      "required_negative_recovery_evidence": "Walk through service outage, guest authority, data residency and old-client migration; reject a design that assumes the static website already operates a backend.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "bd372d163265e2c998fd0204eea357fca683772cff0926b42f9e9e09cbdd01b1",
+      "body_sha256_after": "53319b301a2aa20864e01d798ac7453a5612fe39990471313c47e7439c5f2a54",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/68"
+      ]
+    },
+    {
+      "coordinate": "IOS-01.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/186",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "outcome": "account/analytics/commerce decision matrix",
+      "required_negative_recovery_evidence": "Evaluate guest-only and account-enabled journeys, analytics consent and regional monetization separately; record explicit exclusions and policy applicability without activating commerce or identity by default.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b88e9ccd2c781e14bd5779b43e3783504c94b6f367243d6c88bb4fe748c5c1e0",
+      "body_sha256_after": "876d5787e144f9041a65332611e57a736bdca0ba6e82c1828fcd28223c2bc424",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-01.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/187",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/164",
+      "outcome": "acceptance matrix and ownership intake",
+      "required_negative_recovery_evidence": "Map each release gate to an observable artifact, required review role and unfilled responsibility; a partial PR or simulator-only run must not satisfy the installed production gate.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "0a90ff421d71b189e76df8593368df32dbe7d4247c12b08e96cc1a029f0eadef",
+      "body_sha256_after": "0d32a6f4847b873cf5e19a2ca3a1531665a372ac4df2869f695e60634cce47f0",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/188",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "outcome": "pinned Xcode/package configuration and clean-build log",
+      "required_negative_recovery_evidence": "Build from a fresh macOS checkout with an empty dependency cache; unavailable pins must fail with actionable setup instructions rather than resolve a different dependency silently.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "963bd9cf9b893fa78e6038ca2879f1ab817f38c1bf6d2ad67c8e49a926265fb9",
+      "body_sha256_after": "bcd4f8b26cdd03a7f5f0cfdd481fed5ff870b13ad403487de0c2c35926674e81",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/189",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "outcome": "environment matrix and wrong-environment test log",
+      "required_negative_recovery_evidence": "Launch a production configuration with a missing endpoint or fixture-only response; fail visibly without falling back to preview data or exposing credentials.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "debfd7a24282bb6270bae53d4ad371e1d5f86e9cfb7058513a76fd604dcf6a7d",
+      "body_sha256_after": "8e044edd8cb0c83948cd3d4fec3d4c1bcef232eb042ebd2673f6eed9345b0f90",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/190",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "outcome": "navigation state model and lifecycle replay",
+      "required_negative_recovery_evidence": "Terminate while editing, then cold-open a second build link; restore the original draft independently and require explicit navigation before changing its content.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b460a25b6de90d662a1267b2b3ebc664fdc7638c0891fa0fe06da0f140cf70b9",
+      "body_sha256_after": "11b98c5436d1680c56665a39b35ca56ac63ea749470e5237a4fa21da0c9223b2",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/191",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "outcome": "module dependency diagram and async cancellation tests",
+      "required_negative_recovery_evidence": "Delay revision N while N+1 completes and cancel the first request; the main actor stays responsive and N cannot replace current state.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "22611006828e93daa9c00fcacc90e60f8f1b97ac9518dfdd69b1f5e05577dded",
+      "body_sha256_after": "0f0c65fa98bb997ce5f1fc664db910c260669c14d773d53b81c5e6109a761932",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/192",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "outcome": "macOS workflow artifact and negative-gate run",
+      "required_negative_recovery_evidence": "Exercise an untrusted PR and an intentionally failing native test; release secrets remain unavailable and required build/contract checks fail the PR.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "79e1d40a7664df0ac03dfd4bea9eae78b76f966cdf170dd50f0f19ae3770fb86",
+      "body_sha256_after": "c784de26839eb25709dd0771cb74fe564b7ae2208299e03038e679a363f2366a",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-02.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/193",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/165",
+      "outcome": "fixture inventory and production-mode rejection test",
+      "required_negative_recovery_evidence": "Try loading reserved demo IDs in real-data mode and capture the rejection; preview fixtures remain visibly synthetic in screen, export and screenshots.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "72776176390faca26503550bc68e92b869e42855f6509d920c7d6b78d24e66f1",
+      "body_sha256_after": "5eb86d1d792d44f3aab8a424cac14a61f3d3b10d0d5fb72964f2993c94246364",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-03.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/194",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "outcome": "hash-pinned Swift boundary model/validator conformance report",
+      "required_negative_recovery_evidence": "Decode all 29 kinds and wrong enums/types, missing required fields and non-decimal money; compare canonical validation results and reject incompatible versions.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "52ba34b008af85ec9abedd09886e6b55f4148ecdad23c5d975d649cccc8422a5",
+      "body_sha256_after": "9dabac9a83b63849dc44344b19d383ee350a8a093019c11b3b84b03e02902c9c",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-03.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/195",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "outcome": "draft-to-snapshot transition tests",
+      "required_negative_recovery_evidence": "Autosave an empty draft, then attempt snapshot export; retain the draft while rejecting incomplete snapshots without invented required values or lost revision locks.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "296a1378702c115c6b3afc760e91e1454f61bc47c77e7bbd5b8d38b41c62a9bf",
+      "body_sha256_after": "e7d3d0c5636a5be12fe3a2191582a989173c766234f3768b7ecc60465cbfb18d",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-03.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/196",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "outcome": "Apple request/response contract vectors and governance approval link",
+      "required_negative_recovery_evidence": "Review unauthenticated writes, unsupported versions, paging limits and stale-write responses against the approved extension; mocks cannot establish live adapter acceptance.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "679b6301b37c0a57db7d0df7bf9dcbf2327d89b6b72762065fbb2d5c231cdbe5",
+      "body_sha256_after": "f489865476578dcc7bd6235147fff20dd352314fc5cfd9f98091fe013f5227fd",
+      "labels_added": [
+        "area:data",
+        "question"
+      ],
+      "field_changes": {
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        },
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/186"
+      ]
+    },
+    {
+      "coordinate": "IOS-03.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/197",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "outcome": "placement/relationship mapping and unsupported-tuple vectors",
+      "required_negative_recovery_evidence": "Round-trip hybrid placement, component roles and memory pools; a v1 representation gap remains unsupported and routes to research #40 instead of an undocumented field.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "cdab5eb17c044c57dac0e042d85d0a36f6bca8aac4644d358a4561b428b9b6df",
+      "body_sha256_after": "069cfe6e5e94bd05e2af3d16b0bd0f64e0ececc8b2798276d9dd2cba2761f1b6",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-03.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/198",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "outcome": "evidence state mapping and decoder/UI vectors",
+      "required_negative_recovery_evidence": "Render absent facts, contradictory evidence, a literal unknown value and skipped rules; never collapse them to pass or confuse outcome with severity.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b08c565d6e69d022b821c9a61af10ace5ef9834f87fd71069fece4635f772971",
+      "body_sha256_after": "1a0a5cbe9efd279ade2513af78f214aeda054b326e581a2d1963588e4b08c566",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-03.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/199",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/166",
+      "outcome": "language-neutral conformance bundle and Apple migration results",
+      "required_negative_recovery_evidence": "Run identical version-pinned vectors through Swift and available references; a future unshipped client uses the published harness interface and remains explicitly unverified.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "07cf303b956cd177717ae92b6e5ea01453798ecce3d5a4308f20c3f0ac3644af",
+      "body_sha256_after": "ce3a785e7cf84b11dbca63fe963349f891cf652e2a88e1ba7602b6a046edb8c9",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Decision accepted",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/200",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "outcome": "Apple source-use matrix linked to research #41/#60",
+      "required_negative_recovery_evidence": "Trace Apple display, offline cache and export uses to exact dated rights rows; unknown or revoked permission excludes the source even when its URL is public.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "80f260ccf6f14c41c64916c2fa7f5e616146c749d61103d57ca8a625ec6e1f29",
+      "body_sha256_after": "d8f81b76c351a311d416705fe07b1953c56dc1ff827c38f8ebfdc7f31ffec6eb",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/55"
+      ],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/201",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "outcome": "Apple intake validation and source-to-field rejection report",
+      "required_negative_recovery_evidence": "Load wrong-kind references, ambiguous versions, malformed units and missing provenance; quarantine the whole invalid snapshot and retain the last valid cache.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "89c983d0b04347446abf41b656bab0561315ff24063cab6df85d08868a8cbbd7",
+      "body_sha256_after": "1becf873fc99d375d724661c2b46579e657b8cb9c181848e8c4416ad5cf9d2d4",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/202",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "outcome": "production-promotion acceptance record for the Apple data slice",
+      "required_negative_recovery_evidence": "Present a merged research proposal with no production promotion receipt; prevent activation until the precise source claims and use rights receive recorded approval.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4a8f9db9907d3b4effb3fd5ed78637e3213a9e415c5e4db99ea2e559f2b68382",
+      "body_sha256_after": "36784497ad176f72e2c26dbd5d3a926dfb81e7e3df1dae3c6727465565413354",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/200"
+      ],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/203",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "outcome": "manifest/hash/atomic activation and rollback replay",
+      "required_negative_recovery_evidence": "Interrupt download after one artifact and inject a bad hash; activate no mixed release, then restore the retained complete manifest.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "0988c7e1fdf21bc67b46b01745751ad777179d2637fa27df87c1c274bb34a7c5",
+      "body_sha256_after": "49f448b2a28d85f2c99494b38c321f36a7d47ba98d9118acc670f06c97bcc886",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/204",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "outcome": "freshness/correction UI and historical-version replay",
+      "required_negative_recovery_evidence": "Retract a current claim used in a historical saved build; show the correction separately while retaining original versioned evidence and rights-aware availability.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "221a4162a785eb02d8a3c5b00b597211a9c503028270c6a3689da62c8365eee6",
+      "body_sha256_after": "e5329fed7def0f4dec87f1cb8152e7603faadc172bef9dad199355bd855cc7e5",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-04.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/205",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/167",
+      "outcome": "reviewed real-data journey recording and coverage manifest",
+      "required_negative_recovery_evidence": "Complete discover/build/check/cost/save/share with the agreed real configuration tuple; record each absent kind, meter or capacity input and show it as unknown/partial.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "2ee93bef404f97df05501c4eef4dc43a35a7f98580313e68cfea61f64ad43c66",
+      "body_sha256_after": "ec683897cece3993af7e229743cc1d16d584ffd68b3eef033bec7de74aff0339",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/203"
+      ],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/206",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "staging adapter smoke evidence and service handoff receipt",
+      "required_negative_recovery_evidence": "Exercise unavailable service, incompatible API and migration rollback against staging; preserve local drafts and report actual endpoint/build versions.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "575a37c92a01ea5ff8ae08634f0ec70146777e37226adb9a4a8380b181dca1b9",
+      "body_sha256_after": "151ec9d37002f45a4137c8a9f90b82812b41fb16ebd3e85c271df557e57cd90e",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {
+        "Priority": {
+          "before": "P1",
+          "after": "P0"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/207",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "paging/cache/version consistency integration tests",
+      "required_negative_recovery_evidence": "Refresh a catalog between paginated responses; detect version change and restart consistently rather than concatenate snapshots or duplicate rows.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d6b75519a1354bafb2c292f4cb1d3363fbb264d92308e064e5c3a6d1871c67fa",
+      "body_sha256_after": "00fe35aa11a10ce1fe90d8c4d24267407f0d1d52b8185f4442987b2438982d21",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/208",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "CRUD/history/delete CAS and idempotency integration evidence",
+      "required_negative_recovery_evidence": "Retry a timed-out create and race two updates; retain one identity, immutable revision history and server-rejected stale writes.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "9ebf1ad2e04d6845fd1d0c5266ea6716f597edb261c731a67eb4f73e7e4e13f7",
+      "body_sha256_after": "b2911e28f7f0e871047309b97a6673d5370c926ebd00761866af7e477fdd6bac",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/212"
+      ]
+    },
+    {
+      "coordinate": "IOS-05.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/209",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "version-bound evaluation/quote adapter tests",
+      "required_negative_recovery_evidence": "Deliver a quote/report for another build or obsolete revision; reject it as current and preserve the matching report's exact catalog/rules/price locks.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "6d9a5b3d09e23e44109e51d092d60823f71b470015c6f69efc99b2b6b0492dc9",
+      "body_sha256_after": "9517a61b99b93003d4df50e0fdeb90921fbc68f2db94238145f8921d51d8df98",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/210",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "share lifecycle, redaction and revocation integration evidence",
+      "required_negative_recovery_evidence": "Inspect uploaded and returned share projections for private fields; revoke the share and verify both fresh and cached access behavior under the approved policy.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "bfa428ecd9cdf4a8266ad084be6abe39681f21f83da59db727559630b8a01de8",
+      "body_sha256_after": "a8b4a97c9a1255ec2bbe5b7b6e50a013e3124e6f9f73abde2fb01dbacff9690e",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/212"
+      ]
+    },
+    {
+      "coordinate": "IOS-05.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/211",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "exact-tuple resource/quality read conformance report",
+      "required_negative_recovery_evidence": "Request evidence for a different model/runtime/context/concurrency tuple; retain unavailable/unknown status and keep measured quality separate from estimated capacity.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "7e2689b34d9bd9bec31e12b18c66479c53503a9055d9240f8ed1e791b8a685b0",
+      "body_sha256_after": "2dab72577008d4367556dff8a0016ff1dbf3cbb275decb36efb6f51b6938c3f2",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.07",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/212",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "guest/account authority and renewal/revocation tests",
+      "required_negative_recovery_evidence": "Attempt private reads and writes using another guest/account identity, then revoke the token; server authority rejects access and renewal cannot replay another user's work.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "fba93b7e71710bf6481d604441b7a2108ee93b9f44289ee7f83c1de141283b5c",
+      "body_sha256_after": "914d03c0a10467f1c1ebd89a468e0f92b895f195b9f6f5a71aab1a0d7bf49a1f",
+      "labels_added": [
+        "area:data",
+        "security"
+      ],
+      "field_changes": {
+        "Priority": {
+          "before": "P1",
+          "after": "P0"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.08",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/213",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "retry/rate-limit/redaction integration report",
+      "required_negative_recovery_evidence": "Replay a request after timeout and rate limiting with cancellation; bound retries, preserve correlation and confirm diagnostics contain no token or private workload.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "490216831c77b95c962efb676cfe9bc27666cec9c25073ed4d8e9e1aeee6a457",
+      "body_sha256_after": "d0a43f4106602d36df1dd324d88b28ce614443952e09731067b4abb3f2712c17",
+      "labels_added": [
+        "area:data",
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-05.09",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/214",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/168",
+      "outcome": "Apple/web service integration matrix",
+      "required_negative_recovery_evidence": "Round-trip one pinned build through Apple and web, then use an older client; compare IDs, revisions, decimal values and typed unsupported-version behavior.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "43bf4611d773daa00cc76c600dcfbb9032d95a67f29d812e94664bbce6843a6b",
+      "body_sha256_after": "05a55e88fb06ad11eab7a60e9c7b7a5544e98ffd95b15a118ffbd7c2c8b425d0",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/215",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "outcome": "reviewed mobile prototype and journey findings",
+      "required_negative_recovery_evidence": "Prototype discovery through sharing on compact and large layouts; a user returning from comparison must find the same active parts list and incomplete draft.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "1fd30b1a740986b2c808ee834d00796de84a87fb5c929c002d3406ac9a6a593a",
+      "body_sha256_after": "2b1357d518a20fcfcba3af8c58e930c2ba177724b17353392742ffbeabcaa130",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/216",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "outcome": "accessible component inventory and manual audit evidence",
+      "required_negative_recovery_evidence": "Use VoiceOver and largest supported Dynamic Type with Reduce Motion; each action/status remains operable and understandable without color alone.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "df278ec29d60a1356f7bae45f5518cef222c2b97f18b11b7917757d57fbd19e3",
+      "body_sha256_after": "f589de3eb4c6d74073cc62499609fb7b00198360dcb8ec8bdc20b61287fed6bb",
+      "labels_added": [
+        "accessibility"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/217",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "outcome": "supported-size screenshots and focus/rotation results",
+      "required_negative_recovery_evidence": "Resize/rotate a populated comparison in iPad multitasking and use keyboard focus; preserve selections and expose every primary action without clipping.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "356a18c13a2a1dd9342523a4e1a2c3523799648b97c8012f2df834129f147ef5",
+      "body_sha256_after": "c711ce91629829deb16db8cd9b2db922bd3b2741f558504e4ea6d0e9d6b40225",
+      "labels_added": [
+        "accessibility"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/218",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "outcome": "builder vocabulary and comprehension cases",
+      "required_negative_recovery_evidence": "Open an empty stack, a conflicting stack and one with unknown evidence; each explains a different next action and none falsely claims incompatibility or success.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d14086d0e2ea90369b6f7189c887d74dc31c214bb3d0731526f49caa93d178ec",
+      "body_sha256_after": "76c69d4a76af294da206d04a568deb5846db2ea6788519114442107e36859de9",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/219",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "outcome": "screen-state inventory and recovery recordings",
+      "required_negative_recovery_evidence": "Cancel a failed retry while keeping an unsaved draft; empty/offline/denied states offer a reachable recovery action without infinite loading.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "5515e0cb63a9d264e415f4d36c89d7e0c88a4935ee882e9689fbfa915911bd54",
+      "body_sha256_after": "134ea39c9d82d79f5cd7f471cf3c10bb7750c4fd704ccf0087ad342e08e90f7b",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-06.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/220",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/169",
+      "outcome": "localization/theme/unit matrix and screenshots",
+      "required_negative_recovery_evidence": "Switch to RTL and a locale with different decimal/date conventions; preserve canonical IDs and arithmetic while testing long labels and pluralization.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "aa54d30c20ea53ed40db0506c28e6fc1ae6fbb98748bfac42d3247a7099bb260",
+      "body_sha256_after": "e2baf8b3f9e2265d255a13a5bb736e8eb36059fcb6e0021c1feeea65dd3423d5",
+      "labels_added": [
+        "accessibility"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-07.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/221",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/170",
+      "outcome": "search/filter/sort and pagination UI tests",
+      "required_negative_recovery_evidence": "Combine filters with unknown-valued rows and a page-fetch failure; counts, sort order and active filters remain explainable and retry preserves build context.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "8c08f0c7564f5e2e115aa20ab2f3a7d951a447e0bb79972894fb8788a073b968",
+      "body_sha256_after": "421495342fa6c0b8e2208408ae825b56b6b297254f30ac727f0c3868c0504646",
+      "labels_added": [
+        "area:catalog"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-07.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/222",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/170",
+      "outcome": "candidate bucket and replacement preview tests",
+      "required_negative_recovery_evidence": "Preview replacing a component while analysis for the prior revision is delayed; show unknown separately and commit no replacement without explicit selection.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "136ebd361c61eee5432034676563af8368edf975c9543dddf5ddddc6c4d03e97",
+      "body_sha256_after": "97f7c5f1cc21bc314a75851b9f7e8b6d1f8988fe7753c93dc291ac3fc904236b",
+      "labels_added": [
+        "area:catalog"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-07.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/223",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/170",
+      "outcome": "component detail provenance and safe-link tests",
+      "required_negative_recovery_evidence": "Open a stale or contradictory specification and an unsafe source URL; expose the evidence limitation and allow only validated external navigation.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b7f3f0ec7590634cd7aedbc41c511363dc9e0e97a3848ee13dfbfbaff4ed9244",
+      "body_sha256_after": "8f97c85a4454899e0ca5e1497983aaaaa62ad426879a3abd6d94e8909488a0a0",
+      "labels_added": [
+        "area:catalog"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-07.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/224",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/170",
+      "outcome": "component comparison matrix and accessibility recording",
+      "required_negative_recovery_evidence": "Compare two to four variants with different units, versions and missing values on a narrow screen; do not rank incomparable facts as better or zero.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "5bd770a2bebe8c9e45b42d9d4bd70a0d73fcb018a7b76012e4fd15b048114e88",
+      "body_sha256_after": "b4fef20da8c545660628853eace980db809cca38631ff9cf7b8cef412057ccdb",
+      "labels_added": [
+        "area:catalog"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-07.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/225",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/170",
+      "outcome": "route/selection validation and unsaved-draft tests",
+      "required_negative_recovery_evidence": "Open a crafted or obsolete component link while editing; reject invalid IDs/versions and require confirmation before replacing an existing selection.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4f4063d6528eccb4a379b9b6ddc4d059991c6357fb8336d5dd616520c673c15b",
+      "body_sha256_after": "a0b9f68b51eea0023d917320cc3194e56fb22b173c24c2e7e2967c782aef47a5",
+      "labels_added": [
+        "area:catalog"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/226",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "outcome": "input validation and applicability vectors",
+      "required_negative_recovery_evidence": "Leave workload/deployment inputs unanswered and enter invalid units; preserve the unanswered state and explain which filters cannot yet apply.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "2a016dadc1ca161df30e68a47b2d62b61527d574922b295b73d45436df4c8e23",
+      "body_sha256_after": "af3313d263cf93537931a88b728f727a2d6debf17fe9b46c6b58d9308ad2087b",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/227",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "outcome": "core selection tuple and role validation tests",
+      "required_negative_recovery_evidence": "Build each approved API, managed and self-hosted path; unavailable hybrid representations remain unsupported and do not fabricate compute requirements.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d3c4cd4da8da299ed6dcf1d71cac0f9e39f3553103e420d54894952164467018",
+      "body_sha256_after": "5e6424278a497c71462a5801306f9d96a3a92bd405a5787405183531b5feca37",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/228",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "outcome": "optional-tier activation/removal transition tests",
+      "required_negative_recovery_evidence": "Disable T3-T5 with dependent settings present; preview destructive effects, preserve intent and mark non-applicable results skipped rather than missing-required.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d38873fef3eef9278aad561b5f720a85bc401060fdb4cdfb964e083a17734598",
+      "body_sha256_after": "6412bd8d24772e47856230b0b712025ee38a82fcc06c8478dd0648244c97ca58",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/229",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "outcome": "typed settings validation and invalidation tests",
+      "required_negative_recovery_evidence": "Enter out-of-range settings and attempt raw credentials; reject unsafe values, preserve the last valid revision and invalidate affected analysis after valid edits.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "e973633637684418e169ac7e25085df24a3f1205fc2a2a5da898ec591e2376c5",
+      "body_sha256_after": "d19a4d996723690675d991b3e4f881607d8c655107246e086f1bee5955aa3b97",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/230",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "outcome": "persistent summary and stale-analysis UI tests",
+      "required_negative_recovery_evidence": "Keep summary visible through rapid selection changes and partial pricing; its findings, cost coverage and next action must match the visible revision.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "9bce1f1220cab7805b67a725bcf04e373bf803f7f88a4155a1e71d531508da30",
+      "body_sha256_after": "85103ab16f6f18dbbc9d6c28c76720ab0e0b90c2af40a1c985942d0d057d761c",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-08.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/231",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/171",
+      "outcome": "autosave/undo/crash-recovery replay",
+      "required_negative_recovery_evidence": "Kill the process during autosave and undo after a newer edit; recover durable history without losing later work or presenting old evidence as current.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "56902e72798a5d8caeef906f5abad4f1d3a01ee5f5c9f0923ef08ea069581e94",
+      "body_sha256_after": "ba5d97ceb5642bec0373cf81b6ea5ee9811a8c6e3e595a92c0e77ba038c9feee",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/232",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "outcome": "Apple evaluator parity and offline boundary report",
+      "required_negative_recovery_evidence": "Compare pass/fail/unknown/skipped outcomes and severity against approved golden vectors; unavailable offline evaluation remains explicit and never becomes pass.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "7edf2ffa95f416a75847ef85a07fe6e1f969b7aac03d5fe46193f2b113b53241",
+      "body_sha256_after": "e1810036c450b3ce6e33b17186b5b59af5d1abba28bfc6a44dce8c79a140ead9",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/233",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "outcome": "incremental invalidation and graph participant tests",
+      "required_negative_recovery_evidence": "Change a model/context and remove an optional tier across a cyclic compatibility graph; invalidate all affected results without delivery-blocking cycles.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "841d152a90a0b51b45468b0ff0168be66d0259b01184525c20c61db157d6b021",
+      "body_sha256_after": "91432f401a5f97e5c1ba18c5ea46376d32b3f2e47625d7881e3f5f33f6fb5a07",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/234",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "outcome": "finding explanation and accessible correction journey",
+      "required_negative_recovery_evidence": "Navigate from a failed or unknown finding to the exact participant setting using VoiceOver; keep rule/evidence version and safe corrective action inspectable.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "3aad68508b5d4e20a68d2de881e77ed7987c4942cd050de570f2b4b37e6904cb",
+      "body_sha256_after": "d20df1910d172304b104e05ea5cc931a4569e085b677bc7d409672f475eb1ab8",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/235",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "outcome": "capacity qualification rejection and explanation tests",
+      "required_negative_recovery_evidence": "Supply weights-only, wrong-runtime or insufficient-memory-pool evidence; refuse a fit verdict and explain context/concurrency and uncertainty conditions.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b88f795ae7d126736500a7b2fa323813fb71eaaa45495b9ead8111c4351fa11c",
+      "body_sha256_after": "301647ce33661fe0a16589d79475cb0238367fb30dd1c4b379e4c5bec3bec87e",
+      "labels_added": [
+        "area:builder",
+        "area:data"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Preview alpha",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/236",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "outcome": "alternative comparison and explicit replacement tests",
+      "required_negative_recovery_evidence": "Offer cheaper alternatives with weaker evidence; expose tradeoffs and preserve the existing saved selection until the user confirms replacement.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "30c2b87e3913b7cb90251085a9117d222b577eedda37992a832e90bdc762eb10",
+      "body_sha256_after": "76c6173497d31fba7be46ea23421b6e9fd86221a0ea6529b9a27efbce8580cbb",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-09.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/237",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/172",
+      "outcome": "race/cancellation/reconnect reproducibility log",
+      "required_negative_recovery_evidence": "Reconnect while three successive revisions finish out of order; only the visible revision is current and cancellation cannot erase the latest matching result.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "f8645d08748b99b4c9e400a8c9afba58a06017035317fe6fd8b966276a040b25",
+      "body_sha256_after": "58a23f160b2af6833ab38db65a6df36c3707dcc6c4f7082268975dd58c02fb58",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/232"
+      ],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-10.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/238",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/173",
+      "outcome": "dated rate selection vectors and pricebook provenance",
+      "required_negative_recovery_evidence": "Resolve expired, regional and mixed-currency rates for an exact item version; missing rates remain absent and free/included claims require evidence.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "9a3eb9573bbfc25ba8fa916dd8a7eaa9e1515ca5139fb08e5dd9d813239b6ee9",
+      "body_sha256_after": "4373893355c856c697d3c2540bdf7ef155cbf6520a27e778158aa7fffe7d0160",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/209"
+      ]
+    },
+    {
+      "coordinate": "IOS-10.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/239",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/173",
+      "outcome": "scenario arithmetic parity and rounding tests",
+      "required_negative_recovery_evidence": "Reconcile worked token/compute/storage scenarios using decimal strings and approved rounding; unsupported meters remain uncovered rather than folded into totals.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "0aa45e40cf9a47dac52fbf92e6e5aad4410b749c39ed5bf3e714d28d88b2182c",
+      "body_sha256_after": "7dfc8b5f71f0321590d2d249d65e0a25b496da99ef19b17c99b50202bb99a4e3",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-10.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/240",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/173",
+      "outcome": "missing-rate/coverage/budget-gate tests",
+      "required_negative_recovery_evidence": "Remove the most expensive component's rate and apply a budget limit; display a partial estimate and never mark that budget satisfied from a partial subtotal.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "75030d14a4a35907606dddf97ed621e9d90a64bda546169d32a6b66944374e2c",
+      "body_sha256_after": "df08a7039a4951d8dc7e533b2cd02dcc1790a2a8cab8d50327d7c98e965d5483",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-10.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/241",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/173",
+      "outcome": "historical cost comparison and export tests",
+      "required_negative_recovery_evidence": "Compare saved scenarios from different pricebooks/currencies; retain original provenance and require an approved explicit conversion policy before aggregation.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "0d3359111f91953363e9915b2ab4491db6e372c7d249d6988a603c4163bc60af",
+      "body_sha256_after": "76cb64e40ba4316efbaf82a96e5bb215eb809a9c2aec1d517d363061d592b428",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/242",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "outcome": "durable library CRUD and corrupt-record tests",
+      "required_negative_recovery_evidence": "Rename/delete one entry beside a corrupt record in a large library; recover the valid entries and preserve unrelated metadata across restart.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "1dfca20a7f243a4c9d5f13650c1fe31bd1b400ce0fd2dd855b619bac4395d5b9",
+      "body_sha256_after": "b020bda2ff96eb17a6e96703dc8c2518c4fbcf3b28ca340e7047494e2ded7ecd",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/243",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "outcome": "build/revision comparison and incomparable-evidence tests",
+      "required_negative_recovery_evidence": "Compare revisions with different component tuples and unmatched measurements; show differences without transplanting quality/capacity evidence between builds.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "7e6902b10317af8a94f6e2abfde0fd8200ec996a4886b6d943476d8ea26f2b77",
+      "body_sha256_after": "56e6726eb8aea56ff42e677249dbfb0b279f5e2b700b9b1283f073d89425cd91",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/244",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "outcome": "Files/share-sheet round-trip and malicious-import tests",
+      "required_negative_recovery_evidence": "Import an oversized, wrong-version or secret-bearing file; show a safe rejection/preview and keep the existing draft unchanged; export only the allowed projection.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "a1223f1b981ff34a656b219e99a05575e1dcf7b0e75cbed9a0a536f7168ee31e",
+      "body_sha256_after": "3823c87e9d4848a0895f376f7b356920e80319ba819ef0eb2acc030d94026050",
+      "labels_added": [
+        "area:builder",
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/245",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "outcome": "read-only viewer/revocation and draft-isolation tests",
+      "required_negative_recovery_evidence": "View an expired/revoked share while holding a local draft; never mutate either source, and distinguish pinned history from current correction notices.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "c20a72287e125abaeb4d98eac81942999534f2912b51f8656b07835256977db8",
+      "body_sha256_after": "0e9f4715b34caf4a7893464f9a88756688a95d3bd3ebc5ce64f0f32caa67d4b9",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Preview alpha",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/246",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "outcome": "independent fork tests and conditional-continuity disposition",
+      "required_negative_recovery_evidence": "Fork an available local or shared snapshot while offline; give it a new identity and preserve lineage. Cross-device continuity is conditional and cannot block acceptance of local forking.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b8254d68d44cb4deb6dbff494e95e4fb334a5b0029b0a9a8e233801fbff77d4f",
+      "body_sha256_after": "e8fc3d4fee0d65e76dcb6165ea7f43a42d36719c17d8e709c3c75def62bce025",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/252"
+      ],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-11.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/247",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/174",
+      "outcome": "AASA/entitlement configuration and physical-device/browser matrix",
+      "required_negative_recovery_evidence": "Open the same valid and malicious paths with installed/uninstalled app, signed-out browser and revoked share; verify HTTPS association, exact routing and safe fallback.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "df2f02ea37cddc1bac10fd2bd2f82fcb359e380661f60dc0c67e2cee0ef8b6d4",
+      "body_sha256_after": "95b5dd3a23c0795cc447caa89f636ec1e5c28cee6665f864b0c3843105eedd0e",
+      "labels_added": [
+        "area:builder",
+        "security"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Preview alpha",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/276"
+      ]
+    },
+    {
+      "coordinate": "IOS-12.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/248",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "outcome": "versioned local schema and migration/recovery tests",
+      "required_negative_recovery_evidence": "Interrupt migration with existing revisions, simulate disk exhaustion and reopen a corrupt record; retain recoverable data without a silent destructive database reset.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4449d86feea0b806c514a994a8fddb066d75205b77ea4144ca2b9d5ac7a19fd4",
+      "body_sha256_after": "d378a2289ebc4f32e4338ed2fb1e41c74eef844fe75af349e230d87d8b405ede",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-12.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/249",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "outcome": "offline cache/edit/restart tests",
+      "required_negative_recovery_evidence": "Launch in airplane mode with incomplete and missing cached versions; edits survive and unavailable current checks remain unknown/stale.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "87a44abf6185f8ff66dc76f47a5b465b9dbb6ccd6cb59472dbe9f5cd6858d134",
+      "body_sha256_after": "38f27dcf8266c288216811c6b9f9cb5ca5ed1b0178ee47163450a3198066f951",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-12.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/250",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "outcome": "atomic foreground/background refresh replay",
+      "required_negative_recovery_evidence": "Let the OS cancel background refresh after partial download; keep the complete old release active and resume safely without assuming guaranteed scheduling.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d44add2495afe1e275f71d302274cdbe5c5a7917226e0653dca575b3649d4afa",
+      "body_sha256_after": "15f224ff498c6e138ff80982bb83b8c947891753507723747302ddfc08fe1a70",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-12.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/251",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "outcome": "durable write queue reconciliation tests",
+      "required_negative_recovery_evidence": "Lose the acknowledgement after a successful server write and replay the queue; stable idempotency and revision preconditions prevent duplicate builds and lost updates.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "14d9269338a7adaa1796fa2a037070978e6554a8e7eba602b57e872f2ad699c6",
+      "body_sha256_after": "daa73c34ab2fd9e9b4a6770ce55665fc1bdb2b2857e29a10a68dab9c86695726",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Foundation",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-12.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/252",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "outcome": "conflict diff and interrupted-resolution tests",
+      "required_negative_recovery_evidence": "Edit the same revision on two clients, then fail midway through conflict resolution; preserve both versions until an explicit keep/fork/merge decision succeeds.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d360ffc1efc97fcbec5fc67485d3afb016542ef29dded0ba6cd02596a97bfefc",
+      "body_sha256_after": "984b98b16aeed10b954f7d6de2e6dcfe66897ab8b8e7a80e88835676776376d9",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Foundation",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-12.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/253",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/175",
+      "outcome": "account/cache/queue isolation and deletion recovery tests",
+      "required_negative_recovery_evidence": "Sign out or delete while writes are queued, then switch identity; never replay or expose the former identity's content and keep unavailable-version errors distinct.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "43066a0d036e61e42071155def4da463f0ee9216f9759297ef085245da2495ee",
+      "body_sha256_after": "d66f5b37e3d47ae1743c2ac71b258a603c0c193a7e0c001d5d9a065e91b9740c",
+      "labels_added": [
+        "area:builder"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Foundation",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/254",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "outcome": "T3 optional/invalid-path configuration tests",
+      "required_negative_recovery_evidence": "Omit the vector database in a supported non-vector retrieval plan, then mismatch embedding dimensions; apply only governed constraints and never imply ingestion ran.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "43e3e723e067fc6a336abe32abb5adbf80894ea00cb22db4d9451941cd0f1d5e",
+      "body_sha256_after": "c3a137e5b2d9cc847dcedc829bafe19cb5326ddf5161fdbbb80801945d860566",
+      "labels_added": [
+        "optional capability"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/255",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "outcome": "T4 permission/trust display and removal tests",
+      "required_negative_recovery_evidence": "Select an untrusted MCP tool and disable T4; explain permissions and remove applicability without executing any tool or claiming registry safety.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "8cca2ce1b26500fc7ca4cef4bbe4f438d38811643d7b176feca98e30bf3e1ce9",
+      "body_sha256_after": "08ab0b4ac6623a103f1a6a44b8bea6c13141eaf28cb9430d35e23b34248da2f1",
+      "labels_added": [
+        "optional capability"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/256",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "outcome": "T5 lineage/license/coverage configuration tests",
+      "required_negative_recovery_evidence": "Select an adapter versus merged fine-tuned artifact with uncertain rights/meters; preserve base lineage and unsupported representation gaps without inventing training results.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "431e4c9e11e5d206f3c88d075f40fba6b8e62ce876da5f96382b01820147489e",
+      "body_sha256_after": "53c9026752343baa0409669e3902014923caf4f2be30aed456b30eeefa7f6118",
+      "labels_added": [
+        "optional capability"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/257",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "outcome": "core T6 guardrail/quality guidance tests",
+      "required_negative_recovery_evidence": "Show compatibility pass with absent or failing quality thresholds; keep quality readiness unapproved and link actual measured artifacts separately.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "a2910883426d8a268f772a3515e7b77f15f7231c964940062bc9ce3028e45221",
+      "body_sha256_after": "b865f74ba853e0c1fcd70834b85aa5ee74aadf9420267172173ea7d8712f1f43",
+      "labels_added": [],
+      "field_changes": {
+        "Priority": {
+          "before": "P2",
+          "after": "P1"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/258",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "outcome": "core T6 proposed-plan export tests",
+      "required_negative_recovery_evidence": "Export an unapproved deployment plan; preserve pending approvals, locks and rollback requirements and show no claim that infrastructure was deployed.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4952615efe9fab78ae4ccbb4e5c2f78ed6c36b19f84f40247949a23dbcd2e792",
+      "body_sha256_after": "b8173809ede406e214c73f4945fe73bfe3edd4af5fb8755d54ca3e4fcbd046c8",
+      "labels_added": [],
+      "field_changes": {
+        "Priority": {
+          "before": "P2",
+          "after": "P1"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-13.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/259",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/176",
+      "outcome": "selected cross-tier coverage and exclusion matrix",
+      "required_negative_recovery_evidence": "Test only release-selected optional combinations plus omitted-tier paths; excluded T3-T5 work has an explicit scope disposition and cannot hold core release hostage.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b2fcf337ca8327028046e19e294285c1540db6cd46b40bcf1647e9e3322a1100",
+      "body_sha256_after": "c51f81d6e14e862a396134cd7df2a99a133975b3cb1d4d05e88f8eaadb83a5d1",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/254",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/255",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/256"
+      ],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-14.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/260",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "outcome": "data inventory, threat model and mitigation register",
+      "required_negative_recovery_evidence": "Trace sensitive workload text through import, storage, diagnostics, sharing and deletion; identify trust boundaries, mitigation evidence and unowned residual risks.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "0ac3d9f6b5dab0f9ada5c626e21bf198251dd2bd40f513055c7a6567e649056f",
+      "body_sha256_after": "ec8aaed84dab052f7e89997c6b119878a66ff5d56efc4584752364975fed6547",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Integrated behavior verified",
+          "after": "Decision accepted"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-14.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/261",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "outcome": "Keychain/file-protection/TLS and redaction device evidence",
+      "required_negative_recovery_evidence": "Lock the device, revoke a session and inspect export/log/clipboard paths; protect tokens and private drafts while reporting unavailable protected data safely.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "05ee4e2699b6174723a11f65a92bd4704caa06721a974ebea700ba2cf4d462fa",
+      "body_sha256_after": "a558309161ca17537d192c7872792ced3099e234eba494b173680d3be2485a7f",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-14.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/262",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "outcome": "account deletion/export/revocation service and device evidence",
+      "required_negative_recovery_evidence": "Fail server deletion midway, retry after reauthentication and inspect retained shares/queues; never report deletion completed from local hiding alone.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "78ae0928549b9c19bc8b294bccb7a1c305ec351b3fc0d481394cf170abe3ec83",
+      "body_sha256_after": "4c400debc1c3fd94ff4b143cb15ffe96ba7c181203ba93e6fd0c0e3e1c381ea3",
+      "labels_added": [
+        "optional capability",
+        "security"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Foundation",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-14.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/263",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "outcome": "SDK inventory, privacy manifests and disclosure reconciliation",
+      "required_negative_recovery_evidence": "Compare the release binary's network/SDK behavior with consent, manifests and store disclosures; unlisted collection or unjustified required-reason access blocks acceptance.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4f544dc09f9a0a8b0710406a2d29326b64fa3d7d94011e1538ac498b6871c34f",
+      "body_sha256_after": "8584999fdd2168873a135892e23a5bffe837f646fff50e2ce137031f16a63d78",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/260"
+      ]
+    },
+    {
+      "coordinate": "IOS-14.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/264",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "outcome": "adversarial case register and regression retest evidence",
+      "required_negative_recovery_evidence": "Attempt cross-user API reads, capability guessing, malicious files and crafted links; verify no private response, draft corruption or sensitive diagnostic leak after remediation.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d213a68ee9ee44d24e8062ceebbdd3c84989368cdcd06f88d371216f4a613958",
+      "body_sha256_after": "d175f48b44c1e3a54037cf3fe30f8194fb3beaa62412a124efb08b0a75a1bd68",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Foundation",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-14.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/265",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/177",
+      "outcome": "dependency inventory and vulnerability-response drill",
+      "required_negative_recovery_evidence": "Introduce a vulnerable or unacceptable-license dependency in review and rehearse an urgent patch; document triage/rotation responsibilities without storing credentials.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4839e6d097a1c5c115319e15acccd5a334f6167978b156a9328647ab30eb38a5",
+      "body_sha256_after": "4070718d008c835f231c0171705fcef2aeae06f4b62cd0f0feb9973657155518",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/266",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "contract/domain regression and mutation-detection evidence",
+      "required_negative_recovery_evidence": "Intentionally perturb a rule, decimal operation and required field; the domain suite must fail and report pinned fixture/contract versions.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "2b2ab6021da966dd260fde2fb6a39dbd79ce0e8d8d5477a7b1249a243680428d",
+      "body_sha256_after": "a4e7e6c7087962b55c7ce4d4a982e274440001ae276e2e0eaa06b1dee2428587",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/267",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "UI automation results and physical-device accessibility audit",
+      "required_negative_recovery_evidence": "Complete discover/build/save/share on actual supported devices using VoiceOver and large text; record manual gaps separately from automated UI passes.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "bc680ad7f0dc78b44efe6d0bbea84a5092321200a25044cda7ec836f2baf1f69",
+      "body_sha256_after": "1b3daf3eca742638037c4a32361d62edf90a83adc39ea5acfcfa0ac307f265c5",
+      "labels_added": [
+        "accessibility",
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/268",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "fault-injection and recovery report",
+      "required_negative_recovery_evidence": "Inject timeout, throttling, malformed payloads and simultaneous edits; preserve drafts through retries/cancellation and prove the recovered result matches current revision.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "7280a33abca6f89699ac0fd27da04d2a9d300e00359d7d0e10697696e4d793e3",
+      "body_sha256_after": "03fffe1070baa1626c641894f2a2eff869852fed62d69ce450addf8cd71c61d3",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/269",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "device/OS/lifecycle qualification matrix",
+      "required_negative_recovery_evidence": "Upgrade a populated installation, terminate/background it and use low-resource states on declared OS/device classes; unavailable physical devices remain qualification gaps.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "eece9d133399d1c747d2e8a35f6de89480b5990b27399a6248baf0ff8c3b54fa",
+      "body_sha256_after": "37babd312213f1d0c5c9c42787df99bf5f48de213f04aeb8ad1b89f105f54c7b",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/270",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "cross-client conformance/old-client migration report",
+      "required_negative_recovery_evidence": "Round-trip the same pinned fixtures through available client runtimes and staging; use a harness for an unshipped Android client and explicitly record unverified runtime coverage.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "73d9f59156861d2fe55a3158467ad395a873b8153188fc80ca6004fb425a6869",
+      "body_sha256_after": "988dd2c3511a445f218d07ff4c3db8161b2fedc562c689396df8bcece8505bdd",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/271",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "performance baseline, approved budgets and measurement artifacts",
+      "required_negative_recovery_evidence": "Measure startup, scrolling, memory, energy and network on representative data/devices; a regression over accepted budgets fails qualification and cannot be replaced by simulator guesses.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "6822cdd553e63a8e7c7a59cfe9aa7694cd875389c773bf91dfe32b4ed7996d53",
+      "body_sha256_after": "4badbf315efe0ca90edfdc83cf6bcb2708f71dc47dc8ae0c28c821246f1db9be",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.07",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/272",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "release-binary security/configuration qualification",
+      "required_negative_recovery_evidence": "Inspect the signed release binary for debug endpoints, excess entitlements, vulnerable packages and bundled secrets; retest remediations on the same candidate identity.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "fd54c7e0cff77c5e9a5edfb6759d28086b3b86c2da55fe89f77fd08256e590c9",
+      "body_sha256_after": "636b031af08a544703973ded43e3fa238cccbf77dbd2586fe9153b0c12e0c023",
+      "labels_added": [
+        "area:ci",
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-15.08",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/273",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/178",
+      "outcome": "authorized usability protocol, anonymized findings and acceptance disposition",
+      "required_negative_recovery_evidence": "Use only approved consent and participants; report failed or inconclusive journeys and withdrawn data honestly without treating desk research as customer acceptance.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "f948a7355244afb90d79a99864ef1e0e565f814c32e8acfc8017a1520e5c36c6",
+      "body_sha256_after": "6f4f69498233d9cf6e6d57fe3679d51db131ffdcb66bcc7169d34ce074039166",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-16.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/274",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "Developer/App Store Connect access and recovery inventory",
+      "required_negative_recovery_evidence": "Verify intended team, app record and bundle identity with least-privilege role evidence; missing access remains a named maintainer action, never a request to publish credentials.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "3696615ae3f21d2803b7977f407295650016537378a0780a427a9b504fb5f919",
+      "body_sha256_after": "358b777d91201618eaa0a89977c44a87af07eeca9657c1840928f77f277315fa",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Launch",
+          "after": "Foundation"
+        },
+        "Readiness": {
+          "before": "Needs owner",
+          "after": "Needs input"
+        },
+        "Acceptance Gate": {
+          "before": "Release verified",
+          "after": "Decision accepted"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/184"
+      ]
+    },
+    {
+      "coordinate": "IOS-16.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/275",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "dated Apple policy applicability/evidence matrix",
+      "required_negative_recovery_evidence": "Recheck official requirements against the selected SDK, accounts, markets, encryption, sharing and commerce; each unresolved applicability item links its decision owner and cannot be marked compliant by assumption.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d1e210b36d2b7236ffa7e9f85faf8a0768ed20004d11171a2d96ef557b06cfdb",
+      "body_sha256_after": "76192f70192a40705f29beb916a2c96d47b9516762642a46db91b2aadf9262c1",
+      "labels_added": [
+        "question"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Launch",
+          "after": "Foundation"
+        },
+        "Readiness": {
+          "before": "Needs input",
+          "after": "Awaiting decision"
+        },
+        "Acceptance Gate": {
+          "before": "Release verified",
+          "after": "Decision accepted"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/260"
+      ]
+    },
+    {
+      "coordinate": "IOS-16.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/276",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "signing/provisioning inventory and signed artifact/install evidence",
+      "required_negative_recovery_evidence": "Archive/install a signed candidate through the intended channel; test revoked/expired credentials and rotation, preserving artifact/commit/entitlement identity without revealing keys.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "17f3f007e29dfee7094da07b707cc0539633709245daa3fdbbe476436841568d",
+      "body_sha256_after": "19ba36e19e053ca03d8913d26891e1e14360106113a4070173ea2ed98f4562fb",
+      "labels_added": [
+        "area:ci",
+        "security"
+      ],
+      "field_changes": {
+        "Phase": {
+          "before": "Launch",
+          "after": "Foundation"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-16.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/277",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "TestFlight distribution, beta review and defect disposition evidence",
+      "required_negative_recovery_evidence": "Exercise internal and approved external beta builds, processing/review failure and expired-build replacement; capture tester/device feedback and verify fixes in the next build.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "14320f3ab84e2cd57838f0ea0f23a91995383e5caede3545d2107645f80fd68b",
+      "body_sha256_after": "8c57d955fc7d6d3b4f853c84232b07e840e02c83fcfda0a3e65aab7e523e88c1",
+      "labels_added": [],
+      "field_changes": {
+        "Phase": {
+          "before": "Launch",
+          "after": "Real-data beta"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/205",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/275",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/268",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/269"
+      ]
+    },
+    {
+      "coordinate": "IOS-16.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/278",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "store metadata package and review-access checklist",
+      "required_negative_recovery_evidence": "Compare screenshots, age/privacy/accessibility answers and support/privacy URLs with the actual candidate; broken URLs or advertised unshipped features fail readiness.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "755bc0e57f050b5a4ebbaf1d3ab4881b3888c73a830cdee8ed973122c33f6fb2",
+      "body_sha256_after": "d3e95fa5ac3d1adde0850b1068fd932a1df02ebec74e81d3f4d1b6200bb14bb6",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/284"
+      ]
+    },
+    {
+      "coordinate": "IOS-16.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/279",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "submission/review receipt, launch decision and rollout/forward-fix runbook",
+      "required_negative_recovery_evidence": "Record submission, review acceptance and release authorization separately; handle rejection/resubmission, pause a rollout and rehearse forward-fix because installed App Store binaries cannot be assumed remotely downgradable.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "1c23df55663af247f39d69503b91e65839e4b6e447fec7581863b06477971dce",
+      "body_sha256_after": "87b01efb47faf6690932a6395ca65988893359acc90e47f689a60e2f10067ac7",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": [
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/283",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/284",
+        "https://github.com/Pick-Your-AI/pickyour.ai/issues/285"
+      ]
+    },
+    {
+      "coordinate": "IOS-16.07",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/280",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/179",
+      "outcome": "installed production release and upgrade readback",
+      "required_negative_recovery_evidence": "Install the public version on supported devices and upgrade an earlier installation; verify actual service/data identity and complete build/save/share with truthful unknowns.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "742ca999d915aaf708af30c28112228600fa19e6213bdcae717e59306584934d",
+      "body_sha256_after": "5fe796c0c168c007b8389926305f314dc64eec80780b45d223e77857418f1b88",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-17.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/281",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/180",
+      "outcome": "privacy-preserving monitoring and alert delivery evidence",
+      "required_negative_recovery_evidence": "Trigger a controlled crash/service fault using sanitized fixtures; confirm useful signals and alert routing without logging tokens or private workload fields.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "8338e3ad454ebef578d64716d5afe2465e2fb860789d5a3e7214fe0a4f651835",
+      "body_sha256_after": "8f87d5da9838da9f9e3865cb7ccc33bb3ee2936e50b7488960c3b98308d058f0",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-17.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/282",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/180",
+      "outcome": "incident/restore drill, recovery results and corrective actions",
+      "required_negative_recovery_evidence": "Restore a service backup and roll back a data manifest while old clients are installed; exercise client containment/forward-fix separately from server/data rollback.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "4f3f7cf010c8bf6a1e44742122ff2df2622890390d0ce9b79775b96a72a6be77",
+      "body_sha256_after": "c38070af4c76d1ae04da06738cb862d9906cfc4177382beb7ed9132d39e922b6",
+      "labels_added": [
+        "security"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-17.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/283",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/180",
+      "outcome": "catalog/price correction maintenance rehearsal",
+      "required_negative_recovery_evidence": "Publish a corrected/retracted rate or claim and refresh an older client; preserve original saved evidence and show current warnings under source-specific maintenance policy.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "fd4d0c3c4e91bff0ceb153ac7935d35f0ad1dfa56b3dcf2d5e0274248f280d3f",
+      "body_sha256_after": "900b57595c85dc50c18fa29110b4975a41b3324db070c72ecde9072486c90a5d",
+      "labels_added": [
+        "area:data"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-17.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/284",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/180",
+      "outcome": "working support/security/correction intake and handling runbook",
+      "required_negative_recovery_evidence": "Use a controlled internal support/correction ticket and verify authorized delivery and triage routing; a rendered form alone is insufficient and diagnostics require a redaction preview.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "d288c8114da52820567a4f4dcc1d6c4b5c30028e714b92f18fa141a158ad7438",
+      "body_sha256_after": "f71a5034b9d649171d84a46d638e41974b3adab7056f3f6671683b4c1c67ec4c",
+      "labels_added": [],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-17.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/285",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/180",
+      "outcome": "OS/SDK/API compatibility and maintenance/hotfix runbook",
+      "required_negative_recovery_evidence": "Run an older supported client against a service migration and rehearse a hotfix; define deprecation/recheck responsibility without invented release dates.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "00ce85582f6a7c6fdec8deff6ac9a02b365cb774dc058223298b6a4b9e97ec30",
+      "body_sha256_after": "18218f8d1715134039a0d8d1cee06fa5a7e3dd0762ab4f497a5ef336490e4612",
+      "labels_added": [
+        "area:ci"
+      ],
+      "field_changes": {},
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18.01",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/286",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "outcome": "approved favorites/alert scope and opt-in/revocation tests",
+      "required_negative_recovery_evidence": "Deny notification permission, change preferences and retract a watched fact; favorites remain usable where selected and no private workload text appears in notifications.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "3dad39e6b5cca8380eddf7153d1fcecb86190dc184b5b7d46d23f4e6831532f7",
+      "body_sha256_after": "62ca5b7e858765a5c498fd1f8b1187afce3271f9a888a8e8f6d68dafc3edb4d1",
+      "labels_added": [
+        "optional capability",
+        "question"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18.02",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/287",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "outcome": "regional commerce applicability and StoreKit/server lifecycle evidence",
+      "required_negative_recovery_evidence": "Test pending/cancelled purchase, restore, refund, renewal failure and account/device changes against verified transactions; never grant entitlement from client claims alone.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "79ab7c91977db8020b4cfdb82e0ca70ccd0234e467ed7be530e5b7da7b1414bd",
+      "body_sha256_after": "2dba8973d41b9cfbad39a68153327f08c5c5db02976df9f961b80737e9178f74",
+      "labels_added": [
+        "optional capability",
+        "question",
+        "security"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18.03",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/288",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "outcome": "approved community scope and moderation/abuse response drill",
+      "required_negative_recovery_evidence": "Submit abusive public-build content and a privacy leak; filtering, reporting, blocking and removal work through an operational moderation path before public launch.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "c15a940d35f2109fe5899df66034687c73eba1c5afeec23458b9083e977f4947",
+      "body_sha256_after": "ecac9da79c95ab900b2c8e3ce2c13bd2e7d378d2cf5a41c0b46ec7744198485c",
+      "labels_added": [
+        "optional capability",
+        "question",
+        "security"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18.04",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/289",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "outcome": "approved recommendation/neutrality criteria and evaluation report",
+      "required_negative_recovery_evidence": "Use sparse/contradictory evidence and a paid candidate; expose uncertainty and ranking rationale, honor personalization revocation and never silently replace selections.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "7fcbdc1664709644a7393d8d82669746e0d853af0130befe7d799978d4509025",
+      "body_sha256_after": "56aa2210254779cd40500d429d6263b96cb097efd4f03acad83ab594562ea2d5",
+      "labels_added": [
+        "optional capability",
+        "question"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18.05",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/290",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "outcome": "separate execution approval and safety/audit qualification",
+      "required_negative_recovery_evidence": "Attempt execution without scoped authority or with obsolete revision/budget; reject it, then test cancellation, isolation and rollback only in an explicitly authorized environment.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "b08902891a1cec5908f7971ad1b148051f1608a8ff839b691f4e06a350ae7660",
+      "body_sha256_after": "0e5b00a1963e22a9c3afd863243582123bf9ca773864e5990ba83985fbc1a88c",
+      "labels_added": [
+        "optional capability",
+        "question",
+        "security"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    },
+    {
+      "coordinate": "IOS-18.06",
+      "issue": "https://github.com/Pick-Your-AI/pickyour.ai/issues/291",
+      "parent": "https://github.com/Pick-Your-AI/pickyour.ai/issues/181",
+      "outcome": "per-market/platform scope and qualification matrix",
+      "required_negative_recovery_evidence": "Propose a new market or Apple platform lacking qualified data/support/device coverage; record a separate applicability/release decision rather than inheriting iOS approval.",
+      "disposition": "Keep open; Apple outcome unimplemented/unverified; preserve original tasks and governance; strengthen output/review/failure boundary.",
+      "body_sha256_before": "ced6f583d343a2590500ee1306f1391b424ec93f5fc95b89582b6cc13b365111",
+      "body_sha256_after": "67913ed7c38509684af55ef230614d02225d106ef7370d271a3168db258977e6",
+      "labels_added": [
+        "optional capability",
+        "question"
+      ],
+      "field_changes": {
+        "Acceptance Gate": {
+          "before": "Scope approval",
+          "after": "Integrated behavior verified"
+        }
+      },
+      "prerequisites_removed": [],
+      "prerequisites_added": []
+    }
+  ],
+  "verified_readback": {
+    "reviewed": 129,
+    "levels": {
+      "Program": 1,
+      "Epic": 18,
+      "Feature": 110
+    },
+    "parents": 128,
+    "apple_prerequisites": 222,
+    "added_edges": 17,
+    "removed_edges": 8,
+    "shared_output_prerequisites": 15,
+    "global_graph_nodes": 329,
+    "global_graph_edges": 435,
+    "cycles": 0,
+    "self_dependencies": 0,
+    "missing_targets": 0,
+    "body_readbacks": 129,
+    "label_changed_issues": 113,
+    "field_changed_issues": 37,
+    "field_value_changes": 42,
+    "unassigned": 129,
+    "readiness": {
+      "Needs owner": 21,
+      "Awaiting decision": 14,
+      "Needs input": 94
+    },
+    "issue_pr_links_resolved": 245,
+    "ownership_changes": [],
+    "unrelated_project_drift": [],
+    "filter_matches": {
+      "1": 129,
+      "2": 21,
+      "3": 129,
+      "4": 108,
+      "5": 60,
+      "6": 42,
+      "7": 16,
+      "8": 14,
+      "9": 11
+    },
+    "at": "2026-10-17T02:33:55.111757+00:00"
+  }
+}
