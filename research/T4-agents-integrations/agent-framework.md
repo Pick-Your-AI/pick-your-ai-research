@@ -1,7 +1,7 @@
 # T4: Agent Framework
 
 Issue: #25 · Contract: 1.0.0 · Kinds: `agent_framework`
-Status: draft · Last researched: 2026-10-16
+Status: research merged via #69; owner handoffs and contract proposals remain open · Reconciled: 2026-10-17
 
 ## Evidence status correction
 
@@ -516,6 +516,13 @@ Not proposed:
 
 For LangGraph, `supports_mcp` is deliberately omitted: MCP comes from the separate `langchain[mcp]` package, which is in beta (A13). `supports_multi_agent` is omitted because no fetched page stated it (A16).
 
+## Engine consumer acceptance specification (#11 to #25)
+
+T4 accepts the conditional tool/schema/API contract in the merged [#11 record](../T2-infrastructure/inference-engine.md#proposed-40-contract-follow-up-no-v1-changes) as the interface for framework research. An engine-wide or OpenAI-compatible label is insufficient. The evidence key must retain engine/build/plugins, model and tokenizer revisions, artifact quantization and adapters, template/parser, API endpoint, request options, strictness, streaming mode and schema/grammar backend. This accepts the research boundary; exact extension fields, migration and executable compatibility rules remain with #40. Missing evidence is unknown, not unsupported or an automatic pass.
+
+Synthetic request/response acceptance cases are kept in [the test fixture specification](../../tests/fixtures/t4-engine-consumer.md). They specify consumer checks and evidence identity, not observed engine support. Runtime exercises and evidence placement remain to be agreed with #11/#36.
+
+
 ## Open questions and handoffs
 
 | Question | Follow-up issue / owner |
@@ -538,4 +545,4 @@ For LangGraph, `supports_mcp` is deliberately omitted: MCP comes from the separa
 | Evidence grading of vendor documentation used here | #41 · @tynamite |
 | Not source-checked on fetched pages: LangGraph multi-agent and parallel tool execution, OpenAI Agents SDK OpenTelemetry, MAF checkpoint storage backends and .NET MCP transports beyond stdio, Mastra SSE, PydanticAI and Agno multi-agent | #25 · @CompleteDotTech |
 
-None of the handoffs above is confirmed yet.
+The incoming #11 consumer contract is accepted with constraints by #25 ([owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334)). Internal T4 handoffs are [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external outgoing handoffs remain pending receiving-owner disposition; see the [workstream handoff matrix](README.md#dependency-and-handoff-matrix).
