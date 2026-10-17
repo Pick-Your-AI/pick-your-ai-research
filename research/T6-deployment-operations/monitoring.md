@@ -151,7 +151,7 @@ Status: proposals from primary sources. They are not legal advice. Legal-basis d
 ## Mapping to the v1 contract
 
 - **`spec_monitoring_stack`**: only `signals` is required. Proposal (to #40): the builder derives the required set of signal enums from the active kinds (tables above). The selected stack's `signals` must cover that set (MON-01).
-- **Baseline rules preserved**: `rule.restricted.monitoring.redaction` (error, `on_unknown: block`) and `rule.production.gates` (error, `on_unknown: block`) already require a monitoring selection with `pii_redaction=true` for restricted data and in production. This note adds proposals without changing either rule.
+- **Baseline rules preserved**: `rule.restricted.monitoring.redaction` (error, `on_unknown: block`) and `rule.production.gates` (error, `on_unknown: block`) require redaction for restricted data and evaluation/monitoring/guardrail selections for production, respectively. Production alone does not require `pii_redaction=true`. This note adds proposals without changing either rule.
 - **Dependency graph**: v1 has `dep.monitoring_stack.{deployment_target,model,compute_profile}`. The signal set also changes with `inference_engine`, `rag_pipeline`, `agent_framework`, `tool`, `mcp_server`, `guardrail` and `fine_tuned_model`. Proposed edges go to #40.
 - **`event.schema.json`**: this schema defines **build-lifecycle integration events** (`build.selection.upserted`, `build.deployed`, …), which are secret-free and idempotent. It is not runtime telemetry, and v1 has no runtime telemetry schema. Use: a `build.selection.upserted` or `build.deployed` event whose `payload.affected_kinds` intersects the kinds above should trigger re-evaluation of MON-01. `payload.note` is free text and must never carry prompt/response content. A runtime alert/telemetry record would be a new contract proposal for #40, and none is drafted here.
 
@@ -163,10 +163,10 @@ These are proposals for #40 in the [rule-proposal](../../templates/rule-proposal
 
 - Kinds/pointers: `monitoring_stack` primary `/spec/signals`; enabled selections of `model`, `inference_engine`, `compute_profile`, `rag_pipeline`, `agent_framework`, `tool`, `mcp_server`, `guardrail`, `fine_tuned_model`.
 - Applicability: a monitoring stack is selected and at least one listed kind is enabled. Kinds not enabled are `skipped`. Engine/GPU signals are `skipped` for a serving component in `api` mode.
-- Assertion: `/spec/signals` ⊇ the derived set (model → `latency`,`errors`,`token_usage`,`cost`; self-hosted engine/compute → adds `gpu_utilization`; agents/tools/RAG → adds `traces`; guardrail → adds `security`; fine-tuned model → adds `drift`,`quality`).
+- Assertion: `/spec/signals` ⊇ the derived set (model → `latency`,`errors`,`token_usage`,`cost`; selected compute with a GPU → adds `gpu_utilization`; CPU-only compute skips GPU coverage; agents/tools/RAG → adds `traces`; guardrail → adds `security`; fine-tuned model → adds `drift`,`quality`).
 - Severity: `warning`. Missing-data: absent `signals` or an unknown mode gives `unknown`, `on_unknown: review`. **Unknown never passes.**
 - Remediation: add an exporter/instrumentation that covers the missing signal, or record an accepted gap.
-- Pass: API model + stack signals `[latency, errors, token_usage, cost]`. Fail: self-hosted vLLM + `[latency]` → missing `gpu_utilization`, `token_usage`, `errors`, `cost`. Unknown: engine mode not recorded. Skipped: no RAG selected → retrieval signals skipped.
+- Pass: API model + stack signals `[latency, errors, token_usage, cost]`. Fail: self-hosted vLLM on a GPU + `[latency]` → missing `gpu_utilization`, `token_usage`, `errors`, `cost`. Unknown: engine mode not recorded. Skipped: no RAG selected → retrieval signals skipped.
 - Version impact: needs the derived-set table to be versioned in a ruleset. The enum gaps (queue, KV, rate-limit) need a v1.x proposal.
 
 ### MON-02: content capture requires redaction and retention
@@ -174,20 +174,20 @@ These are proposals for #40 in the [rule-proposal](../../templates/rule-proposal
 - Kinds/pointers: `monitoring_stack` `/spec/pii_redaction`, `/spec/retention_days`, selection `/settings/retention_days`; build `/objectives/data_classification`.
 - Applicability: `data_classification` ∈ {`confidential`, `restricted`} and the stack captures content. v1 has no content-capture field, so for now this cannot be determined, and the result is `unknown`.
 - Assertion: `pii_redaction == true` AND `retention_days` is set (selection or spec).
-- Severity: `error` for `restricted` (consistent with the baseline rule), `warning` for `confidential`. `on_unknown: review`.
+- MON-02 has fixed severity `error` and applies only to `restricted` data with content capture. MON-02b is a separate candidate with fixed severity `warning`, applying only to `confidential` data with content capture and the same assertion. Both use `on_unknown: review`; unknown capture state gives `unknown`, and known no capture gives `skipped`.
 - Pass: confidential, redaction true, retention set. Fail: restricted, redaction false. Unknown: content capture not recorded.
 - Version impact: a proposed `content_capture` enum (`none`/`reference`/`masked`/`full`) goes to #40.
 
 ### MON-03: threshold provenance
 
-- Assertion: every alert threshold references a build objective pointer (`/objectives/max_latency_ms`, `/objectives/monthly_budget_amount`, `/objectives/max_concurrency`, `spec_workload` `/latency_budget_ms`, `/uptime_target_pct`, or #81's proposed `latency_targets`/`availability_target`/`budgets`) or a reviewed #36 result. No literal default constant is allowed.
+- Assertion: every alert threshold references a build objective pointer (`/objectives/max_latency_ms`, `/objectives/monthly_budget_amount`, `/objectives/max_concurrency`, `spec_workload` `/latency_budget_ms`, `/uptime_target_pct`, or #81's `latency_targets`/`throughput_target`/`availability_target`/`budgets`) or a reviewed #36 result. No literal default constant is allowed.
 - Severity: `warning`. A missing objective gives `unknown` with `on_unknown: defer`, and the alert is shown as "no threshold". It is not given an invented value.
 
 ### MON-04: engine signal gaps
 
 - Applicability: selected `inference_engine` is TGI v3.3.7 or llama.cpp v0.7.0 and the workload sets a TTFT target.
 - Assertion: the engine exposes a TTFT metric. Neither documents one [M2, M3], so client-side `gen_ai.client.inference.time_to_first_chunk` [M6] is required instead.
-- Severity: `info` when client TTFT is configured. Otherwise `warning`, with outcome `unknown`. The rule also carries the TGI maintenance-mode note (T2 E20).
+- Severity: fixed `warning`. Outcome is `pass` when client TTFT is configured, `fail` when known absent, and `unknown` with `missing_evidence` and `on_unknown: review` when configuration cannot be determined. The rule also carries the TGI maintenance-mode note (T2 E20).
 
 ### MON-05: provider rate-limit headroom
 
@@ -204,6 +204,7 @@ No numeric threshold is set. Each alert's source is mapped below, and the decisi
 | `api.ttft` / `engine.ttft`, `engine.itl`, `*.e2e` | #81 `latency_targets` (metric ttft/tpot/e2e + percentile), v1 `max_latency_ms` / `latency_budget_ms` | #2 @tynamite; #36 |
 | `engine.queue_depth`, `engine.kv_cache`, `gpu.memory` | #10 admission/headroom (open in T2 gpu-compute.md) | #10 @Mattycodes69 |
 | `api.ratelimit_headroom` | Account-specific provider limits (T1 A5, B3) | #5 |
+| throughput | #81 `throughput_target` | #2 |
 | availability / errors | v1 `uptime_target_pct`; #81 `availability_target` | #2 |
 | cost burn | `monthly_budget_amount`; #81 `budgets`; #39 aggregation | #39 |
 | `drift`, `quality` | #36 evaluation suite and baseline | #36 |
@@ -261,7 +262,7 @@ T1 (O2, A4, A5, B3), T2 (E06, E14, E20, E26) and T5 (Q1) entries are reused with
 | Q6 | Agent retry/approval/task-success signals | #25/#28 @CompleteDotTech | Unknown |
 | Q7 | Guardrail trigger signals | #35 @PUSHINGSQUARES | Unknown |
 | Q8 | Cost derivation and provider usage/cost APIs | #39 @PUSHINGSQUARES | Unknown |
-| Q9 | Lawful basis and default retention for logged content | @PUSHINGSQUARES; #41 | Open |
+| Q9 | Lawful basis and default retention for logged content | @PUSHINGSQUARES; #35/#38, using CD-12 organisation attestations for the lawful-basis reference | Open |
 | Q10 | AMD/Apple accelerator telemetry; Grafana/MLflow | @PUSHINGSQUARES | Not researched |
 | H1 | Accept the #11→#38 signal mapping above (release labels, queue/KV/device memory) | @Mattycodes69 | Pending |
 | H2 | Confirm the threshold source pointers | @tynamite (#2) | Pending |
