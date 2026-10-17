@@ -6,7 +6,7 @@ Issue: [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50). S
 
 The fourteen profiles (including the CanIRun.ai intake) are drawn from the 33-entity [#48 catalog](../competitors.json), keeping its entity IDs, classifications and profile paths. #48 records the selection as a criterion ("Select 10–15 material deep dives") but no separate rationale, so this is the #50 basis for #48 to confirm:
 
-1. **Direct substitution risk first.** Products that take a user's workload or hardware and return a recommendation: Flocci, ModelFit, llmfit, Local AI Planner, BenchLM (LLM Selector), Artificial Analysis (Model Recommender).
+1. **Direct substitution risk first.** Products that take a user's workload or hardware and return a recommendation: Flocci, ModelFit, llmfit, Local AI Planner, BenchLM (LLM Selector), Artificial Analysis (Model Recommender), and CanIRun.ai (provisional, added in #98: its repository README describes hardware-detected, per-use-case recommendations, which ranks it with ModelFit/llmfit on direct-substitution risk ahead of the submission databases LocalScore and LocalMaxxing; the coordinator decision on those two still stands).
 2. **Decision-changing evidence and data sources**, where rights or provenance could invalidate ingestion: BenchLM, Artificial Analysis, OpenRouter, Hugging Face, Models.dev, Harness Bench.
 3. **Substitute workflows** that let users skip planning and build or run directly: Dify, n8n (application/automation) and SkyPilot (compute placement).
 
@@ -29,7 +29,7 @@ Access tier for all profiles: public pages, public docs and public repository me
 | Profile | Workflow evidence | Rights evidence | Strongest counterexample (suffices for) |
 | --- | --- | --- | --- |
 | [Flocci Ask / Stack Builder](flocci.md) | Observed hands-on (one historical request, #66) + static pages | No terms found; © operator | Free ordered toolchain for a common local task |
-| [CanIRun.ai](canirun-ai.md) | Observed static directory + vendor claim; untested | Unknown; review required before reuse | Device-first local model choice (hypothesis) |
+| [CanIRun.ai](canirun-ai.md) | Observed static directory + README vendor claim; untested | Public repo, no licence file; no reuse grant | Hardware-detected local model choice (hypothesis) |
 | [ModelFit](modelfit.md) | Observed UI structure + Documented | Licence files observed: MIT CLI (API NOASSERTION), CC BY 4.0 dataset | Best local model for one device |
 | [llmfit](llmfit.md) | Documented | MIT via licence API | Local model and quantization fit on one machine |
 | [Local AI Planner](local-ai-planner.md) | Observed UI (form fields) | No terms found | Single-GPU or Mac local model with speed targets |

@@ -742,13 +742,28 @@
     "id": "src-canirun-ai",
     "url": "https://www.canirun.ai/devices",
     "supporting_urls": [],
-    "publisher": "CanIRun.ai; legal operator unverified",
+    "publisher": "CanIRun.ai (operated by GitHub user midudev; legal entity unconfirmed)",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public device directory read only. Recommendations are vendor claims; no device workflow or inference was run. Pricing, methodology, API, code licence and data reuse rights unverified.",
+    "limitations": "Public device directory read only. Recommendations are vendor claims; no device workflow or inference was run. Pricing, methodology, API, code licence and data reuse rights unverified. robots.txt allows all paths except /api/ and /og/; a later automated re-check returned HTTP 403 (bot challenge) and was not bypassed.",
     "version": "Public page retrieved 2026-10-16; no software revision pinned",
     "region": "Global public website; not a regional offering or price quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-canirun-ai-repo",
+    "url": "https://github.com/midudev/canirun.ai",
+    "supporting_urls": [
+      "https://api.github.com/repos/midudev/canirun.ai"
+    ],
+    "publisher": "midudev (GitHub user, Miguel Ángel Durán)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Repository metadata (homepage https://canirun.ai, owner type User, licence null) is primary; README capability statements are vendor claims. No code was run.",
+    "version": "Default branch, pushed 2026-10-16T23:27:02Z",
+    "region": "Global; not a regional offering or price quote",
     "confidence": "Medium"
   }
 ]
