@@ -1,6 +1,6 @@
 # MR-09: Validate benchmark comparability and harness effects
 
-Issue: [#62](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62). Owner: @PUSHINGSQUARES. Status: desk validation drafted; no benchmark run; owner review pending. Readiness: Ready. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
+Issue: [#62](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62). Live assignees (2026-10-16): @appletechie and @PUSHINGSQUARES. Status: desk validation drafted; no benchmark run; owner review pending. Readiness: Ready. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
 
 This desk pass was prepared by a contributor who is not the assignee, for the owner's review. The owner keeps every decision in it. It does not complete #62.
 
@@ -9,7 +9,7 @@ Which benchmark differences survive controlled model-harness comparisons?
 
 **Working hypothesis H1.** At a fixed model snapshot, task set, budget and grader, harness choice changes delivery outcomes on agentic workloads by at least δ full-credit points, or δm mean-score points. The owner sets δ and δm before any run.
 
-**Falsifier F1.** H1 is falsified for a pair of harnesses at one model when a pinned, paired replication meets two conditions. It uses at least three runs per task and task-clustered errors. Its 90% confidence interval for the gap (two one-sided tests at 5%) lies entirely within ±δ on full-credit rate and within ±δm on mean score. H1 is supported for that pair when the gap passes G3. A non-significant gap whose interval reaches beyond the margin is inconclusive, not a falsification.
+**Falsifier F1.** H1 is falsified for a pair of harnesses at one model when a pinned, paired replication meets two conditions. It uses at least three runs per task and a paired error analysis accounting for repeated runs and shared-source task clusters. Its 90% confidence interval for the gap (two one-sided tests at 5%) lies entirely within ±δ on full-credit rate and within ±δm on mean score. H1 is supported for that pair only when all four gates pass and the estimated gap meets the applicable owner-set margin. A non-significant gap whose interval reaches beyond the margin is inconclusive, not a falsification.
 
 **Gates.** Each published claim gets pass, fail or unknown on four gates. A claim survives only if it passes all four.
 
@@ -17,10 +17,10 @@ Which benchmark differences survive controlled model-harness comparisons?
 | --- | --- |
 | G1 Pinned | Both sides name the task set and content lock, model snapshot and provider, harness version, budget, inference settings and grader that produced the result. |
 | G2 One factor | Exactly one of those factors differs between the two sides. |
-| G3 Above noise | Gap divided by the standard error of the difference is at least 1.96. |
+| G3 Above noise | For an identified metric and suite, the gap divided by a valid standard error of the paired difference is at least 1.96, with task/run dependence, shared-source clusters and harness selection accounted for. Missing result-level evidence yields unknown. |
 | G4 Same direction | The direction holds on both mean score and full-credit rate, or the claim is explicitly about their divergence. |
 
-The initial market pass forbids paid runs, so this note **can** say which published comparisons are unpinned, underpowered or conflicting. It **cannot** say whether any harness effect is real.
+The initial market pass forbids paid runs, so this note **can** identify unpinned or conflicting comparisons and conditional power limitations. It **cannot** say whether any harness effect is real.
 
 ## Starting evidence
 [technical-feasibility.md](technical-feasibility.md), in particular "Benchmark release correction and child boundaries" and evidence rows F14 and F15. The #62 row of the [parent-completion gate](mr09-acceptance.md) and the #56 → #36 and #56 → #25 rows of the [handoff ledger](handoffs.md) list what this child must deliver. This note is not a new canonical component catalog or a completed measurement.
@@ -72,9 +72,9 @@ Backends named on the website pages read: GPT-5.6 Sol, two GLM-5.3 variants, Qwe
 
 The decisive gap is the link between published results and pinned inputs. The repository pins harness images, task content and runner defaults, but no surface states which model snapshot, harness pin, settings and grader code produced the published numbers. Every published claim below therefore fails G1.
 
-### Noise floor (Estimate)
+### Conditional noise sensitivity (Estimate; not G3 evidence)
 
-Method: standard error of a proportion, SE = sqrt(p(1 − p)/n). The base case is p = 0.30, because GPT-5.6 Sol's full-credit rates are 24.82% and 31.02% and pooled full credit is 23.8% to 27.1%; other models' rates are not published. The difference between two harnesses uses SE × √2. The minimum detectable effect (MDE) uses 2.8 × SE of the difference (80% power, two-sided 5%). The MDE is a planning figure for a replication; published gaps are judged against the z ≥ 1.96 floor.
+These calculations illustrate an independent-task scenario, not an uncertainty estimate for any published result. Assume independent Bernoulli task outcomes within each harness, independent harness means, a common full-credit probability p, a known task count n, and a normal approximation. Then SE = sqrt(p(1 − p)/n), and the SE of a two-harness difference is SE × √2. The illustrative base case is p = 0.30, motivated by the website's GPT-5.6 Sol and pooled rates; it is not an observed probability for Qwen or GLM. All table values are percentage points. The nominal 1.96 × SE threshold and approximate MDE = 2.8 × SE (80% power, two-sided 5%) apply only under these assumptions. They are neither measured confidence intervals nor gate verdicts.
 
 | Tasks per cell (n) | SE | SE of difference | z ≥ 1.96 floor | MDE |
 | --- | --- | --- | --- | --- |
@@ -82,24 +82,24 @@ Method: standard error of a proportion, SE = sqrt(p(1 − p)/n). The base case i
 | 106 (v1 suite) | 4.45 | 6.29 | 12.3 points | 17.6 points |
 | 26 (multimodal suite) | 8.99 | 12.7 | 24.9 points | 35.6 points |
 
-Sensitivity at n = 274: the floor is 8.4 points at p = 0.5 (worst case), 6.7 at p = 0.2 and 5.0 at p = 0.1. Pass verdicts below use the worst-case floor. If mean score is a per-task score from 0 to 100, its per-task SD is at most 50, so its floor is also at most 8.4 points at n = 274.
+Conditional sensitivity at n = 274: the nominal pairwise threshold is 8.4 points at p = 0.5 (maximum Bernoulli variance within this scenario), 6.7 at p = 0.2 and 5.0 at p = 0.1. If the metric is a mean of independent task scores bounded from 0 to 100, its per-task SD is at most 50 and the same 8.4-point pairwise threshold follows under independent harness means. Neither bound applies under arbitrary task clustering or to an unidentified metric/suite.
 
-For a best-to-worst range across seven harnesses, the 95% critical range is q(0.05, 7) × SE = 4.17 × 2.77 = 11.5 points (12.6 at p = 0.5). The expected range with no harness effect at all is about 2.70 × 2.77 = 7.5 points. This treats harness means as independent, so it is a rough bound, not a paired test.
+For a best-to-worst range across seven independent, equal-variance, approximately normal harness means, the illustrative 95% critical range uses q ≈ 4.17: 4.17 × 2.77 ≈ 11.5 points (12.6 at p = 0.5). The expected null range is about 2.70 × 2.77 ≈ 7.5 points. This is a conditional normal-range calculation, not a bound for paired or clustered results. Harness selection and unequal variances require their own treatment.
 
-These bounds are conservative only with respect to pairing. With one run per task, this SE already includes run-to-run noise but cannot separate it from task sampling, so neither the fixed-task-set SE nor the paired SE can be computed. Single runs on another agent benchmark shifted by 2.2 to 6.0 points (B5). Each of the 274 general tasks has its own task family, but tasks share cited sources, so errors clustered on shared sources could be larger; B4 found up to 3.05 times on other benchmarks, and this is untested here. A gap below the floor is therefore Unknown on G3, not Fail. Per-task results are not public.
+With one run per task, task heterogeneity and run-to-run variation cannot be separated. Aggregate rates do not identify paired covariance or shared-source cluster dependence. Pairing can change the difference SE in either direction; clustering can invalidate the independent-task thresholds entirely. B5's 2.2-to-6.0-point shifts and B4's up-to-3.05 clustering factor concern other benchmarks; neither supplies a correction factor or bound for Harness Bench. No finite threshold derived here establishes G3 for any published gap. Per-task results, metric/suite identities and a justified dependence/selection analysis are required. **Every published performance claim below is unknown on G3**, independently of its G1 failure.
 
 ### Claims ledger
 
 All figures are from the website (B2), accessed 2026-10-16, unversioned. The website cites paper Tables 4, 7, 8 and 11 for these results as a group and does not say which table backs each claim; no row has been checked against B1. Evidence grade: Vendor claim, except the derived row. Capability scope: agentic workflow tasks in Harness Bench's six task categories only. The website does not say which suite each figure covers. Confidence: Low for every harness-effect conclusion.
 
-| Claim as published | Metric and gap | G1 | G2 | G3 (estimate) | G4 | Verdict |
+| Claim as published | Metric and gap | G1 | G2 | G3 outcome and conditional sensitivity | G4 | Verdict |
 | --- | --- | --- | --- | --- | --- | --- |
-| GPT-5.6 Sol: mean score SD 1.93 across harnesses, full-credit range 9.12 | Divergence claim | Fail | Pass | Fails the conservative range test: 9.12 is below the 11.5-point critical range and near the 7.5-point null expectation | Divergence is the claim | Not established: the full-credit spread is within the noise range |
+| GPT-5.6 Sol: mean score SD 1.93 across harnesses, full-credit range 9.12 | Divergence claim | Fail | Pass | Unknown: 9.12 is below the illustrative 11.5-point range threshold only under the independent-means scenario; paired/clustered uncertainty is unavailable | Divergence is the claim | Not established; observed spread has no valid uncertainty estimate |
 | Per-model harness choice adds 2.53 to 2.73 points of held-out full credit; mean moves within ±0.14 | Selection gain averaged over models | Fail | Pass | Unknown: split size and SE are not published, so the single-pair floor does not apply | Divergence is the claim | Not established |
-| Harness gaps of 5.0 to 9.5 points within nine models | Metric not stated; likely best-to-worst | Fail | Pass | Unknown: all are below the 11.5-point range bound; pairwise, 9.5 would clear the 8.4-point floor | Unknown | Not established |
-| Qwen3.8-27B harness gap of 39.2 points | Metric not stated | Fail (locally hosted; snapshot and quantization unknown) | Pass | Pass under any metric and variance assumption | Unknown | Unknown at G1; the largest published gap |
-| Both GLM-5.3 variants: 13.5-point full-credit gap | Full credit, 13.5, two comparisons | Fail | Pass if the pair is two harnesses | Pass, even as a seven-harness range (above 12.6) | Unknown | Unknown at G1 |
-| GPT-5.6 Sol: Nanobot costs 2.97 × OpenClaw at 24.82% vs 31.02% full credit | Full credit, 6.2; z ≈ 1.6 unpaired | Fail | Pass | Unknown: pairing would shrink the SE and run variance would grow it | Unknown (means not given) | Full-credit gap not established; the cost ratio is a separate vendor claim |
+| Harness gaps of 5.0 to 9.5 points within nine models | Metric not stated; likely best-to-worst | Fail | Pass | Unknown: metric, suite and dependence are missing; 9.5 exceeds 8.4 only in the conditional n = 274 pairwise scenario | Unknown | Not established |
+| Qwen3.8-27B harness gap of 39.2 points | Metric not stated | Fail (locally hosted; snapshot and quantization unknown) | Pass | Unknown: metric, suite and paired/clustered errors are missing; 39.2 exceeds 8.4 and 12.6 only if the corresponding independent-task/means scenario applies | Unknown | Not established at G1 or G3; largest transcribed gap, metric/suite unidentified |
+| Both GLM-5.3 variants: 13.5-point full-credit gap | Full credit, 13.5, two comparisons | Fail | Pass if the pair is two harnesses | Unknown: suite and paired/clustered errors are missing; 13.5 exceeds 12.6 only in the conditional n = 274 seven-harness scenario | Unknown | Not established at G1 or G3 |
+| GPT-5.6 Sol: Nanobot costs 2.97 × OpenClaw at 24.82% vs 31.02% full credit | Full credit, 6.2; illustrative z ≈ 1.6 only at n = 274, p = 0.30 with independent tasks/means | Fail | Pass | Unknown: paired covariance, run variation and shared-source dependence are unavailable | Unknown (means not given) | Full-credit gap not established; the cost ratio is a separate vendor claim |
 | Pooled harness profile: OpenCode first on mean (66.3), OpenClaw first on full credit (27.1%), Codex 65.3 / 23.8% vs Goose 62.0 / 26.1% | Ranking by metric | Fail | Fail (pooled over models, possibly across both suites) | Unknown: gaps are 0.1 to 3.3 points and pooled attempts share tasks across models | Divergence is the claim | Hypothesis, not established: the orders differ, but the reversals are small and untested |
 | Derived (Estimate): 20,454 = 274 × 7 × 10 + 26 × 7 × 7, so k = 1 | Runs per configuration | Not applicable | Not applicable | Not applicable | Not applicable | One run per configuration, matching the v2 body per #79 |
 
@@ -142,9 +142,9 @@ This is the smallest run that could test F1. It needs the owner's approval, a #3
 2. Choose one model and two harnesses. The default is GPT-5.6 Sol with OpenClaw versus Nanobot, because the website gives both rates and the cost ratio. Record the provider's model snapshot and date.
 3. Fix the judge explicitly, or report a deterministic-only score that excludes judged cases, so the grader is identical on both sides.
 4. Run k ≥ 3 at a fixed temperature on all 274 general tasks, or on a pre-registered stratified subset with that limit stated. Subsets can flip about 12% of rankings, per the abstract of B6.
-5. Report per-task paired differences with task-clustered errors for mean score, full-credit rate and pass^k, plus cost per full-credit task. Apply F1 with the owner's δ and δm.
+5. Retain result-level task/run/harness outcomes and report paired differences for mean score, full-credit rate and pass^k, plus cost per full-credit task. Predeclare the inference target, shared-source cluster structure, treatment of repeated runs and any harness-selection adjustment with #36; task-only clustering is insufficient if tasks share dependent sources. Apply F1 with the owner's δ and δm and a justified dependence-aware method. No result or confidence interval is supplied by this prepared protocol.
 
-Power caveat: at k = 3 the unpaired MDE on 274 tasks is still several points, so a small δ may need more runs or a larger effect to be conclusive. Pairing reduces it by an amount only the run can show.
+Power caveat: repeating each task three times does not triple the number of independent tasks or clusters. The conditional MDE table is a planning sensitivity only; actual power depends on paired covariance, run variation and shared-source dependence. #36 must review the design before any run is authorized.
 
 The v1 `QualityEvaluationRun` schema is bound to a build, so no website figure fits it. Any real run needs a placement agreed with #36 first.
 
@@ -155,15 +155,19 @@ The v1 `QualityEvaluationRun` schema is bound to a build, so no website figure f
 - **C3 for #36:** evaluation-suite notes record grader identity and the budget tuple before any result attaches. Candidate `metric_names`: `mean_score`, `full_credit_rate`, `threshold_rate_0.8`, `pass_pow_k`, `cost_per_full_credit`. For delivery-style workloads, show full-credit rate with cost before mean score.
 - **Finding for #40:** v1's `spec_model` has no benchmark or quality field, and `spec_evaluation_suite` has only `metric_names`, `mode`, `gate_on_deployment` and `dataset_refs`. Any display rule therefore needs a field proposal through #40, not a new rule-template entry.
 
+### Evidence-policy boundary
+
+The adopted [#41 interim policy, PR #75 review 5550616927 §3](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), distinguishes checked primary documentation from independently reproduced evidence; [PR #88 review 5554964868](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868) confirms that distinction. Eligible documentation may support a constraint pass labelled unverified; that does not supply missing statistical evidence for G3. Version-pinned facts retain their original scope/access dates; website figures remain as-of 2026-10-16 vendor claims. No new source access or independent reproduction is claimed. Only short paraphrases and links are retained; task/result reuse remains subject to #41/#60 review. C1–C3 and the gates are proposals for receiving-owner review; final rules or contract changes require central versioned #40 review.
+
 ## Next action
-For @PUSHINGSQUARES (#36): accept, narrow or reject this desk pass, the gates, and conventions C1 and C3; set δ and δm if a replication is wanted. Ask the Harness Bench authors for the full list of the 10 backends with snapshot, provider or runtime and run date for each (quantization and hardware for the locally hosted ones), the code, settings and grader behind the published tables, the three backends excluded from the multimodal suite, and the v1 task list with content hashes. Once arXiv is readable, check each ledger figure against B1 Tables 4, 7, 8 and 11. Decide whether a replication is wanted, and if so, its placement with #36 and its pricing with #39.
+For @PUSHINGSQUARES (#36): accept, narrow or reject this desk pass, the gates, and conventions C1 and C3; set δ and δm if a replication is wanted. Ask the Harness Bench authors for the full list of the 10 backends with snapshot, provider or runtime and run date for each (quantization and hardware for the locally hosted ones), result-level task/run/harness scores with metric/suite labels and shared-source cluster metadata, the code, settings and grader behind the published tables, the three backends excluded from the multimodal suite, and the v1 task list with content hashes. Once arXiv is readable, check each ledger figure against B1 Tables 4, 7, 8 and 11. Decide whether a replication is wanted, and if so, its placement with #36 and its pricing with #39.
 
 For @CompleteDotTech (#25): accept, narrow or reject C2.
 
 For @tynamite (#40, #41): review the field finding, C1, and reuse rights for Harness Bench tasks and results.
 
 ## Result
-No benchmark was run. No paid API output, benchmark artifact, raw dataset or customer content was collected; the repository was inspected read-only. None of the published harness-effect claims passes G1, so none survives yet. Of the published gaps, only the 39.2-point Qwen3.8-27B gap clears the G3 noise floor under any variance assumption. The 13.5-point GLM-5.3 gaps clear it as well, but neither claim passes G1. The published aggregates are consistent with, but do not establish, mean score and full-credit rate ranking harnesses differently. Consumers: #25, #36.
+No benchmark was run. No paid API output, benchmark artifact, raw dataset or customer content was collected; the repository was inspected read-only. None of the published harness-effect claims passes G1, so none survives yet. Every published performance claim is also unknown on G3. The 39.2-point Qwen3.8-27B and 13.5-point GLM-5.3 deltas remain unverified vendor claims with the source conditions and unknowns above. They exceed illustrative thresholds only under stated independent-task/means assumptions; no statistical significance or confidence interval is established. The published aggregates are consistent with, but do not establish, mean score and full-credit rate ranking harnesses differently. Consumers: #25, #36.
 
 Repository checks on 2026-10-16, Python 3.12.3: both unittest suites (21 and 24 tests), `scripts/validate_research.py`, `scripts/validate_market_research.py` and `git diff --check` pass. They check structure and integrity, not the truth of sources, figures or rights.
 
@@ -185,6 +189,6 @@ Repository checks on 2026-10-16, Python 3.12.3: both unittest suites (21 and 24 
 - **#40 (tynamite):** the quality-field finding.
 - **#41 (tynamite), with #60:** C1, and rights for Harness Bench tasks and results.
 - **#39 (PUSHINGSQUARES):** price the replication protocol, only if #36 wants a replication.
-- **Harness Bench authors:** the backend list and snapshots, the code, settings and grader behind the published tables, the excluded multimodal backends, the v1 task list with content hashes, and a license.
+- **Harness Bench authors:** the backend list and snapshots, result-level task/run/harness scores with metric/suite labels and shared-source cluster metadata, the code, settings and grader behind the published tables, the excluded multimodal backends, the v1 task list with content hashes, and a license.
 
 Handoff rows #62 → #25, #36, #40, #41 and #39 are in [handoffs.md](handoffs.md) and [handoffs.json](handoffs.json). All are pending; nothing here pre-marks acceptance. #62 and #36 share an assignee, so the #36 acceptance must be recorded explicitly.

@@ -1199,9 +1199,9 @@
     "artifact": "research/market/benchmark-validation.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Not yet confirmed",
-    "requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, noise floor and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
+    "requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown) and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
     "mr09_review_2026_10_16": {
-      "finding_and_requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, noise floor and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
+      "finding_and_requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown) and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
       "evidence": [
         "research/market/benchmark-validation.md",
         "research/market/mr09-acceptance.md"
