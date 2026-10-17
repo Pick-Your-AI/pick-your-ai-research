@@ -1,7 +1,7 @@
 # T0: Component Schema & Compatibility Rules
 
 Issue: #40 · Contract: v1 1.0.0 (adopted in PR #44) · Assignees: @tynamite, @zwright8
-Status: draft, revision 1 (consolidates decisions already posted) · Last updated: 2026-10-17
+Status: partial decision record for review, revision 2 (consolidates decisions already posted) · Last updated: 2026-10-17
 Deliverable path: `research/T0-configuration/component-schema-compatibility.md` · Companion records: `workload-use-case.md` and `deployment-mode.md` (PR #81), `catalog-data-sources.md` (#41)
 
 This revision consolidates what #40's owner has already decided in reviews of submitted proposals: T2 in [#75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), market research in [#67](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), T1 in [#88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868), and T0's own proposals in PR #81. Sections marked **To do** are open, and the split proposed on #40 assigns the worked T1/T2 examples and the T5 triage to @zwright8. Nothing here changes the frozen v1 contract; changes go to a reviewed next version.
@@ -58,7 +58,7 @@ How does the builder represent every component, and decide, explain and recomput
 | Workload | W-R1 to W-R5, W-R7, W-R9, W-R10 | As proposed in #81 |
 | Price classification | CTX-04 | #39 owns rates; budget checks use the higher tier when estimates straddle |
 
-**To do (@zwright8):** triage T5's rule and contract-change proposals (#68, #76, #77) into these families or new ones.
+**For @zwright8 review:** confirm, narrow or reject the proposed T5 routing inventory below for #68/#76/#77; no disposition is inferred.
 
 ## Contract decisions
 
@@ -111,7 +111,7 @@ CD-1 to CD-12 are defined in #81 (`deployment-mode.md`, "Open contract decisions
 - The evaluator treats the string `"unknown"` only as a typed answer state.
 
 **Reading 1.0.0 builds under v1.1** (a migration adapter; the original bytes are kept):
-1. **Mode.** Each serving component takes the build's `deployment_mode` value when it is `api`, `managed` or `self_hosted`. When it is `hybrid`, each component's mode is `unknown` until answered; it is never guessed.
+1. **Mode.** Preserve the legacy build-level `deployment_mode` label for historical v1 evaluation. Populate each new component deployment only from eligible component/offering evidence or an explicit answer identifying its runtime operator and, for provider operation, capacity. A build-level label alone never supplies those facts, including labels `api`, `managed` and `self_hosted`. Unresolved component facts remain `unknown`; derive the new overall mode only after evaluating the components under #81.
 2. **Workload.** Build a profile from the three copies with this precedence: build `objectives`, then the `workload` selection's settings, then a catalog `workload` preset. Values that disagree are flagged for the user rather than silently merged.
 3. **Locks.** A lock without a snapshot or pricebook revision is marked "cannot be reproduced exactly" (#114).
 4. **Rulesets.** Show results under both the 1.0.0 and 1.1.0 rulesets, with the per-rule differences, as #114's revisit states describe.
@@ -120,7 +120,7 @@ CD-1 to CD-12 are defined in #81 (`deployment-mode.md`, "Open contract decisions
 
 **Acceptance for v1.1.**
 - Every v1 example still validates and evaluates identically under the v1 ruleset.
-- Migration tests cover a hybrid build, a build with conflicting workload copies, and a lock without a revision.
+- Migration tests cover the cases below, including independent component modes, conflicting workload copies and a lock without a revision.
 - The affected workstreams are listed in the changelog.
 
 ## Contribution format
@@ -133,8 +133,8 @@ Use `templates/rule-proposal.md`, plus these conventions:
 
 ## To do
 
-- Worked rule examples spanning T1/T2: model ↔ engine format, model ↔ GPU memory, context ↔ KV cache, including `unknown` handling (@zwright8).
-- T5 triage (@zwright8).
+- Review the synthetic worked examples below with T1/T2 owners (@zwright8); executable migration fixtures remain open.
+- Receiving-owner disposition of the proposed T5 routing inventory (@zwright8).
 - Migration test fixtures for the v1.1 plan (CD-7): hybrid build, conflicting workload copies, lock without revision.
 
 ## Acceptance criteria coverage
@@ -142,7 +142,7 @@ Use `templates/rule-proposal.md`, plus these conventions:
 | Criterion (issue #40) | Where | Status |
 | --- | --- | --- |
 | Schema document with field types and examples | What v1 provides; #81 field dictionaries | Partial |
-| Worked rule examples spanning T1/T2, including `unknown` | To do | Open |
+| Worked rule examples spanning T1/T2, including `unknown` | Synthetic worked examples below | Proposed; owner review open |
 | Approach to cycles and recomputation | Cycles and recomputation | Proposed |
 | Rule and catalog versioning | Versioning; Contract versions and migration | Proposed |
 | Contribution format | Contribution format | Proposed |
@@ -152,3 +152,45 @@ Use `templates/rule-proposal.md`, plus these conventions:
 | Handoffs confirmed | — | Open |
 | Open questions with owners | Contract decisions; #81 | Partial |
 | Decision record merged | — | Open |
+
+## Synthetic migration cases for CD-7 review
+
+These are proposed acceptance examples, not measured configurations or a migration implementation. Preserve original v1 bytes and historical outcomes in every case.
+
+| Case | Input | Required migrated interpretation |
+| --- | --- | --- |
+| M1 | Legacy build label `api`; model offering documents provider/shared runtime; retrieval service explicitly operated by user | Model `api`, retrieval `self_hosted`, derived build `hybrid`; the old label cannot overwrite retrieval evidence |
+| M2 | Legacy build label `managed`; component operator/capacity absent | Component `unknown`; do not infer dedicated/reserved capacity from the legacy label |
+| M3 | Legacy build label `self_hosted`; model is user-operated, external moderation offering provider/shared | Model `self_hosted`, moderation `api`; derive hybrid over applicable serving components |
+| M4 | Build objectives and workload settings disagree | Preserve both source values and flag a decision; do not manufacture a reconciled workload |
+| M5 | Lock references a pricebook ID without revision | Historical cost cannot be reproduced exactly; do not substitute the latest revision silently |
+
+The open migration fixtures must encode these expected interpretations before a v1.1 adapter can be accepted. No adapter or next contract is introduced by this note.
+
+## Worked rule examples for receiving-owner review
+
+The quantities and labels in this section are synthetic fixtures, never catalog evidence or measurements. They illustrate the proposed families; #40 co-owners and affected T1/T2 owners still decide adoption.
+
+| Family | Synthetic inputs | Expected interpretation |
+| --- | --- | --- |
+| Joint format support | Artifact format A; engine's version-matched exhaustive supported set contains A | `pass`; source checked does not mean independently reproduced |
+| Joint format support | Artifact format A absent from an exhaustive version-matched set | `fail`; if list completeness is unknown, `unknown/missing_evidence` instead |
+| Memory fit | Estimated demand [10,14] GiB; usable pool 12 GiB under identical placement/dtype/admission scope | Conservative upper demand does not fit: `fail`, labelled may not fit and estimated; no measured OOM is claimed |
+| Memory fit | Demand or pool scope cannot be matched to the selected rank | `unknown/missing_evidence`; do not combine unmatched memory pools |
+| Context/KV | Native context 8,000 tokens, input 7,000 plus reserved output 2,000, same tokenizer and shared-session semantics | Context predicate `fail`; a separate KV/memory predicate still needs its own evidence |
+| Context/KV | Independent input/output caps, input 7,000 under input cap 8,000 and output 2,000 under output cap 4,000 | Both budget predicates pass; do not compare their sum against either separate cap |
+| Applicability | No adapter selected | Adapter-only predicate `skipped/not_applicable`; a missing adapter lineage on a selected adapter is `unknown` |
+
+## Proposed T5 routing inventory
+
+This is an initial routing synthesis from the merged T5 README and component notes, inspected 2026-10-17; it does not accept their hypotheses or replace @zwright8's triage disposition.
+
+| T5 input | Proposed family or contract decision | Remaining acceptance |
+| --- | --- | --- |
+| F-series framework method/backend support | Joint support and loader/API families; CD-3/CD-6, keep managed-service backend optionality distinct | #30/#40 confirm scope and supported methods |
+| K-series resource estimates and training meters | Memory fit via CD-2/CD-3; price dimensions through #39, then #40 | #10 confirms estimator dimensions; #39 confirms meter semantics |
+| D-series dataset governance and provenance | Licence/rights and CD-3/CD-6; replace boolean-only evidence through versioned fields | #32/#30/#60 source-specific rights; D-20 leakage/freeze remains #36 policy |
+| A-series base revision, adapter metadata and notices | Loader/adapter and licence families; CD-6/CD-7; applicability-aware A-18a/b/c remains separate | #33/#11/#30 confirm lineage and notice predicates |
+| A-13 deployment lifecycle; A-20 evaluation gate | Lifecycle to #37; gate to #36, with references in the shared rule record | #36/#37 dispositions remain separate from #40 schema routing |
+
+No T5 candidate is promoted into the executable baseline by this inventory. Field and fixture implementation remains a next-version proposal requiring affected-owner review.
