@@ -15,15 +15,15 @@
     {
       "source_uri": "https://docs.runpod.io/pods/overview",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Dedicated container environment. Regions and private-networking property omitted because no scoped supported matrix was established."
     },
     {
       "source_uri": "https://docs.runpod.io/pods/pricing",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Metered compute/storage; actual GPU rate comes from selected configuration."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }
