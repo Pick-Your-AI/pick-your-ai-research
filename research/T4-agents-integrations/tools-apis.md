@@ -1,7 +1,7 @@
 # T4: Tools & APIs
 
 Issue: #26 · Contract: 1.0.0 · Kinds: `tool`, `integration`
-Status: draft · Last researched: 2026-10-16
+Status: research merged via #70; external handoffs and contract proposals remain open · Last researched: 2026-10-16
 
 ## Evidence status correction
 
@@ -545,4 +545,4 @@ These affect throughput and plan selection, not price per call.
 | Evidence policy for summarising fetchers and pages that render tables in JavaScript (Slack tiers, GitHub permissions) | #41 · @tynamite |
 | Re-fetch: Slack current tier table and non-Marketplace limits; Brave rate-limit headers; GitHub repository permissions (Contents, Administration, repo delete); Stripe RAK permission names; Drive quotas; E2B SDK licence conflict (MIT vs Apache-2.0) | #26 · @CompleteDotTech |
 
-None of the handoffs above is confirmed yet.
+[Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).

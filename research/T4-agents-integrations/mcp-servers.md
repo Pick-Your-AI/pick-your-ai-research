@@ -1,7 +1,7 @@
 # T4: MCP Servers
 
 Issue: #27 · Contract: 1.0.0 · Kinds: `mcp_server`
-Status: draft · Last researched: 2026-10-16
+Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-17
 
 ## Evidence status correction
 
@@ -940,7 +940,7 @@ Notes on these proposals:
 | Whether each candidate server already speaks 2026-07-28 (`server/discover`); only SDK-level evidence was gathered | #27 · @CompleteDotTech |
 | Atlassian admin controls (IP and domain allowlists) and whether `/v1/sse` still exists; Stripe local package; Cloudflare, Notion and Linear remote servers | #27 · @CompleteDotTech |
 
-None of these handoffs is confirmed yet.
+The incoming #9 hosting/network boundary is accepted with constraints by #27 ([owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072)). Internal T4 handoffs are [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external outgoing handoffs remain pending receiving-owner disposition; see the [workstream handoff matrix](README.md#dependency-and-handoff-matrix).
 
 ## Limitations
 

@@ -1,7 +1,7 @@
 # T4: Agent Memory
 
 Issue: #28 · Contract: 1.0.0 · Kinds: `memory_store`
-Status: draft · Last researched: 2026-10-17
+Status: research merged via #72; external handoffs and contract proposals remain open · Last researched: 2026-10-17
 
 ## Evidence status correction
 
@@ -495,7 +495,7 @@ Catalog proposals (all `kind: memory_store`, `tier: T4`, validated):
 | Is ChatGPT-style consumer memory out of scope? Excluded here as consumer, not builder-selectable | #28 · @CompleteDotTech |
 | Unverified facts to re-fetch: Memory Bank TTL configuration details and pricing units; Anthropic memory tool platform availability (Bedrock, Vertex); Graphiti `group_id` partitioning; Zep and Letta encryption and residency; MS Agent Framework TTL and deletion | #28 · @CompleteDotTech |
 
-None of the handoffs above is confirmed yet.
+[Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
 
 ## Evidence
 

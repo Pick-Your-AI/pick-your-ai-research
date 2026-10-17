@@ -1,50 +1,43 @@
 # T4: Agents & Integrations
 
 Issue: #24 · Contract: 1.0.0 · Kinds: `agent_framework`, `tool`, `integration`, `mcp_server`, `memory_store`
-Status: draft · Last researched: 2026-10-16
+Status: component research merged; external handoffs and central proposals remain open · Reconciled: 2026-10-17
 
-This is the workstream summary for T4. It consolidates the four component decision records and does not replace them. Every finding below is **draft research awaiting review**. No handoff has been confirmed by a consuming owner yet, so nothing here is an accepted decision.
+This is the workstream summary for T4. All four component records and this summary are merged as reviewed research. This does not accept a production configuration or final versioned ruleset. #24–#28 remain open because external consuming-owner dispositions and issue acceptance work remain.
 
-The four component PRs [#69](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69), [#70](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70), [#71](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71) and [#72](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72) remain unmerged pending independent review. Component decision records and proposal directories below link to their exact corrected unmerged revisions. Counts describe proposals, not merged deliveries. Original source and pricing access dates remain 2026-10-16; the AutoGen lifecycle update below was checked on 2026-10-17. This correction supplies no new independent evidence.
+PRs #69, #70, #71 and #72 are merged. The component links below pin the reviewed revisions; they are historical evidence anchors, not unmerged dependencies. Original source/pricing access dates remain 2026-10-16 except explicitly dated rechecks. The 2026-10-17 corrections withdraw unsupported credential inheritance checks, fix the encryption key-reference false positive, and document the bounded Mem0 history-retention reproduction.
 
 | Component | Issue | Decision record | Structured proposals |
 | --- | --- | --- | --- |
-| Agent Framework | #25 | [agent-framework.md](https://github.com/itisSomeone/pick-your-ai-research/blob/956d923ef335b49878ad31fee9ac8d18edf5e0b0/research/T4-agents-integrations/agent-framework.md) | 10 `agent_framework` items ([`catalog/proposals/t4a-*.json`](https://github.com/itisSomeone/pick-your-ai-research/tree/956d923ef335b49878ad31fee9ac8d18edf5e0b0/catalog/proposals)) |
-| Tools & APIs | #26 | [tools-apis.md](https://github.com/itisSomeone/pick-your-ai-research/blob/987ff82546e02443733cf13810275fa029278770/research/T4-agents-integrations/tools-apis.md) | 8 `tool` + 2 `integration` items ([`t4b-*.json`](https://github.com/itisSomeone/pick-your-ai-research/tree/987ff82546e02443733cf13810275fa029278770/catalog/proposals)), 1 pricebook ([`pricing/proposals/t4b-anthropic-web-search.json`](https://github.com/itisSomeone/pick-your-ai-research/blob/987ff82546e02443733cf13810275fa029278770/pricing/proposals/t4b-anthropic-web-search.json)) |
-| MCP Servers | #27 | [mcp-servers.md](https://github.com/itisSomeone/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md) | 9 `mcp_server` items ([`t4c-*.json`](https://github.com/itisSomeone/pick-your-ai-research/tree/3d95c61efc2895d971415950dd4ebdfc1f23aba8/catalog/proposals)) |
-| Agent Memory | #28 | [agent-memory.md](https://github.com/itisSomeone/pick-your-ai-research/blob/e76806679c32b41063f151b9689785a1070f3f9d/research/T4-agents-integrations/agent-memory.md) | 6 `memory_store` items ([`t4d-*.json`](https://github.com/itisSomeone/pick-your-ai-research/tree/e76806679c32b41063f151b9689785a1070f3f9d/catalog/proposals)) |
+| Agent Framework | #25 | [agent-framework.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/956d923ef335b49878ad31fee9ac8d18edf5e0b0/research/T4-agents-integrations/agent-framework.md) | 10 `agent_framework` items ([`catalog/proposals/t4a-*.json`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/956d923ef335b49878ad31fee9ac8d18edf5e0b0/catalog/proposals)) |
+| Tools & APIs | #26 | [tools-apis.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/12188f1c8bb74c66a0ccbe6a46b46ff8323687ab/research/T4-agents-integrations/tools-apis.md) | 8 `tool` + 2 `integration` items ([`t4b-*.json`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/12188f1c8bb74c66a0ccbe6a46b46ff8323687ab/catalog/proposals)), 1 pricebook ([`pricing/proposals/t4b-anthropic-web-search.json`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/12188f1c8bb74c66a0ccbe6a46b46ff8323687ab/pricing/proposals/t4b-anthropic-web-search.json)) |
+| MCP Servers | #27 | [mcp-servers.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md) | 9 `mcp_server` items ([`t4c-*.json`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/3d95c61efc2895d971415950dd4ebdfc1f23aba8/catalog/proposals)) |
+| Agent Memory | #28 | [agent-memory.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ec16c925c7038ea3ee0b88f0bb8054e4e1d8c6b2/research/T4-agents-integrations/agent-memory.md) | 6 `memory_store` items ([`t4d-*.json`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/ec16c925c7038ea3ee0b88f0bb8054e4e1d8c6b2/catalog/proposals)) |
 
 ## Scope and optionality
 
 T4 answers whether a build takes actions, calls tools or keeps memory across interactions, and which orchestration approach fits. It is optional and must disappear cleanly when unused.
 
-Synthetic rule mechanics checked against the v1 reference evaluator (`contracts/v1/reference/evaluate.py`, baseline ruleset plus the 25 T4 rule proposals, synthetic fixture build):
+Synthetic rule mechanics checked against the v1 reference evaluator (`contracts/v1/reference/evaluate.py`, baseline ruleset plus the 24 T4 rule proposals, synthetic fixture build):
 
-- With every T4 selection removed, or present but `enabled: false`, every rule triggered by a T4 selection (the five baseline T4 rules and all 25 proposals) evaluates to `skipped`. Two baseline rules that merely list a T4 kind among their affected kinds (`rule.embedding.dimension`, `rule.budget.monthly.cap`) are triggered by T3 and T6 selections and behave the same with or without T4.
+- With every T4 selection removed, or present but `enabled: false`, every rule triggered by a T4 selection (the five baseline T4 rules and all 24 proposals) evaluates to `skipped`. Two baseline rules that merely list a T4 kind among their affected kinds (`rule.embedding.dimension`, `rule.budget.monthly.cap`) are triggered by T3 and T6 selections and behave the same with or without T4.
 - A build with an agent, tools, MCP and relational memory but no RAG, embedding model or vector database is valid for T4: `rule.memory.vector.storage` and `rule.embedding.dimension` are `skipped`. A vector database is not required for persistent memory.
 
 Out of scope: building the product's agent runtime, and evaluating storage or vector products (T2 #9, T3 #13 and #15 own those).
 
 ## Triage and execution matrix
 
-The original research refreshed GitHub state on 2026-10-16 from the public issue pages. Issue assignees below were refreshed from the API during this correction; no assignments or Project fields were changed. The original session could not read the Project board (see Limitations), so its field values remain unverified here.
+Live GitHub issue and Project API readback on 2026-10-17: all five issues remain open and **In Review**, with **Medium** priority, **Ready** readiness, **Unblocked** dependency status and **Unverified** research confidence. Assignees and triage fields were preserved; the older P2 vocabulary in repository guidance does not override the live Medium value.
 
-| Issue | State and assignees (source-checked) | Existing artifacts before this work | Delivered in this round | Remaining acceptance gaps | Actual blockers | Next action |
-| --- | --- | --- | --- | --- | --- | --- |
-| #24 T4 parent | Open · @CompleteDotTech, @appletechie · `type: workstream`, `optional capability` · native sub-issues #25–28 (0 of 4 done) | None | This summary | All four sub-issues; owner-confirmed handoffs | None (sub-issue completion only) | Merge last, after #25–28 |
-| #25 Agent Framework | Open · @CompleteDotTech, @Mattycodes69 · `type: research`, `optional capability` | None | Decision record, 10 catalog items, 4 v1-valid rules (a fifth, on SSE, was merged into the #27 rule), 11 rules needing #40 (2 shared with #27) | Owner review; handoffs to #6, #11, #16, #26, #27, #28, #35, #36, #37, #38 unconfirmed | None | Review PR; request #6 and #11 owners |
-| #26 Tools & APIs | Open · @CompleteDotTech, @zwright8 · `type: research`, `optional capability` | None | Decision record, 10 catalog items, 1 pricebook, 11 v1-valid rules, 3 needing #40 | Owner review; #35 and #39 handoffs unconfirmed; listed re-fetches | None | Review PR; request #35 and #39 owners |
-| #27 MCP Servers | Open · @CompleteDotTech, @tynamite · `type: research`, `optional capability`, `topic: compatibility` | None | Decision record, 9 catalog items, 6 v1-valid rules, 6 needing #40 | Owner review; #9, #35, #37 handoffs unconfirmed; per-server 2026-07-28 support | None | Review PR; request #9, #35, #37 owners |
-| #28 Agent Memory | Open · @CompleteDotTech, @PUSHINGSQUARES · `type: research`, `optional capability`, `topic: data-governance` | None | Decision record, 6 catalog items, 4 v1-valid rules, 5 needing #40 | Owner review; storage handoff to #9, #13, #15 unconfirmed | None | Review PR; request #9 and T3 owners |
+| Issue | Live co-assignees | Merged research | Remaining work |
+| --- | --- | --- | --- |
+| #24 | @CompleteDotTech, @appletechie | Summary #73; all four component records | Complete component acceptance criteria and external workstream handoffs; do not close before children |
+| #25 | @CompleteDotTech, @Mattycodes69 | #69: framework record and 10 catalog proposals | External capability/consumer dispositions; unresearched mappings remain named unknowns; actual engine consumer runs remain scoped with #11/#36 |
+| #26 | @CompleteDotTech, @zwright8 | #70: tools/integrations record, 10 catalog proposals, 1 pricebook; corrected credential proposal | #13/#35/#39 boundaries and #40 credential/rule decisions; no unsupported inheritance resolver in v1 |
+| #27 | @CompleteDotTech, @tynamite | #71: MCP record and 9 catalog proposals | External hosting/trust/deployment dispositions, #40 selection semantics and per-server/client revision evidence |
+| #28 | @CompleteDotTech, @PUSHINGSQUARES | #72: memory record and 6 catalog proposals; encryption tests and bounded deletion reproduction | Storage and context dispositions; #35/#38 history-retention/purge decisions; #40 configuration evidence |
 
-Classification under the triage rules:
-
-- **Ready (executed):** #25, #26, #27, #28 research; #24 summary.
-- **Needs input (informational, not blocking):** model tool-calling facts (#6), engine tool-calling prerequisites (#11), storage and vector catalogs (#9, #15), pricing semantics (#39). Each note records the unknown and continues.
-- **Awaiting review:** all contract-change proposals (#40) and all handoffs. These gate closure, not research.
-- **Duplicates found:** none. **New issues or sub-issues needed:** none. Small follow-ups are checklist items on the existing issues (each note's "Open questions" table).
-- **Priority:** P2 remains appropriate for all five. No documented dependency or product decision justifies promotion.
-- **Readiness:** Ready for #25–28. No native blockers exist; every relationship listed in `docs/DEPENDENCIES.md` for T4 is informational or a compatibility relationship.
+No duplicate issues, new execution blockers or priority changes are introduced. Contract proposals and external acceptance gate completion, not the already completed research merges. Unpriced or incomplete product facts stay in notes; owner confirmation is never inferred from shared assignment or silence.
 
 ## Research decisions by component
 
@@ -73,15 +66,15 @@ Classification under the triage rules:
 
 - **Taxonomy:** ten conceptual behaviours (in-session state, working, persistent agent state, user-scoped, organization-scoped, episodic, semantic, summarized history, retrieval-backed, explicit structured state). They are behaviours, not products, and map onto v1 `memory_type` (`working|session|long_term`) and `backing_type`.
 - **Default:** no durable memory unless the user needs it. Session state on the framework's own store over #9 relational storage. Vector search only for large free-text memory, reusing the #15 vector database.
-- **Privacy:** expiry and deletion are not erasure everywhere. Deleting an OpenAI conversation does not delete its items; Mem0 expiry hides records. The builder must show deletion depth per product (handoff to #35).
+- **Privacy:** expiry and deletion are not erasure everywhere. Deleting an OpenAI conversation does not delete its items; Mem0 expiry hides records, and its pinned OSS deletion path retains prior text in SQLite history (see the scoped reproduction in the memory record). The builder must show deletion depth per product (handoff to #35).
 
 ## Shared catalog kinds
 
-All proposals use the merged v1 contract without changes. The four linked unmerged revisions propose 35 catalog files (10 frameworks, 8 tools, 2 integrations, 9 MCP servers and 6 memory stores) and 1 pricebook. These are proposed counts until the components are merged; they are not files delivered on main by this summary. The corrected slices pass `scripts/validate_research.py` individually against current main and together. Optional booleans (for example `supports_mcp`) are included only where checked primary documentation supports them. Those claims remain unverified; absence means undocumented in the checked sources, not false.
+All 35 T4 CatalogItem proposals (10 frameworks, 8 tools, 2 integrations, 9 MCP servers and 6 memory stores) and the one T4 pricebook are now on main. They remain proposals with source-checked/unverified provenance; merge does not publish a production catalog. The frozen v1 contract is unchanged. Incomplete facts and unsupported meters remain note-only.
 
 ## Cross-component compatibility rules
 
-25 rule proposals are valid v1 `Ruleset` rules (schema-checked, and every JSON pointer resolves to a real v1 field). Further proposals need contract changes and are written as text expressions. All are submitted for central review through #40; none is an approved ruleset.
+24 rule proposals are valid v1 `Ruleset` rules (schema-checked, and every JSON pointer resolves to a real v1 field). Further proposals need contract changes and are written as text expressions. All are submitted for central review through #40; none is an approved ruleset.
 
 | Case | Rule(s) | Evaluator outcome on synthetic builds |
 | --- | --- | --- |
@@ -105,41 +98,42 @@ These are proposals. Nothing under `contracts/` was changed.
 1. **Rules only see one selection per kind.** Every baseline T4 rule references role `primary`. A build normally has several tools and MCP servers, so tools in other roles are never checked. Worse, two selections sharing role `primary` make `exists` resolve false, so `rule.agent.tools.framework` reports `skipped` instead of `unknown` (reproduced with the reference evaluator). Proposal: a quantifier over all enabled selections of a kind, and semantic rejection of duplicate primary roles before evaluation.
 2. **`rule.memory.framework.compatibility` blocks real memory builds.** `supports_memory` has no defined meaning, so no real framework proposal asserts it. The rule is `error` with `on_unknown: block`, so every real framework plus memory store evaluates to `unknown` and blocks. Proposal: define or replace the field (for example `framework_refs` on `memory_store`) and downgrade to `warning` until it is populated.
 3. **MCP:** `spec_mcp_server.transport` is single-valued (servers often speak several); no protocol-version field on either side; `sse` should be marked deprecated; no hosting category, maintainer, registry name or package pin; framework needs `mcp_client_transports`, `mcp_protocol_versions`, `mcp_client_capabilities`, `mcp_oauth_modes`.
-4. **Tools:** `side_effect_class` (four values) and metrics `tools.high_impact_count`, `tools.irreversible_count`; `tools.mutating_count` should include integrations and MCP-exposed tools; auth values (`basic`, `jwt`, bearer/PAT); structured `rate_limits[]`; pricebook meters for per-second compute and per-execution billing.
-5. **Memory:** `scopes`, `deletion_modes`, `supports_export`, retention and TTL semantics, `storage_ref`, `vector_database_ref`, `managed_storage`, `regions`, `tenant_isolation`; `backing_type` values for graph and managed storage; a build-level persistence requirement; a `memory.max_injected_tokens` metric shared with #7.
+4. **Tools:** explicit credential binding/resolution (direct, integration, provider-hosted or none), link cardinality, ambiguity outcomes and legacy migration; the former universal tool-local credential rule is withdrawn. Remaining proposals include `side_effect_class` (four values) and metrics `tools.high_impact_count`, `tools.irreversible_count`; `tools.mutating_count` should include integrations and MCP-exposed tools; auth values (`basic`, `jwt`, bearer/PAT); structured `rate_limits[]`; pricebook meters for per-second compute and per-execution billing.
+5. **Memory:** configuration evidence for optional encryption/key consumption and covered history/storage layers; retention/purge evidence distinct from vector deletion. Remaining proposals include `scopes`, `deletion_modes`, `supports_export`, retention and TTL semantics, `storage_ref`, `vector_database_ref`, `managed_storage`, `regions`, `tenant_isolation`; `backing_type` values for graph and managed storage; a build-level persistence requirement; a `memory.max_injected_tokens` metric shared with #7.
 6. **Framework:** `tool_calling_modes`, `model_api_surfaces`, state backends, human-approval support, telemetry egress; lifecycle mapping for "archived" and "superseded"; a way to select "no framework".
 7. **Versioning:** hosted services and remote MCP servers change without a release tag. A snapshot-date convention for `version` is needed (with #41).
 
 ## Dependency and handoff matrix
 
-No handoff is confirmed yet. Each row needs a linked comment or PR review from the receiving owner.
+External outgoing handoffs below remain pending. Requests are consolidated for T3 and T6, with each receiving issue named; a request is not acceptance. [Internal T4 receiving-owner dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509) accept the framework/tool/MCP/memory interfaces with explicit constraints; they do not fill missing product facts or approve #40 schemas.
 
 | From | To | Information handed over | Owner | Status |
 | --- | --- | --- | --- | --- |
-| #25 | #6 AI Model | Populate `supports_tool_calling` and `supports_json_schema` per model and API surface, including reasoning-effort conditions | @zwright8 | Pending |
-| #25 | #11 Inference Engine | Tool-calling prerequisites per engine (vLLM parser flags, Ollama `tool_choice` gap) | @Mattycodes69 | Pending |
-| #28 | #7 Context Window | Memory and history tokens must fit `requested_context_tokens`; proposed injected-token metric | @zwright8 | Pending |
-| #27, #28 | #9 Hosting | Self-hosted MCP hosting categories and egress field; relational, object and file memory reuse `storage` | @Mattycodes69 | Pending |
-| #26, #28 | #13 Knowledge Base | Shared provider identity for ingestion vs actions; memory reuses knowledge storage semantics | @zabyxc01 | Pending |
-| #28 | #15 Vector Database | Vector-backed memory reuses the selected vector database (role `memory`) | @zabyxc01 | Pending |
-| #25 | #16 RAG | Retrieval exposed as a tool vs native retrieval components | @zabyxc01 | Pending |
-| #26, #27, #28 | #35 Guardrails | Risk classes and approval defaults; MCP trust criteria and untrusted content; token passthrough; memory poisoning, consent, erasure gaps | @PUSHINGSQUARES | Pending |
-| #25, #28 | #36 Evaluation | Agent, tool-use and memory-quality evaluation hooks (not researched in T4) | @PUSHINGSQUARES | Pending |
-| #25, #27 | #37 Deployment | Managed runtimes; stdio needs process spawning; non-interactive targets cannot complete browser OAuth | @PUSHINGSQUARES | Pending |
-| #25, #26, #28 | #38 Monitoring | OpenTelemetry support, telemetry egress, rate-limit signals, memory growth and deletion jobs | @PUSHINGSQUARES | Pending |
-| #26, #27, #28 | #39 Cost Estimate | Pricing units (per request, per vCPU-second, per execution, credits), one priced item, graph edge `cost_policy → tool` | @PUSHINGSQUARES | Pending |
-| all | #40 Compatibility Schema | Rule proposals and the contract findings above | @tynamite | Pending |
-| all | #41 Data Freshness | Versioning of hosted services; grading of vendor docs and JavaScript-rendered pages | @tynamite | Pending |
+| #25 | #6 AI Model | Populate `supports_tool_calling` and `supports_json_schema` per model and API surface, including reasoning-effort conditions | @zwright8, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6#issuecomment-6233367351) |
+| #25 | #11 Inference Engine | Tool-calling prerequisites per engine (vLLM parser flags, Ollama `tool_choice` gap) | @zwright8, @Mattycodes69 | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334) |
+| #28 | #7 Context Window | Memory and history tokens must fit `requested_context_tokens`; proposed injected-token metric | @zwright8, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6233367558) |
+| #27, #28 | #9 Hosting | Self-hosted MCP hosting categories and egress field; relational, object and file memory reuse `storage` | @Mattycodes69, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072) |
+| #26, #28 | #13 Knowledge Base | Shared provider identity for ingestion vs actions; memory reuses knowledge storage semantics | @tynamite, @zabyxc01 | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13#issuecomment-6233368471) |
+| #28 | #15 Vector Database | Vector-backed memory reuses the selected vector database (role `memory`) | @zabyxc01, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13#issuecomment-6233368471) |
+| #25 | #16 RAG | Retrieval exposed as a tool vs native retrieval components | @zabyxc01, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13#issuecomment-6233368471) |
+| #26, #27, #28 | #35 Guardrails | Risk classes and approval defaults; MCP trust criteria and untrusted content; token passthrough; memory poisoning, consent, erasure gaps | @appletechie, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6233368724) |
+| #25, #28 | #36 Evaluation | Agent, tool-use and memory-quality evaluation hooks (not researched in T4) | @appletechie, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6233368724) |
+| #25, #27 | #37 Deployment | Managed runtimes; stdio needs process spawning; non-interactive targets cannot complete browser OAuth | @appletechie, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6233368724) |
+| #25, #26, #28 | #38 Monitoring | OpenTelemetry support, telemetry egress, rate-limit signals, memory growth and deletion jobs | @appletechie, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6233368724) |
+| #26, #27, #28 | #39 Cost Estimate | Pricing units (per request, per vCPU-second, per execution, credits), one priced item, graph edge `cost_policy → tool` | @appletechie, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6233368724) |
+| all | #40 Compatibility Schema | Rule proposals and the contract findings above | @zwright8, @tynamite | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6233368930) |
+| all | #41 Data Freshness | Versioning of hosted services; grading of vendor docs and JavaScript-rendered pages | @tynamite, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6233369204) |
+
 
 ### Reconciliation with merged T2 research
 
-T2 Infrastructure research merged in PR #75 after this summary was drafted. It lists reciprocal handoffs to T4, all still pending acknowledgment by the T4 owner (@CompleteDotTech):
+T4's receiving-owner dispositions are now explicit:
 
-- **#9 to #27:** T2 classifies a local MCP process and a remote MCP HTTP service as hosting placements and leaves transport, authentication and trust to #27. This matches the three hosting categories in [mcp-servers.md](https://github.com/itisSomeone/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md). T2 pinned the 2025-11-25 transport document and asked #27 to decide which protocol versions to retain; mcp-servers.md answers that the catalog must track version sets, with 2026-07-28 current.
-- **#11 to #25:** T2 records that tool calling depends on engine version, model revision, chat template, parser, request fields, strictness and streaming mode, and asks #25 for consumer acceptance fixtures. This is consistent with the engine prerequisites in [agent-framework.md](https://github.com/itisSomeone/pick-your-ai-research/blob/956d923ef335b49878ad31fee9ac8d18edf5e0b0/research/T4-agents-integrations/agent-framework.md). The fixtures are not yet written.
-- **#9 to #28:** T2 asks #28 to confirm that T2 storage describes infrastructure only, while session and durable memory semantics, retention and deletion stay with T4. This matches the storage boundary in [agent-memory.md](https://github.com/itisSomeone/pick-your-ai-research/blob/e76806679c32b41063f151b9689785a1070f3f9d/research/T4-agents-integrations/agent-memory.md).
+- **#9 -> #27:** [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072): hosting placement stays with T2; MCP transport/protocol/auth/trust stays with T4. Egress/process/locality capabilities require evidence; no new v1 fields are inferred.
+- **#9 -> #28:** [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072): T2 supplies infrastructure storage; T4 retains memory scope, consent, retention and deletion. Storage choice is not proof of ACLs or erasure.
+- **#11 -> #25:** [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334): tool/parser/schema/API support is conditional on the complete versioned request tuple. [Synthetic consumer cases](../../tests/fixtures/t4-engine-consumer.md) specify future checks; no engine run is certified by those examples.
 
-Acknowledging these handoffs is the T4 owner's decision. This summary records only that the T4 drafts do not contradict them.
+These are directional acknowledgments. The reciprocal #9/#11 requests in the table above still need their receiving owners' decisions. The [T2 ledger](../T2-infrastructure/handoffs.md) links the actual T4 receipts.
 
 ## Data-source provenance
 
@@ -147,9 +141,9 @@ Original factual claims in the component notes cite primary sources accessed on 
 
 ## Limitations
 
-- The original research session could not read the GitHub Project board or API; the correction fetched issue and PR metadata from the API but did not verify Project fields. Project field values (Status, Priority, Readiness) are not verified here. Several issue pages show "Backlog" in their metadata while their timelines say "Todo".
+- The original session could not read the Project board; the 2026-10-17 reconciliation verified the live fields stated above. These are a snapshot, not automatic synchronization.
 - Some vendor pages were read through a text-extracting fetcher; quotations are as extracted. Pages that render tables in JavaScript (Slack rate tiers, some pricing pages) are listed as gaps.
-- No framework, MCP server or SDK was executed. Behaviour is documented, not measured.
+- No full framework, MCP server or memory service was exercised. The memory record separately documents a pinned, isolated Mem0 deletion-method/SQLite reproduction with synthetic vector/entity stubs; it does not certify the deployed service.
 - The original research used Python 3.13 locally. Evidence corrections were validated on Python 3.12 with pinned requirements, on each component head, each slice against current main, and all four together; the summary was also validated separately. Automation checks structure and references, not independent product behaviour or receiving-owner acceptance.
 - Schema validity does not prove claims are accurate or current.
 
@@ -159,11 +153,11 @@ Each component note ends with an open-questions table naming the follow-up issue
 
 ## Pull requests
 
-Each component PR uses `Refs #n`, not `Closes`, because handoffs are not yet confirmed. The component and proposal links above target exact corrected, unmerged revisions on the contributor fork; they do not assume those files exist on main. Review and merge of #69–#72, issue acceptance criteria, and receiving-owner handoff confirmation remain completion gates. This summary does not merge or accept them.
+All four component PRs merged using partial-work references. Their reviewed heads are retained below for evidence traceability. Issue completion still requires acceptance criteria and external handoff dispositions; no issue is closed by this summary.
 
-| PR | Corrected unmerged revision | Proposed slice |
+| PR | Reviewed merged head | Research slice |
 | --- | --- | --- |
-| [#69](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69) | [`956d923ef335b49878ad31fee9ac8d18edf5e0b0`](https://github.com/itisSomeone/pick-your-ai-research/commit/956d923ef335b49878ad31fee9ac8d18edf5e0b0) | agent-framework.md |
-| [#70](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70) | [`987ff82546e02443733cf13810275fa029278770`](https://github.com/itisSomeone/pick-your-ai-research/commit/987ff82546e02443733cf13810275fa029278770) | tools-apis.md |
-| [#71](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71) | [`3d95c61efc2895d971415950dd4ebdfc1f23aba8`](https://github.com/itisSomeone/pick-your-ai-research/commit/3d95c61efc2895d971415950dd4ebdfc1f23aba8) | mcp-servers.md |
-| [#72](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72) | [`e76806679c32b41063f151b9689785a1070f3f9d`](https://github.com/itisSomeone/pick-your-ai-research/commit/e76806679c32b41063f151b9689785a1070f3f9d) | agent-memory.md |
+| [#69](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69) | `956d923ef335b49878ad31fee9ac8d18edf5e0b0` | agent-framework.md |
+| [#70](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70) | `12188f1c8bb74c66a0ccbe6a46b46ff8323687ab` | tools-apis.md |
+| [#71](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71) | `3d95c61efc2895d971415950dd4ebdfc1f23aba8` | mcp-servers.md |
+| [#72](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72) | `ec16c925c7038ea3ee0b88f0bb8054e4e1d8c6b2` | agent-memory.md |
