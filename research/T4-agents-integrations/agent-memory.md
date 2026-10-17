@@ -3,6 +3,12 @@
 Issue: #28 · Contract: 1.0.0 · Kinds: `memory_store`
 Status: draft · Last researched: 2026-10-16
 
+## Evidence status correction
+
+Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims remain `unverified`; the original facts, versions, source access dates and `checked_at` are unchanged. No qualifying independent corroboration or runtime reproduction was supplied. Vendor capability statements remain documented claims, not measurements.
+
+A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
+
 ## User decision
 
 What should the agent remember within a session and across sessions, where is it stored, and for how long?
@@ -93,7 +99,7 @@ Versions come from the PyPI JSON API on 2026-10-16. "Unknown" means not found in
 | Mem0 OSS | `mem0ai` 2.2.1 (2026-09-25) | Apache-2.0 | LLM-extracted semantic memory; raw storage with `infer=False` | `user_id`, `agent_id`, `run_id` (D37) | 22 vector stores in Python; default local Qdrant; history in SQLite; self-hosted server uses Postgres with pgvector (D33, D34) | `expiration_date` (YYYY-MM-DD, UTC) **hides, does not delete** (D36) | `delete`, `delete_all`; no batch delete; no export (D35) | "No org/project concept" (D35) | library or Docker self-host | graph memory removed from OSS (D35) | D32–D38 |
 | Mem0 Platform | n/a (service) | proprietary | as OSS, plus native graph | adds `app_id` and org/project (D35) | undisclosed | `expiration_date` as OSS | `batch_delete` up to 1000 per call; Memory Export jobs (D35) | multi-org and multi-project with roles (D35) | managed | — | D35 |
 | Zep Cloud | `zep-cloud` SDK 4.0.0 (2026-10-14) | SDK license not in PyPI metadata (unknown) | temporal knowledge graph of users and threads | user, thread, graph; account and project isolation (D42) | undisclosed (Graphiti engine) | none by default; admin-managed retention policies (`off`, `report_only`, `enforce`) (D40) | delete edge, node, episode, thread, user, graph; asynchronous. Derived node summaries may keep deleted text (D41). Backups up to 365 days (D40) | account and project | managed or BYOC | **Community Edition deprecated** (D42) | D40–D43 |
-| Graphiti | `graphiti-core` 0.31.1 (2026-10-15) | Apache-2.0 (PyPI) | temporal facts with validity windows; changed facts are invalidated, not deleted (D39) | not verified (`group_id` not in the fetched README) | Neo4j 5.26, FalkorDB 1.1.2, Neptune; Kuzu deprecated | n/a (application-managed) | unknown | unknown | self-host only | — | D39 |
+| Graphiti | `graphiti-core` 0.31.1 (2026-10-15) | Apache-2.0 (PyPI) | temporal facts with validity windows; changed facts are invalidated, not deleted (D39) | not source-checked (`group_id` not in the fetched README) | Neo4j 5.26, FalkorDB 1.1.2, Neptune; Kuzu deprecated | n/a (application-managed) | unknown | unknown | self-host only | — | D39 |
 | Letta | `letta` 0.34.12 (2026-10-12) is now **Letta Code**; the V1 API server is archived (D44) | Apache-2.0 (D45) | memory blocks (always in context), files, archival memory (vector), external RAG (D46) | agent | Letta Cloud by default; git-tracked MemFS (D45) | unknown | unknown | unknown | managed (Letta Cloud); local CLI | **V1 self-hosted server archived** | D44–D47 |
 
 ### Provider-hosted memory and state
@@ -147,7 +153,7 @@ The coordinator's required research fields, mapped to v1. "Note only" means v1 h
 
 ## When vector search is warranted
 
-A vector database is **not** required for persistent memory. Every framework-native persistence path verified here works on relational or key-value storage:
+A vector database is **not** required for persistent memory. Every framework-native persistence path source-checked here works on relational or key-value storage:
 - LangGraph stores work by namespace and key; "semantic search" is enabled only if an embedding model is configured (D3).
 - ADK DatabaseSessionService is relational (D17).
 - AgentCore and Memory Bank do not expose a vector index to the user (D25, D21).
@@ -183,7 +189,7 @@ Rule of thumb for the builder (Estimate, project guidance):
 
 ### Findings that affect the rules
 
-| Risk | Verified finding | Builder implication | Route |
+| Risk | Source-checked (unverified) finding | Builder implication | Route |
 | --- | --- | --- | --- |
 | Deletion that is not erasure | OpenAI: deleting a conversation does not delete its items (D15). Mem0: expiration hides, does not delete (D36). AgentCore: expired records can be returned for days; use `DeleteMemoryRecord` for immediate removal (D26). Zep: residual text in shared node summaries; backups up to 365 days (D40, D41) | `supports_ttl=true` must not be read as "erasure guaranteed". Show deletion depth per product | #35, #40 |
 | Cross-session persistence without notice | ADK `user:` state persists across all of a user's sessions once a persistent SessionService is used (D18) | Persistent user memory should be visible to the user, with a consent notice and a forget control. This is application-side; no product enforces it | #35 |
@@ -258,9 +264,9 @@ assert:       exists(link from=sel(memory_store) relation=stored_in to=sel(kind=
               AND catalog(storage via link) /spec/storage_type == catalog memory_store /spec/backing_type
 ```
 
-**Permissions part.** v1 has no permission or IAM fields. A verified example: setting a TTL on AgentCore long-term records requires `bedrock-agentcore:UpdateMemoryRecordExpirySpecification`, or the request fails with `AccessDeniedException` (D26).
+**Permissions part.** v1 has no permission or IAM fields. A source-checked example: setting a TTL on AgentCore long-term records requires `bedrock-agentcore:UpdateMemoryRecordExpirySpecification`, or the request fails with `AccessDeniedException` (D26).
 
-- **Status:** Verified fact, Hypothesis rule; needs contract change via #40.
+- **Status:** Source-checked (unverified) fact, Hypothesis rule; needs contract change via #40.
 - **Severity:** warning.
 
 ```text
@@ -296,7 +302,7 @@ assert:       exists(selection memory_store primary /id)
 
 **`rule.t4.memory.longterm.volatile`** is a v1 proxy that catches a configuration that claims long-term memory but is process-memory backed.
 
-- **Status:** Verified. In-memory backends lose data on restart: ADK (D17), LangGraph `InMemoryStore` (D3), LangMem (D10).
+- **Status:** Source-checked (unverified). In-memory backends lose data on restart: ADK (D17), LangGraph `InMemoryStore` (D3), LangMem (D10).
 - **Severity:** warning, because Redis can be configured to persist. That is a #9 fact.
 - **Synthetic results:** `long_term` + `in_memory` → `fail`; `long_term` + `relational` → `pass`; `session` + `in_memory` → `skipped`.
 
@@ -306,7 +312,7 @@ assert:       exists(selection memory_store primary /id)
 
 **`rule.t4.memory.ttl.support`** catches a retention period that the store cannot enforce.
 
-- **Status:** Verified as a contract-semantics rule, using v1 fields only. Products differ: PostgresStore supports TTL (D7), the OSS PostgresSaver has no TTL code (D7), and Mem0 expiry hides records (D36).
+- **Status:** Schema-checked as a contract-semantics proposal, using v1 fields only; product claims remain source-checked and unverified. Products differ: PostgresStore supports TTL (D7), the OSS PostgresSaver has no TTL code (D7), and Mem0 expiry hides records (D36).
 - **Severity:** warning.
 - **Synthetic result:** `ttl_hours` set on an item with `supports_ttl` absent → `unknown` (review), which is the intended behaviour.
 
@@ -487,7 +493,7 @@ None of the handoffs above is confirmed yet.
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. "Wheel source" means file names and source text read from the published wheel, without executing it.
+All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. "Wheel source" means file names and source text read from the published wheel, without executing it.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |

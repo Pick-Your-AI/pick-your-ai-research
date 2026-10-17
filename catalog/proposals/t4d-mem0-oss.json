@@ -23,31 +23,31 @@
     {
       "source_uri": "https://pypi.org/pypi/mem0ai/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports version 2.2.1 (uploaded 2026-09-25), license_expression Apache-2.0."
     },
     {
       "source_uri": "https://docs.mem0.ai/components/vectordbs/overview",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports backing_type vector: 22 Python vector store providers; 'Qdrant will be used as the vector database' by default."
     },
     {
       "source_uri": "https://docs.mem0.ai/open-source/overview",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports library defaults: OpenAI LLM and embeddings, local Qdrant, SQLite history at ~/.mem0/history.db."
     },
     {
       "source_uri": "https://docs.mem0.ai/platform/features/expiration-date",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "expiration_date hides a memory from search but does not delete it, so supports_ttl is deliberately not asserted."
     },
     {
       "source_uri": "https://raw.githubusercontent.com/mem0ai/mem0/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports license Apache-2.0."
     }
   ],
@@ -56,5 +56,5 @@
     "commercial_use_allowed": true,
     "self_hosting_allowed": true
   },
-  "updated_at": "2026-10-16T12:00:00Z"
+  "updated_at": "2026-10-17T02:17:46Z"
 }
