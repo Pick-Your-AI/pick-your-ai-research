@@ -18,7 +18,7 @@ This summary lists the decisions in the five T6 records, the rules they contribu
 | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 198 |
 | | total | | | 320 | 72 | 1,024 |
 
-Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
+Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy): 1,001 Primary documentation, 19 Independent measurement, 4 Vendor claim. Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
 
 ## Decisions
 
@@ -84,7 +84,7 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 |---|---|---|
 | #2 T0 | fields the rules and quantities need: data sensitivity, residency, tenancy, language, regulated-workload flag (#35); evaluator placement and region at provisioning (#36); peak volume, build life and migration window, licensee domicile, MAU or revenue, end-user countries (#37); availability objective, SLO window, freshness tolerance, retention, budget hard stop, high-risk status (#38); quantity roles and case drivers (#39) | all |
 | #40 Schema | the rules and enums above; the mode working rule | all |
-| #41 Data sources | evidence grades for every record; reproducibility tiers A to C; price sources, dates and terms | all |
+| #41 Data sources | interim evidence grades to confirm for every record; reproducibility tiers A to C; price sources, dates and terms | all |
 | #42 Saved builds | accepted warnings with their reasons (#35); the price snapshot fields and re-pricing behaviour (#39) | #35, #39 |
 | T1 to T5 owners | lifecycle dates per host, engine maintenance status, embedding versions, feature availability per platform, base-model matching (#37); the signals each component must expose, by mode (#38) | #37, #38 |
 
@@ -101,7 +101,7 @@ Grouped by who can answer them. #38 and #39 name an owner for each question; #35
 - 28 rules and 3 hypotheses in #35 to #37 carry a conditional severity, for example "warning; incompatible when …". #38 and #39 use exactly one severity per rule. Decide whether #40 allows the conditional form or the rules are split. Rules: G-R13, G-R21, G-R23, G-R26 and G-H9 (#35); E-R3, E-R6, E-R8, E-R10, E-R11, E-R12, E-R21, E-R30, E-R48, E-R60, E-R70, E-R72, E-R74, E-R82, E-R83 and E-H2 (#36); D-R10, D-R13, D-R25, D-R34, D-R43, D-R69, D-R72, D-R77, D-R79 and D-H22 (#37).
 
 **#41 owner**
-- Evidence grades for every record, including whether vendor accuracy claims may be displayed (#35, #37, #38).
+- The final evidence-grade policy. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md`; #41 confirms them, including whether vendor accuracy claims may be displayed (#35, #37, #38).
 - Sizing rule for evaluation sets and reproducibility tier boundaries (#36).
 - Whether AWS and Azure price data may be redistributed (#39).
 
