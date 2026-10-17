@@ -56,6 +56,23 @@ GitHub issue assignees are authoritative for both programs; sub-issues can have 
 
 Website implementation is tracked separately in [Project 3](https://github.com/orgs/Pick-Your-AI/projects/3). A research PR contributes evidence; it does not by itself implement a feature or approve a deployment.
 
+### Apple/iOS delivery planning
+
+The [Apple/iOS delivery plan](docs/APPLE_DELIVERY_PLAN.md) follows the Android planning
+structure: **1 program → 18 epics → 110 feature/task work packages → implementation
+and validation subtasks**. It covers the native client, shared services and catalog
+pipeline, offline behavior, privacy, quality, TestFlight, App Store launch and operations.
+The delivery hierarchy is separate from the product's T0–T6 configuration tiers.
+
+The plan is published in [Apple Project #5](https://github.com/orgs/Pick-Your-AI/projects/5)
+under [program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163); see the
+[issue index and triage record](docs/APPLE_DELIVERY_TRACKING.md). It does not establish
+a shipped application. Existing
+research, Android and website work remains canonical: shared capabilities are linked
+rather than duplicated, and client-specific integration is tracked separately.
+Implementation repository, platform, technology and conditional-feature decisions
+remain explicit work packages. See the [roadmap](docs/roadmap.md) for release gates.
+
 ## Where submissions go
 
 | Material | Location |

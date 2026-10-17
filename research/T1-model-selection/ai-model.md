@@ -25,7 +25,7 @@ Bedrock on-demand is a second API offering of the same publisher release, not a 
 1. Keep publisher, family, exact release/snapshot, serving route and derivative artifact separate. Stable family names support discovery but never pin reproducibility alone.
 2. API identity uses the published immutable release ID where available. Record aliases as lookup inputs plus their resolved snapshot and check date. A2 demonstrates that the presence of a date is not a reliable alias test.
 3. Open weights use publisher repository plus immutable revision. Pin tokenizer/config/chat-template/license to that revision. A converted or quantized artifact needs its own source/revision, base lineage, format, precision and license evidence; never relabel an arbitrary GGUF as the original BF16 checkpoint.
-4. v1 `model.spec.provider_ref` is a single serving/source reference. Until #40 approves a richer offering relation, catalog IDs distinguish route-specific model records and notes retain the shared publisher identity. This avoids treating an API limit as a universal model fact.
+4. v1 `model.spec.provider_ref` is a single serving/source reference, and build `provided_by` links already bind a selected model to its provider. Following the [#40 owner's PR #88 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868), accessed 2026-10-17, no new relation is needed for that binding. Catalog IDs distinguish route-specific model records and notes retain shared publisher identity; richer endpoint identity/alias policy, region and tier use #81's proposed configuration key. This avoids treating an API limit as a universal model fact while versioning the remaining metadata through #40.
 5. Intake currently allows one version per catalog ID. Retain historical facts in notes until a reviewed multi-version intake exists; price references always target the exact submitted item version. Do not use the capture date to replace an actual model snapshot.
 
 ## Comparison fields
@@ -39,7 +39,9 @@ Every field needs a primary URL/access date and version/route conditions. Option
 | `status`, release/deprecation dates | Enum active/preview/deprecated/retired; ISO dates in notes | Current lifecycle documentation. Gemini's access restriction is not retirement; Anthropic's earliest retirement promise is not an actual deprecation date. |
 | `spec.modalities_in/out`, `model_type` | Enum arrays / enum | Exact model and route docs, not family-level advertising. |
 | `supports_tool_calling`, `supports_json_schema` | Optional boolean with claim grade | A documented API capability is not a demonstrated workflow or reliable output score. Qwen structured JSON guarantees remain unknown. |
+| `spec.supports_fine_tuning` on model and provider | Optional boolean with scoped evidence | Existing v1 technical capability; explicit false on either rejects fine-tuning, independently of license answers. Missing is not false. Model/provider true is necessary capability evidence, not account/region entitlement. |
 | `license_ref`, license restrictions | Opaque string plus primary license/terms in notes | Actual checkpoint license, conditions, modification/redistribution/access; #30 confirms sufficiency. Custom/ambiguous terms require a named decision, not assumed permission. |
+| `license_conditions` / `licence_answers` (proposed, not v1) | Typed conditions and selection-bound answers; #81 D-R2a/b | Eligibility answers resolve met/not_met or a recorded grant; obligation answers resolve acknowledged/not_acknowledged. Answer/storage/version policy remains with #30/#40; do not write these fields into v1 proposals. |
 | `access_modes`, `weight_access` | Enum arrays / optional open/restricted/none | Distinguish service access, actual weights, gating and agreement. No source weights downloaded. |
 | Total / active parameters | Integer count, note-only | Q1 total 8.2B is publisher-rounded; active count unknown rather than copying non-embedding count. Closed-model counts remain unknown. |
 | Architecture / layers / heads / head dimension | Strings and integers, note-only | Q2 immutable config; KV geometry handed to #10 without asserting GPU fit. |
@@ -50,7 +52,7 @@ Every field needs a primary URL/access date and version/route conditions. Option
 
 ## Compatibility proposals
 
-See [model/offering/engine rules](rules/model-offering.md) and [context research](context-window.md). Model-format/precision agreement is necessary evidence, not sufficient proof of fit. T2 owns engine/backend/version support and calibrated resource methodology; #36 owns measured task quality. No quality score, latency number or universal best model is asserted.
+See [model/offering rules and shared-family inputs](rules/model-offering.md) and [context research](context-window.md). Former T1-M1/M2 IDs are retired into the #75 joint-support family (COMPUTE-02/ENGINE-02/D-R3) and memory-fit family (COMPUTE-01/W-R6). T1 supplies pinned artifact/geometry/precision/context inputs; T2 owns engine/backend/version support and resource methodology. Missing resource evidence is unknown with `on_unknown: review`, not blocking. Model-format/precision agreement is necessary evidence, not sufficient proof of fit; #36 owns measured quality against a selected target. No quality score, latency number or universal best model is asserted.
 
 ## Pricing and capacity
 
@@ -63,6 +65,8 @@ O3 is the OpenAI Services Agreement effective January 1, 2026: it grants service
 A6 is Anthropic's Commercial Terms effective June17,2025: sectionsA/B cover service permission and customer input/output rights. D.4(a) addresses competing products/model training/resale and contains an express-approval qualification; D.4(b) separately restricts reverse engineering or duplication. No approval exception for clause(b) is inferred. Customer output rights are not a license to model weights or generic training permission. Route/account-specific agreements and policies still apply; Bedrock delivery does not automatically inherit the direct API agreement.
 
 Qwen Q3 supplies this exact checkpoint's Apache-2.0 license; source conditions/notices and derivative lineage must travel with an artifact. G2 supplies Gemini API terms, including paid/unpaid and geographic distinctions. These linked sources and the typed field table supply #30's requested facts; #30 must confirm sufficiency and decide the proposed action. No agreement was accepted and no legal suitability determination was made during research.
+
+The #40 owner's PR #88 review separates answerable license conditions (#81 D-R2a eligibility and D-R2b obligations) from technical offering capability. The proposed `license_conditions` and `licence_answers` resolve once the user answers the reviewed condition; they are not permanently unknown. Their content, binding and migration still need #30/#40 review. GPT-5.4's existing `supports_fine_tuning: false` rejects a direct fine-tuning request on v1 fields alone; a license acknowledgement cannot override that capability failure.
 
 ## Structured artifacts
 

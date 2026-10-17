@@ -8,6 +8,13 @@ This repository holds **research**, not implementation. Every issue tracks evide
 
 ## Issue hierarchy
 
+This section governs technical research issues. The published Apple implementation
+hierarchy is documented separately in [APPLE_DELIVERY_PLAN.md](docs/APPLE_DELIVERY_PLAN.md):
+program → epic → feature/task → implementation and validation subtasks. Its 18 epics
+and 110 work packages align with the Android plan; they do not replace T0–T6 research
+parents, create runtime work in this repository, or require duplicate shared-service
+issues. Preserve live owners and native relationships when linking existing work.
+
 | Level | What it is | Label |
 | --- | --- | --- |
 | Workstream (T0–T6) | Parent issue that groups research for one area and records cross-workstream handoffs | `type: workstream` |

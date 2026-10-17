@@ -103,3 +103,7 @@ If an external decision, unavailable resource or permission blocks an action, co
 ## Required final report
 
 Report #48’s completed and remaining criteria, changed files, source/evidence limitations, actual validation commands/results, branch and commit SHA, pushed remote head, PR URL and base, review/owner dispositions, merge commit and destination, canonical-main verification and any actual Project readback. Separate partial delivery from issue completion. Name the exact missing permission, artifact, experiment, decision or reviewer action when blocked.
+
+## Additional intake: CanIRun.ai (2026-10-16)
+
+Include `canirun-ai` / https://www.canirun.ai/devices in this issue's existing scope. Read [the profile](../../research/market/competitors/canirun-ai.md), `src-canirun-ai` and its matrix cells. Do not conflate it with `canrun` or `canitrun`. Directory inspection is documentary evidence, not a completed scenario. Preserve live owners, prior test order and acceptance gates; this addition does not authorize unrelated work.

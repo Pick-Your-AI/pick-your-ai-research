@@ -16,15 +16,15 @@
     {
       "source_uri": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "EBS supplies block volumes for EC2."
     },
     {
       "source_uri": "https://aws.amazon.com/ebs/pricing/",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "gp3 is metered provisioned storage. Conditional example is not promoted to a regional price."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

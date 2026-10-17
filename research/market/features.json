@@ -16843,6 +16843,504 @@
       "verification_method": "Not verified",
       "access_date": "2026-10-16",
       "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "hardware_fit",
+      "status": "Documented",
+      "evidence_ids": [
+        "src-canirun-ai"
+      ],
+      "basis": "The directory links devices to recommended local models; recommendation accuracy and scenario execution untested.",
+      "verification_method": "Primary page read 2026-10-16; documentation/claim inspection only; bounded execution test not performed.",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Vendor claim",
+      "evidence_url": "https://www.canirun.ai/devices",
+      "confidence": "Medium for the stated documentary boundary; execution unverified",
+      "limitations": "P records only the basis above; it does not pass the full capability test or certify compatibility, performance, persistence, price accuracy or rights.",
+      "audit_scope": "public-docs-2026-10-16"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "hardware_catalog",
+      "status": "Documented",
+      "evidence_ids": [
+        "src-canirun-ai"
+      ],
+      "basis": "Device categories and named device entries are published; completeness and hardware specifications unverified.",
+      "verification_method": "Primary page read 2026-10-16; documentation/claim inspection only; bounded execution test not performed.",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Vendor claim",
+      "evidence_url": "https://www.canirun.ai/devices",
+      "confidence": "Medium for the stated documentary boundary; execution unverified",
+      "limitations": "P records only the basis above; it does not pass the full capability test or certify compatibility, performance, persistence, price accuracy or rights.",
+      "audit_scope": "public-docs-2026-10-16"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "vram_ram",
+      "status": "Documented",
+      "evidence_ids": [
+        "src-canirun-ai"
+      ],
+      "basis": "Device entries display memory capacities; these are not measured model memory requirements.",
+      "verification_method": "Primary page read 2026-10-16; documentation/claim inspection only; bounded execution test not performed.",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Vendor claim",
+      "evidence_url": "https://www.canirun.ai/devices",
+      "confidence": "Medium for the stated documentary boundary; execution unverified",
+      "limitations": "P records only the basis above; it does not pass the full capability test or certify compatibility, performance, persistence, price accuracy or rights.",
+      "audit_scope": "public-docs-2026-10-16"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "canirun-ai",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
     }
   ]
 }
