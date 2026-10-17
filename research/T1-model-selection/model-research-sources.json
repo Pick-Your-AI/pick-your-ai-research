@@ -1,0 +1,2135 @@
+{
+  "format": "research-source-register",
+  "status": "in_progress",
+  "policy": "IDs resolve to actually inspected primary pages or explicitly labeled source limitations. Checked is not independently verified.",
+  "sources": [
+    {
+      "id": "P01",
+      "publisher": "Meta SAM3.1",
+      "urls": [
+        "https://github.com/facebookresearch/sam3/blob/7f473cfd983d5eb43040ff608f66bff0d7bdcb53/README.md",
+        "https://github.com/facebookresearch/sam3/blob/7f473cfd983d5eb43040ff608f66bff0d7bdcb53/LICENSE",
+        "https://huggingface.co/api/models/facebook/sam3.1"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P02",
+      "publisher": "Roboflow RF-DETR",
+      "urls": [
+        "https://github.com/roboflow/rf-detr/blob/5b22dfc0940697ce1abdfa681a5f7392b3eddbfb/README.md",
+        "https://github.com/roboflow/rf-detr/blob/5b22dfc0940697ce1abdfa681a5f7392b3eddbfb/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P03",
+      "publisher": "Ultralytics",
+      "urls": [
+        "https://docs.ultralytics.com/models/yolo26"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P04",
+      "publisher": "IDEA Research",
+      "urls": [
+        "https://huggingface.co/IDEA-Research/grounding-dino-base/blob/12bdfa3120f3e7ec7b434d90674b3396eccf88eb/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P05",
+      "publisher": "Google OWLv2",
+      "urls": [
+        "https://huggingface.co/google/owlv2-base-patch16-ensemble/blob/cfd3195ba4ea9592eec887ded089f4c08eff231d/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P06",
+      "publisher": "Google SigLIP2",
+      "urls": [
+        "https://huggingface.co/google/siglip2-so400m-patch14-384/blob/e8e487298228002f3d8a82e0cd5c8ea9c567f57f/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P07",
+      "publisher": "Meta DINOv3",
+      "urls": [
+        "https://github.com/facebookresearch/dinov3/blob/6876159a11b4df116f30f667f8c9888617df0751/README.md",
+        "https://huggingface.co/api/models/facebook/dinov3-vitl16-pretrain-lvd1689m"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P08",
+      "publisher": "ByteDance Seed DA3",
+      "urls": [
+        "https://huggingface.co/depth-anything/DA3-LARGE-1.1/blob/0e109ae307c5982f319a67cf6f9f99ccdc0ec97c/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P09",
+      "publisher": "ByteDance Seed DA3",
+      "urls": [
+        "https://huggingface.co/depth-anything/DA3-SMALL/blob/e08cab65ca0ec38e7826075418411ab90cab4da3/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P10",
+      "publisher": "Meta CoTracker",
+      "urls": [
+        "https://huggingface.co/facebook/cotracker3/blob/bf55ea50d4390e1820a267f131cd6587240fb2c5/README.md",
+        "https://github.com/facebookresearch/co-tracker/blob/82e02e8029753ad4ef13cf06be7f4fc5facdda4d/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P11",
+      "publisher": "Mistral OCR",
+      "urls": [
+        "https://docs.mistral.ai/models/ocr-4-1",
+        "https://docs.mistral.ai/studio/document-processing/basic_ocr",
+        "https://mistral.ai/news/ocr-4/"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P12",
+      "publisher": "PaddlePaddle",
+      "urls": [
+        "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6/blob/c5630abae1d940eafe0697512a0325494b02ab42/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P13",
+      "publisher": "PaddlePaddle",
+      "urls": [
+        "https://huggingface.co/PaddlePaddle/PP-DocLayoutV3/blob/241f8bdfc77a7c7bee915a5057aaee58c235a8d3/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P14",
+      "publisher": "Z.ai",
+      "urls": [
+        "https://huggingface.co/zai-org/GLM-OCR/blob/2e85a62840ccac27daa451df36c736c4636b8628/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P15",
+      "publisher": "DeepSeek",
+      "urls": [
+        "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2/blob/aaa02f3811945a91062062994c5c4a3f4c0af2b0/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P16",
+      "publisher": "Ai2",
+      "urls": [
+        "https://huggingface.co/allenai/olmOCR-2-7B-1025/blob/e52d6f090b7a9007afffbbd6ce510876222fea93/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P17",
+      "publisher": "Microsoft",
+      "urls": [
+        "https://huggingface.co/microsoft/Florence-2-large/blob/21a599d414c4d928c9032694c424fb94458e3594/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P18",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/blob/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P19",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/blob/e61197ed45024b0ed8a2d74b80b4d909f1255473/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P20",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B/blob/9f2f7e710d6d81056aa5c0a4f04764fec6bb7bda/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P21",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B/blob/4bd860ac4f15ad1897a214615cccc700f8f71818/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P22",
+      "publisher": "BAAI",
+      "urls": [
+        "https://huggingface.co/BAAI/bge-m3/blob/5617a9f61b028005a4858fdac845db406aefb181/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P23",
+      "publisher": "BAAI",
+      "urls": [
+        "https://huggingface.co/BAAI/bge-reranker-v2-m3/blob/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P24",
+      "publisher": "Voyage",
+      "urls": [
+        "https://docs.voyageai.com/docs/embeddings"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P25",
+      "publisher": "Voyage",
+      "urls": [
+        "https://huggingface.co/voyageai/voyage-4-nano/blob/433ece5e27a1611e9360dd7134ecaaf79fb3681d/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P26",
+      "publisher": "Voyage",
+      "urls": [
+        "https://docs.voyageai.com/docs/multimodal-embeddings"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P27",
+      "publisher": "Voyage",
+      "urls": [
+        "https://docs.voyageai.com/docs/reranker"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P28",
+      "publisher": "Cohere",
+      "urls": [
+        "https://docs.cohere.com/docs/cohere-embed"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P29",
+      "publisher": "Cohere",
+      "urls": [
+        "https://docs.cohere.com/v2/docs/single-container-on-private-clouds"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P30",
+      "publisher": "Cohere",
+      "urls": [
+        "https://docs.cohere.com/docs/rerank"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P31",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2",
+        "https://ai.google.dev/gemini-api/docs/embeddings"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P32",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/terms"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P33",
+      "publisher": "Jina",
+      "urls": [
+        "https://huggingface.co/jinaai/jina-embeddings-v4/blob/853c867b65b749f3c3c72a06868140d842e04f06/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P34",
+      "publisher": "ByteDance Seed",
+      "urls": [
+        "https://github.com/ByteDance-Seed/depth-anything-3/blob/3d835ec1a5802d64a8b8b15f817a1ab54809bfe4/README.md",
+        "https://huggingface.co/depth-anything/DA3-LARGE/blob/c54c26b16ec04d218e8d584ecf4bce082a9fcc20/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P35",
+      "publisher": "Roboflow",
+      "urls": [
+        "https://roboflow.com/licensing"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave1",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P36",
+      "publisher": "Meta ConvNeXtV2",
+      "urls": [
+        "https://github.com/facebookresearch/ConvNeXt-V2/blob/2553895753323c6fe0b2bf390683f5ea358a42b9/README.md",
+        "https://github.com/facebookresearch/ConvNeXt-V2/blob/2553895753323c6fe0b2bf390683f5ea358a42b9/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P37",
+      "publisher": "Google EfficientNet",
+      "urls": [
+        "https://github.com/tensorflow/tpu/blob/7dc921f846c9e4071f3884b768a7ddf521272a49/models/official/efficientnet/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P38",
+      "publisher": "Google MobileNet",
+      "urls": [
+        "https://github.com/tensorflow/models/blob/34a21326906b9574fa11c4d6d0a5c534ff039267/research/slim/nets/mobilenet/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P39",
+      "publisher": "Meta Sapiens",
+      "urls": [
+        "https://huggingface.co/facebook/sapiens-pose-1b/blob/d8394afb1a70868611a56fc1b1bec7732fa5b17c/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P40",
+      "publisher": "ViTPose authors",
+      "urls": [
+        "https://github.com/ViTAE-Transformer/ViTPose/blob/c050ed29112da7704797cc1a65af0234b525010d/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P41",
+      "publisher": "Google pose",
+      "urls": [
+        "https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker",
+        "https://storage.googleapis.com/mediapipe-assets/Model%20Card%20BlazePose%20GHUM%203D.pdf"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P42",
+      "publisher": "Google hand",
+      "urls": [
+        "https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker",
+        "https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Hand%20Tracking%20%28Lite_Full%29%20with%20Fairness%20Oct%202021.pdf"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P43",
+      "publisher": "ColPali authors",
+      "urls": [
+        "https://huggingface.co/vidore/colpali-v1.3/blob/b5c6dd62125326e6f0b540c1f7b36e901cdc0a11/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P44",
+      "publisher": "ColQwen authors",
+      "urls": [
+        "https://huggingface.co/vidore/colqwen2-v1.0/blob/2b6ac8fb37f46a49e4841e599583d00ae8a20117/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P45",
+      "publisher": "ColBERT authors",
+      "urls": [
+        "https://huggingface.co/colbert-ir/colbertv2.0/blob/c1e84128e85ef755c096a95bdb06b47793b13acf/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P46",
+      "publisher": "NAVER",
+      "urls": [
+        "https://huggingface.co/naver/splade-v3",
+        "https://huggingface.co/api/models/naver/splade-v3",
+        "https://github.com/naver/splade/blob/8dcd33a054d790e74aceda25b128c1b188c5d9c1/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P47",
+      "publisher": "NAVER",
+      "urls": [
+        "https://huggingface.co/naver/splade-cocondenser-ensembledistil/blob/49cf4c7b0db5b870a401ddf5e2669993ef3699c7/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P48",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/embeddings",
+        "https://developers.openai.com/api/reference/resources/embeddings/methods/create"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P49",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Embedding-4B/blob/5cf2132abc99cad020ac570b19d031efec650f2b/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P50",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Embedding-8B/blob/1d8ad4ca9b3dd8059ad90a75d4983776a23d44af/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P51",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Reranker-4B/blob/22e683669bc0f0bd69640a1354a6d0aebcfeede5/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P52",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Reranker-8B/blob/77d193c791ed757ca307ee72715aa132723da912/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P53",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B/blob/2c4565515e0f265c6511776e7193b22c0968ddc7/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "P54",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B/blob/b212dc8c91a8164aef1ea2de9c1a867611e75c04/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "perception-wave2",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "B01",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B02",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/image-generation"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B03",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/imagen"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B04",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B05",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B06",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/video"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B07",
+      "publisher": "Black Forest Labs",
+      "urls": [
+        "https://docs.bfl.ai/flux_3/flux3_overview"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B08",
+      "publisher": "Black Forest Labs",
+      "urls": [
+        "https://docs.bfl.ai/flux_2/flux2_overview"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B09",
+      "publisher": "Black Forest Labs",
+      "urls": [
+        "https://github.com/black-forest-labs/flux2/blob/50fe5162777813d869182b139e83b10743caef15/README.md",
+        "https://github.com/black-forest-labs/flux2/blob/50fe5162777813d869182b139e83b10743caef15/model_licenses/LICENSE-FLUX-NON-COMMERICAL"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B10",
+      "publisher": "Luma",
+      "urls": [
+        "https://docs.lumalabs.ai/docs/video-generation"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B11",
+      "publisher": "Luma",
+      "urls": [
+        "https://docs.agents.lumalabs.ai/"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B12",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen-Image-2512/blob/25468b98e3276ca6700de15c6628e51b7de54a26/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B13",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen-Image-Edit-2511/blob/6f3ccc0b56e431dc6a0c2b2039706d7d26f22cb9/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B14",
+      "publisher": "Stability AI",
+      "urls": [
+        "https://stability.ai/license"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B15",
+      "publisher": "Stability AI",
+      "urls": [
+        "https://stability.ai/core-models"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B16",
+      "publisher": "Runway",
+      "urls": [
+        "https://docs.dev.runwayml.com/guides/models/"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B17",
+      "publisher": "Wan",
+      "urls": [
+        "https://huggingface.co/Wan-AI/Wan2.2-T2V-A14B/blob/c8c270b13ee05bfa474194ac9fb07a5868a97cea/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B18",
+      "publisher": "Wan",
+      "urls": [
+        "https://huggingface.co/Wan-AI/Wan2.2-Animate-2-14B/blob/6e8f1973bf0abc2aafd517992e8b6d88c3c46e69/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B19",
+      "publisher": "Lightricks",
+      "urls": [
+        "https://huggingface.co/Lightricks/LTX-2.5"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B20",
+      "publisher": "Lightricks",
+      "urls": [
+        "https://github.com/Lightricks/LTX-2/blob/be6d6d0a69d11a0a399c462ed92606692e5f8697/LICENSE",
+        "https://github.com/Lightricks/LTX-2/blob/be6d6d0a69d11a0a399c462ed92606692e5f8697/LICENSE-2_x"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B21",
+      "publisher": "Lightricks",
+      "urls": [
+        "https://huggingface.co/Lightricks/LTX-2.3/blob/3c6a4e66e5d0a684231950b9c74dd4ded7b6fadc/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B22",
+      "publisher": "Tencent",
+      "urls": [
+        "https://huggingface.co/tencent/HunyuanVideo-1.5/blob/9b49404b3f5df2a8f0b31df27a0c7ab872e7b038/README.md",
+        "https://huggingface.co/tencent/HunyuanVideo-1.5/blob/9b49404b3f5df2a8f0b31df27a0c7ab872e7b038/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B23",
+      "publisher": "Tencent",
+      "urls": [
+        "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/82920d643c0dc2f7bfd7255f45f62d386edfe60c/README.md",
+        "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1/blob/82920d643c0dc2f7bfd7255f45f62d386edfe60c/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B24",
+      "publisher": "Microsoft",
+      "urls": [
+        "https://huggingface.co/microsoft/TRELLIS.2-4B/blob/af44b45f2e35a493886929c6d786e563ec68364d/README.md",
+        "https://github.com/microsoft/TRELLIS.2/blob/75fbf0183001ed9876c8dbb35de6b68552ee08bd/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B25",
+      "publisher": "VAST",
+      "urls": [
+        "https://huggingface.co/VAST-AI/TripoSG/blob/2c1c516d22d58db486a058d98d31bb6177344e06/README.md",
+        "https://github.com/VAST-AI-Research/TripoSG/blob/fc5c40990181e2a756c4e0b1c2f4d6b5202faf8c/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B26",
+      "publisher": "VAST",
+      "urls": [
+        "https://huggingface.co/VAST-AI/TripoSG-scribble/blob/e70b06bad2dece5b6a359aa8cd12f538cabd7095/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B27",
+      "publisher": "Stability/Tripo",
+      "urls": [
+        "https://huggingface.co/stabilityai/TripoSR/blob/5b521936b01fbe1890f6f9baed0254ab6351c04a/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B28",
+      "publisher": "Tencent",
+      "urls": [
+        "https://github.com/Tencent-Hunyuan/HY-World-2.0/blob/df9988efb87bfc0f4947eb3889411cf957478b06/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B29",
+      "publisher": "World Labs",
+      "urls": [
+        "https://www.worldlabs.ai/blog/announcing-the-world-api"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B30",
+      "publisher": "Adobe",
+      "urls": [
+        "https://developer.adobe.com/firefly-services/docs/firefly-api/guides/how-tos/cm-generate-image/feature-guide"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B31",
+      "publisher": "Adobe",
+      "urls": [
+        "https://developer.adobe.com/firefly-services/docs/firefly-api/guides/how-tos/cm-generate-image/breaking-changes"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave1",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B32",
+      "publisher": "ByteDance/BytePlus",
+      "urls": [
+        "https://docs.byteplus.com/en/docs/modelark/model-release-announcement"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B33",
+      "publisher": "Kuaishou",
+      "urls": [
+        "https://ir.kuaishou.com/news-releases/news-release-details/kling-ai-launches-30-model-ushering-era-where-everyone-can-be"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B34",
+      "publisher": "MiniMax",
+      "urls": [
+        "https://platform.minimax.io/docs/api-reference/video-generation-v2-create"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B35",
+      "publisher": "MiniMax",
+      "urls": [
+        "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/42ed227ee7df40d41602854ae760620d6eb651fe/README.md",
+        "https://www.minimax.io/news/minimax-h3-open-source"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B36",
+      "publisher": "MiniMax",
+      "urls": [
+        "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/42ed227ee7df40d41602854ae760620d6eb651fe/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B37",
+      "publisher": "xAI",
+      "urls": [
+        "https://docs.x.ai/developers/model-capabilities/video/overview"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B38",
+      "publisher": "xAI",
+      "urls": [
+        "https://docs.x.ai/developers/models/grok-imagine-image-2.0"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B39",
+      "publisher": "xAI",
+      "urls": [
+        "https://docs.x.ai/developers/migration/imagine-image-quality-nov-2"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B40",
+      "publisher": "Recraft",
+      "urls": [
+        "https://www.recraft.ai/docs/api-reference/models/recraft-v4-1"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B41",
+      "publisher": "Midjourney",
+      "urls": [
+        "https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B42",
+      "publisher": "Midjourney",
+      "urls": [
+        "https://docs.midjourney.com/hc/en-us/articles/32013696484109-Community-Guidelines"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B43",
+      "publisher": "BRIA",
+      "urls": [
+        "https://docs.bria.ai/products-overview"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B44",
+      "publisher": "BRIA",
+      "urls": [
+        "https://huggingface.co/api/models/briaai/FIBO",
+        "https://huggingface.co/api/models/briaai/FIBO-lite"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B45",
+      "publisher": "Black Forest Labs",
+      "urls": [
+        "https://huggingface.co/black-forest-labs/flux-3-action-base",
+        "https://huggingface.co/api/models/black-forest-labs/flux-3-action-so101"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B46",
+      "publisher": "Black Forest Labs",
+      "urls": [
+        "https://huggingface.co/black-forest-labs/flux-3-action-base/blob/main/LICENSE.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B47",
+      "publisher": "Black Forest Labs",
+      "urls": [
+        "https://huggingface.co/api/models/black-forest-labs/flux-3-image-klein"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B48",
+      "publisher": "World Labs",
+      "urls": [
+        "https://atlas-beta.worldlabs.ai/docs/api-reference"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B49",
+      "publisher": "World Labs",
+      "urls": [
+        "https://atlas-beta.worldlabs.ai/docs/api-reference/atlas-generate"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "B50",
+      "publisher": "World Labs",
+      "urls": [
+        "https://atlas-beta.worldlabs.ai/docs/api-reference/splats2-mesh"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "media-wave2",
+      "verification": "checked; no independent generation"
+    },
+    {
+      "id": "U01",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/gpt-transcribe",
+        "https://developers.openai.com/api/docs/guides/transcription"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U02",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/gpt-live-transcribe"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U03",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/speech-to-text"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U04",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/deprecations"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U05",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/gpt-audio-1.5"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U06",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/gpt-realtime-2.1"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U07",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/text-to-speech",
+        "https://developers.openai.com/api/docs/guides/custom-voices"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U08",
+      "publisher": "ElevenLabs",
+      "urls": [
+        "https://elevenlabs.io/docs/overview/models",
+        "https://elevenlabs.io/terms-of-use",
+        "https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U09",
+      "publisher": "Google",
+      "urls": [
+        "https://docs.cloud.google.com/speech-to-text/docs/models/chirp-3"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U10",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U11",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/lyria-3.5",
+        "https://ai.google.dev/gemini-api/docs/music-generation"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U12",
+      "publisher": "Deepgram",
+      "urls": [
+        "https://developers.deepgram.com/docs/models-languages-overview",
+        "https://developers.deepgram.com/docs/tts-models"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U13",
+      "publisher": "Cartesia",
+      "urls": [
+        "https://docs.cartesia.ai/build-with-cartesia/tts-models/latest"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "U14",
+      "publisher": "AWS",
+      "urls": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-sonic.html"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W01",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://github.com/openai/whisper/blob/86098128c0b4f24f0e2aa2994de830614b474227/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W02",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-ASR-1.7B/blob/7278e1e70fe206f11671096ffdd38061171dd6e5/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W03",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice/blob/0c0e3051f131929182e2c023b9537f8b1c68adfe/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W04",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base/blob/fd4b254389122332181a7c3db7f27e918eec64e3/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W05",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen2-Audio-7B-Instruct/blob/0a095220c30b7b31434169c3086508ef3ea5bf0a/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W06",
+      "publisher": "NVIDIA",
+      "urls": [
+        "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3/blob/541d1f99c6b0c3cd0b11a95167540bb8edefd82b/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W07",
+      "publisher": "NVIDIA",
+      "urls": [
+        "https://huggingface.co/nvidia/canary-1b-v2/blob/d455706339a6b32e1aa40f82c713a482a0c938e2/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W08",
+      "publisher": "NVIDIA",
+      "urls": [
+        "https://huggingface.co/nvidia/canary-qwen-2.5b/blob/b1469e1bba1cfe140205529c79c434ca47180960/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W09",
+      "publisher": "hexgrad",
+      "urls": [
+        "https://huggingface.co/hexgrad/Kokoro-82M/blob/f3ff3571791e39611d31c381e3a41a3af07b4987/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W10",
+      "publisher": "Resemble AI",
+      "urls": [
+        "https://huggingface.co/ResembleAI/chatterbox/blob/5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18/README.md",
+        "https://github.com/resemble-ai/chatterbox/blob/5de7a54aa4e5e2baadb0182dde554908b48b85c2/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W11",
+      "publisher": "F5-TTS authors",
+      "urls": [
+        "https://huggingface.co/SWivid/F5-TTS/blob/84e5a410d9cead4de2f847e7c9369a6440bdfaca/README.md",
+        "https://github.com/SWivid/F5-TTS/blob/2f866649b779881af8bd644e76b9a6d95053da29/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W12",
+      "publisher": "Kyutai",
+      "urls": [
+        "https://huggingface.co/kyutai/moshiko-pytorch-bf16/blob/2bfc9ae6e89079a5cc7ed2a68436010d91a3d289/README.md",
+        "https://github.com/kyutai-labs/moshi/blob/e6a55d2722a65870ef52a6c9f6ecfc0e90f38362/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W13",
+      "publisher": "Meta",
+      "urls": [
+        "https://huggingface.co/facebook/seamless-m4t-v2-large/blob/5f8cc790b19fc3f67a61c105133b20b34e3dcb76/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W14",
+      "publisher": "Meta",
+      "urls": [
+        "https://huggingface.co/facebook/musicgen-large/blob/15ccdc92099879e47b6da12c350cdb71d4eab3ca/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W15",
+      "publisher": "Stability AI",
+      "urls": [
+        "https://huggingface.co/stabilityai/stable-audio-open-1.0",
+        "https://huggingface.co/stabilityai/stable-audio-open-1.0/blob/main/LICENSE.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W16",
+      "publisher": "ACE-Step",
+      "urls": [
+        "https://huggingface.co/ACE-Step/Ace-Step1.5/blob/19671f406d603126926c1b7e2adc169acbcade22/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W17",
+      "publisher": "Google",
+      "urls": [
+        "https://huggingface.co/google/magenta-realtime/blob/c05f8d6d608afd588469b7a8ef0929d5a1f8f6bb/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W18",
+      "publisher": "M-A-P",
+      "urls": [
+        "https://huggingface.co/m-a-p/YuE-s1-7B-anneal-en-cot/blob/454c20e1748888800f8e4b3da45125f55482d967/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W19",
+      "publisher": "LAION",
+      "urls": [
+        "https://huggingface.co/laion/clap-htsat-unfused/blob/8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a/README.md",
+        "https://github.com/LAION-AI/CLAP/blob/1fd4c37df5ffbfcfbad5415c170bc66cf94c9994/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W20",
+      "publisher": "Microsoft",
+      "urls": [
+        "https://github.com/microsoft/unilm/blob/31c5b904ca1bf2afb4c234a6675c683a4e5fc7cd/beats/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W21",
+      "publisher": "Meta",
+      "urls": [
+        "https://github.com/facebookresearch/demucs/blob/e976d93ecc3865e5757426930257e200846a520a/README.md",
+        "https://github.com/facebookresearch/demucs/blob/e976d93ecc3865e5757426930257e200846a520a/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W22",
+      "publisher": "DeepFilterNet authors",
+      "urls": [
+        "https://github.com/Rikorose/DeepFilterNet/blob/d375b2d8309e0935d165700c91da9de862a99c31/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "W23",
+      "publisher": "pyannote",
+      "urls": [
+        "https://huggingface.co/pyannote/speaker-diarization-community-1"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave1",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C01",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/gpt-live-1"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C02",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/gpt-realtime-translate",
+        "https://developers.openai.com/api/docs/guides/realtime-translation"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C03",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C04",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C05",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-ForcedAligner-0.6B/blob/c7cbfc2048c462b0d63a45797104fc9db3ad62b7/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C06",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign/blob/5ecdb67327fd37bb2e042aab12ff7391903235d3/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C07",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct/blob/26291f793822fb6be9555850f06dfe95f2d7e695/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C08",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Captioner/blob/a2bd106cbf527db5676e79662674da22b0545ec0/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C09",
+      "publisher": "Google",
+      "urls": [
+        "https://github.com/tensorflow/models/blob/34a21326906b9574fa11c4d6d0a5c534ff039267/research/audioset/yamnet/README.md",
+        "https://www.tensorflow.org/hub/tutorials/yamnet"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C10",
+      "publisher": "AST authors / HF conversion",
+      "urls": [
+        "https://huggingface.co/MIT/ast-finetuned-audioset-10-10-0.4593/blob/f826b80d28226b62986cc218e5cec390b1096902/README.md",
+        "https://github.com/YuanGongND/ast/blob/31088be8a3f6ef96416145c4b8d43c81f99eba7a/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C11",
+      "publisher": "SpeechBrain authors",
+      "urls": [
+        "https://huggingface.co/speechbrain/sepformer-whamr/blob/9950fd8055b38679d2af5bef2366b5dba600ec66/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C12",
+      "publisher": "NVIDIA",
+      "urls": [
+        "https://huggingface.co/nvidia/diar_streaming_sortformer_4spk-v2.1/blob/cd03eee90fbec18297ac31b8c21546e596b7f71c/README.md",
+        "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C13",
+      "publisher": "NVIDIA",
+      "urls": [
+        "https://huggingface.co/nvidia/Nemotron-3-Diarization/blob/f667ed73aee57d40cc39428eb768b4fd87a0a29e/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C14",
+      "publisher": "Silero",
+      "urls": [
+        "https://github.com/snakers4/silero-vad/blob/1e261b036686cd0017d500ee96acd1c4ba572a9d/README.md",
+        "https://github.com/snakers4/silero-vad/blob/1e261b036686cd0017d500ee96acd1c4ba572a9d/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C15",
+      "publisher": "FunAudioLLM",
+      "urls": [
+        "https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512/blob/29e01c4e8d000f4bcd70751be16fa94bf3d85a18/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C16",
+      "publisher": "Suno",
+      "urls": [
+        "https://huggingface.co/suno/bark/blob/70a8a7d34168586dc5d028fa9666aceade177992/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C17",
+      "publisher": "Microsoft",
+      "urls": [
+        "https://huggingface.co/microsoft/VibeVoice-1.5B/blob/c00898d257e6b46004e3e2866a47534085fb685a/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "C18",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/pricing"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "audio-wave2",
+      "verification": "checked; no independent audio inference"
+    },
+    {
+      "id": "R01",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models",
+        "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R02",
+      "publisher": "Anthropic",
+      "urls": [
+        "https://platform.claude.com/docs/en/models/overview",
+        "https://platform.claude.com/docs/en/models/opus-5-5/overview"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R03",
+      "publisher": "Google",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R04",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R05",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://huggingface.co/openai/gpt-oss-20b/blob/6cee5e81ee83917806bbde320786a8fb61efebee/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R06",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/blob/b2cff646eb4bb1d68355c01b18ae02e7cf42d120/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R07",
+      "publisher": "Mistral",
+      "urls": [
+        "https://docs.mistral.ai/models/mistral-large"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R08",
+      "publisher": "Meta",
+      "urls": [
+        "https://huggingface.co/meta-llama/Llama-4-Scout-17B-16E-Instruct"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R09",
+      "publisher": "Amazon",
+      "urls": [
+        "https://huggingface.co/amazon/chronos-2/blob/29ec3766d36d6f73f0696f85560a422f50e8498c/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R10",
+      "publisher": "Google",
+      "urls": [
+        "https://github.com/google-research/timesfm/blob/e51928e27119cb17bebc005be2696b75e0a9e688/README.md",
+        "https://huggingface.co/google/timesfm-3.0-pytorch/blob/43046b85ec22d584a13f8098c2ed39c889e129c2/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R11",
+      "publisher": "Prior Labs",
+      "urls": [
+        "https://docs.priorlabs.ai/models"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R12",
+      "publisher": "Auton Lab",
+      "urls": [
+        "https://huggingface.co/AutonLab/MOMENT-1-large/blob/ca58581bc7bea2ebed4e80dc0a3e4b8b609c6ecc/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R13",
+      "publisher": "Google DeepMind",
+      "urls": [
+        "https://github.com/google-deepmind/weathernext/blob/f2f2c5117d2f864e2d5e7c2f9f220db5e1049dd3/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R14",
+      "publisher": "IBM/NASA/JSC",
+      "urls": [
+        "https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-600M/blob/2a5cf6cedea1c0b31734021e2a5ac90082825414/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R15",
+      "publisher": "Boltz authors",
+      "urls": [
+        "https://github.com/jwohlwend/boltz/blob/b1ebfc46ecf57f5414e0d1a6f9027bbb122c53bc/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R16",
+      "publisher": "Biohub",
+      "urls": [
+        "https://huggingface.co/biohub/ESMFold2/blob/69869f737beffec5294845ede23db5fc0b4f509e/README.md",
+        "https://github.com/Biohub/esm/blob/43b4548b86762edfa747b07d5f440aad3c33acee/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R17",
+      "publisher": "Arc Institute",
+      "urls": [
+        "https://huggingface.co/arcinstitute/evo2_40b_base/blob/a91f87a93194a23d553186b11e11c55d66456d55/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R18",
+      "publisher": "Google DeepMind",
+      "urls": [
+        "https://github.com/google-deepmind/alphafold3",
+        "https://github.com/google-deepmind/alphafold3/blob/main/WEIGHTS_TERMS_OF_USE.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R19",
+      "publisher": "Meta FAIR",
+      "urls": [
+        "https://huggingface.co/facebook/UMA",
+        "https://huggingface.co/facebook/UMA/blob/main/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R20",
+      "publisher": "Physical Intelligence",
+      "urls": [
+        "https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/README.md",
+        "https://github.com/Physical-Intelligence/openpi/blob/215abfb217dbac7d5f1273282331b9b1866c0479/LICENSE"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R21",
+      "publisher": "OpenVLA authors",
+      "urls": [
+        "https://huggingface.co/openvla/openvla-7b/blob/47a0ec7fc4ec123775a391911046cf33cf9ed83f/README.md",
+        "https://github.com/openvla/openvla/blob/c8f03f48af692657d3060c19588038c7220e9af9/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R22",
+      "publisher": "Meta RecSys",
+      "urls": [
+        "https://github.com/meta-recsys/generative-recommenders"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R23",
+      "publisher": "Microsoft",
+      "urls": [
+        "https://github.com/microsoft/Graphormer"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R24",
+      "publisher": "scikit-learn developers",
+      "urls": [
+        "https://scikit-learn.org/stable/model_persistence.html"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R25",
+      "publisher": "XGBoost developers",
+      "urls": [
+        "https://github.com/dmlc/xgboost"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-language-specialized",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R26",
+      "publisher": "OpenAI",
+      "urls": [
+        "https://developers.openai.com/api/docs/models/omni-moderation-latest"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-expansion3",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R27",
+      "publisher": "Meta",
+      "urls": [
+        "https://huggingface.co/facebook/nllb-200-distilled-600M/blob/f8d333a098d19b4fd9a8b18f94170487ad3f821d/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-expansion3",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R28",
+      "publisher": "Answer.AI",
+      "urls": [
+        "https://huggingface.co/answerdotai/ModernBERT-base/blob/8949b909ec900327062f0ebf497f51aef5e6f0c8/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-expansion3",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R29",
+      "publisher": "dslim",
+      "urls": [
+        "https://huggingface.co/dslim/bert-base-NER/blob/d1a3e8f13f8c3566299d95fcfc9a8d2382a9affc/README.md"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-expansion3",
+      "verification": "checked; no independent inference"
+    },
+    {
+      "id": "R30",
+      "publisher": "Real-ESRGAN authors",
+      "urls": [
+        "https://github.com/xinntao/Real-ESRGAN"
+      ],
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation",
+      "observer_group": "root-expansion3",
+      "verification": "checked; no independent inference"
+    }
+  ]
+}
