@@ -58,7 +58,7 @@ Control types. The "v1 mapping" column shows which `spec_guardrail` enums can ex
 | OpenAI Moderation | API (standalone endpoint, or inline with Responses or Chat) | C-01, C-02. Some categories are text only; no audio | `omni-moderation-latest`. The application sets thresholds | Returns flags and scores; it does not block. OpenAI: "Treat moderation scores as signals ... not as an automatic blocking decision." The moderation result can be an error. Tool names and schemas are not covered | "Free to use"; requires an API account | E01 |
 | Amazon Bedrock Guardrails | Managed. Can be called with Bedrock models, or through `ApplyGuardrail` without invoking a model | C-01–C-03 (content filters include Prompt Attack), denied topics, word filters, C-06 (block or mask, plus regex), C-11 (contextual grounding), Automated Reasoning | Strength per category; versioned guardrails; Classic and Standard tiers; input tagging to evaluate only part of a prompt (SDK only) | Configurable blocked message; block or mask per filter | AWS account; regions and models listed separately (not fetched); page undated | E02 |
 | Azure AI Content Safety, including Prompt Shields | Managed (standalone API); also built into Foundry deployments | C-01, C-02 (four categories, severity levels), C-03 (user prompt attacks), C-04 and C-05 (document attacks; tool-response scan in preview), C-11 (groundedness), protected material | Foundry: user-prompt shield on by default, document-attack shield off by default. Default filters apply to Foundry models; turning them off needs approval | In the API, "the application decides" whether to allow or block. In Foundry, blocking happens before the model when enabled. Prompt Shields do not judge harm or grounding | Last updated 2026-10-01 and 2026-10-14; mostly trained on English; region-limited | E03–E05 |
-| Google Gemini safety filters (Vertex / Agent Platform) | API, managed | C-01, C-02 (four harm categories); fixed CSAM and SPII filters; citation filter | `SafetySetting` threshold per category, by SEVERITY or PROBABILITY | `OFF` is the default for `gemini-3.5-flash` and later models, so no filtering unless configured. A block stops token generation and returns a reason code | Last updated 2026-10-15 | E06 |
+| Google Gemini safety filters (Vertex / Agent Platform) | API, managed | C-01, C-02 (four harm categories); fixed CSAM and SPII filters; citation filter | `SafetySetting` threshold per category, by SEVERITY or PROBABILITY | `OFF` is the default for `gemini-3.5-flash` and later models, so configurable harm filtering is off unless configured; non-configurable CSAM/SPII protections remain. A block stops token generation and returns a reason code | Last updated 2026-10-15 | E06 |
 | Anthropic Claude | API | Built-in real-time safeguards (not configurable). Documented patterns for C-03–C-05: a Haiku harmlessness screen, untrusted content only in `tool_result`, least privilege | Prompting and screening done by the application | A block is not by itself a policy violation. The screening model can itself refuse, which leaves no verdict to read | Usage Policy shows "Effective November 12, 2026" (later than the access date; the version in force today was not read) | E07, E08 |
 | Meta Llama Guard 4 (12B) | Self-hosted classifier | C-01, C-02 for text and images; 14 hazards from the MLCommons taxonomy, including S14 Code Interpreter Abuse | Classifies prompts and responses; the host enforces | The card says it "may be susceptible to adversarial attacks or prompt injection" and points to Prompt Guard 2 for that | Card at PurpleLlama `cd9fe6579234` (2025-04-29). Llama 4 Community License, effective 2025-04-05. HF repo is gated (manual approval); weights were not accessed | E09 |
 | Meta Llama Prompt Guard 2 (86M) | Self-hosted classifier | C-03, C-04, C-05 | Context window of 512 tokens; longer inputs must be split into segments | No separate injection sub-label | Same commit and licence as Llama Guard 4; gated | E10 |
@@ -99,11 +99,11 @@ A hosted guardrail used from a self-hosted or API build sends prompts and output
 - `targets` lacks `memory` (needed for C-14).
 - `policies` lacks `grounding` (C-11) and `output_encoding` (C-10).
 - No metric or field for rate limits or quotas (C-12), and no workload flag for high-risk decisions (C-13).
-- `role: "primary"` references can check only one guardrail. A build with separate input and output guardrails cannot pass `rule.t6.guardrail.model.io`. This is the same per-selection quantifier gap that PR #70 raised.
+- `role: "primary"` references can check only one guardrail. A build with separate input and output guardrails returns `unknown` (`unsupported_selection_quantifier`, `on_unknown: review`) until coverage can be quantified across selections; it must not receive a false `fail`. This is the same per-selection quantifier gap that PR #70 raised.
 
 ## Compatibility proposals
 
-All rules are **hypotheses**: builder policy resting on premises that were source checked. Outcome and severity are separate fields. Every rule uses `severity: warning` and `on_unknown: review`, so missing catalog data gives `unknown`, never `pass`. A missing guardrail selection gives `fail`. The baseline rules stay in force and are not duplicated:
+All rules are **hypotheses**: builder policy resting on premises that were source checked. Outcome and severity are separate fields. Except for the separate production-only G-R1b candidate below, every rule uses `severity: warning` and `on_unknown: review`, so missing catalog data gives `unknown`, never `pass`. A missing guardrail selection gives `fail`. The baseline rules stay in force and are not duplicated:
 
 - `rule.tool.mutation.guardrails` (error);
 - `rule.production.gates` (error: production needs a guardrail);
@@ -115,6 +115,7 @@ T4 rules `rule.t4.tool.guardrail.targets`, `rule.t4.tool.guardrail.enforcement`,
 | Rule | Applies when | Asserts | Premise evidence | Synthetic pass / fail / unknown or skipped |
 | --- | --- | --- | --- | --- |
 | G-R1 `rule.t6.guardrail.model.io` | A model is selected | A guardrail exists and its targets include `input` and `output` | E01–E06 (provider filters are optional, off by default, or signal-only) | Fixture: pass · guardrail removed: fail · catalog item missing: unknown |
+| G-R1b `rule.t6.guardrail.model.io.production` | A model is selected and deployment is production | Same input/output coverage assertion as G-R1; fixed severity `error`, `on_unknown: review`; unsupported multiple-selection quantification gives unknown | Policy proposal, requires #35/#40 acceptance | pass / fail / unknown as G-R1 |
 | G-R2 `rule.t6.guardrail.retrieval.injection` | `rag_pipeline` or `knowledge_base` selected | Targets include `retrieval`; policies include `prompt_injection` | E04 (document attacks off by default), E11, E15 | pass / fail (output-only guardrail) / unknown |
 | G-R3 `rule.t6.guardrail.tool.injection` | `tool` or `mcp_server` selected | Targets include `tool`; policies include `prompt_injection` | E08, E15; PR #71 ("treat tool output as untrusted regardless of `trust_level`") | pass / fail / unknown |
 | G-R4 `rule.t6.guardrail.data.pii` | `data_classification` is confidential or restricted | Policies include `pii`; targets include `output` | E02, E13, E19 | Restricted: pass · internal fixture: skipped |
@@ -126,7 +127,7 @@ Each rule has the same remaining fields:
 
 - **Dependency edges:** guardrail ↔ the named kind.
 - **Consumers:** #36, #37, #38, and the T4 owners.
-- **Version impact:** none. The rules use v1 fields and operators only.
+- **Version impact:** cross-selection quantification remains a #40 gap; use unknown until supported. No frozen schema changes.
 - **Remediation:** select or configure the missing control, or record an exception that an owner has approved.
 
 Validation: the JSON below is valid against `ruleset.schema.json`. It was evaluated with `contracts/v1/reference/evaluate.py` against `contracts/v1/examples/` and against five synthetic variants built in a temporary directory and not committed. The outcomes match the table above. All examples are synthetic.
@@ -211,7 +212,7 @@ All accessed 2026-10-17. Grade: primary documentation unless noted. Every fetch 
 
 | # | Decision |
 | --- | --- |
-| Q1 | Which controls are baseline and which conditional? Should G-R1 be `error` for production builds (it is `warning` now)? |
+| Q1 | Which controls are baseline and which conditional? Review separate production-only G-R1b (`error`); G-R1 remains fixed `warning`. |
 | Q2 | Default failure behaviour: fail-closed for tool and retrieval guards, but fail-open with audit for chat moderation? Or fail-closed everywhere? |
 | Q3 | May a provider's built-in filter satisfy G-R1? If so, what evidence and settings must the selection record? |
 | Q4 | Should audit-only enforcement be allowed in production with an approved exception (G-R6)? |
@@ -231,3 +232,11 @@ All accessed 2026-10-17. Grade: primary documentation unless noted. Every fetch 
 | Guardrail pricing (Bedrock, Azure, Google) | #39 · @appletechie, @PUSHINGSQUARES | Pending |
 | Classifier GPU sizing (Llama Guard 4) | #10 · @Mattycodes69 | Pending |
 | Terms restrictions (row #6 -> #35) | #6 · @zwright8 | Pending; no claim here depends on it |
+
+### Review clarification (2026-10-17)
+
+G-R1 establishes input/output target coverage only. A PII-only guardrail may satisfy it; that does not establish content or prompt-injection baseline coverage, which needs separate policy assertions and #35/#40 acceptance. Evaluate separate input and output controls jointly when supported, otherwise return unknown with the quantifier-gap reason above.
+
+Mode is assigned to each guardrail runtime under merged #81: provider-operated shared Bedrock Guardrails, Azure AI Content Safety and moderation endpoints are `api`, including when a managed model invokes them. `managed` requires dedicated/reserved capacity for that component. The model deployment mode is not inherited by its guardrail. Mode columns describing the caller are applicability, not guardrail mode.
+
+The #121-first integration order and pending owner decisions are unchanged.
