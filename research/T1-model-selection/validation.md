@@ -2,6 +2,30 @@
 
 This file records actual checks of this contribution. Preparation and automation do not verify vendor truth, account access, independent performance, source reuse rights, owner acceptance or merge.
 
+## Broad-family and retrospective citations: 2026-10-17
+
+The earlier contribution is now traced in [the citation audit](citation-audit-2026-10-17.md) and [123-cell market citation index](../market/citation-index-2026-10-17.md). Historical access dates are retained. The broader research adds 248 candidate records across six comparison tables, with 189 primary source groups, 237 distinct URLs across 38 domains and 55 overlapping task tags. These are corpus counts, not a global census or 248 independently pinned deployable models.
+
+Current-main integration was recorded at `d1c8b7f877a4a814c2456d2c9a89c439fe6643ab`. The additive source-register conflict preserved both the new GPUs.io observation and main's CanIRun repository correction. Frozen `contracts/v1` files are unchanged.
+
+Executed with `.venv/bin/python` (Python 3.12) from the repository root:
+
+| Check | Actual result |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt` | Exit 0; pinned requirements already installed |
+| `python -m unittest discover -s contracts/v1/tests -v` | Exit 0; 21 tests passed at the integrated head |
+| `python -m unittest discover -s tests -v` | Exit 0; 24 tests passed at the integrated head |
+| `python scripts/validate_research.py` | Exit 0; 30 catalog proposals / 2 pricebooks plus external evidence metadata |
+| `python scripts/validate_market_research.py` | Exit 0; 33 entities / 1,584 cells / 20 issues |
+| Additional JSON/table/reference checks after factual corrections | 248 unique records; all source IDs resolve; all 248 table rows match the inventory; zero broken local T1 document links; source and task counts above |
+| `git diff --check` | Exit 0 |
+
+An independent read-only artifact review at `d1c8b7f` reran the suites/validators, reconciled all table and market citation mappings and checked primary-source samples. It requested two factual corrections: Grok 1.5 variants had inherited older-route editing/clip input, and six Qwen rows blurred text/multimodal vectors with rerank relevance. Both are corrected in JSON and Markdown against B37/P49–P54. Main-session source review also removed the unsupported Whisper turbo translation tag against W01, and removed unrelated legacy-retirement boilerplate from newer audio rows. The earlier review is not an approval of a later revision.
+
+A correction gate at `af2ed75` found that the JSON task-tag edit had matched Whisper large-v3 instead of turbo. The named records were corrected explicitly: large-v3 retains translation, turbo has speech recognition only. A stronger final comparison checks every table column, complete task-tag lists and exact source links for all 248 rows, plus explicit Grok/Whisper variant assertions; it passes. Earlier partial-field assertions were insufficient for this mismatch and are superseded by that full comparison. The 21+24 tests and both validators also passed at `af2ed75`; they do not check these documentary task semantics.
+
+The normal submission validator does not ingest the new research-only inventory; its separate assertions check structure and mapping. Neither check establishes source truth for every claim, legal sufficiency, freshness, account access, runtime performance or consumer acceptance. No paid API, inference/GPU, scientific or robot experiment was performed. Missing Biome LSP was not installed after the user's prior decline. Contract and receiving-owner reviews remain in [the handoff ledger](handoffs.md); this checkpoint uses `Refs`, not issue closure.
+
 ## Central-review follow-up: 2026-10-17
 
 Applied the five corrections requested in the [central owner's PR #88 review at `dbfa7dd`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868). The read-only GitHub API response confirms review ID `5554964868`, reviewer `tynamite`, reviewed commit `dbfa7dd13a7f732bff0653ae6ab45f55b2782f20` and submitted time 2026-10-17T00:07:36Z. #75's shared-family disposition and #81's proposed W-R10/D-R2a/b were read separately; the latter was pinned at `9786ef6f9a7942b21a3cc51a05df741360e3594f`. This is documentation reconciliation, with no generated contract, catalog fact or price change and no production evaluator added.
