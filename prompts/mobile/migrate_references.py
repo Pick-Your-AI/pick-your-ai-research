@@ -26,7 +26,7 @@ def rewrite(text, mapping, qualify_bare=False):
     def protect(match):
         label, target = match[1], match[2]
         target = url(target)
-        linked = re.fullmatch(r'https://github\.com/(Pick-Your-AI/[\w.-]+)/issues/(\d+)', target)
+        linked = re.fullmatch(r'https://github\.com/(Pick-Your-AI/[\w.-]+)/issues/(\d+)(?:[?#].*)?', target)
         if linked:
             label = (f'{linked[1]}#{linked[2]}' if label.isdigit() else
                      re.sub(r'(?:Pick-Your-AI/[\w.-]+)?#\d+',

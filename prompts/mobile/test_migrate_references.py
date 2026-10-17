@@ -32,6 +32,12 @@ class ReferenceMigrationTests(unittest.TestCase):
         self.assertEqual(result, '[Pick-Your-AI/pick-your-ai-apple#22](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/22)')
         self.assertEqual(rewrite(result, self.mapping, True), result)
 
+    def test_comment_anchor_keeps_destination_identity(self):
+        source = '[#184](https://github.com/Pick-Your-AI/pickyour.ai/issues/184#issuecomment-123)'
+        expected = '[Pick-Your-AI/pick-your-ai-apple#22](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/22#issuecomment-123)'
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+        self.assertEqual(rewrite(expected, self.mapping, True), expected)
+
     def test_previous_generator_research_misqualification(self):
         self.assertEqual(rewrite('research Pick-Your-AI/pickyour.ai#40', self.mapping),
                          'research Pick-Your-AI/pick-your-ai-research#40')
