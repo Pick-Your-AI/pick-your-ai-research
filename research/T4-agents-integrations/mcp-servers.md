@@ -229,7 +229,7 @@ These rules are proposed for review by #40.
 **Relation to the baseline:**
 - `rule.agent.mcp.framework` checks only `agent_framework.spec.supports_mcp`. That boolean cannot express transport, protocol era, auth flow or client capabilities. The rules below **extend** it and do not replace it. The boolean should be kept as a coarse gate until the #40 fields exist.
 - `rule.tool.mutation.guardrails` is gated on the metric `tools.mutating_count`. The reference evaluator counts only selections of kind `tool`, so **MCP server tools are invisible to it** (problem flagged). `rule.t4.mcp.mutation.guardrails` closes this gap for v1.
-- **All `role: primary` refs resolve only when exactly one active selection matches.** Builds with two or more MCP servers evaluate to `unknown` for every rule here. Per-server iteration needs a contract change (#40).
+- **All `role: primary` refs resolve only when exactly one active selection matches.** With two or more enabled MCP servers sharing role `primary`, those references are ambiguous. The six v1 rules below guard applicability with `exists` on that selection; the guard is false and each rule is `skipped`, so the servers are not checked individually. Per-server iteration needs a contract change (#40).
 
 ### Rule summary
 
@@ -843,7 +843,7 @@ assert: registry_namespace_matches(catalog mcp_server /spec/registry_name,     #
    - add `required_scopes` (`spec_tool` has this field; `spec_mcp_server` does not).
 6. Add `spec_mcp_server.read_only_mode_supported: boolean`.
 7. Add to `spec_agent_framework`: `mcp_client_transports`, `mcp_protocol_versions`, `mcp_client_capabilities`, `mcp_oauth_modes` ∈ {interactive, token_injection, none}, `mcp_auth_extensions`, `mcp_runtime` ∈ {in_process, provider_hosted}.
-8. Rules need per-selection iteration (for example "for each mcp_server selection") or a metric such as `mcp.untrusted_count`. Otherwise builds with several servers are always `unknown`.
+8. Rules need per-selection iteration (for example "for each mcp_server selection") or a metric such as `mcp.untrusted_count`. Otherwise the six v1 rules above are `skipped` when several enabled MCP servers share role `primary`, rather than checking each server.
 9. Extend the metric `tools.mutating_count` to include MCP server tools, or add `mcp.mutating_server_count`.
 10. Multi-version intake: hosted remotes change without notice, so `version` needs a "snapshot date" semantic (#41).
 
