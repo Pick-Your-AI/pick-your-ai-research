@@ -26,7 +26,7 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 
 - A catalog of controls plus compatibility rules, not a recommended product. No single product covers the catalog; for example, harm classifiers lack injection and PII detection (G-R18).
 - A baseline of controls applies to every build. Further controls apply when T3 retrieval or T4 tools and agents are active.
-- A missing control is a rule result, shown in the build's risk review. A `warning` can be accepted with a reason saved in the build (#42). An `incompatible` result blocks the build until the selection changes. An `unknown` result is shown with its open question and owner, never as a pass.
+- A missing control is a rule result, shown in the build's risk review. A `warning` can be accepted with a reason saved in the build (#42). A failed `error` rule blocks the build until the selection changes. An `unknown` result is shown with its open question and owner, never as a pass.
 - Controls that the platform supplies in API or managed mode are shown as provided by the platform, with their source (G-R19).
 
 ### #36 Evaluation
@@ -38,7 +38,7 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 
 ### #37 Deployment
 
-- Mode working rule: a build with a customer-owned deployment object is managed, one without is API, and self-hosted means the build runs the engine. This places hyperscaler-hosted inference, pending #40.
+- Mode follows the serving-component decision in [T0](../T0-configuration/deployment-mode.md), merged through #81: user-operated serving is `self_hosted`; provider-operated dedicated or reserved capacity is `managed`; provider-operated shared capacity is `api`. Billing units and customer-owned deployment objects do not determine mode. Hyperscaler on-demand/shared inference is `api`; dedicated endpoints and provisioned throughput are `managed`. Training runs do not set serving mode. Select the actual offering/capacity rather than inferring a mode from the provider name.
 - Order of work runs from T0 through terms, identity, pins, the mode's platform steps, gates, monitoring and rollback, and only then traffic (S1 to S13).
 - Default to a runtime identity in every mode, and to the pin that cannot move: a snapshot id (API), an explicit deployment version (managed), or an image digest plus a weights commit hash (self-hosted).
 - Rollout mechanics belong to #37; promotion criteria belong to #36 and #38. Readiness rows show one of pass, fail, not applicable, unknown or not measured.
@@ -60,21 +60,21 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 
 ## Rules contributed to #40
 
-All five records use the same rule format at rule version 0.1: rule id, participants, condition, severity, explanation, suggested correction, source. Severity is one of compatible, warning, incompatible or unknown. Each record separates source-checked rules (the cited page was opened on its access date and states the rule) from hypotheses (no opened source states it yet). Source checked does not mean independently reproduced; it follows the interim #41 definition adopted in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). A rule owned by one record is cited by id in the others, not restated.
+**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); the latter two are drafts, while the cited interim owner decisions apply.
 
 | record | source-checked rules | hypotheses |
 |---|---|---|
-| #35 Guardrails | G-R1 to G-R34 (34) | G-H7, G-H9 (2) |
-| #36 Evaluation | E-R1 to E-R86 (86) | E-H1 to E-H14 except E-H9 (13) |
-| #37 Deployment | D-R1 to D-R87 (87) | D-H1 to D-H24 except D-H5, D-H18, D-H19 (21) |
-| #38 Monitoring | M-R1 to M-R72 except M-R34 (71) | M-H1 to M-H25 (25) |
-| #39 Cost Estimate | C-R1 to C-R43 (43) | C-H1, C-H5 to C-H10, C-H12, C-H13, C-H15, C-H17 (11) |
+| #35 Guardrails | 35 candidates (original IDs plus explicit suffixed splits) | 3 candidates (including explicit splits) |
+| #36 Evaluation | 92 candidates (original IDs plus explicit suffixed splits) | 13 candidates (including explicit splits) |
+| #37 Deployment | 90 candidates (original IDs plus explicit suffixed splits) | 21 candidates (including explicit splits) |
+| #38 Monitoring | 71 candidates (original IDs plus explicit suffixed splits) | 25 candidates (including explicit splits) |
+| #39 Cost Estimate | 43 candidates (original IDs plus explicit suffixed splits) | 11 candidates (including explicit splits) |
 
-Contract v1 arrived after these records were drafted. Its Ruleset has severities `error`, `warning` and `info`, and a separate `on_unknown` behaviour. Each record's Compatibility proposals section proposes the same reading for #40: `incompatible` is `error`, `warning` is `warning`, `unknown` is `warning` with `on_unknown: review` until the evidence settles it, and a conditional severity becomes two rules. No v1 Ruleset JSON is included; #40 reviews the rules first.
+Conditional severity cells have been replaced with fixed severities and explicit applicability/outcome semantics. Suffixed candidates preserve the separate conditions; #40 still reviews adoption.
 
 Missing ids were retired while drafting or during QC: a hypothesis became a source-checked rule, a rule restated another record's rule, or a source settled the question. Ids are not reused.
 
-The records also hand #40 these enums and fields: the guardrail category and failure-behaviour enums (#35), the evaluation type enum and the evaluator-placement field (#36), the mode working rule (#37), and the alert-class and threshold-source enums (#38).
+The records also hand #40 these enums and fields: the guardrail category and failure-behaviour enums (#35), the evaluation type enum and the evaluator-placement field (#36), the adopted serving-mode definition (#37), and the alert-class and threshold-source enums (#38).
 
 ## Handoffs awaiting confirmation
 
@@ -83,7 +83,7 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 | to | what T6 hands over | from |
 |---|---|---|
 | #2 T0 | fields the rules and quantities need: data sensitivity, residency, tenancy, language, regulated-workload flag (#35); evaluator placement and region at provisioning (#36); peak volume, build life and migration window, licensee domicile, MAU or revenue, end-user countries (#37); availability objective, SLO window, freshness tolerance, retention, budget hard stop, high-risk status (#38); quantity roles and case drivers (#39) | all |
-| #40 Schema | the rules and enums above; the mode working rule | all |
+| #40 Schema | the rules and enums above; the adopted serving-mode definition | all |
 | #41 Data sources | interim evidence grades to confirm for every record; reproducibility tiers A to C; price sources, dates and terms | all |
 | #42 Saved builds | accepted warnings with their reasons (#35); the price snapshot fields and re-pricing behaviour (#39) | #35, #39 |
 | #32 and #33 (T5) | `D-20` accepted, narrowed, in #36: #36 freezes and hashes the evaluation set, T5 runs the leakage check (E-R44, G1); `A-20` accepted in #36 as a G5 input; `A-13` (Foundry deletes a fine-tuned deployment after 15 idle days) accepted in #37 as D-R87; a T5 cost scenario is a follow-up in #39 | #36, #37, #39 |
@@ -97,9 +97,9 @@ Grouped by who can answer them. #38 and #39 name an owner for each question; #35
 - Add the T0 fields listed under Handoffs (#35, #37, #38, #39).
 
 **#40 owner**
-- Is hyperscaler-hosted inference API or managed? #37 uses a working rule (#37).
+- Serving mode is decided by merged #81; apply the per-component definition above.
 - Accept the placement rules, the alert-class enum and the threshold-source enum (#38).
-- 28 rules and 3 hypotheses in #35 to #37 carry a conditional severity, for example "warning; incompatible when …". #38 and #39 use exactly one severity per rule. Decide whether #40 allows the conditional form or the rules are split. Rules: G-R13, G-R21, G-R23, G-R26 and G-H9 (#35); E-R3, E-R6, E-R8, E-R10, E-R11, E-R12, E-R21, E-R30, E-R48, E-R60, E-R70, E-R72, E-R74, E-R82, E-R83 and E-H2 (#36); D-R10, D-R13, D-R25, D-R34, D-R43, D-R69, D-R72, D-R77, D-R79 and D-H22 (#37).
+- Review the candidate rule splits and reason codes through #40; fixed severity is already the required convention, not an open choice.
 
 **#41 owner**
 - The final evidence-grade policy. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md`; #41 confirms them, including whether vendor accuracy claims may be displayed (#35, #37, #38).
@@ -107,7 +107,7 @@ Grouped by who can answer them. #38 and #39 name an owner for each question; #35
 - Whether AWS and Azure price data may be redistributed (#39).
 
 **#42 owner**
-- The stale-after window for saved builds (#39).
+- Re-evaluation on changed pricebook, snapshot, ruleset, rights decision or build edits (#42); prices retain as-of dates, without a time-window expiry.
 
 **Maintainers**
 - The default currency and region: USD pricing, T0 budget currency for display, and a region fallback (#39).

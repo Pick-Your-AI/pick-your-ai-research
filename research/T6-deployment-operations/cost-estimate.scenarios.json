@@ -125,11 +125,12 @@
   },
   {
    "id": "W1-gemini",
-   "title": "API: Gemini 3.1 Pro Preview, Gemini API paid tier, prompts <= 200k, context-cache reads at $0.20 (storage not modelled)",
+   "title": "API: Gemini 3.1 Pro Preview, paid tier; original workload below 4096-token caching minimum, no cache discount",
    "vars": {
     "p_in": 2.0,
     "p_cr": 0.2,
-    "p_out": 12.0
+    "p_out": 12.0,
+    "hit": 0
    },
    "steps": [
     [
@@ -147,13 +148,13 @@
    ],
    "expect": {
     "monthly": {
-     "low": 7600,
-     "expected": 10000,
+     "low": 11000,
+     "expected": 12000,
      "high": 31000
     },
     "per_request": {
-     "low": 0.0076,
-     "expected": 0.01,
+     "low": 0.011,
+     "expected": 0.012,
      "high": 0.031
     }
    }
