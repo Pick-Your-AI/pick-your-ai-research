@@ -25,29 +25,29 @@
     {
       "source_uri": "https://registry.npmjs.org/@openai/agents",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "@openai/agents 0.20.0 published 2026-10-08; license MIT"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-js/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license MIT"
     },
     {
       "source_uri": "https://github.com/openai/openai-agents-js/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "programming_languages JavaScript/TypeScript; supports_multi_agent and supports_tool_execution (functions, MCP, hosted tools)"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-js/main/docs/src/content/docs/guides/mcp.mdx",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_mcp: hosted MCP, Streamable HTTP, stdio; SSE legacy"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "MIT",
     "commercial_use_allowed": true,

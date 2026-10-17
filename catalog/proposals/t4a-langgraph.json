@@ -22,29 +22,29 @@
     {
       "source_uri": "https://pypi.org/pypi/langgraph/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "version 1.2.15 uploaded 2026-10-12; requires_python >=3.10; supports programming_languages python"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license MIT"
     },
     {
       "source_uri": "https://github.com/langchain-ai/langgraph/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "MIT license; JS/TS is a separate library (LangGraph.js), not covered by this version"
     },
     {
       "source_uri": "https://github.com/langchain-ai/langchain-mcp-adapters/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_tool_execution: LangGraph prebuilt ToolNode/tools_condition executes tool calls (LangChain-authored example)"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "MIT",
     "commercial_use_allowed": true,

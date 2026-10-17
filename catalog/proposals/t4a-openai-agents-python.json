@@ -24,29 +24,29 @@
     {
       "source_uri": "https://pypi.org/pypi/openai-agents/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "version 0.24.0 uploaded 2026-10-15; license MIT; requires_python >=3.10"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-python/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license MIT"
     },
     {
       "source_uri": "https://github.com/openai/openai-agents-python/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_multi_agent (handoffs, agents as tools) and supports_tool_execution (function, MCP, hosted tools)"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/openai/openai-agents-python/main/docs/mcp.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_mcp: stdio, Streamable HTTP, SSE and OpenAI-hosted MCP; mcp>=1.19.0,<3"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "MIT",
     "commercial_use_allowed": true,

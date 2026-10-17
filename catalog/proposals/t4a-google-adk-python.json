@@ -24,29 +24,29 @@
     {
       "source_uri": "https://pypi.org/pypi/google-adk/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "version 2.12.0 uploaded 2026-10-13; requires_python >=3.11"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/google/adk-python/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license Apache-2.0"
     },
     {
       "source_uri": "https://github.com/google/adk-python/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_multi_agent (modular multi-agent systems, workflow runtime) and supports_tool_execution (custom functions, OpenAPI, MCP tools)"
     },
     {
       "source_uri": "https://adk.dev/tools-custom/mcp-tools/index.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_mcp: McpToolset client over stdio, SSE and Streamable HTTP"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "Apache-2.0",
     "commercial_use_allowed": true,

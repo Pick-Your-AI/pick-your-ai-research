@@ -24,29 +24,29 @@
     {
       "source_uri": "https://pypi.org/pypi/agent-framework/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "version 1.22.0 uploaded 2026-10-15; Python package"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/microsoft/agent-framework/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license MIT"
     },
     {
       "source_uri": "https://github.com/microsoft/agent-framework/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_multi_agent: graph-based workflows with sequential, concurrent, handoff and group patterns; OpenTelemetry built in"
     },
     {
       "source_uri": "https://learn.microsoft.com/en-us/agent-framework/agents/tools/local-mcp-tools",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_mcp and supports_tool_execution: local MCP tool classes for stdio, Streamable HTTP and WebSocket"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "MIT",
     "commercial_use_allowed": true,

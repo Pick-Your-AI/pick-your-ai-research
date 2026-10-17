@@ -24,29 +24,29 @@
     {
       "source_uri": "https://pypi.org/pypi/crewai/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "version 1.15.28 uploaded 2026-10-14; requires_python >=3.10,<3.14; depends on mcp~=1.28.1"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/crewAIInc/crewAI/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license text is MIT"
     },
     {
       "source_uri": "https://github.com/crewAIInc/crewAI/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "MIT license; supports_multi_agent (crews of specialized agents) and supports_tool_execution (tools)"
     },
     {
       "source_uri": "https://docs.crewai.com/en/mcp/overview",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_mcp: stdio, SSE and Streamable HTTP via agent mcps field or MCPServerAdapter"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "MIT",
     "commercial_use_allowed": true,

@@ -3,6 +3,12 @@
 Issue: #25 · Contract: 1.0.0 · Kinds: `agent_framework`
 Status: draft · Last researched: 2026-10-16
 
+## Evidence status correction
+
+Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims remain `unverified`; the original facts, versions, source access dates and `checked_at` are unchanged. No qualifying independent corroboration or runtime reproduction was supplied. Vendor capability statements remain documented claims, not measurements.
+
+A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
+
 ## User decision
 
 Which orchestration approach should run multi-step or tool-using behaviour: a framework or SDK, or no framework (the application drives a provider SDK's tool-use loop itself)?
@@ -100,7 +106,7 @@ The v1 `spec_agent_framework` has one required field (`programming_languages`) a
 | `/spec/programming_languages` | array of enum `python, typescript, javascript, go, rust, java, other` | see matrix | per row | No `csharp`/`dotnet` or `kotlin`; MAF, SK and ADK need `other` |
 | `/spec/supports_tool_execution` | boolean | true for all evaluated | per row | Does not say native vs prompted (ReAct/code) tool calling |
 | `/spec/supports_mcp` | boolean | true where a first-party MCP client is documented | per row | Cannot express transports, protocol revision, or "via companion package in beta" (LangGraph) |
-| `/spec/supports_multi_agent` | boolean | true where verified | per row | Handoff vs graph vs hosted subagents are not distinguished |
+| `/spec/supports_multi_agent` | boolean | true where documented | per row | Handoff vs graph vs hosted subagents are not distinguished |
 | `/spec/supports_memory` | boolean | **not populated** in proposals | — | Ambiguous: built-in conversation state, a long-term store, or integration with an external `memory_store`? See compatibility proposals |
 | `/settings/agent_count`, `/max_iterations`, `/timeout_ms` (selection) | integers | no change proposed | — | Approval policy and checkpoint backend are not settings |
 | supported model APIs (note only) | proposed enum array `openai_responses, openai_chat_completions, anthropic_messages, gemini, bedrock_converse, ollama_native, litellm, other` | see notes | A35, A37, A44, A54 | Needed for rule `rule.t4.model.api.surface` |
@@ -114,7 +120,7 @@ The v1 `spec_agent_framework` has one required field (`programming_languages`) a
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md`. Versions and dates come from the PyPI JSON API (`https://pypi.org/pypi/<pkg>/json`), the npm registry (`https://registry.npmjs.org/<pkg>`) and the NuGet v3 API. Licenses come from LICENSE files fetched from raw.githubusercontent.com. Capability claims are vendor documentation, graded Primary documentation because they describe the vendor's own software. No candidate was installed or executed.
+All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Versions and dates come from the PyPI JSON API (`https://pypi.org/pypi/<pkg>/json`), the npm registry (`https://registry.npmjs.org/<pkg>`) and the NuGet v3 API. Licenses come from LICENSE files fetched from raw.githubusercontent.com. Capability claims are vendor documentation, graded Primary documentation because they describe the vendor's own software. No candidate was installed or executed.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -206,7 +212,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 ## Compatibility proposals
 
 These rules are proposed for review by #40 using the [rule proposal template](../../templates/rule-proposal.md).
-- **Verified** means the cited primary text supports the assertion.
+- **Source-checked (unverified)** means the cited primary text supports the assertion.
 - **Hypothesis** means the assertion needs a definition, measurement or contract field that does not exist yet.
 
 Outcome (`pass/fail/unknown/skipped`) is produced by evaluation; severity (`info/warning/error`) is a property of the rule. All JSON blocks below were checked against the `rules` item schema of `contracts/v1/schemas/ruleset.schema.json`.
@@ -219,7 +225,7 @@ Outcome (`pass/fail/unknown/skipped`) is produced by evaluation; severity (`info
 | `rule.agent.mcp.framework` | (1) A boolean cannot express transports: MAF Python has no SSE class (A25); LangChain has no WebSocket (A13); Mastra documents stdio and Streamable HTTP only (A70). (2) It cannot express protocol revision: the 2026-07-28 spec changed the session model (A3), and CrewAI pins the v1 SDK (A28). (3) Provider-hosted MCP (OpenAI hosted MCP, Anthropic MCP connector, Foundry hosted MCP) makes the provider the MCP client, so "framework supports MCP" is the wrong test (A2, A26, A36). (4) Primary role only. | Refine with `rule.t4.mcp.transport.match` and `rule.t4.mcp.protocol.revision` (need #40); interim `rule.t4.mcp.transport.sse-deprecated` in mcp-servers.md (v1-valid). |
 | `rule.memory.framework.compatibility` | `supports_memory` is ambiguous. Every candidate keeps some conversation state; what differs is which external backends it can use (LangGraph checkpointers, ADK SessionService, Agno `db`, Strands session managers) (A9, A47, A67, A76). Proposals here leave it unset rather than guess. | Replace with `rule.t4.memory.backend` (needs #40 and #28). |
 
-### Verified, expressible in v1
+### Source-checked (unverified), expressible in v1
 
 #### rule.t4.model.toolcalling: native tool calling required by the selected model
 
@@ -336,7 +342,7 @@ The rule itself is owned by #27 and published once, as `rule.t4.mcp.transport.ss
 
 ### Need contract change via #40
 
-#### rule.t4.toolcalling.mode (compatibility example 1, full form) · Verified evidence, needs #40
+#### rule.t4.toolcalling.mode (compatibility example 1, full form) · Source-checked (unverified) evidence, needs #40
 
 Missing field: `spec_agent_framework.tool_calling_modes` (array enum `native, prompted_react, code_action, provider_hosted`). With it, rule 1 can become an `error` that passes for prompted or code modes (A60, A61).
 
@@ -348,7 +354,7 @@ assert: any(
   eq(catalog model primary /spec/supports_tool_calling, true))
 ```
 
-#### rule.t4.model.api.surface (compatibility example 2, full form) · Verified evidence, needs #40
+#### rule.t4.model.api.surface (compatibility example 2, full form) · Source-checked (unverified) evidence, needs #40
 
 A framework can support a provider API without supporting every model feature through it:
 - The OpenAI Agents SDK silently drops Responses-only fields on Chat Completions (A37).
@@ -367,7 +373,7 @@ assert: subset_of(selection agent_framework primary /settings/required_api_featu
                   catalog model primary /spec/api_features [MISSING])
 ```
 
-#### rule.t4.engine.toolchoice · Verified evidence, needs #40 and #11
+#### rule.t4.engine.toolchoice · Source-checked (unverified) evidence, needs #40 and #11
 
 Ollama's `/v1/chat/completions` does not accept `tool_choice` (A79). vLLM supports `required` only from 0.8.3 and enforces schemas for `auto` only with `strict` or a strictness floor (A77). Frameworks that force a tool call (for example for structured output, or `tool_choice='required'`) then fail or degrade.
 
@@ -379,7 +385,7 @@ assert: implies(eq(catalog agent_framework primary /spec/requires_tool_choice [M
 severity: warning
 ```
 
-#### rule.t4.mcp.transport.match · Verified evidence, needs #40
+#### rule.t4.mcp.transport.match · Source-checked (unverified) evidence, needs #40
 
 Same proposal as `rule.t4.mcp.transport.client-support` in [mcp-servers.md](mcp-servers.md), which is the canonical version for #40 review. This section supplies the framework-side transport evidence.
 
@@ -439,7 +445,7 @@ assert: exists(catalog agent_framework primary /spec/managed_runtime_refs [MISSI
 severity: warning
 ```
 
-#### rule.t4.telemetry.egress · Verified evidence, needs #40, #35 and #38
+#### rule.t4.telemetry.egress · Source-checked (unverified) evidence, needs #40, #35 and #38
 
 Some frameworks send data off-host by default:
 - OpenAI Agents SDK traces go to OpenAI by default (A38).
@@ -484,7 +490,7 @@ This is research guidance for builder defaults, not a product endorsement.
 
 ## Structured artifacts
 
-Ten CatalogItem proposals were written. Each contains only verified `programming_languages` and verified booleans. `supports_memory` is left out of all of them because it is ambiguous.
+Ten CatalogItem proposals were written. Each contains only source-checked `programming_languages` and source-checked booleans. `supports_memory` is left out of all of them because it is ambiguous.
 
 | File | ID | Version | Booleans included |
 | --- | --- | --- | --- |
@@ -505,7 +511,7 @@ Not proposed:
 - **Semantic Kernel:** status mapping undecided.
 - **LlamaIndex:** agent and workflow packages version separately (`llama-index-core` 0.14.25, `llama-index-workflows` 2.26.0), so the one-version-per-ID rule is ambiguous here.
 - **Agno:** default telemetry egress needs a field before listing.
-- **JS ports of LangGraph, ADK and Strands:** MCP and multi-agent not verified per port.
+- **JS ports of LangGraph, ADK and Strands:** MCP and multi-agent not source-checked per port.
 
 For LangGraph, `supports_mcp` is deliberately omitted: MCP comes from the separate `langchain[mcp]` package, which is in beta (A13). `supports_multi_agent` is omitted because no fetched page stated it (A16).
 
@@ -529,6 +535,6 @@ For LangGraph, `supports_mcp` is deliberately omitted: MCP comes from the separa
 | Monitoring: OTel support per framework; default telemetry egress (OpenAI Agents traces, Agno, CrewAI) | #38 · @PUSHINGSQUARES |
 | Plan gates and prices for managed runtimes (LangSmith Plus/Enterprise, CrewAI AMP, Agent Runtime, Foundry) | #39 · @PUSHINGSQUARES |
 | Evidence grading of vendor documentation used here | #41 · @tynamite |
-| Not verified on fetched pages: LangGraph multi-agent and parallel tool execution, OpenAI Agents SDK OpenTelemetry, MAF checkpoint storage backends and .NET MCP transports beyond stdio, Mastra SSE, PydanticAI and Agno multi-agent | #25 · @CompleteDotTech |
+| Not source-checked on fetched pages: LangGraph multi-agent and parallel tool execution, OpenAI Agents SDK OpenTelemetry, MAF checkpoint storage backends and .NET MCP transports beyond stdio, Mastra SSE, PydanticAI and Agno multi-agent | #25 · @CompleteDotTech |
 
 None of the handoffs above is confirmed yet.

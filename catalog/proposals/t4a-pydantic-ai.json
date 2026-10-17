@@ -23,29 +23,29 @@
     {
       "source_uri": "https://pypi.org/pypi/pydantic-ai/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "version 2.57.0 uploaded 2026-10-16; license MIT; requires_python >=3.11"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/pydantic/pydantic-ai/main/LICENSE",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "license MIT"
     },
     {
       "source_uri": "https://github.com/pydantic/pydantic-ai/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_tool_execution: function tools and toolsets"
     },
     {
       "source_uri": "https://raw.githubusercontent.com/pydantic/pydantic-ai/main/docs/mcp/client.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "supports_mcp: MCPToolset over Streamable HTTP, SSE and stdio"
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "license": {
     "spdx_id": "MIT",
     "commercial_use_allowed": true,
