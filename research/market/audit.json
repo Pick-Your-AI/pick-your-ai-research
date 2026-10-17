@@ -1,326 +1,498 @@
 {
-  "access_date": "2026-10-16",
+  "access_date": "2026-10-17",
   "issues": [
     {
       "number": 1,
       "title": "T0: Configuration",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "tynamite"
+        "tynamite",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #81: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        81
+      ]
     },
     {
       "number": 2,
       "title": "T0: Workload / Use Case",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "tynamite"
+        "tynamite",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #81: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        81
+      ]
     },
     {
       "number": 3,
       "title": "T0: Deployment Mode",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "tynamite"
+        "tynamite",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #81: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        81
+      ]
     },
     {
       "number": 4,
       "title": "T1: Model Selection",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "zwright8"
+        "zwright8",
+        "Mattycodes69"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #88: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        88
+      ]
     },
     {
       "number": 5,
       "title": "T1: Model Provider",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "zwright8"
+        "zwright8",
+        "tynamite"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #88: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        88
+      ]
     },
     {
       "number": 6,
       "title": "T1: AI Model",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "zwright8"
+        "zwright8",
+        "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #88: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        88
+      ]
     },
     {
       "number": 7,
       "title": "T1: Context Window",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "zwright8"
+        "zwright8",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #88: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        88
+      ]
     },
     {
       "number": 8,
       "title": "T2: Infrastructure",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "zwright8",
         "Mattycodes69"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #75: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        75
+      ]
     },
     {
       "number": 9,
       "title": "T2: Hosting",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "Mattycodes69"
+        "Mattycodes69",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #75: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        75
+      ]
     },
     {
       "number": 10,
       "title": "T2: GPU / Compute",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "Mattycodes69"
+        "Mattycodes69",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #75: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        75
+      ]
     },
     {
       "number": 11,
       "title": "T2: Inference Engine",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "zwright8",
         "Mattycodes69"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #75: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        75
+      ]
     },
     {
       "number": 12,
       "title": "T3: Knowledge & Retrieval",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "Mattycodes69",
         "zabyxc01"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 13,
       "title": "T3: Knowledge Base",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "tynamite",
         "zabyxc01"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 14,
       "title": "T3: Embedding Model",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
-        "zabyxc01"
+        "zabyxc01",
+        "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 15,
       "title": "T3: Vector Database",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
-        "zabyxc01"
+        "zabyxc01",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 16,
       "title": "T3: RAG & Retrieval Backends",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
-        "zabyxc01"
+        "zabyxc01",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 24,
       "title": "T4: Agents & Integrations",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "CompleteDotTech"
+        "CompleteDotTech",
+        "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #73: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        73
+      ]
     },
     {
       "number": 25,
       "title": "T4: Agent Framework",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "CompleteDotTech"
+        "CompleteDotTech",
+        "Mattycodes69"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #69: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        69
+      ]
     },
     {
       "number": 26,
       "title": "T4: Tools & APIs",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "CompleteDotTech"
+        "CompleteDotTech",
+        "zwright8"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #70: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        70
+      ]
     },
     {
       "number": 27,
       "title": "T4: MCP Servers",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "CompleteDotTech"
+        "CompleteDotTech",
+        "tynamite"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #71: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        71
+      ]
     },
     {
       "number": 28,
       "title": "T4: Agent Memory",
-      "classification": "Existing and unstarted",
+      "classification": "Open research submission",
       "owners": [
-        "CompleteDotTech"
+        "CompleteDotTech",
+        "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #72: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        72
+      ]
     },
     {
       "number": 29,
       "title": "T5: Training & Fine-Tuning",
-      "classification": "Existing and active",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "Mattycodes69",
         "appletechie"
       ],
-      "rationale": "Relevant draft PR exists (#46 for training, #44 for contracts); no acceptance inferred."
+      "rationale": "PR #85: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        85
+      ]
     },
     {
       "number": 30,
       "title": "T5: Training Framework",
-      "classification": "Existing and active",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "zwright8",
         "appletechie"
       ],
-      "rationale": "Relevant draft PR exists (#46 for training, #44 for contracts); no acceptance inferred."
+      "rationale": "PR #68: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        68
+      ]
     },
     {
       "number": 31,
       "title": "T5: Training Compute",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "tynamite",
         "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #77: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        77
+      ]
     },
     {
       "number": 32,
       "title": "T5: Training Dataset",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
-        "appletechie"
+        "appletechie",
+        "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #76: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        76
+      ]
     },
     {
       "number": 33,
       "title": "T5: Fine-Tuned Model",
-      "classification": "Existing and unstarted",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "Mattycodes69",
         "appletechie"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "PR #84: merged. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        84
+      ]
     },
     {
       "number": 34,
       "title": "T6: Deployment & Operations",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "appletechie",
         "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 35,
       "title": "T6: Guardrails",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "appletechie",
         "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 36,
       "title": "T6: Evaluation",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "appletechie",
         "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 37,
       "title": "T6: Deployment",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "appletechie",
         "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 38,
       "title": "T6: Monitoring",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "appletechie",
         "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 39,
       "title": "T6: Cost Estimate",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
+        "appletechie",
         "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 40,
       "title": "T0: Component Schema & Compatibility Rules",
-      "classification": "Existing and active",
+      "classification": "Related research merged; issue acceptance not established",
       "owners": [
+        "zwright8",
         "tynamite"
       ],
-      "rationale": "Relevant draft PR exists (#46 for training, #44 for contracts); no acceptance inferred."
+      "rationale": "PR #44: merged; PR #81: open. Open issue acceptance is not inferred from artifact or merge state.",
+      "issue_state": "OPEN",
+      "related_prs": [
+        44,
+        81
+      ]
     },
     {
       "number": 41,
       "title": "T0: Catalog Data Sources & Freshness",
-      "classification": "Existing and unstarted",
+      "classification": "Open; current research progress not established by this audit",
       "owners": [
-        "tynamite"
+        "tynamite",
+        "PUSHINGSQUARES"
       ],
-      "rationale": "Open technical research; no reviewed complete deliverable established by audit."
+      "rationale": "No issue-specific current submission was established by this metadata audit; this does not mean work is unstarted.",
+      "issue_state": "OPEN",
+      "related_prs": []
     },
     {
       "number": 42,
       "title": "T0: Saved, Shared & Compared Builds",
-      "classification": "Blocked",
+      "classification": "Native prerequisite remains open",
       "owners": [
-        "tynamite"
+        "tynamite",
+        "appletechie"
       ],
-      "rationale": "Native prerequisite #40 remains open."
+      "rationale": "Native blocked-by #40 was read back on 2026-10-17; no relationship changed.",
+      "issue_state": "OPEN",
+      "related_prs": []
     }
   ],
   "reviewed_prs": [
     44,
-    45,
-    46
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    75,
+    76,
+    77,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    87,
+    88,
+    90,
+    95,
+    96,
+    97,
+    98
   ],
   "technical_project": 1,
   "market_project": 2,
@@ -347,8 +519,14 @@
     ]
   },
   "notes": [
-    "PR #45 owns broader vision/governance proposals; market strategy is evidence input, not replacement.",
-    "Project #1 contains stale Ready filter status:Todo and older field references; reported without modifying unrelated Project.",
-    "PR #46 handoff text names CompleteDotTech for T0; live T0 assignee is tynamite. Preserve live assignment."
-  ]
+    "The original audit was made before most submissions. This dated refresh supersedes its unstarted classifications and stale #46 training references.",
+    "PR #46 closed without merge; current T5 submissions #68/#76/#77/#84/#85 are merged. Merge is distinct from issue acceptance.",
+    "PR #67 merged to main at a2d12b8709b34fc2bb718e5fe0670d44d2f58322 on 2026-10-16T23:39:05Z. PR #79 had first merged into its proposal branch.",
+    "Explicit PR #67 owner dispositions are recorded only for their named scope, source review and commit; generic approval and merges supply no additional acceptance.",
+    "#59 owns handoffs.md, audit.json and risk-register.md. Executive synthesis belongs to #47; earlier synthesis-context approvals are not transferred to corrected audit artifacts.",
+    "Current GitHub coassignees were recorded without changing any assignee, label, priority, hierarchy, native dependency or Project field.",
+    "Token lacks read:project; live Project values/options were not refreshed. Historical project-configuration.json and research-backlog.json are not live board evidence."
+  ],
+  "completion_assessment": "No issue completion is established by this metadata-only refresh. All 55 listed issues remain open.",
+  "snapshot": "research/market/handoff-audit-readback.json"
 }
