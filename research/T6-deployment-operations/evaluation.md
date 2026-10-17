@@ -124,7 +124,7 @@ A cited benchmark figure may be displayed as **comparable** only when its full t
 | R15 | Known limitations | Contamination status, judge identity, excluded items | Below |
 
 Additional conditions:
-- **One factor.** Two figures may be compared only if exactly one tuple element differs (#83 G2). Otherwise the comparison is `unknown`, not a ranking.
+- **One factor.** Two figures may be compared only if exactly one independent experimental control differs (#83 G2). Count precision, quantization, context limit and chat template within R5 separately; provenance fields identify evidence and are not experimental factors. A known violation displayed as comparable is `fail` with a reason code; use `unknown` only when the tuple cannot be determined.
 - **Contamination.** Record a contamination status: checked (method and hit counts, using #32's layered method: exact hash, 13-gram, MinHash, embedding + judge; E04, E23), not checked, or known exposed (for example, benchmark answers publicly readable, as #83 found for Harness Bench). No method proves absence of leakage (E23). Public benchmarks are never the only `task_quality` evidence for a gate.
 - **Judge models.** LLM judges show position, verbosity and self-enhancement biases (E15). A judged metric records judge model and version, prompt, and whether the judge equals the system under test. Harness Bench's default judge is the evaluated model (E20). Judged metrics require a human-agreement check on a sample before they gate (owner threshold).
 - **Vendor vs independent.** A publisher's own result is a vendor claim even when the method is published. "Independent measurement" needs a third party with stated conditions.
@@ -146,7 +146,7 @@ Proposal for #37 to adopt or narrow. Thresholds are owner decisions (Open questi
 | P5 Performance | Latency or throughput target set | W-R7 passes on eligible measurements (EVAL-10) | `needs_review` |
 | P6 Cost | Budget set | #39 estimate within budget, using measured usage per task | `needs_review` |
 
-Mapping to EvaluationReport `deployment_readiness`: any `fail` with severity `error` gives `blocked`; any `unknown` with severity `error` gives `needs_review` unless the row says `blocked`; otherwise `ready`. This keeps measured evidence (QualityEvaluationRun) separate from compatibility (EvaluationReport), as the v1 schema titles require. v1 has no field linking the two; the interim link is a finding's `evidence[].path` / `source_version` naming the run id (gap sent to #40).
+Mapping to EvaluationReport `deployment_readiness`: any `fail` with severity `error` gives `blocked`; any `unknown` with severity `error` gives `needs_review` unless the row says `blocked`; any remaining `unknown` with `on_unknown: review`, including warning-level EVAL-12, gives `needs_review`; otherwise `ready`. This keeps measured evidence (QualityEvaluationRun) separate from compatibility (EvaluationReport), as the v1 schema titles require. v1 has no field linking the two; the interim link is a finding's `evidence[].path` / `source_version` naming the run id (gap sent to #40).
 
 Re-run triggers: any change to the build revision, model snapshot, engine version, fine-tune artifact, prompt / system instructions, retrieval index, guardrail configuration, or the evaluation protocol invalidates prior runs for the affected gates.
 
@@ -218,8 +218,8 @@ Proposed for #40 using the [rule proposal template](../../templates/rule-proposa
 
 | Rule | Participating kinds / pointers | Applies when | Assertion | Outcome / severity | Missing data | Evidence | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| EVAL-01 | `evaluation_suite` task type; `model` access route | A selected suite task needs loglikelihood scoring and the model is reachable only through a chat-completion API | Task cannot run on that route; use a generative variant, a completions route or self-hosted weights | fail / error (for that task) | Route unknown: unknown / warning | E02 | source checked (lm-eval only) |
-| EVAL-02 | Cited benchmark figure; tuple R1–R15 | A benchmark figure is displayed | Display as comparable only with a fully pinned tuple; compare two figures only when one element differs | unknown / warning when incomplete; fail / warning for a comparison differing in >1 element | unknown | E20, E22 | policy proposal (adopts #83 C1, pending) |
+| EVAL-01 | `evaluation_suite` task type; `model` access route | A selected suite task needs loglikelihood scoring and the model is reachable only through a chat-completion API | Task cannot run on that route; use a generative variant, a completions route or self-hosted weights | fail / error (for that task) | Route unknown: unknown / error (`missing_evidence`, `on_unknown: review`) | E02 | source checked (lm-eval only) |
+| EVAL-02 | Cited benchmark figure; tuple R1–R15 | A benchmark figure is displayed | Display as comparable only with a fully pinned tuple; compare two figures only when one element differs | fail / warning when a known incomplete tuple is displayed as comparable (`incomplete_protocol`), or a comparison differs in >1 independent control; unknown / warning only when the tuple cannot be determined | unknown | E20, E22 | policy proposal (adopts #83 C1, pending) |
 | EVAL-03 | `/settings/gate_required`; QualityEvaluationRun `/build_id`, `/build_revision` | Gate required | A run exists for the current build revision | unknown / error → `blocked` | — | Schema fields (source checked) | policy proposal |
 | EVAL-04 | Run `/evaluator_version`, `/dataset_revision` vs frozen protocol | Run exists | Both match the frozen protocol | fail / error when different; unknown / error when unrecorded | unknown | Schema fields | policy proposal |
 | EVAL-05 | Run `/status`, `/measurements/*/passed` | Gating metric present | `status` = `passed` and every gating measurement `passed` = true | fail / error; `incomplete` → unknown / error | unknown | Schema fields | policy proposal |
@@ -247,7 +247,7 @@ Not priced here. Evaluation cost is model / judge API usage plus compute time, p
 1. **Evaluate the configured system, not the model.** Gates use the user's frozen task set; public benchmarks inform selection only.
 2. **Prefer deterministic scoring** where the task allows (extraction, code, SQL, structured output). Use judged metrics only with recorded judges (EVAL-06).
 3. **Candidate defaults, pending owner adoption:** lm-evaluation-harness for capability retention (self-hosted, or completions-capable routes); Inspect for agent and sandboxed tasks; Ragas or TruLens for RAG grounding; AILuminate (demo or member practice set) and HarmBench for safety, with their access and staleness limits stated; vLLM `bench serve` or an equivalent load generator for performance. HELM and OpenAI Evals are not recommended as gate dependencies (maintenance mode; no release since 2024).
-4. **Adopt R1–R15 and the one-factor rule** as #41's definition of a comparable benchmark claim.
+4. **R1–R15 and the one-factor rule** are accepted by the #41 owner under CD-3 (2026-10-17 review); W-R10 protocol ownership remains with #36.
 5. **Make fine-tune safety regression a blocking gate** (EVAL-07), because the evidence shows large regressions from small fine-tunes.
 
 ## Structured artifacts
@@ -291,3 +291,7 @@ Handoffs (owners are live assignees on 2026-10-17; none confirmed yet):
 | #10 / #11 | Performance measurement conditions (EVAL-10) and engine-version pinning | @Mattycodes69 (#10 with @appletechie; #11 with @zwright8) |
 
 Evidence gaps: over-refusal measurement; permission-compliance evaluation for RAG; an open-source training-data harm screen; MTEB and SWE-bench primary sources; AILuminate version label; Bedrock / Vertex evaluation pricing and judge models.
+
+### Review corrections (2026-10-17)
+
+Benchmark display also requires the #60 source-specific rights decisions (`research/market/rights-validation.md` on main). Artificial Analysis data is not permitted in a selection product; BenchLM display requires an agreement. Comparability does not grant reuse rights. EVAL-02 checks both protocol eligibility and that separate rights gate. This comparison draft remains behind #121 in the agreed integration order.
