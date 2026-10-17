@@ -1,7 +1,7 @@
 # T6 Monitoring
 
 Issue: [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `monitoring_stack` · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
-Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Rule version 0.1 (the #40 working format).
+Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Candidate rule revision 0.2 (for #40 review).
 
 ## User decision
 
@@ -431,7 +431,7 @@ The catalog's `privacy notes` column says what each signal carries. These requir
 
 **Source checked** means checked against primary documentation, not independently reproduced.
 
-**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); the latter two are drafts, while the cited interim owner decisions apply.
+**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); the latter two remain open review proposals, while the cited interim owner decisions apply.
 
 Severity and outcome follow the interpretation above; missing eligible evidence or unresolved equal-rank ties require review. Participants that are not T0 fields today (retention, availability target, hard-stop flag, high-risk status) are named as such.
 

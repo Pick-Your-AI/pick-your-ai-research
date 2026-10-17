@@ -1,7 +1,7 @@
 # T6 Deployment
 
 Issue: [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `deployment_target` · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
-Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Rule version 0.1 (the #40 working format).
+Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Candidate rule revision 0.2 (for #40 review).
 
 ## User decision
 
@@ -154,14 +154,14 @@ Research question 2. Each check names the component it depends on and an "applie
 | applies when | predicate | component present, T0 value, mode | a check with a false predicate is recorded "not applicable, reason" |
 | source | evidence ids | D-A, D-M, D-S, D-K, D-O, D-D, D-T, D-P families | URL, publisher, access date 2026-10-16, version or page date, region and currency for prices |
 | number label | enum | published, estimated, measured | every number here is published unless labelled; absolute prices deferred to #39 (multipliers and one list price carried, see finding 2) |
-| severity (rules) | enum | compatible, warning, incompatible, unknown | #40 format; source checked only when an opened page states the condition |
+| severity (rules) | enum | error, warning, info | #40 format; source checked only when an opened page states the condition |
 | evidence grade | enum | per #41 (provisional) | not assigned in this draft; #41 policy pending |
 
 ## Compatibility proposals
 
 **Source checked** means checked against primary documentation, not independently reproduced.
 
-**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); the latter two are drafts, while the cited interim owner decisions apply.
+**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); the latter two remain open review proposals, while the cited interim owner decisions apply.
 
 Shared #40 format, candidate rule revision 0.2. Source-checked rules have an opened page that states the condition. Hypotheses carry what is known and what would verify them. A warning can be accepted with a recorded reason; an incompatible result cannot (the #35 convention). Participants name a T0 field, a catalog entry (T1 to T5), a #35 control or a #36 gate.
 
