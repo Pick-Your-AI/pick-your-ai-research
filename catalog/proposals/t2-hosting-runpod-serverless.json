@@ -15,15 +15,15 @@
     {
       "source_uri": "https://docs.runpod.io/serverless/overview",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Managed workers execute custom Docker application code."
     },
     {
       "source_uri": "https://docs.runpod.io/serverless/pricing",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Workers incur running-time charges including startup and idle phases."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

@@ -2,6 +2,10 @@
 
 Mandate: user launched the nine-section goal covering assigned issues #4–7 and #49 on 2026-10-16. No token/time budget was requested. This file is a resumable checkpoint, not a claim of completion.
 
+## Follow-up checkpoint: 2026-10-17
+
+PR #88 is merged. The [central owner's review at merged head `dbfa7dd`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868) accepts #3/#41 as applied and records #40 positions. This follow-up applies all five requested corrections: upper-bound context decisions, native-limit fallback, conditional W-R10 quality with independent transformation/recount, split answerable license conditions versus v1 fine-tuning capability, and shared #75 joint-support/memory-fit families with `on_unknown: review`. See [handoffs](handoffs.md) for precise accepted scope and remaining consumer/contract gates. The changed revision still requires review. No issue/Project/assignee changes, closure, runtime implementation or contract patches are part of this follow-up. The sections below preserve the earlier publication checkpoint; their initial empty-review/unmerged observations are historical, not current claims. The separate #49 delivery state must be refreshed in its own track.
+
 ## Scope and current work
 
 | Track | Owned artifacts | State / next action |

@@ -1,0 +1,1068 @@
+{
+  "observed_on": "2026-10-17",
+  "classification": "Public GitHub issue, pull-request and explicit owner-review metadata; not proof of research completion",
+  "repo": "Pick-Your-AI/pick-your-ai-research",
+  "issues": [
+    {
+      "number": 1,
+      "title": "T0: Configuration",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1"
+    },
+    {
+      "number": 2,
+      "title": "T0: Workload / Use Case",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2"
+    },
+    {
+      "number": 3,
+      "title": "T0: Deployment Mode",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3"
+    },
+    {
+      "number": 4,
+      "title": "T1: Model Selection",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "Mattycodes69"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4"
+    },
+    {
+      "number": 5,
+      "title": "T1: Model Provider",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "tynamite"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5"
+    },
+    {
+      "number": 6,
+      "title": "T1: AI Model",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6"
+    },
+    {
+      "number": 7,
+      "title": "T1: Context Window",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7"
+    },
+    {
+      "number": 8,
+      "title": "T2: Infrastructure",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "Mattycodes69"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8"
+    },
+    {
+      "number": 9,
+      "title": "T2: Hosting",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9"
+    },
+    {
+      "number": 10,
+      "title": "T2: GPU / Compute",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10"
+    },
+    {
+      "number": 11,
+      "title": "T2: Inference Engine",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "Mattycodes69"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11"
+    },
+    {
+      "number": 12,
+      "title": "T3: Knowledge & Retrieval",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "zabyxc01"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12"
+    },
+    {
+      "number": 13,
+      "title": "T3: Knowledge Base",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "zabyxc01"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13"
+    },
+    {
+      "number": 14,
+      "title": "T3: Embedding Model",
+      "state": "OPEN",
+      "assignees": [
+        "zabyxc01",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14"
+    },
+    {
+      "number": 15,
+      "title": "T3: Vector Database",
+      "state": "OPEN",
+      "assignees": [
+        "zabyxc01",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15"
+    },
+    {
+      "number": 16,
+      "title": "T3: RAG & Retrieval Backends",
+      "state": "OPEN",
+      "assignees": [
+        "zabyxc01",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16"
+    },
+    {
+      "number": 24,
+      "title": "T4: Agents & Integrations",
+      "state": "OPEN",
+      "assignees": [
+        "CompleteDotTech",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24"
+    },
+    {
+      "number": 25,
+      "title": "T4: Agent Framework",
+      "state": "OPEN",
+      "assignees": [
+        "CompleteDotTech",
+        "Mattycodes69"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25"
+    },
+    {
+      "number": 26,
+      "title": "T4: Tools & APIs",
+      "state": "OPEN",
+      "assignees": [
+        "CompleteDotTech",
+        "zwright8"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26"
+    },
+    {
+      "number": 27,
+      "title": "T4: MCP Servers",
+      "state": "OPEN",
+      "assignees": [
+        "CompleteDotTech",
+        "tynamite"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27"
+    },
+    {
+      "number": 28,
+      "title": "T4: Agent Memory",
+      "state": "OPEN",
+      "assignees": [
+        "CompleteDotTech",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/28"
+    },
+    {
+      "number": 29,
+      "title": "T5: Training & Fine-Tuning",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29"
+    },
+    {
+      "number": 30,
+      "title": "T5: Training Framework",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30"
+    },
+    {
+      "number": 31,
+      "title": "T5: Training Compute",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31"
+    },
+    {
+      "number": 32,
+      "title": "T5: Training Dataset",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32"
+    },
+    {
+      "number": 33,
+      "title": "T5: Fine-Tuned Model",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33"
+    },
+    {
+      "number": 34,
+      "title": "T6: Deployment & Operations",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34"
+    },
+    {
+      "number": 35,
+      "title": "T6: Guardrails",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35"
+    },
+    {
+      "number": 36,
+      "title": "T6: Evaluation",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36"
+    },
+    {
+      "number": 37,
+      "title": "T6: Deployment",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37"
+    },
+    {
+      "number": 38,
+      "title": "T6: Monitoring",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38"
+    },
+    {
+      "number": 39,
+      "title": "T6: Cost Estimate",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39"
+    },
+    {
+      "number": 40,
+      "title": "T0: Component Schema & Compatibility Rules",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "tynamite"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40"
+    },
+    {
+      "number": 41,
+      "title": "T0: Catalog Data Sources & Freshness",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41"
+    },
+    {
+      "number": 42,
+      "title": "T0: Saved, Shared & Compared Builds",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42"
+    },
+    {
+      "number": 47,
+      "title": "Market Research Program — Pick Your AI",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47"
+    },
+    {
+      "number": 48,
+      "title": "MR-01 — Competitive Landscape Discovery",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48"
+    },
+    {
+      "number": 49,
+      "title": "MR-02 — Competitive Feature Matrix",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49"
+    },
+    {
+      "number": 50,
+      "title": "MR-03 — Competitor Deep Dives",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50"
+    },
+    {
+      "number": 51,
+      "title": "MR-04 — PCPartPicker Product Experience",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51"
+    },
+    {
+      "number": 52,
+      "title": "MR-05 — Customer Research & Personas",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52"
+    },
+    {
+      "number": 53,
+      "title": "MR-06 — Market Size, Demand & Trends",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53"
+    },
+    {
+      "number": 54,
+      "title": "MR-07 — Pricing & Monetization",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54"
+    },
+    {
+      "number": 55,
+      "title": "MR-08 — Data Sources & Integration Opportunities",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55"
+    },
+    {
+      "number": 56,
+      "title": "MR-09 — Technical Feasibility",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56"
+    },
+    {
+      "number": 57,
+      "title": "MR-10 — Competitive Differentiation",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57"
+    },
+    {
+      "number": 58,
+      "title": "MR-11 — MVP Definition & Prioritization",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58"
+    },
+    {
+      "number": 59,
+      "title": "MR-12 — Research Quality, Synthesis & Handoffs",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59"
+    },
+    {
+      "number": 60,
+      "title": "MR-08: Validate commercial display and redistribution rights",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60"
+    },
+    {
+      "number": 61,
+      "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
+      "state": "OPEN",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61"
+    },
+    {
+      "number": 62,
+      "title": "MR-09: Validate benchmark comparability and harness effects",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62"
+    },
+    {
+      "number": 63,
+      "title": "MR-05: Validate customer demand and willingness to pay",
+      "state": "OPEN",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63"
+    },
+    {
+      "number": 64,
+      "title": "MR-07: Validate price freshness and total-cost scenarios",
+      "state": "OPEN",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64"
+    },
+    {
+      "number": 65,
+      "title": "MR-09: Review RAG interoperability market claims",
+      "state": "OPEN",
+      "assignees": [
+        "zabyxc01",
+        "appletechie",
+        "itisSomeone"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65"
+    },
+    {
+      "number": 66,
+      "title": "MR-03: Test direct stack-builder substitutes",
+      "state": "OPEN",
+      "assignees": [
+        "tynamite",
+        "itisSomeone"
+      ],
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66"
+    }
+  ],
+  "pull_requests": [
+    {
+      "baseRefName": "main",
+      "headRefOid": "9d3912e55047ff8130a1da73daf3fe311fe8a118",
+      "mergeCommit": {
+        "oid": "84bb455fa1b4532923462bd9cc0ac499b67066f9"
+      },
+      "mergedAt": "2026-10-16T10:00:22Z",
+      "number": 43,
+      "state": "MERGED",
+      "title": "Document triage conventions and refresh dependency map",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/43"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "a222013c1f0106159132564d05e5d24666ad6342",
+      "mergeCommit": {
+        "oid": "9769fcd9ea380b1211669b2753181c7782444178"
+      },
+      "mergedAt": "2026-10-16T11:41:48Z",
+      "number": 44,
+      "state": "MERGED",
+      "title": "Adopt v1 contract and validated researcher submission workflow",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "277d6218a40b15a479190ea692ee4cacb114a45f",
+      "mergeCommit": {
+        "oid": "324518ff8d9629fbb7cd4f2d6a27dcc219300fd4"
+      },
+      "mergedAt": "2026-10-16T11:43:02Z",
+      "number": 45,
+      "state": "MERGED",
+      "title": "Add vision, architecture, governance and roadmap docs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/45"
+    },
+    {
+      "baseRefName": "research-contract-v1",
+      "headRefOid": "6dc50156ec03b1c772692d2b84a17669c6879ae9",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 46,
+      "state": "CLOSED",
+      "title": "T5: Training Framework research note (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/46"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "aed4e7d6fd63d1f8a3e765295fa0a23ab8af3ce2",
+      "mergeCommit": {
+        "oid": "a2d12b8709b34fc2bb718e5fe0670d44d2f58322"
+      },
+      "mergedAt": "2026-10-16T23:39:05Z",
+      "number": 67,
+      "state": "MERGED",
+      "title": "Establish market research project, triage and initial competitive evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "1b6759425309fb0eea4472007d70b845779e74ba",
+      "mergeCommit": {
+        "oid": "edb4a3f47e1991b932f837ba266920d552bcf5cf"
+      },
+      "mergedAt": "2026-10-16T23:51:55Z",
+      "number": 68,
+      "state": "MERGED",
+      "title": "T5: Training Framework research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/68"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "9a6607e9d57edd3ef8954d224ac1d7b3e5994b52",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 69,
+      "state": "OPEN",
+      "title": "T4: Agent framework decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "0c37922e9e3cb5f53785545553d6a0d47f700617",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 70,
+      "state": "OPEN",
+      "title": "T4: Tools & APIs decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "525a09c023ffc90d9dc454f586ad108391063a46",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 71,
+      "state": "OPEN",
+      "title": "T4: MCP servers decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "b79921ffd72ca871dea43dc4b7c4ee2383fcb72e",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 72,
+      "state": "OPEN",
+      "title": "T4: Agent memory decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "b713d396afee8bae15b8ee3472752bc172409789",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 73,
+      "state": "OPEN",
+      "title": "T4: Agents & Integrations workstream summary (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/73"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "e3c2f40165abf792376e9ff4adb1efa44cbb9030",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 74,
+      "state": "OPEN",
+      "title": "Add maintainer research prompts and organization maintenance handoffs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "9e66622a4b2698a9305274f05da9c15ae5d90b8c",
+      "mergeCommit": {
+        "oid": "ec612eb14edaf63cc9caca2ab655d053c9114dd4"
+      },
+      "mergedAt": "2026-10-16T16:11:04Z",
+      "number": 75,
+      "state": "MERGED",
+      "title": "T2: Infrastructure evidence, sizing and engine research",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "56d3d54bdee4e0c0a8ebdc9b5c35eac5f22ef81f",
+      "mergeCommit": {
+        "oid": "56bbcafd551a357f4002dd315d4a17b530832ff0"
+      },
+      "mergedAt": "2026-10-16T23:53:17Z",
+      "number": 76,
+      "state": "MERGED",
+      "title": "T5: Training Dataset research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/76"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "200a89fa1402a6c123c7b15a3fec6890c24cd357",
+      "mergeCommit": {
+        "oid": "80a65c36b3869e65eeeb306ac8f0e90819baa99a"
+      },
+      "mergedAt": "2026-10-16T23:55:19Z",
+      "number": 77,
+      "state": "MERGED",
+      "title": "T5: Training Compute research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/77"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "7c1aa813bea161ae86c8a286bf9ca1e014b27c95",
+      "mergeCommit": {
+        "oid": "6144a644d5692a12cc18e330d1c7922ab1a18d33"
+      },
+      "mergedAt": "2026-10-16T23:35:16Z",
+      "number": 78,
+      "state": "MERGED",
+      "title": "Align contributor docs with live Project fields and T0 owner",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/78"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "380c2955210c82a455b8d367def995fa307cd524",
+      "mergeCommit": {
+        "oid": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      },
+      "mergedAt": "2026-10-16T14:19:18Z",
+      "number": 79,
+      "state": "MERGED",
+      "title": "MR-09: Estimator assumptions and pinned GPU memory observations",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "ef075df4a7525f66222239a3240efeb63feeffaa",
+      "mergeCommit": {
+        "oid": "75188d16c62e5a68cc2f0dfcb25ad1255bb52ac1"
+      },
+      "mergedAt": "2026-10-16T23:36:57Z",
+      "number": 80,
+      "state": "MERGED",
+      "title": "MR-09: Record approval and proposal-branch merge state",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/80"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "9786ef6f9a7942b21a3cc51a05df741360e3594f",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 81,
+      "state": "OPEN",
+      "title": "T0: workload and deployment-mode research notes",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "6ddbc8dda845c2e2cb9bf2081749191b49badef8",
+      "mergeCommit": {
+        "oid": "fe1d9f8ddcb64a0a1bfe4d0e5b254c519239d769"
+      },
+      "mergedAt": "2026-10-16T23:37:03Z",
+      "number": 82,
+      "state": "MERGED",
+      "title": "MR-08: record reuse rights for the 10 shortlisted sources",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "011e5ae1260a52dc3883dea5a2d43b8752f909c4",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 83,
+      "state": "OPEN",
+      "title": "MR-09: Desk validation of benchmark comparability and harness effects (Refs #62)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "ac5f8c11e46744393874e1143e343772cc391bac",
+      "mergeCommit": {
+        "oid": "3fcf1139d51f6e0a41484503073a99d49a649aa1"
+      },
+      "mergedAt": "2026-10-16T23:56:28Z",
+      "number": 84,
+      "state": "MERGED",
+      "title": "T5: Fine-Tuned Model research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/84"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "57d502e32e41505c64e63e585062cfd533cd6a1f",
+      "mergeCommit": {
+        "oid": "f2847041999fd2085610aea52a6f196930e62b0d"
+      },
+      "mergedAt": "2026-10-17T00:01:38Z",
+      "number": 85,
+      "state": "MERGED",
+      "title": "T5: Training & Fine-Tuning workstream summary",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/85"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "ba2b132c487a83d22a5cf7f9dfbd6e359cb05533",
+      "mergeCommit": {
+        "oid": "41d33f210e5229bb46aaf40fc9987f22b13e696a"
+      },
+      "mergedAt": "2026-10-16T18:42:08Z",
+      "number": 86,
+      "state": "MERGED",
+      "title": "Add orchestration prompts for all 20 Project 2 issues",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/86"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "870d6d87c555112fb782147589487e2c8421e4cf",
+      "mergeCommit": {
+        "oid": "eaa279472e958e97631e16b0501af406fe7da6ea"
+      },
+      "mergedAt": "2026-10-16T23:37:07Z",
+      "number": 87,
+      "state": "MERGED",
+      "title": "research: audit MR-02 capability evidence and bounded tests",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "dbfa7dd13a7f732bff0653ae6ab45f55b2782f20",
+      "mergeCommit": {
+        "oid": "4858d81eed2b6fab66e5be50874d575e0903f90a"
+      },
+      "mergedAt": "2026-10-16T23:37:43Z",
+      "number": 88,
+      "state": "MERGED",
+      "title": "research: establish T1 provider, model and context decision records",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "cb851f5d40320c5bf72f13aee56de8462972abed",
+      "mergeCommit": {
+        "oid": "05f081f5899c53a9431f3b4fd63346cb14620b00"
+      },
+      "mergedAt": "2026-10-16T23:53:23Z",
+      "number": 89,
+      "state": "MERGED",
+      "title": "MR-04: PCPartPicker walkthrough limits and AI-builder translation (Refs #51)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/89"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "d4f535277aaa9eb01e6962baec5d46942a37ad9f",
+      "mergeCommit": {
+        "oid": "251514e6426fc8c3e88ade121c28424ddbcb3365"
+      },
+      "mergedAt": "2026-10-16T23:37:12Z",
+      "number": 90,
+      "state": "MERGED",
+      "title": "MR-06: dated adoption evidence and sensitivity for sizing scenarios (Refs #53)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/90"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "6c8ecb24590e636ea7ee7ae494b09dedb77199f5",
+      "mergeCommit": {
+        "oid": "ee580169ad9be3cc00fa2d5962f602cfcf6fe445"
+      },
+      "mergedAt": "2026-10-16T23:37:16Z",
+      "number": 91,
+      "state": "MERGED",
+      "title": "MR-07: plan structures, conflict analysis and neutrality controls (Refs #54)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/91"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "eabfc6b447c7d1ac530cb3e7c552090b33cbacdb",
+      "mergeCommit": {
+        "oid": "21be4877f539fc169533241f174dae1a88142e10"
+      },
+      "mergedAt": "2026-10-16T23:37:21Z",
+      "number": 92,
+      "state": "MERGED",
+      "title": "MR-05: neutral interview guide, personas and #63 approval package (Refs #52, #63)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/92"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "dfb420fb35315db52a2a8678f60ae4a4849b6b42",
+      "mergeCommit": {
+        "oid": "5238277602411238cac40e71011052c2fd68ba95"
+      },
+      "mergedAt": "2026-10-16T23:35:34Z",
+      "number": 93,
+      "state": "MERGED",
+      "title": "Refresh README and GitHub guidance for both research programs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/93"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "ec1c5fe72a0897894463d01d4e4fe9d8613bfc42",
+      "mergeCommit": {
+        "oid": "3e92b97bd8e28fcaa9f25c3f2c01295860ea03d8"
+      },
+      "mergedAt": "2026-10-16T23:37:25Z",
+      "number": 94,
+      "state": "MERGED",
+      "title": "MR-11: risk ranking and validation-gate table for MVP options (Refs #58)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/94"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "fdc9a0b6898d1f0e963fc2ba4ab6f8ec29b8f89c",
+      "mergeCommit": {
+        "oid": "ee7d60479e3e32babea3fe043742ee88c9e4d3a0"
+      },
+      "mergedAt": "2026-10-16T23:37:30Z",
+      "number": 95,
+      "state": "MERGED",
+      "title": "MR-10: falsifiable differentiation hypotheses and kill criteria (Refs #57)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/95"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "1ba153557790c819cb106539b89a608889d4c883",
+      "mergeCommit": {
+        "oid": "889f5df8fcae6c71ce634e7838597419932faa29"
+      },
+      "mergedAt": "2026-10-16T23:37:34Z",
+      "number": 96,
+      "state": "MERGED",
+      "title": "MR-01: seeds, operator records and community fit-report resources (Refs #48)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/96"
+    },
+    {
+      "baseRefName": "research/market-intelligence",
+      "headRefOid": "337dccd280ac7d35c12417ca823bdbec4762b665",
+      "mergeCommit": {
+        "oid": "568c6125bf86c49cb9919043e85805d2d0786b01"
+      },
+      "mergedAt": "2026-10-16T23:37:38Z",
+      "number": 97,
+      "state": "MERGED",
+      "title": "MR-03: workflow-structured deep dives with separated rights (Refs #50)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/97"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "056956d1c3c37ba691257d84d4323add884e1ece",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 98,
+      "state": "OPEN",
+      "title": "research: add CanIRun.ai to market discovery",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/98"
+    },
+    {
+      "baseRefName": "main",
+      "headRefOid": "eb2b3485b0f5ee1225f7a9e8bfba8cb7dc8a0ca3",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 99,
+      "state": "OPEN",
+      "title": "docs: align Apple delivery plan with Android hierarchy",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/99"
+    }
+  ],
+  "market_owner_reviews": [
+    {
+      "commit_id": "6511dea2a5102b13df1e47378a31f31230ecb494",
+      "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+      "reviewer": "tynamite",
+      "state": "COMMENTED",
+      "submitted_at": "2026-10-16T16:28:32Z"
+    },
+    {
+      "commit_id": "6511dea2a5102b13df1e47378a31f31230ecb494",
+      "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449",
+      "reviewer": "appletechie",
+      "state": "COMMENTED",
+      "submitted_at": "2026-10-16T21:54:31Z"
+    }
+  ],
+  "project_readback": {
+    "applied": false,
+    "reason": "Token lacks read:project; no live Project field readback or mutation"
+  },
+  "native_blocker_readback": {
+    "issue": 42,
+    "blocked_by": [
+      40
+    ],
+    "observed_on": "2026-10-17",
+    "source": "GitHub GraphQL repository.issue.blockedBy readback; no mutation"
+  },
+  "limitations": "Issue assignees and PR states were read live. Explicit dispositions below come only from the named review at its reviewed commit; neither a merge, generic approval nor a newly added coassignee supplies acceptance. Other issue relationships and live Project fields were not refreshed.",
+  "additional_review_readbacks": [
+    {
+      "pr": 75,
+      "reviews": [
+        {
+          "commit_id": "9e66622a4b2698a9305274f05da9c15ae5d90b8c",
+          "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927",
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "submitted_at": "2026-10-16T16:22:02Z"
+        }
+      ]
+    },
+    {
+      "pr": 83,
+      "reviews": [
+        {
+          "commit_id": "011e5ae1260a52dc3883dea5a2d43b8752f909c4",
+          "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83#pullrequestreview-5554743318",
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "submitted_at": "2026-10-16T23:37:50Z"
+        }
+      ]
+    },
+    {
+      "pr": 84,
+      "reviews": [
+        {
+          "commit_id": "3f8ad4473de359e727a2ff1bd01225161b67fa90",
+          "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/84#pullrequestreview-5554743470",
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "submitted_at": "2026-10-16T23:37:52Z"
+        },
+        {
+          "commit_id": "3f8ad4473de359e727a2ff1bd01225161b67fa90",
+          "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/84#pullrequestreview-5554884187",
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "submitted_at": "2026-10-16T23:55:57Z"
+        }
+      ]
+    },
+    {
+      "pr": 88,
+      "reviews": [
+        {
+          "commit_id": "dbfa7dd13a7f732bff0653ae6ab45f55b2782f20",
+          "html_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868",
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "submitted_at": "2026-10-17T00:07:36Z"
+        }
+      ]
+    }
+  ]
+}

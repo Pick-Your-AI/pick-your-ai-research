@@ -17,15 +17,15 @@
     {
       "source_uri": "https://docs.runpod.io/storage/network-volumes",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Persistent mounted file storage. Pods require Secure Cloud and locality. No maximum-capacity or encryption guarantee inferred."
     },
     {
       "source_uri": "https://docs.runpod.io/storage/s3-api",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "US-KS-2 is a documented datacenter endpoint. Does not establish current storage or GPU stock."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

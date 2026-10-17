@@ -109,7 +109,7 @@ These are direct counterexamples to the defensibility hypothesis in [differentia
 
 Excluded from deep dives: Arena and LLM Stats (leaderboards overlapping Artificial Analysis and BenchLM); CanRun and CanItRun (narrower fit calculators overlapping llmfit, ModelFit and the planner, operators unknown); Ollama and Unsloth (runtimes, substitutes only for the run step); GPUs.io, Vast.ai and Runpod (infrastructure pricing, for #54/#39); Langflow, Flowise, LlamaIndex and LangChain (adjacent builders represented by Dify and n8n); Langfuse, Ragas, LM Evaluation Harness and Qdrant benchmarks (evaluation tooling for #36); MCP Registry (T4 data source).
 
-**Coordinator decision needed:** LocalScore and LocalMaxxing are the strongest of the new community resources against the defensibility hypothesis (public, submission-based fit databases with stated protocols or plausibility checks). Profiling one or both keeps the set within 10–15 (14 or 15). The other four are better treated as evidence sources for #41/#60 than as profiles.
+**Coordinator decision needed:** LocalScore and LocalMaxxing are the strongest of the new community resources against the defensibility hypothesis (public, submission-based fit databases with stated protocols or plausibility checks). With the CanIRun.ai intake, profiling one brings the set to 15, within the 10–15 target. Profiling both would bring it to 16 and needs an explicit scope decision or a replacement profile. The other four are better treated as evidence sources for #41/#60 than as profiles.
 
 ## CanIRun.ai addition (2026-10-16)
 
