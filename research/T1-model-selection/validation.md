@@ -2,6 +2,22 @@
 
 This file records actual checks of this contribution. Preparation and automation do not verify vendor truth, account access, independent performance, source reuse rights, owner acceptance or merge.
 
+## Central-review follow-up: 2026-10-17
+
+Applied the five corrections requested in the [central owner's PR #88 review at `dbfa7dd`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868). The read-only GitHub API response confirms review ID `5554964868`, reviewer `tynamite`, reviewed commit `dbfa7dd13a7f732bff0653ae6ab45f55b2782f20` and submitted time 2026-10-17T00:07:36Z. #75's shared-family disposition and #81's proposed W-R10/D-R2a/b were read separately; the latter was pinned at `9786ef6f9a7942b21a3cc51a05df741360e3594f`. This is documentation reconciliation, with no generated contract, catalog fact or price change and no production evaluator added.
+
+Executed from the follow-up worktree with bundled Python **3.12.14** at `C:/Users/Stew1/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`. The parent session completed `python -m pip install -r requirements-research.txt` against the same requirements before these checks; no additional bundled-package changes were made for this follow-up.
+
+| Check | Actual result |
+| --- | --- |
+| `python -m unittest discover -s contracts/v1/tests -v` | Exit 0; **21 tests passed** |
+| `python -m unittest discover -s tests -v` | Exit 0; **24 tests passed**; normal temp-file access used because the session sandbox blocks temporary-file creation |
+| `python scripts/validate_research.py` | Exit 0; **30 catalog proposals and 2 pricebooks**, plus external evidence metadata |
+| `python scripts/validate_market_research.py` | Exit 0; **32 entities, 1,536 cells, 20 issues** |
+| `git diff --check` | Exit 0 |
+
+The contract tests include the unchanged v1 behavior; passing them does not implement or approve these proposed rule changes. Structural validation checks import/generator integrity, schemas, canonical coverage, references, provenance shape/date ordering and market integrity. It does not verify remote source truth, reuse rights, measurements, contract migration or receiving-owner acceptance. No fresh vendor research or inference/GPU/training experiment was performed. The [handoff ledger](handoffs.md) keeps the changed-revision review, #30 license sufficiency, #10 KV agreement, other consumer dispositions, #36 quality protocol and #39/#40 versioned semantics pending. The prior execution record below is historical.
+
 ## Environment
 
 Python **3.12.12**, local ignored `.venv`. `python -m pip install -r requirements-research.txt` completed successfully under that environment. Frozen import files are not changed. JSON LSP is unavailable because Biome is not installed and installation was previously declined; repository schema validation is the applicable structural check.

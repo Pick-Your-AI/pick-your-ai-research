@@ -1,7 +1,7 @@
 # T1 Model Selection research
 
 Parent: [#4](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4) · Owner at intake: @zwright8 · Last researched: 2026-10-16
-Status: **draft research for independent and consuming-owner review**. This summary reports proposals and sourced findings, not accepted product requirements or completed issues.
+Status: **merged research with scoped central-owner positions; follow-up and consuming-owner review pending**. Vendor research remains dated 2026-10-16; the central [PR #88 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868) was reconciled on 2026-10-17. This summary reports sourced findings and proposed contract changes, not completed issues or an approved executable ruleset.
 
 ## Decision records
 
@@ -21,15 +21,16 @@ Supporting records: [source register](evidence.md), [handoffs](handoffs.md), [ex
 - Dateless does not necessarily mean rolling: current Claude release IDs are fixed snapshots. For weights, preserve model/tokenizer/config/license revision and derivative lineage.
 - Model/provider context limits, output limits and usable task quality are different. Gemini's independent budgets cannot be safely forced into a fabricated combined v1 scalar. Qwen's generation recommendation is not a universal output cap. Direct and Bedrock limits remain route-specific.
 - Token estimates include complete serialized inputs and generation reserves, with explicit bounded/unbounded uncertainty. Context fit is not a guarantee of usable quality, latency, GPU capacity or training permission.
+- For bounded context estimates, decide on the upper bound; straddling intervals fail flagged **may not fit**, with the range shown. Unknown extension configuration uses the evidenced native limit. Quality checks run only for a selected workload `quality_target` under W-R10; transformation support and recounting remain independent.
 - License/access fields retain the actual source and conditions; #30 must confirm sufficiency. T2 owns exact engine/backend support and resource methodology; #36 owns measured quality.
 - API prices are dated USD first-party list rates with exact model versions. Prompt thresholds, caching, service tier and residency affect applicability. Unknown self-hosting and uncovered operations remain unpriced; the Pricebook is not a complete build quote.
 - #41's adopted distinction between checked and independently verified evidence is applied. Current-state facts are dated; pinned facts are rechecked on version/source correction. Resolve conflicts by documented scope and authority before assigning unknown.
 
 ## Contributions for #40 review
 
-Eight proposed rule groups follow the shared template: [T1-O1/O2 and T1-M1/M2](rules/model-offering.md), [CTX-01/02](rules/context-fit.md), [CTX-03/04](rules/context-warnings.md). They cover route identity, license/permission, format/engine support, scoped capacity evidence, context fit/configuration, quality/content loss and price classification. Each has applicability, fixed severity, missing-data behavior, examples, consumers and version consequences. Outcomes remain separate from severity. No final executable Ruleset is published.
+The [PR #88 owner review at `dbfa7dd`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868) accepts T1-O1 and CTX-04, accepts CTX-01/02 with corrections, and narrows CTX-03/T1-O2. This follow-up applies all five requested edits in [model/offering rules and shared inputs](rules/model-offering.md), [CTX-01/02](rules/context-fit.md) and [CTX-03/04](rules/context-warnings.md). T1-O2 now separates v1 model/provider fine-tuning capability from proposed answerable license conditions (D-R2a/b). CTX-03 retains v1 transformation support and recounting; conditional quality belongs to W-R10. Former T1-M1/M2 IDs are retired into the #75 joint-support family (COMPUTE-02/ENGINE-02/D-R3) and memory-fit family (COMPUTE-01/W-R6), with `on_unknown: review` for missing resource evidence. T1 supplies pinned inputs; #10/#11 own formulas/runtime evidence. Outcomes remain separate from severity. The changed revision still needs review; no final executable Ruleset is published.
 
-Contract gaps: offering/model binding, independent context budget semantics and overrides, tokenizer/estimate bounds, architecture/derivative lineage, scoped terms/quotas/regions and conditional price applicability. Existing v1 fields and one-version intake are preserved; extend through #40 with affected-owner review and migration examples rather than patching imported files.
+Contract routing is recorded in [handoffs](handoffs.md): existing `provided_by` binds model/provider; richer endpoint identity, answerable terms/lineage/context-policy roles use #81 CD-6; independent context semantics and route overrides use CD-11; per-stage budgets use CD-5. #39 first owns price applicability, followed by CD-7 migration; region mapping uses CD-9. Existing v1 fields and one-version intake are preserved. These owner positions need versioned #40 changes and affected-owner review before executable use.
 
 ## Structured proposals
 
@@ -39,6 +40,6 @@ Qwen/Gemini remain note-only model candidates where required max-output/combined
 
 ## Completion and open work
 
-All [41 criteria](acceptance-matrix.md) for assigned #4–7/#49 are tracked without equating prepared content with acceptance. Required T1 handoffs are [pending](handoffs.md). #49's matrix contribution remains separate from T1 and builds on unmerged PR #67. Parent #4 needs the three accepted/merged child records, this merged summary and its own confirmed cross-workstream assumptions before closure.
+All [41 criteria](acceptance-matrix.md) for assigned #4–7/#49 are tracked without equating a merge with full acceptance. The #3/#41 applications and scoped #40 positions are recorded in [handoffs](handoffs.md); required independent consumer confirmations remain pending, including #30 license-field sufficiency and #10 KV inputs. #49's matrix contribution remains separate from T1; its earlier PR #67/#87 stack state is historical and must be refreshed in that track. Parent #4 still needs complete child acceptance and confirmed cross-workstream handoffs before closure.
 
-Submitted as [PR #88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88); the separate matrix contribution is [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87). See [goal progress](goal-progress.md) for exact branch/check/review state. The signed-in browser wrote and read back T1 Status=In Review without account permission expansion; #49 was already In Review. Normal independent reviews and owner decisions remain required before completion.
+Decision records merged in [PR #88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88); the central reviewer explicitly reviewed merged head `dbfa7dd`. The separate matrix contribution is [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87). [Goal progress](goal-progress.md) preserves the prior publication checkpoint with this follow-up noted. No new board/assignment mutation is part of this correction; owner decisions remain required before completion.
