@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "mcp_server.playwright",
+  "kind": "mcp_server",
+  "tier": "T4",
+  "name": "Playwright MCP",
+  "version": "0.0.83",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Microsoft browser-automation MCP server (@playwright/mcp). Default packaging is stdio; '--port' enables an HTTP endpoint at /mcp, which v1 cannot record on the same item. The README states it is not a security boundary.",
+  "tags": [
+    "local",
+    "browser-automation",
+    "microsoft"
+  ],
+  "spec": {
+    "transport": "stdio",
+    "auth_methods": [
+      "none"
+    ],
+    "trust_level": "trusted_external"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://registry.npmjs.org/@playwright/mcp",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "npm dist-tag latest 0.0.83 published 2026-09-28; license Apache-2.0; mcpName io.github.microsoft/playwright-mcp. Supports version."
+    },
+    {
+      "source_uri": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.microsoft%2Fplaywright-mcp/versions/latest",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Registry entry io.github.microsoft/playwright-mcp lists version 0.0.82 (npm @playwright/mcp, transport stdio), status active, published 2026-09-18; registry lags npm by one patch. Supports transport and publisher identity. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/playwright-mcp/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "README: stdio configs; '--port' enables HTTP transport (url http://localhost:8931/mcp); --host defaults to localhost; --allowed-origins 'does not serve as a security boundary'; 'Playwright MCP is not a security boundary'. No server-side authentication option documented, recorded as auth none."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/playwright-mcp/blob/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "LICENSE is Apache License 2.0. Supports license."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}
