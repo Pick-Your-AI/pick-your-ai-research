@@ -6,7 +6,8 @@
   "method": {
     "sources": "Publisher documentation and pinned code/configuration; checked source claims remain unverified as runtime behavior.",
     "coverage": "Four task territories with targeted skeptical expansion; not an exhaustive census.",
-    "unknowns": "Explicit unknowns and source disagreements retained. Numeric defaults/examples/training shapes are not promoted to unconditional maxima."
+    "unknowns": "Explicit unknowns and source disagreements retained. Numeric defaults/examples/training shapes are not promoted to unconditional maxima.",
+    "conflict_resolution": "Apply #41 scope, version/date and authority order; conservative equal-rank numeric value with disputed=true. Unknown only for missing eligible evidence or genuine ties. disputed=false means no conflict recorded here, not verified runtime behavior."
   },
   "sources": [
     {
@@ -504,7 +505,8 @@
       "implication": "Persist selected dimension and model identity with the index. Do not transfer v5's default to v4 or assume equal dimension means equal embedding space.",
       "source_ids": [
         "EL-S1"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "EL-02",
@@ -520,7 +522,8 @@
       "implication": "Never present successful default truncation as preservation of every input token. Avoid one brand-wide image-count cap.",
       "source_ids": [
         "EL-S1"
-      ]
+      ],
+      "disputed": true
     },
     {
       "id": "EL-03",
@@ -536,23 +539,44 @@
       "implication": "Check both item and batch budgets. Splitting a batch does not repair a too-long individual item.",
       "source_ids": [
         "EL-S2"
-      ]
+      ],
+      "disputed": false
     },
     {
-      "id": "EL-04",
+      "id": "EL-04-input",
       "family": "retrieval",
       "model": "Voyage text embeddings",
       "route": "direct v1 embeddings",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "documented default transform and packed output layout",
-      "quantity": "truncation policy and binary storage length",
-      "value": "truncation=true by default; false raises overlength error; binary/ubinary returned integer-list length = output_dimension / 8",
-      "unit": "policy; packed bytes per vector",
+      "quantity": "input truncation policy and binary storage length",
+      "value": "truncation=true default; false raises overlength error",
+      "unit": "policy",
       "conditions": "Applicable model/dtype support remains source-specific; the logical vector dimension is not the returned packed-list length.",
       "implication": "Store the effective transform and logical dimension/dtype. Do not interpret a 128-element packed result as a 128-dimensional float vector.",
       "source_ids": [
         "EL-S2"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "EL-04"
+    },
+    {
+      "id": "EL-04-output",
+      "family": "retrieval",
+      "model": "Voyage text embeddings",
+      "route": "direct v1 embeddings",
+      "direction": "output",
+      "semantics": "documented default transform and packed output layout",
+      "quantity": "output truncation policy and binary storage length",
+      "value": "binary/ubinary integer-list length = output_dimension / 8",
+      "unit": "packed bytes per vector",
+      "conditions": "Applicable model/dtype support remains source-specific; the logical vector dimension is not the returned packed-list length.",
+      "implication": "Store the effective transform and logical dimension/dtype. Do not interpret a 128-element packed result as a 128-dimensional float vector.",
+      "source_ids": [
+        "EL-S2"
+      ],
+      "disputed": false,
+      "parent_record": "EL-04"
     },
     {
       "id": "EL-05",
@@ -568,39 +592,80 @@
       "implication": "Pin SDK/server parameter mapping and actual returned chunk_texts. A larger total window does not enlarge every chunk.",
       "source_ids": [
         "EL-S3"
-      ]
+      ],
+      "disputed": false
     },
     {
-      "id": "EL-06",
+      "id": "EL-06-input",
       "family": "retrieval",
       "model": "Qwen/Qwen3-Embedding-0.6B",
       "route": "pinned open-weight card/config",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "published sequence/configuration versus runnable example",
-      "quantity": "sequence length and output dimension",
-      "value": "card: 32K sequence; pinned config max_position_embeddings=32768; dimensions 32..1024; example max_length=8192",
-      "unit": "tokens; vector dimensions",
+      "quantity": "input sequence length and output dimension",
+      "value": "card 32K; config max_position_embeddings=32768; example max_length=8192",
+      "unit": "tokens",
       "conditions": "The example's truncation limit is not the card's model ceiling. Configuration and card do not establish runtime quality/admission at every length.",
       "implication": "Record the actual preprocessing limit and selected dimension separately from the model's published/configured capacity.",
       "source_ids": [
         "EL-S4"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "EL-06"
     },
     {
-      "id": "EL-07",
+      "id": "EL-06-output",
+      "family": "retrieval",
+      "model": "Qwen/Qwen3-Embedding-0.6B",
+      "route": "pinned open-weight card/config",
+      "direction": "output",
+      "semantics": "published sequence/configuration versus runnable example",
+      "quantity": "output sequence length and output dimension",
+      "value": "32..1024",
+      "unit": "vector dimensions",
+      "conditions": "The example's truncation limit is not the card's model ceiling. Configuration and card do not establish runtime quality/admission at every length.",
+      "implication": "Record the actual preprocessing limit and selected dimension separately from the model's published/configured capacity.",
+      "source_ids": [
+        "EL-S4"
+      ],
+      "disputed": false,
+      "parent_record": "EL-06"
+    },
+    {
+      "id": "EL-07-input",
       "family": "retrieval",
       "model": "BAAI/bge-m3",
       "route": "pinned publisher card",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "published sequence limit and multiple retrieval representations",
-      "quantity": "sequence and dense dimension",
-      "value": "8192 input tokens; dense dimension 1024; dense, sparse and multi-vector outputs",
-      "unit": "tokens; vector dimensions; representation kind",
+      "quantity": "input sequence and dense dimension",
+      "value": "8192",
+      "unit": "tokens",
       "conditions": "Example max_passage_length=128 is a configured speed/length choice, not the published model maximum.",
       "implication": "Require the consumer's dense/sparse/late-interaction representation support, in addition to length and any dimension check.",
       "source_ids": [
         "EL-S5"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "EL-07"
+    },
+    {
+      "id": "EL-07-output",
+      "family": "retrieval",
+      "model": "BAAI/bge-m3",
+      "route": "pinned publisher card",
+      "direction": "output",
+      "semantics": "published sequence limit and multiple retrieval representations",
+      "quantity": "output sequence and dense dimension",
+      "value": "dense dimension 1024; dense, sparse and multi-vector outputs",
+      "unit": "vector dimensions; representation kind",
+      "conditions": "Example max_passage_length=128 is a configured speed/length choice, not the published model maximum.",
+      "implication": "Require the consumer's dense/sparse/late-interaction representation support, in addition to length and any dimension check.",
+      "source_ids": [
+        "EL-S5"
+      ],
+      "disputed": false,
+      "parent_record": "EL-07"
     },
     {
       "id": "EL-08",
@@ -616,7 +681,8 @@
       "implication": "A single-vector dimension equality check cannot certify compatibility. Pin processor/runtime and score method as part of retrieval identity.",
       "source_ids": [
         "EL-S6"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "EL-09",
@@ -632,23 +698,44 @@
       "implication": "Keep preprocessing/prefix policy and truncation visible. Do not market unchanged handling of longer documents.",
       "source_ids": [
         "EL-S7"
-      ]
+      ],
+      "disputed": false
     },
     {
-      "id": "EL-10",
+      "id": "EL-10-input",
       "family": "retrieval",
       "model": "jinaai/jina-embeddings-v4",
       "route": "pinned publisher card; open-weight mode",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "published sequence and representation dimensions",
-      "quantity": "sequence and dense/late-interaction dimensions",
-      "value": "32768 sequence; dense default 2048, selectable 128/256/512/1024/2048; multi-vector width 128",
-      "unit": "tokens; vector dimensions",
+      "quantity": "input sequence and dense/late-interaction dimensions",
+      "value": "32768",
+      "unit": "tokens",
       "conditions": "Card's Sentence Transformers section directs multi-vector users to the Hugging Face model directly. The examined wrappers are not interchangeable.",
       "implication": "Persist vector_type and supported wrapper alongside dimension. A wrapper exposing only dense output does not prove multi-vector availability.",
       "source_ids": [
         "EL-S8"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "EL-10"
+    },
+    {
+      "id": "EL-10-output",
+      "family": "retrieval",
+      "model": "jinaai/jina-embeddings-v4",
+      "route": "pinned publisher card; open-weight mode",
+      "direction": "output",
+      "semantics": "published sequence and representation dimensions",
+      "quantity": "output sequence and dense/late-interaction dimensions",
+      "value": "dense default 2048; selectable 128/256/512/1024/2048; multi-vector width 128",
+      "unit": "vector dimensions",
+      "conditions": "Card's Sentence Transformers section directs multi-vector users to the Hugging Face model directly. The examined wrappers are not interchangeable.",
+      "implication": "Persist vector_type and supported wrapper alongside dimension. A wrapper exposing only dense output does not prove multi-vector availability.",
+      "source_ids": [
+        "EL-S8"
+      ],
+      "disputed": false,
+      "parent_record": "EL-10"
     },
     {
       "id": "AU-01",
@@ -664,7 +751,8 @@
       "implication": "Separate chunk/window configuration from file admission.",
       "source_ids": [
         "AU-S1"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-02",
@@ -672,15 +760,16 @@
       "model": "OpenAI hosted transcription",
       "route": "Transcriptions guide versus legacy whisper-1 FAQ",
       "direction": "input",
-      "semantics": "unresolved unit/scope discrepancy",
+      "semantics": "route-scoped documented limit",
       "quantity": "file/request size",
       "value": "guide: 25 MB file; FAQ: 25 MiB legacy request",
       "unit": "publisher MB/MiB",
-      "conditions": "Newer GPT-4o routes may use different duration/token validation. No exact common byte threshold established.",
-      "implication": "Do not normalize into a universal size or audio duration maximum.",
+      "conditions": "Apply the current guide to current routes and the legacy FAQ to whisper-1 only. If both govern the same route, resolve units where defined and take the smaller eligible limit, flagged disputed; do not assume a byte definition the publisher omits.",
+      "implication": "Apply scope before numeric comparison; unknown only if eligible evidence is absent or a genuine tie remains.",
       "source_ids": [
         "AU-S2"
-      ]
+      ],
+      "disputed": true
     },
     {
       "id": "AU-03",
@@ -696,7 +785,8 @@
       "implication": "Represent connection/session expiry separately from media admission.",
       "source_ids": [
         "AU-S3"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-04",
@@ -712,7 +802,8 @@
       "implication": "Preserve character accounting and API identity; do not substitute tokens/words.",
       "source_ids": [
         "AU-S4"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-05",
@@ -728,7 +819,8 @@
       "implication": "Preserve character accounting and API identity; do not substitute tokens/words.",
       "source_ids": [
         "AU-S4"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-06",
@@ -744,7 +836,8 @@
       "implication": "Preserve character accounting and API identity; do not substitute tokens/words.",
       "source_ids": [
         "AU-S4"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-07",
@@ -760,7 +853,8 @@
       "implication": "Provider/model/plan/route must be separate selection attributes.",
       "source_ids": [
         "AU-S5"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-08",
@@ -776,7 +870,8 @@
       "implication": "Name chunking strategy, timestamp mode and actual retained chunks.",
       "source_ids": [
         "AU-S6"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-09",
@@ -792,7 +887,8 @@
       "implication": "Do not impose wrapper chunk duration as the aligner model's universal maximum.",
       "source_ids": [
         "AU-S6"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-10",
@@ -808,7 +904,8 @@
       "implication": "Keep representation and processor path, rather than declaring a 510-character natural-language ceiling.",
       "source_ids": [
         "AU-S7"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-11",
@@ -824,7 +921,8 @@
       "implication": "Show recommendation separately from hard admission predicates.",
       "source_ids": [
         "AU-S8"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-01",
@@ -840,7 +938,8 @@
       "implication": "Distinguish per-axis grid, total area and recommended operating size.",
       "source_ids": [
         "ME-S1"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-02",
@@ -856,7 +955,8 @@
       "implication": "Product UI capacities must not be copied onto an API route.",
       "source_ids": [
         "ME-S2"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-03",
@@ -872,7 +972,8 @@
       "implication": "Bind limits to a dated observation and effective version; auto is not an explicit user duration.",
       "source_ids": [
         "ME-S3"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-04",
@@ -888,7 +989,8 @@
       "implication": "Avoid assuming conventional 720p/1080p/2160p shapes or native generation at delivered resolution.",
       "source_ids": [
         "ME-S3"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-05",
@@ -904,7 +1006,8 @@
       "implication": "Validate model-discriminated body and allowed combinations, not arbitrary image dimensions.",
       "source_ids": [
         "ME-S4"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-06",
@@ -920,7 +1023,8 @@
       "implication": "A shared image-generation interface does not make every size valid for every model.",
       "source_ids": [
         "ME-S5"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-07",
@@ -936,7 +1040,8 @@
       "implication": "Use the exact ratio/size table rather than treating 4096 as a width cap.",
       "source_ids": [
         "ME-S5"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-08",
@@ -952,7 +1057,8 @@
       "implication": "Do not turn an optimization recommendation into a hard rejection threshold.",
       "source_ids": [
         "ME-S5"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "ME-09",
@@ -968,23 +1074,44 @@
       "implication": "Validate combinations rather than independent maxima.",
       "source_ids": [
         "ME-S6"
-      ]
+      ],
+      "disputed": false
     },
     {
-      "id": "ME-10",
+      "id": "ME-10-input",
       "family": "media",
       "model": "Veo3.1 / Fast extension",
       "route": "prior Veo-generated video only",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "extension-specific limits",
-      "quantity": "route-specific image/video admission or output",
-      "value": "input <=141s at720p; each extension7s; up to 20 extensions; output<=148s",
+      "quantity": "input route-specific image/video admission or output",
+      "value": "input <=141s at720p; prior Veo-generated video; up to 20 extensions",
       "unit": "seconds; extension count",
       "conditions": "16:9/9:16; Lite lacks extension. This is not arbitrary upload support or single-generation length.",
       "implication": "Treat extension lineage, resolution and cumulative duration as separate predicates.",
       "source_ids": [
         "ME-S6"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "ME-10"
+    },
+    {
+      "id": "ME-10-output",
+      "family": "media",
+      "model": "Veo3.1 / Fast extension",
+      "route": "prior Veo-generated video only",
+      "direction": "output",
+      "semantics": "extension-specific limits",
+      "quantity": "output route-specific image/video admission or output",
+      "value": "each extension 7s; cumulative output <=148s",
+      "unit": "seconds",
+      "conditions": "16:9/9:16; Lite lacks extension. This is not arbitrary upload support or single-generation length.",
+      "implication": "Treat extension lineage, resolution and cumulative duration as separate predicates.",
+      "source_ids": [
+        "ME-S6"
+      ],
+      "disputed": false,
+      "parent_record": "ME-10"
     },
     {
       "id": "ME-11",
@@ -1000,23 +1127,44 @@
       "implication": "Store sampling and resolution with admission/quality inputs.",
       "source_ids": [
         "ME-S7"
-      ]
+      ],
+      "disputed": false
     },
     {
-      "id": "ME-12",
+      "id": "ME-12-input",
       "family": "media",
       "model": "FLUX3 image",
       "route": "POST /v1/flux-3-image; version=latest",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "documented reference count and equal-area size tier",
-      "quantity": "route-specific image/video admission or output",
-      "value": "optional references1-10; tiers768sq/1k/1.5k/2k/4k; default 1k",
-      "unit": "reference images; publisher size tier",
+      "quantity": "input route-specific image/video admission or output",
+      "value": "optional references 1-10",
+      "unit": "reference images",
       "conditions": "No exact per-ratio dimensions or numerical total-pixel ceiling established; count is field description rather than maxItems schema proof.",
       "implication": "Do not import FLUX.2's 4MP ceiling or interpret tier name as edge length.",
       "source_ids": [
         "ME-S8"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "ME-12"
+    },
+    {
+      "id": "ME-12-output",
+      "family": "media",
+      "model": "FLUX3 image",
+      "route": "POST /v1/flux-3-image; version=latest",
+      "direction": "output",
+      "semantics": "documented reference count and equal-area size tier",
+      "quantity": "output route-specific image/video admission or output",
+      "value": "tiers 768sq/1k/1.5k/2k/4k; default 1k",
+      "unit": "publisher size tier",
+      "conditions": "No exact per-ratio dimensions or numerical total-pixel ceiling established; count is field description rather than maxItems schema proof.",
+      "implication": "Do not import FLUX.2's 4MP ceiling or interpret tier name as edge length.",
+      "source_ids": [
+        "ME-S8"
+      ],
+      "disputed": false,
+      "parent_record": "ME-12"
     },
     {
       "id": "ME-13",
@@ -1032,23 +1180,44 @@
       "implication": "Check area, ratio and per-axis grid together; experimental does not mean prohibited.",
       "source_ids": [
         "ME-S9"
-      ]
+      ],
+      "disputed": true
     },
     {
-      "id": "ME-14",
+      "id": "ME-14-input",
       "family": "media",
       "model": "gpt-image-2.5-sunburst / flare",
       "route": "POST /v1/images/edits",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "endpoint count and model-specific parameter behavior",
-      "quantity": "route-specific image/video admission or output",
-      "value": "up to 16 input references; 1-10 output images",
+      "quantity": "input route-specific image/video admission or output",
+      "value": "up to 16 input references",
       "unit": "images",
       "conditions": "Pin dated model IDs instead of current default. GPT Image2 high fidelity is automatic; omit input_fidelity per guide.",
       "implication": "Counts do not guarantee identity fidelity; older parameter controls need route-specific checking.",
       "source_ids": [
         "ME-S9"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "ME-14"
+    },
+    {
+      "id": "ME-14-output",
+      "family": "media",
+      "model": "gpt-image-2.5-sunburst / flare",
+      "route": "POST /v1/images/edits",
+      "direction": "output",
+      "semantics": "endpoint count and model-specific parameter behavior",
+      "quantity": "output route-specific image/video admission or output",
+      "value": "1-10 output images",
+      "unit": "images",
+      "conditions": "Pin dated model IDs instead of current default. GPT Image2 high fidelity is automatic; omit input_fidelity per guide.",
+      "implication": "Counts do not guarantee identity fidelity; older parameter controls need route-specific checking.",
+      "source_ids": [
+        "ME-S9"
+      ],
+      "disputed": false,
+      "parent_record": "ME-14"
     },
     {
       "id": "ME-15",
@@ -1064,7 +1233,8 @@
       "implication": "Leave exact OCR hard admission unknown rather than using the largest upstream upload value.",
       "source_ids": [
         "ME-S10"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-12",
@@ -1080,7 +1250,8 @@
       "implication": "Do not transfer a hardware-conditioned capacity to an arbitrary runtime.",
       "source_ids": [
         "AU-S9"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-13",
@@ -1096,7 +1267,8 @@
       "implication": "Preserve attention mode and unresolved hardware scope.",
       "source_ids": [
         "AU-S9"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-14",
@@ -1112,7 +1284,8 @@
       "implication": "Store effective generation settings; do not claim an architectural ceiling or exact audio duration.",
       "source_ids": [
         "AU-S10"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-15",
@@ -1128,7 +1301,8 @@
       "implication": "Retain unknown rather than converting codec tokens to a guaranteed number of seconds.",
       "source_ids": [
         "AU-S10"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-01",
@@ -1144,7 +1318,8 @@
       "implication": "Group by series and retained history rather than treating every row as one token.",
       "source_ids": [
         "PR-S1"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-02",
@@ -1160,7 +1335,8 @@
       "implication": "Separate configured capability, guard policy and actual requested horizon.",
       "source_ids": [
         "PR-S1"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-03",
@@ -1176,55 +1352,116 @@
       "implication": "Pin wrapper revision and report retained/discarded history.",
       "source_ids": [
         "PR-S2"
-      ]
+      ],
+      "disputed": false
     },
     {
-      "id": "PR-04",
+      "id": "PR-04-input",
       "family": "predictive",
       "model": "TimesFM2.5",
       "route": "publisher release plus example",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "published input capability and optional quantile-head horizon",
-      "quantity": "model-specific input/output or representation",
-      "value": "context up to 16k; quantile forecasting up to 1k; example max_context1024/max_horizon256",
-      "unit": "time points; future steps",
+      "quantity": "input model-specific input/output or representation",
+      "value": "context up to 16k; example max_context1024",
+      "unit": "time points",
       "conditions": "Source k notation retained. Quantile-head horizon is not an unconditional point-forecast cap.",
       "implication": "Keep task/head and example/runtime settings separate.",
       "source_ids": [
         "PR-S3"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "PR-04"
     },
     {
-      "id": "PR-05",
+      "id": "PR-04-output",
+      "family": "predictive",
+      "model": "TimesFM2.5",
+      "route": "publisher release plus example",
+      "direction": "output",
+      "semantics": "published input capability and optional quantile-head horizon",
+      "quantity": "output model-specific input/output or representation",
+      "value": "quantile forecasting up to 1k; example max_horizon256",
+      "unit": "future steps",
+      "conditions": "Source k notation retained. Quantile-head horizon is not an unconditional point-forecast cap.",
+      "implication": "Keep task/head and example/runtime settings separate.",
+      "source_ids": [
+        "PR-S3"
+      ],
+      "disputed": false,
+      "parent_record": "PR-04"
+    },
+    {
+      "id": "PR-05-input",
       "family": "predictive",
       "model": "TimesFM2.0",
       "route": "pinned card",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "training context with internally qualified inference description",
-      "quantity": "model-specific input/output or representation",
-      "value": "training context 2048; example/usage maximum ambiguity; arbitrary horizons described",
-      "unit": "time points; future steps",
+      "quantity": "input model-specific input/output or representation",
+      "value": "training context 2048; current usage limitation 2048 takes precedence over general extrapolation capability",
+      "unit": "time points",
       "conditions": "Card permits extrapolation past training context, while usage describes currently handled2048; horizon<=context is recommended, not required.",
-      "implication": "Preserve internal source ambiguity and inspect chosen wrapper rather than inventing one universal ceiling.",
+      "implication": "For the documented current usage, the stated 2048 limitation outranks the general extrapolation capability. Keep the dispute visible and inspect the selected wrapper; this does not impose a universal output horizon.",
       "source_ids": [
         "PR-S4"
-      ]
+      ],
+      "disputed": true,
+      "parent_record": "PR-05"
     },
     {
-      "id": "PR-06",
+      "id": "PR-05-output",
+      "family": "predictive",
+      "model": "TimesFM2.0",
+      "route": "pinned card",
+      "direction": "output",
+      "semantics": "training context with internally qualified inference description",
+      "quantity": "output model-specific input/output or representation",
+      "value": "arbitrary horizons described; horizon<=context recommended, not required",
+      "unit": "future steps",
+      "conditions": "Card permits extrapolation past training context, while usage describes currently handled2048; horizon<=context is recommended, not required.",
+      "implication": "For the documented current usage, the stated 2048 limitation outranks the general extrapolation capability. Keep the dispute visible and inspect the selected wrapper; this does not impose a universal output horizon.",
+      "source_ids": [
+        "PR-S4"
+      ],
+      "disputed": true,
+      "parent_record": "PR-05"
+    },
+    {
+      "id": "PR-06-input",
       "family": "predictive",
       "model": "MOMENT1-large",
       "route": "checkpoint and model input",
-      "direction": "input_and_output",
+      "direction": "input",
       "semantics": "configured window versus output example",
-      "quantity": "model-specific input/output or representation",
-      "value": "seq_len512; patch length/stride8; forecasting example horizon 96",
-      "unit": "time points; steps",
+      "quantity": "input model-specific input/output or representation",
+      "value": "seq_len512; patch length/stride8",
+      "unit": "time points",
       "conditions": "Input is batch xchannels xsequence; univariate pretraining is not proof of one-channel-only inference. No universal output cap verified.",
       "implication": "Treat96 as example and retain actual task head/channel configuration.",
       "source_ids": [
         "PR-S5"
-      ]
+      ],
+      "disputed": false,
+      "parent_record": "PR-06"
+    },
+    {
+      "id": "PR-06-output",
+      "family": "predictive",
+      "model": "MOMENT1-large",
+      "route": "checkpoint and model input",
+      "direction": "output",
+      "semantics": "configured window versus output example",
+      "quantity": "output model-specific input/output or representation",
+      "value": "forecasting example horizon96; no universal output cap established",
+      "unit": "steps",
+      "conditions": "Input is batch xchannels xsequence; univariate pretraining is not proof of one-channel-only inference. No universal output cap verified.",
+      "implication": "Treat96 as example and retain actual task head/channel configuration.",
+      "source_ids": [
+        "PR-S5"
+      ],
+      "disputed": false,
+      "parent_record": "PR-06"
     },
     {
       "id": "PR-07",
@@ -1240,7 +1477,8 @@
       "implication": "Keep dataset axes and configuration semantics separate from architectural hard maxima.",
       "source_ids": [
         "PR-S6"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-08",
@@ -1256,7 +1494,8 @@
       "implication": "Do not publish the fallback's50000 as the selected checkpoint's operating cap.",
       "source_ids": [
         "PR-S6"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-09",
@@ -1273,7 +1512,8 @@
       "source_ids": [
         "PR-S6",
         "PR-S7"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-10",
@@ -1289,7 +1529,8 @@
       "implication": "Validate semantic band mapping and normalization, not channel count alone.",
       "source_ids": [
         "PR-S8"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-11",
@@ -1305,7 +1546,8 @@
       "implication": "Do not turn224 into geographic extent/resolution or a global token cap.",
       "source_ids": [
         "PR-S8"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-12",
@@ -1321,7 +1563,8 @@
       "implication": "Do not label the largest preset bucket as global molecule-size cap.",
       "source_ids": [
         "PR-S9"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-13",
@@ -1337,7 +1580,8 @@
       "implication": "Expose transformations and lost cross-target/covariate information; do not claim a global32-variate prohibition.",
       "source_ids": [
         "PR-S2"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "PR-14",
@@ -1353,7 +1597,8 @@
       "implication": "Use the actual tokenizer/processing policy for mixed complexes; do not invent a universal atom maximum.",
       "source_ids": [
         "PR-S9"
-      ]
+      ],
+      "disputed": false
     },
     {
       "id": "AU-16",
@@ -1369,7 +1614,8 @@
       "implication": "Keep exact model ID and text-accounting policy with the selected route.",
       "source_ids": [
         "AU-S4"
-      ]
+      ],
+      "disputed": false
     }
   ]
 }

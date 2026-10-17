@@ -4,7 +4,7 @@ Issues: #5, #6, #7; central review: #40. **Status: partial research for review; 
 
 ## Scope and evidence
 
-This supplement records **55 evidence/unknown records across four territories and 37 source groups** (65 distinct source URLs on 12 domains, fragments deduplicated). Counts are derived from the companion [research JSON](nontext-limit-evidence.json); they are not independently tested model counts. The JSON is a research note, not a CatalogItem, Pricebook or measured run.
+This supplement records **65 direction-specific evidence/unknown records across four territories and 37 source groups** (65 distinct source URLs on 12 domains, fragments deduplicated). Counts are derived from the companion [research JSON](nontext-limit-evidence.json); they are not independently tested model counts. The JSON is a research note, not a CatalogItem, Pricebook or measured run.
 
 Each record preserves model/route, stage, unit, limit semantics, source revision/access date and decision consequence. Model configuration, wrapper cap, service limit, default, training shape, recommendation and example are distinct evidence. All observations remain **source checked, unverified as runtime behavior**. No paid calls, inference, weights, raw datasets or private inputs were used. Model quality, hardware fit, clinical utility and legal clearance are not established.
 
@@ -36,7 +36,10 @@ flowchart TD
     H --> C[Evaluate only the matching predicate]
     T --> D[Show retained or changed content]
     G --> Q[Keep separate from rejection rules]
-    X --> V[Request evidence or owner review]
+    X --> V[Apply scope then version and authority order]
+    V --> C
+    V --> N[Equal-rank numbers: conservative value and disputed flag]
+    V --> M[No eligible evidence or genuine tie: unknown]
 ```
 
 Figure: project-authored research flow for interpreting the evidence below; not an implemented rule engine.
@@ -46,7 +49,7 @@ Figure: project-authored research flow for interpreting the evidence below; not 
 | ID / model and route | Documented value and unit | Meaning and retained conditions | Selection consequence | Evidence |
 | --- | --- | --- | --- | --- |
 | **AU-01** OpenAI Whisper; local transcribe() | 30-second sliding windows; 16000 Hz **seconds; Hz** (input) | **processing window, not whole-file maximum.** Whole file is processed over repeated windows. | Separate chunk/window configuration from file admission. | [AU-S1](#au-s1) |
-| **AU-02** OpenAI hosted transcription; Transcriptions guide versus legacy whisper-1 FAQ | guide: 25 MB file; FAQ: 25 MiB legacy request **publisher MB/MiB** (input) | **unresolved unit/scope discrepancy.** Newer GPT-4o routes may use different duration/token validation. No exact common byte threshold established. | Do not normalize into a universal size or audio duration maximum. | [AU-S2](#au-s2) |
+| **AU-02** OpenAI hosted transcription; Transcriptions guide versus legacy whisper-1 FAQ | guide: 25 MB file; FAQ: 25 MiB legacy request **publisher MB/MiB** (input) | **route-scoped limits.** Current guide governs current routes; legacy FAQ governs whisper-1 only. If both apply to one route, use the smaller eligible limit, flagged disputed; preserve any undefined byte basis. | Do not normalize into a universal size or audio duration maximum. | [AU-S2](#au-s2) |
 | **AU-03** OpenAI Realtime; speech-to-speech session | 60 **minutes** (session) | **documented maximum.** This is a session lifetime, not individual input/output audio duration or every voice route. | Represent connection/session expiry separately from media admission. | [AU-S3](#au-s3) |
 | **AU-04** eleven_v3; ElevenLabs TTS API | 5000 **characters** (input) | **documented request maximum.** Exact character-count algorithm is not established by this page; approximate audio minutes are not output-duration caps. | Preserve character accounting and API identity; do not substitute tokens/words. | [AU-S4](#au-s4) |
 | **AU-05** eleven_multilingual_v2; ElevenLabs TTS API | 10000 **characters** (input) | **documented request maximum.** Exact character-count algorithm is not established by this page; approximate audio minutes are not output-duration caps. | Preserve character accounting and API identity; do not substitute tokens/words. | [AU-S4](#au-s4) |
@@ -105,7 +108,7 @@ Figure: project-authored research flow for interpreting the evidence below; not 
 | **PR-02** Chronos2; pipeline prediction_length guard | 1024 (=64 output patches x16 steps) **future time steps** (output) | **default model length with explicit override.** limit_prediction_length rejects overlength when enabled; disabling allows continuation with warning. No quality guarantee for longer forecasts. | Separate configured capability, guard policy and actual requested horizon. | [PR-S1](#pr-s1) |
 | **PR-03** TimesFM3.0; pinned PyTorch forecaster | 15360 **time points** (input) | **wrapper retained-context cap.** Longer target histories/covariates are sliced; earlier2.5 16k statement is not this wrapper. | Pin wrapper revision and report retained/discarded history. | [PR-S2](#pr-s2) |
 | **PR-04** TimesFM2.5; publisher release plus example | context up to 16k; quantile forecasting up to 1k; example max_context1024/max_horizon256 **time points; future steps** (input_and_output) | **published input capability and optional quantile-head horizon.** Source k notation retained. Quantile-head horizon is not an unconditional point-forecast cap. | Keep task/head and example/runtime settings separate. | [PR-S3](#pr-s3) |
-| **PR-05** TimesFM2.0; pinned card | training context 2048; example/usage maximum ambiguity; arbitrary horizons described **time points; future steps** (input_and_output) | **training context with internally qualified inference description.** Card permits extrapolation past training context, while usage describes currently handled2048; horizon<=context is recommended, not required. | Preserve internal source ambiguity and inspect chosen wrapper rather than inventing one universal ceiling. | [PR-S4](#pr-s4) |
+| **PR-05** TimesFM2.0; pinned card | training context 2048; example/usage maximum ambiguity; arbitrary horizons described **time points; future steps** (input_and_output) | **training context with internally qualified inference description.** Card permits extrapolation past training context, while usage describes currently handled2048; horizon<=context is recommended, not required. | Apply the stated current-usage 2048 limitation ahead of the general extrapolation capability, flagged disputed; inspect the selected wrapper and keep output horizon separate. | [PR-S4](#pr-s4) |
 | **PR-06** MOMENT1-large; checkpoint and model input | seq_len512; patch length/stride8; forecasting example horizon 96 **time points; steps** (input_and_output) | **configured window versus output example.** Input is batch xchannels xsequence; univariate pretraining is not proof of one-channel-only inference. No universal output cap verified. | Treat96 as example and retain actual task head/channel configuration. | [PR-S5](#pr-s5) |
 | **PR-07** TabPFN v2; version-specific default inference configuration | 10000 samples; 500 features; 10 classes **samples; features; classes** (input) | **intended operating-range configuration.** Source describes sample/feature values as intended pretraining range including extrapolation; not necessarily literal largest training dataset. | Keep dataset axes and configuration semantics separate from architectural hard maxima. | [PR-S6](#pr-s6) |
 | **PR-08** TabPFN v2.5; post-v2 checkpoint-loaded configuration | fallback function50000 samples/2000 features/10 classes; loaded checkpoint limits not established here **samples; features; classes** (input) | **withdrawn fallback-as-cap inference; actual limit unresolved.** get_default explicitly says post-v2 inference config comes from checkpoint and this function is not called. No weights downloaded. | Do not publish the fallback's50000 as the selected checkpoint's operating cap. | [PR-S6](#pr-s6) |
@@ -134,7 +137,8 @@ These are requests for review, not receiving-owner acknowledgements.
 | #7 | Apply token predicates only where units/semantics match; preserve transforms | Pending |
 | #10/#11 | Carry retained shapes, mode, chunking, dtype and wrapper revision; measure resource claims | Pending |
 | #14/#15/#16 | Confirm dense/sparse/multivector, packed dtype, dimension and processor compatibility; separate item/batch budgets | Pending |
-| #30/#41 | Review artifact/route rights independently; this supplement supplies no new rights approval | Pending |
+| #30/#60 | Review artifact/route rights against the #60 decision table; no new rights approval | Pending |
+| #41 | Evidence, freshness and reuse provenance; conflict resolution | Pending |
 | #36 | Define task quality checks and assess information discarded by transforms | Pending |
 | #39 | Separate billing units from admission and account for chunked/transformed work without invented rates | Pending |
 | #40 | Review typed conditional stage-specific limits and migration; never force seconds/rows/pixels into token fields | Pending |
@@ -407,3 +411,11 @@ Google DeepMind. Scope: AlphaFold3 local bucket and tokenizer semantics. Revisio
 - [Primary source 2](https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/src/alphafold3/model/features.py#L180-L194)
 - [Primary source 3](https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/src/alphafold3/model/features.py#L236-L281)
 - [Primary source 4](https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/src/alphafold3/model/pipeline/pipeline.py#L153-L156)
+
+### Review semantics (2026-10-17)
+
+The JSON splits all combined input/output records into `-input` and `-output` children linked by `parent_record`; the summary tables retain the parent IDs. These are separate budgets, never a shared pool. `disputed` preserves a recorded source conflict even when precedence resolves it.
+
+Proposed outcome reason codes for #40: hard documented predicate violation -> `fail/limit_exceeded`; default or transform -> `transform_applied` (not itself a failure); recommendation -> `recommendation_only`; training shape or example -> `not_admission_evidence`; missing eligible evidence -> `unknown/missing_evidence`; genuine unresolved tie -> `unknown/unresolved_tie`; non-applicable scope -> `skipped/not_applicable`. These are research proposals, not additions to frozen v1 enums. Apply #41 scope, version/date and authority before conservative equal-rank numbers.
+
+CTX-02 clarification: when effective configuration is unknown, use the native or selected-checkpoint limit as the baseline; do not assume an optional extension is enabled. Missing evidence for the selected checkpoint remains unknown.
