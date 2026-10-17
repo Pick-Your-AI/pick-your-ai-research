@@ -89,6 +89,40 @@ CD-1 to CD-12 are defined in #81 (`deployment-mode.md`, "Open contract decisions
 - **Catalog:** keep one version per ID until CD-7 adds ID+version resolution, then retain every version referenced by a saved build, evidence record or rule. A new release changes no existing outcome by itself.
 - **Validity windows:** derive `valid_from`/`valid_to` from catalog snapshot revisions rather than adding per-item fields, unless CD-7 decides otherwise.
 
+## Contract versions and migration (CD-7, Proposal)
+
+**Constraints from v1.** The import is frozen: a next version is a new sibling (`contracts/v1.1/`, later `contracts/v2/`) that carries its own generator, schemas, docs, fixtures and tests, and the import-hash test keeps v1 untouched (`contracts/v1/ADOPTION.md`). v1 pins `schema_version` to `1.0.0`, the build rejects unknown top-level fields, and only namespaced `x_` keys are allowed in `extensions` (`common.schema.json`).
+
+**v1.1, additive.** A v1.1 reader accepts every 1.0.0 document unchanged, and a 1.0.0 document evaluates exactly as before under the v1 baseline ruleset.
+
+| Area | Additions | Source |
+| --- | --- | --- |
+| Selections | Per-component `deployment` object (`runtime_operator`, `runtime_supplied_by`, `capacity`, `placement`); `licence_answers` | #81 |
+| Build | Build-owned `workload` profile, including the CD-12 organisation attestations; `destinations`; typed answer states (CD-1), including `withheld` (#114 SB-8) | #81, #114 |
+| Links | Optional `role` and an access attribute (mount vs fetch) | CD-6, T2-C05 |
+| Locks | Catalog-snapshot and pricebook revisions | #114 SB-2, SB-3 |
+| Catalog | Artifact `quantization` and `components`; device memory kind, bandwidth, instruction sets, NUMA nodes; list-completeness metadata; `context_semantics` and `max_input_tokens` | #81, CD-3, CD-11 |
+| Results | Outcome reason codes; a `disputed` flag; evidence labels (checked, verified) | #126, #127 |
+| Ruleset | v1.1 baseline ruleset: the 17 self-hosted rules re-gated on the component's mode; the two membership rules return `unknown` on omission from unmarked lists | This record |
+
+**v2.0, breaking.**
+- One workload record: remove the `objectives` and `workload` selection copies.
+- `deployment_mode` becomes derived; the catalog kind and its selection are removed.
+- The evaluator treats the string `"unknown"` only as a typed answer state.
+
+**Reading 1.0.0 builds under v1.1** (a migration adapter; the original bytes are kept):
+1. **Mode.** Each serving component takes the build's `deployment_mode` value when it is `api`, `managed` or `self_hosted`. When it is `hybrid`, each component's mode is `unknown` until answered; it is never guessed.
+2. **Workload.** Build a profile from the three copies with this precedence: build `objectives`, then the `workload` selection's settings, then a catalog `workload` preset. Values that disagree are flagged for the user rather than silently merged.
+3. **Locks.** A lock without a snapshot or pricebook revision is marked "cannot be reproduced exactly" (#114).
+4. **Rulesets.** Show results under both the 1.0.0 and 1.1.0 rulesets, with the per-rule differences, as #114's revisit states describe.
+
+**Before v1.1 lands.** Prototype the proposed fields only in synthetic fixtures under `tests/`, using `x_t0_*` extension keys. Never put them in catalog proposals.
+
+**Acceptance for v1.1.**
+- Every v1 example still validates and evaluates identically under the v1 ruleset.
+- Migration tests cover a hybrid build, a build with conflicting workload copies, and a lock without a revision.
+- The affected workstreams are listed in the changelog.
+
 ## Contribution format
 
 Use `templates/rule-proposal.md`, plus these conventions:
@@ -101,7 +135,7 @@ Use `templates/rule-proposal.md`, plus these conventions:
 
 - Worked rule examples spanning T1/T2: model ↔ engine format, model ↔ GPU memory, context ↔ KV cache, including `unknown` handling (@zwright8).
 - T5 triage (@zwright8).
-- Contract-version plan and migration examples (CD-7).
+- Migration test fixtures for the v1.1 plan (CD-7): hybrid build, conflicting workload copies, lock without revision.
 
 ## Acceptance criteria coverage
 
@@ -110,7 +144,7 @@ Use `templates/rule-proposal.md`, plus these conventions:
 | Schema document with field types and examples | What v1 provides; #81 field dictionaries | Partial |
 | Worked rule examples spanning T1/T2, including `unknown` | To do | Open |
 | Approach to cycles and recomputation | Cycles and recomputation | Proposed |
-| Rule and catalog versioning | Versioning | Proposed |
+| Rule and catalog versioning | Versioning; Contract versions and migration | Proposed |
 | Contribution format | Contribution format | Proposed |
 | Deployment modes covered | Rule format, item 7; #81 | Proposed |
 | Rule format, severities, `unknown` handling | Rule format and outcome semantics | Decided in reviews |
