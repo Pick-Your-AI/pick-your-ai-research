@@ -40,3 +40,18 @@ The prompts do not grant new account permissions, waive reviews, or authorize pr
 ## Keep the set aligned
 
 Change common rules in `SHARED.md`, and update affected workstream text in the same PR. Recheck live Project fields and the existing issue paths before publishing a new handoff revision. Validate with `docs/RESEARCH_WORKFLOW.md`; separately review instructions, links, and evidence because schema tests cannot establish prompt correctness or research acceptance.
+
+## Organization maintenance
+
+[ORGANIZATION.md](ORGANIZATION.md) is a separate maintainer prompt for repository descriptions, topics, links, and the public organization profile. It is not an eighth research workstream and does not change T0–T6 completion criteria.
+
+```text
+Read AGENTS.md, applicable contribution guidance, prompts/SHARED.md, and
+prompts/ORGANIZATION.md. Execute only the assigned organization-maintenance
+issue within my existing authority. Refresh live repositories, public status,
+issues, owners, and active work first. Preserve research scope and triage.
+Apply authorized metadata changes, submit file changes through required PR
+review, verify published results, and report any remaining blockers.
+```
+
+Research owners should hand off evidence of outdated public claims to the existing organization-maintenance issue. They should not start a separate maintenance run as part of their research assignment.
