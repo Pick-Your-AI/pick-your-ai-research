@@ -491,7 +491,7 @@
       "human_evidence_acceptance": "pending",
       "project_write_applied": false,
       "project_limitation": "No live Project field readback: token lacks read:project; original triage fields are preserved historical metadata.",
-      "next_action": "Review this focused submission and explicit handoff requests; finish missing empirical/child coverage, obtain human acceptance, and merge before Done.",
+      "next_action": "Complete remaining empirical/child scope and explicit owner/coordinator dispositions; PR79 is merged into PR67, whose review and main merge remain pending.",
       "handoff_request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
       "progress_comment_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6217452787",
       "measured_dense_runs": 15,
@@ -502,7 +502,26 @@
         "13 receiving-owner dispositions and coordinator evidence acceptance",
         "PR #67 dependency, review and merge",
         "Completion of children #61, #62 and #65"
-      ]
+      ],
+      "proposal_branch_merge": {
+        "pr": 79,
+        "merged_by": "PUSHINGSQUARES",
+        "merged_at_utc": "2026-10-16T14:19:18Z",
+        "merge_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "base_branch": "research/market-intelligence",
+        "upstream_pr": 67,
+        "upstream_state": "open",
+        "canonical_main_merge": false
+      },
+      "general_pr_review": {
+        "reviewer": "PUSHINGSQUARES",
+        "state": "APPROVED",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+        "date": "2026-10-16",
+        "submitted_at_utc": "2026-10-16T14:18:27Z",
+        "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+        "scope": "General PR approval; empty body does not specify individual row dispositions. Reviewed, pending explicit scope confirmation."
+      }
     }
   },
   {
@@ -774,7 +793,7 @@
       "human_evidence_acceptance": "pending",
       "project_write_applied": false,
       "project_limitation": "No live Project field readback: token lacks read:project; original triage fields are preserved historical metadata.",
-      "next_action": "Review this focused submission and explicit handoff requests; finish missing empirical/child coverage, obtain human acceptance, and merge before Done.",
+      "next_action": "Complete remaining empirical/child scope and explicit owner/coordinator dispositions; PR79 is merged into PR67, whose review and main merge remain pending.",
       "handoff_request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
       "progress_comment_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6217453539",
       "measured_dense_runs": 15,
@@ -784,7 +803,26 @@
         "Matched estimator/runtime evidence or explicit reviewed narrowing",
         "13 receiving-owner dispositions and coordinator evidence acceptance",
         "PR #67 dependency, review and merge"
-      ]
+      ],
+      "proposal_branch_merge": {
+        "pr": 79,
+        "merged_by": "PUSHINGSQUARES",
+        "merged_at_utc": "2026-10-16T14:19:18Z",
+        "merge_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "base_branch": "research/market-intelligence",
+        "upstream_pr": 67,
+        "upstream_state": "open",
+        "canonical_main_merge": false
+      },
+      "general_pr_review": {
+        "reviewer": "PUSHINGSQUARES",
+        "state": "APPROVED",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+        "date": "2026-10-16",
+        "submitted_at_utc": "2026-10-16T14:18:27Z",
+        "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+        "scope": "General PR approval; empty body does not specify individual row dispositions. Reviewed, pending explicit scope confirmation."
+      }
     }
   },
   {

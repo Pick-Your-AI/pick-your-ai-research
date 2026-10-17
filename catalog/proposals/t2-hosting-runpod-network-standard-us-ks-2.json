@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "id": "runpod-network-standard-us-ks-2",
+  "kind": "storage",
+  "tier": "T2",
+  "name": "Runpod Standard Network Volume in US-KS-2",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot of standard network volume in one documented datacenter. S3-compatible access does not change mounted file semantics.",
+  "spec": {
+    "storage_type": "file",
+    "hosting_ref": "runpod-pods",
+    "region": "US-KS-2"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.runpod.io/storage/network-volumes",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Persistent mounted file storage. Pods require Secure Cloud and locality. No maximum-capacity or encryption guarantee inferred."
+    },
+    {
+      "source_uri": "https://docs.runpod.io/storage/s3-api",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "US-KS-2 is a documented datacenter endpoint. Does not establish current storage or GPU stock."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}

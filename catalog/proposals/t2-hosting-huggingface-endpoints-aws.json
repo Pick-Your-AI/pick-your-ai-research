@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "id": "huggingface-endpoints-aws",
+  "kind": "hosting_platform",
+  "tier": "T2",
+  "name": "Hugging Face Inference Endpoints on AWS",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot scoped to AWS endpoints; excludes other provider offerings and does not assert a GPU-by-region matrix.",
+  "spec": {
+    "hosting_type": "managed_api",
+    "regions": [
+      "us-east-1",
+      "eu-west-1"
+    ],
+    "supports_private_networking": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://huggingface.co/docs/inference-endpoints/faq",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "AWS portion of documented endpoint regions only. Service is managed; host operating-system access is not exposed."
+    },
+    {
+      "source_uri": "https://huggingface.co/docs/inference-endpoints/guides/private_link",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "AWS private endpoints support intra-region PrivateLink. Actual endpoint/network setup remains a deployment check."
+    },
+    {
+      "source_uri": "https://huggingface.co/docs/inference-endpoints/pricing",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Dedicated replica compute is metered; L4 rate does not prove availability in either region."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}

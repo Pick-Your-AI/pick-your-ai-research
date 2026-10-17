@@ -1,64 +1,53 @@
-name: Market research deliverable
-description: Propose one independently reviewable market research outcome.
-title: "MR-XX: "
+name: Market research finding
+description: Record customer, competitor, market, or product evidence for Project 2
+title: "Market research: "
 labels: ["type: research"]
 body:
   - type: markdown
     attributes:
-      value: "Use Project #2 for market research. Search existing issues, Project #1, PRs and notes first. Assignees are authoritative; do not create an issue for every competitor."
-  - type: input
-    id: decision
-    attributes:
-      label: User decision and research question
-      description: What decision changes when this is answered? What would falsify the hypothesis?
-    validations:
-      required: true
+      value: |
+        Start from [Program #47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) and the [Market Research Project](https://github.com/orgs/Pick-Your-AI/projects/2). Search for an existing MR issue before creating a new outcome.
+        Follow the [research workflow](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/docs/RESEARCH_WORKFLOW.md). Component schemas apply when contributing component records; market notes may document hypotheses and missing evidence directly.
   - type: textarea
     id: scope
     attributes:
-      label: Scope and deduplication
-      description: State in/out boundaries, canonical related issues, overlap resolution and the native parent to attach after creation.
-    validations:
-      required: true
-  - type: input
-    id: deliverable
-    attributes:
-      label: Deliverable
-      description: Exact existing or proposed research/market path and independently reviewable outcome.
+      label: Related MR issue and decision
+      description: Link the parent and related issues, describe the decision and falsifiable research question, state in/out scope, and explain overlap with existing work.
     validations:
       required: true
   - type: textarea
     id: evidence
     attributes:
-      label: Comparison fields and evidence
-      description: Starting URLs, publisher, access dates, version/region, evidence grade, confidence, rights and unknowns. Never invent required fields.
+      label: Evidence and source details
+      description: Include URLs, publishers, access dates, versions or regions, claim types, and conditions. Distinguish observed behavior, vendor claims, measurements, estimates, and hypotheses. State any evidence gaps.
     validations:
       required: true
   - type: textarea
-    id: dependencies
+    id: findings
     attributes:
-      label: Dependencies and relationships
-      description: Separate actual blockers, information inputs, related work, validation dependencies and technical handoffs. Name the consuming issue and requested review.
+      label: Findings, confidence, and limitations
+      description: Explain what the evidence supports and what remains unknown. Do not infer absence from missing documentation.
     validations:
       required: true
   - type: textarea
-    id: acceptance
+    id: deliverable
     attributes:
-      label: Acceptance criteria
-      description: Checkable completion criteria, validation commands and required owner review. A draft is not Done.
+      label: Deliverable and acceptance criteria
+      description: Identify the existing research file or proposed path, independently reviewable outcome, checkable acceptance criteria, validation commands, and required owner review.
     validations:
       required: true
+  - type: textarea
+    id: handoffs
+    attributes:
+      label: Handoffs and follow-up
+      description: Link consuming technical or market issues, separate actual blockers from information inputs, and name open decisions and requested reviews. Assignees and status are managed on the issue and Project.
   - type: textarea
     id: triage
     attributes:
       label: Ownership, priority and readiness proposal
-      description: Proposed assignee, MR-01–12, six rubric inputs or unknown, priority rationale/override, readiness, status and next action. Triage must verify these in Project fields before Ready.
-    validations:
-      required: true
+      description: For a new deliverable, propose an assignee, MR workstream, priority rationale, readiness and next action. Triage must verify the live Project fields; these proposals do not change assignments.
   - type: textarea
     id: open_questions
     attributes:
       label: Open questions and phase limit
-      description: Missing input or owner decision, scope limit and stopping/expansion condition.
-    validations:
-      required: true
+      description: Record missing input, named owner decisions, the scope limit, and stopping or expansion conditions. A draft is not Done.

@@ -531,6 +531,214 @@
     "confidence": "Low"
   },
   {
+    "id": "src-llmfit-upstream-pages",
+    "url": "https://github.com/AlexsJones/llmfit/blob/eb8db3835157d1c300ffa9050ac58f63df11617c/CNAME",
+    "supporting_urls": [
+      "https://llmfit.axjns.dev/",
+      "https://github.com/AlexsJones",
+      "https://www.llmfit.org/"
+    ],
+    "publisher": "Alex Jones (GitHub user AlexsJones), upstream repository owner",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Repository CNAME and GitHub Pages config point to llmfit.axjns.dev; repository homepage field is empty and a repository code search found no llmfit.org reference. llmfit.org links to the repository and shows \"© 2026 llmfit\" without naming an operator. Establishes the upstream site only, not who operates llmfit.org.",
+    "version": "Repository main at eb8db3835157d1c300ffa9050ac58f63df11617c; CNAME added in e3bad78 (2026-02-15)",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-benchlm-legal",
+    "url": "https://benchlm.ai/terms",
+    "supporting_urls": [
+      "https://benchlm.ai/about",
+      "https://benchlm.ai/privacy"
+    ],
+    "publisher": "BenchLM",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Terms say they apply \"between you and the operator of BenchLM\" without naming a legal entity. Operator identity remains unknown.",
+    "version": "Terms last updated 2026-10-02",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-local-ai-planner-about",
+    "url": "https://logarithmicspirals.com/about/",
+    "supporting_urls": [
+      "https://github.com/h93xV2"
+    ],
+    "publisher": "Logarithmic Spirals (blog author)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Author self-describes as a software engineer and does not give a name; tool page links GitHub user h93xV2, whose profile shows no name. Pseudonymous individual operator; no legal entity.",
+    "version": "Public page on access date",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-llm-stats-legal",
+    "url": "https://llm-stats.com/legal/terms-of-service",
+    "supporting_urls": [
+      "https://llm-stats.com/about-us",
+      "https://llm-stats.com/legal/privacy-policy"
+    ],
+    "publisher": "llm-stats",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "About page self-describes \"two people\" signing as \"Co-founders, llm-stats\" with no names in static HTML; terms are governed by United States law and name no legal entity. Usage figures on the about page are vendor claims.",
+    "version": "Terms last updated 2026-10-08",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-canrun-about",
+    "url": "https://canrunllm.com/about",
+    "supporting_urls": [
+      "https://canrunllm.com/privacy"
+    ],
+    "publisher": "CanRun",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "About page states \"CanRun is an independent project\" without naming an operator; privacy policy states browser-side calculation and Cloudflare Pages hosting. Accuracy of estimates not tested.",
+    "version": "Privacy policy effective 2026-10-06",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-canitrun-about",
+    "url": "https://canitrun.dev/about/",
+    "supporting_urls": [
+      "https://canitrun.dev/privacy/"
+    ],
+    "publisher": "CanItRun",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Methodology and privacy pages name no operator or legal entity; contact is an obfuscated e-mail. Estimates are documented formulas, not measurements.",
+    "version": "Privacy policy last updated 2026-08-16",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-gpus-io-recheck",
+    "url": "https://gpus.io/",
+    "supporting_urls": [
+      "https://gpus.io/about",
+      "https://gpus.io/terms",
+      "https://gpus.io/privacy"
+    ],
+    "publisher": "GPUs.io; legal entity unconfirmed",
+    "access_date": "2026-10-16",
+    "access_status": "unverified-access-blocked",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Anonymous HTTP retrieval of the home, about, terms and privacy paths returned 403 with a bot challenge on 2026-10-16; not bypassed. robots.txt allows all paths. Operator and current pages unverified.",
+    "version": "Not retrieved",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Low"
+  },
+  {
+    "id": "src-localscore",
+    "url": "https://www.localscore.ai/about",
+    "supporting_urls": [
+      "https://github.com/cjpais/LocalScore",
+      "https://github.com/Mozilla-Ocho/llamafile/tree/main/localscore",
+      "https://builders.mozilla.org/"
+    ],
+    "publisher": "LocalScore (Mozilla Builders project; repository cjpais/LocalScore)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "About page describes an open-source benchmark CLI and a public results database with optional submission; repository is Apache-2.0 with homepage localscore.ai. No verification process for submitted results is stated. Result accuracy not tested.",
+    "version": "Public page on access date; repository pushed 2026-10-09",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-localmaxxing",
+    "url": "https://www.localmaxxing.com/en",
+    "supporting_urls": [
+      "https://www.localmaxxing.com/en/privacy",
+      "https://github.com/LottoLottoLotto/localmaxxing-cli"
+    ],
+    "publisher": "LocalMaxxing (CLI repository LottoLottoLotto/localmaxxing-cli)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Submission requires sign-in and an API key; privacy policy describes automatic checks including \"a physical speed ceiling\" and hiding suspicious runs. Operator legal entity not named. Live counters not used.",
+    "version": "Privacy policy last updated 2026-10-04",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-rapid-mlx",
+    "url": "https://rapidmlx.com/leaderboard",
+    "supporting_urls": [
+      "https://github.com/raullenchai/Rapid-MLX"
+    ],
+    "publisher": "Rapid-MLX (repository raullenchai/Rapid-MLX)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Leaderboard page describes one locked run protocol and consent-previewed sharing for Apple Silicon only. GitHub licence API reports NOASSERTION while the repository description states Apache 2.0; a CC0 data statement cited by PR #81 was not visible in the static HTML retrieved here.",
+    "version": "Public page on access date; repository pushed 2026-10-16",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-metrillm",
+    "url": "https://metrillm.dev/",
+    "supporting_urls": [
+      "https://metrillm.dev/methodology",
+      "https://github.com/MetriLLM/metrillm",
+      "https://www.npmjs.com/package/metrillm"
+    ],
+    "publisher": "MetriLLM (GitHub organization MetriLLM)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Vendor claim",
+    "limitations": "Home page requires Ollama or LM Studio for the npm CLI; methodology claims every submitted result is displayed and each run carries a hash. Repository Apache-2.0. Claims not reproduced.",
+    "version": "Public page on access date; repository pushed 2026-06-02",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-openbenchmarking-llama-cpp",
+    "url": "https://openbenchmarking.org/test/pts/llama-cpp",
+    "supporting_urls": [
+      "https://github.com/phoronix-test-suite/phoronix-test-suite/blob/be12163bb02435219d4fd891cd6258597ca9bc2f/documentation/phoronix-test-suite.md",
+      "https://github.com/phoronix-test-suite/test-profiles/tree/d2f1a150d388bd062737b445891edda0780f7e25/pts/llama-cpp-1.1.0"
+    ],
+    "publisher": "OpenBenchmarking.org / Phoronix Test Suite",
+    "access_date": "2026-10-16",
+    "access_status": "unverified-access-blocked",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Profile page returned 403 with a bot challenge to anonymous retrieval; not bypassed. PTS documentation describes optional upload to OpenBenchmarking.org and a no-upload batch mode. The GitHub test-profiles mirror holds only pts/llama-cpp 1.0.0 and 1.1.0; current profile version unverified here.",
+    "version": "PTS docs at be12163; test-profiles mirror at d2f1a15",
+    "region": "Global website; not a regional rate quote",
+    "confidence": "Low"
+  },
+  {
+    "id": "src-llama-cpp-perf-threads",
+    "url": "https://github.com/ggml-org/llama.cpp/discussions/15013",
+    "supporting_urls": [
+      "https://github.com/ggml-org/llama.cpp/discussions/4167",
+      "https://github.com/ggml-org/llama.cpp/discussions/10879"
+    ],
+    "publisher": "ggml-org/llama.cpp GitHub Discussions (community threads)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Thread instructions are primary documentation for the reporting protocol; posted results are individual community reports, not independent measurements under shared conditions. Thread metadata via GitHub API: #4167 Apple Silicon (279 comments), #10879 Vulkan (787), #15013 CUDA (234).",
+    "version": "Threads updated 2026-10-01 (#4167), 2026-10-10 (#10879), 2026-10-16 (#15013)",
+    "region": "Global / self-selected contributors",
+    "confidence": "Medium"
+  },
+  {
     "id": "src-harness-bench-repo-b8d8963",
     "url": "https://github.com/Qihoo360/harness-bench/tree/b8d89634c6f445fcc68ceb6744a59bef6cdf4863",
     "supporting_urls": [

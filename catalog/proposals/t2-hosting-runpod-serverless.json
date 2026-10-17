@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "id": "runpod-serverless",
+  "kind": "hosting_platform",
+  "tier": "T2",
+  "name": "Runpod Serverless",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot of application hosting, distinct from a provider model API. Regional inventory and quota unknown.",
+  "spec": {
+    "hosting_type": "cloud"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.runpod.io/serverless/overview",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Managed workers execute custom Docker application code."
+    },
+    {
+      "source_uri": "https://docs.runpod.io/serverless/pricing",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Workers incur running-time charges including startup and idle phases."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}

@@ -668,7 +668,18 @@
       "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
       "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
       "review_request_date": "2026-10-16",
-      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred.",
+      "review_events": [
+        {
+          "reviewer": "PUSHINGSQUARES",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+          "date": "2026-10-16",
+          "submitted_at_utc": "2026-10-16T14:18:27Z",
+          "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+          "scope": "General PR approval; empty body does not specify individual row dispositions. Reviewed, pending explicit scope confirmation."
+        }
+      ]
     }
   },
   {
@@ -695,7 +706,18 @@
       "request_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110",
       "note": "Prepared submission; no human acceptance. Original handoff fields preserved.",
       "review_request_date": "2026-10-16",
-      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
+      "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred.",
+      "review_events": [
+        {
+          "reviewer": "PUSHINGSQUARES",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+          "date": "2026-10-16",
+          "submitted_at_utc": "2026-10-16T14:18:27Z",
+          "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524",
+          "scope": "General PR approval; empty body does not specify individual row dispositions. Reviewed, pending explicit scope confirmation."
+        }
+      ]
     }
   },
   {

@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "id": "inference-llama-cpp",
+  "kind": "inference_engine",
+  "tier": "T2",
+  "name": "llama.cpp",
+  "version": "v0.7.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Release-scoped research proposal at source commit 620d2225cc436ab0b001e3200e590e3b286ef9ab. Conservative capability subsets; omitted support is unknown. See inference-engine.md for tuple, API, adapter and lifecycle conditions.",
+  "spec": {
+    "backends": [
+      "cpu",
+      "cuda",
+      "rocm",
+      "metal",
+      "oneapi"
+    ],
+    "model_formats": [
+      "gguf"
+    ],
+    "supported_precisions": [
+      "fp32",
+      "fp16",
+      "bf16"
+    ]
+  },
+  "license": {
+    "spdx_id": "MIT"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/README.md",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E11: documented backend inventory; HIP maps to rocm and SYCL to oneapi. Conditional build/operator support is retained in the note. Checked source field, not independently reproduced runtime compatibility."
+    },
+    {
+      "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/docs/models.md",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E13: GGUF artifact requirement and conversion boundary; source PEFT artifacts are not directly interchangeable. Checked source field, not independently reproduced runtime compatibility."
+    },
+    {
+      "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/include/ggml.h",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E15: F32/F16/BF16 tensor definitions; conservative precision subset, not complete operator support for every backend. Checked source field, not independently reproduced runtime compatibility."
+    },
+    {
+      "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/LICENSE",
+      "checked_at": "2026-10-16T12:52:17Z",
+      "verification_status": "verified",
+      "notes": "E12: MIT source license; model/adapter rights separate. Checked source field, not independently reproduced runtime compatibility."
+    }
+  ],
+  "updated_at": "2026-10-16T12:52:17Z"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cloudflare-r2-standard",
+  "kind": "storage",
+  "tier": "T2",
+  "name": "Cloudflare R2 Standard Object Storage",
+  "version": "2026-10-16",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Research snapshot. Does not certify a specific bucket's residency or offer POSIX/block semantics.",
+  "spec": {
+    "storage_type": "object"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://developers.cloudflare.com/r2/pricing/",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Standard object-storage class; storage and classified requests are separate meters."
+    },
+    {
+      "source_uri": "https://developers.cloudflare.com/r2/reference/data-location/",
+      "checked_at": "2026-10-16T12:39:46Z",
+      "verification_status": "verified",
+      "notes": "Automatic placement, best-effort hints and jurisdiction restrictions differ; no exact physical region asserted."
+    }
+  ],
+  "updated_at": "2026-10-16T12:39:46Z"
+}
