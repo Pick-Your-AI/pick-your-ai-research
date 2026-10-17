@@ -12,7 +12,7 @@ Inputs. The Guardrails ([#35](guardrails.md)), Evaluation ([#36](evaluation.md))
 
 ### Number labels
 
-Every number carries one label. **Published** means copied from a source on the access date. **Estimated** means derived here; the formula is shown next to it and re-computed by `research/scripts/cost-scenarios.py` from `context/drafts/cost-estimate.scenarios.json`. **Builder-set** means a choice the builder or user makes (for example a cache hit ratio). Counts of rows made by the builder from a cited price file or API query (909, 12, 394, 567) are **estimated**: each is the number of rows carrying one unit string, counted by the builder with the query and date given where the count appears, and anyone can recount it. No number in this record is **measured** from a running system.
+Every number carries one label. **Published** means copied from a source on the access date. **Estimated** means derived here; the formula is shown next to it and re-computed by `scripts/cost-scenarios.py` from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json). **Builder-set** means a choice the builder or user makes (for example a cache hit ratio). Counts of rows made by the builder from a cited price file or API query (909, 12, 394, 567) are **estimated**: each is the number of rows carrying one unit string, counted by the builder with the query and date given where the count appears, and anyone can recount it. No number in this record is **measured** from a running system.
 
 ### Five findings that shape the record
 
@@ -259,7 +259,7 @@ LLM-judge tokens are billed by the judge provider or platform at its own rate; #
 
 ## Worked scenarios
 
-One scenario per mode on the reference workload, plus the component add-ons. All totals are **estimated**, in USD per month, excluding tax, rounded to two significant figures (C-R40). Each figure is re-computed by `python3 research/scripts/cost-scenarios.py context/drafts/cost-estimate.scenarios.json`; the script exits non-zero if a figure in the scenarios file differs from the re-computation, and the figures in this record are copied from that file. The script does not read this markdown. Totals are summed before rounding, so rounded parts need not add up to a rounded total.
+One scenario per mode on the reference workload, plus the component add-ons. All totals are **estimated**, in USD per month, excluding tax, rounded to two significant figures (C-R40). Each figure is re-computed by `python3 scripts/cost-scenarios.py research/T6-deployment-operations/cost-estimate.scenarios.json` (run from the repository root); the script exits non-zero if a figure in the scenarios file differs from the re-computation, and the figures in this record are copied from that file. The script does not read this markdown. Totals are summed before rounding, so rounded parts need not add up to a rounded total.
 
 | id | mode | scenario | price rows used | low | expected | high | what moves the range | provenance |
 |---|---|---|---|---|---|---|---|---|
