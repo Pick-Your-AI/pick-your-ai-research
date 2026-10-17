@@ -1,7 +1,7 @@
 # T0: Deployment Mode
 
 Issue: #3 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `a222013`) · Kinds: `deployment_mode`
-Status: draft, revision 4 (after three internal reviews) · Last researched: 2026-10-16
+Status: draft, revision 5 (aligned with the owner positions posted on #75 and #88) · Last researched: 2026-10-16
 Deliverable path: `research/T0-configuration/deployment-mode.md` · Companion note: [`research/T0-configuration/workload-use-case.md`](workload-use-case.md)
 
 Labels used in this note:
@@ -24,12 +24,12 @@ This note is written **local-first**: the T0 owner has chosen to prioritise self
 - **Mode is set per serving component, and relationships come from v1's existing `build.links`** (C9). This fixes a v1 defect: the 17 self-hosting rules check the literal value `mode == "self_hosted"`, so hybrid builds skip them all (C3, C4).
 - **Self-hosted fit depends on several things at once:** the artifact, the engine build, the decoding method, the devices and their memory configuration, the context and the concurrency.
   - Fit evidence is kept as records that are immutable while retained.
-  - One eligibility predicate (EV-1) decides whether evidence may be used, with checks specific to each type of evidence. Eligible results that disagree leave the value unresolved.
+  - One eligibility predicate (EV-1) decides whether evidence may be used, with checks specific to each type of evidence. Eligible results that disagree are resolved by #41's conflict order; the value stays unresolved only for genuine ties.
   - A newer release alone never invalidates a record.
 - **CPU-only and mixed CPU+GPU builds are in scope.** For single-batch generation, memory bandwidth is reported as a main bottleneck (D27–D29), so bandwidth, instruction sets and offload support are key inputs. Measured fit records, not this note, decide how far that holds for a given machine.
 - **Crowdsourced fit reports are a possible additional evidence source.** Several community databases already exist (D36–D41). Agreement between reports is shown, but doesn't decide compatibility until #41 defines an acceptance policy (CD-8).
 - **Self-hosting enables local inference, but doesn't by itself keep data local.** Residency is checked over the build's data flows, including external destinations (D-R6).
-- **Open contract decisions.** Ten are recorded for #40 and #41 rather than solved here (CD-1 to CD-10).
+- **Open contract decisions.** Eleven are recorded for #40 and #41 rather than solved here (CD-1 to CD-11; CD-11 was raised on #88).
 
 ## User decision
 
@@ -181,7 +181,18 @@ EV-1 decides whether a piece of evidence may be used by a rule. Every piece of e
 
 **Transfers between workloads.** A performance figure carried over from a different workload distribution, for example by a transfer model, is a derived estimate, not a measurement of the build's configuration. Until CD-3 defines how such estimates are assessed, they are not eligible, and W-R7 gives `unknown`.
 
-**Conflicting evidence.** Eligible evidence can disagree about a rule's verdict: one measurement or estimate meets a target while another misses it, or one primary document lists a combination as supported while another doesn't. The value is then unresolved, so the outcome is `unknown`, until CD-3 and #41's acceptance policy define how results are selected or aggregated. A rule never passes on one eligible result while ignoring another.
+**Conflicting evidence.** Eligible evidence can disagree about a rule's verdict: one measurement or estimate meets a target while another misses it, or one primary document lists a combination as supported while another doesn't. #41's interim conflict order, set in the #75 owner review, resolves it:
+
+1. **Normalise.** Differences in units, rounding, currency or naming aren't conflicts.
+2. **Scope.** Drop evidence whose stated coverage excludes the selection. Among the rest, the most specific coverage wins.
+3. **Version and date.** For version-pinned facts, the source for the selected version wins. For current-state facts, the latest effective date wins.
+4. **Authority.**
+   - The publisher beats third parties for facts it controls.
+   - Within one publisher, a stated requirement or limitation beats a capability listing.
+   - For fit and performance, a matching measurement beats an estimate, which beats a vendor claim.
+5. **Numbers of equal rank.** The conservative value in the rule's direction decides: highest memory, highest latency, lowest throughput, or largest quality loss. The result is flagged as disputed.
+
+The value stays unresolved, and the outcome `unknown`, only when equally ranked evidence still gives opposite yes/no answers after these steps. A rule never passes on one eligible result while ignoring another. How the evaluator encodes this order is CD-3.
 
 Ineligible evidence is shown but leaves the dependent value unresolved, so the rule's outcome is `unknown`. Eligibility is recomputed whenever any of these change: the selection, the evidence's status, the policy, or the date. A newer engine release alone changes nothing; it is shown separately as "newer build available".
 
@@ -194,7 +205,7 @@ Many people already own capacity without a GPU. #10 asks "Is CPU or edge inferen
 | **Decode is described as memory-bound** | Arm's llama.cpp guide says "the Decode stage is memory-bound" (D27, Vendor claim). NVIDIA describes decode the same way for GPUs (D28, Vendor claim). SqueezeLLM reports memory bandwidth as "the main bottleneck … specifically for single batch inference" (D29). Batching, caching, sparse activation, speculative decoding and placement change the picture; fit records show how far it holds for a given machine. |
 | **Server CPUs differ widely in bandwidth** | Vendor peak figures per socket: AMD EPYC 9755, 12 channels and 614 GB/s; AMD EPYC 9996, 16 channels and 1024 GB/s with DDR5 RDIMMs or 1638 GB/s with MRDIMMs. Intel lists the Xeon 6980P with 12 channels and DDR5-6400 or MRDIMM-8800, without a bandwidth figure (D30). These are peak specifications, not inference measurements. |
 | **Instruction sets gate engines** | vLLM's CPU backend recommends `avx512f` on x86 and gives `avx2` "limited features". It requires NEON on Arm, marks Apple silicon and IBM Z as experimental, and recommends tensor parallelism equal to the number of NUMA nodes (D31). llama.cpp lists "AVX, AVX2, AVX512 and AMX support for x86 architectures" and Arm NEON (D3). Intel says AMX improves inference "with no additional hardware" (D33, Vendor claim). |
-| **Quantization support differs on CPUs** | In vLLM's quantization chart (D1), AWQ and GPTQ are supported on x86 CPUs but not Arm CPUs. llm-compressor INT8 (W8A8) is marked as supported on both, INT8 (W4A8) only on Arm, and GGUF on neither. vLLM's CPU page lists AWQ and GPTQ for "x86, s390x, Power", and compressed-tensor INT8 W8A8 for "x86, s390x only" (D31). The two pages therefore disagree on Arm W8A8, or differ in scope without saying so. Neither was tested here. Until #11 or #41 reconciles them for a pinned vLLM version, Arm W8A8 stays unresolved for automatic checks (D-R3 gives `unknown`). llama.cpp runs GGUF on CPUs (D3). |
+| **Quantization support differs on CPUs** | In vLLM's quantization chart (D1), AWQ and GPTQ are supported on x86 CPUs but not Arm CPUs. llm-compressor INT8 (W8A8) is marked as supported on both, INT8 (W4A8) only on Arm, and GGUF on neither. vLLM's CPU page lists AWQ and GPTQ for "x86, s390x, Power", and compressed-tensor INT8 W8A8 for "x86, s390x only" (D31). The two pages therefore disagree on Arm W8A8. Under #41's conflict order the CPU page decides: it is the more specific source for CPU backends (step 2), and "x86, s390x only" is a stated limitation (step 4). D-R3 therefore gives `fail` for W8A8 on Arm, flagged as disputed. Neither page was tested here. llama.cpp runs GGUF on CPUs (D3). |
 | **Hybrid CPU+GPU offload** | llama.cpp's server can cap the layers held in VRAM (`--n-gpu-layers`) and "keep all Mixture of Experts (MoE) weights in the CPU" (`--cpu-moe`) (D32). KTransformers targets "CPU-GPU heterogeneous computing", for example "hot experts on GPU, cold experts on CPU" (D34). Whether a modest GPU plus a large-memory server can host models neither could alone is a hypothesis for fit records. |
 | **Measurement** | `llama-bench` reports prompt-processing and generation speed as "average tokens per second (t/s) and standard deviation". It excludes tokenization and sampling (D35). That is kernel throughput, not a service-level latency measurement (see [What a report contains](#what-a-report-contains)). |
 
@@ -258,7 +269,7 @@ Both protocol types also record:
 | `project_measured` | Measured under the #61 protocol |
 | `flagged` | Failed an automatic check; kept for review, not used as evidence |
 
-**Display:** show the spread (median, range, number of reports) and the grade, never a single universal "works". Showing the spread doesn't decide a verdict: eligible results that disagree leave it unresolved (EV-1). Under EV-1, community grades are informative until #41's acceptance policy says otherwise.
+**Display:** show the spread (median, range, number of reports) and the grade, never a single universal "works". Showing the spread doesn't decide a verdict; when eligible results disagree, #41's conflict order decides (EV-1). Under EV-1, community grades are informative until #41's acceptance policy says otherwise.
 
 **Sticky, not frozen:**
 - Reports are immutable while retained: a correction is a new report that supersedes the old one, not an edit.
@@ -389,7 +400,7 @@ v1 today: when the build mode is `self_hosted`, `rule.selfhost.requires.infrastr
 
 All rules are hypotheses for #40 review.
 - Each rule has one fixed severity, as the ruleset schema requires (C10).
-- A known violation is `fail`. Ineligible, missing or conflicting evidence leaves the dependent value unresolved, so the outcome is `unknown`.
+- A known violation is `fail`. Ineligible or missing evidence leaves the dependent value unresolved, so the outcome is `unknown`. Eligible evidence that conflicts is resolved by #41's conflict order (EV-1); `unknown` remains only for genuine ties.
 - Examples are synthetic.
 - After review, D-R4 and D-R9 have been withdrawn and replaced by EV-1, which governs evidence rather than compatibility. D-R2 and D-R7 have each been split in two, because one rule can't carry two severities. Each half states its own scope, or names the fields it shares with its companion.
 - None of these rules is approved or executable yet. They need the new fields and CD-1, and #41's evidence policies for EV-1.
@@ -471,15 +482,15 @@ Air-gap isolation is checked by W-R8 in the companion note. The version and migr
   - the devices' generation or backend;
   - eligible support documentation (EV-1; matrix format: CD-3).
 - **Applies when:** a self-hosted model uses a quantized artifact.
-- **Assertion:** eligible support documentation lists the combination as supported, and none lists it as unsupported.
-- **Missing data:** `unknown`, including when eligible documents disagree. A known "unsupported" entry, with no eligible document saying otherwise, is `fail`.
+- **Assertion:** eligible support documentation lists the combination as supported, once #41's conflict order has resolved any disagreement between documents (EV-1).
+- **Missing data:** `unknown` when no eligible document covers the combination; absence from a list not marked complete is not "unsupported". A known "unsupported" entry, including one that wins under the conflict order, is `fail`.
 - **Remediation:** choose a supported quantization, engine build or device.
 - **Dependencies:** #11, #10. v1 checks precision against the engine and against the accelerator separately (C3).
 - **Examples** (from D1):
   - Pass: AWQ with vLLM on an Ampere GPU.
   - Fail: AWQ with vLLM on an AMD GPU.
   - Unknown: no entry for a new method.
-  - Unknown: W8A8 with vLLM on an Arm CPU, where vLLM's two pages disagree (D1, D31).
+  - Fail, flagged as disputed: W8A8 with vLLM on an Arm CPU. vLLM's CPU page (D31) is more specific than its chart (D1) and limits W8A8 to x86 and s390x.
   - Skipped: an unquantized artifact.
 
 ### D-R5 Managed components have a platform and location
@@ -567,7 +578,7 @@ These are decisions for #40 and #41, recorded rather than solved in these notes.
 | --- | --- | --- | --- |
 | CD-1 | A typed answer-state representation, and how the evaluator normalises it. v1 treats the string `"unknown"` as known (C11 probe). The design must distinguish "not relevant", "not yet known" and "not selected". | Workload note | #40 |
 | CD-2 | Physical memory pools, device instances, co-residency scenarios, and byte allocation for `placement` | W-R6 | #40 (with #10) |
-| CD-3 | Protocol identity, the canonical configuration key (essential vs display fields), protocol compatibility, result schemas for `kernel_throughput` vs `service_level`, coverage matching for support documentation, how derived estimates are assessed, and how conflicting eligible results are selected or aggregated | EV-1, reports, W-R7 | #41 (with #10, #62) |
+| CD-3 | Protocol identity, the canonical configuration key (essential vs display fields), protocol compatibility, result schemas for `kernel_throughput` vs `service_level`, coverage matching for support documentation, how derived estimates are assessed, and how the evaluator encodes #41's conflict order for eligible results | EV-1, reports, W-R7 | #41 (with #10, #62) |
 | CD-4 | The isolation-boundary model: endpoint membership, connection lifecycle and state, and artifact readiness manifests | W-R8 | #40 |
 | CD-5 | Per-stage load and length records for pipelines | Workload note | #40 (with #10) |
 | CD-6 | Relationship details: the draft-to-target link, where `licence_answers` live, mapping the hardware inventory to device selections, roles that disambiguate multiple links, whether an adapter's `derived_from` link must match its `base_model_ref`, and the effective serving capabilities of fine-tuned models and adapter/base compositions | Bindings, D-R1, D-R2, D-R8, W-R1 | #40 (with #6, #33) |
@@ -575,6 +586,7 @@ These are decisions for #40 and #41, recorded rather than solved in these notes.
 | CD-8 | Reporter and execution independence, and the acceptance policy that would let community evidence decide verdicts | Trust grades | #41 |
 | CD-9 | The jurisdiction hierarchy, containment, named groups, and mapping provider regions to jurisdictions | D-R5, D-R6 | #41 (with #9) |
 | CD-10 | Runtime requirements for non-model services such as vector databases | D-R7a, matrix | #40 (with #11, #15) |
+| CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides | T1 (#88) | #40 (with #7) |
 
 ## Pricing and capacity
 
@@ -589,10 +601,10 @@ No prices are recorded. Charge basis, ownership and commitment are independent:
 
 1. **Adopt the operator and capacity test,** with billing kept separate, explicit capacity semantics, `unknown` handling, and classification by the test rather than by vendor terminology.
 2. **Make mode per component.** Use `build.links` as the only representation of relationships, and add a `deployment` object for the facts that aren't relationships.
-3. **Keep fit records immutable while retained,** with mode-appropriate keys, and use one eligibility predicate (EV-1), with checks by evidence type, wherever evidence is consumed. Eligible evidence that disagrees leaves the value unresolved.
+3. **Keep fit records immutable while retained,** with mode-appropriate keys, and use one eligibility predicate (EV-1), with checks by evidence type, wherever evidence is consumed. Eligible evidence that disagrees is resolved by #41's conflict order.
 4. **Treat CPU-only and hybrid CPU+GPU builds as first-class,** adding bandwidth (in GB/s), instruction sets, NUMA nodes, memory kind and typed placement.
 5. **Adopt crowdsourced reports as informative evidence,** with two protocol types, trust grades, facilitation, incentives (as hypotheses), integrity checks and privacy rules. Let #41 decide when they may decide verdicts (CD-8). Ask #48 and #57 to assess the existing projects, and #41 and #60 whether their data can be linked.
-6. **Take CD-1 to CD-10 to #40 and #41,** alongside D-R1 to D-R8.
+6. **Take CD-1 to CD-11 to #40 and #41,** alongside D-R1 to D-R8.
 7. **Store deployment mode on the build and its selections, not as catalog items.** In v1 it is a catalog kind (C6) needing provenance with a public URL (C7).
 
 ## Structured artifacts
@@ -628,7 +640,7 @@ Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #33, #36, #37, #
 | Per-build vs per-component decision | [Per-component mode](#per-component-mode-and-relationships-decision-proposal) | Reviewer: met; v1 links claim corrected |
 | Comparison fields | [Field dictionary](#field-dictionary), [EV-1](#evidence-eligibility-ev-1) | Revised: licence answers typed by condition kind; evidence checked by type; remaining items recorded as CDs |
 | Rules in the shared format; hypotheses separated | [Compatibility proposals](#compatibility-proposals) | Revised: common template fields; split rules state their scope; evidence moved to EV-1 |
-| Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; vLLM CPU documentation conflict recorded |
+| Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; vLLM CPU documentation conflict resolved by #41's conflict order |
 | Handoffs confirmed | [Open questions](#open-questions-and-handoffs) | Open |
 | Open questions with owners | [Open questions](#open-questions-and-handoffs) | Partly met: Q8 and Q9 point to issues with no assignee set |
 | Decision record merged | — | Open |
@@ -657,7 +669,7 @@ All sources were accessed on 2026-10-16. Vendor terms change often; re-check the
 
 | ID | Publisher, title and URL | Version / date shown | Evidence grade | Limitations |
 | --- | --- | --- | --- | --- |
-| D1 | vLLM project, "Quantization": <https://docs.vllm.ai/en/latest/features/quantization/> | "Last update: September 14, 2026" | Primary documentation | vLLM only; "subject to change"; disagrees with D31 on Arm W8A8 |
+| D1 | vLLM project, "Quantization": <https://docs.vllm.ai/en/latest/features/quantization/> | "Last update: September 14, 2026" | Primary documentation | vLLM only; "subject to change"; disagrees with D31 on Arm W8A8, where D31 governs under #41's conflict order |
 | D2 | vLLM project, "Installation": <https://docs.vllm.ai/en/latest/getting_started/installation/> | "Last update: May 11, 2026" | Primary documentation | — |
 | D3 | ggml-org, llama.cpp README: <https://github.com/ggml-org/llama.cpp/blob/f3363593f457169cdfbdfe22ea399b1cc139ba18/README.md>; `docs/models.md`: <https://github.com/ggml-org/llama.cpp/blob/f3363593f457169cdfbdfe22ea399b1cc139ba18/docs/models.md> | Commit `f336359` | Primary documentation | — |
 | D4 | vLLM releases: <https://github.com/vllm-project/vllm/releases> | As shown at access | Primary documentation (release metadata) | — |
@@ -687,7 +699,7 @@ All sources were accessed on 2026-10-16. Vendor terms change often; re-check the
 | D28 | NVIDIA Technical Blog, "Mastering LLM Techniques: Inference Optimization": <https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/> | Published 17 Nov 2023; modified 27 Dec 2025 | Vendor claim | GPU-focused |
 | D29 | Kim et al., "SqueezeLLM" (ICML 2024): <https://arxiv.org/abs/2306.07629> | arXiv v4 | Independent measurement (author-reported) | GPU; single-batch scope |
 | D30 | AMD, EPYC 9755: <https://www.amd.com/en/products/processors/server/epyc/9005-series/amd-epyc-9755.html>; EPYC 9996: <https://www.amd.com/en/products/processors/server/epyc/9006-series/amd-epyc-9996.html>; Intel, Xeon 6980P: <https://www.intel.com/content/www/us/en/products/sku/240777/intel-xeon-6980p-processor-504m-cache-2-00-ghz/specifications.html> | As shown at access | Primary documentation (specifications) | Peak figures |
-| D31 | vLLM project, "CPU": <https://docs.vllm.ai/en/latest/getting_started/installation/cpu/>; quantization FAQ: <https://docs.vllm.ai/en/latest/getting_started/installation/cpu/#which-quantization-configs-does-vllm-cpu-support> | Revision date 15 Oct 2026 | Primary documentation | Disagrees with D1 on Arm W8A8 |
+| D31 | vLLM project, "CPU": <https://docs.vllm.ai/en/latest/getting_started/installation/cpu/>; quantization FAQ: <https://docs.vllm.ai/en/latest/getting_started/installation/cpu/#which-quantization-configs-does-vllm-cpu-support> | Revision date 15 Oct 2026 | Primary documentation | Disagrees with D1 on Arm W8A8; governs as the more specific source with a stated limitation (#41 conflict order, steps 2 and 4) |
 | D32 | ggml-org, llama.cpp server README: <https://github.com/ggml-org/llama.cpp/blob/f3363593f457169cdfbdfe22ea399b1cc139ba18/tools/server/README.md> | Commit `f336359` | Primary documentation | — |
 | D33 | Intel, "Intel Advanced Matrix Extensions Overview": <https://www.intel.com/content/www/us/en/products/details/processors/xeon/features/advanced-matrix-extensions.html> | No page date confirmed | Vendor claim | No LLM-specific claim |
 | D34 | kvcache-ai, KTransformers README: <https://github.com/kvcache-ai/ktransformers/blob/7fbbc20d31265b266a16dd4a3929f2abf76681e6/README.md> | Commit `7fbbc20` | Primary documentation (purpose) | Research project |

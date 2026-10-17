@@ -1,7 +1,7 @@
 # T0: Workload / Use Case
 
 Issue: #2 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `a222013`) · Kinds: `workload`
-Status: draft, revision 4 (after three internal reviews) · Last researched: 2026-10-16
+Status: draft, revision 5 (aligned with the owner positions posted on #75 and #88) · Last researched: 2026-10-16
 Deliverable path: `research/T0-configuration/workload-use-case.md` · Companion note: [`research/T0-configuration/deployment-mode.md`](deployment-mode.md)
 
 Labels used in this note:
@@ -164,9 +164,9 @@ The proposed location is a `workload` object owned by the build (Recommendation 
 | `actions` | enum `none`, `read_only`, `write` | — | Always | User input | — |
 | `customisation` | enum `none`, `prompt_only`, `fine_tune` | — | Always | User input | `fine_tuning` value only |
 | `requests` | `{count: integer ≥ 0, period: day \| month}`, unit: requests | — | Always | User input or preset | `requests_per_day` (three copies) |
-| `peak_concurrency` | integer ≥ 1, requests in flight | — | Always | User input or preset | `concurrency` / `max_concurrency` |
+| `peak_concurrency` | integer ≥ 1, requests in flight at the service (demand) | Not the engine's admission limit: memory is sized on admitted sequences (W-R6) | Always | User input or preset | `concurrency` / `max_concurrency` |
 | `input_tokens` | `{mean: decimal, max: integer}`, tokens per request | 1 ≤ mean ≤ max; includes history when `turns` is `multi` | Text input | User input; any conversion from words is an Estimate (E6) | `avg_input_tokens`; context policy `requested_context_tokens` (C2) |
-| `output_tokens` | `{mean: decimal, max: integer}` or `not_applicable` | 0 ≤ mean ≤ max | Whenever generated tokens are expected, whatever the task; `not_applicable` only when the serving operation generates no tokens (see below) | User input | `avg_output_tokens`; context policy `reserved_output_tokens` (C2) |
+| `output_tokens` | `{mean: decimal, max: integer}` or `not_applicable` | 0 ≤ mean ≤ max; counts every generated token, including reasoning or thinking tokens, whether or not they are shown | Whenever generated tokens are expected, whatever the task; `not_applicable` only when the serving operation generates no tokens (see below) | User input | `avg_output_tokens`; context policy `reserved_output_tokens` (C2) |
 | `native_input_units`, `native_output_units` | `{images_per_request, audio_seconds, video_seconds}`, each as `{mean: decimal, max}`; `max` is an integer for image counts and a decimal for durations | All values ≥ 0; mean ≤ max | Non-text input or output | User input; token conversion is per model (#7) | — |
 | `tokenizer_assumption` | string: a tokenizer or model ID, or `model_native` | — | When counts are in tokens | User input | — |
 | `latency_targets` | list of `{metric: ttft \| tpot \| e2e, value_ms: integer ≥ 1, percentile: 50 \| 90 \| 95 \| 99}` | At most one entry per metric | `interactive`, `background` | Metric definitions per E2, E3 | `latency_budget_ms` |
@@ -238,10 +238,12 @@ Both `unknown` and `missing` must evaluate as unresolved, giving the outcome `un
 **Context length and concurrency set memory use, alongside the weights.**
 - The PagedAttention paper calculates the KV cache of OPT-13B at 800 KB per token in FP16, and up to 1.6 GB for one 2,048-token request. It notes that the cache grows during generation (E4).
 - Its authors report that the existing systems they profiled used only 20.4%–38.2% of KV cache memory for token states (E5, Vendor claim). Memory needs therefore depend on the engine too.
+- **Demand is not admission.** `peak_concurrency` is demand: requests in flight at the service. The engine's admission limit, a launch option in the configuration key (companion note), caps how many sequences hold KV cache at once; beams and parallel samples count as separate sequences. Requests above the limit queue and show up as latency (W-R7), not memory. Memory is sized on admitted sequences, and on `peak_concurrency` when the admission limit is unknown (W-R6).
 
 **Separate input and output lengths.**
 - The v1 evaluator adds `requested_context_tokens` and `reserved_output_tokens` (C7).
 - Proposed mapping for simple text generation: `requested_context_tokens` ← `input_tokens.max`, and `reserved_output_tokens` ← `output_tokens.max`. This avoids counting output twice.
+- Some models and routes set separate input and output limits rather than one shared window; #88 records Gemini 2.5 as an example. v1's sum can't express that, so the mapping for those routes waits on CD-11.
 - Pipelines with several stages need per-stage loads (CD-5).
 
 **Usable context is a deployment setting.** Qwen3.8-27B's card gives 262,144 tokens natively, "extensible up to 1,000,000 tokens" (E8). What fits locally depends on memory left after the weights (E4).
@@ -319,7 +321,7 @@ When an answer is `none`, the tier is collapsed (the user can still add it). Whe
 
 All rules are hypotheses for #40 review, using the v1 separation of severity (`info`/`warning`/`error`) from outcome (`pass`/`fail`/`unknown`/`skipped`).
 - Each rule has one fixed severity, as the ruleset schema requires (C10).
-- A known violation is `fail`. Ineligible, missing or conflicting evidence leaves the dependent value unresolved, so the outcome is `unknown`.
+- A known violation is `fail`. Ineligible or missing evidence leaves the dependent value unresolved, so the outcome is `unknown`. Eligible evidence that conflicts is resolved by #41's conflict order (EV-1 in the companion note); `unknown` remains only for genuine ties.
 - Examples are synthetic.
 - None of these rules is approved or executable yet. All of them need CD-1 and the new fields. The evidence-based rules (W-R6, W-R7, W-R10) also need CD-3 and CD-8.
 
@@ -432,15 +434,17 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
   - eligible measurements or memory estimates (EV-1 in the companion note).
 - **Applies when:** any component has a concrete device placement, whatever `hardware.mode` is. Devices acquired or rented for the build are included.
 - **Assertion:** for each memory pool, the peak memory of all components that can be resident at the same time, plus that pool's `reserved_memory_gb`, is at most the pool's capacity.
-  - Peak memory comes from eligible measurements or estimates at the workload's maximum lengths and peak concurrency. Estimates must meet the build's `min_resource_confidence` (C5). If eligible evidence for a component disagrees about whether the pool fits, its peak is unresolved (EV-1).
+  - Peak memory comes from eligible measurements or estimates at the workload's maximum lengths and its admitted sequences: the engine's admission limit, counting beams and parallel samples separately, and never more than `peak_concurrency`. When the admission limit is unknown, `peak_concurrency` is used.
+  - Estimates must meet the build's `min_resource_confidence` (C5). If eligible evidence for a component disagrees, the highest peak decides and the result is flagged as disputed (EV-1).
   - Until CD-2 defines co-residency scenarios, components marked `on_demand` are counted as resident (a conservative maximum).
   - Devices sharing a `memory_pool_id`, such as unified memory, are summed together.
 - **Missing data:** `unknown`. It never passes without eligible evidence for every resident component.
-- **Remediation:** smaller artifacts, different placement, less context or concurrency, or more hardware.
+- **Remediation:** smaller artifacts, different placement, less context, a lower admission limit, or more hardware.
 - **Dependencies:** #10, #11; CD-2; extends `rule.vram.estimate.fit` and `rule.vram.per.device.fit` (C3).
 - **Examples:**
   - Pass: a 24 GB GPU holding a 14 GB generator, a 6 GB embedder and 2 GB reserved.
   - Fail: an 18 GB generator and an 8 GB embedder on the same 24 GB GPU.
+  - Fail, flagged as disputed: two eligible estimates put the generator at 15 GB and 19 GB, with a 6 GB embedder and 2 GB reserved on a 24 GB GPU. The 19 GB estimate decides.
   - Fail: on a 24 GB unified-memory machine, 18 GB used by the CPU path and 8 GB by the GPU path. They share one pool.
   - Unknown: the embedder has no eligible measurement or estimate.
   - Skipped: no device placement yet.
@@ -449,7 +453,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 
 - **Roles and pointers:** the `/workload` targets, lengths, concurrency and `interaction_pattern`; eligible measurements (EV-1 in the companion note); build `/policy/min_resource_confidence` (C5).
 - **Applies when:** a latency or throughput target is set.
-- **Assertion:** every eligible measurement meets the target. `pass` needs at least one eligible measurement, all meeting the target; `fail` means all of them miss it. A measurement counts only if it:
+- **Assertion:** the conservative eligible measurement meets the target: the slowest for a latency target, the lowest for a throughput target. `pass` needs at least one eligible measurement. When eligible measurements fall on both sides of the target, the conservative one decides and the result is flagged as disputed (#41's conflict order, step 5). A measurement counts only if it:
   - uses the configuration identity that suits the component's mode: the full self-hosted key, or the opaque-endpoint key for API and managed components;
   - was measured under the same workload distribution (input and output length distributions, concurrency, arrival process) and serving protocol;
   - uses the target's metric definition and percentile (per E2, E3);
@@ -460,14 +464,14 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
   Memory estimates don't count here; latency and throughput need `service_level` measurements.
 
   **No transfers yet.** A measurement from another workload distribution isn't used. A transfer model validated by #10 and #36 could later produce a derived estimate, with its own identity (the source measurements and the model version). CD-3 decides how such an estimate is assessed. Until then the outcome is `unknown`.
-- **Missing data:** `unknown`. This includes eligible measurements that disagree about whether the target is met. A pass can't rest on one favourable result while another eligible one fails; selection and aggregation are left to CD-3 and #41's acceptance policy.
+- **Missing data:** `unknown` when no eligible measurement exists. Eligible measurements that disagree are not `unknown`: the conservative one decides, as above, so a pass never rests on one favourable result while another eligible one fails. How the evaluator encodes this is CD-3.
 - **Remediation:** measure with the matching protocol, relax the target, or change the configuration.
 - **Dependencies:** #10, #11, #36, #62; CD-3, CD-8.
 - **Examples:**
   - Pass: a measured p95 TTFT of 600 ms against an 800 ms p95 target, on the same configuration and workload distribution.
   - Fail: measured 1,200 ms.
   - Unknown: the evidence used a different arrival process, reports p50, or is kernel-throughput output such as `llama-bench`.
-  - Unknown: two eligible measurements on the same key and protocol, at 600 ms and 1,200 ms against an 800 ms target.
+  - Fail, flagged as disputed: two eligible measurements on the same key and protocol, at 600 ms and 1,200 ms against an 800 ms target.
   - Unknown: the only evidence comes from a different length distribution.
   - Skipped: no target.
 
@@ -513,12 +517,13 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
   - shows degradation within `max_degradation`, in the metric's direction and units, under #36's uncertainty and acceptance policy.
 
   Bit-width is never used as a proxy.
-- **Missing data:** `unknown`, including when the results come from different protocols, or when eligible results under the same protocol disagree about whether the target is met.
+- **Missing data:** `unknown` when no result was produced under the target's protocol, including when the only results come from different protocols. Eligible results under the same protocol that disagree are decided on the conservative one, the larger degradation, and the result is flagged as disputed.
 - **Remediation:** evaluate the selected artifact under the target's protocol, choose another artifact, or relax the target.
 - **Dependencies:** #36; CD-3.
 - **Examples:**
   - Pass: a 0.4-point drop against a 1-point allowance, under the same protocol.
   - Fail: a 3-point drop under the same protocol.
+  - Fail, flagged as disputed: two results under the same protocol, with 0.4-point and 1.5-point drops against a 1-point allowance.
   - Unknown: only vendor claims exist, or the dataset revisions differ.
   - Skipped: no target.
 
@@ -530,13 +535,14 @@ These are recorded as decisions for #40 and #41 rather than solved here. The ful
 | --- | --- | --- |
 | CD-1 | A typed answer-state representation, and how the evaluator normalises it (including nested fields and the "not relevant / not yet known / not selected" distinction) | #40 |
 | CD-2 | Physical memory pools, device instances, and co-residency scenarios | #40, with #10 |
-| CD-3 | Benchmark protocol identity, the canonical configuration key, result schemas for kernel throughput vs service-level latency, derived estimates from transfer models, and how conflicting eligible results are selected or aggregated | #41, with #10, #62 |
+| CD-3 | Benchmark protocol identity, the canonical configuration key, result schemas for kernel throughput vs service-level latency, derived estimates from transfer models, and how the evaluator encodes #41's conflict order for eligible results | #41, with #10, #62 |
 | CD-4 | The isolation-boundary model, connection lifecycle, and artifact readiness | #40 |
 | CD-5 | Per-stage load and length records for pipelines | #40, with #10 |
 | CD-6 | Reconciling the hardware inventory with device selections; the effective capabilities of fine-tuned stages and adapter/base compositions (W-R1) | #40, with #6, #33 |
 | CD-7 | The migration strategy: what is additive vs replacement, adapters, deprecation, and the version | #40 |
 | CD-8 | The acceptance policy that lets community evidence decide verdicts (W-R6, W-R7, W-R10) | #41 |
 | CD-9 | The jurisdiction hierarchy, containment rules, and named groups | #41 |
+| CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides. Raised on #88; it decides how `input_tokens` and `output_tokens` map for separate-budget routes. | #40, with #7 |
 
 ## Pricing and capacity
 
@@ -549,7 +555,7 @@ This note sets no prices. Budgets combine one-off hardware caps with operating c
 3. **Store the workload inputs once.** v1 repeats them three times with different names (C1, C2, C5).
 4. **Adopt the answer-state policy,** and implement it through CD-1 rather than by assuming the current evaluator supports it.
 5. **Keep one primary workload per build** (`cardinality: "one"`, C8). Several workloads sharing a machine are left open (Q7).
-6. **Adopt W-R1 to W-R10 after #40 review,** together with CD-1 to CD-9.
+6. **Adopt W-R1 to W-R10 after #40 review,** together with CD-1 to CD-9 and CD-11.
 
 ## Structured artifacts
 
@@ -580,7 +586,7 @@ Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #33, #
 | Types, units, ranges, `unknown` handling | [Field dictionary](#field-dictionary), [Unknown and missing answers](#unknown-and-missing-answers-proposal), CD-1 | Revised: output tokens follow the serving operation; means are decimals; representation open as CD-1 |
 | Activation rules for T3/T4/T5 | [Activation rules](#activation-rules-for-t3-t4-and-t5-proposal) | Revised: per capability |
 | Deployment-mode coverage | [Candidate options](#candidate-options), W-R7 | Revised: mode-appropriate evidence identity |
-| Comparison fields | [Field dictionary](#field-dictionary), W-R7 | Revised: evidence checked by type (EV-1); conflicting results are `unknown`; remaining items recorded as CDs |
+| Comparison fields | [Field dictionary](#field-dictionary), W-R7 | Revised: evidence checked by type (EV-1); conflicting eligible results resolved by #41's conflict order; remaining items recorded as CDs |
 | Rules in the shared format; hypotheses separated | [Compatibility proposals](#compatibility-proposals) | Revised: common template fields; fine-tuned stages in W-R1 |
 | Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; E23 re-checked |
 | Handoffs confirmed | [Open questions](#open-questions-and-handoffs) | Open |
