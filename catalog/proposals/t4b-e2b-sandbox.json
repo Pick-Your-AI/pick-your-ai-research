@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "tool.e2b.sandbox",
+  "kind": "tool",
+  "tier": "T4",
+  "name": "E2B sandbox (code execution)",
+  "version": "2.56.0",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Hosted (or self-hostable) Firecracker sandbox for running agent-generated code, used through the E2B SDK.",
+  "tags": [
+    "code-execution",
+    "sandbox"
+  ],
+  "spec": {
+    "protocol": "http",
+    "side_effect": "mutating",
+    "auth_methods": [
+      "api_key"
+    ],
+    "is_networked": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/e2b/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports version 2.56.0 of the e2b Python SDK (uploaded 2026-10-13). PyPI license_expression MIT; the repository root LICENSE is Apache-2.0, so no license block is asserted."
+    },
+    {
+      "source_uri": "https://e2b.dev/pricing",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports billing_class metered: per-second CPU and RAM pricing; plan concurrency and session-length caps recorded in the note."
+    },
+    {
+      "source_uri": "https://docs.e2b.dev/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports E2B_API_KEY authentication and on-demand Linux VM sandbox description."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/e2b-dev/infra/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports Firecracker microVM isolation, per-sandbox egress firewall with domain allow/deny lists, and self-hosting (single host, Terraform for GCP/AWS/Azure). side_effect mutating is a project classification: executes arbitrary code, creates billable resources and may reach the network."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "extensions": {
+    "x_side_effect_class": "high_impact",
+    "x_open_world": true
+  }
+}

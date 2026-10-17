@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.mastra",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "Mastra",
+  "version": "1.78.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "typescript"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true
+  },
+  "description": "TypeScript agent and workflow framework (@mastra/core). Dual licensed: Apache-2.0 except ee/ directories under the Mastra Enterprise License, so no single SPDX license is recorded. MCP client in @mastra/mcp (stdio, Streamable HTTP).",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://registry.npmjs.org/@mastra/core",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "@mastra/core 1.78.0 published 2026-10-15; npm license field Apache-2.0"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/mastra-ai/mastra/main/LICENSE.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "dual license: Apache-2.0 outside ee/ directories; ee/ under Mastra Enterprise License"
+    },
+    {
+      "source_uri": "https://github.com/mastra-ai/mastra/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "programming_languages TypeScript; supports_tool_execution (agents use tools)"
+    },
+    {
+      "source_uri": "https://mastra.ai/reference/tools/client/llms.txt",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_mcp: MCPClient uses stdio when command is set and Streamable HTTP when url is set"
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z"
+}

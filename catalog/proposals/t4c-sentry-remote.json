@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "id": "mcp_server.sentry-remote",
+  "kind": "mcp_server",
+  "tier": "T4",
+  "name": "Sentry MCP (remote)",
+  "version": "0.42.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Sentry-hosted remote MCP server (https://mcp.sentry.dev/mcp). The same project ships a stdio package @sentry/mcp-server for self-hosted Sentry. Source is under FSL-1.1-ALv2, not an OSI license; licence not recorded on this hosted item.",
+  "tags": [
+    "remote",
+    "vendor-hosted",
+    "observability"
+  ],
+  "spec": {
+    "transport": "streamable_http",
+    "auth_methods": [
+      "oauth2",
+      "api_key"
+    ],
+    "trust_level": "trusted_external"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.getsentry%2Fsentry-mcp/versions/latest",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Registry entry io.github.getsentry/sentry-mcp version 0.42.0, status active, published 2026-09-25; remotes streamable-http https://mcp.sentry.dev/mcp; packages npm @sentry/mcp-server stdio with SENTRY_ACCESS_TOKEN. Supports version, transport. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
+    },
+    {
+      "source_uri": "https://github.com/getsentry/sentry-mcp/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "README: 'Bearer' reserved for MCP OAuth access tokens; 'Sentry-Bearer' forwards an upstream Sentry token that the worker does not validate or refresh; AI search tools need an external LLM provider key. Supports auth_methods (oauth2, api_key). auth_methods records the credential types the server accepts from the client or its environment: oauth2 = MCP authorization (OAuth 2.1) or an upstream OAuth login; api_key = a static bearer/personal/agent token passed by header or environment variable."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z"
+}
