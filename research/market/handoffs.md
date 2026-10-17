@@ -108,3 +108,7 @@ The offered runtime evidence remains **15 successful dense CUDA runs**, five con
 ## Preserved relationships and Project limitation
 
 Native #42 ← #40 was read back on 2026-10-17 and preserved. Other native relationships were not changed or newly inferred. The token lacks `read:project`, so live Project options/values were not refreshed or written; repository JSON and issue prose are historical snapshots, not live board readback. Preserve current priorities, labels, hierarchy and assignees. No issue or Project item is marked Done by this audit.
+
+## CanIRun.ai intake (2026-10-16; acceptance pending)
+
+Evidence: [profile](competitors/canirun-ai.md), `src-canirun-ai`, and 48 `canirun-ai` matrix cells. #48/#49/#50 review classification and documentary scope; #66 owns scenario validation. #6/#10 review any technical implications; #41/#60 review rights before reuse. These are information/review inputs, with live issue assignees authoritative. No consumer response or approval is recorded.
