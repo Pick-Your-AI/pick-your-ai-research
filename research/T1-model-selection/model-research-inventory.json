@@ -2303,7 +2303,8 @@
       "model": "Whisper large-v3",
       "publisher": "OpenAI",
       "task_families": [
-        "speech_recognition"
+        "speech_recognition",
+        "speech_translation"
       ],
       "input_output": "Audio -> text",
       "access": "weights",
@@ -2318,8 +2319,7 @@
       "model": "Whisper turbo",
       "publisher": "OpenAI",
       "task_families": [
-        "speech_recognition",
-        "speech_translation"
+        "speech_recognition"
       ],
       "input_output": "Audio -> text",
       "access": "weights",
