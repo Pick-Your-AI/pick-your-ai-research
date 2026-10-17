@@ -1,6 +1,8 @@
 # Architecture and scope
 
-Planning-stage description. Components and behaviours below are targets for research, not shipped functionality.
+Shared research architecture and implementation boundaries. The website demonstrates
+builder behavior with synthetic data; this description does not certify production
+catalog coverage or native-client delivery.
 
 ## Seven configuration tiers
 
@@ -20,7 +22,24 @@ Tiers organise research and the user's guided flow. They are not a strict waterf
 
 1. **Catalog**: validated datasets of components, specifications, pricing and evidence (`catalog/`, `pricing/`, `evidence/`), following the shared contract in `contracts/v1/`.
 2. **Rules**: dependencies and compatibility rules over catalog entries, defined by the same contract (see [CONTRACT_MAPPING.md](CONTRACT_MAPPING.md) for how component kinds map to issues).
-3. **Builder** (future): a constraint-resolution engine that applies rules to the user's selections, recomputes valid options and costs, and exports configurations.
+3. **Builder clients and services**: apply the governed rules to user selections,
+   recompute valid options and costs, and export configurations. The website has a
+   synthetic preview; native clients and production services have separate delivery gates.
+
+## Mobile delivery and shared services
+
+The [Apple/iOS delivery plan](APPLE_DELIVERY_PLAN.md) aligns with the Android plan:
+1 program, 18 epics and 110 feature/task work packages. These are delivery levels,
+not new component tiers or contract kinds. Epics 03–05 cover shared contracts,
+production data and services; each client owns its native UI, persistence, lifecycle,
+network adapters and conformance checks.
+
+Keep one canonical implementation issue for each shared capability. Apple, Android
+and web integration tasks link to that work without changing its assignees or parent.
+Repository/framework decisions remain in 01.3, service hosting in 01.4, and contract
+changes under research #40. API declarations and a static website do not establish
+that a production backend exists. Approved research, published data and deployed
+services must be verified separately.
 
 ## Dependency-aware compatibility
 
@@ -40,4 +59,10 @@ The component-level relationships are documented in [DEPENDENCIES.md](DEPENDENCI
 
 ## Out of scope for this repository
 
-The production web application, user accounts, payment handling, and any claim that a particular stack is recommended.
+Production web/mobile runtime code, operating backend services, user-account and
+payment implementation, and unsupported claims that a particular stack is recommended.
+Delivery planning may live here; it does not override research ownership or frozen v1.
+
+Apple delivery structure and canonical shared handoffs are indexed in
+[APPLE_DELIVERY_TRACKING.md](APPLE_DELIVERY_TRACKING.md). Its dated snapshot does not
+replace live GitHub status, ownership or dependency relationships.

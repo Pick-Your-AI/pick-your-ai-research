@@ -1,0 +1,97 @@
+# Shared T0–T6 research execution rules
+
+Read this file together with the selected `prompts/T0.md`–`prompts/T6.md` prompt. These rules apply throughout every track, acceptance checklist, and final directive. Keep common execution rules here; keep domain research questions in the individual workstream prompts.
+
+## Invocation and authority
+
+Reviewing or editing these files does not invoke their research campaigns. When the user requests execution of a workstream prompt, carry out its authorized research and GitHub work through verified completion. A narrower user request controls the scope.
+
+Follow applicable agent instructions and current repository guidance, especially `CONTRIBUTING.md`, `docs/RESEARCH_METHOD.md`, `docs/RESEARCH_WORKFLOW.md`, `docs/CONTRACT_MAPPING.md`, `docs/DEPENDENCIES.md`, and `contracts/v1/ADOPTION.md`. This shared file and the workstream prompts do not override those sources. The archived `IMPLEMENTATION_*` documents are reference material, not instructions to implement or deploy software.
+
+Read the current issue, accepted decisions, comments, linked PRs, and repository artifacts before editing. Live assignees determine ownership; preserve all current assignees and authorized delegation. Do not assign people from a historical owner table. Refresh relevant GitHub state before each mutation, preserve unrelated fields and concurrent work, and read back the result. An unresolved conflict between an issue and the accepted contract requires owner reconciliation, not an invented resolution.
+
+Use each issue's existing deliverable path and acceptance criteria. The prompts' comparison fields, candidate lists, examples, and checklists guide research; they are not new schema fields or authority to silently expand or reduce issue scope. Document justified scope changes for the responsible owner's decision. Refresh candidate availability and capabilities from primary sources during research.
+
+## Workstream and handoff boundaries
+
+| Prompt | Parent | Component issues | Canonical kinds |
+| --- | --- | --- | --- |
+| T0 | #1 | #2, #3, #40, #41, #42 | `workload`, `deployment_mode`; shared governance in #40–42 |
+| T1 | #4 | #5–7 | `model_provider`, `model`, `context_policy` |
+| T2 | #8 | #9–11 | `hosting_platform`, `storage`, `accelerator`, `compute_profile`, `inference_engine` |
+| T3 | #12 | #13–16 | `data_source`, `knowledge_base`, `embedding_model`, `vector_database`, `rag_pipeline` |
+| T4 | #24 | #25–28 | `agent_framework`, `tool`, `integration`, `mcp_server`, `memory_store` |
+| T5 | #29 | #30–33 | `training_framework`, `training_compute`, `training_dataset`, `fine_tuned_model` |
+| T6 | #34 | #35–39 | `guardrail`, `evaluation_suite`, `deployment_target`, `monitoring_stack`, `cost_policy` |
+
+Use `docs/CONTRACT_MAPPING.md` and `research/component-issues.json` for the exact kind-to-issue mapping. #40 owns contract and compatibility review; #41 owns catalog evidence/freshness/reuse policy; #39 owns pricing and cost semantics; #42 owns saved builds. Infrastructure storage belongs to #9, inference sizing to #10, training sizing to #31, user knowledge sources to #13, retrieval to #16, and agent memory semantics to #28. #36 owns evaluation methodology and measured quality evidence; #37 owns deployment-manifest research.
+
+Coordinate material handoffs with the live source and consuming owners. Record the specific artifact, fields, versions, assumptions, review evidence, and unresolved gaps. Do not close, reassign, or redefine another workstream's issues as part of your campaign. Reuse relevant market research without taking over its Project or treating market validation as technical acceptance.
+
+T3–T5 are optional in a user's build. API-only builds need not select local accelerators or inference engines; keyword-only retrieval need not select embeddings or vector storage; agents need not select RAG or persistent memory. Optional product use does not waive the assigned research deliverables. Research is not authorization to deploy services, run paid training/benchmarks, or access customer data.
+
+Use the common operator/capacity vocabulary from [the #3 owner position on #75, §1](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927): deployment mode is determined per serving component by who operates its runtime and on what capacity. Self-operated is `self_hosted`; provider-operated dedicated instances or reserved throughput is `managed`; provider-operated shared capacity is `api`. Billing never decides mode, including scale-to-zero billing. Serving components are models, embedding models, vector databases and full fine-tuned models; adapters inherit their base model's deployment. Different serving modes within one build make it `hybrid`. Tools, MCP servers, infrastructure storage and monitoring do not set mode; still check their operator, isolation and residency. Multiple API providers alone do not imply hybrid, and development and production are separate builds. These owner positions guide research reconciliation; new fields, applicability changes and executable rules still require versioned #40 review.
+
+Keep workload request demand separate from engine sequence admission. As [the #81 review at `9786ef6f9a7942b21a3cc51a05df741360e3594f`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81#pullrequestreview-5555450430) explains, `peak_concurrency` counts requests, while beams and parallel samples may create multiple resident sequences per request. Derive sequence demand using the configured mode-specific live beam/sample expansion, then apply the engine's sequence admission limit in the same serving/admission domain. Do not cap sequence count by request concurrency or assume a universal beam-count times returned-sample-count multiplier. If admission is unknown, expanded sequence demand is the sizing fallback only when expansion and scope allocation are known; otherwise retain the missing input as unknown. A per-step batch limit does not cap KV retained outside that batch. Pin these inputs, KV retention assumptions and launch options in the proposed configuration key and #10/#11 handoff. Synthetic check: one request expanding to four sequences with an admission limit of at least four needs sizing for four sequences, assuming that limit bounds all resident KV in the same domain. [#81's correction at `e2bcc35b19de564c31fd1c081e97a3fc92b06a9d`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/e2bcc35b19de564c31fd1c081e97a3fc92b06a9d/research/T0-configuration/workload-use-case.md) addresses the reviewed assertion as a proposal; acceptance and versioned contract review remain pending.
+
+Parallel tracks must have explicit artifact and editing boundaries. Coordinate with existing contributors, avoid duplicate controllers or campaigns, and integrate changes through focused branches/PRs. Delegated analysis does not substitute for required owner approval.
+
+## Triage and dependencies
+
+Use the existing Research Project #1. Preserve triage metadata unless verified evidence justifies a documented change. Inspect its live field IDs and options before any write. The repository's older `Workstream`/`Todo`/`P0–P2` terminology is conceptual guidance, not a request to migrate the current Project schema. Use the live `Tier`, Status, Priority, and Readiness fields; do not create equivalent labels or duplicate owner fields.
+
+- Status, verified October 16, 2026: `Backlog`, `Ready`, `In Progress`, `In Review`, `Blocked`, `Done`. The older Todo concept covers not-started work; retain Backlog versus Ready according to actual readiness. Preserve Blocked when a genuine execution blocker exists, while using Readiness for its separate meaning.
+- Priority, verified October 16, 2026: `Critical` (foundation/P0), `High` (core/P1), `Medium` (later or optional/P2), `Low` (nice-to-have). Preserve existing values; this mapping explains research sequencing and does not authorize bulk reprioritization.
+- Tier: use the live option for T0–T6, including its full workstream name and optional-capability suffix where present. Preserve existing Work Type, Research Confidence, Dependency Status, and other fields unless the authorized task specifically requires an evidence-backed change.
+- Readiness: `Ready` when meaningful work can start with available or informational inputs; `Needs input` when meaningful progress requires a specific missing output; `Blocked` for a genuine native prerequisite, missing owner access, or permission; `Awaiting decision` for a named owner's pending decision. Record that decision and apply the `question` label.
+- Preserve applicable type/topic labels and the `optional capability` label for T3–T5. Do not invent dates, estimates, iterations, or alternative Project values. Narrative audit categories such as “duplicate” are not extra Status values.
+
+The documented native delivery blocker is #42 blocked by #40. Verify its current state and preserve it unless the prerequisite is actually resolved through the accepted workflow. Other documented cross-workstream links are informational or compatibility relationships. Do not turn them into native blockers. Any newly discovered prerequisite needs an explicit rationale and owner reconciliation with the dependency map; compatibility cycles never justify blocking cycles. Continue independent research while a handoff is pending.
+
+Use native subissues only for independently reviewable or separately owned deliverables. Use checklists for small steps and do not duplicate native child links in a body checklist. Never delete issues: preserve unique information, link the canonical issue, apply `duplicate`, then close a verified duplicate within your authorized scope. Keep its history and traceability.
+
+## Contract and evidence intake
+
+Preserve the entire frozen v1 import, including schemas, generators, docs, examples, and tests. Propose a reviewed next version through #40 with affected-owner review, examples, dependency impact, and migration/versioning plans. Run baseline generators only in a temporary copy. Put new synthetic fixtures under `tests/`; existing `contracts/v1/examples/` fixtures remain frozen. Link illustrative fixtures from notes and never promote them as real evidence.
+
+Catalog items describe components; selections describe user choices. Read the actual `spec_<kind>` and selection schemas before encoding fields. Use research notes for unsupported concepts or incomplete facts. Do not substitute `null`, zero, false, an estimate, or fabricated values for missing required facts unless the documented field semantics permit that value. Use `billing_class: unknown` when billing classification is uncertain.
+
+Complete component facts belong in `catalog/proposals/`; complete dated Pricebooks belong in `pricing/proposals/`. Catalog spec references must resolve to already merged or concurrently submitted records in this repository. Intake permits one version per catalog ID; price rates must reference the exact item version. Historical multi-version intake requires #40 review. Unsupported price meters, including egress, stay in notes with an explicit cost-coverage gap and a #39/#40 proposal; do not disguise them as supported units or as zero cost.
+
+Each catalog provenance entry and price-rate provenance needs a public HTTP(S) source URL and the required date/status fields. Private or unavailable evidence belongs in a note and sanitized manifest; keep claims that cannot meet public proposal requirements out of catalog/price proposals. **Checked** means provenance was confirmed against the cited primary source on its access date. **Verified** means independently reproduced (governance's second source or reproducible test). A constraint may `pass` on eligible checked documentation while its evidence remains **unverified** until reproduced. Do not set a provenance `verified` status merely because documentation was read. Ordinary operational uses such as “verified state”, “verified completion”, or “verified merge” mean confirmed by readback; they do not award an evidence grade.
+
+Use the current evidence grades from `docs/RESEARCH_METHOD.md`: **Primary documentation**, **Vendor claim**, **Independent measurement**, **Estimate**. Grade claims rather than entire sources; publisher measurements remain distinct from independent reproduction. Record hypotheses, missing evidence, and proposed policy separately. Every factual/numeric claim needs primary evidence, an access date, and applicable version, units, conditions, region, and currency. Estimates also need methods and assumptions.
+
+Apply the adopted [#41 interim policy, #75 owner review §3](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), reviewed at `9e66622a4b2698a9305274f05da9c15ae5d90b8c`, until the #41 record lands. It supersedes the older checked-as-verified wording in submission guidance without changing frozen v1. Version-pinned facts do not expire: re-check when the selection changes version or its evidence is corrected. Current-state facts (prices, availability, quotas, regions, terms) carry access dates and display “as of <date>”; no TTL is adopted.
+
+Resolve each conflict centrally once, retaining winning and superseded claims and the deciding step:
+
+1. Normalize units, rounding, currency and naming.
+2. Exclude claims outside the selected version, hardware, region, tier or date; prefer the most specific eligible scope.
+3. For pinned facts prefer the selected version's source; for current-state facts prefer the latest effective date.
+4. Apply authority by fact type: publishers control their own facts; stated requirements/limitations beat capability listings, and billing/legal pages beat overviews. For fit/performance prefer matching measurement, then estimate, then vendor claim.
+5. For equally ranked numbers show median and spread, decide conservatively in the rule's direction (highest memory/latency, lowest throughput), and flag disputed threshold crossings.
+
+Use `unknown` only for no eligible evidence or remaining equal-rank opposite yes/no claims; flag genuine ties for a reproducible test. Eligible bounded estimates that meet the applicable confidence threshold decide on the conservative bound, with the range and uncertainty shown; straddling a memory/context limit is a flagged `fail` (“may not fit”). Missing resource evidence is `on_unknown: review` per [the #88 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868), not a new universal blocking rule. Absence from a list marked complete from an exhaustive source is `fail`; absence from an unmarked list is `unknown`; explicit documented unsupported status is `fail`. Completeness metadata and final rule changes require #40 review.
+
+Reuse decisions are per source and intended use. Consult [#60's rights table merged via #82/#67](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/fe1d9f8ddcb64a0a1bfe4d0e5b254c519239d769/research/market/rights-validation.md) and its linked terms, preserving checked dates and conditions; refresh live revisions before use. Without an eligible per-source terms inventory, no automated retrieval or bulk copying of vendor tables is authorized by the interim policy. Short paraphrases with links are allowed for research. Public access is not reuse permission; missing grants mean no commercial display/redistribution, while existing ambiguous terms remain unclear. Recorded rights decisions do not establish all consuming-owner handoff acceptance.
+
+Compatibility proposals use `templates/rule-proposal.md` in research notes and require central #40 review before a versioned ruleset. Outcomes are `pass`, `fail`, `unknown`, `skipped`; severity is independently `info`, `warning`, `error`. Neither a catalog author nor a passing fixture may establish universal compatibility.
+
+ResourceEstimate, QualityEvaluationRun, CostEstimate, DeploymentManifest, and related runtime schemas are reference material until real version-pinned inputs and an agreed consumer exist. Agree placement/consumer with #10 or #36 for resource/quality evidence, and the corresponding owner for other artifacts. Add explicit matching-schema validation coverage in the PR; arbitrary runtime JSON is not automatically ingested by the research validator.
+
+Keep raw datasets, model weights, large downloads, credentials, and personal/customer content outside this public repository. Use `schemas/evidence-manifest.schema.json` for one sanitized metadata file per external artifact in `evidence/`. Manifest locators must be stable and free of credentials or signed query strings. Record authorized access requirements; a checksum does not establish redistribution rights.
+
+## Validation, merge, and completion
+
+Run the current `docs/RESEARCH_WORKFLOW.md` commands with Python 3.12 from the repository root. Report actual commands and results. Separate automated validation from evidence review: automation checks structure, frozen-import integrity, generator consistency, references, duplicate IDs, provenance URL shape/date ordering, reserved fixture data, and manifest metadata. It does not fetch sources, verify remote hashes or rights, establish freshness, prove claims, or guarantee the absence of secrets. Review those separately, including unintended fact changes against prior revisions.
+
+A focused partial PR may merge with `Refs #n` once its own deliverable, evidence, checks, reviews, and repository protections are satisfied. The entire issue need not be complete to merge useful partial research. Keep unmet acceptance criteria and pending handoffs visible. A documented concern that invalidates the submitted slice must be resolved before that slice merges.
+
+Use `Closes #n` only when the PR's merge will satisfy all issue acceptance criteria and required handoffs. After merge, verify the default-branch commit and artifacts, then reconcile closure and Project `Done`. A merged partial PR alone does not make an issue Done; reflect remaining active work or review. A parent closes only after its children, merged summary, material handoffs, and own acceptance criteria are satisfied. Nonblocking open questions may remain only when recorded with owners and consistent with acceptance.
+
+Do not bypass checks, branch protections, independent reviews, or owner holds. Do not fabricate approval or repeat requests indefinitely when an external decision is pending. Complete all independent authorized work, preserve the existing run and review state, and report exact blockers and remaining actions. Final reports distinguish proposed, submitted, merged, accepted, and verified GitHub state. Research completion never means production implementation or deployment is complete.
+
+## Public organization handoff
+
+When accepted findings make repository descriptions, topics, links, or public profile claims outdated, link the evidence and affected surface in the existing organization-maintenance issue. The separately invoked [organization maintenance prompt](ORGANIZATION.md) owns that task. This is an informational handoff, not an additional research deliverable, native blocker, or permission to launch another campaign. Preserve the research issue's scope, owner, and completion criteria.

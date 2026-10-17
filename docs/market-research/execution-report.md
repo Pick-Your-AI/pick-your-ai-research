@@ -27,3 +27,7 @@ No findings are accepted yet. Required: owner review of PR #67 and handoffs, aut
 - Native blockers added for genuine completion prerequisites only: #57 and #58 are blocked by #66 (direct-substitute test). All other links remain information/validation inputs.
 - Status: #66 In Progress (one of several required scenarios executed); #63 Blocked (outreach awaits coordinator approval). Evidence Confidence lowered to Low for workstreams whose notes are explicitly hypotheses or assumption-based scenarios, and set to Unverified for validations that have not run.
 - Labels: `topic: data-governance` on #55/#60; `topic: pricing` on #64.
+
+## Subsequent CanIRun.ai intake (2026-10-16)
+
+Added `canirun-ai` and `src-canirun-ai`, a fourteenth draft profile and 48 matrix cells (3 Documented, 45 Unknown). Current totals: 33 entities and 1,584 cells. Original execution counts above are historical. Tracking remains in #48/#49/#50/#66; no new issue, owner, priority, blocker or completion state is required. The device directory was read; no scenario, benchmark or rights validation is claimed.

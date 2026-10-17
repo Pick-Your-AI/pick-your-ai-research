@@ -56,6 +56,29 @@ GitHub issue assignees are authoritative for both programs; sub-issues can have 
 
 Website implementation is tracked separately in [Project 3](https://github.com/orgs/Pick-Your-AI/projects/3). A research PR contributes evidence; it does not by itself implement a feature or approve a deployment.
 
+### Apple/iOS delivery planning
+
+The [Apple/iOS delivery plan](docs/APPLE_DELIVERY_PLAN.md) follows the Android planning
+structure: **1 program → 18 epics → 110 feature/task work packages → implementation
+and validation subtasks**. It covers the native client, shared services and catalog
+pipeline, offline behavior, privacy, quality, TestFlight, App Store launch and operations.
+The delivery hierarchy is separate from the product's T0–T6 configuration tiers.
+
+The plan is published in [Apple Project #5](https://github.com/orgs/Pick-Your-AI/projects/5)
+under [program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163); see the
+[issue index and triage record](docs/APPLE_DELIVERY_TRACKING.md). It does not establish
+a shipped application. Existing
+research, Android and website work remains canonical: shared capabilities are linked
+rather than duplicated, and client-specific integration is tracked separately.
+Implementation repository, platform, technology and conditional-feature decisions
+remain explicit work packages. See the [roadmap](docs/roadmap.md) for release gates.
+
+### Contributor recognition and leaderboards
+
+The dedicated [pick-your-ai-leaderboard repository](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard), [delivery project](https://github.com/orgs/Pick-Your-AI/projects/6), and [program](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard/issues/1) plan public recognition across pull requests, code changes, reviews, issues, triage, documentation, research, and maintenance. The initial scope defines **98 metrics, 20 epics, 112 work packages, and 474 implementation checklist tasks**. Publishing this plan does not establish a deployed leaderboard or complete historical coverage.
+
+Metric definitions and correction rules belong to the leaderboard repository. Source links and coverage limitations must accompany recognition; unavailable activity is not zero, and activity counts do not establish research quality or acceptance. Research deliverables, ownership, contracts, and evidence review continue to follow this repository's workflow. Leaderboard implementation belongs in its dedicated repository and links to existing research instead of duplicating it.
+
 ## Where submissions go
 
 | Material | Location |

@@ -32,27 +32,27 @@
     {
       "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/README.md",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E11: documented backend inventory; HIP maps to rocm and SYCL to oneapi. Conditional build/operator support is retained in the note. Checked source field, not independently reproduced runtime compatibility."
     },
     {
       "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/docs/models.md",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E13: GGUF artifact requirement and conversion boundary; source PEFT artifacts are not directly interchangeable. Checked source field, not independently reproduced runtime compatibility."
     },
     {
       "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/include/ggml.h",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E15: F32/F16/BF16 tensor definitions; conservative precision subset, not complete operator support for every backend. Checked source field, not independently reproduced runtime compatibility."
     },
     {
       "source_uri": "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/LICENSE",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E12: MIT source license; model/adapter rights separate. Checked source field, not independently reproduced runtime compatibility."
     }
   ],
-  "updated_at": "2026-10-16T12:52:17Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

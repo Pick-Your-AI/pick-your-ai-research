@@ -16,15 +16,15 @@
     {
       "source_uri": "https://modal.com/docs/guide/volumes",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "File-storage product, scoped to v1. v2 beta and its caveats are a separate finding."
     },
     {
       "source_uri": "https://modal.com/pricing",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Metered GiB-month pricing remains in notes pending canonical unit interpretation."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

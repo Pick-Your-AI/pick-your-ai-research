@@ -9,6 +9,10 @@ Choose the organization/source and a particular model delivery offering under ex
 
 ## Candidate options
 
+The original table below is a dated API/weights comparison. The2026-10-17 [broader inventory](model-taxonomy.md) extends provider/source discovery to perception, retrieval, speech/music, editable image/video, spatial, predictive/scientific and action-model routes. Each [candidate row](model-research-inventory.json) cites the [primary register](model-research-sources.md) and preserves publisher versus host/reseller/UI distinctions. Exact API IDs, downloadable artifacts and services must not be collapsed merely because a reseller offers a similarly named model.
+
+New API/service licence or account terms not inspected remain explicitly pending in those rows; weight/code/backbone/adapter/data/voice rights are separate. No unknown rate or permission becomes zero/free/allowed. New meters such as characters, images, pixels, generated seconds, credits and scientific job units require #39 definitions and dated Pricebook intake; the existing token-rate Pricebook is not a complete price comparison for these task families. The research adds no fabricated new rates or contracts.
+
 Evidence IDs resolve in [the claim register](evidence.md). This bounded set covers first-party API, a cloud-managed marketplace/inference route, and open-weight distribution. It is representative rather than a recommendation that every provider fits every workload.
 
 | Offering / mode | Publisher / serving party / distributor | Canonical model key -> route ID | Terms, limits and evidence |
@@ -31,7 +35,7 @@ Every research field requires source URL/access date/version and applicable cond
 | --- | --- | --- |
 | Provider ID / CatalogItem `id` | Stable string | Publisher or serving organization's identity; do not equate a host with model author. |
 | Offering type | Enum API/managed/weights; note-only | Route-specific documentation. Hybrid is composed per component. |
-| Canonical model key and provider model ID | Two strings + revision; note-only offering relation | Exact publisher and route IDs, explicit mapping confidence; ambiguous version stays unmapped. |
+| Canonical model key and provider model ID | Two strings + revision; v1 `provided_by` binding plus proposed endpoint key | Exact publisher and route IDs, explicit mapping confidence; ambiguous version stays unmapped. Rich endpoint/region/tier metadata remains a #40 proposal. |
 | `spec.api_base_url` | URI, optional | Actual endpoint documentation; omit if not checked. Distribution URL is not an API endpoint. |
 | `spec.supported_regions` / serving and residency regions | String array; role-qualified notes | Model/endpoint/plan-specific region evidence. Unknown is not unrestricted; a country of API access is not a processing-region guarantee. |
 | Rates | Decimal currency per typed meter in Pricebook | Capture date, route, billing region, currency, conditions, exact item version. Unpriced operations remain uncovered. |
@@ -39,7 +43,7 @@ Every research field requires source URL/access date/version and applicable cond
 | Retention | Duration plus purpose, feature, exception, agreement; note-only | O2/A4/B2/G2; separate abuse monitoring, application state, logging and third parties. |
 | Training use / residency | Conditional policy and source; note-only | Account opt-ins, paid/unpaid mode, country and endpoint; never reduce a conditional arrangement to universal false. |
 | SLA | Agreement URI/version, metric, exclusions and eligibility; note-only | B4 provides candidate agreement. Purchased eligibility for any offering remains unknown. |
-| `spec.supports_fine_tuning` | Optional boolean | A provider-level capability cannot prove a particular model/account/region is eligible. O1 explicitly says this GPT-5.4 model is unsupported; other candidates remain route-specific unknowns here. |
+| `spec.supports_fine_tuning` on provider and model | Optional boolean | Existing v1 capability: explicit false on either fails a selected fine-tuning action; missing is unknown. Provider true does not override model false or prove account/region/license eligibility. O1 says this GPT-5.4 model is unsupported; other candidates remain route-specific unknowns here. |
 | Source / checked date | Public URI / UTC timestamp | Public field-level provenance; #41 determines freshness/reuse policy. |
 
 ## Pricing and capacity
@@ -53,6 +57,8 @@ Default-view proposal: show the user's chosen currency and serving/billing regio
 ## Compatibility proposals
 
 See [offering and access rules](rules/model-offering.md). Facts checked against docs and proposed builder behavior are distinguished there. Missing account/region/terms evidence yields unknown, not a compatible offering.
+
+The [#40 owner's PR #88 review at `dbfa7dd`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868), accessed 2026-10-17, accepts T1-O1 on existing `provided_by` links and narrows T1-O2 into two concerns. Technical fine-tuning capability uses existing model/provider flags. License/terms conditions become answerable `license_conditions` / `licence_answers` under #81 D-R2a/b, subject to #30 interpretation and #40 versioning; a user answer can resolve its condition without overriding unsupported capability. No proposed field is added to v1.
 
 The actual API agreement references and conditional customization/output restrictions are recorded in [the model license section](ai-model.md#license-and-access-conditions-for-30), with O3/A6/G2/Q3 primary terms. They are source facts for #30 to review, not a universal right to train from service outputs. H2 additionally distinguishes published endpoint payload handling from30-day log retention; it is not a claim about a customer's negotiated agreement.
 
@@ -68,4 +74,4 @@ v1 has no first-class offering entity or conditional terms/quota/region schema. 
 
 ## Open questions and handoffs
 
-See [handoffs](handoffs.md) for every consumer, owner, exact request and disposition. #6/#7 are integrated by this T1 author, with independent evidence review still pending. #30 must decide fine-tuning permission semantics; #37 needs route/control-plane/region constraints; #39 needs meter conditions and uncovered costs. None is pre-marked accepted. Regional default-view choice belongs to #39/#3; source refresh/rights to #41; the offering contract gap to #40.
+See [handoffs](handoffs.md) for every consumer, owner, exact request and disposition. #6/#7 are integrated by this T1 author, with independent evidence review still pending. #30 must confirm license-field sufficiency and ambiguous condition interpretation; #37 needs route/control-plane/region constraints; #39 needs meter conditions and uncovered costs. Those consumer rows remain pending. Regional default-view choice belongs to #39/#3; #41 accepted the applied interim evidence policy at `dbfa7dd`; remaining contract details and migration stay with #40.

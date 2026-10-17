@@ -4,9 +4,9 @@ Issue: [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50). S
 
 ## Selection rationale
 
-The thirteen profiles are drawn from the 32-entity [#48 catalog](../competitors.json), keeping its entity IDs, classifications and profile paths. #48 records the selection as a criterion ("Select 10–15 material deep dives") but no separate rationale, so this is the #50 basis for #48 to confirm:
+The fourteen profiles (including the CanIRun.ai intake) are drawn from the 33-entity [#48 catalog](../competitors.json), keeping its entity IDs, classifications and profile paths. #48 records the selection as a criterion ("Select 10–15 material deep dives") but no separate rationale, so this is the #50 basis for #48 to confirm:
 
-1. **Direct substitution risk first.** Products that take a user's workload or hardware and return a recommendation: Flocci, ModelFit, llmfit, Local AI Planner, BenchLM (LLM Selector), Artificial Analysis (Model Recommender).
+1. **Direct substitution risk first.** Products that take a user's workload or hardware and return a recommendation: Flocci, ModelFit, llmfit, Local AI Planner, BenchLM (LLM Selector), Artificial Analysis (Model Recommender), and CanIRun.ai (provisional, added in #98: its repository README describes hardware-detected, per-use-case recommendations, which ranks it with ModelFit/llmfit on direct-substitution risk ahead of the submission databases LocalScore and LocalMaxxing; the coordinator decision on those two still stands).
 2. **Decision-changing evidence and data sources**, where rights or provenance could invalidate ingestion: BenchLM, Artificial Analysis, OpenRouter, Hugging Face, Models.dev, Harness Bench.
 3. **Substitute workflows** that let users skip planning and build or run directly: Dify, n8n (application/automation) and SkyPilot (compute placement).
 
@@ -29,6 +29,7 @@ Access tier for all profiles: public pages, public docs and public repository me
 | Profile | Workflow evidence | Rights evidence | Strongest counterexample (suffices for) |
 | --- | --- | --- | --- |
 | [Flocci Ask / Stack Builder](flocci.md) | Observed hands-on (one historical request, #66) + static pages | No terms found; © operator | Free ordered toolchain for a common local task |
+| [CanIRun.ai](canirun-ai.md) | Observed static directory + README vendor claim; untested | Public repo, no licence file; no reuse grant | Hardware-detected local model choice (hypothesis) |
 | [ModelFit](modelfit.md) | Observed UI structure + Documented | Licence files observed: MIT CLI (API NOASSERTION), CC BY 4.0 dataset | Best local model for one device |
 | [llmfit](llmfit.md) | Documented | MIT via licence API | Local model and quantization fit on one machine |
 | [Local AI Planner](local-ai-planner.md) | Observed UI (form fields) | No terms found | Single-GPU or Mac local model with speed targets |
@@ -49,7 +50,7 @@ Claims are from [differentiation.md](../differentiation.md) (#57). Each row name
 | Differentiation claim | Strongest counterexample | Where it could suffice | Remaining gap (to test, not assumed) |
 | --- | --- | --- | --- |
 | Workload-first guided recommendation | BenchLM LLM Selector; Flocci Stack Builder | Single hosted-model choice (BenchLM); free local toolchain (Flocci, observed once) | Joint multi-tier composition with compatibility evidence |
-| Hardware-aware fit | ModelFit, llmfit, Local AI Planner | One device, local GGUF models | Hosted-vs-local trade-off; measured, not heuristic, memory |
+| Hardware-aware fit | ModelFit, llmfit, Local AI Planner, CanIRun.ai | One device, local GGUF models | Hosted-vs-local trade-off; measured, not heuristic, memory |
 | Cross-provider cost/performance | Artificial Analysis, OpenRouter | API model/provider choice | Complete bill, self-hosting cost; AA data barred for this use |
 | Versioned, shareable configuration | Dify DSL, n8n JSON + Git, SkyPilot YAML; BenchLM URL state | Teams that already know their components | These record what to run, not why; BenchLM links re-evaluate on current data |
 | Evidence-linked defensibility | Harness Bench, BenchLM methodology; community fit-report projects (below) | Readers who want published measurements | Reproducible history of configuration outcomes is not shown by any profile, but community projects were not reviewed |

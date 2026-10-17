@@ -1,6 +1,7 @@
-# Initial roadmap
+# Research and application delivery roadmap
 
-Phases describe order of work, not dates. No deadlines have been set.
+Phases describe order of work, not dates. No deadlines have been set. The first three
+phases below govern research; application release gates are recorded separately.
 
 ## Phase 1: Foundation
 
@@ -19,3 +20,32 @@ Phases describe order of work, not dates. No deadlines have been set.
 - Promote validated rules into product requirements ([governance.md](governance.md)).
 
 Execution prerequisites between issues are tracked with GitHub's native blocking relationships; compatibility feedback loops are not.
+
+## Apple application delivery
+
+The [Apple/iOS plan](APPLE_DELIVERY_PLAN.md) uses the Android plan's **1 program →
+18 epics → 110 feature/task work packages → subtasks** hierarchy. It supersedes the
+earlier 19-workstream Apple outline with a documented coverage mapping.
+[Project #5](https://github.com/orgs/Pick-Your-AI/projects/5) and
+[program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163) now track delivery;
+the [publication index](APPLE_DELIVERY_TRACKING.md) records structure and triage.
+This does not assign work or establish implementation completion.
+
+| Phase | Gate |
+| --- | --- |
+| Foundation | Scope and architecture decisions, reproducible native build, CI and contract conformance |
+| Synthetic preview alpha | Core client journeys, persistence and failure handling work with explicit fixture labels |
+| Reviewed real-data beta | Supported path uses reviewed, rights-cleared published data; included services and privacy flows work; TestFlight feedback triaged |
+| Production launch | Device, accessibility, security and release qualification; support and operations ready; App Store review and release approval; installed-release verification |
+| Selected expansion | Explicit decisions and acceptance gates for alerts, monetization, community, advanced recommendations, execution or additional platforms |
+
+Design, security, persistence and testing run throughout. Shared catalog/backend work
+is reused across Apple, Android and web; existing issues keep their owners and
+hierarchy. Implementation can proceed against fixtures while evidence is incomplete,
+but fixture success and merged research do not establish production readiness.
+
+## Contributor leaderboard delivery
+
+The [leaderboard project](https://github.com/orgs/Pick-Your-AI/projects/6) and [program](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard/issues/1) track contributor recognition in the dedicated [pick-your-ai-leaderboard repository](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard). The initial plan contains 98 metric definitions, 20 epics, 112 work packages, and 474 implementation checklist tasks. Current scope, prerequisites, validation, and release gates are maintained there.
+
+Publishing the plan is separate from implementing metric collection, validating source attribution and coverage, and releasing a live dashboard. Research acceptance still requires its existing evidence and owner review; contribution counts are not a substitute for either.

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "id": "pricebook.t4b.anthropic-web-search",
+  "revision": 1,
+  "captured_at": "2026-10-16T12:00:00Z",
+  "rates": [
+    {
+      "id": "rate.anthropic.web-search.request",
+      "catalog_item_id": "tool.anthropic.web-search",
+      "catalog_item_version": "web_search_20260318",
+      "meter": "request",
+      "unit_price": {
+        "amount": "0.01",
+        "currency": "USD"
+      },
+      "valid_from": "2026-10-16T00:00:00Z",
+      "provenance": {
+        "source_uri": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "checked_at": "2026-10-16T12:00:00Z",
+        "verification_status": "unverified",
+        "notes": "Listed as '$10 per 1,000 searches'; page states 'All prices are in USD'."
+      },
+      "conditions": [
+        "Published list price is USD 10 per 1,000 searches; converted to 10 / 1000 = USD 0.01 per single search request.",
+        "One request = one web search use, regardless of the number of results returned.",
+        "Searches that end in an error are not billed.",
+        "Token costs for search-generated content are billed separately at the selected model's token rates and are not included here.",
+        "Claude API (first-party) price; prices on other platforms were not checked.",
+        "valid_from is the capture date, not the vendor's effective date (unknown)."
+      ],
+      "price_type": "list"
+    }
+  ]
+}

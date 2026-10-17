@@ -1,154 +1,128 @@
 # Market-to-technical handoffs
 
-All are information/review relationships, not native execution blockers. Ownership was read live on 2026-10-16. Acceptance remains pending.
+Refreshed **2026-10-17** from [sanitized public GitHub readback](handoff-audit-readback.json). These are information/review relationships. GitHub Assignees remain authoritative; every current coassignee is listed below. No GitHub ownership, relationship, label or Project field was changed.
 
-| Market | Consumer | Live owner | Evidence |
+The [structured ledger](handoffs.json) records each offered scope, exact requested action and explicit review URL/date/commit. A response applies only to its named scope at its reviewed commit. Later edits and newly added coassignees are not silently covered. A merge, generic approval or review request supplies no row disposition.
+
+## Current disposition ledger
+
+| Producer → consumer | Current receiving assignees | Current artifact | Recorded disposition |
 | --- | --- | --- | --- |
-| [#48](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48) | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | zwright8 | [research/market/competitors.json](competitors.json) |
-| [#48](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48) | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | Mattycodes69 | [research/market/competitors.json](competitors.json) |
-| [#48](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48) | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | CompleteDotTech | [research/market/competitors.json](competitors.json) |
-| [#48](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48) | [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) | tynamite | [research/market/competitors.json](competitors.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | zwright8 | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#7](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7) | zwright8 | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | Mattycodes69 | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) | zabyxc01 | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | CompleteDotTech | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#27](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27) | CompleteDotTech | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33) | appletechie | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | PUSHINGSQUARES | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/features.json](features.json) |
-| [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49) | [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | tynamite | [research/market/features.json](features.json) |
-| [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50) | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | zwright8 | [research/market/competitors/README.md](competitors/README.md) |
-| [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50) | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | Mattycodes69 | [research/market/competitors/README.md](competitors/README.md) |
-| [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50) | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | CompleteDotTech | [research/market/competitors/README.md](competitors/README.md) |
-| [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/competitors/README.md](competitors/README.md) |
-| [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50) | [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) | tynamite | [research/market/competitors/README.md](competitors/README.md) |
-| [#51](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51) | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | tynamite | [research/market/pcpartpicker.md](pcpartpicker.md) |
-| [#51](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51) | [#3](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3) | tynamite | [research/market/pcpartpicker.md](pcpartpicker.md) |
-| [#51](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51) | [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | tynamite | [research/market/pcpartpicker.md](pcpartpicker.md) |
-| [#51](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51) | [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | tynamite | [research/market/pcpartpicker.md](pcpartpicker.md) |
-| [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52) | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | tynamite | [research/market/customers.md](customers.md) |
-| [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52) | [#3](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3) | tynamite | [research/market/customers.md](customers.md) |
-| [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52) | [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) | zabyxc01 | [research/market/customers.md](customers.md) |
-| [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52) | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | CompleteDotTech | [research/market/customers.md](customers.md) |
-| [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/customers.md](customers.md) |
-| [#53](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53) | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | tynamite | [research/market/market-sizing.md](market-sizing.md) |
-| [#53](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/market-sizing.md](market-sizing.md) |
-| [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/monetization.md](monetization.md) |
-| [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54) | [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) | tynamite | [research/market/monetization.md](monetization.md) |
-| [#55](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55) | [#5](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5) | zwright8 | [research/market/integrations.json](integrations.json) |
-| [#55](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55) | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | zwright8 | [research/market/integrations.json](integrations.json) |
-| [#55](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55) | [#9](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | Mattycodes69 | [research/market/integrations.json](integrations.json) |
-| [#55](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55) | [#27](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27) | CompleteDotTech | [research/market/integrations.json](integrations.json) |
-| [#55](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/integrations.json](integrations.json) |
-| [#55](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55) | [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) | tynamite | [research/market/integrations.json](integrations.json) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#7](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7) | zwright8 | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | Mattycodes69 | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#11](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) | Mattycodes69 | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) | zabyxc01 | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | CompleteDotTech | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#27](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27) | CompleteDotTech | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33) | appletechie | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | PUSHINGSQUARES | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56) | [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | tynamite | [research/market/technical-feasibility.md](technical-feasibility.md) |
-| [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | tynamite | [research/market/differentiation.md](differentiation.md) |
-| [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) | [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | tynamite | [research/market/differentiation.md](differentiation.md) |
-| [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) | [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | tynamite | [research/market/differentiation.md](differentiation.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | tynamite | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#3](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3) | tynamite | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | zwright8 | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | Mattycodes69 | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#11](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) | Mattycodes69 | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | tynamite | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | tynamite | [research/market/mvp-analysis.md](mvp-analysis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) | tynamite | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#3](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3) | tynamite | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#5](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5) | zwright8 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#6](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6) | zwright8 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#7](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7) | zwright8 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#9](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | Mattycodes69 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | Mattycodes69 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#11](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) | Mattycodes69 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) | zabyxc01 | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#25](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25) | CompleteDotTech | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#26](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26) | CompleteDotTech | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#27](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27) | CompleteDotTech | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33) | appletechie | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | PUSHINGSQUARES | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | PUSHINGSQUARES | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | PUSHINGSQUARES | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | tynamite | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) | tynamite | [research/market/synthesis.md](synthesis.md) |
-| [#59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59) | [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | tynamite | [research/market/synthesis.md](synthesis.md) |
+| #48 → #6 | zwright8, PUSHINGSQUARES | [competitors.json](competitors.json) | Not yet confirmed |
+| #48 → #10 | Mattycodes69, appletechie | [competitors.json](competitors.json) | Not yet confirmed |
+| #48 → #25 | CompleteDotTech, Mattycodes69 | [competitors.json](competitors.json) | Not yet confirmed |
+| #48 → #41 | tynamite, PUSHINGSQUARES | [competitors.json](competitors.json) | Accepted with requested provenance changes ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #49 → #6 | zwright8, PUSHINGSQUARES | [features.json](features.json) | Not yet confirmed |
+| #49 → #7 | zwright8, appletechie | [features.json](features.json) | Not yet confirmed |
+| #49 → #10 | Mattycodes69, appletechie | [features.json](features.json) | Not yet confirmed |
+| #49 → #16 | zabyxc01, appletechie | [features.json](features.json) | Not yet confirmed |
+| #49 → #25 | CompleteDotTech, Mattycodes69 | [features.json](features.json) | Not yet confirmed |
+| #49 → #27 | CompleteDotTech, tynamite | [features.json](features.json) | Not yet confirmed |
+| #49 → #33 | Mattycodes69, appletechie | [features.json](features.json) | Narrowed to information only ([appletechie, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449), `6511dea`) |
+| #49 → #36 | appletechie, PUSHINGSQUARES | [features.json](features.json) | Not yet confirmed |
+| #49 → #39 | appletechie, PUSHINGSQUARES | [features.json](features.json) | Not yet confirmed |
+| #49 → #42 | tynamite, appletechie | [features.json](features.json) | Narrowed ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #50 → #6 | zwright8, PUSHINGSQUARES | [competitors/README.md](competitors/README.md) | Not yet confirmed |
+| #50 → #10 | Mattycodes69, appletechie | [competitors/README.md](competitors/README.md) | Not yet confirmed |
+| #50 → #25 | CompleteDotTech, Mattycodes69 | [competitors/README.md](competitors/README.md) | Not yet confirmed |
+| #50 → #39 | appletechie, PUSHINGSQUARES | [competitors/README.md](competitors/README.md) | Not yet confirmed |
+| #50 → #41 | tynamite, PUSHINGSQUARES | [competitors/README.md](competitors/README.md) | Accepted with requested provenance changes ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #51 → #2 | tynamite, appletechie | [pcpartpicker.md](pcpartpicker.md) | Accepted as hypotheses ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #51 → #3 | tynamite, appletechie | [pcpartpicker.md](pcpartpicker.md) | Accepted as hypotheses ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #51 → #40 | zwright8, tynamite | [pcpartpicker.md](pcpartpicker.md) | Accepted as hypotheses ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #51 → #42 | tynamite, appletechie | [pcpartpicker.md](pcpartpicker.md) | Accepted as hypotheses ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #52 → #2 | tynamite, appletechie | [customers.md](customers.md) | Accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #52 → #3 | tynamite, appletechie | [customers.md](customers.md) | Accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #52 → #16 | zabyxc01, appletechie | [customers.md](customers.md) | Not yet confirmed |
+| #52 → #25 | CompleteDotTech, Mattycodes69 | [customers.md](customers.md) | Not yet confirmed |
+| #52 → #39 | appletechie, PUSHINGSQUARES | [customers.md](customers.md) | Not yet confirmed |
+| #53 → #2 | tynamite, appletechie | [market-sizing.md](market-sizing.md) | Rejected as a consumer input ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #53 → #39 | appletechie, PUSHINGSQUARES | [market-sizing.md](market-sizing.md) | Not yet confirmed |
+| #54 → #39 | appletechie, PUSHINGSQUARES | [monetization.md](monetization.md) | Not yet confirmed |
+| #54 → #41 | tynamite, PUSHINGSQUARES | [monetization.md](monetization.md) | Accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #55 → #5 | zwright8, tynamite | [integrations.json](integrations.json) | Not yet confirmed |
+| #55 → #6 | zwright8, PUSHINGSQUARES | [integrations.json](integrations.json) | Not yet confirmed |
+| #55 → #9 | Mattycodes69, appletechie | [integrations.json](integrations.json) | Not yet confirmed |
+| #55 → #27 | CompleteDotTech, tynamite | [integrations.json](integrations.json) | Not yet confirmed |
+| #55 → #39 | appletechie, PUSHINGSQUARES | [integrations.json](integrations.json) | Not yet confirmed |
+| #55 → #41 | tynamite, PUSHINGSQUARES | [integrations.json](integrations.json) | Accepted as a starting deliverable ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #56 → #7 | zwright8, appletechie | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #10 | Mattycodes69, appletechie | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #11 | zwright8, Mattycodes69 | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #16 | zabyxc01, appletechie | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #25 | CompleteDotTech, Mattycodes69 | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #27 | CompleteDotTech, tynamite | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #33 | Mattycodes69, appletechie | [technical-feasibility.md](technical-feasibility.md) | Accepted lineage boundary ([appletechie, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449), `6511dea`) |
+| #56 → #36 | appletechie, PUSHINGSQUARES | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #39 | appletechie, PUSHINGSQUARES | [technical-feasibility.md](technical-feasibility.md) | Not yet confirmed |
+| #56 → #40 | zwright8, tynamite | [technical-feasibility.md](technical-feasibility.md) | Accepted boundary ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #57 → #2 | tynamite, appletechie | [differentiation.md](differentiation.md) | Accepted with a coverage gap ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #57 → #40 | zwright8, tynamite | [differentiation.md](differentiation.md) | Accepted with a coverage gap ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #57 → #42 | tynamite, appletechie | [differentiation.md](differentiation.md) | Accepted with a coverage gap ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #58 → #2 | tynamite, appletechie | [mvp-analysis.md](mvp-analysis.md) | Accepted with a requested constraint ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #58 → #3 | tynamite, appletechie | [mvp-analysis.md](mvp-analysis.md) | Accepted with a requested constraint ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #58 → #6 | zwright8, PUSHINGSQUARES | [mvp-analysis.md](mvp-analysis.md) | Not yet confirmed |
+| #58 → #10 | Mattycodes69, appletechie | [mvp-analysis.md](mvp-analysis.md) | Not yet confirmed |
+| #58 → #11 | zwright8, Mattycodes69 | [mvp-analysis.md](mvp-analysis.md) | Not yet confirmed |
+| #58 → #39 | appletechie, PUSHINGSQUARES | [mvp-analysis.md](mvp-analysis.md) | Not yet confirmed |
+| #58 → #40 | zwright8, tynamite | [mvp-analysis.md](mvp-analysis.md) | Accepted with a requested constraint ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #58 → #42 | tynamite, appletechie | [mvp-analysis.md](mvp-analysis.md) | Accepted with a requested constraint ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #59 → #2 | tynamite, appletechie | [handoffs.md](handoffs.md) | Pending review of #59 audit deliverables; earlier synthesis context accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #59 → #3 | tynamite, appletechie | [handoffs.md](handoffs.md) | Pending review of #59 audit deliverables; earlier synthesis context accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #59 → #5 | zwright8, tynamite | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #6 | zwright8, PUSHINGSQUARES | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #7 | zwright8, appletechie | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #9 | Mattycodes69, appletechie | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #10 | Mattycodes69, appletechie | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #11 | zwright8, Mattycodes69 | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #16 | zabyxc01, appletechie | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #25 | CompleteDotTech, Mattycodes69 | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #26 | CompleteDotTech, zwright8 | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #27 | CompleteDotTech, tynamite | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #33 | Mattycodes69, appletechie | [handoffs.md](handoffs.md) | Pending review of #59 audit deliverables; earlier synthesis context accepted ([appletechie, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449), `6511dea`) |
+| #59 → #36 | appletechie, PUSHINGSQUARES | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #37 | appletechie, PUSHINGSQUARES | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #39 | appletechie, PUSHINGSQUARES | [handoffs.md](handoffs.md) | Not yet confirmed |
+| #59 → #40 | zwright8, tynamite | [handoffs.md](handoffs.md) | Pending review of #59 audit deliverables; earlier synthesis context accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #59 → #41 | tynamite, PUSHINGSQUARES | [handoffs.md](handoffs.md) | Pending review of #59 audit deliverables; earlier synthesis context accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #59 → #42 | tynamite, appletechie | [handoffs.md](handoffs.md) | Pending review of #59 audit deliverables; earlier synthesis context accepted ([tynamite, 2026-10-16](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), `6511dea`) |
+| #61 → #7 | zwright8, appletechie | [sizing-validation.md](sizing-validation.md) | Not yet confirmed |
+| #61 → #10 | Mattycodes69, appletechie | [sizing-validation.md](sizing-validation.md) | Not yet confirmed |
+| #61 → #11 | zwright8, Mattycodes69 | [sizing-validation.md](sizing-validation.md) | Not yet confirmed |
 
-Research sequencing: landscape and taxonomy → comparison and direct-substitute review → demand/rights/measurement validation → differentiation and MVP decision → accepted technical handoffs. Draft analysis may proceed before validation; publication as accepted fact may not. Existing native blocker #42 ← #40 is preserved. No new native blockers are necessary for startable market research.
+## Review scope and remaining decisions
 
-## MR-09 scope-specific review ledger — 2026-10-16
+- [tynamite's PR #67 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545) records T0/provenance decisions at `6511dea`. In particular, **#53 → #2 is rejected as a workload input**; retain market sizing as #47 context. Conditional acceptances retain their requested changes and are not blanket evidence approval.
+- [appletechie's PR #67 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449) narrows #49 → #33 to information and accepts #56 → #33's lineage boundary. `fine_tuning`, `training_compute` and `training_data` map to #30/#31/#32; the reviewer must confirm whether the limited T5 response covers those consumers or provide separate dispositions. No new acceptance is inferred.
+- **#59 owns this ledger, `audit.json` and `risk-register.md`; #47 owns `synthesis.md`.** Earlier #59-labelled synthesis responses are retained as reviewed context, with `reviewed_artifact` in the structured ledger. They do not accept the corrected audit deliverables. Receiving owners must review those artifacts under the corrected boundary.
+- All rows without a scoped response remain **Not yet confirmed**. Mattycodes69's current assignment on a producing/receiving issue is not a human acknowledgement of that row. Record explicit #7/#10/#11 protocol, measurement and consumption decisions; #10 must agree ResourceEstimate placement before such records are submitted.
 
-The table above is preserved as the original market handoff snapshot. This dated addendum supplies precise #56/#61 dispositions without rewriting unrelated workstreams. Live ownership/native relationships and exact acceptance criteria were refreshed in [mr09-baseline.json](mr09-baseline.json). [Acceptance matrix](mr09-acceptance.md) distinguishes prepared, measured, reviewed and accepted. None of the 13 required #56/#61 dispositions below has been accepted. A PR request or an agent review does not establish acceptance, including where the producer and receiver share an assignee.
+## MR-09 evidence and completion limits
 
-Evidence offered: [feasibility comparison/source/risk ledgers](technical-feasibility.md), [pinned measurement protocol and actual coverage](sizing-validation.md), [validation and review limits](mr09-validation.md). PR #75's [GPU note](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9e66622a4b2698a9305274f05da9c15ae5d90b8c/research/T2-infrastructure/gpu-compute.md), [engine note](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9e66622a4b2698a9305274f05da9c15ae5d90b8c/research/T2-infrastructure/inference-engine.md), [sizing arithmetic](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9e66622a4b2698a9305274f05da9c15ae5d90b8c/research/T2-infrastructure/compute/sizing_examples.py), [handoffs](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9e66622a4b2698a9305274f05da9c15ae5d90b8c/research/T2-infrastructure/handoffs.md) and [contract proposals](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9e66622a4b2698a9305274f05da9c15ae5d90b8c/research/T2-infrastructure/contract-proposals.md) remain **proposals**, inspected as reference material rather than merged decisions. Its versioned synthetic arithmetic is not runtime evidence.
+PR #79's [general approval](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115) and proposal-branch merge were real review events, with no named row dispositions. PR #67 subsequently [merged to main](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67) at `a2d12b8709b34fc2bb718e5fe0670d44d2f58322` on 2026-10-16T23:39:05Z. Canonical-main merge is no longer a missing step. The subsequent explicit #56 → #33 and #56 → #40 boundary responses above supersede their earlier pending entries; they do not accept unmeasured coverage.
 
-The final measurement offer is **15 successful real dense CUDA runs** (five context/KV/active-sequence configurations × three fresh-process repetitions), with allocated/reserved phase counters and [all input hashes](measurements/mr09-results-summary.json). There were no observed model-runtime errors or OOMs. Matched competitor/runtime pairs remain **0**, so competitor error ranges are unavailable. The native KV formula check is only a tensor-layout check. MoE and multi-GPU cases remain unexecuted; the final smaller-MoE spare-capacity screen reported 3,935 MiB free against its unchanged 4,096 MiB guard. All source/code/data quality reviews remain separate from the required human dispositions below.
+The offered runtime evidence remains **15 successful dense CUDA runs**, five configurations with three repetitions, with separate allocated/reserved phases. Matched competitor/runtime pairs remain **0**; competitor error bounds are unavailable. The native KV check is a tensor-layout check. MoE and multi-GPU cases remain unexecuted in the recorded evidence; do not infer that the historical spare-capacity observation describes hardware availability today. See [sizing-validation](sizing-validation.md) and the [acceptance matrix](mr09-acceptance.md) for the predeclared experiment constraints and remaining evidence requirements.
 
-| Producer → consumer | Live receiving owner | Precise finding / offered scope | Disposition; review link/date | Unresolved decision and exact next action |
-| --- | --- | --- | --- | --- |
-| #56 → #7 | zwright8 | Estimator context/KV assumptions and separate weight/cache precision; actual prompt/output and active sequences must match | Pending; no receiving-owner response | Accept/narrow context-budget and cache semantics; review architecture exceptions and retained gaps |
-| #56 → #10 | Mattycodes69 | Conditional capacity screen; per-device placement and unlike units/quantities; reuse pinned T2 methodology | Pending; explicit internal acknowledgement needed | Confirm consumption of findings; retain #10 ownership of sizing and choose any future ResourceEstimate placement |
-| #56 → #11 | Mattycodes69 | Runtime-specific cache pools, allocation/reservation, offload and quantization support; source-version distinctions | Pending; explicit internal acknowledgement needed | Confirm runtime/instrumentation scope and which unsupported combinations need additional evidence |
-| #56 → #16 | zabyxc01 | No new completed retrieval workload is claimed; interoperability risk retained and delegated to #65 | Pending scope disposition; no receiving-owner response | Accept/narrow unchanged retrieval boundary; complete #65 dimension/metric/auth/workload checks |
-| #56 → #25 | CompleteDotTech | No framework evaluation or complete-delivery ranking is added; system/harness assumptions await #62 | Pending scope disposition; no receiving-owner response | Review boundary and #62 input; do not infer task completion from mean score |
-| #56 → #27 | CompleteDotTech | No MCP runtime compatibility finding is added; connector existence remains distinct from exercised auth/transport/tool workload | Pending scope disposition; no receiving-owner response | Accept/narrow unchanged scope and route relevant #65 findings for review |
-| #56 → #33 | appletechie | No fine-tuned artifact facts are added; base/adapter/merged artifact identity must remain separate from a file-format label | Pending scope disposition; no receiving-owner response | Accept/narrow lineage boundary; identify any artifact-specific counterexample requiring sizing/runtime validation |
-| #56 → #36 | PUSHINGSQUARES | Harness Bench v2 metadata/body discrepancy and missing release-matched replication; no reproduced ranking | General PR approval 2026-10-16; explicit row disposition pending (review below) | Complete #62 source/result identity reconciliation, contamination/overlap and repeat-limit review; confirm evaluation-boundary disposition |
-| #56 → #39 | PUSHINGSQUARES | Local/API cost conclusion remains conditional on workload/utilization/idle/energy/amortization/storage/egress/operating effort; no new rate or competing cost model | General PR approval 2026-10-16; explicit row disposition pending (review below) | Confirm cost scope, quantity and uncertainty disposition; consume relevant #64 pricing review rather than assume a break-even threshold |
-| #56 → #40 | tynamite | Incomplete findings remain notes; no generated-schema patch, final compatibility boolean or new ResourceEstimate record | Pending; no receiving-owner response | Accept/narrow contract boundary; route actual changes through versioned owner review |
-| #61 → #7 | zwright8 | Bounded dense/MoE design; explicitly separate context limit, actual cached tokens, generation length, KV dtype and admitted active sequences | Pending; no receiving-owner response | Review workload/token-count meaning and exclusions before accepting empirical coverage |
-| #61 → #10 | Mattycodes69 | Protocol, hardware inventory and only the explicitly executed observations; no calibration from unmatched estimator quantities | Pending; explicit internal acknowledgement needed | Review comparability and missing hardware/counters; agree evidence consumption/placement before requesting ResourceEstimate records |
-| #61 → #11 | Mattycodes69 | Pinned runtime/build/dependencies; allocated/reserved counters versus process/device memory; run phases/isolation and failure categories | Pending; explicit internal acknowledgement needed | Review instrumentation and supported cache/parallelism settings; resolve remaining execution scope |
+#62 has an [open desk-validation submission, PR #83](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83); its existence is distinct from accepted reconciliation or reproduced evaluation. #65 remains open with current assignees listed in the readback; its existing owner work must not be duplicated. #56 remains incomplete while child evidence and human acceptance are outstanding. The bounded #58 recommendation is an input for its current receiving owners and the coordinator, not an approved product threshold or implementation authorization.
 
-Receiving owners should respond with **accepted**, **narrowed**, **rejected** or **pending**, naming the producer/consumer issue, exact artifact commit, retained unknowns and next action. Record the actual public comment/review URL and date after a response exists. Coordinator CompleteDotTech must separately accept the evidence. Authoring this ledger does not speak for any owner.
+## Preserved relationships and Project limitation
 
-### Posted review requests — not acceptance
+Native #42 ← #40 was read back on 2026-10-17 and preserved. Other native relationships were not changed or newly inferred. The token lacks `read:project`, so live Project options/values were not refreshed or written; repository JSON and issue prose are historical snapshots, not live board readback. Preserve current priorities, labels, hierarchy and assignees. No issue or Project item is marked Done by this audit.
 
-On 2026-10-16, [PR #79](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79) was opened and attached to this research task. GitHub readback confirmed review requests to CompleteDotTech, zwright8, tynamite, zabyxc01, appletechie and PUSHINGSQUARES; Mattycodes69's internal T2 acknowledgements were explicitly requested in the comment below. The submitted-review list was empty at the request readback. Every disposition above remains pending.
+## CanIRun.ai intake (2026-10-16; acceptance pending)
 
-- [Scope-specific request covering all 13 #56/#61 receiving-owner rows](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110)
-- [#56 progress, children and Project-administrator action](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6217452787)
-- [#61 measured coverage, unexecuted cases and exact owner actions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6217453539)
-- [#58 conditional decision handoff to the coordinator](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6217454289)
-
-These are actual posted requests with links and dates, not receiving-owner review responses. Neither #56 nor #61 was closed; no Project field, assignee, label or native relationship was changed.
-
-### Live approval and merge readback — 2026-10-16
-
-PUSHINGSQUARES submitted an [APPROVED review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115) on evidence head `380c2955210c82a455b8d367def995fa307cd524` at 22:18:27 Asia/Shanghai, then merged PR #79 at 22:19:18 into `research/market-intelligence`, merge commit `6511dea2a5102b13df1e47378a31f31230ecb494`. [Current-head CI passed](https://github.com/Pick-Your-AI/pick-your-ai-research/actions/runs/38914663005/job/117018939668). The [sanitized readback](mr09-review-readback.json) preserves these facts separately from the initial empty-review snapshot.
-
-This is actual human PR approval, recorded as reviewed for PUSHINGSQUARES' #36/#39 scope. Its body is empty and does not name individual handoff dispositions, so no row-specific acceptance is manufactured; explicit accept/narrow/reject confirmation remains pending. The other receiving owners and coordinator have not supplied dispositions in this readback. PR #67 is still open against `main` at head `6511dea`; it now contains the MR-09 submission. Completing that proposal's review and merge replaces the earlier plan to rebase/retarget #79. Issues #56/#61 and children #62/#65 remain open, with ownership and native relationships unchanged.
-
-### Child workstreams: reviewed output availability and owner action
-
-No reviewed results are available from #62 or #65 at this refresh, so no such results were integrated or relabelled accepted. Their existing deliverables and ownership are preserved.
-
-- **#62 / PUSHINGSQUARES:** a limited primary-source desk check identifies an internal v2 discrepancy: the [arXiv v2 landing-page abstract](https://arxiv.org/abs/2605.27922v2) says 106 tasks/5,194 trajectories, while the [v2 full text, §3.2 and §4.1](https://arxiv.org/html/2605.27922v2) says 300 tasks (274 general + 26 multimodal) and 20,454 trajectories. The [pinned repository CURRENT.json](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/CURRENT.json) and [catalog guide](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/README.md) identify the 300-task release. An outdated abstract is a plausible hypothesis, **not a confirmed correction or proof of matching task IDs/results**. The owner must map v1/v2 paper tasks and result provenance to release locks, reconcile overlap/contamination, pin model/harness/budget/task versions, separate mean score and complete delivery, and report replication limits (the v2 body reports one evaluation per configuration). Obtain #25/#36 review before child acceptance. This desk observation does not execute #62's controlled model/harness comparison.
-- **#65 / zabyxc01:** inspect embedding dimension and metric contracts; API/authentication boundaries; and actual successful permitted retrieval workloads separately from advertised connector presence. Record failures, source versions and explicit retrieval-owner review with relevant #14/#15/#16 and #25/#27 consumers. No new retrieval experiment or accepted interoperability rule is claimed here.
-
-The Harness Bench entries were accessed **2026-10-16**; publisher: the paper/repository authors; evidence class: **primary documentation / author-reported results**, not independent replication; confidence: high for the quoted source discrepancy, unknown for empirical comparability; region: not applicable. Only short paraphrases and source locators are included; no task dataset, trajectories or benchmark result corpus is redistributed. Commercial reuse rights are not established. The live issues themselves are repository metadata, not evidence that experiments succeeded.
-
-### #58 decision handoff and ownership
-
-#58 is **currently unassigned** in live GitHub; **CompleteDotTech** is the program coordinator. The #56 recommendation is conditional: proceed with reviewing an assumption-explicit decision workflow; narrow claims to evidenced model/runtime/workload envelopes; collect #61 allocator/comparison evidence and #62/#65 owner outputs before treating technical feasibility as established. Stop or pivot the proposed scope if required source rights or reproducible configuration support cannot be obtained, according to coordinator-defined product thresholds. No approved numeric success threshold, economic break-even result or implementation approval is invented. The more detailed decision input belongs in [technical-feasibility.md](technical-feasibility.md). Preserve #58's native #66 blocker; #61 is an information/validation gate.
+Evidence: [profile](competitors/canirun-ai.md), `src-canirun-ai`, and 48 `canirun-ai` matrix cells. #48/#49/#50 review classification and documentary scope; #66 owns scenario validation. #6/#10 review any technical implications; #41/#60 review rights before reuse. These are information/review inputs, with live issue assignees authoritative. No consumer response or approval is recorded.
 
 ## #62 desk validation ledger — 2026-10-16
 
-This dated addendum adds the #62 rows without rewriting the tables above. Evidence offered: [benchmark validation](benchmark-validation.md), a desk pass with no benchmark run, prepared by a non-assignee contributor for the owner's review. None of the dispositions below has been accepted. The #36 receiver is also the #62 assignee, so the #36 acceptance must be recorded explicitly and cannot be inferred from that owner's review of #62. No review request has been posted yet.
+This dated addendum adds the #62 rows without rewriting the tables above. Evidence offered: [benchmark validation](benchmark-validation.md), a desk pass with no benchmark run, prepared by a non-assignee contributor for the owner's review. None of the dispositions below has been accepted. Both #36 receivers are also #62 assignees, so the #36 acceptance must be recorded explicitly and cannot be inferred from that owner's review of #62. PR #83 has owner reviews, but no receiving disposition is inferred.
 
 | Producer → consumer | Live receiving owner | Precise finding / offered scope | Disposition; review link/date | Unresolved decision and exact next action |
 | --- | --- | --- | --- | --- |
-| #62 → #25 | CompleteDotTech | No published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered; convention C2 | Pending; no receiving-owner response | Accept, narrow or reject C2; keep harnesses as candidates, not a ranking |
-| #62 → #36 | PUSHINGSQUARES | Release identities, grader conflict on 79 general tasks, contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown), replication limits; gates and conventions C1 and C3 | Pending; explicit internal acknowledgement needed (#62 and #36 share assignee PUSHINGSQUARES) | Accept, narrow or replace the gates, C1 and C3; set the H1 margins; decide on a replication and its placement |
-| #62 → #40 | tynamite | v1 `spec_model` has no benchmark or quality field; any display rule needs a field proposal | Pending; no receiving-owner response | Accept or reject the finding; route any field proposal through versioned review |
-| #62 → #41 | tynamite | Convention C1; reuse rights for Harness Bench tasks and results (no license, all rights reserved), with #60 | Pending; no receiving-owner response | Accept, narrow or reject C1; decide permitted reuse scope |
-| #62 → #39 | PUSHINGSQUARES | Conditional: pricing of the prepared replication protocol, only if #36 wants a replication | Pending; conditional on #36 | Price endpoints or GPUs, judge calls and repeated runs if requested |
+| #62 → #25 | CompleteDotTech, Mattycodes69 | No published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered; convention C2 | Pending; no receiving-owner response | Accept, narrow or reject C2; keep harnesses as candidates, not a ranking |
+| #62 → #36 | appletechie, PUSHINGSQUARES | Release identities, grader conflict on 79 general tasks, contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown), replication limits; gates and conventions C1 and C3 | Pending; explicit internal acknowledgement needed (#62 and #36 share appletechie and PUSHINGSQUARES) | Accept, narrow or replace the gates, C1 and C3; set the H1 margins; decide on a replication and its placement |
+| #62 → #40 | zwright8, tynamite | v1 `spec_model` has no benchmark or quality field; any display rule needs a field proposal | Pending; no receiving-owner response | Accept or reject the finding; route any field proposal through versioned review |
+| #62 → #41 | tynamite, PUSHINGSQUARES | Convention C1; reuse rights for Harness Bench tasks and results (no license, all rights reserved), with #60 | Pending; no receiving-owner response | Accept, narrow or reject C1; decide permitted reuse scope |
+| #62 → #39 | appletechie, PUSHINGSQUARES | Conditional: pricing of the prepared replication protocol, only if #36 wants a replication | Pending; conditional on #36 | Price endpoints or GPUs, judge calls and repeated runs if requested |
+
+Ownership refreshed from live assignees on 2026-10-17: #25 CompleteDotTech/Mattycodes69; #36 and #39 appletechie/PUSHINGSQUARES; #40 zwright8/tynamite; #41 tynamite/PUSHINGSQUARES. All five dispositions remain pending; appletechie explicitly withheld #36/#39 acceptance in the PR review.
