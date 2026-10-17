@@ -840,8 +840,8 @@
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Independent measurement",
-    "limitations": "Subsampling ranking flips measured on other benchmarks; abstract only, full text not read.",
-    "version": "arXiv abstract page only; revision not recorded",
+    "limitations": "Full v1 text read 2026-10-17: Table 7 reports the 12% reversal result for IRT/IRT++ against full-dataset rankings, not arbitrary subsets or Harness Bench.",
+    "version": "arXiv v1 HTML, inspected 2026-10-17",
     "region": "Not applicable",
     "confidence": "Medium"
   }
