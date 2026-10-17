@@ -89,7 +89,7 @@ A provider API is **not** one tool. Evidence shows that one credential or scope 
 
 Therefore:
 1. Model one `tool` item per operation family whose side-effect class is uniform, e.g. `tool.github.issues-read` (read_only) and `tool.github.issues-write` (write).
-2. Model the provider connection once as an `integration` (`integration.github.rest-api`). It holds the endpoint, credential and rate limit, and lists its families in `associated_tool_refs`.
+2. Model the provider connection once as an `integration` (`integration.github.rest-api`). It holds the endpoint, credential and rate limit, and lists its families in `associated_tool_refs`. That catalog list does not bind a tool selection to a particular integration selection or implement credential inheritance; the proposed binding semantics are in T4-B6 below.
 3. Guardrails (#35) can then allow the read family automatically and gate the write family, even though the provider issues one token.
 4. Scope checks alone cannot separate families that share a scope (Slack `chat:write`). The guardrail must enforce by **operation**, not only by scope (handoff to #35).
 
@@ -118,7 +118,7 @@ Google Drive and Slack each serve two roles. They are knowledge sources to inges
 
 1. **T4 owns the provider connection.** It owns `integration.<provider>.<api>`: endpoint, auth methods, rate limits, and the runtime operation families (`tool.*`).
 2. **T3 owns ingestion semantics.** It owns `data_source.<provider>.<source>`: modality, classification, refresh, ACL and deletion. It does not redefine endpoint or credential facts.
-3. **Selections link them.** A `data_source` selection has a build link `relation: "provided_by"` to the integration selection (`provided_by` exists in v1 build links). The build then holds one provider identity and one `credential_ref`.
+3. **Selections link them.** A `data_source` selection has a build link `relation: "provided_by"` to the integration selection (`provided_by` exists in v1 build links). The proposed connection model then holds one provider identity and one `credential_ref`; v1 permits that link shape but does not resolve or inherit credentials through it (T4-B6).
 4. **Scopes stay separate.**
    - Ingestion scopes (e.g. Drive `drive.readonly`, Restricted, B22) are justified by T3.
    - Runtime scopes (e.g. `drive.file`, Non-sensitive) sit on T4 tool items.
@@ -140,7 +140,7 @@ Mapped to v1 JSON pointers. "Note only" means v1 cannot express it.
 | Input / output contract (JSON Schema) | — | **note only**; MCP requires `inputSchema` and allows `outputSchema` (B1); OpenAI `parameters` (B3); Anthropic `input_schema` (B4) |
 | Auth method | `/spec/auth_methods` (tool, integration) | partial: no `basic`, `jwt` or personal access token values |
 | OAuth scopes / permissions | `/spec/required_scopes` (tool); `/settings/allowed_scopes` (selection) | expressible as strings; no scope sensitivity (Google: Non-sensitive / Sensitive / Restricted, B19, B22) |
-| Credential handling | `/settings/credential_ref` (`secret://…`) on tool and integration | expressible; key type (restricted vs unrestricted) is note only |
+| Credential handling | `/settings/credential_ref` (`secret://…`) on tool, integration and model provider | Direct references are expressible; connection binding, inheritance and credential readiness require the T4-B6 proposal through #40; key type is note only |
 | API limits | `/spec/rate_limit_per_minute` (integration only, integer) | partial: per-hour, per-second, quota units, concurrency and "50+" tiers are not expressible |
 | Network access | `/spec/is_networked` | partial: no domain allowlist, egress location or open-world flag |
 | Side-effect class | `/spec/side_effect` (`read_only`, `mutating`) | partial; four-class proposal below; `x_side_effect_class` in proposals |
@@ -271,7 +271,7 @@ Rules are proposed to #40 using the [rule proposal template](../../templates/rul
 - **Source-checked (unverified):** the assertion is supported by cited primary text, and the expression uses only v1 fields.
 - **Hypothesis:** policy judgement or contract change needed.
 
-All JSON rules below validate against `ruleset.schema.json`. They were also run with `contracts/v1/reference/evaluate.py` against the synthetic fixture build (`contracts/v1/examples/`). Outcomes there: pass for scopes, guardrail and MCP rules; fail for `credential.ref` (the fixture has no `credential_ref`); skipped for the cost and exfiltration rules.
+The ten remaining JSON rules below validate against `ruleset.schema.json`. Earlier synthetic fixture checks produced pass for scopes, guardrail and MCP rules, and skipped for cost and exfiltration rules. The former executable `credential.ref` rule is withdrawn: it falsely required a tool-local reference for shared and provider-hosted credentials. T4-B6 is now a contract-dependent proposal, not an executable v1 check; v1 cannot establish credential readiness by skipping or omitting that check.
 
 ### Problems found in baseline T4 rules
 
@@ -346,16 +346,30 @@ assert: all(
   eq(selection guardrail /settings/enforcement, "escalate"))
 ```
 
-### T4-B6 `rule.t4.tool.credential.ref`: credential must be a secret reference
+### T4-B6 `rule.t4.tool.credential.ref`: credential source and resolution (needs contract change via #40)
 
-- If `auth_methods` exists and does not contain `none`, the tool selection must have `/settings/credential_ref` (`secret://…`, never the credential).
-- Severity: error; `on_unknown: review`.
-- **Source-checked (unverified).** Evidence: Stripe "Store sensitive keys in a secrets vault" (B27); AWS prefers temporary role credentials (B40).
-- The key *type* (restricted vs unrestricted, temporary vs long-term) needs a contract field (`credential_kind`). Note only.
+**Status: proposed, not implemented or accepted.** The former v1 JSON rule required every authenticated tool to carry its own `/settings/credential_ref`. That contradicts the shared integration connection and provider-hosted execution models above. It is withdrawn rather than treating an unresolved source as authenticated or requiring duplicate references.
 
-```json
-{"id":"rule.t4.tool.credential.ref","severity":"error","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/id"}}},{"op":"exists","value":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/auth_methods"}}},{"op":"not","arg":{"op":"contains","left":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/auth_methods"}},"right":{"literal":"none"}}}]},"assert":{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/settings/credential_ref"}}},"on_unknown":"review","message":"The tool needs credentials but no secret reference is configured.","remediation":"Set credential_ref to a secret:// reference for a least-privilege credential.","affected_kinds":["tool"],"owner":"t4-research"}
-```
+**Existing v1 facts:** `selection.schema.json` defines opaque `secret://` references on tool, integration and model-provider settings. `build.schema.json` permits `provided_by` links with selection IDs. Neither the schemas nor the reference evaluator define credential inheritance, credential-source selection, link traversal or effective authorization. `associated_tool_refs` names catalog items, not the active connection selection. These facts do not establish that an inherited credential works.
+
+**Proposed resolution semantics for #40/#35 review:** introduce an explicit per-tool credential binding with source `direct`, `integration`, `model_provider` or `none`, a selected authentication method, and an exact connection selection ID when inherited. These are proposed concepts, not existing v1 fields or JSON pointers. Do not infer a binding from a role, provider name, catalog association, available secret or the absence of a tool-local reference.
+
+| Explicit source | Proposed check | Outcome when facts are missing or contradictory |
+| --- | --- | --- |
+| `direct` | Only this case requires the tool's own `/settings/credential_ref`; it must be an opaque secret reference and the selected auth method must be supported | Missing required reference: `fail`; unknown auth support: `unknown` |
+| `integration` | Require exactly one enabled, version-resolved integration selection identified by the binding and a `provided_by` link from this tool selection to that integration. Resolve its `/settings/credential_ref`; confirm the connection serves this operation family and supports the selected auth method | Known absent/disabled/wrong-kind target or absent required reference: `fail`; unresolved version, unknown association or multiple candidate bindings: `unknown` |
+| `model_provider` | For an explicitly provider-hosted tool, require exactly one enabled, version-resolved model-provider selection identified by the binding and a `provided_by` link from this tool selection to that provider. Resolve the provider's `/settings/credential_ref`; confirm the tool is available through that provider/API | Known wrong provider or absent required reference: `fail`; unestablished execution location, API compatibility or ambiguous binding: `unknown` |
+| `none` | Require an explicit unauthenticated choice supported by the selected operation and deployment | Known authentication requirement: `fail`; unknown auth requirements: `unknown` |
+
+Absent binding, absent/empty auth metadata, or a mixed `none`/authenticated method list without an explicit choice is `unknown` with review required, never automatic `pass` or `skipped`. Conflicting local and inherited references must be resolved explicitly; neither silently overrides the other, even if their opaque strings match. No selected/enabled tool is the non-applicable (`skipped`) case. A supported alternative auth method is not a requirement to configure every method.
+
+`rule.t4.tool.credential.ref` would apply only after the binding establishes `direct`; a companion resolution check must keep inherited, missing and ambiguous cases visible. A direct-only guard on a missing proposed field would skip under v1 `exists` semantics, so no such JSON guard is offered here. Proposed severity remains `error`, with `unknown` requiring review. A presence check is not credential validation, authorization, account entitlement or permission to execute. Scope union and least privilege remain #35/T3 review inputs, including the connection's actual granted permissions.
+
+**Evidence and consumers:** secret handling is source-checked (unverified) under B27 (vault storage) and B40 (temporary role credentials); inheritance and outcome choices above are design hypotheses for #40, #35 and #13, not vendor claims. Read only reference metadata for research validation; never dereference secrets, copy secret values, or log them in findings, tests or evidence. Report selection IDs and missing/ambiguous source categories only.
+
+**Synthetic acceptance cases for the future versioned contract (expected outcomes, not implemented resolver results):** direct + required reference passes the presence check; direct + missing reference fails. An explicitly bound GitHub integration with a reference and no tool-local copy passes the inherited presence check; a provider-hosted search tool uses its explicitly bound provider reference. A disabled/missing target fails; two competing bindings, a conflict between local and inherited references, absent auth metadata, or an unchosen mixed auth list require `unknown`/review. Explicit supported `none` is non-authenticated; no enabled tool is `skipped`. Passing any presence check does not assert that the credential is valid.
+
+**Version/migration handoff:** #40 must choose the actual binding fields, link cardinality, per-selection evaluation mechanism and versioned resolver/ruleset semantics, with #35 authorization review and #13 connection-boundary review. Existing v1 builds must retain unresolved credential readiness; do not default legacy builds to `direct` or infer successful inheritance. Add versioned synthetic fixtures for every case above before a new contract/ruleset is adopted. No frozen schema, evaluator, catalog fact, price or secret is changed here.
 
 ### T4-B7 `rule.t4.tool.protocol.mcp-framework`: framework must support the tool's protocol
 
@@ -432,7 +446,7 @@ assert: eq(metric cost.unpriced_metered_count, 0)
 | `rule.t4.tool.guardrail.targets` | error | Source-checked (unverified) | json |
 | `rule.t4.tool.guardrail.enforcement` | warning | Hypothesis | json |
 | `rule.t4.tool.irreversible.approval` | error / warning | Hypothesis | needs contract change |
-| `rule.t4.tool.credential.ref` | error | Source-checked (unverified) | json |
+| `rule.t4.tool.credential.ref` and source resolution | error | Hypothesis; secret-handling evidence source-checked (unverified) | needs contract change |
 | `rule.t4.tool.protocol.mcp-framework` | error | Source-checked (unverified) | json |
 | tool interface / provider-hosted tool rule | error | Hypothesis | needs contract change |
 | `rule.t4.tool.cost.metered` | warning | Source-checked (unverified) evidence, policy hypothesis | json |
@@ -517,6 +531,7 @@ These affect throughput and plan selection, not price per call.
 | --- | --- |
 | Add `spec_tool.side_effect_class` (4-value enum) with a consistency constraint to `side_effect`; metrics `tools.high_impact_count`, `tools.irreversible_count`; count integrations and MCP-exposed tools in mutating metrics | #40 · @tynamite |
 | Add `provider_id` (shared with `data_source`), `category`, `interfaces[]`, `requires_provider_ref`, `input_schema_uri`/`output_schema_uri`, `data_access_scope`, `idempotency`, `open_world`, `operation_family` to `spec_tool` | #40 · @tynamite |
+| T4-B6 credential binding and resolution: direct vs integration/provider-hosted vs none; exact active connection identity, link cardinality, ambiguous/missing outcomes, legacy migration and versioned synthetic fixtures; no inferred credential readiness in v1 | #40 · @tynamite; authorization #35; shared-connection boundary #13 |
 | Auth enum: add `basic`, `jwt`, `personal_access_token` (or `bearer_token`); add `credential_kind` (restricted / unrestricted / temporary). `spec_mcp_server.auth_methods` lacks `service_account` | #40 · @tynamite; MCP side #27 |
 | Rate limits: replace integer `rate_limit_per_minute` with `rate_limits[]` `{value, unit: per_second / per_minute / per_hour / quota_units / concurrent, scope: user / app / org / endpoint}` | #40 · @tynamite |
 | Rule quantifier over all selections of a kind (baseline rules check only role `primary`) | #40 · @tynamite |
