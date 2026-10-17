@@ -54,3 +54,7 @@ research, select conditional features or authorize production deployment.
 ## Security and conduct
 
 Report vulnerabilities as described in [SECURITY.md](../SECURITY.md). Be respectful and assume good faith; the organization-wide code of conduct, once adopted, applies here.
+
+Apple delivery structure and canonical shared handoffs are indexed in
+[APPLE_DELIVERY_TRACKING.md](APPLE_DELIVERY_TRACKING.md). Its dated snapshot does not
+replace live GitHub status, ownership or dependency relationships.

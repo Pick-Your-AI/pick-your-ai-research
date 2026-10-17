@@ -1,13 +1,16 @@
 # Apple/iOS application delivery plan
 
-Status: proposed delivery structure. This document does not create a GitHub Project,
-issues, assignments, release commitments, or an implemented Apple application.
+Published delivery structure: [Project #5](https://github.com/orgs/Pick-Your-AI/projects/5),
+[program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163).
+The [issue index and triage record](APPLE_DELIVERY_TRACKING.md) records the publication
+snapshot and structural conventions. GitHub owns current status, ownership and native
+relationships. Planning publication does not establish application implementation.
 
 The plan follows the Android planning session's **1 program → 18 epics → 110
 feature/task work packages → implementation and validation subtasks** structure.
 The same numeric coordinates identify corresponding capabilities on both platforms;
 use the `IOS-` prefix when referring to an Apple work package, for example
-`IOS-11.4`. These are planning identifiers, not GitHub issue numbers.
+`IOS-11.04`. These are planning identifiers, not GitHub issue numbers.
 
 Source: user-designated Android planning session
 `01a14760-a1b1-73b2-ba80-fb42046c1abc`, reviewed 2026-10-16. This plan supersedes the
@@ -237,11 +240,12 @@ created; this plan does not rename fields or reset existing boards.
 
 ## Shared work and existing issue ownership
 
-The 110 entries are capability work packages, **not a requirement to create 110 new
-Apple-only issues**. Before creation, refresh open and closed issues, PRs, current
-assignees, and the Android delivery project's current state. Add an existing issue to
-the Apple board where appropriate; create an Apple integration task only for a distinct
-client deliverable. Preserve its original parent, owners, and triage metadata.
+The published 110 feature/task issues represent distinct Apple outcomes, including
+client integration and receiving acceptance of shared outputs. They do not commission
+110 independent Apple services. The [tracking index](APPLE_DELIVERY_TRACKING.md) maps
+canonical shared delivery slices to their Apple consumers. Before adding work, refresh
+open/closed issues, PRs and related projects. Preserve existing parents, owners and
+triage metadata; add an existing issue or a distinct integration task as appropriate.
 
 | Work | Canonical coordination point | Apple plan consumers |
 | --- | --- | --- |
@@ -333,7 +337,8 @@ versioned successor is adopted. Merged research alone does not satisfy a release
 
 ## Documentation verification
 
-Check that the tree contains exactly 18 epic IDs and 110 unique feature IDs, with
+The 2026-10-17 publication snapshot contains 18 epic IDs and 110 unique feature IDs.
+Reconcile against live GitHub; these are not fixed quotas for future triage. Check for
 each feature under its matching epic. Verify relative links and cross-document
 scope/status language. Run the [research workflow checks](RESEARCH_WORKFLOW.md)
 before publication. Those checks validate research structure and contract integrity;

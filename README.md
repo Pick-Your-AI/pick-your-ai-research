@@ -64,7 +64,10 @@ and validation subtasks**. It covers the native client, shared services and cata
 pipeline, offline behavior, privacy, quality, TestFlight, App Store launch and operations.
 The delivery hierarchy is separate from the product's T0–T6 configuration tiers.
 
-This is a proposed plan, not a created Apple Project or shipped application. Existing
+The plan is published in [Apple Project #5](https://github.com/orgs/Pick-Your-AI/projects/5)
+under [program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163); see the
+[issue index and triage record](docs/APPLE_DELIVERY_TRACKING.md). It does not establish
+a shipped application. Existing
 research, Android and website work remains canonical: shared capabilities are linked
 rather than duplicated, and client-specific integration is tracked separately.
 Implementation repository, platform, technology and conditional-feature decisions
