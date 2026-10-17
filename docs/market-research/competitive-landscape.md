@@ -1,6 +1,6 @@
 # Competitive landscape
 
-The inventory contains 32 distinct products/resources, including all 22 named candidates and ten additional resources. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
+The inventory contains 33 distinct products/resources, including all 22 original named candidates, ten original additional resources and CanIRun.ai. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
 
 - [BenchLM](https://benchlm.ai/): Partial competitor, Benchmark provider, Data source. Model and provider comparison with benchmark, price and runtime evidence.
 - [Harness Bench](https://www.harness-bench.ai/): Benchmark provider, Open-source integration candidate. Model-harness evaluation in sandboxed tasks with final-artifact oracles.
@@ -59,7 +59,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 
 ## Community fit-report resources (staged, not yet in the catalog)
 
-tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. All six exist and their primary pages are registered in `sources.json`. They are **not yet added to `competitors.json`** because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells, which #49 owns. Once #49 adds them (as `Unknown` unless evidenced), the catalog rises from 32 to 38, inside the 30–40 bound.
+tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. All six exist and their primary pages are registered in `sources.json`. They are **not yet added to `competitors.json`** because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells, which #49 owns. Once #49 adds them (as `Unknown` unless evidenced), the catalog would rise from 33 to 39 after the CanIRun.ai intake, inside the 30–40 bound.
 
 | Proposed ID | Resource | Operator / repository | Proposed classification | Source | Key boundary |
 | --- | --- | --- | --- | --- | --- |
@@ -110,3 +110,7 @@ These are direct counterexamples to the defensibility hypothesis in [differentia
 Excluded from deep dives: Arena and LLM Stats (leaderboards overlapping Artificial Analysis and BenchLM); CanRun and CanItRun (narrower fit calculators overlapping llmfit, ModelFit and the planner, operators unknown); Ollama and Unsloth (runtimes, substitutes only for the run step); GPUs.io, Vast.ai and Runpod (infrastructure pricing, for #54/#39); Langflow, Flowise, LlamaIndex and LangChain (adjacent builders represented by Dify and n8n); Langfuse, Ragas, LM Evaluation Harness and Qdrant benchmarks (evaluation tooling for #36); MCP Registry (T4 data source).
 
 **Coordinator decision needed:** LocalScore and LocalMaxxing are the strongest of the new community resources against the defensibility hypothesis (public, submission-based fit databases with stated protocols or plausibility checks). Profiling one or both keeps the set within 10–15 (14 or 15). The other four are better treated as evidence sources for #41/#60 than as profiles.
+
+## CanIRun.ai addition (2026-10-16)
+
+[CanIRun.ai devices](https://www.canirun.ai/devices) is recorded as `canirun-ai`, a partial competitor for device-first local model selection. It is a separate record from CanRun (`canrunllm.com`) and CanItRun (`canitrun.dev`); ownership relationships are unknown. See the [dated profile](../../research/market/competitors/canirun-ai.md). #48 owns intake, #49 its 48 matrix cells, #50 the profile and #66 scenario testing. This adds a fourteenth profile within the 10–15 target; it does not establish a full-stack substitute or data reuse permission.

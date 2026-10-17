@@ -107,3 +107,7 @@ Data reuse rights for these sources are not established (#60/#41). Rapid-MLX's C
 | Every conclusion linked | Throughout | Self-checked only; reviewer pending |
 | Technical owners review handoffs | handoffs.md rows #57 → #2/#40/#42 | tynamite accepted with a coverage gap, now addressed for review |
 | Checks pass; reviewer accepts | — | Blocked by #66; no acceptance claimed |
+
+## CanIRun.ai intake (2026-10-16)
+
+The [CanIRun.ai profile](competitors/canirun-ai.md) adds a device-first counterexample candidate for #66. It strengthens the reason to test narrow model-selection substitutes; it does not establish full-stack substitution. Keep existing hypothesis thresholds and acceptance gates unchanged pending scenario evidence.

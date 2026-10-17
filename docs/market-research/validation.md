@@ -18,3 +18,9 @@ The research is submitted for review; a passing check does not make any issue Do
 ## Revalidation after rebase onto `main` — 2026-10-16
 
 Rerun after rebasing onto `main` (#44 and #45 merged). Results are recorded in the PR description. These checks still do not verify market truth, rights, benchmark accuracy or owner acceptance.
+
+## CanIRun.ai intake validation (2026-10-16)
+
+Python 3.12: required dependencies satisfied; contract suite 21/21 and repository suite 24/24 passed. `scripts/validate_research.py` passed (30 catalog proposals, 2 pricebooks); `scripts/validate_market_research.py` passed (33 entities, 1,584 cells, 20 existing issues). `python -X utf8 prompts/market/validate_prompts.py` passed; UTF-8 mode avoids the Windows console's inability to print the existing arrow character. `git diff --check` passed.
+
+These checks establish schema, reference, matrix and prompt integrity. CanIRun.ai scenario execution, recommendation accuracy, reuse rights and owner acceptance remain pending; see [the intake profile](../../research/market/competitors/canirun-ai.md). Historical counts above describe the initial validation, not the current inventory.

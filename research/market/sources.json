@@ -737,5 +737,18 @@
     "version": "Threads updated 2026-10-01 (#4167), 2026-10-10 (#10879), 2026-10-16 (#15013)",
     "region": "Global / self-selected contributors",
     "confidence": "Medium"
+  },
+  {
+    "id": "src-canirun-ai",
+    "url": "https://www.canirun.ai/devices",
+    "supporting_urls": [],
+    "publisher": "CanIRun.ai; legal operator unverified",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public device directory read only. Recommendations are vendor claims; no device workflow or inference was run. Pricing, methodology, API, code licence and data reuse rights unverified.",
+    "version": "Public page retrieved 2026-10-16; no software revision pinned",
+    "region": "Global public website; not a regional offering or price quote",
+    "confidence": "Medium"
   }
 ]

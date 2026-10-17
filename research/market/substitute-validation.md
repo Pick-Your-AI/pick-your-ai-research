@@ -26,3 +26,7 @@ One generated workflow was observed, as described below; no deployed-system vali
 A completed free Stack Builder test returned an ordered local PDF RAG workflow for Windows, 16 GB RAM and no GPU. It acknowledged memory/latency uncertainty and suggested reproducibility steps. The visible result named Docling, txtai, Chroma, Ollama, Gemma and Open WebUI. This verifies generated workflow advice, not that the combination runs, preserves privacy or produces an executable export.
 
 Remaining: test contradictory constraints, verify actual deployment and export behavior, compare a second substitute, and obtain owner review.
+
+## CanIRun.ai candidate (2026-10-16)
+
+Add [CanIRun.ai](competitors/canirun-ai.md) to the device-first comparison queue alongside ModelFit and llmfit. Directory inspection is the only evidence so far. Apply the existing common scenario, contradictory constraints and export tests; record unsupported inputs as bounded observations. No test has run and the existing Flocci-first order and acceptance gates remain unchanged.

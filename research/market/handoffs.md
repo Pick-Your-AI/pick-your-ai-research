@@ -140,3 +140,7 @@ The Harness Bench entries were accessed **2026-10-16**; publisher: the paper/rep
 ### #58 decision handoff and ownership
 
 #58 is **currently unassigned** in live GitHub; **CompleteDotTech** is the program coordinator. The #56 recommendation is conditional: proceed with reviewing an assumption-explicit decision workflow; narrow claims to evidenced model/runtime/workload envelopes; collect #61 allocator/comparison evidence and #62/#65 owner outputs before treating technical feasibility as established. Stop or pivot the proposed scope if required source rights or reproducible configuration support cannot be obtained, according to coordinator-defined product thresholds. No approved numeric success threshold, economic break-even result or implementation approval is invented. The more detailed decision input belongs in [technical-feasibility.md](technical-feasibility.md). Preserve #58's native #66 blocker; #61 is an information/validation gate.
+
+## CanIRun.ai intake (2026-10-16; acceptance pending)
+
+Evidence: [profile](competitors/canirun-ai.md), `src-canirun-ai`, and 48 `canirun-ai` matrix cells. #48/#49/#50 review classification and documentary scope; #66 owns scenario validation. #6/#10 review any technical implications; #41/#60 review rights before reuse. These are information/review inputs, with live issue assignees authoritative. No consumer response or approval is recorded.

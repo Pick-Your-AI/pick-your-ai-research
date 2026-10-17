@@ -4,7 +4,7 @@ Snapshot: 2026-10-16. Draft for #49; required owner acceptance remains open.
 
 F = Exercised: bounded test passed with replayable evidence. P = Documented: narrower documentary support, including unverified vendor claims. N = Unsupported: explicit negative evidence under pinned conditions. ? = Unknown. No absence is inferred from silence. The old “Verified Full/Partial” names are retired following [the evidence-owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545).
 
-[features.json](features.json) retains all 32 entities and 48 dimension IDs. It defines a test and required conditions for each dimension. The current audit has **120 P, 0 F, 0 N and 1,416 ? cells**. This is research coverage, not a product score. Every P has a source-register ID, claim-specific URL, basis, method, evidence class and audit scope. The scope records the public reading mode, dated surface, untested plan entitlements, region and reuse limits. A dated page is not a pinned software release.
+[features.json](features.json) retains all 33 entities and 48 dimension IDs. It defines a test and required conditions for each dimension. The current audit has **123 P, 0 F, 0 N and 1,461 ? cells**. This is research coverage, not a product score. Every P has a source-register ID, claim-specific URL, basis, method, evidence class and audit scope. The scope records the public reading mode, dated surface, untested plan entitlements, region and reuse limits. A dated page is not a pinned software release.
 
 ## How to apply the tests
 
@@ -27,6 +27,7 @@ Existing compound taxonomy labels remain unchanged pending owner review. For `ra
 | arena | ? | ? | P | ? | ? | ? | ? | ? | ? | ? |
 | llm-stats | ? | ? | P | ? | ? | ? | ? | ? | P | ? |
 | models-dev | ? | P | P | ? | P | ? | ? | ? | P | P |
+| canirun-ai | ? | ? | ? | P | ? | ? | ? | ? | ? | ? |
 | canrun | ? | ? | ? | P | ? | ? | ? | ? | ? | ? |
 | canitrun | ? | ? | ? | P | ? | ? | ? | ? | ? | ? |
 | modelfit | ? | P | ? | P | ? | ? | ? | P | ? | P |
@@ -84,3 +85,7 @@ The new Dify and n8n documentation supports configuration transfer; BenchLM desc
 The audit checked high-impact advice-versus-execution, registry-versus-runtime, orchestration-versus-hosting, context input-versus-limit, export-versus-reconstruction and version-name-versus-immutable-artifact distinctions. SkyPilot `hosting` and LM Evaluation Harness `evaluation` were narrowed to ? because the cited material established orchestration and model benchmarks, respectively, rather than the selected dimension's stronger behavior. MCP registry remains P only for the explicit discovery branch.
 
 Do not treat the #42 narrowing review as acceptance of this revision. [Acceptance map and validation record](mr02-acceptance.md) names outstanding reviewers and follow-up decisions. #48 retains source registration; #59 retains the canonical handoff ledger; #57/#58 retain positioning/MVP decisions. The matrix introduces no new contract kinds or compatibility rules.
+
+## CanIRun.ai intake (2026-10-16)
+
+`canirun-ai` adds 48 cells: three Documented (hardware_fit, hardware_catalog, vram_ram), 45 Unknown. Directory text only; no exercised capability. See the [profile](competitors/canirun-ai.md) and `src-canirun-ai`.
