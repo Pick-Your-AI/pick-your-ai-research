@@ -1,0 +1,3860 @@
+{
+  "format": "research-notes-not-catalog",
+  "status": "in_progress",
+  "scope": "Broad task-family evidence inventory; not exhaustive enumeration, deployment approval or independent benchmark.",
+  "accessed_on": "2026-10-17",
+  "records": [
+    {
+      "model": "facebook/sam3.1",
+      "publisher": "Meta",
+      "task_families": [
+        "segmentation",
+        "object_detection",
+        "tracking"
+      ],
+      "input_output": "Images/video + prompts -> masks/object tracks",
+      "access": "gated weights",
+      "license_evidence": "Custom SAM License",
+      "selection_caveat": "Card raw access denied; repository/metadata checked. Entitlement, memory and precise limits not established.",
+      "source_ids": [
+        "P01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "RF-DETR Nano",
+      "publisher": "Roboflow",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> boxes/classes",
+      "access": "weights",
+      "license_evidence": "Apache-designated artifact in publisher README",
+      "selection_caveat": "Pin actual checkpoint independently of package version; no throughput or GPU-fit measurement.",
+      "source_ids": [
+        "P02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "RF-DETR Small",
+      "publisher": "Roboflow",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> boxes/classes",
+      "access": "weights",
+      "license_evidence": "Apache-designated artifact in publisher README",
+      "selection_caveat": "Pin actual checkpoint independently of package version; no throughput or GPU-fit measurement.",
+      "source_ids": [
+        "P02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "RF-DETR Large",
+      "publisher": "Roboflow",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> boxes/classes",
+      "access": "weights",
+      "license_evidence": "Apache-designated artifact in publisher README",
+      "selection_caveat": "Pin actual checkpoint independently of package version; no throughput or GPU-fit measurement.",
+      "source_ids": [
+        "P02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "RF-DETR XL",
+      "publisher": "Roboflow",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> detections",
+      "access": "weights / Plus extension",
+      "license_evidence": "PML 1.0 artifact-specific terms",
+      "selection_caveat": "Do not inherit Nano-Large Apache designation; entitlement and exact weight hash pending.",
+      "source_ids": [
+        "P02",
+        "P35"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "RF-DETR 2XL",
+      "publisher": "Roboflow",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> detections",
+      "access": "weights / Plus extension",
+      "license_evidence": "PML 1.0 artifact-specific terms",
+      "selection_caveat": "Do not inherit Nano-Large Apache designation; entitlement and exact weight hash pending.",
+      "source_ids": [
+        "P02",
+        "P35"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "yolo26n.pt",
+      "publisher": "Ultralytics",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> boxes/classes",
+      "access": "weights",
+      "license_evidence": "AGPL-3.0 / enterprise route",
+      "selection_caveat": "Export-specific compatibility, checkpoint hash and output coordinate/metric conventions need review.",
+      "source_ids": [
+        "P03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "yolo26n-seg.pt",
+      "publisher": "Ultralytics",
+      "task_families": [
+        "segmentation"
+      ],
+      "input_output": "Image -> instance masks",
+      "access": "weights",
+      "license_evidence": "AGPL-3.0 / enterprise route",
+      "selection_caveat": "Export-specific compatibility, checkpoint hash and output coordinate/metric conventions need review.",
+      "source_ids": [
+        "P03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "yolo26n-cls.pt",
+      "publisher": "Ultralytics",
+      "task_families": [
+        "classification"
+      ],
+      "input_output": "Image -> classes",
+      "access": "weights",
+      "license_evidence": "AGPL-3.0 / enterprise route",
+      "selection_caveat": "Export-specific compatibility, checkpoint hash and output coordinate/metric conventions need review.",
+      "source_ids": [
+        "P03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "yolo26n-pose.pt",
+      "publisher": "Ultralytics",
+      "task_families": [
+        "pose"
+      ],
+      "input_output": "Image -> keypoints",
+      "access": "weights",
+      "license_evidence": "AGPL-3.0 / enterprise route",
+      "selection_caveat": "Export-specific compatibility, checkpoint hash and output coordinate/metric conventions need review.",
+      "source_ids": [
+        "P03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "yolo26n-obb.pt",
+      "publisher": "Ultralytics",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image -> rotated boxes",
+      "access": "weights",
+      "license_evidence": "AGPL-3.0 / enterprise route",
+      "selection_caveat": "Export-specific compatibility, checkpoint hash and output coordinate/metric conventions need review.",
+      "source_ids": [
+        "P03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "yolo26n-depth.pt",
+      "publisher": "Ultralytics",
+      "task_families": [
+        "depth_geometry"
+      ],
+      "input_output": "Image -> depth",
+      "access": "weights",
+      "license_evidence": "AGPL-3.0 / enterprise route",
+      "selection_caveat": "Export-specific compatibility, checkpoint hash and output coordinate/metric conventions need review.",
+      "source_ids": [
+        "P03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "IDEA-Research/grounding-dino-base",
+      "publisher": "IDEA Research",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image + text -> boxes/labels",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Text/pixel limits and deployment capacity not established.",
+      "source_ids": [
+        "P04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "google/owlv2-base-patch16-ensemble",
+      "publisher": "Google",
+      "task_families": [
+        "object_detection"
+      ],
+      "input_output": "Image + text -> detections",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Ensemble artifact is distinct from base checkpoint.",
+      "source_ids": [
+        "P05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "google/siglip2-so400m-patch14-384",
+      "publisher": "Google",
+      "task_families": [
+        "classification",
+        "multimodal_embedding"
+      ],
+      "input_output": "Images/text -> aligned representations or class scores",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Preprocessing, pooling, normalization and selected task head must be pinned.",
+      "source_ids": [
+        "P06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/dinov3-vitl16-pretrain-lvd1689m",
+      "publisher": "Meta",
+      "task_families": [
+        "visual_representation"
+      ],
+      "input_output": "Images -> features",
+      "access": "gated weights",
+      "license_evidence": "Custom / metadata other; exact grant needs review",
+      "selection_caveat": "Representation encoder is not an installed classifier head; gated card unavailable.",
+      "source_ids": [
+        "P07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "depth-anything/DA3-LARGE-1.1",
+      "publisher": "ByteDance Seed",
+      "task_families": [
+        "depth_geometry"
+      ],
+      "input_output": "Multiple images -> depth/confidence/camera parameters",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 refreshed card",
+      "selection_caveat": "Original LARGE checkpoint differs in license and is deprecated; resolve stale example paths.",
+      "source_ids": [
+        "P08",
+        "P34"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "depth-anything/DA3-SMALL",
+      "publisher": "ByteDance Seed",
+      "task_families": [
+        "depth_geometry"
+      ],
+      "input_output": "Images -> depth/camera parameters",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Metric scale and resource requirements not established.",
+      "source_ids": [
+        "P09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/cotracker3 / scaled_online.pth",
+      "publisher": "Meta",
+      "task_families": [
+        "tracking"
+      ],
+      "input_output": "Video + query points -> tracks",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0 card declaration",
+      "selection_caveat": "Online/offline buffering and memory differ; no FPS assertion.",
+      "source_ids": [
+        "P10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/cotracker3 / scaled_offline.pth",
+      "publisher": "Meta",
+      "task_families": [
+        "tracking"
+      ],
+      "input_output": "Video + query points -> tracks",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0 card declaration",
+      "selection_caveat": "Online/offline buffering and memory differ; no FPS assertion.",
+      "source_ids": [
+        "P10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "mistral-ocr-4-1",
+      "publisher": "Mistral",
+      "task_families": [
+        "ocr_document"
+      ],
+      "input_output": "PDF/image -> text/layout/confidence",
+      "access": "API",
+      "license_evidence": "Proprietary service; exact terms/entitlement pending",
+      "selection_caveat": "OCR page limits differ from text-token windows; latest alias not pinned release.",
+      "source_ids": [
+        "P11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "PaddlePaddle/PaddleOCR-VL-1.6",
+      "publisher": "PaddlePaddle",
+      "task_families": [
+        "ocr_document"
+      ],
+      "input_output": "Document images -> text/table/formula/chart recognition",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Residual1.5 wording exists; version/config must be checked.",
+      "source_ids": [
+        "P12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "PaddlePaddle/PP-DocLayoutV3",
+      "publisher": "PaddlePaddle",
+      "task_families": [
+        "document_layout"
+      ],
+      "input_output": "Document images -> boxes/reading order",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Layout component, not full OCR pipeline.",
+      "source_ids": [
+        "P13"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "zai-org/GLM-OCR",
+      "publisher": "Z.ai",
+      "task_families": [
+        "ocr_document"
+      ],
+      "input_output": "Document images -> text/structured extraction",
+      "access": "weights",
+      "license_evidence": "MIT model; separate pipeline dependency licenses",
+      "selection_caveat": "Standalone recognition differs from composed layout/recognition SDK.",
+      "source_ids": [
+        "P14"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "deepseek-ai/DeepSeek-OCR-2",
+      "publisher": "DeepSeek",
+      "task_families": [
+        "ocr_document"
+      ],
+      "input_output": "Document image -> text",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Visual tiling/token preprocessing is not a universal text context maximum.",
+      "source_ids": [
+        "P15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "allenai/olmOCR-2-7B-1025",
+      "publisher": "Ai2",
+      "task_families": [
+        "ocr_document"
+      ],
+      "input_output": "Rendered pages -> text",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 plus responsible-use wording in card",
+      "selection_caveat": "Research/educational wording and page rendering conditions require review.",
+      "source_ids": [
+        "P16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "microsoft/Florence-2-large",
+      "publisher": "Microsoft",
+      "task_families": [
+        "ocr_document",
+        "object_detection",
+        "segmentation"
+      ],
+      "input_output": "Images + prompts -> task-specific outputs",
+      "access": "weights",
+      "license_evidence": "MIT card declaration",
+      "selection_caveat": "Current card describes continued-pretrained variant and quality caveat; stable name is not immutable content.",
+      "source_ids": [
+        "P17"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Embedding-0.6B",
+      "publisher": "Qwen",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text -> vectors",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "32K sequence; 32-1024 dimensions. Query/document instructions and normalization matter.",
+      "source_ids": [
+        "P18"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Reranker-0.6B",
+      "publisher": "Qwen",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Query/document -> relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "32K published sequence; score semantics/truncation need task-specific review.",
+      "source_ids": [
+        "P19"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-Embedding-2B",
+      "publisher": "Qwen",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Text/image/video -> vectors",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Visual sampling/budgets unresolved; 32K is not a video duration.",
+      "source_ids": [
+        "P20"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-Reranker-2B",
+      "publisher": "Qwen",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Multimodal query/document -> relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Visual budgets and score calibration unresolved.",
+      "source_ids": [
+        "P21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "BAAI/bge-m3",
+      "publisher": "BAAI",
+      "task_families": [
+        "text_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Text -> dense/sparse/multivector representations",
+      "access": "weights",
+      "license_evidence": "MIT card declaration",
+      "selection_caveat": "Dense1024 /8192 tokens are not the complete sparse/multivector output contract.",
+      "source_ids": [
+        "P22"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "BAAI/bge-reranker-v2-m3",
+      "publisher": "BAAI",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Text query/document -> relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Context maximum not established in this collection.",
+      "source_ids": [
+        "P23"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "voyage-4-large",
+      "publisher": "Voyage",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text/code -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; exact terms pending",
+      "selection_caveat": "Publisher table32,000 tokens, default1024 and selectable dimensions; route-specific configuration must be retained.",
+      "source_ids": [
+        "P24"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "voyage-4",
+      "publisher": "Voyage",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text/code -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; exact terms pending",
+      "selection_caveat": "Publisher table32,000 tokens, default1024 and selectable dimensions; route-specific configuration must be retained.",
+      "source_ids": [
+        "P24"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "voyage-4-lite",
+      "publisher": "Voyage",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text/code -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; exact terms pending",
+      "selection_caveat": "Publisher table32,000 tokens, default1024 and selectable dimensions; route-specific configuration must be retained.",
+      "source_ids": [
+        "P24"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "voyage-code-4",
+      "publisher": "Voyage",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text/code -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; exact terms pending",
+      "selection_caveat": "Publisher table32,000 tokens, default1024 and selectable dimensions; route-specific configuration must be retained.",
+      "source_ids": [
+        "P24"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "voyageai/voyage-4-nano",
+      "publisher": "Voyage",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text -> vectors",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "HF card default2048 differs from API table1024; preserve route-specific defaults.",
+      "source_ids": [
+        "P24",
+        "P25"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "voyage-multimodal-3.5",
+      "publisher": "Voyage",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Text/images/video -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; terms pending",
+      "selection_caveat": "Byte/pixel/token/batch limits are independent; exact guide governs.",
+      "source_ids": [
+        "P26"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "rerank-3",
+      "publisher": "Voyage",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Text query/documents -> ranked scores",
+      "access": "API",
+      "license_evidence": "Proprietary API; terms pending",
+      "selection_caveat": "Published query and combined context limits differ; document-count limit unresolved.",
+      "source_ids": [
+        "P27"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "rerank-3-lite",
+      "publisher": "Voyage",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Text query/documents -> ranked scores",
+      "access": "API",
+      "license_evidence": "Proprietary API; terms pending",
+      "selection_caveat": "Published query and combined context limits differ; document-count limit unresolved.",
+      "source_ids": [
+        "P27"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "embed-v5.0-pro",
+      "publisher": "Cohere",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Text/images/mixed -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; deployment/terms pending",
+      "selection_caveat": "Dimension alternatives depend on model; v4 private-container evidence cannot establish v5 entitlement.",
+      "source_ids": [
+        "P28",
+        "P29"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "embed-v5.0-fast",
+      "publisher": "Cohere",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Text/images/mixed -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; deployment/terms pending",
+      "selection_caveat": "Dimension alternatives depend on model; v4 private-container evidence cannot establish v5 entitlement.",
+      "source_ids": [
+        "P28",
+        "P29"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "embed-v4.0",
+      "publisher": "Cohere",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Text/images/mixed -> vectors",
+      "access": "API",
+      "license_evidence": "Proprietary API; deployment/terms pending",
+      "selection_caveat": "Dimension alternatives depend on model; v4 private-container evidence cannot establish v5 entitlement.",
+      "source_ids": [
+        "P28",
+        "P29"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "rerank-v4.0-pro",
+      "publisher": "Cohere",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Query/documents -> relevance order",
+      "access": "API",
+      "license_evidence": "Proprietary API; terms pending",
+      "selection_caveat": "Do not inherit v3.5 context or deployment constraints.",
+      "source_ids": [
+        "P30"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "rerank-v4.0-fast",
+      "publisher": "Cohere",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Query/documents -> relevance order",
+      "access": "API",
+      "license_evidence": "Proprietary API; terms pending",
+      "selection_caveat": "Do not inherit v3.5 context or deployment constraints.",
+      "source_ids": [
+        "P30"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-embedding-2",
+      "publisher": "Google",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Text/image/video/audio/PDF -> vectors",
+      "access": "API",
+      "license_evidence": "Gemini API terms",
+      "selection_caveat": "8192-token text bound is not a substitute for each modality's input budgets.",
+      "source_ids": [
+        "P31",
+        "P32"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "jinaai/jina-embeddings-v4",
+      "publisher": "Jina",
+      "task_families": [
+        "multimodal_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Visual documents/text -> retrieval vectors",
+      "access": "weights",
+      "license_evidence": "Qwen Research License per corrected card",
+      "selection_caveat": "Public weights do not imply permissive commercial use; preserve backbone/adapters and output representation.",
+      "source_ids": [
+        "P33"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "convnextv2_atto_1k_224_ema.pt",
+      "publisher": "Meta",
+      "task_families": [
+        "classification"
+      ],
+      "input_output": "Image -> ImageNet classes",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0 weights; MIT code",
+      "selection_caveat": "Fine-tuned classifier differs from FCMAE pretraining artifact.",
+      "source_ids": [
+        "P36"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "efficientnet-b0.tar.gz (baseline)",
+      "publisher": "Google",
+      "task_families": [
+        "classification"
+      ],
+      "input_output": "Image -> classes",
+      "access": "weights",
+      "license_evidence": "Weight-specific grant unresolved; Apache code",
+      "selection_caveat": "Baseline differs from AA/AdvProp/NoisyStudent; checkpoint digest not read.",
+      "source_ids": [
+        "P37"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "v3-small_224_1.0_float.tgz",
+      "publisher": "Google",
+      "task_families": [
+        "classification"
+      ],
+      "input_output": "Image -> classes",
+      "access": "weights",
+      "license_evidence": "Weight-specific grant unresolved; Apache code",
+      "selection_caveat": "Float/checkpoint width/input variant must be retained.",
+      "source_ids": [
+        "P38"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/sapiens-pose-1b",
+      "publisher": "Meta",
+      "task_families": [
+        "pose"
+      ],
+      "input_output": "Image -> body/face/hand/foot keypoints",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0",
+      "selection_caveat": "Task crop/topology and capacity need matching evidence.",
+      "source_ids": [
+        "P39"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "ViTPose-B MAE COCO standard-head 256x192",
+      "publisher": "ViTPose authors",
+      "task_families": [
+        "pose"
+      ],
+      "input_output": "Image -> keypoints",
+      "access": "weights",
+      "license_evidence": "Weight-specific grant unresolved; Apache repository",
+      "selection_caveat": "Do not combine standard/simple head or different dataset variants.",
+      "source_ids": [
+        "P40"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "pose_landmarker_lite/float16/1/pose_landmarker_lite.task",
+      "publisher": "Google",
+      "task_families": [
+        "pose"
+      ],
+      "input_output": "Image/video -> body landmarks",
+      "access": "weights",
+      "license_evidence": "Checkpoint grant unresolved",
+      "selection_caveat": "Detector+landmarker bundle; documentation footer is not weight license.",
+      "source_ids": [
+        "P41"
+      ],
+      "artifact_type": "model_bundle"
+    },
+    {
+      "model": "hand_landmarker/float16/1/hand_landmarker.task",
+      "publisher": "Google",
+      "task_families": [
+        "pose"
+      ],
+      "input_output": "Image/video -> hand landmarks",
+      "access": "weights",
+      "license_evidence": "Checkpoint grant unresolved",
+      "selection_caveat": "Palm detector+landmarker bundle; runtime tracking is pipeline behavior.",
+      "source_ids": [
+        "P42"
+      ],
+      "artifact_type": "model_bundle"
+    },
+    {
+      "model": "vidore/colpali-v1.3",
+      "publisher": "ColPali authors",
+      "task_families": [
+        "multimodal_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Page images/text -> token/patch vectors",
+      "access": "weights",
+      "license_evidence": "MIT adapters; Gemma backbone terms",
+      "selection_caveat": "Backbone permission and adapter permission are separate.",
+      "source_ids": [
+        "P43"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "vidore/colqwen2-v1.0",
+      "publisher": "ColQwen authors",
+      "task_families": [
+        "multimodal_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Page images/text -> multivectors",
+      "access": "weights",
+      "license_evidence": "MIT adapters; Apache backbone",
+      "selection_caveat": "Configured patch count is not a universal pixel maximum.",
+      "source_ids": [
+        "P44"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "colbert-ir/colbertv2.0",
+      "publisher": "ColBERT authors",
+      "task_families": [
+        "text_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Query/document -> token matrices",
+      "access": "weights",
+      "license_evidence": "MIT card declaration",
+      "selection_caveat": "MaxSim/index configuration cannot be reduced to one pooled vector.",
+      "source_ids": [
+        "P45"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "naver/splade-v3",
+      "publisher": "NAVER",
+      "task_families": [
+        "text_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Text -> vocabulary sparse vector",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-SA-4.0; gated",
+      "selection_caveat": "Vocabulary dimension differs from hidden width; agreement not accepted.",
+      "source_ids": [
+        "P46"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "naver/splade-cocondenser-ensembledistil",
+      "publisher": "NAVER",
+      "task_families": [
+        "text_embedding",
+        "sparse_multivector"
+      ],
+      "input_output": "Text -> sparse vector",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-SA-4.0",
+      "selection_caveat": "Preprocessing/index compatibility remains version-dependent.",
+      "source_ids": [
+        "P47"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "text-embedding-3-small",
+      "publisher": "OpenAI",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text -> dense vectors",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Selectable dimensions and text-input ceiling are API constraints, not weight release.",
+      "source_ids": [
+        "P48"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "text-embedding-3-large",
+      "publisher": "OpenAI",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Text -> dense vectors",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Selectable dimensions and text-input ceiling are API constraints, not weight release.",
+      "source_ids": [
+        "P48"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Embedding-4B",
+      "publisher": "Qwen",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "source_ids": [
+        "P49"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "publisher": "Qwen",
+      "task_families": [
+        "text_embedding"
+      ],
+      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "source_ids": [
+        "P50"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Reranker-4B",
+      "publisher": "Qwen",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "source_ids": [
+        "P51"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Reranker-8B",
+      "publisher": "Qwen",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "source_ids": [
+        "P52"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-Embedding-8B",
+      "publisher": "Qwen",
+      "task_families": [
+        "multimodal_embedding"
+      ],
+      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "source_ids": [
+        "P53"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-VL-Reranker-8B",
+      "publisher": "Qwen",
+      "task_families": [
+        "reranking"
+      ],
+      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "source_ids": [
+        "P54"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-image-2.5-sunburst",
+      "publisher": "OpenAI",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference images -> images",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "2.5 vs earlier2 are distinct; documented dimension grids and pixel budgets are not text-token limits.",
+      "source_ids": [
+        "B02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-image-2.5-flare",
+      "publisher": "OpenAI",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference images -> images",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "2.5 vs earlier2 are distinct; documented dimension grids and pixel budgets are not text-token limits.",
+      "source_ids": [
+        "B02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-image-2",
+      "publisher": "OpenAI",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference images -> images",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "2.5 vs earlier2 are distinct; documented dimension grids and pixel budgets are not text-token limits.",
+      "source_ids": [
+        "B02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "sora-2 / sora-2-pro (historical)",
+      "publisher": "OpenAI",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/images -> video",
+      "access": "retired API",
+      "license_evidence": "Historical service",
+      "selection_caveat": "Videos API shut down2026-09-24; retained lifecycle counterexample, not selectable current route.",
+      "source_ids": [
+        "B01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-nano-banana-2.1",
+      "publisher": "Google",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/image/video/PDF -> image/text",
+      "access": "API",
+      "license_evidence": "Gemini service terms",
+      "selection_caveat": "Separate input/output budgets; PDF missing from v1 modality enumeration.",
+      "source_ids": [
+        "B04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3.1-flash-image",
+      "publisher": "Google",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "API",
+      "license_evidence": "Service terms; per-ID eligibility unresolved",
+      "selection_caveat": "Documented index identity only; each model's detailed limits/lifecycle need separate intake.",
+      "source_ids": [
+        "B05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3.1-flash-lite-image",
+      "publisher": "Google",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "API",
+      "license_evidence": "Service terms; per-ID eligibility unresolved",
+      "selection_caveat": "Documented index identity only; each model's detailed limits/lifecycle need separate intake.",
+      "source_ids": [
+        "B05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3-pro-image",
+      "publisher": "Google",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "API",
+      "license_evidence": "Service terms; per-ID eligibility unresolved",
+      "selection_caveat": "Documented index identity only; each model's detailed limits/lifecycle need separate intake.",
+      "source_ids": [
+        "B05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-2.5-flash-image",
+      "publisher": "Google",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "API",
+      "license_evidence": "Service terms; per-ID eligibility unresolved",
+      "selection_caveat": "Documented index identity only; each model's detailed limits/lifecycle need separate intake.",
+      "source_ids": [
+        "B05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "veo-3.1-generate-preview",
+      "publisher": "Google",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/images -> video with audio",
+      "access": "API preview",
+      "license_evidence": "Service terms",
+      "selection_caveat": "Preview identity; exact duration/resolution/audio combinations remain route-specific.",
+      "source_ids": [
+        "B05",
+        "B06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "veo-3.1-lite-generate-preview",
+      "publisher": "Google",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/images -> video with audio",
+      "access": "API preview",
+      "license_evidence": "Service terms",
+      "selection_caveat": "Preview identity; exact duration/resolution/audio combinations remain route-specific.",
+      "source_ids": [
+        "B05",
+        "B06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-omni-1.1-flash",
+      "publisher": "Google",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/image/audio/video -> video/audio",
+      "access": "API",
+      "license_evidence": "Service terms",
+      "selection_caveat": "Model index/video guide describe route; exact quotas/limits not inferred.",
+      "source_ids": [
+        "B05",
+        "B06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "flux-3-image",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference images -> images",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Reference count/resolution conditional; API ID differs from downloadable Klein artifacts.",
+      "source_ids": [
+        "B07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "flux-3-video",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/keyframes/clip -> video/audio",
+      "access": "API preview",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Omni Reference described coming soon is not shipped capability; mode-specific frame/duration constraints.",
+      "source_ids": [
+        "B07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "flux-2-pro",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Fixed snapshot vs mutable preview must remain distinct; playground/API reference limits differ.",
+      "source_ids": [
+        "B08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "flux-2-pro-preview",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Fixed snapshot vs mutable preview must remain distinct; playground/API reference limits differ.",
+      "source_ids": [
+        "B08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/FLUX.2-klein-4B",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Base vs distilled identity separate; example dimensions are not maxima.",
+      "source_ids": [
+        "B08",
+        "B09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/FLUX.2-klein-base-4B",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Base vs distilled identity separate; example dimensions are not maxima.",
+      "source_ids": [
+        "B08",
+        "B09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/FLUX.2-klein-9B",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "weights / gating varies",
+      "license_evidence": "Custom noncommercial weight terms; exact artifact grant required",
+      "selection_caveat": "Do not inherit4B Apache grant; source/license version associations need review.",
+      "source_ids": [
+        "B09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/FLUX.2-dev",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "weights / gating varies",
+      "license_evidence": "Custom noncommercial weight terms; exact artifact grant required",
+      "selection_caveat": "Do not inherit4B Apache grant; source/license version associations need review.",
+      "source_ids": [
+        "B09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen-Image-2512",
+      "publisher": "Qwen",
+      "task_families": [
+        "image_generation"
+      ],
+      "input_output": "Text -> image",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Text-to-image artifact is not the separate edit model.",
+      "source_ids": [
+        "B12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen-Image-Edit-2511",
+      "publisher": "Qwen",
+      "task_families": [
+        "image_editing"
+      ],
+      "input_output": "Text/images -> edited image",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "No text-token maxima established; keep source revision and edit roles.",
+      "source_ids": [
+        "B13"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Stable Diffusion3.5 Large",
+      "publisher": "Stability AI",
+      "task_families": [
+        "image_generation"
+      ],
+      "input_output": "Text -> image",
+      "access": "weights",
+      "license_evidence": "Stability Community License; commercial registration/revenue conditions",
+      "selection_caveat": "Gated card limitations and exact checkpoint terms retained; not uniformly unrestricted.",
+      "source_ids": [
+        "B14",
+        "B15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Stable Diffusion3.5 Large Turbo",
+      "publisher": "Stability AI",
+      "task_families": [
+        "image_generation"
+      ],
+      "input_output": "Text -> image",
+      "access": "weights",
+      "license_evidence": "Stability Community License; commercial registration/revenue conditions",
+      "selection_caveat": "Gated card limitations and exact checkpoint terms retained; not uniformly unrestricted.",
+      "source_ids": [
+        "B14",
+        "B15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Stable Diffusion3.5 Medium",
+      "publisher": "Stability AI",
+      "task_families": [
+        "image_generation"
+      ],
+      "input_output": "Text -> image",
+      "access": "weights",
+      "license_evidence": "Stability Community License; commercial registration/revenue conditions",
+      "selection_caveat": "Gated card limitations and exact checkpoint terms retained; not uniformly unrestricted.",
+      "source_ids": [
+        "B14",
+        "B15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gen4.5",
+      "publisher": "Runway",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/image -> video",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Exact API ID documented; request limits, region and entitlements need route-specific intake.",
+      "source_ids": [
+        "B16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gen4_turbo",
+      "publisher": "Runway",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Image -> video",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Exact API ID documented; request limits, region and entitlements need route-specific intake.",
+      "source_ids": [
+        "B16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gen4_image",
+      "publisher": "Runway",
+      "task_families": [
+        "image_generation"
+      ],
+      "input_output": "Text/reference -> image",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Exact API ID documented; request limits, region and entitlements need route-specific intake.",
+      "source_ids": [
+        "B16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "aleph2",
+      "publisher": "Runway",
+      "task_families": [
+        "video_editing"
+      ],
+      "input_output": "Clip/instructions -> video",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Exact API ID documented; request limits, region and entitlements need route-specific intake.",
+      "source_ids": [
+        "B16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "act_two",
+      "publisher": "Runway",
+      "task_families": [
+        "motion_avatar"
+      ],
+      "input_output": "Performance/reference -> character video",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Exact API ID documented; request limits, region and entitlements need route-specific intake.",
+      "source_ids": [
+        "B16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gwm1_avatars",
+      "publisher": "Runway",
+      "task_families": [
+        "motion_avatar"
+      ],
+      "input_output": "Script/audio -> avatar video",
+      "access": "API",
+      "license_evidence": "Proprietary API terms pending",
+      "selection_caveat": "Exact API ID documented; request limits, region and entitlements need route-specific intake.",
+      "source_ids": [
+        "B16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "uni-1",
+      "publisher": "Luma",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Current Agents API model, not the Agents SDK itself.",
+      "source_ids": [
+        "B11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "uni-1-max",
+      "publisher": "Luma",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Current Agents API model, not the Agents SDK itself.",
+      "source_ids": [
+        "B11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "ray-3.2",
+      "publisher": "Luma",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/image/video -> video",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Legacy Ray2 page is not current entitlement; example720p5s is not a maximum.",
+      "source_ids": [
+        "B10",
+        "B11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Wan-AI/Wan2.2-T2V-A14B",
+      "publisher": "Wan",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text -> video",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Activated parameters are not total size; runtime/resource claims remain conditioned.",
+      "source_ids": [
+        "B17"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Wan-AI/Wan2.2-Animate-2-14B",
+      "publisher": "Wan",
+      "task_families": [
+        "motion_avatar",
+        "video_editing"
+      ],
+      "input_output": "Driving clip/reference -> character video",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Distilled/base and hardware-conditioned tests are separate; real-time claim not reproduced.",
+      "source_ids": [
+        "B18"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "tencent/HunyuanVideo-1.5",
+      "publisher": "Tencent",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/image -> video",
+      "access": "weights",
+      "license_evidence": "Tencent Hunyuan Community License; territory restrictions",
+      "selection_caveat": "Subfolder variants/SR/distillation differ; coming-soon variants not assumed available.",
+      "source_ids": [
+        "B22"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Lightricks/LTX-2.5",
+      "publisher": "Lightricks",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/image/video -> synchronized video/audio",
+      "access": "weights; access gating varies",
+      "license_evidence": "LTX Community terms; revision-dependent revenue conditions",
+      "selection_caveat": "License timeline differs by release; shape divisibility is not maximum duration.",
+      "source_ids": [
+        "B19",
+        "B20",
+        "B21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Lightricks/LTX-2.3",
+      "publisher": "Lightricks",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/image/video -> synchronized video/audio",
+      "access": "weights; access gating varies",
+      "license_evidence": "LTX Community terms; revision-dependent revenue conditions",
+      "selection_caveat": "License timeline differs by release; shape divisibility is not maximum duration.",
+      "source_ids": [
+        "B19",
+        "B20",
+        "B21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "tencent/Hunyuan3D-2.1 Shape-v2-1 / Paint-v2-1",
+      "publisher": "Tencent",
+      "task_families": [
+        "3d_assets"
+      ],
+      "input_output": "Image -> shape; mesh/reference -> PBR texture",
+      "access": "weights",
+      "license_evidence": "Hunyuan3D2.1 Community License; territory conditions",
+      "selection_caveat": "Distinct shape/paint components, not ordinary image output; no universal GPU fit.",
+      "source_ids": [
+        "B23"
+      ],
+      "artifact_type": "model_pipeline"
+    },
+    {
+      "model": "microsoft/TRELLIS.2-4B",
+      "publisher": "Microsoft",
+      "task_families": [
+        "3d_assets"
+      ],
+      "input_output": "Image -> PBR mesh",
+      "access": "weights",
+      "license_evidence": "MIT",
+      "selection_caveat": "Latent/voxel counts are not text-token windows; dependency licenses/artifact identity still matter.",
+      "source_ids": [
+        "B24"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "VAST-AI/TripoSG",
+      "publisher": "VAST",
+      "task_families": [
+        "3d_assets"
+      ],
+      "input_output": "Image -> mesh",
+      "access": "weights",
+      "license_evidence": "MIT",
+      "selection_caveat": "Latent/voxel counts are not text-token windows; dependency licenses/artifact identity still matter.",
+      "source_ids": [
+        "B25"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "VAST-AI/TripoSG-scribble",
+      "publisher": "VAST",
+      "task_families": [
+        "3d_assets"
+      ],
+      "input_output": "Scribble/text -> shape",
+      "access": "weights",
+      "license_evidence": "MIT",
+      "selection_caveat": "Latent/voxel counts are not text-token windows; dependency licenses/artifact identity still matter.",
+      "source_ids": [
+        "B26"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "stabilityai/TripoSR",
+      "publisher": "Stability/Tripo",
+      "task_families": [
+        "3d_assets"
+      ],
+      "input_output": "Image -> reconstructed3D",
+      "access": "weights",
+      "license_evidence": "MIT card",
+      "selection_caveat": "Latent/voxel counts are not text-token windows; dependency licenses/artifact identity still matter.",
+      "source_ids": [
+        "B27"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "HY-World-2.0 components (HY-Pano/WorldStereo/HY-WorldMirror)",
+      "publisher": "Tencent",
+      "task_families": [
+        "world_spatial"
+      ],
+      "input_output": "Text/images/video -> persistent scene/reconstruction",
+      "access": "published component weights",
+      "license_evidence": "Exact component license unresolved",
+      "selection_caveat": "Framework/model zoo comprises distinct artifacts; product2.1 announcement is not a checkpoint.",
+      "source_ids": [
+        "B28"
+      ],
+      "artifact_type": "model_pipeline"
+    },
+    {
+      "model": "Marble2 Developer API",
+      "publisher": "World Labs",
+      "task_families": [
+        "world_spatial",
+        "3d_assets"
+      ],
+      "input_output": "Frames/cameras/depth/splats -> world/mesh",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "v2 endpoint is not immutable model version; export extension example inconsistent.",
+      "source_ids": [
+        "B29",
+        "B48",
+        "B49",
+        "B50"
+      ],
+      "artifact_type": "model_service_unpinned"
+    },
+    {
+      "model": "Firefly Image5",
+      "publisher": "Adobe",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Official feature/migration documents conflict on payload/model selectors; no verified request shape asserted.",
+      "source_ids": [
+        "B30",
+        "B31"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "dreamina-seedance-2-5-260628",
+      "publisher": "ByteDance/BytePlus",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/reference/video -> video",
+      "access": "API",
+      "license_evidence": "Hosted service terms pending",
+      "selection_caveat": "Exact ModelArk route ID; not Runway alias or evidence of weights.",
+      "source_ids": [
+        "B32"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "dreamina-seedance-2-0-260128",
+      "publisher": "ByteDance/BytePlus",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/reference/video -> video",
+      "access": "API",
+      "license_evidence": "Hosted service terms pending",
+      "selection_caveat": "Exact ModelArk route ID; not Runway alias or evidence of weights.",
+      "source_ids": [
+        "B32"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "dreamina-seedance-2-0-fast-260128",
+      "publisher": "ByteDance/BytePlus",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/reference/video -> video",
+      "access": "API",
+      "license_evidence": "Hosted service terms pending",
+      "selection_caveat": "Exact ModelArk route ID; not Runway alias or evidence of weights.",
+      "source_ids": [
+        "B32"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "dola-seedream-5-0-pro-260628",
+      "publisher": "ByteDance/BytePlus",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference -> image/edits",
+      "access": "API",
+      "license_evidence": "Hosted service terms pending",
+      "selection_caveat": "Per-mode limits/terms unresolved; reseller label not canonical publisher ID.",
+      "source_ids": [
+        "B32"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "dola-seedream-5-0-flash-260915",
+      "publisher": "ByteDance/BytePlus",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference -> image/edits",
+      "access": "API",
+      "license_evidence": "Hosted service terms pending",
+      "selection_caveat": "Per-mode limits/terms unresolved; reseller label not canonical publisher ID.",
+      "source_ids": [
+        "B32"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Kling Video3.0 /3.0Omni and Image3.0 /3.0Omni",
+      "publisher": "Kuaishou",
+      "task_families": [
+        "video_generation",
+        "image_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/reference -> video/audio or images",
+      "access": "publisher service; exact API ID unresolved",
+      "license_evidence": "Service terms/entitlement unresolved",
+      "selection_caveat": "Family identities established, current account availability and exact API selectors not established from shell pages.",
+      "source_ids": [
+        "B33"
+      ],
+      "artifact_type": "model_family_unpinned"
+    },
+    {
+      "model": "MiniMax-H3",
+      "publisher": "MiniMax",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/image/video/audio references -> video",
+      "access": "API",
+      "license_evidence": "Hosted API terms pending",
+      "selection_caveat": "Resolution/duration capabilities differ between H3 and H3-Max; reseller labels are different.",
+      "source_ids": [
+        "B34"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "MiniMax-H3-Max",
+      "publisher": "MiniMax",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Text/image/video/audio references -> video",
+      "access": "API",
+      "license_evidence": "Hosted API terms pending",
+      "selection_caveat": "Resolution/duration capabilities differ between H3 and H3-Max; reseller labels are different.",
+      "source_ids": [
+        "B34"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "MiniMaxAI/MiniMax-H3 (FL2VA / Ref2VA)",
+      "publisher": "MiniMax",
+      "task_families": [
+        "video_generation"
+      ],
+      "input_output": "Reference images/video -> video/audio",
+      "access": "weights",
+      "license_evidence": "Community License excludes named territories and has revenue conditions",
+      "selection_caveat": "Hosted2K enhancement is not proven base-weight equivalence; checkpoint-specific entitlement required.",
+      "source_ids": [
+        "B35",
+        "B36"
+      ],
+      "artifact_type": "model_bundle"
+    },
+    {
+      "model": "grok-imagine-video-1.5",
+      "publisher": "xAI",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/clip -> video/audio",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Editing/extension belongs to documented older route; newer1.5 is not automatically feature superset; native/upscaled1080 differ.",
+      "source_ids": [
+        "B37"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "grok-imagine-video-1.5-lite",
+      "publisher": "xAI",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/clip -> video/audio",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Editing/extension belongs to documented older route; newer1.5 is not automatically feature superset; native/upscaled1080 differ.",
+      "source_ids": [
+        "B37"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "grok-imagine-video",
+      "publisher": "xAI",
+      "task_families": [
+        "video_generation",
+        "video_editing"
+      ],
+      "input_output": "Text/images/clip -> video/audio",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Editing/extension belongs to documented older route; newer1.5 is not automatically feature superset; native/upscaled1080 differ.",
+      "source_ids": [
+        "B37"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "grok-imagine-image-2.0",
+      "publisher": "xAI",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> image",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Future alias redirect not current state; quality tier and region apply.",
+      "source_ids": [
+        "B38",
+        "B39"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "recraftv4_1",
+      "publisher": "Recraft",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> raster or editable SVG",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
+      "source_ids": [
+        "B40"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "recraftv4_1_vector",
+      "publisher": "Recraft",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> raster or editable SVG",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
+      "source_ids": [
+        "B40"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "recraftv4_1_pro",
+      "publisher": "Recraft",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> raster or editable SVG",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
+      "source_ids": [
+        "B40"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "recraftv4_1_pro_vector",
+      "publisher": "Recraft",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> raster or editable SVG",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
+      "source_ids": [
+        "B40"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Midjourney V8.2 / Edit Model",
+      "publisher": "Midjourney",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "UI prompts/images -> images/edits",
+      "access": "UI service; no general API/weights established",
+      "license_evidence": "Service terms prohibit unauthorized automation",
+      "selection_caveat": "Do not fabricate api/weights access; official exceptions require explicit grant.",
+      "source_ids": [
+        "B41",
+        "B42"
+      ],
+      "artifact_type": "ui_model_family"
+    },
+    {
+      "model": "briaai/FIBO",
+      "publisher": "BRIA",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference/VGL -> images",
+      "access": "gated weights; separate API routes",
+      "license_evidence": "CC-BY-NC-4.0 metadata; hosted rights separate",
+      "selection_caveat": "Exact FIBO1.5 mapping and API entitlement unresolved.",
+      "source_ids": [
+        "B43",
+        "B44"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "briaai/FIBO-lite",
+      "publisher": "BRIA",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/reference/VGL -> images",
+      "access": "gated weights; separate API routes",
+      "license_evidence": "CC-BY-NC-4.0 metadata; hosted rights separate",
+      "selection_caveat": "Exact FIBO1.5 mapping and API entitlement unresolved.",
+      "source_ids": [
+        "B43",
+        "B44"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/flux-3-action-base",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "robotics_action",
+        "world_spatial"
+      ],
+      "input_output": "Observations -> motor actions and future camera frames",
+      "access": "weights",
+      "license_evidence": "FLUX Kommunity conditional grant; not Apache",
+      "selection_caveat": "Base vs embodiment-specific policy differs; action space/robot calibration must match.",
+      "source_ids": [
+        "B45",
+        "B46"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/flux-3-action-so101",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "robotics_action",
+        "world_spatial"
+      ],
+      "input_output": "Observations -> motor actions and future camera frames",
+      "access": "weights",
+      "license_evidence": "FLUX Kommunity conditional grant; not Apache",
+      "selection_caveat": "Base vs embodiment-specific policy differs; action space/robot calibration must match.",
+      "source_ids": [
+        "B45",
+        "B46"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "black-forest-labs/flux-3-image-klein",
+      "publisher": "Black Forest Labs",
+      "task_families": [
+        "image_generation",
+        "image_editing"
+      ],
+      "input_output": "Text/images -> images",
+      "access": "gated weights metadata",
+      "license_evidence": "FLUX Kommunity per metadata",
+      "selection_caveat": "Raw card gated; retain partial identity/license evidence, not complete capability or dependency grant.",
+      "source_ids": [
+        "B47"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-transcribe",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Committed audio/file -> text",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-live-transcribe",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Live speech -> transcript deltas",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-4o-transcribe-diarize",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_recognition",
+        "diarization"
+      ],
+      "input_output": "Audio -> speaker-labelled transcript",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U03",
+        "U04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "whisper-1",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_recognition",
+        "speech_translation"
+      ],
+      "input_output": "Audio -> text/English translation",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U03",
+        "U04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-audio-1.5",
+      "publisher": "OpenAI",
+      "task_families": [
+        "realtime_speech"
+      ],
+      "input_output": "Text/audio -> text/audio",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-realtime-2.1",
+      "publisher": "OpenAI",
+      "task_families": [
+        "realtime_speech"
+      ],
+      "input_output": "Speech/multimodal session -> speech",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-4o-mini-tts",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> audio",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "U07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-live-1",
+      "publisher": "OpenAI",
+      "task_families": [
+        "realtime_speech"
+      ],
+      "input_output": "Full-duplex speech -> speech with backend delegation",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "C01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-realtime-translate",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_translation"
+      ],
+      "input_output": "Speech -> translated speech/text",
+      "access": "API",
+      "license_evidence": "Proprietary service terms",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "source_ids": [
+        "C02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Whisper large-v3",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_recognition",
+        "speech_translation"
+      ],
+      "input_output": "Audio -> text",
+      "access": "weights",
+      "license_evidence": "MIT code and weights",
+      "selection_caveat": "Turbo not trained for translation; do not transfer hosted API retirement to weights.",
+      "source_ids": [
+        "W01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Whisper turbo",
+      "publisher": "OpenAI",
+      "task_families": [
+        "speech_recognition",
+        "speech_translation"
+      ],
+      "input_output": "Audio -> text",
+      "access": "weights",
+      "license_evidence": "MIT code and weights",
+      "selection_caveat": "Turbo not trained for translation; do not transfer hosted API retirement to weights.",
+      "source_ids": [
+        "W01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "eleven_v4",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text/dialogue -> audio",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "eleven_v4_turbo",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> streamed audio",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "eleven_flash_v2_5",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> audio",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "eleven_multilingual_sts_v2",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "voice_conversion"
+      ],
+      "input_output": "Voice recording -> converted voice",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "scribe_v2",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "speech_recognition",
+        "diarization"
+      ],
+      "input_output": "Audio -> transcript/segments",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "scribe_v2_realtime",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Streamed audio -> text",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "scribe_v2_medical",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Clinical audio -> text",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "music_v2_5",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Prompt/plans/reference -> music",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "music_v2",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Prompt -> music",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "eleven_text_to_sound_v2",
+      "publisher": "ElevenLabs",
+      "task_families": [
+        "audio_generation"
+      ],
+      "input_output": "Text -> sound effects",
+      "access": "API",
+      "license_evidence": "Proprietary service / workflow-specific consent terms",
+      "selection_caveat": "Character, speaker, language and streaming limits differ; no clinical suitability or end-to-end latency certification.",
+      "source_ids": [
+        "U08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "chirp_3",
+      "publisher": "Google",
+      "task_families": [
+        "speech_recognition",
+        "diarization"
+      ],
+      "input_output": "Audio -> text/segments",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "V2 streaming/sync/batch differ; diarization language/method subset matters.",
+      "source_ids": [
+        "U09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3.8-live",
+      "publisher": "Google",
+      "task_families": [
+        "realtime_speech",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/image/audio/video -> audio/transcript",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Separate input/output budgets; response modality differs from transcription options.",
+      "source_ids": [
+        "U10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "lyria-3.5",
+      "publisher": "Google",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Text/image -> music",
+      "access": "API",
+      "license_evidence": "Service-specific music rights pending",
+      "selection_caveat": "Full-song versus30-second preview are distinct; vague minutes is not hard maximum.",
+      "source_ids": [
+        "U11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "lyria-3-clip-preview",
+      "publisher": "Google",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Text/image -> music",
+      "access": "API",
+      "license_evidence": "Service-specific music rights pending",
+      "selection_caveat": "Full-song versus30-second preview are distinct; vague minutes is not hard maximum.",
+      "source_ids": [
+        "U11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3.8-flash-tts",
+      "publisher": "Google",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> audio",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "8192input and16384output are separate serving budgets, not a combined context.",
+      "source_ids": [
+        "C03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3.8-flash-lite-tts",
+      "publisher": "Google",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> audio",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "8192input and16384output are separate serving budgets, not a combined context.",
+      "source_ids": [
+        "C04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "nova-3",
+      "publisher": "Deepgram",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Audio -> transcript/turn events",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Flux turn detection differs from Nova3; languages and task mode not interchangeable.",
+      "source_ids": [
+        "U12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "flux-general-en",
+      "publisher": "Deepgram",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Audio -> transcript/turn events",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Flux turn detection differs from Nova3; languages and task mode not interchangeable.",
+      "source_ids": [
+        "U12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "flux-general-multi",
+      "publisher": "Deepgram",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Audio -> transcript/turn events",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Flux turn detection differs from Nova3; languages and task mode not interchangeable.",
+      "source_ids": [
+        "U12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "aura-2-celeste-es",
+      "publisher": "Deepgram",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> voice-specific audio",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Exact IDs encode voice/language; decide voice variant identity separately from model family.",
+      "source_ids": [
+        "U12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "aura-2-agathe-fr",
+      "publisher": "Deepgram",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> voice-specific audio",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Exact IDs encode voice/language; decide voice variant identity separately from model family.",
+      "source_ids": [
+        "U12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "aura-2-julius-de",
+      "publisher": "Deepgram",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> voice-specific audio",
+      "access": "API",
+      "license_evidence": "Proprietary service terms pending",
+      "selection_caveat": "Exact IDs encode voice/language; decide voice variant identity separately from model family.",
+      "source_ids": [
+        "U12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "sonic-3.6-2026-08-27",
+      "publisher": "Cartesia",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> audio",
+      "access": "API",
+      "license_evidence": "Service terms pending",
+      "selection_caveat": "Dated snapshot differs from floating sonic-3.6 alias; no latency guarantee.",
+      "source_ids": [
+        "U13"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "amazon.nova-2-sonic-v1:0",
+      "publisher": "Amazon",
+      "task_families": [
+        "realtime_speech"
+      ],
+      "input_output": "Speech -> speech",
+      "access": "API via Bedrock",
+      "license_evidence": "EULA-specific terms pending",
+      "selection_caveat": "Preserve published K/M units until exact integer semantics confirmed; route entitlement untested.",
+      "source_ids": [
+        "U14"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-ASR-1.7B",
+      "publisher": "Qwen",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Audio -> text/language ID",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Languages and dialects counted separately.",
+      "source_ids": [
+        "W02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+      "publisher": "Qwen",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text/instruction -> preset voice",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Preset voice differs from Basecloning and VoiceDesign.",
+      "source_ids": [
+        "W03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+      "publisher": "Qwen",
+      "task_families": [
+        "speech_synthesis",
+        "voice_conversion"
+      ],
+      "input_output": "Text/reference recording -> speech",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Weight license does not grant voice/reference consent.",
+      "source_ids": [
+        "W04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen2-Audio-7B-Instruct",
+      "publisher": "Qwen",
+      "task_families": [
+        "audio_understanding"
+      ],
+      "input_output": "Audio/text -> text",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Audio understanding is not TTS.",
+      "source_ids": [
+        "W05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "nvidia/parakeet-tdt-0.6b-v3",
+      "publisher": "NVIDIA",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Audio -> text/timestamps",
+      "access": "weights",
+      "license_evidence": "CC-BY-4.0",
+      "selection_caveat": "Duration depends on attention mode and named hardware; no universalfit.",
+      "source_ids": [
+        "W06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "nvidia/canary-1b-v2",
+      "publisher": "NVIDIA",
+      "task_families": [
+        "speech_recognition",
+        "speech_translation"
+      ],
+      "input_output": "Audio -> text/translation",
+      "access": "weights",
+      "license_evidence": "CC-BY-4.0",
+      "selection_caveat": "Translation directions are not arbitrary all-pairs.",
+      "source_ids": [
+        "W07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "nvidia/canary-qwen-2.5b",
+      "publisher": "NVIDIA",
+      "task_families": [
+        "speech_recognition"
+      ],
+      "input_output": "Audio -> text; separate text-onlyLLMmode",
+      "access": "weights",
+      "license_evidence": "CC-BY-4.0",
+      "selection_caveat": "Training sequence limits are not inference maxima.",
+      "source_ids": [
+        "W08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "hexgrad/Kokoro-82M / kokoro-v1_0.pth",
+      "publisher": "hexgrad",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> audio",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Voice/language matrix and exact duration unresolved.",
+      "source_ids": [
+        "W09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "ResembleAI/chatterbox",
+      "publisher": "Resemble AI",
+      "task_families": [
+        "speech_synthesis",
+        "voice_conversion"
+      ],
+      "input_output": "Text/reference -> speech",
+      "access": "weights",
+      "license_evidence": "MIT card",
+      "selection_caveat": "Mutable card describes updated family; pin component/revision.",
+      "source_ids": [
+        "W10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "ResembleAI/chatterbox-turbo",
+      "publisher": "Resemble AI",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> speech",
+      "access": "weights",
+      "license_evidence": "MIT card",
+      "selection_caveat": "Separate model from multilingual main and Nano.",
+      "source_ids": [
+        "W10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "ResembleAI/chatterbox-nano",
+      "publisher": "Resemble AI",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Text -> speech",
+      "access": "weights",
+      "license_evidence": "MIT card",
+      "selection_caveat": "English model; not whole family language coverage.",
+      "source_ids": [
+        "W10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "SWivid/F5-TTS",
+      "publisher": "F5-TTS authors",
+      "task_families": [
+        "speech_synthesis",
+        "voice_conversion"
+      ],
+      "input_output": "Text/reference -> speech",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0 weights; MIT code",
+      "selection_caveat": "Checkpoint filename/version and source rights need review.",
+      "source_ids": [
+        "W11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "kyutai/moshiko-pytorch-bf16",
+      "publisher": "Kyutai",
+      "task_families": [
+        "realtime_speech"
+      ],
+      "input_output": "Full-duplex audio conversation",
+      "access": "weights",
+      "license_evidence": "CC-BY-4.0 weights",
+      "selection_caveat": "Mimi codec is distinct; no end-to-end duration/latency proof.",
+      "source_ids": [
+        "W12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/seamless-m4t-v2-large",
+      "publisher": "Meta",
+      "task_families": [
+        "speech_translation"
+      ],
+      "input_output": "Speech/text -> speech/text",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0",
+      "selection_caveat": "Language counts differ by input/output/taskdirection.",
+      "source_ids": [
+        "W13"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/musicgen-large",
+      "publisher": "Meta",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Text/audio prompts -> music",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0 weights; MIT code",
+      "selection_caveat": "Mono artifact distinct from stereo; no generalcommercialgrant.",
+      "source_ids": [
+        "W14"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "stabilityai/stable-audio-open-1.0",
+      "publisher": "Stability AI",
+      "task_families": [
+        "audio_generation"
+      ],
+      "input_output": "Text -> audio",
+      "access": "weights",
+      "license_evidence": "Stability Community License",
+      "selection_caveat": "Gating/registration/revenue conditions;47sec stereo44.1kHz publishedscope.",
+      "source_ids": [
+        "W15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "ACE-Step/Ace-Step1.5",
+      "publisher": "ACE-Step",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Prompts/music -> generated/edited audio",
+      "access": "weights",
+      "license_evidence": "MIT card",
+      "selection_caveat": "Stage decomposition and input/output rights not automaticallycleared.",
+      "source_ids": [
+        "W16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "google/magenta-realtime",
+      "publisher": "Google",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Conditioning -> streamed music",
+      "access": "weights",
+      "license_evidence": "CC-BY-4.0 weights; Apache code",
+      "selection_caveat": "Checkpoint duration/sample-rate details unresolved.",
+      "source_ids": [
+        "W17"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "m-a-p/YuE-s1-7B-anneal-en-cot",
+      "publisher": "M-A-P",
+      "task_families": [
+        "music_generation"
+      ],
+      "input_output": "Lyrics -> song stage1",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Stage1 is not standalone full pipeline; output-credit wording changedhistorically.",
+      "source_ids": [
+        "W18"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "laion/clap-htsat-unfused",
+      "publisher": "LAION",
+      "task_families": [
+        "audio_classification",
+        "multimodal_embedding"
+      ],
+      "input_output": "Audio/text -> embeddings or zero-shotlabels",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card; upstreamcodeCC0",
+      "selection_caveat": "Artifact-specific license and sampling/preprocessing must be retained.",
+      "source_ids": [
+        "W19"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "BEATs_iter3+ AS2M / cpt2",
+      "publisher": "Microsoft",
+      "task_families": [
+        "audio_classification",
+        "audio_understanding"
+      ],
+      "input_output": "Audio -> representations / classscores",
+      "access": "weights",
+      "license_evidence": "Checkpoint grant unresolved",
+      "selection_caveat": "Pretrained encoder and fine-tuned classifier are distinct.",
+      "source_ids": [
+        "W20"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "htdemucs",
+      "publisher": "Meta",
+      "task_families": [
+        "audio_separation"
+      ],
+      "input_output": "Music -> stems",
+      "access": "weights",
+      "license_evidence": "Repository MIT; checkpoint grant follow-up",
+      "selection_caveat": "Four-stem model differs from ft/6s.",
+      "source_ids": [
+        "W21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "htdemucs_ft",
+      "publisher": "Meta",
+      "task_families": [
+        "audio_separation"
+      ],
+      "input_output": "Music -> stems",
+      "access": "weights",
+      "license_evidence": "Repository MIT; checkpoint grant follow-up",
+      "selection_caveat": "Fine-tuned checkpoint distinct.",
+      "source_ids": [
+        "W21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "htdemucs_6s",
+      "publisher": "Meta",
+      "task_families": [
+        "audio_separation"
+      ],
+      "input_output": "Music -> six stems",
+      "access": "weights",
+      "license_evidence": "Repository MIT; checkpoint grant follow-up",
+      "selection_caveat": "Extra piano/guitaroutputs; task scope explicit.",
+      "source_ids": [
+        "W21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "DeepFilterNet3",
+      "publisher": "DeepFilterNet authors",
+      "task_families": [
+        "audio_enhancement"
+      ],
+      "input_output": "Noisy speech -> enhanced audio",
+      "access": "weights",
+      "license_evidence": "Weight grant unresolved; codeMIT/Apache",
+      "selection_caveat": "48kHz full-band framework target; archive identified not downloaded.",
+      "source_ids": [
+        "W22"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "pyannote/speaker-diarization-community-1",
+      "publisher": "pyannote",
+      "task_families": [
+        "diarization"
+      ],
+      "input_output": "Audio -> speaker/time segments",
+      "access": "weights",
+      "license_evidence": "CC-BY-4.0; gated",
+      "selection_caveat": "Pipeline with constituentmodels;16kHzmono/resamplingconditions.",
+      "source_ids": [
+        "W23"
+      ],
+      "artifact_type": "model_pipeline"
+    },
+    {
+      "model": "Qwen/Qwen3-ForcedAligner-0.6B",
+      "publisher": "Qwen",
+      "task_families": [
+        "forced_alignment"
+      ],
+      "input_output": "Speech+knowntext -> timestamps",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Five-minute/11-language limit is not siblingASRcoverage.",
+      "source_ids": [
+        "C05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+      "publisher": "Qwen",
+      "task_families": [
+        "speech_synthesis",
+        "voice_design"
+      ],
+      "input_output": "Text+voice description -> speech",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Distinct from Basecloning and CustomVoice.",
+      "source_ids": [
+        "C06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "publisher": "Qwen",
+      "task_families": [
+        "audio_understanding",
+        "multimodal_understanding",
+        "realtime_speech"
+      ],
+      "input_output": "Text/image/audio/video -> text/speech",
+      "access": "weights",
+      "license_evidence": "Card other / Apache-name inconsistency",
+      "selection_caveat": "Governing license linkage requires review; no inferredtoken ceiling.",
+      "source_ids": [
+        "C07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Omni-30B-A3B-Captioner",
+      "publisher": "Qwen",
+      "task_families": [
+        "audio_understanding"
+      ],
+      "input_output": "One audio input -> caption",
+      "access": "weights",
+      "license_evidence": "Card other / Apache-name inconsistency",
+      "selection_caveat": "No text prompts;30sec recommendation is not hardlimit.",
+      "source_ids": [
+        "C08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Google YAMNet / tfhub yamnet/1",
+      "publisher": "Google",
+      "task_families": [
+        "audio_classification"
+      ],
+      "input_output": "Audio -> soundevent scores/embedding",
+      "access": "weights",
+      "license_evidence": "Checkpoint grant unresolved",
+      "selection_caveat": "521classes;0.96sec analysispatch is not filemaximum.",
+      "source_ids": [
+        "C09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "MIT/ast-finetuned-audioset-10-10-0.4593",
+      "publisher": "AST authors / HF conversion",
+      "task_families": [
+        "audio_classification"
+      ],
+      "input_output": "Audio -> AudioSet classscores",
+      "access": "weights",
+      "license_evidence": "BSD-3-Clause hostedcard; originalscope review",
+      "selection_caveat": "Converted artifact vs originalauthorcheckpoint distinguished; cardthirdparty-authored.",
+      "source_ids": [
+        "C10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "speechbrain/sepformer-whamr",
+      "publisher": "SpeechBrain authors",
+      "task_families": [
+        "audio_separation"
+      ],
+      "input_output": "Mixed noisy speech -> sources",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "8kHzmono training/task scope; no universalquality.",
+      "source_ids": [
+        "C11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "nvidia/diar_streaming_sortformer_4spk-v2.1",
+      "publisher": "NVIDIA",
+      "task_families": [
+        "diarization"
+      ],
+      "input_output": "Audio -> speakeractivitysegments",
+      "access": "weights",
+      "license_evidence": "NVIDIA Open Model License",
+      "selection_caveat": "Four speakers; no v2CC-BYinheritance.",
+      "source_ids": [
+        "C12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "nvidia/Nemotron-3-Diarization",
+      "publisher": "NVIDIA",
+      "task_families": [
+        "diarization"
+      ],
+      "input_output": "Audio -> activitytensor/segments",
+      "access": "weights",
+      "license_evidence": "OpenMDW-1.1 card declaration",
+      "selection_caveat": "8speakers; bufferframe interval not end-to-endlatency.",
+      "source_ids": [
+        "C13"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Silero VAD / silero_vad",
+      "publisher": "Silero",
+      "task_families": [
+        "voice_activity"
+      ],
+      "input_output": "Audio -> speechactivity",
+      "access": "weights",
+      "license_evidence": "MIT publisherlicense",
+      "selection_caveat": "Select exactONNX/JITartifact; misleadingbadge alttextdoesnotoverride license.",
+      "source_ids": [
+        "C14"
+      ],
+      "artifact_type": "artifact_family_unpinned"
+    },
+    {
+      "model": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+      "publisher": "FunAudioLLM",
+      "task_families": [
+        "speech_synthesis",
+        "voice_conversion"
+      ],
+      "input_output": "Text/reference -> audio",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Dialect counts are not languagecounts.",
+      "source_ids": [
+        "C15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "suno/bark",
+      "publisher": "Suno",
+      "task_families": [
+        "speech_synthesis",
+        "audio_generation"
+      ],
+      "input_output": "Text -> expressiveaudio",
+      "access": "weights",
+      "license_evidence": "MIT card",
+      "selection_caveat": "Component identity/durationmaximum unresolved.",
+      "source_ids": [
+        "C16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "microsoft/VibeVoice-1.5B",
+      "publisher": "Microsoft",
+      "task_families": [
+        "speech_synthesis"
+      ],
+      "input_output": "Multispeaker text -> longformaudio",
+      "access": "weights",
+      "license_evidence": "MIT metadata vs restrictivecard wording unresolved",
+      "selection_caveat": "Do not label unrestrictedcommercial; publisherquality/durationclaimsnot measured.",
+      "source_ids": [
+        "C17"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-6.1-sol",
+      "publisher": "OpenAI",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API",
+      "license_evidence": "Proprietary Services Agreement; offering conditions",
+      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not latestdefault.",
+      "source_ids": [
+        "R01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-6-astra",
+      "publisher": "OpenAI",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API",
+      "license_evidence": "Proprietary Services Agreement; offering conditions",
+      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not latestdefault.",
+      "source_ids": [
+        "R01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gpt-6-luna",
+      "publisher": "OpenAI",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API",
+      "license_evidence": "Proprietary Services Agreement; offering conditions",
+      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not latestdefault.",
+      "source_ids": [
+        "R01"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "claude-fable-5-1",
+      "publisher": "Anthropic",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API; partner routes separate",
+      "license_evidence": "Commercial/API terms; model-feature retention varies",
+      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "source_ids": [
+        "R02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "claude-opus-5-5",
+      "publisher": "Anthropic",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API; partner routes separate",
+      "license_evidence": "Commercial/API terms; model-feature retention varies",
+      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "source_ids": [
+        "R02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "claude-sonnet-5-5",
+      "publisher": "Anthropic",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API; partner routes separate",
+      "license_evidence": "Commercial/API terms; model-feature retention varies",
+      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "source_ids": [
+        "R02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "claude-haiku-5-5",
+      "publisher": "Anthropic",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "API; partner routes separate",
+      "license_evidence": "Commercial/API terms; model-feature retention varies",
+      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "source_ids": [
+        "R02"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "publisher": "Google",
+      "task_families": [
+        "language_reasoning",
+        "code_generation",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/image/video/audio/PDF -> text",
+      "access": "API",
+      "license_evidence": "Gemini service terms",
+      "selection_caveat": "Separate input/output budgets; computer usepreview not generalized liveaudio/imagegeneration.",
+      "source_ids": [
+        "R03"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3.8-27B",
+      "publisher": "Qwen",
+      "task_families": [
+        "language_reasoning",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/vision inputs -> text",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Native vs extendedcontext differ; hostedQwenCloud service describedcomingsoon not currentlyassertedAPIavailability.",
+      "source_ids": [
+        "R04"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "openai/gpt-oss-20b",
+      "publisher": "OpenAI",
+      "task_families": [
+        "language_reasoning",
+        "code_generation"
+      ],
+      "input_output": "Text -> text/toolcalls",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Harmonyformat and MXFP4artifact requireexactruntime; not genericint4 fit.",
+      "source_ids": [
+        "R05"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+      "publisher": "Qwen",
+      "task_families": [
+        "code_generation"
+      ],
+      "input_output": "Text/code -> text/code/toolcalls",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Non-thinking model; generationexample is not universalmaxoutput; native/YaRNdistinct.",
+      "source_ids": [
+        "R06"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "mistral-large-4",
+      "publisher": "Mistral",
+      "task_families": [
+        "language_reasoning",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/vision -> text",
+      "access": "API / publisher open-weight claim",
+      "license_evidence": "Exact checkpoint license and entitlement pending",
+      "selection_caveat": "Previewrelease and route details differ from olderLarge3; no guessedcurrentweightgrant.",
+      "source_ids": [
+        "R07"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+      "publisher": "Meta",
+      "task_families": [
+        "language_reasoning",
+        "multimodal_understanding"
+      ],
+      "input_output": "Text/images -> text",
+      "access": "gated weights",
+      "license_evidence": "Llama4Community terms",
+      "selection_caveat": "No unrestricted commercial/territory permission inferred; exactcheckpointgatingmatters.",
+      "source_ids": [
+        "R08"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "amazon/chronos-2",
+      "publisher": "Amazon",
+      "task_families": [
+        "time_series"
+      ],
+      "input_output": "Historical series/covariates -> forecasts/quantiles",
+      "access": "weights; documented SageMaker route",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Time steps/horizon/covariates are not texttokens; published speed claim not retained as measured.",
+      "source_ids": [
+        "R09"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "google/timesfm-3.0-pytorch",
+      "publisher": "Google",
+      "task_families": [
+        "time_series"
+      ],
+      "input_output": "Series/covariates -> forecasts",
+      "access": "weights / separately authorized cloud",
+      "license_evidence": "Noncommercial nonproduction weights; Apache code",
+      "selection_caveat": "Older2.5Apache terms do not cover3.0weights; cloudcommercialterms separate.",
+      "source_ids": [
+        "R10"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "TabPFN-3.5",
+      "publisher": "Prior Labs",
+      "task_families": [
+        "tabular_prediction"
+      ],
+      "input_output": "Rows/features -> classification/regression predictions",
+      "access": "local weights / API",
+      "license_evidence": "Custom model license; commercial agreement conditions",
+      "selection_caveat": "CodeApache does not settleweights; row/column maxima cannot necessarilycombine; no modelrunacceptedterms.",
+      "source_ids": [
+        "R11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "TabPFN-3.5-Thinking",
+      "publisher": "Prior Labs",
+      "task_families": [
+        "tabular_prediction"
+      ],
+      "input_output": "Structured/text-rich tables -> predictions",
+      "access": "hosted API/VPC",
+      "license_evidence": "Commercial/API terms",
+      "selection_caveat": "Different dataset ceilings and runtime from localBase; keep offeringvariants.",
+      "source_ids": [
+        "R11"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "AutonLab/MOMENT-1-large",
+      "publisher": "Auton Lab",
+      "task_families": [
+        "time_series",
+        "anomaly_detection",
+        "tabular_prediction"
+      ],
+      "input_output": "Time series -> reconstruction/forecast/labels",
+      "access": "weights",
+      "license_evidence": "MIT card declaration",
+      "selection_caveat": "Taskhead and in-domain adaptation required by chosenuse; no universalclassificationquality.",
+      "source_ids": [
+        "R12"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "WeatherNext2 / GenCast / GraphCast checkpoint families",
+      "publisher": "Google DeepMind",
+      "task_families": [
+        "weather_forecasting"
+      ],
+      "input_output": "Atmospheric states -> forecasts",
+      "access": "published checkpoint families",
+      "license_evidence": "Apachecode / CC-BY4othermaterials; data terms separate",
+      "selection_caveat": "Exact checkpoint/year/grid/inputvariables needselection; no officialwarning replacement or universal forecastaccuracy asserted.",
+      "source_ids": [
+        "R13"
+      ],
+      "artifact_type": "model_family_unpinned"
+    },
+    {
+      "model": "ibm-nasa-geospatial/Prithvi-EO-2.0-600M",
+      "publisher": "IBM/NASA/JSC",
+      "task_families": [
+        "geospatial"
+      ],
+      "input_output": "Multispectral temporal images -> representations/reconstruction",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Input bands, reflectanceunits, timestamps/geolocation and downstreamhead not genericRGBvision.",
+      "source_ids": [
+        "R14"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "Boltz-2",
+      "publisher": "Boltz authors",
+      "task_families": [
+        "biomolecular"
+      ],
+      "input_output": "Biomolecular inputs -> structures/affinity predictions",
+      "access": "weights",
+      "license_evidence": "MIT code/weights perpublisher",
+      "selection_caveat": "No clinical/experimentalvalidity or publisher speedcomparison independentlyadopted.",
+      "source_ids": [
+        "R15"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "biohub/ESMFold2",
+      "publisher": "Biohub",
+      "task_families": [
+        "biomolecular"
+      ],
+      "input_output": "Sequences/MSA/molecules -> structural predictions",
+      "access": "weights / publisherAPI",
+      "license_evidence": "MIT card/model statement; dependency notices separate",
+      "selection_caveat": "Single-sequence vs MSA and Fastvariant differ; scientific predictions unvalidated for a specificuse.",
+      "source_ids": [
+        "R16"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "arcinstitute/evo2_40b_base",
+      "publisher": "Arc Institute",
+      "task_families": [
+        "genomics"
+      ],
+      "input_output": "DNA sequences -> sequence representations/predictions",
+      "access": "weights",
+      "license_evidence": "Apache-2.0 card declaration",
+      "selection_caveat": "Base8192trainingcontext differs from longcontext sibling; no arbitrarytext-chat semantics.",
+      "source_ids": [
+        "R17"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "AlphaFold3",
+      "publisher": "Google DeepMind",
+      "task_families": [
+        "biomolecular"
+      ],
+      "input_output": "Molecular inputs -> structure predictions",
+      "access": "model parameters / separate cloudservice",
+      "license_evidence": "Weightterms separate from Apache code",
+      "selection_caveat": "No generallicensepermissioninferred; exact weights provenance and input/databaserights required.",
+      "source_ids": [
+        "R18"
+      ],
+      "artifact_type": "model_pipeline"
+    },
+    {
+      "model": "facebook/UMA / uma-s-1.1",
+      "publisher": "Meta FAIR",
+      "task_families": [
+        "atomistic_materials"
+      ],
+      "input_output": "Atomic structures -> energy/force related predictions",
+      "access": "gated weights",
+      "license_evidence": "FAIR Chemistry License",
+      "selection_caveat": "Material/taskunitconditions, jurisdiction and third-partydata rights require review; no physicsvalidation run.",
+      "source_ids": [
+        "R19"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "openpi/pi05_base",
+      "publisher": "Physical Intelligence",
+      "task_families": [
+        "robotics_action"
+      ],
+      "input_output": "Vision/language/state -> actionchunks",
+      "access": "weights in publisher checkpointtable",
+      "license_evidence": "RepositoryApache; exact checkpoint grant/derivativesreview",
+      "selection_caveat": "Baseforfinetuning vs embodiment-specificDROID policy; robotcoordinates/calibration/actionsafety not universal.",
+      "source_ids": [
+        "R20"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "openpi/pi05_droid",
+      "publisher": "Physical Intelligence",
+      "task_families": [
+        "robotics_action"
+      ],
+      "input_output": "Vision/language/state -> actionchunks",
+      "access": "weights in publisher checkpointtable",
+      "license_evidence": "RepositoryApache; exact checkpoint grant/derivativesreview",
+      "selection_caveat": "Baseforfinetuning vs embodiment-specificDROID policy; robotcoordinates/calibration/actionsafety not universal.",
+      "source_ids": [
+        "R20"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "openvla/openvla-7b",
+      "publisher": "OpenVLA authors",
+      "task_families": [
+        "robotics_action"
+      ],
+      "input_output": "Image/instruction -> robotactions",
+      "access": "weights",
+      "license_evidence": "MIT card vs upstream base-model-restriction notice requires reconciliation",
+      "selection_caveat": "No robotexecution; do not normalize conflictinglicensenotices to unrestrictedpermission.",
+      "source_ids": [
+        "R21"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "HSTU / DLRMv3 model recipe",
+      "publisher": "Meta RecSys",
+      "task_families": [
+        "recommendation"
+      ],
+      "input_output": "User/item histories/features -> retrieval/ranking",
+      "access": "training recipe; user-trained artifacts",
+      "license_evidence": "Repositorylicense not blanket userdatagrant",
+      "selection_caveat": "No universal pretrainedproductioncheckpoint established; fitdatasetandserializeowntrainedmodel.",
+      "source_ids": [
+        "R22"
+      ],
+      "artifact_type": "architecture_recipe"
+    },
+    {
+      "model": "Graphormer model/backbone recipes",
+      "publisher": "Microsoft",
+      "task_families": [
+        "graph_learning"
+      ],
+      "input_output": "Graph/molecular features -> learned predictions",
+      "access": "architecture/training recipes",
+      "license_evidence": "Exactcheckpointgrant not established",
+      "selection_caveat": "Require exact trainedcheckpoint/dataset/feature-schema beforecatalogproposal; repository not itselfdeployablemodel.",
+      "source_ids": [
+        "R23"
+      ],
+      "artifact_type": "architecture_recipe"
+    },
+    {
+      "model": "User-fitted classical estimator / XGBoost Booster",
+      "publisher": "Estimator authors/operator",
+      "task_families": [
+        "tabular_prediction",
+        "anomaly_detection"
+      ],
+      "input_output": "Dataset-specific features -> predictions/scores",
+      "access": "user-trained serializedartifact",
+      "license_evidence": "Librarylicense and data/model rights separate",
+      "selection_caveat": "An algorithm/library release is not a trainedmodel. Recorddataset/features/preprocessor/serialization/runtime; no fictitiousuniversalweights.",
+      "source_ids": [
+        "R24",
+        "R25"
+      ],
+      "artifact_type": "architecture_recipe"
+    },
+    {
+      "model": "omni-moderation-2024-09-26",
+      "publisher": "OpenAI",
+      "task_families": [
+        "moderation"
+      ],
+      "input_output": "Text/images -> harmful-content classification",
+      "access": "API",
+      "license_evidence": "Proprietary API terms",
+      "selection_caveat": "Exact snapshot differs from latest alias; no task-specific safety guarantee.",
+      "source_ids": [
+        "R26"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "facebook/nllb-200-distilled-600M",
+      "publisher": "Meta",
+      "task_families": [
+        "language_translation"
+      ],
+      "input_output": "Sentence text -> translated text",
+      "access": "weights",
+      "license_evidence": "CC-BY-NC-4.0",
+      "selection_caveat": "Research single-sentence task; not certified/document/domain-specialized translation.",
+      "source_ids": [
+        "R27"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "answerdotai/ModernBERT-base",
+      "publisher": "Answer.AI",
+      "task_families": [
+        "encoder_understanding"
+      ],
+      "input_output": "Text -> masked-token/encoder representations",
+      "access": "weights",
+      "license_evidence": "Apache-2.0",
+      "selection_caveat": "Pretrained encoder is not a ready task-specific classifier or a chat generator.",
+      "source_ids": [
+        "R28"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "dslim/bert-base-NER",
+      "publisher": "dslim",
+      "task_families": [
+        "token_classification"
+      ],
+      "input_output": "Text -> named-entity token labels",
+      "access": "weights",
+      "license_evidence": "MIT card declaration",
+      "selection_caveat": "Fine-tuned English label/dataset scope; no universal language/domain quality.",
+      "source_ids": [
+        "R29"
+      ],
+      "artifact_type": "model"
+    },
+    {
+      "model": "RealESRGAN_x4plus",
+      "publisher": "Real-ESRGAN authors",
+      "task_families": [
+        "image_restoration"
+      ],
+      "input_output": "Image/video frames -> restored/upscaled images",
+      "access": "published pretrained-model route",
+      "license_evidence": "Exact checkpoint grant not normalized",
+      "selection_caveat": "Upscaling/restoration differs from new-image generation; degradation/domain and scale apply.",
+      "source_ids": [
+        "R30"
+      ],
+      "artifact_type": "model"
+    }
+  ]
+}
