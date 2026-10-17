@@ -1,0 +1,117 @@
+# T0: Component Schema & Compatibility Rules
+
+Issue: #40 · Contract: v1 1.0.0 (adopted in PR #44) · Assignees: @tynamite, @zwright8
+Status: draft, revision 1 (consolidates decisions already posted) · Last updated: 2026-10-17
+Deliverable path: `research/T0-configuration/component-schema-compatibility.md` · Companion records: `workload-use-case.md` and `deployment-mode.md` (PR #81), `catalog-data-sources.md` (#41)
+
+This revision consolidates what #40's owner has already decided in reviews of submitted proposals: T2 in [#75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), market research in [#67](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), T1 in [#88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868), and T0's own proposals in PR #81. Sections marked **To do** are open, and the split proposed on #40 assigns the worked T1/T2 examples and the T5 triage to @zwright8. Nothing here changes the frozen v1 contract; changes go to a reviewed next version.
+
+## User decision
+
+How does the builder represent every component, and decide, explain and recompute whether a set of selections is compatible?
+
+## Candidate options
+
+| Option | Description | Assessment |
+| --- | --- | --- |
+| A. v1 as-is | The adopted contract and its 45 baseline rules | Executable today, but its build-level mode gate skips 17 self-hosted rules on hybrid builds, and two membership rules fail on omissions from incomplete lists (below) |
+| **B. v1 plus a reviewed next version** (recommended) | Keep v1; collect proposals as rule families and contract decisions (CD-n); release them as a versioned ruleset and contract version | Preserves v1 readers; each change carries examples and migration (CD-7) |
+| C. Replace the contract | Redesign the schema around the proposals | Rejected: discards adopted work and its tests |
+
+## What v1 already provides
+
+- **Catalog item:** `id`, `kind`, `tier`, `name`, `version`, `status`, `billing_class`, `spec`, `license`, `provenance`, `updated_at` (required), plus `description`, `tags` and `extensions`. This covers #40's minimum fields for entity ID, category (`kind`, `tier`), version, lifecycle status and source references (`provenance`). `valid_from`/`valid_to` have no direct field (versioning, below).
+- **Build:** `selections`, `links` (typed relations such as `runs_on`, `served_by`, `stored_in`, `provided_by`, `derived_from`), `objectives`, `policy`, `locks`, `revision`.
+- **Rule:** `id`, `severity` (`error`/`warning`/`info`), `applies_when`, `assert`, `on_unknown` (`block`/`review`/`defer`), `message`, `remediation`, `affected_kinds`. A ruleset has `id`, `version` and `published_at`; individual rules carry no version.
+- **Also:** `catalog-snapshot` (captured items with a revision) and `dependency-graph` (edges with a revision).
+
+## Rule format and outcome semantics (decided)
+
+1. **Severity is fixed per rule; the outcome is separate.** Outcomes are `pass`, `fail`, `unknown`, `skipped`. A passing `error` rule is not a failure.
+2. **One rule per concern.** Missing evidence and "not applicable vs not yet known" are reason codes on the outcome (CD-1), not separate evidence or applicability clauses. A rule is split only when a genuinely different severity is needed (as with D-R2a/b and D-R7a/b in #81).
+3. **`unknown` is reserved for missing eligible evidence or genuine ties.** Conflicting eligible evidence is resolved by #41's conflict order:
+   1. normalise;
+   2. scope;
+   3. version and date;
+   4. authority;
+   5. the conservative value among equal ranks, with the result flagged as disputed.
+4. **Estimates that straddle a limit are decided on the conservative bound and flagged** ("may not fit"), not left `unknown`.
+5. **Passing on documentation.** A rule may pass on eligible, versioned publisher documentation. The result carries "unverified" until it is independently reproduced (governance's second source or reproducible test).
+6. **List completeness.** Absence from a list marked complete from an exhaustive source is `fail`; absence from an unmarked list is `unknown`. Until that metadata exists (CD-3), `rule.engine.model.format` (`intersects`) and `rule.precision.engine` (`contains`) must not fail on omissions from researched arrays.
+7. **Applicability is per component.** Rules key on the component's deployment mode (operator and capacity, #81), not the build-level `deployment_mode`.
+8. **`on_unknown`:** `review` for evidence-dependent rules; `block` only where proceeding is unsafe (for example air-gap isolation, W-R8); `defer` for recommendations.
+
+## Rule families (decided, pending a versioned ruleset)
+
+| Family | Merges | Notes |
+| --- | --- | --- |
+| Memory fit | COMPUTE-01, T1-M2, W-R6 | Per-rank and per-memory-pool; admitted sequences per #81's request-to-sequence accounting; EV-1 rank before the conservative maximum (CD-2) |
+| Joint support | COMPUTE-02, ENGINE-02, T1-M1, D-R3 | One rule keyed by the configuration tuple; D-R3 is its quantization case (CD-3) |
+| Context fit | CTX-01, `rule.model.context.fit`, COMPUTE-03 (KV half) | Separate input/output budgets wait on CD-11; context-limit checks stay in v1's rule |
+| Long-context configuration | CTX-02 | Unknown scaling configuration is evaluated against the native limit |
+| Multi-device plan | COMPUTE-04 | Expressed through #81's `placement` |
+| Loader, adapters, API features | ENGINE-01, ENGINE-03, ENGINE-04 | Adapter lineage under CD-6; structured output read from the workload profile |
+| Hosting | Private networking, mounted-storage locality (generalised from Runpod), offering membership | Completeness gate applies; offering presence is not residency |
+| Route and offering | T1-O1, T1-O2 (split) | Offering via `provided_by` and the opaque-endpoint key; licence conditions under D-R2a/b |
+| Licence and rights | D-R1, D-R2a/b | Any mode where the weights' licence binds; inherited through `derived_from` (CD-6, #30) |
+| Residency and isolation | D-R6, W-R8 | Processing and storage evaluated separately |
+| Workload | W-R1 to W-R5, W-R7, W-R9, W-R10 | As proposed in #81 |
+| Price classification | CTX-04 | #39 owns rates; budget checks use the higher tier when estimates straddle |
+
+**To do (@zwright8):** triage T5's rule and contract-change proposals (#68, #76, #77) into these families or new ones.
+
+## Contract decisions
+
+CD-1 to CD-12 are defined in #81 (`deployment-mode.md`, "Open contract decisions") and remain the single list. Additions from the reviews:
+
+| Source | Decision | Routed to |
+| --- | --- | --- |
+| T2-C01 | Price dimensions; canonical storage unit is decimal GB, with the source value kept | #39, then #40 |
+| T2-C02 | Capacity intervals in the next ResourceEstimate | CD-2/CD-3 |
+| T2-C03 | Allocation and topology | CD-2 |
+| T2-C04 | Conditional engine support | CD-3, CD-6 |
+| T2-C05 | Host completeness and mount relationships | CD-3, CD-6, CD-9 |
+| T2-C06 | Multi-version intake and retention | CD-7, #41, #42 |
+| T1 gaps 1–4 | Offering identity, budgets, tokenizer and lineage, price applicability | CD-6, CD-11, CD-5/CD-6, #39 then CD-7 |
+
+## Cycles and recomputation (Proposal)
+
+- **Rules evaluate; they never change selections.** Model ↔ GPU ↔ engine is a cycle in the dependency graph, not in evaluation. Every rule is a function of the current selections, links, catalog snapshot and evidence, so evaluation needs no ordering and always terminates.
+- **Recompute by participants.** Index each rule by the selections and fields it reads (`affected_kinds` plus its pointers). When a selection, link, catalog item, evidence record, policy or ruleset version changes, re-evaluate only the rules that read it.
+- **Recommendations are separate from verdicts.** Ranking or suggesting alternatives may search over candidates, but the verdicts it shows come from the same pure evaluation.
+
+## Versioning (Proposal)
+
+- **Rules:** v1 versions rulesets, not rules. Keep that. Give each published ruleset a semantic version and changelog; a saved build pins the ruleset version it was evaluated with (#42) and is re-evaluated on upgrade.
+- **Catalog:** keep one version per ID until CD-7 adds ID+version resolution, then retain every version referenced by a saved build, evidence record or rule. A new release changes no existing outcome by itself.
+- **Validity windows:** derive `valid_from`/`valid_to` from catalog snapshot revisions rather than adding per-item fields, unless CD-7 decides otherwise.
+
+## Contribution format
+
+Use `templates/rule-proposal.md`, plus these conventions:
+- one fixed severity per rule;
+- reason codes rather than extra clauses;
+- examples covering pass, fail, unknown, skipped, and a disputed case where evidence can conflict;
+- new contract needs stated as CD candidates with migration notes.
+
+## To do
+
+- Worked rule examples spanning T1/T2: model ↔ engine format, model ↔ GPU memory, context ↔ KV cache, including `unknown` handling (@zwright8).
+- T5 triage (@zwright8).
+- Contract-version plan and migration examples (CD-7).
+
+## Acceptance criteria coverage
+
+| Criterion (issue #40) | Where | Status |
+| --- | --- | --- |
+| Schema document with field types and examples | What v1 provides; #81 field dictionaries | Partial |
+| Worked rule examples spanning T1/T2, including `unknown` | To do | Open |
+| Approach to cycles and recomputation | Cycles and recomputation | Proposed |
+| Rule and catalog versioning | Versioning | Proposed |
+| Contribution format | Contribution format | Proposed |
+| Deployment modes covered | Rule format, item 7; #81 | Proposed |
+| Rule format, severities, `unknown` handling | Rule format and outcome semantics | Decided in reviews |
+| Primary sources with access dates | Contract files at the merged revision; reviews linked | Partial |
+| Handoffs confirmed | — | Open |
+| Open questions with owners | Contract decisions; #81 | Partial |
+| Decision record merged | — | Open |
