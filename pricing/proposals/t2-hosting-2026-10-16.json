@@ -17,7 +17,7 @@
       "provenance": {
         "source_uri": "https://huggingface.co/docs/inference-endpoints/pricing",
         "checked_at": "2026-10-16T12:39:46Z",
-        "verification_status": "verified",
+        "verification_status": "unverified",
         "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
       },
       "conditions": [
@@ -40,7 +40,7 @@
       "provenance": {
         "source_uri": "https://docs.runpod.io/storage/network-volumes",
         "checked_at": "2026-10-16T12:39:46Z",
-        "verification_status": "verified",
+        "verification_status": "unverified",
         "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
       },
       "conditions": [
@@ -64,7 +64,7 @@
       "provenance": {
         "source_uri": "https://developers.cloudflare.com/r2/pricing/",
         "checked_at": "2026-10-16T12:39:46Z",
-        "verification_status": "verified",
+        "verification_status": "unverified",
         "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
       },
       "conditions": [
@@ -87,7 +87,7 @@
       "provenance": {
         "source_uri": "https://developers.cloudflare.com/r2/pricing/",
         "checked_at": "2026-10-16T12:39:46Z",
-        "verification_status": "verified",
+        "verification_status": "unverified",
         "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
       },
       "conditions": [
@@ -110,7 +110,7 @@
       "provenance": {
         "source_uri": "https://developers.cloudflare.com/r2/pricing/",
         "checked_at": "2026-10-16T12:39:46Z",
-        "verification_status": "verified",
+        "verification_status": "unverified",
         "notes": "Observed published list rate at capture time; valid_from is observation start, not asserted vendor effective date."
       },
       "conditions": [

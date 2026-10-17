@@ -20,21 +20,21 @@
     {
       "source_uri": "https://huggingface.co/docs/inference-endpoints/faq",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "AWS portion of documented endpoint regions only. Service is managed; host operating-system access is not exposed."
     },
     {
       "source_uri": "https://huggingface.co/docs/inference-endpoints/guides/private_link",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "AWS private endpoints support intra-region PrivateLink. Actual endpoint/network setup remains a deployment check."
     },
     {
       "source_uri": "https://huggingface.co/docs/inference-endpoints/pricing",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Dedicated replica compute is metered; L4 rate does not prove availability in either region."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }
