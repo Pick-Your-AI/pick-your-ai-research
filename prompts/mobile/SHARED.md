@@ -1,5 +1,7 @@
 # Shared mobile delivery execution rules
 
+Mobile planning issues now live in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`. See the [migration record](MIGRATION.md). Repository creation resolves location only; framework, modules and service placement remain gated. Existing acceptance-record paths are preserved. Historical snapshots below do not override the live migration.
+
 Read this file with the platform program prompt, selected epic prompt, and that issue's entry in [the index](INDEX.md). These rules apply to every program, epic and assigned work package. Publication is proposed guidance, not invocation, assignment, implementation evidence or release authority. A narrower user mandate controls execution.
 
 ## Inspect and take ownership
@@ -11,7 +13,7 @@ Read this file with the platform program prompt, selected epic prompt, and that 
 
 ## Reconcile prerequisites and architecture
 
-The device is a planning client, not automatically the inference target. Resolve repository/module/framework and service-placement decisions before dependent implementation. Android placement is [Pick-Your-AI/pickyour.ai#67](https://github.com/Pick-Your-AI/pickyour.ai/issues/67), services [Pick-Your-AI/pickyour.ai#68](https://github.com/Pick-Your-AI/pickyour.ai/issues/68); Apple placement is [Pick-Your-AI/pickyour.ai#184](https://github.com/Pick-Your-AI/pickyour.ai/issues/184), service integration [Pick-Your-AI/pickyour.ai#185](https://github.com/Pick-Your-AI/pickyour.ai/issues/185). Neither platform prompt approves a framework. Keep runtime code out of research. The website remains static unless a separately accepted architecture decision changes its boundary; a static host is not a stateful write API.
+The device is a planning client, not automatically the inference target. Resolve repository/module/framework and service-placement decisions before dependent implementation. Android placement is [Pick-Your-AI/pick-your-ai-android#34](https://github.com/Pick-Your-AI/pick-your-ai-android/issues/34), services [Pick-Your-AI/pick-your-ai-android#35](https://github.com/Pick-Your-AI/pick-your-ai-android/issues/35); Apple placement is [Pick-Your-AI/pick-your-ai-apple#22](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/22), service integration [Pick-Your-AI/pick-your-ai-apple#23](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/23). Neither platform prompt approves a framework. Keep runtime code out of research. The website remains static unless a separately accepted architecture decision changes its boundary; a static host is not a stateful write API.
 
 For every prerequisite record the exact consumed artifact, revision, availability, required acceptance stage and receiving review. Preserve native parents and legitimate blockers. An edge gates its named output, not unrelated upstream UI/store delivery or automatic closure of an entire program. Information handoffs and compatibility relationships remain links; do not create blanket blockers or cycles. Preparation and synthetic harnesses may proceed only within the issue's authority and without claiming final integration. Continue independent authorized work while an external input is pending.
 
