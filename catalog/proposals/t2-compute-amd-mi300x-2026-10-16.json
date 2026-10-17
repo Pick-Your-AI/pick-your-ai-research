@@ -32,5 +32,5 @@
       "notes": "C05. Directly inspected ROCm6.3.0 supported-GPU row:MI300X/CDNA3/gfx942. Supports /spec/backends=rocm only; exact engine/OS/kernel/driver tuple remains unverified. C22's hardware table labels192GiB while C03 datasheet says up-to192GB; catalog retains datasheet-advertised192 without implying exact free bytes or silently converting that conflicting label. Unit/allocatable-memory decision remains #40."
     }
   ],
-  "updated_at": "2026-10-16T13:19:13Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }
