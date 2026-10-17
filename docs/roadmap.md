@@ -43,3 +43,9 @@ Design, security, persistence and testing run throughout. Shared catalog/backend
 is reused across Apple, Android and web; existing issues keep their owners and
 hierarchy. Implementation can proceed against fixtures while evidence is incomplete,
 but fixture success and merged research do not establish production readiness.
+
+## Contributor leaderboard delivery
+
+The [leaderboard project](https://github.com/orgs/Pick-Your-AI/projects/6) and [program](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard/issues/1) track contributor recognition in the dedicated [pick-your-ai-leaderboard repository](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard). The initial plan contains 98 metric definitions, 20 epics, 112 work packages, and 474 implementation checklist tasks. Current scope, prerequisites, validation, and release gates are maintained there.
+
+Publishing the plan is separate from implementing metric collection, validating source attribution and coverage, and releasing a live dashboard. Research acceptance still requires its existing evidence and owner review; contribution counts are not a substitute for either.
