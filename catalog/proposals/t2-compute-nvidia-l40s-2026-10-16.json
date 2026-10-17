@@ -22,15 +22,15 @@
     {
       "source_uri": "https://www.nvidia.com/en-us/data-center/l40s/",
       "checked_at": "2026-10-16T12:39:54Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "C01 in gpu-compute.md. Checked /name and /spec accelerator_type,vendor,model_name,vram_gb,precisions,rated_power_w,interconnect against full specifications. 48 advertised GB, maximum power350W, PCIeGen4x16; not free runtime bytes. Published specification, not independent measurement. Native precision does not assert quantization/kernel compatibility. Snapshot status active means vendor currently describes product; billing classification unknown. Source material reuse requires #41 review; no page copy redistributed."
     },
     {
       "source_uri": "https://developer.nvidia.com/cuda/gpus",
       "checked_at": "2026-10-16T12:39:54Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "C04. /spec/backends=cuda; NVIDIA lists L40S as compute capability8.9. No claim about an installed driver/runtime or a joint model-engine deployment."
     }
   ],
-  "updated_at": "2026-10-16T12:39:54Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }
