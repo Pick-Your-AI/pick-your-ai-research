@@ -164,7 +164,7 @@ The proposed location is a `workload` object owned by the build (Recommendation 
 | `actions` | enum `none`, `read_only`, `write` | — | Always | User input | — |
 | `customisation` | enum `none`, `prompt_only`, `fine_tune` | — | Always | User input | `fine_tuning` value only |
 | `requests` | `{count: integer ≥ 0, period: day \| month}`, unit: requests | — | Always | User input or preset | `requests_per_day` (three copies) |
-| `peak_concurrency` | integer ≥ 1, requests in flight at the service (demand) | Not the engine's admission limit: memory is sized on admitted sequences (W-R6) | Always | User input or preset | `concurrency` / `max_concurrency` |
+| `peak_concurrency` | integer ≥ 1, requests in flight at the service (demand) | Requests, not sequences; expand using the selected decoding configuration, then apply sequence admission in the same serving scope (W-R6). Missing expansion leaves sizing unknown. | Always | User input or preset | `concurrency` / `max_concurrency` |
 | `input_tokens` | `{mean: decimal, max: integer}`, tokens per request | 1 ≤ mean ≤ max; includes history when `turns` is `multi` | Text input | User input; any conversion from words is an Estimate (E6) | `avg_input_tokens`; context policy `requested_context_tokens` (C2) |
 | `output_tokens` | `{mean: decimal, max: integer}` or `not_applicable` | 0 ≤ mean ≤ max; counts every generated token, including reasoning or thinking tokens, whether or not they are shown | Whenever generated tokens are expected, whatever the task; `not_applicable` only when the serving operation generates no tokens (see below) | User input | `avg_output_tokens`; context policy `reserved_output_tokens` (C2) |
 | `native_input_units`, `native_output_units` | `{images_per_request, audio_seconds, video_seconds}`, each as `{mean: decimal, max}`; `max` is an integer for image counts and a decimal for durations | All values ≥ 0; mean ≤ max | Non-text input or output | User input; token conversion is per model (#7) | — |
@@ -238,7 +238,7 @@ Both `unknown` and `missing` must evaluate as unresolved, giving the outcome `un
 **Context length and concurrency set memory use, alongside the weights.**
 - The PagedAttention paper calculates the KV cache of OPT-13B at 800 KB per token in FP16, and up to 1.6 GB for one 2,048-token request. It notes that the cache grows during generation (E4).
 - Its authors report that the existing systems they profiled used only 20.4%–38.2% of KV cache memory for token states (E5, Vendor claim). Memory needs therefore depend on the engine too.
-- **Demand is not admission.** `peak_concurrency` is demand: requests in flight at the service. The engine's admission limit, a launch option in the configuration key (companion note), caps how many sequences hold KV cache at once; beams and parallel samples count as separate sequences. Requests above the limit queue and show up as latency (W-R7), not memory. Memory is sized on admitted sequences, and on `peak_concurrency` when the admission limit is unknown (W-R6).
+- **Demand is not admission.** `peak_concurrency` counts requests in flight at the service. W-R6 expands those requests into sequence demand using the selected decoding configuration, then applies the engine's sequence admission limit in the same serving scope. Beams and parallel samples count separately. An unknown admission limit uses expanded peak sequence demand as a conservative fallback, only when expansion is known. Queued work affects latency (W-R7); only work proven to hold no resident KV is excluded from memory.
 
 **Separate input and output lengths.**
 - The v1 evaluator adds `requested_context_tokens` and `reserved_output_tokens` (C7).
@@ -292,7 +292,7 @@ None of these is an independent measurement, and none sets a general ordering of
 | `interaction_pattern` | Latency vs throughput sizing; cost | #10, #11, #39 | `batch` value; no rule |
 | `modalities_*`, `output_format` | Pipeline filter (W-R1) | #6, #13 | Modalities; no rule |
 | `knowledge`, `actions`, `customisation` | Recommend T3, T4, T5 (W-R2 to W-R5) | #13, #16, #25–#28, #30–#33, #35 | — |
-| `requests`, `peak_concurrency`, lengths | Memory, device count, cost | #10, #11, #39 | No rule |
+| `requests`, `peak_concurrency`, lengths | Memory, device count, cost; #10/#11 expand request demand using decoding settings and apply admission in sequence units for the same serving scope (W-R6) | #10, #11, #39 | No rule |
 | `latency_targets`, `throughput_target`, `completion_window_hours` | Model, quantization, device and engine choice; monitoring; evaluation | #6, #10, #11, #36, #38 | `latency_budget_ms`; no rule |
 | `quality_target` | Which artifacts qualify, once comparable evidence exists | #36 | — |
 | `precision_preference` | Labelled preference filter | #11 | — |
@@ -434,7 +434,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
   - eligible measurements or memory estimates (EV-1 in the companion note).
 - **Applies when:** any component has a concrete device placement, whatever `hardware.mode` is. Devices acquired or rented for the build are included.
 - **Assertion:** for each memory pool, the peak memory of all components that can be resident at the same time, plus that pool's `reserved_memory_gb`, is at most the pool's capacity.
-  - Peak memory comes from eligible measurements or estimates at the workload's maximum lengths and its admitted sequences: the engine's admission limit, counting beams and parallel samples separately, and never more than `peak_concurrency`. When the admission limit is unknown, `peak_concurrency` is used.
+  - Peak memory comes from eligible measurements or estimates at the workload's maximum lengths and the resident sequence envelope derived below. Request concurrency is never a direct cap on sequence count.
   - Estimates must meet the build's `min_resource_confidence` (C5). If eligible evidence for a component disagrees, the highest peak decides and the result is flagged as disputed (EV-1).
   - Until CD-2 defines co-residency scenarios, components marked `on_demand` are counted as resident (a conservative maximum).
   - Devices sharing a `memory_pool_id`, such as unified memory, are summed together.
@@ -448,6 +448,30 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
   - Fail: on a 24 GB unified-memory machine, 18 GB used by the CPU path and 8 GB by the GPU path. They share one pool.
   - Unknown: the embedder has no eligible measurement or estimate.
   - Skipped: no device placement yet.
+
+**Request-to-sequence accounting (Proposal; #10/#11 handoff).** For one serving component and admission domain (a single engine instance, replica, or explicitly shared scheduler), let `R` be its peak request demand, `E` its maximum simultaneous KV-holding sequences per request, and `A` its engine admission limit in sequences. All three must describe the same workload, decoding settings and admission scope. A service-wide `peak_concurrency` cannot be combined with a per-replica limit without an explicit routing/load allocation; absent that allocation, sizing is `unknown`.
+
+- Single-sequence decoding has `E = 1` only when that configuration is established.
+- Independent parallel sampling of `n` outputs has `E = n` when the selected engine runs all samples simultaneously. Serial samples can have `E = 1` only with evidence that prior sample KV is released. Candidate generation such as best-of must count simultaneously live candidates, not merely returned outputs.
+- A beam search maintaining `b` live beams has `E = b`. Returning `n` hypotheses from that shared beam search does not imply `n * b` live sequences. Separate concurrent beam-search groups require their actual total live beam count. Combined, speculative or other decoding modes require a version-specific occupancy model; no universal `n * num_beams` multiplier is assumed.
+
+For homogeneous requests, expanded demand is `D = R * E` sequences. For mixed request classes, sum `R_i * E_i` over their explicitly concurrent envelopes, within the same admission domain; missing class expansion or concurrency is `unknown`. With a known applicable `A`, use `S = min(D, A)` sequences for the resident KV envelope. With unknown `A` but known `D`, use `S = D` as the conservative peak-demand fallback and label admission unknown; do not silently substitute `R`. Unknown expansion leaves `D` and `S` unknown even if `A` is known. This fallback supplies a sizing input, not a memory-fit verdict: EV-1 and `min_resource_confidence` still apply.
+
+The admission cap must bound all KV-holding sequences, including retained/preempted state. A scheduler's per-step batch limit is not automatically such a cap. If queueing or preemption retains KV outside the cap, include that state through an eligible memory model or leave sizing `unknown`. Beams/samples are counted separately as logical sequences; physical prefix sharing or cache preallocation may change bytes, and needs an eligible engine-specific model. Lower admission can queue or reject whole requests, depending on engine semantics; W-R7 must evaluate that behavior rather than assume each expanded request can be split.
+
+The following are **synthetic arithmetic illustrations**, not measurements or engine capability claims; their fixture inputs live in [`tests/fixtures/wr6-sequence-accounting.json`](../../tests/fixtures/wr6-sequence-accounting.json). Known admission in these examples is assumed to cap all resident KV in one matching domain; hypothetical parallel samples are independently admissible.
+
+| Case | Request demand and expansion | Sequence admission | Resident sequence envelope |
+| --- | --- | --- | --- |
+| One request, four parallel samples | `R = 1`, `E = 4`, `D = 4` | `A = 8` | `S = 4`, never capped to one request |
+| One request, four live beams | `R = 1`, `E = 4`, `D = 4` | `A = 4` | `S = 4` |
+| Admission limited | `R = 3`, `E = 4`, `D = 12` | `A = 8` | `S = 8`; remaining work queues or is rejected under the recorded scheduler policy |
+| Missing admission | `R = 1`, `E = 4`, `D = 4` | Unknown | `S = 4` conservative fallback; admission remains unknown |
+| Missing expansion | `R = 1`, `E` unknown | `A = 4` | Unknown; neither one request nor the cap supplies missing expansion |
+| Missing both inputs | `R = 1`, `E` unknown | Unknown | Unknown |
+| Missing scope allocation | Service demand known; per-replica `R` unknown | Per-replica `A = 8` | Unknown until routing/load allocation is recorded |
+
+Handoff to #11: document decoding mode, live sequence expansion, admission units/domain, whole-request scheduling and KV retention semantics for the exact engine build. Handoff to #10: use that expansion and matching request allocation to derive `D` and `S`, then size KV at maximum lengths with placement, sharing assumptions, overhead and confidence recorded. These remain proposed inputs under CD-2/CD-3; neither handoff is confirmed here.
 
 ### W-R7 Performance evidence matches the configuration and workload
 

@@ -141,15 +141,17 @@ Relationships are read from links:
 
 **The configuration key for self-hosted components covers:**
 - the model artifact: ID, version, file hash, format, quantization, logical and stored bits, and the components loaded;
-- the engine: ID, version, fork or commit, and launch options that affect memory or speed (threads, batch limits, KV cache precision, parallelism);
-- the decoding method and draft artifact;
+- the engine: ID, version, fork or commit, and launch options that affect memory or speed (threads, batch limits, KV cache precision, parallelism), including the sequence admission limit, its domain (engine instance, replica or shared scheduler), and whether queued/preempted KV is retained outside that limit;
+- the decoding method and draft artifact, with mode-specific live sequence expansion per request (parallel samples, live beams or other candidates); returned output count alone is insufficient, and `n * num_beams` is not a universal expansion;
 - the devices: model, memory capacity and configuration (including channel population and NUMA layout), instruction-set features, driver;
 - the placement;
 - the OS;
-- the workload distribution: input and output lengths, concurrency and arrival process;
+- the workload distribution: input and output lengths, request concurrency and arrival process, plus request allocation to each admission domain, derived peak sequence demand and the resident sequence envelope (W-R6 in the companion note);
 - the cache state (warm or cold).
 
 Which fields are essential for comparison and which are display-only is decided in CD-3.
+
+For W-R6, request demand and sequence admission must have matching component, workload and scheduler scope. Expand request demand using the recorded decoding mode before applying the sequence admission cap. If admission is unknown, use expanded peak sequence demand only when expansion is known; missing expansion or scope allocation leaves sizing `unknown`. A per-step scheduler batch limit cannot cap KV retained outside the active batch. The companion note defines the arithmetic, synthetic examples and #10/#11 handoffs; these assumptions are part of evidence matching, not approved contract fields.
 
 **The configuration key for opaque API and managed endpoints covers:**
 - the provider;
@@ -175,7 +177,7 @@ EV-1 decides whether a piece of evidence may be used by a rule. Every piece of e
 | Type | Examples | Read by | Applies to the build when |
 | --- | --- | --- | --- |
 | Measurement | Fit records, crowdsourced reports, project measurements, quality evaluation results | W-R6, W-R7, W-R10 | Every essential key field equals the build's selection, using the key that suits the component's mode. It was produced under the same protocol identity, or one #41 declares compatible (CD-3). Its grade meets #41's acceptance policy. Until that policy exists, only `project_measured` records qualify, and community reports are informative only (CD-8). |
-| Estimate | v1 resource estimates; memory calculated from artifact size, context and concurrency; figures labelled estimated in a fit record | W-R6 | Its inputs (artifact, engine build, placement, lengths, concurrency) equal the build's selection and workload, its method and version are recorded, and its v1 confidence (`estimated`, `calibrated` or `verified`) meets the build's `min_resource_confidence` (C5, C9). Estimates are not used for latency or throughput targets, which need `service_level` measurements. Estimated figures in community reports stay informative, like the rest of the report (CD-8). |
+| Estimate | v1 resource estimates; memory calculated from artifact size, context and sequence occupancy; figures labelled estimated in a fit record | W-R6 | Its inputs (artifact, engine build, placement, lengths, request concurrency, mode-specific sequence expansion, admission scope/limit or explicit peak-demand fallback, and KV retention/sharing assumptions) equal the build's selection and workload, its method and version are recorded, and its v1 confidence (`estimated`, `calibrated` or `verified`) meets the build's `min_resource_confidence` (C5, C9). Estimates are not used for latency or throughput targets, which need `service_level` measurements. Estimated figures in community reports stay informative, like the rest of the report (CD-8). |
 | Support documentation | Engine support matrices, instruction-set requirements, a draft model's stated target and hardware | D-R3, D-R7a, D-R7b, D-R8 | It is primary documentation from the publisher of the engine, artifact or hardware, and the selection falls within the coverage it declares, such as an engine version, hardware generation or platform. |
 | Legal and provider documents | Licences, model cards stating weight access, terms of service, data-handling pages, region lists | D-R1, D-R2a, D-R2b, D-R5, D-R6 | It is primary documentation from the licensor or provider, and it matches the selected offering, its version or effective date, the jurisdiction, and any account conditions it states (for example paid or unpaid use, or approval for zero retention). |
 
@@ -337,7 +339,8 @@ These fields sit on a serving component's `deployment`, on device selections, on
 | `memory_bandwidth` | device | `{value_gb_per_s: decimal > 0, basis: vendor_peak \| measured}`, gigabytes (10⁹ bytes) per second | — | D30 or measurement | — |
 | `isa_features` | device | set, e.g. `avx2`, `avx512f`, `amx`, `neon`, `sve` | CPUs | Specification or harness | — |
 | `numa_nodes` | device | integer ≥ 1 | CPUs | Harness | — |
-| `engine_build` | engine selection | `{version: string, fork_repo: URL, commit: string, launch_options: object}` | `fork_repo` and `commit` required for forks | D4, D5, D24 | Engine item version |
+| `engine_build` | engine selection | `{version: string, fork_repo: URL, commit: string, launch_options: object}` | `fork_repo` and `commit` required for forks; launch options record sequence admission limit and domain, distinct from request demand and per-step batch limits; unknown limit uses W-R6's expanded-demand fallback only when expansion is known | D4, D5, D24; exact launch configuration and engine-version admission semantics needed for W-R6 | Engine item version |
+| Sequence accounting inputs | decoding configuration and workload-to-engine allocation (CD-2/CD-3) | decoding mode/settings; integer live sequences per request ≥ 1; admission domain; peak requests per domain ≥ 1; sequence admission limit ≥ 1 when known | Derive sequence demand before admission per W-R6; mode-specific expansion, KV retention/sharing and whole-request admission assumptions explicit; missing expansion or allocation leaves sizing unknown | #11: exact engine semantics; #10: derived envelope and eligible memory model | — |
 | `artifact_format` | artifact | Serialization: `gguf`, `safetensors`, `onnx`, `pytorch`, `other` | — | Repository files | `model_formats` (C1) |
 | `package_convention` | artifact | `mlx`, `transformers`, `other`, `none` | Separate from serialization: IBM's MLX repository holds safetensors files (D47) | Repository files | — |
 | `quantization` | artifact | `{method: open vocabulary, logical_bits_per_weight: decimal, stored_bits_per_weight: decimal, packing: string}` | bits > 0 | Artifact card (D10, D23, D24) | Fixed enum without bits (C2) |
