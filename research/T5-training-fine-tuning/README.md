@@ -119,7 +119,7 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 | Handoff | From | To | Owner |
 | --- | --- | --- | --- |
 | Per-checkpoint licence, weight access, revision, whether the base distribution at that revision includes a NOTICE file, provider fine-tuning lifecycle | #30, #33 | #6, #5 | @zwright8 |
-| Accelerator facts (VRAM, dtype, peak FLOP/s), compute profiles, hosting regions; adapter and merged VRAM | #31, #33 | #10, #9 | @Mattycodes69 |
+| Missing accelerator and compute-profile records for the priced SKUs; a peak dense TFLOP/s field; missing hosting and storage records; adapter and merged VRAM | #31, #33 | #10, #9 | @Mattycodes69 |
 | Adapter and format support facts for `inference_engine` items | #33 | #11 | @Mattycodes69 |
 | Training vs retrieval rights boundary; `data_source` for training sources | #32 | #13 | @zabyxc01 |
 | Leakage method and eval-set freeze; pre-deployment evaluation gate | #32, #33 | #36 | @PUSHINGSQUARES |
