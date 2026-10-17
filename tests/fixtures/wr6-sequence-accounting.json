@@ -1,0 +1,18 @@
+{
+  "synthetic": true,
+  "purpose": "W-R6 arithmetic illustrations only; no measured evidence or engine capability claims",
+  "assumptions": [
+    "Known admission limits cap all resident KV sequences in one matching domain",
+    "Parallel samples in these hypothetical cases are independently admissible",
+    "Null represents unavailable fixture input, not a proposed contract encoding"
+  ],
+  "cases": [
+    {"id": "one-request-four-samples", "mode": "parallel_sampling", "requests": 1, "expansion": 4, "admission": 8, "scope_matches": true, "expected_demand": 4, "expected_resident": 4},
+    {"id": "one-request-four-beams", "mode": "beam_search", "requests": 1, "expansion": 4, "admission": 4, "scope_matches": true, "expected_demand": 4, "expected_resident": 4},
+    {"id": "admission-limited", "mode": "parallel_sampling", "requests": 3, "expansion": 4, "admission": 8, "scope_matches": true, "expected_demand": 12, "expected_resident": 8},
+    {"id": "missing-admission", "mode": "parallel_sampling", "requests": 1, "expansion": 4, "admission": null, "scope_matches": true, "expected_demand": 4, "expected_resident": 4},
+    {"id": "missing-expansion", "mode": "unknown", "requests": 1, "expansion": null, "admission": 4, "scope_matches": true, "expected_demand": null, "expected_resident": null},
+    {"id": "missing-both", "mode": "unknown", "requests": 1, "expansion": null, "admission": null, "scope_matches": true, "expected_demand": null, "expected_resident": null},
+    {"id": "missing-scope-allocation", "mode": "parallel_sampling", "requests": null, "expansion": 4, "admission": 8, "scope_matches": false, "expected_demand": null, "expected_resident": null}
+  ]
+}
