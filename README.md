@@ -73,6 +73,12 @@ rather than duplicated, and client-specific integration is tracked separately.
 Implementation repository, platform, technology and conditional-feature decisions
 remain explicit work packages. See the [roadmap](docs/roadmap.md) for release gates.
 
+### Contributor recognition and leaderboards
+
+The dedicated [pick-your-ai-leaderboard repository](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard), [delivery project](https://github.com/orgs/Pick-Your-AI/projects/6), and [program](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard/issues/1) plan public recognition across pull requests, code changes, reviews, issues, triage, documentation, research, and maintenance. The initial scope defines **98 metrics, 20 epics, 112 work packages, and 474 implementation checklist tasks**. Publishing this plan does not establish a deployed leaderboard or complete historical coverage.
+
+Metric definitions and correction rules belong to the leaderboard repository. Source links and coverage limitations must accompany recognition; unavailable activity is not zero, and activity counts do not establish research quality or acceptance. Research deliverables, ownership, contracts, and evidence review continue to follow this repository's workflow. Leaderboard implementation belongs in its dedicated repository and links to existing research instead of duplicating it.
+
 ## Where submissions go
 
 | Material | Location |

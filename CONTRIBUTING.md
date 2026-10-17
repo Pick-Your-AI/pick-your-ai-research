@@ -15,6 +15,8 @@ and 110 work packages align with the Android plan; they do not replace T0–T6 r
 parents, create runtime work in this repository, or require duplicate shared-service
 issues. Preserve live owners and native relationships when linking existing work.
 
+Contributor recognition has a separate [leaderboard repository](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard), [delivery project](https://github.com/orgs/Pick-Your-AI/projects/6), and [program](https://github.com/Pick-Your-AI/pick-your-ai-leaderboard/issues/1). Its metrics link to source contributions; they do not replace research evidence review, change issue ownership, or determine acceptance. File leaderboard implementation and metric-correction work there, while research deliverables remain at their existing paths in this repository.
+
 | Level | What it is | Label |
 | --- | --- | --- |
 | Workstream (T0–T6) | Parent issue that groups research for one area and records cross-workstream handoffs | `type: workstream` |
