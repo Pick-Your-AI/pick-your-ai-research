@@ -29,7 +29,7 @@ This note is written **local-first**: the T0 owner has chosen to prioritise self
 - **CPU-only and mixed CPU+GPU builds are in scope.** For single-batch generation, memory bandwidth is reported as a main bottleneck (D27–D29), so bandwidth, instruction sets and offload support are key inputs. Measured fit records, not this note, decide how far that holds for a given machine.
 - **Crowdsourced fit reports are a possible additional evidence source.** Several community databases already exist (D36–D41). Agreement between reports is shown, but doesn't decide compatibility until #41 defines an acceptance policy (CD-8).
 - **Self-hosting enables local inference, but doesn't by itself keep data local.** Residency is checked over the build's data flows, including external destinations (D-R6).
-- **Open contract decisions.** Twelve are recorded for #40 and #41 rather than solved here (CD-1 to CD-12; CD-11 was raised on #88 and CD-12 in T5's review of #81).
+- **Open contract decisions.** Thirteen are recorded for #40 and #41 rather than solved here (CD-1 to CD-13; CD-11 was raised on #88 CD-12 in T5's review of #81, and CD-13 by T4 on #40).
 
 ## User decision
 
@@ -597,6 +597,7 @@ These are decisions for #40 and #41, recorded rather than solved in these notes.
 | CD-10 | Runtime requirements for non-model services such as vector databases | D-R7a, matrix | #40 (with #11, #15) |
 | CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides | T1 (#88) | #40 (with #7) |
 | CD-12 | Organisation-level attestations, answered once and reused across conditions: establishment jurisdiction, EU market placement, lawful basis for training data, revenue and monthly active users | T5 review of #81, D-R2a | #40 (with #30, #31, #32) |
+| CD-13 | Rules over several selections of one kind: a quantifier over all enabled selections, and semantic rejection of duplicate `primary` roles before evaluation, so "not selected", "not relevant" and "not yet known" are not collapsed into `skipped` | T4 on #40 | #40 |
 
 ## Pricing and capacity
 
@@ -614,7 +615,7 @@ No prices are recorded. Charge basis, ownership and commitment are independent:
 3. **Keep fit records immutable while retained,** with mode-appropriate keys, and use one eligibility predicate (EV-1), with checks by evidence type, wherever evidence is consumed. Eligible evidence that disagrees is resolved by #41's conflict order.
 4. **Treat CPU-only and hybrid CPU+GPU builds as first-class,** adding bandwidth (in GB/s), instruction sets, NUMA nodes, memory kind and typed placement.
 5. **Adopt crowdsourced reports as informative evidence,** with two protocol types, trust grades, facilitation, incentives (as hypotheses), integrity checks and privacy rules. Let #41 decide when they may decide verdicts (CD-8). Ask #48 and #57 to assess the existing projects, and #41 and #60 whether their data can be linked.
-6. **Take CD-1 to CD-12 to #40 and #41,** alongside D-R1 to D-R8.
+6. **Take CD-1 to CD-13 to #40 and #41,** alongside D-R1 to D-R8.
 7. **Store deployment mode on the build and its selections, not as catalog items.** In v1 it is a catalog kind (C6) needing provenance with a public URL (C7).
 
 ## Structured artifacts
