@@ -836,7 +836,7 @@
       "quantity": "route-specific image/video admission or output",
       "value": "minimum 64x64; 16-pixel dimension increments; maximum 4 MP (publisher notation); <=2 MP recommended",
       "unit": "pixels; megapixels",
-      "conditions": "2048x2048 is an example, not the sole maximum geometry. Do not silently treat publisher 4 MP notation as exactly 4, 000, 000 pixels.",
+      "conditions": "2048x2048 is an example, not the sole maximum geometry. Do not silently treat publisher 4 MP notation as exactly 4,000,000 pixels.",
       "implication": "Distinguish per-axis grid, total area and recommended operating size.",
       "source_ids": [
         "ME-S1"
