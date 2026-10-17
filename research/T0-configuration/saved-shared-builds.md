@@ -6,7 +6,7 @@ Deliverable path: `research/T0-configuration/saved-shared-builds.md`
 
 Labels used in this note:
 - **V** IDs cite the v1 contract in this repository; **X** IDs cite external primary sources; **P** IDs cite project decisions and drafts.
-- **SB-n** IDs are this note's open decisions, routed to #40 unless stated. They are separate from #81's CD-1 to CD-11, which this note references but does not renumber, extend or settle.
+- **SB-n** IDs are this note's open decisions, routed to #40 unless stated. They are separate from #81's CD-1 to CD-12, which this note references but does not renumber, extend or settle.
 - **SB-Rn** IDs are rule proposals for #40 review.
 - **Proposal:** a design choice made in this note, not a sourced fact.
 - "Source checked" means the claim was compared with the cited source on its access date. Nothing here is independently reproduced ("verified" in the #41 interim sense, P3).
@@ -16,7 +16,7 @@ Labels used in this note:
 - **A saved build is an immutable `BuildSnapshot` revision plus the derived records that cite that revision.** Every edit creates a new revision; old revisions are kept (V5). The v1 locks already pin the catalog snapshot, ruleset version and dependency graph revision (V1).
 - **Two validity views, never merged.** *Historical validity* is the `EvaluationReport` produced under the build's own locks. *Current validity* is a fresh evaluation of the same selections against the currently published catalog snapshot, ruleset and pricebook. A revisit shows both and the per-rule differences. Neither overwrites the other, and nothing in the user's selections changes without consent (V5, V6).
 - **Sharing stores the build server-side behind an opaque link and shares a redacted projection.** Credentials references, endpoints, free text, budgets, residency, data classification and organisation attestations are withheld by default. A recipient who forks gets the withheld inputs as unanswered, so the rules that read them give `unknown`, never `pass`.
-- **Comparisons align selections by kind and role and show "not comparable" with the reason** when currency, pricing period, workload, ruleset version, evidence protocol or cost coverage differ. Modes are compared per serving component using #81's pending definitions (P1).
+- **Comparisons align selections by kind and role and show "not comparable" with the reason** when currency, pricing period, workload, ruleset version, evidence protocol or cost coverage differ. Modes are compared per serving component using #81's merged definitions (P1).
 - **Time alone never invalidates a build.** Under the #41 interim policy, version-pinned facts don't expire and current-state facts are shown "as of" their access date with no TTL (P3). Invalidation comes from publications: a new catalog snapshot, ruleset version, dependency graph revision or pricebook; a lifecycle change; a #60 rights decision; or a build edit.
 - **v1 gaps** (visibility, validation state, assumptions, cost snapshot link, snapshot revision lock, fork lineage, withheld-input state, multi-workload builds) are recorded as SB-1 to SB-10. No schema is patched.
 
@@ -44,7 +44,7 @@ What should a saved or shared build contain, how are builds compared, and what h
 
 ### Deployment modes covered
 
-All four modes appear in the comparison semantics. Mode is a per-serving-component property in #81's proposal; the build's mode is derived (`hybrid` when components differ, `unknown` when any is unknown) (P1). v1 instead has one `deployment_mode` selection with `cardinality: one` (V9). Until #40 decides CD-7, this note reads mode from #81's definitions and labels it pending.
+All four modes appear in the comparison semantics. Mode is a per-serving-component property in #81's merged decision; the build's mode is derived (`hybrid` when components differ, `unknown` when any is unknown) (P1). v1 instead has one `deployment_mode` selection with `cardinality: one` (V9). Until #40 decides CD-7, this note reads mode from #81's definitions and labels it pending.
 
 ## Build record definition
 
@@ -136,7 +136,7 @@ Default treatment. "Opt-in" means the owner explicitly includes the group for th
 | `objectives.monthly_budget_amount`, #81 `budgets`, `settings_cost_policy` amounts | Commercial | Opt-in | |
 | Load inputs: `requests_per_day`, `max_concurrency`, token counts, #81 `requests`, `peak_concurrency`, `input_tokens`, `output_tokens`, latency and throughput targets | Business volume | Opt-in | Usually needed by a recipient to judge fit, but reveals scale |
 | #81 `hardware.devices[]` model names and memory | Configuration | Included | #81 already excludes serial numbers and hostnames (P1) |
-| #81 `licence_answers` (with `grant_ref`), zero-retention or account approvals in `data_terms` conditions | Organisation attestation | Never, and never copied on fork | An attestation is made by one organisation about itself; it can't transfer to the recipient |
+| #81 CD-12 organisation attestations (establishment jurisdiction, EU market placement, lawful basis, revenue, MAU), `licence_answers` (with `grant_ref`), zero-retention or account approvals in `data_terms` conditions | Organisation attestation | Never, and never copied on fork | An attestation is made by one organisation about itself; it can't transfer to the recipient |
 | #81 `destinations[].host`, `external_connections` | Infrastructure | Included without hosts | Mode and residency findings stay explainable |
 | `EvaluationReport.findings[].evidence[].observed` | Derived | Included, unless it echoes a withheld input | The observed value would leak the input |
 | Catalog-sourced values (prices, benchmark figures) in findings or cost lines | Third-party data | Only where #60 grants commercial display (P4) | A share to the public is display |
@@ -225,6 +225,8 @@ Status labels: **contract-derived** restates behaviour stated in the v1 docs (V5
 - **Assertion:** the estimate cites this revision and the locked pricebook, coverage is `complete`, and currency matches. V8: stale or partial quotes yield `unknown`, never budget-pass.
 - **Outcome / severity:** stale or partial: `unknown`, `warning` for display; the budget rule itself keeps its own severity. Currency mismatch in a comparison: `skipped` with reason "not comparable" (no FX policy).
 
+Both estimates and their component lines may still be shown, labelled with pricebook dates and their qualifications. A non-comparable total is not a reason to hide either estimate or its components.
+
 ### SB-R4 Selected components are still offered (hypothesis)
 
 - **Pointers:** the selection's item in the current snapshot: `catalog-item.schema.json#/properties/status`.
@@ -296,7 +298,7 @@ No handoff is confirmed yet.
 | Comparison semantics with examples | Comparison | Drafted, three synthetic examples |
 | Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states | Drafted on the interim policy |
 | Decision record merged | — | Not merged; blocked by #40 |
-| Deployment modes covered | Candidate options; Comparison | Covered using #81's pending definitions |
+| Deployment modes covered | Candidate options; Comparison | Covered using #81's merged definitions |
 | Comparison fields with type, unit, evidence | Comparison fields | Drafted |
 | Rules in #40 format; verified vs hypotheses | Compatibility proposals | Contract-derived vs hypothesis labelled; none reproduced |
 | Primary sources with access dates | Evidence | Done for the claims made |
@@ -323,10 +325,12 @@ No handoff is confirmed yet.
 | X1 | IETF, RFC 9110 HTTP Semantics, §4.1: <https://www.rfc-editor.org/rfc/rfc9110.html> | 2026-10-17 | RFC 9110 | Primary documentation (specification) | Source checked: "RECOMMENDED that all senders and recipients support, at a minimum, URIs with lengths of 8000 octets in protocol elements". A minimum, not a maximum. |
 | X2 | Dify, app management docs: <https://docs.dify.ai/en/cloud/use-dify/workspace/app-management> | 2026-10-17 | Cloud docs, current | Primary documentation | Source checked: export includes app configuration, node settings, model parameters, prompts and knowledge-base connections; excludes third-party API keys, knowledge content and logs; warns on importing an older DSL version |
 | X3 | n8n, export and import docs: <https://docs.n8n.io/build/manage-workflows/export-and-import.md> | 2026-10-17 | docs, current | Primary documentation | Source checked: JSON format; exported files include credential names and IDs; "Remove or anonymize this information from the JSON file before sharing" |
-| P1 | PR #81 drafts, `research/T0-configuration/deployment-mode.md` and `workload-use-case.md` at `e2bcc35b19de564c31fd1c081e97a3fc92b06a9d` | 2026-10-17 | draft revision 5 | Project draft (not merged) | Read only; definitions pending owner review; CD-1 to CD-11 are #81's |
+| P1 | PR #81 drafts, `research/T0-configuration/deployment-mode.md` and `workload-use-case.md` at `028a116` | 2026-10-17 | reviewed revision 028a116 | Project decision record (#81 merged) | Read only; adopted definitions, schema changes remain subject to #40; CD-1 to CD-12 are #81's |
 | P2 | This note's competitor context: `research/market/competitors/dify.md`, `n8n.md`, `skypilot.md` | 2026-10-17 | accessed by those notes 2026-10-16 | Project research | SkyPilot task YAML as a portable config is noted there; not relied on here |
 | P3 | #41 interim policy, PR #75 review: <https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927> | 2026-10-17 | review of `9e66622`, submitted 2026-10-16 | Project owner position | Not an approved contract; no TTL |
 | P4 | #60 decisions, `research/market/rights-validation.md` | 2026-10-17 | terms checked 2026-10-16 | Project decision | Adoption by #41 pending |
 | P5 | `research/market/pcpartpicker.md` (H4; requirement 4) | 2026-10-17 | 2026-10-16 | Project research (hypotheses) | PCPartPicker pages not fetched; robots.txt disallows AI agents. Save/share flows unobserved. |
 | P6 | `research/T5-training-fine-tuning/README.md` (T5 rules `skipped` when removed) | 2026-10-17 | `main` at `f297ac5` | Project research | — |
 | P7 | `prompts/T0.md` Track E on PR #74 (`docs/maintainer-research-prompts`) | 2026-10-17 | unmerged | Project guidance | Guidance, not acceptance |
+
+Review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing does not settle those schema decisions; this remains a draft blocked by #40.
