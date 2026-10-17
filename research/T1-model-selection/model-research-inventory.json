@@ -2002,7 +2002,7 @@
         "image_generation",
         "image_editing"
       ],
-      "input_output": "Text/images -> raster or editable SVG",
+      "input_output": "Text/images -> raster (1K)",
       "access": "API",
       "license_evidence": "Service terms pending",
       "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
@@ -2018,7 +2018,7 @@
         "image_generation",
         "image_editing"
       ],
-      "input_output": "Text/images -> raster or editable SVG",
+      "input_output": "Text/images -> editable SVG",
       "access": "API",
       "license_evidence": "Service terms pending",
       "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
@@ -2034,7 +2034,7 @@
         "image_generation",
         "image_editing"
       ],
-      "input_output": "Text/images -> raster or editable SVG",
+      "input_output": "Text/images -> raster (2K)",
       "access": "API",
       "license_evidence": "Service terms pending",
       "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
@@ -2050,7 +2050,7 @@
         "image_generation",
         "image_editing"
       ],
-      "input_output": "Text/images -> raster or editable SVG",
+      "input_output": "Text/images -> editable SVG",
       "access": "API",
       "license_evidence": "Service terms pending",
       "selection_caveat": "Vector output is materially different from bitmap; exact model variant governs.",
