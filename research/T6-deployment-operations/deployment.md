@@ -564,7 +564,7 @@ None in this pull request. A `deployment_target` catalog item needs `target_type
 |---|---|---|
 | Serving mode | Decided: apply merged #81 per-component operator/capacity definition; no #40 decision outstanding | #3 |
 | T0 needs fields this record depends on: expected peak volume, planned build life and migration window, licensee domicile, MAU or revenue, end-user countries | #2 owner | before #37 merges |
-| Confirm the rollout scope split: mechanics in #37, promotion criteria in #36 and #38 | #37 owner (Ari Leavesley), #36 and #38 owners | at review |
+| Confirm the rollout scope split: mechanics in #37, promotion criteria in #36 and #38 | #37 owners (@PUSHINGSQUARES, @appletechie), #36 and #38 owners | at review |
 | Which prompt storage pattern does the builder default to? This record proposes repository files with hashes, or registry version ids where a registry exists | #37 owner | at review |
 | Azure OpenAI and Foundry SLA figures (the SLA document was not opened) and the current Bedrock SLA (the opened page is dated 2023-10-04) | #37 owner | QC pass |
 | OpenAI usage policies, service terms and key-scope help pages returned 403 | #37 owner | before #37 merges |

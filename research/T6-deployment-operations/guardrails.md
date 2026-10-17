@@ -244,9 +244,9 @@ None in this pull request. A `guardrail` catalog item needs `targets`, `policies
 | Anthropic retention wording: "not retained by default" versus "delete within 30 days" on two Anthropic pages | @PUSHINGSQUARES to raise with Anthropic docs | before G-R21 ships as source checked |
 | Cloudflare AI Gateway Guardrails: which hazard categories and which classifier model it uses; the page does not say, so G-R31 is unknown and its price cannot be tied to a model | @PUSHINGSQUARES, ask Cloudflare or check the dashboard | next revision |
 | Lakera: whether a flag-only mode exists; the defenses page describes blocking, the API page describes returning flags for the application to act on | @PUSHINGSQUARES | next revision |
-| Model Armor pricing and Lakera pricing: not published on pages that render without scripts | #39 owner (@PUSHINGSQUARES) | cost estimate |
+| Model Armor pricing and Lakera pricing: not published on pages that render without scripts | #39 owners (@PUSHINGSQUARES, @appletechie) | cost estimate |
 | Recursion, step and spend limits for agents (G-H7): find a primary source or drop | @PUSHINGSQUARES | next revision |
-| Guardrail pricing units differ (per 1K text records, per 1,000 text units, per M tokens, Neurons, per request, free): hand the normalisation to #39 | #39 owner (@PUSHINGSQUARES) | cost-estimate record |
+| Guardrail pricing units differ (per 1K text records, per 1,000 text units, per M tokens, Neurons, per request, free): hand the normalisation to #39 | #39 owners (@PUSHINGSQUARES, @appletechie) | cost-estimate record |
 
 ### Handoffs
 

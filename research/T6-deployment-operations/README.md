@@ -11,12 +11,12 @@ This summary lists the decisions in the five T6 records, the rules they contribu
 
 | issue | record | v1 kind | decision it supports | source-checked rules | hypotheses | evidence rows |
 |---|---|---|---|---|---|---|
-| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 34 | 2 | 30 |
-| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 86 | 13 | 290 |
-| [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 87 | 21 | 222 |
+| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 35 | 3 | 30 |
+| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 92 | 13 | 290 |
+| [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 90 | 21 | 222 |
 | [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 285 |
 | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 198 |
-| | total | | | 321 | 72 | 1,025 |
+| | total | | | 331 | 73 | 1,025 |
 
 Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy): 1,002 Primary documentation, 19 Independent measurement, 4 Vendor claim. Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
 
