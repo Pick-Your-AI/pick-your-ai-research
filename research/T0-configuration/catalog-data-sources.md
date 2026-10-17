@@ -65,9 +65,10 @@ Where does the builder get component facts and prices, may it reuse them, and ho
 A saved build is re-evaluated when any of these happen:
 - the selected component version changes, or a selected item is deprecated or removed;
 - the evidence for a selected tuple changes, is corrected or is retracted;
-- the ruleset version changes;
+- the ruleset version or dependency-graph revision changes;
 - a current-state fact used by the build changes (price, availability, region, terms);
-- a #60 rights decision changes.
+- a #60 rights decision changes (affected values are hidden in every view, including historical and shared ones);
+- the contract version changes (migration per CD-7).
 
 A newer release alone doesn't invalidate a build; it is shown as "newer version available".
 
