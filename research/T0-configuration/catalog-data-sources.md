@@ -1,7 +1,7 @@
 # T0: Catalog Data Sources & Freshness
 
 Issue: #41 · Contract: v1 1.0.0 (adopted in PR #44) · Assignees: @tynamite, @PUSHINGSQUARES
-Status: draft, revision 1 (adopts the interim policy already applied by T1 and T2) · Last updated: 2026-10-17
+Status: partial decision record for review, revision 2 (adopts the interim policy already applied by T1 and T2) · Last updated: 2026-10-17
 Deliverable path: `research/T0-configuration/catalog-data-sources.md` · Related: `component-schema-compatibility.md` (#40), `research/market/rights-validation.md` (#60), `research/market/integrations.json` (#55)
 
 This revision turns the interim positions posted in the [#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) into #41's record. T1 (#88) and T2 (#75) already apply them, and #60's source decisions are merged. Sections marked **To do (@PUSHINGSQUARES)** follow the split proposed on #41: price-specific freshness, region/currency and price conflicts, next to #39.
@@ -24,8 +24,14 @@ Where does the builder get component facts and prices, may it reuse them, and ho
 - **Checked:** a claim's provenance was confirmed against the cited primary source on its access date.
 - **Verified:** independently reproduced (governance's second source or reproducible test). A rule may pass on checked evidence; the result carries "unverified" until reproduced.
 - **Community reports:** trust grades in #81 (`self_reported` to `project_measured`) are informative until CD-8's acceptance policy says otherwise.
-- **Comparable benchmark claims:** a benchmark figure is comparable only when its reproducibility tuple is fully pinned (R1–R15 in the T6 evaluation draft, #115). Two figures are compared only when exactly one element differs. Protocol identity is encoded under CD-3.
+- **Comparable benchmark claims:** a benchmark figure is comparable only when its reproducibility tuple is fully pinned (R1–R15 in the T6 evaluation draft, #115). For a one-factor comparison, exactly one independent experimental control differs. Precision/quantization, context limit and chat template within R5 are separate controls. Evidence identity fields (source, measurement date and uncertainty) may differ without becoming experimental controls. A known incomplete protocol or known multiple-control change displayed as comparable is `fail` with an explanatory reason; use `unknown` only when the necessary evidence cannot be determined. Statistical eligibility does not grant reuse rights; apply #60 separately. Protocol identity is encoded under CD-3.
 - **Status labels for feature claims:** `Exercised`, `Documented`, `Unsupported`, `Unknown`, as adopted in #67.
+
+## Mapping evidence labels to frozen v1
+
+The research labels above describe the claim's evidence strength. Frozen v1 provenance `verification_status` has `verified`, `user_supplied`, `estimated` and `unverified`; it has no separate `source_checked` value. Existing `verified` entries were admitted under the older workflow's source-check definition. They establish a checked citation only unless linked evidence independently establishes reproduction or corroboration. Never upgrade an existing claim to independently Verified solely because its v1 value is `verified`.
+
+For new source-checked claims without independent corroboration, retain the access date and source in provenance, use `unverified`, and explain the checked claim in the research note. `user_supplied` and `estimated` retain their distinct meanings. Use `verified` for new entries only with linked independent corroboration or reproduction described in the note. Do not mass-relabel historical records; review claim-level evidence when adopting the next-version mapping through #40. The contributor workflow in this PR follows this distinction. No frozen schema or generator is changed.
 
 ## Freshness
 
