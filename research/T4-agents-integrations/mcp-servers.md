@@ -3,6 +3,14 @@
 Issue: #27 · Contract: 1.0.0 · Kinds: `mcp_server`
 Status: draft · Last researched: 2026-10-16
 
+## Evidence status correction
+
+Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims remain `unverified`; the original facts, versions, source access dates and `checked_at` are unchanged. No qualifying independent corroboration or runtime reproduction was supplied. Vendor capability statements remain documented claims, not measurements.
+
+A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
+
+`trusted_external` is a proposed project classification under the criteria in this note, pending #35/#40 review. Registry presence and namespace/package identity checks do not certify security, safe code, benign tools or independently verified behaviour. The catalog value is not a security certification.
+
 ## User decision
 
 Which Model Context Protocol (MCP) servers can supply tools and context to the selected agent framework or client, and how is each one hosted, authenticated and trusted?
@@ -11,7 +19,7 @@ The builder has to answer three joint questions for every selected server:
 
 1. **Can the client talk to it?** Protocol revision (era), transport and the client capabilities the server needs.
 2. **Can the deployment reach and authorize it?** Local subprocess or remote endpoint, who hosts it, and whether the required authorization flow can run in the chosen deployment mode.
-3. **How far should it be trusted?** Who publishes it, how identity is verified, and what its tools can change.
+3. **How far should it be trusted?** Who publishes it, how identity is source-checked, and what its tools can change.
 
 Deployment modes covered (the v1 `spec_deployment_mode.mode` enum is `api`, `managed`, `self_hosted`, `hybrid`):
 
@@ -38,7 +46,7 @@ Published revisions (C1, C2): `2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11
 | 2025-11-25 | legacy | same | Client ID Metadata Documents (CIMD) recommended; OpenID Connect discovery; incremental scope consent; URL-mode elicitation; experimental tasks; tool icons; tool naming guidance | C4 |
 | **2026-07-28** | **modern** | stdio, Streamable HTTP (redefined) | **Stateless**: `initialize` removed, version and client capabilities in every request's `_meta`; mandatory `server/discover`; no protocol sessions (`Mcp-Session-Id` removed); server-to-client requests replaced by Multi Round-Trip Requests; `subscriptions/listen`; tasks moved to an extension; Roots, Sampling, Logging and Dynamic Client Registration **Deprecated** | C3, C7, C11 |
 
-**Era compatibility (C7, verified).** The spec defines "modern" (2026-07-28 and later), "legacy" (2025-11-25 and earlier) and "dual-era" implementations:
+**Era compatibility (C7, source-checked).** The spec defines "modern" (2026-07-28 and later), "legacy" (2025-11-25 and earlier) and "dual-era" implementations:
 
 | Client | Server | Outcome |
 | --- | --- | --- |
@@ -48,7 +56,7 @@ Published revisions (C1, C2): `2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11
 | Legacy | Modern | **Fails** (no fall-forward) |
 | Legacy | Dual-era or legacy | Works |
 
-**Ecosystem state today (verified from SDK artifacts, C31, C32):**
+**Ecosystem state today (source-checked from SDK artifacts, C31, C32):**
 - The TypeScript SDK `@modelcontextprotocol/sdk` 1.32.1 (2026-10-05) sets `LATEST_PROTOCOL_VERSION = '2025-11-25'` and supports 2024-10-07 to 2025-11-25. A separate module declares `DRAFT-2026-v1`.
 - The Python SDK `mcp` 1.30.0 supports 2024-11-05 to 2025-11-25 only. `mcp` 2.3.0 (2026-10-02) contains 2026-07-28 code paths (`subscriptions/listen`, deprecation warnings for sampling and roots) and a handshake path, which suggests dual-era support (its exact version list sits in a separate `mcp_types` package that was not inspected).
 - The reference servers pin the legacy SDK lines: `mcp-server-fetch` and `mcp-server-git` require `mcp<2,>=1.29.0`, and `server-filesystem`/`server-everything` 1.0.0 require `@modelcontextprotocol/sdk ^1.31.0` (C36, C38, C39, C41).
@@ -213,7 +221,7 @@ All accessed 2026-10-16.
 ## Compatibility proposals
 
 These rules are proposed for review by #40.
-- **Verified:** the rule's factual premise is primary-source backed.
+- **Source-checked (unverified):** the rule's factual premise is primary-source backed; it has not been independently reproduced.
 - **Hypothesis:** the rule depends on a policy choice, a proxy field or a field that v1 lacks.
 - Outcomes are `pass/fail/unknown/skipped`. Severity is a separate field.
 - The JSON blocks below were validated together as a ruleset against `contracts/v1/schemas/ruleset.schema.json`. They were also run through `contracts/v1/reference/evaluate.py` on a synthetic, unsaved build (GitHub remote + air-gapped hosting), which produced the expected `fail` for the air-gap rule.
@@ -227,20 +235,20 @@ These rules are proposed for review by #40.
 
 | Rule id | Example | Status | Format | Severity | on_unknown |
 | --- | --- | --- | --- | --- | --- |
-| `rule.t4.mcp.transport.sse-deprecated` | transport lifecycle | Verified | json | warning | review |
+| `rule.t4.mcp.transport.sse-deprecated` | transport lifecycle | Source-checked (unverified) | json | warning | review |
 | `rule.t4.mcp.remote.air-gapped` | (4) hosting unavailable in deployment | Hypothesis (proxy) | json | error | review |
-| `rule.t4.mcp.untrusted.guardrails` | trust | Hypothesis (policy on a verified premise) | json | error | block |
+| `rule.t4.mcp.untrusted.guardrails` | trust | Hypothesis (policy on a source-checked premise) | json | error | block |
 | `rule.t4.mcp.trust-level.required` | trust data completeness | Hypothesis (policy) | json | warning | review |
 | `rule.t4.mcp.credential.secret-ref` | credentials | Hypothesis | json | warning | review |
 | `rule.t4.mcp.mutation.guardrails` | side effects | Hypothesis | json | error | block |
-| `rule.t4.mcp.transport.client-support` | (3) transport unsupported by client | Verified premise | needs contract change via #40 | error | block |
-| `rule.t4.mcp.protocol.era` | version compatibility | Verified | needs contract change via #40 | error | block |
-| `rule.t4.mcp.client-capabilities` | capability compatibility | Verified | needs contract change via #40 | error | review |
-| `rule.t4.mcp.auth.flow-available` | (4) authorization unavailable in deployment | Verified premise | needs contract change via #40 | error | block |
-| `rule.t4.mcp.stdio.colocation` | (4) local process impossible in mode | Verified premise | needs contract change via #40 | error | block |
+| `rule.t4.mcp.transport.client-support` | (3) transport unsupported by client | Source-checked (unverified) premise | needs contract change via #40 | error | block |
+| `rule.t4.mcp.protocol.era` | version compatibility | Source-checked (unverified) | needs contract change via #40 | error | block |
+| `rule.t4.mcp.client-capabilities` | capability compatibility | Source-checked (unverified) | needs contract change via #40 | error | review |
+| `rule.t4.mcp.auth.flow-available` | (4) authorization unavailable in deployment | Source-checked (unverified) premise | needs contract change via #40 | error | block |
+| `rule.t4.mcp.stdio.colocation` | (4) local process impossible in mode | Source-checked (unverified) premise | needs contract change via #40 | error | block |
 | `rule.t4.mcp.registry.identity` | impersonation | Hypothesis | needs contract change via #40 | warning | review |
 
-### rule.t4.mcp.transport.sse-deprecated (Verified)
+### rule.t4.mcp.transport.sse-deprecated (Source-checked (unverified))
 
 - **Participating kinds, roles and JSON pointers:** `mcp_server` (primary) `/spec/transport`; `agent_framework`.
 - **Applicability condition:** an MCP server is selected.
@@ -393,9 +401,9 @@ assert: selection hosting_platform /settings/network_isolation != "air_gapped"
 }
 ```
 
-### rule.t4.mcp.untrusted.guardrails (Hypothesis: policy on a verified premise)
+### rule.t4.mcp.untrusted.guardrails (Hypothesis: policy on a source-checked premise)
 
-- **Premise (verified):**
+- **Premise (source-checked):**
   - Clients MUST treat tool annotations as untrusted unless the server is trusted (C15).
   - Hosts must obtain consent before invoking tools (C18, non-normative).
   - Tool results flow into model context (C15 asks clients to validate results before passing them to the LLM).
@@ -717,13 +725,13 @@ assert: selection hosting_platform /settings/network_isolation != "air_gapped"
 
 - **Participating fields (missing):** `spec_mcp_server.transports` (array) and `spec_agent_framework.mcp_client_transports` (array).
 - **Assertion:** the two sets intersect. Otherwise the outcome is `fail`/error with remediation "choose another packaging of the server, or a framework with that transport".
-- **Verified premise (C56–C59):**
+- **Source-checked (unverified) premise (C56–C59):**
 
 | Framework (docs, 2026-10-16) | stdio | Streamable HTTP | HTTP+SSE | Provider-hosted remote | Status in rule terms |
 | --- | --- | --- | --- | --- | --- |
-| OpenAI Agents SDK (Python) | yes `MCPServerStdio` | yes `MCPServerStreamableHttp` | yes `MCPServerSse` (legacy) | yes `HostedMCPTool` | verified compatible for all three |
-| Google ADK | yes `StdioConnectionParams` | yes `StreamableHTTPConnectionParams` | yes `SseConnectionParams` | not documented | verified compatible for all three |
-| Claude Agent SDK | yes | yes (`type: "http"`) | yes (`type: "sse"`) | not applicable | verified compatible for all three |
+| OpenAI Agents SDK (Python) | yes `MCPServerStdio` | yes `MCPServerStreamableHttp` | yes `MCPServerSse` (legacy) | yes `HostedMCPTool` | source-checked compatible for all three |
+| Google ADK | yes `StdioConnectionParams` | yes `StreamableHTTPConnectionParams` | yes `SseConnectionParams` | not documented | source-checked compatible for all three |
+| Claude Agent SDK | yes | yes (`type: "http"`) | yes (`type: "sse"`) | not applicable | source-checked compatible for all three |
 | LangChain `langchain[mcp]` (beta) | yes (script path) | yes (http/https URL) | not on the page read | — | sse = unknown |
 
 - **Examples (synthetic):**
@@ -737,17 +745,17 @@ assert: intersects(catalog mcp_server /spec/transports,                 # missin
 on_unknown: block   severity: error
 ```
 
-### rule.t4.mcp.protocol.era (needs contract change via #40, Verified)
+### rule.t4.mcp.protocol.era (needs contract change via #40, Source-checked (unverified))
 
 The rule implements the C7 matrix.
 - **Pass:** the version sets intersect, or either side is dual-era with a version shared with the other side.
 - **Fail:** a modern-only client with a legacy-only server, or the reverse.
 - **Unknown:** either side lacks version data.
-- **Verified facts:**
+- **Source-checked (unverified) facts:**
   - The legacy TypeScript SDK line supports up to 2025-11-25 (C31).
   - Python `mcp` 1.30.0 supports up to 2025-11-25.
   - The reference servers are pinned to those lines (C36, C38).
-- **Framework version support:** not verified for any framework (handed to #25).
+- **Framework version support:** not source-checked for any framework (handed to #25).
 
 ```text
 assert: intersects(catalog mcp_server /spec/protocol_versions,            # missing field
@@ -755,7 +763,7 @@ assert: intersects(catalog mcp_server /spec/protocol_versions,            # miss
 on_unknown: block   severity: error
 ```
 
-### rule.t4.mcp.client-capabilities (needs contract change via #40, Verified premise)
+### rule.t4.mcp.client-capabilities (needs contract change via #40, Source-checked (unverified) premise)
 
 - **Assertion:** the server's required client capabilities are a subset of the framework's supported client capabilities.
 - **Premise:**
@@ -770,16 +778,16 @@ assert: subset_of(catalog mcp_server /spec/required_client_capabilities,        
                   catalog agent_framework /spec/mcp_client_capabilities)          # missing
 ```
 
-### rule.t4.mcp.auth.flow-available (compatibility example 4; needs contract change via #40, Verified premise)
+### rule.t4.mcp.auth.flow-available (compatibility example 4; needs contract change via #40, Source-checked (unverified) premise)
 
 - **Assertion:** when the server accepts only `oauth2`, the selected framework and deployment can complete an MCP OAuth flow:
   - an interactive flow with a user present, or
   - an injected, pre-obtained token, or
   - the OAuth Client Credentials extension for non-interactive targets (C19).
-- **Verified premise:**
+- **Source-checked (unverified) premise:**
   - The Claude Agent SDK "doesn't open a browser or run an interactive OAuth flow". The server reports `needs-auth`, and the app must obtain the token itself and pass it in `headers` (C59). This is **conditional**: it passes only with token injection.
   - The OpenAI Agents SDK page has no OAuth section. It accepts headers and an `httpx.Auth` (C56): **conditional**.
-  - ADK lists an OAuth2 auth scheme with token refresh (C58): **verified compatible** at doc level.
+  - ADK lists an OAuth2 auth scheme with token refresh (C58): **source-checked compatible** at doc level.
   - LangChain links an Auth page covering OAuth 2.1 (not read): **unknown**.
   - Stripe, Atlassian and Sentry offer static-token fallbacks (C48–C50). Stripe connected-account calls do not support OAuth (C48).
 - **Deployment-mode interaction:** a `deployment_target.target_type = batch_worker` has no user to complete a browser consent. With an OAuth-only server, the outcome must be `fail` unless the client-credentials extension or a stored refresh token is available.
@@ -796,7 +804,7 @@ assert: any(
 on_unknown: block   severity: error
 ```
 
-### rule.t4.mcp.stdio.colocation (compatibility example 4; needs contract change via #40, Verified premise)
+### rule.t4.mcp.stdio.colocation (compatibility example 4; needs contract change via #40, Source-checked (unverified) premise)
 
 - **Assertion:** a stdio server requires an agent runtime that can spawn a local subprocess on the same host (C10).
 - **Fails when:**
@@ -862,7 +870,7 @@ assert: registry_namespace_matches(catalog mcp_server /spec/registry_name,     #
 | trust_level | Criteria (all must hold) |
 | --- | --- |
 | `internal` | Operated by the user's organisation on its own hosting platform or local machines, from source or images it controls (pinned version or digest), and reachable only inside its trust boundary |
-| `trusted_external` | Maintained by the vendor of the upstream API, or by a named organisation (MCP steering group, Microsoft, Bytebase); publisher identity verified through the official registry namespace or the vendor's own documentation; public source or vendor-operated endpoint; active releases within about 90 days |
+| `trusted_external` | Maintained by the vendor of the upstream API, or by a named organisation (MCP steering group, Microsoft, Bytebase); publisher identity source-checked through the official registry namespace or the vendor's own documentation; public source or vendor-operated endpoint; active releases within about 90 days |
 | `untrusted_external` | Anything else: unverified namespace, third-party proxy of another vendor's API, or archived or unmaintained |
 
 Trust level does not make returned **content** trusted: Playwright and fetch are `trusted_external` yet return untrusted web content. #35 should treat tool output as untrusted regardless of `trust_level`.
@@ -872,7 +880,7 @@ Trust level does not make returned **content** trusted: Playwright and fetch are
 No Pricebook is proposed. The open-source servers are free software (compute cost falls on the host, #9/#10). Pricing units observed, for #39:
 - Atlassian Rovo MCP calls consume Rovo credits, varying with "data volume, reasoning depth, and per-call limits" (C49). Rate not fetched.
 - GitHub remote server billing was not determined (it is served from `api.githubcopilot.com`; billing ties to Copilot plans are unknown).
-- Stripe and Sentry MCP pricing was not stated on the pages read. Underlying API usage is billed under each vendor's normal terms (not verified).
+- Stripe and Sentry MCP pricing was not stated on the pages read. Underlying API usage is billed under each vendor's normal terms (not source-checked).
 
 Prices are unknown, not zero.
 

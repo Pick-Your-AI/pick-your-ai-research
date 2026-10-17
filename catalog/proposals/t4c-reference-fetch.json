@@ -25,21 +25,21 @@
     {
       "source_uri": "https://pypi.org/pypi/mcp-server-fetch/json",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "PyPI latest 2026.10.10 uploaded 2026-10-11, license field MIT, requires mcp<2,>=1.29.0 (legacy-era SDK line). Supports version."
     },
     {
       "source_uri": "https://github.com/modelcontextprotocol/servers/blob/main/src/fetch/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "README: stdio via uvx/pip/docker; tool annotations readOnlyHint true, destructiveHint false, idempotentHint true, openWorldHint true; SSRF caution and private-address guard. Supports transport and auth none."
     },
     {
       "source_uri": "https://github.com/modelcontextprotocol/servers/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Repository README: reference implementations 'not production-ready'; maintained by the MCP steering group; licensing transition MIT to Apache-2.0. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z"
+  "updated_at": "2026-10-17T02:17:46Z"
 }

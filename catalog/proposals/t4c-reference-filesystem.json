@@ -26,15 +26,15 @@
     {
       "source_uri": "https://registry.npmjs.org/@modelcontextprotocol/server-filesystem",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "npm latest 1.0.0 published 2026-10-11; license 'SEE LICENSE IN LICENSE'; depends on @modelcontextprotocol/sdk ^1.31.0; mcpName io.github.modelcontextprotocol/server-filesystem (not found by exact-name lookup in the official registry on 2026-10-16). Supports version."
     },
     {
       "source_uri": "https://github.com/modelcontextprotocol/servers/blob/main/src/filesystem/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "README: directory access control via args or Roots; server requests roots/list at initialization and replaces allowed directories; fails at initialization when no args and no roots support. Supports transport stdio and auth none. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z"
+  "updated_at": "2026-10-17T02:17:46Z"
 }

@@ -27,21 +27,21 @@
     {
       "source_uri": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.github%2Fgithub-mcp-server/versions/latest",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Official MCP Registry entry io.github.github/github-mcp-server, version 2.0.2, status active, published 2026-10-08; remotes[0].type streamable-http at https://api.githubcopilot.com/mcp/ with a secret Authorization header (PAT or App token). Supports version, transport. trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
     },
     {
       "source_uri": "https://github.com/github/github-mcp-server/blob/main/README.md",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "README: remote server hosted by GitHub; configuration shown 'Using OAuth' and 'Using a GitHub PAT' (Authorization: Bearer); GitHub Enterprise Server does not support remote hosting; ghe.com uses copilot-api.<sub>.ghe.com/mcp. Supports auth_methods. auth_methods records the credential types the server accepts from the client or its environment: oauth2 = MCP authorization (OAuth 2.1) or an upstream OAuth login; api_key = a static bearer/personal/agent token passed by header or environment variable."
     },
     {
       "source_uri": "https://github.com/github/github-mcp-server/releases/tag/v2.0.2",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Release v2.0.2 exists and is marked Latest (08 Oct). Supports version."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z"
+  "updated_at": "2026-10-17T02:17:46Z"
 }
