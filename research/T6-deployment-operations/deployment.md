@@ -1,6 +1,7 @@
 # T6 Deployment
 
-Issue: [#37](https://github.com/Pick-Your-AI/research/issues/37) in the T6 Deployment & Operations workstream ([#34](https://github.com/Pick-Your-AI/research/issues/34)). Status: draft, not merged. Access date for every source in this record: 2026-10-16. Rule version 0.1 (the [#40](https://github.com/Pick-Your-AI/research/issues/40) format).
+Issue: [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `deployment_target` · Owner: @PUSHINGSQUARES
+Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Rule version 0.1 (the #40 working format).
 
 ## User decision
 
@@ -161,7 +162,9 @@ Research question 2. Each check names the component it depends on and an "applie
 | severity (rules) | enum | compatible, warning, incompatible, unknown | #40 format; verified only when an opened page states the condition |
 | evidence grade | enum | per #41 (provisional) | not assigned in this draft; #41 policy pending |
 
-## Compatibility rules (hard / warning / unknown)
+## Compatibility proposals
+
+Contract v1 note. These rules use the #40 working format at rule version 0.1, written before contract v1 was imported into this repository. Proposed reading for #40's Ruleset review: `incompatible` is v1 severity `error` and `warning` is `warning`; `unknown` (the sources leave the outcome open) has no v1 severity, so this record proposes `warning` with `on_unknown: review` until the evidence settles it; `compatible` means the rule passes. A rule whose severity cell names a condition becomes two v1 rules with different `applies_when`. Rule ids stay stable. This is a proposal, not a published ruleset.
 
 Shared #40 format, rule version 0.1. Verified rules have an opened page that states the condition. Hypotheses carry what is known and what would verify them. A warning can be accepted with a recorded reason; an incompatible result cannot (the #35 convention). Participants name a T0 field, a catalog entry (T1 to T5), a #35 control or a #36 gate.
 
@@ -516,6 +519,10 @@ Every row was opened on 2026-10-16 by the Sonnet 5.5 sweep. "none" in the date c
 | D-N803 | Amazon Web Services | https://docs.aws.amazon.com/bedrock/latest/userguide/quotas-mantle.html | none | the bedrock-mantle approval condition cited in D-R83: "Approval depends on whether your existing usage justifies the increase, so include recent usage information from CloudWatch or the Service Quotas console with your request." |
 | D-N901 | Ollama | https://docs.ollama.com/context-length | none | the VRAM-tier context defaults cited in D-H17: "Ollama defaults to the following context lengths based on VRAM: < 24 GiB VRAM: 4k context 24-48 GiB VRAM: 32k context >= 48 GiB VRAM: 256k context"; "Tasks which require large context like web search, agents, and coding tools should be set to at least 64000 tokens." (raw-checked 2026-10-16) |
 
+## Pricing and capacity
+
+Deployment costs are priced in [#39](cost-estimate.md): provisioned capacity in line items L17 to L27, and secrets, the rollback overlap and residency multipliers in L65 to L67. The prices quoted in this record are dated samples, not pricebook proposals.
+
 ## Recommendation and rationale
 
 **Order of work.** Settle T0 first (S1), then terms and identity (S3 to S5), then pins (S6 to S8), then the mode's platform steps, then gates, monitoring and rollback (S9 to S12), and only then traffic (S13). No opened page states this order; it is assembled from per-platform pages (Finding 1), and the monitoring-before-traffic ordering reads the AWS anti-pattern (D-D21) as a rule.
@@ -543,7 +550,13 @@ Every row was opened on 2026-10-16 by the Sonnet 5.5 sweep. "none" in the date c
 | not measured | the measurement the user must run (cold start, rollback time, load test) | blocks the readiness rows that depend on it |
 | not applicable | the reason (component absent, predicate false) | none |
 
-## Open questions
+## Structured artifacts
+
+None in this pull request. A `deployment_target` catalog item needs `target_type` (api_endpoint, batch_worker, application or edge). Catalog proposals are a follow-up after #40 settles the mode working rule (Open questions). DeploymentManifest artifacts stay reference material until real inputs exist ([contract mapping](../../docs/CONTRACT_MAPPING.md)).
+
+## Open questions and handoffs
+
+### Open questions
 
 | question | owner | by |
 |---|---|---|
@@ -568,7 +581,7 @@ Every row was opened on 2026-10-16 by the Sonnet 5.5 sweep. "none" in the date c
 | Evidence grades for every row | #41 owner | when the #41 policy lands |
 | Quotes read through the summariser (marked in Evidence) need a raw check | QC pass | before review |
 
-## Handoffs
+### Handoffs
 
 | to | what this record hands over | status |
 |---|---|---|
@@ -581,7 +594,7 @@ Every row was opened on 2026-10-16 by the Sonnet 5.5 sweep. "none" in the date c
 | #2 T0 | the T0 fields listed in Open questions | pending |
 | T1 to T5 owners | lifecycle dates per host (T1); TGI maintenance status (T2, D-R53); embedding model versioned with the index (T3, D-R61, D-R62); feature availability per platform (T4, D-R13); base-model matching (T5, D-R79) | pending |
 
-### Signals handed to #38
+#### Signals handed to #38
 
 | signal | component | unit | threshold source | privacy notes |
 |---|---|---|---|---|

@@ -1,6 +1,7 @@
 # T6 Cost Estimate
 
-Issue: [#39](https://github.com/Pick-Your-AI/research/issues/39) in the T6 Deployment & Operations workstream ([#34](https://github.com/Pick-Your-AI/research/issues/34)). Status: draft, not merged. Access date for every source in this record: 2026-10-16. Rule version 0.1 (the [#40](https://github.com/Pick-Your-AI/research/issues/40) format).
+Issue: [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `cost_policy` · Owner: @PUSHINGSQUARES
+Status: ready for review · Last researched: 2026-10-17 · Access date for every source in this record: 2026-10-16; rows re-read on 2026-10-17 say so. Rule version 0.1 (the #40 working format).
 
 ## User decision
 
@@ -12,7 +13,7 @@ Inputs. The Guardrails ([#35](guardrails.md)), Evaluation ([#36](evaluation.md))
 
 ### Number labels
 
-Every number carries one label. **Published** means copied from a source on the access date. **Estimated** means derived here; the formula is shown next to it and re-computed by `scripts/cost-scenarios.py` from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json). **Builder-set** means a choice the builder or user makes (for example a cache hit ratio). Counts of rows made by the builder from a cited price file or API query (909, 12, 394, 567) are **estimated**: each is the number of rows carrying one unit string, counted by the builder with the query and date given where the count appears, and anyone can recount it. No number in this record is **measured** from a running system.
+Every number carries one label. **Published** means copied from a source on the access date. **Estimated** means derived here; the formula is shown next to it and re-computed by [`cost-scenarios.py`](cost-scenarios.py) from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json). **Builder-set** means a choice the builder or user makes (for example a cache hit ratio). Counts of rows made by the builder from a cited price file or API query (909, 12, 394, 567) are **estimated**: each is the number of rows carrying one unit string, counted by the builder with the query and date given where the count appears, and anyone can recount it. No number in this record is **measured** from a running system.
 
 ### Five findings that shape the record
 
@@ -259,7 +260,7 @@ LLM-judge tokens are billed by the judge provider or platform at its own rate; #
 
 ## Worked scenarios
 
-One scenario per mode on the reference workload, plus the component add-ons. All totals are **estimated**, in USD per month, excluding tax, rounded to two significant figures (C-R40). Each figure is re-computed by `python3 scripts/cost-scenarios.py research/T6-deployment-operations/cost-estimate.scenarios.json` (run from the repository root); the script exits non-zero if a figure in the scenarios file differs from the re-computation, and the figures in this record are copied from that file. The script does not read this markdown. Totals are summed before rounding, so rounded parts need not add up to a rounded total.
+One scenario per mode on the reference workload, plus the component add-ons. All totals are **estimated**, in USD per month, excluding tax, rounded to two significant figures (C-R40). Each figure is re-computed by `python3 research/T6-deployment-operations/cost-scenarios.py research/T6-deployment-operations/cost-estimate.scenarios.json` (run from the repository root); the script exits non-zero if a figure in the scenarios file differs from the re-computation, and the figures in this record are copied from that file. The script does not read this markdown. Totals are summed before rounding, so rounded parts need not add up to a rounded total.
 
 | id | mode | scenario | price rows used | low | expected | high | what moves the range | provenance |
 |---|---|---|---|---|---|---|---|---|
@@ -426,9 +427,11 @@ On reopening: re-price every line from its source, show old and new totals side 
 | number label | enum | published, estimated, builder-set, measured | the formula for estimated |
 | status | enum | verified, hypothesis | verified needs an opened source |
 
-## Compatibility rules (hard / warning / unknown)
+## Compatibility proposals
 
-Format: [#40](https://github.com/Pick-Your-AI/research/issues/40). Severity is one of compatible, warning, incompatible, unknown. Rules owned by #35 to #38 are cited, not restated: residency uplifts and Data Zone quota for residency-pinned endpoints (#37 `D-R9`), reservation scope and non-pausable deployments (#37 `D-R29`), committed Bedrock terms (#37 `D-R31`), scale-to-zero latency (#37 `D-R36`, `D-R37`), judge routing (#36 `E-R14`), currency handling for provider spend limits (#38 `M-R7`), in-process spend (#38 signal `SG56`), stale prices in that spend (#38 hypothesis `M-H14`) and fine-tuned hosting hours (#38 signal `SG119`).
+Contract v1 note. These rules use the #40 working format at rule version 0.1, written before contract v1 was imported into this repository. Proposed reading for #40's Ruleset review: `incompatible` is v1 severity `error` and `warning` is `warning`; `unknown` (the sources leave the outcome open) has no v1 severity, so this record proposes `warning` with `on_unknown: review` until the evidence settles it; `compatible` means the rule passes. A rule whose severity cell names a condition becomes two v1 rules with different `applies_when`. Rule ids stay stable. This is a proposal, not a published ruleset.
+
+Format: [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40). Severity is one of compatible, warning, incompatible, unknown. Rules owned by #35 to #38 are cited, not restated: residency uplifts and Data Zone quota for residency-pinned endpoints (#37 `D-R9`), reservation scope and non-pausable deployments (#37 `D-R29`), committed Bedrock terms (#37 `D-R31`), scale-to-zero latency (#37 `D-R36`, `D-R37`), judge routing (#36 `E-R14`), currency handling for provider spend limits (#38 `M-R7`), in-process spend (#38 signal `SG56`), stale prices in that spend (#38 hypothesis `M-H14`) and fine-tuned hosting hours (#38 signal `SG119`).
 
 ### Verified (every source opened 2026-10-16 or 2026-10-17; rows C-R42 and C-R43 cite sources opened 2026-10-17)
 
@@ -701,6 +704,10 @@ Every row below was opened on 2026-10-16, except C-F2 (HTTP 403 on both dates; i
 | C-N03 | Microsoft (Azure Retail Prices API) | https://prices.azure.com/api/retail/prices?currencyCode='USD'&$filter=serviceName%20eq%20'Virtual%20Machines'%20and%20armSkuName%20eq%20'Standard_D4s_v5'%20and%20armRegionName%20eq%20'eastus'%20and%20priceType%20eq%20'Consumption' ; the same query with currencyCode='EUR' and with currencyCode='GBP' | effectiveStartDate 2021-11-01T00:00:00Z on all three; queried 2026-10-17 (values match the 2026-10-16 read) | Linux row, productName "Virtual Machines Dsv5 Series", unitOfMeasure "1 Hour": "retailPrice":0.192 ... "currencyCode":"USD"; "retailPrice":0.1690 ... "currencyCode":"EUR"; "retailPrice":0.1449 ... "currencyCode":"GBP" |
 | C-N04 | Microsoft (Azure Retail Prices API) | https://prices.azure.com/api/retail/prices?currencyCode='USD'&$filter=serviceName%20eq%20'Virtual%20Machines'%20and%20armSkuName%20eq%20'Standard_D4s_v5'%20and%20armRegionName%20eq%20'swedencentral'%20and%20priceType%20eq%20'Consumption' ; the same query with armRegionName 'westeurope' | effectiveStartDate 2022-01-01T00:00:00Z (swedencentral), 2021-11-01T00:00:00Z (westeurope); queried 2026-10-17 (values match the 2026-10-16 read) | Linux row, productName "Virtual Machines Dsv5 Series", unitOfMeasure "1 Hour", USD: "retailPrice":0.204 (swedencentral); "retailPrice":0.23 (westeurope) |
 
+## Pricing and capacity
+
+This record is the pricing and capacity method: Unit normalisation, Line-item catalog, Worked scenarios and Capacity vs usage above. Its prices are dated samples that prove the units and drive the scenarios. They are not pricebook proposals (see Structured artifacts).
+
 ## Recommendation and rationale
 
 1. **Normalise, do not convert in place.** Keep every price as published (string, unit, quantity, currency, date) and derive canonical per-unit prices with the factor recorded. The unit problem (at least nine incompatible price units, catalogued as U1 to U30) and the unit-field conflicts (C-R2) make any other approach lossy.
@@ -719,7 +726,13 @@ Minimum per mode:
 | self-hosted | GPU instances by whole instance, licence, storage, egress; rollback overlap as a builder-set line (C-H13; #37 `S36` names it for managed mode) | throughput bracket from published rows (C-R30); packaging (C-R29) |
 | all | #35 guardrail, #36 judge, #38 logs and observability, #37 secrets, FX, tax label | free tiers that stop (C-R35); allowance scope (C-R36) |
 
-## Open questions
+## Structured artifacts
+
+No catalog or pricebook proposals in this pull request. A `cost_policy` item needs `default_currency`, which waits on the maintainers' answer to the currency question below (USD proposed). Pricebook proposals under `pricing/proposals/` for the rates the worked scenarios use, and a CostEstimate mapping of W1 to W5, are follow-ups. The scenario calculator ships with this record: [`cost-scenarios.py`](cost-scenarios.py) and its spec [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
+
+## Open questions and handoffs
+
+### Open questions
 
 | question | why it matters | owner |
 |---|---|---|
@@ -731,7 +744,7 @@ Minimum per mode:
 | Set the rollback overlap window (C-H13; #37 gives one advisory figure of about 30 days, `D-O14`) and settle the NVIDIA conflict on whether production NIM needs AI Enterprise (C-H12; #37 `D-S18` against `D-S19`, `D-H7`) | both add capacity or licence lines | #37 owner |
 | Decide whether redistribution of AWS and Azure price data is allowed (C-R16, C-H17) | a shared price catalogue (#41) depends on it | #41 owner |
 
-## Handoffs
+### Handoffs
 
 | to | what | rows |
 |---|---|---|
@@ -740,6 +753,6 @@ Minimum per mode:
 | #36 Evaluation | judge-token and evaluation-service lines; the online-judge cost at 10 percent sampling | L61, L62, L63, L64 |
 | #37 Deployment | capacity lines, residency multipliers, secrets, the rollback overlap formula; confirm the NIM licence scope | L17, L18, L20, L23, L67, L65, L66, L35, L13 |
 | #38 Monitoring | prices per token class, hosting meters and GPU hourly rates with currency and date for `SG56`, `SG91`, `SG119`, `SG55`; the recorded FX rate, date and band for `M-R7`; the snapshot fields that let `M-H14` detect stale prices | catalog T1 and T2 rows; Snapshot proposal |
-| #40 Rule format | the rules of this record in the #40 format (rule version 0.1): 43 rows in Verified (C-R1 to C-R43) and 11 rows in Hypotheses (C-H1, C-H5 to C-H10, C-H12, C-H13, C-H15, C-H17), counted by the builder from the two tables | Compatibility rules |
+| #40 Rule format | the rules of this record in the #40 format (rule version 0.1): 43 rows in Verified (C-R1 to C-R43) and 11 rows in Hypotheses (C-H1, C-H5 to C-H10, C-H12, C-H13, C-H15, C-H17), counted by the builder from the two tables | Compatibility proposals |
 | #41 Price data | price sources, their dates, ids and terms | C-R13, C-R12, C-R15, C-R16, C-R14 |
 | #42 Saved builds | the snapshot fields and the re-pricing behaviour | Snapshot proposal for #42 |

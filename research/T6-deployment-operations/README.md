@@ -1,21 +1,22 @@
 # T6 Deployment & Operations
 
-Workstream: [#34](https://github.com/Pick-Your-AI/research/issues/34) · Owner: @PUSHINGSQUARES · Status: **draft, not merged** · Sources accessed 2026-10-16 (and 2026-10-17 for re-checked rows in #39)
+Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Owner: @PUSHINGSQUARES
+Status: ready for review · Last researched: 2026-10-17 · Sources accessed 2026-10-16 (and 2026-10-17 for re-checked rows in #39)
 
 Product question: is the build safe, measurable, deployable, observable, and affordable?
 
-This summary lists the decisions in the five T6 records, the rules they contribute to [#40](https://github.com/Pick-Your-AI/research/issues/40), the handoffs that other owners need to confirm, and the open questions. The records are the source; this page only points into them.
+This summary lists the decisions in the five T6 records, the rules they contribute to [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), the handoffs that other owners need to confirm, and the open questions. The records are the source; this page only points into them.
 
 ## Records
 
-| issue | record | decision it supports | verified rules | hypotheses | evidence rows |
-|---|---|---|---|---|---|
-| [#35](https://github.com/Pick-Your-AI/research/issues/35) | [Guardrails](guardrails.md) | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 34 | 2 | 30 |
-| [#36](https://github.com/Pick-Your-AI/research/issues/36) | [Evaluation](evaluation.md) | How will the user know whether the build meets its quality, safety, latency and cost targets? | 86 | 13 | 290 |
-| [#37](https://github.com/Pick-Your-AI/research/issues/37) | [Deployment](deployment.md) | What does it take to ship this build, and is it ready? | 86 | 21 | 221 |
-| [#38](https://github.com/Pick-Your-AI/research/issues/38) | [Monitoring](monitoring.md) | Which signals must be watched once the build runs? | 71 | 25 | 285 |
-| [#39](https://github.com/Pick-Your-AI/research/issues/39) | [Cost Estimate](cost-estimate.md) | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 198 |
-| | total | | 320 | 72 | 1,024 |
+| issue | record | v1 kind | decision it supports | verified rules | hypotheses | evidence rows |
+|---|---|---|---|---|---|---|
+| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 34 | 2 | 30 |
+| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 86 | 13 | 290 |
+| [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 86 | 21 | 221 |
+| [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 285 |
+| [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 198 |
+| | total | | | 320 | 72 | 1,024 |
 
 Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
 
@@ -55,7 +56,7 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 - Build low, expected and high from quantities and builder-set drivers, with prices fixed. On the reference workload the API estimate spans 4.3 times (W1: 6,700 to 29,000 USD a month).
 - Show capacity next to its utilisation and break-even. Peak-sized Azure provisioned throughput runs at about a third of its capacity, so reserved PTUs cost about 3 times pay-as-you-go and hourly PTUs about 8.5 times (W2).
 - Price in USD, display in the T0 currency, exclude tax and date every price. The operations lines from #35 to #38 add 9 to 22 percent to an API build (W4).
-- Every worked-scenario figure is re-computed by [`scripts/cost-scenarios.py`](../../scripts/cost-scenarios.py) from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
+- Every worked-scenario figure is re-computed by [`cost-scenarios.py`](cost-scenarios.py) from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
 
 ## Rules contributed to #40
 
@@ -68,6 +69,8 @@ All five records use the same rule format at rule version 0.1: rule id, particip
 | #37 Deployment | D-R1 to D-R86 (86) | D-H1 to D-H24 except D-H5, D-H18, D-H19 (21) |
 | #38 Monitoring | M-R1 to M-R72 except M-R34 (71) | M-H1 to M-H25 (25) |
 | #39 Cost Estimate | C-R1 to C-R43 (43) | C-H1, C-H5 to C-H10, C-H12, C-H13, C-H15, C-H17 (11) |
+
+Contract v1 arrived after these records were drafted. Its Ruleset has severities `error`, `warning` and `info`, and a separate `on_unknown` behaviour. Each record's Compatibility proposals section proposes the same reading for #40: `incompatible` is `error`, `warning` is `warning`, `unknown` is `warning` with `on_unknown: review` until the evidence settles it, and a conditional severity becomes two rules. No v1 Ruleset JSON is included; #40 reviews the rules first.
 
 Missing ids were retired while drafting or during QC: a hypothesis became a verified rule, a rule restated another record's rule, or a source settled the question. Ids are not reused.
 
@@ -129,6 +132,6 @@ Grouped by who can answer them. #38 and #39 name an owner for each question; #35
 
 ## Workstream done when
 
-- [ ] All sub-issues are closed with merged decision records: five drafts exist; none is merged.
+- [ ] All sub-issues are closed with merged decision records: the five records are in review; none is merged yet.
 - [ ] The handoffs above are confirmed by the affected workstream owners.
 - [x] A workstream summary at `research/T6-deployment-operations/README.md` lists decisions, rules contributed to #40, and open questions (this page).

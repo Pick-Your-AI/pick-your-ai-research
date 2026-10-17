@@ -1,6 +1,7 @@
 # T6 Evaluation
 
-Issue: #36 · Workstream: #34 · Owner: @PUSHINGSQUARES · Status: **draft, not merged** · Evidence access date: 2026-10-16 for every URL in this record unless a row says otherwise.
+Issue: [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `evaluation_suite` · Owner: @PUSHINGSQUARES
+Status: ready for review · Last researched: 2026-10-16 · Evidence access date: 2026-10-16 for every URL in this record unless a row says otherwise.
 
 ## User decision
 
@@ -218,7 +219,9 @@ Benchmarks, datasets and leaderboards. "tier" is the reproducibility tier propos
 
 Severity vocabulary follows #40: compatible, warning, incompatible, unknown. Rule version 0.1 throughout.
 
-## Compatibility rules (hard / warning / unknown)
+## Compatibility proposals
+
+Contract v1 note. These rules use the #40 working format at rule version 0.1, written before contract v1 was imported into this repository. Proposed reading for #40's Ruleset review: `incompatible` is v1 severity `error` and `warning` is `warning`; `unknown` (the sources leave the outcome open) has no v1 severity, so this record proposes `warning` with `on_unknown: review` until the evidence settles it; `compatible` means the rule passes. A rule whose severity cell names a condition becomes two v1 rules with different `applies_when`. Rule ids stay stable. This is a proposal, not a published ruleset.
 
 Participants name T0 inputs (workload, mode, region, data sensitivity, zero-retention requirement) and evaluation candidates. Every verified row quotes or paraphrases an opened page; where part of a rule is inferred, the row says so and the inferred part is carried as a hypothesis.
 
@@ -669,6 +672,10 @@ Rows that said "as cited in the pack" (E-F14, E-T6, E-T8, E-B13, E-B14, E-L9, E-
 
 Opened but uncited: E-G6 (LMArena arena-human-preference-140k dataset page, cc-by-4.0 vote data). No cell or paragraph in this record cites it, so the row stays as a record of a page that was opened.
 
+## Pricing and capacity
+
+Evaluation costs are priced in [#39](cost-estimate.md): judge tokens and evaluation services in line items L61 to L64, and the online judge in the W4 add-ons. The prices quoted in this record are dated samples, not pricebook proposals.
+
 ## Recommendation and rationale
 
 The builder should treat evaluation as a per-build plan with four parts: the workload row, the safety pair, the latency-and-cost measurement, and a regression gate on a dataset the user owns.
@@ -692,7 +699,13 @@ The builder should treat evaluation as a per-build plan with four parts: the wor
 | judge from the same family as the generator | "same-family judge" badge with the reason (platform-fixed judge) |
 | a candidate in the status ledger | the ledger status and date, not the vendor's own description |
 
-## Open questions
+## Structured artifacts
+
+None in this pull request. An `evaluation_suite` catalog item needs `metric_names` and `mode` (offline, online or both); the Products and services table supplies these, and catalog proposals are a follow-up. No `quality-evaluation-run` artifact is included: this research ran no evaluation.
+
+## Open questions and handoffs
+
+### Open questions
 
 | question | owner | by |
 |---|---|---|
@@ -710,7 +723,7 @@ The builder should treat evaluation as a per-build plan with four parts: the wor
 | SWE-bench Verified status (E-H11); WebArena Verified Hard subset size | @PUSHINGSQUARES | next revision |
 | Rollout gates (shadow, canary, A/B, rollback): in #37's scope or here | #37 owner | before #37 drafts |
 
-## Handoffs
+### Handoffs
 
 | to | what | status |
 |---|---|---|

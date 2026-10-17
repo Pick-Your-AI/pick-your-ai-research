@@ -1,6 +1,7 @@
 # T6 Monitoring
 
-Issue: [#38](https://github.com/Pick-Your-AI/research/issues/38) in the T6 Deployment & Operations workstream ([#34](https://github.com/Pick-Your-AI/research/issues/34)). Status: draft, not merged. Access date for every source in this record: 2026-10-16. Rule version 0.1 (the [#40](https://github.com/Pick-Your-AI/research/issues/40) format).
+Issue: [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `monitoring_stack` · Owner: @PUSHINGSQUARES
+Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Rule version 0.1 (the #40 working format).
 
 ## User decision
 
@@ -426,7 +427,9 @@ The catalog's `privacy notes` column says what each signal carries. These requir
 | `source` | ids | evidence ids (M-A to M-Z families), or sibling record ids | URL, publisher, access date, version or date |
 | number label | enum | measured, published, estimated | every number in this record is published (with its page) or estimated (derived here); none is measured |
 
-## Compatibility rules (hard / warning / unknown)
+## Compatibility proposals
+
+Contract v1 note. These rules use the #40 working format at rule version 0.1, written before contract v1 was imported into this repository. Proposed reading for #40's Ruleset review: `incompatible` is v1 severity `error` and `warning` is `warning`; `unknown` (the sources leave the outcome open) has no v1 severity, so this record proposes `warning` with `on_unknown: review` until the evidence settles it; `compatible` means the rule passes. A rule whose severity cell names a condition becomes two v1 rules with different `applies_when`. Rule ids stay stable. This is a proposal, not a published ruleset.
 
 Severity follows #40: compatible, warning, incompatible, unknown. An incompatible result blocks; a warning can be accepted with a recorded reason; unknown means a documented conflict or an absence. Participants that are not T0 fields today (retention, availability target, hard-stop flag, high-risk status) are named as such.
 
@@ -832,6 +835,10 @@ Every source below was opened on 2026-10-16 by the research sweep; the `supports
 | M-N905 | Hugging Face | https://huggingface.co/docs/inference-endpoints/autoscaling | No date shown; accessed 2026-10-16 | "the HTTP server will respond with a status code 502 Bad Gateway while the new replica is initializing. Please note that there is currently no queueing system in place for incoming requests." |
 | M-N906 | Amazon Web Services | https://docs.aws.amazon.com/sagemaker/latest/dg/endpoint-auto-scaling-zero-instances.html | No date shown; accessed 2026-10-16 | "Be aware that the provisioning process takes several minutes. During that time, any attempts to invoke the endpoint will produce an error." (the page also names the metric NoCapacityInvocationFailures) |
 
+## Pricing and capacity
+
+Log, metric and observability costs are priced in [#39](cost-estimate.md), line items L68 to L73 and the W4 add-ons. In-process spend (`SG56`) takes its prices from there.
+
 ## Recommendation and rationale
 
 Watch the minimum catalog for the build's mode, page only on symptoms, and audit the privacy state at every deploy.
@@ -855,7 +862,13 @@ Add by component: T3 freshness and quality (SG94 or SG96 or SG97, SG103, SG104);
 
 Rationale. The catalog covers each component and mode with published names where a page states them; rows marked hypothesis are builder-defined (SG138, SG139, SG141, SG146, SG153, SG158, SG159, SG162, SG164) and coverage gaps are listed in Open questions. Thresholds come from T0 because no source publishes an LLM quality, latency or spend threshold other than the tool defaults in finding 1; where T0 has no field, the threshold is builder-set and the gap is an open question rather than a guessed number.
 
-## Open questions
+## Structured artifacts
+
+None in this pull request. A `monitoring_stack` catalog item needs `signals` from the v1 enum (latency, errors, token_usage, gpu_utilization, quality, drift, cost, traces, security). The signal catalog here is finer (165 signals), so mapping each signal to that enum is a follow-up for review with #40.
+
+## Open questions and handoffs
+
+### Open questions
 
 | question | why it matters | owner |
 |---|---|---|
@@ -870,7 +883,7 @@ Rationale. The catalog covers each component and mode with published names where
 | Open the sources this sweep could not: Azure abuse-monitoring retention days, Azure `RequestResponse` schema, OpenAI usage delay, Arize AX and Helicone retention and regions, alert-evaluation delays, Mistral and Cohere monitoring, open-weight API hosts | each closes a hypothesis or a coverage gap | #38 owner |
 | Check inputs #11, #16, #25 and #28 against this record once available | they were not held in this workspace | #38 owner |
 
-## Handoffs
+### Handoffs
 
 | to | what | rows |
 |---|---|---|
@@ -879,6 +892,6 @@ Rationale. The catalog covers each component and mode with published names where
 | #36 | the reading of G12 proposed in finding 3; EV-26 online scoring rows; span ingest against emit beside E-R18; sampling and coverage method | SG131 to SG139, SG141, SG148, M-H24, M-H7 |
 | #37 | coverage of the fourteen handed signals; gate signals for S11, S34, R24, R26 and R33; D-H11 reading | #37 handoff coverage table, SG160 to SG165, SG78, SG140, SG154 |
 | #39 | price inputs and currency handling for in-process spend and self-hosted cost | SG56, SG91, SG119, SG55, M-R7 |
-| #40 | alert-class and threshold-source enums; rules whose participants are not T0 fields yet | Comparison fields; Compatibility rules (71 M-R rows in Verified, 25 M-H rows in Hypotheses) |
+| #40 | alert-class and threshold-source enums; rules whose participants are not T0 fields yet | Comparison fields; Compatibility proposals (71 M-R rows in Verified, 25 M-H rows in Hypotheses) |
 | #41 | evidence grading for the M families | Evidence |
 | T1 to T5 owners | the signals each component must expose, by mode | Signal catalog sections; Minimum catalog per mode |

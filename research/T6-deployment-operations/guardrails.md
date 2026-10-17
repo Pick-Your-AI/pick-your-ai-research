@@ -1,6 +1,7 @@
 # T6 Guardrails
 
-Issue: #35 · Workstream: #34 · Owner: @PUSHINGSQUARES · Status: **draft, not merged** · Evidence access date: 2026-10-16 for every URL in this record unless a row says otherwise.
+Issue: [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `guardrail` · Owner: @PUSHINGSQUARES
+Status: ready for review · Last researched: 2026-10-16 · Evidence access date: 2026-10-16 for every URL in this record unless a row says otherwise.
 
 ## User decision
 
@@ -104,7 +105,9 @@ One row per control. `applies to` names the component the control attaches to. `
 
 Every number in this record is **published** by its source unless marked otherwise. Vendor accuracy figures (Llama Guard 4 recall 69 percent English, Prompt Guard 2 AUC 0.998, NemoGuard JailbreakDetect F1 0.9601, Nemotron 3.5 scores) are vendor claims on vendor test sets and are not comparable across products; #36 owns whether any of them may be displayed.
 
-## Compatibility rules (hard / warning / unknown)
+## Compatibility proposals
+
+Contract v1 note. These rules use the #40 working format at rule version 0.1, written before contract v1 was imported into this repository. Proposed reading for #40's Ruleset review: `incompatible` is v1 severity `error` and `warning` is `warning`; `unknown` (the sources leave the outcome open) has no v1 severity, so this record proposes `warning` with `on_unknown: review` until the evidence settles it; `compatible` means the rule passes. A rule whose severity cell names a condition becomes two v1 rules with different `applies_when`. Rule ids stay stable. This is a proposal, not a published ruleset.
 
 Format from #40: participants, condition, severity, explanation, suggested correction, source, rule version. Severity values: compatible, warning, incompatible, unknown. All rules below are version 0.1.
 
@@ -197,6 +200,10 @@ Not opened, kept as hypotheses: Meta Llama Moderations API and IBM watsonx as ma
 
 Internal input, not evidence: the project brainstorm's security model (authority ladder L0 to L5, eleven named threats, ten required controls). It seeded the first hypotheses and is cited as design intent only.
 
+## Pricing and capacity
+
+Guardrail services are priced in [#39](cost-estimate.md): line items L56 to L60 normalise their units, and the W4 add-ons price one guardrail on the reference workload. The prices quoted in this record are dated samples, not pricebook proposals.
+
 ## Recommendation and rationale
 
 **Baseline for every build, independent of T3 and T4.** harm-classification-input and harm-classification-output (in API mode the provider often supplies the classifier, but OpenAI Moderation, Azure standalone and Mistral Moderation only flag, so the build still needs an enforcement step); system-prompt-no-secrets; zero-trust-output-handling; provider-retention-mode and data-residency-pinning declared against the T0 sensitivity; trace-content-masking whenever logging captures content; operator-stop-and-disengage; guardrail-failure-mode declared for every guardrail in the build.
@@ -217,7 +224,13 @@ Internal input, not evidence: the project brainstorm's security model (authority
 4. Controls the platform supplies in API or managed mode appear as **provided by platform** with the source, so the user can see what they rely on and what they cannot switch off (G-R19).
 5. Severity is shown by label and icon, not colour alone.
 
-## Open questions
+## Structured artifacts
+
+None in this pull request. A `guardrail` catalog item needs `targets`, `policies` and `enforcement` (contract v1). The services table supplies most of these. Some `enforcement` values stay open until the open questions below are settled: failure modes the publishers do not document, the Cloudflare AI Gateway Guardrails categories (G-R31) and Lakera's flag-only mode. Catalog proposals under `catalog/proposals/` are a follow-up.
+
+## Open questions and handoffs
+
+### Open questions
 
 | question | owner | needed by |
 |---|---|---|
@@ -231,7 +244,7 @@ Internal input, not evidence: the project brainstorm's security model (authority
 | Recursion, step and spend limits for agents (G-H7): find a primary source or drop | @PUSHINGSQUARES | next revision |
 | Guardrail pricing units differ (per 1K text records, per 1,000 text units, per M tokens, Neurons, per request, free): hand the normalisation to #39 | #39 owner (@PUSHINGSQUARES) | cost-estimate record |
 
-## Handoffs
+### Handoffs
 
 | consumer | what they get from this record | confirmation |
 |---|---|---|
