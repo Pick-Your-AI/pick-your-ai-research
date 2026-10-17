@@ -1,10 +1,12 @@
 # Mobile prompt publication review
 
+Mobile planning issues now live in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`. See the [migration record](MIGRATION.md). Repository creation resolves location only; framework, modules and service placement remain gated. Existing acceptance-record paths are preserved. Historical snapshots below do not override the live migration.
+
 This review concerns execution guidance, not implementation acceptance. Live source refresh was performed during publication preparation; source `updatedAt` and SHA-256 identities are recorded per issue in [coverage.json](coverage.json). Historical dates/counts in plans and triage text are not deadlines, live status or quotas.
 
 ## Source and coverage findings
 
-- Planning issues are in `Pick-Your-AI/pickyour.ai`; guidance and Apple planning/tracking documents are in `Pick-Your-AI/pick-your-ai-research`. The Android plan is the live program, epic/work-package bodies and Project README. No nonexistent Android plan path is required.
+- Planning issues are now in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`; guidance and Apple planning/tracking documents are in `Pick-Your-AI/pick-your-ai-research`. The Android plan is the live program, epic/work-package bodies and Project README. No nonexistent Android plan path is required.
 - Project 4: 129 issues, one program, 18 epics, 110 work packages, 128 parent edges and 210 native prerequisite edges. Project 5: 129 issues, one program, 18 epics, 110 work packages, 128 parent edges and 222 prerequisite edges. The combined covered prerequisite graph has no cycles.
 - Exact coverage: 258 issue mappings, 906 acceptance criteria and 880 implementation checklist steps. There are two program prompts and 36 scoped epic prompts; no checklist-task prompt duplication.
 - Both Projects' 19 fields and their option IDs were inspected independently. All 258 issues were unassigned and Backlog at intake. Readiness includes Needs owner, Needs input and Awaiting decision; none of this guidance makes them Ready or In Progress.
