@@ -2,6 +2,8 @@
 
 Proposed execution guidance for the existing [Android Project 4](https://github.com/orgs/Pick-Your-AI/projects/4) and [Apple/iOS Project 5](https://github.com/orgs/Pick-Your-AI/projects/5). Publishing or reviewing these files does not launch either campaign, assign work, change readiness, or satisfy delivery acceptance. This revision must be reviewed before being represented as accepted guidance.
 
+[Publication PR and revision status](PUBLICATION.md). The PR remains unmerged; issue and Project sections pin the exact pushed revision.
+
 This set adapts the inspection → ownership → prerequisites → implementation → validation → receiving review → PR → evidence-backed completion approach of the T0–T6 maintainer prompts. The technical prompt work in [Pick-Your-AI/pick-your-ai-research PR 74](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74) is still proposed at this publication baseline; mobile prompts are independently usable and do not require that PR to merge. Existing [market prompts](../market/README.md) remain separate.
 
 | Entry point | Coverage |
