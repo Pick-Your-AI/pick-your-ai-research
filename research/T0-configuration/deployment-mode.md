@@ -29,7 +29,7 @@ This note is written **local-first**: the T0 owner has chosen to prioritise self
 - **CPU-only and mixed CPU+GPU builds are in scope.** For single-batch generation, memory bandwidth is reported as a main bottleneck (D27–D29), so bandwidth, instruction sets and offload support are key inputs. Measured fit records, not this note, decide how far that holds for a given machine.
 - **Crowdsourced fit reports are a possible additional evidence source.** Several community databases already exist (D36–D41). Agreement between reports is shown, but doesn't decide compatibility until #41 defines an acceptance policy (CD-8).
 - **Self-hosting enables local inference, but doesn't by itself keep data local.** Residency is checked over the build's data flows, including external destinations (D-R6).
-- **Open contract decisions.** Eleven are recorded for #40 and #41 rather than solved here (CD-1 to CD-11; CD-11 was raised on #88).
+- **Open contract decisions.** Twelve are recorded for #40 and #41 rather than solved here (CD-1 to CD-12; CD-11 was raised on #88 and CD-12 in T5's review of #81).
 
 ## User decision
 
@@ -65,6 +65,8 @@ For each component that serves a model or retrieval, who runs it, where, and on 
   - An adapter is loaded into a base model's deployment. It inherits that deployment, and needs an engine that supports adapters (to be confirmed with #11 and #33).
 
 Tools, MCP servers, storage and monitoring don't decide the mode. They are still checked for isolation (W-R8 in the companion note) and residency (D-R6).
+
+**The mode applies to serving components only.** Training and fine-tuning runs are out of its scope; T5 classifies them (#30–#33). A serverless fine-tuning service is therefore not "API" under this test. Only the fine-tuned model it produces, once served, gets a mode.
 
 **Build-level mode:**
 - If every serving component has the same mode, the build has that mode.
@@ -450,23 +452,26 @@ Air-gap isolation is checked by W-R8 in the companion note. The version and migr
 
 ### D-R2a Licence eligibility conditions are met
 
-- **Roles and pointers:** model `/license_conditions` where `kind` is `eligibility`; build `/licence_answers`.
-- **Applies when:** a component that D-R1 applies to has at least one condition of kind `eligibility`.
+- **Roles and pointers:** model `/license_conditions` where `kind` is `eligibility`; build `/licence_answers`; for a `fine_tuned_model`, its base model's conditions, reached through its `derived_from` link.
+- **Applies when:** the selected weights' licence binds the user, whatever the mode, and at least one condition of kind `eligibility` applies. The licence binds when the user runs the weights (D-R1's scope), and also when the user supplies open weights or a derivative of them to provider-operated infrastructure: a dedicated endpoint, or a managed fine-tuning or serving service. Provider-operated serving alone doesn't bypass it. A provider serving its own model under its API terms falls under those terms instead (#5, D-R5).
+- **Inheritance:** a `fine_tuned_model` inherits its base model's conditions through `derived_from`, as an adapter does under D-R1. For example, Mistral Medium 3.5's licence withholds all rights from companies above a monthly revenue threshold, and applies that to the model and any derivatives, whoever provides them (D48).
+- **Scope decision:** recorded under CD-6, with #30, including inherited base-model conditions.
 - **Assertion:** every eligibility condition is answered `met`, or a grant is recorded.
 - **Example condition** (Llama 3.1, D12): "If, on the Llama 3.1 version release date, the monthly active users of the products or services made available by or for Licensee, or Licensee's affiliates, is greater than 700 million monthly active users in the preceding calendar month, you must request a license from Meta". The release date is 23 July 2024. The question therefore covers the licensee and its affiliates, for the calendar month before that date.
 - **Missing data:** `unknown`.
 - **Remediation:** answer the condition, record a grant, or choose another model.
-- **Dependencies:** #5, #6; where licence answers live is CD-6.
+- **Dependencies:** #5, #6, #30; where licence answers live, and the scope across modes, is CD-6. Organisation-level answers are CD-12.
 - **Examples:**
   - Pass: answered `met`.
   - Fail: answered `not_met`, with no grant.
+  - Fail: a fine-tune of a revenue-capped base model, served on a managed endpoint, with the base model's revenue condition answered `not_met`. Provider-operated serving doesn't bypass the inherited condition.
   - Unknown: unanswered.
   - Skipped: no conditions recorded.
 
 ### D-R2b Licence obligations are acknowledged
 
 - **Roles and pointers:** model `/license_conditions` where `kind` is `obligation`, such as Llama 3.1's incorporated acceptable use policy (D12); build `/licence_answers`.
-- **Applies when:** a component that D-R1 applies to has at least one condition of kind `obligation`. This is D-R2a's scope, for obligations instead of eligibility conditions.
+- **Applies when:** the selected weights' licence binds the user, as defined in D-R2a (any mode, with inheritance through `derived_from`), and at least one condition of kind `obligation` applies.
 - **Assertion:** every obligation is answered `acknowledged`.
 - **Missing data:** `unknown`.
 - **Remediation:** acknowledge the obligation, or choose another model.
@@ -527,6 +532,7 @@ Air-gap isolation is checked by W-R8 in the companion note. The version and migr
   - Pass: storage-only constraint; data is stored in an allowed country, and processing isn't checked.
   - Fail: processing-only constraint; a local engine sends logs to an external host processing elsewhere.
   - Fail: an offering that stores data in-region but processes it elsewhere (D19).
+  - Fail: evaluating a fine-tuned model on Foundry's `Developer` deployment type with a processing constraint. D16 says it processes in any Azure region, with no data-residency guarantee.
   - Unknown: a telemetry destination with no locations.
   - Skipped: both dimensions are `none`.
 
@@ -584,12 +590,13 @@ These are decisions for #40 and #41, recorded rather than solved in these notes.
 | CD-3 | Protocol identity, the canonical configuration key (essential vs display fields), protocol compatibility, result schemas for `kernel_throughput` vs `service_level`, coverage matching for support documentation, how derived estimates are assessed, and how the evaluator encodes #41's conflict order for eligible results | EV-1, reports, W-R7 | #41 (with #10, #62) |
 | CD-4 | The isolation-boundary model: endpoint membership, connection lifecycle and state, and artifact readiness manifests | W-R8 | #40 |
 | CD-5 | Per-stage load and length records for pipelines | Workload note | #40 (with #10) |
-| CD-6 | Relationship details: the draft-to-target link, where `licence_answers` live, mapping the hardware inventory to device selections, roles that disambiguate multiple links, whether an adapter's `derived_from` link must match its `base_model_ref`, and the effective serving capabilities of fine-tuned models and adapter/base compositions | Bindings, D-R1, D-R2, D-R8, W-R1 | #40 (with #6, #33) |
+| CD-6 | Relationship details: the draft-to-target link, where `licence_answers` live, mapping the hardware inventory to device selections, roles that disambiguate multiple links, whether an adapter's `derived_from` link must match its `base_model_ref`, and the effective serving capabilities of fine-tuned models and adapter/base compositions; the scope of licence conditions across modes, including conditions inherited through `derived_from` | Bindings, D-R1, D-R2, D-R8, W-R1 | #40 (with #6, #30, #33) |
 | CD-7 | The migration strategy: what is additive vs replacement, the treatment of the three workload copies, adapters and deprecation, how legacy build-level mode is interpreted, and the contract version | All rules | #40 |
 | CD-8 | Reporter and execution independence, and the acceptance policy that would let community evidence decide verdicts | Trust grades | #41 |
 | CD-9 | The jurisdiction hierarchy, containment, named groups, and mapping provider regions to jurisdictions | D-R5, D-R6 | #41 (with #9) |
 | CD-10 | Runtime requirements for non-model services such as vector databases | D-R7a, matrix | #40 (with #11, #15) |
 | CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides | T1 (#88) | #40 (with #7) |
+| CD-12 | Organisation-level attestations, answered once and reused across conditions: establishment jurisdiction, EU market placement, lawful basis for training data, revenue and monthly active users | T5 review of #81, D-R2a | #40 (with #30, #31, #32) |
 
 ## Pricing and capacity
 
@@ -607,7 +614,7 @@ No prices are recorded. Charge basis, ownership and commitment are independent:
 3. **Keep fit records immutable while retained,** with mode-appropriate keys, and use one eligibility predicate (EV-1), with checks by evidence type, wherever evidence is consumed. Eligible evidence that disagrees is resolved by #41's conflict order.
 4. **Treat CPU-only and hybrid CPU+GPU builds as first-class,** adding bandwidth (in GB/s), instruction sets, NUMA nodes, memory kind and typed placement.
 5. **Adopt crowdsourced reports as informative evidence,** with two protocol types, trust grades, facilitation, incentives (as hypotheses), integrity checks and privacy rules. Let #41 decide when they may decide verdicts (CD-8). Ask #48 and #57 to assess the existing projects, and #41 and #60 whether their data can be linked.
-6. **Take CD-1 to CD-11 to #40 and #41,** alongside D-R1 to D-R8.
+6. **Take CD-1 to CD-12 to #40 and #41,** alongside D-R1 to D-R8.
 7. **Store deployment mode on the build and its selections, not as catalog items.** In v1 it is a catalog kind (C6) needing provenance with a public URL (C7).
 
 ## Structured artifacts
@@ -632,7 +639,7 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q10 | How are hybrid builds saved, shared and compared? | #42 | — |
 | Q11 | What remains after a report or its attribution is deleted (nothing, a tombstone, or aggregate statistics), and how long are reports and raw logs kept? | #41 | #60 |
 
-Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #33, #36, #37, #39, #40, #41, #42, #48, #52, #57, #60, #62.
+Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #30, #31, #32, #33, #36, #37, #39, #40, #41, #42, #48, #52, #57, #60, #62. #30 decides how licence conditions apply to fine-tuning and derivatives (D-R2a/b, CD-6); #30, #31 and #32 consume the organisation attestations (CD-12).
 
 ## Acceptance criteria coverage
 
@@ -719,3 +726,4 @@ All sources were accessed on 2026-10-16. Vendor terms change often; re-check the
 | D45 | Valve, "Steam Hardware & Software Survey": <https://store.steampowered.com/hwsurvey> | September 2026 | Primary documentation | Selection not described |
 | D46 | PR #67 competitor register at commit `4a3fa17`: <https://github.com/Pick-Your-AI/pick-your-ai-research/blob/4a3fa17aa22b38c088f224358681817166c1ecb5/research/market/competitors.json> | Commit `4a3fa17`; the file is identical at PR head `6511dea` (checked 2026-10-16) | Primary documentation (project file) | Open PR; may change |
 | D47 | IBM, granite-4.2-30b-q4-mlx repository file list: <https://huggingface.co/ibm-granite/granite-4.2-30b-q4-mlx/tree/main> | As shown at access | Primary documentation | Shows `.safetensors` weight files |
+| D48 | Mistral AI, Mistral-Medium-3.5-128B licence ("Modified MIT License"): <https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/raw/main/LICENSE> | Accessed 2026-10-17 | Primary documentation (licence text) | Revenue condition applies to the model and its derivatives; not legal advice |

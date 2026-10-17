@@ -180,6 +180,9 @@ The proposed location is a `workload` object owned by the build (Recommendation 
 | `data_classification` | v1 enum | Level definitions open (Q1) | Always | User input | `objectives.data_classification` (C5) |
 | `data_categories` | set of `personal_data`, `special_category`; or exactly `none` / `unknown` | Exclusive values as stated | Always | Definitions per E23 | — |
 | `residency.processing`, `residency.storage` | each: a list of jurisdiction codes, or `none` (unconstrained), or `unknown` | Evaluated independently (D-R6 in the companion note); codes per ISO 3166 (E25); containment hierarchy and named groups to be set by #41 (CD-9) | Always | User input | `objectives.region` (one string) |
+| `organisation.jurisdiction` | ISO 3166 code where the licensee organisation is established, or `unknown` | Distinct from `residency`, which records where data goes. Deferred attestation: answered once and reused across licence conditions (CD-12) | When a selected licence or policy conditions on the licensee's establishment | User attestation; rules owned by #30 | — |
+| `organisation.eu_market_placement` | boolean, or `unknown`: whether the user places the system or model on the EU market | Deferred attestation (CD-12) | When T5 provider-status rules apply | User attestation; rules owned by #31, #32 | — |
+| `organisation.lawful_basis_ref` | reference to the lawful basis or legitimate-interest assessment for personal data used in training, or `unknown` | Deferred attestation (CD-12); only meaningful when `data_categories` includes personal data | When a training dataset contains personal data | User attestation; rules owned by #31, #32 | — |
 | `budgets` | list of `{amount: decimal ≥ 0, currency: ISO 4217 alpha code, period: one_off \| month \| year, scope: hardware \| operating \| total}` | An empty list means no budget constraint | Always | Currency per E24 | `objectives.monthly_budget_amount` |
 
 `mean` is the expected mean per request, used for throughput and cost. It is a decimal, because the mean of whole counts needn't be whole: one request with 1 output token and one with 2 have a mean of 1.5. `max` is used for memory sizing.
@@ -423,8 +426,10 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 - **Dependencies:** #30–#33.
 - **Examples:**
   - Pass: a `fine_tuned_model` is selected.
+  - Pass: only a `training_framework` is selected, because the fine-tuned model doesn't exist yet.
   - Fail: neither is selected.
   - Skipped: the answer is `unknown`.
+  - Skipped: the answer is `prompt_only`, which needs no T5 tier.
 
 ### W-R6 Components resident together fit each memory pool
 
@@ -435,7 +440,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 - **Applies when:** any component has a concrete device placement, whatever `hardware.mode` is. Devices acquired or rented for the build are included.
 - **Assertion:** for each memory pool, the peak memory of all components that can be resident at the same time, plus that pool's `reserved_memory_gb`, is at most the pool's capacity.
   - Peak memory comes from eligible measurements or estimates at the workload's maximum lengths and the resident sequence envelope derived below. Request concurrency is never a direct cap on sequence count.
-  - Estimates must meet the build's `min_resource_confidence` (C5). If eligible evidence for a component disagrees, the highest peak decides and the result is flagged as disputed (EV-1).
+  - Estimates must meet the build's `min_resource_confidence` (C5). If eligible evidence for a component disagrees, EV-1's ranking applies first: a measurement matching the configuration outranks an estimate. Only among evidence of equal rank does the highest peak decide, and the result is then flagged as disputed.
   - Until CD-2 defines co-residency scenarios, components marked `on_demand` are counted as resident (a conservative maximum).
   - Devices sharing a `memory_pool_id`, such as unified memory, are summed together.
 - **Missing data:** `unknown`. It never passes without eligible evidence for every resident component.
@@ -444,7 +449,8 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 - **Examples:**
   - Pass: a 24 GB GPU holding a 14 GB generator, a 6 GB embedder and 2 GB reserved.
   - Fail: an 18 GB generator and an 8 GB embedder on the same 24 GB GPU.
-  - Fail, flagged as disputed: two eligible estimates put the generator at 15 GB and 19 GB, with a 6 GB embedder and 2 GB reserved on a 24 GB GPU. The 19 GB estimate decides.
+  - Fail, flagged as disputed: two eligible estimates put the generator at 15 GB and 19 GB, with a 6 GB embedder and 2 GB reserved on a 24 GB GPU. Both are estimates of equal rank, so the 19 GB estimate decides.
+  - Pass: a matching 15 GB measurement and a 19 GB estimate for the same generator, with 8 GB of other components and reservation on a 24 GB pool. The measurement outranks the estimate, so 23 GB fits.
   - Fail: on a 24 GB unified-memory machine, 18 GB used by the CPU path and 8 GB by the GPU path. They share one pool.
   - Unknown: the embedder has no eligible measurement or estimate.
   - Skipped: no device placement yet.
@@ -562,11 +568,12 @@ These are recorded as decisions for #40 and #41 rather than solved here. The ful
 | CD-3 | Benchmark protocol identity, the canonical configuration key, result schemas for kernel throughput vs service-level latency, derived estimates from transfer models, and how the evaluator encodes #41's conflict order for eligible results | #41, with #10, #62 |
 | CD-4 | The isolation-boundary model, connection lifecycle, and artifact readiness | #40 |
 | CD-5 | Per-stage load and length records for pipelines | #40, with #10 |
-| CD-6 | Reconciling the hardware inventory with device selections; the effective capabilities of fine-tuned stages and adapter/base compositions (W-R1) | #40, with #6, #33 |
+| CD-6 | Reconciling the hardware inventory with device selections; the effective capabilities of fine-tuned stages and adapter/base compositions (W-R1); the scope of licence conditions across modes and their inheritance through `derived_from` (D-R2a/b in the companion note) | #40, with #6, #30, #33 |
 | CD-7 | The migration strategy: what is additive vs replacement, adapters, deprecation, and the version | #40 |
 | CD-8 | The acceptance policy that lets community evidence decide verdicts (W-R6, W-R7, W-R10) | #41 |
 | CD-9 | The jurisdiction hierarchy, containment rules, and named groups | #41 |
 | CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides. Raised on #88; it decides how `input_tokens` and `output_tokens` map for separate-budget routes. | #40, with #7 |
+| CD-12 | Organisation-level attestations, answered once and reused across conditions: establishment jurisdiction, EU market placement, lawful basis for training data, revenue and monthly active users. Raised in T5's review of #81. | #40, with #30, #31, #32 |
 
 ## Pricing and capacity
 
@@ -579,7 +586,7 @@ This note sets no prices. Budgets combine one-off hardware caps with operating c
 3. **Store the workload inputs once.** v1 repeats them three times with different names (C1, C2, C5).
 4. **Adopt the answer-state policy,** and implement it through CD-1 rather than by assuming the current evaluator supports it.
 5. **Keep one primary workload per build** (`cardinality: "one"`, C8). Several workloads sharing a machine are left open (Q7).
-6. **Adopt W-R1 to W-R10 after #40 review,** together with CD-1 to CD-9 and CD-11.
+6. **Adopt W-R1 to W-R10 after #40 review,** together with CD-1 to CD-9, CD-11 and CD-12.
 
 ## Structured artifacts
 
@@ -599,7 +606,7 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q6 | Which protocols and metrics can a `quality_target` use? | #36 | #11 |
 | Q7 | How should several workloads sharing one machine be represented? | #42 | #10 |
 
-Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #33, #35, #36, #39, #40, #41, #42, #62.
+Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #30, #31, #32, #33, #35, #36, #39, #40, #41, #42, #62. #30, #31 and #32 consume the deferred organisation attestations (CD-12).
 
 ## Acceptance criteria coverage
 
