@@ -1,13 +1,15 @@
 # T4: Agent Memory
 
 Issue: #28 · Contract: 1.0.0 · Kinds: `memory_store`
-Status: draft · Last researched: 2026-10-16
+Status: draft · Last researched: 2026-10-17
 
 ## Evidence status correction
 
 Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims remain `unverified`; the original facts, versions, source access dates and `checked_at` are unchanged. No qualifying independent corroboration or runtime reproduction was supplied. Vendor capability statements remain documented claims, not measurements.
 
 A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
+
+Follow-up on 2026-10-17: corrected the proposed encryption rule's key-reference false positive and source-checked Mem0 OSS deletion against v2.2.1 source pinned to commit `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` (D57, D58). An isolated synthetic method test also reproduced retained SQLite history text; it does not establish full-service erasure behaviour or upgrade the catalog claims above.
 
 ## User decision
 
@@ -66,7 +68,7 @@ All of these are note-only today. They are proposed to #40 below.
   - minimum or maximum TTL (AgentCore long-term records need at least 31 days, D26);
   - default retention (OpenAI conversations have no 30-day TTL, D14; AgentCore records do not expire by default, D26);
   - TTL semantics (Mem0 `expiration_date` hides records and does not delete them, D36; AgentCore expired records can still be returned for "a few days", D26).
-- **Deletion, export and consent:** v1 has no fields. Deletion depth also differs: OpenAI conversation deletion keeps the items (D15), and Zep leaves derived node summaries (D41).
+- **Deletion, export and consent:** v1 has no fields. Deletion depth also differs: OpenAI conversation deletion keeps the items (D15), Mem0 OSS deletion retains prior memory text in SQLite history (D57, D58), and Zep leaves derived node summaries (D41).
 - **Storage and vector references:** COMPONENTS.md says `memory_store` "may reuse `vector_database` or `storage`", but `spec_memory_store` has no `storage_ref` or `vector_database_ref`.
   - The build link `memory_store stored_in vector_database` exists in `BuildSnapshot.links` (contracts/v1/docs/DEPENDENCIES.md).
   - The rule language cannot traverse links. Rules therefore fall back to "the primary `storage` or `vector_database` selection", which can be the wrong instance.
@@ -75,6 +77,7 @@ All of these are note-only today. They are proposed to #40 below.
   - "managed or undisclosed" for provider services, whose physical backing is not documented;
   - "client-implemented", for the Anthropic memory tool, where the application chooses storage (D31).
 - **Encryption:** `encryption_at_rest` is a boolean. It cannot separate provider-managed keys from customer-managed keys (AgentCore and Memory Bank support CMK, D24, D25) or record optional application-level encryption (LangGraph `EncryptedSerializer`, D2; OpenAI `EncryptedSession`, D12).
+- **Encryption configuration evidence:** `settings_memory_store.encryption_key_ref` is an opaque secret reference. Its presence does not prove that the selected store consumes it or that encryption is enabled. The v1 rule below checks documented default encryption only; optional encryption and configuration verification need #40 review with #35.
 - **Access control:** the only access-related field is `settings_memory_store.encryption_key_ref`. There is no credential reference and no IAM permission list.
 
 ## Candidate options
@@ -96,7 +99,7 @@ Versions come from the PyPI JSON API on 2026-10-16. "Unknown" means not found in
 
 | Candidate | Version | License | Behaviours | Scope keys | Backends | Retention / TTL | Deletion / export | Tenant isolation | Hosting | Status flag | Evidence |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Mem0 OSS | `mem0ai` 2.2.1 (2026-09-25) | Apache-2.0 | LLM-extracted semantic memory; raw storage with `infer=False` | `user_id`, `agent_id`, `run_id` (D37) | 22 vector stores in Python; default local Qdrant; history in SQLite; self-hosted server uses Postgres with pgvector (D33, D34) | `expiration_date` (YYYY-MM-DD, UTC) **hides, does not delete** (D36) | `delete`, `delete_all`; no batch delete; no export (D35) | "No org/project concept" (D35) | library or Docker self-host | graph memory removed from OSS (D35) | D32–D38 |
+| Mem0 OSS | `mem0ai` 2.2.1 (2026-09-25) | Apache-2.0 | LLM-extracted semantic memory; raw storage with `infer=False` | `user_id`, `agent_id`, `run_id` (D37) | 22 vector stores in Python; default local Qdrant; history in SQLite; self-hosted server uses Postgres with pgvector (D33, D34) | `expiration_date` (YYYY-MM-DD, UTC) **hides, does not delete** (D36) | `delete`, `delete_all` remove vector records but retain prior text in SQLite history (D57, D58); no batch delete; no export (D35) | "No org/project concept" (D35) | library or Docker self-host | graph memory removed from OSS (D35) | D32–D38, D57, D58 |
 | Mem0 Platform | n/a (service) | proprietary | as OSS, plus native graph | adds `app_id` and org/project (D35) | undisclosed | `expiration_date` as OSS | `batch_delete` up to 1000 per call; Memory Export jobs (D35) | multi-org and multi-project with roles (D35) | managed | — | D35 |
 | Zep Cloud | `zep-cloud` SDK 4.0.0 (2026-10-14) | SDK license not in PyPI metadata (unknown) | temporal knowledge graph of users and threads | user, thread, graph; account and project isolation (D42) | undisclosed (Graphiti engine) | none by default; admin-managed retention policies (`off`, `report_only`, `enforce`) (D40) | delete edge, node, episode, thread, user, graph; asynchronous. Derived node summaries may keep deleted text (D41). Backups up to 365 days (D40) | account and project | managed or BYOC | **Community Edition deprecated** (D42) | D40–D43 |
 | Graphiti | `graphiti-core` 0.31.1 (2026-10-15) | Apache-2.0 (PyPI) | temporal facts with validity windows; changed facts are invalidated, not deleted (D39) | not source-checked (`group_id` not in the fetched README) | Neo4j 5.26, FalkorDB 1.1.2, Neptune; Kuzu deprecated | n/a (application-managed) | unknown | unknown | self-host only | — | D39 |
@@ -140,7 +143,7 @@ The coordinator's required research fields, mapped to v1. "Note only" means v1 h
 | context requirements | tokens injected per turn (integer, tokens) | Anthropic `view` truncates at 16,000 characters (D31) | D31 | **Note only.** Proposed `settings_memory_store.max_injected_tokens` |
 | retention default | enum `none, fixed, configurable` plus duration | OpenAI responses 30 days; conversations no TTL; AgentCore records none | D14, D26 | **Note only** |
 | consent requirement | proposed enum `none, implicit_notice, explicit_opt_in` | no product enforces consent; it is the application's responsibility | D55 | **Note only.** Product facts cannot satisfy this; it is a build policy (#35) |
-| deletion support | proposed enum array `item, scope_bulk, filter_purge, full_subject, async` | OpenAI conversation delete keeps items; Zep is async with residual summaries | D15, D22, D23, D41 | **Note only.** Proposed `spec_memory_store.deletion_modes` |
+| deletion support | proposed enum array `item, scope_bulk, filter_purge, full_subject, async` | OpenAI conversation delete keeps items; Mem0 OSS retains SQLite history text; Zep is async with residual summaries | D15, D22, D23, D41, D57, D58 | **Note only.** Proposed `spec_memory_store.deletion_modes`; API names alone do not establish deletion depth |
 | export support | boolean | Mem0 Platform yes; Mem0 OSS no | D35 | **Note only** |
 | access control | proposed enum `none, app_enforced, iam_scoped` | Memory Bank IAM Conditions; Agents SDK `session_id` is not authentication | D12, D21 | **Note only** |
 | tenant isolation | proposed enum `none, logical_key, project, account` | Mem0 OSS none; Zep account and project; Memory Bank per scope | D21, D35, D42 | **Note only** |
@@ -191,7 +194,7 @@ Rule of thumb for the builder (Estimate, project guidance):
 
 | Risk | Source-checked (unverified) finding | Builder implication | Route |
 | --- | --- | --- | --- |
-| Deletion that is not erasure | OpenAI: deleting a conversation does not delete its items (D15). Mem0: expiration hides, does not delete (D36). AgentCore: expired records can be returned for days; use `DeleteMemoryRecord` for immediate removal (D26). Zep: residual text in shared node summaries; backups up to 365 days (D40, D41) | `supports_ttl=true` must not be read as "erasure guaranteed". Show deletion depth per product | #35, #40 |
+| Deletion that is not erasure | OpenAI: deleting a conversation does not delete its items (D15). Mem0: expiration hides, does not delete (D36); OSS `delete` and `delete_all` retain prior text in SQLite history (D57, D58). AgentCore: expired records can be returned for days; use `DeleteMemoryRecord` for immediate removal (D26). Zep: residual text in shared node summaries; backups up to 365 days (D40, D41) | `supports_ttl=true` must not be read as "erasure guaranteed". Show deletion depth per product; require an explicit history-retention and purge policy | #35, #38, #40 |
 | Cross-session persistence without notice | ADK `user:` state persists across all of a user's sessions once a persistent SessionService is used (D18) | Persistent user memory should be visible to the user, with a consent notice and a forget control. This is application-side; no product enforces it | #35 |
 | User and tenant boundaries | Agents SDK: `session_id` "does not authenticate a user or authorize access" (D12). MS Agent Framework: "bind each stored session to the authenticated user or tenant before allowing it to resume" (D48). Mem0 OSS has no org or project concept (D35). Memory Bank isolates per scope and supports IAM Conditions (D21) | Multi-tenant builds need app-enforced or IAM-scoped isolation; v1 cannot check it | #35, #40 |
 | Sensitive data | Anthropic: Claude "usually refuses" to write sensitive data; add validation for stronger guarantees (D31). OWASP: audit memory for sensitive data before persistence; encrypt or redact (D56) | Pair long-term memory for confidential or restricted builds with encryption and redaction (rule `rule.t4.memory.sensitive.encryption`) | #35 |
@@ -320,14 +323,15 @@ assert:       exists(selection memory_store primary /id)
 {"id":"rule.t4.memory.ttl.support","severity":"warning","applies_when":{"op":"exists","value":{"ref":{"scope":"selection","kind":"memory_store","role":"primary","pointer":"/settings/ttl_hours"}}},"assert":{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/supports_ttl"}},"right":{"literal":true}},"on_unknown":"review","message":"A memory retention period (ttl_hours) is configured, but the memory store is not documented to support automatic expiry.","remediation":"Choose a memory store with documented TTL support, or implement and evidence a scheduled deletion job before relying on ttl_hours.","affected_kinds":["memory_store"],"owner":"t4-research"}
 ```
 
-**`rule.t4.memory.sensitive.encryption`** is the privacy companion rule; controls are routed to #35.
+**`rule.t4.memory.sensitive.encryption`** checks documented default encryption for sensitive long-term memory; configuration controls are routed to #35 and #40.
 
 - **Status:** Hypothesis (policy choice). The control itself is backed by D56.
 - **Severity:** warning.
-- **Synthetic results** (restricted build, long-term memory): no key and no `encryption_at_rest` → `unknown` (review); `encryption_key_ref` set → `pass`; internal classification → `skipped`.
+- **Scope:** This is a conservative catalog-capability check, not proof of encryption in a running deployment. A `pass` requires `encryption_at_rest=true`, recorded only for documented default encryption as specified in the field mapping above. An opaque key reference never changes the outcome. Optional application encryption requires a separately evidenced configuration review; missing capability evidence remains `unknown` with `on_unknown: review`.
+- **Synthetic results** (restricted build, long-term memory): missing `encryption_at_rest`, with or without a key → `unknown` (review); explicit `false`, with or without an unused key → `fail`; documented `true` → `pass`; internal classification, session memory or no memory selection → `skipped`. Regression coverage: `tests/test_memory_rule.py`.
 
 ```json
-{"id":"rule.t4.memory.sensitive.encryption","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"memory_store","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/memory_type"}},"right":{"literal":"long_term"}},{"op":"in","left":{"ref":{"scope":"build","pointer":"/objectives/data_classification"}},"right":{"literal":["confidential","restricted"]}}]},"assert":{"op":"any","args":[{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/encryption_at_rest"}},"right":{"literal":true}},{"op":"exists","value":{"ref":{"scope":"selection","kind":"memory_store","role":"primary","pointer":"/settings/encryption_key_ref"}}}]},"on_unknown":"review","message":"Long-term memory for confidential or restricted data has no documented encryption at rest and no configured encryption key.","remediation":"Choose a memory store with documented encryption at rest, or configure settings.encryption_key_ref, and review the control with the guardrails owner (#35).","affected_kinds":["memory_store","workload"],"owner":"t4-research"}
+{"id":"rule.t4.memory.sensitive.encryption","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"memory_store","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/memory_type"}},"right":{"literal":"long_term"}},{"op":"in","left":{"ref":{"scope":"build","pointer":"/objectives/data_classification"}},"right":{"literal":["confidential","restricted"]}}]},"assert":{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/encryption_at_rest"}},"right":{"literal":true}},"on_unknown":"review","message":"Long-term memory for confidential or restricted data lacks documented default encryption at rest or has unknown encryption capability.","remediation":"Use a store with documented default encryption at rest, or obtain a separate configuration review with #35/#40 for optional encryption; a key reference alone is insufficient.","affected_kinds":["memory_store","workload"],"owner":"t4-research"}
 ```
 
 **`rule.t4.memory.user.erasure`** handles erasure for user-scoped memory.
@@ -447,7 +451,7 @@ Capacity facts with stated conditions:
    - Zep Community Edition is deprecated (D42).
    - Semantic Kernel memory is experimental (D52).
    - Graph memory was removed from Mem0 OSS (D35).
-5. **Never present "expiration" or "delete" as erasure without qualification.** See the deletion findings (D15, D26, D36, D40, D41).
+5. **Never present "expiration" or "delete" as erasure without qualification.** See the deletion findings (D15, D26, D36, D40, D41, D57, D58), including Mem0 OSS SQLite history retention after vector deletion.
 
 ## Structured artifacts
 
@@ -478,10 +482,12 @@ Catalog proposals (all `kind: memory_store`, `tier: T4`, validated):
 | Add to `spec_memory_store`: `scopes` (array), `deletion_modes`, `supports_export`, `default_retention`, `min_ttl_hours`, `max_ttl_hours`, `ttl_semantics` (`delete`, `hide`, `delayed_delete`), `storage_ref`, `vector_database_ref`, `framework_refs`, `managed_storage`, `region` or `regions`, `retrieval_modes`, `tenant_isolation`. Add `backing_type` values `graph`, `document`, `managed_undisclosed`, `client_defined`. Allow array `memory_types` | #40 · @tynamite |
 | Add `build.objectives.memory_persistence` (or a workload setting) so the requirement in Example 6 is checkable | #40 with #2 · @tynamite |
 | Add rule-DSL access to `BuildSnapshot.links` (`stored_in`) so memory→storage and memory→vector rules check the actual wired instance | #40 · @tynamite |
+| Define versioned evidence for optional encryption support, enablement, key consumption by the selected store, and the covered storage/history layers. These are proposals, not v1 fields. Until approved, a key reference alone cannot satisfy the encryption rule, and missing capability evidence remains `unknown` (review); documented default capability still does not certify a deployed configuration | #40 · @tynamite; #35 · @PUSHINGSQUARES (**pending owner confirmation**) |
 | Add metric `memory.max_injected_tokens` and setting `settings_memory_store.max_injected_tokens`; decide whether it is counted inside `requested_context_tokens` | #7 · @zwright8 and #40 |
 | Redefine or replace `agent_framework.spec.supports_memory`; review the severity and on_unknown of `rule.memory.framework.compatibility` | #40 · @tynamite; #25 · @CompleteDotTech |
 | **Storage handoff to T3 and T2, pending owner confirmation:** memory reuses `vector_database` (#15) for vector-backed memory with role `memory`, and `storage` (#9) for relational, object and file memory. #28 adds no storage product items. Confirm the role naming (`memory`) and that #15 items will carry `supports_acl` and `regions` facts usable for memory | #15, #13 · @zabyxc01; #9 · @Mattycodes69 (**pending owner confirmation**) |
 | Controls for memory writes (poisoning, PII redaction before persistence, path validation for file memory), consent notice, forget control, erasure across derived artifacts | #35 · @PUSHINGSQUARES |
+| Mem0 OSS v2.2.1 `delete`/`delete_all` retain prior text in SQLite history (D57, D58): decide retention/purge requirements for history, vectors, derived artifacts and backups; monitor purge completion across those layers. No complete-erasure guarantee or purge procedure is established here | #35, #38 · @PUSHINGSQUARES (**pending owner confirmation**) |
 | Monitoring of memory size growth, TTL sweeper health and deletion-job success; audit logs of memory reads and writes | #38 · @PUSHINGSQUARES |
 | Pricing units for AgentCore Memory, Memory Bank, Mem0 Platform, Zep and Letta Cloud; extraction LLM-call cost per memory write | #39 · @PUSHINGSQUARES |
 | Evaluation of memory quality (recall, staleness, poisoning resistance) | #36 · @PUSHINGSQUARES |
@@ -493,7 +499,7 @@ None of the handoffs above is confirmed yet.
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. "Wheel source" means file names and source text read from the published wheel, without executing it.
+Access dates are per entry (D1–D56: 2026-10-16; D57–D58: 2026-10-17). Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. "Wheel source" means file names and source text read from the published wheel, without executing it.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -553,6 +559,14 @@ All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and 
 | D54 | Redis, https://redis.io/docs/latest/commands/expire/ | 2026-10-16 | current docs | Primary documentation | — |
 | D55 | EUR-Lex, https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02016R0679-20160504 | 2026-10-16 | consolidated text 2016-05-04 (Regulation (EU) 2016/679) | Primary documentation (legal text) | Consolidated version has no legal effect; not legal advice. The direct curl to eur-lex was refused by the proxy; read via WebFetch |
 | D56 | OWASP, https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html | 2026-10-16 | current | Primary documentation (community standard) | Guidance, not a standard with legal effect |
+| D57 | Mem0, https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/main.py#L2114 | 2026-10-17 | v2.2.1, commit `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | Primary documentation (source code); scoped synthetic reproduction described below | `_delete_memory` deletes the vector and writes prior text into history; `delete_all` calls it. No full-service or backend-erasure test |
+| D58 | Mem0, https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/storage.py#L150 | 2026-10-17 | same v2.2.1 commit as D57 | Primary documentation (source code); scoped synthetic reproduction described below | `add_history` stores `old_memory`; `get_history` returns rows including deletion events. History-purge policy and backups not tested |
+
+### Mem0 deletion reproduction and limits
+
+On Python 3.12.10, the v2.2.1 tag resolved to the commit in D57/D58. Downloaded tag and commit bytes matched (SHA-256: `main.py` = `f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c`; `storage.py` = `5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd`). The isolated test executed the exact AST-extracted synchronous `_delete_memory` method and its timestamp normalizer with the upstream `SQLiteManager(':memory:')`, one synthetic vector-store stub, and a no-op entity-cleanup stub. Input text was `SYNTHETIC retained text`. After deletion, the stub had no vector, but `get_history` returned that text in `old_memory` with `event='DELETE'`, `new_memory=None`, and `is_deleted=True`.
+
+This reproduces retention in that method/storage path only. It does not exercise a full Mem0 service, actual vector or entity backends, asynchronous deletion, backups, or Mem0 Platform. `delete_all` reuse of `_delete_memory` and public `history()` delegation to `get_history` were source-checked, not executed end to end. Reproduce with `python tests/reproduce_mem0_deletion.py`: this opt-in script downloads the two pinned source files, checks the SHA-256 values before execution, and uses only synthetic text. It is excluded from automatic unittest discovery; no upstream source is vendored. Receiving owners must resolve history retention and purge policy before treating deletion as complete erasure.
 
 ### Limitations
 
