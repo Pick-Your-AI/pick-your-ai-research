@@ -926,6 +926,10 @@
     [
      "dz_out_in_ratio",
      "15.4/1.925"
+    ],
+    [
+     "ft_hosting_month",
+     "1.7*730"
     ]
    ],
    "report": [
@@ -971,7 +975,8 @@
     "workers_spread",
     "gemini_storage",
     "replica_month_lambda",
-    "dz_out_in_ratio"
+    "dz_out_in_ratio",
+    "ft_hosting_month"
    ],
    "expect": {
     "ms_example_ptu": {
@@ -1231,6 +1236,12 @@
      "low": 8,
      "expected": 8,
      "high": 8
+    },
+    "ft_hosting_month": {
+     "low": 1241,
+     "expected": 1241,
+     "high": 1241,
+     "sf": 4
     }
    }
   }

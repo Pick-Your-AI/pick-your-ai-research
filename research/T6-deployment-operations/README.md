@@ -1,6 +1,6 @@
 # T6 Deployment & Operations
 
-Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Owner: @PUSHINGSQUARES
+Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
 Status: ready for review · Last researched: 2026-10-17 · Sources accessed 2026-10-16 (and 2026-10-17 for re-checked rows in #39)
 
 Product question: is the build safe, measurable, deployable, observable, and affordable?
@@ -9,16 +9,16 @@ This summary lists the decisions in the five T6 records, the rules they contribu
 
 ## Records
 
-| issue | record | v1 kind | decision it supports | verified rules | hypotheses | evidence rows |
+| issue | record | v1 kind | decision it supports | source-checked rules | hypotheses | evidence rows |
 |---|---|---|---|---|---|---|
 | [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 34 | 2 | 30 |
 | [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 86 | 13 | 290 |
-| [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 86 | 21 | 221 |
+| [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 87 | 21 | 222 |
 | [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 285 |
 | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 198 |
-| | total | | | 320 | 72 | 1,024 |
+| | total | | | 321 | 72 | 1,025 |
 
-Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy): 1,001 Primary documentation, 19 Independent measurement, 4 Vendor claim. Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
+Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy): 1,002 Primary documentation, 19 Independent measurement, 4 Vendor claim. Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
 
 ## Decisions
 
@@ -60,19 +60,19 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 
 ## Rules contributed to #40
 
-All five records use the same rule format at rule version 0.1: rule id, participants, condition, severity, explanation, suggested correction, source. Severity is one of compatible, warning, incompatible or unknown. Each record separates verified rules (an opened source states the rule) from hypotheses (no opened source states it yet). A rule owned by one record is cited by id in the others, not restated.
+All five records use the same rule format at rule version 0.1: rule id, participants, condition, severity, explanation, suggested correction, source. Severity is one of compatible, warning, incompatible or unknown. Each record separates source-checked rules (the cited page was opened on its access date and states the rule) from hypotheses (no opened source states it yet). Source checked does not mean independently reproduced; it follows the interim #41 definition adopted in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). A rule owned by one record is cited by id in the others, not restated.
 
-| record | verified rules | hypotheses |
+| record | source-checked rules | hypotheses |
 |---|---|---|
 | #35 Guardrails | G-R1 to G-R34 (34) | G-H7, G-H9 (2) |
 | #36 Evaluation | E-R1 to E-R86 (86) | E-H1 to E-H14 except E-H9 (13) |
-| #37 Deployment | D-R1 to D-R86 (86) | D-H1 to D-H24 except D-H5, D-H18, D-H19 (21) |
+| #37 Deployment | D-R1 to D-R87 (87) | D-H1 to D-H24 except D-H5, D-H18, D-H19 (21) |
 | #38 Monitoring | M-R1 to M-R72 except M-R34 (71) | M-H1 to M-H25 (25) |
 | #39 Cost Estimate | C-R1 to C-R43 (43) | C-H1, C-H5 to C-H10, C-H12, C-H13, C-H15, C-H17 (11) |
 
 Contract v1 arrived after these records were drafted. Its Ruleset has severities `error`, `warning` and `info`, and a separate `on_unknown` behaviour. Each record's Compatibility proposals section proposes the same reading for #40: `incompatible` is `error`, `warning` is `warning`, `unknown` is `warning` with `on_unknown: review` until the evidence settles it, and a conditional severity becomes two rules. No v1 Ruleset JSON is included; #40 reviews the rules first.
 
-Missing ids were retired while drafting or during QC: a hypothesis became a verified rule, a rule restated another record's rule, or a source settled the question. Ids are not reused.
+Missing ids were retired while drafting or during QC: a hypothesis became a source-checked rule, a rule restated another record's rule, or a source settled the question. Ids are not reused.
 
 The records also hand #40 these enums and fields: the guardrail category and failure-behaviour enums (#35), the evaluation type enum and the evaluator-placement field (#36), the mode working rule (#37), and the alert-class and threshold-source enums (#38).
 
@@ -86,6 +86,7 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 | #40 Schema | the rules and enums above; the mode working rule | all |
 | #41 Data sources | interim evidence grades to confirm for every record; reproducibility tiers A to C; price sources, dates and terms | all |
 | #42 Saved builds | accepted warnings with their reasons (#35); the price snapshot fields and re-pricing behaviour (#39) | #35, #39 |
+| #32 and #33 (T5) | `D-20` accepted, narrowed, in #36: #36 freezes and hashes the evaluation set, T5 runs the leakage check (E-R44, G1); `A-20` accepted in #36 as a G5 input; `A-13` (Foundry deletes a fine-tuned deployment after 15 idle days) accepted in #37 as D-R87; a T5 cost scenario is a follow-up in #39 | #36, #37, #39 |
 | T1 to T5 owners | lifecycle dates per host, engine maintenance status, embedding versions, feature availability per platform, base-model matching (#37); the signals each component must expose, by mode (#38) | #37, #38 |
 
 ## Open questions
