@@ -106,7 +106,7 @@ A = API, M = managed, S = self-hosted. "Source component" links each readiness c
 
 | Step | Mode | Prerequisites | Readiness check | Source | Source component |
 | --- | --- | --- | --- | --- | --- |
-| DS-28 Compatibility clean | all | EvaluationReport for this `build_revision` | No `fail` and no blocking `unknown` (PRICING_AND_GATES §2) | contract | #40 |
+| DS-28 Compatibility clean | all | EvaluationReport for this `build_revision` | No failed blocking rules and no blocking `unknown`; retain nonblocking warnings (PRICING_AND_GATES §2) | contract | #40 |
 | DS-29 Evaluation gate passed | all | Quality run on the current revision | Pending #36: suites, thresholds and the fine-tune safety-regression gate (#33 A-20) | pending | #36 |
 | DS-30 Guardrail gate passed | all | Guardrail selection and its gate | Pending #35: which controls apply per mode, especially mutating tools and MCP | pending | #35, #27 |
 | DS-31 Cost quote complete | all | CostEstimate `coverage=complete` | Budget gate can't pass on partial or unknown coverage | PRICING_AND_GATES §5 | #39 |
@@ -129,11 +129,11 @@ Conceptual states map onto the existing v1 `EvaluationReport.deployment_readines
 
 | Conceptual state | Condition on findings | `deployment_readiness` |
 | --- | --- | --- |
-| Ready | No `error` finding with outcome `fail` or `unknown` | `ready` |
+| Ready | No blocking failure or unknown, and no unresolved `on_unknown=review` finding | `ready` |
 | Ready with warnings | As Ready, plus `warning` findings or `on_unknown=defer` unknowns | `ready` (findings retained and shown) |
 | Missing prerequisites | An existence rule fails (e.g. `rule.production.gates`, `rule.selfhost.requires.infrastructure`) | `blocked` |
 | Incompatible | Any other `error` finding with outcome `fail` | `blocked` |
-| Unknown | An `error` finding is `unknown` with `on_unknown=block` / `review` | `blocked` / `needs_review` |
+| Unknown | A finding is `unknown` with `on_unknown=block` / `review`, including warning-level review findings | `blocked` / `needs_review` |
 
 Evidence status is separate. A check can pass on source-checked but unverified evidence, and `ready` is not deployment approval: the DeploymentManifest stays `proposed` until DS-28 to DS-33 hold for the same `build_revision`.
 
