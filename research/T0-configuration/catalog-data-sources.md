@@ -24,6 +24,7 @@ Where does the builder get component facts and prices, may it reuse them, and ho
 - **Checked:** a claim's provenance was confirmed against the cited primary source on its access date.
 - **Verified:** independently reproduced (governance's second source or reproducible test). A rule may pass on checked evidence; the result carries "unverified" until reproduced.
 - **Community reports:** trust grades in #81 (`self_reported` to `project_measured`) are informative until CD-8's acceptance policy says otherwise.
+- **Comparable benchmark claims:** a benchmark figure is comparable only when its reproducibility tuple is fully pinned (R1–R15 in the T6 evaluation draft, #115). Two figures are compared only when exactly one element differs. Protocol identity is encoded under CD-3.
 - **Status labels for feature claims:** `Exercised`, `Documented`, `Unsupported`, `Unknown`, as adopted in #67.
 
 ## Freshness
