@@ -22,15 +22,15 @@
     {
       "source_uri": "https://www.nvidia.com/en-us/data-center/h100/",
       "checked_at": "2026-10-16T12:39:54Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "C02 in gpu-compute.md. H100 SXM column supplies /name and /spec accelerator_type,vendor,model_name,vram_gb,precisions,rated_power_w,interconnect.80GB, maximum configurable TDP up to700W, NVLink; no NVL values mixed in. Rating is not measured draw or capacity guarantee. Native arithmetic subset only, no universal kernel compatibility. Product status snapshot active; billing unknown. Rights/reuse pending #41, no mirrored material."
     },
     {
       "source_uri": "https://developer.nvidia.com/cuda/gpus",
       "checked_at": "2026-10-16T12:39:54Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "C04. /spec/backends=cuda; H100 compute capability9.0. Driver and engine support version remain separate."
     }
   ],
-  "updated_at": "2026-10-16T12:39:54Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }
