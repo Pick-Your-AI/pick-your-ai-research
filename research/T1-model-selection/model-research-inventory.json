@@ -960,10 +960,10 @@
       "task_families": [
         "text_embedding"
       ],
-      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "input_output": "Text -> vectors",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "selection_caveat": "Individual card pinned; dimension selection, pooling/normalization, query/document instructions and exact runtime require review.",
       "source_ids": [
         "P49"
       ],
@@ -975,10 +975,10 @@
       "task_families": [
         "text_embedding"
       ],
-      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "input_output": "Text -> vectors",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "selection_caveat": "Individual card pinned; dimension selection, pooling/normalization, query/document instructions and exact runtime require review.",
       "source_ids": [
         "P50"
       ],
@@ -990,10 +990,10 @@
       "task_families": [
         "reranking"
       ],
-      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "input_output": "Query/document text -> relevance",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "selection_caveat": "Individual card pinned; query/document truncation, relevance score calibration and exact runtime require review.",
       "source_ids": [
         "P51"
       ],
@@ -1005,10 +1005,10 @@
       "task_families": [
         "reranking"
       ],
-      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "input_output": "Query/document text -> relevance",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "selection_caveat": "Individual card pinned; query/document truncation, relevance score calibration and exact runtime require review.",
       "source_ids": [
         "P52"
       ],
@@ -1020,10 +1020,10 @@
       "task_families": [
         "multimodal_embedding"
       ],
-      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "input_output": "Text/image/video -> vectors",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "selection_caveat": "Individual card pinned; visual sampling/budgets, representation or score semantics and exact runtime require review.",
       "source_ids": [
         "P53"
       ],
@@ -1035,10 +1035,10 @@
       "task_families": [
         "reranking"
       ],
-      "input_output": "Task-specific query/document/media -> vectors or relevance",
+      "input_output": "Multimodal query/document -> relevance",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Individual card pinned; modality sampling, score calibration and exact runtime still require review.",
+      "selection_caveat": "Individual card pinned; visual sampling/budgets, representation or score semantics and exact runtime require review.",
       "source_ids": [
         "P54"
       ],
@@ -1936,13 +1936,12 @@
       "model": "grok-imagine-video-1.5",
       "publisher": "xAI",
       "task_families": [
-        "video_generation",
-        "video_editing"
+        "video_generation"
       ],
-      "input_output": "Text/images/clip -> video/audio",
+      "input_output": "Text/images -> video/audio",
       "access": "API",
       "license_evidence": "Service terms pending",
-      "selection_caveat": "Editing/extension belongs to documented older route; newer1.5 is not automatically feature superset; native/upscaled1080 differ.",
+      "selection_caveat": "Text/image generation with reference-image, voice and pinned-frame modes. Editing and extension are not listed for this variant; native resolution differs from lite.",
       "source_ids": [
         "B37"
       ],
@@ -1952,13 +1951,12 @@
       "model": "grok-imagine-video-1.5-lite",
       "publisher": "xAI",
       "task_families": [
-        "video_generation",
-        "video_editing"
+        "video_generation"
       ],
-      "input_output": "Text/images/clip -> video/audio",
+      "input_output": "Text/images -> video/audio",
       "access": "API",
       "license_evidence": "Service terms pending",
-      "selection_caveat": "Editing/extension belongs to documented older route; newer1.5 is not automatically feature superset; native/upscaled1080 differ.",
+      "selection_caveat": "Text/image generation; 1080p is upscaled from 720p. Editing, extension, reference images, voices and pinned frames are not listed for this variant.",
       "source_ids": [
         "B37"
       ],
@@ -2171,7 +2169,7 @@
       "input_output": "Committed audio/file -> text",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "U01"
       ],
@@ -2186,7 +2184,7 @@
       "input_output": "Live speech -> transcript deltas",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "U02"
       ],
@@ -2202,7 +2200,7 @@
       "input_output": "Audio -> speaker-labelled transcript",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacy whisper/transcribe-diarize API removal 2027-02-26 is distinct from open weights.",
       "source_ids": [
         "U03",
         "U04"
@@ -2219,7 +2217,7 @@
       "input_output": "Audio -> text/English translation",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacy whisper/transcribe-diarize API removal 2027-02-26 is distinct from open weights.",
       "source_ids": [
         "U03",
         "U04"
@@ -2235,7 +2233,7 @@
       "input_output": "Text/audio -> text/audio",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "U05"
       ],
@@ -2250,7 +2248,7 @@
       "input_output": "Speech/multimodal session -> speech",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "U06"
       ],
@@ -2265,7 +2263,7 @@
       "input_output": "Text -> audio",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "U07"
       ],
@@ -2280,7 +2278,7 @@
       "input_output": "Full-duplex speech -> speech with backend delegation",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "C01"
       ],
@@ -2295,7 +2293,7 @@
       "input_output": "Speech -> translated speech/text",
       "access": "API",
       "license_evidence": "Proprietary service terms",
-      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality. Legacywhisper/transcribe-diarize API removal2027-02-26 is distinct from open weights.",
+      "selection_caveat": "Exact route/session/counting/format differs; documented limits are not measured quality.",
       "source_ids": [
         "C02"
       ],
@@ -2305,8 +2303,7 @@
       "model": "Whisper large-v3",
       "publisher": "OpenAI",
       "task_families": [
-        "speech_recognition",
-        "speech_translation"
+        "speech_recognition"
       ],
       "input_output": "Audio -> text",
       "access": "weights",
@@ -3303,7 +3300,7 @@
       "input_output": "Text/images -> text",
       "access": "API",
       "license_evidence": "Proprietary Services Agreement; offering conditions",
-      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not latestdefault.",
+      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not the latest default.",
       "source_ids": [
         "R01"
       ],
@@ -3320,7 +3317,7 @@
       "input_output": "Text/images -> text",
       "access": "API",
       "license_evidence": "Proprietary Services Agreement; offering conditions",
-      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not latestdefault.",
+      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not the latest default.",
       "source_ids": [
         "R01"
       ],
@@ -3337,7 +3334,7 @@
       "input_output": "Text/images -> text",
       "access": "API",
       "license_evidence": "Proprietary Services Agreement; offering conditions",
-      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not latestdefault.",
+      "selection_caveat": "No comparative performance adopted; model-specific endpoints/reasoning/token limits differ. Original GPT5.4 capture remains historical, not the latest default.",
       "source_ids": [
         "R01"
       ],
@@ -3354,7 +3351,7 @@
       "input_output": "Text/images -> text",
       "access": "API; partner routes separate",
       "license_evidence": "Commercial/API terms; model-feature retention varies",
-      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "selection_caveat": "Current overview documents identities; no account entitlement, quality rank or universal feature matrix assumed.",
       "source_ids": [
         "R02"
       ],
@@ -3371,7 +3368,7 @@
       "input_output": "Text/images -> text",
       "access": "API; partner routes separate",
       "license_evidence": "Commercial/API terms; model-feature retention varies",
-      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "selection_caveat": "Current overview documents identities; no account entitlement, quality rank or universal feature matrix assumed.",
       "source_ids": [
         "R02"
       ],
@@ -3388,7 +3385,7 @@
       "input_output": "Text/images -> text",
       "access": "API; partner routes separate",
       "license_evidence": "Commercial/API terms; model-feature retention varies",
-      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "selection_caveat": "Current overview documents identities; no account entitlement, quality rank or universal feature matrix assumed.",
       "source_ids": [
         "R02"
       ],
@@ -3405,7 +3402,7 @@
       "input_output": "Text/images -> text",
       "access": "API; partner routes separate",
       "license_evidence": "Commercial/API terms; model-feature retention varies",
-      "selection_caveat": "Current overview documents identities; no account entitlement, qualityrank or universal samefeaturematrix assumed.",
+      "selection_caveat": "Current overview documents identities; no account entitlement, quality rank or universal feature matrix assumed.",
       "source_ids": [
         "R02"
       ],
@@ -3422,7 +3419,7 @@
       "input_output": "Text/image/video/audio/PDF -> text",
       "access": "API",
       "license_evidence": "Gemini service terms",
-      "selection_caveat": "Separate input/output budgets; computer usepreview not generalized liveaudio/imagegeneration.",
+      "selection_caveat": "Separate input/output budgets; computer use preview not generalized live audio/image generation.",
       "source_ids": [
         "R03"
       ],
@@ -3438,7 +3435,7 @@
       "input_output": "Text/vision inputs -> text",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Native vs extendedcontext differ; hostedQwenCloud service describedcomingsoon not currentlyassertedAPIavailability.",
+      "selection_caveat": "Native vs extended context differ; hosted Qwen Cloud service described as coming soon not asserted as currently available through an API.",
       "source_ids": [
         "R04"
       ],
@@ -3454,7 +3451,7 @@
       "input_output": "Text -> text/toolcalls",
       "access": "weights",
       "license_evidence": "Apache-2.0",
-      "selection_caveat": "Harmonyformat and MXFP4artifact requireexactruntime; not genericint4 fit.",
+      "selection_caveat": "Harmony format and MXFP4 artifact require the exact runtime; not generic int4 fit.",
       "source_ids": [
         "R05"
       ],
@@ -3469,7 +3466,7 @@
       "input_output": "Text/code -> text/code/toolcalls",
       "access": "weights",
       "license_evidence": "Apache-2.0",
-      "selection_caveat": "Non-thinking model; generationexample is not universalmaxoutput; native/YaRNdistinct.",
+      "selection_caveat": "Non-thinking model; generation example is not universal maximum output; native and YaRN are distinct.",
       "source_ids": [
         "R06"
       ],
@@ -3485,7 +3482,7 @@
       "input_output": "Text/vision -> text",
       "access": "API / publisher open-weight claim",
       "license_evidence": "Exact checkpoint license and entitlement pending",
-      "selection_caveat": "Previewrelease and route details differ from olderLarge3; no guessedcurrentweightgrant.",
+      "selection_caveat": "Preview release and route details differ from older Large 3; no guessed current weight grant.",
       "source_ids": [
         "R07"
       ],
@@ -3500,8 +3497,8 @@
       ],
       "input_output": "Text/images -> text",
       "access": "gated weights",
-      "license_evidence": "Llama4Community terms",
-      "selection_caveat": "No unrestricted commercial/territory permission inferred; exactcheckpointgatingmatters.",
+      "license_evidence": "Llama 4 Community terms",
+      "selection_caveat": "No unrestricted commercial/territory permission inferred; exact checkpoint gating matters.",
       "source_ids": [
         "R08"
       ],
@@ -3516,7 +3513,7 @@
       "input_output": "Historical series/covariates -> forecasts/quantiles",
       "access": "weights; documented SageMaker route",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Time steps/horizon/covariates are not texttokens; published speed claim not retained as measured.",
+      "selection_caveat": "Time steps/horizon/covariates are not text tokens; published speed claim not retained as measured.",
       "source_ids": [
         "R09"
       ],
@@ -3531,7 +3528,7 @@
       "input_output": "Series/covariates -> forecasts",
       "access": "weights / separately authorized cloud",
       "license_evidence": "Noncommercial nonproduction weights; Apache code",
-      "selection_caveat": "Older2.5Apache terms do not cover3.0weights; cloudcommercialterms separate.",
+      "selection_caveat": "Older 2.5 Apache terms do not cover 3.0 weights; cloud commercial terms separate.",
       "source_ids": [
         "R10"
       ],
@@ -3546,7 +3543,7 @@
       "input_output": "Rows/features -> classification/regression predictions",
       "access": "local weights / API",
       "license_evidence": "Custom model license; commercial agreement conditions",
-      "selection_caveat": "CodeApache does not settleweights; row/column maxima cannot necessarilycombine; no modelrunacceptedterms.",
+      "selection_caveat": "Apache code does not settle weights; row/column maxima cannot necessarily combine; no model run or terms acceptance performed.",
       "source_ids": [
         "R11"
       ],
@@ -3561,7 +3558,7 @@
       "input_output": "Structured/text-rich tables -> predictions",
       "access": "hosted API/VPC",
       "license_evidence": "Commercial/API terms",
-      "selection_caveat": "Different dataset ceilings and runtime from localBase; keep offeringvariants.",
+      "selection_caveat": "Different dataset ceilings and runtime from local Base; keep offering variants.",
       "source_ids": [
         "R11"
       ],
@@ -3578,7 +3575,7 @@
       "input_output": "Time series -> reconstruction/forecast/labels",
       "access": "weights",
       "license_evidence": "MIT card declaration",
-      "selection_caveat": "Taskhead and in-domain adaptation required by chosenuse; no universalclassificationquality.",
+      "selection_caveat": "Task head and in-domain adaptation required by chosen use; no universal classification quality.",
       "source_ids": [
         "R12"
       ],
@@ -3592,8 +3589,8 @@
       ],
       "input_output": "Atmospheric states -> forecasts",
       "access": "published checkpoint families",
-      "license_evidence": "Apachecode / CC-BY4othermaterials; data terms separate",
-      "selection_caveat": "Exact checkpoint/year/grid/inputvariables needselection; no officialwarning replacement or universal forecastaccuracy asserted.",
+      "license_evidence": "Apache code / CC-BY 4.0 other materials; data terms separate",
+      "selection_caveat": "Exact checkpoint/year/grid/input variables need selection; no official warning replacement or universal forecast accuracy asserted.",
       "source_ids": [
         "R13"
       ],
@@ -3608,7 +3605,7 @@
       "input_output": "Multispectral temporal images -> representations/reconstruction",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Input bands, reflectanceunits, timestamps/geolocation and downstreamhead not genericRGBvision.",
+      "selection_caveat": "Input bands, reflectance units, timestamps/geolocation and downstream head not generic RGB vision.",
       "source_ids": [
         "R14"
       ],
@@ -3622,8 +3619,8 @@
       ],
       "input_output": "Biomolecular inputs -> structures/affinity predictions",
       "access": "weights",
-      "license_evidence": "MIT code/weights perpublisher",
-      "selection_caveat": "No clinical/experimentalvalidity or publisher speedcomparison independentlyadopted.",
+      "license_evidence": "MIT code/weights per publisher",
+      "selection_caveat": "No clinical/experimental validity or publisher speed comparison independently adopted.",
       "source_ids": [
         "R15"
       ],
@@ -3636,9 +3633,9 @@
         "biomolecular"
       ],
       "input_output": "Sequences/MSA/molecules -> structural predictions",
-      "access": "weights / publisherAPI",
+      "access": "weights / publisher API",
       "license_evidence": "MIT card/model statement; dependency notices separate",
-      "selection_caveat": "Single-sequence vs MSA and Fastvariant differ; scientific predictions unvalidated for a specificuse.",
+      "selection_caveat": "Single-sequence vs MSA and Fast variant differ; scientific predictions unvalidated for a specific use.",
       "source_ids": [
         "R16"
       ],
@@ -3653,7 +3650,7 @@
       "input_output": "DNA sequences -> sequence representations/predictions",
       "access": "weights",
       "license_evidence": "Apache-2.0 card declaration",
-      "selection_caveat": "Base8192trainingcontext differs from longcontext sibling; no arbitrarytext-chat semantics.",
+      "selection_caveat": "Base 8192 training context differs from long context sibling; no arbitrary text-chat semantics.",
       "source_ids": [
         "R17"
       ],
@@ -3666,9 +3663,9 @@
         "biomolecular"
       ],
       "input_output": "Molecular inputs -> structure predictions",
-      "access": "model parameters / separate cloudservice",
-      "license_evidence": "Weightterms separate from Apache code",
-      "selection_caveat": "No generallicensepermissioninferred; exact weights provenance and input/databaserights required.",
+      "access": "model parameters / separate cloud service",
+      "license_evidence": "Weight terms separate from Apache code",
+      "selection_caveat": "No general licence permission inferred; exact weights provenance and input/database rights required.",
       "source_ids": [
         "R18"
       ],
@@ -3683,7 +3680,7 @@
       "input_output": "Atomic structures -> energy/force related predictions",
       "access": "gated weights",
       "license_evidence": "FAIR Chemistry License",
-      "selection_caveat": "Material/taskunitconditions, jurisdiction and third-partydata rights require review; no physicsvalidation run.",
+      "selection_caveat": "Material/task unit conditions, jurisdiction and third-party data rights require review; no physics validation run.",
       "source_ids": [
         "R19"
       ],
@@ -3695,10 +3692,10 @@
       "task_families": [
         "robotics_action"
       ],
-      "input_output": "Vision/language/state -> actionchunks",
-      "access": "weights in publisher checkpointtable",
-      "license_evidence": "RepositoryApache; exact checkpoint grant/derivativesreview",
-      "selection_caveat": "Baseforfinetuning vs embodiment-specificDROID policy; robotcoordinates/calibration/actionsafety not universal.",
+      "input_output": "Vision/language/state -> action chunks",
+      "access": "weights in publisher checkpoint table",
+      "license_evidence": "Repository Apache; exact checkpoint grant/derivatives review",
+      "selection_caveat": "Base for fine-tuning vs embodiment-specific DROID policy; robot coordinates/calibration/action safety not universal.",
       "source_ids": [
         "R20"
       ],
@@ -3710,10 +3707,10 @@
       "task_families": [
         "robotics_action"
       ],
-      "input_output": "Vision/language/state -> actionchunks",
-      "access": "weights in publisher checkpointtable",
-      "license_evidence": "RepositoryApache; exact checkpoint grant/derivativesreview",
-      "selection_caveat": "Baseforfinetuning vs embodiment-specificDROID policy; robotcoordinates/calibration/actionsafety not universal.",
+      "input_output": "Vision/language/state -> action chunks",
+      "access": "weights in publisher checkpoint table",
+      "license_evidence": "Repository Apache; exact checkpoint grant/derivatives review",
+      "selection_caveat": "Base for fine-tuning vs embodiment-specific DROID policy; robot coordinates/calibration/action safety not universal.",
       "source_ids": [
         "R20"
       ],
@@ -3725,10 +3722,10 @@
       "task_families": [
         "robotics_action"
       ],
-      "input_output": "Image/instruction -> robotactions",
+      "input_output": "Image/instruction -> robot actions",
       "access": "weights",
       "license_evidence": "MIT card vs upstream base-model-restriction notice requires reconciliation",
-      "selection_caveat": "No robotexecution; do not normalize conflictinglicensenotices to unrestrictedpermission.",
+      "selection_caveat": "No robot execution; do not normalize conflicting licence notices to unrestricted permission.",
       "source_ids": [
         "R21"
       ],
@@ -3742,8 +3739,8 @@
       ],
       "input_output": "User/item histories/features -> retrieval/ranking",
       "access": "training recipe; user-trained artifacts",
-      "license_evidence": "Repositorylicense not blanket userdatagrant",
-      "selection_caveat": "No universal pretrainedproductioncheckpoint established; fitdatasetandserializeowntrainedmodel.",
+      "license_evidence": "Repository licence not blanket user-data grant",
+      "selection_caveat": "No universal pretrained production checkpoint established; fit a dataset and serialize the trained model.",
       "source_ids": [
         "R22"
       ],
@@ -3757,8 +3754,8 @@
       ],
       "input_output": "Graph/molecular features -> learned predictions",
       "access": "architecture/training recipes",
-      "license_evidence": "Exactcheckpointgrant not established",
-      "selection_caveat": "Require exact trainedcheckpoint/dataset/feature-schema beforecatalogproposal; repository not itselfdeployablemodel.",
+      "license_evidence": "Exact checkpoint grant not established",
+      "selection_caveat": "Require exact trained checkpoint/dataset/feature schema before catalog proposal; repository not itself a deployable model.",
       "source_ids": [
         "R23"
       ],
@@ -3772,9 +3769,9 @@
         "anomaly_detection"
       ],
       "input_output": "Dataset-specific features -> predictions/scores",
-      "access": "user-trained serializedartifact",
-      "license_evidence": "Librarylicense and data/model rights separate",
-      "selection_caveat": "An algorithm/library release is not a trainedmodel. Recorddataset/features/preprocessor/serialization/runtime; no fictitiousuniversalweights.",
+      "access": "user-trained serialized artifact",
+      "license_evidence": "Library licence and data/model rights separate",
+      "selection_caveat": "An algorithm/library release is not a trained model. Record dataset/features/preprocessor/serialization/runtime; no fictitious universal weights.",
       "source_ids": [
         "R24",
         "R25"

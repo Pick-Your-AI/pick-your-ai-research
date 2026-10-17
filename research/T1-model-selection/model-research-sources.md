@@ -1,6 +1,6 @@
 # Complete model-research source register
 
-All new broad-family entries below were inspected **2026-10-17**. Each ID is a primary-source group, sometimes with separate card, code licence, weight licence or route documents. A group is not an independent replication and does not imply every linked page grants all rights. Precise access/gating and unresolved conditions are in the citing model rows. The [machine-readable register](model-research-sources.json) records observers/date; [prior research](citation-audit-2026-10-17.md) keeps its original16October sources and fresh17October checks distinct.
+All new broad-family entries below were inspected **2026-10-17**. Each ID is a primary-source group, sometimes with separate card, code licence, weight licence or route documents. A group is not an independent replication and does not imply every linked page grants all rights. Precise access/gating and unresolved conditions are in the citing model rows. The [machine-readable register](model-research-sources.json) records observers/date; [prior research](citation-audit-2026-10-17.md) keeps its original 16 October sources and fresh 17 October checks distinct.
 
 | ID | Publisher / source owner | Actual primary references | Observation group |
 | --- | --- | --- | --- |

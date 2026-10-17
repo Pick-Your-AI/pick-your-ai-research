@@ -6,14 +6,14 @@ The earlier four-model table was a language/multimodal-generation slice. The bro
 
 ## Read the evidence
 
-The [JSON inventory](model-research-inventory.json) currently contains **248 candidate records**, not248 independently pinned deployable models: it explicitly distinguishes models, bundles, families, unpinned services and training recipes. Its **55 research task tags** can overlap. Each record resolves to one or more of **189 primary source groups** in [the register](model-research-sources.md), comprising **237 distinct URLs** at this checkpoint. Counts are **derived from this corpus**, not market size, popularity or quality. All new observations are dated17October; [earlier research citations](citation-audit-2026-10-17.md) retain their original dates.
+The [JSON inventory](model-research-inventory.json) currently contains **248 candidate records**, not 248 independently pinned deployable models: it explicitly distinguishes models, bundles, families, unpinned services and training recipes. Its **55 research task tags** can overlap. Each record resolves to one or more of **189 primary source groups** in [the register](model-research-sources.md), comprising **237 distinct URLs** at this checkpoint. Counts are **derived from this corpus**, not market size, popularity or quality. All new observations are dated 17 October; [earlier research citations](citation-audit-2026-10-17.md) retain their original dates.
 
 | Research territory | Task families investigated | Detailed sourced comparison |
 | --- | --- | --- |
-| Language and discriminative NLP | Reasoning/generation, code, translation, encoder representations, token classification, moderation, multimodal understanding | [Language models](language-models.md); primary groupsR01-R08/R26-R29 |
+| Language and discriminative NLP | Reasoning/generation, code, translation, encoder representations, token classification, moderation, multimodal understanding | [Language models](language-models.md); primary groups R01-R08/R26-R29 |
 | Vision perception and documents | Classification/representation, object detection, segmentation, pose, tracking, depth/camera geometry, OCR and layout | [Perception models](perception-models.md); P01-P17/P34-P42 |
 | Retrieval representations | Text/multimodal embedding, dense/sparse/multivector outputs and reranking | [Retrieval models](retrieval-models.md); P06/P18-P33/P43-P54; handoff to #14, not ownership transfer |
-| Generative and editable media | Image generation/editing/restoration, video/audio generation/editing, motion/avatar transfer,3D assets/PBR, spatial/world models and action-conditioned prediction | [Generative media](generative-media-models.md); B01-B50/R30 |
+| Generative and editable media | Image generation/editing/restoration, video/audio generation/editing, motion/avatar transfer, 3D assets/PBR, spatial/world models and action-conditioned prediction | [Generative media](generative-media-models.md); B01-B50/R30 |
 | Speech and audio | ASR, speech translation, alignment, diarization, synthesis, voice conversion/design, full-duplex conversation, music/sound generation, audio QA/classification/embedding, separation/enhancement and VAD | [Audio models](audio-models.md); U01-U14/W01-W23/C01-C18 |
 | Predictive/scientific/embodied | Tabular classification/regression, anomaly/temporal classification, forecasting, recommendations, graph learning, weather, geospatial, molecular/genomic/materials and robot action policies | [Specialized models](specialized-models.md); R09-R25, with embodied B45/B46 |
 
