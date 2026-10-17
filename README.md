@@ -38,6 +38,17 @@ GitHub Issues hold the research tasks: T0–T6 are parent issues and each compon
 - What should a build summary, saved configuration, and shareable link contain, and what happens when data changes? ([#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42))
 - Which data sources permit automated updates, and how will stale or conflicting facts be handled? ([#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41))
 
+## Maintainers
+
+- [@Alexi5000](https://github.com/Alexi5000)
+
+## Early contributors
+
+- [@bradAGI](https://github.com/bradAGI)
+- [@DevvGwardo](https://github.com/DevvGwardo)
+- [@Dropgunner](https://github.com/Dropgunner)
+- [@KingdomMinded7x70](https://github.com/KingdomMinded7x70)
+
 ## Inspiration and boundaries
 
 PCPartPicker is a reference for the selection flow, compatibility feedback, and price comparison. This project should develop its own design, wording, data model, and implementation. Research should cite primary sources for AI product facts, prices, licenses, benchmarks, and operational claims.
