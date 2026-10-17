@@ -27,17 +27,17 @@
     {
       "source_uri": "https://docs.github.com/en/rest/issues/issues",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports API version 2026-03-10 and 'Issues' repository permissions (write) for Create an issue. Update an issue was not visible in the fetched excerpt. required_scopes uses this project's notation '<fine-grained permission>:<access>' for the GitHub fine-grained token permission named on the endpoint page; auth_methods api_key represents a fine-grained personal access token (bearer token). OAuth app and GitHub App installation tokens were not verified today and are omitted."
     },
     {
       "source_uri": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Content-creating requests: 80 per minute and 500 per hour secondary limits; POST/PATCH cost 5 points."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "extensions": {
     "x_side_effect_class": "write",
     "x_operation_family": "issues.write"

@@ -28,17 +28,17 @@
     {
       "source_uri": "https://developers.google.com/workspace/gmail/api/auth/scopes",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports gmail.send scope ('Send email on your behalf', Sensitive) and OAuth scopes model; narrowest-scope advice."
     },
     {
       "source_uri": "https://developers.google.com/workspace/gmail/api/reference/quota",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "messages.send costs 100 quota units; 6,000 units per user per minute; 1,200,000 per project per minute; truncated exponential backoff advised. Version v1 from the REST reference path."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "extensions": {
     "x_side_effect_class": "irreversible",
     "x_operation_family": "messages.send"

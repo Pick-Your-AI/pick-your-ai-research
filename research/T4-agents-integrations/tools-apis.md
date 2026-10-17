@@ -3,6 +3,12 @@
 Issue: #26 · Contract: 1.0.0 · Kinds: `tool`, `integration`
 Status: draft · Last researched: 2026-10-16
 
+## Evidence status correction
+
+Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims and the published list-price rate remain `unverified`; the original facts, versions, source access dates and `checked_at` and pricing conditions are unchanged. No qualifying independent corroboration or runtime reproduction was supplied. Vendor capability statements remain documented claims, not measurements.
+
+A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
+
 ## User decision
 
 Which external actions and data APIs can the agent call, and with what permissions, risks and costs?
@@ -15,7 +21,7 @@ This note defines the metadata every tool entry needs, a side-effect and risk cl
 
 A tool's deployment mode decides where the call executes, where egress happens, and who holds the credential. It does not decide whether the tool exists.
 
-| Mode | What runs where | Examples verified here | Consequence for the builder |
+| Mode | What runs where | Examples source-checked here | Consequence for the builder |
 | --- | --- | --- | --- |
 | **API (provider-hosted server tool)** | The model provider executes the tool inside its own API; the application has no handler code (B4) | Anthropic web search and web fetch (B5, B6); OpenAI code interpreter (B41) | Uses the model provider's credential and billing. Only available when the model is called through that provider's API. Egress happens from the provider, not the user's network |
 | **Managed SaaS API** | The application or agent runtime calls a vendor REST API with its own credential | GitHub, Slack, Gmail, Google Drive, Stripe, Brave Search, E2B Cloud, n8n Cloud | Needs a `credential_ref`, outbound network from the agent runtime, and the vendor's rate limits and pricing |
@@ -29,7 +35,7 @@ A tool's deployment mode decides where the call executes, where egress happens, 
 
 Proposed values for a future `category` field (now `/tags` by convention). Categories describe *what the tool touches*. The risk class (next section) describes *what it changes*. A category does not imply a risk class.
 
-| Category id | Covers | Typical default risk class | Verified example in this note |
+| Category id | Covers | Typical default risk class | Source-checked (unverified) example in this note |
 | --- | --- | --- | --- |
 | `http_request` | Generic HTTP/API request tools where the target is configured or model-chosen | write (unknown target) | — (n8n HTTP-style flows, by reference) |
 | `search_browse` | Web search, page fetch, headless browsing | read_only, open world | Anthropic web search/fetch, Brave Search |
@@ -52,7 +58,7 @@ One row per **operation family**. Families are split when side effects differ, b
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Web search (`web_search_20260318`) | Anthropic (API server tool) | Claude API key | none beyond API access; an org admin can disable it or restrict domains in the Console | `max_uses` per request (caller-set); org rate limit (`too_many_requests`) | read_only, open world | Errors arrive inside HTTP 200 as `too_many_requests`, `max_uses_exceeded`, `query_too_long`, `request_too_large`, `invalid_tool_input`, `unavailable`; disabled tool returns 400 | per search: $10 per 1,000 searches (USD) + tokens; errors not billed | B5, B7 |
 | 2 | Web fetch (`web_fetch_20260318`) | Anthropic (API server tool) | Claude API key | none; domain allow/block lists | `max_uses` (no default limit; failed fetches count) | read_only, open world, **exfiltration risk** | `url_not_in_prior_context`, `url_not_allowed`, `url_not_accessible`, `unsupported_content_type`, `too_many_requests`, `max_uses_exceeded`, `unavailable` (inside HTTP 200) | no extra charge; tokens only | B6, B7 |
-| 3 | Brave web search (`/res/v1/web/search`) | Brave (SaaS) | API key in `X-Subscription-Token` | none | Search plan 50 QPS | read_only, open world | not verified (rate-limit page failed to load) | per request: "$5.00 per 1,000 requests", $5 monthly credit; currency code not stated | B8, B9 |
+| 3 | Brave web search (`/res/v1/web/search`) | Brave (SaaS) | API key in `X-Subscription-Token` | none | Search plan 50 QPS | read_only, open world | not source-checked (rate-limit page failed to load) | per request: "$5.00 per 1,000 requests", $5 monthly credit; currency code not stated | B8, B9 |
 | 4 | GitHub issues read | GitHub (SaaS) | fine-grained PAT | "Issues" repository permission (read); none for public repos | 5,000 req/h authenticated; 60 req/h unauthenticated; secondary 100 concurrent, 900 points/min (GET = 1 point) | read_only | 403/429 with `x-ratelimit-remaining: 0`; wait for `x-ratelimit-reset` or `retry-after`; repeated violation "may result in the banning of your integration" | none published for REST calls (unknown) | B10, B11 |
 | 5 | GitHub issues write (create) | GitHub (SaaS) | fine-grained PAT | "Issues" repository permission (write) | as above, plus 80 content-creating req/min and 500/h; POST/PATCH = 5 points | write | as above | unknown | B10, B11 |
 | 6 | Slack `chat.postMessage` | Slack (SaaS) | OAuth v2 bot or user token | `chat:write` | "Special": about 1 message/s per channel, several hundred/min per workspace | high_impact (visible to others at once) | `ratelimited` with `Retry-After`; `rate_limited` (too many posts) | none published per call (unknown) | B13, B18 |
@@ -165,7 +171,7 @@ Mapped to v1 JSON pointers. "Note only" means v1 cannot express it.
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md`. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
+All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -230,7 +236,7 @@ The schema states that "all properties in `ToolAnnotations` are **hints**", that
 
 ### Four classes
 
-| Class | Definition | Examples (verified) | Maps to v1 `side_effect` | MCP hint equivalent | Default approval | Least-privilege requirement |
+| Class | Definition | Examples (source-checked) | Maps to v1 `side_effect` | MCP hint equivalent | Default approval | Least-privilege requirement |
 | --- | --- | --- | --- | --- | --- | --- |
 | `read_only` | No state change in any system. It may still read private data or reach the open web | GitHub list issues; Slack `conversations.history`; web search/fetch; Postgres SELECT under a read-only role | `read_only` | `readOnlyHint: true` | none (auto) | read-only permission level (GitHub "read", `drive.file` or `drive.readonly`); read-only DB role, not just a read-only transaction |
 | `write` | Changes state in the caller's own resources, additive or reversible by another API call | GitHub create issue; Gmail `messages.trash` | `mutating` | `readOnlyHint: false`, `destructiveHint: false` | policy allowlist + audit log; no per-call human approval | narrowest write permission (GitHub "Issues: write" only) |
@@ -262,7 +268,7 @@ The schema states that "all properties in `ToolAnnotations` are **hints**", that
 ## Compatibility proposals
 
 Rules are proposed to #40 using the [rule proposal template](../../templates/rule-proposal.md). Outcome (`pass/fail/unknown/skipped`) is separate from severity (`info/warning/error`).
-- **Verified:** the assertion is supported by cited primary text, and the expression uses only v1 fields.
+- **Source-checked (unverified):** the assertion is supported by cited primary text, and the expression uses only v1 fields.
 - **Hypothesis:** policy judgement or contract change needed.
 
 All JSON rules below validate against `ruleset.schema.json`. They were also run with `contracts/v1/reference/evaluate.py` against the synthetic fixture build (`contracts/v1/examples/`). Outcomes there: pass for scopes, guardrail and MCP rules; fail for `credential.ref` (the fixture has no `credential_ref`); skipped for the cost and exfiltration rules.
@@ -285,7 +291,7 @@ All JSON rules below validate against `ruleset.schema.json`. They were also run 
 - Explanation and remediation: the tool cannot work within the scopes the policy allows. Widen deliberately or pick a narrower family.
 - Edges: `dep.guardrail.tool`. Consumers: #35.
 - Passing example (synthetic): required `["chat:write"]`, allowed `["chat:write"]`. Failing: required `["issues:write"]`, allowed `["issues:read"]`. Unknown: allowed absent.
-- Version impact: none (v1 fields only). **Verified** (expression); the policy semantics are a hypothesis for #35.
+- Version impact: none (v1 fields only). **Source-checked (unverified)** (expression); the policy semantics are a hypothesis for #35.
 
 ```json
 {"id":"rule.t4.tool.scopes.allowed","severity":"error","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/id"}}},{"op":"exists","value":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/required_scopes"}}}]},"assert":{"op":"subset_of","left":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/required_scopes"}},"right":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/settings/allowed_scopes"}}},"on_unknown":"review","message":"The tool needs permission scopes that this build does not allow.","remediation":"Grant the missing scopes in allowed_scopes after policy review, or choose a narrower tool operation family.","affected_kinds":["tool","guardrail"],"owner":"t4-research"}
@@ -297,7 +303,7 @@ All JSON rules below validate against `ruleset.schema.json`. They were also run 
 - Evidence: Google advises "the most narrowly focused scope possible" (B19). AWS says to "grant only the permissions required to perform a task" (B40).
 - Severity: warning; `on_unknown: review`.
 - Passing: allowed `["gmail.send"]` = required. Failing: allowed `["https://mail.google.com/"]` for a send-only tool. Skipped/unknown: no `allowed_scopes`.
-- **Verified.**
+- **Source-checked (unverified).**
 
 ```json
 {"id":"rule.t4.tool.scopes.least-privilege","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/settings/allowed_scopes"}}},{"op":"exists","value":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/required_scopes"}}}]},"assert":{"op":"subset_of","left":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/settings/allowed_scopes"}},"right":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/required_scopes"}}},"on_unknown":"review","message":"The build allows scopes this tool does not need.","remediation":"Remove scopes from allowed_scopes that are not in the tool's required_scopes.","affected_kinds":["tool","guardrail"],"owner":"t4-research"}
@@ -309,7 +315,7 @@ All JSON rules below validate against `ruleset.schema.json`. They were also run 
 - Evidence: MCP says applications SHOULD provide confirmation and a human able to deny invocations (B1).
 - Severity: error; `on_unknown: block` (same as the baseline).
 - Passing: targets `["input","tool"]`. Failing: targets `["output"]` with a `tool_permissions` policy. Unknown: no metric (catalog item missing).
-- **Verified** (expression); policy owned by #35.
+- **Source-checked (unverified)** (expression); policy owned by #35.
 
 ```json
 {"id":"rule.t4.tool.guardrail.targets","severity":"error","applies_when":{"op":"gt","left":{"metric":"tools.mutating_count"},"right":{"literal":0}},"assert":{"op":"contains","left":{"ref":{"scope":"catalog","kind":"guardrail","role":"primary","pointer":"/spec/targets"}},"right":{"literal":"tool"}},"on_unknown":"block","message":"Mutating tools are selected but the guardrail does not target tool calls.","remediation":"Select a guardrail whose targets include tool.","affected_kinds":["tool","guardrail"],"owner":"t4-research"}
@@ -344,7 +350,7 @@ assert: all(
 
 - If `auth_methods` exists and does not contain `none`, the tool selection must have `/settings/credential_ref` (`secret://…`, never the credential).
 - Severity: error; `on_unknown: review`.
-- **Verified.** Evidence: Stripe "Store sensitive keys in a secrets vault" (B27); AWS prefers temporary role credentials (B40).
+- **Source-checked (unverified).** Evidence: Stripe "Store sensitive keys in a secrets vault" (B27); AWS prefers temporary role credentials (B40).
 - The key *type* (restricted vs unrestricted, temporary vs long-term) needs a contract field (`credential_kind`). Note only.
 
 ```json
@@ -354,7 +360,7 @@ assert: all(
 ### T4-B7 `rule.t4.tool.protocol.mcp-framework`: framework must support the tool's protocol
 
 - Expressible today for MCP only. It extends `rule.agent.mcp.framework`, which triggers only when an `mcp_server` is selected, to tools whose `protocol` is `mcp`.
-- Severity: error; `on_unknown: block`. **Verified** (B1 defines MCP tools; the framework capability comes from #25).
+- Severity: error; `on_unknown: block`. **Source-checked (unverified)** (B1 defines MCP tools; the framework capability comes from #25).
 
 ```json
 {"id":"rule.t4.tool.protocol.mcp-framework","severity":"error","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/protocol"}},"right":{"literal":"mcp"}}]},"assert":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"agent_framework","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"agent_framework","role":"primary","pointer":"/spec/supports_mcp"}},"right":{"literal":true}}]},"on_unknown":"block","message":"An MCP tool is selected but the framework does not support MCP.","remediation":"Choose an MCP-capable framework or a non-MCP variant of the tool.","affected_kinds":["tool","agent_framework","mcp_server"],"owner":"t4-research"}
@@ -373,7 +379,7 @@ assert (server tools): eq(catalog tool /spec/requires_provider_ref, selection mo
 
 - A metered tool or integration adds recurring usage cost. It needs a `cost_policy` selection so #39 includes its meter. This extends `rule.budget.monthly.cap`, which only acts once a complete quote exists.
 - Severity: warning; `on_unknown: review`.
-- **Verified** for metered evidence (B7, B8, B29, B37); the policy is a hypothesis.
+- **Source-checked (unverified)** for metered evidence (B7, B8, B29, B37); the policy is a hypothesis.
 - Passing: a metered web search tool with a cost policy. Failing: a metered tool and no cost policy. Skipped: `billing_class` `free` or `included`.
 
 ```json
@@ -386,7 +392,7 @@ assert (server tools): eq(catalog tool /spec/requires_provider_ref, selection mo
 
 ### T4-B9 `rule.t4.tool.cost.unknown`: info when the cost basis is unknown
 
-- Severity: info; `on_unknown: defer`. Many SaaS APIs publish no per-call price but sit behind a paid account (GitHub, Gmail, Stripe). **Verified** (absence of published per-call prices in B10, B20, B24).
+- Severity: info; `on_unknown: defer`. Many SaaS APIs publish no per-call price but sit behind a paid account (GitHub, Gmail, Stripe). **Source-checked (unverified)** (absence of published per-call prices in B10, B20, B24).
 
 ```json
 {"id":"rule.t4.tool.cost.unknown","severity":"info","applies_when":{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/id"}}},"assert":{"op":"ne","left":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/billing_class"}},"right":{"literal":"unknown"}},"on_unknown":"defer","message":"The tool's billing class is unknown, so its cost may be missing from the estimate.","remediation":"Confirm whether the tool or its upstream API is free, included or metered.","affected_kinds":["tool","cost_policy"],"owner":"t4-research"}
@@ -402,7 +408,7 @@ assert: eq(metric cost.unpriced_metered_count, 0)
 ### T4-B10 `rule.t4.tool.network.exfiltration`: networked tool with sensitive data
 
 - If a networked tool is used in a build with `objectives.data_classification` in `confidential` or `restricted`, the guardrail must include the `data_exfiltration` policy.
-- Severity: warning; `on_unknown: review`. **Verified** (B6 exfiltration warning; B1 security considerations).
+- Severity: warning; `on_unknown: review`. **Source-checked (unverified)** (B6 exfiltration warning; B1 security considerations).
 
 ```json
 {"id":"rule.t4.tool.network.exfiltration","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/is_networked"}},"right":{"literal":true}},{"op":"in","left":{"ref":{"scope":"build","pointer":"/objectives/data_classification"}},"right":{"literal":["confidential","restricted"]}}]},"assert":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"guardrail","role":"primary","pointer":"/id"}}},{"op":"contains","left":{"ref":{"scope":"catalog","kind":"guardrail","role":"primary","pointer":"/spec/policies"}},"right":{"literal":"data_exfiltration"}}]},"on_unknown":"review","message":"A networked tool runs in a build that handles confidential or restricted data without an exfiltration guardrail.","remediation":"Add a guardrail with a data_exfiltration policy, or restrict the tool's domains.","affected_kinds":["tool","guardrail"],"owner":"t4-research"}
@@ -411,7 +417,7 @@ assert: eq(metric cost.unpriced_metered_count, 0)
 ### T4-B11 `rule.t4.integration.rate-limit`: configured rate within provider limit
 
 - Selection `/settings/rate_limit_per_minute` ≤ catalog `/spec/rate_limit_per_minute`.
-- Severity: warning; `on_unknown: defer`. **Verified** expression. Most providers do not publish a single per-minute number (B8, B10, B20, B24), so the rule will often be skipped.
+- Severity: warning; `on_unknown: defer`. **Source-checked (unverified)** expression. Most providers do not publish a single per-minute number (B8, B10, B20, B24), so the rule will often be skipped.
 
 ```json
 {"id":"rule.t4.integration.rate-limit","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"integration","role":"primary","pointer":"/settings/rate_limit_per_minute"}}},{"op":"exists","value":{"ref":{"scope":"catalog","kind":"integration","role":"primary","pointer":"/spec/rate_limit_per_minute"}}}]},"assert":{"op":"lte","left":{"ref":{"scope":"selection","kind":"integration","role":"primary","pointer":"/settings/rate_limit_per_minute"}},"right":{"ref":{"scope":"catalog","kind":"integration","role":"primary","pointer":"/spec/rate_limit_per_minute"}}},"on_unknown":"defer","message":"The configured integration rate exceeds the provider's documented limit.","remediation":"Lower rate_limit_per_minute to the provider limit or obtain a higher quota.","affected_kinds":["integration"],"owner":"t4-research"}
@@ -421,20 +427,20 @@ assert: eq(metric cost.unpriced_metered_count, 0)
 
 | Rule | Severity | Status | Form |
 | --- | --- | --- | --- |
-| `rule.t4.tool.scopes.allowed` | error | Verified (expression); policy hypothesis | json |
-| `rule.t4.tool.scopes.least-privilege` | warning | Verified | json |
-| `rule.t4.tool.guardrail.targets` | error | Verified | json |
+| `rule.t4.tool.scopes.allowed` | error | Source-checked (unverified) (expression); policy hypothesis | json |
+| `rule.t4.tool.scopes.least-privilege` | warning | Source-checked (unverified) | json |
+| `rule.t4.tool.guardrail.targets` | error | Source-checked (unverified) | json |
 | `rule.t4.tool.guardrail.enforcement` | warning | Hypothesis | json |
 | `rule.t4.tool.irreversible.approval` | error / warning | Hypothesis | needs contract change |
-| `rule.t4.tool.credential.ref` | error | Verified | json |
-| `rule.t4.tool.protocol.mcp-framework` | error | Verified | json |
+| `rule.t4.tool.credential.ref` | error | Source-checked (unverified) | json |
+| `rule.t4.tool.protocol.mcp-framework` | error | Source-checked (unverified) | json |
 | tool interface / provider-hosted tool rule | error | Hypothesis | needs contract change |
-| `rule.t4.tool.cost.metered` | warning | Verified evidence, policy hypothesis | json |
-| `rule.t4.integration.cost.metered` | warning | Verified evidence, policy hypothesis | json |
-| `rule.t4.tool.cost.unknown` | info | Verified | json |
+| `rule.t4.tool.cost.metered` | warning | Source-checked (unverified) evidence, policy hypothesis | json |
+| `rule.t4.integration.cost.metered` | warning | Source-checked (unverified) evidence, policy hypothesis | json |
+| `rule.t4.tool.cost.unknown` | info | Source-checked (unverified) | json |
 | unpriced metered component | warning | Hypothesis | needs contract change |
-| `rule.t4.tool.network.exfiltration` | warning | Verified | json |
-| `rule.t4.integration.rate-limit` | warning | Verified | json |
+| `rule.t4.tool.network.exfiltration` | warning | Source-checked (unverified) | json |
+| `rule.t4.integration.rate-limit` | warning | Source-checked (unverified) | json |
 
 ## Pricing and capacity
 

@@ -26,11 +26,11 @@
     {
       "source_uri": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports version web_fetch_20260318, no additional cost beyond tokens (billing_class included), max_uses with no default limit, allowed/blocked domains, max_content_tokens, URL must already be in context, data exfiltration warning, error codes. side_effect read_only is a project classification (HTTP GET of URLs), with exfiltration risk noted in the research note."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "extensions": {
     "x_side_effect_class": "read_only",
     "x_open_world": true

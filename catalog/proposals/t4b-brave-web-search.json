@@ -24,17 +24,17 @@
     {
       "source_uri": "https://api-dashboard.search.brave.com/app/documentation/web-search/get-started",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports endpoint https://api.search.brave.com/res/v1/web/search (version v1 from the path) and X-Subscription-Token API key header."
     },
     {
       "source_uri": "https://api-dashboard.search.brave.com/app/plans",
       "checked_at": "2026-10-16T12:00:00Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Supports billing_class metered: Search plan $5.00 per 1,000 requests, $5 monthly free credit, 50 QPS. Currency symbol only; currency code not stated, so no pricebook proposed."
     }
   ],
-  "updated_at": "2026-10-16T12:00:00Z",
+  "updated_at": "2026-10-17T02:17:46Z",
   "extensions": {
     "x_side_effect_class": "read_only",
     "x_open_world": true

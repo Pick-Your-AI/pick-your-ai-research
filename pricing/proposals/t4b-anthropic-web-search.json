@@ -17,7 +17,7 @@
       "provenance": {
         "source_uri": "https://platform.claude.com/docs/en/about-claude/pricing",
         "checked_at": "2026-10-16T12:00:00Z",
-        "verification_status": "verified",
+        "verification_status": "unverified",
         "notes": "Listed as '$10 per 1,000 searches'; page states 'All prices are in USD'."
       },
       "conditions": [
