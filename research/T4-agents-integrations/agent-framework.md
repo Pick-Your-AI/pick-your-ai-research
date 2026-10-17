@@ -37,7 +37,7 @@ Versions are the latest release on the package registry on 2026-10-16. "MCP clie
 | No framework: OpenAI SDK (`openai`) | 3.31.0 (2026-10-14) | Apache-2.0 (PyPI metadata) | per SDK | active | none in loop; OpenAI-side remote MCP via Responses API | application-owned | application-owned | application-owned | application-owned | A1, A80 |
 | No framework: Anthropic SDK (`anthropic`) | 1.15.0 (2026-10-15) | MIT (PyPI metadata) | per SDK | active | none in loop; Anthropic-side MCP connector | application-owned | application-owned | application-owned | application-owned | A2, A80 |
 | LangGraph (`langgraph`) | 1.2.15 (2026-10-12); JS `@langchain/langgraph` 1.5.0 (2026-10-12) | MIT | python; typescript (separate package) | active | via LangChain `langchain[mcp]>=1.4.0` (beta): stdio, Streamable HTTP, in-memory; SSE deprecated; WebSocket not supported. `langchain-mcp-adapters` no longer maintained | checkpointers: in-memory, SQLite, Postgres; Store for long-term memory | graph; multi-agent not stated on fetched pages | interrupts | LangSmith; OTel export via `langsmith[otel]` | A6–A16 |
-| Microsoft AutoGen (`autogen-agentchat`) | 0.7.5 (2025-09-30) | MIT | python | **maintenance mode**; successor is Microsoft Agent Framework | not assessed | not assessed | yes | not assessed | not assessed | A17, A18 |
+| Microsoft AutoGen (`autogen-agentchat`) | 0.7.5 (2025-09-30) | MIT | python | **archived**; no Microsoft bug fixes, security fixes or support; successor is Microsoft Agent Framework | not assessed | not assessed | yes | not assessed | not assessed | A17, A18, A85 |
 | Microsoft Semantic Kernel (`semantic-kernel`) | 1.45.0 (2026-10-06); NuGet `Microsoft.SemanticKernel` 1.81.0 | MIT | python, .NET, Java | **superseded**: README says it "is now Microsoft Agent Framework"; still releasing | MCP plugins (transports not assessed) | not assessed | yes | not assessed | not assessed | A19, A20 |
 | Microsoft Agent Framework (`agent-framework`) | 1.22.0 (2026-10-15); NuGet `Microsoft.Agents.AI` 1.25.0 (2026-10-14) | MIT | python, .NET; Go in public preview | active (1.0 GA, LTS commitment) | Python: stdio (`MCPStdioTool`), Streamable HTTP (`MCPStreamableHTTPTool`), WebSocket (`MCPWebsocketTool`); .NET page shows stdio only; Foundry-hosted MCP with approval modes | workflow checkpoints at superstep boundaries; backends not stated | graph and functional workflows; sequential, concurrent, handoff, group | `RequestInfoExecutor` / `ctx.request_info()`; hosted MCP approval | built-in OpenTelemetry | A21–A27 |
 | CrewAI (`crewai`) | 1.15.28 (2026-10-14) | MIT | python (>=3.10,<3.14) | active | stdio, SSE, Streamable HTTP (`mcps` field or `MCPServerAdapter`); adapter is tools-only | checkpoints of crews, flows, agents: JSON or SQLite providers | crews and flows | human input / review | depends on `opentelemetry-sdk`; anonymous telemetry by default | A28–A33 |
@@ -59,8 +59,8 @@ Notes on the "other" slots: Mastra (the only TypeScript-only framework evaluated
 - **LangGraph.** Low-level graph runtime: "you don't need to use LangChain to use LangGraph" (A16). Checkpointers give human-in-the-loop, time travel and fault tolerance. In-memory checkpoints are lost on restart; Postgres is recommended for production (A9).
   - MCP is not in LangGraph itself. It comes from LangChain's `langchain.mcp` (beta, `langchain[mcp]>=1.4.0`, targets the 2026-07-28 MCP spec with fallback) (A13, A14). `langchain-mcp-adapters` 0.3.2 is "no longer actively maintained" (A12).
   - Managed: LangSmith Deployment in four modes: Cloud (Plus plan or above), Hybrid, Self-hosted (Enterprise plan), and a Standalone server that needs PostgreSQL, Redis and a LangSmith license (A10).
-- **AutoGen.** "AutoGen is now in maintenance mode. It will not receive new features or enhancements and is community managed going forward. New users should start with Microsoft Agent Framework" (A17). The last PyPI release is 0.7.5 on 2025-09-30 (A18). Do not offer it for new builds.
-- **Semantic Kernel.** README: "Semantic Kernel is now Microsoft Agent Framework!", with a migration guide (A19). Releases continue (Python 1.45.0, .NET 1.81.0) (A20). Whether it is "maintenance" in the AutoGen sense is not stated. Treat it as superseded for new builds.
+- **AutoGen.** Microsoft now describes AutoGen as archived and no longer maintained; Microsoft provides no bug fixes, security fixes, new features or support (A85, checked 2026-10-17). New users are directed to Microsoft Agent Framework. The last PyPI release is 0.7.5 on 2025-09-30 (A18). Do not offer it for new builds.
+- **Semantic Kernel.** README: "Semantic Kernel is now Microsoft Agent Framework!", with a migration guide (A19). Releases continue (Python 1.45.0, .NET 1.81.0) (A20). Treat it as superseded for new builds.
 - **Microsoft Agent Framework (MAF).** Python and .NET, with Go in public preview: "Declarative agents, RAG, CodeAct, and functional workflows are not yet available" in Go (A24). Providers: "Microsoft Foundry, Anthropic, Azure OpenAI, OpenAI, Ollama, and more" (A24).
   - Python MCP client classes: `MCPStdioTool`, `MCPStreamableHTTPTool`, `MCPWebsocketTool`. They need `mcp --pre` (and `mcp[ws] --pre` for WebSocket), which is a version-dependent prerequisite (A25). There is no separate SSE class.
   - Hosting samples cover A2A, Foundry hosted agents, and a separate Durable Task / Azure Functions extension (A21).
@@ -101,7 +101,7 @@ The v1 `spec_agent_framework` has one required field (`programming_languages`) a
 | --- | --- | --- | --- | --- |
 | `/id` | string, `agent_framework.<slug>` | one item per package and language | — | Multi-language frameworks ship separate packages with different versions (MAF Python 1.22.0 vs .NET 1.25.0) |
 | `/version` | string, exact registry version | see matrix | per row | v1 allows one version per ID; per-language versions need separate IDs |
-| `/status` | enum `active, preview, deprecated, retired` | AutoGen → `deprecated` (maintenance mode); Semantic Kernel → see open questions | A17, A19 | v1 has no "maintenance" or "superseded" value |
+| `/status` | enum `active, preview, deprecated, retired` | AutoGen → `deprecated` (archived; lifecycle mapping remains proposed); Semantic Kernel → see open questions | A85, A19 | v1 has no "archived" or "superseded" value |
 | `/license/spdx_id` | SPDX string | MIT or Apache-2.0 for all evaluated, except Mastra (dual) | per row | Mastra cannot be expressed as one SPDX ID; Claude Agent SDK npm license not SPDX |
 | `/spec/programming_languages` | array of enum `python, typescript, javascript, go, rust, java, other` | see matrix | per row | No `csharp`/`dotnet` or `kotlin`; MAF, SK and ADK need `other` |
 | `/spec/supports_tool_execution` | boolean | true for all evaluated | per row | Does not say native vs prompted (ReAct/code) tool calling |
@@ -120,7 +120,7 @@ The v1 `spec_agent_framework` has one required field (`programming_languages`) a
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Versions and dates come from the PyPI JSON API (`https://pypi.org/pypi/<pkg>/json`), the npm registry (`https://registry.npmjs.org/<pkg>`) and the NuGet v3 API. Licenses come from LICENSE files fetched from raw.githubusercontent.com. Capability claims are vendor documentation, graded Primary documentation because they describe the vendor's own software. No candidate was installed or executed.
+Original entries accessed on 2026-10-16; A85 is a lifecycle recheck accessed on 2026-10-17. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Versions and dates come from the PyPI JSON API (`https://pypi.org/pypi/<pkg>/json`), the npm registry (`https://registry.npmjs.org/<pkg>`) and the NuGet v3 API. Licenses come from LICENSE files fetched from raw.githubusercontent.com. Capability claims are vendor documentation, graded Primary documentation because they describe the vendor's own software. No candidate was installed or executed.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -208,6 +208,7 @@ All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and 
 | A82 | PyPI https://pypi.org/pypi/claude-agent-sdk/json; https://github.com/anthropics/claude-agent-sdk-python/blob/main/README.md; npm https://registry.npmjs.org/@anthropic-ai/claude-agent-sdk | 2026-10-16 | 0.2.168 (2026-10-15); npm 0.3.301 | Primary documentation | Not evaluated |
 | A83 | npm, https://registry.npmjs.org/ai | 2026-10-16 | 7.0.142 (2026-10-15), Apache-2.0 | Primary documentation | Not evaluated |
 | A84 | PyPI, https://pypi.org/pypi/litellm/json | 2026-10-16 | 1.105.1 (2026-10-14), MIT | Primary documentation | Feature pass-through not assessed |
+| A85 | Microsoft, https://github.com/microsoft/autogen/commit/004749e6b7102c8fd317b9b1499ce5807223c278 | 2026-10-17 | README lifecycle update, 2026-10-16T16:14:36Z | Primary documentation | Archived; no Microsoft bug fixes, security fixes, new features or support; supersedes the lifecycle statement originally recorded under A17 |
 
 ## Compatibility proposals
 
@@ -222,7 +223,7 @@ Outcome (`pass/fail/unknown/skipped`) is produced by evaluation; severity (`info
 | Baseline rule | Problem found | Proposal |
 | --- | --- | --- |
 | `rule.agent.tools.framework` | A no-framework build (direct SDK loop, A1, A2) has tools but no `agent_framework` selection, so this rule fails with `error` and blocks a valid architecture. It only reads the `primary` tool; tools selected under other roles are never checked. `supports_tool_execution` is true for every framework evaluated, so it does not discriminate. | Keep, but add an explicit "direct orchestration" option (see `rule.t4.direct.orchestration`). Move the discriminating check to the model and engine (`rule.t4.model.toolcalling`, `rule.t4.engine.toolcalling`). |
-| `rule.agent.mcp.framework` | (1) A boolean cannot express transports: MAF Python has no SSE class (A25); LangChain has no WebSocket (A13); Mastra documents stdio and Streamable HTTP only (A70). (2) It cannot express protocol revision: the 2026-07-28 spec changed the session model (A3), and CrewAI pins the v1 SDK (A28). (3) Provider-hosted MCP (OpenAI hosted MCP, Anthropic MCP connector, Foundry hosted MCP) makes the provider the MCP client, so "framework supports MCP" is the wrong test (A2, A26, A36). (4) Primary role only. | Refine with `rule.t4.mcp.transport.match` and `rule.t4.mcp.protocol.revision` (need #40); interim `rule.t4.mcp.transport.sse-deprecated` in mcp-servers.md (v1-valid). |
+| `rule.agent.mcp.framework` | (1) A boolean cannot express transports: MAF Python has no SSE class (A25); LangChain has no WebSocket (A13); Mastra documents stdio and Streamable HTTP only (A70). (2) It cannot express protocol revision: the 2026-07-28 spec changed the session model (A3), and CrewAI pins the v1 SDK (A28). (3) Provider-hosted MCP (OpenAI hosted MCP, Anthropic MCP connector, Foundry hosted MCP) makes the provider the MCP client, so "framework supports MCP" is the wrong test (A2, A26, A36). (4) Primary role only. | Refine with `rule.t4.mcp.transport.match` and `rule.t4.mcp.protocol.revision` (need #40); interim `rule.t4.mcp.transport.sse-deprecated` in [mcp-servers.md](https://github.com/itisSomeone/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md) (v1-valid, unmerged PR #71). |
 | `rule.memory.framework.compatibility` | `supports_memory` is ambiguous. Every candidate keeps some conversation state; what differs is which external backends it can use (LangGraph checkpointers, ADK SessionService, Agno `db`, Strands session managers) (A9, A47, A67, A76). Proposals here leave it unset rather than guess. | Replace with `rule.t4.memory.backend` (needs #40 and #28). |
 
 ### Source-checked (unverified), expressible in v1
@@ -318,12 +319,12 @@ Outcome (`pass/fail/unknown/skipped`) is produced by evaluation; severity (`info
 
 The framework-side evidence for flagging SSE servers is: MCP 2026-07-28 defines only stdio and Streamable HTTP as standard transports (A3); OpenAI Agents JS calls SSE "deprecated by the MCP project" (A41); PydanticAI says "The SSE transport in MCP is deprecated" (A52); LangChain says "Supported, but the transport is deprecated" (A13); MAF Python has no SSE class (A25).
 
-The rule itself is owned by #27 and published once, as `rule.t4.mcp.transport.sse-deprecated` in [mcp-servers.md](mcp-servers.md). An identical framework-side rule was drafted here and removed so the ruleset does not report the same finding twice.
+The rule itself is owned by #27 and published once, as `rule.t4.mcp.transport.sse-deprecated` in [mcp-servers.md](https://github.com/itisSomeone/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md). An identical framework-side rule was drafted here and removed so the ruleset does not report the same finding twice.
 
 #### rule.t4.framework.lifecycle: deprecated framework
 
 - Participating: catalog `agent_framework` primary `/status` (envelope field).
-- Assertion: status in `active` or `preview`. AutoGen is in maintenance mode (A17).
+- Assertion: status in `active` or `preview`. AutoGen is archived (A85).
 - Severity: `warning`; `on_unknown: review`.
 
 ```json
@@ -334,7 +335,7 @@ The rule itself is owned by #27 and published once, as `rule.t4.mcp.transport.ss
   "assert": {"op": "in", "left": {"ref": {"scope": "catalog", "kind": "agent_framework", "role": "primary", "pointer": "/status"}}, "right": {"literal": ["active", "preview"]}},
   "on_unknown": "review",
   "message": "The selected agent framework is deprecated or retired and will not receive new features.",
-  "remediation": "Choose the successor framework (for AutoGen: Microsoft Agent Framework) or accept maintenance-only support.",
+  "remediation": "Choose a maintained framework (for AutoGen: Microsoft Agent Framework).",
   "affected_kinds": ["agent_framework"],
   "owner": "t4-research"
 }
@@ -387,7 +388,7 @@ severity: warning
 
 #### rule.t4.mcp.transport.match · Source-checked (unverified) evidence, needs #40
 
-Same proposal as `rule.t4.mcp.transport.client-support` in [mcp-servers.md](mcp-servers.md), which is the canonical version for #40 review. This section supplies the framework-side transport evidence.
+Same proposal as `rule.t4.mcp.transport.client-support` in [mcp-servers.md](https://github.com/itisSomeone/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md), which is the canonical version for #40 review. This section supplies the framework-side transport evidence.
 
 Missing field: `spec_agent_framework.mcp_client_transports`, reusing the `spec_mcp_server.transport` enum and adding `websocket` and `provider_hosted`.
 
@@ -401,7 +402,7 @@ Failing example from evidence: an SSE server with MAF Python, which has no SSE c
 
 #### rule.t4.mcp.protocol.revision · Hypothesis, needs #40 and #27
 
-Same proposal as `rule.t4.mcp.protocol.era` in [mcp-servers.md](mcp-servers.md), which is the canonical version for #40 review.
+Same proposal as `rule.t4.mcp.protocol.era` in [mcp-servers.md](https://github.com/itisSomeone/pick-your-ai-research/blob/3d95c61efc2895d971415950dd4ebdfc1f23aba8/research/T4-agents-integrations/mcp-servers.md), which is the canonical version for #40 review.
 
 Revision 2026-07-28 removed the connection-scoped `initialize` session and relies on fallback for older counterparts (A3, A4). Frameworks pin different SDK lines: CrewAI `mcp~=1.28.1` (A28), Agno `mcp>=2.1` (A64), OpenAI Agents `mcp>=1.19,<3` (A36). Whether a v1-SDK client works with a 2026-only server is not documented.
 
@@ -484,7 +485,7 @@ This is research guidance for builder defaults, not a product endorsement.
   - Python: LangGraph, Microsoft Agent Framework or Google ADK. Each documents checkpoint or session persistence and human-in-the-loop (A9, A27, A47).
   - Teams that want durable execution on an existing workflow engine: PydanticAI (A51).
 - **TypeScript:** Mastra, OpenAI Agents JS, LangGraph.js, ADK TypeScript or Strands TypeScript.
-- **Do not offer for new builds:** AutoGen (maintenance mode). Present Semantic Kernel as superseded by Microsoft Agent Framework.
+- **Do not offer for new builds:** AutoGen (archived; A85). Present Semantic Kernel as superseded by Microsoft Agent Framework.
 - **Portability:** tool definitions are portable in practice through MCP; every framework evaluated has an MCP client. Agent graphs, state schemas and checkpoints are framework-specific, with no common format found. Treat a framework switch as a rewrite of orchestration code and a state migration.
 - **Local models:** the builder must check the engine path, not just "OpenAI-compatible". Tool calling, `tool_choice`, strict schemas and the Responses API vary by engine and configuration (A37, A54, A77, A79).
 
@@ -507,7 +508,7 @@ Ten CatalogItem proposals were written. Each contains only source-checked `progr
 
 Not proposed:
 - **No framework:** `spec_agent_framework` requires `programming_languages` and a single `version`. A "direct SDK" option is an architecture choice, not a versioned component, and an item would make baseline rules treat it as a framework.
-- **AutoGen:** maintenance mode; can be added as `deprecated` if the builder must list it.
+- **AutoGen:** archived (A85); can be proposed as `deprecated` if the builder must list it, with lifecycle mapping reviewed through #40.
 - **Semantic Kernel:** status mapping undecided.
 - **LlamaIndex:** agent and workflow packages version separately (`llama-index-core` 0.14.25, `llama-index-workflows` 2.26.0), so the one-version-per-ID rule is ambiguous here.
 - **Agno:** default telemetry egress needs a field before listing.
@@ -521,7 +522,7 @@ For LangGraph, `supports_mcp` is deliberately omitted: MCP comes from the separa
 | --- | --- |
 | Add `spec_agent_framework` fields: `tool_calling_modes`, `model_api_surfaces`, `mcp_client_transports`, `mcp_protocol_revisions`, `state_backends`, `rag_integration`, `managed_runtime_refs`, `default_telemetry_egress`, `observability` (enum `otel_native, otlp_export, vendor_tracing`), `supports_human_approval` | #40 · @tynamite |
 | Deprecate or redefine `supports_memory`; extend `programming_languages` with `csharp`/`dotnet` and `kotlin`; per-language versions under one framework ID | #40 · @tynamite |
-| Status values for "maintenance mode" and "superseded" (AutoGen, Semantic Kernel) | #40 · @tynamite; #41 freshness |
+| Status mapping for "archived" and "superseded" (AutoGen, Semantic Kernel) | #40 · @tynamite; #41 freshness |
 | Represent "no framework / direct SDK orchestration" in a build; fix `rule.agent.tools.framework` and `rule.agent.mcp.framework` for provider-hosted MCP | #40 · @tynamite |
 | #6 must populate `supports_tool_calling` and `supports_json_schema` per model and per API surface (Responses vs Chat Completions), including reasoning-effort conditions (A53) | #6 · @zwright8 |
 | #11 must record tool-calling prerequisites per engine: vLLM `--enable-auto-tool-choice`, `--tool-call-parser`, `--tool-strict-level`, `required` from 0.8.3; Ollama no `tool_choice` and stateless Responses only | #11 · @Mattycodes69 |
