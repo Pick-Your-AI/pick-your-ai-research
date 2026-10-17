@@ -37,6 +37,20 @@ Each workstream (T0 to T6) has an owner assigned on its parent issue. Owners coo
 
 An issue is Done only with usable findings, source references with access dates, documented limitations, reviewed data, and contract validation where it applies. A bare list of technologies is not done.
 
+## Application planning and cross-client handoffs
+
+The [Apple/iOS delivery plan](APPLE_DELIVERY_PLAN.md) follows the Android plan's
+18-epic, 110-work-package structure. Delivery levels do not replace research tiers.
+Research, shared service delivery, native-client integration and release approval
+have separate definitions of done; no status transfers automatically between them.
+
+Before creating implementation tracking, refresh existing issues and PRs. Keep shared
+contracts, data publication and service work under their canonical issues, with
+client-specific integration tasks only where there is a distinct deliverable. Use
+native sub-issues for independently owned/reviewed tasks and checklists for small steps.
+Preserve assignees and triage metadata; a plan does not grant new ownership, approve
+research, select conditional features or authorize production deployment.
+
 ## Security and conduct
 
 Report vulnerabilities as described in [SECURITY.md](../SECURITY.md). Be respectful and assume good faith; the organization-wide code of conduct, once adopted, applies here.

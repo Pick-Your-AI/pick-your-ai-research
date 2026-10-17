@@ -1,8 +1,16 @@
 # Vision
 
-**AI Builder is in the research and planning stage. Nothing described here is implemented yet.**
+**The website has a synthetic-data preview. Research-backed production capabilities
+and native applications remain subject to their delivery and evidence gates.**
 
-AI Builder aims to be a PCPartPicker-style planner for AI: a web-based tool for assembling, checking, comparing and costing complete AI stacks. Where a PC builder picks CPUs, motherboards and GPUs, AI Builder users pick workloads, deployment modes, models, infrastructure, retrieval, agents, training and operations components. PCPartPicker is a functional reference only; AI Builder will use its own brand, interface and code.
+AI Builder aims to be a PCPartPicker-style planner for AI across web and planned mobile
+clients: a tool for assembling, checking, comparing and costing complete AI stacks.
+Where a PC builder picks CPUs, motherboards and GPUs, AI Builder users pick workloads,
+deployment modes, models, infrastructure, retrieval, agents, training and operations
+components. PCPartPicker is a functional reference only; AI Builder uses its own brand,
+interface and code. The [Apple/iOS delivery plan](APPLE_DELIVERY_PLAN.md) follows the
+Android plan's 18-epic, 110-work-package structure and separates shared services from
+platform-specific implementation. Its publication does not create a mobile application.
 
 ## Intended capabilities
 
@@ -21,7 +29,11 @@ AI Builder aims to be a PCPartPicker-style planner for AI: a web-based tool for 
 
 ## This repository's role
 
-This is the canonical research and requirements repository: component catalogs, compatibility rules, the shared contract, benchmarks and cost intelligence that the future application will consume. It does not contain the production web application.
+This is the canonical research and requirements repository: component catalogs,
+compatibility rules, shared contracts, benchmarks and cost intelligence for application
+consumers. It can hold delivery planning and research-to-implementation handoffs.
+Production web/mobile runtime code and service operation belong in implementation
+repositories. Merged proposals are not automatically published production data.
 
 ## Principles
 
