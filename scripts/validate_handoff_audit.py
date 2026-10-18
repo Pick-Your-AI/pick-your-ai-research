@@ -48,7 +48,39 @@ def response_status(row):
     return 'author_integration_only' if row.get('responses') else 'not_yet_confirmed'
 
 
+def validate_identity_numbers(ledger, readback, audit):
+    """Check identity types before Python's bool/float equality can join them."""
+    def number(value, label):
+        require(type(value) is int and value > 0,
+                f'{label}: expected a positive integer issue/PR number')
+
+    for issue in readback['issues']:
+        number(issue['number'], 'snapshot issue')
+        if issue['parent'] is not None:
+            number(issue['parent']['number'], 'native parent')
+        for relationship in ('sub_issues', 'blocked_by'):
+            for value in issue.get(relationship, []):
+                number(value, relationship)
+    for label, rows in (
+            ('handoff', ledger),
+            ('historical review', readback['historical_owner_reviews']),
+            ('scoped response', readback['new_scoped_responses'])):
+        for row in rows:
+            number(row['market_issue'], label + ' producer')
+            number(row['consumer_issue'], label + ' consumer')
+    for pair in readback['declared_handoff_pairs']:
+        for value in pair:
+            number(value, 'declared handoff')
+    for pr in readback['pull_requests']:
+        number(pr['number'], 'snapshot pull request')
+    for issue in audit['issues']:
+        number(issue['number'], 'classified issue')
+        for value in issue['related_prs']:
+            number(value, 'related pull request')
+
+
 def validate(ledger, readback, audit):
+    validate_identity_numbers(ledger, readback, audit)
     issues = {issue['number']: issue for issue in readback['issues']}
     require(len(issues) == len(readback['issues']), 'duplicate snapshot issue')
     pairs = {(row['market_issue'], row['consumer_issue']) for row in ledger}

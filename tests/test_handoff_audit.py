@@ -59,7 +59,7 @@ class HandoffAuditValidation(unittest.TestCase):
             'handoff_coverage': coverage, 'pull_requests': [{'number': 44}]}
         self.audit = {'snapshot_cutoff_utc': cutoff, 'base_commit': 'b' * 40,
                       'handoff_coverage': deepcopy(coverage),
-                      'issues': [{'related_prs': [44]}]}
+                      'issues': [{'number': 48, 'related_prs': [44]}]}
 
     def test_synthetic_attribution_fixture_is_valid(self):
         self.check()
@@ -70,6 +70,51 @@ class HandoffAuditValidation(unittest.TestCase):
     def test_committed_snapshot_is_consistent(self):
         load = lambda name: read_json(BASE / name)
         validate(load('handoffs.json'), load('handoff-audit-readback.json'), load('audit.json'))
+
+    def identifier_locations(self):
+        parent, child = self.readback['issues'][:2]
+        parent['sub_issues'] = [child['number']]
+        child['parent'] = {'number': parent['number']}
+        child['blocked_by'] = [49]
+        return {
+            'snapshot issue': (parent, 'number'),
+            'native parent': (child['parent'], 'number'),
+            'native child': (parent['sub_issues'], 0),
+            'native blocker': (child['blocked_by'], 0),
+            'ledger producer': (self.ledger[0], 'market_issue'),
+            'ledger consumer': (self.ledger[0], 'consumer_issue'),
+            'declared producer': (self.readback['declared_handoff_pairs'][0], 0),
+            'declared consumer': (self.readback['declared_handoff_pairs'][0], 1),
+            'historical producer': (self.readback['historical_owner_reviews'][0], 'market_issue'),
+            'historical consumer': (self.readback['historical_owner_reviews'][0], 'consumer_issue'),
+            'response producer': (self.readback['new_scoped_responses'][0], 'market_issue'),
+            'response consumer': (self.readback['new_scoped_responses'][0], 'consumer_issue'),
+            'snapshot PR': (self.readback['pull_requests'][0], 'number'),
+            'classified issue': (self.audit['issues'][0], 'number'),
+            'related PR': (self.audit['issues'][0]['related_prs'], 0),
+        }
+
+    def test_positive_integer_identifiers_preserve_native_relationships(self):
+        self.identifier_locations()
+        self.check()
+
+    def test_numeric_aliases_cannot_match_issue_or_pr_identities(self):
+        for label, (container, key) in self.identifier_locations().items():
+            original = container[key]
+            with self.subTest(location=label):
+                container[key] = float(original)
+                try:
+                    with self.assertRaisesRegex(HandoffValidationError, 'positive integer'):
+                        self.check()
+                finally:
+                    container[key] = original
+
+    def test_issue_identifiers_reject_other_json_types_and_nonpositive_integers(self):
+        for value in (True, False, 0, -1, 1.5, '6', None, [], {}):
+            with self.subTest(value=value):
+                self.readback['issues'][0]['number'] = value
+                with self.assertRaisesRegex(HandoffValidationError, 'positive integer'):
+                    self.check()
 
     def raw_documents(self):
         return {name: json.dumps(value) for name, value in (
@@ -103,6 +148,36 @@ class HandoffAuditValidation(unittest.TestCase):
                     result = self.run_cli(documents, optimized)
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertIn('Handoff audit integrity OK', result.stdout)
+
+    def test_cli_rejects_identifier_aliases_in_each_input(self):
+        # Make 1 a real synthetic issue/PR identity so true would otherwise join
+        # it. Keep every reference consistent before changing one input only.
+        def remap(value):
+            if isinstance(value, dict):
+                return {key: remap(item) for key, item in value.items()}
+            if isinstance(value, list):
+                return [remap(item) for item in value]
+            return 1 if type(value) is int and value in (6, 44) else value
+
+        originals = {name: remap(json.loads(text)) for name, text in self.raw_documents().items()}
+        for optimized in (False, True):
+            valid = self.run_cli({name: json.dumps(value) for name, value in originals.items()}, optimized)
+            self.assertEqual(valid.returncode, 0, valid.stderr)
+            for name, path in (
+                    ('handoffs.json', (0, 'consumer_issue')),
+                    ('handoff-audit-readback.json', ('issues', 0, 'number')),
+                    ('audit.json', ('issues', 0, 'related_prs', 0))):
+                for alias in (True, 1.0):
+                    with self.subTest(input=name, alias=alias, optimized=optimized):
+                        documents = deepcopy(originals)
+                        container = documents[name]
+                        for part in path[:-1]:
+                            container = container[part]
+                        container[path[-1]] = alias
+                        result = self.run_cli({key: json.dumps(value) for key, value in documents.items()}, optimized)
+                        self.assertNotEqual(result.returncode, 0)
+                        self.assertIn('positive integer', result.stderr)
+                        self.assertNotIn('Handoff audit integrity OK', result.stdout)
 
     def test_cli_rejects_duplicate_object_keys_in_every_input(self):
         keys = {

@@ -58,6 +58,11 @@ The 21 original tests exercise the synthetic contract examples. They are not a s
 
 The handoff audit validator checks consistency among `handoffs.json`, `handoff-audit-readback.json` and `audit.json`. Its reader first rejects duplicate JSON object keys, non-finite constants and numeric overflow in all three files, including under optimized Python. It then rejects duplicate snapshot issue IDs, pull-request IDs, declared handoff pairs and historical review pairs before relying on their indexed identities. Conflicting entries cannot be silently discarded to obtain a passing audit. These checks preserve recorded attribution; they do not fetch live GitHub state or establish receiving-owner acceptance.
 
+Issue and pull-request identities in the audit, snapshot, handoff pairs and native
+parent/child/blocker references must be positive JSON integers. Booleans and
+floating-point aliases cannot match an integer identity through Python equality.
+This identity check does not change numeric fields in unrelated evidence metadata.
+
 ## Review and ownership
 
 - Existing issue assignees own research decisions. Request affected owners' review for handoffs; preserve live assignments.
