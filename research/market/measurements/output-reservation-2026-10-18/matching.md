@@ -18,19 +18,27 @@ owner review in #267, not treated as accepted merely because it exists.
 
 | Quantity | GPUStack v0.26.4 source model | llama.cpp b11669 initialization | Finding |
 | --- | --- | --- | --- |
-| Prompt graph output rows | `min(context512, ubatch256)` = 256 | `min(n_tokens256, n_outputs_max256)` = 256; recorded graph reservations confirm 256 | Cardinality matches for this exact case |
-| Per-sequence output maximum | No dedicated setting in inspected CLI/option type | 1, separately from global maximum256; no backend samplers installed by harness | Does not reduce the reserved prompt graph to one row |
-| Initial host readback rows | 256; footprint includes vocabulary and embedding-width terms | `output_reserve(n_seq_max1)`; logits enabled, embeddings disabled, no backend sampler | Initial host capacity differs |
-| Output computation placement | Host device index0 for ordinary `llama`; device exception restricted to `eagle3` | Output-weight backend is CUDA0; native graph builds output projection from those weights; scheduler prefers weight backend | Source-based placement expectation differs; no new per-tensor allocation trace is claimed |
+| Prompt graph output rows | `min(context 512, ubatch 256)` = 256 | `min(n_tokens = 256, n_outputs_max = 256)` = 256; recorded graph reservations confirm 256 | Cardinality matches for this exact case |
+| Per-sequence output maximum | No dedicated setting in inspected CLI/option type | 1, separately from global maximum 256; no backend samplers installed by harness | Does not reduce the reserved prompt graph to one row |
+| Initial host readback rows | 256; footprint includes vocabulary and embedding-width terms | `output_reserve(n_seq_max)` with `n_seq_max = 1`; logits enabled, embeddings disabled, no backend sampler | Initial host capacity differs |
+| Output computation placement | Host device index 0 for ordinary `llama`; device exception restricted to `eagle3` | Output-weight backend is CUDA0; native graph builds output projection from those weights; scheduler prefers weight backend | Source-based placement expectation differs; no new per-tensor allocation trace is claimed |
 | Target device total | Original modeled 288,499,968 bytes | Original admitted 334,511,360 bytes; native self interval retained separately | Different output semantics prevent numerical error admission |
 
-The model's architecture is `llama`, vocabulary49,152 and embedding width576,
+The model's architecture is `llama`, vocabulary 49,152 and embedding width 576,
 from the exact hash-bound CPU GGUF record. It does not enter the estimator's
 `eagle3` exception. Inspection covered the pinned registered CLI flags and
 estimate-option fields: there is no dedicated output-reservation row/placement
 control. `--raw` emits GGUF file information and skips estimation; it does not
 expose a different output-capacity estimate. Batch/context/offload/tensor
 changes would change the reviewed tuple and cannot be applied to old captures.
+
+The estimator's own [architecture rationale](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_architecture.go#L1461)
+and [output-placement rationale](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate__llamacpp.go#L1487)
+assume an ordinary decoder reserves a single graph output. That assumption is
+stale for the pinned b11669 [prompt-graph reserve](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp#L770),
+which requests 256 here, and differs from the estimator's own `nOutputs = nTokens`
+count. This identifies a concrete version-specific modeling defect; it does not
+measure its full numerical effect or establish a correction for other versions.
 
 ## Host readback is distinct from graph output
 
@@ -80,13 +88,14 @@ committing downloaded source copies or binaries.
 
 Primary sources accessed 2026-10-18:
 
-- GPUStack pinned [output count and host footprint](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate__llamacpp.go#L891),
+- GPUStack pinned [output count](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate__llamacpp.go#L914) and
+  [host footprint](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate__llamacpp.go#L944),
   [output-computation placement](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate__llamacpp.go#L1464),
   [architecture predicate](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_architecture.go#L1460),
   [CLI](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/cmd/gguf-parser/main.go#L57)
   and [option fields](https://github.com/gpustack/gguf-parser-go/blob/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate_option.go#L12).
 - llama.cpp pinned [constructor host reserve](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp#L461),
-  [prompt graph reserve](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp#L753),
+  [prompt graph reserve](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp#L770),
   [host buffer sizing/placement](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp#L2227),
   [output assignment](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp#L2594),
   [llama model output graph](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/models/llama.cpp#L231)
@@ -103,7 +112,7 @@ claim about all newer releases or other architectures/backends.
 
 The next estimator candidate must separately model **host readback rows** and
 **device graph output rows/placement** for this exact ordinary decoder. Preserve
-context512, batch/ubatch256, sequence1, F16 K/V, Flash Attention disabled, output
+context 512, batch/ubatch 256, sequence 1, F16 K/V, Flash Attention disabled, output
 layer CUDA0, extra buffer types disabled and initialization-only stage. A
 versioned estimator correction or another independently pinned implementation
 needs review before producing a new prediction. Its tests should distinguish
@@ -121,8 +130,13 @@ it cannot relabel the existing three trials.
 
 #61 co-owners Mattycodes69/appletechie and #10/#11 review estimator/quantity and
 runtime scope; #7 reviews capacity/output semantics; CompleteDotTech retains
-coordinator evidence and tolerance review. This finding provides none of their
-receiving receipts. Inference/VMM/scratch, opaque-library and process-wide caps,
+coordinator evidence and tolerance review. [Zwright8's scoped #7 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/267#pullrequestreview-5561909720)
+accepts with constraints the matching diagnosis as an exclusion gate for this
+exact pair. It does not accept a replacement estimator, measured fit, tolerance
+or native process-wide cap. [Appletechie's source review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/267#pullrequestreview-5561985132)
+corroborates the diagnosis but explicitly does not supply #7/#10/#11 or
+coordinator acceptance. Remaining co-owner/consumer and coordinator decisions
+remain separate; no broader receiving receipt is inferred. Inference/VMM/scratch, opaque-library and process-wide caps,
 whole-process peaks, broader MoE/concurrency/multi-GPU coverage, named original
 estimator requirements and ResourceEstimate placement remain separate gates.
 Frozen v1, issue ownership/triage and #59 handoff ledgers are unchanged.
@@ -138,3 +152,6 @@ can be checked using `--source-directory PATH`; this only verifies bytes and
 fragment identities. Automation does not execute an estimator or native graph,
 prove source interpretations or supply empirical acceptance. See
 [validation](validation.md) and [source-copy cleanup](cleanup.json).
+
+[Current-main integration and evidence-review disposition](review-completion.md)
+records subsequent corrections and preserves the earlier validation scopes.
