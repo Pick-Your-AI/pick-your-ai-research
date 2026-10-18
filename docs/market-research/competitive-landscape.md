@@ -62,7 +62,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 
 ## Community fit-report resources (added to the catalog)
 
-tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. All six exist and their primary pages are registered in `sources.json`. They are **not yet added to `competitors.json`** because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells, which #49 owns. Once #49 adds them (as `Unknown` unless evidenced), the catalog would rise from 33 to 39 after the CanIRun.ai intake, inside the 30–40 bound.
+tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. Their primary pages were already registered in `sources.json`. Before this amendment, the six were staged outside `competitors.json` because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells under #49's conventions. This amendment adds all six with those cells, taking the catalog from 33 to 39 after the CanIRun.ai intake, inside the 30–40 bound.
 
 **Update:** all six are now entities in `competitors.json` with their 48 `features.json` cells each (288 in total). Every cell is `Unknown` with no inference from silence; grading beyond Unknown is left to #49's conventions and reviewer. Classifications follow the proposals in the table below and remain analyst judgements. Whether LocalScore or LocalMaxxing get deep-dive profiles is still a coordinator/#50 decision.
 

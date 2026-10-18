@@ -2647,7 +2647,7 @@
       "src-openbenchmarking-llama-cpp"
     ],
     "last_verification": "2026-10-16",
-    "confidence": "Medium",
+    "confidence": "Low",
     "applicable_tiers": [
       "T1",
       "T2"
@@ -2668,12 +2668,12 @@
       "canonical_url": "https://openbenchmarking.org/test/pts/llama-cpp",
       "operator": "OpenBenchmarking.org / Phoronix Test Suite",
       "product_scope": "Phoronix Test Suite llama.cpp test profile with optional result upload to OpenBenchmarking.org.",
-      "version": "Public page as retrieved 2026-10-16; no software revision pinned.",
+      "version": "PTS documentation at be12163bb02435219d4fd891cd6258597ca9bc2f and test-profiles mirror at d2f1a150d388bd062737b445891edda0780f7e25, checked 2026-10-16. The public profile page was not retrieved; its current version remains unverified.",
       "source_ids": [
         "src-openbenchmarking-llama-cpp"
       ],
       "evidence_locator": "src-openbenchmarking-llama-cpp",
-      "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
+      "status": "Source-checked PTS documentation and GitHub test-profile mirror from the staged #48 record; public profile access blocked and current profile version unverified",
       "limitations": "Profile page returned 403 (bot challenge) to anonymous retrieval and was not bypassed; current profile version unverified.",
       "updated_fields": []
     }
