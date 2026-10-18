@@ -727,7 +727,7 @@ None in this pull request. An `evaluation_suite` catalog item needs `metric_name
 | Human evaluation protocol: rater count, agreement statistic, Bedrock and Azure human-evaluation setup | @PUSHINGSQUARES | next revision |
 | Run-to-run determinism of hosted APIs at temperature 0 | @PUSHINGSQUARES | next revision |
 | Self-hosted judge quality bar and GPU-hour cost inputs | #39 owner for cost; @PUSHINGSQUARES for judge | next revision |
-| Evidence rows cited "as cited in the pack" (E-F14, E-T6, E-T8, E-B13, E-B14, E-L9, E-L10, E-C6, E-K14, E-G13): supply URLs or drop | QC pass | this draft |
+| Evidence URLs for E-F14, E-T6, E-T8, E-B13, E-B14, E-L9, E-L10, E-C6, E-K14 and E-G13 | Resolved in this draft: every listed Evidence row now supplies a URL; this records locator coverage, not independent reproduction or source-rights acceptance | no follow-up for the locator omission |
 | SWE-bench Verified status (E-H11); WebArena Verified Hard subset size | @PUSHINGSQUARES | next revision |
 | Rollout gates (shadow, canary, A/B, rollback): in #37's scope or here | #37 owner | before #37 drafts |
 
