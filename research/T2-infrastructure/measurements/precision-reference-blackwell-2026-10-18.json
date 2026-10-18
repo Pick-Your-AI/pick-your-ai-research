@@ -1,0 +1,72 @@
+{
+  "compute_caps": {
+    "10.0": {
+      "precisions": [
+        "fp32",
+        "tf32",
+        "bf16",
+        "fp16",
+        "fp8",
+        "int8"
+      ],
+      "source": {
+        "uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+        "access_date": "2026-10-18",
+        "quote": "Table 33 'Input Data Types Supported by Tensor Core Acceleration per Compute Capability': row for CC 10.0 marks Yes for TF32, BF16, FP16, FP8, FP6, FP4, INT8; FP64 and INT4 cells blank (unsupported). FP32/FP64 are CUDA-Core precisions (not Tensor Core), so fp32 is carried in by the Blackwell 'Supported CUDA Core precisions' list."
+      }
+    },
+    "10.3": {
+      "precisions": [
+        "fp32",
+        "tf32",
+        "bf16",
+        "fp16",
+        "fp8",
+        "int8"
+      ],
+      "source": {
+        "uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+        "access_date": "2026-10-18",
+        "quote": "Table 33 'Input Data Types Supported by Tensor Core Acceleration per Compute Capability': row for CC 10.3 marks Yes for TF32, BF16, FP16, FP8, FP6, FP4, INT8; FP6 and FP4 present but do NOT map to any v1 enum value; FP32 (CUDA-core) carried in by the Blackwell 'Supported CUDA Core precisions' list; INT4 cell blank (unsupported)."
+      }
+    },
+    "12.0": {
+      "precisions": [
+        "fp32",
+        "tf32",
+        "bf16",
+        "fp16",
+        "fp8",
+        "int8"
+      ],
+      "source": {
+        "uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+        "access_date": "2026-10-18",
+        "quote": "Table 33 'Input Data Types Supported by Tensor Core Acceleration per Compute Capability': the 12.x row (which includes 12.0) marks Yes for TF32, BF16, FP16, FP8, FP6, FP4, INT8; FP6 and FP4 present but do NOT map to any v1 enum value; FP32 (CUDA-core) carried in by the Blackwell 'Supported CUDA Core precisions' list; INT4 cell blank (unsupported)."
+      }
+    }
+  },
+  "fp4_fp6_note": "NVIDIA Blackwell Architecture Technical Brief: 'new fifth-generation Tensor Core architecture in Blackwell supports new number formats such as FP4, including community-defined microscaling (OCP) formats. The Blackwell architecture supports all the data types and numerical formats listed in Table 1.' Table 1 (Blackwell Supported Data Types): FP64, FP32, TF32, FP16, BF16, FP8, INT8, FP6, FP4 — all confirmed present on Blackwell. NVIDIA Tensor Cores page: 'Supported Tensor Core precisions | FP64, TF32, BF16, FP16, FP8, INT8, FP6, FP4' for Blackwell; NVFP4 blog: 'NVIDIA Blackwell provides maximum flexibility with support for FP64, FP32/TF32, FP16/BF16, INT8/FP8, FP6, and FP4 data formats.' Mapping onto the v1 precision enum [fp32,tf32,bf16,fp16,fp8,int8,int4]: (a) FP6 (6-bit floating point) is a native Blackwell Tensor Core format but has no analog in the v1 enum — it is not representable as tf32/bf16/fp16 and is ABSENT from the v1 enum; do NOT conflate with fp16. (b) FP4 (E2M1 4-bit floating point, incl. MXFP4/NVFP4 microscaling variants) is also a native Blackwell format; it does NOT map to the v1 int4 slot because int4 is signed INTEGER quantization whereas NVFP4/FP4 are floating 4-bit — so FP4 is likewise ABSENT from the v1 enum, and int4 is correctly absent for all Blackwell compute capabilities. Note: NVIDIA's own CUDA Table 33 lists FP6 and FP4 as Tensor Core input types for CC 10.x/12.x but lists INT4 as NOT supported (empty), so int4 must be omitted from every Blackwell card's precisions list; the float-precision FP4/FP6 are not captured by any v1 enum value. A standalone 'FP6' column is never enumerated in Table 33 — it always appears co-listed with FP8 ('FP8/FP6'), consistent with Blackwell's 'Total FP8/FP6 Tensor Core' spec-sheet line.",
+  "cards_by_cap": {
+    "10.0": [
+      "b100",
+      "b200"
+    ],
+    "10.3": [
+      "b300"
+    ],
+    "12.0": [
+      "rtx-pro-6000-blackwell-workstation",
+      "rtx-pro-5000-blackwell",
+      "rtx-pro-4000-blackwell",
+      "rtx-pro-2000-blackwell",
+      "geforce-rtx-5090",
+      "geforce-rtx-5080",
+      "geforce-rtx-5070-ti",
+      "geforce-rtx-5070",
+      "geforce-rtx-5060-ti",
+      "geforce-rtx-5060"
+    ]
+  },
+  "v1_enum_note": "Each CC array is the v1-enum precision set per the repo's 4090/L40S convention (uniform across the family). The quoted Table 33 row gives the TENSOR-CORE input types; fp32 is CUDA-core; int4 is ABSENT for all Blackwell compute capabilities (Table 33 marks the INT4 cell blank for CC 10.0/10.3/12.0), and Blackwell-native FP6/FP4 are absent from the v1 enum (see fp4_fp6_note)."
+}

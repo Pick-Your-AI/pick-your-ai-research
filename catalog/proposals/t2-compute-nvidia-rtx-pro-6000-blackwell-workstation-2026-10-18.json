@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-rtx-pro-6000-blackwell-workstation",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "RTX PRO 6000 Blackwell Workstation Edition",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Documented hardware identity, not a currently purchasable offering or measured runtime tuple. Blackwell precision sources (quoted): the Blackwell precision reference (NVIDIA CUDA programming guide, compute-capabilities Table 33, https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html) states FP6 and FP4 are native Blackwell Tensor Core formats; they map to NO v1 enum slot (FP4 != signed int4, FP6 has no analog) so both are ABSENT from the v1 enum and int4 is correctly absent. Omission here does not imply FP4/FP6 are unsupported.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "RTX PRO 6000 Blackwell Workstation Edition",
+    "vram_gb": 96,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "tf32",
+      "bf16",
+      "fp16",
+      "fp32",
+      "fp8",
+      "int8"
+    ],
+    "rated_power_w": 600
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000-family",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | GPU Memory: 96 GB GDDR7 with error-correcting code (ECC); Max Power Consumption 600 W (Workstation Edition)"
+    },
+    {
+      "source_uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | Table 33 (Compute Capability 12.x) Tensor Core input data types: Yes for TF32, BF16, FP16, FP8, FP6, FP4, INT8; INT4 cell blank. FP6 and FP4 are present but do NOT map to a v1 enum value; int4 is therefore correctly omitted."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda-gpus",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | RTX PRO 6000 Blackwell (Workstation Edition) maps to Compute Capability 12.0; GPU Memory 96GB GDDR7 with ECC; Max Power Consumption up to 600 W (configurable)."
+    }
+  ],
+  "updated_at": "2026-10-18T00:00:00Z"
+}

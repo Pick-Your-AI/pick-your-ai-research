@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-geforce-rtx-5060-ti-16gb",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA GeForce RTX 5060 Ti 16 GB (reference specifications)",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Documented hardware identity, not a currently purchasable offering or measured runtime tuple. Research snapshot; no serving or training-fit claim. precisions list the v1 enum values supported on Blackwell; int4 is omitted (CUDA Table 33 INT4 cell blank for compute capability 12.x); FP4/FP6 are native Blackwell formats with no v1 enum value, so their absence is not a claim they are unsupported.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "GeForce RTX 5060 Ti 16 GB",
+    "vram_gb": 16,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "fp32",
+      "tf32",
+      "bf16",
+      "fp16",
+      "fp8",
+      "int8"
+    ],
+    "rated_power_w": 180,
+    "interconnect": "pcie"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Source: Router's primary-source check blackwell-vram-variants-2026-10-18.md (Router re-read the row on nvidia.com 2026-10-18; first pass by SCOUT hermies_advisor_35b session 83ee44f5); not re-fetched by the author. GeForce RTX 5060 Ti 16 GB: 16 GB GDDR7, 128-bit bus (bus width recorded here: schema has no bus-width field), 180 W. GeForce power is Total Graphics Power for the Founders/reference design; AIB cards vary. NVIDIA lists ONE power figure (180 W) for both the 16 GB and 8 GB 5060 Ti SKUs, with no per-SKU split on its page. Verbatim rows read by Router on the RTX 5060 family page 2026-10-18: \"Standard Memory Config | 16 GB / 8 GB GDDR7 | 8 GB GDDR7\" (5060 Ti | 5060), \"Memory Interface Width | 128-bit | 128-bit\", \"Total Graphics Power (W) | 180 | 145\"."
+    },
+    {
+      "source_uri": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5060-family/",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Source: Router's primary-source check blackwell-vram-variants-2026-10-18.md (Router re-read the row on nvidia.com 2026-10-18; first pass by SCOUT hermies_advisor_35b session 83ee44f5); not re-fetched by the author. Row \"PCI Express Gen 5 | Yes | Yes\" on the RTX 5060 family page, so interconnect is pcie."
+    },
+    {
+      "source_uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Source: Router's primary-source check blackwell-vram-variants-2026-10-18.md (Router re-read the row on nvidia.com 2026-10-18; first pass by SCOUT hermies_advisor_35b session 83ee44f5); not re-fetched by the author. Precision set: CUDA Table 33 (Compute Capability 12.x) Tensor Core input data types: Yes for TF32, BF16, FP16, FP8, FP6, FP4, INT8; INT4 cell blank. fp32 is CUDA-core. Quote carried from the precision reference used for the earlier Blackwell items, not in the VRAM-variants file."
+    }
+  ],
+  "updated_at": "2026-10-18T00:00:00Z"
+}

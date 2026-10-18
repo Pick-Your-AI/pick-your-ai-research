@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-geforce-rtx-5090",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "GeForce RTX 5090",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Documented hardware identity, not a currently purchasable offering or measured runtime tuple. Blackwell precision sources (quoted): the Blackwell precision reference (NVIDIA CUDA programming guide, compute-capabilities Table 33, https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html) states FP6 and FP4 are native Blackwell Tensor Core formats; they map to NO v1 enum slot (FP4 != signed int4, FP6 has no analog) so both are ABSENT from the v1 enum and int4 is correctly absent. Omission here does not imply FP4/FP6 are unsupported.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "GeForce RTX 5090",
+    "vram_gb": 32,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "tf32",
+      "bf16",
+      "fp16",
+      "fp32",
+      "fp8",
+      "int8"
+    ],
+    "rated_power_w": 575
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | \"Standard Memory Config | 32 GB GDDR7\" (GeForce RTX 5090 column)."
+    },
+    {
+      "source_uri": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | \"Total Graphics Power (W) | 575\" for GeForce RTX 5090."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | CUDA GPU Compute Capability table lists GeForce RTX 5090 under compute capability 12.0 (Workstation/Consumer)."
+    },
+    {
+      "source_uri": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | \"The GeForce RTX 5090 ships with 28 Gbps GDDR7 memory and delivers 1.792 TB/sec peak memory bandwidth\"."
+    },
+    {
+      "source_uri": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "checked_at": "2026-10-18T00:00:00Z",
+      "verification_status": "unverified",
+      "notes": "quote supplied by a spec-sourcing sub-agent, not re-fetched by the author | \"NVIDIA NVLink\u2122 (SLI-Ready) | No\" and \"PCI Express Gen 5 | Yes\", so interconnect is pcie."
+    }
+  ],
+  "updated_at": "2026-10-18T00:00:00Z"
+}

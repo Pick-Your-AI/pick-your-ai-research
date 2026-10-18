@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "id": "resources.rtx-pro-4000-blackwell-sff.2026-10-18",
+  "build_id": "build.rtx-pro-4000-blackwell-sff.2026-10-18",
+  "build_revision": 1,
+  "generated_at": "2026-10-18T07:20:00Z",
+  "estimates": [
+    {
+      "metric": "inference.estimated_required_vram_gb",
+      "value": "3.238",
+      "unit": "gb",
+      "estimator_id": "t2-measured-dense-fit",
+      "estimator_version": "1.0.0",
+      "confidence": "calibrated",
+      "assumptions": [
+        "Measured on 2x NVIDIA RTX PRO 4000 Blackwell SFF (24 GiB, sm_120, 70 W), driver 580.126.09, llama.cpp llama-server, --flash-attn off, f16 KV, ctx 2048, concurrency 1.",
+        "Model: Qwen3 4B Instruct Awq, Q4_K_M (file 2.491 decimal GB, arch qwen3, DENSE, 398 tensors).",
+        "Per-PID VRAM via nvidia-smi --query-compute-apps; background services (whitehat GPU0 + Ornith sub-agent GPU1) subtracted. Peak at generation = 3088 MiB = 3.238 decimal GB.",
+        "KV f16 at ctx 2048 = 0.302 decimal GB (36 layers, 8 KV heads, head_dim 128). Weights 2.491 + KV 0.302 + runtime/buffers ~0.445 = 3.238.",
+        "n=1 measurement; a single dense data point, not a calibrated error range."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    },
+    {
+      "metric": "inference.estimated_peak_per_device_vram_gb",
+      "value": "2.198",
+      "unit": "gb",
+      "estimator_id": "t2-measured-multigpu-split",
+      "estimator_version": "1.0.0",
+      "confidence": "calibrated",
+      "assumptions": [
+        "Measured on 2x NVIDIA RTX PRO 4000 Blackwell SFF, llama.cpp --dev 0,1 --split-mode layer, ctx 2048, concurrency 1.",
+        "Model: Qwen3 4B Instruct Awq, Q4_K_M (same artifact as M1).",
+        "Per-device VRAM at generation = GPU0 2096 MiB + GPU1 1502 MiB = 3598 MiB pool (3.773 decimal GB). Peak per device = 2096 MiB = 2.198 decimal GB.",
+        "Layer split is 58.3/41.7, NOT 50/50; a sizing rule must use peak-per-device, not total/2. The pool is 0.535 decimal GB above the single-GPU M1 reading (a second runtime context).",
+        "n=1 measurement."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    },
+    {
+      "metric": "inference.estimated_required_vram_gb",
+      "value": "3.150",
+      "unit": "gb",
+      "estimator_id": "t2-measured-moe-offload",
+      "estimator_version": "1.0.0",
+      "confidence": "calibrated",
+      "assumptions": [
+        "Measured on NVIDIA RTX PRO 4000 Blackwell SFF, llama.cpp --cpu-moe, ctx 1024, concurrency 1.",
+        "Model: Qwen-Agentworld-35B-A3B, Q4_K_M (file 22.314 decimal GB, arch qwen35moe, HYBRID SSM+MoE, 256 experts top-8, full_attention_interval 4).",
+        "Resident GPU VRAM at generation = 3004 MiB = 3.150 decimal GB. Routed+shared experts (19.770 decimal GB) are offloaded to host RAM; observed host RAM delta ~8.4 decimal GB (mmap/page-cache, NOT a resident copy and NOT a prediction).",
+        "The MoE is a hybrid SSM+MoE: only 1 of 4 blocks is full attention, so per-token KV grows ~4x slower than a dense model at equal depth. This is why a 22.314 decimal GB model is resident in 3.150 decimal GB of VRAM.",
+        "Latency cost of offload: TTFT 1.737 s, ITL 0.1252 s, 7.3 tokens/s (vs 28.4 tokens/s for the dense 4B).",
+        "n=1 measurement."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    },
+    {
+      "metric": "inference.estimated_tokens_per_second",
+      "value": "28.4",
+      "unit": "tokens_per_second",
+      "estimator_id": "t2-measured-dense-fit",
+      "estimator_version": "1.0.0",
+      "confidence": "calibrated",
+      "assumptions": [
+        "Measured tokens/s for the M1 dense fit (Qwen3 4B Q4_K_M, ctx 2048, concurrency 1) on the RTX PRO 4000 Blackwell SFF.",
+        "TTFT 0.131 s, ITL 0.0344 s. n=1."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    },
+    {
+      "metric": "inference.estimated_tokens_per_second",
+      "value": "23.5",
+      "unit": "tokens_per_second",
+      "estimator_id": "t2-measured-multigpu-split",
+      "estimator_version": "1.0.0",
+      "confidence": "calibrated",
+      "assumptions": [
+        "Measured tokens/s for the M3 multi-GPU split (Qwen3 4B Q4_K_M, --dev 0,1 --split-mode layer, ctx 2048, concurrency 1).",
+        "TTFT 0.151 s, ITL 0.0417 s. Two-GPU split is slower than single-GPU M1 (28.4) at this small model size. n=1."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    },
+    {
+      "metric": "inference.estimated_tokens_per_second",
+      "value": "7.3",
+      "unit": "tokens_per_second",
+      "estimator_id": "t2-measured-moe-offload",
+      "estimator_version": "1.0.0",
+      "confidence": "calibrated",
+      "assumptions": [
+        "Measured tokens/s for the M2 MoE offload (Qwen-Agentworld-35B-A3B, --cpu-moe, ctx 1024, concurrency 1).",
+        "TTFT 1.737 s, ITL 0.1252 s. Offloading experts to host RAM costs ~4x ITL vs the dense 4B at this size class. n=1."
+      ],
+      "selection_ids": [
+        "sel_model",
+        "sel_context_policy",
+        "sel_inference_engine",
+        "sel_accelerator"
+      ]
+    }
+  ]
+}

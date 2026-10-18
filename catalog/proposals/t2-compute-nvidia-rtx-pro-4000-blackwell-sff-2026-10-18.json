@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-rtx-pro-4000-blackwell-sff",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA RTX PRO 4000 Blackwell SFF Edition (measured on CONTAK-01)",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Low-profile single-slot Blackwell (sm_120, compute capability 12.0) workstation GPU with a 70 W board power limit, distinct from the higher-TDP full-size RTX PRO 4000. This item is grounded in a local nvidia-smi reading of the exact card used for the #10 inference measurements (2x in one box), not a vendor reference sheet. Research snapshot; no serving or training-fit claim.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "RTX PRO 4000 Blackwell SFF Edition",
+    "vram_gb": 24,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "fp32",
+      "tf32",
+      "bf16",
+      "fp16",
+      "fp8",
+      "int8"
+    ],
+    "rated_power_w": 70,
+    "interconnect": "pcie"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T08:10:00Z",
+      "verification_status": "verified",
+      "notes": "Local nvidia-smi reading of the exact card (2x in one box) on CONTAK-01: name 'NVIDIA RTX PRO 4000 Blackwell SFF Edition', compute capability 12.0 (sm_120, Blackwell), FB memory total 24467 MiB (24 GiB advertised, 25.656 decimal GB), board power limit 70 W (min 60 / max 70), PCIe interconnect, single slot, no NVLink. Driver 580.126.09. This is a measured device identity, not a vendor reference sheet; the 70 W limit distinguishes the SFF variant from the full-size RTX PRO 4000. The precision set follows precision-reference.json CC 12.0 (fp32, tf32, bf16, fp16, fp8, int8); int4 is omitted because CUDA Table 33 marks the INT4 cell blank for CC 12.x, and Blackwell's native FP4/FP6 are absent from the v1 enum. A precision listing does not assert that an arbitrary quantized checkpoint runs."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T08:10:00Z",
+      "verification_status": "unverified",
+      "notes": "CUDA GPU table lists the RTX PRO 4000 Blackwell family at compute capability 12.0, supporting the CUDA backend identity. This does not pin a driver or CUDA runtime version, and does not establish engine/artifact/kernel compatibility."
+    }
+  ],
+  "updated_at": "2026-10-18T08:10:00Z"
+}
