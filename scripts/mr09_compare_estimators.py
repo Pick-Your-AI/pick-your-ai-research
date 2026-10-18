@@ -28,6 +28,28 @@ def digest(path):
 def write(path, data):
     path.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
 
+def input_json(text):
+    """Reject ambiguous keys and non-finite numbers before consuming evidence."""
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f"duplicate JSON object key: {key!r}")
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise ValueError(f"non-finite JSON number: {value}")
+
+    def finite_float(value):
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError("JSON number exceeds finite numeric range")
+        return number
+
+    return json.loads(text, object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
+
 def payload_bytes(value):
     """Normalize a positive integral byte count without accepting booleans."""
     if isinstance(value, bool) or not isinstance(value, (int, float)):
@@ -47,13 +69,15 @@ def kv_component(plan):
         raise ValueError("positive finite KV size required")
     return payload_bytes(value * GIB)
 
-def compare_payload(plan, run, point):
-    """Validate the four-field geometry and storage width, not runtime fit."""
+def measured_payload(run, point):
+    """Admit exact integer native counts, geometry and two-byte storage only."""
     if run["status"] != "success" or run["model_id"] != MODEL or run["revision"] != REVISION:
         raise ValueError("wrong measured model or unsuccessful observation")
     config, geometry, actual = run["configuration"], run["model_geometry"], run["actual_tokens"]
-    if (config["kv_cache"] != "bf16" or actual["active_sequences"] != 1
-            or (geometry["layers"], geometry["kv_heads"], geometry["head_dim"]) != (30, 3, 64)):
+    shape = (geometry["layers"], geometry["kv_heads"], geometry["head_dim"])
+    if (config["kv_cache"] != "bf16" or type(actual["active_sequences"]) is not int
+            or actual["active_sequences"] != 1
+            or any(type(value) is not int for value in shape) or shape != (30, 3, 64)):
         raise ValueError("only single-sequence native two-byte KV is eligible")
     if point == "prefill":
         context, measured = actual["prompt_per_sequence"], run["native_kv_prefill_payload"]["measured_bytes"]
@@ -61,16 +85,36 @@ def compare_payload(plan, run, point):
         context, measured = actual["cache_tokens_per_sequence"], run["native_kv_steady_payload_bytes"]
     else:
         raise ValueError("unknown payload observation point")
-    if plan["context"] != context or plan["quantization"] != "BF16":
+    if type(context) is not int or context <= 0:
+        raise ValueError("positive integer observed context required")
+    return context, payload_bytes(measured)
+
+def compare_payload(plan, run, point):
+    """Validate the four-field geometry and storage width, not runtime fit."""
+    context, measured = measured_payload(run, point)
+    if (type(plan["context"]) is not int or plan["context"] != context
+            or plan["quantization"] != "BF16"):
         raise ValueError("context or requested weight precision differs")
     estimate = kv_component(plan)
-    measured = payload_bytes(measured)
     signed = estimate - measured
     return {"point": point, "context": context, "estimated_payload_bytes": estimate,
             "measured_payload_bytes": measured, "signed_bytes": signed,
             "absolute_bytes": abs(signed), "signed_relative_percent": 100 * signed / measured,
             "quantity": "native two-byte full-attention KV tensor payload only",
             "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair"}
+
+def read_measurements(directory):
+    """Check all retained input bytes before creating output or running a tool."""
+    runs = {}
+    for cell in ("D1", "D2"):
+        for rep in (1, 2, 3):
+            name = f"mr09-{cell}-r{rep}.json"
+            raw = (directory / name).read_bytes()
+            run = input_json(raw.decode("utf-8"))
+            for point in ("prefill", "terminal"):
+                measured_payload(run, point)
+            runs[name] = (run, hashlib.sha256(raw).hexdigest())
+    return runs
 
 NODE_AUDIT = r"""
 const {pathToFileURL} = await import('node:url');
@@ -89,10 +133,11 @@ def main():
     args = parser.parse_args()
     if args.output_dir.exists():
         parser.error("fresh output directory required; never overwrite evidence")
+    runs = read_measurements(args.measurements)
     for name, expected in PINS.items():
         if digest(args.artifact_dir / name) != expected:
             parser.error("external artifact hash mismatch: " + name)
-    catalog = json.loads((args.artifact_dir / "hf_models.json").read_text(encoding="utf-8"))
+    catalog = input_json((args.artifact_dir / "hf_models.json").read_text(encoding="utf-8"))
     model = next(row for row in catalog if row["name"] == MODEL)
     geometry = {k:model[k] for k in ("parameters_raw", "num_hidden_layers", "num_key_value_heads", "head_dim", "format", "quantization")}
     if (geometry["num_hidden_layers"], geometry["num_key_value_heads"], geometry["head_dim"]) != (30, 3, 64):
@@ -113,7 +158,7 @@ def main():
         if result.returncode != 0:
             write(args.output_dir / name,{"status":"estimator_rejection", "exit_code":result.returncode, "stdout":result.stdout, "stderr":result.stderr})
             raise RuntimeError("estimator failed; preserve output and stop")
-        plan = json.loads(result.stdout)
+        plan = input_json(result.stdout)
         write(args.output_dir / name,plan)
         plans[(context,kv)] = plan
         ledger["estimator_executions"].append({"file":name, "sha256":digest(args.output_dir/name), "argv":["$LLMFIT",*argv], "exit_code":0,
@@ -121,16 +166,15 @@ def main():
     for cell in ("D1","D2"):
         for rep in (1,2,3):
             name = f"mr09-{cell}-r{rep}.json"
-            path = args.measurements / name
-            run = json.loads(path.read_text(encoding="utf-8"))
+            run, measurement_sha256 = runs[name]
             for point, context in (("prefill",run["actual_tokens"]["prompt_per_sequence"]),("terminal",run["actual_tokens"]["cache_tokens_per_sequence"])):
                 pair = compare_payload(plans[(context,"fp16")],run,point)
-                pair.update({"measurement_file":name,"measurement_sha256":digest(path),"estimator_file":f"llmfit-{context}-fp16.json"})
+                pair.update({"measurement_file":name,"measurement_sha256":measurement_sha256,"estimator_file":f"llmfit-{context}-fp16.json"})
                 ledger["component_pairs"].append(pair)
-    run = json.loads((args.measurements / "mr09-D1-r1.json").read_text())
+    run = runs["mr09-D1-r1.json"][0]
     # Feed the recorded capacity, in explicit decimal GB, rather than today's hardware.
     result = subprocess.run([args.node,"--input-type=module","-e",NODE_AUDIT,str((args.artifact_dir/"engine.mjs").resolve()),str(run["hardware"]["driver_total_bytes"]/1e9)],capture_output=True,text=True,check=True,timeout=30)
-    modelfit = json.loads(result.stdout)
+    modelfit = input_json(result.stdout)
     write(args.output_dir / "modelfit-audit.json",modelfit)
     ledger["modelfit"] = {"file":"modelfit-audit.json","sha256":digest(args.output_dir/"modelfit-audit.json"),"status":"missing_inputs_or_model", "limits":["no exact catalog model match", "API has no artifact revision, runtime, context, cache layout or admitted concurrency arguments"], "engine_argv":["$NODE","--input-type=module","-e","NODE_AUDIT in recorded script","$ARTIFACT_DIR/engine.mjs","recorded driver_total_bytes / 1e9"]}
     ledger["component_pair_count"] = len(ledger["component_pairs"])
