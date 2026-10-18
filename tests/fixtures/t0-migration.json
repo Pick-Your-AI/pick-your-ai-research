@@ -78,7 +78,11 @@
         }
       },
       "expected": {
-        "overall_mode": "hybrid"
+        "overall_mode": "hybrid",
+        "component_modes": {
+          "primary": "self_hosted",
+          "moderation-model": "api"
+        }
       }
     },
     {
