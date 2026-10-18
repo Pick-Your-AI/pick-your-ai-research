@@ -7,6 +7,7 @@ from ipaddress import ip_address
 from pathlib import Path
 from urllib.parse import urlsplit
 
+import idna
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
 
@@ -81,20 +82,29 @@ def locator_parts(uri):
 def public_source(uri):
     try:
         value = locator_parts(uri)
-        # Normalize Unicode hostname forms before reserved-domain/IP checks.
-        host = (value.hostname or '').encode('idna').decode('ascii').removesuffix('.')
-        reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
-            host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
-        if (value.scheme not in {'http', 'https'} or not host or reserved
+        host = value.hostname or ''
+        if (value.scheme not in {'http', 'https'} or not host
                 or value.username is not None or value.password is not None
                 or '%' in host or '\\' in host):
             return False
-        try:
+        if value.netloc.startswith('['):
+            # IPv6 literals are addresses, not IDNA domain labels.
             address = ip_address(host)
-        except ValueError:
-            # Legacy numeric hosts can be interpreted as local IPs by a browser.
-            # Require a canonical IP literal rather than guessing its radix/parts.
-            return re.fullmatch(r'(?:0[xX][0-9a-fA-F]*|[0-9]+)(?:\.(?:0[xX][0-9a-fA-F]*|[0-9]+))*', host) is None
+            if address.version != 6:
+                return False
+        else:
+            # The standard-library IDNA2003 codec misses newer compatibility
+            # mappings that browsers apply before interpreting a host as an IP.
+            host = idna.encode(host, uts46=True, std3_rules=True).decode('ascii').removesuffix('.')
+            reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
+                host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
+            if reserved:
+                return False
+            try:
+                address = ip_address(host)
+            except ValueError:
+                # Require canonical IP syntax instead of guessing radix/parts.
+                return re.fullmatch(r'(?:0[xX][0-9a-fA-F]*|[0-9]+)(?:\.(?:0[xX][0-9a-fA-F]*|[0-9]+))*', host) is None
         address = getattr(address, 'ipv4_mapped', None) or address
         return address.is_global and not (address.is_multicast or address.is_reserved
                                           or getattr(address, 'is_site_local', False))
