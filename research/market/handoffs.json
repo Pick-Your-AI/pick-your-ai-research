@@ -92,8 +92,8 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Independent receiving acceptance pending; author integration acknowledged",
-    "requested_action": "Obtain an independent receiving disposition. Unknown cells are neither negative capability findings nor product requirements.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Use documentary model discovery and comparison only. Keep publisher release, serving route and derivative artifact separate; no production catalog admission, immutable serving pin, weight/licence right or measured quality follows.",
     "ownership_observed_on": "2026-10-18",
     "responses": [
       {
@@ -109,7 +109,25 @@
         "commit_basis": "Explicit research-repository reviewed SHA in receipt"
       }
     ],
-    "receiving_review_status": "author_integration_only"
+    "receiving_review_status": "author_integration_only",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:24:09Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49#issuecomment-6251641610",
+        "reviewed_commit": "fcc29c518037e0f47e94e1a22f34f846a93cf227",
+        "disposition": "accepted_with_narrowing",
+        "scope": "model discovery/comparison and version-field vocabulary",
+        "retained_unknowns_and_next_action": "Use documentary model discovery and comparison only. Keep publisher release, serving route and derivative artifact separate; no production catalog admission, immutable serving pin, weight/licence right or measured quality follows.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "reviewed_artifact_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "published_equivalent_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "commit_basis": "The actual issue receipt names prepared fcc29c51/tree25bfa13b and its six receiving-note blobs. Direct Git Data and raw-blob readback proves published 5f3765e1 has that exact tree; publication is not a different claimed review input.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -121,8 +139,8 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Independent receiving acceptance pending; author integration acknowledged",
-    "requested_action": "Obtain an independent receiving disposition. Unknown cells are neither negative capability findings nor product requirements.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Keep selected planning inputs distinct from published or enforced route limits. Preserve complete assembled input, output reservation, shared/separate budgets and tokenizer/template uncertainty; no tokenizer, KV default, calibrated count, truncation policy or remaining context agreement is adopted.",
     "ownership_observed_on": "2026-10-18",
     "responses": [
       {
@@ -138,7 +156,25 @@
         "commit_basis": "Explicit research-repository reviewed SHA in receipt"
       }
     ],
-    "receiving_review_status": "author_integration_only"
+    "receiving_review_status": "author_integration_only",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:24:09Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49#issuecomment-6251641610",
+        "reviewed_commit": "fcc29c518037e0f47e94e1a22f34f846a93cf227",
+        "disposition": "accepted_with_narrowing",
+        "scope": "planning-input versus published model/route-limit vocabulary",
+        "retained_unknowns_and_next_action": "Keep selected planning inputs distinct from published or enforced route limits. Preserve complete assembled input, output reservation, shared/separate budgets and tokenizer/template uncertainty; no tokenizer, KV default, calibrated count, truncation policy or remaining context agreement is adopted.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "reviewed_artifact_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "published_equivalent_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "commit_basis": "The actual issue receipt names prepared fcc29c51/tree25bfa13b and its six receiving-note blobs. Direct Git Data and raw-blob readback proves published 5f3765e1 has that exact tree; publication is not a different claimed review input.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -150,10 +186,28 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Distinguish device capacity, allocatable memory, model/runtime requirement and vendor fit estimate. Retain exact configuration, per-device accounting, one reserve and the accepted uncalibrated-method limits; no ResourceEstimate, feasibility, throughput/SLO, error calibration, dtype support or withdrawn accelerator intake is supplied.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:24:09Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49#issuecomment-6251641610",
+        "reviewed_commit": "fcc29c518037e0f47e94e1a22f34f846a93cf227",
+        "disposition": "accepted_with_narrowing",
+        "scope": "conditional compute discovery and sizing-test vocabulary",
+        "retained_unknowns_and_next_action": "Distinguish device capacity, allocatable memory, model/runtime requirement and vendor fit estimate. Retain exact configuration, per-device accounting, one reserve and the accepted uncalibrated-method limits; no ResourceEstimate, feasibility, throughput/SLO, error calibration, dtype support or withdrawn accelerator intake is supplied.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "reviewed_artifact_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "published_equivalent_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "commit_basis": "The actual issue receipt names prepared fcc29c51/tree25bfa13b and its six receiving-note blobs. Direct Git Data and raw-blob readback proves published 5f3765e1 has that exact tree; publication is not a different claimed review input.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -165,10 +219,28 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Use three construction pointers and one separately identified Ragas evaluation pointer. No backend, embedding/store/reranker tuple, retrieved answer, workload quality, caller/store/action authorization, citation correctness or context-budget agreement follows; preserve complete-request recounting and permission before exposure.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:24:09Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49#issuecomment-6251641610",
+        "reviewed_commit": "fcc29c518037e0f47e94e1a22f34f846a93cf227",
+        "disposition": "accepted_with_narrowing",
+        "scope": "documentary RAG construction versus evaluation discovery",
+        "retained_unknowns_and_next_action": "Use three construction pointers and one separately identified Ragas evaluation pointer. No backend, embedding/store/reranker tuple, retrieved answer, workload quality, caller/store/action authorization, citation correctness or context-budget agreement follows; preserve complete-request recounting and permission before exposure.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "reviewed_artifact_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "published_equivalent_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "commit_basis": "The actual issue receipt names prepared fcc29c51/tree25bfa13b and its six receiving-note blobs. Direct Git Data and raw-blob readback proves published 5f3765e1 has that exact tree; publication is not a different claimed review input.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -180,10 +252,27 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Use the unchanged five-test T4 slice as discovery and test design only. Nine Documented / 156 Unknown records establish no configured framework/client/server/model/tool tuple, runtime exchange, trust, permissions, catalogue admission or capability absence.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "recorded_scoped_receiving_review",
+        "reviewer": "CompleteDotTech (literal T4 receipt attribution)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T09:15:34Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6248122696",
+        "reviewed_commit": "9192d5d6994b644ebbb81344300fda48db6d29a8",
+        "disposition": "accepted_with_narrowing",
+        "scope": "documentary agent/MCP discovery and bounded test design",
+        "retained_unknowns_and_next_action": "Use the unchanged five-test T4 slice as discovery and test design only. Nine Documented / 156 Unknown records establish no configured framework/client/server/model/tool tuple, runtime exchange, trust, permissions, catalogue admission or capability absence.",
+        "rechecked_commit": "f0387630f00a95d3a78dfedba54abc96c8b833d0",
+        "reviewed_artifact_git_blob": "a5e6a0887516b47cd7077a2b7471622cced8f73b",
+        "commit_basis": "The original receipt explicitly names both reviewed revisions and matrix a5e6a088. The current research author independently compared all 165 complete T4 cell records and found them unchanged at published 5f3765e1. This preservation check is separate from the earlier receiving review and does not refresh its source/runtime scope.",
+        "authority": "Preserve the original project-authorized T4 receipt as stated; no new reviewer identity, current product execution or absent-assignee response is inferred."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -195,10 +284,27 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "A registry record or advertised MCP interface is documentary discovery, not client/server protocol, transport, authentication, trust or operation qualification. Preserve exact connection/operation evidence and the unchanged nine Documented / 156 Unknown five-test slice.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "recorded_scoped_receiving_review",
+        "reviewer": "CompleteDotTech (literal T4 receipt attribution)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T09:15:34Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6248122696",
+        "reviewed_commit": "9192d5d6994b644ebbb81344300fda48db6d29a8",
+        "disposition": "accepted_with_narrowing",
+        "scope": "MCP registry/discovery versus connection qualification",
+        "retained_unknowns_and_next_action": "A registry record or advertised MCP interface is documentary discovery, not client/server protocol, transport, authentication, trust or operation qualification. Preserve exact connection/operation evidence and the unchanged nine Documented / 156 Unknown five-test slice.",
+        "rechecked_commit": "f0387630f00a95d3a78dfedba54abc96c8b833d0",
+        "reviewed_artifact_git_blob": "a5e6a0887516b47cd7077a2b7471622cced8f73b",
+        "commit_basis": "The original receipt explicitly names both reviewed revisions and matrix a5e6a088. The current research author independently compared all 165 complete T4 cell records and found them unchanged at published 5f3765e1. This preservation check is separate from the earlier receiving review and does not refresh its source/runtime scope.",
+        "authority": "Preserve the original project-authorized T4 receipt as stated; no new reviewer identity, current product execution or absent-assignee response is inferred."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -210,8 +316,8 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Narrowed to information only; T5 mapping reaffirmed",
-    "requested_action": "No additional #30-#32 rows while that scope stays Unknown. If a finding rises above Unknown, add a specific scoped consumer handoff. No MVP training scope is approved.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Keep one Unsloth training advertisement and 164 Unknown cells within discovery/test context. All 33 fine_tuned_deploy cells remain Unknown; no artifact lineage, adapter/merged/provider classification, framework/dataset references, serving tuple, evaluation, licence applicability or optional T5/MVP adoption follows. Preserve the original 159/160 receipt and record the separate current #30 discovery intake outside the snapshot.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "appletechie",
@@ -236,7 +342,26 @@
         "commit_basis": "Receipt does not name a newly reviewed research-repository SHA; no SHA inferred"
       }
     ],
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:45:40Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/357#pullrequestreview-5563733075",
+        "reviewed_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "disposition": "accepted_with_narrowing",
+        "scope": "current 165-cell T5 documentary discovery/test context",
+        "retained_unknowns_and_next_action": "Keep one Unsloth training advertisement and 164 Unknown cells within discovery/test context. All 33 fine_tuned_deploy cells remain Unknown; no artifact lineage, adapter/merged/provider classification, framework/dataset references, serving tuple, evaluation, licence applicability or optional T5/MVP adoption follows. Preserve the original 159/160 receipt and record the separate current #30 discovery intake outside the snapshot.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "published_matrix_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "original_receiving_input_commit": "aeb9f35f5113297db44b230f59a8cdf778379a24",
+        "original_receiving_matrix_git_blob": "00dbb8d94488ad73bae58d5ee934520e95b4862f",
+        "commit_basis": "The actual current-head PR review preserves the earlier accepted-aeb9 receiving input and separately verifies its applicable unchanged cells/current prose at published 5f3765e1. Original technical intake, current preservation and any stated source read retain their separate scopes.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -248,10 +373,29 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Keep seven benchmark, one harness, two application-evaluation, four RAG and one monitoring documentary pointers distinct; all guardrails remain Unknown. Inspection stays documentary and benchmark retrieval is not replication. Withhold evaluation_suite execution, rankings/thresholds, deployment/regression gates and measured latency/cost; actual comparisons still need the accepted identity/attempt/measurement/uncertainty/grade/intended-use tuple.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:45:40Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/357#pullrequestreview-5563733075",
+        "reviewed_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "disposition": "accepted_with_narrowing",
+        "scope": "evaluation discovery and test-design vocabulary",
+        "retained_unknowns_and_next_action": "Keep seven benchmark, one harness, two application-evaluation, four RAG and one monitoring documentary pointers distinct; all guardrails remain Unknown. Inspection stays documentary and benchmark retrieval is not replication. Withhold evaluation_suite execution, rankings/thresholds, deployment/regression gates and measured latency/cost; actual comparisons still need the accepted identity/attempt/measurement/uncertainty/grade/intended-use tuple.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "published_matrix_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "original_receiving_input_commit": "aeb9f35f5113297db44b230f59a8cdf778379a24",
+        "original_receiving_matrix_git_blob": "00dbb8d94488ad73bae58d5ee934520e95b4862f",
+        "commit_basis": "The actual current-head PR review preserves the earlier accepted-aeb9 receiving input and separately verifies its applicable unchanged cells/current prose at published 5f3765e1. Original technical intake, current preservation and any stated source read retain their separate scopes.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -263,10 +407,29 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing to documentary discovery and test design",
+    "requested_action": "Use five API-price and three hosting-price documentary pointers only. Withhold numerical Pricebook/cost_policy/CostEstimate intake, price truth/freshness/rights, billing semantics, quantities and FX/currency/region defaults. Hardware, recurring, training and TCO costs remain Unknown; comparison under exclusions is partial, and missing active cost is not zero.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:45:40Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/357#pullrequestreview-5563733075",
+        "reviewed_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "disposition": "accepted_with_narrowing",
+        "scope": "price-source discovery and field/test vocabulary",
+        "retained_unknowns_and_next_action": "Use five API-price and three hosting-price documentary pointers only. Withhold numerical Pricebook/cost_policy/CostEstimate intake, price truth/freshness/rights, billing semantics, quantities and FX/currency/region defaults. Hardware, recurring, training and TCO costs remain Unknown; comparison under exclusions is partial, and missing active cost is not zero.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "published_matrix_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "original_receiving_input_commit": "aeb9f35f5113297db44b230f59a8cdf778379a24",
+        "original_receiving_matrix_git_blob": "00dbb8d94488ad73bae58d5ee934520e95b4862f",
+        "commit_basis": "The actual current-head PR review preserves the earlier accepted-aeb9 receiving input and separately verifies its applicable unchanged cells/current prose at published 5f3765e1. Original technical intake, current preservation and any stated source read retain their separate scopes.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 49,
@@ -278,8 +441,8 @@
     ],
     "artifact": "research/market/features.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Narrowed",
-    "requested_action": "PR #87 fills bounded evidence; recipient acceptance of the later cells remains distinct from the original narrowing.",
+    "acceptance": "Accepted with constraints as documentary comparison input",
+    "requested_action": "Use each named filter view, benchmark/recommendation output, bookmark, catalog JSON, repository history, workflow format or task YAML only within its documented basis. No complete BuildSnapshot recovery, immutable serving/dependency pins, recipient authority, redaction or historical/current separation is inferred. Preserve the separate #66 guest observation; future exercised round-trip and application pin-change tests are separate promotion/implementation gates.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -290,7 +453,26 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session Android engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:32:19Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/357#pullrequestreview-5563689928",
+        "reviewed_commit": "5f3765e1a53b52541fa3b27417215685f99961a0",
+        "disposition": "accepted_with_constraints",
+        "scope": "52-cell documentary saved/share/export/version comparison",
+        "retained_unknowns_and_next_action": "Use each named filter view, benchmark/recommendation output, bookmark, catalog JSON, repository history, workflow format or task YAML only within its documented basis. No complete BuildSnapshot recovery, immutable serving/dependency pins, recipient authority, redaction or historical/current separation is inferred. Preserve the separate #66 guest observation; future exercised round-trip and application pin-change tests are separate promotion/implementation gates.",
+        "reviewed_tree": "25bfa13b2d8b38dc15e811e7f8528ec55b4c8071",
+        "published_matrix_git_blob": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "original_receiving_input_commit": "aeb9f35f5113297db44b230f59a8cdf778379a24",
+        "original_receiving_matrix_git_blob": "00dbb8d94488ad73bae58d5ee934520e95b4862f",
+        "commit_basis": "The actual current-head PR review preserves the earlier accepted-aeb9 receiving input and separately verifies its applicable unchanged cells/current prose at published 5f3765e1. Original technical intake, current preservation and any stated source read retain their separate scopes.",
+        "authority": "Actual in-session technical decisions under the user's express project engineering delegation, posted through the connected account. No absent-assignee acknowledgement, consumer-issue completion, source-use grant or production acceptance is implied."
+      }
+    ]
   },
   {
     "market_issue": 50,
