@@ -89,7 +89,7 @@ This table describes observed publication, not Project Status or full issue acce
 | #37 T6: Deployment | PUSHINGSQUARES, appletechie | [#121](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121) (merged) |
 | #38 T6: Monitoring | PUSHINGSQUARES, appletechie | [#121](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121) (merged) |
 | #39 T6: Cost Estimate | PUSHINGSQUARES, appletechie | [#121](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121) (merged) |
-| #40 T0: Component Schema & Compatibility Rules | tynamite, zwright8 | [#44](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44) (merged), [#134](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134) (merged) |
+| #40 T0: Component Schema & Compatibility Rules | tynamite, zwright8 | [#44](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44) (merged), [#126](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) (merged partial decision record), [#134](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134) (merged) |
 | #41 T0: Catalog Data Sources & Freshness | PUSHINGSQUARES, tynamite | [#127](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127) (merged), [#137](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/137) (merged) |
 | #42 T0: Saved, Shared & Compared Builds | appletechie, tynamite | [#114](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114) (open) |
 
