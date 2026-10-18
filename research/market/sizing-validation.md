@@ -118,6 +118,12 @@ sanitization writes. It permits changing free-memory observations, timings,
 artifact-list order and publication metadata. Early failures without discovery
 metadata remain recorded and excluded from numerical aggregates.
 
+Successful repetitions also pin the observed model geometry, tokenized workload
+(including the prompt digest) and actual token counts. Matching requested
+configuration alone cannot make different executed inputs one measurement
+cohort. Missing observed inputs on a successful record are rejected; early
+failures remain recorded without contributing numeric samples.
+
 The [regression tests](../../tests/test_mr09_measure.py) cover mismatched cohorts,
 allowed availability variation, early failures and unchanged reproduction of the
 committed summary. These checks do not establish physical-device UUID identity,

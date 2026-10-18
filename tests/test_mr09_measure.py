@@ -30,6 +30,9 @@ def synthetic_run(repetition=1, value=10, cell="D-synthetic"):
         "protocol_sha256": "synthetic-protocol-fixture",
         "configuration": {
             "fixture": "synthetic; never research evidence", "active_sequences": 1},
+        "model_geometry": {"layers": 1},
+        "workload": {"prompt_token_ids_sha256": "c" * 64, "generation": "synthetic-greedy"},
+        "actual_tokens": {"prompt_per_sequence": 1, "active_sequences": 1},
         "environment": {
             "python": "synthetic-python", "torch": "synthetic-torch",
             "cuda_build": "synthetic-cuda",
@@ -232,7 +235,8 @@ class MeasurementArithmeticTests(unittest.TestCase):
             failure["status"] = "unsupported"
             failure["phases"] = []
             failure["failure"] = {"phase": "discovery", "message": "synthetic"}
-            for key in ("environment", "hardware", "artifact_manifest"):
+            for key in ("environment", "hardware", "artifact_manifest",
+                        "model_geometry", "workload", "actual_tokens"):
                 failure.pop(key)
             write_synthetic_run(root, failure)
             summary = SUMMARY.summarize(root)
@@ -244,7 +248,8 @@ class MeasurementArithmeticTests(unittest.TestCase):
                 summary["cells"]["D-synthetic"]["failures"][0]["status"], "unsupported")
 
     def test_summary_rejects_missing_success_identity(self):
-        for field in ("environment", "hardware", "artifact_manifest"):
+        for field in ("environment", "hardware", "artifact_manifest",
+                      "model_geometry", "workload", "actual_tokens"):
             with self.subTest(field=field), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 run = synthetic_run()
@@ -252,6 +257,24 @@ class MeasurementArithmeticTests(unittest.TestCase):
                 write_synthetic_run(root, run)
                 with self.assertRaisesRegex(ValueError, "successful run requires"):
                     SUMMARY.summarize(root)
+
+    def test_summary_rejects_changed_observed_inputs_before_sanitizing(self):
+        changes = (("model_geometry", "layers", 2),
+                   ("workload", "prompt_token_ids_sha256", "d" * 64),
+                   ("actual_tokens", "prompt_per_sequence", 2))
+        for parent, field, value in changes:
+            with self.subTest(field=parent), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                first = write_synthetic_run(root, synthetic_run())
+                before = first.read_bytes()
+                second = synthetic_run(2)
+                second[parent][field] = value
+                second_path = write_synthetic_run(root, second)
+                second_before = second_path.read_bytes()
+                with self.assertRaisesRegex(ValueError, "incompatible measurement cohort"):
+                    SUMMARY.summarize(root, sanitize=True)
+                self.assertEqual(first.read_bytes(), before)
+                self.assertEqual(second_path.read_bytes(), second_before)
 
     def test_summary_preserves_committed_measurement_cohort(self):
         root = Path(__file__).resolve().parents[1] / "research/market/measurements"

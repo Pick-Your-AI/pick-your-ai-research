@@ -39,6 +39,12 @@ def cohort_signature(run):
     Availability, phase counters/timings and publication metadata may vary.
     This checks recorded identities, not artifact truth or physical-device UUIDs.
     """
+    inputs = {}
+    for field in ("model_geometry", "workload", "actual_tokens"):
+        value = run.get(field)
+        if not isinstance(value, dict) or not value:
+            raise ValueError(f"successful run requires observed {field}")
+        inputs[field] = value
     environment = run.get("environment")
     if not isinstance(environment, dict):
         raise ValueError("successful run requires environment pins")
@@ -111,7 +117,7 @@ def cohort_signature(run):
 
     return json.dumps(
         {"environment": environment, "hardware": stable_hardware,
-         "artifacts": sorted(artifact_pins)},
+         "artifacts": sorted(artifact_pins), "observed_inputs": inputs},
         sort_keys=True, separators=(",", ":"), allow_nan=False,
     )
 
