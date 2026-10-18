@@ -1,0 +1,18 @@
+{
+  "x_t0_revision_locks": {
+    "proposal_version": "cd7-0.1",
+    "build_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864",
+    "artifacts": {
+      "catalog_snapshot": {
+        "id": "catalog.fixture.1",
+        "revision": 1,
+        "sha256": "2e9120db823faef3e1e330a7d2e8067b3ab064328e2faed699d15cf41880fbf8"
+      },
+      "pricebook": {
+        "id": "prices.fixture.1",
+        "revision": 1,
+        "sha256": "716a848822fc2b182d226c597f7e50f4b00a0fe01ba5c03879e858ca6f0c9b46"
+      }
+    }
+  }
+}
