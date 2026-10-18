@@ -24,6 +24,8 @@ assignee or grant production/external permission. The exact contextual
 [rights-validation.md](rights-validation.md#receiving-decisions-and-criterion-map)
 without inventing additional snapshot pairs.
 
+On 2026-10-18, the [actual coordinating engineering receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238) accepted the three existing #66 → #2/#40/#42 scopes for original-constraint preservation, compatibility-evidence limits and the tested saved-artifact comparison. The exact note blob and original captures were independently inspected. These decisions are recorded as post-snapshot reviews, with no receiving response attributed to an absent assignee. The 101 snapshot pairs, historical responses and 44/55/2 cutoff classifications remain unchanged. The [literal #66 criterion map](substitute-validation.md#literal-66-criterion-map) retains the final amendment validation and delivery gate.
+
 The #49 → #33 information-only row covers #30/#31/#32 while their scope remains Unknown, as the [T5 owner reaffirmed](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818). No extra T5 consumer rows are invented. #59 → #33 remains accepted as synthesis context; current audit acceptance is separate. The [#60 → #27 MCP rights receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6244042769) is contextual and is not transferred onto a #55 handoff.
 
 ## Current disposition ledger
@@ -128,9 +130,9 @@ The #49 → #33 information-only row covers #30/#31/#32 while their scope remain
 | #65 → #16 | appletechie, zabyxc01 | [rag-validation.md](rag-validation.md) | Not yet confirmed |
 | #65 → #25 | CompleteDotTech, Mattycodes69 | [rag-validation.md](rag-validation.md) | Not yet confirmed |
 | #65 → #27 | CompleteDotTech, tynamite | [rag-validation.md](rag-validation.md) | Not yet confirmed |
-| #66 → #2 | appletechie, tynamite | [substitute-validation.md](substitute-validation.md) | Not yet confirmed |
-| #66 → #40 | tynamite, zwright8 | [substitute-validation.md](substitute-validation.md) | Not yet confirmed |
-| #66 → #42 | appletechie, tynamite | [substitute-validation.md](substitute-validation.md) | Not yet confirmed |
+| #66 → #2 | appletechie, tynamite | [substitute-validation.md](substitute-validation.md) | Accepted with original-constraint and explicit-adoption limits by [delegated engineering review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238); note blob fbaff0a0; receiving-issue criteria remain separate |
+| #66 → #40 | tynamite, zwright8 | [substitute-validation.md](substitute-validation.md) | Accepted as bounded UX evidence; no inferred compatibility pass by [delegated engineering review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238); note blob fbaff0a0; receiving-issue criteria remain separate |
+| #66 → #42 | appletechie, tynamite | [substitute-validation.md](substitute-validation.md) | Accepted for the tested bookmark/configuration distinction; no global feature-absence claim by [delegated engineering review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238); note blob fbaff0a0; receiving-issue criteria remain separate |
 
 ## Review routing
 
