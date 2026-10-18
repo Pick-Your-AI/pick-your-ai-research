@@ -130,6 +130,31 @@ committed summary. These checks do not establish physical-device UUID identity,
 artifact truth, estimator comparability or empirical calibration. The original
 measurement instrument, dated protocol, raw observations and summary are unchanged.
 
+### Counter and comparison intake boundary (2026-10-18)
+
+An offline review of the summarizer at
+[`09fc94e`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/09fc94e08075ce0180a77e62dfcda767abb74d48/scripts/mr09_summarize.py)
+reproduced two input-validation failures using synthetic test records: arbitrary
+`error_comparisons` lengths could be reported as comparable competitor pairs,
+and a nonnumeric optional KV payload could become a byte statistic. The
+[`current instrument`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/09fc94e08075ce0180a77e62dfcda767abb74d48/scripts/mr09_measure.py)
+initializes an empty comparison list and implements no competitor intake.
+Inspected 2026-10-18; these are code findings, not new empirical observations.
+
+The summarizer now validates optional native/INT4 KV byte counters as nonnegative
+integers and rejects malformed or nonempty successful-run comparison lists.
+A future nonempty competitor comparison needs a separately reviewed intake
+that establishes matching artifact/runtime/quantity pins and error arithmetic;
+list length cannot supply that evidence. Failure diagnostics remain excluded
+from numerical summaries. Nonfinite JSON constants are rejected anywhere in the
+batch. All sanitized bytes, summary arithmetic and output serialization are
+prepared before optional sanitization changes any input, so malformed later
+failure metadata or an arithmetic overflow cannot rewrite earlier evidence.
+This does not promise rollback after a publication I/O failure. Regression tests
+preserve all input bytes on preparation errors and reproduce the committed
+15-run summary unchanged. No error pair, estimator tolerance or additional
+architecture coverage is created by this validation correction.
+
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
 - [x] Vary context cache precision and concurrency (dense D1–D5; MoE variation remains a gap)

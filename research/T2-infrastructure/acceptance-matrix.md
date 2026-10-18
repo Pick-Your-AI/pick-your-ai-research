@@ -27,7 +27,7 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 10.6 | Comparison fields defined with type, unit, and evidence requirement | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 10.7 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [gpu-compute.md](gpu-compute.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 10.8 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [gpu-compute.md](gpu-compute.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Partial scoped receipts: #9/#11/#31; #39 pending; other co-owner scope separate |
+| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Scoped #9/#11/#31 receipts; appletechie accepts #39 with constraints; PUSHINGSQUARES and other co-owner scope separate |
 | 10.10 | Open questions recorded with a named follow-up owner | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 11.1 | Support matrix keyed by engine version with sources | [inference-engine.md](inference-engine.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 11.2 | Rules in the #40 format, including `unknown` for unverified combinations | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
@@ -55,9 +55,10 @@ The [decision record](gpu-compute.md#headroom-and-measurement-handoff-dispositio
 now proposes explicit scenario headroom with no universal numeric default,
 note-only consumption of #61 observations, and a future build-bound estimate
 placement. This supports prepared content for 10.1/10.2/10.10; it does not accept
-those criteria or supply calibration. Both live #10 co-owners, @Mattycodes69 and
-@appletechie, must disposition the proposal. For 10.9, the existing #31 scoped
-receipt is present; Mattycodes69's #9/#11 interface receipts are now linked in the ledger, while #39 and other co-owner decisions remain separate. Those receipts do not accept headroom, calibration or estimate placement. #61's full
+those criteria or supply calibration. appletechie's later scoped acceptance of
+explicit headroom/note-only observations is recorded in the continuation below;
+Mattycodes69's disposition and future placement agreement remain open. For 10.9, the existing #31 scoped
+receipt is present; Mattycodes69's #9/#11 interface receipts are now linked in the ledger, while appletechie's #39 response and other co-owner decisions keep their own scope. The interface receipts do not accept headroom, calibration or estimate placement. #61's full
 empirical coverage, matching estimator errors and coordinator evidence acceptance
 remain open in its [current acceptance map](../market/mr09-acceptance.md#current-1061-continuation-map-2026-10-18).
 No acceptance criterion, assignee, native relationship or Project value changes.
@@ -71,6 +72,18 @@ Live owners: #8/#11 @zwright8 and @Mattycodes69; #9/#10 @Mattycodes69 and @apple
 
 The [engine record](inference-engine.md#version-retention-and-bounded-candidate-recommendation--2026-10-18) now records zwright8's actual retention/candidate receipt and proposes the matching bounded recommendation for Mattycodes69's review. It defines reference-based retention and new-release research triggers, preserves single-version-per-ID intake, and names #42's receiving owners. This prepares 11.4/11.9 without claiming their acceptance. A separately dated TGI lifecycle source check leaves the main matrix and catalog dates intact. For 11.8, appletechie's deployment/monitoring responses keep their reviewed revision, direction and integration limits; other owners' decisions are not inferred. No runtime tuple, support window, security certification or versioned executable rule is approved by this update.
 
+
+## #10 explicit-reserve arithmetic continuation (2026-10-18)
+
+The [compute record](gpu-compute.md#research-arithmetic-check-for-the-headroom-proposal)
+links a research-only checker and synthetic boundary regressions for explicit
+headroom, single reserve accounting, confidence eligibility and matching domains.
+This supplies reproducible methodology support for 10.1/10.2 without a measured
+error bound, default reserve, ResourceEstimate or GPU-count recommendation.
+The note records appletechie's actual headroom/note-only, #33 and #39 responses
+at their reviewed revision; Mattycodes69's methodology disposition, future
+placement and PUSHINGSQUARES's cost scope remain separate. No criterion is
+marked accepted by these tests or this reconciliation.
 
 ## #9 regional/billing continuation (2026-10-18)
 

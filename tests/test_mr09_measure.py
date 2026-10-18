@@ -338,6 +338,87 @@ class MeasurementArithmeticTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "inconsistent allocator counters"):
                 SUMMARY.summarize(root)
 
+    def test_summary_rejects_unvalidated_competitor_pairs_before_sanitizing(self):
+        for comparisons in ("invented", {}, None, [{}], [0]):
+            with self.subTest(comparisons=comparisons), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                first = write_synthetic_run(root, synthetic_run())
+                second = synthetic_run(2)
+                second["error_comparisons"] = comparisons
+                last = write_synthetic_run(root, second)
+                before = [path.read_bytes() for path in (first, last)]
+                with self.assertRaisesRegex(ValueError, "error_comparisons"):
+                    SUMMARY.summarize(root, sanitize=True)
+                self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
+    def test_summary_rejects_invalid_optional_payloads_before_sanitizing(self):
+        for field, metric in (
+                ("native_kv_prefill_payload", "measured_bytes"),
+                ("int4_kv_prefill_payload", "total_physical_storage_bytes")):
+            for payload in (None, [], {}, {metric: "invalid"}, {metric: True},
+                            {metric: -1}, {metric: 1.5}):
+                with self.subTest(field=field, payload=payload), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    second = synthetic_run(2)
+                    second[field] = payload
+                    last = write_synthetic_run(root, second)
+                    before = [path.read_bytes() for path in (first, last)]
+                    with self.assertRaisesRegex(ValueError, "invalid byte counter"):
+                        SUMMARY.summarize(root, sanitize=True)
+                    self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
+    def test_summary_preserves_zero_and_positive_optional_payloads(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for repetition, value in ((1, 0), (2, 4)):
+                run = synthetic_run(repetition)
+                run["native_kv_prefill_payload"] = {"measured_bytes": value}
+                run["int4_kv_prefill_payload"] = {"total_physical_storage_bytes": value}
+                write_synthetic_run(root, run)
+            cell = SUMMARY.summarize(root)["cells"]["D-synthetic"]
+            expected = {"n": 2, "min": 0, "median": 2.0, "max": 4}
+            self.assertEqual(cell["native_kv_prefill_payload_bytes"], expected)
+            self.assertEqual(cell["int4_kv_prefill_payload_bytes"], expected)
+
+    def test_summary_rejects_nonfinite_metadata_before_sanitizing(self):
+        for value in (float("nan"), float("inf"), float("-inf")):
+            with self.subTest(value=value), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                first = write_synthetic_run(root, synthetic_run())
+                second = synthetic_run(2)
+                second["unaggregated_metadata"] = {"elapsed_seconds": value}
+                last = write_synthetic_run(root, second)
+                before = [path.read_bytes() for path in (first, last)]
+                with self.assertRaisesRegex(ValueError, "Out of range float values"):
+                    SUMMARY.summarize(root, sanitize=True)
+                self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
+    def test_summary_prepares_failed_record_sanitization_before_any_write(self):
+        for hardware in (None, [], "invalid"):
+            with self.subTest(hardware=hardware), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                first = write_synthetic_run(root, synthetic_run())
+                failure = synthetic_run(2)
+                failure["status"] = "unsupported"
+                failure["phases"] = []
+                failure["hardware"] = hardware
+                last = write_synthetic_run(root, failure)
+                before = [path.read_bytes() for path in (first, last)]
+                with self.assertRaisesRegex(ValueError, "hardware must be an object"):
+                    SUMMARY.summarize(root, sanitize=True)
+                self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
+    def test_summary_finishes_arithmetic_before_any_sanitization_write(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            paths = [write_synthetic_run(root, synthetic_run(repetition, value))
+                     for repetition, value in ((1, 10), (2, 2 ** 1200))]
+            before = [path.read_bytes() for path in paths]
+            with self.assertRaises(OverflowError):
+                SUMMARY.summarize(root, sanitize=True)
+            self.assertEqual([path.read_bytes() for path in paths], before)
+
 
 if __name__ == "__main__":
     unittest.main()
