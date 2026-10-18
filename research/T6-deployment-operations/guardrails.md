@@ -272,3 +272,68 @@ Refs #120, #35, #38. Source checked 2026-10-18; not independently reproduced. Th
 Google Cloud's [Safety and content filters](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/configure-safety-filters) page states that `OFF` is the configurable harm-block threshold default for `gemini-3.5-flash` and subsequent models. In that setting, configurable response blocking and its metadata are absent. This is not a statement that every safety control is disabled: the page separately describes non-configurable CSAM/PII protections and SPII response termination. Its configurable filters follow model versions, not an independently versioned filter release. `BLOCK_NONE` disables blocking but returns scores; [F03](sibling-reconciliation.md) separately scopes the Gemini API defaults and error telemetry.
 
 Receiving implication for #35/#38: record the exact Google Cloud model/version and configured threshold before interpreting absent harm scores or block events. Missing metadata is not a measured zero harm rate or evidence that a request was safe. Explicit threshold selection and telemetry interpretation remain proposed receiving decisions, not an adopted ruleset or account-level test. The source is mutable; recheck it when the model or service configuration changes.
+
+## Proposed memory-deletion-depth control (2026-10-18)
+
+This bounded follow-up addresses [PUSHINGSQUARES' scoped receiving request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930)
+for a `memory-deletion-depth` control after #121. It supplements the control
+catalog; it is a project proposal, not an additional source-verified executable
+rule, a purge procedure or an erasure certification. #35 co-owner review and #40
+adoption remain outstanding. It does not change the existing rule counts or v1.
+
+| Control | Scope and applicability | Required research/configuration evidence | Proposed observable result |
+| --- | --- | --- | --- |
+| `memory-deletion-depth` | Selected persistent memory with a deletion/revocation or retention requirement, across API, managed and self-operated placement | Exact backend/version; source/subject/event identity; inventory of active, history, derived/entity/graph and backup layers actually present; each layer's authorized lifecycle path, completion condition and verification method; #28/#35 policy and #38 evidence location | Display deletion depth per layer. Distinguish request acknowledgement, serving exclusion and policy-complete deletion; retain incomplete/unknown layers and separately governed backup expiry. No full-completion label from one backend response |
+
+The [memory-observability proposal](memory-observability-proposal.md) supplies
+candidate MEM-SG04 job-state and MEM-SG05 per-layer verification signals. Signals
+are observations, not enforcement. Counts, elapsed seconds and observation times
+need their scope and method; public labels must not carry memory text, prompts,
+secrets or raw subject/job identifiers. Access-controlled audit records remain
+separate from aggregation. Missing instrumentation is unknown, not a zero
+residual count. A bounded sample is not exhaustive absence evidence.
+
+### Candidate warning and error interpretation for #40
+
+`G-H-MEM-01` is a local proposal identifier. Applicability is an actual selected
+memory lifecycle requirement; missing policy/applicability evidence is unknown,
+not skipped. The assertion is that the displayed deletion-depth/completion claim
+matches the current event-bound per-layer evidence and the declared policy.
+Severity is fixed `error`; unknown policy is `block` for claiming completion.
+This does not assert that every incomplete deletion is already a policy breach.
+
+| Synthetic situation | Proposed outcome / user-visible treatment |
+| --- | --- |
+| No applicable persistent-memory lifecycle requirement | skipped, with the applicability reason; do not suppress an independent knowledge-source or security requirement |
+| Complete declared inventory, each required layer meets its explicit completion criterion with current evidence | pass for that scoped policy claim; no universal deletion or legal-compliance guarantee |
+| API says accepted, but history or another required layer is unobserved | unknown; show pending/unknown per layer rather than complete |
+| Known retained history while the UI claims all required content was erased | fail; withdraw the unsupported full-completion claim and show retained depth |
+| Backup is excluded from serving, but its approved retention period has not completed | show retained/pending backup status; full-policy completion is not yet established |
+| Receipt refers to a different event/revision, or tenant/subject mapping is unresolved | unknown; obtain correctly scoped evidence without copying private content into public records |
+
+[KB-02 and its synthetic examples](../T3-knowledge-retrieval/knowledge-base.md#synthetic-deletion-lineage-examples-for-kb-02)
+check a narrower serving predicate. A tombstone or serving exclusion may satisfy
+that predicate while historical content remains retained. Never promote its
+pass into a `G-H-MEM-01` erasure/completion claim. Conversely, a current known
+stale serving copy must remain a KB-02 failure despite unrelated missing layers.
+
+### Source basis and unresolved ownership
+
+The existing [Mem0 evidence D57/D58](../T4-agents-integrations/agent-memory.md#mem0-deletion-reproduction-and-limits)
+provides the motivating distinction. On 2026-10-18 this follow-up reread the exact
+publisher source at commit `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd`:
+[`main.py`](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/main.py#L2114)
+removes the vector and passes prior text to a DELETE history event;
+[`storage.py`](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/storage.py#L150)
+inserts that prior text into SQLite history. Downloaded file SHA-256 values
+matched the existing D57/D58 record (`f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c`
+and `5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd`).
+This is source inspection only; the earlier isolated reproduction was not rerun,
+and no full service, purge, backup or later Mem0 version was tested.
+
+#28 supplies actual layer/lifecycle inventory; #35 co-owners decide required
+scope and acceptable verification, including any retained exceptions; #38 owns
+collection/access/alert policy; #13/#15/#16 supply knowledge/index lineage;
+#37 owns eventual operational readiness. No retention duration, purge command,
+residual threshold or storage access is invented. Configured-key evidence is a
+separate requested control and is not completed by this deletion-depth proposal.
