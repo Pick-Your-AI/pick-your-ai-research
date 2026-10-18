@@ -311,7 +311,7 @@ Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals un
 | MI300X accelerator | `amd-mi300x`: `vram_gb` 192, backend `rocm` | Not priced in this note |
 | `aws g6e.xlarge` (1× L40S, $1.861/h, P7) | `compute_profile` `aws-ec2-g6e-xlarge-us-east-1`: `hosting_ref` `aws-ec2`, `accelerator_ref` `nvidia-l40s`, count 1, region `us-east-1` | The only existing `compute_profile`. It is a valid `compute_profile_ref` target. The T2 pricebook has no rate for it yet |
 | AWS and RunPod hosting | `hosting_platform` `aws-ec2` (`us-east-1`), `runpod-pods`; also `runpod-serverless`, `modal-functions`, `huggingface-endpoints-aws` | Hosting records exist for two of the self-run providers priced here |
-| Checkpoint storage (`storage_ref`) | `storage` `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | `aws-s3-standard` (object, `aws-ec2`) was added in #158; P13 remains historical note-only pricing, not a rate bound to this item/version |
+| Checkpoint storage (`storage_ref`) | `storage` `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | `aws-s3-standard` (object; no EC2 hosting dependency) was added in #158; P13 remains historical note-only pricing, not a rate bound to this item/version |
 
 | Gap | Kind | Route |
 | --- | --- | --- |
