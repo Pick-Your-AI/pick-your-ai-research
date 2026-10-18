@@ -12,6 +12,16 @@ A later 2026-10-18 [@appletechie receipt](https://github.com/Pick-Your-AI/pick-y
 
 ## Required consuming-owner confirmations
 
+The #9 → #37 hosting linkage requested in [appletechie's receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047)
+was subsequently delivered in [#247](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/247),
+merged at `31467ea945ea01bd9e9f48eaa8c87497d58a0caf`.
+The [three-group map](../T6-deployment-operations/deployment.md#hosting-rule-to-step-linkage-proposal-2026-10-18)
+links offering membership to S1/S17/S28, private-network capability to S10/S45,
+and mounted-storage locality to S43/S50. [Source review 5561644402](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/247#pullrequestreview-5561644402)
+records its independent documentary review. The earlier receipt keeps its
+`66b46d4` pin; acceptance of the later integration and the remaining co-owner
+scopes are still separate. No selected deployment or final ruleset is inferred.
+
 | Producer | Consumer | Current consuming owner | Artifact / confirmation requested | Acknowledgement evidence |
 | --- | --- | --- | --- | --- |
 | #9 | #10 | @Mattycodes69, @appletechie | Hosting IDs, EC2 profile binding, regional availability unknowns | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057): dated EC2 host/profile binding; stock/quota unknown |
@@ -19,7 +29,7 @@ A later 2026-10-18 [@appletechie receipt](https://github.com/Pick-Your-AI/pick-y
 | #9 | #15 | @zabyxc01, @appletechie | Vector DB hosting and infrastructure storage boundary; product evaluation retained by #15 | [@appletechie accepts boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; @zabyxc01 substantive disposition separate |
 | #9 | #27 | @CompleteDotTech, @tynamite | MCP server hosting/network category; transport and tool semantics retained by #27 | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072) |
 | #9 | #31 | @tynamite, @appletechie | Host/storage IDs, availability and billing constraints; training sizing retained by #31 | [Accepted](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274): reuse existing host/storage IDs; missing SKU records remain separate |
-| #9 | #37 | @appletechie, @PUSHINGSQUARES | Deployment responsibility, artifacts, network and region constraints | [@appletechie accepts, integration pending](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; hosting rule-ID integration and @PUSHINGSQUARES scope separate |
+| #9 | #37 | @appletechie, @PUSHINGSQUARES | Deployment responsibility, artifacts, network and region constraints | [@appletechie's historical accept, integration-pending receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; #247 delivered the hosting rule-ID map. Its receiving review and @PUSHINGSQUARES's scope remain separate |
 | #9 | #39 | @appletechie, @PUSHINGSQUARES | Dated price units, conditional rates, storage/egress exclusions | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; preserve units and uncovered costs. @PUSHINGSQUARES and invoice-rounding decisions separate |
 | #10 | #9 | @Mattycodes69, @appletechie | Distinct accelerator vs provisionable compute-profile catalog IDs | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): accelerator/profile separation; no free-memory or workload-fit claim |
 | #10 | #11 | @zwright8, @Mattycodes69 | Backend/precision and per-device memory assumptions; no universal GPU fit | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): per-device inputs and capacity/support separation; no pooled VRAM |
