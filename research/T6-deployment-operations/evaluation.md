@@ -13,8 +13,6 @@ Mode labels follow [merged T0 #81](../T0-configuration/deployment-mode.md): prov
 
 Three findings shape the record. First, no primary source gives a recommended pass threshold for any evaluation; the only numbers are tool defaults (DeepEval 0.5, Azure quality evaluators pass at 3 of 5, Azure safety default 3 on a 0 to 7 scale, Promptfoo pass rate 100 percent) and illustrative examples from vendor pages, none presented as a recommended threshold, so every threshold in this record is builder-set and labelled hypothesis. Second, no number in this record is measured by us: every figure is published by the cited page or estimated here with its formula. Third, OpenAI's Evals platform is being retired (read-only 2026-10-31, shutdown 2026-11-30), so it is excluded from every recommendation.
 
-Source follow-up, checked 2026-10-18: the lm-evaluation-harness TemplateAPI guide limits likelihood/MCQ tasks to completion endpoints; a chat-completion route does not support that scoring operation. Check the exact backend and task protocol before treating E-R65's API route as eligible ([F02](sibling-reconciliation.md)). Microsoft separately documents pre-training harm screening and a post-training deployment assessment for its fine-tuning service, with predefined evaluation filters independent of customer content-filter configuration and a request process for modified thresholds. These provider assessments do not replace paired base/fine-tuned regression evidence ([F04](sibling-reconciliation.md)); no screening job was run here.
-
 ## Candidate options
 
 ### Evaluation types
@@ -769,9 +767,9 @@ Refs #115, #32, #33, #36. Sources checked 2026-10-18; neither finding is an inde
 
 ### lm-evaluation-harness API boundary
 
-The publisher's [TemplateAPI usage guide](https://github.com/EleutherAI/lm-evaluation-harness/blob/main/docs/API_guide.md) limits loglikelihood and MCQ tasks such as MMLU to completion endpoints, rather than chat-completion endpoints expecting message dictionaries. For compatible instruction-tuned completion APIs, `--apply_chat_template` preserves chat formatting while retaining the logits needed by these tasks. The guide also requires a tokenizer backend for loglikelihood/MCQ tasks.
+The publisher's [TemplateAPI usage guide](https://github.com/EleutherAI/lm-evaluation-harness/blob/d6de81643928d653435c431bae19945d41d32520/docs/API_guide.md) limits loglikelihood and MCQ tasks such as MMLU to completion endpoints, rather than chat-completion endpoints expecting message dictionaries. For compatible instruction-tuned completion APIs, `--apply_chat_template` preserves chat formatting while retaining the logits needed by these tasks. The guide also requires a tokenizer backend for loglikelihood/MCQ tasks.
 
-Therefore the earlier API-backend candidate listing is not universal task support. Record the pinned harness, task/output type, tokenizer and exact endpoint capability before selecting an evaluation route. An unavailable capability is not a low model score; an untested tuple remains unknown. This is a source boundary, not a successful benchmark run or a change to the existing gates. The cited branch is mutable and needs rechecking for the selected revision.
+Therefore the earlier API-backend candidate listing is not universal task support. Record the pinned harness, task/output type, tokenizer and exact endpoint capability before selecting an evaluation route. An unavailable capability is not a low model score; an untested tuple remains unknown. This is a source boundary, not a successful benchmark run or a change to the existing gates. The guide is pinned to commit `d6de81643928d653435c431bae19945d41d32520` in [F02](sibling-reconciliation.md). This readback does not establish which harness revision a future build actually installs.
 
 ### Foundry training-data harm screen
 
