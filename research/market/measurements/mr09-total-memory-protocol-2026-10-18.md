@@ -1,6 +1,6 @@
 # MR-09 total-memory setup proposal â€” 2026-10-18
 
-Refs #61. **Prepared; GPU execution is not qualified or enabled.** This protocol
+Refs #61. **Historical preparation: GPU execution was not qualified or enabled.** This protocol
 was written after CPU estimator preparation and before any native GPU run.
 It proposes a semantically matched **managed device-buffer snapshot** comparison;
 it does not silently replace #61's peak-allocated-memory question or establish
@@ -14,6 +14,11 @@ explicit disposition. This is a reviewable proposal, not their approval. No
 contract, ResourceEstimate, catalog, assignment, triage or #59 ledger is changed.
 The named llmfit/ModelFit/Local AI Planner comparisons remain separate; this
 candidate does not manufacture missing outputs for those tools.
+
+The [native qualification continuation](native-qualification-2026-10-18/qualification.md)
+records three subsequent initialization-only trials. The original setup and CPU
+preparation remain immutable and disabled; inference and process-wide caps,
+output-reservation matching and accepted estimator comparisons remain open.
 
 ## Selected pair and artifact
 
@@ -147,7 +152,7 @@ The offline checker intentionally reports `execution_enabled: false`.
 
 ## Units, rounding and pairing gates
 
-The pinned runtime JSON logger **floors each nonnegative buffer value to integer MiB**, even for
+The pinned runtime JSON logger **floors each nonnegative self/model/context/compute buffer value to integer MiB**. Negative signed `unaccounted` residuals instead truncate toward zero under C++ signed division; they are not target buffer totals. The flooring applies even for
 structured output. For a reported `self = s`, the actual integer-byte value is
 in `[s Ã— 2^20, (s+1) Ã— 2^20 âˆ’ 1]`. Do not call `s Ã— 2^20` an exact measurement,
 or reconstruct `self` by adding independently rounded model/context/compute.

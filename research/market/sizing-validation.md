@@ -231,6 +231,26 @@ number is a guarantee of future allocation success. No other process is
 evicted or altered. Per-phase CUDA-reported free values are observations, not
 additional headroom or demanded KV memory.
 
+## Native initialization qualification — 2026-10-18
+
+The [native cap/CUDA/capture continuation](measurements/native-qualification-2026-10-18/qualification.md)
+records three real, serial initialization-only trials using the pinned llama.cpp
+b11669 runtime and exact prepared SmolLM2 F16 GGUF. Each trial admitted
+**334,511,360 live managed-buffer bytes** under the unchanged 2,136,809,472-byte
+cap, reconciled with native `self=319 MiB`, attempted no model graph dispatch or
+generation, and released all tracked buffers. An 8 MiB CUDA clear/free probe and
+intentional pre-call over-cap/graph rejection precede model initialization.
+
+This qualifies only the guarded default buffer interface during this exact
+initialization path. Opaque CUDA/library allocations, inference/VMM/scratch and
+whole-process peaks remain unqualified. Native output reservation reads back as
+256 maximum outputs and one per sequence; reconcile the estimator's output
+assumptions before a numerical comparison. Accepted estimator pairs remain zero.
+The failed first DLL-path probe, corrected source/build, driver/API version
+readback, three captures, publication filtering and cleanup receipt are retained.
+Original preparation records, dense/GM1 evidence, v1 and receiving-owner gates
+are unchanged; these observations do not provide acceptance or a scope waiver.
+
 ## Proposed matching total-buffer setup — 2026-10-18
 
 The [pinned native setup protocol](measurements/mr09-total-memory-protocol-2026-10-18.md)

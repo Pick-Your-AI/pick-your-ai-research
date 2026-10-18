@@ -1,0 +1,9 @@
+{
+  "id": "mr09-llama-b11669-win-cu134",
+  "uri": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-win-cuda-13.4-x64.zip",
+  "version": "b11669; source620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "sha256": "3b92d5c064f5032e603e531d3ec8961f3bd6613e5dfad047399a92dec8e95dbc",
+  "access": "Official public pinned archive accessed 2026-10-18; locally verified in task-owned temporary storage, removed after qualification.",
+  "description": "Pinned official Windows native runtime. Local archive size/hash and extracted DLL identities are recorded in native qualification. A bounded initialization-only child harness loaded the CUDA0 backend.",
+  "rights": "llama.cpp/ggml project MIT code; third-party component rights remain separate. No binaries/source archives redistributed."
+}

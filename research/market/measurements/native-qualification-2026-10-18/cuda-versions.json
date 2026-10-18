@@ -1,0 +1,20 @@
+{
+  "classification": "read-only CUDA version query; independent from actual native backend probe",
+  "observed_utc": "2026-10-18T06:49:31.326957+00:00",
+  "cuDriverGetVersion": {
+    "exit_code": 0,
+    "version_integer": 13030
+  },
+  "bundled_cudart_cudaRuntimeGetVersion": {
+    "exit_code": 0,
+    "version_integer": 13030
+  },
+  "scope": "bundled dynamic cudart identity is queried separately; ggml-cuda statically links its runtime; actual native CUDA0 allocation/clear is in probe and initialization records",
+  "driver_changed": false,
+  "primary_compatibility_source": "https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html",
+  "compatibility_limit": "CUDA13.x minor-version compatibility requires driver>=580; 13.4 new features/platforms can require R615; observed initialization is narrower than all kernel/library feature support",
+  "bundled_cudart_loaded_from_pinned_directory": true,
+  "bundled_cudart_file_sha256": "05bfafcb97bd53b0089568a96e1e5bd6921637bd0853ff7f5342bd31a6a16890",
+  "bundled_cudart_file_version": "6,14,11,13040",
+  "version_label_caveat": "Archive label is CUDA13.4 and DLL file version ends13040, while the two API queries returned13030. Both facts are preserved; the cause and broader CUDA13.4 feature compatibility are not established."
+}

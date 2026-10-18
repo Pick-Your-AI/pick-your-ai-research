@@ -1,0 +1,105 @@
+{
+  "classification": "three real native initialization qualification trials; receiving review outstanding",
+  "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "harness_sha256": "07c2f8587b58a6dbe557d7e7f395f765ec03c18122386f6456333338f832f09e",
+  "qualified_scope": [
+    "CUDA0 initialization and 8 MiB clear/release",
+    "pre-call managed-buffer cap for pinned initialization-only interface",
+    "native capture reconciles with exact admitted-buffer ledger"
+  ],
+  "not_qualified": [
+    "graph execution/VMM scratch pools",
+    "opaque CUDA/library allocations or physical process-wide cap",
+    "inference/throughput/whole-process peaks",
+    "accepted estimator scope/error tolerance"
+  ],
+  "initialization_trials": 3,
+  "accepted_estimator_pairs": 0,
+  "whole_process_peak_pairs": 0,
+  "observations": [
+    {
+      "file": "init-r1.json",
+      "sha256": "0da6cbbcbdb46f90eb8684aa174de10ce06c9f5b7e76e60588be4fdce1cc17a1",
+      "repetition": 1,
+      "exact_admitted_live_buffer_bytes": 334511360,
+      "native_self_byte_interval": [
+        334495744,
+        335544319
+      ],
+      "native_device_row": {
+        "kind": "device",
+        "name": "CUDA0",
+        "description": "RTX 5070 Ti",
+        "total": 16302,
+        "free": 14717,
+        "self": 319,
+        "model": 256,
+        "context": 11,
+        "compute": 51,
+        "unaccounted": 1266
+      },
+      "cap_bytes": 2136809472,
+      "peak_admitted_bytes": 334511360,
+      "initialization_graph_dispatches": 0,
+      "cleanup_live_bytes": 0,
+      "runtime_n_outputs_max": 256,
+      "runtime_n_outputs_max_per_seq": 1
+    },
+    {
+      "file": "init-r2.json",
+      "sha256": "b24f78b0aefa564228453b2b115354f7c338e7739ffd790a452d837ea44d22e3",
+      "repetition": 2,
+      "exact_admitted_live_buffer_bytes": 334511360,
+      "native_self_byte_interval": [
+        334495744,
+        335544319
+      ],
+      "native_device_row": {
+        "kind": "device",
+        "name": "CUDA0",
+        "description": "RTX 5070 Ti",
+        "total": 16302,
+        "free": 14717,
+        "self": 319,
+        "model": 256,
+        "context": 11,
+        "compute": 51,
+        "unaccounted": 1266
+      },
+      "cap_bytes": 2136809472,
+      "peak_admitted_bytes": 334511360,
+      "initialization_graph_dispatches": 0,
+      "cleanup_live_bytes": 0,
+      "runtime_n_outputs_max": 256,
+      "runtime_n_outputs_max_per_seq": 1
+    },
+    {
+      "file": "init-r3.json",
+      "sha256": "d6f822f92c21d03d841c30de335f6db46ecff13364f713deab272c753e00cf2d",
+      "repetition": 3,
+      "exact_admitted_live_buffer_bytes": 334511360,
+      "native_self_byte_interval": [
+        334495744,
+        335544319
+      ],
+      "native_device_row": {
+        "kind": "device",
+        "name": "CUDA0",
+        "description": "RTX 5070 Ti",
+        "total": 16302,
+        "free": 14717,
+        "self": 319,
+        "model": 256,
+        "context": 11,
+        "compute": 51,
+        "unaccounted": 1266
+      },
+      "cap_bytes": 2136809472,
+      "peak_admitted_bytes": 334511360,
+      "initialization_graph_dispatches": 0,
+      "cleanup_live_bytes": 0,
+      "runtime_n_outputs_max": 256,
+      "runtime_n_outputs_max_per_seq": 1
+    }
+  ]
+}

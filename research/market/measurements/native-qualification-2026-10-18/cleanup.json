@@ -1,0 +1,8 @@
+{
+  "recorded_utc": "2026-10-18T06:55:26.4276588Z",
+  "target": "$TASK_TEMP/mr09-native-qualification-20261018",
+  "scope": "Only task-owned downloaded runtime archives/DLLs, GGUF, pinned headers, compiled probes and raw sanitized capture archive; existing toolchains, Python and other workloads unchanged",
+  "removed_files": 84,
+  "removed_bytes": 1598801903.0,
+  "target_exists_after": false
+}
