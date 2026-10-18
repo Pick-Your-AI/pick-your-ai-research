@@ -1,0 +1,23 @@
+{
+  "x_t0_context_budget": {
+    "proposal_version": "cd11-0.1",
+    "scope": {
+      "selection_id": "selection.synthetic-model",
+      "model": {
+        "id": "model.synthetic",
+        "version": "v1"
+      },
+      "route": {
+        "id": "route.synthetic-direct",
+        "version": "revision-1"
+      },
+      "operation": "generate-text",
+      "tokenizer": {
+        "id": "tokenizer.synthetic",
+        "version": "revision-1"
+      },
+      "settings_sha256": "7dbb63a35d452036e16ff1129f0fc80bfadad352f87ef649d4a94dfa1e3d4575"
+    },
+    "answer_states_sha256": "be4fc13496144cb559fa2a8116da5f81fd5e1395f50fa6c6b1b8999bf6c9b2f1"
+  }
+}
