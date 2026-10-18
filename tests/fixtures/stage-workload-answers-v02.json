@@ -1,0 +1,265 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/workload/requests": {
+        "state": "provided",
+        "value": {
+          "count": 777777,
+          "period": "month"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/workload/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "2222",
+          "max": 2222
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/workload/output_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "999",
+          "max": 999
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/requests": {
+        "state": "provided",
+        "value": {
+          "count": 1000,
+          "period": "day"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/peak_concurrency": {
+        "state": "provided",
+        "value": 3,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/input_uses_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/output_generates_tokens": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "20.5",
+          "max": 128
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/retrieve/65b7e7eeea999181eac8c786ef874a045f2cd287aa57b74cf266dd03fa49ae5a/output_tokens": {
+        "state": "not_applicable"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/requests": {
+        "state": "provided",
+        "value": {
+          "count": 1000,
+          "period": "day"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/peak_concurrency": {
+        "state": "provided",
+        "value": 2,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/input_uses_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/output_generates_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "4096.125",
+          "max": 8000
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/draft/08beb64e82c369c03938b6aa86604656319f61eb28ea3a7132b60207822ede32/output_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "500.5",
+          "max": 2000
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/requests": {
+        "state": "provided",
+        "value": {
+          "count": 2000,
+          "period": "day"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/peak_concurrency": {
+        "state": "provided",
+        "value": 4,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/input_uses_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/output_generates_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "200.25",
+          "max": 1024
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/classify/e64e9efa2c638133f59d6bd0a44a97819a78e30f718b1478dfa628cb0f8af1a2/output_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "1.5",
+          "max": 8
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/requests": {
+        "state": "provided",
+        "value": {
+          "count": 0,
+          "period": "month"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/peak_concurrency": {
+        "state": "provided",
+        "value": 0,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/input_uses_tokens": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/output_generates_tokens": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/input_tokens": {
+        "state": "not_applicable"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/output_tokens": {
+        "state": "not_applicable"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/stages/audio-score/007b3926df007543dbe909568f8099478a67a5c8eadaeeb77d2b5d2ca80dba28/native_input_units/audio_seconds": {
+        "state": "provided",
+        "value": {
+          "mean": "1.500",
+          "max": "3.25"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a/fixture.pipeline.1/inventories/93db933016ac21fa6509daad4b2651f0cfed5b2f8884de4a6df35982b281bb8c/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      }
+    }
+  }
+}
