@@ -627,8 +627,10 @@ copying their provisional assertions into an adopted deployment ruleset.
 | Readiness input | Existing T4 rule identifier | Required evidence and limit |
 | --- | --- | --- |
 | Local subprocess spawning and locality | `rule.t4.mcp.stdio.colocation` | The selected client runtime can start the selected stdio server in the required local execution boundary. A generic target type or an installed executable alone does not prove that path works. |
-| Outbound reachability for the selected remote server | `rule.t4.mcp.remote.air-gapped` | The selected endpoint/transport is reachable under the actual egress/residency policy. A vendor-hosted remote dependency conflicts with a genuinely air-gapped deployment; a local stdio selection does not acquire that remote dependency. |
+| Reachability and isolation for the selected server | Historical `rule.t4.mcp.remote.air-gapped`, narrowed into W-R8/CD-4 by the #40 review below | The selected endpoint/transport is reachable under the actual egress/residency policy. For an air-gapped workload, no enabled runtime connection may leave the selected isolation boundary, and all runtime artifacts must be present inside it. Apply these requirements to provider-operated and self-operated components alike. |
 | Available authorization flow | `rule.t4.mcp.auth.flow-available` | Identify an actual supported interactive path or independently evidenced non-interactive alternative for the selected framework/server/target. A browser somewhere on the operator's laptop does not prove it is usable in the deployment's flow. |
+
+**Isolation reconciliation (2026-10-18).** [The actual #40 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) routes the earlier operator/trust proxy to [W-R8](../T0-configuration/workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections). Record endpoint membership and each connection's provisioning/runtime lifecycle and enabled state; an absent inventory is unknown. A provider-run installation inside the boundary can satisfy this isolation input with complete evidence. Keep the historical T4 proxy as provenance while #40 owns the versioned representation; no frozen rule is changed here.
 
 For all three, retain selected component versions, execution boundary, evidence
 locator/date and outcome separately. Unknown capability is not false evidence of
@@ -639,8 +641,8 @@ consent, refresh path or permission to configure credentials. No credential is
 collected or transmitted by this research.
 
 Synthetic examples, not executed deployment tests: a stdio-only server with a
-known no-process target fails; a vendor-hosted remote server with denied outbound
-access fails; an OAuth-only server without an available supported authorization
+known no-process target fails; a server requiring a runtime connection outside an
+air-gapped boundary fails, regardless of operator; an OAuth-only server without an available supported authorization
 path fails; an unexamined non-interactive alternative remains unknown rather than
 passing because a key reference exists. With no selected MCP server, these
 conditional inputs are skipped. An evidenced capability still needs the applicable
