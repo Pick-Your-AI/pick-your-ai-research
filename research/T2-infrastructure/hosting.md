@@ -251,3 +251,8 @@ Follow-up validation on 2026-10-17, Python 3.12.14: pinned dependency installati
 [H31]: https://docs.runpod.io/references/security-and-compliance
 [H32]: https://huggingface.co/docs/inference-endpoints/security
 [H33]: https://marketplace.nvidia.com/en-us/enterprise/personal-ai-supercomputers/dgx-spark/
+
+
+## S3 Standard identity supplement (2026-10-18)
+
+`catalog/proposals/t2-aws-s3-standard.json` adds the missing #31 checkpoint-storage identity as an object storage class. [AWS storage-class documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html), accessed 2026-10-18, identifies STANDARD. This dated capture does not bind a bucket, region, retention policy or EC2 host. Encryption configuration and historical object coverage need separate evidence; no universal encryption boolean or maximum capacity is supplied. No current price is added. #31’s historical price observations retain their own dates/conditions, and #39 must establish applicable rates before cost evaluation. This is source-checked, not a storage deployment measurement.
