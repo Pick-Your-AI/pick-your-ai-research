@@ -13,7 +13,7 @@ This covers three things:
 - managed per-token training prices vs self-run GPU-hours.
 
 Training channels (these do not determine T0 serving deployment modes):
-- **Provider-operated training:** cost is per training token plus post-training hosting or storage. The user sizes no hardware.
+- **Provider-operated training:** billing is offering-specific: training tokens, GPU/time units or job minimums, with post-training hosting or storage where applicable (P1–P6). Capacity choices and responsibility for underlying allocation vary by offering; dedicated training may require selecting capacity.
 - **User-operated training:** the user picks accelerators (#10) on a host (#9). The builder must estimate whether the run fits in memory and how long it takes.
 
 Inference GPU sizing is owned by #10, and cost aggregation by #39.
