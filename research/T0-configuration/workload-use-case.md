@@ -146,7 +146,7 @@ Open-weight models differ here, even within one family. According to their 2026 
 | `knowledge` | Set of `reference_documents` and/or `structured_lookup`; or exactly `none`; or `unknown` | T3, or a declared alternative per capability (W-R2) |
 | `actions` | `none`, `read_only`, `write` | T4 (W-R3); guardrails for `write` (W-R4) |
 | `customisation` | `none`, `prompt_only`, `fine_tune` | T5 (W-R5) |
-| `memory` | `none`, `session`, `persistent`; or `unknown` | T4 memory (#28) for `persistent`; `session` state comes with an agent framework or a memory store (W-R11) |
+| `memory` | `none`, `session`, `persistent`; or `unknown` | T4 memory (#28) for `persistent`; session history may be application-managed, framework-managed or store-backed (W-R11) |
 
 ## Field dictionary
 
@@ -164,10 +164,11 @@ The proposed location is a `workload` object owned by the build (Recommendation 
 | `knowledge_implementation` | object keyed by capability: `{via: rag \| knowledge_base \| long_context \| tool \| direct_lookup, selection_ids: [IDs], justification: string}` | One entry per capability in `knowledge`; `long_context` and `direct_lookup` need a justification | When `knowledge` has values | User input, reviewed against #7 and #16 | — |
 | `actions` | enum `none`, `read_only`, `write` | — | Always | User input | — |
 | `customisation` | enum `none`, `prompt_only`, `fine_tune` | — | Always | User input | `fine_tuning` value only |
-| `memory` | enum `none`, `session`, `persistent`, `unknown` | `session` means state kept within one conversation; `persistent` means state kept across conversations. Anything other than `none` implies `turns: multi` | Always | User input | — |
+| `memory` | enum `none`, `session`, `persistent`, `unknown` | `session` means state kept within one conversation; `persistent` means state kept across conversations. `turns` counts requests within a conversation and does not constrain cross-conversation persistence; `unknown` imposes no turn-count constraint | Always | User input | — |
+| `memory_implementation` | `{via: application \| agent_framework \| memory_store, selection_ids: [IDs], justification: string}` | Identifies the implementation satisfying the need; `application` session history requires a justification and no T4 selection. A selection ID alone does not establish memory capabilities | When `memory` is `session` or `persistent` | User implementation declaration and scoped capability evidence, reviewed against #28 and W-R11 | — |
 | `requests` | `{count: integer ≥ 0, period: day \| month}`, unit: requests | — | Always | User input or preset | `requests_per_day` (three copies) |
 | `peak_concurrency` | integer ≥ 1, requests in flight at the service (demand) | Requests, not sequences; expand using the selected decoding configuration, then apply sequence admission in the same serving scope (W-R6). Missing expansion leaves sizing unknown. | Always | User input or preset | `concurrency` / `max_concurrency` |
-| `input_tokens` | `{mean: decimal, max: integer}`, tokens per request | 1 ≤ mean ≤ max; includes history, and any memory injected into the prompt, when `turns` is `multi` | Text input | User input; any conversion from words is an Estimate (E6) | `avg_input_tokens`; context policy `requested_context_tokens` (C2) |
+| `input_tokens` | `{mean: decimal, max: integer}`, tokens per request | 1 ≤ mean ≤ max; includes all history and memory injected into this request, including persistent memory in a single-turn conversation | Text input | User input; any conversion from words is an Estimate (E6) | `avg_input_tokens`; context policy `requested_context_tokens` (C2) |
 | `output_tokens` | `{mean: decimal, max: integer}` or `not_applicable` | 0 ≤ mean ≤ max; counts every generated token, including reasoning or thinking tokens, whether or not they are shown | Whenever generated tokens are expected, whatever the task; `not_applicable` only when the serving operation generates no tokens (see below) | User input | `avg_output_tokens`; context policy `reserved_output_tokens` (C2) |
 | `native_input_units`, `native_output_units` | `{images_per_request, audio_seconds, video_seconds}`, each as `{mean: decimal, max}`; `max` is an integer for image counts and a decimal for durations | All values ≥ 0; mean ≤ max | Non-text input or output | User input; token conversion is per model (#7) | — |
 | `tokenizer_assumption` | string: a tokenizer or model ID, or `model_native` | — | When counts are in tokens | User input | — |
@@ -318,8 +319,8 @@ Selections remain authoritative, as in v1 (C4). The answers recommend tiers, and
 | `knowledge` includes `structured_lookup` | A `rag_pipeline` or `tool` selection, or a `direct_lookup` implementation with a justification |
 | `actions` is `read_only` or `write` | An `agent_framework`, `tool` or `mcp_server` |
 | `actions` is `write` | Also a `guardrail` |
-| `memory` is `persistent` | A `memory_store` selection |
-| `memory` is `session` | An `agent_framework` or a `memory_store` selection |
+| `memory` is `persistent` | An enabled `memory_store` with `memory_type: long_term` and an eligible non-ephemeral backing (W-R11); a selection alone is insufficient |
+| `memory` is `session` | Declared application-managed conversation history, or documented session state in the selected framework/store, identified by `memory_implementation` (W-R11) |
 | `customisation` is `fine_tune` | A `fine_tuned_model` or `training_framework` |
 
 When an answer is `none`, the tier is collapsed (the user can still add it). When an answer is unresolved, the tier is shown as optional and the rules are `skipped`.
@@ -564,18 +565,30 @@ Handoff to #11: document decoding mode, live sequence expansion, admission units
 
 ### W-R11 Memory need is met
 
-- **Roles and pointers:** build `/workload/memory`, `/workload/turns`; selections of kind `memory_store`, `agent_framework`.
+- **Roles and pointers:** build `/workload/memory`, `/workload/memory_implementation`; enabled selections of kind `memory_store`, `agent_framework`, and their scoped capability evidence.
 - **Applies when:** `memory` is known and is `session` or `persistent`.
-- **Assertion:** for `persistent`, a `memory_store` is selected. For `session`, an `agent_framework` or a `memory_store` is selected.
-- **Missing data:** `skipped` if `memory` is unresolved. A `memory` answer other than `none` with `turns: single` is a contradictory answer: `fail`, with a reason code, so the user fixes one of them.
-- **Remediation:** add a memory store (or framework), or correct the `memory` answer.
-- **Dependencies:** #25, #28; CD-13, because a build may select several memory stores. Injected memory tokens count inside `input_tokens.max` (#7, #28), never on top of it.
-- **Examples:**
-  - Pass: `persistent` with a `memory_store`.
-  - Pass: `session` with an `agent_framework` only.
-  - Fail: `persistent` with no `memory_store`.
-  - Fail: `memory: persistent` with `turns: single`.
-  - Skipped: `memory` is `none`, or `unknown`.
+- **Assertion:** for `persistent`, at least one identified, enabled `memory_store` has `memory_type: long_term` and a non-ephemeral backing. Match #28's persistence proposal: an `in_memory` backing does not establish cross-session persistence. A documented persistent configuration of an in-memory product needs separate #9/#28 evidence and a versioned representation through #40; do not infer it from the product name. For `session`, the declaration identifies application-managed history with a justification, or the selected framework/store has documented conversation-state support. The presence of an `agent_framework` alone does not prove it retains history.
+- **Missing data and outcomes:** `skipped` if `memory` is `none` or unresolved, following the recommendation policy. With a known need, missing implementation or capability evidence gives `unknown` (`memory_implementation_unknown`); a known absent implementation gives `fail` (`memory_implementation_missing`); a fully documented incompatible implementation gives `fail` (`memory_capability_mismatch`). Among several identified stores, one eligible match suffices; if none matches but a candidate's capability is unresolved, the result is `unknown`, not `fail` or `pass`.
+- **Turn-count independence:** `turns` describes one conversation. A single-request conversation can load user preferences or application state from previous conversations. Neither `persistent` nor `unknown` is contradictory with `turns: single`; no cross-conversation memory requirement is inferred from `turns` either.
+- **Remediation:** declare application-managed session history, select and evidence a suitable framework/store, or correct the stated need. Do not add a T4 selection solely to represent history already managed by the application.
+- **Dependencies:** #25, [#28's memory taxonomy and persistence proposal](../T4-agents-integrations/agent-memory.md); CD-1 and CD-13, because a build may select several memory stores. Injected memory tokens count inside `input_tokens.max` (#7, #28) for every request, including single-turn conversations, never on top of it. These remain research proposals, not new frozen-v1 fields or executable rules.
+- **Synthetic decision cases** (capability checks, not measured product behavior):
+
+  | Need and implementation | Outcome | Reason |
+  | --- | --- | --- |
+  | `persistent`, `turns: single`, identified long-term relational store | `pass` | Cross-conversation state is independent of turns within a conversation |
+  | `persistent`, only a documented `session` store | `fail` | `memory_capability_mismatch` |
+  | `persistent`, only a documented `working` store | `fail` | `memory_capability_mismatch` |
+  | `persistent`, long-term store backed only by `in_memory` | `fail` | `memory_capability_mismatch`; persistence is not established |
+  | `persistent`, selected store's memory type or backing unknown | `unknown` | `memory_implementation_unknown` |
+  | `persistent`, a known session-only store plus an unresolved candidate | `unknown` | The unresolved candidate could satisfy the need |
+  | `persistent`, a session-only store plus an eligible long-term store | `pass` | One identified eligible store satisfies the need |
+  | `persistent`, explicitly no implementation | `fail` | `memory_implementation_missing` |
+  | `session`, declared application-managed history with justification, no T4 selection | `pass` | The application retains and resends the conversation history |
+  | `session`, framework with documented session-state support | `pass` | Capability evidence, rather than selection kind, establishes support |
+  | `session`, framework selected but history support unrecorded | `unknown` | `memory_implementation_unknown` |
+  | `unknown`, `turns: single` | `skipped` | Need is unresolved; no contradiction or persistence inference |
+  | `none` | `skipped` | No memory need was stated |
 
 ## Open contract decisions
 

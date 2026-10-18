@@ -29,7 +29,7 @@ This note is written **local-first**: the T0 owner has chosen to prioritise self
 - **CPU-only and mixed CPU+GPU builds are in scope.** For single-batch generation, memory bandwidth is reported as a main bottleneck (D27–D29), so bandwidth, instruction sets and offload support are key inputs. Measured fit records, not this note, decide how far that holds for a given machine.
 - **Crowdsourced fit reports are a possible additional evidence source.** Several community databases already exist (D36–D41). Agreement between reports is shown, but doesn't decide compatibility until #41 defines an acceptance policy (CD-8).
 - **Self-hosting enables local inference, but doesn't by itself keep data local.** Residency is checked over the build's data flows, including external destinations (D-R6).
-- **Open contract decisions.** Thirteen are recorded for #40 and #41 rather than solved here (CD-1 to CD-13; CD-11 was raised on #88 CD-12 in T5's review of #81, and CD-13 by T4 on #40).
+- **Open contract decisions.** Thirteen are recorded for #40 and #41 rather than solved here (CD-1 to CD-13; CD-11 was raised on #88, CD-12 in T5's review of #81, and CD-13 by T4 on #40).
 
 ## User decision
 
