@@ -2347,11 +2347,25 @@
     ],
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Independent integration scope accepted with constraints; consuming-owner acceptance pending",
+    "requested_action": "Consuming owner: accept, reject or narrow this research input. T2 retains selected-region availability, startup and actual capacity evidence.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_integration",
+        "reviewer": "CompleteDotTech",
+        "submitted_at": "2026-10-18T03:19:07Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681",
+        "reviewed_commit": "c08484cdc27ad43d7251da5f31ca2fad3a89c28a",
+        "reviewed_tree": "3f5ae899cefadfa6dca5b637a6ded3d9dd46c37b",
+        "disposition": "accepted_with_constraints",
+        "scope": "HF per-replica/minute and RunPod volume/tier source observations; retain unknown region, quota, startup and service equivalence.",
+        "retained_unknowns_and_next_action": "T2 retains selected-region availability, startup and actual capacity evidence.",
+        "authority": "The user expressly delegated project-focused engineering decisions. This is the actual independent integration review, not a response attributed to a named assignee who did not post one. The separate consuming-owner acceptance requirement remains pending."
+      }
+    ]
   },
   {
     "market_issue": 64,
@@ -2363,11 +2377,25 @@
     ],
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Independent integration scope accepted with constraints; consuming-owner acceptance pending",
+    "requested_action": "Consuming owner: accept, reject or narrow this research input. #39 retains meters, aggregation/rounding, commitments and selected-workload quantity decisions.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_integration",
+        "reviewer": "CompleteDotTech",
+        "submitted_at": "2026-10-18T03:19:07Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681",
+        "reviewed_commit": "c08484cdc27ad43d7251da5f31ca2fad3a89c28a",
+        "reviewed_tree": "3f5ae899cefadfa6dca5b637a6ded3d9dd46c37b",
+        "disposition": "accepted_with_constraints",
+        "scope": "37-check arithmetic audit, one-off/recurring split, scoped allowances and uncovered-meter inventory; partial subtotals cannot pass complete-coverage budget gates.",
+        "retained_unknowns_and_next_action": "#39 retains meters, aggregation/rounding, commitments and selected-workload quantity decisions.",
+        "authority": "The user expressly delegated project-focused engineering decisions. This is the actual independent integration review, not a response attributed to a named assignee who did not post one. The separate consuming-owner acceptance requirement remains pending."
+      }
+    ]
   },
   {
     "market_issue": 64,
@@ -2379,11 +2407,25 @@
     ],
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Independent integration scope accepted with constraints; consuming-owner acceptance pending",
+    "requested_action": "Consuming owner: accept, reject or narrow this research input. #41/#60 retain conflict policy and source-use rights; no new retrieval, display or redistribution rights.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_integration",
+        "reviewer": "CompleteDotTech",
+        "submitted_at": "2026-10-18T03:19:07Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681",
+        "reviewed_commit": "c08484cdc27ad43d7251da5f31ca2fad3a89c28a",
+        "reviewed_tree": "3f5ae899cefadfa6dca5b637a6ded3d9dd46c37b",
+        "disposition": "accepted_with_constraints",
+        "scope": "Dated source checking, failed-fetch/drift treatment and withdrawal of the unaccepted automatic 30-day TTL; retain historical pins and v1 unverified source status.",
+        "retained_unknowns_and_next_action": "#41/#60 retain conflict policy and source-use rights; no new retrieval, display or redistribution rights.",
+        "authority": "The user expressly delegated project-focused engineering decisions. This is the actual independent integration review, not a response attributed to a named assignee who did not post one. The separate consuming-owner acceptance requirement remains pending."
+      }
+    ]
   },
   {
     "market_issue": 65,
