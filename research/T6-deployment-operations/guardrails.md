@@ -337,3 +337,68 @@ collection/access/alert policy; #13/#15/#16 supply knowledge/index lineage;
 #37 owns eventual operational readiness. No retention duration, purge command,
 residual threshold or storage access is invented. Configured-key evidence is a
 separate requested control and is not completed by this deletion-depth proposal.
+
+## Proposed customer-managed-key configuration evidence (2026-10-18)
+
+This supplies the separate `customer-managed-keys` follow-up in the [scoped #35
+receiving reply](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930).
+It is a proposal for evidence requirements, not a new adopted rule or account
+configuration. The [#28 encryption boundary](../T4-agents-integrations/agent-memory.md)
+already states that an opaque key reference cannot prove the store consumes it.
+Provider-managed encryption may meet an encryption-at-rest requirement while
+failing a distinct customer-managed-key requirement; keep those predicates apart.
+
+| Proposed control | Applicability | Configuration evidence required | Unknown/failure boundary |
+| --- | --- | --- | --- |
+| `customer-managed-keys` | An explicit workload/policy requires customer-managed encryption for the selected data layer | Exact service/object and region/tenant; applicable API/version; current encryption binding and resolved key/version; service principal and authorized operation scope; key availability and applicable policy/grant evidence; dated verification for the selected layer | Key reference alone or missing binding/policy evidence is unknown. A known incompatible binding or explicitly denied required operation fails that configuration requirement. Only explicitly absent CMK applicability skips it; ordinary encryption requirements remain independent |
+
+### Dated primary-source examples
+
+All three sources were read **2026-10-18**, are mutable publisher documentation,
+and are **source checked / unverified**. These are scoped documentary facts, not
+observed account state, source-use grants or certifications.
+
+- **Microsoft Azure AI Search:** [CMK guide](https://learn.microsoft.com/en-us/azure/search/search-security-manage-encryption-keys)
+  distinguishes object binding from service-level defaults. Service-level CMK is
+  preview (`2026-03-01-preview` management API); defaults protect new objects,
+  not pre-existing ones. Inspection of inherited keys uses data-plane
+  `2026-05-01-preview` or later. The guide requires service access to the key and
+  distinguishes configuration readback, operational checks and resource-log
+  evidence. Its cache-duration wording is inconsistent: some sections say up
+  to **60 minutes**, while the rotation section also says **up to several hours**.
+  Neither establishes a verified revocation deadline here. Rotation changes must
+  propagate before old dependencies are removed. This is
+  at-rest protection, not protection of data in use. Do not infer whole-service
+  coverage from a default key or immediate revocation from a configuration change.
+- **AWS KMS state:** [key-state documentation](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+  distinguishes Enabled, Disabled, PendingDeletion and other states. DescribeKey
+  may succeed when cryptographic operations cannot. For custom key stores,
+  disabling/deleting the backing key can cause cryptographic failure without
+  changing the KMS key state. Thus an Enabled label alone is not end-to-end
+  evidence that a selected storage service can use the key.
+- **AWS KMS authorization:** [key-policy documentation](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+  makes access dependent on applicable key/IAM/grant permissions and absence of
+  denial. IAM allow statements need the key policy to enable their use; key
+  policies are regional. A key identifier or permission in a different region
+  is not an applicable authorization result.
+
+### Proposed review cases and ownership
+
+Synthetic cases for #40: reference with no binding → unknown; current selected
+object binding plus complete applicable evidence → pass for the declared scope;
+explicit required-operation denial → fail; unread policy → unknown; a new-object
+service default offered as proof for an old object → unknown until that object's
+configuration is established. None of these examples certifies encryption or
+changes the frozen-v1 memory rule. Proposed severity is fixed `error`, with
+unknown policy `review`; #35/#40 must adopt the exact applicability and encoding.
+
+#28/#13/#15 supply the actual memory/history/index layers; #35 co-owners decide
+control coverage; #37 owns any future authorized operational verification;
+#38 records configuration drift and appropriately scoped audit evidence; #41
+owns evidence grading/freshness. Rotation, disabled backing keys, policy changes
+and new objects invalidate prior applicability assumptions rather than justify
+an invented TTL. Keys, credentials, private policy contents and raw tenant
+identifiers must not be committed to public research. No key creation, policy
+change, authentication, cryptographic request or resource action was performed
+or authorized by this note. The earlier deletion-depth proposal remains a
+separate lifecycle control; key revocation is not a universal erasure proof.
