@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.embedding_model.intfloat-multilingual-e5-large",
+  "kind": "embedding_model",
+  "tier": "T3",
+  "name": "Multilingual E5 large text representation",
+  "version": "ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb",
+  "status": "active",
+  "billing_class": "unknown",
+  "spec": {
+    "provider_ref": "cat.model_provider.intfloat",
+    "embedding_dimensions": 1024,
+    "max_input_tokens": 512,
+    "similarity_metrics": [
+      "dot"
+    ],
+    "supported_modalities": [
+      "text"
+    ],
+    "access_modes": [
+      "weights"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://huggingface.co/intfloat/multilingual-e5-large/raw/ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb/README.md",
+      "checked_at": "2026-10-18T01:24:00Z",
+      "verification_status": "unverified",
+      "notes": "Card declares MIT and 1024 dimensions; example uses text, mean pooling, L2 normalization and dot scoring (display scaled by 100). Prefix choice depends on retrieval versus symmetric tasks. No benchmark or language-quality claim is imported."
+    },
+    {
+      "source_uri": "https://huggingface.co/intfloat/multilingual-e5-large/blob/ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb/tokenizer_config.json",
+      "checked_at": "2026-10-18T01:24:00Z",
+      "verification_status": "unverified",
+      "notes": "Pinned XLMRobertaTokenizer configuration sets model_max_length to 512. The record requires prefixes and special tokens inside this envelope, not additional allowance."
+    },
+    {
+      "source_uri": "https://huggingface.co/intfloat/multilingual-e5-large/blob/ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb/sentence_bert_config.json",
+      "checked_at": "2026-10-18T01:24:00Z",
+      "verification_status": "unverified",
+      "notes": "Pinned Sentence Transformers configuration sets max_seq_length to 512."
+    },
+    {
+      "source_uri": "https://huggingface.co/intfloat/multilingual-e5-large/tree/ab10c1a7f42e74530fe7ae5be82e6d4f11a719eb",
+      "checked_at": "2026-10-18T01:24:00Z",
+      "verification_status": "unverified",
+      "notes": "Pinned public repository lists downloadable weights. No weights downloaded or locally hashed; repository revision is not a runtime or accuracy measurement."
+    }
+  ],
+  "updated_at": "2026-10-18T01:24:00Z",
+  "description": "Pinned downloadable text embedding artifact. Preserve attention-mask mean pooling, L2 normalization and task-specific query/passage prefixes from the decision record. The 512-token envelope includes the complete encoded input. This is not a hosted offering or tested runtime tuple.",
+  "license": {
+    "spdx_id": "MIT"
+  }
+}
