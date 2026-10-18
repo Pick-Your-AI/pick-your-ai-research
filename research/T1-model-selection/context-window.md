@@ -9,6 +9,10 @@ Will the complete request and reserved generation fit the selected model **on th
 
 This bounded candidate set covers direct APIs, a Bedrock API route and self-hosted weights. Managed coverage is the conditional dedicated endpoint route in [Model Provider](model-provider.md), whose model and runtime ceilings need exact offering evidence. Under #3's [owner position](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), provider-operated shared Bedrock on-demand is API; managed requires dedicated/reserved capacity. Hybrid applies independently to serving components; a local retrieval service does not make remote generation KV cache local. RAG assembly stays with #16 and sizing with #10.
 
+## Non-text and predictive model limits
+
+The [selection-limit supplement](nontext-selection-limits.md) records model- and route-specific audio, image/video, retrieval and predictive-model constraints with their actual units. It distinguishes documented hard predicates from defaults, chunking/truncation policies, training shapes, examples and unresolved claims. These research notes do not extend the text-token contract or establish runtime capacity; new typed limit semantics remain subject to #40 and affected-owner review.
+
 ## Candidate options
 
 ### Scope extension beyond text-token contexts
@@ -58,13 +62,13 @@ Apply #41's [interim checked/verified and conflict policy](evidence.md#evidence-
 
 ## Token estimation method and uncertainty
 
-Proposed method, not a measured implementation:
+The request-counting method remains proposed. A [bounded raw-text tokenizer study](token-estimation-study.md) now measures its text-only component on synthetic inputs; it is not a full request counter or runtime-admission measurement.
 
 1. Freeze model/route and the full planned request. Include system/developer instructions, role/template markers, retained history/thinking, tools and their results, RAG and memory, media settings and the generation reserve. Count after assembly; recount after edits, compaction, tool rounds, model changes or tokenizer/template changes. Budget future tool results separately until their payloads exist.
 2. Prefer the provider's supported request counter for that exact model/API. Claude accepts structured message inputs but currently rejects many server tools, MCP connector inputs and URL/file media sources; unsupported portions remain unknown (CW05). Gemini `count_tokens` counts input, not future generation (CW07). Bedrock advertises Count tokens support for the scoped 4.6 route (CW09); no call was made. OpenAI documents tiktoken-based string estimation (CW02); this note does not establish an exact GPT-5.4 tokenizer mapping or exact whole-request local count.
 3. For Qwen, tokenize with the pinned repository's tokenizer and chat template, retaining `enable_thinking` and generation-prompt settings (CW11). Exactness applies to the resulting local token sequence only if the serving runtime uses that same serialization; it does not establish output length or quality.
 4. If only text size is known, keep a rough estimate labelled **Estimate**, with tokenizer/language/modality assumptions. A characters-per-token heuristic is not a universal bound. Without calibration, report an unknown error bound and return `unknown` near any limit, not an asserted fit. Do not apply a text ratio to images, audio or video.
-5. For a later authorized calibration, compare estimates with provider usage over representative languages, code, tool payloads and media settings. Record signed residuals (`actual - estimate`), sample count, minimum/maximum and empirical quantiles per stratum. Use an upper residual envelope only within the calibrated scope; distinguish an observed sample envelope from a confidence interval or guaranteed bound. Recalibrate after route/tokenizer changes. No residuals or numeric safety margin are invented in this submission.
+5. For a later authorized calibration, compare estimates with provider usage over representative languages, code, tool payloads and media settings. Record signed residuals (`actual - estimate`), sample count, minimum/maximum and empirical quantiles per stratum. Use an upper residual envelope only within the calibrated scope; distinguish an observed sample envelope from a confidence interval or guaranteed bound. Recalibrate after route/tokenizer changes. The linked local study records actual text-tokenization residuals only; no provider calibration or deployable numeric safety margin is established.
 6. If valid lower/upper input bounds exist, decide conservatively on the upper bound: within every applicable budget is a scoped pass; exceeding any known cap is fail. When the interval straddles the cap, flag the fail **may not fit** and show the range, following the central owner's PR #88 review. This is an estimated screen, not a measured API rejection. With unbounded omitted content, fit is unknown. An unbounded point estimate can support a labelled planning scenario but never an unconditional pass.
 
 For unknown long-context extension configuration, evaluate the limit predicate against the evidenced native limit. Qwen's 100,000-token request without YaRN evidence therefore fails its published native 32,768-token limit; evidence an extended configuration or reduce the request. Independent runtime/memory predicates can remain unknown for review. A native-limit pass never proves runtime support, memory fit or quality.
@@ -142,9 +146,9 @@ Live issue assignees were read on 2026-10-16. No owner confirmation is claimed; 
 | Live #7 criterion | Artifact / section | Assessment |
 | --- | --- | --- |
 | Fit / warning / unknown rules in #40 format | Linked rule files | Supplied as proposals; central approval pending |
-| Token method with stated uncertainty | Token estimation method | Supplied; no invented calibration |
+| Token method with stated uncertainty | Token estimation method; [bounded study](token-estimation-study.md) | Method supplied with measured raw-text counterexamples; provider/chat calibration and unseen-input bounds remain unestablished |
 | KV definition agreed with #10 | KV manifest / handoff | Definition supplied; agreement **unmet** |
-| Decision record merged at required path | This file | **Unmet** until reviewed canonical merge |
+| Decision record merged at required path | This file, via #88/#102/#122/#123 | Existing record merged as partial research; this tokenization follow-up requires independent review and merge |
 | API / managed / self-hosted coverage | Candidate table | Supplied, hybrid component scope explicit |
 | Typed/unit comparison fields and evidence | Comparison table | Supplied; schema gaps explicit |
 | Shared-format rules and evidence/hypothesis distinction | Rule files | Supplied as proposals |

@@ -787,5 +787,62 @@
     "version": "Default branch, pushed 2026-10-16T23:27:02Z",
     "region": "Global; not a regional offering or price quote",
     "confidence": "Medium"
+  },
+  {
+    "id": "src-harness-bench-repo-b8d8963",
+    "url": "https://github.com/Qihoo360/harness-bench/tree/b8d89634c6f445fcc68ceb6744a59bef6cdf4863",
+    "supporting_urls": [
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/CURRENT.json",
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/docs/EVALUATION_AND_SCORING.md",
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/src/harnessbench/grading/semantic_judge.py",
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/task_catalog.csv"
+    ],
+    "publisher": "Qihoo360 / Harness Bench Team",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Read-only inspection of one pinned commit; nothing was run. Published results are not in Git, so results cannot be tied to these pins. No LICENSE file; visibility is not a reuse grant. Performance figures elsewhere remain vendor claims.",
+    "version": "Commit b8d89634c6f445fcc68ceb6744a59bef6cdf4863 (2026-10-09)",
+    "region": "Not applicable",
+    "confidence": "High"
+  },
+  {
+    "id": "src-miller-2024",
+    "url": "https://arxiv.org/abs/2411.00640v1",
+    "supporting_urls": [],
+    "publisher": "Evan Miller / Anthropic (arXiv)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Independent measurement",
+    "limitations": "Statistical method; clustering factors were measured on other benchmarks, not Harness Bench.",
+    "version": "arXiv v1",
+    "region": "Not applicable",
+    "confidence": "High"
+  },
+  {
+    "id": "src-bjarnason-2026",
+    "url": "https://arxiv.org/abs/2602.07150v1",
+    "supporting_urls": [],
+    "publisher": "Bjarnason et al. (arXiv)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Independent measurement",
+    "limitations": "Run-to-run variation measured on SWE-bench Verified, not Harness Bench.",
+    "version": "arXiv v1",
+    "region": "Not applicable",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-madaan-2024",
+    "url": "https://arxiv.org/abs/2406.10229",
+    "supporting_urls": [],
+    "publisher": "Madaan et al. (arXiv)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Independent measurement",
+    "limitations": "Full v1 text read 2026-10-17: Table 7 reports the 12% reversal result for IRT/IRT++ against full-dataset rankings, not arbitrary subsets or Harness Bench.",
+    "version": "arXiv v1 HTML, inspected 2026-10-17",
+    "region": "Not applicable",
+    "confidence": "Medium"
   }
 ]

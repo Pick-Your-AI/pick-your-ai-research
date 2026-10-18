@@ -25,6 +25,66 @@ How does the builder represent every component, and decide, explain and recomput
 - **Rule:** `id`, `severity` (`error`/`warning`/`info`), `applies_when`, `assert`, `on_unknown` (`block`/`review`/`defer`), `message`, `remediation`, `affected_kinds`. A ruleset has `id`, `version` and `published_at`; individual rules carry no version.
 - **Also:** `catalog-snapshot` (captured items with a revision) and `dependency-graph` (edges with a revision).
 
+## Consolidated next-version field dictionary (research proposal)
+
+This dictionary makes the proposed shapes reviewable for #40's “field types and examples” criterion. It consolidates the merged [workload dictionary](workload-use-case.md#field-dictionary), [deployment dictionary](deployment-mode.md#field-dictionary), [CD-1–CD-12](deployment-mode.md#open-contract-decisions), CD-13 below, and the CD-7 fixtures. These are project proposals, not new publisher facts or a released schema. The companion dictionaries retain their per-field evidence requirements and are authoritative where this summary groups several fields. No new enum, required field or JSON location is adopted here.
+
+**Notation and unknowns.** Types describe known values only. The CD-1 wire encoding for missing, explicitly unknown, withheld and not-applicable answers is unresolved; none is an ordinary member of a vendor capability enum. In the synthetic examples below, “unknown” describes the expected interpretation, not a literal to send to the frozen evaluator. An omitted list is not an empty list; an incomplete supported-values list cannot prove an unsupported value. A zero is known data only where the field allows zero, never a replacement for absent evidence. References must resolve within their declared snapshot/version scope; a string identifier alone supplies no fact or permission.
+
+| Proposed object / field group | Known-value type, unit and constraints | Synthetic example / unresolved boundary | Source and accountable issue |
+| --- | --- | --- | --- |
+| Catalog identity and lifecycle | Existing v1 strings `id`, `kind`, `tier`, `name`, `version`, `status`; preserve schema enums | A different release is a different version, not proof that the old release is unusable. ID+version resolution and retention remain CD-7 | v1 CatalogItem; #40/#41/#42 |
+| Catalog provenance | Existing source URL, accessed date and status; next-version evidence identity/completeness needs a reviewed shape | Source-checked documentation remains `unverified`; the exact tuple and independent support must be recorded before `verified` | #41 evidence grades; CD-3 |
+| Selection `deployment.runtime_operator` | `self` or `provider` | User-operated model plus provider/shared moderation model derives hybrid; a legacy `self_hosted` label cannot override either | deployment dictionary; #3/#40, M3 |
+| `runtime_supplied_by`, `capacity` | Provider case: supplier `operator` or `customer`; capacity `shared`, `reserved_throughput`, `dedicated_instances` | Provider with missing capacity has unknown mode, even if billed monthly. Supplier does not alone choose mode | deployment dictionary; #3/#9 |
+| `deployment.placement` | Typed device shares; devices linked by `runs_on` | Shares are not byte allocations; per-pool/rank accounting remains CD-2 | deployment dictionary; #10/#11 |
+| Build-owned `workload` taxonomy | Task enum plus optional secondary-task set; `turns` single/multi; interaction interactive/background/batch | Primary task excluded from secondary tasks; `other` needs 1–500-character description. Per-stage workloads remain CD-5 | workload dictionary; #2/#40 |
+| Workload modalities and output | Nonempty input/output modality sets; output format free/json/json_schema with schema when required | A format requirement is not model support evidence | workload dictionary; #2/#6 |
+| Knowledge/actions/customisation needs | Knowledge capability set or exclusive none/unknown; actions none/read_only/write; customisation none/prompt_only/fine_tune | `knowledge_implementation` is keyed by capability, with via rag/knowledge_base/long_context/tool/direct_lookup, selection IDs and justification; long_context/direct_lookup require justification | workload dictionary and W-R2–W-R5; #13/#16/#25/#30 |
+| Memory need and implementation | Need none/session/persistent; implementation via application/agent_framework/memory_store with IDs and justification | Persistent memory can accompany a single-turn conversation. Application session history need not select a memory store | workload dictionary and W-R11; #2/#28 |
+| Request volume and concurrency | Request count integer ≥ 0 per day/month; peak concurrent requests integer ≥ 1 | Zero volume is distinct from absent volume. Service-wide demand cannot be combined with per-replica admission without allocation | workload dictionary and W-R6; #10/#11/#39 |
+| Input/output token demand | Mean decimal and maximum integer; input 1 ≤ mean ≤ max; output 0 ≤ mean ≤ max | Mean 1.5 is valid. Output is not applicable only for an operation generating no tokens; thinking is counted once in output | workload dictionary; #7/#39 |
+| Native non-text demand | Per-request image count integer max; audio/video seconds decimal max; decimal means ≥ 0 and ≤ max | These are native units, not invented token counts. Stage-specific limits remain CD-11 | workload dictionary; #6/#7 |
+| Tokenizer and context policy | `tokenizer_assumption`: tokenizer/model ID string or model_native; exact route's input/output/combined budget semantics | Independent caps 8,000 input and 4,000 output do not imply a 12,000 shared window; exact new wire fields remain CD-11 | #7; T1 gaps; worked context examples below |
+| Latency and throughput targets | Latency metric ttft/tpot/e2e, positive integer ms, percentile 50/90/95/99; positive decimal throughput with unit output_tokens_per_second/requests_per_second/items_per_hour and scope aggregate/per_request | At most one latency target per metric. Aggregate requests/s is distinct from per-request output tokens/s | workload dictionary; #36/#39 |
+| Batch completion window | `completion_window_hours`: decimal > 0 hours, for batch workloads | A synthetic 2.5-hour completion target is not an observed runtime or an inferred throughput guarantee | workload dictionary; #2/#36 |
+| Availability target | `availability_target`: decimal percent 0–100 and period day/month/year | A synthetic 99 percent per month requirement is user input, not a provider SLA; period must remain explicit | workload dictionary; #2/#37 |
+| Precision preference | `precision_preference.min_stored_bits_per_weight`: optional decimal > 0 bits/weight | A requested minimum must be checked against actual artifact evidence under W-R9, not inferred from a quantization label | workload dictionary and W-R9; #6/#10/#11 |
+| Network requirement | `network`: online/private_network/air_gapped | An air-gapped requirement activates W-R8; provider operation alone neither proves nor disproves isolation. Missing answer remains unresolved | workload dictionary; CD-4/#37 |
+| Data classification and categories | `data_classification`: v1 enum, level definitions remain Q1; `data_categories`: set of personal_data/special_category or exclusive none/unknown | Explicit none is not unknown and cannot be mixed with personal-data categories; classification labels alone prove no lawful basis | workload dictionary; #40/#35/#31/#32 |
+| Quality target | Protocol/metric/reference IDs, higher_better/lower_better, nonnegative absolute or relative-percent degradation | Relative-percent degradation is invalid when reference value is zero; unlike protocols are not comparable | workload dictionary and W-R10; #36 |
+| Budgets | List of nonnegative decimal amount, ISO currency, period one_off/month/year and scope hardware/operating/total | Empty list explicitly means unconstrained; missing currency cannot default to USD | workload dictionary; #39/#41 |
+| Hardware inventory mode | `hardware.mode`: required use_existing/acquire/undecided; `devices[]`: list with at least one entry for use_existing | CPU-only devices are valid; acquire/undecided does not switch W-R6 fit requirements off | workload hardware dictionary; #2/#10 |
+| Hardware device identity and capacity | Stable unique `device_id` string; kind gpu/cpu/npu/other; optional accelerator `catalog_ref`; required `model_name` string; positive decimal `memory_gb` (10⁹ bytes), `memory_pool_id`; `reserved_memory_gb` ≥ 0 per pool | CPU/GPU sharing one pool must not double-count its bytes; CPU memory describes system memory available to inference. Catalog references do not replace the inventory's actual capacity evidence | workload hardware dictionary; CD-2/CD-6/#10 |
+| Hardware inventory location | `hardware.location`: jurisdiction ISO 3166 code and `site_label` string; jurisdiction required when residency is constrained | An owned-machine site replaces a cloud-region input but does not establish all downstream processing/storage locations | workload hardware dictionary; #2/#37 |
+| Host hardware location | `hardware_location` on host: kind personal_device/own_server/rented_server/provider, ISO 3166 jurisdiction and `site_label` string | Jurisdiction required when residency is constrained; a rented server's location is not inferred from its billing address or the researcher's location | deployment dictionary; #3/#9/#37 |
+| Device capabilities | memory_kind dedicated/unified/system; positive decimal GB/s with vendor_peak/measured basis; ISA set; NUMA count integer ≥ 1 | Published peak bandwidth is not a measured workload rate | deployment dictionary; #10/#11 |
+| Engine build and admission | Version, fork URL/commit when applicable, launch options; positive integer sequence expansion/admission and matching domain | Missing expansion leaves sequence demand unknown; a per-step batch limit is not automatically a KV-residency cap | deployment dictionary and W-R6; CD-2/CD-3/#11 |
+| Artifact representation | Format gguf/safetensors/onnx/pytorch/other; package convention mlx/transformers/other/none; open-vocabulary quantization method, positive decimal logical/stored bits per weight and packing string | Package convention is not serialization; a quantization label alone supplies no byte estimate | deployment dictionary; #6/#10/#11 |
+| Artifact `components` | List of role language_model/vision/draft/other, positive decimal size_gb and required boolean | A required vision component must be included in the scoped resource model | deployment dictionary; #6/#10 |
+| Conditional support/list completeness | Supported values plus completeness and exact tuple/evidence metadata; wire shape open | Absence from exhaustive applicable list → fail; absence from researched subset → unknown | CD-3; #6/#9/#11 |
+| Licence conditions and answers | Conditions have ID/text/source/kind eligibility or obligation/question; answers depend on kind | Eligibility met/not_met differs from obligation acknowledged/not_acknowledged. Answer/reference locations still require CD-6 | deployment dictionary; #30/#40 |
+| Organisation attestations | Jurisdiction code, EU-market-placement boolean, lawful-basis reference; CD-12 also includes revenue and monthly active users. Revenue needs an amount, currency, reporting period and the licence-defined organisation/account scope; MAU needs a user count, monthly measurement period and the licence-defined product/organisation scope. Exact value types, aggregation and wire fields remain unresolved against the selected condition | A missing revenue or MAU answer leaves an applicable eligibility condition unknown; never infer zero or reuse a differently scoped total. These are sensitive user attestations, not inferred permission or transferable consent | workload dictionary; deployment CD-12 and licence-condition questions; #30/#31/#32/#42 |
+| External connections | Entries with destination ID, purpose, provisioning/runtime lifecycle, enabled/disabled state, data-carrying and required booleans | Unknown state and absent inventory remain unresolved; runtime isolation also needs the selected boundary | deployment dictionary; CD-4/#37 |
+| Destinations and residency | Destination IDs/host, processing/storage code lists and data scope; processing and storage constraints separate | Unconstrained residency is distinct from unknown; jurisdiction containment/group semantics remain CD-9 | both dictionaries; #37/#41 |
+| Provider data terms | Training-use enum, scoped application-state/abuse-monitoring retention entries, zero-retention eligibility and conditions | Free-text conditions cannot silently become pass; endpoint/account/region evidence required | deployment dictionary; #5/#9 |
+| Billing descriptor | charge_basis per_use/per_time/flat_subscription/none; ownership owned/rented/provider; commitment kind none/reservation and integer term_months ≥ 0 | Does not determine mode or substitute for a pricebook; new meter units require #39 disposition | deployment dictionary; #39 |
+| Build links | Existing relation/from/to references including per-component runs_on/served_by host/device/engine links; proposed role/access attribute | Multiple possible credential/base bindings without an evidenced disambiguation remain unknown; inheritance rules are CD-6 | CD-6 and T4 queue; #40 |
+| Snapshot and pricebook locks | Existing IDs plus proposed explicit revisions; exact revision wire type/location pending | Missing revision produces “cannot be reproduced exactly”, never replacement by latest | CD-7, M5; #42 |
+| Evaluation result | Fixed rule severity; outcome pass/fail/unknown/skipped; proposed reason code, disputed flag and evidence label | A passing error-severity rule is not a failure; evidence disagreement does not change severity | Rule semantics above; CD-1/CD-3 |
+| Multi-selection evaluation | Quantify over enabled selections; reject duplicate primary roles semantically before evaluation | Two primary selections must not silently cause a required rule to skip; quantifier syntax remains open | CD-13; #40/T4 |
+
+### Reviewable examples and migration boundaries
+
+The [CD-7 synthetic fixtures](../../tests/fixtures/t0-migration.json) and [projection prototype](../../tests/t0_migration_prototype.py) already exercise component operator/capacity, independent and derived modes, conflicting workload copies, unresolved/cyclic adapter bases and revision locks. They accept normalized fixture evidence only. They do not define the final wire encoding or resolve arbitrary real catalog sources.
+
+- **Mode:** M1 preserves the old API label for historical evaluation while projecting model API + user-operated retrieval to hybrid. M2 cannot project managed capacity from a legacy label.
+- **Workload:** M4 chooses the documented projection precedence (objectives, selection settings, preset), preserving disagreeing values and a conflict flag. Precedence is not acceptance of the chosen answer; the user still must reconcile the conflict. Zero is preserved rather than treated as missing.
+- **Locks:** M5 records missing revision evidence rather than fetching a current revision. Historical v1 evaluator output and original bytes stay unchanged.
+- **Context:** the worked T1/T2 examples below separate shared-session failure from independent input/output passes; neither supplies a KV-memory fit result.
+
+**Remaining decisions, not invented defaults:** CD-1 answer-state encoding; CD-2 byte placement/pool semantics; CD-3 eligible-evidence/completeness/result wire shapes; CD-4 boundary representation; CD-5 per-stage workload; CD-6 reference/credential/inheritance resolution; CD-7 revision resolution and next-version migration; CD-8 community evidence; CD-9 jurisdiction groups; CD-10 non-model-service runtime requirements; CD-11 context-budget shape; CD-12 attestation placement and CD-13 multi-selection syntax remain with their accountable owners in the companion decision register. This dictionary neither releases v1.1 nor removes #42's recorded #40 prerequisite.
+
 ## Rule format and outcome semantics (decided)
 
 1. **Severity is fixed per rule; the outcome is separate.** Outcomes are `pass`, `fail`, `unknown`, `skipped`. A passing `error` rule is not a failure.
@@ -59,7 +119,7 @@ How does the builder represent every component, and decide, explain and recomput
 | Price classification | CTX-04 | #39 owns rates; budget checks use the higher tier when estimates straddle |
 | Agent capability and trust | T4 framework, tool, MCP and memory rules (24 v1-valid proposals plus contract-dependent ones) | One severity per rule; queue disposition only, accepted on #40; credential-binding ambiguity gives `unknown` (CD-6) |
 
-**For @zwright8 review:** confirm, narrow or reject the proposed T5 routing inventory below for #68/#76/#77; no disposition is inferred.
+**Recorded T5 routing disposition:** [@zwright8 accepted the routing with constraints in #126](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323). The inventory below preserves the remaining source-specific receiving decisions; queue acceptance is not approval of fields, rights or executable rules.
 
 ## Contract decisions
 
@@ -141,25 +201,40 @@ Use `templates/rule-proposal.md`, plus these conventions:
 
 ## To do
 
-- Review the synthetic worked examples below with T1/T2 owners (@zwright8); executable migration fixtures remain open.
-- Receiving-owner disposition of the proposed T5 routing inventory (@zwright8).
-- Migration test fixtures for the v1.1 plan (CD-7): hybrid build, conflicting workload copies, lock without revision.
+- T1/#40 worked-example review is [recorded on #126](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126). Other affected-owner dispositions remain separate.
+- T5 routing is accepted with constraints by @zwright8 in #126; the source-specific #10/#31/#39/#30/#32/#33/#36/#37 decisions remain with their owners.
+- The synthetic CD-7 projection experiment below now exercises migration boundaries. A released v1.1 adapter, actual evidence resolution, schema/generator changes and consumer acceptance remain open.
+
+## Claim-source traceability audit
+
+Inspected 2026-10-18 at [`61e1c9a83bbcd22a672b53e06c544ee3ddd7689d`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d). This record's factual claims concern the imported contract and recorded project decisions; its candidate designs and worked quantities are explicitly proposals/synthetic examples, not vendor measurements. The consolidated dictionary delegates publisher-specific evidence to the cited companion dictionaries and their dated primary-source ledgers. This audit does not independently reproduce those publisher claims or approve the proposed wire shapes.
+
+| Claim group | Primary project source, inspected 2026-10-18 | Check and boundary |
+| --- | --- | --- |
+| 45 baseline rules; 17 rules gated on literal self-hosted mode | [Frozen baseline](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/baseline/core-ruleset.json) | Parsed `rules`: 45 entries; 17 `applies_when` expressions contain `self_hosted`. These are code counts, not benchmark results |
+| Incomplete-list membership behavior | [Baseline](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/baseline/core-ruleset.json), [reference evaluator](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/reference/evaluate.py) | `rule.engine.model.format` uses `intersects`; `rule.precision.engine` uses `contains`. The proposed completeness gate is not implemented by frozen v1 |
+| Existing field names, versions and extension boundary | [Canonical schemas](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/schemas), [adoption policy](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/ADOPTION.md) | Catalog/build/ruleset/snapshot/graph shapes are contract facts; `schema_version` is 1.0.0. Build extra-field rejection and common `x_` extension namespace are inspected in their schemas |
+| Outcome, conflict and rule-family decisions | Owner reviews linked in the introduction ([#75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), [#67](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), [#88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868)); [#41 record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T0-configuration/catalog-data-sources.md) | Project decisions, not new universal compatibility claims; preserve scope and fixed severity |
+| Workload/deployment field evidence and modes | [Workload](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T0-configuration/workload-use-case.md), [deployment](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T0-configuration/deployment-mode.md) | Their field dictionaries map conditions to dated C/E/D primary-source references. Open CD shapes remain unresolved; examples in this consolidation add no price or performance claim |
+| 24 v1-valid T4 rule proposals and accepted queue scope | [T4 summary](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T4-agents-integrations/README.md), [#40 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) | Count describes contributed proposal pointers, not approved executable rules; retain the queue-only disposition |
+| T5 routing and later T6/saved-build inputs | [T5 summary](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T5-training-fine-tuning/README.md), [#126 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323), linked draft PRs in the routing table | Routing accepted with constraints; #114 and T6 drafts do not become merged decisions through citation |
+| M1–M5 and T1/T2 worked quantities | [Synthetic fixtures](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/tests/fixtures/t0-migration.json), [projection tests](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/tests/test_t0_migration.py) | Synthetic semantic examples only; no access date, region or currency is invented for nonexistent vendor measurements |
 
 ## Acceptance criteria coverage
 
 | Criterion (issue #40) | Where | Status |
 | --- | --- | --- |
-| Schema document with field types and examples | What v1 provides; #81 field dictionaries | Partial |
-| Worked rule examples spanning T1/T2, including `unknown` | Synthetic worked examples below | Proposed; owner review open |
+| Schema document with field types and examples | What v1 provides; consolidated next-version dictionary; #81 field dictionaries; CD-7 examples | Consolidated research shapes and examples; final encodings and affected-owner acceptance remain open |
+| Worked rule examples spanning T1/T2, including `unknown` | Synthetic worked examples below | T1/#40 scoped acceptance in #126; broader handoffs remain open |
 | Approach to cycles and recomputation | Cycles and recomputation | Proposed |
 | Rule and catalog versioning | Versioning; Contract versions and migration | Proposed |
 | Contribution format | Contribution format | Proposed |
 | Deployment modes covered | Rule format, item 7; #81 | Proposed |
 | Rule format, severities, `unknown` handling | Rule format and outcome semantics | Decided in reviews |
-| Primary sources with access dates | Contract files at the merged revision; reviews linked | Partial |
+| Primary sources with access dates | Claim-source traceability audit; companion primary-source ledgers | Contract/project claims traced with inspection date; synthetic quantities and proposed fields remain explicitly separate |
 | Handoffs confirmed | — | Open |
 | Open questions with owners | Contract decisions; #81 | Partial |
-| Decision record merged | — | Open |
+| Decision record merged | PR #126 | Merged partial record; not issue completion |
 
 ## Synthetic migration cases for CD-7 review
 
@@ -169,11 +244,13 @@ These are proposed acceptance examples, not measured configurations or a migrati
 | --- | --- | --- |
 | M1 | Legacy build label `api`; model offering documents provider/shared runtime; retrieval service explicitly operated by user | Model `api`, retrieval `self_hosted`, derived build `hybrid`; the old label cannot overwrite retrieval evidence |
 | M2 | Legacy build label `managed`; component operator/capacity absent | Component `unknown`; do not infer dedicated/reserved capacity from the legacy label |
-| M3 | Legacy build label `self_hosted`; model is user-operated, external moderation offering provider/shared | Model `self_hosted`, moderation `api`; derive hybrid over applicable serving components |
+| M3 | Legacy build label `self_hosted`; model is user-operated, external moderation **model** offering provider/shared | Primary model `self_hosted`, moderation model `api`; derive hybrid over applicable serving components. A `guardrail` selection alone does not set mode |
 | M4 | Build objectives and workload settings disagree | Preserve both source values and flag a decision; do not manufacture a reconciled workload |
 | M5 | Lock references a pricebook ID without revision | Historical cost cannot be reproduced exactly; do not substitute the latest revision silently |
 
-The open migration fixtures must encode these expected interpretations before a v1.1 adapter can be accepted. No adapter or next contract is introduced by this note.
+The [synthetic fixtures](../../tests/fixtures/t0-migration.json) encode M1–M5 and additional boundary cases. The [test-only projection prototype](../../tests/t0_migration_prototype.py) takes already-normalized eligible fixture facts in `x_t0_migration_inputs`, preserves original historical bytes and emits a separate `x_t0_migration_projection`. It does not parse arbitrary real selections, resolve source conflicts or publish a next-version schema. Null means missing fixture evidence, not a contract answer encoding.
+
+Run `python -m unittest discover -s tests -p test_t0_migration.py -v`. The tests cover all operator/capacity pairs, unknown dominance, non-serving/disabled components, adapter inheritance and missing/cyclic/disabled bases, rejection of unrelated serving kinds as adapter bases, duplicate IDs, conflicting workload copies including zero, absent snapshot/pricebook revisions, and unchanged v1 historical evaluator findings. They are synthetic semantics checks, not runtime measurements or validation of a released migration adapter. Actual snapshot resolution and dual-ruleset evaluation remain future versioned implementation.
 
 ## Worked rule examples for receiving-owner review
 
@@ -191,7 +268,7 @@ The quantities and labels in this section are synthetic fixtures, never catalog 
 
 ## Proposed T5 routing inventory
 
-This is an initial routing synthesis from the merged T5 README and component notes, inspected 2026-10-17; it does not accept their hypotheses or replace @zwright8's triage disposition.
+This routing synthesis comes from the merged T5 README and component notes, inspected 2026-10-17. [@zwright8's #126 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323) accepts it with the constraints below. It accepts routing for review, not new enums, evidence truth, legal permission or execution.
 
 | T5 input | Proposed family or contract decision | Remaining acceptance |
 | --- | --- | --- |

@@ -1,7 +1,7 @@
 # T0: Saved, Shared & Compared Builds
 
 Issue: #42 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `f297ac5`) · Kinds: `BuildSnapshot`, `Selection`, `CatalogSnapshot` (with `EvaluationReport`, `CostEstimate`, `Pricebook`, `Ruleset`, `DependencyGraph`, `Event` as referenced records)
-Status: draft, not for merge while #40 blocks #42 · Last researched: 2026-10-17 · Guidance: PR #74 Track E (P7)
+Status: draft, not for merge while #40 blocks #42 · Last researched: 2026-10-18 · Guidance: PR #74 Track E (P7)
 Deliverable path: `research/T0-configuration/saved-shared-builds.md`
 
 Labels used in this note:
@@ -40,7 +40,7 @@ What should a saved or shared build contain, how are builds compared, and what h
 | --- | --- | --- |
 | Self-contained URL | Encode the build in the link | Can't be revoked or re-redacted after a rights change. RFC 9110 recommends support for URIs of only "at least 8000 octets" (X1), and a build with 2+ selections, settings and links has no size bound, so portability isn't assured. Rejected for the primary share. |
 | Opaque link to a stored projection (Proposal) | The link carries a random token; the server returns a redacted projection of one revision | Revocable; redaction can be recomputed when #60 decisions change. **Recommended.** |
-| Export file | Downloadable JSON of the build | Kept as a separate, explicit action. Prior art: Dify's DSL export excludes third-party API keys, knowledge content and logs (X2); n8n's JSON export includes credential names and IDs and tells users to remove or anonymise them before sharing (X3). Exports apply the same redaction as shares. |
+| Export file | Downloadable JSON of the build | Kept as a separate, explicit action. Prior art: Dify's DSL export excludes third-party tool API keys, knowledge content and logs, but can include Secret-type environment variables when the user opts in (X2). n8n's JSON export includes credential names and IDs; HTTP Request nodes imported from cURL can also contain authentication headers, which its documentation tells users to remove or anonymise before sharing (X3). These exclusions do not establish that an arbitrary export is safe. Pick Your AI exports apply the same redaction as shares. |
 
 ### Deployment modes covered
 
@@ -102,12 +102,18 @@ States are derived on read, not stored. More than one can apply.
 | Result changed | Current findings differ from historical findings for any rule | The per-rule diff; changes to `fail` or `unknown` listed first |
 | Now indeterminate | A historical `pass` is `unknown` in the current report | "Can no longer be confirmed", with the missing evidence |
 | Now valid | A historical `fail` is `pass` in the current report | "This now passes under ruleset <version>"; the historical failure stays visible |
-| Component unavailable | A selected item is `deprecated` or `retired` (`catalog-item.schema.json#/properties/status`), or absent from the current snapshot | SB-R4 finding |
+| Component deprecated | The selected item's applicable lifecycle evidence says `deprecated` | SB-R4a `fail/warning`; SB-R4b still passes availability. Offer a replacement without claiming the item is unavailable |
+| Component unavailable | The selected item is `retired`, or an exhaustive current snapshot establishes absence for its exact item/version scope | SB-R4b `fail/error`, with the evidence scope |
+| Availability unknown | Snapshot retrieval, lifecycle evidence or item/version coverage is unresolved | SB-R4b `unknown/error`, not an unavailable claim; omission from an incomplete list proves no retirement |
 | Prices as of | Always for current-state facts | "Prices as of <captured_at>". A newer pricebook or a rate past `valid_until` makes the old estimate historical, not current |
 | Values withheld | A #60 decision removes display rights, or a share withheld an input | The finding's outcome without the value, and the reason |
 | Cannot be reproduced | A pinned record is missing | Historical result labelled accordingly |
+| New contract available | A successor contract is published while this revision still pins its original schema | Preserve the original bytes, historical findings and reproducibility under the retained reader; offer an explicit migration as a new revision |
+| Current evaluation unavailable | The proposed current evaluation needs an unsupported contract/ruleset or an unavailable migration | Show the historical result with its original version and explain the unavailable current path; do not mark the historical result irreproducible solely because a successor exists |
 
 `EvaluationReport.result = valid` means the configured rules passed for the locked revision, not production readiness (V6). Shares say so.
+
+**Synthetic boundary examples (proposal, no runtime measured):** an item marked `deprecated` remains available with a warning; an item omitted from a non-exhaustive snapshot has unknown availability. A v1 revision with all original records and its v1 evaluator retained remains reproducible after a v1.1 publication. If the v1.1 migration is unavailable, only the proposed current view is unavailable. If the original pinned evaluator or a required record is actually lost, the historical findings remain visible but their reproducibility is qualified with that specific missing dependency. These cases follow SB-R4a/SB-R4b and #40's [CD-7 migration boundary](component-schema-compatibility.md#contract-versions-and-migration-cd-7-proposal); they do not release a successor contract.
 
 ### Sharing (Proposal)
 
@@ -185,7 +191,7 @@ Lean: (b), because co-resident memory can only be checked where all resident com
 | --- | --- | --- | --- |
 | Build edit | New `revision`; `build.selection.upserted`/`removed`, `build.link.upserted`, `build.objectives.updated` events (V11) | Prior derived records are stale for the new revision; affected kinds found both ways through the graph, honouring activation before and after (V5) | Not evaluated (until re-run) |
 | Catalog snapshot published | `catalog.snapshot.published` event (V11) | Historical unchanged; current report computed | Newer data available; Result changed |
-| Item lifecycle change | `status` becomes `deprecated` or `retired` in the newer snapshot | As above | Component unavailable (SB-R4) |
+| Item lifecycle change | Eligible evidence establishes `deprecated`, `retired` or exact-scope absence in the newer snapshot | As above; incomplete coverage remains unresolved | Component deprecated (SB-R4a), Component unavailable (SB-R4b), or Availability unknown, as supported by the evidence |
 | Source correction (#41) | New item revision in a new snapshot | Version-pinned facts are re-checked only when the version changes or the source is corrected (P3) | Result changed, if it did |
 | Conflict re-resolution (#41) | New snapshot with the re-resolved claim | As above | Result changed |
 | Time passing | — | **None.** No TTL exists under the interim policy (P3) | Prices as of <date> |
@@ -193,8 +199,8 @@ Lean: (b), because co-resident memory can only be checked where all resident com
 | Dependency graph revision | `locks.dependency_graph_revision` differs | Activation and affected kinds may change | Newer data available |
 | Pricebook published, or rate past `valid_until` | `pricebook.published` event; rate `valid_until` | Historical estimate kept; current estimate computed. A stale or partial quote makes budget checks `unknown`, never budget-pass (V8) | Prices as of; Result changed |
 | #60 rights decision changes to "no" | #41/#60 per-source decision (P4) | Affected values are hidden in every view, including historical and shared views, because showing them is display | Values withheld |
-| Mode or optional tier switched | Activation conditions (V5) | Whole branches activate or become `skipped` | Not evaluated |
-| Contract version bump | `schema_version` | Migration per CD-7 (#81) | Cannot be reproduced, until migrated |
+| Mode or optional tier switched | Activation conditions (V5) | Re-evaluate required and cross-component rules; only predicates with actually false applicability become `skipped` | Not evaluated |
+| Successor contract published | Available contract version differs from this revision's pinned `schema_version` | Preserve original bytes, locks, reader and historical findings; an explicitly adopted migration creates a new revision under CD-7 | New contract available; Current evaluation unavailable if the new path is unsupported. Original reproducibility changes only if its actual dependencies are missing |
 | Withheld input on a fork | SB-8 | Dependent rules `unknown` | Prompt to answer |
 
 When whether a branch is active is itself unknown, invalidate and re-evaluate (V5).
@@ -336,9 +342,9 @@ The #41 invalidation-policy handoff above is confirmed. Other receiving-owner di
 | V11 | `contracts/v1/schemas/event.schema.json` (`/properties/type` enum) | 2026-10-17 | as V1 | Primary documentation (contract) | — |
 | V12 | `DEPENDENCIES.md`, "Operand types" (references resolve within the build; mismatched versions → `unknown`) | 2026-10-17 | as V1 | Primary documentation (contract) | — |
 | V13 | `contracts/v1/baseline/core-ruleset.json` (rules reading `/objectives/data_classification`, `/objectives/region`, `/objectives/monthly_budget_amount`) | 2026-10-17 | as V1 | Primary documentation (contract) | Baseline, not an approved production ruleset |
-| X1 | IETF, RFC 9110 HTTP Semantics, §4.1: <https://www.rfc-editor.org/rfc/rfc9110.html> | 2026-10-17 | RFC 9110 | Primary documentation (specification) | Source checked: "RECOMMENDED that all senders and recipients support, at a minimum, URIs with lengths of 8000 octets in protocol elements". A minimum, not a maximum. |
-| X2 | Dify, app management docs: <https://docs.dify.ai/en/cloud/use-dify/workspace/app-management> | 2026-10-17 | Cloud docs, current | Primary documentation | Source checked: export includes app configuration, node settings, model parameters, prompts and knowledge-base connections; excludes third-party API keys, knowledge content and logs; warns on importing an older DSL version |
-| X3 | n8n, export and import docs: <https://docs.n8n.io/build/manage-workflows/export-and-import.md> | 2026-10-17 | docs, current | Primary documentation | Source checked: JSON format; exported files include credential names and IDs; "Remove or anonymize this information from the JSON file before sharing" |
+| X1 | IETF, RFC 9110 HTTP Semantics, §4.1: <https://www.rfc-editor.org/rfc/rfc9110.html> | 2026-10-17; rechecked 2026-10-18 | RFC 9110 | Primary documentation (specification) | Source checked: minimum recommended support is 8000-octet URIs. This is not a maximum. |
+| X2 | Dify, app management docs: <https://docs.dify.ai/en/cloud/use-dify/workspace/app-management> | 2026-10-17; rechecked 2026-10-18 | Cloud docs; page last modified 2026-07-29 | Primary documentation | Source checked: export includes app configuration, node settings, model parameters, prompts and knowledge-base connections; excludes third-party tool API keys, knowledge content and logs; Secret-type environment variables may be included by explicit export choice. Warns on importing an older DSL version; no export was executed here |
+| X3 | n8n, export and import docs: <https://docs.n8n.io/build/manage-workflows/export-and-import.md> | 2026-10-17; rechecked 2026-10-18 | docs, current | Primary documentation | Source checked: JSON includes credential names and IDs; HTTP Request nodes imported from cURL can contain authentication headers. The documentation calls for removing or anonymising sensitive material before sharing; no export was executed here |
 | P1 | PR #81 drafts, `research/T0-configuration/deployment-mode.md` and `workload-use-case.md` at `028a116` | 2026-10-17 | reviewed revision 028a116 | Project decision record (#81 merged) | Read only; adopted definitions, schema changes remain subject to #40; CD-1 to CD-12 are #81's |
 | P2 | This note's competitor context: `research/market/competitors/dify.md`, `n8n.md`, `skypilot.md` | 2026-10-17 | accessed by those notes 2026-10-16 | Project research | SkyPilot task YAML as a portable config is noted there; not relied on here |
 | P3 | #41 interim policy, PR #75 review: <https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927> | 2026-10-17 | review of `9e66622`, submitted 2026-10-16 | Project owner position | Not an approved contract; no TTL |

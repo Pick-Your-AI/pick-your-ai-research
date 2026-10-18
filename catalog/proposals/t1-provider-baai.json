@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.model_provider.baai",
+  "kind": "model_provider",
+  "tier": "T1",
+  "name": "BAAI model publisher",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "spec": {},
+  "provenance": [
+    {
+      "source_uri": "https://huggingface.co/BAAI",
+      "checked_at": "2026-10-18T01:20:00Z",
+      "verification_status": "unverified",
+      "notes": "Publisher profile identifies Beijing Academy of Artificial Intelligence. Identity-only capture; version is the research date. No hosted service, auth, region or fine-tuning entitlement is inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T01:20:00Z"
+}

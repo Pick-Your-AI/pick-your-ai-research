@@ -63,10 +63,10 @@ One row per **operation family**. Families are split when side effects differ, b
 | 5 | GitHub issues write (create) | GitHub (SaaS) | fine-grained PAT | "Issues" repository permission (write) | as above, plus 80 content-creating req/min and 500/h; POST/PATCH = 5 points | write | as above | unknown | B10, B11 |
 | 6 | Slack `chat.postMessage` | Slack (SaaS) | OAuth v2 bot or user token | `chat:write` | "Special": about 1 message/s per channel, several hundred/min per workspace | high_impact (visible to others at once) | `ratelimited` with `Retry-After`; `rate_limited` (too many posts) | none published per call (unknown) | B13, B18 |
 | 7 | Slack `chat.delete` | Slack (SaaS) | OAuth v2 bot or user token | **`chat:write` (same scope as posting)**; a bot token can delete only its own messages | Tier 3 (50+/min) | irreversible (project classification) | `ratelimited` + `Retry-After` | unknown | B14 |
-| 8 | Slack `conversations.history` | Slack (SaaS) | OAuth v2 bot or user token | `channels:history`, `groups:history`, `im:history` or `mpim:history` | Tier 3 (50+/min); new limits since 2025-05-29 for newly created, commercially distributed non-Marketplace apps (values not rendered) | read_only (private data) | HTTP 429 + `Retry-After` (B17, 2018 changelog) | unknown | B15, B16, B17 |
+| 8 | Slack `conversations.history` | Slack (SaaS) | OAuth v2 bot or user token | `channels:history`, `groups:history`, `im:history` or `mpim:history` | App/install cohort determines Tier 3 versus 1 request/min and 15-object pages; see dated B42/B43 readback below | read_only (private data) | HTTP 429 + `Retry-After` (B43; current readback) | unknown | B15, B16, B17; B42, B43 |
 | 9 | Gmail `messages.send` | Google (SaaS) | OAuth 2.0 | `gmail.send` (Sensitive) | 100 quota units per call; 6,000 units/user/min; 1,200,000 units/project/min | irreversible (project classification) | quota errors; truncated exponential backoff advised | none published per call (unknown) | B19, B20 |
 | 10 | Gmail `messages.delete` vs `messages.trash` | Google (SaaS) | OAuth 2.0 | `delete` needs `https://mail.google.com/` (Restricted); `trash` is reversible | delete 10 units; trash 20 units | delete = irreversible ("cannot be undone. Prefer messages.trash"); trash = write | as above | unknown | B20, B21 |
-| 11 | Google Drive files | Google (SaaS) | OAuth 2.0 | `drive.file` (Non-sensitive, per-file) recommended over `drive` / `drive.readonly` (Restricted) | not fetched | read_only or write by scope | not fetched | unknown | B22 |
+| 11 | Google Drive files | Google (SaaS) | OAuth 2.0 | `drive.file` (Non-sensitive, per-file) recommended over `drive` / `drive.readonly` (Restricted) | Cohort-specific quota units; see B44 readback | read_only or write by scope | 403/429; truncated exponential backoff (B44) | unknown | B22, B44 |
 | 12 | Stripe create refund (`POST /v1/refunds`) | Stripe (SaaS) | restricted API key (`rk_`), agent-tagged keys recommended for agents | per-resource RAK permissions (names not fetched) | 100 req/s live, 25 req/s sandbox, 25 req/s per endpoint; 50 concurrent | irreversible (money movement; card refund cancel only briefly and only in the Dashboard) | 429 with `Stripe-Rate-Limited-Reason`; `lock_timeout`; refund can later fail (`refund.failed`) | none per API call; refunds "might incur a fee" and original processing fees are not returned | B23–B28 |
 | 13 | E2B sandbox (SDK 2.56.0) | E2B (SaaS or self-hosted) | API key (`E2B_API_KEY`) | none | Hobby 20 concurrent sandboxes, 1 h sessions; Pro 100 (to 1,100), 24 h | high_impact (arbitrary code, spend, egress) | not fetched | per second: $0.000014/s per vCPU, $0.0000045/s per GiB RAM; Pro $150/month | B29–B33 |
 | 14 | OpenAI code interpreter (`code_interpreter`) | OpenAI (API server tool) | OpenAI API key | none | 100 RPM per org | high_impact (contained) | container expires after 20 min idle; later use fails | "built-in tools rates" (values not extracted) | B41 |
@@ -171,7 +171,7 @@ Mapped to v1 JSON pointers. "Note only" means v1 cannot express it.
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
+Original B1–B41 entries accessed on 2026-10-16; dated follow-up entries below retain their own access dates. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -472,7 +472,7 @@ assert: eq(metric cost.unpriced_metered_count, 0)
 | Anthropic code execution | 1,550 free hours per org per month, then $0.05 USD per hour per container, 5-minute minimum; free when used with web search/fetch 20260209+ | No v1 meter for container-hour; tool not proposed as an item |
 | n8n Cloud | EUR per monthly workflow executions (Starter 2.5K, Pro 10K) | Plan price, not per-request; no list price per execution (B37) |
 | OpenAI code interpreter | "built-in tools rates" | Values not extracted (B41) |
-| GitHub, Slack, Gmail, Drive, Stripe API calls | no per-call price published | Cost is in the subscription or seat; Stripe refunds "might incur a fee" (B25) |
+| GitHub, Slack, Gmail, Drive, Stripe API calls | no per-call price published | Do not assume API cost is covered by a subscription or seat. Drive has a future-charging notice (B44); Stripe refunds "might incur a fee" (B25) |
 
 **Capacity facts for #38/#39:**
 - Gmail quota units (100 per send).
@@ -543,6 +543,49 @@ These affect throughput and plan selection, not price per call.
 | Shared provider identity and `provided_by` link between `data_source` and `integration`; union-of-scopes review when one OAuth client serves ingestion and actions | handoff to #13 · @zabyxc01 |
 | Rate-limit and failure-mode signals (`Retry-After`, `x-ratelimit-*`, `Stripe-Rate-Limited-Reason`, in-band tool errors) for monitoring | handoff to #38 · @PUSHINGSQUARES |
 | Evidence policy for summarising fetchers and pages that render tables in JavaScript (Slack tiers, GitHub permissions) | #41 · @tynamite |
-| Re-fetch: Slack current tier table and non-Marketplace limits; Brave rate-limit headers; GitHub repository permissions (Contents, Administration, repo delete); Stripe RAK permission names; Drive quotas; E2B SDK licence conflict (MIT vs Apache-2.0) | #26 · @CompleteDotTech |
+| Remaining source decisions: exact Stripe refund-operation RAK resource mapping; E2B distribution artifact/dependency terms beyond the pinned SDK source | #26 · @CompleteDotTech |
 
 [Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
+
+
+## Slack history rate-limit gap resolved (2026-10-18)
+
+B42 — Slack, [conversations.history](https://docs.slack.dev/reference/methods/conversations.history/), mutable Web API method documentation, accessed **2026-10-18** with the browser text extractor. **Primary documentation, source checked / unverified**; no authenticated API request or measured throughput.
+
+The previously unread B15 values are now visible: qualifying new commercially distributed non-Marketplace applications/installations from 2025-05-29 receive **1 request/minute**, with both default and maximum page size **15 objects**. Marketplace-approved and internal customer-built applications retain **Tier 3**. The current method page exempts existing installations of non-Marketplace applications from the newly posted limits. Preserve app distribution/approval and installation cohort; do not assign the restrictive rate to every external app or infer a particular customer's effective quota.
+
+B43 — Slack, [Web API rate limits](https://docs.slack.dev/apis/web-api/rate-limits/), mutable guide, accessed **2026-10-18** through the same extractor; **Primary documentation, source checked / unverified**. The formerly unread B16 table describes Tier 3 as **50+ requests/minute**, scoped by method, workspace and app. Pagination is a condition of published tiers; omitting it can tighten limits. Burst ceilings are unpublished. Rate-limit responses use HTTP **429**, with `Retry-After` in seconds; unrelated methods/workspaces are not automatically paused.
+
+Project interpretation for #38: retain those dimensions when grouping throttling events and retry queues. Unknown cohort remains unknown; an advertised tier is neither observed throughput nor guaranteed latency. Do not flatten all Slack methods into v1's integration-level `rate_limit_per_minute`. This resolves the two historical unread-table gaps only; other B15/B16 historical access conditions remain recorded, #40 owns richer rate-limit fields and #38 receiving acceptance remains pending. Source access grants no customer-content or publication rights.
+
+## Drive quota gap resolved (2026-10-18)
+
+B44 — Google, [Drive API usage limits](https://developers.google.com/workspace/drive/api/guides/limits), mutable v3 documentation, accessed **2026-10-18** with the browser text extractor. **Primary documentation, source checked / unverified**; no API request or billing observation.
+
+The guide applies new quotas to projects created from **2026-05-01**; projects using Drive during November 2025–April 2026 retain previous quotas. Published new limits are **1,000,000 quota units/minute/project** and **325,000/minute/user/project**. Representative costs: `files.get` **5**, `files.list` **100**, `files.download` **200**, `files.update` **50** units. These are not request counts. Rate errors include **403** and **429**; use truncated exponential backoff with jitter and bounded retries.
+
+The page separately lists a **1 TB/day/project** egress threshold and **400,000,000 units/day/project** billing threshold. Standard use is currently described as no additional cost; over-quota charging is planned later in 2026, with details and notice still forthcoming on this read. No rate or effective bill is established.
+
+Project interpretation: #38 needs project/user/method/cohort dimensions; #39 needs an actual effective price schedule before pricing quota units. Keep billing classification unknown pending that scoped determination. v1's request-per-minute field cannot faithfully represent this model. Customer-specific quotas, authorization and receiving dispositions remain unverified; B22's historical unfetched state is preserved.
+
+## Remaining named source-gap readbacks (2026-10-18)
+
+All sources below were opened on **2026-10-18** with the browser text extractor (GitHub API resolved the E2B commit). Grade: **Primary documentation, source checked / unverified**. This is desk research: no authenticated product request, credential creation, execution benchmark or redistribution approval.
+
+### Brave rate windows
+
+B45 — Brave, [Rate limiting](https://api-dashboard.search.brave.com/documentation/guides/rate-limiting), mutable guide. The guide documents a one-second sliding request window and HTTP 429 on excess. `X-RateLimit-Limit`, `X-RateLimit-Policy`, `X-RateLimit-Remaining` and `X-RateLimit-Reset` carry multiple windows; reset values are seconds from the response, not Unix timestamps. The example values are illustrative plan data, not a universal quota. Brave states successful responses count toward quota/billing; this does not establish a monetary rate or independently reproduce enforcement. For #38, preserve all corresponding window values and plan scope when deciding retry delay; do not retry merely because the shortest window reset if another is exhausted. This resolves the previously unread header semantics; account-specific limits remain unknown.
+
+### GitHub operation permissions
+
+B46 — GitHub, [Repository contents](https://docs.github.com/en/rest/repos/contents?apiVersion=2026-03-10), REST API **2026-03-10** documentation. Private content reads require fine-grained **Contents: read**; public content may be read without authentication. Creating/updating file contents requires **Contents: write**, with **Workflows: write** additionally for workflow changes. These are operation/resource permissions, not generic OAuth scope strings.
+
+B47 — GitHub, [Delete a repository](https://docs.github.com/en/rest/repos/repos?apiVersion=2026-03-10#delete-a-repository), same API version. Fine-grained deletion requires **Administration: write**; organizational deletion policy can still deny a member. Project implication: a content writer must not be treated as a repository administrator or deletion-authorized actor. These published prerequisites do not prove a particular token's effective access and do not relax repository protections or tool approval rules.
+
+### Stripe permission naming boundary
+
+B48 — Stripe, [Restricted API keys](https://docs.stripe.com/keys/restricted-api-keys), mutable documentation. Resource permissions are **None**, **Read** or **Write**; Write includes Read. The guide's named examples are **Payment Intents: Write**, **Customers: Read** and **Disputes: Read**. GET maps to reading and POST/DELETE to writing the relevant resource. It does not establish the exact resource/dependency permission set for this note's refund-creation operation. That mapping stays unknown pending an explicit applicable reference or authorized sandbox evidence; do not substitute a Stripe Apps manifest permission or a broad unrestricted key. No key was created and no refund attempted.
+
+### E2B package-local license scope
+
+B49 — E2B source at commit `62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3`: the package-local [Python SDK LICENSE](https://raw.githubusercontent.com/e2b-dev/E2B/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/LICENSE) declares MIT; adjacent [pyproject.toml](https://raw.githubusercontent.com/e2b-dev/E2B/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/pyproject.toml) declares package `e2b` version **2.56.0** and MIT. This supplies the missing package-local source evidence behind B31, rather than applying the root repository license to every subpackage. B33's historical root-file observation remains recorded. No wheel or dependency bundle was inspected; this finding does not decide terms for hosted sandboxes, infrastructure, dependencies, user workloads or a redistributed artifact. #60 retains publication-scope review.

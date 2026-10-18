@@ -112,3 +112,17 @@ Native #42 ← #40 was read back on 2026-10-17 and preserved. Other native relat
 ## CanIRun.ai intake (2026-10-16; acceptance pending)
 
 Evidence: [profile](competitors/canirun-ai.md), `src-canirun-ai`, and 48 `canirun-ai` matrix cells. #48/#49/#50 review classification and documentary scope; #66 owns scenario validation. #6/#10 review any technical implications; #41/#60 review rights before reuse. These are information/review inputs, with live issue assignees authoritative. No consumer response or approval is recorded.
+
+## #62 desk validation ledger — 2026-10-16
+
+This dated addendum adds the #62 rows without rewriting the tables above. Evidence offered: [benchmark validation](benchmark-validation.md), a desk pass with no benchmark run, prepared by a non-assignee contributor for the owner's review. None of the dispositions below has been accepted. Both #36 receivers are also #62 assignees, so the #36 acceptance must be recorded explicitly and cannot be inferred from that owner's review of #62. PR #83 has owner reviews, but no receiving disposition is inferred.
+
+| Producer → consumer | Live receiving owner | Precise finding / offered scope | Disposition; review link/date | Unresolved decision and exact next action |
+| --- | --- | --- | --- | --- |
+| #62 → #25 | CompleteDotTech, Mattycodes69 | No published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered; convention C2 | Pending; no receiving-owner response | Accept, narrow or reject C2; keep harnesses as candidates, not a ranking |
+| #62 → #36 | appletechie, PUSHINGSQUARES | Release identities, grader conflict on 79 general tasks, contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown), replication limits; gates and conventions C1 and C3 | Pending; explicit internal acknowledgement needed (#62 and #36 share appletechie and PUSHINGSQUARES) | Accept, narrow or replace the gates, C1 and C3; set the H1 margins; decide on a replication and its placement |
+| #62 → #40 | zwright8, tynamite | v1 `spec_model` has no benchmark or quality field; any display rule needs a field proposal | Pending; no receiving-owner response | Accept or reject the finding; route any field proposal through versioned review |
+| #62 → #41 | tynamite, PUSHINGSQUARES | Convention C1; reuse rights for Harness Bench tasks and results (no license, all rights reserved), with #60 | Pending; no receiving-owner response | Accept, narrow or reject C1; decide permitted reuse scope |
+| #62 → #39 | appletechie, PUSHINGSQUARES | Conditional: pricing of the prepared replication protocol, only if #36 wants a replication | Pending; conditional on #36 | Price endpoints or GPUs, judge calls and repeated runs if requested |
+
+Ownership refreshed from live assignees on 2026-10-17: #25 CompleteDotTech/Mattycodes69; #36 and #39 appletechie/PUSHINGSQUARES; #40 zwright8/tynamite; #41 tynamite/PUSHINGSQUARES. All five dispositions remain pending; appletechie explicitly withheld #36/#39 acceptance in the PR review.

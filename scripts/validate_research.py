@@ -42,7 +42,7 @@ def schema_errors(payload, schema):
 def public_source(uri):
     try:
         value = urlsplit(uri)
-        host = value.hostname or ''
+        host = (value.hostname or '').removesuffix('.')
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
         return value.scheme in {'http', 'https'} and bool(host) and not reserved and not value.username and not value.password
@@ -99,7 +99,7 @@ def intake_errors(catalog, pricebooks):
                 errors.append(f'{ident}: catalog ID/version does not resolve')
             if not public_source(rate['provenance'].get('source_uri')):
                 errors.append(f'{ident}: rate needs a real public source URL')
-            if rate.get('valid_until') and datetime.fromisoformat(rate['valid_until'].replace('Z', '+00:00')) <= datetime.fromisoformat(rate['valid_from'].replace('Z', '+00:00')):
+            if rate.get('valid_until') and datetime.fromisoformat(rate['valid_until'].upper().replace('Z', '+00:00')) <= datetime.fromisoformat(rate['valid_from'].upper().replace('Z', '+00:00')):
                 errors.append(f'{ident}: valid_until must follow valid_from')
     return errors
 

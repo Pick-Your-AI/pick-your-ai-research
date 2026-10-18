@@ -36,6 +36,8 @@ python -m pip install -r requirements-research.txt
 python -m unittest discover -s contracts/v1/tests -v
 python -m unittest discover -s tests -v
 python scripts/validate_research.py
+python scripts/validate_market_research.py
+python prompts/mobile/validate_prompts.py
 ```
 
 To inspect one payload separately:
@@ -58,3 +60,19 @@ The 21 original tests exercise the synthetic contract examples. They are not a s
 ## What belongs in Git
 
 Commit small textual research notes, sanitized structured proposals, source manifests, schemas, generators, and regression fixtures. Keep fixtures clearly synthetic. Store raw crawls, large datasets, model weights, recordings, private documents, and credentials outside this public repository. Manifest URLs must be stable locators without signed query strings or credentials; record how authorized users obtain access. A checksum describes an artifact, not permission to redistribute it.
+
+## Pre-merge issue-closure check
+
+Immediately before each merge, fetch the **current PR body, commit messages and linked-issue state**, even when CI already passed. GitHub recognizes closing keywords in PR descriptions and commit messages; plain-English negation does not provide a safe cancellation mechanism. A range can still contain a closing reference to its first issue. See [GitHub's linking documentation](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue) (checked 2026-10-18).
+
+For partial work, use `Refs` and write that the issues remain open. Remove keyword/reference combinations from negated sentences, quotations and examples in PR metadata. Inspect manually linked issues too: this text check cannot see or unlink them.
+
+Save the freshly fetched PR body and commit messages as local UTF-8 text files, then run:
+
+```bash
+python scripts/check_closing_directives.py /tmp/pr-body.txt /tmp/commit-messages.txt
+```
+
+The conservative checker rejects detected directives by default. For an intentional closure, first verify every acceptance criterion and required receiving-owner receipt. Put each intended directive on its own unindented plain line in an isolated paragraph containing only reviewed directives; pass its exact target with `--allow '#123'` (or the exact repository-qualified reference/issue URL). Repeat for each reviewed target. An allowlist is a reviewer declaration, not proof of completion. Negated, ranged, prose-embedded or indented directives still fail even if a target is allowed. Fenced examples remain ineligible across blank lines, including unclosed fences.
+
+This offline check uses a deliberately limited detector, not GitHub's full Markdown/linking parser. Passing it does not certify all issue links, current permissions or acceptance. Re-read live metadata and any proposed merge message before the expected-head merge. Afterward verify intended issue states **and Project statuses**; reopening an accidentally closed issue does not prove its Project status was restored. Report inaccessible Project fields without bypassing access restrictions.
