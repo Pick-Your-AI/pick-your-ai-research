@@ -17,7 +17,7 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 9.6 | Comparison fields defined with type, unit, and evidence requirement | [hosting.md](hosting.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 9.7 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [hosting.md](hosting.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 9.8 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [hosting.md](hosting.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 9.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #14/#15 @zabyxc01, #27 @CompleteDotTech, #31 @appletechie, #37/#39 @PUSHINGSQUARES | Partial scoped receipts: #10/#27/#31; #14/#15/#37/#39 pending; other co-owner scope separate |
+| 9.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #14/#15 @zabyxc01, #27 @CompleteDotTech, #31 @appletechie, #37/#39 @PUSHINGSQUARES | Scoped #10/#27/#31 receipts plus appletechie #15 boundary / #37 integration-pending / #39 constraints; #14, substantive #15 and other co-owner scopes separate |
 | 9.10 | Open questions recorded with a named follow-up owner | [hosting.md](hosting.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 10.1 | Sizing method with assumptions and uncertainty documented | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 10.2 | Measured values cite their source and conditions; estimates are labelled | [gpu-compute.md](gpu-compute.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
@@ -84,3 +84,14 @@ The note records appletechie's actual headroom/note-only, #33 and #39 responses
 at their reviewed revision; Mattycodes69's methodology disposition, future
 placement and PUSHINGSQUARES's cost scope remain separate. No criterion is
 marked accepted by these tests or this reconciliation.
+
+## #9 regional/billing continuation (2026-10-18)
+
+The [hosting recommendation](hosting.md#proposed-initial-regional-scope-and-expansion-gates-2026-10-18)
+proposes initial regional samples, named expansion triggers and explicit
+account/stock/network/rate evidence gates. H34â€“H37 are separately dated source
+rechecks; original rates, catalog scope and source dates are preserved. This
+prepares 9.3/9.5/9.10 without asserting owner adoption. For 9.9, appletechie's
+actual #15/#37/#39 responses retain their limits; #14 and the substantive
+product/remaining co-owner decisions remain unresolved. No issue checkbox or
+Project metadata changes.
