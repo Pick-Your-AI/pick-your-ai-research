@@ -2,7 +2,7 @@
 
 Refs #48. Original documentary checks: 2026-10-18 (Asia/Shanghai); current-main reconciliation and correction review: 2026-10-18 (UTC). Partial contribution for review; no issue acceptance is asserted.
 
-The original audit and receipt-only sections retain their PR #214/#231 bases, counts and validation records. The [later catalog and summary reconciliation](#2026-10-18-catalog-and-summary-reconciliation) below adds narrowly dated source evidence and reader-facing corrections; it does not repeat the delivered audit or transfer old review acceptance to a new head.
+The original audit and receipt-only sections retain their PR #214/#231 bases, counts and validation records. The [later catalog and summary reconciliation](#2026-10-18-catalog-and-summary-reconciliation) below adds narrowly dated source evidence and reader-facing corrections. The [current seed and receipt readback](#2026-10-18-seed-and-receipt-readback) records the subsequent bounded source pass and T4 receipt; historical acceptance maps and pending requests below describe their stated revisions.
 
 ## Revision, authority and writer boundary
 
@@ -202,3 +202,59 @@ On 2026-10-18, the integrated contribution was checked with **Python 3.12.14** i
 A focused preservation check found exactly five changed files: the other 32 entity records, all entity/source IDs and ordering, original dates, classifications, feature flags, prices and prior source observations/rechecks remain unchanged. Only CanIRun.ai's five named fields plus its dated discovery record and the two appended source rechecks change the structured records. The resulting counts are 33 entity discovery records, 43 source rechecks and 100 claims. New local Markdown file and heading links resolve. No new test was added for this bounded research/documentation change.
 
 An independent agent re-read the pinned CanIRun.ai and llmfit primary files and metadata and inspected this five-file diff. Its review found an incorrect GPUs.io source-record locator in the summary; the locator was corrected, and the follow-up review reported no remaining blocker in its changed-claim and history-preservation scope. The synchronized base leaves those reviewed changes intact. This is an independent agent review, not a maintainer approval or receiving-owner disposition. Automation checks repository integrity, not source truth, reuse rights, runtime behavior, freshness or owner acceptance. The four validators and whitespace check were also rerun after recording these results.
+
+## 2026-10-18 seed and receipt readback
+
+This continuation starts from accepted main `301b7c9` and preserves the prior audit and all original observations. GitHub still lists Mattycodes69 and appletechie as #48 co-assignees. A live API read found no native child or blocked-by issue for #48. The current work remains discovery research; #49's matrix, #50's profile experiments, #66's product tests and #59's canonical receipt ledger retain their existing boundaries.
+
+### Five-seed source pass
+
+All five operational seed sites were read again on 2026-10-18. The five appended `sources.json` rechecks have stable IDs, claim-specific primary URLs, publishers, access dates, evidence classes, versions, regions, confidence, method and rights/behavior limitations. They preserve the earlier 43 rechecks and 100 claims in place. The resulting source register has 58 source IDs, 48 rechecks and 107 claims; entity, profile and feature-cell counts remain 33, 14 and 1,584.
+
+| Seed / recheck ID suffix | Source read and bounded result | What remains unknown |
+| --- | --- | --- |
+| BenchLM / `benchlm` | [Selector](https://benchlm.ai/tools/llm-selector): job description, editable constraints, dataset-based shortlist and reusable links are documented vendor claims. | Recommendation correctness, product execution and complete stack coverage. |
+| Harness Bench / `harness-bench` | [Homepage](https://www.harness-bench.ai/): Harness Bench Team attribution, linked Qihoo360 repository and final-artifact scoring are documented. | Benchmark reproduction, dataset rights and legal operating entity. |
+| llmfit.org / `llmfit` | [Seed site](https://www.llmfit.org/): local hardware-fit CLI/TUI and a link to AlexsJones/llmfit are documented. | Seed-domain operator and reciprocal upstream affiliation; no software was installed. |
+| Local AI Planner / `local-ai-planner` | [Planner](https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/): goal/hardware/runtime controls and explicitly heuristic estimates are documented. | Calibrated fit/speed accuracy, runtime topology and a successful workload. |
+| Flocci / `flocci` | [Ask](https://aitools.flocci.in/ask), [Stack](https://aitools.flocci.in/stack) and [home](https://aitools.flocci.in/): job-to-tools/ordered-workflow claims and Flocci Technologies attribution are documented. | Actual generated workflow, constraint handling, saved/exported result and reuse permission. Ask/Stack extraction exposes only brief introductory text. |
+
+Each recheck ID is `mr01-seed-readback-20261018-` plus the suffix above. This verifies documentary coverage of the already selected working list. It does not recover the undocumented original seed intent, create a new seed selection, promote any feature grade or establish that a complete substitute exists. The current direct-substitute answer remains **unverified**: BenchLM and Flocci document material selection/workflow overlap, while end-to-end scenario evidence belongs to #50/#66. Absence of a demonstrated substitute is not evidence that none exists.
+
+### Actual reviews and their scope
+
+[PR #284](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/284) delivered the later five-file catalog/summary correction to main on 2026-10-18. CompleteDotTech's [review 5562309563](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/284#pullrequestreview-5562309563) on `9854f56d41927c7a13867fb652e235487dbc871a` accepts that bounded source/history correction for normal checked delivery. It explicitly leaves original seed intent, reuse permission and other receiving decisions unresolved. It does not accept this new seed-readback contribution.
+
+The separate [T4 receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6248122696), authored by CompleteDotTech at 2026-10-18T09:15:34Z, **accepts #48 -> #25 narrowed to discovery and comparison context**. Its reviewed input was main `9192d5d6994b644ebbb81344300fda48db6d29a8`, with a byte-identical artifact check at `f0387630f00a95d3a78dfedba54abc96c8b833d0`; the reviewed competitor blob was `cdff0760ac405cc66034d3ef12cdfd29d7069e01`. It supplies no exact framework/model/endpoint/parser/tool tuple, new catalog requirement, runtime integration, source-use permission or other co-owner response.
+
+The current-main competitor blob is `83464bb659b0c33c0fef4af439c812b38f1cff14`. A record-by-record comparison found only `canirun-ai` changed since that receipt; all ten T4-related entries are identical. This establishes preservation of the reviewed T4 slice while retaining the actual receipt's revision. It does not retroactively accept the changed CanIRun record or these new source rechecks. The receipt is linked here rather than appended to #59's separately owned canonical ledger.
+
+### Current criterion and decision map
+
+| Live #48 criterion | Delivered coverage / check | Remaining decision for issue completion |
+| --- | --- | --- |
+| Verify all five seeds | Five operational sites have fresh documentary rechecks above; earlier identity boundaries remain. | Confirm whether the documented working list satisfies the original-seed requirement. Original intent is still undocumented. |
+| Classify at least 30 distinct resources | 33 distinct stable IDs and existing classifications; complete source references and matrix dimensions retained. | Independent evidence acceptance of the delivered research, without treating every entry as a complete competitor. |
+| Record entity boundaries and unknowns | All 33 have dated discovery records; seed/upstream/operator, code/data/service and historical-observation boundaries remain explicit. | No missing operator or permission is filled by inference. Review the changed evidence at the final submitted revision. |
+| Select 10-15 material deep dives | Fourteen-entry rationale and existing #50 co-owner working-list receipts are preserved. | Coordinator confirmation of the working selection; any community-resource replacement/addition remains a separate #50 decision. Full profile execution is not claimed here. |
+| Link every significant conclusion to evidence or an explicit hypothesis | Seven fresh claims link their exact primary pages; substitution conclusions are explicitly documentary or unverified and routed to #50/#66. | Independent review of this contribution and acceptance of the landscape evidence in its stated historical scopes. No blanket re-verification of older claims. |
+| Relevant owners review handoffs; unresolved decisions named | #6/#50 scoped receipts retained; actual #25 T4 receipt added above. #41 retains its earlier conditional provenance receipt. | #6: PUSHINGSQUARES; #10: Mattycodes69/appletechie; #25: Mattycodes69's separate scope; #41: tynamite/PUSHINGSQUARES on the appended provenance and intended-use boundaries. Existing #59 writer reconciles the T4 receipt separately. |
+| Checks pass; reviewer accepts evidence before Done | Current Python 3.12 workflow and preservation checks are required on the submitted revision. | Required independent evidence/coordinator review and the named receiving decisions. Green checks and a partial merge do not close #48. |
+
+The original five-seed question and the named independent reviews are external acceptance decisions. No issue checklist, assignee, priority, Project field, canonical ledger or acceptance requirement is changed by this contribution.
+
+### Validation of the seed and receipt continuation
+
+The worktree was fast-forwarded from `301b7c9cccaa6c5ab8a3c72be5a8dfc23893f554` to main `a46a06b7315ba10b3d469bea82795f0c200a1da3`. The incoming workflow/handoff-validator/test changes were disjoint from this two-file contribution and were read before the integrated checks. An isolated Python **3.12.12** virtual environment installed the pinned dependencies with `python -m pip install -r requirements-research.txt`.
+
+| Exact command | Actual integrated result |
+| --- | --- |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
+| `python -m unittest discover -s tests -v` | 515 run, 512 passed, three Linux parent-death-cleanup cases skipped on macOS |
+| `python scripts/validate_research.py` | 78 proposals, three pricebooks and external evidence metadata passed |
+| `python scripts/validate_market_research.py` and `python -O scripts/validate_market_research.py` | Both passed: 33 entities, 1,584 cells, 20 issues |
+| `python scripts/validate_handoff_audit.py` | Passed: 101 rows, 98 declared pairs |
+| `python prompts/mobile/validate_prompts.py` | Passed: two Projects, 258 issues, 36 epics, 906 criteria, 880 steps |
+| `git diff --check` | Passed |
+
+A separate preservation check verified all 58 ordered source identities and original fields, all 43 prior rechecks/100 claims, exactly five appended rechecks/seven claims with unique IDs and matching claim/reviewed URLs, the unchanged ten-entry T4 slice and the local section links. The complete two-file diff was self-reviewed against the actual seven source-page claims and authenticated GitHub receipt; the review link and its numeric ID were checked against the API. No test was added for this evidence-only change. Automation checks structural integrity and references; source truth, rights, runtime behavior and independent acceptance remain separate. The final PR pins its submitted head and review state.
