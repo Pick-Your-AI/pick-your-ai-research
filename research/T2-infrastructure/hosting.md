@@ -308,3 +308,43 @@ Prepared from main `e3078c5ff529ccf27bb4cd5a83ac7fe35b4a560c` with Python **3.12
 | `git diff --check` | Passed |
 
 Only this record, the T2 ledger and the #9 acceptance-map entries change. No new test is needed for this documentation-only contribution. H34–H37 are source checks with the dates and limits above; original source observations, catalog facts, pricebooks, frozen v1 and market ledgers are unchanged. Automation checks integrity, not source truth, rights, current quota/stock, invoice behavior or consuming-owner acceptance. No account probe, reservation, paid service or deployment was performed. Regional coverage adoption and the named remaining consumer decisions stay open.
+
+## Relational and in-memory software identities (2026-10-18)
+
+The [#9 co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewed at historical main `66b46d4`, correctly identified missing relational and in-memory storage records. This contribution adds two **software identities** in the existing frozen-v1 `storage` kind. It provides candidates for that identity gap; the receipt does not become acceptance of these new records.
+
+| Catalog proposal | Exact publisher release and immutable source commit | Evidenced v1 field | Scope |
+| --- | --- | --- | --- |
+| [PostgreSQL](../../catalog/proposals/t2-storage-postgresql.json), ID `postgresql` | `18.6`; tag `REL_18_6` resolved to `724edf9bde9d356724ad384a2e196edc3c9f80f7` | `storage_type: relational` | Database software; no selected database instance or managed service |
+| [Redis Open Source](../../catalog/proposals/t2-storage-redis-open-source.json), ID `redis-open-source` | `8.10.2`; tag `8.10.2` resolved to `498ecd0d6d007db11ddb3aea9428552598a78622` | `storage_type: in_memory` | Primarily in-memory database software; Redis Software and Redis Cloud remain separate products |
+
+Both releases and their type claims were read from the primary sources below at **2026-10-18T06:04:43Z**. `version` records the publisher release, while `updated_at` and `checked_at` record this research capture. The catalog's `active` status records the released candidate at this capture; it does not promise future support or certify the installed version. The [PostgreSQL release announcement](https://www.postgresql.org/about/news/postgresql-186-1711-1615-1519-1424-and-19-beta-3-released-3365/) and [Redis release](https://github.com/redis/redis/releases/tag/8.10.2) were separately checked as released versions; they are not substituted for the immutable file pins.
+
+### Source-to-field evidence
+
+All new provenance remains `unverified`: primary-source checking supplies identity and documented characteristics, without independent installation or workload reproduction.
+
+| Evidence | Primary source and inspected Git blob | Claim and limit |
+| --- | --- | --- |
+| H38 | [PostgreSQL README](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/README.md), `7352a90a72373d62c469defba3f62185673f5894` | Publisher describes an object-relational database management system; supports the relational type only |
+| H39 | [PostgreSQL configure.ac](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/configure.ac), `527437e0d207ccec4ac899b1d2e646b9f4aa78e4` | `AC_INIT` identifies version `18.6`; no build or runtime was executed |
+| H40 | [PostgreSQL COPYRIGHT](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/COPYRIGHT), `0a397648dcd3c2177acc58bd7daecd11ad64be62` | Software/documentation permission carries notice and disclaimer requirements; it supplies no infrastructure rate or rights over user data |
+| H41 | [Redis README](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/README.md), `0bc4d0bb9d0cc8677c4dd6228cf3d8365e2d6e27` | Primary in-memory backing and Open Source / Software / Cloud product boundaries; marketing latency and workload claims are not admitted |
+| H42 | [Redis version header](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/src/version.h), `9b227053661510c47036bee2045ef3602681f033` | `REDIS_VERSION` identifies `8.10.2`; no installed-build or module inventory is asserted |
+| H43 | [Redis LICENSE.txt](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/LICENSE.txt), `4657905cf699d1d5ac96a07d0969bc79e27c4eec` | Header identifies RSALv2 / SSPLv1 / AGPLv3 alternatives for Redis 8 code, separately from older BSD releases; it does not make all alternatives permissive or choose an intended-use licence |
+
+The optional `license` object is omitted from both proposals. The evidence above records the actual sources and conditions without manufacturing a universal permission boolean. Redis's bundled components and a selected licence alternative require their own applicable notices and use assessment. This note paraphrases bounded source facts with attribution; it includes no upstream source distribution.
+
+### Selection and receiving boundaries
+
+- `hosting_ref`, `region`, `encryption_at_rest` and `max_capacity_gb` are omitted because this software-identity review supplies no selected placement, configuration or capacity evidence. `billing_class` remains `unknown`; software availability does not price the host, storage medium, backups, replication, support or operations.
+- The `in_memory` classification does not assert that Redis has no persistent files. Its [documented persistence modes](https://redis.io/docs/latest/management/persistence/), accessed 2026-10-18, are separately configurable. A selected instance still needs its persistence, eviction, backup and deletion evidence; a software catalog ID does not prove data retention or erasure.
+- Existing T4 PostgreSQL/Redis patterns, ADK and LangGraph catalog records are unchanged. Neither proposal proves that a particular library, driver, extension, module or protocol configuration works with these exact releases. #15 retains vector-product and pgvector review; #28 retains memory semantics; #31 retains checkpoint/training requirements; #37 retains the selected deployment.
+- A shared software ID can identify multiple separate database instances. It provides no shared-instance, tenant-isolation, credential, ACL or residency guarantee. The frozen-v1 memory/storage field and rule-extension questions remain with #40; no unsupported reference or new field is added to a T4 item.
+- The missing on-premises/edge host identity from the original receipt remains separate. These software records do not supply a physical host or managed offering.
+
+#9's current owners review these exact candidates and their identity-only scope. #28/#15 consumers can evaluate the pinned software as new inputs while preserving the historical receipt. #39 owns selected deployment cost coverage; #40/#41 retain the contract and provenance boundaries. No receiving disposition, successful connection, benchmark, encryption configuration, current capacity, Pricebook, ResourceEstimate or issue completion is asserted.
+
+### Validation
+
+Checked against base `f9ef1b551336615c04a4bc892a0db2e91fab9d11` with Python 3.12.14 and the pinned research dependencies: 21 contract tests, 241 repository tests, research intake (76 CatalogItems / 3 Pricebooks), market integrity (33 entities / 1,584 cells / 20 issues), handoff integrity (101 rows / 98 declared pairs), mobile prompt validation (258 issues / 36 epics / 906 criteria / 880 steps), and `git diff --check` pass. Manual source-to-field review confirms both unique catalog IDs, the exact versions and types, the six immutable source paths, and omitted unevidenced selection fields. These checks establish intake structure and repository integrity; no database runtime test is claimed.
