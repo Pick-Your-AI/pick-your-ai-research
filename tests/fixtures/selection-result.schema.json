@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-13 identity rejection result proposal; not an adopted contract",
+  "oneOf": [
+    { "$ref": "#/$defs/rejected" },
+    { "$ref": "#/$defs/evaluated" }
+  ],
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "severity": { "enum": ["info", "warning", "error"] },
+    "outcome": { "enum": ["pass", "fail", "unknown", "skipped"] },
+    "rejection": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reason_code", "selection_id"],
+          "properties": {
+            "reason_code": { "const": "duplicate_selection_id" },
+            "selection_id": { "$ref": "#/$defs/text" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reason_code", "kind", "role"],
+          "properties": {
+            "reason_code": { "const": "ambiguous_selection_role" },
+            "kind": { "$ref": "#/$defs/text" },
+            "role": { "$ref": "#/$defs/text" }
+          }
+        }
+      ]
+    },
+    "rejected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal_version", "identity_policy", "status", "phase", "rule_id", "severity", "rejection"],
+      "properties": {
+        "proposal_version": { "const": "cd13-result-0.1" },
+        "identity_policy": { "const": "strict_build_wide" },
+        "status": { "const": "rejected" },
+        "phase": { "const": "identity_preflight" },
+        "rule_id": { "$ref": "#/$defs/text" },
+        "severity": { "$ref": "#/$defs/severity" },
+        "rejection": { "$ref": "#/$defs/rejection" }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection_id", "outcome", "reason"],
+      "properties": {
+        "selection_id": { "$ref": "#/$defs/text" },
+        "outcome": { "$ref": "#/$defs/outcome" },
+        "reason": { "enum": ["not_applicable", "applicability_unknown", "eligible_evidence_missing", "assertion_false", "assertion_true"] }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "severity", "outcome", "reason", "findings"],
+      "properties": {
+        "rule_id": { "$ref": "#/$defs/text" },
+        "severity": { "$ref": "#/$defs/severity" },
+        "outcome": { "$ref": "#/$defs/outcome" },
+        "reason": { "enum": ["counterexample", "unresolved_selection", "all_applicable_pass", "none_applicable", "no_enabled_selections"] },
+        "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } }
+      }
+    },
+    "evaluated": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal_version", "identity_policy", "status", "result"],
+      "properties": {
+        "proposal_version": { "const": "cd13-result-0.1" },
+        "identity_policy": { "const": "strict_build_wide" },
+        "status": { "const": "evaluated" },
+        "result": { "$ref": "#/$defs/result" }
+      }
+    }
+  }
+}

@@ -55,7 +55,7 @@ Any truncation or compaction must first have evidenced support and an explicitly
 
 ## Current KV-cache handoff to #10
 
-This is an input contract for [#10's existing inference-sizing method](../T2-infrastructure/gpu-compute.md), not a replacement formula or a runtime result. The method's dense full-attention scope, architecture exceptions, per-device placement, explicitly unapplied reserve/headroom and uncalibrated evidence status remain intact. The actual [#10 completion and receiving receipts](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250602587) complete that research artifact without proving a selected Build's KV capacity.
+This is an input contract for [#10's existing inference-sizing method](../T2-infrastructure/gpu-compute.md), not a replacement formula or a runtime result. The method's dense full-attention scope, architecture exceptions, per-device placement, explicit reserve/headroom inputs and their unknown or unapplied state when absent, and uncalibrated evidence status remain intact. The actual [#10 completion and receiving receipts](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250602587) complete that research artifact without proving a selected Build's KV capacity.
 
 | Required handoff group | Type / unit / evidence and interpretation |
 | --- | --- |

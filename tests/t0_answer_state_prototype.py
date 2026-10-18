@@ -21,6 +21,7 @@ from typing import assert_never
 from jsonschema import Draft202012Validator, ValidationError
 
 from tests.selection_quantifier_prototype import Outcome
+from tests.t0_known_value_schema import known_value_validator
 
 
 SCHEMA_PATH = Path(__file__).with_name("fixtures") / "t0-answer-states.schema.json"
@@ -301,11 +302,13 @@ class AnswerIndex:
                 value = value[index]
             else:
                 raise ValueError("cannot traverse a scalar answer")
-        Draft202012Validator.check_schema(value_schema)
+        validator = known_value_validator(value_schema)
         try:
-            Draft202012Validator(value_schema).validate(value)
+            validator.validate(value)
         except ValidationError as error:
             raise ValueError(f"invalid provided value at {pointer}: {error.message}") from error
+        except RecursionError as error:
+            raise ValueError("invalid known-value schema: recursive application did not resolve") from error
         return Answer(state, deepcopy(value), record.get("source"), source_path)
 
     def predicate(self, pointer, value_schema, predicate) -> PredicateResult:

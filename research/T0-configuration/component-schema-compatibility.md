@@ -335,6 +335,99 @@ The final schema/generator/ruleset, full field registry and affected-owner
 handoffs remain separate successor-release work. #42/#114's recorded
 prerequisite is unchanged by this synthetic normalization experiment.
 
+#### CD-1 known-value schema admission correction (2026-10-18)
+
+This is the bounded response to **constraint 2** in the
+[existing owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407),
+under the [separate implementation reservation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251633973).
+The earlier normalization and rule-outcome records above retain their original
+scope. The remaining defect was at the supplied **field schema** boundary:
+`{"enum": ["none", "session", "persistent", "unknown"]}` admitted a provided
+`"unknown"` as a known value. Actual original-reader probes also admitted direct
+`const`, locally referenced vocabularies, object properties and array items.
+A typed `memory != "none"` assertion could consequently pass for the in-band
+marker. Correct typed negation cannot recover an answer state already lost by
+an unsafe field vocabulary.
+
+The [test-only schema admission helper](../../tests/t0_known_value_schema.py)
+now checks the local known-value profile before `AnswerIndex.read` validates
+any provided value. It rejects `"unknown"` in finite `enum`/`const` value
+declarations, including leaves of structured constants and nested field schemas.
+The **schema** is rejected even when the current supplied answer happens to be
+`"persistent"`; the reader does not silently remove an enum member, substitute a
+value or rewrite the schema. The predicate never runs after this rejection.
+The encoding remains `cd1-0.1`, and original answer bytes and the caller's schema
+remain unchanged. No production field, wire, generator or ruleset is adopted by
+this test-only admission profile.
+
+| Input boundary | Result |
+| --- | --- |
+| Provided value with finite vocabulary containing `"unknown"` | Input error before a value predicate or terminal finding |
+| Explicit `unknown`, `missing`, `withheld` or `not_applicable` record | Existing typed state, source path and rule policy; no value-schema check or value callback |
+| Known enum/constant, including false, zero, empty or explicitly nullable values | Ordinary schema validation, exact value/type retention |
+| Literal `"unknown"` under a free-text string schema | Provided text; never silently converted to an answer state |
+| `unknown` as an object property name, description, example or default annotation | Not a provided-value vocabulary declaration; no default is applied |
+| Direct `not: {const: "unknown"}` or `not: {enum: [...]}` exclusion | Ordinary exclusion semantics; the excluded value still fails field validation |
+
+The supported schema profile is explicit. It uses draft 2020-12, follows
+document-local JSON Pointer `$ref` targets (including RFC 6901 escaping and URI
+fragment decoding) at supported schema locations, and inspects the standard
+object/array applicators,
+`allOf`/`anyOf`/`oneOf`, conditional locations and dependent schemas. Unused
+`$defs` and annotations are not applied field declarations. Property-name
+validation retains a separate context, so a reference used for names cannot
+hide the same vocabulary when it is also used for values. Ordinary finite-data
+recursive schemas remain usable; a nonprogressing recursive application is a
+controlled input error, never a predicate result.
+
+This is a conservative **admission profile**, not a JSON Schema equivalence or
+satisfiability solver. A finite exclusion is admitted only when the immediate
+`not` body consists solely of `enum` or `const` and is outside another negation.
+Other occurrences of the sentinel in finite declarations, including conditional
+or compound-negation forms, require an explicit field-schema rewrite; the
+normalizer does not infer that another keyword makes them unreachable. Named
+anchors, external/dynamic references, nested schema resources and other dialects
+are outside this profile and reject before reference retrieval or predicates.
+They cannot bypass the local vocabulary inspection. Root schema identifiers and
+supported local references retain their ordinary meaning. This changes no
+frozen contract resolver or other schema validator.
+
+Independent review found that the first candidate inspected a reference target
+without inspecting resource-bearing ancestors skipped by its pointer. A jump
+through an unused `$defs` resource could make the admission helper inspect the
+root's known enum while the actual validator used the nested resource's
+`enum: ["unknown"]`. The original candidate admitted the marker and executed
+the predicate; its otherwise successful test receipts do not cover this gap.
+The correction tracks schema nodes separately from schema-map/array containers
+through the full pointer path and rejects any nested resource ancestor. A field
+or definition literally named `$id` remains a normal name, not a resource
+keyword. Pointers into annotations or container maps are outside the supported
+schema-location profile; no arbitrary dictionary is promoted to a field schema.
+
+[Twenty-two additional synthetic methods](../../tests/test_t0_known_value_schemas.py)
+exercise the actual reader, predicate and typed terminal-rule boundary, including
+direct and nested sentinel vocabularies, known-value controls, exact free text,
+literal property names, annotations, local/escaped/shared references, unused
+definitions, recursion, direct exclusions and negation counterexamples. The
+original six-method red run had 15 failed rejection subcases with the free-text
+control passing. Normal/optimized and final source/receiving runs retain their
+own PR receipts; a proposal or test count is not empirical source evidence.
+
+Primary syntax checked **2026-10-18**: JSON Schema validation
+[sections 6.1.2–6.1.3](https://json-schema.org/draft/2020-12/json-schema-validation#section-6.1.2)
+define finite enum/constant equality, while core
+[sections 10.2.1–10.2.2](https://json-schema.org/draft/2020-12/json-schema-core#section-10.2.1)
+define applicators, negation and conditional behavior. Those standards do not
+reserve the word `unknown`; excluding it from known answer vocabularies and
+restricting this local profile are project decisions from the cited disposition.
+
+The [parent-visibility correction](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251507908)
+retains its separate lookup/source-path scope. This correction changes only the
+provided-value schema-validation footer in the existing reader. Preset
+provenance, the complete owner-reviewed field registry, successor migration,
+affected-consumer adoption and the full #40/#42 acceptance remain separate.
+The workload-note and M1/W-R11 writer retains its dictionary/activation scope.
+
 ### CD-1 withheld-child visibility in parent reads (2026-10-18)
 
 Constraint 5 in [the current #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
@@ -367,6 +460,67 @@ This corrects visibility in the existing test-only reader. It adds no wire
 field/state, default, evidence qualification, preset policy or successor
 adoption. The other CD-1 constraints and full #40/#42 criteria remain open.
 
+### CD-1 explicit preset attribution candidate (2026-10-18)
+
+Constraint 6 in [the #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a constrained `preset:<name>` source and an explicit assumption flag.
+The original `cd1-0.1` schema admits arbitrary nonblank source text and has no
+assumption member. The separate [0.2 schema](../../tests/fixtures/t0-answer-attribution.schema.json),
+[synthetic example](../../tests/fixtures/t0-answer-attribution.json),
+[reader](../../tests/t0_answer_attribution_prototype.py) and
+[regressions](../../tests/test_t0_answer_attribution.py) provide an explicit
+opt-in candidate. Original 0.1 schemas, fixtures, readers and callers retain
+their historical meaning; neither reader silently accepts the other version.
+
+Every 0.2 `provided` record must include an exact Boolean `assumption`. Its
+optional `source` must be `preset:<name>`, where this bounded candidate permits
+a 1–64-character ASCII name starting with a letter or digit and continuing with
+letters, digits, dots, underscores or hyphens. Whitespace, trailing control
+characters, URLs and arbitrary source labels are rejected. Broader preset-name
+vocabulary requires an explicit later candidate. Unresolved records retain the
+existing four states and cannot carry a value, source or assumption flag.
+
+`assumption: true` and `assumption: false` remain the caller's distinct explicit
+declarations. The reader infers neither from a source name, a missing source,
+the value's truthiness or another record. Both flags are valid with or without
+a preset source: preserving the origin does not determine whether the caller
+currently declares the value an assumption. Neither flag, nor a syntactically
+valid source, establishes accuracy, confirmation, eligible evidence, publisher
+identity or receiving-owner acceptance. No implicit false/default is supplied.
+
+The reader retains the original UTF-8 bytes. After strict 0.2 admission, it uses
+a private 0.1-shaped in-memory view only to reuse current pointer traversal,
+field validation and answer-state mechanics. That view is not an exported
+artifact, a changed identity or a migration of retained bytes. A provided
+nested value inherits its actual recorded ancestor's source and assumption;
+a missing member or unresolved answer receives no provided attribution.
+Current parent-visibility and overlap behavior is reused unchanged.
+
+The accepted original-token precision guard from [#359](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/359)
+also runs at this candidate's first JSON parse, before any private view is
+serialized. Otherwise an underflowed or excess-precision raw token could be
+rounded first and the downstream reader would see only the replacement number.
+Synthetic controls reject those tokens even in unread nested values before the
+normalizer is called, while preserving supported decimal/exponent values and
+exact JSON integers with their original bytes and explicit attribution.
+
+The typed predicate preserves the explicit flag/source through safe negation.
+The separate terminal wrapper keeps them alongside the unchanged typed rule
+finding and its causal source path, using only the callback actually responsible
+for the result. An unevaluated assertion is not called to obtain metadata.
+Fixed severity, unknown/skipped policy and lazy value validation remain with
+the existing rule evaluator; a false assumption flag cannot turn unresolved
+predicate evidence into a pass. This wrapper rejects callbacks that have
+already discarded attribution. Existing lossy adapters and consumers are not
+silently upgraded to the candidate.
+
+The synthetic cases cover both Boolean flags, absent sources, invalid/missing
+flags, whole-string source admission, original-byte preservation, exact nested
+causes, unresolved states, safe negation and both terminal policies. This
+addresses the test-only attribution mechanics of constraint 6. It changes no
+frozen v1 field, source grade, preset registry, field vocabulary or production
+wire format; successor adoption and the complete #40/#42 criteria remain open.
+
 ### CD-3 synthetic support-membership experiment (2026-10-18)
 
 The [normalized prototype](../../tests/support_membership_prototype.py) and
@@ -388,7 +542,7 @@ marker, merge independent support dimensions, or resolve catalog sources.
 
 | Eligible evidence for a requested value | Proposed member result |
 | --- | --- |
-| Documented supported member, without an equal-rank opposite claim | `pass`, evidence still `unverified`; exhaustiveness is unnecessary for this positive claim |
+| Documented supported member, without an equal-rank opposite claim | `pass`; `unverified` only when the used cohort has separately qualified checked-only provenance as specified below. Exhaustiveness is unnecessary for this positive claim |
 | Explicit unsupported statement, without an equal-rank opposite claim | `fail`; an exhaustive inventory is unnecessary for this negative claim |
 | Absent from a known list whose scoped source is exhaustive | `fail` |
 | Absent from an unmarked/non-exhaustive list, or the list itself is missing | `unknown`; a missing list is not a known empty exhaustive list |
@@ -445,9 +599,10 @@ separate. Frozen v1 and #42's prerequisite are unchanged.
 
 **Selected research design:** bind the corrected membership reducer through
 closed `x_t0_support_query` / `x_t0_support_result` envelopes at proposal version
-`cd3-0.2`. This is an explicit successor research candidate to historical
-`cd3-0.1`, not a reinterpretation or implicit migration of retained old bytes.
-The synthetic query version advances from `0.1.0` to `0.2.0`, so its scoped CD-1
+`cd3-0.3`. This is an explicit successor research candidate to historical
+`cd3-0.1` and the [requested-completeness correction in `cd3-0.2`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/349),
+not a reinterpretation or implicit migration of retained old bytes.
+The synthetic query version advances from `0.2.0` to `0.3.0`, so its scoped CD-1
 paths change too. The unchanged claim cohort retains its own `0.1.0` version.
 This reader rejects old or unsupported proposal versions; a current query
 cannot reuse answers stored under the prior query-version paths.
@@ -472,7 +627,8 @@ claim that the normalized-mechanics receipt also adopted this new wire format.
 | `supported` / `unsupported` | Provided unique string lists, possibly empty, or unresolved CD-1 states. The former is a positive inventory; the latter records explicit equal-rank negative claims in this cohort |
 | `exhaustive` | Provided Boolean or unresolved CD-1 state, separate from source eligibility. Only a known positive inventory plus eligible `true` completeness can support an absence-based negative |
 | Caller qualification | Exact Boolean or unresolved selection activation, plus four independently qualified input groups: applicability, requested values, requested completeness and cohort. Each omitted qualification is unresolved for that invocation; an answer's `source` label cannot qualify itself. Requested-completeness qualification is necessary only for the verdicts that require a complete requested set |
-| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context including all four qualifications, all six operands' state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. The existing `unverified` label behavior is retained with its unresolved policy boundary below; severity stays on the versioned query |
+| Checked-only cohort provenance | Separate caller-established `cohort_checked_only: true / false / null` for this exact scoped/versioned cohort. Only `true` supplies checked-only provenance; false or omitted/null supplies no grade. Eligibility, source strings, hashes and result flags cannot establish this fact |
+| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context including all four eligibility qualifications and checked-only provenance, all six operands' state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. `evidence_label` is `unverified` only for actually used, eligible, checked-only cohort evidence; otherwise it is null. Severity stays on the versioned query |
 
 **The negative-claim readiness decision is explicit.** The accepted reducer
 requires a concrete set of explicit negative claims. This encoding therefore
@@ -497,7 +653,8 @@ positive/negative claims remain disputed and unknown. ANY preserves
 its other unresolved rows when one member passes; ALL preserves them when a
 known counterexample fails. The committed synthetic ANY example contains one
 documented member, one unmarked omission and one equal-rank dispute. Its pass
-is scoped membership only, with `disputed: true` and `unverified` preserved.
+is scoped membership only, with `disputed: true` preserved and no evidence grade
+asserted (`evidence_label: null`).
 The example explicitly records a synthetic complete-request fact under its new
 query-version path; that marker is not inferred from the frozen catalog or
 claim lists. An unresolved or ineligible requested-completeness marker does not
@@ -519,10 +676,12 @@ digest guards reject terminal controls across the complete value.
 
 **Result consumption:** schema validation checks shape only. `verify_result`
 recomputes from the retained query/answers and the **caller's** selected scope,
-activation and eligibility inputs, then compares every reported field. A
+activation, eligibility and checked-only provenance inputs, then compares every reported field. A
 self-reported eligible flag, changed requested-completeness state/value, changed
 source/version/hash, removed disputed row or changed outcome cannot validate
 itself, even when the mutation leaves the membership verdict unchanged.
+Changing the result's provenance flag or grade cannot qualify that result;
+the verifier never obtains its caller context from the reported context.
 Result JSON formatting may vary;
 the original query and answer byte identities cannot. Returned data is detached
 from the reader. This is a consistency check, not a signature or evidence grade.
@@ -537,12 +696,40 @@ This format can name canonical API, managed or self-hosted component scopes,
 but a kind, digest or matching label proves no joint tuple support, activation,
 rights, currency, residency, runtime fit or independent verification.
 
-**Remaining evidence-label constraint:** completeness constraint 5 in the
-owner disposition is not resolved by this correction. The prototype's existing
-constant `unverified` label remains even where no check has run; that behavior
-must not be claimed as accepted evidence grading. Source/date/rank admission,
-real rule adapters (including `rule.precision.engine` and
-`rule.engine.model.format`) and frozen-rule adoption remain separate work.
+**Evidence-label correction (2026-10-18):** the earlier `cd3-0.2` correction left
+completeness constraint 5 in the owner disposition open. Against accepted main
+`4f1c22bac91783a00384b3037bb64b040250c072`, four regression methods produced 13
+failing subcases: the constant `unverified` label was attached to disabled,
+unresolved, missing-request, ineligible and merely eligible cases without a
+checked-only provenance fact. The separate [label regressions](../../tests/test_support_evidence_labels.py)
+retain these counterexamples and exercise the corrected boundary.
+
+The normalized reducer now receives `Evidence.checked_only` separately from
+eligibility; the binding receives the same fact as caller-only
+`cohort_checked_only`. This is a qualified input from the caller's actual #41
+review of that exact cohort, not an assertion that a field or fixture performs
+source checking. Only a true qualification **and actual use of eligible cohort
+evidence** can attach `unverified`. Skipped, unresolved-activation/scope,
+missing/empty-request and ineligible cases have no label. A missing positive
+inventory with no relevant explicit negative claim remains ungraded even when
+the caller supplied true. A provided unmarked inventory, exhaustive absence,
+documented member or explicit/disputed claim can carry the scoped checked-only
+label; unknown and disputed findings still retain their own reasons.
+
+Null means this prototype establishes no evidence grade; it never implies
+independent verification or a different grade. The checked-only fact does not
+change membership outcomes, findings, completeness, disputes or fixed severity.
+An answer's source string, an extra answer field or a result's own context cannot
+establish it. Each verification recomputes against the caller's separately
+supplied qualification, including when changing the grade leaves the outcome
+unchanged. Arbitrary grade strings, including `verified`, and non-Boolean
+qualification values are rejected. The prototype does not implement stronger
+grades, authenticate the caller or perform the external evidence review.
+
+This supplies the bounded label mechanic requested by constraint 5. Source/date/
+rank admission, real rule adapters (including `rule.precision.engine` and
+`rule.engine.model.format`), affected-owner adoption and frozen-rule adoption
+remain separate work.
 
 This bounded correction changes the existing test-only CD-3 reducer, binding,
 fixtures and regression cases. It leaves the accepted CD-1 normalizer,
@@ -799,6 +986,75 @@ The `all_enabled` reader and its schema below remain unchanged. Conditional
 requirements, real activation resolution, the disabled-alternative decision,
 structured wire rejections, CD-1/CD-6 binding and affected-owner adoption remain
 separate. Frozen v1 and #42's substantive #40 prerequisite are unchanged.
+
+### CD-13 structured identity rejection proposal (2026-10-18)
+
+Constraint 3 in the [#40 mechanics disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a reason-coded rejection result. Three actual synthetic probes of the
+accepted `79960b7` reducer produce a plain `ValueError`: duplicate selection IDs,
+two enabled selections sharing a role, and a disabled alternative sharing that
+role. All three correctly reject before any predicate. The missing piece is a
+machine-readable rejection boundary, not a change to those identity decisions.
+
+The [explicit result boundary](../../tests/selection_result_prototype.py),
+[candidate result schema](../../tests/fixtures/selection-result.schema.json) and
+[synthetic regressions](../../tests/test_selection_result.py) propose
+`cd13-result-0.1`. The caller must select this exact version; there is no implicit
+version, older-result reinterpretation or migration. The envelope explicitly
+pins `identity_policy: strict_build_wide`. This is a separate test-only proposal
+over normalized Python selections and a rule, not adoption of a final wire,
+Build reader, ruleset or native adapter.
+
+| Boundary result | Meaning |
+| --- | --- |
+| `status: rejected`, `phase: identity_preflight`, `reason_code: duplicate_selection_id` | One normalized selection ID appears more than once, including across kinds or disabled entries; the diagnostic retains that exact ID |
+| `status: rejected`, `phase: identity_preflight`, `reason_code: ambiguous_selection_role` | More than one selection has the same kind and role under the strict build-wide policy; the diagnostic retains that exact kind/role pair |
+| `status: evaluated` with the existing rule result | Identity preflight completed and the unchanged universal reducer returned its fixed severity, outcome, reason and individually attributed findings |
+
+A rejection retains the supplied rule ID and its fixed severity but has **no
+rule outcome or findings**. It is not a compatibility failure, an unknown
+evidence finding or an inapplicability skip. The two envelope branches reject
+extra fields and cannot combine a rejection with an evaluated result. The
+schema defines the proposed shape only: it does not authenticate a result or
+prove that its reported reason follows from any retained input.
+
+The shared preflight now raises a typed `IdentityPreflightError` carrying its
+reason and conflicting identity. It remains a `ValueError` subclass and keeps
+the exact original message text for existing Python callers. Identity checks,
+their order and the first encountered rejection are unchanged. This proposal
+does not promise an exhaustive conflict list or a canonical first conflict when
+several independent defects are reordered. Disabled and unrelated-kind entries
+still participate; roles remain scoped to kind. The separately reserved
+enabled-role policy needs its own explicit selection and review and cannot
+silently change this result version.
+
+Only the preflight call is inside the rejection handler. Rule evaluation runs
+outside it. A callback's `ValueError`, even one deliberately using the new typed
+exception, remains an execution error; a non-normalized predicate return still
+raises. No exception message or partially accumulated finding is emitted as a
+result. The boundary checks its Python argument shape, normalized identity text,
+exact Boolean activation and fixed severity before preflight. Unsupported
+versions and malformed Python calls remain API errors, not identity findings.
+This bounded shape check supplies no canonical Build/schema/reference validation,
+selection inventory completeness, source eligibility or truth of a callback.
+Those remain independently established caller preconditions.
+
+For valid inputs, every applicability/assertion truth pair, empty or disabled
+scope, all-inapplicable scope, counterexample and unresolved row retains the
+original reducer's result. Findings retain stable selection-ID order. Inputs
+are not rewritten, and returned documents do not share mutable findings across
+calls. The required-presence mode and existing typed binding retain their
+current APIs and policy; required absence is still distinct from universal
+empty-scope skipping.
+
+The regression cases exercise both rejection codes, disabled/other-kind
+ambiguity, all activation pairs and input orders, callback isolation, strict
+version selection, malformed Python arguments and mutually exclusive schema
+branches. Existing callers' exception compatibility and required-presence
+behavior have explicit controls. These are synthetic mechanics checks only.
+Frozen v1 is unchanged. A full untrusted-input reader, adopted result wire,
+source-bound verification, affected-owner integration and #42's substantive
+#40 prerequisite remain separate.
 
 ### CD-13 typed selection binding proposal (2026-10-18)
 
