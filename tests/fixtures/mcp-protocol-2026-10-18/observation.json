@@ -1,0 +1,117 @@
+{
+  "controller_python": "3.12.14",
+  "expectations_satisfied": true,
+  "machine": "x86_64",
+  "observations": [
+    {
+      "client_sdk": "1.30.0",
+      "echo": {
+        "echo": "pyai-synthetic-protocol-probe",
+        "server_sdk": "1.30.0"
+      },
+      "matches_expected": true,
+      "mode": "legacy",
+      "protocol_version": "2025-11-25",
+      "server_sdk": "1.30.0",
+      "status": "passed",
+      "tools": [
+        "synthetic_echo"
+      ],
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "1.30.0",
+      "echo": {
+        "echo": "pyai-synthetic-protocol-probe",
+        "server_sdk": "2.3.0"
+      },
+      "matches_expected": true,
+      "mode": "legacy",
+      "protocol_version": "2025-11-25",
+      "server_sdk": "2.3.0",
+      "status": "passed",
+      "tools": [
+        "synthetic_echo"
+      ],
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "echo": {
+        "echo": "pyai-synthetic-protocol-probe",
+        "server_sdk": "1.30.0"
+      },
+      "matches_expected": true,
+      "mode": "auto",
+      "protocol_version": "2025-11-25",
+      "server_sdk": "1.30.0",
+      "status": "passed",
+      "tools": [
+        "synthetic_echo"
+      ],
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "echo": {
+        "echo": "pyai-synthetic-protocol-probe",
+        "server_sdk": "2.3.0"
+      },
+      "matches_expected": true,
+      "mode": "auto",
+      "protocol_version": "2026-07-28",
+      "server_sdk": "2.3.0",
+      "status": "passed",
+      "tools": [
+        "synthetic_echo"
+      ],
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "echo": {
+        "echo": "pyai-synthetic-protocol-probe",
+        "server_sdk": "2.3.0"
+      },
+      "matches_expected": true,
+      "mode": "legacy",
+      "protocol_version": "2025-11-25",
+      "server_sdk": "2.3.0",
+      "status": "passed",
+      "tools": [
+        "synthetic_echo"
+      ],
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "errors": [
+        {
+          "code": -32602,
+          "type": "MCPError"
+        }
+      ],
+      "matches_expected": true,
+      "mode": "2026-07-28",
+      "server_sdk": "1.30.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    }
+  ],
+  "observed_utc": "2026-10-18T07:07:00.142527+00:00",
+  "platform": "Linux",
+  "scope": "synthetic-local-SDK-stdio-peers",
+  "script_sha256": "d5abac2d72b3754e3f522dac0c3d8f3f76161208d9db6ff0d980e0cda683cac6"
+}
