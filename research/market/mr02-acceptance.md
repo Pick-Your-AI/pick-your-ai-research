@@ -1,5 +1,27 @@
 # MR-02 acceptance and evidence audit
 
+## Current delivery status — 2026-10-18
+
+PR #87's matrix audit reached canonical `main` through merged PR #67; #98 added
+CanIRun.ai. At main `3850afee18e05aa7afca89485963fcea9e7adcaf` the inventory has
+33 entities, 48 dimensions and 1,584 cells. Main also includes #163's capability-test
+coverage checks. The validator uses explicit `MarketValidationError` checks and
+runs under both normal and optimized Python; the historical instruction below
+about Python assertions no longer applies.
+
+Issue #49 remains open. Delivery and structural validation do not settle claim
+truth or receiving-owner acceptance. The [2026-10-18 scoped disposition on #59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59)
+narrows #49's T5 use to information only and leaves independent taxonomy/claim
+acceptance separate from author integration. Consult live issue comments and the
+existing #59 writer's handoff ledger for exact recipients and revisions.
+
+## Historical submission record — 2026-10-16
+
+The remainder preserves the original proposal-branch audit, counts, owner snapshot
+and executed validation. Its present-tense branch/review statements describe that
+submission date, not current repository state. No historical test was rerun or
+receiving acceptance inferred by this status correction.
+
 Issue: [#49](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49). Assignee: @zwright8. Audit date: 2026-10-16. Status: corrected draft, awaiting evidence and consuming-owner review; **not Done**.
 
 ## Revision and boundary

@@ -1,5 +1,33 @@
 # MR-09 acceptance and remaining gates
 
+## Current delivery status — 2026-10-18
+
+PR #79 first merged into the market proposal branch; PR #67 subsequently delivered
+that branch to canonical `main`. PR #105 reconciled the feasibility record with
+merged main. These files are present at main
+`3850afee18e05aa7afca89485963fcea9e7adcaf`; a new #67 merge is no longer a delivery
+action. Issues #56 and #61 remain open.
+
+The [2026-10-18 receiving disposition on #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61)
+narrows #7/#11 acceptance to context/runtime accounting interfaces. It explicitly
+does not accept empirical completion, waive MoE/multi-GPU cases or supply error
+bounds. The evidence remains 15 bounded dense runs and zero matched
+competitor/runtime pairs. No hardware run was performed for this refresh.
+
+PR #83 is now a partial desk analysis against `main`, with appletechie's outstanding
+change request and separate #36/#39 receiving decisions. #65 has an active writer;
+its protocol and Bedrock input do not establish completed interoperability tests.
+The live #10 owner still decides ResourceEstimate placement/consumption. Preserve
+the #59 single writer for updating canonical handoff dispositions and attribution.
+
+## Historical submission record — 2026-10-16
+
+The remainder preserves the original #79/#80 snapshot, acceptance matrix, validation
+and hardware observations. Its branch statuses, ownership lists and zero-receipt
+counts describe that snapshot, not current state. They must not erase subsequent
+scoped receipts or be used to request merging an already-merged PR. Remaining
+empirical and acceptance gates are not removed by delivery to main.
+
 Issues: [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56), [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Research date: 2026-10-16. Submission uses **Refs #56; Refs #61**. Neither issue is complete.
 
 Review submission: **[PR #79](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79)** was approved and merged by PUSHINGSQUARES into PR #67's proposal branch at `6511dea2a5102b13df1e47378a31f31230ecb494`. **PR #67 remains open against `main`; this is not a canonical-main merge.** [Live review/merge readback](mr09-review-readback.json) records the approval, final-head CI success and exact refs. The general approval has no written row dispositions; **explicit accepted handoff dispositions remain 0**. [Posted requests](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110) cover all 13 rows. The [#58 handoff](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6217454289) remains pending coordinator review.
