@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-evalplus-pass",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "EvalPlus existing-sample correctness evaluation",
+  "version": "0.3.1",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "A source-only profile of batch correctness evaluation for supplied code samples. No code sample, model, evaluator or benchmark was executed. The proposal does not establish a secure execution environment, dataset rights, measured pass rate or deployment threshold. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "pass@1"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/evalplus/0.3.1/json",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact published version 0.3.1 was source checked. The retained source distribution is 606441 bytes, SHA256 732352dba404d96dd97a1593b3209fd50a09f543bfe37058a0bacf3fd23025da, uploaded 2024-10-20T20:08:27.844855Z; its original bytes were rehashed before this proposal. Active denotes available published software, not a promise of continuing maintenance or current runtime fitness. No package was installed or imported, and no model, judge, test or evaluation ran."
+    },
+    {
+      "source_uri": "https://github.com/evalplus/evalplus/releases/tag/v0.3.1",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Publisher release was non-draft and non-prerelease, published 2024-10-20T21:59:03Z; its tag resolves to e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2. Versioned selected source files were byte-compared with the hashed source distribution. This is source checking, not independent reproduction of metric outcomes."
+    },
+    {
+      "source_uri": "https://github.com/evalplus/evalplus/blob/e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2/evalplus/evaluate.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 146c29bd11725d411600b89cbbd540b02f6b82bd, SHA256 6fcd78d262eae6eff8af4ef6eb00b22909d37beebd90dc37b84b756053e981dd, was read at e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2. evaluate.py computes literal pass@1 (and conditional pass@10/pass@100) separately for base tests and combined base-plus tests. Required sample counts gate the k outputs; pass@k is not a fixed task-success threshold."
+    },
+    {
+      "source_uri": "https://github.com/evalplus/evalplus/blob/e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2/README.md",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 8d363b08155f6f50e4b046ebc29b9d5b2ab53733, SHA256 8bd03a0fac4d781cfa4e19d551af6ca9359af9f6f3d279cd35dbd9145b7a3b53, was read at e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2. evaluate accepts existing samples/JSONL, loads the selected dataset version, performs batched correctness checks, calculates pass@k and saves results. Optional model_kwargs separately start generation. This supports an offline/batch suite entry, not a network-isolation or executed-sandbox claim. Release 0.3.1 notes MBPP+ 0.2.1 maintenance; the note’s historical MBPP+ 0.2.0/378-task comparison does not select a dataset for this item."
+    },
+    {
+      "source_uri": "https://github.com/evalplus/evalplus/blob/e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2/LICENSE",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 97b358ff02b6d6dd385db5157b070dc607ca6e45, SHA256 fcc1f77fe5443b21bfc4dfcc3d66f7654f599b91582df771850e5e876986a103, was read at e5d0ed0bab96280b60b637ec7f15b5e4841b0cb2. Only the project SPDX license identifier is recorded. Dependencies, datasets, model and judge usage, compute, hosting and support have separate terms and costs; no free total evaluation cost or pricebook rate is inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T20:22:02Z"
+}

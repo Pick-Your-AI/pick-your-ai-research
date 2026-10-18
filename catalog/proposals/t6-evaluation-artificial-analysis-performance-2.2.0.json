@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-artificial-analysis-api-performance",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Artificial Analysis API performance method",
+  "version": "2.2.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published API measurement protocol, separate from Intelligence Index scoring and from permission to reuse provider results. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Time to First Token",
+      "Time to First Answer Token",
+      "Output Speed"
+    ],
+    "mode": "online"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://artificialanalysis.ai/methodology/performance-benchmarking",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The page identifies method 2.2.0 and defines the three named measurements. Online denotes its repeated live-endpoint probes, not an installed observability product. Workload, concurrency, tokenizer, reasoning visibility, geography and measurement window affect comparison; unknown measurements or cost remain unknown. TTFT can include reasoning before answer tokens. No request was sent to a model or benchmark endpoint."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

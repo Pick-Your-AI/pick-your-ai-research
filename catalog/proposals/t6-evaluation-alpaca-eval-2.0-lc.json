@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-alpaca-eval-length-controlled",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "AlpacaEval length-controlled preference",
+  "version": "2.0 LC",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "A source-only profile of the published AlpacaEval 2.0 length-controlled scoring configuration. The version identifies the benchmark method, not package version 0.5 or an executed comparison. Dataset, reference, judge, score policy, uncertainty and cached-versus-new provenance remain necessary context for any future result; no measured score or deployment gate is supplied. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "length_controlled_winrate",
+      "win_rate",
+      "lc_standard_error"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/tatsu-lab/alpaca_eval/blob/cd543a149df89434d8a54582c0151c0b945c3d20/README.md",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 3d38fcf85a1a9d0ef422d88fc268b5e46ecde8c6 was read at cd543a149df89434d8a54582c0151c0b945c3d20 and its retained bytes were rehashed. The publisher distinguishes benchmark edition 2.0 and its length-controlled update from the Python package version. Saved model/reference outputs and batch annotation or metric recomputation support offline mode, not network isolation. The declared 2.0 reference is gpt4_turbo and annotator is weighted_alpaca_eval_gpt4_turbo. Published availability is retained; no endpoint availability or continued maintenance is claimed. Historical dollar/runtime/correlation claims are not adopted as current rates or reproduced evidence."
+    },
+    {
+      "source_uri": "https://github.com/tatsu-lab/alpaca_eval/blob/cd543a149df89434d8a54582c0151c0b945c3d20/src/alpaca_eval/metrics/glm_winrate.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 201b9ce4e41ef48e5a1abd1accbdfccc817a8ca7 was read at cd543a149df89434d8a54582c0151c0b945c3d20 and its retained bytes were rehashed. get_length_controlled_winrate emits length_controlled_winrate and lc_standard_error, using a fitted preference model with length difference controlled; both are reported on a percentage scale. It incorporates get_winrate’s win_rate. Default glm_name is length_controlled_v1. Failed or filtered annotations, baseline, fitting policy and uncertainty belong with any later result; no fitting or scoring ran here."
+    },
+    {
+      "source_uri": "https://github.com/tatsu-lab/alpaca_eval/blob/cd543a149df89434d8a54582c0151c0b945c3d20/src/alpaca_eval/metrics/winrate.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob d95e19dc810f402f02e56bd8354ed85541fcdce3 was read at cd543a149df89434d8a54582c0151c0b945c3d20 and its retained bytes were rehashed. get_winrate describes preferences against the selected reference and returns win_rate through the scoring-rule helper. The raw win rate and the length-controlled estimate remain separate metrics; neither certifies an absolute model-quality or safety threshold."
+    },
+    {
+      "source_uri": "https://github.com/tatsu-lab/alpaca_eval/blob/cd543a149df89434d8a54582c0151c0b945c3d20/src/alpaca_eval/evaluators_configs/weighted_alpaca_eval_gpt4_turbo/configs.yaml",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 7b3bfb7c143ab785b33a75eec30d185a006e6357 was read at cd543a149df89434d8a54582c0151c0b945c3d20 and its retained bytes were rehashed. The immutable declared annotator configuration names gpt-4-1106-preview, logprobs and continuous logprob parsing. This is source identity, not a claim that the endpoint is presently available or that another judge is interchangeable. No credentials were supplied and no endpoint was called."
+    },
+    {
+      "source_uri": "https://github.com/tatsu-lab/alpaca_eval/blob/cd543a149df89434d8a54582c0151c0b945c3d20/LICENSE",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 05b63bab038348c8188a4c9738b39caebcce64c3 was read at cd543a149df89434d8a54582c0151c0b945c3d20 and its retained bytes were rehashed. The project code license is Apache-2.0. The README separately labels benchmark data CC BY-NC 4.0; this code identifier does not grant data redistribution, training, commercial-use or model rights. Billing remains unknown and no paid inference or hosting rate is invented."
+    }
+  ],
+  "updated_at": "2026-10-18T20:22:02Z"
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-helm-capabilities-benchmark",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "HELM Capabilities benchmark metric scope",
+  "version": "1.0.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published benchmark edition with its own identity, separate from the HELM framework package. Active denotes available methodology, not a maintenance or fitness guarantee. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Multiple Choice Accuracy",
+      "IFEval Strict Accuracy",
+      "WB-Score",
+      "LLM-judged Accuracy"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://crfm.stanford.edu/2025/03/20/helm-capabilities.html",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The published 1.0.0 suite uses multiple-choice scoring for MMLU-Pro and GPQA, strict IFEval scoring, a rescaled WildBench judge average, and Omni-MATH judge accuracy. These labels describe distinct policies; neither loose IFEval scoring nor one universal judge is implied. The fixed benchmark workflow supports offline mode, while configured judges can require external services."
+    },
+    {
+      "source_uri": "https://crfm-helm.readthedocs.io/en/latest/maintenance_mode/",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The current HELM maintenance policy is best-effort maintenance, not a promise of feature development. It does not establish that this published benchmark was retired. Framework package 0.5.16 and benchmark 1.0.0 are different version identities."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

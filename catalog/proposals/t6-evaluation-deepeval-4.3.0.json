@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-deepeval-exact-match",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "DeepEval offline Exact Match",
+  "version": "4.3.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Bounded offline Exact Match capability profile from the published DeepEval 4.3.0 source distribution. It compares supplied actual and expected outputs case-sensitively after trimming surrounding whitespace. This component profile supplies no dataset, aggregate quality result, release threshold, contract-validity result or cloud-service entitlement. Operational billing and data-flow choices remain unresolved. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Exact Match"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/deepeval/4.3.0/json",
+      "checked_at": "2026-10-18T19:43:24Z",
+      "verification_status": "unverified",
+      "notes": "DE-S1: exact release metadata identifies deepeval 4.3.0 and its unyanked source distribution, uploaded 2026-10-15T16:06:56.252376Z. status active denotes the available published release, not a general-availability, latest-version, security or production-fitness claim. The artifact's expected size is 1051235 bytes and SHA256 is d9d89e00361a08a335cd5e2aa4bb10577e9a711ead8119aff0574b92fcce27b7."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/63/07/617e549974814727bb2b5f73643d121abef1f9670278e2b22a98eebe61f1/deepeval-4.3.0.tar.gz",
+      "checked_at": "2026-10-18T19:43:24Z",
+      "verification_status": "unverified",
+      "notes": "DE-S2: the downloaded 1051235-byte archive matched the publisher's SHA256 d9d89e00361a08a335cd5e2aa4bb10577e9a711ead8119aff0574b92fcce27b7. The complete deepeval/metrics/exact_match/exact_match.py (SHA256 7247e72c2e01630e35d27b87dc278e65637f426a53e70e8327cf094ec63a1426) requires input, actual_output and expected_output, defines __name__ as Exact Match and compares the two stripped strings without case normalization. Its per-test binary score is not label-level precision, recall or F1 evidence, even though the class also assigns attributes with those names. No package, scorer or evaluation was installed or executed."
+    },
+    {
+      "source_uri": "https://pypi.org/project/deepeval/4.3.0/",
+      "checked_at": "2026-10-18T19:43:24Z",
+      "verification_status": "unverified",
+      "notes": "DE-S3: the version-specific publisher README describes supplied test cases and the pytest/CLI evaluation workflow, separately from Confident AI's live-trace service. The selected profile records that offline path; it does not claim DeepEval lacks other modes or certify runtime telemetry. Archive README SHA256 64b1000d1a1f148a1073162eabc7766bb529c0de7b6a410c7100cb47aeb691d3; mode mapping is a bounded research interpretation of this workflow."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/63/07/617e549974814727bb2b5f73643d121abef1f9670278e2b22a98eebe61f1/deepeval-4.3.0.tar.gz",
+      "checked_at": "2026-10-18T19:43:24Z",
+      "verification_status": "unverified",
+      "notes": "DE-S4: archive pyproject.toml declares version 4.3.0 and license Apache-2.0 (SHA256 a7b9e4ca1d9d3e5da924ca95425c78b9cb3feddc15418d8d9be4801d134aaf9d); PKG-INFO repeats the exact version/license and includes LICENSE.md. Only the source's SPDX label is recorded. No optional use-rights Boolean, model or dataset permission, judge charge, subscription or zero operating-cost claim is supplied."
+    }
+  ],
+  "updated_at": "2026-10-18T19:45:23Z"
+}

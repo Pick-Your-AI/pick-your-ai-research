@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-helm-language-probability",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "HELM language-model probability metrics",
+  "version": "0.5.16",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Bounded HELM probability-aggregation profile. Published framework availability is retained alongside its maintenance-mode policy; no new-feature or maintained-provider compatibility promise is inferred. This source-only capability profile supplies no measured result, dataset/model rights, hosted service entitlement or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "perplexity",
+      "bits_per_byte",
+      "logprob_per_byte"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/crfm-helm/0.5.16/json",
+      "checked_at": "2026-10-18T20:02:36.518146+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact crfm-helm 0.5.16 metadata identifies an unyanked sdist uploaded 2026-04-30T05:07:21.124541Z. The original 8289168-byte archive was downloaded and matched publisher SHA256 2ce0e3e2b81298f93c2882b52a66c1619dc40460d7eadfb6b3d7e1717294a9d6. Active records availability of this published artifact, not latest-version, active feature development, compatibility, performance or production fitness. No package/model was installed or executed."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/12/4d/395b742b9897a2966ee17e44c9d638ffb96716641acef86d80ef377bb72f/crfm_helm-0.5.16.tar.gz",
+      "checked_at": "2026-10-18T20:02:36.518146+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member src/helm/benchmark/metrics/basic_metrics.py has SHA256 df2d4cd261492fc16590c910596b38655d8d8ab89a306c9d75d6de63717ebd79. compute_perplexity_metrics and its metadata define all three literal names. Perplexity derives from summed log probability per positive token count; the other two use positive byte count. Missing log probability returns no derived metric. These are distinct denominators, not interchangeable arithmetic means or measured scores."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/12/4d/395b742b9897a2966ee17e44c9d638ffb96716641acef86d80ef377bb72f/crfm_helm-0.5.16.tar.gz",
+      "checked_at": "2026-10-18T20:02:36.518146+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member README.md has SHA256 4a838920d5fa562cacd4c913976be4430c0e9bf01d779acb1090c340b81f2fc4. The versioned quick start separates a configured helm-run benchmark, helm-summarize and optional result display. This supports the scoped offline workflow, including when models use remote APIs. Dataset, adapter, tokenizer, log-probability support, generation, scenario and model pins remain run inputs."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/12/4d/395b742b9897a2966ee17e44c9d638ffb96716641acef86d80ef377bb72f/crfm_helm-0.5.16.tar.gz",
+      "checked_at": "2026-10-18T20:02:36.518146+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member pyproject.toml has SHA256 55121a5bb557214f597e6a65b474abef99e6ddb574e7501ccd8b86229197e5f6. The exact packaging declares crfm-helm 0.5.16 and Apache-2.0. Only the source SPDX identifier is recorded; operational billing remains unknown and no model, benchmark-data or provider entitlement follows."
+    },
+    {
+      "source_uri": "https://crfm-helm.readthedocs.io/en/latest/maintenance_mode/",
+      "checked_at": "2026-10-18T20:07:31Z",
+      "verification_status": "unverified",
+      "notes": "Primary maintenance policy read on 2026-10-18: maintenance began June 1, 2026; code and leaderboards remain available with best-effort volunteer support, no new features or leaderboard evaluations, and no fixed release cadence. External API/model scenarios may break. This is not a retirement claim or proof any current scenario works."
+    }
+  ],
+  "updated_at": "2026-10-18T20:07:31Z"
+}

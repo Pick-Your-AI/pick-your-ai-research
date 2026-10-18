@@ -258,7 +258,7 @@ Lean: (b), because co-resident memory can only be checked where all resident com
 | #60 rights decision changes to "no" | #41/#60 per-source decision (P4) | Affected values are hidden in every view, including historical and shared views, because showing them is display | Values withheld |
 | Mode or optional tier switched | Activation conditions (V5) | Re-evaluate required and cross-component rules; only predicates with actually false applicability become `skipped` | Not evaluated |
 | Successor contract published | Available contract version differs from this revision's pinned `schema_version` | Preserve original bytes, locks, reader and historical findings; an explicitly adopted migration creates a new revision under CD-7 | New contract available; Current evaluation unavailable if the new path is unsupported. Original reproducibility changes only if its actual dependencies are missing |
-| Withheld input on a fork | SB-8 | Dependent rules `unknown` | Prompt to answer |
+| Withheld input on a fork | SB-8 | New evaluation follows existing missing-input and applicability behavior, including SB-R5 | Prompt to answer |
 
 When whether a branch is active is itself unknown, invalidate and re-evaluate (V5).
 
@@ -315,7 +315,7 @@ Both estimates and their component lines may still be shown, labelled with price
 ### SB-R5 Withheld inputs leave dependent rules unresolved (hypothesis)
 
 - **Applies when:** a forked build has an input withheld at share time (SB-8).
-- **Assertion:** any rule operand that resolves to a withheld input is unresolved, so the rule is `unknown`. A recommendation-only rule follows #81's policy and is `skipped` (P1).
+- **Assertion:** any rule operand that resolves to a withheld input is unresolved. A fork's new evaluation follows the dependent rule's own applicability, assertion and unknown policy. Recommendation-only rules skip when their activating need is unresolved; withholding an assertion operand does not itself skip an applicable recommendation. Under the [W-R11 continuation in #401](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/401), a withheld memory need skips the recommendation, but a known `session` or `persistent` need with a withheld implementation declaration gives `unknown`, with fixed `warning`/`defer`. Historical P1 records, retained reader profiles and original findings keep their own revisions and semantics.
 - **Severity:** the dependent rule's own. `on_unknown` per that rule.
 - **Example:** a share withholds `data_classification`; on the fork, the rule reading `/objectives/data_classification` (V13) is `unknown`, not `pass`.
 - **Dependency:** CD-1's typed answer states; v1's evaluator treats the string `"unknown"` as a known value (P1), so a withheld marker must not be a string sentinel.
@@ -473,3 +473,52 @@ is not removed by either source-only receipt.
 | P10 | [Actual H40-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254602552); [reviewed producer source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/45b20960cbc4652fb3341c977a025821c96595f9/research/T0-configuration/component-schema-compatibility.md) | 2026-10-18 | Proposed source `45b20960`, note blob `375506ee`; receipt submitted 2026-10-18 20:12:44 UTC | Project engineering receiving decision | Accepts the stated base research representations and conditions; unsigned source at receipt, no producer-delivery, complete shared/history implementation, new disclosure-proposal acceptance or #42 completion claim |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; the contract decisions and #42 prerequisite remain open.
+
+## Retained input association diagnostics (2026-10-18)
+
+The local [historical replay prototype](../../tests/t0_historical_replay_prototype.py)
+now retains independently checkable associations for all selected historical
+inputs when another input prevents reproduction. This extends the retained-report
+correction delivered in [#383](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/383)
+to the existing SB-2/SB-3 and SB-R2 identity checks. It changes neither the frozen
+schemas nor the replay manifest/profile or existing reason-code vocabulary.
+
+Actual synthetic probes on accepted
+[`a219392b`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/a219392b64f82849b00f7da373b13661518354c4)
+showed that all eight complete-input controls exposed their known mismatch:
+resource/cost Build ID or revision, and ruleset/graph lock ID or version/revision.
+Removing only the unrelated catalog hid all eight diagnoses, although each
+affected artifact still resolved to its exact manifest-bound bytes. No evaluator
+callback ran and no original input bytes changed. The expanded
+[regression matrix](../../tests/test_t0_saved_input_associations.py) also covers
+selection, rate, missing-sidecar, digest, reader-profile and unselected-artifact
+boundaries. These are synthetic source observations, not measured estimates or
+observations of a saved-build UI.
+
+| Association | Inputs needed to establish a mismatch |
+| --- | --- |
+| Ruleset ID/version; graph ID/revision | The original Build locks and the independently resolved ruleset or graph |
+| Resource, cost and report Build ID/revision; report locks | The original Build and the independently resolved derived record |
+| Resource selection IDs; priced/unpriced cost selection IDs | The original Build selections and the independently resolved estimate |
+| Cost Pricebook ID | The original Build's Pricebook lock and the independently resolved cost; an absent optional lock cannot admit a retained cost |
+| Cost rate ID, selected item/version and meter | The independently resolved cost, original Build selections and exact resolved Pricebook matching the cost's Pricebook ID |
+| Rate-to-catalog membership | Both exact resolved Pricebook and catalog |
+
+Unavailable, unpinned, digest-mismatched or explicitly unsupplied records cannot
+supply association claims. An unrelated newer or foreign archived record cannot
+replace them. In particular, a missing Pricebook leaves rate comparisons
+unavailable; it does not hide a selection ID or Pricebook-lock disagreement
+already established from the original Build and exact cost bytes. All available
+diagnostics are emitted once. Existing input-availability, digest, selection and
+reader-profile status precedence remains; a mismatch still prevents evaluation.
+
+Original Build, sidecar, manifest, estimates and report bytes remain unchanged.
+A resolved content binding means the selected bytes were recovered; the separate
+association diagnostic explains why those bytes do not support this saved Build.
+It does not establish numerical accuracy, current price or capacity eligibility,
+source authenticity, source-use permission or a new compatibility result. Current
+consumer presentation, retained-report storage, successor migration and the
+remaining SB/CD receiving decisions keep their existing owners and scope. The
+separately delivered #377 diagnostic view remains its original controller's work;
+this correction adds no replacement view or callback protocol. #40 and #42
+acceptance remains open.
