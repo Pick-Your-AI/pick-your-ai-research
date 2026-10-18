@@ -280,6 +280,25 @@ readback, three captures, publication filtering and cleanup receipt are retained
 Original preparation records, dense/GM1 evidence, v1 and receiving-owner gates
 are unchanged; these observations do not provide acceptance or a scope waiver.
 
+## Output-reservation matching audit — 2026-10-18
+
+The [pinned output audit](measurements/output-reservation-2026-10-18/matching.md)
+resolves the count question but identifies a semantic mismatch: both sides
+reserve 256 prompt-graph output rows, while the estimator places ordinary-decoder
+output computation on the host and models a different host readback capacity.
+The native initialization asks for one host logits row (logged as 0.19 MiB),
+separately from the 256-row graph reserve. Its per-sequence maximum1 does not
+reduce this graph with no backend samplers. No dedicated output-reservation
+control exists in the inspected pinned estimator CLI/option type.
+
+The existing totals are therefore not admitted as an error comparison; accepted
+estimator pairs and whole-process peak pairs stay zero. The hash-bound source
+report separates logical tensor geometry from measured buffers. A separately
+versioned estimator that models host readback and device output computation is
+the next matching path; no post-observation correction, new estimator/GPU run or
+receiving-owner acceptance is claimed. Original CPU/native records and broader
+#61 gates remain unchanged.
+
 ## Proposed matching total-buffer setup — 2026-10-18
 
 The [pinned native setup protocol](measurements/mr09-total-memory-protocol-2026-10-18.md)

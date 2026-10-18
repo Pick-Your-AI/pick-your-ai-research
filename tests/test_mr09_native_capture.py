@@ -92,6 +92,66 @@ class NativeCaptureTests(unittest.TestCase):
         for text in ('{"x":1,"x":1}','{"x":NaN}','{"x":1e999}'):
             with self.subTest(text=text),self.assertRaises(ValueError): capture.loads(text)
 
+    def test_driver_csv_ambiguity_rejected_but_quoted_reordering_supported(self):
+        original=self.record["driver_csv"]
+        for text in (
+            original.replace("driver_version,", "driver_version,driver_version,").replace("610.88,", "conflicting,610.88,"),
+            original.replace("driver_version,", "driver_version, driver_version ,").replace("610.88,", "conflicting,610.88,"),
+            original.replace("name,", "name, ,").replace("NVIDIA", "value,NVIDIA",1),
+            original+",extra",
+        ):
+            with self.subTest(text=text),self.assertRaises(ValueError): capture.driver_readback(text)
+        reordered='"memory.free [MiB]","driver_version","name","memory.total [MiB]"\n"10134 MiB","610.88","NVIDIA, synthetic quoted name","16303 MiB"'
+        parsed=capture.driver_readback(reordered)
+        self.assertEqual(parsed["name"],"NVIDIA, synthetic quoted name")
+        self.assertEqual(parsed["driver_version"],"610.88")
+
+    def test_rehashed_invalid_preflights_rejected_without_publication(self):
+        def set_nested(record,group,key,value): record[group][key]=value
+        cases=[
+            lambda r:r.update(guards={}),
+            lambda r:r.update(status="blocked"),
+            lambda r:set_nested(r,"observed","available_host_ram_bytes",1),
+            lambda r:set_nested(r,"guards","available_host_ram_bytes",1),
+            lambda r:set_nested(r,"observed","available_host_ram_bytes",float(r["observed"]["available_host_ram_bytes"])),
+            lambda r:set_nested(r,"thresholds","available_host_ram_bytes",1),
+            lambda r:r.update(methods=[]),
+            lambda r:r.update(observed_utc="2026-10-19T00:00:00+00:00"),
+            lambda r:r.update(observed_utc="2026-10-18T06:40:00+00:00"),
+            lambda r:set_nested(r,"observed","nvidia_smi_free_mib",999999),
+        ]
+        for index,change in enumerate(cases):
+            with self.subTest(case=index),tempfile.TemporaryDirectory() as temp:
+                dest=Path(temp)/"copy";shutil.copytree(DIRECTORY,dest)
+                preflight=dest/"init-r1-preflight.json";screen=json.loads(preflight.read_text())
+                change(screen);preflight.write_text(json.dumps(screen))
+                path=dest/"init-r1.json";record=json.loads(path.read_text())
+                record["preflight_sha256"]=capture.sha(preflight);path.write_text(json.dumps(record))
+                before={p.name:p.read_bytes() for p in dest.glob('init-*.json')}
+                with self.assertRaises(ValueError): capture.publish(dest,Path(temp)/"archive")
+                self.assertEqual(before,{p.name:p.read_bytes() for p in dest.glob('init-*.json')})
+                self.assertFalse((Path(temp)/"archive").exists())
+
+    def test_capture_cannot_move_after_cleanup(self):
+        lines=self.record["stdout"].splitlines()
+        line=next(l for l in lines if 'fit_memory_breakdown' in l)
+        lines.remove(line);lines.append(line)
+        self.record["stdout"]="\n".join(lines)+"\n"
+        with self.assertRaises(ValueError): capture.validate_capture(self.record)
+
+    def test_cleanup_peak_cannot_decrease(self):
+        events=[json.loads(l) for l in self.record["stdout"].splitlines()]
+        next(e for e in events if e.get("stage")=="after_cleanup")["peak_admitted_bytes"]=8388608
+        self.record["stdout"]="\n".join(json.dumps(e) for e in events)+"\n"
+        with self.assertRaises(ValueError): capture.validate_capture(self.record)
+
+    def test_native_discovery_requires_typed_sufficient_consistent_bytes(self):
+        for field,value in (("cuda_reported_free_bytes",0),("cuda_reported_free_bytes",2**65),
+                            ("driver_total_bytes",17094475776.0),("cuda_reported_free_bytes",True)):
+            self.record=json.loads((DIRECTORY/"init-r1.json").read_text())
+            self.mutate_event("mr09_event","qualification",field,value)
+            with self.subTest(field=field,value=value),self.assertRaises(ValueError): capture.validate_capture(self.record)
+
     def test_native_quota_portable_cpu_selftest(self):
         compiler=shutil.which("g++")
         if not compiler: self.skipTest("portable compiler absent; MSVC execution separately recorded")

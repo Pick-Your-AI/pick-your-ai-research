@@ -212,3 +212,37 @@ locators and hashes without redistributing runtime binaries or external headers.
 
 [Submission validation](validation.md) separates automated integrity checks from
 actual native observations and outstanding human evidence review.
+
+The subsequent [output-reservation audit](../output-reservation-2026-10-18/matching.md)
+resolves the global graph-row count but finds incompatible host capacity and
+output-computation placement in the pinned estimator. It adds no native trial,
+changes no capture and admits no numerical comparison.
+
+Review corrections after `df8ff7270002994545731a733e9b216dd4f3e6ac` address
+[review 5561872151](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/267#pullrequestreview-5561872151)
+and the additional peak/discovery review. The offline reader rejects duplicate,
+whitespace-aliased or empty driver CSV headers before building row dictionaries;
+quoted/reordered unique columns remain supported. Capacity screens now require
+exact original thresholds/methods, nonempty exact guard keys/Boolean true,
+sufficient integer observations, successful matching status and reason,
+preflight-before-run timestamps within 30 seconds, child duration within the
+90-second launcher deadline, and consistent recorded device capacities (allowing
+at most 1 MiB total-memory rounding difference). Native discovery bytes require
+exact unsigned integer types, at least 4 GiB free and free no greater than total.
+The complete seven-event order binds capture before cleanup; peak/counter
+consistency prevents a final peak from decreasing. Rehashed contradictory
+preflights fail before publication. All actual trial, preflight, publication,
+summary, historical source/build and launcher bytes are preserved. No new native
+execution or empirical acceptance accompanies these offline corrections.
+
+**Instrumentation qualifier from native-source review:** the harness wraps each
+buffer's `free_buffer` callback. The pinned backend's
+[CUDA buffer identity test](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-cuda/ggml-cuda.cu#L785)
+compares that exact callback pointer, so instrumented buffers fail that identity
+test and CUDA copy fast paths can decline them. The harness therefore changes
+backend/copy behavior; its initialized buffer observations must not be presented
+as unchanged standard-runtime copy semantics or inference behavior. This is an
+additional instrumentation limitation, not a rewrite of source pins/results.
+The exact implementation of `GGML_CUDA_DISABLE_GRAPHS` is in pinned
+[common.cuh](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-cuda/common.cuh#L1289).
+The additional source readback is recorded [separately](../output-reservation-2026-10-18/instrumentation-source-readback.json).

@@ -1,5 +1,6 @@
 """Validate/publish bounded native qualification captures, never runtime fit claims."""
 import argparse
+from datetime import datetime
 import csv
 import io
 import math
@@ -41,6 +42,11 @@ def validate_capture(record):
     probe=one("mr09_event","qualification")
     if probe["status"]!="probe_passed" or probe["device"]!="CUDA0" or probe["decode_api_loaded"] is not False or probe["graphs_disabled"] is not True:
         raise ValueError("CUDA/graph boundary not qualified")
+    for key in ("driver_total_bytes", "cuda_reported_free_bytes"):
+        if type(probe.get(key)) is not int or not 0 < probe[key] <= 2**64-1:
+            raise ValueError("invalid native discovery byte counter")
+    if not 4*2**30 <= probe["cuda_reported_free_bytes"] <= probe["driver_total_bytes"]:
+        raise ValueError("native spare-capacity discovery failed")
     effective=one("mr09_event","effective")
     expected={"mr09_event":"effective","no_alloc":False,"context":512,"batch":256,"ubatch":256,"sequences":1,"generation_forwards":0,"warmup":False,"extra_buffer_types":False}
     if json.dumps(effective,sort_keys=True)!=json.dumps(expected,sort_keys=True):
@@ -64,7 +70,12 @@ def validate_capture(record):
     if any(caps[stage]["native_allocator_calls"]!=4 for stage in ("before_capture","after_cleanup")):
         raise ValueError("unexpected native allocation count")
     if caps["after_cleanup"]["live_bytes"]!=0: raise ValueError("native buffer cleanup incomplete")
-    data=one("type","fit_memory_breakdown")["data"]
+    if caps["after_cleanup"]["peak_admitted_bytes"] != caps["before_capture"]["peak_admitted_bytes"] or caps["before_capture"]["peak_admitted_bytes"] < caps["after_probe"]["peak_admitted_bytes"]:
+        raise ValueError("contradictory cross-phase peak ledger")
+    capture=one("type","fit_memory_breakdown")
+    if events != [probe,caps["after_probe"],effective,caps["before_capture"],capture,caps["after_cleanup"],result]:
+        raise ValueError("native complete event ordering drift")
+    data=capture["data"]
     interval=managed_snapshot_interval({**data,"metric":"managed_device_buffers_snapshot","no_alloc":effective["no_alloc"]})
     live=caps["before_capture"]["live_bytes"]
     if not interval[0]<=live<=interval[1]: raise ValueError("native reported buffers do not reconcile with admission ledger")
@@ -84,6 +95,58 @@ def validate_capture(record):
             "cleanup_live_bytes":caps["after_cleanup"]["live_bytes"],
             "runtime_n_outputs_max":outputs,"runtime_n_outputs_max_per_seq":per_seq}
 
+PREFLIGHT_THRESHOLDS = {"nvidia_smi_free_mib":4096, "available_host_ram_bytes":12884901888,
+                        "temporary_volume_free_bytes":6412308016}
+PREFLIGHT_METHODS = ["nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+                     "Windows kernel32 GlobalMemoryStatusEx.ullAvailPhys",
+                     "Python shutil.disk_usage(temporary_dir).free"]
+
+
+def driver_readback(text):
+    try:
+        rows=list(csv.reader(io.StringIO(text), strict=True))
+    except csv.Error as error:
+        raise ValueError("malformed driver CSV") from error
+    if len(rows)!=2: raise ValueError("single header and GPU record required")
+    headers=rows[0]; normalized=[h.strip() for h in headers]
+    required={"name","driver_version","memory.total [MiB]","memory.free [MiB]"}
+    if (len(set(headers))!=len(headers) or len(set(normalized))!=len(normalized)
+            or any(not h for h in normalized) or set(normalized)!=required
+            or len(rows[1])!=len(headers)):
+        raise ValueError("ambiguous/missing driver CSV headers or row width")
+    record=dict(zip(normalized,[v.strip() for v in rows[1]]))
+    if any(not v for v in record.values()): raise ValueError("empty driver CSV value")
+    for key in ("memory.total [MiB]","memory.free [MiB]"):
+        if not re.fullmatch(r"[0-9]+ MiB",record[key]): raise ValueError("invalid driver memory")
+    if not 0 <= int(record["memory.free [MiB]"].split()[0]) <= int(record["memory.total [MiB]"].split()[0]):
+        raise ValueError("contradictory driver capacity")
+    return record
+
+
+def validate_preflight(screen,record,hardware):
+    require_bindings(screen, {"classification":"read-only capacity screen; not inference or a fit guarantee",
+                     "reason":"all screens satisfied; recheck before inference",
+                     "profile":"granite31", "thresholds":PREFLIGHT_THRESHOLDS,
+                     "methods":PREFLIGHT_METHODS, "status":"admitted_to_download_screen_only"}, "preflight")
+    for group in ("thresholds","observed","guards"):
+        if type(screen.get(group)) is not dict or set(screen[group])!=set(PREFLIGHT_THRESHOLDS):
+            raise ValueError("preflight scope/keys drift")
+    for key,threshold in PREFLIGHT_THRESHOLDS.items():
+        value=screen["observed"][key]
+        if type(value) is not int or value<threshold or screen["guards"][key] is not True:
+            raise ValueError("contradictory preflight guard or observation")
+    if screen["observed"]["nvidia_smi_free_mib"] > int(hardware["memory.total [MiB]"].split()[0]):
+        raise ValueError("preflight exceeds recorded device capacity")
+    try:
+        times=[datetime.fromisoformat(v) for v in (screen["observed_utc"], record["started_utc"], record["finished_utc"])]
+        if any(t.utcoffset() is None for t in times) or not times[0] <= times[1] <= times[2]:
+            raise ValueError("preflight/run temporal order drift")
+        if (times[1]-times[0]).total_seconds()>30 or (times[2]-times[1]).total_seconds()>90:
+            raise ValueError("stale preflight or run beyond launcher deadline")
+    except (TypeError,KeyError) as error:
+        raise ValueError("invalid preflight/run time") from error
+
+
 def summarize(directory):
     build=strict_json(directory/"build-loader-v2.json")
     observations=[];cohort=None
@@ -101,16 +164,20 @@ def summarize(directory):
         if type(record["repetition"]) is not int or record["repetition"]!=rep: raise ValueError("wrong repetition")
         if record["harness_sha256"]!=build["executables"]["native-init.exe"]: raise ValueError("wrong native executable")
         if sha(directory/record["preflight_file"])!=record["preflight_sha256"]: raise ValueError("preflight hash mismatch")
-        if not all(strict_json(directory/record["preflight_file"])["guards"].values()): raise ValueError("failed native preflight")
         if sha(directory/"runtime-artifacts.json")!=record["runtime_artifact_ledger_sha256"]: raise ValueError("runtime artifact drift")
-        hardware_rows=list(csv.DictReader(io.StringIO(record["driver_csv"])))
-        if len(hardware_rows)!=1: raise ValueError("single system GPU record required")
-        hardware={k.strip():v.strip() for k,v in hardware_rows[0].items()}
+        capture_result=validate_capture(record)
+        hardware=driver_readback(record["driver_csv"])
+        validate_preflight(strict_json(directory/record["preflight_file"]),record,hardware)
+        native_probe=next(e for e in [loads(line) for line in record["stdout"].splitlines() if line.strip()] if e.get("mr09_event")=="qualification")
+        # WDDM/CUDA and nvidia-smi totals have different rounding; allow at most 1 MiB.
+        total=native_probe["driver_total_bytes"]
+        if type(total) is not int or abs(total-int(hardware["memory.total [MiB]"].split()[0])*2**20)>2**20:
+            raise ValueError("native/driver device capacity mismatch")
         hardware_pin=tuple(hardware[k] for k in ("name","driver_version","memory.total [MiB]"))
         signature=tuple(record[k] for k in ("harness_sha256","harness_git_ref","launcher_sha256","model_sha256","runtime_artifact_ledger_sha256"))+hardware_pin
         if cohort is not None and cohort!=signature: raise ValueError("mixed qualification cohort")
         cohort=signature
-        observations.append({"file":path.name,"sha256":sha(path),"repetition":rep,**validate_capture(record)})
+        observations.append({"file":path.name,"sha256":sha(path),"repetition":rep,**capture_result})
     return {"classification":"three real native initialization qualification trials; receiving review outstanding",
             "runtime_commit":"620d2225cc436ab0b001e3200e590e3b286ef9ab","harness_sha256":cohort[0],
             "qualified_scope":["CUDA0 initialization and 8 MiB clear/release","pre-call managed-buffer cap for pinned initialization-only interface","native capture reconciles with exact admitted-buffer ledger"],
