@@ -13,6 +13,17 @@ from pathlib import Path
 
 DIRECTORY = Path("research/market/measurements/total-memory-setup-2026-10-18")
 MIB = 2**20
+# Freeze the entire reviewed proposal/execution tuple (timestamps excluded).
+# Canonical JSON preserves bool/int/float distinctions and rejects added fields.
+# Later qualification records do not rewrite this historical CPU preparation.
+REVIEWED_SETUP_SHA256 = "dcc7b8693896bc0ad996378dbdb006357132c98741673148156c3954ca1ecc16"
+REVIEWED_PREPARATION_SHA256 = "4f6d8255398aa3ce4b40a7d75cb3a776ed6f1c977e9fcc005160767af8a3a2b6"
+
+def require_reviewed_binding(value, ignored, expected, label):
+    material = {k:v for k,v in value.items() if k not in ignored}
+    actual = hashlib.sha256(json.dumps(material,sort_keys=True,separators=(",", ":"),allow_nan=False).encode()).hexdigest()
+    if actual != expected:
+        raise ValueError("reviewed " + label + " binding drift; explicit proposal review required")
 
 def strict_json(path):
     def unique(pairs):
@@ -76,6 +87,8 @@ def error_interval(estimate_bytes, measured_interval):
 def validate_setup(directory):
     setup = strict_json(directory / "setup.json")
     preparation = strict_json(directory / "preparation.json")
+    require_reviewed_binding(setup, {"prepared_utc"}, REVIEWED_SETUP_SHA256, "setup")
+    require_reviewed_binding(preparation, {"recorded_utc"}, REVIEWED_PREPARATION_SHA256, "preparation")
     raw_path = directory / preparation["estimate_file"]
     if hashlib.sha256(raw_path.read_bytes()).hexdigest() != preparation["estimate_sha256"]:
         raise ValueError("estimator output hash drift")

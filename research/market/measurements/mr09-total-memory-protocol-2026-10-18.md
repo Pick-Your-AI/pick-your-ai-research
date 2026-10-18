@@ -1,4 +1,4 @@
-# MR-09 total-memory setup proposal — 2026-10-18
+# MR-09 total-memory setup proposal â€” 2026-10-18
 
 Refs #61. **Prepared; GPU execution is not qualified or enabled.** This protocol
 was written after CPU estimator preparation and before any native GPU run.
@@ -28,7 +28,7 @@ candidate does not manufacture missing outputs for those tools.
 The estimator reads tensor sizes/types from that GGUF, rather than a model-name
 catalog entry or nominal parameter count. The native runtime must load **the
 same hashed file**. The F16 GGUF may include other tensor types; do not substitute
-`parameters × 2`. Its metadata reports llama architecture, 30 blocks, 3 KV heads,
+`parameters Ã— 2`. Its metadata reports llama architecture, 30 blocks, 3 KV heads,
 64-dimensional keys, and 134,515,008 parameters. The converter lineage to the
 historical HF safetensors revision is unverified: this is a new artifact/runtime
 cohort, not a rerun or pooled extension of those measurements. Publisher/GGUF
@@ -147,16 +147,16 @@ The offline checker intentionally reports `execution_enabled: false`.
 
 ## Units, rounding and pairing gates
 
-The pinned runtime JSON logger **floors each value to integer MiB**, even for
+The pinned runtime JSON logger **floors each nonnegative buffer value to integer MiB**, even for
 structured output. For a reported `self = s`, the actual integer-byte value is
-in `[s × 2^20, (s+1) × 2^20 − 1]`. Do not call `s × 2^20` an exact measurement,
+in `[s Ã— 2^20, (s+1) Ã— 2^20 âˆ’ 1]`. Do not call `s Ã— 2^20` an exact measurement,
 or reconstruct `self` by adding independently rounded model/context/compute.
 An exact-byte exporter would require a separately hashed source/build and
 qualification; no upstream metric is silently relabelled here.
 
 Given positive actual byte interval `[L,U]` and estimate `E`, signed error is
-`[E−U,E−L]`; signed relative percent is
-`[100×(E−U)/U,100×(E−L)/L]`. Absolute error can include zero when the estimate is
+`[Eâˆ’U,Eâˆ’L]`; signed relative percent is
+`[100Ã—(Eâˆ’U)/U,100Ã—(Eâˆ’L)/L]`. Absolute error can include zero when the estimate is
 inside the interval. These are measurement-resolution intervals for a future
 observation, not experimental or universal error bounds. No approved tolerance
 exists. The [offline helper](../../../scripts/mr09_total_memory_setup.py) retains

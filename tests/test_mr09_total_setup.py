@@ -86,6 +86,47 @@ class PreparedSetupIntegrity(unittest.TestCase):
             (directory/"setup.json").write_text(json.dumps(original))
             with self.assertRaises(ValueError): MODULE.validate_setup(directory)
 
+    def test_every_declared_setup_binding_is_frozen_with_exact_types(self):
+        original = json.loads((DIRECTORY/"setup.json").read_text())
+        def leaves(value, trail=()):
+            if isinstance(value,dict):
+                for k,v in value.items():
+                    if k != "prepared_utc": yield from leaves(v,trail+(k,))
+            elif isinstance(value,list):
+                for k,v in enumerate(value): yield from leaves(v,trail+(k,))
+            else: yield trail,value
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            for name in ("setup.json","preparation.json","gguf-parser-estimate.json"):
+                shutil.copyfile(DIRECTORY/name,directory/name)
+            for trail,value in leaves(original):
+                changed = copy.deepcopy(original)
+                cursor = changed
+                for key in trail[:-1]: cursor = cursor[key]
+                replacement = (not value if type(value) is bool else
+                               True if type(value) is int and value == 1 else
+                               value+1 if type(value) is int else
+                               "synthetic-binding-drift")
+                cursor[trail[-1]] = replacement
+                (directory/"setup.json").write_text(json.dumps(changed))
+                with self.subTest(trail=trail),self.assertRaises(ValueError): MODULE.validate_setup(directory)
+
+    def test_preparation_exit_version_and_actual_command_are_bound(self):
+        original = json.loads((DIRECTORY/"preparation.json").read_text())
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            for name in ("setup.json","preparation.json","gguf-parser-estimate.json"):
+                shutil.copyfile(DIRECTORY/name,directory/name)
+            mutations = []
+            for key,value in (("exit_code",1),("exit_code",False),("estimator_version","synthetic-wrong-version")):
+                changed=copy.deepcopy(original);changed[key]=value;mutations.append(changed)
+            changed=copy.deepcopy(original)
+            changed["argv"][changed["argv"].index("--cache-type-k")+1]="q4_0"
+            mutations.append(changed)
+            for changed in mutations:
+                (directory/"preparation.json").write_text(json.dumps(changed))
+                with self.assertRaises(ValueError): MODULE.validate_setup(directory)
+
     def test_duplicate_nonfinite_inputs_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp)/"synthetic.json"
