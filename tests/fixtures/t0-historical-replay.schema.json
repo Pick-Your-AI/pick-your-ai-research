@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-7 frozen-v1 historical replay manifest",
+  "type": "object",
+  "required": ["x_t0_historical_replay"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_historical_replay": {
+      "type": "object",
+      "required": ["proposal_version", "build_sha256", "revision_locks_sha256", "evaluator", "inputs"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd7-replay-0.1"},
+        "build_sha256": {"$ref": "#/$defs/digest"},
+        "revision_locks_sha256": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/digest"}]},
+        "evaluator": {
+          "type": "object",
+          "required": ["profile", "sha256", "schemas_sha256"],
+          "additionalProperties": false,
+          "properties": {
+            "profile": {"type": "string", "minLength": 1, "maxLength": 120},
+            "sha256": {"$ref": "#/$defs/digest"},
+            "schemas_sha256": {"$ref": "#/$defs/digest"}
+          }
+        },
+        "inputs": {
+          "type": "object",
+          "required": ["ruleset", "dependency_graph", "resource_estimate", "cost_estimate", "evaluation_report"],
+          "additionalProperties": false,
+          "properties": {
+            "ruleset": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/ruleset"}]},
+            "dependency_graph": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/graph"}]},
+            "resource_estimate": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/derived"}]},
+            "cost_estimate": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/derived"}]},
+            "evaluation_report": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/derived"}]}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "minLength": 64, "maxLength": 64, "pattern": "^[a-f0-9]{64}$"},
+    "id": {
+      "type": "string", "minLength": 3, "maxLength": 120,
+      "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+      "not": {"pattern": "[^a-z0-9._:-]"}
+    },
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807},
+    "ruleset": {
+      "type": "object", "required": ["id", "version", "sha256"], "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "version": {
+          "type": "string", "minLength": 5, "maxLength": 120,
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$",
+          "not": {"pattern": "[^0-9A-Za-z.+-]"}
+        },
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "graph": {
+      "type": "object", "required": ["id", "revision", "sha256"], "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "revision": {"$ref": "#/$defs/revision"},
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "derived": {
+      "type": "object", "required": ["id", "build_id", "build_revision", "sha256"], "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "build_id": {"$ref": "#/$defs/id"},
+        "build_revision": {"$ref": "#/$defs/revision"}, "sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

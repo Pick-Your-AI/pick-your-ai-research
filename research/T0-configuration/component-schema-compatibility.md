@@ -788,9 +788,10 @@ strict duplicate/nonfinite handling and unchanged historical v1 evaluation.
 Run `python -m unittest discover -s tests -p test_t0_revision_locks.py -v`.
 
 This completes a reviewable revision and membership-binding candidate for
-CD-7/SB-2 and part of SB-3/SB-R1. It does not claim complete replay: evaluator,
-ruleset, graph, derived estimates and external evidence must still be retained
-and resolved under their own exact pins. It neither applies price eligibility
+CD-7/SB-2 and part of SB-3/SB-R1. The catalog/pricebook resolver alone does not
+establish complete replay: evaluator, ruleset, graph, derived estimates and
+external evidence need their own exact pins. The bounded frozen-reference
+profile below now exercises those additional retained inputs. Neither profile applies price eligibility
 or rights policy nor interprets arbitrary catalog references, migrates a build,
 publishes a successor reader/ruleset, or generates a current report. Those
 integration decisions remain with #40/#41/#39/#42. The technical candidate can
@@ -941,6 +942,116 @@ native integer bounds, raw JSON ambiguity, resource limits and cross-catalog
 rate rejection. Run `python -m unittest discover -s tests -p
 test_t0_cd7_consumer.py -v`. #40 and #42 remain open for their remaining
 contract/migration, replay and receiving requirements.
+
+### CD-7 historical reference replay candidate (2026-10-18)
+
+**Engineering decision:** extend the existing CD-7 archive with a separate,
+versioned replay manifest. Keep the original build, revision sidecar, input
+documents and historical report byte-for-byte. The
+[manifest schema](../../tests/fixtures/t0-historical-replay.schema.json),
+[synthetic manifest](../../tests/fixtures/t0-historical-replay.json) and
+[executable prototype](../../tests/t0_historical_replay_prototype.py) implement
+one supported historical path: the unchanged frozen-v1 Python reference
+evaluator. This is a completed testable proposal for that path, not adoption of
+a successor reader or migration of a saved build.
+
+The frozen [evaluator source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/907c1ed1ba5bc975cd8b0a9981e56a32648387c0/contracts/v1/reference/evaluate.py)
+and [report schema](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/907c1ed1ba5bc975cd8b0a9981e56a32648387c0/contracts/v1/schemas/evaluation-report.schema.json)
+were inspected on 2026-10-18. The evaluator consumes a build, catalog and
+ruleset, plus explicitly supplied resource/cost estimates. It neither evaluates
+the dependency graph's edges nor recalculates costs from price rates. Its report
+copies graph locks and uses the fixed demonstration timestamp
+`2026-10-16T09:00:00Z`. The replay preserves these historical behaviors instead
+of substituting current data or assigning a new evaluation time.
+
+The `x_t0_historical_replay` manifest uses proposal version `cd7-replay-0.1`:
+
+| Retained identity | Exact binding and use |
+| --- | --- |
+| Build and existing CD-7 sidecar | SHA-256 of each original byte string. A changed build, whitespace-only rewrite or different sidecar cannot reuse the manifest. An explicitly absent sidecar remains missing pins. |
+| Evaluator | Allowlisted profile `frozen-v1-reference-py312-decimal28`, evaluator source SHA-256 and frozen schema-bundle SHA-256. The manifest supplies no executable, path, URL, import name or metrics override. |
+| Catalog and optional pricebook | Existing CD-7 exact kind/ID/revision/digest pins. A locked pricebook must resolve even when no cost estimate was supplied. |
+| Ruleset | Exact ID, version and content digest, agreeing with the build locks. |
+| Dependency graph | Exact ID, integer revision and content digest, agreeing with the build locks. Retained and checked as an associated historical input; edges are not newly interpreted. |
+| Resource and cost estimates | Each slot is present and either explicitly `null` (not supplied to the original evaluation) or pinned by ID, build ID, build revision and digest. A missing pinned input aborts replay; the sole available estimate is never inferred. |
+| Retained report | Exact ID, build ID, build revision and digest. A report is required to demonstrate reproduction, with all catalog/ruleset/graph locks cross-checked against this build. |
+
+The allowlisted evaluator source digest is
+`092c8a99495f9b5ae960df40b27e33f15eefe6d1a7cd80119658fdc79ada1a5a`.
+The schema-bundle digest is
+`eaaf51a04c9bd0c7fce23e7ecc75724226e26b337cc1da04b88a59d2a912914f`:
+sort the 14 `contracts/v1/schemas/*.schema.json` filenames, construct the array
+of `[filename, sha256-of-original-bytes]` pairs, serialize with ASCII escaping,
+no spaces and no trailing newline, then hash those bytes. The local files and
+loaded schemas must match before execution. The prototype compiles the exact
+verified local evaluator bytes, with Python 3.12 and a fresh Decimal context
+(28 digits, half-even rounding and the standard exponent/trap settings), so a
+caller's changed Decimal precision cannot change the replay. Use the repository's
+pinned validation dependencies from `requirements-research.txt`.
+
+**Cross-record association.** The wrapper places these checks before evaluator
+execution, providing an executable candidate for the historical portion of
+SB-R1, SB-R2, SB-3, SB-5 and SB-10. After artifact resolution, every enabled
+selection must resolve to its exact catalog ID/version and matching kind.
+`selected_version_absent`, `selected_kind_mismatch` or another unresolved
+enabled association produces `input_identity_mismatch`, with its selection ID
+and resolver status in `issues`; `not_enabled` remains allowed. This boundary
+matters because the frozen evaluator's metrics sometimes index by ID alone,
+and some selected kinds can produce no rule finding for a broken reference.
+A matching report cannot certify that missing association. The original report
+bytes remain retained; the wrapper does not rewrite historical findings. An
+ordinary historical rule failure or unknown with resolved input identities
+still reproduces as invalid or indeterminate. Derived records must belong to
+the exact build ID and revision. Resource-estimate selection references must
+exist in that build;
+cost lines must refer to a selection and an exact rate in the locked pricebook,
+with matching selected catalog ID/version and meter. Unpriced selection IDs
+must also exist. Every retained price rate must belong to the selected catalog
+snapshot. These are identity checks, not pricing eligibility, estimator
+calibration, billing arithmetic, source authenticity or evidence grading. The
+frozen evaluator retains its own incomplete/nonmonthly/currency-mismatched cost
+behavior and resource-confidence handling.
+
+| Result | Meaning |
+| --- | --- |
+| `inputs_unavailable` | A required pin or its exact bytes are missing. Per-input bindings retain the missing-pin versus missing-artifact distinction. No evaluator call occurs. |
+| `input_digest_mismatch` | An exact key exists but the bytes disagree. The binding returns no artifact values. |
+| `input_identity_mismatch` | Retained artifacts resolve, but an enabled selection's exact catalog ID/version/kind or another build/lock/selection/rate association disagrees. |
+| `profile_unavailable` | Requested evaluator/schema identity, local files or interpreter family do not match this supported profile. No archive-supplied code executes. |
+| `profile_unsupported` | A catalog contains several versions of one item ID. CD-7 can resolve these, but the frozen evaluator indexes by ID alone; the wrapper refuses to select an arbitrary version for it. |
+| `evaluation_failed` | The unchanged reference evaluator cannot evaluate these retained inputs or emit a conforming report. Original findings remain available in their retained bytes. |
+| `report_mismatch` | A report was generated, but its complete typed JSON differs from the retained report, including ordered findings, summaries, identity, timestamp or numeric representation. |
+| `reproduced` | The complete generated report matches. Historical `invalid` or `indeterminate` remains that outcome; reproduction does not make it valid or current. |
+
+Malformed JSON, invalid schemas, duplicate immutable keys and manifest/build/
+sidecar binding errors fail explicitly as value errors before evaluation.
+The candidate reuses the CD-7 strict Unicode/JSON and depth/node boundaries,
+caps each artifact/build at 512 KiB and each manifest/sidecar at 64 KiB, and caps
+the archive at 32 records and 8 MiB. New revision identities require positive
+signed-64-bit JSON integer tokens. These are receiving-profile constraints;
+the frozen schema files remain unchanged. Existing build-wide identity/role
+preflight still includes disabled selections. The wrapper does not rewrite a
+legacy input that this profile cannot admit.
+
+**Integrity is separate from authenticity and availability.** Every result's
+`qualification` keeps authenticity, source use and current compatibility at
+`not_established`. A manifest records the declared original input set; creating
+one after the fact cannot prove which inputs a real historical run used. In
+particular, an unknown original estimate choice cannot be silently recorded as
+`null`. Missing source records are not recovered by a matching report, and a
+matching digest supplies no publisher or retention/display permission. The
+prototype performs no network fetch, native cache activation, external-evidence
+revalidation, new estimation, dual-ruleset migration or production publication.
+
+The [focused regressions](../../tests/test_t0_historical_replay.py) reproduce all
+45 findings of the existing synthetic report (41 pass, four skipped), preserve
+hand-authored invalid/unknown historical cases, reject missing/tampered and
+cross-build inputs, exercise explicit optional-input absence, and verify local
+evaluator/schema changes, numeric context, input bounds and complete report
+comparison. Run `python -m unittest discover -s tests -p
+test_t0_historical_replay.py -v`. These findings are synthetic demonstrations,
+not hardware, model-quality, source-rights or current-runtime evidence. #40 and
+#42 remain open for the remaining contract, migration and receiving decisions.
 
 ## Contribution format
 

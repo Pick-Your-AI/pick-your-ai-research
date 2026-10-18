@@ -1,7 +1,7 @@
 # T0: Catalog Data Sources & Freshness
 
 Issue: #41 · Contract: v1 1.0.0 (adopted in PR #44) · Assignees: @tynamite, @PUSHINGSQUARES
-Status: partial decision record for review, revision 4 (executable price-policy cases; receiving acceptance pending) · Last updated: 2026-10-18
+Status: partial decision record for review, revision 5 (executable price-policy and jurisdiction cases; receiving acceptance pending) · Last updated: 2026-10-18
 Deliverable path: `research/T0-configuration/catalog-data-sources.md` · Related: `component-schema-compatibility.md` (#40), `research/market/rights-validation.md` (#60), `research/market/integrations.json` (#55)
 
 This revision turns the interim positions posted in the [#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) into #41's record. T1 (#88) and T2 (#75) already apply them, and #60's source decisions are merged. The price-policy supplement below supplies a concrete proposal for the recorded @PUSHINGSQUARES #41/#39 review scope: price-specific freshness, region/currency and price conflicts. It does not claim that owner’s acceptance or change assignments.
@@ -203,6 +203,7 @@ The inventory stores per-source decisions; detailed claim eligibility additional
 | Q2 | How the evaluator encodes the conflict order and records decisions (CD-3) | #41 with #40 |
 | Q3 | Acceptance policy for community evidence (CD-8) | #41 |
 | Q4 | Where fit reports live, and under what licence (#81 Q6) | #41 |
+| Q5 | Admit actual jurisdiction identities, containment/disjointness evidence, named-group definitions and provider-region mappings for the CD-9 candidate below | #41 with #9; #37 receives residency results and #40 owns successor-contract adoption |
 
 ## Acceptance criteria coverage
 
@@ -220,3 +221,149 @@ The inventory stores per-source decisions; detailed claim eligibility additional
 | Handoffs confirmed | Existing receipts and remaining review | Partial; original #42 change-event and T4 evidence scopes recorded |
 | Open questions with owners | Open questions | Met |
 | Decision record merged | PR #127; price supplement PR #137 | Merged partial research; receiving acceptance remains separate |
+
+## CD-9 jurisdiction and region resolution candidate (2026-10-18)
+
+**Engineering decision for review:** use explicit, pinned location and allowed-set
+descriptors, positive containment paths and separately evidenced disjointness.
+Never infer a provider's processing or storage jurisdiction from its region name.
+Never infer exclusion merely because one jurisdiction is absent from another's
+ancestor list. A country-level location may be too coarse for an allowed
+subdivision; two named scopes can also overlap. Those cases remain `unknown`
+without an adequate containment or disjointness proof.
+
+The [CD-9 register and D-R6 proposal](deployment-mode.md#open-contract-decisions),
+[D-R6 assertion and fixed policy](deployment-mode.md#d-r6-residency-covers-processing-and-storage-across-the-data-flows),
+[workload residency dictionary](workload-use-case.md#field-dictionary) and
+[CD-1 answer-state candidate](component-schema-compatibility.md#cd-1-concrete-answer-encoding-and-normalization-experiment-2026-10-18)
+were inspected at accepted main
+[`250537e10c674e8d6ba19eb08921fda15511a23b`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/250537e10c674e8d6ba19eb08921fda15511a23b)
+on 2026-10-18. These are primary project requirements and proposed semantics,
+not geographic, provider or legal evidence. The policy above continues to govern
+source qualification, conflict order, dates, conditions and rights.
+
+### Concrete shape and evidence boundary
+
+The [test-only schema](../../tests/fixtures/jurisdiction-binding.schema.json),
+[binding fixture](../../tests/fixtures/jurisdiction-binding.json),
+[CD-1 answers](../../tests/fixtures/jurisdiction-answers.json) and
+[offline resolver](../../tests/jurisdiction_binding_prototype.py) select the
+`x_t0_jurisdiction` / `cd9-0.1` candidate. All fixture identities, provider region
+labels and geography are invented. The fixture's Boolean facts and the tests'
+explicit eligibility assertions are synthetic inputs, not source approvals.
+
+| Object / field | Candidate type and exact scope | Missing or changing evidence |
+| --- | --- | --- |
+| `answer_states_sha256` | SHA-256 of the complete original UTF-8 CD-1 sidecar | A byte mismatch is rejected; parsing-equivalent bytes are not substituted |
+| `jurisdictions[]` | Distinct identity plus an ordered list of immediate `parent_ids` | Each node's identity, each positive parent edge and complete parent inventory have separate Boolean answers. Unknown referenced nodes remain unresolved; explicit cycles are rejected |
+| `groups[]` | Distinct named-group identity plus an ordered list of jurisdiction `member_ids` | A member needs its own eligible assertion. A complete empty group is distinct from missing membership; groups cannot silently recurse through other group identities |
+| `disjoint_pairs[]` | Distinct identity and two jurisdiction IDs | An eligible `true` explicitly establishes disjoint scopes. It is symmetric. Self-pairs and duplicate unordered pairs are rejected; absence or `false` supplies no disjointness proof |
+| `regions[]` | Distinct mapping ID; exact `provider_id`, `service_id`, `region_id`, `context_id`, processing/storage `dimension`, and jurisdiction list | The context names the specific reviewed conditions; it is not a wildcard. Each mapped location and completeness need separate eligible facts. Identical region labels under different providers or dimensions remain separate |
+| `queries[]` | Distinct query ID; `subject_id`, `context_id`, dimension and location references | An explicit query concerns one subject and dimension. Each subject-to-location association and its complete possible-location inventory need separate eligible facts. An empty inventory remains unknown |
+| Location reference | Tagged jurisdiction/provider-region ID plus `descriptor_sha256` when known | Missing descriptor, missing pin or different descriptor gives unknown. There is no latest-descriptor fallback |
+| Allowed reference | Tagged jurisdiction/group ID plus `descriptor_sha256` when known | Expanding a group or replacing a referenced descriptor cannot reinterpret the old constraint. Its pin must match the selected definition |
+| Workload constraint | CD-1 answer at `/workload/residency/processing` or `/workload/residency/storage`: provided `{mode: unconstrained}` or `{mode: restricted, allowed: [...]}` | The restricted list is nonempty. Only eligible, provided `unconstrained` skips that dimension. Unknown, missing, withheld and not-applicable remain unresolved; none is silently unconstrained |
+
+Identifiers are case-sensitive bounded ASCII tokens in this experiment; they are
+not a validated ISO registry. Provider/account/route conditions must be encoded
+in the admitted context and matched to the actual subject outside this resolver.
+The schema caps the scoped experiment at 256 jurisdiction/group/region records,
+512 disjoint pairs and 64 queries; it is not a global geographic database format.
+Multiple explicit jurisdiction parents are allowed, but the declared graph must
+be acyclic even when a query is unconstrained or an edge lacks eligible evidence.
+Duplicate IDs, duplicate exact mapping/query scopes, malformed provided values,
+ambiguous raw JSON and non-finite values are rejected before evaluation.
+
+Each relationship/completeness answer uses a non-overlapping CD-1 path containing
+the SHA-256 of its complete owning descriptor. The descriptor encoding is UTF-8
+JSON with sorted object keys, no insignificant whitespace, and original array
+order, prefixed with `cd9-0.1` and a newline. Descriptors contain only strings,
+arrays and objects. Reordering an inventory therefore needs new scoped keys in
+this candidate. Original binding and answer bytes are retained unchanged.
+Location references also pin their target descriptors: proving a replacement
+mapping's geography does not prove that the subject uses that replacement.
+
+The caller supplies evidence eligibility separately for every exact answer path;
+only Boolean `true` admits that fact. False, absent or unresolved eligibility
+cannot become a known answer. A source label, matching hash, descriptor name or
+complete-list flag establishes neither eligibility nor source rights. The caller
+must first apply the existing normalization, scope, version/date and authority
+policy. Opposite equally ranked facts must remain unresolved in the CD-1 input.
+
+### Predicate, completeness and disagreement
+
+For each eligible restricted dimension, compare every confirmed possible location
+of the requested subject against the allowed alternatives. A possible footprint
+is source-qualified scope, not proof that a data transfer actually occurred.
+Provider mappings are additionally bound to the query's context and dimension.
+
+- A positive chain from the location to an allowed jurisdiction proves
+  containment. It does not require an exhaustive list of every other ancestor.
+- If a location is within A, an allowed jurisdiction is within B, and eligible
+  evidence establishes A and B are disjoint, that alternative is excluded.
+  Name prefixes, different roots, sibling nodes and complete ancestry alone do
+  not supply this negative.
+- Contradictory containment/disjointness proofs, including two disjoint
+  ancestors inside either positive ancestry closure, produce disputed unknown.
+  A third common containing ancestor cannot hide an internally contradictory
+  location. The result retains the conflicting paths.
+- A named group matches when any confirmed member contains the location.
+  Other unresolved member results are retained. It excludes the location only
+  with eligible complete membership and exclusion by every member. A confirmed
+  complete empty group excludes a known location; an incomplete empty group
+  stays unknown.
+- Any allowed alternative may establish membership; unknown alternatives remain
+  visible. Every location must be covered for the subject to pass. The subject
+  inventory and each provider mapping need their own eligible completeness
+  assertion; an incomplete list cannot establish total residency coverage.
+- One proven disallowed location makes the subject result fail while retaining
+  other unknown locations and coverage gaps. Otherwise an unresolved required
+  fact makes it unknown. Processing and storage return separate results.
+
+The typed result retains query/subject/context/dimension identities, per-location
+checks, allowed-alternative and group-member outcomes, proof paths, all read CD-1
+answers and their eligibility, and both original input hashes. D-R6 retains fixed
+`error` severity and the existing proposed `on_unknown: review`; this candidate
+does not adopt the optional stronger block policy reserved for #41. A failed
+predicate describes the supplied scope proof, not a legal finding or observed
+data-residency incident.
+
+| Synthetic case | Required result |
+| --- | --- |
+| Local subdivision explicitly within allowed country; other ancestry incomplete | Pass that location |
+| Country-level source with only a narrower allowed subdivision | Unknown; coarse source cannot establish placement within or outside the subdivision |
+| Two roots with complete ancestry but no disjointness evidence | Unknown |
+| Explicit disjoint country scopes inherited through confirmed subdivision paths | Fail that alternative |
+| Processing map inside A; same-named storage map in disjoint B | Processing pass and storage fail; no cross-dimension borrowing |
+| Positive group member and another unresolved member | Membership passes with unresolved member retained; subject coverage still requires completeness |
+| A location within disjoint A and B, both under allowed C | Disputed unknown |
+| Fresh replacement provider mapping with the old subject reference pin | Unknown until the exact new subject association is supplied |
+| A group adds a jurisdiction while the old workload constraint retains its pin | Unknown for that group reference; no implicit policy expansion |
+| Known outside location plus missing destination/coverage | Fail with the unknown rows retained |
+
+### Validation, migration and receiving scope
+
+Run `python -m unittest tests.test_jurisdiction_binding -v`. The 32 focused
+methods cover these semantic boundaries, independent processing/storage results,
+exact input and descriptor binding, changed eligibility, original-byte retention,
+cycles and ambiguous identities. These tests exercise invented facts only.
+Repository validation remains a separate integrity check and does not qualify
+any actual geography, provider service, source permission or runtime behavior.
+
+There is deliberately no whole-build verdict: queries do not discover omitted
+components, logs, backups, tool connections or other data flows. A receiving
+adapter must construct and qualify the complete applicable subject inventory,
+bind actual build/selection/route revisions and the admitted condition context,
+and retain all per-dimension results. A cloud-region mapping cannot replace
+provider data terms, actual configuration or processing/storage scope evidence.
+
+This selects a concrete test-only CD-9 shape and resolver. Frozen v1, its
+region-string rules and historical results remain unchanged. No ISO dataset,
+real group-membership table or provider mapping is introduced. #41 with #9
+must admit actual source-specific identities, boundaries, group versions,
+mapping dates/conditions and rights; #37 receives scoped residency results.
+#40 retains successor schema/reader/ruleset and migration adoption, with #42
+receiving exact saved-build pins and changed-evidence handling. The active
+CD-2/CD-7 implementation slices and canonical market ledgers are unchanged.
+These concrete research mechanics do not close #41/#40 or supply an absent
+owner's receiving disposition.

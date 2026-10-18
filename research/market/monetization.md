@@ -1,6 +1,6 @@
 # Monetization and neutral recommendations
 
-Status: research proposal for [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54). Initial desk research: 2026-10-16; the separate 2026-10-18 source and proposal review is identified below, and section 8 preserves an additional bounded four-page offer readback. No accounts, quotes, agreements, outreach or willingness-to-pay data. Confidence overall: Low for commercial viability; the observed offer structures have the narrower confidence stated in sections 2 and 8.
+Status: reviewed research proposal for [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54). Initial desk research: 2026-10-16; the separate 2026-10-18 source and proposal review is identified below, and section 8 preserves an additional bounded four-page offer readback. No accounts, quotes, agreements, outreach or willingness-to-pay data. Confidence overall: Low for commercial viability; the observed offer structures have the narrower confidence stated in sections 2 and 8. The actual scoped source and receiving decisions are recorded in section 9; final amendment validation and canonical delivery remain separate gates.
 
 This note compares business-model **structure**. It records no prices, rates, fees, discounts or allowances. Monetary rates belong in dated pricebooks only when complete units and conditions exist ([`docs/RESEARCH_WORKFLOW.md`](../../docs/RESEARCH_WORKFLOW.md)); price freshness and total-cost scenarios are owned by [#64](pricing-validation.md), and pricing/cost semantics by [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39). Country, taxes, discounts, storage, egress, idle capacity, support and commitment terms must be evaluated for an actual quote.
 
@@ -131,7 +131,7 @@ First concept to test (Hypothesis, confidence Low): a free, neutral comparison c
 
 Each model must qualify independently. A subscription needs a useful recurring buyer job, reachable procurement, rights-qualified benefits and support/data/retention economics. Referrals need reachable purchases, a real partner agreement, disclosed incentives, unchanged organic order and support/data costs that can be covered. The accepted #60 policy excludes unsupported source uses; neither model may assume those uses become licensed by monetization. #63 observations can revise either pilot, and **both models may remain unqualified**. Rejection of a subscription does not automatically select referrals; the outcome may be a smaller free research tool, a revised concept or no commercial launch.
 
-Handoffs: #39 receives comparison-unit boundaries, partial-cost limits and the prohibition on treating offered prices as validated willingness to pay; the exploratory workspace/month unit is not a new frozen billing unit or a runtime pricebook entry. #41 receives the rights exclusions and voluntary neutrality controls; tynamite's earlier #54 → #41 acceptance in PR #67 remains historical. #63 receives a proposal for D-14/D-15, with its operational/participant decisions still open. #58 receives the conditional research recommendation, not a launch decision. Current #39/#41 technical receiving decisions and final evidence review are to be recorded separately; Capterra terms, current PCPartPicker wording, G2 organic paid influence, service-specific legal applicability and all fieldwork/economics remain explicit unknowns.
+Handoffs: #39 receives comparison-unit boundaries, partial-cost limits and the prohibition on treating offered prices as validated willingness to pay; the exploratory workspace/month unit is not a new frozen billing unit or a runtime pricebook entry. #41 receives the rights exclusions and voluntary neutrality controls; tynamite's earlier #54 → #41 acceptance in PR #67 remains historical. #63 receives a proposal for D-14/D-15, with its operational/participant decisions still open. #58 receives the conditional research recommendation, not a launch decision. The actual delegated #39/#41 technical receiving decisions and the separately bounded #63/#58 design inputs are recorded in section 9; Capterra terms, current PCPartPicker wording, G2 organic paid influence, service-specific legal applicability and all fieldwork/economics remain explicit unknowns.
 
 ## 8. Commercial-offer readback, 2026-10-18
 
@@ -178,17 +178,34 @@ their existing writers. The seven live #54 criteria, unresolved legal
 applicability questions, untested neutrality controls and conditional
 recommendation remain unchanged; #54 stays open.
 
+## 9. Actual receiving decisions and review reconciliation, 2026-10-18
+
+The [independent source and delegated receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/326#pullrequestreview-5562961319), submitted at 2026-10-18T12:19:23Z, reviewed the complete note at `a53d06a04869f13938c46377d25fdc995c74785c`, blob `d9114eff62410d1d6150fcbe5cb1083c75051c9e`, the seven live #54 criteria and the four consumer boundaries below. It records actual engineering decisions under the user's express project delegation, posted through CompleteDotTech; it does not attribute a response to an absent assignee. Its primary-page, pinned-licence and official legal-provision readbacks retain their documentary limits.
+
+The [same reviewer's correction continuation](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/326#pullrequestreview-5562972004), submitted at 2026-10-18T12:22:53Z, independently accepts the single G2 sentence change at `161c99d1d3321e3f3c93c74b520cb26333248117`, blob `dab9c1512949983392da05835be9a1e0ea185979`, and carries the earlier four scoped decisions. The [separate coordinating review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/326#pullrequestreview-5562972949) independently checked that sentence against the current G2 methodology; it is not a second full-document or consumer review. No test, source retrieval or receiving decision is transferred to an earlier reviewer or a different revision.
+
+| Consumer | Actual scoped disposition | Retained decision or evidence limit |
+| --- | --- | --- |
+| #39 Cost Estimate | Accept the offer/charging-event comparison and the fixed hypothetical workspace/month questionnaire unit as research inputs, with explicit currency, period and buyer scope. | This unit is not a new frozen billing meter, Pricebook, provider charge, FX rule, runtime currency default or profitable price. The separate USD cost-policy preview retains its own adoption boundary; #64's findings remain incomplete cost coverage. |
+| #41 Data Sources | Accept the separately qualified software/data-rights observations, dated source readbacks and voluntary neutrality-control proposal, including paid-slot separation and invariant organic order. | No retrieval, display or redistribution grant, factual eligibility, legal applicability or automated rights decision follows. #60's exclusions and every source-specific condition remain effective. |
+| #63 Customer Validation | Accept section 6 as a bounded design input for D-14/D-15 and proposed reporting/analysis choices. | The complete concept card, quotas, reporting cells, all D-01–D-17 operational decisions, participant authority/consent and actual fieldwork are still required. This receipt selects none of those values and authorizes no contact. |
+| #58 MVP | Accept the commercial structure and conditional benefit hypotheses as context for the accepted narrow decision-record comparison; both revenue models may remain unqualified. | No paid demand, retention, complete economics, implementation scope or launch decision is supplied. #322's reconstruction and evidence gates remain unchanged. |
+
+The [canonical ledger](handoffs.json) records the two actual receipt revisions separately in the existing #54 → #39/#41 rows. The historical tynamite #41 receipt, original owner identities, all prior review objects and the 44/55/2 cutoff classifications remain unchanged. The #63/#58 design inputs above do not create new historical handoff pairs or complete those issues.
+
+The [#64 completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249706653) records its delivered bounded pricing research; the partial component scenarios still establish neither a complete bill nor commercial viability. Section 8 remains the complete original #312 readback, including the receiving and issue states observed at that earlier pass. This section records the subsequent decisions without rewriting that history. Capterra terms, current PCPartPicker wording, G2 organic paid influence, service-specific legal applicability and all participant/economic outcomes remain unknown or untested as stated above. Final independent review of this receipt amendment, current repository checks and normal canonical delivery precede #54 criterion reconciliation.
+
 ## Acceptance map (#54)
 
 | Criterion | Section | Status |
 | --- | --- | --- |
-| Compare subscription and referral models | 1, 2, 7 | Drafted; awaiting reviewer |
-| Review commercial offers without inventing rates | 2, 8 | Original observations retained; four dated primary-page structures rechecked without rates; independent review pending |
-| Assess neutrality conflicts | 3, 4 | Drafted; legal applicability needs review |
-| Propose willingness-to-pay validation | 6 | Proposed to #63; not run |
-| Every significant conclusion linked to evidence or explicit hypothesis | All | Section 8 links each new structure to its exact primary page and marks its decision implications as hypotheses; reviewer to confirm |
-| Technical owners review handoffs; unresolved decisions named | 7 | #41 prior acceptance; #39 pending |
-| Repository checks pass; reviewer accepts evidence | — | Checks run locally; reviewer acceptance pending |
+| Compare subscription and referral models | 1, 2, 7, 9 | Comparison and independent qualification accepted by the linked source review; no selected model is validated by demand. |
+| Review commercial offers without inventing rates | 2, 8, 9 | Dated primary-page structures and pinned licences independently reviewed; no rate imported; access failures and publisher claims keep their limits. |
+| Assess neutrality conflicts | 3, 4, 9 | Conflicts and voluntary controls reviewed; actual organic-order testing and service-specific legal applicability remain unestablished. |
+| Propose willingness-to-pay validation | 6, 9 | Accepted as a bounded #63 design input; D-01–D-17 operational choices and all fieldwork remain separate. |
+| Every significant conclusion linked to evidence or explicit hypothesis | All, 9 | Full source review accepts the qualified documentary claims and labelled hypotheses; the G2 follow-up resolves its one finding. |
+| Technical owners review handoffs; unresolved decisions named | 7, 9 | Actual delegated #39/#41 receiving decisions and #63/#58 design inputs recorded at their exact sources; no absent-assignee response inferred. |
+| Repository checks pass; reviewer accepts evidence | 9 and PR #326 | Original source and G2 correction reviews are recorded; this receipt amendment's exact review, current checks and canonical delivery remain final PR gates. |
 
 ## Proposed source-register additions
 
