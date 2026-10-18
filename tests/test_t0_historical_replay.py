@@ -401,15 +401,76 @@ class HistoricalReplayTests(unittest.TestCase):
                 self.assertEqual(result.status, "profile_unavailable")
                 self.assertIn(("evaluator", "evaluator_pin_unsupported"), result.issues)
                 self.assertIsNone(result.generated_report)
+                self.assertEqual({binding.kind for binding in result.bindings}, set(RECORDS))
+                self.assertIs(next(b.raw for b in result.bindings if b.kind == "evaluation_report"),
+                              RECORDS["evaluation_report"])
 
     def test_missing_or_modified_local_evaluator_cannot_execute(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "evaluate.py"
             with patch.object(replay, "EVALUATOR_PATH", path):
-                self.assertEqual(run().issues, (("evaluator", "local_evaluator_or_schemas_unavailable"),))
+                missing = run()
+                self.assertEqual(missing.issues, (("evaluator", "local_evaluator_or_schemas_unavailable"),))
+                self.assertIs(next(b.raw for b in missing.bindings if b.kind == "evaluation_report"),
+                              RECORDS["evaluation_report"])
                 path.write_bytes(b"raise AssertionError('untrusted evaluator executed')\n")
                 result = run()
                 self.assertEqual(result.issues, (("evaluator", "local_evaluator_digest_mismatch"),))
+                self.assertIs(next(b.raw for b in result.bindings if b.kind == "evaluation_report"),
+                              RECORDS["evaluation_report"])
+
+    def test_unavailable_reader_retains_independent_missing_and_tampered_input_diagnostics(self):
+        cases = (("resource_estimate", "missing", "pinned_artifact_unavailable"),
+                 ("dependency_graph", "changed", "content_digest_mismatch"),
+                 ("catalog_snapshot", "missing", "pinned_revision_unavailable"))
+        for kind, mutation, code in cases:
+            records = dict(RECORDS)
+            if mutation == "missing":
+                del records[kind]
+            else:
+                records[kind] += b"\n"
+            value = packet()
+            value["evaluator"]["profile"] = "unavailable-retained-reader"
+            with self.subTest(kind=kind):
+                result = run(records, replay_manifest=manifest(value))
+                self.assertEqual(result.status, "profile_unavailable")
+                self.assertEqual(result.issues, (("evaluator", "evaluator_pin_unsupported"), (kind, code)))
+                self.assertIsNone(result.generated_report)
+                self.assertIs(next(b.raw for b in result.bindings if b.kind == "evaluation_report"),
+                              RECORDS["evaluation_report"])
+                self.assertIsNone(next(b.raw for b in result.bindings if b.kind == kind))
+
+    def test_unavailable_reader_never_fabricates_missing_or_tampered_report_bytes(self):
+        for mutation, code in (("missing", "pinned_artifact_unavailable"),
+                               ("changed", "content_digest_mismatch")):
+            records = dict(RECORDS)
+            if mutation == "missing":
+                del records["evaluation_report"]
+            else:
+                records["evaluation_report"] += b"\n"
+            value = packet(); value["evaluator"]["profile"] = "unavailable-retained-reader"
+            with self.subTest(mutation=mutation):
+                result = run(records, replay_manifest=manifest(value))
+                self.assertEqual(result.status, "profile_unavailable")
+                self.assertIn(("evaluation_report", code), result.issues)
+                binding = next(b for b in result.bindings if b.kind == "evaluation_report")
+                self.assertEqual(binding.status, code)
+                self.assertIsNone(binding.raw)
+                self.assertIsNone(result.generated_report)
+
+    def test_unavailable_reader_keeps_report_identity_disagreement_explicit(self):
+        records = dict(RECORDS); report = json.loads(records["evaluation_report"])
+        report["build_revision"] = 2
+        records["evaluation_report"] = replay.encoded(report)
+        sidecar, replay_manifest = repin(records)
+        value = json.loads(replay_manifest)["x_t0_historical_replay"]
+        value["evaluator"]["profile"] = "unavailable-retained-reader"
+        result = run(records, sidecar=sidecar, replay_manifest=manifest(value))
+        self.assertEqual(result.status, "profile_unavailable")
+        self.assertIn(("evaluation_report", "build_identity_mismatch"), result.issues)
+        self.assertIs(next(b.raw for b in result.bindings if b.kind == "evaluation_report"),
+                      records["evaluation_report"])
+        self.assertIsNone(result.generated_report)
 
     def test_changed_or_missing_schema_bytes_cannot_claim_the_pinned_profile(self):
         with tempfile.TemporaryDirectory() as directory:
