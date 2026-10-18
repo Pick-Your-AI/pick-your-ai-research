@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-a100-80gb",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA A100 80GB (shared form-factor facts)",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Only facts shared by the documented 80GB PCIe and SXM variants. Form factor, power and fabric remain unspecified; no 40GB or MIG allocation implied.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "A100 80GB",
+    "vram_gb": 80,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "fp32",
+      "tf32",
+      "bf16",
+      "fp16",
+      "int8"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-nvidia-us-2188504-web.pdf",
+      "checked_at": "2026-10-18T00:53:22Z",
+      "verification_status": "unverified",
+      "notes": "Datasheet 2188504, page 1: both 80GB columns support name, vendor, model, memory and listed precision subset. Power and interconnect omitted because their conditions differ by variant. Published GB is not measured free memory. Snapshot active means product documentation exists, not a stock or lifecycle guarantee; billing unknown."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T00:53:22Z",
+      "verification_status": "unverified",
+      "notes": "NVIDIA lists A100 compute capability 8.0, supporting CUDA backend identity. No driver, engine or kernel compatibility assertion."
+    }
+  ],
+  "updated_at": "2026-10-18T00:53:22Z"
+}

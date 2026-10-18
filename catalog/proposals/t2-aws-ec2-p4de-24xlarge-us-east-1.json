@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "id": "aws-ec2-p4de-24xlarge-us-east-1",
+  "kind": "compute_profile",
+  "tier": "T2",
+  "name": "Amazon EC2 p4de.24xlarge in us-east-1",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published default allocation and regional family listing. Account quota, AZ capacity, usable memory, exact accelerator form factor and current price remain unknown.",
+  "spec": {
+    "hosting_ref": "aws-ec2",
+    "accelerator_ref": "nvidia-a100-80gb",
+    "accelerator_count": 8,
+    "cpu_cores": 48,
+    "ram_gb": 1236.950581248,
+    "disk_gb": 8000,
+    "region": "us-east-1"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://aws.amazon.com/ec2/instance-types/p4/",
+      "checked_at": "2026-10-18T00:53:22Z",
+      "verification_status": "unverified",
+      "notes": "p4de.24xlarge row: eight A100 GPUs, 640GB aggregate GPU memory,1152GiB host RAM, 96vCPU,8x1000GB local NVMe. Host RAM converts exactly as1152*2^30/10^9=1236.950581248GB. Accelerator ref describes shared A100 80GB facts, not an inferred PCIe/SXM variant. Disk is aggregate local instance storage, not persistent checkpoint storage. Omit network guarantee."
+    },
+    {
+      "source_uri": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html",
+      "checked_at": "2026-10-18T00:53:22Z",
+      "verification_status": "unverified",
+      "notes": "p4de.24xlarge default CPU options:48 cores, 2 threads per core, 96vCPU. cpu_cores uses 48, not 96; not a dedicated-host tenancy claim."
+    },
+    {
+      "source_uri": "https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html",
+      "checked_at": "2026-10-18T00:53:22Z",
+      "verification_status": "unverified",
+      "notes": "US East N.Virginia (us-east-1) lists P4de. P4 page identifies p4de.24xlarge. Regional support does not establish every AZ, account entitlement, available capacity or price. Snapshot active only."
+    }
+  ],
+  "updated_at": "2026-10-18T00:53:22Z"
+}

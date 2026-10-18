@@ -2,21 +2,21 @@
 
 Parent: [#8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) · Live owner: @Mattycodes69 · Contract: 1.0.0 · Research capture: 2026-10-16
 
-Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), open against `main`. All six affected owners' review requests were verified; no submitted owner review or handoff confirmation had been received at the publication check.
+Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), merged to `main`. The following publication-era paragraphs are historical; the ledger records later scoped receipts.
 
 Continuation audit on 2026-10-16 re-read live issues, comments, native relationships and the existing PR. Hosting and engine researchers checked source conditions, and an independent compute researcher audited arithmetic. The orchestrator completed compute corrections and shared integration through this existing PR. See [validation.md](validation.md) for corrections and the independent integration review; owner acceptance remains pending.
 
-**Status: prepared for owner review; research completion is not claimed.** The three decision records and this summary require reviewed merge and the consuming-owner confirmations below. No product implementation, runtime deployment, provisioning or training job is included.
+**Status: records and summary merged; research completion is not claimed.** Consuming-owner confirmations and remaining issue criteria still apply. No product implementation, runtime deployment, provisioning or training job is included.
 
 ## Decision records and artifacts
 
 | Issue | Decision record / recommendation for review | Structured proposals |
 | --- | --- | --- |
-| [#9 Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | [hosting.md](hosting.md): separate operational responsibility, invocation protocol, location and billing; retain unknown stock/quotas and infrastructure-storage boundaries | [Five host and four storage proposals](../../catalog/proposals/); [dated Pricebook](../../pricing/proposals/t2-hosting-2026-10-16.json), five conditional rates |
-| [#10 GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | [gpu-compute.md](gpu-compute.md): separate physical accelerator from provisionable profile; byte-based weights/KV/runtime/adapter sizing with per-device topology and explicit uncertainty | Three accelerator records and one EC2 profile in [catalog proposals](../../catalog/proposals/); [reproducible arithmetic](compute/sizing_examples.py) |
+| [#9 Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | [hosting.md](hosting.md): separate operational responsibility, invocation protocol, location and billing; retain unknown stock/quotas and infrastructure-storage boundaries | [Five host and five storage proposals](../../catalog/proposals/); [dated Pricebook](../../pricing/proposals/t2-hosting-2026-10-16.json), five conditional rates |
+| [#10 GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | [gpu-compute.md](gpu-compute.md): separate physical accelerator from provisionable profile; byte-based weights/KV/runtime/adapter sizing with per-device topology and explicit uncertainty | Five accelerator records and two EC2 profiles in [catalog proposals](../../catalog/proposals/); [reproducible arithmetic](compute/sizing_examples.py) |
 | [#11 Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) | [inference-engine.md](inference-engine.md): version-specific support tuples and API/parser/adapter semantics; retain historical rows and unknown combinations | [vLLM v0.31.0](../../catalog/proposals/t2-engine-vllm-v0.31.0.json), [llama.cpp v0.7.0](../../catalog/proposals/t2-engine-llama-cpp-v0.7.0.json), [TGI v3.3.7](../../catalog/proposals/t2-engine-tgi-v3.3.7.json) |
 
-The 16 CatalogItems cover all five scoped canonical kinds: `hosting_platform`, `storage`, `accelerator`, `compute_profile`, `inference_engine`. Service/hardware date versions are research snapshots; engine versions are source releases. Catalog `active` is lifecycle metadata, not owner approval or security certification. No new real ResourceEstimate is emitted without real T1 build/selection inputs.
+The 20 CatalogItems cover all five scoped canonical kinds: `hosting_platform`, `storage`, `accelerator`, `compute_profile`, `inference_engine`. Service/hardware date versions are research snapshots; engine versions are source releases. Catalog `active` is lifecycle metadata, not owner approval or security certification. No new real ResourceEstimate is emitted without real T1 build/selection inputs.
 
 One integrated review submission keeps the shared host/profile/accelerator references resolvable together. Files and acceptance assessments remain separated by research issue. The summary, matrix and ledger are owned by the orchestrator.
 
@@ -76,3 +76,6 @@ See [validation.md](validation.md) for exact checks, independent review findings
 | Restore Project write access or apply the verified status updates manually, then re-read them | @Mattycodes69 / organization Project administrator |
 
 Use `Refs #8, #9, #10, #11`. Close no scoped issue until its merged record and full acceptance criteria—including actual owner confirmations—are satisfied; close #8 only after all children and the merged summary meet their gates.
+
+
+2026-10-18 supplement: A100 80GB shared-variant facts, RTX 4090 reference-design facts, the P4de default profile and S3 Standard identity are documented in the existing GPU/hosting records. Their catalog snapshots remain source-checked/unverified and add no rates or measured results.
