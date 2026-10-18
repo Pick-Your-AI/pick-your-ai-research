@@ -202,9 +202,9 @@ If no relevant decision process, alternative or spend applies, record `not appli
 | To | What | Status |
 | --- | --- | --- |
 | #63 | Interview guide, screener, segment/role map, analysis questions | Supplied in this note; #63 owns approval and execution |
-| #2, #3 (tynamite) | Segment 1 local-first job | Accepted by tynamite in PR #67 review at `6511dea`; personas remain unvalidated |
-| #16 (zabyxc01), #25 (CompleteDotTech) | Segment 3 RAG/agent stack job | Disposition not yet recorded |
-| #39 (PUSHINGSQUARES) | Revised segment 6 job and cost-priority caveat | Disposition not yet recorded |
+| #2, #3 (tynamite) | Segment 1 local-first job | Historical tynamite acceptance at `6511dea` retained; the separately dated [delegated engineering receipt](#actual-technical-receiving-decisions-2026-10-18) receives the current note with constraints |
+| #16 (zabyxc01), #25 (CompleteDotTech) | Segment 3 RAG/agent stack job | Current bounded input accepted with constraints in the [actual delegated engineering receipt](#actual-technical-receiving-decisions-2026-10-18); no absent-assignee response or backend/framework decision is inferred |
+| #39 (PUSHINGSQUARES) | Revised segment 6 job and cost-priority caveat | Current priority/role input accepted with constraints in the [actual delegated engineering receipt](#actual-technical-receiving-decisions-2026-10-18); no rate, quantity, willingness-to-pay result or budget pass |
 | #53, #54, #58 | Segment map, enterprise adoption figures, cost-priority caveat | Information only; no owner disposition recorded |
 
 ## Proposed source-register additions
@@ -247,7 +247,66 @@ the non-user group that had considered AI. Catalog roles are distinguished witho
 attributing hardware-fit capability to every listed alternative or claiming
 comprehensive coverage of enterprise decision processes.
 
-This update records no new receiving-owner disposition and makes no fieldwork,
-recruitment, consent, quota, concept-card or monetary decision for #63. The existing
-handoff rows retain their stated scope; independent evidence/protocol review and
-the named receiving decisions remain necessary before #52 acceptance.
+The source/protocol correction delivered through [#337](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/337)
+recorded no new receiving-owner disposition and made no fieldwork, recruitment,
+consent, quota, concept-card or monetary decision for #63. Its complete independent
+evidence/protocol review is [5563135481](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/337#pullrequestreview-5563135481).
+The later receiving assessment below has its own date, role and source identity.
+
+## Actual technical receiving decisions, 2026-10-18
+
+The [actual receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6250471522),
+posted at **2026-10-18T13:27:17Z**, records decisions by ChatGPT acting as the
+in-session research engineering reviewer under the user's express project
+delegation, through the connected CompleteDotTech account. The reviewer authored
+the #337 correction; its independent source review is linked above. These are
+actual technical input decisions, not responses attributed to the other listed
+assignees or a claim to have completed their issues.
+
+The receipt reviews this note at signed main
+`aee9b46df93c9e74b9c9d4ae588b203e8421df59`, exact blob
+`25112cbe50585cf38892fd2b1bcf8aea58c901e1`, against the five live receiving scopes
+and their applicable definitions, proposed interfaces and unresolved decisions.
+Its precise receiving-note blob identities remain in that receipt. The two
+original tynamite records retain their own `6511dea` scope and authorship.
+
+| Existing technical handoff | Disposition | Accepted use and retained limits |
+| --- | --- | --- |
+| #52 → #2 Workload | Accepted with constraints | Use segment 1 to ask about existing hardware and actual targets. It supplies no preset workload, measured demand, memory/quality result or automatic T3/T4/T5 activation. Explicit answers, unknowns and selected capabilities remain authoritative. |
+| #52 → #3 Deployment | Accepted with constraints | Receive the local-first comparison hypothesis. Determine each serving component's actual operator and capacity separately; infer no mode, billing basis, residency, isolation or fit from a persona. |
+| #52 → #16 Retrieval | Accepted with constraints | Receive segment 3 as an integration/rework hypothesis. It selects no backend or vector store and supplies no ACL, context, quality or interoperability result. Preserve optional retrieval, caller/resource authorization, complete assembled-input counting and separate #36/#65 evidence. |
+| #52 → #25 Agent framework | Accepted with constraints | Receive segment 3 as an orchestration/integration question. Retain no-framework/direct orchestration and explicit selected paths; catalog presence supplies no tuple compatibility, adoption or measured planning benefit. Security, iteration, evaluation and #40 decisions remain separate. |
+| #52 → #39 Cost | Accepted with constraints | Receive segment 6's neutral priorities and user/buyer/approver distinction. Survey responses supply no quantity, rate, currency/region default or willingness-to-pay amount. Actual spend and hypothetical intent stay distinct; unpriced/unsized inputs remain unknown and partial coverage cannot establish a complete budget result. |
+
+The incoming #3 → #52 incentive question remains an untested hypothesis, as in
+the [historical co-owner reply](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6245701946).
+Contributor incentives and #63's interview incentive are separate decisions.
+No incentive or participant contact is authorized by this assessment.
+
+Unresolved decisions remain named: #16's zabyxc01/appletechie own backend,
+enforcement and context/evaluation follow-ups; #25's CompleteDotTech/Mattycodes69
+retain selected-path/security research and central #40 adoption; #39's
+appletechie/PUSHINGSQUARES retain qualified quantities, rate coverage,
+currency/region and saved-estimate policy. For #63, zwright8/appletechie retain
+the validation work and coordinator CompleteDotTech retains recruitment,
+consent, retention, quotas, concept text and incentive decisions. These
+information handoffs neither change assignments nor require the complete
+receiving work packages to close before the bounded #52 desk deliverable.
+
+## Literal #52 criterion map
+
+The [live issue](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52)
+explicitly includes desk personas, current alternatives and an interview protocol,
+and excludes running interviews or contacting participants. #63 remains the
+separate primary-validation work package; its unperformed fieldwork does not
+convert into an additional #52 criterion.
+
+| Literal criterion | Evidence and review | Acceptance boundary |
+| --- | --- | --- |
+| Map ten requested segments | The ten-row segment map and ten numbered jobs remain intact; complete source review 5563135481 checked them. | Roles and overlaps are desk hypotheses, with no inferred segment population or participant count. |
+| Write evidence-qualified jobs to be done | Each job records a trigger, constraint and hypothesized consequence; nearby sources and the opening claim rules distinguish reported survey evidence from analyst assumptions. | No job is represented as an observed customer finding. |
+| Define neutral interview questions | Screening permits non-use; the fixed sequence reconstructs events before alternatives/spend and optional concept questions. #337's reviewed correction removes recurrence, bad-outcome and fictional-decision assumptions. | #63's operational decisions remain unfilled; the guide does not authorize recruitment or manufacture task-completion evidence. |
+| Distinguish desk personas from validated customers | The status, claim rules, role map and per-segment hypotheses explicitly retain that distinction. | Demand, recurrence and willingness to pay are unestablished. |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | The source tables, catalog IDs, original source-register proposals and dated source review supply claim-level qualifications; the independent review read the primary tables and actual Census workbook. | Publisher observations retain dates, populations, question denominators and limitations; this is not independent survey reproduction, continued freshness or a source-use grant. |
+| Relevant technical owners review handoffs; unresolved decisions are named. | The five actual delegated technical receiving decisions above supplement the two preserved historical tynamite records; the receipt and ledger identify the role, exact artifact, scope and retained decisions. | No response is attributed to an absent assignee; no consumer's complete technical outcome is accepted by this desk-input receipt. |
+| Repository checks pass; reviewer accepts the evidence before Done. | #337's independent source review and exact receiving/signed-main logs passed 21 contract and 659 repository tests plus all four validators. This receipt/ledger reconciliation receives its own independent review, current checks and signed-main identity verification through its publishing PR. | Close #52 only after those amendment delivery gates complete and the live issue/Project readback is reconciled. #63 remains separately gated. |
