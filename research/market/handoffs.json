@@ -731,10 +731,27 @@
     ],
     "artifact": "research/market/integrations.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted for constrained source discovery and maintenance planning by delegated project engineering",
+    "requested_action": "Preserve original provider/offering/region, exact units and dated observations. A rank supplies no current quote, available capacity, measurement or SLA.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:11:47Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771",
+        "reviewed_commit": "86fa60c445dbd29197ca576af6ae633a7943ca74",
+        "reviewed_tree": "20bdbaabb9e901dea9a166be01023d10c455fba6",
+        "reviewed_input_main_commit": "2f307a10ef98a8c7c711ef28ba35c6246d36f9fd",
+        "delivery_commit_of_reviewed_tree": "3f863edbf2dd0470b26dc108f1b3f706f5ae93ad",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session independent technical receiving assessment under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the named research input or conservative project exclusion, not external source permission, production integration, publication qualification or any other issue's full acceptance.",
+        "scope": "Use the ranked inventory as source-discovery and maintenance-planning input for hosting research.",
+        "retained_unknowns_and_next_action": "Preserve original provider/offering/region, exact units and dated observations. A rank supplies no current quote, available capacity, measurement or SLA."
+      }
+    ]
   },
   {
     "market_issue": 55,
@@ -746,10 +763,27 @@
     ],
     "artifact": "research/market/integrations.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted for constrained MCP metadata discovery by delegated project engineering",
+    "requested_action": "Keep metadata, repository code/docs and server package material distinct. Listing supplies no security, compatibility or execution certification.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:11:47Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771",
+        "reviewed_commit": "86fa60c445dbd29197ca576af6ae633a7943ca74",
+        "reviewed_tree": "20bdbaabb9e901dea9a166be01023d10c455fba6",
+        "reviewed_input_main_commit": "2f307a10ef98a8c7c711ef28ba35c6246d36f9fd",
+        "delivery_commit_of_reviewed_tree": "3f863edbf2dd0470b26dc108f1b3f706f5ae93ad",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session independent technical receiving assessment under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the named research input or conservative project exclusion, not external source permission, production integration, publication qualification or any other issue's full acceptance.",
+        "scope": "Use MCP registry metadata as discovery context, with provenance, applicable notices and separate project annotations.",
+        "retained_unknowns_and_next_action": "Keep metadata, repository code/docs and server package material distinct. Listing supplies no security, compatibility or execution certification."
+      }
+    ]
   },
   {
     "market_issue": 55,
@@ -761,10 +795,27 @@
     ],
     "artifact": "research/market/integrations.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted for constrained price-source selection by delegated project engineering",
+    "requested_action": "Conditional source permission is separate from product eligibility. The shortlist supplies no billable meter, Pricebook, FX rate or licence for upstream material; original-provider prices need their own rights and applicability review.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:11:47Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771",
+        "reviewed_commit": "86fa60c445dbd29197ca576af6ae633a7943ca74",
+        "reviewed_tree": "20bdbaabb9e901dea9a166be01023d10c455fba6",
+        "reviewed_input_main_commit": "2f307a10ef98a8c7c711ef28ba35c6246d36f9fd",
+        "delivery_commit_of_reviewed_tree": "3f863edbf2dd0470b26dc108f1b3f706f5ae93ad",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session independent technical receiving assessment under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the named research input or conservative project exclusion, not external source permission, production integration, publication qualification or any other issue's full acceptance.",
+        "scope": "Use the explicit ranked, dated code/data and intended-use records to nominate original-provider sources for exact-scope rate research.",
+        "retained_unknowns_and_next_action": "Conditional source permission is separate from product eligibility. The shortlist supplies no billable meter, Pricebook, FX rate or licence for upstream material; original-provider prices need their own rights and applicability review."
+      }
+    ]
   },
   {
     "market_issue": 55,
@@ -776,8 +827,8 @@
     ],
     "artifact": "research/market/integrations.json",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted as a starting deliverable",
-    "requested_action": "The reviewer retained source terms, intended-use permissions, cadence and last-check fields as follow-up work; rights validation belongs with #60/#41.",
+    "acceptance": "Historical starting-deliverable receipt retained; completed research fields accepted by delegated project engineering",
+    "requested_action": "Every inventory row remains Not approved for integration. Retain actual source dates, conditional permissions, notice/material boundaries and named future use decisions; no freshness, evidence correctness or production publication is inferred.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -788,7 +839,24 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:11:47Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771",
+        "reviewed_commit": "86fa60c445dbd29197ca576af6ae633a7943ca74",
+        "reviewed_tree": "20bdbaabb9e901dea9a166be01023d10c455fba6",
+        "reviewed_input_main_commit": "2f307a10ef98a8c7c711ef28ba35c6246d36f9fd",
+        "delivery_commit_of_reviewed_tree": "3f863edbf2dd0470b26dc108f1b3f706f5ae93ad",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session independent technical receiving assessment under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the named research input or conservative project exclusion, not external source permission, production integration, publication qualification or any other issue's full acceptance.",
+        "scope": "Accept the explicit ranked, dated code/data and intended-use research records for source selection and intake policy.",
+        "retained_unknowns_and_next_action": "Every inventory row remains Not approved for integration. Retain actual source dates, conditional permissions, notice/material boundaries and named future use decisions; no freshness, evidence correctness or production publication is inferred."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -2003,8 +2071,8 @@
     ],
     "artifact": "research/market/rights-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted per-source intended-use rights boundary",
-    "requested_action": "Preserve source-specific retrieval/display/redistribution/automation restrictions and original access dates. Pinned historical facts need no arbitrary TTL; mutable claims remain as-of dated. PR #127 merge is separate from this receipt; its merge SHA is not a reviewed SHA.",
+    "acceptance": "Historical intended-use receipt retained; current table and exclusion accepted by delegated project engineering",
+    "requested_action": "Unknown upstream grants remain unknown and excluded. Retain licence, attribution, change-indication, version and notice conditions. Changed material/use/terms returns to #41/#60; reconsider GPUs.io only with a specific permitted-use basis and new #39/#41/#60 review. No production or external rights approval.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60",
     "responses": [
@@ -2021,7 +2089,24 @@
         "commit_basis": "Receipt does not name a newly reviewed research-repository SHA; no SHA inferred"
       }
     ],
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session root engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:11:47Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771",
+        "reviewed_commit": "86fa60c445dbd29197ca576af6ae633a7943ca74",
+        "reviewed_tree": "20bdbaabb9e901dea9a166be01023d10c455fba6",
+        "reviewed_input_main_commit": "2f307a10ef98a8c7c711ef28ba35c6246d36f9fd",
+        "delivery_commit_of_reviewed_tree": "3f863edbf2dd0470b26dc108f1b3f706f5ae93ad",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session independent technical receiving assessment under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the named research input or conservative project exclusion, not external source permission, production integration, publication qualification or any other issue's full acceptance.",
+        "scope": "Accept the qualified ten-source material/use table and adopt exclusion of GPUs.io API retrieval, display and export from the current product.",
+        "retained_unknowns_and_next_action": "Unknown upstream grants remain unknown and excluded. Retain licence, attribution, change-indication, version and notice conditions. Changed material/use/terms returns to #41/#60; reconsider GPUs.io only with a specific permitted-use basis and new #39/#41/#60 review. No production or external rights approval."
+      }
+    ]
   },
   {
     "market_issue": 61,
