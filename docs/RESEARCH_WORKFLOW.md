@@ -50,6 +50,8 @@ CI runs the same checks. It validates schemas, import integrity, generator consi
 
 The market integrity reader applies the same duplicate-key, non-finite-number and numeric-overflow rejection to its four inputs: `competitors.json`, `sources.json`, `features.json` and `research-backlog.json`. It rejects ambiguous raw JSON before interpreting the market evidence or priority records, including under optimized Python.
 
+Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; the exact claim URL must use HTTP(S) without credentials or whitespace, and the access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.
+
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
 
 The handoff audit validator checks consistency among `handoffs.json`, `handoff-audit-readback.json` and `audit.json`. It rejects duplicate snapshot issue IDs, pull-request IDs, declared handoff pairs and historical review pairs before relying on their indexed identities. Conflicting entries cannot be silently discarded to obtain a passing audit. These checks preserve recorded attribution; they do not fetch live GitHub state or establish receiving-owner acceptance.

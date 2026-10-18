@@ -56,6 +56,72 @@ class MarketValidation(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
 
+    def supported_claim(self):
+        data = deepcopy(self.data)
+        data['features.json']['cells'][0].update(
+            status='Documented', evidence_ids=['synthetic-source'],
+            basis='Synthetic claim for validator regression only',
+            verification_method='Synthetic documentary check',
+            evidence_grade='Vendor claim',
+            evidence_url='https://example.com/synthetic-claim',
+            access_date='2026-10-18', confidence='Synthetic limited confidence',
+            limitations='Not real product evidence', audit_scope='synthetic-test-only')
+        return data
+
+    def test_complete_supported_claims_pass_in_both_modes(self):
+        for status in ('Documented', 'Exercised', 'Unsupported'):
+            data = self.supported_claim()
+            data['features.json']['status_semantics'][status] = 'Synthetic test grade'
+            data['features.json']['cells'][0]['status'] = status
+            for optimized in (False, True):
+                with self.subTest(status=status, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_supported_claim_metadata_cannot_be_missing_blank_or_nontext(self):
+        for field in ('basis', 'verification_method', 'evidence_grade', 'evidence_url',
+                      'access_date', 'confidence', 'limitations', 'audit_scope'):
+            for value in (None, '', '   ', [], 1):
+                data = self.supported_claim()
+                if value is None:
+                    del data['features.json']['cells'][0][field]
+                else:
+                    data['features.json']['cells'][0][field] = value
+                for optimized in (False, True):
+                    with self.subTest(field=field, value=value, optimized=optimized):
+                        result = self.run_validator(data, optimized)
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn('MarketValidationError', result.stderr)
+                        self.assertIn(field, result.stderr)
+                        self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_supported_claim_requires_a_credential_free_http_url(self):
+        for url in ('file:///synthetic', '/synthetic', 'https:///synthetic',
+                    'https://user:password@example.com/synthetic',
+                    'https://@example.com/synthetic', 'https://[invalid',
+                    'https://example.com/synthetic claim'):
+            data = self.supported_claim()
+            data['features.json']['cells'][0]['evidence_url'] = url
+            for optimized in (False, True):
+                with self.subTest(url=url, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertIn('evidence_url', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_supported_claim_requires_an_actual_iso_access_date(self):
+        for access_date in ('2026-02-30', '20261018', '2026-10-18T00:00:00Z', 'yesterday'):
+            data = self.supported_claim()
+            data['features.json']['cells'][0]['access_date'] = access_date
+            for optimized in (False, True):
+                with self.subTest(access_date=access_date, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertIn('access_date', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
     def test_duplicate_json_keys_fail_before_market_data_is_interpreted(self):
         original = json.dumps(self.data['features.json'])
         cases = (

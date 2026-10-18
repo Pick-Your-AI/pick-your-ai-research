@@ -1,6 +1,7 @@
 """Check market-note integrity, not truth, rights, benchmark quality or acceptance."""
 import json
 import math
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -76,7 +77,26 @@ def validate():
         require(cell['status'] in matrix['status_semantics'], 'market integrity check failed')
         require(set(cell['evidence_ids']) <= source_ids, 'market integrity check failed')
         if cell['status'] != 'Unknown':
-            require(cell['evidence_ids'] and cell['basis'] and cell['verification_method'], 'market integrity check failed')
+            require(cell['evidence_ids'], 'market integrity check failed')
+            for field in ('basis', 'verification_method', 'evidence_grade', 'evidence_url',
+                          'access_date', 'confidence', 'limitations', 'audit_scope'):
+                value = cell.get(field)
+                require(isinstance(value, str) and value.strip(),
+                        f'{pair}: supported cell requires nonempty {field}')
+            try:
+                claim_url = urlsplit(cell['evidence_url'])
+                valid_url = (claim_url.scheme in ('http', 'https') and claim_url.hostname and
+                             claim_url.username is None and claim_url.password is None and
+                             not any(character.isspace() for character in cell['evidence_url']))
+            except ValueError as error:
+                raise MarketValidationError(f'{pair}: invalid evidence_url') from error
+            require(valid_url, f'{pair}: evidence_url requires credential-free HTTP(S)')
+            try:
+                access_date = date.fromisoformat(cell['access_date'])
+            except ValueError as error:
+                raise MarketValidationError(f'{pair}: invalid access_date') from error
+            require(access_date.isoformat() == cell['access_date'],
+                    f'{pair}: access_date must use YYYY-MM-DD')
     require(len(pairs) == len(ids) * len(matrix['definitions']), 'incomplete matrix')
     numbers = {item['number'] for item in backlog}
     require(len(numbers) == len(backlog), 'duplicate backlog issue')
