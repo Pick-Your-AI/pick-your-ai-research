@@ -12,9 +12,9 @@ This covers three things:
 - storage and distributed-training needs;
 - managed per-token training prices vs self-run GPU-hours.
 
-Deployment modes:
-- **API / managed:** cost is per training token plus post-training hosting or storage. The user sizes no hardware.
-- **Self-hosted:** the user picks accelerators (#10) on a host (#9). The builder must estimate whether the run fits in memory and how long it takes.
+Training channels (these do not determine T0 serving deployment modes):
+- **Provider-operated training:** billing is offering-specific: training tokens, GPU/time units or job minimums, with post-training hosting or storage where applicable (P1–P6). Capacity choices and responsibility for underlying allocation vary by offering; dedicated training may require selecting capacity.
+- **User-operated training:** the user picks accelerators (#10) on a host (#9). The builder must estimate whether the run fits in memory and how long it takes.
 
 Inference GPU sizing is owned by #10, and cost aggregation by #39.
 
@@ -69,7 +69,7 @@ LoRA at r = 16 on all linear layers gives N_lora = 1,212,416 per layer × 36 = *
 
 QLoRA on Qwen3-8B at s = 4096 is therefore ≈ 6–8 GB with fused cross-entropy, or ≈ 11–15 GB without. The difference is the logits term. The builder must ask whether a fused-loss framework is selected (#30: Unsloth, Liger-enabled TRL, torchtune chunked cross-entropy).
 
-These are estimates and must be calibrated against the measured rows below.
+These are estimates. The published rows below provide comparison inputs, not a completed calibration: no row measures this Qwen3-8B configuration, B1 has an inferred configuration, and B12 reports capability without memory or throughput measurements. A calibration must record matched model revision, method, precision, optimiser, loss implementation, sequence length, batch size and hardware, then compare predicted and observed memory/time with residuals. Until that evidence exists, retain `estimated` confidence and do not use these examples as a general fit guarantee.
 
 ### Published measurements
 
@@ -278,7 +278,7 @@ The prices above are recorded with provenance so they can be converted once the 
 
 ### Upstream T2 records
 
-2026-10-18 supplement: the [T2 hardware/profile capture](../T2-infrastructure/gpu-compute.md#additional-hardware-and-profile-capture-2026-10-18) supplies note-only A100 80GB, RTX 4090 and P4de facts. Their incomplete precision coverage cannot safely become frozen-v1 catalog entries; those record gaps remain. The [S3 identity](../T2-infrastructure/hosting.md#s3-standard-identity-supplement-2026-10-18) adds only `aws-s3-standard`, superseding that specific absence statement below once reviewed. Other SKUs, rates, measured training capacity and proposed contract fields remain unresolved. No historical price is silently rebound to a new item/version.
+2026-10-18 supplement: the [T2 hardware/profile capture](../T2-infrastructure/gpu-compute.md#additional-hardware-and-profile-capture-2026-10-18) supplies note-only A100 80GB, RTX 4090 and P4de facts. Their incomplete precision coverage cannot safely become frozen-v1 catalog entries; those record gaps remain. The [S3 identity](../T2-infrastructure/hosting.md#s3-standard-identity-supplement-2026-10-18) adds [`aws-s3-standard`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/14cd2d0328e6290552d03e32460456cf47e78c95/catalog/proposals/t2-aws-s3-standard.json) (merged in #158), resolving the missing storage identity. Other SKUs, rates, measured training capacity and proposed contract fields remain unresolved. No historical price is silently rebound to a new item/version. Training minimums, storage IOPS requirements and egress costs remain separate unresolved scope; the identity does not establish them.
 
 Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals under their own review, not approved catalog data. The first table lists what this note can already reference. The second separates records that do not exist from fields and meters that are unresolved.
 
@@ -289,14 +289,13 @@ Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals un
 | MI300X accelerator | `amd-mi300x`: `vram_gb` 192, backend `rocm` | Not priced in this note |
 | `aws g6e.xlarge` (1× L40S, $1.861/h, P7) | `compute_profile` `aws-ec2-g6e-xlarge-us-east-1`: `hosting_ref` `aws-ec2`, `accelerator_ref` `nvidia-l40s`, count 1, region `us-east-1` | The only existing `compute_profile`. It is a valid `compute_profile_ref` target. The T2 pricebook has no rate for it yet |
 | AWS and RunPod hosting | `hosting_platform` `aws-ec2` (`us-east-1`), `runpod-pods`; also `runpod-serverless`, `modal-functions`, `huggingface-endpoints-aws` | Hosting records exist for two of the self-run providers priced here |
-| Checkpoint storage (`storage_ref`) | `storage` `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | The S3 Standard row (P13) has no matching `storage` record |
+| Checkpoint storage (`storage_ref`) | `storage` `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | `aws-s3-standard` (object, `aws-ec2`) was added in #158; P13 remains historical note-only pricing, not a rate bound to this item/version |
 
 | Gap | Kind | Route |
 | --- | --- | --- |
 | `compute_profile` for `p5.48xlarge`, `p4de.24xlarge`, `a3-highgpu-8g`, `Standard_ND96isr_H100_v5`, Lambda, RunPod and CoreWeave SKUs | Missing record. Required spec fields: `hosting_ref`, `cpu_cores`, `ram_gb`, `region`. The price evidence here records SKU, GPU count and price; it was not collected for CPU and RAM, and P11 states no RunPod region. Those fields need their own sources | #10 owns profiles. This note supplies the SKU and price list only |
 | Accelerator records for A100 80 GB and RTX 4090 | Missing record (B2, B3 use the 4090) | #10 |
 | `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave | Missing record | #9 |
-| `storage` record for S3 Standard | Missing record | #9 |
 | Peak dense TFLOP/s per accelerator, needed by the time formula | Unresolved field: `spec_accelerator` has `vram_gb` and `precisions` but no throughput field | Contract proposal through #40, with #10 |
 | Training-token, job-minimum, training-hour and model-storage meters; `compute_profile_ref` optional for managed services | Unresolved meters and field (v1 contract) | #40 and #39 |
 | `training.estimated_peak_per_device_vram_gb` | Unresolved ResourceEstimate metric | #40, with #10 |
@@ -308,7 +307,7 @@ Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals un
 | Question | Follow-up issue / owner |
 | --- | --- |
 | Accelerator and compute-profile records still missing for the SKUs priced here (A100 80 GB, RTX 4090, and profiles for every SKU except `aws-ec2-g6e-xlarge-us-east-1`); a peak dense TFLOP/s field. VRAM and bf16/fp8 inputs already exist for H100 SXM, L40S and MI300X. See Upstream T2 records | #10 · @Mattycodes69 |
-| Hosting platform records for Google Cloud, Azure, Lambda and CoreWeave, and a `storage` record for S3 Standard. `aws-ec2` and `runpod-pods` already exist | #9 · @Mattycodes69 |
+| Hosting platform records for Google Cloud, Azure, Lambda and CoreWeave. `aws-ec2` and `runpod-pods` already exist | #9 · @Mattycodes69 |
 | Pricebook meters for `training_tokens_1m`, `training_tokens_1k`, `training_hour`, `job_minimum` and `model_storage_month`; a ResourceEstimate metric `training.estimated_peak_per_device_vram_gb`; `compute_profile_ref` optional for managed services | #40 · @tynamite |
 | Price normalisation: per-1k vs per-1M tokens, epochs and validation tokens, job minimums, and post-training hosting shown next to training cost | #39 · @PUSHINGSQUARES |
 | Training time and cost estimate for distillation and GRPO (only memory is sketched) | #31 · @appletechie |
