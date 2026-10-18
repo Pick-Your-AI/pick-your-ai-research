@@ -1,7 +1,7 @@
 # T0: Catalog Data Sources & Freshness
 
 Issue: #41 · Contract: v1 1.0.0 (adopted in PR #44) · Assignees: @tynamite, @PUSHINGSQUARES
-Status: partial decision record for review, revision 3 (price-policy supplement proposed) · Last updated: 2026-10-18
+Status: partial decision record for review, revision 4 (executable price-policy cases; receiving acceptance pending) · Last updated: 2026-10-18
 Deliverable path: `research/T0-configuration/catalog-data-sources.md` · Related: `component-schema-compatibility.md` (#40), `research/market/rights-validation.md` (#60), `research/market/integrations.json` (#55)
 
 This revision turns the interim positions posted in the [#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) into #41's record. T1 (#88) and T2 (#75) already apply them, and #60's source decisions are merged. The price-policy supplement below supplies a concrete proposal for the recorded @PUSHINGSQUARES #41/#39 review scope: price-specific freshness, region/currency and price conflicts. It does not claim that owner’s acceptance or change assignments.
@@ -89,12 +89,49 @@ These cases are policy examples, not market evidence or executable rules.
 
 **Handoff package.** #39 receives scope matching, explicit-currency/FX boundaries, conservative disputed estimates and uncovered-meter semantics; #42 receives expired-validity and failed-refresh states alongside the already accepted change-event interface. @PUSHINGSQUARES/@tynamite retain #41 acceptance; #39 co-assignees and #42 owners must record their scoped disposition. The supplement completes the draft policy detail, not those acceptance receipts.
 
+### Executable price-policy cases
+
+The [test-only prototype](../../tests/price_policy_prototype.py) and
+[synthetic cases](../../tests/test_price_policy.py) exercise the proposed
+selection order and exclusion boundaries. They make scope-before-recency,
+effective-date-before-capture-date, billing authority, disputed upper bounds,
+explicit global scope, missing currency/conditions, documented zero, expired
+validity, failed refresh and historical display-rights checks executable.
+No fixture contains a real provider rate or invokes a source.
+
+The inputs are normalized research facts, not a new Pricebook or Selection wire
+format. `valid_for_query` requires prior interpretation of the actual source's
+effective interval and boundaries; `refreshed_for_query` requires a successful
+source and scope recheck for that request. Neither is inferred from the original
+capture date. The rights boolean likewise represents a prior scoped review and
+cannot be inferred from a source URL, public availability or a generic licence.
+`None` is missing fixture evidence. A known empty condition tuple explicitly
+means no further conditions after a complete review; a missing inventory or
+missing key cannot match as a wildcard. Units must already share exact semantics;
+there is no GB/GiB or FX conversion.
+
+The bounded scope ordering distinguishes an exact region from explicitly global
+coverage only. It does not rank partially overlapping region/account/volume
+conditions or decide those unresolved wire shapes. Authority cases compare
+billing and overview documents from the same publisher; cross-publisher authority
+is outside the modeled cohort. An eligible cohort retains
+superseded and permitted historical observations with their original identity
+and dates; choosing a saved build's historical pin remains separate. Rights
+exclusions hide values from that history as well as from a current candidate.
+A selected amount is one conditional rate; it does not certify an invoice,
+complete cost coverage, measured equivalence or a total build budget.
+
+Run `python -m unittest discover -s tests -p test_price_policy.py -v`.
+These cases support review of #41/#39/#40/#42's existing proposal. They do not
+adopt its final schema, satisfy pending owner receipts or release an evaluator.
+
 ## Reuse and automated retrieval
 
-- The publisher's own licence or terms decide. Where no grant is found, commercial display and redistribution are `no`. `unclear` is reserved for ambiguous terms.
+- The publisher's own licence or terms control the permission basis. Where no applicable grant is established, the project's current intake excludes commercial display and redistribution; unestablished legal scope remains unknown. Ambiguous terms likewise do not prevent a conservative project exclusion or become proof of a legal prohibition.
 - Decisions for the 10 shortlisted sources, covering automated retrieval, internal research, commercial display and redistribution, are in [`research/market/rights-validation.md`](../market/rights-validation.md) (#60). Per-source evidence is in [`integrations.json`](../market/integrations.json). Summary:
-  - **Usable for display:** models.dev, ModelFit, llmfit, MCP registry metadata, Hugging Face factual identifiers, Harness Bench paper results, and GPUs.io values under its attribution and non-compete conditions.
+  - **Conditionally available for display:** models.dev, ModelFit, llmfit, MCP registry metadata, Hugging Face factual identifiers and Harness Bench paper material, within each source's exact material and notice scope. Paper permission does not make a benchmark comparison valid or extend to separately unlicensed repository content.
   - **Not usable without agreement:** BenchLM-owned outputs, Artificial Analysis data (its terms bar model-selection products), and automated OpenRouter collection.
+  - **GPUs.io:** [#204's merged source correction](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/204) records a proposed exclusion from current product retrieval/display/export. The [terms](https://gpus.io/en/terms), checked 2026-10-18, retain a broader competing-product restriction even inside a build estimate. The required specific permitted-use basis and receiving-owner acceptance remain unestablished; this summary grants neither.
 - Research notes may use short factual paraphrases with links. No bulk copying of vendor tables.
 - A new source is added by recording its terms URL, a decision per use, update cadence and last-checked date, as `integrations.json` does.
 
@@ -133,7 +170,7 @@ This dictionary separates **existing inventory fields** in [`research/market/int
 | `access_date`, `last_checked` | Calendar date strings, YYYY-MM-DD | Record actual inspection; neither is a price's effective date or a promise that evidence remains current |
 | `terms_urls` | List of public source URL strings | Identify the governing terms/license and scope; public access alone grants no reuse rights |
 | `reuse_permitted` | Object keyed by automated_retrieval, internal_research, display, redistribution | Keep each use separate; a display grant does not authorize automated collection |
-| Each reuse decision | `value` yes/no/unclear plus `conditions` and `basis` text | Conditions remain binding. No applicable grant → no for commercial display/redistribution; ambiguous terms → unclear. A missing row never becomes yes |
+| Each reuse decision | `value` yes/no/unclear plus `conditions` and `basis` text | Conditions remain binding. An unestablished grant means exclusion from the project's current intake while legal scope can remain unknown; ambiguous terms remain unclear. A missing row never becomes yes |
 | `update_cadence` | Text description | Publisher/source observation, not an invented refresh TTL |
 | `rights_evidence_grade` | Research grade text | Primary documentation identifies the source class; it does not certify independent reproduction or replace claim-level provenance |
 
@@ -179,7 +216,7 @@ The inventory stores per-source decisions; detailed claim eligibility additional
 | Deployment modes covered | Applies to all modes; opaque-endpoint evidence per #81 | Proposed |
 | Comparison fields with type, unit, evidence | Typed source-policy inventory; existing `integrations.json` | Research dictionary supplied; new claim wire shapes remain proposals |
 | Rules in #40's format | Conflict order feeds #40's outcome semantics | Proposed |
-| Primary sources with access dates | #60 table and `integrations.json` (2026-10-16) | Met for the 10 sources |
+| Primary sources with access dates | #60 table and `integrations.json`; initial audit 2026-10-16, bounded recheck in #204 on 2026-10-18 | Source-scoped dates retained; the other seven sources were not rechecked by #204 |
 | Handoffs confirmed | Existing receipts and remaining review | Partial; original #42 change-event and T4 evidence scopes recorded |
 | Open questions with owners | Open questions | Met |
 | Decision record merged | PR #127; price supplement PR #137 | Merged partial research; receiving acceptance remains separate |
