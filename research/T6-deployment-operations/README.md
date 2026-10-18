@@ -1,24 +1,26 @@
 # T6 Deployment & Operations
 
 Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
-Status: ready for review · Last researched: 2026-10-17 · Sources accessed 2026-10-16 (and 2026-10-17 for re-checked rows in #39)
+Status: five decision records merged through [#121](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121), with rule-semantics corrections merged through [#190](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/190); component-issue acceptance and handoffs remain under review. Last researched: 2026-10-18. Original source sweeps: 2026-10-16/17; source additions and the W5 illustration were checked on 2026-10-18 as identified in each record.
 
 Product question: is the build safe, measurable, deployable, observable, and affordable?
 
 This summary lists the decisions in the five T6 records, the rules they contribute to [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), the handoffs that other owners need to confirm, and the open questions. The records are the source; this page only points into them.
 
+The [2026-10-18 sibling reconciliation](sibling-reconciliation.md) preserves the corrected alternative proposals from #113/#115/#116/#118/#120 at immutable revisions and records the four source findings also carried by concurrent #191, with a pinned harness readback and explicit Gemini API-family telemetry. Its supplemental sources are separate from the inventory counts below; PR supersession does not accept a receiving handoff or complete an issue.
+
 ## Records
 
 | issue | record | v1 kind | decision it supports | source-checked rules | hypotheses | evidence rows |
 |---|---|---|---|---|---|---|
-| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 35 | 3 | 30 |
-| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 92 | 13 | 290 |
+| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 36 | 3 | 30 |
+| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 94 | 13 | 292 |
 | [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 90 | 21 | 222 |
-| [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 285 |
-| [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 198 |
-| | total | | | 331 | 73 | 1,025 |
+| [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 286 |
+| [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 202 |
+| | total | | | 334 | 73 | 1,032 |
 
-Each record was checked by a QC pass that re-opened every cited URL and tried to refute each row. The corrections are applied in the records. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy): 1,002 Primary documentation, 19 Independent measurement, 4 Vendor claim. Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. No T6 research ran a system, so no number in these records is measured. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set.
+The original #121 submission records a QC pass that re-opened its cited URLs and applied the corrections in the records. The 2026-10-18 follow-ups rechecked their added findings and pricing inputs; they do not claim a new reread of every older source. The counts above describe the current rule, hypothesis and evidence tables; inline primary-source links and linked evidence appendices are additional references. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy). Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. These records do not supply a T6 runtime experiment. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set; automated recomputation of the scenarios is arithmetic validation.
 
 ## Decisions
 
@@ -56,7 +58,7 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 - Build low, expected and high from quantities and builder-set drivers, with prices fixed. On the reference workload the API estimate spans 4.3 times (W1: 6,700 to 29,000 USD a month).
 - Show capacity next to its utilisation and break-even. Peak-sized Azure provisioned throughput runs at about a third of its capacity, so reserved PTUs cost about 3 times pay-as-you-go and hourly PTUs about 8.5 times (W2).
 - Price in USD, display in the T0 currency, exclude tax and date every price. The operations lines from #35 to #38 add 9 to 22 percent to an API build (W4).
-- Every worked-scenario figure is re-computed by [`cost-scenarios.py`](cost-scenarios.py) from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
+- W5 separates provider-specific fine-tuning quantities and minimums from subsequent hosting, including a stated 30-day period. Every worked-scenario figure is re-computed by [`cost-scenarios.py`](cost-scenarios.py) from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
 
 ## Rules contributed to #40
 
@@ -64,8 +66,8 @@ Each record was checked by a QC pass that re-opened every cited URL and tried to
 
 | record | source-checked rules | hypotheses |
 |---|---|---|
-| #35 Guardrails | 35 candidates (original IDs plus explicit suffixed splits) | 3 candidates (including explicit splits) |
-| #36 Evaluation | 92 candidates (original IDs plus explicit suffixed splits) | 13 candidates (including explicit splits) |
+| #35 Guardrails | 36 candidates (original IDs plus explicit suffixed splits) | 3 candidates (including explicit splits) |
+| #36 Evaluation | 94 candidates (original IDs plus explicit suffixed splits) | 13 candidates (including explicit splits) |
 | #37 Deployment | 90 candidates (original IDs plus explicit suffixed splits) | 21 candidates (including explicit splits) |
 | #38 Monitoring | 71 candidates (original IDs plus explicit suffixed splits) | 25 candidates (including explicit splits) |
 | #39 Cost Estimate | 43 candidates (original IDs plus explicit suffixed splits) | 11 candidates (including explicit splits) |
@@ -86,7 +88,7 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 | #40 Schema | the rules and enums above; the adopted serving-mode definition | all |
 | #41 Data sources | claim-level evidence grades and price-source eligibility to review; R1–R15 and one-factor semantics are already adopted in merged #41 and retained in #36; additional reproducibility tiers A to C and sizing remain proposals | all |
 | #42 Saved builds | accepted warnings with their reasons (#35); the price snapshot fields and re-pricing behaviour (#39) | #35, #39 |
-| #32 and #33 (T5) | `D-20` accepted, narrowed, in #36: #36 freezes and hashes the evaluation set, T5 runs the leakage check (E-R44, G1); `A-20` accepted in #36 as a G5 input; `A-13` (Foundry deletes a fine-tuned deployment after 15 idle days) accepted in #37 as D-R87; a T5 cost scenario is a follow-up in #39 | #36, #37, #39 |
+| #32 and #33 (T5) | `D-20` accepted, narrowed, in #36: #36 freezes and hashes the evaluation set, T5 runs the leakage check (E-R44, G1); `A-20` accepted in #36 as a G5 input; `A-13` (the Foundry classic FAQ says a fine-tuned deployment can be deleted after more than 15 inactive days while the customized model is retained) accepted in #37 as D-R87; #39 W5 now supplies separate Together and Azure training/hosting illustrations, with receiving acceptance and unpriced deployment-specific items recorded separately | #36, #37, #39 |
 | T1 to T5 owners | lifecycle dates per host, engine maintenance status, embedding versions, feature availability per platform, base-model matching (#37); the signals each component must expose, by mode (#38) | #37, #38 |
 
 ## Open questions
@@ -133,11 +135,6 @@ Grouped by who can answer them. Every record has an owner column in its Open que
 
 ## Workstream done when
 
-- [ ] All sub-issues are closed with merged decision records: the five records are in review; none is merged yet.
+- [ ] All sub-issues are closed with merged decision records: the five canonical records are merged through #121, and #190 merged the rule-semantics corrections. The component issues remain open while their remaining acceptance criteria and handoffs are reconciled; a merged record alone does not close an issue.
 - [ ] The handoffs above are confirmed by the affected workstream owners.
 - [x] A workstream summary at `research/T6-deployment-operations/README.md` lists decisions, rules contributed to #40, and open questions (this page).
-
-
-## Comparison-draft reconciliation
-
-The [2026-10-18 reconciliation](comparison-draft-reconciliation.md) records how #113, #115, #116, #118 and #120 are preserved after #121. It adds the route-specific filter and evaluation findings, content-capture audit, contract questions and the W5 training/hosting illustration while preserving the remaining issue and handoff boundaries.
