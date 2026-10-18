@@ -1,10 +1,10 @@
 # Non-text model selection limits
 
-Issues: #5, #6, #7; central review: #40. **Status: partial research for review; no owner acceptance or approved compatibility rules.** Sources inspected **2026-10-17**.
+Issues: #5, #6, #7; central review: #40. **Status: partial research for review; no owner acceptance or approved compatibility rules.** Sources inspected **2026-10-17**, with the pinned Runway SDK follow-up inspected **2026-10-18**.
 
 ## Scope and evidence
 
-This supplement records **65 direction-specific evidence/unknown records across four territories and 37 source groups** (65 distinct source URLs on 12 domains, fragments deduplicated). Counts are derived from the companion [research JSON](nontext-limit-evidence.json); they are not independently tested model counts. The JSON is a research note, not a CatalogItem, Pricebook or measured run.
+This supplement records **65 direction-specific evidence/unknown records across four territories and 38 source groups** (66 distinct source URLs on 12 domains, fragments deduplicated). Counts are derived from the companion [research JSON](nontext-limit-evidence.json); they are not independently tested model counts. The JSON is a research note, not a CatalogItem, Pricebook or measured run.
 
 Each record preserves model/route, stage, unit, limit semantics, source revision/access date and decision consequence. Model configuration, wrapper cap, service limit, default, training shape, recommendation and example are distinct evidence. All observations remain **source checked, unverified as runtime behavior**. No paid calls, inference, weights, raw datasets or private inputs were used. Model quality, hardware fit, clinical utility and legal clearance are not established.
 
@@ -73,7 +73,7 @@ Figure: project-authored research flow for interpreting the evidence below; not 
 | **ME-02** FLUX.2 editing; API /v1/flux-2-pro-preview versus playground | 8 API versus 10 playground **reference images** (input) | **route-specific reference count.** Docs identify /v1/flux-2-pro as pinned; preview examples are not its immutable revision proof. | Product UI capacities must not be copied onto an API route. | [ME-S2](#me-s2) |
 | **ME-03** FLUX3 video; /v1/flux-3-video; version=latest | whole seconds 5-20 or auto **seconds** (output) | **documented duration enum/range and mutable version.** Only latest is currently offered; do not invent a dated version. | Bind limits to a dated observation and effective version; auto is not an explicit user duration. | [ME-S3](#me-s3) |
 | **ME-04** FLUX3 video; 16:9 resolution selection | hd 1280x704; fhd 1920x1088; qhd 2560x1440; uhd 3840x2176 **pixels** (output) | **delivered shapes and upsampling.** Higher classes use upsampling; draft requires hd. | Avoid assuming conventional 720p/1080p/2160p shapes or native generation at delivered resolution. | [ME-S3](#me-s3) |
-| **ME-05** Runway gen4.5; POST /v1/image_to_video; X-Runway-Version=2024-11-06 | integer duration 2-10; 1280:720, 720:1280, 1104:832, 960:960, 832:1104, 1584:672 **seconds; output pixels** (output) | **Pinned SDK constraint/literals; live endpoint enum completeness unknown; disputed.** These six ratios are in the Gen4_5 SDK type at ME-S8. Image position is first; other models' last-frame capability is not inherited. | Do not reject other live-service ratios using this list. Refresh the model-discriminated endpoint spec before admission validation; see the unresolved source check below. | [ME-S4](#me-s4), [ME-S8](#me-s8) |
+| **ME-05** Runway gen4.5; POST /v1/image_to_video; X-Runway-Version=2024-11-06 | integer duration 2-10; 1280:720, 720:1280, 1104:832, 960:960, 832:1104, 1584:672 **seconds; output pixels** (output) | **Pinned SDK constraint/literals; live endpoint enum completeness unknown; disputed.** These six ratios are in the Gen4_5 SDK type at ME-S11. Image position is first; other models' last-frame capability is not inherited. | Do not reject other live-service ratios using this list. Refresh the model-discriminated endpoint spec before admission validation; see the unresolved source check below. | [ME-S4](#me-s4), [ME-S11](#me-s11) |
 | **ME-06** Gemini image models; /v1beta/interactions | nano-banana-2.1: 1K/2K/4K, not 512px; 3.1-flash-image supports 512px; 3.1-flash-lite-image: 1K only **publisher size tier** (output) | **model-specific size-tier support.** Current new-project choice and older model routes differ. | A shared image-generation interface does not make every size valid for every model. | [ME-S5](#me-s5) |
 | **ME-07** gemini-nano-banana-2.1; 4K output tier | 1:1 4096x4096; 16:9 5504x3072; 8:1 12288x1536 **pixels** (output) | **ratio-dependent delivered dimensions.** 4K is a tier label; not a universal maximum edge. | Use the exact ratio/size table rather than treating 4096 as a width cap. | [ME-S5](#me-s5) |
 | **ME-08** gemini-nano-banana-2.1 versus 2.5-flash-image; reference inputs | 2.1:14 total, fidelity categories 10 objects/4 characters; 2.5:3 works-best inputs **reference images** (input) | **documented capacity versus optimization guidance.** Reference acceptance and identity fidelity are separate claims. | Do not turn an optimization recommendation into a hard rejection threshold. | [ME-S5](#me-s5) |
@@ -153,7 +153,7 @@ Pinned constants/configurations were read for Whisper, Qwen ASR/TTS/embeddings, 
 
 ## Sources
 
-All groups were accessed **2026-10-17**. Mutable-page update dates are separate from access dates; code/config revisions are pinned. Full mapping: [nontext-limit-evidence.json](nontext-limit-evidence.json).
+The original 37 groups were accessed **2026-10-17**; Runway SDK group ME-S11 was accessed **2026-10-18**. Mutable-page update dates are separate from access dates; code/config revisions are pinned. Full mapping: [nontext-limit-evidence.json](nontext-limit-evidence.json).
 
 ### EL-S1
 
@@ -420,7 +420,7 @@ Proposed outcome reason codes for #40: hard documented predicate violation -> `f
 
 CTX-02 clarification: when effective configuration is unknown, use the native or selected-checkpoint limit as the baseline; do not assume an optional extension is enabled. Missing evidence for the selected checkpoint remains unknown.
 
-### ME-S8
+### ME-S11
 
 Runway Python SDK, commit `6568d7c5f5200fba62389fcf8eca429b14a5643e`, `Gen4_5` request type; source checked 2026-10-18. This pinned SDK lists the six ME-05 ratio literals and a duration of 2–10 seconds. It is not proof of the complete live endpoint enum or observed service behavior.
 

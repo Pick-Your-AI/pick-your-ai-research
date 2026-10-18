@@ -1,7 +1,7 @@
 {
   "format": "research-notes-not-catalog",
   "status": "partial_source_checked_not_accepted",
-  "accessed_on": "2026-10-17",
+  "accessed_on": "2026-10-18",
   "scope": "T1 model-specific limit, representation and route evidence. No inference, capacity benchmark, pricebook, approved rule or new schema.",
   "method": {
     "sources": "Publisher documentation and pinned code/configuration; checked source claims remain unverified as runtime behavior.",
@@ -490,7 +490,7 @@
       "verification_status": "unverified"
     },
     {
-      "id": "ME-S8",
+      "id": "ME-S11",
       "publisher": "Runway",
       "scope": "Python SDK Gen4_5 image_to_video request type; not an exhaustive live-service contract",
       "urls": [
@@ -1018,7 +1018,7 @@
       "implication": "Use the pinned SDK literals only for that SDK type. Do not reject other live-service ratios from this research list; refresh the model-discriminated endpoint specification before admission validation.",
       "source_ids": [
         "ME-S4",
-        "ME-S8"
+        "ME-S11"
       ],
       "disputed": true
     },
