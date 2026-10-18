@@ -21,6 +21,7 @@ PINS = {
     "hf_models.json": "49d3ec213f38a18e7e3495cfe8d3e64e136db4b26e68aad851afc35498de0a16",
 }
 GIB = 2**30
+NATIVE_CONTEXTS = {"D1": (256, 288), "D2": (2048, 2080)}
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -75,7 +76,8 @@ def measured_payload(run, point):
         raise ValueError("wrong measured model or unsuccessful observation")
     config, geometry, actual = run["configuration"], run["model_geometry"], run["actual_tokens"]
     shape = (geometry["layers"], geometry["kv_heads"], geometry["head_dim"])
-    if (config["kv_cache"] != "bf16" or type(actual["active_sequences"]) is not int
+    if (config["kv_cache"] != "bf16" or type(config["active_sequences"]) is not int
+            or config["active_sequences"] != 1 or type(actual["active_sequences"]) is not int
             or actual["active_sequences"] != 1
             or any(type(value) is not int for value in shape) or shape != (30, 3, 64)):
         raise ValueError("only single-sequence native two-byte KV is eligible")
@@ -106,13 +108,26 @@ def compare_payload(plan, run, point):
 def read_measurements(directory):
     """Check all retained input bytes before creating output or running a tool."""
     runs = {}
-    for cell in ("D1", "D2"):
+    for cell, contexts in NATIVE_CONTEXTS.items():
         for rep in (1, 2, 3):
             name = f"mr09-{cell}-r{rep}.json"
             raw = (directory / name).read_bytes()
             run = input_json(raw.decode("utf-8"))
-            for point in ("prefill", "terminal"):
-                measured_payload(run, point)
+            if (run["cell"] != cell or type(run["repetition"]) is not int
+                    or run["repetition"] != rep):
+                raise ValueError("measurement identity differs from expected file: " + name)
+            for point, expected in zip(("prefill", "terminal"), contexts):
+                context, _ = measured_payload(run, point)
+                if context != expected:
+                    raise ValueError("observed context differs from retained cell: " + name)
+            configured = run["configuration"]
+            declared_counts = (configured["prompt_tokens_per_sequence"],
+                               configured["decode_forwards_per_sequence"],
+                               run["actual_tokens"]["decode_forwards_per_sequence"])
+            expected_counts = (contexts[0], contexts[1] - contexts[0], contexts[1] - contexts[0])
+            if (any(type(value) is not int for value in declared_counts)
+                    or declared_counts != expected_counts):
+                raise ValueError("declared context counts differ from retained cell: " + name)
             runs[name] = (run, hashlib.sha256(raw).hexdigest())
     return runs
 
@@ -151,7 +166,8 @@ def main():
               "approved_tolerance":None, "fit_verdict":"unavailable; quantities/runtime do not match"}
     plans = {}
     # Four native-cache snapshots plus two explicit non-equivalent INT4 probes.
-    for context, kv in ((256,"fp16"),(288,"fp16"),(2048,"fp16"),(2080,"fp16"),(2048,"q4_0"),(2080,"q4_0")):
+    native_plans = [(context, "fp16") for contexts in NATIVE_CONTEXTS.values() for context in contexts]
+    for context, kv in [*native_plans, (2048, "q4_0"), (2080, "q4_0")]:
         argv = ["--no-dashboard", "plan", MODEL, "--context", str(context), "--quant", "BF16", "--kv-quant", kv, "--json"]
         result = subprocess.run([str(args.artifact_dir / "llmfit.exe"), *argv], capture_output=True, text=True, timeout=90)
         name = f"llmfit-{context}-{kv}.json"
