@@ -278,6 +278,8 @@ The prices above are recorded with provenance so they can be converted once the 
 
 ### Upstream T2 records
 
+2026-10-18 supplement: the [T2 hardware/profile capture](../T2-infrastructure/gpu-compute.md#additional-hardware-and-profile-capture-2026-10-18) supplies note-only A100 80GB, RTX 4090 and P4de facts. Their incomplete precision coverage cannot safely become frozen-v1 catalog entries; those record gaps remain. The [S3 identity](../T2-infrastructure/hosting.md#s3-standard-identity-supplement-2026-10-18) adds only `aws-s3-standard`, superseding that specific absence statement below once reviewed. Other SKUs, rates, measured training capacity and proposed contract fields remain unresolved. No historical price is silently rebound to a new item/version.
+
 Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals under their own review, not approved catalog data. The first table lists what this note can already reference. The second separates records that do not exist from fields and meters that are unresolved.
 
 | Need in this note | Record on `main` (`catalog/proposals/`) | Notes |

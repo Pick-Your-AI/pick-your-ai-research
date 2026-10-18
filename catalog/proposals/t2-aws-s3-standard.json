@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "id": "aws-s3-standard",
+  "kind": "storage",
+  "tier": "T2",
+  "name": "Amazon S3 Standard",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "S3 STANDARD storage-class identity. Bucket region, account configuration, object history, capacity and rates require separate evidence; no EC2 hosting dependency.",
+  "spec": {
+    "storage_type": "object"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+      "checked_at": "2026-10-18T00:53:22Z",
+      "verification_status": "unverified",
+      "notes": "S3 STANDARD is the default object storage class; supports storage_type=object and service identity. Date is this mutable-document capture, not a service release. No region or maximum capacity invented. billing_class remains unknown until an exact account/rate scope is selected; not a free-service assertion."
+    }
+  ],
+  "updated_at": "2026-10-18T00:53:22Z"
+}
