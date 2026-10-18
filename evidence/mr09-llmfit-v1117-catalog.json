@@ -1,0 +1,9 @@
+{
+  "id": "mr09-llmfit-v1117-catalog",
+  "uri": "https://raw.githubusercontent.com/AlexsJones/llmfit/9781270c1cd907971ce071517041edb55702b3ff/llmfit-core/data/hf_models.json",
+  "version": "9781270c1cd907971ce071517041edb55702b3ff",
+  "sha256": "49d3ec213f38a18e7e3495cfe8d3e64e136db4b26e68aad851afc35498de0a16",
+  "access": "Public download accessed 2026-10-18; external task copies only, removed after execution; no credentials required.",
+  "description": "Pinned catalog used to inspect the selected model geometry; hash records external bytes. Only bounded geometry facts are retained, not the dataset.",
+  "rights": "AlexsJones repository; model metadata/source rights remain distinct from code license. No dataset redistributed; evidence reuse review still required."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "mr09-modelfit-v153-data",
+  "uri": "https://raw.githubusercontent.com/Wecko-ai/modelfit/8c1df5f00e8f21edd0f0c7b4a12230b838e0b433/src/data/models.json",
+  "version": "8c1df5f00e8f21edd0f0c7b4a12230b838e0b433",
+  "sha256": "e8d88ff38cffa51cfc84ec7c3f80017580835ba06d31d4e936876903dfa523a6",
+  "access": "Public download accessed 2026-10-18; external task copies only, removed after execution; no credentials required.",
+  "description": "Pinned ModelFit CLI dataset; execution retains only counts, exact-match absence and one related model name, not raw dataset records.",
+  "rights": "ModelFit Local LLM Hardware Compatibility Dataset (modelfit.io), CC BY 4.0; no dataset modification or redistribution. Attribution retained in comparison note."
+}

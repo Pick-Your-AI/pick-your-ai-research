@@ -2,6 +2,74 @@
 
 Research date: 2026-10-16. Branch: `codex/mr09-feasibility-validation`. Base: PR #67 commit `075653aa4c0682c976ea9486d7d549d667118530`. Validation belongs to this submission; earlier #67/#75 results are historical inputs only.
 
+## Estimator comparison validation — 2026-10-18
+
+Branch `codex/issue61-estimator-comparisons`, base main
+`b9694364b6f0a3d1e9c6b37189cc007778fc54bc`. This dated addendum covers the new
+estimator runner, six llmfit outputs, ModelFit output, author-reported browser observation,
+12 component pairs and updated decision notes. The final integration at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`
+retains #251 GPU evidence unchanged and outside this estimator-pair set.
+The full required suite and all validators were rerun after resolving the three
+note conflicts; upstream tests account for the increased integrated count.
+Historical validation below remains dated.
+
+Used bundled Python **3.12.14**, Node **v25.9.0**, and the pinned external binary,
+engine and metadata identities recorded in the comparison ledger. Ran the
+workflow dependency installation with `-r requirements-research.txt --target
+$TASK_VALIDATION_DEPS`; set PYTHONPATH to that existing isolated dependency
+directory. Existing-target warnings did not replace or change installed packages.
+
+| Command / check | Result |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt --target $TASK_VALIDATION_DEPS` | Passed |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
+| `python -m unittest discover -s tests -v` initially, `-q` after integration | 226 initially; 247 passed after integration, including eight new comparison eligibility/integrity tests |
+| `python scripts/validate_research.py` | 74 catalog proposals, 3 pricebooks and external evidence metadata passed |
+| `python scripts/validate_market_research.py` | 33 entities, 1,584 cells and 20 issues passed |
+| `python scripts/validate_handoff_audit.py` | 101 rows / 98 declared pairs passed; ledgers unchanged |
+| `python prompts/mobile/validate_prompts.py` | 2 Projects, 258 issues, 36 epic prompts, 906 criteria and 880 steps passed |
+| `git diff --check` | Passed |
+
+New offline tests check GiB conversion only for the named KV field, context and
+geometry/revision rejection, active2/Quanto exclusions, positive denominators,
+nonzero-error arithmetic, existing-output preservation and recomputation of all
+12 committed component pairs with source/result hashes. Synthetic mutations stay
+in tests and produce no research observations. Tests do not execute an estimator,
+download an artifact or use a GPU. Actual estimator execution is recorded
+separately with its command/code/output pins.
+
+Quality review checked local note targets, retained source attribution and
+separated native storage-width agreement from a whole-runtime prediction.
+No GPU counters, original runtime source/protocol/summary, contract or shared
+handoff ledger changed. Task-owned external artifacts were removed with a
+checked cleanup receipt. Record-shape/hash checks do not certify source rights,
+physical measurements, artifact/runtime equivalence, fresh deployment identity,
+fit accuracy or human acceptance. #61 co-owners/coordinator and #7/#10/#11
+receivers must review those matters; whole-runtime pairs remain zero and no
+decision tolerance or issue completion is claimed.
+
+### Subsequent offline review correction
+
+The exact executed runner is retained at
+[`mr09_compare_estimators.executed.py`](measurements/estimator-comparison-2026-10-18/mr09_compare_estimators.executed.py),
+matching the unchanged comparison ledger's recorded source SHA-256. The current
+runner now rejects boolean, fractional, nonpositive and nonfinite payload byte
+counts before calculating an error. Both observation points have synthetic
+negative and integral-float normalization coverage. The historical estimator
+outputs, pairs, timestamps and their source hashes are unchanged; no external
+estimator or GPU run was repeated to produce this correction.
+
+The transient Planner controls are explicitly author-reported, with no retained
+capture locator or independent corroboration supplied. This limitation is
+carried through the observation, decision note and acceptance map; no independent
+confidence or receiving-owner acceptance is inferred from that report.
+
+After this correction, Python 3.12.14 passed 21 contract tests and 249 repository
+tests, including all 10 comparison tests; the same 10 comparison tests also passed
+under optimized Python. Research intake, market, handoff-audit and mobile prompt
+validators and whitespace checks passed. These are offline checks, separate from
+the historical external execution recorded above.
+
 ## Supplemental GM1 validation — 2026-10-18
 
 Branch: `codex/issue61-sizing-validation`, based on main

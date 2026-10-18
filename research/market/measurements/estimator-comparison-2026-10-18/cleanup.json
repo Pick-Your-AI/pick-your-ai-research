@@ -1,0 +1,9 @@
+{
+  "target": "$TASK_TEMP/mr09-estimator-20261018",
+  "removed_files": 9,
+  "removed_bytes": 54656438.0,
+  "classification": "task artifact cleanup receipt",
+  "target_exists": false,
+  "checked_utc": "2026-10-18T05:59:28.6259314Z",
+  "scope": "Only this task-created estimator binary/source/metadata session; no model weights, existing runtimes or unrelated files removed"
+}

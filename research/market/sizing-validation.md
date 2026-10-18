@@ -27,7 +27,7 @@ spare-capacity authorization. No paid compute or new device was used.
 | Dense observations | D1–D5: five configurations, three fresh-process runs each; separate allocated/reserved counters | #61 co-owners and coordinator review the bounded observations and provenance caveats |
 | MoE variations | Three supplemental GM1 runs; pinned OLMoE matrix remains unexecuted | @Mattycodes69/@appletechie identify an authorized envelope for remaining cells and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
 | Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
-| Comparable estimator errors | Zero matching competitor/runtime pairs | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
+| Comparable estimator errors | Zero whole-runtime pairs; 12 bounded native KV component checks in the dated comparison | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
 | Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
 | ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
 
@@ -260,7 +260,30 @@ number is a guarantee of future allocation success. No other process is
 evicted or altered. Per-phase CUDA-reported free values are observations, not
 additional headroom or demanded KV memory.
 
-## Comparison target and error discipline
+## Executed estimator comparisons — 2026-10-18
+
+The [dated comparison record](measurements/mr09-estimator-comparison-2026-10-18.md)
+adds six actual llmfit v1.1.17 plans, one pinned ModelFit CLI engine audit and an
+author-reported Local AI Planner control inspection pending corroboration. Its [hashed output/pair ledger](measurements/estimator-comparison-2026-10-18/comparison.json)
+checks **12 native two-byte KV component pairs** from D1/D2 prefill/terminal
+snapshots: all signed/absolute/relative differences are zero. These are four
+deterministic estimates paired to six existing processes, two snapshots each;
+they establish storage arithmetic agreement only. FP16 estimates and BF16 tensors
+share a two-byte storage width; their numerical/runtime behavior is not equated.
+Only llmfit's KV field is converted from GiB, as established by its pinned code.
+
+**Whole-runtime/peak-allocated pairs remain zero**, with no numerical total-memory
+error range or accepted tolerance. llmfit's hardware requirement is a different
+quantity; ModelFit has no exact 135M match or workload/runtime arguments; the
+author's planner report supplies no matching estimate and its transient controls
+await independent corroboration. Two q4_0
+plans are retained as mismatches with Quanto INT4, with no invented error.
+D3 active2, D4/D5 cache layout, MoE and multi-GPU comparisons remain open. No new
+GPU run, weights download, ResourceEstimate or scope waiver is supplied here.
+[PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) merged separately at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`; its GM1
+observations remain a separate cohort and are not used in this estimator comparison.
+
+## Historical comparison target and error discipline — 2026-10-16
 
 The existing PR #75 sizing arithmetic at
 `9e66622a4b2698a9305274f05da9c15ae5d90b8c` remains a Qwen-specific,
