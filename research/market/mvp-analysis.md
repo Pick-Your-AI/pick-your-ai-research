@@ -2,6 +2,158 @@
 
 Issue: [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) (MR-11). Parent: #47. Repository-state refresh: 2026-10-18; original source access dates remain attached to their evidence.
 
+Status: **Narrowed next-validation recommendation accepted in the actual independent coordinator/evidence and eight receiving dispositions; final source review and canonical delivery pending.** The recommendation selects a research comparison, with the remaining product advantages explicitly unproved. Actual PR and issue receipts determine acceptance and delivery.
+
+## Current narrowed recommendation (2026-10-18)
+
+**Selected next research comparison:** validate an explicit local/API decision
+record over existing tools and manifests before expanding a recommender. Use
+one coherent, non-sensitive inference workload, with a dense single-device
+self-hosted option and a separately identified API option. Compare the record
+against the best applicable existing substitute and an existing manifest or
+README format. The decision to use, extend or integrate an adequate existing
+tool remains a successful research outcome. A standalone product is not the
+default outcome of an inconclusive comparison.
+
+This narrows the original hybrid option to its proposed record and evidence
+value. It does not claim that either selected option has demonstrated runtime
+fit, quality equivalence, complete cost coverage or customer demand. Retrieval,
+agents, fine-tuning, MoE and multi-GPU cases remain outside this first comparison;
+their original research criteria and empirical work are not waived. All new
+ratings and sequencing decisions below are analyst judgments (AJ), not measured
+value, implementation effort or delivery estimates.
+
+The [actual independent coordinator/evidence and receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6249433692)
+reviews candidate blob `6cdc379b6c0ca8d4d376827fc9ec0d428b8f4fab` and selects this
+bounded comparison under the user's express delegation of project engineering
+decisions. It accepts the reasoning, the narrowed #79 input, unchanged
+D-57-1/2/3 and all eight receiving scopes below. These are the reviewer's actual
+in-session decisions, not statements attributed to absent assignees. Final
+published-source review, current checks and canonical delivery remain required.
+
+### Accepted inputs and their limits
+
+- **#66 is a satisfied native prerequisite.** The accepted [substitute note at
+  merge `8dfec2d`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/8dfec2d58661232f5128f954cf2b5840450732a8/research/market/substitute-validation.md),
+  [actual evidence/receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238)
+  and [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248992055)
+  establish the delivered input. Ordered advice and the tested conflict
+  explanation are real counterpressure. The proposed local relaxation does not
+  satisfy the original offline/hosted-model contradiction. The tested guest
+  bookmark did not retain the configuration context; other exports and tiers
+  remain unknown. This pass reads the accepted evidence and does not rerun or
+  recapture the product.
+- **#57 accepted a narrowing.** [The delivered differentiation record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d761200a5dd94f069c2a7c94ac1bb4f9df67581b/research/market/differentiation.md)
+  and its [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57#issuecomment-6249278917)
+  reject exclusivity based only on basic model fit, ordered advice or the tested
+  conflict explanation. H1/H2 narrow, H5's historical scoped rejection remains,
+  and H3/H4/H5b are unproved. A defensible unmet workflow has not been established.
+- **#60 completed a restrictive research disposition.** The accepted [ten-source
+  material/use record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3d395801742461aa82ac31a21857ec6f8d0270fb/research/market/rights-validation.md)
+  and [actual receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771)
+  retain source-specific conditions and the current-product GPUs.io exclusion.
+  Closed research does not approve a feed or broaden a publisher grant. All ten
+  integration inventory rows remain Not approved for integration.
+- **#61 and #64 supply bounded inputs.** The [current MR-09 acceptance record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d761200a5dd94f069c2a7c94ac1bb4f9df67581b/research/market/mr09-acceptance.md)
+  distinguishes twelve native KV component-payload pairs from zero matched
+  competitor/whole-runtime pairs; no calibrated whole-runtime error bound
+  follows. The [actual #64 evidence and #9/#39/#41 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654)
+  accepts the dated arithmetic and incomplete-quote finding. Its canonical
+  note/ledger amendment and final delivery were still pending at this readback.
+  Both cost scenarios remain partial; this input adds no current quote,
+  cheapest-service finding or measured service equivalence.
+
+The [#79 input offered to #58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6217454289)
+is accepted with narrowing in the actual coordinator receipt above:
+assumption-explicit screening and reproducible evidence collection inform the
+record comparison. Separate tensor payload, allocator allocated/reserved memory
+and device budgets; preserve artifact/runtime/context/KV/admission/topology
+identity. The original execution guards, broader empirical matrix and receiving
+decisions remain with #61 and its consumers. This does not convert the older
+hand-off into evidence of fit or acknowledge it on another assignee's behalf.
+
+### Reassessment of all six approaches
+
+The six approaches and earlier rating cells are preserved below as a dated
+snapshot. This table records the current role of each option without replacing
+those historical judgments or claiming a newly measured ranking.
+
+| Approach | Current role in the next research decision | Evidence-dependent limit |
+| --- | --- | --- |
+| Model-first | Retain as a narrow discovery alternative or input to the record. | Existing selectors are counterexamples to basic-shortlist uniqueness. Exact model/route identity and eligible quality evidence remain necessary; #62's pinning gaps do not support a comparative quality claim. |
+| Hardware-first | Retain as dense, single-device, assumption-explicit screening. | The #61 component checks do not calibrate total runtime memory. A hardware or runtime name alone cannot certify fit; empirical tolerances and broader architectures keep their own gates. |
+| Workload-first | Use explicit requirements to structure the comparison. | The accepted Flocci observation already supplies useful ordered advice and conflict recognition. Original constraints, proposed relaxations and actual adoption must remain distinguishable. |
+| Cost-first | Keep dated meter/coverage context as an input; do not make lowest total cost the first comparison's success claim. | #64 accepts partial arithmetic with uncovered meters and unmeasured service equivalence. Source eligibility, period, currency and billing-scope conditions remain separate. |
+| End-to-end stack | Defer the broad product scope while its component, compatibility, rights and maintenance questions remain unresolved. | No accepted result establishes a unique or adequately evidenced whole-stack advantage. Adding tiers cannot rescue failure of the narrower record comparison. |
+| Hybrid bounded workflow | Select the narrower decision-record comparison for the next validation. | The record/provenance advantage is unproved. Existing formats or tools that reach the fixed parity rule should be used or extended, rather than treated as failed substitutes. |
+
+### Minimum evidence and decisions that change the recommendation
+
+The nine-risk order in historical section 3 remains the analyst priority order:
+source-use eligibility, adequate substitutes, sizing, benchmark comparability,
+price completeness/freshness, runtime churn, incentive conflicts, demand and
+the reference-study gap. Acceptance of #60/#66 resolves their research-delivery
+gates; it does not remove the underlying data/maintenance or substitute risks.
+No old rate, vendor observation or risk score is refreshed by this reconciliation.
+
+| Decision gate | Minimum evidence for this comparison | Narrowing or stopping rule |
+| --- | --- | --- |
+| Source and intended-use eligibility (#60/#41) | Predeclare the required source/material/use set and retain its exact accepted basis, notices, date and scope. Project-authored inputs and synthetic controls stay labelled; a factual identifier does not grant model weights or third-party result rights. | Exclude an unestablished use. Narrow to a permitted subset. If that subset cannot support the required decision, stop that comparison or pursue a separately reviewed permitted-use basis. No new integration is necessary to accept this research recommendation. |
+| Coherent decision and record parity (#57) | Before new observations, pin the accepted protocol revision, coherent inputs, candidate identities/versions, required fields, not-applicable decisions, evaluator and receiving reconstruction record. Preserve every omission and clarification request. | Apply unchanged D-57-1, D-57-2 and D-57-3 together. If an existing substitute or format meets all three, stop the exclusive standalone claim and use, extend or integrate the sufficient option. If a part fails, narrow to that exact gap; failure is not proof of demand or a product go decision. |
+| Contradiction handling (#66/#57) | Label contradictory inputs before collection. Record detected conflicts and proposed relaxations separately. Any accepted relaxation needs an identified decision-maker, changed/retained constraints and separately scored coherent inputs. | The original impossible conjunction cannot receive a satisfaction pass. Inaccessible or untested behavior is unobserved, not failed capability. Retain #66's historical findings without retrospective rescoring. |
+| Runtime and sizing (#61/#10/#11) | Exact artifact, build, runtime, hardware, context/output reservation, precision, active-sequence and placement identity; matched measurements and an accepted workload-specific tolerance before a calibrated fit/error claim. | Until those exist, the record carries scoped evidence, estimates and unknowns. It cannot pass an unknown hard fit constraint. Narrow the architecture/runtime scope or stop the claimed fit decision when its required quantity or placement cannot be represented. |
+| Quality and benchmark identity (#62/#6) | Eligible model/harness/task/grader/budget identities and the existing G1–G4 evidence for any comparative or causal assertion. | Retain attributed, permitted publisher findings with their limits; omit unsupported comparative ranking or quality-equivalence claims. A missing identity is not repaired by a successful record reconstruction. |
+| Cost (#64/#39) | Dated eligible units, explicit one-off/recurring periods and billing scopes, scenario inputs, covered/uncovered meters and current eligibility. Complete comparative costs additionally need accepted coverage and service-equivalence evidence. | Use partial costs and explicit unknowns while coverage is incomplete. No unknown cost becomes zero and no partial amount passes a complete-coverage budget gate. Workload-specific uncertainty remains a separate #39 decision. |
+| Demand and maintenance (#63/#57) | Actual accepted participant evidence under the #63 recruitment/consent protocol for customer claims; prospective time/change logs under unchanged D-57-5/D-57-6 for maintenance claims. | A record-parity result cannot establish preference, a payer or sustainable maintenance. Preserve existing disconfirmation rules and named undecided #63 protocol items; incomplete observations are inconclusive. No outreach or scheduled study is started here. |
+
+For the selected new comparison, the actual coordinator receipt adopts the existing
+[D-57-1–7 protocol](differentiation.md#prospective-follow-up-protocol-2026-10-18)
+without altering it: the combined coherent gate uses D-57-1/2/3; the other rules
+keep their original future scope. In particular, D-57-3's complete agreement on
+the predeclared required fields tests reconstruction, not deployment. The
+coordinator's receipt accepts this selection and the scoped #79 disposition.
+No new numeric runtime tolerance, cost uncertainty, customer threshold or
+retrospective scoring rule is invented to finish #58.
+
+### Receiving scopes for this amendment
+
+Earlier #58 receipts keep their exact authors/revisions; they do not
+automatically accept this amendment. The linked actual independent receipt
+records all eight current accept/narrow decisions with the boundaries below;
+final published-source review must confirm the delivered amendment retains
+those scopes. The existing #59 writer retains the canonical ledger and risk
+snapshot.
+
+| Receiver | Input offered and preserved boundary |
+| --- | --- |
+| [#2 Workload](../T0-configuration/workload-use-case.md) | Compare explicit hard constraints, unknown inputs and separately adopted relaxations for one workload. Do not replace a target with a suggested method or infer a new parser/profile field. |
+| [#3 Deployment mode](../T0-configuration/deployment-mode.md) | Classify operator/capacity for each serving component; record billing separately. Local/API alternatives and hybrid composition are distinct; tool hosting alone does not decide the serving mode or prove isolation. |
+| [#6 Model](../T1-model-selection/ai-model.md) | Keep publisher release, serving route and derivative artifact identities separate, with exact revision and applicable evidence. A model-family label, capability declaration or public identifier proves neither measured quality nor artifact rights. |
+| [#10 Compute](../T2-infrastructure/gpu-compute.md) | Carry actual selected hardware/placement and scoped quantity evidence. Advertised memory, payload arithmetic and recorded allocator values are different; no ResourceEstimate or universal fit verdict is created by the comparison. |
+| [#11 Engine](../T2-infrastructure/inference-engine.md) | Keep engine/build/backend, artifact, tokenizer/template, context, precision and admitted sequences in the selected tuple. Accepted documentary engine research does not independently verify that whole runtime tuple. |
+| [#39 Cost](../T6-deployment-operations/cost-estimate.md) | Preserve exact units, period, currency, one-off/recurring separation, billing scope and unknown coverage. No new price, meter, FX/currency default or rounding policy is adopted; incomplete totals remain partial. |
+| [#40 Compatibility](../T0-configuration/component-schema-compatibility.md) | Apply separately eligible facts to exact selected identities and bindings. Reconstruction and explanations do not supply a verdict. Frozen v1 and successor representation, dispatch, migration and adoption gates remain unchanged. |
+| [#42 Saved/shared builds](../T0-configuration/saved-shared-builds.md) | Compare exact identities/settings/links, inputs, locks, evidence/unknowns and revision-bound reports. Preserve original revisions and require explicit adoption of a new selection; no persistence, retention or sharing implementation is inferred. |
+
+### Current literal acceptance map
+
+| Unchanged #58 criterion | Evidence or disposition | Remaining delivery boundary |
+| --- | --- | --- |
+| Compare all six launch approaches | Original six-row comparison plus the explicit current reassessment above | Analyst judgments remain separate from measured outcomes. |
+| Rank data and maintenance risks | Preserved nine-risk order with current source-use/substitute and bounded technical/cost inputs | No universal rights, freshness or maintenance result is inferred. |
+| Define minimum evidence requirements | The seven decision-gate rows and unchanged prospective D-57 protocol | Actual future inputs, empirical tolerances and study observations retain their own scopes. |
+| Keep recommendation separate from implementation authorization | The selected record comparison and its use/extend/narrow/stop outcomes | This research decision is not a product launch, deployment, outreach or paid-study decision. |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Exact accepted input revisions/receipts, explicit analyst/hypothesis labels and the actual independent evidence decision | Final published-source review must confirm the accepted reasoning is preserved. |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Linked actual coordinator/evidence and all eight receiving decisions, including the narrowed #79 disposition | Preserve each stated boundary and actual reviewer attribution; individual consumer issues retain their own acceptance gates. |
+| Repository checks pass; reviewer accepts the evidence before Done. | Current PR checks, independent final source review and canonical delivery/readback | #66 is satisfied; this accepted disposition still requires final reviewed delivery before #58 closes. |
+
+## Historical recommendation before accepted #299/#304/#313 evidence
+
+The following sections preserve the earlier recommendation and reconciliation
+verbatim, including then-open gates, ratings and thresholds awaiting decisions.
+Those status statements describe their historical checkpoint; the current
+dated recommendation above governs the accepted input and remaining #58 review.
+
 Status: **draft recommendation for validation only.** It is not implementation, build, deployment or outreach authorization, and it is not an accepted MVP choice. #58 is natively blocked by [#66](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66) and cannot be accepted, nor closed, before #66 is resolved through the accepted workflow. Validation approval, evidence acceptance and product implementation authorization are three separate decisions; this note requests none of them on anyone's behalf.
 
 ## Evidence classes
