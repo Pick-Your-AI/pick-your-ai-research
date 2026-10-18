@@ -85,6 +85,8 @@ def validate():
                         f'{pair}: supported cell requires nonempty {field}')
             try:
                 claim_url = urlsplit(cell['evidence_url'])
+                # urlsplit defers malformed/out-of-range port checks to this property.
+                _ = claim_url.port
                 valid_url = (claim_url.scheme in ('http', 'https') and claim_url.hostname and
                              claim_url.username is None and claim_url.password is None and
                              not any(character.isspace() for character in cell['evidence_url']))

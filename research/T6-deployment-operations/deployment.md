@@ -627,8 +627,10 @@ copying their provisional assertions into an adopted deployment ruleset.
 | Readiness input | Existing T4 rule identifier | Required evidence and limit |
 | --- | --- | --- |
 | Local subprocess spawning and locality | `rule.t4.mcp.stdio.colocation` | The selected client runtime can start the selected stdio server in the required local execution boundary. A generic target type or an installed executable alone does not prove that path works. |
-| Outbound reachability for the selected remote server | `rule.t4.mcp.remote.air-gapped` | The selected endpoint/transport is reachable under the actual egress/residency policy. A vendor-hosted remote dependency conflicts with a genuinely air-gapped deployment; a local stdio selection does not acquire that remote dependency. |
+| Reachability and isolation for the selected server | Historical `rule.t4.mcp.remote.air-gapped`, narrowed into W-R8/CD-4 by the #40 review below | The selected endpoint/transport is reachable under the actual egress/residency policy. For an air-gapped workload, no enabled runtime connection may leave the selected isolation boundary, and all runtime artifacts must be present inside it. Apply these requirements to provider-operated and self-operated components alike. |
 | Available authorization flow | `rule.t4.mcp.auth.flow-available` | Identify an actual supported interactive path or independently evidenced non-interactive alternative for the selected framework/server/target. A browser somewhere on the operator's laptop does not prove it is usable in the deployment's flow. |
+
+**Isolation reconciliation (2026-10-18).** [The actual #40 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) routes the earlier operator/trust proxy to [W-R8](../T0-configuration/workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections). Record endpoint membership and each connection's provisioning/runtime lifecycle and enabled state; an absent inventory is unknown. A provider-run installation inside the boundary can satisfy this isolation input with complete evidence. Keep the historical T4 proxy as provenance while #40 owns the versioned representation; no frozen rule is changed here.
 
 For all three, retain selected component versions, execution boundary, evidence
 locator/date and outcome separately. Unknown capability is not false evidence of
@@ -639,8 +641,8 @@ consent, refresh path or permission to configure credentials. No credential is
 collected or transmitted by this research.
 
 Synthetic examples, not executed deployment tests: a stdio-only server with a
-known no-process target fails; a vendor-hosted remote server with denied outbound
-access fails; an OAuth-only server without an available supported authorization
+known no-process target fails; a server requiring a runtime connection outside an
+air-gapped boundary fails, regardless of operator; an OAuth-only server without an available supported authorization
 path fails; an unexamined non-interactive alternative remains unknown rather than
 passing because a key reference exists. With no selected MCP server, these
 conditional inputs are skipped. An evidenced capability still needs the applicable
@@ -651,3 +653,77 @@ These inputs remain proposed versioned operands for #40, with #27 protocol and
 uncompleted deployment-target comparison; this addition neither invents their
 capabilities nor imports their prices as readiness evidence. #37 retains target
 selection and actual execution validation, with #38 observation and #39 cost scope.
+
+## Agent-hosting target packaging comparison — 2026-10-18
+
+This source-only slice addresses the managed-service comparison left open above
+and the offerings named in #39 L48. **Managed service is a publisher category,
+not an automatic `managed` mode:** the T0 operator/capacity test still applies to
+selected agent hosting separately from its model-serving component. Shared versus
+dedicated/reserved capacity is not established by these packaging pages. No new
+catalog object, mode assignment, price, deployed resource or acceptance is created.
+
+All five sources below were opened on 2026-10-18. Evidence grade: primary
+publisher documentation, source-checked / `unverified` for independent runtime
+behavior. URLs are mutable; Google displays last updated 2026-10-15 on both pages.
+AWS uses its `latest` guide and Microsoft its current Foundry guide; no immutable
+service release or installed SDK version was established. Ports, HTTP codes and
+architecture names below are published contract values, not measured performance.
+
+| Target / selected path | Documented packaging and interaction boundary | Proposed readiness evidence to collect | Source |
+| --- | --- | --- | --- |
+| Amazon Bedrock AgentCore Runtime, HTTP container path | ARM64 application bound to `0.0.0.0:8080`; `POST /invocations` takes JSON and returns JSON or SSE. `GET /ping` supplies JSON health with HTTP 200 when healthy. Optional `/ws` can share the container. `HealthyBusy` keeps a background-task session active. | Record image digest/architecture and selected protocol; test invocation, response framing and health independently. Inspect background-task status rather than treating a responsive process as completed work. | D-AR1 |
+| Google Agent Runtime, Python source path | Source deployment supplies `source_packages`, `entrypoint_module`, `entrypoint_object` and `class_methods`; dependency installation uses the packaged requirements file. The current guide separately offers Dockerfile and Artifact Registry image paths. Source-file deployment is Python-only; container paths permit other languages. | Bind source revision, selected path, entrypoint and declared operations to pinned dependencies; verify the deployed operations match the application's required methods. A successful upload alone does not demonstrate an invocation. | D-AR2 |
+| Google Agent Runtime, custom-container path | Listen on `0.0.0.0:8080`. Custom HTTP endpoints are allowed; `/api/reasoning_engine` and `/api/stream_reasoning_engine` are optional at the API level but enable SDK integration. Playground needs the streaming endpoint and `stream_query`. Declare supported `classMethods` and execution modes; the documented streaming response is newline-delimited JSON. | Record the chosen client integration and required methods/framing. Do not require the SDK/playground routes for an unrelated custom-endpoint-only client, or mistake SSE for the documented query stream. | D-AR3 |
+| Microsoft Foundry hosted agents, container path | Deployment guide requires `linux/amd64` images in Azure Container Registry and creates an agent version/identity. Runtime contract uses HTTP/1.1, platform-terminated TLS, default port 8088 (overridable via `PORT`), `GET /readiness` and at least one of `POST /responses` or `POST /invocations`. Responses can hydrate history via the adapter; Invocations leaves state to application code. | Record image digest/architecture, protocol/adapter version, effective port, health and invocation behavior, and explicit conversation-state responsibility. Verify chosen version routing before promotion. | D-AR4, D-AR5 |
+
+### Sources and deployment-specific cautions
+
+- **D-AR1:** AWS, [HTTP protocol contract](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-http-protocol-contract.html).
+  Its optional `time_of_last_update` health field must reflect actual status
+  changes; continually advancing it can prevent idle timeout and exhaust session
+  quota. This health/session behavior does not establish application correctness,
+  model availability or a billable quantity for #39.
+- **D-AR2:** Google, [Deploy an agent](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/runtime/deploy-an-agent).
+  The current document calls the product Agent Runtime and uses `client.runtimes`;
+  historical Agent Engine SDK names in other records are not silently rewritten.
+  Reconcile the selected SDK/API version before adopting a code recipe. Package
+  versions should be pinned for reproducibility; this review installs none.
+- **D-AR3:** Google, [Agent Platform runtime contract](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/runtime/runtime-contract).
+  Query methods route according to declared execution mode. Full ADK integration
+  requires its additional method contract; exposing the two query routes alone
+  is not evidence of complete ADK compatibility. CPU architecture and an external
+  health-probe contract are unresolved in this bounded source review.
+- **D-AR4:** Microsoft, [Deploy a hosted agent](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/deploy-hosted-agent).
+  The guide distinguishes deployment permissions from the created runtime agent
+  identity. `azd deploy` preserves versions but the default endpoint follows the
+  latest version; pin production before candidate deployment and promote
+  explicitly. Registry private-network support depends on project creation date
+  (guide boundary: June 25, 2026), so access must be checked for the actual project.
+  No role assignment, identity creation or network change is performed here.
+- **D-AR5:** Microsoft, [Hosted agent runtime contract](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agent-contract).
+  Adapters handle health, protocol framing and graceful `SIGTERM` shutdown.
+  Long-running resilient execution is a separate preview section with opt-in and
+  rerun/checkpoint obligations; ordinary foreground responses are not re-invoked
+  after process termination. A healthy container therefore supplies no general
+  exactly-once or durable-workflow guarantee.
+
+### Bounded decision and unresolved readiness
+
+Proposed #37 checklist extension: compare the selected hosting path's architecture,
+entrypoint, protocol, stream encoding, health and state semantics before treating
+an agent-framework package as portable. Inferred synthetic examples (not executed):
+an ARM64-only image fails the documented Foundry image requirement; an AWS-style
+`/ping` alone does not satisfy Foundry's `/readiness`; an SSE-only endpoint does
+not establish Google's documented newline-delimited query protocol. An unknown
+image architecture or unexamined client adapter remains unknown and blocks a
+positive readiness claim. These are candidate checks for #40, not adopted rules.
+
+#37 with #25/#27 still owns exact framework/SDK/protocol mapping and the selected
+capacity/mode; #35 owns credentials, network, data and tool-access controls; #36
+owns workload acceptance; #38 owns observable health, tracing and alert thresholds;
+#39 owns fresh region/SKU quantities and costs. Actual region availability, quotas,
+IAM/egress, MCP subprocess support, selected-version rollout/rollback and runtime
+execution remain unverified for these targets. The earlier readiness inputs and
+all owner handoffs remain required. Packaging evidence narrows this comparison's
+unknowns; it does not complete deployment research or authorize cloud operations.

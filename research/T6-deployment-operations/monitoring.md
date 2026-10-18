@@ -985,3 +985,58 @@ not observed traffic, and an unset optional exporter is not an air-gap test.
 This resolves the scoped source questions above only; actual configuration and
 network observation, remaining T4 frameworks, third-party tool rate limits and
 receiving-owner acceptance remain open. No new monitoring rule is adopted here.
+
+## Third-party tool throttling: GitHub and Slack — 2026-10-18
+
+This bounded #26 → #38 supplement starts with two operation families already in
+[T4's inventory](../T4-agents-integrations/tools-apis.md). It proposes monitoring
+inputs, not a new universal retry policy or a change to the frozen integration
+rate-limit field. Both sources were opened on 2026-10-18; they are mutable,
+undated publisher documentation, source-checked / `unverified` for independent
+runtime behavior. No API load test, private workspace read, credential change,
+message send or rate-limit bypass was performed.
+
+**GitHub REST (M-TR1).** [The primary guide](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)
+identifies primary resource buckets with `x-ratelimit-resource`, limit/remaining/
+used counts and reset time in UTC epoch seconds. Limits depend on authentication
+and endpoint; the T4 personal-token example is not every installation's budget.
+GitHub says response headers take precedence over the rate-limit endpoint and
+may vary between responses, so remaining counts need not decrease monotonically.
+Primary exhaustion gives 403/429 with remaining zero. Secondary throttling also
+gives 403/429 but is identified by the error message; it need not exhaust the
+primary bucket, and no secondary-budget status query exists. Follow a supplied
+`retry-after` in seconds; with remaining zero, respect the reset timestamp;
+otherwise the secondary-limit guidance says to wait at least one minute.
+Repeated secondary failures require increasing backoff and a bounded retry count.
+These are published values/conditions, not observed tenant limits. A generic 403
+alone is insufficient evidence of throttling or permission to retry a denied call.
+
+**Slack Web API (M-TR2).** [The primary guide](https://docs.slack.dev/apis/web-api/rate-limits/)
+scopes limits by method, workspace and app. HTTP 429 carries `Retry-After` in
+seconds; the same method/workspace restriction applies across that app's tokens.
+Other methods or workspaces are not restricted by that particular response, which
+does not certify that they have remaining capacity. Method tiers, pagination and
+app/install cohort matter; preserve T4's dated B42/B43 history/replies cohort
+readback rather than applying one blanket per-minute limit. Exact burst limits
+are unpublished. A retry delay is not a rate, billable quantity or guaranteed
+recovery time, and rotating tokens is not an acceptable substitute for waiting.
+
+### Proposed observation fields and acceptance examples
+
+| Observation | Type / unit | Evidence and boundary |
+| --- | --- | --- |
+| Provider, selected operation, resource/method bucket and scope binding | identifiers; no unit | #26 supplies operation and integration identity. Retain only an approved non-secret scope reference; never record token values or request/response content for this signal. |
+| Throttle classification and missing evidence | enum-like proposed label | Distinguish documented primary/secondary/method throttle, permission failure and unknown; status alone may be insufficient. Keep original header/error classification evidence privately with appropriate minimization. |
+| Response limit/remaining/used, when supplied | nonnegative count with named bucket | Preserve presence separately from zero; absent secondary headroom is unknown, not unlimited. Do not sum incomparable buckets or infer a smooth rate from one response. |
+| Retry delay versus reset instant | seconds versus UTC epoch seconds | Preserve source units and observation time. A delay and a timestamp are different quantities; malformed/missing values stay unknown. |
+| Attempt count, wait duration and terminal outcome | count, seconds, outcome | Proposed client observations, not provider-exported metrics. Separate retry waiting from execution latency; bound attempts and preserve operation side-effect/authorization requirements before any retry. |
+
+Synthetic acceptance cases, not executed integrations: GitHub primary headroom
+above zero plus an explicit secondary-limit message must not pass as healthy;
+Slack method A throttling does not prove method B is throttled; a missing retry
+header must not become a zero-second permission to retry. Unknown classifications
+require review rather than a fabricated successful outcome. Alert thresholds and
+retry budgets remain #38 decisions, safe operation/authorization and ambiguous
+write outcomes remain #26/#35 inputs, and meter units/prices remain #39 before
+versioned #40 adoption. Other tool families, installed SDK retry behavior and
+actual tenant observations remain open.

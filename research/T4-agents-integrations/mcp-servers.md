@@ -236,7 +236,7 @@ These rules are proposed for review by #40.
 | Rule id | Example | Status | Format | Severity | on_unknown |
 | --- | --- | --- | --- | --- | --- |
 | `rule.t4.mcp.transport.sse-deprecated` | transport lifecycle | Source-checked (unverified) | json | warning | review |
-| `rule.t4.mcp.remote.air-gapped` | (4) hosting unavailable in deployment | Hypothesis (proxy) | json | error | review |
+| `rule.t4.mcp.remote.air-gapped` | (4) hosting unavailable in deployment | Historical proxy; new work routed to W-R8/CD-4 | json (historical) | error | review |
 | `rule.t4.mcp.untrusted.guardrails` | trust | Hypothesis (policy on a source-checked premise) | json | error | block |
 | `rule.t4.mcp.trust-level.required` | trust data completeness | Hypothesis (policy) | json | warning | review |
 | `rule.t4.mcp.credential.secret-ref` | credentials | Hypothesis | json | warning | review |
@@ -304,6 +304,8 @@ These rules are proposed for review by #40.
 ```
 
 ### rule.t4.mcp.remote.air-gapped (Hypothesis, compatibility example 4)
+
+**Central-review disposition (reconciled 2026-10-18).** [The actual #40 queue review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) narrows this proxy into [W-R8](../T0-configuration/workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections) and CD-4. Assess enabled runtime connections against the selected isolation boundary and require runtime artifacts inside it. A provider-operated endpoint inside that boundary can pass with the required evidence; a self-operated endpoint reached across the boundary fails. Missing connection, lifecycle or boundary evidence remains unknown. The following proxy, proposed hosting enum and JSON are retained as historical research, not the current isolation assertion or an adopted executable rule. Per-component deployment and versioned boundary representation remain with #40.
 
 - **Participating kinds:** `mcp_server` `/spec/transport` and `/spec/trust_level`; `hosting_platform` selection `/settings/network_isolation`.
 - **Applicability condition:** a remote transport combined with an externally operated server, approximated by `trust_level` ∈ {trusted_external, untrusted_external}. **The proxy is the reason this rule is a hypothesis.** `trust_level` describes trust, not who hosts the endpoint. A self-hosted copy of an external project would be wrongly flagged unless it is catalogued as `internal`.

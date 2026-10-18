@@ -49,3 +49,12 @@ runner or download weights to validate a JSON estimate.
 The existing 15 dense observations have no real BuildSnapshot/selection binding
 and no matched competitor/runtime error cohort. They remain note-only evidence;
 this proposed directory is not a reason to relabel them.
+
+
+The [research memory screen](../memory_screen.py) is arithmetic support for the
+proposal above, not an intake validator or ResourceEstimate generator. Its
+caller-provided confidence/domain assertions do not establish evidence eligibility.
+The [2026-10-18 appletechie response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221)
+accepts explicit headroom and note-only observations from that co-owner scope.
+It does not accept future placement, waive #61 coverage or bind a real build;
+Mattycodes69's disposition and the placement agreement remain required.
