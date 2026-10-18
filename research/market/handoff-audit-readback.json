@@ -1,0 +1,5208 @@
+{
+  "observed_on": "2026-10-18",
+  "snapshot_started_at": "2026-10-18T02:49:56Z",
+  "snapshot_cutoff_utc": "2026-10-18T02:50:05Z",
+  "classification": "Sanitized GitHub issue/PR/native-relationship readback plus separately timestamped public Project UI",
+  "repo": "Pick-Your-AI/pick-your-ai-research",
+  "base_commit": "5e8051e4ffa9eea99dfe2bff25466cd1cc690f5d",
+  "issues": [
+    {
+      "number": 1,
+      "title": "T0: Configuration",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:35Z",
+      "parent": null,
+      "sub_issues": [
+        2,
+        3,
+        40,
+        41,
+        42
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 2,
+      "title": "T0: Workload / Use Case",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:37Z",
+      "parent": {
+        "number": 1
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 3,
+      "title": "T0: Deployment Mode",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:39Z",
+      "parent": {
+        "number": 1
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 4,
+      "title": "T1: Model Selection",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4",
+      "assignees": [
+        "Mattycodes69",
+        "zwright8"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:42Z",
+      "parent": null,
+      "sub_issues": [
+        5,
+        6,
+        7
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 5,
+      "title": "T1: Model Provider",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5",
+      "assignees": [
+        "tynamite",
+        "zwright8"
+      ],
+      "labels": [
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:17:58Z",
+      "parent": {
+        "number": 4
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 6,
+      "title": "T1: AI Model",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "zwright8"
+      ],
+      "labels": [
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:44Z",
+      "parent": {
+        "number": 4
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 7,
+      "title": "T1: Context Window",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7",
+      "assignees": [
+        "appletechie",
+        "zwright8"
+      ],
+      "labels": [
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:46Z",
+      "parent": {
+        "number": 4
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 8,
+      "title": "T2: Infrastructure",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8",
+      "assignees": [
+        "Mattycodes69",
+        "zwright8"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:03Z",
+      "parent": null,
+      "sub_issues": [
+        9,
+        10,
+        11
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 9,
+      "title": "T2: Hosting",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:05Z",
+      "parent": {
+        "number": 8
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 10,
+      "title": "T2: GPU / Compute",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "topic: compatibility",
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:07Z",
+      "parent": {
+        "number": 8
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 11,
+      "title": "T2: Inference Engine",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11",
+      "assignees": [
+        "Mattycodes69",
+        "zwright8"
+      ],
+      "labels": [
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T22:58:38Z",
+      "parent": {
+        "number": 8
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 12,
+      "title": "T3: Knowledge & Retrieval",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12",
+      "assignees": [
+        "Mattycodes69",
+        "zabyxc01"
+      ],
+      "labels": [
+        "optional capability",
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T01:20:04Z",
+      "parent": null,
+      "sub_issues": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 13,
+      "title": "T3: Knowledge Base",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13",
+      "assignees": [
+        "tynamite",
+        "zabyxc01"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: data-governance",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:50Z",
+      "parent": {
+        "number": 12
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 14,
+      "title": "T3: Embedding Model",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "zabyxc01"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T01:28:38Z",
+      "parent": {
+        "number": 12
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 15,
+      "title": "T3: Vector Database",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15",
+      "assignees": [
+        "appletechie",
+        "zabyxc01"
+      ],
+      "labels": [
+        "optional capability",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:54Z",
+      "parent": {
+        "number": 12
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 16,
+      "title": "T3: RAG & Retrieval Backends",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16",
+      "assignees": [
+        "appletechie",
+        "zabyxc01"
+      ],
+      "labels": [
+        "optional capability",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:16Z",
+      "parent": {
+        "number": 12
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 24,
+      "title": "T4: Agents & Integrations",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24",
+      "assignees": [
+        "CompleteDotTech",
+        "appletechie"
+      ],
+      "labels": [
+        "optional capability",
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:18Z",
+      "parent": null,
+      "sub_issues": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 25,
+      "title": "T4: Agent Framework",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25",
+      "assignees": [
+        "CompleteDotTech",
+        "Mattycodes69"
+      ],
+      "labels": [
+        "optional capability",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:20Z",
+      "parent": {
+        "number": 24
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 26,
+      "title": "T4: Tools & APIs",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26",
+      "assignees": [
+        "CompleteDotTech",
+        "zwright8"
+      ],
+      "labels": [
+        "optional capability",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:21Z",
+      "parent": {
+        "number": 24
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 27,
+      "title": "T4: MCP Servers",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27",
+      "assignees": [
+        "CompleteDotTech",
+        "tynamite"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:23Z",
+      "parent": {
+        "number": 24
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 28,
+      "title": "T4: Agent Memory",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/28",
+      "assignees": [
+        "CompleteDotTech",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: data-governance",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:25Z",
+      "parent": {
+        "number": 24
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 29,
+      "title": "T5: Training & Fine-Tuning",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "optional capability",
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:26Z",
+      "parent": null,
+      "sub_issues": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 30,
+      "title": "T5: Training Framework",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30",
+      "assignees": [
+        "appletechie",
+        "zwright8"
+      ],
+      "labels": [
+        "optional capability",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T22:58:45Z",
+      "parent": {
+        "number": 29
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 31,
+      "title": "T5: Training Compute",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:30Z",
+      "parent": {
+        "number": 29
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 32,
+      "title": "T5: Training Dataset",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: data-governance",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:31Z",
+      "parent": {
+        "number": 29
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 33,
+      "title": "T5: Fine-Tuned Model",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:33Z",
+      "parent": {
+        "number": 29
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 34,
+      "title": "T6: Deployment & Operations",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T02:36:56Z",
+      "parent": null,
+      "sub_issues": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 35,
+      "title": "T6: Guardrails",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T19:59:25Z",
+      "parent": {
+        "number": 34
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 36,
+      "title": "T6: Evaluation",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:38Z",
+      "parent": {
+        "number": 34
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 37,
+      "title": "T6: Deployment",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:39Z",
+      "parent": {
+        "number": 34
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 38,
+      "title": "T6: Monitoring",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:41Z",
+      "parent": {
+        "number": 34
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 39,
+      "title": "T6: Cost Estimate",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:43Z",
+      "parent": {
+        "number": 34
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 40,
+      "title": "T0: Component Schema & Compatibility Rules",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40",
+      "assignees": [
+        "tynamite",
+        "zwright8"
+      ],
+      "labels": [
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:56Z",
+      "parent": {
+        "number": 1
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 41,
+      "title": "T0: Catalog Data Sources & Freshness",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "tynamite"
+      ],
+      "labels": [
+        "topic: data-governance",
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:50:59Z",
+      "parent": {
+        "number": 1
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 42,
+      "title": "T0: Saved, Shared & Compared Builds",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:48Z",
+      "parent": {
+        "number": 1
+      },
+      "sub_issues": [],
+      "blocked_by": [
+        40
+      ]
+    },
+    {
+      "number": 47,
+      "title": "Market Research Program — Pick Your AI",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:49Z",
+      "parent": null,
+      "sub_issues": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 48,
+      "title": "MR-01 — Competitive Landscape Discovery",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:51Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 49,
+      "title": "MR-02 — Competitive Feature Matrix",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49",
+      "assignees": [
+        "appletechie",
+        "zwright8"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:53Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 50,
+      "title": "MR-03 — Competitor Deep Dives",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50",
+      "assignees": [
+        "appletechie",
+        "zwright8"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:54Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [
+        66
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 51,
+      "title": "MR-04 — PCPartPicker Product Experience",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "question",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:20:57Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 52,
+      "title": "MR-05 — Customer Research & Personas",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:58Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [
+        63
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 53,
+      "title": "MR-06 — Market Size, Demand & Trends",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:18:59Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 54,
+      "title": "MR-07 — Pricing & Monetization",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54",
+      "assignees": [
+        "appletechie",
+        "zwright8"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:01Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [
+        64
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 55,
+      "title": "MR-08 — Data Sources & Integration Opportunities",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "topic: data-governance",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:03Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [
+        60
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 56,
+      "title": "MR-09 — Technical Feasibility",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:05Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [
+        61,
+        62,
+        65
+      ],
+      "blocked_by": []
+    },
+    {
+      "number": 57,
+      "title": "MR-10 — Competitive Differentiation",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:07Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": [
+        66
+      ]
+    },
+    {
+      "number": 58,
+      "title": "MR-11 — MVP Definition & Prioritization",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:09Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": [
+        66
+      ]
+    },
+    {
+      "number": 59,
+      "title": "MR-12 — Research Quality, Synthesis & Handoffs",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T01:08:06Z",
+      "parent": {
+        "number": 47
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 60,
+      "title": "MR-08: Validate commercial display and redistribution rights",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60",
+      "assignees": [
+        "appletechie",
+        "tynamite"
+      ],
+      "labels": [
+        "topic: data-governance",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T01:06:24Z",
+      "parent": {
+        "number": 55
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 61,
+      "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "question",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T22:58:42Z",
+      "parent": {
+        "number": 56
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 62,
+      "title": "MR-09: Validate benchmark comparability and harness effects",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:51:03Z",
+      "parent": {
+        "number": 56
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 63,
+      "title": "MR-05: Validate customer demand and willingness to pay",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
+      "assignees": [
+        "appletechie",
+        "zwright8"
+      ],
+      "labels": [
+        "question",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:18Z",
+      "parent": {
+        "number": 52
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 64,
+      "title": "MR-07: Validate price freshness and total-cost scenarios",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
+      "assignees": [
+        "PUSHINGSQUARES",
+        "appletechie"
+      ],
+      "labels": [
+        "topic: pricing",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:19:19Z",
+      "parent": {
+        "number": 54
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 65,
+      "title": "MR-09: Review RAG interoperability market claims",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
+      "assignees": [
+        "appletechie",
+        "itisSomeone",
+        "zabyxc01"
+      ],
+      "labels": [
+        "optional capability",
+        "topic: compatibility",
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-17T12:21:01Z",
+      "parent": {
+        "number": 56
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    },
+    {
+      "number": 66,
+      "title": "MR-03: Test direct stack-builder substitutes",
+      "state": "OPEN",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
+      "assignees": [
+        "itisSomeone",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "milestone": null,
+      "updated_at": "2026-10-18T00:51:05Z",
+      "parent": {
+        "number": 50
+      },
+      "sub_issues": [],
+      "blocked_by": []
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 43,
+      "title": "Document triage conventions and refresh dependency map",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/43",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "9d3912e55047ff8130a1da73daf3fe311fe8a118",
+      "merge_sha": "84bb455fa1b4532923462bd9cc0ac499b67066f9",
+      "merged_at": "2026-10-16T10:00:22Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 44,
+      "title": "Adopt v1 contract and validated researcher submission workflow",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "a222013c1f0106159132564d05e5d24666ad6342",
+      "merge_sha": "9769fcd9ea380b1211669b2753181c7782444178",
+      "merged_at": "2026-10-16T11:41:48Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 45,
+      "title": "Add vision, architecture, governance and roadmap docs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/45",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "277d6218a40b15a479190ea692ee4cacb114a45f",
+      "merge_sha": "324518ff8d9629fbb7cd4f2d6a27dcc219300fd4",
+      "merged_at": "2026-10-16T11:43:02Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 46,
+      "title": "T5: Training Framework research note (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/46",
+      "state": "CLOSED",
+      "base_ref": "research-contract-v1",
+      "head_sha": "6dc50156ec03b1c772692d2b84a17669c6879ae9",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": []
+    },
+    {
+      "number": 67,
+      "title": "Establish market research project, triage and initial competitive evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "aed4e7d6fd63d1f8a3e765295fa0a23ab8af3ce2",
+      "merge_sha": "a2d12b8709b34fc2bb718e5fe0670d44d2f58322",
+      "merged_at": "2026-10-16T23:39:05Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+          "submitted_at": "2026-10-16T16:28:32Z",
+          "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+        },
+        {
+          "reviewer": "appletechie",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449",
+          "submitted_at": "2026-10-16T21:54:31Z",
+          "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "title": "T5: Training Framework research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/68",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "1b6759425309fb0eea4472007d70b845779e74ba",
+      "merge_sha": "edb4a3f47e1991b932f837ba266920d552bcf5cf",
+      "merged_at": "2026-10-16T23:51:55Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/68#pullrequestreview-5554741830",
+          "submitted_at": "2026-10-16T23:37:35Z",
+          "reviewed_commit": "40635525c66bbcfbc9a5a549c826c4cfa89ab2cd"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/68#pullrequestreview-5554852053",
+          "submitted_at": "2026-10-16T23:51:31Z",
+          "reviewed_commit": "1b6759425309fb0eea4472007d70b845779e74ba"
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "title": "T4: Agent framework decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "956d923ef335b49878ad31fee9ac8d18edf5e0b0",
+      "merge_sha": "4bf68e80942a600e947a4b00c1cc2bc37479a6c7",
+      "merged_at": "2026-10-17T11:17:50Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69#pullrequestreview-5554742050",
+          "submitted_at": "2026-10-16T23:37:37Z",
+          "reviewed_commit": "9a6607e9d57edd3ef8954d224ac1d7b3e5994b52"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/69#pullrequestreview-5557516289",
+          "submitted_at": "2026-10-17T11:08:15Z",
+          "reviewed_commit": "956d923ef335b49878ad31fee9ac8d18edf5e0b0"
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "title": "T4: Tools & APIs decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "12188f1c8bb74c66a0ccbe6a46b46ff8323687ab",
+      "merge_sha": "4267d01e271b96c25bc5e7792ce1f74ee7f9978a",
+      "merged_at": "2026-10-17T11:30:13Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70#pullrequestreview-5554742286",
+          "submitted_at": "2026-10-16T23:37:39Z",
+          "reviewed_commit": "0c37922e9e3cb5f53785545553d6a0d47f700617"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70#pullrequestreview-5557512874",
+          "submitted_at": "2026-10-17T11:06:54Z",
+          "reviewed_commit": "987ff82546e02443733cf13810275fa029278770"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70#pullrequestreview-5557570705",
+          "submitted_at": "2026-10-17T11:30:10Z",
+          "reviewed_commit": "12188f1c8bb74c66a0ccbe6a46b46ff8323687ab"
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "title": "T4: MCP servers decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3d95c61efc2895d971415950dd4ebdfc1f23aba8",
+      "merge_sha": "1b5da8a946e20bba32bab2c903af9a5586e636dc",
+      "merged_at": "2026-10-17T11:17:42Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71#pullrequestreview-5554742526",
+          "submitted_at": "2026-10-16T23:37:41Z",
+          "reviewed_commit": "525a09c023ffc90d9dc454f586ad108391063a46"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71#pullrequestreview-5557512959",
+          "submitted_at": "2026-10-17T11:06:56Z",
+          "reviewed_commit": "3d95c61efc2895d971415950dd4ebdfc1f23aba8"
+        }
+      ]
+    },
+    {
+      "number": 72,
+      "title": "T4: Agent memory decision record (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "ec16c925c7038ea3ee0b88f0bb8054e4e1d8c6b2",
+      "merge_sha": "ff3b08561b6266a24f35f3344e90ee3aae7299ce",
+      "merged_at": "2026-10-17T11:29:25Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72#pullrequestreview-5554742703",
+          "submitted_at": "2026-10-16T23:37:43Z",
+          "reviewed_commit": "b79921ffd72ca871dea43dc4b7c4ee2383fcb72e"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72#pullrequestreview-5557513073",
+          "submitted_at": "2026-10-17T11:06:58Z",
+          "reviewed_commit": "e76806679c32b41063f151b9689785a1070f3f9d"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/72#pullrequestreview-5557568621",
+          "submitted_at": "2026-10-17T11:29:21Z",
+          "reviewed_commit": "ec16c925c7038ea3ee0b88f0bb8054e4e1d8c6b2"
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "title": "T4: Agents & Integrations workstream summary (draft)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/73",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "1965ca46488c1c540eb2556d8da65333b4451e78",
+      "merge_sha": "bfeb21f4b67d011f2d8ba6c5f8be776e5e04b33a",
+      "merged_at": "2026-10-17T11:17:57Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/73#pullrequestreview-5554742885",
+          "submitted_at": "2026-10-16T23:37:45Z",
+          "reviewed_commit": "b713d396afee8bae15b8ee3472752bc172409789"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/73#pullrequestreview-5557519601",
+          "submitted_at": "2026-10-17T11:09:40Z",
+          "reviewed_commit": "1965ca46488c1c540eb2556d8da65333b4451e78"
+        }
+      ]
+    },
+    {
+      "number": 74,
+      "title": "Add maintainer research prompts and organization maintenance handoffs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "69cdd7d7f96a0b7f25c997ab6970109a7d144eec",
+      "merge_sha": "708bd94fa49482235308fd79fcc5f8669a29ce3d",
+      "merged_at": "2026-10-17T17:03:47Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74#pullrequestreview-5554741658",
+          "submitted_at": "2026-10-16T23:37:33Z",
+          "reviewed_commit": "5910bcca98e4064c16ee77b77a338c8ac4c99bc3"
+        },
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74#pullrequestreview-5554998365",
+          "submitted_at": "2026-10-17T00:12:56Z",
+          "reviewed_commit": "5910bcca98e4064c16ee77b77a338c8ac4c99bc3"
+        },
+        {
+          "reviewer": "appletechie",
+          "state": "DISMISSED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74#pullrequestreview-5555679126",
+          "submitted_at": "2026-10-17T02:59:21Z",
+          "reviewed_commit": "6a34fc0f8f35a0058c999a7b8d143a17c521f266"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74#pullrequestreview-5556655123",
+          "submitted_at": "2026-10-17T06:35:06Z",
+          "reviewed_commit": "6a34fc0f8f35a0058c999a7b8d143a17c521f266"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74#pullrequestreview-5556655550",
+          "submitted_at": "2026-10-17T06:35:16Z",
+          "reviewed_commit": "6a34fc0f8f35a0058c999a7b8d143a17c521f266"
+        },
+        {
+          "reviewer": "tynamite",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/74#pullrequestreview-5558427007",
+          "submitted_at": "2026-10-17T15:16:20Z",
+          "reviewed_commit": "69cdd7d7f96a0b7f25c997ab6970109a7d144eec"
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "title": "T2: Infrastructure evidence, sizing and engine research",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "9e66622a4b2698a9305274f05da9c15ae5d90b8c",
+      "merge_sha": "ec612eb14edaf63cc9caca2ab655d053c9114dd4",
+      "merged_at": "2026-10-16T16:11:04Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927",
+          "submitted_at": "2026-10-16T16:22:02Z",
+          "reviewed_commit": "9e66622a4b2698a9305274f05da9c15ae5d90b8c"
+        }
+      ]
+    },
+    {
+      "number": 76,
+      "title": "T5: Training Dataset research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/76",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "56d3d54bdee4e0c0a8ebdc9b5c35eac5f22ef81f",
+      "merge_sha": "56bbcafd551a357f4002dd315d4a17b530832ff0",
+      "merged_at": "2026-10-16T23:53:17Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/76#pullrequestreview-5554743023",
+          "submitted_at": "2026-10-16T23:37:46Z",
+          "reviewed_commit": "daa9666c3c241e00ed7ec59cd7151a0e603d6558"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/76#pullrequestreview-5554862564",
+          "submitted_at": "2026-10-16T23:52:57Z",
+          "reviewed_commit": "56d3d54bdee4e0c0a8ebdc9b5c35eac5f22ef81f"
+        }
+      ]
+    },
+    {
+      "number": 77,
+      "title": "T5: Training Compute research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/77",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "200a89fa1402a6c123c7b15a3fec6890c24cd357",
+      "merge_sha": "80a65c36b3869e65eeeb306ac8f0e90819baa99a",
+      "merged_at": "2026-10-16T23:55:19Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/77#pullrequestreview-5554743169",
+          "submitted_at": "2026-10-16T23:37:48Z",
+          "reviewed_commit": "6396aec760a5d6ac80577b107b7af1c47c575e84"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/77#pullrequestreview-5554875957",
+          "submitted_at": "2026-10-16T23:54:47Z",
+          "reviewed_commit": "6396aec760a5d6ac80577b107b7af1c47c575e84"
+        }
+      ]
+    },
+    {
+      "number": 78,
+      "title": "Align contributor docs with live Project fields and T0 owner",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/78",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "7c1aa813bea161ae86c8a286bf9ca1e014b27c95",
+      "merge_sha": "6144a644d5692a12cc18e330d1c7922ab1a18d33",
+      "merged_at": "2026-10-16T23:35:16Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 79,
+      "title": "MR-09: Estimator assumptions and pinned GPU memory observations",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "380c2955210c82a455b8d367def995fa307cd524",
+      "merge_sha": "6511dea2a5102b13df1e47378a31f31230ecb494",
+      "merged_at": "2026-10-16T14:19:18Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "PUSHINGSQUARES",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#pullrequestreview-5549035115",
+          "submitted_at": "2026-10-16T14:18:27Z",
+          "reviewed_commit": "380c2955210c82a455b8d367def995fa307cd524"
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "title": "MR-09: Record approval and proposal-branch merge state",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/80",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "ef075df4a7525f66222239a3240efeb63feeffaa",
+      "merge_sha": "75188d16c62e5a68cc2f0dfcb25ad1255bb52ac1",
+      "merged_at": "2026-10-16T23:36:57Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 81,
+      "title": "T0: workload and deployment-mode research notes",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "028a116f0cbd631833481ed27556e710a053dabb",
+      "merge_sha": "aaae63703c3776891bb730664aa22bf64737aa62",
+      "merged_at": "2026-10-17T17:06:46Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81#pullrequestreview-5555450430",
+          "submitted_at": "2026-10-17T01:56:25Z",
+          "reviewed_commit": "9786ef6f9a7942b21a3cc51a05df741360e3594f"
+        },
+        {
+          "reviewer": "appletechie",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81#pullrequestreview-5555675123",
+          "submitted_at": "2026-10-17T02:58:06Z",
+          "reviewed_commit": "e2bcc35b19de564c31fd1c081e97a3fc92b06a9d"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81#pullrequestreview-5557498342",
+          "submitted_at": "2026-10-17T11:00:49Z",
+          "reviewed_commit": "e2bcc35b19de564c31fd1c081e97a3fc92b06a9d"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81#pullrequestreview-5558965388",
+          "submitted_at": "2026-10-17T17:06:43Z",
+          "reviewed_commit": "028a116f0cbd631833481ed27556e710a053dabb"
+        }
+      ]
+    },
+    {
+      "number": 82,
+      "title": "MR-08: record reuse rights for the 10 shortlisted sources",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "6ddbc8dda845c2e2cb9bf2081749191b49badef8",
+      "merge_sha": "fe1d9f8ddcb64a0a1bfe4d0e5b254c519239d769",
+      "merged_at": "2026-10-16T23:37:03Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "PUSHINGSQUARES",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82#pullrequestreview-5551359699",
+          "submitted_at": "2026-10-16T17:30:42Z",
+          "reviewed_commit": "6ddbc8dda845c2e2cb9bf2081749191b49badef8"
+        }
+      ]
+    },
+    {
+      "number": 83,
+      "title": "MR-09: Desk validation of benchmark comparability and harness effects (Refs #62)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "5e1b57696399a71326a92671d3f62a3326f9a5c3",
+      "merge_sha": "51a5c552bd8dbf6fa6a11d07d6772a3ce9d305b6",
+      "merged_at": "2026-10-18T02:09:10Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83#pullrequestreview-5554743318",
+          "submitted_at": "2026-10-16T23:37:50Z",
+          "reviewed_commit": "011e5ae1260a52dc3883dea5a2d43b8752f909c4"
+        },
+        {
+          "reviewer": "appletechie",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83#pullrequestreview-5556580902",
+          "submitted_at": "2026-10-17T06:09:11Z",
+          "reviewed_commit": "0be51abbffdad4992d68ea30f6d9c2fcb3014cb2"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83#pullrequestreview-5557498414",
+          "submitted_at": "2026-10-17T11:00:51Z",
+          "reviewed_commit": "0be51abbffdad4992d68ea30f6d9c2fcb3014cb2"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83#pullrequestreview-5560802999",
+          "submitted_at": "2026-10-18T00:33:36Z",
+          "reviewed_commit": "5e1b57696399a71326a92671d3f62a3326f9a5c3"
+        }
+      ]
+    },
+    {
+      "number": 84,
+      "title": "T5: Fine-Tuned Model research note",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/84",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "ac5f8c11e46744393874e1143e343772cc391bac",
+      "merge_sha": "3fcf1139d51f6e0a41484503073a99d49a649aa1",
+      "merged_at": "2026-10-16T23:56:28Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/84#pullrequestreview-5554743470",
+          "submitted_at": "2026-10-16T23:37:52Z",
+          "reviewed_commit": "3f8ad4473de359e727a2ff1bd01225161b67fa90"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/84#pullrequestreview-5554884187",
+          "submitted_at": "2026-10-16T23:55:57Z",
+          "reviewed_commit": "3f8ad4473de359e727a2ff1bd01225161b67fa90"
+        }
+      ]
+    },
+    {
+      "number": 85,
+      "title": "T5: Training & Fine-Tuning workstream summary",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/85",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "57d502e32e41505c64e63e585062cfd533cd6a1f",
+      "merge_sha": "f2847041999fd2085610aea52a6f196930e62b0d",
+      "merged_at": "2026-10-17T00:01:38Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/85#pullrequestreview-5554743608",
+          "submitted_at": "2026-10-16T23:37:54Z",
+          "reviewed_commit": "eb28169a2f52821062fc23dbae791f8f721da440"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "DISMISSED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/85#pullrequestreview-5554913927",
+          "submitted_at": "2026-10-17T00:00:10Z",
+          "reviewed_commit": "b2220643d2769b4795dedad8ad746ebf59dfd2d5"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/85#pullrequestreview-5554919579",
+          "submitted_at": "2026-10-17T00:01:00Z",
+          "reviewed_commit": "57d502e32e41505c64e63e585062cfd533cd6a1f"
+        }
+      ]
+    },
+    {
+      "number": 86,
+      "title": "Add orchestration prompts for all 20 Project 2 issues",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/86",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "ba2b132c487a83d22a5cf7f9dfbd6e359cb05533",
+      "merge_sha": "41d33f210e5229bb46aaf40fc9987f22b13e696a",
+      "merged_at": "2026-10-16T18:42:08Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 87,
+      "title": "research: audit MR-02 capability evidence and bounded tests",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "870d6d87c555112fb782147589487e2c8421e4cf",
+      "merge_sha": "eaa279472e958e97631e16b0501af406fe7da6ea",
+      "merged_at": "2026-10-16T23:37:07Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 88,
+      "title": "research: establish T1 provider, model and context decision records",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "dbfa7dd13a7f732bff0653ae6ab45f55b2782f20",
+      "merge_sha": "4858d81eed2b6fab66e5be50874d575e0903f90a",
+      "merged_at": "2026-10-16T23:37:43Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868",
+          "submitted_at": "2026-10-17T00:07:36Z",
+          "reviewed_commit": "dbfa7dd13a7f732bff0653ae6ab45f55b2782f20"
+        }
+      ]
+    },
+    {
+      "number": 89,
+      "title": "MR-04: PCPartPicker walkthrough limits and AI-builder translation (Refs #51)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/89",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "cb851f5d40320c5bf72f13aee56de8462972abed",
+      "merge_sha": "05f081f5899c53a9431f3b4fd63346cb14620b00",
+      "merged_at": "2026-10-16T23:53:23Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/89#pullrequestreview-5554743744",
+          "submitted_at": "2026-10-16T23:37:55Z",
+          "reviewed_commit": "e5b03c1b8a91614f07c8ca99f42597248a34f5f8"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/89#pullrequestreview-5554861612",
+          "submitted_at": "2026-10-16T23:52:50Z",
+          "reviewed_commit": "e5b03c1b8a91614f07c8ca99f42597248a34f5f8"
+        }
+      ]
+    },
+    {
+      "number": 90,
+      "title": "MR-06: dated adoption evidence and sensitivity for sizing scenarios (Refs #53)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/90",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "d4f535277aaa9eb01e6962baec5d46942a37ad9f",
+      "merge_sha": "251514e6426fc8c3e88ade121c28424ddbcb3365",
+      "merged_at": "2026-10-16T23:37:12Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 91,
+      "title": "MR-07: plan structures, conflict analysis and neutrality controls (Refs #54)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/91",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "6c8ecb24590e636ea7ee7ae494b09dedb77199f5",
+      "merge_sha": "ee580169ad9be3cc00fa2d5962f602cfcf6fe445",
+      "merged_at": "2026-10-16T23:37:16Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 92,
+      "title": "MR-05: neutral interview guide, personas and #63 approval package (Refs #52, #63)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/92",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "eabfc6b447c7d1ac530cb3e7c552090b33cbacdb",
+      "merge_sha": "21be4877f539fc169533241f174dae1a88142e10",
+      "merged_at": "2026-10-16T23:37:21Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 93,
+      "title": "Refresh README and GitHub guidance for both research programs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/93",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "dfb420fb35315db52a2a8678f60ae4a4849b6b42",
+      "merge_sha": "5238277602411238cac40e71011052c2fd68ba95",
+      "merged_at": "2026-10-16T23:35:34Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 94,
+      "title": "MR-11: risk ranking and validation-gate table for MVP options (Refs #58)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/94",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "ec1c5fe72a0897894463d01d4e4fe9d8613bfc42",
+      "merge_sha": "3e92b97bd8e28fcaa9f25c3f2c01295860ea03d8",
+      "merged_at": "2026-10-16T23:37:25Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 95,
+      "title": "MR-10: falsifiable differentiation hypotheses and kill criteria (Refs #57)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/95",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "fdc9a0b6898d1f0e963fc2ba4ab6f8ec29b8f89c",
+      "merge_sha": "ee7d60479e3e32babea3fe043742ee88c9e4d3a0",
+      "merged_at": "2026-10-16T23:37:30Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 96,
+      "title": "MR-01: seeds, operator records and community fit-report resources (Refs #48)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/96",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "1ba153557790c819cb106539b89a608889d4c883",
+      "merge_sha": "889f5df8fcae6c71ce634e7838597419932faa29",
+      "merged_at": "2026-10-16T23:37:34Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 97,
+      "title": "MR-03: workflow-structured deep dives with separated rights (Refs #50)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/97",
+      "state": "MERGED",
+      "base_ref": "research/market-intelligence",
+      "head_sha": "337dccd280ac7d35c12417ca823bdbec4762b665",
+      "merge_sha": "568c6125bf86c49cb9919043e85805d2d0786b01",
+      "merged_at": "2026-10-16T23:37:38Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 98,
+      "title": "research: add CanIRun.ai to market discovery",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/98",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "fba00842cfcfee06d4f9925bab46e1d1db9cd8a3",
+      "merge_sha": "f8237774098f3f376d7b48b8e665a99fdff43e3c",
+      "merged_at": "2026-10-17T01:58:12Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 99,
+      "title": "docs: align and track complete Apple/iOS delivery project",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/99",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "eb2b3485b0f5ee1225f7a9e8bfba8cb7dc8a0ca3",
+      "merge_sha": "f1d9148f2fef82a57e698dd5d91b92e7b495dfdc",
+      "merged_at": "2026-10-17T01:56:29Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 100,
+      "title": "research: apply GPU sizing and evidence review decisions",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/100",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "c9856edf640da7f688fe518c332d638bf796f73f",
+      "merge_sha": "268797260eb9ce9fade766de1fee80ef35f72b3e",
+      "merged_at": "2026-10-17T01:56:33Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 101,
+      "title": "research: reconcile release-scoped engine support and provenance",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/101",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "043f7f65a0712a183f59262efa16384313663e4c",
+      "merge_sha": "b8a956d840c8a1512a815596eebce7e914f110f1",
+      "merged_at": "2026-10-17T01:56:38Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 102,
+      "title": "research: apply T1 context and offering review decisions",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/102",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "6b4c2ae818fa525a8f5ff351475dfc5f1f6a3d62",
+      "merge_sha": "dbbbe892ba8473a25aa0154f60694efd23613b3f",
+      "merged_at": "2026-10-17T01:56:42Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 103,
+      "title": "research: reconcile hosting rules and source evidence status",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/103",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "71f7fd80595e097a44dfbc6b7eb79ab82fea072d",
+      "merge_sha": "9b821cd5e0b0b35a84de2bc76723aa4cdfb5e6d6",
+      "merged_at": "2026-10-17T01:56:46Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 104,
+      "title": "research: reconcile handoff responses and live ownership audit",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/104",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "d28b929cec078ad474b507bddeb60f8e4fafe179",
+      "merge_sha": "ce189229c2254c94850cecde82b4f20d91e1fbe4",
+      "merged_at": "2026-10-17T01:56:52Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 105,
+      "title": "research: reconcile feasibility evidence and review state",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/105",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "59f95e883c391d1fe99013e8d5d3a6f320615f95",
+      "merge_sha": "71691be72dc520040762da8a5c0e62c4b62496e0",
+      "merged_at": "2026-10-17T01:56:58Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 106,
+      "title": "docs: publish verified Apple delivery triage and issue index",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/106",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "556db8efd5b937550d0e7a0acf261b5acfb49bec",
+      "merge_sha": "6185bf8b8bad67511e24f4ea15f1b740cf1ab6be",
+      "merged_at": "2026-10-17T02:35:39Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 107,
+      "title": "docs: link contributor leaderboard delivery plan",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/107",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "c831b8269aabac591ce5727aabc3e94f26ad8289",
+      "merge_sha": "f55e7e6acabdee0c8cf8401344ef5443dc0e75ac",
+      "merged_at": "2026-10-17T03:01:18Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 108,
+      "title": "docs: publish Android and Apple maintainer execution prompts",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/108",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "12a604fa0e1fd7305349f7b889a8ed80fdb6d24d",
+      "merge_sha": "f297ac558fb15bdedbcf391d84b63a3a7dc38019",
+      "merged_at": "2026-10-17T03:06:18Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 109,
+      "title": "MR-01: correct CanIRun.ai operator, scope and licence records (Refs #48)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/109",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "823139215a05ff7ef27233bf32e9f3c021cdc2a5",
+      "merge_sha": "8d7dce9433c6e7cdc7f5a0a3a646d1eb39b9abe5",
+      "merged_at": "2026-10-17T06:06:57Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 110,
+      "title": "T5: separate training channels from T0 deployment modes (Refs #30)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/110",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "dc315485080873622543e5ee027a17f68c8cf66a",
+      "merge_sha": "104eecbaf23ec998983917307a2e0896db22beb0",
+      "merged_at": "2026-10-17T17:07:24Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/110#pullrequestreview-5558405454",
+          "submitted_at": "2026-10-17T15:11:55Z",
+          "reviewed_commit": "dc315485080873622543e5ee027a17f68c8cf66a"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/110#pullrequestreview-5558968988",
+          "submitted_at": "2026-10-17T17:07:22Z",
+          "reviewed_commit": "dc315485080873622543e5ee027a17f68c8cf66a"
+        }
+      ]
+    },
+    {
+      "number": 111,
+      "title": "docs: reconcile mobile prompts after issue repository migration",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/111",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "1a8e738f19385a80c169a04ab52879d5f81ed009",
+      "merge_sha": "da3c6045f84260506bd326bb24ddfa8a7e6a23e8",
+      "merged_at": "2026-10-18T02:13:15Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/111#pullrequestreview-5558426923",
+          "submitted_at": "2026-10-17T15:16:19Z",
+          "reviewed_commit": "d0a1f8b05b90e7e7087fb2f06890265ab5d42606"
+        }
+      ]
+    },
+    {
+      "number": 112,
+      "title": "MR-07: price freshness recheck and total-cost scenarios (Refs #64)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/112",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "fc9c3259b9437ab1d7a2b67778fa475c83218db6",
+      "merge_sha": "e44a0217b4a9e92583c4ba064c633fb2b757c00f",
+      "merged_at": "2026-10-17T06:22:07Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 113,
+      "title": "T6: partial cost-estimate draft — unit normalisation and open decisions (Refs #39)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/113",
+      "state": "CLOSED",
+      "base_ref": "main",
+      "head_sha": "14783c517d73538fc8eb5af18530018159b161cc",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/113#pullrequestreview-5558426491",
+          "submitted_at": "2026-10-17T15:16:14Z",
+          "reviewed_commit": "be303197ba8e1ae93c17c352dae5474ce8fb244b"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/113#pullrequestreview-5561131269",
+          "submitted_at": "2026-10-18T02:35:55Z",
+          "reviewed_commit": "14783c517d73538fc8eb5af18530018159b161cc"
+        }
+      ]
+    },
+    {
+      "number": 114,
+      "title": "T0: draft saved, shared and compared builds record (Refs #42; blocked by #40)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114",
+      "state": "OPEN",
+      "base_ref": "main",
+      "head_sha": "ea4c599501229f03c88d477f7530940ee1cfcc46",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384",
+          "submitted_at": "2026-10-17T15:12:32Z",
+          "reviewed_commit": "a0a0920528bdae653e6bfae681d4835f5735b301"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5560504666",
+          "submitted_at": "2026-10-17T22:56:07Z",
+          "reviewed_commit": "e19b164f0acabdb593da3cc1611fcbecb7d77e79"
+        },
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5560696480",
+          "submitted_at": "2026-10-17T23:53:38Z",
+          "reviewed_commit": "e19b164f0acabdb593da3cc1611fcbecb7d77e79"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5560845951",
+          "submitted_at": "2026-10-18T00:50:55Z",
+          "reviewed_commit": "ea4c599501229f03c88d477f7530940ee1cfcc46"
+        }
+      ]
+    },
+    {
+      "number": 115,
+      "title": "T6: evaluation decision record (Refs #36)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/115",
+      "state": "CLOSED",
+      "base_ref": "main",
+      "head_sha": "9f403b4252ad646fd1f75f73da2ce4fc02bb7991",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/115#pullrequestreview-5558426612",
+          "submitted_at": "2026-10-17T15:16:15Z",
+          "reviewed_commit": "207b9703016993050e5053d601c337dec0403c6d"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/115#pullrequestreview-5561131574",
+          "submitted_at": "2026-10-18T02:36:02Z",
+          "reviewed_commit": "9f403b4252ad646fd1f75f73da2ce4fc02bb7991"
+        }
+      ]
+    },
+    {
+      "number": 116,
+      "title": "T6: deployment decision record (Refs #37)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/116",
+      "state": "CLOSED",
+      "base_ref": "main",
+      "head_sha": "9a5efb79b6bbb9fd19f87fcbd9f59367a0c35b28",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/116#pullrequestreview-5561131852",
+          "submitted_at": "2026-10-18T02:36:08Z",
+          "reviewed_commit": "9a5efb79b6bbb9fd19f87fcbd9f59367a0c35b28"
+        }
+      ]
+    },
+    {
+      "number": 117,
+      "title": "Market: refresh program synthesis with gate table (Refs #47)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/117",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "819964eef7c370ab2090d7d10401e328d3e44022",
+      "merge_sha": "61acb7a724469c0ae9889c46934beff757c853b6",
+      "merged_at": "2026-10-17T11:18:01Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 118,
+      "title": "T6: monitoring decision record (Refs #38)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/118",
+      "state": "CLOSED",
+      "base_ref": "main",
+      "head_sha": "56a25ed3ccc03f2a774f824f3ce4c2326f6fc695",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/118#pullrequestreview-5558426729",
+          "submitted_at": "2026-10-17T15:16:16Z",
+          "reviewed_commit": "bd615d4780e8de06559b573467c33713a166400f"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/118#pullrequestreview-5561132123",
+          "submitted_at": "2026-10-18T02:36:14Z",
+          "reviewed_commit": "56a25ed3ccc03f2a774f824f3ce4c2326f6fc695"
+        }
+      ]
+    },
+    {
+      "number": 119,
+      "title": "T3: RAG and retrieval backends decision record (Refs #16)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/119",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "22f397110621d829bc1a12051bf80e83baa04287",
+      "merge_sha": "106d2dd647b447ee598518771849b41126f49a79",
+      "merged_at": "2026-10-17T06:22:29Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 120,
+      "title": "T6: guardrails decision record (Refs #35)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/120",
+      "state": "CLOSED",
+      "base_ref": "main",
+      "head_sha": "f4721c123cbba706c46dc2f458f33f38f0f69398",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/120#pullrequestreview-5558426832",
+          "submitted_at": "2026-10-17T15:16:18Z",
+          "reviewed_commit": "bef9c508a7e62ae592c0cd911d80549ebf18f02a"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/120#pullrequestreview-5561132362",
+          "submitted_at": "2026-10-18T02:36:20Z",
+          "reviewed_commit": "f4721c123cbba706c46dc2f458f33f38f0f69398"
+        }
+      ]
+    },
+    {
+      "number": 121,
+      "title": "T6: Deployment & Operations decision records and workstream summary (Refs #34)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "38a83764f4819fde6900dcb8b7219b7cec2315ef",
+      "merge_sha": "913c9b1e974aff3b1a3a22a8ed339b99fa8e95b4",
+      "merged_at": "2026-10-18T02:09:05Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "appletechie",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5556633862",
+          "submitted_at": "2026-10-17T06:27:18Z",
+          "reviewed_commit": "21fd72c09f81518715c40723a1078d7602326030"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5557498252",
+          "submitted_at": "2026-10-17T11:00:47Z",
+          "reviewed_commit": "ef0e4af66e41ab320db172bb653064c1887423cd"
+        },
+        {
+          "reviewer": "tynamite",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5558426199",
+          "submitted_at": "2026-10-17T15:16:11Z",
+          "reviewed_commit": "ef0e4af66e41ab320db172bb653064c1887423cd"
+        },
+        {
+          "reviewer": "tynamite",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5559293819",
+          "submitted_at": "2026-10-17T18:16:00Z",
+          "reviewed_commit": "36ac35466f2d0580d5ac6475785cd3d3127b48d3"
+        },
+        {
+          "reviewer": "tynamite",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5560411239",
+          "submitted_at": "2026-10-17T22:30:34Z",
+          "reviewed_commit": "7cbebf3776ebd44122df201295b8b31477a10e19"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5560504732",
+          "submitted_at": "2026-10-17T22:56:08Z",
+          "reviewed_commit": "7cbebf3776ebd44122df201295b8b31477a10e19"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5560782829",
+          "submitted_at": "2026-10-18T00:25:36Z",
+          "reviewed_commit": "7cbebf3776ebd44122df201295b8b31477a10e19"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#pullrequestreview-5560791616",
+          "submitted_at": "2026-10-18T00:29:02Z",
+          "reviewed_commit": "46b0d206e8991a89cb503d423547e38fa2afc9a8"
+        }
+      ]
+    },
+    {
+      "number": 122,
+      "title": "T1: broaden model-family research and cite previous findings",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/122",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "33515d1d27230c88ab53b84e2b2778b9ff4dde6a",
+      "merge_sha": "854ed815979dc4124a645cefe0187d1473f88247",
+      "merged_at": "2026-10-17T11:18:08Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 123,
+      "title": "T1: source-scoped limits across model task families",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/123",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "19c14e49d8b4e36870d4a6d6a93a715d38244f0c",
+      "merge_sha": "63de7559f856eeb27809f6ee87b442b2b7a60029",
+      "merged_at": "2026-10-18T00:45:01Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "tynamite",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/123#pullrequestreview-5558426344",
+          "submitted_at": "2026-10-17T15:16:12Z",
+          "reviewed_commit": "efafe63b653352688db3a32adf305edffaf0f6d0"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/123#pullrequestreview-5560808373",
+          "submitted_at": "2026-10-18T00:35:45Z",
+          "reviewed_commit": "e2f097b296f4bd04e51be03b4b6e37de367b2786"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/123#pullrequestreview-5560822777",
+          "submitted_at": "2026-10-18T00:41:31Z",
+          "reviewed_commit": "20886854bde624a9b9aef9b08ca2d6bbfb591957"
+        }
+      ]
+    },
+    {
+      "number": 124,
+      "title": "Reconcile merged T4 research and owner handoffs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/124",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "01b2754d64ee75c7de43fcb1f3cbb98e0f4adc1b",
+      "merge_sha": "a894c9b8e65f4fb4a97059fb12e05921a65384ca",
+      "merged_at": "2026-10-17T11:36:32Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 125,
+      "title": "MR-03: log 2026-10-17 substitute tests (ModelFit, CanIRun.ai; Flocci gated)",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/125",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3d2a786bf7081aa4d45a51470274575d91db1268",
+      "merge_sha": "6b14b7f50dbf5ceecbc43ca77c3a62ee9b2242d0",
+      "merged_at": "2026-10-17T17:07:55Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/125#pullrequestreview-5558972678",
+          "submitted_at": "2026-10-17T17:07:53Z",
+          "reviewed_commit": "3d2a786bf7081aa4d45a51470274575d91db1268"
+        }
+      ]
+    },
+    {
+      "number": 126,
+      "title": "T0 #40: component schema and compatibility rules",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "b589c20cbad1a049c5dfea172fdb4ff99713cd2f",
+      "merge_sha": "565f4512ed6a38dfc21c83c92babe5b3bed64e24",
+      "merged_at": "2026-10-18T00:18:48Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5559386862",
+          "submitted_at": "2026-10-17T18:34:46Z",
+          "reviewed_commit": "9c5c2c88ee8278e7d1eb2220982ed1ea24347bd7"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323",
+          "submitted_at": "2026-10-17T22:56:29Z",
+          "reviewed_commit": "b589c20cbad1a049c5dfea172fdb4ff99713cd2f"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560765303",
+          "submitted_at": "2026-10-18T00:18:45Z",
+          "reviewed_commit": "b589c20cbad1a049c5dfea172fdb4ff99713cd2f"
+        }
+      ]
+    },
+    {
+      "number": 127,
+      "title": "T0 #41: catalog data sources and freshness",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "954a48c0c0f23e6c45d4cb6368350120ed1694c9",
+      "merge_sha": "92111483b8d52b1b05152391b2d73e9f59ca2fba",
+      "merged_at": "2026-10-18T00:19:21Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "CHANGES_REQUESTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127#pullrequestreview-5559386999",
+          "submitted_at": "2026-10-17T18:34:47Z",
+          "reviewed_commit": "eff5ad1856073515b7c31d2760641925ced6a1f9"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127#pullrequestreview-5560766386",
+          "submitted_at": "2026-10-18T00:19:10Z",
+          "reviewed_commit": "954a48c0c0f23e6c45d4cb6368350120ed1694c9"
+        }
+      ]
+    },
+    {
+      "number": 128,
+      "title": "Update T0 prompt current state after #81 merged",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/128",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "f409f2f8cdcd63ec13289640494a16dc9f290fd9",
+      "merge_sha": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "merged_at": "2026-10-17T18:34:08Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/128#pullrequestreview-5559383031",
+          "submitted_at": "2026-10-17T18:34:05Z",
+          "reviewed_commit": "f409f2f8cdcd63ec13289640494a16dc9f290fd9"
+        }
+      ]
+    },
+    {
+      "number": 129,
+      "title": "T0: add memory need (W-R11) and CD-13 to the workload and mode notes",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/129",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "a6c683a0737e626f418b2810f68e004d93b07468",
+      "merge_sha": "98dab330aea14965bb0b995d71e07b1949486924",
+      "merged_at": "2026-10-18T00:24:38Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/129#pullrequestreview-5560705078",
+          "submitted_at": "2026-10-17T23:56:48Z",
+          "reviewed_commit": "1572019f0501a60a7074e6816677366524067a9b"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/129#pullrequestreview-5560780253",
+          "submitted_at": "2026-10-18T00:24:35Z",
+          "reviewed_commit": "a6c683a0737e626f418b2810f68e004d93b07468"
+        }
+      ]
+    },
+    {
+      "number": 130,
+      "title": "T3: add ingestion, embedding and vector-store decision records",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/130",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3aac48f887dae67dfa57fbc091db337a55d7cac6",
+      "merge_sha": "2976d96cc421baeb4f89f4f224e2db8ec67893a0",
+      "merged_at": "2026-10-18T00:31:23Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/130#pullrequestreview-5560791459",
+          "submitted_at": "2026-10-18T00:28:59Z",
+          "reviewed_commit": "3aac48f887dae67dfa57fbc091db337a55d7cac6"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/130#pullrequestreview-5560799743",
+          "submitted_at": "2026-10-18T00:32:18Z",
+          "reviewed_commit": "3aac48f887dae67dfa57fbc091db337a55d7cac6"
+        }
+      ]
+    },
+    {
+      "number": 131,
+      "title": "docs: align T6 handoff severity and source-use routing",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/131",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "1c494e391f68526f15d9d19429864b343a3ac16f",
+      "merge_sha": "46b0d206e8991a89cb503d423547e38fa2afc9a8",
+      "merged_at": "2026-10-18T00:27:46Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/131#pullrequestreview-5560787433",
+          "submitted_at": "2026-10-18T00:27:24Z",
+          "reviewed_commit": "1c494e391f68526f15d9d19429864b343a3ac16f"
+        }
+      ]
+    },
+    {
+      "number": 132,
+      "title": "T0: summarize merged decisions and outstanding handoffs",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/132",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "47af5f135e3048ff8b2f34f055bd12f9a73162e3",
+      "merge_sha": "e89430bfb347df540635b803ef4555ff961363b7",
+      "merged_at": "2026-10-18T00:31:26Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/132#pullrequestreview-5560793844",
+          "submitted_at": "2026-10-18T00:29:58Z",
+          "reviewed_commit": "47af5f135e3048ff8b2f34f055bd12f9a73162e3"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/132#pullrequestreview-5560797995",
+          "submitted_at": "2026-10-18T00:31:39Z",
+          "reviewed_commit": "47af5f135e3048ff8b2f34f055bd12f9a73162e3"
+        }
+      ]
+    },
+    {
+      "number": 133,
+      "title": "fix: preserve issue namespaces during mobile reference migration",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/133",
+      "state": "MERGED",
+      "base_ref": "docs/mobile-issue-migration",
+      "head_sha": "6422a39fb53388e225f9891c1647f6c69b616185",
+      "merge_sha": "396bb259c989347d7c3ef5956c23092e64bc5903",
+      "merged_at": "2026-10-18T00:29:29Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/133#pullrequestreview-5560792252",
+          "submitted_at": "2026-10-18T00:29:19Z",
+          "reviewed_commit": "6422a39fb53388e225f9891c1647f6c69b616185"
+        }
+      ]
+    },
+    {
+      "number": 134,
+      "title": "T0: exercise CD-7 migration cases with synthetic fixtures",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "1bb1d65c6ae68ab05dc2e4833edf0471fae13bac",
+      "merge_sha": "3ac541e718933fc5d4c2779bcf29673ce5301ab3",
+      "merged_at": "2026-10-18T00:35:55Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134#pullrequestreview-5560804276",
+          "submitted_at": "2026-10-18T00:34:08Z",
+          "reviewed_commit": "c0c457922f59b1691f33ef3a4d2f69853b675b72"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134#pullrequestreview-5560804590",
+          "submitted_at": "2026-10-18T00:34:15Z",
+          "reviewed_commit": "c0c457922f59b1691f33ef3a4d2f69853b675b72"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134#pullrequestreview-5560808555",
+          "submitted_at": "2026-10-18T00:35:50Z",
+          "reviewed_commit": "1bb1d65c6ae68ab05dc2e4833edf0471fae13bac"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/134#pullrequestreview-5560810338",
+          "submitted_at": "2026-10-18T00:36:33Z",
+          "reviewed_commit": "1bb1d65c6ae68ab05dc2e4833edf0471fae13bac"
+        }
+      ]
+    },
+    {
+      "number": 135,
+      "title": "fix: separate context limits from measured runtime capacity",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/135",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "7f6e22721b20649d4da5cc857e73969c8ed084c2",
+      "merge_sha": "fa231b34efc4c016c2dbbefda685a637e716519b",
+      "merged_at": "2026-10-18T00:34:31Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/135#pullrequestreview-5560804430",
+          "submitted_at": "2026-10-18T00:34:12Z",
+          "reviewed_commit": "7f6e22721b20649d4da5cc857e73969c8ed084c2"
+        }
+      ]
+    },
+    {
+      "number": 136,
+      "title": "Fix access binding for protected single-tenant stores",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/136",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3a3d311ba5b73ca5a99b62ade33d986c0ab4f146",
+      "merge_sha": "42d3c660cebbdb70381882d975c063c3d3e98851",
+      "merged_at": "2026-10-18T00:40:01Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/136#pullrequestreview-5560808957",
+          "submitted_at": "2026-10-18T00:35:59Z",
+          "reviewed_commit": "59c633d8c2d342349ad7208d26caacb72bfedfae"
+        }
+      ]
+    },
+    {
+      "number": 137,
+      "title": "T0: specify price eligibility, refresh and conflict policy",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/137",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "0994b056a9ef92752e62e4a583a8d783aef09e66",
+      "merge_sha": "e9c1a88188bed09b939ba164db9c65cd7a9403bb",
+      "merged_at": "2026-10-18T00:40:05Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 138,
+      "title": "T3: pin pgvector software catalog evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/138",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "78eec21e0b8ced7ea8cb6d492e402ef21441eac4",
+      "merge_sha": "6e5a048d67fe3159f90bed88c0655d8d71cb8a45",
+      "merged_at": "2026-10-18T00:44:25Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 139,
+      "title": "T3: pin BGE-M3 representation evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/139",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "520fe08003b1f972bf9aff7be71dbf20acd33438",
+      "merge_sha": "4addb4d45d3eadb4598262532823634980b8a1b5",
+      "merged_at": "2026-10-18T00:46:19Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 140,
+      "title": "Sync T6 proposal with reviewed main and consolidated tests",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/140",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "47396ca88b0f23a8c1b96bba08437accca002657",
+      "merge_sha": "18bbc4a4e43eb243ae4554ae3e3fc5f43bc4ded0",
+      "merged_at": "2026-10-18T00:59:55Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "zwright8",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/140#pullrequestreview-5560848816",
+          "submitted_at": "2026-10-18T00:52:05Z",
+          "reviewed_commit": "efede92586264b99136fe2cbf62b68d4ac7f847a"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/140#pullrequestreview-5560849899",
+          "submitted_at": "2026-10-18T00:52:31Z",
+          "reviewed_commit": "efede92586264b99136fe2cbf62b68d4ac7f847a"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/140#pullrequestreview-5560868054",
+          "submitted_at": "2026-10-18T00:59:50Z",
+          "reviewed_commit": "47396ca88b0f23a8c1b96bba08437accca002657"
+        }
+      ]
+    },
+    {
+      "number": 141,
+      "title": "fix: reject nonfinite cost calculations and test scenario checks",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/141",
+      "state": "CLOSED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "c58d2bf047809b5c940bc81d2615505de5cf4c46",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": []
+    },
+    {
+      "number": 142,
+      "title": "Fix non-finite scenario expectations and add calculator regression coverage",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/142",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "4c02b11d048c29fe94a258ef4be8f79ca031b35a",
+      "merge_sha": "8e17ee853c7f9e4e1f58b0dffb0d815ec35abc84",
+      "merged_at": "2026-10-18T00:51:28Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/142#pullrequestreview-5560847233",
+          "submitted_at": "2026-10-18T00:51:26Z",
+          "reviewed_commit": "4c02b11d048c29fe94a258ef4be8f79ca031b35a"
+        }
+      ]
+    },
+    {
+      "number": 143,
+      "title": "Reconcile market gate notes with delivered evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/143",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "85adf3d084dcc443e96d7fef1899ffd3b36d80b8",
+      "merge_sha": "b0d99ea647691ea5636892bd8c74055eb0bb3d2d",
+      "merged_at": "2026-10-18T00:56:32Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/143#pullrequestreview-5560850520",
+          "submitted_at": "2026-10-18T00:52:47Z",
+          "reviewed_commit": "40c13b9adce5569384a904d0e33fe7442e5485d7"
+        }
+      ]
+    },
+    {
+      "number": 144,
+      "title": "Clarify training channels and reconcile scoped handoff receipts",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/144",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "2dbc50622ecbbb95c8f5e2b9aac2dbe7708bb4ad",
+      "merge_sha": "2a80f0c46a312af66151e607e6478aacdec129b6",
+      "merged_at": "2026-10-18T00:54:01Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 145,
+      "title": "test: keep unrelated adapter bases unresolved in T0 projection",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/145",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "f2f2ac9af101742faef3c5f3f4e80114e3fda35f",
+      "merge_sha": "0a904c8677cf2a9be3ca1b94a225300414089186",
+      "merged_at": "2026-10-18T00:51:28Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 146,
+      "title": "Document next-version field types and examples for T0 review",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/146",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "319602ff6581826f97612e0c426cd45c713de0fb",
+      "merge_sha": "61e1c9a83bbcd22a672b53e06c544ee3ddd7689d",
+      "merged_at": "2026-10-18T01:01:19Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/146#pullrequestreview-5560851341",
+          "submitted_at": "2026-10-18T00:53:06Z",
+          "reviewed_commit": "e7377460961651dea5b5dac950ebd7e726f22f5d"
+        },
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/146#pullrequestreview-5560857055",
+          "submitted_at": "2026-10-18T00:55:30Z",
+          "reviewed_commit": "0dcdd02639eb92bc8f0e5d5f2dde0aebe6d28749"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/146#pullrequestreview-5560860940",
+          "submitted_at": "2026-10-18T00:57:06Z",
+          "reviewed_commit": "0dcdd02639eb92bc8f0e5d5f2dde0aebe6d28749"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/146#pullrequestreview-5560865735",
+          "submitted_at": "2026-10-18T00:59:02Z",
+          "reviewed_commit": "319602ff6581826f97612e0c426cd45c713de0fb"
+        }
+      ]
+    },
+    {
+      "number": 147,
+      "title": "docs: pin consumer artifacts and remaining research gates",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/147",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3f9aaf6cfc0a7787cdd845bc5c009d8fbe8c312d",
+      "merge_sha": "74b8e6801e9b60a4c476b9ac64ae4114270ab2fd",
+      "merged_at": "2026-10-18T00:52:05Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/147#pullrequestreview-5560848718",
+          "submitted_at": "2026-10-18T00:52:02Z",
+          "reviewed_commit": "3f9aaf6cfc0a7787cdd845bc5c009d8fbe8c312d"
+        }
+      ]
+    },
+    {
+      "number": 148,
+      "title": "fix: normalize reserved source hosts and price-validity timestamps",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/148",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "97539407c0ec480642beb372df08e89750c886ae",
+      "merge_sha": "7115e77caf2d766b98d42dd8d75ee65325f2d4e7",
+      "merged_at": "2026-10-18T00:52:49Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/148#pullrequestreview-5560850194",
+          "submitted_at": "2026-10-18T00:52:39Z",
+          "reviewed_commit": "97539407c0ec480642beb372df08e89750c886ae"
+        }
+      ]
+    },
+    {
+      "number": 149,
+      "title": "Pin E5 encoding evidence and separate embedding request limits",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/149",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3c55cb077313ea799b94f315af13ee156129bd21",
+      "merge_sha": "7d2ebe70d8631aa4ed492e4a0caf51e8cac1607d",
+      "merged_at": "2026-10-18T00:54:06Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/149#pullrequestreview-5560854335",
+          "submitted_at": "2026-10-18T00:54:22Z",
+          "reviewed_commit": "3c55cb077313ea799b94f315af13ee156129bd21"
+        }
+      ]
+    },
+    {
+      "number": 150,
+      "title": "fix: enforce market integrity checks under optimized Python",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/150",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "43b954533243d64b8ff057d38e4484b3a71c9ae1",
+      "merge_sha": "9dd5da02965c4b500646456702449fce192583a9",
+      "merged_at": "2026-10-18T00:54:36Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/150#pullrequestreview-5560854477",
+          "submitted_at": "2026-10-18T00:54:25Z",
+          "reviewed_commit": "43b954533243d64b8ff057d38e4484b3a71c9ae1"
+        }
+      ]
+    },
+    {
+      "number": 151,
+      "title": "T3: pin Qdrant and Chroma catalog evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/151",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "c2a3f3dcaa644f1488a8de8b56327d9661ada4fc",
+      "merge_sha": "255e0eb19e8f2f506107c5d614970c3e19f95c54",
+      "merged_at": "2026-10-18T00:57:33Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 152,
+      "title": "fix: reject intermediate cost overflow and consolidate scenario coverage",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/152",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "6c4feda5294bcf8ef3e673037feaacdb42046214",
+      "merge_sha": "2ef8a0b0b27244ccd62c1b01cccfa56784c34518",
+      "merged_at": "2026-10-18T00:55:17Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/152#pullrequestreview-5560856213",
+          "submitted_at": "2026-10-18T00:55:08Z",
+          "reviewed_commit": "6c4feda5294bcf8ef3e673037feaacdb42046214"
+        }
+      ]
+    },
+    {
+      "number": 153,
+      "title": "Define source-policy fields and reconcile scoped T0 receipts",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/153",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "7ee0117058601f9c6e726c3ad1ce25759020bab5",
+      "merge_sha": "2554f4a7b4a89611e31f26e5c77bec476f4823d2",
+      "merged_at": "2026-10-18T00:57:21Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 154,
+      "title": "Resolve retrieval source gaps and authorization boundaries",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/154",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "4379c5d920200c0de4de84d0c16637e6f4189a4d",
+      "merge_sha": "207452af04a1f58a9ae1c942bcbefa112be04998",
+      "merged_at": "2026-10-18T00:57:27Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 155,
+      "title": "Propose pinned display labels for all 29 component kinds",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/155",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "ee67bf9e29b3b1703ebcf01100634e46fbf138e8",
+      "merge_sha": "83edc67cfedef3a7ce12e9f3ee750f4f033a85a4",
+      "merged_at": "2026-10-18T02:14:34Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/155#pullrequestreview-5560856399",
+          "submitted_at": "2026-10-18T00:55:13Z",
+          "reviewed_commit": "ee67bf9e29b3b1703ebcf01100634e46fbf138e8"
+        },
+        {
+          "reviewer": "zwright8",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/155#pullrequestreview-5561013837",
+          "submitted_at": "2026-10-18T01:52:35Z",
+          "reviewed_commit": "ee67bf9e29b3b1703ebcf01100634e46fbf138e8"
+        }
+      ]
+    },
+    {
+      "number": 156,
+      "title": "Define prospective market follow-up criteria and seed scope",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/156",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "660dbacb735a47f8a148e6a49a0a9498c05fe234",
+      "merge_sha": "e24ec4d54ed9d9884a6e8bdb16747cb9f6f14997",
+      "merged_at": "2026-10-18T00:59:03Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/156#pullrequestreview-5560861100",
+          "submitted_at": "2026-10-18T00:57:10Z",
+          "reviewed_commit": "660dbacb735a47f8a148e6a49a0a9498c05fe234"
+        }
+      ]
+    },
+    {
+      "number": 157,
+      "title": "Validate nontext evidence fields and relative links",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/157",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "fb11b8d9a682d9684d586347f2addd079de722c3",
+      "merge_sha": "d82d8360be01e9d3cbe541eeccecc6a923703e12",
+      "merged_at": "2026-10-18T00:57:38Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/157#pullrequestreview-5560861264",
+          "submitted_at": "2026-10-18T00:57:14Z",
+          "reviewed_commit": "fb11b8d9a682d9684d586347f2addd079de722c3"
+        }
+      ]
+    },
+    {
+      "number": 158,
+      "title": "Record missing hardware evidence and add S3 storage identity",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/158",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "43e8011f01802e7a1d9928732e1484d87aef6231",
+      "merge_sha": "14cd2d0328e6290552d03e32460456cf47e78c95",
+      "merged_at": "2026-10-18T01:00:18Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/158#pullrequestreview-5560868862",
+          "submitted_at": "2026-10-18T01:00:10Z",
+          "reviewed_commit": "43e8011f01802e7a1d9928732e1484d87aef6231"
+        }
+      ]
+    },
+    {
+      "number": 159,
+      "title": "Document pinned publication inputs and source-use clearance gaps",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/159",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "b0ba32090186fa580c7138a52bc17b376a61d4b7",
+      "merge_sha": "93f657288c3da74db5c0c2bebf8c56fc0b2b509b",
+      "merged_at": "2026-10-18T00:57:12Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/159#pullrequestreview-5560859076",
+          "submitted_at": "2026-10-18T00:56:22Z",
+          "reviewed_commit": "b0ba32090186fa580c7138a52bc17b376a61d4b7"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/159#pullrequestreview-5560861727",
+          "submitted_at": "2026-10-18T00:57:26Z",
+          "reviewed_commit": "b0ba32090186fa580c7138a52bc17b376a61d4b7"
+        }
+      ]
+    },
+    {
+      "number": 160,
+      "title": "Propose capacity-evidence reads and saved-build service gates",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/160",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3f7078ce1c3ccfd76168883a02dda1f3f42855a1",
+      "merge_sha": "7957e42414ff24601fbb185b427ae87e63cd9277",
+      "merged_at": "2026-10-18T02:14:43Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "zwright8",
+          "state": "APPROVED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/160#pullrequestreview-5561013906",
+          "submitted_at": "2026-10-18T01:52:37Z",
+          "reviewed_commit": "3f7078ce1c3ccfd76168883a02dda1f3f42855a1"
+        }
+      ]
+    },
+    {
+      "number": 161,
+      "title": "Research Azure Blob and Bedrock S3 connector boundaries",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/161",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "397d0ed748ad46dfc9d40cf4801ea8c3ecec9f38",
+      "merge_sha": "86843a07118e87fcfeb3d51e07e694ed37f4202f",
+      "merged_at": "2026-10-18T00:59:08Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 162,
+      "title": "fix: distinguish symmetric and asymmetric E5 prefix guidance",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/162",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3e5f5ccf88f4c03cf0e923e4d6393c90ddaecb43",
+      "merge_sha": "a402caa0638a0c11860d5b8163156e6145694957",
+      "merged_at": "2026-10-18T00:58:31Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/162#pullrequestreview-5560863863",
+          "submitted_at": "2026-10-18T00:58:21Z",
+          "reviewed_commit": "3e5f5ccf88f4c03cf0e923e4d6393c90ddaecb43"
+        }
+      ]
+    },
+    {
+      "number": 163,
+      "title": "Validate atomic market capability test coverage",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/163",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "5a0c66089c1991a669063f0effbe3cffe622abef",
+      "merge_sha": "2ec13b6290d3bc6743ac1121b85dfa79c75cb396",
+      "merged_at": "2026-10-18T01:03:59Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 164,
+      "title": "Reconcile scoped T4 receipts and merged T3 evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/164",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "a258660dc10ae6193656023dce6e97f3a3bfdfba",
+      "merge_sha": "34e2c53737bcf6b0ad81e750adfd99255618de63",
+      "merged_at": "2026-10-18T01:04:24Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 165,
+      "title": "Align T6 draft status notes with its existing evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/165",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "b6d319c94e86c253c75eef108699b09a629e8723",
+      "merge_sha": "33f87a5750be1a31ad5f9ccd9e9cfbbf4e8a42d0",
+      "merged_at": "2026-10-18T01:03:47Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 166,
+      "title": "Correct T5 calibration confidence and resolved storage gap",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/166",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "05ccc1d7f35d742951ea94d2860b2977f040771b",
+      "merge_sha": "6a3853181161b365ad901fdbbe02767c6f6909bf",
+      "merged_at": "2026-10-18T01:04:14Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 167,
+      "title": "Reconcile T0 ownership, migration evidence and source traceability",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/167",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "f7ddde5276a17457fe1e52fef4906246c9b71918",
+      "merge_sha": "c5139f1f2bf103c1d95d6b3737470b116850e82b",
+      "merged_at": "2026-10-18T01:05:42Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/167#pullrequestreview-5560886326",
+          "submitted_at": "2026-10-18T01:07:22Z",
+          "reviewed_commit": "f7ddde5276a17457fe1e52fef4906246c9b71918"
+        }
+      ]
+    },
+    {
+      "number": 168,
+      "title": "Reconcile T1/T2 receiving receipts and post-merge tracking",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/168",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "b993086cc6e320ca07415926a457241fea0b0706",
+      "merge_sha": "3850afee18e05aa7afca89485963fcea9e7adcaf",
+      "merged_at": "2026-10-18T01:04:06Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 169,
+      "title": "Reconcile S3 identity and historical T2 tracking",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/169",
+      "state": "CLOSED",
+      "base_ref": "main",
+      "head_sha": "2a051cd8a07d7da4d30164f26a09614bc8c833b6",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": []
+    },
+    {
+      "number": 170,
+      "title": "Resolve conditional Slack history rate-limit evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/170",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "bcf2710466ff79cde718fea8471bbc4b3f53210c",
+      "merge_sha": "56dcbe38df46e546f32c0d7acdcd6ffea0a95551",
+      "merged_at": "2026-10-18T01:05:47Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 171,
+      "title": "Clarify delivered market audits and historical acceptance snapshots",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/171",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "9b23f58f11b595a5362f0b59195786cec60406bc",
+      "merge_sha": "d0eea102bcfbcae8afaf3a3734a4e9ad2dbf945a",
+      "merged_at": "2026-10-18T01:07:15Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 172,
+      "title": "Document primary evidence for agent run-bound semantics",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/172",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "8963711f73a7db7182d7fcd58870f8c9e48728c9",
+      "merge_sha": "625d1711e52c72c6e99b0317303707ab36d5b858",
+      "merged_at": "2026-10-18T01:07:00Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 173,
+      "title": "Document scoped Drive quotas and unresolved billing",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/173",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "288f6ecff513e65e2f3c234f1a837781abecfb3c",
+      "merge_sha": "00bbfbd890d5f6e96285d12dc00ffde40739ff0b",
+      "merged_at": "2026-10-18T01:07:54Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 174,
+      "title": "Define GRPO and distillation time-cost accounting",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/174",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3cf1ff10f36eaab18df90f0fed10f8aae75f2560",
+      "merge_sha": "73535003dda89e8ad95d1ebcb6add15e93ebdf4c",
+      "merged_at": "2026-10-18T01:07:37Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 175,
+      "title": "Compare hosted embedding prices and vector service billing units",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/175",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "7a508b703c655a844d0303f479a4cf87541e46b2",
+      "merge_sha": "37c37a3ddd9f42b1b6dc0a416a1bab671d390789",
+      "merged_at": "2026-10-18T01:17:45Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "chatgpt-codex-connector",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/175#pullrequestreview-5560891714",
+          "submitted_at": "2026-10-18T01:09:40Z",
+          "reviewed_commit": "3cf485a685f0e7049f655bd061ac1415b95c2ff8"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/175#pullrequestreview-5560910182",
+          "submitted_at": "2026-10-18T01:16:59Z",
+          "reviewed_commit": "7a508b703c655a844d0303f479a4cf87541e46b2"
+        }
+      ]
+    },
+    {
+      "number": 176,
+      "title": "Resolve named tool source gaps with bounded evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/176",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "c1e2e09605acc2a88fbfb9ea0c988c2f03493ff3",
+      "merge_sha": "41263cf6285232bd39a25fed11fcb9a714a673f0",
+      "merged_at": "2026-10-18T01:09:38Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 177,
+      "title": "Refresh market synthesis with delivered observations and scoped receipts",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/177",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "80630b4a2c5dc5b21a7ba1477b1ef9ad607d2b66",
+      "merge_sha": "950569233102a06f4a20b4658f67332e5512d728",
+      "merged_at": "2026-10-18T01:09:27Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 178,
+      "title": "Complete RTX 4090 precision evidence and retain scoped A100 gaps",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/178",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "7324b2248bba29e01af9ad200de5465dad419624",
+      "merge_sha": "8e67caa50e29faf2f15b9004935140f8c9e9e059",
+      "merged_at": "2026-10-18T01:09:54Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 179,
+      "title": "Align T6 comparison fields with adopted #41 policy",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/179",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "17df4499a8f6a89f63ac549383e9634696a43ec3",
+      "merge_sha": "4df354e3e6ef83a7a335126dffcb090bee4ce4c4",
+      "merged_at": "2026-10-18T01:09:49Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 180,
+      "title": "Correct customer survey denominators and cost scenario interpretation",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/180",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "489bed5543344992131b682aee7616117d1122c1",
+      "merge_sha": "d549903b35c7d2fe234eaceb359af8e2aea32b09",
+      "merged_at": "2026-10-18T01:14:52Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/180#pullrequestreview-5560905305",
+          "submitted_at": "2026-10-18T01:15:01Z",
+          "reviewed_commit": "489bed5543344992131b682aee7616117d1122c1"
+        }
+      ]
+    },
+    {
+      "number": 181,
+      "title": "Reconcile guardrail pricing and agent-bound evidence gaps",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/181",
+      "state": "MERGED",
+      "base_ref": "t6/deployment-operations",
+      "head_sha": "5d81c8dfd6c071cf4b1f1f280f0cdf5ff47ccf55",
+      "merge_sha": "38a83764f4819fde6900dcb8b7219b7cec2315ef",
+      "merged_at": "2026-10-18T01:10:47Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 182,
+      "title": "Bound memory consent claims to their evidence",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/182",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "8c846c0d3b23a688576f6be8eeba02b5a6ba9e03",
+      "merge_sha": "7e590b54e7991146cbf76a66fd40cf5c88a43c58",
+      "merged_at": "2026-10-18T01:10:52Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 183,
+      "title": "Record constrained MCP handoff receipt in market synthesis",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/183",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "2f3e7a6d8a09506dca907851a4a0d02423dea58c",
+      "merge_sha": "d55764fbe68d9e01d03caf4ddffa053a65f7c199",
+      "merged_at": "2026-10-18T01:12:12Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 184,
+      "title": "Propose memory observability signals and record SLA source checks",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/184",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "42cf2be01dc778b930f0b0e86bb707eb1bfb7694",
+      "merge_sha": "8e161c98f6ec5aa6d7caa32d236fdeea9f1f0065",
+      "merged_at": "2026-10-18T02:21:22Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/184#pullrequestreview-5560913476",
+          "submitted_at": "2026-10-18T01:18:19Z",
+          "reviewed_commit": "cbe0f5798ce6480ec0778020591b8f9ec2b66b0c"
+        }
+      ]
+    },
+    {
+      "number": 185,
+      "title": "Propose pinned BGE-M3 dense embedding and publisher records",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/185",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "ef17b93245328934c5d7d344962f22385771fd83",
+      "merge_sha": "16d5238d36474ab156615b07b5908f8dcf2f6f92",
+      "merged_at": "2026-10-18T01:22:35Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/185#pullrequestreview-5560922727",
+          "submitted_at": "2026-10-18T01:22:02Z",
+          "reviewed_commit": "ef17b93245328934c5d7d344962f22385771fd83"
+        }
+      ]
+    },
+    {
+      "number": 186,
+      "title": "Document conditional post-training ONNX conversion boundaries",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/186",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "2879f1c23208d288c5bcb020059e6a5a4b8a6a0a",
+      "merge_sha": "7d46be0f642fc958ca0c91d97e1a083fdc20ba38",
+      "merged_at": "2026-10-18T01:25:09Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/186#pullrequestreview-5560928930",
+          "submitted_at": "2026-10-18T01:24:37Z",
+          "reviewed_commit": "2879f1c23208d288c5bcb020059e6a5a4b8a6a0a"
+        }
+      ]
+    },
+    {
+      "number": 187,
+      "title": "research: add pinned multilingual E5 artifact proposal",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/187",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "5be6416761ebe9c52f3f26618dc869cb7911cf47",
+      "merge_sha": "afa7513bd278791ffd7e751fb11f9869549ecd13",
+      "merged_at": "2026-10-18T01:27:57Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/187#pullrequestreview-5560936703",
+          "submitted_at": "2026-10-18T01:27:37Z",
+          "reviewed_commit": "5be6416761ebe9c52f3f26618dc869cb7911cf47"
+        }
+      ]
+    },
+    {
+      "number": 188,
+      "title": "Reconcile held mobile migration proposal with current main",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/188",
+      "state": "MERGED",
+      "base_ref": "docs/mobile-issue-migration",
+      "head_sha": "ce38d520cf830bcfc33d119e74fa5006861b648d",
+      "merge_sha": "1a8e738f19385a80c169a04ab52879d5f81ed009",
+      "merged_at": "2026-10-18T01:35:07Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 189,
+      "title": "Correct benchmark table scope and preserve reviewed desk analysis",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/189",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "7010989a81206388bc06d4938ceb9668b577cd5c",
+      "merge_sha": "1a8c49046605027d4b9e13a9878e0940e4186ecf",
+      "merged_at": "2026-10-18T02:24:50Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/189#pullrequestreview-5561101855",
+          "submitted_at": "2026-10-18T02:24:45Z",
+          "reviewed_commit": "7010989a81206388bc06d4938ceb9668b577cd5c"
+        }
+      ]
+    },
+    {
+      "number": 190,
+      "title": "Align T6 readiness prose with fixed rule severities",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/190",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "ba1f1fe585792eefcafc58f600e72d475d006742",
+      "merge_sha": "6102d0d519897b17c691a041de60caf88b0b75d0",
+      "merged_at": "2026-10-18T02:22:47Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    },
+    {
+      "number": 191,
+      "title": "Retain focused T6 source findings after #121 integration",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/191",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "3f5acad2cf1917c7cb20cc8bf7ff6368ceab1ca0",
+      "merge_sha": "5906084bbaab8ceed446ab4d191915f84c2dc089",
+      "merged_at": "2026-10-18T02:32:10Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/191#pullrequestreview-5561119907",
+          "submitted_at": "2026-10-18T02:31:43Z",
+          "reviewed_commit": "3f5acad2cf1917c7cb20cc8bf7ff6368ceab1ca0"
+        }
+      ]
+    },
+    {
+      "number": 192,
+      "title": "research: preserve T6 sibling findings after canonical merge",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/192",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "bb4e03620a03b6b7ed10a19e5748d453d12c0890",
+      "merge_sha": "6a0a05ac7462d4cec4fdf4d112bea8fdf1c3b053",
+      "merged_at": "2026-10-18T02:35:17Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/192#pullrequestreview-5561126196",
+          "submitted_at": "2026-10-18T02:34:02Z",
+          "reviewed_commit": "bb4e03620a03b6b7ed10a19e5748d453d12c0890"
+        }
+      ]
+    },
+    {
+      "number": 193,
+      "title": "Add a conservative pre-merge issue-closure check",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/193",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "58dbcd53949f3341e1743a10146fd3831cfd8cf4",
+      "merge_sha": "5e8051e4ffa9eea99dfe2bff25466cd1cc690f5d",
+      "merged_at": "2026-10-18T02:45:08Z",
+      "included_in_captured_main": true,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/193#pullrequestreview-5561157481",
+          "submitted_at": "2026-10-18T02:44:38Z",
+          "reviewed_commit": "58dbcd53949f3341e1743a10146fd3831cfd8cf4"
+        }
+      ]
+    },
+    {
+      "number": 194,
+      "title": "Preserve T6 comparison findings and complete training cost example",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/194",
+      "state": "OPEN",
+      "base_ref": "main",
+      "head_sha": "bb9326c4346e18b970d9c0c3159a4da2f4f0c4cf",
+      "merge_sha": null,
+      "merged_at": null,
+      "included_in_captured_main": false,
+      "reviews": [
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/194#pullrequestreview-5561167954",
+          "submitted_at": "2026-10-18T02:49:10Z",
+          "reviewed_commit": "bb9326c4346e18b970d9c0c3159a4da2f4f0c4cf"
+        },
+        {
+          "reviewer": "CompleteDotTech",
+          "state": "COMMENTED",
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/194#pullrequestreview-5561169334",
+          "submitted_at": "2026-10-18T02:49:43Z",
+          "reviewed_commit": "bb9326c4346e18b970d9c0c3159a4da2f4f0c4cf"
+        }
+      ]
+    },
+    {
+      "number": 195,
+      "title": "research: reconcile parallel T6 source notes",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/195",
+      "state": "MERGED",
+      "base_ref": "main",
+      "head_sha": "a75eb9f5bfdd8a24dd4979bff0e1b54aeee6b557",
+      "merge_sha": "e7eb3a790548f822092f162fd888b4e72250c594",
+      "merged_at": "2026-10-18T02:43:48Z",
+      "included_in_captured_main": true,
+      "reviews": []
+    }
+  ],
+  "historical_owner_reviews": [
+    {
+      "market_issue": 48,
+      "consumer_issue": 41,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with requested provenance changes",
+        "scope": "Catalog source/provenance handoff at reviewed commit 6511dea.",
+        "retained_unknowns_and_next_action": "Retain the claim-level grading and source-reuse caveats; PR #96 adds source work but later changes are not retroactively accepted.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 49,
+      "consumer_issue": 33,
+      "owner_review": {
+        "reviewer": "appletechie",
+        "disposition": "Narrowed to information only",
+        "scope": "T5 matrix cells do not establish T5 requirements; fine_tuned_deploy must identify adapter, merged weights, GGUF or provider-hosted artifacts.",
+        "retained_unknowns_and_next_action": "fine_tuning, training_compute and training_data map to #30/#31/#32. Confirm whether this limited review covers those consumer rows or obtain their explicit dispositions.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449",
+        "submitted_at": "2026-10-16T21:54:31Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 49,
+      "consumer_issue": 42,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Narrowed",
+        "scope": "Saved/share/export/model_versions columns for the 13 profiled products form the #42 competitive baseline.",
+        "retained_unknowns_and_next_action": "PR #87 fills bounded evidence; recipient acceptance of the later cells remains distinct from the original narrowing.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 50,
+      "consumer_issue": 41,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with requested provenance changes",
+        "scope": "Deep-profile source/provenance handoff at reviewed commit 6511dea.",
+        "retained_unknowns_and_next_action": "PR #97 separates workflow and rights findings; later source/reuse changes require recipient review.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 51,
+      "consumer_issue": 2,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted as hypotheses",
+        "scope": "PCPartPicker translation hypotheses; not a completed authenticated walkthrough.",
+        "retained_unknowns_and_next_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 51,
+      "consumer_issue": 3,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted as hypotheses",
+        "scope": "PCPartPicker translation hypotheses; not a completed authenticated walkthrough.",
+        "retained_unknowns_and_next_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 51,
+      "consumer_issue": 40,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted as hypotheses",
+        "scope": "PCPartPicker translation hypotheses; not a completed authenticated walkthrough.",
+        "retained_unknowns_and_next_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 51,
+      "consumer_issue": 42,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted as hypotheses",
+        "scope": "PCPartPicker translation hypotheses; not a completed authenticated walkthrough.",
+        "retained_unknowns_and_next_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 52,
+      "consumer_issue": 2,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted",
+        "scope": "Local-first persona input and existing-hardware workload case.",
+        "retained_unknowns_and_next_action": "Personas remain unvalidated; demand testing belongs to #63.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 52,
+      "consumer_issue": 3,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted",
+        "scope": "Local-first persona input and existing-hardware workload case.",
+        "retained_unknowns_and_next_action": "Personas remain unvalidated; demand testing belongs to #63.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 53,
+      "consumer_issue": 2,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Rejected as a consumer input",
+        "scope": "Market-sizing scenarios do not change any #2 workload field.",
+        "retained_unknowns_and_next_action": "Retain sizing scenarios as #47 program context, not as a required #2 input.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 54,
+      "consumer_issue": 41,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted",
+        "scope": "Neutrality and separation of commercial access fees from redistribution rights.",
+        "retained_unknowns_and_next_action": "This does not approve a licence or permit bulk source copying.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 55,
+      "consumer_issue": 41,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted as a starting deliverable",
+        "scope": "Integration register accepted as the starting point for #55.",
+        "retained_unknowns_and_next_action": "The reviewer retained source terms, intended-use permissions, cadence and last-check fields as follow-up work; rights validation belongs with #60/#41.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 56,
+      "consumer_issue": 33,
+      "owner_review": {
+        "reviewer": "appletechie",
+        "disposition": "Accepted lineage boundary",
+        "scope": "Keep base, adapter and merged identity separate from file-format labels.",
+        "retained_unknowns_and_next_action": "Per-adapter VRAM, quantized-base merges and MoE expert LoRA need artifact-specific #10/#11 evidence; no fine-tuned artifact facts are required from MR-09.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449",
+        "submitted_at": "2026-10-16T21:54:31Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 56,
+      "consumer_issue": 40,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted boundary",
+        "scope": "Notes remain notes: no schema patch, compatibility boolean or ResourceEstimate.",
+        "retained_unknowns_and_next_action": "Actual contract/rule changes require versioned #40 review; this accepts a scope boundary, not measured fit.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 57,
+      "consumer_issue": 2,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a coverage gap",
+        "scope": "Differentiation hypotheses with missing community fit-report counterexamples.",
+        "retained_unknowns_and_next_action": "PR #96 stages six community resources and #95 revises hypotheses; recipient review of those later changes remains separate.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 57,
+      "consumer_issue": 40,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a coverage gap",
+        "scope": "Differentiation hypotheses with missing community fit-report counterexamples.",
+        "retained_unknowns_and_next_action": "PR #96 stages six community resources and #95 revises hypotheses; recipient review of those later changes remains separate.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 57,
+      "consumer_issue": 42,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a coverage gap",
+        "scope": "Differentiation hypotheses with missing community fit-report counterexamples.",
+        "retained_unknowns_and_next_action": "PR #96 stages six community resources and #95 revises hypotheses; recipient review of those later changes remains separate.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 2,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a requested constraint",
+        "scope": "Hybrid local-vs-API workflow, fit evidence and versioned build input.",
+        "retained_unknowns_and_next_action": "Apply the #41 conflict order from the PR #75 review before classifying a finding unknown; no approved MVP threshold is inferred.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 3,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a requested constraint",
+        "scope": "Hybrid local-vs-API workflow, fit evidence and versioned build input.",
+        "retained_unknowns_and_next_action": "Apply the #41 conflict order from the PR #75 review before classifying a finding unknown; no approved MVP threshold is inferred.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 40,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a requested constraint",
+        "scope": "Hybrid local-vs-API workflow, fit evidence and versioned build input.",
+        "retained_unknowns_and_next_action": "Apply the #41 conflict order from the PR #75 review before classifying a finding unknown; no approved MVP threshold is inferred.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 42,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted with a requested constraint",
+        "scope": "Hybrid local-vs-API workflow, fit evidence and versioned build input.",
+        "retained_unknowns_and_next_action": "Apply the #41 conflict order from the PR #75 review before classifying a finding unknown; no approved MVP threshold is inferred.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
+      }
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 2,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted earlier synthesis context",
+        "scope": "The review names synthesis.md, now owned by #47; it does not review the corrected #59 audit deliverables.",
+        "retained_unknowns_and_next_action": "Review the current handoff ledger, audit and risk register separately under #59.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "reviewed_artifact": "research/market/synthesis.md"
+      }
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 3,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted earlier synthesis context",
+        "scope": "The review names synthesis.md, now owned by #47; it does not review the corrected #59 audit deliverables.",
+        "retained_unknowns_and_next_action": "Review the current handoff ledger, audit and risk register separately under #59.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "reviewed_artifact": "research/market/synthesis.md"
+      }
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 33,
+      "owner_review": {
+        "reviewer": "appletechie",
+        "disposition": "Accepted earlier synthesis context",
+        "scope": "The review accepts optional T5 context in synthesis.md, which belongs to #47.",
+        "retained_unknowns_and_next_action": "No MVP fine-tuning scope is approved; current #59 ledger/audit/risk artifacts still need review.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449",
+        "submitted_at": "2026-10-16T21:54:31Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "reviewed_artifact": "research/market/synthesis.md"
+      }
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 40,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted earlier synthesis context",
+        "scope": "The review names synthesis.md, now owned by #47; it does not review the corrected #59 audit deliverables.",
+        "retained_unknowns_and_next_action": "Review the current handoff ledger, audit and risk register separately under #59.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "reviewed_artifact": "research/market/synthesis.md"
+      }
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 41,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted earlier synthesis context",
+        "scope": "The review names synthesis.md, now owned by #47; it does not review the corrected #59 audit deliverables.",
+        "retained_unknowns_and_next_action": "Review the current handoff ledger, audit and risk register separately under #59.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "reviewed_artifact": "research/market/synthesis.md"
+      }
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 42,
+      "owner_review": {
+        "reviewer": "tynamite",
+        "disposition": "Accepted earlier synthesis context",
+        "scope": "The review names synthesis.md, now owned by #47; it does not review the corrected #59 audit deliverables.",
+        "retained_unknowns_and_next_action": "Review the current handoff ledger, audit and risk register separately under #59.",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545",
+        "submitted_at": "2026-10-16T16:28:32Z",
+        "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494",
+        "reviewed_artifact": "research/market/synthesis.md"
+      }
+    }
+  ],
+  "new_scoped_responses": [
+    {
+      "market_issue": 48,
+      "consumer_issue": 6,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to discovery and context",
+      "scope": "Discovery/context for #6 only; bounded public observations from #66.",
+      "retained_unknowns_and_next_action": "No capability or recommendation approval. Preserve per-session observations and #60 rights restrictions; other co-owner acceptance remains unrecorded.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/competitors.json",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 50,
+      "consumer_issue": 6,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to discovery and context",
+      "scope": "Discovery/context for #6 only; bounded public observations from #66.",
+      "retained_unknowns_and_next_action": "No capability or recommendation approval. Preserve per-session observations and #60 rights restrictions; other co-owner acceptance remains unrecorded.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/competitors/README.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 49,
+      "consumer_issue": 6,
+      "reviewer": "zwright8",
+      "role": "author_integration",
+      "disposition": "Author integration only",
+      "scope": "Matrix author integration acknowledgement; not independent receiving acceptance.",
+      "retained_unknowns_and_next_action": "Obtain an independent receiving disposition. Unknown cells are neither negative capability findings nor product requirements.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/features.json",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 49,
+      "consumer_issue": 7,
+      "reviewer": "zwright8",
+      "role": "author_integration",
+      "disposition": "Author integration only",
+      "scope": "Matrix author integration acknowledgement; not independent receiving acceptance.",
+      "retained_unknowns_and_next_action": "Obtain an independent receiving disposition. Unknown cells are neither negative capability findings nor product requirements.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/features.json",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 55,
+      "consumer_issue": 5,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted with per-source rights constraints",
+      "scope": "Source intake/provenance boundaries qualified by the same reviewer receipt on #60.",
+      "retained_unknowns_and_next_action": "Separate provenance and evidence grades. Retain models.dev/llmfit notices and code/dataset/site boundaries; ModelFit attribution, licence link, changes and estimate labels; factual Hugging Face identifiers plus repo-specific checks. Exclude prohibited Artificial Analysis use; no automated OpenRouter collection without permission. No new collection or weights/cards/measurements rights.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/integrations.json",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 55,
+      "consumer_issue": 6,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted with per-source rights constraints",
+      "scope": "Source intake/provenance boundaries qualified by the same reviewer receipt on #60.",
+      "retained_unknowns_and_next_action": "Separate provenance and evidence grades. Retain models.dev/llmfit notices and code/dataset/site boundaries; ModelFit attribution, licence link, changes and estimate labels; factual Hugging Face identifiers plus repo-specific checks. Exclude prohibited Artificial Analysis use; no automated OpenRouter collection without permission. No new collection or weights/cards/measurements rights.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/integrations.json",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 56,
+      "consumer_issue": 7,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to accounting interface",
+      "scope": "Interface/accounting review only, qualified by the detailed #61 receipt.",
+      "retained_unknowns_and_next_action": "Separate actual prompt/cached/generated lengths from context cap; KV dtype/layout from weight dtype; admitted active sequences from queue; exact artifact/runtime/backend and allocator phases; never sum allocated and reserved memory. Preserve 15 dense runs, zero matched estimator/runtime pairs, and unexecuted/unwaived MoE/multi-GPU. Other co-owner/coordinator evidence review and #10 ResourceEstimate placement remain pending.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/technical-feasibility.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 56,
+      "consumer_issue": 11,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to accounting interface",
+      "scope": "Interface/accounting review only, qualified by the detailed #61 receipt.",
+      "retained_unknowns_and_next_action": "Separate actual prompt/cached/generated lengths from context cap; KV dtype/layout from weight dtype; admitted active sequences from queue; exact artifact/runtime/backend and allocator phases; never sum allocated and reserved memory. Preserve 15 dense runs, zero matched estimator/runtime pairs, and unexecuted/unwaived MoE/multi-GPU. Other co-owner/coordinator evidence review and #10 ResourceEstimate placement remain pending.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/technical-feasibility.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 61,
+      "consumer_issue": 7,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to accounting interface",
+      "scope": "Interface/accounting review only, qualified by the detailed #61 receipt.",
+      "retained_unknowns_and_next_action": "Separate actual prompt/cached/generated lengths from context cap; KV dtype/layout from weight dtype; admitted active sequences from queue; exact artifact/runtime/backend and allocator phases; never sum allocated and reserved memory. Preserve 15 dense runs, zero matched estimator/runtime pairs, and unexecuted/unwaived MoE/multi-GPU. Other co-owner/coordinator evidence review and #10 ResourceEstimate placement remain pending.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/sizing-validation.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 61,
+      "consumer_issue": 11,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to accounting interface",
+      "scope": "Interface/accounting review only, qualified by the detailed #61 receipt.",
+      "retained_unknowns_and_next_action": "Separate actual prompt/cached/generated lengths from context cap; KV dtype/layout from weight dtype; admitted active sequences from queue; exact artifact/runtime/backend and allocator phases; never sum allocated and reserved memory. Preserve 15 dense runs, zero matched estimator/runtime pairs, and unexecuted/unwaived MoE/multi-GPU. Other co-owner/coordinator evidence review and #10 ResourceEstimate placement remain pending.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/sizing-validation.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 6,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to proposed validation scenario",
+      "scope": "Proposed bounded local-versus-API validation scenario only.",
+      "retained_unknowns_and_next_action": "No MVP, demand threshold, implementation or reuse approval. Retain #63/#66 coordinator gates and other co-owner decisions.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/mvp-analysis.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 11,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to proposed validation scenario",
+      "scope": "Proposed bounded local-versus-API validation scenario only.",
+      "retained_unknowns_and_next_action": "No MVP, demand threshold, implementation or reuse approval. Retain #63/#66 coordinator gates and other co-owner decisions.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/mvp-analysis.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 58,
+      "consumer_issue": 40,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to proposed validation scenario",
+      "scope": "Proposed bounded local-versus-API validation scenario only.",
+      "retained_unknowns_and_next_action": "No MVP, demand threshold, implementation or reuse approval. Retain #63/#66 coordinator gates and other co-owner decisions.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/mvp-analysis.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 5,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted as audit context; refreshed artifacts pending review",
+      "scope": "Risk, ownership and artifact-separation boundaries as audit context.",
+      "retained_unknowns_and_next_action": "Review this dated ledger/audit/risk refresh at the PR head. Earlier context acceptance is not blanket approval of changed artifacts or additional co-owners.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/handoffs.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 6,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted as audit context; refreshed artifacts pending review",
+      "scope": "Risk, ownership and artifact-separation boundaries as audit context.",
+      "retained_unknowns_and_next_action": "Review this dated ledger/audit/risk refresh at the PR head. Earlier context acceptance is not blanket approval of changed artifacts or additional co-owners.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/handoffs.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 7,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted as audit context; refreshed artifacts pending review",
+      "scope": "Risk, ownership and artifact-separation boundaries as audit context.",
+      "retained_unknowns_and_next_action": "Review this dated ledger/audit/risk refresh at the PR head. Earlier context acceptance is not blanket approval of changed artifacts or additional co-owners.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/handoffs.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 11,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted as audit context; refreshed artifacts pending review",
+      "scope": "Risk, ownership and artifact-separation boundaries as audit context.",
+      "retained_unknowns_and_next_action": "Review this dated ledger/audit/risk refresh at the PR head. Earlier context acceptance is not blanket approval of changed artifacts or additional co-owners.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/handoffs.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 26,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted as audit context; refreshed artifacts pending review",
+      "scope": "Risk, ownership and artifact-separation boundaries as audit context.",
+      "retained_unknowns_and_next_action": "Review this dated ledger/audit/risk refresh at the PR head. Earlier context acceptance is not blanket approval of changed artifacts or additional co-owners.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/handoffs.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 40,
+      "reviewer": "zwright8",
+      "role": "receiving_owner",
+      "disposition": "Accepted as audit context; refreshed artifacts pending review",
+      "scope": "Risk, ownership and artifact-separation boundaries as audit context.",
+      "retained_unknowns_and_next_action": "Review this dated ledger/audit/risk refresh at the PR head. Earlier context acceptance is not blanket approval of changed artifacts or additional co-owners.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859",
+      "submitted_at": "2026-10-17T22:58:44Z",
+      "reviewed_commit": "7acbefbf4e4e700231e88be272bc89e3a73dde15",
+      "reviewed_artifact": "research/market/handoffs.md",
+      "commit_basis": "Explicit research-repository reviewed SHA in receipt"
+    },
+    {
+      "market_issue": 49,
+      "consumer_issue": 33,
+      "reviewer": "appletechie",
+      "role": "receiving_owner",
+      "disposition": "Narrowed to information only; T5 mapping reaffirmed",
+      "scope": "Existing #33 row covers #30/#31/#32 fine_tuning, training_compute and training_data context.",
+      "retained_unknowns_and_next_action": "No additional #30-#32 rows while that scope stays Unknown. If a finding rises above Unknown, add a specific scoped consumer handoff. No MVP training scope is approved.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818",
+      "submitted_at": "2026-10-17T06:06:51Z",
+      "reviewed_commit": null,
+      "reviewed_artifact": "research/market/features.json",
+      "commit_basis": "Receipt does not name a newly reviewed research-repository SHA; no SHA inferred"
+    },
+    {
+      "market_issue": 59,
+      "consumer_issue": 33,
+      "reviewer": "appletechie",
+      "role": "receiving_owner",
+      "disposition": "Accepted as synthesis context; refreshed audit artifacts pending review",
+      "scope": "Reaffirms #47-owned synthesis context and existing #59-to-#33 boundary.",
+      "retained_unknowns_and_next_action": "Retain acceptance as context. No fine-tuning MVP scope unless #58 decides. Current #59 ledger/audit/risk artifacts still require receiving review.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818",
+      "submitted_at": "2026-10-17T06:06:51Z",
+      "reviewed_commit": null,
+      "reviewed_artifact": "research/market/synthesis.md",
+      "commit_basis": "Receipt does not name a newly reviewed research-repository SHA; no SHA inferred"
+    },
+    {
+      "market_issue": 60,
+      "consumer_issue": 41,
+      "reviewer": "tynamite",
+      "role": "receiving_owner",
+      "disposition": "Accepted per-source intended-use rights boundary",
+      "scope": "Per-source intended-use table adopted for #41; source-checking is separate from independent support.",
+      "retained_unknowns_and_next_action": "Preserve source-specific retrieval/display/redistribution/automation restrictions and original access dates. Pinned historical facts need no arbitrary TTL; mutable claims remain as-of dated. PR #127 merge is separate from this receipt; its merge SHA is not a reviewed SHA.",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6235704731",
+      "submitted_at": "2026-10-17T15:24:16Z",
+      "reviewed_commit": null,
+      "reviewed_artifact": "research/market/rights-validation.md",
+      "commit_basis": "Receipt does not name a newly reviewed research-repository SHA; no SHA inferred"
+    }
+  ],
+  "handoff_coverage": {
+    "total_rows": 101,
+    "declared_pairs": 98,
+    "preserved_baseline_rows": 86,
+    "added_pairs": [
+      [
+        60,
+        41
+      ],
+      [
+        63,
+        2
+      ],
+      [
+        63,
+        3
+      ],
+      [
+        63,
+        39
+      ],
+      [
+        64,
+        9
+      ],
+      [
+        64,
+        39
+      ],
+      [
+        64,
+        41
+      ],
+      [
+        65,
+        14
+      ],
+      [
+        65,
+        15
+      ],
+      [
+        65,
+        16
+      ],
+      [
+        65,
+        25
+      ],
+      [
+        65,
+        27
+      ],
+      [
+        66,
+        2
+      ],
+      [
+        66,
+        40
+      ],
+      [
+        66,
+        42
+      ]
+    ],
+    "historical_owner_review_rows": 28,
+    "new_response_records": 22,
+    "receiving_review_status_counts": {
+      "scoped_response_recorded": 44,
+      "not_yet_confirmed": 55,
+      "author_integration_only": 2
+    },
+    "current_audit_acceptance_pending": 19,
+    "counting_rule": "Rows with a historical or scoped receiving response are not full artifact/issue acceptance. Author-only integration is counted separately; missing replies are not rejection."
+  },
+  "declared_handoff_pairs": [
+    [
+      48,
+      6
+    ],
+    [
+      48,
+      10
+    ],
+    [
+      48,
+      25
+    ],
+    [
+      48,
+      41
+    ],
+    [
+      49,
+      6
+    ],
+    [
+      49,
+      7
+    ],
+    [
+      49,
+      10
+    ],
+    [
+      49,
+      16
+    ],
+    [
+      49,
+      25
+    ],
+    [
+      49,
+      27
+    ],
+    [
+      49,
+      33
+    ],
+    [
+      49,
+      36
+    ],
+    [
+      49,
+      39
+    ],
+    [
+      49,
+      42
+    ],
+    [
+      50,
+      6
+    ],
+    [
+      50,
+      10
+    ],
+    [
+      50,
+      25
+    ],
+    [
+      50,
+      39
+    ],
+    [
+      50,
+      41
+    ],
+    [
+      51,
+      2
+    ],
+    [
+      51,
+      3
+    ],
+    [
+      51,
+      40
+    ],
+    [
+      51,
+      42
+    ],
+    [
+      52,
+      2
+    ],
+    [
+      52,
+      3
+    ],
+    [
+      52,
+      16
+    ],
+    [
+      52,
+      25
+    ],
+    [
+      52,
+      39
+    ],
+    [
+      53,
+      2
+    ],
+    [
+      53,
+      39
+    ],
+    [
+      54,
+      39
+    ],
+    [
+      54,
+      41
+    ],
+    [
+      55,
+      5
+    ],
+    [
+      55,
+      6
+    ],
+    [
+      55,
+      9
+    ],
+    [
+      55,
+      27
+    ],
+    [
+      55,
+      39
+    ],
+    [
+      55,
+      41
+    ],
+    [
+      56,
+      7
+    ],
+    [
+      56,
+      10
+    ],
+    [
+      56,
+      11
+    ],
+    [
+      56,
+      16
+    ],
+    [
+      56,
+      25
+    ],
+    [
+      56,
+      27
+    ],
+    [
+      56,
+      33
+    ],
+    [
+      56,
+      36
+    ],
+    [
+      56,
+      39
+    ],
+    [
+      56,
+      40
+    ],
+    [
+      57,
+      2
+    ],
+    [
+      57,
+      40
+    ],
+    [
+      57,
+      42
+    ],
+    [
+      58,
+      2
+    ],
+    [
+      58,
+      3
+    ],
+    [
+      58,
+      6
+    ],
+    [
+      58,
+      10
+    ],
+    [
+      58,
+      11
+    ],
+    [
+      58,
+      39
+    ],
+    [
+      58,
+      40
+    ],
+    [
+      58,
+      42
+    ],
+    [
+      59,
+      2
+    ],
+    [
+      59,
+      3
+    ],
+    [
+      59,
+      5
+    ],
+    [
+      59,
+      6
+    ],
+    [
+      59,
+      7
+    ],
+    [
+      59,
+      9
+    ],
+    [
+      59,
+      10
+    ],
+    [
+      59,
+      11
+    ],
+    [
+      59,
+      16
+    ],
+    [
+      59,
+      25
+    ],
+    [
+      59,
+      26
+    ],
+    [
+      59,
+      27
+    ],
+    [
+      59,
+      33
+    ],
+    [
+      59,
+      36
+    ],
+    [
+      59,
+      37
+    ],
+    [
+      59,
+      39
+    ],
+    [
+      59,
+      40
+    ],
+    [
+      59,
+      41
+    ],
+    [
+      59,
+      42
+    ],
+    [
+      60,
+      41
+    ],
+    [
+      61,
+      7
+    ],
+    [
+      61,
+      10
+    ],
+    [
+      61,
+      11
+    ],
+    [
+      62,
+      25
+    ],
+    [
+      62,
+      36
+    ],
+    [
+      63,
+      2
+    ],
+    [
+      63,
+      3
+    ],
+    [
+      63,
+      39
+    ],
+    [
+      64,
+      9
+    ],
+    [
+      64,
+      39
+    ],
+    [
+      64,
+      41
+    ],
+    [
+      65,
+      14
+    ],
+    [
+      65,
+      15
+    ],
+    [
+      65,
+      16
+    ],
+    [
+      65,
+      25
+    ],
+    [
+      65,
+      27
+    ],
+    [
+      66,
+      2
+    ],
+    [
+      66,
+      40
+    ],
+    [
+      66,
+      42
+    ]
+  ],
+  "contextual_receipts": [
+    {
+      "producer_issue": 60,
+      "consumer_issue": 27,
+      "reviewer": "CompleteDotTech",
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6244042769",
+      "submitted_at": "2026-10-18T01:06:24Z",
+      "reviewed_commit": null,
+      "scope": "MCP registry metadata retrieval/cache/display boundary only. Upstream revision 11b7b0e274d518b6f449c5ee3518a6151d9848b9 is not a research-repository reviewed SHA; package/code/content rights and compatibility/security remain separate. No launch collection authorization."
+    }
+  ],
+  "project_readback": {
+    "api": "Unavailable: authenticated token lacks read:project; no permission change requested",
+    "public_ui_observed_at": "2026-10-18T02:53:39.185Z",
+    "method": "Read-only rendered public Project table; view filters and scroll only",
+    "project_1": {
+      "url": "https://github.com/orgs/Pick-Your-AI/projects/1/views/2",
+      "component_rows": [
+        {
+          "number": 2,
+          "status": "In Progress",
+          "tier": "T0 Configuration",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T0: Configuration #1"
+        },
+        {
+          "number": 3,
+          "status": "In Progress",
+          "tier": "T0 Configuration",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T0: Configuration #1"
+        },
+        {
+          "number": 5,
+          "status": "In Progress",
+          "tier": "T1 Model Selection",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T1: Model Selection #4"
+        },
+        {
+          "number": 6,
+          "status": "In Progress",
+          "tier": "T1 Model Selection",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T1: Model Selection #4"
+        },
+        {
+          "number": 7,
+          "status": "In Progress",
+          "tier": "T1 Model Selection",
+          "priority": "High",
+          "readiness": "Ready",
+          "parent_display": "T1: Model Selection #4"
+        },
+        {
+          "number": 9,
+          "status": "In Progress",
+          "tier": "T2 Infrastructure",
+          "priority": "High",
+          "readiness": "Ready",
+          "parent_display": "T2: Infrastructure #8"
+        },
+        {
+          "number": 10,
+          "status": "In Progress",
+          "tier": "T2 Infrastructure",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T2: Infrastructure #8"
+        },
+        {
+          "number": 11,
+          "status": "In Progress",
+          "tier": "T2 Infrastructure",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T2: Infrastructure #8"
+        },
+        {
+          "number": 13,
+          "status": "Backlog",
+          "tier": "T3 Knowledge & Retrieval (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T3: Knowledge & Retrieval #12"
+        },
+        {
+          "number": 14,
+          "status": "Backlog",
+          "tier": "T3 Knowledge & Retrieval (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T3: Knowledge & Retrieval #12"
+        },
+        {
+          "number": 15,
+          "status": "Done",
+          "tier": "T3 Knowledge & Retrieval (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T3: Knowledge & Retrieval #12"
+        },
+        {
+          "number": 16,
+          "status": "In Progress",
+          "tier": "T3 Knowledge & Retrieval (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T3: Knowledge & Retrieval #12"
+        },
+        {
+          "number": 25,
+          "status": "In Progress",
+          "tier": "T4 Agents & Integrations (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T4: Agents & Integrations #24"
+        },
+        {
+          "number": 26,
+          "status": "In Progress",
+          "tier": "T4 Agents & Integrations (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T4: Agents & Integrations #24"
+        },
+        {
+          "number": 27,
+          "status": "In Progress",
+          "tier": "T4 Agents & Integrations (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T4: Agents & Integrations #24"
+        },
+        {
+          "number": 28,
+          "status": "In Progress",
+          "tier": "T4 Agents & Integrations (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T4: Agents & Integrations #24"
+        },
+        {
+          "number": 30,
+          "status": "In Review",
+          "tier": "T5 Training & Fine-Tuning (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T5: Training & Fine-Tuning #29"
+        },
+        {
+          "number": 31,
+          "status": "In Progress",
+          "tier": "T5 Training & Fine-Tuning (optional)",
+          "priority": "Medium",
+          "readiness": "Needs input",
+          "parent_display": "T5: Training & Fine-Tuning #29"
+        },
+        {
+          "number": 32,
+          "status": "In Progress",
+          "tier": "T5 Training & Fine-Tuning (optional)",
+          "priority": "Medium",
+          "readiness": "Ready",
+          "parent_display": "T5: Training & Fine-Tuning #29"
+        },
+        {
+          "number": 33,
+          "status": "In Progress",
+          "tier": "T5 Training & Fine-Tuning (optional)",
+          "priority": "Medium",
+          "readiness": "Needs input",
+          "parent_display": "T5: Training & Fine-Tuning #29"
+        },
+        {
+          "number": 35,
+          "status": "In Review",
+          "tier": "T6 Deployment & Operations",
+          "priority": "High",
+          "readiness": "Ready",
+          "parent_display": "T6: Deployment & Operations #34"
+        },
+        {
+          "number": 36,
+          "status": "In Review",
+          "tier": "T6 Deployment & Operations",
+          "priority": "High",
+          "readiness": "Ready",
+          "parent_display": "T6: Deployment & Operations #34"
+        },
+        {
+          "number": 37,
+          "status": "In Review",
+          "tier": "T6 Deployment & Operations",
+          "priority": "High",
+          "readiness": "Needs input",
+          "parent_display": "T6: Deployment & Operations #34"
+        },
+        {
+          "number": 38,
+          "status": "In Review",
+          "tier": "T6 Deployment & Operations",
+          "priority": "Medium",
+          "readiness": "Needs input",
+          "parent_display": "T6: Deployment & Operations #34"
+        },
+        {
+          "number": 39,
+          "status": "In Review",
+          "tier": "T6 Deployment & Operations",
+          "priority": "High",
+          "readiness": "Needs input",
+          "parent_display": "T6: Deployment & Operations #34"
+        },
+        {
+          "number": 40,
+          "status": "In Progress",
+          "tier": "T0 Configuration",
+          "priority": "Critical",
+          "readiness": "Ready",
+          "parent_display": "T0: Configuration #1"
+        },
+        {
+          "number": 41,
+          "status": "In Progress",
+          "tier": "T0 Configuration",
+          "priority": "High",
+          "readiness": "Ready",
+          "parent_display": "T0: Configuration #1"
+        },
+        {
+          "number": 42,
+          "status": "In Progress",
+          "tier": "T0 Configuration",
+          "priority": "High",
+          "readiness": "Blocked",
+          "parent_display": "T0: Configuration #1"
+        }
+      ],
+      "coverage": "All 28 component rows. Work Type/Research Confidence/Dependency Status and full selectable option IDs were not visible in this view."
+    },
+    "project_2": {
+      "url": "https://github.com/orgs/Pick-Your-AI/projects/2/views/13?filterQuery=59",
+      "issue": 59,
+      "assignees_display": "appletechie and Mattycodes69",
+      "priority": "P1",
+      "workstream": "MR-12",
+      "research_readiness": "Ready",
+      "status": "In Progress",
+      "labels_display": "type: research",
+      "parent_display": "Market Research Program — Pick Your AI #47",
+      "work_type": "Research",
+      "evidence_confidence": "Low"
+    },
+    "findings": [
+      {
+        "issue": 15,
+        "observed": "Project Status Done; GitHub issue OPEN",
+        "action": "Ask #15 owners/coordinator to link completed acceptance criteria and evidence review or correct status; no automatic state change."
+      }
+    ],
+    "limitations": [
+      "Full Project option definitions/IDs and non-#59 market rows were not audited. No Project fields changed.",
+      "Displayed current values are observations, not approval of their correctness."
+    ]
+  },
+  "limitations": [
+    "Readback records all 55 open issues and 133 PRs returned by the bounded API snapshot; snapshot is not a promise of future state.",
+    "Only explicit mapped owner dispositions are recorded. Merge/generic approval is not handoff or empirical acceptance.",
+    "Repository evidence cross-check does not re-access vendor sources; original source access dates remain unchanged.",
+    "Project UI observations occurred after the GitHub API cutoff and have their own timestamp."
+  ]
+}

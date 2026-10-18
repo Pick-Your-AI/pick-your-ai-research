@@ -14,7 +14,7 @@ Evidence classes: **PD** primary documentation, **VC** vendor claim, **OB** obse
 
 ## Falsifiable hypotheses
 
-Every threshold is a **named coordinator decision (D-57-n)** and must be recorded before the #66 or #63 results are read. Once a result is known, a threshold cannot be changed to save a hypothesis.
+Historical thresholds were left as named coordinator decisions (D-57-n). The prospective protocol below supplies engineering choices for a new follow-up only. Existing #66 results were already read, so these choices cannot retroactively preregister or score that work. Once a follow-up result is known, its threshold cannot be changed to save a hypothesis.
 
 | ID | User decision (bounded) | Observable outcome | Falsification test | Fails if | Class |
 | --- | --- | --- | --- | --- | --- |
@@ -107,3 +107,24 @@ Data reuse rights for these sources are not established (#60/#41). Rapid-MLX's C
 | Every conclusion linked | Throughout | Self-checked only; reviewer pending |
 | Technical owners review handoffs | handoffs.md rows #57 → #2/#40/#42 | tynamite accepted with a coverage gap, now addressed for review |
 | Checks pass; reviewer accepts | — | Blocked by #66; no acceptance claimed |
+
+## CanIRun.ai intake (2026-10-16)
+
+The [CanIRun.ai profile](competitors/canirun-ai.md) adds a device-first counterexample candidate for #66. It strengthens the reason to test narrow model-selection substitutes; it does not establish full-stack substitution. Keep existing hypothesis thresholds and acceptance gates unchanged pending scenario evidence.
+
+
+## Prospective follow-up protocol (2026-10-18)
+
+These are engineering design choices under the user's delegated project authority, not measured product thresholds, an accepted positioning decision, or another owner's acknowledgement. Existing Flocci, ModelFit and CanIRun observations informed the design and remain exploratory. Preserve the historical H5 disposition. Before collecting new results, record this protocol's commit, the exact scenario inputs, product/runtime versions, a fixed required-field list and the evaluator. Any amendment creates a separately labelled follow-up; do not pool earlier results or silently exclude failures. An inaccessible tool is unobserved, not a failed capability.
+
+| Decision | Fixed rule for the new follow-up | Rationale and limit |
+| --- | --- | --- |
+| D-57-1 | Zero parity margin: a substitute must meet every hard constraint, explicitly identify every deliberately contradictory pair, and attach an eligible source or an explicit unknown to every material compatibility assertion. A claimed resolution based on an unknown hard constraint does not pass. | Hard constraints are conjunctive; average scores must not hide a violation. No historical result is rescored. |
+| D-57-2 | Require all D-57-1 conditions plus an explicit operator/capacity classification for each serving component and at least one stated trade-off between the local and hosted alternatives. | A provider name alone does not explain the local/API decision. |
+| D-57-3 | Reconstruction parity requires 100% agreement on the predeclared required fields: component identities and revisions, operator/capacity, runtime, tokenizer/template, context/output reservations, precision, concurrency, cost assumptions, and evidence/unknowns. A field outside the scenario is marked not applicable before the test. The recipient must reconstruct without author clarification. | This tests a record, not deployment success; execution requires separate authorization. Record all omissions and requests for clarification. |
+| D-57-4 | In a future authorized sample of 12 qualified participants spanning at least three distinct buyer roles, require at least 7 to prefer the versioned record over their current alternative and at least 4 to identify a payer and a positive unprompted budget for it. Otherwise narrow or stop the paid-record hypothesis. Incomplete recruitment is inconclusive. | Exploratory stopping rule, not a population estimate, revenue forecast or price anchor. This does not approve #63 recruitment, consent, quotas, interview wording or collection. |
+| D-57-5 | Observe one fixed scenario's price set over 28 consecutive days; log source checks, changes and missing observations. | A bounded maintenance study; one period does not establish long-term freshness. No scheduled job is created here. |
+| D-57-6 | More than 2 researcher-hours of active maintenance over that 28-day period triggers narrowing the cost-advice scope. Track time prospectively; missing time logs make the outcome inconclusive. | An explicit analyst effort budget, not measured economics or authorization for purchases. Trust remains a separate #63 observation; maintenance alone cannot pass H4. |
+| D-57-7 | For a newly fixed scenario matrix, comparable outcomes from existing projects for 100% of its required combinations falsify the exclusive outcome-coverage claim. Each match needs artifact/runtime/hardware pins and the same measured quantity. | An existence/coverage check, not permission to reuse data. It cannot revive the already rejected historical H5 claim. |
+
+For #58, a substitute satisfies this follow-up's **full decision-record scenario** only if D-57-1, D-57-2 and D-57-3 all pass. Failure narrows the research question; it does not establish demand or authorize implementation. Preserve #66's native prerequisite and its owners' evidence review. Hardware error tolerance and cost uncertainty remain workload-specific #10/#39 decisions: without matched measurements or complete meters, offer assumption-explicit screening or partial costs, not a certified fit or savings claim. No go decision follows until applicable empirical gates and receiving scopes are accepted.

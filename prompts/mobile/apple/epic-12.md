@@ -1,0 +1,54 @@
+# Apple/iOS 12: Offline storage and synchronization — execution prompt
+
+Scope: [Pick-Your-AI/pick-your-ai-apple#13](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/13) under [Pick-Your-AI/pick-your-ai-apple#1](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/1). Required: [shared rules](../SHARED.md), [platform requirements](../APPLE.md), [launch instructions](../README.md), [issue/acceptance index](../INDEX.md#issue-apple-13).
+
+## Intake and prerequisite reconciliation
+
+Execute SHARED.md’s complete workflow: inspect live issues/comments/PRs and owners, reconcile native prerequisites and active work, implement the authorized slice, validate meaningful behavior, obtain receiving review, deliver a scoped PR, and verify evidence-backed completion. Preserve the live acceptance criteria and native parents. For a work-package invocation select only its row below; other rows remain coordination context. No assignment or execution is created by publishing this file.
+
+## Integrated outcome and implementation focus
+
+Start with durable schema/migration and retention policy, then offline cache, atomic refresh, durable write queue and explicit conflict UX. Interrupt each persistence/network boundary, lose acknowledgments and switch identity; recover without duplicate writes, silent last-writer loss or substituted historical versions.
+
+Apple-specific receiving boundary: consume the canonical shared output and implement only Apple requirements/adapters/acceptance. Use the lifecycle, Keychain/entitlement, Universal Link, VoiceOver and TestFlight/App Store requirements in APPLE.md where applicable. No second backend, imposed framework or extra Apple platform.
+
+## Existing work packages
+
+| Assigned slice | Outcome to implement | Native prerequisite inputs | Receiving review |
+| --- | --- | --- | --- |
+| [Pick-Your-AI/pick-your-ai-apple#86](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/86) — Apple/iOS 12.01: Durable local database and migrations | Restart and upgrade preserve supported drafts and revision history. | [Pick-Your-AI/pick-your-ai-apple#33](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/33), [Pick-Your-AI/pick-your-ai-apple#29](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/29) | Apple persistence/service and privacy reviewers |
+| [Pick-Your-AI/pick-your-ai-apple#87](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/87) — Apple/iOS 12.02: Cached catalogs and offline draft editing | Offline use preserves edits without presenting unavailable checks as passed. | [Pick-Your-AI/pick-your-ai-apple#31](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/31), [Pick-Your-AI/pick-your-ai-apple#86](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/86) | Apple persistence/service and privacy reviewers |
+| [Pick-Your-AI/pick-your-ai-apple#88](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/88) — Apple/iOS 12.03: Atomic refresh and background scheduling | Partial downloads never activate a mixed artifact release. | [Pick-Your-AI/pick-your-ai-apple#87](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/87) | Apple persistence/service and privacy reviewers |
+| [Pick-Your-AI/pick-your-ai-apple#89](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/89) — Apple/iOS 12.04: Queued writes and retry reconciliation | Retries do not duplicate builds or overwrite newer remote revisions. | [Pick-Your-AI/pick-your-ai-apple#86](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/86), [Pick-Your-AI/pick-your-ai-apple#46](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/46) | Apple persistence/service and privacy reviewers |
+| [Pick-Your-AI/pick-your-ai-apple#90](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/90) — Apple/iOS 12.05: Conflict resolution without lost edits | Conflict handling has no silent last-writer data loss. | [Pick-Your-AI/pick-your-ai-apple#89](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/89) | Apple persistence/service and privacy reviewers |
+| [Pick-Your-AI/pick-your-ai-apple#91](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/91) — Apple/iOS 12.06: Logout, deletion and unavailable-version handling | Account switches cannot expose or replay another user's private changes. | [Pick-Your-AI/pick-your-ai-apple#50](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/50), [Pick-Your-AI/pick-your-ai-apple#89](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/89) | Apple persistence/service and privacy reviewers |
+
+## Validation and acceptance record
+
+Epic record/output: `integrated epic evidence record for 12`. Link the record from the live issue after the repository/module decision; the snapshot does not establish a file path.
+
+Receiving review: Apple persistence/service and privacy reviewers. Resolve people from live assignees and agreed reviewer intake, never from these role names.
+
+For every selected row, open its [index entry](../INDEX.md) and the matching `coverage.json` record. Preserve every exact criterion, implementation step, validation method, required negative/recovery case and delivery/review boundary. Use the live issue to reconcile changes before implementing. Create the criterion-to-evidence table required by SHARED.md at that issue’s existing record location; link artifact hashes, commands, failure/recovery observations and receiving-review disposition.
+
+Demonstrate this epic’s combined outcome, including relevant platform interruption, unavailable-data and recovery paths. Apply the platform program’s device and store distinctions; fixtures and local build success cannot certify production integration or release. Do not infer Done from child counts. The epic’s exact acceptance baseline is:
+
+- Restart and upgrade preserve supported drafts and revision history.
+
+- Offline use preserves edits without presenting unavailable checks as passed.
+
+- Partial downloads never activate a mixed artifact release.
+
+- Retries do not duplicate builds or overwrite newer remote revisions.
+
+- Conflict handling has no silent last-writer data loss.
+
+- Account switches cannot expose or replay another user's private changes.
+
+- Receiving reviews accept the combined epic demonstration and explicitly dispose of excluded scope; native child completion alone is insufficient.
+
+## Handoffs, PR and completion
+
+Use the issue-specific producer/input links in the index and coverage ledger plus the common authority table in SHARED.md. Confirm exact output/version and consumer acceptance with current owners. Native prerequisites gate named outputs; research information and compatibility links are not blanket blockers. Continue independent authorized work when a particular input is missing.
+
+Deliver scoped signed commits and a PR with fully qualified partial issue references, actual validation and unresolved criteria. Obtain receiving and required repository review; do not bypass gates or merge beyond the execution mandate. Re-read before each authorized issue/Project write and verify after it. Complete this epic only when its own integrated criteria and selected child outcomes are accepted, with explicit dispositions for deferred work. Report proposed/submitted/merged status, evidence gaps and the precise remaining owner, input, decision or access condition.

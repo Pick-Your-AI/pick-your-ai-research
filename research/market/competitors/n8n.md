@@ -46,7 +46,7 @@ Not in the PR #82 shortlist. Embedding n8n inside a commercial Pick Your AI offe
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `agents`, `deployment`, `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees. Pricing lists "Workflow history" and "Version control using Git", which bear on `saved`; already Documented.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `agents`, `deployment`, `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees. Pricing lists "Workflow history" and "Version control using Git", which bear on `saved`; already Documented.
 
 ## Open questions and routing
 

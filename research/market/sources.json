@@ -432,13 +432,14 @@
     "id": "src-hugging-face",
     "url": "https://huggingface.co/models",
     "supporting_urls": [
-      "https://huggingface.co/docs/hub/model-cards"
+      "https://huggingface.co/docs/hub/model-cards",
+      "https://huggingface.co/docs/hub/repositories-getting-started"
     ],
     "publisher": "Hugging Face",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -484,12 +485,14 @@
   {
     "id": "src-arena",
     "url": "https://arena.ai/",
-    "supporting_urls": [],
+    "supporting_urls": [
+      "https://arena.ai/leaderboard"
+    ],
     "publisher": "Arena",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -747,13 +750,14 @@
     "id": "src-modelfit",
     "url": "https://modelfit.io/",
     "supporting_urls": [
-      "https://modelfit.io/data/"
+      "https://modelfit.io/data/",
+      "https://modelfit.io/api/dataset/"
     ],
     "publisher": "ModelFit / @wecko-ai package",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -815,12 +819,14 @@
   {
     "id": "src-ollama",
     "url": "https://ollama.com/library",
-    "supporting_urls": [],
+    "supporting_urls": [
+      "https://docs.ollama.com/quickstart"
+    ],
     "publisher": "Ollama",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -1040,13 +1046,14 @@
     "url": "https://dify.ai/",
     "supporting_urls": [
       "https://docs.dify.ai/en/home",
-      "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
+      "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE",
+      "https://docs.dify.ai/en/cloud/use-dify/workspace/app-management"
     ],
     "publisher": "LangGenius",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -1249,13 +1256,14 @@
     "url": "https://n8n.io/",
     "supporting_urls": [
       "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
-      "https://n8n.io/pricing/"
+      "https://n8n.io/pricing/",
+      "https://docs.n8n.io/build/manage-workflows/export-and-import.md"
     ],
     "publisher": "n8n",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -1329,13 +1337,14 @@
     "id": "src-skypilot",
     "url": "https://skypilot.co/",
     "supporting_urls": [
-      "https://docs.skypilot.ai/en/latest/docs/index.html"
+      "https://docs.skypilot.ai/en/latest/docs/index.html",
+      "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html"
     ],
     "publisher": "SkyPilot",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium",
@@ -1935,7 +1944,7 @@
       {
         "access_date": "2026-10-18",
         "access_status": "public primary documents retrieved",
-        "version": "Unversioned docs and main LICENSE unpinned; model catalog labels are not software release pins",
+        "version": "Unversioned docs; root LICENSE read through GitHub at b4a4855e49c674f1dd375a5f716d901502b97b73 during correction review. This pins the licence text, not an installed product or model release.",
         "region": "Global documentation; no cloud price or residency claim",
         "confidence": "Medium",
         "reviewed_urls": [
@@ -1948,6 +1957,11 @@
             "url": "https://raw.githubusercontent.com/unslothai/unsloth/main/LICENSE",
             "publisher": "Unsloth",
             "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/unslothai/unsloth/blob/b4a4855e49c674f1dd375a5f716d901502b97b73/LICENSE",
+            "publisher": "Unsloth",
+            "access_status": "pinned licence text retrieved through GitHub connector"
           }
         ],
         "claims": [
@@ -1970,16 +1984,15 @@
             "claim": "Root license identifies Apache-2.0 unsloth/tests/scripts, AGPLv3 optional studio/unsloth_cli. Models, datasets and separate packages retain separate rights.",
             "evidence_class": "Primary documentation",
             "source_urls": [
-              "https://unsloth.ai/docs",
-              "https://raw.githubusercontent.com/unslothai/unsloth/main/LICENSE"
+              "https://github.com/unslothai/unsloth/blob/b4a4855e49c674f1dd375a5f716d901502b97b73/LICENSE"
             ],
             "publisher": "Unsloth"
           }
         ],
         "operator_statement": "Root copyright names Unsloth AI. Inc team, Daniel Han-Chen and Michael Han-Chen",
         "rights": "Root license identifies Apache-2.0 unsloth/tests/scripts, AGPLv3 optional studio/unsloth_cli. Models, datasets and separate packages retain separate rights.",
-        "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff.",
-        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+        "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff. Public web extraction of the mutable GitHub page omitted the scoped lines in this review; the pinned GitHub text contains them. Model and data rights remain separate.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution. Licence correction review used pinned GitHub text because the mutable web extraction differed."
       }
     ]
   },
@@ -2461,6 +2474,19 @@
     ]
   },
   {
+    "id": "src-gpus-io-20261017",
+    "url": "https://gpus.io/en",
+    "supporting_urls": [],
+    "publisher": "GPUs.io; legal entity not established by this page check",
+    "access_date": "2026-10-17",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Fresh public-page inspection shows GPU/provider/hourly rental-rate rows. Not a validated rate quote, legal-operator determination, successful rental or independent measurement. Preserve earlier src-gpus-io and src-gpus-io-recheck contradictory historical access records.",
+    "version": "Public page inspected2026-10-17; no immutable page revision",
+    "region": "Global comparison page; no regional quote",
+    "confidence": "Medium"
+  },
+  {
     "id": "src-canirun-ai-repo",
     "url": "https://github.com/midudev/canirun.ai",
     "supporting_urls": [
@@ -2473,6 +2499,63 @@
     "limitations": "Repository metadata (homepage https://canirun.ai, owner type User, licence null) is primary; README capability statements are vendor claims. No code was run.",
     "version": "Default branch, pushed 2026-10-16T23:27:02Z",
     "region": "Global; not a regional offering or price quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-harness-bench-repo-b8d8963",
+    "url": "https://github.com/Qihoo360/harness-bench/tree/b8d89634c6f445fcc68ceb6744a59bef6cdf4863",
+    "supporting_urls": [
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/CURRENT.json",
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/docs/EVALUATION_AND_SCORING.md",
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/src/harnessbench/grading/semantic_judge.py",
+      "https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/task_catalog.csv"
+    ],
+    "publisher": "Qihoo360 / Harness Bench Team",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Read-only inspection of one pinned commit; nothing was run. Published results are not in Git, so results cannot be tied to these pins. No LICENSE file; visibility is not a reuse grant. Performance figures elsewhere remain vendor claims.",
+    "version": "Commit b8d89634c6f445fcc68ceb6744a59bef6cdf4863 (2026-10-09)",
+    "region": "Not applicable",
+    "confidence": "High"
+  },
+  {
+    "id": "src-miller-2024",
+    "url": "https://arxiv.org/abs/2411.00640v1",
+    "supporting_urls": [],
+    "publisher": "Evan Miller / Anthropic (arXiv)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Independent measurement",
+    "limitations": "Statistical method; clustering factors were measured on other benchmarks, not Harness Bench.",
+    "version": "arXiv v1",
+    "region": "Not applicable",
+    "confidence": "High"
+  },
+  {
+    "id": "src-bjarnason-2026",
+    "url": "https://arxiv.org/abs/2602.07150v1",
+    "supporting_urls": [],
+    "publisher": "Bjarnason et al. (arXiv)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Independent measurement",
+    "limitations": "Run-to-run variation measured on SWE-bench Verified, not Harness Bench.",
+    "version": "arXiv v1",
+    "region": "Not applicable",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-madaan-2024",
+    "url": "https://arxiv.org/abs/2406.10229",
+    "supporting_urls": [],
+    "publisher": "Madaan et al. (arXiv)",
+    "access_date": "2026-10-16",
+    "access_status": "retrieved",
+    "evidence_grade": "Independent measurement",
+    "limitations": "Full v1 text read 2026-10-17: Table 7 reports the 12% reversal result for IRT/IRT++ against full-dataset rankings, not arbitrary subsets or Harness Bench.",
+    "version": "arXiv v1 HTML, inspected 2026-10-17",
+    "region": "Not applicable",
     "confidence": "Medium"
   }
 ]

@@ -45,7 +45,7 @@ Not in the PR #82 shortlist. Provider price data is a #39/#41 question.
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `deployment`, `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees. `constraints` and `multi_gpu` appear documented in the YAML spec but are Unknown in #87; proposed to #49, not edited here.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `deployment`, `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees. `constraints` and `multi_gpu` appear documented in the YAML spec but are Unknown in #87; proposed to #49, not edited here.
 
 ## Open questions and routing
 

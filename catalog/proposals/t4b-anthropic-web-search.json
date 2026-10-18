@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "id": "tool.anthropic.web-search",
+  "kind": "tool",
+  "tier": "T4",
+  "name": "Anthropic Claude API web search tool",
+  "version": "web_search_20260318",
+  "status": "active",
+  "billing_class": "metered",
+  "description": "Provider-hosted web search server tool for the Claude Messages API. One search per use, billed per search.",
+  "tags": [
+    "search",
+    "server-tool",
+    "open-world"
+  ],
+  "spec": {
+    "protocol": "http",
+    "side_effect": "read_only",
+    "auth_methods": [
+      "api_key"
+    ],
+    "is_networked": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports version string web_search_20260318 (also 20250305, 20260209), max_uses, allowed_domains/blocked_domains, error codes (too_many_requests, max_uses_exceeded), errors not billed, admin can disable in Console. side_effect read_only is a project classification: the tool only searches. protocol http: server tool executed by Anthropic inside the HTTP Messages API (no client handler)."
+    },
+    {
+      "source_uri": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports billing_class metered: $10 per 1,000 searches plus token costs; 'All prices are in USD'."
+    },
+    {
+      "source_uri": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports server-tool classification (runs on Anthropic infrastructure). auth_methods api_key is the Claude API key; the auth mechanism itself was not re-verified on a separate page."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "extensions": {
+    "x_side_effect_class": "read_only",
+    "x_open_world": true
+  }
+}

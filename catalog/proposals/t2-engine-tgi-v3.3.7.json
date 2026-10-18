@@ -28,21 +28,21 @@
     {
       "source_uri": "https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/README.md",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E20: NVIDIA/AMD and Safetensors documented. Maintenance mode; deprecated is proposed research classification for new-build selection, not an upstream EOL or security verdict. Checked source field, not independently reproduced runtime compatibility."
     },
     {
       "source_uri": "https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/launcher/src/main.rs",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E25: FP16/BF16 dtype options; actual model/hardware/quantization support requires a joint check. Checked source field, not independently reproduced runtime compatibility."
     },
     {
       "source_uri": "https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/LICENSE",
       "checked_at": "2026-10-16T12:52:17Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "E21: Apache-2.0 source license only. Checked source field, not independently reproduced runtime compatibility."
     }
   ],
-  "updated_at": "2026-10-16T12:52:17Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

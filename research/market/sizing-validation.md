@@ -1,12 +1,134 @@
 # MR-09: Validate GPU sizing against pinned runtime measurements
 
-Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Owner: @Mattycodes69. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
+Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
 
 ## Question
 Where do planning estimates fail under real runtime conditions?
 
 ## Starting evidence
 [technical-feasibility.md](technical-feasibility.md). This note is not a new canonical component catalog or completed competitor-estimator validation.
+
+## Coverage and authority disposition (2026-10-18)
+
+**Retain the full empirical acceptance scope recorded in the live issue.**
+This research follow-up documents the hardware needed for the existing dense,
+MoE, multi-GPU and comparable-estimator requirements. It supplies no new
+device, reservation, download or cost authorization. Sources inspected on 2026-10-18:
+[live #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61),
+[Zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
+and the committed protocols/results at main
+`ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999`. No hardware probe, inference,
+weights download, paid compute or new device authorization was performed here.
+
+| Gate | Available evidence | Exact remaining action / accountable owner |
+| --- | --- | --- |
+| Dense observations | D1–D5: five configurations, three fresh-process runs each; separate allocated/reserved counters | #61 co-owners and coordinator review the bounded observations and provenance caveats |
+| MoE variations | Pinned OLMoE matrix and separate Granite profiles; no recorded MoE execution | @Mattycodes69/@appletechie identify an authorized envelope and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
+| Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
+| Comparable estimator errors | Zero matching competitor/runtime pairs | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
+| Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
+| ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
+
+The prior spare-local-capacity-only constraint and GPU/RAM/disk/process caps
+remain in force. The 2026-10-16 Granite3.1 failure is a historical observation,
+not a current hardware reservation or a new availability measurement. Paid
+compute, another device, or a different capacity envelope needs explicit
+authorization. Capacity failure is not evidence of model/runtime incompatibility.
+
+An alternative narrowing decision must name the retained question, exact
+deferred/removed cells and comparison claims, approvers and reviewed revision,
+and the acceptance criteria it changes. It requires the live #61 co-owners and
+coordinator's explicit disposition; a general PR approval or the #7/#11 interface
+receipt does not supply it. Until then the full criteria remain open.
+
+Zwright8's receipt accepts actual prompt/cache/predicted lengths, active-sequence
+versus queued-request accounting, runtime pins and separate allocator phases for
+#7/#11. It supplies no new run or error bound. Appletechie's #7 and Mattycodes69's
+#11 co-owner responses remain distinct. #10's new consumption/placement proposal
+is ready for its co-owners' review, not an already accepted handoff. Preserve
+#59's single writer for `handoffs.md`/`handoffs.json`.
+
+## Hardware required for full-scope continuation (2026-10-18)
+
+[PR #200](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/200) delivered
+the bounded accounting proposal and cohort-integrity guard to main at
+`5df5c8c017a4bc775b0702e436eaa8b281bda339`. Its publication review does not
+allocate experiment hardware. Identifying and authorizing the hardware path
+for the existing full scope remains an action for
+@Mattycodes69/@appletechie with @CompleteDotTech.
+
+The following requirements are transcribed or derived from the existing dated
+protocols, inspected 2026-10-18. These are not fresh availability observations
+or measured fit claims. GiB = 2^30 bytes; MiB = 2^20 bytes.
+
+| Coverage | Hardware and preserved limits | What is still needed |
+| --- | --- | --- |
+| D1–D5 dense reproduction | Original single RTX 5070 Ti / pinned CUDA runtime; [dense wrapper](../../scripts/mr09_run_matrix.ps1) requires one valid `nvidia-smi` sample and at least 2,048 MiB free before each run; the runner separately requires CUDA-reported free >=2 GiB. [Original protocol](measurements/mr09-protocol-2026-10-16.md) caps this process at min(2 GiB, 12.5% of reported device memory) | Fresh safe spare-capacity check and temporary artifact storage before any rerun; prior observations are already recorded, so rerunning them does not fill missing MoE/topology/comparison cells |
+| Supplemental Granite3.1 GM1 | [Separate short-case protocol](measurements/mr09-granite31-protocol-2026-10-16.md): GPU free >=4,096 MiB; available physical host RAM >=12 GiB; temporary-volume free >=6,412,308,016 bytes; own allocator cap <=3 GiB. Recheck GPU guard before each of three serial fresh processes | A current passing preflight on the authorized spare device. GM1 is supplemental short MoE coverage only; it does not replace M1–M4 |
+| OLMoE M1–M4 | [Pinned plan](measurements/mr09-moe-plan.json): BF16 resident weight tensors alone are 13,838,323,712 bytes. M1/M2: prompts 256/2,048, active1, BF16 KV; M3: prompt2,048, active2, BF16 KV; M4: prompt2,048, active1, INT4 if supported | Named authorized GPU allocation and reviewed process cap covering all resident experts, cache, prefill/routing workspace, allocator/context and explicit reserve. The existing 2 GiB dense cap cannot admit these weights. Full-resident and separately pinned offload designs are distinct scenarios |
+| Long-context boundary | [Original protocol](measurements/mr09-protocol-2026-10-16.md) defers a larger 8,192-total-position boundary to a reserved session | Review the exact model/prompt/cache/predicted lengths with #7 and establish a safe device/host envelope before adding this cell. Pinned OLMoE has only 4,096 positions; do not apply the 8,192 boundary to it or deliberately cause contention/OOM on the shared device |
+| G1 multi-GPU/per-rank | [Original matrix](measurements/mr09-protocol-2026-10-16.md): same pinned dense/MoE, prompt2,048, active2, native BF16 KV, 32 decode forwards; at least two authorized GPUs and an explicit per-rank placement/topology plan | Name each device and allocation, interconnect, parallelism strategy, runtime/backend and per-rank memory budget. Add separately hashed multi-rank instrumentation/protocol: the existing wrapper and [runner](../../scripts/mr09_measure.py) accept exactly one visible device and do not execute G1 |
+| Matched estimator pairs | Same model/artifact, runtime, weight/KV precision, actual context, active sequences, offload/topology and measured quantity | Pin matching estimator execution/outputs and a reviewed decision tolerance. More GPU memory alone does not create a comparable pair or approve an error threshold |
+
+For the OLMoE native BF16 case, the pinned geometry gives
+`2 * 16 layers * 16 KV heads * 128 head_dim * 2 bytes = 131,072 bytes`
+per cached token per active sequence. M3's terminal cache at
+`(2,048 + 32) * 2` positions is therefore **545,259,520 bytes**.
+Weights plus this cache are **14,383,583,232 bytes** before workspace,
+allocator/library/context costs, loading transients, communication or reserve.
+This is a derived payload floor, not a GPU capacity recommendation or measured
+peak; it does not justify a particular 16/24/48 GB card or a new memory guard.
+M4's packing/metadata/backend support must be checked separately.
+
+OLMoE host-RAM and disk minima remain **unquantified**. Before authorizing that
+session, pin shard file sizes/hashes, loader/offload strategy and simultaneous
+host copies, then declare RAM and storage guards including metadata,
+download/staging/copies and cleanup headroom. The index's tensor-byte count is
+not an exact download/storage requirement. Do not reuse Granite3.1's smaller
+guards for OLMoE or lower any existing profile's guards.
+
+A reviewable hardware authorization must record the host/session owner and
+location, device IDs/models/count and per-rank allocation, host RAM and temporary
+storage budgets, exact model/runtime/driver/backend pins, permitted process caps,
+topology, run/stop conditions and artifact retention/cleanup. Identify whether
+the session uses existing spare local capacity or a newly approved reservation.
+A second device, larger reservation/cap or paid compute needs explicit
+authorization; this hardware checklist provides none of those permissions.
+Keep pre-existing workloads untouched. No new probe, download or experiment
+was performed to prepare this hardware checklist.
+
+## Offline evidence integrity and continuation guard (2026-10-18)
+
+An independent read-only audit at main
+`ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999` matched all 15 result-file
+SHA-256 values to the committed summary, matched instrument/protocol hashes to
+the recorded sources, and independently recomputed all 480 phase/counter
+`n/min/median/max` summary fields. It found no mismatch. It checked phase
+uniqueness and allocator inequalities and found a consistent recorded
+environment/hardware/artifact cohort. This was in-memory file/hash arithmetic,
+not Python execution, new inference, current hardware inventory or validation
+of downloaded model bytes. Original pilot/preflight caveats remain below.
+
+The audit found a continuation defect: the summarizer's existing grouping pins
+covered model/code/protocol/configuration but could pool successful repetitions
+with changed environment, device conditions or artifact contents. The updated
+[summarizer](../../scripts/mr09_summarize.py) compares recorded runtime/package,
+allocator/device/driver and artifact identity pins before any optional
+sanitization writes. It permits changing free-memory observations, timings,
+artifact-list order and publication metadata. Early failures without discovery
+metadata remain recorded and excluded from numerical aggregates.
+
+Successful repetitions also pin the observed model geometry, tokenized workload
+(including the prompt digest) and actual token counts. Matching requested
+configuration alone cannot make different executed inputs one measurement
+cohort. Missing observed inputs on a successful record are rejected; early
+failures remain recorded without contributing numeric samples.
+
+The [regression tests](../../tests/test_mr09_measure.py) cover mismatched cohorts,
+allowed availability variation, early failures and unchanged reproduction of the
+committed summary. These checks do not establish physical-device UUID identity,
+artifact truth, estimator comparability or empirical calibration. The original
+measurement instrument, dated protocol, raw observations and summary are unchanged.
 
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
@@ -17,7 +139,7 @@ Where do planning estimates fail under real runtime conditions?
 - [ ] Obtain affected-owner review and accepted handoff.
 
 ## Next action
-Finish the bounded matrix and the separately recorded coverage gaps; obtain context, sizing and runtime-owner review. The original protocol checklist remains above, with completion claimed only where supported below.
+Review the headroom/note-only consumption proposal and identify authorized capacity plus comparable estimator quantities before new experiments. Retain the full missing MoE/topology/comparison work unless the accountable owners explicitly narrow it. The original protocol checklist remains above, with completion claimed only where supported below.
 
 ## Result
 Partial real GPU inference has been executed. This does not complete independent validation of competitor sizing estimates or establish universal fit. No raw customer content, paid API output, weights or raw datasets are committed. Consumers: #7, #10, #11.
@@ -290,9 +412,9 @@ preserved by the wrapper; use a fresh output directory for independent replicati
 
 | Consumer | Finding offered | Receiving owner | Disposition / unresolved next action |
 | --- | --- | --- | --- |
-| #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | Live owner recorded in [handoffs.md](handoffs.md) | Pending human review; confirm context-policy assumptions and untested boundaries |
-| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | Live owner recorded in [handoffs.md](handoffs.md) | Pending human review; agree calibration targets and future ResourceEstimate consumer/placement |
-| #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | Live owner recorded in [handoffs.md](handoffs.md) | Pending human review; accept instrumentation scope and required runtime extensions |
+| #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | @zwright8, @appletechie | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of accounting interface only; appletechie's disposition and empirical acceptance remain pending |
+| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | @Mattycodes69, @appletechie | [Note-only consumption and future placement proposed](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); both owners' dispositions remain pending |
+| #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | @zwright8, @Mattycodes69 | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of runtime accounting interface only; Mattycodes69's disposition and empirical acceptance remain pending |
 
 No ResourceEstimate, canonical catalog item, Pricebook or compatibility boolean
 is manufactured. #40 remains the review entry for any contract/rule change;

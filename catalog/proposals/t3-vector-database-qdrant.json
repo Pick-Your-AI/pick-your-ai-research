@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "id": "vector_database.qdrant",
+  "kind": "vector_database",
+  "tier": "T3",
+  "name": "Qdrant (self-operated software)",
+  "version": "1.19.2",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Self-operated software release, not a hosted-service plan. Canonical metrics are supported families; score transforms and representation-specific limits remain in the linked research note. Runtime configuration, access enforcement and operational costs require separate evidence.",
+  "tags": [
+    "vector-search",
+    "self-hosted",
+    "open-source"
+  ],
+  "spec": {
+    "supported_metrics": [
+      "cosine",
+      "dot",
+      "euclidean"
+    ]
+  },
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/lib/segment/src/types.rs",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "Distance enum establishes Cosine, Euclid and Dot (also Manhattan, outside canonical v1 metric vocabulary)."
+    },
+    {
+      "source_uri": "https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/lib/collection/src/operations/types.rs",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "VectorParams validates dense size in 1..65536; sparse and multivector representation limits are separate, so no universal max_dimensions is asserted."
+    },
+    {
+      "source_uri": "https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/lib/storage/src/rbac/mod.rs",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "Collection-level role modes exist. Legacy payload constraints are rejected as deprecated. No deployment ACL guarantee is asserted."
+    },
+    {
+      "source_uri": "https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/LICENSE",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "Apache-2.0 software license. No-charge software use is distinct from hosting, storage and operations costs; comply with license/NOTICE and redistribution conditions. No customer-content or hosted-service rights inferred."
+    },
+    {
+      "source_uri": "https://github.com/qdrant/qdrant/releases/tag/v1.19.2",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "Publisher release/tag pin resolves to commit 016542aa5deb6c66380bb137badf73d54f742bde. No installed runtime or benchmark was exercised."
+    }
+  ],
+  "updated_at": "2026-10-18T00:51:33Z"
+}

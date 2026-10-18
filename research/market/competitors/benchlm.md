@@ -40,7 +40,7 @@ The shortlist itself was not generated: it runs client-side and hands-on testing
 | (b) Code licence | No public source repository identified; not applicable / Unknown | Unknown | — |
 | (c) Data reuse | Terms: the public website dataset is "licensed under CC BY-NC 4.0"; commercial use "requires a separate license". Data plans cover "queries and internal analysis"; commercial display needs "a separate display agreement". Publisher measurements keep their own licences | Documented (terms) | [terms](https://benchlm.ai/terms), [data access](https://benchlm.ai/data/access) |
 
-Consistent with pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82) (commercial display: no; redistribution: no). The CC BY-NC licence on website downloads is an additional finding for #41/#60 to confirm.
+Consistent with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82) (commercial display: no; redistribution: no). The CC BY-NC licence on website downloads is an additional finding for #41/#60 to confirm.
 
 ## Counterexample
 
@@ -49,7 +49,7 @@ Consistent with pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-re
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `share` Documented, `export` Documented, `model_versions` Documented, `saved` Unknown. This profile agrees; the selector's URL state is sharing, not a saved versioned build, so `saved` stays Unknown. `natural_language`, `constraints` and `guided_selection` appear Documented on the selector page but are Unknown in #87; proposed to #49, not edited here.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `share` Documented, `export` Documented, `model_versions` Documented, `saved` Unknown. This profile agrees; the selector's URL state is sharing, not a saved versioned build, so `saved` stays Unknown. `natural_language`, `constraints` and `guided_selection` appear Documented on the selector page but are Unknown in #87; proposed to #49, not edited here.
 
 ## Open questions and routing
 

@@ -15,15 +15,15 @@
     {
       "source_uri": "https://developers.cloudflare.com/r2/pricing/",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Standard object-storage class; storage and classified requests are separate meters."
     },
     {
       "source_uri": "https://developers.cloudflare.com/r2/reference/data-location/",
       "checked_at": "2026-10-16T12:39:46Z",
-      "verification_status": "verified",
+      "verification_status": "unverified",
       "notes": "Automatic placement, best-effort hints and jurisdiction restrictions differ; no exact physical region asserted."
     }
   ],
-  "updated_at": "2026-10-16T12:39:46Z"
+  "updated_at": "2026-10-17T01:42:05Z"
 }

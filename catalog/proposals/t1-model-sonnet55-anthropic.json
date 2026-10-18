@@ -40,7 +40,13 @@
       "checked_at": "2026-10-16T19:18:37Z",
       "verification_status": "unverified",
       "notes": "Generation4.6-and-later dateless IDs name fixed snapshots. No invented dated alias."
+    },
+    {
+      "source_uri": "https://platform.claude.com/docs/en/models/overview",
+      "checked_at": "2026-10-17T06:19:25Z",
+      "verification_status": "unverified",
+      "notes": "Fresh primary documentation check: Compare models includes Sonnet5.5 and states current models support tool use. Explicit support for supports_tool_calling; not an independently exercised workflow. Original October16 provenance entries retained."
     }
   ],
-  "updated_at": "2026-10-16T19:18:37Z"
+  "updated_at": "2026-10-17T06:19:25Z"
 }

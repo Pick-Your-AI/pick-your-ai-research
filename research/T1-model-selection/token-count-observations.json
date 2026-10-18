@@ -1,0 +1,145 @@
+{
+  "issue": 7,
+  "measured_at": "2026-10-18T03:01:02.138737+00:00",
+  "evidence_class": "local_software_measurement_on_synthetic_inputs",
+  "scope": "raw_text_only",
+  "synthetic_inputs": true,
+  "model_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "fixture_sha256": "41f78e1aa9294a0ecc5d02e6c8100c2db2917d9f55d2b45c75e77c698f748364",
+  "python_version": "3.12.12",
+  "tokenizers_version": "0.23.3",
+  "pydantic_version": "2.12.5",
+  "add_special_tokens": false,
+  "truncation": false,
+  "padding": false,
+  "synthetic_budget_tokens": 32,
+  "observations": [
+    {
+      "id": "empty",
+      "stratum": "empty",
+      "unicode_codepoints": 0,
+      "utf8_bytes": 0,
+      "observed_tokens": 0,
+      "ceil_codepoints_div_4": 0,
+      "signed_residual_tokens": 0
+    },
+    {
+      "id": "ascii_greeting",
+      "stratum": "english",
+      "unicode_codepoints": 12,
+      "utf8_bytes": 12,
+      "observed_tokens": 3,
+      "ceil_codepoints_div_4": 3,
+      "signed_residual_tokens": 0
+    },
+    {
+      "id": "english_prose",
+      "stratum": "english",
+      "unicode_codepoints": 139,
+      "utf8_bytes": 139,
+      "observed_tokens": 21,
+      "ceil_codepoints_div_4": 35,
+      "signed_residual_tokens": -14
+    },
+    {
+      "id": "python_code",
+      "stratum": "code",
+      "unicode_codepoints": 85,
+      "utf8_bytes": 85,
+      "observed_tokens": 21,
+      "ceil_codepoints_div_4": 22,
+      "signed_residual_tokens": -1
+    },
+    {
+      "id": "tool_json",
+      "stratum": "structured_text",
+      "unicode_codepoints": 111,
+      "utf8_bytes": 111,
+      "observed_tokens": 26,
+      "ceil_codepoints_div_4": 28,
+      "signed_residual_tokens": -2
+    },
+    {
+      "id": "cjk_repeated",
+      "stratum": "cjk",
+      "unicode_codepoints": 114,
+      "utf8_bytes": 342,
+      "observed_tokens": 66,
+      "ceil_codepoints_div_4": 29,
+      "signed_residual_tokens": 37
+    },
+    {
+      "id": "arabic_prose",
+      "stratum": "arabic",
+      "unicode_codepoints": 192,
+      "utf8_bytes": 354,
+      "observed_tokens": 75,
+      "ceil_codepoints_div_4": 48,
+      "signed_residual_tokens": 27
+    },
+    {
+      "id": "emoji_sequences",
+      "stratum": "emoji",
+      "unicode_codepoints": 156,
+      "utf8_bytes": 456,
+      "observed_tokens": 216,
+      "ceil_codepoints_div_4": 39,
+      "signed_residual_tokens": 177
+    },
+    {
+      "id": "composed_accents",
+      "stratum": "unicode_composed",
+      "unicode_codepoints": 180,
+      "utf8_bytes": 220,
+      "observed_tokens": 62,
+      "ceil_codepoints_div_4": 45,
+      "signed_residual_tokens": 17
+    },
+    {
+      "id": "decomposed_accents",
+      "stratum": "unicode_decomposed",
+      "unicode_codepoints": 220,
+      "utf8_bytes": 260,
+      "observed_tokens": 62,
+      "ceil_codepoints_div_4": 55,
+      "signed_residual_tokens": 7
+    },
+    {
+      "id": "spaces",
+      "stratum": "whitespace",
+      "unicode_codepoints": 128,
+      "utf8_bytes": 128,
+      "observed_tokens": 1,
+      "ceil_codepoints_div_4": 32,
+      "signed_residual_tokens": -31
+    },
+    {
+      "id": "digits",
+      "stratum": "digits",
+      "unicode_codepoints": 160,
+      "utf8_bytes": 160,
+      "observed_tokens": 160,
+      "ceil_codepoints_div_4": 40,
+      "signed_residual_tokens": 120
+    },
+    {
+      "id": "base_input",
+      "stratum": "assembled_text",
+      "unicode_codepoints": 83,
+      "utf8_bytes": 83,
+      "observed_tokens": 15,
+      "ceil_codepoints_div_4": 21,
+      "signed_residual_tokens": -6
+    },
+    {
+      "id": "input_with_memory",
+      "stratum": "assembled_text",
+      "unicode_codepoints": 583,
+      "utf8_bytes": 583,
+      "observed_tokens": 101,
+      "ceil_codepoints_div_4": 146,
+      "signed_residual_tokens": -45
+    }
+  ]
+}

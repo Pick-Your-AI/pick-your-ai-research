@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.model_provider.intfloat",
+  "kind": "model_provider",
+  "tier": "T1",
+  "name": "intfloat model publisher",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "spec": {},
+  "provenance": [
+    {
+      "source_uri": "https://huggingface.co/intfloat",
+      "checked_at": "2026-10-18T01:24:00Z",
+      "verification_status": "unverified",
+      "notes": "Public publisher namespace for the E5 artifact; identity-only capture, not a hosted inference operator. Version is research capture date. No unchecked capabilities, regions or rights are added."
+    }
+  ],
+  "updated_at": "2026-10-18T01:24:00Z"
+}

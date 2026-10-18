@@ -37,7 +37,7 @@ Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-
 | (b) Code licence | SPDX `MIT` (`gh api repos/anomalyco/models.dev/license`) | Observed | [licence](https://github.com/anomalyco/models.dev/blob/dev/LICENSE) |
 | (c) Data reuse | Data lives in the MIT repository; provider logos and upstream provider facts may carry trademark or provider terms | Observed / hypothesis for upstream | [repository](https://github.com/anomalyco/models.dev) |
 
-Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes with the MIT notice. This profile agrees; logos and trademarks remain a #41 question.
+Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes with the MIT notice. This profile agrees; logos and trademarks remain a #41 question.
 
 ## Counterexample
 
@@ -46,7 +46,7 @@ Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82):
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_search`, `model_compare`, `model_versions`, `context`, `api_pricing`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_search`, `model_compare`, `model_versions`, `context`, `api_pricing`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
 
 ## Open questions and routing
 

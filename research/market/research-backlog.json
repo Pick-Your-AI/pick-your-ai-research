@@ -77,7 +77,8 @@
       "Verify all five seeds",
       "Classify at least 30 distinct resources",
       "Record entity boundaries and unknowns",
-      "Select 10–15 material deep dives"
+      "Select 10–15 material deep dives",
+      "Review CanIRun.ai (canirun-ai) within this issue scope; see competitors/canirun-ai.md. Directory inspection only; scenario and owner acceptance pending."
     ],
     "status": "In Review",
     "readiness": "Ready",
@@ -129,7 +130,8 @@
       "Define atomic capability tests",
       "Link every supported cell to evidence",
       "Keep silence Unknown",
-      "Review overlap and compare coverage"
+      "Review overlap and compare coverage",
+      "Review CanIRun.ai (canirun-ai) within this issue scope; see competitors/canirun-ai.md. Directory inspection only; scenario and owner acceptance pending."
     ],
     "status": "In Review",
     "readiness": "Ready",
@@ -176,7 +178,8 @@
       "Review 10–15 profiles",
       "Analyze workflow and architecture",
       "Separate commercial access from reuse rights",
-      "Test material differentiation counterexamples"
+      "Test material differentiation counterexamples",
+      "Review CanIRun.ai (canirun-ai) within this issue scope; see competitors/canirun-ai.md. Directory inspection only; scenario and owner acceptance pending."
     ],
     "status": "In Review",
     "readiness": "Ready",
@@ -1033,7 +1036,8 @@
       "Run a common public non-sensitive scenario",
       "Check constraint handling and explanation quality",
       "Inspect saved or exported configuration claims",
-      "Record counterexamples and pivot recommendation"
+      "Record counterexamples and pivot recommendation",
+      "Review CanIRun.ai (canirun-ai) within this issue scope; see competitors/canirun-ai.md. Directory inspection only; scenario and owner acceptance pending."
     ],
     "status": "In Progress",
     "readiness": "Ready",

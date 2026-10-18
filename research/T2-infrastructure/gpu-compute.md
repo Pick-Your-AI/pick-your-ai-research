@@ -1,21 +1,21 @@
 # GPU / Compute: inference capacity and provisionable profiles
 
 Issue: [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) · Contract: 1.0.0 · Kinds: `accelerator`, `compute_profile`
-Status: ready for review; merge and consuming-owner acknowledgements pending · Last researched: 2026-10-16
+Status: decision record merged in PR #75; follow-up rule proposal and remaining handoffs pending · Last researched: 2026-10-17
 
 ## User decision
 
 Which accelerator, and how many, can serve a particular version of a model at the requested context and load? Keep an accelerator's physical specifications separate from a provisionable host SKU. A memory calculation is a capacity screen; passing it does not establish model quality, engine support, an SLO, regional stock, or a reservation.
 
-The current default-branch contract, following merged PR #44, is authoritative. The scoped issue appendix was corrected to record the merged state. This note contributes proposed facts and rules without changing v1. Live GitHub assignee on the research date: @Mattycodes69. Related ownership was read from GitHub rather than inferred from older contributor tables.
+The current default-branch contract, following merged PR #44, is authoritative. This note contributes facts and proposed rules without changing v1. Live GitHub assignees re-read on 2026-10-18: @Mattycodes69 and @appletechie. PR #75 merged at `ec612eb14edaf63cc9caca2ab655d053c9114dd4`; merge does not establish every consuming-owner acceptance.
 
 Deployment-mode coverage is a research decision:
 
 | Mode | Treatment |
 | --- | --- |
 | API | Omit customer-owned GPU and local engine when using only a hosted model API, consistent with the [component guide](../../contracts/v1/docs/COMPONENTS.md). Provider hardware and its hidden scheduling cannot be inferred from an API model name; API behavior belongs to #5. |
-| Managed | Size only where the service exposes a pinned instance/device allocation and configurable runtime. Record opaque managed inference capacity as unknown. Runpod's selectable Pods inform candidates, but incomplete profile fields stay in this note. |
-| Self-hosted / hybrid | Use hardware catalog plus host SKU, exact artifact, engine version and workload. A cloud VM running customer-managed inference is self-hosted at the model-serving layer; #3 must confirm its final deployment taxonomy. On-premises inventory uses the same hardware records with a separately evidenced host profile. |
+| Managed | A managed component with a user-chosen instance type is in scope for sizing. Provider-operated shared or opaque capacity skips local sizing; its quota and capacity guarantees remain unknown service inputs. Runpod's selectable Pods inform candidates, but incomplete profile fields stay in this note. |
+| Self-hosted / hybrid | Use hardware catalog plus host SKU, exact artifact, engine version and workload. #3 accepted operator/capacity classification in the owner review below: a customer-operated cloud engine is self-hosted. Evaluate each component of a hybrid build separately; build-level hybrid mode must not skip its local checks. |
 
 CPU inference and edge inference are in scope for comparisons and unknown handling. This bounded first intake supplies discrete datacenter GPUs and one cloud profile. It does not claim exhaustive CPU/NPU/TPU/consumer GPU coverage. Unified memory and CPU RAM must not be relabelled dedicated VRAM; no CPU/edge CatalogItem is fabricated to fill required fields. #10/@Mattycodes69 and #40/@tynamite must decide how v1 represents shared memory and accelerator partitions before complete edge proposals. #11's CPU/Metal candidates establish possible runtime paths, not capacity guarantees.
 
@@ -33,7 +33,7 @@ All numeric hardware entries in this table are **published** vendor specificatio
 
 Arithmetic precision support is not a promise that an arbitrary quantized checkpoint runs. A checkpoint's storage format, quantization algorithm, scale representation, compute dtype and KV dtype are different inputs. vLLM 0.10.2's table, for example, lists FP8 W8A8 on Ada/Hopper/AMD GPU but AWQ/GPTQ as unsupported on AMD GPU (C12). Keep this joint engine/artifact/hardware evidence with #11. No `int4` claim is inferred for H100 or MI300X from another generation's table.
 
-That v0.10.2 table is historical. The separately inspected v0.31.0 table retains these particular FP8 W8A8 and AMD AWQ/GPTQ entries (C20); neither table proves every architecture, weight layout, driver or plugin combination. Current engine proposals use #11's v0.31.0 evidence, while the older benchmark below retains its own engine version. AMD's datasheet labels capacity up to **192 GB**, while its ROCm 6.3 hardware table labels **192 GiB** (C03, C22). The catalog preserves the datasheet's advertised value; this source-unit conflict cannot establish allocatable/free bytes and requires #40's unit decision.
+That v0.10.2 table is historical. The separately inspected v0.31.0 table retains these particular FP8 W8A8 and AMD AWQ/GPTQ entries (C20); neither table proves every architecture, weight layout, driver or plugin combination. Current engine proposals use #11's v0.31.0 evidence, while the older benchmark below retains its own engine version. AMD's datasheet labels capacity up to **192 GB**, while its ROCm 6.3 hardware table labels **192 GiB** (C03, C22). #40's review confirms decimal GB (10^9 bytes) is canonical; retain each source value/unit and normalize before comparing. These differently labelled published capacities do not establish allocatable/free bytes, so the catalog retains its datasheet source and runtime allocation stays unknown.
 
 ### Provisionable compute profiles
 
@@ -67,11 +67,11 @@ The following is the normalized comparison specification. It does not add fields
 | `/spec/region` | provider region ID | us-east-1 | C08, C09 | Published offering, historical launch plus AWS mapping; availability now unknown |
 | Weight tensor count/dtype, artifact revision, quantization algorithm/group size/scales | structured evidence in note; count, bits/element, bytes | Exact artifact metadata preferred | C11, C13 | Parameter marketing labels alone are insufficient; metadata not modeled by v1 |
 | Layers, KV heads, head dimension, cache dtype and layout | positive integers / dtype / bytes | Example L=28, Hkv=4, D=128, BF16=2 bytes | C11, C14 | Architecture-specific; attention head count is not KV-head count |
-| Requested context + reserved output, active sequences, token batch | integers, tokens and sequences | Explicit scenario inputs below | C11, C15; workload assumptions | Concurrency is not prefill token batch; queued requests do not all hold device KV |
+| Requested context + reserved output, admitted sequences, token batch | integers, tokens and sequences | Explicit scenario inputs below | C11, C15; workload assumptions | Workload peak demand differs from engine admission and prefill token batch; queued requests do not all hold device KV |
 | Runtime/adapter/activation memory and headroom | bytes and fraction; bounded project estimates | Explicit scenario inputs below | C13–C15; estimates | No universal overhead or headroom default established |
 | Sizing output / ResourceEstimate metrics | decimal strings, GB; integer planned count in note | Total range and peak per device | C11–C15; calculation | Real build/selection versions needed before publishing build-bound ResourceEstimate |
 | Throughput / latency | tokens/s; TTFT/ITL/end-to-end ms, distribution and test conditions | Published comparison only; new profile unknown | C16 | No error range invented; no numeric L40S SLO established |
-| Provenance `/provenance/*` | public URL, RFC3339 date, verification enum, notes | Source-to-field mappings in each proposal | All cited sources | `verified` means checked against citation, not independently benchmarked |
+| Provenance `/provenance/*` | public URL, RFC3339 date, verification enum, notes | Source-to-field mappings in each proposal | All cited sources | Source-checked publisher facts remain `unverified` under the adopted #41 policy; checking alone is not independent reproduction |
 
 ## Evidence
 
@@ -102,7 +102,16 @@ Access date for every entry: **2026-10-16**. Prices and currency are not copied 
 | C21 | vLLM [release-pinned optimization guide](https://github.com/vllm-project/vllm/blob/v0.31.0/docs/configuration/optimization.md) | 2026-10-16 | v0.31.0 | Primary documentation; performance guidance is vendor claim | Cache preallocation, TP/PP/DP/MoE distinctions and CPU-process recommendation; no L40S throughput calibration |
 | C22 | AMD [ROCm hardware specifications](https://rocm.docs.amd.com/en/docs-6.3.0/reference/gpu-arch-specs.html) | 2026-10-16 | ROCm 6.3.0, dated 2024-12-03 | Primary documentation | MI300X CDNA3/gfx942 row labels memory 192 GiB, unlike datasheet GB; keep conflict and runtime allocation unknown |
 
-Freshness proposal, pending #41: preserve dated hardware and historical engine snapshots; recheck a claim when source changes, selected engine/driver/artifact changes, a new saved build is evaluated, or provisioning is planned. For current quotes and availability, require a fresh regional/account check at decision time. This is a proposed event policy, not an adopted SLA. A historical reproducible source remains useful with its date; it is not “current performance”. Conflicting units or values remain visible and do not silently overwrite one another.
+### Owner review and interim evidence policy
+
+Primary project decision source: [#3/#40/#41 owner review on PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), @tynamite, reviewed head `9e66622a4b2698a9305274f05da9c15ae5d90b8c`, submitted 2026-10-16; accessed 2026-10-17. This is an owner position, not independently measured product evidence or an approved contract revision.
+
+- Version-pinned support/specification facts do not expire merely with time; recheck when the selected version or source changes. Current prices, availability, regions, quotas and terms remain dated **as of** observations; no TTL is adopted.
+- Resolve conflicts centrally in this order: normalize units/names; exclude out-of-scope claims and prefer the most specific coverage; use selected-version evidence for pinned facts or latest effective date for current facts; apply fact-specific authority. A publisher controls its product requirements, and its explicit requirement/limitation wins over its capability listing. Matching measurements outrank estimates, which outrank vendor claims for fit/performance. Equal-ranked numbers retain median/spread and decide conservatively in the rule's direction; opposite equally ranked yes/no claims or no eligible evidence remain `unknown` for a reproducible test. Preserve the losing claims and deciding step.
+- Checked, eligible versioned documentation can yield a support `pass` while the compatibility result is **unverified** until independently reproduced. Source checking alone leaves the four compute CatalogItems' provenance `unverified` under the adopted #41 policy. This follow-up corrects the earlier stronger label without changing the cited facts, source check dates or schema.
+- Short paraphrases with links remain acceptable interim reuse; automated retrieval/bulk copying awaits #41/#60's per-source rights inventory.
+
+The review accepts the capacity-interval and memory-pool proposals into CD-2/CD-3 review and the shared memory-fit/joint-support families. It leaves default headroom with #10, and the proposed contract fields unimplemented. The suggested 20% reserve / 4 GiB runtime is not adopted or calibrated by this follow-up.
 
 ## Reproducible inference sizing method
 
@@ -127,9 +136,9 @@ M_total = sum over devices of M_required(device)
 
 The factor 2 is keys plus values. Use KV heads for GQA/MQA, not query heads; obtain head dimension from explicit architecture metadata or justify `hidden_size / attention_heads`. Count beams and parallel sampled continuations as separate active sequences unless actual cache sharing is evidenced. Round to the engine's real cache block size. Do not assume prefix sharing or sliding-window eviction savings in an initial conservative screen. Sliding-window, encoder-decoder, multimodal, MLA, recurrent and hybrid attention need a model-specific cache derivation; missing architecture/cache data gives `unknown`, not an invented constant (C11, C14).
 
-Batch size is the number of sequences processed together; prefill token batch and decode sequence batch differ. Concurrency is admitted active sequences with resident KV, distinct from arrival rate and requests waiting in a queue. Use `sum_i(T_i)` for the worst admitted envelope rather than average prompt length; model every replica independently. Chunked prefill changes peak activations and scheduling; recomputation/preemption can avoid allocation failure while increasing latency (C15).
+Batch size is the number of sequences processed together; prefill token batch and decode sequence batch differ. Workload peak concurrency is requests-in-flight **demand**; engine launch options determine **admitted sequences** with resident KV. Use the admission limit for KV sizing, counting beams and parallel samples separately. If admission is unknown, size at peak demand and record the assumption; if both are missing, demand is unknown. Requests above the limit queue and affect latency rather than necessarily holding device KV. Use `sum_i(T_i)` for the worst admitted envelope rather than average prompt length; model every replica independently. #81 proposes `peak_concurrency` and engine-build launch options; these are not new fields in frozen v1. Chunked prefill changes peak activations and scheduling (C15).
 
-Runtime overhead includes allocator fragmentation, CUDA/ROCm context, graph capture, kernels, temporary attention/GEMM buffers, logits, quantization repacking and communication. Measure peak after loading, graph capture, longest permitted prefill and mixed-load steady state when a later authorized benchmark exists. A universal percent cannot stand in for these terms. Here the explicit overhead bracket is a scenario assumption, and headroom is unused capacity outside that bracket. Do not add another blanket overhead percentage to the same memory. More reserve is prudent under uncertainty, but the default remains an owner decision.
+Runtime overhead includes allocator fragmentation, CUDA/ROCm context, graph capture, kernels, temporary attention/GEMM buffers, logits, quantization repacking and communication. Measure peak after loading, graph capture, longest permitted prefill and mixed-load steady state when a later authorized benchmark exists. A universal percent cannot stand in for these terms. Here the explicit overhead bracket is a scenario assumption, and headroom is unused capacity outside that bracket. Do not add another blanket overhead percentage to the same memory. The disposition below recommends explicit scenario reserve instead of a universal numeric default; co-owner review remains required.
 
 Reconcile this formula with the engine's configured memory pool. vLLM preallocates cache using `gpu_memory_utilization` (C21): a utilization budget of `u × device_capacity` already leaves `(1-u)` outside that pool. If it is the same reserve as headroom `h`, compare `M_live <= (1-h) × capacity` once; do not divide by `(1-h)` and compare against that already-reduced budget again. A larger preallocated pool is not a second copy of the demand-derived KV bytes. Preserve demand, allocated pool and free bytes separately.
 
@@ -152,7 +161,7 @@ Range endpoints use `(W+K+2GiB)/(1-0.10)` and `(W+K+4GiB)/(1-0.20)`; D adds adap
 
 Case D follows LoRA's low-rank count `r × (d_in + d_out)` per adapted linear layer (C13). For Qwen's shapes: Q has 3584→3584, V has 3584→512. Across 28 layers, rank 16 and BF16, one adapter has 10,092,544 bytes; four have 40,370,176 bytes. This is payload only. Multi-adapter residency, rank limits, staging and batching overhead are engine-specific (#11/#33). Merged weights are sized as a full distinct checkpoint; do not add the unmerged adapter again. Keeping a base and merged checkpoint loaded together requires both copies.
 
-Two additional **synthetic estimate** checks are reproduced by the script. A merged checkpoint with A's unchanged shape/dtype has A's bounds when loaded alone, with no extra adapter payload; this assumes a hypothetical merge and no duplicated base. For a 48 GB allocation and assumed 41 GB live payload (including runtime), 10% reserve requires 45.556 GB and clears the screen, while 20% requires 51.25 GB and exceeds it. This shows sensitivity to an unapproved policy, not a proven hardware failure. Missing KV geometry produces an unknown estimate, and an API-only route skips local sizing; neither is encoded as numeric zero.
+Two additional **synthetic estimate** checks are reproduced by the script. A merged checkpoint with A's unchanged shape/dtype has A's bounds when loaded alone, with no extra adapter payload; this assumes a hypothetical merge and no duplicated base. For a 48 GB allocation and assumed 41 GB live payload (including runtime), 10% reserve requires 45.556 GB and clears the screen, while 20% requires 51.25 GB and exceeds it. Under the owner-reviewed conservative policy, an estimate meeting the build's proposed minimum resource confidence uses the upper bound: this straddling range gives `fail`, flagged **may not fit**, displaying both bounds. It is a conditional screen decision, not a proven hardware failure. Missing confidence eligibility remains `unknown` for review; no default confidence or headroom is invented. Missing KV geometry produces an unknown estimate, and an API-only route skips local sizing; neither is encoded as numeric zero.
 
 ### Multi-GPU count and parallelism
 
@@ -172,7 +181,7 @@ The proposed load-to-count procedure is: bound prompt/output distributions, arri
 
 ## Compatibility proposals
 
-The [compute rules](rules/compute-capacity.md) follow the rule-proposal template for #40 review. They distinguish a proven assertion from a conditional estimate and separate outcome (`pass/fail/unknown/skipped`) from severity (`info/warning/error`). Proposed rules cover memory lower bounds and uncertain screens, joint model/engine/backend compatibility, context/KV assumptions, topology and provider-owned API capacity. An outcome for one assertion is not a universal compatible boolean.
+The [compute rules](rules/compute-capacity.md) follow the rule-proposal template for #40 review. They distinguish a proven assertion from a conditional estimate and separate outcome (`pass/fail/unknown/skipped`) from severity (`info/warning/error`). Four proposed groups cover shared memory-fit screening, joint model/engine/backend support, KV accounting and topology. Former COMPUTE-05 is shared component applicability; context-limit checking stays with #7's `rule.model.context.fit`. An outcome for one assertion is not a universal compatible boolean. #40's review accepts these families into its queue, subject to versioned CD-1/CD-2/CD-3 decisions.
 
 ### ResourceEstimate contract mapping and #40 questions
 
@@ -181,9 +190,23 @@ The v1 schema C17 permits scalar decimal values for `inference.estimated_require
 1. Generate only after a real version-pinned build and selections exist. Use `confidence="estimated"` for this uncalibrated method. Preserve GB conversions, complete model/cache/parallelism/overhead inputs, source URLs and runtime conditions in assumptions/source URI. Tie every influenced selection (model, context, engine, accelerator, profile and optional adapter/workload) to the result.
 2. Report upper-bound scenario memory as the conservative scalar, and preserve the full sensitivity table and input manifest in the source note. `estimated_required_vram_gb` is sum across ranks; `estimated_peak_per_device_vram_gb` is maximum rank. State that convention explicitly until #40 confirms it. For one device the two are identical. Do not take a single-device estimate and multiply/divide blindly.
 3. Leave unsupported throughput/power metrics absent. A missing metric is not a zero; the evaluation should report unknown for the dependent assertion. TDP is not estimated operating power, and no training GPU-hours are emitted by this method.
-4. No new ResourceEstimate JSON is claimed: the repository has no real T1 model/build inputs for this scenario. The reproducible calculation output is a research calculation, not a build artifact. Explicit schema validation of the repository's existing clearly synthetic fixture checks shape only, not this method or a vendor deployment.
+4. No new ResourceEstimate JSON is claimed: merged T1 catalog records now exist, but this historical scenario is not bound to a real BuildSnapshot and selection IDs, and #10's co-owners have not accepted the note-only consumption/future-placement proposal below. The reproducible calculation output remains a research calculation, not a build artifact. The synthetic fixture checks shape only, not this method or a vendor deployment.
 
 Requested extensions for #40/@tynamite, with #6/@zwright8, #10/#11/@Mattycodes69 and #39/@PUSHINGSQUARES as affected consumers: interval/scenario identity and unknown reason for ResourceEstimate; artifact tensor/quantization metadata; per-device allocatable memory and partition profile distinct from advertised capacity; bandwidth with units and peak/sustained qualifier; multiple interconnects/topology; physical cores versus vCPU and host RAM unit semantics; TP/PP/EP/DP and KV-sharding metadata. Examples are the 48 GB/44 GiB L40S allocation, Case B's 36.012–43.198 GB range and unknown throughput. Proposed version/migration: additive draft for a next contract version with explicit reader support; preserve imported v1, do not add unrecognized spec fields or silently reinterpret historical values. Namespaced intake annotations do not become approved canonical fields.
+
+## Headroom and measurement handoff disposition (2026-10-18)
+
+This contribution recommends **explicit scenario headroom, with no universal numeric default**. It retains #61's full experimental acceptance scope. These are reviewable methodology decisions for the live #10/#61 co-owners, @Mattycodes69 and @appletechie, with coordinator @CompleteDotTech; this text does not manufacture their acceptance. Sources inspected on 2026-10-18: [live #10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [live #61 and its scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281), the [committed measurement record](../market/sizing-validation.md), and frozen v1 C17. This is a repository/evidence audit, not a new hardware measurement.
+
+- Specify a headroom fraction `h` for each device/admission domain, with `0 <= h < 1`, its rationale, and the capacity basis before that reserve. An explicitly justified zero is distinguishable from a missing input. Missing headroom, runtime coverage, capacity evidence or confidence eligibility leaves the fit conclusion `unknown` for review. The worked 10%/20% cases remain sensitivity examples; neither the small dense cohort nor an engine's utilization default calibrates a general reserve.
+- Account for resident weights, cache, adapters, workspace and communication first. Apply unused-capacity reserve once: `required_upper = live_upper / (1-h)`, or equivalently `live_upper <= (1-h) * capacity_lower`. State whether capacity is an instance entitlement, partition allocation, observed budget or advertised specification. A specification-only comparison remains a conditional arithmetic screen. Exclude other workloads once, and reconcile the engine's preallocated pool rather than adding a second KV allocation or a second reserve.
+- Keep confidence and headroom independent. `confidence="estimated"` describes this uncalibrated estimator when a real build is later bound; it is not a promise that the scenario bounds cover runtime error. No numeric confidence threshold is adopted here. Missing eligibility cannot be repaired by selecting a larger reserve.
+- Offer #61's existing observations to #10 as **note-only accounting evidence**: actual prompt/cache/predicted lengths, active sequences, exact artifact/runtime/backend, and separate phase peaks. Retain raw records at `research/market/measurements/` and their limitations. Allocated and reserved overlap; they are not additive. Nine native KV layout checks are not total-memory calibration, and zero matched competitor/runtime pairs supply no competitor error range.
+- Do not convert these observations into ResourceEstimate JSON. The v1 schema has estimate metrics and requires a real build revision and selection IDs. For future qualifying build-bound estimates, the proposed #10-owned placement and intake gates are [compute/resource-estimates/README.md](compute/resource-estimates/README.md). That path is a proposal pending the co-owners' disposition, not evidence that records already exist or that the schema can encode measured allocator counters.
+
+**Experiment disposition:** retain dense/MoE/topology and comparable-estimator requirements unless the accountable experiment/coordinator owners explicitly narrow them. This pass adds no hardware authorization, weights download or experiment. Historical failed spare-capacity screens are not current availability. The [#61 continuation table](../market/sizing-validation.md#coverage-and-authority-disposition-2026-10-18) names the missing hardware and comparison inputs. An interface receipt does not waive them.
+
+**Review still required:** #10 co-owners decide this headroom/consumption/placement proposal; #61 co-owners and coordinator decide any experiment narrowing and evidence acceptance; #9/#11 interface receipts are linked below, while #39's receiving decision remains pending; those receipts do not decide this methodology proposal. [#31's existing hardware-reuse receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484) remains accepted only within its stated scope. #40 retains versioned contract/rule review. Shared market handoff ledgers remain with #59's writer.
 
 ## Pricing and capacity
 
@@ -205,20 +228,22 @@ No model weights, source PDFs, raw benchmark datasets, large downloads or new ex
 
 ## Open questions and handoffs
 
-Live issue assignees on 2026-10-16 determine the named owners below. None of these owner acknowledgements has been received; an orchestrator review request is not confirmation.
+The table retains its 2026-10-16 input questions, with live owners, directional receipts and the separate #10/#61 proposal state refreshed on 2026-10-18. Three of four required consumers (#9/#11/#31) have scoped receipts; #39 remains pending. Interface acceptance does not decide headroom, calibration, measurement scope or ResourceEstimate placement, and does not accept another co-owner's scope. A proposal or review request is not confirmation.
 
 | Follow-up / exact question | Responsible issue / owner | Impact / handoff state |
 | --- | --- | --- |
-| Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 | Required #10→#9 acknowledgement pending |
-| Confirm current v0.31.0 versus historical v0.10.2 constraints, per-rank KV/adapter placement and engine-version invalidation? | #11, @Mattycodes69 | Required #10→#11 acknowledgement pending; source reconciliation is not owner approval |
-| Reuse these physical IDs without treating inference capacity as training memory/time? | #31, @appletechie | Required #10→#31 acknowledgement pending |
-| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @PUSHINGSQUARES | Required #10→#39 acknowledgement pending |
-| Approve exact tensor/artifact revision and context policy; provide resident tensors and model-specific cache geometry? | #6/#7, @zwright8 | Informational compatibility handoff pending; calculations remain conditional |
-| Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @appletechie | Informational artifact handoff pending |
-| What unused-capacity headroom and runtime measurement protocol should be the default? | #10, @Mattycodes69, with #2/@tynamite and #38/@PUSHINGSQUARES | Decision open; 10%/20% sensitivity is not an adopted default |
-| Approve proposed rules, ResourceEstimate intervals/unknowns and bandwidth/topology/partition fields? | #40, @tynamite | Central review pending; no schema edits or final ruleset |
-| May catalog facts be reused under publisher terms, and what refresh/invalidation events are adopted? | #41, @tynamite | Evidence/reuse review pending; no automation/mirroring permission presumed |
-| Confirm current account/region offer, quotas, runtime free memory and deployment measurement procedure? | #37, @PUSHINGSQUARES | Deployment research input only; no provisioning performed |
+| Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 / @appletechie | [#10 -> #9 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): preserve distinct IDs/units and regional offering versus deployability; @appletechie's scope remains separate |
+| Confirm current v0.31.0 versus historical v0.10.2 constraints, per-rank KV/adapter placement and engine-version invalidation? | #11, @zwright8 / @Mattycodes69 | [#10 -> #11 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): exact tuple, per-device allocation/topology, resident demand/admission and uncertainty; no pooled VRAM, inherited results or SLO assertion |
+| Reuse these physical IDs without treating inference capacity as training memory/time? | #31, @tynamite / @appletechie | [Accepted hardware-reuse boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484); missing records and training estimates remain separate |
+| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @appletechie / @PUSHINGSQUARES | Required #10→#39 acknowledgement pending |
+| Approve exact tensor/artifact revision and context policy; provide resident tensors and model-specific cache geometry? | #6, @zwright8 / @PUSHINGSQUARES; #7, @zwright8 / @appletechie | Informational compatibility handoff pending; calculations remain conditional |
+| Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @Mattycodes69 / @appletechie | Informational artifact handoff pending |
+| Accept explicit scenario headroom and note-only #61 consumption, with future build-bound placement? | #10, @Mattycodes69 and @appletechie; #61 co-owners and coordinator for experiment scope | Proposal above ready for disposition; no universal numeric reserve, calibration claim or ResourceEstimate emitted |
+| Finalize proposed rules, ResourceEstimate intervals/unknowns and bandwidth/topology/partition fields? | #40, @tynamite and @zwright8 | Accepted into central queue, narrowed in linked PR #75 review; CD-1/CD-2/CD-3 and affected-owner version review remain; no schema edits/final ruleset |
+| Complete per-source rights inventory and final evidence policy? | #41, @tynamite and @PUSHINGSQUARES | Interim freshness/conflict/short-paraphrase policy adopted in linked review; no automation/mirroring permission presumed |
+| Confirm current account/region offer, quotas, runtime free memory and deployment measurement procedure? | #37, @appletechie / @PUSHINGSQUARES | Deployment research input only; no provisioning performed |
+
+The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057), reviewing main `9344f99325510adfe678382a4672246d028e87bc`, separately accepts **#9 -> #10 and #11 -> #10 with constraints from @Mattycodes69's scope**. The host binding reuses `aws-ec2` and `aws-ec2-g6e-xlarge-us-east-1` version `2026-10-16`, with `nvidia-l40s` distinct, two default CPU cores/four vCPUs, and source 32 GiB = 34.359738368 decimal GB RAM. Runtime inputs retain exact-release loader/backend/format/quantization/kernel constraints, separate weight/activation/KV dtypes, adapter rank/targets/residency, per-rank topology and expanded resident-sequence/admission scope. Historical vLLM v0.10.2 calculations remain historical; v0.31.0 requires its own eligible build/hardware evidence, including the resolved Volta exclusion. Missing free memory, geometry or admission stays explicit; memory fit does not establish serving support, quality or SLO performance. These incoming receipts are separate from the outgoing rows above, do not speak for @appletechie, and accept no headroom default, ResourceEstimate, runtime result or #61 placement.
 
 ## Acceptance assessment and validation
 
@@ -227,12 +252,66 @@ Live issue assignees on 2026-10-16 determine the named owners below. None of the
 | Sizing method with assumptions and uncertainty documented | Method, worked examples, script | Research draft supplied; uncalibrated uncertainty explicit |
 | Measured values cite their source and conditions; estimates are labelled | C16 conditions; every calculation marked Estimate | Supplied; no local measurements claimed |
 | Model ↔ GPU rules in the #40 format | rules/compute-capacity.md | Proposed; #40 approval pending |
-| Decision record merged at required path following research method | This record | Unmet until reviewed merge |
+| Decision record merged at required path following research method | This record; PR #75 | Merged; this follow-up and full issue acceptance remain pending |
 | Candidate set covers relevant API / managed / self-hosted modes or states why a mode does not apply | Mode table, physical candidates and profile | Supplied; CPU/edge gaps explicit |
 | Comparison fields defined with type, unit, evidence requirement | Comparison table | Supplied |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Supplied as proposals; central review pending |
 | Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; source-mapped catalog provenance; derived formulas | Prepared for independent evidence review; source rendering and unit conflicts disclosed |
-| Each handoff confirmed by consuming issue owner with link | Handoff table | Unmet: #9/#11/#31/#39 acknowledgements pending |
+| Each handoff confirmed by consuming issue owner with link | Handoff table | Partial: #9/#11/#31 have scoped receipts; #39 remains pending. Headroom/calibration and #61 evidence/placement are separate decisions |
 | Open questions with named follow-up owner | Table above | Supplied |
 
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
+
+Follow-up validation, 2026-10-17 (Python 3.12.14): pinned dependency installation, 21 contract tests, 24 research tests, research intake (30 CatalogItems / two Pricebooks), market integrity (32 entities / 1,536 cells / 20 issues), sizing arithmetic and `git diff --check` pass. Research tests required an unsandboxed rerun because Windows sandbox temporary-directory permissions failed before assertions; the rerun passed all 24. The arithmetic implementation and imported v1 are unchanged. These checks establish structural integrity and reproducible arithmetic, not rule approval or empirical fit. #10 still needs its default headroom/confidence decision, consuming-owner acknowledgements and agreed #61 ResourceEstimate placement before closure.
+
+
+## Additional hardware and profile capture (2026-10-18)
+
+This source-checked, runtime-unverified supplement records evidence for #31’s missing-record request. At the initial capture, the hardware and dependent profile remained note-only: frozen v1 precision membership treats an omitted precision as unsupported, so a researched subset cannot safely be emitted as a CatalogItem. The follow-up below resolves the RTX 4090 precision gap; A100/P4de remain note-only. No runtime compatibility is asserted here.
+
+| Note-only candidate | Published facts and precise scope | Primary evidence, accessed 2026-10-18 |
+| --- | --- | --- |
+| `nvidia-a100-80gb` | 80GB; FP32/TF32/BF16/FP16/INT8 subset shared by PCIe and SXM. Variant-specific power/fabric deliberately absent | [NVIDIA datasheet 2188504, p1](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-nvidia-us-2188504-web.pdf); [CUDA GPU table](https://developer.nvidia.com/cuda/gpus) |
+| `nvidia-geforce-rtx-4090` | Reference design: 24GB, PCIe, 450W graphics rating; CUDA compute capability 8.9; researched FP32 subset, not an exhaustive precision list | [NVIDIA specifications](https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/); [Ada guide 13.4, §1.4.1.3](https://docs.nvidia.com/cuda/ada-tuning-guide/index.html) |
+| `aws-ec2-p4de-24xlarge-us-east-1` | Eight A100 80GB,48 default CPU cores(96vCPU),1152GiB RAM =1236.950581248 decimal GB,8000GB aggregate local storage; region listing is not provisioning proof | [P4 specification](https://aws.amazon.com/ec2/instance-types/p4/); [CPU options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html); [region table](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html) |
+
+The A100 reference supplies only cross-variant facts; it cannot establish a particular board’s power or interconnect. The researched precision lists here are non-exhaustive. Their omissions mean research unknowns, but frozen v1 cannot express that distinction for accelerator precision membership; this prevented accelerator/profile promotion at the initial capture. The RTX 4090 follow-up below now supplies its complete v1 precision coverage. Advertised device memory is not measured free allocation, and eight devices do not form one freely addressable 640GB allocation. No throughput, training fit, price, runtime result or independent verification is claimed. Current lifecycle/stock, account quota and AZ capacity remain unverified. The PDF is identified by publisher document 2188504; no immutable content hash was obtained. Other URLs are mutable dated captures. Exact host/device/runtime evidence is still needed before deployment.
+
+#31 can use these notes as research inputs, but cannot reference missing catalog IDs. A100 and P4de records remain absent until precision coverage is established; the RTX 4090 record is supplied below; other priced SKUs also still need matching profile evidence. Unsupported training-memory metrics and price meters remain #40/#39 work, independent of these catalog facts.
+
+
+## Precision follow-up and bounded retrieval (2026-10-18)
+
+The [RTX 4090 proposal](../../catalog/proposals/t2-compute-nvidia-geforce-rtx-4090-2026-10-18.json)
+resolves its initial absence. [NVIDIA Ada whitepaper v2.02](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf),
+Appendix A, printed pp29–31, documents every v1 precision in the RTX 4090 column;
+the separate [CUDA GPU table](https://developer.nvidia.com/cuda/gpus) supports its
+CUDA identity. Both were accessed 2026-10-18. This is hardware arithmetic support,
+not permission to run every quantized artifact or an engine compatibility result.
+No negative precision inference is needed because all seven enum values have
+positive evidence. Keep engine/backend, quantizer, kernel, model and cache dtype
+checks separate.
+
+The [A100 architecture whitepaper](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf),
+printed pp15/26, accessed 2026-10-18, adds explicit INT4 evidence to the earlier
+subset. It does not resolve the FP8 entry: absence from that older document is not
+a universal negative. The attempted TensorRT 10.5 archive URL redirected to
+current documentation, so it was not treated as a pinned historical support
+matrix. The Transformer Engine FP8 primer retrieval failed; no fact is inferred
+from that failure. A100 therefore remains note-only under the frozen-v1 negative
+membership behavior; #40 completeness semantics or eligible scoped evidence is
+still required.
+
+Re-reading the [P4 specification](https://aws.amazon.com/ec2/instance-types/p4/),
+[CPU-options row](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html)
+and [regional table](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html)
+on 2026-10-18 confirms the P4de note's default CPU/RAM/disk values and the
+us-east-1 family listing. Its unresolved dependency is the A100 catalog identity,
+not missing CPU arithmetic. Removing the GPU reference to pass intake would hide
+a material hardware dependency, so no incomplete profile is emitted.
+
+PDF source text and table views were inspected through the web reader. Direct
+PDF download returned HTTP 403 from the environment proxy; no hash, local PDF
+capture or redistribution permission is claimed. Dates/document versions are
+recorded; mutable URLs are not immutable evidence. No source freshness guarantee,
+current stock, rate binding or runtime measurement follows from this research.

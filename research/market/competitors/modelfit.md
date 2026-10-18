@@ -37,7 +37,7 @@ Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-
 | (b) Code licence | CLI repo LICENSE is MIT text; GitHub API reports `NOASSERTION` (licence not auto-detected), so SPDX is MIT by file reading, not API detection | Observed | [CLI repo](https://github.com/Wecko-ai/modelfit) |
 | (c) Data reuse | Dataset repo LICENSE: CC BY 4.0, "even commercially, provided you give appropriate credit"; terms §7: credit "ModelFit (modelfit.io)"; cited third-party benchmark figures keep their own terms | Observed (LICENSE) / Documented (terms) | [dataset repo](https://github.com/Wecko-ai/modelfit-hardware-dataset), [terms](https://modelfit.io/terms/) |
 
-Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes with attribution and change notice; figures are ModelFit estimates. This profile agrees and adds the NOASSERTION detail.
+Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes with attribution and change notice; figures are ModelFit estimates. This profile agrees and adds the NOASSERTION detail.
 
 ## Counterexample
 
@@ -46,10 +46,26 @@ Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82):
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `hardware_fit`, `model_versions`, `quantization`, `mcp`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `hardware_fit`, `model_versions`, `quantization`, `mcp`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
 
 ## Open questions and routing
 
 - #10/#11: compare ModelFit's 70% memory budget with MR-09 measurements at long context.
 - #41: dataset version pinning (repo commit) before any ingestion.
-- #66: run the device flow on the shared scenario.
+- #66: preserve the bounded device-flow observation below; runtime accuracy and other scenarios remain separate.
+
+## Reviewed scenario supplement — 2026-10-17
+
+[#125](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/125), merged as
+`6b14b7f50dbf5ceecbc43ca77c3a62ee9b2242d0`, records the anonymous device-flow
+session and its [independent review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/125#pullrequestreview-5558972678).
+The common local-PDF Q&A scenario on a 16 GB Windows laptop without a discrete
+GPU was not expressible in that session's device choices. That is a bounded
+workflow observation, not evidence of universal CPU incompatibility or measured
+model accuracy. Export/API/CLI claims concern model/device data, not an observed
+saved full-stack configuration.
+
+The independent reviewer also saw Radeon choices, so the author's precise
+device inventory is session-specific rather than a stable complete list. No
+new session occurred during the 2026-10-18 profile reconciliation. The original
+desk findings retain their original dates; #66 and #50 acceptance remain open.

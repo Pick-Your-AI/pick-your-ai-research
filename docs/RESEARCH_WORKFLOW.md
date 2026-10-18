@@ -23,7 +23,7 @@ Merging a proposal makes it reviewed research. It does not publish a production 
 
 For a catalog item, consult `spec_<kind>` in the schema and the [field guide](../contracts/v1/docs/COMPONENTS.md). Do not copy a fictional example and leave demo values behind. If a required model context limit is unknown, the note is valid research but the item is not yet a complete catalog proposal. Do not use `null`, zero, or an estimate as a substitute unless the field's documented semantics permit it.
 
-Each catalog provenance entry and price-rate provenance must contain a public HTTP(S) source URL and the contract's date/status fields. Link unavailable/private evidence through a note and sanitized manifest; keep those catalog claims in notes until they meet the public proposal requirement. `verified` means the cited claim was checked, not that a whole product was independently benchmarked. Missing or uncertain billing classification remains `unknown`.
+Each catalog provenance entry and price-rate provenance must contain a public HTTP(S) source URL and the contract's date/status fields. Link unavailable/private evidence through a note and sanitized manifest; keep those catalog claims in notes until they meet the public proposal requirement. Distinguish source checking from independent verification: a source-checked claim was read against its cited source on the access date; independently verified means reproduced or corroborated with eligible independent evidence, as described in the claim note. For new provenance, use `unverified` for source-checked claims lacking that evidence, and reserve `verified` for claims with linked independent support. Historical `verified` entries admitted under the former source-check convention are not automatically independently verified; inspect the claim note before presenting that grade. Keep `user_supplied` and `estimated` distinct, and do not bulk-relabel old records or change frozen v1 enums. See the [#41 label mapping](../research/T0-configuration/catalog-data-sources.md#mapping-evidence-labels-to-frozen-v1). Missing or uncertain billing classification remains `unknown`.
 
 Catalog references must resolve to proposals in this repository. Submit referenced providers, hosts, or sources in the same PR or reference already merged records. Because v1's catalog spec references use IDs without versions, this intake currently permits one version per catalog ID to avoid ambiguous resolution. Propose multi-version snapshot intake through #40 before adding historical versions under a single ID. Price rates must reference that item's exact version.
 
@@ -36,6 +36,8 @@ python -m pip install -r requirements-research.txt
 python -m unittest discover -s contracts/v1/tests -v
 python -m unittest discover -s tests -v
 python scripts/validate_research.py
+python scripts/validate_market_research.py
+python prompts/mobile/validate_prompts.py
 ```
 
 To inspect one payload separately:
@@ -44,7 +46,9 @@ To inspect one payload separately:
 python contracts/v1/reference/validate_payload.py contracts/v1/schemas/catalog-item.schema.json catalog/proposals/YOUR-FILE.json
 ```
 
-CI runs the same checks. It validates schemas, import integrity, generator consistency, canonical-kind coverage, local catalog references, exact price references, duplicate IDs, public provenance URL shape, date ordering, and external-artifact metadata. It rejects reserved fixture IDs/example domains in real proposals. It does not fetch sources, verify remote hashes or rights, establish freshness, prove claims, or guarantee secrets are absent. Reviewers must check those matters and compare prior revisions for unintended fact changes.
+CI runs the same checks. It validates schemas, import integrity, generator consistency, canonical-kind coverage, local catalog references, exact price references, duplicate IDs, public provenance URL shape, date ordering, and external-artifact metadata. It rejects reserved fixture IDs/example domains in real proposals. Catalog, pricebook and evidence JSON must have unique object keys at every level; conflicting or repeated keys are rejected before schema validation rather than silently choosing a value. Non-finite numeric literals and numbers that overflow the intake's finite numeric range are also rejected. This stricter submission parsing does not change the frozen v1 contract. It does not fetch sources, verify remote hashes or rights, establish freshness, prove claims, or guarantee secrets are absent. Reviewers must check those matters and compare prior revisions for unintended fact changes.
+
+The market integrity reader applies the same duplicate-key, non-finite-number and numeric-overflow rejection to its four inputs: `competitors.json`, `sources.json`, `features.json` and `research-backlog.json`. It rejects ambiguous raw JSON before interpreting the market evidence or priority records, including under optimized Python.
 
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
 
@@ -58,3 +62,19 @@ The 21 original tests exercise the synthetic contract examples. They are not a s
 ## What belongs in Git
 
 Commit small textual research notes, sanitized structured proposals, source manifests, schemas, generators, and regression fixtures. Keep fixtures clearly synthetic. Store raw crawls, large datasets, model weights, recordings, private documents, and credentials outside this public repository. Manifest URLs must be stable locators without signed query strings or credentials; record how authorized users obtain access. A checksum describes an artifact, not permission to redistribute it.
+
+## Pre-merge issue-closure check
+
+Immediately before each merge, fetch the **current PR body, commit messages and linked-issue state**, even when CI already passed. GitHub recognizes closing keywords in PR descriptions and commit messages; plain-English negation does not provide a safe cancellation mechanism. A range can still contain a closing reference to its first issue. See [GitHub's linking documentation](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue) (checked 2026-10-18).
+
+For partial work, use `Refs` and write that the issues remain open. Remove keyword/reference combinations from negated sentences, quotations and examples in PR metadata. Inspect manually linked issues too: this text check cannot see or unlink them.
+
+Save the freshly fetched PR body and commit messages as local UTF-8 text files, then run:
+
+```bash
+python scripts/check_closing_directives.py /tmp/pr-body.txt /tmp/commit-messages.txt
+```
+
+The conservative checker rejects detected directives by default. For an intentional closure, first verify every acceptance criterion and required receiving-owner receipt. Put each intended directive on its own unindented plain line in an isolated paragraph containing only reviewed directives; pass its exact target with `--allow '#123'` (or the exact repository-qualified reference/issue URL). Repeat for each reviewed target. An allowlist is a reviewer declaration, not proof of completion. Negated, ranged, prose-embedded or indented directives still fail even if a target is allowed. Fenced examples remain ineligible across blank lines, including unclosed fences.
+
+This offline check uses a deliberately limited detector, not GitHub's full Markdown/linking parser. Passing it does not certify all issue links, current permissions or acceptance. Re-read live metadata and any proposed merge message before the expected-head merge. Afterward verify intended issue states **and Project statuses**; reopening an accidentally closed issue does not prove its Project status was restored. Report inaccessible Project fields without bypassing access restrictions.

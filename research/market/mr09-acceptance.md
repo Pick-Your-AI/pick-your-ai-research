@@ -1,5 +1,70 @@
 # MR-09 acceptance and remaining gates
 
+## Current delivery status — 2026-10-18
+
+PR #79 first merged into the market proposal branch; PR #67 subsequently delivered
+that branch to canonical `main`. PR #105 reconciled the feasibility record with
+merged main. These files are present at main
+`3850afee18e05aa7afca89485963fcea9e7adcaf`; a new #67 merge is no longer a delivery
+action. Issues #56 and #61 remain open.
+
+The [2026-10-17 receiving disposition on #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
+narrows #7/#11 acceptance to context/runtime accounting interfaces. It explicitly
+does not accept empirical completion, waive MoE/multi-GPU cases or supply error
+bounds. The evidence remains 15 bounded dense runs and zero matched
+competitor/runtime pairs. No hardware run was performed for this refresh.
+
+PR #83 is now a partial desk analysis against `main`, with appletechie's outstanding
+change request and separate #36/#39 receiving decisions. #65 has an active writer;
+its protocol and Bedrock input do not establish completed interoperability tests.
+The live #10 owner still decides ResourceEstimate placement/consumption. Preserve
+the #59 single writer for updating canonical handoff dispositions and attribution.
+
+## Current #10/#61 continuation map (2026-10-18)
+
+This addendum supersedes the historical zero-receipt/main-merge gaps below for
+this pair only. It records a proposal, not new evidence acceptance. Current
+#10/#61 co-owners are @Mattycodes69 and @appletechie; @CompleteDotTech coordinates
+experiment scope and evidence review. See the
+[coverage disposition](sizing-validation.md#coverage-and-authority-disposition-2026-10-18)
+and [#10 decision](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18).
+
+| #61 live criterion (unchanged) | Current support | Remaining gate |
+| --- | --- | --- |
+| Design dense and MoE measurement matrix | Pinned design; executed cells separated from plans | Owner design review; missing architecture/topology work remains |
+| Vary context cache precision and concurrency | Dense D1–D5 observations | Missing MoE variations and boundary coverage; no waiver |
+| Measure peak allocated and reserved memory | Six phases in 15 dense observations | Missing architecture/per-rank evidence and human validity review |
+| Report error bounds and failures without universal fit claims | Failure/mismatch categories and bounded layout check | Zero matched competitor/runtime pairs; numerical error range unavailable; comparable inputs and reviewed tolerance needed |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Pinned source/result ledger and limitations | Coordinator evidence, reproducibility and reuse review |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Zwright8's scoped #7/#11 interface receipt | Other co-owner responses; #10 headroom/note-only consumption/future placement proposal awaits disposition |
+| Repository checks pass; reviewer accepts the evidence before Done. | This contribution is submitted for current-revision workflow and review | Current-head validation and required human review; no Done claim |
+
+The proposed headroom policy requires an explicit per-device scenario fraction
+and capacity basis, rather than adopting 10% or 20% as a universal default.
+Existing #61 records stay in `research/market/measurements/`; the proposed
+future ResourceEstimate path accepts only real build-bound estimates after
+owner agreement and explicit matching-schema validation. No raw measurement is
+renamed to an estimate metric, no build IDs are fabricated, and no frozen schema
+is changed.
+
+Full empirical scope remains as recorded in the live issue. The
+[hardware continuation checklist](sizing-validation.md#hardware-required-for-full-scope-continuation-2026-10-18)
+records existing numeric guards, the OLMoE payload floor, unquantified RAM/disk
+requirements and missing multi-rank instrumentation. This research follow-up
+records the hardware needed under that scope; a named authorized full hardware
+path, comparable estimator pairs and evidence acceptance remain outstanding. No new
+GPU run, download, hardware probe or device/cost authorization is supplied.
+Canonical market handoff ledgers remain with #59's writer; the linked receipt
+does not accept another co-owner's scope or the newly proposed #10 decisions.
+
+## Historical submission record — 2026-10-16
+
+The remainder preserves the original #79/#80 snapshot, acceptance matrix, validation
+and hardware observations. Its branch statuses, ownership lists and zero-receipt
+counts describe that snapshot, not current state. They must not erase subsequent
+scoped receipts or be used to request merging an already-merged PR. Remaining
+empirical and acceptance gates are not removed by delivery to main.
+
 Issues: [#56](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56), [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Research date: 2026-10-16. Submission uses **Refs #56; Refs #61**. Neither issue is complete.
 
 Review submission: **[PR #79](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79)** was approved and merged by PUSHINGSQUARES into PR #67's proposal branch at `6511dea2a5102b13df1e47378a31f31230ecb494`. **PR #67 remains open against `main`; this is not a canonical-main merge.** [Live review/merge readback](mr09-review-readback.json) records the approval, final-head CI success and exact refs. The general approval has no written row dispositions; **explicit accepted handoff dispositions remain 0**. [Posted requests](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/79#issuecomment-6217452110) cover all 13 rows. The [#58 handoff](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6217454289) remains pending coordinator review.
@@ -40,7 +105,7 @@ Criteria below are verbatim from the live issue bodies, also retained in the sna
 | Child | Live owner / status | Evidence available to integrate | Exact remaining owner action |
 | --- | --- | --- | --- |
 | #61 | Mattycodes69 / open | This submission; execution and counter coverage are explicitly bounded | Complete missing qualifying dense/MoE observations, secure #7/#10/#11 acceptance and evidence review, merge |
-| #62 | PUSHINGSQUARES / open | Existing protocol only; release-identity desk observation in [handoffs](handoffs.md) | Reconcile v2 landing metadata106 versus v2 body/current300 and v1/v2 task/result identities; pin model/harness/budget/task versions, check contamination and overlap, separate mean score from complete delivery, record replication limits and obtain #25/#36 acceptance |
+| #62 | appletechie, PUSHINGSQUARES / open (ownership checked 2026-10-17) | Desk validation drafted in [benchmark validation](benchmark-validation.md) (no benchmark run; prepared by a non-assignee for owner review; not accepted); #62 handoff rows pending in [handoffs](handoffs.md) | Reconcile v2 landing metadata106 versus v2 body/current300 and v1/v2 task/result identities; pin model/harness/budget/task versions, check contamination and overlap, separate mean score from complete delivery, record replication limits and obtain #25/#36 acceptance |
 | #65 | zabyxc01 / open | Existing protocol only; no reviewed interoperability results | Check embedding dimensions and metrics, API/auth boundaries, and successful end-to-end workloads separately from connector existence; obtain retrieval-owner and affected #25/#27 review |
 
 Completion of #61 alone cannot complete #56. No waiver is inferred. #56/#61/#62/#65 have no native blockers in the refreshed readback. These are acceptance, access and information gates, not authorization to invent blocking relationships. #58 retains its existing native blocker #66.

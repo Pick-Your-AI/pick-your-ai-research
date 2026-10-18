@@ -2287,13 +2287,13 @@
       "canonical_url": "https://unsloth.ai/",
       "operator": "Root copyright names Unsloth AI. Inc team, Daniel Han-Chen and Michael Han-Chen",
       "product_scope": "Local model inference/training library plus optional Desktop/Studio and CLI surfaces; separate licensing boundaries.",
-      "version": "Unversioned docs and main LICENSE unpinned; model catalog labels are not software release pins",
+      "version": "Unversioned docs; root LICENSE read through GitHub at b4a4855e49c674f1dd375a5f716d901502b97b73 during correction review. This pins the licence text, not an installed product or model release.",
       "source_ids": [
         "src-unsloth"
       ],
       "evidence_locator": "src-unsloth / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff.",
+      "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff. Public web extraction of the mutable GitHub page omitted the scoped lines in this review; the pinned GitHub text contains them. Model and data rights remain separate.",
       "updated_fields": [
         "organization",
         "capabilities",
@@ -2303,5 +2303,56 @@
         "limitations"
       ]
     }
+  },
+  {
+    "id": "canirun-ai",
+    "name": "CanIRun.ai",
+    "website": "https://canirun.ai/",
+    "organization": "midudev (Miguel Ángel Durán; individual GitHub account that owns the repository whose homepage is canirun.ai); legal entity unconfirmed",
+    "classifications": [
+      "Partial competitor"
+    ],
+    "classification_basis": "Analyst judgement: device-first local model selection overlaps T1/T2; full stack substitution untested. Distinct URL/entity record from canrunllm.com and canitrun.dev; common ownership unverified. Repository README (vendor claim, 2026-10-16) describes browser detection of CPU, RAM and GPU and per-use-case open-model recommendations (coding, chat, reasoning, vision); this makes it a direct-substitute candidate for single-device local model choice, pending the #66 test and a #48 classification decision.",
+    "target_users": "People choosing local AI models for their device (analyst inference)",
+    "capabilities": "Device directory linking to local model recommendations; repository README (vendor claim) describes in-browser hardware detection and per-use-case open-model recommendations.",
+    "documented_features": [
+      "hardware_fit",
+      "hardware_catalog",
+      "vram_ram"
+    ],
+    "pricing": {
+      "summary": "Unknown; no pricing page reviewed",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": []
+    },
+    "deployment_support": "Public website observed; deployment/runtime support unverified",
+    "apis_and_integrations": "Unknown; not established by the reviewed directory",
+    "licensing": "Public repository midudev/canirun.ai; GitHub reports no licence (API license null, checked 2026-10-16), so no code or data reuse grant is established; commercial display or redistribution permission not established.",
+    "source_ids": [
+      "src-canirun-ai",
+      "src-canirun-ai-repo"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      50,
+      66,
+      6,
+      10,
+      41,
+      60
+    ],
+    "limitations": [
+      "Directory inspection only; no independent compatibility, speed or memory measurement.",
+      "Other capabilities, prices, operator identity and reuse rights remain unknown.",
+      "robots.txt (2026-10-16) allows all paths except /api/ and /og/; a later automated re-check of the site returned HTTP 403 (bot challenge) and was not bypassed."
+    ]
   }
 ]

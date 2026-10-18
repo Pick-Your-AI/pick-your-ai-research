@@ -1,12 +1,12 @@
 # Competitor profiles (MR-03)
 
-Issue: [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50). Status: draft for owner review. Revised 2026-10-16 from the thirteen PR #67 desk profiles. None is independently accepted or benchmark-reproduced. Hands-on substitute testing is owned by [#66](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66) ([substitute-validation.md](../substitute-validation.md)); these profiles cite it and do not extend it.
+Issue: [#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50). Status: fourteen desk profiles merged as partial research; full acceptance remains open. The original desk sources retain their 2026-10-16 access dates. Repository-state reconciliation: 2026-10-18. [#125](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/125) supplies independently reviewed, bounded 2026-10-17 browser observations for ModelFit and CanIRun.ai and the Flocci access gate. These are not performance benchmarks. Hands-on testing remains with [#66](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66) ([substitute-validation.md](../substitute-validation.md)); this reconciliation performs no new session and does not complete that child.
 
 ## Selection rationale
 
-The thirteen profiles are drawn from the 32-entity [#48 catalog](../competitors.json), keeping its entity IDs, classifications and profile paths. #48 records the selection as a criterion ("Select 10–15 material deep dives") but no separate rationale, so this is the #50 basis for #48 to confirm:
+The fourteen profiles (including the CanIRun.ai intake) are drawn from the 33-entity [#48 catalog](../competitors.json), keeping its entity IDs, classifications and profile paths. #48 records the selection as a criterion ("Select 10–15 material deep dives") but no separate rationale, so this is the #50 basis for #48 to confirm:
 
-1. **Direct substitution risk first.** Products that take a user's workload or hardware and return a recommendation: Flocci, ModelFit, llmfit, Local AI Planner, BenchLM (LLM Selector), Artificial Analysis (Model Recommender).
+1. **Direct substitution risk first.** Products that take a user's workload or hardware and return a recommendation: Flocci, ModelFit, llmfit, Local AI Planner, BenchLM (LLM Selector), Artificial Analysis (Model Recommender), and CanIRun.ai (provisional, added in #98: its repository README describes hardware-detected, per-use-case recommendations, which ranks it with ModelFit/llmfit on direct-substitution risk ahead of the submission databases LocalScore and LocalMaxxing; the coordinator decision on those two still stands).
 2. **Decision-changing evidence and data sources**, where rights or provenance could invalidate ingestion: BenchLM, Artificial Analysis, OpenRouter, Hugging Face, Models.dev, Harness Bench.
 3. **Substitute workflows** that let users skip planning and build or run directly: Dify, n8n (application/automation) and SkyPilot (compute placement).
 
@@ -16,7 +16,7 @@ Not profiled, with reason: Arena, LLM Stats, CanRun, CanItRun (overlap BenchLM/A
 
 Used in every profile's workflow table.
 
-- **Observed**: seen in a fetch made on 2026-10-16 at the cited URL: page structure or form fields, licence files, GitHub API responses. "Observed hands-on" is only Flocci's recorded browser session. Observing a form is not running it. In [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87) terms this is still Documented, not Exercised.
+- **Observed**: a dated observation of page structure, form fields, licence files or repository metadata, rather than verified runtime behavior. Original desk observations are from 2026-10-16. Later recorded browser observations are explicitly dated and linked to #66/#125. Seeing a form is not executing a scenario; scenario interaction is not a performance measurement. Profile prose does not automatically promote a matrix cell to Exercised.
 - **Documented**: the operator's documentation or help text describes the behaviour; not exercised.
 - **Vendor claim**: self-assessment such as accuracy, independence, "verified" or counts.
 - **Unknown**: not established. Silence is not absence.
@@ -29,7 +29,8 @@ Access tier for all profiles: public pages, public docs and public repository me
 | Profile | Workflow evidence | Rights evidence | Strongest counterexample (suffices for) |
 | --- | --- | --- | --- |
 | [Flocci Ask / Stack Builder](flocci.md) | Observed hands-on (one historical request, #66) + static pages | No terms found; © operator | Free ordered toolchain for a common local task |
-| [ModelFit](modelfit.md) | Observed UI structure + Documented | Licence files observed: MIT CLI (API NOASSERTION), CC BY 4.0 dataset | Best local model for one device |
+| [CanIRun.ai](canirun-ai.md) | Static intake plus bounded Iris Xe preset observation, 2026-10-17 (#125); estimates unverified | Public repo, no licence file; no reuse grant established | Single-device model-fit slice; the tested preset did not supply the PDF retrieval stack |
+| [ModelFit](modelfit.md) | UI/documentation plus bounded device-flow observation, 2026-10-17 (#125) | Licence files observed: MIT CLI (API NOASSERTION), CC BY 4.0 dataset | Local-model selection; the common CPU-only Windows scenario was not expressible in that session |
 | [llmfit](llmfit.md) | Documented | MIT via licence API | Local model and quantization fit on one machine |
 | [Local AI Planner](local-ai-planner.md) | Observed UI (form fields) | No terms found | Single-GPU or Mac local model with speed targets |
 | [BenchLM](benchlm.md) | Observed UI (selector form) + Documented | Terms quoted: CC BY-NC website data; display agreement | Hosted API model for one task under budget |
@@ -44,27 +45,30 @@ Access tier for all profiles: public pages, public docs and public repository me
 
 ## Material differentiation counterexamples
 
-Claims are from [differentiation.md](../differentiation.md) (#57). Each row names the strongest competing workflow. All are hypotheses until #66 tests them.
+Claims are from [differentiation.md](../differentiation.md) (#57). Each row names a competing workflow and retains its stated hypothesis boundary. #125 adds narrow observed counterexample evidence for two device-first tools, not a market-wide sufficiency or runtime-accuracy conclusion. Flocci's contradictory-constraints and export tests remain incomplete under #66.
 
 | Differentiation claim | Strongest counterexample | Where it could suffice | Remaining gap (to test, not assumed) |
 | --- | --- | --- | --- |
 | Workload-first guided recommendation | BenchLM LLM Selector; Flocci Stack Builder | Single hosted-model choice (BenchLM); free local toolchain (Flocci, observed once) | Joint multi-tier composition with compatibility evidence |
-| Hardware-aware fit | ModelFit, llmfit, Local AI Planner | One device, local GGUF models | Hosted-vs-local trade-off; measured, not heuristic, memory |
+| Hardware-aware fit | ModelFit, llmfit, Local AI Planner, CanIRun.ai | One device, local GGUF models | Hosted-vs-local trade-off; measured, not heuristic, memory |
 | Cross-provider cost/performance | Artificial Analysis, OpenRouter | API model/provider choice | Complete bill, self-hosting cost; AA data barred for this use |
 | Versioned, shareable configuration | Dify DSL, n8n JSON + Git, SkyPilot YAML; BenchLM URL state | Teams that already know their components | These record what to run, not why; BenchLM links re-evaluate on current data |
 | Evidence-linked defensibility | Harness Bench, BenchLM methodology; community fit-report projects (below) | Readers who want published measurements | Reproducible history of configuration outcomes is not shown by any profile, but community projects were not reviewed |
 
 ## Rights summary
 
-Commercial access, code licence and data rights are separated in each profile. Data decisions follow pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82) (#55/#60, not yet merged) where it covers the source. Profiles add three findings for #41/#60: BenchLM website data is CC BY-NC 4.0; OpenRouter terms also bar developing "a competing service"; the ModelFit CLI and n8n/Dify licences are not auto-detected by GitHub (`NOASSERTION`), so SPDX comes from reading the file. Sources without terms (Flocci, Local AI Planner) default to no display or redistribution under the #82 decision rule.
+Commercial access, code licence and data rights are separated in each profile. [#82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82) merged the source-use audit; consult the current [#60 decision record](../rights-validation.md) and [source-specific register](../integrations.json) before reuse. The dated profiles record BenchLM's website-data CC BY-NC scope, OpenRouter's competing-service restriction and file-read licences where GitHub reports `NOASSERTION`. They do not grant access, ingestion, commercial display or redistribution. For sources without an established permission basis, product reuse stays excluded pending the responsible owner's review; missing documentation does not establish a legal prohibition or a licence grant. Historical profile dates are not refreshed by this repository reconciliation.
 
 ## Matrix consistency
 
-`saved`, `share`, `export` and `model_versions` statements match pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87) (#49) for all thirteen products. `features.json` is not edited here. Proposed #49 follow-ups: BenchLM `natural_language`, `constraints` and `guided_selection`; OpenRouter `constraints`; SkyPilot `constraints` and `multi_gpu`, each Documented by the pages cited in the profiles.
+[#87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87) and [#98](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/98) are merged. Their current `features.json` is a separate capability-evidence artifact; this profile reconciliation does not promote a cell. At the 2026-10-18 readback, BenchLM `natural_language`/`constraints`/`guided_selection`, OpenRouter `constraints` and SkyPilot `constraints`/`multi_gpu` remain Unknown. The older profile suggestions are leads for the bounded #49 capability tests, not sufficient proof to mark them Documented or Exercised. CanIRun.ai `vram_ram` remains a documentary device-capacity observation, explicitly not a measured model-memory requirement; its profile retains the re-basing question.
 
-## Proposed source-register additions
+## Historical source-register leads
 
-For #48 to accept into [sources.json](../sources.json). Not applied here.
+The desk pass proposed these URLs for #48's [source register](../sources.json).
+#48 owns their current inclusion and disposition; compare the live register
+before adding anything rather than assuming every historical lead is absent.
+This reconciliation changes no source registration or original access date.
 
 | Entity | Proposed supporting URLs (all accessed 2026-10-16) |
 | --- | --- |
@@ -84,10 +88,21 @@ Candidate new entities (not reviewed by #50; URLs not guessed): the community fi
 
 ## Routing and unresolved decisions
 
-- #66: run BenchLM Selector, Artificial Analysis Recommender and ModelFit on the shared scenario; Flocci contradictory constraints and bookmark round-trip.
-- #41/#60 (and #55): adopt PR #82 decisions plus the three findings above.
+- #66: retain #125's dated ModelFit/CanIRun.ai observations and their session limits; complete Flocci contradictory constraints and save/export from an authorized session. Other proposed scenarios remain with the existing child owners; this index starts none.
+- #41/#60 (and #55): preserve the merged #82 audit and review changed source/material/use scopes separately; a licence or merged desk profile is not integration acceptance.
 - #49: the matrix follow-ups above. #48: source additions, candidate entities, BenchLM classification.
-- #6, #10, #25, #39: profile-specific questions in each file. Owner dispositions are not yet requested.
+- #6: [narrowed receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859) accepts discovery/context only at `7acbefbf`, not recommendations or technical capability. Other co-owner scope is unrecorded.
+- #41: [historical acceptance with provenance changes](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545) retains its original scope. #10/#25/#39 receiving decisions remain pending in the canonical [handoff ledger](../handoffs.md); the #59 writer owns that ledger.
+
+## Acceptance after reconciliation
+
+The fourteen profiles are within the issue's 10–15 target, but inventory size is
+not full acceptance. The receiving-owner and coordinator still review the
+workflow/architecture evidence, source-use boundaries and counterexample
+interpretation. #66's unfinished Flocci test prevents a complete differentiation
+verdict. Unknowns, proposed matrix changes and source-register additions remain
+with their named owners. #50 stays open; no checklist, Project field, assignment
+or native relationship is changed by this documentation contribution.
 
 ## Robots.txt and access record
 

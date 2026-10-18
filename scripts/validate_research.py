@@ -1,5 +1,6 @@
 """Validate research intake; does not certify claims or publish runtime artifacts."""
 import json
+import math
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -39,10 +40,33 @@ def schema_errors(payload, schema):
     return [f"/{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in validator.iter_errors(payload)]
 
 
+def intake_json(text):
+    """Decode an unambiguous JSON submission without non-finite numbers."""
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f'duplicate JSON object key: {key!r}')
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise ValueError(f'non-finite JSON number: {value}')
+
+    def finite_float(value):
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError('JSON number exceeds finite numeric range')
+        return number
+
+    return json.loads(text, object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
+
+
 def public_source(uri):
     try:
         value = urlsplit(uri)
-        host = value.hostname or ''
+        host = (value.hostname or '').removesuffix('.')
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
         return value.scheme in {'http', 'https'} and bool(host) and not reserved and not value.username and not value.password
@@ -99,7 +123,7 @@ def intake_errors(catalog, pricebooks):
                 errors.append(f'{ident}: catalog ID/version does not resolve')
             if not public_source(rate['provenance'].get('source_uri')):
                 errors.append(f'{ident}: rate needs a real public source URL')
-            if rate.get('valid_until') and datetime.fromisoformat(rate['valid_until'].replace('Z', '+00:00')) <= datetime.fromisoformat(rate['valid_from'].replace('Z', '+00:00')):
+            if rate.get('valid_until') and datetime.fromisoformat(rate['valid_until'].upper().replace('Z', '+00:00')) <= datetime.fromisoformat(rate['valid_from'].upper().replace('Z', '+00:00')):
                 errors.append(f'{ident}: valid_until must follow valid_from')
     return errors
 
@@ -110,7 +134,7 @@ def validate_tree(root=ROOT):
         values = []
         for path in sorted((root / relative).rglob('*.json')):
             try:
-                values.append(json.loads(path.read_text(encoding='utf-8')))
+                values.append(intake_json(path.read_text(encoding='utf-8')))
             except (ValueError, OSError) as exc:
                 errors.append(f'{path}: {exc}')
         return values

@@ -36,7 +36,7 @@ Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-
 | (b) Code licence | Closed service | Not applicable | — |
 | (c) Data reuse | Terms prohibit using "scripts, robots or ... automated technology) to scrape or copy any information on the Site or the Services", and accessing the service "for purposes of reselling API access to Models or otherwise developing a competing service" | Documented (terms) | [terms](https://openrouter.ai/terms) |
 
-Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): automated retrieval no (including the public Models API) without written permission; display and redistribution no; manual reading with link only. This profile agrees and adds the "competing service" clause for #41 to interpret.
+Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): automated retrieval no (including the public Models API) without written permission; display and redistribution no; manual reading with link only. This profile agrees and adds the "competing service" clause for #41 to interpret.
 
 ## Counterexample
 
@@ -45,7 +45,7 @@ Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82):
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_versions`, `export`, `context`, `hosting`, `tool_calling`, `api_pricing`, `api_access` Documented; `saved`, `share` Unknown. Agrees. Routing constraints suggest `constraints` is Documented; proposed to #49, not edited here.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_versions`, `export`, `context`, `hosting`, `tool_calling`, `api_pricing`, `api_access` Documented; `saved`, `share` Unknown. Agrees. Routing constraints suggest `constraints` is Documented; proposed to #49, not edited here.
 
 ## Open questions and routing
 

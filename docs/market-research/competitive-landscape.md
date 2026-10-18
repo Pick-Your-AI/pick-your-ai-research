@@ -1,6 +1,6 @@
 # Competitive landscape
 
-The inventory contains 32 distinct products/resources, including all 22 named candidates and ten additional resources. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
+The inventory contains 33 distinct products/resources, including all 22 original named candidates, ten original additional resources and CanIRun.ai. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
 
 - [BenchLM](https://benchlm.ai/): Partial competitor, Benchmark provider, Data source. Model and provider comparison with benchmark, price and runtime evidence.
 - [Harness Bench](https://www.harness-bench.ai/): Benchmark provider, Open-source integration candidate. Model-harness evaluation in sandboxed tasks with final-artifact oracles.
@@ -39,7 +39,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 
 ## Seeds
 
-**Status: inferred — coordinator to confirm.** No artifact on this branch, PR #67 or issue #48 lists the five original seeds explicitly; #47 still lists "the #48 seed-list confirmation" as open. The list below is inferred from the first five catalog entries, the "seed page" wording in the llmfit profile and the risk register. All were re-accessed anonymously on 2026-10-16; robots.txt permitted each path.
+**Operational scope selected 2026-10-18 under delegated engineering authority:** use the five entries below for the bounded #48 seed-coverage review. This resolves the working list, not the undocumented original intent: the earlier inference came from the first five catalog entries, the llmfit profile and the risk register. Selection does not certify verification, operator identity or receiving-owner acceptance. The observations below retain their original 2026-10-16 access date; no fresh site inspection is claimed.
 
 | Seed | Operator (as established) | Site | Repository | Site vs repository boundary |
 | --- | --- | --- | --- | --- |
@@ -59,7 +59,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 
 ## Community fit-report resources (staged, not yet in the catalog)
 
-tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. All six exist and their primary pages are registered in `sources.json`. They are **not yet added to `competitors.json`** because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells, which #49 owns. Once #49 adds them (as `Unknown` unless evidenced), the catalog rises from 32 to 38, inside the 30–40 bound.
+tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. All six exist and their primary pages are registered in `sources.json`. They are **not yet added to `competitors.json`** because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells, which #49 owns. Once #49 adds them (as `Unknown` unless evidenced), the catalog would rise from 33 to 39 after the CanIRun.ai intake, inside the 30–40 bound.
 
 | Proposed ID | Resource | Operator / repository | Proposed classification | Source | Key boundary |
 | --- | --- | --- | --- | --- | --- |
@@ -102,11 +102,15 @@ These are direct counterexamples to the defensibility hypothesis in [differentia
 
 | Selected | Reason |
 | --- | --- |
-| BenchLM, Harness Bench, llmfit, Local AI planner, Flocci | The five (inferred) seeds; each overlaps an entry step (model choice, harness evaluation, hardware fit, guided stack) |
+| BenchLM, Harness Bench, llmfit, Local AI planner, Flocci | The five operational seeds selected 2026-10-18; each overlaps an entry step (model choice, harness evaluation, hardware fit, guided stack) |
 | ModelFit | Strongest documented hardware-first direct substitute (device/setup/results flow, CLI, MCP) |
 | Artificial Analysis, OpenRouter, Hugging Face, Models.dev | Primary model, provider and price data feeds; integration and rights questions for #41 |
 | Dify, n8n, SkyPilot | Build/deploy substitutes downstream of a recommendation; test export and execution boundaries |
 
 Excluded from deep dives: Arena and LLM Stats (leaderboards overlapping Artificial Analysis and BenchLM); CanRun and CanItRun (narrower fit calculators overlapping llmfit, ModelFit and the planner, operators unknown); Ollama and Unsloth (runtimes, substitutes only for the run step); GPUs.io, Vast.ai and Runpod (infrastructure pricing, for #54/#39); Langflow, Flowise, LlamaIndex and LangChain (adjacent builders represented by Dify and n8n); Langfuse, Ragas, LM Evaluation Harness and Qdrant benchmarks (evaluation tooling for #36); MCP Registry (T4 data source).
 
-**Coordinator decision needed:** LocalScore and LocalMaxxing are the strongest of the new community resources against the defensibility hypothesis (public, submission-based fit databases with stated protocols or plausibility checks). Profiling one or both keeps the set within 10–15 (14 or 15). The other four are better treated as evidence sources for #41/#60 than as profiles.
+**Coordinator decision needed:** LocalScore and LocalMaxxing are the strongest of the new community resources against the defensibility hypothesis (public, submission-based fit databases with stated protocols or plausibility checks). With the CanIRun.ai intake, profiling one brings the set to 15, within the 10–15 target. Profiling both would bring it to 16 and needs an explicit scope decision or a replacement profile. The other four are better treated as evidence sources for #41/#60 than as profiles.
+
+## CanIRun.ai addition (2026-10-16)
+
+[CanIRun.ai devices](https://www.canirun.ai/devices) is recorded as `canirun-ai`, a partial competitor for device-first local model selection. It is operated by GitHub user midudev, per the `midudev/canirun.ai` repository whose homepage is canirun.ai (legal entity unconfirmed). It is a separate record from CanRun (`canrunllm.com`) and CanItRun (`canitrun.dev`); ownership relationships to those are unknown. The repository README describes hardware-detected, per-use-case recommendations, which makes it a direct-substitute candidate pending #66. See the [dated profile](../../research/market/competitors/canirun-ai.md). #48 owns intake, #49 its 48 matrix cells, #50 the profile and #66 scenario testing. This adds a fourteenth profile within the 10–15 target; it does not establish a full-stack substitute or data reuse permission.

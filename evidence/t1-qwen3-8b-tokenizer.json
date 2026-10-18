@@ -1,0 +1,9 @@
+{
+  "id": "t1-qwen3-8b-tokenizer",
+  "uri": "https://huggingface.co/Qwen/Qwen3-8B/resolve/b968826d9c46dd6066d109eabc6255188de91218/tokenizer.json",
+  "version": "b968826d9c46dd6066d109eabc6255188de91218",
+  "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "access": "Public publisher file retrieved without credentials on 2026-10-18 UTC (October 17 America/New_York). Download outside Git. Size: 11422654 bytes. No weights or runtime inference are needed.",
+  "description": "Pinned tokenizer artifact for the bounded #7 raw-text token-count experiment. It identifies the local encoder, not a deployed endpoint, chat template, context admission policy or calibrated memory model.",
+  "rights": "Publisher LICENSE at https://huggingface.co/Qwen/Qwen3-8B/blob/b968826d9c46dd6066d109eabc6255188de91218/LICENSE contains Apache License 2.0; inspected 2026-10-18 UTC. Follow its notices/conditions. Upstream tokenizer bytes are not redistributed in this repository; only metadata, project-authored synthetic inputs and resulting local counts are submitted. A checksum is identity evidence, not an additional rights grant."
+}
