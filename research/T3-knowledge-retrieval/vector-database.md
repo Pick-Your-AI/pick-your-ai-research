@@ -8,7 +8,7 @@ Decide whether retrieval needs a vector index, then choose its representation, a
 
 | Candidate | Index/representation facts | Deployment and operating boundary | Unknowns before catalog intake |
 | --- | --- | --- | --- |
-| PostgreSQL + pgvector | Exact and approximate search; HNSW and IVFFlat. Documented HNSW `vector` ceiling 2,000 dimensions, `halfvec` 4,000; these are index/type-specific, not universal storage limits [V1] | Self-operated PostgreSQL or a separately evidenced hosted offering; SQL policies and index tuning are separate concerns | Pin extension/PostgreSQL release and operator class; provider meters/region, license and operational sizing |
+| PostgreSQL + pgvector | Exact and approximate search; HNSW and IVFFlat. Documented HNSW `vector` ceiling 2,000 dimensions, `halfvec` 4,000; these are index/type-specific, not universal storage limits [V1] | Self-operated PostgreSQL or a separately evidenced hosted offering; SQL policies and index tuning are separate concerns | Extension pinned below to v0.8.7; PostgreSQL version/operator class, provider meters/region and operational sizing still required |
 | Qdrant | Each named vector can have its own dimension and metric; documented metrics include Dot, Cosine, Euclid and Manhattan [V2] | Self-operated or separately evidenced cloud offering; tenant payload filtering is distinct from storage optimization [V3] | Release-specific dimension/index limits, cloud capacity/operator, pricing and rights |
 | Pinecone | Index schema supports dense/sparse fields; externally supplied vectors or integrated embedding; namespaces scope operations [V4] | Hosted offering; verify plan/capacity rather than deriving mode from API transport | Exact plan limits, metric/schema, regional rates and terms; no self-hosted offering established here |
 | Chroma | Documented HNSW and SPANN configuration; l2/cosine/ip metric choices depend on configuration; cloud SPANN settings are not freely customizable [V5] | Confirm deployment/backend before applying a configuration | Release/backend dimension limits, authentication/tenancy, pricing and license |
@@ -65,4 +65,22 @@ All read 2026-10-18. Primary documentation, source checked only; mutable pages a
 
 Start with the required retrieval/access contract, then compare operational burden and measured quality. Dedicated storage is an option, not an obligatory T3 component. #16 owners decide the not-needed criteria; #14 owns representation/metric compatibility; #28 owns vector-backed memory semantics; #39 owns meters and rates; #9 owns hosting/recovery evidence; #35 owns policy enforcement. All receiving dispositions remain pending.
 
-@zabyxc01/@appletechie retain candidate/ACL decisions. Before completion, pin actual product releases/offerings, obtain complete dimension/index/filter and license/price evidence, and record consumer acceptance. No CatalogItem or Pricebook is added with invented required fields. This bounded draft does not replace or claim completion of the active #65 interoperability validation.
+@zabyxc01/@appletechie retain candidate/ACL decisions. Before completion, pin actual product releases/offerings, obtain complete dimension/index/filter and license/price evidence, and record consumer acceptance. The pgvector software CatalogItem below contains only sourced required fields and scoped license facts; no Pricebook is invented. This bounded draft does not replace or claim completion of the active #65 interoperability validation.
+
+## Pinned pgvector software proposal (2026-10-18)
+
+[Catalog proposal](../../catalog/proposals/t3-vector-database-pgvector.json): `vector_database.pgvector`, version `0.8.7`. The publisher tag resolves to commit `f37c13f68b57d2c3472b2214fbcff699d6d34876`. This is the self-operated extension, not a hosting offering. Sources below were retrieved from that commit on 2026-10-18; claims are published and source checked, not runtime measurements.
+
+| Field | Pinned evidence and scope |
+| --- | --- |
+| Runtime dependency | PostgreSQL 13+ in the pinned README; actual deployment PostgreSQL version remains a separate choice |
+| Canonical metrics | Euclidean, dot, cosine map to documented L2, inner product and cosine distance. SQL `<#>` returns **negative** inner product for ascending index scans, so a raw distance must not be presented as similarity without conversion |
+| Index admission | HNSW and IVFFlat `vector` indexes support up to 2,000 dimensions, `halfvec` up to 4,000. Storage of a `vector` value allows up to 16,000 dimensions; that does not grant ANN index support at that width |
+| Filters and recall | Approximate-index filtering occurs after scanning and may return fewer matches; iterative scanning/configuration requires workload evaluation. This is not an ACL assurance |
+| License/billing scope | PostgreSQL license permits software use/modification/distribution without fee subject to required notices/disclaimers. `free` describes the extension software, not compute, database hosting, storage, backup or operational charges |
+
+- [Pinned README](https://github.com/pgvector/pgvector/blob/f37c13f68b57d2c3472b2214fbcff699d6d34876/README.md)
+- [Pinned license](https://github.com/pgvector/pgvector/blob/f37c13f68b57d2c3472b2214fbcff699d6d34876/LICENSE)
+- [Publisher release tag](https://github.com/pgvector/pgvector/tree/v0.8.7)
+
+The v1 proposal intentionally omits optional `max_dimensions`, `supports_acl`, `supports_hybrid_search`, `regions` and `hosting_ref`: a single product-wide dimensional ceiling loses the distinction above; the remaining properties require deployment/configuration evidence. The three canonical metrics are supported members, not a claim that other publisher metrics do not exist. No pricebook or hosting reference is fabricated. #40 owns richer index/type bounds, #14/#16 consume scoring/index semantics, #9 owns the actual database deployment, #35 owns trusted access enforcement and #39 owns operational cost. Their dispositions remain pending; this proposal does not complete #15.
