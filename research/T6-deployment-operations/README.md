@@ -84,7 +84,7 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 |---|---|---|
 | #2 T0 | fields the rules and quantities need: data sensitivity, residency, tenancy, language, regulated-workload flag (#35); evaluator placement and region at provisioning (#36); peak volume, build life and migration window, licensee domicile, MAU or revenue, end-user countries (#37); availability objective, SLO window, freshness tolerance, retention, budget hard stop, high-risk status (#38); quantity roles and case drivers (#39) | all |
 | #40 Schema | the rules and enums above; the adopted serving-mode definition | all |
-| #41 Data sources | interim evidence grades to confirm for every record; reproducibility tiers A to C; price sources, dates and terms | all |
+| #41 Data sources | claim-level evidence grades and price-source eligibility to review; R1–R15 and one-factor semantics are already adopted in merged #41 and retained in #36; additional reproducibility tiers A to C and sizing remain proposals | all |
 | #42 Saved builds | accepted warnings with their reasons (#35); the price snapshot fields and re-pricing behaviour (#39) | #35, #39 |
 | #32 and #33 (T5) | `D-20` accepted, narrowed, in #36: #36 freezes and hashes the evaluation set, T5 runs the leakage check (E-R44, G1); `A-20` accepted in #36 as a G5 input; `A-13` (Foundry deletes a fine-tuned deployment after 15 idle days) accepted in #37 as D-R87; a T5 cost scenario is a follow-up in #39 | #36, #37, #39 |
 | T1 to T5 owners | lifecycle dates per host, engine maintenance status, embedding versions, feature availability per platform, base-model matching (#37); the signals each component must expose, by mode (#38) | #37, #38 |
