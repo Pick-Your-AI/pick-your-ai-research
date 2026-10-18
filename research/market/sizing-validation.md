@@ -10,9 +10,10 @@ Where do planning estimates fail under real runtime conditions?
 
 ## Coverage and authority disposition (2026-10-18)
 
-**Retain the full empirical acceptance scope.** This continuation is a bounded
-accounting/evidence contribution; it does not waive MoE, topology or comparable
-estimator requirements. Sources inspected on 2026-10-18:
+**Retain the full empirical acceptance scope recorded in the live issue.**
+This research follow-up documents the hardware needed for the existing dense,
+MoE, multi-GPU and comparable-estimator requirements. It supplies no new
+device, reservation, download or cost authorization. Sources inspected on 2026-10-18:
 [live #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61),
 [Zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
 and the committed protocols/results at main
@@ -46,6 +47,55 @@ versus queued-request accounting, runtime pins and separate allocator phases for
 #11 co-owner responses remain distinct. #10's new consumption/placement proposal
 is ready for its co-owners' review, not an already accepted handoff. Preserve
 #59's single writer for `handoffs.md`/`handoffs.json`.
+
+## Hardware required for full-scope continuation (2026-10-18)
+
+[PR #200](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/200) delivered
+the bounded accounting proposal and cohort-integrity guard to main at
+`5df5c8c017a4bc775b0702e436eaa8b281bda339`. Its publication review does not
+allocate experiment hardware. Identifying and authorizing the hardware path
+for the existing full scope remains an action for
+@Mattycodes69/@appletechie with @CompleteDotTech.
+
+The following requirements are transcribed or derived from the existing dated
+protocols, inspected 2026-10-18. These are not fresh availability observations
+or measured fit claims. GiB = 2^30 bytes; MiB = 2^20 bytes.
+
+| Coverage | Hardware and preserved limits | What is still needed |
+| --- | --- | --- |
+| D1–D5 dense reproduction | Original single RTX 5070 Ti / pinned CUDA runtime; [dense wrapper](../../scripts/mr09_run_matrix.ps1) requires one valid `nvidia-smi` sample and at least 2,048 MiB free before each run; the runner separately requires CUDA-reported free >=2 GiB. [Original protocol](measurements/mr09-protocol-2026-10-16.md) caps this process at min(2 GiB, 12.5% of reported device memory) | Fresh safe spare-capacity check and temporary artifact storage before any rerun; prior observations are already recorded, so rerunning them does not fill missing MoE/topology/comparison cells |
+| Supplemental Granite3.1 GM1 | [Separate short-case protocol](measurements/mr09-granite31-protocol-2026-10-16.md): GPU free >=4,096 MiB; available physical host RAM >=12 GiB; temporary-volume free >=6,412,308,016 bytes; own allocator cap <=3 GiB. Recheck GPU guard before each of three serial fresh processes | A current passing preflight on the authorized spare device. GM1 is supplemental short MoE coverage only; it does not replace M1–M4 |
+| OLMoE M1–M4 | [Pinned plan](measurements/mr09-moe-plan.json): BF16 resident weight tensors alone are 13,838,323,712 bytes. M1/M2: prompts 256/2,048, active1, BF16 KV; M3: prompt2,048, active2, BF16 KV; M4: prompt2,048, active1, INT4 if supported | Named authorized GPU allocation and reviewed process cap covering all resident experts, cache, prefill/routing workspace, allocator/context and explicit reserve. The existing 2 GiB dense cap cannot admit these weights. Full-resident and separately pinned offload designs are distinct scenarios |
+| Long-context boundary | [Original protocol](measurements/mr09-protocol-2026-10-16.md) defers a larger 8,192-total-position boundary to a reserved session | Review the exact model/prompt/cache/predicted lengths with #7 and establish a safe device/host envelope before adding this cell. Pinned OLMoE has only 4,096 positions; do not apply the 8,192 boundary to it or deliberately cause contention/OOM on the shared device |
+| G1 multi-GPU/per-rank | [Original matrix](measurements/mr09-protocol-2026-10-16.md): same pinned dense/MoE, prompt2,048, active2, native BF16 KV, 32 decode forwards; at least two authorized GPUs and an explicit per-rank placement/topology plan | Name each device and allocation, interconnect, parallelism strategy, runtime/backend and per-rank memory budget. Add separately hashed multi-rank instrumentation/protocol: the existing wrapper and [runner](../../scripts/mr09_measure.py) accept exactly one visible device and do not execute G1 |
+| Matched estimator pairs | Same model/artifact, runtime, weight/KV precision, actual context, active sequences, offload/topology and measured quantity | Pin matching estimator execution/outputs and a reviewed decision tolerance. More GPU memory alone does not create a comparable pair or approve an error threshold |
+
+For the OLMoE native BF16 case, the pinned geometry gives
+`2 * 16 layers * 16 KV heads * 128 head_dim * 2 bytes = 131,072 bytes`
+per cached token per active sequence. M3's terminal cache at
+`(2,048 + 32) * 2` positions is therefore **545,259,520 bytes**.
+Weights plus this cache are **14,383,583,232 bytes** before workspace,
+allocator/library/context costs, loading transients, communication or reserve.
+This is a derived payload floor, not a GPU capacity recommendation or measured
+peak; it does not justify a particular 16/24/48 GB card or a new memory guard.
+M4's packing/metadata/backend support must be checked separately.
+
+OLMoE host-RAM and disk minima remain **unquantified**. Before authorizing that
+session, pin shard file sizes/hashes, loader/offload strategy and simultaneous
+host copies, then declare RAM and storage guards including metadata,
+download/staging/copies and cleanup headroom. The index's tensor-byte count is
+not an exact download/storage requirement. Do not reuse Granite3.1's smaller
+guards for OLMoE or lower any existing profile's guards.
+
+A reviewable hardware authorization must record the host/session owner and
+location, device IDs/models/count and per-rank allocation, host RAM and temporary
+storage budgets, exact model/runtime/driver/backend pins, permitted process caps,
+topology, run/stop conditions and artifact retention/cleanup. Identify whether
+the session uses existing spare local capacity or a newly approved reservation.
+A second device, larger reservation/cap or paid compute needs explicit
+authorization; this hardware checklist provides none of those permissions.
+Keep pre-existing workloads untouched. No new probe, download or experiment
+was performed to prepare this hardware checklist.
 
 ## Offline evidence integrity and continuation guard (2026-10-18)
 
