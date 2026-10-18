@@ -155,7 +155,7 @@ Research question 2. Each check names the component it depends on and an "applie
 | source | evidence ids | D-A, D-M, D-S, D-K, D-O, D-D, D-T, D-P families | URL, publisher, access date 2026-10-16, version or page date, region and currency for prices |
 | number label | enum | published, estimated, measured | every number here is published unless labelled; absolute prices deferred to #39 (multipliers and one list price carried, see finding 2) |
 | severity (rules) | enum | error, warning, info | #40 format; source checked only when an opened page states the condition |
-| evidence grade | enum | per #41 (provisional) | not assigned in this draft; #41 policy pending |
+| evidence grade | enum | Primary documentation, Vendor claim, Independent measurement, Estimate | assigned per row in Evidence under the research method; candidate grading remains subject to #41 receiving review |
 
 ## Compatibility proposals
 

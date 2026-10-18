@@ -91,7 +91,7 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 
 ## Open questions
 
-Grouped by who can answer them. #38 and #39 name an owner for each question; #35 to #37 give a deadline instead, so their questions are placed here by subject. Each record's Open questions table has the reason and the detail.
+Grouped by who can answer them. Every record has an owner column in its Open questions table; #35 to #37 also record when an answer is needed. Issue-owner references resolve to the live GitHub assignees and do not reassign work. Each record's table retains the question and its details.
 
 **#2 owner**
 - Add the T0 fields listed under Handoffs (#35, #37, #38, #39).
