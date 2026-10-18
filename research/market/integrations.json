@@ -58,7 +58,7 @@
     "access": "Free JSON export at /api/dataset/; CSV and JSON mirrors on GitHub and Hugging Face",
     "rights": "Dataset licensed CC BY 4.0 by the publisher; CLI separately MIT",
     "maintenance": "Moderate: estimated memory and model identity must be reconciled",
-    "next_action": "Confirm the GitHub mirror's licence file matches the page (GitHub reports it as unrecognised) before bulk import; memory figures are ModelFit estimates, not measurements",
+    "next_action": "The 2026-10-18 bounded source check resolved the publisher-linked mirror licence at 6fa130db0efa61a5b7ac242fb400c632ab730c52: dataset CC BY 4.0, generation script additionally MIT. Before any intake, retain attribution/change/estimate labels and check the selected payload identity and separate upstream material rights with #41/#60; payload equivalence and estimator accuracy were not tested.",
     "source_ids": [
       "src-modelfit"
     ],
@@ -68,7 +68,9 @@
     "access_date": "2026-10-16",
     "terms_urls": [
       "https://modelfit.io/data/",
-      "https://creativecommons.org/licenses/by/4.0/"
+      "https://creativecommons.org/licenses/by/4.0/",
+      "https://modelfit.io/terms/",
+      "https://github.com/Wecko-ai/modelfit-hardware-dataset/blob/6fa130db0efa61a5b7ac242fb400c632ab730c52/LICENSE"
     ],
     "reuse_permitted": {
       "automated_retrieval": {
@@ -94,7 +96,7 @@
     },
     "update_cadence": "Dataset page shows 'Updated 2026-10-13'; GitHub mirror last pushed 2026-10-16",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16",
+    "last_checked": "2026-10-18",
     "research_assessment": {
       "assessment_date": "2026-10-18",
       "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
@@ -103,8 +105,9 @@
       "maintenance_basis": "Estimate from model identity mapping, estimator assumptions and mirror consistency; no import, maintenance workload or estimator accuracy was measured.",
       "code_material_scope": "The recorded MIT statement applies to the CLI; it does not supply the dataset licence.",
       "data_material_scope": "The recorded CC BY 4.0 dataset scope requires attribution, licence link and change indication. Preserve the distinction from third-party benchmark sources, model files and website content; dataset memory figures remain estimates.",
-      "unresolved_decisions": "#60 retains the exact mirror/licence-scope check; #10/#61 own any matched estimator comparison and #41 owns intake policy."
-    }
+      "unresolved_decisions": "The separately dated 2026-10-18 recheck in rights-validation.md resolves the mirror licence question; selected-payload identity and upstream material rights still require actual intake review by #41/#60. #10/#61 own matched estimator comparison."
+    },
+    "recheck_scope": "Bounded publisher terms section 7, dataset-page link and exact mirror LICENSE/README check only; resolves the earlier mirror-licence-file question. Original 2026-10-16 access/update-cadence observations remain unchanged. No data export was acquired, payload equivalence checked, estimator run or integration approved. See rights-validation.md for exact source pins and the scoped receiving receipt."
   },
   {
     "product_id": "llmfit",
@@ -531,23 +534,26 @@
     "last_checked": "2026-10-18",
     "project_use_decision": {
       "disposition": "exclude_from_current_product_scope",
-      "status": "proposed_for_independent_integration_review",
+      "status": "accepted_by_delegated_project_engineering",
       "basis": "Terms sections 5–7 and an explicit project choice; no conclusion of legal eligibility",
       "automated_product_retrieval": false,
       "commercial_display": false,
       "redistribution": false,
-      "reconsideration": "Specific permitted-use basis covering the proposed product, then new #39/#41/#60 review"
+      "reconsideration": "Specific permitted-use basis covering the proposed product, then new #39/#41/#60 review",
+      "decided_on": "2026-10-18",
+      "receipt_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771",
+      "reviewed_research_commit": "86fa60c445dbd29197ca576af6ae633a7943ca74"
     },
     "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed.",
     "research_assessment": {
       "assessment_date": "2026-10-18",
       "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
-      "ranking_rationale": "Keep this candidate last for current product investigation because the proposed product exclusion addresses its competition restriction and original-provider prices offer a separately reviewable path. Rank does not establish legal eligibility.",
+      "ranking_rationale": "Keep this candidate last for current product investigation because the recorded current-product exclusion addresses its competition restriction and original-provider prices offer a separately reviewable path. Rank does not establish legal eligibility.",
       "maintenance_evidence_class": "Estimate",
       "maintenance_basis": "Estimate from spot availability, location and price-unit changes; the historical page timestamp is an observation, not an update SLA or measured maintenance cost.",
       "code_material_scope": "No licence to the service implementation code follows from paid API access; code reuse is not proposed.",
-      "data_material_scope": "Paid API data, attributed display and bulk redistribution have distinct recorded conditions. Preserve the proposed exclusion of current product retrieval/display/export; a build estimate is not a stated exemption from the competition clause.",
-      "unresolved_decisions": "#39/#41/#60 retain the exact exclusion and any later permitted-use review. #9/#39 should use separately reviewed original-provider facts and rates."
+      "data_material_scope": "Paid API data, attributed display and bulk redistribution have distinct recorded conditions. Preserve the accepted project exclusion of current product retrieval/display/export; a build estimate is not a stated exemption from the competition clause.",
+      "unresolved_decisions": "The current-product exclusion is accepted through the scoped engineering receipt. #39/#41/#60 retain any future specific permitted-use review; #9/#39 should use separately reviewed original-provider facts and rates."
     }
   }
 ]
