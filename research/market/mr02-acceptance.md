@@ -1,20 +1,120 @@
 # MR-02 acceptance and evidence audit
 
-## Current delivery status — 2026-10-18
+## Delivery and evidence readback — 2026-10-18
 
-PR #87's matrix audit reached canonical `main` through merged PR #67; #98 added
-CanIRun.ai. At main `3850afee18e05aa7afca89485963fcea9e7adcaf` the inventory has
-33 entities, 48 dimensions and 1,584 cells. Main also includes #163's capability-test
-coverage checks. The validator uses explicit `MarketValidationError` checks and
-runs under both normal and optimized Python; the historical instruction below
-about Python assertions no longer applies.
+Readback basis: research main `ac5e5844dd1cd01366a1b51a0054afa71a340aca` and GitHub
+responses read through 2026-10-18T05:19:30Z. PR #87's matrix audit reached canonical main through
+#67; #98 added CanIRun.ai. At this revision there are 33 entities, 48 dimensions,
+1,584 cells, 123 Documented and 1,461 Unknown; no Exercised or Unsupported cells.
+The 48 capability tests cover exactly the 48 dimension IDs. These are coverage
+counts, not a product capability score or an acceptance receipt.
 
-Issue #49 remains open. Delivery and structural validation do not settle claim
-truth or receiving-owner acceptance. The [2026-10-17 T5 disposition on #59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818)
-narrows #49's T5 use to information only. The separate
-[2026-10-17 author-integration disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859)
-leaves independent taxonomy/claim acceptance pending. Consult live issue comments and the
-existing #59 writer's handoff ledger for exact recipients and revisions.
+The validator uses explicit `MarketValidationError` checks under normal and
+optimized Python. The current correction also requires every non-Unknown cell's
+existing claim metadata: basis, verification method, evidence grade, exact HTTP(S)
+URL without credentials, actual YYYY-MM-DD access date, confidence, limitations
+and audit scope. A resolvable source-register ID alone is insufficient. These
+offline checks reject incomplete records; they do not retrieve the source or
+verify that its text supports the feature's bounded test. Unknown cells can stay
+incomplete without fabricated evidence. No grade taxonomy or frozen v1 field is
+changed.
+
+### Current acceptance map
+
+| Issue #49 criterion | Evidence at the readback revision | Remaining acceptance or action |
+| --- | --- | --- |
+| Define atomic capability tests | `features.json` contains 48 scenarios, observables, required conditions and failure policies; the validator checks exact dimension coverage | Independent taxonomy review remains required; compound RAG/MCP/export branches are not interchangeable |
+| Link every supported cell to evidence | All 123 Documented cells contain the existing claim metadata; the validator now rejects missing, blank or nontext metadata, invalid URLs and impossible access dates | A valid URL/date is not source accuracy, freshness or intended-use permission; claim review remains separate |
+| Keep silence Unknown | 1,461 cells remain Unknown; no new positive or negative cell is introduced by this correction | Do not infer absent capabilities or market gaps from Unknown |
+| Review overlap and compare coverage | Existing guide records the 13-profile × four-column saved/share/export/version review and documentary counterexamples | #42's original narrowing is not acceptance of the later cells; current receiver review and selected round-trip tests remain |
+| Link conclusions to evidence or hypothesis | Existing matrix records and guide distinguish documentary claims from runtime behavior; the new Flocci evidence is reconciled below without changing grades | Reproducible configurations, measured fit, rights and market demand are still distinct unknowns |
+| Obtain technical-owner handoffs and name unresolved decisions | Actual scoped receipts and live co-owners are recorded below, with links to their reviewed revisions | Preserve the canonical #59 writer; author integration cannot supply independent acceptance |
+| Pass checks and obtain reviewer acceptance before Done | Current correction runs the complete Python 3.12 workflow and rejection regressions in both Python modes | Exact-head hosted CI, independent review of this correction and remaining research handoffs are required; #49 remains open |
+
+### Actual receiving dispositions and next decisions
+
+These are issue #49's acceptance-map references, not a replacement for the
+[canonical handoff ledger](handoffs.json). Its ten #49 pairs at the pinned base
+contain two author-integration-only rows, two scoped-response rows and six without
+receiving responses. That is recorded receipt coverage, not ten accepted handoffs.
+Live GitHub assignees were read for every consumer below; preserve all co-owners.
+
+| Consumers / live co-owners | Actual receipt and retained scope | Next decision |
+| --- | --- | --- |
+| #6: @zwright8, @PUSHINGSQUARES; #7: @zwright8, @appletechie | [zwright8's 6242699859](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859), reviewing main `7acbefbf4e4e700231e88be272bc89e3a73dde15`: author integration only | Obtain independent taxonomy/claim acceptance; this author cannot approve their own matrix as a receiving reviewer |
+| #10: @Mattycodes69, @appletechie | No receiving receipt recorded for the #49 pair at this base | Accept/narrow hardware-estimate coverage; a device capacity or recommendation is not measured model sizing |
+| #16: @zabyxc01, @appletechie | No receiving receipt recorded for the #49 pair at this base | Accept/narrow RAG construction versus advice versus evaluation |
+| #25: @CompleteDotTech, @Mattycodes69; #27: @CompleteDotTech, @tynamite | No receiving receipts recorded for these #49 pairs at this base | Accept/narrow agent and MCP coverage; a registry listing is not a successful tool exchange |
+| #33: @Mattycodes69, @appletechie; relevant #30–#32 context | [appletechie's review 5554129449](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5554129449) at `6511dea2a5102b13df1e47378a31f31230ecb494` narrows T5 to information only; [6230504818](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818) reaffirms the #30–#32 mapping | See the exact reaffirmation and conditions immediately below |
+| #36 / #39: @PUSHINGSQUARES, @appletechie | No receiving receipts recorded for these #49 pairs at this base | Accept/narrow benchmark/application-evaluation and price-field boundaries; no new measurements or complete cost model are delivered |
+| #42: @tynamite, @appletechie | [tynamite's review 5550697545](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545) at `6511dea2a5102b13df1e47378a31f31230ecb494` requests the four columns across 13 profiles | The later 52-cell audit answers coverage, not independent acceptance of every cell or execution of a round trip |
+
+The exact T5 reaffirmation is [comment 6230504818](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818).
+It explicitly extends the #33 information-only disposition to `fine_tuning`,
+`training_compute` and `training_data` context for #30/#31/#32, without new rows
+while that limited scope remains. It names no new reviewed SHA, so none is
+inferred. A newly promoted finding needs the specific affected-consumer handoff;
+`fine_tuned_deploy` must distinguish adapter, merged weights, GGUF or provider-hosted
+artifacts. This does not accept a later matrix revision or include training in MVP.
+
+The independent program/evidence review remains with @CompleteDotTech. #48 and
+#59 are currently co-owned by @Mattycodes69/@appletechie; #57 by
+@tynamite/@appletechie; #58 by @appletechie/@PUSHINGSQUARES. Their historical
+"Unassigned" entries below describe the 2026-10-16 snapshot only. No issue owner,
+Project status, native relationship or canonical ledger receipt is changed here.
+
+### Reserved matrix correction and later Flocci evidence
+
+The [shared-file agreement 6245977192](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49#issuecomment-6245977192)
+leaves @appletechie the six staged community resources, their 288 cells, the
+specific CanIRun `vram_ram` correction and derived guide/count reconciliation.
+Device memory capacity alone does not satisfy the model-memory-requirements
+dimension. That known cell remains a pending correction until their reviewed
+change lands. This submission preserves all matrix cells, taxonomy IDs, source
+records and the guide to avoid a competing implementation of that reserved slice.
+No additional deep-dive profile or evidence grade is pre-accepted.
+
+[PR #227](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/227), submitted
+head `ef685e30af7c1c3a447f4732e1647075b23a3b2b`, merged as
+`49896b41b6e0add6f333406112e8d009e7ad9ee6`, adds a dated Flocci guest contradiction,
+bookmark and return-navigation observation in [substitute-validation.md](substitute-validation.md).
+The older request below to rerun a sign-in-blocked test is historical. The new
+note reports recognition of the offline/hosted-model conflict and one saved tool
+bookmark without a recovered stack; generated fit/privacy/runtime claims remain
+unverified. The distinction between detecting an impossible conjunction and
+satisfying a coherent workload is preserved.
+
+[Receiving review 5561540382](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/227#pullrequestreview-5561540382)
+accepts only the #40 explanation-versus-compatibility evidence boundary. Its #50
+exercised-result acceptance needs review locations for three retained captures;
+this author has not independently inspected those screenshots or verified their
+hashes. The note's report and other reviewers' evidence scopes are not converted
+into this author's observation. No Flocci cell is promoted to Exercised, and no
+general absence of export, measured fit or market gap follows. #66's owners and
+the actual #42/#50/#57/#58 receivers retain their own acceptance decisions.
+
+### Validation of this correction
+
+Python 3.12.12 with the pinned requirements, run on 2026-10-18:
+
+| Command or observation | Result |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt` | Pinned dependencies installed in the external audit environment |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 pass |
+| `python -m unittest discover -s tests -v` | 184 pass, including four added market-test methods |
+| `python scripts/validate_research.py` | 74 catalog proposals and three pricebooks validate |
+| `python scripts/validate_market_research.py` and `python -O scripts/validate_market_research.py` | Both pass: 33 entities, 1,584 cells and 20 issues |
+| `python scripts/validate_handoff_audit.py` | Pass: 101 rows and 98 declared pairs; human acceptance not certified |
+| `python prompts/mobile/validate_prompts.py` | Pass: 258 issues, 36 epics, 906 criteria and 880 steps |
+| Controlled baseline/corrected CLI comparison on synthetic records | Missing claim URL, blank grade, URL with credentials and impossible February date each pass the unchanged validator and fail the correction, in both Python modes |
+
+Valid complete synthetic Documented/Exercised/Unsupported cells pass, and an
+Unknown cell still passes without invented provenance. Additional regressions
+cover every required field missing/blank/nontext, malformed URLs and invalid or
+noncanonical dates. This is record-integrity validation; no vendor capability,
+freshness, source rights or receiving-owner decision is newly verified. All real
+matrix/source records, the guide, canonical handoffs and frozen contracts are
+unchanged by this correction. Independent exact-head review remains required.
 
 ## Historical submission record — 2026-10-16
 
