@@ -4,7 +4,9 @@ Original source snapshot: 2026-10-16. The separately dated 2026-10-18 documentar
 
 F = Exercised: bounded test passed with replayable evidence. P = Documented: narrower documentary support, including unverified vendor claims. N = Unsupported: explicit negative evidence under pinned conditions. ? = Unknown. No absence is inferred from silence. The old “Verified Full/Partial” names are retired following [the evidence-owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545).
 
-[features.json](features.json) retains all 33 entities and 48 dimension IDs. It defines a test and required conditions for each dimension. After the memory and explanation reviews, the matrix has **121 P, 0 F, 0 N and 1,463 ? cells**. This is research coverage, not a product score. Every P has a source-register ID, claim-specific URL, basis, method, evidence class and audit scope. The scope records the public reading mode, dated surface, untested plan entitlements, region and reuse limits. A dated page is not a pinned software release.
+[features.json](features.json) contains 39 entities and the unchanged 48 dimension IDs. It defines a test and required conditions for each dimension. After the memory and explanation reviews and the six-resource intake, the matrix has **121 P, 0 F, 0 N and 1,751 ? cells**. This is research coverage, not a product score. Every P has a source-register ID, claim-specific URL, basis, method, evidence class and audit scope. The scope records the public reading mode, dated surface, untested plan entitlements, region and reuse limits. A dated page is not a pinned software release.
+
+The six-resource expansion contributes 288 Unknown cells. All 1,584 earlier cell objects and all 48 test definitions remain unchanged; the earlier 33-entity receiving decisions retain their original revision and scope. This separate #48/#49 proposal does not extend that acceptance or supply an exercised result.
 
 ## How to apply the tests
 
