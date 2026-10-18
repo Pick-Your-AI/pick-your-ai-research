@@ -82,3 +82,18 @@ Use `Refs #4`, `Refs #5`, `Refs #6`, `Refs #7` while full acceptance remains pen
 [PR #88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88) requests all six affected owners listed above; GitHub readback confirmed those requests and an empty submitted-review list at publication. [Parent request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4#issuecomment-6223171020) and [central #40 intake](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6223171381) identify the concrete artifacts and required dispositions. Requests leave all Pending rows pending. Existing signed-in browser access resolved the earlier Project API limitation; #4–7 Status is now In Review, with priorities/readiness/ownership preserved. No Done status or closure is claimed.
 
 The publication paragraph is a historical readback. The 2026-10-17 refresh reads the actual submitted central owner review above, superseding its empty-review state for @tynamite. It makes no new Project or assignment changes. Other consumer rows remain pending until their owners provide a disposition on the specific handoff.
+
+
+## Reciprocal receiving receipts (2026-10-18)
+
+A live readback found three incoming T4 interface decisions at reviewed main
+`7acbefbf4e4e700231e88be272bc89e3a73dde15`. These are receiving dispositions
+from the named delegate's co-owner scope, not acceptance of T1's outgoing rows.
+
+| Direction | Receipt and scope | Remaining decision |
+| --- | --- | --- |
+| #25 -> #6 | [@zwright8 delegate accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6#issuecomment-6242697096): capability evidence is scoped to model/offering/API surface and request conditions, including reasoning, parser/template, strictness and streaming; missing eligible evidence remains unknown | @PUSHINGSQUARES co-owner response and @appletechie's #30 licence-field sufficiency remain separate |
+| #28 -> #7 | [@zwright8 delegate accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6242697652): memory/history are part of assembled input; reserve output/thinking without double counting and recount after transforms; independent caps stay independent | @appletechie co-owner disposition, #16 assembly details and #10 reciprocal KV agreement remain separate |
+
+The #25 -> #11 receipt is recorded in the [T2 ledger](../T2-infrastructure/handoffs.md#reciprocal-engine-receipt-2026-10-18).
+None supplies runtime measurements, changes v1, accepts the reverse direction, or closes #4–7.
