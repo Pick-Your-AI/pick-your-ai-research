@@ -1,0 +1,9 @@
+{
+  "id": "t4-e2b-2560-wheel",
+  "uri": "https://files.pythonhosted.org/packages/58/ec/17bee489c285b555a83a3360da1e4eeedaf7c5c767de4038cf9503104faa/e2b-2.56.0-py3-none-any.whl",
+  "version": "2.56.0",
+  "sha256": "acfb77c56a33daf1542362cab8048f062b578dffe7a48f32f87a4a3e0bef1e14",
+  "access": "Public version-pinned PyPI wheel downloaded and inspected 2026-10-18 without authentication, installation, dependency resolution or SDK execution. SHA-256 and 400291-byte size matched https://pypi.org/pypi/e2b/2.56.0/json on that date.",
+  "description": "Exact e2b 2.56.0 Python SDK wheel used for the B54 artifact readback in research/T4-agents-integrations/tools-apis.md. Its 245 regular files match the 245 unique RECORD rows; all 244 recorded SHA-256 digests and byte sizes match, with RECORD itself unhashed. This checks artifact contents and internal consistency, not runtime behavior or build-source identity.",
+  "rights": "Wheel METADATA declares License-Expression: MIT but contains no License-File field. No regular member basename contains LICENSE, LICENCE, NOTICE or COPYING, case-insensitively. B49 separately records a pinned package-local MIT source license; version agreement does not establish that this wheel was built from that commit. The artifact is not redistributed in Git. Applicable notice delivery, resolved dependency terms and any intended redistribution scope remain a #26 source-specific follow-up under #41 intake policy; no blanket permission or legal violation is inferred."
+}
