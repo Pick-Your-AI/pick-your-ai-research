@@ -1,0 +1,136 @@
+{
+  "x_t0_jurisdiction": {
+    "proposal_version": "cd9-0.1",
+    "answer_states_sha256": "2a3db9b1444095e32af480b8df25d744621f2ceafd4eab20f6fcc8345aea5411",
+    "jurisdictions": [
+      {
+        "id": "synthetic-country-a",
+        "parent_ids": []
+      },
+      {
+        "id": "synthetic-country-b",
+        "parent_ids": []
+      },
+      {
+        "id": "synthetic-a-north",
+        "parent_ids": [
+          "synthetic-country-a"
+        ]
+      },
+      {
+        "id": "synthetic-a-east",
+        "parent_ids": [
+          "synthetic-country-a"
+        ]
+      },
+      {
+        "id": "synthetic-b-north",
+        "parent_ids": [
+          "synthetic-country-b"
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "id": "synthetic-group-a",
+        "member_ids": [
+          "synthetic-country-a"
+        ]
+      },
+      {
+        "id": "synthetic-group-ab",
+        "member_ids": [
+          "synthetic-country-a",
+          "synthetic-country-b"
+        ]
+      },
+      {
+        "id": "synthetic-empty-group",
+        "member_ids": []
+      }
+    ],
+    "disjoint_pairs": [
+      {
+        "id": "synthetic-a-b-disjoint",
+        "left_id": "synthetic-country-a",
+        "right_id": "synthetic-country-b"
+      }
+    ],
+    "regions": [
+      {
+        "id": "synthetic-processing-map",
+        "provider_id": "synthetic-provider-a",
+        "service_id": "synthetic-service",
+        "region_id": "same-region-label",
+        "context_id": "synthetic-configuration-1",
+        "dimension": "processing",
+        "jurisdiction_ids": [
+          "synthetic-a-north"
+        ]
+      },
+      {
+        "id": "synthetic-storage-map",
+        "provider_id": "synthetic-provider-a",
+        "service_id": "synthetic-service",
+        "region_id": "same-region-label",
+        "context_id": "synthetic-configuration-1",
+        "dimension": "storage",
+        "jurisdiction_ids": [
+          "synthetic-country-b"
+        ]
+      },
+      {
+        "id": "synthetic-other-provider-map",
+        "provider_id": "synthetic-provider-b",
+        "service_id": "synthetic-service",
+        "region_id": "same-region-label",
+        "context_id": "synthetic-configuration-1",
+        "dimension": "processing",
+        "jurisdiction_ids": [
+          "synthetic-country-b"
+        ]
+      }
+    ],
+    "queries": [
+      {
+        "id": "synthetic-processing-query",
+        "subject_id": "synthetic-service-data-flow",
+        "context_id": "synthetic-configuration-1",
+        "dimension": "processing",
+        "location_refs": [
+          {
+            "kind": "provider_region",
+            "id": "synthetic-processing-map",
+            "descriptor_sha256": "576f274ef928811ec9152a7f8c952e811fbad70c5c95880bcd8b0ca64348cdd0"
+          }
+        ]
+      },
+      {
+        "id": "synthetic-storage-query",
+        "subject_id": "synthetic-service-data-flow",
+        "context_id": "synthetic-configuration-1",
+        "dimension": "storage",
+        "location_refs": [
+          {
+            "kind": "provider_region",
+            "id": "synthetic-storage-map",
+            "descriptor_sha256": "ccbbc2f6b41cffddb0b4c062a1e85ed6ddce838e6c0fccff81b7b394f8cd0e83"
+          }
+        ]
+      },
+      {
+        "id": "synthetic-local-query",
+        "subject_id": "synthetic-local-data-flow",
+        "context_id": "synthetic-configuration-1",
+        "dimension": "processing",
+        "location_refs": [
+          {
+            "kind": "jurisdiction",
+            "id": "synthetic-a-north",
+            "descriptor_sha256": "121f0783916d8c0679a1119f14639ac2285f55aceb47152212622a4d2d5d1629"
+          }
+        ]
+      }
+    ]
+  }
+}
