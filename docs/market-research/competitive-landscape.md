@@ -1,6 +1,6 @@
 # Competitive landscape
 
-The inventory contains 33 distinct products/resources, including all 22 original named candidates, ten original additional resources and CanIRun.ai. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
+The inventory contains 39 distinct products/resources, including all 22 original named candidates, ten original additional resources, CanIRun.ai and the six community fit-report resources added below. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
 
 The [MR-01 acceptance and selection record](../../research/market/mr01-acceptance.md) contains the merged five-seed audit, current fourteen-profile working list, revision-scoped reviews and remaining owner decisions. The [2026-10-18 follow-up](../../research/market/mr01-acceptance.md#2026-10-18-catalog-and-summary-reconciliation) reconciles CanIRun.ai documentary fields and pins the llmfit upstream identity check. Older observations below retain their stated dates; document publication does not supply issue acceptance.
 
@@ -60,9 +60,11 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 - **CanItRun:** methodology and privacy pages (privacy updated 2026-08-16) name no operator; contact e-mail only. Unknown (`src-canitrun-about`).
 - **GPUs.io:** home, about, terms and privacy returned 403 with a bot challenge to anonymous retrieval on 2026-10-16. Not bypassed; operator and content were unverified in that inspection (`src-gpus-io-recheck`). The earlier `src-gpus-io` "retrieved" record is preserved unchanged. The separately dated 2026-10-18 terms correction in `sources.json` / `src-gpus-io` names Peak Technologies, Inc. as publisher attribution; see the [MR-01 source limitations](../../research/market/mr01-acceptance.md#claimevidence-review-and-source-limitations). Independent ownership verification and intended-use permission remain separate; this summary performs no new site check.
 
-## Community fit-report resources (staged, not yet in the catalog)
+## Community fit-report resources (added to the catalog)
 
 tynamite's PR #67 review (item 5) and PR #81 (D36–D41, Q9) name six community fit-report projects. All six exist and their primary pages are registered in `sources.json`. They are **not yet added to `competitors.json`** because `validate_market_research.py` requires a complete product × feature matrix: each new entity needs 48 `features.json` cells, which #49 owns. Once #49 adds them (as `Unknown` unless evidenced), the catalog would rise from 33 to 39 after the CanIRun.ai intake, inside the 30–40 bound.
+
+**Update:** all six are now entities in `competitors.json` with their 48 `features.json` cells each (288 in total). Every cell is `Unknown` with no inference from silence; grading beyond Unknown is left to #49's conventions and reviewer. Classifications follow the proposals in the table below and remain analyst judgements. Whether LocalScore or LocalMaxxing get deep-dive profiles is still a coordinator/#50 decision.
 
 | Proposed ID | Resource | Operator / repository | Proposed classification | Source | Key boundary |
 | --- | --- | --- | --- | --- | --- |
