@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-7 catalog and pricebook revision pins",
+  "type": "object",
+  "required": ["x_t0_revision_locks"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_revision_locks": {
+      "type": "object",
+      "required": ["proposal_version", "build_sha256", "artifacts"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd7-0.1"},
+        "build_sha256": {"$ref": "#/$defs/digest"},
+        "artifacts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "catalog_snapshot": {"$ref": "#/$defs/pin"},
+            "pricebook": {"$ref": "#/$defs/pin"}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {"type": "string", "minLength": 64, "maxLength": 64, "pattern": "^[a-f0-9]{64}$"},
+    "pin": {
+      "type": "object",
+      "required": ["id", "revision", "sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string", "minLength": 3, "maxLength": 120,
+          "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+          "not": {"pattern": "[^a-z0-9._:-]"}
+        },
+        "revision": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

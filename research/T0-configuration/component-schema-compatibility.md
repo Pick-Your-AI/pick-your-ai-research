@@ -363,6 +363,83 @@ Routing from the reviews:
 - Migration tests cover the cases below, including independent component modes, conflicting workload copies and a lock without a revision.
 - The affected workstreams are listed in the changelog.
 
+### CD-7 exact catalog and pricebook pin experiment (2026-10-18)
+
+**Engineering decision for the candidate:** retain explicit positive integer
+revisions alongside catalog/pricebook IDs, using the artifact's existing revision
+value. Do not reinterpret an ID as inherently unique per revision, infer a
+revision from a date, or select the only/latest available artifact. This chooses
+the explicit-revision option in #114 SB-2 and the pricebook part of SB-3. The
+frozen [build locks](../../contracts/v1/schemas/build.schema.json),
+[catalog snapshot](../../contracts/v1/schemas/catalog-snapshot.schema.json) and
+[pricebook](../../contracts/v1/schemas/pricebook.schema.json) were inspected at
+`a9f0e6efd67e8d7d7ddf1327e95b000c20e8f5f3` on 2026-10-18: the artifacts have
+revisions, while the build locks retain only their IDs. This is a contract fact;
+the following sidecar and digest policies are new project design choices.
+
+The [schema](../../tests/fixtures/t0-revision-locks.schema.json) and
+[fixture](../../tests/fixtures/t0-revision-locks.json) select this synthetic shape:
+
+```text
+x_t0_revision_locks:
+  proposal_version: "cd7-0.1"
+  build_sha256: SHA-256 of the original UTF-8 build bytes
+  artifacts:
+    catalog_snapshot: {id, revision, sha256}
+    pricebook: {id, revision, sha256}  # only if the build locks a pricebook
+```
+
+Hashes bind the exact retained bytes, including whitespace, rather than an
+unstated canonical JSON serialization. A digest is an integrity comparison,
+not source authentication, evidence verification or a right to retain/display
+the document. The sidecar's artifact IDs must match the build's IDs. Editing,
+redacting, forking or reserializing the build invalidates this sidecar's byte
+binding; it cannot silently transfer assertions or pins to another document.
+All supplied pins require a full-string canonical ID (3–120 characters, without
+whitespace/control suffixes), an integer revision and a lowercase 64-digit digest.
+An absent pin is allowed so the reader can explain a legacy omission. A
+malformed supplied pin is rejected rather than treated as a missing answer.
+
+The [offline archive](../../tests/t0_revision_lock_prototype.py) validates the
+retained frozen-format fixture documents using the local schema registry and
+strict JSON parsing. It rejects duplicate artifact keys, duplicate catalog
+ID/version pairs and duplicate rate IDs. Exact-key lookup distinguishes:
+
+| Condition | Resolution result |
+| --- | --- |
+| No revision pin, even with one available candidate | `revision_pin_missing` |
+| Exact kind/ID/revision absent, including when a newer revision exists | `pinned_revision_unavailable` |
+| Exact key present but retained bytes disagree with the selected digest | `content_digest_mismatch`; no artifact values returned |
+| Exact key and bytes agree | `resolved` for that artifact only |
+
+For a resolved catalog, every enabled selection binds its exact item ID and
+version, then checks kind. A known absent version or wrong kind is an explicit
+membership-integrity diagnostic; it is not a claim of unsupported capability.
+An unresolved snapshot cannot establish missing membership. Disabled selections
+are identified separately; build-wide identity/role ambiguity is still rejected
+before resolution, reusing CD-13's preflight. Distinct versions of the same item
+ID can coexist in this test-only archive and are selected without order
+dependence. Frozen intake still requires one version per ID, and the frozen
+evaluator must not be used to interpret this proposed multi-version behavior.
+
+The original build bytes and resolved artifact bytes are retained unchanged;
+returned item dictionaries are detached from each other and subsequent reads.
+The [20 synthetic test methods](../../tests/test_t0_revision_locks.py) exercise
+the wire schema, actual fixture resolution, newer/absent/tampered versions,
+partial catalog/pricebook resolution, selection membership and input isolation,
+strict duplicate/nonfinite handling and unchanged historical v1 evaluation.
+Run `python -m unittest discover -s tests -p test_t0_revision_locks.py -v`.
+
+This completes a reviewable revision and membership-binding candidate for
+CD-7/SB-2 and part of SB-3/SB-R1. It does not claim complete replay: evaluator,
+ruleset, graph, derived estimates and external evidence must still be retained
+and resolved under their own exact pins. It neither applies price eligibility
+or rights policy nor interprets arbitrary catalog references, migrates a build,
+publishes a successor reader/ruleset, or generates a current report. Those
+integration decisions remain with #40/#41/#39/#42. The technical candidate can
+be reviewed independently of named receiving-owner adoption; #40 remains open
+and #114's recorded prerequisite/hold is unchanged.
+
 ## Contribution format
 
 Use `templates/rule-proposal.md`, plus these conventions:
@@ -422,7 +499,7 @@ These are proposed acceptance examples, not measured configurations or a migrati
 
 The [synthetic fixtures](../../tests/fixtures/t0-migration.json) encode M1–M5 and additional boundary cases. The [test-only projection prototype](../../tests/t0_migration_prototype.py) takes already-normalized eligible fixture facts in `x_t0_migration_inputs`, preserves original historical bytes and emits a separate `x_t0_migration_projection`. It does not parse arbitrary real selections, resolve source conflicts or publish a next-version schema. Null means missing fixture evidence, not a contract answer encoding.
 
-Run `python -m unittest discover -s tests -p test_t0_migration.py -v`. The tests cover all operator/capacity pairs, unknown dominance, non-serving/disabled components, adapter inheritance and missing/cyclic/disabled bases, rejection of unrelated serving kinds as adapter bases, duplicate IDs, conflicting workload copies including zero, absent snapshot/pricebook revisions, and unchanged v1 historical evaluator findings. They are synthetic semantics checks, not runtime measurements or validation of a released migration adapter. Actual snapshot resolution and dual-ruleset evaluation remain future versioned implementation.
+Run `python -m unittest discover -s tests -p test_t0_migration.py -v`. The tests cover all operator/capacity pairs, unknown dominance, non-serving/disabled components, adapter inheritance and missing/cyclic/disabled bases, rejection of unrelated serving kinds as adapter bases, duplicate IDs, conflicting workload copies including zero, absent snapshot/pricebook revisions, and unchanged v1 historical evaluator findings. They are synthetic semantics checks, not runtime measurements or validation of a released migration adapter. The separate CD-7 pin experiment above now resolves actual retained fixture snapshot bytes; a released resolver and dual-ruleset evaluation remain future versioned implementation.
 
 ## Worked rule examples for receiving-owner review
 
