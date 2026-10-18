@@ -104,7 +104,7 @@ Grouped by who can answer them. #38 and #39 name an owner for each question; #35
 **#41 owner**
 - The final evidence-grade policy. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md`; #41 confirms them, including whether vendor accuracy claims may be displayed (#35, #37, #38).
 - Sizing rule for evaluation sets and reproducibility tier boundaries (#36).
-- Whether AWS and Azure price data may be redistributed (#39).
+- Apply the [#60 source-specific reuse decisions](../market/rights-validation.md) to AWS/Azure price reuse (#39); keep unaddressed rights questions with #60/#41. No broader redistribution permission is implied.
 
 **#42 owner**
 - Re-evaluation on changed pricebook, snapshot, ruleset, rights decision or build edits (#42); prices retain as-of dates, without a time-window expiry.
