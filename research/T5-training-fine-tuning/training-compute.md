@@ -88,6 +88,26 @@ These are estimates. The published rows below provide comparison inputs, not a c
 | B11 | Liger Kernel paper | Independent measurement (LinkedIn) | Llama 3-8B, 4× A100-80G, bf16, AdamW, s 512, bs 64 | +42.8% throughput, −54.8% memory |
 | B12 | Answer.AI FSDP + QLoRA | Vendor claim | 70B on 2× 24 GB (RTX 3090) | Capability only; no sequence length, memory or time published |
 
+### Distillation and GRPO time/cost accounting (2026-10-18)
+
+This is a **project-derived accounting method**, not a benchmark or a price quote. E20–E21 identify stages that the SFT-only FLOP estimate omits; they supply no transferable throughput for this note's selected profiles. Keep time and cost unknown until phase durations or matched throughput bounds and applicable rates exist.
+
+**GRPO.** TRL generates groups of completions, scores rewards, and can perform multiple updates per generation via `num_iterations`. A nonzero KL coefficient adds reference-policy work. Generation can share training GPUs or use a separate server allocation. Its logged `step_time` includes generation (E20). For a defined generation cycle, record disjoint durations in seconds:
+
+`T_cycle = t_generation + t_reward + t_reference + t_updates + t_sync_other`
+
+`t_updates` covers all updates using that cycle's samples; do not multiply the entire cycle by `num_iterations`. Count prompt prefill, sampled completion lengths, reward/tool latency and weight synchronization in their actual phases. When using inclusive `step_time`, do not add generation a second time. This sum describes serial execution; overlapping pipelines require a measured schedule or critical-path estimate, not addition of overlapping wall times.
+
+**Distillation.** Separate fixed teacher-generated data plus student SFT from online teacher-feedback training. TRL GKD uses `lmbda` to select student-generated batches and `seq_kd` to enable teacher-generated sequences; teacher token-level feedback is additional work (E21). Record:
+
+`T_total = t_prepare_once + sum(t_generate + t_teacher_feedback + t_student_update + t_transfer_other)`
+
+Sum over actual batches. Charge reusable offline preparation once per artifact, then student passes separately. Count online generation and feedback at their executed frequency, not once for the dataset. Do not assume token-distribution access from a text-only API or infer permission to distil from technical access. The exact teacher/student revisions, tokenizers, sequence distributions, generation settings, caching, batch schedule and resource assignments are required inputs.
+
+**Allocation and billing.** For either method, derive allocated GPU-hours as `H = sum_a(G_a × allocated_seconds_a / 3600)` over disjoint allocations. A dedicated rollout or teacher allocation counts while reserved, including idle periods; shared hardware is counted once. For per-GPU-hour rates, cost is `sum_a(H_a × rate_a)`; for instance-hour rates use allocated instance-hours directly, without another GPU-count multiplier. Add applicable API/reward calls, minimum billing, storage and egress separately with exact units and rate scope. This is accounting notation, not adoption of new #39/#40 meters. Missing rates or durations remain unknown, not zero. Phase bounds produce a conditional serial-time range only when all terms have bounds; no finite upper bound is justified for unbounded tool latency, retries or generation.
+
+Next evidence request to #31: matched phase timings and allocation lifetimes for one specified GRPO or distillation configuration. #39 must confirm its billing scope. No hardware run or numeric cost is claimed here.
+
 ## Comparison fields
 
 These cover the CatalogItem envelope plus `spec_training_compute`. The issue's conceptual fields map as follows:
@@ -110,7 +130,7 @@ These cover the CatalogItem envelope plus `spec_training_compute`. The issue's c
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Prices are in USD; the region is given where the provider states it.
+Entries accessed on 2026-10-16 unless their row specifies the 2026-10-18 supplement. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Prices are in USD; the region is given where the provider states it.
 
 ### Estimation (E)
 
@@ -135,6 +155,8 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | E17 | Hugging Face TRL, https://huggingface.co/docs/trl/main/en/dpo_trainer | 2026-10-16 | main | Primary documentation | — |
 | E18 | Hugging Face Accelerate, https://huggingface.co/docs/accelerate/main/en/usage_guides/model_size_estimator ; https://github.com/huggingface/accelerate/blob/main/src/accelerate/commands/estimate.py | 2026-10-16 | main | Primary documentation | — |
 | E19 | Qwen, https://huggingface.co/Qwen/Qwen3-8B/raw/main/config.json | 2026-10-16 | revision b968826d | Primary documentation | — |
+| E20 | Hugging Face TRL, [GRPO trainer](https://github.com/huggingface/trl/blob/6d6901c5e3963108076131ac4979d344566b13a2/docs/source/grpo_trainer.md) | 2026-10-18 | commit `6d6901c5e3963108076131ac4979d344566b13a2` | Primary documentation, source checked | Stages and configuration semantics only; no matched throughput or billing guarantee |
+| E21 | Hugging Face TRL, [GKD trainer](https://github.com/huggingface/trl/blob/6d6901c5e3963108076131ac4979d344566b13a2/docs/source/gkd_trainer.md) | 2026-10-18 | same commit; experimental trainer | Primary documentation, source checked | Teacher/student generation and feedback semantics; no permission grant or calibrated runtime |
 
 ### Benchmarks (B-source)
 
@@ -310,7 +332,7 @@ Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals un
 | Hosting platform records for Google Cloud, Azure, Lambda and CoreWeave. `aws-ec2` and `runpod-pods` already exist | #9 · @Mattycodes69 |
 | Pricebook meters for `training_tokens_1m`, `training_tokens_1k`, `training_hour`, `job_minimum` and `model_storage_month`; a ResourceEstimate metric `training.estimated_peak_per_device_vram_gb`; `compute_profile_ref` optional for managed services | #40 · @tynamite |
 | Price normalisation: per-1k vs per-1M tokens, epochs and validation tokens, job minimums, and post-training hosting shown next to training cost | #39 · @PUSHINGSQUARES |
-| Training time and cost estimate for distillation and GRPO (only memory is sketched) | #31 · @appletechie |
+| Matched phase timings, allocation lifetimes and scoped rates for the distillation/GRPO accounting method above; no numeric calibration yet | #31 · @appletechie |
 | Run a 20-step dry run to calibrate the Qwen3-8B worked example (no published measurement for it) | #31 · @appletechie |
 | Methods and frameworks consumed from #30 | #30 · @appletechie (PR #68) |
 | Freshness threshold for prices (they change faster than specifications) | #41 · @tynamite |
