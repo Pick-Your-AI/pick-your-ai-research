@@ -72,13 +72,30 @@ def member(value: str, evidence: Evidence) -> Finding:
     return Finding(value, Outcome.UNKNOWN, "unmarked_absence")
 
 
+def requested_values(value: frozenset[str] | None) -> None:
+    """Require a normalized set; never treat a string as characters."""
+    if value is not None and (type(value) is not frozenset or
+            any(type(member) is not str or not member.strip() for member in value)):
+        raise ValueError("requested values must be a frozenset of nonblank strings or None")
+
+
 def evaluate(
     requested: frozenset[str] | None,
     evidence: Evidence,
     requirement: Requirement = Requirement.ANY,
     *,
     applicable: bool | None = True,
+    requested_complete: bool | None = None,
 ) -> Decision:
+    """Reduce qualified member facts without inventing requested-set coverage.
+
+    ANY needs one positive witness; ALL needs one negative counterexample.
+    The opposite definitive verdicts need a nonempty, known-complete requested
+    set. Empty sets stay unknown, including explicitly complete empty sets.
+    The caller qualifies the completeness fact independently of list values.
+    """
+    requested_values(requested)
+    normalized_fact(requested_complete)
     normalized_fact(applicable)
     normalized_fact(evidence.eligible)
     normalized_fact(evidence.exhaustive)
@@ -91,7 +108,7 @@ def evaluate(
     if requested is None:
         return Decision(Outcome.UNKNOWN, "requirement_unknown", evidence.source_id)
     if not requested:
-        raise ValueError("an applicable membership query needs a nonempty requirement")
+        return Decision(Outcome.UNKNOWN, "requirement_empty", evidence.source_id)
     if evidence.eligible is not True:
         return Decision(Outcome.UNKNOWN, "no_eligible_evidence", evidence.source_id)
 
@@ -113,9 +130,16 @@ def evaluate(
             if Outcome.UNKNOWN in outcomes
             else Outcome.PASS
         )
+    reason = f"{requirement}_membership"
+    needs_complete = ((requirement == Requirement.ANY and outcome is Outcome.FAIL)
+                      or (requirement == Requirement.ALL and outcome is Outcome.PASS))
+    if needs_complete and requested_complete is not True:
+        outcome = Outcome.UNKNOWN
+        reason = ("requested_set_incomplete" if requested_complete is False
+                  else "requested_completeness_unknown")
     return Decision(
         outcome,
-        f"{requirement}_membership",
+        reason,
         evidence.source_id,
         findings,
         any(finding.disputed for finding in findings),
