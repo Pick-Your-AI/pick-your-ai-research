@@ -370,6 +370,33 @@ GPU run, weights download, ResourceEstimate or scope waiver is supplied here.
 [PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) merged separately at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`; its GM1
 observations remain a separate cohort and are not used in this estimator comparison.
 
+### Comparator numeric integrity — 2026-10-18
+
+The current [comparison reader](../../scripts/mr09_compare_estimators.py) retains
+the original value of decimal and exponent JSON numbers before admitting a
+measured payload or converting GiB to bytes. Positive integral representations,
+including values wider than binary64's consecutive-integer range, retain every
+byte. A fractional value cannot acquire an integral value through float rounding
+or intermediate multiplication. GiB scaling uses exact rational arithmetic;
+the signed and absolute byte differences are integer calculations. The relative
+percentage remains a floating-point presentation of that difference.
+
+The existing finite-number intake gate, Boolean rejection and integer-token
+requirements for context, geometry, repetition and sequence counts remain in
+force. Decimal exponents outside the reader's representable range are rejected
+with a controlled diagnostic. Unrelated catalog and Node-audit metadata retain
+their previous float representation, including recorded device capacity at
+the Node decimal-GB boundary. New estimator-plan files preserve the
+validated captured JSON so their numeric values and source hashes are not
+changed by serialization.
+
+These are synthetic integrity regressions in
+[`test_mr09_payload_precision.py`](../../tests/test_mr09_payload_precision.py),
+including failure before artifact access and controlled CLI publication. They
+add no estimator or GPU execution, empirical pair, tolerance or receiving-owner
+acceptance. The historical executed script, measurements, plan files, hashes,
+timestamps and twelve recorded component comparisons remain unchanged.
+
 ## Historical comparison target and error discipline — 2026-10-16
 
 The existing PR #75 sizing arithmetic at
