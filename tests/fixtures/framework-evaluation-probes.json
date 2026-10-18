@@ -1,0 +1,119 @@
+{
+  "synthetic": true,
+  "executed_at": "2026-10-18T06:48:30.023404+00:00",
+  "python_version": "3.12.14",
+  "method": "Hash-check fetched sources, extract only named function ASTs without rewriting their bodies, run with synthetic values and an in-process API recorder.",
+  "sources": [
+    {
+      "key": "crew-evalrunner",
+      "repository": "crewAIInc/crewAI",
+      "revision": "eb15c66cef12073d8d06d6942eecc35e7fd6c783",
+      "path": "lib/crewai/src/crewai/experimental/evaluation/experiment/runner.py",
+      "source_url": "https://github.com/crewAIInc/crewAI/blob/eb15c66cef12073d8d06d6942eecc35e7fd6c783/lib/crewai/src/crewai/experimental/evaluation/experiment/runner.py",
+      "git_blob_sha": "0ef61a1d4298959ee8dd4764b9df51895af2b1f2",
+      "size_bytes": 5962,
+      "sha256": "92f917c3294c480b19293a8d83fde40e9b20584a89e00b857d598a4de6bd77a3"
+    },
+    {
+      "key": "agno-init",
+      "repository": "agno-agi/agno",
+      "revision": "4c969bc5fd88c3b1e6e7d3aa470ba0cd19252a8a",
+      "path": "libs/agno/agno/agent/_init.py",
+      "source_url": "https://github.com/agno-agi/agno/blob/4c969bc5fd88c3b1e6e7d3aa470ba0cd19252a8a/libs/agno/agno/agent/_init.py",
+      "git_blob_sha": "c2bacc4e9452d9f4ce6480c7586a7e7c235d3f92",
+      "size_bytes": 24857,
+      "sha256": "5d1c21d50306d56a075ad32bae03b152618cbc6e7821ec4027a17345c0531362"
+    },
+    {
+      "key": "agno-evalutils",
+      "repository": "agno-agi/agno",
+      "revision": "4c969bc5fd88c3b1e6e7d3aa470ba0cd19252a8a",
+      "path": "libs/agno/agno/eval/utils.py",
+      "source_url": "https://github.com/agno-agi/agno/blob/4c969bc5fd88c3b1e6e7d3aa470ba0cd19252a8a/libs/agno/agno/eval/utils.py",
+      "git_blob_sha": "61e7a203a4f4eb7662a9dce0c0ff1036b2c71b47",
+      "size_bytes": 9595,
+      "sha256": "2d5862083f0e2c7cb0b194f2ce6de571316b60fffe995c912caa8405c7c31640"
+    }
+  ],
+  "crew_score_predicate": [
+    {
+      "case": "complete_pass",
+      "expected": {
+        "goal": 7.0,
+        "tools": 7.0
+      },
+      "actual": {
+        "goal": 8.0,
+        "tools": 8.0
+      },
+      "upstream_result": true,
+      "missing_expected_metrics": []
+    },
+    {
+      "case": "known_below_threshold",
+      "expected": {
+        "goal": 7.0,
+        "tools": 7.0
+      },
+      "actual": {
+        "goal": 6.0,
+        "tools": 8.0
+      },
+      "upstream_result": false,
+      "missing_expected_metrics": []
+    },
+    {
+      "case": "missing_expected_metric",
+      "expected": {
+        "goal": 7.0,
+        "tools": 7.0
+      },
+      "actual": {
+        "goal": 8.0
+      },
+      "upstream_result": true,
+      "missing_expected_metrics": [
+        "tools"
+      ]
+    },
+    {
+      "case": "no_matching_metric",
+      "expected": {
+        "goal": 7.0,
+        "tools": 7.0
+      },
+      "actual": {
+        "other": 8.0
+      },
+      "upstream_result": false,
+      "missing_expected_metrics": [
+        "goal",
+        "tools"
+      ]
+    }
+  ],
+  "agno_telemetry_helpers": {
+    "environment": {
+      "AGNO_TELEMETRY": "false"
+    },
+    "synthetic_agent_initial_telemetry": true,
+    "agent_after_set_telemetry": false,
+    "direct_eval_helper_stub_calls": 1,
+    "recorded_stub_payloads": [
+      {
+        "run_id": "synthetic-run",
+        "eval_type": "synthetic-reliability",
+        "data": {
+          "synthetic": true
+        }
+      }
+    ],
+    "network_requests": 0,
+    "boundary": "Exact isolated helper call; no full evaluator, Agent, package, network or provider execution."
+  },
+  "limitations": [
+    "No complete framework or evaluator was installed or executed.",
+    "No model, tool, paid API, GPU or network request was executed.",
+    "The predicate outputs are not measured agent quality or production privacy evidence."
+  ]
+}
