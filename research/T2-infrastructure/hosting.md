@@ -2,7 +2,7 @@
 
 Issue: [#9](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) · Contract: 1.0.0 · Kinds: `hosting_platform`, `storage`
 Status: merged in PR #75; follow-up proposals and remaining handoffs pending · Last researched: 2026-10-17
-Decision owners: @Mattycodes69 and @appletechie, live #9 assignees checked on 2026-10-17.
+Decision owners: @Mattycodes69 and @appletechie, live #9 assignees checked on 2026-10-18. Handoff receipts refreshed on 2026-10-18; vendor-source access dates retain their original scope.
 
 ## User decision
 
@@ -173,29 +173,34 @@ No complete `ResourceEstimate`, `CostEstimate`, runtime configuration or deploym
 
 ## Open questions and handoffs
 
-Live owners were checked through GitHub on 2026-10-16. **No consuming-owner acknowledgements were present for this package at research time.** The orchestrator must link actual comments/reviews before checking the handoff criterion; agent coordination is not owner acceptance.
+Live owners and issue comments were re-read on 2026-10-18. Three of the seven required consumers have scoped receipts: #10, #27 and #31. #14, #15, #37 and #39 remain unconfirmed. The additional #28 boundary receipt is separate from those seven required consumers. Each receipt retains its direction and issuing owner's scope; it does not accept another co-owner's scope or satisfy the full handoff criterion.
 
-| Consumer / live owner | Specific requested acknowledgement | State / impact |
+| Consumer / live owners | Specific requested acknowledgement | State / impact |
 | --- | --- | --- |
-| #10 @Mattycodes69 | `aws-ec2` ID/version and researched region subset; source-complete profiles versus incomplete Runpod offers | Research coordinated; human acceptance pending |
-| #14, #15 @zabyxc01 | API/managed/self-hosted categories; object/block/file interfaces; vector DB evaluation remains T3 | Pending; no embedding/vector product choice made |
-| #27 @CompleteDotTech | Local stdio versus remote HTTP host requirements; service lifetime, auth/trust and timeout evidence still theirs | Pending; no MCP server suitability assertion |
-| #31 @appletechie | Persistent storage cost/locality/parallel-write caveats, funding/deletion and inode constraints, and non-shared training estimate ownership | Pending; no training sizing duplicated |
-| #37, #39 @PUSHINGSQUARES | Deployment constraints, unknown quota/capacity, storage/egress and conditions including post-delete billing; billing aggregation policy | Pending; research can be reviewed independently |
-| #13 @zabyxc01; #28 @CompleteDotTech | Infrastructure product facts do not decide ACL propagation, retention, consent or deletion semantics | Pending boundary review |
+| #10 @Mattycodes69 / @appletechie | `aws-ec2` ID/version and researched region subset; source-complete profiles versus incomplete Runpod offers | [#9 -> #10 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057): exact host/profile binding and units; regional offering is not stock, quota or entitlement; @appletechie's co-owner scope remains separate |
+| #14 @zabyxc01 / @PUSHINGSQUARES | Managed embedding endpoint hosting category and residency boundary | Pending; no embedding product choice made |
+| #15 @zabyxc01 / @appletechie | API/managed/self-hosted categories; object/block/file interfaces; vector DB evaluation remains T3 | Pending; no vector product choice made |
+| #27 @CompleteDotTech / @tynamite | Local stdio versus remote HTTP host requirements; service lifetime, auth/trust and timeout evidence still theirs | [#9 -> #27 accepted with constraints by @CompleteDotTech](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072); no MCP server suitability or deployment assertion |
+| #31 @tynamite / @appletechie | Host/storage ID reuse and training-estimate boundary; storage cost/locality/parallel-write, funding/deletion and inode caveats remain explicit | [#9 -> #31 accepted by @appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274): reuse existing IDs, retain missing SKU records and independent training sizing; no blanket billing/storage guarantee |
+| #37, #39 @appletechie / @PUSHINGSQUARES | Deployment constraints, unknown quota/capacity, storage/egress and conditions including post-delete billing; billing aggregation policy | Pending; research can be reviewed independently |
+| #13 @tynamite / @zabyxc01; #28 @CompleteDotTech / @PUSHINGSQUARES | Infrastructure product facts do not decide ACL propagation, retention, consent or deletion semantics | [#9 -> #28 accepted with constraints by @CompleteDotTech](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072); #13's storage/ACL boundary disposition remains separate |
 | #3, #40, #41 current coassignees; scoped response by @tynamite | Taxonomy; rule applicability/coverage; source/freshness/reuse | PR #75 accepts taxonomy with constraints, narrows rule intake and adopts interim policy; final contract and per-source rights work remain |
-| #5/#6/#7 @zwright8; #33 @appletechie | Model/API lifecycle and context assumptions; artifact access, adapter/merged weights and immutable provenance | Pending; not inferred from host artifact support |
+| #5 @zwright8 / @tynamite; #6 @zwright8 / @PUSHINGSQUARES; #7 @zwright8 / @appletechie; #33 @Mattycodes69 / @appletechie | Model/API lifecycle and context assumptions; artifact access, adapter/merged weights and immutable provenance | Pending for this hosting interface; not inferred from host artifact support or another directional receipt |
+
+The [2026-10-18 #9 co-owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225), reviewing main `9344f99325510adfe678382a4672246d028e87bc`, accepts **#27/#28 -> #9 with constraints from @Mattycodes69's scope**. Reuse existing hosting/storage IDs: local MCP needs evidenced subprocess support in the actual client runtime, self-hosted remote MCP needs its actual hosting placement, and vendor remote MCP needs evidenced reachability/egress. A URL/category proves neither process lifetime, private connectivity, OAuth/trust nor locality. Relational/object/file memory can reuse infrastructure storage; T4 retains application memory, consent, retention and history/backup erasure semantics, T3 retains knowledge/ACL and vector-product boundaries, and #37 retains deployment. Missing process/egress/locality fields and rules remain #40 proposals. No new host kind or deployment certification is accepted; @appletechie's co-owner disposition remains separate.
+
+The same receipt accepts **#10 -> #9 with constraints**: physical accelerators remain distinct from provisionable profiles. `aws-ec2-g6e-xlarge-us-east-1` version `2026-10-16` binds `aws-ec2` and `nvidia-l40s`; default CPU cores/vCPUs and source GiB/decimal GB remain distinct. Published regional offering and allocation do not establish stock, quota, free runtime memory or workload fit. Incomplete Runpod/A100/P4de profile evidence remains note-only. This reverse receipt is separate from #9 -> #10 above.
 
 | Question / follow-up owner | Required action and impact |
 | --- | --- |
 | Initial regions — #9 @Mattycodes69 / @appletechie | #3 imposes no region requirement and accepts US examples as samples; #9 still decides product coverage breadth. No global coverage commitment is inferred |
-| Current inventory and access — #9/#10 @Mattycodes69 | Obtain dated public/account availability and quota evidence only if a deployability claim is needed; keep unknown meanwhile |
+| Current inventory and access — #9/#10 @Mattycodes69 / @appletechie | Obtain dated public/account availability and quota evidence only if a deployability claim is needed; keep unknown meanwhile |
 | Invoice rounding — #39 live owners with Runpod | Specific network-volume hourly billing outranks generic wording; confirm sub-hour invoice rounding and avoid unsupported invoice predictions |
 | Storage units and transfer meters — #39/#40 live owners | Decimal GB is confirmed canonical by #40; preserve vendor GiB. Define aggregation and new transfer/IOPS/throughput/minimum fields only through versioned proposal; affected #9/#31/#39/#42 consumers remain |
-| Tier and allowance semantics — #39 @PUSHINGSQUARES | Adopt exact threshold/rounding/allowance aggregation before automatic costing; rates in notes/conditions do not implement tier logic |
-| Full residency and security — #35/#37 @PUSHINGSQUARES, #13 @zabyxc01 | Review all processing, routing, artifact and backup locations, agreement/report scope; host region alone is insufficient |
+| Tier and allowance semantics — #39 @appletechie / @PUSHINGSQUARES | Adopt exact threshold/rounding/allowance aggregation before automatic costing; rates in notes/conditions do not implement tier logic |
+| Full residency and security — #35/#37 @appletechie / @PUSHINGSQUARES, #13 @tynamite / @zabyxc01 | Review all processing, routing, artifact and backup locations, agreement/report scope; host region alone is insufficient |
 | Freshness/reuse — #41 @tynamite / @PUSHINGSQUARES | Interim version-pinned/current-state distinction and conflict order are adopted; per-source rights inventory and automated reuse remain unresolved |
-| Compatibility metadata — #40 @tynamite | Model mounted-volume relationship and evidence completeness, retain unknown behavior, review three rules; no v1 migration made here |
+| Compatibility metadata — #40 @zwright8 / @tynamite | Model mounted-volume relationship and evidence completeness, retain unknown behavior, review three rules; no v1 migration made here |
 
 ## Acceptance assessment and validation
 
@@ -211,7 +216,7 @@ The criteria below preserve the live issue wording. “Prepared” means an arti
 | Comparison fields defined with type, unit, and evidence requirement | Comparison-fields table | Prepared; #40 unit/completeness questions explicit |
 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [Three rule proposals](rules/hosting-rules.md) | Prepared; evidence-backed assertions separated from hypotheses; #40 approval pending |
 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Claim-level H01–H33 links and evidence table; published/estimate labels | Source accuracy rechecked against primary pages on 2026-10-16; owner accuracy/rights/freshness review pending |
-| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Handoff table, seven direct consumers | **Not satisfied:** no human acknowledgements yet |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Handoff table, seven direct consumers | **Not satisfied:** #10/#27/#31 have scoped receipts; #14/#15/#37/#39 remain unconfirmed. Additional #28 and reverse-direction receipts do not replace these four |
 | Open questions recorded with a named follow-up owner | Questions table using live assignees | Prepared; owner decisions pending |
 
 Validation is reported after running the canonical workflow by the integration orchestrator. Schema validity establishes structure/references only; it does not establish claim truth, freshness, licensing permission, stock, compatibility, owner acceptance or merge. The source review here checked the cited page conditions and preserved unresolved conflicts; it did not audit private compliance reports or run workloads.

@@ -17,7 +17,7 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 9.6 | Comparison fields defined with type, unit, and evidence requirement | [hosting.md](hosting.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 9.7 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [hosting.md](hosting.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 9.8 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [hosting.md](hosting.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 9.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #14/#15 @zabyxc01, #27 @CompleteDotTech, #31 @appletechie, #37/#39 @PUSHINGSQUARES | Pending owner confirmation |
+| 9.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #14/#15 @zabyxc01, #27 @CompleteDotTech, #31 @appletechie, #37/#39 @PUSHINGSQUARES | Partial scoped receipts: #10/#27/#31; #14/#15/#37/#39 pending; other co-owner scope separate |
 | 9.10 | Open questions recorded with a named follow-up owner | [hosting.md](hosting.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 10.1 | Sizing method with assumptions and uncertainty documented | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 10.2 | Measured values cite their source and conditions; estimates are labelled | [gpu-compute.md](gpu-compute.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
@@ -27,7 +27,7 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 10.6 | Comparison fields defined with type, unit, and evidence requirement | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 10.7 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [gpu-compute.md](gpu-compute.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 10.8 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [gpu-compute.md](gpu-compute.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Pending owner confirmation |
+| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Partial scoped receipts: #9/#11/#31; #39 pending; other co-owner scope separate |
 | 10.10 | Open questions recorded with a named follow-up owner | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 11.1 | Support matrix keyed by engine version with sources | [inference-engine.md](inference-engine.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 11.2 | Rules in the #40 format, including `unknown` for unverified combinations | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
@@ -36,12 +36,12 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 11.5 | Comparison fields defined with type, unit, and evidence requirement | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 11.6 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [inference-engine.md](inference-engine.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 11.7 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [inference-engine.md](inference-engine.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 11.8 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #25 @CompleteDotTech, #33 @appletechie, #37/#38 @PUSHINGSQUARES | Pending owner confirmation |
+| 11.8 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #25 @CompleteDotTech, #33 @appletechie, #37/#38 @PUSHINGSQUARES | Partial scoped receipts: #10/#25/#33; #37/#38 pending; other co-owner scope separate |
 | 11.9 | Open questions recorded with a named follow-up owner | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 
 ## Baseline and tracking audit
 
-Publication: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), with issue-specific progress and handoff requests linked from [handoffs.md](handoffs.md#posted-requests-not-acknowledgements). No owner acceptance or merge is inferred from publication; every Pending status remains pending.
+Publication: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), with issue-specific progress and handoff requests linked from [handoffs.md](handoffs.md#posted-requests-not-acknowledgements). The original publication did not establish acceptance. Current receipt assessments above follow the linked 2026-10-18 ledger; historical intake observations below retain their dates.
 
 - Initial intake default branch `main` at `324518ff8d9629fbb7cd4f2d6a27dcc219300fd4`; PR #44 merged at `9769fcd9ea380b1211669b2753181c7782444178` on 2026-10-16. PR #45 also merged. No T2 records or proposals were present on that default-branch baseline. Continuation reuses existing PR #75 and its records rather than treating them as new findings.
 - Native relationships read through GitHub GraphQL: #8 has #9/#10/#11; each child's parent is #8; none has `blockedBy` relationships. No relationships are changed.
@@ -57,7 +57,11 @@ note-only consumption of #61 observations, and a future build-bound estimate
 placement. This supports prepared content for 10.1/10.2/10.10; it does not accept
 those criteria or supply calibration. Both live #10 co-owners, @Mattycodes69 and
 @appletechie, must disposition the proposal. For 10.9, the existing #31 scoped
-receipt is present; #9/#11/#39 receiving decisions remain separate. #61's full
+receipt is present; Mattycodes69's #9/#11 interface receipts are now linked in the ledger, while #39 and other co-owner decisions remain separate. Those receipts do not accept headroom, calibration or estimate placement. #61's full
 empirical coverage, matching estimator errors and coordinator evidence acceptance
 remain open in its [current acceptance map](../market/mr09-acceptance.md#current-1061-continuation-map-2026-10-18).
 No acceptance criterion, assignee, native relationship or Project value changes.
+
+## Scoped interface reconciliation (2026-10-18)
+
+Live owners: #8/#11 @zwright8 and @Mattycodes69; #9/#10 @Mattycodes69 and @appletechie. The [ledger](handoffs.md) credits each actual receipt author without treating it as approval by every co-owner. Existing merged record gates are complete; remaining full acceptance criteria stay open. Project readback again returned `INSUFFICIENT_SCOPES` for `read:project`; no board values are claimed or changed.
