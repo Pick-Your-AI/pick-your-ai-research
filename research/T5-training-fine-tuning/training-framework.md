@@ -13,6 +13,8 @@ The answer depends on three joint facts: the base model's license and weight acc
 - **Managed:** cloud fine-tuning services (Vertex AI, Bedrock, Microsoft Foundry, Together, Fireworks). Some return downloadable weights or adapters.
 - **Self-hosted:** open frameworks run on user compute (TRL, PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NVIDIA NeMo stack, torchtune).
 
+These three labels group **training channels**, not deployment modes. T0's deployment mode (#3) decides the mode by who operates the *serving* runtime and on what capacity ([PR #81](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81), pending), and that definition governs serving. A fine-tuned model's serving mode follows T0, not the channel used to train it. For example, a LoRA trained on Together, downloaded as an adapter and served with its matching base model on user-operated compute would be T0 "Self-hosted", even though it is listed above as a managed training channel ([Together deployment documentation](https://docs.together.ai/docs/fine-tuning/deployment#run-locally), accessed 2026-10-17). T0 defines no mode for a training run; see K-08 in #31.
+
 Compute sizing (#31) and dataset preparation (#32) are out of scope.
 
 ## Candidate options

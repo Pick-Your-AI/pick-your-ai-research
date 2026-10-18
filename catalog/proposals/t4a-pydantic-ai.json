@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.pydantic-ai",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "Pydantic AI",
+  "version": "2.57.0",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true
+  },
+  "description": "Typed Python agent loop with structured outputs, deferred tools for human approval, durable execution integrations (Temporal, DBOS, Prefect and others) and OpenTelemetry instrumentation.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/pydantic-ai/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "version 2.57.0 uploaded 2026-10-16; license MIT; requires_python >=3.11"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/pydantic/pydantic-ai/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "license MIT"
+    },
+    {
+      "source_uri": "https://github.com/pydantic/pydantic-ai/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_tool_execution: function tools and toolsets"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/pydantic/pydantic-ai/main/docs/mcp/client.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_mcp: MCPToolset over Streamable HTTP, SSE and stdio"
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

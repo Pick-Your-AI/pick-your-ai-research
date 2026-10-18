@@ -112,13 +112,14 @@
     "id": "src-hugging-face",
     "url": "https://huggingface.co/models",
     "supporting_urls": [
-      "https://huggingface.co/docs/hub/model-cards"
+      "https://huggingface.co/docs/hub/model-cards",
+      "https://huggingface.co/docs/hub/repositories-getting-started"
     ],
     "publisher": "Hugging Face",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -126,12 +127,14 @@
   {
     "id": "src-arena",
     "url": "https://arena.ai/",
-    "supporting_urls": [],
+    "supporting_urls": [
+      "https://arena.ai/leaderboard"
+    ],
     "publisher": "Arena",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -195,13 +198,14 @@
     "id": "src-modelfit",
     "url": "https://modelfit.io/",
     "supporting_urls": [
-      "https://modelfit.io/data/"
+      "https://modelfit.io/data/",
+      "https://modelfit.io/api/dataset/"
     ],
     "publisher": "ModelFit / @wecko-ai package",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -209,12 +213,14 @@
   {
     "id": "src-ollama",
     "url": "https://ollama.com/library",
-    "supporting_urls": [],
+    "supporting_urls": [
+      "https://docs.ollama.com/quickstart"
+    ],
     "publisher": "Ollama",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -265,13 +271,14 @@
     "url": "https://dify.ai/",
     "supporting_urls": [
       "https://docs.dify.ai/en/home",
-      "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
+      "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE",
+      "https://docs.dify.ai/en/cloud/use-dify/workspace/app-management"
     ],
     "publisher": "LangGenius",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -307,13 +314,14 @@
     "url": "https://n8n.io/",
     "supporting_urls": [
       "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
-      "https://n8n.io/pricing/"
+      "https://n8n.io/pricing/",
+      "https://docs.n8n.io/build/manage-workflows/export-and-import.md"
     ],
     "publisher": "n8n",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -322,13 +330,14 @@
     "id": "src-skypilot",
     "url": "https://skypilot.co/",
     "supporting_urls": [
-      "https://docs.skypilot.ai/en/latest/docs/index.html"
+      "https://docs.skypilot.ai/en/latest/docs/index.html",
+      "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html"
     ],
     "publisher": "SkyPilot",
     "access_date": "2026-10-16",
     "access_status": "retrieved",
     "evidence_grade": "Primary documentation",
-    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
+    "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
     "confidence": "Medium"
@@ -749,6 +758,19 @@
     "limitations": "Public device directory read only. Recommendations are vendor claims; no device workflow or inference was run. Pricing, methodology, API, code licence and data reuse rights unverified. robots.txt allows all paths except /api/ and /og/; a later automated re-check returned HTTP 403 (bot challenge) and was not bypassed.",
     "version": "Public page retrieved 2026-10-16; no software revision pinned",
     "region": "Global public website; not a regional offering or price quote",
+    "confidence": "Medium"
+  },
+  {
+    "id": "src-gpus-io-20261017",
+    "url": "https://gpus.io/en",
+    "supporting_urls": [],
+    "publisher": "GPUs.io; legal entity not established by this page check",
+    "access_date": "2026-10-17",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Fresh public-page inspection shows GPU/provider/hourly rental-rate rows. Not a validated rate quote, legal-operator determination, successful rental or independent measurement. Preserve earlier src-gpus-io and src-gpus-io-recheck contradictory historical access records.",
+    "version": "Public page inspected2026-10-17; no immutable page revision",
+    "region": "Global comparison page; no regional quote",
     "confidence": "Medium"
   },
   {

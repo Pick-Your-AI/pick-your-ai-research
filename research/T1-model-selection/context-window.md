@@ -15,6 +15,12 @@ The [selection-limit supplement](nontext-selection-limits.md) records model- and
 
 ## Candidate options
 
+### Scope extension beyond text-token contexts
+
+The2026-10-17 [model-family study](model-taxonomy.md) adds models whose meaningful admission constraints are samples/channels/characters, frames/fps, pixels/bytes/pages, rows/features, forecast steps, molecular units, geometry or action horizons. See the cited [audio](audio-models.md), [media](generative-media-models.md), [perception](perception-models.md) and [specialized](specialized-models.md) tables. Their published examples, training lengths, recommended windows, minimum buffers and hard maxima have different meanings; no numeric conversion to text tokens is justified without an actual matching tokenizer/processor and source semantics.
+
+Preserve the accepted shared/separate language-budget rules below. New non-token tasks remain note-only where v1's required model token fields cannot be populated truthfully. [T1-TAX1](model-family-contract-proposal.md) proposes typed per-stage input/output/shape limits through #40/CD-5/CD-6/CD-11. A composed OCR, codec, diffusion or action pipeline needs its own stage/processor identity; it does not automatically share a text-autoregressive KV-cache model. #10/#11 own matched resource/runtime methodology, #36 selected quality targets and #39 task-specific billing. This extension changes no frozen rule or accepted conservative-bound/native-limit policy.
+
 All limits below are **published** specifications, not measurements. Numbers are tokens. `Unknown` is not zero. The sources are linked in the evidence register; descriptions of effective quality remain vendor claims unless independently measured.
 
 | Offering / version | Input / output / combined limit | Override and counting conditions | Evidence |
