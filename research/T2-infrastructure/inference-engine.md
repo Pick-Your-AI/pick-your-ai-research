@@ -216,15 +216,15 @@ This follow-up corrects all **11 provenance entries** across the three engine pr
 
 ## Open questions and handoffs
 
-The 2026-10-18 live issue/comment readback preserves #11 coassignees @Mattycodes69 and @zwright8. Scoped receiving-owner receipts now exist for #10, #25 and #33; the 2026-10-18 @appletechie #37/#38 responses are recorded below with integration limits. @PUSHINGSQUARES's own scope remains separate. The links below record the actual commenter and direction, without treating shared assignment, E27 central decisions or an incoming receipt as another owner's acceptance. Main-matrix vendor-source access dates and the historical validation paragraphs remain unchanged.
+The 2026-10-18 live issue/comment readback preserves #11 coassignees @Mattycodes69 and @zwright8. Scoped receiving-owner receipts exist for #10, #25 and #33; both T6 co-owners' #37/#38 responses are recorded below with their individual pins and limits. The links record the actual commenter and direction, without treating shared assignment, E27 central decisions or an incoming receipt as another owner's acceptance. Main-matrix vendor-source access dates and the historical validation paragraphs remain unchanged.
 
 | Required #11 consumer | Live assignees | Concrete handoff / required confirmation | State |
 | --- | --- | --- | --- |
 | #10 GPU / Compute | @Mattycodes69, @appletechie | Accept exact-release hardware/kernel caveats, adapter/KV inputs and non-pooling assumption for sizing. Reconcile v0.31.0 CUDA minimum against historical v0.10.2 estimates. | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057), from that co-owner's scope; [@appletechie's later scoped acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) separately preserves exact-release build/quantization/KV/adapter constraints and non-pooling. Historical calculations remain pinned; a fit screen does not establish engine support or an SLO. |
 | #25 Agent Framework | @CompleteDotTech, @Mattycodes69 | Accept conditional tool/schema/API contract, propose consumer request/response fixtures and required endpoints. | [Accepted with constraints by @CompleteDotTech](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334): preserve the complete request/runtime tuple; synthetic consumer specifications do not certify execution. |
 | #33 Fine-Tuned Model | @appletechie, @Mattycodes69 | Confirm adapter vs merged artifact semantics, immutable base/tokenizer lineage, rank/layout/targets and provider lock-in treatment. | [Accepted with tokenizer/template narrowing by @appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684): #33 records added tokens and training template; #32 owns the training-data template; #11 determines engine support. |
-| #37 Deployment | @appletechie, @PUSHINGSQUARES | Accept version/build/plugin pins, model/adapter loading checks and admin endpoint exposure constraints. | [Accepted by @appletechie, integration pending](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428), reviewing main `66b46d4` on 2026-10-18. [#246](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/246) subsequently delivered the ENGINE group-to-readiness map and loader-policy reconciliation. The original receipt retains its earlier pin; @PUSHINGSQUARES's disposition and actual deployment evidence are not inferred. |
-| #38 Monitoring | @appletechie, @PUSHINGSQUARES | Accept release-specific signal mapping and measurement/privacy inputs; define thresholds from workload evidence. | [Narrowed by @appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428), reviewing main `66b46d4` on 2026-10-18: labels/evidence requirements are accepted as inputs. [#246](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/246) subsequently delivered the exact-release source mapping; actual metric exposition, acceptance of that integration and @PUSHINGSQUARES's privacy/threshold scope remain separate. |
+| #37 Deployment | @appletechie, @PUSHINGSQUARES | Accept version/build/plugin pins, model/adapter loading checks and admin endpoint exposure constraints. | [@appletechie's historical accept, integration-pending response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428) retains `66b46d4`. [@PUSHINGSQUARES confirms with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6247689868), checking `9192d5d`: #246's ENGINE map is delivered; engine routes use S45/R30 rather than tool/MCP check R18. Research mapping is accepted without an executable rule, selected tuple or actual deployment result. |
+| #38 Monitoring | @appletechie, @PUSHINGSQUARES | Accept release-specific signal mapping and measurement/privacy inputs; define thresholds from workload evidence. | [@appletechie's historical narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428) retains `66b46d4`. [@PUSHINGSQUARES narrows](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6247689868), checking `9192d5d`: source-reconciled signals and version/build/config evidence fields are inputs, not required metric labels. `_total` exposition still needs a live scrape; missing series are unavailable, not zero. New llama.cpp signal IDs wait for a selected build/tuple. |
 
 For the reciprocal **#25 → #11** direction, [@zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6242698282) and [@Mattycodes69's co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677) each accept with constraints. Preserve engine/build/plugins/backend, model/tokenizer revisions, quantization and adapter/base lineage, template/parser, endpoint, request controls/`tool_choice`, strictness/schema/grammar, streaming/parallel behavior and decoding mode. T4 supplies consumer specifications; #11 retains support evidence and execution scope. Unsupported controls stay scoped exclusions and missing eligible evidence stays unknown. Historical minimum-version or Ollama statements are not adopted as current T2 support or a new candidate selection. FC-5/FC-7 below the linked baseline address the requested additional specification details; no runtime case was executed here.
 
@@ -269,10 +269,10 @@ Follow-up validation on **2026-10-17**, Python **3.12.14**: the shared runtime's
 | Comparison fields defined with type, unit and evidence requirement | Comparison-fields table | Research artifact criterion satisfied: 15 field groups define types, units or non-numeric semantics, and evidence requirements; canonical fields are distinguished from note-only proposals. |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Proposed rules, sourced premises, evidence status | Research artifact criterion satisfied: fixed severities, outcomes, applicability, unknown policy and synthetic examples are explicit. The proposals make no independently verified joint-compatibility claim. |
 | Every factual/numeric claim primary-sourced with access date and relevant conditions | Claim-source matrices and dated evidence table; build supplement | Research artifact criterion satisfied for the bounded documentation findings: E01–E28/H01–H09 and the separately dated supplement preserve primary locators, versions, access dates and claim conditions. No fresh vendor measurement or blanket source recheck is claimed by this criterion audit. |
-| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table | Scoped #10/#25/#33 receipts linked; appletechie accepts #37 with integration pending and narrows #38 to inputs. PUSHINGSQUARES and remaining co-owner decisions are separate; no complete handoff acceptance claimed. |
+| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table; dated T6 receipt below | Scoped #10/#25/#33 receipts linked. Appletechie's #37/#38 response retains `66b46d4`; PUSHINGSQUARES's later `9192d5d` response confirms the delivered #37 research map with constraints and narrows #38 to evidence inputs. Final criterion assessment must preserve each receipt's scope; no runtime or another owner's acceptance is inferred. |
 | Open questions recorded with named follow-up owner | Open-decision table | Research artifact criterion satisfied: retention, exact tuples, plugins/builds, lineage, context, managed-version disclosure and source policy each have named follow-up owners. Recording a question does not accept the owner's decision. |
 
-This issue remains open because complete receiving acceptance is not established. The #246 source integration is delivered; the #37/#38 receipts keep their original scope and revision, while acceptance of the later integration and the other receiving-owner scopes remain visible. Mattycodes69's retention/lifecycle concurrence and #42's receiving decision are also still recorded as unresolved decisions. Exact installed tuples and a versioned executable ruleset remain future work in their owning scopes; the literal research criteria above require documented evidence, proposals and handoffs, and do not add an engine-execution requirement. The merged supplement does not certify an installed tuple. GitHub checklists and Project values must follow the reviewed criterion assessment and actual receiving evidence.
+This issue remains open pending final assessment of the scoped receiving evidence. The #246 source integration is delivered, and the later PUSHINGSQUARES response below records its #37 confirmation and #38 narrowing without rewriting appletechie's earlier response. Mattycodes69's retention/lifecycle concurrence and #42's receiving decision are still recorded as unresolved decisions. Exact installed tuples and a versioned executable ruleset remain future work in their owning scopes; the literal research criteria above require documented evidence, proposals and handoffs, and do not add an engine-execution requirement. The merged supplement does not certify an installed tuple. GitHub checklists and Project values must follow the reviewed criterion assessment and actual receiving evidence; this attribution correction does not change them.
 
 ### Criterion and integration audit — 2026-10-18
 
@@ -288,11 +288,34 @@ owner or permission to close #11.
 [ENGINE-to-T6 integration](../T6-deployment-operations/engine-input-integration.md).
 Its [independent review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/246#pullrequestreview-5561658476)
 checks the source mapping and loader-policy distinctions. That technical review
-does not rewrite appletechie's earlier receiving response or supply
-PUSHINGSQUARES's decision. Live exposition, thresholds and deployment execution
+does not rewrite appletechie's earlier receiving response or itself supply
+PUSHINGSQUARES's later decision recorded below. Live exposition, thresholds and deployment execution
 remain unclaimed. The matrix's vendor access dates and all catalog provenance
 remain unchanged by this audit.
 
+
+### T6 receiving disposition — 2026-10-18
+
+[@PUSHINGSQUARES's comment 6247689868](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6247689868),
+posted at 2026-10-18T08:34:32Z after checking main
+`9192d5d6994b644ebbb81344300fda48db6d29a8`, supplies the previously missing T6
+co-owner response. It credits appletechie's earlier `66b46d4` receipt without
+claiming that co-owner reviewed the later integration.
+
+| Direction | Actual disposition and correction | Retained boundary |
+| --- | --- | --- |
+| #11 → #37 | Confirm with constraints: #246's ENGINE-01–04 readiness/source map is delivered. The receipt identifies engine-route coverage at S45/R30; R18 is the separate tool/MCP credential check. | Research mapping only. No tuple is selected and each selected service still needs its own exact build/runtime evidence; no executable rule is approved. |
+| #11 → #38 | Narrow to exact-release source/evidence inputs. Version/build/config are evidence-record fields, not required exported metric labels; the vLLM V1 logger's actual `model_name`/`engine` labels stay distinct. | SG74/SG75 `_total` forms still need live scrape confirmation. Missing series remain unavailable, not zero; client headers do not supply labels. New llama.cpp SG IDs wait for a selected build/tuple. |
+
+The receipt explicitly identifies these as consuming co-owner research
+dispositions, not an independent runtime check or completion of #11/#37/#38.
+It supersedes statements that PUSHINGSQUARES has supplied no #37/#38 response;
+it does not broaden the earlier appletechie pin or convert source mapping into
+metric exposition. The existing owners should assess criterion11.8 against these
+actual scoped receipts and identify any precise remaining handoff requirement.
+No new execution requirement, source fact, lifecycle adoption or closure is
+introduced by recording the response. The canonical market #59 ledger and all
+issue metadata remain with their existing owners.
 
 ### Lifecycle and receipt follow-up validation — 2026-10-18
 
