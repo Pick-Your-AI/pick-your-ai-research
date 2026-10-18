@@ -595,6 +595,75 @@ selects a query/result candidate over CD-1; conflict resolution over real
 sources, affected-owner adoption and the versioned ruleset/adapter remain
 separate. Frozen v1 and #42's prerequisite are unchanged.
 
+### CD-3 scoped source evidence candidate (2026-10-18)
+
+Completeness constraint 3 in [the owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires evidence to say which version, date and scope its result covers.
+The existing typed query below already retains query/cohort versions and the
+exact selected scope; its closed cohort reference has no dated source register.
+The [separate claim](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252536259)
+therefore adds a test-only carrier and admission wrapper, without changing the
+existing query, reducer, binding schema or frozen v1. The before/control case
+executes the actual current query: its qualified matching-scope control passes,
+while adding a source URI or check date to its cohort rejects the closed shape.
+This preserves the earlier binding's documented boundary.
+
+The [new schema](../../tests/fixtures/support-evidence-admission.schema.json),
+[synthetic record](../../tests/fixtures/support-evidence-admission.json),
+[computed synthetic result](../../tests/fixtures/support-evidence-admission-result.json),
+[wrapper](../../tests/support_evidence_admission_prototype.py) and
+[regressions](../../tests/test_support_evidence_admission.py) select the explicit
+research proposal `cd3-evidence-0.1` over `cd3-0.3`. Unsupported versions reject;
+there is no implicit migration or latest-version selection.
+
+| Retained field | Meaning and admission boundary |
+| --- | --- |
+| Original query-byte SHA-256 | Binds the complete query, including its exact original answer-byte digest; reformatting either retained input requires a new matching identity |
+| Query, cohort and scope | Complete query identity/severity/quantifier, cohort ID/version, and all existing selection/catalog/item/version/kind/property/conditions dimensions must exactly match the retained query |
+| Source register | One to 32 explicitly named source ID/revision pairs with `source_uri` and `checked_at`; duplicate pairs reject, and all entries retain their order and original strings |
+| Caller qualification | `source_qualified: true / false / null` plus the SHA-256 of the exact source-record bytes the caller actually qualified; a missing or mismatched receipt leaves admission unresolved |
+| Result | Complete dated source register and its original byte hash, requested and effective qualification context, plus the unchanged full membership result and all operand states/findings |
+
+The carrier covers one already normalized, scoped and ranked cohort. It does
+not map individual membership claims to individual sources within that cohort.
+The caller must establish that every retained source applies to this exact
+coverage and that preceding conflicts/ranks were resolved under
+[#41's evidence policy](catalog-data-sources.md#conflict-resolution). A nonempty
+register, matching digest, source ID or valid timestamp establishes neither
+that review nor source truth, publisher authority, rights or current eligibility.
+
+The wrapper validates the complete source record before any applicability
+shortcut. It reuses the existing conservative public HTTP(S) locator checks and
+requires query-free URLs, preserving section fragments. This avoids storing
+signed URL query parameters; it does not fetch a URL or prove public access.
+The existing timestamp profile validates actual Gregorian dates, explicit
+offsets and fractional precision without optional format-checker packages or
+normalizing the retained strings. The carrier is limited to 64 KiB, with the
+schema's explicit source/string bounds; exceeding this prototype profile is an
+input rejection, not an incompatibility finding.
+
+Qualified source admission is additional to the existing independently supplied
+applicability, requested values/completeness and cohort qualifications. It can
+withhold an otherwise eligible cohort, but cannot override an ineligible one.
+The membership result keeps its existing reasoned unknown/skipped dispositions
+and fixed severity. Checked-only provenance remains a separate per-invocation
+fact from the canonical label candidate: no date, URI or successful admission
+supplies that grade. Neither eligibility nor a label is reused from a prior call.
+
+The full-result verifier recomputes against the caller's current context and
+compares every field. A changed check date, source revision, URI, scope, digest,
+qualification or membership result cannot certify itself, including changes
+that leave the verdict the same. Output JSON formatting may differ; retained
+input bytes cannot. Returned objects are detached from the retained records.
+
+No maximum evidence age is invented. Dates remain dated observations; version
+or source corrections, current-state eligibility, rights and rank qualification
+stay with the caller under #41. All committed inputs are explicitly synthetic;
+their placeholder source path was not fetched and their qualification flags
+claim no real review. This supplies bounded carrier/admission mechanics for
+constraint 3, not successor wire adoption, actual source resolution, the separate
+two-rule adapter, or completion of #40/#41/#42 and their receiving handoffs.
+
 ### CD-3 typed support query and result candidate (2026-10-18)
 
 **Selected research design:** bind the corrected membership reducer through
