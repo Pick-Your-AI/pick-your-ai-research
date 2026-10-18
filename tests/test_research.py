@@ -69,6 +69,42 @@ class Intake(unittest.TestCase):
         self.item['spec']['unsupported_claim'] = True
         self.assertTrue(intake_errors([self.item], []))
 
+    def test_absolute_dns_reserved_sources_rejected(self):
+        for uri in ('https://example.com./claim', 'https://example.org./claim',
+                    'https://example.net./claim', 'https://models.example./claim',
+                    'https://localhost./claim', 'https://models.test./claim',
+                    'https://models.invalid./claim'):
+            with self.subTest(uri=uri):
+                item = copy.deepcopy(self.item)
+                item['provenance'][0]['source_uri'] = uri
+                self.assertTrue(intake_errors([item], []))
+                rate = {'id': 'test.rate', 'catalog_item_id': self.item['id'],
+                        'catalog_item_version': '1', 'meter': 'request',
+                        'unit_price': {'amount': '0.1', 'currency': 'USD'},
+                        'valid_from': '2026-10-16T09:00:00Z',
+                        'provenance': item['provenance'][0], 'price_type': 'estimate'}
+                book = {'schema_version': '1.0.0', 'id': 'test.prices', 'revision': 1,
+                        'captured_at': '2026-10-16T09:00:00Z', 'rates': [rate]}
+                self.assertTrue(intake_errors([self.item], [book]))
+        self.item['provenance'][0]['source_uri'] = 'https://github.com./Pick-Your-AI'
+        self.assertEqual(intake_errors([self.item], []), [])
+
+    def test_lowercase_rfc3339_price_validity_ordering(self):
+        rate = {'id': 'test.rate', 'catalog_item_id': self.item['id'],
+                'catalog_item_version': '1', 'meter': 'request',
+                'unit_price': {'amount': '0.1', 'currency': 'USD'},
+                'valid_from': '2026-10-16t09:00:00z',
+                'valid_until': '2026-10-17t09:00:00z',
+                'provenance': self.item['provenance'][0], 'price_type': 'estimate'}
+        book = {'schema_version': '1.0.0', 'id': 'test.prices', 'revision': 1,
+                'captured_at': '2026-10-16T09:00:00Z', 'rates': [rate]}
+        self.assertEqual(intake_errors([self.item], [book]), [])
+        for end in ('2026-10-16t09:00:00z', '2026-10-15t09:00:00z'):
+            with self.subTest(valid_until=end):
+                rate['valid_until'] = end
+                self.assertIn('test.rate: valid_until must follow valid_from',
+                              intake_errors([self.item], [book]))
+
     def test_tier_and_fixture_id_rejected(self):
         self.item['tier'] = 'T2'
         self.assertTrue(intake_errors([self.item], []))

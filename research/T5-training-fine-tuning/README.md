@@ -114,7 +114,7 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 
 #33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature` and `base_notice_file_present` (needed by A-18c), plus revision-pinned catalog references.
 
-## Handoffs (none confirmed)
+## Outgoing handoffs (none confirmed)
 
 | Handoff | From | To | Owner |
 | --- | --- | --- | --- |
@@ -128,6 +128,8 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 | User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @tynamite |
 | Rule format and contract changes; "competing model" policy | all | #40 | @tynamite |
 | Evidence grading (checked vs verified), price freshness | all | #41 | @tynamite |
+
+Incoming T2 boundaries have separate receiving-owner receipts: [#9 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274), [#10 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484), and [#11 → #33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684). These accept reuse of existing records and narrow tokenizer/template ownership; they do not accept the reverse-direction requests in this table or supply missing catalog records. The receipts were read back on 2026-10-18.
 
 Owners are the live GitHub assignees as of 2026-10-16 and are not duplicated elsewhere.
 

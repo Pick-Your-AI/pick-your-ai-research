@@ -1,0 +1,1634 @@
+{
+  "format": "research-notes-not-catalog",
+  "status": "partial_source_checked_not_accepted",
+  "accessed_on": "2026-10-18",
+  "scope": "T1 model-specific limit, representation and route evidence. No inference, capacity benchmark, pricebook, approved rule or new schema.",
+  "method": {
+    "sources": "Publisher documentation and pinned code/configuration; checked source claims remain unverified as runtime behavior.",
+    "coverage": "Four task territories with targeted skeptical expansion; not an exhaustive census.",
+    "unknowns": "Explicit unknowns and source disagreements retained. Numeric defaults/examples/training shapes are not promoted to unconditional maxima.",
+    "conflict_resolution": "Apply #41 scope, version/date and authority order; conservative equal-rank numeric value with disputed=true. Unknown only for missing eligible evidence or genuine ties. disputed=false means no conflict recorded here, not verified runtime behavior."
+  },
+  "sources": [
+    {
+      "id": "EL-S1",
+      "publisher": "Cohere",
+      "urls": [
+        "https://docs.cohere.com/docs/cohere-embed",
+        "https://docs.cohere.com/v2/reference/embed",
+        "https://docs.cohere.com/v1/docs/embeddings"
+      ],
+      "scope": "Direct Cohere v2 Embed API; model rows distinguish v4/v5",
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S2",
+      "publisher": "Voyage AI",
+      "urls": [
+        "https://docs.voyageai.com/docs/embeddings",
+        "https://docs.voyageai.com/reference/embeddings-api"
+      ],
+      "scope": "Voyage v1 text embeddings API",
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S3",
+      "publisher": "Voyage AI",
+      "urls": [
+        "https://docs.voyageai.com/docs/contextualized-chunk-embeddings"
+      ],
+      "scope": "voyage-context-4; SDK and server auto-chunking conditions",
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S4",
+      "publisher": "Qwen",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/raw/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/README.md",
+        "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/raw/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/config.json"
+      ],
+      "scope": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S5",
+      "publisher": "BAAI",
+      "urls": [
+        "https://huggingface.co/BAAI/bge-m3/raw/5617a9f61b028005a4858fdac845db406aefb181/README.md"
+      ],
+      "scope": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S6",
+      "publisher": "Vidore",
+      "urls": [
+        "https://huggingface.co/vidore/colpali-v1.3/raw/b5c6dd62125326e6f0b540c1f7b36e901cdc0a11/README.md",
+        "https://huggingface.co/vidore/colpali-v1.3/raw/b5c6dd62125326e6f0b540c1f7b36e901cdc0a11/1_Dense/config.json"
+      ],
+      "scope": "vidore/colpali-v1.3",
+      "revision": "b5c6dd62125326e6f0b540c1f7b36e901cdc0a11",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S7",
+      "publisher": "intfloat",
+      "urls": [
+        "https://huggingface.co/intfloat/multilingual-e5-large/raw/3d7cfbdacd47fdda877c5cd8a79fbcc4f2a574f3/README.md"
+      ],
+      "scope": "intfloat/multilingual-e5-large",
+      "revision": "3d7cfbdacd47fdda877c5cd8a79fbcc4f2a574f3",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "EL-S8",
+      "publisher": "Jina AI",
+      "urls": [
+        "https://huggingface.co/jinaai/jina-embeddings-v4/raw/853c867b65b749f3c3c72a06868140d842e04f06/README.md"
+      ],
+      "scope": "jinaai/jina-embeddings-v4",
+      "revision": "853c867b65b749f3c3c72a06868140d842e04f06",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S1",
+      "publisher": "OpenAI",
+      "scope": "local Whisper transcribe()",
+      "urls": [
+        "https://github.com/openai/whisper/blob/86098128c0b4f24f0e2aa2994de830614b474227/README.md#L125",
+        "https://github.com/openai/whisper/blob/86098128c0b4f24f0e2aa2994de830614b474227/whisper/audio.py#L13-L17"
+      ],
+      "revision": "86098128c0b4f24f0e2aa2994de830614b474227",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S2",
+      "publisher": "OpenAI",
+      "scope": "hosted transcription guide versus legacy whisper-1 FAQ",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/speech-to-text#longer-inputs",
+        "https://help.openai.com/en/articles/7031512-audio-api-faq"
+      ],
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S3",
+      "publisher": "OpenAI",
+      "scope": "Realtime session lifecycle",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/realtime-conversations#session-lifecycle-events"
+      ],
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S4",
+      "publisher": "ElevenLabs",
+      "scope": "model-specific TTS API character limits",
+      "urls": [
+        "https://elevenlabs.io/docs/overview/models#character-limits"
+      ],
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S5",
+      "publisher": "ElevenLabs",
+      "scope": "website TTS plan limits",
+      "urls": [
+        "https://elevenlabs.io/docs/eleven-creative/playground/text-to-speech"
+      ],
+      "revision": "mutable documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S6",
+      "publisher": "Qwen",
+      "scope": "Qwen3-ASR official Python wrapper",
+      "urls": [
+        "https://github.com/QwenLM/Qwen3-ASR/blob/7c6daf77a2421100f5fb066495372c00129d39ff/qwen_asr/inference/utils.py#L33-L36",
+        "https://github.com/QwenLM/Qwen3-ASR/blob/7c6daf77a2421100f5fb066495372c00129d39ff/qwen_asr/inference/utils.py#L246-L314",
+        "https://github.com/QwenLM/Qwen3-ASR/blob/7c6daf77a2421100f5fb066495372c00129d39ff/qwen_asr/inference/qwen3_asr.py#L366-L377",
+        "https://github.com/QwenLM/Qwen3-ASR/blob/7c6daf77a2421100f5fb066495372c00129d39ff/README.md#L65"
+      ],
+      "revision": "7c6daf77a2421100f5fb066495372c00129d39ff",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S7",
+      "publisher": "hexgrad",
+      "scope": "Kokoro raw phoneme pipeline/model",
+      "urls": [
+        "https://github.com/hexgrad/kokoro/blob/dfb907a02bba8152ca444717ca5d78747ccb4bec/kokoro/pipeline.py#L272-L277",
+        "https://github.com/hexgrad/kokoro/blob/dfb907a02bba8152ca444717ca5d78747ccb4bec/kokoro/model.py#L128-L131",
+        "https://huggingface.co/hexgrad/Kokoro-82M/blob/f3ff3571791e39611d31c381e3a41a3af07b4987/config.json"
+      ],
+      "revision": "code dfb907a02bba8152ca444717ca5d78747ccb4bec; checkpoint f3ff3571791e39611d31c381e3a41a3af07b4987",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S8",
+      "publisher": "Nari Labs",
+      "scope": "Dia voice-cloning reference recommendation",
+      "urls": [
+        "https://github.com/nari-labs/dia/blob/876125e461a03b157ec905b0fe8b57a0f8b9e7a0/README.md#L42"
+      ],
+      "revision": "876125e461a03b157ec905b0fe8b57a0f8b9e7a0",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S1",
+      "publisher": "Black Forest Labs",
+      "scope": "FLUX.2 dimension guide",
+      "urls": [
+        "https://help.bfl.ai/articles/8916739058-what-aspect-ratios-and-output-dimensions-are-supported"
+      ],
+      "revision": "page update 2026-06-12; accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S2",
+      "publisher": "Black Forest Labs",
+      "scope": "FLUX.2 image editing API versus playground",
+      "urls": [
+        "https://docs.bfl.ai/flux_2/flux2_image_editing"
+      ],
+      "revision": "mutable publisher documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S3",
+      "publisher": "Black Forest Labs",
+      "scope": "FLUX3 video API and resolution guide",
+      "urls": [
+        "https://docs.bfl.ai/api-reference/utility/generate-a-video-with-flux-3",
+        "https://docs.bfl.ai/flux_3/flux3_video#resolution"
+      ],
+      "revision": "mutable publisher documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S4",
+      "publisher": "Runway",
+      "scope": "gen4.5 image_to_video route",
+      "urls": [
+        "https://docs.dev.runwayml.com/api.md"
+      ],
+      "revision": "API header 2024-11-06; mutable spec accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S5",
+      "publisher": "Google",
+      "scope": "Gemini image generation; model and image-size combinations",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/image-generation"
+      ],
+      "revision": "page update 2026-10-09; accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S6",
+      "publisher": "Google",
+      "scope": "Veo3.1/Fast generation versus extension",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/veo"
+      ],
+      "revision": "page update 2026-10-08; accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S7",
+      "publisher": "Google",
+      "scope": "Gemini video understanding",
+      "urls": [
+        "https://ai.google.dev/gemini-api/docs/video-understanding#technical-details-about-videos"
+      ],
+      "revision": "page update 2026-10-13; accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S8",
+      "publisher": "Black Forest Labs",
+      "scope": "FLUX3 image endpoint",
+      "urls": [
+        "https://docs.bfl.ai/api-reference/utility/generate-an-image-with-flux-3.md"
+      ],
+      "revision": "mutable publisher documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S9",
+      "publisher": "OpenAI",
+      "scope": "GPT Image2.5 prompting and direct edits",
+      "urls": [
+        "https://developers.openai.com/api/docs/guides/image-prompting",
+        "https://developers.openai.com/api/reference/resources/images/methods/edit",
+        "https://developers.openai.com/api/docs/guides/image-generation"
+      ],
+      "revision": "snapshots gpt-image-2.5-sunburst-2026-09-08 and gpt-image-2.5-flare-2026-09-08; current guide accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S10",
+      "publisher": "Mistral",
+      "scope": "OCR typical processing versus Files API upload",
+      "urls": [
+        "https://docs.mistral.ai/resources/cookbooks/mistral-ocr-documentchunking-document_chunking_cookbook",
+        "https://docs.mistral.ai/api/endpoint/files"
+      ],
+      "revision": "mutable publisher documentation accessed 2026-10-17",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S9",
+      "publisher": "NVIDIA",
+      "scope": "Parakeet-TDT-0.6B-v3 publisher card",
+      "urls": [
+        "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3/blob/541d1f99c6b0c3cd0b11a95167540bb8edefd82b/README.md#L804",
+        "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3/blob/541d1f99c6b0c3cd0b11a95167540bb8edefd82b/README.md#L947-L956"
+      ],
+      "revision": "541d1f99c6b0c3cd0b11a95167540bb8edefd82b",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "AU-S10",
+      "publisher": "Qwen",
+      "scope": "Qwen3-TTS checkpoint defaults, wrapper overrides and EOS",
+      "urls": [
+        "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base/blob/fd4b254389122332181a7c3db7f27e918eec64e3/generation_config.json#L11",
+        "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base/blob/fd4b254389122332181a7c3db7f27e918eec64e3/config.json",
+        "https://github.com/QwenLM/Qwen3-TTS/blob/022e286b98fbec7e1e916cb940cdf532cd9f488e/qwen_tts/inference/qwen3_tts_model.py#L329-L350",
+        "https://github.com/QwenLM/Qwen3-TTS/blob/022e286b98fbec7e1e916cb940cdf532cd9f488e/qwen_tts/core/models/modeling_qwen3_tts.py#L2283-L2287"
+      ],
+      "revision": "checkpoint fd4b254389122332181a7c3db7f27e918eec64e3; wrapper 022e286b98fbec7e1e916cb940cdf532cd9f488e",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S1",
+      "publisher": "Amazon Science",
+      "scope": "Chronos2 checkpoint and pipeline",
+      "urls": [
+        "https://huggingface.co/amazon/chronos-2/blob/29ec3766d36d6f73f0696f85560a422f50e8498c/config.json#L5-L10",
+        "https://github.com/amazon-science/chronos-forecasting/blob/1224fafa91e1ecd6674f5204066b159e40b5e4a1/src/chronos/chronos2/pipeline.py#L599-L617"
+      ],
+      "revision": "checkpoint29ec3766d36d6f73f0696f85560a422f50e8498c; pipeline1224fafa91e1ecd6674f5204066b159e40b5e4a1",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S2",
+      "publisher": "Google Research",
+      "scope": "TimesFM3 PyTorch forecaster/evaluator",
+      "urls": [
+        "https://github.com/google-research/timesfm/blob/e51928e27119cb17bebc005be2696b75e0a9e688/src/timesfm3/torch/timesfm3_forecaster.py#L32-L34",
+        "https://github.com/google-research/timesfm/blob/e51928e27119cb17bebc005be2696b75e0a9e688/src/timesfm3/torch/timesfm3_forecaster.py#L655-L664",
+        "https://github.com/google-research/timesfm/blob/e51928e27119cb17bebc005be2696b75e0a9e688/src/timesfm3/torch/evaluator.py#L136-L168"
+      ],
+      "revision": "e51928e27119cb17bebc005be2696b75e0a9e688",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S3",
+      "publisher": "Google Research",
+      "scope": "TimesFM2.5 release description and example",
+      "urls": [
+        "https://github.com/google-research/timesfm/blob/e51928e27119cb17bebc005be2696b75e0a9e688/README.md#L98-L106",
+        "https://huggingface.co/google/timesfm-2.5-200m-pytorch/blob/1d952420fba87f3c6dee4f240de0f1a0fbc790e3/README.md#L52-L62"
+      ],
+      "revision": "repository e51928e27119cb17bebc005be2696b75e0a9e688; card1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S4",
+      "publisher": "Google Research",
+      "scope": "TimesFM2.0 trained versus inference context",
+      "urls": [
+        "https://huggingface.co/google/timesfm-2.0-500m-pytorch/blob/dc2443792ce5516872b89b37cf1bc058c3bf0c10/README.md#L23-L27",
+        "https://huggingface.co/google/timesfm-2.0-500m-pytorch/blob/dc2443792ce5516872b89b37cf1bc058c3bf0c10/README.md#L68-L72"
+      ],
+      "revision": "dc2443792ce5516872b89b37cf1bc058c3bf0c10",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S5",
+      "publisher": "AutonLab / MOMENT",
+      "scope": "MOMENT1-large config and model input shape",
+      "urls": [
+        "https://huggingface.co/AutonLab/MOMENT-1-large/blob/ca58581bc7bea2ebed4e80dc0a3e4b8b609c6ecc/config.json#L1-L7",
+        "https://huggingface.co/AutonLab/MOMENT-1-large/blob/ca58581bc7bea2ebed4e80dc0a3e4b8b609c6ecc/README.md#L48-L56",
+        "https://github.com/moment-timeseries-foundation-model/moment/blob/38f7310ad594100747ca2a8357e9c7ca7d323e0e/momentfm/models/moment.py#L239-L249"
+      ],
+      "revision": "checkpointca58581bc7bea2ebed4e80dc0a3e4b8b609c6ecc; code38f7310ad594100747ca2a8357e9c7ca7d323e0e",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S6",
+      "publisher": "Prior Labs",
+      "scope": "TabPFN default versus checkpoint-loaded configuration",
+      "urls": [
+        "https://github.com/PriorLabs/TabPFN/blob/417c9877dbfe657afdbe0aee70af2a05ffe4abba/src/tabpfn/inference_config.py#L339-L352",
+        "https://github.com/PriorLabs/TabPFN/blob/417c9877dbfe657afdbe0aee70af2a05ffe4abba/src/tabpfn/inference_config.py#L436-L458",
+        "https://github.com/PriorLabs/TabPFN/blob/417c9877dbfe657afdbe0aee70af2a05ffe4abba/src/tabpfn/inference_config.py#L503-L550",
+        "https://github.com/PriorLabs/TabPFN/blob/417c9877dbfe657afdbe0aee70af2a05ffe4abba/src/tabpfn/classifier.py#L827-L862"
+      ],
+      "revision": "417c9877dbfe657afdbe0aee70af2a05ffe4abba",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S7",
+      "publisher": "Prior Labs",
+      "scope": "TabPFN3.5 card/public metadata",
+      "urls": [
+        "https://huggingface.co/Prior-Labs/tabpfn_3_5/blob/06bf2ba35c80a92a3b9abb436b99cf49e7a0365e/README.md#L62-L80",
+        "https://huggingface.co/Prior-Labs/tabpfn_3_5/blob/06bf2ba35c80a92a3b9abb436b99cf49e7a0365e/config.json"
+      ],
+      "revision": "06bf2ba35c80a92a3b9abb436b99cf49e7a0365e",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S8",
+      "publisher": "IBM / NASA",
+      "scope": "Prithvi EO2 300M configuration and input instructions",
+      "urls": [
+        "https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M/blob/9eb1b1102806593963daa333bcc491b1c6f8562f/config.json#L4-L20",
+        "https://huggingface.co/ibm-nasa-geospatial/Prithvi-EO-2.0-300M/blob/9eb1b1102806593963daa333bcc491b1c6f8562f/README.md#L37-L50"
+      ],
+      "revision": "9eb1b1102806593963daa333bcc491b1c6f8562f",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "PR-S9",
+      "publisher": "Google DeepMind",
+      "scope": "AlphaFold3 local bucket and tokenizer semantics",
+      "urls": [
+        "https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/docs/performance.md#L276-L300",
+        "https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/src/alphafold3/model/features.py#L180-L194",
+        "https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/src/alphafold3/model/features.py#L236-L281",
+        "https://github.com/google-deepmind/alphafold3/blob/03f4f48867748c164ae6d5144ae0529477df02e3/src/alphafold3/model/pipeline/pipeline.py#L153-L156"
+      ],
+      "revision": "03f4f48867748c164ae6d5144ae0529477df02e3",
+      "accessed_on": "2026-10-17",
+      "evidence_grade": "Primary documentation or publisher artifact",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S11",
+      "publisher": "Runway",
+      "scope": "Python SDK Gen4_5 image_to_video request type; not an exhaustive live-service contract",
+      "urls": [
+        "https://github.com/runwayml/sdk-python/blob/6568d7c5f5200fba62389fcf8eca429b14a5643e/src/runwayml/types/image_to_video_create_params.py"
+      ],
+      "revision": "6568d7c5f5200fba62389fcf8eca429b14a5643e",
+      "accessed_on": "2026-10-18",
+      "evidence_grade": "Primary publisher SDK source",
+      "verification_status": "unverified"
+    }
+  ],
+  "records": [
+    {
+      "id": "EL-01",
+      "family": "retrieval",
+      "model": "Cohere embed-v4.0 versus embed-v5.0-pro/fast",
+      "route": "direct /v2/embed",
+      "direction": "output",
+      "semantics": "allowed dimensions and defaults",
+      "quantity": "embedding dimensions",
+      "value": "v4: 256, 512, 1024, 1536(default); v5: 256, 512, 768, 1024, 1536, 2048(default)",
+      "unit": "vector dimensions",
+      "conditions": "Different model generations; source lists 128k input tokens for each, in publisher notation.",
+      "implication": "Persist selected dimension and model identity with the index. Do not transfer v5's default to v4 or assume equal dimension means equal embedding space.",
+      "source_ids": [
+        "EL-S1"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "EL-02",
+      "family": "retrieval",
+      "model": "Cohere Embed v2 API",
+      "route": "direct /v2/embed",
+      "direction": "input",
+      "semantics": "endpoint batch/size limits and default truncation",
+      "quantity": "batch size; image payload; overlength handling",
+      "value": "texts: 96; inputs: 96; v4+ images combined: 20 MB; truncate default END",
+      "unit": "items; publisher MB; truncation policy",
+      "conditions": "Current v2 reference does not impose an image-count limit for v4+; older v1 guide states up to 96 v4 images. Treat parameter/API version and image bytes separately. NONE returns an overlength error.",
+      "implication": "Never present successful default truncation as preservation of every input token. Avoid one brand-wide image-count cap.",
+      "source_ids": [
+        "EL-S1"
+      ],
+      "disputed": true
+    },
+    {
+      "id": "EL-03",
+      "family": "retrieval",
+      "model": "voyage-4-large / voyage-4 / voyage-4-lite",
+      "route": "direct v1 embeddings; Python embed()",
+      "direction": "input",
+      "semantics": "per-text versus aggregate batch admission",
+      "quantity": "context and batch budgets",
+      "value": "32, 000 per text; at most 1, 000 texts; aggregate 120K / 320K / 1M tokens respectively",
+      "unit": "tokens; texts",
+      "conditions": "Selected output dimension 1024(default), 256, 512 or 2048. Do not infer missing voyage-code-4 batch semantics from voyage-code-3.",
+      "implication": "Check both item and batch budgets. Splitting a batch does not repair a too-long individual item.",
+      "source_ids": [
+        "EL-S2"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "EL-04-input",
+      "family": "retrieval",
+      "model": "Voyage text embeddings",
+      "route": "direct v1 embeddings",
+      "direction": "input",
+      "semantics": "documented default transform and packed output layout",
+      "quantity": "input truncation policy and binary storage length",
+      "value": "truncation=true default; false raises overlength error",
+      "unit": "policy",
+      "conditions": "Applicable model/dtype support remains source-specific; the logical vector dimension is not the returned packed-list length.",
+      "implication": "Store the effective transform and logical dimension/dtype. Do not interpret a 128-element packed result as a 128-dimensional float vector.",
+      "source_ids": [
+        "EL-S2"
+      ],
+      "disputed": false,
+      "parent_record": "EL-04"
+    },
+    {
+      "id": "EL-04-output",
+      "family": "retrieval",
+      "model": "Voyage text embeddings",
+      "route": "direct v1 embeddings",
+      "direction": "output",
+      "semantics": "documented default transform and packed output layout",
+      "quantity": "output truncation policy and binary storage length",
+      "value": "binary/ubinary integer-list length = output_dimension / 8",
+      "unit": "packed bytes per vector",
+      "conditions": "Applicable model/dtype support remains source-specific; the logical vector dimension is not the returned packed-list length.",
+      "implication": "Store the effective transform and logical dimension/dtype. Do not interpret a 128-element packed result as a 128-dimensional float vector.",
+      "source_ids": [
+        "EL-S2"
+      ],
+      "disputed": false,
+      "parent_record": "EL-04"
+    },
+    {
+      "id": "EL-05",
+      "family": "retrieval",
+      "model": "voyage-context-4",
+      "route": "contextualized embeddings; auto-chunking mode",
+      "direction": "input",
+      "semantics": "conditional total/chunk limits and default target",
+      "quantity": "chunk and total token budgets",
+      "value": "32, 000 per chunk; 120, 000 total with auto-chunking, otherwise 32, 000; target chunk default 512",
+      "unit": "tokens",
+      "conditions": "The overview footnote uses enable_auto_chunk while the SDK signature uses enable_auto_chunking. Target chunk size/overlap are upper bounds, not guaranteed exact segmentation; custom client chunk_fn cannot combine with server auto-chunking.",
+      "implication": "Pin SDK/server parameter mapping and actual returned chunk_texts. A larger total window does not enlarge every chunk.",
+      "source_ids": [
+        "EL-S3"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "EL-06-input",
+      "family": "retrieval",
+      "model": "Qwen/Qwen3-Embedding-0.6B",
+      "route": "pinned open-weight card/config",
+      "direction": "input",
+      "semantics": "published sequence/configuration versus runnable example",
+      "quantity": "input sequence length and output dimension",
+      "value": "card 32K; config max_position_embeddings=32768; example max_length=8192",
+      "unit": "tokens",
+      "conditions": "The example's truncation limit is not the card's model ceiling. Configuration and card do not establish runtime quality/admission at every length.",
+      "implication": "Record the actual preprocessing limit and selected dimension separately from the model's published/configured capacity.",
+      "source_ids": [
+        "EL-S4"
+      ],
+      "disputed": false,
+      "parent_record": "EL-06"
+    },
+    {
+      "id": "EL-06-output",
+      "family": "retrieval",
+      "model": "Qwen/Qwen3-Embedding-0.6B",
+      "route": "pinned open-weight card/config",
+      "direction": "output",
+      "semantics": "published sequence/configuration versus runnable example",
+      "quantity": "output sequence length and output dimension",
+      "value": "32..1024",
+      "unit": "vector dimensions",
+      "conditions": "The example's truncation limit is not the card's model ceiling. Configuration and card do not establish runtime quality/admission at every length.",
+      "implication": "Record the actual preprocessing limit and selected dimension separately from the model's published/configured capacity.",
+      "source_ids": [
+        "EL-S4"
+      ],
+      "disputed": false,
+      "parent_record": "EL-06"
+    },
+    {
+      "id": "EL-07-input",
+      "family": "retrieval",
+      "model": "BAAI/bge-m3",
+      "route": "pinned publisher card",
+      "direction": "input",
+      "semantics": "published sequence limit and multiple retrieval representations",
+      "quantity": "input sequence and dense dimension",
+      "value": "8192",
+      "unit": "tokens",
+      "conditions": "Example max_passage_length=128 is a configured speed/length choice, not the published model maximum.",
+      "implication": "Require the consumer's dense/sparse/late-interaction representation support, in addition to length and any dimension check.",
+      "source_ids": [
+        "EL-S5"
+      ],
+      "disputed": false,
+      "parent_record": "EL-07"
+    },
+    {
+      "id": "EL-07-output",
+      "family": "retrieval",
+      "model": "BAAI/bge-m3",
+      "route": "pinned publisher card",
+      "direction": "output",
+      "semantics": "published sequence limit and multiple retrieval representations",
+      "quantity": "output sequence and dense dimension",
+      "value": "dense dimension 1024; dense, sparse and multi-vector outputs",
+      "unit": "vector dimensions; representation kind",
+      "conditions": "Example max_passage_length=128 is a configured speed/length choice, not the published model maximum.",
+      "implication": "Require the consumer's dense/sparse/late-interaction representation support, in addition to length and any dimension check.",
+      "source_ids": [
+        "EL-S5"
+      ],
+      "disputed": false,
+      "parent_record": "EL-07"
+    },
+    {
+      "id": "EL-08",
+      "family": "retrieval",
+      "model": "vidore/colpali-v1.3",
+      "route": "pinned card and Sentence Transformers dense-layer config",
+      "direction": "output",
+      "semantics": "multi-vector projection versus variable sequence shape",
+      "quantity": "per-token vector width",
+      "value": "out_features=128; card example query (28, 128) and document (1030, 128)",
+      "unit": "vector dimensions per token/patch; example sequence lengths",
+      "conditions": "28 and 1030 are illustrated shapes, not universal token/patch counts. The card documents MaxSim late interaction and processor-prefix differences across engine versions.",
+      "implication": "A single-vector dimension equality check cannot certify compatibility. Pin processor/runtime and score method as part of retrieval identity.",
+      "source_ids": [
+        "EL-S6"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "EL-09",
+      "family": "retrieval",
+      "model": "intfloat/multilingual-e5-large",
+      "route": "pinned publisher card",
+      "direction": "input",
+      "semantics": "documented truncation behavior and task formatting",
+      "quantity": "maximum retained text length",
+      "value": "long texts truncated to at most 512 tokens",
+      "unit": "tokens",
+      "conditions": "Card FAQ requires task-appropriate query/passage prefixes; input formatting is separate from the retained sequence cap.",
+      "implication": "Keep preprocessing/prefix policy and truncation visible. Do not market unchanged handling of longer documents.",
+      "source_ids": [
+        "EL-S7"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "EL-10-input",
+      "family": "retrieval",
+      "model": "jinaai/jina-embeddings-v4",
+      "route": "pinned publisher card; open-weight mode",
+      "direction": "input",
+      "semantics": "published sequence and representation dimensions",
+      "quantity": "input sequence and dense/late-interaction dimensions",
+      "value": "32768",
+      "unit": "tokens",
+      "conditions": "Card's Sentence Transformers section directs multi-vector users to the Hugging Face model directly. The examined wrappers are not interchangeable.",
+      "implication": "Persist vector_type and supported wrapper alongside dimension. A wrapper exposing only dense output does not prove multi-vector availability.",
+      "source_ids": [
+        "EL-S8"
+      ],
+      "disputed": false,
+      "parent_record": "EL-10"
+    },
+    {
+      "id": "EL-10-output",
+      "family": "retrieval",
+      "model": "jinaai/jina-embeddings-v4",
+      "route": "pinned publisher card; open-weight mode",
+      "direction": "output",
+      "semantics": "published sequence and representation dimensions",
+      "quantity": "output sequence and dense/late-interaction dimensions",
+      "value": "dense default 2048; selectable 128/256/512/1024/2048; multi-vector width 128",
+      "unit": "vector dimensions",
+      "conditions": "Card's Sentence Transformers section directs multi-vector users to the Hugging Face model directly. The examined wrappers are not interchangeable.",
+      "implication": "Persist vector_type and supported wrapper alongside dimension. A wrapper exposing only dense output does not prove multi-vector availability.",
+      "source_ids": [
+        "EL-S8"
+      ],
+      "disputed": false,
+      "parent_record": "EL-10"
+    },
+    {
+      "id": "AU-01",
+      "family": "audio",
+      "model": "OpenAI Whisper",
+      "route": "local transcribe()",
+      "direction": "input",
+      "semantics": "processing window, not whole-file maximum",
+      "quantity": "window and internal sample rate",
+      "value": "30-second sliding windows; 16000 Hz",
+      "unit": "seconds; Hz",
+      "conditions": "Whole file is processed over repeated windows.",
+      "implication": "Separate chunk/window configuration from file admission.",
+      "source_ids": [
+        "AU-S1"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-02",
+      "family": "audio",
+      "model": "OpenAI hosted transcription",
+      "route": "Transcriptions guide versus legacy whisper-1 FAQ",
+      "direction": "input",
+      "semantics": "route-scoped documented limit",
+      "quantity": "file/request size",
+      "value": "guide: 25 MB file; FAQ: 25 MiB legacy request",
+      "unit": "publisher MB/MiB",
+      "conditions": "Apply the current guide to current routes and the legacy FAQ to whisper-1 only. If both govern the same route, resolve units where defined and take the smaller eligible limit, flagged disputed; do not assume a byte definition the publisher omits.",
+      "implication": "Apply scope before numeric comparison; unknown only if eligible evidence is absent or a genuine tie remains.",
+      "source_ids": [
+        "AU-S2"
+      ],
+      "disputed": true
+    },
+    {
+      "id": "AU-03",
+      "family": "audio",
+      "model": "OpenAI Realtime",
+      "route": "speech-to-speech session",
+      "direction": "session",
+      "semantics": "documented maximum",
+      "quantity": "session lifetime",
+      "value": "60",
+      "unit": "minutes",
+      "conditions": "This is a session lifetime, not individual input/output audio duration or every voice route.",
+      "implication": "Represent connection/session expiry separately from media admission.",
+      "source_ids": [
+        "AU-S3"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-04",
+      "family": "audio",
+      "model": "eleven_v3",
+      "route": "ElevenLabs TTS API",
+      "direction": "input",
+      "semantics": "documented request maximum",
+      "quantity": "input text length",
+      "value": "5000",
+      "unit": "characters",
+      "conditions": "Exact character-count algorithm is not established by this page; approximate audio minutes are not output-duration caps.",
+      "implication": "Preserve character accounting and API identity; do not substitute tokens/words.",
+      "source_ids": [
+        "AU-S4"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-05",
+      "family": "audio",
+      "model": "eleven_multilingual_v2",
+      "route": "ElevenLabs TTS API",
+      "direction": "input",
+      "semantics": "documented request maximum",
+      "quantity": "input text length",
+      "value": "10000",
+      "unit": "characters",
+      "conditions": "Exact character-count algorithm is not established by this page; approximate audio minutes are not output-duration caps.",
+      "implication": "Preserve character accounting and API identity; do not substitute tokens/words.",
+      "source_ids": [
+        "AU-S4"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-06",
+      "family": "audio",
+      "model": "eleven_flash_v2_5",
+      "route": "ElevenLabs TTS API",
+      "direction": "input",
+      "semantics": "documented request maximum",
+      "quantity": "input text length",
+      "value": "40000",
+      "unit": "characters",
+      "conditions": "Exact character-count algorithm is not established by this page; approximate audio minutes are not output-duration caps.",
+      "implication": "Preserve character accounting and API identity; do not substitute tokens/words.",
+      "source_ids": [
+        "AU-S4"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-07",
+      "family": "audio",
+      "model": "ElevenLabs website TTS",
+      "route": "website generation",
+      "direction": "input",
+      "semantics": "plan-specific product maximum",
+      "quantity": "text length",
+      "value": "paid: 5000; free: 2500",
+      "unit": "characters per generation",
+      "conditions": "Website product limits differ from API model maxima.",
+      "implication": "Provider/model/plan/route must be separate selection attributes.",
+      "source_ids": [
+        "AU-S5"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-08",
+      "family": "audio",
+      "model": "Qwen3-ASR",
+      "route": "official wrapper, transcription without timestamps",
+      "direction": "input",
+      "semantics": "chunk target, not whole-input rejection maximum",
+      "quantity": "audio chunk duration and normalization",
+      "value": "1200 seconds; 16000 Hz; boundary search 5 seconds around target",
+      "unit": "seconds; Hz",
+      "conditions": "Low-energy boundary choice can exceed the nominal target. Longer audio is split.",
+      "implication": "Name chunking strategy, timestamp mode and actual retained chunks.",
+      "source_ids": [
+        "AU-S6"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-09",
+      "family": "audio",
+      "model": "Qwen3-ASR / ForcedAligner-0.6B",
+      "route": "wrapper with return_time_stamps=true versus aligner README",
+      "direction": "input",
+      "semantics": "stage-specific wrapper target versus advertised capacity",
+      "quantity": "alignment chunk duration",
+      "value": "wrapper target 180 seconds; aligner card up to 5 minutes",
+      "unit": "seconds; minutes",
+      "conditions": "Wrapper and aligner statements describe different stages; boundary-search caveat remains.",
+      "implication": "Do not impose wrapper chunk duration as the aligner model's universal maximum.",
+      "source_ids": [
+        "AU-S6"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-10",
+      "family": "audio",
+      "model": "Kokoro-82M",
+      "route": "pinned raw phoneme-string pipeline and model",
+      "direction": "input",
+      "semantics": "path-specific hard check and positional configuration",
+      "quantity": "phoneme input versus model tokens",
+      "value": "raw phoneme path rejects >510 characters; model reserves 2 of 512 positions",
+      "unit": "phoneme characters; token positions",
+      "conditions": "Recognized phoneme token IDs and natural-language graphemes are different representations; other paths chunk/truncate.",
+      "implication": "Keep representation and processor path, rather than declaring a 510-character natural-language ceiling.",
+      "source_ids": [
+        "AU-S7"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-11",
+      "family": "audio",
+      "model": "Dia",
+      "route": "voice-cloning reference",
+      "direction": "input",
+      "semantics": "recommendation",
+      "quantity": "reference audio duration",
+      "value": "5-10",
+      "unit": "seconds",
+      "conditions": "Not an evidenced rejection threshold or maximum output duration.",
+      "implication": "Show recommendation separately from hard admission predicates.",
+      "source_ids": [
+        "AU-S8"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-01",
+      "family": "media",
+      "model": "FLUX.2",
+      "route": "/v1/flux-2-pro",
+      "direction": "output",
+      "semantics": "documented shape budget versus recommendation",
+      "quantity": "route-specific image/video admission or output",
+      "value": "minimum 64x64; 16-pixel dimension increments; maximum 4 MP (publisher notation); <=2 MP recommended",
+      "unit": "pixels; megapixels",
+      "conditions": "2048x2048 is an example, not the sole maximum geometry. Do not silently treat publisher 4 MP notation as exactly 4,000,000 pixels.",
+      "implication": "Distinguish per-axis grid, total area and recommended operating size.",
+      "source_ids": [
+        "ME-S1"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-02",
+      "family": "media",
+      "model": "FLUX.2 editing",
+      "route": "API /v1/flux-2-pro-preview versus playground",
+      "direction": "input",
+      "semantics": "route-specific reference count",
+      "quantity": "route-specific image/video admission or output",
+      "value": "8 API versus 10 playground",
+      "unit": "reference images",
+      "conditions": "Docs identify /v1/flux-2-pro as pinned; preview examples are not its immutable revision proof.",
+      "implication": "Product UI capacities must not be copied onto an API route.",
+      "source_ids": [
+        "ME-S2"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-03",
+      "family": "media",
+      "model": "FLUX3 video",
+      "route": "/v1/flux-3-video; version=latest",
+      "direction": "output",
+      "semantics": "documented duration enum/range and mutable version",
+      "quantity": "route-specific image/video admission or output",
+      "value": "whole seconds 5-20 or auto",
+      "unit": "seconds",
+      "conditions": "Only latest is currently offered; do not invent a dated version.",
+      "implication": "Bind limits to a dated observation and effective version; auto is not an explicit user duration.",
+      "source_ids": [
+        "ME-S3"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-04",
+      "family": "media",
+      "model": "FLUX3 video",
+      "route": "16:9 resolution selection",
+      "direction": "output",
+      "semantics": "delivered shapes and upsampling",
+      "quantity": "route-specific image/video admission or output",
+      "value": "hd 1280x704; fhd 1920x1088; qhd 2560x1440; uhd 3840x2176",
+      "unit": "pixels",
+      "conditions": "Higher classes use upsampling; draft requires hd.",
+      "implication": "Avoid assuming conventional 720p/1080p/2160p shapes or native generation at delivered resolution.",
+      "source_ids": [
+        "ME-S3"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-05",
+      "family": "media",
+      "model": "Runway gen4.5",
+      "route": "POST /v1/image_to_video; X-Runway-Version=2024-11-06",
+      "direction": "output",
+      "semantics": "pinned SDK duration constraint and ratio literals; live endpoint enum completeness unknown",
+      "quantity": "route-specific image/video admission or output",
+      "value": "integer duration 2-10; 1280:720, 720:1280, 1104:832, 960:960, 832:1104, 1584:672",
+      "unit": "seconds; output pixels",
+      "conditions": "SDK Gen4_5 request type at ME-S8 lists these six ratios. Image position is first; other models' last-frame capability is not inherited. A review reports an additional 672:1584 API ratio; that claim was not independently confirmed because the live API markdown could not be retrieved on 2026-10-18.",
+      "implication": "Use the pinned SDK literals only for that SDK type. Do not reject other live-service ratios from this research list; refresh the model-discriminated endpoint specification before admission validation.",
+      "source_ids": [
+        "ME-S4",
+        "ME-S11"
+      ],
+      "disputed": true
+    },
+    {
+      "id": "ME-06",
+      "family": "media",
+      "model": "Gemini image models",
+      "route": "/v1beta/interactions",
+      "direction": "output",
+      "semantics": "model-specific size-tier support",
+      "quantity": "route-specific image/video admission or output",
+      "value": "nano-banana-2.1: 1K/2K/4K, not 512px; 3.1-flash-image supports 512px; 3.1-flash-lite-image: 1K only",
+      "unit": "publisher size tier",
+      "conditions": "Current new-project choice and older model routes differ.",
+      "implication": "A shared image-generation interface does not make every size valid for every model.",
+      "source_ids": [
+        "ME-S5"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-07",
+      "family": "media",
+      "model": "gemini-nano-banana-2.1",
+      "route": "4K output tier",
+      "direction": "output",
+      "semantics": "ratio-dependent delivered dimensions",
+      "quantity": "route-specific image/video admission or output",
+      "value": "1:1 4096x4096; 16:9 5504x3072; 8:1 12288x1536",
+      "unit": "pixels",
+      "conditions": "4K is a tier label; not a universal maximum edge.",
+      "implication": "Use the exact ratio/size table rather than treating 4096 as a width cap.",
+      "source_ids": [
+        "ME-S5"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-08",
+      "family": "media",
+      "model": "gemini-nano-banana-2.1 versus 2.5-flash-image",
+      "route": "reference inputs",
+      "direction": "input",
+      "semantics": "documented capacity versus optimization guidance",
+      "quantity": "route-specific image/video admission or output",
+      "value": "2.1:14 total, fidelity categories 10 objects/4 characters; 2.5:3 works-best inputs",
+      "unit": "reference images",
+      "conditions": "Reference acceptance and identity fidelity are separate claims.",
+      "implication": "Do not turn an optimization recommendation into a hard rejection threshold.",
+      "source_ids": [
+        "ME-S5"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-09",
+      "family": "media",
+      "model": "Veo3.1 / Fast preview",
+      "route": "predictLongRunning generation",
+      "direction": "output",
+      "semantics": "conditional duration/resolution/reference combinations",
+      "quantity": "route-specific image/video admission or output",
+      "value": "4/6/8 seconds; 16:9 or9:16; 24fps; 1 video; 1080p/4K or reference images require 8s; <=3 references",
+      "unit": "seconds; frames/second; counts",
+      "conditions": "Restricted to 3.1/Fast preview; do not copy older Veo table values.",
+      "implication": "Validate combinations rather than independent maxima.",
+      "source_ids": [
+        "ME-S6"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-10-input",
+      "family": "media",
+      "model": "Veo3.1 / Fast extension",
+      "route": "prior Veo-generated video only",
+      "direction": "input",
+      "semantics": "extension-specific limits",
+      "quantity": "input route-specific image/video admission or output",
+      "value": "input <=141s at720p; prior Veo-generated video; up to 20 extensions",
+      "unit": "seconds; extension count",
+      "conditions": "16:9/9:16; Lite lacks extension. This is not arbitrary upload support or single-generation length.",
+      "implication": "Treat extension lineage, resolution and cumulative duration as separate predicates.",
+      "source_ids": [
+        "ME-S6"
+      ],
+      "disputed": false,
+      "parent_record": "ME-10"
+    },
+    {
+      "id": "ME-10-output",
+      "family": "media",
+      "model": "Veo3.1 / Fast extension",
+      "route": "prior Veo-generated video only",
+      "direction": "output",
+      "semantics": "extension-specific limits",
+      "quantity": "output route-specific image/video admission or output",
+      "value": "each extension 7s; cumulative output <=148s",
+      "unit": "seconds",
+      "conditions": "16:9/9:16; Lite lacks extension. This is not arbitrary upload support or single-generation length.",
+      "implication": "Treat extension lineage, resolution and cumulative duration as separate predicates.",
+      "source_ids": [
+        "ME-S6"
+      ],
+      "disputed": false,
+      "parent_record": "ME-10"
+    },
+    {
+      "id": "ME-11",
+      "family": "media",
+      "model": "Gemini video understanding",
+      "route": "example gemini-3.8-flash interactions route",
+      "direction": "input",
+      "semantics": "sampling default and context/resolution-conditioned capacity",
+      "quantity": "route-specific image/video admission or output",
+      "value": "1fps default static sampling; 1M-context models up to 3h low media resolution or1h high",
+      "unit": "frames/second; hours",
+      "conditions": "Configurable sampling and agentic processing differ; no universal duration or native-frame inspection established.",
+      "implication": "Store sampling and resolution with admission/quality inputs.",
+      "source_ids": [
+        "ME-S7"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "ME-12-input",
+      "family": "media",
+      "model": "FLUX3 image",
+      "route": "POST /v1/flux-3-image; version=latest",
+      "direction": "input",
+      "semantics": "documented reference count and equal-area size tier",
+      "quantity": "input route-specific image/video admission or output",
+      "value": "optional references 1-10",
+      "unit": "reference images",
+      "conditions": "No exact per-ratio dimensions or numerical total-pixel ceiling established; count is field description rather than maxItems schema proof.",
+      "implication": "Do not import FLUX.2's 4MP ceiling or interpret tier name as edge length.",
+      "source_ids": [
+        "ME-S8"
+      ],
+      "disputed": false,
+      "parent_record": "ME-12"
+    },
+    {
+      "id": "ME-12-output",
+      "family": "media",
+      "model": "FLUX3 image",
+      "route": "POST /v1/flux-3-image; version=latest",
+      "direction": "output",
+      "semantics": "documented reference count and equal-area size tier",
+      "quantity": "output route-specific image/video admission or output",
+      "value": "tiers 768sq/1k/1.5k/2k/4k; default 1k",
+      "unit": "publisher size tier",
+      "conditions": "No exact per-ratio dimensions or numerical total-pixel ceiling established; count is field description rather than maxItems schema proof.",
+      "implication": "Do not import FLUX.2's 4MP ceiling or interpret tier name as edge length.",
+      "source_ids": [
+        "ME-S8"
+      ],
+      "disputed": false,
+      "parent_record": "ME-12"
+    },
+    {
+      "id": "ME-13",
+      "family": "media",
+      "model": "gpt-image-2.5-sunburst / flare",
+      "route": "direct image output; 2026-09-08 snapshots",
+      "direction": "output",
+      "semantics": "joint hard shape predicates plus experimental threshold",
+      "quantity": "route-specific image/video admission or output",
+      "value": "each edge<=3840 and divisible by16; ratio<=3:1; area655360..8294400; area>3686400 experimental",
+      "unit": "pixels; aspect ratio",
+      "conditions": "Current guide permits 3840 edges, while an older cookbook says less than3840; retain current-source scope.",
+      "implication": "Check area, ratio and per-axis grid together; experimental does not mean prohibited.",
+      "source_ids": [
+        "ME-S9"
+      ],
+      "disputed": true
+    },
+    {
+      "id": "ME-14-input",
+      "family": "media",
+      "model": "gpt-image-2.5-sunburst / flare",
+      "route": "POST /v1/images/edits",
+      "direction": "input",
+      "semantics": "endpoint count and model-specific parameter behavior",
+      "quantity": "input route-specific image/video admission or output",
+      "value": "up to 16 input references",
+      "unit": "images",
+      "conditions": "Pin dated model IDs instead of current default. GPT Image2 high fidelity is automatic; omit input_fidelity per guide.",
+      "implication": "Counts do not guarantee identity fidelity; older parameter controls need route-specific checking.",
+      "source_ids": [
+        "ME-S9"
+      ],
+      "disputed": false,
+      "parent_record": "ME-14"
+    },
+    {
+      "id": "ME-14-output",
+      "family": "media",
+      "model": "gpt-image-2.5-sunburst / flare",
+      "route": "POST /v1/images/edits",
+      "direction": "output",
+      "semantics": "endpoint count and model-specific parameter behavior",
+      "quantity": "output route-specific image/video admission or output",
+      "value": "1-10 output images",
+      "unit": "images",
+      "conditions": "Pin dated model IDs instead of current default. GPT Image2 high fidelity is automatic; omit input_fidelity per guide.",
+      "implication": "Counts do not guarantee identity fidelity; older parameter controls need route-specific checking.",
+      "source_ids": [
+        "ME-S9"
+      ],
+      "disputed": false,
+      "parent_record": "ME-14"
+    },
+    {
+      "id": "ME-15",
+      "family": "media",
+      "model": "Mistral OCR / Document AI",
+      "route": "OCR cookbook versus Files API",
+      "direction": "input",
+      "semantics": "typical processing estimate versus separate upload maximum",
+      "quantity": "route-specific image/video admission or output",
+      "value": "OCR typical ~50MB/~1000 pages; Files API upload512MB",
+      "unit": "publisher MB; pages",
+      "conditions": "Exact current OCR-model processing ceiling remains unknown. Files upload does not establish inference acceptance.",
+      "implication": "Leave exact OCR hard admission unknown rather than using the largest upstream upload value.",
+      "source_ids": [
+        "ME-S10"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-12",
+      "family": "audio",
+      "model": "Parakeet-TDT-0.6B-v3",
+      "route": "full attention; publisher A100 80GB condition",
+      "direction": "input",
+      "semantics": "conditional documented capacity, not proven rejection cap",
+      "quantity": "audio duration",
+      "value": "up to 24",
+      "unit": "minutes",
+      "conditions": "Card says supported input size depends on RAM.",
+      "implication": "Do not transfer a hardware-conditioned capacity to an arbitrary runtime.",
+      "source_ids": [
+        "AU-S9"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-13",
+      "family": "audio",
+      "model": "Parakeet-TDT-0.6B-v3",
+      "route": "local attention",
+      "direction": "input",
+      "semantics": "mode-specific supported capacity",
+      "quantity": "audio duration",
+      "value": "up to 3",
+      "unit": "hours",
+      "conditions": "Card does not separately bind the local-attention figure to specified hardware; no universal hard maximum established.",
+      "implication": "Preserve attention mode and unresolved hardware scope.",
+      "source_ids": [
+        "AU-S9"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-14",
+      "family": "audio",
+      "model": "Qwen3-TTS-12Hz-1.7B-Base",
+      "route": "pinned checkpoint plus wrapper",
+      "direction": "output",
+      "semantics": "overridable generation default",
+      "quantity": "new codec-token budget",
+      "value": "checkpoint 8192; wrapper fallback/evaluation 2048; lower-level signature 4096",
+      "unit": "codec tokens",
+      "conditions": "User override precedes checkpoint default; stages differ. EOS may finish earlier.",
+      "implication": "Store effective generation settings; do not claim an architectural ceiling or exact audio duration.",
+      "source_ids": [
+        "AU-S10"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-15",
+      "family": "audio",
+      "model": "Qwen3-TTS-12Hz-1.7B-Base",
+      "route": "complete audio request",
+      "direction": "output",
+      "semantics": "unknown hard duration maximum",
+      "quantity": "whole-output duration",
+      "value": "unknown",
+      "unit": "seconds",
+      "conditions": "Internal positional sizes and max_length fields do not establish a universal duration maximum.",
+      "implication": "Retain unknown rather than converting codec tokens to a guaranteed number of seconds.",
+      "source_ids": [
+        "AU-S10"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-01",
+      "family": "predictive",
+      "model": "Chronos2",
+      "route": "checkpoint plus current pipeline",
+      "direction": "input",
+      "semantics": "configured retained-history cap",
+      "quantity": "model-specific input/output or representation",
+      "value": "8192",
+      "unit": "time steps per series",
+      "conditions": "Larger requested context is clamped; total dataframe rows may include many series.",
+      "implication": "Group by series and retained history rather than treating every row as one token.",
+      "source_ids": [
+        "PR-S1"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-02",
+      "family": "predictive",
+      "model": "Chronos2",
+      "route": "pipeline prediction_length guard",
+      "direction": "output",
+      "semantics": "default model length with explicit override",
+      "quantity": "model-specific input/output or representation",
+      "value": "1024 (=64 output patches x16 steps)",
+      "unit": "future time steps",
+      "conditions": "limit_prediction_length rejects overlength when enabled; disabling allows continuation with warning. No quality guarantee for longer forecasts.",
+      "implication": "Separate configured capability, guard policy and actual requested horizon.",
+      "source_ids": [
+        "PR-S1"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-03",
+      "family": "predictive",
+      "model": "TimesFM3.0",
+      "route": "pinned PyTorch forecaster",
+      "direction": "input",
+      "semantics": "wrapper retained-context cap",
+      "quantity": "model-specific input/output or representation",
+      "value": "15360",
+      "unit": "time points",
+      "conditions": "Longer target histories/covariates are sliced; earlier2.5 16k statement is not this wrapper.",
+      "implication": "Pin wrapper revision and report retained/discarded history.",
+      "source_ids": [
+        "PR-S2"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-04-input",
+      "family": "predictive",
+      "model": "TimesFM2.5",
+      "route": "publisher release plus example",
+      "direction": "input",
+      "semantics": "published input capability and optional quantile-head horizon",
+      "quantity": "input model-specific input/output or representation",
+      "value": "context up to 16k; example max_context1024",
+      "unit": "time points",
+      "conditions": "Source k notation retained. Quantile-head horizon is not an unconditional point-forecast cap.",
+      "implication": "Keep task/head and example/runtime settings separate.",
+      "source_ids": [
+        "PR-S3"
+      ],
+      "disputed": false,
+      "parent_record": "PR-04"
+    },
+    {
+      "id": "PR-04-output",
+      "family": "predictive",
+      "model": "TimesFM2.5",
+      "route": "publisher release plus example",
+      "direction": "output",
+      "semantics": "published input capability and optional quantile-head horizon",
+      "quantity": "output model-specific input/output or representation",
+      "value": "quantile forecasting up to 1k; example max_horizon256",
+      "unit": "future steps",
+      "conditions": "Source k notation retained. Quantile-head horizon is not an unconditional point-forecast cap.",
+      "implication": "Keep task/head and example/runtime settings separate.",
+      "source_ids": [
+        "PR-S3"
+      ],
+      "disputed": false,
+      "parent_record": "PR-04"
+    },
+    {
+      "id": "PR-05-input",
+      "family": "predictive",
+      "model": "TimesFM2.0",
+      "route": "pinned card",
+      "direction": "input",
+      "semantics": "training context with internally qualified inference description",
+      "quantity": "input model-specific input/output or representation",
+      "value": "training context 2048; current usage limitation 2048 takes precedence over general extrapolation capability",
+      "unit": "time points",
+      "conditions": "Card permits extrapolation past training context, while usage describes currently handled2048; horizon<=context is recommended, not required.",
+      "implication": "For the documented current usage, the stated 2048 limitation outranks the general extrapolation capability. Keep the dispute visible and inspect the selected wrapper; this does not impose a universal output horizon.",
+      "source_ids": [
+        "PR-S4"
+      ],
+      "disputed": true,
+      "parent_record": "PR-05"
+    },
+    {
+      "id": "PR-05-output",
+      "family": "predictive",
+      "model": "TimesFM2.0",
+      "route": "pinned card",
+      "direction": "output",
+      "semantics": "training context with internally qualified inference description",
+      "quantity": "output model-specific input/output or representation",
+      "value": "arbitrary horizons described; horizon<=context recommended, not required",
+      "unit": "future steps",
+      "conditions": "Card permits extrapolation past training context, while usage describes currently handled2048; horizon<=context is recommended, not required.",
+      "implication": "For the documented current usage, the stated 2048 limitation outranks the general extrapolation capability. Keep the dispute visible and inspect the selected wrapper; this does not impose a universal output horizon.",
+      "source_ids": [
+        "PR-S4"
+      ],
+      "disputed": true,
+      "parent_record": "PR-05"
+    },
+    {
+      "id": "PR-06-input",
+      "family": "predictive",
+      "model": "MOMENT1-large",
+      "route": "checkpoint and model input",
+      "direction": "input",
+      "semantics": "configured window versus output example",
+      "quantity": "input model-specific input/output or representation",
+      "value": "seq_len512; patch length/stride8",
+      "unit": "time points",
+      "conditions": "Input is batch xchannels xsequence; univariate pretraining is not proof of one-channel-only inference. No universal output cap verified.",
+      "implication": "Treat96 as example and retain actual task head/channel configuration.",
+      "source_ids": [
+        "PR-S5"
+      ],
+      "disputed": false,
+      "parent_record": "PR-06"
+    },
+    {
+      "id": "PR-06-output",
+      "family": "predictive",
+      "model": "MOMENT1-large",
+      "route": "checkpoint and model input",
+      "direction": "output",
+      "semantics": "configured window versus output example",
+      "quantity": "output model-specific input/output or representation",
+      "value": "forecasting example horizon96; no universal output cap established",
+      "unit": "steps",
+      "conditions": "Input is batch xchannels xsequence; univariate pretraining is not proof of one-channel-only inference. No universal output cap verified.",
+      "implication": "Treat96 as example and retain actual task head/channel configuration.",
+      "source_ids": [
+        "PR-S5"
+      ],
+      "disputed": false,
+      "parent_record": "PR-06"
+    },
+    {
+      "id": "PR-07",
+      "family": "predictive",
+      "model": "TabPFN v2",
+      "route": "version-specific default inference configuration",
+      "direction": "input",
+      "semantics": "intended operating-range configuration",
+      "quantity": "model-specific input/output or representation",
+      "value": "10000 samples; 500 features; 10 classes",
+      "unit": "samples; features; classes",
+      "conditions": "Source describes sample/feature values as intended pretraining range including extrapolation; not necessarily literal largest training dataset.",
+      "implication": "Keep dataset axes and configuration semantics separate from architectural hard maxima.",
+      "source_ids": [
+        "PR-S6"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-08",
+      "family": "predictive",
+      "model": "TabPFN v2.5",
+      "route": "post-v2 checkpoint-loaded configuration",
+      "direction": "input",
+      "semantics": "withdrawn fallback-as-cap inference; actual limit unresolved",
+      "quantity": "model-specific input/output or representation",
+      "value": "fallback function50000 samples/2000 features/10 classes; loaded checkpoint limits not established here",
+      "unit": "samples; features; classes",
+      "conditions": "get_default explicitly says post-v2 inference config comes from checkpoint and this function is not called. No weights downloaded.",
+      "implication": "Do not publish the fallback's50000 as the selected checkpoint's operating cap.",
+      "source_ids": [
+        "PR-S6"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-09",
+      "family": "predictive",
+      "model": "TabPFN3.5",
+      "route": "publisher card and public config",
+      "direction": "input",
+      "semantics": "published feature bound; row/class constraints unknown",
+      "quantity": "model-specific input/output or representation",
+      "value": "card feature limit 20000; row/class maxima unknown",
+      "unit": "features; samples; classes",
+      "conditions": "Public config contains only model name; newer checkpoint metadata not downloaded. Text/datetime columns remain tabular representations.",
+      "implication": "Record feature count independently; do not backfill row/class limits from older versions.",
+      "source_ids": [
+        "PR-S6",
+        "PR-S7"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-10",
+      "family": "predictive",
+      "model": "Prithvi-EO-2.0-300M",
+      "route": "pinned processor/checkpoint",
+      "direction": "input",
+      "semantics": "semantic channel contract",
+      "quantity": "model-specific input/output or representation",
+      "value": "6 channels: Blue, Green, Red, Narrow NIR, SWIR1, SWIR2; patch[1, 16, 16]",
+      "unit": "spectral bands; patch shape",
+      "conditions": "Expected reflectance units/order are part of the input. This is not arbitrary RGB+3 channels.",
+      "implication": "Validate semantic band mapping and normalization, not channel count alone.",
+      "source_ids": [
+        "PR-S8"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-11",
+      "family": "predictive",
+      "model": "Prithvi-EO-2.0-300M",
+      "route": "pretrained configuration",
+      "direction": "input",
+      "semantics": "configuration/pretraining shape, not proven hard maximum",
+      "quantity": "model-specific input/output or representation",
+      "value": "image size224; 4 frames",
+      "unit": "pixels; temporal frames",
+      "conditions": "Chronological observations at same location; selected implementation's resize/interpolation/frame flexibility not established.",
+      "implication": "Do not turn224 into geographic extent/resolution or a global token cap.",
+      "source_ids": [
+        "PR-S8"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-12",
+      "family": "predictive",
+      "model": "AlphaFold3",
+      "route": "local implementation",
+      "direction": "input",
+      "semantics": "default compilation bucket versus extensible input",
+      "quantity": "model-specific input/output or representation",
+      "value": "largest default bucket5120; larger inputs create new bucket/recompile",
+      "unit": "processed model tokens",
+      "conditions": "Local bucket behavior does not establish hosted limits, hardware fit or successful/accurate execution at larger size.",
+      "implication": "Do not label the largest preset bucket as global molecule-size cap.",
+      "source_ids": [
+        "PR-S9"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-13",
+      "family": "predictive",
+      "model": "TimesFM3.0",
+      "route": "benchmark evaluator only",
+      "direction": "input",
+      "semantics": "route-specific variate budget and transforms",
+      "quantity": "model-specific input/output or representation",
+      "value": "budget 32 includes targets+past-future covariates+past-only covariates",
+      "unit": "variates",
+      "conditions": "Overflow subsamples covariates and chunks targets; general forecaster hard variate cap remains unestablished.",
+      "implication": "Expose transformations and lost cross-target/covariate information; do not claim a global32-variate prohibition.",
+      "source_ids": [
+        "PR-S2"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "PR-14",
+      "family": "predictive",
+      "model": "AlphaFold3",
+      "route": "local tokenizer with default nonstandard flattening",
+      "direction": "input",
+      "semantics": "representation-specific token accounting",
+      "quantity": "model-specific input/output or representation",
+      "value": "standard polymer:1 token/residue; represented ligand:1 token/atom; nonstandard residues flattened with protein MSE exception",
+      "unit": "processed residue/atom tokens",
+      "conditions": "Count the processed output atom layout; a chemical string atom count or raw residue count is insufficient.",
+      "implication": "Use the actual tokenizer/processing policy for mixed complexes; do not invent a universal atom maximum.",
+      "source_ids": [
+        "PR-S9"
+      ],
+      "disputed": false
+    },
+    {
+      "id": "AU-16",
+      "family": "audio",
+      "model": "eleven_v4",
+      "route": "ElevenLabs TTS API",
+      "direction": "input",
+      "semantics": "documented request maximum",
+      "quantity": "input text length",
+      "value": "10000",
+      "unit": "characters",
+      "conditions": "Current model table; approximate audio duration is not a guaranteed output cap. Character-count implementation remains unspecified here.",
+      "implication": "Keep exact model ID and text-accounting policy with the selected route.",
+      "source_ids": [
+        "AU-S4"
+      ],
+      "disputed": false
+    }
+  ]
+}

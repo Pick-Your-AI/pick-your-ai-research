@@ -29,7 +29,7 @@ This note is written **local-first**: the T0 owner has chosen to prioritise self
 - **CPU-only and mixed CPU+GPU builds are in scope.** For single-batch generation, memory bandwidth is reported as a main bottleneck (D27–D29), so bandwidth, instruction sets and offload support are key inputs. Measured fit records, not this note, decide how far that holds for a given machine.
 - **Crowdsourced fit reports are a possible additional evidence source.** Several community databases already exist (D36–D41). Agreement between reports is shown, but doesn't decide compatibility until #41 defines an acceptance policy (CD-8).
 - **Self-hosting enables local inference, but doesn't by itself keep data local.** Residency is checked over the build's data flows, including external destinations (D-R6).
-- **Open contract decisions.** Twelve are recorded for #40 and #41 rather than solved here (CD-1 to CD-12; CD-11 was raised on #88 and CD-12 in T5's review of #81).
+- **Open contract decisions.** Thirteen are recorded for #40 and #41 rather than solved here (CD-1 to CD-13; CD-11 was raised on #88, CD-12 in T5's review of #81, and CD-13 by T4 on #40).
 
 ## User decision
 
@@ -597,6 +597,7 @@ These are decisions for #40 and #41, recorded rather than solved in these notes.
 | CD-10 | Runtime requirements for non-model services such as vector databases | D-R7a, matrix | #40 (with #11, #15) |
 | CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides | T1 (#88) | #40 (with #7) |
 | CD-12 | Organisation-level attestations, answered once and reused across conditions: establishment jurisdiction, EU market placement, lawful basis for training data, revenue and monthly active users | T5 review of #81, D-R2a | #40 (with #30, #31, #32) |
+| CD-13 | Rules over several selections of one kind: a quantifier over all enabled selections, and semantic rejection of duplicate `primary` roles before evaluation, so "not selected", "not relevant" and "not yet known" are not collapsed into `skipped` | T4 on #40 | #40 |
 
 ## Pricing and capacity
 
@@ -614,7 +615,7 @@ No prices are recorded. Charge basis, ownership and commitment are independent:
 3. **Keep fit records immutable while retained,** with mode-appropriate keys, and use one eligibility predicate (EV-1), with checks by evidence type, wherever evidence is consumed. Eligible evidence that disagrees is resolved by #41's conflict order.
 4. **Treat CPU-only and hybrid CPU+GPU builds as first-class,** adding bandwidth (in GB/s), instruction sets, NUMA nodes, memory kind and typed placement.
 5. **Adopt crowdsourced reports as informative evidence,** with two protocol types, trust grades, facilitation, incentives (as hypotheses), integrity checks and privacy rules. Let #41 decide when they may decide verdicts (CD-8). Ask #48 and #57 to assess the existing projects, and #41 and #60 whether their data can be linked.
-6. **Take CD-1 to CD-12 to #40 and #41,** alongside D-R1 to D-R8.
+6. **Take CD-1 to CD-13 to #40 and #41,** alongside D-R1 to D-R8.
 7. **Store deployment mode on the build and its selections, not as catalog items.** In v1 it is a catalog kind (C6) needing provenance with a public URL (C7).
 
 ## Structured artifacts
@@ -639,7 +640,20 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q10 | How are hybrid builds saved, shared and compared? | #42 | — |
 | Q11 | What remains after a report or its attribution is deleted (nothing, a tombstone, or aggregate statistics), and how long are reports and raw logs kept? | #41 | #60 |
 
-Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #30, #31, #32, #33, #36, #37, #39, #40, #41, #42, #48, #52, #57, #60, #62. #30 decides how licence conditions apply to fine-tuning and derivatives (D-R2a/b, CD-6); #30, #31 and #32 consume the organisation attestations (CD-12).
+### Recorded receiving dispositions
+
+The [#3 handoff request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6238501962) includes @tynamite's **#60 acceptance of the community-dataset-rights handoff**, with #60's own handoffs retained. This is routing/ownership acceptance, not a blanket import or redistribution grant.
+
+[@zwright8's scoped response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6242696588), reviewed against main `7acbefbf4e4e700231e88be272bc89e3a73dde15`, records:
+
+| Consumer | Accepted scope and retained constraint |
+| --- | --- |
+| #5 | Per-offering API/managed data terms, region and account conditions; unavailable entitlements remain unknown |
+| #6/#30 | Source-specific licence, weight-access and derivative-lineage evidence; `derived_from` grants no rights, and generic capability does not establish fine-tuning permission |
+| #11 | Exact artifact/base/tokenizer/template, engine/build/plugins, backend/kernel, precision, ISA and draft-model tuple; missing evidence unresolved and incomplete lists cannot manufacture negatives |
+| #40 | D-R1–D-R8, EV-1 and CD-1–CD-12 proceed through reviewed version/migration proposals; frozen v1 and historical outcomes stay unchanged |
+
+The response retains operator/capacity mode classification and the training/serving distinction; it does not approve every external claim. Remaining scopes are #9, #10, #31, #32, #33, #36, #37, #39, #41, #42, #48, #52, #57 and #62, plus other co-assignees' scopes in the accepted rows. #30/#31/#32 retain their distinct CD-12 and derivative-permission decisions. No receiving disposition is inferred from authorship.
 
 ## Acceptance criteria coverage
 
@@ -651,9 +665,9 @@ Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #30, #31, #32, #
 | Comparison fields | [Field dictionary](#field-dictionary), [EV-1](#evidence-eligibility-ev-1) | Revised: licence answers typed by condition kind; evidence checked by type; remaining items recorded as CDs |
 | Rules in the shared format; hypotheses separated | [Compatibility proposals](#compatibility-proposals) | Revised: common template fields; split rules state their scope; evidence moved to EV-1 |
 | Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; vLLM CPU documentation conflict resolved by #41's conflict order |
-| Handoffs confirmed | [Open questions](#open-questions-and-handoffs) | Open |
+| Handoffs confirmed | [Recorded dispositions](#recorded-receiving-dispositions) | Partial, scoped receipts only |
 | Open questions with owners | [Open questions](#open-questions-and-handoffs) | Partly met: Q8 and Q9 point to issues with no assignee set |
-| Decision record merged | — | Open |
+| Decision record merged | PR #81 | Merged research; remaining criteria and handoffs separate |
 
 ## Evidence
 
