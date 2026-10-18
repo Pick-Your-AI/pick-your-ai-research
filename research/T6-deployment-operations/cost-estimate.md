@@ -361,6 +361,8 @@ The Together hosting amount is unknown until a dedicated hardware/replica select
 
 Both paths leave inference, independent quality evaluation, observability, transfer/storage when applicable and tax explicitly unpriced. Together also leaves hosting unpriced. Therefore neither is a complete build total or a passing budget gate. Hosting continues into later periods while the training charge is one-off; it is not amortised. For the Azure expected case, hosting alone is 8.16 times the training charge (estimated: 1,224 / 150). The scenario spec checks these exact component amounts; the existing two-significant-figure rendering remains a display choice, not currency settlement arithmetic.
 
+Under proposed C-R44, the Azure known first-period subtotal above would trigger a warning because it combines a one-off charge with recurring hosting without an amortisation policy. Keep the separate component amounts visible; do not use that combined subtotal as an accepted one-off, monthly or yearly budget comparison. No amortisation policy is adopted here.
+
 ## Capacity vs usage
 
 Capacity lines (PTU, model unit, Reserved tier TPM, GSU, node, GPU) bill for time held. Usage lines bill for tokens, calls or bytes. The comparison method:
