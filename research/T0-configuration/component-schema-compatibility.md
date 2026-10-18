@@ -205,6 +205,21 @@ Use `templates/rule-proposal.md`, plus these conventions:
 - T5 routing is accepted with constraints by @zwright8 in #126; the source-specific #10/#31/#39/#30/#32/#33/#36/#37 decisions remain with their owners.
 - The synthetic CD-7 projection experiment below now exercises migration boundaries. A released v1.1 adapter, actual evidence resolution, schema/generator changes and consumer acceptance remain open.
 
+## Claim-source traceability audit
+
+Inspected 2026-10-18 at [`61e1c9a83bbcd22a672b53e06c544ee3ddd7689d`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d). This record's factual claims concern the imported contract and recorded project decisions; its candidate designs and worked quantities are explicitly proposals/synthetic examples, not vendor measurements. The consolidated dictionary delegates publisher-specific evidence to the cited companion dictionaries and their dated primary-source ledgers. This audit does not independently reproduce those publisher claims or approve the proposed wire shapes.
+
+| Claim group | Primary project source, inspected 2026-10-18 | Check and boundary |
+| --- | --- | --- |
+| 45 baseline rules; 17 rules gated on literal self-hosted mode | [Frozen baseline](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/baseline/core-ruleset.json) | Parsed `rules`: 45 entries; 17 `applies_when` expressions contain `self_hosted`. These are code counts, not benchmark results |
+| Incomplete-list membership behavior | [Baseline](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/baseline/core-ruleset.json), [reference evaluator](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/reference/evaluate.py) | `rule.engine.model.format` uses `intersects`; `rule.precision.engine` uses `contains`. The proposed completeness gate is not implemented by frozen v1 |
+| Existing field names, versions and extension boundary | [Canonical schemas](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/schemas), [adoption policy](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/contracts/v1/ADOPTION.md) | Catalog/build/ruleset/snapshot/graph shapes are contract facts; `schema_version` is 1.0.0. Build extra-field rejection and common `x_` extension namespace are inspected in their schemas |
+| Outcome, conflict and rule-family decisions | Owner reviews linked in the introduction ([#75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), [#67](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545), [#88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88#pullrequestreview-5554964868)); [#41 record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T0-configuration/catalog-data-sources.md) | Project decisions, not new universal compatibility claims; preserve scope and fixed severity |
+| Workload/deployment field evidence and modes | [Workload](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T0-configuration/workload-use-case.md), [deployment](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T0-configuration/deployment-mode.md) | Their field dictionaries map conditions to dated C/E/D primary-source references. Open CD shapes remain unresolved; examples in this consolidation add no price or performance claim |
+| 24 v1-valid T4 rule proposals and accepted queue scope | [T4 summary](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T4-agents-integrations/README.md), [#40 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) | Count describes contributed proposal pointers, not approved executable rules; retain the queue-only disposition |
+| T5 routing and later T6/saved-build inputs | [T5 summary](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/research/T5-training-fine-tuning/README.md), [#126 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323), linked draft PRs in the routing table | Routing accepted with constraints; #114 and T6 drafts do not become merged decisions through citation |
+| M1–M5 and T1/T2 worked quantities | [Synthetic fixtures](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/tests/fixtures/t0-migration.json), [projection tests](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/61e1c9a83bbcd22a672b53e06c544ee3ddd7689d/tests/test_t0_migration.py) | Synthetic semantic examples only; no access date, region or currency is invented for nonexistent vendor measurements |
+
 ## Acceptance criteria coverage
 
 | Criterion (issue #40) | Where | Status |
@@ -216,7 +231,7 @@ Use `templates/rule-proposal.md`, plus these conventions:
 | Contribution format | Contribution format | Proposed |
 | Deployment modes covered | Rule format, item 7; #81 | Proposed |
 | Rule format, severities, `unknown` handling | Rule format and outcome semantics | Decided in reviews |
-| Primary sources with access dates | Contract files at the merged revision; reviews linked | Partial |
+| Primary sources with access dates | Claim-source traceability audit; companion primary-source ledgers | Contract/project claims traced with inspection date; synthetic quantities and proposed fields remain explicitly separate |
 | Handoffs confirmed | — | Open |
 | Open questions with owners | Contract decisions; #81 | Partial |
 | Decision record merged | PR #126 | Merged partial record; not issue completion |
