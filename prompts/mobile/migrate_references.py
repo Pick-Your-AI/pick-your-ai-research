@@ -36,12 +36,27 @@ def rewrite(text, mapping, qualify_bare=False):
     text = re.sub(r'\[([^\]]*)\]\(([^)]+)\)', protect, text)
 
     # Older generated prose sometimes qualified a research shorthand as website.
-    text = re.sub(r'(?i)(research\s+)((?:(?:Pick-Your-AI/pickyour\.ai)?#\d+)(?:[/, ]+#\d+)*)',
-                  lambda m: m[1] + re.sub(r'(?:Pick-Your-AI/pickyour\.ai)?#(\d+)',
-                                         r'Pick-Your-AI/pick-your-ai-research#\1', m[2]), text)
+    # Include explicit research PR ranges, even across a line break.
+    text = re.sub(
+        r'(?i)(research\s+(?:PRs?\s+)?)((?:(?:Pick-Your-AI/pickyour\.ai)?#\d+)(?:(?:[/,-]|,\s+|\s+and\s+)#\d+)*)',
+        lambda m: m[1] + re.sub(r'(?:Pick-Your-AI/pickyour\.ai)?#(\d+)',
+                               r'Pick-Your-AI/pick-your-ai-research#\1', m[2]), text)
+    # Qualify compact chains before migration: their numbers share the explicit
+    # namespace. A spaced slash can introduce another service, so never infer
+    # research ownership across it. Ambiguous prose must be qualified by its author.
+    text = re.sub(
+        r'(Pick-Your-AI/[\w.-]+)#(\d+)((?:[/,-]#\d+)+)',
+        lambda m: f'{m[1]}#{m[2]}' + re.sub(r'#(\d+)',
+                                            lambda n: f'{m[1]}#{n[1]}', m[3]), text)
+
     text = re.sub(r'Pick-Your-AI/pickyour\.ai#(\d+)\b', lambda m: ref(m[1]), text)
     text = url(text)
     if qualify_bare:
+        # Only consume a compact bare chain when its first reference is bare.
+        # Keeping '/' in the guard leaves raw URL fragments and already-qualified
+        # destination chains intact, instead of remapping their numbers.
+        text = re.sub(r'(?<![\w/#])#\d+(?:[/,-]#\d+)+',
+                      lambda m: re.sub(r'#(\d+)', lambda n: ref(n[1]), m[0]), text)
         text = re.sub(r'(?<![\w/#])#(\d+)\b',
                       lambda m: m[0] if re.search(r'(?i)project\s+$', text[max(0,m.start()-12):m.start()])
                       else ref(m[1]), text)

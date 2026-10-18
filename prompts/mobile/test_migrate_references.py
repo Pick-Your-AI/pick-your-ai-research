@@ -46,6 +46,65 @@ class ReferenceMigrationTests(unittest.TestCase):
         self.assertEqual(rewrite('[184](https://github.com/Pick-Your-AI/pickyour.ai/issues/184)', self.mapping),
                          '[Pick-Your-AI/pick-your-ai-apple#22](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/22)')
 
+    def test_bare_slash_chain_migrates_every_old_identity(self):
+        source = '#184/#40'
+        expected = 'Pick-Your-AI/pick-your-ai-apple#22/Pick-Your-AI/pick-your-ai-android#7'
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+        self.assertEqual(rewrite(expected, self.mapping, True), expected)
+
+    def test_raw_url_fragments_are_not_issue_references(self):
+        source = ('https://example.org/#184 '
+                  'https://example.org/#184/#40 '
+                  'https://example.org/path#184; #184/#40')
+        expected = ('https://example.org/#184 '
+                    'https://example.org/#184/#40 '
+                    'https://example.org/path#184; '
+                    'Pick-Your-AI/pick-your-ai-apple#22/'
+                    'Pick-Your-AI/pick-your-ai-android#7')
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+        self.assertEqual(rewrite(expected, self.mapping, True), expected)
+
+    def test_namespaced_chain_preserves_repository(self):
+        source = 'Pick-Your-AI/pick-your-ai-research#40/#184'
+        expected = 'Pick-Your-AI/pick-your-ai-research#40/Pick-Your-AI/pick-your-ai-research#184'
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+
+    def test_research_range_and_pr_prefix_are_not_mobile_issues(self):
+        source = 'Merged research #40-#184; open research\nPRs #40-#184'
+        expected = ('Merged research Pick-Your-AI/pick-your-ai-research#40-'
+                    'Pick-Your-AI/pick-your-ai-research#184; open research\n'
+                    'PRs Pick-Your-AI/pick-your-ai-research#40-'
+                    'Pick-Your-AI/pick-your-ai-research#184')
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+        self.assertEqual(rewrite(expected, self.mapping, True), expected)
+
+    def test_research_pr_list_keeps_all_research_identities(self):
+        source = 'research PRs #40-#184, #40 and #184'
+        expected = ('research PRs Pick-Your-AI/pick-your-ai-research#40-'
+                    'Pick-Your-AI/pick-your-ai-research#184, '
+                    'Pick-Your-AI/pick-your-ai-research#40 and '
+                    'Pick-Your-AI/pick-your-ai-research#184')
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+
+    def test_spaced_slash_does_not_extend_research_namespace(self):
+        source = 'research #40 / #184 lifecycle'
+        expected = ('research Pick-Your-AI/pick-your-ai-research#40 / '
+                    'Pick-Your-AI/pick-your-ai-apple#22 lifecycle')
+        self.assertEqual(rewrite(source, self.mapping, True), expected)
+
+    def test_tracking_references_keep_review_and_service_meaning(self):
+        from pathlib import Path
+        tracking = (Path(__file__).resolve().parents[2] /
+                    'docs/APPLE_DELIVERY_TRACKING.md').read_text()
+        self.assertIn('pick-your-ai-apple#44/Pick-Your-AI/pick-your-ai-apple#50', tracking)
+        self.assertIn('pick-your-ai-android#78 lifecycle', tracking)
+        self.assertIn('pick-your-ai-android#79 capacity/quality', tracking)
+        self.assertIn('Merged research Pick-Your-AI/pick-your-ai-research#100-'
+                      'Pick-Your-AI/pick-your-ai-research#105', tracking)
+        self.assertIn('PRs Pick-Your-AI/pick-your-ai-research#69-'
+                      'Pick-Your-AI/pick-your-ai-research#73', tracking)
+        self.assertNotRegex(tracking, r'Pick-Your-AI/[\w.-]+#\d+[/,-]#\d+')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -43,8 +43,8 @@ estimate or milestone was invented. **There is no fully Ready work at this snaps
 Priority uses release necessity, fan-out, user value and risk: P0 foundations and
 security boundaries; P1 core journeys, core T6 guidance, release and operating needs;
 P2 optional tier breadth; P3 separately approved expansion. Each issue explains its
-rationale. Shared-service foundation/authorization integration Pick-Your-AI/pick-your-ai-apple#44/#212 is P0;
-core T6 Pick-Your-AI/pick-your-ai-apple#95/#258 is P1. Contract integration completes at Integrated behavior verified,
+rationale. Shared-service foundation/authorization integration Pick-Your-AI/pick-your-ai-apple#44/Pick-Your-AI/pick-your-ai-apple#50 is P0;
+core T6 Pick-Your-AI/pick-your-ai-apple#95/Pick-Your-AI/pick-your-ai-apple#96 is P1. Contract integration completes at Integrated behavior verified,
 not Decision accepted. Conditional epic Pick-Your-AI/pick-your-ai-apple#19 and implementation Pick-Your-AI/pick-your-ai-apple#124-Pick-Your-AI/pick-your-ai-apple#129 still needs verified
 behavior after scope approval; scope approval alone cannot close those issues.
 
@@ -74,16 +74,16 @@ technical research, market, web, Android and Apple, not only the Apple subgraph.
 | Pick-Your-AI/pick-your-ai-apple#43 ← Pick-Your-AI/pick-your-ai-apple#41 | Published release arrives through Pick-Your-AI/pick-your-ai-apple#42; preserve the manifest requirement. |
 | Pick-Your-AI/pick-your-ai-apple#75 ← Pick-Your-AI/pick-your-ai-apple#70 | Evaluator output arrives through Pick-Your-AI/pick-your-ai-apple#71. |
 | Pick-Your-AI/pick-your-ai-apple#84 ← Pick-Your-AI/pick-your-ai-apple#90 | Conflict service gates selected cross-device continuity, not independent local/shared-snapshot forking. |
-| Pick-Your-AI/pick-your-ai-apple#97 ← Pick-Your-AI/pick-your-ai-apple#92/#255/#256 | Optional T3-T5 branches follow Pick-Your-AI/pick-your-ai-apple#21 scope disposition; omitted tiers cannot block core verification. |
+| Pick-Your-AI/pick-your-ai-apple#97 ← Pick-Your-AI/pick-your-ai-apple#92/Pick-Your-AI/pick-your-ai-apple#93/Pick-Your-AI/pick-your-ai-apple#94 | Optional T3-T5 branches follow Pick-Your-AI/pick-your-ai-apple#21 scope disposition; omitted tiers cannot block core verification. |
 
 Added dependencies cover shared hosting ADR Pick-Your-AI/pick-your-ai-android#35 → Apple integration ADR Pick-Your-AI/pick-your-ai-apple#23;
 account/authority decision Pick-Your-AI/pick-your-ai-apple#24 → API integration Pick-Your-AI/pick-your-ai-apple#34; authorization Pick-Your-AI/pick-your-ai-apple#50 → build
-and share adapters Pick-Your-AI/pick-your-ai-apple#46/#210; pricing service Pick-Your-AI/pick-your-ai-apple#47 → rate selection Pick-Your-AI/pick-your-ai-apple#76; signing
-Pick-Your-AI/pick-your-ai-apple#114 → Universal Links Pick-Your-AI/pick-your-ai-apple#85; threat model Pick-Your-AI/pick-your-ai-apple#98 → disclosures/policy Pick-Your-AI/pick-your-ai-apple#101/#275;
+and share adapters Pick-Your-AI/pick-your-ai-apple#46/Pick-Your-AI/pick-your-ai-apple#48; pricing service Pick-Your-AI/pick-your-ai-apple#47 → rate selection Pick-Your-AI/pick-your-ai-apple#76; signing
+Pick-Your-AI/pick-your-ai-apple#114 → Universal Links Pick-Your-AI/pick-your-ai-apple#85; threat model Pick-Your-AI/pick-your-ai-apple#98 → disclosures/policy Pick-Your-AI/pick-your-ai-apple#101/Pick-Your-AI/pick-your-ai-apple#113;
 platform identity Pick-Your-AI/pick-your-ai-apple#22 → team setup Pick-Your-AI/pick-your-ai-apple#112; real-data, policy, resilience and device
-evidence Pick-Your-AI/pick-your-ai-apple#43/#275/#268/#269 → final TestFlight acceptance Pick-Your-AI/pick-your-ai-apple#115; working support Pick-Your-AI/pick-your-ai-apple#122
+evidence Pick-Your-AI/pick-your-ai-apple#43/Pick-Your-AI/pick-your-ai-apple#113/Pick-Your-AI/pick-your-ai-apple#106/Pick-Your-AI/pick-your-ai-apple#107 → final TestFlight acceptance Pick-Your-AI/pick-your-ai-apple#115; working support Pick-Your-AI/pick-your-ai-apple#122
 → store package Pick-Your-AI/pick-your-ai-apple#116; and ongoing data/support/compatibility readiness
-Pick-Your-AI/pick-your-ai-apple#121/#284/#285 → launch Pick-Your-AI/pick-your-ai-apple#117. Bodies explain exact consumed outputs and preparation.
+Pick-Your-AI/pick-your-ai-apple#121/Pick-Your-AI/pick-your-ai-apple#122/Pick-Your-AI/pick-your-ai-apple#123 → launch Pick-Your-AI/pick-your-ai-apple#117. Bodies explain exact consumed outputs and preparation.
 
 Accounts remain conditional: launch Pick-Your-AI/pick-your-ai-apple#117 must accept Pick-Your-AI/pick-your-ai-apple#100 deletion evidence if
 accounts are included, or record the Pick-Your-AI/pick-your-ai-apple#24 exclusion. It is not an unconditional
@@ -104,12 +104,12 @@ service implementers. Agree the service/data owner through Pick-Your-AI/pick-you
 | Research Pick-Your-AI/pick-your-ai-research#40 / application Pick-Your-AI/pick-your-ai-android#36 versioned API | Pick-Your-AI/pick-your-ai-apple#34 |
 | Research Pick-Your-AI/pick-your-ai-research#41/Pick-Your-AI/pick-your-ai-research#60 source-use policy; Pick-Your-AI/pick-your-ai-android#22 Android use matrix is context | Pick-Your-AI/pick-your-ai-apple#38 Apple display/cache/export matrix |
 | Website Pick-Your-AI/pickyour.ai#15 / Pick-Your-AI/pick-your-ai-android#28 normalization, Pick-Your-AI/pick-your-ai-android#38 promotion, Pick-Your-AI/pick-your-ai-android#50 immutable publication, Pick-Your-AI/pick-your-ai-android#39 corrections, Pick-Your-AI/pick-your-ai-android#60 supported slice | Pick-Your-AI/pick-your-ai-apple#39-Pick-Your-AI/pick-your-ai-apple#43 |
-| Website Pick-Your-AI/pickyour.ai#15 / Pick-Your-AI/pick-your-ai-android#51 service foundation, Pick-Your-AI/pick-your-ai-android#61 discovery | Pick-Your-AI/pick-your-ai-apple#44/#207 |
-| Website Pick-Your-AI/pickyour.ai#17 and research Pick-Your-AI/pick-your-ai-research#42 / Pick-Your-AI/pick-your-ai-research#111 lifecycle, Pick-Your-AI/pick-your-ai-android#95 sharing | Pick-Your-AI/pick-your-ai-apple#46/#210 |
+| Website Pick-Your-AI/pickyour.ai#15 / Pick-Your-AI/pick-your-ai-android#51 service foundation, Pick-Your-AI/pick-your-ai-android#61 discovery | Pick-Your-AI/pick-your-ai-apple#44/Pick-Your-AI/pick-your-ai-apple#45 |
+| Website Pick-Your-AI/pickyour.ai#17 and research Pick-Your-AI/pick-your-ai-research#42 / Pick-Your-AI/pick-your-ai-android#78 lifecycle, Pick-Your-AI/pick-your-ai-android#95 sharing | Pick-Your-AI/pick-your-ai-apple#46/Pick-Your-AI/pick-your-ai-apple#48 |
 | Research Pick-Your-AI/pick-your-ai-research#39 and website Pick-Your-AI/pickyour.ai#17 / Pick-Your-AI/pick-your-ai-android#94 evaluation/pricing | Pick-Your-AI/pick-your-ai-apple#47 and Pick-Your-AI/pick-your-ai-apple#76-Pick-Your-AI/pick-your-ai-apple#79 |
-| Website Pick-Your-AI/pickyour.ai#16; research Pick-Your-AI/pick-your-ai-research#10/Pick-Your-AI/pick-your-ai-research#36 / Pick-Your-AI/pick-your-ai-research#112 capacity/quality reads | Pick-Your-AI/pick-your-ai-apple#49/#235 |
-| Website Pick-Your-AI/pickyour.ai#17 / Pick-Your-AI/pick-your-ai-android#62 authorization, Pick-Your-AI/pick-your-ai-android#63 security controls | Pick-Your-AI/pick-your-ai-apple#50/#213 |
-| Website Pick-Your-AI/pickyour.ai#18 / research Pick-Your-AI/pick-your-ai-research#40 display labels | Pick-Your-AI/pick-your-ai-apple#32/#220 |
+| Website Pick-Your-AI/pickyour.ai#16; research Pick-Your-AI/pick-your-ai-research#10/Pick-Your-AI/pick-your-ai-research#36 / Pick-Your-AI/pick-your-ai-android#79 capacity/quality reads | Pick-Your-AI/pick-your-ai-apple#49/Pick-Your-AI/pick-your-ai-apple#73 |
+| Website Pick-Your-AI/pickyour.ai#17 / Pick-Your-AI/pick-your-ai-android#62 authorization, Pick-Your-AI/pick-your-ai-android#63 security controls | Pick-Your-AI/pick-your-ai-apple#50/Pick-Your-AI/pick-your-ai-apple#51 |
+| Website Pick-Your-AI/pickyour.ai#18 / research Pick-Your-AI/pick-your-ai-research#40 display labels | Pick-Your-AI/pick-your-ai-apple#32/Pick-Your-AI/pick-your-ai-apple#58 |
 
 Application repository `main` contains React/TypeScript, no native Apple/Android
 application or backend deployment. [PR #9](https://github.com/Pick-Your-AI/pickyour.ai/pull/9)
@@ -124,12 +124,12 @@ review. Preserve those web checks when adding macOS CI.
 
 The PR inventory includes all open, closed and merged PRs in all three organization
 repositories. No open application implementation PR exists at this snapshot.
-Merged research Pick-Your-AI/pick-your-ai-research#100-Pick-Your-AI/pick-your-ai-android#72 contains partial evidence/reconciliation; it does not
+Merged research Pick-Your-AI/pick-your-ai-research#100-Pick-Your-AI/pick-your-ai-research#105 contains partial evidence/reconciliation; it does not
 establish production publication or accepted executable policy. Open research
-PRs Pick-Your-AI/pick-your-ai-android#36-Pick-Your-AI/pick-your-ai-android#40, Pick-Your-AI/pick-your-ai-android#48 and Pick-Your-AI/pick-your-ai-android#50 have Changes requested despite green structural validation:
+PRs Pick-Your-AI/pick-your-ai-research#69-Pick-Your-AI/pick-your-ai-research#73, Pick-Your-AI/pick-your-ai-research#81 and Pick-Your-AI/pick-your-ai-research#83 have Changes requested despite green structural validation:
 T4 provenance/summary consistency, workload resident-sequence sizing, and benchmark
 uncertainty claims need reviewer disposition. Updated commits require re-review;
-the old review is not proof the current head remains defective. Pick-Your-AI/pick-your-ai-android#41 is open with
+the old review is not proof the current head remains defective. Pick-Your-AI/pick-your-ai-research#74 is open with
 green validation and review comments but no recorded approval decision. These are
 bounded input-review gaps, not blanket blockers on unrelated Apple preparation.
 
@@ -159,7 +159,7 @@ Pick-Your-AI/pick-your-ai-apple#20 journey/evidence mapping and Pick-Your-AI/pic
 execution prerequisites. Pick-Your-AI/pick-your-ai-apple#38 source-use applicability can also start independently.
 Then resolve Pick-Your-AI/pick-your-ai-apple#21-Pick-Your-AI/pick-your-ai-apple#24 scope/platform/hosting/identity, followed by Pick-Your-AI/pick-your-ai-apple#26 toolchain,
 Pick-Your-AI/pick-your-ai-apple#32 contracts, Pick-Your-AI/pick-your-ai-apple#30 macOS CI and Pick-Your-AI/pick-your-ai-apple#86 durable storage. Access/signing evidence from
-Pick-Your-AI/pick-your-ai-apple#112/#276 needs authorized Apple maintainers; no team permissions were changed here.
+Pick-Your-AI/pick-your-ai-apple#112/Pick-Your-AI/pick-your-ai-apple#114 needs authorized Apple maintainers; no team permissions were changed here.
 No work is marked Ready until ownership and its exact inputs are available.
 
 ## Validation boundaries
