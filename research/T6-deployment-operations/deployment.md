@@ -649,9 +649,10 @@ conditional inputs are skipped. An evidenced capability still needs the applicab
 R18/S10 and #35 controls, and does not certify the whole deployment.
 
 These inputs remain proposed versioned operands for #40, with #27 protocol and
-#25 framework evidence. Managed agent runtimes priced in L48 are still a separate
-uncompleted deployment-target comparison; this addition neither invents their
-capabilities nor imports their prices as readiness evidence. #37 retains target
+#25 framework evidence. The separately dated agent-hosting comparison below
+supplies the later source-only packaging slice for the offerings named in L48;
+its remaining readiness requirements and receiving acceptance stay explicit.
+Prices alone do not establish readiness. #37 retains target
 selection and actual execution validation, with #38 observation and #39 cost scope.
 
 ## Agent-hosting target packaging comparison — 2026-10-18
