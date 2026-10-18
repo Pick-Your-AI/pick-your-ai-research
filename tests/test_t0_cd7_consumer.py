@@ -1,15 +1,18 @@
 """Native CD-7 integrity handoff tests; all retained source bytes are synthetic."""
 
 from copy import deepcopy
+from contextlib import contextmanager
 import json
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tests"))
+import t0_cd7_consumer_prototype as consumer
 from t0_cd7_consumer_prototype import (
     ConsumerError, DEFAULT_ARTIFACT_BYTES, MAX_DEPTH, MAX_ENVELOPE_BYTES,
     MAX_NODES, MAX_REVISION, SCHEMA, bounded_json, decode, digest, encoded,
@@ -27,6 +30,26 @@ ARTIFACTS = {"catalog_snapshot": CATALOG, "pricebook": PRICEBOOK}
 
 def result(raw):
     return decode(raw)["x_t0_cd7_consumer_result"]
+
+
+@contextmanager
+def without_optional_formats():
+    # Exercise the supported dependency configuration even if a developer has
+    # installed JSON Schema's optional date-time extras.
+    with patch("validate_research.FormatChecker", lambda: FormatChecker(formats=[])), \
+            patch.object(consumer, "VALIDATOR", consumer.VALIDATOR.evolve(format_checker=None)):
+        yield
+
+
+def forged_artifact_response(kind, raw):
+    # Keep a truthful advertised date while replacing the artifact bytes/digest.
+    # The consumer must check the received document before trusting this claim.
+    document = decode(RESPONSE)
+    descriptor = document["x_t0_cd7_consumer_result"]["bindings"][kind]["artifact"]
+    descriptor["sha256"], descriptor["byte_length"] = digest(raw), len(raw)
+    descriptor["retrieval_path"] = "/artifacts/sha256/" + digest(raw) + ".json"
+    artifacts = {**ARTIFACTS, kind: raw}
+    return encoded(document), artifacts
 
 
 class CD7Consumer(unittest.TestCase):
@@ -272,6 +295,160 @@ class CD7Consumer(unittest.TestCase):
         document["selections"][0]["catalog_item"]["version"] = "changed"
         self.assertEqual(inspect(stored, REQUEST, BUILD, PINS), before)
         self.assertEqual(ARTIFACTS, {"catalog_snapshot": CATALOG, "pricebook": PRICEBOOK})
+
+    def test_invalid_capture_dates_stay_inspectable_without_optional_formats(self):
+        invalid = (
+            "", "not-a-date", "2026-02-30T00:00:00Z", "2025-02-29T00:00:00Z",
+            "2026-00-18T00:00:00Z", "2026-13-18T00:00:00Z", "0000-01-01T00:00:00Z",
+            "2026-10-18T24:00:00Z", "2026-10-18T00:60:00Z", "2026-10-18T00:00:61Z",
+            "2026-10-18T00:00:00", "2026-10-18 00:00:00Z", "2026-10-18T00:00:00.Z",
+            "2026-10-18T00:00:00+24:00", "2026-10-18T00:00:00+00:60",
+            "2026-10-18T00:00:00+0000", "2026-10-18T00:00:00Z\n",
+            " 2026-10-18T00:00:00Z", "2026-10-18T00:00:00Z ",
+            # Valid RFC leap-second syntax is explicitly outside this profile.
+            "1990-12-31T23:59:60Z",
+        )
+        with without_optional_formats():
+            for kind in ARTIFACTS:
+                for captured_at in invalid:
+                    document = decode(ARTIFACTS[kind])
+                    document["captured_at"] = captured_at
+                    artifacts = {**ARTIFACTS, kind: encoded(document)}
+                    pins = sidecar(catalog=artifacts["catalog_snapshot"], pricebook=artifacts["pricebook"])
+                    req = request(BUILD, pins)
+                    stored = SnapshotArchive(list(artifacts.items()))
+                    with self.subTest(kind=kind, captured_at=captured_at):
+                        raw = inspect(stored, req, BUILD, pins)
+                        observed = result(raw)
+                        self.assertEqual(observed["bindings"][kind]["status"],
+                                         "artifact_representation_unsupported")
+                        self.assertNotIn("artifact", observed["bindings"][kind])
+                        other = next(name for name in ARTIFACTS if name != kind)
+                        self.assertEqual(observed["bindings"][other]["status"], "resolved")
+                        self.assertEqual(observed["pair"], {"status": "incomplete"})
+                        self.assert_code("pair_unresolved", verify_complete_pair,
+                                         raw, req, BUILD, pins, artifacts)
+
+    def test_received_dates_are_checked_in_both_descriptors_and_original_artifacts(self):
+        with without_optional_formats():
+            for kind in ARTIFACTS:
+                for captured_at in ("not-a-date", "2026-02-30T00:00:00Z",
+                                    "2026-10-18T00:00:00+24:00", "2026-10-18T00:00:00Z\n"):
+                    with self.subTest(kind=kind, captured_at=captured_at):
+                        response = decode(RESPONSE)
+                        response["x_t0_cd7_consumer_result"]["bindings"][kind]["artifact"]["captured_at"] = captured_at
+                        self.assert_code("artifact_representation_unsupported", wire,
+                                         encoded(response), "x_t0_cd7_consumer_result")
+                        document = decode(ARTIFACTS[kind])
+                        document["captured_at"] = captured_at
+                        response, artifacts = forged_artifact_response(kind, encoded(document))
+                        self.assert_code("artifact_representation_unsupported", verify_complete_pair,
+                                         response, REQUEST, BUILD, PINS, artifacts)
+
+    def test_supported_capture_dates_preserve_original_strings_bytes_and_pair_identity(self):
+        supported = (
+            "0001-01-01T00:00:00+23:59", "9999-12-31T23:59:59-23:59",
+            "2024-02-29t12:34:56.123456789012345678900z",
+            "2026-10-18T12:30:00+05:45", "2026-10-18T12:30:00-00:00",
+        )
+        with without_optional_formats():
+            for captured_at in supported:
+                artifacts = {}
+                for kind, raw in ARTIFACTS.items():
+                    document = decode(raw)
+                    document["captured_at"] = captured_at
+                    artifacts[kind] = encoded(document)
+                pins = sidecar(catalog=artifacts["catalog_snapshot"], pricebook=artifacts["pricebook"])
+                req = request(BUILD, pins)
+                response = inspect(SnapshotArchive(list(artifacts.items())), req, BUILD, pins)
+                accepted = verify_complete_pair(response, req, BUILD, pins, artifacts)
+                with self.subTest(captured_at=captured_at):
+                    self.assertIs(accepted[0], artifacts["catalog_snapshot"])
+                    self.assertIs(accepted[1], artifacts["pricebook"])
+                    for kind in ARTIFACTS:
+                        self.assertEqual(result(response)["bindings"][kind]["artifact"]["captured_at"], captured_at)
+                    self.assertNotEqual(result(response)["pair"]["identity"], result(RESPONSE)["pair"]["identity"])
+                    self.assertEqual(result(response)["qualification"], result(RESPONSE)["qualification"])
+
+    def test_newline_rate_id_is_withheld_before_membership_or_output_encoding(self):
+        for mismatched in (False, True):
+            prices = decode(PRICEBOOK)
+            prices["rates"][0]["id"] += "\n"
+            if mismatched:
+                prices["rates"][0]["catalog_item_id"] = "cat.missing.fixture"
+            raw = encoded(prices)
+            pins = sidecar(pricebook=raw)
+            req = request(BUILD, pins)
+            with self.subTest(mismatched=mismatched):
+                # Frozen validation admits this suffix; never strip retained IDs.
+                response = result(inspect(archive(pricebook=raw), req, BUILD, pins))
+                self.assertEqual(response["bindings"]["pricebook"]["status"],
+                                 "artifact_representation_unsupported")
+                self.assertEqual(response["bindings"]["catalog_snapshot"]["status"], "resolved")
+                self.assertEqual(response["pair"], {"status": "incomplete"})
+                forged, artifacts = forged_artifact_response("pricebook", raw)
+                self.assert_code("artifact_representation_unsupported", verify_complete_pair,
+                                 forged, REQUEST, BUILD, PINS, artifacts)
+        # A well-formed cross-catalog rate keeps its existing distinct result.
+        prices["rates"][0]["id"] = prices["rates"][0]["id"].rstrip("\n")
+        raw = encoded(prices)
+        pins = sidecar(pricebook=raw)
+        observed = result(inspect(archive(pricebook=raw), request(BUILD, pins), BUILD, pins))
+        self.assertEqual(observed["pair"], {"status": "rate_catalog_mismatch",
+                         "unmatched_rate_ids": [prices["rates"][0]["id"]]})
+
+    def test_native_id_profile_covers_artifact_members_and_reference_fields(self):
+        catalog = decode(CATALOG)
+        model = next(i for i, item in enumerate(catalog["items"]) if item["kind"] == "model")
+        for kind, path in (
+                ("catalog_snapshot", ("items", 0, "id")),
+                ("catalog_snapshot", ("items", model, "spec", "provider_ref")),
+                ("pricebook", ("rates", 0, "catalog_item_id"))):
+            document = decode(ARTIFACTS[kind])
+            target = document
+            for part in path[:-1]:
+                target = target[part]
+            target[path[-1]] += "\n"
+            artifacts = {**ARTIFACTS, kind: encoded(document)}
+            pins = sidecar(catalog=artifacts["catalog_snapshot"], pricebook=artifacts["pricebook"])
+            with self.subTest(kind=kind, path=path):
+                response = result(inspect(SnapshotArchive(list(artifacts.items())),
+                                          request(BUILD, pins), BUILD, pins))
+                self.assertEqual(response["bindings"][kind]["status"], "artifact_representation_unsupported")
+                self.assertEqual(response["pair"], {"status": "incomplete"})
+
+    def test_native_build_and_wire_selection_ids_require_the_entire_string(self):
+        for path in (("id",), ("locks", "dependency_graph_id"), ("selections", 0, "id"),
+                     ("selections", 0, "catalog_item_id"), ("links", 0, "id"),
+                     ("links", 0, "from_selection_id"), ("links", 0, "to_selection_id")):
+            build = decode(BUILD)
+            target = build
+            for part in path[:-1]:
+                target = target[part]
+            target[path[-1]] += "\n"
+            raw = encoded(build)
+            pins = sidecar(raw)
+            with self.subTest(path=path):
+                self.assert_code("invalid_cd7_input", inspect, archive(), request(raw, pins), raw, pins)
+        response = decode(RESPONSE)
+        response["x_t0_cd7_consumer_result"]["selections"][0]["selection_id"] += "\n"
+        self.assert_code("malformed_envelope", wire, encoded(response), "x_t0_cd7_consumer_result")
+
+    def test_native_id_checks_preserve_frozen_schemas_and_untyped_extension_values(self):
+        frozen = {path.name: json.loads(path.read_text())
+                  for path in (ROOT / "contracts/v1/schemas").glob("*.schema.json")}
+        self.assertEqual(consumer.SCHEMAS, frozen)
+        catalog = decode(CATALOG)
+        catalog["items"][0]["extensions"] = {
+            "x_cd7_fixture": {"id": "external/display id\n", "captured_at": "display text, not a timestamp\n"}}
+        raw = encoded(catalog)
+        pins = sidecar(catalog=raw)
+        req = request(BUILD, pins)
+        response = inspect(archive(raw), req, BUILD, pins)
+        accepted = verify_complete_pair(response, req, BUILD, pins,
+                                        {"catalog_snapshot": raw, "pricebook": PRICEBOOK})
+        self.assertIs(accepted[0], raw)
+        self.assertEqual(consumer.SCHEMAS, frozen)
 
     def test_descriptor_timestamps_are_ascii_without_narrowing_frozen_v1(self):
         for captured_at in ("２０２６-10-16T09:00:00Z", "٢٠٢٦-10-16T09:00:00Z",
