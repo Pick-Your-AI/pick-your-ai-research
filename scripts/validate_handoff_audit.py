@@ -206,6 +206,8 @@ def validate(ledger, readback, audit):
     require(coverage['current_audit_acceptance_pending'] == pending,
             'context response incorrectly counted as current audit acceptance')
     for number, issue in issues.items():
+        require(len(issue['sub_issues']) == len(set(issue['sub_issues'])),
+                f'#{number}: duplicate native sub-issue')
         parent = issue['parent']
         require(parent is None or (parent['number'] in issues and
                 number in issues[parent['number']]['sub_issues']),
@@ -214,6 +216,19 @@ def validate(ledger, readback, audit):
                     issues[child]['parent']['number'] == number
                     for child in issue['sub_issues']),
                 'native parent/sub-issue mismatch')
+    # Reciprocal edges alone also describe self-links and cycles. Follow each
+    # single-parent chain once, without recursion or changing snapshot order.
+    complete = set()
+    for number in issues:
+        chain = set()
+        current = number
+        while current is not None and current not in complete:
+            require(current not in chain,
+                    f'native parent/sub-issue cycle at #{current}')
+            chain.add(current)
+            parent = issues[current]['parent']
+            current = None if parent is None else parent['number']
+        complete.update(chain)
     captured_prs = {pr['number'] for pr in readback['pull_requests']}
     require(len(captured_prs) == len(readback['pull_requests']),
             'duplicate snapshot pull request')
