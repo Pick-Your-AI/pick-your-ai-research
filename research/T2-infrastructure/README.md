@@ -8,15 +8,17 @@ Continuation audit on 2026-10-16 re-read live issues, comments, native relations
 
 **Status: #11 research is complete; #8/#9/#10 retain their remaining acceptance criteria.** [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291), merged as [859f47db88f0d8f1a99899ca9029ce0da19800c8](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/859f47db88f0d8f1a99899ca9029ce0da19800c8), delivered the [final research handoff assessment](inference-engine.md#final-research-handoff-assessment--2026-10-18). All nine original #11 criteria are satisfied by reviewed artifacts and scoped consuming-owner confirmations. This completes the engine research deliverable; product implementation, runtime deployment, provisioning and training remain in their owning scopes.
 
+The [precision intake correction](gpu-compute.md#incomplete-precision-intake-correction-2026-10-18) keeps the incomplete H100 SXM and MI300X candidates note-only; the later accepted A100/P4de records retain their separately documented native-precision scope.
+
 ## Decision records and artifacts
 
 | Issue | Decision record / recommendation for review | Structured proposals |
 | --- | --- | --- |
-| [#9 Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | [hosting.md](hosting.md): separate operational responsibility, invocation protocol, location and billing; retain unknown stock/quotas and infrastructure-storage boundaries | [Five host and five storage proposals](../../catalog/proposals/); [dated Pricebook](../../pricing/proposals/t2-hosting-2026-10-16.json), five conditional rates |
-| [#10 GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | [gpu-compute.md](gpu-compute.md): separate physical accelerator from provisionable profile; byte-based weights/KV/runtime/adapter sizing with per-device topology and explicit uncertainty | Four accelerator records and one EC2 profile in [catalog proposals](../../catalog/proposals/); [reproducible arithmetic](compute/sizing_examples.py) |
+| [#9 Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) | [hosting.md](hosting.md): separate operational responsibility, invocation protocol, location and billing; retain unknown stock/quotas and infrastructure-storage boundaries | [Five host and seven storage proposals](../../catalog/proposals/); [dated Pricebook](../../pricing/proposals/t2-hosting-2026-10-16.json), five conditional rates |
+| [#10 GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | [gpu-compute.md](gpu-compute.md): separate physical accelerator from provisionable profile; byte-based weights/KV/runtime/adapter sizing with per-device topology and explicit uncertainty | L40S, RTX 4090 and A100 80GB accelerator records plus two EC2 profiles in [catalog proposals](../../catalog/proposals/); H100 SXM and MI300X remain note-only; [reproducible arithmetic](compute/sizing_examples.py) |
 | [#11 Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) | [inference-engine.md](inference-engine.md): version-specific support tuples and API/parser/adapter semantics; retain historical rows and unknown combinations | [vLLM v0.31.0](../../catalog/proposals/t2-engine-vllm-v0.31.0.json), [llama.cpp v0.7.0](../../catalog/proposals/t2-engine-llama-cpp-v0.7.0.json), [TGI v3.3.7](../../catalog/proposals/t2-engine-tgi-v3.3.7.json) |
 
-The 18 CatalogItems cover all five scoped canonical kinds: `hosting_platform`, `storage`, `accelerator`, `compute_profile`, `inference_engine`. Service/hardware date versions are research snapshots; engine versions are source releases. Catalog `active` is lifecycle metadata, not owner approval or security certification. No new real ResourceEstimate is emitted without real T1 build/selection inputs.
+The 20 CatalogItems cover all five scoped canonical kinds: `hosting_platform`, `storage`, `accelerator`, `compute_profile`, `inference_engine`. Service/hardware date versions are research snapshots; engine versions are source releases. Catalog `active` is lifecycle metadata, not owner approval or security certification. No new real ResourceEstimate is emitted without real T1 build/selection inputs.
 
 One integrated review submission keeps the shared host/profile/accelerator references resolvable together. Files and acceptance assessments remain separated by research issue. The summary, matrix and ledger are owned by the orchestrator.
 
@@ -31,10 +33,10 @@ One integrated review submission keeps the shared host/profile/accelerator refer
 
 ## Contributions for #40 review
 
-There are 12 proposed assertion groups, with explicit applicability, fields, evidence, remediation and passing/failing/unknown examples:
+There are 11 proposed assertion groups, with explicit applicability, fields, evidence, remediation and passing/failing/unknown examples. Former COMPUTE-05 is now shared applicability:
 
 - [Three hosting rule groups](rules/hosting-rules.md): private-network capability, mounted-volume locality, offering membership and incomplete evidence.
-- [Five compute rule groups](rules/compute-capacity.md): per-device memory, joint backend support, context/KV, topology/inventory, API applicability.
+- [Four compute rule groups](rules/compute-capacity.md): per-device memory, joint backend support, KV accounting and topology/inventory, each with shared component applicability. Context-limit checking remains with #7.
 - [Four engine rule groups](rules/engine-compatibility.md): artifact/architecture loader, backend/precision implementation, adapter lineage, required API contract.
 
 Rule groups separate fixed-severity constraints from evidence and applicability diagnostics. A rule's outcome does not change its severity; a `pass` on an `error` constraint is still a pass. The proposed clause splits do not publish an approved Ruleset.
@@ -51,7 +53,7 @@ The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–
 | --- | --- | --- |
 | #8 | @zwright8, @Mattycodes69 | Open; merged summary and records, full child acceptance remains |
 | #9 | @Mattycodes69, @appletechie | Open; remaining #14/#15 receiving decisions and #37/#39 scopes, regional breadth and billing evidence are listed in the live issue |
-| #10 | @Mattycodes69, @appletechie | Open; #39 receipt, other co-owner decisions and measurement/headroom work remain |
+| #10 | @Mattycodes69, @appletechie | Open; both scoped #39 responses are recorded, including unapplied headroom. Changed H100/MI300X intake availability, precision semantics, methodology and measurement/headroom decisions remain |
 | #11 | @zwright8, @Mattycodes69 | Closed as completed on 2026-10-18 through [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291); all nine original research criteria satisfied. Named lifecycle/#42 and runtime follow-ups retain their own scope |
 
 The original Project observations were made on 2026-10-16: `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`, with #8/#10/#11 Critical and #9 High. They are historical, not current board state. An earlier API Project readback on 2026-10-18 failed with `INSUFFICIENT_SCOPES` (`read:project` missing). After #291 merged and #11 closed, a subsequent public [#11 issue-sidebar readback](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) on the same date showed `Status = Done` in Pick Your AI — AI Builder Research. This records the observed #11 value, not a board write or a readback of other fields/issues. Preserve live fields and priorities; merged partial research alone is insufficient for Done.
