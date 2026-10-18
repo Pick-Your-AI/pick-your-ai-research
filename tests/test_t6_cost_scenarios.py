@@ -27,10 +27,44 @@ class CostScenarioTests(unittest.TestCase):
                                   capture_output=True, text=True)
 
     def test_published_scenario_arithmetic(self):
-        result = subprocess.run([sys.executable, str(SCRIPT), str(SPEC)],
-                                capture_output=True, text=True)
+        spec = json.loads(SPEC.read_text())
+        self.assertTrue(spec['scenarios'])
+        for scenario in spec['scenarios']:
+            with self.subTest(scenario=scenario['id']):
+                self.assertTrue(scenario['expect'])
+                for expected in scenario['expect'].values():
+                    self.assertEqual(set(expected) - {'sf'}, set(spec['cases']))
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'results.json'
+            result = subprocess.run([sys.executable, str(SCRIPT), str(SPEC), '--json', str(output)],
+                                    capture_output=True, text=True, timeout=30)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            results = json.loads(output.read_text(encoding='utf-8'))
+        self.assertEqual(
+            {case: values['monthly'] for case, values in results['W1-gemini'].items()},
+            {'low': 10800, 'expected': 12000, 'high': 31200},
+        )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn('checked 273 quoted figures', result.stdout)
+
+    def test_evaluated_and_rounded_overflow_fail_before_export(self):
+        # Finite JSON inputs can still overflow during evaluation or rounding.
+        for expression, quantity in (('quantity * 2', 1e308),
+                                     ('min(quantity * 2, 2)', 1e308),
+                                     ('quantity', 1.79e308)):
+            with self.subTest(expression=expression), tempfile.TemporaryDirectory() as directory:
+                spec = {'cases': {'low': {}}, 'shared': {'quantity': quantity},
+                        'scenarios': [{'id': 'synthetic', 'steps': [['cost', expression]],
+                                       'report': ['cost'], 'expect': {'cost': {'low': 2}}}]}
+                source = Path(directory) / 'synthetic-overflow.json'
+                output = Path(directory) / 'results.json'
+                source.write_text(json.dumps(spec), encoding='utf-8')
+                result = subprocess.run([sys.executable, str(SCRIPT), str(source), '--json', str(output)],
+                                        capture_output=True, text=True, timeout=30)
+                self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertIn('non-finite number', result.stderr)
+                self.assertNotIn('all quoted figures match', result.stdout)
+                self.assertFalse(output.exists())
 
     def test_mismatch_fails(self):
         result = self.run_spec(2)
