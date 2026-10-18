@@ -1,6 +1,6 @@
 # MVP alternatives
 
-Issue: [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) (MR-11). Parent: #47. Refreshed: 2026-10-16.
+Issue: [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) (MR-11). Parent: #47. Repository-state refresh: 2026-10-18; original source access dates remain attached to their evidence.
 
 Status: **draft recommendation for validation only.** It is not implementation, build, deployment or outreach authorization, and it is not an accepted MVP choice. #58 is natively blocked by [#66](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66) and cannot be accepted, nor closed, before #66 is resolved through the accepted workflow. Validation approval, evidence acceptance and product implementation authorization are three separate decisions; this note requests none of them on anyone's behalf.
 
@@ -17,7 +17,7 @@ Each claim below carries one class. Grades follow [RESEARCH_METHOD.md](../../doc
 | OBS | Observed browser behavior, scoped to the recorded steps |
 | AJ | Analyst judgement (all ratings in the comparison table) |
 | HYP | Hypothesis, unvalidated |
-| RS | Repository state (GitHub issue/PR metadata, read 2026-10-16); not accepted research |
+| RS | Repository state (GitHub issue/PR metadata, refreshed 2026-10-18 where identified below; historical receipts retain their dates); not accepted research |
 
 **Pending review** means the cited input is unmerged, or merged only to the `research/market-intelligence` proposal branch without accepted handoff dispositions. Nothing marked pending is accepted evidence.
 
