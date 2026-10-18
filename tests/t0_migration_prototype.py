@@ -26,7 +26,13 @@ def component_modes(components):
             return None
         if item['kind'] == 'fine_tuned_model' and item.get('artifact_type') == 'adapter':
             base = item.get('base_id')
-            result = resolve(base, visiting | {key}) if base else 'unknown'
+            # #81 inheritance is from a base model, not any serving component.
+            # Keep synthetic model lineage traversal; real link/catalog agreement
+            # remains CD-6 work, not something this projection establishes.
+            base_item = by_id.get(base)
+            result = (resolve(base, visiting | {key})
+                      if base_item and base_item['kind'] in {'model', 'fine_tuned_model'}
+                      else 'unknown')
             result = result or 'unknown'
         elif item['kind'] == 'fine_tuned_model' and item.get('artifact_type') != 'full':
             result = 'unknown'
