@@ -17,7 +17,8 @@ class HandoffAuditValidation(unittest.TestCase):
     def setUp(self):
         # Synthetic attribution fixture, independent of future owner decisions.
         cutoff = '2026-10-18T02:50:05Z'
-        historical = {'reviewer': 'consumer', 'reviewed_commit': 'a' * 40}
+        historical = {'reviewer': 'consumer', 'reviewed_commit': 'a' * 40,
+                      'submitted_at': '2026-10-16T00:00:00Z'}
         def response(role):
             return {'reviewer': 'consumer', 'role': role,
                     'url': 'https://example.com/synthetic-receipt/' + role,
@@ -145,6 +146,85 @@ class HandoffAuditValidation(unittest.TestCase):
                         self.assertIn(field + ' must be nonempty text', result.stderr)
                         self.assertNotIn('Handoff audit integrity OK', result.stdout)
         self.assertEqual({name: (BASE / name).read_text(encoding='utf-8') for name in originals}, originals)
+
+    def set_receipt_time(self, kind, value):
+        # Alter both copies together: simple snapshot-equality checks must not
+        # mistake a copied malformed or post-cutoff timestamp for valid evidence.
+        if kind == 'historical':
+            self.ledger[0]['owner_review']['submitted_at'] = value
+            self.readback['historical_owner_reviews'][0]['owner_review']['submitted_at'] = value
+        else:
+            self.ledger[2]['responses'][0]['submitted_at'] = value
+            self.readback['new_scoped_responses'][1]['submitted_at'] = value
+
+    def test_receipts_compare_actual_instants_and_include_the_cutoff(self):
+        for kind in ('historical', 'scoped'):
+            for value in ('2026-10-18T02:50:05Z',
+                          '2026-10-18T02:50:05.000000Z',
+                          '2026-10-18T04:50:05+02:00',
+                          '2026-10-17T21:50:05-05:00'):
+                with self.subTest(kind=kind, value=value):
+                    self.set_receipt_time(kind, value)
+                    self.check()
+
+    def test_post_cutoff_receipts_cannot_pass_by_string_order_or_history_class(self):
+        for kind in ('historical', 'scoped'):
+            for value in ('2026-10-19T00:00:00Z',
+                          '2026-10-17T23:59:59-12:00',
+                          '2026-10-18T02:50:05.000001Z'):
+                with self.subTest(kind=kind, value=value):
+                    self.set_receipt_time(kind, value)
+                    with self.assertRaisesRegex(HandoffValidationError, 'post-cutoff receipt'):
+                        self.check()
+            self.set_receipt_time(kind, '2026-10-16T00:00:00Z')
+
+    def test_receipt_dates_require_real_calendars_and_explicit_timezones(self):
+        invalid = (None, True, 42, [], {}, '', '0', '2026-10-17',
+                   '2026-02-30T00:00:00Z', '2026-10-17T00:00:00',
+                   '2026-10-17T00:00:00Z\n', '2026-10-17T00:00:60Z',
+                   '2026-10-17T00:00:00+24:00', '2026-10-17T00:00:00+00:60',
+                   '2026-10-17T00:00:00.0000001Z',
+                   '\u0662\u0660\u0662\u0666-10-17T00:00:00Z')
+        for kind in ('historical', 'scoped'):
+            for value in invalid:
+                with self.subTest(kind=kind, value=value):
+                    self.set_receipt_time(kind, value)
+                    with self.assertRaisesRegex(
+                            HandoffValidationError,
+                            'audit timestamp|submitted_at must be nonempty text'):
+                        self.check()
+            self.set_receipt_time(kind, '2026-10-16T00:00:00Z')
+
+    def test_cutoff_dates_are_validated_even_when_both_copies_agree(self):
+        for value in (None, False, 42, '2026-10-35T02:50:05Z',
+                      '2026-10-18T02:50:05', '9999-12-31T23:59:59-01:00'):
+            with self.subTest(value=value):
+                self.readback['snapshot_cutoff_utc'] = value
+                self.audit['snapshot_cutoff_utc'] = value
+                with self.assertRaisesRegex(HandoffValidationError, 'audit timestamp'):
+                    self.check()
+
+    def test_historical_receipts_need_their_original_observed_timestamp(self):
+        del self.ledger[0]['owner_review']['submitted_at']
+        del self.readback['historical_owner_reviews'][0]['owner_review']['submitted_at']
+        with self.assertRaisesRegex(HandoffValidationError, 'audit timestamp'):
+            self.check()
+
+    def test_cli_rejects_invalid_and_post_cutoff_receipts_in_both_modes(self):
+        for optimized in (False, True):
+            control = self.run_cli(self.raw_documents(), optimized)
+            self.assertEqual(control.returncode, 0, control.stderr)
+            for kind in ('historical', 'scoped'):
+                for value, diagnostic in (
+                        ('2026-02-30T00:00:00Z', 'audit timestamp'),
+                        ('2026-10-17T23:59:59-12:00', 'post-cutoff receipt')):
+                    with self.subTest(kind=kind, value=value, optimized=optimized):
+                        self.set_receipt_time(kind, value)
+                        result = self.run_cli(self.raw_documents(), optimized)
+                        self.assertNotEqual(result.returncode, 0)
+                        self.assertIn(diagnostic, result.stderr)
+                        self.assertNotIn('Handoff audit integrity OK', result.stdout)
+                self.set_receipt_time(kind, '2026-10-16T00:00:00Z')
 
     def test_classified_issue_must_exist_in_the_captured_snapshot(self):
         self.audit['issues'][0]['number'] = max(

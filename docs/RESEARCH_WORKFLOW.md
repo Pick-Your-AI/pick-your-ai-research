@@ -69,6 +69,14 @@ string do not satisfy these fields. Validation preserves the original text and
 permits an explicitly unknown `reviewed_commit` with a nonempty basis; it does
 not certify the statement, source URL, timestamp or receiving decision.
 
+The snapshot cutoff and every historical or new receipt's `submitted_at` must
+be real, timezone-aware timestamps. The audit profile accepts ASCII
+`YYYY-MM-DDTHH:MM:SS`, optional one-to-six-digit fractional seconds, and an
+explicit `Z` or signed `HH:MM` offset. It compares the resulting UTC instants,
+including the cutoff itself, so lexical ordering or duplicate copies of an
+invalid date cannot admit a post-cutoff receipt. Original evidence strings are
+preserved; valid timestamps alone do not authenticate a review or its scope.
+
 Issue and pull-request identities in the audit, snapshot, handoff pairs and native
 parent/child/blocker references must be positive JSON integers. Booleans and
 floating-point aliases cannot match an integer identity through Python equality.

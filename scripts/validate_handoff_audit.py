@@ -1,10 +1,15 @@
 """Check snapshot consistency and scoped handoff attribution, never evidence acceptance."""
 from collections import Counter
+from datetime import datetime, timezone
 import json
 import math
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
+TIMESTAMP = re.compile(
+    r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
+    r'(?:\.[0-9]{1,6})?(?:Z|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])')
 
 
 class HandoffValidationError(ValueError):
@@ -14,6 +19,21 @@ class HandoffValidationError(ValueError):
 def require(condition, message):
     if not condition:
         raise HandoffValidationError(message)
+
+
+def audit_instant(value, label):
+    """Read an explicit, calendar-valid instant without losing precision.
+
+    The audit profile uses ASCII dates and at most microsecond precision.
+    Original timestamp strings remain untouched in the evidence records.
+    """
+    require(type(value) is str and TIMESTAMP.fullmatch(value) is not None,
+            f'{label}: invalid timezone-aware audit timestamp')
+    try:
+        return datetime.fromisoformat(value).astimezone(timezone.utc)
+    except (ValueError, OverflowError) as error:
+        raise HandoffValidationError(
+            f'{label}: invalid timezone-aware audit timestamp') from error
 
 
 def read_json(path):
@@ -95,6 +115,8 @@ def validate(ledger, readback, audit):
             validate_response_text(response, 'ledger response')
     for response in readback['new_scoped_responses']:
         validate_response_text(response, 'readback response')
+    cutoff = audit_instant(readback['snapshot_cutoff_utc'], 'readback cutoff')
+    audit_instant(audit['snapshot_cutoff_utc'], 'audit cutoff')
     issues = {issue['number']: issue for issue in readback['issues']}
     require(len(issues) == len(readback['issues']), 'duplicate snapshot issue')
     classified_numbers = [issue['number'] for issue in audit['issues']]
@@ -112,6 +134,11 @@ def validate(ledger, readback, audit):
             'audit and readback cutoff differ')
     require(audit['base_commit'] == readback['base_commit'],
             'audit and readback base commit differ')
+    for row in readback['historical_owner_reviews']:
+        pair = (row['market_issue'], row['consumer_issue'])
+        submitted = audit_instant(row['owner_review'].get('submitted_at'),
+                                  f'{pair}: historical receipt')
+        require(submitted <= cutoff, f'{pair}: post-cutoff receipt')
     historical = {(r['market_issue'], r['consumer_issue']): r['owner_review']
                   for r in readback['historical_owner_reviews']}
     require(len(historical) == len(readback['historical_owner_reviews']),
@@ -135,8 +162,9 @@ def validate(ledger, readback, audit):
             if response['role'] == 'receiving_owner':
                 require(response['reviewer'] in row['consumer_owner'],
                         f'{pair}: response is not from a receiving assignee')
-            require(response['submitted_at'] <= readback['snapshot_cutoff_utc'],
-                    f'{pair}: post-cutoff receipt')
+            submitted = audit_instant(response.get('submitted_at'),
+                                      f'{pair}: scoped receipt')
+            require(submitted <= cutoff, f'{pair}: post-cutoff receipt')
             require('reviewed_commit' in response,
                     f'{pair}: reviewed SHA must be explicit or explicitly unknown')
             actual_responses.append({**response, 'market_issue': pair[0],
