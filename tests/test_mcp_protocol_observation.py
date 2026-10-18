@@ -1,6 +1,7 @@
 """Offline integrity guards for the bounded synthetic-peer observation."""
 
 from copy import deepcopy
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -23,6 +24,16 @@ class ProtocolObservationTests(unittest.TestCase):
         self.assertEqual(len(rows), len(PROBE.CASES))
         self.assertTrue(self.record["expectations_satisfied"])
         for row, case in zip(rows, PROBE.CASES, strict=True):
+            self.assertTrue(row["matches_expected"])
+            self.assertTrue(PROBE.matches_expected(row, case))
+
+    def test_linux_cleanup_replay_matches_the_current_harness_and_matrix(self):
+        replay = json.loads((FIXTURES / "cleanup-observation.json").read_text())
+        self.assertEqual(replay["script_sha256"], hashlib.sha256(PROBE.SELF.read_bytes()).hexdigest())
+        self.assertEqual(replay["platform"], "Linux")
+        self.assertTrue(replay["expectations_satisfied"])
+        self.assertEqual(len(replay["observations"]), len(PROBE.CASES))
+        for row, case in zip(replay["observations"], PROBE.CASES, strict=True):
             self.assertTrue(row["matches_expected"])
             self.assertTrue(PROBE.matches_expected(row, case))
 
