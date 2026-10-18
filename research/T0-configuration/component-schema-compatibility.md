@@ -443,6 +443,148 @@ and #42's substantive #40 prerequisite is retained. The
 is now merged; that delivery does not adopt this candidate or release a
 successor contract.
 
+### CD-7 native consumer envelope candidate (2026-10-18)
+
+**Engineering decision:** reuse the merged CD-7 archive and sidecar rather than
+invent another exact-revision resolver. Add a separately versioned inspection
+envelope, `cd7-consumer-0.1`, for native receiving adapters. The
+[request/result schema](../../tests/fixtures/t0-cd7-consumer.schema.json),
+[request bytes](../../tests/fixtures/t0-cd7-consumer-request.json),
+[result bytes](../../tests/fixtures/t0-cd7-consumer-response.json),
+[negative response matrix](../../tests/fixtures/t0-cd7-consumer-negative.json)
+and [reference adapter](../../tests/t0_cd7_consumer_prototype.py) are synthetic
+test artifacts. They leave the original CD-7 sidecar, frozen documents,
+generators and historical evaluator unchanged. This selects a receiving
+interface for the CD-7/SB-2 integrity work; it is not a v1.1 release or a
+publisher manifest.
+
+The request names the SHA-256 of the exact build bytes, the SHA-256 of the exact
+sidecar bytes (or explicit `null` when absent), and the receiving byte limit.
+Those two documents are supplied separately as immutable UTF-8 bytes. The
+result binds the exact request bytes and build bytes. A client must retain
+them; equivalent JSON serialization is not an interchangeable request. The
+schema resolves its references through the local frozen schema registry and
+the existing CD-7 pin schema, registered at `urn:pick-your-ai:cd7-pins:0.1`.
+There is no HTTP endpoint or network retrieval in this experiment.
+
+| Result boundary | Required interpretation |
+| --- | --- |
+| `revision_pin_missing` | No pin exists; omit the revision and artifact. A sole available artifact does not supply a pin. |
+| `pinned_revision_unavailable` | The exact requested kind/ID/revision is absent; never substitute a newer revision. |
+| `content_digest_mismatch` | Retained bytes disagree with the pin; return no artifact. Preserve this observed failure even when a producer also reports unavailability or revocation. |
+| `native_revision_unsupported` | A positive revision exceeds signed 64-bit range. Omit the numeric revision and artifact; retain the original request/sidecar for inspection. Never round, truncate, wrap or reinterpret it as a missing pin. |
+| `artifact_too_large` / `artifact_structure_unsupported` | Bytes fail the receiving profile; return no artifact and retain independent outcomes for the other artifact. |
+| `artifact_representation_unsupported` | The descriptor's capture timestamp is outside the new ASCII profile, even if the frozen timestamp format checker admits its Unicode decimal digits. Return no artifact; frozen-v1 validation remains unchanged. |
+| `revoked` / `temporarily_unavailable` | An external producer adapter explicitly withholds this exact kind/ID/revision. The fixture adapter can represent these dispositions; it does not discover revocation or implement a publisher. |
+| Per-artifact `resolved` | Exact bytes, frozen structure and this artifact identity agree. This conveys no price eligibility, capability or publication/source-use approval. |
+| Selection outcomes | Preserve `not_enabled`, `snapshot_unresolved`, `selected_version_absent`, `selected_kind_mismatch` and `resolved`. Only a resolved selection carries its exact ID/version/kind reference. |
+
+Each resolved artifact descriptor includes `kind`, `schema_version`, exact ID,
+revision, the document's unchanged `captured_at` string, exact-byte SHA-256,
+byte length and `/artifacts/sha256/{digest}.json`. This is a proposed immutable
+retrieval path under a separately configured trusted HTTPS origin. A transport
+adapter must keep it on that origin, reject credentials, query strings,
+fragments and redirects, check the advertised length before transfer, and also
+bound actual bytes. Descriptor/path equality with the digest is rechecked;
+accepting a syntactically valid path is insufficient. CD-7 `catalog_snapshot`
+maps explicitly to Apple's internal `CatalogArtifact.catalog`; frozen schema
+field names remain unchanged.
+
+**Complete-pair boundary.** Catalog and pricebook results remain independent.
+The pair is `resolved` only when both resolve and every price rate's exact
+`catalog_item_id`/`catalog_item_version` exists in this catalog. An unresolved
+side produces `incomplete`; a cross-catalog rate produces
+`rate_catalog_mismatch` with sorted unmatched rate IDs. A build without a
+pricebook produces a `null` pricebook binding and `pricebook_absent`. None of
+these states synthesizes an empty pricebook or a zero price. Catalog item
+references other than price-rate membership, source-use rights, billing
+eligibility, currency/date/region applicability and full evaluator replay
+remain separate decisions.
+
+The pair's deterministic `identity` is the SHA-256 of the ASCII bytes
+`cd7-consumer-0.1` plus one LF byte, followed by compact JSON containing exactly
+the `catalog_snapshot` and `pricebook` descriptors. Sort every object key
+lexicographically, use no insignificant whitespace or escaped solidus (`\/`),
+encode JSON integers without a decimal/exponent, and preserve descriptor strings unchanged. All
+descriptor fields in this profile have ASCII values; the new descriptor schema
+explicitly restricts `captured_at` to ASCII in addition to the frozen timestamp
+format. This binds both artifacts
+and their metadata in fixed roles. It is an integrity identity, not a publisher
+release identity, signature or publication receipt.
+
+`verify_complete_pair` checks the received request binding, lengths and exact
+hashes, strict raw JSON, full frozen CatalogSnapshot and Pricebook schemas,
+immutable identities, duplicate members and catalog/rate relationships. It
+then reproduces the complete result from the supplied bytes and rejects any
+descriptor, path, selection or pair disagreement. It returns the original two
+byte strings only after all checks pass. Native callers must validate through
+their complete typed boundaries and atomically activate the complete pair;
+partial/error/cancelled refreshes preserve the previous pair. No cache is
+written by this reference function, and its result cannot admit production.
+
+**Receiving profile and migration.** New envelope integer fields require JSON
+integer tokens in `1...9223372036854775807` for revisions. The existing CD-7
+resolver also requires integer tokens; frozen JSON Schema's mathematically
+integral-number semantics are unchanged. The profile defaults to 512 KiB per
+build/artifact, permits an explicit receiving maximum up to 64 MiB, and caps
+request/result/sidecar envelopes at 64 KiB. It also caps values at 48 levels
+(root is level one) and 16,384 value nodes per document, rejecting duplicate
+decoded keys, canonically equivalent Unicode object keys, invalid UTF-8,
+isolated surrogate escapes in keys or values, and nonfinite numbers. Correctly
+paired surrogate escapes and other valid Unicode scalars remain accepted. It
+does not normalize retained bytes. Each native adapter
+applies the stricter of these negotiated limits and its own parser, transport
+and memory limits. These are new consumer-profile constraints, not additional
+claims about frozen-v1 conformance.
+
+Receiving source inspection on 2026-10-18 included Apple's
+[catalog cache](https://github.com/Pick-Your-AI/pick-your-ai-apple/blob/a12ab324e499907bd15abf4b80709d0f02667ae1/Packages/PlannerCatalog/Sources/PlannerCatalog/CatalogCache.swift)
+and [bounded transport](https://github.com/Pick-Your-AI/pick-your-ai-apple/blob/a12ab324e499907bd15abf4b80709d0f02667ae1/Packages/PlannerCatalog/Sources/PlannerCatalog/PublicArtifactClient.swift),
+and Android's
+[verified artifact cache](https://github.com/Pick-Your-AI/pick-your-ai-android/blob/526c05c6528be1313bb8b1bf71b89cc131eb2d75/core/src/main/kotlin/ai/pickyour/core/cache/VerifiedArtifactCache.kt).
+Apple's internal preview cache manifest and Android's caller-supplied hash
+boundary do not supply publisher authority. Apple already has a typed
+Pricebook decoder in PlannerCore; raw-parser and cache wiring changes remain
+client implementation work. The Python prototype checks value structure after
+decoding; it does not demonstrate native protection before allocation.
+
+**Scoped receiving review.** Both in-session Apple and Android engineering
+lanes independently reviewed this packet, including the final ASCII timestamp
+correction at local source `f301b1b2f5574be968fb715e40ffafc9e9876826`,
+the shared schema and adapter, and ran all 19 focused methods including 21 portable response
+mutations. Android also reproduced and then verified the correction for
+isolated surrogate escapes; Apple verified the immutable-source links and
+unescaped-solidus pair encoding. A separate coordinating engineer reproduced
+the Unicode-decimal timestamp gap and reviewed its new-envelope correction;
+both native lanes rechecked that correction with frozen-v1 acceptance retained.
+Both accepted the resulting interface as
+technically suitable for native inspection and complete-pair integrity adapter
+reuse, with no remaining blocker in that scope. The reviewed adapter, schema
+and test blobs are respectively
+`4887aeb101e36ceee121132e82af72e0d84505b4`,
+`be473bff00f1335313a8fb83280f2bbd352a32b4` and
+`506557082a72ee2e9da877aecc1946f7e7643481`.
+These are actual in-session technical receiving reviews. They do not
+impersonate a named maintainer or claim publisher/source-rights approval,
+native implementation/device execution, production adoption or full #40/#42
+acceptance. The later documentation-only receipt preserves all six reviewed
+implementation/schema/fixture/test blobs unchanged.
+
+The `qualification` object is deliberately fixed to `publication` and
+`source_use` both `not_established`; an `approved` field or value is invalid.
+A future, separately reviewed publisher adapter must bind a real release to
+both exact descriptors and an authenticated publication receipt, distinguish
+synthetic from real provenance, and evaluate evidence for each requested
+source use. This packet neither invents that evidence nor changes Apple's
+closed production gate. Research acceptance can assess this bounded technical
+interface independently of those external evidence stages. The
+[focused tests](../../tests/test_t0_cd7_consumer.py) include exported wire
+replay, 21 portable response mutations, independent missing/mismatch outcomes,
+native integer bounds, raw JSON ambiguity, resource limits and cross-catalog
+rate rejection. Run `python -m unittest discover -s tests -p
+test_t0_cd7_consumer.py -v`. #40 and #42 remain open for their remaining
+contract/migration, replay and receiving requirements.
+
 ## Contribution format
 
 Use `templates/rule-proposal.md`, plus these conventions:
