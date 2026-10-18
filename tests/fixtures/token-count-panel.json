@@ -1,0 +1,77 @@
+{
+  "synthetic": true,
+  "scope": "raw_text_only",
+  "synthetic_budget_tokens": 32,
+  "samples": [
+    {
+      "id": "empty",
+      "stratum": "empty",
+      "text": ""
+    },
+    {
+      "id": "ascii_greeting",
+      "stratum": "english",
+      "text": "Hello world!"
+    },
+    {
+      "id": "english_prose",
+      "stratum": "english",
+      "text": "A planning estimate should explain its assumptions and preserve uncertainty. Count the assembled text again after adding retrieved context."
+    },
+    {
+      "id": "python_code",
+      "stratum": "code",
+      "text": "def total(items):\n    return sum(item['price'] * item['quantity'] for item in items)\n"
+    },
+    {
+      "id": "tool_json",
+      "stratum": "structured_text",
+      "text": "{\"operation\":\"search\",\"query\":\"token estimation\",\"filters\":{\"language\":\"en\",\"limit\":10},\"include_sources\":true}"
+    },
+    {
+      "id": "cjk_repeated",
+      "stratum": "cjk",
+      "text": "请解释上下文预算与令牌估算之间的区别。请解释上下文预算与令牌估算之间的区别。请解释上下文预算与令牌估算之间的区别。请解释上下文预算与令牌估算之间的区别。请解释上下文预算与令牌估算之间的区别。请解释上下文预算与令牌估算之间的区别。"
+    },
+    {
+      "id": "arabic_prose",
+      "stratum": "arabic",
+      "text": "يجب توضيح الافتراضات وإعادة حساب النص بعد إضافة السياق المسترجع.يجب توضيح الافتراضات وإعادة حساب النص بعد إضافة السياق المسترجع.يجب توضيح الافتراضات وإعادة حساب النص بعد إضافة السياق المسترجع."
+    },
+    {
+      "id": "emoji_sequences",
+      "stratum": "emoji",
+      "text": "👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 👩🏽‍💻 🧑‍🔬 🚀 🌍 "
+    },
+    {
+      "id": "composed_accents",
+      "stratum": "unicode_composed",
+      "text": "café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé "
+    },
+    {
+      "id": "decomposed_accents",
+      "stratum": "unicode_decomposed",
+      "text": "café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé café naïve résumé "
+    },
+    {
+      "id": "spaces",
+      "stratum": "whitespace",
+      "text": "                                                                                                                                "
+    },
+    {
+      "id": "digits",
+      "stratum": "digits",
+      "text": "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
+    },
+    {
+      "id": "base_input",
+      "stratum": "assembled_text",
+      "text": "Summarize the supplied notes. Preserve uncertainty and cite the source identifiers."
+    },
+    {
+      "id": "input_with_memory",
+      "stratum": "assembled_text",
+      "text": "Summarize the supplied notes. Preserve uncertainty and cite the source identifiers.\n\nRetrieved memory:\nObservation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. Observation A is documented; observation B remains unknown. "
+    }
+  ]
+}
