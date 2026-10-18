@@ -64,7 +64,7 @@ Per-source evidence, update cadence and next actions are recorded in [integratio
 - [x] Confirm upstream rights for compiled data: compilation licences cover the compilations (models.dev, ModelFit, llmfit); upstream measurements keep their own rights (BenchLM states this)
 - [x] Approve or reject each intended use (table above)
 - [x] Record exact source, version or date, conditions, failures and confidence (`integrations.json`)
-- [ ] Finish the exact receiving dispositions below. Existing #41/#5/#6/#27 receipts retain their stated scope; the current #41 table, #39 exclusion and #36/#62 paper-only boundaries require actual independent review.
+- [ ] Finish the exact receiving dispositions below. Existing #41/#5/#6/#27 receipts retain their stated scope; the current #41 table, #39 exclusion and #36/#62 paper-only boundaries require actual receiving-owner review.
 
 ## Bounded source recheck — 2026-10-18
 
@@ -79,7 +79,7 @@ These are source-checked policy observations. The other seven shortlisted source
 
 ## Receiving decisions and criterion map
 
-The user's express project engineering delegation permits an actual integration decision without impersonating a named assignee. Any new receipt must state the reviewer, immutable research revision, exact scope and remaining conditions. Prior owner receipts are retained as historical evidence; they are not transferred to another source or consumer.
+Independent integration review may evaluate this partial research for publication. It does not satisfy the separate receiving-owner acceptance required by live #60. The offered decisions below remain proposals until the relevant consuming owners record their scoped accept, narrow or reject dispositions. Any new receipt must state the actual reviewer, immutable research revision, exact scope and remaining conditions. Prior owner receipts retain their historical scope and do not transfer to another source or consumer.
 
 | Handoff | Actual recorded receipt or offered decision | Remaining boundary |
 | --- | --- | --- |
@@ -96,9 +96,9 @@ The user's express project engineering delegation permits an actual integration 
 | Confirm upstream rights for compiled data | Compilation rights do not grant every upstream measurement or artifact; retain per-source material boundaries and exclude unestablished uses |
 | Approve or reject each intended use | Four-use table plus the concrete proposed GPUs.io product exclusion; no missing permission is treated as a grant |
 | Significant conclusions linked to evidence or hypothesis | Primary terms, exact repository/paper identities and explicit project decisions |
-| Relevant technical owners review handoffs; unresolved decisions named | Exact prior receipts plus the offered consumer scopes above; new integration review remains pending |
+| Relevant technical owners review handoffs; unresolved decisions named | Exact prior receipts plus the offered consumer scopes above; actual receiving-owner acceptance of the new scopes remains pending |
 | Checks pass; reviewer accepts evidence before Done | Final PR checks and exact scoped review are required; no new local validation result is claimed in this prepared package |
 
 ## Result
 
-The ten-source research audit supports a restrictive intake policy. Current source-use decisions can be completed by excluding a source or material when its required permission is unestablished; no agreement or collection is needed to make that exclusion concrete. The new exclusion and remaining receiving scopes are offered for independent review. #60 remains open until that review is recorded and this correction is merged. Consumers: #41, #39, #5, #6, #27, #36, #62.
+The ten-source research audit supports a restrictive intake policy. Excluding a source or material when its required permission is unestablished makes the proposed intake boundary concrete without obtaining an agreement or collecting its data. The new exclusion and remaining receiving scopes remain proposals for the consuming owners. A reviewed merge publishes this partial research; #60 remains open until its criterion-specific decisions and required receiving-owner receipts are recorded and its complete deliverable is reviewed and merged. Consumers: #41, #39, #5, #6, #27, #36, #62.
