@@ -89,6 +89,23 @@ Nested files and links to files inside the directory remain eligible; validation
 does not rewrite their recorded paths. This establishes file presence, not evidence
 quality, review acceptance or issue completion.
 
+For a backlog row with `status: Done`, `completion_evidence` must be an object
+with nonempty text for `accepted_commit`, `review_url` and `handoff_acceptance`.
+The review URL uses the existing HTTP(S) syntax checks. Booleans, numbers,
+containers and whitespace cannot substitute for these records. The validator
+preserves their original text and permits incomplete evidence while the row is
+not Done. This checks record shape only: it does not resolve the commit, retrieve
+the review, authenticate handoff acceptance or establish issue completion.
+
+The market backlog also enforces the methodology's parent-completion rule:
+every recorded child of a `Done` parent must be `Done`, with each completed
+issue still requiring its own acceptance-evidence record. The check follows
+the captured parent links regardless of row order and applies at every level.
+An unfinished issue in a separate tree does not invalidate a completed tree,
+and a child may finish before its parent. This checks only recorded status
+consistency; it does not fetch live issues, discover omitted children, verify
+acceptance evidence or change any issue or Project status.
+
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.
 
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
