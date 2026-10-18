@@ -247,3 +247,55 @@ Live issue assignees on 2026-10-16 determine the named owners below. None of the
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
 
 Follow-up validation, 2026-10-17 (Python 3.12.14): pinned dependency installation, 21 contract tests, 24 research tests, research intake (30 CatalogItems / two Pricebooks), market integrity (32 entities / 1,536 cells / 20 issues), sizing arithmetic and `git diff --check` pass. Research tests required an unsandboxed rerun because Windows sandbox temporary-directory permissions failed before assertions; the rerun passed all 24. The arithmetic implementation and imported v1 are unchanged. These checks establish structural integrity and reproducible arithmetic, not rule approval or empirical fit. #10 still needs its default headroom/confidence decision, consuming-owner acknowledgements and agreed #61 ResourceEstimate placement before closure.
+
+
+## Additional hardware and profile capture (2026-10-18)
+
+This source-checked, runtime-unverified supplement records evidence for #31’s missing-record request. At the initial capture, the hardware and dependent profile remained note-only: frozen v1 precision membership treats an omitted precision as unsupported, so a researched subset cannot safely be emitted as a CatalogItem. The follow-up below resolves the RTX 4090 precision gap; A100/P4de remain note-only. No runtime compatibility is asserted here.
+
+| Note-only candidate | Published facts and precise scope | Primary evidence, accessed 2026-10-18 |
+| --- | --- | --- |
+| `nvidia-a100-80gb` | 80GB; FP32/TF32/BF16/FP16/INT8 subset shared by PCIe and SXM. Variant-specific power/fabric deliberately absent | [NVIDIA datasheet 2188504, p1](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-nvidia-us-2188504-web.pdf); [CUDA GPU table](https://developer.nvidia.com/cuda/gpus) |
+| `nvidia-geforce-rtx-4090` | Reference design: 24GB, PCIe, 450W graphics rating; CUDA compute capability 8.9; researched FP32 subset, not an exhaustive precision list | [NVIDIA specifications](https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/); [Ada guide 13.4, §1.4.1.3](https://docs.nvidia.com/cuda/ada-tuning-guide/index.html) |
+| `aws-ec2-p4de-24xlarge-us-east-1` | Eight A100 80GB,48 default CPU cores(96vCPU),1152GiB RAM =1236.950581248 decimal GB,8000GB aggregate local storage; region listing is not provisioning proof | [P4 specification](https://aws.amazon.com/ec2/instance-types/p4/); [CPU options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html); [region table](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html) |
+
+The A100 reference supplies only cross-variant facts; it cannot establish a particular board’s power or interconnect. The researched precision lists here are non-exhaustive. Their omissions mean research unknowns, but frozen v1 cannot express that distinction for accelerator precision membership; this prevented accelerator/profile promotion at the initial capture. The RTX 4090 follow-up below now supplies its complete v1 precision coverage. Advertised device memory is not measured free allocation, and eight devices do not form one freely addressable 640GB allocation. No throughput, training fit, price, runtime result or independent verification is claimed. Current lifecycle/stock, account quota and AZ capacity remain unverified. The PDF is identified by publisher document 2188504; no immutable content hash was obtained. Other URLs are mutable dated captures. Exact host/device/runtime evidence is still needed before deployment.
+
+#31 can use these notes as research inputs, but cannot reference missing catalog IDs. A100 and P4de records remain absent until precision coverage is established; the RTX 4090 record is supplied below; other priced SKUs also still need matching profile evidence. Unsupported training-memory metrics and price meters remain #40/#39 work, independent of these catalog facts.
+
+
+## Precision follow-up and bounded retrieval (2026-10-18)
+
+The [RTX 4090 proposal](../../catalog/proposals/t2-compute-nvidia-geforce-rtx-4090-2026-10-18.json)
+resolves its initial absence. [NVIDIA Ada whitepaper v2.02](https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf),
+Appendix A, printed pp29–31, documents every v1 precision in the RTX 4090 column;
+the separate [CUDA GPU table](https://developer.nvidia.com/cuda/gpus) supports its
+CUDA identity. Both were accessed 2026-10-18. This is hardware arithmetic support,
+not permission to run every quantized artifact or an engine compatibility result.
+No negative precision inference is needed because all seven enum values have
+positive evidence. Keep engine/backend, quantizer, kernel, model and cache dtype
+checks separate.
+
+The [A100 architecture whitepaper](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf),
+printed pp15/26, accessed 2026-10-18, adds explicit INT4 evidence to the earlier
+subset. It does not resolve the FP8 entry: absence from that older document is not
+a universal negative. The attempted TensorRT 10.5 archive URL redirected to
+current documentation, so it was not treated as a pinned historical support
+matrix. The Transformer Engine FP8 primer retrieval failed; no fact is inferred
+from that failure. A100 therefore remains note-only under the frozen-v1 negative
+membership behavior; #40 completeness semantics or eligible scoped evidence is
+still required.
+
+Re-reading the [P4 specification](https://aws.amazon.com/ec2/instance-types/p4/),
+[CPU-options row](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html)
+and [regional table](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html)
+on 2026-10-18 confirms the P4de note's default CPU/RAM/disk values and the
+us-east-1 family listing. Its unresolved dependency is the A100 catalog identity,
+not missing CPU arithmetic. Removing the GPU reference to pass intake would hide
+a material hardware dependency, so no incomplete profile is emitted.
+
+PDF source text and table views were inspected through the web reader. Direct
+PDF download returned HTTP 403 from the environment proxy; no hash, local PDF
+capture or redistribution permission is claimed. Dates/document versions are
+recorded; mutable URLs are not immutable evidence. No source freshness guarantee,
+current stock, rate binding or runtime measurement follows from this research.

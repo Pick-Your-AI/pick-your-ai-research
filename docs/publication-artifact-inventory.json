@@ -1,0 +1,888 @@
+{
+  "research_commit": "7115e77caf2d766b98d42dd8d75ee65325f2d4e7",
+  "purpose": "Dated research handoff inventory, not a publication allowlist or a rights grant. Source-level permissions must not be inherited by complete mixed-source artifacts.",
+  "artifacts": [
+    {
+      "path": "catalog/proposals/t1-context-gpt54.json",
+      "sha256": "2180bdf159e6d500eb9c72778dbebcd373191a81a98726dc4afae2b6ec2c0f2e",
+      "id": "cat.context_policy.gpt54_published_ceiling",
+      "version": "gpt-5.4-2026-03-05",
+      "revision": null,
+      "source_uris": [
+        "https://developers.openai.com/api/docs/models/gpt-5.4"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-context-sonnet55.json",
+      "sha256": "844ca1d74141b401ef98251c5054d4b89c4e68e1e2ced94011fbf9b49dc6a88e",
+      "id": "cat.context_policy.sonnet55_published_ceiling",
+      "version": "claude-sonnet-5-5",
+      "revision": null,
+      "source_uris": [
+        "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-model-gpt54-openai.json",
+      "sha256": "cc28c19338339338f82c00f9124b82532ad5d89c9cb361828ae4ce771bc5ba34",
+      "id": "cat.model.gpt54_openai",
+      "version": "gpt-5.4-2026-03-05",
+      "revision": null,
+      "source_uris": [
+        "https://developers.openai.com/api/docs/models/gpt-5.4"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-model-sonnet55-anthropic.json",
+      "sha256": "94eaed2b42886d8fcb67a942709e1c0c88f996944334282206737a1f22d62c1a",
+      "id": "cat.model.sonnet55_anthropic",
+      "version": "claude-sonnet-5-5",
+      "revision": null,
+      "source_uris": [
+        "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+        "https://platform.claude.com/docs/en/models/overview",
+        "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-provider-anthropic.json",
+      "sha256": "eb6612fda6666101d17604cda5a589faa9a71b4336d03545515652f620190cdc",
+      "id": "cat.model_provider.anthropic",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-provider-aws_bedrock.json",
+      "sha256": "1b3f6ee95cf17aaefab99a34c737ff22fcb3e3f34cf2baf8241e6640c5d51610",
+      "id": "cat.model_provider.aws_bedrock",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-provider-google.json",
+      "sha256": "23fcb0f0790d7f85c16b00ed68c3b900a21199ca69a83b1349cbd4b84f7e2d53",
+      "id": "cat.model_provider.google",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-provider-huggingface.json",
+      "sha256": "037bcf997dcb34f4caed4a0ca00e352fe6d0a90ecfedaf8f42b3fbbbc8cfbf42",
+      "id": "cat.model_provider.huggingface",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://huggingface.co/api/models/Qwen/Qwen3-8B"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-provider-openai.json",
+      "sha256": "47ab0ba395c45021a17a95bbc4207fa73bf9469366c254efdf78288e5ad028fc",
+      "id": "cat.model_provider.openai",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://developers.openai.com/api/docs/models/gpt-5.4"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t1-provider-qwen.json",
+      "sha256": "be92db37797f45012b97b5eb948416a47d2f9f3ad94249877d946483dbf26ee8",
+      "id": "cat.model_provider.qwen",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://huggingface.co/Qwen/Qwen3-8B/blob/b968826d9c46dd6066d109eabc6255188de91218/README.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-amd-mi300x-2026-10-16.json",
+      "sha256": "b1631e60acb7d43333b2bec97ad3a48215d1813dbdabeaac605d7c2a03a798d9",
+      "id": "amd-mi300x",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://rocm.docs.amd.com/projects/install-on-linux/en/docs-6.3.0/reference/system-requirements.html",
+        "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/data-sheets/amd-instinct-mi300x-data-sheet.pdf"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-aws-g6e-xlarge-us-east-1-2026-10-16.json",
+      "sha256": "dc2106bd704317b54977d83b38a295386767026e324e68fb8948c591394ca176",
+      "id": "aws-ec2-g6e-xlarge-us-east-1",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://aws.amazon.com/about-aws/whats-new/2024/08/amazon-ec2-g6e-instances/",
+        "https://aws.amazon.com/ec2/instance-types/g6e/",
+        "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html",
+        "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-h100-sxm-2026-10-16.json",
+      "sha256": "f3d01af0ebbb1b62f4518fb02f5df9fa2b514f6231a4665c36c566c9385a3967",
+      "id": "nvidia-h100-sxm",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://www.nvidia.com/en-us/data-center/h100/"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-l40s-2026-10-16.json",
+      "sha256": "d34bf198e93577ff9dbacf4a84204f7a09d5abea01cb5d6fb61c0eff96a4da4a",
+      "id": "nvidia-l40s",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://www.nvidia.com/en-us/data-center/l40s/"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-engine-llama-cpp-v0.7.0.json",
+      "sha256": "e1fe6c451bc403b11235b55fa7da46a1bf0de53728fca34d78921e1b2867ac06",
+      "id": "inference-llama-cpp",
+      "version": "v0.7.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/LICENSE",
+        "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/README.md",
+        "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/docs/models.md",
+        "https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/include/ggml.h"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-engine-tgi-v3.3.7.json",
+      "sha256": "c05e41242d9a04bd609b3ce25d29331477d7a87c3d1488b94f5daca304ec7833",
+      "id": "inference-tgi",
+      "version": "v3.3.7",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/LICENSE",
+        "https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/README.md",
+        "https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/launcher/src/main.rs"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-engine-vllm-v0.31.0.json",
+      "sha256": "8177ed14feb1108290c7d25219c2d87eae0d66fddf9d25f6730b165666f8b228",
+      "id": "inference-vllm",
+      "version": "v0.31.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE",
+        "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/README.md",
+        "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/config/load.py",
+        "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/config/model.py"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-aws-ebs-gp3.json",
+      "sha256": "77a94d0b4ed631670de2a00d73b4574ab42a250ea27d6f08ee8ed18fc0886d93",
+      "id": "aws-ebs-gp3",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://aws.amazon.com/ebs/pricing/",
+        "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-aws-ec2.json",
+      "sha256": "0ec720b091fa9fbc21b8fe774404146fafd01b72cb8259932878e36b85d14c02",
+      "id": "aws-ec2",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://aws.amazon.com/about-aws/whats-new/2024/08/amazon-ec2-g6e-instances/",
+        "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-cloudflare-r2-standard.json",
+      "sha256": "39a4d47090c01a87e171a8beaf049ef52ce70b538eda65506796456f090eda22",
+      "id": "cloudflare-r2-standard",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://developers.cloudflare.com/r2/pricing/",
+        "https://developers.cloudflare.com/r2/reference/data-location/"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-huggingface-endpoints-aws.json",
+      "sha256": "3953ebe83d28c0605ea05901a35de0fe8fb6650e7c96f47b9aabe8974ac85f99",
+      "id": "huggingface-endpoints-aws",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://huggingface.co/docs/inference-endpoints/faq",
+        "https://huggingface.co/docs/inference-endpoints/guides/private_link",
+        "https://huggingface.co/docs/inference-endpoints/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-modal-functions.json",
+      "sha256": "267e70e6b9ce83aeb56278792682fff2f9661ec72934a53ccdb2a6d16ce40380",
+      "id": "modal-functions",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://modal.com/docs/guide/region-selection",
+        "https://modal.com/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-modal-volumes-v1.json",
+      "sha256": "198eb1d254eb061943bc3b6e4f593c7469c773b954a9036cef9b2e05b011051b",
+      "id": "modal-volumes-v1",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://modal.com/docs/guide/volumes",
+        "https://modal.com/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-runpod-network-standard-us-ks-2.json",
+      "sha256": "d3cd5e78c8b6cdf24e84f9fbc1a1207361df7ef65d638e90a3e334a74b2c8fba",
+      "id": "runpod-network-standard-us-ks-2",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://docs.runpod.io/storage/network-volumes",
+        "https://docs.runpod.io/storage/s3-api"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-runpod-pods.json",
+      "sha256": "4a42a2f495719320fcb8babb132b3c5cb0c2ca08f4c8605d93d56b5011217e92",
+      "id": "runpod-pods",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://docs.runpod.io/pods/overview",
+        "https://docs.runpod.io/pods/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t2-hosting-runpod-serverless.json",
+      "sha256": "659d00e78de9bff537469c8055169285db868975fa9b66d145d0a74106bc2103",
+      "id": "runpod-serverless",
+      "version": "2026-10-16",
+      "revision": null,
+      "source_uris": [
+        "https://docs.runpod.io/serverless/overview",
+        "https://docs.runpod.io/serverless/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t3-vector-database-pgvector.json",
+      "sha256": "e7f14460e8ccfc262cc58c4c637a3a57c80e65ff3c1bee8184b9ad87c0b2b49e",
+      "id": "vector_database.pgvector",
+      "version": "0.8.7",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/pgvector/pgvector/blob/f37c13f68b57d2c3472b2214fbcff699d6d34876/LICENSE",
+        "https://github.com/pgvector/pgvector/blob/f37c13f68b57d2c3472b2214fbcff699d6d34876/README.md",
+        "https://github.com/pgvector/pgvector/tree/v0.8.7"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-crewai.json",
+      "sha256": "3c1c02b6ed65911fc66f9dff21ad39b5b38a989ba6417d1e80d3ca229a2a001e",
+      "id": "agent_framework.crewai",
+      "version": "1.15.28",
+      "revision": null,
+      "source_uris": [
+        "https://docs.crewai.com/en/mcp/overview",
+        "https://github.com/crewAIInc/crewAI/blob/main/README.md",
+        "https://pypi.org/pypi/crewai/json",
+        "https://raw.githubusercontent.com/crewAIInc/crewAI/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-google-adk-python.json",
+      "sha256": "fcaac328b09d5a9a32b146229c94e5d3fcdfd5b2a338039696fe7e0a3c7b147a",
+      "id": "agent_framework.google-adk-python",
+      "version": "2.12.0",
+      "revision": null,
+      "source_uris": [
+        "https://adk.dev/tools-custom/mcp-tools/index.md",
+        "https://github.com/google/adk-python/blob/main/README.md",
+        "https://pypi.org/pypi/google-adk/json",
+        "https://raw.githubusercontent.com/google/adk-python/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-langgraph.json",
+      "sha256": "df9a935df8fd5a316a027bbe56324c5cd8b33f4cb4cdd4ce6c3378feca7c98a4",
+      "id": "agent_framework.langgraph",
+      "version": "1.2.15",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/langchain-ai/langchain-mcp-adapters/blob/main/README.md",
+        "https://github.com/langchain-ai/langgraph/blob/main/README.md",
+        "https://pypi.org/pypi/langgraph/json",
+        "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-mastra.json",
+      "sha256": "31b3a14bd7a34911820e3c8fe10ddac8bb28c79e598ce8f36b8b697046218f45",
+      "id": "agent_framework.mastra",
+      "version": "1.78.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/mastra-ai/mastra/blob/main/README.md",
+        "https://mastra.ai/reference/tools/client/llms.txt",
+        "https://raw.githubusercontent.com/mastra-ai/mastra/main/LICENSE.md",
+        "https://registry.npmjs.org/@mastra/core"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-microsoft-agent-framework-python.json",
+      "sha256": "d4290db1e7a11f9a36b7bf462afcd4b6c3fcbe44c794f6d798d420e80b311452",
+      "id": "agent_framework.microsoft-agent-framework-python",
+      "version": "1.22.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/microsoft/agent-framework/blob/main/README.md",
+        "https://learn.microsoft.com/en-us/agent-framework/agents/tools/local-mcp-tools",
+        "https://pypi.org/pypi/agent-framework/json",
+        "https://raw.githubusercontent.com/microsoft/agent-framework/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-openai-agents-js.json",
+      "sha256": "dd6dee395ebbb3882076a270ce5858b251d389cdf1b45351ddf26c3995a0bdde",
+      "id": "agent_framework.openai-agents-js",
+      "version": "0.20.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/openai/openai-agents-js/blob/main/README.md",
+        "https://raw.githubusercontent.com/openai/openai-agents-js/main/LICENSE",
+        "https://raw.githubusercontent.com/openai/openai-agents-js/main/docs/src/content/docs/guides/mcp.mdx",
+        "https://registry.npmjs.org/@openai/agents"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-openai-agents-python.json",
+      "sha256": "61789d0afeaed736000a16f11e4fac3d5ecc622a93f87ab573b39e3c10f430ce",
+      "id": "agent_framework.openai-agents-python",
+      "version": "0.24.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/openai/openai-agents-python/blob/main/README.md",
+        "https://pypi.org/pypi/openai-agents/json",
+        "https://raw.githubusercontent.com/openai/openai-agents-python/main/LICENSE",
+        "https://raw.githubusercontent.com/openai/openai-agents-python/main/docs/mcp.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-pydantic-ai.json",
+      "sha256": "864b5fe3aa2eef8dd40e487acfa5267f54c8fa5e63784f0391f198fb514ff378",
+      "id": "agent_framework.pydantic-ai",
+      "version": "2.57.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/pydantic/pydantic-ai/blob/main/README.md",
+        "https://pypi.org/pypi/pydantic-ai/json",
+        "https://raw.githubusercontent.com/pydantic/pydantic-ai/main/LICENSE",
+        "https://raw.githubusercontent.com/pydantic/pydantic-ai/main/docs/mcp/client.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-smolagents.json",
+      "sha256": "a9689ffe5fe9b97f74c819053ea63b66bafc88c736cfc59a7b0682bf88122266",
+      "id": "agent_framework.smolagents",
+      "version": "1.26.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/huggingface/smolagents/blob/main/README.md",
+        "https://pypi.org/pypi/smolagents/json",
+        "https://raw.githubusercontent.com/huggingface/smolagents/main/LICENSE",
+        "https://raw.githubusercontent.com/huggingface/smolagents/main/docs/source/en/tutorials/tools.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4a-strands-agents-python.json",
+      "sha256": "3d2cf4dc289684a2dfc75b5b56eff7cca8e4abda9909bf5f1c0b0465427247f0",
+      "id": "agent_framework.strands-agents-python",
+      "version": "1.61.1",
+      "revision": null,
+      "source_uris": [
+        "https://pypi.org/pypi/strands-agents/json",
+        "https://raw.githubusercontent.com/strands-agents/harness-sdk/main/LICENSE.APACHE",
+        "https://raw.githubusercontent.com/strands-agents/harness-sdk/main/strands-py/README.md",
+        "https://strandsagents.com/docs/user-guide/concepts/agents/session-management/index.md",
+        "https://strandsagents.com/docs/user-guide/concepts/tools/mcp-tools/"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-anthropic-web-fetch.json",
+      "sha256": "82949918982c9685018d67aae2170bf7202e2b1337f64481e8b59fc73375b9f3",
+      "id": "tool.anthropic.web-fetch",
+      "version": "web_fetch_20260318",
+      "revision": null,
+      "source_uris": [
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-anthropic-web-search.json",
+      "sha256": "149461f5515c9f9cfe64684c2aa5680f86480e1035edc8ee89e76ea321672c88",
+      "id": "tool.anthropic.web-search",
+      "version": "web_search_20260318",
+      "revision": null,
+      "source_uris": [
+        "https://platform.claude.com/docs/en/about-claude/pricing",
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+        "https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-brave-web-search.json",
+      "sha256": "0dac023205dcd0e6e58c4ccb6f7d76a5c67085f38a09bc2600b92b469e67606e",
+      "id": "tool.brave.web-search",
+      "version": "v1",
+      "revision": null,
+      "source_uris": [
+        "https://api-dashboard.search.brave.com/app/documentation/web-search/get-started",
+        "https://api-dashboard.search.brave.com/app/plans"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-e2b-sandbox.json",
+      "sha256": "2f750b659c76decca8dd10e1b1a9b1c42d38b63099873c2d8bf65f0a14b78b76",
+      "id": "tool.e2b.sandbox",
+      "version": "2.56.0",
+      "revision": null,
+      "source_uris": [
+        "https://docs.e2b.dev/",
+        "https://e2b.dev/pricing",
+        "https://pypi.org/pypi/e2b/json",
+        "https://raw.githubusercontent.com/e2b-dev/infra/main/README.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-github-issues-read.json",
+      "sha256": "d7826763a475df9a5567621540fdc173f8ca82bf07f51fa03c5e92bf78fe7476",
+      "id": "tool.github.issues-read",
+      "version": "2026-03-10",
+      "revision": null,
+      "source_uris": [
+        "https://docs.github.com/en/rest/issues/issues",
+        "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-github-issues-write.json",
+      "sha256": "3d68b158613d2fc5172fd9820842097aaac7e095571a2c3e998e8db0ab5dc6ad",
+      "id": "tool.github.issues-write",
+      "version": "2026-03-10",
+      "revision": null,
+      "source_uris": [
+        "https://docs.github.com/en/rest/issues/issues",
+        "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-github-rest-api.json",
+      "sha256": "9a951b7c6f1063b77196301c48d84e7cb1a1780d01c47e6127b0d042b1deec76",
+      "id": "integration.github.rest-api",
+      "version": "2026-03-10",
+      "revision": null,
+      "source_uris": [
+        "https://docs.github.com/en/rest/issues/issues",
+        "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-gmail-messages-send.json",
+      "sha256": "34282f6455da9d4e6e14a88fdfe406e6cb8fce2e297b498b96cdc5d65f645105",
+      "id": "tool.gmail.messages-send",
+      "version": "v1",
+      "revision": null,
+      "source_uris": [
+        "https://developers.google.com/workspace/gmail/api/auth/scopes",
+        "https://developers.google.com/workspace/gmail/api/reference/quota"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-n8n-webhook.json",
+      "sha256": "16e78ac427c93dd36d76c0947c172da97d01d9d61ccdce8226e99eab1000b8f1",
+      "id": "integration.n8n.webhook",
+      "version": "2.43.7",
+      "revision": null,
+      "source_uris": [
+        "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/",
+        "https://n8n.io/pricing/",
+        "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
+        "https://registry.npmjs.org/n8n"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4b-stripe-refunds-create.json",
+      "sha256": "0331bfa89e0586082ed2974fc309b91ceb6e36675c7a70c0098bf48e45b0003a",
+      "id": "tool.stripe.refunds-create",
+      "version": "2026-09-30.endive",
+      "revision": null,
+      "source_uris": [
+        "https://docs.stripe.com/api/idempotent_requests",
+        "https://docs.stripe.com/api/refunds/create",
+        "https://docs.stripe.com/api/versioning",
+        "https://docs.stripe.com/keys"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-atlassian-remote.json",
+      "sha256": "77b0a3b35a26760e78943dd322465f58524e8eb1bf64ff895793a45180a1973e",
+      "id": "mcp_server.atlassian-remote",
+      "version": "2.0.0",
+      "revision": null,
+      "source_uris": [
+        "https://registry.modelcontextprotocol.io/v0.1/servers/com.atlassian%2Fatlassian-mcp-server/versions/latest",
+        "https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-dbhub.json",
+      "sha256": "5d14b45d54b38b61ac14181227b410cf5d1a20718bbf3ee159713f482988414d",
+      "id": "mcp_server.dbhub",
+      "version": "1.5.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/bytebase/dbhub/blob/main/LICENSE",
+        "https://github.com/bytebase/dbhub/blob/main/README.md",
+        "https://registry.npmjs.org/@bytebase/dbhub"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-github-local.json",
+      "sha256": "45585d85d1e570a0bf415e891061e1f6d4303774df7a4ee5f553bda3ad0f123e",
+      "id": "mcp_server.github-local",
+      "version": "2.0.2",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/github/github-mcp-server/blob/main/LICENSE",
+        "https://github.com/github/github-mcp-server/blob/main/README.md",
+        "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.github%2Fgithub-mcp-server/versions/latest"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-github-remote.json",
+      "sha256": "332eae930c6287c40862d752f84f991e7e6adb036730695eced7afee24118b24",
+      "id": "mcp_server.github-remote",
+      "version": "2.0.2",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/github/github-mcp-server/blob/main/README.md",
+        "https://github.com/github/github-mcp-server/releases/tag/v2.0.2",
+        "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.github%2Fgithub-mcp-server/versions/latest"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-playwright.json",
+      "sha256": "c6d33a6dfd161eb48578af016d994732f4ddbc2b1b4da17557823116e6b1bbd4",
+      "id": "mcp_server.playwright",
+      "version": "0.0.83",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/microsoft/playwright-mcp/blob/main/LICENSE",
+        "https://github.com/microsoft/playwright-mcp/blob/main/README.md",
+        "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.microsoft%2Fplaywright-mcp/versions/latest",
+        "https://registry.npmjs.org/@playwright/mcp"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-reference-fetch.json",
+      "sha256": "a6e693bf731a2775e7ce159de4f6e5591dec4646b87fd5390f373f38a12e56a9",
+      "id": "mcp_server.reference-fetch",
+      "version": "2026.10.10",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/modelcontextprotocol/servers/blob/main/README.md",
+        "https://github.com/modelcontextprotocol/servers/blob/main/src/fetch/README.md",
+        "https://pypi.org/pypi/mcp-server-fetch/json"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-reference-filesystem.json",
+      "sha256": "467aace222ea486771de6a37ed4032bfd2583dadf37203c4e9c6adef4e3ec702",
+      "id": "mcp_server.reference-filesystem",
+      "version": "1.0.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/modelcontextprotocol/servers/blob/main/src/filesystem/README.md",
+        "https://registry.npmjs.org/@modelcontextprotocol/server-filesystem"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-sentry-remote.json",
+      "sha256": "a6b5681896710619d746550f0d325ec2664b38959aef691287cacf03faa04157",
+      "id": "mcp_server.sentry-remote",
+      "version": "0.42.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/getsentry/sentry-mcp/blob/main/README.md",
+        "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.getsentry%2Fsentry-mcp/versions/latest"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4c-stripe-remote.json",
+      "sha256": "71fed972f84ef193ed7272cb392d8e6caee1d28c80f6961db5cc3c813eccb338",
+      "id": "mcp_server.stripe-remote",
+      "version": "0.2.4",
+      "revision": null,
+      "source_uris": [
+        "https://docs.stripe.com/mcp",
+        "https://registry.modelcontextprotocol.io/v0.1/servers/com.stripe%2Fmcp/versions/latest"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4d-adk-database-session-service.json",
+      "sha256": "b21efc5fe8ae1623643673619ef514f257f90c17743b2cff3ab65e4f8969d437",
+      "id": "memory_store.google-adk.database-session-service",
+      "version": "2.12.0",
+      "revision": null,
+      "source_uris": [
+        "https://adk.dev/sessions/session/",
+        "https://pypi.org/pypi/google-adk/json",
+        "https://raw.githubusercontent.com/google/adk-python/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4d-adk-in-memory-session-service.json",
+      "sha256": "40ee52861445c04c047f179b5d2902f6a957517015e8c50713c7c7ca1d9612bd",
+      "id": "memory_store.google-adk.in-memory-session-service",
+      "version": "2.12.0",
+      "revision": null,
+      "source_uris": [
+        "https://adk.dev/sessions/session/",
+        "https://pypi.org/pypi/google-adk/json",
+        "https://raw.githubusercontent.com/google/adk-python/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4d-langgraph-postgres-saver.json",
+      "sha256": "69f62f0f8a1e6620d8f6e4f942a85effe130e677c1979e302d2ae0cd056d30e4",
+      "id": "memory_store.langgraph.postgres-saver",
+      "version": "3.2.0",
+      "revision": null,
+      "source_uris": [
+        "https://docs.langchain.com/oss/python/langgraph/checkpointers",
+        "https://pypi.org/pypi/langgraph-checkpoint-postgres/json",
+        "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4d-langgraph-postgres-store.json",
+      "sha256": "2eec23fca71163e96a267afc7696bcbb2eed8e413e24ce728e4ba8edf477fa58",
+      "id": "memory_store.langgraph.postgres-store",
+      "version": "3.2.0",
+      "revision": null,
+      "source_uris": [
+        "https://docs.langchain.com/oss/python/langgraph/stores",
+        "https://pypi.org/pypi/langgraph-checkpoint-postgres/json",
+        "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4d-mem0-oss.json",
+      "sha256": "fbe4e8344da81ac4ede243c563483db6d98dc28a45615d5f917b205a5799d3e8",
+      "id": "memory_store.mem0.oss",
+      "version": "2.2.1",
+      "revision": null,
+      "source_uris": [
+        "https://docs.mem0.ai/components/vectordbs/overview",
+        "https://docs.mem0.ai/open-source/overview",
+        "https://docs.mem0.ai/platform/features/expiration-date",
+        "https://pypi.org/pypi/mem0ai/json",
+        "https://raw.githubusercontent.com/mem0ai/mem0/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/t4d-openai-agents-sqlalchemy-session.json",
+      "sha256": "4c74cdc1a08491d32c160f56a19133d2e8b127920beeba068c4492c06290d374",
+      "id": "memory_store.openai-agents.sqlalchemy-session",
+      "version": "0.24.0",
+      "revision": null,
+      "source_uris": [
+        "https://openai.github.io/openai-agents-python/sessions/",
+        "https://pypi.org/pypi/openai-agents/json",
+        "https://raw.githubusercontent.com/openai/openai-agents-python/main/LICENSE"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/training_framework-axolotl.json",
+      "sha256": "3606fc92a1b68b5e02643469609422c49435e94ae585ef3f68c1717bbcc81167",
+      "id": "cat.training_framework.axolotl",
+      "version": "0.21.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/axolotl-ai-cloud/axolotl/blob/main/LICENSE",
+        "https://github.com/axolotl-ai-cloud/axolotl/blob/main/README.md",
+        "https://github.com/axolotl-ai-cloud/axolotl/releases/tag/v0.21.0",
+        "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/export.qmd",
+        "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/mac.qmd",
+        "https://raw.githubusercontent.com/axolotl-ai-cloud/axolotl/main/docs/support-matrix.qmd"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/training_framework-peft.json",
+      "sha256": "14188aa415e3e932bd40fa2b4aa7bbb22f073ecf90efb4e65e7d2ba030f50eff",
+      "id": "cat.training_framework.peft",
+      "version": "0.21.2",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/huggingface/peft/blob/main/LICENSE",
+        "https://github.com/huggingface/peft/blob/main/README.md",
+        "https://github.com/huggingface/peft/releases/tag/v0.21.2",
+        "https://raw.githubusercontent.com/huggingface/peft/main/docs/source/developer_guides/checkpoint.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/training_framework-trl.json",
+      "sha256": "4d06096989eafd652a78d69d9e5b0fbfb4a5852569770ddd07ccb5da68b2d36d",
+      "id": "cat.training_framework.trl",
+      "version": "1.16.0",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/huggingface/trl/blob/main/LICENSE",
+        "https://github.com/huggingface/trl/blob/main/README.md",
+        "https://github.com/huggingface/trl/releases/tag/v1.16.0",
+        "https://raw.githubusercontent.com/huggingface/trl/main/docs/source/distributing_training.md",
+        "https://raw.githubusercontent.com/huggingface/trl/main/docs/source/reducing_memory_usage.md"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "catalog/proposals/training_framework-unsloth.json",
+      "sha256": "229924b4b12b5bddf3454418378ea33e50cd5fdc23e869ae9cfee9efa7e4b122",
+      "id": "cat.training_framework.unsloth",
+      "version": "2026.10.6",
+      "revision": null,
+      "source_uris": [
+        "https://github.com/unslothai/unsloth/blob/main/README.md",
+        "https://github.com/unslothai/unsloth/releases/tag/v0.1.908-beta",
+        "https://pypi.org/project/unsloth/2026.10.6/",
+        "https://unsloth.ai/docs/basics/inference-and-deployment/saving-to-gguf",
+        "https://unsloth.ai/docs/get-started/fine-tuning-for-beginners/unsloth-requirements"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "pricing/proposals/t1-api-2026-10-16.json",
+      "sha256": "e44edc4e4e188b582b7de66df41c5df4c3f2d655325c39c202fd8178ebf06056",
+      "id": "pricebook.t1_api_2026_10_16",
+      "version": null,
+      "revision": 1,
+      "source_uris": [
+        "https://developers.openai.com/api/docs/models/gpt-5.4",
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "pricing/proposals/t2-hosting-2026-10-16.json",
+      "sha256": "6c6df4fd70486c2f09fac8a8ff2dec6bb75c834a292c2a21819e9722608357fa",
+      "id": "t2-hosting-2026-10-16",
+      "version": null,
+      "revision": 1,
+      "source_uris": [
+        "https://developers.cloudflare.com/r2/pricing/",
+        "https://docs.runpod.io/storage/network-volumes",
+        "https://huggingface.co/docs/inference-endpoints/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    },
+    {
+      "path": "pricing/proposals/t4b-anthropic-web-search.json",
+      "sha256": "71f902ad0d1c3351f58b5e7b3e324f6889d077981772af4a142aafa064cb5b29",
+      "id": "pricebook.t4b.anthropic-web-search",
+      "version": null,
+      "revision": 1,
+      "source_uris": [
+        "https://platform.claude.com/docs/en/about-claude/pricing"
+      ],
+      "publication_status": "not_established_for_complete_artifact"
+    }
+  ]
+}

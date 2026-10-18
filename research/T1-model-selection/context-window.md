@@ -9,6 +9,10 @@ Will the complete request and reserved generation fit the selected model **on th
 
 This bounded candidate set covers direct APIs, a Bedrock API route and self-hosted weights. Managed coverage is the conditional dedicated endpoint route in [Model Provider](model-provider.md), whose model and runtime ceilings need exact offering evidence. Under #3's [owner position](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), provider-operated shared Bedrock on-demand is API; managed requires dedicated/reserved capacity. Hybrid applies independently to serving components; a local retrieval service does not make remote generation KV cache local. RAG assembly stays with #16 and sizing with #10.
 
+## Non-text and predictive model limits
+
+The [selection-limit supplement](nontext-selection-limits.md) records model- and route-specific audio, image/video, retrieval and predictive-model constraints with their actual units. It distinguishes documented hard predicates from defaults, chunking/truncation policies, training shapes, examples and unresolved claims. These research notes do not extend the text-token contract or establish runtime capacity; new typed limit semantics remain subject to #40 and affected-owner review.
+
 ## Candidate options
 
 ### Scope extension beyond text-token contexts

@@ -48,7 +48,7 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ### Training compute (#31)
 
-- **Memory:** a component formula with gradient dtype, optimiser and fused-loss choice as explicit inputs, calibrated against 12 published measurements.
+- **Memory:** a component formula with gradient dtype, optimiser and fused-loss choice as explicit inputs. The compute note collects 12 published comparison rows; B12 is a capability claim without measurements. These rows do not establish calibration of the Qwen3-8B worked example or a general fit guarantee.
   - Logits are often the largest swing: for Qwen3-8B at 4,096 tokens, 2.5–7.5 GB per sequence without fused cross-entropy.
 - **Time:** measured tokens/s where a calibration row exists. Otherwise 6·N·D (full) or ≈4·N·D (LoRA, a project estimate) FLOPs with an MFU range.
 - **Cost:** a 30M-token LoRA run on an 8B model costs about $1–4 in rented-GPU compute, or $10–45 on a managed service. Post-training hosting dominates instead: about $1,241/month for a fine-tuned Azure deployment, roughly 8× its training cost.
@@ -114,7 +114,7 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 
 #33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature` and `base_notice_file_present` (needed by A-18c), plus revision-pinned catalog references.
 
-## Handoffs (none confirmed)
+## Outgoing handoffs (none confirmed)
 
 | Handoff | From | To | Owner |
 | --- | --- | --- | --- |
@@ -129,15 +129,17 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 | Rule format and contract changes; "competing model" policy | all | #40 | @tynamite |
 | Evidence grading (checked vs verified), price freshness | all | #41 | @tynamite |
 
+Incoming T2 boundaries have separate receiving-owner receipts: [#9 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274), [#10 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484), and [#11 → #33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684). These accept reuse of existing records and narrow tokenizer/template ownership; they do not accept the reverse-direction requests in this table or supply missing catalog records. The receipts were read back on 2026-10-18.
+
 Owners are the live GitHub assignees as of 2026-10-16 and are not duplicated elsewhere.
 
 ## Blockers on structured artifacts
 
-T2 proposals merged to `main` in #75 already supply part of what T5 references: three `accelerator` records (`nvidia-h100-sxm`, `nvidia-l40s`, `amd-mi300x`) with VRAM and precision inputs, one `compute_profile` (`aws-ec2-g6e-xlarge-us-east-1`), `hosting_platform` and `storage` records, and a `gpu_hour` meter. They are proposals under their own review, not approved catalog data. The one existing profile is a valid `compute_profile_ref` target, and having only one profile is not a schema blocker. The meter enum's `gpu_hour` can represent per-GPU-hour billing, such as the Fireworks Dedicated Training API row, once matching catalog references exist; the other managed training rows need separate meter review, and those limits do not exclude all managed training prices from v1. The remaining gaps are the records and fields that actually do not exist, listed in [Upstream T2 records](training-compute.md#upstream-t2-records).
+T2 proposals merged to `main` in #75 already supply part of what T5 references: three `accelerator` records (`nvidia-h100-sxm`, `nvidia-l40s`, `amd-mi300x`) with VRAM and precision inputs, one `compute_profile` (`aws-ec2-g6e-xlarge-us-east-1`), `hosting_platform` and `storage` records, and a `gpu_hour` meter. They are proposals under their own review, not approved catalog data. The one existing profile is a valid `compute_profile_ref` target, and having only one profile is not a schema blocker. The meter enum's `gpu_hour` can represent per-GPU-hour billing, such as the Fireworks Dedicated Training API row, once matching catalog references exist; the other managed training rows need separate meter review, and those limits do not exclude all managed training prices from v1. The S3 Standard storage identity was added in #158; its historical P13 rate has not been rebound to that catalog version. The remaining gaps are the records and fields that actually do not exist, listed in [Upstream T2 records](training-compute.md#upstream-t2-records).
 
 | Artifact | Blocked by |
 | --- | --- |
-| `training_compute` items, training Pricebooks, ResourceEstimates | #31 proposes no `training_compute` item and no Pricebook or ResourceEstimate. Missing records: `compute_profile` for every priced SKU except `aws-ec2-g6e-xlarge-us-east-1` (#10), `accelerator` for A100 80 GB and RTX 4090 (#10), `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave and `storage` for S3 Standard (#9). Unresolved fields and meters: peak dense TFLOP/s per accelerator, training-token, job-minimum, training-hour and model-storage meters, optional `compute_profile_ref` for managed services, a training-memory ResourceEstimate metric (#40), and whether a multi-GPU instance-hour price maps to `gpu_hour` per GPU or per instance (#39) |
+| `training_compute` items, training Pricebooks, ResourceEstimates | #31 proposes no `training_compute` item and no Pricebook or ResourceEstimate. Missing records: `compute_profile` for every priced SKU except `aws-ec2-g6e-xlarge-us-east-1` (#10), `accelerator` for A100 80 GB (#10); RTX 4090 identity is now supplied by `nvidia-geforce-rtx-4090` version `2026-10-18` without a profile/rate binding, `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave (#9). Unresolved fields and meters: peak dense TFLOP/s per accelerator, training-token, job-minimum, training-hour and model-storage meters, optional `compute_profile_ref` for managed services, a training-memory ResourceEstimate metric (#40), and whether a multi-GPU instance-hour price maps to `gpu_hour` per GPU or per instance (#39) |
 | `data_source` items from the source audit | `spec_data_source` has no licence, terms or opt-out fields; agreement needed with #13 and #40 |
 | Managed `training_framework` items | `backends` required but not user-visible for managed services (#40) |
 | `fine_tuned_model` items | User-specific; references require `model` and `training_dataset` items, and A-18c needs the proposed `base_notice_file_present` fact (#40, #6) |
