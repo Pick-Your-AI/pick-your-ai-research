@@ -159,6 +159,16 @@ preserve all input bytes on preparation errors and reproduce the committed
 15-run summary unchanged. No error pair, estimator tolerance or additional
 architecture coverage is created by this validation correction.
 
+A follow-up review at
+[`b7c9f07`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/b7c9f07e7ef82ac9ee80c974df86aee02575d2a2/scripts/mr09_summarize.py)
+reproduced another raw-input ambiguity: duplicate status keys could become a
+success and sanitization removed the contradictory original value. The reader
+now rejects duplicate keys at every object level, including identical duplicates,
+optional counters and non-numerical failure diagnostics, before any input rewrite.
+Synthetic regressions check preservation of every original input byte with
+sanitization both enabled and disabled. Existing measured observations, instrument
+pins and the committed summary are unchanged; this is an input-integrity fix.
+
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
 - [x] Vary context cache precision and concurrency (dense D1–D5; MoE variation remains a gap)
