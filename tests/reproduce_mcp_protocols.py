@@ -7,12 +7,15 @@ isolated Python environments with the versions recorded in the companion note.
 
 import argparse
 import asyncio
+import ctypes
 from datetime import datetime, timedelta, timezone
 import hashlib
 from importlib.metadata import version
 import json
+import os
 from pathlib import Path
 import platform
+import signal
 import subprocess
 import sys
 
@@ -65,7 +68,25 @@ def matches_expected(row, case):
             and row.get("echo") == {"echo": SYNTHETIC_TEXT, "server_sdk": SDK_VERSIONS[server]})
 
 
-def serve(generation):
+def bind_parent_lifetime(expected_parent):
+    """Stop this fixed Linux peer even when the SDK gives it a new session."""
+    if sys.platform != "linux":
+        raise RuntimeError("The observer requires Linux parent-death cleanup")
+    if (type(expected_parent) is not int or expected_parent <= 0
+            or os.getppid() != expected_parent):
+        raise RuntimeError("The expected probe parent is no longer present")
+    prctl = ctypes.CDLL(None, use_errno=True).prctl
+    prctl.argtypes = [ctypes.c_int] + [ctypes.c_ulong] * 4
+    prctl.restype = ctypes.c_int
+    if prctl(1, int(signal.SIGKILL), 0, 0, 0) != 0:  # PR_SET_PDEATHSIG
+        raise OSError(ctypes.get_errno(), "Cannot bind the probe's parent lifetime")
+    # Parent death before prctl is not retroactive; close that setup race.
+    if os.getppid() != expected_parent:
+        raise RuntimeError("The expected probe parent exited during setup")
+
+
+def serve(generation, parent_pid):
+    bind_parent_lifetime(parent_pid)
     actual = require_sdk(generation)
     if generation == "v1":
         from mcp.server.fastmcp import FastMCP
@@ -91,7 +112,7 @@ async def probe(client_generation, server_generation, server_python, mode):
 
     parameters = StdioServerParameters(
         command=server_python,
-        args=["-I", str(SELF), "--serve", server_generation],
+        args=["-I", str(SELF), "--serve", server_generation, "--parent-pid", str(os.getpid())],
         env=clean_environment(server_python),
     )
     row = {"client_sdk": client_sdk, "server_sdk": SDK_VERSIONS[server_generation],
@@ -138,15 +159,46 @@ async def probe(client_generation, server_generation, server_python, mode):
     return row
 
 
+def run_worker(command, environment, timeout=20):
+    """Bound an isolated Linux worker and its inherited process group.
+
+    Do not drain inherited pipes again after a timeout: a peer may still hold
+    them open. The SDK's separate-session synthetic peer also binds its own
+    parent lifetime before loading the SDK; arbitrary process trees are not
+    supported by this helper.
+    """
+    if sys.platform != "linux":
+        raise RuntimeError("The observer requires Linux parent-death cleanup")
+    worker = subprocess.Popen(command, env=environment, stdin=subprocess.DEVNULL,
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                              text=True, start_new_session=True)
+    try:
+        stdout, stderr = worker.communicate(timeout=timeout)
+        return subprocess.CompletedProcess(command, worker.returncode, stdout, stderr)
+    except BaseException:
+        # The fresh session gives this invocation its own group, even if its
+        # leader exited without yet being reaped. Never signal a recycled group
+        # after communicate() has already reaped the leader on a normal path.
+        if worker.returncode is None:
+            try:
+                os.killpg(worker.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            worker.wait(timeout=5)
+        raise
+    finally:
+        worker.stdout.close()
+        worker.stderr.close()
+
+
 def observe(v1_python, v2_python):
     interpreters = {"v1": str(Path(v1_python).absolute()), "v2": str(Path(v2_python).absolute())}
     rows = []
     for case in CASES:
         client, server, mode, _ = case
         command = [interpreters[client], "-I", str(SELF), "--probe", client, server,
-                   interpreters[server], mode]
-        result = subprocess.run(command, env=clean_environment(interpreters[client]),
-                                capture_output=True, text=True, timeout=20)
+                   interpreters[server], mode, "--parent-pid", str(os.getpid())]
+        result = run_worker(command, clean_environment(interpreters[client]))
         if result.returncode != 0:
             raise RuntimeError("A probe worker failed before recording an observation")
         row = json.loads(result.stdout)
@@ -168,10 +220,12 @@ def main():
     mode.add_argument("--serve", choices=SDK_VERSIONS)
     mode.add_argument("--probe", nargs=4, metavar=("CLIENT", "SERVER", "SERVER_PYTHON", "MODE"))
     mode.add_argument("--observe", nargs=2, metavar=("V1_PYTHON", "V2_PYTHON"))
+    parser.add_argument("--parent-pid", type=int, help="exact parent PID for an owned worker or peer")
     args = parser.parse_args()
     if args.serve:
-        serve(args.serve)
+        serve(args.serve, args.parent_pid)
     elif args.probe:
+        bind_parent_lifetime(args.parent_pid)
         print(json.dumps(asyncio.run(probe(*args.probe)), sort_keys=True))
     else:
         result = observe(*args.observe)
