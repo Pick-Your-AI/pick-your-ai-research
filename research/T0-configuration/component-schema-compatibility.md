@@ -697,6 +697,13 @@ unchanged.
 
 ### CD-13 explicit role policy for disabled alternatives (2026-10-18)
 
+**Parked archive, not an integration proposal.** The owner's
+[16:00 UTC ledger](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252011763)
+accepts the already stated strict disabled-role choice as satisfying constraint
+2 for this prototype. The optional profile below is retained only as a reviewed
+experiment on `archive/cd13-enabled-roles-44a55`; it is not a needed repair or an
+adopted replacement for the accepted strict behavior.
+
 The [earlier co-owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6246963100)
 retains build-wide `(kind, role)` uniqueness, including disabled selections.
 The [later owner disposition, constraint 2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
@@ -713,7 +720,7 @@ retain only their enabled findings, and duplicate IDs always reject. These are
 expected results of the earlier policy, not a defect retrospectively assigned
 to that policy.
 
-**Prospective choice:** callers may explicitly select
+**Archived prospective choice:** callers may explicitly select
 `RolePolicy.ENABLED_ONLY` through the normalized `validate_identities` or
 `evaluate` keyword `role_policy`. The default is still
 `RolePolicy.BUILD_WIDE`; no existing call or binding selects the new policy.
@@ -749,6 +756,19 @@ invocation; binding a policy to a released wire format or historical replay
 requires separate versioned review. Frozen v1, native semantics, required
 presence, affected-owner reconciliation and the full #40/#42 criteria remain
 unchanged.
+
+The reviewed local checkpoint is `3b14f6f484630792ce5e035e235745f82c34bcc5`, tree
+`429f25d320a386ccac5a6efdbaa153c975d92090`, based on accepted `c2bdd82`.
+The API archive checkpoint `75c49acc4e24b218542f9b601a392f19644d174c`
+preserves that exact tested tree with its own publication identity.
+Actual local gates at that exact tree used Python 3.12.14 and all seven pinned
+requirements: 21 contract methods, 824 repository methods, 12 optimized profile
+methods and all four validators passed. The full repository run had no skips
+and took 99.291 seconds. Those executions precede this archive-status
+annotation; they are not attributed to the later annotated tree or to a hosted
+run. An independent in-session source review of all three changed paths found
+no blocker. This records technical review of an archived experiment, not an
+affected owner's adoption or a completion claim for #40 or #42.
 
 ### CD-13 required-presence mode (2026-10-18)
 
