@@ -311,7 +311,7 @@
     "access": "API/MCP access plans documented",
     "rights": "Free, Pro and Research plans cover queries and internal analysis only; commercial display and redistribution need separate agreements",
     "maintenance": "High: source mix, license lineage and snapshot history",
-    "next_action": "Source benchmark results from their original publishers, whose measurements keep their own rights; request a display agreement only if BenchLM-owned outputs are essential",
+    "next_action": "Exclude BenchLM-owned outputs and compiled feeds from commercial display or redistribution without the separate agreement. Prefer separately licensed original publisher measurements and retain their exact terms; quotations and attributed embeds remain separately scoped.",
     "source_ids": [
       "src-benchlm"
     ],
@@ -320,7 +320,8 @@
     "status": "Not approved for integration",
     "access_date": "2026-10-16",
     "terms_urls": [
-      "https://benchlm.ai/data/access"
+      "https://benchlm.ai/data/access",
+      "https://benchlm.ai/terms"
     ],
     "reuse_permitted": {
       "automated_retrieval": {
@@ -346,15 +347,16 @@
     },
     "update_cadence": "Continuous; history depth depends on plan",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-18",
+    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed."
   },
   {
     "product_id": "harness-bench",
     "investigation_rank": 9,
     "access": "Public repository and study",
-    "rights": "Repository has no licence; the arXiv paper is CC BY 4.0",
+    "rights": "No repository-wide licence found at b8d89634c6f445fcc68ceb6744a59bef6cdf4863; the separate arXiv v2 paper is CC BY 4.0",
     "maintenance": "High: suite identity conflict and controlled reproduction",
-    "next_action": "Reconcile release versions (#62) before displaying any paper result; ask maintainers for a repository licence if task data is needed",
+    "next_action": "Keep repository tasks/code/trajectories excluded from product reuse. Paper-only attribution and version scope can be reviewed without treating published figures as comparable quality evidence; #62 retains missing model/grader pins and statistical limits.",
     "source_ids": [
       "src-harness-bench"
     ],
@@ -364,7 +366,9 @@
     "access_date": "2026-10-16",
     "terms_urls": [
       "https://github.com/Qihoo360/harness-bench",
-      "https://arxiv.org/abs/2605.27922"
+      "https://arxiv.org/abs/2605.27922",
+      "https://arxiv.org/abs/2605.27922v2",
+      "https://creativecommons.org/licenses/by/4.0/legalcode.en"
     ],
     "reuse_permitted": {
       "automated_retrieval": {
@@ -379,26 +383,27 @@
       },
       "display": {
         "value": "yes",
-        "conditions": "Results and text published in the paper only, with attribution and version (v2); not repository tasks, trajectories or catalogue files",
+        "conditions": "Only material published in the CC BY 4.0 paper v2: retain authors/title/version, source/licence links, supplied notices and change indications. No endorsement or rights to separate repository content are implied.",
         "basis": "Paper licence CC BY 4.0; repository has no licence (GitHub licence API: none)"
       },
       "redistribution": {
         "value": "no",
-        "conditions": "Repository content stays no; the paper itself may be shared under CC BY 4.0",
+        "conditions": "Repository collection remains excluded. The separate licensed paper may be shared/adapted under CC BY 4.0 with its attribution, notice and change-indication conditions; its permission does not attach to task/code/trajectory files.",
         "basis": "Repository has no licence"
       }
     },
     "update_cadence": "Repository updated 2026-10-09 (Harness-Bench 3.0); paper v2 revised 2026-10-15",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-18",
+    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed."
   },
   {
     "product_id": "gpus-io",
     "investigation_rank": 10,
     "access": "Public comparison site; documented API under paid plans",
-    "rights": "API licence covers internal use and values shown inside your own product with attribution; no resale, redistribution or competing comparison service",
+    "rights": "Conditional paid-API licence for internal/product use and attributed outputs; prohibits competing products/services, substantially similar datasets/comparison services and standalone or bulk redistribution",
     "maintenance": "High: spot availability, location and unit semantics",
-    "next_action": "#39 to decide whether the cost feature could count as a competing comparison service before using GPUs.io data; verify quotes with providers directly",
+    "next_action": "Exclude GPUs.io from current product retrieval, display and export. Reconsider only with a specific permitted-use basis covering this product and a new #39/#41/#60 review; obtain price facts from separately reviewed original providers.",
     "source_ids": [
       "src-gpus-io"
     ],
@@ -422,7 +427,7 @@
       },
       "display": {
         "value": "yes",
-        "conditions": "Through the API; credit 'Pricing data by GPUs.io' with a link; values inside a build's cost estimate, not a standalone GPU price comparison (terms bar competing comparison services); users must not be able to bulk-extract the data",
+        "conditions": "Conditional on compliance with all terms and paid API access, attribution and no bulk extraction. Section 5's competing-product/service restriction still applies inside a build cost estimate; this product's eligibility is not established.",
         "basis": "Terms: licence for use within your own applications and products; anti-competition clause"
       },
       "redistribution": {
@@ -433,6 +438,16 @@
     },
     "update_cadence": "Live; the page showed data updated 21 minutes before access",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-18",
+    "project_use_decision": {
+      "disposition": "exclude_from_current_product_scope",
+      "status": "proposed_for_independent_integration_review",
+      "basis": "Terms sections 5–7 and an explicit project choice; no conclusion of legal eligibility",
+      "automated_product_retrieval": false,
+      "commercial_display": false,
+      "redistribution": false,
+      "reconsideration": "Specific permitted-use basis covering the proposed product, then new #39/#41/#60 review"
+    },
+    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed."
   }
 ]
