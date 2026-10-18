@@ -1449,8 +1449,8 @@
     ],
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing by actual delegated technical receiving review",
+    "requested_action": "Retain mixed-unit per-term handling, distinct ModelFit website/CLI identities, actual resident weights, offload costs and per-rank placement. No global mixed-total conversion, pooled-VRAM fit, SLO/GPU count, measured throughput, calibrated ResourceEstimate or new compatibility rule follows.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
       "evidence": [
@@ -1467,7 +1467,27 @@
       "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (actual in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T17:50:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_input_blobs": {
+          "research/market/technical-feasibility.md": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+          "research/market/sizing-validation.md": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262"
+        },
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session technical receiving review under the user's express project-engineering delegation, posted through the shared account. No response from an absent assignee, new execution, source-use grant or whole-issue acceptance is inferred.",
+        "reviewed_artifact_git_blob": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "scope": "bounded sizing assumptions and artifact/runtime/cache/active-sequence/per-rank/unit mismatch vocabulary",
+        "retained_unknowns_and_next_action": "Retain mixed-unit per-term handling, distinct ModelFit website/CLI identities, actual resident weights, offload costs and per-rank placement. No global mixed-total conversion, pooled-VRAM fit, SLO/GPU count, measured throughput, calibrated ResourceEstimate or new compatibility rule follows."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -1526,8 +1546,8 @@
     ],
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing by actual delegated technical receiving review",
+    "requested_action": "Bind exact dimensions/metric/format, API/transport/auth and versions; require a permitted workload plus deliberate mismatches. Protected retrieval needs trusted caller-to-store/action scope, current permission/revocation and enforcement before model/tool exposure. No default backend, deployed ACL result or rule activation follows.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review unchanged retrieval scope; substantive dimension/metric/authentication/workload results remain with #65.",
       "evidence": [
@@ -1544,7 +1564,27 @@
       "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (actual in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T17:50:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_input_blobs": {
+          "research/market/technical-feasibility.md": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+          "research/market/sizing-validation.md": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262"
+        },
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session technical receiving review under the user's express project-engineering delegation, posted through the shared account. No response from an absent assignee, new execution, source-use grant or whole-issue acceptance is inferred.",
+        "reviewed_artifact_git_blob": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "scope": "interoperability and authorization risks as concrete positive/negative test requirements",
+        "retained_unknowns_and_next_action": "Bind exact dimensions/metric/format, API/transport/auth and versions; require a permitted workload plus deliberate mismatches. Protected retrieval needs trusted caller-to-store/action scope, current permission/revocation and enforcement before model/tool exposure. No default backend, deployed ACL result or rule activation follows."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -1556,8 +1596,8 @@
     ],
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with constraints on 2026-10-18 as conditional feasibility and required-evidence input to the accepted framework selection interface; no selected-path runtime or comparative-quality result is supplied.",
+    "requested_action": "Apply the exact model/offering/API/adapter/version/request-mode and optional engine/parser/schema/streaming tuple. Preserve direct SDK/no-framework and optional T3–T5. Qualify a concrete selected operation separately with its real round trip, unsupported/wrong-tuple and denied-action controls; no such experiment is required merely to receive this documentary input.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review unchanged agent scope and #62 system/harness/complete-delivery evidence requirements.",
       "evidence": [
@@ -1574,7 +1614,28 @@
       "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session Android engineering specialist)",
+        "submitted_at": "2026-10-18T18:11:38Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253363116",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "reviewed_input_blobs": {
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262",
+          "research/market/handoffs.json": "061c6afc334ef0e3480494469fbf9ca39ee5e15e"
+        },
+        "reviewed_consumer_commit": "d98fbe716f49c0da3782655acfd5d1b3f471cafc",
+        "reviewed_consumer_git_blob": "15bf6574b00a12a1774ef33363db2087d8703ea5",
+        "scope": "Accept MR-09 conditional feasibility/risk, reuse of component decisions and system/harness/complete-delivery evidence requirements into #25's accepted configured-path interface. A generic flag or unused API/mode cannot witness the requested action path; direct SDK/no-framework and optional tiers remain valid.",
+        "retained_unknowns_and_next_action": "No allocator fit, agent quality, portability, persistence/deletion, token/call total, runtime behavior, normalized benchmark rank or causal framework effect is certified. Existing #25 R1–R6/C2 and closed research outcome keep their separate attribution. Future selected-operation execution needs exact caller/serving/artifact/configuration, actual tool round trip, unsupported/wrong tuple and denied-action controls with metric completeness."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -1586,8 +1647,8 @@
     ],
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with constraints on 2026-10-18 as documentary discovery/risk and required-evidence input for the accepted MCP connection binding; it supplies no new server catalog or protocol/credential support fact.",
+    "requested_action": "Bind actual client/installed SDK, server package/digest or dated endpoint, transport, common revision and negotiation/fallback, operation/capability requirements and principal/resource/permission/lifecycle. Future tuple qualification requires actual negotiation/listing/round trip plus applicable denial controls before effects; retain literal SDK/public-endpoint observations without generalizing.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review unchanged MCP scope; advertised connector/transport presence does not establish an authenticated successful workload.",
       "evidence": [
@@ -1604,7 +1665,28 @@
       "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session Android engineering specialist)",
+        "submitted_at": "2026-10-18T18:11:38Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253363116",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "reviewed_input_blobs": {
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262",
+          "research/market/handoffs.json": "061c6afc334ef0e3480494469fbf9ca39ee5e15e"
+        },
+        "reviewed_consumer_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_consumer_git_blob": "5ef99a009df2bf8877622a0027d6fe5dc890c1ed",
+        "scope": "Accept advertised-connector/transport versus authenticated-workload distinctions as discovery/risk and required-evidence input to the actual MCP connection binding. Keep provider-hosted client ownership, wire transport, each stdio lifecycle leg and model-serving mode distinct.",
+        "retained_unknowns_and_next_action": "Package ranges, supports_mcp, stored credentials, registry namespaces, approval hooks and untrusted read-only annotations grant no authority. Missing non-exhaustive support remains unknown; only qualified explicit/exhaustive negatives fail and disabled/known-absent optional paths skip their own clauses. Actual negotiated round-trip/denial evidence is separate. Existing closed #27 outcome and literal SDK/public-endpoint observations are neither reopened nor rerun."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -1656,8 +1738,8 @@
     ],
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing by actual delegated technical receiving review",
+    "requested_action": "Keep exact model/harness/task-content/budget/load/attempts/metric/reducer identity, control differences and dependence-aware uncertainty. Published priors, mean scores, full-task delivery and deployment runs remain separate. No benchmark execution, default threshold, A–C tier-policy adoption or quality/release gate follows.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review #62 release/result identity gap, internal v2 abstract/body discrepancy, contamination/overlap and replication limits.",
       "evidence": [
@@ -1685,7 +1767,27 @@
       ]
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (actual in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T17:50:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_input_blobs": {
+          "research/market/technical-feasibility.md": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+          "research/market/sizing-validation.md": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262"
+        },
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session technical receiving review under the user's express project-engineering delegation, posted through the shared account. No response from an absent assignee, new execution, source-use grant or whole-issue acceptance is inferred.",
+        "reviewed_artifact_git_blob": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "scope": "comparison and reproducibility conditions under the already adopted R1–R15 method",
+        "retained_unknowns_and_next_action": "Keep exact model/harness/task-content/budget/load/attempts/metric/reducer identity, control differences and dependence-aware uncertainty. Published priors, mean scores, full-task delivery and deployment runs remain separate. No benchmark execution, default threshold, A–C tier-policy adoption or quality/release gate follows."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -1697,8 +1799,8 @@
     ],
     "artifact": "research/market/technical-feasibility.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with narrowing by actual delegated technical receiving review",
+    "requested_action": "Retain source units/currency/date/region, actual billable quantity/period and unpriced or unsized items. Headroom remains not applied; requests in flight, rate, peak-to-mean ratio, cache hit and reserve are distinct. Memory fits, nominal bandwidth and shared-device timing do not establish sustainable throughput, token economics, break-even, complete TCO or a new price/FX/default decision.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review conditional workload/utilization/idle/energy/amortization/storage/egress/operating-effort scope using #39 semantics and #64 validation; no new rates.",
       "evidence": [
@@ -1726,7 +1828,27 @@
       ]
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (actual in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T17:50:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_input_blobs": {
+          "research/market/technical-feasibility.md": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+          "research/market/sizing-validation.md": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262"
+        },
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session technical receiving review under the user's express project-engineering delegation, posted through the shared account. No response from an absent assignee, new execution, source-use grant or whole-issue acceptance is inferred.",
+        "reviewed_artifact_git_blob": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "scope": "quantity, unit, utilization, capacity and omission constraints for conditional cost research",
+        "retained_unknowns_and_next_action": "Retain source units/currency/date/region, actual billable quantity/period and unpriced or unsized items. Headroom remains not applied; requests in flight, rate, peak-to-mean ratio, cache hit and reserve are distinct. Memory fits, nominal bandwidth and shared-device timing do not establish sustainable throughput, token economics, break-even, complete TCO or a new price/FX/default decision."
+      }
+    ]
   },
   {
     "market_issue": 56,
@@ -3512,8 +3634,8 @@
     ],
     "artifact": "research/market/sizing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
+    "acceptance": "Accepted with narrowing by actual delegated technical receiving review",
+    "requested_action": "Adopt research/T2-infrastructure/compute/resource-estimates/ under its real build/selection/unit/schema/semantic evidence gates. Preserve dense15, GM1three, twelve two-byte KV component pairs and three initialization-buffer observations as separate cohorts; none calibrates whole-runtime memory. Existing observations stay in market/measurements, unbound arithmetic in notes/scripts, synthetic examples in tests. New metrics/interval/topology semantics and proposed sum/max-rank convention still require #40; no current ResourceEstimate is admitted.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review conditional memory/comparison evidence, per-device and unit limitations; agree consumption and any future ResourceEstimate placement.",
       "evidence": [
@@ -3529,7 +3651,27 @@
       "request_note": "Posted scope-specific PR request; six external reviewer requests verified; internal T2 human acknowledgement still required. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (actual in-session Apple engineering specialist)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T17:50:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632",
+        "reviewed_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_input_blobs": {
+          "research/market/technical-feasibility.md": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+          "research/market/sizing-validation.md": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+          "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262"
+        },
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session technical receiving review under the user's express project-engineering delegation, posted through the shared account. No response from an absent assignee, new execution, source-use grant or whole-issue acceptance is inferred.",
+        "reviewed_artifact_git_blob": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+        "scope": "note-only accounting evidence and an adopted future ResourceEstimate research-intake location, admitting zero present records",
+        "retained_unknowns_and_next_action": "Adopt research/T2-infrastructure/compute/resource-estimates/ under its real build/selection/unit/schema/semantic evidence gates. Preserve dense15, GM1three, twelve two-byte KV component pairs and three initialization-buffer observations as separate cohorts; none calibrates whole-runtime memory. Existing observations stay in market/measurements, unbound arithmetic in notes/scripts, synthetic examples in tests. New metrics/interval/topology semantics and proposed sum/max-rank convention still require #40; no current ResourceEstimate is admitted."
+      }
+    ]
   },
   {
     "market_issue": 61,
@@ -3587,8 +3729,8 @@
     ],
     "artifact": "research/market/benchmark-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review the #62 desk validation: no published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered. Accept, narrow or reject convention C2 (benchmark evidence names the paired model, budget and task version).",
+    "acceptance": "Accepted C2 for the framework research interface at the original reviewed input",
+    "requested_action": "Preserve paired model/provider, task release, harness/configuration, budget and grading context; keep mean/full delivery separate. Candidate harnesses and unresolved pins/dependence do not establish ranking or a causal effect. Future quality evidence and versioned result binding remain with #36/#40; no other assignee response, benchmark execution or missing publisher pin is supplied.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review the #62 desk validation: no published harness-effect claim passes the pinning gate, so no framework or harness ranking is offered. Accept, narrow or reject convention C2 (benchmark evidence names the paired model, budget and task version).",
       "evidence": [
@@ -3604,7 +3746,23 @@
       "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "actual_assignee_research_receiving",
+        "reviewer": "CompleteDotTech (literal #25 receiving receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T15:16:43Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25#issuecomment-6251565503",
+        "reviewed_commit": "be60732a1353f9d4efab9d1a4c5fbf7627d49abf",
+        "reviewed_artifact_git_blob": "1ab917cda860cabfce5d2280475613fd1ae11f61",
+        "reviewed_framework_git_blob": "37a1a29b27a8c619a22048399f4a6dd9488486d3",
+        "disposition": "accepted_with_constraints",
+        "authority": "The literal public receipt records CompleteDotTech's #25 receiving decision under delegated engineering authority. It does not assert Mattycodes69's separate response, a benchmark run or issue completion. The later source clarification is not backdated into this original review.",
+        "scope": "C2 framework research comparison interface",
+        "retained_unknowns_and_next_action": "Preserve paired model/provider, task release, harness/configuration, budget and grading context; keep mean/full delivery separate. Candidate harnesses and unresolved pins/dependence do not establish ranking or a causal effect. Future quality evidence and versioned result binding remain with #36/#40; no other assignee response, benchmark execution or missing publisher pin is supplied."
+      }
+    ]
   },
   {
     "market_issue": 62,
@@ -3616,8 +3774,8 @@
     ],
     "artifact": "research/market/benchmark-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown) and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
+    "acceptance": "Accepted with narrowing on 2026-10-18 as a negative desk comparability finding and C1/C3 input under adopted R1–R15. The actual delegated decision selects no replication under #62.",
+    "requested_action": "Keep G2 passes nominal where G1 is absent and G3's 1.96 convention a conditional desk proposal. A separately selected #36 experiment needs its exact reproducibility tuple, predeclared practical margins, valid paired/dependence/selection-aware procedure, rights, resource budget and result placement; no ranking, runtime gate or fabricated run is admitted.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review the #62 release identities, grader conflict (bounded LLM fallback on 79 general tasks versus the website's no-LLM-judge statement), contamination and overlap unknowns, conditional independent-task/means sensitivity (all published G3 outcomes unknown) and replication limits. Accept, narrow or replace the gates and conventions C1 and C3; set the H1 margins and decide whether a replication is wanted and where its results live.",
       "evidence": [
@@ -3633,7 +3791,26 @@
       "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:20Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6253421648",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "5f6d1aedcfd3cef90877b5f321ad181638cbb34d",
+        "reviewed_consumer_git_blob": "171a16b97f526160804f6261b6b1b7fb60b430aa",
+        "scope": "Receive the negative desk finding and C1/C3 under the adopted exact model/runtime, task content, harness/prompt, budget/load, grader, metric/reducer, attempts, dependence and uncertainty tuple. Historical G2 remains nominal design where G1 is missing; G3's 1.96 remains conditional desk proposal. Select no replication under #62.",
+        "retained_unknowns_and_next_action": "Mean, threshold rate and full credit remain distinct; no measured quality/ranking/causal effect/runtime gate or invented run. Future #36 experiment requires a separate valid predeclared procedure, rights and budget. Missing immutable publisher model and result-to-grader pins keep #62 open; earlier explicitly withheld review and original #62→25 receipt remain historical."
+      }
+    ]
   },
   {
     "market_issue": 62,
@@ -3645,8 +3822,8 @@
     ],
     "artifact": "research/market/benchmark-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Only if #36 decides a replication is wanted: price the prepared replication protocol (model endpoints or local GPUs, judge calls, at least three runs per task).",
+    "acceptance": "Accepted with narrowing on 2026-10-18: replication costing is not applicable to this desk result because no replication is selected; no zero-cost estimate is inferred.",
+    "requested_action": "Keep the publisher's 2.97× claim attributed and separate from this project's bill or a supplier rate. Any later selected experiment needs actual quantities, units, horizon, repetitions, eligible rates and resources; no price, FX/default currency/region or CostEstimate follows.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Only if #36 decides a replication is wanted: price the prepared replication protocol (model endpoints or local GPUs, judge calls, at least three runs per task).",
       "evidence": [
@@ -3662,7 +3839,26 @@
       "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:20Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6253421648",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "5f6d1aedcfd3cef90877b5f321ad181638cbb34d",
+        "reviewed_consumer_git_blob": "6405fd07b1465178c82bcfeab18d13990ad2836e",
+        "scope": "Receive the explicit non-applicability of replication costing for the current desk result after the no-replication decision. The publisher's 2.97× claim remains an attributed publisher claim.",
+        "retained_unknowns_and_next_action": "Not applicable does not mean zero cost. No project bill, supplier rate, price, FX/default currency/region or CostEstimate is created. A separately selected experiment needs its actual quantities/units/horizon/repetitions/eligible rates/resources; missing publisher pins and earlier withheld receiving scope remain explicit."
+      }
+    ]
   },
   {
     "market_issue": 62,
@@ -3674,8 +3870,8 @@
     ],
     "artifact": "research/market/benchmark-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review the finding that v1 spec_model has no benchmark or quality field and spec_evaluation_suite has only metric_names, mode, gate_on_deployment and dataset_refs; any benchmark display rule needs a field proposal through #40.",
+    "acceptance": "Accepted with narrowing on 2026-10-18 as an external-result/catalog provenance and binding gap, preserving existing frozen QualityEvaluationRun support for genuinely conforming build-bound observations.",
+    "requested_action": "Do not invent aggregate-result build/revision, suite, evaluator/dataset, timestamp, sample-size or threshold/comparator fields. A proposed external-result/catalog extension needs versioned schema, fixtures and migration; no frozen v1 change and no new schema merely to display a conforming existing run.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Review the finding that v1 spec_model has no benchmark or quality field and spec_evaluation_suite has only metric_names, mode, gate_on_deployment and dataset_refs; any benchmark display rule needs a field proposal through #40.",
       "evidence": [
@@ -3691,7 +3887,26 @@
       "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:20Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6253421648",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "5f6d1aedcfd3cef90877b5f321ad181638cbb34d",
+        "reviewed_consumer_git_blob": "dc0c07e85c0fac97d47ba684b087631e0ca89abf",
+        "scope": "Receive missing external-result/catalog provenance and binding semantics without denying existing QualityEvaluationRun support for real conforming build-bound observations. Actual frozen model, suite and complete quality-run schemas were read.",
+        "retained_unknowns_and_next_action": "Public aggregates cannot fabricate required identities/revisions, timestamps, sample size or per-measurement threshold/comparator. An external-result/catalog extension requires versioned schema/fixtures/migration. No frozen field change and no new schema needed merely to display a genuinely conforming existing run; no measured run is admitted."
+      }
+    ]
   },
   {
     "market_issue": 62,
@@ -3703,8 +3918,8 @@
     ],
     "artifact": "research/market/benchmark-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, narrow or reject convention C1 (show a benchmark figure only with its full tuple, otherwise unknown) and review reuse rights for Harness Bench tasks and results (no license; website reserves all rights), with #60.",
+    "acceptance": "Accepted with narrowing on 2026-10-18 as the separation of dated attributed publisher claims, comparable evidence and independently reproduced evidence under accepted #60 material/use policy.",
+    "requested_action": "Retain exact source/version/access dates and missing provenance. Paper permission does not grant task/code/result-bundle reuse or establish statistical quality; no new source/licence review or integration permission is supplied.",
     "mr09_review_2026_10_16": {
       "finding_and_requested_action": "Accept, narrow or reject convention C1 (show a benchmark figure only with its full tuple, otherwise unknown) and review reuse rights for Harness Bench tasks and results (no license; website reserves all rights), with #60.",
       "evidence": [
@@ -3720,7 +3935,29 @@
       "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:20Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6253421648",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "5f6d1aedcfd3cef90877b5f321ad181638cbb34d",
+        "reviewed_consumer_git_blob": "36de8d2c699491a1935f79d6dd83660c90b51dbb",
+        "reviewed_related_input_blobs": {
+          "research/market/rights-validation.md": "2fb0aa8d4c51448f111dbc82a8123206646f61c6"
+        },
+        "scope": "Receive the separation of a dated attributed publisher claim, qualified comparable evidence and independently reproduced evidence while consuming accepted #60 material/use policy.",
+        "retained_unknowns_and_next_action": "Preserve exact source/version/access dates and missing-provenance flags. Accepted paper permission does not grant task/code/result-bundle reuse or prove statistical quality. No new licence/source read, freshness audit or integration permission is supplied; literal publisher pin gaps remain open."
+      }
+    ]
   },
   {
     "market_issue": 63,
@@ -3732,11 +3969,33 @@
     ],
     "artifact": "research/market/customer-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with narrowing on 2026-10-18 as the prospective interview/coding design for reported tasks, constraints, alternatives, component choices and decision effort; no participant or typed-workload result exists.",
+    "requested_action": "Preserve no-decision/unknown responses and unmatched alternatives; attach catalog identity only after a real item/version/snapshot match. Later numerical requirements need actual units, periods and provenance; segment/preference supplies no typed workload/default/serving pin/performance/volume evidence. D-01–D-17 operational values and four empirical/operational criteria remain open.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:50Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6253426889",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "4ca91862a532c0d662ab12ecf4203deef267343f",
+        "reviewed_related_input_blobs": {
+          "research/market/monetization.md": "3baf64e0aca6c9190bc6012fde5cc62e3fe9baf8"
+        },
+        "reviewed_consumer_git_blob": "b9691e48704a5ffa35db7741ad1d26a93f6a3187",
+        "scope": "Receive the prospective design for reported tasks/constraints/alternatives/component choices/decision effort, retaining no-decision/unknown responses and unmatched alternatives. Catalog identity requires actual item/version/snapshot matching.",
+        "retained_unknowns_and_next_action": "No segment/preference supplies typed workload/default/immutable serving pin/measured performance/numerical volume/concurrency/context/budget. Task/output/interaction/modality/optional activation remain distinct. Later requirements need actual units/periods/provenance. No recruitment, consent, response, task trial or transaction; operational values and empirical criteria remain open."
+      }
+    ]
   },
   {
     "market_issue": 63,
@@ -3748,11 +4007,33 @@
     ],
     "artifact": "research/market/customer-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with narrowing on 2026-10-18 as prospective deployment-decision context, with missing per-component operator/capacity/dataflow facts retained as unknown; no current DeploymentMode is assigned.",
+    "requested_action": "Classify later deployments from actual per-component runtime operator and capacity plus applicable dataflows/isolation. Brand/API/payment/hardware ownership/training channel/local-first preference alone establishes neither serving mode nor privacy or air-gapped operation; future participant/controller/consent/operational records remain separate.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:50Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6253426889",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "4ca91862a532c0d662ab12ecf4203deef267343f",
+        "reviewed_related_input_blobs": {
+          "research/market/monetization.md": "3baf64e0aca6c9190bc6012fde5cc62e3fe9baf8"
+        },
+        "reviewed_consumer_git_blob": "7d88a23348768dfaab9630f6194bc3971bbfcbae",
+        "scope": "Receive prospective reported local/API/hosting choices and reasons, preserving missing operator/capacity facts as unknown.",
+        "retained_unknowns_and_next_action": "A later deployment is classified from actual per-component runtime operator/capacity and applicable dataflows/isolation. Brand, API, payment, hardware ownership, training channel and preference do not establish serving mode/privacy/air gap. No present DeploymentMode or participant result; actual operational and consent records remain outstanding."
+      }
+    ]
   },
   {
     "market_issue": 63,
@@ -3764,11 +4045,33 @@
     ],
     "artifact": "research/market/customer-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with narrowing on 2026-10-18 as prospective spending/time and price-perception research design, keeping self-report, observed tasks and actual purchases distinct and requiring the complete accepted #54 paid card and eligible payer.",
+    "requested_action": "Separate participants, described decisions and independent buying units. Omit price questions for incomplete/misunderstood paid cards; free offer gets distinct trust/comprehension/workflow questions. No supplier rate/Pricebook, realized revenue/full cost/TCO/population willingness-to-pay or FX/default policy follows; preserve unselected operational values and absent execution.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_narrowing",
+        "authority": "Actual in-session engineering review under the user's delegated project authority; not a response from an absent assignee, a new experiment or source-rights grant, or whole-issue acceptance.",
+        "reviewer": "ChatGPT (actual in-session coordinating engineering reviewer)",
+        "submitted_at": "2026-10-18T18:17:50Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6253426889",
+        "reviewed_commit": "1a1324d064139efecb4830fe5e2b793efec81d3b",
+        "reviewed_tree": "139a0db010896b67f121208a2a68a41cc5489d59",
+        "reviewed_source_location": "Prepared local candidate, pending normal publication and checks at the time of the actual receipt.",
+        "reviewed_input_main_commit": "745e58704262aa7b0c755794f820ec1372b24395",
+        "reviewed_artifact_git_blob": "4ca91862a532c0d662ab12ecf4203deef267343f",
+        "reviewed_related_input_blobs": {
+          "research/market/monetization.md": "3baf64e0aca6c9190bc6012fde5cc62e3fe9baf8"
+        },
+        "reviewed_consumer_git_blob": "6405fd07b1465178c82bcfeab18d13990ad2836e",
+        "scope": "Receive the distinction among reported past spending/time, stated price perception, directly observed tasks and actual purchases. Separate participants/decisions/buying units and deduplicate repeated purchase accounts. Apply #54 complete benefit/buyer/unit/currency/period, comprehension and eligible-payer conditions.",
+        "retained_unknowns_and_next_action": "An incomplete or misunderstood paid card receives no price questions; the free concept receives trust/comprehension/workflow questions. Exploratory responses are not supplier rates/Pricebook/realized revenue/full cost/TCO/population WTP/FX policy. No participant or transaction execution, controller/contact/storage/permission/consent fact or D-01–D-17 operational selection is supplied."
+      }
+    ]
   },
   {
     "market_issue": 64,

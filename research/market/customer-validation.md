@@ -1,6 +1,6 @@
 # MR-05: Validate customer demand and willingness to pay
 
-Issue: [#63](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63). Parent: [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52). Owner and approver: @CompleteDotTech (coordinator). Status: **approval package only; validation has not started.** Readiness: Awaiting Decision. Evidence availability score: unknown (not zero).
+Issue: [#63](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63). Parent: [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52). Live issue assignees checked on 2026-10-18: @zwright8 and @appletechie; @CompleteDotTech is the program coordinator. Status: **protocol preparation only; validation has not started.** The original package recorded readiness as Awaiting Decision; this amendment does not certify current Project fields. Evidence availability score: unknown (not zero).
 
 No one has been contacted, no community has been posted to, no account was created and no personal data was collected. Nothing in this note may be used for outreach until the coordinator records each decision in [Decisions required](#8-decisions-required-from-coordinator-before-any-contact). Every number below marked **proposal** is for the coordinator to approve, change or reject; none is an accepted threshold.
 
@@ -9,6 +9,8 @@ Do target users repeatedly face multi-component AI configuration decisions, and 
 
 ## Inputs from #52
 [customers.md](customers.md): ten segments with user/buyer/approver hypotheses, jobs to be done, desk evidence, the screener and the interview guide. This note does not repeat the guide; it adds recruitment, consent, data handling, reporting, analysis and willingness to pay.
+
+The 2026-10-18 instrument clarification also consumes the accepted [#54 willingness-to-pay design](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/745e58704262aa7b0c755794f820ec1372b24395/research/market/monetization.md#6-proposed-willingness-to-pay-validation-handoff-to-63), input blob `3baf64e0aca6c9190bc6012fde5cc62e3fe9baf8`. It aligns the questions and interpretation below with that proposal. It is not a new review of the dated channel/privacy sources, an adopted price or a fieldwork result. The actual #54 receiving receipts retain their separate design-only scope.
 
 ## 1. Recruitment channels (for approval)
 
@@ -110,6 +112,8 @@ If supporting artifacts need to be referenced from Git, add one sanitized manife
 
 ## 5. Anonymized reporting rules
 
+P-IDs and coarse labels are a pseudonymization scheme, not proof that a record or quote is anonymous. Before public release, assess the combination of role, segment, channel, region and distinctive account or quotation; withhold identifying combinations. The proposed minimum cell size below is one disclosure control, not an anonymity guarantee. The two-per-segment recruitment proposal cannot by itself support a three-person public segment breakdown.
+
 - Participants are referred to only by pseudonymous IDs (P-01, P-02, ...), assigned in interview order.
 - Labels are coarse: primary segment from the ten in #52, role code, organization-size band and broad region (for example "EU", "North America"). No job title, employer, client, product name of the participant's employer, city or exact dates.
 - No employer or client names, even if the participant says them; replace with "[employer]" or a category.
@@ -119,41 +123,50 @@ If supporting artifacts need to be referenced from Git, add one sanitized manife
 
 ## 6. Analysis plan
 
-Coding follows the #52 analysis questions. Each participant is coded for: decision in window (yes/no), previous similar decision (yes/no/unknown), number of component types in the decision, role, current alternatives (with catalog IDs), current spend (money; time; none; unknown), payer, and whether they say existing alternatives were enough.
+Coding follows the #52 analysis questions. Each participant is coded for: decision in the declared window (yes/no/unknown), previous similar decision (yes/no/unknown), known component types in that decision, role, current alternatives, reported past spend (money; time; none; unknown), actual payer/approver and whether they say existing alternatives were enough. Attach a catalog ID only when a recorded alternative actually matches the item/version in an identified catalog snapshot; retain an unmatched description or unknown instead of inventing an identity. A marketing name alone does not establish an immutable model or serving revision.
 
-### What disconfirms demand
+Keep the participant, the described decision and the purchasing unit separate. Several people may describe the same buying decision; their role accounts remain useful but cannot be counted as independent buyer decisions. Preserve no-decision cases. Record each module's eligible/exposed count, valid responses, skips, unknowns, exclusions and withdrawals, with the applicable window and concept version. Missing or untracked time is not zero effort, and missing spend is not a zero budget. Use the approved disclosure rules when publishing these counts.
 
-Thresholds are named but **not set**; the coordinator sets them before the first interview (D-13), so they cannot be tuned to the results.
+### Descriptive signals for revising this pilot
 
-| ID | Disconfirming finding | Threshold |
-| --- | --- | --- |
-| T-1 | Few participants report a decision in the window | Share below `T-1` |
-| T-2 | Decisions are one-off: few report a previous similar decision | Share below `T-2` |
-| T-3 | Decisions are single-component (one model or one tool), not multi-component | Share above `T-3` |
-| T-4 | No current spend of money or tracked time on making these decisions | Share above `T-4` |
-| T-5 | Existing alternatives suffice by the participant's own account | Share above `T-5` |
-| T-6 | Buyers (Q-2) do not see a problem their users report | Qualitative; coordinator review |
+Thresholds are named but **not set**. D-13 must fix each descriptive threshold, minimum valid response count and denominator before the first interview, including how the no-decision and incomplete-response cases are handled. These are pilot-triage choices, not validated market cutoffs. The purposive quota sample cannot establish population demand, reach, recurring-use prevalence, paid conversion or market rejection. Paid-concept flags must also keep #54's separate eligible-buyer/comprehension denominators and proposed minimum-response rule.
 
-Results are reported by segment and role only where cells meet D-12. Report what the sample cannot show: recruitment bias by channel, missing segments, and the difference between stated intent and behaviour.
+| ID | Possible pilot signal | Denominator and interpretation boundary | Threshold |
+| --- | --- | --- | --- |
+| T-1 | Few participants report a decision in the window | Participants with a valid window/decision response, including valid no-decision answers; unknown recall remains separate | Share below `T-1` |
+| T-2 | Few report an earlier similar decision | Respondents with a recent decision and a valid answer about an earlier similar decision; this does not measure future recurrence | Share below `T-2` |
+| T-3 | Decisions involve only one known component type | Distinct described decisions with enough component detail to classify them; unknown components are not silently counted as absent | Share above `T-3` |
+| T-4 | Participants report neither monetary spend nor time spent on the decision | Distinct decisions with valid money and time answers; untracked or unknown time/spend is excluded from this numerator and reported separately | Share above `T-4` |
+| T-5 | Existing alternatives suffice by the participant's account | Distinct decisions with known alternatives and a valid sufficiency response; retain reuse of existing hardware and a decision to buy nothing | Share above `T-5` |
+| T-6 | A buyer and user describe different needs | Role accounts linked to the same actual decision where available; unrelated user and buyer answers do not establish within-team disagreement | Qualitative review |
+
+Results are reported by segment and role only where cells meet D-12 and the disclosure review. Report channel bias, missing segments and incomplete modules. A failed or misunderstood prototype task calls for instrument/prototype revision; it does not by itself reject the underlying value proposition. Without an actual fixed baseline/prototype task, success criteria and order plan, collect concept reactions only and report no task-performance improvement. Stated intent, reported past behaviour, directly observed tasks and actual transactions remain separate evidence classes.
 
 ## 7. Willingness-to-pay module (proposal)
 
 Status: proposal. Monetization models are owned by [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54); this module only collects inputs for it.
 
-Sequence (fixed, after Part C of the #52 guide):
-1. **Observed behaviour first.** Already asked in Part C: current spend on tools, services, consultants or time; who paid; any past purchase made to support this kind of decision. These are the strongest evidence and are reported separately.
-2. **Concept description** (Part D), fixed text approved by the coordinator (D-14).
-3. **Open-ended price sensitivity**, no researcher-supplied prices. Proposed: the four Van Westendorp questions with free-text answers (too cheap to trust, a bargain, getting expensive, too expensive to consider), asked for the payer the participant named. If the participant is not the payer, ask who would decide and how, instead of a price.
-4. **Purchasing process**: what would need to happen for this to be bought (approval steps, budget line, procurement).
+**Offer prerequisite.** Reuse #54's proposed paid concept: one private team workspace with shared versioned builds, evidence/source-revision links, comparison history and review comments, evaluated by the actual buying team or organization. Its proposed question unit is **USD per workspace per month**, with the existing team's size stated. These are hypothetical benefits, not an available product or a new frozen billing unit. The card excludes inference execution, model-provider credits, third-party dataset redistribution rights, consulting and an SLA. Before any price question, D-14 must freeze the exact member/build limits, history retention, included support, rights-qualified content and worked use case, together with that benefit bundle, buyer unit, currency and period. If the card is incomplete or not understood, omit the price module. A separately specified local-currency card is a separate analysis cell, with no invented FX conversion or pooling.
 
-Reporting: stated willingness to pay, observed spend and actual paid transactions are separate categories. With qualitative sample sizes, open-ended price answers are reported as ranges per role, not as a price curve or an optimal price. Not proposed: Gabor-Granger or any method that shows prices, because researcher-supplied prices anchor answers (the issue flagged in #52).
+Sequence (fixed, after Part C of the #52 guide):
+
+1. **Reported past behaviour first.** Reconstruct current and past spending on tools, services, consultants and decision time, who paid and how the participant knows. An interview answer is a self-report, not an independently observed purchase. Any separately supported observation keeps its own consent, provenance and scope; do not request private employer records for this public research. Keep no-spend and unknown responses distinct.
+2. **Concept and comprehension.** Use the fixed, versioned D-14 card after the past-behaviour questions. Ask the participant to explain the benefits, exclusions, buyer unit and commercial relationship. If both paid and referral-funded free concepts are shown, predeclare their counterbalanced order. They offer different benefit bundles, so their answers are not a controlled comparison of price alone.
+3. **Paid price perception.** Only an eligible payer who understands the complete paid card receives the four exploratory free-response prompts: too cheap to trust, a bargain, expensive but still considered, and too expensive to consider, in the card's fixed unit. Do not show competitor prices or researcher-supplied amounts. A participant who does not control the purchase describes who decides and how, without supplying a proxy payer amount. Record unknown, skipped and inconsistent answers rather than imputing zero.
+4. **Free-concept and purchasing process.** For the separately disclosed referral-funded free concept, ask about disclosure comprehension, trust and workflow choice; do not ask a free offer for a "too expensive" price point. For a paid offer, ask about approval steps, budget, procurement, reachable purchase channels and reasons for choosing no purchase. A non-binding request for a pilot, if separately included in the operational protocol, is interest rather than a sale or demonstrated retention.
+
+Reporting: keep stated price perceptions, reported past spend, directly observed task outcomes and actual paid transactions separate. Report exposed/eligible/valid counts, skips, unknowns and withdrawals for each module, deduplicating the actual buying decision. Compare ranges only within the same complete benefit/card version, buyer unit, currency and billing period; do not pool role or unit mismatches into a price curve or an optimal price. These amounts are not supplier rates or Pricebook inputs.
+
+The four prompts retain #54's explicit method limit: the original Van Westendorp and Newton–Miller–Smith papers remain unread, so this is not a validated PSM instrument or a purchase/revenue estimate. The present exploratory design chooses open questions; it does not establish that every method showing a price is invalid. Adopting a different pricing experiment requires its own declared offer, sequence, sampling and interpretation. The proposed free and paid models can each remain unqualified; failed task comprehension is separate from demand, and reduced trust after commission disclosure can support neutrality concerns rather than refute their value.
 
 ## 8. Decisions required from coordinator before any contact
+
+Project engineering decisions can be recorded under the user's delegated authority; no reply from an absent assignee is created or required merely to review this instrument. The operational package still needs actual controller/contact details, storage/access arrangements, applicable channel/participant permissions and a recorded recruitment/consent decision. A technical receiving review cannot invent those facts or a participant's consent. The checklist below remains unselected unless an explicit later decision records its value and scope.
 
 - [ ] D-01 Approve, change or reject this package as a whole.
 - [ ] D-02 Which recruitment channels are allowed (section 1); Reddit stays blocked until its rules are read and recorded.
 - [ ] D-03 Recall window N months for screener question 2.
-- [ ] D-04 Quotas Q-1 to Q-5 (approve or replace).
+- [ ] D-04 Quotas Q-1 to Q-5 and the participant/decision/buyer denominators (approve or replace).
 - [ ] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
 - [ ] D-06 Controller identity and the contact address in consent and outreach.
 - [ ] D-07 Lawful basis (consent, legitimate interests with a documented assessment, or other) and the rights text.
@@ -161,10 +174,10 @@ Reporting: stated willingness to pay, observed spend and actual paid transaction
 - [ ] D-09 Private storage location, encryption, and the named access list.
 - [ ] D-10 Retention and deletion deadlines (approve or replace the section 4 proposals).
 - [ ] D-11 Whether audio and/or video recording is offered at all.
-- [ ] D-12 Minimum reported cell size (proposal: 3).
-- [ ] D-13 Values for thresholds T-1 to T-5, set before the first interview.
-- [ ] D-14 The neutral concept description text for Part D, or a decision to omit Part D.
-- [ ] D-15 Whether the willingness-to-pay module is used, after #54 review.
+- [ ] D-12 Minimum reported cell size (proposal: 3) and review of identifying combinations/quotes.
+- [ ] D-13 Values, denominators and minimum valid response counts for pilot flags T-1 to T-5, set before the first interview.
+- [ ] D-14 The complete versioned benefit/buyer/currency/period card for Part D, or a decision to omit Part D; incomplete cards receive no price questions.
+- [ ] D-15 Whether the paid-payer price module and distinct free-concept questions are used, under the accepted #54 design limits.
 - [ ] D-16 Who interviews, and how interviewer conflicts of interest are disclosed.
 - [ ] D-17 Minimum participant age (consent draft assumes 18+).
 
@@ -177,11 +190,25 @@ Reporting: stated willingness to pay, observed spend and actual paid transaction
 | Capture current alternatives and recent decisions | Not started; instrument in #52 guide |
 | Test willingness to pay without leading questions | Not started; module proposed |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis | Met for this package: no demand conclusion is drawn |
-| Relevant technical owners review handoffs; unresolved decisions are named | Decisions named above; no handoff reviewed |
-| Repository checks pass; reviewer accepts the evidence before Done | Checks run on the local working tree; no reviewer acceptance |
+| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; D-01–D-17 operational values remain unselected |
+| Repository checks pass; reviewer accepts the evidence before Done | Technical instrument review accepted at prepared `1a1324d`; final amendment checks and canonical delivery remain required, with no fieldwork acceptance |
 
 ## Result
-No validation has been completed. No participant data, raw customer data, benchmark artifact or paid API output exists. Consumers once results exist: #52, #58, #2, #3, #39.
+No customer fieldwork validation has been completed. The prospective technical design has the scoped receiving review below; no participant data, raw customer data, benchmark artifact or paid API output exists. Actual future results retain separate intake requirements for #52, #58, #2, #3 and #39.
+
+## Actual prospective technical intake — 2026-10-18
+
+The coordinating in-session engineer's [actual receipt 6253426889](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6253426889), created **18:17:50Z**, reviewed prepared local `1a1324d064139efecb4830fe5e2b793efec81d3b`, tree `139a0db010896b67f121208a2a68a41cc5489d59`, customer-protocol blob `4ca91862a532c0d662ab12ecf4203deef267343f`, on accepted parent `745e58704262aa7b0c755794f820ec1372b24395`. It also read accepted #54 sections 6–7 and their receiving limits at monetization blob `3baf64e0aca6c9190bc6012fde5cc62e3fe9baf8`, the complete revised T-1–T-6/price instrument and relevant workload, deployment and cost dictionaries. This is actual delegated engineering review, posted through CompleteDotTech, with no response attributed to an absent assignee. It is not a new privacy-law, vendor-price or primary-source audit.
+
+| Consumer | Actual disposition | Retained boundary |
+| --- | --- | --- |
+| #2 Workload / Use Case | Accept with narrowing the prospective task/constraint/alternative/component/effort interview and coding design | Keep no-decision/unknown and unmatched alternatives; attach item/version/snapshot identity only after a real match. No segment or preference produces a typed workload, default, serving pin, measured performance or numerical quantity. |
+| #3 Deployment Mode | Accept with narrowing prospective local/API/hosting decision context | Actual per-component runtime operator/capacity and applicable dataflows/isolation are still needed. Brand, protocol, payment, hardware ownership, training channel or preference alone establishes neither serving mode nor privacy/air gap. |
+| #39 Cost Estimate | Accept with narrowing the separation of self-reported spending/time, stated price perception, observed tasks and actual purchases | Deduplicate buying decisions, apply #54's complete paid card and comprehension/eligible-payer conditions, and keep the free offer's questions distinct. No supplier rate, Pricebook, realized revenue, full cost/TCO, population willingness to pay or FX policy follows. |
+
+The accepted scope is this **prospective technical design**. Pilot flags retain valid denominators, unknown/skipped/excluded/withdrawn counts and purposive-sample limits. Misunderstood tasks require instrument revision; without a fixed task/baseline/order there is no task-performance result. Original pricing-method papers remain unread. Pseudonyms and coarse cells do not prove anonymity.
+
+The receipt supplies no real controller/contact details, private storage/access arrangement, channel permission or participant consent, and selects none of D-01–D-17's operational values. Engineering choices can be made under the existing delegation; actual permissions, identities and consent cannot be invented. Recruitment, current-alternative capture, task trials, transactions and willingness-to-pay execution remain absent, so the four operational/empirical criteria and #63 stay open. Publication checks and Project-field QA retain separate evidence. The three actual receipts are appended to the existing handoff rows without rewriting earlier records.
 
 ## Proposed source-register additions
 
