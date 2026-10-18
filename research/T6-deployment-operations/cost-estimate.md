@@ -792,7 +792,9 @@ No catalog or pricebook proposals in this pull request. A `cost_policy` item nee
 
 W1-gemini keeps the original 2,000-token shared prefix and 3,000-token request (3,900 in the high case). [Google caching documentation](https://ai.google.dev/gemini-api/docs/caching), accessed 2026-10-17, requires 4,096 tokens for Gemini 3.1 Pro Preview. The scenario therefore sets cache hits to zero: raw monthly estimates are USD 10,800 / 12,000 / 31,200, displayed at two significant figures as 11,000 / 12,000 / 31,000. No cache-storage cost or discount is claimed.
 
-C-R16 and C-H17 must use the [#60 source-specific reuse decisions](../market/rights-validation.md), not infer permission from API access or a generic terms warning. GPUs.io is display-only through its paid API with attribution under that table; no catalog redistribution grant is implied. For AWS/Azure, apply the recorded allowed scope and keep unaddressed rights questions with #60/#41.
+C-R16 and C-H17 must apply the [#60 source/material/use assessment](../market/rights-validation.md). For AWS/Azure, retain the recorded scope and unresolved rights questions with #60/#41.
+
+**GPUs.io reconciliation (2026-10-18):** the current #39 proposal excludes GPUs.io API intake, display and export for this product. Its [terms](https://gpus.io/en/terms) (last updated 2026-06-05; read 2026-10-18, sections 5–7) separately restrict competing-product use and redistribution; paid API access and attribution do not establish approval for the intended use. Reconsider only with a documented specific permitted-use basis and a new #39/#41/#60 review. The actual receiving-owner acceptance remains pending; this correction does not supply it.
 
 Prices carry as-of dates. Re-evaluate on a new pricebook, snapshot or ruleset, a rights-decision change, or a build edit. Time elapsed alone does not expire version-pinned facts; #42 is not asked to invent a stale-after duration.
 
