@@ -1,7 +1,9 @@
 """Validate research intake; does not certify claims or publish runtime artifacts."""
 import json
 import math
+import re
 from datetime import datetime
+from ipaddress import ip_address
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -79,10 +81,23 @@ def locator_parts(uri):
 def public_source(uri):
     try:
         value = locator_parts(uri)
-        host = (value.hostname or '').removesuffix('.')
+        # Normalize Unicode hostname forms before reserved-domain/IP checks.
+        host = (value.hostname or '').encode('idna').decode('ascii').removesuffix('.')
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
-        return value.scheme in {'http', 'https'} and bool(host) and not reserved
+        if (value.scheme not in {'http', 'https'} or not host or reserved
+                or value.username is not None or value.password is not None
+                or '%' in host or '\\' in host):
+            return False
+        try:
+            address = ip_address(host)
+        except ValueError:
+            # Legacy numeric hosts can be interpreted as local IPs by a browser.
+            # Require a canonical IP literal rather than guessing its radix/parts.
+            return re.fullmatch(r'(?:0[xX][0-9a-fA-F]*|[0-9]+)(?:\.(?:0[xX][0-9a-fA-F]*|[0-9]+))*', host) is None
+        address = getattr(address, 'ipv4_mapped', None) or address
+        return address.is_global and not (address.is_multicast or address.is_reserved
+                                          or getattr(address, 'is_site_local', False))
     except (ValueError, TypeError):
         return False
 

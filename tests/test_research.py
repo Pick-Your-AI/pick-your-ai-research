@@ -142,14 +142,34 @@ class Intake(unittest.TestCase):
                 self.assertEqual(baseline.returncode, 0, baseline.stderr)
                 self.assertIn('Validated 1 catalog proposals and 1 pricebooks', baseline.stdout)
                 for target in ('catalog', 'price', 'manifest'):
-                    for uri in ('https://github.com:65536/claim', 'https://@github.com/claim',
-                                'https://github.com:\t443/claim'):
+                    malformed = ['https://github.com:65536/claim', 'https://@github.com/claim',
+                                 'https://github.com:\t443/claim']
+                    if target in ('catalog', 'price'):
+                        malformed += [f'https://{host}\\claim/' for host in (
+                            '127.0.0.1', 'localhost', '10.0.0.1', 'example.com',
+                            '2130706433', '１２７.０.０.１')]
+                    for uri in malformed:
                         with self.subTest(optimized=optimized, target=target, uri=uri):
                             self._write_locator_submission(root, target, uri)
                             result = subprocess.run(command, capture_output=True, text=True, check=False)
                             self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
                             self.assertIn('INVALID:', result.stdout)
                             self.assertNotIn('Validated ', result.stdout)
+
+    def test_backslash_authority_rejected_for_catalog_and_prices(self):
+        hosts = ('127.0.0.1', 'localhost', '10.0.0.1', 'example.com',
+                 '2130706433', '0x7f000001', '１２７.０.０.１',
+                 'github.com', 'bücher.de')
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for target in ('catalog', 'price'):
+                for scheme in ('http', 'https'):
+                    for host in hosts:
+                        uri = f'{scheme}://{host}\\claim/'
+                        with self.subTest(target=target, uri=uri):
+                            self._write_locator_submission(root, target, uri)
+                            self.assertTrue(any('real public source URL' in error
+                                                for error in validate_tree(root)[0]))
 
     def test_missing_and_synthetic_sources_rejected(self):
         for uri in (None, 'https://models.example/model', 'https://example.com/x', 'https://user:password@host.com/doc'):
@@ -200,6 +220,50 @@ class Intake(unittest.TestCase):
                 rate['valid_until'] = end
                 self.assertIn('test.rate: valid_until must follow valid_from',
                               intake_errors([self.item], [book]))
+
+    def test_nonpublic_ip_provenance_rejected_for_catalog_and_prices(self):
+        hosts = (
+            '127.0.0.1', '127.0.0.1.', '10.0.0.1', '172.16.0.1', '192.168.1.1',
+            '169.254.1.1', '100.64.0.1', '0.0.0.0', '192.0.2.1', '198.51.100.1',
+            '203.0.113.1', '198.18.0.1', '224.0.0.1', '255.255.255.255',
+            '[::]', '[::1]', '[fc00::1]', '[fe80::1]', '[2001:db8::1]', '[ff0e::1]',
+            '[fec0::1]', '[feff::1]', '[4000::1]', '[8000::1]', '[64:ff9b::808:808]',
+            '[::ffff:127.0.0.1]', '[::ffff:100.64.0.1]', '[::ffff:224.0.0.1]',
+            '127.1', '2130706433', '0177.0.0.1', '0x7f000001', '0x7f.0.0.1',
+            '0x', '0X', '0x.0.0.1',
+            '127%2e0%2e0%2e1', '[fe80::1%25eth0]',
+            '１２７.０.０.１', '127。0。0。1', '127．0．0．1', '127｡0｡0｡1',
+            '０ｘ７ｆ０００００１', 'ｌｏｃａｌｈｏｓｔ', 'ｅｘａｍｐｌｅ.com',
+            'example。org', 'host。test',
+        )
+        rate = {'id': 'test.rate', 'catalog_item_id': self.item['id'],
+                'catalog_item_version': '1', 'meter': 'request',
+                'unit_price': {'amount': '0.1', 'currency': 'USD'},
+                'valid_from': '2026-10-16T09:00:00Z',
+                'provenance': copy.deepcopy(self.item['provenance'][0]), 'price_type': 'estimate'}
+        book = {'schema_version': '1.0.0', 'id': 'test.prices', 'revision': 1,
+                'captured_at': '2026-10-16T09:00:00Z', 'rates': [rate]}
+        for host in hosts:
+            with self.subTest(host=host):
+                uri = f'https://{host}/claim'
+                item = copy.deepcopy(self.item)
+                item['provenance'][0]['source_uri'] = uri
+                self.assertTrue(intake_errors([item], []))
+                rate['provenance']['source_uri'] = uri
+                self.assertTrue(intake_errors([self.item], [book]))
+
+    def test_public_ip_and_dns_source_shapes_remain_eligible(self):
+        # These are syntax controls, not inspected sources or evidence claims.
+        for uri in ('https://8.8.8.8/claim', 'http://1.1.1.1:80/claim',
+                    'https://8.8.8.8./claim', 'https://[2606:4700:4700::1111]/claim',
+                    'https://[::ffff:8.8.8.8]/claim',
+                    'https://８.８.８.８/claim', 'https://8.8.8.8。/claim',
+                    'https://bücher.de/claim',
+                    'https://github.com./Pick-Your-AI/pick-your-ai-research'):
+            with self.subTest(uri=uri):
+                item = copy.deepcopy(self.item)
+                item['provenance'][0]['source_uri'] = uri
+                self.assertEqual(intake_errors([item], []), [])
 
     def test_tier_and_fixture_id_rejected(self):
         self.item['tier'] = 'T2'
