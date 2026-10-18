@@ -17,6 +17,13 @@ class Outcome(StrEnum):
     SKIPPED = "skipped"
 
 
+class RolePolicy(StrEnum):
+    """Explicit research policies; existing callers retain build-wide roles."""
+
+    BUILD_WIDE = "build_wide"
+    ENABLED_ONLY = "enabled_only"
+
+
 class SelectionIdentity(Protocol):
     """Only the identity fields consumed by the shared preflight."""
 
@@ -66,19 +73,36 @@ class Result:
     findings: tuple[Finding, ...]
 
 
-def validate_identities(selections: tuple[SelectionIdentity, ...]) -> None:
-    """Apply the frozen protocol's build-wide identity/role precondition.
+def validate_identities(
+    selections: tuple[SelectionIdentity, ...],
+    *,
+    role_policy: RolePolicy = RolePolicy.BUILD_WIDE,
+) -> None:
+    """Keep the existing preflight unless the caller selects the proposal.
 
-    Disabled entries still have identities and roles. Disabling one must not
-    hide an ambiguous build that becomes ambiguous again when it is enabled.
-    This is only the identity slice, not full schema/referential validation.
+    Build-wide roles retain the earlier protocol interpretation, including
+    disabled records. The prospective enabled-only policy admits disabled
+    alternatives but requires a tuple of Selection records with exact Boolean
+    activation. The caller still establishes the inventory's completeness.
+    IDs remain globally unique in both policies. This is only the identity
+    slice, not full schema/referential validation or a tri-state activation rule.
     """
+    if not isinstance(role_policy, RolePolicy):
+        raise ValueError("role policy must be a typed RolePolicy")
+    if role_policy is RolePolicy.ENABLED_ONLY:
+        if type(selections) is not tuple or any(type(s) is not Selection for s in selections):
+            raise ValueError("enabled-only roles require a tuple of Selection records")
+        for selection in selections:
+            if type(getattr(selection, "enabled")) is not bool:
+                raise ValueError("enabled-only roles require exact Boolean enabled values")
     identities: set[str] = set()
     roles: set[tuple[str, str]] = set()
     for selection in selections:
         if selection.id in identities:
             raise ValueError(f"duplicate selection id: {selection.id}")
         identities.add(selection.id)
+        if role_policy is RolePolicy.ENABLED_ONLY and getattr(selection, "enabled") is False:
+            continue
         key = (selection.kind, selection.role)
         if key in roles:
             raise ValueError(f"ambiguous kind/role: {selection.kind}/{selection.role}")
@@ -92,8 +116,13 @@ def fact(value: bool | None) -> bool | None:
     return value
 
 
-def evaluate(selections: tuple[Selection, ...], rule: Rule) -> Result:
-    validate_identities(selections)
+def evaluate(
+    selections: tuple[Selection, ...],
+    rule: Rule,
+    *,
+    role_policy: RolePolicy = RolePolicy.BUILD_WIDE,
+) -> Result:
+    validate_identities(selections, role_policy=role_policy)
     selected = sorted(
         (s for s in selections if s.enabled and s.kind == rule.kind),
         key=lambda s: s.id,

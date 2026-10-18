@@ -663,7 +663,7 @@ That historical rule is used only to expose the selection bug: the experiment
 does not reinstate its framework requirement; W-R3 still permits tool or MCP
 execution without a framework.
 
-The prototype's proposed execution order is:
+The prototype's original default policy uses this execution order:
 
 1. Check selection identities and `(kind, role)` uniqueness across the build
    before running any rule predicate. This is the identity slice of the frozen
@@ -693,6 +693,61 @@ still belongs to the preceding activation layer. These checks establish only
 the proposed mechanics. The later binding below joins them to CD-1 answers;
 CD-3 evidence resolution/result encoding, a general predicate DSL, affected-owner
 review and the versioned adapter / ruleset remain open. #42's prerequisite is
+unchanged.
+
+### CD-13 explicit role policy for disabled alternatives (2026-10-18)
+
+The [earlier co-owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6246963100)
+retains build-wide `(kind, role)` uniqueness, including disabled selections.
+The [later owner disposition, constraint 2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+identifies the differing frozen dependency/protocol wording and prefers allowing
+disabled alternatives to share a role while rejecting ambiguity among enabled
+selections. Both dispositions were read on 2026-10-18. The existing strict
+interpretation remains attributable to its accepted revision and consumers.
+
+An actual twelve-case probe at accepted
+`c2bdd82ca727aefe14ca47aa50fb90c08a8ce2fe`, prototype blob
+`c9ee4547202f7f0e9b059f5e0d36a7ce3f5bc381`, records the strict baseline: every
+same-role activation pair rejects before predicates, distinct-role controls
+retain only their enabled findings, and duplicate IDs always reject. These are
+expected results of the earlier policy, not a defect retrospectively assigned
+to that policy.
+
+**Prospective choice:** callers may explicitly select
+`RolePolicy.ENABLED_ONLY` through the normalized `validate_identities` or
+`evaluate` keyword `role_policy`. The default is still
+`RolePolicy.BUILD_WIDE`; no existing call or binding selects the new policy.
+
+| Policy | Selection ID uniqueness | Role uniqueness | Disabled alternative |
+| --- | --- | --- | --- |
+| `BUILD_WIDE` (unchanged default behavior) | Entire supplied inventory | Entire supplied inventory, scoped to kind | Keeps its role for ambiguity checks |
+| `ENABLED_ONLY` (explicit proposal) | Entire supplied inventory | Every enabled record, including unqueried kinds and non-primary roles | May share a role with another record; supplies no predicate or result row |
+
+The selected proposal requires a tuple of normalized `Selection` records and
+validates every record's exact Boolean `enabled` value before scope filtering
+or predicate shortcuts. Missing, unresolved or truthy aliases are errors;
+none becomes a disabled alternative. A tuple is not evidence of a complete
+inventory: the caller must still establish actual inventory completeness and
+the existing schema/reference preconditions. Enabling an alternative triggers
+the full preflight again, so two now-enabled same-role records cannot reuse an
+earlier result or silently select one by input order.
+
+The [twelve dedicated regression methods](../../tests/test_selection_role_policy.py)
+exercise both policies, all activation pairs, input order, unrelated-kind and
+non-primary ambiguity, global duplicate IDs, malformed inventories and policy
+choices, lazy predicates, fixed severity, counterexamples and retained unknown
+rows. The universal result shape, literal selection IDs, sorted findings and
+outcome/reason reduction are unchanged. Empty enabled scope still skips; the
+separate required-presence mode keeps its strict identity preflight and distinct
+`True` / `False` / `None` activation semantics.
+
+This is an opt-in normalized mechanics proposal, not successor adoption. The
+selection, isolation, stage-workload, memory and revision-lock consumers remain
+on the original strict default, as do their retained wire inputs/results.
+Callers of the experiment must retain their explicit policy choice with the
+invocation; binding a policy to a released wire format or historical replay
+requires separate versioned review. Frozen v1, native semantics, required
+presence, affected-owner reconciliation and the full #40/#42 criteria remain
 unchanged.
 
 ### CD-13 required-presence mode (2026-10-18)
