@@ -1,0 +1,105 @@
+{
+  "architecture": {
+    "type": "model",
+    "architecture": "llama",
+    "maximumContextLength": 8192,
+    "embeddingLength": 576,
+    "blockCount": 30,
+    "feedForwardLength": [
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536,
+      1536
+    ],
+    "attentionHeadCount": 9,
+    "attentionHeadCountKV": 3,
+    "attentionSlidingWindowPattern": 1,
+    "attentionLayerNormRMSEpsilon": 1e-05,
+    "attentionKeyLength": 64,
+    "attentionValueLength": 64,
+    "attentionCausal": true,
+    "ropeDimensionCount": 64,
+    "ropeFrequencyBase": 100000,
+    "ropeFrequencyScale": 1,
+    "vocabularyLength": 49152
+  },
+  "estimate": {
+    "items": [
+      {
+        "offloadLayers": 31,
+        "fullOffloaded": true,
+        "ram": {
+          "handleLayers": 0,
+          "handleLastLayer": -1,
+          "handleOutputLayer": false,
+          "remote": false,
+          "position": 0,
+          "uma": 125235680,
+          "nonuma": 125235680
+        },
+        "vrams": [
+          {
+            "handleLayers": 30,
+            "handleLastLayer": 29,
+            "handleOutputLayer": true,
+            "remote": false,
+            "position": 0,
+            "uma": 11796480,
+            "nonuma": 288499968
+          }
+        ]
+      }
+    ],
+    "type": "model",
+    "architecture": "llama",
+    "contextSize": 512,
+    "flashAttention": false,
+    "noMMap": false,
+    "embeddingOnly": false,
+    "reranking": false,
+    "distributable": true,
+    "logicalBatchSize": 256,
+    "physicalBatchSize": 256
+  },
+  "metadata": {
+    "type": "model",
+    "architecture": "llama",
+    "quantizationVersion": 2,
+    "alignment": 32,
+    "name": "Smollm2 135M 8k Lc100K Mix1 Ep2",
+    "license": "apache-2.0",
+    "fileType": 1,
+    "fileTypeDetail": "F16",
+    "littleEndian": true,
+    "fileSize": 270885952,
+    "size": 269100288,
+    "parameters": 134515008,
+    "bitsPerWeight": 16.00417928087251
+  }
+}

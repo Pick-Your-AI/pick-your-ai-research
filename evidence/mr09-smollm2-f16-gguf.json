@@ -1,0 +1,9 @@
+{
+  "id": "mr09-smollm2-f16-gguf",
+  "uri": "https://huggingface.co/bartowski/SmolLM2-135M-Instruct-GGUF/resolve/09816acd5d99df7be770d85ea30822623dab342c/SmolLM2-135M-Instruct-f16.gguf",
+  "version": "09816acd5d99df7be770d85ea30822623dab342c",
+  "sha256": "f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57",
+  "access": "Public pinned artifact accessed 2026-10-18; temporary local copy removed after preparation.",
+  "description": "270885952-byte pinned F16 GGUF. Local download length/hash matched publisher metadata; new artifact cohort, not the historical BF16 safetensors.",
+  "rights": "bartowski publisher metadata and GGUF metadata label Apache-2.0. Converted artifact provenance beyond this exact file remains unverified; no weights redistributed."
+}
