@@ -1,5 +1,175 @@
 # MR-01 landscape review and selection rationale
 
+## Current-scope adoption and receiving decision — 2026-10-18
+
+Status: **Current seed/deep-dive scope and documentary evidence independently
+accepted with narrowing; final source review and canonical delivery pending.** This amendment
+adopts a forward research scope under the user's express delegation of project
+engineering decisions. It preserves the original seven #48 criteria, the
+additional CanIRun.ai intake check and all historical evidence below.
+
+### Decision and historical uncertainty
+
+For the current #48 landscape, adopt the five already documented operational
+seeds: **BenchLM, Harness Bench, llmfit.org with its upstream boundary retained,
+Local AI Planner and Flocci**. Retain the fourteen existing working deep-dive
+entries listed below. This is an explicit present selection of an existing
+documented scope; it is not an assertion that the original undocumented seed
+intent has been recovered. The [earlier explicit operational selection](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/1393d00b2f710d405384360dbbdc220f0356eaf2/docs/market-research/competitive-landscape.md#seeds)
+and the [delivered #305 seed/source pass](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/305)
+provide the concrete list and its documentary checks. Array order and similar
+product names supply no missing identity or affiliation evidence.
+
+The [actual independent coordinator/evidence and receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48#issuecomment-6249724402)
+posted by CompleteDotTech at **2026-10-18T12:07:37Z** accepts this current
+selection and its evidence with the boundaries below. It reviews candidate
+blob `9c76d36b0171e80ab99dfb7aa6a7ada9e4732f45` against accepted main
+`19f248d37c5a8cb8cdd187bc0197281b0f67c044`. This is an actual present
+engineering/coordinator decision under the project owner's delegation, not a
+statement on behalf of an absent co-assignee. Historical intent remains
+unknown; it is not replaced by a claimed historical approval. The selection is
+an analyst judgment about bounded discovery, not an
+empirical vendor ranking, exhaustive market coverage or a claim that all
+selected profiles have completed their separate #50 acceptance.
+
+### Exact delivered inventory and source basis
+
+The readback at accepted main `19f248d37c5a8cb8cdd187bc0197281b0f67c044`
+contains **33 distinct registered entities**, each with a dated
+`discovery_review`; **58 source IDs**, **48 rechecks**, **107 claims**, fourteen
+existing profiles and 1,584 feature cells. The claim total includes 100 claims
+in arrays and seven legacy singular `claim` records. All historical forms,
+dates, failures and qualified findings are retained; no source record is
+rewritten or omitted to obtain that count.
+
+| Canonical input at that accepted revision | Exact Git blob | Use in this decision |
+| --- | --- | --- |
+| [competitors.json](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/19f248d37c5a8cb8cdd187bc0197281b0f67c044/research/market/competitors.json) | `83464bb659b0c33c0fef4af439c812b38f1cff14` | Stable entity IDs, classifications, documentary identity/scope and explicit unknowns. |
+| [sources.json](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/19f248d37c5a8cb8cdd187bc0197281b0f67c044/research/market/sources.json) | `b151438ded6b84db23cccd70ced9182464748134` | Dated claim-specific primary URLs, publisher attribution, evidence classes, scope and limitations. |
+| [Previously delivered acceptance rationale](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/19f248d37c5a8cb8cdd187bc0197281b0f67c044/research/market/mr01-acceptance.md) | `823887d33c56084d51672ed8fc535fb71eee7196` | Existing selection reasons, source-review history, corrections and actual revision-bound receiving receipts, all preserved below. |
+
+The source-register checks qualify fields at their own recorded dates and
+versions. An older `last_verification`, source-level grade or untouched feature
+cell does not become a new assertion about current product behavior. Current
+selection accepts discovery context only; any later use must check the actual
+material, claim, intended use and relevant version again.
+
+### Five selected seeds and documentary verification
+
+Each row uses the existing `mr01-seed-readback-20261018-` recheck plus the suffix
+shown. The underlying pass read the seven named primary pages on 2026-10-18;
+this amendment reviews and adopts that delivered evidence without claiming a
+new product execution, API call or publisher agreement.
+
+The linked independent review separately read all seven exact primary pages
+on 2026-10-18 and checked all 33 qualified operator/product scopes, their
+source references, the five seed rechecks and fourteen-row selection
+rationale. Its Ask/Stack extraction was brief. That review submitted no
+prompts, consumed no credits, exercised no recommendation endpoint, installed
+no product and measured no fit, price or performance. Its new readback does
+not rewrite any earlier source access date or establish a publisher agreement.
+
+| Selected seed / recheck suffix | Verified documentary scope | Boundary retained in the current selection |
+| --- | --- | --- |
+| BenchLM / `benchlm` | The selector documents a job description, editable constraints, dataset-computed shortlist and reusable result links. | These are vendor-described functions, not a newly generated recommendation or complete-stack test. Legal operating entity remains unnamed; commercial data/use conditions remain source-specific. |
+| Harness Bench / `harness-bench` | The homepage attributes the work to Harness Bench Team, links the Qihoo360 repository and describes sandboxed model-harness tasks and final-artifact scoring. | Team/repository linkage does not establish a legal company, a reproduced benchmark or dataset rights. No task count or performance result is adopted. |
+| llmfit.org / `llmfit` | The seed site documents local CLI/TUI fit selection and links AlexsJones/llmfit. The earlier separately pinned upstream review retains Alex Jones and `llmfit.axjns.dev` as its own identity. | Seed-domain operator and reciprocal affiliation remain unverified. A one-way link does not transfer upstream ownership, endorsement or licensing to the seed site. No installation or runtime-fit measurement is implied. |
+| Local AI Planner / `local-ai-planner` | The planner documents goal, hardware, runtime, quantization and context controls and labels memory/speed outputs as planning estimates. | Logarithmic Spirals remains the qualified pseudonymous attribution; a legal person is not invented. Accuracy, runtime topology and successful workloads are untested in this source pass. |
+| Flocci / `flocci` | Ask/Stack/home describe job-to-tools discovery, ordered workflows and Flocci Technologies attribution; Ask/Stack extraction was brief. | Documentary coverage does not itself establish a generated, saved or exported configuration. The separate accepted #66 observation retains its exact scope and date. |
+
+### Classification and the CanIRun.ai intake
+
+The 33 existing stable IDs retain their current classifications. The catalog's
+`classification_basis` explicitly uses **Direct competitor** for material
+initial-workflow overlap, not verified complete T0–T6 coverage. A dataset,
+repository, hosted service and legal entity are not interchangeable. CanRun,
+CanItRun and CanIRun.ai remain three distinct resources; no shared ownership is
+inferred from their names.
+
+For `canirun-ai`, adopt the existing **Partial competitor** classification and
+its bounded hardware/use-case discovery role. The [delivered pinned identity
+correction](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/284)
+and the source-register record identify midudev from the repository, README and
+footer source at `73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983`; the legal operating
+entity and other affiliations remain unverified. Documentary model and
+recommendation interfaces are not a deployed-revision or response-correctness
+test. The README's MIT statement, missing root LICENSE, `license: null`
+metadata and separately scoped third-party skill licence remain a documented
+discrepancy; this decision establishes no reuse grant.
+
+The current discovery answer is bounded: existing resources supply material
+parts of selection, fit advice and reusable composition. The [accepted #66
+record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/8dfec2d58661232f5128f954cf2b5840450732a8/research/market/substitute-validation.md)
+and [accepted #57 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d761200a5dd94f069c2a7c94ac1bb4f9df67581b/research/market/differentiation.md)
+remove basic fit, ordered advice and the tested contradiction explanation as
+exclusive advantages. Neither the landscape nor these bounded observations
+establish a fully verified end-to-end substitute or a defensible unmet
+workflow. Absence from this selected inventory is not evidence of absence.
+
+### Fourteen retained working deep dives
+
+Retain exactly `flocci`, `modelfit`, `llmfit`, `local-ai-planner`, `benchlm`,
+`artificial-analysis`, `openrouter`, `hugging-face`, `models-dev`,
+`harness-bench`, `dify`, `n8n`, `skypilot` and `canirun-ai`, using their existing
+profile paths. The [fourteen-row rationale preserved below](#fourteen-selected-deep-dives-for-50)
+maps each choice to decision overlap, evidence availability, substitution risk
+and source relevance. The earlier #50 working-list receipts keep their actual
+reviewed revisions and constraints; they are not blanket acceptance of later
+profiles. The linked current coordinator/#50 decision accepts this exact
+working selection with the same distinction from profile completion.
+
+This keeps the literal 10–15 bound. The six staged community resources remain
+source leads, separate from the counted registry and selected profiles. Their
+potential fifteenth slot or replacement, any #49 matrix intake and their own
+#50 profile scope require a concrete separate research decision. Excluded
+entries remain discovery resources and possible counterexamples; exclusion is
+an analyst work-order choice, not a negative capability finding.
+
+### Actual receiving decisions for this amendment
+
+The linked **6249724402** receipt records the independent reviewer's actual
+current decisions for all four #48 receiving scopes and the #50 working
+selection. The reviewer checked the relevant records, including #25's
+framework/API/transport/runtime boundary. Existing named-assignee receipts
+retain their actual dates and reviewed revisions; no missing co-assignee
+statement is invented. The existing #59 writer retains canonical ledger
+reconciliation.
+
+| Receiver | Actual decision and retained boundary |
+| --- | --- |
+| #6 Model | **Accept with narrowing:** discovery and comparison leads from the 33 qualified identity/scope records and fourteen selected entries. Family names, vendor descriptions and documented interfaces supply neither model recommendations, runtime capability, measured quality/fit nor source-use eligibility. |
+| #10 Compute | **Accept with narrowing:** hardware-fit candidates and their explicit assumptions as methodology/comparison leads. Retain quantity, context, precision, device and topology unknowns; no calibrated error bound, whole-runtime measurement, ResourceEstimate or universal fit result follows. |
+| #25 Agent framework | **Accept with narrowing:** Flocci/Dify/n8n/SkyPilot workflow and export claims as composition counterexamples, with product/code/service and selected-path boundaries. They prove no deployment, runtime interoperability, privacy, secret-safe sharing or complete end-to-end substitute. |
+| #41 Catalog provenance | **Accept with narrowing:** dated claim-level source evidence, qualified operator identities, preserved historical dates and material/use distinctions for discovery. Accepted #60 restrictions, current-product exclusions and all ten Not approved for integration rows remain effective; source visibility and code licences do not approve a feed or upstream data/model use. |
+| #50 Deep-dive selection | **Accept the exact current fourteen-entry working selection** within 10–15, retaining stable IDs/paths, per-entry rationale and staged community leads. This completes a selection decision only; profile execution/evidence, feature grading and future matched substitute tests retain their own criteria. |
+
+### Unchanged literal acceptance map
+
+| Live #48 criterion | Concrete coverage accepted in the linked decision | Remaining delivery boundary |
+| --- | --- | --- |
+| Verify all five seeds | Explicit forward adoption of the five already documented operational seeds and their existing dated documentary checks above | Preserve the accepted current scope; original historical intent stays unknown. |
+| Classify at least 30 distinct resources | 33 stable, distinct catalog IDs with the existing bounded classifications | Acceptance covers the qualified discovery inventory, not every product's behavior. |
+| Record entity boundaries and unknowns | All 33 dated discovery records, source links and retained operator/product/repository/use limitations; explicit CanIRun.ai disposition | Missing identity, runtime evidence or source permission remains unknown. |
+| Select 10–15 material deep dives | Exact fourteen existing entries, preserved per-entry rationale, prior scoped receipts and actual current #50/coordinator decision | No profile, hands-on experiment or community-matrix completion is inferred. |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Exact canonical source/catalog/rationale revisions, dated claims, accepted #66/#57 inputs and explicit analyst judgments | Independent review must accept the final reasoning in its historical/documentary scope. |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Actual current four technical receiving decisions and separately bounded #50 selection in receipt 6249724402 | Preserve each decision's source, date, attribution and limits; prior named-assignee receipts remain historical. |
+| Repository checks pass; reviewer accepts the evidence before Done. | Current Python 3.12 workflow, preservation checks, independent final source review and canonical merge/readback | Native issue state and all seven literal criteria must be verified before closure; no Project status is inferred. |
+
+The additional CanIRun.ai intake checkbox is covered by the exact identity,
+partial-competitor classification and source-record disposition explicitly
+accepted in the same independent evidence review. Final source review, checks,
+normal merge and canonical readback remain necessary before issue completion.
+This amendment changes only the
+supporting acceptance rationale. It does not edit the catalog, source register,
+profiles, feature matrix, frozen contracts, prior evidence or live ownership.
+
+## Historical source review, selection and delivery records
+
+Everything below retains the earlier contribution verbatim, including its
+then-pending decisions, source dates, counts and actual review scopes. Those
+status statements describe the stated historical revisions. The current
+accepted current-scope decision above does not retrospectively change them.
+
 Refs #48. Original documentary checks: 2026-10-18 (Asia/Shanghai); current-main reconciliation and correction review: 2026-10-18 (UTC). Partial contribution for review; no issue acceptance is asserted.
 
 The original audit and receipt-only sections retain their PR #214/#231 bases, counts and validation records. The [later catalog and summary reconciliation](#2026-10-18-catalog-and-summary-reconciliation) below adds narrowly dated source evidence and reader-facing corrections. The [current seed and receipt readback](#2026-10-18-seed-and-receipt-readback) records the subsequent bounded source pass and T4 receipt; historical acceptance maps and pending requests below describe their stated revisions.
