@@ -5,3 +5,4 @@ jsonschema-specifications==2025.9.1
 attrs==26.1.0
 rpds-py==0.30.0
 PyYAML==6.0.3
+idna==3.20

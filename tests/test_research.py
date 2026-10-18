@@ -148,6 +148,12 @@ class Intake(unittest.TestCase):
                         malformed += [f'https://{host}\\claim/' for host in (
                             '127.0.0.1', 'localhost', '10.0.0.1', 'example.com',
                             '2130706433', '１２７.０.０.１')]
+                        malformed += [
+                            # Segmented digits and modifier letters normalize to
+                            # loopback/reserved hosts in browser URL parsing.
+                            'https://\U0001fbf1\U0001fbf2\U0001fbf7.\U0001fbf0.\U0001fbf0.\U0001fbf1/claim',
+                            'https://\u1d49xample.com/claim',
+                        ]
                     for uri in malformed:
                         with self.subTest(optimized=optimized, target=target, uri=uri):
                             self._write_locator_submission(root, target, uri)
@@ -264,6 +270,31 @@ class Intake(unittest.TestCase):
                 item = copy.deepcopy(self.item)
                 item['provenance'][0]['source_uri'] = uri
                 self.assertEqual(intake_errors([item], []), [])
+
+    def test_uts46_host_mapping_before_public_source_classification(self):
+        # These are synthetic URL-shape cases; no network lookup is performed.
+        rejected = (
+            '\U0001fbf1\U0001fbf2\U0001fbf7.\U0001fbf0.\U0001fbf0.\U0001fbf1',
+            '\u1d49xample.com', 'lo\u1d9calhost', 'h\u1d52st.test',
+            'xn--.com', '_invalid.example-host.org', '[v1.publisher.org]',
+        )
+        accepted = (
+            'bücher.de', 'xn--bcher-kva.de', 'faß.de', 'github.com.',
+            '\U0001fbf8.\U0001fbf8.\U0001fbf8.\U0001fbf8',
+            '[2606:4700:4700::1111]', '[::ffff:8.8.8.8]',
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for target in ('catalog', 'price'):
+                for hosts, valid in ((rejected, False), (accepted, True)):
+                    for host in hosts:
+                        with self.subTest(target=target, host=host, valid=valid):
+                            self._write_locator_submission(root, target, f'https://{host}/claim')
+                            errors = validate_tree(root)[0]
+                            if valid:
+                                self.assertEqual(errors, [])
+                            else:
+                                self.assertTrue(any('real public source URL' in e for e in errors), errors)
 
     def test_tier_and_fixture_id_rejected(self):
         self.item['tier'] = 'T2'
