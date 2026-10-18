@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-9 jurisdiction resolution candidate",
+  "description": "Test-only descriptors. These are not real jurisdiction, provider, legal or residency evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["x_t0_jurisdiction"],
+  "properties": {
+    "x_t0_jurisdiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal_version", "answer_states_sha256", "jurisdictions", "groups", "disjoint_pairs", "regions", "queries"],
+      "properties": {
+        "proposal_version": {"const": "cd9-0.1"},
+        "answer_states_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "jurisdictions": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/jurisdiction"}},
+        "groups": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/group"}},
+        "disjoint_pairs": {"type": "array", "maxItems": 512, "items": {"$ref": "#/$defs/disjoint_pair"}},
+        "regions": {"type": "array", "maxItems": 256, "items": {"$ref": "#/$defs/region"}},
+        "queries": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"$ref": "#/$defs/query"}}
+      }
+    }
+  },
+  "$defs": {
+    "identity": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "ids": {"type": "array", "uniqueItems": true, "maxItems": 256, "items": {"$ref": "#/$defs/identity"}},
+    "dimension": {"enum": ["processing", "storage"]},
+    "jurisdiction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "parent_ids"],
+      "properties": {"id": {"$ref": "#/$defs/identity"}, "parent_ids": {"$ref": "#/$defs/ids"}}
+    },
+    "group": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "member_ids"],
+      "properties": {"id": {"$ref": "#/$defs/identity"}, "member_ids": {"$ref": "#/$defs/ids"}}
+    },
+    "disjoint_pair": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "left_id", "right_id"],
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "left_id": {"$ref": "#/$defs/identity"},
+        "right_id": {"$ref": "#/$defs/identity"}
+      }
+    },
+    "region": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "provider_id", "service_id", "region_id", "context_id", "dimension", "jurisdiction_ids"],
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "provider_id": {"$ref": "#/$defs/identity"},
+        "service_id": {"$ref": "#/$defs/identity"},
+        "region_id": {"$ref": "#/$defs/identity"},
+        "context_id": {"$ref": "#/$defs/identity"},
+        "dimension": {"$ref": "#/$defs/dimension"},
+        "jurisdiction_ids": {"$ref": "#/$defs/ids"}
+      }
+    },
+    "location": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {"enum": ["jurisdiction", "provider_region"]},
+        "id": {"$ref": "#/$defs/identity"},
+        "descriptor_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "allowed": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {"enum": ["jurisdiction", "group"]},
+        "id": {"$ref": "#/$defs/identity"},
+        "descriptor_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "constraint": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["mode"], "properties": {"mode": {"const": "unconstrained"}}},
+        {"type": "object", "additionalProperties": false, "required": ["mode", "allowed"], "properties": {"mode": {"const": "restricted"}, "allowed": {"type": "array", "minItems": 1, "maxItems": 256, "uniqueItems": true, "items": {"$ref": "#/$defs/allowed"}}}}
+      ]
+    },
+    "query": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "subject_id", "context_id", "dimension", "location_refs"],
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "subject_id": {"$ref": "#/$defs/identity"},
+        "context_id": {"$ref": "#/$defs/identity"},
+        "dimension": {"$ref": "#/$defs/dimension"},
+        "location_refs": {"type": "array", "maxItems": 256, "uniqueItems": true, "items": {"$ref": "#/$defs/location"}}
+      }
+    }
+  }
+}

@@ -226,6 +226,84 @@ class HandoffAuditValidation(unittest.TestCase):
                         self.assertNotIn('Handoff audit integrity OK', result.stdout)
                 self.set_receipt_time(kind, '2026-10-16T00:00:00Z')
 
+    def append_scoped_record(self, row_index, **changes):
+        row = self.ledger[row_index]
+        response = {**deepcopy(row['responses'][0]), **changes}
+        row['responses'].append(response)
+        self.readback['new_scoped_responses'].append({
+            **deepcopy(response), 'market_issue': row['market_issue'],
+            'consumer_issue': row['consumer_issue']})
+        for record in (self.readback, self.audit):
+            record['handoff_coverage']['new_response_records'] += 1
+
+    def test_identical_scoped_receipts_cannot_inflate_matching_coverage(self):
+        original = deepcopy((self.ledger, self.readback, self.audit))
+        for row_index in (1, 2):
+            with self.subTest(role=self.ledger[row_index]['responses'][0]['role']):
+                self.ledger, self.readback, self.audit = deepcopy(original)
+                self.append_scoped_record(row_index)
+                with self.assertRaisesRegex(HandoffValidationError, 'duplicate scoped response'):
+                    self.check()
+
+    def test_duplicate_scoped_response_is_rejected_in_either_copy(self):
+        original = deepcopy((self.ledger, self.readback, self.audit))
+        for location in ('ledger', 'readback'):
+            for row_index in (1, 2):
+                with self.subTest(location=location, row_index=row_index):
+                    self.ledger, self.readback, self.audit = deepcopy(original)
+                    responses = (self.ledger[row_index]['responses'] if location == 'ledger'
+                                 else self.readback['new_scoped_responses'])
+                    response = responses[0 if location == 'ledger' else row_index - 1]
+                    # Object member order cannot make a second copy distinct.
+                    responses.append(dict(reversed(list(deepcopy(response).items()))))
+                    with self.assertRaisesRegex(HandoffValidationError, 'duplicate scoped response'):
+                        self.check()
+
+    def test_shared_source_and_distinct_scopes_remain_separate_records(self):
+        for _, response in self.response_copies():
+            response['url'] = 'https://example.com/synthetic-receipt/shared-comment'
+        self.append_scoped_record(1, scope='A separate bounded scope from the same comment')
+        before = deepcopy((self.ledger, self.readback, self.audit))
+        self.check()
+        self.assertEqual((self.ledger, self.readback, self.audit), before)
+
+    def test_scoped_receipt_reconciliation_ignores_record_order_with_shared_source(self):
+        self.append_scoped_record(1, scope='A separate bounded scope from the same comment')
+        original = deepcopy((self.ledger, self.readback, self.audit))
+        for location in ('ledger', 'readback', 'both'):
+            with self.subTest(location=location):
+                self.ledger, self.readback, self.audit = deepcopy(original)
+                if location in ('ledger', 'both'):
+                    self.ledger[1]['responses'].reverse()
+                if location in ('readback', 'both'):
+                    self.readback['new_scoped_responses'].reverse()
+                before = deepcopy((self.ledger, self.readback, self.audit))
+                self.check()
+                self.assertEqual((self.ledger, self.readback, self.audit), before)
+                self.readback['new_scoped_responses'][0]['scope'] += ' changed in one copy'
+                with self.assertRaisesRegex(HandoffValidationError, 'receipt moved, changed or dropped'):
+                    self.check()
+
+    def test_cli_rejects_duplicate_receipt_counts_in_copied_canonical_records(self):
+        originals = {name: (BASE / name).read_text(encoding='utf-8') for name in (
+            'handoffs.json', 'handoff-audit-readback.json', 'audit.json')}
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                documents = {name: json.loads(text) for name, text in originals.items()}
+                row = next(row for row in documents['handoffs.json'] if row.get('responses'))
+                response = deepcopy(row['responses'][0])
+                row['responses'].append(response)
+                documents['handoff-audit-readback.json']['new_scoped_responses'].append({
+                    **deepcopy(response), 'market_issue': row['market_issue'],
+                    'consumer_issue': row['consumer_issue']})
+                for name in ('handoff-audit-readback.json', 'audit.json'):
+                    documents[name]['handoff_coverage']['new_response_records'] += 1
+                result = self.run_cli({name: json.dumps(data) for name, data in documents.items()}, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('duplicate scoped response', result.stderr)
+                self.assertNotIn('Handoff audit integrity OK', result.stdout)
+        self.assertEqual({name: (BASE / name).read_text(encoding='utf-8') for name in originals}, originals)
+
     def test_classified_issue_must_exist_in_the_captured_snapshot(self):
         self.audit['issues'][0]['number'] = max(
             row['number'] for row in self.readback['issues']) + 1

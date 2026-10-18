@@ -60,6 +60,32 @@
         "rights": "Read/link/attributed quotation permitted. Website dataset CC BY-NC 4.0; dedicated Data access has separate terms; no commercial integration cleared.",
         "limitations": "Static documentation read only; no selector submitted, API account, accuracy reproduction, compatibility validation or market-share inference.",
         "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_id": "mr01-seed-readback-20261018-benchlm",
+        "access_date": "2026-10-18",
+        "access_status": "public web extraction; descriptive text retrieved at all listed URLs",
+        "version": "Unversioned public selector; page labels its method bench-align-v5.8-2026-09-30.",
+        "region": "Public English-language pages; no regional availability or price quote",
+        "confidence": "Medium for documentary scope; product behavior and unresolved operators unverified",
+        "reviewed_urls": [
+          {
+            "url": "https://benchlm.ai/tools/llm-selector",
+            "publisher": "BenchLM",
+            "access_status": "descriptive text retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "The selector describes a natural-language job form, editable budget/context/deployment answers, a dataset-computed shortlist, and reusable result links/API query parameters.",
+            "evidence_class": "Vendor claim",
+            "url": "https://benchlm.ai/tools/llm-selector",
+            "publisher": "BenchLM"
+          }
+        ],
+        "rights": "Read-only discovery citation; no new code, dataset or commercial reuse grant assessed. Retain earlier source-specific rights restrictions and #41/#60 decisions.",
+        "limitations": "No description submitted, shortlist generated or recommendation endpoint called. Public description does not establish correctness, complete stack selection or reuse permission.",
+        "method": "Public web-tool extraction on 2026-10-18; text may be cached. No account, product prompt, API recommendation or compute execution."
       }
     ]
   },
@@ -120,6 +146,32 @@
         "rights": "Site footer reserves rights; no repository licence text established in this pass. A missing licence indicator is not reuse permission.",
         "limitations": "No benchmark run; current paper not reread, so preserve historical suite-size discrepancy as earlier finding and avoid new numeric claims.",
         "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_id": "mr01-seed-readback-20261018-harness-bench",
+        "access_date": "2026-10-18",
+        "access_status": "public web extraction; descriptive text retrieved at all listed URLs",
+        "version": "Unversioned public homepage; no repository release, paper revision or executable dataset checked in this readback.",
+        "region": "Public English-language pages; no regional availability or price quote",
+        "confidence": "Medium for documentary scope; product behavior and unresolved operators unverified",
+        "reviewed_urls": [
+          {
+            "url": "https://www.harness-bench.ai/",
+            "publisher": "Harness Bench Team",
+            "access_status": "descriptive text retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "The public benchmark page links Qihoo360/harness-bench, attributes the work to Harness Bench Team, and describes sandboxed model-harness tasks with final-artifact oracle scoring.",
+            "evidence_class": "Primary documentation",
+            "url": "https://www.harness-bench.ai/",
+            "publisher": "Harness Bench Team"
+          }
+        ],
+        "rights": "Read-only discovery citation; no new code, dataset or commercial reuse grant assessed. Retain earlier source-specific rights restrictions and #41/#60 decisions.",
+        "limitations": "No task count or performance result adopted; no benchmark run, dataset rights review or independent legal-operator verification.",
+        "method": "Public web-tool extraction on 2026-10-18; text may be cached. No account, product prompt, API recommendation or compute execution."
       }
     ]
   },
@@ -201,6 +253,32 @@
         "rights": "Upstream licence is MIT, copyright Alex Jones; retain notices. Seed site reserves rights; upstream code licence does not clear seed website or model/benchmark metadata rights.",
         "limitations": "Not installed/run; fit and community-result quality untested; default-branch documents mutable.",
         "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_id": "mr01-seed-readback-20261018-llmfit",
+        "access_date": "2026-10-18",
+        "access_status": "public web extraction; descriptive text retrieved at all listed URLs",
+        "version": "Unversioned seed website; no installed CLI version checked.",
+        "region": "Public English-language pages; no regional availability or price quote",
+        "confidence": "Medium for documentary scope; product behavior and unresolved operators unverified",
+        "reviewed_urls": [
+          {
+            "url": "https://www.llmfit.org/",
+            "publisher": "llmfit.org; operator unverified",
+            "access_status": "descriptive text retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "The seed page links AlexsJones/llmfit and documents local CLI/TUI hardware-fit selection, quantization and runtime options.",
+            "evidence_class": "Vendor claim",
+            "url": "https://www.llmfit.org/",
+            "publisher": "llmfit.org; operator unverified"
+          }
+        ],
+        "rights": "Read-only discovery citation; no new code, dataset or commercial reuse grant assessed. Retain earlier source-specific rights restrictions and #41/#60 decisions.",
+        "limitations": "One-way link does not establish seed-domain ownership or upstream endorsement. No installation, fit measurement or new upstream affiliation search.",
+        "method": "Public web-tool extraction on 2026-10-18; text may be cached. No account, product prompt, API recommendation or compute execution."
       }
     ]
   },
@@ -252,6 +330,32 @@
         "rights": "Public access only; no source/dataset redistribution licence established. Page cites upstream GPU, model and benchmark sources that require separate rights review.",
         "limitations": "Static text/controls inspected; no submitted custom model, numeric reproduction or executable export; multiplying identical GPU capacity does not verify runtime topology.",
         "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_id": "mr01-seed-readback-20261018-local-ai-planner",
+        "access_date": "2026-10-18",
+        "access_status": "public web extraction; descriptive text retrieved at all listed URLs",
+        "version": "Unversioned public planner; no numeric output or model snapshot independently checked.",
+        "region": "Public English-language pages; no regional availability or price quote",
+        "confidence": "Medium for documentary scope; product behavior and unresolved operators unverified",
+        "reviewed_urls": [
+          {
+            "url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+            "publisher": "Logarithmic Spirals",
+            "access_status": "descriptive text retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "The planner describes goal/hardware/runtime/quantization/context controls and labels its memory and speed outputs as planning estimates rather than guarantees.",
+            "evidence_class": "Vendor claim",
+            "url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+            "publisher": "Logarithmic Spirals"
+          }
+        ],
+        "rights": "Read-only discovery citation; no new code, dataset or commercial reuse grant assessed. Retain earlier source-specific rights restrictions and #41/#60 decisions.",
+        "limitations": "Read-only page extraction; no custom model submitted or estimate calibrated. Controls and methodology descriptions do not establish actual fit or runtime topology.",
+        "method": "Public web-tool extraction on 2026-10-18; text may be cached. No account, product prompt, API recommendation or compute execution."
       }
     ]
   },
@@ -317,6 +421,54 @@
         "rights": "No code or dataset reuse permission established; hosted access/credit pricing is not a content licence.",
         "limitations": "No prompt submitted in this pass; historical 2026-10-16 generated workflow must retain original date; no compatibility, export or deployment verified.",
         "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_id": "mr01-seed-readback-20261018-flocci",
+        "access_date": "2026-10-18",
+        "access_status": "public web extraction; descriptive text retrieved at all listed URLs",
+        "version": "Unversioned public Ask/Stack/home pages; only brief descriptive text was available for Ask and Stack.",
+        "region": "Public English-language pages; no regional availability or price quote",
+        "confidence": "Medium for documentary scope; product behavior and unresolved operators unverified",
+        "reviewed_urls": [
+          {
+            "url": "https://aitools.flocci.in/ask",
+            "publisher": "Flocci Technologies",
+            "access_status": "descriptive text retrieved"
+          },
+          {
+            "url": "https://aitools.flocci.in/stack",
+            "publisher": "Flocci Technologies",
+            "access_status": "descriptive text retrieved"
+          },
+          {
+            "url": "https://aitools.flocci.in/",
+            "publisher": "Flocci Technologies",
+            "access_status": "descriptive text retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Ask invites a plain-language description of the user's job to find matching tools.",
+            "evidence_class": "Vendor claim",
+            "url": "https://aitools.flocci.in/ask",
+            "publisher": "Flocci Technologies"
+          },
+          {
+            "claim": "Stack advertises an ordered workflow of tools based on a description of the user's goal.",
+            "evidence_class": "Vendor claim",
+            "url": "https://aitools.flocci.in/stack",
+            "publisher": "Flocci Technologies"
+          },
+          {
+            "claim": "The homepage attributes the directory to Flocci Technologies and distinguishes free browsing from credit-priced optional assistants.",
+            "evidence_class": "Primary documentation",
+            "url": "https://aitools.flocci.in/",
+            "publisher": "Flocci Technologies"
+          }
+        ],
+        "rights": "Read-only discovery citation; no new code, dataset or commercial reuse grant assessed. Retain earlier source-specific rights restrictions and #41/#60 decisions.",
+        "limitations": "No prompt, account, credit consumption, saved result or export test. The vendor's whole-workflow claim is a falsification lead, not demonstrated compatibility or a complete substitute.",
+        "method": "Public web-tool extraction on 2026-10-18; text may be cached. No account, product prompt, API recommendation or compute execution."
       }
     ]
   },
