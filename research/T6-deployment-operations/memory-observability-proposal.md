@@ -1,6 +1,6 @@
 # Memory and deletion observability proposal
 
-Refs #28, #35 and #38. Status: proposed research signals; [T4 #28 receiving review accepts the interface with constraints](../T4-agents-integrations/README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18). #35/#38 co-owner adoption remains separate. This supplements the agent/tool signals in the [merged #121 monitoring record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
+Refs #28, #35 and #38. Status: proposed research signals; [CompleteDotTech's delegated T4 #28 review accepts the interface with constraints](../T4-agents-integrations/README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18). PUSHINGSQUARES' separate #28 confirmation is unrecorded; #35/#38 co-owner adoption remains separate. This supplements the agent/tool signals in the [merged #121 monitoring record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
 
 ## Evidence boundary
 
