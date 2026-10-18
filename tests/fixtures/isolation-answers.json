@@ -1,0 +1,127 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/workload/network": {
+        "state": "provided",
+        "value": "air_gapped",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/workload/isolation_boundary_id": {
+        "state": "provided",
+        "value": "boundary.fixture.local",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/endpoints/endpoint.fixture.local/inside_boundary": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/endpoints/endpoint.fixture.publisher/inside_boundary": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_model/runtime_endpoints/a4453c1d3a6c910f0da44f7a44fbc52fffc43d1dc61a8b1d06a79e8c83d2ec3c/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_model/connections/62ccfac09fc4b9cbac522f4d9ac60c08821ff25a3eb214bdd2e18f4d33d0e8af/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_model/runtime_artifacts/510268fbc75afc7cbf950c2bb473b3130bc8b0680efe5f16549f1d81683ee035/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_model/runtime_artifacts/artifact.fixture.weights/1e747c30ece5413332c6f6587919d887b3420e93bd66b6b4042a68e12c55ec9b/present_inside_boundary": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/runtime_endpoints/6213083cb114cd980b3e7891ed0e037c81ca791fad74548eac07dad5de32221f/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/49549f7fea01163fa3f9103f950b533c2585a47f1527069bdd788333e0fd9d46/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/runtime_artifacts/d0163584ef6977b6aad5da88b4dd00c14873fcfc52482a6454d3386659ee8de4/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/conn.fixture.telemetry/destination_id": {
+        "state": "provided",
+        "value": "endpoint.fixture.publisher",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/conn.fixture.telemetry/lifecycle": {
+        "state": "provided",
+        "value": "runtime",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/conn.fixture.telemetry/state": {
+        "state": "provided",
+        "value": "disabled",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/conn.fixture.download/destination_id": {
+        "state": "provided",
+        "value": "endpoint.fixture.publisher",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/conn.fixture.download/lifecycle": {
+        "state": "provided",
+        "value": "provisioning",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/connections/conn.fixture.download/state": {
+        "state": "provided",
+        "value": "enabled",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_inference_engine/runtime_artifacts/artifact.fixture.engine/6a99e0123502a2ad9390201c0ea724f4bdc898369712d6b57f2a80883453dbca/present_inside_boundary": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_mcp_server/runtime_endpoints/6213083cb114cd980b3e7891ed0e037c81ca791fad74548eac07dad5de32221f/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_mcp_server/connections/3d2f0fd35f4b4ee46b641ffbc2fd08f16ba4c1033c6f4fed945e97092b572db9/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_mcp_server/runtime_artifacts/b878f45b0c3b719c8d928ac747e510eddb3bd2b0891688fcb3cc1233698d50fd/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_mcp_server/connections/conn.fixture.api/destination_id": {
+        "state": "provided",
+        "value": "endpoint.fixture.local",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_mcp_server/connections/conn.fixture.api/lifecycle": {
+        "state": "provided",
+        "value": "runtime",
+        "source": "synthetic:cd4-scenario"
+      },
+      "/isolation/boundary.fixture.local/components/sel_mcp_server/connections/conn.fixture.api/state": {
+        "state": "provided",
+        "value": "enabled",
+        "source": "synthetic:cd4-scenario"
+      }
+    }
+  }
+}
