@@ -113,7 +113,7 @@ These cover the CatalogItem envelope plus `spec_fine_tuned_model`. The issue's c
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Engine facts come from release-tagged sources.
+Entries accessed on 2026-10-16 unless a later re-check is recorded in the row. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Engine facts come from release-tagged sources.
 
 ### Serving (V)
 
@@ -157,7 +157,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | --- | --- | --- | --- | --- | --- |
 | Q1 | Qi et al., https://arxiv.org/abs/2310.03693 | 2026-10-16 | — | Independent measurement | GPT-3.5 Turbo and Llama-2-7b-Chat, 2023 |
 | Q2 | Biderman et al., LoRA Learns Less and Forgets Less, https://arxiv.org/abs/2405.09673 | 2026-10-16 | — | Independent measurement | Llama-2-7B; code and math domains |
-| Q3 | Microsoft, https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation | 2026-10-16 | ms.date 2026-07-31 | Primary documentation | Re-checked directly |
+| Q3 | Microsoft, https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation | 2026-10-18 | Updated 2026-07-31; preview guide | Primary documentation | Re-checked directly: separate data/model assessments; predefined thresholds and a modification-request route, not an account-specific exception |
 | Q4 | OpenAI, https://developers.openai.com/api/docs/guides/supervised-fine-tuning | 2026-10-16 | — | Primary documentation | Training-data moderation not described in current docs |
 | Q5 | Mazeika et al., HarmBench, https://arxiv.org/abs/2402.04249 ; MLCommons, https://mlcommons.org/ailuminate/ | 2026-10-16 | AILuminate Safety v1.0 | Independent measurement | — |
 | Q6 | EleutherAI, https://pypi.org/project/lm-eval/ | 2026-10-16 | 0.4.13 (2026-08-31), MIT | Primary documentation | — |
@@ -224,7 +224,7 @@ Not priced here:
    - optionally an OpenSSF model-signing bundle.
 6. **Gate deployment on #36's evaluation set.** Minimum proposal:
    - **Safety and refusal regression against the base** on the same suite. Fine-tuning on 10 adversarial examples took GPT-3.5 Turbo's harmfulness rate from 1.8% to 88.8%, and benign Alpaca fine-tuning took it from 5.5% to 31.8% (Q1).
-   - **A training-data harm screen before training.** Microsoft Foundry fails jobs on harmful training data and blocks deployment above fixed thresholds that "can't be modified by customers" (Q3).
+   - **Separate pre-training data and post-training model assessments.** The Foundry preview guide describes a data screen that fails a job when detected harmful content exceeds its severity threshold, followed by a separate model evaluation before deployment. Its predefined evaluation thresholds are not customer-configurable or tied to a custom content-filter configuration, but the guide also provides a request route for modified fine-tuning safety thresholds (Q3; re-read 2026-10-18). That route establishes neither approval nor eligibility for a particular account. This aligns with the [#36 safety-screen supplement](../T6-deployment-operations/evaluation.md#foundry-training-data-harm-screen); provider checks do not establish the proposed builder evaluation gate or receiving-owner acceptance.
    - **Capability retention against the base** on general benchmarks, because both LoRA and full fine-tuning forget (Q2).
    - **Target-task gain over the base** (Q4).
    - **Provenance and licence integrity checks** (A-15 to A-19).
