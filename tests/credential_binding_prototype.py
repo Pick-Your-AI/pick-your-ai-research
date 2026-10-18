@@ -77,6 +77,14 @@ def evaluate(case: Case) -> Outcome:
     if len(case.bindings) != 1:
         return Outcome.UNKNOWN
     binding = case.bindings[0]
+    # A direct or unauthenticated choice cannot simultaneously select inherited
+    # credential provenance. Do not silently prefer one source over the other.
+    if binding.source in (Source.DIRECT, Source.NONE) and binding.target_id is not None:
+        return Outcome.UNKNOWN
+    # A no-auth choice does not prove that a configured or uninspected local
+    # reference can be disregarded; require an explicit conflict resolution.
+    if binding.source is Source.NONE and case.local_credential_present is not False:
+        return Outcome.UNKNOWN
     match binding.source:
         case Source.DIRECT:
             return combine(
