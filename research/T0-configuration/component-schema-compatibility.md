@@ -72,7 +72,7 @@ This dictionary makes the proposed shapes reviewable for #40's “field types an
 | Build links | Existing relation/from/to references including per-component runs_on/served_by host/device/engine links; proposed role/access attribute | Multiple possible credential/base bindings without an evidenced disambiguation remain unknown; inheritance rules are CD-6 | CD-6 and T4 queue; #40 |
 | Snapshot and pricebook locks | Existing IDs plus proposed explicit revisions; exact revision wire type/location pending | Missing revision produces “cannot be reproduced exactly”, never replacement by latest | CD-7, M5; #42 |
 | Evaluation result | Fixed rule severity; outcome pass/fail/unknown/skipped; proposed reason code, disputed flag and evidence label | A passing error-severity rule is not a failure; evidence disagreement does not change severity | Rule semantics above; CD-1/CD-3 |
-| Multi-selection evaluation | Quantify over enabled selections; reject duplicate primary roles semantically before evaluation | Two primary selections must not silently cause a required rule to skip; quantifier syntax remains open | CD-13; #40/T4 |
+| Multi-selection evaluation | Quantify over enabled selections; reject duplicate primary roles semantically before evaluation | Two primary selections must not silently cause a required rule to skip; the CD-13 typed binding below proposes one concrete quantifier encoding, with final ruleset adoption separate | CD-13; #40/T4 |
 
 ### Reviewable examples and migration boundaries
 
@@ -297,9 +297,76 @@ selections, a counterexample in each input order, duplicate IDs, a duplicate in
 an unrelated kind, and rejection of non-normalized predicate values. Empty
 scope is not a vacuous compatibility pass; required-component cardinality
 still belongs to the preceding activation layer. These checks establish only
-the proposed mechanics. CD-1 answer states, CD-3 evidence resolution/result
-encoding, CD-13 DSL syntax, affected-owner review and the versioned adapter /
-ruleset remain open; #42's prerequisite is unchanged.
+the proposed mechanics. The later binding below joins them to CD-1 answers;
+CD-3 evidence resolution/result encoding, a general predicate DSL, affected-owner
+review and the versioned adapter / ruleset remain open. #42's prerequisite is
+unchanged.
+
+### CD-13 typed selection binding proposal (2026-10-18)
+
+The [versioned sidecar schema](../../tests/fixtures/selection-binding.schema.json),
+[binding fixture](../../tests/fixtures/selection-binding.json),
+[paired CD-1 answers](../../tests/fixtures/selection-answers.json),
+[reader](../../tests/selection_binding_prototype.py) and
+[integration cases](../../tests/test_selection_binding.py) choose a concrete
+encoding for the accepted universal selection mechanics. These are synthetic
+project design examples. They add no publisher claim or released v1 field.
+
+| Proposed field | Type and meaning |
+| --- | --- |
+| `x_t0_selection_rule.proposal_version` | Exact `cd13-0.1`; one bounded rule-input binding, not a general ruleset |
+| `build_sha256`, `answer_states_sha256` | 64 lowercase hexadecimal characters; each binds the complete original UTF-8 byte sequence, including whitespace and unrelated fields |
+| `rule.id`, `rule.version` | Full-string canonical rule ID and bounded exact version string in the frozen semver shape; changes do not inherit another rule/version's answers |
+| `rule.kind` | One canonical frozen component kind; no arbitrary first or primary selection is chosen |
+| `rule.quantifier` | Exact `all_enabled`; evaluate every enabled selection of that kind |
+| `rule.severity` | `info`, `warning` or `error`, fixed independently of every finding and overall outcome |
+
+Each applicability/assertion answer lives at the literal JSON Pointer
+`/selection_checks/{selection_id}/{rule_id}/{rule_version}/{field}`, where
+`field` is `applies_when` or `assertion`. Tokens are escaped as JSON Pointer
+tokens, not interpreted as dotted paths or positions in the build's selection
+array. For example the fixture's assertion is
+`/selection_checks/sel_tool/rule.fixture.cd13/0.1.0/assertion`. Grouped parent
+objects and unresolved parents retain CD-1's source path and state behavior.
+
+The reader first validates the sidecar and complete-byte bindings, the frozen
+build's schema and integer revision, and build-wide selection identity/role
+uniqueness. Selection IDs and roles must match their entire canonical string;
+a terminal newline is rejected even though the frozen regex's `$` can accept it.
+Disabled and unrelated-kind entries still participate in identity preflight.
+Every provided Boolean operand for the scoped kind is then type-checked,
+including disabled selections and assertions whose applicability will be false
+or unresolved. Numeric/string aliases and malformed parent traversal reject
+before a predicate runs. Existing CD-1 and CD-13 implementations are unchanged.
+
+The caller must establish eligibility separately for **each** selection's
+applicability and assertion operand. Omitted, unresolved or ineligible inputs
+cannot become known facts merely because they have a value or source label.
+Even a provided false applicability answer only produces `skipped` when that
+answer is eligible. Otherwise applicability remains `unknown`; a known eligible
+assertion false remains a counterexample only under known eligible applicability.
+Missing, unknown, withheld and not-applicable CD-1 answers all stay unresolved
+for this compatibility predicate, with their distinct states retained. This
+does not change the separate recommendation policy or required-component layer.
+
+The accepted CD-13 reducer retains individual pass/fail/unknown/skipped findings,
+keeps a definite failure alongside other selections' unknowns, and distinguishes
+an empty enabled scope from an entirely inapplicable scope. Results also retain
+the exact rule version, all scoped answer states (including disabled entries)
+and per-operand eligibility. Repeated evaluation cannot inherit an earlier
+eligibility decision. The binding never requires a framework for a tool: W-R3's
+explicit no-framework path remains available.
+
+This reader performs schema and selection-identity preflight; it does not supply
+the remaining catalog/version, relationship or evidence-resolution preconditions
+from the frozen validation protocol. Callers must establish those prerequisites
+before treating their Boolean rule inputs as eligible. A digest binds bytes; it
+does not authenticate a rule, source, support claim or complete build. Arbitrary
+predicate expressions, relationship joins, catalog/source eligibility, final
+result wire format and actual successor migration remain separate integration.
+#40 and affected T4/other consumers must review this exact proposal before a
+versioned adapter/ruleset adopts it. Historical build bytes and frozen findings
+remain unchanged; #42's native #40 prerequisite remains in place.
 
 Routing from the reviews:
 

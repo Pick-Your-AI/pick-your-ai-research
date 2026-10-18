@@ -1,0 +1,14 @@
+{
+  "x_t0_selection_rule": {
+    "proposal_version": "cd13-0.1",
+    "build_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864",
+    "answer_states_sha256": "97d8bb30cc79e0ee0d40d05030041a16863f468142065d9e46f726b41b234335",
+    "rule": {
+      "id": "rule.fixture.cd13",
+      "version": "0.1.0",
+      "kind": "tool",
+      "quantifier": "all_enabled",
+      "severity": "error"
+    }
+  }
+}

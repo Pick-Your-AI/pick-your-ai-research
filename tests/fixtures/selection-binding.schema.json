@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-13 all-enabled selection rule binding",
+  "description": "One reviewed quantifier over normalized Boolean inputs; not a released ruleset or general predicate DSL.",
+  "type": "object",
+  "required": ["x_t0_selection_rule"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_selection_rule": {
+      "type": "object",
+      "required": ["proposal_version", "build_sha256", "answer_states_sha256", "rule"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd13-0.1"},
+        "build_sha256": {"$ref": "#/$defs/digest"},
+        "answer_states_sha256": {"$ref": "#/$defs/digest"},
+        "rule": {
+          "type": "object",
+          "required": ["id", "version", "kind", "quantifier", "severity"],
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string", "minLength": 3, "maxLength": 120,
+              "pattern": "^[a-z][a-z0-9._:-]{2,119}$",
+              "not": {"pattern": "[^a-z0-9._:-]"}
+            },
+            "version": {
+              "type": "string", "minLength": 5, "maxLength": 160,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$",
+              "not": {"pattern": "[^0-9A-Za-z.-]"}
+            },
+            "kind": {
+              "enum": ["workload", "deployment_mode", "model_provider", "model", "context_policy", "hosting_platform", "accelerator", "compute_profile", "inference_engine", "storage", "data_source", "knowledge_base", "embedding_model", "vector_database", "rag_pipeline", "agent_framework", "tool", "mcp_server", "memory_store", "integration", "training_framework", "training_compute", "training_dataset", "fine_tuned_model", "guardrail", "evaluation_suite", "deployment_target", "monitoring_stack", "cost_policy"]
+            },
+            "quantifier": {"const": "all_enabled"},
+            "severity": {"enum": ["info", "warning", "error"]}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string", "minLength": 64, "maxLength": 64,
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
