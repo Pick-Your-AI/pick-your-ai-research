@@ -1,0 +1,99 @@
+{
+  "controller_python": "3.12.14",
+  "machine": "x86_64",
+  "observations": [
+    {
+      "client_sdk": "1.30.0",
+      "errors": [
+        {
+          "code": 408,
+          "type": "McpError"
+        }
+      ],
+      "mode": "legacy",
+      "server_sdk": "1.30.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "1.30.0",
+      "errors": [
+        {
+          "code": 408,
+          "type": "McpError"
+        }
+      ],
+      "mode": "legacy",
+      "server_sdk": "2.3.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "errors": [
+        {
+          "code": -32001,
+          "type": "MCPError"
+        }
+      ],
+      "mode": "auto",
+      "server_sdk": "1.30.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "errors": [
+        {
+          "code": -32001,
+          "type": "MCPError"
+        }
+      ],
+      "mode": "auto",
+      "server_sdk": "2.3.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "errors": [
+        {
+          "code": -32001,
+          "type": "MCPError"
+        }
+      ],
+      "mode": "legacy",
+      "server_sdk": "2.3.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    {
+      "client_sdk": "2.3.0",
+      "errors": [
+        {
+          "code": -32001,
+          "type": "MCPError"
+        }
+      ],
+      "mode": "2026-07-28",
+      "server_sdk": "1.30.0",
+      "status": "failed",
+      "transport": "stdio",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    }
+  ],
+  "observed_utc": "2026-10-18T07:03:20.711301+00:00",
+  "platform": "Linux",
+  "scope": "synthetic-local-SDK-stdio-peers"
+}

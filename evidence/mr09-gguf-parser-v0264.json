@@ -1,0 +1,9 @@
+{
+  "id": "mr09-gguf-parser-v0264",
+  "uri": "https://github.com/gpustack/gguf-parser-go/releases/download/v0.26.4/gguf-parser-windows-amd64.exe",
+  "version": "v0.26.4; 637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
+  "sha256": "8da9ae6b8968d5d2dee4eaf48dbc24ed48bf3de02794c8dbe0b2a9443b12c92c",
+  "access": "Public pinned artifact accessed 2026-10-18; temporary local copy removed after preparation.",
+  "description": "Official Windows binary executed only for version/help and CPU GGUF estimation. Local hash matches publisher release digest.",
+  "rights": "GPUStack gguf-parser-go MIT code; binary stays outside Git; no third-party source or binary redistributed."
+}
