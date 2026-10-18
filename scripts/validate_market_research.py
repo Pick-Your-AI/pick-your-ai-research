@@ -50,6 +50,70 @@ def validate_http_url(value, label):
     require(url.username is None and url.password is None, f'credentials in {label}')
 
 
+def validate_source_rechecks(source):
+    """Validate both retained claim shapes without certifying their statements."""
+    label = f"source {source['id']}: rechecks"
+    rechecks = source.get('rechecks', [])
+    require(isinstance(rechecks, list), f'{label}: requires an array')
+
+    def text_field(record, field, where):
+        value = record.get(field)
+        require(isinstance(value, str) and value.strip(),
+                f'{where}: requires nonempty {field}')
+        return value
+
+    def claim_fields(record, where):
+        require(isinstance(record, dict), f'{where}: requires an object')
+        for field in ('claim', 'publisher', 'evidence_class'):
+            text_field(record, field, where)
+        require('url' in record or 'source_urls' in record,
+                f'{where}: requires url or source_urls')
+        if 'url' in record:
+            validate_http_url(record['url'], f'{where}: url')
+        if 'source_urls' in record:
+            urls = record['source_urls']
+            require(isinstance(urls, list) and urls,
+                    f'{where}: source_urls requires a nonempty array')
+            for index, url in enumerate(urls):
+                validate_http_url(url, f'{where}: source_urls[{index}]')
+
+    for index, recheck in enumerate(rechecks):
+        where = f'{label}[{index}]'
+        require(isinstance(recheck, dict), f'{where}: requires an object')
+        for field in ('access_status', 'version', 'region', 'confidence',
+                      'limitations', 'rights'):
+            text_field(recheck, field, where)
+        value = text_field(recheck, 'access_date', where)
+        try:
+            accessed = date.fromisoformat(value)
+        except ValueError as error:
+            raise MarketValidationError(f'{where}: invalid access_date') from error
+        require(accessed.isoformat() == value,
+                f'{where}: access_date must use YYYY-MM-DD')
+        require(('claim' in recheck) != ('claims' in recheck),
+                f'{where}: requires exactly one of claim or claims')
+        if 'claim' in recheck:
+            claim_fields(recheck, where)
+        else:
+            text_field(recheck, 'method', where)
+            claims = recheck['claims']
+            require(isinstance(claims, list) and claims,
+                    f'{where}: claims requires a nonempty array')
+            for claim_index, claim in enumerate(claims):
+                claim_fields(claim, f'{where}: claims[{claim_index}]')
+        if 'claims' in recheck or 'reviewed_urls' in recheck:
+            reviewed = recheck.get('reviewed_urls')
+            require(isinstance(reviewed, list) and reviewed,
+                    f'{where}: reviewed_urls requires a nonempty array')
+            for url_index, reviewed_url in enumerate(reviewed):
+                url_label = f'{where}: reviewed_urls[{url_index}]'
+                require(isinstance(reviewed_url, dict),
+                        f'{url_label}: requires an object')
+                for field in ('publisher', 'access_status'):
+                    text_field(reviewed_url, field, url_label)
+                validate_http_url(reviewed_url.get('url'), f'{url_label}: url')
+
+
 def read(name):
     def unique_object(pairs):
         result = {}
@@ -188,6 +252,7 @@ def validate():
             raise MarketValidationError(f'{label}: invalid access_date') from error
         require(accessed.isoformat() == source['access_date'],
                 f'{label}: access_date must use YYYY-MM-DD')
+        validate_source_rechecks(source)
     for competitor in competitors:
         require(set(competitor['source_ids']) <= source_ids, 'market integrity check failed')
         require(competitor['last_verification'] and competitor['limitations'], 'market integrity check failed')

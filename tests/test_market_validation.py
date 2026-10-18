@@ -364,6 +364,27 @@ class MarketValidation(unittest.TestCase):
             self.assert_invalid_source_metadata('access_date', value)
 
     def test_source_metadata_preserves_valid_dates_statuses_and_original_bytes(self):
+        # Complete synthetic rechecks preserve both shapes through their own gate.
+        recheck_metadata = {
+            'access_date': '2026-10-18', 'access_status': 'Synthetic blocked access',
+            'version': 'Unknown; synthetic fixture', 'region': 'Unknown',
+            'confidence': 'Unverified synthetic record',
+            'limitations': 'No source or product assertion is verified',
+            'rights': 'Unknown; no source-use permission established',
+        }
+        claim_metadata = {
+            'publisher': 'Synthetic publisher', 'evidence_class': 'Synthetic fixture',
+            'url': 'https://example.com/synthetic-recheck',
+        }
+        rechecks = [
+            {**recheck_metadata, **claim_metadata,
+             'claim': 'Synthetic retained singular claim'},
+            {**recheck_metadata, 'method': 'Synthetic offline fixture',
+             'reviewed_urls': [{'url': claim_metadata['url'],
+                                'publisher': claim_metadata['publisher'],
+                                'access_status': recheck_metadata['access_status']}],
+             'claims': [{**claim_metadata, 'claim': 'Synthetic retained array claim'}]},
+        ]
         for access_date, status in (('0001-01-01', 'unverified-access-blocked'),
                                     ('1900-02-28', 'partial / manually retained'),
                                     ('2000-02-29', ' retrieved \u2003'),
@@ -371,8 +392,7 @@ class MarketValidation(unittest.TestCase):
             data = deepcopy(self.data)
             data['sources.json'][0].update(
                 access_date=access_date, access_status=status,
-                rechecks=[{'claim': 'Synthetic retained singular claim'},
-                          {'claims': [{'claim': 'Synthetic retained array claim'}]}])
+                rechecks=deepcopy(rechecks))
             for optimized in (False, True):
                 with self.subTest(access_date=access_date, status=status, optimized=optimized):
                     result = self.run_validator(data, optimized)
