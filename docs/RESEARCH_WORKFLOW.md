@@ -36,6 +36,8 @@ python -m pip install -r requirements-research.txt
 python -m unittest discover -s contracts/v1/tests -v
 python -m unittest discover -s tests -v
 python scripts/validate_research.py
+python scripts/validate_market_research.py
+python prompts/mobile/validate_prompts.py
 ```
 
 To inspect one payload separately:
