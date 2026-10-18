@@ -59,10 +59,13 @@ negative and integral-float normalization coverage. The historical estimator
 outputs, pairs, timestamps and their source hashes are unchanged; no external
 estimator or GPU run was repeated to produce this correction.
 
-The transient Planner controls are explicitly author-reported, with no retained
-capture locator or independent corroboration supplied. This limitation is
-carried through the observation, decision note and acceptance map; no independent
-confidence or receiving-owner acceptance is inferred from that report.
+The original 05:57 Planner report remains explicitly author-reported, without an
+original-session capture. A subsequently supplied, separately dated 06:16
+[reviewer receipt](measurements/mr09-estimator-comparison-2026-10-18.md#separate-reviewer-observation--2026-10-18-0616-utc)
+corroborates visible controls at that later time; it does not reproduce the
+earlier session, verify its HTTP 403s, pin deployed code or produce an estimate.
+The original observation JSON and all estimator outputs remain unchanged by
+this receipt; neither report supplies receiving-owner acceptance.
 
 After this correction, Python 3.12.14 passed 21 contract tests and 249 repository
 tests, including all 10 comparison tests; the same 10 comparison tests also passed
