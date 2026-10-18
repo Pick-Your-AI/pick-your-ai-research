@@ -35,6 +35,20 @@ def validate():
     for competitor in competitors:
         require(set(competitor['source_ids']) <= source_ids, 'market integrity check failed')
         require(competitor['last_verification'] and competitor['limitations'], 'market integrity check failed')
+    capability_tests = matrix.get('capability_tests')
+    require(isinstance(capability_tests, dict), 'capability_tests must be an object')
+    require(set(capability_tests) == set(matrix['definitions']),
+            'capability tests must cover exactly the feature definitions')
+    for feature, test in capability_tests.items():
+        require(isinstance(test, dict), f'{feature}: capability test must be an object')
+        for field in ('scenario', 'pass_observable', 'failure_policy'):
+            value = test.get(field)
+            require(isinstance(value, str) and value.strip(),
+                    f'{feature}: capability test requires nonempty {field}')
+        conditions = test.get('required_conditions')
+        require(isinstance(conditions, list) and conditions and
+                all(isinstance(value, str) and value.strip() for value in conditions),
+                f'{feature}: capability test requires nonempty required_conditions')
     pairs = set()
     for cell in matrix['cells']:
         pair = (cell['product_id'], cell['feature'])
