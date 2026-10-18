@@ -106,6 +106,33 @@ class HandoffAuditValidation(unittest.TestCase):
         with self.assertRaisesRegex(HandoffValidationError, 'receipt moved'):
             self.check()
 
+    def test_receipt_cannot_override_its_enclosing_pair(self):
+        source, target = self.ledger[2], self.ledger[1]
+        response = source['responses'].pop()
+        response.update(market_issue=source['market_issue'],
+                        consumer_issue=source['consumer_issue'])
+        target['responses'].append(response)
+        # Preserve coherent status counts so the embedded pair cannot hide a
+        # transfer behind otherwise accurate coverage metadata.
+        from collections import Counter
+        from scripts.validate_handoff_audit import response_status
+        for row in (source, target):
+            row['receiving_review_status'] = response_status(row)
+        counts = dict(Counter(response_status(row) for row in self.ledger))
+        for snapshot in (self.readback, self.audit):
+            snapshot['handoff_coverage']['receiving_review_status_counts'] = counts
+        with self.assertRaisesRegex(HandoffValidationError, 'reserved pair keys'):
+            self.check()
+
+    def test_parent_cannot_list_a_child_without_its_reciprocal_parent(self):
+        parent, child = self.readback['issues'][:2]
+        parent['sub_issues'] = [child['number']]
+        child['parent'] = {'number': parent['number']}
+        self.check()
+        child['parent'] = None
+        with self.assertRaisesRegex(HandoffValidationError, 'parent/sub-issue mismatch'):
+            self.check()
+
     def test_context_cannot_silently_become_current_audit_acceptance(self):
         row = next(r for r in self.ledger if r['market_issue'] == 59)
         row['current_audit_acceptance'] = 'Accepted'

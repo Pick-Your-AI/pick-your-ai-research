@@ -47,6 +47,8 @@ def validate(ledger, readback, audit):
         require(row['receiving_review_status'] == response_status(row),
                 f'{pair}: author-only or absent response promoted to receiving review')
         for response in row.get('responses', []):
+            require(not {'market_issue', 'consumer_issue'} & response.keys(),
+                    f'{pair}: response contains reserved pair keys')
             require(response['role'] in ('receiving_owner', 'author_integration'),
                     f'{pair}: unknown response role')
             if response['role'] == 'receiving_owner':
@@ -58,8 +60,8 @@ def validate(ledger, readback, audit):
                     f'{pair}: incomplete or post-cutoff receipt')
             require('reviewed_commit' in response and response['commit_basis'],
                     f'{pair}: reviewed SHA must be explicit or explicitly unknown')
-            actual_responses.append({'market_issue': pair[0], 'consumer_issue': pair[1],
-                                     **response})
+            actual_responses.append({**response, 'market_issue': pair[0],
+                                     'consumer_issue': pair[1]})
     key = lambda r: (r['market_issue'], r['consumer_issue'], r['url'])
     require(sorted(actual_responses, key=key) ==
             sorted(readback['new_scoped_responses'], key=key),
@@ -80,9 +82,15 @@ def validate(ledger, readback, audit):
                   for row in ledger)
     require(coverage['current_audit_acceptance_pending'] == pending,
             'context response incorrectly counted as current audit acceptance')
-    require(all(issues[n]['parent'] is None or
-                n in issues[issues[n]['parent']['number']]['sub_issues']
-                for n in issues), 'native parent/sub-issue mismatch')
+    for number, issue in issues.items():
+        parent = issue['parent']
+        require(parent is None or (parent['number'] in issues and
+                number in issues[parent['number']]['sub_issues']),
+                'native parent/sub-issue mismatch')
+        require(all(child in issues and issues[child]['parent'] is not None and
+                    issues[child]['parent']['number'] == number
+                    for child in issue['sub_issues']),
+                'native parent/sub-issue mismatch')
     captured_prs = {pr['number'] for pr in readback['pull_requests']}
     require(all(n in captured_prs for row in audit['issues'] for n in row['related_prs']),
             'technical classification references an uncaptured PR')
