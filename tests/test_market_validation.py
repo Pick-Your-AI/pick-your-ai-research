@@ -27,7 +27,11 @@ class MarketValidation(unittest.TestCase):
                                   'last_verification': '2026-10-18', 'limitations': 'Synthetic fixture'}],
             'sources.json': [{'id': 'synthetic-source', 'url': 'https://example.com/synthetic',
                               'access_date': '2026-10-18', 'access_status': 'synthetic'}],
-            'features.json': {'definitions': {'feature': {}}, 'status_semantics': {'Unknown': {}, 'Documented': {}},
+            'features.json': {'definitions': {'feature': {}},
+                              'capability_tests': {'feature': {'scenario': 'Synthetic input',
+                                  'pass_observable': 'Synthetic output',
+                                  'failure_policy': 'Unperformed is Unknown',
+                                  'required_conditions': ['synthetic condition']}}, 'status_semantics': {'Unknown': {}, 'Documented': {}},
                               'cells': [{'product_id': 'synthetic-product', 'feature': 'feature',
                                          'status': 'Unknown', 'evidence_ids': []}]},
             'research-backlog.json': [{'number': 1, 'question': 'Synthetic?', 'owner': 'fixture',
@@ -50,6 +54,32 @@ class MarketValidation(unittest.TestCase):
                 result = self.run_validator(self.data, optimized)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
+
+    def test_capability_test_integrity_in_both_modes(self):
+        mutations = [
+            ('missing tests', None),
+            ('missing feature', {}),
+            ('extra feature', {'extra': deepcopy(self.data['features.json']['capability_tests']['feature'])}),
+            ('non-object test', {'feature': []}),
+        ]
+        baseline = self.data['features.json']['capability_tests']
+        for field in ('scenario', 'pass_observable', 'failure_policy', 'required_conditions'):
+            for value in (None, '', '   ', [], [None]):
+                tests = deepcopy(baseline)
+                tests['feature'][field] = value
+                mutations.append((f'{field}={value!r}', tests))
+        for name, tests in mutations:
+            data = deepcopy(self.data)
+            if tests is None:
+                del data['features.json']['capability_tests']
+            else:
+                data['features.json']['capability_tests'] = tests
+            for optimized in (False, True):
+                with self.subTest(case=name, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
 
     def test_invalid_inputs_fail_in_both_modes(self):
         cases = []

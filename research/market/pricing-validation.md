@@ -68,7 +68,7 @@ Labelled assumptions (A) are hypotheses, not measurements. Arithmetic uses decim
 | HF L4 endpoint, 1 replica | `hf-aws-l4-replica-hour` × A3 | 128.00 | 288.00 | 576.00 | Partial: storage, egress, extra replicas, init time, tax, operator time uncovered |
 | Local GPU, power only | A4 × EIA | 6.97 (48 kWh) | 59.32 (324 kWh) | 207.36 (432 kWh) | **Lower bound only**: hardware capital uncovered (no sourced price), actual tariff, cooling, operator time uncovered |
 
-Reading: at low volume the APIs cost less than an idle-prone dedicated endpoint; at the high band the endpoint is not dominated, but only if A5 holds. The local row cannot be compared to either until hardware capital and the user's actual tariff are sourced.
+Reading: the API token-charge subtotals are below the dedicated endpoint compute subtotal in all three bands, including the high band ($320 for Sonnet and $440 for GPT versus $576 for the endpoint). These partial line items do not establish a complete cost or service ranking: A5 remains unverified, and omitted charges and service differences must be resolved before recommending an option. The local row cannot support a complete cost comparison until hardware capital and the user's actual tariff are sourced.
 
 ### S2 — Fine-tune an 8B model (LoRA/QLoRA) and serve it for 30 days
 

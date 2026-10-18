@@ -84,7 +84,7 @@ The issue lists `supported models`, `input data format` and `export path`. v1 ha
 | `/license` | SPDX identifier where one exists | Apache-2.0, BSD-3-Clause; Unsloth is dual | F2, F14 | Framework license ≠ base-model license; both must be checked |
 | `/spec/methods` | array of enum `sft, lora, qlora, dpo, full_finetune, distillation`, min 1 | see the candidate tables | per row | v1 cannot express GRPO, PPO, KTO, ORPO, RFT, continued pretraining, preference optimisation or DoRA |
 | `/spec/backends` | array of enum `cuda, rocm, oneapi, metal, tpu, cpu, other`, min 1 | see the candidate tables | per row | Managed services have no user-visible backend. `other` hides Trainium and Ascend. Support levels differ by method |
-| `/spec/model_formats` | array of enum `safetensors, gguf, onnx, pytorch, api_only, other` | managed locked services = `api_only` | per row | ONNX output was not confirmed for any candidate. Native GGUF export only in axolotl and unsloth; PEFT LoRA adapters from any framework convert with llama.cpp `convert_lora_to_gguf.py` (F34) |
+| `/spec/model_formats` | array of enum `safetensors, gguf, onnx, pytorch, api_only, other` | managed locked services = `api_only` | per row | Native ONNX output was not confirmed for any candidate; a [conditional downstream conversion route](onnx-export-boundary.md) is documented separately, without an executed tuple. Native GGUF export only in axolotl and unsloth; PEFT LoRA adapters from any framework convert with llama.cpp `convert_lora_to_gguf.py` (F34) |
 | `/spec/distributed_supported` | boolean | true for all self-hosted candidates; not applicable to managed | per row | The boolean cannot distinguish multi-GPU from multi-node (Unsloth multi-node is unknown) |
 | `supported models` (note only) | list of model catalog IDs (→ #6) | summarised per service | per row | Changes often; must be date-stamped |
 | `input data format` (note only) | enum proposal: `chat_messages_jsonl`, `prompt_completion_jsonl`, `preference_jsonl`, `alpaca`, `sharegpt`, `raw_text`, `tokenized_parquet` | see tables | per row | Handed to #32 |
@@ -308,7 +308,7 @@ Not proposed yet:
 | Revenue, MAU and residency are user attestations needed by F-03, F-04, F-07 and F-09. Where are they captured? | #2 / #3 · @tynamite |
 | Policy for "competing model" (F-17): no provider defines it | #40 · @tynamite |
 | Mistral Forge licensing and weight export: not stated publicly; sales-led | #30 · @appletechie |
-| ONNX export support (GGUF is resolved: F34–F38) | #30 · @appletechie; consumed by #33 and #11 |
+| Native ONNX support and exact conversion tuple; [downstream route documented](onnx-export-boundary.md), not reproduced (GGUF is resolved: F34–F38) | #30 · @appletechie; consumed by #33 and #11 |
 | Input data formats per framework and service (see tables) | handoff to #32 · @appletechie |
 | Output artifact formats and portability (adapter vs merged, provider-locked) | handoff to #33 · @appletechie; serving support by #11 · @Mattycodes69 |
 | Distributed training capability and backend list for training sizing | handoff to #31 · @appletechie; accelerator catalog by #10 · @Mattycodes69 |

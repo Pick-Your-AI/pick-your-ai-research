@@ -39,7 +39,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 
 ## Seeds
 
-**Status: inferred — coordinator to confirm.** No artifact on this branch, PR #67 or issue #48 lists the five original seeds explicitly; #47 still lists "the #48 seed-list confirmation" as open. The list below is inferred from the first five catalog entries, the "seed page" wording in the llmfit profile and the risk register. All were re-accessed anonymously on 2026-10-16; robots.txt permitted each path.
+**Operational scope selected 2026-10-18 under delegated engineering authority:** use the five entries below for the bounded #48 seed-coverage review. This resolves the working list, not the undocumented original intent: the earlier inference came from the first five catalog entries, the llmfit profile and the risk register. Selection does not certify verification, operator identity or receiving-owner acceptance. The observations below retain their original 2026-10-16 access date; no fresh site inspection is claimed.
 
 | Seed | Operator (as established) | Site | Repository | Site vs repository boundary |
 | --- | --- | --- | --- | --- |
@@ -102,7 +102,7 @@ These are direct counterexamples to the defensibility hypothesis in [differentia
 
 | Selected | Reason |
 | --- | --- |
-| BenchLM, Harness Bench, llmfit, Local AI planner, Flocci | The five (inferred) seeds; each overlaps an entry step (model choice, harness evaluation, hardware fit, guided stack) |
+| BenchLM, Harness Bench, llmfit, Local AI planner, Flocci | The five operational seeds selected 2026-10-18; each overlaps an entry step (model choice, harness evaluation, hardware fit, guided stack) |
 | ModelFit | Strongest documented hardware-first direct substitute (device/setup/results flow, CLI, MCP) |
 | Artificial Analysis, OpenRouter, Hugging Face, Models.dev | Primary model, provider and price data feeds; integration and rights questions for #41 |
 | Dify, n8n, SkyPilot | Build/deploy substitutes downstream of a recommendation; test export and execution boundaries |

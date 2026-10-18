@@ -65,4 +65,20 @@ The canonical baseline comes from merged [PR #44](https://github.com/Pick-Your-A
 
 ## Closure gates
 
-All three decision records and the T2 summary must be merged through the normal review process. Every required handoff above must have an actual consuming-owner acknowledgement, and all issue acceptance criteria must be satisfied. Until then use `Refs #n`, leave #8–#11 open, and report any Project update limitation explicitly.
+All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff above must have an actual consuming-owner acknowledgement, and all issue acceptance criteria must be satisfied. Until then use `Refs #n`, leave #8–#11 open, and report any Project update limitation explicitly.
+
+
+## Reciprocal engine receipt (2026-10-18)
+
+[@zwright8's delegate accepts #25 -> #11 with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6242698282),
+reviewing main `7acbefbf4e4e700231e88be272bc89e3a73dde15` from that co-owner's scope.
+The interface retains engine/build/plugins/backend, model/tokenizer revisions,
+adapter/base lineage, template/parser, endpoint, request controls, strictness,
+parallel/streaming behavior and decoding mode. Consumer cases distinguish valid
+correlated calls, malformed arguments, unsupported options, incomplete streams,
+schema violations and changed tuples. This is interface acceptance, not evidence
+that those runtime cases ran.
+
+Mattycodes69's co-owner/internal #10 dispositions and #37/#38 receipts remain
+open. Existing #11 -> #25 and #11 -> #33 receipts above retain their original
+direction and scope; this new receipt does not accept other pending rows.
