@@ -39,7 +39,7 @@ The workload profile applies in every deployment mode. Only the examples and dep
   - A field dictionary covering local hardware fit: separate input and output lengths, a quality target, available hardware including CPU-only servers, and network isolation.
   - The workload stored as a profile owned by the build.
   - No silent substitution for unknown answers.
-  - Ten rule proposals, all hypotheses.
+  - Eleven rule proposals, all hypotheses.
 - **Not settled here.** Several design questions are recorded as open contract decisions for #40 and #41 rather than settled in this note. Examples are how unknown answers are represented to the evaluator (CD-1), shared memory pools (CD-2) and per-stage loads (CD-5).
 
 ## User decision
@@ -146,6 +146,7 @@ Open-weight models differ here, even within one family. According to their 2026 
 | `knowledge` | Set of `reference_documents` and/or `structured_lookup`; or exactly `none`; or `unknown` | T3, or a declared alternative per capability (W-R2) |
 | `actions` | `none`, `read_only`, `write` | T4 (W-R3); guardrails for `write` (W-R4) |
 | `customisation` | `none`, `prompt_only`, `fine_tune` | T5 (W-R5) |
+| `memory` | `none`, `session`, `persistent`; or `unknown` | T4 memory (#28) for `persistent`; session history may be application-managed, framework-managed or store-backed (W-R11) |
 
 ## Field dictionary
 
@@ -163,9 +164,11 @@ The proposed location is a `workload` object owned by the build (Recommendation 
 | `knowledge_implementation` | object keyed by capability: `{via: rag \| knowledge_base \| long_context \| tool \| direct_lookup, selection_ids: [IDs], justification: string}` | One entry per capability in `knowledge`; `long_context` and `direct_lookup` need a justification | When `knowledge` has values | User input, reviewed against #7 and #16 | — |
 | `actions` | enum `none`, `read_only`, `write` | — | Always | User input | — |
 | `customisation` | enum `none`, `prompt_only`, `fine_tune` | — | Always | User input | `fine_tuning` value only |
+| `memory` | enum `none`, `session`, `persistent`, `unknown` | `session` means state kept within one conversation; `persistent` means state kept across conversations. `turns` counts requests within a conversation and does not constrain cross-conversation persistence; `unknown` imposes no turn-count constraint | Always | User input | — |
+| `memory_implementation` | `{via: application \| agent_framework \| memory_store, selection_ids: [IDs], justification: string}` | Identifies the implementation satisfying the need; `application` session history requires a justification and no T4 selection. A selection ID alone does not establish memory capabilities | When `memory` is `session` or `persistent` | User implementation declaration and scoped capability evidence, reviewed against #28 and W-R11 | — |
 | `requests` | `{count: integer ≥ 0, period: day \| month}`, unit: requests | — | Always | User input or preset | `requests_per_day` (three copies) |
 | `peak_concurrency` | integer ≥ 1, requests in flight at the service (demand) | Requests, not sequences; expand using the selected decoding configuration, then apply sequence admission in the same serving scope (W-R6). Missing expansion leaves sizing unknown. | Always | User input or preset | `concurrency` / `max_concurrency` |
-| `input_tokens` | `{mean: decimal, max: integer}`, tokens per request | 1 ≤ mean ≤ max; includes history when `turns` is `multi` | Text input | User input; any conversion from words is an Estimate (E6) | `avg_input_tokens`; context policy `requested_context_tokens` (C2) |
+| `input_tokens` | `{mean: decimal, max: integer}`, tokens per request | 1 ≤ mean ≤ max; includes all history and memory injected into this request, including persistent memory in a single-turn conversation | Text input | User input; any conversion from words is an Estimate (E6) | `avg_input_tokens`; context policy `requested_context_tokens` (C2) |
 | `output_tokens` | `{mean: decimal, max: integer}` or `not_applicable` | 0 ≤ mean ≤ max; counts every generated token, including reasoning or thinking tokens, whether or not they are shown | Whenever generated tokens are expected, whatever the task; `not_applicable` only when the serving operation generates no tokens (see below) | User input | `avg_output_tokens`; context policy `reserved_output_tokens` (C2) |
 | `native_input_units`, `native_output_units` | `{images_per_request, audio_seconds, video_seconds}`, each as `{mean: decimal, max}`; `max` is an integer for image counts and a decimal for durations | All values ≥ 0; mean ≤ max | Non-text input or output | User input; token conversion is per model (#7) | — |
 | `tokenizer_assumption` | string: a tokenizer or model ID, or `model_native` | — | When counts are in tokens | User input | — |
@@ -223,7 +226,7 @@ Both `unknown` and `missing` must evaluate as unresolved, giving the outcome `un
 **Policy:**
 1. **No substitution.** Filtering never assumes a value. Filters that need an unresolved input are not applied, and results say "not checked against <input>".
 2. **Compatibility rules** (W-R1, W-R6, W-R7, W-R8, W-R10) are written so that an unresolved input makes the applicability or assertion unresolved, giving `unknown`. They don't treat "answered" as a precondition.
-3. **Recommendation rules** (W-R2 to W-R5) only recommend. Their applicability is "the answer is known and …", so an unresolved answer makes them `skipped`. This is a deliberate exception, needed so that they don't nag. CD-1 must let the evaluator distinguish "not relevant", "not yet known" and "not selected".
+3. **Recommendation rules** (W-R2 to W-R5 and W-R11) only recommend. Their applicability is "the answer is known and …", so an unresolved answer makes them `skipped`. This is a deliberate exception, needed so that they don't nag. CD-1 must let the evaluator distinguish "not relevant", "not yet known" and "not selected".
 4. **Interface:** `missing` prompts the builder to ask; `unknown` is listed as an open assumption.
 
 **Load presets** are order-of-magnitude bands. The boundaries are design choices, to be calibrated with #10 and #39:
@@ -294,7 +297,7 @@ None of these is an independent measurement, and none sets a general ordering of
 | `turns` | Context growth | #7 | — |
 | `interaction_pattern` | Latency vs throughput sizing; cost | #10, #11, #39 | `batch` value; no rule |
 | `modalities_*`, `output_format` | Pipeline filter (W-R1) | #6, #13 | Modalities; no rule |
-| `knowledge`, `actions`, `customisation` | Recommend T3, T4, T5 (W-R2 to W-R5) | #13, #16, #25–#28, #30–#33, #35 | — |
+| `knowledge`, `actions`, `memory`, `customisation` | Recommend T3, T4, T5 (W-R2 to W-R5, W-R11) | #13, #16, #25–#28, #30–#33, #35 | — |
 | `requests`, `peak_concurrency`, lengths | Memory, device count, cost; #10/#11 expand request demand using decoding settings and apply admission in sequence units for the same serving scope (W-R6) | #10, #11, #39 | No rule |
 | `latency_targets`, `throughput_target`, `completion_window_hours` | Model, quantization, device and engine choice; monitoring; evaluation | #6, #10, #11, #36, #38 | `latency_budget_ms`; no rule |
 | `quality_target` | Which artifacts qualify, once comparable evidence exists | #36 | — |
@@ -308,7 +311,7 @@ None of these is an independent measurement, and none sets a general ordering of
 
 ## Activation rules for T3, T4 and T5 (Proposal)
 
-Selections remain authoritative, as in v1 (C4). The answers recommend tiers, and W-R2 to W-R5 report gaps as warnings. Each knowledge capability is satisfied separately:
+Selections remain authoritative, as in v1 (C4). The answers recommend tiers, and W-R2 to W-R5 and W-R11 report gaps as warnings. Each knowledge capability is satisfied separately:
 
 | Need | Satisfied by |
 | --- | --- |
@@ -316,6 +319,8 @@ Selections remain authoritative, as in v1 (C4). The answers recommend tiers, and
 | `knowledge` includes `structured_lookup` | A `rag_pipeline` or `tool` selection, or a `direct_lookup` implementation with a justification |
 | `actions` is `read_only` or `write` | An `agent_framework`, `tool` or `mcp_server` |
 | `actions` is `write` | Also a `guardrail` |
+| `memory` is `persistent` | An enabled `memory_store` with `memory_type: long_term` and an eligible non-ephemeral backing (W-R11); a selection alone is insufficient |
+| `memory` is `session` | Declared application-managed conversation history, or documented session state in the selected framework/store, identified by `memory_implementation` (W-R11) |
 | `customisation` is `fine_tune` | A `fine_tuned_model` or `training_framework` |
 
 When an answer is `none`, the tier is collapsed (the user can still add it). When an answer is unresolved, the tier is shown as optional and the rules are `skipped`.
@@ -347,6 +352,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 | W-R8 | Air-gapped builds have no external connections | `error` | `block` |
 | W-R9 | Precision preference respected | `warning` | `defer` |
 | W-R10 | Quality target backed by comparable evidence | `error` | `review` |
+| W-R11 | Memory need is met | `warning` | `defer` |
 
 **Migration.** These rules depend on new build-level fields and on CD-1. Whether that is additive or a replacement, and which contract version it needs, is for #40 to decide (CD-7).
 
@@ -557,6 +563,33 @@ Handoff to #11: document decoding mode, live sequence expansion, admission units
   - Unknown: only vendor claims exist, or the dataset revisions differ.
   - Skipped: no target.
 
+### W-R11 Memory need is met
+
+- **Roles and pointers:** build `/workload/memory`, `/workload/memory_implementation`; enabled selections of kind `memory_store`, `agent_framework`, and their scoped capability evidence.
+- **Applies when:** `memory` is known and is `session` or `persistent`.
+- **Assertion:** for `persistent`, at least one identified, enabled `memory_store` has `memory_type: long_term` and a non-ephemeral backing. Match #28's persistence proposal: an `in_memory` backing does not establish cross-session persistence. A documented persistent configuration of an in-memory product needs separate #9/#28 evidence and a versioned representation through #40; do not infer it from the product name. For `session`, the declaration identifies application-managed history with a justification, or the selected framework/store has documented conversation-state support. The presence of an `agent_framework` alone does not prove it retains history.
+- **Missing data and outcomes:** `skipped` if `memory` is `none` or unresolved, following the recommendation policy. With a known need, missing implementation or capability evidence gives `unknown` (`memory_implementation_unknown`); a known absent implementation gives `fail` (`memory_implementation_missing`); a fully documented incompatible implementation gives `fail` (`memory_capability_mismatch`). Among several identified stores, one eligible match suffices; if none matches but a candidate's capability is unresolved, the result is `unknown`, not `fail` or `pass`.
+- **Turn-count independence:** `turns` describes one conversation. A single-request conversation can load user preferences or application state from previous conversations. Neither `persistent` nor `unknown` is contradictory with `turns: single`; no cross-conversation memory requirement is inferred from `turns` either.
+- **Remediation:** declare application-managed session history, select and evidence a suitable framework/store, or correct the stated need. Do not add a T4 selection solely to represent history already managed by the application.
+- **Dependencies:** #25, [#28's memory taxonomy and persistence proposal](../T4-agents-integrations/agent-memory.md); CD-1 and CD-13, because a build may select several memory stores. Injected memory tokens count inside `input_tokens.max` (#7, #28) for every request, including single-turn conversations, never on top of it. These remain research proposals, not new frozen-v1 fields or executable rules.
+- **Synthetic decision cases** (capability checks, not measured product behavior):
+
+  | Need and implementation | Outcome | Reason |
+  | --- | --- | --- |
+  | `persistent`, `turns: single`, identified long-term relational store | `pass` | Cross-conversation state is independent of turns within a conversation |
+  | `persistent`, only a documented `session` store | `fail` | `memory_capability_mismatch` |
+  | `persistent`, only a documented `working` store | `fail` | `memory_capability_mismatch` |
+  | `persistent`, long-term store backed only by `in_memory` | `fail` | `memory_capability_mismatch`; persistence is not established |
+  | `persistent`, selected store's memory type or backing unknown | `unknown` | `memory_implementation_unknown` |
+  | `persistent`, a known session-only store plus an unresolved candidate | `unknown` | The unresolved candidate could satisfy the need |
+  | `persistent`, a session-only store plus an eligible long-term store | `pass` | One identified eligible store satisfies the need |
+  | `persistent`, explicitly no implementation | `fail` | `memory_implementation_missing` |
+  | `session`, declared application-managed history with justification, no T4 selection | `pass` | The application retains and resends the conversation history |
+  | `session`, framework with documented session-state support | `pass` | Capability evidence, rather than selection kind, establishes support |
+  | `session`, framework selected but history support unrecorded | `unknown` | `memory_implementation_unknown` |
+  | `unknown`, `turns: single` | `skipped` | Need is unresolved; no contradiction or persistence inference |
+  | `none` | `skipped` | No memory need was stated |
+
 ## Open contract decisions
 
 These are recorded as decisions for #40 and #41 rather than solved here. The full list is in the companion note; the ones this note depends on are:
@@ -574,6 +607,7 @@ These are recorded as decisions for #40 and #41 rather than solved here. The ful
 | CD-9 | The jurisdiction hierarchy, containment rules, and named groups | #41 |
 | CD-11 | Context budget semantics: shared vs separate input and output limits, a maximum-input field, and route-specific overrides. Raised on #88; it decides how `input_tokens` and `output_tokens` map for separate-budget routes. | #40, with #7 |
 | CD-12 | Organisation-level attestations, answered once and reused across conditions: establishment jurisdiction, EU market placement, lawful basis for training data, revenue and monthly active users. Raised in T5's review of #81. | #40, with #30, #31, #32 |
+| CD-13 | Rules over several selections of one kind: a quantifier over all enabled selections, and semantic rejection of duplicate `primary` roles before evaluation, so "not selected", "not relevant" and "not yet known" are not collapsed into `skipped`. Raised by T4 on #40. | #40 |
 
 ## Pricing and capacity
 
@@ -586,7 +620,7 @@ This note sets no prices. Budgets combine one-off hardware caps with operating c
 3. **Store the workload inputs once.** v1 repeats them three times with different names (C1, C2, C5).
 4. **Adopt the answer-state policy,** and implement it through CD-1 rather than by assuming the current evaluator supports it.
 5. **Keep one primary workload per build** (`cardinality: "one"`, C8). Several workloads sharing a machine are left open (Q7).
-6. **Adopt W-R1 to W-R10 after #40 review,** together with CD-1 to CD-9, CD-11 and CD-12.
+6. **Adopt W-R1 to W-R11 after #40 review,** together with CD-1 to CD-9 and CD-11 to CD-13.
 
 ## Structured artifacts
 
@@ -606,7 +640,7 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q6 | Which protocols and metrics can a `quality_target` use? | #36 | #11 |
 | Q7 | How should several workloads sharing one machine be represented? | #42 | #10 |
 
-Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #30, #31, #32, #33, #35, #36, #39, #40, #41, #42, #62. #30, #31 and #32 consume the deferred organisation attestations (CD-12).
+Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #28, #30, #31, #32, #33, #35, #36, #39, #40, #41, #42, #62. #30, #31 and #32 consume the deferred organisation attestations (CD-12).
 
 ## Acceptance criteria coverage
 
