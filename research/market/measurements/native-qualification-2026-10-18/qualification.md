@@ -162,13 +162,13 @@ large source archive or customer content enters Git.
 ## Current disposition and reproducibility
 
 The historical `total-memory-setup-2026-10-18/setup.json` and actual CPU estimate
-remain immutable, including their original unqualified/disabled status. The
-corrected offline checker freezes **all** reviewed setup and preparation fields
-except their observation timestamps, with canonical JSON hashes that distinguish
-booleans, integers and floats. It now rejects the runtime/configuration,
-preparation exit/version/argv and type-alias mutations raised in the #259 reviews.
-Updating the approved tuple requires an explicit reviewed code/pin change;
-qualification evidence is added separately rather than rewriting history.
+remain immutable, including their original unqualified/disabled status. Current
+main already contains the #259 correction binding reviewed runtime/configuration,
+preparation exit/version/argv and exact JSON scalar types. Integration retains
+that checker and its seventeen tests unchanged, including its conservative
+reduced future-cap rule. The intermediate full-record hash checker from this
+branch is superseded by the merged correction, not claimed as the final design.
+Qualification evidence is added separately rather than rewriting history.
 
 Reproduction inputs are the manifest-pinned archives/GGUF, external headers at
 runtime commit620d2225cc436ab0b001e3200e590e3b286ef9ab, the recorded MSVC x64

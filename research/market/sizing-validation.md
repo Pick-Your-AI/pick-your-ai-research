@@ -27,7 +27,7 @@ spare-capacity authorization. No paid compute or new device was used.
 | Dense observations | D1–D5: five configurations, three fresh-process runs each; separate allocated/reserved counters | #61 co-owners and coordinator review the bounded observations and provenance caveats |
 | MoE variations | Three supplemental GM1 runs; pinned OLMoE matrix remains unexecuted | @Mattycodes69/@appletechie identify an authorized envelope for remaining cells and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
 | Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
-| Comparable estimator errors | Zero matching competitor/runtime pairs | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
+| Comparable estimator errors | Zero whole-runtime pairs; 12 bounded native KV component checks in the dated comparison | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
 | Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
 | ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
 
@@ -159,6 +159,35 @@ preserve all input bytes on preparation errors and reproduce the committed
 15-run summary unchanged. No error pair, estimator tolerance or additional
 architecture coverage is created by this validation correction.
 
+### Ambiguous observation JSON (2026-10-18)
+
+An offline synthetic check of the summarizer at
+[`2ecfa005`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/2ecfa005a93b3944e6832bdb6a168d535e5efca6/scripts/mr09_summarize.py)
+found that repeated object keys silently kept their last value. A conflicting
+peak counter was accepted, then the earlier value was removed by sanitization.
+The reader now rejects duplicate keys at every object depth before interpreting
+either successful or failed observations. Identical repeated values and escaped
+spellings of the same key are also ambiguous and rejected. Regression fixtures
+check that earlier inputs, the invalid record and an existing summary stay
+byte-for-byte unchanged when intake fails, including with `--sanitize`.
+The historical dense and supplemental GM1 instruments and observations are
+unchanged; their existing summary/integrity checks remain required. This checks
+representation integrity and supplies no new measurement or source validation.
+
+### Ambiguous NVIDIA CSV columns (2026-10-18)
+
+An offline synthetic check of the summarizer at
+[`31d7dfc6`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/31d7dfc615d38cea963efcda563d3370100f5a72/scripts/mr09_summarize.py)
+found that duplicate CSV column names could hide conflicting NVIDIA driver
+identities and incorrectly combine two successful records into one cohort.
+Column names are now trimmed and checked for duplicates or empty names before
+any row is converted to a dictionary. Identical repeated values, quoted or
+whitespace-varied names and duplicate optional columns are also rejected.
+Synthetic regressions retain both input records and an existing summary on
+rejection, with and without sanitization; uniquely named reordered columns
+remain valid. Historical instruments, observations and summaries are unchanged.
+This validates input representation, not the truth of reported device identity.
+
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
 - [x] Vary context cache precision and concurrency (dense D1–D5; MoE variation remains a gap)
@@ -278,7 +307,31 @@ whole-process peak pairs at zero. Three serial initialization snapshots are
 proposed only after qualification; no inference, paid compute, device expansion,
 ResourceEstimate, decision tolerance or scope waiver is claimed.
 
-## Comparison target and error discipline
+## Executed estimator comparisons — 2026-10-18
+
+The [dated comparison record](measurements/mr09-estimator-comparison-2026-10-18.md)
+adds six actual llmfit v1.1.17 plans, one pinned ModelFit CLI engine audit and an
+author-reported Local AI Planner control inspection, with a separately dated
+visible-control reviewer receipt in that record. Its [hashed output/pair ledger](measurements/estimator-comparison-2026-10-18/comparison.json)
+checks **12 native two-byte KV component pairs** from D1/D2 prefill/terminal
+snapshots: all signed/absolute/relative differences are zero. These are four
+deterministic estimates paired to six existing processes, two snapshots each;
+they establish storage arithmetic agreement only. FP16 estimates and BF16 tensors
+share a two-byte storage width; their numerical/runtime behavior is not equated.
+Only llmfit's KV field is converted from GiB, as established by its pinned code.
+
+**Whole-runtime/peak-allocated pairs remain zero**, with no numerical total-memory
+error range or accepted tolerance. llmfit's hardware requirement is a different
+quantity; ModelFit has no exact 135M match or workload/runtime arguments; the
+author's planner report supplies no matching estimate; the later reviewer receipt
+corroborates visible controls only. Two q4_0
+plans are retained as mismatches with Quanto INT4, with no invented error.
+D3 active2, D4/D5 cache layout, MoE and multi-GPU comparisons remain open. No new
+GPU run, weights download, ResourceEstimate or scope waiver is supplied here.
+[PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) merged separately at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`; its GM1
+observations remain a separate cohort and are not used in this estimator comparison.
+
+## Historical comparison target and error discipline — 2026-10-16
 
 The existing PR #75 sizing arithmetic at
 `9e66622a4b2698a9305274f05da9c15ae5d90b8c` remains a Qwen-specific,

@@ -1,0 +1,9 @@
+{
+  "id": "mr09-modelfit-v153-engine",
+  "uri": "https://raw.githubusercontent.com/Wecko-ai/modelfit/8c1df5f00e8f21edd0f0c7b4a12230b838e0b433/src/engine.mjs",
+  "version": "1.5.3; commit 8c1df5f00e8f21edd0f0c7b4a12230b838e0b433",
+  "sha256": "d6cdbde9a75cc160609bb0bced91d82dac0ec874316ccc7fa1f799c9feaa83f1",
+  "access": "Public download accessed 2026-10-18; external task copies only, removed after execution; no credentials required.",
+  "description": "Unmodified official CLI engine executed with its pinned bundled dataset; this identifies the CLI port, not a website release.",
+  "rights": "Wecko-ai/modelfit MIT code; no engine source redistributed."
+}

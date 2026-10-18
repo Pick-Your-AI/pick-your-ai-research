@@ -1,6 +1,7 @@
 """Synthetic future-log fixtures and real CPU-estimator setup integrity; no GPU."""
 import copy
 from fractions import Fraction
+import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -56,6 +57,25 @@ class NativeMeasurementSemantics(unittest.TestCase):
             with self.subTest(measured=measured), self.assertRaises(ValueError): MODULE.error_interval(110,measured)
 
 class PreparedSetupIntegrity(unittest.TestCase):
+    def reject_setup_mutations(self, mutations):
+        """Keep every input byte intact when an altered proposal is rejected."""
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            for name in ("setup.json", "preparation.json", "gguf-parser-estimate.json"):
+                shutil.copyfile(DIRECTORY/name, directory/name)
+            original = json.loads((DIRECTORY/"setup.json").read_text())
+            for path, value in mutations:
+                changed = copy.deepcopy(original)
+                target = changed
+                for key in path[:-1]:
+                    target = target[key]
+                target[path[-1]] = value
+                (directory/"setup.json").write_text(json.dumps(changed))
+                before = {p.name: p.read_bytes() for p in directory.iterdir()}
+                with self.subTest(path=path, value=value), self.assertRaises(ValueError):
+                    MODULE.validate_setup(directory)
+                self.assertEqual(before, {p.name: p.read_bytes() for p in directory.iterdir()})
+
     def test_real_cpu_only_setup_remains_unexecuted(self):
         result = MODULE.validate_setup(DIRECTORY)
         self.assertEqual(result["estimated_managed_device_bytes"],288499968)
@@ -86,46 +106,137 @@ class PreparedSetupIntegrity(unittest.TestCase):
             (directory/"setup.json").write_text(json.dumps(original))
             with self.assertRaises(ValueError): MODULE.validate_setup(directory)
 
-    def test_every_declared_setup_binding_is_frozen_with_exact_types(self):
-        original = json.loads((DIRECTORY/"setup.json").read_text())
-        def leaves(value, trail=()):
-            if isinstance(value,dict):
-                for k,v in value.items():
-                    if k != "prepared_utc": yield from leaves(v,trail+(k,))
-            elif isinstance(value,list):
-                for k,v in enumerate(value): yield from leaves(v,trail+(k,))
-            else: yield trail,value
-        with tempfile.TemporaryDirectory() as temp:
-            directory = Path(temp)
-            for name in ("setup.json","preparation.json","gguf-parser-estimate.json"):
-                shutil.copyfile(DIRECTORY/name,directory/name)
-            for trail,value in leaves(original):
-                changed = copy.deepcopy(original)
-                cursor = changed
-                for key in trail[:-1]: cursor = cursor[key]
-                replacement = (not value if type(value) is bool else
-                               True if type(value) is int and value == 1 else
-                               value+1 if type(value) is int else
-                               "synthetic-binding-drift")
-                cursor[trail[-1]] = replacement
-                (directory/"setup.json").write_text(json.dumps(changed))
-                with self.subTest(trail=trail),self.assertRaises(ValueError): MODULE.validate_setup(directory)
+    def test_runtime_workload_and_target_bindings_reject_changes(self):
+        self.reject_setup_mutations([
+            (("runtime", "offload_layers"), 0), (("runtime", "device"), "CPU"),
+            (("runtime", "device"), "CUDA1"), (("runtime", "name"), "another/runtime"),
+            (("runtime", "release"), "b11668"), (("runtime", "commit"), "0"*40),
+            (("runtime", "planned_archive"), "another-build.zip"),
+            (("runtime", "planned_archive_sha256"), "0"*64),
+            (("runtime", "planned_cudart_archive"), "another-cudart.zip"),
+            (("runtime", "planned_cudart_sha256"), "0"*64),
+            (("runtime", "archive_verification"), "synthetic claim of local execution"),
+            (("configuration", "mmap"), False), (("configuration", "main_gpu"), 1),
+            (("configuration", "warmup"), True), (("configuration", "generation_forwards"), 32),
+            (("configuration", "tensor_split"), [0, 1]),
+            (("configuration", "logical_batch"), 512), (("configuration", "physical_batch"), 128),
+            (("configuration", "kv_key"), "q8_0"), (("configuration", "kv_value"), "q8_0"),
+            (("estimator", "name"), "another/estimator"), (("estimator", "version"), "v0.26.3"),
+            (("estimator", "commit"), "0"*40),
+            (("artifact", "repo"), "another/model"), (("artifact", "revision"), "0"*40),
+            (("artifact", "file"), "SmolLM2-135M-Instruct-Q4_K_M.gguf"),
+            (("comparison", "estimator_path"), "estimate.items[0].ram.nonuma"),
+            (("comparison", "runtime_field"), "fit_memory_breakdown.rows[kind=host].self"),
+            (("comparison", "runtime_source_unit"), "bytes"),
+            (("comparison", "includes"), ["whole-process peak"]),
+            (("comparison", "excludes"), []),
+            (("envelope", "preparation_min_gpu_free_mib"), 1),
+            (("envelope", "spare_local_only"), False), (("envelope", "paid_compute"), True),
+        ])
 
-    def test_preparation_exit_version_and_actual_command_are_bound(self):
-        original = json.loads((DIRECTORY/"preparation.json").read_text())
+    def test_numeric_boolean_aliases_rejected_throughout_bound_groups(self):
+        original = json.loads((DIRECTORY/"setup.json").read_text())
+        mutations = []
+        def visit(value, path):
+            if type(value) is dict:
+                for key, item in value.items(): visit(item, (*path, key))
+            elif type(value) is list:
+                for index, item in enumerate(value): visit(item, (*path, index))
+            elif type(value) is bool:
+                mutations.append((path, int(value)))
+            elif type(value) is int:
+                mutations.append((path, float(value)))
+                if value in (0, 1): mutations.append((path, bool(value)))
+        for group in ("estimator", "runtime", "configuration", "comparison", "envelope"):
+            visit(original[group], (group,))
+        self.reject_setup_mutations(mutations)
+
+    def test_missing_or_undeclared_runtime_controls_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             directory = Path(temp)
-            for name in ("setup.json","preparation.json","gguf-parser-estimate.json"):
-                shutil.copyfile(DIRECTORY/name,directory/name)
-            mutations = []
-            for key,value in (("exit_code",1),("exit_code",False),("estimator_version","synthetic-wrong-version")):
-                changed=copy.deepcopy(original);changed[key]=value;mutations.append(changed)
-            changed=copy.deepcopy(original)
-            changed["argv"][changed["argv"].index("--cache-type-k")+1]="q4_0"
-            mutations.append(changed)
-            for changed in mutations:
+            for name in ("setup.json", "preparation.json", "gguf-parser-estimate.json"):
+                shutil.copyfile(DIRECTORY/name, directory/name)
+            original = json.loads((DIRECTORY/"setup.json").read_text())
+            for group in ("runtime", "configuration"):
+                for key in original[group]:
+                    changed = copy.deepcopy(original)
+                    del changed[group][key]
+                    (directory/"setup.json").write_text(json.dumps(changed))
+                    with self.subTest(group=group, key=key), self.assertRaises(ValueError):
+                        MODULE.validate_setup(directory)
+        self.reject_setup_mutations([(("runtime", "rpc_server"), "synthetic.invalid"),
+                                     (("configuration", "kqv_offload"), False)])
+
+    def test_matching_receipt_edits_cannot_replace_reviewed_artifacts(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            shutil.copyfile(DIRECTORY/"gguf-parser-estimate.json", directory/"gguf-parser-estimate.json")
+            for group, key, receipt_key, value in (
+                ("artifact", "sha256", "artifact_sha256", "0"*64),
+                ("artifact", "bytes", "artifact_bytes", 270885953),
+                ("estimator", "windows_exe_sha256", "estimator_exe_sha256", "0"*64),
+            ):
+                setup = json.loads((DIRECTORY/"setup.json").read_text())
+                preparation = json.loads((DIRECTORY/"preparation.json").read_text())
+                setup[group][key] = preparation[receipt_key] = value
+                (directory/"setup.json").write_text(json.dumps(setup))
+                (directory/"preparation.json").write_text(json.dumps(preparation))
+                with self.subTest(key=key), self.assertRaises(ValueError): MODULE.validate_setup(directory)
+
+    def test_recorded_command_version_and_exit_status_are_bound(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            for name in ("setup.json", "preparation.json", "gguf-parser-estimate.json"):
+                shutil.copyfile(DIRECTORY/name, directory/name)
+            original = json.loads((DIRECTORY/"preparation.json").read_text())
+            argv = copy.deepcopy(original["argv"])
+            argv[argv.index("--gpu-layers") + 1] = "0"
+            for key, value in (("argv", argv), ("exit_code", False), ("exit_code", 1),
+                               ("estimator_version", "gguf-parser.exe version v0.26.3"),
+                               ("artifact_bytes", 270885952.0), ("runtime_execution", "success")):
+                changed = copy.deepcopy(original)
+                changed[key] = value
                 (directory/"preparation.json").write_text(json.dumps(changed))
-                with self.assertRaises(ValueError): MODULE.validate_setup(directory)
+                with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                    MODULE.validate_setup(directory)
+
+    def test_rehashed_effective_output_still_requires_exact_scalar_types(self):
+        mutations = [(("estimate", "noMMap"), 0), (("estimate", "flashAttention"), 0),
+                     (("metadata", "fileSize"), 270885952.0),
+                     (("architecture", "blockCount"), 30.0),
+                     (("estimate", "items", 0, "offloadLayers"), 31.0),
+                     (("estimate", "items", 0, "fullOffloaded"), 1),
+                     (("estimate", "items", 0, "vrams", 0, "position"), False),
+                     (("estimate", "items", 0, "vrams", 0, "remote"), 0),
+                     (("estimate", "items", 0, "vrams", 0, "handleOutputLayer"), 1)]
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            shutil.copyfile(DIRECTORY/"setup.json", directory/"setup.json")
+            original = json.loads((DIRECTORY/"gguf-parser-estimate.json").read_text())
+            preparation = json.loads((DIRECTORY/"preparation.json").read_text())
+            for path, value in mutations:
+                changed = copy.deepcopy(original)
+                target = changed
+                for key in path[:-1]: target = target[key]
+                target[path[-1]] = value
+                raw_path = directory/"gguf-parser-estimate.json"
+                raw_path.write_text(json.dumps(changed))
+                preparation["estimate_sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+                (directory/"preparation.json").write_text(json.dumps(preparation))
+                with self.subTest(path=path), self.assertRaises(ValueError): MODULE.validate_setup(directory)
+
+    def test_a_lower_future_cap_remains_an_unqualified_proposal(self):
+        with tempfile.TemporaryDirectory() as temp:
+            directory = Path(temp)
+            for name in ("setup.json", "preparation.json", "gguf-parser-estimate.json"):
+                shutil.copyfile(DIRECTORY/name, directory/name)
+            setup = json.loads((directory/"setup.json").read_text())
+            setup["envelope"]["future_managed_allocation_cap_bytes"] = 2**30
+            (directory/"setup.json").write_text(json.dumps(setup))
+            result = MODULE.validate_setup(directory)
+            self.assertIs(result["execution_enabled"], False)
+            self.assertEqual(result["runtime_observations"], 0)
+            self.assertEqual(result["outstanding_gates"], setup["qualification_gates"])
 
     def test_duplicate_nonfinite_inputs_rejected(self):
         with tempfile.TemporaryDirectory() as temp:

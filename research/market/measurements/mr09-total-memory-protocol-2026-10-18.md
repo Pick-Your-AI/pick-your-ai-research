@@ -1,4 +1,4 @@
-# MR-09 total-memory setup proposal â€” 2026-10-18
+# MR-09 total-memory setup proposal — 2026-10-18
 
 Refs #61. **Historical preparation: GPU execution was not qualified or enabled.** This protocol
 was written after CPU estimator preparation and before any native GPU run.
@@ -33,7 +33,7 @@ output-reservation matching and accepted estimator comparisons remain open.
 The estimator reads tensor sizes/types from that GGUF, rather than a model-name
 catalog entry or nominal parameter count. The native runtime must load **the
 same hashed file**. The F16 GGUF may include other tensor types; do not substitute
-`parameters Ã— 2`. Its metadata reports llama architecture, 30 blocks, 3 KV heads,
+`parameters × 2`. Its metadata reports llama architecture, 30 blocks, 3 KV heads,
 64-dimensional keys, and 134,515,008 parameters. The converter lineage to the
 historical HF safetensors revision is unverified: this is a new artifact/runtime
 cohort, not a rerun or pooled extension of those measurements. Publisher/GGUF
@@ -152,16 +152,18 @@ The offline checker intentionally reports `execution_enabled: false`.
 
 ## Units, rounding and pairing gates
 
-The pinned runtime JSON logger **floors each nonnegative self/model/context/compute buffer value to integer MiB**. Negative signed `unaccounted` residuals instead truncate toward zero under C++ signed division; they are not target buffer totals. The flooring applies even for
-structured output. For a reported `self = s`, the actual integer-byte value is
-in `[s Ã— 2^20, (s+1) Ã— 2^20 âˆ’ 1]`. Do not call `s Ã— 2^20` an exact measurement,
+The pinned runtime JSON logger **floors nonnegative buffer values to integer
+MiB**, even for structured output. Its signed `unaccounted` residual uses C++
+integer division, which truncates a negative value toward zero; that residual
+does not enter this process-buffer comparison. For a reported `self = s`, the actual integer-byte value is
+in `[s × 2^20, (s+1) × 2^20 − 1]`. Do not call `s × 2^20` an exact measurement,
 or reconstruct `self` by adding independently rounded model/context/compute.
 An exact-byte exporter would require a separately hashed source/build and
 qualification; no upstream metric is silently relabelled here.
 
 Given positive actual byte interval `[L,U]` and estimate `E`, signed error is
-`[Eâˆ’U,Eâˆ’L]`; signed relative percent is
-`[100Ã—(Eâˆ’U)/U,100Ã—(Eâˆ’L)/L]`. Absolute error can include zero when the estimate is
+`[E−U,E−L]`; signed relative percent is
+`[100×(E−U)/U,100×(E−L)/L]`. Absolute error can include zero when the estimate is
 inside the interval. These are measurement-resolution intervals for a future
 observation, not experimental or universal error bounds. No approved tolerance
 exists. The [offline helper](../../../scripts/mr09_total_memory_setup.py) retains
@@ -181,6 +183,23 @@ Run the **offline** prepared-record check from the repository root:
 ```powershell
 python scripts/mr09_total_memory_setup.py
 ```
+
+The prepared-record checker binds the reviewed estimator/runtime source and
+archive identities, exact GGUF repository/revision/file/size/hash, every declared
+runtime and workload control, recorded estimator command, target fields/units
+and scope, and the existing preparation guards. It compares exact JSON types,
+including numeric array members: `true`, `1` and `1.0` are not interchangeable.
+Missing or additional estimator/runtime/configuration/comparison fields require
+review; matching edits to a preparation receipt cannot silently replace the
+reviewed artifact identity. Effective estimator fields and placement must agree
+with those bindings. The proposed future cap may decrease, but cannot increase
+or enable execution. Synthetic mutations exercise the rejected alternatives;
+the original CPU output, preparation, preflight and cleanup bytes are unchanged.
+
+These checks establish local record consistency, not the truth of source-check
+or local-verification annotations, completeness of the qualification decisions,
+fresh hardware admission, downloaded runtime identity or physical execution.
+Those evidence and receiving-owner gates remain independently reviewable.
 
 ## Primary evidence and confidence
 

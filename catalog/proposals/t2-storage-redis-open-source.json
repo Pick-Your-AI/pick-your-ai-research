@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "storage",
+  "tier": "T2",
+  "status": "active",
+  "billing_class": "unknown",
+  "id": "redis-open-source",
+  "name": "Redis Open Source database software",
+  "version": "8.10.2",
+  "description": "Pinned Redis Open Source software identity with primary in-memory backing. Persistence, eviction, host, region, capacity, encryption, application compatibility and operating costs require separate selection evidence.",
+  "spec": {
+    "storage_type": "in_memory"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/README.md",
+      "checked_at": "2026-10-18T06:04:43Z",
+      "verification_status": "unverified",
+      "notes": "The pinned publisher README says Redis keeps data primarily in memory and separates Redis Open Source from Redis Software and Redis Cloud. This supports storage_type=in_memory for the software identity, not a managed offering, no-persistence guarantee, selected memory backend or measured performance."
+    },
+    {
+      "source_uri": "https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/src/version.h",
+      "checked_at": "2026-10-18T06:04:43Z",
+      "verification_status": "unverified",
+      "notes": "REDIS_VERSION is 8.10.2; release tag 8.10.2 resolved to this commit when checked. The released-version identity does not establish the installed build, its configured modules, a support guarantee or a successful application/backend tuple."
+    },
+    {
+      "source_uri": "https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/LICENSE.txt",
+      "checked_at": "2026-10-18T06:04:43Z",
+      "verification_status": "unverified",
+      "notes": "The pinned licence header states RSALv2, SSPLv1 or AGPLv3 alternatives for Redis 8 code and separately identifies the older BSD-licensed releases. No licence alternative, unrestricted commercial-use boolean or hosted-service permission is selected here. Applicable notices, bundled components and intended use require separate review. No operating rate is supplied; billing_class remains unknown."
+    }
+  ],
+  "updated_at": "2026-10-18T06:04:43Z"
+}

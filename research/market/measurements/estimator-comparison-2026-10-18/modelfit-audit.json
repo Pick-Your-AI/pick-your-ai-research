@@ -1,0 +1,16 @@
+{
+  "input": {
+    "deviceType": "PC",
+    "chip": "NVIDIA GeForce RTX 5070 Ti",
+    "ramGb": 17.094475776,
+    "priority": "Balanced",
+    "useCase": "General"
+  },
+  "ratio": 0.7,
+  "budget": 11.9661330432,
+  "datasetRecords": 156,
+  "exactModelMatches": [],
+  "relatedNames": [
+    "SmolLM2 360M"
+  ]
+}
