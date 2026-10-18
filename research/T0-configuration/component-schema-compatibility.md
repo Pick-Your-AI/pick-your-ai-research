@@ -542,7 +542,7 @@ marker, merge independent support dimensions, or resolve catalog sources.
 
 | Eligible evidence for a requested value | Proposed member result |
 | --- | --- |
-| Documented supported member, without an equal-rank opposite claim | `pass`, evidence still `unverified`; exhaustiveness is unnecessary for this positive claim |
+| Documented supported member, without an equal-rank opposite claim | `pass`; `unverified` only when the used cohort has separately qualified checked-only provenance as specified below. Exhaustiveness is unnecessary for this positive claim |
 | Explicit unsupported statement, without an equal-rank opposite claim | `fail`; an exhaustive inventory is unnecessary for this negative claim |
 | Absent from a known list whose scoped source is exhaustive | `fail` |
 | Absent from an unmarked/non-exhaustive list, or the list itself is missing | `unknown`; a missing list is not a known empty exhaustive list |
@@ -599,9 +599,10 @@ separate. Frozen v1 and #42's prerequisite are unchanged.
 
 **Selected research design:** bind the corrected membership reducer through
 closed `x_t0_support_query` / `x_t0_support_result` envelopes at proposal version
-`cd3-0.2`. This is an explicit successor research candidate to historical
-`cd3-0.1`, not a reinterpretation or implicit migration of retained old bytes.
-The synthetic query version advances from `0.1.0` to `0.2.0`, so its scoped CD-1
+`cd3-0.3`. This is an explicit successor research candidate to historical
+`cd3-0.1` and the [requested-completeness correction in `cd3-0.2`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/349),
+not a reinterpretation or implicit migration of retained old bytes.
+The synthetic query version advances from `0.2.0` to `0.3.0`, so its scoped CD-1
 paths change too. The unchanged claim cohort retains its own `0.1.0` version.
 This reader rejects old or unsupported proposal versions; a current query
 cannot reuse answers stored under the prior query-version paths.
@@ -626,7 +627,8 @@ claim that the normalized-mechanics receipt also adopted this new wire format.
 | `supported` / `unsupported` | Provided unique string lists, possibly empty, or unresolved CD-1 states. The former is a positive inventory; the latter records explicit equal-rank negative claims in this cohort |
 | `exhaustive` | Provided Boolean or unresolved CD-1 state, separate from source eligibility. Only a known positive inventory plus eligible `true` completeness can support an absence-based negative |
 | Caller qualification | Exact Boolean or unresolved selection activation, plus four independently qualified input groups: applicability, requested values, requested completeness and cohort. Each omitted qualification is unresolved for that invocation; an answer's `source` label cannot qualify itself. Requested-completeness qualification is necessary only for the verdicts that require a complete requested set |
-| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context including all four qualifications, all six operands' state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. The existing `unverified` label behavior is retained with its unresolved policy boundary below; severity stays on the versioned query |
+| Checked-only cohort provenance | Separate caller-established `cohort_checked_only: true / false / null` for this exact scoped/versioned cohort. Only `true` supplies checked-only provenance; false or omitted/null supplies no grade. Eligibility, source strings, hashes and result flags cannot establish this fact |
+| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context including all four eligibility qualifications and checked-only provenance, all six operands' state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. `evidence_label` is `unverified` only for actually used, eligible, checked-only cohort evidence; otherwise it is null. Severity stays on the versioned query |
 
 **The negative-claim readiness decision is explicit.** The accepted reducer
 requires a concrete set of explicit negative claims. This encoding therefore
@@ -651,7 +653,8 @@ positive/negative claims remain disputed and unknown. ANY preserves
 its other unresolved rows when one member passes; ALL preserves them when a
 known counterexample fails. The committed synthetic ANY example contains one
 documented member, one unmarked omission and one equal-rank dispute. Its pass
-is scoped membership only, with `disputed: true` and `unverified` preserved.
+is scoped membership only, with `disputed: true` preserved and no evidence grade
+asserted (`evidence_label: null`).
 The example explicitly records a synthetic complete-request fact under its new
 query-version path; that marker is not inferred from the frozen catalog or
 claim lists. An unresolved or ineligible requested-completeness marker does not
@@ -673,10 +676,12 @@ digest guards reject terminal controls across the complete value.
 
 **Result consumption:** schema validation checks shape only. `verify_result`
 recomputes from the retained query/answers and the **caller's** selected scope,
-activation and eligibility inputs, then compares every reported field. A
+activation, eligibility and checked-only provenance inputs, then compares every reported field. A
 self-reported eligible flag, changed requested-completeness state/value, changed
 source/version/hash, removed disputed row or changed outcome cannot validate
 itself, even when the mutation leaves the membership verdict unchanged.
+Changing the result's provenance flag or grade cannot qualify that result;
+the verifier never obtains its caller context from the reported context.
 Result JSON formatting may vary;
 the original query and answer byte identities cannot. Returned data is detached
 from the reader. This is a consistency check, not a signature or evidence grade.
@@ -691,12 +696,40 @@ This format can name canonical API, managed or self-hosted component scopes,
 but a kind, digest or matching label proves no joint tuple support, activation,
 rights, currency, residency, runtime fit or independent verification.
 
-**Remaining evidence-label constraint:** completeness constraint 5 in the
-owner disposition is not resolved by this correction. The prototype's existing
-constant `unverified` label remains even where no check has run; that behavior
-must not be claimed as accepted evidence grading. Source/date/rank admission,
-real rule adapters (including `rule.precision.engine` and
-`rule.engine.model.format`) and frozen-rule adoption remain separate work.
+**Evidence-label correction (2026-10-18):** the earlier `cd3-0.2` correction left
+completeness constraint 5 in the owner disposition open. Against accepted main
+`4f1c22bac91783a00384b3037bb64b040250c072`, four regression methods produced 13
+failing subcases: the constant `unverified` label was attached to disabled,
+unresolved, missing-request, ineligible and merely eligible cases without a
+checked-only provenance fact. The separate [label regressions](../../tests/test_support_evidence_labels.py)
+retain these counterexamples and exercise the corrected boundary.
+
+The normalized reducer now receives `Evidence.checked_only` separately from
+eligibility; the binding receives the same fact as caller-only
+`cohort_checked_only`. This is a qualified input from the caller's actual #41
+review of that exact cohort, not an assertion that a field or fixture performs
+source checking. Only a true qualification **and actual use of eligible cohort
+evidence** can attach `unverified`. Skipped, unresolved-activation/scope,
+missing/empty-request and ineligible cases have no label. A missing positive
+inventory with no relevant explicit negative claim remains ungraded even when
+the caller supplied true. A provided unmarked inventory, exhaustive absence,
+documented member or explicit/disputed claim can carry the scoped checked-only
+label; unknown and disputed findings still retain their own reasons.
+
+Null means this prototype establishes no evidence grade; it never implies
+independent verification or a different grade. The checked-only fact does not
+change membership outcomes, findings, completeness, disputes or fixed severity.
+An answer's source string, an extra answer field or a result's own context cannot
+establish it. Each verification recomputes against the caller's separately
+supplied qualification, including when changing the grade leaves the outcome
+unchanged. Arbitrary grade strings, including `verified`, and non-Boolean
+qualification values are rejected. The prototype does not implement stronger
+grades, authenticate the caller or perform the external evidence review.
+
+This supplies the bounded label mechanic requested by constraint 5. Source/date/
+rank admission, real rule adapters (including `rule.precision.engine` and
+`rule.engine.model.format`), affected-owner adoption and frozen-rule adoption
+remain separate work.
 
 This bounded correction changes the existing test-only CD-3 reducer, binding,
 fixtures and regression cases. It leaves the accepted CD-1 normalizer,
@@ -953,6 +986,75 @@ The `all_enabled` reader and its schema below remain unchanged. Conditional
 requirements, real activation resolution, the disabled-alternative decision,
 structured wire rejections, CD-1/CD-6 binding and affected-owner adoption remain
 separate. Frozen v1 and #42's substantive #40 prerequisite are unchanged.
+
+### CD-13 structured identity rejection proposal (2026-10-18)
+
+Constraint 3 in the [#40 mechanics disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a reason-coded rejection result. Three actual synthetic probes of the
+accepted `79960b7` reducer produce a plain `ValueError`: duplicate selection IDs,
+two enabled selections sharing a role, and a disabled alternative sharing that
+role. All three correctly reject before any predicate. The missing piece is a
+machine-readable rejection boundary, not a change to those identity decisions.
+
+The [explicit result boundary](../../tests/selection_result_prototype.py),
+[candidate result schema](../../tests/fixtures/selection-result.schema.json) and
+[synthetic regressions](../../tests/test_selection_result.py) propose
+`cd13-result-0.1`. The caller must select this exact version; there is no implicit
+version, older-result reinterpretation or migration. The envelope explicitly
+pins `identity_policy: strict_build_wide`. This is a separate test-only proposal
+over normalized Python selections and a rule, not adoption of a final wire,
+Build reader, ruleset or native adapter.
+
+| Boundary result | Meaning |
+| --- | --- |
+| `status: rejected`, `phase: identity_preflight`, `reason_code: duplicate_selection_id` | One normalized selection ID appears more than once, including across kinds or disabled entries; the diagnostic retains that exact ID |
+| `status: rejected`, `phase: identity_preflight`, `reason_code: ambiguous_selection_role` | More than one selection has the same kind and role under the strict build-wide policy; the diagnostic retains that exact kind/role pair |
+| `status: evaluated` with the existing rule result | Identity preflight completed and the unchanged universal reducer returned its fixed severity, outcome, reason and individually attributed findings |
+
+A rejection retains the supplied rule ID and its fixed severity but has **no
+rule outcome or findings**. It is not a compatibility failure, an unknown
+evidence finding or an inapplicability skip. The two envelope branches reject
+extra fields and cannot combine a rejection with an evaluated result. The
+schema defines the proposed shape only: it does not authenticate a result or
+prove that its reported reason follows from any retained input.
+
+The shared preflight now raises a typed `IdentityPreflightError` carrying its
+reason and conflicting identity. It remains a `ValueError` subclass and keeps
+the exact original message text for existing Python callers. Identity checks,
+their order and the first encountered rejection are unchanged. This proposal
+does not promise an exhaustive conflict list or a canonical first conflict when
+several independent defects are reordered. Disabled and unrelated-kind entries
+still participate; roles remain scoped to kind. The separately reserved
+enabled-role policy needs its own explicit selection and review and cannot
+silently change this result version.
+
+Only the preflight call is inside the rejection handler. Rule evaluation runs
+outside it. A callback's `ValueError`, even one deliberately using the new typed
+exception, remains an execution error; a non-normalized predicate return still
+raises. No exception message or partially accumulated finding is emitted as a
+result. The boundary checks its Python argument shape, normalized identity text,
+exact Boolean activation and fixed severity before preflight. Unsupported
+versions and malformed Python calls remain API errors, not identity findings.
+This bounded shape check supplies no canonical Build/schema/reference validation,
+selection inventory completeness, source eligibility or truth of a callback.
+Those remain independently established caller preconditions.
+
+For valid inputs, every applicability/assertion truth pair, empty or disabled
+scope, all-inapplicable scope, counterexample and unresolved row retains the
+original reducer's result. Findings retain stable selection-ID order. Inputs
+are not rewritten, and returned documents do not share mutable findings across
+calls. The required-presence mode and existing typed binding retain their
+current APIs and policy; required absence is still distinct from universal
+empty-scope skipping.
+
+The regression cases exercise both rejection codes, disabled/other-kind
+ambiguity, all activation pairs and input orders, callback isolation, strict
+version selection, malformed Python arguments and mutually exclusive schema
+branches. Existing callers' exception compatibility and required-presence
+behavior have explicit controls. These are synthetic mechanics checks only.
+Frozen v1 is unchanged. A full untrusted-input reader, adopted result wire,
+source-bound verification, affected-owner integration and #42's substantive
+#40 prerequisite remain separate.
 
 ### CD-13 typed selection binding proposal (2026-10-18)
 
