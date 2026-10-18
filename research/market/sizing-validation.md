@@ -260,6 +260,26 @@ number is a guarantee of future allocation success. No other process is
 evicted or altered. Per-phase CUDA-reported free values are observations, not
 additional headroom or demanded KV memory.
 
+## Proposed comparison specification — 2026-10-18
+
+The [comparison specification](measurements/mr09-comparison-spec-2026-10-18.md)
+proposes a supplemental initialization managed-buffer track before a versioned
+estimator correction. It retains the original third-party peak-memory question,
+with zero accepted total-buffer/whole-process pairs. The proposed primary
+reference is native CUDA0 self with its MiB rounding interval, corroborated by
+the exact default-buffer admission ledger; host readback, graph output capacity
+and output-device computation are separate controls. Existing three native
+trials are a known development case, not held-out validation.
+
+The proposal defines fixed artifact/runtime/placement/stage bindings, admission
+and difference-reporting rules, prospective H1-H3 validation cells, and five
+explicit owner decisions. No correction, new prediction, runtime execution,
+accepted tolerance or scope waiver is supplied. #7's prior exclusion-gate receipt
+and #267's publication approval do not accept the prospective candidate or
+comparison target; their scopes are preserved. See the specification for the
+remaining #61/#7/#10/#11/coordinator dispositions. Frozen v1 and every historical
+CPU/native evidence file remain unchanged.
+
 ## Native initialization qualification — 2026-10-18
 
 The [native cap/CUDA/capture continuation](measurements/native-qualification-2026-10-18/qualification.md)
