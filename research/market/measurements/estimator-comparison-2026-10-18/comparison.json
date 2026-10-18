@@ -1,0 +1,330 @@
+{
+  "classification": "real estimator execution against existing real runtime records; bounded component comparison",
+  "started_utc": "2026-10-18T05:56:48.448553+00:00",
+  "script_sha256": "d1c57ed56d75e18ba7dba6b5c589816c8d7ea321c4f1ebc5b184cb09ba160e9b",
+  "artifact_sha256": {
+    "llmfit.exe": "3c5c783dd85cd78d2f91c9ac2809967a47b13708a9cc72112ed4a02c9d6cc981",
+    "engine.mjs": "d6cdbde9a75cc160609bb0bced91d82dac0ec874316ccc7fa1f799c9feaa83f1",
+    "data/models.json": "e8d88ff38cffa51cfc84ec7c3f80017580835ba06d31d4e936876903dfa523a6",
+    "hf_models.json": "49d3ec213f38a18e7e3495cfe8d3e64e136db4b26e68aad851afc35498de0a16"
+  },
+  "catalog_geometry": {
+    "parameters_raw": 134515008,
+    "num_hidden_layers": 30,
+    "num_key_value_heads": 3,
+    "head_dim": 64,
+    "format": "gguf",
+    "quantization": "Q4_K_M"
+  },
+  "llmfit_version": "llmfit 1.1.17",
+  "node_version": "v25.9.0",
+  "estimator_executions": [
+    {
+      "file": "llmfit-256-fp16.json",
+      "sha256": "70f25f545b4637303cc8adca786f86769136f4b1fb2406ce15b14012afd3782f",
+      "argv": [
+        "$LLMFIT",
+        "--no-dashboard",
+        "plan",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "--context",
+        "256",
+        "--quant",
+        "BF16",
+        "--kv-quant",
+        "fp16",
+        "--json"
+      ],
+      "exit_code": 0,
+      "whole_runtime_disposition": "mismatch: planning requirement, unpinned artifact/runtime"
+    },
+    {
+      "file": "llmfit-288-fp16.json",
+      "sha256": "4795d70c969bb006961a27b7c46bf526bc703c42a40dfef11b542d6c3a048abf",
+      "argv": [
+        "$LLMFIT",
+        "--no-dashboard",
+        "plan",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "--context",
+        "288",
+        "--quant",
+        "BF16",
+        "--kv-quant",
+        "fp16",
+        "--json"
+      ],
+      "exit_code": 0,
+      "whole_runtime_disposition": "mismatch: planning requirement, unpinned artifact/runtime"
+    },
+    {
+      "file": "llmfit-2048-fp16.json",
+      "sha256": "724a826858228e68d1568be2610f8b4cdd37482f9fec65c7c751dfa882110bd4",
+      "argv": [
+        "$LLMFIT",
+        "--no-dashboard",
+        "plan",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "--context",
+        "2048",
+        "--quant",
+        "BF16",
+        "--kv-quant",
+        "fp16",
+        "--json"
+      ],
+      "exit_code": 0,
+      "whole_runtime_disposition": "mismatch: planning requirement, unpinned artifact/runtime"
+    },
+    {
+      "file": "llmfit-2080-fp16.json",
+      "sha256": "b234004f99fcf13ea5070503105fd47b79a42554a0cfeb1a16583f52ee78c0e3",
+      "argv": [
+        "$LLMFIT",
+        "--no-dashboard",
+        "plan",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "--context",
+        "2080",
+        "--quant",
+        "BF16",
+        "--kv-quant",
+        "fp16",
+        "--json"
+      ],
+      "exit_code": 0,
+      "whole_runtime_disposition": "mismatch: planning requirement, unpinned artifact/runtime"
+    },
+    {
+      "file": "llmfit-2048-q4_0.json",
+      "sha256": "b5a3500a129f34bf004bc7529dd7a146cb51c6fd57a5b06bed4d4697c1935a2c",
+      "argv": [
+        "$LLMFIT",
+        "--no-dashboard",
+        "plan",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "--context",
+        "2048",
+        "--quant",
+        "BF16",
+        "--kv-quant",
+        "q4_0",
+        "--json"
+      ],
+      "exit_code": 0,
+      "whole_runtime_disposition": "mismatch: planning requirement, unpinned artifact/runtime; q4_0 is not Quanto INT4"
+    },
+    {
+      "file": "llmfit-2080-q4_0.json",
+      "sha256": "ae0949ec67ad54a5a38d67e7fc1a8ad8c0b2d498d08af98b01d452343c14d209",
+      "argv": [
+        "$LLMFIT",
+        "--no-dashboard",
+        "plan",
+        "HuggingFaceTB/SmolLM2-135M-Instruct",
+        "--context",
+        "2080",
+        "--quant",
+        "BF16",
+        "--kv-quant",
+        "q4_0",
+        "--json"
+      ],
+      "exit_code": 0,
+      "whole_runtime_disposition": "mismatch: planning requirement, unpinned artifact/runtime; q4_0 is not Quanto INT4"
+    }
+  ],
+  "component_pairs": [
+    {
+      "point": "prefill",
+      "context": 256,
+      "estimated_payload_bytes": 5898240,
+      "measured_payload_bytes": 5898240,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D1-r1.json",
+      "measurement_sha256": "468dd086831b4dcedd6657c11c64d7fd4a5ec840455ac75c2d4600edf5166ed5",
+      "estimator_file": "llmfit-256-fp16.json"
+    },
+    {
+      "point": "terminal",
+      "context": 288,
+      "estimated_payload_bytes": 6635520,
+      "measured_payload_bytes": 6635520,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D1-r1.json",
+      "measurement_sha256": "468dd086831b4dcedd6657c11c64d7fd4a5ec840455ac75c2d4600edf5166ed5",
+      "estimator_file": "llmfit-288-fp16.json"
+    },
+    {
+      "point": "prefill",
+      "context": 256,
+      "estimated_payload_bytes": 5898240,
+      "measured_payload_bytes": 5898240,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D1-r2.json",
+      "measurement_sha256": "99b5ba2874baa98699be2ce08baf924a0886a636528d95666ca22fee8e3d4585",
+      "estimator_file": "llmfit-256-fp16.json"
+    },
+    {
+      "point": "terminal",
+      "context": 288,
+      "estimated_payload_bytes": 6635520,
+      "measured_payload_bytes": 6635520,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D1-r2.json",
+      "measurement_sha256": "99b5ba2874baa98699be2ce08baf924a0886a636528d95666ca22fee8e3d4585",
+      "estimator_file": "llmfit-288-fp16.json"
+    },
+    {
+      "point": "prefill",
+      "context": 256,
+      "estimated_payload_bytes": 5898240,
+      "measured_payload_bytes": 5898240,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D1-r3.json",
+      "measurement_sha256": "c3ed189fd2f664fb44df9d853a7f97be01b7e617558704ed7c1b7ab26726150f",
+      "estimator_file": "llmfit-256-fp16.json"
+    },
+    {
+      "point": "terminal",
+      "context": 288,
+      "estimated_payload_bytes": 6635520,
+      "measured_payload_bytes": 6635520,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D1-r3.json",
+      "measurement_sha256": "c3ed189fd2f664fb44df9d853a7f97be01b7e617558704ed7c1b7ab26726150f",
+      "estimator_file": "llmfit-288-fp16.json"
+    },
+    {
+      "point": "prefill",
+      "context": 2048,
+      "estimated_payload_bytes": 47185920,
+      "measured_payload_bytes": 47185920,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D2-r1.json",
+      "measurement_sha256": "741695e94eec7005955bc2d4693e46a8ba1269a0b0f7613d8432c12d84807c41",
+      "estimator_file": "llmfit-2048-fp16.json"
+    },
+    {
+      "point": "terminal",
+      "context": 2080,
+      "estimated_payload_bytes": 47923200,
+      "measured_payload_bytes": 47923200,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D2-r1.json",
+      "measurement_sha256": "741695e94eec7005955bc2d4693e46a8ba1269a0b0f7613d8432c12d84807c41",
+      "estimator_file": "llmfit-2080-fp16.json"
+    },
+    {
+      "point": "prefill",
+      "context": 2048,
+      "estimated_payload_bytes": 47185920,
+      "measured_payload_bytes": 47185920,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D2-r2.json",
+      "measurement_sha256": "37703acee09e718c4643a92381f71cd077b19884496876369fd348896eac005c",
+      "estimator_file": "llmfit-2048-fp16.json"
+    },
+    {
+      "point": "terminal",
+      "context": 2080,
+      "estimated_payload_bytes": 47923200,
+      "measured_payload_bytes": 47923200,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D2-r2.json",
+      "measurement_sha256": "37703acee09e718c4643a92381f71cd077b19884496876369fd348896eac005c",
+      "estimator_file": "llmfit-2080-fp16.json"
+    },
+    {
+      "point": "prefill",
+      "context": 2048,
+      "estimated_payload_bytes": 47185920,
+      "measured_payload_bytes": 47185920,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D2-r3.json",
+      "measurement_sha256": "315f85d93818022a1e9690233b041924cda0369639e934cb753245c83c1d5476",
+      "estimator_file": "llmfit-2048-fp16.json"
+    },
+    {
+      "point": "terminal",
+      "context": 2080,
+      "estimated_payload_bytes": 47923200,
+      "measured_payload_bytes": 47923200,
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0,
+      "quantity": "native two-byte full-attention KV tensor payload only",
+      "scope": "storage-width/layout check; FP16 estimate versus BF16 tensors; no whole-runtime pair",
+      "measurement_file": "mr09-D2-r3.json",
+      "measurement_sha256": "315f85d93818022a1e9690233b041924cda0369639e934cb753245c83c1d5476",
+      "estimator_file": "llmfit-2080-fp16.json"
+    }
+  ],
+  "whole_runtime_pairs": 0,
+  "approved_tolerance": null,
+  "fit_verdict": "unavailable; quantities/runtime do not match",
+  "modelfit": {
+    "file": "modelfit-audit.json",
+    "sha256": "dd6322c68832f49ee5d6aed919216b1c6991fdccb0bc0690fe412b5040cd6d83",
+    "status": "missing_inputs_or_model",
+    "limits": [
+      "no exact catalog model match",
+      "API has no artifact revision, runtime, context, cache layout or admitted concurrency arguments"
+    ],
+    "engine_argv": [
+      "$NODE",
+      "--input-type=module",
+      "-e",
+      "NODE_AUDIT in recorded script",
+      "$ARTIFACT_DIR/engine.mjs",
+      "recorded driver_total_bytes / 1e9"
+    ]
+  },
+  "component_pair_count": 12,
+  "independent_workload_cells": 2,
+  "finished_utc": "2026-10-18T05:57:11.794399+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/workload/network": {"state": "unknown"},
+      "/workload/requests": {
+        "state": "provided",
+        "value": {"count": 0, "period": "day"},
+        "source": "preset:synthetic-zero-demand"
+      },
+      "/workload/actions": {"state": "provided", "value": "none", "source": "user"},
+      "/workload/budgets": {"state": "missing"},
+      "/workload/organization": {"state": "withheld"},
+      "/workload/output_tokens": {"state": "not_applicable"},
+      "/synthetic/a~1b~0c": {"state": "provided", "value": false},
+      "/synthetic/literal_label": {"state": "provided", "value": "unknown"},
+      "/synthetic/empty_requirements": {"state": "provided", "value": []}
+    }
+  }
+}

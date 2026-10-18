@@ -1,6 +1,7 @@
 """Check snapshot consistency and scoped handoff attribution, never evidence acceptance."""
 from collections import Counter
 import json
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +14,30 @@ class HandoffValidationError(ValueError):
 def require(condition, message):
     if not condition:
         raise HandoffValidationError(message)
+
+
+def read_json(path):
+    """Reject ambiguous object keys and non-finite numbers before audit indexing."""
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result,
+                    f'{path.name}: duplicate JSON object key: {key!r}')
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise HandoffValidationError(f'{path.name}: non-finite JSON number: {value}')
+
+    def finite_float(value):
+        number = float(value)
+        require(math.isfinite(number),
+                f'{path.name}: JSON number exceeds finite numeric range')
+        return number
+
+    return json.loads(path.read_text(encoding='utf-8'),
+                      object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
 
 
 def response_status(row):
@@ -106,7 +131,7 @@ def validate(ledger, readback, audit):
 
 def main():
     base = ROOT / 'research' / 'market'
-    load = lambda name: json.loads((base / name).read_text(encoding='utf-8'))
+    load = lambda name: read_json(base / name)
     coverage = validate(load('handoffs.json'), load('handoff-audit-readback.json'),
                         load('audit.json'))
     print(f'Handoff audit integrity OK: {coverage["total_rows"]} rows; '

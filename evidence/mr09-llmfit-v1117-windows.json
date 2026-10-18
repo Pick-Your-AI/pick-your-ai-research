@@ -1,0 +1,9 @@
+{
+  "id": "mr09-llmfit-v1117-windows",
+  "uri": "https://github.com/AlexsJones/llmfit/releases/download/v1.1.17/llmfit-v1.1.17-x86_64-pc-windows-msvc.zip",
+  "version": "v1.1.17; commit 9781270c1cd907971ce071517041edb55702b3ff",
+  "sha256": "661b6ea57d835f681fbabcf3366649ff681d0081267fd3a05db254e67af6073f",
+  "access": "Public download accessed 2026-10-18; external task copies only, removed after execution; no credentials required.",
+  "description": "Official Windows release archive, downloaded and SHA-256 checked against its published .sha256 sidecar; executable identity also recorded in comparison ledger.",
+  "rights": "AlexsJones llmfit MIT code; license remains in release archive; no binary/source archive redistributed."
+}

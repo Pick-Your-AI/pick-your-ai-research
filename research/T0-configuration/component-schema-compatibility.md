@@ -101,6 +101,85 @@ The [CD-7 synthetic fixtures](../../tests/fixtures/t0-migration.json) and [proje
 7. **Applicability is per component.** Rules key on the component's deployment mode (operator and capacity, #81), not the build-level `deployment_mode`.
 8. **`on_unknown`:** `review` for evidence-dependent rules; `block` only where proceeding is unsafe (for example air-gap isolation, W-R8); `defer` for recommendations.
 
+### CD-1 concrete answer encoding and normalization experiment (2026-10-18)
+
+The [#81 answer-state policy](workload-use-case.md#unknown-and-missing-answers-proposal)
+already distinguishes `provided`, `unknown` and `missing`. Its compatibility
+and recommendation rules deliberately handle unresolved inputs differently.
+The #42 [reviewed draft](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114)
+also needs `withheld`. This experiment chooses a concrete candidate encoding
+for those requirements and for an explicit `not_applicable` answer. It does
+not release a successor contract or claim that those owners adopted this shape.
+
+**Selected design:** a versioned, discriminated answer map in the synthetic
+`x_t0_answer_states` extension, with `proposal_version: "cd1-0.1"`. Each key is
+a non-root JSON Pointer naming a field in the experimental answer tree. The
+[schema](../../tests/fixtures/t0-answer-states.schema.json),
+[synthetic example](../../tests/fixtures/t0-answer-states.json) and
+[normalizer](../../tests/t0_answer_state_prototype.py) live under `tests/`, as
+the pre-release migration boundary requires. These paths do not resolve real
+catalog items or change the frozen BuildSnapshot shape.
+
+| State | Wire members | Normalized meaning |
+| --- | --- | --- |
+| `provided` | Required `state`, `value`; optional nonempty `source` | A stated value, validated against the requested field's local schema before a predicate receives it. `preset:<name>` retains editable-assumption attribution, not independent verification |
+| `unknown` | `state` only | Explicitly unresolved answer; no replacement value |
+| `missing` | `state` only | No recorded answer in this experiment; the interface can ask for it. Absence of a path has the same normalized state, without claiming why a historical v1 value was absent |
+| `withheld` | `state` only | Deliberately unavailable; retained as distinct from an unanswered question |
+| `not_applicable` | `state` only | Declared absence of a value in this field's scope. It does not itself establish that every dependent rule is inapplicable |
+
+A tagged value avoids interpreting a user's literal string `"unknown"` as a
+state. Field validation still rejects that string where, for example, the
+network enum allows only known network modes. Zero, false, empty arrays and
+empty strings remain provided when their field schema permits them. Explicit
+provided null is valid only for a nullable field; it never substitutes for an
+unknown numeric, boolean or enum answer. Bare sentinel strings/null cannot
+stand in for an answer record.
+
+An indexed representation keeps answer metadata out of ordinary domain
+objects; an object-valued answer can itself contain a field named `state`
+without being recursively reinterpreted as metadata. Compared with wrapping
+every nested domain field, the index also permits a single withheld or unknown
+parent answer to cover its descendants. Overlapping parent/child declarations
+are rejected: a provided parent cannot conceal a withheld child, or vice versa.
+Partially disclosed objects must use separate leaf answers. A provided parent
+can supply a nested object/array value; absent members or indices become
+`missing`. Malformed pointer/index syntax and scalar traversal are errors.
+Duplicate JSON keys and nonfinite numbers are rejected before normalization.
+
+**Rule boundary:** compatibility predicates receive an unresolved result for
+all non-provided states, including unknown applicability. Recommendation
+rules explicitly test the known-answer gate specified in #81 and therefore
+skip unresolved needs. A known false applicability predicate still skips.
+No selected component remains CD-13's distinct empty selection scope; it is
+not a sixth answer state. The answer's original state/path remains available
+alongside the selection findings so these explanations are not collapsed.
+Severity, evidence eligibility and selection activation remain separate.
+
+The [15 executable cases](../../tests/test_t0_answer_states.py) cover nested
+and escaped paths, array boundaries, parent withholding, explicit false/zero,
+field-type rejection before predicates, malformed/duplicate/nonfinite inputs,
+read isolation and compatibility/recommendation behavior through the CD-13
+experiment. They reproduce frozen v1's literal-unknown comparison and verify
+unchanged historical findings when the synthetic extension is present. No
+original build bytes, frozen evaluator, measured artifact or receiving receipt
+is modified.
+
+Primary syntax references inspected **2026-10-18**:
+[RFC 6901, sections 3–4 and 7](https://www.rfc-editor.org/rfc/rfc6901) defines
+pointer token escaping, traversal and application-specific error handling;
+[JSON Schema draft 2020-12 validation](https://json-schema.org/draft/2020-12/json-schema-validation)
+defines the field-validation vocabulary used in the local fixture. The
+answer states, non-root restriction, overlap rejection and missing-value policy
+are project design choices, not requirements attributed to either source.
+
+Remaining integration is concrete: #40/#2/#3/#42 review this exact encoding;
+CD-3 binds eligible evidence; CD-6/CD-13 bind real selection/reference paths;
+CD-7 provides original/successor reader dispatch, migration and version locks.
+The final schema/generator/ruleset, full field registry and affected-owner
+handoffs remain separate successor-release work. #42/#114's recorded
+prerequisite is unchanged by this synthetic normalization experiment.
+
 ### CD-3 synthetic support-membership experiment (2026-10-18)
 
 The [normalized prototype](../../tests/support_membership_prototype.py) and

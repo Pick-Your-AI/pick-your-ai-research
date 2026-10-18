@@ -63,13 +63,26 @@ def intake_json(text):
                       parse_constant=reject_constant, parse_float=finite_float)
 
 
+def locator_parts(uri):
+    """Check original locator syntax without normalizing away malformed input."""
+    if not isinstance(uri, str) or not uri or any(
+            char.isspace() or ord(char) < 0x20 or ord(char) == 0x7f for char in uri):
+        raise ValueError('locator needs nonempty text without whitespace or control characters')
+    value = urlsplit(uri)
+    # urlsplit defers nonnumeric and out-of-range port validation to this property.
+    _ = value.port
+    if value.username is not None or value.password is not None:
+        raise ValueError('locator must not contain user information')
+    return value
+
+
 def public_source(uri):
     try:
-        value = urlsplit(uri)
+        value = locator_parts(uri)
         host = (value.hostname or '').removesuffix('.')
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
-        return value.scheme in {'http', 'https'} and bool(host) and not reserved and not value.username and not value.password
+        return value.scheme in {'http', 'https'} and bool(host) and not reserved
     except (ValueError, TypeError):
         return False
 
@@ -152,8 +165,8 @@ def validate_tree(root=ROOT):
             errors.append(f"{manifest['id']}: duplicate evidence artifact ID")
         artifact_ids.add(manifest['id'])
         try:
-            uri = urlsplit(manifest['uri'])
-            valid = uri.scheme in {'https', 's3', 'gs'} and uri.hostname and not (uri.username or uri.password or uri.query or uri.fragment)
+            uri = locator_parts(manifest['uri'])
+            valid = uri.scheme in {'https', 's3', 'gs'} and uri.hostname and not (uri.query or uri.fragment)
         except ValueError:
             valid = False
         if not valid:

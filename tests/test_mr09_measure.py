@@ -297,6 +297,59 @@ class MeasurementArithmeticTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "duplicate repetition"):
                 SUMMARY.summarize(root)
 
+    def test_summary_rejects_duplicate_json_keys_before_any_publication(self):
+        cases = (
+            ('"status": "success"', '"status": "OOM_prefill", "status": "success"'),
+            ('"status": "success"', '"\\u0073tatus": "OOM_prefill", "status": "success"'),
+            ('"revision": "synthetic-model-revision"',
+             '"revision": "synthetic-model-revision", "revision": "synthetic-model-revision"'),
+            ('"peak_allocated_bytes": 10',
+             '"peak_allocated_bytes": 9999, "peak_allocated_bytes": 10'),
+            ('"sha256": "' + "a" * 64 + '"',
+             '"sha256": "' + "c" * 64 + '", "sha256": "' + "a" * 64 + '"'),
+            ('"unused": 1', '"unused": 2, "unused": 1'),
+        )
+        for old, replacement in cases:
+            for sanitize in (False, True):
+                with self.subTest(replacement=replacement, sanitize=sanitize), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    second = synthetic_run(2)
+                    second["unaggregated_metadata"] = [{"unused": 1}]
+                    last = write_synthetic_run(root, second)
+                    raw = last.read_text(encoding="utf-8")
+                    self.assertIn(old, raw)
+                    last.write_text(raw.replace(old, replacement, 1), encoding="utf-8")
+                    output = root / "mr09-results-summary.json"
+                    output.write_text("synthetic prior summary", encoding="utf-8")
+                    paths = (first, last, output)
+                    before = [path.read_bytes() for path in paths]
+                    argv = ["mr09_summarize.py", "--directory", str(root)]
+                    if sanitize:
+                        argv.append("--sanitize")
+                    with patch.object(sys, "argv", argv):
+                        with self.assertRaisesRegex(ValueError, "duplicate JSON object key"):
+                            SUMMARY.main()
+                    self.assertEqual([path.read_bytes() for path in paths], before)
+
+    def test_summary_rejects_duplicate_failure_metadata_without_rewriting_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first = write_synthetic_run(root, synthetic_run())
+            failure = synthetic_run(2)
+            failure["status"] = "unsupported"
+            failure["phases"] = []
+            failure["failure"] = {"message": "synthetic missing backend"}
+            last = write_synthetic_run(root, failure)
+            raw = last.read_text(encoding="utf-8").replace(
+                '"message": "synthetic missing backend"',
+                '"message": "synthetic different failure", "message": "synthetic missing backend"')
+            last.write_text(raw, encoding="utf-8")
+            before = [path.read_bytes() for path in (first, last)]
+            with self.assertRaisesRegex(ValueError, "duplicate JSON object key"):
+                SUMMARY.summarize(root, sanitize=True)
+            self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
     def test_summary_rejects_missing_duplicate_or_unexpected_success_phase(self):
         for variant in ("missing", "duplicate", "unexpected"):
             with self.subTest(variant=variant), tempfile.TemporaryDirectory() as directory:
@@ -418,6 +471,49 @@ class MeasurementArithmeticTests(unittest.TestCase):
             with self.assertRaises(OverflowError):
                 SUMMARY.summarize(root, sanitize=True)
             self.assertEqual([path.read_bytes() for path in paths], before)
+
+    def test_summary_rejects_conflicting_and_identical_duplicate_status_before_writes(self):
+        for first_status in ("unsupported", "success"):
+            for sanitize in (False, True):
+                with self.subTest(first_status=first_status, sanitize=sanitize), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    last = write_synthetic_run(root, synthetic_run(2))
+                    raw = last.read_text(encoding="utf-8")
+                    marker = '"status": "success"'
+                    self.assertEqual(raw.count(marker), 1)
+                    raw = raw.replace(marker, f'"status": "{first_status}", {marker}', 1)
+                    last.write_text(raw, encoding="utf-8")
+                    before = [path.read_bytes() for path in (first, last)]
+                    with self.assertRaisesRegex(ValueError, "duplicate JSON object key: 'status'"):
+                        SUMMARY.summarize(root, sanitize=sanitize)
+                    self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
+    def test_summary_rejects_nested_counter_and_failure_keys_before_writes(self):
+        for failure in (False, True):
+            for sanitize in (False, True):
+                with self.subTest(failure=failure, sanitize=sanitize), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    run = synthetic_run(2)
+                    if failure:
+                        run["status"] = "unsupported"
+                        run["phases"] = []
+                        run["failure"] = {"reason": "later"}
+                        marker = '"reason": "later"'
+                        replacement = '"reason": "earlier", "reason": "later"'
+                    else:
+                        run["native_kv_prefill_payload"] = {"measured_bytes": 0}
+                        marker = '"measured_bytes": 0'
+                        replacement = '"measured_bytes": -1, "measured_bytes": 0'
+                    last = write_synthetic_run(root, run)
+                    raw = last.read_text(encoding="utf-8")
+                    self.assertEqual(raw.count(marker), 1)
+                    last.write_text(raw.replace(marker, replacement, 1), encoding="utf-8")
+                    before = [path.read_bytes() for path in (first, last)]
+                    with self.assertRaisesRegex(ValueError, "duplicate JSON object key"):
+                        SUMMARY.summarize(root, sanitize=sanitize)
+                    self.assertEqual([path.read_bytes() for path in (first, last)], before)
 
 
 if __name__ == "__main__":
