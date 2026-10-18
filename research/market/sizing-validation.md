@@ -231,6 +231,33 @@ number is a guarantee of future allocation success. No other process is
 evicted or altered. Per-phase CUDA-reported free values are observations, not
 additional headroom or demanded KV memory.
 
+## Proposed matching total-buffer setup — 2026-10-18
+
+The [pinned native setup protocol](measurements/mr09-total-memory-protocol-2026-10-18.md)
+pairs GPUStack gguf-parser-go v0.26.4 with llama.cpp b11669 on the **same locally
+hash-verified F16 GGUF**. It fixes context capacity512, batch/ubatch256, one
+sequence, F16 K/V, 31 offloaded layers and explicit disabled auto-fit/Flash
+Attention. A real **CPU-only estimator** execution returned **288,499,968 bytes**;
+[setup and preparation records](measurements/total-memory-setup-2026-10-18/) retain
+source/output/artifact pins. No native GPU model/context was initialized.
+
+The proposed matching target is **managed device buffers at initialization**:
+model + context/KV + compute, with the estimator's platform allowance explicitly
+set to zero because CUDA context/driver/library memory is excluded from this
+target. It is not asserted absent. Native logger MiB flooring requires a byte
+interval, not an exact-byte observation. This candidate is a new estimator and
+snapshot scope requiring #61/#10/#11 disposition; it does not replace the named
+estimators or silently satisfy the retained peak-allocated-memory criterion.
+
+Status: **prepared, not GPU-qualified**. Runtime archive/DLL and driver validation,
+a verified native allocation cap within the prior dense envelope, and actual
+allocated-buffer capture remain gates. PyTorch limits and native fit margins
+are not a native hard cap. The [offline checker](../../scripts/mr09_total_memory_setup.py)
+leaves execution disabled, runtime observations/total-buffer pairs at zero and
+whole-process peak pairs at zero. Three serial initialization snapshots are
+proposed only after qualification; no inference, paid compute, device expansion,
+ResourceEstimate, decision tolerance or scope waiver is claimed.
+
 ## Comparison target and error discipline
 
 The existing PR #75 sizing arithmetic at

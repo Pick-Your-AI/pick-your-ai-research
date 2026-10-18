@@ -1,0 +1,96 @@
+{
+  "id": "mr09-total-gguf-setup-2026-10-18",
+  "status": "prepared_not_gpu_qualified",
+  "prepared_utc": "2026-10-18T06:10:31.325269+00:00",
+  "issue": 61,
+  "execution_enabled": false,
+  "estimator": {
+    "name": "gpustack/gguf-parser-go",
+    "version": "v0.26.4",
+    "commit": "637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
+    "windows_exe_sha256": "8da9ae6b8968d5d2dee4eaf48dbc24ed48bf3de02794c8dbe0b2a9443b12c92c",
+    "platform_footprint_mib": [
+      0,
+      0
+    ]
+  },
+  "runtime": {
+    "name": "ggml-org/llama.cpp",
+    "release": "b11669",
+    "commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+    "planned_archive": "llama-b11669-bin-win-cuda-13.4-x64.zip",
+    "planned_archive_sha256": "3b92d5c064f5032e603e531d3ec8961f3bd6613e5dfad047399a92dec8e95dbc",
+    "archive_verification": "publisher release digest only; not downloaded or executed",
+    "planned_cudart_archive": "cudart-llama-bin-win-cuda-13.4-x64.zip",
+    "planned_cudart_sha256": "738f8c251ac22b70c3ae6f83a10cf222725df0395246a2cf58f32bdb85fbe668",
+    "device": "CUDA0",
+    "devices": 1,
+    "auto_fit": false,
+    "graphs": false,
+    "offload_layers": 31
+  },
+  "artifact": {
+    "repo": "bartowski/SmolLM2-135M-Instruct-GGUF",
+    "revision": "09816acd5d99df7be770d85ea30822623dab342c",
+    "file": "SmolLM2-135M-Instruct-f16.gguf",
+    "bytes": 270885952,
+    "sha256": "f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57",
+    "local_verification": "downloaded size and SHA-256 matched publisher metadata; temporary copy removed after preparation",
+    "file_type": "F16 GGUF; exact tensor types belong to this file, not nominal parameters times two"
+  },
+  "configuration": {
+    "context_capacity": 512,
+    "logical_batch": 256,
+    "physical_batch": 256,
+    "active_sequences": 1,
+    "kv_key": "f16",
+    "kv_value": "f16",
+    "flash_attention": false,
+    "mmap": true,
+    "tensor_split": [
+      1
+    ],
+    "main_gpu": 0,
+    "warmup": false,
+    "generation_forwards": 0
+  },
+  "comparison": {
+    "metric": "managed_device_buffers_snapshot",
+    "estimator_path": "estimate.items[0].vrams[0].nonuma",
+    "runtime_field": "fit_memory_breakdown.rows[kind=device,name=CUDA0].self",
+    "runtime_source_unit": "MiB_floor",
+    "includes": [
+      "model device buffers",
+      "allocated context/KV buffers at configured capacity",
+      "compute/scheduler buffers"
+    ],
+    "excludes": [
+      "CUDA context and library allocations outside reported buffers",
+      "driver and other processes",
+      "host RAM",
+      "whole-process high-water and transient allocation peaks"
+    ],
+    "whole_process_peak_equivalent": false,
+    "component_pair_count": 0,
+    "total_buffer_pair_count": 0,
+    "approved_tolerance": null
+  },
+  "envelope": {
+    "preparation_min_gpu_free_mib": 4096,
+    "preparation_min_host_ram_bytes": 12884901888,
+    "preparation_min_temp_disk_bytes": 6412308016,
+    "future_managed_allocation_cap_bytes": 2136809472,
+    "cap_enforcement": "not implemented/qualified for native runtime; PyTorch allocator cap does not apply",
+    "repetitions_after_qualification": 3,
+    "spare_local_only": true,
+    "paid_compute": false,
+    "cap_basis": "min(2 GiB, 12.5% of the recorded 17094475776-byte device); future cap may only decrease after fresh discovery"
+  },
+  "qualification_gates": [
+    "#61 co-owners and #10/#11 accept the new estimator and managed-buffer snapshot target; coordinator retains scope/tolerance decisions",
+    "Verify both runtime archives locally and record DLL/executable hashes, driver compatibility and actual CUDA0 backend without changing drivers",
+    "Implement and verify a native allocation cap at or below min(2136809472 bytes, 2 GiB, 12.5% of freshly reported device memory); fit-target margin and watchdog are not a hard cap",
+    "Prove the capture uses allocated buffers (no_alloc=false), exact effective settings and no host/output-layer fallback; qualify the runtime log exporter",
+    "Record fresh GPU/RAM/disk guards before each serial process; stop at any error or drift"
+  ]
+}
