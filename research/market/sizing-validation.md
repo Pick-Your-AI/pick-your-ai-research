@@ -234,8 +234,8 @@ additional headroom or demanded KV memory.
 ## Executed estimator comparisons — 2026-10-18
 
 The [dated comparison record](measurements/mr09-estimator-comparison-2026-10-18.md)
-adds six actual llmfit v1.1.17 plans, one pinned ModelFit CLI engine audit and a
-current Local AI Planner control inspection. Its [hashed output/pair ledger](measurements/estimator-comparison-2026-10-18/comparison.json)
+adds six actual llmfit v1.1.17 plans, one pinned ModelFit CLI engine audit and an
+author-reported Local AI Planner control inspection pending corroboration. Its [hashed output/pair ledger](measurements/estimator-comparison-2026-10-18/comparison.json)
 checks **12 native two-byte KV component pairs** from D1/D2 prefill/terminal
 snapshots: all signed/absolute/relative differences are zero. These are four
 deterministic estimates paired to six existing processes, two snapshots each;
@@ -246,7 +246,8 @@ Only llmfit's KV field is converted from GiB, as established by its pinned code.
 **Whole-runtime/peak-allocated pairs remain zero**, with no numerical total-memory
 error range or accepted tolerance. llmfit's hardware requirement is a different
 quantity; ModelFit has no exact 135M match or workload/runtime arguments; the
-planner's visible context/runtime choices cannot express these runs. Two q4_0
+author's planner report supplies no matching estimate and its transient controls
+await independent corroboration. Two q4_0
 plans are retained as mismatches with Quanto INT4, with no invented error.
 D3 active2, D4/D5 cache layout, MoE and multi-GPU comparisons remain open. No new
 GPU run, weights download, ResourceEstimate or scope waiver is supplied here.

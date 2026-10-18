@@ -6,7 +6,7 @@ Research date: 2026-10-16. Branch: `codex/mr09-feasibility-validation`. Base: PR
 
 Branch `codex/issue61-estimator-comparisons`, base main
 `b9694364b6f0a3d1e9c6b37189cc007778fc54bc`. This dated addendum covers the new
-estimator runner, six llmfit outputs, ModelFit output, browser observation,
+estimator runner, six llmfit outputs, ModelFit output, author-reported browser observation,
 12 component pairs and updated decision notes. The final integration at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`
 retains #251 GPU evidence unchanged and outside this estimator-pair set.
 The full required suite and all validators were rerun after resolving the three
@@ -47,6 +47,28 @@ physical measurements, artifact/runtime equivalence, fresh deployment identity,
 fit accuracy or human acceptance. #61 co-owners/coordinator and #7/#10/#11
 receivers must review those matters; whole-runtime pairs remain zero and no
 decision tolerance or issue completion is claimed.
+
+### Subsequent offline review correction
+
+The exact executed runner is retained at
+[`mr09_compare_estimators.executed.py`](measurements/estimator-comparison-2026-10-18/mr09_compare_estimators.executed.py),
+matching the unchanged comparison ledger's recorded source SHA-256. The current
+runner now rejects boolean, fractional, nonpositive and nonfinite payload byte
+counts before calculating an error. Both observation points have synthetic
+negative and integral-float normalization coverage. The historical estimator
+outputs, pairs, timestamps and their source hashes are unchanged; no external
+estimator or GPU run was repeated to produce this correction.
+
+The transient Planner controls are explicitly author-reported, with no retained
+capture locator or independent corroboration supplied. This limitation is
+carried through the observation, decision note and acceptance map; no independent
+confidence or receiving-owner acceptance is inferred from that report.
+
+After this correction, Python 3.12.14 passed 21 contract tests and 249 repository
+tests, including all 10 comparison tests; the same 10 comparison tests also passed
+under optimized Python. Research intake, market, handoff-audit and mobile prompt
+validators and whitespace checks passed. These are offline checks, separate from
+the historical external execution recorded above.
 
 ## Supplemental GM1 validation — 2026-10-18
 

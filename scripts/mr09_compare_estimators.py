@@ -8,6 +8,7 @@ import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import subprocess
 
@@ -27,15 +28,24 @@ def digest(path):
 def write(path, data):
     path.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
 
+def payload_bytes(value):
+    """Normalize a positive integral byte count without accepting booleans."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError("positive finite integral payload bytes required")
+    if value <= 0 or (isinstance(value, float)
+                      and (not math.isfinite(value) or not value.is_integer())):
+        raise ValueError("positive finite integral payload bytes required")
+    return int(value)
+
 def kv_component(plan):
     """This exact llmfit field is GiB despite its _gb label; never scale totals."""
     rows = [r for r in plan["kv_alternatives"] if r["kv_quant"] == "fp16"]
     if len(rows) != 1 or plan["model_name"] != MODEL or plan["kv_quant"] != "fp16":
         raise ValueError("exact native KV component required")
-    value = rows[0]["kv_cache_gb"] * GIB
-    if not isinstance(value, (int, float)) or not value > 0 or not value.is_integer():
-        raise ValueError("positive integral payload bytes required")
-    return int(value)
+    value = rows[0]["kv_cache_gb"]
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError("positive finite KV size required")
+    return payload_bytes(value * GIB)
 
 def compare_payload(plan, run, point):
     """Validate the four-field geometry and storage width, not runtime fit."""
@@ -54,8 +64,7 @@ def compare_payload(plan, run, point):
     if plan["context"] != context or plan["quantization"] != "BF16":
         raise ValueError("context or requested weight precision differs")
     estimate = kv_component(plan)
-    if measured <= 0:
-        raise ValueError("positive measured payload required")
+    measured = payload_bytes(measured)
     signed = estimate - measured
     return {"point": point, "context": context, "estimated_payload_bytes": estimate,
             "measured_payload_bytes": measured, "signed_bytes": signed,

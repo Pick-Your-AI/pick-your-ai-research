@@ -15,6 +15,7 @@ SPEC = importlib.util.spec_from_file_location("mr09_comparison", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 DIRECTORY = ROOT / "research/market/measurements/estimator-comparison-2026-10-18"
+EXECUTED_SCRIPT = DIRECTORY / "mr09_compare_estimators.executed.py"
 
 class EligibilityTests(unittest.TestCase):
     """Mutated/small fixtures here are synthetic, never research observations."""
@@ -56,10 +57,34 @@ class EligibilityTests(unittest.TestCase):
         self.run["native_kv_prefill_payload"]["measured_bytes"] = 0
         with self.assertRaises(ValueError):
             MODULE.compare_payload(self.plan, self.run, "prefill")
-        for invalid in (0,-1,float("nan"),float("inf")):
+        for invalid in (False,True,0,-1,float("nan"),float("inf"),float("-inf"),0.5/MODULE.GIB,"1",None):
             self.plan["kv_alternatives"][0]["kv_cache_gb"] = invalid
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 MODULE.kv_component(self.plan)
+
+    def test_invalid_measured_bytes_rejected_at_both_points(self):
+        for point, context in (("prefill",256),("terminal",288)):
+            plan = json.loads((DIRECTORY / f"llmfit-{context}-fp16.json").read_text())
+            for invalid in (False,True,0,-1,0.5,float("nan"),float("inf"),float("-inf"),"1",None):
+                run = copy.deepcopy(self.run)
+                if point == "prefill":
+                    run["native_kv_prefill_payload"]["measured_bytes"] = invalid
+                else:
+                    run["native_kv_steady_payload_bytes"] = invalid
+                with self.subTest(point=point, invalid=invalid), self.assertRaises(ValueError):
+                    MODULE.compare_payload(plan,run,point)
+
+    def test_integral_float_measurements_normalize_to_bytes(self):
+        for point, context, measured in (("prefill",256,5898240.0),("terminal",288,6635520.0)):
+            plan = json.loads((DIRECTORY / f"llmfit-{context}-fp16.json").read_text())
+            if point == "prefill":
+                self.run["native_kv_prefill_payload"]["measured_bytes"] = measured
+            else:
+                self.run["native_kv_steady_payload_bytes"] = measured
+            with self.subTest(point=point):
+                result = MODULE.compare_payload(plan,self.run,point)
+                self.assertIs(type(result["measured_payload_bytes"]),int)
+                self.assertEqual(result["signed_bytes"],0)
 
     def test_nonzero_error_uses_measured_denominator(self):
         self.run["native_kv_prefill_payload"]["measured_bytes"] = 2949120
@@ -82,7 +107,7 @@ class EligibilityTests(unittest.TestCase):
 class RecordedComparisonIntegrity(unittest.TestCase):
     def test_committed_outputs_and_pairs_recompute(self):
         ledger = json.loads((DIRECTORY / "comparison.json").read_text())
-        self.assertEqual(ledger["script_sha256"], hashlib.sha256(SCRIPT.read_bytes()).hexdigest())
+        self.assertEqual(ledger["script_sha256"], hashlib.sha256(EXECUTED_SCRIPT.read_bytes()).hexdigest())
         self.assertEqual(ledger["whole_runtime_pairs"],0)
         self.assertIsNone(ledger["approved_tolerance"])
         self.assertEqual(ledger["component_pair_count"],12)

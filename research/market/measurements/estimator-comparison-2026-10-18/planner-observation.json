@@ -1,5 +1,7 @@
 {
   "classification": "dated interactive browser control inspection; no matching planner estimate executed",
+  "verification_status": "author-reported control readback; independent capture or reviewer corroboration pending",
+  "retained_capture_locator": null,
   "observed_utc": "2026-10-18T05:57:48.319605+00:00",
   "publisher": "Logarithmic Spirals",
   "page_url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",

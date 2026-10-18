@@ -18,12 +18,15 @@ receiving-owner review. Assignments, triage, #59 ledgers and v1 are unchanged.
 | --- | --- | --- |
 | llmfit v1.1.17, commit `9781270c1cd907971ce071517041edb55702b3ff`; official Windows binary | Six unmodified `plan` executions for exact `HuggingFaceTB/SmolLM2-135M-Instruct`, BF16 weight override, contexts 256/288/2,048/2,080 with FP16 KV; additional q4_0 probes at 2,048/2,080 | Four native KV component estimates can be checked against D1/D2 payload snapshots; total hardware requirement and q4_0 are excluded from numerical runtime error |
 | ModelFit CLI `@wecko-ai/modelfit` 1.5.3, commit `8c1df5f00e8f21edd0f0c7b4a12230b838e0b433` | Execute unmodified `getRecommendations` with pinned 156-record dataset and recorded GPU capacity; exact 135M matches = 0, related entry = SmolLM2 360M | Missing exact model and API workload/runtime inputs; no replacement model, no numerical error |
-| Local AI Planner, Logarithmic Spirals deployed page, browser inspection dated 2026-10-18 | Expand Advanced Options/Custom Model Data; inspect runtime, precision and context controls | Visible runtimes GGUF/llama.cpp or MLX; minimum selectable context 4,096; no visible admitted-sequence input. No exact estimate executed and no numerical error |
+| Local AI Planner, Logarithmic Spirals deployed page, author's browser inspection dated 2026-10-18 | Author reports expanding Advanced Options/Custom Model Data and reading runtime, precision and context controls; no retained capture locator or independent corroboration is supplied | Author-reported runtimes GGUF/llama.cpp or MLX, minimum selectable context 4,096 and no visible admitted-sequence input; independent confirmation remains pending. No exact estimate executed and no numerical error |
 
 All six llmfit commands returned JSON with exit 0. Full outputs are retained in
 [the execution directory](estimator-comparison-2026-10-18/); exact arguments,
 executable/source/data hashes, UTC timestamps, Node version and runner hash are
 in [comparison.json](estimator-comparison-2026-10-18/comparison.json).
+The exact [historical executed runner](estimator-comparison-2026-10-18/mr09_compare_estimators.executed.py)
+retains that recorded source hash. The current runner's later byte-count guards
+were reviewed offline; these estimator outputs were not regenerated with them.
 The release archive hash matched its publisher sidecar before execution; the
 executable hash is additionally pinned. Local source/data copies were unmodified.
 No model/catalog injection, alternate formula or unsupported context was used to
@@ -33,9 +36,10 @@ turn an unavailable comparison into success.
 hardware requirements using a planning formula and a fixed runtime allowance;
 it neither pins this Transformers/safetensors artifact nor emits a PyTorch
 phase-peak prediction. ModelFit's port lacks artifact revision, runtime, context,
-KV layout and admitted concurrency arguments. Planner's inspected controls
-cannot express these recorded contexts/runtime. These are identified quantity
-or input mismatches, not evidence that either an estimator or model failed.
+KV layout and admitted concurrency arguments. The author's Planner report supplies
+no matching estimate, and its transient control facts still await independent
+corroboration. These are quantity/input mismatches or missing evidence, not proof
+that either an estimator or model failed.
 Neither a `Perfect` fit label nor an estimated TPS is independently validated.
 Today's free-capacity fields in llmfit output are read-only discovery samples,
 not the historical runtime capacity, a reservation or a new hardware test.
@@ -93,7 +97,8 @@ Local LLM Hardware Compatibility Dataset, [modelfit.io](https://modelfit.io/),
 CC BY 4.0. Only bounded execution facts are retained, no dataset redistribution.
 
 [Planner browser observation](estimator-comparison-2026-10-18/planner-observation.json)
-records the inspected controls. Direct HTTP retrieval of the page and historical
+records the author's inspected controls, pending independent corroboration or an
+accessible retained capture. Direct HTTP retrieval of the page and historical
 asset returned 403; the browser page was accessible without challenge solving or
 authentication. No fresh bundle hash is available and the old bundle identity is
 not claimed reverified. No unseen API capability is inferred from visible controls.
@@ -105,6 +110,12 @@ forces unsupported values into the page nor substitutes a 4,096-token result.
 [Runner](../../../scripts/mr09_compare_estimators.py) accepts a fresh output
 directory, a directory containing the four pinned external files and Node.
 It rejects an existing output directory or artifact hash drift before executing.
+The current runner additionally rejects boolean, fractional, nonpositive and
+nonfinite payload byte counts at either observation point, before calculating an
+error. Its source identity differs from the archived executed runner; a future
+execution records its own source hash and timestamps rather than rewriting the
+historical comparison ledger. Offline tests recompute the unchanged finite pairs
+with the guarded helper and verify the historical source against its recorded hash.
 Download the external artifacts using the exact manifest locators; extract
 `llmfit.exe` from the official checked archive. Place the ModelFit engine beside
 `data/models.json`; place llmfit's pinned `hf_models.json` in the artifact root.
@@ -127,7 +138,7 @@ pinned KV component and matched payload quantities enter this comparison.
 | --- | --- |
 | AlexsJones: [v1.1.17 release](https://github.com/AlexsJones/llmfit/releases/tag/v1.1.17), [models.rs](https://github.com/AlexsJones/llmfit/blob/9781270c1cd907971ce071517041edb55702b3ff/llmfit-core/src/models.rs#L1426), [catalog](https://github.com/AlexsJones/llmfit/blob/9781270c1cd907971ce071517041edb55702b3ff/llmfit-core/data/hf_models.json) | Primary pinned code/metadata plus actual binary output. High confidence in inspected unit/layout arithmetic; predictive peak accuracy unverified. MIT code, dataset/model rights separate; source/binary/data remain external. [Archive manifest](../../../evidence/mr09-llmfit-v1117-windows.json), [catalog manifest](../../../evidence/mr09-llmfit-v1117-catalog.json). |
 | Wecko-ai / ModelFit: [engine](https://github.com/Wecko-ai/modelfit/blob/8c1df5f00e8f21edd0f0c7b4a12230b838e0b433/src/engine.mjs), [data](https://github.com/Wecko-ai/modelfit/blob/8c1df5f00e8f21edd0f0c7b4a12230b838e0b433/src/data/models.json) | Unmodified local CLI execution, distinct from web release. High confidence in bounded output/model absence at this pin; unverified predictive accuracy. MIT code / attributed CC BY 4.0 dataset. [Engine manifest](../../../evidence/mr09-modelfit-v153-engine.json), [data manifest](../../../evidence/mr09-modelfit-v153-data.json). |
-| Logarithmic Spirals: [deployed planner](https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/) | Current interactive control inspection only, no immutable deployed-code pin or output reproduction. High confidence in visible options; other interfaces/rights unknown. Link and bounded facts, no bundle or source text redistributed. |
+| Logarithmic Spirals: [deployed planner](https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/) | Author-reported interactive controls, pending an accessible capture or independent reviewer corroboration; no independently established confidence in the transient options, immutable deployed-code pin or output reproduction. Other interfaces/rights remain unknown. Link and bounded report, no bundle or source text redistributed. |
 | Project: original [protocol](mr09-protocol-2026-10-16.md), [D1/D2 runtime observations](./) | Actual project GPU measurements dated 2026-10-16, exact model/runtime/artifact and code pins retained. High confidence in stored counters, subject to their shared-device/pilot caveats and human validity review. No new GPU measurements here. |
 
 Next whole-runtime gate: #61 co-owners and #10/#11 must agree a specific estimator
