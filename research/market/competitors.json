@@ -2379,5 +2379,361 @@
         "limitations"
       ]
     }
+  },
+  {
+    "id": "localscore",
+    "name": "LocalScore",
+    "website": "https://www.localscore.ai/",
+    "organization": "Mozilla Builders project; repository cjpais/LocalScore",
+    "classifications": [
+      "Benchmark provider",
+      "Data source",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement from the #48 staged list (tynamite's PR #67 review, PR #81 D36–D41); a community fit-report or benchmark resource that counters the outcome-history differentiation claim (#57 H5).",
+    "target_users": "Local model users comparing hardware, engine and quantization results",
+    "capabilities": "Documented scope (not exercised): Open-source benchmark CLI plus a public results database with optional submission.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "No pricing reviewed; public results pages only.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.localscore.ai/"
+      ]
+    },
+    "deployment_support": "Unknown; not established by reviewed evidence.",
+    "apis_and_integrations": "Unknown; not established by reviewed evidence.",
+    "licensing": "Repository Apache-2.0 (GitHub licence API); results database reuse terms unverified.",
+    "source_ids": [
+      "src-localscore"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      57,
+      41,
+      10
+    ],
+    "limitations": [
+      "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
+      "Optional submission; no result verification process stated."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-16",
+      "canonical_url": "https://www.localscore.ai/",
+      "operator": "Mozilla Builders project; repository cjpais/LocalScore",
+      "product_scope": "Open-source benchmark CLI plus a public results database with optional submission.",
+      "version": "Public page as retrieved 2026-10-16; no software revision pinned.",
+      "source_ids": [
+        "src-localscore"
+      ],
+      "evidence_locator": "src-localscore",
+      "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
+      "limitations": "Optional submission; no result verification process stated.",
+      "updated_fields": []
+    }
+  },
+  {
+    "id": "localmaxxing",
+    "name": "LocalMaxxing",
+    "website": "https://www.localmaxxing.com/en",
+    "organization": "Operator unnamed; CLI repository LottoLottoLotto/localmaxxing-cli",
+    "classifications": [
+      "Partial competitor",
+      "Benchmark provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement from the #48 staged list (tynamite's PR #67 review, PR #81 D36–D41); a community fit-report or benchmark resource that counters the outcome-history differentiation claim (#57 H5).",
+    "target_users": "Local model users comparing hardware, engine and quantization results",
+    "capabilities": "Documented scope (not exercised): Community-submitted local inference results filterable by model, hardware, engine and quantization.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "No pricing reviewed; public results pages only.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.localmaxxing.com/en"
+      ]
+    },
+    "deployment_support": "Unknown; not established by reviewed evidence.",
+    "apis_and_integrations": "Unknown; not established by reviewed evidence.",
+    "licensing": "CLI repository MIT; site data reuse terms unverified.",
+    "source_ids": [
+      "src-localmaxxing"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      57,
+      41,
+      10
+    ],
+    "limitations": [
+      "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
+      "Submission requires sign-in and an API key; robots.txt disallows leaderboard pages, which were not inspected."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-16",
+      "canonical_url": "https://www.localmaxxing.com/en",
+      "operator": "Operator unnamed; CLI repository LottoLottoLotto/localmaxxing-cli",
+      "product_scope": "Community-submitted local inference results filterable by model, hardware, engine and quantization.",
+      "version": "Public page as retrieved 2026-10-16; no software revision pinned.",
+      "source_ids": [
+        "src-localmaxxing"
+      ],
+      "evidence_locator": "src-localmaxxing",
+      "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
+      "limitations": "Submission requires sign-in and an API key; robots.txt disallows leaderboard pages, which were not inspected.",
+      "updated_fields": []
+    }
+  },
+  {
+    "id": "rapid-mlx",
+    "name": "Rapid-MLX community benchmarks",
+    "website": "https://rapidmlx.com/leaderboard",
+    "organization": "Repository raullenchai/Rapid-MLX",
+    "classifications": [
+      "Benchmark provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement from the #48 staged list (tynamite's PR #67 review, PR #81 D36–D41); a community fit-report or benchmark resource that counters the outcome-history differentiation claim (#57 H5).",
+    "target_users": "Local model users comparing hardware, engine and quantization results",
+    "capabilities": "Documented scope (not exercised): Apple Silicon inference leaderboard with one locked run per submission and version badges.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "No pricing reviewed; public results pages only.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://rapidmlx.com/leaderboard"
+      ]
+    },
+    "deployment_support": "Unknown; not established by reviewed evidence.",
+    "apis_and_integrations": "Unknown; not established by reviewed evidence.",
+    "licensing": "GitHub licence API reports NOASSERTION; the CC0 statement for submissions is a vendor claim for #41 to review.",
+    "source_ids": [
+      "src-rapid-mlx"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      57,
+      41,
+      10
+    ],
+    "limitations": [
+      "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
+      "Apple Silicon only."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-16",
+      "canonical_url": "https://rapidmlx.com/leaderboard",
+      "operator": "Repository raullenchai/Rapid-MLX",
+      "product_scope": "Apple Silicon inference leaderboard with one locked run per submission and version badges.",
+      "version": "Public page as retrieved 2026-10-16; no software revision pinned.",
+      "source_ids": [
+        "src-rapid-mlx"
+      ],
+      "evidence_locator": "src-rapid-mlx",
+      "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
+      "limitations": "Apple Silicon only.",
+      "updated_fields": []
+    }
+  },
+  {
+    "id": "metrillm",
+    "name": "MetriLLM",
+    "website": "https://metrillm.dev/",
+    "organization": "GitHub organization MetriLLM",
+    "classifications": [
+      "Benchmark provider",
+      "Data source",
+      "Open-source integration candidate"
+    ],
+    "classification_basis": "Analyst judgement from the #48 staged list (tynamite's PR #67 review, PR #81 D36–D41); a community fit-report or benchmark resource that counters the outcome-history differentiation claim (#57 H5).",
+    "target_users": "Local model users comparing hardware, engine and quantization results",
+    "capabilities": "Documented scope (not exercised): npm CLI benchmarking Ollama or LM Studio models with an uncurated public results display.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "No pricing reviewed; public results pages only.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://metrillm.dev/"
+      ]
+    },
+    "deployment_support": "Unknown; not established by reviewed evidence.",
+    "apis_and_integrations": "Unknown; not established by reviewed evidence.",
+    "licensing": "Repository Apache-2.0; results reuse terms unverified.",
+    "source_ids": [
+      "src-metrillm"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      57,
+      41,
+      10
+    ],
+    "limitations": [
+      "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
+      "No curation or review by its own statement; requires Ollama or LM Studio."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-16",
+      "canonical_url": "https://metrillm.dev/",
+      "operator": "GitHub organization MetriLLM",
+      "product_scope": "npm CLI benchmarking Ollama or LM Studio models with an uncurated public results display.",
+      "version": "Public page as retrieved 2026-10-16; no software revision pinned.",
+      "source_ids": [
+        "src-metrillm"
+      ],
+      "evidence_locator": "src-metrillm",
+      "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
+      "limitations": "No curation or review by its own statement; requires Ollama or LM Studio.",
+      "updated_fields": []
+    }
+  },
+  {
+    "id": "openbenchmarking-llama-cpp",
+    "name": "OpenBenchmarking.org pts/llama-cpp",
+    "website": "https://openbenchmarking.org/test/pts/llama-cpp",
+    "organization": "OpenBenchmarking.org / Phoronix Test Suite",
+    "classifications": [
+      "Benchmark provider",
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement from the #48 staged list (tynamite's PR #67 review, PR #81 D36–D41); a community fit-report or benchmark resource that counters the outcome-history differentiation claim (#57 H5).",
+    "target_users": "Local model users comparing hardware, engine and quantization results",
+    "capabilities": "Documented scope (not exercised): Phoronix Test Suite llama.cpp test profile with optional result upload to OpenBenchmarking.org.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "No pricing reviewed; public results pages only.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://openbenchmarking.org/test/pts/llama-cpp"
+      ]
+    },
+    "deployment_support": "Unknown; not established by reviewed evidence.",
+    "apis_and_integrations": "Unknown; not established by reviewed evidence.",
+    "licensing": "Phoronix Test Suite client GPL-3.0; result data reuse terms unverified.",
+    "source_ids": [
+      "src-openbenchmarking-llama-cpp"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Low",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      57,
+      41,
+      10
+    ],
+    "limitations": [
+      "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
+      "Profile page returned 403 (bot challenge) to anonymous retrieval and was not bypassed; current profile version unverified."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-16",
+      "canonical_url": "https://openbenchmarking.org/test/pts/llama-cpp",
+      "operator": "OpenBenchmarking.org / Phoronix Test Suite",
+      "product_scope": "Phoronix Test Suite llama.cpp test profile with optional result upload to OpenBenchmarking.org.",
+      "version": "PTS documentation at be12163bb02435219d4fd891cd6258597ca9bc2f and test-profiles mirror at d2f1a150d388bd062737b445891edda0780f7e25, checked 2026-10-16. The public profile page was not retrieved; its current version remains unverified.",
+      "source_ids": [
+        "src-openbenchmarking-llama-cpp"
+      ],
+      "evidence_locator": "src-openbenchmarking-llama-cpp",
+      "status": "Source-checked PTS documentation and GitHub test-profile mirror from the staged #48 record; public profile access blocked and current profile version unverified",
+      "limitations": "Profile page returned 403 (bot challenge) to anonymous retrieval and was not bypassed; current profile version unverified.",
+      "updated_fields": []
+    }
+  },
+  {
+    "id": "llama-cpp-perf-threads",
+    "name": "llama.cpp performance discussion threads",
+    "website": "https://github.com/ggml-org/llama.cpp/discussions/15013",
+    "organization": "ggml-org/llama.cpp GitHub Discussions (community threads #4167, #10879, #15013)",
+    "classifications": [
+      "Data source"
+    ],
+    "classification_basis": "Analyst judgement from the #48 staged list (tynamite's PR #67 review, PR #81 D36–D41); a community fit-report or benchmark resource that counters the outcome-history differentiation claim (#57 H5).",
+    "target_users": "Local model users comparing hardware, engine and quantization results",
+    "capabilities": "Documented scope (not exercised): Community-posted llama-bench results pinned to a commit for a fixed model and quantization.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "No pricing reviewed; public results pages only.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://github.com/ggml-org/llama.cpp/discussions/15013"
+      ]
+    },
+    "deployment_support": "Unknown; not established by reviewed evidence.",
+    "apis_and_integrations": "Unknown; not established by reviewed evidence.",
+    "licensing": "Discussion/result-data reuse terms unverified; no blanket redistribution permission established by this review.",
+    "source_ids": [
+      "src-llama-cpp-perf-threads"
+    ],
+    "last_verification": "2026-10-16",
+    "confidence": "Medium",
+    "applicable_tiers": [
+      "T1",
+      "T2"
+    ],
+    "related_issues": [
+      48,
+      49,
+      57,
+      41,
+      10
+    ],
+    "limitations": [
+      "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
+      "Kernel throughput only; individual reports, not independent measurements."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-16",
+      "canonical_url": "https://github.com/ggml-org/llama.cpp/discussions/15013",
+      "operator": "ggml-org/llama.cpp GitHub Discussions (community threads #4167, #10879, #15013)",
+      "product_scope": "Community-posted llama-bench results pinned to a commit for a fixed model and quantization.",
+      "version": "Public page as retrieved 2026-10-16; no software revision pinned.",
+      "source_ids": [
+        "src-llama-cpp-perf-threads"
+      ],
+      "evidence_locator": "src-llama-cpp-perf-threads",
+      "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
+      "limitations": "Kernel throughput only; individual reports, not independent measurements.",
+      "updated_fields": []
+    }
   }
 ]
