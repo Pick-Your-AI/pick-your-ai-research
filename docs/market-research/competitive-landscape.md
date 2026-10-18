@@ -2,6 +2,8 @@
 
 The inventory contains 33 distinct products/resources, including all 22 original named candidates, ten original additional resources and CanIRun.ai. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
 
+The [MR-01 acceptance and selection record](../../research/market/mr01-acceptance.md) contains the merged five-seed audit, current fourteen-profile working list, revision-scoped reviews and remaining owner decisions. The [2026-10-18 follow-up](../../research/market/mr01-acceptance.md#2026-10-18-catalog-and-summary-reconciliation) reconciles CanIRun.ai documentary fields and pins the llmfit upstream identity check. Older observations below retain their stated dates; document publication does not supply issue acceptance.
+
 - [BenchLM](https://benchlm.ai/): Partial competitor, Benchmark provider, Data source. Model and provider comparison with benchmark, price and runtime evidence.
 - [Harness Bench](https://www.harness-bench.ai/): Benchmark provider, Open-source integration candidate. Model-harness evaluation in sandboxed tasks with final-artifact oracles.
 - [llmfit](https://www.llmfit.org/): Partial competitor, Open-source integration candidate. Hardware detection and model-fit recommendations across quantizations and runtimes.
@@ -16,6 +18,7 @@ The inventory contains 33 distinct products/resources, including all 22 original
 - [CanRun](https://canrunllm.com/): Partial competitor. Hardware and RAM calculator for local AI model fit.
 - [CanItRun](https://canitrun.dev/): Partial competitor. GPU hardware checker and VRAM calculator.
 - [ModelFit](https://modelfit.io/): Direct competitor, Data source, Open-source integration candidate. Device-first local-model recommendations; CLI and documented JSON/MCP access.
+- [CanIRun.ai](https://canirun.ai/): Partial competitor. Hardware/use-case local-model recommendations and documented JSON model, compatibility and recommendation interfaces; source-inspected, not exercised in the #48 follow-up. Separate from CanRun and CanItRun.
 - [Ollama](https://ollama.com/library): Substitute workflow, Open-source integration candidate. Discover and run model packages through a local-model ecosystem.
 - [GPUs.io](https://gpus.io/): Partial competitor, Data source. Cloud GPU rental price comparison.
 - [Vast.ai](https://vast.ai/): Infrastructure provider, Potential partner. GPU rental marketplace.
@@ -24,7 +27,7 @@ The inventory contains 33 distinct products/resources, including all 22 original
 - [Langflow](https://www.langflow.org/): Adjacent competitor, Substitute workflow. Low-code builder for agent and RAG applications.
 - [Flowise](https://flowiseai.com/): Adjacent competitor, Substitute workflow. Visual agent construction.
 - [n8n](https://n8n.io/): Adjacent competitor, Substitute workflow. Workflow automation with AI integrations.
-- [SkyPilot](https://skypilot.co/): Substitute workflow, Open-source integration candidate. Manage and execute AI compute across infrastructure providers.
+- [SkyPilot](https://skypilot.ai/): Substitute workflow, Open-source integration candidate. Manage and execute AI compute across infrastructure providers.
 - [BentoML / Bento](https://www.bentoml.com/): Substitute workflow, Infrastructure provider. Model inference deployment and scaling.
 - [Langfuse](https://langfuse.com/): Adjacent competitor, Open-source integration candidate. Agent evaluation and observability.
 - [Ragas](https://docs.ragas.io/en/stable/): Benchmark provider, Open-source integration candidate. Evaluation tooling for LLM and RAG applications.
@@ -55,7 +58,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 - **LLM Stats:** about page self-describes "two people" signing as "Co-founders, llm-stats"; terms (updated 2026-10-08) cite United States law and name no entity. Legal entity unknown (`src-llm-stats-legal`).
 - **CanRun:** "CanRun is an independent project", unaffiliated with GPU makers or model publishers; served by Cloudflare Pages. Operator unnamed (`src-canrun-about`).
 - **CanItRun:** methodology and privacy pages (privacy updated 2026-08-16) name no operator; contact e-mail only. Unknown (`src-canitrun-about`).
-- **GPUs.io:** home, about, terms and privacy returned 403 with a bot challenge to anonymous retrieval on 2026-10-16. Not bypassed; operator and current content unverified (`src-gpus-io-recheck`). The earlier `src-gpus-io` "retrieved" record is preserved unchanged.
+- **GPUs.io:** home, about, terms and privacy returned 403 with a bot challenge to anonymous retrieval on 2026-10-16. Not bypassed; operator and content were unverified in that inspection (`src-gpus-io-recheck`). The earlier `src-gpus-io` "retrieved" record is preserved unchanged. The separately dated 2026-10-18 terms correction in `sources.json` / `src-gpus-io` names Peak Technologies, Inc. as publisher attribution; see the [MR-01 source limitations](../../research/market/mr01-acceptance.md#claimevidence-review-and-source-limitations). Independent ownership verification and intended-use permission remain separate; this summary performs no new site check.
 
 ## Community fit-report resources (staged, not yet in the catalog)
 
@@ -98,7 +101,7 @@ These are direct counterexamples to the defensibility hypothesis in [differentia
 
 ## Deep-dive selection rationale
 
-**Status: reconstructed from the existing artifacts — coordinator to confirm.** PR #67 profiled 13 entities in `research/market/competitors/` without a written rationale. The selection is consistent with the four criteria in the #48 prompt (overlap with the target decision, evidence availability, substitution risk, source relevance). This is an analyst selection, not a vendor ranking.
+**Historical reconstruction of the original thirteen profiles.** The table below retains the initial selection explanation. The current working selection is fourteen after the already-merged CanIRun.ai intake; its [explicit #48 rationale and scoped #50 reviews](../../research/market/mr01-acceptance.md#fourteen-selected-deep-dives-for-50) were delivered through PRs #214 and #231. The four criteria are decision overlap, evidence availability, substitution risk and source relevance. Coordinator confirmation, profile acceptance and hands-on tests remain separate. This is an analyst selection, not a vendor ranking.
 
 | Selected | Reason |
 | --- | --- |
@@ -114,3 +117,5 @@ Excluded from deep dives: Arena and LLM Stats (leaderboards overlapping Artifici
 ## CanIRun.ai addition (2026-10-16)
 
 [CanIRun.ai devices](https://www.canirun.ai/devices) is recorded as `canirun-ai`, a partial competitor for device-first local model selection. It is operated by GitHub user midudev, per the `midudev/canirun.ai` repository whose homepage is canirun.ai (legal entity unconfirmed). It is a separate record from CanRun (`canrunllm.com`) and CanItRun (`canitrun.dev`); ownership relationships to those are unknown. The repository README describes hardware-detected, per-use-case recommendations, which makes it a direct-substitute candidate pending #66. See the [dated profile](../../research/market/competitors/canirun-ai.md). #48 owns intake, #49 its 48 matrix cells, #50 the profile and #66 scenario testing. This adds a fourteenth profile within the 10–15 target; it does not establish a full-stack substitute or data reuse permission.
+
+The [2026-10-18 #48 reconciliation](../../research/market/mr01-acceptance.md#2026-10-18-catalog-and-summary-reconciliation) records the later pinned README/footer/API-route evidence. The original directory and #125 browser observations retain their dates and limits; documented API shapes do not establish live availability or fit accuracy.
