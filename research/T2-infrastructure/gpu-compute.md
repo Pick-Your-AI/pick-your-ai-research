@@ -527,3 +527,16 @@ tuple. A versioned reader/ruleset needs its own reviewed migration and affected
 consumer decisions. #31's current hardware-reuse statement also needs review
 of this changed availability. These are named follow-ups; this correction does
 not complete #10 or waive #61's empirical criteria.
+
+## Blackwell contribution review (2026-10-18)
+
+The [Blackwell hardware supplement](blackwell-accelerators.md) records thirteen
+dated reference proposals with complete native-precision dispositions and
+source-checked, unverified provenance. The separate
+[sizing and observation review](gpu-compute-catalog-extension.md) preserves the
+original contributor's reports while correcting the generic arithmetic helper.
+The unbound submitted ResourceEstimate is not admitted; original driver samples
+provide zero additional eligible whole-runtime peak pairs for #61. Existing
+accepted examples, empirical records, frozen schemas and issue dispositions
+remain unchanged. These supplements require their own source/receiving review
+and do not establish production publication, runtime fit or calibration.

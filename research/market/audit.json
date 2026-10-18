@@ -1353,6 +1353,200 @@
         "status": "Existing accepted 8df56f1 snapshot preserved; concrete current-count/scope/state update offered in the audit, with no new overall program decision or edit to the existing writer’s source."
       },
       "validation_status": "Exact candidate repository validation and independent evidence/intake review are recorded in delivery receipts; not inferred from this metadata object."
+    },
+    {
+      "observed_on": "2026-10-18",
+      "artifact_baseline_commit": "a2a582d7471dc1e588b7fab5d5f37c0ba31b0500",
+      "classification": "Independent public Project metadata QA and dated reconciliation; no Project write or new scientific receiving acceptance",
+      "readback": "research/market/project-qa-2026-10-18-2152.json",
+      "readback_sha256": "e20b3d6377dccdd70a1b23ddc0a130144c7b78aebc635368463c3717beca63ee",
+      "readback_bytes": 238704,
+      "field_read_completed_by": "2026-10-18T21:52:18.937888Z",
+      "item_read_completed_by": "2026-10-18T21:52:45.514221Z",
+      "native_relationship_capture_completed_by": "2026-10-18T21:58:15Z",
+      "visibility_read_completed_by": "2026-10-18T21:59:38.704287Z",
+      "evidence_audit": "docs/market-research/audit.md#public-project-qa-and-current-reconciliation--2026-10-18",
+      "risk_register": "research/market/risk-register.md#project-qa-continuation--2026-10-18",
+      "pinned_reference_inputs": [
+        {
+          "path": "research/market/handoffs.json",
+          "git_blob": "01361279011b324f18c2c3ede17227aa5897d9ef",
+          "sha256": "5f2969deb978c2ec88a458241ef24839b92a3d4b82c9c955cc00fcd4f08ddf72"
+        },
+        {
+          "path": "research/market/research-backlog.json",
+          "git_blob": "7f492bb86fc0159fd8695396226fe47b89955a67",
+          "sha256": "ec06b14deba332403ccd3119365ed564f9b2364080a8cf48942e9570bf701d84"
+        },
+        {
+          "path": "research/market/project-configuration.json",
+          "git_blob": "241d094adebdc635d3da72cde9d70a8054a23118",
+          "sha256": "04d33a27ac418a20fcfc6e75d1ba63433aa5eabb9c451a0bf45117f162251eaf"
+        },
+        {
+          "path": "research/market/features.json",
+          "git_blob": "e9f07772223b2da3cb7b3cff77c56e50abbacd16",
+          "sha256": "4712d18c4705f62206e08670c389dfcf3b344fe9119a55a1219385e7b6c690f9"
+        },
+        {
+          "path": "research/market/sources.json",
+          "git_blob": "b151438ded6b84db23cccd70ced9182464748134",
+          "sha256": "b74382fd92ee7ab57efb4a3028786c41a40a959ffff8b9d49a8b702e0ab65eb9"
+        },
+        {
+          "path": "research/market/synthesis.md",
+          "git_blob": "0f5cfff57671097695ceef9fd62906587b90e6b5",
+          "sha256": "3f5018a01c12ebd134ef80320780f1ef9cc47c0c078ef2de78c11e5f4fd710cf"
+        },
+        {
+          "path": "research/market/pcpartpicker.md",
+          "git_blob": "aeda23c2f2a1d79ed306f7e8f6c766e30648a341",
+          "sha256": "dad5304f617dcedf1610a2e7d3ce6f6df2bbe5e9311bb7a920465f5d62f8b3d0"
+        },
+        {
+          "path": "docs/market-research/research-methodology.md",
+          "git_blob": "5881fc6e09a5eea5ffa35dcf26ef83b902d61ba3",
+          "sha256": "2950374b9bc734951e02b6860417df325c5c15734af0c75a4117e64a544728a0"
+        },
+        {
+          "path": "prompts/market/issue-059.md",
+          "git_blob": "1f7f4f9f4c66cacab1af8334701606e8508057af",
+          "sha256": "8ca12ae024e469567f3e7824d6ac7eca673a63823a28651469dd6a8b9edfcfb3"
+        },
+        {
+          "path": "prompts/market/SHARED.md",
+          "git_blob": "081bd496574c346872bbd4338b8b8578afa2074c",
+          "sha256": "4d63dc64da9885afc02e8a5001e14c2a3e10fe7a4b78db305a17f3f01a623747"
+        }
+      ],
+      "project_qa": {
+        "project_count": 2,
+        "field_definitions": 36,
+        "single_select_options": 86,
+        "items": 72,
+        "research_issues": 55,
+        "pull_request_items": 17,
+        "all_issue_selections_present_and_option_identities_valid": true,
+        "title_assignees_labels_match_embedded_content": true,
+        "both_projects_public_at_visibility_read": true,
+        "current_view_layouts_filters_permissions_rechecked": false,
+        "project_mutation_performed_by_this_capture": false
+      },
+      "historical_comparison": {
+        "same_issue_identity_title_assignee_label_parent_type_records": 55,
+        "same_reciprocal_acyclic_hierarchy_edges": 47,
+        "parent_collections": 13,
+        "blockers": [
+          {
+            "issue": 57,
+            "blocked_by": 66,
+            "blocker_state": "closed"
+          },
+          {
+            "issue": 58,
+            "blocked_by": 66,
+            "blocker_state": "closed"
+          },
+          {
+            "issue": 42,
+            "blocked_by": 40,
+            "blocker_state": "open"
+          }
+        ],
+        "same_market_backlog_issue_item_identities": 20,
+        "status_differences_from_initial_backlog": 18,
+        "readiness_differences_from_initial_backlog": 5,
+        "other_seven_market_selection_values_unchanged": true,
+        "market_custom_field_node_identities_unchanged": 9,
+        "market_select_option_id_name_order_unchanged": 53,
+        "nontransactional_state_change": "#36 open in the 21:52 Project content; closed in the 21:58 relationship response. Original observations are not rewritten."
+      },
+      "actual_external_controller_receipts": [
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6254963300",
+          "scope": "Separately timed public REST discovery and later readback; other research controller."
+        },
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6255435332",
+          "scope": "Nine original UI Status writes and readback, retaining the subsequent #52 policy finding; Root 5dcf."
+        },
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6255646287",
+          "created_at": "2026-10-18T21:57:41Z",
+          "scope": "Actual #52 reopen at 21:50:45Z and In Progress readback at 21:55, preserving seven accepted desk criteria and unchanged #63."
+        },
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6255646921",
+          "created_at": "2026-10-18T21:57:45Z",
+          "scope": "Final routing: eight Done corrections plus #52 open/In Progress; original ninth write remains historical."
+        }
+      ],
+      "pending_targeted_project_reconciliation": {
+        "issue": 51,
+        "item_id": 273612849,
+        "item_node_id": "PVTI_lADOFHg4Xc4BnViWzhBPADE",
+        "proposal_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6255676129",
+        "created_at": "2026-10-18T22:00:51Z",
+        "fields": [
+          {
+            "name": "Status",
+            "field_id": 427467114,
+            "captured_option": "9dd5a876",
+            "captured_value": "Blocked",
+            "proposed_option": "08629308",
+            "proposed_value": "Done"
+          },
+          {
+            "name": "Research Readiness",
+            "field_id": 427467514,
+            "captured_option": "2087a91d",
+            "captured_value": "Awaiting Decision",
+            "proposed_option": "bcccd43f",
+            "proposed_value": "Ready"
+          }
+        ],
+        "saved_change_claimed": false,
+        "preserve": "All seven other selections, complete issue metadata, assignees, labels and native relationships; no walkthrough claim."
+      },
+      "historical_preservation": {
+        "all_prior_audit_fields_and_audits": "unchanged",
+        "handoff_rows": 101,
+        "original_owner_reviews": 28,
+        "cutoff_responses": 22,
+        "post_snapshot_reviews_unchanged": 115,
+        "historical_categories": [
+          44,
+          55,
+          2
+        ],
+        "original_backlog_and_configuration_exports": "byte-identical",
+        "all_prior_markdown_content": "byte-identical prefix"
+      },
+      "current_record_counts_at_baseline": {
+        "entities": 39,
+        "dimensions": 48,
+        "cells": 1872,
+        "documented": 121,
+        "unknown": 1751,
+        "exercised": 0,
+        "unsupported": 0,
+        "source_records": 58,
+        "dated_rechecks": 48
+      },
+      "count_scope": "#386 adds six documentary resources and 288 Unknown cells. Prior 33-entity receiving reviews keep their original scope; no source date or evidence grade is refreshed.",
+      "executive_synthesis": {
+        "owner_issue": 47,
+        "existing_receipt": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6254040913",
+        "existing_delivery": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/389",
+        "this_update": "Dated metadata/context offered to the existing executive owner; no new program decision or rewrite."
+      },
+      "remaining_evidence_boundaries": [
+        "#61 missing actual matched runtime/topology/calibration observations; no new hardware execution.",
+        "#62 missing immutable evaluated-model/run/task/grader identities and no replication selected.",
+        "#63 prospective operational/participant decisions and actual fieldwork remain unperformed; #52/#56 retain child gates.",
+        "All source-use, publication, shared-contract and native lifecycle scope remains separate."
+      ],
+      "validation_and_acceptance": "Prepared source only. Independent source/preservation review, current-head checks, normal delivery and actual-main qualification remain required. Any later targeted-field operation must retain its own fresh guards and independent readback; an unapplied correction remains an explicitly audited discrepancy with a named follow-up, not a claim of saved values or an additional audit-completion prerequisite. No whole #59 closure is claimed."
     }
   ]
 }
