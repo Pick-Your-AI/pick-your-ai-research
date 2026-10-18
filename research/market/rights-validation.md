@@ -47,7 +47,7 @@ Per-source evidence, update cadence and next actions are recorded in [integratio
 
 - **GPUs.io** has published terms and a paid API; both were recorded as unknown.
 - **Artificial Analysis**: commercial display isn't just "requires review". Its terms bar this product category without written consent.
-- **Harness Bench**: the paper is CC BY 4.0, so its published results can be shown with attribution. The repository has no licence, so its tasks, trajectories and catalogue cannot be reused.
+- **Harness Bench**: paper material can be used within its CC BY 4.0 scope and notice conditions. The separately unlicensed repository tasks, trajectories and catalogue remain excluded from the project's current intake because no applicable reuse grant was established in the bounded audit below. That exclusion does not turn unestablished legal scope into a finding about every possible use.
 - **MCP registry**: downstream republishing is the intended use, not an open question.
 - **OpenRouter**: automated collection, including through its public API, needs written permission.
 
