@@ -795,3 +795,51 @@ W1-gemini keeps the original 2,000-token shared prefix and 3,000-token request (
 C-R16 and C-H17 must use the [#60 source-specific reuse decisions](../market/rights-validation.md), not infer permission from API access or a generic terms warning. GPUs.io is display-only through its paid API with attribution under that table; no catalog redistribution grant is implied. For AWS/Azure, apply the recorded allowed scope and keep unaddressed rights questions with #60/#41.
 
 Prices carry as-of dates. Re-evaluate on a new pricebook, snapshot or ruleset, a rights-decision change, or a build edit. Time elapsed alone does not expire version-pinned facts; #42 is not asked to invent a stale-after duration.
+
+## T4 cost-coverage follow-up (2026-10-18; partial research)
+
+This section addresses the two #39 coverage objections in
+[appletechie's co-owner reply](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+to [PUSHINGSQUARES's scoped dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930).
+It adds the missing cross-record links and explicit omissions; it does not add a
+price, recompute a scenario, or establish a current vendor billing claim.
+
+### Memory costs omitted from totals
+
+The following are **not priced in this estimate**. This means that this record
+has no accepted, scenario-bound line for them, not that their publishers have no
+prices or that the services are free. Keep each selected but unpriced service
+visible next to the total; an absent selection does not incur an invented charge.
+
+| Memory candidate from #28 | Cost treatment here | Evidence still needed before including a line |
+| --- | --- | --- |
+| Google Agent Platform Memory Bank | Not priced; omitted from totals | Selected service/version, applicable operation and storage meters, region, dated rate and conditions, workload quantities |
+| Mem0 Platform | Not priced; omitted from totals | Selected hosted plan, billing meters, dated rate/allowances/overages and scenario quantities |
+| Zep Cloud | Not priced; omitted from totals | Selected plan and billable operations/storage, dated rate/allowances and scenario quantities |
+| Letta Cloud | Not priced; omitted from totals | Selected hosted offering, billing meters, dated rate/conditions and scenario quantities |
+
+See the merged [#28 agent-memory research note](../T4-agents-integrations/agent-memory.md)
+(original partial delivery #72) for the candidate identities and managed versus
+self-hosted distinctions. Mem0 OSS, Graphiti, and self-hosted framework stores
+are not interchangeable with their hosted counterparts: infrastructure, storage,
+model extraction/embedding calls, backups and operations remain separate possible
+costs. No licence label or unknown hosted fee makes those costs zero. This list
+is the requested four-candidate omission coverage, not an exhaustive memory
+pricebook or a change to L48's managed agent-runtime prices.
+
+### Tool pricebook remains a separately dated proposal
+
+The merged [Anthropic web-search pricebook proposal](../../pricing/proposals/t4b-anthropic-web-search.json)
+(original partial delivery #70) retains its own exact catalog version, capture
+date, currency, request meter, provenance and billing conditions. Its first-party
+platform scope, error exclusions, separately billed model-token costs and
+capture-date versus vendor-effective-date distinction must travel with any future
+use. Do not copy a bare rate into this estimate or silently add it to an existing
+scenario: first match the selected tool/version and platform, recheck applicability
+and freshness, supply search-use quantities and separately account for model
+usage without double-counting. This follow-up neither refreshes nor promotes the
+proposal and leaves the current scenario outputs unchanged.
+
+The remaining #39 pricing acceptance and #40 `cost_policy → tool` contract decision
+stay with their existing owners. These linked receipts address research scope;
+they do not complete #39 or replace the other T4/T6 follow-ups.
