@@ -27,9 +27,9 @@ A completed free Stack Builder test returned an ordered local PDF RAG workflow f
 
 Remaining: test contradictory constraints, verify actual deployment and export behavior, and obtain owner review. Second-substitute comparisons were run on 2026-10-17 (below).
 
-## CanIRun.ai candidate (2026-10-16)
+## Historical CanIRun.ai intake (2026-10-16)
 
-Add [CanIRun.ai](competitors/canirun-ai.md) to the device-first comparison queue alongside ModelFit and llmfit. Directory inspection is the only evidence so far. Apply the existing common scenario, contradictory constraints and export tests; record unsupported inputs as bounded observations. No test has run and the existing Flocci-first order and acceptance gates remain unchanged.
+At intake, [CanIRun.ai](competitors/canirun-ai.md) was queued alongside ModelFit and llmfit with directory inspection only. The dated 2026-10-17 observations below supersede that initial untested state for ModelFit and CanIRun.ai. They do not complete the Flocci contradictory-constraints/export test or establish deployed-system behavior. PR #125 delivered those observations to main (`6b14b7f`, merge state checked 2026-10-18); the acceptance gates remain unchanged.
 
 ## 2026-10-17 tests (@tynamite)
 
