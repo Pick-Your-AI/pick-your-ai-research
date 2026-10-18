@@ -8,7 +8,7 @@ Select a representation for the actual retrieval task and preserve its identity 
 
 ## Candidate options and sourced fields
 
-The values below are publisher statements, not observed capacity or quality. Sources E1–E3 were checked 2026-10-18; mutable model aliases/cards require a pinned artifact or route before a complete catalog proposal.
+The values below are publisher statements, not observed capacity or quality. Sources E1–E3 were checked 2026-10-18; BGE-M3 is pinned below. Other mutable model aliases/cards require an artifact or route pin before a complete catalog proposal.
 
 | Candidate | Representation and published limit | Access and terms | Conditions |
 | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ Proposed estimate: re-embedding work equals the sum of billed input units for af
 ## Evidence and quality boundary
 
 - E1 — OpenAI, [Embeddings guide](https://developers.openai.com/api/docs/guides/embeddings), mutable API documentation, accessed 2026-10-18. Default dimensions and shortening are source checked; no API call was made.
-- E2 — BAAI, [bge-m3 model card](https://huggingface.co/BAAI/bge-m3), mutable card, accessed 2026-10-18. Published dense width/sequence and alternate representations; no weights downloaded or benchmark reproduced.
+- E2 — BAAI, [bge-m3 model card](https://huggingface.co/BAAI/bge-m3/raw/5617a9f61b028005a4858fdac845db406aefb181/README.md), repository revision `5617a9f61b028005a4858fdac845db406aefb181`, accessed 2026-10-18. The [publisher repository metadata](https://huggingface.co/api/models/BAAI/bge-m3) resolved that revision. Published dense width/sequence, alternate representations and MIT card declaration are scoped to this card; no weights downloaded or benchmark reproduced.
 - E3 — intfloat, [multilingual-e5-large card](https://huggingface.co/intfloat/multilingual-e5-large), mutable card, accessed 2026-10-18. Prefix, normalization and truncation instructions; no ranking against other candidates is claimed.
 
 Publisher benchmark tables do not establish quality on the user's corpus. #36 must pin corpus/license, queries, relevance judgments, split/leakage controls, preprocessing, retrieval depth, metric and uncertainty before comparisons. The existing #65 experiment remains with its active contributors.
@@ -59,3 +59,9 @@ Publisher benchmark tables do not establish quality on the user's corpus. #36 mu
 ## Recommendation and outstanding acceptance
 
 Choose representation and index together after fixing the task, language and data boundary. Keep #13 chunking, #15 dimensions/metrics, #16 scoring, #28 memory representation reuse and #39 re-indexing meters as explicit handoffs. @zabyxc01/@PUSHINGSQUARES own this record; consumer dispositions and exact runtime/version/price fields remain pending. No CatalogItem is fabricated to fill missing values. Multimodal candidates remain in the T1 inventory until T3 owners select scope and representation-specific evidence.
+
+## BGE-M3 representation pin
+
+For the self-operated BGE-M3 candidate, use repository revision `5617a9f61b028005a4858fdac845db406aefb181` for both document and query artifacts. The pinned E2 card declares 1,024 dense dimensions and an 8,192-token sequence length, demonstrates dense dot-product scoring and says query instructions are unnecessary. Preserve the actual tokenizer, pooling, normalization, runtime revision and configured maximum length in the representation identity; the repository pin alone does not specify the complete serving stack. Smaller configured lengths must not silently discard required content (EMB-04).
+
+The card separately exposes sparse weights and multivector scoring; those outputs are not interchangeable with the dense field. Its MIT declaration concerns the model artifact, not automatically the ingestion corpus or a hosted offering. Remaining admission work is runtime/configuration evidence and provider/catalog linkage, with #14 owners retaining multimodal scope and #30/#60 retaining applicable rights review. This pin removes the mutable-card ambiguity, without claiming quality, throughput, a default backend or full issue completion.
