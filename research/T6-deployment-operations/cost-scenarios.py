@@ -48,10 +48,22 @@ def fmt(x):
     if isinstance(x, float) and not x.is_integer(): return f'{x:,.6g}' if abs(x) < 1000 else f'{x:,.2f}'
     return f'{int(x):,}'
 
+def finite_json_float(value):
+    """Reject overflowing JSON numbers before they can invalidate comparisons."""
+    number = float(value)
+    if not math.isfinite(number):
+        raise ValueError(f'non-finite number in scenario spec: {value}')
+    return number
+
+def reject_json_constant(value):
+    raise ValueError(f'non-finite number in scenario spec: {value}')
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ('-h', '--help'):
         print(__doc__); sys.exit(0 if len(sys.argv) > 1 else 2)
-    spec = json.load(open(sys.argv[1], encoding='utf-8'))
+    with open(sys.argv[1], encoding='utf-8') as source:
+        spec = json.load(source, parse_float=finite_json_float,
+                         parse_constant=reject_json_constant)
     n = spec.get('sig_figs', 2)
     cases = list(spec['cases'])
     out, bad = {}, []
