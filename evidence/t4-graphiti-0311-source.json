@@ -1,0 +1,9 @@
+{
+  "id": "t4-graphiti-0311-source",
+  "uri": "https://raw.githubusercontent.com/getzep/graphiti/5961293865a57844fe13d4eb061deb3501971fb2/graphiti_core/graphiti.py",
+  "version": "v0.31.1; commit 5961293865a57844fe13d4eb061deb3501971fb2",
+  "sha256": "f3a4a26094e681fea3ed333d70d89fcb5df5af49b1a9599d8e77d4fcaf8be45a",
+  "access": "Public commit-pinned source read on 2026-10-18 through GitHub. The v0.31.1 tag resolved to this commit; the 90672 UTF-8 bytes reproduce Git blob 61ea540595de04a93860836de9777fbb68523bf6. No SDK installation, source execution, credentials, database or hosted service was used.",
+  "description": "Primary Graphiti source for the group_id/group_ids partition interface readback in research/T4-agents-integrations/agent-memory.md, D61-D65. Source inspection covers documented entry points and request-scoped routing, alongside the separately linked pinned helper, search and driver files; it does not establish runtime isolation or a deployed authorization boundary.",
+  "rights": "The pinned repository LICENSE declares Apache License 2.0; pyproject.toml identifies graphiti-core version 0.31.1 and Apache-2.0. These are repository-source observations, not an audit of a built distribution or all dependencies. The source file is not redistributed in Git; the decision record contains attributed links and paraphrases."
+}
