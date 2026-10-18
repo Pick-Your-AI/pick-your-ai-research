@@ -73,6 +73,29 @@ class ContextBudgetCases(unittest.TestCase):
         result = evaluate(replace(SHARED, input_tokens=None, reserved_output=4001))
         self.assertEqual(result.outcome, Outcome.FAIL)
 
+    def test_known_input_failure_is_not_hidden_by_unknown_budget_semantics(self) -> None:
+        budget = replace(SHARED, semantics=Semantics.UNKNOWN, input_cap=6000)
+        result = evaluate(budget)
+        self.assertEqual(result.outcome, Outcome.FAIL)
+        self.assertFalse(result.may_not_fit)
+
+    def test_input_straddle_keeps_uncertainty_with_unknown_budget_semantics(self) -> None:
+        budget = replace(
+            SHARED,
+            semantics=Semantics.UNKNOWN,
+            input_tokens=TokenRange(5500, 6500),
+            input_cap=6000,
+        )
+        result = evaluate(budget)
+        self.assertEqual(result.outcome, Outcome.FAIL)
+        self.assertTrue(result.may_not_fit)
+
+    def test_fitting_input_cap_cannot_resolve_unknown_budget_semantics(self) -> None:
+        budget = replace(SHARED, semantics=Semantics.UNKNOWN, input_cap=8000)
+        result = evaluate(budget)
+        self.assertEqual(result.outcome, Outcome.UNKNOWN)
+        self.assertFalse(result.may_not_fit)
+
     def test_partial_pass_cannot_hide_unknown_required_operands(self) -> None:
         fitting = replace(SHARED, input_tokens=TokenRange(5000, 5000))
         for budget in (

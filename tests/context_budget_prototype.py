@@ -88,27 +88,19 @@ def evaluate(budget: Budget) -> Result:
                     compare(total_upper, budget.shared_cap),
                 )
             )
-            if budget.input_cap is not None:
-                checks.append(
-                    Check(
-                        "input",
-                        compare(lower, budget.input_cap),
-                        compare(upper, budget.input_cap),
-                    )
-                )
         case Semantics.SEPARATE:
-            checks.extend(
-                (
-                    Check("combined", Outcome.SKIPPED, Outcome.SKIPPED),
-                    Check(
-                        "input",
-                        compare(lower, budget.input_cap),
-                        compare(upper, budget.input_cap),
-                    ),
-                )
-            )
+            checks.append(Check("combined", Outcome.SKIPPED, Outcome.SKIPPED))
         case Semantics.UNKNOWN:
             checks.append(Check("combined", Outcome.UNKNOWN, Outcome.UNKNOWN))
+
+    if budget.input_cap is not None or budget.semantics == Semantics.SEPARATE:
+        checks.append(
+            Check(
+                "input",
+                compare(lower, budget.input_cap),
+                compare(upper, budget.input_cap),
+            )
+        )
 
     if budget.policy_total_cap is not None:
         checks.append(
