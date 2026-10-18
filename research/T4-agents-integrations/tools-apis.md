@@ -63,7 +63,7 @@ One row per **operation family**. Families are split when side effects differ, b
 | 5 | GitHub issues write (create) | GitHub (SaaS) | fine-grained PAT | "Issues" repository permission (write) | as above, plus 80 content-creating req/min and 500/h; POST/PATCH = 5 points | write | as above | unknown | B10, B11 |
 | 6 | Slack `chat.postMessage` | Slack (SaaS) | OAuth v2 bot or user token | `chat:write` | "Special": about 1 message/s per channel, several hundred/min per workspace | high_impact (visible to others at once) | `ratelimited` with `Retry-After`; `rate_limited` (too many posts) | none published per call (unknown) | B13, B18 |
 | 7 | Slack `chat.delete` | Slack (SaaS) | OAuth v2 bot or user token | **`chat:write` (same scope as posting)**; a bot token can delete only its own messages | Tier 3 (50+/min) | irreversible (project classification) | `ratelimited` + `Retry-After` | unknown | B14 |
-| 8 | Slack `conversations.history` | Slack (SaaS) | OAuth v2 bot or user token | `channels:history`, `groups:history`, `im:history` or `mpim:history` | Tier 3 (50+/min); new limits since 2025-05-29 for newly created, commercially distributed non-Marketplace apps (values not rendered) | read_only (private data) | HTTP 429 + `Retry-After` (B17, 2018 changelog) | unknown | B15, B16, B17 |
+| 8 | Slack `conversations.history` | Slack (SaaS) | OAuth v2 bot or user token | `channels:history`, `groups:history`, `im:history` or `mpim:history` | App/install cohort determines Tier 3 versus 1 request/min and 15-object pages; see dated B40/B41 readback below | read_only (private data) | HTTP 429 + `Retry-After` (B41; current readback) | unknown | B15, B16, B17; B40, B41 |
 | 9 | Gmail `messages.send` | Google (SaaS) | OAuth 2.0 | `gmail.send` (Sensitive) | 100 quota units per call; 6,000 units/user/min; 1,200,000 units/project/min | irreversible (project classification) | quota errors; truncated exponential backoff advised | none published per call (unknown) | B19, B20 |
 | 10 | Gmail `messages.delete` vs `messages.trash` | Google (SaaS) | OAuth 2.0 | `delete` needs `https://mail.google.com/` (Restricted); `trash` is reversible | delete 10 units; trash 20 units | delete = irreversible ("cannot be undone. Prefer messages.trash"); trash = write | as above | unknown | B20, B21 |
 | 11 | Google Drive files | Google (SaaS) | OAuth 2.0 | `drive.file` (Non-sensitive, per-file) recommended over `drive` / `drive.readonly` (Restricted) | not fetched | read_only or write by scope | not fetched | unknown | B22 |
@@ -171,7 +171,7 @@ Mapped to v1 JSON pointers. "Note only" means v1 cannot express it.
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
+Original B1–B39 entries accessed on 2026-10-16; dated follow-up entries below retain their own access dates. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -543,6 +543,17 @@ These affect throughput and plan selection, not price per call.
 | Shared provider identity and `provided_by` link between `data_source` and `integration`; union-of-scopes review when one OAuth client serves ingestion and actions | handoff to #13 · @zabyxc01 |
 | Rate-limit and failure-mode signals (`Retry-After`, `x-ratelimit-*`, `Stripe-Rate-Limited-Reason`, in-band tool errors) for monitoring | handoff to #38 · @PUSHINGSQUARES |
 | Evidence policy for summarising fetchers and pages that render tables in JavaScript (Slack tiers, GitHub permissions) | #41 · @tynamite |
-| Re-fetch: Slack current tier table and non-Marketplace limits; Brave rate-limit headers; GitHub repository permissions (Contents, Administration, repo delete); Stripe RAK permission names; Drive quotas; E2B SDK licence conflict (MIT vs Apache-2.0) | #26 · @CompleteDotTech |
+| Re-fetch: Brave rate-limit headers; GitHub repository permissions (Contents, Administration, repo delete); Stripe RAK permission names; Drive quotas; E2B SDK licence conflict (MIT vs Apache-2.0) | #26 · @CompleteDotTech |
 
 [Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
+
+
+## Slack history rate-limit gap resolved (2026-10-18)
+
+B40 — Slack, [conversations.history](https://docs.slack.dev/reference/methods/conversations.history/), mutable Web API method documentation, accessed **2026-10-18** with the browser text extractor. **Primary documentation, source checked / unverified**; no authenticated API request or measured throughput.
+
+The previously unread B15 values are now visible: qualifying new commercially distributed non-Marketplace applications/installations from 2025-05-29 receive **1 request/minute**, with both default and maximum page size **15 objects**. Marketplace-approved and internal customer-built applications retain **Tier 3**. The current method page exempts existing installations of non-Marketplace applications from the newly posted limits. Preserve app distribution/approval and installation cohort; do not assign the restrictive rate to every external app or infer a particular customer's effective quota.
+
+B41 — Slack, [Web API rate limits](https://docs.slack.dev/apis/web-api/rate-limits/), mutable guide, accessed **2026-10-18** through the same extractor; **Primary documentation, source checked / unverified**. The formerly unread B16 table describes Tier 3 as **50+ requests/minute**, scoped by method, workspace and app. Pagination is a condition of published tiers; omitting it can tighten limits. Burst ceilings are unpublished. Rate-limit responses use HTTP **429**, with `Retry-After` in seconds; unrelated methods/workspaces are not automatically paused.
+
+Project interpretation for #38: retain those dimensions when grouping throttling events and retry queues. Unknown cohort remains unknown; an advertised tier is neither observed throughput nor guaranteed latency. Do not flatten all Slack methods into v1's integration-level `rate_limit_per_minute`. This resolves the two historical unread-table gaps only; other B15/B16 historical access conditions remain recorded, #40 owns richer rate-limit fields and #38 receiving acceptance remains pending. Source access grants no customer-content or publication rights.
