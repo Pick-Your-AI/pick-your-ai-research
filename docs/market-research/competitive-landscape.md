@@ -39,7 +39,7 @@ Machine-readable observations: [competitors](../../research/market/competitors.j
 
 ## Seeds
 
-**Status: inferred — coordinator to confirm.** No artifact on this branch, PR #67 or issue #48 lists the five original seeds explicitly; #47 still lists "the #48 seed-list confirmation" as open. The list below is inferred from the first five catalog entries, the "seed page" wording in the llmfit profile and the risk register. All were re-accessed anonymously on 2026-10-16; robots.txt permitted each path.
+**Operational scope selected 2026-10-18 under delegated engineering authority:** use the five entries below for the bounded #48 seed-coverage review. This resolves the working list, not the undocumented original intent: the earlier inference came from the first five catalog entries, the llmfit profile and the risk register. Selection does not certify verification, operator identity or receiving-owner acceptance. The observations below retain their original 2026-10-16 access date; no fresh site inspection is claimed.
 
 | Seed | Operator (as established) | Site | Repository | Site vs repository boundary |
 | --- | --- | --- | --- | --- |
@@ -102,7 +102,7 @@ These are direct counterexamples to the defensibility hypothesis in [differentia
 
 | Selected | Reason |
 | --- | --- |
-| BenchLM, Harness Bench, llmfit, Local AI planner, Flocci | The five (inferred) seeds; each overlaps an entry step (model choice, harness evaluation, hardware fit, guided stack) |
+| BenchLM, Harness Bench, llmfit, Local AI planner, Flocci | The five operational seeds selected 2026-10-18; each overlaps an entry step (model choice, harness evaluation, hardware fit, guided stack) |
 | ModelFit | Strongest documented hardware-first direct substitute (device/setup/results flow, CLI, MCP) |
 | Artificial Analysis, OpenRouter, Hugging Face, Models.dev | Primary model, provider and price data feeds; integration and rights questions for #41 |
 | Dify, n8n, SkyPilot | Build/deploy substitutes downstream of a recommendation; test export and execution boundaries |
@@ -113,4 +113,4 @@ Excluded from deep dives: Arena and LLM Stats (leaderboards overlapping Artifici
 
 ## CanIRun.ai addition (2026-10-16)
 
-[CanIRun.ai devices](https://www.canirun.ai/devices) is recorded as `canirun-ai`, a partial competitor for device-first local model selection. It is a separate record from CanRun (`canrunllm.com`) and CanItRun (`canitrun.dev`); ownership relationships are unknown. See the [dated profile](../../research/market/competitors/canirun-ai.md). #48 owns intake, #49 its 48 matrix cells, #50 the profile and #66 scenario testing. This adds a fourteenth profile within the 10–15 target; it does not establish a full-stack substitute or data reuse permission.
+[CanIRun.ai devices](https://www.canirun.ai/devices) is recorded as `canirun-ai`, a partial competitor for device-first local model selection. It is operated by GitHub user midudev, per the `midudev/canirun.ai` repository whose homepage is canirun.ai (legal entity unconfirmed). It is a separate record from CanRun (`canrunllm.com`) and CanItRun (`canitrun.dev`); ownership relationships to those are unknown. The repository README describes hardware-detected, per-use-case recommendations, which makes it a direct-substitute candidate pending #66. See the [dated profile](../../research/market/competitors/canirun-ai.md). #48 owns intake, #49 its 48 matrix cells, #50 the profile and #66 scenario testing. This adds a fourteenth profile within the 10–15 target; it does not establish a full-stack substitute or data reuse permission.

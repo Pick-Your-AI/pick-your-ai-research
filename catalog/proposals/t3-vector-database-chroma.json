@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "vector_database.chroma",
+  "kind": "vector_database",
+  "tier": "T3",
+  "name": "Chroma (self-operated software)",
+  "version": "1.5.9",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Self-operated software release, not a hosted-service plan. Canonical metrics are supported families; score transforms and representation-specific limits remain in the linked research note. Runtime configuration, access enforcement and operational costs require separate evidence.",
+  "tags": [
+    "vector-search",
+    "self-hosted",
+    "open-source"
+  ],
+  "spec": {
+    "supported_metrics": [
+      "cosine",
+      "dot",
+      "euclidean"
+    ]
+  },
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/rust/distance/src/types.rs",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "l2, cosine and ip map to Euclidean, Cosine and InnerProduct. Returned l2 is squared Euclidean; ip returns one minus dot product. Canonical names identify metric families, not comparable raw score units."
+    },
+    {
+      "source_uri": "https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/chromadb/api/collection_configuration.py",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "HNSW and SPANN are separate configurations and cannot both be supplied. This does not establish cloud plan availability or an ACL boundary."
+    },
+    {
+      "source_uri": "https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/LICENSE",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "Apache-2.0 software license. No-charge software use is distinct from hosting, storage and operations costs; comply with license/NOTICE and redistribution conditions. No customer-content or hosted-service rights inferred."
+    },
+    {
+      "source_uri": "https://github.com/chroma-core/chroma/releases/tag/1.5.9",
+      "checked_at": "2026-10-18T00:51:33Z",
+      "verification_status": "unverified",
+      "notes": "Publisher release/tag pin resolves to commit 11f3c7435e71024aa0a2b53710a28d3289d922d1. No installed runtime or benchmark was exercised."
+    }
+  ],
+  "updated_at": "2026-10-18T00:51:33Z"
+}

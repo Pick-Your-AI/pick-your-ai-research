@@ -7,18 +7,24 @@ Status: draft for owner review · Last researched: 2026-10-16
 
 Select a particular model release and serving artifact that fits a workload and delivery mode. Preserve identity, access and capability evidence separately from runtime fit and measured quality.
 
-## Candidate options
+## Broader model-family research
+
+The user expanded this assignment on2026-10-17 beyond LLMs and required citations for new and previous research. [Model taxonomy](model-taxonomy.md) now links sourced comparisons for [language/NLP](language-models.md), [perception/OCR](perception-models.md), [embedding/reranking](retrieval-models.md), [generative media/3D/worlds](generative-media-models.md), [speech/audio/music](audio-models.md) and [predictive/scientific/action models](specialized-models.md). The [research inventory](model-research-inventory.json) and [complete source index](model-research-sources.md) retain exact record-to-source mappings, dates and unknowns. These are research notes, not an alternate production catalog or evidence that every possible checkpoint was enumerated.
+
+Non-token and discriminative tasks require task-specific output/admission semantics. The [T1-TAX1 proposal](model-family-contract-proposal.md) preserves frozen v1 and previously accepted #40 routing; it does not force pixels, seconds, sparse vectors, forecast steps, DNA, meshes or actions into invented text-token fields. #14 still owns embedding catalog work; #10/#11/#30/#36/#39 retain their specialized decisions.
+
+## Original language-model slice (captured2026-10-16)
 
 Evidence IDs refer to [the source register](evidence.md); all facts below are published, not independently benchmarked.
 
 | Candidate / identity | Delivery, lifecycle and capability | Architecture / license / context |
 | --- | --- | --- |
-| OpenAI GPT-5.4 / `gpt-5.4-2026-03-05` | Direct API; named snapshot still documented at capture. Text/image input to text; function calling and structured output documented; this model does not support fine-tuning (O1). | Closed API offering; weights, parameter count, internal architecture/precision and tokenizer internals not established here. Published context/output 1,050,000/128,000 tokens. Service terms require offering-level evidence (O2). |
-| Claude Sonnet 5.5 / `claude-sonnet-5-5` | Direct API and Bedrock on-demand API offering; active release. Text/image input to text and tool use documented (A1, models overview linked by A1). Dateless fixed snapshot, not rolling latest (A2). | No downloadable-weight artifact established by these sources; internal parameters/precision unknown. Published standard context/output 1M/128K; distinct batch beta excluded (A1). Serving API/retention arrangements differ by route (A4/B2). |
+| OpenAI GPT-5.4 / `gpt-5.4-2026-03-05` | Direct API; named snapshot still documented at capture. Text/image input to text; function calling and structured output documented; this model does not support fine-tuning (O1). | Closed API offering; weights, parameter count, internal architecture/precision and tokenizer internals not established here. Published context/output 1,050,000/128,000 tokens. Service terms require offering-level evidence (O3); privacy/retention uses O2. |
+| Claude Sonnet 5.5 / `claude-sonnet-5-5` | Direct API and Bedrock on-demand API offering; active release. Text/image input to text (A1); tool use explicitly documented in the [models overview](https://platform.claude.com/docs/en/models/overview), A7, rechecked2026-10-17. Dateless fixed snapshot, not rolling latest (A2). | No downloadable-weight artifact established by these sources; internal parameters/precision unknown. Published standard context/output 1M/128K; distinct batch beta excluded (A1). Serving API/retention arrangements differ by route (A4/B2). |
 | Gemini 2.5 Flash / `gemini-2.5-flash` | Legacy-access API candidate, existing active users only, not deprecated (G1). Text/image/video/audio input to text; publisher tool/schema claims. | Independent input 1,048,576 and output 65,536 budgets; no invented combined limit. Closed internals unknown. Note-only until context semantics map accepted by #40. Paid/unpaid terms differ (G2). |
 | Qwen3-8B / immutable repository revision | Self-hosted text-generation checkpoint; Apache-2.0 weights in public ungated source (Q1/Q3/Q4). Card claims agent/tool capability; not a measured end-to-end tool workflow. | 8.2B total dense parameters; 6.95B non-embedding is not active-parameter count. `Qwen3ForCausalLM`, BF16, Safetensors source. 36 layers, 32 query/8 KV heads, head dimension 128. Native 32,768 vs YaRN 131,072; config 40,960 is a separate field (Q1/Q2). |
 
-Bedrock on-demand is a second API offering of the same publisher release, not a claim of a different model or dedicated capacity. Managed coverage is the conditional dedicated Hugging Face endpoint candidate (H1/H2), with exact artifact/engine/instance support still required. Hybrid builds keep per-serving-component modes; no fictitious hybrid model is introduced. Candidate breadth is bounded by these contrasting cases; new releases do not trigger a perpetual crawl.
+Bedrock on-demand is a second API offering of the same publisher release, not a claim of a different model or dedicated capacity. Managed coverage is the conditional dedicated Hugging Face endpoint candidate (H1/H2), with exact artifact/engine/instance support still required. Hybrid builds keep per-serving-component modes; no fictitious hybrid model is introduced. These four earlier examples are preserved for their source/date scope; they are not the boundary of the expanded model-family research or a list of current default recommendations.
 
 ## Identity and versioning decision proposal
 

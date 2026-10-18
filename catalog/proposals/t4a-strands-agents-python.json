@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.strands-agents-python",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "Strands Agents (Python)",
+  "version": "1.61.1",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true,
+    "supports_mcp": true,
+    "supports_multi_agent": true
+  },
+  "description": "In-process agent SDK from AWS with no hosted control plane; Graph and Swarm multi-agent patterns, session managers (file, S3, custom) and OpenTelemetry tracing. TypeScript SDK is versioned separately.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/strands-agents/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "version 1.61.1 uploaded 2026-10-15; license Apache-2.0; requires_python >=3.10"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/strands-agents/harness-sdk/main/LICENSE.APACHE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "license Apache-2.0"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/strands-agents/harness-sdk/main/strands-py/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_tool_execution (tools, model providers)"
+    },
+    {
+      "source_uri": "https://strandsagents.com/docs/user-guide/concepts/tools/mcp-tools/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_mcp: stdio, Streamable HTTP and SSE in Python and TypeScript"
+    },
+    {
+      "source_uri": "https://strandsagents.com/docs/user-guide/concepts/agents/session-management/index.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_multi_agent: Graph and Swarm multi-agent systems"
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "license": {
+    "spdx_id": "Apache-2.0",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

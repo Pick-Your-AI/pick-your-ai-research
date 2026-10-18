@@ -13,6 +13,12 @@ Status: **merged research with scoped central-owner positions; follow-up and con
 
 Supporting records: [source register](evidence.md), [handoffs](handoffs.md), [exact acceptance matrix](acceptance-matrix.md), [validation](validation.md), [goal progress](goal-progress.md).
 
+## Expanded scope and source audit (2026-10-17)
+
+The user clarified that model selection must include types beyond LLMs and that **all model research, including the earlier work, must cite sources**. Start with [model taxonomy and coverage](model-taxonomy.md), its six detailed comparisons and [complete primary-source register](model-research-sources.md). The [JSON notes](model-research-inventory.json) contain248 candidate records spanning55 overlapping research task tags; models, pipelines/bundles, unpinned families and recipes are explicitly distinguished. These are corpus counts, not a global census or validated production inventory.
+
+[Retrospective T1 citation audit](citation-audit-2026-10-17.md) corrects indirect/wrong evidence references while preserving original dates. [Market citation map](../market/citation-index-2026-10-17.md) indexes every current nonunknown matrix claim; supplemental source URLs and fresh rechecks do not rewrite historical access. No independently measured performance, universal licence permission or owner acceptance is inferred. [Task-family contract proposal](model-family-contract-proposal.md) routes unsupported types/units through #40 while preserving v1 and earlier central-owner corrections.
+
 ## Proposed decisions and findings
 
 - Model publisher, serving provider, distributor and offering are distinct. Pin a release and its serving route; an alias/marketing family alone is insufficient. The [source register](evidence.md) supplies claim-level dates and versions.

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "id": "cat.embedding_model.baai-bge-m3-dense",
+  "kind": "embedding_model",
+  "tier": "T3",
+  "name": "BGE-M3 dense text representation",
+  "version": "5617a9f61b028005a4858fdac845db406aefb181",
+  "status": "active",
+  "billing_class": "unknown",
+  "spec": {
+    "provider_ref": "cat.model_provider.baai",
+    "embedding_dimensions": 1024,
+    "max_input_tokens": 8192,
+    "similarity_metrics": [
+      "dot"
+    ],
+    "supported_modalities": [
+      "text"
+    ],
+    "access_modes": [
+      "weights"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://huggingface.co/BAAI/bge-m3/raw/5617a9f61b028005a4858fdac845db406aefb181/README.md",
+      "checked_at": "2026-10-18T01:20:00Z",
+      "verification_status": "unverified",
+      "notes": "Source-checked card specifies dense width and sequence ceiling, demonstrates text encoding and dense dot-product scoring, and declares MIT. No benchmark reproduction or corpus/service rights are asserted."
+    },
+    {
+      "source_uri": "https://huggingface.co/BAAI/bge-m3/tree/5617a9f61b028005a4858fdac845db406aefb181",
+      "checked_at": "2026-10-18T01:20:00Z",
+      "verification_status": "unverified",
+      "notes": "Pinned repository lists downloadable model weights. No weights downloaded; revision identifies repository content, not a locally verified weight hash. Runtime, tokenizer configuration, normalization and precision remain separate inputs."
+    }
+  ],
+  "updated_at": "2026-10-18T01:20:00Z",
+  "description": "Pinned downloadable model artifact, dense output only. Sparse and multivector modes require separate representation contracts. This is not a hosted offering or a tested runtime configuration; operating costs remain unknown.",
+  "license": {
+    "spdx_id": "MIT"
+  }
+}

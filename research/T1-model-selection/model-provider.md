@@ -9,6 +9,10 @@ Choose the organization/source and a particular model delivery offering under ex
 
 ## Candidate options
 
+The original table below is a dated API/weights comparison. The2026-10-17 [broader inventory](model-taxonomy.md) extends provider/source discovery to perception, retrieval, speech/music, editable image/video, spatial, predictive/scientific and action-model routes. Each [candidate row](model-research-inventory.json) cites the [primary register](model-research-sources.md) and preserves publisher versus host/reseller/UI distinctions. Exact API IDs, downloadable artifacts and services must not be collapsed merely because a reseller offers a similarly named model.
+
+New API/service licence or account terms not inspected remain explicitly pending in those rows; weight/code/backbone/adapter/data/voice rights are separate. No unknown rate or permission becomes zero/free/allowed. New meters such as characters, images, pixels, generated seconds, credits and scientific job units require #39 definitions and dated Pricebook intake; the existing token-rate Pricebook is not a complete price comparison for these task families. The research adds no fabricated new rates or contracts.
+
 Evidence IDs resolve in [the claim register](evidence.md). This bounded set covers first-party API, a cloud-managed marketplace/inference route, and open-weight distribution. It is representative rather than a recommendation that every provider fits every workload.
 
 | Offering / mode | Publisher / serving party / distributor | Canonical model key -> route ID | Terms, limits and evidence |

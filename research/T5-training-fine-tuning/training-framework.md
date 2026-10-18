@@ -7,11 +7,13 @@ Status: ready for review · Last researched: 2026-10-16
 
 Can the selected model be customised, and with which method and tool?
 
-The answer depends on three joint facts: the base model's license and weight access (#6), the provider's offering (#5), and the framework or service that implements the method. This note covers all three deployment modes:
+The answer depends on three joint facts: the base model's license and weight access (#6), the provider's offering (#5), and the framework or service that implements the method. This note compares three training channels:
 
-- **API:** first-party model APIs (OpenAI, Gemini API, Anthropic, Mistral, Cohere). Customisation is hosted, and the artifact cannot leave the provider.
-- **Managed:** cloud fine-tuning services (Vertex AI, Bedrock, Microsoft Foundry, Together, Fireworks). Some return downloadable weights or adapters.
-- **Self-hosted:** open frameworks run on user compute (TRL, PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NVIDIA NeMo stack, torchtune).
+- **First-party training API:** model APIs (OpenAI, Gemini API, Anthropic, Mistral, Cohere). Customisation is hosted, and the artifact cannot leave the provider.
+- **Managed training service:** cloud fine-tuning services (Vertex AI, Bedrock, Microsoft Foundry, Together, Fireworks). Some return downloadable weights or adapters.
+- **User-operated training framework:** open frameworks run on user compute (TRL, PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NVIDIA NeMo stack, torchtune).
+
+These channel labels do not determine the serving deployment mode. T0's deployment mode (#3) decides the mode by who operates the *serving* runtime and on what capacity ([PR #81](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81), merged), and that definition governs serving. A fine-tuned model's serving mode follows T0, not the channel used to train it. For example, a LoRA trained on Together, downloaded as an adapter and served with its matching base model on user-operated compute would be T0 "Self-hosted", even though its training channel above is a managed training service ([Together deployment documentation](https://docs.together.ai/docs/fine-tuning/deployment#run-locally), accessed 2026-10-17). T0 defines no mode for a training run; see K-08 in #31.
 
 Compute sizing (#31) and dataset preparation (#32) are out of scope.
 
@@ -82,7 +84,7 @@ The issue lists `supported models`, `input data format` and `export path`. v1 ha
 | `/license` | SPDX identifier where one exists | Apache-2.0, BSD-3-Clause; Unsloth is dual | F2, F14 | Framework license ≠ base-model license; both must be checked |
 | `/spec/methods` | array of enum `sft, lora, qlora, dpo, full_finetune, distillation`, min 1 | see the candidate tables | per row | v1 cannot express GRPO, PPO, KTO, ORPO, RFT, continued pretraining, preference optimisation or DoRA |
 | `/spec/backends` | array of enum `cuda, rocm, oneapi, metal, tpu, cpu, other`, min 1 | see the candidate tables | per row | Managed services have no user-visible backend. `other` hides Trainium and Ascend. Support levels differ by method |
-| `/spec/model_formats` | array of enum `safetensors, gguf, onnx, pytorch, api_only, other` | managed locked services = `api_only` | per row | ONNX output was not confirmed for any candidate. Native GGUF export only in axolotl and unsloth; PEFT LoRA adapters from any framework convert with llama.cpp `convert_lora_to_gguf.py` (F34) |
+| `/spec/model_formats` | array of enum `safetensors, gguf, onnx, pytorch, api_only, other` | managed locked services = `api_only` | per row | Native ONNX output was not confirmed for any candidate; a [conditional downstream conversion route](onnx-export-boundary.md) is documented separately, without an executed tuple. Native GGUF export only in axolotl and unsloth; PEFT LoRA adapters from any framework convert with llama.cpp `convert_lora_to_gguf.py` (F34) |
 | `/spec/distributed_supported` | boolean | true for all self-hosted candidates; not applicable to managed | per row | The boolean cannot distinguish multi-GPU from multi-node (Unsloth multi-node is unknown) |
 | `supported models` (note only) | list of model catalog IDs (→ #6) | summarised per service | per row | Changes often; must be date-stamped |
 | `input data format` (note only) | enum proposal: `chat_messages_jsonl`, `prompt_completion_jsonl`, `preference_jsonl`, `alpaca`, `sharegpt`, `raw_text`, `tokenized_parquet` | see tables | per row | Handed to #32 |
@@ -306,7 +308,7 @@ Not proposed yet:
 | Revenue, MAU and residency are user attestations needed by F-03, F-04, F-07 and F-09. Where are they captured? | #2 / #3 · @tynamite |
 | Policy for "competing model" (F-17): no provider defines it | #40 · @tynamite |
 | Mistral Forge licensing and weight export: not stated publicly; sales-led | #30 · @appletechie |
-| ONNX export support (GGUF is resolved: F34–F38) | #30 · @appletechie; consumed by #33 and #11 |
+| Native ONNX support and exact conversion tuple; [downstream route documented](onnx-export-boundary.md), not reproduced (GGUF is resolved: F34–F38) | #30 · @appletechie; consumed by #33 and #11 |
 | Input data formats per framework and service (see tables) | handoff to #32 · @appletechie |
 | Output artifact formats and portability (adapter vs merged, provider-locked) | handoff to #33 · @appletechie; serving support by #11 · @Mattycodes69 |
 | Distributed training capability and backend list for training sizing | handoff to #31 · @appletechie; accelerator catalog by #10 · @Mattycodes69 |

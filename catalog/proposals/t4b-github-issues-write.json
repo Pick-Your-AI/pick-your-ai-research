@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "id": "tool.github.issues-write",
+  "kind": "tool",
+  "tier": "T4",
+  "name": "GitHub REST API issues (write)",
+  "version": "2026-03-10",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Write operation family of the GitHub REST Issues API (create issues). Separated from the read item because the side effect and required permission differ.",
+  "tags": [
+    "developer-platform",
+    "github"
+  ],
+  "spec": {
+    "protocol": "http",
+    "side_effect": "mutating",
+    "auth_methods": [
+      "api_key"
+    ],
+    "required_scopes": [
+      "issues:write"
+    ],
+    "is_networked": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.github.com/en/rest/issues/issues",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports API version 2026-03-10 and 'Issues' repository permissions (write) for Create an issue. Update an issue was not visible in the fetched excerpt. required_scopes uses this project's notation '<fine-grained permission>:<access>' for the GitHub fine-grained token permission named on the endpoint page; auth_methods api_key represents a fine-grained personal access token (bearer token). OAuth app and GitHub App installation tokens were not verified today and are omitted."
+    },
+    {
+      "source_uri": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Content-creating requests: 80 per minute and 500 per hour secondary limits; POST/PATCH cost 5 points."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "extensions": {
+    "x_side_effect_class": "write",
+    "x_operation_family": "issues.write"
+  }
+}

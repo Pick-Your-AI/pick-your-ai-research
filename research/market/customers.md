@@ -47,7 +47,7 @@ The ten segments are unchanged from the PR #67 draft. Role columns use: **user**
 | # | Segment (as defined) | User / buyer / approver (hypothesis) | Overlaps |
 | --- | --- | --- | --- |
 | 1 | Local AI enthusiasts | Same person for all three when self-funded; no organizational approver | Individual developers (2), AI researchers (9) when hobby and work mix |
-| 2 | Individual developers | User always; buyer when self-funded or using a personal card; employer becomes buyer/approver for work use. Stack Overflow shows 10.6% of switchers moved because their organization required or recommended a tool (evidenced for that sample only) | 1, 3; may be the user inside 5, 6 or 7 |
+| 2 | Individual developers | User always; buyer when self-funded or using a personal card; employer becomes buyer/approver for work use. Stack Overflow shows 10.6% of respondents to the switching question reported switching because their organization required or recommended a tool (evidenced for that sample only) | 1, 3; may be the user inside 5, 6 or 7 |
 | 3 | AI application developers | User; buyer is usually a team lead, founder or client; approver may be security or platform team | 2, 4, 6, 10 |
 | 4 | ML engineers | User; buyer is team or infrastructure budget owner | 3, 5, 9 |
 | 5 | Infrastructure engineers | User and often technical recommender; buyer is engineering or finance budget owner; approver may be procurement | 4, 8 |
@@ -78,7 +78,7 @@ Format: **trigger → constraint → consequence of a bad choice.** All jobs are
 ### 3. AI application developers
 - **Job:** Assemble a workable RAG or agent stack. Trigger: a new application or a failed prototype. Constraint: integration with existing data and frameworks, team skills, deadline. Consequence: rebuilding on a different framework or vector store after early commitment.
 - **Alternatives:** `dify`, `langflow`, `flowise`, `n8n`, `langchain`, `llamaindex`, `langfuse`, `ragas`, `flocci`.
-- **Evidenced:** these builders and frameworks exist (catalog). 7.4% of Stack Overflow switchers cited workflow integration.
+- **Evidenced:** these builders and frameworks exist (catalog). 7.4% of Stack Overflow respondents to the switching question cited workflow integration as their primary reason for switching; the denominator includes respondents who did not switch.
 - **Hypothesis:** that planning before building saves measurable effort compared with prototyping in these tools.
 
 ### 4. ML engineers

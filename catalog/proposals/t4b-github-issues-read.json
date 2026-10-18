@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "id": "tool.github.issues-read",
+  "kind": "tool",
+  "tier": "T4",
+  "name": "GitHub REST API issues (read)",
+  "version": "2026-03-10",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Read operation family of the GitHub REST Issues API (list and get issues).",
+  "tags": [
+    "developer-platform",
+    "github"
+  ],
+  "spec": {
+    "protocol": "http",
+    "side_effect": "read_only",
+    "auth_methods": [
+      "api_key"
+    ],
+    "required_scopes": [
+      "issues:read"
+    ],
+    "is_networked": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.github.com/en/rest/issues/issues",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports API version 2026-03-10 (latest) and 'Issues' repository permissions (read) for List repository issues and Get an issue; public resources need no auth. required_scopes uses this project's notation '<fine-grained permission>:<access>' for the GitHub fine-grained token permission named on the endpoint page; auth_methods api_key represents a fine-grained personal access token (bearer token). OAuth app and GitHub App installation tokens were not verified today and are omitted."
+    },
+    {
+      "source_uri": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Rate limits recorded in the note (5,000 req/h per user; 60 req/h unauthenticated; secondary 900 points/min, GET = 1 point)."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "extensions": {
+    "x_side_effect_class": "read_only",
+    "x_operation_family": "issues.read"
+  }
+}
