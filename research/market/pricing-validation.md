@@ -1,6 +1,6 @@
 # MR-07: Validate price freshness and total-cost scenarios
 
-Issue: [#64](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64). Assignees (live, 2026-10-17): @PUSHINGSQUARES, @appletechie. Status: first desk recheck and scenario draft; not reviewed, not accepted. Readiness: Ready.
+Issue: [#64](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64). Assignees (GitHub readback, 2026-10-18): @appletechie and @PUSHINGSQUARES. Status: updated desk recheck and criterion-specific review package; final review pending. This record answers the research-completeness question, not the cost or service equivalence of an installed build.
 
 ## Question
 Can local and hosted configurations be compared with complete cost units?
@@ -16,13 +16,13 @@ Can local and hosted configurations be compared with complete cost units?
 - [ ] Record exact source/version, conditions, failures and confidence.
 - [ ] Obtain affected-owner review and accepted handoff.
 
-Boxes stay unticked until review; progress is in the [criterion map](#6-criterion-map-against-the-live-64-checklist).
+The [criterion map](#6-criterion-map-against-the-live-64-checklist) records the completed evidence and the exact receiving scopes for review. The live question explicitly permits idle, storage, egress and utilization to be shown as unknowns. A complete research audit can therefore conclude that its example quotes have incomplete coverage; it must not turn those omissions into zero or a service recommendation.
 
-## 1. Freshness recheck (2026-10-17)
+## 1. Freshness recheck (2026-10-18)
 
-Method: unauthenticated HTTPS GET of each `provenance.source_uri` on 2026-10-17 (robots.txt checked first; all paths allowed), HTML reduced to text and the rate row read. No account, API key or paid call. Evidence class for every row: primary documentation (vendor-published list price). Confidence: high that the page states the value today; this is not an invoice, entitlement or quota check, so Pricebook `verification_status: unverified` stays correct.
+The original pass was dated 2026-10-17. This second pass reread the same primary rate sources on 2026-10-18, using the published HTML/text and, where extraction omitted a material value, the publisher's Markdown or structured HTML data as identified below. No account, API key or paid call was used. Evidence class: primary documentation (vendor-published list price); confidence is high that the source states the value at this recheck, not that an account can buy it or meet a workload. Pricebook `verification_status: unverified` remains appropriate: source checking is not independent invoice, entitlement or quota verification.
 
-| Rate ID | Catalog item @ version | Meter | Pricebook | Observed 2026-10-17 | Region / scope | Result |
+| Rate ID | Catalog item @ version | Meter | Pricebook | Rechecked 2026-10-18 | Region / scope | Result |
 | --- | --- | --- | --- | --- | --- | --- |
 | `rate.t1.gpt54.input.short` | `cat.model.gpt54_openai` @ `gpt-5.4-2026-03-05` | `input_tokens_1m` | USD 2.50 | USD 2.50 per 1M input | Global standard; prompts ≤272K | Match (0, 0%) |
 | `rate.t1.gpt54.output.short` | same | `output_tokens_1m` | USD 15.00 | USD 15.00 | same | Match |
@@ -38,20 +38,28 @@ Method: unauthenticated HTTPS GET of each `provenance.source_uri` on 2026-10-17 
 | `r2-standard-class-a-request` | same | `request` | USD 0.0000045 | USD 4.50 / million; free 1M/month | same | Match |
 | `r2-standard-class-b-request` | same | `request` | USD 0.00000036 | USD 0.36 / million; free 10M/month | same | Match |
 
-**Totals: 13 match, 0 drift, 0 unverified (unfetchable).** Sources: [OpenAI GPT-5.4](https://developers.openai.com/api/docs/models/gpt-5.4), [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing), [HF Inference Endpoints pricing](https://huggingface.co/docs/inference-endpoints/pricing), [RunPod network volumes](https://docs.runpod.io/storage/network-volumes), [Cloudflare R2 pricing](https://developers.cloudflare.com/r2/pricing/).
+**Totals: 13 published rates match the referenced Pricebooks; no numeric drift was observed. All remain source-checked, not independently verified.** Sources: [OpenAI GPT-5.4](https://developers.openai.com/api/docs/models/gpt-5.4), [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing), [HF Inference Endpoints pricing](https://huggingface.co/docs/inference-endpoints/pricing), [RunPod network volumes](https://docs.runpod.io/storage/network-volumes), [Cloudflare R2 pricing](https://developers.cloudflare.com/r2/pricing/).
 
 Conditions observed today that the Pricebook already excludes but a quote must not ignore: OpenAI regional-processing endpoints +10%; Anthropic `inference_geo: "us"` 1.1x; Anthropic 5-minute (USD 2.50) and 1-hour (USD 4) cache writes; RunPod standard volume USD 0.05/GB/month beyond 1 TB; R2 rounds up to the next billing unit; HF scale-up replicas bill at the same per-replica rate.
 
+Retrieval details for material conditions:
+
+- **OpenAI:** the model page's linked [Markdown](https://developers.openai.com/api/docs/models/gpt-5.4.md) states the full-session multipliers for prompts above 272K input tokens; the public [pricing Markdown](https://developers.openai.com/api/docs/pricing.md) separately lists the short/long rate columns. The HTML text extraction omitted that multiplier paragraph, so it was not used to infer an absence. The source records a 10% regional-processing uplift; these scenarios select global standard rates.
+- **Anthropic:** the pricing table and cache/data-residency sections explicitly identify Sonnet 5.5's three referenced rates, cache-write prices and US-only multiplier. Partner-operated platform prices are separate.
+- **Hugging Face:** the AWS `nvidia-l4` x1 row and minute-billing paragraph were read. A globally listed price does not establish region-specific availability; billing includes eligible initialization and running time.
+- **RunPod:** the network-volume page supplies the tier prices; `US-KS-2` is in its API example, not a regional rate table. The GPU pricing page's `application/ld+json` product `#gpu-rtx-4090` contains separate USD per-hour offers for Community and Secure Cloud. The visible text extraction exposed only Secure's $0.89; the $0.34 Community value was read from the publisher's actual structured HTML, not inferred from the toggle or a search snippet. Neither proves live supply.
+- **Cloudflare:** Standard storage, Class A/B units, the monthly free tier, upward billing-unit rounding and the direct-R2 egress footnote were read together. The examples assume the quoted free allowances remain available to this workload; another workload consuming them changes the bill.
+
 Note-only rates used in scenarios (not Pricebook rates, so a CostEstimate line has no `price_rate_id` for them):
 
-| Note row | Source | 2026-10-16 note | Observed 2026-10-17 | Result |
+| Note row | Source | Earlier note | Rechecked 2026-10-18 | Result |
 | --- | --- | --- | --- | --- |
 | RunPod RTX 4090, Secure / Community, per GPU-hour | [runpod.io/pricing](https://www.runpod.io/pricing) (page "Updated October 8, 2026") | USD 0.89 / 0.34 | USD 0.89 / 0.34 | Match; region not stated |
-| US average electricity price, July 2026 (cents/kWh) | [EIA Electric Power Monthly Table 5.6.A](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a), released 2026-09-24 | — | Residential 18.31, commercial 14.53, Hawaii residential 48.00 | New; preliminary statistical average, **not a tariff** |
+| US average electricity price, July 2026 (cents/kWh) | [EIA Electric Power Monthly Table 5.6.A](https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a), released 2026-09-24 | — | Residential 18.31, commercial 14.53, Hawaii residential 48.00 | Matches the July 2026 table used on 2026-10-17; preliminary statistical average, **not a tariff** |
 
 ## 2. Total-cost scenarios (30-day horizon, USD, list prices, pre-tax)
 
-Labelled assumptions (A) are hypotheses, not measurements. Arithmetic uses decimal multiplication rounded half-up to cents per line. Low/expected/high are assumption bands, not a confidence interval. No currency conversion.
+Labelled assumptions (A) are hypotheses, not measurements. Arithmetic uses decimal multiplication rounded half-up to cents per line, then sums those rounded lines. Low/expected/high are assumption bands, not a confidence interval. No currency conversion. Amounts are partial subtotals for the stated 30-day period, not an accepted cost model or a complete bill.
 
 ### S1 — Assistant inference: hosted API vs dedicated endpoint vs local GPU
 
@@ -75,7 +83,7 @@ Reading: the API token-charge subtotals are below the dedicated endpoint compute
 - Training workload from [training-compute.md](../T5-training-fine-tuning/training-compute.md) Scenario A: 30M training tokens; 2.703 h (LoRA, B2) or 3.454 h (QLoRA, B3) on one RTX 4090, compute-only.
 - A6 training rate band: low LoRA × Community 0.34; expected LoRA × Secure 0.89; high QLoRA × Secure 0.89.
 - A7 working volume (data, checkpoints) held a full month: 50 / 100 / 200 GB on RunPod standard volume; artifacts on R2: 10 / 20 / 50 GB.
-- A8 R2 operations within the free allowance for low/expected; high 3M Class A and 30M Class B.
+- A8 R2 operations within the free allowance for low/expected; high 3M Class A and 30M Class B. The Standard free allowance is applied once at its monthly scope and is assumed unused by other work; it is not re-granted per component.
 - Serving: S1 HF L4 band (A3), or S1 local power band (A4).
 
 | Line | Rate | Low | Expected | High |
@@ -85,10 +93,10 @@ Reading: the API token-charge subtotals are below the dedicated endpoint compute
 | Artifact storage after 10 GB free | `r2-standard-storage` | 0.00 | 0.15 | 0.60 |
 | R2 Class A / B after free allowance | `r2-standard-class-a/b-request` | 0.00 (A8) | 0.00 (A8) | 9.00 + 7.20 |
 | Serving | `hf-aws-l4-replica-hour` | 128.00 | 288.00 | 576.00 |
-| **Hosted subtotal** | | **132.42** | **297.56** | **609.87** |
+| **First 30-day hosted subtotal** (one-off training plus the stated recurring lines) | | **132.42** | **297.56** | **609.87** |
 | Local alternative: training + serving power | A4 × EIA | 0.12 + 6.97 = **7.09** | 0.22 + 59.32 = **59.54** | 0.99 + 207.36 = **208.35** |
 
-Serving dominates the hosted subtotal (97% at expected), consistent with the T5 finding that hosting after training outweighs training. The local alternative is again a power-only lower bound. Training excludes setup, data loading, evaluation, retries and minimum increments (T5 caveat).
+The one-off training GPU subtotal is $0.92 / $2.41 / $3.07. The selected volume, artifact, request and serving lines total $131.50 / $295.15 / $606.80 for the 30-day period; they recur only while the same quantities and retained-storage assumptions continue. Training is not charged again merely because another billing period starts. Serving is 96.79% of the expected first-period hosted subtotal (288 / 297.56, estimated), a result of these assumptions rather than a universal hosting ratio. The local alternative is again a power-only lower bound. Training excludes setup, data loading, evaluation, retries and minimum increments (T5 caveat). The independently scoped [T6 W5](../T6-deployment-operations/cost-estimate.md#w5-fine-tuning-a-one-off-job-and-continuing-hosting) illustrates Together/Azure provider training and hosting formulas separately; it does not make this RunPod/HF scenario complete.
 
 Neither scenario reaches `coverage=complete` under [PRICING_AND_GATES.md](../../contracts/v1/docs/PRICING_AND_GATES.md); `cost.monthly_total_amount` must stay `unknown`.
 
@@ -117,29 +125,52 @@ Recompute both scenarios and recheck the affected source before any recommendati
 - the region or data-center changes (HF region unbound; RunPod data center; residency/geo endpoints);
 - the currency is not USD or a quote needs tax;
 - the workload assumptions A1–A8 move outside their bands, prompts exceed 272K, or a ResourceEstimate/quality run contradicts A5;
-- the Pricebook revision or catalog version referenced here changes, or 30 days pass since 2026-10-17 (suggested staleness bound for #41; not an accepted policy).
+- the Pricebook revision, selected catalog version, eligible evidence for that tuple, applicable rule version or source-use decision changes; or an explicit source validity boundary is reached.
+
+The earlier unaccepted 30-day staleness suggestion is withdrawn. This audit applies [#41's recorded event-based policy](../T0-configuration/catalog-data-sources.md#freshness): elapsed time alone neither expires a historical fact nor invalidates a saved build. Keep its access date visible. A source retrieval failure does not prove withdrawal; it prevents a claim that the current recommendation was freshly verified. Actual rate/condition drift is routed below, without silently rewriting the retained Pricebook or the saved historical view.
 
 ## 5. Drift routing
 
-No drift found, so no revision is requested from the T1 (@zwright8) or T2 (@Mattycodes69) Pricebook owners; this note does not edit either file. Optional notes for them: RunPod's rate is not data-center specific (the ID implies US-KS-2); the excluded conditions in section 1 are live on today's pages.
+No numeric drift was found in the 13 referenced rates on 2026-10-18, so this reread proposes no new Pricebook revision. T1/T2 retain the complete dated rate records and source-specific applicability. RunPod's rate is not data-center specific despite the historical item ID; HF's public table likewise does not guarantee an eligible region or quota. For a future quote, change the region, quantity, allowance, tier or commitment only from eligible selected-offering evidence, then recompute. Uncovered costs are routed to #39; source/conflict/reuse conditions follow #41/#60. The pricebooks remain unchanged.
 
 ## 6. Criterion map against the live #64 checklist
 
-| Live criterion | Artifact / evidence | Status | Remaining gap / reviewer |
+| Live criterion | Artifact / evidence | Research result | Remaining operational or policy limit |
 | --- | --- | --- | --- |
-| Pin provider region date and billing units | Section 1 table | Met for 13 rates; HF region and RunPod data center unbound by source | Evidence reviewer |
-| Include idle capacity storage egress and utilization | S1/S2 bands, section 3 | Partially met: idle, storage, utilization shown; egress explicitly uncovered | #39 owner meter decision |
-| Recheck live rates before recommendations | Section 1 (2026-10-17) | Met for this revision; no recommendation made | Repeat at decision time |
-| Report ranges and invalidation triggers | Sections 2 and 4 | Met (assumption bands) | Evidence reviewer |
-| Every significant conclusion linked to evidence or hypothesis | Rate IDs, sources, A1–A8 | Met in draft | Evidence reviewer |
-| Technical owners review handoffs; unresolved decisions named | Sections 3 and 5 | Not met: no owner has reviewed | #9, #39, #41 owners; T1/T2 owners |
-| Repository checks pass; reviewer accepts evidence | Section 7 | Checks recorded; acceptance not obtained | Program coordinator |
+| Pin provider region date and billing units | Section 1; exact Pricebook rate/item versions | Thirteen rates source-checked on 2026-10-18 with units, USD and known scope. HF region and RunPod data-center rate binding remain explicitly unknown. | A future selected deployment needs its own eligible regional/entitlement evidence. |
+| Include idle capacity storage egress and utilization | S1/S2 A1–A8; section 3 | Included as explicit assumption bands, priced lines or named unknowns, as the issue's research question permits. No unknown is zero. | Both example quotes retain incomplete coverage. |
+| Recheck live rates before recommendations | Section 1 and retrieval notes | Fresh reread complete; no service-equivalence or cost recommendation is issued. | Recheck material inputs before any later recommendation. |
+| Report ranges and invalidation triggers | Sections 2 and 4 | Assumption bands are separate from confidence intervals; one-off and recurring costs and event-based invalidation are explicit. | No automatic TTL, new FX policy or universal amortization convention. |
+| Every significant conclusion linked to evidence or hypothesis | Rate IDs, primary links, A1–A8 and formulas | Source statements and derived arithmetic remain distinct from runtime/quality hypotheses. | A5 capacity and quality equivalence is unmeasured. |
+| Relevant technical owners review handoffs; unresolved decisions named | Scoped receiving package below; linked review on the delivery PR | Prepared for independent delegated project review. | Record the actual revision and disposition for #9, #39 and #41; a general PR approval alone is insufficient. |
+| Repository checks pass; reviewer accepts evidence | Section 7 and delivery PR | Current validation is recorded below; independent review is pending. | Issue closure follows the reviewed merge and explicit receiving dispositions. |
 
-Issue-specific gate: no unknown egress, idle cost or utilization is treated as zero; both scenarios are partial.
+### Scoped receiving package
+
+These are concrete research interface decisions under the user's project-wide engineering delegation. They preserve live GitHub assignees and do not assert a response by an assignee who did not post one. The independent integration reviewer must explicitly disposition each scope, with a link recorded here and in the shared handoff ledger.
+
+| Consumer | Offered decision | Named remaining question |
+| --- | --- | --- |
+| #9 Hosting | Accept the conditional HF per-replica/minute and RunPod volume/tier source observations as dated hosting inputs. Region, quota, startup duration and service equivalence remain unknown where the source or scenario does not establish them. | T2 hosting/compute owners retain selected-region availability, endpoint startup and actual capacity evidence. |
+| #39 Cost Estimate | Accept the arithmetic audit, one-off/recurring split, scoped allowances and explicit uncovered-meter inventory as research inputs. The output is a partial subtotal, so it cannot pass a complete-coverage budget gate or prove that local/hosted service is equivalent. | #39 retains new meter, aggregation/rounding, commitments and selected-workload quantity decisions; no new unit or pricebook is adopted here. |
+| #41 Data Sources | Accept the dated-source and failure/drift treatment and withdrawal of the unaccepted TTL. Source-checked facts remain unverified in v1; historical pins persist; price or condition changes trigger evidence review without an automatic saved-build rewrite. | #41/#60 retain source-use rights and conflict policy; this audit grants no extra retrieval, display or redistribution right. |
+
+The #58 informational input is the same conclusion: cost-only recommendations require evidence beyond these partial examples. It does not establish willingness to pay, customer demand or an MVP decision.
 
 ## 7. Validation record
 
-Commands (Python 3.12, revision on `feat/mr-07-price-freshness` from `f297ac5`): `python scripts/validate_market_research.py`, `python scripts/validate_research.py`, `python -m unittest discover -s tests`, `git diff --check`. These check repository structure and integrity, not price truth, rights or owner acceptance.
+Historical checks for #112 were recorded on `feat/mr-07-price-freshness` from `f297ac5`. The 2026-10-18 follow-up was checked on main `df2e2712070b72a68de2eab0629c2bf12fbbe4bf` plus this focused diff, with Python 3.12.14 and pinned research requirements:
+
+```text
+python -m unittest discover -s contracts/v1/tests -v  # 21 passed
+python -m unittest discover -s tests -v               # 88 passed
+python scripts/validate_research.py                  # 74 proposals, 3 pricebooks
+python scripts/validate_market_research.py           # 33 entities, 1584 cells, 20 issues
+python prompts/mobile/validate_prompts.py            # passed
+git diff --check                                    # passed
+```
+
+A separate Decimal recomputation read the thirteen unchanged Pricebook rates and the stated A1–A8 assumptions. All 37 checked scenario amounts and the expected hosting-share percentage agreed: S1 subtotals, S2 item lines, one-off/recurring/first-period sums and local power sums. It rounded each monetary line half-up to cents before summing, as stated in section 2. The rate-source review in section 1 is distinct from this arithmetic check. Neither test suite nor the calculator establishes runtime performance, source rights, account availability or actual bills; no new provider job was run.
 
 ## Result
-Partial. Desk freshness recheck complete for all 13 Pricebook rates (13 match). Two scenarios with ranges are drafted; neither is complete. No raw customer data, benchmark artifact or paid API output was collected. Consumers: #9, #39, #41; informational gate for #58.
+The desk audit is complete for its stated 13-rate inventory and two conditional scenarios. Its finding is that neither scenario is a complete quote and neither proves service equivalence. Research acceptance awaits the explicit scoped review above and its reviewed merge; incomplete quote coverage is the documented result, not an omitted research step. No raw customer data, benchmark artifact or paid API output was collected. Consumers: #9, #39, #41; informational input for #58.

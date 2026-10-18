@@ -126,3 +126,16 @@ This dated addendum adds the #62 rows without rewriting the tables above. Eviden
 | #62 → #39 | appletechie, PUSHINGSQUARES | Conditional: pricing of the prepared replication protocol, only if #36 wants a replication | Pending; conditional on #36 | Price endpoints or GPUs, judge calls and repeated runs if requested |
 
 Ownership refreshed from live assignees on 2026-10-17: #25 CompleteDotTech/Mattycodes69; #36 and #39 appletechie/PUSHINGSQUARES; #40 zwright8/tynamite; #41 tynamite/PUSHINGSQUARES. All five dispositions remain pending; appletechie explicitly withheld #36/#39 acceptance in the PR review.
+
+
+## #64 pricing-validation receiving package — 2026-10-18
+
+Evidence: [pricing validation](pricing-validation.md), refreshed against all thirteen referenced Pricebook rates and its two conditional scenarios. The issue's research question permits explicit unknown costs; both scenario quotes remain incomplete. Current receiving assignees were read directly from GitHub on 2026-10-18 and are preserved. These rows request independent, scoped integration review under the user's delegated project mandate; no response by a named assignee is inferred.
+
+| Producer → consumer | Current receiving assignees | Exact research scope | Disposition | Remaining question |
+| --- | --- | --- | --- | --- |
+| #64 → #9 | Mattycodes69, appletechie | HF per-replica/minute and RunPod volume/tier source observations; retain unknown region, quota, startup and service equivalence | Pending scoped integration review | T2 retains selected-region availability, startup and actual capacity evidence |
+| #64 → #39 | appletechie, PUSHINGSQUARES | Arithmetic audit, one-off/recurring split, scoped allowances and uncovered-meter inventory; partial subtotals cannot pass a complete-coverage budget gate | Pending scoped integration review | #39 retains meters, aggregation/rounding, commitments and selected-workload quantity decisions |
+| #64 → #41 | tynamite, PUSHINGSQUARES | Dated source checking, failed-fetch/drift treatment and withdrawal of the unaccepted automatic 30-day TTL; retain historical pins and v1 unverified source status | Pending scoped integration review | #41/#60 retain conflict policy and source-use rights; no new retrieval, display or redistribution right |
+
+The same incomplete-coverage conclusion is an information input to #58, not a customer-demand result or an accepted MVP. Closing #64 after its full research review would not close #54/#58 or any of the technical consumer issues.

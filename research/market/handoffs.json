@@ -1841,5 +1841,72 @@
       "request_note": "No review request posted yet; to be requested on the submission PR. No response or acceptance inferred."
     },
     "ownership_observed_on": "2026-10-17"
+  },
+  {
+    "market_issue": 64,
+    "workstream": "MR-07",
+    "consumer_issue": 9,
+    "consumer_owner": [
+      "Mattycodes69",
+      "appletechie"
+    ],
+    "artifact": "research/market/pricing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Pending scoped integration review",
+    "requested_action": "Accept or narrow the exact research scope in the 2026-10-18 receiving package.",
+    "ownership_observed_on": "2026-10-18",
+    "review_2026_10_18": {
+      "scope": "HF per-replica/minute and RunPod volume/tier source observations; retain unknown region, quota, startup and service equivalence.",
+      "remaining_question": "T2 retains selected-region availability, startup and actual capacity evidence.",
+      "disposition": "pending",
+      "review_response_url": null,
+      "reviewed_commit": null,
+      "authority": "Project-wide engineering work expressly delegated by the user; independent integration review required. Live assignees remain unchanged."
+    }
+  },
+  {
+    "market_issue": 64,
+    "workstream": "MR-07",
+    "consumer_issue": 39,
+    "consumer_owner": [
+      "appletechie",
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/pricing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Pending scoped integration review",
+    "requested_action": "Accept or narrow the exact research scope in the 2026-10-18 receiving package.",
+    "ownership_observed_on": "2026-10-18",
+    "review_2026_10_18": {
+      "scope": "37-check arithmetic audit, one-off/recurring split, scoped allowances and uncovered-meter inventory; partial subtotals cannot pass complete-coverage budget gates.",
+      "remaining_question": "#39 retains meters, aggregation/rounding, commitments and selected-workload quantity decisions.",
+      "disposition": "pending",
+      "review_response_url": null,
+      "reviewed_commit": null,
+      "authority": "Project-wide engineering work expressly delegated by the user; independent integration review required. Live assignees remain unchanged."
+    }
+  },
+  {
+    "market_issue": 64,
+    "workstream": "MR-07",
+    "consumer_issue": 41,
+    "consumer_owner": [
+      "tynamite",
+      "PUSHINGSQUARES"
+    ],
+    "artifact": "research/market/pricing-validation.md",
+    "relationship": "Cross-tier handoff / information input",
+    "acceptance": "Pending scoped integration review",
+    "requested_action": "Accept or narrow the exact research scope in the 2026-10-18 receiving package.",
+    "ownership_observed_on": "2026-10-18",
+    "review_2026_10_18": {
+      "scope": "Dated source checking, failed-fetch/drift treatment and withdrawal of the unaccepted automatic 30-day TTL; retain historical pins and v1 unverified source status.",
+      "remaining_question": "#41/#60 retain conflict policy and source-use rights; no new retrieval, display or redistribution rights.",
+      "disposition": "pending",
+      "review_response_url": null,
+      "reviewed_commit": null,
+      "authority": "Project-wide engineering work expressly delegated by the user; independent integration review required. Live assignees remain unchanged."
+    }
   }
+
 ]
