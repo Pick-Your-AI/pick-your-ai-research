@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pick-your-ai:cd7-projection:0.1",
+  "title": "Synthetic CD-7 configuration-only projection and its separate byte binding",
+  "description": "Tests-only proposal. Neither envelope is a frozen BuildSnapshot or an adopted wire.",
+  "oneOf": [
+    {"$ref": "#/$defs/projection_envelope"},
+    {"$ref": "#/$defs/binding_envelope"}
+  ],
+  "$defs": {
+    "digest": {"type": "string", "minLength": 64, "maxLength": 64, "pattern": "^[a-f0-9]{64}$"},
+    "nullable_digest": {"anyOf": [{"$ref": "#/$defs/digest"}, {"type": "null"}]},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807},
+    "identity": {
+      "type": "object", "additionalProperties": false, "required": ["id", "revision"],
+      "properties": {
+        "id": {"$ref": "https://schemas.ai-builder.example/v1/common.schema.json#/$defs/id"},
+        "revision": {"$ref": "#/$defs/revision"}
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "revision", "build_sha256", "sidecar_sha256"],
+      "properties": {
+        "id": {"$ref": "https://schemas.ai-builder.example/v1/common.schema.json#/$defs/id"},
+        "revision": {"$ref": "#/$defs/revision"},
+        "build_sha256": {"$ref": "#/$defs/digest"},
+        "sidecar_sha256": {"$ref": "#/$defs/nullable_digest"}
+      }
+    },
+    "selection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "catalog_item_id", "catalog_item_version", "role", "enabled"],
+      "properties": {
+        "id": {"$ref": "https://schemas.ai-builder.example/v1/selection.schema.json#/properties/id"},
+        "kind": {"$ref": "https://schemas.ai-builder.example/v1/selection.schema.json#/properties/kind"},
+        "catalog_item_id": {"$ref": "https://schemas.ai-builder.example/v1/selection.schema.json#/properties/catalog_item_id"},
+        "catalog_item_version": {"$ref": "https://schemas.ai-builder.example/v1/selection.schema.json#/properties/catalog_item_version"},
+        "role": {
+          "allOf": [
+            {"$ref": "https://schemas.ai-builder.example/v1/selection.schema.json#/properties/role"},
+            {"not": {"pattern": "[^a-z0-9_-]"}}
+          ]
+        },
+        "enabled": {"type": "boolean"}
+      }
+    },
+    "configuration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_version", "locks", "selections", "links"],
+      "properties": {
+        "schema_version": {"const": "1.0.0"},
+        "locks": {"$ref": "https://schemas.ai-builder.example/v1/build.schema.json#/properties/locks"},
+        "selections": {"type": "array", "items": {"$ref": "#/$defs/selection"}},
+        "links": {"$ref": "https://schemas.ai-builder.example/v1/build.schema.json#/properties/links"}
+      }
+    },
+    "projection_envelope": {
+      "type": "object", "additionalProperties": false, "required": ["x_t0_cd7_projection"],
+      "properties": {
+        "x_t0_cd7_projection": {
+          "type": "object", "additionalProperties": false,
+          "required": ["protocol_version", "profile", "kind", "identity", "source", "source_artifact_pins", "parent_projection_sha256", "configuration", "answer_states", "qualification"],
+          "properties": {
+            "protocol_version": {"const": "cd7-projection-0.1"},
+            "profile": {"const": "configuration_only"},
+            "kind": {"enum": ["share", "fork_draft"]},
+            "identity": {"$ref": "#/$defs/identity"},
+            "source": {"$ref": "#/$defs/source"},
+            "source_artifact_pins": {"$ref": "urn:pick-your-ai:cd7-pins:0.1#/properties/x_t0_revision_locks/properties/artifacts"},
+            "parent_projection_sha256": {"$ref": "#/$defs/nullable_digest"},
+            "configuration": {"$ref": "#/$defs/configuration"},
+            "answer_states": {"$ref": "urn:pick-your-ai:cd1-answer-states:0.1"},
+            "qualification": {
+              "const": {
+                "source_authenticity": "not_established",
+                "source_use": "not_established",
+                "artifact_resolution": "not_established",
+                "evaluation": "not_performed"
+              }
+            }
+          }
+        }
+      }
+    },
+    "binding_envelope": {
+      "type": "object", "additionalProperties": false, "required": ["x_t0_cd7_projection_binding"],
+      "properties": {
+        "x_t0_cd7_projection_binding": {
+          "type": "object", "additionalProperties": false,
+          "required": ["protocol_version", "projection_sha256", "projection_byte_length"],
+          "properties": {
+            "protocol_version": {"const": "cd7-projection-0.1"},
+            "projection_sha256": {"$ref": "#/$defs/digest"},
+            "projection_byte_length": {"type": "integer", "minimum": 1, "maximum": 65536}
+          }
+        }
+      }
+    }
+  }
+}

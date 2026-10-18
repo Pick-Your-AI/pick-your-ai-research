@@ -1637,6 +1637,100 @@ source admission and native receiving acceptance are separate tasks. This
 mechanics candidate follows the owner's standing queue criteria; it does not
 mark that owner's constraint closed or complete #40/#42's research acceptance.
 
+### CD-7 configuration-only share and fork path (2026-10-18, test-only)
+
+This versioned prototype addresses the byte-binding path in **CD-7 constraint 5**
+of the [#40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407).
+It applies the existing [share/export sensitivity table and fork proposal](saved-shared-builds.md#field-sensitivity-for-shared-links-and-exports)
+to synthetic frozen-v1 inputs. This is a bounded mechanic for that queue; it does
+not claim that the owner adopted a field, wire encoding, migration or native
+adapter. The separate constraint-2 diagnostics work retains its
+[canonical owner](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252851908).
+
+The complete experiment is
+[`t0_cd7_projection_prototype.py`](../../tests/t0_cd7_projection_prototype.py),
+its [closed-shape schema](../../tests/fixtures/t0-cd7-projection.schema.json), and
+[synthetic controls](../../tests/test_t0_cd7_projection.py). Callers must explicitly
+select **`cd7-projection-0.1`**; the sole profile is `configuration_only`.
+The existing `cd7-consumer-0.1` envelopes and frozen v1 remain unchanged.
+
+| Boundary | Concrete behavior |
+| --- | --- |
+| Private factory input | Read the original frozen Build bytes and optional original `x_t0_revision_locks` bytes locally. Reuse schema, strict build-wide selection identity and exact original sidecar checks. These private bytes never become fields of the new transport envelopes. |
+| Projection | `x_t0_cd7_projection` retains schema version, component ID/kind/catalog item/version/role/enabled, exact links and locks. It also carries its identity, original source ID/revision/byte hashes, source catalog/Pricebook pins, explicit answer states and qualification limits. This is a partial view, not a schema-valid BuildSnapshot. |
+| New sidecar | `x_t0_cd7_projection_binding` carries only the explicitly selected protocol and the **new projection's** SHA-256 and byte length. Source pin values are inside the hashed projection, so a sidecar cannot alter them independently. It never reuses the original Build digest as the projection digest. |
+| Share and export | Both use the same private factory and default redaction. A downloadable export has no additional settings or secret-bearing path. No link, account, storage record or remote service is created by this prototype. |
+| Read | Validate both closed envelopes, exact bytes, full-string IDs, exact integer representations, source/lock pin identity and the recomputed answer-state map before returning the partial view. No archive fetch, latest fallback or evaluation is dispatched. |
+| Fork | Require an explicit new Build ID, different from the source. Produce `fork_draft` at revision **1**, retaining source ID/revision and the exact parent projection digest as lineage. Rebind these new bytes with a new sidecar. The result is an unanswered draft requiring completion before any frozen Build validation or evaluation. |
+
+**Default redaction is conservative and explicit.** This profile omits every
+selection's entire `settings`, `notes` and `extensions` groups, along with the
+Build's name, owner, lifecycle, created/updated metadata, objectives, policy and
+extensions. It therefore omits credential/account/encryption/connector references,
+internal endpoints and artifact locators, free text, classification, region,
+budget/volume inputs and organisation attestations. It offers no opt-in group in
+this version. Declared omitted groups remain marked even when absent in the
+source, so the projection does not disclose their presence or private child keys.
+Public component/link identities and disabled flags remain exact; redaction does
+not replace them with guesses or remove an inactive alternative.
+
+The transport also rejects a decoded `secret://` locator, case-insensitively,
+if it is disguised as an otherwise public version or object key. This is an
+explicit locator and field-boundary check, not a claim of arbitrary secret-content
+detection. Public configuration labels are still caller-supplied, unqualified
+data. All test locators and private-field canaries are synthetic; no real
+credential, user input or evidence payload is included.
+
+**Unanswered fork inputs stay unresolved.** Shares mark omitted groups `withheld`.
+Forks mark those same groups `missing`, without copying their source values,
+presets, attestations or approvals. Public configuration leaves remain `provided`,
+including `false` and exact integer values. The reader recomputes this complete
+map from the declared profile and public configuration; a peer cannot change a
+withheld owner or setting to `provided` or `not_applicable` merely by recomputing
+the envelope digest. The existing typed CD-1 reader gives dependent compatibility
+rules `unknown` with `answer_withheld` or `answer_missing`, including under
+negation, without calling a predicate on the missing value. A known disabled
+configuration retains its separate applicability semantics and fixed rule severity.
+
+**Provenance is distinct from authority.** Original Build and sidecar hashes
+identify the private source bytes the factory read; catalog and Pricebook pins
+remain exact source provenance. A missing pin remains absent, including when no
+source sidecar was supplied. A self-consistent public projection and digest do
+not authenticate its issuer, prove derivation from those private bytes, resolve
+an artifact, grant display rights or establish current compatibility. Those
+qualification fields remain explicit. This profile copies no historical report,
+finding observation, cost line, validation lifecycle or derived success into the
+share or fork. A separately reviewed, rights-aware historical-result projection
+is still needed for the full SB-R2/shared-view requirement; a report for the
+original Build can never serve as the new fork's assessment.
+
+The local profile admits frozen-v1 source bytes up to 512 KiB and each new envelope
+up to 64 KiB, with the existing consumer's depth/node limits and Unicode-scalar/
+decoded-key checks. Public revision identities use JSON integer tokens in
+`1..2^63-1`; Boolean and floating-point aliases reject. These limits and the
+`1.0.0` schema pin belong to this new experiment, not a frozen-contract edit.
+Successor artifacts or another redaction profile need an explicit versioned path.
+
+**Observed controls:** the unchanged resolver admitted all 29 original synthetic
+selections but correctly rejected a required-field-redacted object, a new fork ID
+with the old sidecar, and equivalent reformatted bytes with the old digest. Those
+are correct original integrity checks demonstrating why a separate path is
+needed. During local preparation, an initial candidate allowed a source-pin
+revision to change outside the projection digest; that unpublished checkpoint
+and actual observation are retained. The corrected shape moves those pins inside
+the hashed projection and rejects the old extra sidecar field. The 22 focused
+methods cover schema-defined private fields, new byte bindings, pin tampering,
+fork identity/lineage, typed missing/withheld outcomes, false/zero distinctions,
+malformed/oversized JSON, Unicode controls and original-byte preservation.
+Actual final-source workflow results and independent review remain recorded with
+the delivering PR, without relabelling an earlier checkpoint's execution.
+
+The source Build, original sidecar, retained artifacts and historical results are
+never rewritten. Migration M1–M5, component-mode adoption, source-rights decisions,
+private-group opt-ins, authentication/revocable links, storage, complete shared
+historical/current views and native receiving acceptance remain separate work.
+#40 and #42 remain open with their current assignees and acceptance gates.
+
 ### CD-7 historical reference replay candidate (2026-10-18)
 
 **Engineering decision:** extend the existing CD-7 archive with a separate,
