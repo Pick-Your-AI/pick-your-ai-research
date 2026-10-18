@@ -141,16 +141,16 @@ Use `templates/rule-proposal.md`, plus these conventions:
 
 ## To do
 
-- Review the synthetic worked examples below with T1/T2 owners (@zwright8); executable migration fixtures remain open.
-- Receiving-owner disposition of the proposed T5 routing inventory (@zwright8).
-- Migration test fixtures for the v1.1 plan (CD-7): hybrid build, conflicting workload copies, lock without revision.
+- T1/#40 worked-example review is [recorded on #126](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126). Other affected-owner dispositions remain separate.
+- T5 routing is accepted with constraints by @zwright8 in #126; the source-specific #10/#31/#39/#30/#32/#33/#36/#37 decisions remain with their owners.
+- The synthetic CD-7 projection experiment below now exercises migration boundaries. A released v1.1 adapter, actual evidence resolution, schema/generator changes and consumer acceptance remain open.
 
 ## Acceptance criteria coverage
 
 | Criterion (issue #40) | Where | Status |
 | --- | --- | --- |
 | Schema document with field types and examples | What v1 provides; #81 field dictionaries | Partial |
-| Worked rule examples spanning T1/T2, including `unknown` | Synthetic worked examples below | Proposed; owner review open |
+| Worked rule examples spanning T1/T2, including `unknown` | Synthetic worked examples below | T1/#40 scoped acceptance in #126; broader handoffs remain open |
 | Approach to cycles and recomputation | Cycles and recomputation | Proposed |
 | Rule and catalog versioning | Versioning; Contract versions and migration | Proposed |
 | Contribution format | Contribution format | Proposed |
@@ -159,7 +159,7 @@ Use `templates/rule-proposal.md`, plus these conventions:
 | Primary sources with access dates | Contract files at the merged revision; reviews linked | Partial |
 | Handoffs confirmed | — | Open |
 | Open questions with owners | Contract decisions; #81 | Partial |
-| Decision record merged | — | Open |
+| Decision record merged | PR #126 | Merged partial record; not issue completion |
 
 ## Synthetic migration cases for CD-7 review
 
@@ -169,11 +169,13 @@ These are proposed acceptance examples, not measured configurations or a migrati
 | --- | --- | --- |
 | M1 | Legacy build label `api`; model offering documents provider/shared runtime; retrieval service explicitly operated by user | Model `api`, retrieval `self_hosted`, derived build `hybrid`; the old label cannot overwrite retrieval evidence |
 | M2 | Legacy build label `managed`; component operator/capacity absent | Component `unknown`; do not infer dedicated/reserved capacity from the legacy label |
-| M3 | Legacy build label `self_hosted`; model is user-operated, external moderation offering provider/shared | Model `self_hosted`, moderation `api`; derive hybrid over applicable serving components |
+| M3 | Legacy build label `self_hosted`; model is user-operated, external moderation **model** offering provider/shared | Primary model `self_hosted`, moderation model `api`; derive hybrid over applicable serving components. A `guardrail` selection alone does not set mode |
 | M4 | Build objectives and workload settings disagree | Preserve both source values and flag a decision; do not manufacture a reconciled workload |
 | M5 | Lock references a pricebook ID without revision | Historical cost cannot be reproduced exactly; do not substitute the latest revision silently |
 
-The open migration fixtures must encode these expected interpretations before a v1.1 adapter can be accepted. No adapter or next contract is introduced by this note.
+The [synthetic fixtures](../../tests/fixtures/t0-migration.json) encode M1–M5 and additional boundary cases. The [test-only projection prototype](../../tests/t0_migration_prototype.py) takes already-normalized eligible fixture facts in `x_t0_migration_inputs`, preserves original historical bytes and emits a separate `x_t0_migration_projection`. It does not parse arbitrary real selections, resolve source conflicts or publish a next-version schema. Null means missing fixture evidence, not a contract answer encoding.
+
+Run `python -m unittest discover -s tests -p test_t0_migration.py -v`. The tests cover all operator/capacity pairs, unknown dominance, non-serving/disabled components, adapter inheritance and missing/cyclic bases, duplicate IDs, conflicting workload copies including zero, absent snapshot/pricebook revisions, and unchanged v1 historical evaluator findings. They are synthetic semantics checks, not runtime measurements or validation of a released migration adapter. Actual snapshot resolution and dual-ruleset evaluation remain future versioned implementation.
 
 ## Worked rule examples for receiving-owner review
 

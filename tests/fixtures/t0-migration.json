@@ -1,0 +1,316 @@
+{
+  "synthetic": true,
+  "purpose": "CD-7 projection experiments only; no real evidence or released contract",
+  "cases": [
+    {
+      "id": "M1",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "model",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "provider",
+                "capacity": "shared"
+              }
+            },
+            {
+              "id": "retrieval",
+              "kind": "vector_database",
+              "deployment": {
+                "runtime_operator": "self",
+                "capacity": null
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "component_modes": {
+          "model": "api",
+          "retrieval": "self_hosted"
+        },
+        "overall_mode": "hybrid"
+      }
+    },
+    {
+      "id": "M2",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "model",
+              "kind": "model"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "component_modes": {
+          "model": "unknown"
+        },
+        "overall_mode": "unknown"
+      }
+    },
+    {
+      "id": "M3",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "primary",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "self",
+                "capacity": null
+              }
+            },
+            {
+              "id": "moderation-model",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "provider",
+                "capacity": "shared"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "overall_mode": "hybrid"
+      }
+    },
+    {
+      "id": "M4",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "workload_sources": {
+            "objectives": {
+              "requests_per_day": 10
+            },
+            "selection_settings": {
+              "requests_per_day": 20
+            },
+            "catalog_preset": {
+              "requests_per_day": 30
+            }
+          }
+        }
+      },
+      "expected": {
+        "workload_candidate": {
+          "requests_per_day": 10
+        },
+        "workload_conflicts": {
+          "requests_per_day": {
+            "objectives": 10,
+            "selection_settings": 20,
+            "catalog_preset": 30
+          }
+        }
+      }
+    },
+    {
+      "id": "M5",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "locks": {
+            "pricebook_id": "synthetic.pricebook"
+          }
+        }
+      },
+      "expected": {
+        "unreproducible_locks": [
+          "pricebook"
+        ]
+      }
+    },
+    {
+      "id": "missing-snapshot-revision",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "locks": {
+            "catalog_snapshot_id": "synthetic.catalog",
+            "pricebook_id": "synthetic.pricebook",
+            "pricebook_revision": "1"
+          }
+        }
+      },
+      "expected": {
+        "unreproducible_locks": [
+          "catalog_snapshot"
+        ]
+      }
+    },
+    {
+      "id": "non-serving-does-not-set-mode",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "primary",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "self",
+                "capacity": null
+              }
+            },
+            {
+              "id": "guardrail",
+              "kind": "guardrail",
+              "deployment": {
+                "runtime_operator": "provider",
+                "capacity": "shared"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "overall_mode": "self_hosted",
+        "component_modes": {
+          "primary": "self_hosted"
+        }
+      }
+    },
+    {
+      "id": "unknown-dominates-known-mix",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "a",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "self",
+                "capacity": null
+              }
+            },
+            {
+              "id": "b",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "provider",
+                "capacity": "shared"
+              }
+            },
+            {
+              "id": "c",
+              "kind": "model"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "overall_mode": "unknown"
+      }
+    },
+    {
+      "id": "adapter-inherits-base",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "base",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "provider",
+                "capacity": "dedicated_instances"
+              }
+            },
+            {
+              "id": "adapter",
+              "kind": "fine_tuned_model",
+              "artifact_type": "adapter",
+              "base_id": "base",
+              "deployment": {
+                "runtime_operator": "self",
+                "capacity": null
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "overall_mode": "managed",
+        "component_modes": {
+          "base": "managed",
+          "adapter": "managed"
+        }
+      }
+    },
+    {
+      "id": "missing-adapter-base",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "adapter",
+              "kind": "fine_tuned_model",
+              "artifact_type": "adapter",
+              "base_id": "absent"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "overall_mode": "unknown"
+      }
+    },
+    {
+      "id": "disabled-unknown-component",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "components": [
+            {
+              "id": "a",
+              "kind": "model",
+              "deployment": {
+                "runtime_operator": "self",
+                "capacity": null
+              }
+            },
+            {
+              "id": "b",
+              "kind": "model",
+              "enabled": false
+            }
+          ]
+        }
+      },
+      "expected": {
+        "overall_mode": "self_hosted",
+        "component_modes": {
+          "a": "self_hosted"
+        }
+      }
+    },
+    {
+      "id": "workload-zero-is-known",
+      "extensions": {
+        "x_t0_migration_inputs": {
+          "workload_sources": {
+            "objectives": {
+              "requests_per_day": 0
+            },
+            "catalog_preset": {
+              "requests_per_day": 10
+            }
+          }
+        }
+      },
+      "expected": {
+        "workload_candidate": {
+          "requests_per_day": 0
+        },
+        "workload_conflicts": {
+          "requests_per_day": {
+            "objectives": 0,
+            "catalog_preset": 10
+          }
+        }
+      }
+    }
+  ]
+}
