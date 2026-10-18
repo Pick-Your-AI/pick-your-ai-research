@@ -147,7 +147,7 @@ can supply a nested object/array value; absent members or indices become
 `missing`. Malformed pointer/index syntax and scalar traversal are errors.
 Duplicate JSON keys and nonfinite numbers are rejected before normalization.
 
-**Rule boundary:** compatibility predicates receive an unresolved result for
+**Original Boolean/None rule boundary:** compatibility predicates receive an unresolved result for
 all non-provided states, including unknown applicability. Recommendation
 rules use the known-answer gate specified in #81 and therefore skip unresolved
 needs. A known false applicability predicate still skips.
@@ -193,8 +193,9 @@ prototype uses the unchanged `AnswerIndex.read` interface. The sidecar,
 schema, fixtures, field dictionary and CD-13 evaluator are unchanged. This
 bounded correction does not resolve the disposition's separate field-sentinel,
 preset, parent-read or state-specific reason/policy questions, including when a
-`not_applicable` answer should skip a dependent compatibility rule. Their
-existing behavior is retained for separate owner-reviewed work.
+`not_applicable` answer should skip a dependent compatibility rule. The
+legacy behavior is retained below; the subsequent typed outcome boundary
+addresses the reason/policy mechanics without changing that interface.
 
 The [20 executable cases](../../tests/test_t0_answer_states.py) cover nested
 and escaped paths, array boundaries, parent withholding, explicit false/zero,
@@ -206,6 +207,90 @@ provided-but-unresolved recommendation case. They reproduce frozen v1's
 literal-unknown comparison and verify unchanged historical findings when the
 synthetic extension is present. No original build bytes, frozen evaluator,
 measured artifact or receiving receipt is modified.
+
+
+**Typed outcome/reason boundary (2026-10-18):** the same
+[#40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires separate answer-state reasons and a skipped dependent predicate for an
+explicit `not_applicable` answer. An actual 15-case probe of accepted
+`dff6b480c437761c56cf60d6aa9999b2abfb3462`, prototype blob
+`9f8cea0119b93c0fd14c0626412bf97a37ba6af1`, confirmed the remaining loss:
+withheld, unknown, missing, not-applicable and absent answers all lowered to the
+same generic compatibility reasons, and recommendation skips used
+`not_applicable` even when the answer was withheld or missing. No value callback
+ran in those probes. The corrected typed negation still prevented a false pass;
+this is the separate policy and explanation gap.
+
+The existing [CD-1 module](../../tests/t0_answer_state_prototype.py) now also
+provides `AnswerRule`, explicit `RulePolicy` and
+`evaluate_answer_rule(rule)` as the terminal boundary for these answer-aware
+experiments. A rule declares one ID, one fixed severity and its compatibility or
+recommendation policy. Both applicability and assertion are lazy callbacks
+returning the existing immutable `PredicateResult`; plain Boolean/None or other
+untyped callback returns reject instead of silently discarding answer metadata.
+The assertion callback runs exactly once only after provided, known-true
+applicability.
+
+| Responsible input | Compatibility outcome | Recommendation outcome | Distinct reason |
+| --- | --- | --- | --- |
+| Unknown / missing / withheld applicability answer | `unknown` | `skipped` | `answer_unknown` / `answer_missing` / `answer_withheld` |
+| Explicit not-applicable answer at either position | `skipped` | `skipped` | `answer_not_applicable` |
+| Provided applicability predicate is false | `skipped` | `skipped` | `applicability_false` |
+| Provided predicate is unresolved, at either position | `unknown` | `unknown` | `predicate_unknown` |
+| Unknown / missing / withheld assertion after known-true applicability | `unknown` | `unknown` | The corresponding `answer_*` reason |
+| Provided assertion is true / false | `pass` / `fail` | `pass` / `fail` | `assertion_true` / `assertion_false` |
+
+Recommendation gating applies to an unanswered applicability input. It does not
+turn unresolved assertion evidence into a known result once the recommendation
+is applicable. A provided answer whose value predicate cannot decide remains a
+provided answer with `predicate_unknown`; this adapter does not invent a claim
+that the answer or eligible evidence was absent. An explicit not-applicable
+answer is scoped to the caller-selected predicate, not a waiver of every rule
+or of required-component presence.
+
+The immutable terminal result retains the rule ID, unchanged severity, outcome,
+reason, responsible position (`applies_when` or `assertion`), exact answer state
+and original source path. An absent path remains missing with no invented source
+path; a parent-withheld or escaped path retains the normalizer's actual path.
+No original answer value is copied into this result. The typed result also
+rejects implicit Boolean coercion, so an unknown/skipped result cannot become a
+pass through Python negation or truth testing.
+
+```python
+finding = evaluate_answer_rule(AnswerRule(
+    id="synthetic.network-isolation",
+    severity="error",
+    policy=RulePolicy.COMPATIBILITY,
+    applies_when=lambda: answers.predicate(network_path, network_schema, needs_isolation),
+    assertion=lambda: answers.predicate(boundary_path, boundary_schema, stays_inside),
+))
+```
+
+This is the preferred terminal API for CD-1 state-aware rule experiments. The
+two Boolean/None adapters above and all 20 existing tests retain their original
+behavior for historical comparison and compatibility with the unchanged CD-13
+prototype. Those adapters cannot carry the new state reasons or not-applicable
+policy and must not be presented as satisfying this boundary. Negation still
+happens on `PredicateResult` before evaluation; neither its callback nor the
+original value is evaluated again.
+
+[Eleven additional synthetic methods](../../tests/test_t0_answer_rule_outcomes.py)
+exercise both policies, all three severities, direct/absent and parent-derived
+states, both predicate positions, explicit not-applicable versus known-false
+skips, provided predicate uncertainty, known truth controls, negation, strict
+callback/metadata rejection, lazy exception behavior, immutable outcomes and
+original-byte/escaped-path retention. They run alongside the unchanged 20 CD-1
+methods. Actual final source and receiving executions retain their own PR
+receipts.
+
+This bounded extension addresses the disposition's reason/policy mechanics.
+It does not select components, quantify over selections, aggregate findings,
+qualify evidence, release a ruleset or add a wire format. The original
+`AnswerIndex.read` and `predicate` implementations, sidecar/schema/fixtures,
+field-sentinel, parent-read and preset constraints remain unchanged. CD-13
+required presence, CD-5 stage adaptation and other owner work keep their
+separate scope and review; downstream adoption must explicitly consume this
+typed result rather than silently reusing a lossy Boolean interface.
 
 Primary syntax references inspected **2026-10-18**:
 [RFC 6901, sections 3–4 and 7](https://www.rfc-editor.org/rfc/rfc6901) defines
@@ -525,6 +610,77 @@ the proposed mechanics. The later binding below joins them to CD-1 answers;
 CD-3 evidence resolution/result encoding, a general predicate DSL, affected-owner
 review and the versioned adapter / ruleset remain open. #42's prerequisite is
 unchanged.
+
+### CD-13 required-presence mode (2026-10-18)
+
+The [current #40 owner disposition, constraint 1](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a separate answer for missing required components. An actual comparison
+against the unchanged frozen
+[`rule.required.foundation`](../../contracts/v1/baseline/core-ruleset.json)
+reproduces eight differences: removing or disabling each primary workload,
+deployment mode, model and context policy makes the frozen required rule fail,
+while the universal selection prototype skips its empty enabled scope. That
+optional-scope behavior remains correct for the universal mode; it cannot be
+used as the required-component answer.
+
+The [required-presence prototype](../../tests/required_presence_prototype.py) and
+[16 regression methods](../../tests/test_required_presence.py) add a separate
+normalized mode. This is a synthetic mechanics proposal. It adopts no successor
+field, sidecar, executable ruleset, migration or native implementation.
+
+| Normalized input | Meaning |
+| --- | --- |
+| `PresenceSelection(id, kind, role, active)` | An explicit selection identity with independently qualified activation: exact `True`, `False` or `None`; unresolved activation is distinct from known inactive or absent |
+| `PresenceRule(id, kind, role, severity)` | Always require the stated kind and exact role; explicit `role=None` permits any role of that kind. Role has no implicit primary default, and severity is fixed as `info`, `warning` or `error` |
+| Complete inventory declaration | An explicit exact `inventory_complete=True` is required. Omitted, false, unresolved or malformed completeness and malformed inventory forms are precondition errors; they cannot prove absence or presence |
+
+The declaration is **not proof of completeness**. The caller must first establish
+the complete normalized selection inventory, canonical schema/reference
+validity and eligibility of every activation fact. This experiment neither
+reads a Build nor derives activation, source eligibility or inventory
+completeness. It substitutes no defaults for those missing inputs.
+
+The shared identity preflight checks the entire inventory before filtering by
+the rule's exact kind/role. Disabled, unresolved and unrelated-kind entries still
+participate. The existing strict `(kind, role)` policy is deliberately retained:
+even a disabled alternative sharing a role rejects, and duplicate selection IDs
+always reject. The earlier co-owner mechanics disposition retained this policy;
+the newer owner's preference for allowing disabled alternatives is a separate
+reconciliation decision. The frozen dependency/reference wording and protocol
+wording are not silently rewritten here. The shared preflight's executable body
+and the universal reducer remain unchanged; only its identity-only type
+annotation is generalized for the separate normalized entry type.
+
+For a valid complete inventory, reduction is scoped before examining witnesses:
+
+| Matching activation observations | Required-presence outcome | Reason |
+| --- | --- | --- |
+| At least one known active selection | `pass` | `selected` |
+| No known active selection, but at least one unresolved activation | `unknown` | `not_selected` |
+| No matching selection, or all matching selections are known inactive | `fail` | `not_selected` |
+
+This mode never returns `skipped`. A selection of another kind or role cannot
+rescue an absent required primary or turn that absence into unknown. A known
+matching witness establishes only existence, even if another matching candidate
+has unresolved activation; that unresolved observation remains unchanged. It
+does not establish compatibility, fitness or that another component is optional.
+Every scoped activation observation is retained in stable selection-ID order.
+An empty result has an empty observation tuple, without an invented selection ID.
+
+The cases compare the four exact primary scopes against the unchanged frozen
+foundation rule with all components present and each separately absent or
+disabled. A separate normalized example gives each required kind unresolved
+activation in turn. Additional cases retain exact role scope, any-role positive
+witnesses alongside unresolved alternatives, all-input identity preflight, strict
+Boolean identity, fixed severity, order independence and the existing universal
+empty/inapplicable skips. The prototype evaluates one required scope at a time;
+the foundation-style cases do not adopt a general multi-kind expression or
+result wire encoding.
+
+The `all_enabled` reader and its schema below remain unchanged. Conditional
+requirements, real activation resolution, the disabled-alternative decision,
+structured wire rejections, CD-1/CD-6 binding and affected-owner adoption remain
+separate. Frozen v1 and #42's substantive #40 prerequisite are unchanged.
 
 ### CD-13 typed selection binding proposal (2026-10-18)
 

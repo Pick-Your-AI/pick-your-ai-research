@@ -7,6 +7,7 @@ selection of the requested kind; they never resolve a single arbitrary match.
 from collections.abc import Callable
 from dataclasses import dataclass
 from enum import StrEnum
+from typing import Protocol
 
 
 class Outcome(StrEnum):
@@ -14,6 +15,19 @@ class Outcome(StrEnum):
     FAIL = "fail"
     UNKNOWN = "unknown"
     SKIPPED = "skipped"
+
+
+class SelectionIdentity(Protocol):
+    """Only the identity fields consumed by the shared preflight."""
+
+    @property
+    def id(self) -> str: ...
+
+    @property
+    def kind(self) -> str: ...
+
+    @property
+    def role(self) -> str: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -52,7 +66,7 @@ class Result:
     findings: tuple[Finding, ...]
 
 
-def validate_identities(selections: tuple[Selection, ...]) -> None:
+def validate_identities(selections: tuple[SelectionIdentity, ...]) -> None:
     """Apply the frozen protocol's build-wide identity/role precondition.
 
     Disabled entries still have identities and roles. Disabling one must not

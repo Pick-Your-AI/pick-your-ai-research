@@ -3,9 +3,11 @@
 An explicit answer state is separate from its value, field type and rule policy.
 Callers supply the field's reviewed local schema before using a provided value.
 This module reads a test-only sidecar; it never rewrites historical build bytes,
-resolves catalog evidence or decides selection activation and compatibility.
+resolves catalog evidence or chooses which selections a rule covers.
+The typed terminal rule boundary retains explicit answer policy and reasons.
 """
 
+from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import dataclass
 from enum import StrEnum
@@ -14,6 +16,8 @@ from pathlib import Path
 import re
 
 from jsonschema import Draft202012Validator, ValidationError
+
+from tests.selection_quantifier_prototype import Outcome
 
 
 SCHEMA_PATH = Path(__file__).with_name("fixtures") / "t0-answer-states.schema.json"
@@ -83,6 +87,113 @@ class PredicateResult:
         value predicate is unresolved still returns None, not a default false.
         """
         return self._value if self.state is State.PROVIDED else False
+
+
+class RulePolicy(StrEnum):
+    """The caller's explicit policy for an unresolved applicability answer."""
+
+    COMPATIBILITY = "compatibility"
+    RECOMMENDATION = "recommendation"
+
+
+@dataclass(frozen=True, slots=True)
+class AnswerRule:
+    """One fixed-severity rule over caller-selected, typed answer predicates."""
+
+    id: str
+    severity: str
+    policy: RulePolicy
+    applies_when: Callable[[], PredicateResult]
+    assertion: Callable[[], PredicateResult]
+
+    def __post_init__(self):
+        if not isinstance(self.id, str) or not self.id.strip():
+            raise ValueError("answer rule must have a nonempty id")
+        if not isinstance(self.severity, str) or self.severity not in {"info", "warning", "error"}:
+            raise ValueError("answer rule must have one fixed severity")
+        if not isinstance(self.policy, RulePolicy):
+            raise ValueError("answer rule must declare a typed rule policy")
+        if not callable(self.applies_when) or not callable(self.assertion):
+            raise ValueError("answer rule predicates must be lazy callables")
+
+
+@dataclass(frozen=True, slots=True)
+class AnswerRuleResult:
+    """A terminal finding, retaining the answer responsible for its outcome.
+
+    This is not a selection aggregate, wire report or evidence qualification.
+    No original answer value is copied into the result.
+    """
+
+    rule_id: str
+    severity: str
+    outcome: Outcome
+    reason: str
+    position: str
+    answer_state: State
+    source_path: str | None
+
+    def __bool__(self):
+        raise TypeError("answer rule results have no implicit Boolean value; inspect outcome")
+
+
+_ANSWER_REASONS = {
+    State.WITHHELD: "answer_withheld",
+    State.UNKNOWN: "answer_unknown",
+    State.MISSING: "answer_missing",
+    State.NOT_APPLICABLE: "answer_not_applicable",
+}
+
+
+def evaluate_answer_rule(rule: AnswerRule) -> AnswerRuleResult:
+    """Evaluate one typed rule without losing answer-state policy or reasons.
+
+    Recommendations skip an unresolved *applicability answer*. Once known
+    applicability is true, an unresolved assertion remains unknown. An explicit
+    not-applicable answer skips its dependent predicate at either position.
+    A provided answer with unresolved predicate evidence is never defaulted.
+    """
+    if not isinstance(rule, AnswerRule):
+        raise ValueError("expected a typed answer rule")
+
+    def checked(callback):
+        result = callback()
+        if not isinstance(result, PredicateResult):
+            raise ValueError("answer rule predicates must return PredicateResult")
+        return result
+
+    def finish(predicate, position, outcome, reason):
+        return AnswerRuleResult(
+            rule.id, rule.severity, outcome, reason, position,
+            predicate.state, predicate.source_path,
+        )
+
+    applicable = checked(rule.applies_when)
+    if applicable.state is State.NOT_APPLICABLE:
+        return finish(applicable, "applies_when", Outcome.SKIPPED,
+                      _ANSWER_REASONS[applicable.state])
+    if applicable.state is not State.PROVIDED:
+        outcome = (Outcome.SKIPPED if rule.policy is RulePolicy.RECOMMENDATION
+                   else Outcome.UNKNOWN)
+        return finish(applicable, "applies_when", outcome,
+                      _ANSWER_REASONS[applicable.state])
+    if applicable._value is None:
+        return finish(applicable, "applies_when", Outcome.UNKNOWN, "predicate_unknown")
+    if applicable._value is False:
+        return finish(applicable, "applies_when", Outcome.SKIPPED, "applicability_false")
+
+    assertion = checked(rule.assertion)
+    if assertion.state is State.NOT_APPLICABLE:
+        return finish(assertion, "assertion", Outcome.SKIPPED,
+                      _ANSWER_REASONS[assertion.state])
+    if assertion.state is not State.PROVIDED:
+        return finish(assertion, "assertion", Outcome.UNKNOWN,
+                      _ANSWER_REASONS[assertion.state])
+    if assertion._value is None:
+        return finish(assertion, "assertion", Outcome.UNKNOWN, "predicate_unknown")
+    if assertion._value is False:
+        return finish(assertion, "assertion", Outcome.FAIL, "assertion_false")
+    return finish(assertion, "assertion", Outcome.PASS, "assertion_true")
 
 
 def pointer_tokens(pointer):
