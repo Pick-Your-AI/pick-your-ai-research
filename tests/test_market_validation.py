@@ -81,6 +81,80 @@ class MarketValidation(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
 
+    def assert_invalid_deliverable(self, value, error_text):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0]['deliverable'] = value
+        for optimized in (False, True):
+            with self.subTest(value=value, optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn('backlog #1: deliverable', result.stderr)
+                self.assertIn(error_text, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_deliverable_requires_nonempty_path_text(self):
+        for value in (None, True, 1, 1.25, [], {}, '', ' \t\n'):
+            self.assert_invalid_deliverable(value, 'nonempty relative file path')
+
+    def test_deliverable_rejects_directories_and_absolute_or_escaping_files(self):
+        (self.base / 'nested').mkdir()
+        outside = self.root / 'outside-note.md'
+        outside.write_text('Synthetic file outside the market directory.\n')
+        for value in ('.', 'nested'):
+            self.assert_invalid_deliverable(value, 'requires an existing file')
+        for value in (str(self.base / 'note.md'), str(outside)):
+            self.assert_invalid_deliverable(value, 'requires a relative file path')
+        self.assert_invalid_deliverable('../../outside-note.md',
+                                        'must remain within research/market')
+
+    def test_deliverable_rejects_external_and_unresolvable_symlinks(self):
+        outside = self.root / 'outside-note.md'
+        outside.write_text('Synthetic external symlink target.\n')
+        self.create_test_symlink(self.base / 'outside-link.md', outside)
+        self.assert_invalid_deliverable('outside-link.md',
+                                        'must remain within research/market')
+        (self.base / 'broken-link.md').symlink_to('missing.md')
+        (self.base / 'loop-link.md').symlink_to('loop-link.md')
+        for value in ('broken-link.md', 'loop-link.md'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
+    def test_deliverable_rejects_missing_and_invalid_paths(self):
+        for value in ('missing.md', 'missing/../note.md', 'null\x00byte.md'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
+    def create_test_symlink(self, path, target):
+        try:
+            path.symlink_to(target)
+        except NotImplementedError:
+            self.skipTest('symbolic links are unavailable on this platform')
+        except OSError as error:
+            if sys.platform == 'win32' and error.winerror in (5, 50, 1314):
+                self.skipTest('this Windows environment cannot create symbolic links')
+            raise
+
+    def test_deliverable_accepts_existing_local_paths_without_rewriting_input(self):
+        (self.base / 'nested').mkdir()
+        (self.base / 'nested' / 'scoped note.md').write_text('Synthetic nested note.\n')
+        for value in ('note.md', 'nested/scoped note.md',
+                      'nested/../note.md'):
+            self.assert_valid_deliverable(value)
+
+    def test_deliverable_accepts_internal_symlink_without_rewriting_input(self):
+        self.create_test_symlink(self.base / 'local-link.md', 'note.md')
+        self.assert_valid_deliverable('local-link.md')
+
+    def assert_valid_deliverable(self, value):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0]['deliverable'] = value
+        for optimized in (False, True):
+            with self.subTest(value=value, optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn('Market integrity OK', result.stdout)
+                self.assertEqual((self.base / 'research-backlog.json').read_text(),
+                                 json.dumps(data['research-backlog.json']))
+
     def assert_invalid_integration(self, records, error_text):
         data = deepcopy(self.data)
         data['integrations.json'] = records

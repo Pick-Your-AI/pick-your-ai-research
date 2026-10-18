@@ -81,6 +81,14 @@ source-use permission.
 
 The market backlog's issue numbers and specified parent numbers must be positive JSON integers. Boolean or floating-point aliases cannot identify an issue; only an absent or null parent means no parent. Its six priority factors follow the existing [ordinal 1–5 rubric](market-research/research-methodology.md#priority-rubric): each is a JSON integer token or null. The total must be a JSON number matching the unchanged weighted calculation, or null when any factor is unknown. Its original numeric token must equal that result exactly; float rounding cannot conceal a fractional difference. Numerically equivalent decimal or exponent spellings remain valid for the total, while factors retain their integer-token requirement. Booleans cannot stand in for a numeric total. These checks preserve the recorded graph and score shape; they do not assess the scoring judgments or establish issue completion.
 
+Each backlog `deliverable` must also be nonempty path text relative to
+`research/market`, resolving to an existing file within that directory. Directories,
+absolute paths, escaping parent paths and symlinks to outside targets are rejected.
+Missing targets, broken links and link loops produce a deliverable diagnostic.
+Nested files and links to files inside the directory remain eligible; validation
+does not rewrite their recorded paths. This establishes file presence, not evidence
+quality, review acceptance or issue completion.
+
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.
 
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
