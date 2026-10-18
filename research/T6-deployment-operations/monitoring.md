@@ -867,7 +867,70 @@ Rationale. The catalog covers each component and mode with published names where
 
 ## Structured artifacts
 
-None in this pull request. A `monitoring_stack` catalog item needs `signals` from the v1 enum (latency, errors, token_usage, gpu_utilization, quality, drift, cost, traces, security). The signal catalog here is finer (165 signals), so mapping each signal to that enum is a follow-up for review with #40.
+### Native vLLM metric profile (2026-10-18)
+
+The [vLLM v0.31.0 monitoring proposal](../../catalog/proposals/t6-monitoring-vllm-v0.31.0.json)
+adds the native V1 engine metric producer as a `monitoring_stack` candidate. It
+uses the same release/source identity as the existing
+[inference-engine proposal](../../catalog/proposals/t2-engine-vllm-v0.31.0.json).
+The source tag was rechecked as `db9527a46873454610df6dbedf79a36d6bf1a7f6`
+[VM-S1]. This identifies the researched release, not the latest release or an
+installed binary. Catalog status `active` records this research candidate.
+
+This is a conservative mapping into the existing v1 fields. The finer SG catalog,
+remaining enum mappings and existing M-R/M-H clauses keep their present scope;
+this addition creates no compatibility rule, signal ID or contract extension.
+
+| Catalog field | Existing signal / exact source registration | Type and unit / evidence | Scope retained |
+| --- | --- | --- | --- |
+| `signals: latency` | SG70: `vllm:time_to_first_token_seconds`; SG71: `vllm:inter_token_latency_seconds`, `vllm:request_time_per_output_token_seconds`; SG72: `vllm:e2e_request_latency_seconds`, `vllm:request_queue_time_seconds` | Prometheus histograms; seconds [VM-S2] | Individual inter-token observations and per-request mean time per output token are different distributions. Engine request/WAITING time does not include an application's complete network/client path. |
+| `signals: token_usage` | SG75: `vllm:prompt_tokens`, `vllm:generation_tokens` | Prometheus counters; tokens, incremented from the respective iteration-stat fields [VM-S2] | These are registered counter bases. Confirm actual exposition names, including `_total`, for the selected endpoint. Do not infer invoice units, computed-only prompt work or measured serving capacity. |
+| `exporter: prometheus` | Native `PrometheusStatLogger` and the API server's documented `/metrics` endpoint | Prometheus client constructors and published exposition example [VM-S2, VM-S3] | This identifies the native interface. It supplies no external collector version, scrape interval, successful scrape or wrapper equivalence. |
+| `license.spdx_id: Apache-2.0` | Pinned source license; matching SPDX header in the logger | Publisher's software license declaration [VM-S2, VM-S4] | Model, service and collected-telemetry rights remain separate; no permission booleans are added. |
+
+The logger attaches `model_name` and `engine` labels to these registrations
+[VM-S2]. A label is not an immutable model or deployment identity. The selected
+deployment still needs its exact engine/build, configuration, wrapper/exporter,
+label policy and observed series, as described in the
+[engine receiving record](engine-input-integration.md#selected-service-evidence-needed-by-38).
+Collection windows and counter resets must be retained before deriving rates;
+unavailable series remain unknown rather than measured zero. No universal
+threshold or collection-overhead estimate is introduced.
+
+This candidate covers the native producer in the researched self-hosted engine
+path. A provider-operated API or managed wrapper needs its own identity and
+metric-exposure evidence; the same engine name does not establish this profile.
+Monitoring does not select a build's serving mode. The item also supplies no
+executable v1 association to a selected inference engine; deployment association
+remains an explicit receiving input.
+
+The admitted `signals` are a supported subset, not a complete capability list.
+In particular, SG74's KV-cache occupancy is not `gpu_utilization`; this proposal
+does not reinterpret memory occupancy as device compute utilization. Other signal
+families remain outside this bounded mapping. `billing_class` stays `unknown`,
+and `pii_redaction` and `retention_days` are omitted because this source check
+does not establish those properties for a selected collection path. Neither
+missing field means false, zero retention or permission to collect content.
+
+#### Primary-source readback
+
+All four sources below were accessed on **2026-10-18**. Evidence class: primary
+publisher source/documentation; catalog provenance remains `unverified` because
+no engine, container or metrics scrape was run. Git blob IDs identify inspected
+source bytes and do not establish runtime behavior or source-use approval.
+
+| ID | Primary source | Readback identity / claim |
+| --- | --- | --- |
+| VM-S1 | [v0.31.0 tag reference](https://api.github.com/repos/vllm-project/vllm/git/ref/tags/v0.31.0) | Observed tag target: source commit `db9527a46873454610df6dbedf79a36d6bf1a7f6`. |
+| VM-S2 | [V1 metrics logger](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/v1/metrics/loggers.py) | Git blob `26a4142df9f1023f8d43633b30b85adf745eba41`; constructor classes, named registrations, labels and record paths. |
+| VM-S3 | [Metrics guide](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/usage/metrics.md) | Git blob `8254a7f4207e5304d606c69956680e4b4e317bea`; endpoint/exposition and deprecation policy. Its generated sections are not treated as a complete metric inventory. |
+| VM-S4 | [Software license](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE) | Git blob `261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64`; Apache-2.0 declaration for this software source. |
+
+The #38 co-owners (@appletechie, @PUSHINGSQUARES) retain the candidate's receiving
+decision and the outstanding threshold, content/privacy and retention choices.
+Selected runtime and deployment evidence remain with the #11/#37 handoffs.
+This structured submission is partial research evidence; it does not complete
+#38 or imply acceptance of later changes by an earlier receiving reviewer.
 
 ## Pinned framework telemetry controls (2026-10-18)
 
