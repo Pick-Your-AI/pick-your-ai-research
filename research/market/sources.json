@@ -2137,7 +2137,65 @@
     "limitations": "Repository CNAME and GitHub Pages config point to llmfit.axjns.dev; repository homepage field is empty and a repository code search found no llmfit.org reference. llmfit.org links to the repository and shows \"© 2026 llmfit\" without naming an operator. Establishes the upstream site only, not who operates llmfit.org.",
     "version": "Repository main at eb8db3835157d1c300ffa9050ac58f63df11617c; CNAME added in e3bad78 (2026-02-15)",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "review_id": "mr01-llmfit-pinned-identity-20261018",
+        "access_date": "2026-10-18",
+        "checked_at_utc": "2026-10-18T08:43:59Z",
+        "access_status": "Pinned upstream source and current repository metadata retrieved",
+        "version": "Upstream commit e915091dd58f7fefaa9814d2d34ee61bd754fdc0; this pin is source evidence, not a released or tested binary. Repository metadata is a separate mutable observation.",
+        "region": "Public source inspection; no hardware, regional offering or price quote",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/CNAME",
+            "publisher": "Alex Jones / AlexsJones",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/README.md",
+            "publisher": "Alex Jones / AlexsJones",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/LICENSE",
+            "publisher": "Alex Jones / AlexsJones",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://api.github.com/repos/AlexsJones/llmfit",
+            "publisher": "Alex Jones / AlexsJones",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "The pinned CNAME specifies llmfit.axjns.dev and the pinned README links its installer; that README contains no llmfit.org reference. Repository metadata has an empty homepage. This check is limited to those files/metadata and does not establish the seed-domain operator or perform a repository-wide absence search.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/CNAME",
+              "https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/README.md",
+              "https://api.github.com/repos/AlexsJones/llmfit"
+            ],
+            "publisher": "Alex Jones / AlexsJones"
+          },
+          {
+            "claim": "The pinned upstream LICENSE is MIT and names Alex Jones in its copyright notice; repository metadata identifies owner AlexsJones. This attribution is for the upstream source and does not establish ownership or reuse terms for llmfit.org or third-party model data.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/LICENSE",
+              "https://api.github.com/repos/AlexsJones/llmfit"
+            ],
+            "publisher": "Alex Jones / AlexsJones"
+          }
+        ],
+        "operator_statement": "Upstream source attribution is established; llmfit.org operator/affiliation remains unverified",
+        "rights": "Upstream MIT text was read at the pinned revision. Seed-site material and model/benchmark data retain separate, unverified intended-use rights.",
+        "limitations": "No seed-domain attribution or binary/runtime validation. The earlier cached CNAME observation remains historical; this is an additional pinned retrieval, not a retrospective claim about its freshness.",
+        "method": "Read-only GitHub connector retrieval; string inspection limited to the pinned README and CNAME. No installation, execution, benchmark or product API request."
+      }
+    ]
   },
   {
     "id": "src-benchlm-legal",
@@ -2503,6 +2561,101 @@
         "rights": "README states MIT; the inspected repository root at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983 has no LICENSE file, and GitHub repository metadata reports license: null, preserving the #109 finding. No repository reuse grant is established by this review. Source visibility does not clear third-party model/spec/metadata reuse.",
         "limitations": "All site results explicitly estimates; bandwidth method omits interconnect overhead. No browser hardware detection or privacy network behavior tested.",
         "method": "Public web-tool extraction, which can be cached, and read-only public GitHub source/metadata queries. No product workflow, recommendation endpoint, inference or compute execution."
+      },
+      {
+        "review_id": "mr01-canirun-documentary-reconciliation-20261018",
+        "access_date": "2026-10-18",
+        "checked_at_utc": "2026-10-18T08:43:59Z",
+        "access_status": "Pinned public GitHub source and metadata retrieved; no product endpoint called",
+        "version": "CanIRun.ai repository 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983; recursive tree returned truncated=false. Repository metadata is a separate mutable observation.",
+        "region": "Public source inspection; no regional offering, deployed API response or price quote",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/components/Footer.astro",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/models.ts",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/models/[id].ts",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/compatibility.ts",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/recommend.ts",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://api.github.com/repos/midudev/canirun.ai/git/trees/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983?recursive=1",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://api.github.com/repos/midudev/canirun.ai",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "The pinned README and footer source attribute the product to midudev and link the same repository; repository metadata names midudev as owner and canirun.ai as homepage. This does not establish a legal operating entity or affiliation with similarly named products.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/components/Footer.astro",
+              "https://api.github.com/repos/midudev/canirun.ai"
+            ],
+            "publisher": "midudev / CanIRun.ai"
+          },
+          {
+            "claim": "The README describes browser hardware detection and use-case-based local-model recommendations. These are vendor-described capabilities, not results of this inspection or a fit validation.",
+            "evidence_class": "Vendor claim",
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+            "publisher": "midudev / CanIRun.ai"
+          },
+          {
+            "claim": "The README documents GET /api/models, GET /api/models/:id, POST /api/compatibility and POST /api/recommend; the four pinned route files export the corresponding GET or POST handlers. This establishes documentary interface/source presence only, not deployed availability, response correctness, authorization policy or permission to call or reuse it.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/models.ts",
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/models/[id].ts",
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/compatibility.ts",
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/pages/api/recommend.ts"
+            ],
+            "publisher": "midudev / CanIRun.ai"
+          },
+          {
+            "claim": "The README states MIT. The complete pinned tree has no root LICENSE file and contains a scoped .agents/skills/frontend-design/LICENSE.txt; current GitHub repository metadata reports license: null. This records the documentation discrepancy without interpreting it as a legal grant or prohibition for the product or third-party data.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+              "https://api.github.com/repos/midudev/canirun.ai/git/trees/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983?recursive=1",
+              "https://api.github.com/repos/midudev/canirun.ai"
+            ],
+            "publisher": "midudev / CanIRun.ai"
+          }
+        ],
+        "operator_statement": "Explicit README/footer attribution and repository owner/homepage linkage; legal entity and common ownership remain unverified",
+        "rights": "Retain the README MIT statement alongside the missing root licence text and null repository metadata. Scoped third-party licence text is not a product-wide grant. Intended code/data uses remain pending #41/#60 review; no permission is inferred here.",
+        "limitations": "Source inspection only; deployed revision, API/runtime behavior, browser privacy, fit accuracy, performance and intended-use permission unverified. No historical source entry or prior observation is retimed.",
+        "method": "Read-only GitHub connector retrieval of pinned text files, complete tree metadata and repository metadata; no install, model/data download, product endpoint call or runtime execution."
       }
     ]
   },

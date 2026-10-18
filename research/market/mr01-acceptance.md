@@ -2,6 +2,8 @@
 
 Refs #48. Original documentary checks: 2026-10-18 (Asia/Shanghai); current-main reconciliation and correction review: 2026-10-18 (UTC). Partial contribution for review; no issue acceptance is asserted.
 
+The original audit and receipt-only sections retain their PR #214/#231 bases, counts and validation records. The [later catalog and summary reconciliation](#2026-10-18-catalog-and-summary-reconciliation) below adds narrowly dated source evidence and reader-facing corrections; it does not repeat the delivered audit or transfer old review acceptance to a new head.
+
 ## Revision, authority and writer boundary
 
 Live GitHub lists **Mattycodes69 and appletechie** as co-assignees; CompleteDotTech remains the issue's named evidence coordinator. This contribution claims no ownership transfer and changes no assignment, issue checklist, Project field or native relationship.
@@ -157,3 +159,46 @@ On 2026-10-18, Python **3.12.14** ran against this follow-up from merged main `b
 - `git diff --check`: passed. Only this rationale changes; all source, catalog, pricebook, matrix, contract and canonical handoff-ledger files are unchanged.
 
 This follow-up compares existing authenticated GitHub review receipts and merge metadata; it adds no vendor source check or empirical result. Checks establish repository integrity, while source truth, rights, freshness, human acceptance and the remaining named owner decisions still require evidence review. No new test was added for this documentation-only reconciliation.
+
+
+## 2026-10-18 catalog and summary reconciliation
+
+**Scope and base:** one #48 writer, starting at main `637957347c54d215f9ef27f2af122a5b9129d0fd` and fast-forwarded before publication to main `4fadc44f64842f1a9a57dae5fe67674d1389def2`. The incoming changes did not overlap this contribution's five files. The live refresh found #214 and #231 already merged; the five operational seed checks and fourteen-profile rationale above are existing work. This follow-up corrects stale summaries and reconciles specific CanIRun.ai fields. It leaves all seven issue criteria, co-assignees, Project fields and native relationships unchanged.
+
+### Documentary evidence added
+
+Source/metadata inspection completed at `2026-10-18T08:43:59Z`. The two appended source rechecks have stable `review_id` locators; their original source entries and all earlier rechecks remain intact.
+
+| Source record / pin | Finding used in this change | Limit |
+| --- | --- | --- |
+| `src-canirun-ai`, `mr01-canirun-documentary-reconciliation-20261018`; repository `73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983` | [README](https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md), [footer source](https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/src/components/Footer.astro) and repository metadata agree on midudev attribution. README plus four route files document model-list/detail GET handlers and compatibility/recommendation POST handlers. | Source and documentary scope only; deployed revision, API availability, response correctness, browser privacy and empirical fit are unverified. No product endpoint was called. |
+| Same CanIRun recheck; [complete tree](https://api.github.com/repos/midudev/canirun.ai/git/trees/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983?recursive=1) | README states MIT; no root LICENSE file is listed, GitHub metadata reports `license: null`, and a scoped third-party licence exists under `.agents/skills/frontend-design/`. | Records a documentation discrepancy, not a legal grant or prohibition. Product and third-party data uses remain with #41/#60. |
+| `src-llmfit-upstream-pages`, `mr01-llmfit-pinned-identity-20261018`; repository `e915091dd58f7fefaa9814d2d34ee61bd754fdc0` | Pinned [CNAME](https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/CNAME) specifies `llmfit.axjns.dev`; [README](https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/README.md) links that installer and has no `llmfit.org` reference. [MIT text](https://github.com/AlexsJones/llmfit/blob/e915091dd58f7fefaa9814d2d34ee61bd754fdc0/LICENSE) names Alex Jones; repository metadata identifies AlexsJones and an empty homepage. | A file-scoped identity check, not a repository-wide absence search, released-binary check or seed-domain ownership finding. The earlier cached CNAME observation is retained as history. |
+
+The `canirun-ai` entity now exposes the already documented API scope, qualified creator attribution and licence discrepancy through a dated `discovery_review` naming its five changed fields. Its original `last_verification` remains **2026-10-16**; classification, feature flags, prices, entity/source IDs and the #125 observation remain unchanged. The previous audit deliberately carried this entity unchanged with a source recheck, so this is a subsequent reconciliation, not a claim that the original audit missed it.
+
+The entry-point landscape now links the existing acceptance record, distinguishes its historical thirteen-profile reconstruction from the current fourteen-profile working list, includes CanIRun.ai in the summary inventory and uses the already-recorded SkyPilot canonical URL. Its GPUs.io text retains the original failed-access observation while pointing to the separately dated publisher correction. The profile index receives only the matching #48 rationale/supplement links; no profile or #50 decision is rewritten.
+
+### Coverage and remaining acceptance
+
+The inventory remains **33 entities, 58 source IDs, 14 profiles and 1,584 feature cells**. The original 32 entity discovery records are preserved and CanIRun.ai gains the thirty-third. The original 41 source rechecks/94 claims are preserved; this contribution adds two rechecks and six source claims, for **43 rechecks/100 claims**. The five operational seeds and fourteen selections are unchanged. No community lead is promoted to a new entity.
+
+The acceptance map above remains qualified: the five working seeds have documentary evidence, but original historical intent and coordinator ratification remain separate; full historical claim review and named receiving-owner decisions are incomplete. The new source pins do not accept the #48→#6/#10/#25/#41 handoffs or #50/#66 outcomes. Exact pending scopes remain in the existing receiver questions. #59 retains the canonical ledger and its dated snapshot; no receipt is created, broadened or moved by this follow-up. #48 remains open.
+
+### Validation of this contribution
+
+On 2026-10-18, the integrated contribution was checked with **Python 3.12.14** in an isolated temporary virtual environment after `python -m pip install -r requirements-research.txt` installed the repository's pinned dependencies. The commands below used that environment's Python. The original contribution base also passed 21 contract tests, 348 repository tests and all four validators; those earlier results are not substituted for the integration results below.
+
+| Exact command | Outcome on integrated main base `4fadc44f64842f1a9a57dae5fe67674d1389def2` |
+| --- | --- |
+| `python -m unittest discover -s contracts/v1/tests -v` | Exit 0; 21 tests passed |
+| `python -m unittest discover -s tests -v` | Exit 0; 373 tests passed |
+| `python scripts/validate_research.py` | Exit 0; 76 catalog proposals, 3 pricebooks and external evidence metadata validated |
+| `python scripts/validate_market_research.py` | Exit 0; 33 entities, 1,584 cells and 20 issues |
+| `python scripts/validate_handoff_audit.py` | Exit 0; 101 rows and 98 declared pairs |
+| `python prompts/mobile/validate_prompts.py` | Exit 0; 2 Projects, 258 issues, 36 epics, 906 criteria and 880 steps |
+| `git diff --check` | Exit 0; no whitespace errors |
+
+A focused preservation check found exactly five changed files: the other 32 entity records, all entity/source IDs and ordering, original dates, classifications, feature flags, prices and prior source observations/rechecks remain unchanged. Only CanIRun.ai's five named fields plus its dated discovery record and the two appended source rechecks change the structured records. The resulting counts are 33 entity discovery records, 43 source rechecks and 100 claims. New local Markdown file and heading links resolve. No new test was added for this bounded research/documentation change.
+
+An independent agent re-read the pinned CanIRun.ai and llmfit primary files and metadata and inspected this five-file diff. Its review found an incorrect GPUs.io source-record locator in the summary; the locator was corrected, and the follow-up review reported no remaining blocker in its changed-claim and history-preservation scope. The synchronized base leaves those reviewed changes intact. This is an independent agent review, not a maintainer approval or receiving-owner disposition. Automation checks repository integrity, not source truth, reuse rights, runtime behavior, freshness or owner acceptance. The four validators and whitespace check were also rerun after recording these results.

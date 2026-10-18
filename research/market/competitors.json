@@ -2310,13 +2310,13 @@
     "id": "canirun-ai",
     "name": "CanIRun.ai",
     "website": "https://canirun.ai/",
-    "organization": "midudev (Miguel Ángel Durán; individual GitHub account that owns the repository whose homepage is canirun.ai); legal entity unconfirmed",
+    "organization": "midudev (repository owner; pinned README and footer source explicitly attribute the product to this account); legal operating entity and other affiliations unverified",
     "classifications": [
       "Partial competitor"
     ],
     "classification_basis": "Analyst judgement: device-first local model selection overlaps T1/T2; full stack substitution untested. Distinct URL/entity record from canrunllm.com and canitrun.dev; common ownership unverified. Repository README (vendor claim, 2026-10-16) describes browser detection of CPU, RAM and GPU and per-use-case open-model recommendations (coding, chat, reasoning, vision); this makes it a direct-substitute candidate for single-device local model choice, pending the #66 test and a #48 classification decision.",
     "target_users": "People choosing local AI models for their device (analyst inference)",
-    "capabilities": "Device directory linking to local model recommendations; repository README (vendor claim) describes in-browser hardware detection and per-use-case open-model recommendations.",
+    "capabilities": "Documented scope: browser hardware detection and per-use-case local-model recommendations, plus a device directory. The pinned README describes these capabilities; this documentary pass does not exercise them or verify model fit.",
     "documented_features": [
       "hardware_fit",
       "hardware_catalog",
@@ -2329,8 +2329,8 @@
       "source_urls": []
     },
     "deployment_support": "Public website observed; deployment/runtime support unverified",
-    "apis_and_integrations": "Unknown; not established by the reviewed directory",
-    "licensing": "Public repository midudev/canirun.ai; GitHub reports no licence (API license null, checked 2026-10-16), so no code or data reuse grant is established; commercial display or redistribution permission not established.",
+    "apis_and_integrations": "Primary documentation and route-source inspection at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983: GET /api/models, GET /api/models/:id, POST /api/compatibility and POST /api/recommend. Source files corroborate the documented interface shapes. No deployed endpoint was called; availability, authorization policy, rate limits, response correctness and integration/reuse permission remain unverified.",
+    "licensing": "Pinned README at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983 states MIT; the complete tree has no root LICENSE file, while GitHub repository metadata reports license: null (checked 2026-10-18). A scoped third-party frontend-design licence exists elsewhere in the tree and is not a product-wide licence. The discrepancy and intended code/data uses remain for #41/#60 review; this documentary check supplies no reuse approval.",
     "source_ids": [
       "src-canirun-ai",
       "src-canirun-ai-repo"
@@ -2352,9 +2352,32 @@
       60
     ],
     "limitations": [
-      "Directory inspection only; no independent compatibility, speed or memory measurement.",
-      "Other capabilities, prices, operator identity and reuse rights remain unknown.",
-      "robots.txt (2026-10-16) allows all paths except /api/ and /og/; a later automated re-check of the site returned HTTP 403 (bot challenge) and was not bypassed."
-    ]
+      "The original 2026-10-16 intake inspected the device directory. The 2026-10-18 discovery_review reconciles specified documentary fields only; the separate #125 browser observation keeps its original scope and date. No independent compatibility, speed or memory measurement is added.",
+      "Repository owner and product attribution are evidenced; legal operating entity, affiliations with CanRun/CanItRun, prices and intended-use permissions remain unverified.",
+      "robots.txt (2026-10-16) allows all paths except /api/ and /og/; a later automated re-check of the site returned HTTP 403 (bot challenge) and was not bypassed. This follow-up reads public GitHub source/metadata only and calls no product endpoint.",
+      "Original last_verification, feature flags and pricing observations retain their original dates. The dated source recheck records the exact fields reconciled here; no feature-matrix cell or #50/#66 acceptance changes."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "checked_at_utc": "2026-10-18T08:43:59Z",
+      "canonical_url": "https://canirun.ai/",
+      "operator": "midudev (repository owner; pinned README and footer source explicitly attribute the product to this account); legal operating entity and other affiliations unverified",
+      "product_scope": "Hardware/use-case local-model selection; documented JSON model, compatibility and recommendation interfaces. A candidate for the single-device selection decision, with full-stack substitution untested.",
+      "version": "Pinned README, footer, four route files and complete repository tree at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983; mutable repository metadata checked at 2026-10-18T08:43:59Z. The deployed site revision is not established.",
+      "source_ids": [
+        "src-canirun-ai",
+        "src-canirun-ai-repo"
+      ],
+      "evidence_locator": "src-canirun-ai / rechecks / review_id=mr01-canirun-documentary-reconciliation-20261018",
+      "status": "Source-checked documentary scope; deployed behavior, empirical fit, legal identity and reuse permissions unverified",
+      "limitations": "This follows the previously recorded CanIRun source recheck; it does not repair a missing original seed audit. No product/API/runtime execution or independent rights determination.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "apis_and_integrations",
+        "licensing",
+        "limitations"
+      ]
+    }
   }
 ]
