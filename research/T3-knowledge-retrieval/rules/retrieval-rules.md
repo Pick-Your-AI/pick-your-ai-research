@@ -8,16 +8,16 @@ Evidence basis per rule: **source checked** means the mechanism in the assertion
 
 ## RAG-01: retrieved upper bound fits the input budget
 
-- Participating kinds, roles, and JSON pointers: `rag_pipeline` primary `/settings/max_chunks` (M); `knowledge_base` primary `/settings/chunk_size_tokens` (S); `context_policy` primary `/settings/requested_context_tokens` (P). Tokenizer identity for S is a research operand pending #40 (gap G5).
+- Participating kinds, roles, and JSON pointers: `rag_pipeline` primary `/settings/max_chunks` (M); `knowledge_base` primary `/settings/chunk_size_tokens` (S); `context_policy` primary `/settings/requested_context_tokens` (configured input allowance P). The complete request count/bound used by CTX-01 is distinct from P in this screen. Tokenizer identity for S and serialization-specific overhead H are research operands pending #40 (gap G5).
 - Applicability condition: enabled `rag_pipeline` with a `context_policy` selection.
-- Assertion and source evidence: M × S + H ≤ P. H is the per-chunk citation/header overhead × M, and is 0 only if it has been measured as 0. This is necessary, not sufficient. CTX-01 (#7) on the complete assembled input remains authoritative. Basis: arithmetic on #7's definition of P, which includes retrieved text. Source checked against [context-window.md](../../T1-model-selection/context-window.md).
+- Assertion and source evidence: M × S + H ≤ P. M and S must be applicable enforced generation-tokenizer/template bounds; their product bounds retrieved payload only. H bounds all retrieval-related citation/header overhead in the applicable serialization; a per-chunk overhead × M is usable only when it supplies that bound. H is 0 only if measured as 0 for this serialization. Independent fragment counts do not automatically establish an assembled bound. This is a necessary subtotal screen, not sufficient for full request fit. CTX-01 (#7) separately evaluates the complete serialized input count or eligible bound, output reservation and applicable route/model limits. Basis: the actual [#7 → #16 counting receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16#issuecomment-6253273759), read on 2026-10-18, and [context-window.md](../../T1-model-selection/context-window.md). This propagates that research decision without a new tokenizer execution or policy adoption.
 - Severity: `error`.
-- Missing-data behaviour: M, S or P absent → `unknown`, `on_unknown: block`. If S was counted with a tokenizer other than the generation model's, the outcome is `unknown` (`review`) until recounted.
+- Missing-data behaviour: M, S, H or P absent or without an eligible bound → `unknown`, `on_unknown: block`; missing overhead cannot become zero. If S was counted with a tokenizer other than the generation model's, the outcome is `unknown` (`review`) until recounted. An unevidenced serialization boundary also leaves the screen unresolved.
 - Explanation and remediation: report M, S, H and P. Lower `max_chunks` or chunk size, or raise P after CTX-01 passes. Do not truncate silently.
 - Dependency edges and affected consumers: #13 chunking, #14 tokenizer, #7 fit, #39 token cost, #28 memory budget.
-- Passing example: M=5, S=400, H=5×20, P=8,000 → 2,100 ≤ 8,000.
+- Passing example: M=5, S=400, H=5×20, P=8,000 → 2,100 ≤ 8,000 for this retrieval subtotal only. A separately counted complete request of 8,200 still exceeds the input allowance; no full-fit pass follows from the subtotal.
 - Failing example: M=20, S=512, H=0 (measured), P=8,000 → 10,240 > 8,000.
-- Unknown / non-applicable: S counted with the embedding tokenizer only → unknown. No `rag_pipeline` selection → skipped.
+- Unknown / non-applicable: S counted with the embedding tokenizer only, unknown H, or a missing bound for the actual serialization → unknown. No `rag_pipeline` selection → skipped.
 - Version and migration impact: needs a tokenizer-identity operand and an H operand. The existing v1 fields are unchanged.
 
 ## RAG-02: caller authorization precedes model and tool exposure
