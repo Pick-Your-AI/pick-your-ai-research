@@ -6,10 +6,10 @@ Deliverable path: `research/T0-configuration/saved-shared-builds.md`
 
 Labels used in this note:
 - **V** IDs cite the v1 contract in this repository; **X** IDs cite external primary sources; **P** IDs cite project decisions and drafts.
-- **SB-n** IDs are this note's open decisions, routed to #40 unless stated. They are separate from #81's CD-1 to CD-12, which this note references but does not renumber, extend or settle.
+- **SB-n** IDs retain this note's research decisions and remaining integration questions, routed to #40 unless stated. They are separate from #81's CD-1 to CD-12, which this note references but does not renumber, extend or settle.
 - **SB-Rn** IDs are rule proposals for #40 review.
 - **Proposal:** a design choice made in this note, not a sourced fact.
-- "Source checked" means the claim was compared with the cited source on its access date. Nothing here is independently reproduced ("verified" in the #41 interim sense, P3).
+- "Source checked" means the claim was compared with the cited source on its access date. The separately labelled synthetic historical-replay experiments exercise their exact supported profiles; they do not establish independently measured vendor behavior or upgrade documentary claims to reproduced evidence (P3, P9).
 
 ## Proposal sequencing decision — 2026-10-18
 
@@ -20,7 +20,7 @@ The sequencing change is recorded at [f56b0fc](https://github.com/Pick-Your-AI/p
 ## Summary
 
 - **A saved build is an immutable `BuildSnapshot` revision plus the derived records that cite that revision.** Every edit creates a new revision (V5); old revisions remain distinct where retention is permitted, subject to the unresolved SB-9 policy. The v1 locks already pin the catalog snapshot, ruleset version and dependency graph revision (V1).
-- **Two validity views, never merged.** *Historical validity* is the `EvaluationReport` produced under the build's own locks. *Current validity* is a fresh evaluation of the same selections against the currently published catalog snapshot, ruleset and pricebook. A revisit shows both and the per-rule differences. Neither overwrites the other, and nothing in the user's selections changes without consent (V5, V6).
+- **Two validity views, never merged.** *Historical validity* is the `EvaluationReport` produced under the build's own locks. *Current validity* is a fresh evaluation of the same selections against the currently published catalog snapshot, ruleset and pricebook. A revisit offers the permitted historical view and, when the required eligible inputs and supported reader exist, a separately identified current candidate with per-rule differences. Neither overwrites the other, and nothing in the user's selections changes without consent (V5, V6).
 - **Sharing stores the build server-side behind an opaque link and shares a redacted projection.** Credentials references, endpoints, free text, budgets, residency, data classification and organisation attestations are withheld by default. A recipient who forks receives withheld inputs as unanswered and supplies its own applicable answers; the new evaluation follows the existing missing-input, applicability and SB-R5 behavior.
 - **Comparisons align selections by kind and role and show "not comparable" with the reason** when currency, pricing period, workload, ruleset version, evidence protocol or cost coverage differ. Modes are compared per serving component using #81's merged definitions (P1).
 - **A new release or elapsed time alone does not invalidate an immutable selected snapshot.** Under the #41 interim policy, version-pinned facts don't expire and current-state facts are shown "as of" their access date with no arbitrary TTL (P3). Publications can prompt a separate current evaluation; selected-input changes, source corrections or retractions, explicit validity conditions, rights decisions and build edits retain their specific effects. Historical reproducibility, current recommendation eligibility and permission to disclose are separate questions in the accepted H41-42 receiving scope (P9).
@@ -50,7 +50,7 @@ What should a saved or shared build contain, how are builds compared, and what h
 
 ### Deployment modes covered
 
-All four modes appear in the comparison semantics. Mode is a per-serving-component property in #81's merged decision; the build's mode is derived (`hybrid` when components differ, `unknown` when any is unknown) (P1). v1 instead has one `deployment_mode` selection with `cardinality: one` (V9). Until #40 decides CD-7, this note reads mode from #81's definitions and labels it pending.
+All four modes appear in the comparison semantics. Mode is a per-serving-component property in #81's merged decision; the build's mode is derived (`hybrid` when components differ, `unknown` when any is unknown) (P1). v1 instead has one `deployment_mode` selection with `cardinality: one` (V9). The accepted #3 → #42 receipt (P12) supplies the researched per-component definition. Versioned representation and migration remain with #40/CD-7; the definition is not an undecided mode choice or a new frozen-v1 field.
 
 ## Build record definition
 
@@ -75,7 +75,7 @@ All four modes appear in the comparison semantics. Mode is a per-serving-compone
 | created / modified | `#/properties/created_at`, `#/properties/updated_at` | Covered | |
 | owner | `#/properties/owner_ref` (required) | Covered, sensitive | Withheld from shares |
 | fork lineage | — | **Gap: SB-6** | |
-| per-component mode | — (`deployment_mode` selection, cardinality one, V9) | Pending #81 / CD-7 | Not an SB decision |
+| per-component mode | — (`deployment_mode` selection, cardinality one, V9) | Research definition received (P12); CD-7 wire/migration separate | Not an SB decision |
 | several workloads on one machine | — (`workload` cardinality one, V9) | **Gap: SB-7** | #81 Q7 handoff |
 
 ### What makes a build reproducible (Proposal)
@@ -84,15 +84,15 @@ Re-evaluation of (build id, revision) yields the same findings when all of these
 
 ### Derived records
 
-A saved revision is the root of: its `EvaluationReport`s, `CostEstimate`s, `ResourceEstimate`s and any `DeploymentManifest`. A derived record whose `build_revision` differs from the build's is stale and is shown as such, never as current (V6, V8).
+A saved revision is the root of: its `EvaluationReport`s, `CostEstimate`s, `ResourceEstimate`s and any `DeploymentManifest`. Association requires this exact `build_id` and `build_revision`, together with each record's required lock/selection identities. Another build's numerically equal revision is not a match. Earlier-revision evidence is historical and cannot satisfy the current revision's gates (V6, V8).
 
 ## Save, share and compare semantics
 
 ### Save and revisit (Proposal)
 
 1. Every change persists a new immutable revision under compare-and-swap (V5). "Save" names a revision; it doesn't freeze the build.
-2. On revisit, show the historical report for that revision's locks.
-3. Compute a current report for the same selections against the latest published snapshot, ruleset, graph and pricebook. This is a candidate, not a revision. It doesn't change the saved build.
+2. On revisit, show the permitted projection of the correctly associated historical report for that revision's locks.
+3. Offer a current report for the same selections against separately identified published snapshot, ruleset, graph and pricebook inputs. Compute it only when the required inputs are eligible and its reader/migration path is supported; otherwise show the qualified current-view limitation below. This is a candidate, not a revision. It doesn't change the saved build. A candidate using different lock inputs is not evidence for the saved revision and cannot satisfy its gates. Any later accepted revision must carry its own matching locks and associated evidence.
 4. Show the differences per `rule_id`: outcome (`pass`/`fail`/`unknown`/`skipped`) and severity (`info`/`warning`/`error`) side by side, with the rule message, remediation and evidence path (V10). Price differences show both pricebooks' "as of" dates.
 5. The user can adopt the current locks, which creates a new revision. Replacements for retired components are offered, never applied automatically (V6).
 
@@ -102,9 +102,9 @@ States are derived on read, not stored. More than one can apply.
 
 | State | Condition | What the viewer sees |
 | --- | --- | --- |
-| Up to date | Locks equal the latest publications, and a report exists for this revision | Current result only |
-| Not evaluated | No report has `build_revision` equal to the build's | "Not checked yet". Never shown as valid |
-| Newer data available | A newer catalog snapshot, ruleset version, graph revision or pricebook exists | Historical result, labelled with its lock dates, plus the current result |
+| Published references unchanged | The compared publication identities equal the saved locks, and the retained report has this exact Build ID/revision and required lock associations | Permitted historical result with its original dates. Reference equality alone establishes neither current eligibility, successful reproduction nor disclosure permission |
+| Report unavailable or unassociated | No report is resolved for this exact Build ID/revision and its required lock associations | Evaluation for this revision is not established. Preserve any original report with its actual association/availability explanation; do not infer that no historical evaluation occurred |
+| Newer data available | A newer catalog snapshot, ruleset version, graph revision or pricebook exists | Permitted historical result with its lock dates; offer a separately qualified current candidate, or explain why that evaluation is unavailable |
 | Result changed | Current findings differ from historical findings for any rule | The per-rule diff; changes to `fail` or `unknown` listed first |
 | Now indeterminate | A historical `pass` is `unknown` in the current report | "Can no longer be confirmed", with the missing evidence |
 | Now valid | A historical `fail` is `pass` in the current report | "This now passes under ruleset <version>"; the historical failure stays visible |
@@ -119,7 +119,7 @@ States are derived on read, not stored. More than one can apply.
 
 `EvaluationReport.result = valid` means the configured rules passed for the locked revision, not production readiness (V6). Shares say so.
 
-**Synthetic boundary examples (proposal, no runtime measured):** an item marked `deprecated` remains available with a warning; an item omitted from a non-exhaustive snapshot has unknown availability. A v1 revision with all original records and its v1 evaluator retained remains reproducible after a v1.1 publication. If the v1.1 migration is unavailable, only the proposed current view is unavailable. If the original pinned evaluator or a required record is actually lost, the historical findings remain visible but their reproducibility is qualified with that specific missing dependency. These cases follow SB-R4a/SB-R4b and #40's [CD-7 migration boundary](component-schema-compatibility.md#contract-versions-and-migration-cd-7-proposal); they do not release a successor contract.
+**Synthetic boundary examples (proposal, no runtime measured):** an item marked `deprecated` remains available with a warning; an item omitted from a non-exhaustive snapshot has unknown availability. A v1 revision with all original records and its v1 evaluator retained remains reproducible after a v1.1 publication. If the v1.1 migration is unavailable, only the proposed current view is unavailable. If the original pinned evaluator or a required record is actually lost, a permitted historical projection can remain visible but its reproducibility is qualified with that specific missing dependency. These cases follow SB-R4a/SB-R4b and #40's [CD-7 migration boundary](component-schema-compatibility.md#contract-versions-and-migration-cd-7-proposal); they do not release a successor contract.
 
 ### Sharing (Proposal)
 
@@ -128,9 +128,35 @@ States are derived on read, not stored. More than one can apply.
 | What a link points to | One immutable revision by default. An owner may choose "follow latest revision"; the viewer is told which. |
 | Access modes | `private` (owner only); `unlisted` (anyone with the token); `public` (listed and discoverable). Organisation-scoped sharing needs accounts and is out of scope. Mode is a property of the share, not of the build, so changing it doesn't create a build revision (SB-4). |
 | Read-only vs fork | Every share is read-only. Fork creates a new build id at revision 1 with a lineage pointer to the source (id, revision) (SB-6). Withheld inputs arrive unanswered; attestations are never copied. |
-| Revocation | Revoking a token stops access to the projection. Copies already exported or forked are outside control and the share flow says so. |
+| Revocation | Revoking a token stops future access through that token. It does not prove physical deletion or erase already exported copies or independently permitted forks; the lifecycle boundaries below apply. |
 | What the viewer sees | Permitted projections of both validity views and their dates; permitted withholding notices rather than private field names or values |
-| Retention | Open product decision (SB-9) |
+| Retention | Lifecycle semantics selected below; numeric periods and deletion-completion policy remain documented and owned under SB-9. No default retention period is adopted. |
+
+### Retention and access lifecycle (SB-9 research decision, 2026-10-18)
+
+The issue asks for a documented retention question; it does not require an
+invented universal duration. This decision separates the lifecycle events now
+so the remaining policy can be reviewed before a hosted service promises
+permanence, expiry or deletion. These are project design choices, not observed
+storage behavior or a new source licence.
+
+| Event or artifact class | Selected research behavior | Remaining policy/evidence |
+| --- | --- | --- |
+| Share expiry or revocation | Stop future access through the expired/revoked token. Never recycle it for another target. While active, a deliberately following share retains its disclosed revision policy. | Actual expiry duration, token/revocation-record lifetime and enforcement implementation |
+| Owner deletion | Stop serving the owner's deleted revisions and associated shares. A deletion request, access denial and completed physical purge are distinct events. | Completion deadline, backups/residual copies, any independently applicable retention basis and evidence of actual purge |
+| Retained payload, token, audit and lineage records | Apply a separate purpose and permitted retention policy to each class. A revocation marker need not retain the full private payload, and its identities or associations can themselves be restricted. | Concrete durations, triggers, access and deletion policy for each class |
+| Independent fork | Keep its new Build ID/revision and own lifecycle. Origin deletion does not automatically erase independently permitted fork content; source identity or token possession supplies no continuing permission. Private attestations and withheld values never transfer. | Permitted content and lineage after the relevant rights or deletion event; no guarantee of perpetual fork survival |
+| External export | Explain the limits of control over a copy already delivered. Revoking a hosted link neither recalls that file nor creates a new right to retain or redistribute it. | The actual recipient/use conditions; no promise of remotely erasing an uncontrolled copy |
+| Replay prerequisite becomes unavailable or unusable | Retain only permitted history and qualify the missing prerequisite. Some prerequisites prevent evaluator execution entirely. Never substitute latest inputs, relabel a partial projection as the original artifact, or rewrite a historical outcome. | Whether each original input remains available, usable and permitted under its actual profile |
+
+**Accountable follow-up:** #42's existing assignees, @tynamite and @appletechie,
+with #41 for source/data governance and #40 for versioned representation.
+Before a hosted retention promise is made, choose the periods and triggers for
+the distinct classes, deletion-completion and residual-copy policy, and
+permitted fork/lineage survival. This records the remaining research question;
+it neither requires implementing accounts/storage in #42 nor implies an
+indefinite default. Absence of an arbitrary source-freshness TTL is not a grant
+to store or disclose material forever.
 
 ### Field sensitivity for shared links and exports
 
@@ -240,7 +266,7 @@ v1's `workload` kind has cardinality one (V9), and #81 keeps one primary workloa
 - **(a) One build per workload, plus a hardware group.** Builds stay simple, but memory-pool fit (#81 W-R6) must then be evaluated across builds, which v1 has no record for.
 - **(b) One build with several workload selections distinguished by role,** each serving component linked to the workload it serves. One evaluation covers co-residency, but it needs a cardinality change and rules that address a workload by role.
 
-Lean: (b), because co-resident memory can only be checked where all resident components are known together. Recorded as SB-7 for #40 with #10; not decided here.
+Future lean: (b), because co-resident memory can only be checked where all resident components are known together. The present research choice remains one primary workload per build (P12). Multi-workload/co-residency representation remains SB-7 for #40 with #10; comparing separate builds proves no combined residency fit.
 
 ## Invalidation triggers
 
@@ -278,19 +304,21 @@ Status labels: **contract-derived** restates behaviour stated in the v1 docs (V5
 
 ### SB-R2 Displayed findings belong to this revision and these locks (contract-derived)
 
-- **Pointers:** `EvaluationReport#/build_revision`, `#/catalog_snapshot_id`, `#/ruleset_id`, `#/ruleset_version`, `#/dependency_graph_id`, `#/dependency_graph_revision` against the build's `revision` and `locks`.
-- **Assertion:** all equal. V6: the UI accepts diagnostics only when `report.build_revision == current build.revision`, otherwise marks them stale.
-- **Outcome / severity:** mismatch: `fail`, `warning` (the report is shown as historical, not current). No report: `unknown`, `warning`, `on_unknown: review` ("Not evaluated").
-- **Examples:** pass: report for revision 4 with matching locks. Fail: report for revision 3 shown on revision 4. Unknown: no report.
+- **Pointers:** `EvaluationReport#/build_id`, `#/build_revision`, `#/catalog_snapshot_id`, `#/ruleset_id`, `#/ruleset_version`, `#/dependency_graph_id`, `#/dependency_graph_revision` against the build's `id`, `revision` and `locks`.
+- **Assertion:** all required identities equal. Another build's numerically equal revision is not a match; exact Build ID/revision and required locks govern association (V6, V8).
+- **Outcome / severity:** known mismatch: `fail`, `warning`; retain the original record with its actual foreign-build, revision or lock identity, never as this revision's result. A missing report or unresolved required association is `unknown`, `warning`, `on_unknown: review`. A known mismatch remains a failure alongside an unrelated unknown; this review policy does not satisfy separate deployment gates.
+- **Examples:** pass: Build B revision 4 with matching locks. Fail: Build B revision 3, or Build C revision 4, presented as B revision 4. Unknown: a required report or association pin is unavailable.
 
 ### SB-R3 Cost is compared only on complete, current quotes (contract-derived)
 
-- **Pointers:** `CostEstimate#/build_revision`, `#/pricebook_id`, `#/currency`, `#/coverage`, `#/period_days`.
+- **Pointers:** `CostEstimate#/build_id`, `#/build_revision`, `#/pricebook_id`, `#/currency`, `#/coverage`, `#/period_days`.
 - **Applies when:** a budget is set or a cost comparison is requested.
-- **Assertion:** the estimate cites this revision and the locked pricebook, coverage is `complete`, and currency matches. V8: stale or partial quotes yield `unknown`, never budget-pass.
+- **Assertion:** the estimate cites this exact Build ID/revision and the locked pricebook, coverage is `complete`, and currency matches. For comparisons, apply this binding independently to each side; compared builds need not share an identity. V8: stale or partial quotes yield `unknown`, never budget-pass.
 - **Outcome / severity:** stale or partial: `unknown`, `warning` for display; the budget rule itself keeps its own severity. Currency mismatch in a comparison: `skipped` with reason "not comparable" (no FX policy).
 
-Both estimates and their component lines may still be shown, labelled with pricebook dates and their qualifications. A non-comparable total is not a reason to hide either estimate or its components.
+Both estimates and their component lines may still be shown where disclosure is independently permitted, labelled with pricebook dates and their qualifications. A non-comparable total alone is not a reason to hide either estimate or its components. The proposed comparison disposition does not rewrite a retained evaluator finding or transfer a historical budget pass to a current candidate.
+
+Historical compatibility replay consumes the exact retained cost estimate; it does not recalculate rates or amounts. A separate cost-recomputation claim needs the original quantities, rate inputs applicable to that calculation's time and scope, and applicable calculation, allocation, aggregation and rounding-policy identities. Missing that basis prevents that claim even when a cost/report association remains checkable. The #39 intake (P13) accepts this distinction. Its still-proposed FX, default currency/region and presentation choices do not enable conversion or supply invented values in frozen v1.
 
 ### SB-R4a Selected components are not deprecated (hypothesis)
 
@@ -366,26 +394,26 @@ released wire format is not a new prerequisite for research acceptance.
 | ID | Decision | Accountable | Consulted |
 | --- | --- | --- | --- |
 | SB-1 | The CD-1 typed answer and explicit provided-value attribution representation is received in P10. Remaining build-assumption mapping includes presets and FX/tax assumptions with their actual sources; receipt does not add fields to v1 | #40 | #81 (CD-1), #39 |
-| SB-2 | Lock the catalog snapshot `revision`, or require snapshot ids to be unique per revision | #40 | #41 |
-| SB-3 | Link a build revision to its cost snapshot: pricebook `revision` in `locks`, and how the build references its `CostEstimate` | #40 | #39 |
-| SB-4 | Visibility as a separate share record (token, access mode, pinned or following revision, created/revoked dates) rather than a build field | #40 | product owner (#42 assignees) |
-| SB-5 | Validation state is derived from reports, not stored; meaning of `lifecycle: validated`; recording the evaluator version in reports | #40 | — |
-| SB-6 | Fork lineage: source build id and revision on the new build | #40 | — |
-| SB-7 | Several workloads sharing one machine (#81 Q7) | #40 | #10, #81 |
+| SB-2 | Receive the explicit positive revision beside the catalog ID selected by the CD-7 exact-pin candidate (P11); do not assume an ID is unique per revision or infer a latest/sole artifact. Released representation and consumer integration remain with #40 | #40 | #41 |
+| SB-3 | Receive the CD-7 explicit pricebook revision and historical manifest association candidate (P11). #39 accepts the exact snapshot/comparison input (P13); calculation policy and complete/current coverage retain their own evidence. Final versioned Build/CostEstimate association remains #40 integration | #40 | #39 |
+| SB-4 | Select the separate share record and explicit access/pinned-or-following/revocation semantics in Sharing; it does not mutate a saved revision or grant source rights. #42 owns the policy; #40 owns its future versioned representation | #40 | product owner (#42 assignees) |
+| SB-5 | Derive displayed state from exactly associated reports and their supported evaluator/profile. A stored `lifecycle: validated` claim cannot certify current eligibility or deployment readiness. CD-7 replay supplies a bounded evaluator-binding candidate; final representation remains #40 | #40 | — |
+| SB-6 | Select a new Build ID/revision 1 with the source ID/revision as separately qualified lineage; no copied private attestations, withheld inputs or approvals. Wire placement remains #40; access and lifecycle limits are in Sharing and SB-9 | #40 | #42 assignees |
+| SB-7 | The initial research choice is one primary workload per build (P12). A later multi-workload model and complete physical co-residency accounting stay with #40/#10; grouping or comparing builds cannot establish combined fit | #40 | #10, #81 |
 | SB-8 | The five-state CD-1 research representation, including distinct `withheld`, is received in P10. Apply its exact profile and migration boundary to the separately reviewed share/fork projection; do not reinterpret the delivered 0.1 reader | #40 (with CD-1) | #81 |
-| SB-9 | Retention of shared links and revisions: expiry, effect of owner deletion, survival of forks | product owner (#42 assignees) | #41 (data governance) |
-| SB-10 | Where cross-record integrity checks (SB-R1 to SB-R3) live: Ruleset, evaluator preconditions or a separate validator | #40 | — |
+| SB-9 | Lifecycle meanings selected above; concrete artifact-class durations, deletion completion/residuals and permitted fork survival remain documented follow-up decisions before a hosted retention promise | product owner (@tynamite, @appletechie; #42) | #41 (data governance), #40 (representation) |
+| SB-10 | Receive the CD-7 historical wrapper preflight as the bounded research placement for exact cross-record checks (P11). Preserve the frozen evaluator and original findings; production/successor placement remains #40 integration | #40 | — |
 
 ## Open questions and handoffs
 
 | Handoff | What is asked | Status |
 | --- | --- | --- |
-| #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted on 2026-10-18 (P10). Producer delivery, remaining SB decisions and the complete projection retain separate gates; #42's live #40 prerequisite remains |
+| #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted (P10), with selected representations delivered by #403 (P11). Remaining central disposition of this SB reconciliation and the complete projection stays separate; #42's live #40 prerequisite remains |
 | #41 | Confirm the invalidation table and the separate retained/current/disclosure boundaries | Original interim scope confirmed by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384). The actual delegated H41-42 receiving decision on 2026-10-18 accepts the later scoped interface (P9); no arbitrary TTL or whole sharing/migration policy is adopted |
-| #39 | Confirm SB-3 and the cost comparison rules (currency, period, charge basis, one-off vs operating) | Pending |
-| #37 | A "deploy from saved build" path must use the pinned revision and its own approvals (V8) | Pending |
-| #81 (#2/#3) | Q7 answered as SB-7 (open); per-component mode, `/workload`, attestations and the "report from a saved build" pre-fill (P1, deployment-mode.md "Report from a build") consume the share redaction: a pre-filled fit report must take the configuration key only, never withheld inputs | Pending |
-| #60 | Confirm that rights changes hide values in historical and shared views | Pending |
+| #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | Accepted with constraints in actual receipt P13; final #40 wire integration and unadopted cost policy remain separate |
+| #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | Accepted with constraints in actual receipt P14; no deployment approval or execution |
+| #81 (#2/#3) | Incoming workload/mode inputs and the separate reverse share/report-prefill interface; Q7 is SB-7 | Actual #2 → #42 and #3 → #42 intake recorded in P12. They accept one primary workload, private non-transfer and complete projection qualification at their pins. The reverse #42 → #2/#3 disposition on this reconciled note remains a separately named receiving task |
+| #60 | #42 → #60: qualify historical/shared/exported views after a relevant material, use or permission change | Accepted with constraints in actual receipt P15; no blanket history deletion, retention grant or new source permission |
 | #51 | PCPartPicker save and share flows remain unobserved (P5); this note doesn't rely on them | Informational |
 
 The original #41 invalidation-policy handoff and the later H41-42 scope are
@@ -425,21 +453,77 @@ disclosure proposal. Other receiving decisions, retention, share access and the
 remaining SB mapping/projection work stay separate. The live #40 prerequisite
 is not removed by either source-only receipt.
 
+### Current receiving and delivery reconciliation — 2026-10-18
+
+The earlier P9/P10 statements that their sources were unsigned and unmerged
+describe the time of those receipts. They remain historical facts. The selected
+#40 representations and #41 source policy were subsequently delivered by
+[#403](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/403) at signed
+`cebbf59345e01d34b8ad4c20d0b57782f6e05369`. #41's
+[actual completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6256107246)
+records its twelve-criterion decision and later closed/completed readback;
+it does not complete #40. The active canonical CD-2 decision and #42's native
+#40 prerequisite retain their owners and actual acceptance gates.
+
+The complete-projection correction was delivered by #396, the dependent-rule
+applicability clarification by #412, and retained-association diagnostics by
+#397. At inspected accepted main
+`45b8fe1c7ee3a010cc294e751a3424ccb81366d4`, this note before the present
+amendment is blob `2f3dc5b22b0e77fa7c496865bb4f20b8a81ae8f2`.
+That delivery is distinct from any later receiving decision or from accepting
+a production implementation.
+
+The complete incoming
+[#3 → #42 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6255453677)
+and
+[#2 → #42 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6256110870)
+are now recorded explicitly (P12). Their exact producer/consumer pins and later
+source guards remain in the receipts. Receive the evidenced per-component
+operator/capacity definition, actual workload/answer states, one primary
+workload, and the report-from-build qualification boundary. They supply no new
+measurement, automatic private-attestation reuse or blanket permission for a
+partial fit record.
+
+The three new outgoing decisions below are actual receiving-side decisions by
+the coordinating ChatGPT engineer through CompleteDotTech under delegated
+project authority, with independent reasoning review of the supplied
+interfaces. The producer was read completely. The cost and deployment
+receiving reads covered the bounded sections named in each receipt; the rights
+note and named frozen gate documents were read completely. No absent named
+assignee, full-vendor re-audit or new test run is attributed to those reviews.
+
+| Direction / receipt | Exact receiving basis at the accepted main above | Accepted scope |
+| --- | --- | --- |
+| [#42 → #39 / 6256564986](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6256564986) | Cost Estimate blob `6df5e3c30e1bef38a6a75b576e7eaa889262338e` | Original versus current estimate, calculation identity, exact quantity/comparison basis, coverage, one-off/recurring separation and disclosure. Unadopted FX/default/aggregation policies remain proposals. |
+| [#42 → #37 / 6256565553](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6256565553) | Deployment blob `64685127aa4477b323d0f72479abddac21cfcae9` | Exact Build/revision/target and associated evidence; actual required approvals and readiness gates. A fork or conforming manifest does not inherit approvals or prove readiness. |
+| [#42 → #60 / 6256566108](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6256566108) | Rights blob `2fb0aa8d4c51448f111dbc82a8123206646f61c6` | Material/use-qualified complete projections, retained-history limits and current exclusions. Relevant changes require qualification without automatically cancelling every historical grant or permitting every later use. |
+
+These decisions receive the existing producer at the stated blob. Independent
+review and delivery of this reconciliation remain separate. The remaining
+named receiving work is **#40's disposition of the reconciled SB choices and
+complete projection**, and **the reverse #42 → #2/#3 configuration/report-prefill
+interface**. #42's current assignees coordinate those scopes with the respective
+issue owners; the incoming P9/P10/P12 receipts are not silently reversed.
+
 ## Acceptance criteria coverage
 
-| Criterion | Where | Status |
+The following first column preserves all eleven literal issue criteria. This is
+a readiness map, not a change to their checkboxes or a declaration of whole
+issue completion. Research acceptance does not require implementing the builder.
+
+| Literal issue criterion | Evidence location | Current disposition |
 | --- | --- | --- |
-| Build record definition referencing #40 schema | Build record definition; H40-42 receipt | v1 mapping retained; selected base research representations received in P10, with remaining SB work and producer delivery separate |
-| Sharing and privacy rules | Sharing; Field sensitivity; Disclosure across complete projections | Disclosure across all fields proposed for review; retention open (SB-9) |
-| Comparison semantics with examples | Comparison | Drafted, including required-foundation and optional-tier boundary cases |
-| Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states; H41-42 receipt | Original interim scope and later retained/current/disclosure interface received; no whole-issue or implementation acceptance |
-| Decision record merged | Proposal sequencing decision | Partial record merged in [#114](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114); #42 completion remains blocked by #40 |
-| Deployment modes covered | Candidate options; Comparison | Covered using #81's merged definitions |
-| Comparison fields with type, unit, evidence | Comparison fields | Drafted |
-| Rules in #40 format; verified vs hypotheses | Compatibility proposals | Contract-derived vs hypothesis labelled; none reproduced |
-| Primary sources with access dates | Evidence | Done for the claims made |
-| Handoffs confirmed by owners | Open questions and handoffs | Original #41 invalidation scope and actual delegated H41-42/H40-42 scopes confirmed; other handoffs pending |
-| Open questions with named owner | Open decisions | Done |
+| Build record definition referencing #40 schema | Build record definition; SB-1–SB-10; P10/P11 | Frozen mapping and selected research choices documented; final central SB/projection disposition and the live #40 prerequisite remain. |
+| Sharing and privacy rules | Sharing; complete projection; SB-9 lifecycle decision | Access, fork, disclosure and lifecycle semantics documented. Numeric retention questions have named owners; this amendment needs its own review and delivery. |
+| Comparison semantics with examples | Comparison and its synthetic examples; SB-R3 | Mode, workload, rule/protocol and cost-basis distinctions are explicit; historical display, new evaluation and cost recomputation remain separate claims. |
+| Invalidation triggers (from #41) and resulting user-visible states | Invalidation triggers; corrected Revisit states; P9/P11 | Actual #41 input received and delivered. Equal references alone no longer imply current eligibility, disclosure permission or reproduction. |
+| Decision record merged at `research/T0-configuration/saved-shared-builds.md` following the research method | Proposal sequencing; current delivery reconciliation | Original #114 and later #396/#412/#397 contributions are delivered. This amendment's actual reviewed main delivery must be recorded on its PR; #42 is not completed by this table. |
+| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Candidate options; Deployment modes covered; Comparison; P12 | API, managed and self-hosted serving plus hybrid composition covered with their separate historical-v1 and researched per-component representations. |
+| Comparison fields defined with type, unit, and evidence requirement | Comparison fields; frozen field mapping; SB-R3 and P13 | Types, units, evidence and comparison basis recorded; missing quantities, cost coverage or calculation policy do not become invented values. |
+| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; CD-7 historical candidate; P10/P11 | Original SB rule identities and contract-derived/hypothesis labels retained. Synthetic historical replay is bounded evidence, not independent vendor verification or a released successor rule format. Required-field mapping to the actual common research format still needs #40 disposition. |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P15 | Primary contract/external references retain actual access dates and scopes. New content records project choices and exact receiving/source evidence; it introduces no new vendor measurement, price or licence claim. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; current receiving reconciliation | P9/P10/P12 and actual outgoing P13–P15 received at their stated directions. Final #40 disposition and reverse #42 → #2/#3 review remain explicitly outstanding. |
+| Open questions recorded with a named follow-up owner | Open decisions (SB-); SB-9 accountable follow-up | All remaining decisions have accountable workstreams; retention periods/deletion completion are documented with @tynamite/@appletechie and #41/#40 consultation. |
 
 ## Evidence
 
@@ -471,6 +555,11 @@ is not removed by either source-only receipt.
 | P8 | [#60 scoped receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771), delivered by [PR #299](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/299); [accepted source-use record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3d395801742461aa82ac31a21857ec6f8d0270fb/research/market/rights-validation.md) | 2026-10-18 | Accepted main `3d395801742461aa82ac31a21857ec6f8d0270fb` | Project engineering receiving decision | Current GPUs.io API/display/export exclusion supersedes the historical P4 consumer guidance; no new permission, production integration approval or #42 contract adoption |
 | P9 | [Actual H41-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254389540); [reviewed producer source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/13b11b7eb9a84af200ea9f0577fcb0e5182a4c46/research/T0-configuration/catalog-data-sources.md) | 2026-10-18 | Proposed source `13b11b7e`, note blob `c7d36a3c`; receipt submitted 2026-10-18 19:51:29 UTC | Project engineering receiving decision | Accepts the stated saved-build event/current/disclosure interface; unsigned source at receipt, no producer-delivery claim, attribution to absent people, whole-issue completion or blanket sharing/history migration |
 | P10 | [Actual H40-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254602552); [reviewed producer source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/45b20960cbc4652fb3341c977a025821c96595f9/research/T0-configuration/component-schema-compatibility.md) | 2026-10-18 | Proposed source `45b20960`, note blob `375506ee`; receipt submitted 2026-10-18 20:12:44 UTC | Project engineering receiving decision | Accepts the stated base research representations and conditions; unsigned source at receipt, no producer-delivery, complete shared/history implementation, new disclosure-proposal acceptance or #42 completion claim |
+| P11 | [Accepted central record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/45b8fe1c7ee3a010cc294e751a3424ccb81366d4/research/T0-configuration/component-schema-compatibility.md), CD-7 exact pins/native envelope/historical replay and selected representations; [#41 delivery receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6256107246) | 2026-10-18 | Accepted main `45b8fe1c7ee3a010cc294e751a3424ccb81366d4`; central blob `8ee5a7b7a960ae63c073c996cfdc73b80d939e7c`; #403 delivered at `cebbf593` | Project research and delivery evidence | Bounded candidate/source sections checked; no whole central/vendor re-audit, CD-2 acceptance, successor release or #42 closure |
+| P12 | [#3 → #42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6255453677) and [#2 → #42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6256110870) actual receiving decisions | 2026-10-18 | Original complete producer/consumer pins and later source guards retained in each receipt | Project engineering receiving decisions | Per-component mode, workload, private non-transfer and complete projection intake; incoming receipts do not substitute for reverse acceptance |
+| P13 | [#42 → #39 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6256564986) | 2026-10-18 | Producer/consumer at `45b8fe1c`, exact blobs in reconciliation above | Project engineering receiving decision | Bounded snapshot/cost/comparison interface; no refreshed vendor rates, adopted FX defaults or production estimator |
+| P14 | [#42 → #37 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6256565553) | 2026-10-18 | Producer/consumer at `45b8fe1c`, exact blobs above; frozen manifest and gates read | Project engineering receiving decision | Pinned revision and actual approvals; schema conformance or historical evidence is not deployment approval |
+| P15 | [#42 → #60 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6256566108) | 2026-10-18 | Producer/consumer at `45b8fe1c`, exact blobs above | Project engineering receiving decision | Complete-view qualification consumes existing project exclusions; no new primary terms check, publisher grant or retention duration |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; the contract decisions and #42 prerequisite remain open.
 
