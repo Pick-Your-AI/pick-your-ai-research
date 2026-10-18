@@ -897,3 +897,11 @@ None in this pull request. A `monitoring_stack` catalog item needs `signals` fro
 | #40 | alert-class and threshold-source enums; rules whose participants are not T0 fields yet | Comparison fields; Compatibility proposals (71 M-R rows in Source checked, 25 M-H rows in Hypotheses) |
 | #41 | evidence grading for the M families | Evidence |
 | T1 to T5 owners | the signals each component must expose, by mode | Signal catalog sections; Minimum catalog per mode |
+
+## Post-#121 source reconciliation: OpenLLMetry trace content
+
+Refs #118, #35, #38. Source checked 2026-10-18; not independently reproduced. This supplements the existing trace-content-masking handoff.
+
+Traceloop's [Prompts, Completions and Embeddings](https://www.traceloop.com/docs/openllmetry/privacy/traces) documentation says OpenLLMetry records prompts, completions and embeddings in span attributes by default. The documented global control is `TRACELOOP_TRACE_CONTENT=false`; TypeScript/JavaScript also supports `traceContent: false`. The same page documents selective workflow/task controls and an `override_enable_content_tracing` context override, so a global setting alone is not evidence that every emitted span is content-free.
+
+Receiving implication: assess overrides and inspect the selected instrumentation's emitted attributes before accepting content-free telemetry. Disabling this content capture does not establish deletion of previously exported traces, retention limits, authorization, or absence of other sensitive attributes. Those remain #35/#38 decisions and runtime evidence requirements. No SDK/version, exporter or backend was run here; the mutable documentation does not qualify every installed instrumentation tuple. Keep the original #118 comparison record until its remaining unique material is reconciled.

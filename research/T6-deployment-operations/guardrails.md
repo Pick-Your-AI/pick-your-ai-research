@@ -261,3 +261,11 @@ None in this pull request. A `guardrail` catalog item needs `targets`, `policies
 | #2 Workload | the T0 fields the rules need | pending |
 
 Review correction, source checked 2026-10-17: [Qdrant multitenancy](https://qdrant.tech/documentation/manage-data/multitenancy/) distinguishes optional tenant-index storage optimization from tenant-scoped queries. G-R7 requires the trusted boundary, not merely an index or shard.
+
+## Post-#121 source reconciliation: Google Cloud harm-filter defaults
+
+Refs #120, #35, #38. Source checked 2026-10-18; not independently reproduced. This retains the focused finding from the comparison PR without replacing G-R19's Gemini API scope.
+
+Google Cloud's [Safety and content filters](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/configure-safety-filters) page states that `OFF` is the configurable harm-block threshold default for `gemini-3.5-flash` and subsequent models. In that setting, configurable response blocking and its metadata are absent. This is not a statement that every safety control is disabled: the page separately describes non-configurable CSAM/PII protections and SPII response termination. Its configurable filters follow model versions, not an independently versioned filter release.
+
+Receiving implication for #35/#38: record the exact Google Cloud model/version and configured threshold before interpreting absent harm scores or block events. Missing metadata is not a measured zero harm rate or evidence that a request was safe. Explicit threshold selection and telemetry interpretation remain proposed receiving decisions, not an adopted ruleset or account-level test. The source is mutable; recheck it when the model or service configuration changes.
