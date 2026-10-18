@@ -48,6 +48,8 @@ python contracts/v1/reference/validate_payload.py contracts/v1/schemas/catalog-i
 
 CI runs the same checks. It validates schemas, import integrity, generator consistency, canonical-kind coverage, local catalog references, exact price references, duplicate IDs, public provenance URL shape, date ordering, and external-artifact metadata. It rejects reserved fixture IDs/example domains in real proposals. Catalog, pricebook and evidence JSON must have unique object keys at every level; conflicting or repeated keys are rejected before schema validation rather than silently choosing a value. Non-finite numeric literals and numbers that overflow the intake's finite numeric range are also rejected. This stricter submission parsing does not change the frozen v1 contract. It does not fetch sources, verify remote hashes or rights, establish freshness, prove claims, or guarantee secrets are absent. Reviewers must check those matters and compare prior revisions for unintended fact changes.
 
+The market integrity reader applies the same duplicate-key, non-finite-number and numeric-overflow rejection to its four inputs: `competitors.json`, `sources.json`, `features.json` and `research-backlog.json`. It rejects ambiguous raw JSON before interpreting the market evidence or priority records, including under optimized Python.
+
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
 
 ## Review and ownership
