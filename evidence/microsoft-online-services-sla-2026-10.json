@@ -1,0 +1,9 @@
+{
+  "id": "microsoft-online-services-sla-2026-10",
+  "uri": "https://www.microsoft.com/licensing/docs/documents/download/OnlineSvcsConsolidatedSLA%28WW%29%28English%29%28October_2026%29%28CR%29.docx",
+  "version": "English worldwide edition dated 2026-10-01; downloaded 2026-10-18",
+  "sha256": "77e3e636513b0b3be8ada4d976d91d4543dd12564c418f2f0ead8fa5b7166f41",
+  "access": "Public publisher download linked by Microsoft's Service Level Agreements for Online Services catalog. No account or credential was required for this retrieval.",
+  "description": "380353-byte DOCX. The title page, general definitions and Foundry Models uptime and priority-latency sections were read from Word text/table/equation XML. This is source inspection, not measured availability, universal Azure OpenAI coverage or a determination of account eligibility.",
+  "rights": "Microsoft publisher document. Link, checksum and limited factual paraphrases only; no grant to redistribute the DOCX or reuse its full text is asserted. Source-use decisions remain with #41/#60."
+}

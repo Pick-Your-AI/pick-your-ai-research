@@ -121,7 +121,7 @@ Grouped by who can answer them. Every record has an owner column in its Open que
 **Provider-side questions (#34 owner)**
 - Guardrail failure modes when a service is unreachable; Anthropic retention wording; the Cloudflare AI Gateway Guardrails categories; a Lakera flag-only mode (#35).
 - Red-team authorisation routes; eval-dataset retention under zero-retention settings; Bedrock evaluation regions and judge prices (#36).
-- Azure OpenAI and Bedrock SLA figures; OpenAI policy pages that returned HTTP 403; the NVIDIA NIM production licence conflict (#37, also asked by #39); GPU quota lead times (#37).
+- Selected-offering SLA applicability and model-specific latency targets: [the Bedrock page and October 2026 Foundry Models section are now source checked](deployment-sla-source-check.md), without assuming separate Azure OpenAI coverage. OpenAI policy pages that returned HTTP 403; the NVIDIA NIM production licence conflict (#37, also asked by #39); GPU quota lead times (#37).
 - Azure abuse-monitoring retention and log schema; vendor retention and regions for Arize AX and Helicone (#38).
 - Bedrock Provisioned Throughput model-unit throughput, which needs an AWS account team; the Azure VM reservation row reading (#39).
 
