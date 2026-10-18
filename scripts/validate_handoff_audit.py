@@ -25,9 +25,12 @@ def response_status(row):
 
 def validate(ledger, readback, audit):
     issues = {issue['number']: issue for issue in readback['issues']}
+    require(len(issues) == len(readback['issues']), 'duplicate snapshot issue')
     pairs = {(row['market_issue'], row['consumer_issue']) for row in ledger}
     require(len(pairs) == len(ledger), 'duplicate handoff pair')
     declared = set(map(tuple, readback['declared_handoff_pairs']))
+    require(len(declared) == len(readback['declared_handoff_pairs']),
+            'duplicate declared handoff pair')
     require(declared <= pairs, 'missing declared handoff')
     require(audit['snapshot_cutoff_utc'] == readback['snapshot_cutoff_utc'],
             'audit and readback cutoff differ')
@@ -35,6 +38,8 @@ def validate(ledger, readback, audit):
             'audit and readback base commit differ')
     historical = {(r['market_issue'], r['consumer_issue']): r['owner_review']
                   for r in readback['historical_owner_reviews']}
+    require(len(historical) == len(readback['historical_owner_reviews']),
+            'duplicate historical review pair')
     observed_history = {(r['market_issue'], r['consumer_issue']): r['owner_review']
                         for r in ledger if 'owner_review' in r}
     require(observed_history == historical, 'historical review changed or dropped')
@@ -92,6 +97,8 @@ def validate(ledger, readback, audit):
                     for child in issue['sub_issues']),
                 'native parent/sub-issue mismatch')
     captured_prs = {pr['number'] for pr in readback['pull_requests']}
+    require(len(captured_prs) == len(readback['pull_requests']),
+            'duplicate snapshot pull request')
     require(all(n in captured_prs for row in audit['issues'] for n in row['related_prs']),
             'technical classification references an uncaptured PR')
     return coverage
