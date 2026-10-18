@@ -122,7 +122,7 @@ def evaluate(budget: Budget) -> Result:
     lower_outcome = combine(tuple(check.lower for check in checks))
     return Result(
         outcome,
-        outcome == Outcome.FAIL and lower_outcome == Outcome.PASS,
+        outcome == Outcome.FAIL and lower_outcome != Outcome.FAIL,
         tuple(checks),
     )
 

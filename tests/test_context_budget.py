@@ -43,6 +43,32 @@ class ContextBudgetCases(unittest.TestCase):
         result = evaluate(replace(SHARED, input_tokens=TokenRange(5000, 6000)))
         self.assertEqual(result.outcome, Outcome.PASS)
 
+    def test_shared_straddle_keeps_uncertainty_when_output_cap_is_unknown(self) -> None:
+        budget = replace(SHARED, input_tokens=TokenRange(5500, 6500), output_cap=None)
+        result = evaluate(budget)
+        self.assertEqual(result.outcome, Outcome.FAIL)
+        self.assertTrue(result.may_not_fit)
+
+    def test_separate_straddle_keeps_uncertainty_when_output_cap_is_unknown(
+        self,
+    ) -> None:
+        budget = replace(
+            SHARED,
+            semantics=Semantics.SEPARATE,
+            input_tokens=TokenRange(7500, 8500),
+            input_cap=8000,
+            output_cap=None,
+        )
+        result = evaluate(budget)
+        self.assertEqual(result.outcome, Outcome.FAIL)
+        self.assertTrue(result.may_not_fit)
+
+    def test_definite_output_failure_prevents_uncertainty_only_label(self) -> None:
+        budget = replace(SHARED, input_tokens=TokenRange(5500, 6500), output_cap=1000)
+        result = evaluate(budget)
+        self.assertEqual(result.outcome, Outcome.FAIL)
+        self.assertFalse(result.may_not_fit)
+
     def test_known_failure_is_not_hidden_by_missing_input(self) -> None:
         result = evaluate(replace(SHARED, input_tokens=None, reserved_output=4001))
         self.assertEqual(result.outcome, Outcome.FAIL)

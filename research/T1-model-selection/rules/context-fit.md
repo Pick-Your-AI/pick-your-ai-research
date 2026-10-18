@@ -40,9 +40,10 @@ The [test-only prototype](../../../tests/context_budget_prototype.py) and
 [executable cases](../../../tests/test_context_budget.py) exercise these proposed
 semantics over normalized eligible facts. They distinguish a shared-window sum
 failure from independent input/output passes, use the upper estimate bound,
-flag a straddling failure as `may_not_fit`, preserve equality at a cap, and retain
+flag a straddling failure as `may_not_fit` even if another cap is unknown, preserve equality at a cap, and retain
 unknown when only some required predicates pass. A known violated cap can fail
-even when another operand is missing. Separate-budget combined checks are skipped.
+even when another operand is missing. A definite lower-bound violation suppresses
+the uncertainty-only flag. Separate-budget combined checks are skipped.
 Explicit policy ceilings remain additional proposed predicates, not vendor limits.
 
 The runtime-limit cases exercise native fallback and a lower known runtime ceiling.
