@@ -348,7 +348,7 @@ assert: all(
 
 ### T4-B6 `rule.t4.tool.credential.ref`: credential source and resolution (needs contract change via #40)
 
-**Status: proposed, not implemented or accepted.** The former v1 JSON rule required every authenticated tool to carry its own `/settings/credential_ref`. That contradicts the shared integration connection and provider-hosted execution models above. It is withdrawn rather than treating an unresolved source as authenticated or requiring duplicate references.
+**Status: proposed contract semantics, not adopted; the synthetic experiment below is not a production resolver.** The former v1 JSON rule required every authenticated tool to carry its own `/settings/credential_ref`. That contradicts the shared integration connection and provider-hosted execution models above. It is withdrawn rather than treating an unresolved source as authenticated or requiring duplicate references.
 
 **Existing v1 facts:** `selection.schema.json` defines opaque `secret://` references on tool, integration and model-provider settings. `build.schema.json` permits `provided_by` links with selection IDs. Neither the schemas nor the reference evaluator define credential inheritance, credential-source selection, link traversal or effective authorization. `associated_tool_refs` names catalog items, not the active connection selection. These facts do not establish that an inherited credential works.
 
@@ -370,6 +370,32 @@ Absent binding, absent/empty auth metadata, or a mixed `none`/authenticated meth
 **Synthetic acceptance cases for the future versioned contract (expected outcomes, not implemented resolver results):** direct + required reference passes the presence check; direct + missing reference fails. An explicitly bound GitHub integration with a reference and no tool-local copy passes the inherited presence check; a provider-hosted search tool uses its explicitly bound provider reference. A disabled/missing target fails; two competing bindings, a conflict between local and inherited references, absent auth metadata, or an unchosen mixed auth list require `unknown`/review. Explicit supported `none` is non-authenticated; no enabled tool is `skipped`. Passing any presence check does not assert that the credential is valid.
 
 **Version/migration handoff:** #40 must choose the actual binding fields, link cardinality, per-selection evaluation mechanism and versioned resolver/ruleset semantics, with #35 authorization review and #13 connection-boundary review. Existing v1 builds must retain unresolved credential readiness; do not default legacy builds to `direct` or infer successful inheritance. Add versioned synthetic fixtures for every case above before a new contract/ruleset is adopted. No frozen schema, evaluator, catalog fact, price or secret is changed here.
+
+#### Executable synthetic binding cases
+
+The [test-only projection](../../tests/credential_binding_prototype.py) and
+[cases](../../tests/test_credential_binding.py) exercise the proposed table above.
+Inputs are a closed synthetic selection inventory and already-normalized,
+eligible presence/support facts for an explicitly chosen authentication method.
+An unknown choice represents absent, empty or ambiguous auth metadata; the
+prototype does not parse a real method list, resolve a catalog or choose a method.
+`None` means unknown fixture evidence, not a contract answer-state encoding.
+
+Cases cover direct references, shared integration without a local copy,
+provider-hosted binding, absent/disabled/wrong-kind/unlinked targets, unresolved
+versions, unsupported versus unknown operation/auth support, competing bindings,
+local/inherited conflicts and legacy builds with no binding. Multiple connections
+do not become bindings automatically. A selected explicit target can disambiguate
+unrelated available connections; duplicate target identities remain unknown.
+
+Only booleans and synthetic selection IDs are inspected. No secret locator or
+value is present, dereferenced, emitted or logged. Passing is the proposed metadata
+readiness result, not credential validity, granted permissions, account entitlement
+or permission to execute a tool. No source-use, guardrail or authorization gate
+is satisfied by these cases. Frozen v1 and its historical behavior remain unchanged;
+CD-6/CD-7 fields, real resolution and migration still require versioned review.
+
+Run `python -m unittest discover -s tests -p test_credential_binding.py -v`.
 
 ### T4-B7 `rule.t4.tool.protocol.mcp-framework`: framework must support the tool's protocol
 

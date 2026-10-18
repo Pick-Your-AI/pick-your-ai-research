@@ -272,3 +272,181 @@ Refs #120, #35, #38. Source checked 2026-10-18; not independently reproduced. Th
 Google Cloud's [Safety and content filters](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/configure-safety-filters) page states that `OFF` is the configurable harm-block threshold default for `gemini-3.5-flash` and subsequent models. In that setting, configurable response blocking and its metadata are absent. This is not a statement that every safety control is disabled: the page separately describes non-configurable CSAM/PII protections and SPII response termination. Its configurable filters follow model versions, not an independently versioned filter release. `BLOCK_NONE` disables blocking but returns scores; [F03](sibling-reconciliation.md) separately scopes the Gemini API defaults and error telemetry.
 
 Receiving implication for #35/#38: record the exact Google Cloud model/version and configured threshold before interpreting absent harm scores or block events. Missing metadata is not a measured zero harm rate or evidence that a request was safe. Explicit threshold selection and telemetry interpretation remain proposed receiving decisions, not an adopted ruleset or account-level test. The source is mutable; recheck it when the model or service configuration changes.
+
+## Proposed memory-deletion-depth control (2026-10-18)
+
+This bounded follow-up addresses [PUSHINGSQUARES' scoped receiving request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930)
+for a `memory-deletion-depth` control after #121. It supplements the control
+catalog; it is a project proposal, not an additional source-verified executable
+rule, a purge procedure or an erasure certification. #35 co-owner review and #40
+adoption remain outstanding. It does not change the existing rule counts or v1.
+
+| Control | Scope and applicability | Required research/configuration evidence | Proposed observable result |
+| --- | --- | --- | --- |
+| `memory-deletion-depth` | Selected persistent memory with a deletion/revocation or retention requirement, across API, managed and self-operated placement | Exact backend/version; source/subject/event identity; inventory of active, history, derived/entity/graph and backup layers actually present; each layer's authorized lifecycle path, completion condition and verification method; #28/#35 policy and #38 evidence location | Display deletion depth per layer. Distinguish request acknowledgement, serving exclusion and policy-complete deletion; retain incomplete/unknown layers and separately governed backup expiry. No full-completion label from one backend response |
+
+The [memory-observability proposal](memory-observability-proposal.md) supplies
+candidate MEM-SG04 job-state and MEM-SG05 per-layer verification signals. Signals
+are observations, not enforcement. Counts, elapsed seconds and observation times
+need their scope and method; public labels must not carry memory text, prompts,
+secrets or raw subject/job identifiers. Access-controlled audit records remain
+separate from aggregation. Missing instrumentation is unknown, not a zero
+residual count. A bounded sample is not exhaustive absence evidence.
+
+### Candidate warning and error interpretation for #40
+
+`G-H-MEM-01` is a local proposal identifier. Applicability is an actual selected
+memory lifecycle requirement; missing policy/applicability evidence is unknown,
+not skipped. The assertion is that the displayed deletion-depth/completion claim
+matches the current event-bound per-layer evidence and the declared policy.
+Severity is fixed `error`; unknown policy is `block` for claiming completion.
+This does not assert that every incomplete deletion is already a policy breach.
+
+| Synthetic situation | Proposed outcome / user-visible treatment |
+| --- | --- |
+| No applicable persistent-memory lifecycle requirement | skipped, with the applicability reason; do not suppress an independent knowledge-source or security requirement |
+| Complete declared inventory, each required layer meets its explicit completion criterion with current evidence | pass for that scoped policy claim; no universal deletion or legal-compliance guarantee |
+| API says accepted, but history or another required layer is unobserved | unknown; show pending/unknown per layer rather than complete |
+| Known retained history while the UI claims all required content was erased | fail; withdraw the unsupported full-completion claim and show retained depth |
+| Backup is excluded from serving, but its approved retention period has not completed | show retained/pending backup status; full-policy completion is not yet established |
+| Receipt refers to a different event/revision, or tenant/subject mapping is unresolved | unknown; obtain correctly scoped evidence without copying private content into public records |
+
+[KB-02 and its synthetic examples](../T3-knowledge-retrieval/knowledge-base.md#synthetic-deletion-lineage-examples-for-kb-02)
+check a narrower serving predicate. A tombstone or serving exclusion may satisfy
+that predicate while historical content remains retained. Never promote its
+pass into a `G-H-MEM-01` erasure/completion claim. Conversely, a current known
+stale serving copy must remain a KB-02 failure despite unrelated missing layers.
+
+### Source basis and unresolved ownership
+
+The existing [Mem0 evidence D57/D58](../T4-agents-integrations/agent-memory.md#mem0-deletion-reproduction-and-limits)
+provides the motivating distinction. On 2026-10-18 this follow-up reread the exact
+publisher source at commit `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd`:
+[`main.py`](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/main.py#L2114)
+removes the vector and passes prior text to a DELETE history event;
+[`storage.py`](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/storage.py#L150)
+inserts that prior text into SQLite history. Downloaded file SHA-256 values
+matched the existing D57/D58 record (`f329ca4a17af1fbefb32ac10d4cc7ae7ddbdb7435a87eb74c30915cff98b8b7c`
+and `5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd`).
+This is source inspection only; the earlier isolated reproduction was not rerun,
+and no full service, purge, backup or later Mem0 version was tested.
+
+#28 supplies actual layer/lifecycle inventory; #35 co-owners decide required
+scope and acceptable verification, including any retained exceptions; #38 owns
+collection/access/alert policy; #13/#15/#16 supply knowledge/index lineage;
+#37 owns eventual operational readiness. No retention duration, purge command,
+residual threshold or storage access is invented. Configured-key evidence is a
+separate requested control and is not completed by this deletion-depth proposal.
+
+## Proposed customer-managed-key configuration evidence (2026-10-18)
+
+This supplies the separate `customer-managed-keys` follow-up in the [scoped #35
+receiving reply](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930).
+It is a proposal for evidence requirements, not a new adopted rule or account
+configuration. The [#28 encryption boundary](../T4-agents-integrations/agent-memory.md)
+already states that an opaque key reference cannot prove the store consumes it.
+Provider-managed encryption may meet an encryption-at-rest requirement while
+failing a distinct customer-managed-key requirement; keep those predicates apart.
+
+| Proposed control | Applicability | Configuration evidence required | Unknown/failure boundary |
+| --- | --- | --- | --- |
+| `customer-managed-keys` | An explicit workload/policy requires customer-managed encryption for the selected data layer | Exact service/object and region/tenant; applicable API/version; current encryption binding and resolved key/version; service principal and authorized operation scope; key availability and applicable policy/grant evidence; dated verification for the selected layer | Key reference alone or missing binding/policy evidence is unknown. A known incompatible binding or explicitly denied required operation fails that configuration requirement. Only explicitly absent CMK applicability skips it; ordinary encryption requirements remain independent |
+
+### Dated primary-source examples
+
+All three sources were read **2026-10-18**, are mutable publisher documentation,
+and are **source checked / unverified**. These are scoped documentary facts, not
+observed account state, source-use grants or certifications.
+
+- **Microsoft Azure AI Search:** [CMK guide](https://learn.microsoft.com/en-us/azure/search/search-security-manage-encryption-keys)
+  distinguishes object binding from service-level defaults. Service-level CMK is
+  preview (`2026-03-01-preview` management API); defaults protect new objects,
+  not pre-existing ones. Inspection of inherited keys uses data-plane
+  `2026-05-01-preview` or later. The guide requires service access to the key and
+  distinguishes configuration readback, operational checks and resource-log
+  evidence. Its cache-duration wording is inconsistent: some sections say up
+  to **60 minutes**, while the rotation section also says **up to several hours**.
+  Neither establishes a verified revocation deadline here. Rotation changes must
+  propagate before old dependencies are removed. This is
+  at-rest protection, not protection of data in use. Do not infer whole-service
+  coverage from a default key or immediate revocation from a configuration change.
+- **AWS KMS state:** [key-state documentation](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+  distinguishes Enabled, Disabled, PendingDeletion and other states. DescribeKey
+  may succeed when cryptographic operations cannot. For custom key stores,
+  disabling/deleting the backing key can cause cryptographic failure without
+  changing the KMS key state. Thus an Enabled label alone is not end-to-end
+  evidence that a selected storage service can use the key.
+- **AWS KMS authorization:** [key-policy documentation](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
+  makes access dependent on applicable key/IAM/grant permissions and absence of
+  denial. IAM allow statements need the key policy to enable their use; key
+  policies are regional. A key identifier or permission in a different region
+  is not an applicable authorization result.
+
+### Proposed review cases and ownership
+
+Synthetic cases for #40: reference with no binding → unknown; current selected
+object binding plus complete applicable evidence → pass for the declared scope;
+explicit required-operation denial → fail; unread policy → unknown; a new-object
+service default offered as proof for an old object → unknown until that object's
+configuration is established. None of these examples certifies encryption or
+changes the frozen-v1 memory rule. Proposed severity is fixed `error`, with
+unknown policy `review`; #35/#40 must adopt the exact applicability and encoding.
+
+#28/#13/#15 supply the actual memory/history/index layers; #35 co-owners decide
+control coverage; #37 owns any future authorized operational verification;
+#38 records configuration drift and appropriately scoped audit evidence; #41
+owns evidence grading/freshness. Rotation, disabled backing keys, policy changes
+and new objects invalidate prior applicability assumptions rather than justify
+an invented TTL. Keys, credentials, private policy contents and raw tenant
+identifiers must not be committed to public research. No key creation, policy
+change, authentication, cryptographic request or resource action was performed
+or authorized by this note. The earlier deletion-depth proposal remains a
+separate lifecycle control; key revocation is not a universal erasure proof.
+
+## MCP description and tool-list change follow-up (2026-10-18)
+
+Status: proposed extension of `untrusted-content-segregation`, addressing the
+explicit description/`listChanged` coverage objection in
+[appletechie's receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+to [PUSHINGSQUARES's disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930).
+This does not retroactively describe the earlier control as complete or supply
+acceptance of this new proposal.
+
+**Source boundary.** The [MCP 2025-11-25 tools specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
+was read on 2026-10-18. `tools/list` returns tool definitions including descriptions
+and schemas. `listChanged` advertises whether the server emits change notifications;
+servers declaring it SHOULD notify when their available tool list changes.
+The specification's explicit untrusted-unless-trusted requirement addresses tool
+annotations. It does not, on this page, prescribe the description-review or approval
+invalidation policy below. These are project-policy inferences for #35/#40, informed
+by the [T4 threat handoff](../T4-agents-integrations/mcp-servers.md#security-and-trust-findings-for-35-findings-only-controls-belong-to-35),
+not a new protocol MUST, a reliable change-delivery guarantee or a measured defense.
+
+**Proposed control extension.** Treat server-provided descriptions, titles and
+schema descriptions as untrusted descriptive data when exposing tools to the
+model. Keep their origin distinct from application policy. Instructions embedded
+in those fields cannot authorize actions, expand permissions, override approval
+requirements or establish a trusted risk class. Apply this boundary to discovery
+and refreshed definitions, not just `tools/call` results. A trusted server identity
+or transport does not itself prove a particular description safe.
+
+Bind any reviewed exposure/approval decision to the selected server identity and
+the specific reviewed tool definition, including name, schema, description and
+risk-relevant metadata. A notification triggers a fresh list/read and comparison;
+it is not authorization to expose a new or changed tool. Hold an added or changed
+definition from use until its required review is current. If current identity or
+definition evidence is missing, keep the decision unknown and block the affected
+exposure/use claim. Absence of a notification does not prove the reviewed definition
+is still current. The eventual refresh interval and representation require owner
+review; this note supplies neither a universal interval nor an atomicity guarantee.
+
+**Synthetic acceptance cases (not executed).** A reviewed unchanged definition
+with current binding and the existing required authorization may pass this narrow
+control; this does not prove the call harmless. A same-name tool whose description
+or schema changed cannot reuse its old approval. A description requesting secret
+exfiltration supplies no authority even if its annotation says read-only. A missing
+current definition, ambiguous server identity or incomplete discovery remains
+unknown rather than safe. With no enabled MCP tool, this conditional control is
+skipped. #27 owns protocol/client evidence; #35 owns policy, #37 deployment and
+#38 change/audit visibility; versioned binding operands remain with #40. No runtime
+MCP connection, credentials, tool execution or production policy was changed.

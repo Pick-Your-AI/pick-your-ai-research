@@ -41,9 +41,10 @@ class MarketValidation(unittest.TestCase):
                                       'scores': [1, 1, 1, 1, 1, 1], 'score': 1.0}],
         }
 
-    def run_validator(self, data, optimized):
+    def run_validator(self, data, optimized, raw_json=None):
         for name, value in data.items():
-            (self.base / name).write_text(json.dumps(value), encoding='utf-8')
+            text = raw_json[name] if raw_json and name in raw_json else json.dumps(value)
+            (self.base / name).write_text(text, encoding='utf-8')
         return subprocess.run([sys.executable, *(['-O'] if optimized else []), str(self.script)],
                               capture_output=True, text=True, timeout=5)
 
@@ -54,6 +55,172 @@ class MarketValidation(unittest.TestCase):
                 result = self.run_validator(self.data, optimized)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
+
+    def supported_claim(self):
+        data = deepcopy(self.data)
+        data['features.json']['cells'][0].update(
+            status='Documented', evidence_ids=['synthetic-source'],
+            basis='Synthetic claim for validator regression only',
+            verification_method='Synthetic documentary check',
+            evidence_grade='Vendor claim',
+            evidence_url='https://example.com/synthetic-claim',
+            access_date='2026-10-18', confidence='Synthetic limited confidence',
+            limitations='Not real product evidence', audit_scope='synthetic-test-only')
+        return data
+
+    def test_complete_supported_claims_pass_in_both_modes(self):
+        for status in ('Documented', 'Exercised', 'Unsupported'):
+            data = self.supported_claim()
+            data['features.json']['status_semantics'][status] = 'Synthetic test grade'
+            data['features.json']['cells'][0]['status'] = status
+            for optimized in (False, True):
+                with self.subTest(status=status, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_supported_claim_metadata_cannot_be_missing_blank_or_nontext(self):
+        for field in ('basis', 'verification_method', 'evidence_grade', 'evidence_url',
+                      'access_date', 'confidence', 'limitations', 'audit_scope'):
+            for value in (None, '', '   ', [], 1):
+                data = self.supported_claim()
+                if value is None:
+                    del data['features.json']['cells'][0][field]
+                else:
+                    data['features.json']['cells'][0][field] = value
+                for optimized in (False, True):
+                    with self.subTest(field=field, value=value, optimized=optimized):
+                        result = self.run_validator(data, optimized)
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn('MarketValidationError', result.stderr)
+                        self.assertIn(field, result.stderr)
+                        self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_supported_claim_requires_a_credential_free_http_url(self):
+        for url in ('file:///synthetic', '/synthetic', 'https:///synthetic',
+                    'https://user:password@example.com/synthetic',
+                    'https://@example.com/synthetic', 'https://[invalid',
+                    'https://example.com/synthetic claim',
+                    'https://example.com:bad/synthetic',
+                    'https://example.com:-1/synthetic',
+                    'https://example.com:65536/synthetic',
+                    'https://[2001:db8::1]:bad/synthetic'):
+            data = self.supported_claim()
+            data['features.json']['cells'][0]['evidence_url'] = url
+            for optimized in (False, True):
+                with self.subTest(url=url, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertIn('evidence_url', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_supported_claim_accepts_valid_explicit_ports(self):
+        for url in ('http://example.com:80/synthetic',
+                    'https://example.com:443/synthetic',
+                    'https://example.com:8443/synthetic',
+                    'https://[2001:db8::1]:443/synthetic'):
+            data = self.supported_claim()
+            data['features.json']['cells'][0]['evidence_url'] = url
+            for optimized in (False, True):
+                with self.subTest(url=url, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Market integrity OK', result.stdout)
+
+    def test_supported_claim_requires_an_actual_iso_access_date(self):
+        for access_date in ('2026-02-30', '20261018', '2026-10-18T00:00:00Z', 'yesterday'):
+            data = self.supported_claim()
+            data['features.json']['cells'][0]['access_date'] = access_date
+            for optimized in (False, True):
+                with self.subTest(access_date=access_date, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertIn('access_date', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def data_with_url(self, url, boundary):
+        data = self.supported_claim()
+        if boundary == 'source URL':
+            data['sources.json'][0]['url'] = url
+        else:
+            data['features.json']['cells'][0]['evidence_url'] = url
+        return data
+
+    def test_source_url_requires_text_and_credential_free_http_shape(self):
+        for url in (None, '', '   ', [], 1, 'file:///synthetic', '/synthetic',
+                    'https:///synthetic', 'https://user:password@example.com/synthetic',
+                    'https://@example.com/synthetic', 'https://[invalid',
+                    'https://example.com/synthetic claim'):
+            for optimized in (False, True):
+                with self.subTest(url=url, optimized=optimized):
+                    result = self.run_validator(self.data_with_url(url, 'source URL'), optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertIn('source URL', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_claim_and_source_urls_validate_port_shape_in_both_modes(self):
+        for authority, valid in (('example.com', True), ('example.com:443', True),
+                                 ('example.com:0', True), ('example.com:65535', True),
+                                 ('[::1]:8443', True), ('example.com:not-a-port', False),
+                                 ('example.com:65536', False), ('example.com:-1', False)):
+            for boundary in ('source URL', 'evidence_url'):
+                data = self.data_with_url(f'https://{authority}/synthetic', boundary)
+                for optimized in (False, True):
+                    with self.subTest(authority=authority, valid=valid, boundary=boundary,
+                                      optimized=optimized):
+                        result = self.run_validator(data, optimized)
+                        if valid:
+                            self.assertEqual(result.returncode, 0, result.stderr)
+                        else:
+                            self.assertNotEqual(result.returncode, 0, result.stdout)
+                            self.assertIn('MarketValidationError', result.stderr)
+                            self.assertIn(boundary, result.stderr)
+                            self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_claim_and_source_urls_reject_raw_controls_in_both_modes(self):
+        for control in ('\x00', '\x1b', '\x7f'):
+            for url in (f'{control}https://example.com/synthetic',
+                        f'https://exa{control}mple.com/synthetic',
+                        f'https://example.com/synthetic{control}'):
+                for boundary in ('source URL', 'evidence_url'):
+                    data = self.data_with_url(url, boundary)
+                    for optimized in (False, True):
+                        with self.subTest(url=url, boundary=boundary, optimized=optimized):
+                            result = self.run_validator(data, optimized)
+                            self.assertNotEqual(result.returncode, 0, result.stdout)
+                            self.assertIn('MarketValidationError', result.stderr)
+                            self.assertIn(boundary, result.stderr)
+                            self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_duplicate_json_keys_fail_before_market_data_is_interpreted(self):
+        original = json.dumps(self.data['features.json'])
+        cases = (
+            original.replace('"definitions":', '"definitions": {}, "definitions":', 1),
+            original.replace('"status": "Unknown"',
+                             '"status": "Documented", "status": "Unknown"', 1),
+            original.replace('"status": "Unknown"',
+                             r'"\u0073tatus": "Documented", "status": "Unknown"', 1),
+        )
+        for raw in cases:
+            for optimized in (False, True):
+                with self.subTest(raw=raw, optimized=optimized):
+                    result = self.run_validator(self.data, optimized, {'features.json': raw})
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('duplicate JSON object key', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_nonfinite_json_numbers_fail_even_in_unconsumed_metadata(self):
+        original = json.dumps(self.data['features.json'])
+        for literal in ('NaN', 'Infinity', '-Infinity', '1e400', '-1e400'):
+            raw = original[:-1] + ', "synthetic_numeric_metadata": ' + literal + '}'
+            for optimized in (False, True):
+                with self.subTest(literal=literal, optimized=optimized):
+                    result = self.run_validator(self.data, optimized, {'features.json': raw})
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('finite', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
 
     def test_capability_test_integrity_in_both_modes(self):
         mutations = [

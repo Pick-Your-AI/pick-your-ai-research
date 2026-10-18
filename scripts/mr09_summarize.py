@@ -13,6 +13,20 @@ import statistics
 PHASES = ("baseline", "loading", "warmup", "prefill", "decode", "steady_state")
 METRICS = ("peak_allocated_bytes", "peak_reserved_bytes", "current_allocated_bytes", "current_reserved_bytes")
 PIN_FIELDS = ("model_id", "revision", "script_sha256", "protocol_sha256")
+PAYLOAD_COUNTERS = (
+    ("native_kv_prefill_payload", "measured_bytes"),
+    ("int4_kv_prefill_payload", "total_physical_storage_bytes"),
+)
+
+
+def unique_object(pairs):
+    """Reject ambiguous observations before either validation or publication."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON object key: {key!r}")
+        result[key] = value
+    return result
 
 
 def range_summary(values):
@@ -39,6 +53,12 @@ def cohort_signature(run):
     Availability, phase counters/timings and publication metadata may vary.
     This checks recorded identities, not artifact truth or physical-device UUIDs.
     """
+    inputs = {}
+    for field in ("model_geometry", "workload", "actual_tokens"):
+        value = run.get(field)
+        if not isinstance(value, dict) or not value:
+            raise ValueError(f"successful run requires observed {field}")
+        inputs[field] = value
     environment = run.get("environment")
     if not isinstance(environment, dict):
         raise ValueError("successful run requires environment pins")
@@ -67,9 +87,15 @@ def cohort_signature(run):
     if not isinstance(smi, str) or not smi:
         raise ValueError("successful run requires NVIDIA driver/device pins")
     try:
+        smi_reader = csv.DictReader(smi.splitlines())
+        headers = [key.strip() for key in (smi_reader.fieldnames or [])]
+        if not headers or any(not key for key in headers) or len(set(headers)) != len(headers):
+            raise ValueError("NVIDIA driver/device pin columns must be unique and nonempty")
+        # Check normalized headers before DictReader can overwrite any value.
+        smi_reader.fieldnames = headers
         smi_rows = [
-            {key.strip(): value.strip() for key, value in row.items()}
-            for row in csv.DictReader(smi.splitlines())
+            {key: value.strip() for key, value in row.items()}
+            for row in smi_reader
         ]
     except (AttributeError, TypeError, csv.Error) as error:
         raise ValueError("invalid NVIDIA driver/device pins") from error
@@ -111,7 +137,7 @@ def cohort_signature(run):
 
     return json.dumps(
         {"environment": environment, "hardware": stable_hardware,
-         "artifacts": sorted(artifact_pins)},
+         "artifacts": sorted(artifact_pins), "observed_inputs": inputs},
         sort_keys=True, separators=(",", ":"), allow_nan=False,
     )
 
@@ -132,10 +158,31 @@ def validate_success(run):
         if not (phase["current_allocated_bytes"] <= phase["peak_allocated_bytes"] <= phase["peak_reserved_bytes"]
                 and phase["current_allocated_bytes"] <= phase["current_reserved_bytes"] <= phase["peak_reserved_bytes"]):
             raise ValueError(f"inconsistent allocator counters: {phase['phase']}")
+    for field, metric in PAYLOAD_COUNTERS:
+        if field not in run:
+            continue
+        payload = run[field]
+        value = payload.get(metric) if isinstance(payload, dict) else None
+        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+            raise ValueError(f"invalid byte counter: {field}/{metric}")
+
+    comparisons = run.get("error_comparisons", [])
+    if not isinstance(comparisons, list):
+        raise ValueError("error_comparisons must be a list")
+    # The current instrument emits an empty list and has no competitor intake.
+    # A list length alone cannot establish matching pins or comparable metrics.
+    if comparisons:
+        raise ValueError(
+            "nonempty error_comparisons requires a reviewed comparator intake; "
+            "the current measurement format supports no competitor error pairs")
 
 
 def summarize(directory, sanitize=False):
-    """Validate the complete batch before any optional publication rewrite."""
+    """Prepare all publication bytes and statistics before rewriting any input.
+
+    A validation, serialization or aggregation error leaves the inputs alone.
+    Publication I/O failures do not have a transactional rollback guarantee.
+    """
     groups = defaultdict(list)
     signatures = {}
     cohort_signatures = {}
@@ -143,7 +190,11 @@ def summarize(directory, sanitize=False):
     records = []
     # Include dense, GM/M0 supplemental MoE and future explicitly named run cells.
     for path in sorted(directory.glob("mr09-*-r*.json")):
-        result = json.loads(path.read_text(encoding="utf-8"))
+        original_bytes = path.read_bytes()
+        result = json.loads(original_bytes.decode("utf-8"), object_pairs_hook=unique_object)
+        # Reject non-JSON NaN/Infinity anywhere before sanitizing earlier inputs.
+        # Python's JSON reader accepts these constants by default.
+        json.dumps(result, allow_nan=False)
         cell, repetition = result.get("cell"), result.get("repetition")
         if not isinstance(cell, str) or not cell:
             raise ValueError(f"missing cell: {path.name}")
@@ -164,18 +215,24 @@ def summarize(directory, sanitize=False):
             if cell in cohort_signatures and cohort != cohort_signatures[cell]:
                 raise ValueError(f"incompatible measurement cohort: {cell}")
             cohort_signatures[cell] = cohort
-        records.append((path, result))
+        records.append((path, result, original_bytes))
 
     inputs = []
-    for path, result in records:
+    publications = []
+    for path, result, original_bytes in records:
+        publication_bytes = original_bytes
         if sanitize:
-            props = result.get("hardware", {}).get("properties", "")
+            hardware = result.get("hardware", {})
+            if not isinstance(hardware, dict):
+                raise ValueError("hardware must be an object when sanitizing")
+            props = hardware.get("properties", "")
             if isinstance(props, str) and props:
-                result["hardware"]["properties"] = re.sub(r"uuid=[^,]*, ", "", props)
+                hardware["properties"] = re.sub(r"uuid=[^,]*, ", "", props)
             result["publication_sanitization"] = "local paths replaced by named placeholders by runner; hardware UUID removed; LF line endings normalized for Git; counters/pins unchanged"
-            path.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
+            publication_bytes = (json.dumps(result, indent=2, allow_nan=False) + "\n").encode("utf-8")
+            publications.append((path, publication_bytes))
         groups[result["cell"]].append(result)
-        inputs.append({"file": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()})
+        inputs.append({"file": path.name, "sha256": hashlib.sha256(publication_bytes).hexdigest()})
     cells = {}
     for cell, runs in sorted(groups.items()):
         successes = [run for run in runs if run["status"] == "success"]
@@ -204,6 +261,11 @@ def summarize(directory, sanitize=False):
                                                        if run["status"] == "success"),
                "native_kv_errors_scope": "formula versus tensor-payload layout sanity check only; no competitor/runtime calibration",
                "cells": cells, "input_checksums": inputs}
+    # Even valid integer inputs can fail during aggregation (for example, an
+    # overflowing median). Finish output validation before publication begins.
+    json.dumps(summary, indent=2, allow_nan=False)
+    for path, publication_bytes in publications:
+        path.write_bytes(publication_bytes)
     return summary
 
 

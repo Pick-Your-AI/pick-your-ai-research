@@ -47,7 +47,7 @@ Not in the PR #82 shortlist. Relevance for Pick Your AI is export targeting, not
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `rag`, `agents`, `deployment`, `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `rag`, `agents`, `deployment`, `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees.
 
 ## Open questions and routing
 

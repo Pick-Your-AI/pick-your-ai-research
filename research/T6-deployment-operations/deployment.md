@@ -9,7 +9,7 @@ What does it take to ship this build, and is it ready?
 
 In scope: packaging and configuration by deployment mode; rollout, rollback, secrets and access control; readiness checks. Out of scope: generating deployable artifacts.
 
-Inputs. The Guardrails record ([#35](guardrails.md)) and the Evaluation record ([#36](evaluation.md)) sit in this folder and are cited here by control id (for example `least-privilege-credentials`), rule id (`G-R3`, `E-R18`) and gate id (`G1` to `G12`, with the meanings in the #36 gate table). The other information inputs (#3, #5, #9, #11, #13, #25, #27) were not available in this workspace. Where a step needs a T0 field those records have not defined yet, the step says so and the Open questions table names the owner.
+Inputs. The Guardrails record ([#35](guardrails.md)) and the Evaluation record ([#36](evaluation.md)) sit in this folder and are cited here by control id (for example `least-privilege-credentials`), rule id (`G-R3`, `E-R18`) and gate id (`G1` to `G12`, with the meanings in the #36 gate table). The original pass did not hold the other information inputs (#3, #5, #9, #11, #13, #25, #27). Later mode corrections are recorded below. The separately dated [engine input integration](engine-input-integration.md) now maps #11 ENGINE-01–04 to this record's steps and readiness checks; other receiving scopes remain separate. Where a step needs a T0 field those records have not defined yet, the step says so and the Open questions table names the owner.
 
 ### Mode definitions used in this record
 
@@ -78,7 +78,7 @@ Research question 1. One row per step. `modes` uses the definitions above. `prer
 | S40 | Estimate GPU memory as weights for the chosen dtype or quantisation plus KV-cache headroom for the target context length and concurrency (Hugging Face estimator: weights plus up to about 20 percent for inference; NIM per-profile VRAM floors exclude KV-cache headroom), then choose GPU count and tensor-parallel size; the projects publish no universal formula, so the G6 load test is the proof | self-hosted | T1 parameter count, dtype, trained context length; T2 GPU type; T0 concurrency | server starts without out-of-memory at the configured context length and reports KV-cache capacity for the target concurrency; S48 passes | source checked (as an estimate, labelled estimated) | D-S33, D-S2, D-S7, D-S17, D-N106 |
 | S41 | Prepare the GPU host: NVIDIA driver at or above the image's CUDA requirement (CUDA 13.x needs driver 580 or later; 12.x 525; 11.x 450; vLLM CUDA 13 images need an R580 or newer driver, or an R535 or R570 host with the image's compatibility libraries (`VLLM_ENABLE_CUDA_COMPATIBILITY=1`) on select professional and data-center GPUs only; SGLang images after v0.5.19-cu129 are CUDA 13 only); NVIDIA Container Toolkit on Docker (a Podman run uses `--device nvidia.com/gpu=all`), or the GPU Operator with the device plugin on Kubernetes | self-hosted | T2 node OS and GPU class; engine image choice | `nvidia-smi` reports a driver at or above the table minimum; nodes advertise `nvidia.com/gpu`; a CUDA test pod requesting one GPU exits successfully | source checked | D-S26, D-S1, D-S13, D-P7, D-S27 |
 | S42 | Build or pull the serving image by version tag and record the digest (`name:tag@sha256:...`), never `latest`; pass build-time secrets only through secret mounts; pin the base image by digest; attach SBOM and provenance attestations, build on a hosted build platform that produces signed provenance, targeting SLSA Build L2 (builder-set target); image signing and verifying the signature against the CI identity is a hypothesis (no opened page states it); for NIM, supply `NGC_API_KEY` for Production Branch models and for NIMs released before NIM LLM and VLM 2.0.10 (Docker login and the key are optional for eligible public-catalog NIMs) | self-hosted | S41; #36 G9; engine version supports the T1 architecture; NIM licence tier settled | the deployed reference is the recorded digest; `docker history` shows no secret; the image index carries SBOM and provenance manifests (hypothesis: a signature verifies against the CI identity) | source checked except image signing (hypothesis) | D-S1, D-P20, D-P12, D-P11, D-K20, D-S17 |
-| S43 | Pin the weights to a commit hash (resolve it once and record the 40-character form; builder rule) (vLLM `--revision`, production-stack `modelRevision`, KServe `hf://repo:hash`); accept safetensors only (`--load-format safetensors`; exclude `*.bin` by file filter, a builder rule backed by the pickle warning D-P8); prefetch into a persistent cache (PVC, hostPath, NIMCache, KServe LocalModelCache) and verify checksums (`hf cache verify`) or the OpenSSF model signature; run offline (`HF_HUB_OFFLINE=1`) | self-hosted | S39; T2 persistent storage sized for the weights (NIM support matrix, published: model-cache disk about 19 GB (NVFP4) to about 63 GB (BF16) for nvidia/nemotron-3.5-lightning; combined container and model disk about 831 GB for deepseek-ai/DeepSeek-V4-Pro-0813); #35 `engine-telemetry-and-egress` if outbound calls are restricted | second start reaches ready with no download; checksums match the pinned revision; load log shows only `.safetensors` files; `model_signing verify` succeeds with the expected identity | source checked | D-S2, D-S10, D-P23, D-S32, D-P8, D-P10, D-S17, D-S22, D-N106 |
+| S43 | Pin the weights to a commit hash (resolve it once and record the 40-character form; builder rule) (vLLM `--revision`, production-stack `modelRevision`, KServe `hf://repo:hash`); apply the selected engine's reviewed loader-format policy (ENGINE-01): on a supported Safetensors path require Safetensors and exclude pickle-based weights (vLLM `--load-format safetensors`; the `*.bin` file exclusion is the existing builder policy backed by D-P8); llama.cpp v0.7.0 instead requires a pinned GGUF artifact with its conversion/source lineage checked separately (ET6-S4); prefetch into a persistent cache (PVC, hostPath, NIMCache, KServe LocalModelCache) and verify checksums (`hf cache verify`) or the OpenSSF model signature; configure the selected fetch/runtime offline control (`HF_HUB_OFFLINE=1` for Hugging Face Hub calls; llama.cpp `--offline`, ET6-S3), then verify egress separately under S45 | self-hosted | S39; T2 persistent storage sized for the weights (NIM support matrix, published: model-cache disk about 19 GB (NVFP4) to about 63 GB (BF16) for nvidia/nemotron-3.5-lightning; combined container and model disk about 831 GB for deepseek-ai/DeepSeek-V4-Pro-0813); #35 `engine-telemetry-and-egress` if outbound calls are restricted | second start reaches ready with no download; checksums match the pinned revision; load record names the reviewed actual format and immutable artifacts, without unapproved pickle-based loading; where a signature is used, it verifies against the expected identity | source checked; loader-policy integration proposed | D-S2, D-S10, D-P23, D-S32, D-P8, D-P10, D-S17, D-S22, D-N106; [ET6-S3/S4](engine-input-integration.md#4-primary-sources) |
 | S44 | Set engine arguments before the first request: context length at or below the model's trained length (vLLM refuses a longer `max-model-len` unless `VLLM_ALLOW_LONG_MAX_MODEL_LEN` is set, and then warns of NaN or out-of-bounds errors), tensor-parallel size, GPU memory fraction (vLLM default 0.92, published), dtype or a quantisation the GPU supports (FP8 compute needs capability 8.9 or higher; Turing has no Marlin MXFP4), served model name (`--served-model-name`), chat template (hypothesis: not on the cited pages); re-run the suite that G9 triggers (G2, G4, G5) on any quantised or fine-tuned checkpoint | self-hosted | T1 trained length and chat template; T2 GPU count and class; S40; #36 G9 | startup log shows no derived-length error and no out-of-memory; `/v1/models` lists the expected name; a chat request succeeds; G2, G4 and G5 results exist for the exact served checkpoint | source checked | D-S2, D-S3, D-S9, D-S17; #36 G9 |
 | S45 | Restrict access: terminate authentication at a gateway or reverse proxy that allowlists only the paths end users need, rate-limits and logs (vLLM `--api-key` protects only the `/v1`, `/v2`, `/inference` and `/cohere` prefixes and leaves inference endpoints (`/invocations`, `/generative_scoring`, `/pooling`, `/classify`, `/score`, `/rerank`), operational control endpoints (`/pause`, `/resume`, `/abort_requests`, `/scale_elastic_ep`, `/update_weights` and others) and utility endpoints (`/tokenize`, `/detokenize`, `/health`, `/ping`, `/version`, `/load`) unauthenticated; Ollama and llama.cpp bind 127.0.0.1 by default; vLLM inter-node traffic is insecure by default); keep inter-node ports on an isolated network; set the #35 `engine-telemetry-and-egress` opt-outs (`VLLM_NO_USAGE_STATS=1`, TGI `--usage-stats=off`, `OLLAMA_NO_CLOUD=1`, llama.cpp `--offline`) when T0 requires | self-hosted | T0 data sensitivity; #35 external enforcement layer; identity provider | an unauthenticated request to `/v1/chat/completions` returns an auth error and one to `/invocations`, `/score` and `/pooling` is blocked at the proxy; operational and utility endpoints are unreachable from outside the trust zone; no unexpected outbound connection during an offline start | source checked | D-S4, D-S20, D-S21, #35 G-R25, G-R26 |
 | S46 | Configure probes: a startup probe sized to the measured cold start (`failureThreshold` times `periodSeconds` above weight download plus load, with margin), a readiness probe on the engine's readiness endpoint (NIM `/v1/health/ready`, llama.cpp `/health` returns 503 while loading, Triton `/v2/health/ready`, vLLM `/health`), a separate liveness probe, and a memory-backed `/dev/shm` volume for tensor-parallel runs; add a deep readiness check that lists the served model (and LoRA adapter) at `/v1/models` and completes a one-token request | self-hosted | S43; T1 model size; T2 storage speed; engine choice | pod becomes Ready only after weights load; no restart loop with `KeyboardInterrupt: terminated`; first generation succeeds after Ready | source checked for probe mechanics, NIM live-versus-ready and llama.cpp 503; hypothesis for vLLM, TGI and SGLang `/health` implying loaded weights (D-H1) and for the deep check | D-S5, D-S29, D-S17, D-S21, D-S8, D-S11, D-S15 |
@@ -229,8 +229,8 @@ A Sonnet 5.5 QC pass on 2026-10-16 re-opened every URL behind these rows, the st
 | D-R51 | Kubernetes `RollingUpdate` or RayService `NewCluster` upgrade; T2 GPU quota | a rolling update or RayService upgrade runs with no spare GPUs | warning | `maxSurge` (default 25 percent) creates pods above the desired count and RayService temporarily creates a second RayCluster, so the new revision can sit Pending | set `maxSurge` 0 with `maxUnavailable` of at least 1 (the two cannot both be 0, and the 25 percent default rounds down to 0 below four replicas), or `Recreate`, accepting downtime; or reserve surge capacity; set `progressDeadlineSeconds` to cover load | D-S28, D-S23 |
 | D-R52 | T2 GPU compute capability; quantisation method | FP8 compute is chosen on a GPU below compute capability 8.9, or Marlin MXFP4 on Turing | warning | FP8 compute needs 8.9 or higher; Turing runs FP8 only as weight-only W8A16; Turing does not support Marlin MXFP4 | match the method to the GPU table; re-run G4 and G5 on the exact quantised build (#36 G9 lists quantisation as a re-run trigger) | D-S9 |
 | D-R53 | T2 inference-engine entry TGI | TGI is selected as the serving engine for a new build | warning | the TGI docs state maintenance mode with minor fixes only and point to vLLM, SGLang and llama.cpp or MLX | prefer an actively developed engine; keep TGI only for existing deployments (handed to the T2 owner) | D-S12 |
-| D-R54 | T1 or T5 weights; engine loader | weights ship only as pickle files, or the engine load format is left at auto | warning | Hugging Face warns of arbitrary code execution when loading pickle; vLLM's auto format falls back to PyTorch bin files; PyTorch defaults `weights_only=True` only from 2.6 | require safetensors, set `--load-format safetensors`, exclude `*.bin` at download | D-P8, D-S2, D-P26 |
-| D-R55 | T1 or T5 weights; Hugging Face scanning; signing step | an artefact is treated as safe because it passed Hub scanning or carries a verified-commit badge | warning | Hugging Face says its pickle scan is not foolproof and signed commits prove origin, not safety; the malware scan covers files smaller than 2 GB | treat scans as signals; also require safetensors, a pinned commit hash and a signature or hash allowlist | D-P8 |
+| D-R54 | T1 or T5 weights; engine loader | weights ship only as pickle files, or the selected loader can fall back to unapproved pickle-based loading | warning | Hugging Face warns of arbitrary code execution when loading pickle; vLLM's auto format falls back to PyTorch bin files; PyTorch defaults `weights_only=True` only from 2.6 | apply S43's reviewed loader path: require Safetensors and exclude `*.bin` where that policy applies, or pin llama.cpp's GGUF artifact and conversion lineage; exclude unapproved pickle-based loading | D-P8, D-S2, D-P26; [ET6-S4](engine-input-integration.md#4-primary-sources) |
+| D-R55 | T1 or T5 weights; Hugging Face scanning; signing step | an artefact is treated as safe because it passed Hub scanning or carries a verified-commit badge | warning | Hugging Face says its pickle scan is not foolproof and signed commits prove origin, not safety; the malware scan covers files smaller than 2 GB | treat scans as signals; require S43's selected-engine loader policy, a pinned commit hash and a signature or hash allowlist | D-P8; [ET6-S4](engine-input-integration.md#4-primary-sources) |
 | D-R56 | OpenSSF model signature; #36 G4, G5 | a valid model signature is used as evidence that the model is fit or safe to deploy | warning | the spec says signing only shows the model has not changed since it was signed | keep signature verification as an integrity gate beside G2, G4 and G5 | D-P10 |
 | D-R57 | container image reference; orchestrator | the deployed image is referenced by a moving tag such as `latest` | warning | Kubernetes says tags can move while digests are fixed and advises against `latest` in production; the vLLM Docker example and Helm chart default use `latest` | reference `name:version@sha256:digest` and bump only through a reviewed change, then run G2 as a builder-set trigger (G2 as written covers prompt, model, retriever, tool and guardrail changes, not image changes) | D-P20, D-P6, D-S1 |
 | D-R58 | prompts, tool schemas or eval config; environment variables on Lambda, Workers or Vercel edge | large prompt or schema payloads are stored in environment variables | warning | Lambda allows 4 KB of variables in aggregate; Cloudflare 5 KB per variable; Vercel edge 5 KB per variable; Kubernetes ConfigMaps cap at 1 MiB | ship them as versioned files in the bundle, hashed in the manifest (S6) | D-P14, D-P15, D-P16, D-P22 |
@@ -531,7 +531,7 @@ Deployment costs are priced in [#39](cost-estimate.md): provisioned capacity in 
 
 **Credentials.** Default to a runtime identity or federation in every mode. Use a static key only where the provider offers no identity path (for example a Gemini standard key; the Gemini API also offers service-account-bound authorization keys and OAuth, D-A20), keep it in a secrets manager, and give it an expiry and an owner. Rules D-R16 to D-R28 cover the failure cases.
 
-**Pins.** Default to the pin that cannot move in each mode. In API mode that is a snapshot id. In managed mode it is an explicit deployment version with a deliberate upgrade policy in IaC. In self-hosted mode it is an image digest plus a weights commit hash, served as safetensors only. Read the retirement date from the host that serves the model, not from the model's first-party page (D-R4).
+**Pins.** Default to the pin that cannot move in each mode. In API mode that is a snapshot id. In managed mode it is an explicit deployment version with a deliberate upgrade policy in IaC. In self-hosted mode it is an image digest plus a weights commit hash, using the selected engine's reviewed loader-format policy (S43). Read the retirement date from the host that serves the model, not from the model's first-party page (D-R4).
 
 **Prompts and config.** Two patterns are both sourced (S6). This record proposes that the builder defaults to reviewed files in the repository (the default is an open question) with a content hash in the release manifest, because OpenAI is retiring reusable prompt objects and this needs no extra service. Where the build already runs a prompt registry, use version ids or protected labels (plan-gated on Langfuse, D-O10) and record the version id per release; rollback is then a label move bounded by the SDK cache TTL (D-R64).
 
@@ -615,3 +615,140 @@ None in this pull request. A `deployment_target` catalog item needs `target_type
 | deprecation notices and provider status feeds | T1; T2 | event | S20, D-D6 to D-D9 | none |
 | index freshness job last run | T3 | timestamp | R19 | none |
 | request logs kept for the SLA-credit claim window | T1; T2 | retention days | D-T9, D-T18 | logs may hold prompts; zero-retention promises apply (R12) |
+
+## T4 deployment-readiness inputs (2026-10-18; proposal)
+
+The [paired T6 receiving dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+request three deployment capabilities beyond R18/S10. Receive these as
+configuration-bound evidence inputs, referencing the existing
+[T4 MCP rule proposals](../T4-agents-integrations/mcp-servers.md), rather than
+copying their provisional assertions into an adopted deployment ruleset.
+
+| Readiness input | Existing T4 rule identifier | Required evidence and limit |
+| --- | --- | --- |
+| Local subprocess spawning and locality | `rule.t4.mcp.stdio.colocation` | The selected client runtime can start the selected stdio server in the required local execution boundary. A generic target type or an installed executable alone does not prove that path works. |
+| Reachability and isolation for the selected server | Historical `rule.t4.mcp.remote.air-gapped`, narrowed into W-R8/CD-4 by the #40 review below | The selected endpoint/transport is reachable under the actual egress/residency policy. For an air-gapped workload, no enabled runtime connection may leave the selected isolation boundary, and all runtime artifacts must be present inside it. Apply these requirements to provider-operated and self-operated components alike. |
+| Available authorization flow | `rule.t4.mcp.auth.flow-available` | Identify an actual supported interactive path or independently evidenced non-interactive alternative for the selected framework/server/target. A browser somewhere on the operator's laptop does not prove it is usable in the deployment's flow. |
+
+**Isolation reconciliation (2026-10-18).** [The actual #40 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) routes the earlier operator/trust proxy to [W-R8](../T0-configuration/workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections). Record endpoint membership and each connection's provisioning/runtime lifecycle and enabled state; an absent inventory is unknown. A provider-run installation inside the boundary can satisfy this isolation input with complete evidence. Keep the historical T4 proxy as provenance while #40 owns the versioned representation; no frozen rule is changed here.
+
+For all three, retain selected component versions, execution boundary, evidence
+locator/date and outcome separately. Unknown capability is not false evidence of
+incompatibility, but blocks a positive readiness claim until resolved. A known
+required capability that the target denies fails; a non-applicable input is skipped.
+A stored credential reference alone establishes no validity, audience, scope,
+consent, refresh path or permission to configure credentials. No credential is
+collected or transmitted by this research.
+
+Synthetic examples, not executed deployment tests: a stdio-only server with a
+known no-process target fails; a server requiring a runtime connection outside an
+air-gapped boundary fails, regardless of operator; an OAuth-only server without an available supported authorization
+path fails; an unexamined non-interactive alternative remains unknown rather than
+passing because a key reference exists. With no selected MCP server, these
+conditional inputs are skipped. An evidenced capability still needs the applicable
+R18/S10 and #35 controls, and does not certify the whole deployment.
+
+These inputs remain proposed versioned operands for #40, with #27 protocol and
+#25 framework evidence. Managed agent runtimes priced in L48 are still a separate
+uncompleted deployment-target comparison; this addition neither invents their
+capabilities nor imports their prices as readiness evidence. #37 retains target
+selection and actual execution validation, with #38 observation and #39 cost scope.
+
+## Agent-hosting target packaging comparison — 2026-10-18
+
+This source-only slice addresses the managed-service comparison left open above
+and the offerings named in #39 L48. **Managed service is a publisher category,
+not an automatic `managed` mode:** the T0 operator/capacity test still applies to
+selected agent hosting separately from its model-serving component. Shared versus
+dedicated/reserved capacity is not established by these packaging pages. No new
+catalog object, mode assignment, price, deployed resource or acceptance is created.
+
+All five sources below were opened on 2026-10-18. Evidence grade: primary
+publisher documentation, source-checked / `unverified` for independent runtime
+behavior. URLs are mutable; Google displays last updated 2026-10-15 on both pages.
+AWS uses its `latest` guide and Microsoft its current Foundry guide; no immutable
+service release or installed SDK version was established. Ports, HTTP codes and
+architecture names below are published contract values, not measured performance.
+
+| Target / selected path | Documented packaging and interaction boundary | Proposed readiness evidence to collect | Source |
+| --- | --- | --- | --- |
+| Amazon Bedrock AgentCore Runtime, HTTP container path | ARM64 application bound to `0.0.0.0:8080`; `POST /invocations` takes JSON and returns JSON or SSE. `GET /ping` supplies JSON health with HTTP 200 when healthy. Optional `/ws` can share the container. `HealthyBusy` keeps a background-task session active. | Record image digest/architecture and selected protocol; test invocation, response framing and health independently. Inspect background-task status rather than treating a responsive process as completed work. | D-AR1 |
+| Google Agent Runtime, Python source path | Source deployment supplies `source_packages`, `entrypoint_module`, `entrypoint_object` and `class_methods`; dependency installation uses the packaged requirements file. The current guide separately offers Dockerfile and Artifact Registry image paths. Source-file deployment is Python-only; container paths permit other languages. | Bind source revision, selected path, entrypoint and declared operations to pinned dependencies; verify the deployed operations match the application's required methods. A successful upload alone does not demonstrate an invocation. | D-AR2 |
+| Google Agent Runtime, custom-container path | Listen on `0.0.0.0:8080`. Custom HTTP endpoints are allowed; `/api/reasoning_engine` and `/api/stream_reasoning_engine` are optional at the API level but enable SDK integration. Playground needs the streaming endpoint and `stream_query`. Declare supported `classMethods` and execution modes; the documented streaming response is newline-delimited JSON. | Record the chosen client integration and required methods/framing. Do not require the SDK/playground routes for an unrelated custom-endpoint-only client, or mistake SSE for the documented query stream. | D-AR3 |
+| Microsoft Foundry hosted agents, container path | Deployment guide requires `linux/amd64` images in Azure Container Registry and creates an agent version/identity. Runtime contract uses HTTP/1.1, platform-terminated TLS, default port 8088 (overridable via `PORT`), `GET /readiness` and at least one of `POST /responses` or `POST /invocations`. Responses can hydrate history via the adapter; Invocations leaves state to application code. | Record image digest/architecture, protocol/adapter version, effective port, health and invocation behavior, and explicit conversation-state responsibility. Verify chosen version routing before promotion. | D-AR4, D-AR5 |
+
+### Sources and deployment-specific cautions
+
+- **D-AR1:** AWS, [HTTP protocol contract](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-http-protocol-contract.html).
+  Its optional `time_of_last_update` health field must reflect actual status
+  changes; continually advancing it can prevent idle timeout and exhaust session
+  quota. This health/session behavior does not establish application correctness,
+  model availability or a billable quantity for #39.
+- **D-AR2:** Google, [Deploy an agent](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/runtime/deploy-an-agent).
+  The current document calls the product Agent Runtime and uses `client.runtimes`;
+  historical Agent Engine SDK names in other records are not silently rewritten.
+  Reconcile the selected SDK/API version before adopting a code recipe. Package
+  versions should be pinned for reproducibility; this review installs none.
+- **D-AR3:** Google, [Agent Platform runtime contract](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/runtime/runtime-contract).
+  Query methods route according to declared execution mode. Full ADK integration
+  requires its additional method contract; exposing the two query routes alone
+  is not evidence of complete ADK compatibility. CPU architecture and an external
+  health-probe contract are unresolved in this bounded source review.
+- **D-AR4:** Microsoft, [Deploy a hosted agent](https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/deploy-hosted-agent).
+  The guide distinguishes deployment permissions from the created runtime agent
+  identity. `azd deploy` preserves versions but the default endpoint follows the
+  latest version; pin production before candidate deployment and promote
+  explicitly. Registry private-network support depends on project creation date
+  (guide boundary: June 25, 2026), so access must be checked for the actual project.
+  No role assignment, identity creation or network change is performed here.
+- **D-AR5:** Microsoft, [Hosted agent runtime contract](https://learn.microsoft.com/en-us/azure/foundry/agents/concepts/hosted-agent-contract).
+  Adapters handle health, protocol framing and graceful `SIGTERM` shutdown.
+  Long-running resilient execution is a separate preview section with opt-in and
+  rerun/checkpoint obligations; ordinary foreground responses are not re-invoked
+  after process termination. A healthy container therefore supplies no general
+  exactly-once or durable-workflow guarantee.
+
+### Bounded decision and unresolved readiness
+
+Proposed #37 checklist extension: compare the selected hosting path's architecture,
+entrypoint, protocol, stream encoding, health and state semantics before treating
+an agent-framework package as portable. Inferred synthetic examples (not executed):
+an ARM64-only image fails the documented Foundry image requirement; an AWS-style
+`/ping` alone does not satisfy Foundry's `/readiness`; an SSE-only endpoint does
+not establish Google's documented newline-delimited query protocol. An unknown
+image architecture or unexamined client adapter remains unknown and blocks a
+positive readiness claim. These are candidate checks for #40, not adopted rules.
+
+#37 with #25/#27 still owns exact framework/SDK/protocol mapping and the selected
+capacity/mode; #35 owns credentials, network, data and tool-access controls; #36
+owns workload acceptance; #38 owns observable health, tracing and alert thresholds;
+#39 owns fresh region/SKU quantities and costs. Actual region availability, quotas,
+IAM/egress, MCP subprocess support, selected-version rollout/rollback and runtime
+execution remain unverified for these targets. The earlier readiness inputs and
+all owner handoffs remain required. Packaging evidence narrows this comparison's
+unknowns; it does not complete deployment research or authorize cloud operations.
+
+## Hosting rule-to-step linkage proposal (2026-10-18)
+
+This dated supplement addresses the explicit **#9 → #37: accept, integration
+pending** request in [appletechie's co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047),
+which reviewed main `66b46d4`. That receipt asks for the hosting rule IDs in
+region/network steps; it does not supply PUSHINGSQUARES's disposition or approve
+an executable ruleset. The following links prepare that documentary integration
+for the #37 owners. Original vendor-source dates and checklist claims stay scoped
+to their own evidence; no new vendor observation or configuration test is added.
+
+| Existing deployment step | Hosting proposal to consult | Required distinction |
+| --- | --- | --- |
+| S1 region declaration; S17 regional API endpoint; S28 managed offering/quota | [`t2-hosting-offering-membership`](../T2-infrastructure/rules/hosting-rules.md#t2-hosting-offering-membership) | Match the selected provider/service/version/location. A researched subset cannot prove absence; published offering presence does not establish account entitlement, quota, current stock or permitted residency. Hidden provider hardware does not remove a requested API-region check. |
+| S10 containment/egress; S45 self-hosted network restrictions | [`t2-hosting-private-networking`](../T2-infrastructure/rules/hosting-rules.md#t2-hosting-private-networking) | Consult the scoped capability when private networking is requested by the host selection or workload. An omitted capability remains unknown. A documented capability does not prove the actual route, identity policy, configured isolation or air-gap; retain S10/S45's separate configuration and test evidence. |
+| S43 persistent artifact cache; S50 retained rollback artifacts | [`t2-hosting-mounted-storage-locality`](../T2-infrastructure/rules/hosting-rules.md#t2-hosting-mounted-storage-locality) | Apply the proposal only to an evidenced direct mount with provider placement constraints. A remote fetch or shared catalog ID does not prove a mount or shared storage instance. Compatible placement does not establish replication, backup, retention or available compute. |
+
+These are research cross-references to hosting proposal revision **0.3.0**, not
+new step outcomes or final #40 rule publication. Read applicability, constraint
+and evidence diagnostics separately; an unresolved requirement is not a passed
+readiness check. Preserve the separate W-R8 isolation and D-R6 residency
+assessment, #13/#28 data semantics, #39 billing evidence and real deployment
+observables. No credentials, network settings, permissions, provider accounts or
+artifacts are changed. Receiving review of this integration and remaining
+co-owner scopes stay pending; #37 and #9 remain open.

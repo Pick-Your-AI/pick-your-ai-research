@@ -236,7 +236,7 @@ These rules are proposed for review by #40.
 | Rule id | Example | Status | Format | Severity | on_unknown |
 | --- | --- | --- | --- | --- | --- |
 | `rule.t4.mcp.transport.sse-deprecated` | transport lifecycle | Source-checked (unverified) | json | warning | review |
-| `rule.t4.mcp.remote.air-gapped` | (4) hosting unavailable in deployment | Hypothesis (proxy) | json | error | review |
+| `rule.t4.mcp.remote.air-gapped` | (4) hosting unavailable in deployment | Historical proxy; new work routed to W-R8/CD-4 | json (historical) | error | review |
 | `rule.t4.mcp.untrusted.guardrails` | trust | Hypothesis (policy on a source-checked premise) | json | error | block |
 | `rule.t4.mcp.trust-level.required` | trust data completeness | Hypothesis (policy) | json | warning | review |
 | `rule.t4.mcp.credential.secret-ref` | credentials | Hypothesis | json | warning | review |
@@ -304,6 +304,8 @@ These rules are proposed for review by #40.
 ```
 
 ### rule.t4.mcp.remote.air-gapped (Hypothesis, compatibility example 4)
+
+**Central-review disposition (reconciled 2026-10-18).** [The actual #40 queue review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) narrows this proxy into [W-R8](../T0-configuration/workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections) and CD-4. Assess enabled runtime connections against the selected isolation boundary and require runtime artifacts inside it. A provider-operated endpoint inside that boundary can pass with the required evidence; a self-operated endpoint reached across the boundary fails. Missing connection, lifecycle or boundary evidence remains unknown. The following proxy, proposed hosting enum and JSON are retained as historical research, not the current isolation assertion or an adopted executable rule. Per-component deployment and versioned boundary representation remain with #40.
 
 - **Participating kinds:** `mcp_server` `/spec/transport` and `/spec/trust_level`; `hosting_platform` selection `/settings/network_isolation`.
 - **Applicability condition:** a remote transport combined with an externally operated server, approximated by `trust_level` ∈ {trusted_external, untrusted_external}. **The proxy is the reason this rule is a hypothesis.** `trust_level` describes trust, not who hosts the endpoint. A self-hosted copy of an external project would be wrongly flagged unless it is catalogued as `internal`.
@@ -755,7 +757,7 @@ The rule implements the C7 matrix.
   - The legacy TypeScript SDK line supports up to 2025-11-25 (C31).
   - Python `mcp` 1.30.0 supports up to 2025-11-25.
   - The reference servers are pinned to those lines (C36, C38).
-- **Framework version support:** not source-checked for any framework (handed to #25).
+- **Framework version support:** [#25's pinned A86 follow-up](agent-framework.md#pinned-source-follow-up-2026-10-18) source-checks OpenAI Agents Python 0.24.0's support for MCP Python package v1/v2 and v2 auto negotiation with legacy fallback. This is conditional client implementation evidence, not an actually negotiated protocol set for a selected server. Other framework/protocol tuples and sampling/elicitation remain unknown where no eligible evidence was read.
 
 ```text
 assert: intersects(catalog mcp_server /spec/protocol_versions,            # missing field

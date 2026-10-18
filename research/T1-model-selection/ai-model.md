@@ -47,6 +47,7 @@ Every field needs a primary URL/access date and version/route conditions. Option
 | `supports_tool_calling`, `supports_json_schema` | Optional boolean with claim grade | A documented API capability is not a demonstrated workflow or reliable output score. Qwen structured JSON guarantees remain unknown. |
 | `spec.supports_fine_tuning` on model and provider | Optional boolean with scoped evidence | Existing v1 technical capability; explicit false on either rejects fine-tuning, independently of license answers. Missing is not false. Model/provider true is necessary capability evidence, not account/region entitlement. |
 | `license_ref`, license restrictions | Opaque string plus primary license/terms in notes | Actual checkpoint license, conditions, modification/redistribution/access; #30 confirms sufficiency. Custom/ambiguous terms require a named decision, not assumed permission. |
+| Separate NOTICE-file presence (proposed, note-only) | Boolean only for a complete, exact distribution inventory; otherwise unknown | [Pinned checkpoint notice evidence](artifact-notices.md) records the inspected Qwen revision. This supplies no v1 field or blanket derivative permission. |
 | `license_conditions` / `licence_answers` (proposed, not v1) | Typed conditions and selection-bound answers; #81 D-R2a/b | Eligibility answers resolve met/not_met or a recorded grant; obligation answers resolve acknowledged/not_acknowledged. Answer/storage/version policy remains with #30/#40; do not write these fields into v1 proposals. |
 | `access_modes`, `weight_access` | Enum arrays / optional open/restricted/none | Distinguish service access, actual weights, gating and agreement. No source weights downloaded. |
 | Total / active parameters | Integer count, note-only | Q1 total 8.2B is publisher-rounded; active count unknown rather than copying non-embedding count. Closed-model counts remain unknown. |
@@ -76,6 +77,13 @@ The #40 owner's PR #88 review separates answerable license conditions (#81 D-R2a
 
 ## Structured artifacts
 
+The [2026-10-18 NOTICE inventory](artifact-notices.md) addresses the separate
+file-presence gap identified in [@appletechie's #30 review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30#issuecomment-6245639699).
+That review accepts/narrows T1's licence/access field sufficiency with the
+normalization, obligation-answer and inheritance constraints it states. The
+Qwen repository result does not resolve notices for every expanded candidate or
+downstream distribution, and no proposed field is added to frozen v1.
+
 Complete API record proposals: `catalog/proposals/t1-model-gpt54-openai.json` and `t1-model-sonnet55-anthropic.json`. Internal architecture, unknown precision, or unsupported optional flags are not invented. v1 accepts the necessary model fields without requiring proprietary internals.
 
 Qwen remains a real researched candidate in notes: an example's `max_new_tokens` is not a universal required `max_output_tokens`. Gemini remains note-only because its independent budgets do not justify an invented combined context ceiling. #40 must reconcile these cases rather than weakening frozen v1. OpenAI/Claude model-API formatting does not imply arbitrary third-party protocol compatibility.
@@ -86,4 +94,4 @@ Expose evidence-qualified filters and conditional compatibility. Favor snapshot 
 
 ## Open questions and handoffs
 
-[Handoff ledger](handoffs.md): #30's owner must confirm license/weight-access sufficiency; #10/#11 must reconcile architecture, format/precision, runtime and context inputs; #16/#25/#35/#36/#39 consume modality/capability/limits/quality/pricing boundaries. Ambiguous licenses go to #30/#40, lifecycle/refresh to #41, context-schema gap to #40. Receiving-owner acceptance and independent research review are pending, not satisfied by authoring this record.
+[Handoff ledger](handoffs.md): [#30's scoped sufficiency review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30#issuecomment-6245639699) now exists, with normalized licence identifiers, obligation answers, inheritance and distribution-specific NOTICE evidence still requiring their stated treatment. #10/#11 reconcile architecture, format/precision, runtime and context inputs; #16/#25/#35/#36/#39 retain their own modality/capability/quality/pricing decisions. Ambiguous licences go to #30/#40, lifecycle/refresh to #41, context-schema gaps to #40. The receipt's scope is not broader research acceptance, an adopted field or a permission grant.

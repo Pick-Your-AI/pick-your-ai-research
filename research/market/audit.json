@@ -470,10 +470,11 @@
         "tynamite",
         "zwright8"
       ],
-      "rationale": "PR #44: merged; PR #134: merged. Publication is separate from receiving evidence review and issue completion. Imported v1 remains frozen; synthetic migration exercises are not approval of successor contract semantics.",
+      "rationale": "PR #44: merged; PR #126: merged canonical partial decision record; PR #134: merged synthetic migration examples. Publication is separate from receiving evidence review and issue completion. Imported v1 remains frozen; synthetic migration exercises are not approval of successor contract semantics.",
       "issue_state": "OPEN",
       "related_prs": [
         44,
+        126,
         134
       ]
     },

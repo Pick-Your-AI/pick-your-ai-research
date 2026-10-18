@@ -55,6 +55,102 @@ class Intake(unittest.TestCase):
     def test_valid_shape_does_not_require_verified_claim(self):
         self.assertEqual(intake_errors([self.item], []), [])
 
+    def _write_locator_submission(self, root, target, uri):
+        item = copy.deepcopy(self.item)
+        rate = {'id': 'test.rate', 'catalog_item_id': item['id'],
+                'catalog_item_version': '1', 'meter': 'request',
+                'unit_price': {'amount': '0.1', 'currency': 'USD'},
+                'valid_from': '2026-10-16T09:00:00Z',
+                'provenance': copy.deepcopy(item['provenance'][0]), 'price_type': 'estimate'}
+        book = {'schema_version': '1.0.0', 'id': 'test.prices', 'revision': 1,
+                'captured_at': '2026-10-16T09:00:00Z', 'rates': [rate]}
+        manifest = {'id': 'test.artifact', 'uri': 's3://test-bucket/data',
+                    'version': '1', 'sha256': 'a' * 64, 'access': 'restricted',
+                    'description': 'Synthetic test only', 'rights': 'Test only'}
+        if target == 'catalog':
+            item['provenance'][0]['source_uri'] = uri
+        elif target == 'price':
+            rate['provenance']['source_uri'] = uri
+        else:
+            manifest['uri'] = uri
+        for relative, payload in (('catalog/proposals/item.json', item),
+                                  ('pricing/proposals/prices.json', book),
+                                  ('evidence/artifact.json', manifest)):
+            path = root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(payload), encoding='utf-8')
+
+    def test_locator_syntax_rejected_in_each_submission_path(self):
+        suffixes = (':65536/claim', ':999999999/claim', ':bad/claim', ':-1/claim',
+                    ':\t443/claim', '/cla\x7fim', '/cla\nim', '/cla\rim',
+                    '/cla\x00im', '/cla im', '/cla\u00a0im')
+        locations = [('catalog', 'https'), ('price', 'https')]
+        locations += [('manifest', scheme) for scheme in ('https', 's3', 'gs')]
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for target, scheme in locations:
+                malformed = [f'{scheme}://github.com{suffix}' for suffix in suffixes]
+                malformed += [f'{scheme}://@github.com/claim',
+                              f'{scheme}://:@github.com/claim',
+                              f'\x01{scheme}://github.com/claim',
+                              f' {scheme}://github.com/claim']
+                for uri in malformed:
+                    with self.subTest(target=target, uri=uri):
+                        self._write_locator_submission(root, target, uri)
+                        self.assertTrue(validate_tree(root)[0])
+
+    def test_valid_locator_forms_and_existing_policy_boundaries(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for target in ('catalog', 'price'):
+                for uri in ('https://github.com/claim', 'http://github.com:80/claim',
+                            'https://github.com:443/claim', 'https://github.com:65535/claim',
+                            'https://github.com:/claim', 'https://github.com./claim',
+                            'https://github.com/claim%20text', 'https://github.com/claim?view=1#part'):
+                    with self.subTest(target=target, uri=uri):
+                        self._write_locator_submission(root, target, uri)
+                        self.assertEqual(validate_tree(root)[0], [])
+                self._write_locator_submission(root, target, 's3://test-bucket/data')
+                self.assertTrue(validate_tree(root)[0])
+            for scheme in ('https', 's3', 'gs'):
+                uri = f'{scheme}://test-bucket/data%20file'
+                self._write_locator_submission(root, 'manifest', uri)
+                self.assertEqual(validate_tree(root)[0], [])
+                for suffix in ('?signature=test-only', '#part'):
+                    self._write_locator_submission(root, 'manifest', uri + suffix)
+                    self.assertTrue(validate_tree(root)[0])
+            for uri in ('https://github.com:443/data', 'https://github.com:/data'):
+                self._write_locator_submission(root, 'manifest', uri)
+                self.assertEqual(validate_tree(root)[0], [])
+            self._write_locator_submission(root, 'manifest', 'http://github.com/data')
+            self.assertTrue(validate_tree(root)[0])
+
+    def test_cli_rejects_malformed_locators_with_and_without_optimization(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            shutil.copytree(CONTRACT, root / 'contracts/v1',
+                            ignore=shutil.ignore_patterns('__pycache__'))
+            (root / 'schemas').mkdir()
+            shutil.copy2(ROOT / 'schemas/evidence-manifest.schema.json', root / 'schemas')
+            (root / 'scripts').mkdir()
+            script = root / 'scripts/validate_research.py'
+            shutil.copy2(ROOT / 'scripts/validate_research.py', script)
+            for optimized in (False, True):
+                command = [sys.executable, *(['-O'] if optimized else []), str(script)]
+                self._write_locator_submission(root, 'catalog', self.item['provenance'][0]['source_uri'])
+                baseline = subprocess.run(command, capture_output=True, text=True, check=False)
+                self.assertEqual(baseline.returncode, 0, baseline.stderr)
+                self.assertIn('Validated 1 catalog proposals and 1 pricebooks', baseline.stdout)
+                for target in ('catalog', 'price', 'manifest'):
+                    for uri in ('https://github.com:65536/claim', 'https://@github.com/claim',
+                                'https://github.com:\t443/claim'):
+                        with self.subTest(optimized=optimized, target=target, uri=uri):
+                            self._write_locator_submission(root, target, uri)
+                            result = subprocess.run(command, capture_output=True, text=True, check=False)
+                            self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                            self.assertIn('INVALID:', result.stdout)
+                            self.assertNotIn('Validated ', result.stdout)
+
     def test_missing_and_synthetic_sources_rejected(self):
         for uri in (None, 'https://models.example/model', 'https://example.com/x', 'https://user:password@host.com/doc'):
             item = copy.deepcopy(self.item)
@@ -146,6 +242,81 @@ class Intake(unittest.TestCase):
             manifest['uri'] = 's3://test-bucket/data'
             (root / 'evidence/test.json').write_text(json.dumps(manifest))
             self.assertEqual(validate_tree(root)[0], [])
+
+    def test_duplicate_json_keys_rejected_in_every_intake_directory(self):
+        rate = {'id': 'test.rate', 'catalog_item_id': self.item['id'],
+                'catalog_item_version': '1', 'meter': 'request',
+                'unit_price': {'amount': '0.1', 'currency': 'USD'},
+                'valid_from': '2026-10-16T09:00:00Z',
+                'provenance': self.item['provenance'][0], 'price_type': 'estimate'}
+        book = {'schema_version': '1.0.0', 'id': 'test.prices', 'revision': 1,
+                'captured_at': '2026-10-16T09:00:00Z', 'rates': [rate]}
+        manifest = {'id': 'test.artifact', 'uri': 's3://test-bucket/data',
+                    'version': '1', 'sha256': 'a' * 64, 'access': 'restricted',
+                    'description': 'Synthetic test only', 'rights': 'Test only'}
+        submissions = {
+            'catalog/proposals/item.json': (self.item, '"verification_status": "unverified"',
+                '"verification_status": "verified", "verification_status": "unverified"'),
+            'pricing/proposals/prices.json': (book, '"amount": "0.1"',
+                '"amount": "999", "amount": "0.1"'),
+            'evidence/artifact.json': (manifest, '"sha256": "' + 'a' * 64 + '"',
+                '"sha256": "' + 'b' * 64 + '", "sha256": "' + 'a' * 64 + '"'),
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for relative, (payload, _, _) in submissions.items():
+                path = root / relative
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps(payload), encoding='utf-8')
+            self.assertEqual(validate_tree(root)[0], [])
+            for relative, (payload, original, ambiguous) in submissions.items():
+                with self.subTest(path=relative):
+                    path = root / relative
+                    raw = json.dumps(payload)
+                    path.write_text(raw.replace(original, ambiguous), encoding='utf-8')
+                    errors = validate_tree(root)[0]
+                    self.assertTrue(any(str(path) in error and 'duplicate JSON object key' in error
+                                        for error in errors), errors)
+                    path.write_text(raw, encoding='utf-8')
+
+    def test_duplicate_decoded_keys_rejected_but_distinct_objects_allowed(self):
+        item = copy.deepcopy(self.item)
+        item['provenance'].append(copy.deepcopy(item['provenance'][0]))
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            folder = root / 'catalog/proposals'
+            folder.mkdir(parents=True)
+            path = folder / 'item.json'
+            raw = json.dumps(item)
+            path.write_text(raw, encoding='utf-8')
+            self.assertEqual(validate_tree(root)[0], [])
+            for escaped in ('"status": "retired", "sta\\u0074us": "active"',
+                            '"status": "active", "status": "active"'):
+                with self.subTest(escaped=escaped):
+                    path.write_text(raw.replace('"status": "active"', escaped), encoding='utf-8')
+                    errors = validate_tree(root)[0]
+                    self.assertTrue(any("duplicate JSON object key: 'status'" in e for e in errors), errors)
+
+    def test_non_finite_catalog_numbers_rejected_before_schema_validation(self):
+        item = copy.deepcopy(self.item)
+        item.update(id='test.accelerator', kind='accelerator', tier='T2',
+                    spec={'accelerator_type': 'gpu', 'vendor': 'Test only',
+                          'model_name': 'Synthetic GPU', 'vram_gb': 16.0,
+                          'backends': ['cuda'], 'precisions': ['bf16']})
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            folder = root / 'catalog/proposals'
+            folder.mkdir(parents=True)
+            path = folder / 'item.json'
+            raw = json.dumps(item)
+            for number in ('16.0', '1.6e1', '1e-3'):
+                path.write_text(raw.replace('16.0', number), encoding='utf-8')
+                self.assertEqual(validate_tree(root)[0], [])
+            for number in ('NaN', 'Infinity', '-Infinity', '1e400', '-1e400'):
+                with self.subTest(number=number):
+                    path.write_text(raw.replace('16.0', number), encoding='utf-8')
+                    errors = validate_tree(root)[0]
+                    self.assertTrue(any(str(path) in e and 'finite' in e for e in errors), errors)
 
 
 if __name__ == '__main__':

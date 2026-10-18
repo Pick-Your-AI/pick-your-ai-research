@@ -112,7 +112,7 @@ Versions come from the PyPI JSON API on 2026-10-16. "Unknown" means not found in
 | OpenAI Responses and Conversations state | API (no version) | in-session state; durable conversation objects | API key or project (D48) | Responses stored 30 days by default; `store=false` disables storage; "Conversation objects and items in them are not subject to the 30 day TTL" (D14) | `DELETE` conversation, but "Items in the conversation will not be deleted" (D15) | not covered in the fetched pages | prior turns billed as input tokens (D14) | D14, D15 |
 | Anthropic memory tool | tool type `memory_20250818`; "all Claude 4 and later models" | file-based long-term memory | application-defined `/memories` directory | application-defined; the docs advise deleting files not accessed for a long time | `delete` command | application-defined | tokens only (no storage billed by the provider) | D31 |
 | Amazon Bedrock AgentCore Memory | service; SDK `bedrock-agentcore` 1.24.1 | short-term events; long-term records via strategies (semantic, user preference, summary, episodic, custom or self-managed) | `actorId`, `sessionId`, namespace templates | events: expiry up to 365 days, fixed at write time. Records: no expiry by default; `recordExpiryDurationDays` ≥ 31 (D25, D26) | `DeleteMemoryRecord`, `BatchDeleteMemoryRecords`. Expired records can still be returned for "a few days" (D26) | service-managed key by default; customer-managed KMS optional (D25); setting a TTL needs IAM `bedrock-agentcore:UpdateMemoryRecordExpirySpecification` (D26) | short-term: per 1,000 events until 2026-10-05, then per GB ingested; storage per GB-month over the event TTL; retrieval per GB. Long-term: per 1,000 records per month; per 1,000 retrievals (D28) | D25–D30 |
-| Google Agent Platform Memory Bank | service (Gemini Enterprise Agent Platform; formerly Vertex AI Agent Engine) | LLM extraction and consolidation of user facts and preferences; direct `CreateMemory` | `scope` dict (≤ 5 pairs; default `{"user_id": ...}`); "isolated collection" per scope (D21, D22) | TTL configurable on the instance (D21) | `memories.delete`, `memories.purge` (filter plus `force`), semantic "forget" via `generate` (D22, D23) | CMEK, VPC-SC, data residency at rest, HIPAA (D24). ML processing may use global endpoints for some models (D21). IAM Conditions per scope | not on the fetched pages; linked to Generative AI pricing (unknown) | D21–D24 |
+| Google Agent Platform Memory Bank | service (Gemini Enterprise Agent Platform; formerly Vertex AI Agent Engine) | LLM extraction and consolidation of user facts and preferences; direct `CreateMemory` | `scope` dict (≤ 5 pairs; default `{"user_id": ...}`); "isolated collection" per scope (D21, D22) | Active-memory and revision TTL are separate; see [dated retention follow-up](#memory-bank-retention-source-follow-up-2026-10-18) (D59, D60) | `memories.delete`, `memories.purge` (filter plus `force`), semantic "forget" via `generate` (D22, D23); deleted-memory revisions have a recovery window (D60) | CMEK, VPC-SC, data residency at rest, HIPAA (D24). Global Memory Bank instances cannot use CMEK (D59). ML processing may use global endpoints for some models (D21). IAM Conditions per scope | not on the fetched pages; linked to Generative AI pricing (unknown) | D21–D24, D59, D60 |
 
 ### Plain storage patterns (reference #9; not re-catalogued)
 
@@ -175,6 +175,16 @@ Rule of thumb for the builder (Estimate, project guidance):
 - Recommend `vector` only when the expected per-scope memory count is too large to inject in full within the context budget, **and** recall must be by meaning, not by key.
 - If a vector index is used, reuse the build's #15 `vector_database` (COMPONENTS.md) and do not create a second, independent one.
 - Keyword-only and key-value memory need no embedding model. This mirrors the existing contract statement that keyword-only RAG needs no vector database.
+
+## Memory Bank retention source follow-up (2026-10-18)
+
+Google's setup and revision guides were read as rendered documentation (D59/D60, both updated 2026-10-15). These are published service behaviors, source checked / unverified; no instance, SDK or deletion operation was exercised.
+
+- **Active memories (D59):** without automatic TTL configuration or an explicit expiration, memories do not expire. A default TTL covers create/update/generate operations; covered updates replace expiration with now plus TTL. Granular TTL distinguishes direct creation, generated creation and generated updates; an omitted operation setting leaves expiration unchanged. The guide says expired memories become unavailable for retrieval and are deleted; it supplies no measured physical-purge deadline.
+- **Revisions (D60):** enabled by default, with a default TTL of 365 days and instance/request overrides. Deletion creates an empty deletion revision while earlier facts remain in child revisions; those revisions can be inspected and rolled back for up to 48 hours after the parent is deleted. Revision expiration prevents inspection and rollback. Disabling creation of new revisions is not evidence that existing history was purged.
+- **Configuration boundary:** D59's setup example uses `memory_revision_default_ttl`, while D60's instance example uses `revision_ttl`. Retain that documentation discrepancy until the selected SDK/API is pinned and checked; this note supplies no executable configuration. D59 also excludes CMEK for a `global` Memory Bank instance. Storage region, processing endpoint and encryption selection need their own configuration evidence.
+
+For #35/#38, check active memory, recoverable revisions and any other retained layers separately before reporting erasure. The two published durations are service-specific conditions, not a project retention default or a legal conclusion. Backup deletion and deployed purge behavior remain unknown; #39's pricing-unit/rate follow-up is unchanged.
 
 ## Privacy, consent, retention and deletion
 
@@ -475,6 +485,18 @@ Catalog proposals (all `kind: memory_store`, `tier: T4`, validated):
 - Graphiti: graph backing has no enum value.
 - Anthropic memory tool: storage is application-defined.
 
+## T3 storage and retrieval receiving review (2026-10-18)
+
+T4/#28 accepts the bounded [#15 storage interface](../T3-knowledge-retrieval/vector-database.md) and [#16 retrieval interface](../T3-knowledge-retrieval/rag-retrieval.md) for the T4 component owner's consuming scope, with these constraints. The decision uses the project owner's delegated authority; @PUSHINGSQUARES's separate co-owner scope and the T3 owners' decisions remain distinct.
+
+- Reference the actual selected store/index and memory role rather than introducing duplicate storage product records. The presence of any primary vector database is insufficient: its configured representation, dimensions, metric, normalization and authorized namespace must fit this memory use. Reusing a storage product does not establish shared permissions or compatible embedding spaces.
+- Receive VDB-01's index/type-specific admission, VDB-02's resource-and-action authorization, and VDB-03's source-to-derived deletion lineage as proposed constraints. Software-level optional fields such as `supports_acl` and `regions` stay absent or unknown without eligible deployment/configuration evidence. No region, isolation guarantee, entitlement or operational price follows from the software catalog alone.
+- Retrieval-backed memory inherits [RAG-02's trusted principal and mandatory scope](../T3-knowledge-retrieval/rules/retrieval-rules.md#rag-02-caller-authorization-precedes-model-and-tool-exposure) before model or tool exposure, including permission-bearing summaries and graph artifacts. Read permission does not grant write, delete or administrative permission. A successful query does not establish consent to persist its result.
+- #28 retains memory purpose/scope, consent, retention and deletion semantics. Vector invisibility or a database acknowledgement does not establish removal from history, checkpoints, summaries, caches or backups. Preserve per-layer evidence and unknowns; the scoped Mem0 reproduction is not a complete-erasure guarantee.
+- Apply the [framework receiving review's complete-input accounting](agent-framework.md#t3-retrieval-receiving-review-2026-10-18). Retrieval and memory labels must not charge the same assembled tokens twice; repeated text actually present in the input still consumes tokens each time. Keyword, exact-key and session-only memory do not acquire a vector-database requirement through this handoff.
+
+This accepts T4's incoming interface only. T3's response to T4's outgoing role/ACL/region request, #40's versioned links and evidence operands, #35/#38 policy and purge coverage, and deployment/interoperability measurements remain separate. No new frozen-v1 field or production configuration is adopted.
+
 ## Open questions and handoffs
 
 | Question | Follow-up issue / owner |
@@ -493,13 +515,13 @@ Catalog proposals (all `kind: memory_store`, `tier: T4`, validated):
 | Evaluation of memory quality (recall, staleness, poisoning resistance) | #36 · @PUSHINGSQUARES |
 | Version field for managed services (no release tag): docs snapshot date or API version? | #41 · @tynamite |
 | Is ChatGPT-style consumer memory out of scope? Excluded here as consumer, not builder-selectable | #28 · @CompleteDotTech |
-| Unverified facts to re-fetch: Memory Bank TTL configuration details and pricing units; Anthropic memory tool platform availability (Bedrock, Vertex); Graphiti `group_id` partitioning; Zep and Letta encryption and residency; MS Agent Framework TTL and deletion | #28 · @CompleteDotTech |
+| Unverified facts to re-fetch: Memory Bank pricing units and selected SDK/API revision-TTL configuration (published retention semantics source-checked at D59/D60); Anthropic memory tool platform availability (Bedrock, Vertex); Graphiti `group_id` partitioning; Zep and Letta encryption and residency; MS Agent Framework TTL and deletion | #28 · @CompleteDotTech |
 
-[Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
+[Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions are partially received in the [workstream matrix](README.md#dependency-and-handoff-matrix). The [2026-10-18 T4 review](README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18) records CompleteDotTech's delegated acceptance of MEM-SG01–MEM-SG06 as the constrained memory-observation interface. PUSHINGSQUARES' separate #28 confirmation remains unrecorded. It does not supply #35/#38 co-owner confirmation, T3 storage acceptance or deployed purge evidence.
 
 ## Evidence
 
-Access dates are per entry (D1–D56: 2026-10-16; D57–D58: 2026-10-17). Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. "Wheel source" means file names and source text read from the published wheel, without executing it.
+Access dates are per entry (D1–D56: 2026-10-16; D57–D58: 2026-10-17; D59–D60: 2026-10-18). Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. "Wheel source" means file names and source text read from the published wheel, without executing it.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -561,6 +583,8 @@ Access dates are per entry (D1–D56: 2026-10-16; D57–D58: 2026-10-17). Grades
 | D56 | OWASP, https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html | 2026-10-16 | current | Primary documentation (community standard) | Guidance, not a standard with legal effect |
 | D57 | Mem0, https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/main.py#L2114 | 2026-10-17 | v2.2.1, commit `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | Primary documentation (source code); scoped synthetic reproduction described below | `_delete_memory` deletes the vector and writes prior text into history; `delete_all` calls it. No full-service or backend-erasure test |
 | D58 | Mem0, https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/memory/storage.py#L150 | 2026-10-17 | same v2.2.1 commit as D57 | Primary documentation (source code); scoped synthetic reproduction described below | `add_history` stores `old_memory`; `get_history` returns rows including deletion events. History-purge policy and backups not tested |
+| D59 | Google Cloud, [Set up Memory Bank](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank/setup) | 2026-10-18 | Mutable service guide, updated 2026-10-15 | Primary documentation | Active TTL and global-CMEK boundary; source read only. CC BY 4.0 page; linked paraphrase, no code copied |
+| D60 | Google Cloud, [Memory revisions](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale/memory-bank/revisions) | 2026-10-18 | Mutable service guide, updated 2026-10-15 | Primary documentation | Revision retention/recovery, no physical-erasure measurement. CC BY 4.0 page; linked paraphrase, no code copied |
 
 ### Mem0 deletion reproduction and limits
 
@@ -573,7 +597,7 @@ This reproduces retention in that method/storage path only. It does not exercise
 - The GDPR text could not be downloaded with curl because the proxy refused eur-lex.europa.eu. It was read through WebFetch from the consolidated HTML. Quotes are partial, because of tool quote limits.
 - These pages did not render or did not cover the point:
   - the Google REST resource page for Memory Bank `memories`;
-  - Memory Bank TTL configuration details;
+  - the selected Memory Bank SDK/API's revision-TTL field mapping (the dated guide semantics are resolved at D59/D60);
   - Memory Bank and Mem0, Zep and Letta pricing.
 - Microsoft Agent Framework and Semantic Kernel licenses come from PyPI classifiers, not LICENSE files.
 - The overall `result` of the synthetic local evaluations was `indeterminate` or `invalid` because of unrelated baseline rules (for example budget and monitoring) on the minimal fixtures. Only the memory, RAG, vector and agent rule outcomes listed above are claimed.

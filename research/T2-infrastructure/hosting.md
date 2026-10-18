@@ -1,8 +1,8 @@
 # Hosting and infrastructure storage
 
 Issue: [#9](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9) · Contract: 1.0.0 · Kinds: `hosting_platform`, `storage`
-Status: merged in PR #75; follow-up proposals and remaining handoffs pending · Last researched: 2026-10-17
-Decision owners: @Mattycodes69 and @appletechie, live #9 assignees checked on 2026-10-17.
+Status: merged in PR #75; follow-up proposals and remaining handoffs pending · Vendor-source dates: per evidence section · Regional/billing continuation: 2026-10-18
+Decision owners: @Mattycodes69 and @appletechie, live #9 assignees checked on 2026-10-18. Handoff receipts refreshed on 2026-10-18; vendor-source access dates retain their original scope.
 
 ## User decision
 
@@ -66,6 +66,35 @@ Modal egress changed on **2026-10-01**: **$0.04/GiB** above Starter **1 TiB**, T
 Runpod's Pod pricing documents no ingress/egress fees; AWS documents separate transfer/IP/network service charging. Neither establishes that external object-store or source-provider transfer is free. Hugging Face endpoint storage/egress line items remain unknown here. [H19][H15][H17]
 
 Attestation **links are evidence locators, not compliance approval**. AWS provides a services-in-scope index [H30]. Runpod describes partner SOC 2/ISO 27001/PCI DSS qualifications, which is a vendor statement rather than a reviewed report for a selected datacenter [H31]. Modal's pricing page lists SOC 2 and plan-dependent HIPAA compatibility [H07]. Hugging Face publishes endpoint security documentation [H32]. Scope, report period, contracted entity, selected service/region and required agreements remain unknown until #35/#37 review. No `compliant=true` field is proposed.
+
+## Proposed initial regional scope and expansion gates (2026-10-18)
+
+**Recommendation for #9 co-owner review:** retain the existing documented samples as the initial comparison scope, with no global-coverage promise. Keep `aws-ec2` scoped to `us-east-1` and the existing linked G6e profile; retain HF AWS endpoints' `us-east-1` / `eu-west-1` service subset. This includes an existing European managed-service example, not a complete GPU-by-region catalog or a residency guarantee. Other services retain their actual documented provider locations or explicit unknowns. This proposal changes no catalog array, source snapshot version, price or owner acceptance.
+
+The central [#3/#40/#41 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) accepts US samples and imposes no T0 regional requirement. It does not decide #9's coverage breadth. The recommendation bounds initial evidence work; it does not prevent a user from requesting a different location or treat an unresearched region as unsupported.
+
+| Scope decision | Proposed handling | Evidence / receiving limit |
+| --- | --- | --- |
+| EC2 self-hosted comparison | Start with the existing `aws-ec2` / G6e `us-east-1` binding. Retain other locations as research leads until the specific profile is evidenced. | H34 rechecks a G6e family listing, not an exact size/AZ/account offer or available GPU. #10 owns compute-profile facts; #37 owns deployment. |
+| Dedicated managed comparison | Preserve the two existing HF AWS service regions; verify selected hardware, image/engine, quota and rate scope separately. | H35 reconfirms the service-level FAQ. A region list is not a GPU × region entitlement matrix. |
+| Serverless, mounted storage and remote services | Keep the provider's service/datacenter identifier and each selection's actual placement; do not equate broad areas, location hints, jurisdictions or same-named regions across providers. | H21/H22/H24/H27 and the existing locality proposal. Same catalog ID does not mean the same storage instance. |
+| Owned/on-premises or edge installation | Obtain the selected installation's location and responsibility evidence; retain unknown where absent. Do not manufacture an on-prem host ID from a hardware purchase example. | Existing taxonomy and #9 co-owner constraints below; device specification remains #10. |
+| Expansion beyond the bounded samples | Add research when a named workload/residency constraint, requested service/SKU, latency requirement or evidenced capacity gap changes the decision. Request #9 and affected consumer review before a new recommendation. | Research sequencing proposal, not measured latency, stock evidence or automatic failover approval. |
+
+For each proposed expansion, record the exact provider/service, location identifier and dated offering source; resolve any selected host/profile/accelerator IDs without assuming a Cartesian product. Separately record account quota/access, current capacity or reservation evidence, network/processing/storage/backup locations and rate scope. Unknown account access or stock stays unknown even when the public offering is listed. A date is not an invented freshness TTL. Non-offering evidence is negative only within an explicitly complete, eligible source scope under #40's coverage policy.
+
+### Separately dated regional and billing source checks
+
+These are **primary documentation, source checked / unverified**, accessed **2026-10-18**. They supplement H03/H19/H21 without replacing their historical dates or the pricebooks' provenance. Mutable pages supply dated observations, not immutable archives or independent measurements.
+
+| New evidence ID / primary source | Bounded finding | Remaining unknown or consumer decision |
+| --- | --- | --- |
+| H34 — [AWS instance types by Region](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html), N. Virginia section and considerations | G6e is listed for `us-east-1`; AWS warns regional instance support does not imply every AZ supports it. | Exact size/AZ/account entitlement, quota and live capacity remain unknown. No regional catalog expansion follows. |
+| H35 — [HF endpoint FAQ](https://huggingface.co/docs/inference-endpoints/faq), regions question | The AWS service portion lists `us-east-1` and `eu-west-1`. | No exact GPU/region capacity, account entitlement or private route was tested. Other provider offerings remain outside this AWS record. |
+| H36 — [Runpod Pod pricing](https://docs.runpod.io/pods/pricing), storage-pricing and on-demand sections | Specific cadence is per-second for container/volume disks, hourly for network volumes; on-demand deployment requires one hour's credits. | The credit admission condition alone does not establish a one-hour minimum billed duration. Sub-hour rounding, billing-month conversion, exact tier boundary and invoice aggregation remain for #39. |
+| H37 — [Runpod network volumes](https://docs.runpod.io/storage/network-volumes), multiple-volume and Pod sections | Attached volume location constrains eligible compute; multiple volumes do not synchronize automatically. | No live inventory, replication, failover, backup or application consistency was verified. #13/#28/#31 retain data semantics. |
+
+For H36, the general per-second sentence does not override the more specific network-volume cadence. Hourly cadence is still insufficient to predict a partial-hour invoice: do not assume rounding up, linear proration or a fixed month length without eligible evidence. **Requested #39 decision:** accept/narrow/reject this separation of display rate, accrual cadence, credit admission and invoice rounding, then name the remaining vendor evidence needed. Existing rate proposals retain their original values/versions; no new Pricebook or whole-account total is emitted.
 
 ## Comparison fields
 
@@ -173,29 +202,35 @@ No complete `ResourceEstimate`, `CostEstimate`, runtime configuration or deploym
 
 ## Open questions and handoffs
 
-Live owners were checked through GitHub on 2026-10-16. **No consuming-owner acknowledgements were present for this package at research time.** The orchestrator must link actual comments/reviews before checking the handoff criterion; agent coordination is not owner acceptance.
+Live owners and issue comments were re-read on 2026-10-18. The existing #10/#27/#31 receipts remain; appletechie's later #15/#37/#39 responses are now linked below. #14 remains pending; zabyxc01's substantive #15 decision and PUSHINGSQUARES's #37/#39 scopes remain separate. The additional #28 boundary receipt is separate from those seven required consumers. Each receipt retains its direction and issuing owner's scope; it does not accept another co-owner's scope or satisfy the full handoff criterion.
 
-| Consumer / live owner | Specific requested acknowledgement | State / impact |
+| Consumer / live owners | Specific requested acknowledgement | State / impact |
 | --- | --- | --- |
-| #10 @Mattycodes69 | `aws-ec2` ID/version and researched region subset; source-complete profiles versus incomplete Runpod offers | Research coordinated; human acceptance pending |
-| #14, #15 @zabyxc01 | API/managed/self-hosted categories; object/block/file interfaces; vector DB evaluation remains T3 | Pending; no embedding/vector product choice made |
-| #27 @CompleteDotTech | Local stdio versus remote HTTP host requirements; service lifetime, auth/trust and timeout evidence still theirs | Pending; no MCP server suitability assertion |
-| #31 @appletechie | Persistent storage cost/locality/parallel-write caveats, funding/deletion and inode constraints, and non-shared training estimate ownership | Pending; no training sizing duplicated |
-| #37, #39 @PUSHINGSQUARES | Deployment constraints, unknown quota/capacity, storage/egress and conditions including post-delete billing; billing aggregation policy | Pending; research can be reviewed independently |
-| #13 @zabyxc01; #28 @CompleteDotTech | Infrastructure product facts do not decide ACL propagation, retention, consent or deletion semantics | Pending boundary review |
+| #10 @Mattycodes69 / @appletechie | `aws-ec2` ID/version and researched region subset; source-complete profiles versus incomplete Runpod offers | [#9 -> #10 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057): exact host/profile binding and units; regional offering is not stock, quota or entitlement; [@appletechie separately accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewing main `66b46d4`; neither response is stock or fit evidence |
+| #14 @zabyxc01 / @PUSHINGSQUARES | Managed embedding endpoint hosting category and residency boundary | Pending; no embedding product choice made |
+| #15 @zabyxc01 / @appletechie | API/managed/self-hosted categories; object/block/file interfaces; vector DB evaluation remains T3 | [@appletechie accepts the boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing main `66b46d4`; @zabyxc01's substantive product-side disposition remains separate. No vector product choice made |
+| #27 @CompleteDotTech / @tynamite | Local stdio versus remote HTTP host requirements; service lifetime, auth/trust and timeout evidence still theirs | [#9 -> #27 accepted with constraints by @CompleteDotTech](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072); no MCP server suitability or deployment assertion |
+| #31 @tynamite / @appletechie | Host/storage ID reuse and training-estimate boundary; storage cost/locality/parallel-write, funding/deletion and inode caveats remain explicit | [#9 -> #31 accepted by @appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274): reuse existing IDs, retain missing SKU records and independent training sizing; no blanket billing/storage guarantee |
+| #37 @appletechie / @PUSHINGSQUARES | Deployment constraints, quota/capacity, network and region constraints | [@appletechie accepts, integration pending](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing main `66b46d4`; cite `t2-hosting-*` rule IDs in the deployment region/network steps. @PUSHINGSQUARES's scope is not inferred |
+| #39 @appletechie / @PUSHINGSQUARES | Dated billing units and storage/egress omissions; aggregation/rounding scope | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing main `66b46d4`; preserve GPU-hour versus node and GB/GiB scope, with uncovered lines never zero. @PUSHINGSQUARES and H36's invoice questions remain separate |
+| #13 @tynamite / @zabyxc01; #28 @CompleteDotTech / @PUSHINGSQUARES | Infrastructure product facts do not decide ACL propagation, retention, consent or deletion semantics | [#9 -> #28 accepted with constraints by @CompleteDotTech](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072); #13's storage/ACL boundary disposition remains separate |
 | #3, #40, #41 current coassignees; scoped response by @tynamite | Taxonomy; rule applicability/coverage; source/freshness/reuse | PR #75 accepts taxonomy with constraints, narrows rule intake and adopts interim policy; final contract and per-source rights work remain |
-| #5/#6/#7 @zwright8; #33 @appletechie | Model/API lifecycle and context assumptions; artifact access, adapter/merged weights and immutable provenance | Pending; not inferred from host artifact support |
+| #5 @zwright8 / @tynamite; #6 @zwright8 / @PUSHINGSQUARES; #7 @zwright8 / @appletechie; #33 @Mattycodes69 / @appletechie | Model/API lifecycle and context assumptions; artifact access, adapter/merged weights and immutable provenance | Pending for this hosting interface; not inferred from host artifact support or another directional receipt |
+
+The [2026-10-18 #9 co-owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225), reviewing main `9344f99325510adfe678382a4672246d028e87bc`, accepts **#27/#28 -> #9 with constraints from @Mattycodes69's scope**. Reuse existing hosting/storage IDs: local MCP needs evidenced subprocess support in the actual client runtime, self-hosted remote MCP needs its actual hosting placement, and vendor remote MCP needs evidenced reachability/egress. A URL/category proves neither process lifetime, private connectivity, OAuth/trust nor locality. Relational/object/file memory can reuse infrastructure storage; T4 retains application memory, consent, retention and history/backup erasure semantics, T3 retains knowledge/ACL and vector-product boundaries, and #37 retains deployment. Missing process/egress/locality fields and rules remain #40 proposals. No new host kind or deployment certification is accepted. [@appletechie's separate co-owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing main `66b46d4`, also accepts #27/#28 → #9 with constraints: missing relational/in-memory storage and on-prem/edge host records remain actual catalog gaps; shared IDs are not shared instances, and placement/write-safety/funding caveats still apply. It does not accept application semantics or prove deployment.
+
+The same receipt accepts **#10 -> #9 with constraints**: physical accelerators remain distinct from provisionable profiles. `aws-ec2-g6e-xlarge-us-east-1` version `2026-10-16` binds `aws-ec2` and `nvidia-l40s`; default CPU cores/vCPUs and source GiB/decimal GB remain distinct. Published regional offering and allocation do not establish stock, quota, free runtime memory or workload fit. Incomplete Runpod/A100/P4de profile evidence remains note-only. This reverse receipt is separate from #9 -> #10 above. appletechie's later #10 → #9 response in the same linked co-owner comment separately records that co-owner's agreement, preserving note-only A100/P4de evidence and the RTX 4090's missing profile binding; it is not independent runtime verification.
 
 | Question / follow-up owner | Required action and impact |
 | --- | --- |
-| Initial regions — #9 @Mattycodes69 / @appletechie | #3 imposes no region requirement and accepts US examples as samples; #9 still decides product coverage breadth. No global coverage commitment is inferred |
-| Current inventory and access — #9/#10 @Mattycodes69 | Obtain dated public/account availability and quota evidence only if a deployability claim is needed; keep unknown meanwhile |
-| Invoice rounding — #39 live owners with Runpod | Specific network-volume hourly billing outranks generic wording; confirm sub-hour invoice rounding and avoid unsupported invoice predictions |
+| Initial regions — #9 @Mattycodes69 / @appletechie | Review the bounded initial-sample recommendation above; #3 accepts US samples but does not decide #9 breadth. Both #9 co-owner dispositions remain required; no global coverage commitment |
+| Current inventory and access — #9/#10 @Mattycodes69 / @appletechie | Obtain dated public/account availability and quota evidence only if a deployability claim is needed; keep unknown meanwhile |
+| Invoice rounding — #39 live owners with Runpod | H36 rechecks hourly network-volume cadence separately from the credit threshold; confirm sub-hour rounding, month/tier semantics and invoice aggregation before predictions |
 | Storage units and transfer meters — #39/#40 live owners | Decimal GB is confirmed canonical by #40; preserve vendor GiB. Define aggregation and new transfer/IOPS/throughput/minimum fields only through versioned proposal; affected #9/#31/#39/#42 consumers remain |
-| Tier and allowance semantics — #39 @PUSHINGSQUARES | Adopt exact threshold/rounding/allowance aggregation before automatic costing; rates in notes/conditions do not implement tier logic |
-| Full residency and security — #35/#37 @PUSHINGSQUARES, #13 @zabyxc01 | Review all processing, routing, artifact and backup locations, agreement/report scope; host region alone is insufficient |
+| Tier and allowance semantics — #39 @appletechie / @PUSHINGSQUARES | Adopt exact threshold/rounding/allowance aggregation before automatic costing; rates in notes/conditions do not implement tier logic |
+| Full residency and security — #35/#37 @appletechie / @PUSHINGSQUARES, #13 @tynamite / @zabyxc01 | Review all processing, routing, artifact and backup locations, agreement/report scope; host region alone is insufficient |
 | Freshness/reuse — #41 @tynamite / @PUSHINGSQUARES | Interim version-pinned/current-state distinction and conflict order are adopted; per-source rights inventory and automated reuse remain unresolved |
-| Compatibility metadata — #40 @tynamite | Model mounted-volume relationship and evidence completeness, retain unknown behavior, review three rules; no v1 migration made here |
+| Compatibility metadata — #40 @zwright8 / @tynamite | Model mounted-volume relationship and evidence completeness, retain unknown behavior, review three rules; no v1 migration made here |
 
 ## Acceptance assessment and validation
 
@@ -203,15 +238,15 @@ The criteria below preserve the live issue wording. “Prepared” means an arti
 
 | #9 criterion | Artifact / evidence | Current assessment / required reviewer |
 | --- | --- | --- |
-| Taxonomy with boundary examples | Taxonomy table; H01–H13 | Prepared; #3 @tynamite / #9 @Mattycodes69 review pending |
+| Taxonomy with boundary examples | Taxonomy table; H01–H13 | #3 accepted taxonomy with constraints in the linked PR #75 review; #9 scope and remaining acceptance decisions stay open |
 | Candidate set per category with priced examples and provenance | Candidate and storage tables; H01–H10, H18–H29; explicit incomplete quote scope | Prepared; #9/#39 review pending; no complete regional cloud VM or current on-prem quote claimed |
 | Availability represented with explicit `unknown` handling | Candidate table, field requirements, rules; H16/H21/H24 | Prepared; stock/entitlement remain unknown |
 | Decision record merged at `research/T2-infrastructure/hosting.md` following the research method | This note + structured artifacts; PR #75 | Merged at `ec612eb14edaf63cc9caca2ab655d053c9114dd4`; changed follow-up and full acceptance remain pending |
-| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Taxonomy, API/managed/cloud/on-prem comparisons and non-model boundaries | Prepared; #3/#9 review pending |
+| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Taxonomy, API/managed/cloud/on-prem comparisons and non-model boundaries | #3 deployment-mode boundaries accepted with constraints; #9 regional recommendation and full acceptance stay open |
 | Comparison fields defined with type, unit, and evidence requirement | Comparison-fields table | Prepared; #40 unit/completeness questions explicit |
 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [Three rule proposals](rules/hosting-rules.md) | Prepared; evidence-backed assertions separated from hypotheses; #40 approval pending |
 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Claim-level H01–H33 links and evidence table; published/estimate labels | Source accuracy rechecked against primary pages on 2026-10-16; owner accuracy/rights/freshness review pending |
-| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Handoff table, seven direct consumers | **Not satisfied:** no human acknowledgements yet |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Handoff table, seven direct consumers | Partial: #10/#27/#31 scoped receipts plus appletechie's #15 boundary, #37 integration-pending and #39 constrained responses. #14, zabyxc01's substantive #15 decision, PUSHINGSQUARES and other co-owner scopes remain separate |
 | Open questions recorded with a named follow-up owner | Questions table using live assignees | Prepared; owner decisions pending |
 
 Validation is reported after running the canonical workflow by the integration orchestrator. Schema validity establishes structure/references only; it does not establish claim truth, freshness, licensing permission, stock, compatibility, owner acceptance or merge. The source review here checked the cited page conditions and preserved unresolved conflicts; it did not audit private compliance reports or run workloads.
@@ -256,3 +291,60 @@ Follow-up validation on 2026-10-17, Python 3.12.14: pinned dependency installati
 ## S3 Standard identity supplement (2026-10-18)
 
 `catalog/proposals/t2-aws-s3-standard.json` adds the missing #31 checkpoint-storage identity as an object storage class. [AWS storage-class documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html), accessed 2026-10-18, identifies STANDARD. This dated capture does not bind a bucket, region, retention policy or EC2 host. Encryption configuration and historical object coverage need separate evidence; no universal encryption boolean or maximum capacity is supplied. No current price is added. #31’s historical price observations retain their own dates/conditions, and #39 must establish applicable rates before cost evaluation. This is source-checked, not a storage deployment measurement.
+
+
+## Regional and billing continuation validation (2026-10-18)
+
+Prepared from main `e3078c5ff529ccf27bb4cd5a83ac7fe35b4a560c` with Python **3.12.14**. Pinned requirements were installed using `python -m pip install -r requirements-research.txt --target <temporary-directory>`; `PYTHONPATH` selected that directory and `PYTHONUTF8=1` made Windows text handling explicit.
+
+| Command | Actual result |
+| --- | --- |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
+| `python -m unittest discover -s tests -v` | 200 passed |
+| `python scripts/validate_research.py` | Passed: 74 CatalogItems / 3 Pricebooks and evidence metadata |
+| `python scripts/validate_market_research.py` | Passed: 33 entities / 1,584 cells / 20 issues |
+| `python scripts/validate_handoff_audit.py` | Passed: 101 rows / 98 declared pairs; human acceptance not certified |
+| `python prompts/mobile/validate_prompts.py` | Passed: 258 issues / 36 epics / 906 criteria / 880 steps |
+| `git diff --check` | Passed |
+
+Only this record, the T2 ledger and the #9 acceptance-map entries change. No new test is needed for this documentation-only contribution. H34–H37 are source checks with the dates and limits above; original source observations, catalog facts, pricebooks, frozen v1 and market ledgers are unchanged. Automation checks integrity, not source truth, rights, current quota/stock, invoice behavior or consuming-owner acceptance. No account probe, reservation, paid service or deployment was performed. Regional coverage adoption and the named remaining consumer decisions stay open.
+
+## Relational and in-memory software identities (2026-10-18)
+
+The [#9 co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewed at historical main `66b46d4`, correctly identified missing relational and in-memory storage records. This contribution adds two **software identities** in the existing frozen-v1 `storage` kind. It provides candidates for that identity gap; the receipt does not become acceptance of these new records.
+
+| Catalog proposal | Exact publisher release and immutable source commit | Evidenced v1 field | Scope |
+| --- | --- | --- | --- |
+| [PostgreSQL](../../catalog/proposals/t2-storage-postgresql.json), ID `postgresql` | `18.6`; tag `REL_18_6` resolved to `724edf9bde9d356724ad384a2e196edc3c9f80f7` | `storage_type: relational` | Database software; no selected database instance or managed service |
+| [Redis Open Source](../../catalog/proposals/t2-storage-redis-open-source.json), ID `redis-open-source` | `8.10.2`; tag `8.10.2` resolved to `498ecd0d6d007db11ddb3aea9428552598a78622` | `storage_type: in_memory` | Primarily in-memory database software; Redis Software and Redis Cloud remain separate products |
+
+Both releases and their type claims were read from the primary sources below at **2026-10-18T06:04:43Z**. `version` records the publisher release, while `updated_at` and `checked_at` record this research capture. The catalog's `active` status records the released candidate at this capture; it does not promise future support or certify the installed version. The [PostgreSQL release announcement](https://www.postgresql.org/about/news/postgresql-186-1711-1615-1519-1424-and-19-beta-3-released-3365/) and [Redis release](https://github.com/redis/redis/releases/tag/8.10.2) were separately checked as released versions; they are not substituted for the immutable file pins.
+
+### Source-to-field evidence
+
+All new provenance remains `unverified`: primary-source checking supplies identity and documented characteristics, without independent installation or workload reproduction.
+
+| Evidence | Primary source and inspected Git blob | Claim and limit |
+| --- | --- | --- |
+| H38 | [PostgreSQL README](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/README.md), `7352a90a72373d62c469defba3f62185673f5894` | Publisher describes an object-relational database management system; supports the relational type only |
+| H39 | [PostgreSQL configure.ac](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/configure.ac), `527437e0d207ccec4ac899b1d2e646b9f4aa78e4` | `AC_INIT` identifies version `18.6`; no build or runtime was executed |
+| H40 | [PostgreSQL COPYRIGHT](https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/COPYRIGHT), `0a397648dcd3c2177acc58bd7daecd11ad64be62` | Software/documentation permission carries notice and disclaimer requirements; it supplies no infrastructure rate or rights over user data |
+| H41 | [Redis README](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/README.md), `0bc4d0bb9d0cc8677c4dd6228cf3d8365e2d6e27` | Primary in-memory backing and Open Source / Software / Cloud product boundaries; marketing latency and workload claims are not admitted |
+| H42 | [Redis version header](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/src/version.h), `9b227053661510c47036bee2045ef3602681f033` | `REDIS_VERSION` identifies `8.10.2`; no installed-build or module inventory is asserted |
+| H43 | [Redis LICENSE.txt](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/LICENSE.txt), `4657905cf699d1d5ac96a07d0969bc79e27c4eec` | Header identifies RSALv2 / SSPLv1 / AGPLv3 alternatives for Redis 8 code, separately from older BSD releases; it does not make all alternatives permissive or choose an intended-use licence |
+
+The optional `license` object is omitted from both proposals. The evidence above records the actual sources and conditions without manufacturing a universal permission boolean. Redis's bundled components and a selected licence alternative require their own applicable notices and use assessment. This note paraphrases bounded source facts with attribution; it includes no upstream source distribution.
+
+### Selection and receiving boundaries
+
+- `hosting_ref`, `region`, `encryption_at_rest` and `max_capacity_gb` are omitted because this software-identity review supplies no selected placement, configuration or capacity evidence. `billing_class` remains `unknown`; software availability does not price the host, storage medium, backups, replication, support or operations.
+- The `in_memory` classification does not assert that Redis has no persistent files. Its [documented persistence modes](https://redis.io/docs/latest/management/persistence/), accessed 2026-10-18, are separately configurable. A selected instance still needs its persistence, eviction, backup and deletion evidence; a software catalog ID does not prove data retention or erasure.
+- Existing T4 PostgreSQL/Redis patterns, ADK and LangGraph catalog records are unchanged. Neither proposal proves that a particular library, driver, extension, module or protocol configuration works with these exact releases. #15 retains vector-product and pgvector review; #28 retains memory semantics; #31 retains checkpoint/training requirements; #37 retains the selected deployment.
+- A shared software ID can identify multiple separate database instances. It provides no shared-instance, tenant-isolation, credential, ACL or residency guarantee. The frozen-v1 memory/storage field and rule-extension questions remain with #40; no unsupported reference or new field is added to a T4 item.
+- The missing on-premises/edge host identity from the original receipt remains separate. These software records do not supply a physical host or managed offering.
+
+#9's current owners review these exact candidates and their identity-only scope. #28/#15 consumers can evaluate the pinned software as new inputs while preserving the historical receipt. #39 owns selected deployment cost coverage; #40/#41 retain the contract and provenance boundaries. No receiving disposition, successful connection, benchmark, encryption configuration, current capacity, Pricebook, ResourceEstimate or issue completion is asserted.
+
+### Validation
+
+Checked against base `f9ef1b551336615c04a4bc892a0db2e91fab9d11` with Python 3.12.14 and the pinned research dependencies: 21 contract tests, 241 repository tests, research intake (76 CatalogItems / 3 Pricebooks), market integrity (33 entities / 1,584 cells / 20 issues), handoff integrity (101 rows / 98 declared pairs), mobile prompt validation (258 issues / 36 epics / 906 criteria / 880 steps), and `git diff --check` pass. Manual source-to-field review confirms both unique catalog IDs, the exact versions and types, the six immutable source paths, and omitted unevidenced selection fields. These checks establish intake structure and repository integrity; no database runtime test is claimed.

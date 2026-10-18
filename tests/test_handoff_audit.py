@@ -1,10 +1,14 @@
-"""Regression checks for lost or overstated audit receipts; mutations stay in memory."""
+"""Audit-receipt regressions use synthetic in-memory or temporary-file fixtures."""
 from copy import deepcopy
 import json
 from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
 import unittest
 
-from scripts.validate_handoff_audit import HandoffValidationError, validate
+from scripts.validate_handoff_audit import HandoffValidationError, read_json, validate
 
 BASE = Path(__file__).resolve().parents[1] / 'research' / 'market'
 
@@ -64,8 +68,105 @@ class HandoffAuditValidation(unittest.TestCase):
         return validate(self.ledger, self.readback, self.audit)
 
     def test_committed_snapshot_is_consistent(self):
-        load = lambda name: json.loads((BASE / name).read_text(encoding='utf-8'))
+        load = lambda name: read_json(BASE / name)
         validate(load('handoffs.json'), load('handoff-audit-readback.json'), load('audit.json'))
+
+    def raw_documents(self):
+        return {name: json.dumps(value) for name, value in (
+            ('handoffs.json', self.ledger),
+            ('handoff-audit-readback.json', self.readback),
+            ('audit.json', self.audit))}
+
+    def run_cli(self, documents, optimized):
+        # Copy the real standalone entry point so ROOT points at disposable
+        # records; the repository's actual audit files are never modified.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            script = root / 'scripts' / 'validate_handoff_audit.py'
+            script.parent.mkdir()
+            shutil.copyfile(BASE.parents[1] / 'scripts' / script.name, script)
+            market = root / 'research' / 'market'
+            market.mkdir(parents=True)
+            for name, text in documents.items():
+                (market / name).write_text(text, encoding='utf-8')
+            options = ['-O'] if optimized else []
+            return subprocess.run([sys.executable, *options, str(script)],
+                                  cwd=root, capture_output=True, text=True,
+                                  timeout=30)
+
+    def test_cli_accepts_valid_json_and_finite_optional_values(self):
+        for extra in ('', '"synthetic_optional": [null, 0, 0.125, -1e308, 1e308], '):
+            documents = {name: text.replace('{', '{' + extra, 1)
+                         for name, text in self.raw_documents().items()}
+            for optimized in (False, True):
+                with self.subTest(extra=bool(extra), optimized=optimized):
+                    result = self.run_cli(documents, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Handoff audit integrity OK', result.stdout)
+
+    def test_cli_rejects_duplicate_object_keys_in_every_input(self):
+        keys = {
+            'handoffs.json': ('market_issue', 'reviewer'),
+            'handoff-audit-readback.json': ('issues', 'reviewer'),
+            'audit.json': ('snapshot_cutoff_utc', 'total_rows')}
+        for name, duplicate_keys in keys.items():
+            for key in duplicate_keys:
+                for optimized in (False, True):
+                    with self.subTest(name=name, key=key, optimized=optimized):
+                        documents = self.raw_documents()
+                        marker = json.dumps(key) + ':'
+                        self.assertIn(marker, documents[name])
+                        documents[name] = documents[name].replace(
+                            marker, marker + ' null, ' + marker, 1)
+                        result = self.run_cli(documents, optimized)
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn('duplicate JSON object key', result.stderr)
+                        self.assertIn(name, result.stderr)
+                        self.assertNotIn('Handoff audit integrity OK', result.stdout)
+
+    def test_cli_rejects_nonfinite_and_overflow_numbers_in_every_input(self):
+        for name in self.raw_documents():
+            for value in ('NaN', 'Infinity', '-Infinity', '1e999', '-1e999'):
+                for optimized in (False, True):
+                    with self.subTest(name=name, value=value, optimized=optimized):
+                        documents = self.raw_documents()
+                        documents[name] = documents[name].replace(
+                            '{', '{"synthetic_extra": ' + value + ', ', 1)
+                        result = self.run_cli(documents, optimized)
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        expected = ('finite numeric range' if 'e999' in value
+                                    else 'non-finite JSON number')
+                        self.assertIn(expected, result.stderr)
+                        self.assertIn(name, result.stderr)
+                        self.assertNotIn('Handoff audit integrity OK', result.stdout)
+
+    def test_duplicate_snapshot_issue_cannot_hide_conflicting_assignees(self):
+        duplicate = deepcopy(self.readback['issues'][0])
+        duplicate['assignees'] = ['synthetic-other-owner']
+        self.readback['issues'].insert(0, duplicate)
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate snapshot issue'):
+            self.check()
+
+    def test_duplicate_historical_pair_cannot_hide_conflicting_review(self):
+        duplicate = deepcopy(self.readback['historical_owner_reviews'][0])
+        duplicate['owner_review']['reviewer'] = 'synthetic-other-owner'
+        self.readback['historical_owner_reviews'].insert(0, duplicate)
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate historical review pair'):
+            self.check()
+
+    def test_duplicate_declared_pair_cannot_disappear_from_coverage(self):
+        self.readback['declared_handoff_pairs'].append(
+            deepcopy(self.readback['declared_handoff_pairs'][0]))
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate declared handoff pair'):
+            self.check()
+
+    def test_duplicate_snapshot_pr_cannot_hide_conflicting_state(self):
+        self.readback['pull_requests'][0]['state'] = 'open'
+        duplicate = deepcopy(self.readback['pull_requests'][0])
+        duplicate['state'] = 'closed'
+        self.readback['pull_requests'].append(duplicate)
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate snapshot pull request'):
+            self.check()
 
     def test_missing_declared_consumer_is_rejected(self):
         pair = tuple(self.readback['declared_handoff_pairs'][0])

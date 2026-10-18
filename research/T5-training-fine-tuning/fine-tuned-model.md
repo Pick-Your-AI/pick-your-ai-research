@@ -29,7 +29,7 @@ Serving support matrices are owned by #11, and evaluation methodology by #36. Th
 | Type | `artifact_format` / `adapter_only` | Produced by | Needs at serving time | Evidence |
 | --- | --- | --- | --- | --- |
 | PEFT LoRA adapter | `safetensors` / `true` | TRL+PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NeMo; Together and Fireworks downloads (#30) | Exact base model (id + revision); engine with LoRA support; rank and target modules within engine limits | V1, V4, G2 |
-| Merged full weights | `safetensors` / `false` | PEFT `merge_and_unload()`, framework export commands (#30) | Any engine supporting the architecture; same VRAM as the base | V1, V11 |
+| Merged full weights | `safetensors` / `false` | PEFT `merge_and_unload()`, framework export commands (#30) | An engine supporting the resulting architecture, format and precision; memory requires the resulting tensor shapes, dtype and serving workload | V1, V11 |
 | GGUF (merged) | `gguf` / `false` | Axolotl, Unsloth natively; llama.cpp converters (#30 F34) | llama.cpp-family engines; vLLM support is experimental | V5, V6 |
 | GGUF LoRA adapter | `gguf` / `true` | llama.cpp `convert_lora_to_gguf.py` | llama.cpp with the matching base GGUF; **not** Ollama ≥0.34.1 | V5, V7 |
 | Provider-hosted | `api_only` / n/a | OpenAI, Vertex Gemini tuning, Bedrock customisation, Foundry (OpenAI models) | The provider's endpoint; lifecycle tied to the provider | V13–V17 |
@@ -113,7 +113,7 @@ These cover the CatalogItem envelope plus `spec_fine_tuned_model`. The issue's c
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Engine facts come from release-tagged sources.
+Entries accessed on 2026-10-16 unless a later re-check is recorded in the row. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Engine facts come from release-tagged sources.
 
 ### Serving (V)
 
@@ -128,7 +128,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | V7 | Ollama, https://github.com/ollama/ollama/blob/v0.40.5/server/create.go (lines 42, 107–108) ; `docs/import.mdx` | 2026-10-16 | v0.40.5; removal since v0.34.1 | Primary documentation | Re-checked directly |
 | V8 | NVIDIA, https://github.com/NVIDIA/TensorRT-LLM/blob/v1.2.1/docs/source/features/lora.md ; `docs/source/legacy/advanced/lora.md` | 2026-10-16 | v1.2.1 | Primary documentation | — |
 | V9 | Apple MLX, https://github.com/ml-explore/mlx-lm/blob/v0.32.2/mlx_lm/LORA.md ; `mlx_lm/SERVER.md` | 2026-10-16 | v0.32.2 | Primary documentation | — |
-| V11 | Hugging Face PEFT, https://github.com/huggingface/peft/blob/v0.21.2/src/peft/tuners/lora/bnb.py ; `docs/source/developer_guides/checkpoint.md`, `quantization.md`, `troubleshooting.md` | 2026-10-16 | v0.21.2 | Primary documentation | Warns: "Merge lora module to 4-bit linear may get different generations due to rounding errors"; AQLM merges impossible |
+| V11 | Hugging Face PEFT, https://github.com/huggingface/peft/blob/v0.21.2/src/peft/tuners/lora/bnb.py ; [checkpoint guide](https://github.com/huggingface/peft/blob/v0.21.2/docs/source/developer_guides/checkpoint.md), `quantization.md`, `troubleshooting.md` | 2026-10-16; checkpoint guide re-read 2026-10-18 | v0.21.2 | Primary documentation | Checkpoint guide: method/quantization-dependent merge support; merged base loses PEFT adapter management. Warns: "Merge lora module to 4-bit linear may get different generations due to rounding errors"; AQLM merges impossible |
 | V12 | Together AI, https://docs.together.ai/docs/lora-inference ; https://docs.together.ai/docs/dedicated-endpoints/adapter ; https://docs.together.ai/docs/custom-models | 2026-10-16 | — | Primary documentation | Serverless LoRA discontinued (re-checked directly) |
 | V13 | Fireworks AI, https://docs.fireworks.ai/fine-tuning/deploying-loras ; https://docs.fireworks.ai/models/uploading-custom-models | 2026-10-16 | — | Primary documentation | — |
 | V14 | Google Cloud, https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/open-model-tuning ; https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning | 2026-10-16 | updated 2026-10-15 | Primary documentation | Whether PEFT_ADAPTER output is merged is unknown |
@@ -157,7 +157,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | --- | --- | --- | --- | --- | --- |
 | Q1 | Qi et al., https://arxiv.org/abs/2310.03693 | 2026-10-16 | — | Independent measurement | GPT-3.5 Turbo and Llama-2-7b-Chat, 2023 |
 | Q2 | Biderman et al., LoRA Learns Less and Forgets Less, https://arxiv.org/abs/2405.09673 | 2026-10-16 | — | Independent measurement | Llama-2-7B; code and math domains |
-| Q3 | Microsoft, https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation | 2026-10-16 | ms.date 2026-07-31 | Primary documentation | Re-checked directly |
+| Q3 | Microsoft, https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation | 2026-10-18 | Updated 2026-07-31; preview guide | Primary documentation | Re-checked directly: separate data/model assessments; predefined thresholds and a modification-request route, not an account-specific exception |
 | Q4 | OpenAI, https://developers.openai.com/api/docs/guides/supervised-fine-tuning | 2026-10-16 | — | Primary documentation | Training-data moderation not described in current docs |
 | Q5 | Mazeika et al., HarmBench, https://arxiv.org/abs/2402.04249 ; MLCommons, https://mlcommons.org/ailuminate/ | 2026-10-16 | AILuminate Safety v1.0 | Independent measurement | — |
 | Q6 | EleutherAI, https://pypi.org/project/lm-eval/ | 2026-10-16 | 0.4.13 (2026-08-31), MIT | Primary documentation | — |
@@ -206,13 +206,13 @@ Not priced here:
   - dedicated-endpoint hours for adapters on Together and Fireworks (V12, V13);
   - hosting hours on Foundry (#31 P5);
   - storage and Provisioned Throughput on Bedrock (#31 P4).
-- **VRAM:** a merged model needs the same VRAM as its base. An adapter adds roughly 2·N_lora bytes per loaded adapter (#31). Sizing belongs to #10, aggregation to #39.
+- **Memory scope:** for unchanged tensor shapes and storage dtype, folding a supported adapter into base weights does not add a separately loaded adapter payload. This is a conditional storage inference, not equal total VRAM: changed vocabulary/shapes, precision, quantization metadata, KV/cache settings and engine overhead require the resulting artifact/workload to be sized by #10. The approximate 2·N_lora-byte adapter term (#31) assumes two-byte adapter elements and describes that payload only, not total runtime memory. Aggregation belongs to #39.
 
 ## Recommendation and rationale
 
-1. **Keep both an adapter and a merged checkpoint**, pinned to the base's full commit SHA.
+1. **Keep the adapter and, where supported, a merged checkpoint**, pinned to the base's full commit SHA.
    - Adapters are small and portable across vLLM, SGLang, TensorRT-LLM, Together and Fireworks.
-   - Merged weights are the only form that works everywhere: Ollama, adapters with added tokens, DoRA, TGI, Bedrock import.
+   - A supported merge can remove the need for dynamic adapter support, but it is not a universal serving format. Check the resulting architecture, tokenizer, precision and engine/provider import requirements; GGUF conversion or another target-specific export may still be required. PEFT documents methods/settings that cannot merge and loss of adapter-management functions after `merge_and_unload()` (V11). No serving tuple is qualified by this recommendation alone.
 2. **Merge into the 16-bit base, then quantise.** PEFT warns that merging into 4- or 8-bit weights changes generations (V11).
 3. **Avoid adding tokens** unless required. Added tokens block adapter serving on most engines and providers (A-03).
 4. **Prefer portable managed paths** (Vertex open models, Together, Fireworks) unless lock-in is acceptable. Show the lifecycle risk for OpenAI and Foundry fine-tunes (A-12, A-13).
@@ -224,7 +224,7 @@ Not priced here:
    - optionally an OpenSSF model-signing bundle.
 6. **Gate deployment on #36's evaluation set.** Minimum proposal:
    - **Safety and refusal regression against the base** on the same suite. Fine-tuning on 10 adversarial examples took GPT-3.5 Turbo's harmfulness rate from 1.8% to 88.8%, and benign Alpaca fine-tuning took it from 5.5% to 31.8% (Q1).
-   - **A training-data harm screen before training.** Microsoft Foundry fails jobs on harmful training data and blocks deployment above fixed thresholds that "can't be modified by customers" (Q3).
+   - **Separate pre-training data and post-training model assessments.** The Foundry preview guide describes a data screen that fails a job when detected harmful content exceeds its severity threshold, followed by a separate model evaluation before deployment. Its predefined evaluation thresholds are not customer-configurable or tied to a custom content-filter configuration, but the guide also provides a request route for modified fine-tuning safety thresholds (Q3; re-read 2026-10-18). That route establishes neither approval nor eligibility for a particular account. This aligns with the [#36 safety-screen supplement](../T6-deployment-operations/evaluation.md#foundry-training-data-harm-screen); provider checks do not establish the proposed builder evaluation gate or receiving-owner acceptance.
    - **Capability retention against the base** on general benchmarks, because both LoRA and full fine-tuning forget (Q2).
    - **Target-task gain over the base** (Q4).
    - **Provenance and licence integrity checks** (A-15 to A-19).

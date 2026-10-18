@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "storage",
+  "tier": "T2",
+  "status": "active",
+  "billing_class": "unknown",
+  "id": "postgresql",
+  "name": "PostgreSQL database software",
+  "version": "18.6",
+  "description": "Pinned PostgreSQL software identity for relational storage. Host, region, capacity, encryption configuration, application compatibility and operating costs require separate selection evidence.",
+  "spec": {
+    "storage_type": "relational"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/README.md",
+      "checked_at": "2026-10-18T06:04:43Z",
+      "verification_status": "unverified",
+      "notes": "The pinned publisher README identifies an object-relational database management system. This supports storage_type=relational for the software identity only; no database instance, hosting service, data permissions or measured operation is implied."
+    },
+    {
+      "source_uri": "https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/configure.ac",
+      "checked_at": "2026-10-18T06:04:43Z",
+      "verification_status": "unverified",
+      "notes": "AC_INIT identifies PostgreSQL 18.6. Release tag REL_18_6 resolved to this commit when checked. The released-version identity does not establish the installed patch level, a support guarantee or a successful application/backend tuple."
+    },
+    {
+      "source_uri": "https://github.com/postgres/postgres/blob/724edf9bde9d356724ad384a2e196edc3c9f80f7/COPYRIGHT",
+      "checked_at": "2026-10-18T06:04:43Z",
+      "verification_status": "unverified",
+      "notes": "Publisher software/documentation permission is subject to preserving copyright, permission and disclaimer notices. No hosting, operations, backup or support rate is supplied; billing_class remains unknown for a selected storage deployment. Data rights and deployment permission are separate."
+    }
+  ],
+  "updated_at": "2026-10-18T06:04:43Z"
+}

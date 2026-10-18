@@ -8,7 +8,9 @@ GitHub Assignees are authoritative. Every live receiving coassignee is retained.
 
 101 rows cover all 98 distinct cross-project pairs explicitly declared in the #48–#66 issue Relationships sections: 86 preserved rows plus 15 formerly missing validation pairs. The three supplemental #62 to #39/#40/#41 rows already merged through #83 are retained alongside the 98 declared pairs. The [JSON ledger](handoffs.json) preserves all 28 historical owner_review objects and adds 22 dated response records.
 
-Row counts: 44 have a historical or scoped receiving response; 2 have author integration only; 55 have no scoped receiving response recorded. These categories describe response coverage, not completed acceptance. All 19 current #59 artifact handoffs still require review of this refresh.
+At the snapshot cutoff, 44 rows have a historical or scoped receiving response; 2 have author integration only; 55 have no scoped receiving response recorded. These categories describe response coverage, not completed acceptance. All 19 current #59 artifact handoffs still require review of this refresh.
+
+After that cutoff, [independent delegated integration review 5561243681](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681) accepted the three #64 receiving scopes at `c08484c`. Those current dispositions are recorded separately in `post_snapshot_reviews` and below. The 101 pairs, all historical owner reviews, the 22 cutoff response records and their `receiving_review_status` counts are preserved. The cutoff integrity validator does not certify these later delegated decisions or attribute them to the listed assignees.
 
 The #49 → #33 information-only row covers #30/#31/#32 while their scope remains Unknown, as the [T5 owner reaffirmed](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818). No extra T5 consumer rows are invented. #59 → #33 remains accepted as synthesis context; current audit acceptance is separate. The [#60 → #27 MCP rights receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6244042769) is contextual and is not transferred onto a #55 handoff.
 
@@ -106,9 +108,9 @@ The #49 → #33 information-only row covers #30/#31/#32 while their scope remain
 | #63 → #2 | appletechie, tynamite | [customer-validation.md](customer-validation.md) | Not yet confirmed |
 | #63 → #3 | appletechie, tynamite | [customer-validation.md](customer-validation.md) | Not yet confirmed |
 | #63 → #39 | PUSHINGSQUARES, appletechie | [customer-validation.md](customer-validation.md) | Not yet confirmed |
-| #64 → #9 | Mattycodes69, appletechie | [pricing-validation.md](pricing-validation.md) | Not yet confirmed |
-| #64 → #39 | PUSHINGSQUARES, appletechie | [pricing-validation.md](pricing-validation.md) | Not yet confirmed |
-| #64 → #41 | PUSHINGSQUARES, tynamite | [pricing-validation.md](pricing-validation.md) | Not yet confirmed |
+| #64 → #9 | Mattycodes69, appletechie | [pricing-validation.md](pricing-validation.md) | Consuming-owner acceptance pending; scope accepted with constraints by [delegated integration review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681); [exact scope](pricing-validation.md#scoped-receiving-package), `c08484c` |
+| #64 → #39 | PUSHINGSQUARES, appletechie | [pricing-validation.md](pricing-validation.md) | Consuming-owner acceptance pending; scope accepted with constraints by [delegated integration review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681); [exact scope](pricing-validation.md#scoped-receiving-package), `c08484c` |
+| #64 → #41 | PUSHINGSQUARES, tynamite | [pricing-validation.md](pricing-validation.md) | Consuming-owner acceptance pending; scope accepted with constraints by [delegated integration review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681); [exact scope](pricing-validation.md#scoped-receiving-package), `c08484c` |
 | #65 → #14 | PUSHINGSQUARES, zabyxc01 | [rag-validation.md](rag-validation.md) | Not yet confirmed |
 | #65 → #15 | appletechie, zabyxc01 | [rag-validation.md](rag-validation.md) | Not yet confirmed |
 | #65 → #16 | appletechie, zabyxc01 | [rag-validation.md](rag-validation.md) | Not yet confirmed |

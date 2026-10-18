@@ -1,0 +1,9 @@
+{
+  "classification": "task artifact cleanup receipt",
+  "checked_utc": "2026-10-18T06:13:45.6785262Z",
+  "scope": "Only task-created GGUF, estimator binary and source inspection files; no existing packages, runtime, workloads or unrelated artifacts removed",
+  "target_exists": false,
+  "removed_bytes": 281697171.0,
+  "removed_files": 20,
+  "target": "$TASK_TEMP/mr09-total-setup-20261018"
+}

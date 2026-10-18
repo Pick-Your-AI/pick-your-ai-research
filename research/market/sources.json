@@ -13,7 +13,55 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned public pages; selector states bench-align-v5.8-2026-09-30 and scores updated 2026-10-17; terms last updated 2026-10-02.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://benchlm.ai/",
+            "publisher": "BenchLM",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://benchlm.ai/terms",
+            "publisher": "BenchLM",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://benchlm.ai/tools/llm-selector",
+            "publisher": "BenchLM",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://benchlm.ai/stack",
+            "publisher": "BenchLM",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Selector documents job descriptions, editable budget/context/local-deployment constraints, reasons for exclusions, shareable answer URLs and /api/tools/recommend.",
+            "evidence_class": "Vendor claim",
+            "url": "https://benchlm.ai/tools/llm-selector",
+            "publisher": "BenchLM"
+          },
+          {
+            "claim": "Terms name no legal operator. Website data is CC BY-NC 4.0; commercial compiled-feed display/republication requires separate agreement. Upstream licences remain separate.",
+            "evidence_class": "Primary documentation",
+            "url": "https://benchlm.ai/terms",
+            "publisher": "BenchLM"
+          }
+        ],
+        "rights": "Read/link/attributed quotation permitted. Website dataset CC BY-NC 4.0; dedicated Data access has separate terms; no commercial integration cleared.",
+        "limitations": "Static documentation read only; no selector submitted, API account, accuracy reproduction, compatibility validation or market-share inference.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-harness-bench",
@@ -29,7 +77,51 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned site and repository default branch, accessed 2026-10-18; no commit pinned in this pass.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://www.harness-bench.ai/",
+            "publisher": "Harness Bench Team",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/Qihoo360/harness-bench",
+            "publisher": "Qihoo360 repository maintainers",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Site links to Qihoo360/harness-bench and attributes the work to Harness Bench Team.",
+            "evidence_class": "Primary documentation",
+            "url": "https://www.harness-bench.ai/",
+            "publisher": "Harness Bench Team"
+          },
+          {
+            "claim": "Linked repository README describes isolated tasks and final-artifact scoring; no benchmark run performed.",
+            "evidence_class": "Primary documentation",
+            "url": "https://github.com/Qihoo360/harness-bench",
+            "publisher": "Qihoo360 repository maintainers"
+          },
+          {
+            "claim": "Benchmark outcome comparisons are the publisher's findings; this pass did not reproduce them.",
+            "evidence_class": "Vendor claim",
+            "url": "https://www.harness-bench.ai/",
+            "publisher": "Harness Bench Team"
+          }
+        ],
+        "rights": "Site footer reserves rights; no repository licence text established in this pass. A missing licence indicator is not reuse permission.",
+        "limitations": "No benchmark run; current paper not reread, so preserve historical suite-size discrepancy as earlier finding and avoid new numeric claims.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-llmfit",
@@ -45,7 +137,72 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unpinned main README/CNAME/LICENSE and unversioned sites accessed 2026-10-18. CNAME tool result was cached from five months earlier; no fresh repository-wide absence search claimed.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://www.llmfit.org/",
+            "publisher": "llmfit.org; operator unverified",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/AlexsJones/llmfit",
+            "publisher": "AlexsJones maintainers",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/AlexsJones/llmfit/main/CNAME",
+            "publisher": "AlexsJones maintainers",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/AlexsJones/llmfit/main/LICENSE",
+            "publisher": "Alex Jones",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://llmfit.axjns.dev/",
+            "publisher": "AlexsJones upstream site",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Seed site links to the AlexsJones repository; this is not reciprocal confirmation of seed-domain ownership.",
+            "evidence_class": "Primary documentation",
+            "url": "https://www.llmfit.org/",
+            "publisher": "llmfit.org; operator unverified"
+          },
+          {
+            "claim": "Upstream CNAME states llmfit.axjns.dev; retrieved text may be cached and establishes no llmfit.org affiliation.",
+            "evidence_class": "Primary documentation",
+            "url": "https://raw.githubusercontent.com/AlexsJones/llmfit/main/CNAME",
+            "publisher": "AlexsJones maintainers"
+          },
+          {
+            "claim": "The upstream site links to GitHub; no affiliation to llmfit.org was established in this pass.",
+            "evidence_class": "Primary documentation",
+            "url": "https://llmfit.axjns.dev/",
+            "publisher": "AlexsJones upstream site"
+          },
+          {
+            "claim": "Upstream README documents hardware detection, quantization, REST API, dashboard and a benchmark/share workflow whose local results can be submitted as PRs and shipped in releases.",
+            "evidence_class": "Vendor claim",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "publisher": "AlexsJones maintainers"
+          }
+        ],
+        "rights": "Upstream licence is MIT, copyright Alex Jones; retain notices. Seed site reserves rights; upstream code licence does not clear seed website or model/benchmark metadata rights.",
+        "limitations": "Not installed/run; fit and community-result quality untested; default-branch documents mutable.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-local-ai-planner",
@@ -58,7 +215,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned planner/about pages accessed 2026-10-18.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+            "publisher": "Logarithmic Spirals",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://logarithmicspirals.com/about/",
+            "publisher": "Logarithmic Spirals author",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Page documents hardware, primary goal, runtime, quantization, context, KV-cache and target-speed controls; recommendations are planning heuristics, including fallback scores.",
+            "evidence_class": "Vendor claim",
+            "url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+            "publisher": "Logarithmic Spirals"
+          },
+          {
+            "claim": "About page describes an individual software-engineer author without a name.",
+            "evidence_class": "Primary documentation",
+            "url": "https://logarithmicspirals.com/about/",
+            "publisher": "Logarithmic Spirals author"
+          }
+        ],
+        "rights": "Public access only; no source/dataset redistribution licence established. Page cites upstream GPU, model and benchmark sources that require separate rights review.",
+        "limitations": "Static text/controls inspected; no submitted custom model, numeric reproduction or executable export; multiplying identical GPU capacity does not verify runtime topology.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-flocci",
@@ -74,7 +269,56 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned Ask/Stack/home pages accessed 2026-10-18; static tool count is mutable and excluded from findings.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://aitools.flocci.in/ask",
+            "publisher": "Flocci Technologies",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://aitools.flocci.in/stack",
+            "publisher": "Flocci Technologies",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://aitools.flocci.in/",
+            "publisher": "Flocci Technologies",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Ask page invites job descriptions; no input submitted in this pass.",
+            "evidence_class": "Vendor claim",
+            "url": "https://aitools.flocci.in/ask",
+            "publisher": "Flocci Technologies"
+          },
+          {
+            "claim": "Stack page advertises an ordered workflow of tools; not a freshly exercised result.",
+            "evidence_class": "Vendor claim",
+            "url": "https://aitools.flocci.in/stack",
+            "publisher": "Flocci Technologies"
+          },
+          {
+            "claim": "Homepage names Flocci Technologies as builder and distinguishes free browsing from credit-priced assistant use.",
+            "evidence_class": "Primary documentation",
+            "url": "https://aitools.flocci.in/",
+            "publisher": "Flocci Technologies"
+          }
+        ],
+        "rights": "No code or dataset reuse permission established; hosted access/credit pricing is not a content licence.",
+        "limitations": "No prompt submitted in this pass; historical 2026-10-16 generated workflow must retain original date; no compatibility, export or deployment verified.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-artificial-analysis",
@@ -90,7 +334,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned API reference/about pages accessed 2026-10-18; example API v2 paths documented, not called.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://artificialanalysis.ai/api-reference",
+            "publisher": "Artificial Analysis",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://artificialanalysis.ai/about",
+            "publisher": "Artificial Analysis",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "API reference documents model evaluation, pricing, output-speed and first-token fields; access requires an account/key, visible attribution and applicable terms.",
+            "evidence_class": "Primary documentation",
+            "url": "https://artificialanalysis.ai/api-reference",
+            "publisher": "Artificial Analysis"
+          },
+          {
+            "claim": "Publisher's statements that measurements are independent remain its claims; no conditions or measurements reproduced in this pass.",
+            "evidence_class": "Vendor claim",
+            "url": "https://artificialanalysis.ai/api-reference",
+            "publisher": "Artificial Analysis"
+          }
+        ],
+        "rights": "Free keyed API subject to Terms of Use and Data Platform Terms; attribution required; commercial API separate. No blanket redistribution clearance.",
+        "limitations": "No account/key/API request, benchmark or paid access; endpoint availability and terms completeness not tested.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-openrouter",
@@ -106,7 +388,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned Models documentation accessed 2026-10-18; terms updated 2026-08-31.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://openrouter.ai/docs/guides/overview/models",
+            "publisher": "OpenRouter",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://openrouter.ai/terms",
+            "publisher": "OpenRouter, Inc.",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Docs specify Models API modality/parameter filters, canonical identifiers and provider metadata; default response is text output only.",
+            "evidence_class": "Primary documentation",
+            "url": "https://openrouter.ai/docs/guides/overview/models",
+            "publisher": "OpenRouter"
+          },
+          {
+            "claim": "Terms name OpenRouter, Inc.; §7 restricts automated scraping/copying and access for developing a competing service.",
+            "evidence_class": "Primary documentation",
+            "url": "https://openrouter.ai/terms",
+            "publisher": "OpenRouter, Inc."
+          }
+        ],
+        "rights": "Public metadata documentation does not itself grant unrestricted reuse. Explicit terms restrictions require #41 disposition before product ingestion.",
+        "limitations": "No account, inference request, API call, resale, scraping workflow or regional routing verification.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-hugging-face",
@@ -122,7 +442,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned Hub docs accessed 2026-10-18; terms page states effective 2022-09-15 (mutable current page).",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://huggingface.co/docs/hub/model-cards",
+            "publisher": "Hugging Face",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://huggingface.co/terms-of-service",
+            "publisher": "Hugging Face, Inc.",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Model cards support task/library/licence filters, base-model relations, new-version metadata and evaluation-source metadata.",
+            "evidence_class": "Primary documentation",
+            "url": "https://huggingface.co/docs/hub/model-cards",
+            "publisher": "Hugging Face"
+          },
+          {
+            "claim": "Terms identify Hugging Face, Inc. and preserve accompanying content licences; public Hub access does not make model/code/data licences uniform.",
+            "evidence_class": "Primary documentation",
+            "url": "https://huggingface.co/terms-of-service",
+            "publisher": "Hugging Face, Inc."
+          }
+        ],
+        "rights": "Inspect each repository/content licence and terms; model-card metadata is supplied by publishers and may be incomplete. No universal model/metadata redistribution clearance.",
+        "limitations": "No repository model downloaded or run; did not audit Hub API here, so existing API Unknown can remain.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-arena",
@@ -137,7 +495,44 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned home/leaderboard/terms pages accessed 2026-10-18.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://arena.ai/",
+            "publisher": "Arena",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://arena.ai/leaderboard",
+            "publisher": "Arena Intelligence",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://arena.ai/terms-of-use",
+            "publisher": "Arena",
+            "access_status": "retrieved; redirected to help.arena.ai/articles/5629909088-terms-of-use"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Official leaderboard exposes multiple task/model ranking categories and side-by-side comparison navigation; page attributes ranking inputs to users.",
+            "evidence_class": "Primary documentation",
+            "url": "https://arena.ai/leaderboard",
+            "publisher": "Arena Intelligence"
+          }
+        ],
+        "rights": "No dataset redistribution licence established; terms read as a source but not fully audited for ingestion.",
+        "limitations": "No model prompt/vote/workflow submitted; home page is an app-building entry point and alone is inadequate evidence for leaderboard scope. Scores and sampling not independently reviewed.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-llm-stats",
@@ -150,7 +545,50 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned home/about pages accessed 2026-10-18; terms last updated 2026-10-08.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://llm-stats.com/",
+            "publisher": "llm-stats",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://llm-stats.com/about-us",
+            "publisher": "llm-stats",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://llm-stats.com/legal/terms-of-service",
+            "publisher": "llm-stats",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Homepage presents comparison/benchmark/price navigation and API/MCP service links; these do not prove API behavior.",
+            "evidence_class": "Primary documentation",
+            "url": "https://llm-stats.com/",
+            "publisher": "llm-stats"
+          },
+          {
+            "claim": "Terms permit copy, modify, share and commercial republication of their materials with visible linked attribution.",
+            "evidence_class": "Primary documentation",
+            "url": "https://llm-stats.com/legal/terms-of-service",
+            "publisher": "llm-stats"
+          }
+        ],
+        "rights": "Publisher expressly permits reuse with attribution; upstream data ownership and attribution chain remain for #41 review. Legal operator still unknown.",
+        "limitations": "No API, model call or independent score/usage validation; about-page audience/customer figures are vendor claims and excluded.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-models-dev",
@@ -166,7 +604,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unpinned dev README and unversioned website accessed 2026-10-18; no exact commit in this pass.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://models.dev/",
+            "publisher": "Models.dev / anomalyco",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/anomalyco/models.dev",
+            "publisher": "anomalyco maintainers",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "README documents provider api.json, model-only models.json and combined catalog.json plus canonical_model_id, with specialised types excluded by default.",
+            "evidence_class": "Primary documentation",
+            "url": "https://github.com/anomalyco/models.dev",
+            "publisher": "anomalyco maintainers"
+          },
+          {
+            "claim": "GitHub displays MIT licence; repository states it is community contributed and used by OpenCode.",
+            "evidence_class": "Primary documentation",
+            "url": "https://github.com/anomalyco/models.dev",
+            "publisher": "anomalyco maintainers"
+          }
+        ],
+        "rights": "Repository displays MIT; exact pinned licence and scope, provider metadata provenance and trademark/logo treatment need #41 review.",
+        "limitations": "No endpoint payload downloaded, pricing validated or schema integrated; provider overrides can differ from model-only metadata.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-canrun",
@@ -179,7 +655,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned home/about accessed 2026-10-18; about page states data updated 2026-10-16 (the separate privacy-policy date remains 2026-10-06).",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://canrunllm.com/",
+            "publisher": "CanRun; operator unverified",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://canrunllm.com/about",
+            "publisher": "CanRun; operator unverified",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "About page documents fit verdicts, weights/KV/buffer breakdown, estimated speed ranges and llama.cpp/Ollama commands selected for context length.",
+            "evidence_class": "Primary documentation",
+            "url": "https://canrunllm.com/about",
+            "publisher": "CanRun; operator unverified"
+          },
+          {
+            "claim": "Homepage calibration/error-band statements are publisher claims, not independent measurements in this audit.",
+            "evidence_class": "Vendor claim",
+            "url": "https://canrunllm.com/",
+            "publisher": "CanRun; operator unverified"
+          }
+        ],
+        "rights": "No source/dataset reuse licence established; cited manufacturer/Hub/benchmark provenance does not automatically clear reuse.",
+        "limitations": "No calculator submitted or command run; no operator established; separate product from canitrun.dev and canirun.ai.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-canitrun",
@@ -192,7 +706,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned home/about pages accessed 2026-10-18.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://canitrun.dev/",
+            "publisher": "CanItRun; operator unverified",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://canitrun.dev/about/",
+            "publisher": "CanItRun; operator unverified",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Methodology documents weights/KV/overhead estimates, explicit offload/multi-GPU assumptions, inference-only batch-one scope and source links.",
+            "evidence_class": "Primary documentation",
+            "url": "https://canitrun.dev/about/",
+            "publisher": "CanItRun; operator unverified"
+          },
+          {
+            "claim": "Fit/speed verdicts and accuracy are publisher estimates; no independent measurements reproduced.",
+            "evidence_class": "Vendor claim",
+            "url": "https://canitrun.dev/about/",
+            "publisher": "CanItRun; operator unverified"
+          }
+        ],
+        "rights": "Calls itself open/free but no licence grant inspected; data/source reuse remains unknown.",
+        "limitations": "No workflow exercised; operator unconfirmed; multi-GPU layer-split assumptions are runtime-specific, not universal fit rules; distinct from CanRun and CanIRun.ai.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-modelfit",
@@ -208,7 +760,61 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned public pages accessed 2026-10-18; terms page shows last updated 2026-10-01 on review (an earlier cached extraction returned 2026-06-21); homepage dataset stamp 2026-10-13.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://modelfit.io/",
+            "publisher": "ModelFit",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://modelfit.io/about/",
+            "publisher": "ModelFit / Peter Dekker",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://modelfit.io/terms/",
+            "publisher": "ModelFit",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://modelfit.io/data/",
+            "publisher": "ModelFit",
+            "access_status": "retrieved on linked retry; first direct open returned tool accessibility error"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "About page names Peter Dekker as founder/maintainer.",
+            "evidence_class": "Primary documentation",
+            "url": "https://modelfit.io/about/",
+            "publisher": "ModelFit / Peter Dekker"
+          },
+          {
+            "claim": "Homepage documents device/setup/results, a CLI run command and JSON/MCP access; not exercised.",
+            "evidence_class": "Primary documentation",
+            "url": "https://modelfit.io/",
+            "publisher": "ModelFit"
+          },
+          {
+            "claim": "Terms distinguish estimated recommendations/speed from measured benchmarks and license compatibility dataset CC BY 4.0, CLI separately MIT.",
+            "evidence_class": "Primary documentation",
+            "url": "https://modelfit.io/terms/",
+            "publisher": "ModelFit"
+          }
+        ],
+        "rights": "Explicit dataset CC BY 4.0 and separate MIT CLI statement; third-party cited benchmark rights remain separate. No ingestion cleared by this audit.",
+        "limitations": "No CLI/MCP/API/workflow run; full-stack selection not established; immutable version not pinned.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-ollama",
@@ -223,7 +829,39 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned library/API introduction accessed 2026-10-18; API docs state API is not strictly versioned.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://ollama.com/library",
+            "publisher": "Ollama",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.ollama.com/api/introduction",
+            "publisher": "Ollama",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "API introduction documents local and cloud base URLs, OpenAI/Anthropic compatibility, official Python/JavaScript libraries and separate cloud authentication.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.ollama.com/api/introduction",
+            "publisher": "Ollama"
+          }
+        ],
+        "rights": "No repository licence reread; model licences are separate from runtime/service rights. Public library access does not clear model/data redistribution.",
+        "limitations": "No installation, model download, account or API call; no fitness/performance claims independently measured.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-gpus-io",
@@ -236,7 +874,88 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned home accessed 2026-10-18 redirects /en; privacy last updated 2026-01-27, cached by web tool seven months earlier.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://gpus.io/",
+            "publisher": "GPUs.io",
+            "access_status": "retrieved; redirect https://gpus.io/en"
+          },
+          {
+            "url": "https://gpus.io/privacy",
+            "publisher": "GPUs.io",
+            "access_status": "retrieved; redirect https://gpus.io/en/privacy"
+          },
+          {
+            "url": "https://gpus.io/about",
+            "publisher": "GPUs.io",
+            "access_status": "failed: cache miss"
+          },
+          {
+            "url": "https://gpus.io/terms",
+            "publisher": "GPUs.io",
+            "access_status": "failed: inaccessible via tool"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Fresh web-tool static home contains comparison filters and model-to-GPU links; price table remains Loading data in retrieved text.",
+            "evidence_class": "Observed behavior",
+            "url": "https://gpus.io/",
+            "publisher": "GPUs.io"
+          },
+          {
+            "claim": "Privacy page describes price-comparison service without naming a legal operator.",
+            "evidence_class": "Primary documentation",
+            "url": "https://gpus.io/privacy",
+            "publisher": "GPUs.io"
+          }
+        ],
+        "rights": "No data reuse permission established; terms not accessible.",
+        "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_scope": "current-main integration correction",
+        "access_date": "2026-10-18",
+        "access_status": "public primary terms retrieved; earlier /terms retrieval failure retained separately",
+        "version": "Terms last updated 2026-06-05; /en/terms read 2026-10-18. Original home/privacy retrieval details remain in the preceding recheck.",
+        "region": "Public service terms; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for publisher documentation; independent ownership and intended-use acceptance remain unresolved",
+        "reviewed_urls": [
+          {
+            "url": "https://gpus.io/en/terms",
+            "publisher": "GPUs.io / Peak Technologies, Inc. (publisher attribution)",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Publisher terms name Peak Technologies, Inc. as the website/API operator and document paid API access.",
+            "evidence_class": "Primary documentation",
+            "url": "https://gpus.io/en/terms",
+            "publisher": "GPUs.io / Peak Technologies, Inc. (publisher attribution)"
+          },
+          {
+            "claim": "Sections 5–7 keep competition, redistribution and attribution constraints separate from paid API access. A subscription is not blanket permission.",
+            "evidence_class": "Primary documentation",
+            "url": "https://gpus.io/en/terms",
+            "publisher": "GPUs.io / Peak Technologies, Inc. (publisher attribution)"
+          }
+        ],
+        "operator_statement": "Peak Technologies, Inc., as named by the publisher terms; corporate identity and ownership not independently verified.",
+        "rights": "Apply the source/material/use assessment and proposed current-product exclusion in research/market/rights-validation.md; intended-use acceptance remains pending #60/#41/#39.",
+        "limitations": "Documentary correction only. No API call, data ingestion, rate verification or independent legal-entity check. Prior failed requests remain in the preceding recheck.",
+        "method": "Read-only public terms extraction and reconciliation with merged research; source claims are publisher documentation."
+      }
+    ]
   },
   {
     "id": "src-vast",
@@ -249,7 +968,45 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public desk retrieval; see per-URL results",
+        "version": "Unversioned home/docs accessed 2026-10-18; old instance-search path redirects to current find-and-rent guide.",
+        "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for documented identity/scope; unverified where stated",
+        "reviewed_urls": [
+          {
+            "url": "https://vast.ai/",
+            "publisher": "Vast.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.vast.ai/documentation/instances/search",
+            "publisher": "Vast.ai",
+            "access_status": "retrieved; redirect https://docs.vast.ai/guides/instances/choosing/find-and-rent"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Find-and-rent guide documents location/GPU/spec/rental filters, host offer terms, GPU/storage/bandwidth charge distinctions and machine verification tiers.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.vast.ai/guides/instances/choosing/find-and-rent",
+            "publisher": "Vast.ai publisher; exact legal entity not established in read pages"
+          },
+          {
+            "claim": "Homepage advertises CLI, Python SDK and REST API programmatic search/provisioning; no provisioning performed.",
+            "evidence_class": "Vendor claim",
+            "url": "https://vast.ai/",
+            "publisher": "Vast.ai"
+          }
+        ],
+        "rights": "No licence for price-feed reuse established; public rental offers and API advertising are not redistribution permission.",
+        "limitations": "No account, API key, credit purchase, rental or live price verification; capacity/performance claims excluded.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-runpod",
@@ -264,7 +1021,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned docs; overview last modified 2026-09-25; terms updated 2026-03-24",
+        "region": "Global documentation; resources and billing vary by selected region/product; no rate quote",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.runpod.io/overview",
+            "publisher": "Runpod",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://www.runpod.io/legal/terms-of-service",
+            "publisher": "Runpod",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "GPU/CPU cloud infrastructure; Pods, Serverless, Public Endpoints and clusters are distinct offerings.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.runpod.io/overview",
+            "publisher": "Runpod"
+          },
+          {
+            "claim": "Primary documentation: SDK and API surfaces, including API-key access to pre-deployed Public Endpoints. No endpoint called.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.runpod.io/overview",
+              "https://www.runpod.io/legal/terms-of-service"
+            ],
+            "publisher": "Runpod"
+          },
+          {
+            "claim": "Commercial service terms apply; no data republication or price-feed reuse permission established.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.runpod.io/overview",
+              "https://www.runpod.io/legal/terms-of-service"
+            ],
+            "publisher": "Runpod"
+          }
+        ],
+        "operator_statement": "Runpod, Inc. explicitly named in terms",
+        "rights": "Commercial service terms apply; no data republication or price-feed reuse permission established.",
+        "limitations": "No capacity, performance, API reliability or cost result verified.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-dify",
@@ -281,7 +1089,65 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned home; app-management modified 2026-07-29, describes DSL v0.6+; LICENSE main unpinned",
+        "region": "Global documentation; no regional price or residency verification",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.dify.ai/en/home",
+            "publisher": "Dify / LangGenius",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.dify.ai/en/cloud/use-dify/workspace/app-management",
+            "publisher": "Dify / LangGenius",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE",
+            "publisher": "Dify / LangGenius",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "AI application/agent and knowledge workflow platform; hosted cloud and source Community Edition are separate surfaces.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.dify.ai/en/home",
+            "publisher": "Dify / LangGenius"
+          },
+          {
+            "claim": "Primary documentation: REST integration, plugins and difyctl. DSL export includes orchestration, parameters and knowledge-base connections; actual knowledge-base content and third-party tool API keys are excluded. Secret-type environment variables may be included after user confirmation, so a DSL export is not necessarily free of secrets. Not exercised.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.dify.ai/en/home",
+              "https://docs.dify.ai/en/cloud/use-dify/workspace/app-management",
+              "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
+            ],
+            "publisher": "Dify / LangGenius"
+          },
+          {
+            "claim": "Modified Apache-2.0 with multi-tenant and frontend branding restrictions; not a blanket Apache license. Dataset and model rights separate.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.dify.ai/en/home",
+              "https://docs.dify.ai/en/cloud/use-dify/workspace/app-management",
+              "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
+            ],
+            "publisher": "Dify / LangGenius"
+          }
+        ],
+        "operator_statement": "LangGenius, Inc. is named in source copyright",
+        "rights": "Modified Apache-2.0 with multi-tenant and frontend branding restrictions; not a blanket Apache license. Dataset and model rights separate.",
+        "limitations": "Export roundtrip and component compatibility untested; docs make broad version-compatibility statements requiring falsification.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-langflow",
@@ -294,7 +1160,65 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Documentation displays 1.12.x; main LICENSE unpinned",
+        "region": "Global documentation; no regional service or price claim",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.langflow.org/",
+            "publisher": "Langflow maintainers",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.langflow.org/concepts-flows-import",
+            "publisher": "Langflow maintainers",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/langflow-ai/langflow/main/LICENSE",
+            "publisher": "Langflow maintainers",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Python framework and visual component/flow editor for AI applications, agents and MCP.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.langflow.org/",
+            "publisher": "Langflow maintainers"
+          },
+          {
+            "claim": "Primary documentation: API execution and import/export endpoints; flow JSON contains nodes, edges and metadata, project downloads use ZIP.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.langflow.org/",
+              "https://docs.langflow.org/concepts-flows-import",
+              "https://raw.githubusercontent.com/langflow-ai/langflow/main/LICENSE"
+            ],
+            "publisher": "Langflow maintainers"
+          },
+          {
+            "claim": "Root source LICENSE reads MIT with notice condition; this does not establish rights in model/data/provider content or separate hosting products.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.langflow.org/",
+              "https://docs.langflow.org/concepts-flows-import",
+              "https://raw.githubusercontent.com/langflow-ai/langflow/main/LICENSE"
+            ],
+            "publisher": "Langflow maintainers"
+          }
+        ],
+        "operator_statement": "Langflow project established; legal site operator not established by reviewed pages",
+        "rights": "Root source LICENSE reads MIT with notice condition; this does not establish rights in model/data/provider content or separate hosting products.",
+        "limitations": "API, portability, imports, compatibility and runtime behavior untested; export may include secrets depending on settings.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-flowise",
@@ -307,7 +1231,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned docs; Agentflow V2 named; source main LICENSE unpinned",
+        "region": "Global documentation; no regional quote",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.flowiseai.com/",
+            "publisher": "Flowise",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/FlowiseAI/Flowise/main/LICENSE.md",
+            "publisher": "Flowise",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Visual generative-AI development platform with Assistant, Chatflow and Agentflow builders.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.flowiseai.com/",
+            "publisher": "Flowise"
+          },
+          {
+            "claim": "Primary documentation lists API, JS/Python SDK, CLI, embedded chatbot and MCP client/server support; reusable components/templates advertised.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.flowiseai.com/",
+              "https://raw.githubusercontent.com/FlowiseAI/Flowise/main/LICENSE.md"
+            ],
+            "publisher": "Flowise"
+          },
+          {
+            "claim": "Root license: Apache-2.0 outside enterprise directory and specifically restricted files; those portions are commercial, third-party terms retained. No dataset reuse clearance.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.flowiseai.com/",
+              "https://raw.githubusercontent.com/FlowiseAI/Flowise/main/LICENSE.md"
+            ],
+            "publisher": "Flowise"
+          }
+        ],
+        "operator_statement": "FlowiseAI, Inc. named in root source copyright; corporate ownership not investigated",
+        "rights": "Root license: Apache-2.0 outside enterprise directory and specifically restricted files; those portions are commercial, third-party terms retained. No dataset reuse clearance.",
+        "limitations": "No workflow execution, integration compatibility, scale or security claim independently verified.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-n8n",
@@ -324,7 +1299,72 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned current docs; root LICENSE master unpinned",
+        "region": "Global documentation; no regional billing/residency claim",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.n8n.io/deploy/host-n8n.md",
+            "publisher": "n8n",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.n8n.io/connect/n8n-api.md",
+            "publisher": "n8n",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.n8n.io/deploy/host-n8n/deploy-with-the-ai-starter-kit.md",
+            "publisher": "n8n",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
+            "publisher": "n8n",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Workflow automation platform; curated AI Starter Kit is a separate Docker Compose template combining n8n, Ollama, Qdrant and PostgreSQL.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.n8n.io/deploy/host-n8n/deploy-with-the-ai-starter-kit.md",
+            "publisher": "n8n"
+          },
+          {
+            "claim": "Public REST API documented for specified Cloud plans and all self-hosted editions; free-trial exclusion documented. No request made.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.n8n.io/deploy/host-n8n.md",
+              "https://docs.n8n.io/connect/n8n-api.md",
+              "https://docs.n8n.io/deploy/host-n8n/deploy-with-the-ai-starter-kit.md",
+              "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md"
+            ],
+            "publisher": "n8n"
+          },
+          {
+            "claim": "Sustainable Use License core; .ee. files need Enterprise License, other branches not licensed by root text. Component/data terms separate.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.n8n.io/deploy/host-n8n.md",
+              "https://docs.n8n.io/connect/n8n-api.md",
+              "https://docs.n8n.io/deploy/host-n8n/deploy-with-the-ai-starter-kit.md",
+              "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md"
+            ],
+            "publisher": "n8n"
+          }
+        ],
+        "operator_statement": "n8n project/brand established; legal entity not newly verified in these pages",
+        "rights": "Sustainable Use License core; .ee. files need Enterprise License, other branches not licensed by root text. Component/data terms separate.",
+        "limitations": "Kit explicitly for testing/proof of concept; no deployment or compatibility exercised. Old sustainable-use-license URL returned Page Not Found.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-skypilot",
@@ -340,7 +1380,65 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles. Citation-index repair2026-10-17 registers the precise page already cited in matrix cells; historical access date retained. Fresh inspection scope is described in citation-index-2026-10-17.md.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Mutable latest docs and master license; no release/SHA pin established",
+        "region": "Global docs; YAML region examples are configuration examples, not current availability or rates",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.skypilot.ai/en/latest/docs/index.html",
+            "publisher": "SkyPilot Team",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+            "publisher": "SkyPilot Team",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/skypilot-org/skypilot/master/LICENSE",
+            "publisher": "SkyPilot Team",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Workload scheduling, provisioning and management over multiple clouds, Kubernetes, Slurm and existing machines; BYOC.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.skypilot.ai/en/latest/docs/index.html",
+            "publisher": "SkyPilot Team"
+          },
+          {
+            "claim": "YAML specifies resource constraints and setup/run commands; any_of optimizer selects from candidate infrastructure, ordered sets failover sequence. CLI and Python SDK documented.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.skypilot.ai/en/latest/docs/index.html",
+              "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+              "https://raw.githubusercontent.com/skypilot-org/skypilot/master/LICENSE"
+            ],
+            "publisher": "SkyPilot Team"
+          },
+          {
+            "claim": "Root Apache-2.0 read, including noted third-party example provenance; commercial platform/cloud/model/data terms separate.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.skypilot.ai/en/latest/docs/index.html",
+              "https://docs.skypilot.ai/en/latest/reference/yaml-spec.html",
+              "https://raw.githubusercontent.com/skypilot-org/skypilot/master/LICENSE"
+            ],
+            "publisher": "SkyPilot Team"
+          }
+        ],
+        "operator_statement": "SkyPilot project established; legal commercial operator not established by reviewed docs/license",
+        "rights": "Root Apache-2.0 read, including noted third-party example provenance; commercial platform/cloud/model/data terms separate.",
+        "limitations": "No capacity, optimization, compatibility, failure recovery or savings measurement.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-bentoml",
@@ -353,7 +1451,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Mutable latest documentation and main source license; release unpinned",
+        "region": "Global documentation with multiregion guidance; no deployment region or rate verified",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.bentoml.com/en/latest/",
+            "publisher": "BentoML",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/bentoml/BentoML/main/LICENSE",
+            "publisher": "BentoML",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "BentoML serving framework and BentoCloud managed deployment are distinct products, rather than one undifferentiated Bento.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.bentoml.com/en/latest/",
+            "publisher": "BentoML"
+          },
+          {
+            "claim": "Documentation lists online service APIs, Python SDK/CLI/client API and framework integrations; none executed.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.bentoml.com/en/latest/",
+              "https://raw.githubusercontent.com/bentoml/BentoML/main/LICENSE"
+            ],
+            "publisher": "BentoML"
+          },
+          {
+            "claim": "BentoML root source Apache-2.0 read; BentoCloud service, external models, datasets and integration terms require separate review.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.bentoml.com/en/latest/",
+              "https://raw.githubusercontent.com/bentoml/BentoML/main/LICENSE"
+            ],
+            "publisher": "BentoML"
+          }
+        ],
+        "operator_statement": "BentoML project/brand established; legal commercial operator not established by reviewed pages",
+        "rights": "BentoML root source Apache-2.0 read; BentoCloud service, external models, datasets and integration terms require separate review.",
+        "limitations": "No deployment, composition or scaling test; documentation performance multiplier omitted as unreproduced.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-langfuse",
@@ -366,7 +1515,65 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Docs announce v4; source main unpinned; terms effective 2026-06-24",
+        "region": "Global docs; contracting entity varies as stated in terms; no regional hosting verification",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://langfuse.com/docs",
+            "publisher": "Langfuse / ClickHouse",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/langfuse/langfuse/main/LICENSE",
+            "publisher": "Langfuse / ClickHouse",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://clickhouse.com/legal/clickhouse-general-terms-and-conditions",
+            "publisher": "Langfuse / ClickHouse",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "AI observability, prompt management, evaluation and API/data platform; Cloud and self-hosted edition boundaries matter.",
+            "evidence_class": "Primary documentation",
+            "url": "https://langfuse.com/docs",
+            "publisher": "Langfuse / ClickHouse"
+          },
+          {
+            "claim": "Documentation describes SDK/OpenTelemetry integrations, API-first platform and blob-storage export; none exercised.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://langfuse.com/docs",
+              "https://raw.githubusercontent.com/langfuse/langfuse/main/LICENSE",
+              "https://clickhouse.com/legal/clickhouse-general-terms-and-conditions"
+            ],
+            "publisher": "Langfuse / ClickHouse"
+          },
+          {
+            "claim": "MIT Expat outside ee directories; enterprise and third-party terms separate. No license inferred for customer traces or service data.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://langfuse.com/docs",
+              "https://raw.githubusercontent.com/langfuse/langfuse/main/LICENSE",
+              "https://clickhouse.com/legal/clickhouse-general-terms-and-conditions"
+            ],
+            "publisher": "Langfuse / ClickHouse"
+          }
+        ],
+        "operator_statement": "Root code copyright ClickHouse, Inc.; redirected general terms distinguish Langfuse GmbH for PAYG Langfuse Cloud",
+        "rights": "MIT Expat outside ee directories; enterprise and third-party terms separate. No license inferred for customer traces or service data.",
+        "limitations": "Terms redirect read; no contract/account entered, no trace content accessed, no performance reproduction.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-ragas",
@@ -379,7 +1586,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Mutable stable docs; source main license unpinned; no exact installed release",
+        "region": "Global documentation; no provider rate or region claim",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.ragas.io/en/stable/",
+            "publisher": "Ragas / Vibrant Labs",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/vibrantlabsai/ragas/main/LICENSE",
+            "publisher": "Ragas / Vibrant Labs",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Library for systematic LLM application, RAG and agent evaluation with experiments, metrics and dataset tooling.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.ragas.io/en/stable/",
+            "publisher": "Ragas / Vibrant Labs"
+          },
+          {
+            "claim": "Documentation lists Python API, CLI and integrations including LangChain and LlamaIndex.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.ragas.io/en/stable/",
+              "https://raw.githubusercontent.com/vibrantlabsai/ragas/main/LICENSE"
+            ],
+            "publisher": "Ragas / Vibrant Labs"
+          },
+          {
+            "claim": "Root source Apache-2.0 read; evaluation datasets, judge models and external provider terms remain separate.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.ragas.io/en/stable/",
+              "https://raw.githubusercontent.com/vibrantlabsai/ragas/main/LICENSE"
+            ],
+            "publisher": "Ragas / Vibrant Labs"
+          }
+        ],
+        "operator_statement": "Docs link vibrantlabsai/ragas; source copyright names Vibrant Labs",
+        "rights": "Root source Apache-2.0 read; evaluation datasets, judge models and external provider terms remain separate.",
+        "limitations": "LLM-driven metrics not independent measurements of every application; no metric validity or dataset rights inspected.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-llamaindex",
@@ -392,7 +1650,65 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned developer docs and main source license; site advertises Extract v2.5, not a framework version",
+        "region": "Site has Global/EU sign-in surfaces; no residency assurance inferred",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://developers.llamaindex.ai/python/framework/",
+            "publisher": "LlamaIndex",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://www.llamaindex.ai/",
+            "publisher": "LlamaIndex",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/run-llama/llama_index/main/LICENSE",
+            "publisher": "LlamaIndex",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "LlamaIndex Framework supports data/RAG/agent applications; commercial LlamaParse services and LiteParse are distinct product surfaces.",
+            "evidence_class": "Primary documentation",
+            "url": "https://developers.llamaindex.ai/python/framework/",
+            "publisher": "LlamaIndex"
+          },
+          {
+            "claim": "Framework developer docs cover LLMs, connectors, indexing/retrieval, agents and workflows. No API called.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://developers.llamaindex.ai/python/framework/",
+              "https://www.llamaindex.ai/",
+              "https://raw.githubusercontent.com/run-llama/llama_index/main/LICENSE"
+            ],
+            "publisher": "LlamaIndex"
+          },
+          {
+            "claim": "Framework root MIT read; commercial services, LiteParse, integrations, model/data content require separate terms.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://developers.llamaindex.ai/python/framework/",
+              "https://www.llamaindex.ai/",
+              "https://raw.githubusercontent.com/run-llama/llama_index/main/LICENSE"
+            ],
+            "publisher": "LlamaIndex"
+          }
+        ],
+        "operator_statement": "Framework copyright Jerry Liu; commercial brand LlamaIndex, corporate contracting entity unverified",
+        "rights": "Framework root MIT read; commercial services, LiteParse, integrations, model/data content require separate terms.",
+        "limitations": "No parsing, workflow, accuracy, uptime or compliance behavior verified.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-langchain",
@@ -405,7 +1721,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned ecosystem home and master framework license; release unpinned",
+        "region": "Global documentation; no regional quote",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://docs.langchain.com/",
+            "publisher": "LangChain",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/langchain-ai/langchain/master/LICENSE",
+            "publisher": "LangChain",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Open model-agnostic agent frameworks/harnesses are distinct from LangSmith testing, deployment, monitoring and Fleet no-code surfaces.",
+            "evidence_class": "Primary documentation",
+            "url": "https://docs.langchain.com/",
+            "publisher": "LangChain"
+          },
+          {
+            "claim": "Documentation describes LangChain, LangGraph and Deep Agents development plus gateway and observability platform surfaces. No endpoint invoked.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.langchain.com/",
+              "https://raw.githubusercontent.com/langchain-ai/langchain/master/LICENSE"
+            ],
+            "publisher": "LangChain"
+          },
+          {
+            "claim": "LangChain framework root MIT read; LangSmith and other products, providers/models and datasets need component-specific review.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://docs.langchain.com/",
+              "https://raw.githubusercontent.com/langchain-ai/langchain/master/LICENSE"
+            ],
+            "publisher": "LangChain"
+          }
+        ],
+        "operator_statement": "LangChain, Inc. named in framework source copyright",
+        "rights": "LangChain framework root MIT read; LangSmith and other products, providers/models and datasets need component-specific review.",
+        "limitations": "No agent build, deployment or compatibility workflow executed; framework license cannot be extended to all named products.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-qdrant-bench",
@@ -418,7 +1785,51 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Single-node results labeled January/June 2024; filtered results February 2023; exact engine and harness revisions not pinned here",
+        "region": "Published experiment identifies Azure VM setup; no region or rate inferred",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://qdrant.tech/benchmarks/",
+            "publisher": "Qdrant",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Vendor-published comparative vector-search and filtered ANN benchmark evidence, separate from Qdrant database or Cloud product.",
+            "evidence_class": "Primary documentation",
+            "url": "https://qdrant.tech/benchmarks/",
+            "publisher": "Qdrant"
+          },
+          {
+            "claim": "Benchmark protocol/source link documented; live data API and redistribution rights unverified.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://qdrant.tech/benchmarks/"
+            ],
+            "publisher": "Qdrant"
+          },
+          {
+            "claim": "Links to code and datasets do not establish all data rights; no bulk result/dataset copied and no reuse permission concluded.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://qdrant.tech/benchmarks/"
+            ],
+            "publisher": "Qdrant"
+          }
+        ],
+        "operator_statement": "Qdrant publishes benchmark; corporate legal entity not newly verified",
+        "rights": "Links to code and datasets do not establish all data rights; no bulk result/dataset copied and no reuse permission concluded.",
+        "limitations": "Publisher acknowledges possible bias; results dated, configuration-specific and not reproduced. No vendor ranking inferred.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-lm-eval",
@@ -431,7 +1842,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Mutable main README includes 2026-09 plugin update and older release announcement; exact current release/SHA not established",
+        "region": "Global repository; evaluation region/provider/model conditions are run-specific",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+            "publisher": "EleutherAI",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/EleutherAI/lm-evaluation-harness/main/LICENSE.md",
+            "publisher": "EleutherAI",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "User-run language-model evaluation framework, distinct from particular leaderboard results and datasets.",
+            "evidence_class": "Primary documentation",
+            "url": "https://github.com/EleutherAI/lm-evaluation-harness",
+            "publisher": "EleutherAI"
+          },
+          {
+            "claim": "README documents Python simple_evaluate(), YAML configuration, local Hugging Face/vLLM and hosted model API backends; not executed.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/EleutherAI/lm-evaluation-harness",
+              "https://raw.githubusercontent.com/EleutherAI/lm-evaluation-harness/main/LICENSE.md"
+            ],
+            "publisher": "EleutherAI"
+          },
+          {
+            "claim": "Root MIT license read; dataset, model, prompt and backend licenses/terms must be reviewed separately.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/EleutherAI/lm-evaluation-harness",
+              "https://raw.githubusercontent.com/EleutherAI/lm-evaluation-harness/main/LICENSE.md"
+            ],
+            "publisher": "EleutherAI"
+          }
+        ],
+        "operator_statement": "EleutherAI repository organization established; exact legal entity not investigated",
+        "rights": "Root MIT license read; dataset, model, prompt and backend licenses/terms must be reviewed separately.",
+        "limitations": "No benchmark executed; repository's framework use does not certify all contributed tasks or comparability of published runs.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-mcp-registry",
@@ -446,7 +1908,58 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unpinned main README; history mentions 2025-10-24 v0.1 API freeze, not proof of current GA status",
+        "region": "Global repository/service documentation; no regional residency claim",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://github.com/modelcontextprotocol/registry",
+            "publisher": "Model Context Protocol Registry Working Group",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/modelcontextprotocol/registry/main/LICENSE",
+            "publisher": "Model Context Protocol Registry Working Group",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Community-driven registry service providing MCP server metadata to clients; listing is not compatibility/security acceptance.",
+            "evidence_class": "Primary documentation",
+            "url": "https://github.com/modelcontextprotocol/registry",
+            "publisher": "Model Context Protocol Registry Working Group"
+          },
+          {
+            "claim": "README links live API docs; v0.1 freeze/preview history documented. API not exercised.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/modelcontextprotocol/registry",
+              "https://raw.githubusercontent.com/modelcontextprotocol/registry/main/LICENSE"
+            ],
+            "publisher": "Model Context Protocol Registry Working Group"
+          },
+          {
+            "claim": "License transition: new/consented code Apache-2.0, unconsented original contributions MIT, non-spec docs CC-BY-4.0. Do not label entire registry uniformly MIT or infer metadata rights.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/modelcontextprotocol/registry",
+              "https://raw.githubusercontent.com/modelcontextprotocol/registry/main/LICENSE"
+            ],
+            "publisher": "Model Context Protocol Registry Working Group"
+          }
+        ],
+        "operator_statement": "Repository under modelcontextprotocol; license names Model Context Protocol a Series of LF Projects, LLC",
+        "rights": "License transition: new/consented code Apache-2.0, unconsented original contributions MIT, non-spec docs CC-BY-4.0. Do not label entire registry uniformly MIT or infer metadata rights.",
+        "limitations": "Current API schema/version and listing-data reuse not established by this read; individual server capabilities not validated.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      }
+    ]
   },
   {
     "id": "src-unsloth",
@@ -459,7 +1972,62 @@
     "limitations": "Public documentation or landing page inspection; not an independent benchmark or universal product verification. Supplemental URLs may identify follow-up material; claim-specific verification is recorded in profiles.",
     "version": "Public page retrieved 2026-10-16; pin exact upstream revision before integration",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Unversioned docs; root LICENSE read through GitHub at b4a4855e49c674f1dd375a5f716d901502b97b73 during correction review. This pins the licence text, not an installed product or model release.",
+        "region": "Global documentation; no cloud price or residency claim",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://unsloth.ai/docs",
+            "publisher": "Unsloth",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://raw.githubusercontent.com/unslothai/unsloth/main/LICENSE",
+            "publisher": "Unsloth",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/unslothai/unsloth/blob/b4a4855e49c674f1dd375a5f716d901502b97b73/LICENSE",
+            "publisher": "Unsloth",
+            "access_status": "pinned licence text retrieved through GitHub connector"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Local model inference/training library plus optional Desktop/Studio and CLI surfaces; separate licensing boundaries.",
+            "evidence_class": "Primary documentation",
+            "url": "https://unsloth.ai/docs",
+            "publisher": "Unsloth"
+          },
+          {
+            "claim": "Docs advertise OpenAI-compatible serving API, local-agent connections and model export; none exercised.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://unsloth.ai/docs",
+              "https://raw.githubusercontent.com/unslothai/unsloth/main/LICENSE"
+            ],
+            "publisher": "Unsloth"
+          },
+          {
+            "claim": "Root license identifies Apache-2.0 unsloth/tests/scripts, AGPLv3 optional studio/unsloth_cli. Models, datasets and separate packages retain separate rights.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/unslothai/unsloth/blob/b4a4855e49c674f1dd375a5f716d901502b97b73/LICENSE"
+            ],
+            "publisher": "Unsloth"
+          }
+        ],
+        "operator_statement": "Root copyright names Unsloth AI. Inc team, Daniel Han-Chen and Michael Han-Chen",
+        "rights": "Root license identifies Apache-2.0 unsloth/tests/scripts, AGPLv3 optional studio/unsloth_cli. Models, datasets and separate packages retain separate rights.",
+        "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff. Public web extraction of the mutable GitHub page omitted the scoped lines in this review; the pinned GitHub text contains them. Model and data rights remain separate.",
+        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution. Licence correction review used pinned GitHub text because the mutable web extraction differed."
+      }
+    ]
   },
   {
     "id": "src-survey-knowledge",
@@ -537,7 +2105,22 @@
     "limitations": "Web request 403; browser redirected to login. List workflow unverified.",
     "version": "Public page on access date",
     "region": "Global / survey population; not all buyers",
-    "confidence": "Low"
+    "confidence": "Low",
+    "rechecks": [
+      {
+        "url": "https://pcpartpicker.com/list/",
+        "publisher": "PCPartPicker",
+        "access_date": "2026-10-18",
+        "access_status": "unverified-access-blocked-403",
+        "version": "Page not retrieved",
+        "region": "Retrieval location unspecified",
+        "claim": "The public list page returned HTTP 403 in this pass.",
+        "evidence_class": "Observed behavior",
+        "confidence": "High for access failure only",
+        "limitations": "No login, bypass or workflow test. Access failure is not negative evidence about saved builds, compatibility or exports.",
+        "rights": "No reuse permission established; no page content copied."
+      }
+    ]
   },
   {
     "id": "src-llmfit-upstream-pages",
@@ -665,7 +2248,22 @@
     "limitations": "About page describes an open-source benchmark CLI and a public results database with optional submission; repository is Apache-2.0 with homepage localscore.ai. No verification process for submitted results is stated. Result accuracy not tested.",
     "version": "Public page on access date; repository pushed 2026-10-09",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "url": "https://www.localscore.ai/about",
+        "publisher": "LocalScore",
+        "access_date": "2026-10-18",
+        "access_status": "retrieved-public-page",
+        "version": "Unversioned about page, read 2026-10-18",
+        "region": "Global public website; no regional rate collected",
+        "claim": "The project describes a benchmark utility and public result database, optional submissions and a single-GPU limit. The page identifies it as a Mozilla Builders project.",
+        "evidence_class": "Primary documentation",
+        "confidence": "Medium",
+        "limitations": "Documentary scope only; no benchmark or submitted-result verification performed. Code, website and contributed results have separate rights.",
+        "rights": "No result-data reuse permission established in this pass; links and short analyst paraphrases only."
+      }
+    ]
   },
   {
     "id": "src-localmaxxing",
@@ -681,7 +2279,22 @@
     "limitations": "Submission requires sign-in and an API key; privacy policy describes automatic checks including \"a physical speed ceiling\" and hiding suspicious runs. Operator legal entity not named. Live counters not used.",
     "version": "Privacy policy last updated 2026-10-04",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "url": "https://www.localmaxxing.com/en",
+        "publisher": "LocalMaxxing; legal operator unconfirmed",
+        "access_date": "2026-10-18",
+        "access_status": "retrieved-public-page",
+        "version": "Unversioned home page, read 2026-10-18",
+        "region": "Global public website; no regional rate collected",
+        "claim": "The site advertises community-submitted inference runs, model/hardware/engine/quantization filtering, and a setup guide. Its submission flow asks for GitHub sign-in and an API key.",
+        "evidence_class": "Vendor claim",
+        "confidence": "Medium",
+        "limitations": "No account, key or run submission; displayed verification labels and counts are not independently verified. CLI MIT label does not establish rights to all submitted data.",
+        "rights": "Product display and redistribution of community results not cleared; #41/#60 review required."
+      }
+    ]
   },
   {
     "id": "src-rapid-mlx",
@@ -696,7 +2309,22 @@
     "limitations": "Leaderboard page describes one locked run protocol and consent-previewed sharing for Apple Silicon only. GitHub licence API reports NOASSERTION while the repository description states Apache 2.0; a CC0 data statement cited by PR #81 was not visible in the static HTML retrieved here.",
     "version": "Public page on access date; repository pushed 2026-10-16",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "url": "https://rapidmlx.com/leaderboard",
+        "publisher": "Rapid-MLX",
+        "access_date": "2026-10-18",
+        "access_status": "retrieved-public-page",
+        "version": "Unversioned leaderboard/methodology page, read 2026-10-18",
+        "region": "Apple Silicon scope; no regional rate collected",
+        "claim": "The page documents a fixed benchmark protocol, separate consent-previewed sharing and public result links. Its footer now states engine Apache 2.0 and submissions CC0.",
+        "evidence_class": "Primary documentation",
+        "confidence": "Medium",
+        "limitations": "This fresh visible statement is separate from the 2026-10-16 check that did not see CC0. No run, data endpoint or result accuracy checked; #41 must assess the actual material and intended use.",
+        "rights": "Publisher's submissions-CC0 statement observed; no blanket rights approval or third-party ownership verification."
+      }
+    ]
   },
   {
     "id": "src-metrillm",
@@ -713,7 +2341,22 @@
     "limitations": "Home page requires Ollama or LM Studio for the npm CLI; methodology claims every submitted result is displayed and each run carries a hash. Repository Apache-2.0. Claims not reproduced.",
     "version": "Public page on access date; repository pushed 2026-06-02",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "url": "https://github.com/MetriLLM/metrillm",
+        "publisher": "MetriLLM repository maintainers",
+        "access_date": "2026-10-18",
+        "access_status": "retrieved-repository; website timed out",
+        "version": "Unpinned default-branch README, read 2026-10-18",
+        "region": "Global public repository; local Ollama/LM Studio scope",
+        "claim": "README documents local model benchmarking, hardware-fit/quality scores, JSON/CSV export, public share URLs and a model-advisor integration.",
+        "evidence_class": "Vendor claim",
+        "confidence": "Medium",
+        "limitations": "metrillm.dev timed out during this pass; README retrieved as a separate primary source. No CLI, model, scoring method, export or share operation executed; no independent measurement.",
+        "rights": "README identifies Apache-2.0 code; leaderboard/result-data rights not established; no dataset copied."
+      }
+    ]
   },
   {
     "id": "src-openbenchmarking-llama-cpp",
@@ -729,7 +2372,22 @@
     "limitations": "Profile page returned 403 with a bot challenge to anonymous retrieval; not bypassed. PTS documentation describes optional upload to OpenBenchmarking.org and a no-upload batch mode. The GitHub test-profiles mirror holds only pts/llama-cpp 1.0.0 and 1.1.0; current profile version unverified here.",
     "version": "PTS docs at be12163; test-profiles mirror at d2f1a15",
     "region": "Global website; not a regional rate quote",
-    "confidence": "Low"
+    "confidence": "Low",
+    "rechecks": [
+      {
+        "url": "https://openbenchmarking.org/test/pts/llama-cpp",
+        "publisher": "OpenBenchmarking.org / Phoronix Test Suite",
+        "access_date": "2026-10-18",
+        "access_status": "unverified-retrieval-error",
+        "version": "Current profile not retrieved",
+        "region": "Global public website; retrieval location unspecified",
+        "claim": "The current profile could not be read by the public web tool. The earlier 2026-10-16 bot-challenge observation remains historical evidence only.",
+        "evidence_class": "Observed behavior",
+        "confidence": "High for the retrieval failure only",
+        "limitations": "No bypass or alternate host used. Failure establishes neither product absence nor current profile version, capabilities or rights.",
+        "rights": "No current profile/result-data reuse permission established."
+      }
+    ]
   },
   {
     "id": "src-llama-cpp-perf-threads",
@@ -745,7 +2403,22 @@
     "limitations": "Thread instructions are primary documentation for the reporting protocol; posted results are individual community reports, not independent measurements under shared conditions. Thread metadata via GitHub API: #4167 Apple Silicon (279 comments), #10879 Vulkan (787), #15013 CUDA (234).",
     "version": "Threads updated 2026-10-01 (#4167), 2026-10-10 (#10879), 2026-10-16 (#15013)",
     "region": "Global / self-selected contributors",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "url": "https://github.com/ggml-org/llama.cpp/discussions/15013",
+        "publisher": "ggml-org/llama.cpp community; thread author olegshulyakov",
+        "access_date": "2026-10-18",
+        "access_status": "retrieved-public-thread",
+        "version": "CUDA discussion #15013, mutable thread, read 2026-10-18",
+        "region": "Self-selected community hardware/OS/driver conditions",
+        "claim": "The CUDA thread specifies model/quantization and reporting commands, requests commit and CUDA information, and displays a curated scoreboard. It warns that drivers and operating systems can change results.",
+        "evidence_class": "Primary documentation",
+        "confidence": "Medium",
+        "limitations": "Thread reporting protocol is documented; individual posted results were not reproduced or audited. This is a discussion resource within llama.cpp, not a separate company or inference engine.",
+        "rights": "Repository code licence does not establish blanket permission to redistribute discussion contributions; link and paraphrase only."
+      }
+    ]
   },
   {
     "id": "src-canirun-ai",
@@ -758,7 +2431,80 @@
     "limitations": "Public device directory read only. Recommendations are vendor claims; no device workflow or inference was run. Pricing, methodology, API, code licence and data reuse rights unverified. robots.txt allows all paths except /api/ and /og/; a later automated re-check returned HTTP 403 (bot challenge) and was not bypassed.",
     "version": "Public page retrieved 2026-10-16; no software revision pinned",
     "region": "Global public website; not a regional offering or price quote",
-    "confidence": "Medium"
+    "confidence": "Medium",
+    "rechecks": [
+      {
+        "access_date": "2026-10-18",
+        "access_status": "public primary documents retrieved",
+        "version": "Mutable homepage/methodology; repository README and root listing rechecked at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983; repository metadata read 2026-10-18",
+        "region": "Global public site; estimates depend on device/runtime, not a regional quote",
+        "confidence": "Medium",
+        "reviewed_urls": [
+          {
+            "url": "https://www.canirun.ai/",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://www.canirun.ai/why",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved; pinned README states MIT"
+          },
+          {
+            "url": "https://api.github.com/repos/midudev/canirun.ai/contents?ref=73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved; complete root directory listing contains no LICENSE file"
+          },
+          {
+            "url": "https://api.github.com/repos/midudev/canirun.ai",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved; repository metadata reports license: null"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Hardware/use-case-based local-model recommendations; separate from canrunllm.com and canitrun.dev.",
+            "evidence_class": "Primary documentation",
+            "url": "https://www.canirun.ai/",
+            "publisher": "midudev / CanIRun.ai"
+          },
+          {
+            "claim": "README documents models, compatibility and recommendation JSON endpoints; site links runai commands. Not called or executed.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://www.canirun.ai/",
+              "https://www.canirun.ai/why",
+              "https://github.com/midudev/canirun.ai"
+            ],
+            "publisher": "midudev / CanIRun.ai"
+          },
+          {
+            "claim": "README states MIT; the inspected repository root at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983 has no LICENSE file, and GitHub repository metadata reports license: null, preserving the #109 finding. No repository reuse grant is established by this review. Source visibility does not clear third-party model/spec/metadata reuse.",
+            "evidence_class": "Primary documentation",
+            "source_urls": [
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+              "https://api.github.com/repos/midudev/canirun.ai/contents?ref=73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983",
+              "https://api.github.com/repos/midudev/canirun.ai"
+            ],
+            "publisher": "midudev / CanIRun.ai"
+          }
+        ],
+        "operator_statement": "Site footer says built by midudev and links midudev/canirun.ai; legal entity unverified",
+        "rights": "README states MIT; the inspected repository root at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983 has no LICENSE file, and GitHub repository metadata reports license: null, preserving the #109 finding. No repository reuse grant is established by this review. Source visibility does not clear third-party model/spec/metadata reuse.",
+        "limitations": "All site results explicitly estimates; bandwidth method omits interconnect overhead. No browser hardware detection or privacy network behavior tested.",
+        "method": "Public web-tool extraction, which can be cached, and read-only public GitHub source/metadata queries. No product workflow, recommendation endpoint, inference or compute execution."
+      }
+    ]
   },
   {
     "id": "src-gpus-io-20261017",

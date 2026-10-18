@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-1 answer-state encoding proposal",
+  "description": "Research fixture only; not a released BuildSnapshot or contract extension.",
+  "type": "object",
+  "required": ["x_t0_answer_states"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_answer_states": {
+      "type": "object",
+      "required": ["proposal_version", "answers"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd1-0.1"},
+        "answers": {
+          "type": "object",
+          "propertyNames": {"pattern": "^(?:/(?:[^~/]|~[01])*)+$"},
+          "additionalProperties": {"$ref": "#/$defs/answer"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "answer": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["state", "value"],
+          "additionalProperties": false,
+          "properties": {
+            "state": {"const": "provided"},
+            "value": {},
+            "source": {"type": "string", "minLength": 1, "pattern": "\\S"}
+          }
+        },
+        {
+          "type": "object",
+          "required": ["state"],
+          "additionalProperties": false,
+          "properties": {
+            "state": {"enum": ["unknown", "missing", "withheld", "not_applicable"]}
+          }
+        }
+      ]
+    }
+  }
+}

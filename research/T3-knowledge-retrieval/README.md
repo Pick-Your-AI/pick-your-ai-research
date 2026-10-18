@@ -29,8 +29,8 @@ These are research proposals for #40. Conceptual operands need a versioned repre
 | #7 | Retrieval, memory and output budgets within the actual model/context semantics | Pending owner acceptance |
 | #9/#10/#11 | Storage/operator/capacity and runtime assumptions for the chosen pipeline | Pending scoped evidence |
 | #16 | Ingestion authorization, embedding/index identity, and when vector storage is unnecessary | Drafted in #13–#15; acceptance pending |
-| #25/#27 | Tool/native retrieval interface; auth and connector existence versus successful execution | Preserve active [#65](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65) work; no new experiment claimed |
-| #28 | Reuse selected storage by link/role; consent, retention and derived deletion remain memory semantics | Pending T3/T4 receiving dispositions |
+| #25/#27 | Tool/native retrieval interface; auth and connector existence versus successful execution | [T4 component-owner scope of #25 accepted with constraints](../T4-agents-integrations/agent-framework.md#t3-retrieval-receiving-review-2026-10-18); other receiving/co-owner scopes remain pending. Preserve active [#65](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65) work; no new experiment claimed |
+| #28 | Reuse selected storage by link/role; consent, retention and derived deletion remain memory semantics | [T4 component-owner scope accepted with constraints](../T4-agents-integrations/agent-memory.md#t3-storage-and-retrieval-receiving-review-2026-10-18); separate co-owner and T3 reciprocal dispositions remain pending |
 | #32 | Retrieval permission does not establish training permission | Pending source-specific rights review |
 | #35/#36 | Enforcement and workload-specific retrieval evaluation | Pending acceptance; no quality threshold invented |
 | #39 | Ingestion, embedding, re-indexing, storage and query meters | Pending route/region/price evidence |

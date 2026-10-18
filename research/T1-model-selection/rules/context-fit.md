@@ -33,3 +33,30 @@ Follow-up to the [#3/#40/#41 owner's review of PR #88 at `dbfa7dd`](https://gith
 - Failing example: same configured maximum with P=30,000/O=8,000 fails that maximum even if a model card advertises a conditional 131,072 extension.
 - Native fallback / unknown / non-applicable examples: Qwen request for 100,000 against evidenced native 32,768 with no YaRN/runtime proof returns `fail`; remediation is to evidence an extended configuration or reduce the request. A request at or below 32,768 can pass this native-limit predicate while separate runtime/memory checks remain unknown. Missing native-limit evidence yields unknown; API-only local KV check is skipped.
 - Version and migration impact: central review must add configuration provenance/conditional operands before automated extension approval. Keep existing v1 values and T2 methodology intact; no final Ruleset emitted.
+
+## Executable synthetic cases (CD-11)
+
+The [test-only prototype](../../../tests/context_budget_prototype.py) and
+[executable cases](../../../tests/test_context_budget.py) exercise these proposed
+semantics over normalized eligible facts. They distinguish a shared-window sum
+failure from independent input/output passes, use the upper estimate bound,
+flag a straddling failure as `may_not_fit` even if another cap is unknown, preserve equality at a cap, and retain
+unknown when only some required predicates pass. A known violated cap can fail
+even when another operand is missing. A definite lower-bound violation suppresses
+the uncertainty-only flag. Separate-budget combined checks are skipped.
+An explicitly evidenced input cap is checked even while shared-versus-separate
+budget semantics remain unknown. A fitting input cap cannot make that unknown
+combined predicate pass; a violated cap retains the same fail/uncertainty rules.
+Explicit policy ceilings remain additional proposed predicates, not vendor limits.
+
+The runtime-limit cases exercise native fallback and a lower known runtime ceiling.
+They do not establish runtime support, KV fit, quality or latency. Missing tuple
+matching evidence cannot borrow another route's limits. Disabled selections skip.
+All numbers are synthetic; no provider request or model execution occurs.
+
+Run `python -m unittest discover -s tests -p test_context_budget.py -v`.
+The prototype accepts only internally constructed, normalized nonnegative token
+counts with ordered bounds. `None` means missing fixture evidence, not a proposed
+wire value. Real selection binding, count eligibility, answer-state encoding,
+source conflicts and migration remain #40 decisions. No frozen evaluator or
+schema changes and no released compatibility ruleset are supplied.

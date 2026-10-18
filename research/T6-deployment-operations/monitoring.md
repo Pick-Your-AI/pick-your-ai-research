@@ -9,7 +9,7 @@ Which signals must be watched once the build runs?
 
 In scope: health, quality, latency, cost, usage, safety and data-freshness signals; alert thresholds; privacy of logged data. Out of scope: operating a monitoring stack.
 
-Inputs. The Guardrails record ([#35](guardrails.md)), the Evaluation record ([#36](evaluation.md)) and the Deployment record ([#37](deployment.md)) sit in this folder and are cited here by id: #35 rule ids (`G-R21`) and control names (`trace-content-masking`), #36 rule ids (`E-R18`) and gate ids (`G1` to `G12`, with the meanings in the #36 gate table), #37 step, readiness, rule and evidence ids (`#37 S29`, `R35`, `D-R11`, `D-M13`). Rules those records own are cited, not restated. The #2 (T0) fields that set thresholds are latency target (percentile and value), throughput and concurrency, volume, data classification, residency and budget (amount, currency, period). The other information inputs (#11, #16, #25, #28) were not available in this workspace; where a threshold needs a field no record defines yet, the row says so and Open questions names the owner.
+Inputs. The Guardrails record ([#35](guardrails.md)), the Evaluation record ([#36](evaluation.md)) and the Deployment record ([#37](deployment.md)) sit in this folder and are cited here by id: #35 rule ids (`G-R21`) and control names (`trace-content-masking`), #36 rule ids (`E-R18`) and gate ids (`G1` to `G12`, with the meanings in the #36 gate table), #37 step, readiness, rule and evidence ids (`#37 S29`, `R35`, `D-R11`, `D-M13`). Rules those records own are cited, not restated. The #2 (T0) fields that set thresholds are latency target (percentile and value), throughput and concurrency, volume, data classification, residency and budget (amount, currency, period). The original pass did not hold #11, #16, #25 or #28. The separately dated [engine input integration](engine-input-integration.md) now reconciles the researched #11 releases with the engine signal names below; the other input reviews remain separate. Where a threshold needs a field no record defines yet, the row says so and Open questions names the owner.
 
 ### Placement rules used in this record
 
@@ -189,13 +189,13 @@ No engine publishes a healthy range for latency, queue depth or tokens per secon
 
 | id | signal | component | category | unit | modes | collected as | threshold source | privacy notes | alert | status | source |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| SG70 | vLLM time to first token | T2 vLLM engine | latency | seconds (histogram) | self-hosted | `vllm:time_to_first_token_seconds` (label `model_name`; `engine` is added in vllm/v1/metrics/loggers.py, M-N507, but is not shown on the docs page) on `GET /metrics` | TH1 when T0 declares a first-token target; no published default | aggregate | ticket (the page comes from SG157) | source checked | M-S2, M-N506, M-N507 |
-| SG71 | vLLM inter-token latency and time per output token | T2 vLLM engine | latency | seconds (histogram) | self-hosted | `vllm:inter_token_latency_seconds`; `vllm:request_time_per_output_token_seconds` | TH1 (streaming smoothness) | aggregate | dashboard | source checked | M-S2 |
-| SG72 | vLLM end-to-end latency and queue time | T2 vLLM engine | latency | seconds (histogram) | self-hosted | `vllm:e2e_request_latency_seconds`; `vllm:request_queue_time_seconds` (time in WAITING) | TH1; queue time builder-set | aggregate | ticket on queue time | source checked | M-S2 |
-| SG73 | vLLM waiting and running requests | T2 vLLM engine | usage | requests (gauge) | self-hosted | `vllm:num_requests_waiting` (and `_by_reason`), `vllm:num_requests_running` | TH3; llm-d guidance (estimated outside llm-d): non-zero waiting means pods are saturated | aggregate | ticket | source checked | M-S2, M-S11 |
-| SG74 | vLLM KV-cache use and preemptions | T2 vLLM engine | health | ratio 0 to 1; preemptions (counter) | self-hosted | `vllm:kv_cache_usage_perc`; `vllm:num_preemptions` (Counter; scraped with the `_total` suffix) | llm-d guidance (estimated outside llm-d): above 0.9 GPU memory is nearly full; sustained preemptions builder-set | aggregate | ticket | source checked | M-S2, M-S11 |
-| SG75 | vLLM token throughput | T2 vLLM engine | usage | tokens per second (rate of counters) | self-hosted | `vllm:prompt_tokens_total`, `vllm:generation_tokens_total` (M-S24; M-S2 lists the base names) | TH3: alert when the rate falls below the declared sustained throughput at declared concurrency | counts only | ticket | source checked | M-S2, M-S24 |
-| SG76 | TGI queue and latency | T2 TGI engine (maintenance mode, TGI README) | latency | requests (gauge); seconds (histograms) | self-hosted | `tgi_queue_size`, `tgi_request_duration`, `tgi_request_mean_time_per_token_duration`, `tgi_request_queue_duration` | TH1; published `--max-concurrent-requests` default 128 (requests above it are refused) | aggregate | ticket | source checked | M-S3, M-S12, M-N503 |
+| SG70 | vLLM time to first token | T2 vLLM engine | latency | seconds (histogram) | self-hosted | `vllm:time_to_first_token_seconds` (label `model_name`; `engine` is added in vllm/v1/metrics/loggers.py, M-N507, but is not shown on the docs page) on `GET /metrics` | TH1 when T0 declares a first-token target; no published default | aggregate | ticket (the page comes from SG157) | source checked | M-S2, M-N506, M-N507; [ET6-S2](engine-input-integration.md#4-primary-sources) |
+| SG71 | vLLM inter-token latency and time per output token | T2 vLLM engine | latency | seconds (histogram) | self-hosted | `vllm:inter_token_latency_seconds`; `vllm:request_time_per_output_token_seconds` | TH1 (streaming smoothness) | aggregate | dashboard | source checked | M-S2; [ET6-S2](engine-input-integration.md#4-primary-sources) |
+| SG72 | vLLM end-to-end latency and queue time | T2 vLLM engine | latency | seconds (histogram) | self-hosted | `vllm:e2e_request_latency_seconds`; `vllm:request_queue_time_seconds` (time in WAITING) | TH1; queue time builder-set | aggregate | ticket on queue time | source checked | M-S2; [ET6-S2](engine-input-integration.md#4-primary-sources) |
+| SG73 | vLLM waiting and running requests | T2 vLLM engine | usage | requests (gauge) | self-hosted | `vllm:num_requests_waiting` (and `_by_reason`), `vllm:num_requests_running` | TH3; inspect the waiting reason before attributing it to capacity. The llm-d non-zero-waiting guidance remains a scoped heuristic (estimated outside llm-d) | aggregate | ticket | source checked | M-S2, M-S11; [ET6-S2](engine-input-integration.md#4-primary-sources) |
+| SG74 | vLLM KV-cache use and preemptions | T2 vLLM engine | health | ratio 0 to 1; preemptions (counter) | self-hosted | `vllm:kv_cache_usage_perc`; registered Counter base `vllm:num_preemptions`; confirm the exposition name, including `_total`, on the selected service | Builder-set from workload and allocation evidence; the llm-d 0.9 guidance is a scoped heuristic, not a universal total-GPU-memory threshold; KV occupancy and device memory remain distinct | aggregate | ticket | source checked | M-S2, M-S11; [ET6-S2](engine-input-integration.md#4-primary-sources) |
+| SG75 | vLLM token throughput | T2 vLLM engine | usage | tokens per second (rate of counters) | self-hosted | documented recording-rule names `vllm:prompt_tokens_total`, `vllm:generation_tokens_total` (M-S24); the pinned V1 registrations use base names without `_total` (ET6-S2). Confirm actual exposition and reset handling on the selected service | TH3: alert when the rate falls below the declared sustained throughput at declared concurrency | counts only | ticket | source checked | M-S2, M-S24; [ET6-S2](engine-input-integration.md#4-primary-sources) |
+| SG76 | TGI queue and latency | T2 TGI engine (maintenance mode, TGI README) | latency | requests (gauge); seconds (histograms) | self-hosted | `tgi_queue_size`, `tgi_request_duration`, `tgi_request_mean_time_per_token_duration`, `tgi_request_queue_duration` | TH1; published `--max-concurrent-requests` default 128 (requests above it are refused) | aggregate | ticket | source checked | M-S3, M-S12, M-N503; [ET6-S5](engine-input-integration.md#4-primary-sources) |
 | SG77 | SGLang queue, KV use and latency | T2 SGLang engine | health | requests (gauge); ratio; seconds (histograms) | self-hosted | `sglang:num_queue_reqs`, `sglang:num_running_reqs`, `sglang:token_usage`, `sglang:time_to_first_token_seconds`, `sglang:e2e_request_latency_seconds`; only with `--enable-metrics` (M-R26) | TH1, TH3; histogram bucket edges must bracket the target | label values can come from an HTTP header (M-R31) | ticket | source checked | M-S4, M-S13 |
 | SG78 | NIM readiness and liveness | T2 NIM container | health | HTTP status | self-hosted | `GET /v1/health/ready` (200 when the model is loaded and inference is available), `GET /v1/health/live`; Prometheus at `GET /v1/metrics` | published behaviour: 200 required; probe timing must cover model load (#37 D-R49) | no content | gate (before traffic); ticket after | source checked | M-S5, M-S14 |
 | SG79 | Triton pending requests, queue time and failures | T2 Triton engine | health | requests (gauge); microseconds (cumulative); failures by reason | self-hosted | `nv_inference_pending_request_count`, `nv_inference_queue_duration_us`, `nv_inference_request_failure` on port 8002 | builder-set; mean queue time = rate(queue duration) / rate(success); percentiles need the opt-in summary metrics (--metrics-config summary_latencies=true) or the experimental first-response histogram (histogram_latencies=true) (M-H4) | per-model labels only | ticket | source checked | M-S6 |
@@ -884,7 +884,8 @@ None in this pull request. A `monitoring_stack` catalog item needs `signals` fro
 | Confirm the interim evidence grades in this record once the final policy exists | the issue asks for #41 grading; interim grades from `docs/RESEARCH_METHOD.md` are applied | #41 owner |
 | Review log duties beyond Art. 5, 25 and 30 (erasure under Art. 17, security under Art. 32), high-risk determination under the AI Act, and national log rules | P9 and P10 cover only what was opened | legal reviewer named by the #34 owner |
 | Open the sources this sweep could not: Azure abuse-monitoring retention days, Azure `RequestResponse` schema, OpenAI usage delay, Arize AX and Helicone retention and regions, alert-evaluation delays, Mistral and Cohere monitoring, open-weight API hosts | each closes a hypothesis or a coverage gap | #38 owner |
-| Check inputs #11, #16, #25 and #28 against this record once available | they were not held in this workspace | #38 owner |
+| Accept or narrow the exact-release #11 [engine input integration](engine-input-integration.md) | SG70–SG76 names/types are source-reconciled; wrapper/exporter names, live exposure and additional llama.cpp signal adoption remain unverified | #38 owners (@appletechie, @PUSHINGSQUARES) |
+| Reconcile the remaining #16, #25 and #28 inputs against this record | the original pass did not hold these records; their receiving review is separate from the #11 source check | #38 owner |
 
 ### Handoffs
 
@@ -906,3 +907,136 @@ Refs #118, #35, #38. Source checked 2026-10-18; not independently reproduced. Th
 Traceloop's [Prompts, Completions and Embeddings](https://www.traceloop.com/docs/openllmetry/privacy/traces) documentation says OpenLLMetry records prompts, completions and embeddings in span attributes by default. The documented global control is `TRACELOOP_TRACE_CONTENT=false`; TypeScript/JavaScript also supports `traceContent: false`. The same page documents selective workflow/task controls and an `override_enable_content_tracing` context override, so a global setting alone is not evidence that every emitted span is content-free.
 
 Receiving implication: assess overrides and inspect the selected instrumentation's emitted attributes before accepting content-free telemetry. Disabling this content capture does not establish deletion of previously exported traces, retention limits, authorization, or absence of other sensitive attributes. Those remain #35/#38 decisions and runtime evidence requirements. No SDK/version, exporter or backend was run here; the mutable documentation does not qualify every installed instrumentation tuple. The remaining #118 proposal families and original revision are preserved in the [sibling reconciliation](sibling-reconciliation.md); their receiving acceptance remains pending.
+
+## T4 framework telemetry boundaries (2026-10-18; partial source follow-up)
+
+The [paired receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+requests defaults beyond M-R59's OpenAI Agents SDK scope. The findings below
+separate trace enablement, payload capture and other telemetry paths. They do not
+establish a single framework-wide `default_telemetry_egress` boolean. Method: read
+publisher documentation and pinned source text only; no framework installation,
+model request, exporter connection or environment setting was executed. Grade:
+primary documentation/source, source checked / unverified.
+
+### LangGraph with LangSmith
+
+The [LangGraph tracing guide](https://docs.langchain.com/langsmith/trace-with-langgraph)
+(accessed 2026-10-18, mutable) explicitly enables tracing with `LANGSMITH_TRACING`
+and a LangSmith credential; the documented default service region is US, with a
+separate endpoint for other regions. Its trace view can include user messages,
+tool calls and the final response. This is a tracing integration, not proof that
+all LangGraph deployments export data or that their payloads are content-free.
+
+For a reproducible lower-bound implementation check, LangSmith SDK tag `v0.4.1`
+resolves to `1101a25abf9db9715e0be86b89a98a6092501a1e`.
+Its [Python utils.py](https://github.com/langchain-ai/langsmith-sdk/blob/1101a25abf9db9715e0be86b89a98a6092501a1e/python/langsmith/utils.py)
+checks explicit tracing context first, then an existing run tree, then environment
+flags; with no context/run/flag it returns false. `get_env_var` checks LANGSMITH
+and LANGCHAIN namespaces. An existing run or explicit context can enable tracing
+without that one environment variable. This is the earlier integration minimum
+already referenced by T4, not the current installed SDK or proof about all later
+versions, hosted Agent Server, plugins or unrelated telemetry.
+
+### Google ADK entry points and content
+
+ADK Python tag `v2.12.0` resolves to `38381f65f2bee0f70a89f938ee64e51b34916fa7`.
+The pinned [CLI option definitions](https://github.com/google/adk-python/blob/38381f65f2bee0f70a89f938ee64e51b34916fa7/src/google/adk/cli/cli_tools_click.py)
+set the FastAPI common options `trace_to_cloud` and `otel_to_cloud` false by default;
+the Agent Engine deployment options instead use an unset (`None`) default and
+deprecate the former flag. Do not transfer one entry point's default to another.
+These option declarations alone do not prove the effective exporter state.
+
+The [Cloud Trace guide](https://adk.dev/integrations/cloud-trace/) (accessed
+2026-10-18, mutable) documents explicit CLI/programmatic enablement. Its payload
+attributes can contain requests, responses and tool arguments/results. The guide
+says Agent Engine deployment with `--otel_to_cloud` sets
+`ADK_CAPTURE_MESSAGE_CONTENT_IN_SPANS=false` unless already defined in `.env`;
+other targets require explicit configuration. It separately describes the OTel
+message-content flag. Pinned [tracing.py](https://github.com/google/adk-python/blob/38381f65f2bee0f70a89f938ee64e51b34916fa7/src/google/adk/telemetry/tracing.py)
+likewise warns that some default span attributes can contain PII. Disabling one
+content path is not a global no-egress claim. Other CLI metrics, plugins and
+provider traffic need their own review; none was exercised here.
+
+### Claude Agent SDK versus the underlying CLI
+
+The [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview)
+(accessed 2026-10-18) describes a library running the Claude Code binary. The
+[CLI monitoring guide](https://code.claude.com/docs/en/monitoring-usage) distinguishes
+configured OTel export from Anthropic operational telemetry; distributed tracing
+is off by default, and content capture has separate controls. The
+[data-usage guide](https://code.claude.com/docs/en/data-usage) documents provider-
+and account-dependent operational telemetry defaults: direct Claude API metrics
+are default-on. Listed third-party-provider paths default off unless
+`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` makes their metrics default on; a signed-in
+Claude apps gateway credential separately suppresses Anthropic-bound usage
+analytics and error reporting. Other traffic exceptions remain, and error
+reporting has separate eligibility conditions.
+All three are mutable guides, not a pinned SDK/binary execution result. Thus an
+OTel-disabled SDK deployment cannot be labeled telemetry-free from this evidence;
+pin the actual bundled binary, provider/auth mode and effective settings first.
+
+### Receiving boundary
+
+For #25/#37/#38, record actual SDK and dependency versions, launch entry point,
+provider/auth mode, trace context, effective exporter endpoint and payload-capture
+settings before asserting an egress default. #35's content-approval policy still
+applies even when a vendor enables capture by default. A source declaration is
+not observed traffic, and an unset optional exporter is not an air-gap test.
+This resolves the scoped source questions above only; actual configuration and
+network observation, remaining T4 frameworks, third-party tool rate limits and
+receiving-owner acceptance remain open. No new monitoring rule is adopted here.
+
+## Third-party tool throttling: GitHub and Slack — 2026-10-18
+
+This bounded #26 → #38 supplement starts with two operation families already in
+[T4's inventory](../T4-agents-integrations/tools-apis.md). It proposes monitoring
+inputs, not a new universal retry policy or a change to the frozen integration
+rate-limit field. Both sources were opened on 2026-10-18; they are mutable,
+undated publisher documentation, source-checked / `unverified` for independent
+runtime behavior. No API load test, private workspace read, credential change,
+message send or rate-limit bypass was performed.
+
+**GitHub REST (M-TR1).** [The primary guide](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api)
+identifies primary resource buckets with `x-ratelimit-resource`, limit/remaining/
+used counts and reset time in UTC epoch seconds. Limits depend on authentication
+and endpoint; the T4 personal-token example is not every installation's budget.
+GitHub says response headers take precedence over the rate-limit endpoint and
+may vary between responses, so remaining counts need not decrease monotonically.
+Primary exhaustion gives 403/429 with remaining zero. Secondary throttling also
+gives 403/429 but is identified by the error message; it need not exhaust the
+primary bucket, and no secondary-budget status query exists. Follow a supplied
+`retry-after` in seconds; with remaining zero, respect the reset timestamp;
+otherwise the secondary-limit guidance says to wait at least one minute.
+Repeated secondary failures require increasing backoff and a bounded retry count.
+These are published values/conditions, not observed tenant limits. A generic 403
+alone is insufficient evidence of throttling or permission to retry a denied call.
+
+**Slack Web API (M-TR2).** [The primary guide](https://docs.slack.dev/apis/web-api/rate-limits/)
+scopes limits by method, workspace and app. HTTP 429 carries `Retry-After` in
+seconds; the same method/workspace restriction applies across that app's tokens.
+Other methods or workspaces are not restricted by that particular response, which
+does not certify that they have remaining capacity. Method tiers, pagination and
+app/install cohort matter; preserve T4's dated B42/B43 history/replies cohort
+readback rather than applying one blanket per-minute limit. Exact burst limits
+are unpublished. A retry delay is not a rate, billable quantity or guaranteed
+recovery time, and rotating tokens is not an acceptable substitute for waiting.
+
+### Proposed observation fields and acceptance examples
+
+| Observation | Type / unit | Evidence and boundary |
+| --- | --- | --- |
+| Provider, selected operation, resource/method bucket and scope binding | identifiers; no unit | #26 supplies operation and integration identity. Retain only an approved non-secret scope reference; never record token values or request/response content for this signal. |
+| Throttle classification and missing evidence | enum-like proposed label | Distinguish documented primary/secondary/method throttle, permission failure and unknown; status alone may be insufficient. Keep original header/error classification evidence privately with appropriate minimization. |
+| Response limit/remaining/used, when supplied | nonnegative count with named bucket | Preserve presence separately from zero; absent secondary headroom is unknown, not unlimited. Do not sum incomparable buckets or infer a smooth rate from one response. |
+| Retry delay versus reset instant | seconds versus UTC epoch seconds | Preserve source units and observation time. A delay and a timestamp are different quantities; malformed/missing values stay unknown. |
+| Attempt count, wait duration and terminal outcome | count, seconds, outcome | Proposed client observations, not provider-exported metrics. Separate retry waiting from execution latency; bound attempts and preserve operation side-effect/authorization requirements before any retry. |
+
+Synthetic acceptance cases, not executed integrations: GitHub primary headroom
+above zero plus an explicit secondary-limit message must not pass as healthy;
+Slack method A throttling does not prove method B is throttled; a missing retry
+header must not become a zero-second permission to retry. Unknown classifications
+require review rather than a fabricated successful outcome. Alert thresholds and
+retry budgets remain #38 decisions, safe operation/authorization and ambiguous
+write outcomes remain #26/#35 inputs, and meter units/prices remain #39 before
+versioned #40 adoption. Other tool families, installed SDK retry behavior and
+actual tenant observations remain open.

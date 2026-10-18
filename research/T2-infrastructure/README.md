@@ -1,6 +1,6 @@
 # T2: Infrastructure research
 
-Parent: [#8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) · Live owner: @Mattycodes69 · Contract: 1.0.0 · Research capture: 2026-10-16
+Parent: [#8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8) · Live co-owners: @zwright8, @Mattycodes69 (checked 2026-10-18) · Contract: 1.0.0 · Research capture: 2026-10-16
 
 Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75), merged to `main`. The following publication-era paragraphs are historical; the ledger records later scoped receipts.
 
@@ -45,16 +45,16 @@ Rule groups separate fixed-severity constraints from evidence and applicability 
 
 ## Acceptance, handoffs and tracking
 
-The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–#11 and maps it to artifacts, evidence and reviewers. All required owner acknowledgements are in [handoffs.md](handoffs.md): seven from Hosting, four from Compute, five from Engine. **Confirmed: none at publication.** A request or independent agent review is not a consuming-owner acknowledgement.
+The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–#11 and maps it to artifacts, evidence and reviewers. All required owner acknowledgements are in [handoffs.md](handoffs.md): seven from Hosting, four from Compute, five from Engine. The original publication had no receipts. As reconciled on 2026-10-18, Hosting has scoped #10/#27/#31 receipts, Compute #9/#11/#31, and Engine #10/#25/#33. Reciprocal #25 -> #11 is accepted with constraints by both #11 co-owners; #27/#28 -> #9 is accepted with constraints by Mattycodes69 only. A receipt does not accept every co-owner's scope or establish runtime support. The linked ledger records the actual comments.
 
-| Issue | Live assignee | Research state after submission | Observed Project state / preserved priority |
-| --- | --- | --- | --- |
-| #8 | @Mattycodes69 | Open; summary and all child acceptance/merge gates pending | Backlog / Critical |
-| #9 | @Mattycodes69 | Open; decision-record PR review and handoffs pending | Backlog / High |
-| #10 | @Mattycodes69 | Open; decision-record PR review and handoffs pending | Backlog / Critical |
-| #11 | @Mattycodes69 | Open; decision-record PR review and handoffs pending | Backlog / Critical |
+| Issue | Live coassignees (2026-10-18) | Current research state |
+| --- | --- | --- |
+| #8 | @zwright8, @Mattycodes69 | Open; merged summary and records, full child acceptance remains |
+| #9 | @Mattycodes69, @appletechie | Open; four required receiving interfaces unconfirmed; region/billing decisions remain |
+| #10 | @Mattycodes69, @appletechie | Open; #39 receipt, other co-owner decisions and measurement/headroom work remain |
+| #11 | @zwright8, @Mattycodes69 | Open; #37/#38 receipts, exact tuple evidence and retention/lifecycle decisions remain |
 
-All four Project items were observed as `Tier = T2 Infrastructure`, `Readiness = Ready`. The actual board has `Backlog` and a `Tier` field, which differ from the brief/documentation vocabulary. Its existing status options include `Backlog`, `Ready`, `In Progress`, `In Review`, `Blocked`, `Done`; readiness options match the documented Ready/Needs input/Blocked/Awaiting decision set. The correct status for the open record PR is `In Review`, but the CLI token lacks Project scope and the public browser is signed out. No board write is claimed. @Mattycodes69 / Project administrator must set #8–#11 to `In Review` using the existing option, preserving priority and Tier; @tynamite should reconcile documented field names. No status/priority labels, dates, estimates, iterations or native blockers are added.
+The original Project observations were made on 2026-10-16: `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`, with #8/#10/#11 Critical and #9 High. They are historical, not current board state. Project readback on 2026-10-18 again failed with `INSUFFICIENT_SCOPES` (`read:project` missing); no board write or current value is claimed. Preserve live fields and priorities. An authorized administrator must read current work before any status change; merged partial research alone is insufficient for Done.
 
 Native hierarchy remains #8 → #9/#10/#11. None has a native blocked-by relationship. Scoped issue appendices were corrected to show PR #44 as merged; acceptance wording and ownership were preserved. Related unmerged T5 work was read for handoff context and is not vendor evidence.
 
@@ -66,16 +66,22 @@ See [validation.md](validation.md) for exact checks, independent review findings
 
 | Action / decision | Owner |
 | --- | --- |
-| Review T2 records and proposed region coverage, CPU/edge scope, headroom and engine-retention policy; explicitly confirm internal T2 handoffs | #8–#11 @Mattycodes69 |
+| Review remaining region coverage, CPU/edge scope, headroom and engine-retention choices; internal interface receipts are linked, with other co-owner scope separate | #8–#11 @Mattycodes69 |
 | Review #3 taxonomy/hybrid semantics; #40 rules, completeness/tuple gate and contract proposals; #41 freshness/reuse policy | @tynamite |
 | Confirm model/context/artifact revision assumptions and supply real T1 records for build-bound estimates | #5/#6/#7 @zwright8 |
 | Confirm hosting/storage boundary and retrieval-consumer requirements | #13/#14/#15/#16 @zabyxc01 |
-| Confirm MCP hosting, agent API/tool requirements and memory boundary | #25/#27/#28 @CompleteDotTech |
-| Confirm training reuse and adapter/base/merged-artifact semantics | #31/#33 @appletechie |
+| T4 incoming boundaries accepted with constraints; actual tuple specifications/execution remain; #9 co-owner scope separate | #25/#27/#28 @CompleteDotTech |
+| T5 scoped reuse and lineage receipts are recorded; missing records and reverse-direction decisions remain separate | #31/#33 live co-owners in [ledger](handoffs.md) |
 | Confirm deployment/monitoring handoffs and pricing aggregation/unit policy | #37/#38/#39 @PUSHINGSQUARES |
-| Restore Project write access or apply the verified status updates manually, then re-read them | @Mattycodes69 / organization Project administrator |
+| Read current Project fields with authorized access before any status update; do not replay historical instructions | @Mattycodes69 / organization Project administrator |
 
 Use `Refs #8, #9, #10, #11`. Close no scoped issue until its merged record and full acceptance criteria—including actual owner confirmations—are satisfied; close #8 only after all children and the merged summary meet their gates.
 
 
 2026-10-18 supplement: A100 80GB shared-variant facts, RTX 4090 reference-design facts, the P4de default profile and S3 Standard identity are documented in the existing GPU/hosting records. S3 Standard and the subsequent RTX 4090 precision follow-up have catalog proposals. A100/P4de remain note-only because unresolved precision coverage is unsafe under frozen-v1 membership rules. No rates or measured results are added.
+
+## Interface reconciliation validation (2026-10-18)
+
+Python 3.12.14: pinned `python -m pip install -r requirements-research.txt` completed; `python -m unittest discover -s contracts/v1/tests -v` passed 21 tests; `python -m unittest discover -s tests -v` passed 107 tests with `PYTHONUTF8=1`. The initial Windows-default run failed decoding an existing Apple tracking document as cp1252; UTF-8 mode matched CI without changing tests or that document. `python scripts/validate_research.py` passed 74 CatalogItems and three Pricebooks; `python scripts/validate_market_research.py` passed 33 entities/1,584 cells/20 issues; `python scripts/validate_handoff_audit.py` passed its existing 101-row snapshot; `python prompts/mobile/validate_prompts.py` and `git diff --check` passed. This slice does not refresh #59's separate audit snapshot.
+
+Independent review checked receipt authors, directions, scopes, counts and the preserved #61/headroom gates; its two wording/owner-list findings were corrected. Automated checks establish structure, references and existing behavior, not source truth, rights, freshness, actual engine execution or broader owner acceptance. Vendor facts, pricebooks, frozen v1 and recorded measurements are unchanged.

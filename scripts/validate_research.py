@@ -1,5 +1,6 @@
 """Validate research intake; does not certify claims or publish runtime artifacts."""
 import json
+import math
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -39,13 +40,49 @@ def schema_errors(payload, schema):
     return [f"/{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in validator.iter_errors(payload)]
 
 
+def intake_json(text):
+    """Decode an unambiguous JSON submission without non-finite numbers."""
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError(f'duplicate JSON object key: {key!r}')
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise ValueError(f'non-finite JSON number: {value}')
+
+    def finite_float(value):
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError('JSON number exceeds finite numeric range')
+        return number
+
+    return json.loads(text, object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
+
+
+def locator_parts(uri):
+    """Check original locator syntax without normalizing away malformed input."""
+    if not isinstance(uri, str) or not uri or any(
+            char.isspace() or ord(char) < 0x20 or ord(char) == 0x7f for char in uri):
+        raise ValueError('locator needs nonempty text without whitespace or control characters')
+    value = urlsplit(uri)
+    # urlsplit defers nonnumeric and out-of-range port validation to this property.
+    _ = value.port
+    if value.username is not None or value.password is not None:
+        raise ValueError('locator must not contain user information')
+    return value
+
+
 def public_source(uri):
     try:
-        value = urlsplit(uri)
+        value = locator_parts(uri)
         host = (value.hostname or '').removesuffix('.')
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
-        return value.scheme in {'http', 'https'} and bool(host) and not reserved and not value.username and not value.password
+        return value.scheme in {'http', 'https'} and bool(host) and not reserved
     except (ValueError, TypeError):
         return False
 
@@ -110,7 +147,7 @@ def validate_tree(root=ROOT):
         values = []
         for path in sorted((root / relative).rglob('*.json')):
             try:
-                values.append(json.loads(path.read_text(encoding='utf-8')))
+                values.append(intake_json(path.read_text(encoding='utf-8')))
             except (ValueError, OSError) as exc:
                 errors.append(f'{path}: {exc}')
         return values
@@ -128,8 +165,8 @@ def validate_tree(root=ROOT):
             errors.append(f"{manifest['id']}: duplicate evidence artifact ID")
         artifact_ids.add(manifest['id'])
         try:
-            uri = urlsplit(manifest['uri'])
-            valid = uri.scheme in {'https', 's3', 'gs'} and uri.hostname and not (uri.username or uri.password or uri.query or uri.fragment)
+            uri = locator_parts(manifest['uri'])
+            valid = uri.scheme in {'https', 's3', 'gs'} and uri.hostname and not (uri.query or uri.fragment)
         except ValueError:
             valid = False
         if not valid:

@@ -1,12 +1,12 @@
 # Memory and deletion observability proposal
 
-Refs #28, #35 and #38. Status: proposed research signals; #38 co-owners and #28 receiving review remain pending. This supplements the agent/tool signals in the [merged #121 monitoring record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
+Refs #28, #35 and #38. Status: proposed research signals; [CompleteDotTech's delegated T4 #28 review accepts the interface with constraints](../T4-agents-integrations/README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18). PUSHINGSQUARES' separate #28 confirmation is unrecorded; #35/#38 co-owner adoption remains separate. This supplements the agent/tool signals in the [merged #121 monitoring record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
 
 ## Evidence boundary
 
 The merged [#28 memory record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/8e67caa50e29faf2f15b9004935140f8c9e9e059/research/T4-agents-integrations/agent-memory.md#mem0-deletion-reproduction-and-limits), D57/D58, reports a scoped synthetic reproduction against Mem0 OSS v2.2.1 commit `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd`: deleting the vector still records prior text in SQLite history. The reproduction covers one extracted synchronous method, a synthetic vector stub and upstream in-memory SQLite manager. It does not exercise a full service, actual vector backend, asynchronous deletion, backups or Mem0 Platform. This note inspected that recorded evidence; it did not rerun or expand the experiment.
 
-The [T4 receiving reply](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930) accepts the monitoring handoff narrowly and identifies memory/history growth and deletion-job read-back as follow-up work, explicitly awaiting appletechie's confirmation. The proposal below supplies that missing content without recording confirmation on either owner's behalf. It leaves the OpenLLMetry followup and the agreed #121-first recuts untouched.
+The [T6 receiving reply](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930) accepts the monitoring handoff narrowly and identifies memory/history growth and deletion-job read-back as follow-up work, explicitly awaiting appletechie's confirmation. The proposal below supplies that missing content without recording that confirmation. #121 has merged; that sequencing condition is complete, while the OpenLLMetry follow-up and other T6 decisions remain separate.
 
 ## Candidate signal catalog
 

@@ -1,7 +1,7 @@
 # T0: Saved, Shared & Compared Builds
 
 Issue: #42 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `f297ac5`) · Kinds: `BuildSnapshot`, `Selection`, `CatalogSnapshot` (with `EvaluationReport`, `CostEstimate`, `Pricebook`, `Ruleset`, `DependencyGraph`, `Event` as referenced records)
-Status: draft, not for merge while #40 blocks #42 · Last researched: 2026-10-18 · Guidance: PR #74 Track E (P7)
+Status: partial research proposal; #42 completion remains blocked by #40 · Last researched: 2026-10-18 · Guidance: PR #74 Track E (P7)
 Deliverable path: `research/T0-configuration/saved-shared-builds.md`
 
 Labels used in this note:
@@ -10,6 +10,10 @@ Labels used in this note:
 - **SB-Rn** IDs are rule proposals for #40 review.
 - **Proposal:** a design choice made in this note, not a sourced fact.
 - "Source checked" means the claim was compared with the cited source on its access date. Nothing here is independently reproduced ("verified" in the #41 interim sense, P3).
+
+## Proposal sequencing decision — 2026-10-18
+
+This partial design record can proceed through ordinary PR review and merge while the contract prerequisite remains open. Recording the proposal gives #40 and the other receiving issues concrete semantics to review. It does not adopt the SB or CD field shapes, release a successor contract, activate a consumer, or supply pending receiving-owner acceptance. #40 and #42 remain open, and #42 retains its #40 prerequisite. The earlier draft-hold reviews remain historical records; this decision changes only the order in which the partial proposal may merge, not the requirements for completing the issues.
 
 ## Summary
 
@@ -317,7 +321,7 @@ The #41 invalidation-policy handoff above is confirmed. Other receiving-owner di
 | Sharing and privacy rules | Sharing; Field sensitivity | Drafted; retention open (SB-9) |
 | Comparison semantics with examples | Comparison | Drafted, including required-foundation and optional-tier boundary cases |
 | Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states | Drafted on the interim policy |
-| Decision record merged | — | Not merged; blocked by #40 |
+| Decision record merged | Proposal sequencing decision | Partial record proposed for merge; #42 completion remains blocked by #40 |
 | Deployment modes covered | Candidate options; Comparison | Covered using #81's merged definitions |
 | Comparison fields with type, unit, evidence | Comparison fields | Drafted |
 | Rules in #40 format; verified vs hypotheses | Compatibility proposals | Contract-derived vs hypothesis labelled; none reproduced |
@@ -353,4 +357,4 @@ The #41 invalidation-policy handoff above is confirmed. Other receiving-owner di
 | P6 | `research/T5-training-fine-tuning/README.md` (T5 rules `skipped` when removed) | 2026-10-17 | `main` at `f297ac5` | Project research | — |
 | P7 | `prompts/T0.md` Track E on PR #74 (`docs/maintainer-research-prompts`) | 2026-10-17 | unmerged | Project guidance | Guidance, not acceptance |
 
-Review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing does not settle those schema decisions; this remains a draft blocked by #40.
+Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; the contract decisions and #42 prerequisite remain open.

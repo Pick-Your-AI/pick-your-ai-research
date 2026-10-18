@@ -1,5 +1,7 @@
 """Check market-note integrity, not truth, rights, benchmark quality or acceptance."""
 import json
+import math
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -16,8 +18,43 @@ def require(condition, message):
         raise MarketValidationError(message)
 
 
+def validate_http_url(value, label):
+    """Check the original text and parsed URL without contacting its host."""
+    require(isinstance(value, str) and value.strip(), f'{label}: requires nonempty text')
+    require(not any(character.isspace() or ord(character) < 0x20 or
+                    ord(character) == 0x7f for character in value),
+            f'{label}: whitespace or control character in URL')
+    try:
+        url = urlsplit(value)
+        # Parsing alone does not validate a nonnumeric or out-of-range port.
+        _ = url.port
+        hostname = url.hostname
+    except ValueError as error:
+        raise MarketValidationError(f'{label}: invalid HTTP(S) URL') from error
+    require(url.scheme in ('http', 'https') and hostname,
+            f'{label}: requires HTTP(S) with a hostname')
+    require(url.username is None and url.password is None, f'credentials in {label}')
+
+
 def read(name):
-    return json.loads((BASE / name).read_text(encoding='utf-8'))
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, f'{name}: duplicate JSON object key: {key!r}')
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise MarketValidationError(f'{name}: non-finite JSON number: {value}')
+
+    def finite_float(value):
+        number = float(value)
+        require(math.isfinite(number), f'{name}: JSON number exceeds finite numeric range')
+        return number
+
+    return json.loads((BASE / name).read_text(encoding='utf-8'),
+                      object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
 
 
 def validate():
@@ -28,9 +65,7 @@ def validate():
     source_ids = {s['id'] for s in sources}
     require(len(source_ids) == len(sources), 'duplicate source IDs')
     for source in sources:
-        url = urlsplit(source['url'])
-        require(url.scheme in ('http', 'https') and url.netloc, 'market integrity check failed')
-        require(not url.username and (not url.password), 'credentials in source URL')
+        validate_http_url(source.get('url'), 'source URL')
         require(source['access_date'] and source['access_status'], 'market integrity check failed')
     for competitor in competitors:
         require(set(competitor['source_ids']) <= source_ids, 'market integrity check failed')
@@ -58,7 +93,19 @@ def validate():
         require(cell['status'] in matrix['status_semantics'], 'market integrity check failed')
         require(set(cell['evidence_ids']) <= source_ids, 'market integrity check failed')
         if cell['status'] != 'Unknown':
-            require(cell['evidence_ids'] and cell['basis'] and cell['verification_method'], 'market integrity check failed')
+            require(cell['evidence_ids'], 'market integrity check failed')
+            for field in ('basis', 'verification_method', 'evidence_grade', 'evidence_url',
+                          'access_date', 'confidence', 'limitations', 'audit_scope'):
+                value = cell.get(field)
+                require(isinstance(value, str) and value.strip(),
+                        f'{pair}: supported cell requires nonempty {field}')
+            validate_http_url(cell['evidence_url'], f'{pair}: evidence_url')
+            try:
+                access_date = date.fromisoformat(cell['access_date'])
+            except ValueError as error:
+                raise MarketValidationError(f'{pair}: invalid access_date') from error
+            require(access_date.isoformat() == cell['access_date'],
+                    f'{pair}: access_date must use YYYY-MM-DD')
     require(len(pairs) == len(ids) * len(matrix['definitions']), 'incomplete matrix')
     numbers = {item['number'] for item in backlog}
     require(len(numbers) == len(backlog), 'duplicate backlog issue')

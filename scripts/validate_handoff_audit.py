@@ -1,6 +1,7 @@
 """Check snapshot consistency and scoped handoff attribution, never evidence acceptance."""
 from collections import Counter
 import json
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +16,30 @@ def require(condition, message):
         raise HandoffValidationError(message)
 
 
+def read_json(path):
+    """Reject ambiguous object keys and non-finite numbers before audit indexing."""
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result,
+                    f'{path.name}: duplicate JSON object key: {key!r}')
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise HandoffValidationError(f'{path.name}: non-finite JSON number: {value}')
+
+    def finite_float(value):
+        number = float(value)
+        require(math.isfinite(number),
+                f'{path.name}: JSON number exceeds finite numeric range')
+        return number
+
+    return json.loads(path.read_text(encoding='utf-8'),
+                      object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
+
+
 def response_status(row):
     if row.get('owner_review') or any(
             response['role'] == 'receiving_owner'
@@ -25,9 +50,12 @@ def response_status(row):
 
 def validate(ledger, readback, audit):
     issues = {issue['number']: issue for issue in readback['issues']}
+    require(len(issues) == len(readback['issues']), 'duplicate snapshot issue')
     pairs = {(row['market_issue'], row['consumer_issue']) for row in ledger}
     require(len(pairs) == len(ledger), 'duplicate handoff pair')
     declared = set(map(tuple, readback['declared_handoff_pairs']))
+    require(len(declared) == len(readback['declared_handoff_pairs']),
+            'duplicate declared handoff pair')
     require(declared <= pairs, 'missing declared handoff')
     require(audit['snapshot_cutoff_utc'] == readback['snapshot_cutoff_utc'],
             'audit and readback cutoff differ')
@@ -35,6 +63,8 @@ def validate(ledger, readback, audit):
             'audit and readback base commit differ')
     historical = {(r['market_issue'], r['consumer_issue']): r['owner_review']
                   for r in readback['historical_owner_reviews']}
+    require(len(historical) == len(readback['historical_owner_reviews']),
+            'duplicate historical review pair')
     observed_history = {(r['market_issue'], r['consumer_issue']): r['owner_review']
                         for r in ledger if 'owner_review' in r}
     require(observed_history == historical, 'historical review changed or dropped')
@@ -92,6 +122,8 @@ def validate(ledger, readback, audit):
                     for child in issue['sub_issues']),
                 'native parent/sub-issue mismatch')
     captured_prs = {pr['number'] for pr in readback['pull_requests']}
+    require(len(captured_prs) == len(readback['pull_requests']),
+            'duplicate snapshot pull request')
     require(all(n in captured_prs for row in audit['issues'] for n in row['related_prs']),
             'technical classification references an uncaptured PR')
     return coverage
@@ -99,7 +131,7 @@ def validate(ledger, readback, audit):
 
 def main():
     base = ROOT / 'research' / 'market'
-    load = lambda name: json.loads((base / name).read_text(encoding='utf-8'))
+    load = lambda name: read_json(base / name)
     coverage = validate(load('handoffs.json'), load('handoff-audit-readback.json'),
                         load('audit.json'))
     print(f'Handoff audit integrity OK: {coverage["total_rows"]} rows; '

@@ -11,8 +11,10 @@ action. Issues #56 and #61 remain open.
 The [2026-10-17 receiving disposition on #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
 narrows #7/#11 acceptance to context/runtime accounting interfaces. It explicitly
 does not accept empirical completion, waive MoE/multi-GPU cases or supply error
-bounds. The evidence remains 15 bounded dense runs and zero matched
-competitor/runtime pairs. No hardware run was performed for this refresh.
+bounds. The historical evidence comprises 15 bounded dense runs. The separately dated
+[GM1 continuation](sizing-validation.md#supplemental-gm1-execution--2026-10-18)
+adds three successful short MoE runs under unchanged guards/cap, in a separate
+driver cohort. Matched competitor/runtime pairs remain zero.
 
 PR #83 is now a partial desk analysis against `main`, with appletechie's outstanding
 change request and separate #36/#39 receiving decisions. #65 has an active writer;
@@ -32,11 +34,11 @@ and [#10 decision](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-
 | #61 live criterion (unchanged) | Current support | Remaining gate |
 | --- | --- | --- |
 | Design dense and MoE measurement matrix | Pinned design; executed cells separated from plans | Owner design review; missing architecture/topology work remains |
-| Vary context cache precision and concurrency | Dense D1–D5 observations | Missing MoE variations and boundary coverage; no waiver |
-| Measure peak allocated and reserved memory | Six phases in 15 dense observations | Missing architecture/per-rank evidence and human validity review |
-| Report error bounds and failures without universal fit claims | Failure/mismatch categories and bounded layout check | Zero matched competitor/runtime pairs; numerical error range unavailable; comparable inputs and reviewed tolerance needed |
+| Vary context cache precision and concurrency | Dense D1–D5 plus supplemental short GM1 observations | Missing MoE variations and boundary coverage; no waiver |
+| Measure peak allocated and reserved memory | Six phases in 15 historical dense and three separate GM1 observations | Missing architecture/per-rank evidence and human validity review |
+| Report error bounds and failures without universal fit claims | Six llmfit executions, ModelFit audit, original author-reported planner inspection and separately dated visible-control corroboration; 12 native KV component pairs, all zero difference, not whole-runtime calibration | Zero matched competitor/runtime pairs; numerical error range unavailable; comparable inputs and reviewed tolerance needed |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Pinned source/result ledger and limitations | Coordinator evidence, reproducibility and reuse review |
-| Relevant technical owners review handoffs; unresolved decisions are named. | Zwright8's scoped #7/#11 interface receipt | Other co-owner responses; #10 headroom/note-only consumption/future placement proposal awaits disposition |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Zwright8's scoped #7/#11 interface receipt | Appletechie accepted earlier #10 note-only policy/headroom methodology at reviewed main 66b46d4, explicitly no runtime result; new GM1 evidence, other co-owner scope and future placement await disposition |
 | Repository checks pass; reviewer accepts the evidence before Done. | This contribution is submitted for current-revision workflow and review | Current-head validation and required human review; no Done claim |
 
 The proposed headroom policy requires an explicit per-device scenario fraction
@@ -47,11 +49,24 @@ owner agreement and explicit matching-schema validation. No raw measurement is
 renamed to an estimate metric, no build IDs are fabricated, and no frozen schema
 is changed.
 
-Full empirical scope is retained. A changed acceptance scope requires an
-explicit co-owner/coordinator disposition naming the exact deferred cells and
-claims. This continuation performs no new GPU run, download or hardware probe.
+Full empirical scope remains as recorded in the live issue. The
+[hardware continuation checklist](sizing-validation.md#hardware-required-for-full-scope-continuation-2026-10-18)
+records existing numeric guards, the OLMoE payload floor, unquantified RAM/disk
+requirements and missing multi-rank instrumentation. This research follow-up
+records the hardware needed under that scope; a named authorized full hardware
+path, comparable estimator pairs and evidence acceptance remain outstanding. The
+GM1 continuation used existing spare local capacity only, after fresh passing
+guards; it supplies no new device/cost authorization and does not replace the
+varied OLMoE or topology requirements.
 Canonical market handoff ledgers remain with #59's writer; the linked receipt
-does not accept another co-owner's scope or the newly proposed #10 decisions.
+does not accept another co-owner's scope or the new GM1 evidence.
+
+The [2026-10-18 estimator execution](measurements/mr09-estimator-comparison-2026-10-18.md)
+supplies bounded component checks, not a whole-runtime error bound. Its two
+q4_0 probes and other unexpressed inputs remain explicit mismatches. #61 co-owners
+and #10/#11 must agree an expressible estimator quantity/runtime protocol before
+whole-runtime calibration; the coordinator retains any decision tolerance.
+This does not waive missing architecture/topology work or accept new evidence.
 
 ## Historical submission record — 2026-10-16
 

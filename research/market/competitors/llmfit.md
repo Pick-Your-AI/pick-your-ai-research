@@ -36,7 +36,7 @@ Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-
 | (b) Code licence | SPDX `MIT` (`gh api repos/AlexsJones/llmfit/license`) | Observed | [licence](https://github.com/AlexsJones/llmfit/blob/main/LICENSE) |
 | (c) Data reuse | Repository data (including `data/hf_models.json`) under MIT; llmfit.org page content is "All rights reserved" and is not covered. Upstream Hugging Face model metadata keeps its own terms | Observed / Documented | [repository](https://github.com/AlexsJones/llmfit), [seed site](https://www.llmfit.org/) |
 
-Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes for repository data with the MIT notice; website content excluded. This profile agrees.
+Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): all four uses Yes for repository data with the MIT notice; website content excluded. This profile agrees.
 
 ## Counterexample
 
@@ -45,7 +45,7 @@ Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82):
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `saved`, `share`, `export` Documented; `model_versions` Unknown. Agrees.
 
 ## Open questions and routing
 

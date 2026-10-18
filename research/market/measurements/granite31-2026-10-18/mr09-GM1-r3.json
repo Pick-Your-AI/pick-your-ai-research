@@ -1,0 +1,240 @@
+{
+  "classification": "independent project measurement; bounded configuration",
+  "cell": "GM1",
+  "repetition": 3,
+  "started_utc": "2026-10-18T05:47:18.886793+00:00",
+  "command_argv": [
+    "scripts/mr09_granite31_measure.py",
+    "--model-dir",
+    "$MODEL_DIR",
+    "--output",
+    "research/market/measurements/granite31-2026-10-18/mr09-GM1-r3.json",
+    "--repetition",
+    "3"
+  ],
+  "model_id": "ibm-granite/granite-3.1-1b-a400m-instruct",
+  "revision": "0da7a48b0276d500ce5922fd2b33944091fc6c09",
+  "status": "success",
+  "phases": [
+    {
+      "phase": "baseline",
+      "elapsed_seconds": 3.7099998735357076e-05,
+      "current_allocated_bytes": 0,
+      "current_reserved_bytes": 0,
+      "peak_allocated_bytes": 0,
+      "peak_reserved_bytes": 0,
+      "driver_free_bytes": 15769534464,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "loading",
+      "elapsed_seconds": 1.9797723000010592,
+      "current_allocated_bytes": 2669257728,
+      "current_reserved_bytes": 2675965952,
+      "peak_allocated_bytes": 2669257728,
+      "peak_reserved_bytes": 2675965952,
+      "driver_free_bytes": 13093568512,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "warmup",
+      "elapsed_seconds": 1.1393691999983275,
+      "current_allocated_bytes": 2681073664,
+      "current_reserved_bytes": 2707423232,
+      "peak_allocated_bytes": 2686198272,
+      "peak_reserved_bytes": 2707423232,
+      "driver_free_bytes": 12999196672,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "prefill",
+      "elapsed_seconds": 0.21119680000265362,
+      "current_allocated_bytes": 2690461696,
+      "current_reserved_bytes": 2740977664,
+      "peak_allocated_bytes": 2711454720,
+      "peak_reserved_bytes": 2740977664,
+      "driver_free_bytes": 12965642240,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "decode",
+      "elapsed_seconds": 4.568640099998447,
+      "current_allocated_bytes": 2691935744,
+      "current_reserved_bytes": 2740977664,
+      "peak_allocated_bytes": 2697602048,
+      "peak_reserved_bytes": 2740977664,
+      "driver_free_bytes": 12965642240,
+      "driver_total_bytes": 17094475776
+    },
+    {
+      "phase": "steady_state",
+      "elapsed_seconds": 3.499999729683623e-05,
+      "current_allocated_bytes": 2691935744,
+      "current_reserved_bytes": 2740977664,
+      "peak_allocated_bytes": 2691935744,
+      "peak_reserved_bytes": 2740977664,
+      "driver_free_bytes": 12965642240,
+      "driver_total_bytes": 17094475776
+    }
+  ],
+  "error_comparisons": [],
+  "configuration": {
+    "weight_dtype": "bfloat16",
+    "weight_quantization": "none",
+    "kv_cache": "bf16",
+    "prompt_tokens_per_sequence": 256,
+    "decode_forwards_per_sequence": 32,
+    "active_sequences": 1,
+    "queued_requests": 0,
+    "seed": 6109,
+    "attention_backend": "sdpa",
+    "graph_capture": false,
+    "compile": false,
+    "device_map": {
+      "": "cuda:0"
+    },
+    "offload": false,
+    "tensor_parallel_size": 1,
+    "pipeline_parallel_size": 1
+  },
+  "script_sha256": "338ebb6a197712b655c5c2f69d6b1dbc0a51265455773b58c32ea2bc87c13974",
+  "protocol_sha256": "c053ef264bf9064854a4abdcc626ea749eb12dd2bcca00219b4a087a8174f904",
+  "environment": {
+    "python": "3.12.11 (main, Aug 18 2025, 19:17:54) [MSC v.1944 64 bit (AMD64)]",
+    "torch": "2.10.0+cu130",
+    "cuda_build": "13.0",
+    "packages": {
+      "transformers": "5.0.0",
+      "accelerate": "1.13.0",
+      "safetensors": "0.7.0",
+      "numpy": "2.4.1",
+      "huggingface-hub": "1.3.5",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "count": 1,
+    "properties": "_CudaDeviceProperties(name='NVIDIA GeForce RTX 5070 Ti', major=12, minor=0, total_memory=16302MB, multi_processor_count=70, pci_bus_id=2, pci_device_id=0, pci_domain_id=0, L2_cache_size=48MB)",
+    "initial_driver_free_bytes": 15769534464,
+    "driver_total_bytes": 17094475776,
+    "process_allocator_limit_bytes": 3221225472,
+    "allocator_backend": "native",
+    "nvidia_smi_csv": "index, name, memory.total [MiB], memory.used [MiB], memory.free [MiB], driver_version, pci.bus_id\n0, NVIDIA GeForce RTX 5070 Ti, 16303 MiB, 9163 MiB, 6835 MiB, 610.88, 00000000:02:00.0"
+  },
+  "artifact_manifest": {
+    "model_id": "ibm-granite/granite-3.1-1b-a400m-instruct",
+    "revision": "0da7a48b0276d500ce5922fd2b33944091fc6c09",
+    "license": "Apache-2.0",
+    "license_source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/blob/0da7a48b0276d500ce5922fd2b33944091fc6c09/README.md",
+    "reuse": "publisher labels Apache-2.0; weights not redistributed",
+    "publisher": "IBM Granite",
+    "access_date": "2026-10-18",
+    "evidence_class": "pinned publisher metadata plus local hash/size checks",
+    "model_format": "safetensors",
+    "artifacts": [
+      {
+        "file": "config.json",
+        "bytes": 889,
+        "sha256": "f1b64813debfabeb9cc20f1a13ed8248da6774fe54e532d19912d4b3f2ab335d",
+        "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/config.json"
+      },
+      {
+        "file": "generation_config.json",
+        "bytes": 132,
+        "sha256": "df006c64ad35b18712527cb5130a7a13a4d8a7c5c23653feea59be88e2e2a4ca",
+        "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/generation_config.json"
+      },
+      {
+        "file": "tokenizer.json",
+        "bytes": 3475806,
+        "sha256": "ed944c0b3d71e2d651a5ba0f8e7b350faff30031c8e3353de70b12b9c1bf5654",
+        "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/tokenizer.json"
+      },
+      {
+        "file": "tokenizer_config.json",
+        "bytes": 8072,
+        "sha256": "ab17e0d532ecf47e9d8451939dd81f25dd98c5fba4b6742584549bbf9c1f06b9",
+        "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/tokenizer_config.json"
+      },
+      {
+        "file": "special_tokens_map.json",
+        "bytes": 701,
+        "sha256": "596d752bf46f5cace1f6826b52ed7d913347a4eea0ecce8ab2f869471ca40369",
+        "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/special_tokens_map.json"
+      },
+      {
+        "file": "model.safetensors",
+        "bytes": 2669283096,
+        "sha256": "ac02591061f1344027a7e7b11dbb4143f75f166c47dc09b742f5de3ab1dde1d1",
+        "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/model.safetensors"
+      }
+    ]
+  },
+  "model_geometry": {
+    "layers": 24,
+    "kv_heads": 8,
+    "head_dim": 64,
+    "max_position_embeddings": 131072,
+    "actual_unique_parameter_elements": 1334628352,
+    "actual_parameter_payload_bytes": 2669256704
+  },
+  "workload": {
+    "text": "The red bird rests near a quiet tree. Water flows past green fields. ",
+    "add_special_tokens": false,
+    "prompt_token_ids_sha256": "8a1e35424ccc80204b5795b98a9115bd01b0445245a76ed77a059c67b2d745a5",
+    "generation": "greedy argmax, no EOS early stop; only counters retained"
+  },
+  "warmup_reset": "released own outputs/cache, synchronize then empty_cache before prefill; weights preserved",
+  "native_kv_prefill_payload": {
+    "measured_bytes": 12582912,
+    "estimated_bytes": 12582912,
+    "target": "native KV tensor payload only; excludes workspace/allocator/runtime",
+    "estimator": "model-config dense KV formula, not competitor calibration",
+    "errors": {
+      "signed_bytes": 0,
+      "absolute_bytes": 0,
+      "signed_relative_percent": 0.0
+    }
+  },
+  "actual_tokens": {
+    "prompt_per_sequence": 256,
+    "decode_forwards_per_sequence": 32,
+    "greedy_tokens_produced_per_sequence": 33,
+    "cache_tokens_per_sequence": 288,
+    "active_sequences": 1,
+    "queued_requests": 0,
+    "note": "prefill predicts first token;32 decode forwards predict32 more;last prediction not in cache"
+  },
+  "native_kv_steady_payload_bytes": 14155776,
+  "finished_utc": "2026-10-18T05:47:45.559196+00:00",
+  "fresh_preflight": {
+    "classification": "read-only capacity screen; not inference or a fit guarantee",
+    "profile": "granite31",
+    "observed_utc": "2026-10-18T05:47:18.778363+00:00",
+    "thresholds": {
+      "nvidia_smi_free_mib": 4096,
+      "available_host_ram_bytes": 12884901888,
+      "temporary_volume_free_bytes": 6412308016
+    },
+    "methods": [
+      "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+      "Windows kernel32 GlobalMemoryStatusEx.ullAvailPhys",
+      "Python shutil.disk_usage(temporary_dir).free"
+    ],
+    "observed": {
+      "nvidia_smi_free_mib": 7349,
+      "available_host_ram_bytes": 27149615104,
+      "temporary_volume_free_bytes": 19367280640
+    },
+    "guards": {
+      "nvidia_smi_free_mib": true,
+      "available_host_ram_bytes": true,
+      "temporary_volume_free_bytes": true
+    },
+    "status": "admitted_to_download_screen_only",
+    "reason": "all screens satisfied; recheck before inference"
+  },
+  "dense_instrument_source_sha256": "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8",
+  "publication_sanitization": "local paths replaced by named placeholders by runner; hardware UUID removed; LF line endings normalized for Git; counters/pins unchanged"
+}
