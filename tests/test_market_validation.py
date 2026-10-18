@@ -434,6 +434,91 @@ class MarketValidation(unittest.TestCase):
                     self.assertIn('MarketValidationError', result.stderr)
                     self.assertNotIn('Market integrity OK', result.stdout)
 
+    def assert_invalid_backlog(self, records, error_text):
+        data = deepcopy(self.data)
+        data['research-backlog.json'] = records
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn(error_text, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_backlog_issue_numbers_are_positive_json_integers(self):
+        baseline = self.data['research-backlog.json']
+        for value in (True, False, 0, -1, 1.0, 1.5, '1', '', None):
+            with self.subTest(number=value):
+                records = deepcopy(baseline)
+                records[0]['number'] = value
+                self.assert_invalid_backlog(records, 'number must be a positive JSON integer')
+        records = deepcopy(baseline)
+        del records[0]['number']
+        self.assert_invalid_backlog(records, 'number must be a positive JSON integer')
+
+    def test_backlog_parent_numbers_cannot_alias_or_disappear(self):
+        baseline = self.data['research-backlog.json']
+        for value in (True, False, 0, -1, 1.0, 1.5, '1', ''):
+            with self.subTest(parent_number=value):
+                records = deepcopy(baseline)
+                child = deepcopy(records[0])
+                child.update(number=2, parent_number=value)
+                records.append(child)
+                self.assert_invalid_backlog(records, 'parent_number must be a positive JSON integer')
+
+    def test_backlog_scores_require_six_ordinal_integers_or_null(self):
+        baseline = self.data['research-backlog.json']
+        for scores, total in ((None, 1), ([], 1), ('111111', 1),
+                              ([1] * 5, 1), ([1] * 7, 1),
+                              ([True] * 6, 1), ([False] * 6, 0),
+                              ([1.0] * 6, 1), ([1.5] * 6, 1.5),
+                              ([0] * 6, 0), ([6] * 6, 6), (['1'] * 6, 1)):
+            with self.subTest(scores=scores):
+                records = deepcopy(baseline)
+                records[0].update(scores=scores, score=total)
+                self.assert_invalid_backlog(records, 'six ordinal JSON integers from 1 to 5 or null')
+
+    def test_backlog_total_requires_a_number_or_exact_unknown(self):
+        baseline = self.data['research-backlog.json']
+        for total in (True, False, '1', None):
+            with self.subTest(total=total):
+                records = deepcopy(baseline)
+                records[0]['score'] = total
+                self.assert_invalid_backlog(records, 'incorrect priority arithmetic')
+        for total in (True, 0, 1):
+            records = deepcopy(baseline)
+            records[0].update(scores=[None, 1, 2, 3, 4, 5], score=total)
+            self.assert_invalid_backlog(records, 'incorrect priority arithmetic')
+
+    def test_backlog_integer_graph_and_known_unknown_scores_still_pass(self):
+        for scores, total in (([1, 1, 1, 1, 1, 1], 1),
+                              ([5, 5, 5, 5, 5, 5], 5.0),
+                              ([1, 2, 3, 4, 5, 1], 2.45),
+                              ([None, 1, 2, 3, 4, 5], None),
+                              ([None] * 6, None)):
+            data = deepcopy(self.data)
+            root = data['research-backlog.json'][0]
+            root.update(scores=scores, score=total, parent_number=None)
+            child = deepcopy(root)
+            child.update(number=2, parent_number=1)
+            data['research-backlog.json'].append(child)
+            for optimized in (False, True):
+                with self.subTest(scores=scores, total=total, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Market integrity OK: 1 entities, 1 cells, 2 issues', result.stdout)
+
+    def test_backlog_duplicate_missing_parent_and_cycles_still_fail(self):
+        baseline = self.data['research-backlog.json']
+        self.assert_invalid_backlog(baseline + deepcopy(baseline), 'duplicate backlog issue')
+        records = deepcopy(baseline)
+        records[0]['parent_number'] = 2
+        self.assert_invalid_backlog(records, 'market integrity check failed')
+        child = deepcopy(records[0])
+        child.update(number=2, parent_number=1)
+        records.append(child)
+        self.assert_invalid_backlog(records, 'cyclic parent links')
+
     def test_invalid_inputs_fail_in_both_modes(self):
         cases = []
         data = deepcopy(self.data)

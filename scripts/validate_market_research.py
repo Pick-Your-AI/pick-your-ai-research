@@ -196,6 +196,13 @@ def validate():
             require(access_date.isoformat() == cell['access_date'],
                     f'{pair}: access_date must use YYYY-MM-DD')
     require(len(pairs) == len(ids) * len(matrix['definitions']), 'incomplete matrix')
+    for index, item in enumerate(backlog):
+        for field in ('number', 'parent_number'):
+            value = item.get(field)
+            require((field == 'parent_number' and value is None) or
+                    (type(value) is int and value > 0),
+                    f'backlog[{index}]: {field} must be a positive JSON integer'
+                    + (' or absent/null' if field == 'parent_number' else ''))
     numbers = {item['number'] for item in backlog}
     require(len(numbers) == len(backlog), 'duplicate backlog issue')
     parents = {}
@@ -205,10 +212,15 @@ def validate():
             require(item.get(key), (item['number'], key))
         require((BASE / item['deliverable']).exists(), item['deliverable'])
         scores = item['scores']
-        require(len(scores) == 6 and all((v is None or 1 <= v <= 5 for v in scores)), 'market integrity check failed')
+        require(isinstance(scores, list) and len(scores) == 6 and
+                all(v is None or (type(v) is int and 1 <= v <= 5) for v in scores),
+                'backlog scores must be six ordinal JSON integers from 1 to 5 or null')
         expected = None if None in scores else round(sum(a*b for a,b in zip(scores, (.25,.20,.20,.15,.1,.1))), 2)
-        require(item['score'] == expected, 'incorrect priority arithmetic')
-        if item.get('parent_number'):
+        actual = item['score']
+        require((actual is None if expected is None else
+                 type(actual) in (int, float) and actual == expected),
+                'incorrect priority arithmetic')
+        if item.get('parent_number') is not None:
             require(item['parent_number'] in numbers, 'market integrity check failed')
             parents[item['number']] = item['parent_number']
         if item['status'] == 'Done':
