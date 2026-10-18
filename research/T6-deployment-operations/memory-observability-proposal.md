@@ -1,6 +1,6 @@
 # Memory and deletion observability proposal
 
-Refs #28, #35 and #38. Status: proposed research signals; #38 co-owners and #28 receiving review remain pending. This supplements the agent/tool signals in the [#121 monitoring draft](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
+Refs #28, #35 and #38. Status: proposed research signals; #38 co-owners and #28 receiving review remain pending. This supplements the agent/tool signals in the [merged #121 monitoring record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
 
 ## Evidence boundary
 
