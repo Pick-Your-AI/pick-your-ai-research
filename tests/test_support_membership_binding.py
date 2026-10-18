@@ -78,7 +78,7 @@ class SupportBindingTests(unittest.TestCase):
             ("safetensors", "pass", "documented_member"),
         ])
         self.assertTrue(all_result["decision"]["disputed"])
-        self.assertEqual(all_result["decision"]["evidence_label"], "unverified")
+        self.assertIsNone(all_result["decision"]["evidence_label"])
         self.assertEqual(all_result["query"]["severity"], "error")
 
     def test_any_all_negative_findings_need_explicit_requested_completeness(self):
@@ -183,9 +183,9 @@ class SupportBindingTests(unittest.TestCase):
                 self.assertEqual(self.result()["decision"]["outcome"], "skipped")
 
     def test_old_proposal_versions_are_rejected_without_silent_upgrade(self):
-        self.assertEqual(self.proposal["proposal_version"], "cd3-0.2")
-        self.assertEqual(self.proposal["query"]["version"], "0.2.0")
-        for version in ("cd3-0.1", "cd3-0.3"):
+        self.assertEqual(self.proposal["proposal_version"], "cd3-0.3")
+        self.assertEqual(self.proposal["query"]["version"], "0.3.0")
+        for version in ("cd3-0.1", "cd3-0.2", "cd3-0.4"):
             with self.subTest(version=version):
                 self.setUp(); self.proposal["proposal_version"] = version
                 with self.assertRaisesRegex(ValueError, "invalid CD-3 query"):
@@ -193,15 +193,17 @@ class SupportBindingTests(unittest.TestCase):
 
     def test_current_query_does_not_reuse_prior_version_answer_paths(self):
         before = dict(self.values)
-        self.values.clear()
-        self.values.update({path.replace('/rule.fixture.engine.formats/0.2.0/',
-                                         '/rule.fixture.engine.formats/0.1.0/'): value
-                            for path, value in before.items()})
-        result = self.result()
-        self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
-                         ("unknown", "applicability_unknown"))
-        self.assertTrue(all(value == {"state": "missing"} for value in result["inputs"].values()))
-        self.assertIsNone(result["inputs"]["requested_complete"].get("value"))
+        for version in ("0.1.0", "0.2.0"):
+            with self.subTest(version=version):
+                self.values.clear()
+                self.values.update({path.replace('/rule.fixture.engine.formats/0.3.0/',
+                                                 f'/rule.fixture.engine.formats/{version}/'): value
+                                    for path, value in before.items()})
+                result = self.result()
+                self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                                 ("unknown", "applicability_unknown"))
+                self.assertTrue(all(value == {"state": "missing"} for value in result["inputs"].values()))
+                self.assertIsNone(result["inputs"]["requested_complete"].get("value"))
 
     def test_known_empty_exhaustive_list_differs_from_unmarked_or_missing_list(self):
         self.fact("requested", ["onnx"])

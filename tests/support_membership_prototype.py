@@ -30,6 +30,9 @@ class Evidence:
     supported: frozenset[str] | None
     exhaustive: bool | None = None
     unsupported: frozenset[str] = frozenset()
+    # A separate caller-established provenance fact, never inferred from
+    # eligibility, source_id, list presence or the membership verdict.
+    checked_only: bool | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -47,7 +50,7 @@ class Decision:
     source_id: str
     findings: tuple[Finding, ...] = ()
     disputed: bool = False
-    evidence_label: str = "unverified"
+    evidence_label: str | None = None
 
 
 def normalized_fact(value: bool | None) -> bool | None:
@@ -93,12 +96,15 @@ def evaluate(
     The opposite definitive verdicts need a nonempty, known-complete requested
     set. Empty sets stay unknown, including explicitly complete empty sets.
     The caller qualifies the completeness fact independently of list values.
+    A checked-only label requires separately qualified provenance and actual
+    use of the cohort; no grade is inferred from eligibility or an outcome.
     """
     requested_values(requested)
     normalized_fact(requested_complete)
     normalized_fact(applicable)
     normalized_fact(evidence.eligible)
     normalized_fact(evidence.exhaustive)
+    normalized_fact(evidence.checked_only)
     if requirement not in (Requirement.ANY, Requirement.ALL):
         raise ValueError("requirement must be any or all")
     if applicable is False:
@@ -137,10 +143,18 @@ def evaluate(
         outcome = Outcome.UNKNOWN
         reason = ("requested_set_incomplete" if requested_complete is False
                   else "requested_completeness_unknown")
+    # A missing positive inventory with no relevant negative claim has no
+    # evidence to label, even if a caller supplied checked-only provenance.
+    used_evidence = any(finding.reason in {
+        "documented_member", "explicit_unsupported", "exhaustive_absence",
+        "unmarked_absence", "opposite_equal_rank_claims",
+    } for finding in findings)
     return Decision(
         outcome,
         reason,
         evidence.source_id,
         findings,
         any(finding.disputed for finding in findings),
+        evidence_label=("unverified" if evidence.checked_only is True and used_evidence
+                        else None),
     )

@@ -3,7 +3,8 @@
 The caller establishes selection activation, exact catalog/configuration scope
 and separately eligible applicability, requirements and evidence. Recorded
 hashes and source labels do not authenticate any of those facts. This wrapper
-uses the corrected requested-set completeness reducer; frozen v1 is unchanged.
+uses the corrected requested-set completeness reducer and separately qualified
+checked-only provenance; frozen v1 is unchanged.
 """
 
 from copy import deepcopy
@@ -116,13 +117,17 @@ class SupportQueryRecord:
     def scope(self):
         return deepcopy(self._proposal["scope"])
 
-    def evaluate(self, selected_scope, *, enabled, eligible_inputs=None):
+    def evaluate(self, selected_scope, *, enabled, eligible_inputs=None, cohort_checked_only=None):
         """Return a closed result over this invocation's caller-established scope.
 
         Eligibility omission is unresolved. Neither source strings nor a prior
         call supply eligibility; each input group is qualified independently.
         A false applicability value can skip only when its eligibility is true.
+        Checked-only provenance is separately established for this exact cohort;
+        it cannot be supplied by an answer's source string or result flags.
         """
+        if cohort_checked_only is not None and type(cohort_checked_only) is not bool:
+            raise ValueError("checked-only qualification must be an exact Boolean or unresolved")
         if enabled is not None and type(enabled) is not bool:
             raise ValueError("enabled must be an exact Boolean or unresolved")
         if selected_scope is not None:
@@ -179,20 +184,21 @@ class SupportQueryRecord:
                 frozenset(known("requested")),
                 Evidence(proposal["cohort"]["id"], True,
                          None if supported is None else frozenset(supported),
-                         known("exhaustive"), frozenset(known("unsupported"))),
+                         known("exhaustive"), frozenset(known("unsupported")),
+                         checked_only=cohort_checked_only),
                 Requirement(proposal["query"]["requirement"]),
                 requested_complete=(known("requested_complete")
                                     if eligible["requested_complete"] is True else None),
             )
         result = {"x_t0_support_result": {
-            "proposal_version": "cd3-0.2",
+            "proposal_version": "cd3-0.3",
             "binding_sha256": digest(self._binding_bytes),
             "answer_states_sha256": digest(self._answer_bytes),
             "query": deepcopy(proposal["query"]),
             "scope": deepcopy(proposal["scope"]),
             "cohort": deepcopy(proposal["cohort"]),
             "evaluation": {"enabled": enabled, "selected_scope": deepcopy(selected_scope),
-                           "eligible_inputs": eligible},
+                           "eligible_inputs": eligible, "cohort_checked_only": cohort_checked_only},
             "inputs": {field: answer_wire(answer) for field, answer in self._answers.items()},
             "decision": asdict(decision),
         }}
@@ -202,7 +208,7 @@ class SupportQueryRecord:
         validate(RESULT, result, "CD-3 result")
         return result
 
-    def verify_result(self, raw, selected_scope, *, enabled, eligible_inputs=None):
+    def verify_result(self, raw, selected_scope, *, enabled, eligible_inputs=None, cohort_checked_only=None):
         """Recompute against caller context; never trust a result's own flags.
 
         Result JSON whitespace/order can differ, but the complete original
@@ -211,7 +217,8 @@ class SupportQueryRecord:
         """
         result = decode(raw)
         validate(RESULT, result, "CD-3 result")
-        expected = self.evaluate(selected_scope, enabled=enabled, eligible_inputs=eligible_inputs)
+        expected = self.evaluate(selected_scope, enabled=enabled, eligible_inputs=eligible_inputs,
+                                 cohort_checked_only=cohort_checked_only)
         if result != expected:
             raise ValueError("support result does not match retained inputs and caller context")
         return expected

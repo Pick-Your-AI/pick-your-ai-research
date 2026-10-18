@@ -1,9 +1,9 @@
 {
   "x_t0_support_query": {
-    "proposal_version": "cd3-0.2",
+    "proposal_version": "cd3-0.3",
     "query": {
       "id": "rule.fixture.engine.formats",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "requirement": "any",
       "severity": "error"
     },
@@ -22,6 +22,6 @@
       "id": "cohort.fixture.engine.formats",
       "version": "0.1.0"
     },
-    "answer_states_sha256": "ad30edd8bd2be3848ebe8ea38735937b48e5feacb2298d50e19836365f5c0570"
+    "answer_states_sha256": "fb118167ec6f19c73aee0d5195ca659b51a14116827b79fd28f6efa867284dce"
   }
 }
