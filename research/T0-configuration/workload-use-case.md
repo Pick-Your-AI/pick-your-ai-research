@@ -226,7 +226,7 @@ Both `unknown` and `missing` must evaluate as unresolved, giving the outcome `un
 **Policy:**
 1. **No substitution.** Filtering never assumes a value. Filters that need an unresolved input are not applied, and results say "not checked against <input>".
 2. **Compatibility rules** (W-R1, W-R6, W-R7, W-R8, W-R10) are written so that an unresolved input makes the applicability or assertion unresolved, giving `unknown`. They don't treat "answered" as a precondition.
-3. **Recommendation rules** (W-R2 to W-R5 and W-R11) only recommend. Their applicability is "the answer is known and …", so an unresolved answer makes them `skipped`. This is a deliberate exception, needed so that they don't nag. CD-1 must let the evaluator distinguish "not relevant", "not yet known" and "not selected".
+3. **Recommendation rules** (W-R2 to W-R5 and W-R11) only recommend. Each rule's applicability asks whether its activating need is known; an unresolved need makes the recommendation `skipped` so it does not nag. Once applicable, the rule's assertion operands and unknown policy still apply. In particular, W-R11 with a known `session` or `persistent` need and an unresolved `memory_implementation` declaration gives `unknown`, with fixed `warning`/`defer`; a provided empty or wholly disabled declaration fails the recommendation. CD-1 must let the evaluator distinguish "not relevant", "not yet known" and "not selected".
 4. **Interface:** `missing` prompts the builder to ask; `unknown` is listed as an open assumption.
 
 **Load presets** are order-of-magnitude bands. The boundaries are design choices, to be calibrated with #10 and #39:

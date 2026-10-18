@@ -315,7 +315,7 @@ Both estimates and their component lines may still be shown, labelled with price
 ### SB-R5 Withheld inputs leave dependent rules unresolved (hypothesis)
 
 - **Applies when:** a forked build has an input withheld at share time (SB-8).
-- **Assertion:** any rule operand that resolves to a withheld input is unresolved, so the rule is `unknown`. A recommendation-only rule follows #81's policy and is `skipped` (P1).
+- **Assertion:** any rule operand that resolves to a withheld input is unresolved. A fork's new evaluation follows the dependent rule's own applicability, assertion and unknown policy. Recommendation-only rules skip when their activating need is unresolved; withholding an assertion operand does not itself skip an applicable recommendation. Under the [W-R11 continuation in #401](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/401), a withheld memory need skips the recommendation, but a known `session` or `persistent` need with a withheld implementation declaration gives `unknown`, with fixed `warning`/`defer`. Historical P1 records, retained reader profiles and original findings keep their own revisions and semantics.
 - **Severity:** the dependent rule's own. `on_unknown` per that rule.
 - **Example:** a share withholds `data_classification`; on the fork, the rule reading `/objectives/data_classification` (V13) is `unknown`, not `pass`.
 - **Dependency:** CD-1's typed answer states; v1's evaluator treats the string `"unknown"` as a known value (P1), so a withheld marker must not be a string sentinel.
