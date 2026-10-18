@@ -1,7 +1,7 @@
 # T4: MCP Servers
 
 Issue: #27 · Contract: 1.0.0 · Kinds: `mcp_server`
-Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-18 (bounded Python SDK and public Cloudflare documentation follow-ups)
+Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-18 (bounded Python SDK, public Cloudflare documentation and authorization/locality follow-ups)
 
 ## Evidence status correction
 
@@ -30,10 +30,10 @@ Deployment modes covered (the v1 `spec_deployment_mode.mode` enum is `api`, `man
 
 | Packaging | What runs where | Fits mode | Notes |
 | --- | --- | --- | --- |
-| **Local stdio** | The MCP client launches the server as a subprocess on the same host (C10) | `self_hosted`, `hybrid`; `managed` only if the managed agent runtime can spawn processes (unknown per platform) | Credentials come from the environment, not MCP authorization (C12) |
+| **Local stdio** | The selected MCP client launches the server and owns its standard streams (C10, C70) | `self_hosted` or the local leg of `hybrid`; a managed runtime needs actual subprocess capability evidence. Using a model API does not identify the MCP client's execution locality | Credentials come from the environment, not the HTTP MCP authorization flow (C12, C66) |
 | **Self-hosted remote** (Streamable HTTP) | The organisation runs the server on its own hosting platform | `self_hosted`, `hybrid`, `managed` | Needs a #9 `hosting_platform` with `hosting_type` `cloud`, `on_prem`, `edge` or `colocation` |
 | **Vendor-hosted remote** (Streamable HTTP) | The API vendor runs the endpoint (GitHub, Stripe, Sentry, Atlassian) | all modes, including `api` | Maps to #9 `hosting_type` `managed_api` if modelled at all. Needs public egress and usually OAuth 2.1 |
-| **Provider-hosted connector** | The model provider calls the remote server from its own infrastructure (OpenAI `HostedMCPTool`, C56) | `api` | The server must be publicly reachable from the provider. stdio is impossible |
+| **Provider-hosted connector** | The model provider calls the remote server from its own infrastructure (OpenAI `HostedMCPTool`, C56, C69) | `api` | A custom server URL must be reachable by the provider. Direct subprocess stdio is outside this documented interface; a separately introduced intermediary requires its own transport and authorization assessment |
 
 Out of scope: the general tool catalog (#26) and framework selection (#25). Facts about frameworks below are limited to what was needed to ground the rule shapes.
 
@@ -156,7 +156,7 @@ The issue's conceptual fields map to v1 as follows. Most do not exist in v1.
 
 ## Evidence
 
-Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C65 follow-up was accessed 2026-10-18.
+Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C65 SDK follow-up and C66–C71 authorization/locality follow-up were accessed 2026-10-18. These rechecks do not refresh unrelated original observations.
 - Pages on modelcontextprotocol.io, github.com, docs and vendor sites were read with a fetch tool that returns extracted Markdown, so quotations are as extracted.
 - JSON APIs (MCP Registry, npm, PyPI) and raw.githubusercontent.com files were read directly.
 - The original 2026-10-16 desk study executed no MCP server or SDK. The separate 2026-10-18 experiment below executes pinned SDKs against local synthetic peers only.
@@ -228,6 +228,12 @@ Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C
 | C63 | MCP, https://github.com/modelcontextprotocol/python-sdk/blob/2118f14f8a19bc158d8a1cf90af58d85d187f849/src/mcp/client/client.py | 2026-10-18 | 2.3.0 publishing revision | Primary source; source checked / unverified | `Client.__aenter__` distinguishes auto, legacy and direct modern adoption |
 | C64 | MCP, https://github.com/modelcontextprotocol/python-sdk/blob/2118f14f8a19bc158d8a1cf90af58d85d187f849/src/mcp/client/_probe.py | 2026-10-18 | 2.3.0 publishing revision | Primary source; source checked / unverified | Conditional fallback and transport-error boundary, not an unconditional interoperability promise |
 | C65 | MCP publisher / PyPI, https://pypi.org/pypi/mcp/1.30.0/json | 2026-10-18 | 1.30.0 | Primary package metadata and wheel source; source checked / unverified | Separate legacy SDK environment; no reference-server package was installed |
+| C66 | MCP, https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization/index | 2026-10-18 | 2026-07-28 | Primary specification; source checked / unverified | HTTP scope, intended resource/audience, operation scopes, token errors and discretionary refresh-token issuance; no authorization server or credential exercised |
+| C67 | MCP, https://modelcontextprotocol.io/extensions/auth/overview and https://modelcontextprotocol.io/extensions/auth/oauth-client-credentials | 2026-10-18 | Current extension documentation, independently versioned from core | Primary documentation; source checked / unverified | Explicit client support and accepted client-credentials flow; server discovery advertisement is recommended, not mandatory proof of support or non-support |
+| C68 | Anthropic, https://code.claude.com/docs/en/agent-sdk/mcp#oauth2-authentication | 2026-10-18 | Current Agent SDK documentation, no installed package qualification | Primary documentation; source checked / unverified | Application-owned OAuth acquisition and header injection; no actual client/server/token result |
+| C69 | OpenAI, https://openai.github.io/openai-agents-python/mcp/ | 2026-10-18 | Current Agents Python documentation; local MCP v1/v2 distinctions | Primary documentation; source checked / unverified | Local transport ownership, hosted Responses path, header injection and version-dependent HTTP auth types; no account or model request |
+| C70 | MCP, https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio | 2026-10-18 | 2026-07-28 | Primary specification; source checked / unverified | Subprocess/stream ownership and lifecycle; custom channels have separate equivalents. No new process experiment |
+| C71 | Google, https://adk.dev/tools-custom/mcp-tools/#remote-mcp-authentication-and-resource-access | 2026-10-18 | Current ADK documentation, no installed package qualification | Primary documentation; source checked / unverified | Documented auth parameters and refresh handling do not establish a selected credential, issuer or operation entitlement |
 
 ## Compatibility proposals
 
@@ -794,44 +800,74 @@ assert: subset_of(catalog mcp_server /spec/required_client_capabilities,        
 
 ### rule.t4.mcp.auth.flow-available (compatibility example 4; needs contract change via #40, Source-checked (unverified) premise)
 
-- **Assertion:** when the server accepts only `oauth2`, the selected framework and deployment can complete an MCP OAuth flow:
-  - an interactive flow with a user present, or
-  - an injected, pre-obtained token, or
-  - the OAuth Client Credentials extension for non-interactive targets (C19).
-- **Source-checked (unverified) premise:**
-  - The Claude Agent SDK "doesn't open a browser or run an interactive OAuth flow". The server reports `needs-auth`, and the app must obtain the token itself and pass it in `headers` (C59). This is **conditional**: it passes only with token injection.
-  - The OpenAI Agents SDK page has no OAuth section. It accepts headers and an `httpx.Auth` (C56): **conditional**.
-  - ADK lists an OAuth2 auth scheme with token refresh (C58): **source-checked compatible** at doc level.
-  - LangChain links an Auth page covering OAuth 2.1 (not read): **unknown**.
-  - Stripe, Atlassian and Sentry offer static-token fallbacks (C48–C50). Stripe connected-account calls do not support OAuth (C48).
-- **Deployment-mode interaction:** a `deployment_target.target_type = batch_worker` has no user to complete a browser consent. With an OAuth-only server, the outcome must be `fail` unless the client-credentials extension or a stored refresh token is available.
+**Current disposition, 2026-10-18.** Retain the rule ID and `error` severity, but withdraw the earlier target-type and secret-reference shortcuts. A `batch_worker` label does not establish which authorization paths are available; `application` does not establish a working browser/callback path. A `credential_ref` identifies secret storage, not a usable, authorized credential. The following is a research decision and proposed #40 input, not released schema syntax or an authorization grant.
+
+**Source findings:**
+
+- C66 limits the core authorization flow to HTTP. It binds access tokens to the MCP resource and requires operation-appropriate permissions; invalid/expired tokens and insufficient permissions have distinct responses. Refresh-token issuance is discretionary. A stored refresh-token reference cannot establish a renewable grant.
+- C67 documents a client-credentials path for unattended workloads. Support must be explicit in the client and accepted by the selected authorization/resource-server arrangement. Its discovery advertisement is optional on the server side; an omitted unmarked extension entry is not an exhaustive negative.
+- C68 documents application-owned OAuth acquisition for the Claude Agent SDK, followed by access-token headers. A challenge without a stored token leaves that server needing authentication. Application integration can supply the flow; the SDK's lack of an internal browser is not a universal deployment prohibition.
+- C69 documents OpenAI's local header injection and distinguishes `httpx.Auth` for MCP v1 from `httpx2.Auth` for v2. `HostedMCPTool` instead delegates the remote connection to the Responses API. C71 documents ADK's auth parameters and refresh handling. These are client implementation capabilities, not proof of a selected grant, server support or future renewal. Unread LangChain authentication details remain unknown.
+
+**Scope and evidence inputs.** Evaluate every enabled server selection against the actual client, transport, endpoint, operation, principal and relevant configuration/revision. Resolve the selected authorization alternative even when a catalog lists several `auth_methods`; comparing the entire array to `["oauth2"]` can skip a protected operation. Run the shared #40 identity/role preflight first: invalid or ambiguous bindings cannot yield a compatibility result. For valid bindings, missing applicability evidence remains unknown rather than being silently skipped. Use the shared per-selection/evidence mechanics; do not rewrite v1's historical single-primary behavior.
+
+| Proposed input | Type / unit | Required evidence boundary |
+| --- | --- | --- |
+| Selected connection and operation | Bound selection IDs, endpoint/resource ID and operation identifier; no numeric unit | Client/server versions or dated service configuration, transport, principal and requested resource/action |
+| Applicable authorization paths | Set of accepted alternatives with per-member evidence | Actual protected operation and relevant authorization server; distinguish a documented anonymous operation from a missing requirement |
+| Acquisition/continuation capability | Per-path `yes` / `no` / `unknown`, with scope | Client integration, registration, required interaction/callback, token acquisition, and any renewal or step-up needed for this use |
+| Credential applicability | Scoped evidence result plus opaque secret reference | Intended issuer/resource, permissions, principal, validity and selected injection mechanism; never publish the credential value |
+| Required execution/lifecycle scope | Declared operation and relevant validity/renewal conditions | A currently usable token may cover a bounded operation without proving unattended renewal; future-use prerequisites need separate evidence |
+| Evidence eligibility and alternative completeness | Scoped evidence records; `known` or `unknown` coverage | No unsupported result from omission on a non-exhaustive capability page; conflicting evidence remains visible |
+
+**Decision (project proposal):** `pass` requires one completely supported applicable path for the stated operation/lifecycle scope. A documented incompatibility can fail that path; report an overall `fail` only when the applicable alternatives are known complete and all fail. If no path passes and a required input or alternative remains unresolved, return `unknown`. A disabled selection or an explicitly evidenced anonymous operation is `skipped` for this protected-HTTP-authentication rule. STDIO upstream credentials are a separate requirement, not an inferred HTTP OAuth flow. Keep per-path findings so a rejected credential or flow is not hidden by a viable alternative.
+
+The proposed `on_unknown: block` handling prevents declaring this prerequisite satisfied while preserving the `unknown` outcome; it is not a conversion to known incompatibility. Remediation identifies the failed or missing requirement: select an accepted flow, provide the appropriate client integration/configuration evidence, or obtain an authorized credential for the exact operation. A research `pass` does not authorize an invocation or replace #35's operation-level permissions and runtime checks.
 
 ```text
-applies_when: catalog mcp_server /spec/auth_methods == ["oauth2"]
-assert: any(
-  contains(catalog agent_framework /spec/mcp_oauth_modes, "interactive")          # missing field
-    AND catalog deployment_target /spec/target_type in ["application","api_endpoint"],
-  contains(catalog agent_framework /spec/mcp_oauth_modes, "token_injection")
-    AND exists(selection mcp_server /settings/credential_ref),
-  contains(catalog mcp_server /spec/auth_extensions, "oauth-client-credentials") # missing field
-    AND contains(catalog agent_framework /spec/mcp_auth_extensions, "oauth-client-credentials"))
-on_unknown: block   severity: error
+# Conceptual outcome ordering only; not executable v1 or an adopted successor DSL.
+for each enabled, identity-bound MCP connection and requested operation:
+  resolve whether this protected-HTTP authorization requirement applies
+  evaluate each eligible accepted path against its exact use and lifecycle scope
+  pass if an applicable path has all required evidence
+  fail if the alternative set is complete and every applicable path is known to fail
+  unknown otherwise; retain each path's evidence and reasons
+severity: error
+on_unknown: block
 ```
+
+| Synthetic case (not an executed service result) | Proposed outcome |
+| --- | --- |
+| Batch worker; accepted client-credentials flow, configured client support and eligible evidence for the operation and required renewal | `pass` for that scope; the target label contributes no authorization evidence |
+| Application target; browser/callback availability is unexamined | `unknown` |
+| Token-injection support and `credential_ref` exist; issuer/resource, scope or validity is unexamined | `unknown` |
+| Only applicable flow is known to require unavailable interaction; alternative inventory is complete | `fail` |
+| One examined flow fails, but another accepted path remains unresolved | `unknown`, retaining the known failed path |
+| A usable injected access token covers the bounded operation; no renewable grant is established | Bounded-operation `pass` only if all its evidence is eligible; required unattended-renewal readiness remains `unknown` |
+| Server advertises both OAuth and another method; selected operation requires OAuth | Evaluate the selected OAuth path; the multi-value catalog array does not cause `skipped` |
+| Operation is explicitly anonymous, or the server selection is disabled | `skipped` for this rule only; trust and tool-policy checks remain separate |
 
 ### rule.t4.mcp.stdio.colocation (compatibility example 4; needs contract change via #40, Source-checked (unverified) premise)
 
-- **Assertion:** a stdio server requires an agent runtime that can spawn a local subprocess on the same host (C10).
-- **Fails when:**
-  - the framework call is provider-hosted, as with OpenAI `HostedMCPTool`, where the round trip happens in OpenAI infrastructure (C56), or
-  - the deployment mode is `api` with no customer runtime.
-- **Missing data:** a runtime-locality field on `agent_framework` or `deployment_target`.
+**Current disposition, 2026-10-18.** Assess the selected direct stdio connection by its actual process/stream ownership, not a build-level deployment-mode enum. C70 specifies client-launched subprocess communication and process lifecycle. C69 separates a local `MCPServerStdio` connection from the hosted Responses connection. Model-API use can coexist with a customer-side MCP process; an `api` model choice alone is not a failure.
+
+- **Scope:** each enabled selection whose chosen connection is direct subprocess stdio. A known HTTP connection is skipped for this rule; unknown transport/locality remains unknown.
+- **Proposed inputs:** exact selected client/runtime and server packaging, executable/launch configuration, ability to start the owned process and connect its streams, and the lifecycle and permitted-resource evidence for that configuration. These are note-only typed identity/configuration/evidence inputs for #40; a generic `can_spawn_processes` flag alone is insufficient.
+- **Pass:** eligible evidence establishes those prerequisites for the selected connection. This is the scoped stdio prerequisite, not whole-server, protocol, artifact-trust or deployment certification.
+- **Fail:** an eligible requirement is known unsatisfied, such as a selected client with no direct subprocess path. A `HostedMCPTool`-only path cannot itself launch the user's local stdio package. Unknown client/locality evidence is not a known failure.
+- **Unknown:** required launch, stream, locality or lifecycle evidence is missing or conflicting. **Severity:** `error`; **on_unknown:** `block`. Remediation identifies the missing/unsupported local capability or proposes a separately assessed remote packaging.
+- **Intermediaries:** a bridge adds a distinct connection and operator boundary. Evaluate each leg, authorization and lifecycle explicitly. The specification allows custom stream transports with channel-specific lifecycle equivalents (C70); they are not automatically the direct-subprocess tuple assessed here.
 
 ```text
-applies_when: catalog mcp_server /spec/transport == "stdio"
-assert: catalog deployment_mode /spec/mode in ["self_hosted","hybrid","managed"]
-        AND catalog agent_framework /spec/mcp_runtime != "provider_hosted"    # missing field
-        AND catalog deployment_target /spec/can_spawn_processes == true       # missing field
+# Conceptual prerequisite; no new v1 fields or executable successor rule.
+applies_to: each enabled, identity-bound direct-subprocess stdio connection
+requires: selected client owns an evidenced launch, stream and lifecycle path
+outcomes: pass / fail / unknown / skipped, with the scoped reasons retained
+severity: error
+on_unknown: block
 ```
+
+Synthetic review cases: model API plus an evidenced customer-side subprocess can pass this prerequisite; a managed-runtime label with unknown process support remains unknown; a hosted-Responses-only client with no direct subprocess path fails that selected direct-stdio requirement. These examples add no runtime measurements.
 
 ### rule.t4.mcp.registry.identity (Hypothesis; needs contract change via #40)
 
@@ -860,6 +896,7 @@ assert: registry_namespace_matches(catalog mcp_server /spec/registry_name,     #
 8. Rules need per-selection iteration (for example "for each mcp_server selection") or a metric such as `mcp.untrusted_count`. Otherwise the six v1 rules above are `skipped` when several enabled MCP servers share role `primary`, rather than checking each server.
 9. Extend the metric `tools.mutating_count` to include MCP server tools, or add `mcp.mutating_server_count`.
 10. Multi-version intake: hosted remotes change without notice, so `version` needs a "snapshot date" semantic (#41).
+11. Bind authorization and direct stdio prerequisites to the actual connection, client/runtime, endpoint/operation and relevant configuration. The [authorization disposition](#rulet4mcpauthflow-available-compatibility-example-4-needs-contract-change-via-40-source-checked-unverified-premise) supplies typed evidence inputs and synthetic outcome cases; it replaces target-type, single-method-array and secret-reference shortcuts. The [stdio disposition](#rulet4mcpstdiocolocation-compatibility-example-4-needs-contract-change-via-40-source-checked-unverified-premise) replaces the build-mode proxy. Adopt encoding and migration centrally, preserving historical v1 results.
 
 ## Security and trust findings (for #35; findings only, controls belong to #35)
 
@@ -908,7 +945,7 @@ Prices are unknown, not zero.
 4. **Show auth as a requirement profile, not a flag.** For each server, show:
    - whether MCP OAuth is required, and with which client registration (pre-registered, CIMD or DCR, with DCR deprecated);
    - whether a static-token fallback exists;
-   - whether a non-interactive path exists (client-credentials extension);
+   - which accepted acquisition and continuation paths fit the intended operation, including applicable client credentials, application-owned acquisition or existing-token use, with renewal assessed separately;
    - which scopes are needed.
    The builder then checks it against the framework's OAuth mode and the deployment target (rule `auth.flow-available`).
 5. **Trust:** use the criteria above. Default unknown to `untrusted_external`. Never infer trust from presence in a registry or marketplace.
@@ -946,8 +983,8 @@ Notes on these proposals:
 | --- | --- |
 | Field-level contract changes 1–10 above; rule ids and severities | #40 · @tynamite |
 | Which protocol revisions, transports, client capabilities and OAuth modes each framework's MCP client supports (fields `mcp_client_transports`, `mcp_protocol_versions`, `mcp_client_capabilities`, `mcp_oauth_modes`); LangChain SSE and OAuth pages; OpenAI Agents SDK sampling and elicitation | #25 · @CompleteDotTech |
-| Trust and auth requirements handed over: the trust criteria table; the rule that tool descriptions, annotations and results are untrusted; human-in-the-loop for mutating tools; token passthrough prohibition and the Sentry `Sentry-Bearer` review; SSRF on OAuth discovery; local-server consent and sandboxing; pinning policy (no `@latest`, digest pins); guardrail policy mapping for `rule.t4.mcp.untrusted.guardrails` | #35 · @PUSHINGSQUARES |
-| Deployment: stdio needs evidenced process spawning and co-location in the selected agent runtime; each target needs an available authorization path, including interaction/callback support when the selected flow requires it. Apply the [current W-R8/CD-4 disposition](#rulet4mcpremoteair-gapped-hypothesis-compatibility-example-4) to actual runtime connections and required artifacts. Vendor operation alone does not establish public egress; runtime-locality, lifecycle and authorization evidence remain receiving inputs | #37 · @PUSHINGSQUARES |
+| Trust and auth requirements handed over: the trust criteria table; the rule that tool descriptions, annotations and results are untrusted; human-in-the-loop for mutating tools; token passthrough prohibition and the Sentry `Sentry-Bearer` review; SSRF on OAuth discovery; local-server consent and sandboxing; pinning policy (no `@latest`, digest pins); guardrail policy mapping for `rule.t4.mcp.untrusted.guardrails`. The 2026-10-18 authorization correction additionally requires actual credential/resource/operation applicability and preserves unknown evidence; a secret reference or research prerequisite pass does not authorize an action | #35 · @PUSHINGSQUARES |
+| Deployment: bind direct stdio to the selected client's launch, stream and lifecycle ownership; bind authorization to accepted acquisition/continuation paths and actual interaction/callback support when required. The 2026-10-18 correction removes batch/application and build-mode proxies; a current-token result does not establish required future renewal. Apply the [current W-R8/CD-4 disposition](#rulet4mcpremoteair-gapped-hypothesis-compatibility-example-4) to actual runtime connections and required artifacts. Vendor operation alone does not establish public egress; runtime-locality, lifecycle and authorization evidence remain receiving inputs | #37 · @PUSHINGSQUARES |
 | Hosting: retain the original `hosting_type` examples above as candidate descriptions. The [current isolation disposition](#rulet4mcpremoteair-gapped-hypothesis-compatibility-example-4) uses per-component boundary, connection/lifecycle and artifact evidence; a new hosting category or `allows_public_egress` flag alone cannot decide air-gap compatibility. Final encoding adoption and source admission remain with #40/#41 | #9 · @Mattycodes69 |
 | Overlap with tools: map MCP server tools to `tool` items (`tool_refs`) for side-effect counting | #26 · @CompleteDotTech |
 | Pricing units for Atlassian Rovo credits and the GitHub remote server (Copilot plan dependency) | #39 · @PUSHINGSQUARES |
