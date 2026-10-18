@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Synthetic CD-3 typed membership query and result",
-  "description": "Research candidate cd3-0.2: separately qualified requested-set completeness. No source admission or frozen contract extension; cd3-0.1 is not silently migrated.",
+  "description": "Research candidate cd3-0.3: checked-only provenance labels require eligible, used cohort evidence and separate caller qualification. No source admission or frozen contract extension; prior proposals are not silently migrated.",
   "type": "object",
   "required": ["x_t0_support_query"],
   "additionalProperties": false,
@@ -11,7 +11,7 @@
       "required": ["proposal_version", "query", "scope", "cohort", "answer_states_sha256"],
       "additionalProperties": false,
       "properties": {
-        "proposal_version": {"const": "cd3-0.2"},
+        "proposal_version": {"const": "cd3-0.3"},
         "query": {"$ref": "#/$defs/query"},
         "scope": {"$ref": "#/$defs/scope"},
         "cohort": {"$ref": "#/$defs/reference"},
@@ -96,7 +96,7 @@
         "outcome": {"$ref": "#/$defs/outcome"},
         "reason": {"enum": ["selection_not_enabled", "selection_activation_unknown", "selection_scope_missing", "support_scope_mismatch", "applies_when_evidence_unresolved", "applies_when_evidence_ineligible", "applicability_unknown", "not_applicable", "requested_evidence_unresolved", "requested_evidence_ineligible", "requirement_unknown", "cohort_evidence_unresolved", "cohort_evidence_ineligible", "unsupported_claims_unresolved", "any_membership", "all_membership", "requirement_empty", "requested_set_incomplete", "requested_completeness_unknown"]},
         "source_id": {"$ref": "#/$defs/id"}, "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
-        "disputed": {"type": "boolean"}, "evidence_label": {"const": "unverified"}
+        "disputed": {"type": "boolean"}, "evidence_label": {"enum": [null, "unverified"]}
       }
     },
     "result": {
@@ -106,13 +106,14 @@
           "type": "object", "additionalProperties": false,
           "required": ["proposal_version", "binding_sha256", "answer_states_sha256", "query", "scope", "cohort", "evaluation", "inputs", "decision"],
           "properties": {
-            "proposal_version": {"const": "cd3-0.2"}, "binding_sha256": {"$ref": "#/$defs/digest"},
+            "proposal_version": {"const": "cd3-0.3"}, "binding_sha256": {"$ref": "#/$defs/digest"},
             "answer_states_sha256": {"$ref": "#/$defs/digest"}, "query": {"$ref": "#/$defs/query"},
             "scope": {"$ref": "#/$defs/scope"}, "cohort": {"$ref": "#/$defs/reference"},
             "evaluation": {
-              "type": "object", "required": ["enabled", "selected_scope", "eligible_inputs"], "additionalProperties": false,
+              "type": "object", "required": ["enabled", "selected_scope", "eligible_inputs", "cohort_checked_only"], "additionalProperties": false,
               "properties": {
                 "enabled": {"$ref": "#/$defs/eligibility"},
+                "cohort_checked_only": {"$ref": "#/$defs/eligibility"},
                 "selected_scope": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/scope"}]},
                 "eligible_inputs": {
                   "type": "object", "required": ["applies_when", "requested", "requested_complete", "cohort"], "additionalProperties": false,
