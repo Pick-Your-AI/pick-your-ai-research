@@ -48,3 +48,16 @@ Publication: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull
 - Live assignees: #8–#11 @Mattycodes69. All scoped and consuming issue comments were read; no handoff acknowledgements existed at intake.
 - Public Project UI was read on 2026-10-16: #8/#9/#10/#11 all `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`; priority #8/#10/#11 `Critical`, #9 `High`. These live values differ from the brief and CONTRIBUTING's earlier field names. Preserve priority and field definitions; do not create substitute labels or fields.
 - Project GraphQL read failed with `INSUFFICIENT_SCOPES`: CLI token lacks `read:project` / `project`; browser is signed out. Board edits cannot be verified or performed with current access. That access failure and the requested In Review update describe the 2026-10-16 publication snapshot, not a current instruction. PR #75 and its follow-ups are now merged. Before changing the Project, an authorized administrator must refresh current work and fields: ongoing incomplete research is In Progress, an actual external prerequisite may warrant Blocked, and In Review requires an open decision-record PR. Preserve current priority and Tier; do not replay the obsolete publication update. #40 @tynamite should reconcile the documented field vocabulary with the board. This is an access/tracking limitation, not a new native research blocker.
+
+## Scoped #10/#61 continuation (2026-10-18)
+
+The [decision record](gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18)
+now proposes explicit scenario headroom with no universal numeric default,
+note-only consumption of #61 observations, and a future build-bound estimate
+placement. This supports prepared content for 10.1/10.2/10.10; it does not accept
+those criteria or supply calibration. Both live #10 co-owners, @Mattycodes69 and
+@appletechie, must disposition the proposal. For 10.9, the existing #31 scoped
+receipt is present; #9/#11/#39 receiving decisions remain separate. #61's full
+empirical coverage, matching estimator errors and coordinator evidence acceptance
+remain open in its [current acceptance map](../market/mr09-acceptance.md#current-1061-continuation-map-2026-10-18).
+No acceptance criterion, assignee, native relationship or Project value changes.
