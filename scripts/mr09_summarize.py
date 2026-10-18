@@ -87,9 +87,15 @@ def cohort_signature(run):
     if not isinstance(smi, str) or not smi:
         raise ValueError("successful run requires NVIDIA driver/device pins")
     try:
+        smi_reader = csv.DictReader(smi.splitlines())
+        headers = [key.strip() for key in (smi_reader.fieldnames or [])]
+        if not headers or any(not key for key in headers) or len(set(headers)) != len(headers):
+            raise ValueError("NVIDIA driver/device pin columns must be unique and nonempty")
+        # Check normalized headers before DictReader can overwrite any value.
+        smi_reader.fieldnames = headers
         smi_rows = [
-            {key.strip(): value.strip() for key, value in row.items()}
-            for row in csv.DictReader(smi.splitlines())
+            {key: value.strip() for key, value in row.items()}
+            for row in smi_reader
         ]
     except (AttributeError, TypeError, csv.Error) as error:
         raise ValueError("invalid NVIDIA driver/device pins") from error
