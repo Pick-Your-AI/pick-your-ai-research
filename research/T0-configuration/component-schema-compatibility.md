@@ -740,6 +740,96 @@ the affected component owner. Real source adapters, final ruleset dispatch,
 migration and the remaining listed handoffs retain their own concrete work.
 #40 remains open and #42/#114's substantive prerequisite is preserved.
 
+### CD-3 actual frozen support-rule adapter candidate (2026-10-18)
+
+**Selected research design:** explicitly opt into the test-only
+`cd3-frozen-support-rules-0.1` [adapter](../../tests/frozen_support_rule_adapter_prototype.py)
+for the two actual baseline identities named in completeness constraint 4 of
+the [owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407).
+This is a bounded per-rule experiment over the canonical `cd3-0.3` membership
+interface, distinct from the default frozen evaluator and from a whole-build
+replay. It supplies a concrete adapter candidate for the still-open task in
+the [16:00 owner ledger](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252011763).
+It does not adopt a v1.1 ruleset, new production field/wire representation,
+source qualification or migration.
+
+| Actual frozen rule | Requested operand | Positive support operand | Completeness decision |
+| --- | --- | --- | --- |
+| `rule.precision.engine` (`contains`) | Selected primary model `/settings/precision` | Primary engine catalog `/spec/supported_precisions` | A resolved, schema-admitted scalar with separately qualified requested input is exactly one requested value. Only this scalar establishes a complete singleton |
+| `rule.engine.model.format` (`intersects`) | Primary model catalog `/spec/model_formats` | Primary engine catalog `/spec/model_formats` | A researched format array supplies no completeness. An all-negative ANY result additionally requires the caller's separately qualified requested-completeness marker |
+
+Both assertions reduce with ANY membership. The adapter reads the unchanged
+actual baseline definitions, retaining their `error` severity, `on_unknown:
+block`, applicability, operand references, message/remediation, affected kinds
+and original owner metadata. It admits only these two rule IDs and verifies
+the exact baseline and reference-reader byte hashes. Their existing
+applicability still requires self-hosted deployment and an enabled primary
+engine. Qualified known non-applicability skips; unresolved deployment facts
+remain unknown. The adapter does not execute other assertions, change frozen
+dispatch or calculate whole-build readiness.
+
+Before any applicability or evidence shortcut, retained build/catalog bytes
+receive the existing JSON intake and frozen shape checks, exact integer
+revision admission, the existing strict build-wide selection identity/role
+preflight, and a unique catalog-ID check. Disabled duplicates remain subject
+to the accepted strict policy. These checks do not constitute full graph,
+CD-7 replay, temporal-format or source admission. The explicit per-rule
+experiment retains the build bytes, including its locks, but makes no
+whole-build ruleset-lock or successor migration decision. A mismatched catalog
+snapshot, unavailable selection/item/version, wrong item kind or absent
+property cannot supply a compatible operand. The frozen catalog requires
+nonempty support/format arrays; malformed missing or empty arrays reject
+input shape instead of becoming evidence for a membership verdict. Missing
+optional selected precision remains unknown, never a default or empty set.
+
+The caller supplies a normalized cohort ID/version, exact support scope,
+explicit negative inventory, publisher exhaustiveness and requested-inventory
+completeness. Scope retains all seven existing CD-3 dimensions: selection,
+catalog bytes, item ID/version/kind, property and complete build/conditions
+bytes. An unchanged value in differently formatted bytes cannot reuse the
+old scoped cohort. Positive claims come from the actual engine catalog
+operand; the negative inventory must be explicitly recorded, including an
+empty set. An unresolved negative inventory is not silently replaced by one.
+The applicability, requested input, requested completeness and cohort retain
+independent caller qualifications. The scalar completeness decision cannot
+bypass the selected-value qualification, and cannot be generalized to a
+researched array.
+
+Unmarked omissions remain reasoned unknown. Qualified documented members,
+explicit unsupported claims and eligible exhaustive absence retain their
+distinct findings; an equal-rank contradiction stays disputed/unknown. An
+ANY positive witness retains other unknown/disputed rows. The canonical
+checked-only input stays separate from eligibility, and `unverified` appears
+only when that independently qualified cohort evidence is actually used.
+An absent label supplies no evidence grade. The normalized record carries
+no publisher URL/access date or source admission: constraint 3 and #41's
+source/date/rank/rights/currency review remain independent prerequisites.
+Matching scope, source names, dates or hashes cannot perform that review.
+
+Each detached Python receipt retains original build/catalog hashes, the
+complete pinned rule definition, all four resolved or unresolved applicability
+and assertion operands with actual source paths, exact scope/cohort and caller
+context, recorded completeness plus its effective value/basis, and every
+member finding/reason/dispute. It is a mechanics receipt, not an adopted wire
+envelope or authenticated result; consumers must recompute from actual inputs
+and caller qualifications rather than trusting a reported flag.
+
+The [synthetic regressions](../../tests/test_frozen_support_rule_adapter.py)
+exercise these actual named rules alongside the unchanged full frozen
+evaluator. The original accepted-`c2bdd82` before record contains eight
+schema-valid frozen executions and four separately schema-rejected controls.
+Three admitted omission cases produced four target `fail` findings; this
+prospective gate keeps them unknown while positive, inactive and unresolved
+controls preserve their dispositions. Raw before-record SHA-256:
+`c5e6031ac6617da6327d09c98c292ca9957242a6d12e5ed28f2a37059dd8effc`.
+These are retained historical frozen outcomes, not a retrospective claim that
+the imported contract violated a later proposal. Further controls cover
+explicit/exhaustive negatives, independently qualified completeness, disputed
+rows, each scope dimension, unresolved operands, malformed markers before
+shortcuts, source order/identity and detached results. None supplies real
+vendor support, runtime measurements or affected-owner adoption. #40, #42
+and their remaining source/contract/replay requirements stay open.
+
 ### CD-4 typed isolation-boundary and inventory candidate (2026-10-18)
 
 **Engineering decision:** represent one selected isolation boundary with an
