@@ -124,7 +124,7 @@ catalog items or change the frozen BuildSnapshot shape.
 | --- | --- | --- |
 | `provided` | Required `state`, `value`; optional nonempty `source` | A stated value, validated against the requested field's local schema before a predicate receives it. `preset:<name>` retains editable-assumption attribution, not independent verification |
 | `unknown` | `state` only | Explicitly unresolved answer; no replacement value |
-| `missing` | `state` only | No recorded answer in this experiment; the interface can ask for it. Absence of a path has the same normalized state, without claiming why a historical v1 value was absent |
+| `missing` | `state` only | No recorded answer in this experiment; the interface can ask for it. An otherwise unrecorded path has this state; the parent-visibility rule below preserves an explicitly withheld descendant. No reason for a historical v1 absence is invented |
 | `withheld` | `state` only | Deliberately unavailable; retained as distinct from an unanswered question |
 | `not_applicable` | `state` only | Declared absence of a value in this field's scope. It does not itself establish that every dependent rule is inapplicable |
 
@@ -250,8 +250,9 @@ or of required-component presence.
 
 The immutable terminal result retains the rule ID, unchanged severity, outcome,
 reason, responsible position (`applies_when` or `assertion`), exact answer state
-and original source path. An absent path remains missing with no invented source
-path; a parent-withheld or escaped path retains the normalizer's actual path.
+and original source path. A genuinely unrecorded path remains missing with no
+invented source path; parent visibility and escaped paths retain the normalizer's
+actual causal record as described below.
 No original answer value is copied into this result. The typed result also
 rejects implicit Boolean coercion, so an unknown/skipped result cannot become a
 pass through Python negation or truth testing.
@@ -285,9 +286,10 @@ receipts.
 
 This bounded extension addresses the disposition's reason/policy mechanics.
 It does not select components, quantify over selections, aggregate findings,
-qualify evidence, release a ruleset or add a wire format. The original
-`AnswerIndex.read` and `predicate` implementations, sidecar/schema/fixtures,
-field-sentinel, parent-read and preset constraints remain unchanged. CD-13
+qualify evidence, release a ruleset or add a wire format. At that terminal-boundary
+checkpoint, the original `AnswerIndex.read` and `predicate` implementations,
+sidecar/schema/fixtures, field-sentinel, parent-read and preset constraints were
+unchanged. The later parent-visibility correction is recorded below. CD-13
 required presence, CD-5 stage adaptation and other owner work keep their
 separate scope and review; downstream adoption must explicitly consume this
 typed result rather than silently reusing a lossy Boolean interface.
@@ -306,6 +308,38 @@ CD-7 provides original/successor reader dispatch, migration and version locks.
 The final schema/generator/ruleset, full field registry and affected-owner
 handoffs remain separate successor-release work. #42/#114's recorded
 prerequisite is unchanged by this synthetic normalization experiment.
+
+### CD-1 withheld-child visibility in parent reads (2026-10-18)
+
+Constraint 5 in [the current #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+identified a lost-state case: when only a child is explicitly withheld, reading
+its otherwise unrecorded parent returned `missing` with no causal path. The
+reader now reports that parent view as `withheld`, retaining a real withheld
+descendant's original pointer in `source_path`. This means part of the requested
+view was deliberately withheld, not that every child has that state.
+
+Only a withheld record supplies this witness. Constructor-time indexing uses
+decoded pointer segments, so similarly prefixed sibling names do not acquire
+the state. If several descendants are withheld, the lexicographically first
+recorded pointer is the deterministic causal witness, independent of input
+object order. No parent record, value or source label is invented. Partial
+provided children are not assembled into a known parent object; callers still
+read each child independently when appropriate. Exact or recorded-ancestor
+lookups, overlap rejection and provided-parent traversal retain their behavior.
+
+The unchanged typed predicate and terminal rule boundary now carry this real
+cause through `answer_withheld`: compatibility applicability remains unknown,
+recommendation applicability skips, and a withheld assertion after known-true
+applicability remains unknown for both policies. The value predicate receives
+no partial object. Severity, lazy evaluation and all original answer bytes are
+unchanged; a genuinely absent path still has `missing` and no invented source.
+
+The [separate synthetic regression file](../../tests/test_t0_answer_parent_visibility.py)
+exercises multiple witnesses/orderings, escaped and empty pointer segments,
+sibling isolation, exact/ancestor/provided reads and both terminal policies.
+This corrects visibility in the existing test-only reader. It adds no wire
+field/state, default, evidence qualification, preset policy or successor
+adoption. The other CD-1 constraints and full #40/#42 criteria remain open.
 
 ### CD-3 synthetic support-membership experiment (2026-10-18)
 

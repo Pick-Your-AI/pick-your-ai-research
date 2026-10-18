@@ -14,6 +14,7 @@ from enum import StrEnum
 import json
 from pathlib import Path
 import re
+from typing import assert_never
 
 from jsonschema import Draft202012Validator, ValidationError
 
@@ -231,6 +232,16 @@ class AnswerIndex:
         for tokens in self._answers:
             if any(tokens[:length] in self._answers for length in range(1, len(tokens))):
                 raise ValueError("overlapping parent/child answer paths")
+        self._withheld_ancestors: dict[tuple[str, ...], str] = {}
+        for child, (path, record) in sorted(self._answers.items(), key=lambda item: item[1][0]):
+            match State(record["state"]):
+                case State.WITHHELD:
+                    for length in range(1, len(child)):
+                        self._withheld_ancestors.setdefault(child[:length], path)
+                case State.PROVIDED | State.UNKNOWN | State.MISSING | State.NOT_APPLICABLE:
+                    continue
+                case unreachable:
+                    assert_never(unreachable)
 
     def read(self, pointer, value_schema):
         """Read a typed fact, preserving unresolved state and source attribution.
@@ -246,6 +257,9 @@ class AnswerIndex:
             if match is not None:
                 break
         else:
+            source_path = self._withheld_ancestors.get(tokens)
+            if source_path is not None:
+                return Answer(State.WITHHELD, source_path=source_path)
             return Answer(State.MISSING)
         source_path, record = match
         state = State(record["state"])
