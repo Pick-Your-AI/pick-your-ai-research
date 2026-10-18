@@ -477,12 +477,14 @@ This format can name canonical API, managed or self-hosted component scopes,
 but a kind, digest or matching label proves no joint tuple support, activation,
 rights, currency, residency, runtime fit or independent verification.
 
-**Remaining evidence-label constraint:** completeness constraint 5 in the
+**Historical `cd3-0.2` evidence-label constraint:** completeness constraint 5 in the
 owner disposition is not resolved by this correction. The prototype's existing
 constant `unverified` label remains even where no check has run; that behavior
 must not be claimed as accepted evidence grading. Source/date/rank admission,
 real rule adapters (including `rule.precision.engine` and
 `rule.engine.model.format`) and frozen-rule adoption remain separate work.
+The explicitly selected `cd3-0.3` experiment below addresses the conditional
+label mechanics without reinterpreting these historical results.
 
 This bounded correction changes the existing test-only CD-3 reducer, binding,
 fixtures and regression cases. It leaves the accepted CD-1 normalizer,
@@ -491,6 +493,86 @@ receiving receipts unchanged. #40's tynamite/zwright8
 review owns successor adoption; #41 owns actual evidence qualification with
 the affected component owner. Real source adapters, final ruleset dispatch,
 migration and the remaining listed handoffs retain their own concrete work.
+
+### CD-3 conditional evidence-label successor (2026-10-18)
+
+The [constraint-5 reservation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251890574)
+addresses the owner's requirement that `unverified` apply only where a result
+rests on checked-only evidence. The
+[successor annotator and reader](../../tests/support_membership_evidence_prototype.py)
+select proposal version `cd3-0.3` explicitly. The original reducer, `cd3-0.2`
+schema, query, answers and result remain intact for historical replay. The
+shared binding extracts its existing admission/reduction and result assembly
+without changing that older reader's decisions or serialized result shape.
+This is a bounded test-only mechanics candidate, not adoption of a field,
+encoding, evidence-grade resolver, migration or executable frozen rule.
+
+**Qualification is separate from eligibility.** The caller supplies
+`cohort_checked_only: true`, `false` or unresolved `null` independently of the
+four existing eligibility inputs. Only `true` says that the entire normalized
+cohort has been established as source-checked without independent support.
+An omitted marker is unresolved for that invocation. `false` or `null` gives
+no label and does not imply `verified`, `estimated`, `user_supplied`, successful
+retrieval, or absence of a source check. Source strings, catalog hashes,
+matching scope, list presence and a prior call cannot establish this marker.
+The caller must withhold a cohort-wide qualification when its source grades
+are mixed or unresolved. This prototype neither splits such a cohort into
+graded sources nor resolves actual sources under #41.
+
+| Evaluated support fact with caller-qualified checked-only cohort | Member label | Aggregate label |
+| --- | --- | --- |
+| Documented positive, explicit unsupported claim, or eligible exhaustive absence | `unverified` | `unverified` only when a matching positive witness or negative counterexample supplies a definitive membership verdict |
+| Equal-rank opposite claims | `unverified`, with the disputed `unknown` finding retained | An unknown aggregate has `null`; a separate qualifying witness/counterexample can still determine ANY/ALL |
+| Missing positive inventory or unmarked omission | `null` | These unknown findings cannot earn an aggregate label |
+| Unknown requested completeness blocks an otherwise definitive reduction | Existing member claims retain their individual labels | `null`, with the original incomplete/unresolved reason |
+| Disabled, inapplicable, missing/mismatched scope, unknown/empty request, ineligible cohort, or unresolved negative-claim inventory | No asserted member findings | `null` |
+| Checked-only qualification is `false`, unresolved or omitted | `null` on every member | `null`, including a membership `pass` or `fail` |
+
+Here `null` means this experiment makes **no grade assertion**. Aggregate
+unknown/skipped verdicts are deliberately unlabeled; their retained member
+claims carry any narrower checked-only qualification. A definitive aggregate's
+label concerns the support claims used by that verdict, not the independent
+grades of the request, applicability, selected configuration or other support
+dimensions. The experiment never emits `verified` and never turns evidence
+qualification into source eligibility. Outcome, reason, sorted findings,
+source identity, dispute, completeness mechanics and fixed query severity stay
+unchanged. In particular, ANY can pass from one positive witness while other
+members remain unknown; ALL can fail from one explicit counterexample under
+the same condition. All member findings remain visible.
+
+The closed [query/result schema](../../tests/fixtures/support-membership-evidence.schema.json),
+[query](../../tests/fixtures/support-membership-evidence-binding.json),
+[CD-1 answers](../../tests/fixtures/support-membership-evidence-answers.json),
+[result](../../tests/fixtures/support-membership-evidence-result.json) and
+[dedicated regression cases](../../tests/test_support_membership_evidence.py)
+make the candidate reproducible. The synthetic query version is `0.3.0`, with
+new answer paths; the unchanged synthetic claim cohort keeps `0.1.0`. The two
+readers reject each other's proposal versions. Neither upgrades old bytes nor
+falls back to old query-version paths. The example simulates a checked-only
+cohort; it supplies no actual vendor or independent verification evidence.
+
+Every result records the caller's marker, even when disabled or unknown, and
+requires a nullable label on the aggregate and each member. `verify_result`
+recomputes all those fields from the retained original query/answer bytes and
+the caller's current scope, activation, four qualifications and checked-only
+marker. A stored marker cannot supply missing caller qualification; schema-
+valid edits to a member label, aggregate label or marker fail recomputation
+even when the membership outcome stays unchanged. Exact Boolean validation
+precedes early returns; `1`, `1.0`, strings and containers are input errors.
+The shared strict JSON, operand, literal-pointer and original-byte guards
+remain in force. Consistency verification is not source authentication.
+
+The seven original counterexamples were executed before the change at main
+`26a82d0aba1fa9f382b143089434f65fdd4c1f83`. Disabled/unknown applicability,
+unknown/empty request, ineligible evidence, a missing support list and an
+unmarked omission all carried the older constant `unverified`. The retained
+original probe has SHA-256
+`b1d3220202f0f0e1e230d003eff5c55263e1f95688b0a413068e34680f2c3e8f`.
+The successor regressions exercise those cases alongside explicit positive,
+negative, exhaustive, disputed and mixed-result controls; they also compare
+membership semantics against the unchanged reducer. This receipt is synthetic
+mechanics evidence only. Constraint 4's real rule adapters, actual evidence
+admission, successor owner adoption and #40/#41's broader criteria remain open.
 #40 remains open and #42/#114's substantive prerequisite is preserved.
 
 ### CD-4 typed isolation-boundary and inventory candidate (2026-10-18)

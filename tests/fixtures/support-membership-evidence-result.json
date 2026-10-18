@@ -1,0 +1,126 @@
+{
+  "x_t0_support_result": {
+    "proposal_version": "cd3-0.3",
+    "binding_sha256": "048d155833e519bc9ea64d87c96d226edd47e7964fb40cdf4ef6368a42a43680",
+    "answer_states_sha256": "fb118167ec6f19c73aee0d5195ca659b51a14116827b79fd28f6efa867284dce",
+    "query": {
+      "id": "rule.fixture.engine.formats",
+      "version": "0.3.0",
+      "requirement": "any",
+      "severity": "error"
+    },
+    "scope": {
+      "selection_id": "sel_inference_engine",
+      "catalog_sha256": "2e9120db823faef3e1e330a7d2e8067b3ab064328e2faed699d15cf41880fbf8",
+      "item": {
+        "id": "cat.inference_engine.fixture",
+        "version": "2026.10-demo",
+        "kind": "inference_engine"
+      },
+      "property": "/spec/model_formats",
+      "conditions_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864"
+    },
+    "cohort": {
+      "id": "cohort.fixture.engine.formats",
+      "version": "0.1.0"
+    },
+    "evaluation": {
+      "enabled": true,
+      "selected_scope": {
+        "selection_id": "sel_inference_engine",
+        "catalog_sha256": "2e9120db823faef3e1e330a7d2e8067b3ab064328e2faed699d15cf41880fbf8",
+        "item": {
+          "id": "cat.inference_engine.fixture",
+          "version": "2026.10-demo",
+          "kind": "inference_engine"
+        },
+        "property": "/spec/model_formats",
+        "conditions_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864"
+      },
+      "eligible_inputs": {
+        "applies_when": true,
+        "requested": true,
+        "requested_complete": true,
+        "cohort": true
+      },
+      "cohort_checked_only": true
+    },
+    "inputs": {
+      "applies_when": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:normalized-request",
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/applies_when"
+      },
+      "requested": {
+        "state": "provided",
+        "value": [
+          "safetensors",
+          "gguf",
+          "future-format"
+        ],
+        "source": "synthetic:normalized-request",
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/requested"
+      },
+      "requested_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:complete-request-inventory",
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/requested_complete"
+      },
+      "supported": {
+        "state": "provided",
+        "value": [
+          "safetensors",
+          "gguf"
+        ],
+        "source": "synthetic:reviewed-cohort",
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/supported"
+      },
+      "unsupported": {
+        "state": "provided",
+        "value": [
+          "gguf"
+        ],
+        "source": "synthetic:reviewed-cohort",
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/unsupported"
+      },
+      "exhaustive": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:reviewed-cohort",
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/exhaustive"
+      }
+    },
+    "decision": {
+      "outcome": "pass",
+      "reason": "any_membership",
+      "source_id": "cohort.fixture.engine.formats",
+      "findings": [
+        {
+          "value": "future-format",
+          "outcome": "unknown",
+          "reason": "unmarked_absence",
+          "disputed": false,
+          "evidence_label": null
+        },
+        {
+          "value": "gguf",
+          "outcome": "unknown",
+          "reason": "opposite_equal_rank_claims",
+          "disputed": true,
+          "evidence_label": "unverified"
+        },
+        {
+          "value": "safetensors",
+          "outcome": "pass",
+          "reason": "documented_member",
+          "disputed": false,
+          "evidence_label": "unverified"
+        }
+      ],
+      "disputed": true,
+      "evidence_label": "unverified"
+    }
+  }
+}

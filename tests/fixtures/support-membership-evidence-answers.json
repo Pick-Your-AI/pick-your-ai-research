@@ -1,0 +1,46 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/applies_when": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:normalized-request"
+      },
+      "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/requested": {
+        "state": "provided",
+        "value": [
+          "safetensors",
+          "gguf",
+          "future-format"
+        ],
+        "source": "synthetic:normalized-request"
+      },
+      "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/requested_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:complete-request-inventory"
+      },
+      "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/supported": {
+        "state": "provided",
+        "value": [
+          "safetensors",
+          "gguf"
+        ],
+        "source": "synthetic:reviewed-cohort"
+      },
+      "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/unsupported": {
+        "state": "provided",
+        "value": [
+          "gguf"
+        ],
+        "source": "synthetic:reviewed-cohort"
+      },
+      "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/exhaustive": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:reviewed-cohort"
+      }
+    }
+  }
+}

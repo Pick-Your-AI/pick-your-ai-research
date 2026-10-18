@@ -1,0 +1,27 @@
+{
+  "x_t0_support_query": {
+    "proposal_version": "cd3-0.3",
+    "query": {
+      "id": "rule.fixture.engine.formats",
+      "version": "0.3.0",
+      "requirement": "any",
+      "severity": "error"
+    },
+    "scope": {
+      "selection_id": "sel_inference_engine",
+      "catalog_sha256": "2e9120db823faef3e1e330a7d2e8067b3ab064328e2faed699d15cf41880fbf8",
+      "item": {
+        "id": "cat.inference_engine.fixture",
+        "version": "2026.10-demo",
+        "kind": "inference_engine"
+      },
+      "property": "/spec/model_formats",
+      "conditions_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864"
+    },
+    "cohort": {
+      "id": "cohort.fixture.engine.formats",
+      "version": "0.1.0"
+    },
+    "answer_states_sha256": "fb118167ec6f19c73aee0d5195ca659b51a14116827b79fd28f6efa867284dce"
+  }
+}

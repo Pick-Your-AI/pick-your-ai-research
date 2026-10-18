@@ -91,9 +91,13 @@ class SupportQueryRecord:
     vendor inventory exhaustiveness and the caller's evidence eligibility.
     """
 
+    _wire_validator = WIRE
+    _result_validator = RESULT
+    _proposal_version = "cd3-0.2"
+
     def __init__(self, binding_raw, answers_raw):
         binding = decode(binding_raw)
-        validate(WIRE, binding, "CD-3 query")
+        validate(self._wire_validator, binding, "CD-3 query")
         proposal = binding["x_t0_support_query"]
         pointer_tokens(proposal["scope"]["property"])
         if type(answers_raw) is not bytes or digest(answers_raw) != proposal["answer_states_sha256"]:
@@ -123,6 +127,15 @@ class SupportQueryRecord:
         call supply eligibility; each input group is qualified independently.
         A false applicability value can skip only when its eligibility is true.
         """
+        eligible, decision = self._evaluate_decision(
+            selected_scope, enabled=enabled, eligible_inputs=eligible_inputs)
+        return self._result_for(decision, {
+            "enabled": enabled, "selected_scope": selected_scope,
+            "eligible_inputs": eligible,
+        })
+
+    def _evaluate_decision(self, selected_scope, *, enabled, eligible_inputs):
+        """Shared admission and membership mechanics, before versioned labels."""
         if enabled is not None and type(enabled) is not bool:
             raise ValueError("enabled must be an exact Boolean or unresolved")
         if selected_scope is not None:
@@ -184,22 +197,25 @@ class SupportQueryRecord:
                 requested_complete=(known("requested_complete")
                                     if eligible["requested_complete"] is True else None),
             )
+        return eligible, decision
+
+    def _result_for(self, decision, evaluation):
+        proposal = self._proposal
         result = {"x_t0_support_result": {
-            "proposal_version": "cd3-0.2",
+            "proposal_version": self._proposal_version,
             "binding_sha256": digest(self._binding_bytes),
             "answer_states_sha256": digest(self._answer_bytes),
             "query": deepcopy(proposal["query"]),
             "scope": deepcopy(proposal["scope"]),
             "cohort": deepcopy(proposal["cohort"]),
-            "evaluation": {"enabled": enabled, "selected_scope": deepcopy(selected_scope),
-                           "eligible_inputs": eligible},
+            "evaluation": deepcopy(evaluation),
             "inputs": {field: answer_wire(answer) for field, answer in self._answers.items()},
             "decision": asdict(decision),
         }}
         # Use JSON's list/string vocabulary; dataclass tuples and StrEnums do
         # not escape into the transport object. This is not input canonicalization.
         result = json.loads(json.dumps(result, ensure_ascii=False, allow_nan=False))
-        validate(RESULT, result, "CD-3 result")
+        validate(self._result_validator, result, "CD-3 result")
         return result
 
     def verify_result(self, raw, selected_scope, *, enabled, eligible_inputs=None):
@@ -210,7 +226,7 @@ class SupportQueryRecord:
         consistency only, not a signature, source truth or caller authority.
         """
         result = decode(raw)
-        validate(RESULT, result, "CD-3 result")
+        validate(self._result_validator, result, "CD-3 result")
         expected = self.evaluate(selected_scope, enabled=enabled, eligible_inputs=eligible_inputs)
         if result != expected:
             raise ValueError("support result does not match retained inputs and caller context")
