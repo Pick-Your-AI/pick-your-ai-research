@@ -1,6 +1,6 @@
 # Customers and jobs to be done
 
-Issue: [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52). Child validation: [#63](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63) ([customer-validation.md](customer-validation.md)). Access date for all sources: 2026-10-16.
+Issue: [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52). Child validation: [#63](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63) ([customer-validation.md](customer-validation.md)). Original source observations retain their 2026-10-16 access date; the final review section records a separate 2026-10-18 source and protocol check.
 
 Status: **desk personas and hypotheses, not validated customers.** No interviews were run, no one was contacted and no personal data was collected. Nothing here establishes demand, frequency of decisions or willingness to pay; those belong to #63 after the coordinator approves recruitment, consent, retention and anonymized reporting.
 
@@ -29,16 +29,16 @@ Publisher: Stack Overflow / Stack Exchange Inc. Evidence class: Primary document
 | Cost or usage limits changed how respondents personally use AI at work | 32.6% monitor their own use; 25.3% choose cheaper models when possible; 23.8% usage is metered; 22.4% not affected; 6.9% team switched to more affordable models or vendors; 12.8% team increased AI budget (n = 1,033, multi-select) | [ai-cost](https://survey.stackoverflow.co/2026/knowledge/data/ai-cost) | Low: small n relative to the survey; route and filter not explained |
 | Reasons to avoid AI at work or school | 41.3% do not avoid AI; 13.0% cite privacy or security; 15.2% moral or ethical concerns (n = 13,857) | [ai-avoid](https://survey.stackoverflow.co/2026/ai/data/ai-avoid) | Medium |
 
-What this supports: in this developer sample, tool choices change (about two thirds of respondents to the switching question switched), quality is the leading stated reason, organizations drive about one in ten switches, and cost is a minority primary reason. That makes it plausible that recurring tool/model decisions exist and that the user is not always the decider. It does not show that the decisions are multi-component, that they are painful, or that anyone would pay for help with them. It also argues against assuming cost is the main priority.
+What this supports: in this developer sample, tool choices change (about two thirds of respondents to the switching question switched), quality is the leading stated reason, and 10.6% of all 13,144 respondents to that question cited a switch required or recommended by their organization. Cost is a minority primary reason. That makes it plausible that recurring tool/model decisions exist and that the user is not always the decider. It does not show that the decisions are multi-component, that they are painful, or that anyone would pay for help with them. It also argues against assuming cost is the main priority.
 
 ### Enterprise and business populations (non-developer)
 
 | Source | Population and method | Figures | Evidence class / confidence | Limitation |
 | --- | --- | --- | --- | --- |
-| [Eurostat, "Use of artificial intelligence in enterprises"](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Use_of_artificial_intelligence_in_enterprises) (Statistics Explained; data extracted December 2025; datasets `isoc_eb_ai`, `isoc_eb_ain2`) | EU enterprises with 10+ employees and self-employed persons in listed NACE sectors (manufacturing, energy, construction, trade, transport, accommodation, ICT, real estate, professional, administrative services, repair of computers). National statistical surveys; about 157,000 of 1.53 million enterprises surveyed | 2025: 19.95% of enterprises used at least one AI technology; 17% small (10–49), 30.36% medium (50–249), 55.03% large (250+). Among enterprises that had ever **considered** AI, lack of relevant expertise was the most cited reason for not using it (70.89%), then unclear legal consequences (52.52%) and data protection/privacy (48.83%); "not useful" was least cited (20.68%) | Primary documentation (official statistics); High for the stated population | Measures enterprise adoption, not decision frequency, tooling or spend. The page attributes data to the "2024 EU survey" while reporting 2025 figures; check the dataset metadata before reuse. Unreliable national data are included in EU aggregates; NL has a 2025 series break |
-| [US Census Bureau, "Large Firms With at Least 20 Employees Biggest AI Users"](https://census.gov/library/stories/2026/05/ai-use-businesses.html) (2026-05-26; Grundy, Breaux, Khatiwoda) | Business Trends and Outlook Survey (BTOS), biweekly, described as nationally representative US businesses; AI supplement since 2025-11-17. Current use = used AI in any business function in the past two weeks | 2025-12-14 to 2026-05-03: current use 17–20% (19.8% as of 2026-05-03); expected use in the next six months 20–23%. 37% of firms with 250+ employees and 32% with 100–249 reported use; under 20% of firms with four or fewer employees. Information sector 39.7%, finance and insurance 33.9% | Primary documentation (official statistics); Medium: supplement is labelled an experimental product | Question wording changed in November 2025 ("in producing goods or services" to "in any business function"), so earlier figures are not comparable. Sample size and response rate are not on the page Latest biweekly estimate: cycle 202620 (collected 2026-09-21 to 10-04) reports 23.8% used AI in the last two weeks and 27.7% expect to within six months ([National.xlsx](https://www.census.gov/hfp/btos/downloads/National.xlsx), "Response Estimates", questions 7 and 24, checked 2026-10-16). |
+| [Eurostat, "Use of artificial intelligence in enterprises"](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Use_of_artificial_intelligence_in_enterprises) (Statistics Explained; data extracted December 2025; datasets `isoc_eb_ai`, `isoc_eb_ain2`) | EU enterprises with 10+ employees and self-employed persons in listed NACE sectors (manufacturing, energy, construction, trade, transport, accommodation, ICT, real estate, professional, administrative services, repair of computers). National statistical surveys; about 157,000 of 1.53 million enterprises surveyed | 2025: 19.95% of enterprises used at least one AI technology; 17% small (10–49), 30.36% medium (50–249), 55.03% large (250+). Among enterprises that did not use AI but had ever **considered** it, lack of relevant expertise was the most cited reason for not using it (70.89%), then unclear legal consequences (52.52%) and data protection/privacy (48.83%); "not useful" was least cited (20.68%) | Primary documentation (official statistics); High for the stated population | Measures enterprise adoption, not decision frequency, tooling or spend. The page attributes data to the "2024 EU survey" while reporting 2025 figures; check the dataset metadata before reuse. Unreliable national data are included in EU aggregates; NL has a 2025 series break |
+| [US Census Bureau, "Large Firms With at Least 20 Employees Biggest AI Users"](https://census.gov/library/stories/2026/05/ai-use-businesses.html) (2026-05-26; Grundy, Breaux, Khatiwoda) | Business Trends and Outlook Survey (BTOS), biweekly, described as nationally representative US businesses; AI supplement since 2025-11-17. Current use = used AI in any business function in the past two weeks | 2025-12-14 to 2026-05-03: current use 17–20% (19.8% as of 2026-05-03); expected use in the next six months 20–23%. 37% of firms with 250+ employees and 32% with 100–249 reported use; under 20% of firms with four or fewer employees. Information sector 39.7%, finance and insurance 33.9% | Primary documentation (official statistics); Medium: supplement is labelled an experimental product | Question wording changed in November 2025 ("in producing goods or services" to "in any business function"), so earlier figures are not comparable. Sample size and response rate are not on the page. Latest biweekly estimate: cycle 202620 (collected 2026-09-21 to 10-04) reports 23.8% used AI in the last two weeks and 27.7% expect to within six months ([National.xlsx](https://www.census.gov/hfp/btos/downloads/National.xlsx), "Response Estimates", questions 7 and 24, checked 2026-10-16). |
 
-What this supports: AI adoption is concentrated in larger organizations and specific sectors; in the EU, expertise (not perceived usefulness) is the leading stated barrier among firms that considered AI. This is consistent with, but does not demonstrate, a need for decision support among enterprise architects, IT administrators and consultancies. Neither source measures who chooses components, how often, or what they spend.
+What this supports: AI adoption is concentrated in larger organizations and specific sectors; in the EU, expertise (not perceived usefulness) is the leading stated barrier among firms that did not use AI but had considered it. This is consistent with, but does not demonstrate, a need for decision support among enterprise architects, IT administrators and consultancies. Neither source measures who chooses components, how often, or what they spend.
 
 ## Segment map
 
@@ -66,7 +66,7 @@ Format: **trigger → constraint → consequence of a bad choice.** All jobs are
 ### 1. Local AI enthusiasts
 - **Job:** Decide what runs on hardware I already own. Trigger: a new model release or a hardware purchase. Constraint: fixed VRAM/RAM and no cloud budget. Consequence: wasted download time, out-of-memory failures, or an unnecessary hardware upgrade.
 - **Alternatives (catalog):** `llmfit`, `modelfit`, `canrun`, `canitrun`, `local-ai-planner`, `ollama`, `hugging-face`.
-- **Evidenced:** these tools exist and document hardware-fit features (catalog). tynamite's PR #67 review accepted this persona for #2/#3 and identified it as #81's local-first case (`hardware.mode: use_existing`); that is a technical-fit acceptance, not demand evidence.
+- **Catalog-backed scope:** the listed alternatives have different documented roles. The catalog records hardware-fit scope for `llmfit`, `modelfit`, `canrun`, `canitrun` and `local-ai-planner`; it records `ollama` as a model library/runtime substitute and `hugging-face` as a model hub. This does not establish segment usage or independently tested fit accuracy. tynamite's PR #67 review accepted this persona for #2/#3 and identified it as #81's local-first case (`hardware.mode: use_existing`); that is a technical-fit acceptance, not demand evidence.
 - **Hypothesis:** that uncertainty about fit, not installation effort, is the bottleneck; that existing fit tools are insufficient.
 
 ### 2. Individual developers
@@ -101,8 +101,8 @@ Format: **trigger → constraint → consequence of a bad choice.** All jobs are
 
 ### 7. Enterprise architects
 - **Job:** Make explainable, compatible choices with provenance. Trigger: a new AI initiative, policy review or vendor renewal. Constraint: data residency, security policy, approved-vendor lists. Consequence: failed security review, compliance exposure, or a choice that cannot be justified later.
-- **Alternatives:** existing vendor and platform evaluation processes. **No catalog entry covers this**; any named alternative would be a hypothesis.
-- **Evidenced:** among EU enterprises that considered AI, unclear legal consequences (52.52%) and data protection (48.83%) are leading barriers (Eurostat, enterprise population). Larger firms adopt more (Eurostat, Census).
+- **Alternatives (hypothesis):** existing vendor and platform evaluation processes. This note assigns no catalog ID to those processes; which alternatives this segment actually uses remains unverified.
+- **Evidenced:** among EU enterprises that did not use AI but had considered it, unclear legal consequences (52.52%) and data protection (48.83%) are leading barriers (Eurostat, enterprise population). Larger firms adopt more (Eurostat, Census).
 - **Hypothesis:** that architects, not procurement or security, own the configuration decision; procurement and residency requirements.
 
 ### 8. IT administrators
@@ -144,7 +144,7 @@ Asked before scheduling. No employer name, email or other identifier is recorded
 1. Which best describes your main role? (open text, coded afterwards into the ten segments; "none of these" allowed)
 2. In the last [N months, coordinator decision D-03], have you been involved in choosing any AI model, tool, service, hardware or hosting for yourself or others? (Yes / No / Not sure). **"No" is not screened out**; it fills the no-recent-decision quota.
 3. If yes: in that decision, which of these did you do? (multi-select) did the hands-on setup or evaluation / recommended an option / approved or rejected it / paid for it or controlled the budget / none of these.
-4. Who pays for the AI tools you use? (myself / my employer or client / free tools only / not sure)
+4. Who, if anyone, pays for the AI tools you use? (myself / my employer or client / free tools only / I do not use AI tools / not applicable / not sure)
 5. Roughly how many people are in your organization? (bands: just me, 2–9, 10–49, 50–249, 250+, not sure; bands chosen to align with Eurostat size classes)
 6. Country or region of residence (needed only for the coordinator's jurisdiction decision D-08; reported only at coarse region level).
 7. Are you, or is your employer, building or selling a tool that recommends AI models, hardware or stacks? (conflict-of-interest check; recorded, not automatically excluded)
@@ -161,12 +161,15 @@ Asked before scheduling. No employer name, email or other identifier is recorded
 5. How long did it take, from start to decision?
 6. What information were you missing, if anything?
 7. What happened afterwards? Did the choice hold, or did you change it?
-8. If it had turned out wrong, what would that have meant for you or your team?
-9. Before that one, when was the previous time you made a similar decision?
+8. What consequences, if any, did that decision have for you or your team?
+9. Was there an earlier similar decision? If yes, when?
 
-**Part B′ — No recent decision.** How do the AI tools you use today get chosen? Who chose them? Has anything about that ever caused a problem? (No follow-up that suggests it should be a problem.)
+**Part B′ — No recent decision.** Do you use any AI tools today? If yes, how were they chosen and by whom? What, if anything, followed from those choices? If no, record that answer without assuming a missing need or asking the participant to invent a decision.
 
 **Part C — Current alternatives and spend (10 min). No concept, product or price has been mentioned yet.**
+
+If no relevant decision process, alternative or spend applies, record `not applicable` and skip the corresponding follow-ups. Retain non-use and no-purchase answers; do not convert them to a zero willingness-to-pay amount.
+
 1. What do you currently use to make or check these decisions? (Probe each tool or source named; record catalog ID if it matches.)
 2. What does that cost today, in money or time? Who pays for it?
 3. Have you ever paid for anything specifically to help make this kind of decision (a tool, a consultant, a benchmark, a trial)? What was it, and who approved it?
@@ -174,7 +177,7 @@ Asked before scheduling. No employer name, email or other identifier is recorded
 
 **Part D — Concept reaction (optional, last 10 min).** Read a neutral one-paragraph description (fixed text approved by the coordinator; it must not claim benefits). Then:
 1. What, if anything, is this similar to?
-2. In your last decision, where if anywhere would this have fitted?
+2. If an actual decision was reported: where, if anywhere, would this have fitted into that decision? If none was reported, skip this question without inventing one.
 3. What would stop you from using something like this?
 4. Willingness-to-pay questions only as specified in the #63 module, and only after this point.
 
@@ -192,7 +195,7 @@ Asked before scheduling. No employer name, email or other identifier is recorded
 2. Which segment and role made, recommended, approved or paid?
 3. What alternatives were used, and did they suffice by the participant's own account?
 4. What money or time is currently spent, and who controls it?
-5. Which reported consequences of a bad choice are concrete events versus anticipated risks?
+5. What consequences, if any, did participants report? Code actual events, anticipated risks and no reported consequence separately, without assuming a bad choice.
 
 ## Handoffs
 
@@ -218,3 +221,33 @@ Not applied to `sources.json` (owned by #48). Proposed entries:
 | `src-census-btos-ai` | https://census.gov/library/stories/2026/05/ai-use-businesses.html | US Census Bureau | 2026-10-16 | Primary documentation (official statistics) | Experimental supplement; November 2025 wording change |
 
 Existing entries `src-survey-knowledge`, `src-survey-method` and `src-survey-trust` are already registered.
+
+## Source and protocol review, 2026-10-18
+
+This is a separately dated documentary check of the existing desk evidence. The
+original survey figures, ten segment definitions, jobs, role hypotheses and
+historical receiving receipt remain unchanged. Reading a publisher's results
+does not independently reproduce its survey or validate these personas.
+
+| Input checked | Actual readback | Boundary retained |
+| --- | --- | --- |
+| Stack Overflow methodology and five question tables | The [methodology](https://survey.stackoverflow.co/2026/methodology) matches the original fielding dates, row counts, validity rules and recruitment frame. The [source-attribution](https://survey.stackoverflow.co/2026/knowledge/data/knowledge-source-ai), [trust](https://survey.stackoverflow.co/2026/ai/data/ai-trust), [switching](https://survey.stackoverflow.co/2026/ai/data/ai-tool-switch), [cost](https://survey.stackoverflow.co/2026/knowledge/data/ai-cost) and [avoidance](https://survey.stackoverflow.co/2026/ai/data/ai-avoid) tables match the quoted figures and their separate denominators: 13,945; 14,304; 13,144; 1,033; 13,857. | Optional questions and the self-selected developer frame remain explicit. Cost is multi-select; the other four questions are single-select. These are published respondent reports, not evidence that any segment buys or repeatedly needs this product. |
+| Eurostat enterprise article | The [primary article](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Use_of_artificial_intelligence_in_enterprises) matches the recorded adoption, size and barrier figures, sample and population. Its December 2025 extraction and inconsistent 2024-survey/2025-results wording remain visible. | The barrier discussion concerns non-users that considered AI, not all enterprises. No dataset-metadata reconciliation or buyer-role observation is claimed. |
+| Census article and national workbook | The [May article](https://www.census.gov/library/stories/2026/05/ai-use-businesses.html) matches the recorded figures and November 2025 question change. A fresh public download of [National.xlsx](https://www.census.gov/hfp/btos/downloads/National.xlsx) was 88,868 bytes, SHA-256 `d905e1b7ad042971e67e8b4b36a50a3050522cb675c609056c7ba374b88c8668`. In `Response Estimates`, cycle `202620`, Q7/Yes is 23.8% (E16) and Q24/Yes is 27.7% (E82). The date sheet records collection 2026-09-21–2026-10-04, prior reference period 2026-09-07–2026-09-20, publication 2026-10-08. | This confirms the existing aggregate readback at the stated cycle. The mutable download and checksum confer no continuing freshness, project purchase intent or permission to redistribute a dataset. No raw workbook is committed. |
+
+The protocol correction keeps Part B on reported past consequences, asks about
+recurrence without presuming it, and permits non-use from screening through Parts
+B′ and C. Part D's decision-specific prompt is conditional on a real report, and
+analysis separates actual consequences, anticipated risks and no reported
+consequence. The old counterfactual about a decision going wrong conflicted with
+the guide's past-behaviour-first rule; its removal does not count as a participant
+finding. The switching interpretation now uses all 13,144 question respondents;
+10.6% does not describe only those who switched. Eurostat barrier statements retain
+the non-user group that had considered AI. Catalog roles are distinguished without
+attributing hardware-fit capability to every listed alternative or claiming
+comprehensive coverage of enterprise decision processes.
+
+This update records no new receiving-owner disposition and makes no fieldwork,
+recruitment, consent, quota, concept-card or monetary decision for #63. The existing
+handoff rows retain their stated scope; independent evidence/protocol review and
+the named receiving decisions remain necessary before #52 acceptance.
