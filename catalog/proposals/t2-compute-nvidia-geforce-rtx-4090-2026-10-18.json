@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-geforce-rtx-4090",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA GeForce RTX 4090 (reference specifications)",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Documented hardware identity, not a currently purchasable offering or measured runtime tuple. Research snapshot; no serving or training-fit claim.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "GeForce RTX 4090",
+    "vram_gb": 24,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "fp32",
+      "tf32",
+      "bf16",
+      "fp16",
+      "fp8",
+      "int8",
+      "int4"
+    ],
+    "rated_power_w": 450,
+    "interconnect": "pcie"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+      "checked_at": "2026-10-18T01:06:32Z",
+      "verification_status": "unverified",
+      "notes": "Ada whitepaper v2.02, Appendix A, printed pp29-31: exact RTX4090 column supports name/vendor/type,24GB,450W TGP,PCIe and all seven v1 arithmetic precisions. No throughput values transcribed. This does not establish engine/artifact/kernel compatibility. Snapshot date is not product-release date; no immutable content hash obtained."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T01:06:32Z",
+      "verification_status": "unverified",
+      "notes": "CUDA GPU table lists GeForce RTX4090 at compute capability8.9, supporting CUDA backend identity. This does not pin a driver or CUDA runtime version."
+    }
+  ],
+  "updated_at": "2026-10-18T01:06:32Z"
+}
