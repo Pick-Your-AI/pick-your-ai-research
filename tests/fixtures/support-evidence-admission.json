@@ -1,0 +1,35 @@
+{
+  "x_t0_support_evidence": {
+    "proposal_version": "cd3-evidence-0.1",
+    "binding_sha256": "048d155833e519bc9ea64d87c96d226edd47e7964fb40cdf4ef6368a42a43680",
+    "query": {
+      "id": "rule.fixture.engine.formats",
+      "version": "0.3.0",
+      "requirement": "any",
+      "severity": "error"
+    },
+    "scope": {
+      "selection_id": "sel_inference_engine",
+      "catalog_sha256": "2e9120db823faef3e1e330a7d2e8067b3ab064328e2faed699d15cf41880fbf8",
+      "item": {
+        "id": "cat.inference_engine.fixture",
+        "version": "2026.10-demo",
+        "kind": "inference_engine"
+      },
+      "property": "/spec/model_formats",
+      "conditions_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864"
+    },
+    "cohort": {
+      "id": "cohort.fixture.engine.formats",
+      "version": "0.1.0"
+    },
+    "sources": [
+      {
+        "id": "source.synthetic.engine",
+        "revision": "synthetic-release-1",
+        "source_uri": "https://github.com/Pick-Your-AI/pick-your-ai-research/__synthetic__/support-matrix#formats",
+        "checked_at": "2026-10-18T00:00:00.123456789Z"
+      }
+    ]
+  }
+}
