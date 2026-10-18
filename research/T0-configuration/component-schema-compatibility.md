@@ -147,7 +147,7 @@ can supply a nested object/array value; absent members or indices become
 `missing`. Malformed pointer/index syntax and scalar traversal are errors.
 Duplicate JSON keys and nonfinite numbers are rejected before normalization.
 
-**Rule boundary:** compatibility predicates receive an unresolved result for
+**Original Boolean/None rule boundary:** compatibility predicates receive an unresolved result for
 all non-provided states, including unknown applicability. Recommendation
 rules use the known-answer gate specified in #81 and therefore skip unresolved
 needs. A known false applicability predicate still skips.
@@ -193,8 +193,9 @@ prototype uses the unchanged `AnswerIndex.read` interface. The sidecar,
 schema, fixtures, field dictionary and CD-13 evaluator are unchanged. This
 bounded correction does not resolve the disposition's separate field-sentinel,
 preset, parent-read or state-specific reason/policy questions, including when a
-`not_applicable` answer should skip a dependent compatibility rule. Their
-existing behavior is retained for separate owner-reviewed work.
+`not_applicable` answer should skip a dependent compatibility rule. The
+legacy behavior is retained below; the subsequent typed outcome boundary
+addresses the reason/policy mechanics without changing that interface.
 
 The [20 executable cases](../../tests/test_t0_answer_states.py) cover nested
 and escaped paths, array boundaries, parent withholding, explicit false/zero,
@@ -206,6 +207,90 @@ provided-but-unresolved recommendation case. They reproduce frozen v1's
 literal-unknown comparison and verify unchanged historical findings when the
 synthetic extension is present. No original build bytes, frozen evaluator,
 measured artifact or receiving receipt is modified.
+
+
+**Typed outcome/reason boundary (2026-10-18):** the same
+[#40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires separate answer-state reasons and a skipped dependent predicate for an
+explicit `not_applicable` answer. An actual 15-case probe of accepted
+`dff6b480c437761c56cf60d6aa9999b2abfb3462`, prototype blob
+`9f8cea0119b93c0fd14c0626412bf97a37ba6af1`, confirmed the remaining loss:
+withheld, unknown, missing, not-applicable and absent answers all lowered to the
+same generic compatibility reasons, and recommendation skips used
+`not_applicable` even when the answer was withheld or missing. No value callback
+ran in those probes. The corrected typed negation still prevented a false pass;
+this is the separate policy and explanation gap.
+
+The existing [CD-1 module](../../tests/t0_answer_state_prototype.py) now also
+provides `AnswerRule`, explicit `RulePolicy` and
+`evaluate_answer_rule(rule)` as the terminal boundary for these answer-aware
+experiments. A rule declares one ID, one fixed severity and its compatibility or
+recommendation policy. Both applicability and assertion are lazy callbacks
+returning the existing immutable `PredicateResult`; plain Boolean/None or other
+untyped callback returns reject instead of silently discarding answer metadata.
+The assertion callback runs exactly once only after provided, known-true
+applicability.
+
+| Responsible input | Compatibility outcome | Recommendation outcome | Distinct reason |
+| --- | --- | --- | --- |
+| Unknown / missing / withheld applicability answer | `unknown` | `skipped` | `answer_unknown` / `answer_missing` / `answer_withheld` |
+| Explicit not-applicable answer at either position | `skipped` | `skipped` | `answer_not_applicable` |
+| Provided applicability predicate is false | `skipped` | `skipped` | `applicability_false` |
+| Provided predicate is unresolved, at either position | `unknown` | `unknown` | `predicate_unknown` |
+| Unknown / missing / withheld assertion after known-true applicability | `unknown` | `unknown` | The corresponding `answer_*` reason |
+| Provided assertion is true / false | `pass` / `fail` | `pass` / `fail` | `assertion_true` / `assertion_false` |
+
+Recommendation gating applies to an unanswered applicability input. It does not
+turn unresolved assertion evidence into a known result once the recommendation
+is applicable. A provided answer whose value predicate cannot decide remains a
+provided answer with `predicate_unknown`; this adapter does not invent a claim
+that the answer or eligible evidence was absent. An explicit not-applicable
+answer is scoped to the caller-selected predicate, not a waiver of every rule
+or of required-component presence.
+
+The immutable terminal result retains the rule ID, unchanged severity, outcome,
+reason, responsible position (`applies_when` or `assertion`), exact answer state
+and original source path. An absent path remains missing with no invented source
+path; a parent-withheld or escaped path retains the normalizer's actual path.
+No original answer value is copied into this result. The typed result also
+rejects implicit Boolean coercion, so an unknown/skipped result cannot become a
+pass through Python negation or truth testing.
+
+```python
+finding = evaluate_answer_rule(AnswerRule(
+    id="synthetic.network-isolation",
+    severity="error",
+    policy=RulePolicy.COMPATIBILITY,
+    applies_when=lambda: answers.predicate(network_path, network_schema, needs_isolation),
+    assertion=lambda: answers.predicate(boundary_path, boundary_schema, stays_inside),
+))
+```
+
+This is the preferred terminal API for CD-1 state-aware rule experiments. The
+two Boolean/None adapters above and all 20 existing tests retain their original
+behavior for historical comparison and compatibility with the unchanged CD-13
+prototype. Those adapters cannot carry the new state reasons or not-applicable
+policy and must not be presented as satisfying this boundary. Negation still
+happens on `PredicateResult` before evaluation; neither its callback nor the
+original value is evaluated again.
+
+[Eleven additional synthetic methods](../../tests/test_t0_answer_rule_outcomes.py)
+exercise both policies, all three severities, direct/absent and parent-derived
+states, both predicate positions, explicit not-applicable versus known-false
+skips, provided predicate uncertainty, known truth controls, negation, strict
+callback/metadata rejection, lazy exception behavior, immutable outcomes and
+original-byte/escaped-path retention. They run alongside the unchanged 20 CD-1
+methods. Actual final source and receiving executions retain their own PR
+receipts.
+
+This bounded extension addresses the disposition's reason/policy mechanics.
+It does not select components, quantify over selections, aggregate findings,
+qualify evidence, release a ruleset or add a wire format. The original
+`AnswerIndex.read` and `predicate` implementations, sidecar/schema/fixtures,
+field-sentinel, parent-read and preset constraints remain unchanged. CD-13
+required presence, CD-5 stage adaptation and other owner work keep their
+separate scope and review; downstream adoption must explicitly consume this
+typed result rather than silently reusing a lossy Boolean interface.
 
 Primary syntax references inspected **2026-10-18**:
 [RFC 6901, sections 3–4 and 7](https://www.rfc-editor.org/rfc/rfc6901) defines
