@@ -69,6 +69,18 @@ def validate_deliverable(value, label):
             f'{label}: requires an existing file with a resolvable path') from error
 
 
+def validate_completion_evidence(item):
+    """Check recorded Done evidence shape, never whether acceptance happened."""
+    label = f'backlog #{item["number"]}: Done requires recorded acceptance evidence'
+    completion = item.get('completion_evidence')
+    require(isinstance(completion, dict), f'{label}: requires an object')
+    for field in ('accepted_commit', 'review_url', 'handoff_acceptance'):
+        value = completion.get(field)
+        require(isinstance(value, str) and value.strip(),
+                f'{label}: {field} must be nonempty text')
+    validate_http_url(completion['review_url'], f'{label}: review_url')
+
+
 def validate_source_rechecks(source):
     """Validate both retained claim shapes without certifying their statements."""
     label = f"source {source['id']}: rechecks"
@@ -332,8 +344,7 @@ def validate():
             require(item['parent_number'] in numbers, 'market integrity check failed')
             parents[item['number']] = item['parent_number']
         if item['status'] == 'Done':
-            completion = item.get('completion_evidence', {})
-            require(all((completion.get(k) for k in ('accepted_commit', 'review_url', 'handoff_acceptance'))), 'Done requires recorded acceptance evidence')
+            validate_completion_evidence(item)
     for start in parents:
         seen = set()
         current = start

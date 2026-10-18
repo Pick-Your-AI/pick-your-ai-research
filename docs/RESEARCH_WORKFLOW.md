@@ -89,6 +89,14 @@ Nested files and links to files inside the directory remain eligible; validation
 does not rewrite their recorded paths. This establishes file presence, not evidence
 quality, review acceptance or issue completion.
 
+For a backlog row with `status: Done`, `completion_evidence` must be an object
+with nonempty text for `accepted_commit`, `review_url` and `handoff_acceptance`.
+The review URL uses the existing HTTP(S) syntax checks. Booleans, numbers,
+containers and whitespace cannot substitute for these records. The validator
+preserves their original text and permits incomplete evidence while the row is
+not Done. This checks record shape only: it does not resolve the commit, retrieve
+the review, authenticate handoff acceptance or establish issue completion.
+
 The market backlog also enforces the methodology's parent-completion rule:
 every recorded child of a `Done` parent must be `Done`, with each completed
 issue still requiring its own acceptance-evidence record. The check follows
