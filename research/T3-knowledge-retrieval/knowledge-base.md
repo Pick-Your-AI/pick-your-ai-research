@@ -108,3 +108,35 @@ All links below were opened and read on **2026-10-18**. Evidence grade: primary 
 - K11 — Microsoft, [Blob RBAC scope ingestion](https://learn.microsoft.com/en-us/azure/search/search-blob-indexer-role-based-access): preview configuration and query permission boundary; preview and ordinary-indexer capabilities kept distinct.
 
 The original K2/K3 links above supply the detailed deletion/sync conditions. No API request, customer content, infrastructure allocation or #65 experiment was performed. Remaining evidence is configuration-specific parser/chunker fidelity, revocation/deletion propagation and actual lag, plus selected region/terms/cost. #13 owners retain connector scope; #14 receives tokenization, #15 source-to-index deletion identity, #16/#35 trusted retrieval enforcement, #28 downstream memory lineage and #32 separate reuse rights. Those receiving dispositions remain outstanding.
+
+## Synthetic deletion-lineage examples for KB-02
+
+The [test-only projection](../../tests/kb_deletion_prototype.py) and
+[regression cases](../../tests/test_kb_deletion.py) make KB-02's proposed
+pass/fail/unknown/skipped boundary executable over synthetic normalized receipts.
+They do not implement ingestion, deletion, graph discovery or a contract reader.
+No actual connector, credential or customer content is involved.
+
+A receipt represents one source-to-derived-destination edge with an unambiguous
+identity and an observation bound to the selected deletion/revocation event.
+Source revision, tenant, event identity, trustworthy observation and scope
+completeness must already have been established by the caller. These tests do
+not establish them. Duplicate/missing edge identities are ambiguous rather than
+silently merged. Unknown event applicability is unknown; only an explicitly
+inapplicable event skips the rule. Severity remains fixed at error.
+
+- A known current stale serving copy fails even if unrelated destinations or
+  full lineage coverage remain unknown.
+- Incomplete lineage, an untracked memory copy, an unknown destination state or
+  a receipt for an older/unbound event cannot establish a pass.
+- Complete scope with every current destination tombstoned or excluded from
+  serving passes this proposed serving predicate. A separately governed backup
+  may remain retained only when its current non-serving classification is
+  established; this is not an erasure, retention-policy or legal-compliance pass.
+- An empty derived scope passes only with positive completeness evidence, not
+  merely an empty list. The test assumes that evidence, rather than measuring it.
+
+These examples illustrate existing KB-02 requirements; they add no publisher
+capability claim or frozen-v1 field. Real revocation/deletion propagation, scope
+completeness and receiving decisions from #15/#16/#28/#35 remain outstanding;
+#40 retains final rule/identity encoding and adoption.
