@@ -9,7 +9,7 @@ Status: source follow-up and retained proposals; receiving acceptance pending ·
 
 Source checking for this reconciliation overlapped [#191](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/191), merged at `5906084bbaab8ceed446ab4d191915f84c2dc089`. Its focused notes already carry the four source findings from the comparison drafts. F01–F04 below consolidate that provenance, pin the harness guide and distinguish the current Gemini Interactions error API from generateContent-family metadata. The evaluation note also now applies the merged [T0 operator/capacity mode definition](../T0-configuration/deployment-mode.md) to each serving component; provider name and evaluator placement do not decide serving mode.
 
-No rule IDs, rule counts, frozen v1 files, schema enums, numeric thresholds, default retention periods, rights decisions or receiving handoff states are changed by this reconciliation. The counts in the [T6 summary](README.md) continue to describe the #121 rule/evidence inventory; F01–F04 are a separate supplement checked against five primary documents. Nothing here is a benchmark run, a configured deployment, or a consumer receipt.
+The original sibling reconciliation did not add rule IDs or change rule counts, frozen v1 files, schema enums, numeric thresholds, default retention periods, rights decisions or receiving handoff states. The counts in the [T6 summary](README.md) describe its current rule/evidence tables, including later additions identified in those tables; F01–F04 remain a separate supplement checked against five primary documents. Nothing here is a benchmark run, a configured deployment, or a consumer receipt.
 
 ## Source findings carried into the canonical records
 
@@ -93,3 +93,7 @@ The links identify the exact reviewed original text, including proposals not rep
 ## Acceptance boundary
 
 The supersession decision resolves competing PR destinations. The issue deliverables and receiving handoffs remain open wherever the canonical record says evidence, measurements, rights, schema versioning, configured behavior or a receiving decision is pending. A future implementation must select and review one policy for each unresolved alternative; it must not load both sets of proposals as cumulative rules. Existing authors, original revisions and review corrections remain traceable above.
+
+## Subsequent integration into the component tables
+
+The 2026-10-18 follow-up places F02/F04 into candidate rows E-R87/E-R88 with evidence rows E-N1001/E-N1002, F03 into G-R35, and F01 into SG147 with evidence row M-L31. They retain the source scope and receiving boundaries above. The [cost record W5](cost-estimate.md#w5-fine-tuning-a-one-off-job-and-continuing-hosting) and its calculator add provider-specific training quantities, a model-specific minimum top-up, and separate recurring hosting. Those figures are synthetic arithmetic illustrations with dated public rates, not provider bills or completed training. This integration does not install a ruleset or settle the retained policy alternatives.
