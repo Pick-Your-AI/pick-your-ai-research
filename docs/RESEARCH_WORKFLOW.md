@@ -52,6 +52,8 @@ The market integrity reader applies the same duplicate-key, non-finite-number an
 
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
 
+The handoff audit validator checks consistency among `handoffs.json`, `handoff-audit-readback.json` and `audit.json`. It rejects duplicate snapshot issue IDs, pull-request IDs, declared handoff pairs and historical review pairs before relying on their indexed identities. Conflicting entries cannot be silently discarded to obtain a passing audit. These checks preserve recorded attribution; they do not fetch live GitHub state or establish receiving-owner acceptance.
+
 ## Review and ownership
 
 - Existing issue assignees own research decisions. Request affected owners' review for handoffs; preserve live assignments.

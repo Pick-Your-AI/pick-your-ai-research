@@ -67,6 +67,34 @@ class HandoffAuditValidation(unittest.TestCase):
         load = lambda name: json.loads((BASE / name).read_text(encoding='utf-8'))
         validate(load('handoffs.json'), load('handoff-audit-readback.json'), load('audit.json'))
 
+    def test_duplicate_snapshot_issue_cannot_hide_conflicting_assignees(self):
+        duplicate = deepcopy(self.readback['issues'][0])
+        duplicate['assignees'] = ['synthetic-other-owner']
+        self.readback['issues'].insert(0, duplicate)
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate snapshot issue'):
+            self.check()
+
+    def test_duplicate_historical_pair_cannot_hide_conflicting_review(self):
+        duplicate = deepcopy(self.readback['historical_owner_reviews'][0])
+        duplicate['owner_review']['reviewer'] = 'synthetic-other-owner'
+        self.readback['historical_owner_reviews'].insert(0, duplicate)
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate historical review pair'):
+            self.check()
+
+    def test_duplicate_declared_pair_cannot_disappear_from_coverage(self):
+        self.readback['declared_handoff_pairs'].append(
+            deepcopy(self.readback['declared_handoff_pairs'][0]))
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate declared handoff pair'):
+            self.check()
+
+    def test_duplicate_snapshot_pr_cannot_hide_conflicting_state(self):
+        self.readback['pull_requests'][0]['state'] = 'open'
+        duplicate = deepcopy(self.readback['pull_requests'][0])
+        duplicate['state'] = 'closed'
+        self.readback['pull_requests'].append(duplicate)
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate snapshot pull request'):
+            self.check()
+
     def test_missing_declared_consumer_is_rejected(self):
         pair = tuple(self.readback['declared_handoff_pairs'][0])
         self.ledger = [r for r in self.ledger
