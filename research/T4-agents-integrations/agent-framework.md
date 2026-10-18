@@ -19,6 +19,8 @@ The answer depends on four joint facts:
 - which MCP transports and protocol revisions the framework's MCP client supports (#27);
 - where state, traces and the runtime live (library in the user's process, or a vendor-managed runtime).
 
+Execution arrangements covered below are independent of the build's serving-component deployment mode. Under the accepted [operator/capacity definition](../../prompts/SHARED.md#workstream-and-handoff-boundaries), an application-owned framework may call a managed model endpoint; that does not require a vendor-managed framework runtime.
+
 Deployment modes covered:
 - **API:** no framework, or a thin loop over a provider API. Some providers run tools or MCP servers on their side (OpenAI hosted MCP tools, Anthropic server tools and MCP connector) (A1, A2, A36).
 - **Self-hosted:** every candidate below is a library that runs in the user's process or container. Some ship an optional self-hostable server (LangGraph Agent Server, Agno AgentOS, LlamaIndex `llama-agents-server`).
@@ -295,7 +297,7 @@ Outcome (`pass/fail/unknown/skipped`) is produced by evaluation; severity (`info
   ]},
   "assert": {"op": "eq", "left": {"ref": {"scope": "catalog", "kind": "inference_engine", "role": "primary", "pointer": "/spec/supports_tool_calling"}}, "right": {"literal": true}},
   "on_unknown": "review",
-  "message": "The selected inference engine is not recorded as exposing tool calling; an agent framework cannot receive tool calls from it.",
+  "message": "The selected inference engine is not recorded as exposing native tool calling. Native tool-call modes need scoped support and configuration evidence; prompted or code-action modes have different requirements.",
   "remediation": "Choose an engine with tool-call support and configure it (for vLLM: --enable-auto-tool-choice and a model-specific --tool-call-parser).",
   "affected_kinds": ["agent_framework", "inference_engine", "model", "tool"],
   "owner": "t4-research"
@@ -354,15 +356,21 @@ The rule itself is owned by #27 and published once, as `rule.t4.mcp.transport.ss
 
 #### rule.t4.toolcalling.mode (compatibility example 1, full form) · Source-checked (unverified) evidence, needs #40
 
-Missing field: `spec_agent_framework.tool_calling_modes` (array enum `native, prompted_react, code_action, provider_hosted`). With it, rule 1 can become an `error` that passes for prompted or code modes (A60, A61).
+The earlier expression intersected the framework's available modes with prompted/code modes. That could pass a build actually configured for native calls simply because the same framework also offers ReAct. Capabilities and the selected execution path are different inputs.
+
+Required proposed inputs: the exact framework/version and its source-qualified supported modes, plus the **selected mode for each configured action path** (`native`, `prompted_react`, `code_action` or `provider_hosted`). A workflow can mix paths, so a framework-wide capability array cannot choose one on the user's behalf. #40 owns their versioned representation and bindings. The [CD-3 scope/completeness policy](../T0-configuration/component-schema-compatibility.md#cd-3-synthetic-support-membership-experiment-2026-10-18) governs support: an unmarked omission is unknown, not a negative.
 
 ```text
 id: rule.t4.toolcalling.mode  severity: error  on_unknown: review
-applies_when: exists(selection agent_framework primary /id) AND (exists tool primary OR exists mcp_server primary)
-assert: any(
-  intersects(catalog agent_framework primary /spec/tool_calling_modes [MISSING], ["prompted_react","code_action"]),
-  eq(catalog model primary /spec/supports_tool_calling, true))
+for_each: enabled, bound framework action path [PROPOSED; CD-7/CD-13]
+assert: eligible scoped support for that path's selected execution mode
+
+id: rule.t4.toolcalling.native-model  severity: error  on_unknown: review
+applies_when: that path's selected mode == native
+assert: eligible native-tool-call support for its actual model, API and request configuration
 ```
+
+Known prompted/code paths skip the native-mode clause; they still need their own scoped framework/mode support and #35 controls. A missing selected mode, unresolved path binding or missing eligible support stays unknown. Provider-hosted execution retains the actual provider/API/tool binding and does not inherit local-handler capability. These are design proposals, not executable v1 fields. The historical warning-only JSON examples above retain their documented single-primary limitations.
 
 #### rule.t4.model.api.surface (compatibility example 2, full form) · Source-checked (unverified) evidence, needs #40
 
@@ -372,16 +380,20 @@ A framework can support a provider API without supporting every model feature th
 - PydanticAI: gpt-6-sol and gpt-6-luna allow function calling on Chat Completions only with reasoning effort `none` (A53).
 - PydanticAI: "Compatibility with one API does not imply support for the other or for every OpenAI feature" (A54).
 
-Missing fields: `spec_agent_framework.model_api_surfaces`, `spec_model_provider.api_surfaces` (or per-model), and a feature list such as `required_api_features` in `settings_agent_framework`.
+Required proposed inputs: the configured API surface on the exact framework/model/serving-path binding, source-qualified support for that surface on both sides, and the features that path actually requests. An intersection between two advertised capability lists cannot prove that the configured surface is in the intersection. The pinned SDK guide's per-provider/run/agent routing and rejection of Responses-only tools on other paths provide a concrete example (A88 below).
 
 ```text
 id: rule.t4.model.api.surface  severity: error  on_unknown: review
-assert: intersects(catalog agent_framework primary /spec/model_api_surfaces [MISSING],
-                   catalog model_provider primary /spec/api_surfaces [MISSING])
+for_each: enabled, bound framework/model serving path [PROPOSED; CD-7/CD-13]
+assert: eligible support for the configured API surface on this framework adapter
+        AND eligible support for the same surface on this exact serving path
+
 id: rule.t4.model.api.feature  severity: warning  on_unknown: review
-assert: subset_of(selection agent_framework primary /settings/required_api_features [MISSING],
-                  catalog model primary /spec/api_features [MISSING])
+assert: each actually requested feature has eligible support for this
+        framework/adapter/model/API/endpoint/request-configuration tuple
 ```
+
+Keep source qualification, known negatives, list completeness and unresolved values distinct under CD-1/CD-3. For example, if both sides advertise Chat Completions but the selected route uses Responses, a common Chat Completions entry supplies no passing verdict for that route. Unknown selected surface is unknown, not an inferred default. A source-backed explicitly unsupported requested feature fails at the clause's fixed severity; an absent entry from a researched subset remains unknown.
 
 #### rule.t4.engine.toolchoice · Source-checked (unverified) evidence, needs #40 and #11
 
@@ -407,7 +419,7 @@ applies_when: exists(selection mcp_server primary /id)
 assert: in(catalog mcp_server primary /spec/transport, catalog agent_framework primary /spec/mcp_client_transports [MISSING])
 ```
 
-Failing example from evidence: an SSE server with MAF Python, which has no SSE class (A25). Unknown example: Mastra with SSE (not documented, A70).
+Unknown examples: an SSE server with MAF Python when the only evidence is that the inspected page has no SSE class (A25), or Mastra with SSE omitted from its inspected page (A70). Neither page inventory is marked exhaustive. A failure requires an applicable explicit negative or an eligible exhaustive list excluding the selected transport; do not turn an unread or unlisted class into unsupported status.
 
 #### rule.t4.mcp.protocol.revision · Hypothesis, needs #40 and #27
 
@@ -447,13 +459,18 @@ severity: info
 
 #### rule.t4.deployment.managed · Hypothesis, needs #40, #3 and #37
 
-A managed deployment mode needs a managed runtime the framework vendor or the cloud supports: LangSmith Deployment (A10), Agent Runtime (A48), Foundry hosted agents (A21), CrewAI AMP (A30). Missing field: `spec_agent_framework.managed_runtime_refs` (references to `hosting_platform`).
+The original build-mode predicate is withdrawn. A managed model endpoint does not require a managed agent runtime: the framework may still run in the application's own process. This rule concerns only an **explicitly selected provider-operated orchestration runtime**. Examples researched here include LangSmith Deployment (A10), Agent Runtime (A48), Foundry hosted agents (A21) and CrewAI AMP (A30); their existence does not establish compatibility with every framework or release.
+
+Required proposed inputs: the selected orchestration runtime and operator, exact framework/runtime versions and configuration, and eligible compatibility evidence for that pair. Missing fields/bindings remain #40/#37 work; no new build-mode taxonomy is introduced.
 
 ```text
-applies_when: eq(catalog deployment_mode primary /spec/mode, "managed") AND exists(selection agent_framework primary /id)
-assert: exists(catalog agent_framework primary /spec/managed_runtime_refs [MISSING])
-severity: warning
+id: rule.t4.deployment.managed  severity: warning  on_unknown: review
+applies_when: the bound orchestration runtime is explicitly provider-operated
+assert: eligible compatibility evidence supports this exact
+        framework/version + selected runtime/version/configuration pair
 ```
+
+An explicitly application-operated framework skips this clause even when the model uses managed serving. An unresolved runtime/operator stays unknown; a nonempty catalog list is not a substitute for the selected runtime's evidence.
 
 #### rule.t4.telemetry.egress · Source-checked (unverified) evidence, needs #40, #35 and #38
 
@@ -462,21 +479,31 @@ Some frameworks send data off-host by default:
 - Agno sends a telemetry event per run (A64).
 - CrewAI has anonymous telemetry (A30).
 
-Missing field: `spec_agent_framework.default_telemetry_egress` (boolean).
+The later [producer-specific source and synthetic findings](framework-evaluation-telemetry.md#telemetry-controls-are-scoped-to-their-producers) show why a single `default_telemetry_egress` or `telemetry_disabled` flag is insufficient. Bind each producer/exporter to the actual selected framework/version, configuration, destination and data scope. Disabling Agent telemetry does not prove that a separate evaluator or exporter is disabled.
+
+The original variable-severity example is replaced by two fixed-severity **policy hypotheses**. The proposed default is to disable a producer that exports outside the selected boundary; #35/#38 still own any scoped approval exception. This record does not itself adopt that policy or certify effective configuration.
 
 ```text
-applies_when: eq(catalog agent_framework primary /spec/default_telemetry_egress [MISSING], true)
-assert: eq(selection agent_framework primary /settings/telemetry_disabled [MISSING], true)
-severity: warning (error when a restricted data_source is selected)
+id: rule.t4.telemetry.egress  severity: warning  on_unknown: review
+for_each: enabled, bound telemetry producer [PROPOSED]
+applies_when: producer export leaves the selected boundary
+              AND its data scope is known not to include restricted data
+assert: source-appropriate effective configuration disables this producer's export
+
+id: rule.t4.telemetry.egress.restricted  severity: error  on_unknown: review
+for_each: enabled, bound telemetry producer [PROPOSED]
+applies_when: producer export leaves the selected boundary
+              AND its data scope includes restricted data
+assert: source-appropriate effective configuration disables this producer's export
 ```
 
-#### rule.t4.direct.orchestration · Hypothesis, needs #40
+Known data classes select the corresponding fixed-severity clause. Missing classification, producer coverage, destination or effective control evidence stays unknown; do not route an unresolved scope through the non-restricted branch or infer a universal opt-out from one environment variable. The clauses are not claims that every candidate transmits restricted data.
 
-v1 cannot represent "no framework". Proposal: a build-level field `/objectives/orchestration` with values `framework` or `direct_sdk`. `rule.agent.tools.framework` would apply only when it is `framework`.
+#### Direct orchestration: use the accepted W-R3 decision
 
-```text
-rule.agent.tools.framework applies_when: exists(tool primary) AND ne(build /objectives/orchestration [MISSING], "direct_sdk")
-```
+The earlier new `/objectives/orchestration` proposal is withdrawn in favor of the existing [W-R3 owner decision](../T0-configuration/workload-use-case.md#w-r3-actions-need-a-t4-component). Known action needs may be met by an enabled framework, tool or MCP server; a framework is not mandatory. Direct orchestration is therefore represented by the actual selected tool/MCP capabilities and their explicit bindings, rather than a fabricated framework catalog item.
+
+Frozen v1's historical `rule.agent.tools.framework` still has its older requirement. The [CD-13 experiment](../T0-configuration/component-schema-compatibility.md#cd-13-synthetic-selection-experiment-2026-10-18) reproduces its selection bug without adopting that requirement. Successor dispatch/migration remains with #40; no frozen rule is changed here. Other conditions, including model/provider-hosted tool compatibility, permissions, isolation and costs, continue to apply to the actual selected path.
 
 ## Pricing and capacity
 
@@ -489,7 +516,7 @@ rule.agent.tools.framework applies_when: exists(tool primary) AND ne(build /obje
 
 This is research guidance for builder defaults, not a product endorsement.
 
-- **Single agent with a few tools:** offer "no framework" (direct provider SDK loop) as a first-class option. It has the fewest dependencies, and the provider documents the loop (A1, A2). v1 cannot select it today (see `rule.t4.direct.orchestration`).
+- **Single agent with a few tools:** offer "no framework" (direct provider SDK loop) as a first-class option. The provider documents the loop (A1, A2). W-R3 accepts tool/MCP execution without a framework; frozen v1's historical framework requirement still needs the reviewed successor dispatch/migration described above.
 - **Durable, multi-step or human-approval workflows:**
   - Python: LangGraph, Microsoft Agent Framework or Google ADK. Each documents checkpoint or session persistence and human-in-the-loop (A9, A27, A47).
   - Teams that want durable execution on an existing workflow engine: PydanticAI (A51).
@@ -539,7 +566,7 @@ Synthetic request/response acceptance cases are kept in [the test fixture specif
 | Add `spec_agent_framework` fields: `tool_calling_modes`, `model_api_surfaces`, `mcp_client_transports`, `mcp_protocol_revisions`, `state_backends`, `rag_integration`, `managed_runtime_refs`, `default_telemetry_egress`, `observability` (enum `otel_native, otlp_export, vendor_tracing`), `supports_human_approval` | #40 · @tynamite |
 | Deprecate or redefine `supports_memory`; extend `programming_languages` with `csharp`/`dotnet` and `kotlin`; per-language versions under one framework ID | #40 · @tynamite |
 | Status mapping for "archived" and "superseded" (AutoGen, Semantic Kernel) | #40 · @tynamite; #41 freshness |
-| Represent "no framework / direct SDK orchestration" in a build; fix `rule.agent.tools.framework` and `rule.agent.mcp.framework` for provider-hosted MCP | #40 · @tynamite |
+| Apply the accepted W-R3 no-framework decision in successor dispatch/migration; retain actual tool/MCP and provider bindings without a competing `/objectives/orchestration` field | #40 · @tynamite |
 | #6 must populate `supports_tool_calling` and `supports_json_schema` per model and per API surface (Responses vs Chat Completions), including reasoning-effort conditions (A53) | #6 · @zwright8 |
 | Exact-release engine/build/parser/endpoint/request prerequisites; historical minima and Ollama claims require eligible scoped evidence and do not add a T2 candidate | #11 · @zwright8, @Mattycodes69: [both scoped receipts recorded](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677); execution/evidence placement remains #11/#36 |
 | Retrieval-as-tool vs native retrieval components; which `rag_pipeline` modes frameworks consume | #16 · @zabyxc01 |
@@ -567,3 +594,20 @@ T4/#25 accepts [#16's retrieval interface](../T3-knowledge-retrieval/rag-retriev
 - With no enabled retrieval selection, the conditional retrieval checks are skipped. The note's new binding/evidence fields and existing `rule.t4.rag.integration` remain proposals for versioned #40 review; no frozen-v1 rule or catalog boolean is changed here.
 
 The T3 reply to T4's outgoing retrieval-interface request, other co-owner dispositions, actual authorization tests and selected-backend measurements remain open at their existing issues. This receiving decision supplies no production authorization or runtime evidence.
+
+## Selected-path rule review (2026-10-18)
+
+This continuation resolves specific false-pass/false-fail paths in the proposed rules, without changing the four original JSON rule IDs, their fixed severities, any catalog value or frozen v1. The rules remain research proposals for #40, including their CD-7/CD-13 binding and all-selection requirements.
+
+A88 — OpenAI, [Agents SDK model guide](https://github.com/openai/openai-agents-python/blob/17d994bd3045dae71acda676a4ef4762ed8ecd94/docs/models/index.md), pinned release source `17d994bd3045dae71acda676a4ef4762ed8ecd94` (Python SDK 0.24.0). Read **2026-10-18** through GitHub's raw-file connector after the web extractor could not retrieve the raw URL. **Primary documentation, source checked / unverified**. The guide distinguishes Responses and Chat Completions model adapters, per-provider/run/agent routing and Responses-only tool features; it describes dropped fields and strict validation on the Chat Completions path. This is source evidence for retaining the selected API/configuration, not an executed provider request or a new joint compatibility result. Original A37 retains its historical main-branch capture.
+
+| Counterexample | Correct proposed disposition | Ownership and evidence boundary |
+| --- | --- | --- |
+| A framework offers native and prompted action modes, but the selected path is native and the model has an eligible native-tool-call negative | Native-mode clause fails; the unused prompted mode cannot make it pass | Selected mode and tuple binding require #40; a missing selected mode remains unknown |
+| Framework and provider have one API surface in common, but the selected path uses a different surface | Check the selected surface and requested features on the exact path; the unused intersection proves nothing | A88 documents path-specific behavior; actual source eligibility and request configuration remain inputs |
+| A managed model endpoint is called by an application-operated framework | Managed-orchestration clause is skipped for that known application-operated runtime | Accepted operator/capacity definition; no automatic framework-runtime requirement from model serving mode |
+| An inspected framework page does not list an SSE client class | Unknown unless eligible explicit negative or exhaustive evidence establishes exclusion | CD-3's accepted unmarked-list distinction; no inferred unsupported capability |
+| The Agent's opt-out is set but a separate evaluator/exporter may remain active | Evaluate each producer with its own control, destination and data scope; unresolved coverage stays unknown | The pinned evaluation/telemetry supplement; #35/#38 adoption and actual configuration remain separate |
+| A tool is selected without an agent framework | W-R3 permits that architecture; apply the actual tool/provider/MCP bindings and other controls | W-R3/#40; historical v1 dispatch remains frozen until a reviewed successor |
+
+The table is a logical review of proposed predicate scope. It supplies no new runtime observations, source-rights decision or receiving-owner adoption. The five remaining unchecked #25 criteria still require their full source/rule/receiving assessment; the three artifact criteria reconciled in [the actual issue comment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25#issuecomment-6248705617) and the original merged-record criterion retain their prior status.
