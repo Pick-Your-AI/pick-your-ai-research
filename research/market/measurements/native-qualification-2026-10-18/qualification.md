@@ -180,7 +180,7 @@ runtime commit620d2225cc436ab0b001e3200e590e3b286ef9ab, the recorded MSVC x64
 flags `/std:c++17 /EHsc /O2 /MD /UNDEBUG`, and project source at the recorded
 harness ref. CPU fixtures are under `tests/native/`. Compile outside Git, verify
 every executable/header/DLL identity and the successful bounded probe before
-model qualification. The [serial launcher](../../../../scripts/mr09_native_qualify.py)
+model qualification. The [executed serial launcher](mr09_native_qualify.executed.py)
 refuses an existing repetition, verifies artifacts, rechecks capacity and captures
 one initialization-only process with a 90-second timeout. It kills only that child
 on timeout, records failure and stops rather than changing settings/retrying.
@@ -246,3 +246,38 @@ additional instrumentation limitation, not a rewrite of source pins/results.
 The exact implementation of `GGML_CUDA_DISABLE_GRAPHS` is in pinned
 [common.cuh](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-cuda/common.cuh#L1289).
 The additional source readback is recorded [separately](../output-reservation-2026-10-18/instrumentation-source-readback.json).
+
+## Prospective launcher result-preservation correction
+
+Reviews [5561890869](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/267#pullrequestreview-5561890869)
+and [5561899280](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/267#pullrequestreview-5561899280)
+identified a later-telemetry failure path: the executed launcher queried the
+driver before saving the native child's stdout, stderr and exit status. A failed
+or hung query could lose or indefinitely delay that record even after the native
+child had returned. This is a prospective program defect, not evidence that the
+three retained successful trials encountered that failure.
+
+The exact executed launcher is archived above with unchanged SHA-256
+`6a645f212c3b947789345dc739d88d554f3e083021db3cc0f7abfebc8ff1f8b8`.
+All original captures, preflights, publication receipts, summary, build and native
+source/executable identities remain unchanged. The [current launcher](../../../../scripts/mr09_native_qualify.py)
+is a different, unexecuted revision. Its capture cannot join this historical
+cohort: the capture reader still requires the original launcher hash.
+
+The corrected path freezes admitted artifact identities before the child starts,
+then atomically saves its completed, failed or timed-out result before collecting
+driver telemetry. The initial record explicitly marks telemetry as pending and
+cannot be admitted as successful qualification. The later driver query has a
+10-second timeout; failed, timed-out, missing or malformed telemetry retains its
+error separately and leaves overall qualification failed. A successful query
+cannot replace a native failure or timeout. Atomic updates preserve the existing
+child record if replacement fails; an existing complete or incomplete repetition
+still prevents another launch. The original 90-second native-child bound, cap,
+artifact checks and capacity prerequisites remain in place, without retries.
+
+Seven CPU-only regression methods use mocked artifact admissions and subprocesses
+to exercise those outcomes and historical-byte preservation. No native executable,
+CUDA/driver query, estimator or model ran for this correction. It supplies no new
+initialization observation, estimator pair, runtime-peak result or receiving-owner
+acceptance; a future cohort still needs its separately reviewed identities and
+qualification scope.
