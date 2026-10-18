@@ -1,10 +1,10 @@
 # Feature matrix review guide
 
-Snapshot: 2026-10-16. Draft for #49; required owner acceptance remains open.
+Source snapshot: 2026-10-16. The separate 2026-10-18 memory-boundary correction is recorded below; it does not refresh the original sources or complete #49's remaining evidence and receiving reviews.
 
 F = Exercised: bounded test passed with replayable evidence. P = Documented: narrower documentary support, including unverified vendor claims. N = Unsupported: explicit negative evidence under pinned conditions. ? = Unknown. No absence is inferred from silence. The old “Verified Full/Partial” names are retired following [the evidence-owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545).
 
-[features.json](features.json) retains all 33 entities and 48 dimension IDs. It defines a test and required conditions for each dimension. The current audit has **123 P, 0 F, 0 N and 1,461 ? cells**. This is research coverage, not a product score. Every P has a source-register ID, claim-specific URL, basis, method, evidence class and audit scope. The scope records the public reading mode, dated surface, untested plan entitlements, region and reuse limits. A dated page is not a pinned software release.
+[features.json](features.json) retains all 33 entities and 48 dimension IDs. It defines a test and required conditions for each dimension. After the memory-boundary correction, the matrix has **122 P, 0 F, 0 N and 1,462 ? cells**. This is research coverage, not a product score. Every P has a source-register ID, claim-specific URL, basis, method, evidence class and audit scope. The scope records the public reading mode, dated surface, untested plan entitlements, region and reuse limits. A dated page is not a pinned software release.
 
 ## How to apply the tests
 
@@ -88,4 +88,10 @@ Do not treat the #42 narrowing review as acceptance of this revision. [Acceptanc
 
 ## CanIRun.ai intake (2026-10-16)
 
-`canirun-ai` adds 48 cells: three Documented (hardware_fit, hardware_catalog, vram_ram), 45 Unknown. Directory text only; no exercised capability. See the [profile](competitors/canirun-ai.md) and `src-canirun-ai`.
+The original intake added 48 cells: three Documented (hardware_fit, hardware_catalog, vram_ram), 45 Unknown. Directory text only; no exercised capability. See the [profile](competitors/canirun-ai.md) and `src-canirun-ai`.
+
+## Memory-boundary correction (2026-10-18)
+
+The `vram_ram` test asks for a memory requirement for one pinned model/runtime configuration, with units and assumptions. The `canirun-ai` cell instead cites a device's memory capacity. Capacity describes available hardware; it cannot support even a documentary claim about how much memory that model/runtime configuration requires. The cell is now **Unknown**, leaving `canirun-ai` with two Documented and 46 Unknown cells. The separate `hardware_catalog` observation remains unchanged.
+
+The correction preserves the original device-capacity basis, source URL, source ID, access date and documentary grade as historical context; it updates only the status and its limitation. It neither infers that CanIRun.ai lacks a memory estimate nor substitutes a new model requirement, benchmark or product execution. All 1,583 other cells and all 48 test definitions remain unchanged. The [current correction record](mr02-acceptance.md#memory-boundary-correction--2026-10-18) separates this classification repair from the broader matrix, receiving and future-intake decisions. The accepted #66 observations retain their separate source and review scope; this correction promotes no cell to Exercised.
