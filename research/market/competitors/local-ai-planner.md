@@ -46,7 +46,7 @@ Not in the PR #82 shortlist; route to #55/#60 if any reuse is proposed.
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `constraints`, `explanation`, `multi_gpu` and related cells Documented; `saved`, `share`, `export`, `model_versions` Unknown. Agrees.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `constraints`, `explanation`, `multi_gpu` and related cells Documented; `saved`, `share`, `export`, `model_versions` Unknown. Agrees.
 
 ## Open questions and routing
 

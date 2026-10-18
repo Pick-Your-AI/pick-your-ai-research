@@ -51,7 +51,7 @@ Initial loading briefly displayed an exhausted allowance; after hydration one fr
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `natural_language`, `guided_selection`, `model_search`, `saved` Documented; `share`, `export`, `model_versions` Unknown. Agrees. The hands-on run is a historical observation, not an Exercised cell under #87's replayable-evidence rule.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `natural_language`, `guided_selection`, `model_search`, `saved` Documented; `share`, `export`, `model_versions` Unknown. Agrees. The hands-on run is a historical observation, not an Exercised cell under #87's replayable-evidence rule.
 
 ## Open questions and routing
 

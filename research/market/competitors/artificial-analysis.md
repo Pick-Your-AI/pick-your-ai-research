@@ -34,7 +34,7 @@ Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-
 | --- | --- | --- | --- |
 | (a) Commercial access | Free website; free Data API with an account key; commercial API "with more comprehensive data" documented to partners separately | Documented | [API reference](https://artificialanalysis.ai/api-reference) |
 | (b) Code licence | Closed service; no public repository | Not applicable | — |
-| (c) Data reuse | "Attribution is required for all use of our free API"; use is subject to the Terms of Use and Data Platform Terms. Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): Data Platform Terms s2.5 bar use, on all tiers, in third-party products whose primary purpose includes model or provider selection guidance, without written consent | Documented (terms); s2.5 cited as pending PR #82 | [API reference](https://artificialanalysis.ai/api-reference), [Terms of Use](https://artificialanalysis.ai/terms-of-use) |
+| (c) Data reuse | "Attribution is required for all use of our free API"; use is subject to the Terms of Use and Data Platform Terms. Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): Data Platform Terms s2.5 bar use, on all tiers, in third-party products whose primary purpose includes model or provider selection guidance, without written consent | Documented (terms); s2.5 recorded in merged PR #82 | [API reference](https://artificialanalysis.ai/api-reference), [Terms of Use](https://artificialanalysis.ai/terms-of-use) |
 
 Consequence: Pick Your AI is the product category s2.5 names. Automated retrieval, display and redistribution are no without written consent; manual reading and citation only.
 
@@ -45,7 +45,7 @@ Consequence: Pick Your AI is the product category s2.5 names. Automated retrieva
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_compare`, `explanation`, `model_versions`, `benchmarks`, `api_pricing`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_compare`, `explanation`, `model_versions`, `benchmarks`, `api_pricing`, `export`, `api_access` Documented; `saved`, `share` Unknown. Agrees.
 
 ## Open questions and routing
 

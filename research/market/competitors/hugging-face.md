@@ -36,7 +36,7 @@ Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-
 | (b) Code licence | Hub service closed; client libraries open source (not assessed here). Each model repository carries its own declared licence | Documented | [model cards docs](https://huggingface.co/docs/hub/model-cards) |
 | (c) Data reuse | ToS defines "Content" as material posted by "you, we, or any third party"; rights follow each repository's licence and gating terms | Documented (terms) | [terms of service](https://huggingface.co/terms-of-service) |
 
-Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): automated retrieval via the documented API, internal research and display of factual identifiers (id, revision, declared licence, size) with a link: yes; redistribution of card text or files only where the repository licence permits. This profile agrees.
+Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): automated retrieval via the documented API, internal research and display of factual identifiers (id, revision, declared licence, size) with a link: yes; redistribution of card text or files only where the repository licence permits. This profile agrees.
 
 ## Counterexample
 
@@ -45,7 +45,7 @@ Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82):
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_search`, `model_compare`, `model_versions`, `export` Documented; `saved`, `share` Unknown. Agrees. `hardware_fit` stays Unknown until an account-based check.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `model_search`, `model_compare`, `model_versions`, `export` Documented; `saved`, `share` Unknown. Agrees. `hardware_fit` stays Unknown until an account-based check.
 
 ## Open questions and routing
 
