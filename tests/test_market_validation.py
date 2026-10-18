@@ -664,6 +664,48 @@ class MarketValidation(unittest.TestCase):
                 self.assertIn(error_text, result.stderr)
                 self.assertNotIn('Market integrity OK', result.stdout)
 
+    def test_backlog_status_requires_present_text(self):
+        baseline = self.data['research-backlog.json']
+        for value in (None, True, False, 0, 1, 1.0, [], ['Done'], {}, {'status': 'Done'}):
+            with self.subTest(status=value):
+                records = deepcopy(baseline)
+                records[0]['status'] = value
+                self.assert_invalid_backlog(records, 'backlog #1: status must be')
+        records = deepcopy(baseline)
+        del records[0]['status']
+        self.assert_invalid_backlog(records, 'backlog #1: status must be')
+
+    def test_backlog_status_rejects_unknown_and_normalized_aliases(self):
+        baseline = self.data['research-backlog.json']
+        for value in ('', ' \t\n', 'done', 'DONE', 'Done ', ' Done',
+                      'In progress', 'In Review\n', 'Completed', 'Backlog',
+                      'Done\u200b', 'In\u00a0Progress'):
+            with self.subTest(status=value):
+                records = deepcopy(baseline)
+                records[0]['status'] = value
+                self.assert_invalid_backlog(records, 'backlog #1: status must be')
+
+    def test_backlog_status_accepts_all_market_options_without_rewriting_input(self):
+        # Inbox and Triage are market intake states, unlike technical Backlog.
+        for status in ('Inbox', 'Triage', 'Ready', 'In Progress',
+                       'In Review', 'Blocked', 'Done'):
+            data = deepcopy(self.data)
+            item = data['research-backlog.json'][0]
+            item['status'] = status
+            if status == 'Done':
+                item['completion_evidence'] = {
+                    'accepted_commit': 'Synthetic accepted revision',
+                    'review_url': 'https://example.com/synthetic-review',
+                    'handoff_acceptance': 'Synthetic acceptance record',
+                }
+            for optimized in (False, True):
+                with self.subTest(status=status, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Market integrity OK', result.stdout)
+                    for name, value in data.items():
+                        self.assertEqual((self.base / name).read_text(), json.dumps(value))
+
     def test_backlog_issue_numbers_are_positive_json_integers(self):
         baseline = self.data['research-backlog.json']
         for value in (True, False, 0, -1, 1.0, 1.5, '1', '', None):
@@ -836,7 +878,7 @@ class MarketValidation(unittest.TestCase):
         return records
 
     def test_done_parent_rejects_each_unfinished_child_status(self):
-        for status in ('Backlog', 'Ready', 'In Progress', 'In Review', 'Blocked'):
+        for status in ('Inbox', 'Triage', 'Ready', 'In Progress', 'In Review', 'Blocked'):
             with self.subTest(child_status=status):
                 records = self.completion_backlog(['Done', status], [None, 1])
                 self.assert_invalid_backlog(

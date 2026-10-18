@@ -335,7 +335,12 @@ def validate():
     require(len(numbers) == len(backlog), 'duplicate backlog issue')
     parents = {}
     for item in backlog:
-        for key in ('question', 'owner', 'workstream', 'priority', 'readiness', 'status',
+        status = item.get('status')
+        require(isinstance(status, str) and status in
+                ('Inbox', 'Triage', 'Ready', 'In Progress', 'In Review', 'Blocked', 'Done'),
+                f'backlog #{item["number"]}: status must be one of '
+                'Inbox, Triage, Ready, In Progress, In Review, Blocked, Done')
+        for key in ('question', 'owner', 'workstream', 'priority', 'readiness',
                     'steps', 'priority_rationale', 'next_action'):
             require(item.get(key), (item['number'], key))
         validate_deliverable(item.get('deliverable'),
