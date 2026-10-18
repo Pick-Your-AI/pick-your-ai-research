@@ -1,15 +1,15 @@
 # T4: MCP Servers
 
 Issue: #27 · Contract: 1.0.0 · Kinds: `mcp_server`
-Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-18 (bounded Python SDK, public Cloudflare documentation and authorization/locality follow-ups)
+Status: research completion assessment below; versioned contract adoption and selected-build qualification remain separate · Reconciled: 2026-10-18
 
 ## Evidence status correction
 
-Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims remain `unverified`; the original facts, versions, source access dates and `checked_at` are unchanged. No qualifying independent corroboration or runtime reproduction was supplied. Vendor capability statements remain documented claims, not measurements.
+Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 interim policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Checked primary documentation, publisher package metadata, registry entries and source inspection are not independent verification. These catalog claims remain `unverified`; the original facts, versions, source access dates and `checked_at` are unchanged. The original catalog claims were not independently reproduced. The later SDK and Cloudflare observations retain their separately dated, narrower scope. Vendor capability statements remain documented claims, not measurements.
 
-A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
+A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. The original evidence correction did not itself satisfy issue completion; the present criterion assessment and actual receiving decisions are recorded below.
 
-`trusted_external` is a proposed project classification under the criteria in this note, pending #35/#40 review. Registry presence and namespace/package identity checks do not certify security, safe code, benign tools or independently verified behaviour. The catalog value is not a security certification.
+`trusted_external` is a project research classification under the criteria in this note, with the [current #35 receiving interpretation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6251677799); versioned rule adoption remains with #40. Registry presence and namespace/package identity checks do not certify security, safe code, benign tools or independently verified behaviour. The catalog value is not a security certification or permission to waive a required control.
 
 The separately dated [Cloudflare documentation-server observation](cloudflare-docs-mcp.md)
 adds actual public-endpoint discovery/listing and one documentation search to the
@@ -26,14 +26,14 @@ The builder has to answer three joint questions for every selected server:
 2. **Can the deployment reach and authorize it?** Local subprocess or remote endpoint, who hosts it, and whether the required authorization flow can run in the chosen deployment mode.
 3. **How far should it be trusted?** Who publishes it, how identity is source-checked, and what its tools can change.
 
-Deployment modes covered (the v1 `spec_deployment_mode.mode` enum is `api`, `managed`, `self_hosted`, `hybrid`):
+Deployment modes covered (the v1 `spec_deployment_mode.mode` enum is `api`, `managed`, `self_hosted`, `hybrid`): MCP placement does not set the build's serving mode. The [accepted #3 operator/capacity position](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) and [#40 isolation disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) require per-component placement and actual connection evidence. The following taxonomy covers MCP use alongside each serving mode; it does not qualify every client/server combination.
 
-| Packaging | What runs where | Fits mode | Notes |
+| Packaging | What runs where | Applicability across serving modes | Evidence and limits |
 | --- | --- | --- | --- |
-| **Local stdio** | The selected MCP client launches the server and owns its standard streams (C10, C70) | `self_hosted` or the local leg of `hybrid`; a managed runtime needs actual subprocess capability evidence. Using a model API does not identify the MCP client's execution locality | Credentials come from the environment, not the HTTP MCP authorization flow (C12, C66) |
-| **Self-hosted remote** (Streamable HTTP) | The organisation runs the server on its own hosting platform | `self_hosted`, `hybrid`, `managed` | Needs a #9 `hosting_platform` with `hosting_type` `cloud`, `on_prem`, `edge` or `colocation` |
-| **Vendor-hosted remote** (Streamable HTTP) | The API vendor runs the endpoint (GitHub, Stripe, Sentry, Atlassian) | all modes, including `api` | Maps to #9 `hosting_type` `managed_api` if modelled at all. Needs public egress and usually OAuth 2.1 |
-| **Provider-hosted connector** | The model provider calls the remote server from its own infrastructure (OpenAI `HostedMCPTool`, C56, C69) | `api` | A custom server URL must be reachable by the provider. Direct subprocess stdio is outside this documented interface; a separately introduced intermediary requires its own transport and authorization assessment |
+| **Local stdio** | The selected MCP client launches the server and owns its standard streams (C10, C70) | Can accompany `api`, `managed`, `self_hosted` or `hybrid` serving when that client has the required launch, stream and lifecycle path | Credentials come from the environment, not the HTTP MCP authorization flow (C12, C66). Using a model API does not identify the MCP client's execution locality |
+| **Self-hosted remote** (Streamable HTTP) | The organisation runs the server on its own hosting platform | Can accompany any serving mode; assess the separate MCP runtime and network path | Reuse an eligible #9 host identity for the actual placement. Cloud, on-premises, edge and colocation are placement possibilities, not proof that a corresponding catalog record or configured service exists |
+| **Vendor-hosted remote** (Streamable HTTP) | The API vendor runs the endpoint (GitHub, Stripe, Sentry, Atlassian; C25, C27–C29) | Can accompany any serving mode, subject to the selected endpoint's reachability and authorization | Check the actual route and isolation boundary. Vendor operation alone proves neither public egress nor private containment; do not infer mode, trust or availability from `managed_api` |
+| **Provider-hosted connector** | The model provider calls the remote server from its own infrastructure (OpenAI `HostedMCPTool`, C56, C69) | Applies when that provider/API interface is selected; other serving components keep their own modes | A custom server URL must be reachable by the provider. Direct subprocess stdio is outside this documented interface; a separately introduced intermediary requires its own transport and authorization assessment |
 
 Out of scope: the general tool catalog (#26) and framework selection (#25). Facts about frameworks below are limited to what was needed to ground the rule shapes.
 
@@ -61,12 +61,12 @@ Published revisions (C1, C2): `2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11
 | Legacy | Modern | **Fails** (no fall-forward) |
 | Legacy | Dual-era or legacy | Works |
 
-**Ecosystem state today (source-checked from SDK artifacts, C31, C32):**
+**Dated implementation observations (source-checked SDK artifacts, C31, C32; later C60–C65):**
 - The TypeScript SDK `@modelcontextprotocol/sdk` 1.32.1 (2026-10-05) sets `LATEST_PROTOCOL_VERSION = '2025-11-25'` and supports 2024-10-07 to 2025-11-25. A separate module declares `DRAFT-2026-v1`.
 - The Python SDK `mcp` 1.30.0 supports 2024-11-05 to 2025-11-25 only. The 2026-10-18 pinned follow-up now inspects `mcp` 2.3.0 and its exact dependency `mcp-types==2.3.0`: the registry lists four handshake revisions (`2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11-25`) and one modern revision (`2026-07-28`). C60–C65 and the [local SDK observation](#pinned-python-sdk-protocol-follow-up-2026-10-18) replace the earlier uninspected-registry uncertainty; they do not establish the protocol set of any selected vendor server.
 - The reference servers pin the legacy SDK lines: `mcp-server-fetch` and `mcp-server-git` require `mcp<2,>=1.29.0`, and `server-filesystem`/`server-everything` 1.0.0 require `@modelcontextprotocol/sdk ^1.31.0` (C36, C38, C39, C41).
 
-**Consequence:** a protocol-version field is mandatory. A client that implements only 2026-07-28 cannot use most servers published today. "Supports MCP" (the v1 boolean) is not enough to predict compatibility.
+**Research consequence:** record a protocol-version field. A modern-only client cannot use a server known to be legacy-only (C7); the inspected packages do not establish what proportion of the ecosystem is legacy. "Supports MCP" (the v1 boolean) is not enough to predict compatibility. The Python 2.3.0 follow-up supplies modern and fallback evidence only for its pinned implementation and observed tuples.
 
 **Transports.**
 - `stdio`: client-launched subprocess, newline-delimited JSON-RPC (C10).
@@ -101,7 +101,7 @@ Status flags: reference servers are "not production-ready" (C33). Fifteen former
 | `mcp_server.stripe-remote` | Stripe | 0.2.4 (registry, 2025-10-28) | n/a (hosted) | streamable_http | vendor-hosted `mcp.stripe.com` | OAuth or agent API key bearer; untagged restricted and full secret keys rejected from December 2026 | tools including generic `stripe_api_write`; human confirmation for some writes | `com.stripe/mcp` (active) | C27, C48 |
 | `mcp_server.sentry-remote` | Sentry | 0.42.0 (2026-09-25) | FSL-1.1-ALv2 (source) | streamable_http (remote); stdio npm `@sentry/mcp-server` | vendor-hosted `mcp.sentry.dev/mcp`; stdio for self-hosted Sentry | MCP OAuth (`Bearer`) or forwarded `Sentry-Bearer` token; stdio uses `SENTRY_ACCESS_TOKEN` with write scopes | tools ("skills" groups); AI search tools call an external LLM provider | `io.github.getsentry/sentry-mcp` (active) | C28, C50–C52 |
 | `mcp_server.atlassian-remote` | Atlassian | 2.0.0 (2026-09-09) | n/a (hosted) | streamable_http (two endpoints, v2 and v1/authv2) | vendor-hosted `mcp.atlassian.com` | OAuth 2.1 primary, API token optional | tools for Jira, JSM, Confluence, Bitbucket, Goals, Projects, Loom; respects user permissions; consumes Rovo credits | `com.atlassian/atlassian-mcp-server` (active) | C29, C49 |
-| `mcp_server.dbhub` (database) | Bytebase | 1.5.0 (2026-10-09) | MIT | stdio; HTTP via `--transport http` | local or self-hosted | none for MCP; DB credentials in DSN | tools `execute_sql`, `search_objects`, opt-in `explain_sql`, `health_check`, custom SQL tools; read-only mode | npm `mcpName` `io.github.bytebase/dbhub` (registry not checked) | C53–C55, C59 |
+| `mcp_server.dbhub` (database) | Bytebase | 1.5.0 (2026-10-09) | MIT | stdio; HTTP via `--transport http` | local or self-hosted | none for MCP; DB credentials in DSN | tools `execute_sql`, `search_objects`, opt-in `explain_sql`, `health_check`, custom SQL tools; read-only mode | npm `mcpName` `io.github.bytebase/dbhub` (registry not checked) | C53–C55 |
 | `mcp_server.reference-fetch` | MCP steering group | 2026.10.10 (2026-10-11) | PyPI: MIT; repository in MIT to Apache-2.0 transition | stdio | local | none | tools (annotated read-only, open-world), prompts | not found in registry search | C33, C34, C37, C38 |
 | `mcp_server.reference-filesystem` | MCP steering group | 1.0.0 (2026-10-11) | "SEE LICENSE IN LICENSE" (mixed MIT/Apache-2.0) | stdio | local | none | tools; **requires client Roots or CLI args** | `mcpName` set but exact-name lookup returned 404 | C30, C35, C36 |
 | reference `git` (note only) | MCP steering group | 2026.10.10 | MIT (PyPI, README) | stdio | local | none | tools | not checked | C39 |
@@ -156,7 +156,7 @@ The issue's conceptual fields map to v1 as follows. Most do not exist in v1.
 
 ## Evidence
 
-Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C65 SDK follow-up and C66–C71 authorization/locality follow-up were accessed 2026-10-18. These rechecks do not refresh unrelated original observations.
+Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C65 SDK follow-up, C66–C71 authorization/locality follow-up and C72–C73 Sentry policy review were accessed 2026-10-18. These rechecks do not refresh unrelated original observations.
 - Pages on modelcontextprotocol.io, github.com, docs and vendor sites were read with a fetch tool that returns extracted Markdown, so quotations are as extracted.
 - JSON APIs (MCP Registry, npm, PyPI) and raw.githubusercontent.com files were read directly.
 - The original 2026-10-16 desk study executed no MCP server or SDK. The separate 2026-10-18 experiment below executes pinned SDKs against local synthetic peers only.
@@ -234,6 +234,8 @@ Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C
 | C69 | OpenAI, https://openai.github.io/openai-agents-python/mcp/ | 2026-10-18 | Current Agents Python documentation; local MCP v1/v2 distinctions | Primary documentation; source checked / unverified | Local transport ownership, hosted Responses path, header injection and version-dependent HTTP auth types; no account or model request |
 | C70 | MCP, https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio | 2026-10-18 | 2026-07-28 | Primary specification; source checked / unverified | Subprocess/stream ownership and lifecycle; custom channels have separate equivalents. No new process experiment |
 | C71 | Google, https://adk.dev/tools-custom/mcp-tools/#remote-mcp-authentication-and-resource-access | 2026-10-18 | Current ADK documentation, no installed package qualification | Primary documentation; source checked / unverified | Documented authentication integration does not establish a selected credential, issuer, operation entitlement or renewal capability |
+| C72 | Sentry, https://github.com/getsentry/toolkit/blob/main/README.md#remote-with-an-explicit-sentry-token | 2026-10-18 | Current README; earlier `getsentry/sentry-mcp` URL redirects here | Primary documentation; source checked / unverified | Distinguishes MCP OAuth `Bearer` from custom upstream `Sentry-Bearer`; describes forwarding without worker validation, exchange or renewal. No deployed revision or credential was tested |
+| C73 | MCP, https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices#token-passthrough | 2026-10-18 | 2026-07-28 guidance | Primary documentation; source checked / unverified | Audience-validation and downstream-forwarding boundary, read with C66; grounds the separate project policy assessment below |
 
 ## Compatibility proposals
 
@@ -245,8 +247,12 @@ These rules are proposed for review by #40.
 
 **Relation to the baseline:**
 - `rule.agent.mcp.framework` checks only `agent_framework.spec.supports_mcp`. That boolean cannot express transport, protocol era, auth flow or client capabilities. The rules below **extend** it and do not replace it. The boolean should be kept as a coarse gate until the #40 fields exist.
-- `rule.tool.mutation.guardrails` is gated on the metric `tools.mutating_count`. The reference evaluator counts only selections of kind `tool`, so **MCP server tools are invisible to it** (problem flagged). `rule.t4.mcp.mutation.guardrails` closes this gap for v1.
+- `rule.tool.mutation.guardrails` is gated on the metric `tools.mutating_count`. The reference evaluator counts only selections of kind `tool`, so **MCP server tools are invisible to it** (problem flagged). The limited v1 `rule.t4.mcp.mutation.guardrails` proposal exposes this gap; its user-intent field and single-primary guard do not prove per-tool enforcement.
 - **All `role: primary` refs resolve only when exactly one active selection matches.** With two or more enabled MCP servers sharing role `primary`, those references are ambiguous. The six v1 rules below guard applicability with `exists` on that selection; the guard is false and each rule is `skipped`, so the servers are not checked individually. Per-server iteration needs a contract change (#40).
+
+**Current shared interpretation (2026-10-18).** Apply the accepted #40 identity/role preflight and all-enabled-selection scope before evaluating successor proposals. Bind transport, protocol, required client capabilities and authorization to the **same selected connection, client implementation, server packaging and relevant configuration**. Separate support somewhere in two product-wide lists cannot prove that combined path. A direct SDK client is a valid no-framework case; missing an `agent_framework` selection does not itself prove no MCP client exists. Its client identity still needs a reviewed #40 representation.
+
+Use the adopted #41 evidence eligibility and #40/CD-3 completeness policy for every membership assertion: eligible explicit unsupported evidence or absence from an eligible exhaustive list can establish a negative; an omission from an unmarked list remains unknown. A supported path may pass its narrow prerequisite on checked documentation, with its unverified grade displayed. Preserve per-path findings and distinguish a suggested alternative from the user's selected path. Historical v1 JSON below remains a limited research illustration; no credential-presence, trust-label or user-intent guard certifies the corresponding #35 control.
 
 ### Rule summary
 
@@ -659,7 +665,7 @@ assert: selection hosting_platform /settings/network_isolation != "air_gapped"
 
 ### rule.t4.mcp.mutation.guardrails (Hypothesis; fixes a baseline gap)
 
-- **Premise:** MCP servers commonly expose mutating tools: Stripe `stripe_api_write` (C48), GitHub write tools unless `--read-only` (C42), memory `delete_entities` (C40), DBHub `execute_sql` unless read-only (C53, C59).
+- **Premise:** The inspected MCP servers include mutating tools: Stripe `stripe_api_write` (C48), GitHub write tools unless `--read-only` (C42), memory `delete_entities` (C40), DBHub `execute_sql` unless read-only (C53).
 - **Gap:** the baseline metric does not count these tools.
 - **Assertion:** `read_only` is set on the selection, or a `tool_permissions` guardrail exists.
 - **Limitation:** `read_only` is user intent. v1 cannot say whether the server enforces a read-only mode (GitHub and DBHub do; Stripe documents none). A #40 field `spec_mcp_server.read_only_mode_supported` would make this rule verifiable.
@@ -743,33 +749,38 @@ assert: selection hosting_platform /settings/network_isolation != "air_gapped"
 ### rule.t4.mcp.transport.client-support (compatibility example 3; needs contract change via #40)
 
 - **Participating fields (missing):** `spec_mcp_server.transports` (array) and `spec_agent_framework.mcp_client_transports` (array).
-- **Assertion:** the two sets intersect. Otherwise the outcome is `fail`/error with remediation "choose another packaging of the server, or a framework with that transport".
+- **Current assertion:** the selected transport is supported by the bound client implementation and server packaging. A product-wide set intersection only identifies a candidate path; it cannot select or prove the configured path. If the research question permits several alternatives, a positive alternative needs evidence for the same complete connection tuple, and an overall negative needs all relevant alternatives resolved as unsupported.
+- **Outcomes:** `pass` for the narrow transport prerequisite when both sides have eligible support evidence; `fail` for an eligible explicit incompatibility or exhaustive negative; `unknown` for missing applicability, support or relevant alternative-completeness evidence; `skipped` when no enabled applicable MCP selection exists. **Severity:** `error`; **on_unknown:** `block`. Remediation identifies the unsupported/missing selected path and may suggest a separately assessed packaging or client.
 - **Source-checked (unverified) premise (C56–C59):**
 
 | Framework (docs, 2026-10-16) | stdio | Streamable HTTP | HTTP+SSE | Provider-hosted remote | Status in rule terms |
 | --- | --- | --- | --- | --- | --- |
-| OpenAI Agents SDK (Python) | yes `MCPServerStdio` | yes `MCPServerStreamableHttp` | yes `MCPServerSse` (legacy) | yes `HostedMCPTool` | source-checked compatible for all three |
-| Google ADK | yes `StdioConnectionParams` | yes `StreamableHTTPConnectionParams` | yes `SseConnectionParams` | not documented | source-checked compatible for all three |
-| Claude Agent SDK | yes | yes (`type: "http"`) | yes (`type: "sse"`) | not applicable | source-checked compatible for all three |
+| OpenAI Agents SDK (Python) | yes `MCPServerStdio` | yes `MCPServerStreamableHttp` | yes `MCPServerSse` (legacy) | yes `HostedMCPTool` | documented client interfaces; selected server/version/configuration still required |
+| Google ADK | yes `StdioConnectionParams` | yes `StreamableHTTPConnectionParams` | yes `SseConnectionParams` | not documented | documented client interfaces; selected server/version/configuration still required |
+| Claude Agent SDK | yes | yes (`type: "http"`) | yes (`type: "sse"`) | not applicable | documented client interfaces; selected server/version/configuration still required |
 | LangChain `langchain[mcp]` (beta) | yes (script path) | yes (http/https URL) | not on the page read | — | sse = unknown |
 
 - **Examples (synthetic):**
-  - Failing: a server with `transports=["sse"]` and a framework with `mcp_client_transports=["stdio","streamable_http"]`.
-  - Unknown: LangChain with an SSE-only server.
+  - Failing: selected SSE connection where the client's eligible exhaustive support list contains only `stdio` and `streamable_http`.
+  - Unknown: the same omission on a non-exhaustive client page; LangChain's original unread SSE detail is such an unknown.
+  - No combined pass: client/server products both list HTTP and stdio, but the selected provider-hosted interface has no direct stdio path. A different local client would require a separate binding and assessment.
 
 ```text
-applies_when: exists selection mcp_server /id
-assert: intersects(catalog mcp_server /spec/transports,                 # missing: array field (replaces single transport)
-                   catalog agent_framework /spec/mcp_client_transports) # missing field on spec_agent_framework
+# Conceptual successor inputs; not executable v1 or a new adopted DSL.
+applies_to: each enabled, identity-bound MCP connection
+assert: selected transport has eligible support at both bound endpoints
+        in the selected implementation/configuration
+outcomes: use scoped support and completeness evidence, retaining each path
 on_unknown: block   severity: error
 ```
 
 ### rule.t4.mcp.protocol.era (needs contract change via #40, Source-checked (unverified))
 
-The rule implements the C7 matrix.
-- **Pass:** the version sets intersect, or either side is dual-era with a version shared with the other side.
-- **Fail:** a modern-only client with a legacy-only server, or the reverse.
-- **Unknown:** either side lacks version data.
+The rule uses the C7 era matrix as a protocol prerequisite, with the current selected-connection and evidence interpretation above. The words modern, legacy or dual-era alone do not establish a negotiated configuration.
+- **Pass:** eligible evidence identifies a common revision supported by both endpoints on the selected transport and the required direct/fallback negotiation path in the selected configuration. This is protocol support evidence, not an observed exchange unless an attributed run supplies one.
+- **Fail:** the selected configuration is explicitly unsupported, or complete eligible revision/negotiation evidence leaves no usable shared path; a modern-only client and legacy-only server are an example (C7).
+- **Unknown:** required version, transport, negotiation or completeness evidence is missing. An incomplete list without an observed intersection cannot establish incompatibility.
+- **Skipped:** no enabled applicable MCP connection. **Severity:** `error`; **on_unknown:** `block`. Remediation identifies the missing or incompatible revision/negotiation requirement.
 - **Source-checked (unverified) facts:**
   - The legacy TypeScript SDK line supports up to 2025-11-25 (C31).
   - Python `mcp` 1.30.0 supports up to 2025-11-25.
@@ -778,24 +789,29 @@ The rule implements the C7 matrix.
 - **SDK-only execution:** the [2026-10-18 stdio experiment](#pinned-python-sdk-protocol-follow-up-2026-10-18) observes this SDK pair's modern exchange and legacy fallback with a synthetic echo peer. It does not run the Agents framework, remote transports or a candidate catalog server.
 
 ```text
-assert: intersects(catalog mcp_server /spec/protocol_versions,            # missing field
-                   catalog agent_framework /spec/mcp_protocol_versions)   # missing field
+# Conceptual successor inputs, evaluated after shared identity/role preflight.
+assert: one eligible revision and negotiation path is supported by both
+        endpoints of the same selected transport/configuration
+outcomes: retain unsupported paths and unknown incomplete alternatives
 on_unknown: block   severity: error
 ```
 
 ### rule.t4.mcp.client-capabilities (needs contract change via #40, Source-checked (unverified) premise)
 
-- **Assertion:** the server's required client capabilities are a subset of the framework's supported client capabilities.
+- **Assertion:** each capability required for the selected server operation/configuration has eligible support in the bound client on that connection. An optional feature is not a mandatory prerequisite merely because a server advertises it. Record accepted configuration alternatives, such as filesystem CLI roots, separately.
 - **Premise:**
   - Servers can return `MissingRequiredClientCapabilityError` (C16).
   - The filesystem reference server exits at initialization when it has neither CLI directories nor client Roots support (C35).
   - Roots and Sampling are Deprecated (C11), so new frameworks may omit them.
   - OpenAI Agents SDK docs do not mention sampling or elicitation (unknown, C56). ADK docs mention resources but not prompts or sampling (C58).
-- **Severity:** error. on_unknown review, because many servers degrade gracefully.
+- **Severity:** error. on_unknown review; resolve required-versus-optional capability and configuration alternatives explicitly.
+- **Outcomes:** pass when every applicable required capability is evidenced; fail on a known required unsupported capability after resolving applicable configuration alternatives; unknown when a required input or list completeness is missing; skip when the operation has no applicable requirement. Keep the same source/selection boundaries as transport and protocol, rather than treating an unmarked missing member as false.
 
 ```text
-assert: subset_of(catalog mcp_server /spec/required_client_capabilities,          # missing
-                  catalog agent_framework /spec/mcp_client_capabilities)          # missing
+# Conceptual note-only requirement and scoped support sets; not executable v1.
+assert: every applicable required client capability has eligible support
+        on the bound operation/connection, including accepted alternatives
+on_unknown: review   severity: error
 ```
 
 ### rule.t4.mcp.auth.flow-available (compatibility example 4; needs contract change via #40, Source-checked (unverified) premise)
@@ -886,28 +902,28 @@ assert: registry_namespace_matches(catalog mcp_server /spec/registry_name,     #
 1. Replace `spec_mcp_server.transport` (single value) with `transports: array of enum` or with `packagings[]` carrying {transport, url or package, hosting}. Rename or annotate `sse` as `http_sse_legacy`, Deprecated since 2025-03-26.
 2. Add `spec_mcp_server.protocol_versions: array of YYYY-MM-DD` (or `protocol_era`).
 3. Add `spec_mcp_server.capabilities` (server features) and `required_client_capabilities`.
-4. Add `spec_mcp_server.hosting` ∈ {local_process, self_hosted_remote, vendor_hosted_remote}, `maintainer`, `registry_name`, and a package pin {registry_type, identifier, version or digest, sha256}.
+4. Original packaging proposal: `spec_mcp_server.hosting` ∈ {local_process, self_hosted_remote, vendor_hosted_remote}, plus `maintainer`, `registry_name` and a package pin {registry_type, identifier, version or digest, sha256}. **Current #40 disposition:** retain the packaging distinction as research metadata; use the common per-component operator/capacity and connection-boundary representation rather than adopting a new hosting category or trust/egress proxy.
 5. Refine `auth_methods`:
    - distinguish `mcp_oauth` (MCP authorization, client to server) from upstream credentials;
    - add `client_registration` ∈ {pre_registered, cimd, dcr} and `auth_extensions`;
    - add `required_scopes` (`spec_tool` has this field; `spec_mcp_server` does not).
 6. Add `spec_mcp_server.read_only_mode_supported: boolean`.
-7. Add to `spec_agent_framework`: `mcp_client_transports`, `mcp_protocol_versions`, `mcp_client_capabilities`, `mcp_oauth_modes` ∈ {interactive, token_injection, none}, `mcp_auth_extensions`, `mcp_runtime` ∈ {in_process, provider_hosted}.
+7. Original framework field proposals: `mcp_client_transports`, `mcp_protocol_versions`, `mcp_client_capabilities`, `mcp_oauth_modes` ∈ {interactive, token_injection, none}, `mcp_auth_extensions`, `mcp_runtime` ∈ {in_process, provider_hosted}. The current dispositions require these facts to be bound to a selected client/connection, with explicit non-interactive and acquisition/continuation evidence; those coarse enums are not exhaustive or sufficient. A direct SDK/no-framework client also needs a representation.
 8. Rules need per-selection iteration (for example "for each mcp_server selection") or a metric such as `mcp.untrusted_count`. Otherwise the six v1 rules above are `skipped` when several enabled MCP servers share role `primary`, rather than checking each server.
 9. Extend the metric `tools.mutating_count` to include MCP server tools, or add `mcp.mutating_server_count`.
-10. Multi-version intake: hosted remotes change without notice, so `version` needs a "snapshot date" semantic (#41).
+10. The [actual #41 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857) accepts capture dates for unversioned hosted-service facts using the existing string `version`. Retain the selected snapshot; a later observation alone does not invalidate a build. Multi-version intake and successor encoding remain separate #40 work.
 11. Bind authorization and direct stdio prerequisites to the actual connection, client/runtime, endpoint/operation and relevant configuration. The [authorization disposition](#rulet4mcpauthflow-available-compatibility-example-4-needs-contract-change-via-40-source-checked-unverified-premise) supplies typed evidence inputs and synthetic outcome cases; it replaces target-type, single-method-array and secret-reference shortcuts. The [stdio disposition](#rulet4mcpstdiocolocation-compatibility-example-4-needs-contract-change-via-40-source-checked-unverified-premise) replaces the build-mode proxy. Adopt encoding and migration centrally, preserving historical v1 results.
 
 ## Security and trust findings (for #35; findings only, controls belong to #35)
 
 | Risk | Finding | Evidence |
 | --- | --- | --- |
-| Untrusted servers and tool-description manipulation | Annotations and tool descriptions are server-supplied and untrusted unless the server is trusted. `listChanged` lets a server change its tool list at runtime, so a reviewed tool set can change after approval (the "rug pull" pattern; the term is not used in the spec pages read). Tool descriptions are placed in model context, so a malicious description acts as prompt injection ("tool poisoning", also not a spec term). | C15, C16, C18 |
+| Untrusted servers and tool-description manipulation | The specification's explicit untrusted-unless-trusted rule addresses annotations. Tool descriptions and changed definitions create a separate prompt-injection risk when exposed to the model; treating them as untrusted data and invalidating stale approval is the accepted #35 project-policy inference. `listChanged` is a change notification, not authority to expose a new tool or a guarantee of current definitions. | C15, C16, C18; [description follow-up](../T6-deployment-operations/guardrails.md#mcp-description-and-tool-list-change-follow-up-2026-10-18) and [current receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6251677799) |
 | Prompt injection through returned content | Clients SHOULD validate tool results before passing them to the LLM. Browsing and fetch servers return arbitrary web content (Playwright is "not a security boundary"). Stripe warns about prompt injection when combining servers. | C15, C45, C48 |
 | Excessive permissions | Scope minimization guidance (avoid omnibus scopes; incremental step-up). Stripe agent keys should have only the needed permissions. The Sentry stdio token needs write scopes. GitHub PAT minimum scopes. | C14, C42, C48, C50 |
 | Unauthorized side effects | Spec: a human in the loop SHOULD be able to deny tool invocations. Stripe requires out-of-band human confirmation for some writes. GitHub `--read-only`. DBHub read-only mode. | C15, C42, C48, C53 |
 | Remote server impersonation | Registry namespace checks cover the publisher, not the code or the remote URL. Third-party proxies (Smithery) republish vendor functionality under their own namespace with their own key. Lookalike names exist. | C20–C22, C25, C30 |
-| Credential disclosure | Token passthrough forbidden. Tokens never in query strings. URL-mode elicitation for secrets, so they never transit the client. **Sentry `Sentry-Bearer` forwards an upstream Sentry token the worker "does not store, validate, exchange, or refresh"; this needs a #35 review against the spec's "MUST NOT accept or transit any other tokens".** `x-mcp-header` exposes parameters to intermediaries. | C12, C14, C17, C9, C50 |
+| Credential disclosure | HTTP MCP token audience and downstream-token separation are required; query strings must not carry access tokens. URL-mode elicitation keeps its sensitive exchange outside the MCP client. Sentry's documented `Sentry-Bearer` path forwards an upstream token; the separately dated policy assessment below rejects that path for the project's audience-bound HTTP requirement. `x-mcp-header` exposes parameters to intermediaries. | C12, C14, C17, C9, C50; C66, C72, C73 |
 | Confused deputy (proxy servers) | MCP proxies with static client IDs MUST implement per-client consent. | C14 |
 | SSRF | Malicious servers can point OAuth discovery URLs at internal or metadata endpoints. Clients SHOULD block private ranges and use egress proxies. The fetch reference server blocks private IPs by default but not DNS rebinding. | C14, C37 |
 | Session or state hijacking | 2026-07-28 has no sessions. State handles MUST NOT be treated as authentication. Legacy `Mcp-Session-Id` guidance sits on the 2025-11-25 page (not fetched). | C14 |
@@ -926,12 +942,32 @@ assert: registry_namespace_matches(catalog mcp_server /spec/registry_name,     #
 
 Trust level does not make returned **content** trusted: Playwright and fetch are `trusted_external` yet return untrusted web content. #35 should treat tool output as untrusted regardless of `trust_level`.
 
+### Sentry token-path policy assessment (2026-10-18)
+
+C72 distinguishes MCP OAuth `Bearer` from custom `Sentry-Bearer`, which forwards
+an upstream Sentry API token without worker validation, exchange or renewal.
+C66/C73 require MCP-resource audience validation and reject token passthrough.
+The [actual #35 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6251677799)
+therefore rejects the described custom path for this project's audience-bound
+HTTP MCP authorization requirement. A different scheme name does not establish
+the missing validation or token separation. This is a source-based project
+policy decision, not a deployed vulnerability finding or executed negative test.
+
+The documented MCP OAuth path remains a separate candidate, needing its own
+eligible issuer/resource/scope and acquisition/continuation evidence. Local stdio
+has its separate environment-credential boundary. No account, token or live
+Sentry operation was exercised. C50 remains the original dated observation;
+this review does not silently replace its source date or qualify a deployed
+version.
+
 ## Pricing and capacity
 
-No Pricebook is proposed. The open-source servers are free software (compute cost falls on the host, #9/#10). Pricing units observed, for #39:
+No Pricebook is proposed. Keep package licensing, host/runtime charges and
+upstream-service prices separate in #39; a package classification cannot establish
+the total cost of a selected deployment. Pricing units observed, for #39:
 - Atlassian Rovo MCP calls consume Rovo credits, varying with "data volume, reasoning depth, and per-call limits" (C49). Rate not fetched.
 - GitHub remote server billing was not determined (it is served from `api.githubcopilot.com`; billing ties to Copilot plans are unknown).
-- Stripe and Sentry MCP pricing was not stated on the pages read. Underlying API usage is billed under each vendor's normal terms (not source-checked).
+- Stripe and Sentry MCP pricing was not stated on the pages read. Underlying API charges, included allowances and billing conditions were not established here and remain unknown inputs for #39.
 
 Prices are unknown, not zero.
 
@@ -939,15 +975,15 @@ Prices are unknown, not zero.
 
 1. **Track protocol versions, not just transports.**
    - Catalog every server with its revision set and era.
-   - Default the builder to require **dual-era** clients until the major SDK lines ship 2026-07-28. Today the TypeScript SDK 1.x and Python SDK 1.x lines, and the servers built on them, are legacy-only (C31, C32).
+   - When the intended server set spans legacy and modern revisions, require evidence for both paths in the chosen client/configuration. The inspected TypeScript 1.32.1 and Python 1.30.0 artifacts are legacy, while the pinned Python 2.3.0 follow-up supports modern operation and conditional legacy fallback (C31, C32, C60–C65). Do not generalize those artifacts to every release, server or framework.
 2. **Prefer Streamable HTTP or stdio packagings.** Mark `sse` as deprecated with a warning (rule above).
-3. **Model hosting explicitly.** Use three categories: local process, self-hosted remote (needs a #9 hosting platform with `hosting_type` in cloud, on_prem, edge, colocation) and vendor-hosted remote (`managed_api` at most; usually no hosting selection, but requires public egress).
+3. **Record the actual MCP placement and connections.** The local-process, self-hosted-remote and vendor-hosted-remote taxonomy describes candidate packaging. Use the accepted per-component deployment model and W-R8/CD-4 isolation evidence; no category, trust label or model-serving mode proves subprocess support, public egress, private reachability or artifact readiness. Reuse #9 identities only where eligible records exist.
 4. **Show auth as a requirement profile, not a flag.** For each server, show:
    - whether MCP OAuth is required, and with which client registration (pre-registered, CIMD or DCR, with DCR deprecated);
    - whether a static-token fallback exists;
    - which accepted acquisition and continuation paths fit the intended operation, including applicable client credentials, application-owned acquisition or existing-token use, with renewal assessed separately;
    - which scopes are needed.
-   The builder then checks it against the framework's OAuth mode and the deployment target (rule `auth.flow-available`).
+   Check that profile against the selected client/connection and operation/lifecycle scope (rule `auth.flow-available`), with the #35 Sentry token-path disposition above.
 5. **Trust:** use the criteria above. Default unknown to `untrusted_external`. Never infer trust from presence in a registry or marketplace.
 6. **Reference servers:** list them for learning and testing only. Mark them "not production-ready" and do not recommend them as production defaults (C33).
 
@@ -983,8 +1019,8 @@ Notes on these proposals:
 | --- | --- |
 | Field-level contract changes 1–11 above; rule ids and severities | #40 · @tynamite |
 | Which protocol revisions, transports, client capabilities and OAuth modes each framework's MCP client supports (fields `mcp_client_transports`, `mcp_protocol_versions`, `mcp_client_capabilities`, `mcp_oauth_modes`); LangChain SSE and OAuth pages; OpenAI Agents SDK sampling and elicitation | #25 · @CompleteDotTech |
-| Trust and auth requirements handed over: the trust criteria table; the rule that tool descriptions, annotations and results are untrusted; human-in-the-loop for mutating tools; token passthrough prohibition and the Sentry `Sentry-Bearer` review; SSRF on OAuth discovery; local-server consent and sandboxing; pinning policy (no `@latest`, digest pins); guardrail policy mapping for `rule.t4.mcp.untrusted.guardrails`. The 2026-10-18 authorization correction additionally requires actual credential/resource/operation applicability and preserves unknown evidence; a secret reference or research prerequisite pass does not authorize an action | #35 · @PUSHINGSQUARES |
-| Deployment: bind direct stdio to the selected client's launch, stream and lifecycle ownership; bind authorization to accepted acquisition/continuation paths and actual interaction/callback support when required. The 2026-10-18 correction removes batch/application and build-mode proxies; a current-token result does not establish required future renewal. Apply the [current W-R8/CD-4 disposition](#rulet4mcpremoteair-gapped-hypothesis-compatibility-example-4) to actual runtime connections and required artifacts. Vendor operation alone does not establish public egress; runtime-locality, lifecycle and authorization evidence remain receiving inputs | #37 · @PUSHINGSQUARES |
+| Trust/auth research handoff is [accepted with its actual policy interpretation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6251677799), including description/change review, operation-level permission, audience separation, local consent and isolation. The Sentry raw-token question is dispositioned above. Selected-control configuration/enforcement, exact refresh policy and successor representation remain receiving work; a secret reference or research prerequisite pass does not authorize an action | #35 · @PUSHINGSQUARES / @appletechie |
+| Deployment handoff is [accepted for readiness design](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6251683433): bind stdio launch/stream/lifecycle and authorization acquisition/continuation to the selected connection; apply W-R8/CD-4 to actual connections/artifacts. Actual target configuration, containment, token tests and deployment/rollback evidence remain separate | #37 · @PUSHINGSQUARES / @appletechie |
 | Hosting: retain the original `hosting_type` examples above as candidate descriptions. The [current isolation disposition](#rulet4mcpremoteair-gapped-hypothesis-compatibility-example-4) uses per-component boundary, connection/lifecycle and artifact evidence; a new hosting category or `allows_public_egress` flag alone cannot decide air-gap compatibility. Final encoding adoption and source admission remain with #40/#41 | #9 · @Mattycodes69 |
 | Overlap with tools: map MCP server tools to `tool` items (`tool_refs`) for side-effect counting | #26 · @CompleteDotTech |
 | Pricing units for Atlassian Rovo credits and the GitHub remote server (Copilot plan dependency) | #39 · @PUSHINGSQUARES |
@@ -992,7 +1028,33 @@ Notes on these proposals:
 | Candidate-by-candidate 2026-07-28 (`server/discover`) and client/transport qualification; the [Cloudflare documentation observation](cloudflare-docs-mcp.md) covers only its named dated tuples | #27 · @CompleteDotTech |
 | Atlassian admin controls (IP and domain allowlists) and whether `/v1/sse` still exists; Stripe local package; other Cloudflare product servers, its unobserved legacy-GET migration response, Notion and Linear remote servers | #27 · @CompleteDotTech |
 
-The incoming #9 hosting/network boundary is accepted with constraints by #27 ([owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072)). Internal T4 handoffs are [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509). External outgoing handoffs are partially received; the [workstream handoff matrix](README.md#dependency-and-handoff-matrix) retains the actual scoped replies, coverage objections and remaining adoption requirements.
+The incoming #9 hosting/network boundary is accepted with constraints by #27 ([owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072)); its reciprocal #27-to-#9 interface has [Mattycodes69's](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225) and [appletechie's](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047) actual constrained acceptance. Internal T4 handoffs are [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509). The current #35/#37 decisions above complete #27's two declared downstream research handoffs. They are CompleteDotTech's present decisions under the user's delegated engineering authority, without attributing another response to either T6 co-owner. The [workstream handoff matrix](README.md#dependency-and-handoff-matrix) retains earlier scoped replies and separate work from other T4 producers; the dated assessment here supplies the later #27 disposition.
+
+## Research completion assessment (2026-10-18)
+
+This assessment preserves the nine original criteria on #27. It concerns the
+representative research deliverable and its receiving interfaces. The issue
+explicitly distinguishes research completion from builder implementation; it
+does not require runtime certification of every possible vendor/client tuple.
+Unresearched candidates and selected-build evidence requirements remain named
+above rather than being assigned invented results.
+
+| Original criterion | Delivered evidence and disposition |
+| --- | --- |
+| Client/framework-to-server compatibility rules in #40 format | The shared-format rule sections provide participating inputs, applicability, assertion, outcome/missing-data handling, severity, remediation and examples. Six original JSON proposals retain their v1 limits; successor transport/protocol/capability/auth/locality inputs are explicit note-only proposals. The [actual #40 queue receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) accepts and narrows the interface; it does not adopt a final DSL. |
+| Trust and auth requirements handed to #35 | The risk/criteria table, description-change follow-up and source-backed Sentry assessment are covered by the [current #35 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6251677799), alongside the original two co-owner receipts. |
+| Canonical decision record merged following the research method | #71 delivered this path and nine catalog proposals. Its [independent approval at `3d95c61`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/71#pullrequestreview-5557512959) verified the provenance correction and exposed the single-primary limitation. #272/#277/#281/#308/#352 supplied separately reviewed follow-ups. Final completion depends on independent review and merge of this assessment. |
+| Candidate set covers API / managed / self-hosted or explains applicability | Twelve representative server rows and the provider-hosted client interface cover local processes, independently hosted services and vendor endpoints. The opening taxonomy explicitly considers each serving mode without treating MCP placement as its determinant. Python and Cloudflare observations add bounded execution; other tuple results remain unknown. |
+| Comparison fields with type, unit and evidence requirement | The comparison table maps all eight minimum issue fields and additional trust/pin/selection inputs to v1 or explicit proposed types. Protocol revisions, identity, transport, capabilities, auth and hosting each retain sources and conditions; missing fields are not invented in JSON. |
+| Shared rule format; verified rules separated from hypotheses | The rule summary separates source-checked/unverified premises, policy hypotheses and historical proxies. Current dispositions specify evidence eligibility and completeness on the same selected connection. No source-only claim or synthetic fixture is promoted to independent runtime verification. |
+| Primary sources, access dates and applicable versions/conditions | C1–C73 and the separate pinned Cloudflare record identify source, access date, version and claim boundary. Package/runtime observations retain their exact identities and conditions. Unsupported population and billing assertions were removed; unresearched prices remain unknown rather than zero. |
+| Every declared downstream handoff confirmed | #35 and #37 are the two consumers listed in #27's Dependencies table; both have actual current receiving decisions linked above. Hosting is also accepted in both directions; [#41 accepts](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857) grading, snapshot and source-specific rights semantics. No technical receipt grants publication rights or claims a deployed result. |
+| Open questions recorded with named follow-up owners | The table above retains #25 client-feature research, #27 future candidate/tuple qualification, #35/#37 configured controls and deployment evidence, #39 prices, and #40/#41 representation/source intake. These follow-ups do not replace missing acceptance evidence with an assumed pass. |
+
+Final review must inspect this assessment and the changed technical dispositions,
+then apply the repository's required validation and closing-directive checks to
+the exact PR. Successful validation establishes repository structure and
+mechanics; it is separate from source review, rights and real runtime evidence.
 
 ## Limitations
 
