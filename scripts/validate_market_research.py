@@ -1,5 +1,6 @@
 """Check market-note integrity, not truth, rights, benchmark quality or acceptance."""
 import json
+import math
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -17,7 +18,24 @@ def require(condition, message):
 
 
 def read(name):
-    return json.loads((BASE / name).read_text(encoding='utf-8'))
+    def unique_object(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, f'{name}: duplicate JSON object key: {key!r}')
+            result[key] = value
+        return result
+
+    def reject_constant(value):
+        raise MarketValidationError(f'{name}: non-finite JSON number: {value}')
+
+    def finite_float(value):
+        number = float(value)
+        require(math.isfinite(number), f'{name}: JSON number exceeds finite numeric range')
+        return number
+
+    return json.loads((BASE / name).read_text(encoding='utf-8'),
+                      object_pairs_hook=unique_object,
+                      parse_constant=reject_constant, parse_float=finite_float)
 
 
 def validate():

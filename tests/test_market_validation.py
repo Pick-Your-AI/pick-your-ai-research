@@ -41,9 +41,10 @@ class MarketValidation(unittest.TestCase):
                                       'scores': [1, 1, 1, 1, 1, 1], 'score': 1.0}],
         }
 
-    def run_validator(self, data, optimized):
+    def run_validator(self, data, optimized, raw_json=None):
         for name, value in data.items():
-            (self.base / name).write_text(json.dumps(value), encoding='utf-8')
+            text = raw_json[name] if raw_json and name in raw_json else json.dumps(value)
+            (self.base / name).write_text(text, encoding='utf-8')
         return subprocess.run([sys.executable, *(['-O'] if optimized else []), str(self.script)],
                               capture_output=True, text=True, timeout=5)
 
@@ -54,6 +55,34 @@ class MarketValidation(unittest.TestCase):
                 result = self.run_validator(self.data, optimized)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
+
+    def test_duplicate_json_keys_fail_before_market_data_is_interpreted(self):
+        original = json.dumps(self.data['features.json'])
+        cases = (
+            original.replace('"definitions":', '"definitions": {}, "definitions":', 1),
+            original.replace('"status": "Unknown"',
+                             '"status": "Documented", "status": "Unknown"', 1),
+            original.replace('"status": "Unknown"',
+                             r'"\u0073tatus": "Documented", "status": "Unknown"', 1),
+        )
+        for raw in cases:
+            for optimized in (False, True):
+                with self.subTest(raw=raw, optimized=optimized):
+                    result = self.run_validator(self.data, optimized, {'features.json': raw})
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('duplicate JSON object key', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_nonfinite_json_numbers_fail_even_in_unconsumed_metadata(self):
+        original = json.dumps(self.data['features.json'])
+        for literal in ('NaN', 'Infinity', '-Infinity', '1e400', '-1e400'):
+            raw = original[:-1] + ', "synthetic_numeric_metadata": ' + literal + '}'
+            for optimized in (False, True):
+                with self.subTest(literal=literal, optimized=optimized):
+                    result = self.run_validator(self.data, optimized, {'features.json': raw})
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('finite', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
 
     def test_capability_test_integrity_in_both_modes(self):
         mutations = [
