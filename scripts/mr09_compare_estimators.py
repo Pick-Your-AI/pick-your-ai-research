@@ -6,6 +6,8 @@ calibration. See the dated estimator comparison note for eligibility boundaries.
 from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
+from decimal import Decimal, InvalidOperation
+from fractions import Fraction
 import hashlib
 import json
 import math
@@ -29,8 +31,13 @@ def digest(path):
 def write(path, data):
     path.write_text(json.dumps(data, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
 
-def input_json(text):
-    """Reject ambiguous keys and non-finite numbers before consuming evidence."""
+def input_json(text, *, exact_numbers=True):
+    """Keep comparison number values exact after the existing finite-range gate.
+
+    Catalog and Node-audit metadata explicitly retain their ordinary float view.
+    JSON integer tokens remain integers; a decimal/exponent count cannot acquire
+    that identity merely because its mathematical value is whole.
+    """
     def unique_object(pairs):
         result = {}
         for key, value in pairs:
@@ -46,17 +53,26 @@ def input_json(text):
         number = float(value)
         if not math.isfinite(number):
             raise ValueError("JSON number exceeds finite numeric range")
-        return number
+        if not exact_numbers:
+            return number
+        try:
+            exact = Decimal(value)
+        except InvalidOperation as error:
+            raise ValueError("JSON number exceeds exact decimal range") from error
+        if not exact.is_finite():
+            raise ValueError("JSON number exceeds exact decimal range")
+        return exact
 
     return json.loads(text, object_pairs_hook=unique_object,
                       parse_constant=reject_constant, parse_float=finite_float)
 
 def payload_bytes(value):
     """Normalize a positive integral byte count without accepting booleans."""
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
+    if isinstance(value, bool) or not isinstance(value, (int, float, Decimal, Fraction)):
         raise ValueError("positive finite integral payload bytes required")
-    if value <= 0 or (isinstance(value, float)
-                      and (not math.isfinite(value) or not value.is_integer())):
+    if (isinstance(value, (float, Decimal)) and not math.isfinite(value)) or value <= 0:
+        raise ValueError("positive finite integral payload bytes required")
+    if value != int(value):
         raise ValueError("positive finite integral payload bytes required")
     return int(value)
 
@@ -66,9 +82,16 @@ def kv_component(plan):
     if len(rows) != 1 or plan["model_name"] != MODEL or plan["kv_quant"] != "fp16":
         raise ValueError("exact native KV component required")
     value = rows[0]["kv_cache_gb"]
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
+    if isinstance(value, bool) or not isinstance(value, (int, float, Decimal)):
         raise ValueError("positive finite KV size required")
-    return payload_bytes(value * GIB)
+    if isinstance(value, (float, Decimal)) and not math.isfinite(value):
+        raise ValueError("positive finite KV size required")
+    # A magnitude below 1e-10 GiB cannot contain one byte. Check the decimal
+    # exponent before constructing a potentially enormous rational denominator.
+    # This uses neither binary multiplication nor the caller's Decimal context.
+    if isinstance(value, Decimal) and value.adjusted() < -10:
+        raise ValueError("positive finite integral payload bytes required")
+    return payload_bytes(Fraction(value) * GIB)
 
 def measured_payload(run, point):
     """Admit exact integer native counts, geometry and two-byte storage only."""
@@ -152,7 +175,7 @@ def main():
     for name, expected in PINS.items():
         if digest(args.artifact_dir / name) != expected:
             parser.error("external artifact hash mismatch: " + name)
-    catalog = input_json((args.artifact_dir / "hf_models.json").read_text(encoding="utf-8"))
+    catalog = input_json((args.artifact_dir / "hf_models.json").read_text(encoding="utf-8"), exact_numbers=False)
     model = next(row for row in catalog if row["name"] == MODEL)
     geometry = {k:model[k] for k in ("parameters_raw", "num_hidden_layers", "num_key_value_heads", "head_dim", "format", "quantization")}
     if (geometry["num_hidden_layers"], geometry["num_key_value_heads"], geometry["head_dim"]) != (30, 3, 64):
@@ -175,7 +198,9 @@ def main():
             write(args.output_dir / name,{"status":"estimator_rejection", "exit_code":result.returncode, "stdout":result.stdout, "stderr":result.stderr})
             raise RuntimeError("estimator failed; preserve output and stop")
         plan = input_json(result.stdout)
-        write(args.output_dir / name,plan)
+        # Retain the validated captured JSON; reserializing Decimal values as
+        # floats would lose the very source precision used by the comparison.
+        (args.output_dir / name).write_text(result.stdout, encoding="utf-8", newline="\n")
         plans[(context,kv)] = plan
         ledger["estimator_executions"].append({"file":name, "sha256":digest(args.output_dir/name), "argv":["$LLMFIT",*argv], "exit_code":0,
             "whole_runtime_disposition":"mismatch: planning requirement, unpinned artifact/runtime; q4_0 is not Quanto INT4" if kv == "q4_0" else "mismatch: planning requirement, unpinned artifact/runtime"})
@@ -189,8 +214,13 @@ def main():
                 ledger["component_pairs"].append(pair)
     run = runs["mr09-D1-r1.json"][0]
     # Feed the recorded capacity, in explicit decimal GB, rather than today's hardware.
-    result = subprocess.run([args.node,"--input-type=module","-e",NODE_AUDIT,str((args.artifact_dir/"engine.mjs").resolve()),str(run["hardware"]["driver_total_bytes"]/1e9)],capture_output=True,text=True,check=True,timeout=30)
-    modelfit = input_json(result.stdout)
+    capacity_bytes = run["hardware"]["driver_total_bytes"]
+    # This audit-only metadata retains the former JSON float view; payload
+    # comparisons above continue to use the exact original number values.
+    if isinstance(capacity_bytes, Decimal):
+        capacity_bytes = float(capacity_bytes)
+    result = subprocess.run([args.node,"--input-type=module","-e",NODE_AUDIT,str((args.artifact_dir/"engine.mjs").resolve()),str(capacity_bytes/1e9)],capture_output=True,text=True,check=True,timeout=30)
+    modelfit = input_json(result.stdout, exact_numbers=False)
     write(args.output_dir / "modelfit-audit.json",modelfit)
     ledger["modelfit"] = {"file":"modelfit-audit.json","sha256":digest(args.output_dir/"modelfit-audit.json"),"status":"missing_inputs_or_model", "limits":["no exact catalog model match", "API has no artifact revision, runtime, context, cache layout or admitted concurrency arguments"], "engine_argv":["$NODE","--input-type=module","-e","NODE_AUDIT in recorded script","$ARTIFACT_DIR/engine.mjs","recorded driver_total_bytes / 1e9"]}
     ledger["component_pair_count"] = len(ledger["component_pairs"])
