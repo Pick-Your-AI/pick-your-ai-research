@@ -2,7 +2,7 @@
 
 Issue: #11 · Contract: 1.0.0 · Kind: `inference_engine`
 Status: merged partial research; central owner follow-ups incorporated for review; compatibility remains unverified
-Last vendor research: 2026-10-16 · Owner-decision reconciliation: 2026-10-17 · Research owners: @Mattycodes69, @zwright8 (live GitHub assignees)
+Last vendor research: 2026-10-16 (main matrix); 2026-10-18 (build supplement) · Owner-decision reconciliation: 2026-10-18 · Research owners: @Mattycodes69, @zwright8 (live GitHub assignees)
 
 ## User decision
 
@@ -17,6 +17,11 @@ This note compares a bounded current candidate set and retains explicit historic
 | Self-hosted | All three candidates have source and serving instructions [E02, E05, E11, E14, E20]. The matrices below describe published capability under stated conditions, not installation success or production readiness. #37 owns packaging, rollout and readiness procedures; #10 owns capacity. |
 
 Sources are primary, release-pinned documentation or source. Matrix cells are documentation findings, not independently verified joint compatibility. The adopted #41 interim policy [E27] separates the rule outcome from its evidence status: eligible versioned publisher documentation can support `pass`, labelled **unverified** until independently reproduced or corroborated under [governance](../../docs/governance.md). Repeated pages from one publisher are not independent reproduction. Missing eligible evidence remains `unknown`; independent reproduction is not required for every documentation-supported constraint to pass.
+
+The [GGUF plugin and ROCm build supplement](engine-build-evidence.md), source-checked
+2026-10-18, pins plugin v0.0.5 and the vLLM v0.31.0 ROCm recipe defaults. It
+distinguishes CUDA release wheels from the documented ROCm source path; exact joint
+compatibility and a reproducible selected binary/runtime tuple remain unknown.
 
 ## Candidate options
 
@@ -38,18 +43,18 @@ Lists are bounded documented examples, not exhaustive architecture registries or
 
 | Engine/version | Engine license | Architecture examples | Artifact formats | Quantization and precision | Hardware backends and limits | Claim sources |
 | --- | --- | --- | --- | --- | --- | --- |
-| vLLM `v0.31.0` | Apache-2.0 | Llama/Qwen/Gemma decoders; Mixtral/DeepSeek-V3 MoE; Mamba/hybrid; LLaVA/Qwen-VL; embedding/retrieval families. Exact architecture/revision and feature combinations still require the supported-model entry. | Safetensors and PyTorch weight loaders. GGUF is documented but now requires a separately installed out-of-tree plugin; its version and compatibility are unknown here. | FP32/FP16/BF16 dtype options; documented quantization families include FP8, INT8, INT4, GPTQ/AWQ, compressed-tensors, ModelOpt and TorchAO. MXFP4/NVFP4/MXFP8 names in upstream do not become new v1 precision enums. Weight, activation and KV dtypes are distinct. | Core NVIDIA CUDA, AMD ROCm, Intel GPU, CPU paths; additional devices via plugins. CUDA installation requires compute capability **7.5 or higher** and a matching binary stack. ROCm docs list MI300 (`gfx942`) and ROCm **6.3 or above**; wheel variant requirements differ. | E02–E10 |
+| vLLM `v0.31.0` | Apache-2.0 | Llama/Qwen/Gemma decoders; Mixtral/DeepSeek-V3 MoE; Mamba/hybrid; LLaVA/Qwen-VL; embedding/retrieval families. Exact architecture/revision and feature combinations still require the supported-model entry. | Safetensors and PyTorch weight loaders. GGUF is documented but now requires a separately installed out-of-tree plugin; plugin v0.0.5 is source-pinned in the supplement, while joint compatibility remains unknown. | FP32/FP16/BF16 dtype options; documented quantization families include FP8, INT8, INT4, GPTQ/AWQ, compressed-tensors, ModelOpt and TorchAO. MXFP4/NVFP4/MXFP8 names in upstream do not become new v1 precision enums. Weight, activation and KV dtypes are distinct. | Core NVIDIA CUDA, AMD ROCm, Intel GPU, CPU paths; additional devices via plugins. CUDA installation requires compute capability **7.5 or higher** and a matching binary stack. ROCm docs list MI300 (`gfx942`) and ROCm **6.3 or above**; wheel variant requirements differ. | E02–E10 |
 | llama.cpp `v0.7.0` | MIT | Source registry includes `llama`, `llama4`, `qwen2`, `qwen3`, `gemma2`, `gemma3` and other architecture identifiers. Registry presence does not verify every conversion, modality, operator or quant/backend tuple. | GGUF required; upstream conversion tools are a separate artifact transformation. GGUF LoRA adapters are distinct from base GGUF weights. | GGML F32/F16/BF16 types; named GGUF quantizations including Q4_K_M and Q8_0. Mixed/block quantizations must retain their exact scheme, rather than being reduced to an assumed uniform bit width. | CPU, CUDA, AMD HIP, Metal, SYCL and Vulkan documented; other backends also listed. CPU+GPU offload documented. Backend compilation and operator support remain build-specific; no blanket memory pooling or edge latency guarantee. | E11–E17 |
 | TGI `v3.3.7` | Apache-2.0 | Tagged model list includes Llama, Gemma, Mistral/Mixtral, Qwen2, DeepSeek V2/V3, T5 and selected multimodal families. Fallback Transformers loading is best effort, not guaranteed optimization. | Safetensors loading documented. Do not infer GGUF support in the default backend from the existence of optional alternative backend code. | Launcher dtype options FP16/BF16. Quantization docs list GPTQ/AWQ/Marlin/EXL2, bitsandbytes, EETQ and FP8; EXL2 explicitly does not support tensor parallelism with more than one shard. | README documents NVIDIA and AMD paths plus integrations for additional devices. Its explicit AMD note names MI210/MI250, so MI300X for this release remains unknown in this survey. CPU fallback is described as outside its intended platform. | E20–E25 |
 
-The canonical proposals deliberately contain conservative subsets of formats/backends/precisions supported by inspected sources. Omission from an **unmarked** list is not negative evidence. The scoped completeness finding below is the exception authorized by #40 [E27]. In particular, llama.cpp's proposal records only F32/F16/BF16 as canonical precision entries; its mixed GGUF quantizations remain named findings above. vLLM's proposal excludes GGUF pending a separately pinned plugin. Optional global booleans and `max_batch_size` are omitted: they would hide model/parser/configuration conditions or imply a universal capacity ceiling.
+The canonical proposals deliberately contain conservative subsets of formats/backends/precisions supported by inspected sources. Omission from an **unmarked** list is not negative evidence. The scoped completeness finding below is the exception authorized by #40 [E27]. In particular, llama.cpp's proposal records only F32/F16/BF16 as canonical precision entries; its mixed GGUF quantizations remain named findings above. vLLM's proposal excludes GGUF because the flat list cannot express the plugin/backend/model conditions detailed in the build supplement. Optional global booleans and `max_batch_size` are omitted: they would hide model/parser/configuration conditions or imply a universal capacity ceiling.
 
 | Release and list | Coverage finding | Effect of absence |
 | --- | --- | --- |
 | llama.cpp `v0.7.0`, direct model-loader formats | **Complete: GGUF only**, scoped to the direct loader's file format [E13, E27]. Conversion tools and adapter/architecture support are separate. | A directly supplied Safetensors or other non-GGUF model fails the loader-format constraint; valid GGUF alone does not establish architecture/backend support. |
 | All other format, architecture, backend and precision lists in this note | **Unmarked**; bounded documented entries, without an exhaustiveness claim | Absence yields `unknown`. An explicit unsupported statement in eligible release-scoped documentation can still yield `fail`. |
 
-For deployment consumers, vLLM v0.31.0's GPU installation page specifies Linux and Python **3.10–3.13**, and says Windows is not supported natively [E05]. Its ROCm include gives a general **6.3+** requirement, but the prebuilt-wheel table names older release ranges and a nightly commit; it does **not** establish a v0.31.0 ROCm wheel, digest, or tested Python/runtime combination [E05]. The selected build must therefore supply that evidence before #37 can treat the AMD path as a reproducible package. This is a source/version gap, not evidence that the AMD backend is unsupported. The CUDA include also distinguishes source builds from binary-compatible PyTorch/CUDA combinations; the engine release string alone does not pin that stack [E05].
+For deployment consumers, vLLM v0.31.0's GPU installation page specifies Linux and Python **3.10–3.13**, and says Windows is not supported natively [E05]. Its ROCm include gives a general **6.3+** requirement, but the prebuilt-wheel table names older release ranges and a nightly commit; it does **not** establish a v0.31.0 ROCm wheel, digest, or tested Python/runtime combination [E05]. The selected build must therefore supply that evidence before #37 can treat the AMD path as a reproducible package. The build supplement narrows the source gap with pinned recipe defaults; selected binary reproducibility remains unknown, without implying AMD is unsupported. The CUDA include also distinguishes source builds from binary-compatible PyTorch/CUDA combinations; the engine release string alone does not pin that stack [E05].
 
 **Consumer gate for #40:** the imported reference `precision.engine` and `engine.model.format` membership rules can emit hard failures for missing list entries. The owner accepted the completeness distinction above, but executable use still waits on CD-1/CD-3 and a versioned ruleset [E27]. Until coverage metadata exists, the imported membership checks must not be treated as authoritative negative evidence for an unmarked list. For example, omitted `int4` is not evidence that vLLM cannot run documented INT4 schemes. T2-C04/C05 are accepted into the central queue with constraints; the frozen reference implementation is preserved.
 
@@ -194,13 +199,13 @@ This follow-up corrects all **11 provenance entries** across the three engine pr
 
 ## Open questions and handoffs
 
-The live issue readback on 2026-10-17 preserves #11 coassignees @Mattycodes69 and @zwright8. The five consumer requests below remain without receiving-owner acknowledgements in this reconciliation. E27 supplies central #3/#40/#41 decisions, not acceptance by these consumers. Shared ownership by the same assignee does not count as an acknowledgment.
+The live issue readback on 2026-10-18 preserves #11 coassignees @Mattycodes69 and @zwright8. Three scoped receiving-owner receipts are now linked below; #37/#38 remain pending. E27 supplies central #3/#40/#41 decisions, not acceptance by these consumers. Shared ownership by the same assignee does not count as an acknowledgment.
 
 | Required #11 consumer | Live owner | Concrete handoff / required confirmation | State |
 | --- | --- | --- | --- |
-| #10 GPU / Compute | @Mattycodes69 | Accept exact-release hardware/kernel caveats, adapter/KV inputs and non-pooling assumption for sizing. Reconcile v0.31.0 CUDA minimum against historical v0.10.2 estimates. | Pending owner acknowledgment |
-| #25 Agent Framework | @CompleteDotTech | Accept conditional tool/schema/API contract, propose consumer request/response fixtures and required endpoints. | Pending owner acknowledgment |
-| #33 Fine-Tuned Model | @appletechie | Confirm adapter vs merged artifact semantics, immutable base/tokenizer lineage, rank/layout/targets and provider lock-in treatment. | Pending owner acknowledgment |
+| #10 GPU / Compute | @Mattycodes69 | Exact-release hardware/kernel caveats, adapter/KV inputs and non-pooling sizing; historical estimates do not establish current compatibility. | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057) in this co-owner's scope; no actual tuple certified |
+| #25 Agent Framework | @CompleteDotTech | Conditional tool/schema/API contract and consumer acceptance cases. | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334); exact fields and executable rules remain #40 work |
+| #33 Fine-Tuned Model | @appletechie | Adapter vs merged artifact semantics, immutable base/tokenizer lineage, rank/layout/targets and provider lock-in. | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684); exact execution remains unverified |
 | #37 Deployment | @PUSHINGSQUARES | Accept version/build/plugin pins, model/adapter loading checks and admin endpoint exposure constraints. | Pending owner acknowledgment |
 | #38 Monitoring | @PUSHINGSQUARES | Accept release-specific signal mapping and measurement/privacy inputs; define thresholds from workload evidence. | Pending owner acknowledgment |
 
@@ -209,14 +214,24 @@ The live issue readback on 2026-10-17 preserves #11 coassignees @Mattycodes69 an
 | Confirm T2 retention/lifecycle choices and candidate breadth | @Mattycodes69 and @zwright8 #11; #42 owner | Central #40/#41 acceptance of retention is recorded in E27; research-owner and downstream dispositions remain pending. |
 | Corroborate actual model/backend/quant/adapter tuples | @Mattycodes69 #11/#10; @zwright8 #6 | No combination is certified by this note; owner can add a second source or reproducible test. Documentation research proceeds. |
 | Apply resolved v0.31.0 Volta conflict to selected tuples | @Mattycodes69 and @zwright8 #11; @tynamite #40 | E27 resolves `fail`: the CUDA minimum supersedes Volta matrix cells. No further policy decision is needed for this conflict; executable ruleset work stays with #40. |
-| Pin vLLM GGUF plugin and evaluate exact compatibility | @Mattycodes69 #11; @appletechie #33 | GGUF excluded from current vLLM canonical proposal; llama.cpp remains a separately sourced candidate. |
-| Pin the vLLM v0.31.0 ROCm package/build and Python/runtime combination | @Mattycodes69 #11/#10; @PUSHINGSQUARES #37 | Tagged installation prose and older/nightly wheel examples do not identify a tested release binary. AMD capability stays documented, while package reproducibility remains unknown. |
+| Evaluate exact vLLM/GGUF plugin compatibility | @Mattycodes69 #11; @appletechie #33 | [Plugin v0.0.5 source pinned](engine-build-evidence.md); vLLM dependency is unversioned. Joint compatibility remains unknown, so GGUF stays out of the flat canonical subset. |
+| Pin the selected vLLM v0.31.0 ROCm binary and Python/runtime combination | @Mattycodes69 #11/#10; @PUSHINGSQUARES #37 | [Release recipe defaults inspected](engine-build-evidence.md), including mutable image/branch hazards. No tested release binary or resolved dependency lock is established. |
 | Preserve adapter lineage, merged licenses and non-portable API fine-tunes | @appletechie #33; @zwright8 #6; #5 @zwright8 | Required before an artifact-level serving compatibility result. |
 | Agree context budget/tokenizer behavior and retrieval checks | @zwright8 #7; @zabyxc01 #16 | T3 ACL/citation ownership preserved; no retrieval semantics moved into the engine. |
 | Exposed managed engine versions/configuration and rate limits | @Mattycodes69 #9; #5 @zwright8 | Unknown managed tuple remains unknown; provider API evaluation proceeds independently. |
 | Complete per-source reuse inventory and final freshness record | @tynamite #41, with #60 | Apply E27's adopted interim policy now; no TTL, bulk-retrieval permission or unrestricted redistribution claim is inferred. |
 
 ## Validation and acceptance assessment
+
+Build-evidence follow-up on **2026-10-18**, Python **3.12.12**: workflow dependency
+installation succeeded; all **21 contract tests** and **107 research tests** passed;
+research intake validated **74 CatalogItems and 3 Pricebooks**; market validation
+passed (**33 entities, 1,584 cells, 20 issues**); mobile prompt validation and
+`git diff --check` passed. Only the two linked Markdown notes change. The frozen
+contract and catalog facts are unchanged. These checks establish repository
+integrity; source inspection supports the stated documentation findings, while
+independent evidence review, actual runtime execution and remaining owner
+decisions are separate.
 
 Validation results are recorded after the files are written and independently checked; the integrated PR must include the repository baseline checks from Python 3.12. Schema validation checks structure, provenance shape and reference consistency; it cannot verify source freshness, license interpretation, actual runtime support or consuming-owner acceptance.
 
@@ -233,7 +248,10 @@ Follow-up validation on **2026-10-17**, Python **3.12.14**: the shared runtime's
 | Comparison fields defined with type, unit and evidence requirement | Comparison-fields table | Authored; canonical versus note-only fields distinguished |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Proposed rules, sourced premises, evidence status | Authored; no verified joint compatibility rule claimed |
 | Every factual/numeric claim primary-sourced with access date and relevant conditions | Claim-source matrices and dated evidence table | Source inspection completed for cited findings; no runtime measurements; independent evidence review pending |
-| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table | Unsatisfied: five acknowledgments pending |
+| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table | Partial: scoped #10/#25/#33 receipts linked; #37/#38 pending |
 | Open questions recorded with named follow-up owner | Open-decision table | Authored; owner decisions remain open |
 
-This issue is not complete: the follow-up needs reviewed merge and five consuming-owner handoffs remain required. The main orchestrator owns PRs, GitHub checklists/Project status and the workstream summary.
+This issue is not complete: the build-evidence supplement needs independent review,
+#37/#38 receiving-owner handoffs remain required, and research-owner decisions and
+actual selected tuples remain open. No issue closure or Project completion follows
+from this partial contribution.
