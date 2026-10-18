@@ -69,6 +69,14 @@ string do not satisfy these fields. Validation preserves the original text and
 permits an explicitly unknown `reviewed_commit` with a nonempty basis; it does
 not certify the statement, source URL, timestamp or receiving decision.
 
+An identical scoped response cannot be recorded more than once for the same
+producer/consumer pair. The ledger and readback are checked separately before
+totals are compared. Different handoff pairs and distinct scoped records may
+cite the same source URL; duplication checks do not infer source authority or
+receiving acceptance. Reordering the response records does not affect their
+reconciliation; every field and nested-array order remains part of the complete
+record identity.
+
 The snapshot cutoff and every historical or new receipt's `submitted_at` must
 be real, timezone-aware timestamps. The audit profile accepts ASCII
 `YYYY-MM-DDTHH:MM:SS`, optional one-to-six-digit fractional seconds, and an

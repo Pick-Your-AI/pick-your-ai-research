@@ -108,13 +108,30 @@ def validate_response_text(response, label):
                 f'{label}: {field} must be nonempty text')
 
 
+def response_identity(response):
+    """Compare complete records without depending on object member order."""
+    return json.dumps(response, sort_keys=True)
+
+
+def validate_distinct_responses(responses, label):
+    """Reject repeated complete records, preserving distinct scopes and pairs."""
+    observed = set()
+    for response in responses:
+        identity = response_identity(response)
+        require(identity not in observed, f'{label}: duplicate scoped response')
+        observed.add(identity)
+
+
 def validate(ledger, readback, audit):
     validate_identity_numbers(ledger, readback, audit)
     for row in ledger:
         for response in row.get('responses', []):
             validate_response_text(response, 'ledger response')
+        pair = (row['market_issue'], row['consumer_issue'])
+        validate_distinct_responses(row.get('responses', []), f'ledger {pair}')
     for response in readback['new_scoped_responses']:
         validate_response_text(response, 'readback response')
+    validate_distinct_responses(readback['new_scoped_responses'], 'readback')
     cutoff = audit_instant(readback['snapshot_cutoff_utc'], 'readback cutoff')
     audit_instant(audit['snapshot_cutoff_utc'], 'audit cutoff')
     issues = {issue['number']: issue for issue in readback['issues']}
@@ -169,9 +186,8 @@ def validate(ledger, readback, audit):
                     f'{pair}: reviewed SHA must be explicit or explicitly unknown')
             actual_responses.append({**response, 'market_issue': pair[0],
                                      'consumer_issue': pair[1]})
-    key = lambda r: (r['market_issue'], r['consumer_issue'], r['url'])
-    require(sorted(actual_responses, key=key) ==
-            sorted(readback['new_scoped_responses'], key=key),
+    require(sorted(map(response_identity, actual_responses)) ==
+            sorted(map(response_identity, readback['new_scoped_responses'])),
             'receipt moved, changed or dropped from its recorded producer/consumer scope')
     coverage = readback['handoff_coverage']
     require(audit['handoff_coverage'] == coverage, 'audit coverage differs')
