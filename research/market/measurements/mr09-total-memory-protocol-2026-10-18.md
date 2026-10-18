@@ -147,8 +147,10 @@ The offline checker intentionally reports `execution_enabled: false`.
 
 ## Units, rounding and pairing gates
 
-The pinned runtime JSON logger **floors each value to integer MiB**, even for
-structured output. For a reported `self = s`, the actual integer-byte value is
+The pinned runtime JSON logger **floors nonnegative buffer values to integer
+MiB**, even for structured output. Its signed `unaccounted` residual uses C++
+integer division, which truncates a negative value toward zero; that residual
+does not enter this process-buffer comparison. For a reported `self = s`, the actual integer-byte value is
 in `[s × 2^20, (s+1) × 2^20 − 1]`. Do not call `s × 2^20` an exact measurement,
 or reconstruct `self` by adding independently rounded model/context/compute.
 An exact-byte exporter would require a separately hashed source/build and
@@ -176,6 +178,23 @@ Run the **offline** prepared-record check from the repository root:
 ```powershell
 python scripts/mr09_total_memory_setup.py
 ```
+
+The prepared-record checker binds the reviewed estimator/runtime source and
+archive identities, exact GGUF repository/revision/file/size/hash, every declared
+runtime and workload control, recorded estimator command, target fields/units
+and scope, and the existing preparation guards. It compares exact JSON types,
+including numeric array members: `true`, `1` and `1.0` are not interchangeable.
+Missing or additional estimator/runtime/configuration/comparison fields require
+review; matching edits to a preparation receipt cannot silently replace the
+reviewed artifact identity. Effective estimator fields and placement must agree
+with those bindings. The proposed future cap may decrease, but cannot increase
+or enable execution. Synthetic mutations exercise the rejected alternatives;
+the original CPU output, preparation, preflight and cleanup bytes are unchanged.
+
+These checks establish local record consistency, not the truth of source-check
+or local-verification annotations, completeness of the qualification decisions,
+fresh hardware admission, downloaded runtime identity or physical execution.
+Those evidence and receiving-owner gates remain independently reviewable.
 
 ## Primary evidence and confidence
 
