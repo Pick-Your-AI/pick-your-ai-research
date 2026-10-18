@@ -1,6 +1,6 @@
 # Memory and deletion observability proposal
 
-Refs #28, #35 and #38. Status: proposed research signals; [CompleteDotTech's delegated T4 #28 review accepts the interface with constraints](../T4-agents-integrations/README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18). PUSHINGSQUARES' separate #28 confirmation is unrecorded; #35/#38 co-owner adoption remains separate. This supplements the agent/tool signals in the [merged #121 monitoring record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/38a83764f4819fde6900dcb8b7219b7cec2315ef/research/T6-deployment-operations/monitoring.md#t4-agents-and-tools). It neither names vendor-exported metrics nor claims an installed collector.
+Refs #28, #35 and #38. Current status: the research observation interface is accepted by the [actual R4 technical receiving review on #345](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/345#pullrequestreview-5563363848) and recorded in the [canonical monitoring decision](monitoring.md#recorded-engine-framework-and-memory-receiving-decisions-2026-10-18). The proposal identifiers, original signal definitions and evidence limits below are retained; acceptance supplies no vendor-exported metric or installed collector. The earlier [delegated T4 #28 review](../T4-agents-integrations/README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18) and absent separate named co-owner confirmations retain their historical scope. The later actual R4 decision is recorded separately below.
 
 ## Evidence boundary
 
@@ -30,4 +30,42 @@ These observations distinguish a completed API request from a completed data-lif
 - #38 decides alert classes and aggregation windows; #40 reviews any eventual fields, enum extensions or executable rules. No frozen schema is changed here.
 - #37 owns deployment readiness for actual collectors and credentials; the research note does not create service availability. #39 retains quantity/price applicability and uncovered costs.
 
-Record explicit receiving dispositions before adopting the supplement into the canonical monitoring decision. This proposal fills the documented signal-catalog gap; it does not satisfy the separate handoff acceptance, decision-record merge or whole-issue completion criteria.
+## Actual receiving decision and canonical incorporation
+
+The [R4 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/345#pullrequestreview-5563363848)
+was submitted on the exact #28 source `c5e1d684aad53a987c33435e56c158ef0bd3ee1b`
+and memory-note blob `006cdd26efde4c2c303650245dd211c304ebc363`, subsequently
+delivered through signed
+[`07e8b9ad1c44973b3ddf2185bc2fa2cd8bbe9d24`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/07e8b9ad1c44973b3ddf2185bc2fa2cd8bbe9d24).
+It explicitly accepts MEM-SG01–06 for actual application-, framework- or
+store-backed persistent-memory layers and lifecycle mechanisms, without requiring
+a fabricated `memory_store` selection. It preserves the units, methods, times,
+event/layer scope, restricted evidence references, content-off default and the
+distinction between unknown counts and zero. Sampling limits, inaccessible
+layers and backup conditions remain visible.
+
+That is an actual delegated technical receiving decision, not an inferred reply
+by a named absent assignee. The older requests and hypotheses above retain their
+source dates and original scope. Their candidate instrumentation status means
+vendor emission and collection remain unevidenced; it does not mean the accepted
+research interface still needs the same receiving decision again.
+
+Determine applicability per observation and actual layer or lifecycle mechanism.
+Growth and access/mutation observations do not require a deletion event. The
+absence of an applicable deletion job cannot suppress those observations, and an
+empty memory catalog selection does not establish absence of application-owned
+memory. Unresolved applicability, inventory or observation capability remains
+unknown. Do not invent a layer, collector or lifecycle mechanism to fill a row.
+
+The [canonical monitoring record](monitoring.md#recorded-engine-framework-and-memory-receiving-decisions-2026-10-18)
+records these accepted definitions and the per-layer completion boundary.
+MEM-SG04 job state cannot substitute for MEM-SG05's complete, current event-bound
+layer assessment. The actual selected policy still determines retention,
+verification methods, numerical objectives, alert classes and collection windows;
+unknown policy/configuration remains visible and supplies no fabricated threshold.
+The original table is preserved rather than relabelled as observed telemetry.
+
+This reconciles this supplement's status with the actual memory-observation
+receiving decision. It does not establish collection, a deployed deletion/retention mechanism,
+source-use rights, purge completion, final #40 encoding or whole #35/#38 research
+completion. Other monitoring handoffs retain their own status.
