@@ -495,7 +495,7 @@ Catalog proposals (all `kind: memory_store`, `tier: T4`, validated):
 | Is ChatGPT-style consumer memory out of scope? Excluded here as consumer, not builder-selectable | #28 · @CompleteDotTech |
 | Unverified facts to re-fetch: Memory Bank TTL configuration details and pricing units; Anthropic memory tool platform availability (Bedrock, Vertex); Graphiti `group_id` partitioning; Zep and Letta encryption and residency; MS Agent Framework TTL and deletion | #28 · @CompleteDotTech |
 
-[Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions are partially received in the [workstream matrix](README.md#dependency-and-handoff-matrix). The [2026-10-18 T4 review](README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18) accepts MEM-SG01–MEM-SG06 as the constrained memory-observation interface. It does not supply #35/#38 co-owner confirmation, T3 storage acceptance or deployed purge evidence.
+[Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions are partially received in the [workstream matrix](README.md#dependency-and-handoff-matrix). The [2026-10-18 T4 review](README.md#t6-receiving-dispositions-and-t4-memory-review-2026-10-18) records CompleteDotTech's delegated acceptance of MEM-SG01–MEM-SG06 as the constrained memory-observation interface. PUSHINGSQUARES' separate #28 confirmation remains unrecorded. It does not supply #35/#38 co-owner confirmation, T3 storage acceptance or deployed purge evidence.
 
 ## Evidence
 
