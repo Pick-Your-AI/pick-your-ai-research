@@ -8,10 +8,10 @@ T3 is optional in a build. Knowledge access does not inherently require embeddin
 
 | Issue | Record | Current scope and limitation |
 | --- | --- | --- |
-| #13 | [Knowledge base](knowledge-base.md) | Draft source/connector/storage taxonomy, permissions, chunking and deletion propagation; source-specific configuration and consumer acceptance pending |
-| #14 | [Embedding model](embedding-model.md) | Draft sourced text-embedding candidates and representation/index contract; release/route pins, quality, pricing and consumer review pending |
-| #15 | [Vector database](vector-database.md) | Draft index-specific candidate comparison, not-needed criteria and trusted tenant boundaries; offering-specific limits and consumer review pending |
-| #16 | [RAG and retrieval](rag-retrieval.md) | Merged partial record from [#119](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/119); backend, ACL and receiving-owner decisions remain separate |
+| #13 | [Knowledge base](knowledge-base.md) | Merged source/connector/storage taxonomy plus Azure Blob indexer and S3/Bedrock comparison; source-specific configuration tests and consumer acceptance pending |
+| #14 | [Embedding model](embedding-model.md) | Merged sourced text-embedding comparison and pinned artifacts in the decision record; selected-route quality, pricing and consumer review pending |
+| #15 | [Vector database](vector-database.md) | Merged pgvector, Qdrant and Chroma software pins ([#151](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/151)), index-specific limits and not-needed criteria; deployment enforcement and consumer review pending |
+| #16 | [RAG and retrieval](rag-retrieval.md) | Merged partial record from [#119](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/119), with source/authorization corrections in [#154](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/154); backend, enforcement tests and receiving-owner decisions remain separate |
 
 ## Proposed rules and contract routing
 
