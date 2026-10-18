@@ -1,7 +1,7 @@
 # T4: MCP Servers
 
 Issue: #27 · Contract: 1.0.0 · Kinds: `mcp_server`
-Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-18 (bounded Python SDK protocol follow-up)
+Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-18 (bounded Python SDK and public Cloudflare documentation follow-ups)
 
 ## Evidence status correction
 
@@ -10,6 +10,11 @@ Evidence metadata corrected at 2026-10-17T02:17:46Z under the [adopted #41 inter
 A proposed constraint may pass on eligible, versioned documentation while its evidence remains unverified. Missing eligible evidence remains unknown; absence from an unmarked capability list does not establish lack of support. Synthetic evaluator results check rule mechanics only and do not verify product behaviour. All rules and contract changes still require central versioned review through #40. Receiving-owner handoffs remain pending and this correction does not satisfy issue completion.
 
 `trusted_external` is a proposed project classification under the criteria in this note, pending #35/#40 review. Registry presence and namespace/package identity checks do not certify security, safe code, benign tools or independently verified behaviour. The catalog value is not a security certification.
+
+The separately dated [Cloudflare documentation-server observation](cloudflare-docs-mcp.md)
+adds actual public-endpoint discovery/listing and one documentation search to the
+earlier desk study and local SDK experiments. It does not upgrade the original
+catalog claims or establish other vendor endpoints, framework clients or adoption.
 
 ## User decision
 
@@ -932,7 +937,8 @@ Notes on these proposals:
 - Not proposed:
   - reference `git`, `memory` and `everything` (note only);
   - Stripe's local package (not researched);
-  - Cloudflare, Notion and Linear (not researched in this pass).
+  - Cloudflare (the public documentation endpoint now has a [bounded follow-up](cloudflare-docs-mcp.md), without a catalog proposal; other Cloudflare product servers remain outside it);
+  - Notion and Linear (not researched in this pass).
 
 ## Open questions and handoffs
 
@@ -946,8 +952,8 @@ Notes on these proposals:
 | Overlap with tools: map MCP server tools to `tool` items (`tool_refs`) for side-effect counting | #26 · @CompleteDotTech |
 | Pricing units for Atlassian Rovo credits and the GitHub remote server (Copilot plan dependency) | #39 · @PUSHINGSQUARES |
 | Freshness policy for hosted remotes whose behaviour changes without a version; registry preview status | #41 · @tynamite |
-| Whether each candidate server already speaks 2026-07-28 (`server/discover`); only SDK-level evidence was gathered | #27 · @CompleteDotTech |
-| Atlassian admin controls (IP and domain allowlists) and whether `/v1/sse` still exists; Stripe local package; Cloudflare, Notion and Linear remote servers | #27 · @CompleteDotTech |
+| Candidate-by-candidate 2026-07-28 (`server/discover`) and client/transport qualification; the [Cloudflare documentation observation](cloudflare-docs-mcp.md) covers only its named dated tuples | #27 · @CompleteDotTech |
+| Atlassian admin controls (IP and domain allowlists) and whether `/v1/sse` still exists; Stripe local package; other Cloudflare product servers, its unobserved legacy-GET migration response, Notion and Linear remote servers | #27 · @CompleteDotTech |
 
 The incoming #9 hosting/network boundary is accepted with constraints by #27 ([owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072)). Internal T4 handoffs are [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external outgoing handoffs remain pending receiving-owner disposition; see the [workstream handoff matrix](README.md#dependency-and-handoff-matrix).
 
@@ -956,7 +962,7 @@ The incoming #9 hosting/network boundary is accepted with constraints by #27 ([o
 - modelcontextprotocol.io, github.com (pages and release feeds), unpkg and jsDelivr refused direct `curl` through the proxy. Those pages were read with a fetch tool that returns extracted text, so quotations are as extracted.
 - The GitHub `/releases` list page returned stale v1.11.0 entries. The tags page was blocked by robots rules.
 - Registry search queries were slow, and one timed out. Exact-name lookups worked.
-- No server, SDK or framework was executed in the original 2026-10-16 desk study. The follow-up below adds local synthetic-peer SDK execution; candidate servers and agent frameworks remain unexecuted.
+- No server, SDK or framework was executed in the original 2026-10-16 desk study. The follow-up below adds local synthetic-peer SDK execution; the separate [Cloudflare documentation record](cloudflare-docs-mcp.md) adds narrowly scoped public-endpoint execution. Other candidate-server tuples and agent frameworks remain unexecuted here.
 
 ## Pinned Python SDK protocol follow-up (2026-10-18)
 

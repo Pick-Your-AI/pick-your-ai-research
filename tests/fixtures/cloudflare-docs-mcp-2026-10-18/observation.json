@@ -1,0 +1,321 @@
+{
+  "observations": {
+    "sse-alias": {
+      "client_sdk": "2.3.0",
+      "endpoint": "https://docs.mcp.cloudflare.com/sse",
+      "http_requests": [
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 245,
+            "sha256": "685d6cf3322fc6e92c072681728cbefb3f71bcb940ccf534c4f4b6e878516735"
+          },
+          "rpc_method": "server/discover",
+          "url": "https://docs.mcp.cloudflare.com/sse"
+        },
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 240,
+            "sha256": "5e9c4dc29db5ff882d8c9da93afa4773c24d5eb1b5ab9146335cc9dece641c49"
+          },
+          "rpc_method": "tools/list",
+          "url": "https://docs.mcp.cloudflare.com/sse"
+        }
+      ],
+      "http_responses": [
+        {
+          "content_type": "application/json",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/sse"
+        },
+        {
+          "content_type": "application/json",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/sse"
+        }
+      ],
+      "listing": {
+        "bytes": 1952,
+        "sha256": "34d787d794129574ab4432809603c31afde3391b85fba3960c781014925cc474"
+      },
+      "mode": "auto",
+      "next_cursor": null,
+      "observed_at": "2026-10-18T08:12:28.049852+00:00",
+      "protocol_version": "2026-07-28",
+      "script_sha256": "6fec10c644ec3e311dd4c81d3590fe0e63ba124355e3c154151a2c8f6a5886b8",
+      "server_info": {
+        "name": "docs-ai-search",
+        "version": "0.4.13"
+      },
+      "status": "passed",
+      "tools": [
+        {
+          "input_schema": {
+            "bytes": 136,
+            "sha256": "e31d79affd315385776b80806c03bfc7988472adb80a800bdd93f0aff7778b00"
+          },
+          "name": "search_cloudflare_documentation",
+          "read_only_hint": true
+        },
+        {
+          "input_schema": {
+            "bytes": 90,
+            "sha256": "93ab7499dc3c616f8db8780fed0d9f69270803cda913882ad2ef3943db8d7225"
+          },
+          "name": "migrate_pages_to_workers_guide",
+          "read_only_hint": true
+        }
+      ],
+      "transport": "streamable_http",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    "sse-get": {
+      "credential_headers": false,
+      "headers": {
+        "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+        "content-type": "text/html; charset=UTF-8",
+        "link": null
+      },
+      "method": "GET",
+      "observed_at": "2026-10-18T08:12:27.219260+00:00",
+      "request_accept": "text/event-stream",
+      "response_body_bytes": 7184,
+      "response_body_sha256": "8e8a34a7e8e3851f6b93c782f2271f9e97409d6d32980f1f5ae95ab2222e2c8b",
+      "status": 403,
+      "url": "https://docs.mcp.cloudflare.com/sse"
+    },
+    "v1": {
+      "client_sdk": "1.30.0",
+      "endpoint": "https://docs.mcp.cloudflare.com/mcp",
+      "http_requests": [
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 152,
+            "sha256": "01aa23325bafde4808cdea7917f11c4fda1898d9a291b42491199f5ffc96e106"
+          },
+          "rpc_method": "initialize",
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 54,
+            "sha256": "59951ca0b212b103876fa23a9e58bcbbc8fbcc0120e3f5ee7214461e2bd1cd5e"
+          },
+          "rpc_method": "notifications/initialized",
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 46,
+            "sha256": "cd40773a5eb07bdbdf483b4bfabb3f92a6cb2ae193e610c9beac1bd4abd9d0ff"
+          },
+          "rpc_method": "tools/list",
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        }
+      ],
+      "http_responses": [
+        {
+          "content_type": "text/event-stream",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "content_type": null,
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 202,
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "content_type": "text/event-stream",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        }
+      ],
+      "listing": {
+        "bytes": 1803,
+        "sha256": "93d114937887fd6a52decccd4e79a3901530fc52142101110c1c81c962ed9afe"
+      },
+      "mode": "legacy",
+      "next_cursor": null,
+      "observed_at": "2026-10-18T08:11:23.699583+00:00",
+      "protocol_version": "2025-11-25",
+      "script_sha256": "6fec10c644ec3e311dd4c81d3590fe0e63ba124355e3c154151a2c8f6a5886b8",
+      "server_info": {
+        "name": "docs-ai-search",
+        "version": "0.4.13"
+      },
+      "session_id_present": false,
+      "status": "passed",
+      "tools": [
+        {
+          "input_schema": {
+            "bytes": 136,
+            "sha256": "e31d79affd315385776b80806c03bfc7988472adb80a800bdd93f0aff7778b00"
+          },
+          "name": "search_cloudflare_documentation",
+          "read_only_hint": true
+        },
+        {
+          "input_schema": {
+            "bytes": 90,
+            "sha256": "93ab7499dc3c616f8db8780fed0d9f69270803cda913882ad2ef3943db8d7225"
+          },
+          "name": "migrate_pages_to_workers_guide",
+          "read_only_hint": true
+        }
+      ],
+      "transport": "streamable_http",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    },
+    "v2": {
+      "client_sdk": "2.3.0",
+      "endpoint": "https://docs.mcp.cloudflare.com/mcp",
+      "http_requests": [
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 245,
+            "sha256": "685d6cf3322fc6e92c072681728cbefb3f71bcb940ccf534c4f4b6e878516735"
+          },
+          "rpc_method": "server/discover",
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 240,
+            "sha256": "5e9c4dc29db5ff882d8c9da93afa4773c24d5eb1b5ab9146335cc9dece641c49"
+          },
+          "rpc_method": "tools/list",
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "credential_headers": false,
+          "method": "POST",
+          "request": {
+            "bytes": 385,
+            "sha256": "28810cee2d4c93881ed9459850bb11dc2e02ac19517bd7f44ffc75d60231ca94"
+          },
+          "rpc_method": "tools/call",
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        }
+      ],
+      "http_responses": [
+        {
+          "content_type": "application/json",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "content_type": "application/json",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        },
+        {
+          "content_type": "application/json",
+          "method": "POST",
+          "protocol_header": null,
+          "session_header_present": false,
+          "status": 200,
+          "url": "https://docs.mcp.cloudflare.com/mcp"
+        }
+      ],
+      "listing": {
+        "bytes": 1952,
+        "sha256": "34d787d794129574ab4432809603c31afde3391b85fba3960c781014925cc474"
+      },
+      "mode": "auto",
+      "next_cursor": null,
+      "observed_at": "2026-10-18T08:11:23.115727+00:00",
+      "protocol_version": "2026-07-28",
+      "script_sha256": "6fec10c644ec3e311dd4c81d3590fe0e63ba124355e3c154151a2c8f6a5886b8",
+      "search": {
+        "is_error": false,
+        "query": "How does Streamable HTTP differ from the deprecated HTTP+SSE transport for MCP?",
+        "result": {
+          "bytes": 55445,
+          "sha256": "56ae836deb773f778b191847d15def59f99329402f019f26841bb9d27288124e"
+        },
+        "result_count": 13,
+        "urls": [
+          "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/",
+          "https://developers.cloudflare.com/changelog/post/2026-07-28-cloudflare-mcp-servers-mcp-2026-07-28/",
+          "https://developers.cloudflare.com/agents/model-context-protocol/protocol/transport/",
+          "https://developers.cloudflare.com/changelog/post/2025-08-05-agents-MCP-update/",
+          "https://developers.cloudflare.com/changelog/43/",
+          "https://developers.cloudflare.com/changelog/product/agents/2/",
+          "https://developers.cloudflare.com/changelog/product-group/ai/7/",
+          "https://developers.cloudflare.com/changelog/product-group/developer-platform/20/",
+          "https://developers.cloudflare.com/cloudflare-one/access-controls/ai-controls/mcp-portals/",
+          "https://developers.cloudflare.com/changelog/product/workers/8/",
+          "https://developers.cloudflare.com/agents/model-context-protocol/apis/client-api/",
+          "https://developers.cloudflare.com/changelog/post/2026-07-27-agents-sdk-v0.20.0-mcp-sdk-v2/",
+          "https://developers.cloudflare.com/changelog/post/2026-08-25-mcp-portals-mcp-2026-07-28/"
+        ]
+      },
+      "server_info": {
+        "name": "docs-ai-search",
+        "version": "0.4.13"
+      },
+      "status": "passed",
+      "tools": [
+        {
+          "input_schema": {
+            "bytes": 136,
+            "sha256": "e31d79affd315385776b80806c03bfc7988472adb80a800bdd93f0aff7778b00"
+          },
+          "name": "search_cloudflare_documentation",
+          "read_only_hint": true
+        },
+        {
+          "input_schema": {
+            "bytes": 90,
+            "sha256": "93ab7499dc3c616f8db8780fed0d9f69270803cda913882ad2ef3943db8d7225"
+          },
+          "name": "migrate_pages_to_workers_guide",
+          "read_only_hint": true
+        }
+      ],
+      "transport": "streamable_http",
+      "worker_exit_code": 0,
+      "worker_stderr_bytes": 0
+    }
+  },
+  "probe_script_sha256": "6fec10c644ec3e311dd4c81d3590fe0e63ba124355e3c154151a2c8f6a5886b8",
+  "scope": "Dated public documentation MCP observation; no customer-account mutation or deployed-source identity claim",
+  "source_commit": "e4cf085520ea7286af77abf938d645c610ef1580",
+  "source_tree": "b6b2aa67cd932bf2b11692a34779389ccaaf05a6"
+}
