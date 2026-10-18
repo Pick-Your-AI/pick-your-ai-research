@@ -13,6 +13,8 @@ Research for an AI system builder inspired by [PCPartPicker](https://pcpartpicke
 3. For component data, use the [canonical schemas](contracts/v1/schemas/), [component-kind registry](contracts/v1/schemas/component-registry.json), and [issue-to-kind mapping](docs/CONTRACT_MAPPING.md). All researchers use the same contract **1.0.0**, adopted in [PR #44](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/44).
 4. Submit a PR referencing the issue. Use `Refs #n` for partial work and `Closes #n` only when all acceptance criteria and handoffs are satisfied. Follow [contributing conventions](CONTRIBUTING.md) and [governance](docs/governance.md).
 
+Client implementers: use the [pinned consumer handoff](docs/CONSUMER_HANDOFF.md) for immutable artifacts, known baseline limitations and remaining receiving gates.
+
 Keep incomplete findings in notes. Never invent a required value to satisfy a schema. The contract's examples are synthetic; passing validation does not verify vendor claims or establish production readiness. Propose contract changes through [Pick-Your-AI/pick-your-ai-research#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40); see [contract adoption and limitations](contracts/v1/ADOPTION.md).
 
 ## Research programs
@@ -103,6 +105,8 @@ python -m pip install -r requirements-research.txt
 python -m unittest discover -s contracts/v1/tests -v
 python -m unittest discover -s tests -v
 python scripts/validate_research.py
+python scripts/validate_market_research.py
+python prompts/mobile/validate_prompts.py
 ```
 
 For market prompt changes, also run `python prompts/market/validate_prompts.py`. Follow any additional checks required by the affected issue. Automation validates structure and references; reviewers assess source accuracy, evidence quality, rights, and handoff acceptance.

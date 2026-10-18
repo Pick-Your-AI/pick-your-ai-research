@@ -9,7 +9,17 @@ Will the complete request and reserved generation fit the selected model **on th
 
 This bounded candidate set covers direct APIs, a Bedrock API route and self-hosted weights. Managed coverage is the conditional dedicated endpoint route in [Model Provider](model-provider.md), whose model and runtime ceilings need exact offering evidence. Under #3's [owner position](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927), provider-operated shared Bedrock on-demand is API; managed requires dedicated/reserved capacity. Hybrid applies independently to serving components; a local retrieval service does not make remote generation KV cache local. RAG assembly stays with #16 and sizing with #10.
 
+## Non-text and predictive model limits
+
+The [selection-limit supplement](nontext-selection-limits.md) records model- and route-specific audio, image/video, retrieval and predictive-model constraints with their actual units. It distinguishes documented hard predicates from defaults, chunking/truncation policies, training shapes, examples and unresolved claims. These research notes do not extend the text-token contract or establish runtime capacity; new typed limit semantics remain subject to #40 and affected-owner review.
+
 ## Candidate options
+
+### Scope extension beyond text-token contexts
+
+The2026-10-17 [model-family study](model-taxonomy.md) adds models whose meaningful admission constraints are samples/channels/characters, frames/fps, pixels/bytes/pages, rows/features, forecast steps, molecular units, geometry or action horizons. See the cited [audio](audio-models.md), [media](generative-media-models.md), [perception](perception-models.md) and [specialized](specialized-models.md) tables. Their published examples, training lengths, recommended windows, minimum buffers and hard maxima have different meanings; no numeric conversion to text tokens is justified without an actual matching tokenizer/processor and source semantics.
+
+Preserve the accepted shared/separate language-budget rules below. New non-token tasks remain note-only where v1's required model token fields cannot be populated truthfully. [T1-TAX1](model-family-contract-proposal.md) proposes typed per-stage input/output/shape limits through #40/CD-5/CD-6/CD-11. A composed OCR, codec, diffusion or action pipeline needs its own stage/processor identity; it does not automatically share a text-autoregressive KV-cache model. #10/#11 own matched resource/runtime methodology, #36 selected quality targets and #39 task-specific billing. This extension changes no frozen rule or accepted conservative-bound/native-limit policy.
 
 All limits below are **published** specifications, not measurements. Numbers are tokens. `Unknown` is not zero. The sources are linked in the evidence register; descriptions of effective quality remain vendor claims unless independently measured.
 

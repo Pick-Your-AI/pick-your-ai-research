@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "id": "vector_database.pgvector",
+  "kind": "vector_database",
+  "tier": "T3",
+  "name": "pgvector (PostgreSQL extension)",
+  "version": "0.8.7",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Self-operated PostgreSQL vector extension. This item describes extension software, not a hosted database offering. PostgreSQL hosting, storage and operations have separate costs. Index/type-specific dimensional limits remain in the linked research note; no universal max_dimensions or ACL guarantee is asserted.",
+  "tags": [
+    "postgresql",
+    "extension",
+    "self-hosted",
+    "vector-search"
+  ],
+  "spec": {
+    "supported_metrics": [
+      "euclidean",
+      "dot",
+      "cosine"
+    ]
+  },
+  "license": {
+    "spdx_id": "PostgreSQL",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/pgvector/pgvector/tree/v0.8.7",
+      "checked_at": "2026-10-18T00:41:21Z",
+      "verification_status": "unverified",
+      "notes": "Tag v0.8.7 resolves to f37c13f68b57d2c3472b2214fbcff699d6d34876. Source checked, no installation or runtime benchmark performed."
+    },
+    {
+      "source_uri": "https://github.com/pgvector/pgvector/blob/f37c13f68b57d2c3472b2214fbcff699d6d34876/README.md",
+      "checked_at": "2026-10-18T00:41:21Z",
+      "verification_status": "unverified",
+      "notes": "Published PostgreSQL extension supports L2 (mapped to euclidean), inner product (dot), and cosine distance. SQL <#> returns negative inner product for ascending ordering; consumers must preserve that sign convention. Schema list is limited to its three supported vocabulary values, not an exhaustive product metric list. README requires PostgreSQL 13+."
+    },
+    {
+      "source_uri": "https://github.com/pgvector/pgvector/blob/f37c13f68b57d2c3472b2214fbcff699d6d34876/LICENSE",
+      "checked_at": "2026-10-18T00:41:21Z",
+      "verification_status": "unverified",
+      "notes": "PostgreSQL license grants use, copying, modification and distribution for any purpose without fee, conditional on preserving the required notices/disclaimers. This supports free extension-software billing and software-use flags only; it does not grant rights to hosted services, embeddings or customer data."
+    }
+  ],
+  "updated_at": "2026-10-18T00:41:21Z"
+}

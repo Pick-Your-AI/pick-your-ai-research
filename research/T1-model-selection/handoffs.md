@@ -23,7 +23,22 @@ Ownership snapshot: 2026-10-16, preserved from live GitHub assignees. Central re
 | #7 -> #28 | @CompleteDotTech | Count history/retrieved memory/thinking; preserve required content and recount after memory transforms | Pending |
 | #7 -> #39 | @PUSHINGSQUARES | Prompt-length predicates, exact currencies/route/service modifiers, threshold-crossing uncertainty and full-session accounting | Pending |
 
-## Central reconciliation
+## Broad-family and citation follow-up: 2026-10-17
+
+The [taxonomy](model-taxonomy.md), six linked comparisons, [inventory](model-research-inventory.json) and [primary register](model-research-sources.md) extend the earlier language-model slice. The [retrospective audit](citation-audit-2026-10-17.md) and [market citation map](../market/citation-index-2026-10-17.md) trace previous sources without replacing historical access dates. None of the earlier owner positions accepts these new artifacts automatically.
+
+| Receiving issues / live owners | New disposition requested | State |
+| --- | --- | --- |
+| #40: @tynamite with T1 author @zwright8; #41: @tynamite / @PUSHINGSQUARES | Review T1-TAX1 task/output/admission semantics and per-source evidence limitations, preserving frozen v1 and accepted CD decisions | Pending |
+| #30: @appletechie with T1 author @zwright8 | Confirm separate code/checkpoint/backbone/adapter/service/data rights evidence and unresolved grants are sufficient for intake; no universal permission | Pending |
+| #10: @Mattycodes69 / @appletechie; engine consumers | Identify per-task runtime/resource inputs; no text-KV formula transferred to arbitrary model families | Pending |
+| #14: @zabyxc01 / @PUSHINGSQUARES | Review dense/sparse/multivector versus rerank outputs and exact modality/shape evidence; embedding catalog ownership stays with T3 | Pending |
+| #39: @appletechie / @PUSHINGSQUARES | Define unsupported image/audio/video/character/credit meters before pricebook/contract intake; no new rates proposed | Pending |
+| #49: @appletechie with author @zwright8; coordinator @CompleteDotTech; #59: @Mattycodes69 / @appletechie | Review retrospective citation mapping and narrower documentary evidence grades; unknown cells remain unknown | Pending |
+
+Live issue assignees were read from GitHub on 2026-10-17; existing assignments and triage were preserved. This is a research checkpoint, not full acceptance of #4–7/#49, measured quality, rights clearance or approved contract migration.
+
+## Central reconciliation (earlier language-model slice)
 
 | Owner / issue | Precise requested disposition | Current state |
 | --- | --- | --- |
@@ -67,3 +82,18 @@ Use `Refs #4`, `Refs #5`, `Refs #6`, `Refs #7` while full acceptance remains pen
 [PR #88](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/88) requests all six affected owners listed above; GitHub readback confirmed those requests and an empty submitted-review list at publication. [Parent request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4#issuecomment-6223171020) and [central #40 intake](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6223171381) identify the concrete artifacts and required dispositions. Requests leave all Pending rows pending. Existing signed-in browser access resolved the earlier Project API limitation; #4–7 Status is now In Review, with priorities/readiness/ownership preserved. No Done status or closure is claimed.
 
 The publication paragraph is a historical readback. The 2026-10-17 refresh reads the actual submitted central owner review above, superseding its empty-review state for @tynamite. It makes no new Project or assignment changes. Other consumer rows remain pending until their owners provide a disposition on the specific handoff.
+
+
+## Reciprocal receiving receipts (2026-10-18)
+
+A live readback found three incoming T4 interface decisions at reviewed main
+`7acbefbf4e4e700231e88be272bc89e3a73dde15`. These are receiving dispositions
+from the named delegate's co-owner scope, not acceptance of T1's outgoing rows.
+
+| Direction | Receipt and scope | Remaining decision |
+| --- | --- | --- |
+| #25 -> #6 | [@zwright8 delegate accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6#issuecomment-6242697096): capability evidence is scoped to model/offering/API surface and request conditions, including reasoning, parser/template, strictness and streaming; missing eligible evidence remains unknown | @PUSHINGSQUARES co-owner response and @appletechie's #30 licence-field sufficiency remain separate |
+| #28 -> #7 | [@zwright8 delegate accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6242697652): memory/history are part of assembled input; reserve output/thinking without double counting and recount after transforms; independent caps stay independent | @appletechie co-owner disposition, #16 assembly details and #10 reciprocal KV agreement remain separate |
+
+The #25 -> #11 receipt is recorded in the [T2 ledger](../T2-infrastructure/handoffs.md#reciprocal-engine-receipt-2026-10-18).
+None supplies runtime measurements, changes v1, accepts the reverse direction, or closes #4–7.
