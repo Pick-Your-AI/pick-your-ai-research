@@ -149,21 +149,63 @@ Duplicate JSON keys and nonfinite numbers are rejected before normalization.
 
 **Rule boundary:** compatibility predicates receive an unresolved result for
 all non-provided states, including unknown applicability. Recommendation
-rules explicitly test the known-answer gate specified in #81 and therefore
-skip unresolved needs. A known false applicability predicate still skips.
+rules use the known-answer gate specified in #81 and therefore skip unresolved
+needs. A known false applicability predicate still skips.
 No selected component remains CD-13's distinct empty selection scope; it is
 not a sixth answer state. The answer's original state/path remains available
 alongside the selection findings so these explanations are not collapsed.
 Severity, evidence eligibility and selection activation remain separate.
 
-The [15 executable cases](../../tests/test_t0_answer_states.py) cover nested
+**Predicate API correction (2026-10-18):** the
+[#40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+identified a concrete negation defect. At prototype blob
+`70feb63f5626de28e7ea197cc28d9ced2e1db662`, each of withheld, unknown, missing,
+not-applicable and absent answers returned Python `None`. A rule asserting
+`not answers.predicate(...)` then received `True` and the existing selection
+evaluator reported `pass` / `assertion_true`, without calling the value
+predicate. The five cases were reproduced before this correction.
+
+`AnswerIndex.predicate(pointer, value_schema, predicate)` now returns an immutable
+`PredicateResult`, retaining the answer's state and source path. Its call
+signature is unchanged, but its return contract deliberately changes: Python
+`bool`, `not`, and truth-testing `and`/`or` raise `TypeError` for every result,
+including provided true/false. Keeping a bare `None` return could not intercept
+the false-pass negation. Explicit operations are:
+
+| Operation | Meaning |
+| --- | --- |
+| `result.negated()` | Flip a known Boolean; preserve unresolved value, original answer state and source path. It does not call the value predicate again |
+| `result.compatibility_value()` | Final lowering to the existing rule interface: true/false remain exact, and an unresolved predicate remains `None` |
+| `result.recommendation_value()` | Final known-answer gate: a non-provided answer returns false so the recommendation skips. A provided answer retains its predicate's true/false/`None`; unresolved predicate evidence is not replaced by false |
+
+Negation must happen on the typed result **before** either final lowering. The
+adapter values are only inputs to the existing strict normalized-rule boundary;
+they must not be intermediate operands for Python Boolean expressions. For
+example, an assertion callback can return
+`answers.predicate(path, schema, check).negated().compatibility_value()`. A
+recommendation applicability callback can return
+`answers.predicate(path, schema, check).recommendation_value()`.
+
+The complete pre-change caller audit found eight direct `predicate` calls, all
+in `tests/test_t0_answer_states.py`: six value consumers now lower explicitly,
+and two malformed-input probes retain their existing rejection. Every other
+prototype uses the unchanged `AnswerIndex.read` interface. The sidecar,
+schema, fixtures, field dictionary and CD-13 evaluator are unchanged. This
+bounded correction does not resolve the disposition's separate field-sentinel,
+preset, parent-read or state-specific reason/policy questions, including when a
+`not_applicable` answer should skip a dependent compatibility rule. Their
+existing behavior is retained for separate owner-reviewed work.
+
+The [20 executable cases](../../tests/test_t0_answer_states.py) cover nested
 and escaped paths, array boundaries, parent withholding, explicit false/zero,
 field-type rejection before predicates, malformed/duplicate/nonfinite inputs,
 read isolation and compatibility/recommendation behavior through the CD-13
-experiment. They reproduce frozen v1's literal-unknown comparison and verify
-unchanged historical findings when the synthetic extension is present. No
-original build bytes, frozen evaluator, measured artifact or receiving receipt
-is modified.
+experiment. Five additional methods exercise the actual false-pass path,
+Boolean shortcuts, safe known/unresolved negation, retained state/path and the
+provided-but-unresolved recommendation case. They reproduce frozen v1's
+literal-unknown comparison and verify unchanged historical findings when the
+synthetic extension is present. No original build bytes, frozen evaluator,
+measured artifact or receiving receipt is modified.
 
 Primary syntax references inspected **2026-10-18**:
 [RFC 6901, sections 3–4 and 7](https://www.rfc-editor.org/rfc/rfc6901) defines
