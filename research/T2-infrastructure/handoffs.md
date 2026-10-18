@@ -77,7 +77,9 @@ At the original publication snapshot, [PR #75](https://github.com/Pick-Your-AI/p
 
 ## Closure gates
 
-All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff above must have an actual consuming-owner acknowledgement, and all issue acceptance criteria must be satisfied. Until then use `Refs #n`, leave #8–#11 open, and report any Project update limitation explicitly.
+All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff must have an actual consuming-owner acknowledgement, and each issue's own acceptance criteria must be satisfied before its completion. #8/#9/#10 retain their remaining gates. Report any Project update limitation explicitly.
+
+The [final research handoff assessment](inference-engine.md#final-research-handoff-assessment--2026-10-18) accounts for all five required #11 consumers using the actual comments above, including #38's expressly accepted narrowing to source/evidence inputs. [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291), merged as [859f47db88f0d8f1a99899ca9029ce0da19800c8](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/859f47db88f0d8f1a99899ca9029ce0da19800c8) on 2026-10-18, completed the reviewed assessment and #11 is now closed. The earlier #266 audit supplied the eight artifact criteria, and #285 reconciled the later T6 receipt. The full assessment preserves those records and each receipt's author, revision, direction and limits. Named lifecycle/#42 and selected-runtime follow-ups remain in their owning scopes; completion of #11 does not complete the parent or its receiving issues.
 
 
 ## Reciprocal engine receipt (2026-10-18)
@@ -95,7 +97,7 @@ that those runtime cases ran.
 
 ## Reciprocal hosting receipt (2026-10-18)
 
-[Mattycodes69 accepts #27/#28 -> #9 with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): reuse hosting/storage IDs; evidence subprocess capability, network reachability/egress and locality for the actual selection. T4 retains protocol, trust and memory semantics; #15 retains vector-product evaluation and #37 deployment. Missing fields/rules remain #40 proposals. Appletechie's separate #9 co-owner disposition is not inferred.
+[Mattycodes69 accepts #27/#28 -> #9 with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): reuse hosting/storage IDs; evidence subprocess capability, network reachability/egress and locality for the actual selection. T4 retains protocol, trust and memory semantics; #15 retains vector-product evaluation and #37 deployment. Missing fields/rules remain #40 proposals. [Appletechie's separate #9 co-owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing `66b46d4`, also accepts #27/#28 -> #9 with constraints. It requires evidence for actual subprocess support, placement and egress; absent storage/host records remain gaps, and a shared catalog ID does not identify a shared instance. Neither response supplies another consuming owner's decision or completes #9.
 
 ## #61 measurement intake proposal (2026-10-18)
 

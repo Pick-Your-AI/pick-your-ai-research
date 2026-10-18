@@ -1,7 +1,7 @@
 # Inference engine: release-scoped serving support
 
 Issue: #11 · Contract: 1.0.0 · Kind: `inference_engine`
-Status: partial research and central corrections merged in #75/#101; scoped receipts reconciled; runtime tuples remain unverified
+Status: research complete through [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291), merged as [859f47db88f0d8f1a99899ca9029ce0da19800c8](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/859f47db88f0d8f1a99899ca9029ce0da19800c8) on 2026-10-18; all nine original criteria are satisfied; runtime tuples remain unverified
 Last vendor research: 2026-10-16 (main matrix); 2026-10-18 (build supplement; lifecycle source recheck) · Owner-decision reconciliation: 2026-10-18 · Research owners: @Mattycodes69, @zwright8 (live GitHub assignees)
 
 ## User decision
