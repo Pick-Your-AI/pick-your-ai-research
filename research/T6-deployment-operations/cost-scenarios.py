@@ -25,9 +25,18 @@ FUNCS = {'ceil': math.ceil, 'floor': math.floor, 'sqrt': math.sqrt, 'max': max, 
 OPS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul, ast.Div: operator.truediv,
        ast.FloorDiv: operator.floordiv, ast.Mod: operator.mod, ast.Pow: operator.pow, ast.USub: operator.neg, ast.UAdd: operator.pos}
 
+def require_finite(value, location):
+    """Reject float overflow without coercing arbitrary-size integers."""
+    if isinstance(value, float) and not math.isfinite(value):
+        raise ValueError(f'non-finite number at {location}')
+    return value
+
 def calc(expr, env):
     """Evaluate one spec expression from an AST whitelist: numbers, names in env, arithmetic, calls to FUNCS."""
     def ev(n):
+        return require_finite(evaluate_node(n), f'expression {expr!r}')
+
+    def evaluate_node(n):
         if isinstance(n, ast.Expression): return ev(n.body)
         if isinstance(n, ast.Constant) and type(n.value) in (int, float): return n.value
         if isinstance(n, ast.Name) and n.id in env and not n.id.startswith('_'): return env[n.id]
@@ -40,18 +49,31 @@ def calc(expr, env):
 
 def sf(x, n):
     # half-up rounding to n significant figures (Python's round() is half-even: 32,500 would give 32,000)
+    require_finite(x, 'rounding input')
     if x == 0: return 0
     q = Decimal(1).scaleb(int(math.floor(math.log10(abs(x)))) - (n - 1))
-    return float(Decimal(repr(x)).quantize(q, rounding=ROUND_HALF_UP))
+    return require_finite(float(Decimal(repr(x)).quantize(q, rounding=ROUND_HALF_UP)), 'rounded result')
 
 def fmt(x):
     if isinstance(x, float) and not x.is_integer(): return f'{x:,.6g}' if abs(x) < 1000 else f'{x:,.2f}'
     return f'{int(x):,}'
 
+def finite_json_float(value):
+    """Reject overflowing JSON numbers before they can invalidate comparisons."""
+    number = float(value)
+    if not math.isfinite(number):
+        raise ValueError(f'non-finite number in scenario spec: {value}')
+    return number
+
+def reject_json_constant(value):
+    raise ValueError(f'non-finite number in scenario spec: {value}')
+
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ('-h', '--help'):
         print(__doc__); sys.exit(0 if len(sys.argv) > 1 else 2)
-    spec = json.load(open(sys.argv[1], encoding='utf-8'))
+    with open(sys.argv[1], encoding='utf-8') as source:
+        spec = json.load(source, parse_float=finite_json_float,
+                         parse_constant=reject_json_constant)
     n = spec.get('sig_figs', 2)
     cases = list(spec['cases'])
     out, bad = {}, []
