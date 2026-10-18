@@ -657,7 +657,7 @@
       {
         "access_date": "2026-10-18",
         "access_status": "public desk retrieval; see per-URL results",
-        "version": "Unversioned home/about accessed 2026-10-18; about page states data updated 2026-10-06.",
+        "version": "Unversioned home/about accessed 2026-10-18; about page states data updated 2026-10-16 (the separate privacy-policy date remains 2026-10-06).",
         "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
         "confidence": "Medium for documented identity/scope; unverified where stated",
         "reviewed_urls": [
@@ -761,7 +761,7 @@
       {
         "access_date": "2026-10-18",
         "access_status": "public desk retrieval; see per-URL results",
-        "version": "Unversioned public pages accessed 2026-10-18; terms updated 2026-06-21; homepage dataset stamp 2026-10-13.",
+        "version": "Unversioned public pages accessed 2026-10-18; terms page shows last updated 2026-10-01 on review (an earlier cached extraction returned 2026-06-21); homepage dataset stamp 2026-10-13.",
         "region": "Global English-language public website/documentation; not a regional price quote or service-availability guarantee",
         "confidence": "Medium for documented identity/scope; unverified where stated",
         "reviewed_urls": [
@@ -1082,7 +1082,7 @@
             "publisher": "Dify / LangGenius"
           },
           {
-            "claim": "Primary documentation: REST integration, plugins and difyctl. DSL export includes orchestration, parameters and knowledge-base connections; content and third-party keys excluded by docs. Not exercised.",
+            "claim": "Primary documentation: REST integration, plugins and difyctl. DSL export includes orchestration, parameters and knowledge-base connections; actual knowledge-base content and third-party tool API keys are excluded. Secret-type environment variables may be included after user confirmation, so a DSL export is not necessarily free of secrets. Not exercised.",
             "evidence_class": "Primary documentation",
             "source_urls": [
               "https://docs.dify.ai/en/home",
@@ -1292,7 +1292,7 @@
           {
             "claim": "Workflow automation platform; curated AI Starter Kit is a separate Docker Compose template combining n8n, Ollama, Qdrant and PostgreSQL.",
             "evidence_class": "Primary documentation",
-            "url": "https://docs.n8n.io/deploy/host-n8n.md",
+            "url": "https://docs.n8n.io/deploy/host-n8n/deploy-with-the-ai-starter-kit.md",
             "publisher": "n8n"
           },
           {
@@ -2390,7 +2390,7 @@
       {
         "access_date": "2026-10-18",
         "access_status": "public primary documents retrieved",
-        "version": "Mutable homepage/methodology and repository main; no release/SHA pin established",
+        "version": "Mutable homepage/methodology; repository README and root listing rechecked at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983; repository metadata read 2026-10-18",
         "region": "Global public site; estimates depend on device/runtime, not a regional quote",
         "confidence": "Medium",
         "reviewed_urls": [
@@ -2408,6 +2408,21 @@
             "url": "https://github.com/midudev/canirun.ai",
             "publisher": "midudev / CanIRun.ai",
             "access_status": "retrieved"
+          },
+          {
+            "url": "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved; pinned README states MIT"
+          },
+          {
+            "url": "https://api.github.com/repos/midudev/canirun.ai/contents?ref=73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved; complete root directory listing contains no LICENSE file"
+          },
+          {
+            "url": "https://api.github.com/repos/midudev/canirun.ai",
+            "publisher": "midudev / CanIRun.ai",
+            "access_status": "retrieved; repository metadata reports license: null"
           }
         ],
         "claims": [
@@ -2428,20 +2443,20 @@
             "publisher": "midudev / CanIRun.ai"
           },
           {
-            "claim": "README states MIT; attempted root LICENSE retrieval failed, so exact license instrument not confirmed. Source visibility does not clear third-party model/spec/metadata reuse.",
+            "claim": "README states MIT; the inspected repository root at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983 has no LICENSE file, and GitHub repository metadata reports license: null, preserving the #109 finding. No repository reuse grant is established by this review. Source visibility does not clear third-party model/spec/metadata reuse.",
             "evidence_class": "Primary documentation",
             "source_urls": [
-              "https://www.canirun.ai/",
-              "https://www.canirun.ai/why",
-              "https://github.com/midudev/canirun.ai"
+              "https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md",
+              "https://api.github.com/repos/midudev/canirun.ai/contents?ref=73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983",
+              "https://api.github.com/repos/midudev/canirun.ai"
             ],
             "publisher": "midudev / CanIRun.ai"
           }
         ],
         "operator_statement": "Site footer says built by midudev and links midudev/canirun.ai; legal entity unverified",
-        "rights": "README states MIT; attempted root LICENSE retrieval failed, so exact license instrument not confirmed. Source visibility does not clear third-party model/spec/metadata reuse.",
+        "rights": "README states MIT; the inspected repository root at 73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983 has no LICENSE file, and GitHub repository metadata reports license: null, preserving the #109 finding. No repository reuse grant is established by this review. Source visibility does not clear third-party model/spec/metadata reuse.",
         "limitations": "All site results explicitly estimates; bandwidth method omits interconnect overhead. No browser hardware detection or privacy network behavior tested.",
-        "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+        "method": "Public web-tool extraction, which can be cached, and read-only public GitHub source/metadata queries. No product workflow, recommendation endpoint, inference or compute execution."
       }
     ]
   },

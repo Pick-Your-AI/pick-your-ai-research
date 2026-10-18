@@ -67,7 +67,12 @@
       ],
       "evidence_locator": "src-benchlm / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Static documentation read only; no selector submitted, API account, accuracy reproduction, compatibility validation or market-share inference."
+      "limitations": "Static documentation read only; no selector submitted, API account, accuracy reproduction, compatibility validation or market-share inference.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "apis_and_integrations"
+      ]
     }
   },
   {
@@ -132,7 +137,11 @@
       ],
       "evidence_locator": "src-harness-bench / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No benchmark run; current paper not reread, so preserve historical suite-size discrepancy as earlier finding and avoid new numeric claims."
+      "limitations": "No benchmark run; current paper not reread, so preserve historical suite-size discrepancy as earlier finding and avoid new numeric claims.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -208,7 +217,11 @@
       ],
       "evidence_locator": "src-llmfit / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Not installed/run; fit and community-result quality untested; default-branch documents mutable."
+      "limitations": "Not installed/run; fit and community-result quality untested; default-branch documents mutable.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -279,7 +292,11 @@
       ],
       "evidence_locator": "src-local-ai-planner / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Static text/controls inspected; no submitted custom model, numeric reproduction or executable export; multiplying identical GPU capacity does not verify runtime topology."
+      "limitations": "Static text/controls inspected; no submitted custom model, numeric reproduction or executable export; multiplying identical GPU capacity does not verify runtime topology.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -357,7 +374,11 @@
       ],
       "evidence_locator": "src-flocci / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No prompt submitted in this pass; historical 2026-10-16 generated workflow must retain original date; no compatibility, export or deployment verified."
+      "limitations": "No prompt submitted in this pass; historical 2026-10-16 generated workflow must retain original date; no compatibility, export or deployment verified.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -425,7 +446,11 @@
       ],
       "evidence_locator": "src-artificial-analysis / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No account/key/API request, benchmark or paid access; endpoint availability and terms completeness not tested."
+      "limitations": "No account/key/API request, benchmark or paid access; endpoint availability and terms completeness not tested.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -499,7 +524,11 @@
       ],
       "evidence_locator": "src-openrouter / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No account, inference request, API call, resale, scraping workflow or regional routing verification."
+      "limitations": "No account, inference request, API call, resale, scraping workflow or regional routing verification.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -565,7 +594,11 @@
       ],
       "evidence_locator": "src-hugging-face / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No repository model downloaded or run; did not audit Hub API here, so existing API Unknown can remain."
+      "limitations": "No repository model downloaded or run; did not audit Hub API here, so existing API Unknown can remain.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -628,7 +661,11 @@
       ],
       "evidence_locator": "src-arena / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No model prompt/vote/workflow submitted; home page is an app-building entry point and alone is inadequate evidence for leaderboard scope. Scores and sampling not independently reviewed."
+      "limitations": "No model prompt/vote/workflow submitted; home page is an app-building entry point and alone is inadequate evidence for leaderboard scope. Scores and sampling not independently reviewed.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -694,7 +731,12 @@
       ],
       "evidence_locator": "src-llm-stats / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No API, model call or independent score/usage validation; about-page audience/customer figures are vendor claims and excluded."
+      "limitations": "No API, model call or independent score/usage validation; about-page audience/customer figures are vendor claims and excluded.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "licensing"
+      ]
     }
   },
   {
@@ -763,7 +805,11 @@
       ],
       "evidence_locator": "src-models-dev / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No endpoint payload downloaded, pricing validated or schema integrated; provider overrides can differ from model-only metadata."
+      "limitations": "No endpoint payload downloaded, pricing validated or schema integrated; provider overrides can differ from model-only metadata.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -819,14 +865,18 @@
       "canonical_url": "https://canrunllm.com/",
       "operator": "CanRun self-described independent project; person/legal entity unnamed",
       "product_scope": "PC/Mac/CPU local model-fit calculator, estimates and documented run commands.",
-      "version": "Unversioned home/about accessed 2026-10-18; about page states data updated 2026-10-06.",
+      "version": "Unversioned home/about accessed 2026-10-18; about page states data updated 2026-10-16 (the separate privacy-policy date remains 2026-10-06).",
       "source_ids": [
         "src-canrun",
         "src-canrun-about"
       ],
       "evidence_locator": "src-canrun / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No calculator submitted or command run; no operator established; separate product from canitrun.dev and canirun.ai."
+      "limitations": "No calculator submitted or command run; no operator established; separate product from canitrun.dev and canirun.ai.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -889,7 +939,11 @@
       ],
       "evidence_locator": "src-canitrun / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No workflow exercised; operator unconfirmed; multi-GPU layer-split assumptions are runtime-specific, not universal fit rules; distinct from CanRun and CanIRun.ai."
+      "limitations": "No workflow exercised; operator unconfirmed; multi-GPU layer-split assumptions are runtime-specific, not universal fit rules; distinct from CanRun and CanIRun.ai.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -956,13 +1010,18 @@
       "canonical_url": "https://modelfit.io/",
       "operator": "ModelFit; Peter Dekker self-described founder/maintainer, per official about page; legal entity unconfirmed",
       "product_scope": "Device-first local model recommendation, documented CLI, JSON/MCP and open compatibility dataset.",
-      "version": "Unversioned public pages accessed 2026-10-18; terms updated 2026-06-21; homepage dataset stamp 2026-10-13.",
+      "version": "Unversioned public pages accessed 2026-10-18; terms page shows last updated 2026-10-01 on review (an earlier cached extraction returned 2026-06-21); homepage dataset stamp 2026-10-13.",
       "source_ids": [
         "src-modelfit"
       ],
       "evidence_locator": "src-modelfit / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No CLI/MCP/API/workflow run; full-stack selection not established; immutable version not pinned."
+      "limitations": "No CLI/MCP/API/workflow run; full-stack selection not established; immutable version not pinned.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "licensing"
+      ]
     }
   },
   {
@@ -1025,7 +1084,12 @@
       ],
       "evidence_locator": "src-ollama / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No installation, model download, account or API call; no fitness/performance claims independently measured."
+      "limitations": "No installation, model download, account or API call; no fitness/performance claims independently measured.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "apis_and_integrations"
+      ]
     }
   },
   {
@@ -1090,7 +1154,11 @@
       ],
       "evidence_locator": "src-gpus-io / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken."
+      "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken.",
+      "updated_fields": [
+        "organization",
+        "capabilities"
+      ]
     }
   },
   {
@@ -1153,7 +1221,12 @@
       ],
       "evidence_locator": "src-vast / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No account, API key, credit purchase, rental or live price verification; capacity/performance claims excluded."
+      "limitations": "No account, API key, credit purchase, rental or live price verification; capacity/performance claims excluded.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "apis_and_integrations"
+      ]
     }
   },
   {
@@ -1217,7 +1290,14 @@
       ],
       "evidence_locator": "src-runpod / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No capacity, performance, API reliability or cost result verified."
+      "limitations": "No capacity, performance, API reliability or cost result verified.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1248,7 +1328,7 @@
       ]
     },
     "deployment_support": "Primary documentation: managed Cloud and self-hosted Community Edition via Docker Compose.",
-    "apis_and_integrations": "Primary documentation: REST integration, plugins and difyctl. DSL export includes orchestration, parameters and knowledge-base connections; content and third-party keys excluded by docs. Not exercised.",
+    "apis_and_integrations": "Primary documentation: REST integration, plugins and difyctl. DSL export includes orchestration, parameters and knowledge-base connections; actual knowledge-base content and third-party tool API keys are excluded. Secret-type environment variables may be included after user confirmation, so a DSL export is not necessarily free of secrets. Not exercised.",
     "licensing": "Modified Apache-2.0 with multi-tenant and frontend branding restrictions; not a blanket Apache license. Dataset and model rights separate.",
     "source_ids": [
       "src-dify"
@@ -1285,7 +1365,14 @@
       ],
       "evidence_locator": "src-dify / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Export roundtrip and component compatibility untested; docs make broad version-compatibility statements requiring falsification."
+      "limitations": "Export roundtrip and component compatibility untested; docs make broad version-compatibility statements requiring falsification.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1347,7 +1434,14 @@
       ],
       "evidence_locator": "src-langflow / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "API, portability, imports, compatibility and runtime behavior untested; export may include secrets depending on settings."
+      "limitations": "API, portability, imports, compatibility and runtime behavior untested; export may include secrets depending on settings.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1408,7 +1502,14 @@
       ],
       "evidence_locator": "src-flowise / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No workflow execution, integration compatibility, scale or security claim independently verified."
+      "limitations": "No workflow execution, integration compatibility, scale or security claim independently verified.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1473,7 +1574,14 @@
       ],
       "evidence_locator": "src-n8n / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Kit explicitly for testing/proof of concept; no deployment or compatibility exercised. Old sustainable-use-license URL returned Page Not Found."
+      "limitations": "Kit explicitly for testing/proof of concept; no deployment or compatibility exercised. Old sustainable-use-license URL returned Page Not Found.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1539,7 +1647,15 @@
       ],
       "evidence_locator": "src-skypilot / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No capacity, optimization, compatibility, failure recovery or savings measurement."
+      "limitations": "No capacity, optimization, compatibility, failure recovery or savings measurement.",
+      "updated_fields": [
+        "website",
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1602,7 +1718,14 @@
       ],
       "evidence_locator": "src-bentoml / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No deployment, composition or scaling test; documentation performance multiplier omitted as unreproduced."
+      "limitations": "No deployment, composition or scaling test; documentation performance multiplier omitted as unreproduced.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1661,7 +1784,14 @@
       ],
       "evidence_locator": "src-langfuse / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Terms redirect read; no contract/account entered, no trace content accessed, no performance reproduction."
+      "limitations": "Terms redirect read; no contract/account entered, no trace content accessed, no performance reproduction.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1722,7 +1852,14 @@
       ],
       "evidence_locator": "src-ragas / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "LLM-driven metrics not independent measurements of every application; no metric validity or dataset rights inspected."
+      "limitations": "LLM-driven metrics not independent measurements of every application; no metric validity or dataset rights inspected.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1784,7 +1921,14 @@
       ],
       "evidence_locator": "src-llamaindex / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No parsing, workflow, accuracy, uptime or compliance behavior verified."
+      "limitations": "No parsing, workflow, accuracy, uptime or compliance behavior verified.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1847,7 +1991,14 @@
       ],
       "evidence_locator": "src-langchain / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No agent build, deployment or compatibility workflow executed; framework license cannot be extended to all named products."
+      "limitations": "No agent build, deployment or compatibility workflow executed; framework license cannot be extended to all named products.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1907,7 +2058,14 @@
       ],
       "evidence_locator": "src-qdrant-bench / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Publisher acknowledges possible bias; results dated, configuration-specific and not reproduced. No vendor ranking inferred."
+      "limitations": "Publisher acknowledges possible bias; results dated, configuration-specific and not reproduced. No vendor ranking inferred.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -1970,7 +2128,14 @@
       ],
       "evidence_locator": "src-lm-eval / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No benchmark executed; repository's framework use does not certify all contributed tasks or comparability of published runs."
+      "limitations": "No benchmark executed; repository's framework use does not certify all contributed tasks or comparability of published runs.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -2029,7 +2194,14 @@
       ],
       "evidence_locator": "src-mcp-registry / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Current API schema/version and listing-data reuse not established by this read; individual server capabilities not validated."
+      "limitations": "Current API schema/version and listing-data reuse not established by this read; individual server capabilities not validated.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   },
   {
@@ -2090,7 +2262,14 @@
       ],
       "evidence_locator": "src-unsloth / rechecks / 2026-10-18",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff."
+      "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff.",
+      "updated_fields": [
+        "organization",
+        "capabilities",
+        "deployment_support",
+        "apis_and_integrations",
+        "licensing"
+      ]
     }
   }
 ]
