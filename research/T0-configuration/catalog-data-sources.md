@@ -1,7 +1,7 @@
 # T0: Catalog Data Sources & Freshness
 
 Issue: #41 · Contract: v1 1.0.0 (adopted in PR #44) · Assignees: @tynamite, @PUSHINGSQUARES
-Status: partial decision record for review, revision 5 (executable price-policy and jurisdiction cases; receiving acceptance pending) · Last updated: 2026-10-18
+Status: decision record for review, revision 6 (source-policy completion packet; current receiving decisions pending) · Last updated: 2026-10-18
 Deliverable path: `research/T0-configuration/catalog-data-sources.md` · Related: `component-schema-compatibility.md` (#40), `research/market/rights-validation.md` (#60), `research/market/integrations.json` (#55)
 
 This revision turns the interim positions posted in the [#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) into #41's record. T1 (#88) and T2 (#75) already apply them, and #60's source decisions are merged. The price-policy supplement below supplies a concrete proposal for the recorded @PUSHINGSQUARES #41/#39 review scope: price-specific freshness, region/currency and price conflicts. It does not claim that owner’s acceptance or change assignments.
@@ -205,7 +205,12 @@ The inventory stores per-source decisions; detailed claim eligibility additional
 | Q4 | Where fit reports live, and under what licence (#81 Q6) | #41 |
 | Q5 | Admit actual jurisdiction identities, containment/disjointness evidence, named-group definitions and provider-region mappings for the CD-9 candidate below | #41 with #9; #37 receives residency results and #40 owns successor-contract adoption |
 
-## Acceptance criteria coverage
+## Historical acceptance coverage before the completion packet
+
+This table preserves the earlier partial-record assessment. The separately dated
+[completion packet](#source-policy-completion-packet-2026-10-18) below distinguishes
+actual later receipts from remaining decisions; its current map supersedes these
+status descriptions without backdating a review or a source check.
 
 | Criterion (issue #41) | Where | Status |
 | --- | --- | --- |
@@ -367,3 +372,340 @@ receiving exact saved-build pins and changed-evidence handling. The active
 CD-2/CD-7 implementation slices and canonical market ledgers are unchanged.
 These concrete research mechanics do not close #41/#40 or supply an absent
 owner's receiving disposition.
+
+## Source-policy completion packet (2026-10-18)
+
+This appendix is the in-session source-policy engineer's research proposal under
+the user's delegated project engineering authority. The reviewed input is research
+main [`cae31f324f827cdeb73548b72cafd392dd777dfa`](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/cae31f324f827cdeb73548b72cafd392dd777dfa).
+It makes the existing policy and remaining receiving decisions concrete; it does
+not claim that an absent assignee has replied. Current independent review and
+delivery receipts must be added before this packet is treated as accepted.
+
+The scope is a finite initial source-policy catalogue, with an explicit route for
+later sources. Individual component research, cost aggregation and unit selection
+remain with their existing issues. No new vendor fact, rate, source-use grant,
+runtime, prototype, ruleset or frozen-v1 field is introduced. The historical
+price and CD-9 experiments above retain their own source pins, execution results
+and limits.
+
+### Initial source coverage and evidence identity
+
+The initial shortlist is the ten existing rows in
+[`integrations.json`](../market/integrations.json), joined through `source_ids` to
+[`sources.json`](../market/sources.json). The source register supplies publisher,
+URL, access result, version/date, region, confidence and limitations; integrations
+supplies access method, per-use decisions, terms URLs, cadence, last-check date
+and review routing. The [typed dictionary](#typed-source-policy-inventory-proposal)
+defines their types and distinguishes claim-level fields. A source-wide region
+such as “global website” is not the serving or billing region of a rate. Every
+price still needs the exact rate-level region, currency, unit and effective/access
+dates; an absent applicable field remains unresolved.
+
+| Existing source identity | Candidate research use and exact material boundary |
+| --- | --- |
+| `src-models-dev` | Provider/model discovery and repository compilation metadata, retaining the repository notice and separate upstream claim/measurement rights |
+| `src-modelfit` | The licensed hardware-fit dataset, labelled as its publisher's estimates; dataset, generator/CLI and unverified upstream measurements remain separate |
+| `src-llmfit` | Repository code/data discovery with its notice; the seed website's unconfirmed affiliation, model files and actual fit measurements remain separate from that repository licence |
+| `src-openrouter` | Manual, limited research citation; the current automated collection and commercial republication exclusions remain |
+| `src-mcp-registry` | Registry metadata discovery with source/annotation separation; server code, binaries and execution or security certification are outside that metadata use |
+| `src-hugging-face` | Factual repository identifiers and declared metadata with links; cards, weights, datasets and other material require their own applicable basis |
+| `src-artificial-analysis` | Manual research citation under the current exclusions; no product data-feed or commercial selection/ranking use is admitted |
+| `src-benchlm` | Distinguish publisher-owned service/compiled outputs from separately licensed original measurements and permitted quotations; no display/feed agreement is inferred |
+| `src-harness-bench` | Licensed paper material with author/version/notices; separately unlicensed repository tasks, code and trajectories stay excluded |
+| `src-gpus-io` | Discovery/terms evidence only for this product; its API retrieval, value display and export remain excluded by the actual project decision |
+
+These are cross-references to the [complete qualified source/use table and
+separately dated ten-source check](../market/rights-validation.md#ten-source-material-check-and-modelfit-resolution--2026-10-18),
+not new or broader permission determinations. The actual
+[#60 → #41 receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771)
+accepts this bounded material/use input and current-product exclusions. All ten
+integration rows remain **Not approved for integration**. A licence-only recheck
+does not advance an API, data-update or measurement observation. The earlier
+statement that #204 did not recheck seven sources remains true of that earlier
+pass; it does not erase the later ten-source documentary review.
+
+The shortlist is not an exhaustive list of publishers. The following policy
+coverage admits research categories while preserving the rule that a source
+without an applicable #60 row has no approved automated retrieval, product display
+or redistribution. A component note may retain its short source-linked factual
+paraphrase and an explicit unknown use decision. Adding a source, different
+material or a new use requires a dated source/material/use review; it does not
+inherit permission from a discovery catalogue.
+
+| Deployment mode / cross-mode source class | Initial coverage and existing research references | Boundary or reason a category does not apply |
+| --- | --- | --- |
+| API | Provider documentation, model cards, route/version records and pricing/billing/terms pages in [T1 provider evidence](../T1-model-selection/model-provider.md) and [context evidence](../T1-model-selection/context-window.md#evidence); models.dev and Hugging Face are discovery inputs at the scopes above | A provider-hosted opaque implementation does not supply a local hardware/engine benchmark. Route, model, account, feature and regional eligibility remain claim-specific; direct-provider values are not copied onto another serving route |
+| Managed | Exact provider/offering/region, capacity and responsibility records in [hosting](../T2-infrastructure/hosting.md), with separately dated provider price/terms material in [cost evidence](../T6-deployment-operations/cost-estimate.md#evidence) | An advertised region is not current quota/stock, private connectivity or a measured SLO. AWS/Azure price reuse is not silently admitted by the shortlist; the existing #39/#41 questions and per-use exclusions remain |
+| Self-hosted | Pinned model/card/licence, [engine-release documentation](../T2-infrastructure/inference-engine.md#evidence), [compute and hardware evidence](../T2-infrastructure/gpu-compute.md), and the qualified ModelFit/llmfit discovery inputs above | Repository licensing does not license the model or dataset. An estimated fit, support listing or published allocation is not an executed workload or available local memory; no cloud account/region is inferred for a local device |
+| Benchmark publications, all applicable modes | [Evaluation's protocol/evidence requirements](../T6-deployment-operations/evaluation.md) and the separate Harness paper/repository and BenchLM material decisions | Apply to an actual matching experiment, not automatically every candidate. Documentation, estimates and synthetic mechanics remain distinct from independent measurements; source rights and comparability are separate |
+| Community fit and jurisdiction material | The existing [community-evidence question](#open-questions) and [CD-9 candidate](#cd-9-jurisdiction-and-region-resolution-candidate-2026-10-18) define informational and future-admission boundaries | No real community measurement, jurisdiction list, named group or provider mapping is added here. Missing evidence is explicitly unknown; no automatic hardware, geographic, legal or provider-name inference is permitted |
+
+Publisher entries outside the ten-source shortlist are therefore explicit manual
+research inputs or future candidates, with their component evidence and unresolved
+uses retained. This is finite initial coverage across the three modes, not a
+promise that every provider, territory, price or hardware SKU is researched.
+
+For cross-record references, retain the repository commit, record path and local
+evidence-row ID together. A local `D1`, `E05` or `CW09` alone is not a globally
+unique source identity. This is a research citation convention, not a new wire
+field or a claim that a pin authenticates source truth.
+
+### Traceability of the carried conflict examples
+
+The three short examples above preserve earlier research adjudications. This
+appendix read their repository evidence registers on 2026-10-18; it did not
+re-fetch those publisher pages, run the engines or make an API request. The dates
+below are the actual historical checks recorded by their authors. The outcomes
+remain source-checked/unverified at that scope.
+
+| Carried example | Exact research and primary evidence | Date, scope and outcome boundary |
+| --- | --- | --- |
+| vLLM `v0.31.0` / Volta | [Pinned engine note, E05/E10/E27](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/cae31f324f827cdeb73548b72cafd392dd777dfa/research/T2-infrastructure/inference-engine.md#evidence); vLLM release [CUDA installation](https://github.com/vllm-project/vllm/blob/v0.31.0/docs/getting_started/installation/gpu.cuda.inc.md) and [quantization matrix](https://github.com/vllm-project/vllm/blob/v0.31.0/docs/features/quantization/README.md); actual [owner conflict decision](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) | Publisher documents checked 2026-10-16, owner decision accessed 2026-10-17. The release-specific minimum supersedes the positive matrix cells under that recorded decision. No conclusion about another release or runtime measurement; region/currency do not apply |
+| vLLM W8A8 / Arm CPU | [Pinned deployment note, D1/D31 and D-R3](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/cae31f324f827cdeb73548b72cafd392dd777dfa/research/T0-configuration/deployment-mode.md); publisher [quantization page](https://docs.vllm.ai/en/latest/features/quantization/) and [CPU quantization FAQ](https://docs.vllm.ai/en/latest/getting_started/installation/cpu/#which-quantization-configs-does-vllm-cpu-support) | Checked 2026-10-16; recorded page dates 2026-09-14 and 2026-10-15 respectively. These were mutable `latest` documents, not an independently pinned release test. The recorded specific limitation wins, with disputed/unverified retained; no claim of a current reread |
+| Bedrock / direct Sonnet 4.6 output limits | [Pinned context register CW09/CW10](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/cae31f324f827cdeb73548b72cafd392dd777dfa/research/T1-model-selection/context-window.md#evidence); [AWS model card](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-sonnet-4-6.html) and [Anthropic direct model page](https://platform.claude.com/docs/en/models/sonnet-4-6/overview); separate [2026-10-17 citation audit](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/cae31f324f827cdeb73548b72cafd392dd777dfa/research/T1-model-selection/citation-audit-2026-10-17.md) | Original check 2026-10-16, separate documentary recheck 2026-10-17. `bedrock-runtime`/model/profile and direct API are different scopes. The existing published token values are retained in their owning note, not new measurements or a cap for Sonnet 5.5; account/region entitlement stays separate and currency does not apply |
+
+### Source-policy rules in the existing #40 research format
+
+These proposed rule rows use the current
+[`rule-proposal.md`](../../templates/rule-proposal.md) template and
+[#40's decided outcome semantics](component-schema-compatibility.md#rule-format-and-outcome-semantics-decided).
+They make source-policy findings reviewable; they do not publish executable rules
+or turn a source-eligibility result into an overall component/build verdict.
+
+The following template fields apply to every row:
+
+- **Participating kinds/roles and pointers:** any selected catalog kind/role for
+  which a fact is consumed. Existing CatalogItem `/id`, `/version`, `/provenance`
+  and Pricebook `/rates` entries retain their frozen meaning. Exact claim,
+  requested/supported-list completeness, conflict and per-use rights references
+  are the conceptual research fields above; their successor JSON pointers remain
+  a #40 decision. No invented pointer is sent to v1.
+- **Evidence and labels:** the existing #41 policies, actual
+  [#75 owner adoption](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927),
+  [checked/verified acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857),
+  and [#60 current material/use decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771)
+  are project primary decisions. The applicable fact still needs its own primary
+  source, exact scope, date and grade. Documentation-only passes remain unverified;
+  a synthetic example supplies no independent factual verification.
+- **Dependencies/consumers:** #40 reviews these rule proposals; #41 owns source
+  policy, #39 meters/aggregation, #42 saved evidence, #5/#6/#9/#14 the relevant
+  component facts, and #36 comparable experiment conditions. No new execution-order
+  dependency is introduced.
+- **Version/migration:** this is the dated `DS` research proposal revision 1.
+  Frozen v1 and historical results stay intact. A future released mapping must
+  identify its ruleset/source-policy revision and preserve old findings rather
+  than relabel them. Proposed fixed severity is separate from outcome, reason and
+  evidence label.
+
+#### DS-R1: Exact fact scope before use
+
+- **Applicability:** a selected component, quote or comparison would consume a fact.
+- **Assertion and source:** the fact's actual artifact/version, provider/route,
+  conditions and relevant time/region/currency cover that use, under EV-1 and the
+  existing [scope and price-eligibility policy](#conflict-resolution).
+- **Severity / missing data:** `error`, proposed `on_unknown: review`. Missing,
+  withheld or unresolved binding is `unknown`; no latest version, empty condition,
+  inferred region or default source currency can supply it.
+- **Explanation/remediation:** identify the missing or mismatched source scope;
+  obtain a matching source/answer or keep the dependent result unresolved.
+- **Synthetic examples:** matching release and documented route → `pass` for
+  scope only; known other release/route applied to this selection → `fail`;
+  unresolved account/region condition → `unknown`; no fact consumed → `skipped`.
+
+#### DS-R2: Complete evidence for an omission-based negative
+
+- **Applicability:** a support-membership comparison uses requested and supported
+  values after DS-R1 eligibility.
+- **Assertion and source:** use the adopted
+  [#75 completeness policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)
+  and its [scoped owner constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407).
+  A documented member is supported; an eligible explicit unsupported statement can
+  prove a negative. Absence only proves a negative with complete applicable source
+  coverage and, where ANY logic requires it, complete requested coverage.
+- **Severity / missing data:** `error`, proposed `on_unknown: review`. Missing or
+  unmarked lists are unresolved, not exhaustive; empty/unknown requested scope and
+  ineligible evidence cannot silently pass. Equal-rank opposite claims use DS-R3.
+- **Explanation/remediation:** retain member-level reasons and source/version
+  completeness; obtain the missing complete evidence or choose an evidenced member.
+- **Aggregation:** retain all member rows and the declared ANY/ALL quantifier.
+  One negative member cannot by itself fail ANY; one positive member cannot by
+  itself pass ALL. Required requested/source completeness is assessed separately:
+  in particular, ANY failure needs complete requested coverage. A member outcome
+  does not assert either list is complete.
+- **Synthetic per-member examples:** an explicitly supported requested member →
+  `pass`; a known unsupported member, or its complete applicable exclusion →
+  `fail`; an absent member of an unmarked researched subset → `unknown`;
+  a known nonapplicable member comparison → `skipped`. These are member outcomes,
+  not an aggregate result.
+
+#### DS-R3: Preserve the resolved interpretation and dispute
+
+- **Applicability:** potentially competing observations address the same claim
+  scope; first establish whether their inventory and eligibility are known.
+- **Assertion and source:** apply the [five-step conflict order](#conflict-resolution)
+  once, retain the winning and superseded references and deciding step, and carry
+  a disputed flag when the adopted policy requires it. Effective time is distinct
+  from collection time. A more recently fetched out-of-scope claim cannot win.
+- **Severity / missing data:** `warning`, proposed `on_unknown: review`. Unresolved
+  competitor inventory or eligibility is `unknown`, as is a genuine equal-rank
+  yes/no tie, with the tie disputed. A known inventory with no competing eligible
+  claims is `skipped` for this conflict rule. Without eligible underlying evidence,
+  the dependent fact/compatibility decision remains `unknown`. DS-R1 separately
+  retains `fail` for a known scope mismatch applied to the use, versus `unknown`
+  for an unresolved binding.
+  Equal-rank eligible numeric values use the conservative value in the actual
+  rule's direction; this does not change the underlying rule's fixed severity.
+- **Explanation/remediation:** show the policy step and unresolved difference;
+  seek better scoped evidence or independent support rather than hiding a conflict.
+- **Synthetic examples:** retaining the more specific applicable requirement with
+  both sources and its deciding step → `pass` for the resolution procedure;
+  knowingly choosing an excluded generic value instead → `fail`; equally ranked
+  opposite yes/no claims → `unknown` and disputed; unresolved competitor eligibility
+  → `unknown`; a known inventory with no competing eligible claims → `skipped`.
+  Passing this procedure does not mean the selected component itself is compatible.
+
+#### DS-R4: Current-state eligibility without expiring retained facts
+
+- **Applicability:** a current-state fact, such as a currently offered price or
+  availability, is presented as eligible for a current recommendation or current
+  budget comparison, rather than solely a dated historical observation. Consuming
+  an immutable version-pinned fact in a current recommendation does not itself
+  require a refresh; relevant correction and changed-selection events retain
+  their separate existing handling.
+- **Assertion and source:** use the [price supplement](#freshness), exact source
+  scope, documented validity interval and successful applicable current source
+  check. The [saved-build invalidation proposal](saved-shared-builds.md#invalidation-triggers)
+  retains selected evidence and distinguishes re-evaluation from loss of history.
+- **Severity / missing data:** `warning`, proposed `on_unknown: review`. An absent
+  or failed required current refresh leaves current eligibility `unknown`. A known
+  expired rate is ineligible for that current use. Without an eligible replacement,
+  the dependent current quote/aggregate/budget decision remains unknown, not zero
+  cost, a budget failure or a newly invalid historical build.
+- **Explanation/remediation:** retain the prior quote's exact inputs and as-of
+  date where permitted, show that current evidence is unavailable, and retry or
+  obtain a new eligible snapshot. Do not invent a stale-after duration.
+- **Synthetic examples:** successful scoped current check with applicable validity
+  → `pass` for current eligibility only; a current label knowingly applied outside
+  the selected rate's validity → `fail` for that label/use; current refresh failed
+  → `unknown`; an immutable version-pinned fact outside this current-state scope,
+  or a permitted solely historical observation → `skipped` by this rule.
+
+#### DS-R5: Exact source material and intended use
+
+- **Applicability:** evidence would be automatically retrieved, displayed or
+  redistributed, or reused for a different material/use scope.
+- **Assertion and source:** an actual applicable source/material/use decision
+  covers the operation and its conditions, using the
+  [qualified #60 table](../market/rights-validation.md#decisions) and later explicit
+  current-product exclusions. Public readability, a compilation licence, a paid
+  access plan or an attribution string does not supply missing permission.
+- **Severity / missing data:** `error`, proposed `on_unknown: block`. Known excluded
+  use → `fail`; unestablished applicable permission → `unknown` and excluded from
+  that intake while its legal scope stays unknown. Conditions are evidence to
+  review, not prose automatically executed as entitlement.
+- **Explanation/remediation:** identify material, use, conditions and deciding
+  receipt; omit or hide the affected values, use an independently reviewed
+  alternative, or return for a scoped review. A rights change rechecks affected
+  current and historical disclosures without deleting unaffected evidence.
+- **Synthetic examples:** a specifically reviewed licensed metadata use with its
+  required notices → `pass` for that use only; excluded current-product feed →
+  `fail`; no applicable source/use row → `unknown` and excluded; no covered
+  retrieval/display/redistribution operation → `skipped`. No example is a grant.
+
+All five rows are **proposed research mechanics**, not independently verified
+vendor compatibility rules. No new external hypothesis or unsupported numeric
+claim is adopted; unknown source facts remain unknown rather than being promoted
+through a policy example. Their receiving decisions below remain separate from
+the earlier prototype tests.
+
+### Exact price and saved-evidence interface for review
+
+The proposed #41 → #39 disposition is deliberately narrower than every historical
+cost-policy proposal. It preserves exact rate identity, source currency, billing
+unit, effective interval, provider/account/service/region and other eligibility
+conditions. Scope is resolved before recency and before any cost arithmetic.
+An unavailable meter or condition cannot become a covered zero-cost line.
+
+The [dated USD cost-policy preview](../T6-deployment-operations/cost-estimate.md#usd-cost-policy-preview--2026-10-18)
+supplies only an estimate-currency preference when no explicit estimate currency
+is supplied. The T0 budget's currency remains explicit; rate currencies remain as
+published. This preference supplies no FX rate or eligible conversion policy,
+cannot compare unlike currencies against a budget, and cannot replace an unknown
+source currency. The older cost narrative's global/reference-region fallback,
+ECB display-conversion choice and FX band remain their stated proposals. This
+packet neither adopts them nor treats an unknown residency/region answer as one
+of those reference locations. #39 retains those separate pricing decisions.
+
+The proposed #41 → #42 disposition distinguishes three questions: whether retained
+evidence can still be reproduced exactly; whether a new current quote is eligible;
+and whether its values may be disclosed under the current source/use decision.
+A failed current refresh does not rewrite the old quote's amount, source date or
+prior outcome and does not alone destroy reproducibility from available permitted
+pins. Explicit expiry can make a quote ineligible for current use while leaving
+its historical meaning intact. Conversely, a reproducible old quote cannot prove
+current availability, price, rights or budget eligibility. Missing retained pins
+or an actual disclosure restriction keep their own unavailable/withheld result.
+
+Selected version/evidence/ruleset/graph/contract/rights changes and build edits
+re-evaluate the affected scope. A newer unrelated release or elapsed time alone
+does not invalidate a build. Retain old and new views, their independent source
+and policy identities and visible unknown/unpriced states; do not manufacture a
+complete quote merely because one unchanged line is reproducible.
+
+### Eight outgoing receiving decisions to record
+
+The following packet describes exactly what each issue is asked to consume. It
+does not reverse an incoming producer receipt or attribute an in-session decision
+to a nonparticipating assignee. Existing actual receipts keep their exact scope;
+the current appendix needs its own linked independent/receiving review. No row
+below is marked accepted solely because a prototype passed or its PR merged.
+
+| #41 consumer | Concrete research input and required boundary | Existing receipt and current decision to record |
+| --- | --- | --- |
+| #40 | The four evidence grades and checked/verified mapping, DS-R1–R5 research proposals, exact source identity and source/output-label separation. Fixed severity, outcome, dispute and evidence grade remain distinct; unknown fields and unreleased pointers stay explicit | [Original grade/conflict owner adoption](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927) and current decided semantics exist. Review this appendix and its generic template/output interface; no field, wire, ruleset or migration adoption is requested |
+| #39 | Exact price eligibility and current-state policy, missing-meter coverage, source currency versus optional estimate preference, per-use rights and the bounded interface immediately above | [#60's actual exclusion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771) and separate component rate/quantity intakes retain their scope. Record the current price-supplement decision; do not adopt FX, default region, aggregation, a rate or a quote through it |
+| #42 | The three separate retained/current/disclosure questions, selected-input change events, failed refresh and explicit rate validity, with historical evidence and unknown-budget states preserved | [Original change-event review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384) and [owner confirmation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6233360821) remain accepted. Record the later price/current-refresh interface; do not adopt a full snapshot implementation, migration or privacy policy |
+| #5 | Provider/route/account/version scope, primary source dates, evidence grades and per-material/use boundaries; an accessible model endpoint is not account entitlement, a current price or a source-use grant | Review the corresponding [provider evidence](../T1-model-selection/model-provider.md) against this policy. Prior #5 producer receipts and #60 rights intake are not by themselves a current #41 → #5 response |
+| #6 | Model/revision/variant/card/licence provenance, claim-level grades, support completeness and scoped discovery-source constraints; derivatives, weights and benchmark measurements keep separate evidence/use bases | Review [model selection](../T1-model-selection/ai-model.md) and its source references. No model fact, capability, licence interpretation or current release is changed here; link the actual current receiving decision |
+| #9 | Provider/offering/region/current-state and responsibility facts, conservative support/source conflict handling and the admitted-versus-future mapping boundary | Review [hosting evidence](../T2-infrastructure/hosting.md). No stock/quota/SLO, local-network deployment or real CD-9 geography is inferred. Hosting's already completed outgoing handoffs do not substitute for this direction |
+| #14 | Exact embedding model/revision/route and query/document/index-generation evidence, with recorded grade/scope and no similarity-quality inference from vector width alone | Coordinate with the [active embedding amendment](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/384). That writer retains both embedding paths and its own source/compatibility decisions. Record policy intake against the actual reviewed version, without adopting an unseen amendment |
+| #36 | Evidence-grade and R1–R15/control distinctions, protocol/selection-specific comparability, current rights boundaries and unknown handling; documentary support is not a paired benchmark measurement. Additional E-H5 sample-size and E-H12 A/B/C-tier proposals remain unadopted by this packet | Coordinate with the [existing evaluation audit](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36#issuecomment-6253043241) and [bounded evaluation correction](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/382). Review the actual current interface; preserve its independent source findings and do not imply an evaluation run, example-display permission or reverse a producer receipt |
+
+### Accountable follow-ups and completion map
+
+The coordinating project research engineer using **CompleteDotTech** takes the
+follow-up routing and evidence reconciliation for this packet under the existing
+user delegation. This is an actual engineering role, not a claim to be @tynamite,
+@PUSHINGSQUARES or another absent owner. Existing issue assignees remain unchanged.
+
+| Remaining question | Named follow-up and boundary |
+| --- | --- |
+| Current price supplement and later pricing policy | CompleteDotTech prepares the scoped #39/#42 decisions for independent review; @PUSHINGSQUARES and @tynamite retain their existing #41/#39 policy scopes. FX, region fallback and aggregation proposals remain separate |
+| Final source/conflict/verification representation | CompleteDotTech routes DS-R1–R5 to the current #40 review; @tynamite's actual decided outcome/grade scope is preserved. Final wire/ruleset/migration work is not implemented by this note |
+| Community evidence admission and fit-report location/licence | CompleteDotTech records any proposed real material/use and routes it to #41/#60 and CD-8 owners before admission. Existing community results stay informative; this packet admits no report or storage service |
+| Real jurisdiction/provider-region source admission | CompleteDotTech coordinates any requested exact identity/group/disjointness/provider-context source packet with #9/#41 and the #37/#40 consumers. Until such evidence is admitted, the CD-9 prototype remains synthetic and actual missing mappings unknown |
+| Additional catalogue sources or changed source/material/use | CompleteDotTech routes the new primary evidence and intended operation through #41/#60. The finite shortlist, current exclusions and historical source dates cannot be silently widened |
+
+| Literal #41 research criterion | Evidence in this record | Current completion-packet state |
+| --- | --- | --- |
+| Source inventory with terms-of-use findings linked to primary documents | Initial ten-source identity table, joined existing registers, qualified completed #60 review and explicit treatment of other manual/future sources | Concrete bounded input; current appendix review pending |
+| Evidence-grade definitions adopted by #40 | Actual #75 owner adoption, #127 correction and current #40 decided semantics | Original adoption established; this appendix does not demand a successor schema release |
+| Freshness and staleness policy proposal | Existing dated/pinned classes, no arbitrary TTL, price supplement and DS-R4 | Proposal supplied; later scoped #39/#42 disposition still needs its actual receipt |
+| Conflict-resolution rules | Existing five-step policy, traced examples, current #40 semantics and DS-R3 | Original policy established; new presentation requires review |
+| List of change events handed to #42 | Original #114/issue42 confirmations and exact retained/current/disclosure packet | Original handoff established; later current-price scope separately pending |
+| Decision record merged at `research/T0-configuration/catalog-data-sources.md` following the research method | Existing #127/#137 and CD-9 deliveries at this path | Existing record merged; current appendix awaits its own normal reviewed delivery |
+| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Explicit API/managed/self-hosted source coverage and cross-mode exclusions above | Finite candidate scope proposed for review; no full component catalogue claim |
+| Comparison fields defined with type, unit, and evidence requirement | Existing typed dictionary and explicit integrations/source-register join; price-level scope remains separate | Research definition supplied; final new wire locations remain #40 proposals |
+| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | DS-R1–R5 with all generic template fields, source decisions, examples and version boundary | Concrete proposals, not a released ruleset or verified vendor behavior |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Existing claim registers, qualified rights review and exact traceability table; current appendix adds no vendor rate or measurement | Dates and scope preserved; current source review must verify these references rather than claim a new external check |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Exact receiving packet with historical receipts separated | Not yet complete: add actual linked current dispositions before closure assessment |
+| Open questions recorded with a named follow-up owner | Accountable routing table above, original owners and explicit admission boundaries | Named routing supplied; independent review and current delivery remain necessary |
+
+Research completion is assessed against these literal criteria after the actual
+reviewed amendment and receiving decisions are delivered. It does not require
+buying an agreement merely to exclude a source, executing a provider workload,
+implementing native applications, or releasing the successor contract. Any
+specific factual claim or source use actually admitted still needs its real
+evidence and applicable authority. Nothing in this packet marks the issue,
+Project state or another component complete.
