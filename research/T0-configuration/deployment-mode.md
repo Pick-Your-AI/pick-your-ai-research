@@ -640,7 +640,20 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q10 | How are hybrid builds saved, shared and compared? | #42 | — |
 | Q11 | What remains after a report or its attribution is deleted (nothing, a tombstone, or aggregate statistics), and how long are reports and raw logs kept? | #41 | #60 |
 
-Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #30, #31, #32, #33, #36, #37, #39, #40, #41, #42, #48, #52, #57, #60, #62. #30 decides how licence conditions apply to fine-tuning and derivatives (D-R2a/b, CD-6); #30, #31 and #32 consume the organisation attestations (CD-12).
+### Recorded receiving dispositions
+
+The [#3 handoff request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6238501962) includes @tynamite's **#60 acceptance of the community-dataset-rights handoff**, with #60's own handoffs retained. This is routing/ownership acceptance, not a blanket import or redistribution grant.
+
+[@zwright8's scoped response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6242696588), reviewed against main `7acbefbf4e4e700231e88be272bc89e3a73dde15`, records:
+
+| Consumer | Accepted scope and retained constraint |
+| --- | --- |
+| #5 | Per-offering API/managed data terms, region and account conditions; unavailable entitlements remain unknown |
+| #6/#30 | Source-specific licence, weight-access and derivative-lineage evidence; `derived_from` grants no rights, and generic capability does not establish fine-tuning permission |
+| #11 | Exact artifact/base/tokenizer/template, engine/build/plugins, backend/kernel, precision, ISA and draft-model tuple; missing evidence unresolved and incomplete lists cannot manufacture negatives |
+| #40 | D-R1–D-R8, EV-1 and CD-1–CD-12 proceed through reviewed version/migration proposals; frozen v1 and historical outcomes stay unchanged |
+
+The response retains operator/capacity mode classification and the training/serving distinction; it does not approve every external claim. Remaining scopes are #9, #10, #31, #32, #33, #36, #37, #39, #41, #42, #48, #52, #57 and #62, plus other co-assignees' scopes in the accepted rows. #30/#31/#32 retain their distinct CD-12 and derivative-permission decisions. No receiving disposition is inferred from authorship.
 
 ## Acceptance criteria coverage
 
@@ -652,9 +665,9 @@ Handoffs to confirm (none confirmed yet): #5, #6, #9, #10, #11, #30, #31, #32, #
 | Comparison fields | [Field dictionary](#field-dictionary), [EV-1](#evidence-eligibility-ev-1) | Revised: licence answers typed by condition kind; evidence checked by type; remaining items recorded as CDs |
 | Rules in the shared format; hypotheses separated | [Compatibility proposals](#compatibility-proposals) | Revised: common template fields; split rules state their scope; evidence moved to EV-1 |
 | Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; vLLM CPU documentation conflict resolved by #41's conflict order |
-| Handoffs confirmed | [Open questions](#open-questions-and-handoffs) | Open |
+| Handoffs confirmed | [Recorded dispositions](#recorded-receiving-dispositions) | Partial, scoped receipts only |
 | Open questions with owners | [Open questions](#open-questions-and-handoffs) | Partly met: Q8 and Q9 point to issues with no assignee set |
-| Decision record merged | — | Open |
+| Decision record merged | PR #81 | Merged research; remaining criteria and handoffs separate |
 
 ## Evidence
 

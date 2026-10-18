@@ -120,6 +120,44 @@ A newer release alone doesn't invalidate a build; it is shown as "newer version 
 | Benchmark publications | Papers, leaderboards | Manual citation; display per terms | Protocol and version pinned (#36, #62) |
 | Community fit reports | LocalScore, LocalMaxxing and others (#81) | Link or import only where terms allow (#81 Q7) | Informative until CD-8 |
 
+## Typed source-policy inventory (proposal)
+
+This dictionary separates **existing inventory fields** in [`research/market/integrations.json`](../market/integrations.json) from **claim-level policy dimensions** described above. It describes research records and existing decisions, not a new CatalogItem schema or a permission grant. Inspected 2026-10-18 against the merged inventory and this policy. Final wire locations and any new types remain proposals through #40; prices retain the frozen Pricebook schema until a reviewed successor exists.
+
+| Inventory field | Type / unit | Evidence and unknown handling |
+| --- | --- | --- |
+| `product_id`, `source_ids` | String identifier; list of source identifiers | Resolve the product/source records; an identifier is not proof that a particular claim was read |
+| `investigation_rank` | Integer ordering value | Research sequencing only; not a quality, permission or confidence score |
+| `access`, `rights`, `maintenance`, `next_action` | Text | Describe documented access, scoped terms and remaining work; prose cannot silently become executable entitlement predicates |
+| `review_owner`, `consumer_issue`, `status` | Owner string, integer issue number, status text | Routing metadata; live assignees govern ownership. A terms grant does not imply production integration approval |
+| `access_date`, `last_checked` | Calendar date strings, YYYY-MM-DD | Record actual inspection; neither is a price's effective date or a promise that evidence remains current |
+| `terms_urls` | List of public source URL strings | Identify the governing terms/license and scope; public access alone grants no reuse rights |
+| `reuse_permitted` | Object keyed by automated_retrieval, internal_research, display, redistribution | Keep each use separate; a display grant does not authorize automated collection |
+| Each reuse decision | `value` yes/no/unclear plus `conditions` and `basis` text | Conditions remain binding. No applicable grant → no for commercial display/redistribution; ambiguous terms → unclear. A missing row never becomes yes |
+| `update_cadence` | Text description | Publisher/source observation, not an invented refresh TTL |
+| `rights_evidence_grade` | Research grade text | Primary documentation identifies the source class; it does not certify independent reproduction or replace claim-level provenance |
+
+The inventory stores per-source decisions; detailed claim eligibility additionally needs the following **conceptual fields**, without asserting a final JSON shape:
+
+| Policy dimension | Known-value type / unit | Required scope / unresolved handling |
+| --- | --- | --- |
+| Claim identity and value | Identifier, typed scalar/list/object and explicit unit | Preserve raw value/unit plus normalized value and conversion method. No conversion between incompatible quantities |
+| Source and version binding | URL/reference, publisher, version/revision and capture date | Match exact artifact/offering/route and conditions. Missing binding remains unresolved, not latest-by-default |
+| Evidence grade and verification | Research grade, frozen-v1 provenance status, links to independent support when claimed | Apply the checked/verified mapping above; historical verified labels do not by themselves establish independent support |
+| Support-list completeness | Explicit completeness assertion tied to the applicable source/version | Omitted member of a researched subset is unknown, not unsupported. Wire representation belongs to CD-3 |
+| Freshness class | Version-pinned fact or current-state fact | Pinned facts do not expire arbitrarily; current recommendations require source rechecking and show dates |
+| Price eligibility | Exact item/version/provider, meter/unit, region, currency, effective interval and account/plan/commitment/cache/batch/volume conditions | No missing condition is a wildcard; unknown currency is not USD; effective date differs from capture date |
+| Price amount | Decimal with currency and per-meter unit | Zero only when documented in eligible scope. Missing meter remains uncovered. Currency conversion is not authorized by this policy |
+| Rights eligibility | Per-use disposition, conditions, governing reference and decision date | Rights and statistical comparability are separate gates. Hide affected values when the applicable rights decision requires it |
+| Conflict resolution | Competing claim references, selected interpretation, deciding step and disputed flag | Normalize → scope → version/date → authority → conservative equal-rank numeric value; nonnumeric ties stay unknown. Preserve discarded claims as permitted evidence history |
+| Change events | Event identity/type, affected selected tuple and referenced revisions | Re-evaluate affected selections under #42; a new unrelated release alone does not invalidate a build |
+
+### Existing receipts and remaining review
+
+- [@tynamite's T4 evidence-interface acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857) covers checked-versus-verified labels, dated hosted-service snapshots, actually read rendered documentation, and the per-source rights inventory. It is not acceptance by every consumer.
+- [The #114 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384) confirms the original #41 change-event handoff as #42 co-assignee/#40/#41 owner. The later price supplement's expired-validity and failed-refresh semantics still need their own #39/#42 scoped dispositions.
+- #40's merged outcome semantics use the evidence/conflict distinction. This does not resolve CD-3's final representation or every co-owner response. @PUSHINGSQUARES retains #41's price-policy acceptance scope; #39 owns meters and aggregation. No receipt here grants source rights beyond its recorded source/use conditions.
+
 ## Open questions
 
 | # | Question | Accountable |
@@ -137,11 +175,11 @@ A newer release alone doesn't invalidate a build; it is shown as "newer version 
 | Evidence-grade definitions adopted by #40 | Evidence grades and labels | Proposed; applied by T1 and T2 |
 | Freshness and staleness policy | Freshness; price eligibility supplement | Concrete proposal with synthetic cases; receiving acceptance pending |
 | Conflict-resolution rules | Conflict resolution | Proposed; applied by T1 and T2 |
-| Change events handed to #42 | Change events | Proposed |
+| Change events handed to #42 | Change events; #114 review receipt | Original handoff confirmed; later price supplement receipt pending |
 | Deployment modes covered | Applies to all modes; opaque-endpoint evidence per #81 | Proposed |
-| Comparison fields with type, unit, evidence | `integrations.json` fields | Partial |
+| Comparison fields with type, unit, evidence | Typed source-policy inventory; existing `integrations.json` | Research dictionary supplied; new claim wire shapes remain proposals |
 | Rules in #40's format | Conflict order feeds #40's outcome semantics | Proposed |
 | Primary sources with access dates | #60 table and `integrations.json` (2026-10-16) | Met for the 10 sources |
-| Handoffs confirmed | — | Open |
+| Handoffs confirmed | Existing receipts and remaining review | Partial; original #42 change-event and T4 evidence scopes recorded |
 | Open questions with owners | Open questions | Met |
-| Decision record merged | PR #127 | Initial partial record merged; supplement requires review |
+| Decision record merged | PR #127; price supplement PR #137 | Merged partial research; receiving acceptance remains separate |
