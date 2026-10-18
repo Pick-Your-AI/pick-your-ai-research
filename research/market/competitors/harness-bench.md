@@ -38,7 +38,7 @@ Harness Bench is not a selection tool. Its user workflow is reading results.
 | (b) Code licence | `gh api repos/Qihoo360/harness-bench/license` returned 404; repository metadata `license: null`. No licence grant | Observed | [repository](https://github.com/Qihoo360/harness-bench) |
 | (c) Data reuse | Paper is CC BY 4.0 (arXiv licence link). Repository tasks, trajectories and catalogue carry no licence | Observed | [arXiv](https://arxiv.org/abs/2605.27922) |
 
-Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): display only results and text published in the paper, attributed and pinned to v2; repository content not reusable. This profile agrees.
+Historical comparison with merged [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82): display only results and text published in the paper, attributed and pinned to v2; repository content not reusable. This profile agrees.
 
 ## Counterexample
 
@@ -47,7 +47,7 @@ Pending [PR #82](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/82):
 
 ## Matrix consistency
 
-Pending [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `benchmarks` and `harness_eval` Documented; `saved`, `share`, `export`, `model_versions` Unknown. Agrees. The repository tree is a code artifact, not a build export.
+Historical comparison with merged [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87): `benchmarks` and `harness_eval` Documented; `saved`, `share`, `export`, `model_versions` Unknown. Agrees. The repository tree is a code artifact, not a build export.
 
 ## Open questions and routing
 
