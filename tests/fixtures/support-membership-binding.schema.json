@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-3 typed membership query and result",
+  "description": "Research candidate only; result shape is $defs/result. No source admission or frozen contract extension.",
+  "type": "object",
+  "required": ["x_t0_support_query"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_support_query": {
+      "type": "object",
+      "required": ["proposal_version", "query", "scope", "cohort", "answer_states_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd3-0.1"},
+        "query": {"$ref": "#/$defs/query"},
+        "scope": {"$ref": "#/$defs/scope"},
+        "cohort": {"$ref": "#/$defs/reference"},
+        "answer_states_sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string", "minLength": 3, "maxLength": 120,
+      "pattern": "^[a-z0-9]", "not": {"pattern": "[^a-z0-9._:-]"}
+    },
+    "text": {
+      "type": "string", "minLength": 1, "maxLength": 200,
+      "pattern": "\\S", "not": {"pattern": "[\u0000-\u001f\u007f]"}
+    },
+    "pointer": {
+      "type": "string", "minLength": 1, "pattern": "^/(?:[^~]|~[01])*$",
+      "not": {"pattern": "[\u0000-\u001f\u007f]"}
+    },
+    "digest": {
+      "type": "string", "minLength": 64, "maxLength": 64,
+      "not": {"pattern": "[^a-f0-9]"}
+    },
+    "kind": {
+      "enum": ["workload", "deployment_mode", "model_provider", "model", "context_policy", "hosting_platform", "accelerator", "compute_profile", "inference_engine", "storage", "data_source", "knowledge_base", "embedding_model", "vector_database", "rag_pipeline", "agent_framework", "tool", "mcp_server", "memory_store", "integration", "training_framework", "training_compute", "training_dataset", "fine_tuned_model", "guardrail", "evaluation_suite", "deployment_target", "monitoring_stack", "cost_policy"]
+    },
+    "reference": {
+      "type": "object", "required": ["id", "version"], "additionalProperties": false,
+      "properties": {"id": {"$ref": "#/$defs/id"}, "version": {"$ref": "#/$defs/text"}}
+    },
+    "item": {
+      "type": "object", "required": ["id", "version", "kind"], "additionalProperties": false,
+      "properties": {"id": {"$ref": "#/$defs/id"}, "version": {"$ref": "#/$defs/text"}, "kind": {"$ref": "#/$defs/kind"}}
+    },
+    "scope": {
+      "type": "object", "required": ["selection_id", "catalog_sha256", "item", "property", "conditions_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "selection_id": {"$ref": "#/$defs/id"}, "catalog_sha256": {"$ref": "#/$defs/digest"},
+        "item": {"$ref": "#/$defs/item"}, "property": {"$ref": "#/$defs/pointer"},
+        "conditions_sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "query": {
+      "type": "object", "required": ["id", "version", "requirement", "severity"], "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/id"}, "version": {"$ref": "#/$defs/text"},
+        "requirement": {"enum": ["any", "all"]}, "severity": {"enum": ["info", "warning", "error"]}
+      }
+    },
+    "values": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/text"}},
+    "requirement_values": {"allOf": [{"$ref": "#/$defs/values"}], "minItems": 1},
+    "eligibility": {"type": ["boolean", "null"]},
+    "input": {
+      "type": "object", "required": ["state"], "additionalProperties": false,
+      "properties": {
+        "state": {"enum": ["provided", "unknown", "missing", "withheld", "not_applicable"]},
+        "value": {}, "source": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "source_path": {"$ref": "#/$defs/pointer"}
+      },
+      "if": {"properties": {"state": {"const": "provided"}}},
+      "then": {"required": ["value", "source_path"]},
+      "else": {"not": {"anyOf": [{"required": ["value"]}, {"required": ["source"]}]}}
+    },
+    "boolean_input": {"allOf": [{"$ref": "#/$defs/input"}], "properties": {"value": {"type": "boolean"}}},
+    "values_input": {"allOf": [{"$ref": "#/$defs/input"}], "properties": {"value": {"$ref": "#/$defs/values"}}},
+    "requirement_input": {"allOf": [{"$ref": "#/$defs/input"}], "properties": {"value": {"$ref": "#/$defs/requirement_values"}}},
+    "outcome": {"enum": ["pass", "fail", "unknown", "skipped"]},
+    "finding": {
+      "type": "object", "required": ["value", "outcome", "reason", "disputed"], "additionalProperties": false,
+      "properties": {
+        "value": {"$ref": "#/$defs/text"}, "outcome": {"enum": ["pass", "fail", "unknown"]},
+        "reason": {"enum": ["documented_member", "explicit_unsupported", "exhaustive_absence", "support_list_missing", "unmarked_absence", "opposite_equal_rank_claims"]},
+        "disputed": {"type": "boolean"}
+      }
+    },
+    "decision": {
+      "type": "object", "required": ["outcome", "reason", "source_id", "findings", "disputed", "evidence_label"],
+      "additionalProperties": false,
+      "properties": {
+        "outcome": {"$ref": "#/$defs/outcome"},
+        "reason": {"enum": ["selection_not_enabled", "selection_activation_unknown", "selection_scope_missing", "support_scope_mismatch", "applies_when_evidence_unresolved", "applies_when_evidence_ineligible", "applicability_unknown", "not_applicable", "requested_evidence_unresolved", "requested_evidence_ineligible", "requirement_unknown", "cohort_evidence_unresolved", "cohort_evidence_ineligible", "unsupported_claims_unresolved", "any_membership", "all_membership"]},
+        "source_id": {"$ref": "#/$defs/id"}, "findings": {"type": "array", "items": {"$ref": "#/$defs/finding"}},
+        "disputed": {"type": "boolean"}, "evidence_label": {"const": "unverified"}
+      }
+    },
+    "result": {
+      "type": "object", "required": ["x_t0_support_result"], "additionalProperties": false,
+      "properties": {
+        "x_t0_support_result": {
+          "type": "object", "additionalProperties": false,
+          "required": ["proposal_version", "binding_sha256", "answer_states_sha256", "query", "scope", "cohort", "evaluation", "inputs", "decision"],
+          "properties": {
+            "proposal_version": {"const": "cd3-0.1"}, "binding_sha256": {"$ref": "#/$defs/digest"},
+            "answer_states_sha256": {"$ref": "#/$defs/digest"}, "query": {"$ref": "#/$defs/query"},
+            "scope": {"$ref": "#/$defs/scope"}, "cohort": {"$ref": "#/$defs/reference"},
+            "evaluation": {
+              "type": "object", "required": ["enabled", "selected_scope", "eligible_inputs"], "additionalProperties": false,
+              "properties": {
+                "enabled": {"$ref": "#/$defs/eligibility"},
+                "selected_scope": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/scope"}]},
+                "eligible_inputs": {
+                  "type": "object", "required": ["applies_when", "requested", "cohort"], "additionalProperties": false,
+                  "properties": {"applies_when": {"$ref": "#/$defs/eligibility"}, "requested": {"$ref": "#/$defs/eligibility"}, "cohort": {"$ref": "#/$defs/eligibility"}}
+                }
+              }
+            },
+            "inputs": {
+              "type": "object", "required": ["applies_when", "requested", "supported", "unsupported", "exhaustive"], "additionalProperties": false,
+              "properties": {
+                "applies_when": {"$ref": "#/$defs/boolean_input"}, "requested": {"$ref": "#/$defs/requirement_input"},
+                "supported": {"$ref": "#/$defs/values_input"}, "unsupported": {"$ref": "#/$defs/values_input"},
+                "exhaustive": {"$ref": "#/$defs/boolean_input"}
+              }
+            },
+            "decision": {"$ref": "#/$defs/decision"}
+          }
+        }
+      }
+    }
+  }
+}

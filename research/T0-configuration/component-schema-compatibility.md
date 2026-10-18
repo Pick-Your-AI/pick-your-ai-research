@@ -62,7 +62,7 @@ This dictionary makes the proposed shapes reviewable for #40's “field types an
 | Engine build and admission | Version, fork URL/commit when applicable, launch options; positive integer sequence expansion/admission and matching domain | Missing expansion leaves sequence demand unknown; a per-step batch limit is not automatically a KV-residency cap | deployment dictionary and W-R6; CD-2/CD-3/#11 |
 | Artifact representation | Format gguf/safetensors/onnx/pytorch/other; package convention mlx/transformers/other/none; open-vocabulary quantization method, positive decimal logical/stored bits per weight and packing string | Package convention is not serialization; a quantization label alone supplies no byte estimate | deployment dictionary; #6/#10/#11 |
 | Artifact `components` | List of role language_model/vision/draft/other, positive decimal size_gb and required boolean | A required vision component must be included in the scoped resource model | deployment dictionary; #6/#10 |
-| Conditional support/list completeness | Supported values plus completeness and exact tuple/evidence metadata; wire shape open | Absence from exhaustive applicable list → fail; absence from researched subset → unknown | CD-3; #6/#9/#11 |
+| Conditional support/list completeness | Typed CD-3 query/cohort/result candidate below, bound to exact CD-1 bytes and normalized component/property/configuration scope | Absence from exhaustive applicable list → fail; absence from researched subset → unknown. Source qualification and real tuple resolution remain separate | CD-3; #6/#9/#11 |
 | Licence conditions and answers | Conditions have ID/text/source/kind eligibility or obligation/question; answers depend on kind | Eligibility met/not_met differs from obligation acknowledged/not_acknowledged. Answer/reference locations still require CD-6 | deployment dictionary; #30/#40 |
 | Organisation attestations | Jurisdiction code, EU-market-placement boolean, lawful-basis reference; CD-12 also includes revenue and monthly active users. Revenue needs an amount, currency, reporting period and the licence-defined organisation/account scope; MAU needs a user count, monthly measurement period and the licence-defined product/organisation scope. Exact value types, aggregation and wire fields remain unresolved against the selected condition | A missing revenue or MAU answer leaves an applicable eligibility condition unknown; never infer zero or reuse a differently scoped total. These are sensitive user attestations, not inferred permission or transferable consent | workload dictionary; deployment CD-12 and licence-condition questions; #30/#31/#32/#42 |
 | External connections | Entries with destination ID, purpose, provisioning/runtime lifecycle, enabled/disabled state, data-carrying and required booleans | Unknown state and absent inventory remain unresolved; runtime isolation also needs the selected boundary | deployment dictionary; CD-4/#37 |
@@ -219,9 +219,94 @@ identity retained. It does not establish joint architecture/backend/quantization
 support, runtime execution, memory fit, an offering's allowed residency, or
 independent verification. [T2's direct-loader completeness exception and its
 unmarked support lists](../T2-infrastructure/inference-engine.md#release-keyed-artifact-and-hardware-matrix)
-retain their original source/release scopes. CD-1/CD-3 wire shapes, conflict
-resolution over real sources, affected-owner adoption and the versioned
-ruleset/adapter remain open; frozen v1 and #42's prerequisite are unchanged.
+retain their original source/release scopes. The typed CD-3 binding below
+selects a query/result candidate over CD-1; conflict resolution over real
+sources, affected-owner adoption and the versioned ruleset/adapter remain
+separate. Frozen v1 and #42's prerequisite are unchanged.
+
+### CD-3 typed support query and result candidate (2026-10-18)
+
+**Selected research design:** retain the accepted membership reducer and add
+closed `x_t0_support_query` / `x_t0_support_result` envelopes at proposal version
+`cd3-0.1`. The [query schema and `$defs/result`](../../tests/fixtures/support-membership-binding.schema.json),
+[reader and result verifier](../../tests/support_membership_binding_prototype.py),
+[query](../../tests/fixtures/support-membership-binding.json),
+[CD-1 answers](../../tests/fixtures/support-membership-answers.json),
+[result](../../tests/fixtures/support-membership-result.json) and
+[25 focused regression methods](../../tests/test_support_membership_binding.py)
+make this exact candidate reviewable. This chooses an encoding; it does not
+claim that the normalized-mechanics receipt also adopted this new wire format.
+
+| Field / boundary | Chosen type and interpretation |
+| --- | --- |
+| Query | Stable canonical-style ID, opaque nonempty version, `requirement: any` or `all`, fixed `info` / `warning` / `error` severity. A singleton is a membership query; no implicit default quantifier |
+| Scope | Exact selection ID, catalog-byte SHA-256, item ID/version/canonical kind, non-root literal JSON Pointer for the support property, and configuration/conditions-byte SHA-256. All dimensions must match the caller's separately established selected scope |
+| Evidence cohort | Stable ID and opaque version identifying the already normalized, scoped and ranked claim cohort. Neither field supplies a publisher URL, access date, completeness or source permission |
+| Answer identity | SHA-256 of the complete original CD-1 file, including unrelated answers and whitespace. Field paths use `/support_checks/{selection_id}/{query_id}/{query_version}/{cohort_id}/{cohort_version}/{field}` with each literal token escaped through CD-1's pointer rules |
+| `applies_when` | A provided Boolean or a distinct unresolved CD-1 state. Only a caller-qualified provided `false` skips a rule |
+| `requested` | Provided nonempty list of unique, nonempty literal strings, or an unresolved CD-1 state. Values are case sensitive, untrimmed and uncoerced; they carry no numeric unit or implicit vocabulary mapping |
+| `supported` / `unsupported` | Provided unique string lists, possibly empty, or unresolved CD-1 states. The former is a positive inventory; the latter records explicit equal-rank negative claims in this cohort |
+| `exhaustive` | Provided Boolean or unresolved CD-1 state, separate from source eligibility. Only a known positive inventory plus eligible `true` completeness can support an absence-based negative |
+| Caller qualification | Exact Boolean or unresolved selection activation, plus independently qualified applicability, requested values and cohort. Each omitted qualification is unresolved for that invocation; an answer's `source` label cannot qualify itself |
+| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context, every operand's state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. Evidence label remains `unverified`; severity stays on the versioned query |
+
+**The negative-claim readiness decision is explicit.** The accepted reducer
+requires a concrete set of explicit negative claims. This encoding therefore
+requires a **provided** `unsupported` list before admitting a cohort to that
+reducer. `[]` means the normalized cohort has no recorded explicit negative
+claims; it does not mean the publisher supports every other value or that its
+positive inventory is exhaustive. Missing, unknown, withheld or not-applicable
+negative-claim data yields `unknown / unsupported_claims_unresolved`, with all
+input states and the requested values retained, and no asserted member findings.
+That deliberately conservative readiness check also defers an otherwise
+possible exhaustive-absence verdict until the cohort's negative inventory is
+recorded. It never converts an unresolved answer into an empty set.
+
+The positive inventory has a different existing reducer contract: it can be
+missing. An explicit eligible unsupported member may still fail with a missing
+positive inventory; a missing positive inventory cannot become an empty
+exhaustive inventory. Documented positives require no completeness marker.
+Equal-rank positive/negative claims remain disputed and unknown. ANY preserves
+its other unresolved rows when one member passes; ALL preserves them when a
+known counterexample fails. The committed synthetic ANY example contains one
+documented member, one unmarked omission and one equal-rank dispute. Its pass
+is scoped membership only, with `disputed: true` and `unverified` preserved.
+
+Provided values are validated before any disabled/applicability/eligibility
+shortcut. Known empty requirements, malformed lists, duplicate decoded JSON
+keys, non-finite numbers, invalid Unicode scalars, ambiguous parent/child paths
+and malformed identities are input errors. Unresolved parent states propagate;
+a provided object can supply grouped fields and retains its exact source path.
+Valid but mismatched selected scope is unknown, never automatic incompatibility.
+Disabled and unresolved activation have separate skipped/unknown dispositions.
+Canonical kinds are checked against frozen v1's registry, while the new ID and
+digest guards reject terminal controls across the complete value.
+
+**Result consumption:** schema validation checks shape only. `verify_result`
+recomputes from the retained query/answers and the **caller's** selected scope,
+activation and eligibility inputs, then compares every reported field. A
+self-reported eligible flag, changed source/version/hash, removed disputed row
+or changed outcome cannot validate itself. Result JSON formatting may vary;
+the original query and answer byte identities cannot. Returned data is detached
+from the reader. This is a consistency check, not a signature or evidence grade.
+
+**Evidence and release boundary:** the example's catalog digest names the
+frozen synthetic catalog and its conditions digest names the complete frozen
+synthetic build. The claim lists are independent synthetic counterexamples,
+not facts extracted from that catalog. The reader consumes neither artifact;
+the caller must resolve the actual selection/item/property/conditions and
+establish the request's and cohort's eligibility under #41 before evaluation.
+This format can name canonical API, managed or self-hosted component scopes,
+but a kind, digest or matching label proves no joint tuple support, activation,
+rights, currency, residency, runtime fit or independent verification.
+
+The new test-only files and this decision supplement leave the accepted
+CD-1 normalizer, CD-3 reducer, CD-2/CD-6/CD-7 work, frozen `contracts/v1`, measured
+artifacts and recorded receiving receipts unchanged. #40's tynamite/zwright8
+review owns successor adoption; #41 owns actual evidence qualification with
+the affected component owner. Real source adapters, final ruleset dispatch,
+migration and the remaining listed handoffs retain their own concrete work.
+#40 remains open and #42/#114's substantive prerequisite is preserved.
 
 ## Rule families (decided, pending a versioned ruleset)
 
