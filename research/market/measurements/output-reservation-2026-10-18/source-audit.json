@@ -1,0 +1,260 @@
+{
+  "classification": "primary source inspection; authored interpretations, not independent physical execution",
+  "accessed_utc": "2026-10-18T07:02:26.560353+00:00",
+  "estimator_commit": "637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
+  "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "rights": "MIT upstream code; source copies remain temporary, only authored interpretations and hashes retained",
+  "files": [
+    {
+      "file": "parser-estimate.go",
+      "url": "https://raw.githubusercontent.com/gpustack/gguf-parser-go/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate__llamacpp.go",
+      "bytes": 94660,
+      "sha256": "f581c2f9b54775042b09328cd4ca4440a46aab4025d59e5c5a633c8f70172762",
+      "inspected_fragments": [
+        {
+          "lines": [
+            910,
+            917
+          ],
+          "sha256": "f6b9cd2bd67aa5e92941726efe3127adc2a721b967c14ea67d67bf5d4490695d",
+          "claim": "output_count",
+          "interpretation": "nTokens=min(context,physical batch); nOutputs=nTokens"
+        },
+        {
+          "lines": [
+            944,
+            969
+          ],
+          "sha256": "6079d854ccc64f0c48c67d612598d2bb6ea6ac3fcec982773f7d87c2439f5727",
+          "claim": "host_readback_model",
+          "interpretation": "default decoder charges embedding plus vocabulary output rows to host footprint"
+        },
+        {
+          "lines": [
+            1464,
+            1496
+          ],
+          "sha256": "4541acda62730029c44725a88de91a14d6f9899cc729a5c58759219fcf7148e9",
+          "claim": "projection_placement",
+          "interpretation": "ordinary decoder charges output computation to device index zero, the host"
+        }
+      ]
+    },
+    {
+      "file": "parser-main.go",
+      "url": "https://raw.githubusercontent.com/gpustack/gguf-parser-go/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/cmd/gguf-parser/main.go",
+      "bytes": 69908,
+      "sha256": "724c4c82f0565807c64f4a6cf7d8b710623aaf7b5549e166115a4cbdee576efd",
+      "inspected_fragments": [
+        {
+          "lines": [
+            57,
+            1011
+          ],
+          "sha256": "815a83ebe42ed562ac1daf788a6278146c293c879f7be08648db0bd952109f18",
+          "claim": "cli_controls",
+          "interpretation": "inspected registered flags: no dedicated output-row capacity/placement control; raw output is GGUF information, not unsummarized estimate"
+        }
+      ]
+    },
+    {
+      "file": "llama-context.cpp",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp",
+      "bytes": 169201,
+      "sha256": "2a25e556cb0d16725e01ce853fb1b76da91dcb41b803ce1a6bacec89bfb94aa5",
+      "inspected_fragments": [
+        {
+          "lines": [
+            334,
+            339
+          ],
+          "sha256": "72bbe3d76db327fac4264a229a4e1266fa9b58560764622667126333b411532f",
+          "claim": "effective_limits",
+          "interpretation": "zero n_outputs_max selects logical batch; per-sequence maximum is separate"
+        },
+        {
+          "lines": [
+            461,
+            473
+          ],
+          "sha256": "d5f6773a9fc97204d01bfda57c79d5493e85d22248556bf11f445d18997cfe7c",
+          "claim": "initial_host_readback",
+          "interpretation": "initial output_reserve receives n_seq_max, not n_outputs_max"
+        },
+        {
+          "lines": [
+            753,
+            776
+          ],
+          "sha256": "9783eea1ed76e55dc07bf61ff2d35966ecd4f626b708abc9f457b3fb4d3d8b55",
+          "claim": "prompt_graph_reservation",
+          "interpretation": "prompt-processing graph uses min(context,ubatch,n_outputs_max), separately from host readback"
+        },
+        {
+          "lines": [
+            2227,
+            2261
+          ],
+          "sha256": "a39244c276d8f7d51e17d08b647ab93ff639e0d4dd187781748bf9aa69832a1c",
+          "claim": "host_readback_geometry",
+          "interpretation": "initial host logits rows are max(requested outputs,n_seq_max); embeddings disabled by default"
+        },
+        {
+          "lines": [
+            2305,
+            2314
+          ],
+          "sha256": "4893f621ddeb8075e260d12c5aa0447eca31e78ec82156ae6e93755aceb59b69",
+          "claim": "host_readback_placement",
+          "interpretation": "CPU or output-device host buffer type, not device VRAM"
+        },
+        {
+          "lines": [
+            2594,
+            2620
+          ],
+          "sha256": "126a174690aa9a955f23dd698c1a10ade360c3028efe86505ea62d3efdc3bd48",
+          "claim": "per_sequence_sampling_limit",
+          "interpretation": "without backend samplers remaining output slots are assigned despite per-sequence sampling maximum"
+        },
+        {
+          "lines": [
+            3980,
+            4010
+          ],
+          "sha256": "18820f5ef34b91cec485a625a948093d095919d2110a7b8b34629de30eaab197",
+          "claim": "context_defaults",
+          "interpretation": "max outputs zero, per-sequence one, embeddings false"
+        }
+      ]
+    },
+    {
+      "file": "llama.h",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/include/llama.h",
+      "bytes": 90731,
+      "sha256": "961430f89e2553dbcd99e3e6c59826af9ec143f05911520c74f804d986ff3cd2",
+      "inspected_fragments": [
+        {
+          "lines": [
+            367,
+            376
+          ],
+          "sha256": "a9bc1285a3c62b1644b54350b34f9a75034f8ae6e8e9835a6037ab9fa8d11ca3",
+          "claim": "public_output_controls",
+          "interpretation": "native output capacity and per-sequence capacity fields are distinct"
+        }
+      ]
+    },
+    {
+      "file": "llama-graph.cpp",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-graph.cpp",
+      "bytes": 152132,
+      "sha256": "a046c32b28de82ce5cbefeb1868cab4b021a6318f226ca8346d35822817188ad",
+      "inspected_fragments": [
+        {
+          "lines": [
+            2734,
+            2751
+          ],
+          "sha256": "f3fd2c8e20f7e749a099d7feaaca47e26e9fd56e3e3bb096ebaa411c483999f2",
+          "claim": "output_row_input",
+          "interpretation": "output-id graph input sized by requested outputs"
+        }
+      ]
+    },
+    {
+      "file": "model-llama.cpp",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/models/llama.cpp",
+      "bytes": 10513,
+      "sha256": "38a43fef15432002ed7bc1a49ffb5e1c2cfba30beb5afc1d38422c288ad8d885",
+      "inspected_fragments": [
+        {
+          "lines": [
+            174,
+            178
+          ],
+          "sha256": "64041b7636f70a7146bb34f7d885eb9a51bef5e9679d3d710cb29a1e805b8a35",
+          "claim": "graph_row_selection",
+          "interpretation": "last layer selects requested output rows"
+        },
+        {
+          "lines": [
+            231,
+            245
+          ],
+          "sha256": "48a550aa63d271ad61271612a68b4fbba50ead3dcb2a65d0f18c28dcea965307",
+          "claim": "graph_projection",
+          "interpretation": "output normalization and model output multiplication build the logits graph"
+        }
+      ]
+    },
+    {
+      "file": "llama-model.cpp",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-model.cpp",
+      "bytes": 184429,
+      "sha256": "a83d3367793f0aa40a869e0ea067a365a6a6bf4b90ea59460ff827efa1dcdd9a",
+      "inspected_fragments": [
+        {
+          "lines": [
+            1670,
+            1679
+          ],
+          "sha256": "b4c1b708365a54504aed75f3af336fa08a0389ab7b3e5f76ab5e906c5688a9ac",
+          "claim": "output_layer_device",
+          "interpretation": "output device selected by layer-offload assignment"
+        }
+      ]
+    },
+    {
+      "file": "ggml-backend.cpp",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-backend.cpp",
+      "bytes": 102667,
+      "sha256": "43dea13b13c2a15afd83f53515f3488c17072fc107a6ba4a5e0370f90b4fe7ff",
+      "inspected_fragments": [
+        {
+          "lines": [
+            1099,
+            1134
+          ],
+          "sha256": "fb95885505625deeb800460a49d64a57f63b5edc320cb55965479a70cc2bc482",
+          "claim": "scheduler_placement",
+          "interpretation": "weight-backed operations prefer their weight backend; source-based expectation, not a new per-tensor physical trace"
+        }
+      ]
+    },
+    {
+      "file": "file_architecture.go",
+      "url": "https://raw.githubusercontent.com/gpustack/gguf-parser-go/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_architecture.go",
+      "bytes": 64786,
+      "sha256": "c75a48fb22124e45d9a6636872833acdfc2538b83b01072fff195d4a733712e3",
+      "inspected_fragments": [
+        {
+          "lines": [
+            1460,
+            1467
+          ],
+          "sha256": "4871b26aab93172a8d5720c7a47ffa44b4af939e235cc595f2c8a3b47271347c",
+          "claim": "architecture_predicate",
+          "interpretation": "only eagle3 emits logits at every position under this predicate; reviewed architecture is llama"
+        }
+      ]
+    },
+    {
+      "file": "file_estimate_option.go",
+      "url": "https://raw.githubusercontent.com/gpustack/gguf-parser-go/637cd9a7a03993ab30ace3c53dd8af5c37f46a94/file_estimate_option.go",
+      "bytes": 15832,
+      "sha256": "1647317d6062d0e42be06f413c1fd662c354e0f3fb9f02bf26fca4bd81476b0e",
+      "inspected_fragments": [
+        {
+          "lines": [
+            12,
+            55
+          ],
+          "sha256": "546f1f114571811cba9f0c488aeffcc7005fbd5d212c5a227a41b76e26129d73",
+          "claim": "option_fields",
+          "interpretation": "inspected option fields: no dedicated decoder output-reservation row control"
+        }
+      ]
+    }
+  ]
+}

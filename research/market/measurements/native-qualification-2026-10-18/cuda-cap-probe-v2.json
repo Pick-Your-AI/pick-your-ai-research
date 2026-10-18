@@ -1,0 +1,17 @@
+{
+  "classification": "actual bounded native CUDA/cap qualification probe, no model inference",
+  "started_utc": "2026-10-18T06:44:05.076318+00:00",
+  "finished_utc": "2026-10-18T06:44:05.942603+00:00",
+  "argv": [
+    "$NATIVE_INIT",
+    "$RUNTIME_DIR",
+    "2136809472"
+  ],
+  "exit_code": 0,
+  "harness_sha256": "07c2f8587b58a6dbe557d7e7f395f765ec03c18122386f6456333338f832f09e",
+  "harness_git_ref": "7805816b3b59f973ec9e87a03b8c807511641700",
+  "stdout": "{\"mr09_event\":\"qualification\",\"status\":\"probe_passed\",\"device\":\"CUDA0\",\"driver_total_bytes\":17094475776,\"cuda_reported_free_bytes\":15769534464,\"graphs_disabled\":true,\"decode_api_loaded\":false}\n{\"mr09_event\":\"cap\",\"stage\":\"after_probe\",\"cap_bytes\":2136809472,\"live_bytes\":0,\"peak_admitted_bytes\":8388608,\"admission_denials\":1,\"native_allocator_calls\":1,\"graph_denials\":1}\n",
+  "stderr": "load_backend: loaded CPU backend from $RUNTIME_DIR/ggml-cpu-x64.dll\nggml_cuda_init: found 1 CUDA devices (Total VRAM: 16302 MiB):\n  Device 0: NVIDIA GeForce RTX 5070 Ti, compute capability 12.0, VMM: yes, VRAM: 16302 MiB\nload_backend: loaded CUDA backend from $RUNTIME_DIR/ggml-cuda.dll\n",
+  "model_loaded": false,
+  "change_from_prior_probe": "normalized DLL paths before loading; same archives, guards and cap"
+}
