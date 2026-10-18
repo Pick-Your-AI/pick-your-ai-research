@@ -289,7 +289,7 @@ assert:       subset_of(catalog memory_store /spec/required_permissions_for_ttl,
                         selection memory_store /settings/granted_permissions)           # MISSING FIELD
 ```
 
-### Example 6: agent needs persistent memory, but only ephemeral state is configured
+### Example 6: persistent memory requires configuration evidence
 
 **Where the requirement lives in v1:** nowhere. Neither of these fields says "this agent must remember across sessions":
 - `workload.spec.workload_type = agentic`;
@@ -301,26 +301,28 @@ The requirement can therefore only be checked after a contract change. Two v1-ex
 - **Status:** Hypothesis; **needs contract change via #40**.
 - **Severity:** error when the user states the requirement.
 - **Missing fields:** `build.objectives.memory_persistence` (enum `none | within_session | cross_session`), or a workload-level `settings_workload.memory_persistence`.
-- **Passing example:** `cross_session` with long-term relational memory.
-- **Failing example:** `cross_session` with only an ADK InMemorySessionService.
-- **Unknown example:** `memory_type` is missing from the catalog item.
+- **Passing example:** `cross_session` with a selected long-term store and configuration whose relevant restart/recovery behaviour is evidenced.
+- **Failing example:** `cross_session` with only the documented non-persistent ADK InMemorySessionService.
+- **Unknown example:** the selected store's persistence configuration or restart/recovery evidence is unavailable. A relational or in-memory backing label alone does not answer the requirement.
 
 ```text
 rule.t4.memory.persistence.required (needs contract change via #40)
 applies_when: build /objectives/memory_persistence == "cross_session"                   # MISSING FIELD
 assert:       exists(selection memory_store primary /id)
               AND catalog memory_store /spec/memory_type == "long_term"
-              AND catalog memory_store /spec/backing_type != "in_memory"
+              AND evidenced_restart_persistence(selected implementation, configuration, required scope)
+                  # MISSING: configuration/evidence operands and their semantics; not an executable v1 predicate
 ```
 
-**`rule.t4.memory.longterm.volatile`** is a v1 proxy that catches a configuration that claims long-term memory but is process-memory backed.
+**`rule.t4.memory.longterm.volatile`** retains its proposal ID as a v1 structural review proxy. It identifies a long-term memory item labeled `in_memory`; it does not establish that the selected implementation loses data on restart.
 
-- **Status:** Source-checked (unverified). In-memory backends lose data on restart: ADK (D17), LangGraph `InMemoryStore` (D3), LangMem (D10).
-- **Severity:** warning, because Redis can be configured to persist. That is a #9 fact.
-- **Synthetic results:** `long_term` + `in_memory` → `fail`; `long_term` + `relational` → `pass`; `session` + `in_memory` → `skipped`.
+- **Status:** Hypothesis review proxy using v1 fields. The source-checked (unverified) ADK (D17), LangGraph `InMemoryStore` (D3) and LangMem (D10) examples describe particular volatile implementations; that observation cannot be generalized to every backend with the same broad label.
+- **Severity:** warning requiring configuration review. The pinned [Redis 8.10.2 configuration](https://github.com/redis/redis/blob/498ecd0d6d007db11ddb3aea9428552598a78622/redis.conf) documents disk snapshot and append-only persistence controls; snapshotting can be disabled, and AOF is separately configured. The [#9 software identity record](../T2-infrastructure/hosting.md#relational-and-in-memory-software-identities-2026-10-18) does not select or verify a deployed configuration. Source inspected 2026-10-18: Git blob `1d1c6284dd173ad9c5577fce211c0db2fa0ed8da`, SHA-256 `5ae0cda89cc3ab7a399280f92ee840a476a8a230249a1b8a138e589ecf522345`; no Redis deployment or recovery experiment was performed for this clarification.
+- **Synthetic results:** `long_term` + `in_memory` → `fail` with a review warning, not a diagnosis of lost data; `long_term` + `relational` → `pass` for this backing-label predicate only, not a durability certificate; `session` + `in_memory` → `skipped`. An unresolved backing reference remains `unknown` with `on_unknown: review`.
+- **Acceptance boundary:** establish the exact implementation/version, enabled persistence mode, retained layers, storage survival and applicable restart/recovery observations before deciding a cross-session requirement. Relabeling the item, configuring a TTL, selecting a non-memory backing or showing a warning-free v1 result is not that evidence. No new v1 field, durability outcome or production ruleset is introduced here.
 
 ```json
-{"id":"rule.t4.memory.longterm.volatile","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"memory_store","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/memory_type"}},"right":{"literal":"long_term"}}]},"assert":{"op":"ne","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/backing_type"}},"right":{"literal":"in_memory"}},"on_unknown":"review","message":"Long-term memory is backed by process memory and is lost when the process restarts.","remediation":"Use a relational, vector, object or file backed memory store for cross-session memory, or relabel the store as working or session memory.","affected_kinds":["memory_store"],"owner":"t4-research"}
+{"id":"rule.t4.memory.longterm.volatile","severity":"warning","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"memory_store","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/memory_type"}},"right":{"literal":"long_term"}}]},"assert":{"op":"ne","left":{"ref":{"scope":"catalog","kind":"memory_store","role":"primary","pointer":"/spec/backing_type"}},"right":{"literal":"in_memory"}},"on_unknown":"review","message":"Confirm restart persistence for this long-term memory configuration. The in-memory backing label alone cannot determine whether data is retained.","remediation":"Review the selected implementation, persistence mode, retained layers and restart/recovery evidence. Choose an appropriately configured persistent store when cross-session retention is required; changing the backing label alone does not establish durability.","affected_kinds":["memory_store"],"owner":"t4-research"}
 ```
 
 **`rule.t4.memory.ttl.support`** catches a retention period that the store cannot enforce.
