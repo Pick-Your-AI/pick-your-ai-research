@@ -1316,6 +1316,17 @@ behavior and resource-confidence handling.
 | `report_mismatch` | A report was generated, but its complete typed JSON differs from the retained report, including ordered findings, summaries, identity, timestamp or numeric representation. |
 | `reproduced` | The complete generated report matches. Historical `invalid` or `indeterminate` remains that outcome; reproduction does not make it valid or current. |
 
+**Unavailable-reader retention correction (2026-10-18):** the original replay
+candidate returned `profile_unavailable` before resolving input bindings. With
+the evaluator file absent, the result had no report binding even when the exact
+pinned historical report remained in the archive. Reader failure now preserves
+all independently resolved data bindings and their diagnostics. The result keeps
+`profile_unavailable` as its status and lists the evaluator issue first, followed
+by any missing, digest-mismatched or cross-record identity issues. A resolved
+report binding retains its original bytes; a missing or tampered report retains
+its own unresolved status and no bytes. No evaluator instance runs on this path,
+and no generated report, replacement input or validity claim is created.
+
 Malformed JSON, invalid schemas, duplicate immutable keys and manifest/build/
 sidecar binding errors fail explicitly as value errors before evaluation.
 The candidate reuses the CD-7 strict Unicode/JSON and depth/node boundaries,

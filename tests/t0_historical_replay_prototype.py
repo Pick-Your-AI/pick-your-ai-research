@@ -210,14 +210,22 @@ class ReplayArchive:
         if packet["revision_locks_sha256"] != (digest(sidecar_bytes) if sidecar_bytes is not None else None):
             raise ReplayError("manifest_sidecar_mismatch")
 
+        profile_issues = []
+
         def result(status, issues=(), bindings=(), generated=None):
+            # Reader availability and retained data identity are independent.
+            # An unavailable reader must not erase an exact historical report
+            # or diagnostics already established for another pinned artifact.
+            if profile_issues:
+                status = "profile_unavailable"
+                issues = [*profile_issues, *issues]
             return ReplayResult(status, tuple(issues), tuple(bindings), build_bytes,
                                 sidecar_bytes, manifest_bytes, generated)
 
         try:
             evaluator = _local_evaluator(packet["evaluator"])
         except ReplayError as error:
-            return result("profile_unavailable", [("evaluator", error.code)])
+            profile_issues.append(("evaluator", error.code))
 
         resolution = self._snapshots.resolve(build_bytes, sidecar_bytes)
         for binding in (resolution.catalog_snapshot, resolution.pricebook):
@@ -291,6 +299,8 @@ class ReplayArchive:
             return result("input_identity_mismatch", issues, bindings)
         if len({item["id"] for item in catalog["items"]}) != len(catalog["items"]):
             return result("profile_unsupported", [("catalog_snapshot", "multiple_versions_per_item_id")], bindings)
+        if profile_issues:
+            return result("profile_unavailable", bindings=bindings)
         try:
             # The frozen evaluator uses Decimal arithmetic. Fix its ambient
             # context; never accept its development-only metrics override.
