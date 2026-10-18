@@ -58,6 +58,8 @@ The 21 original tests exercise the synthetic contract examples. They are not a s
 
 The handoff audit validator checks consistency among `handoffs.json`, `handoff-audit-readback.json` and `audit.json`. Its reader first rejects duplicate JSON object keys, non-finite constants and numeric overflow in all three files, including under optimized Python. It then rejects duplicate snapshot issue IDs, pull-request IDs, declared handoff pairs and historical review pairs before relying on their indexed identities. Conflicting entries cannot be silently discarded to obtain a passing audit. These checks preserve recorded attribution; they do not fetch live GitHub state or establish receiving-owner acceptance.
 
+The public-provenance shape check requires an IP literal's globally reachable classification and excludes multicast, reserved and deprecated IPv6 site-local addresses. This conservative intake also excludes reserved translation-prefix literals. IPv4-mapped IPv6 literals use the embedded address's classification. Ambiguous legacy numeric hosts and percent-encoded or interface-scoped hosts are rejected; use a canonical public IP literal or publisher hostname. This is an offline intake check: DNS names still require an actual public-access and source-evidence review, and an accepted IP shape does not establish that a publisher or document exists there.
+
 ## Review and ownership
 
 - Existing issue assignees own research decisions. Request affected owners' review for handoffs; preserve live assignments.

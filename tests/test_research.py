@@ -201,6 +201,45 @@ class Intake(unittest.TestCase):
                 self.assertIn('test.rate: valid_until must follow valid_from',
                               intake_errors([self.item], [book]))
 
+    def test_nonpublic_ip_provenance_rejected_for_catalog_and_prices(self):
+        hosts = (
+            '127.0.0.1', '127.0.0.1.', '10.0.0.1', '172.16.0.1', '192.168.1.1',
+            '169.254.1.1', '100.64.0.1', '0.0.0.0', '192.0.2.1', '198.51.100.1',
+            '203.0.113.1', '198.18.0.1', '224.0.0.1', '255.255.255.255',
+            '[::]', '[::1]', '[fc00::1]', '[fe80::1]', '[2001:db8::1]', '[ff0e::1]',
+            '[fec0::1]', '[feff::1]', '[4000::1]', '[8000::1]', '[64:ff9b::808:808]',
+            '[::ffff:127.0.0.1]', '[::ffff:100.64.0.1]', '[::ffff:224.0.0.1]',
+            '127.1', '2130706433', '0177.0.0.1', '0x7f000001', '0x7f.0.0.1',
+            '0x', '0X', '0x.0.0.1',
+            '127%2e0%2e0%2e1', '[fe80::1%25eth0]',
+        )
+        rate = {'id': 'test.rate', 'catalog_item_id': self.item['id'],
+                'catalog_item_version': '1', 'meter': 'request',
+                'unit_price': {'amount': '0.1', 'currency': 'USD'},
+                'valid_from': '2026-10-16T09:00:00Z',
+                'provenance': copy.deepcopy(self.item['provenance'][0]), 'price_type': 'estimate'}
+        book = {'schema_version': '1.0.0', 'id': 'test.prices', 'revision': 1,
+                'captured_at': '2026-10-16T09:00:00Z', 'rates': [rate]}
+        for host in hosts:
+            with self.subTest(host=host):
+                uri = f'https://{host}/claim'
+                item = copy.deepcopy(self.item)
+                item['provenance'][0]['source_uri'] = uri
+                self.assertTrue(intake_errors([item], []))
+                rate['provenance']['source_uri'] = uri
+                self.assertTrue(intake_errors([self.item], [book]))
+
+    def test_public_ip_and_dns_source_shapes_remain_eligible(self):
+        # These are syntax controls, not inspected sources or evidence claims.
+        for uri in ('https://8.8.8.8/claim', 'http://1.1.1.1:80/claim',
+                    'https://8.8.8.8./claim', 'https://[2606:4700:4700::1111]/claim',
+                    'https://[::ffff:8.8.8.8]/claim',
+                    'https://github.com./Pick-Your-AI/pick-your-ai-research'):
+            with self.subTest(uri=uri):
+                item = copy.deepcopy(self.item)
+                item['provenance'][0]['source_uri'] = uri
+                self.assertEqual(intake_errors([item], []), [])
+
     def test_tier_and_fixture_id_rejected(self):
         self.item['tier'] = 'T2'
         self.assertTrue(intake_errors([self.item], []))
