@@ -3,7 +3,7 @@
     "id": "benchlm",
     "name": "BenchLM",
     "website": "https://benchlm.ai/",
-    "organization": "BenchLM; operator not named in terms",
+    "organization": "BenchLM brand; legal operator unnamed in terms",
     "classifications": [
       "Partial competitor",
       "Benchmark provider",
@@ -11,7 +11,7 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Model and provider comparison with benchmark, price and runtime evidence.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted model/provider comparison, benchmark data and workload-based model selector.",
     "documented_features": [
       "model_search",
       "model_compare",
@@ -30,7 +30,7 @@
       ]
     },
     "deployment_support": "Hosted web application (observed in browser, 2026-10-16); self-hosted or local deployment Unknown.",
-    "apis_and_integrations": "Vendor claim: data access \"through API or MCP\" with 250 free monthly reads (site navigation on benchlm.ai/about, 2026-10-16); no key created, untested. Commercial display needs a separate agreement.",
+    "apis_and_integrations": "Vendor claim: data access \"through API or MCP\" with 250 free monthly reads (site navigation on benchlm.ai/about, 2026-10-16); no key created, untested. Commercial display needs a separate agreement. 2026-10-18 selector documentation additionally describes /api/tools/recommend and shareable answer URLs; neither executed.",
     "licensing": "Public comparison; paid data access and sponsorship. Commercial display requires a separate agreement.",
     "source_ids": [
       "src-benchlm",
@@ -52,21 +52,36 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://benchlm.ai/",
+      "operator": "BenchLM brand; legal operator unnamed in terms",
+      "product_scope": "Hosted model/provider comparison, benchmark data and workload-based model selector.",
+      "version": "Unversioned public pages; selector states bench-align-v5.8-2026-09-30 and scores updated 2026-10-17; terms last updated 2026-10-02.",
+      "source_ids": [
+        "src-benchlm",
+        "src-benchlm-legal"
+      ],
+      "evidence_locator": "src-benchlm / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Static documentation read only; no selector submitted, API account, accuracy reproduction, compatibility validation or market-share inference."
+    }
   },
   {
     "id": "harness-bench",
     "name": "Harness Bench",
     "website": "https://www.harness-bench.ai/",
-    "organization": "Harness Bench Team / Qihoo360 repository",
+    "organization": "Harness Bench Team (site attribution); linked repository owned by GitHub Qihoo360; underlying legal operator not established",
     "classifications": [
       "Benchmark provider",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Model-harness evaluation in sandboxed tasks with final-artifact oracles.",
+    "capabilities": "Documented scope (not exercised in this pass): Benchmark for model-harness configuration effects with sandboxed tasks and final-artifact oracles.",
     "documented_features": [
       "benchmarks",
       "harness_eval"
@@ -103,21 +118,35 @@
     ],
     "limitations": [
       "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
-      "Paper abstract and website/repository suite sizes differ; see benchmark-validation.md. No license detected by GitHub license endpoint."
-    ]
+      "Paper abstract and website/repository suite sizes differ; see benchmark-validation.md. No license detected by GitHub license endpoint.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.harness-bench.ai/",
+      "operator": "Harness Bench Team (site attribution); linked repository owned by GitHub Qihoo360; underlying legal operator not established",
+      "product_scope": "Benchmark for model-harness configuration effects with sandboxed tasks and final-artifact oracles.",
+      "version": "Unversioned site and repository default branch, accessed 2026-10-18; no commit pinned in this pass.",
+      "source_ids": [
+        "src-harness-bench"
+      ],
+      "evidence_locator": "src-harness-bench / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No benchmark run; current paper not reread, so preserve historical suite-size discrepancy as earlier finding and avoid new numeric claims."
+    }
   },
   {
     "id": "llmfit",
     "name": "llmfit",
     "website": "https://www.llmfit.org/",
-    "organization": "Upstream: Alex Jones (GitHub AlexsJones), repository and llmfit.axjns.dev; llmfit.org operator unverified",
+    "organization": "Alex Jones / GitHub AlexsJones for upstream software; llmfit.org operator remains unverified",
     "classifications": [
       "Partial competitor",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "Local model users",
-    "capabilities": "Hardware detection and model-fit recommendations across quantizations and runtimes.",
+    "capabilities": "Documented scope (not exercised in this pass): Seed domain documents local hardware-fit CLI/TUI/API. Upstream is AlexsJones/llmfit and its own site llmfit.axjns.dev; these boundaries remain explicit.",
     "documented_features": [
       "model_search",
       "model_compare",
@@ -164,20 +193,35 @@
     ],
     "limitations": [
       "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
-      "llmfit.org is not referenced by the upstream repository, whose own site is llmfit.axjns.dev; llmfit.org operator unverified."
-    ]
+      "llmfit.org is not referenced by the upstream repository, whose own site is llmfit.axjns.dev; llmfit.org operator unverified.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.llmfit.org/",
+      "operator": "Alex Jones / GitHub AlexsJones for upstream software; llmfit.org operator remains unverified",
+      "product_scope": "Seed domain documents local hardware-fit CLI/TUI/API. Upstream is AlexsJones/llmfit and its own site llmfit.axjns.dev; these boundaries remain explicit.",
+      "version": "Unpinned main README/CNAME/LICENSE and unversioned sites accessed 2026-10-18. CNAME tool result was cached from five months earlier; no fresh repository-wide absence search claimed.",
+      "source_ids": [
+        "src-llmfit",
+        "src-llmfit-upstream-pages"
+      ],
+      "evidence_locator": "src-llmfit / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Not installed/run; fit and community-result quality untested; default-branch documents mutable."
+    }
   },
   {
     "id": "local-ai-planner",
     "name": "Local AI VRAM Calculator / GPU Planner",
     "website": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
-    "organization": "Logarithmic Spirals (pseudonymous individual blog author)",
+    "organization": "Logarithmic Spirals pseudonymous individual blog author; no legal name established",
     "classifications": [
       "Partial competitor"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "Local model users",
-    "capabilities": "Goal-based fit estimates with weights, KV cache and runtime overhead.",
+    "capabilities": "Documented scope (not exercised in this pass): Browser planner for goal-based local model recommendations and memory/speed estimates.",
     "documented_features": [
       "hardware_fit",
       "quantization",
@@ -220,21 +264,36 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+      "operator": "Logarithmic Spirals pseudonymous individual blog author; no legal name established",
+      "product_scope": "Browser planner for goal-based local model recommendations and memory/speed estimates.",
+      "version": "Unversioned planner/about pages accessed 2026-10-18.",
+      "source_ids": [
+        "src-local-ai-planner",
+        "src-local-ai-planner-about"
+      ],
+      "evidence_locator": "src-local-ai-planner / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Static text/controls inspected; no submitted custom model, numeric reproduction or executable export; multiplying identical GPU capacity does not verify runtime topology."
+    }
   },
   {
     "id": "flocci",
     "name": "Flocci Ask / Stack Builder",
     "website": "https://aitools.flocci.in/ask",
-    "organization": "Flocci Technologies",
+    "organization": "Flocci Technologies, per official homepage; legal registration not independently established",
     "classifications": [
       "Direct competitor",
       "Data source"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Conversational discovery and generated ordered AI workflows with constraints, explanations and uncertainty statements.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted tool directory, plain-language Ask discovery and advertised ordered Stack Builder workflow.",
     "documented_features": [
       "natural_language",
       "model_search",
@@ -284,14 +343,28 @@
     ],
     "limitations": [
       "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
-      "One generated RAG workflow observed; compatibility, privacy and deployability not independently tested. Static and rendered catalog counts conflict."
-    ]
+      "One generated RAG workflow observed; compatibility, privacy and deployability not independently tested. Static and rendered catalog counts conflict.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://aitools.flocci.in/ask",
+      "operator": "Flocci Technologies, per official homepage; legal registration not independently established",
+      "product_scope": "Hosted tool directory, plain-language Ask discovery and advertised ordered Stack Builder workflow.",
+      "version": "Unversioned Ask/Stack/home pages accessed 2026-10-18; static tool count is mutable and excluded from findings.",
+      "source_ids": [
+        "src-flocci"
+      ],
+      "evidence_locator": "src-flocci / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No prompt submitted in this pass; historical 2026-10-16 generated workflow must retain original date; no compatibility, export or deployment verified."
+    }
   },
   {
     "id": "artificial-analysis",
     "name": "Artificial Analysis",
     "website": "https://artificialanalysis.ai/",
-    "organization": "Artificial Analysis",
+    "organization": "Artificial Analysis; official about page names founders Micah Hill-Smith and George Cameron; legal entity not verified here",
     "classifications": [
       "Partial competitor",
       "Benchmark provider",
@@ -299,7 +372,7 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Model/provider evaluation, speed, price and recommendation surfaces.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted model/provider evaluations and documented keyed benchmark/data API.",
     "documented_features": [
       "model_compare",
       "benchmarks",
@@ -338,14 +411,28 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://artificialanalysis.ai/",
+      "operator": "Artificial Analysis; official about page names founders Micah Hill-Smith and George Cameron; legal entity not verified here",
+      "product_scope": "Hosted model/provider evaluations and documented keyed benchmark/data API.",
+      "version": "Unversioned API reference/about pages accessed 2026-10-18; example API v2 paths documented, not called.",
+      "source_ids": [
+        "src-artificial-analysis"
+      ],
+      "evidence_locator": "src-artificial-analysis / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No account/key/API request, benchmark or paid access; endpoint availability and terms completeness not tested."
+    }
   },
   {
     "id": "openrouter",
     "name": "OpenRouter",
     "website": "https://openrouter.ai/models",
-    "organization": "OpenRouter",
+    "organization": "OpenRouter, Inc., explicitly named by official Terms of Service",
     "classifications": [
       "Partial competitor",
       "Infrastructure provider",
@@ -353,7 +440,7 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Model directory plus unified provider-routing API.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted model/provider catalogue and third-party model API aggregation/routing.",
     "documented_features": [
       "model_search",
       "model_compare",
@@ -398,14 +485,28 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://openrouter.ai/models",
+      "operator": "OpenRouter, Inc., explicitly named by official Terms of Service",
+      "product_scope": "Hosted model/provider catalogue and third-party model API aggregation/routing.",
+      "version": "Unversioned Models documentation accessed 2026-10-18; terms updated 2026-08-31.",
+      "source_ids": [
+        "src-openrouter"
+      ],
+      "evidence_locator": "src-openrouter / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No account, inference request, API call, resale, scraping workflow or regional routing verification."
+    }
   },
   {
     "id": "hugging-face",
     "name": "Hugging Face Hub",
     "website": "https://huggingface.co/models",
-    "organization": "Hugging Face",
+    "organization": "Hugging Face, Inc. (Delaware corporation), named in official terms",
     "classifications": [
       "Partial competitor",
       "Data source",
@@ -413,7 +514,7 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Model discovery with task/library filters and model-card metadata.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted model repository hub with discoverability, metadata, model cards and per-repository licences.",
     "documented_features": [
       "model_search",
       "model_compare",
@@ -450,21 +551,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://huggingface.co/models",
+      "operator": "Hugging Face, Inc. (Delaware corporation), named in official terms",
+      "product_scope": "Hosted model repository hub with discoverability, metadata, model cards and per-repository licences.",
+      "version": "Unversioned Hub docs accessed 2026-10-18; terms page states effective 2022-09-15 (mutable current page).",
+      "source_ids": [
+        "src-hugging-face"
+      ],
+      "evidence_locator": "src-hugging-face / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No repository model downloaded or run; did not audit Hub API here, so existing API Unknown can remain."
+    }
   },
   {
     "id": "arena",
     "name": "Arena",
     "website": "https://arena.ai/",
-    "organization": "Arena",
+    "organization": "Arena Intelligence branding/footer; exact legal entity not confirmed in read text",
     "classifications": [
       "Benchmark provider",
       "Partial competitor"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Public model ranking and comparison entry point; interactive evaluation not tested.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted model comparison, voting and public leaderboard surfaces.",
     "documented_features": [
       "benchmarks",
       "model_compare"
@@ -499,21 +614,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://arena.ai/",
+      "operator": "Arena Intelligence branding/footer; exact legal entity not confirmed in read text",
+      "product_scope": "Hosted model comparison, voting and public leaderboard surfaces.",
+      "version": "Unversioned home/leaderboard/terms pages accessed 2026-10-18.",
+      "source_ids": [
+        "src-arena"
+      ],
+      "evidence_locator": "src-arena / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No model prompt/vote/workflow submitted; home page is an app-building entry point and alone is inadequate evidence for leaderboard scope. Scores and sampling not independently reviewed."
+    }
   },
   {
     "id": "llm-stats",
     "name": "LLM Stats",
     "website": "https://llm-stats.com/",
-    "organization": "llm-stats (self-described two co-founders); legal entity unconfirmed",
+    "organization": "llm-stats brand; about page says two co-founders without naming them; legal operator remains unconfirmed",
     "classifications": [
       "Partial competitor",
       "Data source"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Leaderboard comparing intelligence, speed and price.",
+    "capabilities": "Documented scope (not exercised in this pass): Hosted model/benchmark/price comparison and advertised API/MCP data service.",
     "documented_features": [
       "model_compare",
       "benchmarks",
@@ -529,7 +658,7 @@
     },
     "deployment_support": "Hosted web application.",
     "apis_and_integrations": "Vendor claim: site navigation lists \"Data API / MCP\"; robots.txt disallows /api/. Not tested.",
-    "licensing": "Pricing of access and reuse rights unknown.",
+    "licensing": "2026-10-18 terms recheck: publisher permits attributed commercial reuse of its materials; legal operator and upstream-data rights remain unverified. No product ingestion cleared. See src-llm-stats dated recheck; access pricing not refreshed.",
     "source_ids": [
       "src-llm-stats",
       "src-llm-stats-legal"
@@ -550,14 +679,29 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://llm-stats.com/",
+      "operator": "llm-stats brand; about page says two co-founders without naming them; legal operator remains unconfirmed",
+      "product_scope": "Hosted model/benchmark/price comparison and advertised API/MCP data service.",
+      "version": "Unversioned home/about pages accessed 2026-10-18; terms last updated 2026-10-08.",
+      "source_ids": [
+        "src-llm-stats",
+        "src-llm-stats-legal"
+      ],
+      "evidence_locator": "src-llm-stats / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No API, model call or independent score/usage validation; about-page audience/customer figures are vendor claims and excluded."
+    }
   },
   {
     "id": "models-dev",
     "name": "Models.dev",
     "website": "https://models.dev/",
-    "organization": "OpenCode / anomalyco",
+    "organization": "GitHub anomalyco repository / OpenCode maintainers; legal operator not independently established",
     "classifications": [
       "Data source",
       "Open-source integration candidate",
@@ -565,7 +709,7 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Provider and canonical-model metadata with JSON endpoints.",
+    "capabilities": "Documented scope (not exercised in this pass): Community-contributed model/provider specification, pricing and capability database.",
     "documented_features": [
       "model_search",
       "model_compare",
@@ -605,20 +749,34 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://models.dev/",
+      "operator": "GitHub anomalyco repository / OpenCode maintainers; legal operator not independently established",
+      "product_scope": "Community-contributed model/provider specification, pricing and capability database.",
+      "version": "Unpinned dev README and unversioned website accessed 2026-10-18; no exact commit in this pass.",
+      "source_ids": [
+        "src-models-dev"
+      ],
+      "evidence_locator": "src-models-dev / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No endpoint payload downloaded, pricing validated or schema integrated; provider overrides can differ from model-only metadata."
+    }
   },
   {
     "id": "canrun",
     "name": "CanRun",
     "website": "https://canrunllm.com/",
-    "organization": "CanRun (self-described independent project); legal entity unconfirmed",
+    "organization": "CanRun self-described independent project; person/legal entity unnamed",
     "classifications": [
       "Partial competitor"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "Local model users",
-    "capabilities": "Hardware and RAM calculator for local AI model fit.",
+    "capabilities": "Documented scope (not exercised in this pass): PC/Mac/CPU local model-fit calculator, estimates and documented run commands.",
     "documented_features": [
       "hardware_fit"
     ],
@@ -653,20 +811,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://canrunllm.com/",
+      "operator": "CanRun self-described independent project; person/legal entity unnamed",
+      "product_scope": "PC/Mac/CPU local model-fit calculator, estimates and documented run commands.",
+      "version": "Unversioned home/about accessed 2026-10-18; about page states data updated 2026-10-06.",
+      "source_ids": [
+        "src-canrun",
+        "src-canrun-about"
+      ],
+      "evidence_locator": "src-canrun / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No calculator submitted or command run; no operator established; separate product from canitrun.dev and canirun.ai."
+    }
   },
   {
     "id": "canitrun",
     "name": "CanItRun",
     "website": "https://canitrun.dev/",
-    "organization": "CanItRun; legal entity unconfirmed",
+    "organization": "CanItRun brand; person/legal entity unnamed in reviewed methodology",
     "classifications": [
       "Partial competitor"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "Local model users",
-    "capabilities": "GPU hardware checker and VRAM calculator.",
+    "capabilities": "Documented scope (not exercised in this pass): Local inference hardware-fit and VRAM/throughput estimator with benchmark context.",
     "documented_features": [
       "hardware_fit"
     ],
@@ -701,14 +874,29 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://canitrun.dev/",
+      "operator": "CanItRun brand; person/legal entity unnamed in reviewed methodology",
+      "product_scope": "Local inference hardware-fit and VRAM/throughput estimator with benchmark context.",
+      "version": "Unversioned home/about pages accessed 2026-10-18.",
+      "source_ids": [
+        "src-canitrun",
+        "src-canitrun-about"
+      ],
+      "evidence_locator": "src-canitrun / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No workflow exercised; operator unconfirmed; multi-GPU layer-split assumptions are runtime-specific, not universal fit rules; distinct from CanRun and CanIRun.ai."
+    }
   },
   {
     "id": "modelfit",
     "name": "ModelFit",
     "website": "https://modelfit.io/",
-    "organization": "ModelFit / @wecko-ai package",
+    "organization": "ModelFit; Peter Dekker self-described founder/maintainer, per official about page; legal entity unconfirmed",
     "classifications": [
       "Direct competitor",
       "Data source",
@@ -716,7 +904,7 @@
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "Local model users",
-    "capabilities": "Device-first local-model recommendations; CLI and documented JSON/MCP access.",
+    "capabilities": "Documented scope (not exercised in this pass): Device-first local model recommendation, documented CLI, JSON/MCP and open compatibility dataset.",
     "documented_features": [
       "hardware_fit",
       "model_search",
@@ -735,7 +923,7 @@
     },
     "deployment_support": "Web device/setup/results flow plus a CLI the publisher states is MIT-licensed.",
     "apis_and_integrations": "Vendor claim / primary documentation: documented JSON and MCP access. Untested.",
-    "licensing": "Free recommendation surface; sponsorship and affiliate disclosures. Dataset claims CC BY 4.0, CLI MIT.",
+    "licensing": "2026-10-18 terms recheck states compatibility dataset CC BY 4.0 and CLI separately MIT; upstream model/benchmark rights remain separate. No ingestion cleared. See src-modelfit dated recheck.",
     "source_ids": [
       "src-modelfit"
     ],
@@ -760,21 +948,35 @@
       42
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://modelfit.io/",
+      "operator": "ModelFit; Peter Dekker self-described founder/maintainer, per official about page; legal entity unconfirmed",
+      "product_scope": "Device-first local model recommendation, documented CLI, JSON/MCP and open compatibility dataset.",
+      "version": "Unversioned public pages accessed 2026-10-18; terms updated 2026-06-21; homepage dataset stamp 2026-10-13.",
+      "source_ids": [
+        "src-modelfit"
+      ],
+      "evidence_locator": "src-modelfit / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No CLI/MCP/API/workflow run; full-stack selection not established; immutable version not pinned."
+    }
   },
   {
     "id": "ollama",
     "name": "Ollama",
     "website": "https://ollama.com/library",
-    "organization": "Ollama",
+    "organization": "Ollama publisher; legal entity not established in this pass",
     "classifications": [
       "Substitute workflow",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Discover and run model packages through a local-model ecosystem.",
+    "capabilities": "Documented scope (not exercised in this pass): Model library plus local and hosted inference APIs; a run-step substitute.",
     "documented_features": [
       "model_search",
       "inference_engine"
@@ -788,7 +990,7 @@
       ]
     },
     "deployment_support": "Local model runtime with a public model library (vendor documentation); not installed in this study.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Primary documentation: local/cloud APIs, OpenAI/Anthropic compatibility and Python/JavaScript client libraries; not called. See src-ollama dated recheck.",
     "licensing": "Model licenses differ; hosting and distribution terms need per-product checks.",
     "source_ids": [
       "src-ollama"
@@ -809,21 +1011,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://ollama.com/library",
+      "operator": "Ollama publisher; legal entity not established in this pass",
+      "product_scope": "Model library plus local and hosted inference APIs; a run-step substitute.",
+      "version": "Unversioned library/API introduction accessed 2026-10-18; API docs state API is not strictly versioned.",
+      "source_ids": [
+        "src-ollama"
+      ],
+      "evidence_locator": "src-ollama / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No installation, model download, account or API call; no fitness/performance claims independently measured."
+    }
   },
   {
     "id": "gpus-io",
     "name": "GPUs.io",
     "website": "https://gpus.io/",
-    "organization": "GPUs.io; legal entity unconfirmed",
+    "organization": "GPUs.io brand; legal entity still unconfirmed. Privacy footer links @boxhock but that alone does not establish operator identity.",
     "classifications": [
       "Partial competitor",
       "Data source"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Cloud GPU rental price comparison.",
+    "capabilities": "Documented scope (not exercised in this pass): Cloud GPU comparison; current static home also advertises model-to-GPU discovery.",
     "documented_features": [
       "hosting_pricing"
     ],
@@ -859,21 +1075,36 @@
     ],
     "limitations": [
       "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
-      "Recheck on 2026-10-16 returned 403 to anonymous retrieval; current capabilities and operator unverified."
-    ]
+      "Recheck on 2026-10-16 returned 403 to anonymous retrieval; current capabilities and operator unverified.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://gpus.io/",
+      "operator": "GPUs.io brand; legal entity still unconfirmed. Privacy footer links @boxhock but that alone does not establish operator identity.",
+      "product_scope": "Cloud GPU comparison; current static home also advertises model-to-GPU discovery.",
+      "version": "Unversioned home accessed 2026-10-18 redirects /en; privacy last updated 2026-01-27, cached by web tool seven months earlier.",
+      "source_ids": [
+        "src-gpus-io",
+        "src-gpus-io-recheck"
+      ],
+      "evidence_locator": "src-gpus-io / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken."
+    }
   },
   {
     "id": "vast",
     "name": "Vast.ai",
     "website": "https://vast.ai/",
-    "organization": "Vast.ai",
+    "organization": "Vast.ai publisher; exact legal entity not established in read pages",
     "classifications": [
       "Infrastructure provider",
       "Potential partner"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "GPU rental marketplace.",
+    "capabilities": "Documented scope (not exercised in this pass): GPU marketplace and programmatic search/provisioning; cloud, serverless and cluster offerings advertised.",
     "documented_features": [
       "hosting",
       "hosting_pricing"
@@ -887,7 +1118,7 @@
       ]
     },
     "deployment_support": "Hosted GPU rental marketplace (vendor documentation).",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
+    "apis_and_integrations": "Vendor documents CLI, Python SDK and REST API for search/provisioning; not called and no compute rented. See src-vast dated recheck.",
     "licensing": "Metered GPU rentals; instance-specific conditions and availability.",
     "source_ids": [
       "src-vast"
@@ -908,21 +1139,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://vast.ai/",
+      "operator": "Vast.ai publisher; exact legal entity not established in read pages",
+      "product_scope": "GPU marketplace and programmatic search/provisioning; cloud, serverless and cluster offerings advertised.",
+      "version": "Unversioned home/docs accessed 2026-10-18; old instance-search path redirects to current find-and-rent guide.",
+      "source_ids": [
+        "src-vast"
+      ],
+      "evidence_locator": "src-vast / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No account, API key, credit purchase, rental or live price verification; capacity/performance claims excluded."
+    }
   },
   {
     "id": "runpod",
     "name": "Runpod",
     "website": "https://www.runpod.io/",
-    "organization": "Runpod",
+    "organization": "Runpod, Inc. explicitly named in terms",
     "classifications": [
       "Infrastructure provider",
       "Potential partner"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "GPU cloud platform for AI workloads.",
+    "capabilities": "Documented scope (not exercised in this pass): GPU/CPU cloud infrastructure; Pods, Serverless, Public Endpoints and clusters are distinct offerings.",
     "documented_features": [
       "hosting",
       "hosting_pricing",
@@ -936,9 +1181,9 @@
         "https://www.runpod.io/pricing"
       ]
     },
-    "deployment_support": "Hosted GPU cloud platform (vendor documentation).",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Metered cloud offerings; rate cards distinguish products and resources.",
+    "deployment_support": "Primary documentation: dedicated containerized Pods and autoscaling Serverless offerings.",
+    "apis_and_integrations": "Primary documentation: SDK and API surfaces, including API-key access to pre-deployed Public Endpoints. No endpoint called.",
+    "licensing": "Commercial service terms apply; no data republication or price-feed reuse permission established.",
     "source_ids": [
       "src-runpod"
     ],
@@ -958,21 +1203,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.runpod.io/",
+      "operator": "Runpod, Inc. explicitly named in terms",
+      "product_scope": "GPU/CPU cloud infrastructure; Pods, Serverless, Public Endpoints and clusters are distinct offerings.",
+      "version": "Unversioned docs; overview last modified 2026-09-25; terms updated 2026-03-24",
+      "source_ids": [
+        "src-runpod"
+      ],
+      "evidence_locator": "src-runpod / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No capacity, performance, API reliability or cost result verified."
+    }
   },
   {
     "id": "dify",
     "name": "Dify",
     "website": "https://dify.ai/",
-    "organization": "LangGenius",
+    "organization": "LangGenius, Inc. is named in source copyright",
     "classifications": [
       "Adjacent competitor",
       "Substitute workflow"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Visual agentic application and knowledge workflow platform.",
+    "capabilities": "Documented scope (not exercised in this pass): AI application/agent and knowledge workflow platform; hosted cloud and source Community Edition are separate surfaces.",
     "documented_features": [
       "workflow",
       "rag",
@@ -988,9 +1247,9 @@
         "https://raw.githubusercontent.com/langgenius/dify/main/LICENSE"
       ]
     },
-    "deployment_support": "Primary documentation: cloud plans and self-hosting; source licence modifies Apache terms with multitenancy and frontend-branding conditions.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Cloud plans and self-hosted code; modified Apache license has multitenancy and branding conditions.",
+    "deployment_support": "Primary documentation: managed Cloud and self-hosted Community Edition via Docker Compose.",
+    "apis_and_integrations": "Primary documentation: REST integration, plugins and difyctl. DSL export includes orchestration, parameters and knowledge-base connections; content and third-party keys excluded by docs. Not exercised.",
+    "licensing": "Modified Apache-2.0 with multi-tenant and frontend branding restrictions; not a blanket Apache license. Dataset and model rights separate.",
     "source_ids": [
       "src-dify"
     ],
@@ -1012,21 +1271,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://dify.ai/",
+      "operator": "LangGenius, Inc. is named in source copyright",
+      "product_scope": "AI application/agent and knowledge workflow platform; hosted cloud and source Community Edition are separate surfaces.",
+      "version": "Unversioned home; app-management modified 2026-07-29, describes DSL v0.6+; LICENSE main unpinned",
+      "source_ids": [
+        "src-dify"
+      ],
+      "evidence_locator": "src-dify / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Export roundtrip and component compatibility untested; docs make broad version-compatibility statements requiring falsification."
+    }
   },
   {
     "id": "langflow",
     "name": "Langflow",
     "website": "https://www.langflow.org/",
-    "organization": "Langflow",
+    "organization": "Langflow project established; legal site operator not established by reviewed pages",
     "classifications": [
       "Adjacent competitor",
       "Substitute workflow"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Low-code builder for agent and RAG applications.",
+    "capabilities": "Documented scope (not exercised in this pass): Python framework and visual component/flow editor for AI applications, agents and MCP.",
     "documented_features": [
       "workflow",
       "rag",
@@ -1040,9 +1313,9 @@
         "https://www.langflow.org/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Commercial hosting and exact source/data terms need review.",
+    "deployment_support": "Primary documentation: server serving flows and containerized deployment; no instance run.",
+    "apis_and_integrations": "Primary documentation: API execution and import/export endpoints; flow JSON contains nodes, edges and metadata, project downloads use ZIP.",
+    "licensing": "Root source LICENSE reads MIT with notice condition; this does not establish rights in model/data/provider content or separate hosting products.",
     "source_ids": [
       "src-langflow"
     ],
@@ -1060,21 +1333,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.langflow.org/",
+      "operator": "Langflow project established; legal site operator not established by reviewed pages",
+      "product_scope": "Python framework and visual component/flow editor for AI applications, agents and MCP.",
+      "version": "Documentation displays 1.12.x; main LICENSE unpinned",
+      "source_ids": [
+        "src-langflow"
+      ],
+      "evidence_locator": "src-langflow / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "API, portability, imports, compatibility and runtime behavior untested; export may include secrets depending on settings."
+    }
   },
   {
     "id": "flowise",
     "name": "Flowise",
     "website": "https://flowiseai.com/",
-    "organization": "Flowise",
+    "organization": "FlowiseAI, Inc. named in root source copyright; corporate ownership not investigated",
     "classifications": [
       "Adjacent competitor",
       "Substitute workflow"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Visual agent construction.",
+    "capabilities": "Documented scope (not exercised in this pass): Visual generative-AI development platform with Assistant, Chatflow and Agentflow builders.",
     "documented_features": [
       "workflow",
       "agents"
@@ -1087,9 +1374,9 @@
         "https://flowiseai.com/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Cloud and source offerings; exact deployment terms need review.",
+    "deployment_support": "Primary documentation lists self-hosting and air-gapped deployment; untested.",
+    "apis_and_integrations": "Primary documentation lists API, JS/Python SDK, CLI, embedded chatbot and MCP client/server support; reusable components/templates advertised.",
+    "licensing": "Root license: Apache-2.0 outside enterprise directory and specifically restricted files; those portions are commercial, third-party terms retained. No dataset reuse clearance.",
     "source_ids": [
       "src-flowise"
     ],
@@ -1107,21 +1394,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://flowiseai.com/",
+      "operator": "FlowiseAI, Inc. named in root source copyright; corporate ownership not investigated",
+      "product_scope": "Visual generative-AI development platform with Assistant, Chatflow and Agentflow builders.",
+      "version": "Unversioned docs; Agentflow V2 named; source main LICENSE unpinned",
+      "source_ids": [
+        "src-flowise"
+      ],
+      "evidence_locator": "src-flowise / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No workflow execution, integration compatibility, scale or security claim independently verified."
+    }
   },
   {
     "id": "n8n",
     "name": "n8n",
     "website": "https://n8n.io/",
-    "organization": "n8n",
+    "organization": "n8n project/brand established; legal entity not newly verified in these pages",
     "classifications": [
       "Adjacent competitor",
       "Substitute workflow"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Workflow automation with AI integrations.",
+    "capabilities": "Documented scope (not exercised in this pass): Workflow automation platform; curated AI Starter Kit is a separate Docker Compose template combining n8n, Ollama, Qdrant and PostgreSQL.",
     "documented_features": [
       "workflow",
       "agents",
@@ -1136,9 +1437,9 @@
         "https://n8n.io/pricing/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Cloud subscriptions; Sustainable Use License and separate enterprise code conditions.",
+    "deployment_support": "Primary documentation: own infrastructure/on-premises/private cloud; Community and keyed editions.",
+    "apis_and_integrations": "Public REST API documented for specified Cloud plans and all self-hosted editions; free-trial exclusion documented. No request made.",
+    "licensing": "Sustainable Use License core; .ee. files need Enterprise License, other branches not licensed by root text. Component/data terms separate.",
     "source_ids": [
       "src-n8n"
     ],
@@ -1158,21 +1459,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://n8n.io/",
+      "operator": "n8n project/brand established; legal entity not newly verified in these pages",
+      "product_scope": "Workflow automation platform; curated AI Starter Kit is a separate Docker Compose template combining n8n, Ollama, Qdrant and PostgreSQL.",
+      "version": "Unversioned current docs; root LICENSE master unpinned",
+      "source_ids": [
+        "src-n8n"
+      ],
+      "evidence_locator": "src-n8n / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Kit explicitly for testing/proof of concept; no deployment or compatibility exercised. Old sustainable-use-license URL returned Page Not Found."
+    }
   },
   {
     "id": "skypilot",
     "name": "SkyPilot",
-    "website": "https://skypilot.co/",
-    "organization": "SkyPilot",
+    "website": "https://skypilot.ai/",
+    "organization": "SkyPilot project established; legal commercial operator not established by reviewed docs/license",
     "classifications": [
       "Substitute workflow",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Manage and execute AI compute across infrastructure providers.",
+    "capabilities": "Documented scope (not exercised in this pass): Workload scheduling, provisioning and management over multiple clouds, Kubernetes, Slurm and existing machines; BYOC.",
     "documented_features": [
       "hosting",
       "deployment",
@@ -1186,9 +1501,9 @@
         "https://docs.skypilot.ai/en/latest/docs/index.html"
       ]
     },
-    "deployment_support": "Vendor documentation: launches and manages AI compute across infrastructure providers; capacity is not guaranteed.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Open-source and commercial platform surfaces; cloud bills remain separate.",
+    "deployment_support": "Primary documentation: launches within user's accounts, VPCs and clusters; no compute launched.",
+    "apis_and_integrations": "YAML specifies resource constraints and setup/run commands; any_of optimizer selects from candidate infrastructure, ordered sets failover sequence. CLI and Python SDK documented.",
+    "licensing": "Root Apache-2.0 read, including noted third-party example provenance; commercial platform/cloud/model/data terms separate.",
     "source_ids": [
       "src-skypilot"
     ],
@@ -1210,21 +1525,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://skypilot.ai/",
+      "operator": "SkyPilot project established; legal commercial operator not established by reviewed docs/license",
+      "product_scope": "Workload scheduling, provisioning and management over multiple clouds, Kubernetes, Slurm and existing machines; BYOC.",
+      "version": "Mutable latest docs and master license; no release/SHA pin established",
+      "source_ids": [
+        "src-skypilot"
+      ],
+      "evidence_locator": "src-skypilot / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No capacity, optimization, compatibility, failure recovery or savings measurement."
+    }
   },
   {
     "id": "bentoml",
     "name": "BentoML / Bento",
     "website": "https://www.bentoml.com/",
-    "organization": "BentoML",
+    "organization": "BentoML project/brand established; legal commercial operator not established by reviewed pages",
     "classifications": [
       "Substitute workflow",
       "Infrastructure provider"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Model inference deployment and scaling.",
+    "capabilities": "Documented scope (not exercised in this pass): BentoML serving framework and BentoCloud managed deployment are distinct products, rather than one undifferentiated Bento.",
     "documented_features": [
       "deployment",
       "hosting"
@@ -1237,9 +1566,9 @@
         "https://www.bentoml.com/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Commercial inference platform with source ecosystem; precise terms unverified.",
+    "deployment_support": "Primary documentation: Python serving framework, packaging for deployment, BentoCloud and bring-your-own-cloud guide.",
+    "apis_and_integrations": "Documentation lists online service APIs, Python SDK/CLI/client API and framework integrations; none executed.",
+    "licensing": "BentoML root source Apache-2.0 read; BentoCloud service, external models, datasets and integration terms require separate review.",
     "source_ids": [
       "src-bentoml"
     ],
@@ -1259,21 +1588,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.bentoml.com/",
+      "operator": "BentoML project/brand established; legal commercial operator not established by reviewed pages",
+      "product_scope": "BentoML serving framework and BentoCloud managed deployment are distinct products, rather than one undifferentiated Bento.",
+      "version": "Mutable latest documentation and main source license; release unpinned",
+      "source_ids": [
+        "src-bentoml"
+      ],
+      "evidence_locator": "src-bentoml / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No deployment, composition or scaling test; documentation performance multiplier omitted as unreproduced."
+    }
   },
   {
     "id": "langfuse",
     "name": "Langfuse",
     "website": "https://langfuse.com/",
-    "organization": "Langfuse",
+    "organization": "Root code copyright ClickHouse, Inc.; redirected general terms distinguish Langfuse GmbH for PAYG Langfuse Cloud",
     "classifications": [
       "Adjacent competitor",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Agent evaluation and observability.",
+    "capabilities": "Documented scope (not exercised in this pass): AI observability, prompt management, evaluation and API/data platform; Cloud and self-hosted edition boundaries matter.",
     "documented_features": [
       "evaluation",
       "monitoring"
@@ -1286,9 +1629,9 @@
         "https://langfuse.com/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Hosted and self-hosted offerings; detailed edition terms require review.",
+    "deployment_support": "Primary documentation says self-hostable; no instance deployed.",
+    "apis_and_integrations": "Documentation describes SDK/OpenTelemetry integrations, API-first platform and blob-storage export; none exercised.",
+    "licensing": "MIT Expat outside ee directories; enterprise and third-party terms separate. No license inferred for customer traces or service data.",
     "source_ids": [
       "src-langfuse"
     ],
@@ -1304,21 +1647,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://langfuse.com/",
+      "operator": "Root code copyright ClickHouse, Inc.; redirected general terms distinguish Langfuse GmbH for PAYG Langfuse Cloud",
+      "product_scope": "AI observability, prompt management, evaluation and API/data platform; Cloud and self-hosted edition boundaries matter.",
+      "version": "Docs announce v4; source main unpinned; terms effective 2026-06-24",
+      "source_ids": [
+        "src-langfuse"
+      ],
+      "evidence_locator": "src-langfuse / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Terms redirect read; no contract/account entered, no trace content accessed, no performance reproduction."
+    }
   },
   {
     "id": "ragas",
     "name": "Ragas",
     "website": "https://docs.ragas.io/en/stable/",
-    "organization": "Ragas maintainers",
+    "organization": "Docs link vibrantlabsai/ragas; source copyright names Vibrant Labs",
     "classifications": [
       "Benchmark provider",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Evaluation tooling for LLM and RAG applications.",
+    "capabilities": "Documented scope (not exercised in this pass): Library for systematic LLM application, RAG and agent evaluation with experiments, metrics and dataset tooling.",
     "documented_features": [
       "evaluation",
       "rag"
@@ -1331,9 +1688,9 @@
         "https://docs.ragas.io/en/stable/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Documentation accessible; exact release and dataset licenses not validated.",
+    "deployment_support": "Primary documentation describes installable library; no evaluation or installation performed.",
+    "apis_and_integrations": "Documentation lists Python API, CLI and integrations including LangChain and LlamaIndex.",
+    "licensing": "Root source Apache-2.0 read; evaluation datasets, judge models and external provider terms remain separate.",
     "source_ids": [
       "src-ragas"
     ],
@@ -1351,21 +1708,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://docs.ragas.io/en/stable/",
+      "operator": "Docs link vibrantlabsai/ragas; source copyright names Vibrant Labs",
+      "product_scope": "Library for systematic LLM application, RAG and agent evaluation with experiments, metrics and dataset tooling.",
+      "version": "Mutable stable docs; source main license unpinned; no exact installed release",
+      "source_ids": [
+        "src-ragas"
+      ],
+      "evidence_locator": "src-ragas / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "LLM-driven metrics not independent measurements of every application; no metric validity or dataset rights inspected."
+    }
   },
   {
     "id": "llamaindex",
     "name": "LlamaIndex",
     "website": "https://www.llamaindex.ai/",
-    "organization": "LlamaIndex",
+    "organization": "Framework copyright Jerry Liu; commercial brand LlamaIndex, corporate contracting entity unverified",
     "classifications": [
       "Adjacent competitor",
       "Substitute workflow"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Document-oriented agent workflows and data processing.",
+    "capabilities": "Documented scope (not exercised in this pass): LlamaIndex Framework supports data/RAG/agent applications; commercial LlamaParse services and LiteParse are distinct product surfaces.",
     "documented_features": [
       "rag",
       "agents",
@@ -1379,9 +1750,9 @@
         "https://www.llamaindex.ai/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Commercial services and framework ecosystem; component-specific terms.",
+    "deployment_support": "Framework docs include local-LLM tutorial; site advertises secure cloud/VPC service deployment. Neither exercised.",
+    "apis_and_integrations": "Framework developer docs cover LLMs, connectors, indexing/retrieval, agents and workflows. No API called.",
+    "licensing": "Framework root MIT read; commercial services, LiteParse, integrations, model/data content require separate terms.",
     "source_ids": [
       "src-llamaindex"
     ],
@@ -1399,21 +1770,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.llamaindex.ai/",
+      "operator": "Framework copyright Jerry Liu; commercial brand LlamaIndex, corporate contracting entity unverified",
+      "product_scope": "LlamaIndex Framework supports data/RAG/agent applications; commercial LlamaParse services and LiteParse are distinct product surfaces.",
+      "version": "Unversioned developer docs and main source license; site advertises Extract v2.5, not a framework version",
+      "source_ids": [
+        "src-llamaindex"
+      ],
+      "evidence_locator": "src-llamaindex / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No parsing, workflow, accuracy, uptime or compliance behavior verified."
+    }
   },
   {
     "id": "langchain",
     "name": "LangChain",
     "website": "https://www.langchain.com/",
-    "organization": "LangChain",
+    "organization": "LangChain, Inc. named in framework source copyright",
     "classifications": [
       "Adjacent competitor",
       "Substitute workflow"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Agent development platform and ecosystem.",
+    "capabilities": "Documented scope (not exercised in this pass): Open model-agnostic agent frameworks/harnesses are distinct from LangSmith testing, deployment, monitoring and Fleet no-code surfaces.",
     "documented_features": [
       "agents",
       "workflow"
@@ -1426,9 +1811,9 @@
         "https://www.langchain.com/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Framework and platform offerings; licensing differs by component.",
+    "deployment_support": "Docs list LangSmith Cloud, BYOC and self-hosted setup; no entitlement or installation verified.",
+    "apis_and_integrations": "Documentation describes LangChain, LangGraph and Deep Agents development plus gateway and observability platform surfaces. No endpoint invoked.",
+    "licensing": "LangChain framework root MIT read; LangSmith and other products, providers/models and datasets need component-specific review.",
     "source_ids": [
       "src-langchain"
     ],
@@ -1448,21 +1833,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://www.langchain.com/",
+      "operator": "LangChain, Inc. named in framework source copyright",
+      "product_scope": "Open model-agnostic agent frameworks/harnesses are distinct from LangSmith testing, deployment, monitoring and Fleet no-code surfaces.",
+      "version": "Unversioned ecosystem home and master framework license; release unpinned",
+      "source_ids": [
+        "src-langchain"
+      ],
+      "evidence_locator": "src-langchain / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No agent build, deployment or compatibility workflow executed; framework license cannot be extended to all named products."
+    }
   },
   {
     "id": "qdrant-bench",
     "name": "Qdrant Vector Search Benchmarks",
     "website": "https://qdrant.tech/benchmarks/",
-    "organization": "Qdrant",
+    "organization": "Qdrant publishes benchmark; corporate legal entity not newly verified",
     "classifications": [
       "Benchmark provider",
       "Data source"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Vendor-published vector search comparisons.",
+    "capabilities": "Documented scope (not exercised in this pass): Vendor-published comparative vector-search and filtered ANN benchmark evidence, separate from Qdrant database or Cloud product.",
     "documented_features": [
       "benchmarks"
     ],
@@ -1474,9 +1873,9 @@
         "https://qdrant.tech/benchmarks/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Vendor evidence; independent reproduction and dataset rights required.",
+    "deployment_support": "Published protocol runs database engines in containers; this is not a deployment-service capability.",
+    "apis_and_integrations": "Benchmark protocol/source link documented; live data API and redistribution rights unverified.",
+    "licensing": "Links to code and datasets do not establish all data rights; no bulk result/dataset copied and no reuse permission concluded.",
     "source_ids": [
       "src-qdrant-bench"
     ],
@@ -1494,21 +1893,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://qdrant.tech/benchmarks/",
+      "operator": "Qdrant publishes benchmark; corporate legal entity not newly verified",
+      "product_scope": "Vendor-published comparative vector-search and filtered ANN benchmark evidence, separate from Qdrant database or Cloud product.",
+      "version": "Single-node results labeled January/June 2024; filtered results February 2023; exact engine and harness revisions not pinned here",
+      "source_ids": [
+        "src-qdrant-bench"
+      ],
+      "evidence_locator": "src-qdrant-bench / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Publisher acknowledges possible bias; results dated, configuration-specific and not reproduced. No vendor ranking inferred."
+    }
   },
   {
     "id": "lm-eval",
     "name": "LM Evaluation Harness",
     "website": "https://github.com/EleutherAI/lm-evaluation-harness",
-    "organization": "EleutherAI",
+    "organization": "EleutherAI repository organization established; exact legal entity not investigated",
     "classifications": [
       "Benchmark provider",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Framework for few-shot language-model evaluation.",
+    "capabilities": "Documented scope (not exercised in this pass): User-run language-model evaluation framework, distinct from particular leaderboard results and datasets.",
     "documented_features": [
       "benchmarks",
       "evaluation"
@@ -1521,9 +1934,9 @@
         "https://github.com/EleutherAI/lm-evaluation-harness"
       ]
     },
-    "deployment_support": "Open-source framework run by the user (public GitHub repository).",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Source framework; test datasets and model licenses remain separate.",
+    "deployment_support": "README documents local library/CLI and separate optional model backends.",
+    "apis_and_integrations": "README documents Python simple_evaluate(), YAML configuration, local Hugging Face/vLLM and hosted model API backends; not executed.",
+    "licensing": "Root MIT license read; dataset, model, prompt and backend licenses/terms must be reviewed separately.",
     "source_ids": [
       "src-lm-eval"
     ],
@@ -1543,21 +1956,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://github.com/EleutherAI/lm-evaluation-harness",
+      "operator": "EleutherAI repository organization established; exact legal entity not investigated",
+      "product_scope": "User-run language-model evaluation framework, distinct from particular leaderboard results and datasets.",
+      "version": "Mutable main README includes 2026-09 plugin update and older release announcement; exact current release/SHA not established",
+      "source_ids": [
+        "src-lm-eval"
+      ],
+      "evidence_locator": "src-lm-eval / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No benchmark executed; repository's framework use does not certify all contributed tasks or comparability of published runs."
+    }
   },
   {
     "id": "mcp-registry",
     "name": "Official MCP Registry",
     "website": "https://github.com/modelcontextprotocol/registry",
-    "organization": "Model Context Protocol maintainers",
+    "organization": "Repository under modelcontextprotocol; license names Model Context Protocol a Series of LF Projects, LLC",
     "classifications": [
       "Data source",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Community-maintained registry service for MCP server metadata.",
+    "capabilities": "Documented scope (not exercised in this pass): Community-driven registry service providing MCP server metadata to clients; listing is not compatibility/security acceptance.",
     "documented_features": [
       "mcp",
       "api_access"
@@ -1570,9 +1997,9 @@
         "https://registry.modelcontextprotocol.io/docs"
       ]
     },
-    "deployment_support": "Open-source registry service (public GitHub repository).",
-    "apis_and_integrations": "Primary documentation: registry API serving MCP server metadata. Untested.",
-    "licensing": "Registry listings are not a compatibility or security certification.",
+    "deployment_support": "README documents registry service local development; production service guarantees unverified.",
+    "apis_and_integrations": "README links live API docs; v0.1 freeze/preview history documented. API not exercised.",
+    "licensing": "License transition: new/consented code Apache-2.0, unconsented original contributions MIT, non-spec docs CC-BY-4.0. Do not label entire registry uniformly MIT or infer metadata rights.",
     "source_ids": [
       "src-mcp-registry"
     ],
@@ -1588,21 +2015,35 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://github.com/modelcontextprotocol/registry",
+      "operator": "Repository under modelcontextprotocol; license names Model Context Protocol a Series of LF Projects, LLC",
+      "product_scope": "Community-driven registry service providing MCP server metadata to clients; listing is not compatibility/security acceptance.",
+      "version": "Unpinned main README; history mentions 2025-10-24 v0.1 API freeze, not proof of current GA status",
+      "source_ids": [
+        "src-mcp-registry"
+      ],
+      "evidence_locator": "src-mcp-registry / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "Current API schema/version and listing-data reuse not established by this read; individual server capabilities not validated."
+    }
   },
   {
     "id": "unsloth",
     "name": "Unsloth",
     "website": "https://unsloth.ai/",
-    "organization": "Unsloth",
+    "organization": "Root copyright names Unsloth AI. Inc team, Daniel Han-Chen and Michael Han-Chen",
     "classifications": [
       "Substitute workflow",
       "Open-source integration candidate"
     ],
     "classification_basis": "Analyst judgement against a guided AI stack-selection workflow; direct means competing on a material initial workflow, not verified complete T0–T6 coverage.",
     "target_users": "AI developers and technical decision makers",
-    "capabilities": "Local model running and training tools.",
+    "capabilities": "Documented scope (not exercised in this pass): Local model inference/training library plus optional Desktop/Studio and CLI surfaces; separate licensing boundaries.",
     "documented_features": [
       "fine_tuning",
       "inference_engine"
@@ -1615,9 +2056,9 @@
         "https://unsloth.ai/"
       ]
     },
-    "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Reuse PR #46 for framework research; model and software terms separate.",
+    "deployment_support": "Primary documentation lists Desktop platforms, browser UI native install and Docker; none installed.",
+    "apis_and_integrations": "Docs advertise OpenAI-compatible serving API, local-agent connections and model export; none exercised.",
+    "licensing": "Root license identifies Apache-2.0 unsloth/tests/scripts, AGPLv3 optional studio/unsloth_cli. Models, datasets and separate packages retain separate rights.",
     "source_ids": [
       "src-unsloth"
     ],
@@ -1635,7 +2076,21 @@
       41
     ],
     "limitations": [
-      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay."
-    ]
+      "Public documentation does not establish actual reliability, full compatibility, market share, or willingness to pay.",
+      "2026-10-18 documentary identity/scope recheck is in discovery_review and the dated source recheck. Original last_verification and other historical field evidence retain their original dates; this is not a fresh verification of every field."
+    ],
+    "discovery_review": {
+      "access_date": "2026-10-18",
+      "canonical_url": "https://unsloth.ai/",
+      "operator": "Root copyright names Unsloth AI. Inc team, Daniel Han-Chen and Michael Han-Chen",
+      "product_scope": "Local model inference/training library plus optional Desktop/Studio and CLI surfaces; separate licensing boundaries.",
+      "version": "Unversioned docs and main LICENSE unpinned; model catalog labels are not software release pins",
+      "source_ids": [
+        "src-unsloth"
+      ],
+      "evidence_locator": "src-unsloth / rechecks / 2026-10-18",
+      "status": "Source-checked documentary scope; behavior and unknown operators unverified",
+      "limitations": "No training, inference, speed, accuracy, VRAM or compatibility reproduction; existing PR #46 remains framework handoff."
+    }
   }
 ]

@@ -1,0 +1,127 @@
+# MR-01 landscape review and selection rationale
+
+Refs #48. Research date: 2026-10-18 (Asia/Shanghai). Partial contribution for review; no issue acceptance is asserted.
+
+## Revision, authority and writer boundary
+
+The user explicitly requested this contribution on behalf of CompleteDotTech's original #48 work. Live GitHub now lists **Mattycodes69 and appletechie** as co-assignees; CompleteDotTech remains the issue's named evidence coordinator. This contribution claims no ownership transfer and changes no assignment, issue checklist, Project field or native relationship.
+
+PR #67 is merged to main, not open. Its historical branch `research/market-intelligence` remains at `aed4e7d6fd63d1f8a3e765295fa0a23ab8af3ce2`. After being told that main contains later work, the user explicitly retained that branch as this PR's base. This is a declared stack against that historical branch, not delivery to current main. The PR diff contains only #48 analyst notes and this rationale. It must be reconciled with later main contributions before any future canonical delivery.
+
+Main was inspected at `1393d00b2f710d405384360dbbdc220f0356eaf2`: 33 entities and 14 profiles, including merged CanIRun.ai intake #98 and operator correction #109. This base has **32 registered entities** and 13 profiles. The two existing CanIRun.ai source records were carried individually from that pinned main revision to preserve their IDs and operator correction; no CanIRun entity, feature cells, profile or unrelated branch was imported. The selection below references its already-delivered main profile as the fourteenth candidate. Do not read this branch's 32 count as current main's inventory count.
+
+Required contributor, governance, method, mapping, dependency and adoption documents were read at the actual base and current main revisions. The newest issue prompt change is `056956d1c3c37ba691257d84d4323add884e1ece`; its branch containment and CanIRun supplement were inspected. The base prompt is `41d33f210e5229bb46aaf40fc9987f22b13e696a`. The user's open-PR stop point overrides the prompts' later merge/Project reconciliation steps. Unmerged review proposals were used only as leads. #74/#75/#81 are merged to main; #79/#80 merged into the proposal branch. They do not confer receiving-owner acceptance for this revision. #83 was also read back as merged before source integration; no open PR overlapping either JSON file was returned at that check.
+
+One integrator wrote both shared JSON files in one serialized pass. Separate agents collected the first 17 and last 16 current-main entity checks and audited live state; the integrator separately checked six community leads and PCPartPicker. Agent review is not human approval. #49 retains the feature matrix, #50 the profiles, #66 hands-on tests, #59 the canonical handoff ledger, and #41/#60 reuse decisions. No catalog, pricebook, contract or schema was changed.
+
+## Acceptance map
+
+| Live #48 criterion | Artifact / evidence | Check for this submission | Required reviewer | Status / remaining gap |
+| --- | --- | --- | --- | --- |
+| Verify all five seeds | First five `competitors.json` discovery_review records; dated `sources.json` rechecks; seed section below | Official pages and linked upstream documents read; website/product/repository boundaries compared | appletechie and evidence coordinator CompleteDotTech | Partly met: all five operational seeds source-checked; original historical seed intent remains undocumented and operator unknowns remain explicit |
+| Classify at least 30 distinct resources | 32 unchanged entity IDs and existing taxonomy; dated product_scope and operator fields | Per-entity documentary identity/scope audit; no duplicate ID or alias promoted as a new resource | appletechie / CompleteDotTech | Met for documentary discovery: 32 classified resources; not a claim that 32 products ran or are complete substitutes |
+| Record entity boundaries and unknowns | `discovery_review`; source limitations, URL statuses, version/region and rights | Site/repo/product/cloud/code/data boundaries reviewed for every base entity | appletechie; #41 owners for provenance | Met as an uncertainty record; unresolved operators and version pins are recorded, not invented |
+| Select 10–15 material deep dives | Fourteen-candidate selection below; 13 base profiles plus existing main CanIRun profile | Decision overlap, evidence availability, substitution risk and source relevance stated; exclusions bounded | #50: zwright8 / appletechie; coordinator | Met as a proposed selection; profile and hands-on acceptance remain separate |
+| Every significant conclusion links to evidence or an explicit hypothesis | Dated recheck claims contain URLs, publishers, evidence classes and inherited date/version/region/confidence/rights/limits | Explicit claim review described below; no fresh performance, price or feature grade inferred | Independent evidence reviewer; #41 for intended reuse | Partly met for the full historical artifact: fresh discovery claims are linked; untouched historical fields are not blanket reverified |
+| Relevant technical owners review handoffs; unresolved decisions named | Exact receiver questions below and PR requests at submitted head | Historical scoped receipts distinguished from this revision's pending dispositions | All live #6/#10/#25/#41 receiving owners | Open: requests and existing context receipts are not acceptance of this head |
+| Repository checks pass; reviewer accepts evidence before Done | Validation section and PR checks at submitted head | Python 3.12 workflow plus market integrity and diff check | Independent reviewer and receiving owners | Partly met only after reported checks pass; evidence acceptance remains open and #48 remains open |
+
+These statuses are submission assessments, not edits to GitHub's seven unchecked boxes.
+
+## Seeds and identity boundaries
+
+The base landscape calls the first-five list inferred. Current main's [landscape at the inspected revision](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/1393d00b2f710d405384360dbbdc220f0356eaf2/docs/market-research/competitive-landscape.md#seeds) explicitly selects the same five as the operational scope on 2026-10-18. This supplies a documented working list without claiming to recover undocumented original intent from array order.
+
+- **BenchLM:** official home, selector and terms read (`src-benchlm`, dated recheck). Hosted model/provider decision tool; legal operator remains unnamed. The selector's workload/constraint/explanation/share claims are documented, not freshly exercised.
+- **Harness Bench:** official site and linked Qihoo360 repository read (`src-harness-bench`). Site attribution establishes Harness Bench Team / repository linkage; it does not identify a legal company or establish dataset rights. No benchmark run or new numeric suite-size claim.
+- **llmfit:** seed `llmfit.org`, upstream AlexsJones repository, CNAME, licence and `llmfit.axjns.dev` read (`src-llmfit`, `src-llmfit-upstream-pages`). Upstream Alex Jones identity is established separately; seed-domain operator/affiliation remains unverified. Mutable/cached CNAME is not a fresh repository-wide absence search.
+- **Local AI Planner:** official planner and Logarithmic Spirals about page read (`src-local-ai-planner`, `src-local-ai-planner-about`). Individual pseudonymous blog author; weights/KV/runtime/speed outputs are estimates. No numerical accuracy or runtime-topology verification.
+- **Flocci:** official Ask, Stack and home pages read (`src-flocci`). Flocci Technologies is the site's attribution. Fresh evidence is documentation only; the historical generated PDF-RAG advice retains its 2026-10-16 observation date. Contradiction handling and reusable export remain with #66.
+
+Also retain BenchLM, CanRun, CanItRun, LLM Stats and GPUs.io legal-operator unknowns. CanRun, CanItRun and CanIRun.ai are different products; similarity of names establishes no affiliation. The carried CanIRun source plus fresh site/repository check identifies the individual account **midudev**, retaining #109's correction while leaving legal entity and other affiliations unknown. ModelFit's official about page self-identifies Peter Dekker; code package branding does not replace that qualified attribution.
+
+## Direct-substitute pressure and falsification route
+
+The following are documentary findings or explicit test hypotheses. Per-claim publisher/date/version/region/confidence/rights/limitations live in the corresponding source's `rechecks` entry dated 2026-10-18. Reading a page is an access observation; reading instructions for an API, export or recommendation is not executing it.
+
+1. **Workload-first selection already has material overlap.** [BenchLM selector](https://benchlm.ai/tools/llm-selector) documents job descriptions, constraints, explanations and shareable answers (`src-benchlm`; method label `bench-align-v5.8-2026-09-30`). Flocci advertises ordered toolchains; Local AI Planner documents goals plus hardware controls. Hypothesis for #50 -> #66: these may suffice for bounded hosted-model or local-stack decisions. Test the unchanged local-PDF/Windows/16-GB/no-GPU scenario and explicit contradictory constraints, not merely whether an input form exists.
+2. **Reusable configuration is not an unoccupied feature.** Dify [DSL export](https://docs.dify.ai/en/cloud/use-dify/workspace/app-management), Langflow [flow JSON](https://docs.langflow.org/concepts-flows-import), SkyPilot YAML (reviewed URLs in `src-skypilot`) and n8n's [AI Starter Kit](https://docs.n8n.io/deploy/host-n8n/deploy-with-the-ai-starter-kit.md) document reusable workflows/manifests. The n8n kit names Ollama, Qdrant, PostgreSQL and n8n, explicitly for testing/proof of concept. Hypothesis: a prepared composition may substitute for planning in some segments. None was exported, imported or deployed here; a manifest does not establish compatibility explanation, secrets-safe sharing or a successful workload.
+3. **Fit explanations remain scoped estimates.** CanRun, CanItRun, ModelFit, Local AI Planner and CanIRun.ai document fit assumptions/reasons; upstream llmfit documents hardware/model matching. That supports investigation, not universal compatibility or an error bound. #10 must decide which conditions are useful; no ResourceEstimate or cross-component rule follows.
+4. **Published configuration histories already exist.** Upstream [llmfit README](https://github.com/AlexsJones/llmfit) documents saved benchmark results and contribution/sharing. Community resources below document shared run histories/protocols. This is evidence against assuming exclusive possession of configuration history; it is not a verdict on reproducibility, coverage or a complete multi-tier substitute.
+
+Route these candidates through **#50 (zwright8/appletechie) to #66 (tynamite/itisSomeone)**. Preserve #66's existing test order and [dated main observations](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/1393d00b2f710d405384360dbbdc220f0356eaf2/research/market/substitute-validation.md). #125's ModelFit/CanIRun observations are historical bounded browser evidence, not new tests here. Flocci's remaining offline-plus-hosted-API-plus-zero-budget contradiction and save/export check require an authorized signed-in session and an actual run; no account, credit purchase or prompt was used here. #57/#58's native #66 gate remains unresolved. Broad discovery proves neither absence nor presence of an end-to-end substitute.
+
+## Fourteen selected deep dives for #50
+
+This is analyst selection, not an empirical vendor ranking. Existing IDs and profile paths are preserved.
+
+| Entity / profile | Decision overlap and substitution risk | Evidence availability / source relevance |
+| --- | --- | --- |
+| `flocci` / `competitors/flocci.md` | Workload-first ordered stack is the strongest existing whole-workflow lead | Public docs plus dated #66 advice observation; contradiction/export gate remains |
+| `modelfit` / `competitors/modelfit.md` | Device-first model choice can replace the initial fit decision | Official methodology, operator and dataset/code terms; #125 observation remains scoped |
+| `llmfit` / `competitors/llmfit.md` | Hardware/runtime/quantization selection plus benchmark history | Official upstream README/API/licence; seed-domain affiliation unresolved |
+| `local-ai-planner` / `competitors/local-ai-planner.md` | Goal/context/runtime/hardware planning | Public tool assumptions support #10 comparison; accuracy is untested |
+| `benchlm` / `competitors/benchlm.md` | Workload/constraint explanations and reusable answer link | Official selector/method/terms; data reuse can change feasibility |
+| `artificial-analysis` / `competitors/artificial-analysis.md` | Hosted model/provider comparison and recommendations | Official API/method/terms; vendor results and restricted reuse need separation |
+| `openrouter` / `competitors/openrouter.md` | Model/provider choice can flow directly into execution | Official model/routing docs and terms; API access is not unrestricted reuse |
+| `hugging-face` / `competitors/hugging-face.md` | Model discovery, model-card relations and versions | Primary Hub/card docs; per-content licences and metadata quality matter |
+| `models-dev` / `competitors/models-dev.md` | Ready metadata may replace part of catalog research | Public repository and identifier model; provider versus canonical-model distinction |
+| `harness-bench` / `competitors/harness-bench.md` | Model-harness evidence can change a recommendation | Official protocol/repository; no independent reproduction or reuse clearance |
+| `dify` / `competitors/dify.md` | Build an application instead of selecting a stack | Official DSL/cloud/community docs; export/compatibility not exercised |
+| `n8n` / `competitors/n8n.md` | Reusable multi-component starter composition | Official kit/API/source terms; proof-of-concept scope and component rights |
+| `skypilot` / `competitors/skypilot.md` | Workload-driven infrastructure constraints and reusable YAML | Official latest reference/SDK docs; no optimizer or cloud capacity tested |
+| `canirun-ai` / existing [main profile](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/1393d00b2f710d405384360dbbdc220f0356eaf2/research/market/competitors/canirun-ai.md) | Hardware plus use-case recommendations are a material fit substitute | Existing #98/#109 intake; fresh official site/README; estimates/API/licence claims unexercised |
+
+**Exclusions:** Arena/LLM Stats overlap hosted comparison; CanRun/CanItRun overlap local fit but retain unnamed operators. They remain discovery resources, not negative capability findings. Langflow/Flowise/LlamaIndex/LangChain overlap composition and remain counterexamples without duplicating Dify/n8n profiles. GPUs.io/Vast/Runpod are infrastructure/pricing leads for #54/#39. Ollama/BentoML/Langfuse/Ragas/LM Evaluation Harness/Qdrant benchmarks/MCP Registry/Unsloth are runtime, evaluation, metadata or operations components rather than the clearest selection-flow tests. This bounds work; it does not say those products cannot substitute.
+
+## Snowballed community resources
+
+The six existing source IDs below were retained and rechecked from the primary-source leads raised in tynamite's [PR #67 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545) and #81. They remain staged candidates, **not extra counted registry entities**. Promoting them requires coordinated #49 matrix rows; this PR does not edit another writer's matrix or invent 288 evidence cells. The 32 registered base resources already meet the numeric bound. With these six, potential base breadth is 38; current main plus these leads would be 39.
+
+| Source ID / resource | Proposed existing-taxonomy classification | Fresh scope and limitation |
+| --- | --- | --- |
+| `src-localscore` / LocalScore | Benchmark provider; Data source; Open-source integration candidate | Official about page describes optional public submissions and single-GPU scope; no result verification performed |
+| `src-localmaxxing` / LocalMaxxing | Partial competitor; Benchmark provider; Data source | Community model/hardware/engine/quantization runs and setup guide; sign-in/key needed for submission; operator/data rights unresolved |
+| `src-rapid-mlx` / Rapid-MLX community board | Benchmark provider; Data source | Locked protocol and separate consent-previewed sharing documented; fresh footer says submissions CC0, unlike what the older static check saw; rights scope still needs #41 |
+| `src-metrillm` / MetriLLM | Benchmark provider; Data source; Open-source integration candidate | Website timed out; repository README documents local scores, exports and public share links; no run or score validation |
+| `src-openbenchmarking-llama-cpp` / OpenBenchmarking profile | Benchmark provider; Data source | Fresh retrieval error; historical bot challenge preserved. Current profile/version remains unverified; not treated as absent |
+| `src-llama-cpp-perf-threads` / llama.cpp CUDA discussion | Data source | Primary thread specifies conditions and commit/driver reporting; posted results remain unverified community reports; part of llama.cpp, not another company |
+
+Keep the fourteen-profile selection. LocalScore/LocalMaxxing may justify a fifteenth profile or a replacement if #50/coordinator decides the counterexample changes the decision; adding both would exceed 15. No scope expansion or acceptance is implied.
+
+## Claim/evidence review and source limitations
+
+All 32 `discovery_review` records point to dated source rechecks. Claim evidence classes attach to statements; the older source-level `evidence_grade` remains historical metadata, not a grade for every later claim. Date/version/region/confidence/rights/limitations on each recheck apply to its child claims. `last_verification` and original access dates were deliberately retained: the fresh pass checks identity, documentary scope, selected interfaces and rights statements, not every historical rate, field or numeric assertion. No matrix grade was promoted.
+
+The explicit review compared every changed operator/scope/interface/licensing statement against the collected primary documents, checked claim-versus-observation wording and per-claim URLs, and checked stable IDs, no dropped source record, and source resolution. Documentary licences are qualified by component: Dify's modified Apache terms, Flowise enterprise exceptions, Unsloth library versus optional Studio/CLI, Langfuse code versus Cloud contracting terms, and MCP Registry's transition/docs terms. Source visibility or a code licence is not blanket permission for model, dataset, community-result or competing-product reuse. #41/#60 must accept intended material/use scopes. CanIRun's README-stated MIT is retained as a statement; the actual licence instrument was not retrieved. Legal ownership was not independently checked.
+
+Public web extraction can serve cached text and supplies no immutable content hash; mutable default-branch documents remain unpinned. Access date means the source was read through that tool on 2026-10-18, not proof of its contemporaneous origin contents. No empirical workflow, API endpoint, compute job, score, saved configuration, licensing compliance or data provenance chain was independently reproduced. No raw result dataset, weights, personal data or large evidence download was committed.
+
+PCPartPicker list returned 403 again (`src-pcpartpicker` recheck); no bypass or login. GPUs.io now yielded partial static home/privacy text, while its data table remained loading and about/terms retrieval failed; this coexists with the earlier 403 and leaves operator/API/prices/rights unknown. OpenBenchmarking's current profile retrieval failed; MetriLLM's site timed out while its official repository was readable. These failures prove no missing capability or product absence. No rate was collected or refreshed.
+
+## Exact receiving-owner disposition requests
+
+The PR body pins these requests to its full submitted commit SHA. Please **accept, narrow or reject** the named slice and state conditions; a general approval is insufficient. The existing #59 writer should reconcile any resulting receipts in the canonical ledger in a separately authorized contribution.
+
+- **#6 — zwright8, PUSHINGSQUARES:** Do the 32 identity/scope records and fourteen-profile selection support discovery/context only, with no model recommendation, capability or benchmark-quality endorsement? zwright8's [historical narrowed receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859) at `7acbefbf4e4e700231e88be272bc89e3a73dde15` keeps its original scope; PUSHINGSQUARES and this new slice remain pending.
+- **#10 — Mattycodes69, appletechie:** Are the hardware-fit candidates and explicitly estimated conditions useful as methodology leads only, with no validated memory fit, error bound, runtime topology or ResourceEstimate? The author cannot supply independent acceptance; appletechie and an appropriate independent receiver must review the new slice.
+- **#25 — CompleteDotTech, Mattycodes69:** Are Flocci/Dify/n8n/SkyPilot workflow/export claims and the #50 -> #66 tests the right composition counterexamples, without asserting deployment, privacy, runtime compatibility or an end-to-end substitute? Author integration is not a receiving-owner review.
+- **#41 — tynamite, PUSHINGSQUARES:** Accept/narrow/reject the appended claim-level checks, qualified operator records, unchanged historical dates, and source-specific code/data/service rights boundaries. Which exact materials/intended uses remain excluded pending #60? The conditional [PR #67 provenance receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545) does not accept all new evidence or clear reuse.
+- **#50 — zwright8/appletechie and coordinator CompleteDotTech:** Confirm the fourteen selections and original-seed uncertainty; choose whether a community profile should replace/add to them. Route hands-on falsification to #66's existing owners. #49 owns any later new-entity matrix coverage. #59 co-owners retain the ledger.
+
+## Validation of this contribution
+
+Executed in the isolated worktree with `.venv/Scripts` first on PATH; `python --version` returned **Python 3.12.14**. These results apply to the submitted artifacts, not newer main tests or another PR's historical run.
+
+| Exact command | Actual outcome |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt` | Exit 0; required pinned dependencies installed, subsequent invocation satisfied |
+| `python -m unittest discover -s contracts/v1/tests -v` | Exit 0; 21 tests passed |
+| `python -m unittest discover -s tests -v` | Exit 0; 24 tests passed |
+| `python scripts/validate_research.py` | Exit 0; 26 catalog proposals, 2 pricebooks and external evidence metadata validated |
+| `python scripts/validate_market_research.py` | Exit 0; 32 entities, 1,536 cells, 20 issues |
+| `git diff --check` | Exit 0; no whitespace errors |
+
+An additional local audit script (kept outside the repository) checked duplicate JSON keys, 32 stable IDs/order/classifications/features, unchanged prices and historical dates, all original fields in 51 source records preserved, two individually carried source records, 40 dated rechecks and complete public-URL metadata for 92 claim records. It also checked evidence locators and source resolution. That script is a local audit aid, not a new repository validation contract.
+
+Separate agent review caught and the integrator corrected four compound source citations, qualified fresh scope as unexercised *in this pass*, and removed an assumption that a signed-in Flocci session exists. Agents checked the historical source preservation and licence-summary wording; these reviews are not independent human or receiving-owner acceptance. Automation checks structure/imports/references, not factual truth, rights, freshness, independent performance, secrets absence or owner acceptance. The explicit documentary review above is separate and remains subject to independent reviewer acceptance.
