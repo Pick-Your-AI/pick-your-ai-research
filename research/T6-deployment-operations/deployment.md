@@ -727,3 +727,28 @@ IAM/egress, MCP subprocess support, selected-version rollout/rollback and runtim
 execution remain unverified for these targets. The earlier readiness inputs and
 all owner handoffs remain required. Packaging evidence narrows this comparison's
 unknowns; it does not complete deployment research or authorize cloud operations.
+
+## Hosting rule-to-step linkage proposal (2026-10-18)
+
+This dated supplement addresses the explicit **#9 → #37: accept, integration
+pending** request in [appletechie's co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047),
+which reviewed main `66b46d4`. That receipt asks for the hosting rule IDs in
+region/network steps; it does not supply PUSHINGSQUARES's disposition or approve
+an executable ruleset. The following links prepare that documentary integration
+for the #37 owners. Original vendor-source dates and checklist claims stay scoped
+to their own evidence; no new vendor observation or configuration test is added.
+
+| Existing deployment step | Hosting proposal to consult | Required distinction |
+| --- | --- | --- |
+| S1 region declaration; S17 regional API endpoint; S28 managed offering/quota | [`t2-hosting-offering-membership`](../T2-infrastructure/rules/hosting-rules.md#t2-hosting-offering-membership) | Match the selected provider/service/version/location. A researched subset cannot prove absence; published offering presence does not establish account entitlement, quota, current stock or permitted residency. Hidden provider hardware does not remove a requested API-region check. |
+| S10 containment/egress; S45 self-hosted network restrictions | [`t2-hosting-private-networking`](../T2-infrastructure/rules/hosting-rules.md#t2-hosting-private-networking) | Consult the scoped capability when private networking is requested by the host selection or workload. An omitted capability remains unknown. A documented capability does not prove the actual route, identity policy, configured isolation or air-gap; retain S10/S45's separate configuration and test evidence. |
+| S43 persistent artifact cache; S50 retained rollback artifacts | [`t2-hosting-mounted-storage-locality`](../T2-infrastructure/rules/hosting-rules.md#t2-hosting-mounted-storage-locality) | Apply the proposal only to an evidenced direct mount with provider placement constraints. A remote fetch or shared catalog ID does not prove a mount or shared storage instance. Compatible placement does not establish replication, backup, retention or available compute. |
+
+These are research cross-references to hosting proposal revision **0.3.0**, not
+new step outcomes or final #40 rule publication. Read applicability, constraint
+and evidence diagnostics separately; an unresolved requirement is not a passed
+readiness check. Preserve the separate W-R8 isolation and D-R6 residency
+assessment, #13/#28 data semantics, #39 billing evidence and real deployment
+observables. No credentials, network settings, permissions, provider accounts or
+artifacts are changed. Receiving review of this integration and remaining
+co-owner scopes stay pending; #37 and #9 remain open.
