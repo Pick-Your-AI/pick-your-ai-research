@@ -906,3 +906,81 @@ Refs #118, #35, #38. Source checked 2026-10-18; not independently reproduced. Th
 Traceloop's [Prompts, Completions and Embeddings](https://www.traceloop.com/docs/openllmetry/privacy/traces) documentation says OpenLLMetry records prompts, completions and embeddings in span attributes by default. The documented global control is `TRACELOOP_TRACE_CONTENT=false`; TypeScript/JavaScript also supports `traceContent: false`. The same page documents selective workflow/task controls and an `override_enable_content_tracing` context override, so a global setting alone is not evidence that every emitted span is content-free.
 
 Receiving implication: assess overrides and inspect the selected instrumentation's emitted attributes before accepting content-free telemetry. Disabling this content capture does not establish deletion of previously exported traces, retention limits, authorization, or absence of other sensitive attributes. Those remain #35/#38 decisions and runtime evidence requirements. No SDK/version, exporter or backend was run here; the mutable documentation does not qualify every installed instrumentation tuple. The remaining #118 proposal families and original revision are preserved in the [sibling reconciliation](sibling-reconciliation.md); their receiving acceptance remains pending.
+
+## T4 framework telemetry boundaries (2026-10-18; partial source follow-up)
+
+The [paired receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+requests defaults beyond M-R59's OpenAI Agents SDK scope. The findings below
+separate trace enablement, payload capture and other telemetry paths. They do not
+establish a single framework-wide `default_telemetry_egress` boolean. Method: read
+publisher documentation and pinned source text only; no framework installation,
+model request, exporter connection or environment setting was executed. Grade:
+primary documentation/source, source checked / unverified.
+
+### LangGraph with LangSmith
+
+The [LangGraph tracing guide](https://docs.langchain.com/langsmith/trace-with-langgraph)
+(accessed 2026-10-18, mutable) explicitly enables tracing with `LANGSMITH_TRACING`
+and a LangSmith credential; the documented default service region is US, with a
+separate endpoint for other regions. Its trace view can include user messages,
+tool calls and the final response. This is a tracing integration, not proof that
+all LangGraph deployments export data or that their payloads are content-free.
+
+For a reproducible lower-bound implementation check, LangSmith SDK tag `v0.4.1`
+resolves to `1101a25abf9db9715e0be86b89a98a6092501a1e`.
+Its [Python utils.py](https://github.com/langchain-ai/langsmith-sdk/blob/1101a25abf9db9715e0be86b89a98a6092501a1e/python/langsmith/utils.py)
+checks explicit tracing context first, then an existing run tree, then environment
+flags; with no context/run/flag it returns false. `get_env_var` checks LANGSMITH
+and LANGCHAIN namespaces. An existing run or explicit context can enable tracing
+without that one environment variable. This is the earlier integration minimum
+already referenced by T4, not the current installed SDK or proof about all later
+versions, hosted Agent Server, plugins or unrelated telemetry.
+
+### Google ADK entry points and content
+
+ADK Python tag `v2.12.0` resolves to `38381f65f2bee0f70a89f938ee64e51b34916fa7`.
+The pinned [CLI option definitions](https://github.com/google/adk-python/blob/38381f65f2bee0f70a89f938ee64e51b34916fa7/src/google/adk/cli/cli_tools_click.py)
+set the FastAPI common options `trace_to_cloud` and `otel_to_cloud` false by default;
+the Agent Engine deployment options instead use an unset (`None`) default and
+deprecate the former flag. Do not transfer one entry point's default to another.
+These option declarations alone do not prove the effective exporter state.
+
+The [Cloud Trace guide](https://adk.dev/integrations/cloud-trace/) (accessed
+2026-10-18, mutable) documents explicit CLI/programmatic enablement. Its payload
+attributes can contain requests, responses and tool arguments/results. The guide
+says Agent Engine deployment with `--otel_to_cloud` sets
+`ADK_CAPTURE_MESSAGE_CONTENT_IN_SPANS=false` unless already defined in `.env`;
+other targets require explicit configuration. It separately describes the OTel
+message-content flag. Pinned [tracing.py](https://github.com/google/adk-python/blob/38381f65f2bee0f70a89f938ee64e51b34916fa7/src/google/adk/telemetry/tracing.py)
+likewise warns that some default span attributes can contain PII. Disabling one
+content path is not a global no-egress claim. Other CLI metrics, plugins and
+provider traffic need their own review; none was exercised here.
+
+### Claude Agent SDK versus the underlying CLI
+
+The [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview)
+(accessed 2026-10-18) describes a library running the Claude Code binary. The
+[CLI monitoring guide](https://code.claude.com/docs/en/monitoring-usage) distinguishes
+configured OTel export from Anthropic operational telemetry; distributed tracing
+is off by default, and content capture has separate controls. The
+[data-usage guide](https://code.claude.com/docs/en/data-usage) documents provider-
+and account-dependent operational telemetry defaults: direct Claude API metrics
+are default-on. Listed third-party-provider paths default off unless
+`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` makes their metrics default on; a signed-in
+Claude apps gateway credential separately suppresses Anthropic-bound usage
+analytics and error reporting. Other traffic exceptions remain, and error
+reporting has separate eligibility conditions.
+All three are mutable guides, not a pinned SDK/binary execution result. Thus an
+OTel-disabled SDK deployment cannot be labeled telemetry-free from this evidence;
+pin the actual bundled binary, provider/auth mode and effective settings first.
+
+### Receiving boundary
+
+For #25/#37/#38, record actual SDK and dependency versions, launch entry point,
+provider/auth mode, trace context, effective exporter endpoint and payload-capture
+settings before asserting an egress default. #35's content-approval policy still
+applies even when a vendor enables capture by default. A source declaration is
+not observed traffic, and an unset optional exporter is not an air-gap test.
+This resolves the scoped source questions above only; actual configuration and
+network observation, remaining T4 frameworks, third-party tool rate limits and
+receiving-owner acceptance remain open. No new monitoring rule is adopted here.
