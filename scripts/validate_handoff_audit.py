@@ -83,6 +83,11 @@ def validate(ledger, readback, audit):
     validate_identity_numbers(ledger, readback, audit)
     issues = {issue['number']: issue for issue in readback['issues']}
     require(len(issues) == len(readback['issues']), 'duplicate snapshot issue')
+    classified_numbers = [issue['number'] for issue in audit['issues']]
+    classified = set(classified_numbers)
+    require(len(classified) == len(classified_numbers), 'duplicate classified issue')
+    require(classified <= issues.keys(),
+            'technical classification references an uncaptured issue')
     pairs = {(row['market_issue'], row['consumer_issue']) for row in ledger}
     require(len(pairs) == len(ledger), 'duplicate handoff pair')
     declared = set(map(tuple, readback['declared_handoff_pairs']))

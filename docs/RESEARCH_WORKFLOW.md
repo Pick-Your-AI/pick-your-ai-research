@@ -63,6 +63,10 @@ parent/child/blocker references must be positive JSON integers. Booleans and
 floating-point aliases cannot match an integer identity through Python equality.
 This identity check does not change numeric fields in unrelated evidence metadata.
 
+Technical audit classifications must reference captured issue IDs without
+repeating an issue. They may cover a subset of the captured issues; this check
+does not create classifications or establish current receiving-owner acceptance.
+
 The public-provenance shape check requires an IP literal's globally reachable classification and excludes multicast, reserved and deprecated IPv6 site-local addresses. This conservative intake also excludes reserved translation-prefix literals. IPv4-mapped IPv6 literals use the embedded address's classification. Hostnames pass through Python's IDNA codec before the reserved-domain and IP checks, so Unicode forms that normalize to those hosts receive the same checks. Ambiguous legacy numeric hosts, percent-encoded or interface-scoped hosts, and hostnames containing a backslash are rejected; use a canonical public IP literal or publisher hostname. This is an offline intake check: DNS names still require an actual public-access and source-evidence review, and an accepted IP shape does not establish that a publisher or document exists there.
 
 ## Review and ownership
