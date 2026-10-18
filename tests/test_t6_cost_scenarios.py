@@ -45,7 +45,12 @@ class CostScenarioTests(unittest.TestCase):
             {'low': 10800, 'expected': 12000, 'high': 31200},
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn('checked 273 quoted figures', result.stdout)
+        self.assertIn('checked 306 quoted figures', result.stdout)
+        # The minimum is a top-up, and the chosen 30-day period is 720 hours.
+        self.assertEqual(results['W5-together-lora']['low']['one_off_job'], 4)
+        self.assertAlmostEqual(results['W5-together-lora']['low']['minimum_top_up'], 0.26)
+        self.assertEqual(results['W5-azure-global-sft']['expected']['hosting_hours'], 720)
+        self.assertEqual(results['W5-azure-global-sft']['expected']['recurring_hosting'], 1224)
 
     def test_evaluated_and_rounded_overflow_fail_before_export(self):
         # Finite JSON inputs can still overflow during evaluation or rounding.

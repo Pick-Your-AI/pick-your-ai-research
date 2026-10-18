@@ -136,3 +136,8 @@ Grouped by who can answer them. Every record has an owner column in its Open que
 - [ ] All sub-issues are closed with merged decision records: the five records are in review; none is merged yet.
 - [ ] The handoffs above are confirmed by the affected workstream owners.
 - [x] A workstream summary at `research/T6-deployment-operations/README.md` lists decisions, rules contributed to #40, and open questions (this page).
+
+
+## Comparison-draft reconciliation
+
+The [2026-10-18 reconciliation](comparison-draft-reconciliation.md) records how #113, #115, #116, #118 and #120 are preserved after #121. It adds the route-specific filter and evaluation findings, content-capture audit, contract questions and the W5 training/hosting illustration while preserving the remaining issue and handoff boundaries.

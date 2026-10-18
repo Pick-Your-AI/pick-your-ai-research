@@ -1245,6 +1245,188 @@
      "sf": 4
     }
    }
+  },
+  {
+   "id": "W5-together-lora",
+   "title": "Synthetic T5: Together Llama 3.1 8B LoRA SFT, validation and job minimum; hosting unpriced",
+   "vars": {
+    "training_file_tokens": 10000000,
+    "validation_file_tokens": 1000000,
+    "sft_price_per_m": 0.34,
+    "job_minimum": 4.0
+   },
+   "case_vars": {
+    "low": {
+     "epochs": 1,
+     "evals": 1
+    },
+    "expected": {
+     "epochs": 3,
+     "evals": 3
+    },
+    "high": {
+     "epochs": 5,
+     "evals": 5
+    }
+   },
+   "steps": [
+    [
+     "training_tokens",
+     "epochs * training_file_tokens"
+    ],
+    [
+     "validation_tokens",
+     "evals * validation_file_tokens"
+    ],
+    [
+     "processed_tokens",
+     "training_tokens + validation_tokens"
+    ],
+    [
+     "usage_charge",
+     "processed_tokens / 1e6 * sft_price_per_m"
+    ],
+    [
+     "minimum_top_up",
+     "max(0, job_minimum - usage_charge)"
+    ],
+    [
+     "one_off_job",
+     "usage_charge + minimum_top_up"
+    ]
+   ],
+   "report": [
+    "training_tokens",
+    "validation_tokens",
+    "processed_tokens",
+    "usage_charge",
+    "minimum_top_up",
+    "one_off_job"
+   ],
+   "expect": {
+    "training_tokens": {
+     "low": 10000000,
+     "expected": 30000000,
+     "high": 50000000,
+     "sf": 10
+    },
+    "validation_tokens": {
+     "low": 1000000,
+     "expected": 3000000,
+     "high": 5000000,
+     "sf": 10
+    },
+    "processed_tokens": {
+     "low": 11000000,
+     "expected": 33000000,
+     "high": 55000000,
+     "sf": 10
+    },
+    "usage_charge": {
+     "low": 3.74,
+     "expected": 11.22,
+     "high": 18.7,
+     "sf": 10
+    },
+    "minimum_top_up": {
+     "low": 0.26,
+     "expected": 0,
+     "high": 0,
+     "sf": 10
+    },
+    "one_off_job": {
+     "low": 4,
+     "expected": 11.22,
+     "high": 18.7,
+     "sf": 10
+    }
+   }
+  },
+  {
+   "id": "W5-azure-global-sft",
+   "title": "Synthetic T5: Azure gpt-4.1-mini Global SFT and 30-day Global Standard hosting; inference/tax unpriced",
+   "vars": {
+    "training_file_tokens": 10000000,
+    "sft_price_per_1k": 0.005,
+    "period_days": 30,
+    "deployed_models": 1,
+    "hosting_price_per_hour": 1.7
+   },
+   "case_vars": {
+    "low": {
+     "epochs": 1,
+     "evals": 1
+    },
+    "expected": {
+     "epochs": 3,
+     "evals": 3
+    },
+    "high": {
+     "epochs": 5,
+     "evals": 5
+    }
+   },
+   "steps": [
+    [
+     "training_tokens",
+     "epochs * training_file_tokens"
+    ],
+    [
+     "one_off_training",
+     "training_tokens / 1000 * sft_price_per_1k"
+    ],
+    [
+     "hosting_hours",
+     "deployed_models * period_days * 24"
+    ],
+    [
+     "recurring_hosting",
+     "hosting_hours * hosting_price_per_hour"
+    ],
+    [
+     "known_first_period_subtotal",
+     "one_off_training + recurring_hosting"
+    ]
+   ],
+   "report": [
+    "training_tokens",
+    "one_off_training",
+    "hosting_hours",
+    "recurring_hosting",
+    "known_first_period_subtotal"
+   ],
+   "expect": {
+    "training_tokens": {
+     "low": 10000000,
+     "expected": 30000000,
+     "high": 50000000,
+     "sf": 10
+    },
+    "one_off_training": {
+     "low": 50,
+     "expected": 150,
+     "high": 250,
+     "sf": 10
+    },
+    "hosting_hours": {
+     "low": 720,
+     "expected": 720,
+     "high": 720,
+     "sf": 10
+    },
+    "recurring_hosting": {
+     "low": 1224,
+     "expected": 1224,
+     "high": 1224,
+     "sf": 10
+    },
+    "known_first_period_subtotal": {
+     "low": 1274,
+     "expected": 1374,
+     "high": 1474,
+     "sf": 10
+    }
+   }
   }
  ]
 }

@@ -615,3 +615,10 @@ None in this pull request. A `deployment_target` catalog item needs `target_type
 | deprecation notices and provider status feeds | T1; T2 | event | S20, D-D6 to D-D9 | none |
 | index freshness job last run | T3 | timestamp | R19 | none |
 | request logs kept for the SLA-credit claim window | T1; T2 | retention days | D-T9, D-T18 | logs may hold prompts; zero-retention promises apply (R12) |
+
+
+### Comparison-draft reconciliation (2026-10-18)
+
+[PR #116's reconciliation](comparison-draft-reconciliation.md#deployment-116) preserves the following deployment-service proposals for #37/#40. The v1 `DeploymentManifest` requires `resource_estimate_id` even for a provider-API-only build; an explicit not-applicable representation or conditional requirement needs a new contract decision, never a fabricated estimate. The manifest's rollout enum has no `shadow`; model shadowing remains a pre-promotion test proposal. A future contract must express target-supported strategies, traffic share, bake period, rollback triggers, endpoint exposure/authentication, secret references and geographic routing independently. A boolean `supports_rollback` does not establish every strategy.
+
+The corrected draft DS-28 gate is retained: compatibility approval checks blocking failed rules and blocking unknowns for the same build revision. Nonblocking warnings stay visible; `on_unknown: review` still produces review. Required approval scopes and their recording remain deployment-service decisions. Frozen `rule.production.gates` checks selection presence, so selection presence alone is not evidence that quality and guardrail gates passed. Foundry's pre-training/model assessments (evaluation E-R88) and its separately documented idle-deployment lifecycle (D-R87) are different checks.
