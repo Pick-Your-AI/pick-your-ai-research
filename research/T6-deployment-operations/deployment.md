@@ -615,3 +615,39 @@ None in this pull request. A `deployment_target` catalog item needs `target_type
 | deprecation notices and provider status feeds | T1; T2 | event | S20, D-D6 to D-D9 | none |
 | index freshness job last run | T3 | timestamp | R19 | none |
 | request logs kept for the SLA-credit claim window | T1; T2 | retention days | D-T9, D-T18 | logs may hold prompts; zero-retention promises apply (R12) |
+
+## T4 deployment-readiness inputs (2026-10-18; proposal)
+
+The [paired T6 receiving dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+request three deployment capabilities beyond R18/S10. Receive these as
+configuration-bound evidence inputs, referencing the existing
+[T4 MCP rule proposals](../T4-agents-integrations/mcp-servers.md), rather than
+copying their provisional assertions into an adopted deployment ruleset.
+
+| Readiness input | Existing T4 rule identifier | Required evidence and limit |
+| --- | --- | --- |
+| Local subprocess spawning and locality | `rule.t4.mcp.stdio.colocation` | The selected client runtime can start the selected stdio server in the required local execution boundary. A generic target type or an installed executable alone does not prove that path works. |
+| Outbound reachability for the selected remote server | `rule.t4.mcp.remote.air-gapped` | The selected endpoint/transport is reachable under the actual egress/residency policy. A vendor-hosted remote dependency conflicts with a genuinely air-gapped deployment; a local stdio selection does not acquire that remote dependency. |
+| Available authorization flow | `rule.t4.mcp.auth.flow-available` | Identify an actual supported interactive path or independently evidenced non-interactive alternative for the selected framework/server/target. A browser somewhere on the operator's laptop does not prove it is usable in the deployment's flow. |
+
+For all three, retain selected component versions, execution boundary, evidence
+locator/date and outcome separately. Unknown capability is not false evidence of
+incompatibility, but blocks a positive readiness claim until resolved. A known
+required capability that the target denies fails; a non-applicable input is skipped.
+A stored credential reference alone establishes no validity, audience, scope,
+consent, refresh path or permission to configure credentials. No credential is
+collected or transmitted by this research.
+
+Synthetic examples, not executed deployment tests: a stdio-only server with a
+known no-process target fails; a vendor-hosted remote server with denied outbound
+access fails; an OAuth-only server without an available supported authorization
+path fails; an unexamined non-interactive alternative remains unknown rather than
+passing because a key reference exists. With no selected MCP server, these
+conditional inputs are skipped. An evidenced capability still needs the applicable
+R18/S10 and #35 controls, and does not certify the whole deployment.
+
+These inputs remain proposed versioned operands for #40, with #27 protocol and
+#25 framework evidence. Managed agent runtimes priced in L48 are still a separate
+uncompleted deployment-target comparison; this addition neither invents their
+capabilities nor imports their prices as readiness evidence. #37 retains target
+selection and actual execution validation, with #38 observation and #39 cost scope.

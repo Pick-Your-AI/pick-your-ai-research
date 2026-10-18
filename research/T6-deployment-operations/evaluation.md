@@ -784,3 +784,25 @@ Therefore the earlier API-backend candidate listing is not universal task suppor
 Microsoft's [fine-tuning safety evaluation preview guide](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation), updated 2026-07-31, describes a pre-training data screen that fails jobs when detected harmful content exceeds its severity threshold. It separately evaluates the resulting model before deployment. The page states that evaluation thresholds are predefined and not customer-configurable, but also links a request process for modified thresholds; this is not evidence that an exception was granted or is available for a particular account.
 
 Proposed #32/#33/#36 handoff: retain a training-data harm screen distinct from post-training safety regression and capability/task evaluation. Foundry's provider check is one documented implementation, not proof that self-hosted training has an equivalent control. An alternative screen, applicable policy, acceptance thresholds and exact model/service scope require receiving-owner disposition. Passing a provider screen does not establish workload safety, corpus rights or consent. No training data was uploaded or job run.
+
+## T4 synthetic-case scope clarification (2026-10-18)
+
+The [paired receiving dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+confirm EV-10/EV-11/EV-12/EV-17 as the agent/tool interface and EV-25 as public
+benchmark priors, while explicitly narrowing E-R28 to its documented synthetic
+RAG-set scope. Do not silently generalize that row's cited retrieval-score claim
+to every agent or tool workload.
+
+For the linked T4 interface, **proposed or synthetic agent/tool cases do not
+certify a model, engine or composed agent**. An unexecuted case defines a question,
+not a result. Passing a synthetic fixture establishes only the exercised behavior
+under its recorded setup; it supplies neither representative user-task quality nor
+a general reliability estimate. Any later acceptance claim needs actual run and
+configuration identities, workload provenance, outcome/trajectory evidence, trial
+counts and applicable review under the existing evaluation policy. No new numeric
+threshold, pass-rate estimate or benchmark result is introduced here. Memory-quality
+evaluation remains an open research question, not an invented release gate.
+
+This is the requested research-interface clarification, not a new source-checked
+E-R rule or an acceptance of future results. #36/#40 retain policy/representation
+review, and the actual selected components still require appropriate evaluation.
