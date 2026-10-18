@@ -15,10 +15,12 @@ The artifact is one of:
 
 The builder must know which, because it decides the compatible inference engines (#11), the GPU sizing (#10), the hosting options (#9) and the evaluation gate (#36).
 
-Deployment modes:
-- **API:** artifact is provider-hosted (`api_only`).
-- **Managed:** hosted, or downloadable, depending on the service (#30).
-- **Self-hosted:** adapter, merged weights or GGUF.
+Deployment mode follows the actual serving component's operator and capacity, using the [accepted shared vocabulary](../../prompts/SHARED.md#workstream-and-handoff-boundaries):
+- **`self_hosted`:** the user operates the serving runtime.
+- **`managed`:** the provider operates dedicated instances or reserved throughput.
+- **`api`:** the provider operates shared serving capacity.
+
+A full fine-tuned model follows its actual runtime; a separately loaded adapter inherits its served base model's mode. Artifact packaging/export access (`api_only` or downloadable weights), training channel and billing do not determine that mode. Different serving-component modes within one build make it `hybrid`; multiple API providers alone do not. `supported_access_modes` still records access form, separately from this operator/capacity decision.
 
 Serving support matrices are owned by #11, and evaluation methodology by #36. This note defines the artifact and the facts those issues consume.
 
@@ -36,26 +38,26 @@ Serving support matrices are owned by #11, and evaluation methodology by #36. Th
 
 ### Inference engines: adapter and format support
 
-This is support for **fine-tuned artifacts** specifically; the full serving matrix belongs to #11.
+This is source evidence about **fine-tuned artifacts** specifically; the selected serving matrix belongs to #11. The [current #33 → #11 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6255802511) receives artifact inputs within #11's vLLM v0.31.0, llama.cpp v0.7.0 and TGI v3.3.7 scope. It does not adopt every historical engine row below, transfer b11699 evidence to v0.7.0, or qualify a model/adapter/plugin tuple. The dated predicate checks below narrow particular source claims, not the complete candidate inventory.
 
 | Engine (release, licence) | Dynamic LoRA | Documented limits | LoRA on quantised base | Merged HF | GGUF / GGUF LoRA | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| vLLM v0.31.0 (2026-10-05, Apache-2.0) | Yes: runtime load/unload API, resolver plugins, MoE expert LoRA | `max_lora_rank` ∈ {1, 8, 16, 32, 64, 128, 256, 320, 512}, default 16; `max_loras` default 1. Rejects DoRA, bias, and `modules_to_save` other than `score`/`classifier` | AWQ, GPTQ, bitsandbytes (examples and tests) | Yes | GGUF "highly experimental and under-optimized"; GGUF LoRA unknown | V1, V2 |
+| vLLM v0.31.0 (2026-10-05, Apache-2.0) | Yes: runtime load/unload API, resolver plugins, MoE expert LoRA | `max_lora_rank` ∈ {1, 8, 16, 32, 64, 128, 256, 320, 512}, default 16; `max_loras` default 1. Rejects DoRA, bias, and `modules_to_save` other than `score`/`classifier` | AWQ, GPTQ, bitsandbytes (examples and tests) | Yes | Documented GGUF model route is experimental and requires the separate plugin; exact joint compatibility and GGUF LoRA remain unknown (#11; V2-R) | V1, V2 |
 | SGLang v0.5.21 (2026-10-02, Apache-2.0) | Yes: load/unload endpoints, pinning | `max_loras_per_batch` default 8. Max rank and target modules inferred from startup adapters unless set. Rejects DoRA and adapters that add vocabulary | Code present, undocumented (unknown) | Yes | `gguf` listed as a quantisation; GGUF LoRA unknown | V3 |
 | TGI v3.3.7 (2025-12-19, Apache-2.0) | Startup only (`LORA_ADAPTERS`) | unknown | unknown | Yes | unknown | V4 |
-| llama.cpp b11699 (2026-10-16, MIT) | Yes: `--lora`, `--lora-scaled`, `POST /lora-adapters`, per-request `lora`; requests with different LoRA configs are not batched together | Rank limit unknown | Adapter applied without modifying base weights; quantised-base behaviour undocumented | After GGUF conversion | Native GGUF and GGUF LoRA. The converter errors on adapters containing `embed_tokens`/`lm_head` ("new tokens added during fine tuning") | V5, V6 |
+| llama.cpp b11699 (2026-10-16, MIT) | Yes: `--lora`, `--lora-scaled`, `POST /lora-adapters`, per-request `lora`; requests with different LoRA configs are not batched together | Rank limit unknown | Adapter applied without modifying base weights; quantised-base behaviour undocumented | After GGUF conversion | Native GGUF and GGUF LoRA. The converter rejects unexpected full embedding/output tensors; low-rank embedding keys and tied-output constraints take separate branches (V6-R) | V5, V6 |
 | Ollama v0.40.5 (2026-10-14, MIT) | **No**: since v0.34.1 `create` rejects any `ADAPTER` with "LoRA adapters are no longer supported", and rejects GGUF files of adapter type | n/a | n/a | Yes (`FROM` a safetensors directory) | GGUF full models only | V7 |
 | TensorRT-LLM v1.2.1 (2026-04-20, Apache-2.0) | Multi-LoRA via `LoRARequest`; HF and NeMo adapter formats | `max_lora_rank`, `max_loras`, `max_cpu_loras`, `lora_target_modules`. DoRA only on the legacy build path | FP8 example ("LoRA works with quantized models") | Yes | No GGUF | V8 |
 | MLX-LM v0.32.2 (2026-10-16, MIT) | `adapters` path in server | lora, dora, full | QLoRA when the model is quantised | `mlx_lm.fuse` (`--dequantize`) | `--export-gguf` limited to Mistral/Mixtral/Llama-style in fp16; MLX adapter format is not PEFT (unconfirmed) | V9 |
 
 TGI's GitHub repository is archived. Its README says: "text-generation-inference is now in maintenance mode" (V4). It should be catalogued as `deprecated` for new builds.
 
-### Managed serving of fine-tunes
+### Provider-operated serving of fine-tunes
 
-| Provider | Import / export | Serving mode | Lock-in | Lifecycle | Evidence |
+| Provider | Import / export | Serving route / capacity facts | Lock-in | Lifecycle | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | Together | Imports PEFT adapters (HF or S3) against a supported `baseModelId`; validates format, base and rank. Exports `adapter` or `merged` | **Dedicated endpoints only**: "Serverless LoRA inference (including Serverless Multi-LoRA) has been discontinued". Multi-LoRA on one dedicated endpoint, or merged deploy | Low | Billed per minute per replica, even idle; adapter versioning not supported | V12, #31 P1 |
-| Fireworks | Uploads PEFT adapters: rank 4–64; fixed target-module list; no `embed_tokens`; no `quantization_config`. Downloads LoRA | On-demand deployments only; "Serverless deployment is not supported for LoRA models". FP8/FP4 deployment shapes cannot enable add-ons | Medium | unknown | V13 |
+| Fireworks | Uploads PEFT adapters: rank 4–64; supported target-module list; no embedding targets; conditional `lm_head` support (V13-R). Downloads LoRA | On-demand deployments only; "Serverless deployment is not supported for LoRA models". FP8/FP4 deployment shapes cannot enable add-ons | Medium | unknown | V13 |
 | Vertex (open models) | Tuned safetensors checkpoints in the user's Cloud Storage; "You can also export the tuned model … and deploy it elsewhere" | Model Garden custom-weights deployment | Low | — | V14, #30 M7 |
 | Vertex (Gemini) | No export documented | Tuned-model endpoint | High | Behaviour when the base is deprecated: unknown | V14 |
 | Bedrock | Bedrock-tuned models: no export documented. Custom Model Import accepts HF-format safetensors for a fixed architecture list (Llama, Mistral/Mixtral, Qwen2/2.5/3, GPT-OSS and others), <200 GB text, <128K context, transformers 4.51.3 | Provisioned Throughput; on-demand for some Nova and Llama 3.3 70B customisations made on or after 2025-07-16 | High for Bedrock-tuned | unknown | V15 |
@@ -86,11 +88,17 @@ These cover the CatalogItem envelope plus `spec_fine_tuned_model`. The issue's c
 | `base_model_revision` (proposed) | full 40-character commit SHA or digest | Hugging Face rejects short hashes; branches and tags move | G1, G3 | Proposal to #40 |
 | `adapter.rank`, `adapter.target_modules`, `adapter.peft_variant` (lora / dora / …), `adapter.modules_to_save` (proposed) | integer; list; enum; list | Determine engine and provider acceptance (V1, V3, V13) | G2 | Proposal to #40 |
 | `base_quantization` (proposed) | enum `none, nf4, int8, awq, gptq, fp8, fp4` | Affects LoRA serving (V1, V13) and merge accuracy (V11) | — | Proposal to #40 |
-| `added_tokens` (proposed) | boolean | Blocks adapter serving on SGLang, llama.cpp conversion, Fireworks and vLLM | V1, V3, V6, V13 | Proposal to #40 |
+| `added_tokens` (proposed) | boolean | Records a token/vocabulary change for the selected converter or loader check; it is not a universal compatibility verdict | V1-R, V3-R, V6-R, V13-R | Proposal to #40. Retain the exact tokenizer/training-template revisions, base vocabulary, saved tensor names/shapes and operation; each route tests its own operands |
 | `method` (proposed) | enum shared with #30 | — | #30 | — |
 | `/license` (optional envelope object) | Optional `spdx_id` string and optional `commercial_use_allowed` / `self_hosting_allowed` booleans; no physical units | Records supported licence metadata using the actual frozen shape | frozen CatalogItem; applicable terms and evidence in G6–G10 / #32 | v1 defines no licence-link member or `other` enum here. Keep terms URLs, notices and activity/artifact-specific applicability in provenance and the note. A base/data licence label does not alone establish the output's legal status or justify a permission boolean; omit unsupported optional values |
-| `evaluation_report_ref` (proposed) | EvaluationReport ID | Gate results from #36 | Q1–Q6 | — |
+| `evaluation_report_ref` (proposed) | EvaluationReport ID | Identifies compatibility findings for a pinned Build/catalog/ruleset/dependency graph, not measured #36 quality results | [frozen EvaluationReport](../../contracts/v1/schemas/evaluation-report.schema.json) | Any artifact association remains a note-only/versioned proposal; neither this ID nor a valid compatibility result supplies G5 measurements |
 | `signature` (proposed) | URI of an OpenSSF model-signing bundle | Optional integrity proof | G5 | — |
+
+### Compatibility and measured quality evidence
+
+The frozen [EvaluationReport](../../contracts/v1/schemas/evaluation-report.schema.json) records rule findings and their outcomes/severities for `build_id`/`build_revision` with catalog, ruleset and dependency-graph locks. The separate [QualityEvaluationRun](../../contracts/v1/schemas/quality-evaluation-run.schema.json) records the identified Build revision's evaluation-suite selection, evaluator version, dataset revision, positive sample size, per-metric observations/thresholds/comparators and a `passed`/`failed`/`incomplete` status. Those are different evidence roles; a compatibility `valid` result is not a measured quality pass.
+
+QualityEvaluationRun's `artifacts` URI array and Build/suite references do not themselves require or prove an exact tuned-artifact digest, provider identity, base comparison or served configuration. Retain those associations with the actual run evidence and resolve its pinned inputs as required by [#36's scoped G5 intake](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6255762046); missing associations stay unresolved. A future artifact-to-report/run reference needs versioned #40 review. This note adds no frozen field, run, threshold or qualified G5 result.
 
 ### Provenance record
 
@@ -104,6 +112,8 @@ These cover the CatalogItem envelope plus `spec_fine_tuned_model`. The issue's c
 | OpenSSF `model_signing` (PyPI 1.1.1, 2025-10-10) | Signs a manifest of file digests as an in-toto statement in a Sigstore bundle; verification re-hashes files | G5 |
 
 ### Licence obligations on the fine-tuned artifact
+
+The following rows summarize recorded source conditions at their stated dates. They do not automatically classify every adapter, merged checkpoint or provider output under its base/data licence. Apply the exact selected terms to the responsible assessment of the material, licensee, activity and output; naming, display attribution and use restrictions can have different conditions. The dated A-16/A-19 clarification below preserves this [accepted H40-33 boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6254608662), without a new legal determination or a re-check of G6/G9.
 
 | Base licence | Naming / attribution | Notice | Use restrictions carry? | Evidence |
 | --- | --- | --- | --- | --- |
@@ -128,7 +138,7 @@ Entries accessed on 2026-10-16 unless a later re-check is recorded in the row. G
 | V3 | SGLang, https://github.com/sgl-project/sglang/blob/v0.5.21/docs/docs/advanced_features/lora.mdx ; `python/sglang/srt/lora/lora_manager.py` | 2026-10-16 | v0.5.21 | Primary documentation | — |
 | V4 | Hugging Face, https://github.com/huggingface/text-generation-inference (README; `docs/source/conceptual/lora.md`) | 2026-10-16 | v3.3.7; repository archived | Primary documentation | Maintenance mode |
 | V5 | ggml-org, https://github.com/ggml-org/llama.cpp/blob/b11699/tools/server/README.md ; PR #8332 | 2026-10-16 | b11699 | Primary documentation | — |
-| V6 | ggml-org, https://github.com/ggml-org/llama.cpp/blob/b11699/convert_lora_to_gguf.py | 2026-10-16 | b11699 | Primary documentation | Added-token adapters rejected |
+| V6 | ggml-org, https://github.com/ggml-org/llama.cpp/blob/b11699/convert_lora_to_gguf.py | 2026-10-16 | b11699 | Primary documentation | Historical added-token shorthand narrowed by the exact tensor predicate in V6-R |
 | V7 | Ollama, https://github.com/ollama/ollama/blob/v0.40.5/server/create.go (lines 42, 107–108) ; `docs/import.mdx` | 2026-10-16 | v0.40.5; removal since v0.34.1 | Primary documentation | Re-checked directly |
 | V8 | NVIDIA, https://github.com/NVIDIA/TensorRT-LLM/blob/v1.2.1/docs/source/features/lora.md ; `docs/source/legacy/advanced/lora.md` | 2026-10-16 | v1.2.1 | Primary documentation | — |
 | V9 | Apple MLX, https://github.com/ml-explore/mlx-lm/blob/v0.32.2/mlx_lm/LORA.md ; `mlx_lm/SERVER.md` | 2026-10-16 | v0.32.2 | Primary documentation | — |
@@ -139,6 +149,18 @@ Entries accessed on 2026-10-16 unless a later re-check is recorded in the row. G
 | V15 | AWS, https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html ; https://docs.aws.amazon.com/bedrock/latest/userguide/deploy-custom-model-on-demand.html | 2026-10-16 | — | Primary documentation | Whether import accepts adapters is unknown |
 | V16 | Microsoft, https://learn.microsoft.com/en-us/azure/foundry/fine-tuning/overview ; https://learn.microsoft.com/en-us/azure/foundry-classic/openai/faq | 2026-10-16 | — | Primary documentation | 15-day auto-delete stated in the classic FAQ only |
 | V17 | OpenAI, https://developers.openai.com/api/docs/deprecations | 2026-10-16 | — | Primary documentation | — |
+
+### Bounded serving-predicate checks, 2026-10-18
+
+These source checks support only the named predicates. They do not refresh the other V-series facts or establish a complete loader, converted artifact, managed account or runtime result. Grade: **Primary documentation**, source checked / unverified. No engine, converter, model or provider request was executed.
+
+| Check | Exact primary source read | Scoped finding and retained limit |
+| --- | --- | --- |
+| V1-R | [vLLM v0.31.0 PEFT helper](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/lora/peft_helper.py), commit `db9527a46873454610df6dbedf79a36d6bf1a7f6`; the same complete helper read for A-04 | `_validate_features` rejects saved modules outside `score`/`classifier`. The relevant operand is the actual `modules_to_save` list; this helper alone is not a universal added-token test or evidence that changed vocabulary is supported. |
+| V3-R | [SGLang v0.5.21 manager](https://github.com/sgl-project/sglang/blob/e00930c5489053f26d86b179cee0d087f846acbb/python/sglang/srt/lora/lora_manager.py) and [LoRAConfig](https://github.com/sgl-project/sglang/blob/e00930c5489053f26d86b179cee0d087f846acbb/python/sglang/srt/lora/lora_config.py), resolved commit `e00930c5489053f26d86b179cee0d087f846acbb`; configuration and admission callers inspected | `validate_new_adapter` rejects a positive `lora_added_tokens_size`. With a known base vocabulary size, LoRAConfig first removes copied token entries whose IDs are below it. Presence of `added_tokens.json` alone therefore does not establish this rejection. Clearing that check establishes no complete adapter compatibility. |
+| V6-R | [llama.cpp b11699 converter](https://github.com/ggml-org/llama.cpp/blob/7182ef71e6d5dd0c8ea76486fac134fcd25025d4/convert_lora_to_gguf.py), resolved commit `7182ef71e6d5dd0c8ea76486fac134fcd25025d4`; tensor filtering, `get_tensors` and `modify_tensors` inspected | Unexpected full `.embed_tokens.weight`/`.lm_head.weight` tensors reaching the rejection branch fail conversion. Low-rank `lora_embedding_A/B` keys are handled separately; tied-output handling has another explicit failure. This is a converter condition at b11699, not a blanket serving result or v0.7.0 qualification. |
+| V13-R | Fireworks [custom LoRA import requirements](https://docs.fireworks.ai/models/uploading-custom-models#importing-trained-models), read 2026-10-18; current provider documentation, no release pin | Embedding target modules such as `embed_tokens` are excluded. `lm_head` is allowed only for the documented base-family/FireAttention LoRA live-merge scope. This is a target-module and operation constraint, not a rejection of every changed-token artifact or an inference of account eligibility. The separate `quantization_config` restriction is stated for full-model `config.json`, not the listed LoRA `adapter_config.json` requirements. |
+| V2-R | [vLLM v0.31.0 GGUF documentation](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/features/quantization/gguf.md), complete page read at the pinned commit | The experimental GGUF model route requires the out-of-tree plugin and matching tokenizer/configuration. The [accepted #11 plugin supplement](../T2-infrastructure/engine-build-evidence.md) pins a plugin source separately and retains unknown joint compatibility. Neither page establishes GGUF LoRA support. |
 
 ### Provenance and licences (G)
 
@@ -174,7 +196,7 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 - `rule.training.base.lineage` checks base identity;
 - `rule.training.model.capable` checks that the training path is complete.
 
-When an artifact field is missing, the rule returns `unknown`, never `pass`.
+Use the dated interpretations below when reading the historical register. Missing facts required to decide applicability or an applicable assertion remain `unknown`; established non-applicability can be `skipped`. A known applicable violation does not become a pass, or disappear because another input is missing.
 
 "Source checked" in the Status column means the cited primary text was read on its access date and supports the assertion. It follows the interim "checked" definition in the owner's adopted #41 policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)). Nothing here is independently verified (reproduced or confirmed by a second source), and a result that passes on checked evidence stays unverified. Licence rules state a document's conditions; whether they apply to a particular artifact is a legal question this note does not decide.
 
@@ -247,6 +269,19 @@ These are review examples of the proposed interpretation, not a new executable e
 
 Keep the 22 original A-series research identities, including the three A-18 suffixes. No evidence-only, applicability-only or configurable-limit-warning identity is added: each corrected row is still one concern. Preserve historical saved results with their original rule/version/evidence references; do not rewrite a prior warning or unknown as if this interpretation had executed then. A future adopted ruleset must carry an explicit successor version, operand representation, migration and conformance examples through #40. Independent source review and normal repository validation/delivery are required before describing this amendment as delivered. The separate receiving decisions concern input sufficiency and do not adopt these proposals wholesale.
 
+### Selected artifact and activity scope — clarification dated 2026-10-18
+
+This narrows the historical A-03, A-09, A-16 and A-19 shorthand for future proposal review. All 22 original rows and interpretation 0.2.0 above are retained verbatim. It introduces no new executable rule, adopted field, source entitlement or universal compatibility/rights conclusion. The [actual H40-33 representation receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6254608662) accepts exact selected artifact/operation/terms evidence, not a result derived from a format or licence label.
+
+| Historical concern | Selected scope and corrected interpretation | Severity, unknowns and remediation |
+| --- | --- | --- |
+| A-03 | For an enabled separately loaded adapter, bind the exact base/artifact, engine/provider release, converter or loader operation, tokenizer/training-template revision and actual vocabulary/tensor configuration. Compare those inputs with the corresponding V1-R/V3-R/V6-R/V13-R requirement. A generic `added_tokens` flag, `modules_to_save` list and `target_modules` list are different inputs and cannot be substituted for one another. | Fixed error severity. A known violated applicable route constraint fails; absent eligible input/support evidence is unknown, not blanket failure or pass. Choose a supported artifact/route or an independently qualified merge/export; a converter failure is not proof that every serving route fails, and a merge does not qualify its resulting runtime. |
+| A-09 | The experimental-status disclosure concerns the documented vLLM full-model GGUF route, with its actual engine/plugin/configuration scope. GGUF LoRA is a different artifact/operation; neither `artifact_format=gguf` nor a flat format list admits it. The current #11 plugin record retains unknown joint compatibility even for its separately pinned engine/plugin sources. | Fixed warning severity for this disclosure. Describing experimental status supplies no loader/adapter compatibility pass. An unresolved artifact form or selected route remains unknown for the relevant check; obtain eligible exact-tuple evidence through #11 instead of treating A-09's historical pass shorthand as authorization. |
+| A-16 | The responsible assessment binds G6's exact Llama terms, the relevant material/output, licensee and selected activity. Assess the naming condition and the “Built with Llama” condition separately at their respective scopes; a Llama base label and distribution flag alone do not establish that both apply to every adapter, merged checkpoint or provider output. | Fixed error severity. An established violation of an applicable recorded condition fails; unresolved applicability or obligation evidence is unknown, with review required and no gate pass. Evidenced non-applicability skips only that concern. Resolve the actual condition or remedy the assessed violation; no general output obligation or exemption is inferred. |
+| A-19 | Identify the exact CC-BY-NC-licensed base/data material and applicable terms, then assess the selected activity and output relationship under that recorded condition. A source licence label or a commercial-output label alone does not establish inherited output terms. Any applicable grant or exception must be evaluated at its actual subject/condition/activity/period, not treated as permission for another obligation. | Fixed error severity. An established applicable NonCommercial-condition violation fails; unresolved applicability/evidence remains unknown, with review required and no gate pass. Evidenced non-applicability skips only that concern. This creates neither a universal ban on commercial outputs nor a universal permission requirement or rights grant. |
+
+The applicability/known-violation/incomplete-evidence distinction is the accepted #40 research semantics. All proposed missing-data dispositions here remain `on_unknown: review`. Disabled or evidenced unrelated participants skip only the corresponding concern; unknown ownership or scope is not an automatic skip. The G6/G9 dates and legal-source limits remain unchanged, and no new legal applicability assessment was performed. #11 retains technical joint-support decisions; #32 retains data preparation/template and rights responsibilities; #36 retains measured quality requirements. Historical results keep their original versions and evidence. Any adopted successor needs #40's explicit version, operands and conformance review.
+
 ## Pricing and capacity
 
 Not priced here:
@@ -262,8 +297,8 @@ Not priced here:
    - Retaining the adapter preserves a separate candidate for engines/providers with an eligible exact base, adapter variant, rank, tensor mapping and deployment path. The recorded support rows do not establish interchangeability across every vLLM, SGLang, TensorRT-LLM, Together or Fireworks configuration.
    - A supported merge can remove the need for dynamic adapter support, but it is not a universal serving format. Check the resulting architecture, tokenizer, precision and engine/provider import requirements; GGUF conversion or another target-specific export may still be required. PEFT documents methods/settings that cannot merge and loss of adapter-management functions after `merge_and_unload()` (V11). No serving tuple is qualified by this recommendation alone.
 2. **Where the selected method and quantization support merging, consider the 16-bit base before target quantization.** This is A-06's project inference from the documented rounding warning, not a universal PEFT recommendation. Unsupported merges remain unsupported, and the resulting artifact still needs its own conversion/import and serving checks (V11; #30 R2/R4).
-3. **Avoid adding tokens** unless required. Added tokens block adapter serving on most engines and providers (A-03).
-4. **Prefer portable managed paths** (Vertex open models, Together, Fireworks) unless lock-in is acceptable. Show the lifecycle risk for OpenAI and Foundry fine-tunes (A-12, A-13).
+3. **Record token and tensor changes before selecting an export or serving route.** Keep the actual tokenizer/training template, vocabulary, saved modules and tensor layout with the artifact. Apply the selected operation's evidenced constraints (V1-R/V3-R/V6-R/V13-R; clarified A-03), not a cross-engine `added_tokens` verdict. If a changed-token artifact needs a merge or different export, qualify that transformation and the resulting serving tuple separately.
+4. **Prefer portable provider-operated paths** (Vertex open models, Together, Fireworks) unless lock-in is acceptable. Show the lifecycle risk for OpenAI and Foundry fine-tunes (A-12, A-13).
 5. **Record provenance:**
    - HF card `base_model` / `base_model_relation`;
    - PEFT config;
@@ -291,13 +326,24 @@ An actual artifact still needs type-correct `base_model_ref`, `training_framewor
 
 | Question | Follow-up issue / owner |
 | --- | --- |
-| Serving support matrix: adopt the adapter and format facts above in `inference_engine` items (vLLM, SGLang, llama.cpp, Ollama, TensorRT-LLM, MLX-LM; TGI as deprecated) | #11 · @Mattycodes69 |
+| Serving support matrix: current three-candidate #11 intake receives the exact artifact inputs; broader SGLang/Ollama/TensorRT-LLM/MLX-LM inventory adoption remains separate, and b11699 evidence does not become v0.7.0 evidence | #11 · @Mattycodes69; scoped receipt below |
 | VRAM for adapters (per loaded adapter) and merged models | #10 · @Mattycodes69 |
 | Evaluation gate: safety regression vs base, capability retention, task gain, training-data harm screen; thresholds and suites (HarmBench, AILuminate, lm-evaluation-harness) | #36 · @PUSHINGSQUARES |
 | Fine-tune serving and hosting costs next to training cost | #39 · @PUSHINGSQUARES |
-| Proposed fields: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature`, `base_notice_file_present` (needed by A-18c); revision-pinned catalog references | #40 · @tynamite |
+| Proposed fields: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref` (compatibility), exact artifact association for measured QualityEvaluationRun evidence, `signature`, `base_notice_file_present` (needed by A-18c); revision-pinned catalog references | #40 · @tynamite |
 | Base-model licence, revision, whether the base distribution at that revision includes a NOTICE file, and provider fine-tuning lifecycle facts | #6, #5 · @zwright8 |
 | Deployment-time handling of lifecycle (OpenAI shutdown with base; Foundry 15-day deletion) | #37 · @PUSHINGSQUARES |
 | Unknowns: vLLM/SGLang LoRA on GGUF bases; SGLang on quantised bases; TGI and llama.cpp LoRA limits; Vertex PEFT_ADAPTER output form; Bedrock import of adapters; Fireworks retention; tuned-Gemini lifecycle on base deprecation | #33 · @appletechie |
 
-None of the handoffs above is confirmed yet.
+### Directional receipt reconciliation, 2026-10-18
+
+The following are actual scoped decisions, not inferred reverse acceptances. Historical named-owner responses keep their authorship; the newer decisions explicitly identify delegated project engineers through the shared account. The recent artifact-side decisions inspected original producer `fd05e2eb3017ec89837b02e62d5890b8f291d561` and the exact consumer blobs named in each receipt. They do not retrospectively review this successor wording or adopt all of its rule proposals.
+
+| Peer | Input received into #33 | Artifact input received from #33 | Preserved limit |
+| --- | --- | --- | --- |
+| #10 GPU / Compute | [6245668221](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221): accepted with narrowing by the #33 co-owner; artifact bytes/configuration responsibilities are distinct from residency | [6255801883](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6255801883): actual delegated #33 → #10 acceptance with constraints | Exact tensor/storage facts feed the existing per-device method; separate saved/added/DoRA tensors and simultaneous copies count. No measured ResourceEstimate, fit result or universal headroom is supplied. |
+| #11 Inference Engine | [6230482684](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684): accepted artifact/base/tokenizer/template input with ownership narrowing | [6255802511](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6255802511): actual delegated acceptance within the current three-candidate scope | #33 records the artifact/training changes; #32 owns the data/template side; #11 determines exact loader/engine/plugin support. Historical broad A-03 wording and unexamined engine inventory are not adopted. |
+| #36 Evaluation | [6255762046](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6255762046): actual reciprocal evaluation/artifact input acceptance with constraints | [6232138142](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142): historical A-20 intake as a G5 input | G1/G2/G4/G5/G9 and the selected thresholds retain their own scope; an ID, provider screen or compatibility report is not a measured run. The later outcome interpretation needs its own versioned adoption. |
+| #37 Deployment | [6255762785](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6255762785): actual #37 → #33 lifecycle/readiness acceptance | The same receipt separately records #33 → #37 artifact-input acceptance; [6232138142](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142) retains the older A-13/D-R87 lifecycle slice | Exact artifact/base/loaded identity, applicable evaluation and rehearsed rollback remain required. The classic-FAQ condition is more than 15 days without the named calls, deleting the deployment while retaining the model; it is not a universal Foundry policy or actual idle-deployment observation. |
+
+The [H40-33 receipt 6254608662](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6254608662) separately accepts the selected research representation and retained conditions. It supplies no executable adoption of these A-series successors. Pricing, source lifecycle, unresolved artifact forms and the other named questions above retain their actual owners and evidence limits; this correction records no new disposition for those directions. The broader #32 four-note reconciliation remains with its existing writer. These receipts and this note establish no training/serving/evaluation execution, account entitlement, legal determination, production readiness or complete #33/#29 acceptance.
