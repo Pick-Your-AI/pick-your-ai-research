@@ -1,0 +1,18 @@
+{
+  "classification": "additional primary-source inspection; held in memory only, no runtime execution",
+  "access_date": "2026-10-18",
+  "files": [
+    {
+      "file": "ggml/src/ggml-cuda/ggml-cuda.cu",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-cuda/ggml-cuda.cu",
+      "sha256": "572e5facba2c6b2ce2f7c6a4c43566d5a719d6e984f7265f1895410cc82d31ec",
+      "bytes": 254769
+    },
+    {
+      "file": "ggml/src/ggml-cuda/common.cuh",
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-cuda/common.cuh",
+      "sha256": "01ec28a5866346886a5ddd74efc1703b86cacdc31990522733d79ea035ace86b",
+      "bytes": 65353
+    }
+  ]
+}
