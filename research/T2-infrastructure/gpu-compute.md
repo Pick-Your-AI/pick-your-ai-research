@@ -1,7 +1,7 @@
 # GPU / Compute: inference capacity and provisionable profiles
 
 Issue: [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) · Contract: 1.0.0 · Kinds: `accelerator`, `compute_profile`
-Status: decision record merged in PR #75; follow-up rule proposal and remaining handoffs pending · Vendor-source dates: per evidence section · Method/receipt continuation: 2026-10-18
+Status: decision record merged; nine research artifact criteria assessed, with current-scope receiving review pending under 10.9 · Vendor-source dates: per evidence section · Method/receipt continuation: 2026-10-18
 
 ## User decision
 
@@ -17,7 +17,7 @@ Deployment-mode coverage is a research decision:
 | Managed | A managed component with a user-chosen instance type is in scope for sizing. Provider-operated shared or opaque capacity skips local sizing; its quota and capacity guarantees remain unknown service inputs. Runpod's selectable Pods inform candidates, but incomplete profile fields stay in this note. |
 | Self-hosted / hybrid | Use hardware catalog plus host SKU, exact artifact, engine version and workload. #3 accepted operator/capacity classification in the owner review below: a customer-operated cloud engine is self-hosted. Evaluate each component of a hybrid build separately; build-level hybrid mode must not skip its local checks. |
 
-CPU inference and edge inference are in scope for comparisons and unknown handling. This bounded first intake supplies discrete datacenter GPUs and one cloud profile. It does not claim exhaustive CPU/NPU/TPU/consumer GPU coverage. Unified memory and CPU RAM must not be relabelled dedicated VRAM; no CPU/edge CatalogItem is fabricated to fill required fields. #10/@Mattycodes69 and #40/@tynamite must decide how v1 represents shared memory and accelerator partitions before complete edge proposals. #11's CPU/Metal candidates establish possible runtime paths, not capacity guarantees.
+CPU inference and edge inference are in scope for comparisons and unknown handling. The original bounded intake supplied discrete datacenter GPUs and one cloud profile; the current structured subset below contains three accelerators and two cloud profiles. It does not claim exhaustive CPU/NPU/TPU/consumer GPU coverage. Unified memory and CPU RAM must not be relabelled dedicated VRAM; no CPU/edge CatalogItem is fabricated to fill required fields. #10/@Mattycodes69 and #40/@tynamite must decide how v1 represents shared memory and accelerator partitions before complete edge proposals. #11's CPU/Metal candidates establish possible runtime paths, not capacity guarantees.
 
 Training memory, optimizer state, gradients, training time and training throughput are owned by #31. #31 reuses these accelerator identities; none of the inference estimates below are training estimates.
 
@@ -113,7 +113,7 @@ Primary project decision source: [#3/#40/#41 owner review on PR #75](https://git
 
 - Version-pinned support/specification facts do not expire merely with time; recheck when the selected version or source changes. Current prices, availability, regions, quotas and terms remain dated **as of** observations; no TTL is adopted.
 - Resolve conflicts centrally in this order: normalize units/names; exclude out-of-scope claims and prefer the most specific coverage; use selected-version evidence for pinned facts or latest effective date for current facts; apply fact-specific authority. A publisher controls its product requirements, and its explicit requirement/limitation wins over its capability listing. Matching measurements outrank estimates, which outrank vendor claims for fit/performance. Equal-ranked numbers retain median/spread and decide conservatively in the rule's direction; opposite equally ranked yes/no claims or no eligible evidence remain `unknown` for a reproducible test. Preserve the losing claims and deciding step.
-- Checked, eligible versioned documentation can yield a support `pass` while the compatibility result is **unverified** until independently reproduced. Source checking alone leaves the four compute CatalogItems' provenance `unverified` under the adopted #41 policy. This follow-up corrects the earlier stronger label without changing the cited facts, source check dates or schema.
+- Checked, eligible versioned documentation can yield a support `pass` while the compatibility result is **unverified** until independently reproduced. At that historical review, source checking alone left the then-four compute CatalogItems' provenance `unverified` under the adopted #41 policy. This follow-up corrects the earlier stronger label without changing the cited facts, source check dates or schema.
 - Short paraphrases with links remain acceptable interim reuse; automated retrieval/bulk copying awaits #41/#60's per-source rights inventory.
 
 The review accepts the capacity-interval and memory-pool proposals into CD-2/CD-3 review and the shared memory-fit/joint-support families. It leaves default headroom with #10, and the proposed contract fields unimplemented. The suggested 20% reserve / 4 GiB runtime is not adopted or calibrated by this follow-up.
@@ -259,24 +259,77 @@ The table retains its 2026-10-16 input questions, with live owners, directional 
 
 The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057), reviewing main `9344f99325510adfe678382a4672246d028e87bc`, separately accepts **#9 -> #10 and #11 -> #10 with constraints from @Mattycodes69's scope**. The host binding reuses `aws-ec2` and `aws-ec2-g6e-xlarge-us-east-1` version `2026-10-16`, with `nvidia-l40s` distinct, two default CPU cores/four vCPUs, and source 32 GiB = 34.359738368 decimal GB RAM. Runtime inputs retain exact-release loader/backend/format/quantization/kernel constraints, separate weight/activation/KV dtypes, adapter rank/targets/residency, per-rank topology and expanded resident-sequence/admission scope. Historical vLLM v0.10.2 calculations remain historical; v0.31.0 requires its own eligible build/hardware evidence, including the resolved Volta exclusion. Missing free memory, geometry or admission stays explicit; memory fit does not establish serving support, quality or SLO performance. These incoming receipts are separate from the outgoing rows above, do not speak for @appletechie, and accept no headroom default, ResourceEstimate, runtime result or #61 placement.
 
+## Compute research artifact assessment — 2026-10-18
+
+The nine artifact criteria below are satisfied by this bounded research record;
+the current-scope receiving condition in **10.9 remains open**. The literal issue
+criteria are retained in the [acceptance matrix](acceptance-matrix.md), and the
+[handoff ledger](handoffs.md) keeps each actual author, direction and reviewed
+revision. This assessment does not change a source-check date, a catalog fact,
+the frozen contract or a historical validation result.
+
+The method supplies byte-based weights/KV/runtime/adapter accounting, explicit
+per-device reserve, topology and uncertainty, together with an uncalibrated
+load-to-count procedure. The 19 comparison-field groups specify their types,
+units, evidence and unknowns. The four COMPUTE groups use the shared proposal
+format. The actual [central review of #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)
+at `9e66622a4b2698a9305274f05da9c15ae5d90b8c` includes a **source-table spot check**
+and accepts narrowed families into the central queue; it is not an independent
+verification of every field or an executable CD-1/CD-3 approval. It leaves
+headroom authority with #10. The current explicit-input method states its
+assumptions without inventing a universal reserve, calibrated error range or
+new build-bound ResourceEstimate. Those future artifacts retain their named
+evidence and versioning requirements.
+
+The current T2 intake has **20 records**: five hosting platforms, seven storage
+items, three accelerators, two compute profiles and three inference engines.
+The compute subset is L40S, RTX 4090 and A100 80GB plus the G6e and P4de profiles.
+The accepted [#301 correction](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/301)
+keeps H100 SXM and MI300X note-only. Their sourced research rows and historical
+proposal bytes remain available, while current structured references cannot
+target those withdrawn IDs. Complete native arithmetic coverage in the retained
+records does not establish joint artifact/engine support. This assessment
+preserves that intake decision and its required semantic work before either
+withdrawn identity returns.
+
+The actual [#39 response from @PUSHINGSQUARES](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6247689665)
+at `9192d5d` narrows the accepted quantity/utilisation input: capacity lines must
+disclose **headroom not applied** until an explicit reserve is adopted. The
+[worked cost record](../T6-deployment-operations/cost-estimate.md#reference-workload-used-by-the-worked-scenarios)
+now carries that disclosure in the 23 scoped capacity ledger assumptions,
+W2/W3 capacity results and five capacity comparisons. It retains every existing
+price, formula and scenario total, and distinguishes requests in flight from
+request rate and peak-to-mean ratio. Its separate L37/L38 **not totalled** rows
+also implement the [#9 → #39 exclusion condition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6247689488)
+without inferring free traffic or adding either estimate to the totals.
+
+The historical #9/#11/#31 receipts and both #39 responses keep their actual
+scope. Applying the #39 display condition does not fabricate a later response
+from its author. In particular, the changed H100/MI300X availability still needs
+a current receiving review for the affected reuse interfaces; the original
+hardware-reuse receipt does not accept that later correction. Once this exact
+scope has an actual reviewed disposition, assess 10.9 against that evidence.
+No additional generic calibration, future-estimate-placement or all-coassignee
+approval requirement is added to the issue's ten research criteria.
+
 ## Acceptance assessment and validation
 
-| Live #10 criterion (preserved) | Evidence/artifact | Assessment before review |
+| Live #10 criterion (preserved) | Evidence/artifact | Current research assessment |
 | --- | --- | --- |
-| Sizing method with assumptions and uncertainty documented | Method, worked examples, script | Research draft supplied; uncalibrated uncertainty explicit |
-| Measured values cite their source and conditions; estimates are labelled | C16 conditions; every calculation marked Estimate | Supplied; no local measurements claimed |
-| Model ↔ GPU rules in the #40 format | rules/compute-capacity.md | Proposed; #40 approval pending |
-| Decision record merged at required path following research method | This record; PR #75 | Merged; this follow-up and full issue acceptance remain pending |
-| Candidate set covers relevant API / managed / self-hosted modes or states why a mode does not apply | Mode table, physical candidates and profile | Supplied; CPU/edge gaps explicit |
-| Comparison fields defined with type, unit, evidence requirement | Comparison table | Supplied |
-| Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Supplied as proposals; central review pending |
-| Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; source-mapped catalog provenance; derived formulas | Prepared for independent evidence review; source rendering and unit conflicts disclosed |
-| Each handoff confirmed by consuming issue owner with link | Handoff table | Historical #9/#11/#31 receipts and both actual #39 responses are linked. PUSHINGSQUARES identifies unapplied headroom, and changed H100/MI300X intake eligibility needs receiving review. Methodology, calibration, full #61 evidence and future placement remain separate |
-| Open questions with named follow-up owner | Table above | Supplied |
+| Sizing method with assumptions and uncertainty documented | Method, worked examples, script | Artifact criterion satisfied: byte-based memory, explicit reserve, per-device topology and an uncalibrated load-to-count method retain their assumptions and unknowns |
+| Measured values cite their source and conditions; estimates are labelled | C16 conditions; every calculation marked Estimate | Artifact criterion satisfied: publisher-measured C16 rows retain hardware/runtime/workload conditions; local arithmetic and hypothetical examples remain estimates |
+| Model ↔ GPU rules in the #40 format | rules/compute-capacity.md | Artifact criterion satisfied: four shared-format proposal groups and their narrowed central queue disposition; executable version approval remains separate |
+| Decision record merged at required path following research method | This record; PR #75 | Artifact criterion satisfied: original decision record and subsequent source/intake corrections are merged; this assessment does not claim its own delivery before merge |
+| Candidate set covers relevant API / managed / self-hosted modes or states why a mode does not apply | Mode table, physical candidates and profile | Artifact criterion satisfied: provider-only API omission, exposed managed capacity and self-hosted/hybrid sizing are covered; CPU/edge and incomplete profiles remain explicit scoped gaps |
+| Comparison fields defined with type, unit, evidence requirement | Comparison table | Artifact criterion satisfied: 19 typed field groups with units, evidence and unknowns; incomplete H100/MI300X lists are note-only and native precision remains distinct from joint execution |
+| Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Artifact criterion satisfied: fixed severity, outcome, evidence status and applicability are separate; sourced premises and synthetic examples do not claim independently verified joint compatibility |
+| Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; RTX 4090 and A100/P4de source supplements; source-mapped catalog provenance; derived formulas | Artifact criterion satisfied for the bounded findings: primary locators, capture dates, versions, units and conditions are retained; source/unit conflicts and measured allocation remain unknown where documented |
+| Each handoff confirmed by consuming issue owner with link | Handoff table | 10.9 remains open: historical #9/#11/#31 receipts and both actual #39 responses are linked; the required headroom disclosure is now integrated. Current receiving review of changed H100/MI300X intake availability is still needed; earlier authors are not assigned a new decision |
+| Open questions with named follow-up owner | Table above | Artifact criterion satisfied: model/engine evidence, native-precision scope, future build-bound estimates, rights and runtime validation have named follow-up owners |
 
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
 
-Follow-up validation, 2026-10-17 (Python 3.12.14): pinned dependency installation, 21 contract tests, 24 research tests, research intake (30 CatalogItems / two Pricebooks), market integrity (32 entities / 1,536 cells / 20 issues), sizing arithmetic and `git diff --check` pass. Research tests required an unsandboxed rerun because Windows sandbox temporary-directory permissions failed before assertions; the rerun passed all 24. The arithmetic implementation and imported v1 are unchanged. These checks establish structural integrity and reproducible arithmetic, not rule approval or empirical fit. #10 still needs its default headroom/confidence decision, consuming-owner acknowledgements and agreed #61 ResourceEstimate placement before closure.
+Follow-up validation, 2026-10-17 (Python 3.12.14): pinned dependency installation, 21 contract tests, 24 research tests, research intake (30 CatalogItems / two Pricebooks), market integrity (32 entities / 1,536 cells / 20 issues), sizing arithmetic and `git diff --check` pass. Research tests required an unsandboxed rerun because Windows sandbox temporary-directory permissions failed before assertions; the rerun passed all 24. The arithmetic implementation and imported v1 are unchanged. These checks establish structural integrity and reproducible arithmetic, not rule approval or empirical fit. That historical validation paragraph recorded the then-open headroom, receiving and future-placement questions. The current assessment above applies the literal research criteria; a numeric default, calibration or a new ResourceEstimate is not added as a research closure requirement.
 
 
 ## Additional hardware and profile capture (2026-10-18)

@@ -37,7 +37,7 @@ open. No selected deployment or final ruleset is accepted.
 | #10 | #9 | @Mattycodes69, @appletechie | Distinct accelerator vs provisionable compute-profile catalog IDs | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): accelerator/profile separation; no free-memory or workload-fit claim |
 | #10 | #11 | @zwright8, @Mattycodes69 | Backend/precision and per-device memory assumptions; no universal GPU fit | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): per-device inputs and capacity/support separation; no pooled VRAM |
 | #10 | #31 | @tynamite, @appletechie | Reuse accelerator catalog; independent training-specific memory/time estimates | [Historical acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484): reuse the then-existing accelerators/profile; training estimates remain independent. The later [H100/MI300X note-only correction](gpu-compute.md#incomplete-precision-intake-correction-2026-10-18) changes current reference availability and needs its own receiving review |
-| #10 | #39 | @appletechie, @PUSHINGSQUARES | Scenario quantities, concurrency, utilization, headroom and uncertainty | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewed `66b46d4`. [@PUSHINGSQUARES narrows](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6247689665), checked `9192d5d`: retain quantity/utilization boundaries, but #39 has no headroom term; disclose **headroom not applied** on capacity lines until an explicit input is adopted. Neither receipt supplies calibrated headroom or a ResourceEstimate |
+| #10 | #39 | @appletechie, @PUSHINGSQUARES | Scenario quantities, concurrency, utilization, headroom and uncertainty | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewed `66b46d4`. [@PUSHINGSQUARES narrows](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6247689665), checked `9192d5d`: retain quantity/utilization boundaries, but #39 has no headroom term; disclose **headroom not applied** on capacity lines until an explicit input is adopted. The [cost record](../T6-deployment-operations/cost-estimate.md#reference-workload-used-by-the-worked-scenarios) now implements that disclosure on its scoped capacity rows/results. Neither receipt supplies calibrated headroom or a ResourceEstimate, and the implementation is not a newly authored response from either owner |
 | #11 | #10 | @Mattycodes69, @appletechie | Version-specific backend/format/precision constraints and adapter overhead | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057): exact-release sizing inputs; historical results do not transfer; [@appletechie separately accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), preserving dtype/adapter roles and non-pooling. Neither is independent runtime verification |
 | #11 | #25 | @CompleteDotTech, @Mattycodes69 | Tool parser, chat-template, structured-output and streaming requirements | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334) |
 | #11 | #33 | @Mattycodes69, @appletechie | Adapter/base lineage, tokenizer, merged-weight and GGUF distinctions | [Accepted with tokenizer/template ownership narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684); engine support stays with #11 |
@@ -131,3 +131,24 @@ narrows #39 to the stated unit, visible-exclusion and billing-stage conditions.
 Receiving review of the #37 map, appletechie's separate scope, #14 and the
 substantive #15 response remain outstanding. Both #9 owners still decide the
 regional recommendation; unresolved invoice semantics remain with #39.
+
+
+## Current compute scope and cost-condition integration (2026-10-18)
+
+The [compute artifact assessment](gpu-compute.md#compute-research-artifact-assessment--2026-10-18)
+preserves the 20-record T2 intake after #301 and all original receiving pins.
+The required #10 → #39 disclosure is now present on 23 capacity ledger rows,
+the W2/W3 capacity results and five comparisons. A reserve remains unspecified;
+the cache-hit variable and requests-in-flight quantity are not repurposed as
+headroom or request rate. The [separate L37/L38 display](../T6-deployment-operations/cost-estimate.md#priced-exclusions-beside-the-w1w3-totals)
+retains their priced examples as **not totalled**, satisfying the documentary
+exclusion condition in the actual #9 → #39 response without claiming invoice
+rounding, a free allowance balance or a complete quote.
+
+The original #9/#11/#31 reuse receipts are still historical. The H100/MI300X
+withdrawal changes current reference availability, so 10.9 remains pending an
+actual current-scope receiving disposition; this text does not manufacture it.
+Review the retained L40S/RTX 4090/A100 and G6e/P4de set, the note-only candidates,
+and consumer references together. There is no need to invent a numeric default,
+runtime calibration or a future ResourceEstimate to satisfy an artifact-format
+criterion. Those follow-ups retain their named owners and factual requirements.
