@@ -1,8 +1,101 @@
 # Differentiation hypotheses and falsification
 
-Issue: [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) (MR-10). Status: **Draft — cannot be accepted before #66.** This is not an accepted positioning decision or marketing copy. Current co-assignees, checked 2026-10-18: `tynamite` and `appletechie`; CompleteDotTech is the named evidence coordinator. Live GitHub assignments remain authoritative.
+Issue: [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) (MR-10). Status: **Research disposition and scoped receiving review accepted; final published-source review and delivery required.** The research result is a bounded narrowing, with the remaining advantages explicitly unproved. Current co-assignees, checked 2026-10-18: `tynamite` and `appletechie`; CompleteDotTech is the named evidence coordinator. Live GitHub assignments remain authoritative.
 
-## Current evidence and acceptance reconciliation (2026-10-18)
+## Disposition after accepted substitute evidence (2026-10-18)
+
+**Decision:** reject differentiation based only on model-fit suggestions, ordered
+stack advice or recognition of the tested offline/hosted-model contradiction.
+Continue evaluating a narrower record of explicit constraint adoption, exact
+configuration identity and eligible evidence. None of those remaining hypotheses
+has demonstrated uniqueness, successful deployment, customer preference or paid
+demand. A defensible unmet workflow is **not yet established**.
+
+The input is the accepted [#66 note at merge `8dfec2d`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/8dfec2d58661232f5128f954cf2b5840450732a8/research/market/substitute-validation.md).
+Its [actual receiving/evidence receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238),
+[final source review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/304#pullrequestreview-5562599537)
+and [completion readback](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248992055)
+establish the reviewed input and delivery. GitHub records #66 completed on
+2026-10-18; its native relationship is preserved as a satisfied prerequisite,
+not removed or replaced by a new empirical gate. This pass reads the accepted
+note and receipts. It does not repeat the product run, recapture the supporting
+images or claim to have independently measured product performance.
+
+### Hypothesis dispositions and counterpressure
+
+These are engineering research judgments from the scoped observations, not
+new measurements. The original H1–H5b definitions and all D-57-1–7 thresholds
+below remain unchanged. No historical result is scored against a protocol
+chosen after that result was observed.
+
+| Hypothesis | Disposition against accepted #66 | Remaining falsification or pivot |
+| --- | --- | --- |
+| H1 Traceable compatibility advice | **Narrow; full advantage unproved.** Flocci's ordered response and useful conflict explanation are positive counterexamples to those capabilities alone. The response did not establish exact identities or independently supported whole-stack feasibility. | Test per-claim eligible provenance and explicit unknowns under D-57-1. Keep original hard constraints distinct from any accepted relaxation. An explanation alone cannot pass a compatibility predicate. |
+| H2 Workload-first cross-provider comparison | **Narrow; full advantage unproved.** A local alternative to a hosted requirement is a useful suggestion, not satisfaction of the original contradictory conjunction. ModelFit and CanIRun.ai remain narrower device/model interfaces within their attempted scenarios. | Test coherent local/hosted alternatives under D-57-2, with the serving-component operator/capacity distinction and recorded trade-offs. Do not call a narrower substitute a failed general-purpose builder. |
+| H3 Versioned shared configuration record | **Unproved.** The exercised guest save path retained a Docling bookmark and did not yield the configuration context. This is bounded evidence for that path; no recipient reconstructed an exact record, and other tiers or export paths were not tested. | Compare an exact record with the existing Dify/n8n/SkyPilot and README/manifest alternatives under D-57-3. D-57-4 remains a future authorized customer test. Prefer an existing sufficient format or integration when parity is demonstrated. |
+| H4 Neutral cost advice | **Unproved and unchanged.** #66 supplies no matched cost comparison, maintained price history or customer trust result. | Preserve D-57-5/D-57-6 and the separate #63 trust test; incomplete maintenance or demand observations are inconclusive. Link to existing provider pricing or narrow the cost scope if the stated conditions fail. |
+| H5 Configuration-outcome history for single-model inference | **Prior scoped rejection retained.** The historical community counterexamples already rejected H5 as stated for that scope. Accepted #66 provides no basis to revive it. | Keep the recorded rejection. Do not generalize it into a fresh completeness or rights assessment of those community sources. |
+| H5b Multi-component outcome history | **Unproved and unchanged.** No new stack-level reproducible outcome coverage was collected for this question. Missing observed evidence does not establish a market gap. | Preserve the existing existence-based falsification rule and D-57-7's scope/pin requirements. Integrate or contribute to an existing sufficient project if it supplies the scenario's reproducible outcomes. |
+
+The accepted observation strengthens the competing workflow: suggesting a
+coherent local alternative is useful, the contradictory original prompt cannot
+receive a satisfaction pass, and the optional RAGFlow suggestion prevents a
+claim that Flocci never proposes verification. The observed bookmark/navigation
+limits establish no global absence of persistence or export. The historical
+provenance table remains evidence for its stated snapshot; neither that table
+nor this narrowing re-grades the current feature matrix or establishes reuse
+permission. The reader must preserve each source, observation date, version
+unknown and evidence class in the accepted input.
+
+For #58, evaluate the existing bounded local/API decision-record comparison as
+a **validation option**, including the option to use or extend existing tools.
+Do not expand scope to rescue a failed differentiator. The combined prospective
+coherent-scenario gate remains D-57-1, D-57-2 and D-57-3; contradiction handling
+is separate. A research disposition can be accepted while remaining hypotheses
+are unproved; implementation, comparative claims and customer conclusions need
+their own evidence. This records no result for #61/#62/#63/#64 and starts no
+recruitment, paid execution or scheduled study.
+
+### Accepted independent disposition and receiving scopes
+
+The historical #57 and newer #66 receipts keep their exact authors and reviewed
+revisions. The #66 receipt is an input to this review, not automatic acceptance
+of this new #57 amendment. The [actual independent evidence/coordinator and
+receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57#issuecomment-6249141807)
+accepts this bounded narrowing at prepared blob
+`b59af2f5291e242e50bdbd75822b8323b1bd8322` and explicitly accepts each scope
+below with its preserved constraints. These are in-session engineering
+judgments under the user's project delegation, not attributed statements by
+the existing assignees. The review independently compared the accepted #66
+note and preserved hypotheses, thresholds and history; it did not repeat the
+live product run or recapture its images. Final published-source review,
+current checks and canonical delivery remain required for #57 completion.
+The existing #59 owner retains the canonical ledger and can reconcile this
+exact receipt. No assignment or receiving issue is changed by this record.
+
+| Receiver | Research input to assess | Preserved boundary and open work |
+| --- | --- | --- |
+| #2 Workload | Keep original requirements, proposed relaxations and explicit adoption separate when comparing alternatives. | No observed adoption is invented. No intent parser, new workload field, runtime fit or demand finding follows. |
+| #40 Compatibility | Treat generated explanations as bounded UX observations; require separately eligible, scoped facts for compatibility outcomes. | Unknown identities or feasibility cannot become a pass. Frozen v1 and the successor's field, dispatch, migration and adoption decisions retain their own gates. |
+| #42 Saved/shared builds | Compare exact reproducible configuration context against bookmarks and existing manifests. | The tested bookmark did not retain that context; untested exports remain unknown. Preserve selected identities/settings/links, locks and revision-bound reports, with explicit adoption of a new revision. Persistence implementation and #42's #40 prerequisite remain separate. |
+
+### Current literal criterion map
+
+| Live #57 criterion (unchanged) | Evidence or decision in this record | Completion boundary |
+| --- | --- | --- |
+| State falsifiable differentiation hypotheses | Original H1–H5b definitions, unchanged D-57-1–7 and the explicit dispositions above | Hypothesis research is defined; remaining product advantages are unproved. |
+| List counterexamples | Historical competing-workflow/CanIRun.ai sections plus the accepted #66 common, contradiction and save/navigation observations | Positive capabilities and untested scopes remain distinct. |
+| Evaluate source provenance and explainability | Dated provenance table and the current distinction between an observed explanation and eligible compatibility evidence | No fresh exhaustive source audit, source-use permission or matrix re-grade is claimed. |
+| Define kill and pivot criteria | Historical conditions, unchanged prospective rules and the scoped narrowing above | Future measurements retain the original thresholds and separate coherent/contradictory scoring. |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Exact accepted #66 revision, receipt/review/readback links, original source citations and explicit unproved dispositions | Independent review must assess this amendment's reasoning at its final revision. |
+| Relevant technical owners review handoffs; unresolved decisions are named. | The linked independent receipt explicitly accepts the bounded #2/#40/#42 inputs with the constraints above; historical receipts retain their own scope | Receiving implementation, representation, adoption and study decisions remain named; no absent assignee's statement is invented. |
+| Repository checks pass; reviewer accepts the evidence before Done. | Current workflow validation, final independent review and canonical delivery receipts on the PR and issue | The satisfied #66 prerequisite permits review; this document does not mark #57 completed before its own remaining gates. |
+
+## Earlier evidence and acceptance reconciliation (2026-10-18, before #304)
+
+This section preserves the earlier reconciliation at its named revision. Its
+open-prerequisite statements describe that historical checkpoint; use the
+current disposition above for the accepted #66 input and remaining #57 gates.
 
 This readback uses research main `bc35bbed9fc9e758966cd3a625e4768e3f9d3e2b` and the live #57 issue, PR metadata and receiving reviews. It reconciles delivered artifacts with the seven unchanged acceptance criteria. The historical tables below retain their original source dates and evidence scope; their statements about pending branches and unperformed scenarios describe the 2026-10-16 snapshot. The separately dated prospective protocol remains a design for new observations.
 
