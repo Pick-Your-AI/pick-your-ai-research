@@ -37,6 +37,7 @@ python -m unittest discover -s contracts/v1/tests -v
 python -m unittest discover -s tests -v
 python scripts/validate_research.py
 python scripts/validate_market_research.py
+python scripts/validate_handoff_audit.py
 python prompts/mobile/validate_prompts.py
 ```
 
@@ -98,6 +99,12 @@ Issue and pull-request identities in the audit, snapshot, handoff pairs and nati
 parent/child/blocker references must be positive JSON integers. Booleans and
 floating-point aliases cannot match an integer identity through Python equality.
 This identity check does not change numeric fields in unrelated evidence metadata.
+
+Native parent/sub-issue links must be reciprocal, contain no repeated child IDs,
+and form an acyclic hierarchy. The validator checks these captured relationships
+without reordering or rewriting the snapshot. Separate information handoffs and
+`blocked_by` links are not treated as parent edges. This offline consistency
+check does not fetch live GitHub relationships or establish issue completion.
 
 Technical audit classifications must reference captured issue IDs without
 repeating an issue. They may cover a subset of the captured issues; this check

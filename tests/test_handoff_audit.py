@@ -580,6 +580,74 @@ class HandoffAuditValidation(unittest.TestCase):
         with self.assertRaisesRegex(HandoffValidationError, 'parent/sub-issue mismatch'):
             self.check()
 
+    def set_native_cycle(self, size):
+        issues = self.readback['issues'][:size]
+        for index, issue in enumerate(issues):
+            parent = issues[index - 1]
+            issue['parent'] = {'number': parent['number']}
+            parent['sub_issues'] = [issue['number']]
+
+    def test_reciprocal_native_cycles_are_rejected_including_self_parenting(self):
+        for size in (1, 2, 3):
+            with self.subTest(size=size):
+                self.setUp()
+                self.set_native_cycle(size)
+                with self.assertRaisesRegex(HandoffValidationError, 'parent/sub-issue cycle'):
+                    self.check()
+
+    def test_repeated_native_child_is_rejected_without_rewriting_the_snapshot(self):
+        parent, child = self.readback['issues'][:2]
+        parent['sub_issues'] = [child['number'], child['number']]
+        child['parent'] = {'number': parent['number']}
+        before = deepcopy((self.ledger, self.readback, self.audit))
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate native sub-issue'):
+            self.check()
+        self.assertEqual((self.ledger, self.readback, self.audit), before)
+
+    def test_native_forest_accepts_multiple_roots_and_reordered_rows(self):
+        root, child, sibling, independent = self.readback['issues']
+        root['sub_issues'] = [child['number'], sibling['number']]
+        for issue in (child, sibling):
+            issue['parent'] = {'number': root['number']}
+        # Informational handoffs and separate blockers are not parent edges.
+        child['blocked_by'] = [independent['number']]
+        independent['blocked_by'] = [child['number']]
+        self.readback['issues'].reverse()
+        before = deepcopy((self.ledger, self.readback, self.audit))
+        self.check()
+        self.assertEqual((self.ledger, self.readback, self.audit), before)
+
+    def test_native_hierarchy_walk_is_iterative(self):
+        # Validate graph consistency without depending on Python's call-stack
+        # limit. This synthetic chain is not a GitHub nesting-limit assertion.
+        issues = self.readback['issues']
+        for number in range(100, 1300):
+            parent = issues[-1]
+            parent['sub_issues'] = [number]
+            issues.append({'number': number, 'assignees': [],
+                           'parent': {'number': parent['number']}, 'sub_issues': []})
+        issues.reverse()
+        self.check()
+
+    def test_cli_rejects_invalid_native_hierarchies_in_both_python_modes(self):
+        for optimized in (False, True):
+            for size in (1, 2, 3):
+                with self.subTest(optimized=optimized, size=size):
+                    self.setUp()
+                    self.set_native_cycle(size)
+                    result = self.run_cli(self.raw_documents(), optimized)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn('parent/sub-issue cycle', result.stderr)
+                    self.assertNotIn('Handoff audit integrity OK', result.stdout)
+            self.setUp()
+            parent, child = self.readback['issues'][:2]
+            parent['sub_issues'] = [child['number'], child['number']]
+            child['parent'] = {'number': parent['number']}
+            result = self.run_cli(self.raw_documents(), optimized)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('duplicate native sub-issue', result.stderr)
+            self.assertNotIn('Handoff audit integrity OK', result.stdout)
+
     def test_context_cannot_silently_become_current_audit_acceptance(self):
         row = next(r for r in self.ledger if r['market_issue'] == 59)
         row['current_audit_acceptance'] = 'Accepted'
