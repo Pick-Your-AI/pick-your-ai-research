@@ -1014,8 +1014,10 @@ framework, HTTP transport, OAuth flow, Roots, Sampling or elicitation was tested
 | 2.3.0 | 2.3.0 | `legacy` | Tool listing and echo passed at `2025-11-25` |
 | 2.3.0 | 1.30.0 | Explicit `2026-07-28` | RPC failed with `MCPError` code `-32602`; no successful listing/echo or negotiated revision recorded |
 
-The [recorded matrix](../../tests/fixtures/mcp-protocol-2026-10-18/observation.json)
-binds these observations to the reproduction script hash. The last row exercises
+The [original recorded matrix](../../tests/fixtures/mcp-protocol-2026-10-18/observation.json)
+binds these observations to the [original reproduction](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/5faa554a6f9ecebdba17186d07fe053f99ca6e94/tests/reproduce_mcp_protocols.py)
+hash. The later cleanup correction below has its own replay; the original record
+and dependency/source preparation remain unchanged. The last row exercises
 an explicit-modern RPC against a legacy peer; it is not an automatic-negotiation
 failure. The five success rows cover two observed revisions, not execution of
 all five revisions listed in the source registry.
@@ -1043,17 +1045,61 @@ From the repository root, supply those environments' Python executables:
 ```sh
 python tests/reproduce_mcp_protocols.py --observe /path/to/v1/bin/python /path/to/v2/bin/python
 python -m unittest discover -s tests -p test_mcp_protocol_observation.py -v
+python -m unittest discover -s tests -p test_mcp_worker_cleanup.py -v
 ```
 
 The observer uses five-second read deadlines and a 20-second worker deadline;
 an unexpected matrix result exits nonzero. A process/setup failure is not a
 compatibility verdict. The SDK's context managers own peer shutdown during
-normal and error unwinding. The outer deadline kills/reaps its worker, not an
-independently verified descendant tree; these exchanges do not qualify cleanup
-after a hard worker kill. No peer remained after the observed normal/error runs.
-The standard research requirements and automatic CI do
-not install these optional SDK environments. Other platforms and dependency
-tuples need their own observation.
+normal and error unwinding. No peer remained after the original normal/error
+runs, but a separate disposable sleeping-peer reproduction demonstrated that
+the original outer deadline could kill/reap its worker while leaving a live peer.
+
+### Linux probe lifetime correction (2026-10-18)
+
+The current observer requires Linux and fails before launching an observation
+worker on another platform. Each worker starts in its own session; a timeout or
+exception path kills only its still-unreaped owned group, waits up to five seconds to
+reap the worker and closes its pipes without a second potentially unbounded drain.
+It does not signal a group after the leader has already been reaped.
+
+The pinned SDKs also create the stdio peer in a **separate session**. This was
+inspected in the original verified wheels at `mcp/client/stdio/__init__.py`
+(1.30.0) and `mcp/client/stdio.py` (2.3.0); a worker-group signal alone cannot
+terminate that peer. The fixed synthetic peer therefore installs Linux
+`PR_SET_PDEATHSIG` with `SIGKILL` before loading the SDK. Both worker and peer
+receive their exact expected parent PID and check it before and after installing
+the guard. Invalid/stale parents and syscall failure stop setup. This closes the
+registration race documented by the [Linux manual](https://man7.org/linux/man-pages/man2/PR_SET_PDEATHSIG.2const.html)
+(inspected 2026-10-18): the signal is not retroactive when the creating parent
+thread has already died. The [Python subprocess documentation](https://docs.python.org/3.12/library/subprocess.html#subprocess.Popen)
+(inspected 2026-10-18) supplies the session, timeout and reaping API semantics.
+
+Four offline lifecycle methods include two actual timeout topologies: an inherited
+worker group and an independently sessioned peer with the lifetime guard. The
+peer writes readiness only after setup; the regression checks its parent/group
+identity, its `SIGKILL` exit, an already-reaped worker and an unaffected unrelated
+sentinel. The test process temporarily adopts/reaps its own fixture orphans and
+restores that process-local setting. Failure cleanup signals only a verified
+unreaped direct/adopted child. Invalid parent types, changed-parent setup and
+syscall/platform failures have separate guards; no MCP installation is needed
+for these lifecycle tests.
+
+The [new six-case SDK replay](../../tests/fixtures/mcp-protocol-2026-10-18/cleanup-observation.json)
+was captured at **2026-10-18 07:45:19 UTC** with the unchanged pinned environments.
+Its current-script hash is independently checked by the observation tests. All
+five successful exchanges and the explicit-modern `-32602` failure remain the
+same, with zero worker stderr and exit code zero in all six rows. An independent
+reviewer also reran the six-case matrix and the four lifecycle methods.
+
+The production claim is termination of this fixed Linux peer plus worker reaping.
+It is not a generic process-tree supervisor: the parent-death setting is not
+inherited across fork and can be cleared by credential changes; arbitrary peer
+children and other platforms remain unqualified. Reaping a terminated orphan
+normally belongs to the host init/subreaper; the observer itself does not become
+a subreaper. The standard research requirements and automatic CI do not install
+the optional SDK environments. No vendor endpoint, authentication or catalog
+qualification is added by this correction.
 
 The #25/#27 next step is to bind a selected client/framework, server artifact,
 transport and authentication configuration to an eligible actual exchange.
