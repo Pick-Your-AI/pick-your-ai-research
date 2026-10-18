@@ -1,5 +1,7 @@
 # Pick Your AI research
 
+Mobile planning issues now live in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`. See the [migration record](prompts/mobile/MIGRATION.md). Repository creation resolves location only; framework, modules and service placement remain gated. Existing acceptance-record paths are preserved. Historical snapshots below do not override the live migration.
+
 Research for an AI system builder inspired by [PCPartPicker](https://pcpartpicker.com/): choose compatible AI components, compare costs and tradeoffs, and save or share a configuration with evidence behind its recommendations.
 
 [Technical research Project](https://github.com/orgs/Pick-Your-AI/projects/1) · [Market research Project](https://github.com/orgs/Pick-Your-AI/projects/2) · [Issues](https://github.com/Pick-Your-AI/pick-your-ai-research/issues) · [Organization](https://github.com/Pick-Your-AI)
@@ -13,7 +15,7 @@ Research for an AI system builder inspired by [PCPartPicker](https://pcpartpicke
 
 Client implementers: use the [pinned consumer handoff](docs/CONSUMER_HANDOFF.md) for immutable artifacts, known baseline limitations and remaining receiving gates.
 
-Keep incomplete findings in notes. Never invent a required value to satisfy a schema. The contract's examples are synthetic; passing validation does not verify vendor claims or establish production readiness. Propose contract changes through [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40); see [contract adoption and limitations](contracts/v1/ADOPTION.md).
+Keep incomplete findings in notes. Never invent a required value to satisfy a schema. The contract's examples are synthetic; passing validation does not verify vendor claims or establish production readiness. Propose contract changes through [Pick-Your-AI/pick-your-ai-research#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40); see [contract adoption and limitations](contracts/v1/ADOPTION.md).
 
 ## Research programs
 
@@ -31,11 +33,11 @@ The builder starts with a workload and deployment mode, then covers models, infr
 | [T5: Training & Fine-Tuning](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29) (optional) | @appletechie |
 | [T6: Deployment & Operations](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) | @PUSHINGSQUARES |
 
-Shared decisions are tracked in [#40: schemas and compatibility](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#41: catalog sources and freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41), and [#42: saved/shared builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42).
+Shared decisions are tracked in [Pick-Your-AI/pick-your-ai-research#40: schemas and compatibility](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [Pick-Your-AI/pick-your-ai-research#41: catalog sources and freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41), and [Pick-Your-AI/pick-your-ai-research#42: saved/shared builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42).
 
 ### Market and customer research — Project 2
 
-[Program #47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) coordinates competition, customer demand, monetization, and product scope. Market findings use the issue's evidence format; they only become component catalog records when that format applies.
+[Program Pick-Your-AI/pick-your-ai-research#47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) coordinates competition, customer demand, monetization, and product scope. Market findings use the issue's evidence format; they only become component catalog records when that format applies.
 
 Read the [market research guide](docs/market-research/README.md), [competitive landscape](docs/market-research/competitive-landscape.md), and [research synthesis](research/market/synthesis.md). These records distinguish reviewed partial research from pending validation and owner decisions.
 
@@ -67,7 +69,7 @@ pipeline, offline behavior, privacy, quality, TestFlight, App Store launch and o
 The delivery hierarchy is separate from the product's T0–T6 configuration tiers.
 
 The plan is published in [Apple Project #5](https://github.com/orgs/Pick-Your-AI/projects/5)
-under [program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163); see the
+under [program Pick-Your-AI/pick-your-ai-apple#1](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/1); see the
 [issue index and triage record](docs/APPLE_DELIVERY_TRACKING.md). It does not establish
 a shipped application. Existing
 research, Android and website work remains canonical: shared capabilities are linked

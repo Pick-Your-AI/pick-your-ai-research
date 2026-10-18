@@ -1,6 +1,6 @@
 # Android program execution prompt
 
-Scope: [Pick-Your-AI/pickyour.ai#34](https://github.com/Pick-Your-AI/pickyour.ai/issues/34), [Project 4](https://github.com/orgs/Pick-Your-AI/projects/4). Required: [shared execution rules](SHARED.md), [issue index](INDEX.md), [launch instructions](README.md). Execute the full shared sequence: inspection, ownership intake, prerequisite reconciliation, implementation, meaningful validation, receiving review, PR delivery and evidence-backed completion. A single-epic or work-package invocation does not invoke this entire program.
+Scope: [Pick-Your-AI/pick-your-ai-android#1](https://github.com/Pick-Your-AI/pick-your-ai-android/issues/1), [Project 4](https://github.com/orgs/Pick-Your-AI/projects/4). Required: [shared execution rules](SHARED.md), [issue index](INDEX.md), [launch instructions](README.md). Execute the full shared sequence: inspection, ownership intake, prerequisite reconciliation, implementation, meaningful validation, receiving review, PR delivery and evidence-backed completion. A single-epic or work-package invocation does not invoke this entire program.
 
 ## Program coordination
 
@@ -14,7 +14,7 @@ Apply these to each relevant child alongside its exact criterion set. Record ina
 
 | Area / epic | Required implementation and observable evidence |
 | --- | --- |
-| Foundation 02; storage 12; quality 15 | Use the framework selected by Pick-Your-AI/pickyour.ai#67. Pin compatible build tools/dependencies and SDK support; retain clean-checkout and CI logs. Test rotation, backgrounding, low-memory process death, cold start, back navigation, resized windows and upgrade without losing acknowledged edits or opening the wrong draft. Do not depend on a final lifecycle callback to persist data. |
+| Foundation 02; storage 12; quality 15 | Use the framework selected by Pick-Your-AI/pick-your-ai-android#34. Pin compatible build tools/dependencies and SDK support; retain clean-checkout and CI logs. Test rotation, backgrounding, low-memory process death, cold start, back navigation, resized windows and upgrade without losing acknowledged edits or opening the wrong draft. Do not depend on a final lifecycle callback to persist data. |
 | Persistence 08/11/12 | Durable transactions for draft/revision/head; migration from every supported schema version; corrupt-record/disk-failure recovery without silent destructive reset. Preserve pins and incomplete drafts. Test autosave acknowledgment, undo as a new revision, outbox crash after server commit, idempotent retry, CAS conflicts, cancellation and account isolation. |
 | Offline 04/05/12 | Atomically activate complete hash-verified artifacts; retain prior cache on interrupted download. Respect OS/network/battery background limits, disclose unavailable server-only checks, prevent mixed snapshots and late responses replacing current analysis. Background scheduling is not a durability guarantee. |
 | Security 11/14 | Least-permission manifest and exported-component audit; safe token custody/Keystore where applicable, TLS policy, backup exclusions and log redaction. Verify grant, denial and revocation. Bound URI/byte/depth imports before decoding; Android document/share flows require explicit acceptance and safe projections. Server authority applies to guests as well as accounts. |
