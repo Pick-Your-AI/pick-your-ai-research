@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "id": "pick-your-ai-usd-cost-policy",
+  "kind": "cost_policy",
+  "tier": "T6",
+  "name": "Pick Your AI USD research cost policy",
+  "version": "2026-10-18-preview.1",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Project-authored preview of the #39 USD default-currency proposal. This research definition does not establish production adoption, runtime enforcement, a free billing classification, currency conversion, a region default or complete cost coverage.",
+  "spec": {
+    "default_currency": "USD"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/Pick-Your-AI/pick-your-ai-research/blob/301b7c9cccaa6c5ab8a3c72be5a8dfc23893f554/research/T6-deployment-operations/cost-estimate.md#currency-and-region-policy",
+      "checked_at": "2026-10-18T10:43:16Z",
+      "verification_status": "unverified",
+      "notes": "The source proposes USD pricing with explicit T0 display currency; it does not record production adoption. This dated preview defines its own identity and USD default in the same research note's USD cost-policy preview section. The existing vendor prices and regional examples are not rechecked or adopted by this candidate."
+    },
+    {
+      "source_uri": "https://github.com/Pick-Your-AI/pick-your-ai-research/blob/301b7c9cccaa6c5ab8a3c72be5a8dfc23893f554/contracts/v1/docs/PRICING_AND_GATES.md",
+      "checked_at": "2026-10-18T10:43:16Z",
+      "verification_status": "unverified",
+      "notes": "Frozen pricing semantics preserve source currencies, require an explicit pinned exchange-rate policy for conversion, and prohibit unknown billing from being treated as zero. This preview supplies no FX or hard-cap implementation and does not establish a complete quote or budget pass."
+    }
+  ],
+  "updated_at": "2026-10-18T10:43:16Z"
+}

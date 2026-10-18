@@ -762,7 +762,48 @@ Minimum per mode:
 
 ## Structured artifacts
 
-No catalog or pricebook proposals in this pull request. A `cost_policy` item needs `default_currency`, which waits on the maintainers' answer to the currency question below (USD proposed). Pricebook proposals under `pricing/proposals/` for the rates the worked scenarios use, and a CostEstimate mapping of W1 to W5, are follow-ups. The scenario calculator ships with this record: [`cost-scenarios.py`](cost-scenarios.py) and its spec [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
+The original #121 submission contained no catalog or pricebook proposals. The dated USD policy preview below supplies a `cost_policy` candidate; production currency and region adoption remain decisions for the named owners. Pricebook proposals under `pricing/proposals/` for the rates the worked scenarios use, and a CostEstimate mapping of W1 to W5, are follow-ups. The scenario calculator ships with this record: [`cost-scenarios.py`](cost-scenarios.py) and its spec [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
+
+### USD cost-policy preview — 2026-10-18
+
+The [structured candidate](../../catalog/proposals/t6-pick-your-ai-usd-cost-policy.json)
+defines this project's preview policy as `pick-your-ai-usd-cost-policy`, version
+`2026-10-18-preview.1`, with `spec.default_currency: USD`. USD is an engineering
+choice for this candidate, following the existing [currency proposal](#currency-and-region-policy).
+It makes the previously proposed default concrete for review; it is not a
+statement that a provider bills every customer in USD or that a runtime already
+implements this policy. The candidate's `preview` status describes this authored
+research definition, not a provider release or production availability.
+
+`default_currency` is a preference for the estimate currency when no explicit
+estimate currency is supplied. Each rate retains its published currency. A
+different requested currency still requires an eligible, pinned conversion
+policy before a converted total can be produced; this candidate supplies none.
+The T0 budget's currency remains explicit, and a comparison across currencies
+cannot pass through this default. Source currencies, prices and existing W1–W5
+arithmetic are unchanged.
+
+The v1 candidate deliberately contains only the required cost-policy field.
+`supports_hard_cap` and `alert_threshold_pct` are omitted because no enforcement
+implementation or adopted threshold is established. `billing_class` remains
+`unknown`; this is not a free/included classification and cannot bypass the
+frozen contract's coverage checks. It selects no provider region, account,
+deployment mode, tax assumption, amortisation period or rounding/FX policy.
+
+| Candidate field | Basis and limit |
+| --- | --- |
+| Identity, version and `preview` status | Project-authored research definition in this section, dated 2026-10-18; not a vendor release date |
+| `spec.default_currency: USD` | Engineering choice following the #39 owner's existing USD proposal; production adoption is still unconfirmed |
+| `billing_class: unknown` | No billing classification for an implemented offering is established; never treat the missing classification as zero cost |
+| Provenance dates and `unverified` status | The cited repository records were read on 2026-10-18; this is not a new external price/terms check or independent vendor measurement |
+
+The provenance pins the pre-existing proposal and frozen pricing semantics at
+`301b7c9cccaa6c5ab8a3c72be5a8dfc23893f554`; the new definition above is the
+source for this candidate's authored identity. The existing #39 currency/region
+question remains the production-adoption question. #39's co-owners retain pricing
+acceptance, #41 retains eligible source/FX policy, and #40/#42 retain contract and
+saved-build consumption decisions. Publishing this preview does not supply any
+of those receiving responses or a complete priced build.
 
 ## Open questions and handoffs
 
