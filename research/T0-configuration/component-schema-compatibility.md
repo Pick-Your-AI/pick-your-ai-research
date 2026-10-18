@@ -1552,6 +1552,91 @@ candidate. The historical receiving receipts above retain their original source
 scope; this correction does not adopt a successor interface, implement migration
 M1–M5, qualify source use or supply native-owner acceptance.
 
+#### CD-7 unresolved-record diagnostics and rule gate candidate (2026-10-18)
+
+This bounded candidate addresses the presentation and dependent-rule mechanic in
+[the #40 owner's CD-7 constraint 2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407).
+Actual probes of accepted `d98fbe716f49c0da3782655acfd5d1b3f471cafc` found that
+the existing consumer already retains each record's specific failure reason.
+Its selection rows use `snapshot_unresolved` for a missing or withheld catalog;
+it does not provide a presentation or dependent-callback boundary. This work
+adds that boundary without describing the existing record resolver as defective.
+
+The [local prototype](../../tests/t0_cd7_diagnostics_prototype.py) requires the
+explicit proposal version `cd7-diagnostics-0.1`. Every inspection and rule call
+invokes the actual `cd7-consumer-0.1` inspector against the supplied request,
+original build, sidecar and immutable fixture archive. Callers cannot supply a
+replacement inspection dictionary. The exact existing consumer response bytes
+are retained, with no protocol or schema change. The new frozen Python result
+objects are a normalized test API, not an adopted serialization or native wire.
+
+Each diagnostic identifies the record kind, available ID and representable
+revision, preserves the original reason code, and renders
+`cannot be reproduced: <record>`. A revision omitted by the existing native
+range boundary remains omitted; the helper does not round it or invent a pin.
+Diagnostics contain these identifiers and reason codes, not record payloads.
+
+| Actual consumer state | Dependent-rule behavior |
+| --- | --- |
+| Missing pin, unavailable exact pin or digest mismatch | `unknown` with `dependency_unresolved` and the original per-record reason code. The existing digest-mismatch precedence remains, including when a producer also withholds the record. |
+| `revoked` or `temporarily_unavailable` catalog | Every enabled selection depending on that snapshot receives its specific catalog cause. Both applicability and assertion callbacks remain uncalled. |
+| Unsupported native revision, artifact byte limit, structure or representation | `unknown` with the distinct existing reason and the record identity that the consumer can represent. No latest candidate or default is substituted. |
+| Selected version absent or selected kind mismatch | `unknown` with that selection's membership reason. These are not assertions that a component capability is unsupported. |
+| Pricebook unavailable, with a resolved catalog | Pricebook/pair-dependent rules remain unknown; independent catalog or selection rules retain their own evaluation. |
+| Catalog/Pricebook rate mismatch | Rules requiring the complete pair remain unknown with `rate_catalog_mismatch`. A resolved individual record alone does not establish cross-record membership. |
+| No Pricebook selected | No global error or zero price is synthesized. A rule explicitly requiring the Pricebook or pair gets `unknown` with `pricebook_absent`; a required pair also retains any independently unresolved catalog cause. |
+| Known disabled selection dependency | A fully known disabled scope gets `skipped` with `not_enabled`. If another declared dependency is unresolved, the result remains `unknown` and also identifies the disabled dependency. |
+
+Rules declare an immutable tuple of exact dependencies: `record` with
+`catalog_snapshot` or `pricebook`, `selection` with an existing selection ID,
+or `pair` with `catalog_pricebook`. Duplicate, malformed or nonexistent selection
+references reject the local call rather than becoming an empty scope. A required
+kind that has no selection is governed by the separate required-presence
+candidate; this API does not infer a selection or replace that rule.
+
+The tuple is a **reviewed-input assumption**, not a dependency compiler. The
+helper cannot determine whether an arbitrary callback concealed an additional
+read. Cross-record rate checks must declare the pair; declaring only the
+Pricebook means only that individual record's identity/availability is checked.
+An empty tuple explicitly declares an independent rule. It can run while other
+records are unresolved, without making the build or those records valid.
+Real ruleset dependency extraction and affected-owner adoption remain required.
+
+After dependency gating, both callbacks must return exactly `True`, `False` or
+`None`; truthy strings, numbers and containers reject. Known non-applicability
+skips, unknown applicability stays unknown, and a resolved dependency set alone
+never supplies a passing assertion. The caller supplies one fixed
+`info`/`warning`/`error` severity for the rule. Callback exceptions, malformed
+requests, unsupported protocol versions and invalid local declarations remain
+execution/input errors; they are not caught as missing-record findings.
+
+**Historical visibility is separate.** A caller may retain an existing
+`ReplayResult` alongside the diagnostic view. Its original build and sidecar
+must match the current call byte for byte; identical JSON values or IDs do not
+transfer that binding. The helper preserves that same object, its original
+manifest and report bytes, findings and status, without executing the evaluator,
+rewriting the report or upgrading an unavailable historical replay. It does not
+authenticate an arbitrary caller-created historical object. No prior `pass` is
+used as a current rule result. This opaque local carrier is not a sharing/export
+format, a sanitization pass, or authority to display restricted source material.
+Publication, source use, historical authenticity and current compatibility remain
+explicitly `not_established` by this inspection mechanic.
+
+The [synthetic regressions](../../tests/test_t0_cd7_diagnostics.py) exercise these
+cases through actual consumer and historical-replay fixture paths, including
+both missing inputs in a required pair, all enabled selections, callback error
+propagation, unchanged response bytes and separately retained historical reports.
+Run `python -m unittest discover -s tests -p test_t0_cd7_diagnostics.py -v` and
+the same command under `python -O`. The synthetic historical control reproduces
+the retained 45-finding example; it supplies no real measurement or source grant.
+
+The frozen import, existing consumer/replay implementation and original fixtures
+remain unchanged. M1–M5 integration, per-component migration, successor schema
+and protocol dispatch, original/current ruleset views, projection/share paths,
+source admission and native receiving acceptance are separate tasks. This
+mechanics candidate follows the owner's standing queue criteria; it does not
+mark that owner's constraint closed or complete #40/#42's research acceptance.
+
 ### CD-7 historical reference replay candidate (2026-10-18)
 
 **Engineering decision:** extend the existing CD-7 archive with a separate,
