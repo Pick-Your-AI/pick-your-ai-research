@@ -80,7 +80,7 @@ At the original publication snapshot, [PR #75](https://github.com/Pick-Your-AI/p
 
 ## Closure gates
 
-All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff must have an actual consuming-owner acknowledgement, and each issue's own acceptance criteria must be satisfied before its completion. #8/#9/#10 retain their remaining gates. Report any Project update limitation explicitly.
+All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff must have an actual consuming-owner acknowledgement, and each issue's own acceptance criteria must be satisfied before its completion. #8/#9 retain their remaining gates; [the current compute reconciliation](#current-compute-scope-and-cost-condition-integration-2026-10-18) records #10's later completion. Report any Project update limitation explicitly.
 
 The [final research handoff assessment](inference-engine.md#final-research-handoff-assessment--2026-10-18) accounts for all five required #11 consumers using the actual comments above, including #38's expressly accepted narrowing to source/evidence inputs. [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291), merged as [859f47db88f0d8f1a99899ca9029ce0da19800c8](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/859f47db88f0d8f1a99899ca9029ce0da19800c8) on 2026-10-18, completed the reviewed assessment and #11 is now closed. The earlier #266 audit supplied the eight artifact criteria, and #285 reconciled the later T6 receipt. The full assessment preserves those records and each receipt's author, revision, direction and limits. Named lifecycle/#42 and selected-runtime follow-ups remain in their owning scopes; completion of #11 does not complete the parent or its receiving issues.
 
@@ -152,7 +152,12 @@ at published `8a6b8a67019a7abbddd66be59a9d14f8cf9a592f`, tree
 withdrawals and cost disclosures. It was posted by `CompleteDotTech` as the
 coordinating engineer under the user's project delegation. Every original
 author, revision and scope is preserved; no absent-assignee response is inferred.
-This supports 10.9. Final source review, current CI, canonical merge and live
-issue/Project reconciliation remain pending. Numeric defaults, runtime
-calibration, future ResourceEstimates and downstream issue completion retain
-their own named owners and factual requirements.
+This satisfies 10.9. [PR #339](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/339)
+received [independent source review at `94ea2422`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/339#pullrequestreview-5563188565)
+and delivered the assessment in signed
+[`a2bba46f`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/a2bba46ff850af5d6263561a94f9866b01c03c05).
+The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250602587)
+records successful post-main CI, the completed issue with all ten criteria
+checked, and the subsequent public Project `Done` readback. Numeric defaults,
+runtime calibration, future ResourceEstimates and downstream issue completion
+retain their own named owners and factual requirements.

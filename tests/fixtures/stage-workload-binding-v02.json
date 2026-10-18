@@ -1,0 +1,91 @@
+{
+  "x_t0_stage_workload": {
+    "proposal_version": "cd5-0.2",
+    "build_sha256": "0d5b670bff77b99ad7ea926349501dfccc8873cb27fc7af117213d46ecbe3b7a",
+    "answer_states_sha256": "35c4dc98252948467394c2ab1ac6fc64c86f1ff52586ee844e1387ca16c22d0a",
+    "inventory_id": "fixture.pipeline.1",
+    "stages": [
+      {
+        "id": "retrieve",
+        "selection_id": "sel_embedding_model",
+        "operation": {
+          "id": "embed-query",
+          "version": "1"
+        },
+        "configuration_id": "fixture.retrieve.1",
+        "native_input_units": [],
+        "native_output_units": [],
+        "tokenizer_assumption": {
+          "state": "provided",
+          "value": {
+            "basis": "tokenizer",
+            "reference": {
+              "id": "fixture.embedding-tokenizer",
+              "version": "1"
+            },
+            "assumption": true
+          },
+          "source": "synthetic:fixture-only"
+        }
+      },
+      {
+        "id": "draft",
+        "selection_id": "sel_model",
+        "operation": {
+          "id": "generate",
+          "version": "1"
+        },
+        "configuration_id": "fixture.draft.1",
+        "native_input_units": [],
+        "native_output_units": [],
+        "tokenizer_assumption": {
+          "state": "provided",
+          "value": {
+            "basis": "tokenizer",
+            "reference": {
+              "id": "fixture.text-tokenizer",
+              "version": "1"
+            },
+            "assumption": true
+          },
+          "source": "synthetic:fixture-only"
+        }
+      },
+      {
+        "id": "classify",
+        "selection_id": "sel_model",
+        "operation": {
+          "id": "generate",
+          "version": "1"
+        },
+        "configuration_id": "fixture.classify.1",
+        "native_input_units": [],
+        "native_output_units": [],
+        "tokenizer_assumption": {
+          "state": "provided",
+          "value": {
+            "basis": "model_native",
+            "assumption": true
+          },
+          "source": "synthetic:fixture-only"
+        }
+      },
+      {
+        "id": "audio-score",
+        "selection_id": "sel_model",
+        "operation": {
+          "id": "audio-scores",
+          "version": "1"
+        },
+        "configuration_id": "fixture.audio-score.1",
+        "native_input_units": [
+          "audio_seconds"
+        ],
+        "native_output_units": [],
+        "tokenizer_assumption": {
+          "state": "not_applicable"
+        }
+      }
+    ]
+  }
+}

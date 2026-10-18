@@ -32,7 +32,8 @@ class SupportMembershipCases(unittest.TestCase):
                 self.assertEqual(result.findings[0].reason, "unmarked_absence")
 
     def test_exhaustive_omission_supplies_negative_evidence(self):
-        result = evaluate(frozenset({"safetensors"}), replace(SOURCE, exhaustive=True))
+        result = evaluate(frozenset({"safetensors"}), replace(SOURCE, exhaustive=True),
+                          requested_complete=True)
         self.assertEqual(result.outcome, Outcome.FAIL)
         self.assertEqual(result.findings[0].reason, "exhaustive_absence")
 
@@ -45,6 +46,7 @@ class SupportMembershipCases(unittest.TestCase):
                 result = evaluate(
                     frozenset({"gguf"}),
                     replace(SOURCE, supported=supported, exhaustive=True),
+                    requested_complete=True,
                 )
                 self.assertEqual(result.outcome, expected)
 
@@ -58,7 +60,7 @@ class SupportMembershipCases(unittest.TestCase):
                 evidence = replace(
                     SOURCE, supported=supported, unsupported=frozenset({"safetensors"})
                 )
-                result = evaluate(frozenset({"safetensors"}), evidence)
+                result = evaluate(frozenset({"safetensors"}), evidence, requested_complete=True)
                 self.assertEqual(result.outcome, Outcome.FAIL)
                 self.assertEqual(result.findings[0].reason, "explicit_unsupported")
 
@@ -84,7 +86,7 @@ class SupportMembershipCases(unittest.TestCase):
         requested = frozenset({"pytorch", "safetensors"})
         self.assertEqual(evaluate(requested, evidence).outcome, Outcome.UNKNOWN)
         self.assertEqual(
-            evaluate(requested, replace(evidence, exhaustive=True)).outcome,
+            evaluate(requested, replace(evidence, exhaustive=True), requested_complete=True).outcome,
             Outcome.FAIL,
         )
 
@@ -101,7 +103,8 @@ class SupportMembershipCases(unittest.TestCase):
         )
         self.assertEqual(
             evaluate(
-                requested, replace(SOURCE, supported=requested), Requirement.ALL
+                requested, replace(SOURCE, supported=requested), Requirement.ALL,
+                requested_complete=True,
             ).outcome,
             Outcome.PASS,
         )
@@ -145,8 +148,7 @@ class SupportMembershipCases(unittest.TestCase):
             evaluate(None, SOURCE, applicable=None).reason, "applicability_unknown"
         )
         self.assertEqual(evaluate(None, SOURCE).reason, "requirement_unknown")
-        with self.assertRaisesRegex(ValueError, "nonempty requirement"):
-            evaluate(frozenset(), SOURCE)
+        self.assertEqual(evaluate(frozenset(), SOURCE).reason, "requirement_empty")
 
     def test_markers_cannot_be_inferred_from_truthy_text_or_numeric_values(self):
         for value in ("false", "unknown", 0, 1):
@@ -156,6 +158,113 @@ class SupportMembershipCases(unittest.TestCase):
                         evaluate(
                             frozenset({"gguf"}), replace(SOURCE, **{marker: value})
                         )
+
+    def test_any_negative_verdict_needs_separately_complete_requested_inventory(self):
+        requested = frozenset({"onnx", "safetensors"})
+        for evidence in (replace(SOURCE, exhaustive=True),
+                         replace(SOURCE, supported=None, unsupported=requested)):
+            for complete, outcome, reason in (
+                (None, Outcome.UNKNOWN, "requested_completeness_unknown"),
+                (False, Outcome.UNKNOWN, "requested_set_incomplete"),
+                (True, Outcome.FAIL, "any_membership"),
+            ):
+                with self.subTest(evidence=evidence, complete=complete):
+                    result = evaluate(requested, evidence, requested_complete=complete)
+                    self.assertEqual((result.outcome, result.reason), (outcome, reason))
+                    self.assertEqual([f.value for f in result.findings], sorted(requested))
+                    self.assertTrue(all(f.outcome is Outcome.FAIL for f in result.findings))
+                    self.assertEqual({f.reason for f in result.findings},
+                                     {"exhaustive_absence" if evidence.exhaustive else "explicit_unsupported"})
+
+    def test_any_positive_witness_survives_incomplete_or_unknown_requested_inventory(self):
+        requested = frozenset({"gguf", "safetensors"})
+        for complete in (None, False, True):
+            with self.subTest(complete=complete):
+                result = evaluate(requested, replace(SOURCE, exhaustive=True),
+                                  requested_complete=complete)
+                self.assertEqual((result.outcome, result.reason), (Outcome.PASS, "any_membership"))
+                self.assertEqual([f.outcome for f in result.findings], [Outcome.PASS, Outcome.FAIL])
+
+    def test_all_positive_verdict_needs_separately_complete_requested_inventory(self):
+        requested = frozenset({"gguf", "safetensors"})
+        for complete, outcome, reason in (
+            (None, Outcome.UNKNOWN, "requested_completeness_unknown"),
+            (False, Outcome.UNKNOWN, "requested_set_incomplete"),
+            (True, Outcome.PASS, "all_membership"),
+        ):
+            with self.subTest(complete=complete):
+                result = evaluate(requested, replace(SOURCE, supported=requested), Requirement.ALL,
+                                  requested_complete=complete)
+                self.assertEqual((result.outcome, result.reason), (outcome, reason))
+                self.assertTrue(all(f.outcome is Outcome.PASS for f in result.findings))
+
+    def test_all_counterexample_survives_incomplete_or_unknown_requested_inventory(self):
+        requested = frozenset({"onnx", "safetensors"})
+        evidence = replace(SOURCE, unsupported=frozenset({"onnx"}))
+        for complete in (None, False, True):
+            with self.subTest(complete=complete):
+                result = evaluate(requested, evidence, Requirement.ALL, requested_complete=complete)
+                self.assertEqual((result.outcome, result.reason), (Outcome.FAIL, "all_membership"))
+                self.assertEqual([f.outcome for f in result.findings], [Outcome.FAIL, Outcome.UNKNOWN])
+
+    def test_empty_requests_are_reasoned_unknown_even_when_explicitly_complete(self):
+        for requirement in Requirement:
+            for complete in (None, False, True):
+                with self.subTest(requirement=requirement, complete=complete):
+                    result = evaluate(frozenset(), SOURCE, requirement, requested_complete=complete)
+                    self.assertEqual((result.outcome, result.reason), (Outcome.UNKNOWN, "requirement_empty"))
+                    self.assertEqual(result.findings, ())
+                    self.assertFalse(result.disputed)
+        self.assertEqual(evaluate(frozenset(), SOURCE, applicable=False).outcome, Outcome.SKIPPED)
+        self.assertEqual(evaluate(frozenset(), SOURCE, applicable=None).reason, "applicability_unknown")
+
+    def test_requested_completeness_does_not_resolve_missing_or_disputed_member_evidence(self):
+        evidence = replace(SOURCE, unsupported=frozenset({"gguf"}))
+        for requirement in Requirement:
+            for complete in (None, False, True):
+                with self.subTest(requirement=requirement, complete=complete):
+                    result = evaluate(frozenset({"gguf", "safetensors"}), evidence, requirement,
+                                      requested_complete=complete)
+                    self.assertEqual(result.outcome, Outcome.UNKNOWN)
+                    self.assertTrue(result.disputed)
+                    self.assertEqual([f.reason for f in result.findings],
+                                     ["opposite_equal_rank_claims", "unmarked_absence"])
+
+    def test_bare_string_is_not_a_characterwise_membership_query(self):
+        evidence = replace(SOURCE, supported=frozenset({"f", "g", "u"}))
+        for requirement in Requirement:
+            with self.subTest(requirement=requirement):
+                with self.assertRaisesRegex(ValueError, "frozenset of nonblank strings"):
+                    evaluate("gguf", evidence, requirement, requested_complete=True)
+
+    def test_malformed_requested_collections_reject_before_shortcuts(self):
+        cases = (b"gguf", ["gguf"], ("gguf",), {"gguf"}, {"gguf": True},
+                 iter(["gguf"]), 0, True, frozenset({None}), frozenset({False}),
+                 frozenset({1}), frozenset({""}), frozenset({"   "}),
+                 frozenset({"gguf", " "}))
+        for value in cases:
+            for applicable in (False, None, True):
+                with self.subTest(value=value, applicable=applicable):
+                    with self.assertRaisesRegex(ValueError, "frozenset of nonblank strings"):
+                        evaluate(value, SOURCE, applicable=applicable)
+
+    def test_requested_completeness_rejects_truthy_values_before_shortcuts(self):
+        for value in (0, 1, 1.0, "true", "false", [], {}):
+            for applicable in (False, None, True):
+                with self.subTest(value=value, applicable=applicable):
+                    with self.assertRaisesRegex(ValueError, "normalized bool or None"):
+                        evaluate(frozenset({"gguf"}), SOURCE, applicable=applicable,
+                                 requested_complete=value)
+
+    def test_requested_values_are_literal_and_caller_inputs_remain_unchanged(self):
+        requested = frozenset({"GGUF", " gguf ", "gguf"})
+        evidence = replace(SOURCE, exhaustive=True)
+        before = (requested, evidence)
+        result = evaluate(requested, evidence, requested_complete=False)
+        self.assertEqual(result.outcome, Outcome.PASS)
+        self.assertEqual([(f.value, f.outcome) for f in result.findings],
+                         [(" gguf ", Outcome.FAIL), ("GGUF", Outcome.FAIL), ("gguf", Outcome.PASS)])
+        self.assertEqual((requested, evidence), before)
 
     def test_frozen_contains_and_intersects_false_is_not_a_completeness_claim(self):
         contract = Path(__file__).resolve().parents[1] / "contracts/v1"

@@ -81,6 +81,128 @@ class SupportBindingTests(unittest.TestCase):
         self.assertEqual(all_result["decision"]["evidence_label"], "unverified")
         self.assertEqual(all_result["query"]["severity"], "error")
 
+    def test_any_all_negative_findings_need_explicit_requested_completeness(self):
+        self.fact("requested", ["onnx", "future-format"])
+        self.fact("unsupported", ["onnx"])
+        self.fact("exhaustive", True)
+        for complete, outcome, reason in (
+            (False, "unknown", "requested_set_incomplete"),
+            (True, "fail", "any_membership"),
+        ):
+            with self.subTest(complete=complete):
+                self.fact("requested_complete", complete)
+                result = self.result()
+                self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                                 (outcome, reason))
+                self.assertEqual([(f["value"], f["outcome"], f["reason"])
+                                  for f in result["decision"]["findings"]],
+                                 [("future-format", "fail", "exhaustive_absence"),
+                                  ("onnx", "fail", "explicit_unsupported")])
+                self.assertIs(result["inputs"]["requested_complete"]["value"], complete)
+
+    def test_all_positive_findings_need_explicit_requested_completeness(self):
+        self.proposal["query"]["requirement"] = "all"
+        self.fact("requested", ["safetensors", "gguf"])
+        self.fact("unsupported", [])
+        for complete, outcome, reason in (
+            (False, "unknown", "requested_set_incomplete"),
+            (True, "pass", "all_membership"),
+        ):
+            with self.subTest(complete=complete):
+                self.fact("requested_complete", complete)
+                result = self.result()
+                self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                                 (outcome, reason))
+                self.assertTrue(all(f["outcome"] == "pass" for f in result["decision"]["findings"]))
+
+    def test_each_unresolved_requested_completeness_state_retains_unknown_verdict(self):
+        for requirement, state in itertools.product(("any", "all"), (*STATES, "absent")):
+            with self.subTest(requirement=requirement, state=state):
+                self.setUp(); self.proposal["query"]["requirement"] = requirement
+                self.fact("requested", ["onnx"])
+                self.fact("supported", ["onnx"] if requirement == "all" else [])
+                self.fact("unsupported", ["onnx"] if requirement == "any" else [])
+                if state == "absent":
+                    del self.values[answer_path(self.proposal, "requested_complete")]
+                else:
+                    self.fact("requested_complete", state=state)
+                result = self.result()
+                self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                                 ("unknown", "requested_completeness_unknown"))
+                marker = result["inputs"]["requested_complete"]
+                self.assertEqual(marker["state"], "missing" if state == "absent" else state)
+                self.assertNotIn("value", marker)
+                self.assertEqual(result["decision"]["findings"][0]["outcome"],
+                                 "fail" if requirement == "any" else "pass")
+
+    def test_requested_completeness_needs_its_own_caller_qualification(self):
+        for requirement, flag in itertools.product(("any", "all"), (False, None, "omitted")):
+            with self.subTest(requirement=requirement, flag=flag):
+                self.setUp(); self.proposal["query"]["requirement"] = requirement
+                self.fact("requested", ["onnx"])
+                self.fact("supported", ["onnx"] if requirement == "all" else [])
+                self.fact("unsupported", ["onnx"] if requirement == "any" else [])
+                self.fact("requested_complete", True)
+                flags = dict(QUALIFIED)
+                if flag == "omitted": del flags["requested_complete"]
+                else: flags["requested_complete"] = flag
+                result = self.result(eligible_inputs=flags)
+                self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                                 ("unknown", "requested_completeness_unknown"))
+                self.assertIs(result["inputs"]["requested_complete"]["value"], True)
+                self.assertIs(result["evaluation"]["eligible_inputs"]["requested_complete"],
+                              None if flag == "omitted" else flag)
+
+    def test_witness_and_counterexample_do_not_require_completeness_qualification(self):
+        for requirement, state, flag in itertools.product(("any", "all"),
+                ("provided", *STATES), (False, None, True)):
+            with self.subTest(requirement=requirement, state=state, flag=flag):
+                self.setUp(); self.proposal["query"]["requirement"] = requirement
+                self.fact("requested", ["safetensors", "onnx", "gguf", "future-format"])
+                self.fact("unsupported", ["gguf", "onnx"])
+                self.fact("requested_complete", False, state=state)
+                result = self.result(eligible_inputs={**QUALIFIED, "requested_complete": flag})
+                self.assertEqual(result["decision"]["outcome"], "pass" if requirement == "any" else "fail")
+                self.assertEqual(len(result["decision"]["findings"]), 4)
+                self.assertTrue(result["decision"]["disputed"])
+                self.assertEqual(result["inputs"]["requested_complete"]["state"], state)
+
+    def test_known_empty_requests_are_unknown_with_all_marker_states_and_quantifiers(self):
+        for requirement, complete in itertools.product(("any", "all"), (False, True, None)):
+            with self.subTest(requirement=requirement, complete=complete):
+                self.setUp(); self.proposal["query"]["requirement"] = requirement
+                self.fact("requested", [])
+                self.fact("requested_complete", complete, state="unknown" if complete is None else "provided")
+                result = self.result()
+                self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                                 ("unknown", "requirement_empty"))
+                self.assertEqual(result["decision"]["findings"], [])
+                self.assertEqual(result["inputs"]["requested"]["value"], [])
+                self.assertEqual(result["inputs"]["requested"]["state"], "provided")
+                self.fact("applies_when", False)
+                self.assertEqual(self.result()["decision"]["outcome"], "skipped")
+
+    def test_old_proposal_versions_are_rejected_without_silent_upgrade(self):
+        self.assertEqual(self.proposal["proposal_version"], "cd3-0.2")
+        self.assertEqual(self.proposal["query"]["version"], "0.2.0")
+        for version in ("cd3-0.1", "cd3-0.3"):
+            with self.subTest(version=version):
+                self.setUp(); self.proposal["proposal_version"] = version
+                with self.assertRaisesRegex(ValueError, "invalid CD-3 query"):
+                    self.record()
+
+    def test_current_query_does_not_reuse_prior_version_answer_paths(self):
+        before = dict(self.values)
+        self.values.clear()
+        self.values.update({path.replace('/rule.fixture.engine.formats/0.2.0/',
+                                         '/rule.fixture.engine.formats/0.1.0/'): value
+                            for path, value in before.items()})
+        result = self.result()
+        self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]),
+                         ("unknown", "applicability_unknown"))
+        self.assertTrue(all(value == {"state": "missing"} for value in result["inputs"].values()))
+        self.assertIsNone(result["inputs"]["requested_complete"].get("value"))
+
     def test_known_empty_exhaustive_list_differs_from_unmarked_or_missing_list(self):
         self.fact("requested", ["onnx"])
         self.fact("supported", [])
@@ -153,9 +275,9 @@ class SupportBindingTests(unittest.TestCase):
                 self.assertIs(result["inputs"]["applies_when"]["value"], False)
                 self.assertEqual(result["inputs"]["requested"]["state"], "withheld")
 
-    def test_each_eligibility_group_is_independent_and_omission_is_unresolved(self):
+    def test_required_input_eligibility_is_independent_and_omission_is_unresolved(self):
         record = self.record()
-        for field, flag in itertools.product(ELIGIBILITY, (False, None)):
+        for field, flag in itertools.product(("applies_when", "requested", "cohort"), (False, None)):
             with self.subTest(field=field, flag=flag):
                 flags = {**QUALIFIED, field: flag}
                 result = record.evaluate(record.scope, enabled=True, eligible_inputs=flags)["x_t0_support_result"]
@@ -167,7 +289,7 @@ class SupportBindingTests(unittest.TestCase):
                          ["x_t0_support_result"]["decision"]["outcome"], "pass")
         self.assertEqual(record.evaluate(record.scope, enabled=True)
                          ["x_t0_support_result"]["decision"]["reason"], "applies_when_evidence_unresolved")
-        for field in ELIGIBILITY:
+        for field in ("applies_when", "requested", "cohort"):
             flags = dict(QUALIFIED); del flags[field]
             self.assertEqual(self.result(eligible_inputs=flags)["decision"]["reason"],
                              field + "_evidence_unresolved")
@@ -178,7 +300,7 @@ class SupportBindingTests(unittest.TestCase):
                                           (None, "unknown", "selection_activation_unknown")):
             result = record.evaluate(None, enabled=enabled)["x_t0_support_result"]
             self.assertEqual((result["decision"]["outcome"], result["decision"]["reason"]), (outcome, reason))
-            self.assertEqual(len(result["inputs"]), 5)
+            self.assertEqual(len(result["inputs"]), 6)
         result = record.evaluate(None, enabled=True, eligible_inputs=QUALIFIED)["x_t0_support_result"]
         self.assertEqual(result["decision"]["reason"], "selection_scope_missing")
 
@@ -227,7 +349,7 @@ class SupportBindingTests(unittest.TestCase):
                 self.assertEqual(result["decision"]["outcome"], "unknown")
                 self.assertTrue(all(v == {"state": state, "source_path": parent} for v in result["inputs"].values()))
         self.values[parent] = {"state": "provided", "source": "synthetic:grouped", "value": {
-            "applies_when": True, "requested": ["gguf"], "supported": ["gguf"],
+            "applies_when": True, "requested": ["gguf"], "requested_complete": True, "supported": ["gguf"],
             "unsupported": [], "exhaustive": False}}
         result = self.result()
         self.assertEqual(result["decision"]["outcome"], "pass")
@@ -237,11 +359,10 @@ class SupportBindingTests(unittest.TestCase):
         result = self.result()
         self.assertEqual(result["inputs"]["unsupported"], {"state": "missing", "source_path": parent})
 
-    def test_empty_duplicate_and_malformed_fields_reject_before_short_circuits(self):
-        cases = [(f, v) for f in ("applies_when", "exhaustive") for v in (0, 1, 1.0, "true", None, [], {})]
+    def test_duplicate_and_malformed_fields_reject_before_short_circuits(self):
+        cases = [(f, v) for f in ("applies_when", "requested_complete", "exhaustive") for v in (0, 1, 1.0, "true", None, [], {})]
         cases += [(f, v) for f in ("requested", "supported", "unsupported")
                   for v in (None, "gguf", False, [None], [False], [0], [1.0], [""], ["   "], ["gguf", "gguf"])]
-        cases += [("requested", [])]
         for (field, value), applicable in itertools.product(cases, (False, None)):
             with self.subTest(field=field, value=value, applicable=applicable):
                 self.setUp(); self.fact("applies_when", applicable, state="unknown" if applicable is None else "provided")
@@ -324,6 +445,11 @@ class SupportBindingTests(unittest.TestCase):
             lambda r: r["cohort"].update(version="new-cohort"),
             lambda r: r["scope"]["item"].update(version="new-item"),
             lambda r: r["evaluation"]["eligible_inputs"].update(cohort=False),
+            lambda r: r["evaluation"]["eligible_inputs"].update(requested_complete=False),
+            lambda r: r["evaluation"]["eligible_inputs"].update(requested_complete=None),
+            lambda r: r["inputs"]["requested_complete"].update(value=False),
+            lambda r: r["inputs"].update(requested_complete={"state": "withheld",
+                "source_path": r["inputs"]["requested_complete"]["source_path"]}),
             lambda r: r["inputs"]["requested"]["value"].append("fabricated-format"),
             lambda r: r["inputs"]["supported"].update(source="fabricated:source"),
             lambda r: r["decision"].update(outcome="fail"),
@@ -344,14 +470,15 @@ class SupportBindingTests(unittest.TestCase):
         record = SupportQueryRecord(BINDING_RAW, ANSWERS_RAW)
         for enabled, flags, scope in ((True, None, record.scope), (True, QUALIFIED, None),
                                       (False, QUALIFIED, record.scope), (None, QUALIFIED, record.scope),
-                                      (True, {**QUALIFIED, "cohort": False}, record.scope)):
+                                      (True, {**QUALIFIED, "cohort": False}, record.scope),
+                                      (True, {**QUALIFIED, "requested_complete": None}, record.scope)):
             with self.subTest(enabled=enabled, flags=flags, scope=scope):
                 with self.assertRaisesRegex(ValueError, "does not match retained inputs"):
                     record.verify_result(RESULT_RAW, scope, enabled=enabled, eligible_inputs=flags)
 
     def test_result_reader_rejects_wrong_wire_shapes_and_ambiguous_json(self):
         record = SupportQueryRecord(BINDING_RAW, ANSWERS_RAW)
-        for mutate in (lambda r: r.update(extra=True), lambda r: r.update(proposal_version="cd3-0.2"),
+        for mutate in (lambda r: r.update(extra=True), lambda r: r.update(proposal_version="cd3-0.1"),
                        lambda r: r["decision"].update(evidence_label="verified"),
                        lambda r: r["evaluation"].update(enabled=1),
                        lambda r: r["inputs"]["supported"].update(state="withheld")):
@@ -377,6 +504,8 @@ class SupportBindingTests(unittest.TestCase):
         first = record.evaluate(record.scope, enabled=True, eligible_inputs=QUALIFIED)
         mutated = first["x_t0_support_result"]
         mutated["inputs"]["supported"]["value"].clear()
+        mutated["inputs"]["requested_complete"]["value"] = False
+        mutated["evaluation"]["eligible_inputs"]["requested_complete"] = None
         mutated["scope"]["item"]["version"] = "edited"
         mutated["evaluation"]["selected_scope"]["item"]["id"] = "edited"
         mutated["query"]["severity"] = "warning"

@@ -1,7 +1,7 @@
 # GPU / Compute: inference capacity and provisionable profiles
 
 Issue: [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) · Contract: 1.0.0 · Kinds: `accelerator`, `compute_profile`
-Status: decision record merged; nine research artifact criteria assessed, with current-scope receiving review pending under 10.9 · Vendor-source dates: per evidence section · Method/receipt continuation: 2026-10-18
+Status: research complete through PR #339; all ten original criteria satisfied and issue closed as completed · Vendor-source dates: per evidence section · Method/receipt continuation: 2026-10-18
 
 ## User decision
 
@@ -264,8 +264,13 @@ The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-r
 The nine artifact criteria below are satisfied by this bounded research record;
 the current-scope receiving condition in **10.9 is satisfied** by the
 [actual delegated project-engineering review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107).
-Final source review, current CI, canonical merge and issue/Project
-reconciliation remain pending. The literal issue
+[PR #339](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/339), independently
+[reviewed at `94ea2422`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/339#pullrequestreview-5563188565),
+delivered this assessment and its cost correction in signed
+[`a2bba46f`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/a2bba46ff850af5d6263561a94f9866b01c03c05).
+The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250602587)
+records passing validation on the actual delivered revision, closure as completed
+on 2026-10-18 and the subsequent public Project `Done` readback. The literal issue
 criteria are retained in the [acceptance matrix](acceptance-matrix.md), and the
 [handoff ledger](handoffs.md) keeps each actual author, direction and reviewed
 revision. This assessment does not change a source-check date, a catalog fact,
@@ -327,12 +332,12 @@ the issue's ten research criteria.
 | Sizing method with assumptions and uncertainty documented | Method, worked examples, script | Artifact criterion satisfied: byte-based memory, explicit reserve, per-device topology and an uncalibrated load-to-count method retain their assumptions and unknowns |
 | Measured values cite their source and conditions; estimates are labelled | C16 conditions; every calculation marked Estimate | Artifact criterion satisfied: publisher-measured C16 rows retain hardware/runtime/workload conditions; local arithmetic and hypothetical examples remain estimates |
 | Model ↔ GPU rules in the #40 format | rules/compute-capacity.md | Artifact criterion satisfied: four shared-format proposal groups and their narrowed central queue disposition; executable version approval remains separate |
-| Decision record merged at required path following research method | This record; PR #75 | Artifact criterion satisfied: original decision record and subsequent source/intake corrections are merged; this assessment does not claim its own delivery before merge |
+| Decision record merged at required path following research method | This record; PR #75 | Artifact criterion satisfied: original decision record and subsequent source/intake corrections are merged; #339 delivered this completed assessment and cost-condition integration in signed `a2bba46f` |
 | Candidate set covers relevant API / managed / self-hosted modes or states why a mode does not apply | Mode table, physical candidates and profile | Artifact criterion satisfied: provider-only API omission, exposed managed capacity and self-hosted/hybrid sizing are covered; CPU/edge and incomplete profiles remain explicit scoped gaps |
 | Comparison fields defined with type, unit, evidence requirement | Comparison table | Artifact criterion satisfied: 19 typed field groups with units, evidence and unknowns; incomplete H100/MI300X lists are note-only and native precision remains distinct from joint execution |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Artifact criterion satisfied: fixed severity, outcome, evidence status and applicability are separate; sourced premises and synthetic examples do not claim independently verified joint compatibility |
 | Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; RTX 4090 and A100/P4de source supplements; source-mapped catalog provenance; derived formulas | Artifact criterion satisfied for the bounded findings: primary locators, capture dates, versions, units and conditions are retained; source/unit conflicts and measured allocation remain unknown where documented |
-| Each handoff confirmed by consuming issue owner with link | Handoff table | 10.9 remains open: historical #9/#11/#31 receipts and both actual #39 responses are linked; the required headroom disclosure is now integrated. Current receiving review of changed H100/MI300X intake availability is still needed; earlier authors are not assigned a new decision |
+| Each handoff confirmed by consuming issue owner with link | Handoff table | 10.9 satisfied by the [actual delegated receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107): all four directions cover the current retained subset, H100/MI300X withdrawals and implemented headroom disclosure. The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250602587) confirms reviewed delivery; historical authors and pins retain their own scope |
 | Open questions with named follow-up owner | Table above | Artifact criterion satisfied: model/engine evidence, native-precision scope, future build-bound estimates, rights and runtime validation have named follow-up owners |
 
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
