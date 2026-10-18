@@ -18,11 +18,13 @@ The input is the [#11 engine record](../T2-infrastructure/inference-engine.md) a
 
 A documentation-supported `pass` at fixed `error` severity is not a failure and remains labelled unverified unless independently corroborated or reproduced. An evidenced contradiction can fail; absence from an unmarked support list remains unknown after the #41 conflict order. These research clauses do not supply a final Ruleset or replace its approved `on_unknown` policy. Applicability is per serving component, including a known local engine in a hybrid configuration. A known opaque provider route does not establish a local engine version; missing scope must not be silently skipped.
 
-### Loader policy correction for S43
+### Loader policy correction for S43, D-R54 and D-R55
 
-The earlier S43 wording applied a Safetensors-only policy across self-hosted engines. That would reject the documented direct-loader format of llama.cpp `v0.7.0`, which requires GGUF and treats conversion from other formats as a separate step [ET6-S4]. S43 now applies the reviewed format policy to the selected engine: the existing Safetensors/pickle-exclusion policy belongs to a supported Safetensors path; llama.cpp uses a pinned GGUF artifact and its conversion/source lineage. vLLM's conditional GGUF plugin path still requires the separate plugin/build evidence in #11.
+The earlier S43 wording applied a Safetensors-only policy across self-hosted engines. That would reject the documented direct-loader format of llama.cpp `v0.7.0`, which requires GGUF and treats conversion from other formats as a separate step [ET6-S4]. S43 now applies the reviewed format policy to the selected engine: the existing Safetensors/pickle-exclusion policy belongs to a supported Safetensors path; llama.cpp uses a pinned GGUF artifact and its conversion/source lineage. vLLM's conditional GGUF plugin path still requires the separate plugin/build evidence in #11. D-R54/D-R55 and the pinning summary now use this same scoped policy; their warning severities and the separate scan/signature limitations remain unchanged.
 
 This is not a general approval of GGUF contents, arbitrary conversion code or additional formats. Artifact checksums identify bytes; a signature identifies its stated signing identity. Neither establishes compatible architecture, benign content, redistribution rights or successful execution. Preserve #35's unsafe-loading controls and #33's artifact distinctions. The current catalog's conservative format subsets are unchanged.
+
+Offline controls follow the same selected-path distinction. S43 now identifies `HF_HUB_OFFLINE=1` for Hugging Face Hub calls and llama.cpp's documented `--offline` control [ET6-S3]. The former does not establish an offline boundary for unrelated network code; configured flags are not an observed egress result. S45 still requires the separate authorized network observation. The dated Hugging Face documentation check is recorded below.
 
 ## 2. Exact research identities
 
@@ -64,16 +66,18 @@ Do not add prompts, retrieved text, tool arguments, credentials or unrestricted 
 
 ## 4. Primary sources
 
-Each source was read through the public GitHub API on **2026-10-18**, at the full immutable commit above. Evidence class: primary publisher documentation or source. Source checking is not independent runtime verification. Git blob identities below identify inspected files; they are not model/package hashes, runtime receipts or permission grants.
+Each of the following six engine files was read through the public GitHub API on **2026-10-18**, at the full immutable commit above. Evidence class: primary publisher documentation or source. Source checking is not independent runtime verification. Git blob identities below identify inspected files; they are not model/package hashes, runtime receipts or permission grants.
 
 | ID | Primary file | Git blob | Finding scope |
 | --- | --- | --- | --- |
 | ET6-S1 | [vLLM metrics guide](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/usage/metrics.md) | `8254a7f4207e5304d606c69956680e4b4e317bea` | Endpoint, generated-section boundary and deprecation cycle. |
 | ET6-S2 | [vLLM V1 metrics logger](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/v1/metrics/loggers.py) | `26a4142df9f1023f8d43633b30b85adf745eba41` | The twelve named registrations above, their Gauge/Counter/Histogram constructors and labels. |
-| ET6-S3 | [llama.cpp server reference](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/tools/server/README.md) | `4e4472ec24bd0822be30e327aecd549cc15a2bc8` | Metrics flag/router condition and bounded published metrics list. |
+| ET6-S3 | [llama.cpp server reference](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/tools/server/README.md) | `4e4472ec24bd0822be30e327aecd549cc15a2bc8` | Metrics flag/router condition, bounded published metrics list and offline flag. |
 | ET6-S4 | [llama.cpp model-format guide](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/docs/models.md) | `eee5952634be3dbf7133f68c7be831d8bc69f6c7` | GGUF requirement and separate conversion path. |
 | ET6-S5 | [TGI metrics reference](https://github.com/huggingface/text-generation-inference/blob/dfb3fbe78e0d1d69251bd33065591c61bafdfaa8/docs/source/reference/metrics.md) | `d34d38eab7d94563cb54949c28c6ad044305a672` | Endpoint and the four SG76 names, types and units. |
 | ET6-S6 | [vLLM security guide](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/usage/security.md) | `a6c986775522c1f7a583514fb9126573a88b0891` | Restricted API-key scope and additional endpoint-isolation requirement. |
+
+Additional narrow web checks on **2026-10-18** revisited the existing D-S32 and D-P8 topics: [Hugging Face Hub v2.2.0 environment variables](https://huggingface.co/docs/huggingface_hub/v2.2.0/package_reference/environment_variables#hfhuboffline) limits `HF_HUB_OFFLINE` to Hub calls and cached files, with an error when required cached files are absent; [Hub pickle scanning](https://huggingface.co/docs/hub/security-pickle) explains arbitrary-code-execution risk during loading. These are publisher documentation pages (the second is unversioned); no immutable content hash or independent runtime result was captured for these web checks.
 
 ## 5. Receiving disposition still required
 
