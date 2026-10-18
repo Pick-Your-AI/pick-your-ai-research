@@ -1,7 +1,7 @@
 # RAG and retrieval backends
 
 Issue: [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) · Contract: 1.0.0 · Kinds: `rag_pipeline`
-Status: draft for owner review (@zabyxc01); consuming-owner handoffs pending · Last researched: 2026-10-18 (targeted supplement; older source dates retained)
+Status: partial decision record for review; #7 context-counting input accepted with constraints, other receiving decisions remain scoped below · Last researched: 2026-10-18 (targeted supplement; older source dates retained)
 
 ## User decision
 
@@ -91,12 +91,14 @@ Anthropic states that its citations "are guaranteed to contain valid pointers to
 
 ## Context budget with #7
 
-**Proposed disposition of the #7 handoff:** accept with constraints. This needs the owner's decision.
+**Actual incoming disposition: accepted with constraints.** The [#7 → #16 receiving decision of 2026-10-18](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16#issuecomment-6253273759) accepts the counting interface below. That decision is attributed to the delegated coordinating reviewer, not an absent co-assignee. It accepts neither a backend nor a whole-chunk drop policy, and it does not supply the separate #16 → #7 policy decision. The [later #6 → #16 identity receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16#issuecomment-6254086817) preserves these same counting limits without claiming runtime or quality evidence.
 
-1. Retrieved chunks, citation metadata and source headers count toward `context_policy` `/settings/requested_context_tokens`, as #7 defines it. CTX-01 in [context-fit.md](../T1-model-selection/rules/context-fit.md) remains the authoritative fit check on the **complete assembled input**.
-2. RAG-01 below is a pre-assembly screen. `max_chunks × chunk_size_tokens` is an upper bound on retrieved text. Chunk sizes from #13 or #14 may use a different tokenizer from the generation model, so the screen passes only when counted with the generation model's tokenizer and template.
+1. In RAG-01, P is the configured input allowance at `context_policy` `/settings/requested_context_tokens`. The complete input count or eligible bound used by CTX-01 is a separate quantity. It includes instructions, template framing, history, tools/results, retrieved content, source/citation metadata, memory and supported media after the selected generation tokenizer/template and serialization are applied. [CTX-01](../T1-model-selection/rules/context-fit.md) remains authoritative for full request fit, with the applicable output reservation and route/model limits checked separately from this retrieval subtotal.
+2. RAG-01 is a pre-assembly screen. M × S bounds retrieved payload only when M (`max_chunks`) and S (`chunk_size_tokens`) are applicable enforced bounds in the generation tokenizer/template. H is an eligible bound for the retrieval-related citation/header overhead in that serialization. Missing H leaves the screen unresolved; zero is usable only when measured as zero for that serialization. An embedding-tokenizer chunk size, an arbitrary sum of independently tokenized fragments or unevidenced template overhead cannot establish this bound. Recount or provide an eligible bound for the actual serialization; no subtotal pass establishes complete request fit.
 3. Proposed content-preservation policy (hypothesis, owner decision): when over budget, drop whole lowest-ranked chunks rather than cutting through a chunk, never drop instructions, and recount after every transform. This is the post-transform recount that [context-warnings.md](../T1-model-selection/rules/context-warnings.md) requires. Mid-chunk truncation would break `cited_text` spans.
 4. A fit is not a quality check. The position effect (R22) and the absence of a universal usable-context threshold (#7, CW04) both mean quality has to be measured by #36.
+
+**Synthetic counting example:** M=5, S=400 and H=100 give a retrieval subtotal of 2,100 tokens against an 8,000-token input allowance. If the separately counted complete serialized request is 8,200 tokens, the request exceeds that allowance even though the retrieval screen passes. This is arithmetic, not an executed tokenizer or request. Every permitted transform requires a new complete-request count or eligible bound while preserving required content and citation identities. Summarization, extraction and reranking calls retain their own selected-model input limits, output reservations where applicable, and costs.
 
 **T2 inputs** ([handoffs.md](../T2-infrastructure/handoffs.md), [inference-engine.md](../T2-infrastructure/inference-engine.md)). Proposed: accept with constraints. Generation, embedding and reranking models are separate selections with their own tokenizers and limits. In 2-step RAG, retrieval completes before generation starts streaming. Agentic retrieval interleaves with tool rounds and #25 owns that (R16). An engine's streaming or batching documentation is not a retrieval-quality claim.
 
@@ -111,7 +113,8 @@ Anthropic states that its citations "are guaranteed to contain valid pointers to
 | permission enforcement point | proposed enum `source_native`/`index_prefilter`/`engine_postfilter`/`app_postfilter`/`none` | Engine security or filter documentation; preview vs GA status | Note-only (G5) |
 | ACL sync lag | duration, minutes | Source-specific sync documentation, or measured | Note-only. #13 owns sync; KB `/settings/refresh_minutes` exists |
 | latency contributors | list: query rewrite, query embedding, ANN, BM25, filter, fusion, rerank, graph map-reduce, LLM calls | Measured p50/p95 per stage under stated load (#36/#38). No vendor figure adopted | Note-only |
-| context tokens used | integer, generation-model tokens | Counted after assembly with the generation tokenizer | Bounded by selection `/settings/max_chunks` × KB `/settings/chunk_size_tokens` |
+| complete context input used | integer count or eligible token bounds under #7 | Complete serialized request counted with the selected generation tokenizer/template, including all required inputs and framing | CTX-01 input; not bounded by M × S alone |
+| retrieval subtotal bound | M × S + H, generation-model tokens | Applicable enforced M/S and eligible serialization-specific H; unknown overhead is not zero | RAG-01 screen against configured `/settings/requested_context_tokens`; separate from complete context input |
 | top_k → selection `/settings/top_k` | integer ≥1 | Configuration | v1 |
 | supported chunking → `/spec/supported_chunking` | enum list | Framework or service documentation | v1. Chunk settings are #13's |
 | deployment mode | API / managed / self-hosted | Hosting documentation (#9 definitions) | Envelope plus hosting refs |
@@ -209,12 +212,12 @@ All entries were accessed on 2026-10-17. Grades: PD = primary documentation, VC 
 
 ## Open questions and handoffs
 
-The T4 component owner's bounded receiving decisions for #25/#28 are linked below; other receiving and co-owner dispositions remain separate. The drafter is a co-assignee on #7, #15, #35, #36 and #39. That authorship is not an independent consuming-owner acknowledgement, so the other co-owner of each issue must confirm.
+The actual incoming #7 counting decision is linked above; the T4 component owner's bounded receiving decisions for #25/#28 are linked below. Incoming and outgoing directions, the remaining policy choices and co-owner dispositions stay separate. The original drafter's co-assignment on #7, #15, #35, #36 and #39 is not itself an independent consuming-owner acknowledgement; no absent person's response is inferred.
 
 | To / owner | Request | Status |
 | --- | --- | --- |
-| #16 @zabyxc01 | Decide the default backend; accept or reject the #7 context-budget rule and the T2 retrieval inputs; adopt the enforcement-point policy | Open |
-| #7 @zwright8 | Confirm that RAG-01 is a screen subordinate to CTX-01, and the whole-chunk drop policy | Pending |
+| #16 @zabyxc01 | Decide the default backend and T2 retrieval inputs; adopt the enforcement-point and content-preservation policies | Open; the incoming #7 counting interface alone is accepted with constraints above |
+| #7 @zwright8 | Review the outgoing whole-chunk drop/content-preservation policy and any later change to RAG-01 | Pending; [incoming #7 → #16 counting acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16#issuecomment-6253273759) does not accept this separate policy or reverse the handoff direction |
 | #13 @tynamite, @zabyxc01 | ACL metadata per chunk, sync lag, rights; whether `acl_enforced` implies P1/P2 | Pending |
 | #14 @zabyxc01, @PUSHINGSQUARES | Embedding tokenizer vs generation tokenizer for chunk budgets; reranker as a separate model | Pending |
 | #15 @zabyxc01, @appletechie (Stormxftw offered draft) | Filtered ANN shortfall and pre/post-filter support per product; no product evaluation here | Pending |
