@@ -488,6 +488,18 @@
       "accessed_on": "2026-10-17",
       "evidence_grade": "Primary documentation or publisher artifact",
       "verification_status": "unverified"
+    },
+    {
+      "id": "ME-S8",
+      "publisher": "Runway",
+      "scope": "Python SDK Gen4_5 image_to_video request type; not an exhaustive live-service contract",
+      "urls": [
+        "https://github.com/runwayml/sdk-python/blob/6568d7c5f5200fba62389fcf8eca429b14a5643e/src/runwayml/types/image_to_video_create_params.py"
+      ],
+      "revision": "6568d7c5f5200fba62389fcf8eca429b14a5643e",
+      "accessed_on": "2026-10-18",
+      "evidence_grade": "Primary publisher SDK source",
+      "verification_status": "unverified"
     }
   ],
   "records": [
@@ -998,16 +1010,17 @@
       "model": "Runway gen4.5",
       "route": "POST /v1/image_to_video; X-Runway-Version=2024-11-06",
       "direction": "output",
-      "semantics": "endpoint duration and aspect-ratio enums",
+      "semantics": "pinned SDK duration constraint and ratio literals; live endpoint enum completeness unknown",
       "quantity": "route-specific image/video admission or output",
       "value": "integer duration 2-10; 1280:720, 720:1280, 1104:832, 960:960, 832:1104, 1584:672",
       "unit": "seconds; output pixels",
-      "conditions": "Image position is first; other models' last-frame capability is not inherited.",
-      "implication": "Validate model-discriminated body and allowed combinations, not arbitrary image dimensions.",
+      "conditions": "SDK Gen4_5 request type at ME-S8 lists these six ratios. Image position is first; other models' last-frame capability is not inherited. A review reports an additional 672:1584 API ratio; that claim was not independently confirmed because the live API markdown could not be retrieved on 2026-10-18.",
+      "implication": "Use the pinned SDK literals only for that SDK type. Do not reject other live-service ratios from this research list; refresh the model-discriminated endpoint specification before admission validation.",
       "source_ids": [
-        "ME-S4"
+        "ME-S4",
+        "ME-S8"
       ],
-      "disputed": false
+      "disputed": true
     },
     {
       "id": "ME-06",
