@@ -1,7 +1,7 @@
 # T4: MCP Servers
 
 Issue: #27 · Contract: 1.0.0 · Kinds: `mcp_server`
-Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-17
+Status: research merged via #71; owner handoffs and contract proposals remain open · Reconciled: 2026-10-18 (bounded Python SDK protocol follow-up)
 
 ## Evidence status correction
 
@@ -58,7 +58,7 @@ Published revisions (C1, C2): `2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11
 
 **Ecosystem state today (source-checked from SDK artifacts, C31, C32):**
 - The TypeScript SDK `@modelcontextprotocol/sdk` 1.32.1 (2026-10-05) sets `LATEST_PROTOCOL_VERSION = '2025-11-25'` and supports 2024-10-07 to 2025-11-25. A separate module declares `DRAFT-2026-v1`.
-- The Python SDK `mcp` 1.30.0 supports 2024-11-05 to 2025-11-25 only. `mcp` 2.3.0 (2026-10-02) contains 2026-07-28 code paths (`subscriptions/listen`, deprecation warnings for sampling and roots) and a handshake path, which suggests dual-era support (its exact version list sits in a separate `mcp_types` package that was not inspected).
+- The Python SDK `mcp` 1.30.0 supports 2024-11-05 to 2025-11-25 only. The 2026-10-18 pinned follow-up now inspects `mcp` 2.3.0 and its exact dependency `mcp-types==2.3.0`: the registry lists four handshake revisions (`2024-11-05`, `2025-03-26`, `2025-06-18`, `2025-11-25`) and one modern revision (`2026-07-28`). C60–C65 and the [local SDK observation](#pinned-python-sdk-protocol-follow-up-2026-10-18) replace the earlier uninspected-registry uncertainty; they do not establish the protocol set of any selected vendor server.
 - The reference servers pin the legacy SDK lines: `mcp-server-fetch` and `mcp-server-git` require `mcp<2,>=1.29.0`, and `server-filesystem`/`server-everything` 1.0.0 require `@modelcontextprotocol/sdk ^1.31.0` (C36, C38, C39, C41).
 
 **Consequence:** a protocol-version field is mandatory. A client that implements only 2026-07-28 cannot use most servers published today. "Supports MCP" (the v1 boolean) is not enough to predict compatibility.
@@ -151,10 +151,10 @@ The issue's conceptual fields map to v1 as follows. Most do not exist in v1.
 
 ## Evidence
 
-All accessed 2026-10-16.
+Original sources C1–C59 were accessed 2026-10-16. The separately dated C60–C65 follow-up was accessed 2026-10-18.
 - Pages on modelcontextprotocol.io, github.com, docs and vendor sites were read with a fetch tool that returns extracted Markdown, so quotations are as extracted.
 - JSON APIs (MCP Registry, npm, PyPI) and raw.githubusercontent.com files were read directly.
-- No MCP server or SDK was executed.
+- The original 2026-10-16 desk study executed no MCP server or SDK. The separate 2026-10-18 experiment below executes pinned SDKs against local synthetic peers only.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
@@ -217,6 +217,12 @@ All accessed 2026-10-16.
 | C57 | LangChain, https://docs.langchain.com/oss/python/langchain/mcp | 2026-10-16 | `langchain[mcp]>=1.4.0` (beta) | Primary documentation | Separate Auth, Connections and Tools pages not read |
 | C58 | Google, https://adk.dev/tools-custom/mcp-tools/ | 2026-10-16 | current docs | Primary documentation | Redirected from google.github.io/adk-docs |
 | C59 | Anthropic, https://code.claude.com/docs/en/agent-sdk/mcp | 2026-10-16 | current docs | Primary documentation | — |
+| C60 | MCP publisher / PyPI, https://pypi.org/pypi/mcp/2.3.0/json | 2026-10-18 | 2.3.0 | Primary package metadata; source checked / unverified | Exact `mcp-types==2.3.0` dependency and wheel identity; no remote-server result |
+| C61 | MCP publisher / PyPI, https://pypi.org/pypi/mcp-types/2.3.0/json | 2026-10-18 | 2.3.0 | Primary package metadata; source checked / unverified | Versioned wheel identity; [PyPI provenance page](https://pypi.org/project/mcp-types/2.3.0/) identifies publishing commit `2118f14f8a19bc158d8a1cf90af58d85d187f849` |
+| C62 | MCP, https://github.com/modelcontextprotocol/python-sdk/blob/2118f14f8a19bc158d8a1cf90af58d85d187f849/src/mcp-types/mcp_types/version.py | 2026-10-18 | 2.3.0 publishing revision | Primary source; source checked / unverified | Exact known, handshake and modern sets; installed and wheel bytes match the pinned Git blob |
+| C63 | MCP, https://github.com/modelcontextprotocol/python-sdk/blob/2118f14f8a19bc158d8a1cf90af58d85d187f849/src/mcp/client/client.py | 2026-10-18 | 2.3.0 publishing revision | Primary source; source checked / unverified | `Client.__aenter__` distinguishes auto, legacy and direct modern adoption |
+| C64 | MCP, https://github.com/modelcontextprotocol/python-sdk/blob/2118f14f8a19bc158d8a1cf90af58d85d187f849/src/mcp/client/_probe.py | 2026-10-18 | 2.3.0 publishing revision | Primary source; source checked / unverified | Conditional fallback and transport-error boundary, not an unconditional interoperability promise |
+| C65 | MCP publisher / PyPI, https://pypi.org/pypi/mcp/1.30.0/json | 2026-10-18 | 1.30.0 | Primary package metadata and wheel source; source checked / unverified | Separate legacy SDK environment; no reference-server package was installed |
 
 ## Compatibility proposals
 
@@ -758,6 +764,7 @@ The rule implements the C7 matrix.
   - Python `mcp` 1.30.0 supports up to 2025-11-25.
   - The reference servers are pinned to those lines (C36, C38).
 - **Framework version support:** [#25's pinned A86 follow-up](agent-framework.md#pinned-source-follow-up-2026-10-18) source-checks OpenAI Agents Python 0.24.0's support for MCP Python package v1/v2 and v2 auto negotiation with legacy fallback. This is conditional client implementation evidence, not an actually negotiated protocol set for a selected server. Other framework/protocol tuples and sampling/elicitation remain unknown where no eligible evidence was read.
+- **SDK-only execution:** the [2026-10-18 stdio experiment](#pinned-python-sdk-protocol-follow-up-2026-10-18) observes this SDK pair's modern exchange and legacy fallback with a synthetic echo peer. It does not run the Agents framework, remote transports or a candidate catalog server.
 
 ```text
 assert: intersects(catalog mcp_server /spec/protocol_versions,            # missing field
@@ -949,4 +956,107 @@ The incoming #9 hosting/network boundary is accepted with constraints by #27 ([o
 - modelcontextprotocol.io, github.com (pages and release feeds), unpkg and jsDelivr refused direct `curl` through the proxy. Those pages were read with a fetch tool that returns extracted text, so quotations are as extracted.
 - The GitHub `/releases` list page returned stale v1.11.0 entries. The tags page was blocked by robots rules.
 - Registry search queries were slow, and one timed out. Exact-name lookups worked.
-- No server, SDK or framework was executed. SDK protocol constants were read from published package files only.
+- No server, SDK or framework was executed in the original 2026-10-16 desk study. The follow-up below adds local synthetic-peer SDK execution; candidate servers and agent frameworks remain unexecuted.
+
+## Pinned Python SDK protocol follow-up (2026-10-18)
+
+This closes the narrow source-inspection gap in the Python 2.3.0 paragraph. It
+does not complete #27's candidate coverage, trust/auth handoffs or #40 contract
+decisions. The supported-version fields still require the reviewed next version;
+no frozen schema, catalog item or provenance grade changes here.
+
+### Exact source and package identity
+
+C60–C65 identify the publisher's versioned artifacts. Downloaded wheel sizes and
+SHA-256 values matched the versioned PyPI JSON responses. All installed Python
+source files also matched their corresponding downloaded wheels: 110 in `mcp`
+1.30.0, 124 in `mcp` 2.3.0 and eight in `mcp-types` 2.3.0. These are observed
+artifact-integrity checks, not independent confirmation of every SDK capability.
+
+| Package | Wheel bytes | SHA-256 | External artifact manifest |
+| --- | ---: | --- | --- |
+| `mcp==1.30.0` | 234581 | `666edb5009503e1047c9d60346a756f94b261f05cc2625f23d41c728ffc484d0` | [Legacy SDK](../../evidence/t4-mcp-1300-wheel.json) |
+| `mcp==2.3.0` | 368664 | `dd0c44c089d16453e8ae31a3877a0054d7a2314caaa81f5e0541b9b1734b2377` | [Current SDK](../../evidence/t4-mcp-230-wheel.json) |
+| `mcp-types==2.3.0` | 69108 | `968efdbdaedfab06adae40d378a34395f1090c5921d4be3c9cde283aaf76d91d` | [Wire types](../../evidence/t4-mcp-types-230-wheel.json) |
+
+The [preparation receipt](../../tests/fixtures/mcp-protocol-2026-10-18/preparation.json)
+retains inspected file hashes and resolved dependency-lock identities. The type
+registry, high-level client and automatic negotiation modules also match the
+corresponding Git blobs at publishing revision `2118f14f8a19bc158d8a1cf90af58d85d187f849`.
+The publisher identifies the packages as MIT; no package binary or third-party
+source is copied into this repository.
+
+C62 enumerates known revisions rather than comparing arbitrary date strings.
+`LATEST_HANDSHAKE_VERSION` is `2025-11-25`, `LATEST_MODERN_VERSION` is `2026-07-28`,
+and the deprecated `SUPPORTED_PROTOCOL_VERSIONS` constant is the union of both
+sets. Reading that union alone cannot establish the selected connection mode.
+C63's `auto` mode probes discovery; C64 may fall back to the legacy handshake.
+A disjoint modern-only peer remains an error, while non-RPC transport exceptions
+propagate. A modern revision passed directly as `mode` instead adopts local
+state without a probe. A reported adopted version therefore is not evidence of
+a successful peer exchange.
+
+### Actual local synthetic-peer observation
+
+The [opt-in reproduction](../../tests/reproduce_mcp_protocols.py) launched real
+SDK server subprocesses over stdio in two isolated CPython 3.12.14 environments
+on Linux x86_64. Each peer exposed one synthetic echo function and returned its
+actual installed SDK version with the fixed test text. Every successful row
+required a real tool listing and matching echo response. No catalog vendor,
+framework, HTTP transport, OAuth flow, Roots, Sampling or elicitation was tested.
+
+| Client SDK | Peer SDK | Client mode | Observed exchange |
+| --- | --- | --- | --- |
+| 1.30.0 | 1.30.0 | Legacy `ClientSession` | Tool listing and echo passed at `2025-11-25` |
+| 1.30.0 | 2.3.0 | Legacy `ClientSession` | Tool listing and echo passed at `2025-11-25` |
+| 2.3.0 | 1.30.0 | `auto` | Fallback exchange passed at `2025-11-25` |
+| 2.3.0 | 2.3.0 | `auto` | Modern exchange passed at `2026-07-28` |
+| 2.3.0 | 2.3.0 | `legacy` | Tool listing and echo passed at `2025-11-25` |
+| 2.3.0 | 1.30.0 | Explicit `2026-07-28` | RPC failed with `MCPError` code `-32602`; no successful listing/echo or negotiated revision recorded |
+
+The [recorded matrix](../../tests/fixtures/mcp-protocol-2026-10-18/observation.json)
+binds these observations to the reproduction script hash. The last row exercises
+an explicit-modern RPC against a legacy peer; it is not an automatic-negotiation
+failure. The five success rows cover two observed revisions, not execution of
+all five revisions listed in the source registry.
+
+An earlier [restricted-host trial](../../tests/fixtures/mcp-protocol-2026-10-18/host-restricted-trial.json)
+recorded six request timeouts, including the same-version controls. That trial
+used the initial observation helper before script-hash and matrix-expectation
+instrumentation. It is retained as an unqualified host observation, not evidence
+of protocol incompatibility. Repeating with working process isolation produced
+the matrix above. The [offline guards](../../tests/test_mcp_protocol_observation.py)
+reject those timeouts, wrong peer/revision bindings, diagnostic output and
+locally adopted versions without a successful exchange. Passing these guards
+checks record interpretation; it does not rerun SDK processes.
+
+### Reproduction and remaining coverage
+
+Create two separate Python 3.12 environments and install the exact wheel locks
+for this Linux x86_64 observation, using PyPI and `--require-hashes --only-binary=:all:`:
+[v1 lock](../../tests/fixtures/mcp-protocol-2026-10-18/requirements-v1.txt) and
+[v2 lock](../../tests/fixtures/mcp-protocol-2026-10-18/requirements-v2.txt).
+Package acquisition uses the network; the experiment itself configures only
+local stdio peers, with a small explicit environment and no authentication.
+From the repository root, supply those environments' Python executables:
+
+```sh
+python tests/reproduce_mcp_protocols.py --observe /path/to/v1/bin/python /path/to/v2/bin/python
+python -m unittest discover -s tests -p test_mcp_protocol_observation.py -v
+```
+
+The observer uses five-second read deadlines and a 20-second worker deadline;
+an unexpected matrix result exits nonzero. A process/setup failure is not a
+compatibility verdict. The SDK's context managers own peer shutdown during
+normal and error unwinding. The outer deadline kills/reaps its worker, not an
+independently verified descendant tree; these exchanges do not qualify cleanup
+after a hard worker kill. No peer remained after the observed normal/error runs.
+The standard research requirements and automatic CI do
+not install these optional SDK environments. Other platforms and dependency
+tuples need their own observation.
+
+The #25/#27 next step is to bind a selected client/framework, server artifact,
+transport and authentication configuration to an eligible actual exchange.
+This local experiment supplies no such vendor tuple and does not infer the
+capabilities of servers from their SDK dependency. External receiving-owner
+dispositions and complete issue acceptance remain open.

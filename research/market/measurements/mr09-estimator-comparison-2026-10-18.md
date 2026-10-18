@@ -148,6 +148,15 @@ their native counts checked before creating an output directory or invoking an
 external tool. Active-sequence, geometry and context counts require exact
 integers; booleans and equal-valued floats do not stand in for those counts.
 Each measurement hash is calculated from the same bytes that were parsed.
+The reader also binds each filename to its declared D1/D2 cell and exact integer
+repetition. Configured and observed active-sequence counts must both be integer
+1. Before external execution, each cell must retain its prefill/terminal contexts
+(D1: 256/288; D2: 2,048/2,080), configured prompt count and configured/observed
+32 decode forwards. Native plan inputs use that same context table. Unsupported
+or swapped contexts, copied run identities and conflicting configured counts are
+rejected without creating output, including under optimized Python. These checks
+establish internal record consistency; they cannot authenticate an observation
+or prove that separately declared repetitions were independently executed.
 The [offline mutation regressions](../../../tests/test_mr09_comparator_inputs.py)
 preserve source files and reject an invalid final measurement before execution.
 This is a representation and eligibility correction, with no estimator or GPU

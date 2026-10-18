@@ -86,7 +86,8 @@ def public_source(uri):
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
         if (value.scheme not in {'http', 'https'} or not host or reserved
-                or value.username is not None or value.password is not None or '%' in host):
+                or value.username is not None or value.password is not None
+                or '%' in host or '\\' in host):
             return False
         try:
             address = ip_address(host)

@@ -1,18 +1,48 @@
 # Differentiation hypotheses and falsification
 
-Issue: [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) (MR-10). Status: **Draft — cannot be accepted before #66.** This is not an accepted positioning decision or marketing copy. Live assignee on 2026-10-16: `appletechie`; the issue body names CompleteDotTech as coordinator. That discrepancy is for the owner to resolve and is not settled here.
+Issue: [#57](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) (MR-10). Status: **Draft — cannot be accepted before #66.** This is not an accepted positioning decision or marketing copy. Current co-assignees, checked 2026-10-18: `tynamite` and `appletechie`; CompleteDotTech is the named evidence coordinator. Live GitHub assignments remain authoritative.
+
+## Current evidence and acceptance reconciliation (2026-10-18)
+
+This readback uses research main `bc35bbed9fc9e758966cd3a625e4768e3f9d3e2b` and the live #57 issue, PR metadata and receiving reviews. It reconciles delivered artifacts with the seven unchanged acceptance criteria. The historical tables below retain their original source dates and evidence scope; their statements about pending branches and unperformed scenarios describe the 2026-10-16 snapshot. The separately dated prospective protocol remains a design for new observations.
+
+### Delivered evidence and remaining decisions
+
+- The matrix re-grade in [PR #87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87) merged on 2026-10-16 as `eaa279472e958e97631e16b0501af406fe7da6ea` from reviewed head `870d6d87c555112fb782147589487e2c8421e4cf`. The historical provenance table's pending-PR labels are obsolete repository-state descriptions. They are retained as a dated snapshot, without re-grading current matrix cells or re-verifying every historical vendor claim.
+- The [2026-10-17 substitute observations](substitute-validation.md#2026-10-17-tests-tynamite) and [2026-10-18 Flocci guest observation](substitute-validation.md#2026-10-18-guest-contradiction-and-saved-output-test) are delivered inputs. [PR #227](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/227) merged the latter as `49896b41b6e0add6f333406112e8d009e7ad9ee6`, head `ef685e30af7c1c3a447f4732e1647075b23a3b2b`. That record reports explicit recognition of the offline/hosted-API conflict and a proposed localhost alternative, one saved tool bookmark, and return navigation without the generated stack. Its generated fit/privacy/runtime claims remain unverified; the tested guest flow establishes no global absence of configuration export. This reconciliation reads the committed report and reviews, without a new product run or independent reinspection of its private captures.
+- Those observations add counterevidence to differentiation based only on ordered stack advice or detecting that contradiction. They do not supply the source-traceability, exact reconstruction or customer-preference outcomes required to score the broader H1–H5b hypotheses. An impossible conjunction does not require a successful tool to satisfy mutually inconsistent requirements. Preserve the reported useful conflict explanation and distinguish its proposed relaxation from the original requirements.
+- [D-57-1–7](#prospective-follow-up-protocol-2026-10-18) now have explicit prospective rules. The earlier acceptance map's awaiting-decision wording predates those design choices. This reconciliation clarifies future coherent-scenario scoring separately from contradictory-input handling in D-57-1/D-57-2 and the combined gate; an accepted relaxation requires recorded revised inputs and separate scoring. Existing observations informed that protocol; none is retroactively preregistered, rescored or accepted by this reconciliation. The historical H5 disposition and all numerical thresholds remain unchanged.
+- [tynamite's #67 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/67#pullrequestreview-5550697545) accepted #57's #2/#40/#42 handoffs with a community-project coverage gap at `6511dea`. The counterexample and H5 sections respond to that gap for review. The later [#227 receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/227#pullrequestreview-5561540382) accepts only the #66 → #40 design-input boundary and requests capture access for #66 → #50. Subsequent independent capture inspection in #227 retains that separate receiving decision. These receipts do not establish final #57 or all-owner acceptance of the newer evidence.
+
+### Current criterion map
+
+| Live #57 criterion (unchanged) | Delivered artifact / evidence | Remaining acceptance |
+| --- | --- | --- |
+| State falsifiable differentiation hypotheses | H1–H5b below and the separately dated D-57-1–7 prospective protocol | Hypotheses and test rules are defined; #66's native prerequisite and the owners' final hypothesis dispositions remain open |
+| List counterexamples | Historical competing-workflow table, CanIRun.ai intake, and the linked dated substitute observations | Incorporate only the accepted scope of #66 evidence into final positioning; preserve untested capabilities as unknown |
+| Evaluate source provenance and explainability | Historical per-product provenance table; merged #87 re-grade; #227's distinction between a generated explanation and verified compatibility | Documentary review is delivered for its stated snapshot; the full current matrix and private captures are not newly audited here |
+| Define kill and pivot criteria | Conditions below and the explicit prospective protocol | Conditions are defined; no new pass/fail result or accepted positioning follows from specifying them |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Original claim links and hypothesis labels; exact merge/review receipts in this reconciliation | Historical source limits remain; reviewers assess the material evidence and conclusions at the submitted revision |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Historical #57 → #2/#40/#42 receipt and the separately scoped #227 receiving review | `tynamite`/`appletechie` and coordinator CompleteDotTech reconcile the newer evidence; each receiver retains its own disposition, including #50's outstanding capture-access scope |
+| Repository checks pass; reviewer accepts the evidence before Done. | Required checks and independent review at the submitted PR head | Passing repository checks and a record merge do not complete native #66 or the required evidence/receiving decisions |
+
+The [live #57 prerequisite](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57) expressly prevents acceptance before #66; it remains in force. No issue checkbox, assignment, Project field, native relationship, canonical handoff ledger or evidence grade changes in this contribution. Next: the existing #66 owners obtain the outstanding scoped receiving decisions, then #57's co-owners and coordinator accept, narrow or reject the hypotheses against that accepted revision. Continue using `Refs #57`.
+
+## Historical evidence and acceptance snapshot (2026-10-16)
+
+The original snapshot recorded `appletechie` as the live assignee and CompleteDotTech as the coordinator, leaving their decision roles for confirmation. The current co-assignees are recorded above. The following sections through the CanIRun.ai intake preserve the original evidence, source access dates and then-pending states; use the current reconciliation for delivered revisions and remaining acceptance.
 
 Base revision: `research/market-intelligence` at `6511dea`. Inputs: [profiles](competitors/README.md), [catalog](competitors.json), [matrix](features.json), [substitute log](substitute-validation.md) (#66, one scenario), and tynamite's PR #67 review (2026-10-16). Pending and unaccepted inputs: PR #87 (matrix re-grade, head `870d6d8`), PR #94 (#58 risk ranking, head `ec1c5fe`) and PR #81 (T0 notes, head `6b6e975`, D36–D41). Access date for everything below: 2026-10-16.
 
 Evidence classes: **PD** primary documentation, **VC** vendor claim, **OB** observed behavior (scoped to recorded steps), **IM** independent measurement, **ES** estimate, **HY** hypothesis. No claim in this note is IM.
 
-## Prior conclusions retained
+### Prior conclusions retained
 
 - The broad claim that users lack model recommendation or hardware-fit tools is falsified (PD/OB: Flocci, ModelFit, llmfit, Local AI Planner, Artificial Analysis).
 - Simple guided stack advice is not distinctive. A Flocci Stack Builder run returned ordered RAG components, constraints and uncertainty (OB, [substitute log](substitute-validation.md)).
 - Nobody has shown that a complete T0–T6 builder is unique, or that it isn't. No exhaustive market search or full end-to-end competitor test was performed.
 
-## Falsifiable hypotheses
+### Falsifiable hypotheses
 
 Historical thresholds were left as named coordinator decisions (D-57-n). The prospective protocol below supplies engineering choices for a new follow-up only. Existing #66 results were already read, so these choices cannot retroactively preregister or score that work. Once a follow-up result is known, its threshold cannot be changed to save a hypothesis.
 
@@ -27,7 +57,7 @@ Historical thresholds were left as named coordinator decisions (D-57-n). The pro
 
 H5 is the current note's "reviewed, reproducible history of configuration outcomes" claim. tynamite's PR #67 review (provenance item 5) says community fit-report projects are direct counterexamples to it. The evidence below supports that for single-model inference throughput. H5b is the narrowed alternative, declared before #66 reports. It is not a result.
 
-## Counterexamples
+### Counterexamples
 
 Two labels are kept apart: **NPE** (no public evidence found; this is not absence) and **EXU** (explicitly unsupported or excluded by the source).
 
@@ -46,7 +76,7 @@ Two labels are kept apart: **NPE** (no public evidence found; this is not absenc
 
 H5 conclusion (HY, Medium confidence): for single-model local inference throughput, these projects already provide public, partly version-pinned outcome histories. H5 is therefore **falsified as stated** for that scope. In the reviewed sources (NPE), none of them shows stack-level (RAG/agent) outcomes or a review process tied to a component contract. That gap leaves H5b open, and it remains untested.
 
-## Source provenance and explainability (profiled products)
+### Source provenance and explainability (profiled products)
 
 Each cell ID is `product_id:feature`. "PR #67" is the current branch grade (`Verified Partial`/`Verified Full`). "PR #87" is the pending re-grade (`Documented`/`Exercised`) that answers tynamite's review item 1. Grades shown use PR #87 names. Cells marked ⁸⁷ are Unknown on PR #67 and graded only in PR #87. Every other non-Unknown cell is `Verified Partial` on PR #67. PR #87 is unmerged, so its grades are proposals. No cell anywhere is graded IM.
 
@@ -68,7 +98,7 @@ Each cell ID is `product_id:feature`. "PR #67" is the current branch grade (`Ver
 
 Reading (HY): explanation and versioning already exist, but in separate products. Explanation sits in recommenders (Flocci, ModelFit, llmfit, AA). Version identity sits in metadata hubs (HF, models.dev). Reproducible artifacts sit in workflow tools (Dify, n8n, SkyPilot). No reviewed product combines rationale, per-claim source, version pin and declared unknowns in one exportable record (NPE, not absence). This is H1/H3's remaining claim, and #66 plus the H3 round-trip test must establish it.
 
-## Kill and pivot criteria (conditions, not results)
+### Kill and pivot criteria (conditions, not results)
 
 | Condition | Action |
 | --- | --- |
@@ -81,7 +111,7 @@ Reading (HY): explanation and versioning already exist, but in separate products
 | H5b: a stack-level reproducible outcome source exists for the scenario | Kill H5b; the remaining option is integration or contribution with those projects (#81 Q7, #41 rights) |
 | All of H1–H5b fail | Recommend that #58 rejects a differentiated MVP for this scope |
 
-## Proposed source-register additions
+### Proposed source-register additions
 
 These are for the #48 owner to apply in `sources.json`. They are not applied here.
 
@@ -96,7 +126,7 @@ These are for the #48 owner to apply in `sources.json`. They are not applied her
 
 Data reuse rights for these sources are not established (#60/#41). Rapid-MLX's CC0 statement is a claim for #41 to review, not a grant accepted here.
 
-## Acceptance map
+### Acceptance map
 
 | Criterion | Section | State |
 | --- | --- | --- |
@@ -108,7 +138,7 @@ Data reuse rights for these sources are not established (#60/#41). Rapid-MLX's C
 | Technical owners review handoffs | handoffs.md rows #57 → #2/#40/#42 | tynamite accepted with a coverage gap, now addressed for review |
 | Checks pass; reviewer accepts | — | Blocked by #66; no acceptance claimed |
 
-## CanIRun.ai intake (2026-10-16)
+### CanIRun.ai intake (2026-10-16)
 
 The [CanIRun.ai profile](competitors/canirun-ai.md) adds a device-first counterexample candidate for #66. It strengthens the reason to test narrow model-selection substitutes; it does not establish full-stack substitution. Keep existing hypothesis thresholds and acceptance gates unchanged pending scenario evidence.
 
@@ -117,14 +147,16 @@ The [CanIRun.ai profile](competitors/canirun-ai.md) adds a device-first countere
 
 These are engineering design choices under the user's delegated project authority, not measured product thresholds, an accepted positioning decision, or another owner's acknowledgement. Existing Flocci, ModelFit and CanIRun observations informed the design and remain exploratory. Preserve the historical H5 disposition. Before collecting new results, record this protocol's commit, the exact scenario inputs, product/runtime versions, a fixed required-field list and the evaluator. Any amendment creates a separately labelled follow-up; do not pool earlier results or silently exclude failures. An inaccessible tool is unobserved, not a failed capability.
 
+**Prospective scoring clarification (2026-10-18):** Label each scenario as coherent or deliberately contradictory before collecting its observations. Score hard-constraint satisfaction for coherent inputs. For contradictory inputs, score explicit conflict detection and clearly labelled proposed relaxations separately; the original impossible conjunction receives no satisfaction pass. Before executing any relaxed coherent follow-up, record the accepting decision-maker, their explicit acceptance, the exact changed and retained constraints, and the new scenario inputs. Score that follow-up separately from the original contradiction-handling result. This clarification governs future collection only; it does not reclassify or rescore historical observations or the H5 disposition.
+
 | Decision | Fixed rule for the new follow-up | Rationale and limit |
 | --- | --- | --- |
-| D-57-1 | Zero parity margin: a substitute must meet every hard constraint, explicitly identify every deliberately contradictory pair, and attach an eligible source or an explicit unknown to every material compatibility assertion. A claimed resolution based on an unknown hard constraint does not pass. | Hard constraints are conjunctive; average scores must not hide a violation. No historical result is rescored. |
-| D-57-2 | Require all D-57-1 conditions plus an explicit operator/capacity classification for each serving component and at least one stated trade-off between the local and hosted alternatives. | A provider name alone does not explain the local/API decision. |
+| D-57-1 | Zero parity margin for a coherent scenario: meet every hard constraint. For a deliberately contradictory scenario, explicitly identify every contradictory pair and clearly label any proposed relaxation, scored separately from constraint satisfaction; the original conjunction cannot pass. In both cases, attach an eligible source or an explicit unknown to every material compatibility assertion. A coherent scenario's claimed resolution based on an unknown hard constraint does not pass. | Coherent hard constraints are conjunctive; average scores must not hide a violation. Contradiction handling tests recognition without demanding impossible satisfaction. An accepted relaxed follow-up uses the separately recorded inputs and scoring above. No historical result is rescored. |
+| D-57-2 | For a coherent scenario, require all D-57-1 coherent-scenario conditions plus an explicit operator/capacity classification for each serving component and at least one stated trade-off between the local and hosted alternatives. | A provider name alone does not explain the local/API decision. |
 | D-57-3 | Reconstruction parity requires 100% agreement on the predeclared required fields: component identities and revisions, operator/capacity, runtime, tokenizer/template, context/output reservations, precision, concurrency, cost assumptions, and evidence/unknowns. A field outside the scenario is marked not applicable before the test. The recipient must reconstruct without author clarification. | This tests a record, not deployment success; execution requires separate authorization. Record all omissions and requests for clarification. |
 | D-57-4 | In a future authorized sample of 12 qualified participants spanning at least three distinct buyer roles, require at least 7 to prefer the versioned record over their current alternative and at least 4 to identify a payer and a positive unprompted budget for it. Otherwise narrow or stop the paid-record hypothesis. Incomplete recruitment is inconclusive. | Exploratory stopping rule, not a population estimate, revenue forecast or price anchor. This does not approve #63 recruitment, consent, quotas, interview wording or collection. |
 | D-57-5 | Observe one fixed scenario's price set over 28 consecutive days; log source checks, changes and missing observations. | A bounded maintenance study; one period does not establish long-term freshness. No scheduled job is created here. |
 | D-57-6 | More than 2 researcher-hours of active maintenance over that 28-day period triggers narrowing the cost-advice scope. Track time prospectively; missing time logs make the outcome inconclusive. | An explicit analyst effort budget, not measured economics or authorization for purchases. Trust remains a separate #63 observation; maintenance alone cannot pass H4. |
 | D-57-7 | For a newly fixed scenario matrix, comparable outcomes from existing projects for 100% of its required combinations falsify the exclusive outcome-coverage claim. Each match needs artifact/runtime/hardware pins and the same measured quantity. | An existence/coverage check, not permission to reuse data. It cannot revive the already rejected historical H5 claim. |
 
-For #58, a substitute satisfies this follow-up's **full decision-record scenario** only if D-57-1, D-57-2 and D-57-3 all pass. Failure narrows the research question; it does not establish demand or authorize implementation. Preserve #66's native prerequisite and its owners' evidence review. Hardware error tolerance and cost uncertainty remain workload-specific #10/#39 decisions: without matched measurements or complete meters, offer assumption-explicit screening or partial costs, not a certified fit or savings claim. No go decision follows until applicable empirical gates and receiving scopes are accepted.
+For #58, a substitute satisfies this follow-up's **coherent full decision-record scenario** only if D-57-1, D-57-2 and D-57-3 all pass. Contradiction-handling results remain separate from that combined gate. Failure narrows the research question; it does not establish demand or authorize implementation. Preserve #66's native prerequisite and its owners' evidence review. Hardware error tolerance and cost uncertainty remain workload-specific #10/#39 decisions: without matched measurements or complete meters, offer assumption-explicit screening or partial costs, not a certified fit or savings claim. No go decision follows until applicable empirical gates and receiving scopes are accepted.

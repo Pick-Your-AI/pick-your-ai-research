@@ -142,14 +142,34 @@ class Intake(unittest.TestCase):
                 self.assertEqual(baseline.returncode, 0, baseline.stderr)
                 self.assertIn('Validated 1 catalog proposals and 1 pricebooks', baseline.stdout)
                 for target in ('catalog', 'price', 'manifest'):
-                    for uri in ('https://github.com:65536/claim', 'https://@github.com/claim',
-                                'https://github.com:\t443/claim'):
+                    malformed = ['https://github.com:65536/claim', 'https://@github.com/claim',
+                                 'https://github.com:\t443/claim']
+                    if target in ('catalog', 'price'):
+                        malformed += [f'https://{host}\\claim/' for host in (
+                            '127.0.0.1', 'localhost', '10.0.0.1', 'example.com',
+                            '2130706433', '１２７.０.０.１')]
+                    for uri in malformed:
                         with self.subTest(optimized=optimized, target=target, uri=uri):
                             self._write_locator_submission(root, target, uri)
                             result = subprocess.run(command, capture_output=True, text=True, check=False)
                             self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
                             self.assertIn('INVALID:', result.stdout)
                             self.assertNotIn('Validated ', result.stdout)
+
+    def test_backslash_authority_rejected_for_catalog_and_prices(self):
+        hosts = ('127.0.0.1', 'localhost', '10.0.0.1', 'example.com',
+                 '2130706433', '0x7f000001', '１２７.０.０.１',
+                 'github.com', 'bücher.de')
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for target in ('catalog', 'price'):
+                for scheme in ('http', 'https'):
+                    for host in hosts:
+                        uri = f'{scheme}://{host}\\claim/'
+                        with self.subTest(target=target, uri=uri):
+                            self._write_locator_submission(root, target, uri)
+                            self.assertTrue(any('real public source URL' in error
+                                                for error in validate_tree(root)[0]))
 
     def test_missing_and_synthetic_sources_rejected(self):
         for uri in (None, 'https://models.example/model', 'https://example.com/x', 'https://user:password@host.com/doc'):

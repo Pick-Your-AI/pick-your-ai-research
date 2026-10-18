@@ -547,9 +547,9 @@ Synthetic request/response acceptance cases are kept in [the test fixture specif
 | MCP handoff: client transports and SDK pins per framework (matrix above); SSE deprecation; MCP 2026-07-28 revision support per framework (unknown) | #27 · @CompleteDotTech |
 | Memory handoff: framework state backends (LangGraph checkpointers, ADK SessionService, Agno `db`, Strands session managers, CrewAI checkpoint providers) mapped to `memory_store.backing_type` | #28 · @CompleteDotTech |
 | Guardrails: approval hooks (OpenAI Agents HITL, ADK tool confirmation, PydanticAI deferred tools, MAF approval modes); smolagents local code execution risk (A63) | #35 · @PUSHINGSQUARES |
-| Evaluation: agent-level eval hooks per framework (not researched) | #36 · @PUSHINGSQUARES |
+| Evaluation: [pinned OpenAI Agents, CrewAI and Agno hooks](framework-evaluation-telemetry.md) now separate scripted orchestration, judge scores, execution checks and host-function measurements; CrewAI's synthetic missing-metric case limits boolean acceptance. Other frameworks and real quality runs remain unresearched | #36 · @appletechie, @PUSHINGSQUARES |
 | Deployment: library vs managed runtimes (LangSmith Deployment, Agent Runtime, Foundry hosted agents, CrewAI AMP, LlamaIndex deploy targets) | #37 · @PUSHINGSQUARES |
-| Monitoring: OTel support per framework; default telemetry egress (OpenAI Agents traces, Agno, CrewAI) | #38 · @PUSHINGSQUARES |
+| Monitoring: [pinned producer-specific controls](framework-evaluation-telemetry.md#telemetry-controls-are-scoped-to-their-producers) now cover OpenAI Agents traces, CrewAI metadata and Agno Agent/evaluator telemetry; effective deployment configuration, other exporters and receiving adoption remain open | #38 · @appletechie, @PUSHINGSQUARES |
 | Plan gates and prices for managed runtimes (LangSmith Plus/Enterprise, CrewAI AMP, Agent Runtime, Foundry) | #39 · @PUSHINGSQUARES |
 | Evidence grading of vendor documentation used here | #41 · @tynamite |
 | Still not source-checked on fetched pages: LangGraph multi-agent, OpenAI Agents SDK OpenTelemetry, MAF checkpoint storage backends and .NET MCP transports beyond stdio, Mastra SSE, PydanticAI and Agno multi-agent. LangGraph parallel tool execution is now source-checked only at A87's pinned implementation | #25 · @CompleteDotTech |
