@@ -760,3 +760,19 @@ None in this pull request. An `evaluation_suite` catalog item needs `metric_name
 | #32 Training dataset | `D-20` accepted, narrowed: #36 owns freezing the evaluation set, hashing its items and embedding the canary GUID (G1, E-R44); T5 runs the leakage check against those hashes and records method, hit counts and hashes; E-R44's outcome remains `unknown` with `missing_evidence` and `on_unknown: review` until both are recorded; its fixed severity remains `error` | pending #32 owner confirmation |
 | #33 Fine-tuned model | `A-20` accepted as an input to G5: a tuned model with no `evaluation_report_ref`, or one whose G5 run failed, is not deployable; G5 already re-runs after any T5 tuning, compares base and tuned weights on the same suite (EV-19, E-R43), and G2 covers capability retention against the base. No acceptable-regression threshold is published (E-H6), so the threshold stays builder-set | pending #33 owner confirmation |
 | #2 T0 | evaluator-placement axis and region-at-provisioning as T0 inputs | pending |
+
+## Post-#121 source reconciliation: API tasks and training-data screening
+
+Refs #115, #32, #33, #36. Sources checked 2026-10-18; neither finding is an independently reproduced evaluation.
+
+### lm-evaluation-harness API boundary
+
+The publisher's [TemplateAPI usage guide](https://github.com/EleutherAI/lm-evaluation-harness/blob/main/docs/API_guide.md) limits loglikelihood and MCQ tasks such as MMLU to completion endpoints, rather than chat-completion endpoints expecting message dictionaries. For compatible instruction-tuned completion APIs, `--apply_chat_template` preserves chat formatting while retaining the logits needed by these tasks. The guide also requires a tokenizer backend for loglikelihood/MCQ tasks.
+
+Therefore the earlier API-backend candidate listing is not universal task support. Record the pinned harness, task/output type, tokenizer and exact endpoint capability before selecting an evaluation route. An unavailable capability is not a low model score; an untested tuple remains unknown. This is a source boundary, not a successful benchmark run or a change to the existing gates. The cited branch is mutable and needs rechecking for the selected revision.
+
+### Foundry training-data harm screen
+
+Microsoft's [fine-tuning safety evaluation preview guide](https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation), updated 2026-07-31, describes a pre-training data screen that fails jobs when detected harmful content exceeds its severity threshold. It separately evaluates the resulting model before deployment. The page states that evaluation thresholds are predefined and not customer-configurable, but also links a request process for modified thresholds; this is not evidence that an exception was granted or is available for a particular account.
+
+Proposed #32/#33/#36 handoff: retain a training-data harm screen distinct from post-training safety regression and capability/task evaluation. Foundry's provider check is one documented implementation, not proof that self-hosted training has an equivalent control. An alternative screen, applicable policy, acceptance thresholds and exact model/service scope require receiving-owner disposition. Passing a provider screen does not establish workload safety, corpus rights or consent. No training data was uploaded or job run.
