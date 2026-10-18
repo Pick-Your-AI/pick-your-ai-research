@@ -29,7 +29,7 @@ spare-capacity authorization. No paid compute or new device was used.
 | Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
 | Comparable estimator errors | Zero whole-runtime pairs; 12 bounded native KV component checks in the dated comparison | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
 | Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
-| ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
+| ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | The separately dated [17:50:17Z receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632) accepts note-only #10 intake and adopts the [future research location](../T2-infrastructure/compute/resource-estimates/README.md) under its existing gates; zero current ResourceEstimate records are admitted |
 
 The prior spare-local-capacity-only constraint and GPU/RAM/disk/process caps
 remain in force. The 2026-10-16 Granite3.1 failure is a historical observation,
@@ -685,15 +685,48 @@ preserved by the wrapper; use a fresh output directory for independent replicati
 | Consumer | Finding offered | Receiving owner | Disposition / unresolved next action |
 | --- | --- | --- | --- |
 | #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | @zwright8, @appletechie | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of accounting interface only; appletechie's disposition and empirical acceptance remain pending |
-| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | @Mattycodes69, @appletechie | [Appletechie scoped acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) for the earlier note-only policy/headroom methodology; no runtime-result acceptance; new GM1 evidence, other co-owner disposition and future placement remain pending |
+| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable whole-runtime competitor pairs | @Mattycodes69, @appletechie | The [earlier co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) retains its original note-only policy/headroom scope. The [actual in-session technical review at 17:50:17Z](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632) accepts the current note-only accounting input and future ResourceEstimate location under real build/selection/unit/evidence gates, admitting zero current records; empirical coverage and calibration remain incomplete |
 | #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | @zwright8, @Mattycodes69 | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of runtime accounting interface only; Mattycodes69's disposition and empirical acceptance remain pending |
 
 No ResourceEstimate, canonical catalog item, Pricebook or compatibility boolean
 is manufactured. #40 remains the review entry for any contract/rule change;
-v1 is unchanged. Agent reproducibility review can identify defects and support
-the submission; it does not accept the above owner handoffs. #61 remains open
+v1 is unchanged. Reproducibility or publication review alone does not accept
+every handoff; actual delegated receiving decisions retain their stated input
+and scope. #61 remains open
 until its coverage, relevant evidence review and acceptance gates are met.
 Automation checks structure, unit arithmetic, failure handling and consistency;
 human reviewers still assess experimental validity, source accuracy, reuse
 rights, freshness, completeness and evidence acceptance. The integrated
 submission validation report records the repository checks separately.
+
+## Current note-only receiving and placement decision — 2026-10-18
+
+The [actual #61 → #10 technical receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632),
+posted at **17:50:17Z** through `CompleteDotTech`, records the in-session Apple
+engineering specialist's own delegated decision. Its literal reviewed input is
+accepted `745e58704262aa7b0c755794f820ec1372b24395`, this note blob
+`98dbe4e65d4e4f32cf026d9103de6e9a77fa480d`, feasibility blob
+`3c6502f8fde84dd5b41544741ac552331d4aecad` and acceptance-record blob
+`71a289a8e86af57aee25a52da8991f13397a8262`. The current receipt amendment requires
+its own source review and delivery; it is not the source of that earlier review.
+
+The decision accepts **note-only accounting evidence** while retaining fifteen
+dense observations, three separate GM1 observations, twelve two-byte native KV
+component pairs and three initialization-buffer observations as distinct cohorts.
+Allocated memory is contained in reserved memory, and the two must not be summed.
+Equal two-byte storage widths and cache-payload agreement do not establish equal
+runtime behaviour or whole-runtime calibration. Initialization-buffer counters
+exclude graph dispatch/inference and opaque context/library allocations. The
+output-reservation mismatch and zero matching peak-allocated competitor pairs
+remain explicit; no universal reserve, fit guarantee or error interval follows.
+
+The future `research/T2-infrastructure/compute/resource-estimates/` location is
+now adopted under its explicit real-build/selection, unit, schema and evidence
+gates. **No present record is admitted.** Existing observations remain in
+`research/market/measurements/`; unbound arithmetic remains notes/scripts;
+synthetic examples remain tests. New allocator metrics, intervals and topology
+semantics, including the proposed total-sum versus maximum-rank convention,
+still go through versioned #40 review. This supersedes the earlier outstanding
+placement question only. It does not attribute another co-owner's response,
+rerun a GPU/corpus/source check, alter #10's accepted research closure, waive the
+remaining #61 empirical criteria or complete #61.
