@@ -1,7 +1,7 @@
 # T6 Monitoring
 
 Issue: [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `monitoring_stack` · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
-Status: partial research; Evaluation receiving interface accepted with conditions · Initial source pass: 2026-10-16; separately dated follow-ups retain their own access dates. Candidate rule revision 0.2 remains for #40 review.
+Status: partial research; engine, framework, memory and Evaluation inputs received within their recorded scopes · Initial source pass: 2026-10-16; separately dated follow-ups retain their own access dates. Candidate rule revision 0.2 remains for #40 review.
 
 ## User decision
 
@@ -9,7 +9,7 @@ Which signals must be watched once the build runs?
 
 In scope: health, quality, latency, cost, usage, safety and data-freshness signals; alert thresholds; privacy of logged data. Out of scope: operating a monitoring stack.
 
-Inputs. The Guardrails record ([#35](guardrails.md)), the Evaluation record ([#36](evaluation.md)) and the Deployment record ([#37](deployment.md)) sit in this folder and are cited here by id: #35 rule ids (`G-R21`) and control names (`trace-content-masking`), #36 rule ids (`E-R18`) and gate ids (`G1` to `G12`, with the meanings in the #36 gate table), #37 step, readiness, rule and evidence ids (`#37 S29`, `R35`, `D-R11`, `D-M13`). Rules those records own are cited, not restated. The #2 (T0) fields that set thresholds are latency target (percentile and value), throughput and concurrency, volume, data classification, residency and budget (amount, currency, period). The original pass did not hold #11, #16, #25 or #28. The separately dated [engine input integration](engine-input-integration.md) now reconciles the researched #11 releases with the engine signal names below; the other input reviews remain separate. Where a threshold needs a field no record defines yet, the row says so and Open questions names the owner.
+Inputs. The Guardrails record ([#35](guardrails.md)), the Evaluation record ([#36](evaluation.md)) and the Deployment record ([#37](deployment.md)) sit in this folder and are cited here by id: #35 rule ids (`G-R21`) and control names (`trace-content-masking`), #36 rule ids (`E-R18`) and gate ids (`G1` to `G12`, with the meanings in the #36 gate table), #37 step, readiness, rule and evidence ids (`#37 S29`, `R35`, `D-R11`, `D-M13`). Rules those records own are cited, not restated. The #2 (T0) fields that set thresholds are latency target (percentile and value), throughput and concurrency, volume, data classification, residency and budget (amount, currency, period). The original pass did not hold #11, #16, #25 or #28. The separately dated [engine input integration](engine-input-integration.md) reconciles the researched #11 releases with the engine signal names below. The subsequent [#11/#25/#28 receipts](#recorded-engine-framework-and-memory-receiving-decisions-2026-10-18) receive their stated research interfaces; #16 and evidence for an actual selected deployment remain separate. Where a threshold needs a field no record defines yet, the row says so and Open questions names the owner.
 
 ### Placement rules used in this record
 
@@ -946,8 +946,10 @@ not observed collector traffic or a universal no-egress guarantee.
 
 Proposed monitoring evidence retains producer/configuration identity, capture
 policy, actual destination, and created/queued/exported/accepted states. The
-receiving #38/#35 owners still need to adopt or narrow this input and obtain
-deployment-specific measurements. No fixed signal threshold, retention period,
+[recorded #25 R5 decision](#recorded-engine-framework-and-memory-receiving-decisions-2026-10-18)
+accepts this per-producer interface for #38. Actual selected configuration,
+collector and queue evidence remain to be obtained; #35's distinct control
+decisions retain their own scope. No fixed signal threshold, retention period,
 price, runtime acceptance or executable contract is introduced.
 
 ## Evaluation receiving decision (2026-10-18)
@@ -963,7 +965,21 @@ The receipt identifies the Evaluation producer delivered through [#382](https://
 | TH12 baseline and alert evidence | Receive the #36 quality/safety baseline with an explicitly selected band and minimum scored count. Published defaults and investigation hints remain distinct from builder decisions. M-H7/M-H24 coverage and ingest assumptions, and the drift proposals, retain their hypothesis status. |
 | G7/G12 and P1–P12 privacy/retention | Include every exporter and effective content-capture override. Judge placement, sink region, retention and retained baseline artifacts are separate inputs. Metadata-only metrics cannot prove that another exporter or judge avoided content. |
 
-The G12 interpretation is therefore received rather than awaiting the same decision again. Selected thresholds, actual exporter behavior, eligible rate/retention facts, rights and deployed monitoring still require their separately scoped evidence. The other #16/#25/#28 inputs and the remaining handoffs below keep their own review state. No signal row, fixed severity, threshold, source-register observation, CatalogItem or frozen contract is changed by this receipt propagation; no model, exporter, service or monitoring stack was executed for it. Broader #38 research completion remains separate.
+The G12 interpretation is therefore received rather than awaiting the same decision again. Selected thresholds, actual exporter behavior, eligible rate/retention facts, rights and deployed monitoring still require their separately scoped evidence. The #11/#25/#28 receipts below retain their separate identities; #16 and the remaining handoffs keep their own review state. No signal row, fixed severity, threshold, source-register observation, CatalogItem or frozen contract is changed by this receipt propagation; no model, exporter, service or monitoring stack was executed for it. Broader #38 research completion remains separate.
+
+## Recorded engine, framework and memory receiving decisions (2026-10-18)
+
+The following are completed receiving records, read back on 2026-10-18. This section propagates those actual decisions; it does not create a later reply from a named co-owner or enlarge an earlier review. Original source dates, claim grades and execution limits remain attached to their own records.
+
+| Input and actual receiving record | Reviewed producer and retained scope | What this Monitoring record receives |
+| --- | --- | --- |
+| **#11 engine inputs:** [appletechie's earlier narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428), followed by [PUSHINGSQUARES' narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6247689868) | The two co-owner records retain their separate `66b46d4` and `9192d5d` bases. The later record receives the [exact-release integration at `9192d5d6994b644ebbb81344300fda48db6d29a8`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9192d5d6994b644ebbb81344300fda48db6d29a8/research/T6-deployment-operations/engine-input-integration.md), with vLLM v0.31.0 and TGI v3.3.7 source mappings. It is a co-owner disposition, not an independent runtime check. | SG70–SG76 names, types and units are research inputs. Version/build/configuration belong in the evidence record and are not invented metric labels; the inspected vLLM logger's `model_name` and `engine` labels retain their exact scope. Confirm `_total` exposition on the selected scrape, re-check names on upgrades, and keep a missing series unavailable rather than zero. New llama.cpp SG IDs remain deferred until a real build/tuple is selected, as the receipt directs. |
+| **#25 framework telemetry:** [actual R5 receiving review 5563932524](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/369#pullrequestreview-5563932524) | The independently performed Apple-lane engineering review under project delegation is recorded through CompleteDotTech at source `15c20428c07ed0e49d680cd2ae03c9c05de626a9`, framework blob `15bf6574b00a12a1774ef33363db2087d8703ea5`. It receives the operative producer boundary and retains the distinct FET source/probe scopes; it is not an absent named assignee's reply. | Bind each actual producer's initialization, dependencies, trace context, effective capture configuration, destinations, buffers and export path. Disabling new capture does not prove removal of queued records or full opt-out. Keep missing observations distinct from zero, and preserve C2 as a negative comparability decision rather than a framework-quality ranking. Research acceptance supplies no observed delivery or operational gate. |
+| **#28 memory observations:** [actual R4 receiving review 5563363848](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/345#pullrequestreview-5563363848) | The independently performed receiving decision under project delegation is recorded through CompleteDotTech at source `c5e1d684aad53a987c33435e56c158ef0bd3ee1b`, memory blob `006cdd26efde4c2c303650245dd211c304ebc363`. It receives [MEM-SG01–06](memory-observability-proposal.md) for an actual selected layer/mechanism; the historical T4 and named co-owner replies keep their original scopes. | Retain counts, units, collection method/time, lifecycle state and restricted evidence references. Capture stays off unless separately approved. Unknown counts are not zero, and sampling, inaccessible layers and retained backups remain visible. This applies to evidenced application-, framework- or store-backed memory without inventing a `memory_store` selection. Actual collectors, windows, alert policies and readiness require their own selected-configuration evidence. |
+
+These inputs support this record's signal-catalog and privacy requirements within their stated scopes. In particular, a source registration is not a live series, an exported event is not proof of downstream acceptance, and an acknowledgement or bounded sample is not full memory erasure. Keep #28's event-bound, complete-layer completion criteria distinct from narrower serving exclusion and from a reported pending backup.
+
+The received interfaces do not select a deployment, legal basis, retention duration, numeric alert window, threshold or permission. They do not adopt new SG IDs, a frozen-v1 field, a final ruleset or the later W-R11 0.2 proposal by implication. The #16 input and other open research questions below remain separately owned. This reconciliation changes no signal/threshold/rule/source row, CatalogItem or prior experiment and does not complete #38 in its entirety.
 
 ## Open questions and handoffs
 
@@ -980,8 +996,8 @@ The G12 interpretation is therefore received rather than awaiting the same decis
 | Confirm the interim evidence grades in this record once the final policy exists | the issue asks for #41 grading; interim grades from `docs/RESEARCH_METHOD.md` are applied | #41 owner |
 | Review log duties beyond Art. 5, 25 and 30 (erasure under Art. 17, security under Art. 32), high-risk determination under the AI Act, and national log rules | P9 and P10 cover only what was opened | legal reviewer named by the #34 owner |
 | Open the sources this sweep could not: Azure abuse-monitoring retention days, Azure `RequestResponse` schema, OpenAI usage delay, Arize AX and Helicone retention and regions, alert-evaluation delays, Mistral and Cohere monitoring, open-weight API hosts | each closes a hypothesis or a coverage gap | #38 owner |
-| Accept or narrow the exact-release #11 [engine input integration](engine-input-integration.md) | SG70–SG76 names/types are source-reconciled; wrapper/exporter names, live exposure and additional llama.cpp signal adoption remain unverified | #38 owners (@appletechie, @PUSHINGSQUARES) |
-| Reconcile the remaining #16, #25 and #28 inputs against this record | the original pass did not hold these records; their receiving review is separate from the #11 source check | #38 owner |
+| Apply the [received #11 narrowing](#recorded-engine-framework-and-memory-receiving-decisions-2026-10-18) to the selected engine/exporter and obtain the matching observation | SG70–SG76 source names/types are received; wrapper/exposition names and live exposure remain unverified. The named receipt defers new llama.cpp SG IDs until a real build/tuple is selected | #38 owners (@appletechie, @PUSHINGSQUARES) |
+| Reconcile the remaining #16 input; qualify any selected producer/layer beyond the recorded #25/#28 interfaces | the original pass did not hold these records. The exact #25 R5 and #28 R4 research interfaces are now received, while a different producer/version or actual collection and lifecycle-completion claim needs its own evidence | #38 owner |
 
 ### Handoffs
 
