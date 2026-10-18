@@ -40,6 +40,51 @@ class Answer:
         return self.state is State.PROVIDED
 
 
+@dataclass(frozen=True, slots=True)
+class PredicateResult:
+    """A predicate fact that cannot become true through Python truthiness.
+
+    Compose negation before lowering. The two value adapters are only for the
+    final normalized-rule boundary, whose bool/None interface is unchanged.
+    They are not intermediate values for Python ``not``, ``and`` or ``or``.
+    """
+
+    state: State
+    _value: bool | None
+    source_path: str | None = None
+
+    def __post_init__(self):
+        if not isinstance(self.state, State):
+            raise ValueError("predicate result must retain an answer State")
+        if self._value is not True and self._value is not False and self._value is not None:
+            raise ValueError("predicate must return a normalized bool or None")
+        if self.state is not State.PROVIDED and self._value is not None:
+            raise ValueError("unresolved answer cannot retain a predicate value")
+
+    def __bool__(self):
+        raise TypeError(
+            "CD-1 predicate results have no implicit Boolean value; "
+            "use negated() and a final rule adapter"
+        )
+
+    def negated(self):
+        """Invert only a known Boolean, retaining unresolved state and path."""
+        value = None if self._value is None else not self._value
+        return PredicateResult(self.state, value, self.source_path)
+
+    def compatibility_value(self):
+        """Lower once at the rule boundary; unresolved input stays None."""
+        return self._value
+
+    def recommendation_value(self):
+        """Apply the existing known-answer gate before final rule lowering.
+
+        An unresolved answer skips a recommendation. A provided answer whose
+        value predicate is unresolved still returns None, not a default false.
+        """
+        return self._value if self.state is State.PROVIDED else False
+
+
 def pointer_tokens(pointer):
     """Non-root RFC 6901 string form; never dotted paths or URI fragments."""
     if not isinstance(pointer, str) or re.fullmatch(r"(?:/(?:[^~/]|~[01])*)+", pointer) is None:
@@ -117,12 +162,10 @@ class AnswerIndex:
             raise ValueError(f"invalid provided value at {pointer}: {error.message}") from error
         return Answer(state, deepcopy(value), record.get("source"), source_path)
 
-    def predicate(self, pointer, value_schema, predicate):
-        """Only provided, field-valid data reaches a rule's value predicate."""
+    def predicate(self, pointer, value_schema, predicate) -> PredicateResult:
+        """Evaluate provided, field-valid data without implicit truth coercion."""
         answer = self.read(pointer, value_schema)
         if not answer.provided:
-            return None
+            return PredicateResult(answer.state, None, answer.source_path)
         result = predicate(answer.value)
-        if result is not True and result is not False and result is not None:
-            raise ValueError("predicate must return a normalized bool or None")
-        return result
+        return PredicateResult(answer.state, result, answer.source_path)
