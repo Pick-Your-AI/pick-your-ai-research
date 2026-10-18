@@ -543,7 +543,7 @@ These affect throughput and plan selection, not price per call.
 | Shared provider identity and `provided_by` link between `data_source` and `integration`; union-of-scopes review when one OAuth client serves ingestion and actions | handoff to #13 · @zabyxc01 |
 | Rate-limit and failure-mode signals (`Retry-After`, `x-ratelimit-*`, `Stripe-Rate-Limited-Reason`, in-band tool errors) for monitoring | handoff to #38 · @PUSHINGSQUARES |
 | Evidence policy for summarising fetchers and pages that render tables in JavaScript (Slack tiers, GitHub permissions) | #41 · @tynamite |
-| Re-fetch: Brave rate-limit headers; GitHub repository permissions (Contents, Administration, repo delete); Stripe RAK permission names; E2B SDK licence conflict (MIT vs Apache-2.0) | #26 · @CompleteDotTech |
+| Remaining source decisions: exact Stripe refund-operation RAK resource mapping; E2B distribution artifact/dependency terms beyond the pinned SDK source | #26 · @CompleteDotTech |
 
 [Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
 
@@ -567,3 +567,25 @@ The guide applies new quotas to projects created from **2026-05-01**; projects u
 The page separately lists a **1 TB/day/project** egress threshold and **400,000,000 units/day/project** billing threshold. Standard use is currently described as no additional cost; over-quota charging is planned later in 2026, with details and notice still forthcoming on this read. No rate or effective bill is established.
 
 Project interpretation: #38 needs project/user/method/cohort dimensions; #39 needs an actual effective price schedule before pricing quota units. Keep billing classification unknown pending that scoped determination. v1's request-per-minute field cannot faithfully represent this model. Customer-specific quotas, authorization and receiving dispositions remain unverified; B22's historical unfetched state is preserved.
+
+## Remaining named source-gap readbacks (2026-10-18)
+
+All sources below were opened on **2026-10-18** with the browser text extractor (GitHub API resolved the E2B commit). Grade: **Primary documentation, source checked / unverified**. This is desk research: no authenticated product request, credential creation, execution benchmark or redistribution approval.
+
+### Brave rate windows
+
+B45 — Brave, [Rate limiting](https://api-dashboard.search.brave.com/documentation/guides/rate-limiting), mutable guide. The guide documents a one-second sliding request window and HTTP 429 on excess. `X-RateLimit-Limit`, `X-RateLimit-Policy`, `X-RateLimit-Remaining` and `X-RateLimit-Reset` carry multiple windows; reset values are seconds from the response, not Unix timestamps. The example values are illustrative plan data, not a universal quota. Brave states successful responses count toward quota/billing; this does not establish a monetary rate or independently reproduce enforcement. For #38, preserve all corresponding window values and plan scope when deciding retry delay; do not retry merely because the shortest window reset if another is exhausted. This resolves the previously unread header semantics; account-specific limits remain unknown.
+
+### GitHub operation permissions
+
+B46 — GitHub, [Repository contents](https://docs.github.com/en/rest/repos/contents?apiVersion=2026-03-10), REST API **2026-03-10** documentation. Private content reads require fine-grained **Contents: read**; public content may be read without authentication. Creating/updating file contents requires **Contents: write**, with **Workflows: write** additionally for workflow changes. These are operation/resource permissions, not generic OAuth scope strings.
+
+B47 — GitHub, [Delete a repository](https://docs.github.com/en/rest/repos/repos?apiVersion=2026-03-10#delete-a-repository), same API version. Fine-grained deletion requires **Administration: write**; organizational deletion policy can still deny a member. Project implication: a content writer must not be treated as a repository administrator or deletion-authorized actor. These published prerequisites do not prove a particular token's effective access and do not relax repository protections or tool approval rules.
+
+### Stripe permission naming boundary
+
+B48 — Stripe, [Restricted API keys](https://docs.stripe.com/keys/restricted-api-keys), mutable documentation. Resource permissions are **None**, **Read** or **Write**; Write includes Read. The guide's named examples are **Payment Intents: Write**, **Customers: Read** and **Disputes: Read**. GET maps to reading and POST/DELETE to writing the relevant resource. It does not establish the exact resource/dependency permission set for this note's refund-creation operation. That mapping stays unknown pending an explicit applicable reference or authorized sandbox evidence; do not substitute a Stripe Apps manifest permission or a broad unrestricted key. No key was created and no refund attempted.
+
+### E2B package-local license scope
+
+B49 — E2B source at commit `62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3`: the package-local [Python SDK LICENSE](https://raw.githubusercontent.com/e2b-dev/E2B/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/LICENSE) declares MIT; adjacent [pyproject.toml](https://raw.githubusercontent.com/e2b-dev/E2B/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/pyproject.toml) declares package `e2b` version **2.56.0** and MIT. This supplies the missing package-local source evidence behind B31, rather than applying the root repository license to every subpackage. B33's historical root-file observation remains recorded. No wheel or dependency bundle was inspected; this finding does not decide terms for hosted sandboxes, infrastructure, dependencies, user workloads or a redistributed artifact. #60 retains publication-scope review.
