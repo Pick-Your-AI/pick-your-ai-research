@@ -1,7 +1,7 @@
 # GPU / Compute: inference capacity and provisionable profiles
 
 Issue: [#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) · Contract: 1.0.0 · Kinds: `accelerator`, `compute_profile`
-Status: decision record merged in PR #75; follow-up rule proposal and remaining handoffs pending · Last researched: 2026-10-17
+Status: decision record merged in PR #75; follow-up rule proposal and remaining handoffs pending · Vendor-source dates: per evidence section · Method/receipt continuation: 2026-10-18
 
 ## User decision
 
@@ -190,7 +190,7 @@ The v1 schema C17 permits scalar decimal values for `inference.estimated_require
 1. Generate only after a real version-pinned build and selections exist. Use `confidence="estimated"` for this uncalibrated method. Preserve GB conversions, complete model/cache/parallelism/overhead inputs, source URLs and runtime conditions in assumptions/source URI. Tie every influenced selection (model, context, engine, accelerator, profile and optional adapter/workload) to the result.
 2. Report upper-bound scenario memory as the conservative scalar, and preserve the full sensitivity table and input manifest in the source note. `estimated_required_vram_gb` is sum across ranks; `estimated_peak_per_device_vram_gb` is maximum rank. State that convention explicitly until #40 confirms it. For one device the two are identical. Do not take a single-device estimate and multiply/divide blindly.
 3. Leave unsupported throughput/power metrics absent. A missing metric is not a zero; the evaluation should report unknown for the dependent assertion. TDP is not estimated operating power, and no training GPU-hours are emitted by this method.
-4. No new ResourceEstimate JSON is claimed: merged T1 catalog records now exist, but this historical scenario is not bound to a real BuildSnapshot and selection IDs, and #10's co-owners have not accepted the note-only consumption/future-placement proposal below. The reproducible calculation output remains a research calculation, not a build artifact. The synthetic fixture checks shape only, not this method or a vendor deployment.
+4. No new ResourceEstimate JSON is claimed: merged T1 catalog records now exist, but this historical scenario is not bound to a real BuildSnapshot and selection IDs, and the note-only consumption/future-placement proposal below still needs Mattycodes69's disposition and agreement on future placement. appletechie's scoped note-only acceptance is recorded separately. The reproducible calculation output remains a research calculation, not a build artifact. The synthetic fixture checks shape only, not this method or a vendor deployment.
 
 Requested extensions for #40/@tynamite, with #6/@zwright8, #10/#11/@Mattycodes69 and #39/@PUSHINGSQUARES as affected consumers: interval/scenario identity and unknown reason for ResourceEstimate; artifact tensor/quantization metadata; per-device allocatable memory and partition profile distinct from advertised capacity; bandwidth with units and peak/sustained qualifier; multiple interconnects/topology; physical cores versus vCPU and host RAM unit semantics; TP/PP/EP/DP and KV-sharding metadata. Examples are the 48 GB/44 GiB L40S allocation, Case B's 36.012–43.198 GB range and unknown throughput. Proposed version/migration: additive draft for a next contract version with explicit reader support; preserve imported v1, do not add unrecognized spec fields or silently reinterpret historical values. Namespaced intake annotations do not become approved canonical fields.
 
@@ -206,7 +206,15 @@ This contribution recommends **explicit scenario headroom, with no universal num
 
 **Experiment disposition:** retain dense/MoE/topology and comparable-estimator requirements unless the accountable experiment/coordinator owners explicitly narrow them. This pass adds no hardware authorization, weights download or experiment. Historical failed spare-capacity screens are not current availability. The [#61 continuation table](../market/sizing-validation.md#coverage-and-authority-disposition-2026-10-18) names the missing hardware and comparison inputs. An interface receipt does not waive them.
 
-**Review still required:** #10 co-owners decide this headroom/consumption/placement proposal; #61 co-owners and coordinator decide any experiment narrowing and evidence acceptance; #9/#11 interface receipts are linked below, while #39's receiving decision remains pending; those receipts do not decide this methodology proposal. [#31's existing hardware-reuse receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484) remains accepted only within its stated scope. #40 retains versioned contract/rule review. Shared market handoff ledgers remain with #59's writer.
+**Review still required:** [@appletechie's 2026-10-18 co-owner response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewing main `66b46d4`, accepts explicit headroom with no universal default and note-only #61 consumption with constraints; it supplies no calibrated default, ResourceEstimate, runtime result or future-placement approval. Mattycodes69's methodology disposition and agreement on future build-bound placement remain open. #61 co-owners and coordinator retain experiment scope/evidence acceptance; #9/#11 interface receipts and appletechie's constrained #39 response do not decide those matters or speak for PUSHINGSQUARES. [#31's existing hardware-reuse receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484) remains accepted only within its stated scope. #40 retains versioned contract/rule review. Shared market handoff ledgers remain with #59's writer.
+
+### Research arithmetic check for the headroom proposal
+
+The [memory-screen helper](compute/memory_screen.py) makes the proposed reserve accounting reviewable without running a device or changing the historical `t2-dense-kv-memory` v0.2.0 examples. Its [synthetic regression cases](../../tests/test_t2_memory_screen.py) exercise the documented sensitivity boundary, exact equality/one-byte excess, already reduced pools, missing inputs and invalid values. They are arithmetic fixtures, not research measurements or approved compatibility rules.
+
+The caller must provide integer byte bounds for upper live demand and lower capacity, a finite Decimal headroom fraction, an explicit before/after-reserve capacity basis, confidence eligibility and matching-domain assertions. There are no default reserves or implicit confidence/domain approvals. A pre-reserve capacity is reduced once; an already reduced engine pool is compared directly. The traceable reserve fraction is still required for either basis. Missing/unsatisfied eligibility or domain agreement gives `unknown`; invalid/non-finite inputs are rejected. Exact rational arithmetic prevents rounding at a capacity boundary from hiding an excess.
+
+A helper `pass` means only that the supplied upper bound clears the supplied budget; `fail` means **may not fit under those inputs**. Inputs are caller assertions: the helper does not verify provenance, discover missing memory terms, decide applicability, calibrate error, select a GPU count, prove engine support or establish a throughput/latency target. A positive arithmetic result must not be presented as measured fit. The proposal still needs the named co-owner decisions and #40's versioned rule review; no ResourceEstimate is emitted.
 
 ## Pricing and capacity
 
@@ -228,17 +236,17 @@ No model weights, source PDFs, raw benchmark datasets, large downloads or new ex
 
 ## Open questions and handoffs
 
-The table retains its 2026-10-16 input questions, with live owners, directional receipts and the separate #10/#61 proposal state refreshed on 2026-10-18. Three of four required consumers (#9/#11/#31) have scoped receipts; #39 remains pending. Interface acceptance does not decide headroom, calibration, measurement scope or ResourceEstimate placement, and does not accept another co-owner's scope. A proposal or review request is not confirmation.
+The table retains its 2026-10-16 input questions, with live owners, directional receipts and the separate #10/#61 proposal state refreshed on 2026-10-18. Required consumers #9/#11/#31 have scoped receipts; appletechie now supplies a constrained #39 co-owner response, while PUSHINGSQUARES's own disposition remains pending. Interface acceptance does not decide headroom, calibration, measurement scope or ResourceEstimate placement, and does not accept another co-owner's scope. A proposal or review request is not confirmation.
 
 | Follow-up / exact question | Responsible issue / owner | Impact / handoff state |
 | --- | --- | --- |
-| Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 / @appletechie | [#10 -> #9 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): preserve distinct IDs/units and regional offering versus deployability; @appletechie's scope remains separate |
+| Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 / @appletechie | [#10 -> #9 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): preserve distinct IDs/units and regional offering versus deployability; [@appletechie separately accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing main `66b46d4`: preserve IDs, source/normalized units and offering versus deployability |
 | Confirm current v0.31.0 versus historical v0.10.2 constraints, per-rank KV/adapter placement and engine-version invalidation? | #11, @zwright8 / @Mattycodes69 | [#10 -> #11 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): exact tuple, per-device allocation/topology, resident demand/admission and uncertainty; no pooled VRAM, inherited results or SLO assertion |
 | Reuse these physical IDs without treating inference capacity as training memory/time? | #31, @tynamite / @appletechie | [Accepted hardware-reuse boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484); missing records and training estimates remain separate |
-| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @appletechie / @PUSHINGSQUARES | Required #10→#39 acknowledgement pending |
+| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @appletechie / @PUSHINGSQUARES | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewing main `66b46d4`: quantity bounds and explicit concurrency/utilization/headroom, not price noise; @PUSHINGSQUARES's disposition remains separate |
 | Approve exact tensor/artifact revision and context policy; provide resident tensors and model-specific cache geometry? | #6, @zwright8 / @PUSHINGSQUARES; #7, @zwright8 / @appletechie | Informational compatibility handoff pending; calculations remain conditional |
-| Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @Mattycodes69 / @appletechie | Informational artifact handoff pending |
-| Accept explicit scenario headroom and note-only #61 consumption, with future build-bound placement? | #10, @Mattycodes69 and @appletechie; #61 co-owners and coordinator for experiment scope | Proposal above ready for disposition; no universal numeric reserve, calibration claim or ResourceEstimate emitted |
+| Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @Mattycodes69 / @appletechie | [@appletechie accepts with narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221): #33 supplies artifact lineage/rank/targets/variant/added-token tensors; resident adapter count is #11/#37 configuration, not an artifact fact |
+| Accept explicit scenario headroom and note-only #61 consumption, with future build-bound placement? | #10, @Mattycodes69 and @appletechie; #61 co-owners and coordinator for experiment scope | [@appletechie accepts explicit headroom and note-only observations with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221); Mattycodes69's disposition and future placement remain open. No universal reserve, calibration or ResourceEstimate emitted |
 | Finalize proposed rules, ResourceEstimate intervals/unknowns and bandwidth/topology/partition fields? | #40, @tynamite and @zwright8 | Accepted into central queue, narrowed in linked PR #75 review; CD-1/CD-2/CD-3 and affected-owner version review remain; no schema edits/final ruleset |
 | Complete per-source rights inventory and final evidence policy? | #41, @tynamite and @PUSHINGSQUARES | Interim freshness/conflict/short-paraphrase policy adopted in linked review; no automation/mirroring permission presumed |
 | Confirm current account/region offer, quotas, runtime free memory and deployment measurement procedure? | #37, @appletechie / @PUSHINGSQUARES | Deployment research input only; no provisioning performed |
@@ -257,7 +265,7 @@ The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-r
 | Comparison fields defined with type, unit, evidence requirement | Comparison table | Supplied |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Supplied as proposals; central review pending |
 | Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; source-mapped catalog provenance; derived formulas | Prepared for independent evidence review; source rendering and unit conflicts disclosed |
-| Each handoff confirmed by consuming issue owner with link | Handoff table | Partial: #9/#11/#31 have scoped receipts; #39 remains pending. Headroom/calibration and #61 evidence/placement are separate decisions |
+| Each handoff confirmed by consuming issue owner with link | Handoff table | Scoped #9/#11/#31 receipts plus appletechie's constrained #39 response; PUSHINGSQUARES's scope remains pending. Mattycodes69's methodology decision, calibration, full #61 evidence and future placement remain separate |
 | Open questions with named follow-up owner | Table above | Supplied |
 
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
@@ -315,3 +323,22 @@ PDF download returned HTTP 403 from the environment proxy; no hash, local PDF
 capture or redistribution permission is claimed. Dates/document versions are
 recorded; mutable URLs are not immutable evidence. No source freshness guarantee,
 current stock, rate binding or runtime measurement follows from this research.
+
+
+## Explicit-headroom arithmetic follow-up validation (2026-10-18)
+
+Prepared from main `fb434fd75685d9c5788a8181548af6ecbd5cce81` with Python **3.12.14**. Pinned requirements were checked with `python -m pip install -r requirements-research.txt --target <temporary-directory>`; `PYTHONPATH` selected that directory and `PYTHONUTF8=1` made Windows text handling explicit.
+
+| Command | Actual result |
+| --- | --- |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
+| `python -m unittest discover -s tests -v` | 192 passed, including 8 new synthetic memory-screen tests |
+| `python scripts/validate_research.py` | Passed: 74 CatalogItems, 3 Pricebooks and evidence metadata |
+| `python scripts/validate_market_research.py` | Passed: 33 entities / 1,584 cells / 20 issues |
+| `python scripts/validate_handoff_audit.py` | Passed: 101 rows / 98 declared pairs; human acceptance not certified |
+| `python prompts/mobile/validate_prompts.py` | Passed: 258 issues / 36 epics / 906 criteria / 880 steps |
+| `python research/T2-infrastructure/compute/sizing_examples.py` | Historical v0.2.0 arithmetic assertions passed; no device execution |
+| `python contracts/v1/reference/validate_payload.py contracts/v1/schemas/resource-estimate.schema.json contracts/v1/examples/resource-estimate.json` | Synthetic imported example valid; no real estimate created |
+| `git diff --check` | Passed |
+
+The focused regressions verify conditional arithmetic, not measurements, evidence eligibility or an executable approved ruleset. They use synthetic values only under `tests/`. Catalog facts, pricebooks, v1, historical sizing examples and the shared market evidence ledger are unchanged. Source truth, rights, calibration, Mattycodes69's methodology disposition, future placement and the remaining consumer scopes require evidence/owner review.
