@@ -1,6 +1,6 @@
 # MR-09: Review RAG interoperability market claims
 
-Issue: [#65](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65). Current desk review: **2026-10-18**. Live assignees at this read: zabyxc01, appletechie and itisSomeone. Status: **source findings prepared; independent evidence and five receiving decisions, final source review, checks and canonical delivery remain required.**
+Issue: [#65](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65). Current desk review: **2026-10-18**. Live assignees at this read: zabyxc01, appletechie and itisSomeone. Status: **desk evidence and five scoped receiving decisions accepted; final receipt amendment review, current checks and canonical delivery remain required.**
 
 ## Decision and scope
 
@@ -69,11 +69,13 @@ The seven E1–E7 locators retain their exact publisher, URL and revision mappin
 
 Only short factual paraphrases and source links are added. No upstream source file, weights, benchmark content, customer text or credentials are redistributed. Existing #60/#41 intended-use and source-eligibility boundaries remain in force; code/model licence declarations in #245 are not a new corpus or hosted-service grant.
 
-## Offered receiving scopes
+## Actual receiving decisions
 
-These are requests for actual accept/narrow/reject decisions on this exact note, not recorded acceptance. The live co-assignees below are preserved. A new delegated in-session engineering review, if provided under the project mandate, must identify its actual reviewer/input and must not be attributed to an absent named assignee.
+The [actual receiving decisions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864), recorded at 2026-10-18T13:05:44Z, accept the five bounded inputs below at commit `3b392e077bfd5522964fc8b852af8c170876dfd1`, note blob `54e87ece34100471cd99ed2ff99deade8cdcfd1a`. These are the root assistant's actual in-session engineering decisions under the user's express project delegation, posted through CompleteDotTech. They are not attributed to absent named co-assignees; live assignments and those owners' own future responses remain intact.
 
-| Consumer and live co-assignees | Offered finding | Remaining owner work |
+The [canonical handoff ledger](handoffs.json) appends this one actual receiving receipt to each of the five existing #65 rows. Their current acceptance/action summaries are reconciled without changing any historical owner, response, declaration, cutoff classification or prior receipt. The remaining owner work below stays explicit; these decisions do not complete a receiving issue or adopt a component, rule or deployment.
+
+| Consumer and live co-assignees | Accepted finding, within the linked conditions | Remaining owner work |
 | --- | --- | --- |
 | #14 — zabyxc01, PUSHINGSQUARES | The pinned dense width/dot example and explicit separation of representation, encoder identity, query/document policy and normalization. | Select and validate the actual encoder/wrapper; retain model/input rights and other representations. |
 | #15 — zabyxc01, appletechie | Qdrant's pinned configuration checks, vector-name/metric requirements and deployment-dependent transport/auth capabilities. | Establish the actual collection/index configuration, client lock and permitted operation scope; no selected database or universal fit is adopted. |
@@ -81,17 +83,27 @@ These are requests for actual accept/narrow/reject decisions on this exact note,
 | #25 — CompleteDotTech, Mattycodes69 | Pinned adapter metadata, query/document method distinction and constructor/insertion side effects. | Pin installed framework/dependencies and embedding wrapper before execution; no general agent behavior or framework selection is accepted by the source comparison. |
 | #27 — CompleteDotTech, tynamite | A vector-store adapter is not evidence of an MCP server/client integration; the operation and credential boundaries need a separate wrapper identity. | Preserve protocol negotiation, transport/auth, capability/trust and tool-argument validation requirements; no MCP workload or wrapper was inspected here. |
 
+## Independent evidence review and validation
+
+The [separate E1–E7 source review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/332#pullrequestreview-5563078599), submitted at 2026-10-18T12:57:39Z, independently checked the pinned BGE/Qdrant/LangChain identities, dependencies, methods and side effects at the same `3b392e077bfd5522964fc8b852af8c170876dfd1` input and unchanged supplement blob `efd8ee8ac8671bf57df02cf425a5740bd7781161`. It read the BGE card and current Qdrant security guide through web retrieval and obtained the pinned GitHub source/tag bytes through the GitHub connector when web source retrieval was unavailable. Its acceptance is limited to the pinned comparison as desk evidence.
+
+The [whole-note evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/332#pullrequestreview-5563109791), submitted at 2026-10-18T13:06:15Z, accepts the complete note within its stated desk scope. The root reviewer independently read the note, retained protocol, supplement, published prompt, seven literal criteria and five live consumer scopes; recomputed the 99 matrix cells and their unchanged evidence records; and directly read all four current claim pages and the seven linked AWS documentation pages. It verified the narrowly supported LlamaIndex row, the actual hybrid-source disagreement and positive UserContext documentation. The E1–E7 source check remains attributed to its separate reviewer. No additional source correction was required.
+
+The five dispositions above and both source reviews concern the exact input commit `3b392e077bfd5522964fc8b852af8c170876dfd1`, tree `f54d9153f27db2ead6d5d83d7f263936928207fb`, canonical note blob `54e87ece34100471cd99ed2ff99deade8cdcfd1a`. They preserve the difference between a publisher declaration, an engineering inference, a selected configuration and an executed workload. No receiving decision supplies a model/package import, constructor call, embedding, service result, retrieval quality, corpus right or end-user authorization test.
+
+On that exact source before this receipt amendment, the author's Python 3.12 local run passed 654 repository tests, 21 contract tests and all four required validators. The whole-note reviewer separately read the complete [hosted source-check log](https://github.com/Pick-Your-AI/pick-your-ai-research/actions/runs/39128909471/job/117679825042): prepared checkout `db8cfa0b2b980fbbaf3eff3a0d5bd667f939bfa1`, composing this source with main `78cc8874`, passed the same six gates. These executions retain their actual revisions and are repository validation, not RAG execution. The final receipt amendment, newer accepted-main composition, current checks, ordinary protected merge and signed-main/issue/Project readback remain delivery gates in [PR #332](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/332).
+
 ## Literal acceptance map
 
-| Live #65 criterion, unchanged | Current evidence | Remaining gate |
+| Live #65 criterion, unchanged | Current evidence | Status and remaining boundary |
 | --- | --- | --- |
-| Inspect model embedding dimension and metric contracts | Pinned dense contract table, E1–E6 source inspection and explicit Bedrock identity gaps. | Independent evidence acceptance of this bounded desk finding. |
-| Check API and authentication boundaries | Adapter methods/dependencies, Qdrant security, Bedrock API/IAM/service-role/UserContext sources. | No runtime authentication pass is inferred; selected deployment work stays with the consumers. |
-| Separate connector existence from successful workloads | Claim inventory, three distinct evidence levels and explicit unexecuted conditions throughout. | No matrix full pass, successful workload or universal compatibility assertion. |
-| Hand findings to existing retrieval owners | Five exact offered receiving scopes above, including the #119 follow-up. | Actual receiving dispositions and canonical receipt reconciliation. |
-| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Exact E1–E7 pins, linked current publisher pages, immutable matrix input and labelled engineering inferences. | Final independent source/evidence review. |
-| Relevant technical owners review handoffs; unresolved decisions are named. | Current live co-assignees and owner-specific questions above. | Five actual scoped decisions, preserving all historical receipt objects. |
-| Repository checks pass; reviewer accepts the evidence before Done. | Required current-revision checks and source/receiving reviews will be attached to the delivery PR. | Guarded canonical merge, signed-main content/check readback and issue/Project reconciliation only after all literal criteria are satisfied. |
+| Inspect model embedding dimension and metric contracts | Pinned dense contract table and independently accepted E1–E7 source comparison; explicit Bedrock identity gaps. | Accepted as desk evidence. Actual encoder, wrapper and collection qualification remains with the consumers. |
+| Check API and authentication boundaries | Adapter methods, dependencies, Qdrant security and independently reviewed Bedrock API/IAM/service-role/UserContext sources. | Accepted documentary boundaries; no runtime authentication or authorization pass is inferred. |
+| Separate connector existence from successful workloads | Claim inventory and explicit distinctions between documentation, selected configuration and observed workload throughout. | Accepted separation; no matrix full pass, successful retrieval or universal compatibility claim. |
+| Hand findings to existing retrieval owners | Actual five-scope receiving receipt, including the #119 follow-up, recorded above and in the existing canonical ledger rows. | Scoped inputs accepted at their exact source; all receiving issues retain their remaining work. |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Exact E1–E7 pins, linked current publisher pages, immutable matrix input and labelled engineering inferences accepted in the independent source reviews. | The final receipt amendment's exact composition still requires review; original findings and source limits are preserved. |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Five actual delegated engineering dispositions with live co-assignees and owner-specific questions retained. | Receiving review complete for this note's bounded requests; no absent-assignee response or broader issue completion inferred. |
+| Repository checks pass; reviewer accepts the evidence before Done. | Exact original-source local and hosted checks, E1–E7 source acceptance and whole-note evidence acceptance recorded above. | Current final-amendment checks, independent composition review, guarded canonical merge, signed-main verification and issue/Project reconciliation precede completion. |
 
 ## Historical protocol checkpoint
 
