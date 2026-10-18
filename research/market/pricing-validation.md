@@ -1,6 +1,6 @@
 # MR-07: Validate price freshness and total-cost scenarios
 
-Issue: [#64](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64). Assignees (GitHub readback, 2026-10-18): @appletechie and @PUSHINGSQUARES. Status: independent integration review accepted the bounded desk audit in [PR #199 review 5561243681](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681); the separate #9/#39/#41 consuming-owner handoffs remain pending. This record answers the research-completeness question, not the cost or service equivalence of an installed build.
+Issue: [#64](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64). Assignees (GitHub readback, 2026-10-18): @appletechie and @PUSHINGSQUARES. Status: the bounded desk audit and three #9/#39/#41 receiving scopes are accepted by the [actual delegated engineering receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654). The earlier [PR #199 integration review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681) retains its separate historical scope. This record answers the research-completeness question, not the cost or service equivalence of an installed build.
 
 ## Question
 Can local and hosted configurations be compared with complete cost units?
@@ -14,7 +14,7 @@ Can local and hosted configurations be compared with complete cost units?
 - [x] Complete the 2026-10-18 primary-source recheck of all thirteen cited rates; repeat material checks before a later recommendation.
 - [x] Report assumption ranges and event-based invalidation triggers.
 - [x] Record exact source/version, conditions, failures and confidence.
-- [ ] Obtain the separate consuming-owner acceptance for the #9/#39/#41 handoffs; the actual independent integration review is recorded below.
+- [x] Record actual #9/#39/#41 technical receiving decisions under the user's project engineering delegation, separately from the historical integration review and without attributing a response to absent assignees.
 
 The [criterion map](#6-criterion-map-against-the-live-64-checklist) records the completed evidence and the exact receiving scopes for review. The live question explicitly permits idle, storage, egress and utilization to be shown as unknowns. A complete research audit can therefore conclude that its example quotes have incomplete coverage; it must not turn those omissions into zero or a service recommendation.
 
@@ -86,6 +86,18 @@ Reading: the API token-charge subtotals are below the dedicated endpoint compute
 - A8 R2 operations within the free allowance for low/expected; high 3M Class A and 30M Class B. The Standard free allowance is applied once at its monthly scope and is assumed unused by other work; it is not re-granted per component.
 - Serving: S1 HF L4 band (A3), or S1 local power band (A4).
 
+**Placement and data-path limit (#9):** these are separately priced components,
+not a provisionable deployment. RunPod's [network-volume documentation](https://docs.runpod.io/storage/network-volumes#network-volumes-for-pods),
+rechecked 2026-10-18, restricts native Pod attachment to Secure Cloud and makes
+eligible GPUs depend on the volume's location. The low band's Community Cloud
+compute therefore cannot simply mount the priced network volume. The same
+document describes S3-compatible access, but this scenario does not establish
+that transfer/staging workflow, its time or its additional storage/network
+costs. The Secure bands also need actual volume/GPU placement and the data path
+to HF serving. A current deployment quote must resolve those paths or use a
+separately evidenced alternative; the retained component-rate arithmetic is not
+evidence of deployability.
+
 | Line | Rate | Low | Expected | High |
 | --- | --- | --- | --- | --- |
 | Training GPU | RunPod 4090 note row | 0.92 | 2.41 | 3.07 |
@@ -93,10 +105,10 @@ Reading: the API token-charge subtotals are below the dedicated endpoint compute
 | Artifact storage after 10 GB free | `r2-standard-storage` | 0.00 | 0.15 | 0.60 |
 | R2 Class A / B after free allowance | `r2-standard-class-a/b-request` | 0.00 (A8) | 0.00 (A8) | 9.00 + 7.20 |
 | Serving | `hf-aws-l4-replica-hour` | 128.00 | 288.00 | 576.00 |
-| **First 30-day hosted subtotal** (one-off training plus the stated recurring lines) | | **132.42** | **297.56** | **609.87** |
+| **First 30-day component subtotal** (one-off training plus the stated recurring lines; placement/data path incomplete) | | **132.42** | **297.56** | **609.87** |
 | Local alternative: training + serving power | A4 × EIA | 0.12 + 6.97 = **7.09** | 0.22 + 59.32 = **59.54** | 0.99 + 207.36 = **208.35** |
 
-The one-off training GPU subtotal is $0.92 / $2.41 / $3.07. The selected volume, artifact, request and serving lines total $131.50 / $295.15 / $606.80 for the 30-day period; they recur only while the same quantities and retained-storage assumptions continue. Training is not charged again merely because another billing period starts. Serving is 96.79% of the expected first-period hosted subtotal (288 / 297.56, estimated), a result of these assumptions rather than a universal hosting ratio. The local alternative is again a power-only lower bound. Training excludes setup, data loading, evaluation, retries and minimum increments (T5 caveat). The independently scoped [T6 W5](../T6-deployment-operations/cost-estimate.md#w5-fine-tuning-a-one-off-job-and-continuing-hosting) illustrates Together/Azure provider training and hosting formulas separately; it does not make this RunPod/HF scenario complete.
+The one-off training GPU subtotal is $0.92 / $2.41 / $3.07. The selected volume, artifact, request and serving lines total $131.50 / $295.15 / $606.80 for the 30-day period; they recur only while the same quantities and retained-storage assumptions continue. Training is not charged again merely because another billing period starts. Serving is 96.79% of the expected first-period component subtotal (288 / 297.56, estimated), a result of these assumptions rather than a universal hosting ratio. The local alternative is again a power-only lower bound. Training excludes setup, data loading, evaluation, retries and minimum increments (T5 caveat). The independently scoped [T6 W5](../T6-deployment-operations/cost-estimate.md#w5-fine-tuning-a-one-off-job-and-continuing-hosting) illustrates Together/Azure provider training and hosting formulas separately; it does not make this RunPod/HF scenario complete.
 
 Neither scenario reaches `coverage=complete` under [PRICING_AND_GATES.md](../../contracts/v1/docs/PRICING_AND_GATES.md); `cost.monthly_total_amount` must stay `unknown`.
 
@@ -105,6 +117,7 @@ Neither scenario reaches `coverage=complete` under [PRICING_AND_GATES.md](../../
 | Meter / cost | Where it bites | Status |
 | --- | --- | --- |
 | Idle capacity | HF replicas billed while running/initializing whether or not serving; local box idle draw; RunPod volume billed while compute is stopped | Modelled only by assumption bands A3/A4; no meter for idle vs active |
+| Working-storage placement and data movement | S2 Community/Secure compute, network volume, staging and HF serving | Community Pods cannot natively attach the priced network volume. No end-to-end alternative transfer/staging path is established or priced; Secure volume/GPU placement is also unverified. |
 | Egress | HF endpoint and RunPod transfer; local ISP | No v1 meter; unpriced. R2 states egress free (documented, not a Pricebook line) |
 | Utilization / capacity | Tokens per GPU-hour, replicas needed for A1 | No ResourceEstimate; A5 unverified |
 | Operator time | Local maintenance, endpoint ops | No meter, no sourced rate |
@@ -123,6 +136,7 @@ Recompute both scenarios and recheck the affected source before any recommendati
 - any cited rate, free allowance, multiplier (long context, cache, residency) or billing granularity changes, or a source page stops stating it;
 - a new SKU, GPU type or model snapshot replaces `gpt-5.4-2026-03-05`, `claude-sonnet-5-5`, AWS L4 or RTX 4090, or a catalog item version changes;
 - the region or data-center changes (HF region unbound; RunPod data center; residency/geo endpoints);
+- the RunPod cloud class, volume/GPU attachment or transfer/staging path changes; the S2 low band supplies no native Community-volume attachment;
 - the currency is not USD or a quote needs tax;
 - the workload assumptions A1–A8 move outside their bands, prompts exceed 272K, or a ResourceEstimate/quality run contradicts A5;
 - the Pricebook revision, selected catalog version, eligible evidence for that tuple, applicable rule version or source-use decision changes; or an explicit source validity boundary is reached.
@@ -142,18 +156,24 @@ No numeric drift was found in the 13 referenced rates on 2026-10-18, so this rer
 | Recheck live rates before recommendations | Section 1 and retrieval notes | Fresh reread complete; no service-equivalence or cost recommendation is issued. | Recheck material inputs before any later recommendation. |
 | Report ranges and invalidation triggers | Sections 2 and 4 | Assumption bands are separate from confidence intervals; one-off and recurring costs and event-based invalidation are explicit. | No automatic TTL, new FX policy or universal amortization convention. |
 | Every significant conclusion linked to evidence or hypothesis | Rate IDs, primary links, A1–A8 and formulas | Source statements and derived arithmetic remain distinct from runtime/quality hypotheses. | A5 capacity and quality equivalence is unmeasured. |
-| Relevant technical owners review handoffs; unresolved decisions named | Scoped receiving package below; [review 5561243681](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681) | Independent integration review accepted all three bounded scopes at `c08484c`; its exact receipt is preserved in the canonical ledger. Consuming-owner acceptance is still pending. | Live assignees are unchanged. Each named consumer must accept, reject or narrow its handoff; residual T2, #39 and #41/#60 questions remain with that consumer. |
-| Repository checks pass; reviewer accepts evidence | Section 7 and [review 5561243681](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681) | Independent evidence, source and arithmetic review accepted; validation recorded below. | Current-head CI and the reviewed merge establish publication of this partial audit; #64 remains open for its separate consuming-owner acceptance criterion. |
+| Relevant technical owners review handoffs; unresolved decisions named | Scoped receiving package below; [actual receiving receipt 6249212654](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654) | All three bounded technical receiving scopes accepted under the user's project engineering delegation. The actual reviewer and inputs are recorded separately from #199 and the historical assignee-response snapshot. | Live assignees are unchanged. Residual selected-deployment, meter/coverage and source-use questions stay with T2, #39 and #41/#60; their complete issues are not accepted here. |
+| Repository checks pass; reviewer accepts evidence | Sections 7–8; [actual evidence/receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654) | Independent source and arithmetic review accepts the bounded documentary finding, including incomplete quote coverage. Historical and current validation are distinguished below. | The final canonical amendment requires current required checks, independent source review and reviewed merge before issue reconciliation. Those delivery gates do not manufacture runtime, entitlement or bill evidence. |
 
 ### Scoped receiving package
 
-These are concrete research interface decisions under the user's project-wide engineering delegation. They preserve live GitHub assignees and do not assert a response by an assignee who did not post one. The [independent integration review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681) accepted each scope on 2026-10-18 at `c08484cdc27ad43d7251da5f31ca2fad3a89c28a` (tree `3f5ae899cefadfa6dca5b637a6ded3d9dd46c37b`). These exact integration decisions are recorded in the shared handoff ledger as post-snapshot reviews, separate from its 02:50:05Z assignee-response audit. They do not satisfy the separate consuming-owner acceptance requirement: the three canonical `receiving_review_status` fields remain `not_yet_confirmed`. Each consuming owner still needs to accept, reject or narrow the corresponding research input.
+These are concrete research interface decisions under the user's project-wide engineering delegation. They preserve live GitHub assignees and do not assert a response by an assignee who did not post one. The [independent integration review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199#pullrequestreview-5561243681) accepted each scope on 2026-10-18 at `c08484cdc27ad43d7251da5f31ca2fad3a89c28a` (tree `3f5ae899cefadfa6dca5b637a6ded3d9dd46c37b`). That receipt remains an integration decision; its authority is not retroactively expanded.
 
-| Consumer | Scope accepted by independent integration review | Named remaining question |
+The separate [actual independent engineering receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654), posted through `CompleteDotTech` at **2026-10-18T11:14:18Z**, accepts the three scopes below. It identifies the note at `8dfec2d58661232f5128f954cf2b5840450732a8`, blob `f0c2c16b9a1d49e5cb1bd2f947f1113414a80f57`, and the two exact Pricebook blobs, unchanged through its fetched main `19de6ee8301487ff70cbf5ec2ac539f4b481a628`. It includes an independent five-page rate-source review and 39-value Decimal recomputation plus the hosting-share ratio. Its RunPod Community markup retrieval failed with HTTP 403, so it does not claim an independent fresh retrieval of that note-only value; the separate research-engineer readback in section 8 has its own attribution.
+
+Both actual receipts are retained in the shared ledger as separate `post_snapshot_reviews`. The 02:50:05Z assignee-response audit and its three `receiving_review_status: not_yet_confirmed` values are historical snapshot fields, not a veto on the later delegated technical decisions. They remain unchanged, as do every assignee, earlier reviewer and scope. These receiving decisions accept the bounded research inputs only.
+
+The subsequent [anchored source and receiving review 5562769687](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/317#pullrequestreview-5562769687), posted through `CompleteDotTech` at **2026-10-18T11:37:13Z**, independently accepts the corrected placement interpretation at published head `adcce4d02e342c12ba30e2ea93ae2d9f46eb3b7f`, note blob `4497487b37640d1a4bb524ae52016925abd9439e`. It confirms all numeric tokens in 62 retained table rows are unchanged and freshly reads the RunPod volume conditions, while preserving that reviewer's earlier Community-markup retrieval limit and not claiming a new Python run. Its actual #9/#39/#41 receiving dispositions explicitly include cloud-class, volume/GPU placement and unpriced transfer-path limits. This later receipt is appended separately to the same three ledger rows; it does not replace either earlier receipt or expand their reviewed revisions.
+
+| Consumer | Scope accepted by current delegated engineering receiving review | Named remaining question |
 | --- | --- | --- |
 | #9 Hosting | **Accepted:** the conditional HF per-replica/minute and RunPod volume/tier source observations as dated hosting inputs. Region, quota, startup duration and service equivalence remain unknown where the source or scenario does not establish them. | T2 hosting/compute owners retain selected-region availability, endpoint startup and actual capacity evidence. |
 | #39 Cost Estimate | **Accepted:** the arithmetic audit, one-off/recurring split, scoped allowances and explicit uncovered-meter inventory as research inputs. The output is a partial subtotal, so it cannot pass a complete-coverage budget gate or prove that local/hosted service is equivalent. | #39 retains new meter, aggregation/rounding, commitments and selected-workload quantity decisions; no new unit or pricebook is adopted here. |
-| #41 Data Sources | **Accepted:** the dated-source and failure/drift treatment and withdrawal of the unaccepted TTL. Source-checked facts remain unverified in v1; historical pins persist; price or condition changes trigger evidence review without an automatic saved-build rewrite. | #41/#60 retain source-use rights and conflict policy; this audit grants no extra retrieval, display or redistribution right. |
+| #41 Data Sources | **Accepted:** the dated-source and failure/drift treatment and withdrawal of the unaccepted TTL. Source-checked facts remain unverified in v1; historical pins are retained where rights permit, with current eligibility reviewed separately; price or condition changes trigger evidence review without an automatic saved-build rewrite. | #41/#60 retain source-use rights and conflict policy; this audit grants no extra retrieval, display or redistribution right, and #60's accepted exclusions remain in force. |
 
 The #58 informational input is the same conclusion: cost-only recommendations require evidence beyond these partial examples. It does not establish willingness to pay, customer demand or an MVP decision.
 
@@ -174,5 +194,50 @@ A separate Decimal recomputation read the thirteen unchanged Pricebook rates and
 
 The subsequent reconciliation with [#197](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/197) preserves its 101-pair dated audit and records only the three actual post-snapshot integration decisions. The source and arithmetic review above remains pinned to `c08484c`; [#199's checks](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199/checks) record validation of the final integrated head. The local results above describe the reviewed source tree.
 
+## 8. Separate source and consumer check — 2026-10-18
+
+The current in-session research engineer independently reread the five primary
+rate sources in section 1 and the two note-only sources, starting from accepted
+main `3d395801742461aa82ac31a21857ec6f8d0270fb`. The thirteen Pricebook amounts
+and material conditions still match. The OpenAI model/pricing Markdown was read
+directly because web text extraction omitted material columns and rejected its
+Markdown content type. RunPod's actual HTML JSON-LD `#gpu-rtx-4090` still names
+the Community and Secure offers separately, with page date `2026-10-08`.
+EIA still publishes the preliminary July 2026 sector averages released on
+2026-09-24; these remain statistical averages, not a user's tariff. No account,
+paid workload or new price record was created.
+
+This source check also found the S2 placement ambiguity clarified above.
+The [hosting record](../T2-infrastructure/hosting.md#infrastructure-storage-comparison)
+already distinguishes Secure Cloud volume attachment, datacenter scope and
+uncertain invoice rounding. The [cost record](../T6-deployment-operations/cost-estimate.md#integration-constraints-from-the-unit-normalisation-draft)
+keeps the selected period, provider billing increments and allowance scope
+explicit. The [source record](../T0-configuration/catalog-data-sources.md#freshness)
+preserves dated facts and scope before recency. The audit can be received as
+conditional component arithmetic and an uncovered-cost inventory within those
+boundaries. It does not adopt the broader #39/#41 draft policies, new meters,
+FX or rounding conventions, or any production eligibility.
+
+The in-session Android engineer independently read the complete original note,
+the two Pricebooks and the linked T5 scenarios at `3d395801`, then recomputed
+37 monetary checks and the 96.79% hosting-share ratio. All agreed. That engineer
+also reviewed the full placement-clarification delta at `eaac597022afcd2983ede90113d9a5617dc6f7c8`,
+note blob `4497487b37640d1a4bb524ae52016925abd9439e`: amounts and Pricebook bytes
+are preserved, and the new limits prevent an unsupported deployability claim.
+This bounded arithmetic/consumer review does not claim a fresh source read by
+that reviewer. The separately attributed source and receiving review posted through
+`CompleteDotTech` is recorded above.
+
+The source clarification was checked from an exact Git-tree archive composed
+with accepted main `19de6ee`: 546 repository tests and 21 frozen-contract tests
+passed, along with all four validators (76 catalog proposals/3 Pricebooks,
+33 market entities/1,584 cells/20 issues, 101 handoff rows/98 declared pairs,
+and the mobile-prompt inventory). All 619 committed paths and blobs were
+verified before and after every command. These are the source-candidate
+results; the receipt amendment and any newer accepted main require their own
+current validation and final independent review in [#317](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/317).
+No frozen contract, source record, rate, published quote or measured workload
+was changed by this documentary amendment.
+
 ## Result
-The desk audit is complete for its stated 13-rate inventory and two conditional scenarios. Its finding is that neither scenario is a complete quote and neither proves service equivalence. The independent integration review accepts that bounded result and the three proposed receiving scopes above. The reviewed merge and final CI publish this partial audit; #64 remains open until the separate consuming-owner handoffs are accepted; incomplete quote coverage is the documented result, not an omitted research step. No raw customer data, benchmark artifact or paid API output was collected. Consumers: #9, #39, #41; informational input for #58.
+The desk audit is complete for its stated 13-rate inventory and two conditional scenarios. Its finding is that neither scenario is a complete quote and neither proves service equivalence. Actual independent evidence review and delegated engineering receiving decisions accept that bounded result and the three scopes above. These accepted findings support #64 research completion once the current required checks and independently reviewed canonical amendment are delivered; incomplete quote coverage is the documented result, not an omitted research step. No raw customer data, benchmark artifact or paid API output was collected. Consumers: #9, #39, #41; informational input for #58. Their remaining operational, policy and issue-completion criteria are separate.

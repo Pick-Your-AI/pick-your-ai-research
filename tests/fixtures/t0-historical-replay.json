@@ -1,0 +1,42 @@
+{
+  "x_t0_historical_replay": {
+    "proposal_version": "cd7-replay-0.1",
+    "build_sha256": "26762208769a8cf1012b4f33b1c1608556d275187ce21117d0b9632cdf951864",
+    "revision_locks_sha256": "2b06abe49c8e192ad0aa96c95fbe755816bc76ea97d0792582cf31dfd65f74aa",
+    "evaluator": {
+      "profile": "frozen-v1-reference-py312-decimal28",
+      "sha256": "092c8a99495f9b5ae960df40b27e33f15eefe6d1a7cd80119658fdc79ada1a5a",
+      "schemas_sha256": "eaaf51a04c9bd0c7fce23e7ecc75724226e26b337cc1da04b88a59d2a912914f"
+    },
+    "inputs": {
+      "ruleset": {
+        "id": "rules.fixture.1",
+        "version": "1.0.0",
+        "sha256": "05474568204fdbfd407cb4e4cfc9334e22fdf24e75111bed8990868926fab418"
+      },
+      "dependency_graph": {
+        "id": "dependencies.core.1",
+        "revision": 1,
+        "sha256": "e9b3bca19a9cf8241fd74f6618824882a3413649822add88be1ac93cb3f1bacc"
+      },
+      "resource_estimate": {
+        "id": "resources.fixture.1",
+        "build_id": "build.fixture.1",
+        "build_revision": 1,
+        "sha256": "41469a377c0b428e779c269eb052fa8f455b4768e2add3c137b5e465a79a362f"
+      },
+      "cost_estimate": {
+        "id": "estimate.fixture.1",
+        "build_id": "build.fixture.1",
+        "build_revision": 1,
+        "sha256": "4b7c3889881d3c424ed98cc47b146b25b05df21c5459c9558717f21b6198b7e4"
+      },
+      "evaluation_report": {
+        "id": "evaluation.build.fixture.1.r1",
+        "build_id": "build.fixture.1",
+        "build_revision": 1,
+        "sha256": "039626962ef0f2c4f706614d775ad47eda1d148c58f736c98ad169fc153221f3"
+      }
+    }
+  }
+}
