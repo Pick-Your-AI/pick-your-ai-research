@@ -162,21 +162,54 @@ class ReplayResult:
                 "current_compatibility": "not_established"}
 
 
-def _retained_report_issues(build, bindings):
-    """Check available report identity even when another input prevents replay."""
-    binding = next((binding for binding in bindings
-                    if binding.kind == "evaluation_report" and binding.status == "resolved"
-                    and binding.raw is not None), None)
-    if binding is None:
-        return ()
-    report = decode(binding.raw)
+def _retained_input_issues(build, bindings):
+    """Check only associations supported by independently resolved exact bytes."""
+    documents = {binding.kind: decode(binding.raw) for binding in bindings
+                 if binding.status == "resolved" and binding.raw is not None}
+    locks = build["locks"]
     issues = []
-    if (report["build_id"], report["build_revision"]) != (build["id"], build["revision"]):
-        issues.append(("evaluation_report", "build_identity_mismatch"))
-    if any(report[name] != build["locks"][name] for name in (
+    rules, graph, report = (documents.get(kind) for kind in
+                            ("ruleset", "dependency_graph", "evaluation_report"))
+    if rules is not None and (rules["id"], rules["version"]) != (locks["ruleset_id"], locks["ruleset_version"]):
+        issues.append(("ruleset", "build_lock_mismatch"))
+    if graph is not None and (graph["id"], graph["revision"]) != (locks["dependency_graph_id"], locks["dependency_graph_revision"]):
+        issues.append(("dependency_graph", "build_lock_mismatch"))
+    for kind in ("resource_estimate", "cost_estimate", "evaluation_report"):
+        document = documents.get(kind)
+        if document is not None and (document["build_id"], document["build_revision"]) != (build["id"], build["revision"]):
+            issues.append((kind, "build_identity_mismatch"))
+    if report is not None and any(report[name] != locks[name] for name in (
             "catalog_snapshot_id", "ruleset_id", "ruleset_version",
             "dependency_graph_id", "dependency_graph_revision")):
         issues.append(("evaluation_report", "build_lock_mismatch"))
+    selections = {selection["id"]: selection for selection in build["selections"]}
+    resource, cost, prices, catalog = (documents.get(kind) for kind in
+                                      ("resource_estimate", "cost_estimate", "pricebook", "catalog_snapshot"))
+    if resource is not None and any(selection_id not in selections
+            for estimate in resource["estimates"] for selection_id in estimate["selection_ids"]):
+        issues.append(("resource_estimate", "selection_identity_mismatch"))
+    if prices is not None and catalog is not None:
+        members = {(item["id"], item["version"]) for item in catalog["items"]}
+        if any((rate["catalog_item_id"], rate["catalog_item_version"]) not in members
+               for rate in prices["rates"]):
+            issues.append(("pricebook", "rate_catalog_mismatch"))
+    if cost is not None:
+        # The original Build alone establishes this lock and its selection IDs.
+        # It cannot establish a missing Pricebook's rates or their meanings.
+        if cost["pricebook_id"] != locks.get("pricebook_id"):
+            issues.append(("cost_estimate", "pricebook_identity_mismatch"))
+        if any(line["selection_id"] not in selections for line in cost["line_items"]):
+            issues.append(("cost_estimate", "line_identity_mismatch"))
+        elif prices is not None and cost["pricebook_id"] == prices["id"]:
+            rates = {rate["id"]: rate for rate in prices["rates"]}
+            for line in cost["line_items"]:
+                selection, rate = selections[line["selection_id"]], rates.get(line["price_rate_id"])
+                if (rate is None or (rate["catalog_item_id"], rate["catalog_item_version"], rate["meter"])
+                        != (selection["catalog_item_id"], selection["catalog_item_version"], line["meter"])):
+                    issues.append(("cost_estimate", "line_identity_mismatch"))
+                    break
+        if any(selection_id not in selections for selection_id in cost["unpriced_selection_ids"]):
+            issues.append(("cost_estimate", "selection_identity_mismatch"))
     return issues
 
 
@@ -229,13 +262,14 @@ class ReplayArchive:
             raise ReplayError("manifest_sidecar_mismatch")
 
         profile_issues = []
+        association_issues = ()
 
         def result(status, issues=(), bindings=(), generated=None):
             # Reader availability and retained data identity are independent.
-            # An unavailable reader must not erase an exact historical report
-            # or diagnostics already established for another pinned artifact.
+            # An unavailable reader must not erase exact historical records
+            # or diagnostics established from independently pinned artifacts.
             issues = list(issues)
-            for issue in _retained_report_issues(build, bindings):
+            for issue in association_issues:
                 if issue not in issues:
                     issues.append(issue)
             if profile_issues:
@@ -261,6 +295,7 @@ class ReplayArchive:
         else:
             bindings.append(ReplayBinding("pricebook", "not_supplied"))
         bindings.extend(self._bind(kind, packet["inputs"][kind]) for kind in INPUT_SCHEMAS)
+        association_issues = _retained_input_issues(build, bindings)
         issues = [(binding.kind, binding.status) for binding in bindings
                   if binding.status not in {"resolved", "not_supplied"}]
         if issues:
@@ -277,48 +312,12 @@ class ReplayArchive:
             # historical rule failures remain a separate evaluator outcome.
             return result("input_identity_mismatch", selection_issues, bindings)
         documents = {binding.kind: decode(binding.raw) for binding in bindings if binding.raw is not None}
-        locks = build["locks"]
         rules, graph, report = (documents[kind] for kind in
                                 ("ruleset", "dependency_graph", "evaluation_report"))
-        if (rules["id"], rules["version"]) != (locks["ruleset_id"], locks["ruleset_version"]):
-            issues.append(("ruleset", "build_lock_mismatch"))
-        if (graph["id"], graph["revision"]) != (locks["dependency_graph_id"], locks["dependency_graph_revision"]):
-            issues.append(("dependency_graph", "build_lock_mismatch"))
-        for kind in ("resource_estimate", "cost_estimate", "evaluation_report"):
-            document = documents.get(kind)
-            if document is not None and (document["build_id"], document["build_revision"]) != (build["id"], build["revision"]):
-                issues.append((kind, "build_identity_mismatch"))
-        if any(report[name] != locks[name] for name in (
-                "catalog_snapshot_id", "ruleset_id", "ruleset_version",
-                "dependency_graph_id", "dependency_graph_revision")):
-            issues.append(("evaluation_report", "build_lock_mismatch"))
-        selections = {selection["id"]: selection for selection in build["selections"]}
-        resource, cost, prices = (documents.get(kind) for kind in
-                                  ("resource_estimate", "cost_estimate", "pricebook"))
-        if resource is not None and any(selection_id not in selections
-                for estimate in resource["estimates"] for selection_id in estimate["selection_ids"]):
-            issues.append(("resource_estimate", "selection_identity_mismatch"))
+        if association_issues:
+            return result("input_identity_mismatch", bindings=bindings)
+        resource, cost = (documents.get(kind) for kind in ("resource_estimate", "cost_estimate"))
         catalog = documents["catalog_snapshot"]
-        members = {(item["id"], item["version"]) for item in catalog["items"]}
-        if prices is not None and any((rate["catalog_item_id"], rate["catalog_item_version"]) not in members
-                                      for rate in prices["rates"]):
-            issues.append(("pricebook", "rate_catalog_mismatch"))
-        if cost is not None:
-            if prices is None or cost["pricebook_id"] != prices["id"]:
-                issues.append(("cost_estimate", "pricebook_identity_mismatch"))
-            else:
-                rates = {rate["id"]: rate for rate in prices["rates"]}
-                for line in cost["line_items"]:
-                    selection, rate = selections.get(line["selection_id"]), rates.get(line["price_rate_id"])
-                    if (selection is None or rate is None
-                            or (rate["catalog_item_id"], rate["catalog_item_version"], rate["meter"])
-                            != (selection["catalog_item_id"], selection["catalog_item_version"], line["meter"])):
-                        issues.append(("cost_estimate", "line_identity_mismatch"))
-                        break
-                if any(selection_id not in selections for selection_id in cost["unpriced_selection_ids"]):
-                    issues.append(("cost_estimate", "selection_identity_mismatch"))
-        if issues:
-            return result("input_identity_mismatch", issues, bindings)
         if len({item["id"] for item in catalog["items"]}) != len(catalog["items"]):
             return result("profile_unsupported", [("catalog_snapshot", "multiple_versions_per_item_id")], bindings)
         if profile_issues:
