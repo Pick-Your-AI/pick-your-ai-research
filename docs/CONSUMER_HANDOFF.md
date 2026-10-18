@@ -1,6 +1,8 @@
 # Consumer integration handoff
 
-Snapshot: 2026-10-18. Refs #40, #41, #39, #42. This is an index of existing artifacts and gates, not a new service contract or an acceptance receipt. Android, Apple and website consumers should record the exact research commit they consume; leaderboard metrics retain their own contract and do not confer research acceptance.
+Delivery readback: 2026-10-18. Refs #40, #41, #39, #42. This is an index of existing artifacts and gates, not a new service contract or an acceptance receipt. Android, Apple and website consumers should record the exact research commit they consume; leaderboard metrics retain their own contract and do not confer research acceptance.
+
+The [earlier open-PR snapshot](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/637957347c54d215f9ef27f2af122a5b9129d0fd/docs/CONSUMER_HANDOFF.md) and revision-specific review records remain historical evidence. The delivered records below update that snapshot's open-PR statuses; receiving requirements still follow the live issues and scoped owner receipts.
 
 ## Immutable baseline
 
@@ -25,17 +27,17 @@ Schema `$id` values under `schemas.ai-builder.example` are local identifiers, no
 | Outcomes | `pass/fail/unknown/skipped` and fixed `info/warning/error` severity are separate axes. Neither a passing error-severity rule nor an unknown outcome is a verified compatibility claim |
 | Evidence | [Merged #127 mapping](../research/T0-configuration/catalog-data-sources.md#mapping-evidence-labels-to-frozen-v1): source-checked-only new claims use `unverified`; historical `verified` values do not establish independent reproduction. [T4 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857) accepts that interface, not every consumer handoff |
 | Freshness | No invented TTL. Preserve capture dates and selected revisions. The [#137 price-policy supplement](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/137) is a merged proposal pending scoped owner acceptance; it does not make old rates current or decide default currency |
-| Cost | #39 retains currency, units, applicability and uncovered-meter decisions. Missing costs are not zero; mixed currencies cannot be summed without an accepted conversion policy. #113/#121 remain proposed research; no service implementation follows from their calculator |
-| Saved/shared builds | [#114](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114) remains a draft explicitly held until #40 is complete. Partial #40 merges do not release that hold or accept retention/sharing semantics |
+| Cost | #39 retains currency, units, applicability and uncovered-meter decisions. Missing costs are not zero; mixed currencies cannot be summed without an accepted conversion policy. #121 delivered the research calculator; its merge supplies no service implementation or remaining receiving acceptance |
+| Saved/shared builds | [#114](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114) delivered the partial proposal at [649f5870](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/649f5870e9729ec1aaf1b5f07e9290ce0f777833). #42 retains its native #40 prerequisite and pending SB/CD, retention, sharing and receiving-owner decisions |
 | Rights | [#60 source-by-use inventory](../research/market/rights-validation.md) controls the evidenced uses. Schema validity, a source URL and a checksum grant no redistribution rights |
 
-## Remaining receiving gates
+## Delivery status and remaining receiving gates
 
 - **#40:** @tynamite/@zwright8 and affected owners retain next-version schema, rule, migration and consumer decisions. Accepted routing/worked examples and a passing prototype do not fulfill the remaining handoffs.
 - **#41/#39:** @tynamite/@PUSHINGSQUARES retain #41 policy acceptance; @appletechie/@PUSHINGSQUARES retain #39 cost decisions and receiving dispositions. The price supplement is reviewable at the pinned revision above.
-- **#111:** [mobile migration guidance](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/111) still has the explicit maintainer no-merge hold and independent mobile receiving-review gap. The T0 review explicitly left mobile review to others. Companion mobile PR merges do not satisfy this research gate.
-- **#121:** [T6 consolidation](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121) retains @appletechie's change request. Corrections and re-review evidence are posted; the reviewer's disposition remains necessary. Keep #113/#115/#116/#118/#120 until their unique findings are preserved after the agreed #121-first sequence.
-- **#83:** [benchmark desk analysis](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83) now targets main and has one renewed approval, but @appletechie's change request and explicitly withheld #36/#39 receiving acceptance remain. No replication is claimed.
+- **#111:** [mobile migration guidance](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/111) merged at [da3c6045](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/da3c6045f84260506bd326bb24ddfa8a7e6a23e8). Its delivered guidance preserves the [canonical receiving paths](../prompts/mobile/MIGRATION.md); application implementation and receiving acceptance still require their own evidence.
+- **#121:** [T6 consolidation](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121) merged at [913c9b1e](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/913c9b1e974aff3b1a3a22a8ed339b99fa8e95b4). The original change requests, sibling PRs and later reconciliation records retain their revision-specific evidence. Individual T6 issue criteria and scoped receiving dispositions still apply.
+- **#83:** [benchmark desk analysis](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/83) merged at [51a5c552](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/51a5c552bd8dbf6fa6a11d07d6772a3ce9d305b6). Desk/source analysis is separate from benchmark replication and #36/#39 receiving acceptance.
 
 Refresh these live gates before integration or merge. This snapshot does not appoint owners, supply missing service infrastructure, or change issue/Project completion. A consumer receipt should identify the immutable research revision, consumed artifacts and accepted scope, test evidence, unresolved conditions, and the receiving issue/owner.
 
