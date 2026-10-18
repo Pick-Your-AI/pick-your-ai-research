@@ -24,10 +24,10 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 10.3 | Model â†” GPU rules in the #40 format | [gpu-compute.md](gpu-compute.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 10.4 | Decision record merged at `research/T2-infrastructure/gpu-compute.md` following the research method | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Merged in #75; full issue acceptance remains open |
 | 10.5 | Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
-| 10.6 | Comparison fields defined with type, unit, and evidence requirement | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
+| 10.6 | Comparison fields defined with type, unit, and evidence requirement | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Typed field table reviewed; incomplete native-precision subsets cannot safely stand for the frozen selected-precision field. H100/MI300X are note-only pending scoped semantics and receiving review |
 | 10.7 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [gpu-compute.md](gpu-compute.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 10.8 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [gpu-compute.md](gpu-compute.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Scoped #9/#11/#31 receipts; appletechie accepts #39 with constraints; PUSHINGSQUARES and other co-owner scope separate |
+| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Historical #9/#11/#31 receipts retained; both #39 responses are linked, including PUSHINGSQUARES's unapplied-headroom narrowing. Changed H100/MI300X intake eligibility needs its own receiving review; no earlier receipt is reassigned to it |
 | 10.10 | Open questions recorded with a named follow-up owner | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 11.1 | Support matrix keyed by engine version with sources | [inference-engine.md](inference-engine.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Artifact criterion satisfied: three examined releases and three historical rows with scoped sources; no runtime certification |
 | 11.2 | Rules in the #40 format, including `unknown` for unverified combinations | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Artifact criterion satisfied: shared proposal template and E27 owner decisions; unknown for missing eligible evidence, with documented outcomes/evidence status distinct; executable approval separate |
@@ -95,3 +95,17 @@ prepares 9.3/9.5/9.10 without asserting owner adoption. For 9.9, appletechie's
 actual #15/#37/#39 responses retain their limits; #14 and the substantive
 product/remaining co-owner decisions remain unresolved. No issue checkbox or
 Project metadata changes.
+
+## #10 precision intake and receipt review (2026-10-18)
+
+The [compute correction](gpu-compute.md#incomplete-precision-intake-correction-2026-10-18)
+reproduces the known frozen membership limit using two actual historical
+accelerator proposals, then keeps those incomplete candidates note-only.
+Independent review found the sizing arithmetic, explicit reserve accounting and
+four shared-format rule proposals coherent; this is artifact review, not
+calibration or approval of a versioned rule. The current T5 availability text
+reflects the withdrawal, while historical inventory and receiving receipts stay
+pinned to their original revisions. The actual later #39 response is narrowed
+to quantity/utilization inputs and requires an unapplied-headroom disclosure.
+No literal criterion, assignment, native relationship or Project field changes,
+and #10 remains open for the named semantic and receiving decisions.
