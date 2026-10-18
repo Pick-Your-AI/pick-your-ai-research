@@ -106,7 +106,7 @@ The [CD-7 synthetic fixtures](../../tests/fixtures/t0-migration.json) and [proje
 The [#81 answer-state policy](workload-use-case.md#unknown-and-missing-answers-proposal)
 already distinguishes `provided`, `unknown` and `missing`. Its compatibility
 and recommendation rules deliberately handle unresolved inputs differently.
-The #42 [reviewed draft](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114)
+The #42 [partial saved-build proposal](saved-shared-builds.md)
 also needs `withheld`. This experiment chooses a concrete candidate encoding
 for those requirements and for an explicit `not_applicable` answer. It does
 not release a successor contract or claim that those owners adopted this shape.
@@ -315,7 +315,7 @@ Routing from the reviews:
 | T1 limits (#123) | Typed, stage-specific limits for non-text inputs and outputs (units such as seconds, rows and pixels, never forced into token fields) | CD-11, CD-3 |
 | T6 drafts (#113, #118, #120, #121) | New price meters G1–G10; monitoring enums, `content_capture`, multiple exporters and telemetry edges; guardrail `supported_enforcement[]` and `operated_by` | #39 then #40; CD-4 for telemetry destinations |
 | T4 findings 1–7 (#25–#28, merged in #124) | Multi-selection quantifier (CD-13); memory-framework rule review (`on_unknown: review`, severity changed in a ruleset version); MCP transports, protocol versions and client capabilities; MCP hosting through #81's `deployment` object, with the air-gap rule folded into W-R8; credential resolution (T4-B6); side-effect classes and tool metrics; memory evidence fields; injected-token metric as a component of `input_tokens.max`; framework fields; snapshot-date `version` for unversioned hosted services | CD-13, CD-6, CD-4, CD-7, CD-3; #39 for meters and rate limits; #41 for versioning; #2 for the memory persistence need |
-| #42 draft (#114) SB-1 to SB-10, SB-R1 to SB-R5 | Saved-build record gaps (assumptions, snapshot and pricebook revision locks, visibility, derived validation state, fork lineage, several workloads, `withheld` answer state, where cross-record checks live) and integrity rules | #40; SB-8 with CD-1; SB-7 with #10 |
+| #42 partial proposal (#114) SB-1 to SB-10, SB-R1 to SB-R5 | Saved-build record gaps (assumptions, snapshot and pricebook revision locks, visibility, derived validation state, fork lineage, several workloads, `withheld` answer state, where cross-record checks live) and integrity rules | #40; SB-8 with CD-1; SB-7 with #10 |
 
 ## Cycles and recomputation (Proposal)
 

@@ -2,7 +2,7 @@
 
 Status: **unaccepted research proposal**, observed 2026-10-18. Supplement to [#40's decision record](component-schema-compatibility.md), not a replacement. Refs research #10, #11, #40, #41, #42; receiving requests [website #16](https://github.com/Pick-Your-AI/pickyour.ai/issues/16) and [website #17](https://github.com/Pick-Your-AI/pickyour.ai/issues/17).
 
-This document supplies reviewable choices for missing operations. It does not release an API version, select authentication or retention policy, assert a backend exists, or supply calibrated estimates. Do not merge it as an accepted shared contract without the affected owners' dispositions. Frozen `contracts/v1/` stays unchanged. #114's explicit hold until #40 closes remains in force.
+This document supplies reviewable choices for missing operations. It does not release an API version, select authentication or retention policy, assert a backend exists, or supply calibrated estimates. Do not merge it as an accepted shared contract without the affected owners' dispositions. Frozen `contracts/v1/` stays unchanged. The [saved-build proposal](saved-shared-builds.md#proposal-sequencing-decision--2026-10-18) merged in #114 under its recorded proposal-only sequencing decision. #42 completion still depends on #40 and its pending owner decisions; that merge does not approve these operations.
 
 ## Inspected baseline and boundary
 
@@ -83,7 +83,7 @@ Live assignees observed 2026-10-18; refresh before requesting acceptance. Routin
 | --- | --- | --- |
 | SO-1 operation and release | #40 @tynamite / @zwright8 | Accept/narrow/reject proposed revision scope, collection/error/pagination semantics and API versioning; publish immutable generated contract reference |
 | Capacity eligibility and real calibration | #10 @Mattycodes69 / @appletechie; #11 @zwright8 / @Mattycodes69; #41 @tynamite / @PUSHINGSQUARES | Scoped method/data and acceptance receipts; decide ambiguity handling and selection/metric applicability; no synthetic confidence substitution |
-| SO-2 saved-build policy | #42 @tynamite / @appletechie, with #41 and affected #37/#60 handoffs | Accepted privacy/auth/retention/sharing/revisit decisions, then list/delete schemas and lifecycle/error cases; retain #114's hold |
+| SO-2 saved-build policy | #42 @tynamite / @appletechie, with #41 and affected #37/#60 handoffs | Accepted privacy/auth/retention/sharing/revisit decisions, then list/delete schemas and lifecycle/error cases; retain #42's substantive #40 prerequisite and pending owner dispositions |
 | Backend implementation | Existing service-delivery owner to be identified through parent coordination | Authorized service base URL/version, supported operations, access policy, persistence behavior and contract/integration test evidence; research approval does not supply these |
 | Website/mobile integration | Receiving repository issue owners | Immutable accepted contract revision plus actual provider tests; compatibility remains Unknown without eligible evidence; do not enable HTTP persistence merely because this note exists |
 
