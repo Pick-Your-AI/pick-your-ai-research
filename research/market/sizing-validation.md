@@ -10,10 +10,10 @@ Where do planning estimates fail under real runtime conditions?
 
 ## Coverage and authority disposition (2026-10-18)
 
-**Retain the full empirical acceptance scope.** The user explicitly selected
-“Retain full scope; document hardware needed” for this continuation on 2026-10-18.
-Dense, MoE, multi-GPU and comparable-estimator requirements remain in scope;
-this direction does not authorize another device, reservation, download or cost. Sources inspected on 2026-10-18:
+**Retain the full empirical acceptance scope recorded in the live issue.**
+This research follow-up documents the hardware needed for the existing dense,
+MoE, multi-GPU and comparable-estimator requirements. It supplies no new
+device, reservation, download or cost authorization. Sources inspected on 2026-10-18:
 [live #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61),
 [Zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
 and the committed protocols/results at main
@@ -53,9 +53,9 @@ is ready for its co-owners' review, not an already accepted handoff. Preserve
 [PR #200](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/200) delivered
 the bounded accounting proposal and cohort-integrity guard to main at
 `5df5c8c017a4bc775b0702e436eaa8b281bda339`. Its publication review does not
-allocate experiment hardware. The full-scope choice above resolves the
-retain-versus-narrow question; identifying and authorizing the hardware path
-remains an action for @Mattycodes69/@appletechie with @CompleteDotTech.
+allocate experiment hardware. Identifying and authorizing the hardware path
+for the existing full scope remains an action for
+@Mattycodes69/@appletechie with @CompleteDotTech.
 
 The following requirements are transcribed or derived from the existing dated
 protocols, inspected 2026-10-18. These are not fresh availability observations
@@ -93,7 +93,7 @@ storage budgets, exact model/runtime/driver/backend pins, permitted process caps
 topology, run/stop conditions and artifact retention/cleanup. Identify whether
 the session uses existing spare local capacity or a newly approved reservation.
 A second device, larger reservation/cap or paid compute needs explicit
-authorization; this full-scope decision provides none of those permissions.
+authorization; this hardware checklist provides none of those permissions.
 Keep pre-existing workloads untouched. No new probe, download or experiment
 was performed to prepare this hardware checklist.
 

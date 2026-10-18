@@ -47,13 +47,12 @@ owner agreement and explicit matching-schema validation. No raw measurement is
 renamed to an estimate metric, no build IDs are fabricated, and no frozen schema
 is changed.
 
-Full empirical scope is retained by explicit user direction on 2026-10-18:
-“Retain full scope; document hardware needed.” The
+Full empirical scope remains as recorded in the live issue. The
 [hardware continuation checklist](sizing-validation.md#hardware-required-for-full-scope-continuation-2026-10-18)
 records existing numeric guards, the OLMoE payload floor, unquantified RAM/disk
-requirements and missing multi-rank instrumentation. The retain-versus-narrow
-choice is resolved for this continuation; a named authorized full hardware path,
-comparable estimator pairs and evidence acceptance remain outstanding. No new
+requirements and missing multi-rank instrumentation. This research follow-up
+records the hardware needed under that scope; a named authorized full hardware
+path, comparable estimator pairs and evidence acceptance remain outstanding. No new
 GPU run, download, hardware probe or device/cost authorization is supplied.
 Canonical market handoff ledgers remain with #59's writer; the linked receipt
 does not accept another co-owner's scope or the newly proposed #10 decisions.
