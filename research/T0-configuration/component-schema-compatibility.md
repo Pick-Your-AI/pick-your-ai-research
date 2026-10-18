@@ -943,6 +943,45 @@ rate rejection. Run `python -m unittest discover -s tests -p
 test_t0_cd7_consumer.py -v`. #40 and #42 remain open for their remaining
 contract/migration, replay and receiving requirements.
 
+### CD-7 capture timestamp guard (2026-10-18)
+
+Constraint 3 in [the current #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+identified a gap in the native inspection candidate: ASCII alone does not make
+`captured_at` a timestamp, and optional JSON Schema format providers are absent
+from the pinned research environment. A synthetic probe reproduced malformed
+calendar/time strings reaching inspection and complete-pair verification even
+when both artifact bytes and descriptor hashes were consistent.
+
+The test-only consumer now checks its capture representation explicitly at the
+wire, retained-artifact inspection and complete-pair boundaries. The supported
+profile is Gregorian years `0001`–`9999`, a real month/day, hours `00`–`23`,
+minutes/seconds `00`–`59`, optional nonempty decimal fractions, and explicit
+`Z`/`z` or a signed `HH:MM` offset through `23:59`. Lowercase `t` is accepted.
+Full-string matching rejects trailing newlines, control bytes and extra text.
+Original spellings, fractional digits, offsets and artifact bytes are retained;
+the check neither rounds values nor converts them to a current date.
+
+This is the candidate's supported subset of [RFC 3339 §§5.6–5.7](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6),
+checked 2026-10-18. Leap-second and year-zero representations are unsupported
+here; this does not change their treatment by frozen v1 or claim complete
+RFC 3339 support. Calendar validation uses Python 3.12's
+[`date`](https://docs.python.org/3.12/library/datetime.html#datetime.date),
+without an optional format package. These checks establish syntax/calendar
+support, not capture authenticity, source freshness or receiving acceptance.
+
+An unsupported retained capture keeps `artifact_representation_unsupported`
+and withholds only that artifact from this consumer result; the original
+archive remains readable and unchanged. The other artifact can stay resolved,
+and a complete pair remains unavailable. Existing digest mismatch takes
+precedence over inspecting untrusted artifact metadata. The
+[new regression suite](../../tests/test_t0_cd7_timestamps.py) disables optional
+format providers and exercises both artifact kinds, matching forged dates,
+retained prior pairs, valid timestamp spellings and original-byte preservation.
+No schema, protocol version, portable fixture, migration or publisher policy
+is adopted or changed. The separate full-string ID question and other CD-7
+owner constraints remain open; this addresses only the timestamp slice of
+constraint 3. #40 and #42 retain their full criteria and owners.
+
 ### CD-7 historical reference replay candidate (2026-10-18)
 
 **Engineering decision:** extend the existing CD-7 archive with a separate,

@@ -5,8 +5,11 @@ identity and catalog/rate membership only; source use remains unqualified.
 """
 
 from dataclasses import replace
+from datetime import date
 import json
 from pathlib import Path
+import re
+from typing import Final
 import unicodedata
 
 from jsonschema import Draft202012Validator, FormatChecker
@@ -31,6 +34,11 @@ REGISTRY = Registry().with_resources(
     + [("urn:pick-your-ai:cd7-pins:0.1", Resource.from_contents(PIN_SCHEMA))]
 )
 VALIDATOR = Draft202012Validator(SCHEMA, registry=REGISTRY, format_checker=FormatChecker())
+CAPTURE_TIMESTAMP: Final = re.compile(
+    r"([0-9]{4})-([0-9]{2})-([0-9]{2})[Tt]"
+    r"(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]"
+    r"(?:\.[0-9]+)?(?:[Zz]|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])"
+)
 
 
 class ConsumerError(ValueError):
@@ -39,6 +47,16 @@ class ConsumerError(ValueError):
     def __init__(self, code):
         self.code = code
         super().__init__(code)
+
+
+def require_capture_timestamp(value: str) -> None:
+    match = CAPTURE_TIMESTAMP.fullmatch(value)
+    if match is None:
+        raise ConsumerError("artifact_representation_unsupported")
+    try:
+        date(int(match[1]), int(match[2]), int(match[3]))
+    except ValueError as error:
+        raise ConsumerError("artifact_representation_unsupported") from error
 
 
 def encoded(value):
@@ -95,8 +113,8 @@ def wire(raw, wrapper):
                     raise ConsumerError("integer_representation_unsupported")
                 if key == "schema_version" and entry != "1.0.0":
                     raise ConsumerError("unsupported_schema_version")
-                if key == "captured_at" and isinstance(entry, str) and not entry.isascii():
-                    raise ConsumerError("artifact_representation_unsupported")
+                if key == "captured_at" and isinstance(entry, str):
+                    require_capture_timestamp(entry)
             pending.extend(child.values())
         elif isinstance(child, list):
             pending.extend(child)
@@ -154,8 +172,7 @@ def _binding(binding, limit, dispositions):
     if binding.raw is not None:
         try:
             document = bounded_json(binding.raw, limit)
-            if not document["captured_at"].isascii():
-                raise ConsumerError("artifact_representation_unsupported")
+            require_capture_timestamp(document["captured_at"])
         except ConsumerError as error:
             status = ("artifact_too_large" if error.code == "byte_limit_exceeded"
                       else "artifact_representation_unsupported" if error.code == "artifact_representation_unsupported"
@@ -260,8 +277,7 @@ def verify_complete_pair(response_bytes, request_bytes, build_bytes, sidecar_byt
             raise ConsumerError("invalid_artifact_document") from error
         if document["revision"] > MAX_REVISION:
             raise ConsumerError("native_revision_unsupported")
-        if not document["captured_at"].isascii():
-            raise ConsumerError("artifact_representation_unsupported")
+        require_capture_timestamp(document["captured_at"])
     try:
         archive = SnapshotArchive(list(artifacts.items()))
     except ValueError as error:
