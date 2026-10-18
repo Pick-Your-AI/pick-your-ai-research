@@ -24,3 +24,12 @@ Both boards use Status columns and Workstream swimlanes. All views sort by prior
 GitHub Projects cannot OR across different fields. Triage therefore includes Inbox, Triage and unset statuses through a negative status filter. The coordinator must move incomplete/unassigned work to Triage during intake; the separate metadata audit detects omissions even when a status is incorrect. No unassigned or incomplete Ready items were found in final readback. This limitation is not hidden behind a nonfunctional OR query.
 
 [View verification](../../research/market/view-verification.json) records actual matching issue IDs, including deliberately empty completed-research results. An anonymous browser cannot render a private project; verification used the authenticated API.
+
+
+## Current public visibility readback — 2026-10-18
+
+The configuration narrative and [JSON export](../../research/market/project-configuration.json) above describe the original private Project setup and its historical view verification. They are retained verbatim. A later independent, unauthenticated public REST read completed at **2026-10-18T21:59:38.704287Z** and returned Project 2 ID `27089046`, node `PVT_kwDOFHg4Xc4BnViW`, with **`public:true`**. Project 1 also returned `public:true` at 21:59:38.579887Z. The [dated QA capture](../../research/market/project-qa-2026-10-18-2152.json) records exact URLs, HTTP 200 results, byte counts and raw-response hashes.
+
+This establishes current visibility at those read times, not when, why or by whom visibility changed. No collaborator permission, repository permission or Project value was changed in this read. The earlier statement that an anonymous browser could not render the then-private Project remains historical; it is not a present restriction on these public endpoints.
+
+All nine custom-field node IDs and all 53 option IDs/names/order match the original configuration. The old GraphQL export's Created/Updated/Closed built-ins and the current REST response's Type field differ as explicitly recorded in the audit; no deletion is inferred. The twelve original views retain their earlier verification and exact export. This metadata pass does not claim a new view-layout/filter/permission test.
