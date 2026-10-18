@@ -402,3 +402,51 @@ identifiers must not be committed to public research. No key creation, policy
 change, authentication, cryptographic request or resource action was performed
 or authorized by this note. The earlier deletion-depth proposal remains a
 separate lifecycle control; key revocation is not a universal erasure proof.
+
+## MCP description and tool-list change follow-up (2026-10-18)
+
+Status: proposed extension of `untrusted-content-segregation`, addressing the
+explicit description/`listChanged` coverage objection in
+[appletechie's receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021)
+to [PUSHINGSQUARES's disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930).
+This does not retroactively describe the earlier control as complete or supply
+acceptance of this new proposal.
+
+**Source boundary.** The [MCP 2025-11-25 tools specification](https://modelcontextprotocol.io/specification/2025-11-25/server/tools)
+was read on 2026-10-18. `tools/list` returns tool definitions including descriptions
+and schemas. `listChanged` advertises whether the server emits change notifications;
+servers declaring it SHOULD notify when their available tool list changes.
+The specification's explicit untrusted-unless-trusted requirement addresses tool
+annotations. It does not, on this page, prescribe the description-review or approval
+invalidation policy below. These are project-policy inferences for #35/#40, informed
+by the [T4 threat handoff](../T4-agents-integrations/mcp-servers.md#security-and-trust-findings-for-35-findings-only-controls-belong-to-35),
+not a new protocol MUST, a reliable change-delivery guarantee or a measured defense.
+
+**Proposed control extension.** Treat server-provided descriptions, titles and
+schema descriptions as untrusted descriptive data when exposing tools to the
+model. Keep their origin distinct from application policy. Instructions embedded
+in those fields cannot authorize actions, expand permissions, override approval
+requirements or establish a trusted risk class. Apply this boundary to discovery
+and refreshed definitions, not just `tools/call` results. A trusted server identity
+or transport does not itself prove a particular description safe.
+
+Bind any reviewed exposure/approval decision to the selected server identity and
+the specific reviewed tool definition, including name, schema, description and
+risk-relevant metadata. A notification triggers a fresh list/read and comparison;
+it is not authorization to expose a new or changed tool. Hold an added or changed
+definition from use until its required review is current. If current identity or
+definition evidence is missing, keep the decision unknown and block the affected
+exposure/use claim. Absence of a notification does not prove the reviewed definition
+is still current. The eventual refresh interval and representation require owner
+review; this note supplies neither a universal interval nor an atomicity guarantee.
+
+**Synthetic acceptance cases (not executed).** A reviewed unchanged definition
+with current binding and the existing required authorization may pass this narrow
+control; this does not prove the call harmless. A same-name tool whose description
+or schema changed cannot reuse its old approval. A description requesting secret
+exfiltration supplies no authority even if its annotation says read-only. A missing
+current definition, ambiguous server identity or incomplete discovery remains
+unknown rather than safe. With no enabled MCP tool, this conditional control is
+skipped. #27 owns protocol/client evidence; #35 owns policy, #37 deployment and
+#38 change/audit visibility; versioned binding operands remain with #40. No runtime
+MCP connection, credentials, tool execution or production policy was changed.
