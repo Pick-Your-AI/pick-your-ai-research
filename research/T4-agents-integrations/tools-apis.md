@@ -136,7 +136,7 @@ Mapped to v1 JSON pointers. "Note only" means v1 cannot express it.
 | Lifecycle status | `/status` | expressible |
 | Provider | — | **note only** (no `provider_ref` on tool or integration) |
 | Category | `/tags` (convention) | partial; propose enum `category` |
-| Supported framework interfaces (OpenAI function JSON Schema, Anthropic tool use, MCP tool, provider server tool) | `/spec/protocol` covers transport only (`mcp` is a value) | **note only**; propose `interfaces[]` |
+| Supported execution interfaces (OpenAI function JSON Schema, Anthropic tool use, MCP tool, provider server tool) | `/spec/protocol` covers transport only (`mcp` is a value) | **note only**; propose `interfaces[]` with an explicit executor binding |
 | Input / output contract (JSON Schema) | — | **note only**; MCP requires `inputSchema` and allows `outputSchema` (B1); OpenAI `parameters` (B3); Anthropic `input_schema` (B4) |
 | Auth method | `/spec/auth_methods` (tool, integration) | partial: no `basic`, `jwt` or personal access token values |
 | OAuth scopes / permissions | `/spec/required_scopes` (tool); `/settings/allowed_scopes` (selection) | expressible as strings; no scope sensitivity (Google: Non-sensitive / Sensitive / Restricted, B19, B22) |
@@ -273,7 +273,7 @@ Rules are proposed to #40 using the [rule proposal template](../../templates/rul
 - **Source-checked (unverified):** the assertion is supported by cited primary text, and the expression uses only v1 fields.
 - **Hypothesis:** policy judgement or contract change needed.
 
-The ten remaining JSON rules below validate against `ruleset.schema.json`. Earlier synthetic fixture checks produced pass for scopes, guardrail and MCP rules, and skipped for cost and exfiltration rules. The former executable `credential.ref` rule is withdrawn: it falsely required a tool-local reference for shared and provider-hosted credentials. T4-B6 is now a contract-dependent proposal, not an executable v1 check; v1 cannot establish credential readiness by skipping or omitting that check.
+The ten retained JSON examples below validate against `ruleset.schema.json`; T4-B7 is preserved as a superseded universal framework prerequisite, not a current rule proposal. Earlier synthetic fixture checks produced pass for scopes, guardrail and MCP rules, and skipped for cost and exfiltration rules. The former executable `credential.ref` rule is withdrawn: it falsely required a tool-local reference for shared and provider-hosted credentials. T4-B6 is now a contract-dependent proposal, not an executable v1 check; v1 cannot establish credential readiness by skipping or omitting that check.
 
 ### Problems found in baseline T4 rules
 
@@ -401,16 +401,33 @@ Run `python -m unittest discover -s tests -p test_credential_binding.py -v`.
 
 ### T4-B7 `rule.t4.tool.protocol.mcp-framework`: framework must support the tool's protocol
 
-- Expressible today for MCP only. It extends `rule.agent.mcp.framework`, which triggers only when an `mcp_server` is selected, to tools whose `protocol` is `mcp`.
-- Severity: error; `on_unknown: block`. **Source-checked (unverified)** (B1 defines MCP tools; the framework capability comes from #25).
+**2026-10-18 disposition: withdraw the universal framework prerequisite.**
+The [follow-up source review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/318#pullrequestreview-5562844668)
+reproduced this example blocking an MCP tool when a framework is absent or
+disabled. It checks for a framework's presence, without establishing that the
+tool uses that framework as its executor. [W-R3](../T0-configuration/workload-use-case.md#w-r3-actions-need-a-t4-component)
+permits a tool or MCP component without a framework, and the [selection
+experiment](../T0-configuration/component-schema-compatibility.md#cd-13-synthetic-selection-experiment-2026-10-18)
+preserves the old framework requirement only as a historical counterexample.
+
+- The original JSON below remains byte-for-byte historical evidence. It extends the old `rule.agent.mcp.framework` prerequisite to a primary tool whose protocol is `mcp`; do not publish it as a successor compatibility rule.
+- Its original `error` severity and `on_unknown: block` behavior remain reproducible. B1's MCP definition and #25's framework capability evidence do not establish a universal requirement to select a framework.
 
 ```json
 {"id":"rule.t4.tool.protocol.mcp-framework","severity":"error","applies_when":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"tool","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"tool","role":"primary","pointer":"/spec/protocol"}},"right":{"literal":"mcp"}}]},"assert":{"op":"all","args":[{"op":"exists","value":{"ref":{"scope":"selection","kind":"agent_framework","role":"primary","pointer":"/id"}}},{"op":"eq","left":{"ref":{"scope":"catalog","kind":"agent_framework","role":"primary","pointer":"/spec/supports_mcp"}},"right":{"literal":true}}]},"on_unknown":"block","message":"An MCP tool is selected but the framework does not support MCP.","remediation":"Choose an MCP-capable framework or a non-MCP variant of the tool.","affected_kinds":["tool","agent_framework","mcp_server"],"owner":"t4-research"}
 ```
 
-**Needs contract change via #40:** a general interface rule. Provider-hosted server tools (Anthropic `web_search`, OpenAI `code_interpreter`) also require a specific model provider.
-- Missing fields: `spec_tool.interfaces` (enum `openai_function`, `anthropic_tool`, `mcp_tool`, `provider_server_tool`, `openapi`), `spec_agent_framework.tool_interfaces`, and `spec_tool.requires_provider_ref`.
-- **Hypothesis.**
+**Current interface proposal for #40 review:** check the tool against its
+explicitly selected executor. A framework capability check applies only after
+the binding identifies that framework as the executor. Direct MCP-client and
+provider-hosted paths require their own eligible protocol/provider evidence and
+connection binding. A framework elsewhere in the build does not establish that
+binding. Missing, ambiguous or unresolved bindings/capabilities remain unknown
+for review; absence of a framework does not by itself establish tool readiness.
+Known incompatibility must remain visible within the selected execution path.
+
+- **Hypothesis; needs contract change via #40 with #25/#27:** tool interfaces, executor identity/binding and that executor's supported interfaces need a versioned representation. The earlier `spec_tool.interfaces` enum (`openai_function`, `anthropic_tool`, `mcp_tool`, `provider_server_tool`, `openapi`), `spec_agent_framework.tool_interfaces` and `spec_tool.requires_provider_ref` names are proposed concepts, not adopted v1 fields. Provider-hosted tools (including Anthropic `web_search` and OpenAI `code_interpreter`) retain their specific provider/API requirements.
+- The former framework-only pseudocode below is retained verbatim. Its first assertion can apply only to an explicitly framework-bound tool; its provider assertion does not establish the binding, authentication or authorization. No new v1 guard, automatic direct-path pass or contract adoption is supplied here.
 
 ```text
 assert: intersects(catalog tool /spec/interfaces, catalog agent_framework /spec/tool_interfaces)
@@ -475,8 +492,8 @@ assert: eq(metric cost.unpriced_metered_count, 0)
 | `rule.t4.tool.guardrail.enforcement` | warning | Hypothesis | json |
 | `rule.t4.tool.irreversible.approval` | error / warning | Hypothesis | needs contract change |
 | `rule.t4.tool.credential.ref` and source resolution | error | Hypothesis; secret-handling evidence source-checked (unverified) | needs contract change |
-| `rule.t4.tool.protocol.mcp-framework` | error | Source-checked (unverified) | json |
-| tool interface / provider-hosted tool rule | error | Hypothesis | needs contract change |
+| `rule.t4.tool.protocol.mcp-framework` | error (historical) | Superseded universal prerequisite; retained for reproduction | historical json |
+| tool interface / selected-executor rule | error (proposed) | Hypothesis; explicit executor binding and unresolved facts require review | needs contract change |
 | `rule.t4.tool.cost.metered` | warning | Source-checked (unverified) evidence, policy hypothesis | json |
 | `rule.t4.integration.cost.metered` | warning | Source-checked (unverified) evidence, policy hypothesis | json |
 | `rule.t4.tool.cost.unknown` | info | Source-checked (unverified) | json |
@@ -635,6 +652,8 @@ The B50–B53 primary pages were opened on **2026-10-18** with the web text extr
 The earlier blanket instruction to never use full-mail scope contradicted the permanent-delete candidate and is superseded by this explicit choice. The taxonomy continues to classify operation families, with the actual enforced invocation boundary determining which operations are reachable. A shared connection is compatible with different family approvals only while the caller cannot bypass the operation/resource restrictions or extract the credential. Unknown enforcement stays unknown and uses the conservative approval default. The later independent criterion audit found that the old MCP-equivalence column also conflated reversibility, additive updates, repeat-call effects and interaction domains; B54 supports the corrected independent-property treatment. These are proposed control requirements for #35/#40, not evidence that v1 or any selected product implements them.
 
 ## Criterion and receiving-interface audit (2026-10-18)
+
+**Recorded checkpoint.** The audit below preceded [#318's delivered revision](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/e4ef6b6246a35cb91c2630a498a889b3931f6085) and the [final bounded research receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26#issuecomment-6249459395). Its remaining-merge wording and ten-proposal count describe that earlier checkpoint. The subsequent T4-B7 disposition above supersedes the universal framework proposal while retaining its original JSON. This follow-up supplies no additional receiving acceptance or frozen-contract implementation.
 
 This audit preserves the nine literal research acceptance criteria from [#26](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26). It separates completion of this bounded research deliverable from adoption of a versioned ruleset, production integration and completion of its consumers. The final assessment includes the actual forward MCP receipt and a present review of the delivered cost-coverage corrections. The remaining delivery gate is independent review and merge of the B54 correction; the issue's final receipt must identify that delivered revision before closure is reported complete.
 
