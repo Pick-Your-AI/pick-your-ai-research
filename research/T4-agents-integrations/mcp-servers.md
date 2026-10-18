@@ -755,7 +755,7 @@ The rule implements the C7 matrix.
   - The legacy TypeScript SDK line supports up to 2025-11-25 (C31).
   - Python `mcp` 1.30.0 supports up to 2025-11-25.
   - The reference servers are pinned to those lines (C36, C38).
-- **Framework version support:** not source-checked for any framework (handed to #25).
+- **Framework version support:** [#25's pinned A86 follow-up](agent-framework.md#pinned-source-follow-up-2026-10-18) source-checks OpenAI Agents Python 0.24.0's support for MCP Python package v1/v2 and v2 auto negotiation with legacy fallback. This is conditional client implementation evidence, not an actually negotiated protocol set for a selected server. Other framework/protocol tuples and sampling/elicitation remain unknown where no eligible evidence was read.
 
 ```text
 assert: intersects(catalog mcp_server /spec/protocol_versions,            # missing field
