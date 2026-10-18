@@ -51,7 +51,7 @@ Sources reviewed but not used as sizing inputs: AI Index Figure 4.2.22 (p. 192, 
 ### Contradictions and weak points
 
 - Organizational adoption differs by source and unit: 88% of McKinsey respondents' organizations (A1) versus 23.8% of U.S. employer businesses (A8) and 20.0% of EU enterprises with 10+ employees (A10). The difference reflects population (large-firm respondents vs representative firm samples) and question wording, not a trend contradiction. Use the official series for business prevalence and treat A1 as directional.
-- All three business series show higher use in large firms and the information sector (A9, A10), which supports focusing on technical teams, but none counts the people inside those firms who make configuration decisions.
+- Census and Eurostat report the stated size and sector differences (A9, A10). A technical-team focus remains an analyst hypothesis; these figures identify neither configuration decision-makers nor a paying segment.
 - Developer use is high among Stack Overflow respondents (A4, A5) but the sample is self-selected and cannot be weighted to a population.
 
 ## Use versus purchase intent
@@ -119,7 +119,7 @@ Search results and competitor page counts demonstrate discoverability, not query
 
 **Research recommendation, 2026-10-18; not an executed campaign.** Start with one project-owned passive opt-in entry point and one prospective **team workspace buyer** cohort. This reuses a channel already listed in [#63's approval package](customer-validation.md#1-recruitment-channels-for-approval). It asserts neither existing traffic nor permission to contact a community, collect participant information, deploy a funnel or take payment. Source access and the arithmetic above cannot establish any of those conditions.
 
-The target is a technical team considering the [accepted #58 bounded local/API decision-record comparison](mvp-analysis.md#2-recommended-next-validation-conditional), with a person who can identify the workspace's purchase decision and payer. The workload can remain single-user text inference even when a team buys the decision record. Team, person, workload and purchasing unit are different counts. The team's recurring decision need, usefulness of the record and willingness to pay are hypotheses; this recommendation does not select a product launch or expand optional-stack scope.
+The target is a technical team considering the [accepted #58 bounded local/API decision-record comparison](mvp-analysis.md#current-narrowed-recommendation-2026-10-18), with a person who can identify the workspace's purchase decision and payer. The workload can remain single-user text inference even when a team buys the decision record. Team, person, workload and purchasing unit are different counts. The team's recurring decision need, usefulness of the record and willingness to pay are hypotheses; this recommendation does not select a product launch or expand optional-stack scope.
 
 The following are **proposed measurement definitions**, with every duration an analyst design choice rather than a measured sales-cycle or an adopted #63 operational value. Before a later test, the owner must pin the actual entry point, eligibility text, instrument, complete benefit/price card, identity/deduplication method and lawful participant handling through #63's existing decisions. Preserve the test version and its original denominator definitions; changes create a separately reported cohort.
 

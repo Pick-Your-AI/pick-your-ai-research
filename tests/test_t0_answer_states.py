@@ -61,7 +61,9 @@ class AnswerEncodingCases(unittest.TestCase):
 
     def test_unknown_string_is_not_implicitly_an_answer_state(self):
         answers = index({"state": "provided", "value": "unknown"})
-        self.assertTrue(answers.predicate("/workload/network", {"type": "string"}, lambda v: v == "unknown"))
+        self.assertTrue(answers.predicate(
+            "/workload/network", {"type": "string"}, lambda v: v == "unknown"
+        ).compatibility_value())
         with self.assertRaisesRegex(ValueError, "invalid provided value"):
             answers.read("/workload/network", NETWORK)
         with self.assertRaisesRegex(ValueError, "invalid CD-1 answer encoding"):
@@ -77,7 +79,9 @@ class AnswerEncodingCases(unittest.TestCase):
                 self.assertEqual(resolved.source_path, "/workload")
                 self.assertIsNone(resolved.value)
                 self.assertIsNone(resolved.source)
-                self.assertIsNone(answers.predicate("/workload/network", NETWORK, lambda v: called.append(v) or True))
+                self.assertIsNone(answers.predicate(
+                    "/workload/network", NETWORK, lambda v: called.append(v) or True
+                ).compatibility_value())
                 self.assertEqual(called, [])
 
     def test_nonprovided_states_cannot_retain_a_value_or_source(self):
@@ -152,15 +156,115 @@ class AnswerEncodingCases(unittest.TestCase):
 
 
 class AnswerRuleBoundaryCases(unittest.TestCase):
+    def test_boolean_shortcuts_reject_provided_true_false_and_unresolved_results(self):
+        answers = index({"state": "provided", "value": "air_gapped"})
+        for value in (True, False, None):
+            result = answers.predicate("/workload/network", NETWORK, lambda _: value)
+            for operation in (bool, lambda r: not r, lambda r: r and True,
+                              lambda r: r or True):
+                with self.subTest(value=value, operation=operation):
+                    with self.assertRaisesRegex(TypeError, "Boolean"):
+                        operation(result)
+            # An unadapted result cannot silently enter the old rule interface.
+            rule = Rule("synthetic.unadapted", "model", "error", lambda _: True,
+                        lambda _: result)
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "normalized bool or None"):
+                evaluate((SELECTION,), rule)
+
+    def test_python_negation_cannot_make_unresolved_assertion_pass(self):
+        for state in ("withheld", "unknown", "missing", "not_applicable", "absent"):
+            answers = (AnswerIndex(encoded({})) if state == "absent"
+                       else index({"state": state}))
+            called = []
+            rule = Rule(
+                "synthetic.negated-network", "model", "error", lambda _: True,
+                lambda _: not answers.predicate(
+                    "/workload/network", NETWORK,
+                    lambda value: called.append(value) or value == "air_gapped"),
+            )
+            with self.subTest(state=state):
+                with self.assertRaisesRegex(TypeError, "Boolean"):
+                    evaluate((SELECTION,), rule)
+                self.assertEqual(called, [])
+
+    def test_safe_negation_preserves_unresolved_answers_and_never_passes(self):
+        for state in ("withheld", "unknown", "missing", "not_applicable", "absent"):
+            answers = (AnswerIndex(encoded({})) if state == "absent"
+                       else index({"state": state}, "/workload"))
+            called = []
+            result = answers.predicate(
+                "/workload/network", NETWORK,
+                lambda value: called.append(value) or value == "air_gapped",
+            )
+            negated = result.negated()
+            rule = Rule("synthetic.negated-network", "model", "error", lambda _: True,
+                        lambda _: negated.compatibility_value())
+            with self.subTest(state=state):
+                self.assertEqual(negated.state, State.MISSING if state == "absent" else State(state))
+                self.assertEqual(negated.source_path, None if state == "absent" else "/workload")
+                self.assertIsNone(negated.compatibility_value())
+                self.assertIs(negated.recommendation_value(), False)
+                self.assertIsNone(result.compatibility_value())
+                self.assertEqual(negated.negated(), result)
+                actual = evaluate((SELECTION,), rule)
+                self.assertEqual(actual.outcome, Outcome.UNKNOWN)
+                self.assertEqual(actual.findings[0].outcome, Outcome.UNKNOWN)
+                self.assertEqual(actual.severity, "error")
+                self.assertEqual(called, [])
+
+    def test_safe_negation_flips_known_results_without_re_evaluating_the_answer(self):
+        answers = index({"state": "provided", "value": "air_gapped"})
+        for value, expected, outcome in ((True, False, Outcome.FAIL),
+                                         (False, True, Outcome.PASS),
+                                         (None, None, Outcome.UNKNOWN)):
+            called = []
+            result = answers.predicate(
+                "/workload/network", NETWORK,
+                lambda answer: called.append(answer) or value,
+            )
+            negated = result.negated()
+            rule = Rule("synthetic.negated-known", "model", "warning", lambda _: True,
+                        lambda _: negated.compatibility_value())
+            with self.subTest(value=value):
+                self.assertIs(negated.compatibility_value(), expected)
+                self.assertIs(result.compatibility_value(), value)
+                self.assertEqual(negated.state, State.PROVIDED)
+                self.assertEqual(negated.source_path, "/workload/network")
+                self.assertEqual(negated.negated(), result)
+                self.assertEqual(evaluate((SELECTION,), rule).outcome, outcome)
+                self.assertEqual(called, ["air_gapped"])
+
+    def test_recommendation_gate_preserves_provided_predicate_uncertainty(self):
+        cases = [({"state": state}, True, Outcome.SKIPPED)
+                 for state in ("missing", "unknown", "withheld", "not_applicable")]
+        cases += [({"state": "provided", "value": "air_gapped"}, value, outcome)
+                  for value, outcome in ((True, Outcome.FAIL), (False, Outcome.SKIPPED),
+                                         (None, Outcome.UNKNOWN))]
+        for answer, value, outcome in cases:
+            called = []
+            result = index(answer).predicate(
+                "/workload/network", NETWORK,
+                lambda observed: called.append(observed) or value,
+            )
+            assertions = []
+            rule = Rule("synthetic.recommendation", "model", "warning",
+                        lambda _: result.recommendation_value(),
+                        lambda _: assertions.append("evaluated") or False)
+            with self.subTest(state=answer["state"], value=value):
+                actual = evaluate((SELECTION,), rule)
+                self.assertEqual(actual.outcome, outcome)
+                self.assertEqual(actual.severity, "warning")
+                self.assertEqual(called, ["air_gapped"] if answer["state"] == "provided" else [])
+                self.assertEqual(assertions, ["evaluated"] if outcome == Outcome.FAIL else [])
+
     def test_compatibility_unknown_and_recommendation_skip_are_deliberately_distinct(self):
         for state in ("missing", "unknown", "withheld", "not_applicable"):
             answers = index({"state": state})
             compatibility = Rule("synthetic.isolation", "model", "error",
-                                 lambda _: answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped"),
+                                 lambda _: answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped").compatibility_value(),
                                  lambda _: False)
             recommendation = Rule("synthetic.recommendation", "model", "warning",
-                                  lambda _: answers.read("/workload/network", NETWORK).provided
-                                  and answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped"),
+                                  lambda _: answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped").recommendation_value(),
                                   lambda _: False)
             with self.subTest(state=state):
                 unresolved = evaluate((SELECTION,), compatibility)
@@ -180,7 +284,7 @@ class AnswerRuleBoundaryCases(unittest.TestCase):
                                 ("private_network", Outcome.SKIPPED)):
             answers = index({"state": "provided", "value": value})
             rule = Rule("synthetic.isolation", "model", "error",
-                        lambda _: answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped"),
+                        lambda _: answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped").compatibility_value(),
                         lambda _: False)
             with self.subTest(value=value):
                 result = evaluate((SELECTION,), rule)
@@ -207,7 +311,9 @@ class AnswerRuleBoundaryCases(unittest.TestCase):
         augmented.setdefault("extensions", {}).update(json.loads(FIXTURE.read_bytes()))
         self.assertEqual(frozen.Evaluator(augmented, catalog, ruleset).evaluate(), before)
         answers = AnswerIndex(FIXTURE.read_bytes())
-        self.assertIsNone(answers.predicate("/workload/network", NETWORK, lambda v: v == "air_gapped"))
+        self.assertIsNone(answers.predicate(
+            "/workload/network", NETWORK, lambda v: v == "air_gapped"
+        ).compatibility_value())
 
 
 if __name__ == "__main__":
