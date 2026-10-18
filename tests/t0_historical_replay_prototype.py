@@ -162,6 +162,24 @@ class ReplayResult:
                 "current_compatibility": "not_established"}
 
 
+def _retained_report_issues(build, bindings):
+    """Check available report identity even when another input prevents replay."""
+    binding = next((binding for binding in bindings
+                    if binding.kind == "evaluation_report" and binding.status == "resolved"
+                    and binding.raw is not None), None)
+    if binding is None:
+        return ()
+    report = decode(binding.raw)
+    issues = []
+    if (report["build_id"], report["build_revision"]) != (build["id"], build["revision"]):
+        issues.append(("evaluation_report", "build_identity_mismatch"))
+    if any(report[name] != build["locks"][name] for name in (
+            "catalog_snapshot_id", "ruleset_id", "ruleset_version",
+            "dependency_graph_id", "dependency_graph_revision")):
+        issues.append(("evaluation_report", "build_lock_mismatch"))
+    return issues
+
+
 class ReplayArchive:
     """Immutable exact-key JSON archive composing the existing CD-7 resolver."""
 
@@ -216,6 +234,10 @@ class ReplayArchive:
             # Reader availability and retained data identity are independent.
             # An unavailable reader must not erase an exact historical report
             # or diagnostics already established for another pinned artifact.
+            issues = list(issues)
+            for issue in _retained_report_issues(build, bindings):
+                if issue not in issues:
+                    issues.append(issue)
             if profile_issues:
                 status = "profile_unavailable"
                 issues = [*profile_issues, *issues]
