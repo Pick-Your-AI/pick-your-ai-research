@@ -1,6 +1,6 @@
 # MR-09: Validate benchmark comparability and harness effects
 
-Issue: [#62](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62). Live assignees (2026-10-17): @appletechie and @PUSHINGSQUARES. Status: desk validation drafted; no benchmark run; owner review pending. Readiness: Ready. Last researched: 2026-10-17. Live Project fields are authoritative; this note does not change them.
+Issue: [#62](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62). Live assignees (2026-10-18): @appletechie and @PUSHINGSQUARES. Status: desk validation drafted; no benchmark run; owner review pending. Readiness: Ready. Last researched: 2026-10-18 (bounded B1 table-scope recheck below). Live Project fields are authoritative; this note does not change them.
 
 This desk pass was prepared by a contributor who is not the assignee, for the owner's review. The owner keeps every decision in it. It does not complete #62.
 
@@ -95,9 +95,11 @@ Figures were originally transcribed from B2 on 2026-10-16. Direct B1 recheck on 
 | Harness gaps of 5.0 to 9.5 points within nine models | General-task mean-score range (B1 Table 2) | Fail | Pass | Unknown: dependence-adjusted uncertainty is missing; 9.5 exceeds 8.4 only in the conditional n = 274 pairwise scenario | Unknown | Not established |
 | Qwen3.8-27B harness gap of 39.2 points | General-task mean-score range (B1 Table 2) | Fail (locally hosted; snapshot and quantization unknown) | Pass | Unknown: paired/clustered errors remain unavailable for this audit; 39.2 exceeds 8.4 and 12.6 only if the corresponding independent-task/means scenario applies | Unknown | Not established at G1 or G3; largest transcribed gap, general-task mean-score scope identified |
 | Both GLM-5.3 variants: 13.5-point full-credit gap | General-task full-credit ranges, 13.50 for each variant (B1 Table 9) | Fail | Pass if the pair is two harnesses | Unknown: paired/clustered errors remain unavailable for this audit; 13.5 exceeds 12.6 only in the conditional n = 274 seven-harness scenario | Unknown | Not established at G1 or G3 |
-| GPT-5.6 Sol: Nanobot costs 2.97 × OpenClaw at 24.82% vs 31.02% full credit | Full credit, 6.2; illustrative z ≈ 1.6 only at n = 274, p = 0.30 with independent tasks/means | Fail | Pass | Unknown: paired covariance, run variation and shared-source dependence are unavailable | Unknown (means not given) | Full-credit gap not established; the cost ratio is a separate vendor claim |
-| Pooled harness profile: OpenCode first on mean (66.3), OpenClaw first on full credit (27.1%), Codex 65.3 / 23.8% vs Goose 62.0 / 26.1% | Ranking by metric | Fail | Fail (pooled over models; general suite per B1) | Unknown: gaps are 0.1 to 3.3 points and pooled attempts share tasks across models | Divergence is the claim | Hypothesis, not established: the orders differ, but the reversals are small and untested |
+| GPT-5.6 Sol: Nanobot costs 2.97 × OpenClaw at 24.82% vs 31.02% full credit | General-task full credit, 6.2; illustrative z ≈ 1.6 only at n = 274, p = 0.30 with independent tasks/means | Fail | Pass | Unknown: paired covariance, run variation and shared-source dependence are unavailable | Pass on the published aggregates: B1 Table 7 also gives mean scores 66.49 vs 73.08 in the same direction | Full-credit gap not established; the cost ratio is a separate vendor claim |
+| Pooled harness profile: OpenCode first on mean (66.3), OpenClaw first on full credit (27.1%), Codex 65.3 / 23.8% vs Goose 62.0 / 26.1% | Ranking by metric, pooled general and multimodal configuration–task evaluations (B1 Table 4) | Fail | Fail (pooled over models and suites, not a fixed-model one-factor comparison) | Unknown: gaps are 0.1 to 3.3 points and pooled attempts share tasks across models | Divergence is the claim | Hypothesis, not established: the orders differ, but the reversals are small and untested |
 | Derived (Estimate): 20,454 = 274 × 7 × 10 + 26 × 7 × 7, so k = 1 | Runs per configuration | Not applicable | Not applicable | Not applicable | Not applicable | One run per configuration, matching the v2 body per #79 |
+
+**B1 scope recheck, 2026-10-18.** The [v2 paper's Table 4](https://arxiv.org/html/2605.27922v2) caption explicitly pools general and multimodal evaluations. Its general-only per-model rows come from Table 7, which supplies both GPT-5.6 Sol mean scores above. These corrections settle the suite label and descriptive G4 direction only; model/grader pins and G3 evidence remain missing. Prior source dates continue to identify the earlier observations.
 
 ### Contamination and task overlap
 
@@ -110,7 +112,7 @@ Figures were originally transcribed from B2 on 2026-10-16. Direct B1 recheck on 
 
 ### Mean score versus complete delivery
 
-Each task's cases sum to 1.00 with a pass threshold of 0.80. Core outcomes carry 0.80 and every core case must pass. Timeouts and other terminal outcomes stay in the denominator. Full credit means every scored module passes. Partial credit therefore raises the mean without any task being delivered. The pooled profile is consistent with this, because mean and full-credit orders differ, but it does not establish it.
+Each task's cases sum to 1.00 with a pass threshold of 0.80. Core outcomes carry 0.80 and every core case must pass. Timeouts and other terminal outcomes stay in the denominator. Full credit means every scored module passes. Partial credit can raise the mean even when no additional task reaches full credit; it does not imply that none of a task's required work was delivered. The pooled profile is consistent with a distinction between partial and complete delivery, because mean and full-credit orders differ, but it does not establish a causal explanation.
 
 ### Replication limits and confidence
 

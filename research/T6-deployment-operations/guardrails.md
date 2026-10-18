@@ -11,8 +11,6 @@ The builder answers this per build. The answer depends on which optional workstr
 
 Mode labels follow [merged #81](../T0-configuration/deployment-mode.md): classify each serving control by its operator and capacity. Provider-operated shared moderation/guardrail endpoints are API; dedicated or reserved serving is managed; user-operated engines are self-hosted. Cloud provider name and desktop/CLI form alone do not decide the mode.
 
-Provider configuration follow-up, checked 2026-10-18: Google Cloud's Vertex / Agent Platform documentation gives `gemini-3.5-flash` and subsequent models a default of `OFF` for configurable harm filters, which disables their blocking and metadata. `BLOCK_NONE` returns scores while disabling blocking. Separate non-configurable CSAM/SPII filters remain. Record the exact model and category settings before crediting a provider control; absent configurable-filter metadata cannot establish a safe response. See [F03 and the retained #120 alternatives](sibling-reconciliation.md).
-
 ## Candidate options
 
 ### Control catalog
@@ -111,7 +109,7 @@ Every number in this record is **published** by its source unless marked otherwi
 
 **Source checked** means checked against primary documentation, not independently reproduced.
 
-**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); the latter two remain open review proposals, while the cited interim owner decisions apply.
+**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); both PRs are merged partial decision records. Their scoped owner decisions apply, while open #40/#41 acceptance and next-version adoption remain separate.
 
 Format from #40: participants, condition, severity, explanation, suggested correction, source, rule version. Severity values: error, warning, info. Outcomes are separately pass, fail, unknown or skipped. Candidate revision 0.2 applies below.
 
@@ -225,7 +223,7 @@ Guardrail services are priced in [#39](cost-estimate.md): line items L56 to L60 
 ### What the builder shows when a control is missing
 
 1. A missing control is a **rule result**, not a hidden default. It appears in the build's risk review with its severity, the rule's explanation and the suggested correction.
-2. `warning` can be **accepted** with a one-line reason stored in the saved build (#42). `incompatible` cannot be accepted; the build stays marked not ready until the selection changes.
+2. A failed rule with fixed `warning` severity can be **accepted** with a one-line reason stored in the saved build (#42). A `fail` result on a rule with fixed `error` severity cannot be accepted; the build stays marked not ready until the selection changes. A passing `error` rule does not block readiness.
 3. `unknown` is shown as unknown with the open question and its owner, never as a pass. G-R8 (undocumented sandbox isolation) and the undocumented failure modes in guardrail-failure-mode are the first cases.
 4. Controls the platform supplies in API or managed mode appear as **provided by platform** with the source, so the user can see what they rely on and what they cannot switch off (G-R19).
 5. Severity is shown by label and icon, not colour alone.
@@ -263,3 +261,11 @@ None in this pull request. A `guardrail` catalog item needs `targets`, `policies
 | #2 Workload | the T0 fields the rules need | pending |
 
 Review correction, source checked 2026-10-17: [Qdrant multitenancy](https://qdrant.tech/documentation/manage-data/multitenancy/) distinguishes optional tenant-index storage optimization from tenant-scoped queries. G-R7 requires the trusted boundary, not merely an index or shard.
+
+## Post-#121 source reconciliation: Google Cloud harm-filter defaults
+
+Refs #120, #35, #38. Source checked 2026-10-18; not independently reproduced. This retains the focused finding from the comparison PR without replacing G-R19's Gemini API scope.
+
+Google Cloud's [Safety and content filters](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/configure-safety-filters) page states that `OFF` is the configurable harm-block threshold default for `gemini-3.5-flash` and subsequent models. In that setting, configurable response blocking and its metadata are absent. This is not a statement that every safety control is disabled: the page separately describes non-configurable CSAM/PII protections and SPII response termination. Its configurable filters follow model versions, not an independently versioned filter release. `BLOCK_NONE` disables blocking but returns scores; [F03](sibling-reconciliation.md) separately scopes the Gemini API defaults and error telemetry.
+
+Receiving implication for #35/#38: record the exact Google Cloud model/version and configured threshold before interpreting absent harm scores or block events. Missing metadata is not a measured zero harm rate or evidence that a request was safe. Explicit threshold selection and telemetry interpretation remain proposed receiving decisions, not an adopted ruleset or account-level test. The source is mutable; recheck it when the model or service configuration changes.
