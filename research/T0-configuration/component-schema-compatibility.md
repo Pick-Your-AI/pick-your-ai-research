@@ -611,6 +611,77 @@ CD-3 evidence resolution/result encoding, a general predicate DSL, affected-owne
 review and the versioned adapter / ruleset remain open. #42's prerequisite is
 unchanged.
 
+### CD-13 required-presence mode (2026-10-18)
+
+The [current #40 owner disposition, constraint 1](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a separate answer for missing required components. An actual comparison
+against the unchanged frozen
+[`rule.required.foundation`](../../contracts/v1/baseline/core-ruleset.json)
+reproduces eight differences: removing or disabling each primary workload,
+deployment mode, model and context policy makes the frozen required rule fail,
+while the universal selection prototype skips its empty enabled scope. That
+optional-scope behavior remains correct for the universal mode; it cannot be
+used as the required-component answer.
+
+The [required-presence prototype](../../tests/required_presence_prototype.py) and
+[16 regression methods](../../tests/test_required_presence.py) add a separate
+normalized mode. This is a synthetic mechanics proposal. It adopts no successor
+field, sidecar, executable ruleset, migration or native implementation.
+
+| Normalized input | Meaning |
+| --- | --- |
+| `PresenceSelection(id, kind, role, active)` | An explicit selection identity with independently qualified activation: exact `True`, `False` or `None`; unresolved activation is distinct from known inactive or absent |
+| `PresenceRule(id, kind, role, severity)` | Always require the stated kind and exact role; explicit `role=None` permits any role of that kind. Role has no implicit primary default, and severity is fixed as `info`, `warning` or `error` |
+| Complete inventory declaration | An explicit exact `inventory_complete=True` is required. Omitted, false, unresolved or malformed completeness and malformed inventory forms are precondition errors; they cannot prove absence or presence |
+
+The declaration is **not proof of completeness**. The caller must first establish
+the complete normalized selection inventory, canonical schema/reference
+validity and eligibility of every activation fact. This experiment neither
+reads a Build nor derives activation, source eligibility or inventory
+completeness. It substitutes no defaults for those missing inputs.
+
+The shared identity preflight checks the entire inventory before filtering by
+the rule's exact kind/role. Disabled, unresolved and unrelated-kind entries still
+participate. The existing strict `(kind, role)` policy is deliberately retained:
+even a disabled alternative sharing a role rejects, and duplicate selection IDs
+always reject. The earlier co-owner mechanics disposition retained this policy;
+the newer owner's preference for allowing disabled alternatives is a separate
+reconciliation decision. The frozen dependency/reference wording and protocol
+wording are not silently rewritten here. The shared preflight's executable body
+and the universal reducer remain unchanged; only its identity-only type
+annotation is generalized for the separate normalized entry type.
+
+For a valid complete inventory, reduction is scoped before examining witnesses:
+
+| Matching activation observations | Required-presence outcome | Reason |
+| --- | --- | --- |
+| At least one known active selection | `pass` | `selected` |
+| No known active selection, but at least one unresolved activation | `unknown` | `not_selected` |
+| No matching selection, or all matching selections are known inactive | `fail` | `not_selected` |
+
+This mode never returns `skipped`. A selection of another kind or role cannot
+rescue an absent required primary or turn that absence into unknown. A known
+matching witness establishes only existence, even if another matching candidate
+has unresolved activation; that unresolved observation remains unchanged. It
+does not establish compatibility, fitness or that another component is optional.
+Every scoped activation observation is retained in stable selection-ID order.
+An empty result has an empty observation tuple, without an invented selection ID.
+
+The cases compare the four exact primary scopes against the unchanged frozen
+foundation rule with all components present and each separately absent or
+disabled. A separate normalized example gives each required kind unresolved
+activation in turn. Additional cases retain exact role scope, any-role positive
+witnesses alongside unresolved alternatives, all-input identity preflight, strict
+Boolean identity, fixed severity, order independence and the existing universal
+empty/inapplicable skips. The prototype evaluates one required scope at a time;
+the foundation-style cases do not adopt a general multi-kind expression or
+result wire encoding.
+
+The `all_enabled` reader and its schema below remain unchanged. Conditional
+requirements, real activation resolution, the disabled-alternative decision,
+structured wire rejections, CD-1/CD-6 binding and affected-owner adoption remain
+separate. Frozen v1 and #42's substantive #40 prerequisite are unchanged.
+
 ### CD-13 typed selection binding proposal (2026-10-18)
 
 The [versioned sidecar schema](../../tests/fixtures/selection-binding.schema.json),

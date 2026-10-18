@@ -496,8 +496,8 @@
     ],
     "artifact": "research/market/customers.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted",
-    "requested_action": "Personas remain unvalidated; demand testing belongs to #63.",
+    "acceptance": "Accepted with constraints under delegated technical receiving review; historical owner scope retained",
+    "requested_action": "Use the persona as a desk hypothesis only. Preserve explicit user answers, unknowns and selected capabilities; no preset workload, measured demand, memory/quality result or automatic tier activation.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -508,7 +508,24 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session research engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:27:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6250471522",
+        "reviewed_commit": "aee9b46df93c9e74b9c9d4ae588b203e8421df59",
+        "reviewed_artifact_git_blob": "25112cbe50585cf38892fd2b1bcf8aea58c901e1",
+        "reviewed_receiving_context_git_blob": "5a5d192278d9c77de5e34b11dc5054a9a948055f",
+        "commit_basis": "The actual receipt identifies the signed producer note and the applicable receiving context at aee9b46. The reviewer authored the #337 correction; complete independent source review 5563135481 is separate. This record amendment receives its own review and current delivery checks.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical input decisions under the user's express project engineering delegation, posted through the connected account. No response is attributed to an absent assignee, and no consuming issue, contract, runtime result or source-use permission is accepted by this desk-input review.",
+        "scope": "local-hardware and actual-target interview prompt",
+        "retained_unknowns_and_next_action": "Use the persona as a desk hypothesis only. Preserve explicit user answers, unknowns and selected capabilities; no preset workload, measured demand, memory/quality result or automatic tier activation."
+      }
+    ]
   },
   {
     "market_issue": 52,
@@ -520,8 +537,8 @@
     ],
     "artifact": "research/market/customers.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted",
-    "requested_action": "Personas remain unvalidated; demand testing belongs to #63.",
+    "acceptance": "Accepted with constraints under delegated technical receiving review; historical owner scope retained",
+    "requested_action": "Require actual per-serving-component operator/capacity evidence. Infer no mode, billing basis, residency, isolation or fit from a persona.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -532,7 +549,24 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session research engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:27:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6250471522",
+        "reviewed_commit": "aee9b46df93c9e74b9c9d4ae588b203e8421df59",
+        "reviewed_artifact_git_blob": "25112cbe50585cf38892fd2b1bcf8aea58c901e1",
+        "reviewed_receiving_context_git_blob": "7d88a23348768dfaab9630f6194bc3971bbfcbae",
+        "commit_basis": "The actual receipt identifies the signed producer note and the applicable receiving context at aee9b46. The reviewer authored the #337 correction; complete independent source review 5563135481 is separate. This record amendment receives its own review and current delivery checks.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical input decisions under the user's express project engineering delegation, posted through the connected account. No response is attributed to an absent assignee, and no consuming issue, contract, runtime result or source-use permission is accepted by this desk-input review.",
+        "scope": "local-first deployment comparison hypothesis",
+        "retained_unknowns_and_next_action": "Require actual per-serving-component operator/capacity evidence. Infer no mode, billing basis, residency, isolation or fit from a persona."
+      }
+    ]
   },
   {
     "market_issue": 52,
@@ -544,10 +578,27 @@
     ],
     "artifact": "research/market/customers.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with constraints under delegated technical receiving review; historical owner scope retained",
+    "requested_action": "Preserve optional retrieval, exact caller/resource authorization, complete assembled-input counting and separate #36/#65 evidence. No backend/default/vector-store choice or tested tuple is supplied.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session research engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:27:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6250471522",
+        "reviewed_commit": "aee9b46df93c9e74b9c9d4ae588b203e8421df59",
+        "reviewed_artifact_git_blob": "25112cbe50585cf38892fd2b1bcf8aea58c901e1",
+        "reviewed_receiving_context_git_blob": "60a79b048c3c71f8d8fbb1e02b12aa380d7cec4d",
+        "commit_basis": "The actual receipt identifies the signed producer note and the applicable receiving context at aee9b46. The reviewer authored the #337 correction; complete independent source review 5563135481 is separate. This record amendment receives its own review and current delivery checks.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical input decisions under the user's express project engineering delegation, posted through the connected account. No response is attributed to an absent assignee, and no consuming issue, contract, runtime result or source-use permission is accepted by this desk-input review.",
+        "scope": "RAG integration and rework hypothesis",
+        "retained_unknowns_and_next_action": "Preserve optional retrieval, exact caller/resource authorization, complete assembled-input counting and separate #36/#65 evidence. No backend/default/vector-store choice or tested tuple is supplied."
+      }
+    ]
   },
   {
     "market_issue": 52,
@@ -559,10 +610,27 @@
     ],
     "artifact": "research/market/customers.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with constraints under delegated technical receiving review; historical owner scope retained",
+    "requested_action": "Preserve no-framework/direct orchestration, explicit selected paths, bounded iteration and existing security/evaluation/#40 decisions. No adoption, tuple compatibility or measured planning benefit is supplied.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session research engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:27:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6250471522",
+        "reviewed_commit": "aee9b46df93c9e74b9c9d4ae588b203e8421df59",
+        "reviewed_artifact_git_blob": "25112cbe50585cf38892fd2b1bcf8aea58c901e1",
+        "reviewed_receiving_context_git_blob": "37a1a29b27a8c619a22048399f4a6dd9488486d3",
+        "commit_basis": "The actual receipt identifies the signed producer note and the applicable receiving context at aee9b46. The reviewer authored the #337 correction; complete independent source review 5563135481 is separate. This record amendment receives its own review and current delivery checks.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical input decisions under the user's express project engineering delegation, posted through the connected account. No response is attributed to an absent assignee, and no consuming issue, contract, runtime result or source-use permission is accepted by this desk-input review.",
+        "scope": "agent and framework integration interview question",
+        "retained_unknowns_and_next_action": "Preserve no-framework/direct orchestration, explicit selected paths, bounded iteration and existing security/evaluation/#40 decisions. No adoption, tuple compatibility or measured planning benefit is supplied."
+      }
+    ]
   },
   {
     "market_issue": 52,
@@ -574,10 +642,27 @@
     ],
     "artifact": "research/market/customers.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Review evidence and accept, reject or narrow the implication for the existing technical deliverable.",
+    "acceptance": "Accepted with constraints under delegated technical receiving review; historical owner scope retained",
+    "requested_action": "Survey responses provide no quantity, rate, currency/region default, willingness-to-pay amount or complete budget result. Actual spend and hypothetical intent stay distinct; unpriced/unsized inputs remain unknown and partial coverage stays explicit.",
     "ownership_observed_on": "2026-10-18",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session research engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:27:17Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6250471522",
+        "reviewed_commit": "aee9b46df93c9e74b9c9d4ae588b203e8421df59",
+        "reviewed_artifact_git_blob": "25112cbe50585cf38892fd2b1bcf8aea58c901e1",
+        "reviewed_receiving_context_git_blob": "504ec2fdf3a5cd0dda2380fbc5b222c2195ae937",
+        "commit_basis": "The actual receipt identifies the signed producer note and the applicable receiving context at aee9b46. The reviewer authored the #337 correction; complete independent source review 5563135481 is separate. This record amendment receives its own review and current delivery checks.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical input decisions under the user's express project engineering delegation, posted through the connected account. No response is attributed to an absent assignee, and no consuming issue, contract, runtime result or source-use permission is accepted by this desk-input review.",
+        "scope": "neutral priority and user/buyer/approver research",
+        "retained_unknowns_and_next_action": "Survey responses provide no quantity, rate, currency/region default, willingness-to-pay amount or complete budget result. Actual spend and hypothetical intent stay distinct; unpriced/unsized inputs remain unknown and partial coverage stays explicit."
+      }
+    ]
   },
   {
     "market_issue": 53,
@@ -3040,11 +3125,28 @@
     ],
     "artifact": "research/market/rag-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints as a sourced dense representation and encoder-policy input; actual encoder selection and workload qualification remain with the existing owners.",
+    "requested_action": "Select and qualify the actual encoder/wrapper with applicable model/input rights and workload evidence; keep non-dense representations separate. Equal width establishes neither encoder nor normalization equivalence.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (root assistant, actual in-session engineering reviewer stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:05:44Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864",
+        "reviewed_commit": "3b392e077bfd5522964fc8b852af8c170876dfd1",
+        "reviewed_tree": "f54d9153f27db2ead6d5d83d7f263936928207fb",
+        "reviewed_artifact_git_blob": "54e87ece34100471cd99ed2ff99deade8cdcfd1a",
+        "commit_basis": "The actual #65 comment identifies the complete note at this exact commit/blob and records five scoped receiving decisions after reading all five live consumer scopes. Its accompanying whole-note review 5563109791 verifies this tree and separates the independently anchored E1–E7 source review 5563078599.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical receiving decisions under the user's express project engineering delegation, posted through the shared CompleteDotTech account. No response is attributed to an absent named co-assignee. These dispositions accept only the stated desk input, not a receiving issue's completion, component/rule adoption, runtime success, corpus rights, quality or end-user authorization.",
+        "scope": "Pinned dense dimensional/dot-product comparison, separating representation, encoder identity, query/document policy and normalization.",
+        "retained_unknowns_and_next_action": "Select and qualify the actual encoder/wrapper with applicable model/input rights and workload evidence; keep non-dense representations separate. Equal width establishes neither encoder nor normalization equivalence."
+      }
+    ]
   },
   {
     "market_issue": 65,
@@ -3056,11 +3158,28 @@
     ],
     "artifact": "research/market/rag-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints for expressible dense configuration, adapter checks and deployment-specific transport/authentication; no selected store or deployment is certified.",
+    "requested_action": "Establish the actual collection/index, installed client lock, endpoint and authorized operations. The existing owners retain the product/index decision; no dedicated store requirement or universally compatible deployment is adopted.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (root assistant, actual in-session engineering reviewer stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:05:44Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864",
+        "reviewed_commit": "3b392e077bfd5522964fc8b852af8c170876dfd1",
+        "reviewed_tree": "f54d9153f27db2ead6d5d83d7f263936928207fb",
+        "reviewed_artifact_git_blob": "54e87ece34100471cd99ed2ff99deade8cdcfd1a",
+        "commit_basis": "The actual #65 comment identifies the complete note at this exact commit/blob and records five scoped receiving decisions after reading all five live consumer scopes. Its accompanying whole-note review 5563109791 verifies this tree and separates the independently anchored E1–E7 source review 5563078599.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical receiving decisions under the user's express project engineering delegation, posted through the shared CompleteDotTech account. No response is attributed to an absent named co-assignee. These dispositions accept only the stated desk input, not a receiving issue's completion, component/rule adoption, runtime success, corpus rights, quality or end-user authorization.",
+        "scope": "Qdrant's expressible dense configuration, adapter vector-name/dimension/distance checks and deployment-specific transport/authentication documentation.",
+        "retained_unknowns_and_next_action": "Establish the actual collection/index, installed client lock, endpoint and authorized operations. The existing owners retain the product/index decision; no dedicated store requirement or universally compatible deployment is adopted."
+      }
+    ]
   },
   {
     "market_issue": 65,
@@ -3072,11 +3191,28 @@
     ],
     "artifact": "research/market/rag-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints for the connector/configuration/workload distinction, preserved Bedrock hybrid-source conflict and positive UserContext documentation; actual retrieval and authorization remain unverified.",
+    "requested_action": "Resolve the concrete store/service/Region, effective search mode and trusted caller-to-document permission binding. Preserve the default-backend decision, #7 context-budget and #36 quality/metric handoffs. No actual fallback, hybrid execution or ACL enforcement was observed; optional filters and service ingestion rights do not supply those observations.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (root assistant, actual in-session engineering reviewer stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:05:44Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864",
+        "reviewed_commit": "3b392e077bfd5522964fc8b852af8c170876dfd1",
+        "reviewed_tree": "f54d9153f27db2ead6d5d83d7f263936928207fb",
+        "reviewed_artifact_git_blob": "54e87ece34100471cd99ed2ff99deade8cdcfd1a",
+        "commit_basis": "The actual #65 comment identifies the complete note at this exact commit/blob and records five scoped receiving decisions after reading all five live consumer scopes. Its accompanying whole-note review 5563109791 verifies this tree and separates the independently anchored E1–E7 source review 5563078599.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical receiving decisions under the user's express project engineering delegation, posted through the shared CompleteDotTech account. No response is attributed to an absent named co-assignee. These dispositions accept only the stated desk input, not a receiving issue's completion, component/rule adoption, runtime success, corpus rights, quality or end-user authorization.",
+        "scope": "Separation of connector, configuration and workload evidence, including the #119 follow-up, current hybrid-search documentation disagreement and positive UserContext documentation.",
+        "retained_unknowns_and_next_action": "Resolve the concrete store/service/Region, effective search mode and trusted caller-to-document permission binding. Preserve the default-backend decision, #7 context-budget and #36 quality/metric handoffs. No actual fallback, hybrid execution or ACL enforcement was observed; optional filters and service ingestion rights do not supply those observations."
+      }
+    ]
   },
   {
     "market_issue": 65,
@@ -3088,11 +3224,28 @@
     ],
     "artifact": "research/market/rag-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints for pinned adapter identity, embedding-method boundaries and construction/insertion/deletion side effects; installed framework and wrapper decisions remain separate.",
+    "requested_action": "Pin the installed framework/dependencies and select the actual embedding wrapper before execution. No framework selection, general agent-behavior validation or harmless-constructor assumption follows.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (root assistant, actual in-session engineering reviewer stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:05:44Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864",
+        "reviewed_commit": "3b392e077bfd5522964fc8b852af8c170876dfd1",
+        "reviewed_tree": "f54d9153f27db2ead6d5d83d7f263936928207fb",
+        "reviewed_artifact_git_blob": "54e87ece34100471cd99ed2ff99deade8cdcfd1a",
+        "commit_basis": "The actual #65 comment identifies the complete note at this exact commit/blob and records five scoped receiving decisions after reading all five live consumer scopes. Its accompanying whole-note review 5563109791 verifies this tree and separates the independently anchored E1–E7 source review 5563078599.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical receiving decisions under the user's express project engineering delegation, posted through the shared CompleteDotTech account. No response is attributed to an absent named co-assignee. These dispositions accept only the stated desk input, not a receiving issue's completion, component/rule adoption, runtime success, corpus rights, quality or end-user authorization.",
+        "scope": "Exact adapter metadata, document/query embedding distinction and constructor, insertion and deletion side effects as constraints for the existing framework decision.",
+        "retained_unknowns_and_next_action": "Pin the installed framework/dependencies and select the actual embedding wrapper before execution. No framework selection, general agent-behavior validation or harmless-constructor assumption follows."
+      }
+    ]
   },
   {
     "market_issue": 65,
@@ -3104,11 +3257,28 @@
     ],
     "artifact": "research/market/rag-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted as a bounded negative MCP-evidence finding and wrapper-review input, retaining all exact protocol, identity, trust and operation requirements.",
+    "requested_action": "Establish exact server/client/wrapper identity, protocol negotiation, transport/authentication, capabilities/trust and tool-argument validation. No MCP wrapper or workload was inspected; the finding does not assert that such integrations cannot exist.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (root assistant, actual in-session engineering reviewer stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T13:05:44Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864",
+        "reviewed_commit": "3b392e077bfd5522964fc8b852af8c170876dfd1",
+        "reviewed_tree": "f54d9153f27db2ead6d5d83d7f263936928207fb",
+        "reviewed_artifact_git_blob": "54e87ece34100471cd99ed2ff99deade8cdcfd1a",
+        "commit_basis": "The actual #65 comment identifies the complete note at this exact commit/blob and records five scoped receiving decisions after reading all five live consumer scopes. Its accompanying whole-note review 5563109791 verifies this tree and separates the independently anchored E1–E7 source review 5563078599.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual technical receiving decisions under the user's express project engineering delegation, posted through the shared CompleteDotTech account. No response is attributed to an absent named co-assignee. These dispositions accept only the stated desk input, not a receiving issue's completion, component/rule adoption, runtime success, corpus rights, quality or end-user authorization.",
+        "scope": "Bounded negative inference that this vector-store adapter supplies no MCP integration evidence, with operation/credential separation as an input to wrapper review.",
+        "retained_unknowns_and_next_action": "Establish exact server/client/wrapper identity, protocol negotiation, transport/authentication, capabilities/trust and tool-argument validation. No MCP wrapper or workload was inspected; the finding does not assert that such integrations cannot exist."
+      }
+    ]
   },
   {
     "market_issue": 66,
