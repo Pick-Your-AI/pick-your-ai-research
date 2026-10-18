@@ -1,5 +1,6 @@
 """Exercise the market validator CLI using synthetic, isolated invalid inputs."""
 from copy import deepcopy
+import importlib.util
 import json
 from pathlib import Path
 import shutil
@@ -555,6 +556,89 @@ class MarketValidation(unittest.TestCase):
                     result = self.run_validator(data, optimized)
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertIn('Market integrity OK: 1 entities, 1 cells, 2 issues', result.stdout)
+
+    def test_raw_priority_totals_cannot_round_to_the_expected_result(self):
+        cases = (
+            ([1] * 6, '1.0000000000000000000001'),
+            ([1] * 6, '0.9999999999999999999999'),
+            ([1] * 6, '10000000000000000000001e-22'),
+            ([5] * 6, '4.999999999999999999999999'),
+            ([5] * 6, '5.000000000000000000000001'),
+            ([1, 2, 3, 4, 5, 1], '2.4500000000000000000001'),
+            ([1, 2, 3, 4, 5, 1], '2.4499999999999999999999'),
+        )
+        for scores, token in cases:
+            data = deepcopy(self.data)
+            data['research-backlog.json'][0].update(scores=scores, score='RAW_TOTAL')
+            raw = json.dumps(data['research-backlog.json']).replace('"RAW_TOTAL"', token)
+            for optimized in (False, True):
+                with self.subTest(token=token, optimized=optimized):
+                    result = self.run_validator(data, optimized,
+                                                raw_json={'research-backlog.json': raw})
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('incorrect priority arithmetic', result.stderr)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+                    self.assertEqual((self.base / 'research-backlog.json').read_text(), raw)
+
+    def test_exact_priority_total_spellings_and_unknowns_remain_valid(self):
+        cases = (
+            ([1] * 6, ('1', '1.0', '1e0', '10e-1', '1.0000000000000000000000')),
+            ([5] * 6, ('5.000e0', '50e-1')),
+            ([1, 2, 3, 4, 5, 1], ('2.45', '2.4500', '245e-2', '245000e-5')),
+            ([None, 1, 2, 3, 4, 5], ('null',)),
+        )
+        for scores, tokens in cases:
+            data = deepcopy(self.data)
+            data['research-backlog.json'][0].update(scores=scores, score='RAW_TOTAL')
+            for token in tokens:
+                raw = json.dumps(data['research-backlog.json']).replace('"RAW_TOTAL"', token)
+                for optimized in (False, True):
+                    with self.subTest(token=token, optimized=optimized):
+                        result = self.run_validator(data, optimized,
+                                                    raw_json={'research-backlog.json': raw})
+                        self.assertEqual(result.returncode, 0, result.stderr)
+                        self.assertIn('Market integrity OK', result.stdout)
+                        for name, value in data.items():
+                            expected = raw if name == 'research-backlog.json' else json.dumps(value)
+                            self.assertEqual((self.base / name).read_text(), expected)
+
+    def test_raw_factor_tokens_keep_the_accepted_integer_only_rule(self):
+        tokens = ('1.0', '1e0', '5.000e0', '10e-1',
+                  '1.0000000000000000000001', '0.999999999999999999999999',
+                  '4.999999999999999999999999', '5.000000000000000000000001')
+        for position in range(6):
+            for token in tokens:
+                data = deepcopy(self.data)
+                scores = [1] * 6
+                scores[position] = 'RAW_FACTOR'
+                data['research-backlog.json'][0]['scores'] = scores
+                raw = json.dumps(data['research-backlog.json']).replace('"RAW_FACTOR"', token)
+                for optimized in (False, True):
+                    with self.subTest(position=position, token=token, optimized=optimized):
+                        result = self.run_validator(data, optimized,
+                                                    raw_json={'research-backlog.json': raw})
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn('six ordinal JSON integers from 1 to 5 or null', result.stderr)
+                        self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_priority_token_check_preserves_unrelated_numeric_readback(self):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0]['unrelated'] = 'RAW_NUMBERS'
+        raw = json.dumps(data['research-backlog.json']).replace(
+            '"RAW_NUMBERS"', '{"decimal":1.25,"rounded":1.0000000000000000000001,"tiny":1e-10000}')
+        result = self.run_validator(data, False, raw_json={'research-backlog.json': raw})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        spec = importlib.util.spec_from_file_location('synthetic_market_reader', self.script)
+        reader = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(reader)
+        actual = reader.read('research-backlog.json')
+        self.assertEqual(actual, json.loads(raw))
+        self.assertIs(type(actual[0]['scores'][0]), int)
+        self.assertIs(type(actual[0]['score']), float)
+        for value in actual[0]['unrelated'].values():
+            self.assertIs(type(value), float)
+        self.assertEqual((self.base / 'research-backlog.json').read_text(), raw)
 
     def test_backlog_duplicate_missing_parent_and_cycles_still_fail(self):
         baseline = self.data['research-backlog.json']
