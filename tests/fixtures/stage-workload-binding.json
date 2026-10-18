@@ -1,0 +1,69 @@
+{
+  "x_t0_stage_workload": {
+    "proposal_version": "cd5-0.1",
+    "build_sha256": "1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef",
+    "answer_states_sha256": "e181d514e22fe82a8b23c94a066c94c368a75a2bf80f5b910bb6435b9e41128d",
+    "inventory_id": "fixture.pipeline.1",
+    "stages": [
+      {
+        "id": "retrieve",
+        "selection_id": "sel_embedding_model",
+        "operation": {
+          "id": "embed-query",
+          "version": "1"
+        },
+        "configuration_id": "fixture.retrieve.1",
+        "tokenizer": {
+          "id": "fixture.embedding-tokenizer",
+          "version": "1"
+        },
+        "native_input_units": [],
+        "native_output_units": []
+      },
+      {
+        "id": "draft",
+        "selection_id": "sel_model",
+        "operation": {
+          "id": "generate",
+          "version": "1"
+        },
+        "configuration_id": "fixture.draft.1",
+        "tokenizer": {
+          "id": "fixture.text-tokenizer",
+          "version": "1"
+        },
+        "native_input_units": [],
+        "native_output_units": []
+      },
+      {
+        "id": "classify",
+        "selection_id": "sel_model",
+        "operation": {
+          "id": "generate",
+          "version": "1"
+        },
+        "configuration_id": "fixture.classify.1",
+        "tokenizer": {
+          "id": "fixture.text-tokenizer",
+          "version": "1"
+        },
+        "native_input_units": [],
+        "native_output_units": []
+      },
+      {
+        "id": "audio-score",
+        "selection_id": "sel_model",
+        "operation": {
+          "id": "audio-scores",
+          "version": "1"
+        },
+        "configuration_id": "fixture.audio-score.1",
+        "tokenizer": null,
+        "native_input_units": [
+          "audio_seconds"
+        ],
+        "native_output_units": []
+      }
+    ]
+  }
+}

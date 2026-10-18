@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "id": "build.fixture.cd5",
+  "revision": 1,
+  "name": "FICTIONAL CD-5 per-stage workload inventory",
+  "owner_ref": "team.fixture",
+  "lifecycle": "draft",
+  "created_at": "2026-10-16T09:00:00Z",
+  "updated_at": "2026-10-16T09:00:00Z",
+  "objectives": {
+    "region": "us-east-fixture",
+    "currency": "USD",
+    "monthly_budget_amount": "1000.00",
+    "requests_per_day": 200,
+    "avg_input_tokens": 700,
+    "avg_output_tokens": 400,
+    "max_concurrency": 2,
+    "data_classification": "internal",
+    "max_latency_ms": 6000
+  },
+  "locks": {
+    "catalog_snapshot_id": "catalog.fixture.1",
+    "ruleset_id": "rules.fixture.1",
+    "ruleset_version": "1.0.0",
+    "dependency_graph_id": "dependencies.core.1",
+    "dependency_graph_revision": 1,
+    "pricebook_id": "prices.fixture.1"
+  },
+  "selections": [
+    {
+      "id": "sel_model",
+      "kind": "model",
+      "catalog_item_id": "cat.model.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "serving_mode": "weights",
+        "precision": "fp16",
+        "max_output_tokens": 512,
+        "temperature": 0.4
+      }
+    },
+    {
+      "id": "sel_inference_engine",
+      "kind": "inference_engine",
+      "catalog_item_id": "cat.inference_engine.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "precision": "fp16",
+        "tensor_parallel_size": 1,
+        "max_batch_tokens": 4096
+      }
+    },
+    {
+      "id": "sel_embedding_model",
+      "kind": "embedding_model",
+      "catalog_item_id": "cat.embedding_model.fixture",
+      "catalog_item_version": "2026.10-demo",
+      "role": "primary",
+      "enabled": true,
+      "settings": {
+        "output_dimensions": 768
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "link.05",
+      "from_selection_id": "sel_model",
+      "to_selection_id": "sel_inference_engine",
+      "relation": "served_by"
+    }
+  ],
+  "policy": {
+    "fail_on_unknown": true,
+    "require_evaluations_for_production": true,
+    "allow_unverified_catalog_items": true,
+    "min_resource_confidence": "estimated"
+  }
+}

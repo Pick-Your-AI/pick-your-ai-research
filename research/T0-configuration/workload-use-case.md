@@ -1,7 +1,7 @@
 # T0: Workload / Use Case
 
 Issue: #2 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `a222013`) · Kinds: `workload`
-Status: draft, revision 5 (aligned with the owner positions posted on #75 and #88) · Last researched: 2026-10-16
+Status: draft, revision 6 (CD-5 stage-workload candidate; receiving/adoption pending) · External research: 2026-10-16 · Candidate updated: 2026-10-18
 Deliverable path: `research/T0-configuration/workload-use-case.md` · Companion note: [`research/T0-configuration/deployment-mode.md`](deployment-mode.md)
 
 Labels used in this note:
@@ -624,7 +624,9 @@ This note sets no prices. Budgets combine one-off hardware caps with operating c
 
 ## Structured artifacts
 
-None. A workload is not a catalog fact (Recommendation 1).
+No catalog proposal: a workload is not a catalog fact (Recommendation 1).
+The [CD-5 candidate below](#cd-5-per-stage-workload-candidate-2026-10-18) adds
+test-only Build/answer/binding fixtures, a schema and a normalization experiment.
 
 ## Open questions and handoffs
 
@@ -639,6 +641,7 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q5 | What latency defaults should the builder use? | #36 | #10, #11 |
 | Q6 | Which protocols and metrics can a `quality_target` use? | #36 | #11 |
 | Q7 | How should several workloads sharing one machine be represented? | #42 | #10 |
+| Q8 | Adopt the CD-5 scoped stage inventory and choose its successor/native input integration; obtain actual stage/operation workload evidence | #40 | #2, #7, #10, #16, #39, #42 |
 
 ### Recorded receiving dispositions
 
@@ -719,3 +722,163 @@ All sources were accessed on 2026-10-16. Relative "updated" labels are not used 
 | E23 | EUR-Lex, GDPR Art. 4(1), 9(1): <https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679> | OJ L 119/1, 4.5.2016 | Primary documentation (legal text) | Text of Art. 4(1) and 9(1) checked at the cited URL on 2026-10-16. Not legal advice. |
 | E24 | ISO, "ISO 4217 Currency codes": <https://www.iso.org/iso-4217-currency-codes.html>; standard record: <https://www.iso.org/standard/64758.html> | ISO 4217:2015; the record shows the 2021 review | Primary documentation | — |
 | E25 | ISO, "ISO 3166 Country Codes": <https://www.iso.org/iso-3166-country-codes.html> | As shown at access | Primary documentation | Containment semantics are a project decision (CD-9) |
+
+## CD-5 per-stage workload candidate (2026-10-18)
+
+**Engineering choice for review:** keep each stage's expected load and lengths
+under its exact selected operation/configuration. Bind the inventory to the
+complete original Build and CD-1 answer bytes. Never fill a missing stage value
+from the build-wide profile, another stage, a task label or a pipeline edge.
+This implements a concrete research candidate for the [CD-5 decision](deployment-mode.md#open-contract-decisions)
+and the [load/length dictionary](#field-dictionary); it leaves their successor
+contract adoption open.
+
+The inspected project baseline is `19f248d37c5a8cb8cdd187bc0197281b0f67c044`,
+read on 2026-10-18. Inputs are the project definitions in this record,
+[CD-1 answer normalization](component-schema-compatibility.md#cd-1-concrete-answer-encoding-and-normalization-experiment-2026-10-18),
+[CD-11 exact context/route scope](component-schema-compatibility.md#cd-11-typed-context-and-exact-route-binding-candidate-2026-10-18),
+and W-R6's request/sequence distinction. These are project design inputs;
+the dated E-series external-source observations above are not refreshed by this
+experiment. No vendor measurement, actual request trace or model support is
+asserted by the invented fixtures.
+
+The candidate comprises a [binding schema](../../tests/fixtures/stage-workload-binding.schema.json),
+[binding](../../tests/fixtures/stage-workload-binding.json),
+[frozen-format synthetic Build](../../tests/fixtures/stage-workload-build.json),
+[CD-1 answers](../../tests/fixtures/stage-workload-answers.json),
+[normalizer](../../tests/stage_workload_binding_prototype.py) and
+[boundary cases](../../tests/test_stage_workload_binding.py).
+
+### Identity and stage coverage
+
+The `x_t0_stage_workload` wrapper has version `cd5-0.1`, SHA-256 hashes of the
+complete original Build and answer documents, an `inventory_id`, and at most
+128 declared stages. The original UTF-8 bytes are retained without rewriting.
+Malformed frozen-format Builds, ambiguous selection/primary-role identities,
+unknown selection references and duplicate stage IDs reject before evaluation.
+Selection enabled state comes from the retained Build.
+
+| Descriptor | Representation and meaning |
+| --- | --- |
+| `id` | Unique stage ID within this inventory. Two calls to the same selection may have different IDs and independent load profiles. An ID alone proves no actual call. |
+| `selection_id` | Exact existing selection in the retained Build. Its version/settings remain bound by the complete Build hash; the candidate does not resolve a catalog archive or verify a service capability. |
+| `operation` | Registered operation ID and exact version string. A method name, stage name or selected kind does not determine whether it generates tokens. |
+| `configuration_id` | Opaque identity for this stage's admitted configuration context. Actual route, account, decoding, retrieval assembly and invocation conditions must be established by the external qualifier. |
+| `tokenizer` | Exact tokenizer ID/version reference, or explicit null while no tokenizer is selected. A token-using stage remains incomplete without it. A qualified purely native-unit operation needs no invented tokenizer. |
+| `native_input_units`, `native_output_units` | Separate unique lists drawn from `images_per_request`, `audio_seconds`, `video_seconds`. Each list needs its own qualified completeness fact. An empty list becomes evidence of no native-unit demand only when that fact is eligible true. |
+
+IDs use 1–128 ASCII letters, digits and `._:-`, starting with a letter or digit.
+Version strings are 1–200 characters, contain non-whitespace text and no ASCII
+control characters, and are compared without trimming/coercion. They may preserve
+release suffixes and meaningful spaces. SHA-256 text is exactly 64 lowercase
+hexadecimal characters. These are bounded candidate wire choices, not automatic
+normalization rules for external identifiers.
+
+Every stage answer path includes the Build hash, inventory ID, stage ID and
+digest of the complete stage descriptor. A changed Build, operation version,
+configuration, tokenizer or native-unit list therefore requires newly scoped
+facts; a fresh workload fact cannot reuse the old stage association.
+The separate stage-inventory completeness path includes the digest of all
+descriptors sorted by stage ID. Adding, removing or replacing a stage cannot
+reuse the old complete-inventory assertion. Reordering stage descriptors does
+not change its identity or imply an execution order.
+
+Descriptor encoding is SHA-256 of UTF-8 `cd5-0.1\n` followed by JSON with sorted
+object keys, no insignificant whitespace and unescaped non-ASCII text. Array
+order inside a descriptor is retained. Descriptors contain strings, null,
+arrays and objects; no decimal or JSON-number canonicalization is applied.
+The complete original input documents are hashed separately, byte for byte.
+
+### Typed facts and exact quantities
+
+Each consumed field is a [CD-1 answer](../../tests/fixtures/t0-answer-states.schema.json),
+with its provided value or distinct missing/unknown/withheld/not-applicable
+state. Each path also has separate caller-supplied eligibility: exact Boolean
+or unresolved. Omitted eligibility, false eligibility and source labels supply
+no usable fact. Stale/unknown eligibility keys and numeric Boolean aliases
+reject. The qualifier must establish the actual stage association and the
+applicable workload evidence; equality of bytes or labels does not do so.
+
+| Stage field | Known-value type and evidence requirement |
+| --- | --- |
+| `active` | Boolean stating whether this exact stage is active. Only eligible false makes the declared stage inactive; missing applicability never invents a zero-load stage. A disabled Build selection is authoritative and cannot be enabled by this answer. |
+| `scope_confirmed` | Eligible true confirming the selected operation/configuration/tokenizer association. False or unresolved leaves the stage incomplete, with no normalized metric values exposed. |
+| `requests` | `count`: exact JSON integer ≥ 0; `period`: day or month. The period is the workload-rate basis, not a dated observation window or a month-to-day conversion. Zero is known demand and does not deactivate the stage. |
+| `peak_concurrency` | Exact JSON integer ≥ 1, requests in flight at this stage. It is neither a sequence count nor an inference-engine admission limit. |
+| `input_uses_tokens`, `output_generates_tokens` | Independently eligible Booleans for the actual operation. Classification implemented by generative JSON still needs output token counts. Neither a task label nor a not-applicable count answer establishes these facts. |
+| `input_tokens` | Mean and maximum tokens per stage request, including the complete assembled stage input. Mean ≥ 1, integer maximum ≥ 1, mean ≤ maximum. |
+| `output_tokens` | Mean and integer maximum generated tokens per stage request, both ≥ 0 and mean ≤ maximum. A generating operation with a zero maximum remains known numeric data. |
+| Native-unit lengths | One mean/maximum answer per declared unit in each direction. Image maxima are exact nonnegative JSON integers; audio/video maxima are nonnegative decimal text in seconds. Means are nonnegative and cannot exceed maxima. No pixels, frames, rows, vectors or token conversions are inferred. |
+| Native-list completeness | Separate `native_input_units_complete` and `native_output_units_complete` Booleans. Incomplete coverage keeps known per-unit values visible while preventing complete stage readiness. |
+
+All integer counts are bounded by `9223372036854775807`; integral floating-point
+tokens such as `1.0` and Booleans reject. Means and duration maxima use unsigned
+plain decimal strings: up to 19 integer digits and 18 fractional digits, no
+exponent, sign or leading integer zero except zero itself. Trailing fractional
+zeroes remain valid. Python Decimal comparisons preserve these exact values
+without binary-float conversion or rounding; this is a candidate input
+representation, not a claim of already-tested native parser parity.
+
+Provided lengths are validated even when their selection/stage is disabled,
+their operation is non-generating or their source is ineligible. A malformed
+known value cannot disappear behind a short circuit. A valid but unresolved
+fact retains its original CD-1 state and source path in the result.
+
+### Readiness and non-applicability
+
+Readiness is an input-normalization result, with no compatibility rule ID,
+severity, fit calculation or whole-Build verdict:
+
+| State | Meaning |
+| --- | --- |
+| Stage `ready` | Scope/activation confirmed and all required load, applicability, length and native-coverage inputs resolved. This does not establish model support, context fit, memory fit, capacity, latency, cost or quality. |
+| Stage `incomplete` | A required stage input or association is unresolved. Other known metric values remain visible when the stage scope itself is confirmed. |
+| Stage `inactive` | Its Build selection is disabled, or an eligible explicit false stage-activation answer is present. It emits no fabricated numeric zeroes. |
+| Metric `not_applicable` | Only a qualified non-token-using/non-generating operation plus a separately eligible CD-1 not-applicable count answer. A missing count, unknown operation or provided conflicting count remains incomplete. |
+
+The inventory result is ready only when it has at least one ready stage,
+every other declared stage is ready/inactive, and stage coverage is eligible
+true. An empty stage inventory remains incomplete even with a complete flag;
+an explicitly complete nonempty all-inactive inventory is inactive. Neither
+case produces a zero total. The output preserves every scoped answer,
+per-path eligibility, stage descriptor and all three original-input hashes.
+Returned mutable copies cannot change subsequent evaluations.
+
+### Synthetic cases and downstream use
+
+| Invented case | Result and consumer implication |
+| --- | --- |
+| Retrieval, drafting and classification share a pipeline; drafting/classification use the same selection | Independent stage means/maxima and request counts remain separate; no sibling or global-profile fallback. |
+| Retrieval output is explicitly non-generating | Qualified output not-applicability is retained; it is not converted into a token budget or a price of zero. |
+| Classification uses generated labels | Its output tokens remain applicable despite the stage name. A provided maximum of zero differs from not-applicable. |
+| Audio scoring has no token-using operation and 1.500 mean / 3.25 maximum input seconds | Exact native seconds remain seconds; no tokenizer or token rate is invented. |
+| All stage values are known but one native-unit inventory or the stage inventory is incomplete | Known stage facts remain usable in their local scope; complete pipeline readiness is withheld. |
+| Same stage/selection IDs after a changed Build, operation or tokenizer | Old associations and numeric facts are not read through the new scoped keys. New eligibility alone cannot repair missing facts. |
+| Mean 1.000000000000000001 with maximum 1 | Rejected as an invalid range even under a low Decimal precision context; no rounding hides the excess. |
+| Requests 9007199254740993 per day | The Python candidate retains the exact JSON integer; no floating-point reduction or monthly total is claimed. |
+
+The focused cases run with
+`python -m unittest tests.test_stage_workload_binding -v`. They exercise exact
+bytes, 36 named stage/number/identity/eligibility cases, source-path preservation,
+inactive and not-applicable boundaries, independent completeness, stale
+associations and repeat-evaluation isolation. Their fixtures are invented
+and their test helper explicitly qualifies only those invented facts.
+
+**Receiving boundary.** #40 owns successor wire/result and reader adoption;
+#2/#16 supply actual stage inventories and assembled-input definitions;
+#7/CD-11 binds each token-using stage to its exact context budget;
+#10/CD-2 applies matching decoding expansion, resident-sequence, allocation and
+memory-pool evidence; #39 applies properly scoped meter/period/rate/rounding
+rules; #42 handles retained versions and multiple workloads. Per-stage request
+peaks cannot be added into a shared-device peak without scheduling/overlap
+evidence. Per-stage averages do not determine correlated tail demand.
+
+This slice does not describe graph execution order, derive fan-out/retries,
+transfer upstream output into a downstream input, count tokens, convert native
+units, infer request-to-sequence expansion, sum shared memory, convert periods
+or evaluate end-to-end latency/cost. Such derivations need explicit models and
+their own evidence. It does not alter frozen v1, CD-1/CD-2/CD-7/CD-11 code,
+current catalog/pricebooks, market ledgers, existing criteria or owner receipts.
+The candidate addresses CD-5 representation and executable normalization;
+actual source qualification, successor/native integration and receiving
+acceptance remain separate work.
