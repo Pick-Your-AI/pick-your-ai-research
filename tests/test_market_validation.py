@@ -139,6 +139,61 @@ class MarketValidation(unittest.TestCase):
                     self.assertIn('access_date', result.stderr)
                     self.assertNotIn('Market integrity OK', result.stdout)
 
+    def data_with_url(self, url, boundary):
+        data = self.supported_claim()
+        if boundary == 'source URL':
+            data['sources.json'][0]['url'] = url
+        else:
+            data['features.json']['cells'][0]['evidence_url'] = url
+        return data
+
+    def test_source_url_requires_text_and_credential_free_http_shape(self):
+        for url in (None, '', '   ', [], 1, 'file:///synthetic', '/synthetic',
+                    'https:///synthetic', 'https://user:password@example.com/synthetic',
+                    'https://@example.com/synthetic', 'https://[invalid',
+                    'https://example.com/synthetic claim'):
+            for optimized in (False, True):
+                with self.subTest(url=url, optimized=optimized):
+                    result = self.run_validator(self.data_with_url(url, 'source URL'), optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn('MarketValidationError', result.stderr)
+                    self.assertIn('source URL', result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_claim_and_source_urls_validate_port_shape_in_both_modes(self):
+        for authority, valid in (('example.com', True), ('example.com:443', True),
+                                 ('example.com:0', True), ('example.com:65535', True),
+                                 ('[::1]:8443', True), ('example.com:not-a-port', False),
+                                 ('example.com:65536', False), ('example.com:-1', False)):
+            for boundary in ('source URL', 'evidence_url'):
+                data = self.data_with_url(f'https://{authority}/synthetic', boundary)
+                for optimized in (False, True):
+                    with self.subTest(authority=authority, valid=valid, boundary=boundary,
+                                      optimized=optimized):
+                        result = self.run_validator(data, optimized)
+                        if valid:
+                            self.assertEqual(result.returncode, 0, result.stderr)
+                        else:
+                            self.assertNotEqual(result.returncode, 0, result.stdout)
+                            self.assertIn('MarketValidationError', result.stderr)
+                            self.assertIn(boundary, result.stderr)
+                            self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_claim_and_source_urls_reject_raw_controls_in_both_modes(self):
+        for control in ('\x00', '\x1b', '\x7f'):
+            for url in (f'{control}https://example.com/synthetic',
+                        f'https://exa{control}mple.com/synthetic',
+                        f'https://example.com/synthetic{control}'):
+                for boundary in ('source URL', 'evidence_url'):
+                    data = self.data_with_url(url, boundary)
+                    for optimized in (False, True):
+                        with self.subTest(url=url, boundary=boundary, optimized=optimized):
+                            result = self.run_validator(data, optimized)
+                            self.assertNotEqual(result.returncode, 0, result.stdout)
+                            self.assertIn('MarketValidationError', result.stderr)
+                            self.assertIn(boundary, result.stderr)
+                            self.assertNotIn('Market integrity OK', result.stdout)
+
     def test_duplicate_json_keys_fail_before_market_data_is_interpreted(self):
         original = json.dumps(self.data['features.json'])
         cases = (
