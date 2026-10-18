@@ -70,7 +70,7 @@ RAG-01 retains its accepted counting text below. Its fixed `on_unknown: block` a
 ## RAG-05: filtered approximate search can return fewer than k results
 
 - Participating kinds, roles, and JSON pointers: `rag_pipeline` `/settings/top_k`; exact backend/query/filter strategy, selected ANN effort/scan bounds and eligible candidate-population evidence. Enforcement point E (RAG-02) locates the filter but does not prove its authority or retrieval coverage.
-- Applicability condition: dense or hybrid retrieval with metadata or ACL filters.
+- Applicability condition: dense or hybrid retrieval with metadata or ACL filters on a selected approximate or candidate-limited vector search. An evidenced exhaustive exact plan that filters the eligible population before final top-k selection, without an earlier candidate cutoff, skips this shortfall-risk screen. An unknown search method is unresolved, not assumed exact.
 - Assertion and source evidence: an applicable documented mitigation for filtered candidate shortfall is actually configured on this query path: pre/efficient filtering, iterative/expanded scanning, or a separately qualified partitioned plan. R01 distinguishes filters inside and outside the kNN search. R35's pinned pgvector source says iterative scans stop when enough results are found **or** configured scan/probe limits are reached; strict distance order does not establish perfect recall. R08/R15 retain their own engine-specific conditions. A known unmitigated post-scan plan fails this configuration screen. A pass establishes the selected mitigation, not returned k, measured recall, answer correctness or authorization.
 - Severity: `warning`. Missing candidates can change answer coverage and correctness; RAG-02 separately governs unauthorized exposure.
 - Missing-data behaviour: undocumented or unbound query/filter/mitigation configuration → `unknown`, `on_unknown: review`. Absent measurement leaves quality/shortfall results unknown even when this configuration screen passes.
@@ -78,7 +78,7 @@ RAG-01 retains its accepted counting text below. Its fixed `on_unknown: block` a
 - Dependency edges and affected consumers: #15, #36 (shortfall metric).
 - Passing example: synthetic Elasticsearch query binds its mandatory filter inside the documented kNN clause; the configuration screen passes while workload recall and RAG-02 authority remain separate. A configured bounded iterative scan can likewise pass without promising k results.
 - Failing example: synthetic k=10 post-scan filter with no applicable mitigation. This flags shortfall risk; it does not prove a particular query returned fewer results.
-- Unknown / non-applicable: strategy or query binding unknown → unknown; an evidenced unfiltered path → skipped.
+- Unknown / non-applicable: search method, strategy or query binding unknown → unknown; an evidenced unfiltered path or exhaustive exact plan without an earlier candidate cutoff → skipped. Skipping this risk screen does not skip #36 returned-count/relevance evaluation or RAG-02 authorization.
 - Version and migration impact: needs filter-strategy, query/configuration and separate measurement operands; no frozen-v1 schema change.
 
 ## RAG-06: citations are required but unsupported
