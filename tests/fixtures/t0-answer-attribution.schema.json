@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-1 0.2 answer-attribution candidate",
+  "description": "Explicit opt-in research fixture; not a released contract or automatic migration.",
+  "type": "object",
+  "required": ["x_t0_answer_states"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_answer_states": {
+      "type": "object",
+      "required": ["proposal_version", "answers"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd1-0.2"},
+        "answers": {
+          "type": "object",
+          "propertyNames": {"pattern": "^(?:/(?:[^~/]|~[01])*)+$"},
+          "additionalProperties": {"$ref": "#/$defs/answer"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "preset_source": {
+      "type": "string",
+      "pattern": "^preset:[A-Za-z0-9][A-Za-z0-9._-]{0,63}(?![\\s\\S])"
+    },
+    "answer": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["state", "value", "assumption"],
+          "additionalProperties": false,
+          "properties": {
+            "state": {"const": "provided"},
+            "value": {},
+            "source": {"$ref": "#/$defs/preset_source"},
+            "assumption": {"type": "boolean"}
+          }
+        },
+        {
+          "type": "object",
+          "required": ["state"],
+          "additionalProperties": false,
+          "properties": {
+            "state": {"enum": ["unknown", "missing", "withheld", "not_applicable"]}
+          }
+        }
+      ]
+    }
+  }
+}

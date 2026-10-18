@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "id": "monitoring-vllm-native-metrics",
+  "kind": "monitoring_stack",
+  "tier": "T6",
+  "name": "vLLM native Prometheus metrics",
+  "version": "v0.31.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Native V1 engine metric profile at source commit db9527a46873454610df6dbedf79a36d6bf1a7f6. Conservative latency and token-counter capability subset; selected deployment, exporter exposure, privacy and retention evidence remain separate. See research/T6-deployment-operations/monitoring.md.",
+  "spec": {
+    "signals": [
+      "latency",
+      "token_usage"
+    ],
+    "exporter": "prometheus"
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://api.github.com/repos/vllm-project/vllm/git/ref/tags/v0.31.0",
+      "checked_at": "2026-10-18T15:53:41Z",
+      "verification_status": "unverified",
+      "notes": "VM-S1: tag readback resolves v0.31.0 to db9527a46873454610df6dbedf79a36d6bf1a7f6. This identifies the researched release; no latest-release or deployed binary claim."
+    },
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/v1/metrics/loggers.py",
+      "checked_at": "2026-10-18T15:53:41Z",
+      "verification_status": "unverified",
+      "notes": "VM-S2: native PrometheusStatLogger uses Prometheus Histogram and Counter constructors for the SG70-SG72 latency and SG75 token registrations mapped in the note. Source definitions and record paths were read; no engine or metrics scrape was run."
+    },
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/usage/metrics.md",
+      "checked_at": "2026-10-18T15:53:41Z",
+      "verification_status": "unverified",
+      "notes": "VM-S3: documented /metrics endpoint, exposition example and metric deprecation policy. The exporter field describes the native metrics interface, not a selected collector version or verified wrapper exposure."
+    },
+    {
+      "source_uri": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE",
+      "checked_at": "2026-10-18T15:53:41Z",
+      "verification_status": "unverified",
+      "notes": "VM-S4: Apache-2.0 declaration for the pinned software source. No license-permission booleans, model/service rights or rights in collected telemetry are inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T15:53:41Z"
+}

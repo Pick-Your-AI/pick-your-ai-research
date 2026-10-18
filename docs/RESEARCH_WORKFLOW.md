@@ -64,6 +64,21 @@ access, retain their original text. This checks the two existing fields without
 rewriting source or recheck records; a well-formed date/status does not establish
 successful retrieval, freshness, source truth or receiving acceptance.
 
+Source-register `rechecks`, when present, must be an array. Each entry retains
+one of the existing representations: a singular `claim` record or a nonempty
+`claims` array. They cannot appear together. Each recheck needs a real
+`YYYY-MM-DD` access date and nonempty access status, version, region, confidence,
+limitations and rights text. Each claim needs its own text, publisher, evidence
+class and either a single `url` or a nonempty `source_urls` list; every supplied
+URL representation receives the existing HTTP(S) syntax checks. Grouped records
+also need their method and nonempty `reviewed_urls` entries with URL, publisher
+and access status. This preserves the seven historical singular claim records
+as well as grouped claims, without converting or rewriting either format.
+Empty recheck arrays and records that explicitly describe unknowns or failed
+access remain valid. These checks do not retrieve the URLs, authenticate the
+metadata, judge claim support or evidence grades, establish freshness or grant
+source-use permission.
+
 The market backlog's issue numbers and specified parent numbers must be positive JSON integers. Boolean or floating-point aliases cannot identify an issue; only an absent or null parent means no parent. Its six priority factors follow the existing [ordinal 1–5 rubric](market-research/research-methodology.md#priority-rubric): each is a JSON integer token or null. The total must be a JSON number matching the unchanged weighted calculation, or null when any factor is unknown. Its original numeric token must equal that result exactly; float rounding cannot conceal a fractional difference. Numerically equivalent decimal or exponent spellings remain valid for the total, while factors retain their integer-token requirement. Booleans cannot stand in for a numeric total. These checks preserve the recorded graph and score shape; they do not assess the scoring judgments or establish issue completion.
 
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.

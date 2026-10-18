@@ -335,6 +335,99 @@ The final schema/generator/ruleset, full field registry and affected-owner
 handoffs remain separate successor-release work. #42/#114's recorded
 prerequisite is unchanged by this synthetic normalization experiment.
 
+#### CD-1 known-value schema admission correction (2026-10-18)
+
+This is the bounded response to **constraint 2** in the
+[existing owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407),
+under the [separate implementation reservation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251633973).
+The earlier normalization and rule-outcome records above retain their original
+scope. The remaining defect was at the supplied **field schema** boundary:
+`{"enum": ["none", "session", "persistent", "unknown"]}` admitted a provided
+`"unknown"` as a known value. Actual original-reader probes also admitted direct
+`const`, locally referenced vocabularies, object properties and array items.
+A typed `memory != "none"` assertion could consequently pass for the in-band
+marker. Correct typed negation cannot recover an answer state already lost by
+an unsafe field vocabulary.
+
+The [test-only schema admission helper](../../tests/t0_known_value_schema.py)
+now checks the local known-value profile before `AnswerIndex.read` validates
+any provided value. It rejects `"unknown"` in finite `enum`/`const` value
+declarations, including leaves of structured constants and nested field schemas.
+The **schema** is rejected even when the current supplied answer happens to be
+`"persistent"`; the reader does not silently remove an enum member, substitute a
+value or rewrite the schema. The predicate never runs after this rejection.
+The encoding remains `cd1-0.1`, and original answer bytes and the caller's schema
+remain unchanged. No production field, wire, generator or ruleset is adopted by
+this test-only admission profile.
+
+| Input boundary | Result |
+| --- | --- |
+| Provided value with finite vocabulary containing `"unknown"` | Input error before a value predicate or terminal finding |
+| Explicit `unknown`, `missing`, `withheld` or `not_applicable` record | Existing typed state, source path and rule policy; no value-schema check or value callback |
+| Known enum/constant, including false, zero, empty or explicitly nullable values | Ordinary schema validation, exact value/type retention |
+| Literal `"unknown"` under a free-text string schema | Provided text; never silently converted to an answer state |
+| `unknown` as an object property name, description, example or default annotation | Not a provided-value vocabulary declaration; no default is applied |
+| Direct `not: {const: "unknown"}` or `not: {enum: [...]}` exclusion | Ordinary exclusion semantics; the excluded value still fails field validation |
+
+The supported schema profile is explicit. It uses draft 2020-12, follows
+document-local JSON Pointer `$ref` targets (including RFC 6901 escaping and URI
+fragment decoding) at supported schema locations, and inspects the standard
+object/array applicators,
+`allOf`/`anyOf`/`oneOf`, conditional locations and dependent schemas. Unused
+`$defs` and annotations are not applied field declarations. Property-name
+validation retains a separate context, so a reference used for names cannot
+hide the same vocabulary when it is also used for values. Ordinary finite-data
+recursive schemas remain usable; a nonprogressing recursive application is a
+controlled input error, never a predicate result.
+
+This is a conservative **admission profile**, not a JSON Schema equivalence or
+satisfiability solver. A finite exclusion is admitted only when the immediate
+`not` body consists solely of `enum` or `const` and is outside another negation.
+Other occurrences of the sentinel in finite declarations, including conditional
+or compound-negation forms, require an explicit field-schema rewrite; the
+normalizer does not infer that another keyword makes them unreachable. Named
+anchors, external/dynamic references, nested schema resources and other dialects
+are outside this profile and reject before reference retrieval or predicates.
+They cannot bypass the local vocabulary inspection. Root schema identifiers and
+supported local references retain their ordinary meaning. This changes no
+frozen contract resolver or other schema validator.
+
+Independent review found that the first candidate inspected a reference target
+without inspecting resource-bearing ancestors skipped by its pointer. A jump
+through an unused `$defs` resource could make the admission helper inspect the
+root's known enum while the actual validator used the nested resource's
+`enum: ["unknown"]`. The original candidate admitted the marker and executed
+the predicate; its otherwise successful test receipts do not cover this gap.
+The correction tracks schema nodes separately from schema-map/array containers
+through the full pointer path and rejects any nested resource ancestor. A field
+or definition literally named `$id` remains a normal name, not a resource
+keyword. Pointers into annotations or container maps are outside the supported
+schema-location profile; no arbitrary dictionary is promoted to a field schema.
+
+[Twenty-two additional synthetic methods](../../tests/test_t0_known_value_schemas.py)
+exercise the actual reader, predicate and typed terminal-rule boundary, including
+direct and nested sentinel vocabularies, known-value controls, exact free text,
+literal property names, annotations, local/escaped/shared references, unused
+definitions, recursion, direct exclusions and negation counterexamples. The
+original six-method red run had 15 failed rejection subcases with the free-text
+control passing. Normal/optimized and final source/receiving runs retain their
+own PR receipts; a proposal or test count is not empirical source evidence.
+
+Primary syntax checked **2026-10-18**: JSON Schema validation
+[sections 6.1.2–6.1.3](https://json-schema.org/draft/2020-12/json-schema-validation#section-6.1.2)
+define finite enum/constant equality, while core
+[sections 10.2.1–10.2.2](https://json-schema.org/draft/2020-12/json-schema-core#section-10.2.1)
+define applicators, negation and conditional behavior. Those standards do not
+reserve the word `unknown`; excluding it from known answer vocabularies and
+restricting this local profile are project decisions from the cited disposition.
+
+The [parent-visibility correction](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251507908)
+retains its separate lookup/source-path scope. This correction changes only the
+provided-value schema-validation footer in the existing reader. Preset
+provenance, the complete owner-reviewed field registry, successor migration,
+affected-consumer adoption and the full #40/#42 acceptance remain separate.
+The workload-note and M1/W-R11 writer retains its dictionary/activation scope.
+
 ### CD-1 withheld-child visibility in parent reads (2026-10-18)
 
 Constraint 5 in [the current #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
@@ -366,6 +459,67 @@ sibling isolation, exact/ancestor/provided reads and both terminal policies.
 This corrects visibility in the existing test-only reader. It adds no wire
 field/state, default, evidence qualification, preset policy or successor
 adoption. The other CD-1 constraints and full #40/#42 criteria remain open.
+
+### CD-1 explicit preset attribution candidate (2026-10-18)
+
+Constraint 6 in [the #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a constrained `preset:<name>` source and an explicit assumption flag.
+The original `cd1-0.1` schema admits arbitrary nonblank source text and has no
+assumption member. The separate [0.2 schema](../../tests/fixtures/t0-answer-attribution.schema.json),
+[synthetic example](../../tests/fixtures/t0-answer-attribution.json),
+[reader](../../tests/t0_answer_attribution_prototype.py) and
+[regressions](../../tests/test_t0_answer_attribution.py) provide an explicit
+opt-in candidate. Original 0.1 schemas, fixtures, readers and callers retain
+their historical meaning; neither reader silently accepts the other version.
+
+Every 0.2 `provided` record must include an exact Boolean `assumption`. Its
+optional `source` must be `preset:<name>`, where this bounded candidate permits
+a 1–64-character ASCII name starting with a letter or digit and continuing with
+letters, digits, dots, underscores or hyphens. Whitespace, trailing control
+characters, URLs and arbitrary source labels are rejected. Broader preset-name
+vocabulary requires an explicit later candidate. Unresolved records retain the
+existing four states and cannot carry a value, source or assumption flag.
+
+`assumption: true` and `assumption: false` remain the caller's distinct explicit
+declarations. The reader infers neither from a source name, a missing source,
+the value's truthiness or another record. Both flags are valid with or without
+a preset source: preserving the origin does not determine whether the caller
+currently declares the value an assumption. Neither flag, nor a syntactically
+valid source, establishes accuracy, confirmation, eligible evidence, publisher
+identity or receiving-owner acceptance. No implicit false/default is supplied.
+
+The reader retains the original UTF-8 bytes. After strict 0.2 admission, it uses
+a private 0.1-shaped in-memory view only to reuse current pointer traversal,
+field validation and answer-state mechanics. That view is not an exported
+artifact, a changed identity or a migration of retained bytes. A provided
+nested value inherits its actual recorded ancestor's source and assumption;
+a missing member or unresolved answer receives no provided attribution.
+Current parent-visibility and overlap behavior is reused unchanged.
+
+The accepted original-token precision guard from [#359](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/359)
+also runs at this candidate's first JSON parse, before any private view is
+serialized. Otherwise an underflowed or excess-precision raw token could be
+rounded first and the downstream reader would see only the replacement number.
+Synthetic controls reject those tokens even in unread nested values before the
+normalizer is called, while preserving supported decimal/exponent values and
+exact JSON integers with their original bytes and explicit attribution.
+
+The typed predicate preserves the explicit flag/source through safe negation.
+The separate terminal wrapper keeps them alongside the unchanged typed rule
+finding and its causal source path, using only the callback actually responsible
+for the result. An unevaluated assertion is not called to obtain metadata.
+Fixed severity, unknown/skipped policy and lazy value validation remain with
+the existing rule evaluator; a false assumption flag cannot turn unresolved
+predicate evidence into a pass. This wrapper rejects callbacks that have
+already discarded attribution. Existing lossy adapters and consumers are not
+silently upgraded to the candidate.
+
+The synthetic cases cover both Boolean flags, absent sources, invalid/missing
+flags, whole-string source admission, original-byte preservation, exact nested
+causes, unresolved states, safe negation and both terminal policies. This
+addresses the test-only attribution mechanics of constraint 6. It changes no
+frozen v1 field, source grade, preset registry, field vocabulary or production
+wire format; successor adoption and the complete #40/#42 criteria remain open.
 
 ### CD-3 synthetic support-membership experiment (2026-10-18)
 
