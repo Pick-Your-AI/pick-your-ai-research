@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-10-18T05:49:07.4716245Z",
+  "scope": "Only this task-created temporary session; existing CUDA runtime and unrelated workloads unchanged",
+  "removed_bytes": 2672773945.0,
+  "target_exists": false,
+  "classification": "task artifact cleanup receipt",
+  "removed_files": 10,
+  "target": "$TASK_TEMP/mr09-gm1-20261018-0545"
+}

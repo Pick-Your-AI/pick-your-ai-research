@@ -1,0 +1,9 @@
+{
+  "id": "mr09-granite31-1b-a400m-instruct",
+  "uri": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/model.safetensors",
+  "version": "0da7a48b0276d500ce5922fd2b33944091fc6c09",
+  "sha256": "ac02591061f1344027a7e7b11dbb4143f75f166c47dc09b742f5de3ab1dde1d1",
+  "access": "Public pinned Hugging Face download, accessed 2026-10-18; model weights are outside Git and task-created local copies are removed after the experiment.",
+  "description": "Pinned Granite3.1 BF16 safetensors for supplemental GM1. Locally checked size 2669283096 bytes and SHA-256 match the publisher metadata. Config/tokenizer hashes are in the separate run artifact ledger.",
+  "rights": "Publisher metadata labels Apache-2.0 at the pinned revision; source card URL is recorded in the run ledger. No weights or model-card text are redistributed. Intended-use rights and source accuracy remain subject to evidence review."
+}
