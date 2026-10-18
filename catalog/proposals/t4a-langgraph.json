@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "id": "agent_framework.langgraph",
+  "kind": "agent_framework",
+  "tier": "T4",
+  "name": "LangGraph (Python)",
+  "version": "1.2.15",
+  "status": "active",
+  "billing_class": "free",
+  "spec": {
+    "programming_languages": [
+      "python"
+    ],
+    "supports_tool_execution": true
+  },
+  "description": "Low-level graph runtime for stateful agents; checkpointers (in-memory, SQLite, Postgres) enable human-in-the-loop and fault tolerance. MCP is provided separately by langchain[mcp] (beta), so supports_mcp is not set.",
+  "tags": [
+    "agent-framework",
+    "open-source"
+  ],
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/langgraph/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "version 1.2.15 uploaded 2026-10-12; requires_python >=3.10; supports programming_languages python"
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "license MIT"
+    },
+    {
+      "source_uri": "https://github.com/langchain-ai/langgraph/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "MIT license; JS/TS is a separate library (LangGraph.js), not covered by this version"
+    },
+    {
+      "source_uri": "https://github.com/langchain-ai/langchain-mcp-adapters/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "supports_tool_execution: LangGraph prebuilt ToolNode/tools_condition executes tool calls (LangChain-authored example)"
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}

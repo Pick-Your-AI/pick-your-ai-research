@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "id": "memory_store.langgraph.postgres-store",
+  "kind": "memory_store",
+  "tier": "T4",
+  "name": "LangGraph PostgresStore (long-term memory store)",
+  "version": "3.2.0",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Cross-thread LangGraph BaseStore in PostgreSQL with namespaced JSON items; optional pgvector semantic search; optional TTL with a background sweeper. Package langgraph-checkpoint-postgres.",
+  "tags": [
+    "long-term-memory",
+    "key-value",
+    "optional-vector",
+    "self-hosted",
+    "library"
+  ],
+  "spec": {
+    "memory_type": "long_term",
+    "backing_type": "relational",
+    "supports_ttl": true
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/langgraph-checkpoint-postgres/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports version 3.2.0 (uploaded 2026-10-14). The 3.2.0 wheel's langgraph/store/postgres/base.py defines ttl_config, an expires_at column, sweep_ttl() and a docstring requiring start_ttl_sweeper() for expiry: supports_ttl true, conditional on the sweeper being started."
+    },
+    {
+      "source_uri": "https://docs.langchain.com/oss/python/langgraph/stores",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports memory_type long_term (cross-thread store, namespaces, put/get/search/delete) and that semantic search is optional ('configure the store with an embedding model'); backing_type relational is the item's primary backing. Vector search when enabled uses pgvector in the same PostgreSQL."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports license MIT."
+    }
+  ],
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-17T02:17:46Z"
+}

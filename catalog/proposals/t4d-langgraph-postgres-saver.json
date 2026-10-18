@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "memory_store.langgraph.postgres-saver",
+  "kind": "memory_store",
+  "tier": "T4",
+  "name": "LangGraph PostgresSaver checkpointer",
+  "version": "3.2.0",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Thread-scoped (short-term) LangGraph state persisted as checkpoints in PostgreSQL; package langgraph-checkpoint-postgres. Storage is the user's PostgreSQL (#9).",
+  "tags": [
+    "checkpointer",
+    "session-state",
+    "self-hosted",
+    "library"
+  ],
+  "spec": {
+    "memory_type": "session",
+    "backing_type": "relational"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/langgraph-checkpoint-postgres/json",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports version 3.2.0 (uploaded 2026-10-14). The 3.2.0 wheel contains langgraph/checkpoint/postgres with delete_thread and no TTL code; supports_ttl and encryption_at_rest are therefore omitted."
+    },
+    {
+      "source_uri": "https://docs.langchain.com/oss/python/langgraph/checkpointers",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports memory_type session (thread_id is the checkpoint primary key) and backing_type relational (PostgresSaver, 'Ideal for using in production'). Encryption is optional via EncryptedSerializer (LANGGRAPH_AES_KEY), not default, so encryption_at_rest is not asserted."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/langchain-ai/langgraph/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports license MIT for the langgraph monorepo that ships the checkpoint libraries."
+    }
+  ],
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  },
+  "updated_at": "2026-10-17T02:17:46Z"
+}

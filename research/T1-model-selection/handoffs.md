@@ -23,7 +23,22 @@ Ownership snapshot: 2026-10-16, preserved from live GitHub assignees. Central re
 | #7 -> #28 | @CompleteDotTech | Count history/retrieved memory/thinking; preserve required content and recount after memory transforms | Pending |
 | #7 -> #39 | @PUSHINGSQUARES | Prompt-length predicates, exact currencies/route/service modifiers, threshold-crossing uncertainty and full-session accounting | Pending |
 
-## Central reconciliation
+## Broad-family and citation follow-up: 2026-10-17
+
+The [taxonomy](model-taxonomy.md), six linked comparisons, [inventory](model-research-inventory.json) and [primary register](model-research-sources.md) extend the earlier language-model slice. The [retrospective audit](citation-audit-2026-10-17.md) and [market citation map](../market/citation-index-2026-10-17.md) trace previous sources without replacing historical access dates. None of the earlier owner positions accepts these new artifacts automatically.
+
+| Receiving issues / live owners | New disposition requested | State |
+| --- | --- | --- |
+| #40: @tynamite with T1 author @zwright8; #41: @tynamite / @PUSHINGSQUARES | Review T1-TAX1 task/output/admission semantics and per-source evidence limitations, preserving frozen v1 and accepted CD decisions | Pending |
+| #30: @appletechie with T1 author @zwright8 | Confirm separate code/checkpoint/backbone/adapter/service/data rights evidence and unresolved grants are sufficient for intake; no universal permission | Pending |
+| #10: @Mattycodes69 / @appletechie; engine consumers | Identify per-task runtime/resource inputs; no text-KV formula transferred to arbitrary model families | Pending |
+| #14: @zabyxc01 / @PUSHINGSQUARES | Review dense/sparse/multivector versus rerank outputs and exact modality/shape evidence; embedding catalog ownership stays with T3 | Pending |
+| #39: @appletechie / @PUSHINGSQUARES | Define unsupported image/audio/video/character/credit meters before pricebook/contract intake; no new rates proposed | Pending |
+| #49: @appletechie with author @zwright8; coordinator @CompleteDotTech; #59: @Mattycodes69 / @appletechie | Review retrospective citation mapping and narrower documentary evidence grades; unknown cells remain unknown | Pending |
+
+Live issue assignees were read from GitHub on 2026-10-17; existing assignments and triage were preserved. This is a research checkpoint, not full acceptance of #4–7/#49, measured quality, rights clearance or approved contract migration.
+
+## Central reconciliation (earlier language-model slice)
 
 | Owner / issue | Precise requested disposition | Current state |
 | --- | --- | --- |
