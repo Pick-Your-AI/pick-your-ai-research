@@ -19,8 +19,11 @@ The [three-group map](../T6-deployment-operations/deployment.md#hosting-rule-to-
 links offering membership to S1/S17/S28, private-network capability to S10/S45,
 and mounted-storage locality to S43/S50. [Source review 5561644402](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/247#pullrequestreview-5561644402)
 records its independent documentary review. The earlier receipt keeps its
-`66b46d4` pin; acceptance of the later integration and the remaining co-owner
-scopes are still separate. No selected deployment or final ruleset is inferred.
+`66b46d4` pin. [PUSHINGSQUARES's actual later response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6247689488),
+reviewing `9192d5d`, confirms its responsibility, artifact, network and region
+inputs and separately narrows the #39 cost interface below. That response
+explicitly leaves receiving review of the map and appletechie's separate scope
+open. No selected deployment or final ruleset is accepted.
 
 | Producer | Consumer | Current consuming owner | Artifact / confirmation requested | Acknowledgement evidence |
 | --- | --- | --- | --- | --- |
@@ -29,8 +32,8 @@ scopes are still separate. No selected deployment or final ruleset is inferred.
 | #9 | #15 | @zabyxc01, @appletechie | Vector DB hosting and infrastructure storage boundary; product evaluation retained by #15 | [@appletechie accepts boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; @zabyxc01 substantive disposition separate |
 | #9 | #27 | @CompleteDotTech, @tynamite | MCP server hosting/network category; transport and tool semantics retained by #27 | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072) |
 | #9 | #31 | @tynamite, @appletechie | Host/storage IDs, availability and billing constraints; training sizing retained by #31 | [Accepted](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274): reuse existing host/storage IDs; missing SKU records remain separate |
-| #9 | #37 | @appletechie, @PUSHINGSQUARES | Deployment responsibility, artifacts, network and region constraints | [@appletechie's historical accept, integration-pending receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; #247 delivered the hosting rule-ID map. Its receiving review and @PUSHINGSQUARES's scope remain separate |
-| #9 | #39 | @appletechie, @PUSHINGSQUARES | Dated price units, conditional rates, storage/egress exclusions | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; preserve units and uncovered costs. @PUSHINGSQUARES and invoice-rounding decisions separate |
+| #9 | #37 | @appletechie, @PUSHINGSQUARES | Deployment responsibility, artifacts, network and region constraints | [@appletechie's historical accept, integration-pending receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047) retains `66b46d4`. [@PUSHINGSQUARES confirms with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6247689488) at `9192d5d`: responsibility/artifact/network/region inputs from #247's delivered offering/private-network/mounted-storage map are confirmed. Proposal 0.3.0 remains documentary, with entitlement, actual route and actual mount separately evidenced. The response explicitly leaves receiving review of the map and appletechie's separate scope open |
+| #9 | #39 | @appletechie, @PUSHINGSQUARES | Dated price units, conditional rates, storage/egress exclusions | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047) at `66b46d4`. [@PUSHINGSQUARES narrows](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6247689488) at `9192d5d`: retain scoped units/conversions/allowances and readable L37/L38 estimates as not-totalled rows under #113. Display rate, accrual cadence, credit admission and invoice rounding remain distinct; the last is unadopted, and Runpod sub-hour cadence remains open |
 | #10 | #9 | @Mattycodes69, @appletechie | Distinct accelerator vs provisionable compute-profile catalog IDs | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): accelerator/profile separation; no free-memory or workload-fit claim |
 | #10 | #11 | @zwright8, @Mattycodes69 | Backend/precision and per-device memory assumptions; no universal GPU fit | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): per-device inputs and capacity/support separation; no pooled VRAM |
 | #10 | #31 | @tynamite, @appletechie | Reuse accelerator catalog; independent training-specific memory/time estimates | [Historical acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484): reuse the then-existing accelerators/profile; training estimates remain independent. The later [H100/MI300X note-only correction](gpu-compute.md#incomplete-precision-intake-correction-2026-10-18) changes current reference availability and needs its own receiving review |
@@ -122,6 +125,9 @@ The [hosting record](hosting.md#proposed-initial-regional-scope-and-expansion-ga
 now proposes bounded initial samples and evidence-led expansion, separates
 public offering from account access/AZ capacity, and rechecks regional and
 Runpod billing/placement documentation as H34–H37. No rate or catalog changes
-follow. appletechie's #15/#37/#39 responses above retain their `66b46d4` scope,
-with product/integration and other co-owner decisions separate. Both #9 owners
-still decide the regional recommendation; #39 must resolve invoice semantics.
+follow. appletechie's #15/#37/#39 responses above retain their `66b46d4` scope.
+PUSHINGSQUARES's later `9192d5d` response confirms #37 inputs from the map and
+narrows #39 to the stated unit, visible-exclusion and billing-stage conditions.
+Receiving review of the #37 map, appletechie's separate scope, #14 and the
+substantive #15 response remain outstanding. Both #9 owners still decide the
+regional recommendation; unresolved invoice semantics remain with #39.
