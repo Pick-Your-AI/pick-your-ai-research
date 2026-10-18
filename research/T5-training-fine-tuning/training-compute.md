@@ -278,9 +278,9 @@ The prices above are recorded with provenance so they can be converted once the 
 
 ### Upstream T2 records
 
-2026-10-18 supplement: the [T2 hardware/profile capture](../T2-infrastructure/gpu-compute.md#additional-hardware-and-profile-capture-2026-10-18) supplies note-only A100 80GB, RTX 4090 and P4de facts. Their incomplete precision coverage cannot safely become frozen-v1 catalog entries; those record gaps remain. The [S3 identity](../T2-infrastructure/hosting.md#s3-standard-identity-supplement-2026-10-18) adds only `aws-s3-standard`, superseding that specific absence statement below once reviewed. Other SKUs, rates, measured training capacity and proposed contract fields remain unresolved. No historical price is silently rebound to a new item/version.
+2026-10-18 supplement: the [T2 hardware/profile capture](../T2-infrastructure/gpu-compute.md#additional-hardware-and-profile-capture-2026-10-18) supplies note-only A100 80GB, RTX 4090 and P4de facts. Their incomplete precision coverage cannot safely become frozen-v1 catalog entries; those record gaps remain. The [S3 identity](../T2-infrastructure/hosting.md#s3-standard-identity-supplement-2026-10-18) adds only `aws-s3-standard`, merged in [#158](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/158) and resolving that specific record-identity gap. Other SKUs, rates, measured training capacity and proposed contract fields remain unresolved. No historical price is silently rebound to a new item/version.
 
-Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals under their own review, not approved catalog data. The first table lists what this note can already reference. The second separates records that do not exist from fields and meters that are unresolved.
+Initially checked on 2026-10-16 against `main` after #75 merged; the S3 identity rows were reconciled on 2026-10-18 after #158 merged. These are T2 proposals under their own review, not approved catalog data. The first table lists what this note can already reference. The second separates records that do not exist from fields and meters that are unresolved.
 
 | Need in this note | Record on `main` (`catalog/proposals/`) | Notes |
 | --- | --- | --- |
@@ -289,14 +289,14 @@ Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals un
 | MI300X accelerator | `amd-mi300x`: `vram_gb` 192, backend `rocm` | Not priced in this note |
 | `aws g6e.xlarge` (1× L40S, $1.861/h, P7) | `compute_profile` `aws-ec2-g6e-xlarge-us-east-1`: `hosting_ref` `aws-ec2`, `accelerator_ref` `nvidia-l40s`, count 1, region `us-east-1` | The only existing `compute_profile`. It is a valid `compute_profile_ref` target. The T2 pricebook has no rate for it yet |
 | AWS and RunPod hosting | `hosting_platform` `aws-ec2` (`us-east-1`), `runpod-pods`; also `runpod-serverless`, `modal-functions`, `huggingface-endpoints-aws` | Hosting records exist for two of the self-run providers priced here |
-| Checkpoint storage (`storage_ref`) | `storage` `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | The S3 Standard row (P13) has no matching `storage` record |
+| Checkpoint storage (`storage_ref`) | `storage` `aws-s3-standard` (object, version `2026-10-18`), `aws-ebs-gp3` (block, `aws-ec2`), `cloudflare-r2-standard` (object), `modal-volumes-v1` (file), `runpod-network-standard-us-ks-2` (file, `runpod-pods`, US-KS-2) | S3 Standard identity exists via #158; P13 remains a historical price observation, not a rate bound to this item/version |
 
 | Gap | Kind | Route |
 | --- | --- | --- |
 | `compute_profile` for `p5.48xlarge`, `p4de.24xlarge`, `a3-highgpu-8g`, `Standard_ND96isr_H100_v5`, Lambda, RunPod and CoreWeave SKUs | Missing record. Required spec fields: `hosting_ref`, `cpu_cores`, `ram_gb`, `region`. The price evidence here records SKU, GPU count and price; it was not collected for CPU and RAM, and P11 states no RunPod region. Those fields need their own sources | #10 owns profiles. This note supplies the SKU and price list only |
 | Accelerator records for A100 80 GB and RTX 4090 | Missing record (B2, B3 use the 4090) | #10 |
 | `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave | Missing record | #9 |
-| `storage` record for S3 Standard | Missing record | #9 |
+| S3 Standard price binding | Identity `aws-s3-standard` version `2026-10-18` exists; applicable rate scope and exact-version pricebook linkage remain unresolved | #39, with #9 for offering scope |
 | Peak dense TFLOP/s per accelerator, needed by the time formula | Unresolved field: `spec_accelerator` has `vram_gb` and `precisions` but no throughput field | Contract proposal through #40, with #10 |
 | Training-token, job-minimum, training-hour and model-storage meters; `compute_profile_ref` optional for managed services | Unresolved meters and field (v1 contract) | #40 and #39 |
 | `training.estimated_peak_per_device_vram_gb` | Unresolved ResourceEstimate metric | #40, with #10 |
@@ -308,7 +308,7 @@ Checked on 2026-10-16 against `main` after #75 merged. These are T2 proposals un
 | Question | Follow-up issue / owner |
 | --- | --- |
 | Accelerator and compute-profile records still missing for the SKUs priced here (A100 80 GB, RTX 4090, and profiles for every SKU except `aws-ec2-g6e-xlarge-us-east-1`); a peak dense TFLOP/s field. VRAM and bf16/fp8 inputs already exist for H100 SXM, L40S and MI300X. See Upstream T2 records | #10 · @Mattycodes69 |
-| Hosting platform records for Google Cloud, Azure, Lambda and CoreWeave, and a `storage` record for S3 Standard. `aws-ec2` and `runpod-pods` already exist | #9 · @Mattycodes69 |
+| Hosting platform records for Google Cloud, Azure, Lambda and CoreWeave. `aws-ec2`, `runpod-pods` and the S3 Standard storage identity already exist; S3 rate binding remains with #39 | #9 · @Mattycodes69 |
 | Pricebook meters for `training_tokens_1m`, `training_tokens_1k`, `training_hour`, `job_minimum` and `model_storage_month`; a ResourceEstimate metric `training.estimated_peak_per_device_vram_gb`; `compute_profile_ref` optional for managed services | #40 · @tynamite |
 | Price normalisation: per-1k vs per-1M tokens, epochs and validation tokens, job minimums, and post-training hosting shown next to training cost | #39 · @PUSHINGSQUARES |
 | Training time and cost estimate for distillation and GRPO (only memory is sketched) | #31 · @appletechie |
