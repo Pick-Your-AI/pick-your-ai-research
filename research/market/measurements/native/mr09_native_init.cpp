@@ -71,8 +71,10 @@ template<class F> static F symbol(HMODULE module,const char * name) {
     return reinterpret_cast<F>(result);
 }
 static HMODULE load(const std::string & dir,const char * name) {
-    auto module = LoadLibraryExA((dir+"/"+name).c_str(),nullptr,LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR|LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
-    if (!module) throw std::runtime_error(std::string("DLL load failed: ")+name);
+    char absolute[32768];
+    if (!GetFullPathNameA((dir+"/"+name).c_str(),sizeof(absolute),absolute,nullptr)) throw std::runtime_error("path normalization failed");
+    auto module = LoadLibraryExA(absolute,nullptr,LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR|LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
+    if (!module) throw std::runtime_error(std::string("DLL load failed: ")+name+" Win32="+std::to_string(GetLastError()));
     return module;
 }
 static void cap_record(const char * stage) {
