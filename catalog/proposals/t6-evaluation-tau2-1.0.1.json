@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-tau2-text-trial-metrics",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "tau2 text simulation trial metrics",
+  "version": "1.0.1",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published v1.0.1 source profile for text simulation scoring. Active means availability of the inspected tag, without adopting benchmark data or running the simulation. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "avg_reward",
+      "pass_hat_1"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/sierra-research/tau2-bench/blob/fc0055dc4e0a316c3f83133267fbd6faaa770992/pyproject.toml",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 55a9d9cf6ebd8bf2326798f4923988917e431086, SHA256 23d59670b4ad7bbc0f57420fd9643a8d9188c24abe4f29c9c965544d8cc4cb8d, was read without importing or executing the package. The tagged source declares tau2 version 1.0.1. The text batch scope does not adopt the separate voice or retrieval extensions in the repository."
+    },
+    {
+      "source_uri": "https://github.com/sierra-research/tau2-bench/blob/fc0055dc4e0a316c3f83133267fbd6faaa770992/README.md",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 9fe658afdd54e83f923bbfc6d77e556ecdbe45f1, SHA256 ed39688aa5d40bd73007355df65f4e41a6c250960642e56764c3ad44da1df8d2, was read without importing or executing the package. Finite task/trial simulations support offline benchmark mode, while target and simulated-user calls may use external APIs. The banking_knowledge grading change must not be mixed across versions. The current document title does not change the declared package identity."
+    },
+    {
+      "source_uri": "https://github.com/sierra-research/tau2-bench/blob/fc0055dc4e0a316c3f83133267fbd6faaa770992/src/tau2/metrics/agent_metrics.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob f6959b005e9653f1858f463d4c73c321d6d26eef, SHA256 136b5ebcc0c115b5817a4f6d6b485a871aba199ddedf56458f35f339569a54dc, was read without importing or executing the package. The serialization emits avg_reward and pass_hat_1 when trials support k=1. pass_hat_k measures all-k consistency using a combination ratio, not at-least-one pass@k. Infrastructure-error filtering, retained trials, reward tolerance and empty-result behavior must remain visible. Empty/default zero values are not measured success, safety or free execution."
+    },
+    {
+      "source_uri": "https://github.com/sierra-research/tau2-bench/blob/fc0055dc4e0a316c3f83133267fbd6faaa770992/LICENSE",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob f0323a32227c1327820da33d2fb9d3338a27ac84, SHA256 e67c5aa0074dfcaefd3c3a1aedb94cb539234aecd15d5a972574e3200e6252fe, was read without importing or executing the package. MIT source-code license only. Model, simulated-user, dataset, hosting and operational charges are not established."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00",
+  "license": {
+    "spdx_id": "MIT"
+  }
+}

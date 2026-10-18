@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-pyrit-scenario-and-scorer",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "PyRIT scenario outcomes and scorer agreement",
+  "version": "1.1.0",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Source-only PyRIT profile that keeps scenario objective outcomes separate from agreement between a scorer and human labels. These identifiers do not denote one interchangeable target-safety score, an executed assessment, an adopted threshold, a dataset/model entitlement or a deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "objective_achieved_rate",
+      "accuracy",
+      "f1_score",
+      "precision",
+      "recall",
+      "mean_absolute_error"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "MIT"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/pyproject.toml",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 5f2a8802b09da68e4289f3e43e20c6c8fbf55344 was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. Version 1.1.0 is classified Development Status 3 Alpha, mapped to preview; the non-prerelease release does not override maturity. Python >=3.10,<3.15 and MIT are publisher metadata, not a reproduced runtime environment."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/pyrit/models/results/scenario_result.py",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob bddfb26f209576e2dbc9db4fd090e3089a369038 was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. objective_achieved_rate is the integer-truncated percentage of recorded results that achieved the objective. Empty or missing selected groups return 0; that absence is not independently measured safety. Cohort, outcome/error coverage and trial counts remain explicit inputs."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/pyrit/score/scorer_evaluation/scorer_metrics.py",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 946e4f8330999d971d6121e6cd1458dc81a70d0d was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. accuracy, f1_score, precision and recall compare an objective scorer with human ground truth; mean_absolute_error is harm-scorer agreement. These are separate scorer-calibration capabilities, not global target-safety measurements."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/doc/code/scoring/4_scorer_metrics.py",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 512c6aedb479bdc33e592e0236f991bc0a2ad3c5 was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. The versioned guide explains those scorer-agreement measures and identity-bound cached versus newly evaluated results. Exact scorer/model/prompt configuration and cache origin must accompany later measured claims; no scoring ran here."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/pyrit/models/score/score.py",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 01ec7d8795c61f9bb86f8e2b5991612b6ae3f6fa was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. Undetermined scores carry no value and get_value raises; they must remain distinct from a measured zero or false outcome. A scenario aggregate does not erase that missing/undetermined coverage."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/doc/scanner/0_scanner.md",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 6056ecd43b665eb7e735a425f70567a9b716eaa1 was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. The documented batch/CI scanner supports the bounded offline interpretation. Interactive interfaces alone do not establish online production monitoring. Configured target, adversarial and judge endpoints or optional hosting remain separate network/data-flow choices."
+    },
+    {
+      "source_uri": "https://github.com/microsoft/PyRIT/blob/d0524f0714840519b826eb770687ca1d4f46a761/LICENSE",
+      "checked_at": "2026-10-18T20:08:36Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob b2f52a2bad4e27e2d9c68a755abb74cb8943f2fa was read at publisher commit d0524f0714840519b826eb770687ca1d4f46a761; its retained bytes were rehashed before this proposal. Only the MIT SPDX identifier is recorded. No package/scorer/model was installed or executed and no cost rate, free external inference, dataset/model right or hosting entitlement is inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T20:08:36Z"
+}

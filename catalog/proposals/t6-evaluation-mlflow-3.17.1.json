@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-mlflow-correctness",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "MLflow GenAI expected-fact correctness",
+  "version": "3.17.1",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "MLflow Correctness judge capability applied to supplied records or recorded traces in dataset evaluation. It checks support for expected facts or a response, rather than direct equivalence or universal factual truth. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "correctness"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/mlflow/3.17.1/json",
+      "checked_at": "2026-10-18T19:50:41.122778+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published mlflow 3.17.1 metadata identifies the source artifact uploaded 2026-10-13T09:00:18.681286Z (yanked=false). Its 11158262-byte download matched publisher SHA256 b41225845f200968bfeb015c48ad9e57a02f3bf4cee246fb04a75325728c21d8. Exact metadata classifies Production/Stable and declares Apache Software License; active records that publisher classification without independently certifying reliability. Provider, judge, logging and hosting charges are not supplied."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/6e/30/953491ffbd83c90aba4a72c8a68c03ea16a8b016050557094d059268bf7d/mlflow-3.17.1.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.122778+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's mlflow/genai/scorers/builtin_scorers.py has SHA256 177054dd83822d044d202409bbab0fdddaa91ab4fe189be6484ecde4a8edc5b6. The complete Correctness class defaults to name correctness, requires expected_response or expected_facts, and invokes the configured judge. It explicitly distinguishes support of expected facts from Equivalence. Source feedback typing/documentation is not a measured correctness result."
+    },
+    {
+      "source_uri": "https://pypi.org/project/mlflow/3.17.1/",
+      "checked_at": "2026-10-18T19:50:41.122778+00:00",
+      "verification_status": "unverified",
+      "notes": "mlflow/genai/evaluation/base.py evaluate takes data and scorers, including recorded traces or supplied inputs/outputs/expectations. This profile selects that offline dataset workflow; optional predict_fn, remote judges, tracking, and Databricks-only advanced features remain separately configured."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/6e/30/953491ffbd83c90aba4a72c8a68c03ea16a8b016050557094d059268bf7d/mlflow-3.17.1.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.122778+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}
