@@ -99,7 +99,11 @@ class MarketValidation(unittest.TestCase):
         for url in ('file:///synthetic', '/synthetic', 'https:///synthetic',
                     'https://user:password@example.com/synthetic',
                     'https://@example.com/synthetic', 'https://[invalid',
-                    'https://example.com/synthetic claim'):
+                    'https://example.com/synthetic claim',
+                    'https://example.com:bad/synthetic',
+                    'https://example.com:-1/synthetic',
+                    'https://example.com:65536/synthetic',
+                    'https://[2001:db8::1]:bad/synthetic'):
             data = self.supported_claim()
             data['features.json']['cells'][0]['evidence_url'] = url
             for optimized in (False, True):
@@ -109,6 +113,19 @@ class MarketValidation(unittest.TestCase):
                     self.assertIn('MarketValidationError', result.stderr)
                     self.assertIn('evidence_url', result.stderr)
                     self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_supported_claim_accepts_valid_explicit_ports(self):
+        for url in ('http://example.com:80/synthetic',
+                    'https://example.com:443/synthetic',
+                    'https://example.com:8443/synthetic',
+                    'https://[2001:db8::1]:443/synthetic'):
+            data = self.supported_claim()
+            data['features.json']['cells'][0]['evidence_url'] = url
+            for optimized in (False, True):
+                with self.subTest(url=url, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Market integrity OK', result.stdout)
 
     def test_supported_claim_requires_an_actual_iso_access_date(self):
         for access_date in ('2026-02-30', '20261018', '2026-10-18T00:00:00Z', 'yesterday'):
