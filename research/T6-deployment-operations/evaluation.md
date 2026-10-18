@@ -735,6 +735,22 @@ The builder should treat evaluation as a per-build plan with four parts: the wor
 
 None in this pull request. An `evaluation_suite` catalog item needs `metric_names` and `mode` (offline, online or both); the Products and services table supplies these, and catalog proposals are a follow-up. No `quality-evaluation-run` artifact is included: this research ran no evaluation.
 
+## Framework hooks and evidence completeness (2026-10-18)
+
+The [#25 pinned framework supplement](../T4-agents-integrations/framework-evaluation-telemetry.md)
+adds source-checked OpenAI Agents 0.24.0, CrewAI 1.15.28 and Agno 3.1.3 mechanisms.
+Scripted SDK orchestration, judge-scored outputs, actual tool-execution matching,
+and Python traced allocation are separate evidence types. None supplies a
+workload-quality threshold or measured result here.
+
+The exact isolated CrewAI experimental score predicate returned true for a
+synthetic case missing one expected metric. The retained probe and reproducer
+are linked from that supplement. Proposed intake must therefore verify required
+metric coverage and eligibility before using a framework's aggregate boolean;
+missing metrics remain missing evidence. This is a receiving proposal for
+#36/#40, not a changed v1 schema or accepted production gate. The same note
+separates evaluator telemetry from target/judge settings for #35/#38 review.
+
 ## Open questions and handoffs
 
 ### Open questions

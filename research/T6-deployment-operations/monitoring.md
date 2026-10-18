@@ -869,6 +869,24 @@ Rationale. The catalog covers each component and mode with published names where
 
 None in this pull request. A `monitoring_stack` catalog item needs `signals` from the v1 enum (latency, errors, token_usage, gpu_utilization, quality, drift, cost, traces, security). The signal catalog here is finer (165 signals), so mapping each signal to that enum is a follow-up for review with #40.
 
+## Pinned framework telemetry controls (2026-10-18)
+
+The [#25 framework supplement](../T4-agents-integrations/framework-evaluation-telemetry.md#telemetry-controls-are-scoped-to-their-producers)
+adds a bounded source read of OpenAI Agents 0.24.0, CrewAI 1.15.28 and Agno 3.1.3.
+It records separate producers, effective disable settings, destinations and
+queue boundaries. OpenAI processor addition preserves the existing exporter;
+disabling new traces does not erase buffered events. CrewAI metadata telemetry
+is separate from optional content sharing. Agno's inspected eval helpers do not
+apply the Agent's `AGNO_TELEMETRY` override, so evaluator settings need their own
+check. These are pinned source findings and an isolated stubbed-helper probe,
+not observed collector traffic or a universal no-egress guarantee.
+
+Proposed monitoring evidence retains producer/configuration identity, capture
+policy, actual destination, and created/queued/exported/accepted states. The
+receiving #38/#35 owners still need to adopt or narrow this input and obtain
+deployment-specific measurements. No fixed signal threshold, retention period,
+price, runtime acceptance or executable contract is introduced.
+
 ## Open questions and handoffs
 
 ### Open questions
