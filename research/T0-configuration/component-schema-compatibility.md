@@ -384,6 +384,114 @@ Routing from the reviews:
 | T4 findings 1–7 (#25–#28, merged in #124) | Multi-selection quantifier (CD-13); memory-framework rule review (`on_unknown: review`, severity changed in a ruleset version); MCP transports, protocol versions and client capabilities; MCP hosting through #81's `deployment` object, with the air-gap rule folded into W-R8; credential resolution (T4-B6); side-effect classes and tool metrics; memory evidence fields; injected-token metric as a component of `input_tokens.max`; framework fields; snapshot-date `version` for unversioned hosted services | CD-13, CD-6, CD-4, CD-7, CD-3; #39 for meters and rate limits; #41 for versioning; #2 for the memory persistence need |
 | #42 partial proposal (#114) SB-1 to SB-10, SB-R1 to SB-R5 | Saved-build record gaps (assumptions, snapshot and pricebook revision locks, visibility, derived validation state, fork lineage, several workloads, `withheld` answer state, where cross-record checks live) and integrity rules | #40; SB-8 with CD-1; SB-7 with #10 |
 
+### CD-6 concrete credential-binding wire experiment (2026-10-18)
+
+**Engineering decision for this candidate:** represent each tool's explicit
+credential source in a closed, versioned sidecar bound to the exact retained
+Build and CD-7 pin-file bytes. This makes the
+[T4-B6 proposal](../T4-agents-integrations/tools-apis.md#t4-b6-rulet4toolcredentialref-credential-source-and-resolution-needs-contract-change-via-40)
+readable from concrete fixtures, beyond the earlier normalized-Boolean
+[experiment](../../tests/credential_binding_prototype.py). It chooses a testable
+wire shape for review; it does not adopt a successor contract or resolve the
+receiving authorization, connection-boundary or saved-build decisions.
+
+The [closed schema](../../tests/fixtures/t0-credential-bindings.schema.json),
+[example](../../tests/fixtures/t0-credential-bindings.json),
+[read-only reader](../../tests/t0_credential_wire_prototype.py) and
+[regressions](../../tests/test_t0_credential_wire.py) use the unchanged fictional
+v1 examples and the accepted
+[CD-7 exact artifact resolver](../../tests/t0_revision_lock_prototype.py)
+([#273](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/273)).
+The sidecar's `x_t0_credential_bindings` object contains:
+
+| Field | Candidate representation and meaning |
+| --- | --- |
+| `proposal_version` | Exactly `cd6-0.1`; other versions require a separate reviewed reader |
+| `build_sha256` | Exactly 64 lowercase hexadecimal characters, checked against the original Build bytes |
+| `revision_locks_sha256` | Same digest shape, checked against the complete supplied CD-7 sidecar bytes, including formatting |
+| `bindings` | At most 1,000 explicit choices; an empty array supplies no credential source |
+| `bindings[].selection_id` | Exact retained tool-selection ID, using the canonical 3–80 character selection-ID grammar with full-string validation |
+| `bindings[].source` | `direct`, `integration`, `model_provider` or `none`; no automatic or role-based choice |
+| `bindings[].auth_method` | One explicit `api_key`, `oauth2`, `service_account` or `mTLS` method for authenticated sources; exactly `none` for source `none` |
+| `bindings[].target_selection_id` | Required only for inherited integration/provider sources; exact retained connection-selection ID |
+
+Unknown properties and credential-reference fields are rejected by the sidecar.
+The current method vocabulary comes from the frozen
+[selection settings](../../contracts/v1/schemas/selection.schema.json) and
+[catalog specs](../../contracts/v1/schemas/catalog-item.schema.json); future
+authentication modes need a versioned change, not string coercion.
+
+The reader validates the Build and selected `(catalog_item_id,
+catalog_item_version, kind)` through CD-7. It never chooses the newest artifact
+or another available item version. Missing pins, unavailable retained revisions
+and digest mismatches retain their distinct catalog status and yield `unknown`
+requirements. A supplied credential sidecar without the CD-7 file leaves its
+required digest **unverified**: `revision_binding` is `revision_pins_missing`
+and each applicable explicit choice has an unknown
+`credential_revision_pins_bound` check. This cannot produce a fully bound
+metadata `pass`. The status remains visible when tools are disabled. The other
+statuses are `credential_sidecar_missing` and `exact_pin_bytes_verified`; the
+latter verifies only the sidecar byte binding, not catalog availability or
+authorization. A different supplied Build or pin file is an input error.
+
+Before constructing lookup maps, CD-7's inherited identity check rejects
+duplicate selection IDs and duplicate `(kind, role)` pairs across the entire
+Build, including disabled entries. This reader also rejects duplicate link
+IDs, dangling endpoints and identifiers with trailing control characters.
+Every enabled tool gets its own result. The outer `Selection.enabled` field
+controls participation; nested settings do not establish effective runtime
+enablement. Disabled tools are `skipped`, and an empty tool inventory has no
+tool results. Missing bindings remain `unknown` even when a local reference
+exists. Repeated or competing binding records remain `unknown` rather than
+being deduplicated or selected by array order.
+
+For `direct`, only the selected tool's opaque reference presence is required.
+For an inherited source, the exact target must exist, have the expected kind,
+be enabled, resolve to its selected catalog version and contain a reference.
+Exactly one tool-to-target `provided_by` link is required: no link is a known
+failure, while repeated matching links with different IDs remain ambiguous.
+An `exposes` link, an item association or another connection cannot replace
+the explicit target. Conflicting tool-local and inherited references remain
+`unknown`, even when the strings are identical; neither overrides the other.
+
+Positive selected-auth membership and an integration's
+`associated_tool_refs` membership establish only catalog metadata presence.
+Absent, empty or unlisted entries are `unknown`: the frozen lists have no
+completeness marker supporting a negative conclusion (CD-3). Explicit `none`
+therefore passes this bounded metadata check only with positive `none` support.
+Provider targets retain unknown `provider_hosted_execution_evidence` and
+`provider_api_operation_evidence` checks because frozen v1 has no fields proving
+that execution location and exact provider/API operation tuple. A provider
+name, API URL, link or reference does not fill either gap. Eligible source
+evidence and the chosen deployment's actual support remain separate #41/CD-3
+and affected-owner review inputs.
+
+Known missing required references or absent/disabled/wrong-kind targets fail;
+unresolved versions and support remain unknown. A known failure takes
+precedence while its other unknown checks remain available. Per-tool severity
+is fixed at `error` with `on_unknown: review`. Results contain validated
+selection IDs, fixed status/check codes and the Build digest, never opaque
+reference strings or submitted free-form text; invalid-input diagnostics are
+also sanitized. `authorization: not_evaluated` and
+`secret_resolution: not_performed` remain explicit. This is neither secret
+resolution nor a public/share export format, and a metadata pass proves no
+credential validity, effective grant, scope, entitlement or permission to run.
+
+The published example deliberately fails for its missing direct reference.
+Positive cases use only fictional opaque locators. The regressions cover
+exact-byte authority, legacy absence, source choice, inherited links,
+identity/role ambiguity, completeness, per-selection outcomes, sanitized
+diagnostics and immutable input/history. Run
+`python -m unittest discover -s tests -p test_t0_credential_wire.py -v`.
+
+The retained v1 Build, schemas, examples, evaluator and historical outcomes
+are unchanged. This sidecar does not silently migrate saved builds or alter
+the active CD-2/CD-7 work. Before adoption, #40 still needs the successor
+schema/reader/ruleset and migration decisions with actual receiving review;
+#35 owns effective authorization/scope review, #13 the connection boundary,
+and #42 saved/share handling and its existing prerequisite. These fixtures
+provide mechanics for that review, not receiving acceptance or issue closure.
+
 ## Cycles and recomputation (Proposal)
 
 - **Rules evaluate; they never change selections.** Model ↔ GPU ↔ engine is a cycle in the dependency graph, not in evaluation. Every rule is a function of the current selections, links, catalog snapshot and evidence, so evaluation needs no ordering and always terminates.
