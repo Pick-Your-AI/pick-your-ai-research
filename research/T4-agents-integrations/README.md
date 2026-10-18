@@ -58,7 +58,7 @@ No duplicate issues, new execution blockers or priority changes are introduced. 
 ### MCP servers (#27)
 
 - **Protocol:** the current MCP revision is **2026-07-28** (source-checked on modelcontextprotocol.io/specification/versioning). It replaces the `initialize` handshake with per-request version negotiation and a mandatory `server/discover`. 2025-11-25 and earlier are handshake-based. Clients and servers can support several versions, so the catalog must track a protocol-version set per server and per client.
-- **Transports:** stdio and Streamable HTTP; HTTP+SSE is deprecated. Hosting has three categories: local process, self-hosted remote (a #9 hosting platform), and vendor-hosted remote (public egress required).
+- **Transports:** stdio and Streamable HTTP; HTTP+SSE is deprecated. Hosting patterns include local processes, self-hosted remote endpoints (a #9 hosting platform), and vendor-hosted remote endpoints. The selected endpoint and its connections determine the isolation check under [W-R8](../T0-configuration/workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections); an operator label does not establish public egress or boundary membership.
 - **Trust:** criteria for `internal`, `trusted_external`, `untrusted_external` are proposed. These are proposed project classifications, not security certifications; registry presence does not certify safety. Trust in a server never makes its returned content, tool descriptions or annotations trustworthy.
 - **Candidates:** GitHub (remote and local), Playwright, Stripe, Sentry, Atlassian, DBHub, and the reference fetch and filesystem servers (reference servers are "not production-ready").
 
@@ -81,7 +81,7 @@ All 35 T4 CatalogItem proposals (10 frameworks, 8 tools, 2 integrations, 9 MCP s
 | 1. Framework requires model tool calling | `rule.t4.model.toolcalling` (warning) | `fail` when `supports_tool_calling` is false, `pass` when true |
 | 2. Provider API supported but not every model feature | `rule.t4.model.api.surface`, `rule.t4.model.api.feature` | Needs #40: no API-surface field in v1 |
 | 3. MCP transport unsupported by client | `rule.t4.mcp.transport.client-support` (canonical; same as #25's `transport.match`) | Needs #40: no client-transport field. Interim: `rule.t4.mcp.transport.sse-deprecated` |
-| 4. MCP hosting or auth unavailable in deployment mode | `rule.t4.mcp.remote.air-gapped` (error), `auth.flow-available`, `stdio.colocation` | `fail` for a vendor-hosted remote server on an air-gapped platform; `skipped` for local stdio |
+| 4. MCP isolation, authorization or process placement unavailable | Current isolation proposal: W-R8/CD-4; `auth.flow-available`, `stdio.colocation`. Historical proxy: `rule.t4.mcp.remote.air-gapped` | Historical proxy fixtures: `fail` for a vendor-hosted remote server on an air-gapped platform; `skipped` for local stdio. These are retained research examples; current isolation follows the boundary disposition below |
 | 5. Memory backend needs absent storage | `rule.t4.memory.storage.backing` (warning) | `fail` with no storage or a mismatched storage type |
 | 6. Persistent memory needs configuration evidence | `rule.t4.memory.longterm.volatile` (structural review proxy); `persistence.required` needs #40 | `fail` is a review warning for a long-term `in_memory` item, not proof of restart loss; a non-memory `pass` does not certify durability; `skipped` for a session store |
 | 7. Tool permissions conflict with guardrail policy | `rule.t4.tool.scopes.allowed` (error), `rule.t4.tool.guardrail.targets` | `fail` when `required_scopes` is not a subset of `allowed_scopes` |
@@ -90,6 +90,10 @@ All 35 T4 CatalogItem proposals (10 frameworks, 8 tools, 2 integrations, 9 MCP s
 | 10. Agents without RAG or vector database | Baseline RAG and vector rules | `skipped`; no new rule needed |
 
 Severity (`info|warning|error`) and outcome (`pass|fail|unknown|skipped`) are kept separate throughout. Each rule's participants, assumptions, user-facing message and correction are in its component note.
+
+**Current isolation disposition.** The [actual #40 queue review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) narrows the historical hosting/trust-label proxy into W-R8/CD-4, as already recorded in the [MCP decision record](mcp-servers.md#rulet4mcpremoteair-gapped-hypothesis-compatibility-example-4). Every enabled runtime connection must stay inside the selected boundary and every required runtime artifact must be present inside it. A provider-operated endpoint inside that boundary can pass with eligible evidence; a self-operated endpoint reached across it fails. Local stdio does not waive a component's other connections or artifact requirements. Missing evidence leaves an unknown only when needed to determine applicability, inventory completeness, containment or artifact readiness. A connection known to remain inside can pass with unresolved lifecycle/state; a disabled or provisioning-only connection can skip unresolved destination membership.
+
+The [CD-4 candidate delivered in #300](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/300) makes those input and outcome mechanics executable with synthetic fixtures, exact Build/answer bindings, per-fact eligibility and inventory-completeness evidence. It supplies no physical isolation observation, final ruleset adoption or consumer integration; those acceptance requirements remain separate.
 
 ## Contract findings for #40 (consolidated)
 
