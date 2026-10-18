@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-4 boundary and runtime inventory binding",
+  "description": "Offline research candidate only; neither physical isolation proof nor a released contract.",
+  "type": "object",
+  "required": ["x_t0_isolation"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_isolation": {
+      "type": "object",
+      "required": ["proposal_version", "build_sha256", "answer_states_sha256", "boundary_id", "endpoint_ids", "components"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd4-0.1"},
+        "build_sha256": {"$ref": "#/$defs/digest"},
+        "answer_states_sha256": {"$ref": "#/$defs/digest"},
+        "boundary_id": {"$ref": "#/$defs/identity"},
+        "endpoint_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/identity"}},
+        "components": {"type": "array", "items": {"$ref": "#/$defs/component"}}
+      }
+    }
+  },
+  "$defs": {
+    "identity": {
+      "type": "string", "minLength": 1, "maxLength": 80,
+      "pattern": "^[A-Za-z0-9._:-]+$", "not": {"pattern": "[^A-Za-z0-9._:-]"}
+    },
+    "digest": {
+      "type": "string", "minLength": 64, "maxLength": 64,
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "connection": {
+      "type": "object", "required": ["id", "purpose"], "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "purpose": {"enum": ["weights_download", "telemetry", "licence_check", "remote_api", "backup", "other"]}
+      }
+    },
+    "artifact": {
+      "type": "object", "required": ["id", "sha256"], "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "sha256": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "component": {
+      "type": "object",
+      "required": ["selection_id", "runtime_endpoint_ids", "connections", "runtime_artifacts"],
+      "additionalProperties": false,
+      "properties": {
+        "selection_id": {"$ref": "#/$defs/identity"},
+        "runtime_endpoint_ids": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/identity"}},
+        "connections": {"type": "array", "items": {"$ref": "#/$defs/connection"}},
+        "runtime_artifacts": {"type": "array", "items": {"$ref": "#/$defs/artifact"}}
+      }
+    }
+  }
+}

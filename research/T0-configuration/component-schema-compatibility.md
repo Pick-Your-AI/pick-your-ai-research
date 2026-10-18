@@ -83,7 +83,7 @@ The [CD-7 synthetic fixtures](../../tests/fixtures/t0-migration.json) and [proje
 - **Locks:** M5 records missing revision evidence rather than fetching a current revision. Historical v1 evaluator output and original bytes stay unchanged.
 - **Context:** the worked T1/T2 examples below separate shared-session failure from independent input/output passes; neither supplies a KV-memory fit result.
 
-**Remaining decisions, not invented defaults:** CD-1 answer-state encoding; CD-2 byte placement/pool semantics; CD-3 eligible-evidence/completeness/result wire shapes; CD-4 boundary representation; CD-5 per-stage workload; CD-6 reference/credential/inheritance resolution; CD-7 revision resolution and next-version migration; CD-8 community evidence; CD-9 jurisdiction groups; CD-10 non-model-service runtime requirements; CD-11 context-budget shape; CD-12 attestation placement and CD-13 multi-selection syntax remain with their accountable owners in the companion decision register. This dictionary neither releases v1.1 nor removes #42's recorded #40 prerequisite.
+**Remaining decisions, not invented defaults:** CD-1 answer-state encoding; CD-2 byte placement/pool semantics; CD-3 eligible-evidence/completeness/result wire shapes; CD-4 candidate adoption and source admission; CD-5 per-stage workload; CD-6 reference/credential/inheritance resolution; CD-7 revision resolution and next-version migration; CD-8 community evidence; CD-9 jurisdiction groups; CD-10 non-model-service runtime requirements; CD-11 context-budget shape; CD-12 attestation placement and CD-13 multi-selection syntax remain with their accountable owners in the companion decision register. This dictionary neither releases v1.1 nor removes #42's recorded #40 prerequisite.
 
 ## Rule format and outcome semantics (decided)
 
@@ -222,6 +222,103 @@ unmarked support lists](../T2-infrastructure/inference-engine.md#release-keyed-a
 retain their original source/release scopes. CD-1/CD-3 wire shapes, conflict
 resolution over real sources, affected-owner adoption and the versioned
 ruleset/adapter remain open; frozen v1 and #42's prerequisite are unchanged.
+
+### CD-4 typed isolation-boundary and inventory candidate (2026-10-18)
+
+**Engineering decision:** represent one selected isolation boundary with an
+explicit endpoint register and per-selection runtime footprints. Bind that
+inventory to the complete original Build and CD-1 answer bytes. Use the existing
+[W-R8 rule](workload-use-case.md#w-r8-air-gapped-builds-have-no-external-connections),
+the [CD-4 decision](deployment-mode.md#open-contract-decisions) and the
+[#37 isolation reconciliation](../T6-deployment-operations/deployment.md)
+as the accepted semantic inputs. This chooses a concrete research encoding for
+endpoint membership, connection lifecycle/state and exact artifact readiness;
+it does not infer isolation from provider operation, self-operation or a
+build-level deployment label.
+
+The [schema](../../tests/fixtures/isolation-binding.schema.json),
+[binding](../../tests/fixtures/isolation-binding.json),
+[fictional Build](../../tests/fixtures/isolation-build.json),
+[typed answers](../../tests/fixtures/isolation-answers.json),
+[reference reader](../../tests/isolation_binding_prototype.py) and
+[regressions](../../tests/test_isolation_binding.py) are synthetic test artifacts.
+The narrow Build reuses fictional v1 model, engine and MCP selections; it is not
+a complete runnable configuration. No endpoint is contacted, artifact acquired,
+firewall configured or publisher evidence graded by this experiment.
+
+| Field or answer | Type and scope | Interpretation |
+| --- | --- | --- |
+| `proposal_version` | Literal `cd4-0.1` | Versioned test encoding; no new frozen-v1 field |
+| `build_sha256`, `answer_states_sha256` | 64 lowercase hexadecimal characters | SHA-256 of each complete supplied byte string, including whitespace and unrelated content; never a hash of a reconstructed document |
+| `boundary_id`, `endpoint_ids[]` | Unique canonical ASCII identity strings, 1–80 characters | Exact declared isolation scope; a label provides no membership or physical-isolation evidence |
+| `components[].selection_id` | Exact unique selection ID in the retained Build | Inventory binding covers every enabled selection, regardless of kind or primary role; an omitted selection remains unknown |
+| `runtime_endpoint_ids[]` | Unique references to registered endpoint IDs | All declared runtime execution/service locations must be inside; a component with no runtime endpoint needs an explicitly complete empty inventory |
+| `connections[]` | Unique local ID plus the existing purpose enum | Every declared connection is checked. Telemetry, licence checks and optional-looking purposes receive no runtime-egress exception |
+| `runtime_artifacts[]` | Unique local ID and required SHA-256 | Enumerates required runtime material, including any required local code, weights, configuration or notices. The fixture hashes identify fictional descriptors, not real downloaded artifacts |
+| `/workload/network` | CD-1 answer over `online`, `private_network`, `air_gapped` | Only an eligible provided air-gap requirement activates W-R8. Other provided values skip it; unresolved or ineligible applicability remains unknown |
+| `/workload/isolation_boundary_id` | CD-1 answer over the identity type | Must equal the binding's boundary. A missing or different selected boundary remains unknown |
+| Endpoint `inside_boundary` | CD-1 answer over Boolean | Membership applies to this exact boundary, not generic private networking or provider region membership |
+| Connection `destination_id`, `lifecycle`, `state` | CD-1 answers over a registered endpoint ID, `provisioning`/`runtime`, and `enabled`/`disabled` | Unknown, missing, withheld and not-applicable use CD-1 states outside these known-value enums |
+| Inventory `complete` | CD-1 Boolean scoped to the exact inventory digest | Only eligible `true` establishes complete coverage; `false` and all unresolved states leave coverage unknown |
+| Artifact `present_inside_boundary` | CD-1 Boolean keyed by selection, artifact ID **and required SHA-256** | A same-named different revision cannot reuse a readiness assertion; a download path or a provisioning connection supplies no runtime readiness |
+
+The reader validates complete raw JSON, frozen Build shape, exact integer
+revision tokens, build-wide selection/role uniqueness, all inventory identities
+and registered endpoint references before applying disabled or inapplicable
+shortcuts. Duplicate keys, non-finite values, malformed provided states and
+ambiguous identities reject. CD-1 retains source labels and source paths,
+including unresolved parents; the reader neither equates a literal `unknown`
+with a valid known state nor coerces numbers into Booleans.
+
+**Completeness binds membership.** For each of the three inventories, the
+completeness answer path contains SHA-256 of UTF-8
+`cd4-0.1:<inventory-name>\n<canonical-descriptors>`. Descriptor arrays are sorted
+by identity, object keys are sorted, JSON uses no insignificant whitespace and
+non-ASCII escaping is disabled. These descriptors contain only strings, arrays
+and objects. This exact encoding is specified by `inventory_path`; original
+Build and CD-1 bytes remain untouched. Removing or adding a connection, runtime
+endpoint or artifact changes that digest and makes the prior completeness answer
+inapplicable. Reordering the same descriptors preserves its semantic scope.
+
+**Evidence remains a separate input.** Each consumed answer path has its own
+external eligibility value, exactly `true`, `false` or unresolved. The default
+is unresolved. No source label, hash, completeness claim or syntax check grants
+eligibility. Before real reuse, the consumer must establish the selected
+configuration, actual endpoint boundary, complete connection lifecycle/state
+inventory and exact artifact-presence evidence for this scope under #41.
+The candidate does not derive those facts from a live deployment or catalog.
+
+| Scoped observation | W-R8 finding |
+| --- | --- |
+| Enabled runtime connection to an endpoint known to be outside | `fail`, even when another inventory or component remains unknown |
+| Explicitly disabled connection, or a connection known to occur only during provisioning | `skipped` for that connection; artifacts still require independent readiness |
+| Destination known to be inside | `pass` for that connection even if its lifecycle or enabled state is unresolved, because neither alternative creates external egress |
+| Runtime endpoint known to be outside, or a required exact artifact known not to be ready inside | `fail` |
+| Any other unresolved connection, endpoint, artifact or inventory coverage | `unknown`; absent inventory is never an empty complete inventory |
+| All enabled footprints accounted for, all runtime locations inside and exact artifacts ready | `pass` for this isolated predicate; it supplies no overall deployment approval |
+| No enabled selections | `skipped` with `no_enabled_selections`; required-component activation remains a preceding contract decision |
+
+The aggregate keeps all per-selection findings in stable order. A known
+counterexample wins over unresolved rows; otherwise unknown wins over pass.
+Rule identity `W-R8`, candidate version `cd4-0.1`, severity `error` and
+`on_unknown: block` remain separate from the outcome. `block` is the proposed
+rule policy, not an instruction for this reader to execute or prevent a real
+deployment.
+
+The focused suite includes the 27-case connection truth table, complete versus
+absent/empty inventories, deletion of a descriptor without a new completeness
+answer, exact artifact revision changes, eligibility isolation, disabled and
+non-primary scopes, raw-byte identity and malformed/duplicate references. Run
+`python -m unittest tests.test_isolation_binding -v` and
+`python -O -m unittest tests.test_isolation_binding -v`.
+
+This resolves CD-4's concrete candidate representation and executable research
+examples. Actual source admission, broader receiving adoption, successor
+schema/ruleset publication and migration remain separate. It supplies no
+physical air-gap evidence, jurisdiction decision, hardware result or new
+publisher permission. Frozen v1 is unchanged; #2/#3/#9/#37/#40 remain open for
+their remaining acceptance criteria, and #42's substantive #40 prerequisite is
+preserved.
 
 ## Rule families (decided, pending a versioned ruleset)
 

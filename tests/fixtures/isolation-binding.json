@@ -1,0 +1,60 @@
+{
+  "x_t0_isolation": {
+    "proposal_version": "cd4-0.1",
+    "build_sha256": "d00c8d6604ff40cde543b6b52f9ca8930c5e1bba041413939cb3d95c82913b22",
+    "answer_states_sha256": "4e111f76b22689dc54916f70c19ec2850b1b18a7ef213c8ec7b7f6192de71ae5",
+    "boundary_id": "boundary.fixture.local",
+    "endpoint_ids": [
+      "endpoint.fixture.local",
+      "endpoint.fixture.publisher"
+    ],
+    "components": [
+      {
+        "selection_id": "sel_model",
+        "runtime_endpoint_ids": [],
+        "connections": [],
+        "runtime_artifacts": [
+          {
+            "id": "artifact.fixture.weights",
+            "sha256": "1e747c30ece5413332c6f6587919d887b3420e93bd66b6b4042a68e12c55ec9b"
+          }
+        ]
+      },
+      {
+        "selection_id": "sel_inference_engine",
+        "runtime_endpoint_ids": [
+          "endpoint.fixture.local"
+        ],
+        "connections": [
+          {
+            "id": "conn.fixture.telemetry",
+            "purpose": "telemetry"
+          },
+          {
+            "id": "conn.fixture.download",
+            "purpose": "weights_download"
+          }
+        ],
+        "runtime_artifacts": [
+          {
+            "id": "artifact.fixture.engine",
+            "sha256": "6a99e0123502a2ad9390201c0ea724f4bdc898369712d6b57f2a80883453dbca"
+          }
+        ]
+      },
+      {
+        "selection_id": "sel_mcp_server",
+        "runtime_endpoint_ids": [
+          "endpoint.fixture.local"
+        ],
+        "connections": [
+          {
+            "id": "conn.fixture.api",
+            "purpose": "remote_api"
+          }
+        ],
+        "runtime_artifacts": []
+      }
+    ]
+  }
+}
