@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "id": "aws-ec2-p4de-24xlarge-us-east-1",
+  "kind": "compute_profile",
+  "tier": "T2",
+  "name": "Amazon EC2 p4de.24xlarge in us-east-1",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published default P4de allocation and regional family offering. Eight separate 80 GB A100 devices; no pooled-memory or training/inference-fit claim. Current account quota, AZ capacity, free memory, price and purchase scenario remain unknown.",
+  "spec": {
+    "hosting_ref": "aws-ec2",
+    "accelerator_ref": "nvidia-a100-80gb",
+    "accelerator_count": 8,
+    "cpu_cores": 48,
+    "ram_gb": 1236.950581248,
+    "disk_gb": 8000,
+    "region": "us-east-1"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://aws.amazon.com/ec2/instance-types/p4/",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "P4DE-P1 in gpu-compute.md. Product-details p4de.24xlarge row and GPU-memory paragraph: 8 A100 devices with 80 GB each, 1152 GiB RAM and 8 x 1000 GB local NVMe storage. RAM conversion 1152 * 2^30 / 10^9 = 1236.950581248 GB; aggregate advertised local storage 8000 GB. Local storage is not a persistent-storage service. No performance or rate copied."
+    },
+    {
+      "source_uri": "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "P4DE-P2. Accelerated-computing CPU-options row: p4de.24xlarge has 48 default CPU cores, 96 vCPUs and 2 threads/core. cpu_cores records default cores, not vCPUs or dedicated physical-host tenancy."
+    },
+    {
+      "source_uri": "https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-regions.html",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "P4DE-P3. US East (N. Virginia), us-east-1 accelerated-computing list includes P4de. Public family offering is not proof of availability in every AZ, current capacity, quota or account authorization."
+    }
+  ],
+  "updated_at": "2026-10-18T08:22:02Z"
+}

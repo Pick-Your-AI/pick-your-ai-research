@@ -78,7 +78,7 @@ See [validation.md](validation.md) for exact checks, independent review findings
 Use `Refs #8, #9, #10, #11`. Close no scoped issue until its merged record and full acceptance criteria—including actual owner confirmations—are satisfied; close #8 only after all children and the merged summary meet their gates.
 
 
-2026-10-18 supplement: A100 80GB shared-variant facts, RTX 4090 reference-design facts, the P4de default profile and S3 Standard identity are documented in the existing GPU/hosting records. S3 Standard and the subsequent RTX 4090 precision follow-up have catalog proposals. A100/P4de remain note-only because unresolved precision coverage is unsafe under frozen-v1 membership rules. No rates or measured results are added.
+2026-10-18 supplement: A100 80GB shared-variant facts, RTX 4090 reference-design facts, the P4de default profile and S3 Standard identity are documented in the existing GPU/hosting records. S3 Standard and the subsequent RTX 4090 precision follow-up have catalog proposals. A100/P4de were note-only at the initial capture; the later [native-precision follow-up](gpu-compute.md#a100-and-p4de-precision-and-profile-follow-up--2026-10-18) adds their scoped catalog proposals. Joint engine/artifact compatibility and receiving-owner acceptance remain separate. No rates or measured results are added.
 
 ## Interface reconciliation validation (2026-10-18)
 

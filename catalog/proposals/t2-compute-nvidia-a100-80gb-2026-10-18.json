@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-a100-80gb",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA A100 80GB (common PCIe/SXM specifications)",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published full-device A100 80 GB hardware identity. Only common PCIe/SXM facts are included. Native arithmetic precision coverage does not establish artifact, quantization-kernel or engine compatibility; current stock and runtime allocation remain unknown.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "A100 80GB",
+    "vram_gb": 80,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "fp32",
+      "tf32",
+      "bf16",
+      "fp16",
+      "int8",
+      "int4"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-nvidia-us-2188504-web.pdf",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "A100-P1 in gpu-compute.md. Publisher document 2188504, printed p1: 80 GB PCIe/SXM columns support vendor/model/GPU identity, 80 GB and FP32/TF32/BF16/FP16/INT8. Variant-specific power, bandwidth and fabric are omitted. Advertised capacity is not observed free memory. Source PDF text read; no local source copy or immutable content hash. Status active records a currently published product description, not lifecycle, stock or purchase eligibility."
+    },
+    {
+      "source_uri": "https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "A100-P2. A100 architecture whitepaper, printed pp15/26: explicit INT4 Tensor Core support completes the positive precision values. Native arithmetic support is distinct from a particular stored quantization or software kernel. FP8 absence is supported separately, not inferred from this older paper's omissions."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "A100-P3. NVIDIA CUDA GPU table maps A100 to compute capability 8.0, supporting CUDA identity and the architecture premise of the FP8 instruction comparison. This is not a driver/runtime installation result."
+    },
+    {
+      "source_uri": "https://docs.nvidia.com/cuda/archive/12.8.1/parallel-thread-execution/index.html",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "A100-P4. PTX ISA 8.7, MMA Target ISA Notes: FP8 e4m3/e5m2 MMA requires sm_89 or higher. Together with A100's compute capability 8.0, this supports excluding native FP8 matrix arithmetic from this list. This architecture inference does not prohibit storage, conversion, emulation or every engine's quantized-artifact path."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/blog/nvidia-hopper-architecture-in-depth/",
+      "checked_at": "2026-10-18T08:22:02Z",
+      "verification_status": "unverified",
+      "notes": "A100-P5. NVIDIA technical article dated 2022-03-22, Table 3: both FP8 Tensor Core rows are N/A for its A100 40 GB comparison. This corroborates the architecture distinction; that row's memory, power and preliminary H100 rates are not transferred to this 80 GB record."
+    }
+  ],
+  "updated_at": "2026-10-18T08:22:02Z"
+}
