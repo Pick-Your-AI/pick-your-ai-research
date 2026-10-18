@@ -483,7 +483,7 @@ Check schema, references and build-wide identity/role uniqueness before predicat
 - **Severity/unknown policy:** fixed `error`, `review`. Missing requirement applicability is unknown; a known required need with an explicitly absent implementation fails the required-implementation check. An undeclared/unresolved path or missing configuration/recovery evidence stays unknown; a valid non-catalog implementation must not fail a catalog-presence check.
 - **Explanation/remediation:** choose and evidence a path for the declared failure/recovery boundary; changing a backing label or increasing TTL is not evidence. Consumers: #2/#9/#25/#28/#37; informational storage links do not create requirements by themselves.
 - **Synthetic examples:** evidenced application-owned retained state meets the declared recovery scope with no separate memory selection → pass for that scope; documented volatile-only configuration under that requirement → fail; unspecified persistence mode or implementation → unknown; explicitly no continuity requirement → skipped.
-- **Version/migration:** replaces use of `longterm.volatile` or the old primary/`long_term` sketch as a durability verdict. The [W-R11 record](../T0-configuration/workload-use-case.md#w-r11-memory-need-is-met) already permits application-owned session history, but its persistent assertion still contains the historical store-kind/backing restriction. This candidate requests #2/#40 acceptance of the evidenced-implementation correction for persistence too; it does not claim W-R11 was already rewritten. #40 must adopt the requirement/evidence encoding in a new ruleset; frozen v1 remains unchanged.
+- **Version/migration:** replaces use of `longterm.volatile` or the old primary/`long_term` sketch as a durability verdict. [PR #351](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/351) subsequently removed the historical W-R11 store-kind/backing restriction. [tynamite’s later #2 review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6252162416) requires the [current W-R11 recommendation](../T0-configuration/workload-use-case.md#w-r11-memory-need-is-met) to check the declaration only, while M1 retains this stronger recovery predicate. The versioned continuation and source-pinned 0.1 history below preserve that distinction. #40 must adopt the requirement/evidence encoding in a new ruleset; frozen v1 remains unchanged.
 
 #### M2 — `rule.t4.memory.storage.linked`
 
@@ -547,6 +547,72 @@ Check schema, references and build-wide identity/role uniqueness before predicat
 - **Explanation/remediation:** bound memory contribution, transform only under the allowed policy, and recount the actual assembled request. Duplicate accounting labels must not double-charge one token sequence; repeated text actually in the request still counts each time. Consumers: #7/#10/#16/#25/#28/#38/#40.
 - **Synthetic examples:** 300 memory tokens + 400 other input + 100 reserved output fits an evidenced 1,024-token total limit, with separate input/output limits also satisfied → pass; a 1,100-token assembled total under that limit → fail; unknown final assembly → unknown; no memory contribution → this memory-specific check skips while the overall context rule still evaluates.
 - **Version/migration:** supersedes the old memory-only metric comparison. The proposed memory measure is a component of total input, not an additional independent charge; #7/#40 retain final field and migration decisions.
+
+## Memory implementation candidate and W-R11 boundary (2026-10-18)
+
+This section implements the placement and policy separation requested by [tynamite as #2 owner on 2026-10-18](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6252162416). The earlier [#28 M1/R5 acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/345#pullrequestreview-5563361404) is a T4 receiving decision. tynamite's later review accepts the implementation-based approach with stated constraints; neither receipt is represented as review of this new source.
+
+### Current 0.2 continuation
+
+The [normalized prototype](../../tests/memory_implementation_prototype.py) and [46 focused cases](../../tests/test_memory_implementation.py) use the explicit version `memory-implementation/0.2.0`. W-R11 checks whether an identified active implementation is declared for this record's stated need. M1 retains its original scoped recovery predicate. Both policies validate the complete selection inventory and exact selected owner references before applicability. An application path is active by explicit declaration; a framework/store path uses its exact owner's selected enablement. No separately invented memory selection is required.
+
+| Known need and declaration | W-R11 recommendation | M1 recovery compatibility |
+| --- | --- | --- |
+| Active path declared; recovery requirement, configuration, layers or evidence missing | `pass` for declaration only | `unknown` |
+| Active path declared; eligible exactly scoped evidence establishes incompatibility | `pass` for declaration only | `fail` under M1's existing completeness/alternative rules |
+| Provided empty or entirely disabled declaration | `fail`: no active path is declared | Known absence fails only with qualified complete coverage; otherwise `unknown` |
+| Declaration unknown, missing, withheld or not applicable under a known need | `unknown` | `unknown` |
+| Need unknown, missing or withheld | `skipped` | `unknown` |
+| Explicit `none` or qualified not-applicable need | `skipped` | `skipped` |
+
+W-R11 remains `warning`/`defer`; M1 remains `error`/`review`. A W-R11 pass neither supplies a recovery fact nor removes an M1 failure or unknown. The normalized shared record may retain typed unresolved recovery fields; W-R11 does not ask the user to provide them. Its findings retain declaration identity and selected enablement without copying recovery evidence or private answer values.
+
+For M1, **qualified eligibility means source admission under #41, not a reproduction requirement**. Eligible versioned publisher documentation can support a pass for the exact configuration and recovery scope while remaining labelled unverified, as stated in this note's evidence policy. The caller must actually establish that eligibility and scope; an evidence identifier or an asserted fixture predicate cannot authenticate a source. The synthetic tests supply no independent product or recovery verification.
+
+The continuation changes the recommendation predicate only. M1's exact evidence binding, qualified positive witness, complete-inventory negative, disabled-owner handling and typed unresolved states remain intact. Version `0.1.0` records are rejected by the `0.2.0` entry point; callers must explicitly select the new profile and re-evaluate, retaining historical results and evidence under their original version. Frozen v1, catalog/source readers, CD-1/CD-13, the older T4 JSON proxies and both CD-5 candidates are unchanged. Final wire/adaptor adoption and receiving review remain #40 work.
+
+### Historical 0.1 candidate and regression receipt
+
+The following cases and normalized-record description were published by [PR #351 at `d79486568f3cf5eaeacdb7893f522ee865579a6c`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/d79486568f3cf5eaeacdb7893f522ee865579a6c). They are relocated from the workload note with their test/source links pinned to that original revision. Their shared M1/W-R11 recovery semantics and 41-case receipt describe **0.1.0 only**; the current recommendation follows the 0.2 continuation above. This preserves the original experiment and attribution without presenting its recovery requirements as the current workload recommendation.
+
+- **Synthetic decision cases** (the qualified facts are fixture inputs, not measured product behavior):
+
+  | Need and implementation | Outcome | Reason |
+  | --- | --- | --- |
+  | `persistent`, `turns: single`, application-owned state with exact positive recovery evidence and complete relevant layers; no T4 selection | `pass` | Evidenced implementation witness; turn count supplies no persistence evidence |
+  | `persistent`, selected framework with the same qualifications and no separate store | `pass` | Exact framework path meets the requirement |
+  | `persistent`, a store called long-term/relational, with no qualified recovery fact | `unknown` | Labels do not establish recovery support |
+  | `persistent`, complete declaration containing only a configuration proven volatile for the required boundary; layer completeness unknown | `fail` | Exact negative recovery counterexample remains decisive |
+  | Positive recovery fact for a different implementation, owner, need, requirement, configuration or layer inventory | `unknown` | Evidence cannot be retargeted to the current path |
+  | Exact positive fact but incomplete relevant layer inventory | `unknown` | Positive recovery support has not been established for every required layer |
+  | Incomplete alternative declaration containing one exact positive witness | `pass` | A witness proves existence without proving exhaustive alternatives |
+  | Complete declaration containing an incompatible path and an unresolved path | `unknown` | The unresolved candidate could satisfy the requirement; the negative finding remains visible |
+  | Exact positive witness plus an incompatible path | `pass` for this requirement | The negative per-path finding remains; independent compatibility checks still apply |
+  | Qualified complete empty declaration, or only disabled declared owners | `fail` | No active implementation; missing boundary data cannot erase this known absence |
+  | Empty declaration with incomplete or unqualified completeness | `unknown` | An empty tuple alone does not prove absence |
+  | Known need with a not-applicable declaration/configuration/layer/support answer | `unknown` | A required input cannot waive the known need |
+  | `session`, application history with exact evidence for the declared within-conversation boundary | `pass` | No process-restart guarantee is inferred |
+  | `unknown`, missing or withheld need | W-R11 `skipped`; M1 `unknown` | Recommendation applicability and compatibility applicability remain separate |
+  | `none`, or a qualified not-applicable need | `skipped` | Only the scoped memory requirement is inactive |
+
+#### Memory implementation 0.1 test-only candidate (2026-10-18)
+
+The [normalized prototype](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d79486568f3cf5eaeacdb7893f522ee865579a6c/tests/memory_implementation_prototype.py) and [41 focused cases](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d79486568f3cf5eaeacdb7893f522ee865579a6c/tests/test_memory_implementation.py) implement the proposal under the explicit version `memory-implementation/0.1.0`. They use the current [CD-1 typed terminal API](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d79486568f3cf5eaeacdb7893f522ee865579a6c/tests/t0_answer_state_prototype.py) and [CD-13 selection identity validation](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/d79486568f3cf5eaeacdb7893f522ee865579a6c/tests/selection_quantifier_prototype.py) without modifying either. The older Boolean sidecar adapters retain their documented limits. This interface accepts Python records; it is not a new JSON schema, frozen-Build reader, catalog resolver, source-admission check or native runtime.
+
+| Normalized input | Required contract in this candidate |
+| --- | --- |
+| `MemoryRequirementRecord` | Explicit version; typed need, requirement and declaration answers; qualified declaration-completeness fact; exact tuple of validated Build selections; explicit complete-selection-inventory precondition |
+| `MemoryImplementation` | Unique ID; application/framework/store path; exact actual owner selection where applicable; typed configuration and layer-inventory keys; qualified layer-completeness fact; one conflict-resolved recovery record or explicit absence |
+| `RecoveryEvidence` | Exact implementation, owner-or-absence, need class, requirement, configuration and layer-inventory keys; evidence ID; separately qualified eligibility and recovery-support facts |
+| `Answer` / `PredicateResult` | Preserve the CD-1 state and actual source path; no unknown-to-zero/false conversion. Unresolved answers cannot retain a provided value. Identity strings use exact valid Unicode text, without Unicode normalization or numeric/Boolean aliases |
+
+The caller must validate the full Build and references, establish selection completeness, and qualify each completeness/support fact for this exact record before invocation. Requirement keys include the subject/purpose/resource, recovery boundary and revision; configuration keys include the actual selected versions, settings and related resources; layer keys identify the relevant retained inventory. Opaque keys and evidence IDs are exact matching identities, not content hashes or proof of authenticity. The prototype does not obtain observations, resolve conflicting sources, derive these keys, or attest that caller-supplied eligibility/completeness is true. Raw-byte parsing and source-to-record binding require a separate versioned adapter and receiving review; the sketch in the field dictionary is not a substitute.
+
+Preflight rejects duplicate implementation IDs, missing/mismatched selected owners, malformed typed records, and duplicate selection IDs or kind/role pairs across the complete inventory, including disabled and unrelated selections. These are invalid-input errors before rule applicability, not invented compatibility failures. Disabled owners remain visible but cannot witness the need. A valid application path has no fake selection, and a framework path does not create a memory-store requirement.
+
+The result carries the fixed rule ID/severity, outcome, unknown policy, detailed reason/responsible state/path and deterministic per-implementation findings. It does not copy raw requirement/configuration/layer answer values into a report. Known absence is evaluated before a missing recovery operand. Within an exactly bound path, a qualified negative recovery fact precedes unrelated layer-completeness uncertainty. A not-applicable required input is retained in the detailed finding; its derived required assertion remains unresolved at the CD-1 boundary, so it cannot become a skip. Results have no implicit Boolean value.
+
+**Validation and migration scope.** The focused cases exercise positive application/framework/store paths, typed state policy, complete/incomplete absence, disabled/unrelated owners, negative/unknown alternatives, exact evidence binding, immutable inputs and actual CD-1 answer reading. They also run with Python optimization enabled. Three adversarial tests failed against the first unpublished draft when a fact was reused after changing the implementation ID, owner or need class; explicit binding fixed those cases. This is a synthetic draft regression receipt, not a deployed recovery experiment or a finding against executed frozen v1. Final receiving review and delivery must cite the exact source revision and required check results. #40 retains the wire format, qualification adapter, successor ruleset and adoption decision; #2's broader criteria and handoffs remain open. The historical T4 JSON proxies, frozen contracts, CD-1/CD-13 APIs, CD-3 support changes and both CD-5 candidates remain intact.
 
 ## Pricing and capacity
 

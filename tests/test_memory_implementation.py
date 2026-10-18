@@ -117,6 +117,95 @@ class MemoryImplementationTests(unittest.TestCase):
         )
         self.assertEqual(result.findings[0].reason, "recovery_evidence_missing")
 
+    def test_recommendation_only_needs_a_declared_active_path(self):
+        for need in ("session", "persistent"):
+            for via in ("application", "agent_framework", "memory_store"):
+                with self.subTest(need=need, via=via):
+                    owner = None if via == "application" else "selected-owner"
+                    selections = () if owner is None else (Selection(owner, via, "primary"),)
+                    item = replace(
+                        implementation(via, via=via, owner=owner),
+                        configuration=missing(State.MISSING, "/implementation/configuration"),
+                        layer_inventory=missing(State.WITHHELD, "/implementation/layers"),
+                        layers_complete=unresolved(State.UNKNOWN), recovery=None,
+                    )
+                    value = replace(
+                        record((item,), selections=selections),
+                        need=answer(need, "/requirement/need"),
+                        requirement=missing(State.MISSING, "/requirement/recovery"),
+                        declaration_complete=unresolved(State.UNKNOWN),
+                    )
+                    result = self.assert_outcome(
+                        value, Outcome.PASS, policy=RulePolicy.RECOMMENDATION
+                    )
+                    self.assertEqual(result.reason, "memory_implementation_declared")
+                    self.assertEqual(result.source_path, "/declaration")
+                    self.assertEqual((result.rule.severity, result.on_unknown), ("warning", "defer"))
+                    self.assertIsNone(result.findings[0].evidence_id)
+                    self.assert_outcome(value, Outcome.UNKNOWN)
+
+    def test_declared_path_can_satisfy_recommendation_while_recovery_fails(self):
+        item = implementation("declared-but-volatile")
+        item = replace(item, recovery=replace(item.recovery, supports_recovery=fact(False)))
+        value = record((item,))
+        recommendation = self.assert_outcome(
+            value, Outcome.PASS, policy=RulePolicy.RECOMMENDATION
+        )
+        compatibility = self.assert_outcome(value, Outcome.FAIL)
+        self.assertEqual(compatibility.reason, "memory_capability_mismatch")
+        self.assertIsNone(recommendation.findings[0].evidence_id)
+        for private_value in (SCOPE, CONFIG, LAYERS, item.recovery.evidence_id):
+            self.assertNotIn(private_value, repr(recommendation))
+
+    def test_recommendation_empty_or_disabled_declaration_needs_no_completeness_proof(self):
+        disabled = implementation("disabled", via="memory_store", owner="store")
+        for items, selections in (
+            ((), (Selection("store", "memory_store", "primary"),)),
+            ((disabled,), (Selection("store", "memory_store", "primary", False),)),
+        ):
+            for complete in (fact(True), fact(False), unresolved(State.UNKNOWN)):
+                with self.subTest(items=items, complete=complete):
+                    value = replace(
+                        record(items, selections=selections),
+                        requirement=missing(State.MISSING, "/requirement/recovery"),
+                        declaration_complete=complete,
+                    )
+                    result = self.assert_outcome(
+                        value, Outcome.FAIL, policy=RulePolicy.RECOMMENDATION
+                    )
+                    self.assertEqual(result.reason, "memory_implementation_not_declared")
+                    self.assertTrue(all(f.outcome is Outcome.SKIPPED for f in result.findings))
+                    self.assert_outcome(
+                        value, Outcome.FAIL if complete.compatibility_value() is True else Outcome.UNKNOWN
+                    )
+
+    def test_recommendation_retains_disabled_paths_beside_an_active_declaration(self):
+        disabled = implementation("disabled", via="memory_store", owner="store")
+        active = replace(implementation("active-application"), recovery=None)
+        value = record(
+            (disabled, active), selections=(Selection("store", "memory_store", "primary", False),)
+        )
+        result = self.assert_outcome(value, Outcome.PASS, policy=RulePolicy.RECOMMENDATION)
+        self.assertEqual(
+            [(f.implementation_id, f.outcome) for f in result.findings],
+            [("active-application", Outcome.PASS), ("disabled", Outcome.SKIPPED)],
+        )
+        self.assert_outcome(value, Outcome.UNKNOWN)
+
+    def test_recommendation_preserves_complete_selection_and_owner_preflight(self):
+        owner = implementation("framework-path", via="agent_framework", owner="framework")
+        invalid = (
+            replace(record(), selection_inventory_complete=False),
+            record(selections=(
+                Selection("same", "model", "primary"),
+                Selection("same", "storage", "secondary", False),
+            )),
+            record((owner,)),
+        )
+        for value in invalid:
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                evaluate(value, RulePolicy.RECOMMENDATION)
+
     def test_qualified_negative_recovery_counterexample_survives_unknown_layer_completeness(self):
         item = implementation("documented-volatile-only-configuration")
         item = replace(
@@ -383,7 +472,7 @@ class MemoryImplementationTests(unittest.TestCase):
         self.assertEqual(repr((left, right)), before)
 
     def test_version_record_and_policy_are_explicit_and_typed(self):
-        for version in ("0.1.0", "memory-implementation/0.2.0", None, True):
+        for version in ("0.2.0", "memory-implementation/0.1.0", None, True):
             with self.subTest(version=version), self.assertRaises(ValueError):
                 evaluate(replace(record(), proposal_version=version))
         with self.assertRaises(ValueError):
