@@ -297,6 +297,59 @@ class MeasurementArithmeticTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "duplicate repetition"):
                 SUMMARY.summarize(root)
 
+    def test_summary_rejects_duplicate_json_keys_before_any_publication(self):
+        cases = (
+            ('"status": "success"', '"status": "OOM_prefill", "status": "success"'),
+            ('"status": "success"', '"\\u0073tatus": "OOM_prefill", "status": "success"'),
+            ('"revision": "synthetic-model-revision"',
+             '"revision": "synthetic-model-revision", "revision": "synthetic-model-revision"'),
+            ('"peak_allocated_bytes": 10',
+             '"peak_allocated_bytes": 9999, "peak_allocated_bytes": 10'),
+            ('"sha256": "' + "a" * 64 + '"',
+             '"sha256": "' + "c" * 64 + '", "sha256": "' + "a" * 64 + '"'),
+            ('"unused": 1', '"unused": 2, "unused": 1'),
+        )
+        for old, replacement in cases:
+            for sanitize in (False, True):
+                with self.subTest(replacement=replacement, sanitize=sanitize), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    second = synthetic_run(2)
+                    second["unaggregated_metadata"] = [{"unused": 1}]
+                    last = write_synthetic_run(root, second)
+                    raw = last.read_text(encoding="utf-8")
+                    self.assertIn(old, raw)
+                    last.write_text(raw.replace(old, replacement, 1), encoding="utf-8")
+                    output = root / "mr09-results-summary.json"
+                    output.write_text("synthetic prior summary", encoding="utf-8")
+                    paths = (first, last, output)
+                    before = [path.read_bytes() for path in paths]
+                    argv = ["mr09_summarize.py", "--directory", str(root)]
+                    if sanitize:
+                        argv.append("--sanitize")
+                    with patch.object(sys, "argv", argv):
+                        with self.assertRaisesRegex(ValueError, "duplicate JSON object key"):
+                            SUMMARY.main()
+                    self.assertEqual([path.read_bytes() for path in paths], before)
+
+    def test_summary_rejects_duplicate_failure_metadata_without_rewriting_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first = write_synthetic_run(root, synthetic_run())
+            failure = synthetic_run(2)
+            failure["status"] = "unsupported"
+            failure["phases"] = []
+            failure["failure"] = {"message": "synthetic missing backend"}
+            last = write_synthetic_run(root, failure)
+            raw = last.read_text(encoding="utf-8").replace(
+                '"message": "synthetic missing backend"',
+                '"message": "synthetic different failure", "message": "synthetic missing backend"')
+            last.write_text(raw, encoding="utf-8")
+            before = [path.read_bytes() for path in (first, last)]
+            with self.assertRaisesRegex(ValueError, "duplicate JSON object key"):
+                SUMMARY.summarize(root, sanitize=True)
+            self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
     def test_summary_rejects_missing_duplicate_or_unexpected_success_phase(self):
         for variant in ("missing", "duplicate", "unexpected"):
             with self.subTest(variant=variant), tempfile.TemporaryDirectory() as directory:

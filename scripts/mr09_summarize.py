@@ -19,6 +19,16 @@ PAYLOAD_COUNTERS = (
 )
 
 
+def unique_object(pairs):
+    """Reject ambiguous observations before either validation or publication."""
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate JSON object key: {key!r}")
+        result[key] = value
+    return result
+
+
 def range_summary(values):
     if not values:
         return {"n": 0, "min": None, "median": None, "max": None}
@@ -175,7 +185,7 @@ def summarize(directory, sanitize=False):
     # Include dense, GM/M0 supplemental MoE and future explicitly named run cells.
     for path in sorted(directory.glob("mr09-*-r*.json")):
         original_bytes = path.read_bytes()
-        result = json.loads(original_bytes.decode("utf-8"))
+        result = json.loads(original_bytes.decode("utf-8"), object_pairs_hook=unique_object)
         # Reject non-JSON NaN/Infinity anywhere before sanitizing earlier inputs.
         # Python's JSON reader accepts these constants by default.
         json.dumps(result, allow_nan=False)

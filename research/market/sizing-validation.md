@@ -159,6 +159,21 @@ preserve all input bytes on preparation errors and reproduce the committed
 15-run summary unchanged. No error pair, estimator tolerance or additional
 architecture coverage is created by this validation correction.
 
+### Ambiguous observation JSON (2026-10-18)
+
+An offline synthetic check of the summarizer at
+[`2ecfa005`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/2ecfa005a93b3944e6832bdb6a168d535e5efca6/scripts/mr09_summarize.py)
+found that repeated object keys silently kept their last value. A conflicting
+peak counter was accepted, then the earlier value was removed by sanitization.
+The reader now rejects duplicate keys at every object depth before interpreting
+either successful or failed observations. Identical repeated values and escaped
+spellings of the same key are also ambiguous and rejected. Regression fixtures
+check that earlier inputs, the invalid record and an existing summary stay
+byte-for-byte unchanged when intake fails, including with `--sanitize`.
+The historical dense and supplemental GM1 instruments and observations are
+unchanged; their existing summary/integrity checks remain required. This checks
+representation integrity and supplies no new measurement or source validation.
+
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
 - [x] Vary context cache precision and concurrency (dense D1–D5; MoE variation remains a gap)
