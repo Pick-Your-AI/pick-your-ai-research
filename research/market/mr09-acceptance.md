@@ -1,6 +1,32 @@
 # MR-09 acceptance and remaining gates
 
-## Current delivery status — 2026-10-18
+## Producer-specific receiving reconciliation — 2026-10-18
+
+This current addendum records actual scoped technical decisions against accepted research main `745e58704262aa7b0c755794f820ec1372b24395` and the separately identified prepared `1a1324d` clarification. It supersedes the earlier pending-receipt, ResourceEstimate-location and child-status assertions below only where the actual dated evidence supports a change. Earlier authors, review inputs, counter observations, test results and all historical acceptance matrices remain intact; the full 2026-10-16 submission record is preserved verbatim.
+
+| Producer / consumer | Actual receipt and reviewed input | Current disposition |
+| --- | --- | --- |
+| #56 → #10/#16/#36/#39; #61 → #10 | [Apple specialist, 6253141632](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632), **17:50:17Z**; main `745e5870`, feasibility `3c6502f8`, sizing `98dbe4e6`, acceptance `71a289a8` | Accept with narrowing the five note-only accounting, representation/authorization, comparability and quantity/omission inputs. Adopt the future #10 ResourceEstimate intake location under its real gates; admit **zero current records**. |
+| #56 → #25/#27 | [Android specialist, 6253363116](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253363116), **18:11:38Z**; main `745e5870`, feasibility `3c6502f8`, acceptance `71a289a8`, original handoff rows `061c6afc` | Accept with constraints the configured framework-path and authenticated MCP connection/evidence interfaces. No runtime, catalog-support, credential-authority or comparative-quality fact is supplied. |
+| #62 → #25 | [Original assignee receipt, 6251565503](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25#issuecomment-6251565503), **15:16:43Z**; original main `be60732a`, benchmark `1ab917cd`, framework `37a1a29b` | Accept C2 for the framework research interface. Keep its earlier source and date separate from the later gate/contract clarification. |
+| #62 → #36/#39/#40/#41 | [Coordinating engineer, 6253421648](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6253421648), **18:17:20Z**; prepared local `1a1324d`, tree `139a0db0`, benchmark `5f6d1aed`, parent `745e5870` | Accept with narrowing negative desk comparability, explicit non-applicable replication costing, the external-result/catalog binding gap and evidence-grade/material-use distinctions. **Select no replication under #62.** |
+
+These are actual in-session technical receiving decisions under the user's delegated project authority, posted through CompleteDotTech. They do not impersonate absent coassignees or replace the earlier #7/#11, #33/#40, general PR, explicitly withheld #36/#39 or source-rights receipts. The complete identities and precise limits are in [the structured ledger](handoffs.json), [feasibility intake](technical-feasibility.md#actual-producer-specific-technical-intakes--2026-10-18), [sizing intake](sizing-validation.md#current-note-only-receiving-and-placement-decision--2026-10-18) and [benchmark decisions](benchmark-validation.md#actual-technical-receiving-decisions--2026-10-18). No GPU, vendor, framework/server, benchmark or full-corpus execution is attributed to these receiving reviews.
+
+### Current evidence and remaining literal criteria
+
+| Issue / boundary | Current support | Remaining criterion or limit |
+| --- | --- | --- |
+| #56 feasibility | Existing conditional source/method assessment and actual producer-specific technical intakes; earlier #7/#11/#33/#40 scopes retained | Keep source/quantity mismatches, unavailable calibration and final-amendment evidence review explicit. Its existing parent-completion rule still requires #61/#62/#65 and the parent criteria; completed desk intakes do not waive children. |
+| #61 measurements | Separately attributed historical dense 15, short GM1 three, twelve two-byte native KV component pairs and three initialization-buffer observations | Missing varied MoE/per-rank/multi-GPU coverage and zero matched peak-allocated competitor/runtime pairs remain. No whole-runtime error bound, universal fit or synthetic replacement is supplied. |
+| #61 → #10 placement | Future `research/T2-infrastructure/compute/resource-estimates/` intake is now adopted; current observations remain in `research/market/measurements/` | A real build/selection-bound, matching-schema record with exact runtime/artifact/topology, units and evidence is still required. **Zero records are admitted.** Unsupported metric/interval/topology semantics, including proposed sum/max-rank conventions, remain #40 work. |
+| #62 benchmark desk result | Five actual documentary intakes; no replication selected, so its costing is not applicable, not zero | Immutable evaluated-model snapshots and result-to-grader bindings remain missing. The negative audit cannot satisfy that literal pinning criterion; no ranking or runtime quality gate follows. |
+| #65 interoperability child | The live issue was closed at **2026-10-18T13:52:56Z**, independently read back in this dated reconciliation; its existing [actual five-scope receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65#issuecomment-6250267864) is already indexed | Preserve that accepted contribution's literal observations and unknowns. This amendment performs no interoperability rerun and does not expand a synthetic-peer, public-endpoint or documentation result into arbitrary deployed workload/permission acceptance. |
+| Current delivery / Project fields | Earlier contributions are on canonical main; this prepared amendment has actual source/receiving reviews | Final source composition, repository checks, review and canonical delivery remain required. No Project field or option was read or written by this amendment. |
+
+The existing #56 parent rule is recorded in `prompts/market/issue-056.md` and the shared workflow; it is not an invented requirement for another absent person to approve routine engineering work. #56, #61 and #62 remain open for their actual criteria. The older #58 program recommendation retains its own receiving scope; the technical receipts above do not newly accept it or choose product thresholds. #63's separately reviewed prospective design and absent participant/operational evidence are recorded in [customer validation](customer-validation.md#actual-prospective-technical-intake--2026-10-18), not counted as an MR09 experiment.
+
+## Earlier delivery status recorded on 2026-10-18
 
 PR #79 first merged into the market proposal branch; PR #67 subsequently delivered
 that branch to canonical `main`. PR #105 reconciled the feasibility record with
@@ -22,7 +48,7 @@ its protocol and Bedrock input do not establish completed interoperability tests
 The live #10 owner still decides ResourceEstimate placement/consumption. Preserve
 the #59 single writer for updating canonical handoff dispositions and attribution.
 
-## Current #10/#61 continuation map (2026-10-18)
+## Earlier #10/#61 continuation map (2026-10-18)
 
 This addendum supersedes the historical zero-receipt/main-merge gaps below for
 this pair only. It records a proposal, not new evidence acceptance. Current
