@@ -1,0 +1,27 @@
+{
+  "fixture_version": "cd7-consumer-0.1",
+  "description": "Synthetic response mutations against t0-cd7-consumer-response.json, with the original request/build/sidecar/catalog/pricebook bytes retained. Paths begin inside x_t0_cd7_consumer_result; set replaces or adds exactly one value. Each mutation must reject complete-pair verification with the given code.",
+  "cases": [
+    {"id": "future-protocol", "path": ["protocol_version"], "value": "cd7-consumer-0.2", "error": "unsupported_protocol_version"},
+    {"id": "different-request", "path": ["request_sha256"], "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "error": "response_request_mismatch"},
+    {"id": "different-build", "path": ["build_sha256"], "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "error": "response_request_mismatch"},
+    {"id": "different-pair", "path": ["pair", "identity"], "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "error": "response_artifact_mismatch"},
+    {"id": "different-identity", "path": ["bindings", "catalog_snapshot", "artifact", "id"], "value": "catalog.other.fixture", "error": "response_artifact_mismatch"},
+    {"id": "different-capture", "path": ["bindings", "catalog_snapshot", "artifact", "captured_at"], "value": "2026-10-18T00:00:00Z", "error": "response_artifact_mismatch"},
+    {"id": "non-ascii-capture", "path": ["bindings", "catalog_snapshot", "artifact", "captured_at"], "value": "\uFF12\uFF10\uFF12\uFF16-10-16T09:00:00Z", "error": "artifact_representation_unsupported"},
+    {"id": "wrong-artifact-kind", "path": ["bindings", "catalog_snapshot", "artifact", "kind"], "value": "pricebook", "error": "response_artifact_mismatch"},
+    {"id": "unknown-schema", "path": ["bindings", "pricebook", "artifact", "schema_version"], "value": "1.1.0", "error": "unsupported_schema_version"},
+    {"id": "fractional-revision-token", "path": ["bindings", "pricebook", "artifact", "revision"], "value": 1.0, "error": "integer_representation_unsupported"},
+    {"id": "native-revision-overflow", "path": ["bindings", "pricebook", "artifact", "revision"], "value": 9223372036854775808, "error": "malformed_envelope"},
+    {"id": "unknown-field", "path": ["approved"], "value": true, "error": "malformed_envelope"},
+    {"id": "invented-publication-approval", "path": ["qualification", "publication"], "value": "approved", "error": "malformed_envelope"},
+    {"id": "invented-source-use-approval", "path": ["qualification", "source_use"], "value": "approved", "error": "malformed_envelope"},
+    {"id": "unbound-path", "path": ["bindings", "catalog_snapshot", "artifact", "retrieval_path"], "value": "/artifacts/sha256/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json", "error": "response_artifact_mismatch"},
+    {"id": "absolute-url", "path": ["bindings", "catalog_snapshot", "artifact", "retrieval_path"], "value": "https://example.invalid/catalog.json", "error": "malformed_envelope"},
+    {"id": "query-url", "path": ["bindings", "catalog_snapshot", "artifact", "retrieval_path"], "value": "/artifacts/sha256/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json?key=x", "error": "malformed_envelope"},
+    {"id": "fragment-url", "path": ["bindings", "catalog_snapshot", "artifact", "retrieval_path"], "value": "/artifacts/sha256/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json#x", "error": "malformed_envelope"},
+    {"id": "digest-disagrees", "path": ["bindings", "pricebook", "artifact", "sha256"], "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "error": "content_digest_mismatch"},
+    {"id": "advertised-length-too-large", "path": ["bindings", "pricebook", "artifact", "byte_length"], "value": 524289, "error": "byte_limit_exceeded"},
+    {"id": "advertised-length-wrong", "path": ["bindings", "pricebook", "artifact", "byte_length"], "value": 1, "error": "content_length_mismatch"}
+  ]
+}

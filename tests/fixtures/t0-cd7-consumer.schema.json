@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pick-your-ai:cd7-consumer:0.1",
+  "title": "Synthetic CD-7 native inspection request and result",
+  "oneOf": [{"$ref": "#/$defs/request"}, {"$ref": "#/$defs/result"}],
+  "$defs": {
+    "digest": {"$ref": "urn:pick-your-ai:cd7-pins:0.1#/$defs/digest"},
+    "id": {"$ref": "urn:pick-your-ai:cd7-pins:0.1#/$defs/pin/properties/id"},
+    "revision": {"type": "integer", "minimum": 1, "maximum": 9223372036854775807},
+    "byte_length": {"type": "integer", "minimum": 1, "maximum": 67108864},
+    "request": {
+      "type": "object", "required": ["x_t0_cd7_consumer"], "additionalProperties": false,
+      "properties": {
+        "x_t0_cd7_consumer": {
+          "type": "object", "additionalProperties": false,
+          "required": ["protocol_version", "build_sha256", "sidecar_sha256", "max_artifact_bytes"],
+          "properties": {
+            "protocol_version": {"const": "cd7-consumer-0.1"},
+            "build_sha256": {"$ref": "#/$defs/digest"},
+            "sidecar_sha256": {"oneOf": [{"$ref": "#/$defs/digest"}, {"type": "null"}]},
+            "max_artifact_bytes": {"$ref": "#/$defs/byte_length"}
+          }
+        }
+      }
+    },
+    "descriptor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "schema_version", "id", "revision", "captured_at", "sha256", "byte_length", "retrieval_path"],
+      "properties": {
+        "kind": {"enum": ["catalog_snapshot", "pricebook"]},
+        "schema_version": {"const": "1.0.0"},
+        "id": {"$ref": "#/$defs/id"},
+        "revision": {"$ref": "#/$defs/revision"},
+        "captured_at": {
+          "allOf": [
+            {"$ref": "https://schemas.ai-builder.example/v1/common.schema.json#/$defs/timestamp"},
+            {"type": "string", "pattern": "^[\\u0000-\\u007f]+$"}
+          ]
+        },
+        "sha256": {"$ref": "#/$defs/digest"},
+        "byte_length": {"$ref": "#/$defs/byte_length"},
+        "retrieval_path": {
+          "type": "string", "minLength": 87, "maxLength": 87,
+          "pattern": "^/artifacts/sha256/[a-f0-9]{64}\\.json$"
+        }
+      }
+    },
+    "binding": {
+      "type": "object", "additionalProperties": false, "required": ["id", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "revision": {"$ref": "#/$defs/revision"},
+        "status": {"enum": ["resolved", "revision_pin_missing", "pinned_revision_unavailable", "content_digest_mismatch", "native_revision_unsupported", "artifact_too_large", "artifact_structure_unsupported", "artifact_representation_unsupported", "revoked", "temporarily_unavailable"]},
+        "artifact": {"$ref": "#/$defs/descriptor"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "resolved"}}},
+          "then": {"required": ["artifact"]},
+          "else": {"not": {"required": ["artifact"]}}
+        },
+        {
+          "if": {"properties": {"status": {"enum": ["revision_pin_missing", "native_revision_unsupported"]}}},
+          "then": {"not": {"required": ["revision"]}},
+          "else": {"required": ["revision"]}
+        }
+      ]
+    },
+    "selection": {
+      "type": "object", "additionalProperties": false, "required": ["selection_id", "status"],
+      "properties": {
+        "selection_id": {"$ref": "https://schemas.ai-builder.example/v1/common.schema.json#/$defs/selection_id"},
+        "status": {"enum": ["not_enabled", "snapshot_unresolved", "selected_version_absent", "selected_kind_mismatch", "resolved"]},
+        "catalog_item": {
+          "type": "object", "additionalProperties": false, "required": ["id", "version", "kind"],
+          "properties": {
+            "id": {"$ref": "#/$defs/id"},
+            "version": {"type": "string", "minLength": 1},
+            "kind": {"$ref": "https://schemas.ai-builder.example/v1/catalog-item.schema.json#/properties/kind"}
+          }
+        }
+      },
+      "if": {"properties": {"status": {"const": "resolved"}}},
+      "then": {"required": ["catalog_item"]},
+      "else": {"not": {"required": ["catalog_item"]}}
+    },
+    "pair": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false, "required": ["status", "identity"],
+          "properties": {"status": {"const": "resolved"}, "identity": {"$ref": "#/$defs/digest"}}
+        },
+        {
+          "type": "object", "additionalProperties": false, "required": ["status"],
+          "properties": {"status": {"enum": ["incomplete", "pricebook_absent"]}}
+        },
+        {
+          "type": "object", "additionalProperties": false, "required": ["status", "unmatched_rate_ids"],
+          "properties": {
+            "status": {"const": "rate_catalog_mismatch"},
+            "unmatched_rate_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}}
+          }
+        }
+      ]
+    },
+    "result": {
+      "type": "object", "required": ["x_t0_cd7_consumer_result"], "additionalProperties": false,
+      "properties": {
+        "x_t0_cd7_consumer_result": {
+          "type": "object", "additionalProperties": false,
+          "required": ["protocol_version", "request_sha256", "build_sha256", "bindings", "selections", "pair", "qualification"],
+          "properties": {
+            "protocol_version": {"const": "cd7-consumer-0.1"},
+            "request_sha256": {"$ref": "#/$defs/digest"},
+            "build_sha256": {"$ref": "#/$defs/digest"},
+            "bindings": {
+              "type": "object", "additionalProperties": false, "required": ["catalog_snapshot", "pricebook"],
+              "properties": {
+                "catalog_snapshot": {"$ref": "#/$defs/binding"},
+                "pricebook": {"oneOf": [{"$ref": "#/$defs/binding"}, {"type": "null"}]}
+              }
+            },
+            "selections": {"type": "array", "items": {"$ref": "#/$defs/selection"}},
+            "pair": {"$ref": "#/$defs/pair"},
+            "qualification": {
+              "type": "object", "additionalProperties": false, "required": ["publication", "source_use"],
+              "properties": {"publication": {"const": "not_established"}, "source_use": {"const": "not_established"}}
+            }
+          }
+        }
+      }
+    }
+  }
+}
