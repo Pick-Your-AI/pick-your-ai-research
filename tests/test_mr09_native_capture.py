@@ -78,6 +78,16 @@ class NativeCaptureTests(unittest.TestCase):
             self.assertEqual(before,{p.name:p.read_bytes() for p in dest.glob('init-*.json')})
             self.assertFalse((Path(temp)/"archive").exists())
 
+    def test_consistently_changed_pins_or_command_rejected(self):
+        for field,value in (("model_sha256","0"*64),("harness_git_ref","0"*40),
+                            ("launcher_sha256","0"*64),("argv",["synthetic-other-command"])):
+            with self.subTest(field=field),tempfile.TemporaryDirectory() as temp:
+                dest=Path(temp)/"copy";shutil.copytree(DIRECTORY,dest)
+                for path in dest.glob("init-r?.json"):
+                    record=json.loads(path.read_text());record[field]=value
+                    path.write_text(json.dumps(record))
+                with self.assertRaises(ValueError): capture.summarize(dest)
+
     def test_nonfinite_and_duplicate_event_keys_rejected(self):
         for text in ('{"x":1,"x":1}','{"x":NaN}','{"x":1e999}'):
             with self.subTest(text=text),self.assertRaises(ValueError): capture.loads(text)

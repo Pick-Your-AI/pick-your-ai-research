@@ -7,7 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
-from mr09_total_memory_setup import managed_snapshot_interval, strict_json
+from mr09_total_memory_setup import managed_snapshot_interval, strict_json, require_bindings
 
 DIRECTORY=Path("research/market/measurements/native-qualification-2026-10-18")
 
@@ -50,15 +50,19 @@ def validate_capture(record):
     caps=[e for e in events if e.get("mr09_event")=="cap"]
     if len(caps)!=3 or {e["stage"] for e in caps}!={"after_probe","before_capture","after_cleanup"}:
         raise ValueError("missing/duplicate native cap phase")
+    if [e["stage"] for e in caps]!=["after_probe","before_capture","after_cleanup"]:
+        raise ValueError("native phase ordering drift")
     caps={e["stage"]:e for e in caps}
     for c in caps.values():
         for key in ("cap_bytes","live_bytes","peak_admitted_bytes","admission_denials","native_allocator_calls","graph_denials"):
             if type(c[key]) is not int or c[key]<0: raise ValueError("invalid native cap counter")
-        if not 0<c["cap_bytes"]<=min(2136809472,probe["driver_total_bytes"]//8): raise ValueError("expanded cap")
+        if c["cap_bytes"]!=2136809472 or c["cap_bytes"]>probe["driver_total_bytes"]//8: raise ValueError("expanded cap")
         if not c["live_bytes"]<=c["peak_admitted_bytes"]<=c["cap_bytes"]: raise ValueError("native cap exceeded")
         if c["admission_denials"]!=1 or c["graph_denials"]!=1: raise ValueError("unexpected allocation/graph attempt")
     if caps["after_probe"]["native_allocator_calls"]!=1 or caps["after_probe"]["live_bytes"]!=0 or caps["after_probe"]["peak_admitted_bytes"]!=8388608:
         raise ValueError("bounded 8 MiB probe not demonstrated")
+    if any(caps[stage]["native_allocator_calls"]!=4 for stage in ("before_capture","after_cleanup")):
+        raise ValueError("unexpected native allocation count")
     if caps["after_cleanup"]["live_bytes"]!=0: raise ValueError("native buffer cleanup incomplete")
     data=one("type","fit_memory_breakdown")["data"]
     interval=managed_snapshot_interval({**data,"metric":"managed_device_buffers_snapshot","no_alloc":effective["no_alloc"]})
@@ -85,6 +89,15 @@ def summarize(directory):
     observations=[];cohort=None
     for rep in (1,2,3):
         path=directory/f"init-r{rep}.json";record=strict_json(path)
+        require_bindings(record, {
+            "argv":["$NATIVE_INIT","$RUNTIME_DIR","2136809472","$GGUF_FILE"],
+            "harness_sha256":"07c2f8587b58a6dbe557d7e7f395f765ec03c18122386f6456333338f832f09e",
+            "harness_git_ref":"7805816b3b59f973ec9e87a03b8c807511641700",
+            "launcher_sha256":"6a645f212c3b947789345dc739d88d554f3e083021db3cc0f7abfebc8ff1f8b8",
+            "model_sha256":"f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57",
+            "runtime_artifact_ledger_sha256":"d788e18ba59ab6f210c1ceb61599f39269440a774664c8f515ffca9a7041cfcd",
+            "preflight_file":f"init-r{rep}-preflight.json",
+        }, "native capture pins")
         if type(record["repetition"]) is not int or record["repetition"]!=rep: raise ValueError("wrong repetition")
         if record["harness_sha256"]!=build["executables"]["native-init.exe"]: raise ValueError("wrong native executable")
         if sha(directory/record["preflight_file"])!=record["preflight_sha256"]: raise ValueError("preflight hash mismatch")

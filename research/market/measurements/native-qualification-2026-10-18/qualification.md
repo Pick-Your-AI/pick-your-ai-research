@@ -112,6 +112,11 @@ mmap, offload31 (30 blocks + output), threads4, no extra buffer types,
 no model warmup/generation. Native logs confirm mmap,31/31 layers offloaded,
 512 KV cells and F16 K/V. Disabling alternate buffer types is an explicit
 instrumentation choice, not an implied property of all standard llama.cpp runs.
+The runtime retains a 54 MiB CPU-mapped token embedding view and host output/
+compute buffers; those are logged and excluded from the CUDA0 device target.
+31/31 layer offload does not mean all tensors or all process memory are on GPU.
+The original proposal's broad no-host-fallback gate is therefore not treated as
+satisfied or waived by these initialization observations.
 
 **New target-affecting readback:** the runtime reports `n_outputs_max=256` and
 `n_outputs_max_per_seq=1`, and reserves a graph with up to256 outputs. The prior
@@ -195,3 +200,15 @@ output-reservation matching; inference/VMM/scratch and process-wide peak
 instrumentation; remaining MoE/concurrency/multi-GPU scope. There is no numerical
 fit verdict, ResourceEstimate, compatibility rule, scope waiver or issue closure.
 All source/physical evidence/reuse decisions remain human review tasks.
+
+Primary source inspection, accessed 2026-10-18, uses the pinned
+[CUDA backend](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-cuda/ggml-cuda.cu),
+[backend interface](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/ggml/src/ggml-backend-impl.h),
+[context allocation](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/src/llama-context.cpp),
+and [native logger](https://github.com/ggml-org/llama.cpp/blob/620d2225cc436ab0b001e3200e590e3b286ef9ab/common/fit.cpp).
+The source interpretation is distinct from actual project observations above;
+MIT code and NVIDIA redistributable rights remain separate. Manifests record
+locators and hashes without redistributing runtime binaries or external headers.
+
+[Submission validation](validation.md) separates automated integrity checks from
+actual native observations and outstanding human evidence review.
