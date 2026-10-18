@@ -145,7 +145,9 @@ Default treatment. "Opt-in" means the owner explicitly includes the group for th
 
 ### Comparison (Proposal)
 
-Builds, or revisions of one build, are aligned per selection by (`kind`, `role`). A kind present in one build and absent in the other is "not selected", and its rules are `skipped` with that reason; T5 shows optional tiers are expected to disappear cleanly this way (P6). Absence is never zero cost or a pass.
+Builds, or revisions of one build, are aligned per selection by (`kind`, `role`). A kind present in one build and absent in the other is displayed as "not selected". Only predicates whose applicability is false for an optional or disabled branch are `skipped`; required-presence and cross-component predicates still evaluate. Comparison presentation never rewrites evaluator outcomes. Absence is never zero cost or a pass.
+
+For example, `rule.required.foundation` always applies: a build missing its primary model retains its foundation failure in the comparison. In contrast, an absent optional T5 tier skips its adapter/training-only predicates when their applicability is false (P6); it does not skip unrelated foundation or cross-component checks.
 
 **Comparison fields**
 
@@ -227,13 +229,25 @@ Status labels: **contract-derived** restates behaviour stated in the v1 docs (V5
 
 Both estimates and their component lines may still be shown, labelled with pricebook dates and their qualifications. A non-comparable total is not a reason to hide either estimate or its components.
 
-### SB-R4 Selected components are still offered (hypothesis)
+### SB-R4a Selected components are not deprecated (hypothesis)
 
 - **Pointers:** the selection's item in the current snapshot: `catalog-item.schema.json#/properties/status`.
-- **Assertion:** status is `active` or `preview`.
-- **Outcome / severity:** `deprecated`: `fail`, `warning`. `retired` or absent from the current snapshot: `fail`, `error` in the current view only; the historical view keeps its original findings. Current snapshot not retrievable: `unknown`.
-- **Remediation:** offer replacements; don't swap automatically (V6).
-- **Open:** whether `preview` warrants `info` is for #40.
+- **Applies when:** the selected item is present in the current snapshot with a known lifecycle status. Known absence is handled by SB-R4b; unresolved presence/status gives `unknown`, not `skipped`.
+- **Assertion:** status is not `deprecated`.
+- **Severity:** fixed `warning`; `on_unknown: review`.
+- **Outcomes:** `deprecated` gives `fail`; any other known status gives `pass` for this predicate only. A retired item still fails SB-R4b. Unretrievable snapshot or unknown lifecycle gives `unknown`.
+- **Remediation:** offer supported replacements; do not swap automatically (V6).
+
+### SB-R4b Selected components remain available (hypothesis)
+
+- **Pointers:** selected item identity and lifecycle in the current snapshot, with evidence of snapshot coverage.
+- **Applies when:** a selected component is checked in the current view.
+- **Assertion:** the item is present and status is not `retired`.
+- **Severity:** fixed `error`; `on_unknown: review`.
+- **Outcomes:** `active`, `preview` or `deprecated` gives `pass` for availability only; SB-R4a separately warns on deprecation. `retired`, or absence established by an exhaustive current snapshot for that item/version scope, gives `fail`. An unavailable snapshot, incomplete coverage, or unknown lifecycle gives `unknown`; omission from an incomplete list is not proof of retirement (#40).
+- **Remediation:** offer replacements; do not swap automatically. Both predicates affect the current view only; the historical view keeps its original findings.
+- **Synthetic cases:** deprecated → SB-R4a `fail/warning`, SB-R4b `pass/error`; retired → `pass/warning`, `fail/error`; unavailable snapshot → both `unknown` with their fixed severities; incomplete snapshot omitting the item → availability `unknown`.
+- **Open:** whether `preview` warrants a separate `info` predicate is for #40.
 
 ### SB-R5 Withheld inputs leave dependent rules unresolved (hypothesis)
 
@@ -280,14 +294,14 @@ None. A build is user data, not a catalog fact, and no fixture is added. The gap
 | Handoff | What is asked | Status |
 | --- | --- | --- |
 | #40 | Accept, narrow or reject SB-1 to SB-8, SB-10 and SB-R1 to SB-R5; confirm the build record mapping | Pending; #42 stays blocked by #40 |
-| #41 | Confirm the invalidation table against the interim policy; a TTL decision would add a time trigger | Pending |
+| #41 | Confirm the invalidation table against the interim policy; a future TTL decision would add a time trigger | Confirmed for this scope by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384); no TTL adopted |
 | #39 | Confirm SB-3 and the cost comparison rules (currency, period, charge basis, one-off vs operating) | Pending |
 | #37 | A "deploy from saved build" path must use the pinned revision and its own approvals (V8) | Pending |
 | #81 (#2/#3) | Q7 answered as SB-7 (open); per-component mode, `/workload`, attestations and the "report from a saved build" pre-fill (P1, deployment-mode.md "Report from a build") consume the share redaction: a pre-filled fit report must take the configuration key only, never withheld inputs | Pending |
 | #60 | Confirm that rights changes hide values in historical and shared views | Pending |
 | #51 | PCPartPicker save and share flows remain unobserved (P5); this note doesn't rely on them | Informational |
 
-No handoff is confirmed yet.
+The #41 invalidation-policy handoff above is confirmed. Other receiving-owner dispositions remain pending; #40 routing and the merge of its partial record in #126 do not complete #40 or remove the #42 prerequisite.
 
 ## Acceptance criteria coverage
 
@@ -295,14 +309,14 @@ No handoff is confirmed yet.
 | --- | --- | --- |
 | Build record definition referencing #40 schema | Build record definition | Drafted against v1; gaps routed to #40 |
 | Sharing and privacy rules | Sharing; Field sensitivity | Drafted; retention open (SB-9) |
-| Comparison semantics with examples | Comparison | Drafted, three synthetic examples |
+| Comparison semantics with examples | Comparison | Drafted, including required-foundation and optional-tier boundary cases |
 | Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states | Drafted on the interim policy |
 | Decision record merged | — | Not merged; blocked by #40 |
 | Deployment modes covered | Candidate options; Comparison | Covered using #81's merged definitions |
 | Comparison fields with type, unit, evidence | Comparison fields | Drafted |
 | Rules in #40 format; verified vs hypotheses | Compatibility proposals | Contract-derived vs hypothesis labelled; none reproduced |
 | Primary sources with access dates | Evidence | Done for the claims made |
-| Handoffs confirmed by owners | Open questions and handoffs | Pending |
+| Handoffs confirmed by owners | Open questions and handoffs | #41 invalidation scope confirmed; other handoffs pending |
 | Open questions with named owner | Open decisions | Done |
 
 ## Evidence
