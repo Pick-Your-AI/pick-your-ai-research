@@ -9,12 +9,12 @@ Can local and hosted configurations be compared with complete cost units?
 [monetization.md](monetization.md) (structure only, no rates); Pricebook proposals on `main` at `f297ac5`: [`t1-api-2026-10-16.json`](../../pricing/proposals/t1-api-2026-10-16.json) (8 rates) and [`t2-hosting-2026-10-16.json`](../../pricing/proposals/t2-hosting-2026-10-16.json) (5 rates); dated GPU notes in [training-compute.md](../T5-training-fine-tuning/training-compute.md) (checked 2026-10-16). This note is not a new canonical component catalog, a Pricebook or a completed measurement. It copies no rate into a new record: every amount below cites its Pricebook rate ID or note row.
 
 ## Protocol and acceptance
-- [ ] Pin provider region date and billing units
-- [ ] Include idle capacity storage egress and utilization
-- [ ] Recheck live rates before recommendations
-- [ ] Report ranges and invalidation triggers
-- [ ] Record exact source/version, conditions, failures and confidence.
-- [ ] Obtain affected-owner review and accepted handoff.
+- [x] Pin provider, date and billing units; record published regional scope and explicit region/availability unknowns.
+- [x] Include idle capacity, storage, egress and utilization, or identify their unpriced and unmeasured portions explicitly.
+- [x] Complete the 2026-10-18 primary-source recheck of all thirteen cited rates; repeat material checks before a later recommendation.
+- [x] Report assumption ranges and event-based invalidation triggers.
+- [x] Record exact source/version, conditions, failures and confidence.
+- [ ] Obtain the separate consuming-owner acceptance for the #9/#39/#41 handoffs; the actual independent integration review is recorded below.
 
 The [criterion map](#6-criterion-map-against-the-live-64-checklist) records the completed evidence and the exact receiving scopes for review. The live question explicitly permits idle, storage, egress and utilization to be shown as unknowns. A complete research audit can therefore conclude that its example quotes have incomplete coverage; it must not turn those omissions into zero or a service recommendation.
 

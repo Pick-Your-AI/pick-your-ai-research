@@ -7,7 +7,7 @@ Status: decision record merged in PR #75; follow-up rule proposal and remaining 
 
 Which accelerator, and how many, can serve a particular version of a model at the requested context and load? Keep an accelerator's physical specifications separate from a provisionable host SKU. A memory calculation is a capacity screen; passing it does not establish model quality, engine support, an SLO, regional stock, or a reservation.
 
-The current default-branch contract, following merged PR #44, is authoritative. This note contributes facts and proposed rules without changing v1. Live GitHub assignees read on 2026-10-17: @Mattycodes69 and @appletechie. PR #75 merged at `ec612eb14edaf63cc9caca2ab655d053c9114dd4`; merge does not establish every consuming-owner acceptance.
+The current default-branch contract, following merged PR #44, is authoritative. This note contributes facts and proposed rules without changing v1. Live GitHub assignees re-read on 2026-10-18: @Mattycodes69 and @appletechie. PR #75 merged at `ec612eb14edaf63cc9caca2ab655d053c9114dd4`; merge does not establish every consuming-owner acceptance.
 
 Deployment-mode coverage is a research decision:
 
@@ -206,7 +206,7 @@ This contribution recommends **explicit scenario headroom, with no universal num
 
 **Experiment disposition:** retain dense/MoE/topology and comparable-estimator requirements unless the accountable experiment/coordinator owners explicitly narrow them. This pass adds no hardware authorization, weights download or experiment. Historical failed spare-capacity screens are not current availability. The [#61 continuation table](../market/sizing-validation.md#coverage-and-authority-disposition-2026-10-18) names the missing hardware and comparison inputs. An interface receipt does not waive them.
 
-**Review still required:** #10 co-owners decide this headroom/consumption/placement proposal; #61 co-owners and coordinator decide any experiment narrowing and evidence acceptance; #9/#11/#39 consumers decide their exact handoffs. [#31's existing hardware-reuse receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484) remains accepted only within its stated scope. #40 retains versioned contract/rule review. Shared market handoff ledgers remain with #59's writer.
+**Review still required:** #10 co-owners decide this headroom/consumption/placement proposal; #61 co-owners and coordinator decide any experiment narrowing and evidence acceptance; #9/#11 interface receipts are linked below, while #39's receiving decision remains pending; those receipts do not decide this methodology proposal. [#31's existing hardware-reuse receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484) remains accepted only within its stated scope. #40 retains versioned contract/rule review. Shared market handoff ledgers remain with #59's writer.
 
 ## Pricing and capacity
 
@@ -228,20 +228,22 @@ No model weights, source PDFs, raw benchmark datasets, large downloads or new ex
 
 ## Open questions and handoffs
 
-The table retains its 2026-10-16 input questions, with the #31 receipt and scoped #10/#61 decisions refreshed on 2026-10-18. Live assignees remain authoritative; a proposal or review request is not confirmation.
+The table retains its 2026-10-16 input questions, with live owners, directional receipts and the separate #10/#61 proposal state refreshed on 2026-10-18. Three of four required consumers (#9/#11/#31) have scoped receipts; #39 remains pending. Interface acceptance does not decide headroom, calibration, measurement scope or ResourceEstimate placement, and does not accept another co-owner's scope. A proposal or review request is not confirmation.
 
 | Follow-up / exact question | Responsible issue / owner | Impact / handoff state |
 | --- | --- | --- |
-| Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 | Required #10→#9 acknowledgement pending |
-| Confirm current v0.31.0 versus historical v0.10.2 constraints, per-rank KV/adapter placement and engine-version invalidation? | #11, @Mattycodes69 | Required #10→#11 acknowledgement pending; source reconciliation is not owner approval |
-| Reuse these physical IDs without treating inference capacity as training memory/time? | #31, @appletechie | [Accepted hardware-reuse boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484); missing records and training estimates remain separate |
-| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @PUSHINGSQUARES | Required #10→#39 acknowledgement pending |
-| Approve exact tensor/artifact revision and context policy; provide resident tensors and model-specific cache geometry? | #6/#7, @zwright8 | Informational compatibility handoff pending; calculations remain conditional |
-| Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @appletechie | Informational artifact handoff pending |
+| Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 / @appletechie | [#10 -> #9 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): preserve distinct IDs/units and regional offering versus deployability; @appletechie's scope remains separate |
+| Confirm current v0.31.0 versus historical v0.10.2 constraints, per-rank KV/adapter placement and engine-version invalidation? | #11, @zwright8 / @Mattycodes69 | [#10 -> #11 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): exact tuple, per-device allocation/topology, resident demand/admission and uncertainty; no pooled VRAM, inherited results or SLO assertion |
+| Reuse these physical IDs without treating inference capacity as training memory/time? | #31, @tynamite / @appletechie | [Accepted hardware-reuse boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484); missing records and training estimates remain separate |
+| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @appletechie / @PUSHINGSQUARES | Required #10→#39 acknowledgement pending |
+| Approve exact tensor/artifact revision and context policy; provide resident tensors and model-specific cache geometry? | #6, @zwright8 / @PUSHINGSQUARES; #7, @zwright8 / @appletechie | Informational compatibility handoff pending; calculations remain conditional |
+| Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @Mattycodes69 / @appletechie | Informational artifact handoff pending |
 | Accept explicit scenario headroom and note-only #61 consumption, with future build-bound placement? | #10, @Mattycodes69 and @appletechie; #61 co-owners and coordinator for experiment scope | Proposal above ready for disposition; no universal numeric reserve, calibration claim or ResourceEstimate emitted |
 | Finalize proposed rules, ResourceEstimate intervals/unknowns and bandwidth/topology/partition fields? | #40, @tynamite and @zwright8 | Accepted into central queue, narrowed in linked PR #75 review; CD-1/CD-2/CD-3 and affected-owner version review remain; no schema edits/final ruleset |
 | Complete per-source rights inventory and final evidence policy? | #41, @tynamite and @PUSHINGSQUARES | Interim freshness/conflict/short-paraphrase policy adopted in linked review; no automation/mirroring permission presumed |
-| Confirm current account/region offer, quotas, runtime free memory and deployment measurement procedure? | #37, @PUSHINGSQUARES | Deployment research input only; no provisioning performed |
+| Confirm current account/region offer, quotas, runtime free memory and deployment measurement procedure? | #37, @appletechie / @PUSHINGSQUARES | Deployment research input only; no provisioning performed |
+
+The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057), reviewing main `9344f99325510adfe678382a4672246d028e87bc`, separately accepts **#9 -> #10 and #11 -> #10 with constraints from @Mattycodes69's scope**. The host binding reuses `aws-ec2` and `aws-ec2-g6e-xlarge-us-east-1` version `2026-10-16`, with `nvidia-l40s` distinct, two default CPU cores/four vCPUs, and source 32 GiB = 34.359738368 decimal GB RAM. Runtime inputs retain exact-release loader/backend/format/quantization/kernel constraints, separate weight/activation/KV dtypes, adapter rank/targets/residency, per-rank topology and expanded resident-sequence/admission scope. Historical vLLM v0.10.2 calculations remain historical; v0.31.0 requires its own eligible build/hardware evidence, including the resolved Volta exclusion. Missing free memory, geometry or admission stays explicit; memory fit does not establish serving support, quality or SLO performance. These incoming receipts are separate from the outgoing rows above, do not speak for @appletechie, and accept no headroom default, ResourceEstimate, runtime result or #61 placement.
 
 ## Acceptance assessment and validation
 
@@ -255,7 +257,7 @@ The table retains its 2026-10-16 input questions, with the #31 receipt and scope
 | Comparison fields defined with type, unit, evidence requirement | Comparison table | Supplied |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Supplied as proposals; central review pending |
 | Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; source-mapped catalog provenance; derived formulas | Prepared for independent evidence review; source rendering and unit conflicts disclosed |
-| Each handoff confirmed by consuming issue owner with link | Handoff table | Partial: #31 scoped receipt exists; #9/#11/#39 dispositions and full issue acceptance remain pending |
+| Each handoff confirmed by consuming issue owner with link | Handoff table | Partial: #9/#11/#31 have scoped receipts; #39 remains pending. Headroom/calibration and #61 evidence/placement are separate decisions |
 | Open questions with named follow-up owner | Table above | Supplied |
 
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
