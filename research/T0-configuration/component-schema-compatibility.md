@@ -438,7 +438,10 @@ or rights policy nor interprets arbitrary catalog references, migrates a build,
 publishes a successor reader/ruleset, or generates a current report. Those
 integration decisions remain with #40/#41/#39/#42. The technical candidate can
 be reviewed independently of named receiving-owner adoption; #40 remains open
-and #114's recorded prerequisite/hold is unchanged.
+and #42's substantive #40 prerequisite is retained. The
+[partial saved-build note in #114](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/649f5870e9729ec1aaf1b5f07e9290ce0f777833)
+is now merged; that delivery does not adopt this candidate or release a
+successor contract.
 
 ## Contribution format
 

@@ -1,0 +1,8 @@
+{
+  "recorded_utc": "2026-10-18T07:07:21.9187792Z",
+  "target": "$TASK_TEMP/mr09-output-matching-20261018",
+  "scope": "Only task-owned pinned source copies and locator list; no model, estimator executable or runtime binary downloaded in this continuation",
+  "removed_files": 11,
+  "removed_bytes": 956303.0,
+  "target_exists_after": false
+}

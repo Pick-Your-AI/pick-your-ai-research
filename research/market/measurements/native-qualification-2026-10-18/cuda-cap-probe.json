@@ -1,0 +1,16 @@
+{
+  "classification": "actual bounded native CUDA/cap qualification probe, no model inference",
+  "started_utc": "2026-10-18T06:43:03.540323+00:00",
+  "finished_utc": "2026-10-18T06:43:04.034391+00:00",
+  "argv": [
+    "$NATIVE_INIT",
+    "$RUNTIME_DIR",
+    "2136809472"
+  ],
+  "exit_code": 1,
+  "harness_sha256": "b66b54dd6d127fdfdb80f6a96ff5401ffc09ed567acfb2924dad594b8d91d74f",
+  "harness_git_ref": "ec6218f356cccb05b694e07546ad3b1e34479815",
+  "stdout": "",
+  "stderr": "qualification failed: DLL load failed: ggml-base.dll\n",
+  "model_loaded": false
+}

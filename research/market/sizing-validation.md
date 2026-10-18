@@ -260,6 +260,45 @@ number is a guarantee of future allocation success. No other process is
 evicted or altered. Per-phase CUDA-reported free values are observations, not
 additional headroom or demanded KV memory.
 
+## Native initialization qualification — 2026-10-18
+
+The [native cap/CUDA/capture continuation](measurements/native-qualification-2026-10-18/qualification.md)
+records three real, serial initialization-only trials using the pinned llama.cpp
+b11669 runtime and exact prepared SmolLM2 F16 GGUF. Each trial admitted
+**334,511,360 live managed-buffer bytes** under the unchanged 2,136,809,472-byte
+cap, reconciled with native `self=319 MiB`, attempted no model graph dispatch or
+generation, and released all tracked buffers. An 8 MiB CUDA clear/free probe and
+intentional pre-call over-cap/graph rejection precede model initialization.
+
+This qualifies only the guarded default buffer interface during this exact
+initialization path. Opaque CUDA/library allocations, inference/VMM/scratch and
+whole-process peaks remain unqualified. Native output reservation reads back as
+256 maximum outputs and one per sequence; reconcile the estimator's output
+assumptions before a numerical comparison. Accepted estimator pairs remain zero.
+The failed first DLL-path probe, corrected source/build, driver/API version
+readback, three captures, publication filtering and cleanup receipt are retained.
+Original preparation records, dense/GM1 evidence, v1 and receiving-owner gates
+are unchanged; these observations do not provide acceptance or a scope waiver.
+
+## Output-reservation matching audit — 2026-10-18
+
+The [pinned output audit](measurements/output-reservation-2026-10-18/matching.md)
+resolves the count question but identifies a semantic mismatch: both sides
+reserve 256 prompt-graph output rows, while the estimator places ordinary-decoder
+output computation on the host and models a different host readback capacity.
+The native initialization asks for one host logits row (logged as 0.19 MiB),
+separately from the 256-row graph reserve. Its per-sequence maximum1 does not
+reduce this graph with no backend samplers. No dedicated output-reservation
+control exists in the inspected pinned estimator CLI/option type.
+
+The existing totals are therefore not admitted as an error comparison; accepted
+estimator pairs and whole-process peak pairs stay zero. The hash-bound source
+report separates logical tensor geometry from measured buffers. A separately
+versioned estimator that models host readback and device output computation is
+the next matching path; no post-observation correction, new estimator/GPU run or
+receiving-owner acceptance is claimed. Original CPU/native records and broader
+#61 gates remain unchanged.
+
 ## Proposed matching total-buffer setup — 2026-10-18
 
 The [pinned native setup protocol](measurements/mr09-total-memory-protocol-2026-10-18.md)

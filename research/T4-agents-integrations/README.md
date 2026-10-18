@@ -83,7 +83,7 @@ All 35 T4 CatalogItem proposals (10 frameworks, 8 tools, 2 integrations, 9 MCP s
 | 3. MCP transport unsupported by client | `rule.t4.mcp.transport.client-support` (canonical; same as #25's `transport.match`) | Needs #40: no client-transport field. Interim: `rule.t4.mcp.transport.sse-deprecated` |
 | 4. MCP hosting or auth unavailable in deployment mode | `rule.t4.mcp.remote.air-gapped` (error), `auth.flow-available`, `stdio.colocation` | `fail` for a vendor-hosted remote server on an air-gapped platform; `skipped` for local stdio |
 | 5. Memory backend needs absent storage | `rule.t4.memory.storage.backing` (warning) | `fail` with no storage or a mismatched storage type |
-| 6. Persistent memory needed, only ephemeral configured | `rule.t4.memory.longterm.volatile` (v1 proxy); `persistence.required` needs #40 | `fail` for long-term memory on `in_memory` backing (synthetic item); `skipped` for a session store |
+| 6. Persistent memory needs configuration evidence | `rule.t4.memory.longterm.volatile` (structural review proxy); `persistence.required` needs #40 | `fail` is a review warning for a long-term `in_memory` item, not proof of restart loss; a non-memory `pass` does not certify durability; `skipped` for a session store |
 | 7. Tool permissions conflict with guardrail policy | `rule.t4.tool.scopes.allowed` (error), `rule.t4.tool.guardrail.targets` | `fail` when `required_scopes` is not a subset of `allowed_scopes` |
 | 8. Tool usage adds recurring cost | `rule.t4.tool.cost.metered`, `rule.t4.integration.cost.metered`, `rule.t4.tool.cost.unknown` | `fail` (warning) for a metered tool with no cost policy |
 | 9. All T4 selections absent or disabled | All T4 rules | `skipped` |

@@ -1,0 +1,58 @@
+{
+  "classification": "source-derived diagnostic bound to existing observations; no new estimator/GPU execution",
+  "status": "count_matches_but_output_placement_and_host_capacity_do_not",
+  "input_sha256": {
+    "research/market/measurements/total-memory-setup-2026-10-18/setup.json": "c624de6fbc60201d66c70e5e758320ba1880f7e6ca75f6126a62f577c1016b59",
+    "research/market/measurements/total-memory-setup-2026-10-18/preparation.json": "2c479fff9a61a753d61d7c579cdaa122fadefb4a9b1dd19b012655c258848004",
+    "research/market/measurements/total-memory-setup-2026-10-18/gguf-parser-estimate.json": "19bb9b673ed757ad4d1bab29656bfb5bf6f6340094310b17687efa8e3c7655af",
+    "research/market/measurements/native-qualification-2026-10-18/init-r1.json": "0da6cbbcbdb46f90eb8684aa174de10ce06c9f5b7e76e60588be4fdce1cc17a1",
+    "research/market/measurements/native-qualification-2026-10-18/init-r2.json": "b24f78b0aefa564228453b2b115354f7c338e7739ffd790a452d837ea44d22e3",
+    "research/market/measurements/native-qualification-2026-10-18/init-r3.json": "d6f822f92c21d03d841c30de335f6db46ecff13364f713deab272c753e00cf2d",
+    "research/market/measurements/native-qualification-2026-10-18/qualification-summary.json": "5f4bfec024860c418f2f9c5e6252cd5548c2f64e5ed80431b09ee855d5cf7ba5",
+    "research/market/measurements/output-reservation-2026-10-18/source-audit.json": "ad1eaaff27f21fb40fe0762bb535d836a35dad62e75f0206724f2be59678c12c"
+  },
+  "estimator_source_interpretation": {
+    "architecture": "llama",
+    "output_rows": 256,
+    "dedicated_output_reservation_control": false,
+    "output_projection_computation_placement": "host for llama; device exception only eagle3",
+    "modeled_host_output_footprint_bytes": 50921472
+  },
+  "runtime": {
+    "n_outputs_max": 256,
+    "n_outputs_max_per_seq": 1,
+    "prompt_graph": {
+      "tokens": 256,
+      "sequences": 1,
+      "outputs": 256
+    },
+    "observed_host_output_mib_text": "0.19",
+    "host_output_rounding_enclosure_mib": [
+      "0.185",
+      "0.195"
+    ]
+  },
+  "source_derived_tensor_geometry_not_measurements": {
+    "vocabulary": 49152,
+    "embedding_width": 576,
+    "float_bytes": 4,
+    "initial_host_logits_rows": 1,
+    "initial_host_logits_payload_bytes": 196608,
+    "prompt_graph_logits_rows": 256,
+    "prompt_graph_logits_payload_bytes": 50331648,
+    "scheduler_placement_expectation": "CUDA0 output-weight backend; source inference, not a per-tensor allocation trace"
+  },
+  "reservation_count_match": true,
+  "host_readback_capacity_match": false,
+  "device_output_computation_placement_match": false,
+  "numerical_error_comparison_admitted": false,
+  "accepted_estimator_pairs": 0,
+  "whole_process_peak_pairs": 0,
+  "reused_initialization_trials": 3,
+  "remaining_gates": [
+    "independently pinned estimator/runtime pair with matching host readback and device graph-output semantics",
+    "allocation alignment, scheduler reuse and remaining compute-model differences",
+    "receiving-owner estimator/quantity acceptance and coordinator evidence/tolerance review",
+    "inference/VMM/scratch cap and whole-process peaks; broader empirical coverage"
+  ]
+}
