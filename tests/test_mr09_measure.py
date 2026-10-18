@@ -472,6 +472,49 @@ class MeasurementArithmeticTests(unittest.TestCase):
                 SUMMARY.summarize(root, sanitize=True)
             self.assertEqual([path.read_bytes() for path in paths], before)
 
+    def test_summary_rejects_conflicting_and_identical_duplicate_status_before_writes(self):
+        for first_status in ("unsupported", "success"):
+            for sanitize in (False, True):
+                with self.subTest(first_status=first_status, sanitize=sanitize), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    last = write_synthetic_run(root, synthetic_run(2))
+                    raw = last.read_text(encoding="utf-8")
+                    marker = '"status": "success"'
+                    self.assertEqual(raw.count(marker), 1)
+                    raw = raw.replace(marker, f'"status": "{first_status}", {marker}', 1)
+                    last.write_text(raw, encoding="utf-8")
+                    before = [path.read_bytes() for path in (first, last)]
+                    with self.assertRaisesRegex(ValueError, "duplicate JSON object key: 'status'"):
+                        SUMMARY.summarize(root, sanitize=sanitize)
+                    self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
+    def test_summary_rejects_nested_counter_and_failure_keys_before_writes(self):
+        for failure in (False, True):
+            for sanitize in (False, True):
+                with self.subTest(failure=failure, sanitize=sanitize), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    first = write_synthetic_run(root, synthetic_run())
+                    run = synthetic_run(2)
+                    if failure:
+                        run["status"] = "unsupported"
+                        run["phases"] = []
+                        run["failure"] = {"reason": "later"}
+                        marker = '"reason": "later"'
+                        replacement = '"reason": "earlier", "reason": "later"'
+                    else:
+                        run["native_kv_prefill_payload"] = {"measured_bytes": 0}
+                        marker = '"measured_bytes": 0'
+                        replacement = '"measured_bytes": -1, "measured_bytes": 0'
+                    last = write_synthetic_run(root, run)
+                    raw = last.read_text(encoding="utf-8")
+                    self.assertEqual(raw.count(marker), 1)
+                    last.write_text(raw.replace(marker, replacement, 1), encoding="utf-8")
+                    before = [path.read_bytes() for path in (first, last)]
+                    with self.assertRaisesRegex(ValueError, "duplicate JSON object key"):
+                        SUMMARY.summarize(root, sanitize=sanitize)
+                    self.assertEqual([path.read_bytes() for path in (first, last)], before)
+
 
 if __name__ == "__main__":
     unittest.main()
