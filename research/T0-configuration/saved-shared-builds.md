@@ -38,7 +38,7 @@ What should a saved or shared build contain, how are builds compared, and what h
 
 | Option | Description | Assessment |
 | --- | --- | --- |
-| Self-contained URL | Encode the build in the link | Can't be revoked or re-redacted after a rights change. RFC 9110 recommends support for URIs of only "at least 8000 octets" (X1), and a build with 2+ selections, settings and links has no size bound, so portability isn't assured. Rejected for the primary share. |
+| Self-contained URL | Encode the build in the link | Can't be revoked or re-redacted after a rights change. RFC 9110 recommends support for URIs of "at least 8000 octets" (X1), and a build with 2+ selections, settings and links has no size bound, so portability isn't assured. Rejected for the primary share. |
 | Opaque link to a stored projection (Proposal) | The link carries a random token; the server returns a redacted projection of one revision | Revocable; redaction can be recomputed when #60 decisions change. **Recommended.** |
 | Export file | Downloadable JSON of the build | Kept as a separate, explicit action. Prior art: Dify's DSL export excludes third-party tool API keys, knowledge content and logs, but can include Secret-type environment variables when the user opts in (X2). n8n's JSON export includes credential names and IDs; HTTP Request nodes imported from cURL can also contain authentication headers, which its documentation tells users to remove or anonymise before sharing (X3). These exclusions do not establish that an arbitrary export is safe. Pick Your AI exports apply the same redaction as shares. |
 

@@ -1,6 +1,7 @@
 """Summarize sanitized MR-09 real-run counters without inventing failure errors."""
 
 import argparse
+import csv
 from collections import Counter, defaultdict
 import hashlib
 import json
@@ -21,7 +22,7 @@ def range_summary(values):
 
 
 def run_signature(run):
-    """A cell cannot pool different artifacts, code, protocols or workloads."""
+    """Base model/code/protocol/workload pins must match, including failures."""
     for field in PIN_FIELDS:
         if not isinstance(run.get(field), str) or not run[field]:
             raise ValueError(f"missing pin: {field}")
@@ -29,6 +30,89 @@ def run_signature(run):
         raise ValueError("configuration must be an object")
     return tuple(run[field] for field in PIN_FIELDS) + (
         json.dumps(run["configuration"], sort_keys=True, separators=(",", ":"), allow_nan=False),
+    )
+
+
+def cohort_signature(run):
+    """Pin recorded conditions for successful numerical observations.
+
+    Availability, phase counters/timings and publication metadata may vary.
+    This checks recorded identities, not artifact truth or physical-device UUIDs.
+    """
+    environment = run.get("environment")
+    if not isinstance(environment, dict):
+        raise ValueError("successful run requires environment pins")
+    if any(not isinstance(environment.get(key), str) or not environment[key]
+           for key in ("python", "torch", "cuda_build")):
+        raise ValueError("successful run requires Python/Torch/CUDA pins")
+    packages = environment.get("packages")
+    if not isinstance(packages, dict) or not packages or any(
+            not isinstance(key, str) or not key
+            or not isinstance(value, str) or not value
+            for key, value in packages.items()):
+        raise ValueError("successful run requires package pins")
+
+    hardware = run.get("hardware")
+    if not isinstance(hardware, dict):
+        raise ValueError("successful run requires hardware pins")
+    for key in ("gpu", "properties", "allocator_backend"):
+        if not isinstance(hardware.get(key), str) or not hardware[key]:
+            raise ValueError(f"successful run requires hardware pin: {key}")
+    for key in ("count", "driver_total_bytes", "process_allocator_limit_bytes"):
+        value = hardware.get(key)
+        if not isinstance(value, int) or isinstance(value, bool) or value <= 0:
+            raise ValueError(f"successful run requires hardware pin: {key}")
+
+    smi = hardware.get("nvidia_smi_csv")
+    if not isinstance(smi, str) or not smi:
+        raise ValueError("successful run requires NVIDIA driver/device pins")
+    try:
+        smi_rows = [
+            {key.strip(): value.strip() for key, value in row.items()}
+            for row in csv.DictReader(smi.splitlines())
+        ]
+    except (AttributeError, TypeError, csv.Error) as error:
+        raise ValueError("invalid NVIDIA driver/device pins") from error
+    smi_fields = ("index", "name", "driver_version", "pci.bus_id")
+    if len(smi_rows) != hardware["count"] or any(
+            any(not row.get(key) for key in smi_fields) for row in smi_rows):
+        raise ValueError("successful run requires NVIDIA driver/device pins")
+    device_pins = sorted(tuple(row[key] for key in smi_fields) for row in smi_rows)
+    stable_hardware = {
+        key: hardware[key] for key in
+        ("gpu", "count", "driver_total_bytes",
+         "process_allocator_limit_bytes", "allocator_backend")
+    }
+    stable_hardware["properties"] = re.sub(
+        r"uuid=[^,]*, ", "", hardware["properties"])
+    stable_hardware["nvidia_devices"] = device_pins
+
+    manifest = run.get("artifact_manifest")
+    if not isinstance(manifest, dict) or any(
+            manifest.get(key) != run[key] for key in ("model_id", "revision")):
+        raise ValueError("successful run requires matching artifact manifest")
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, list) or not artifacts:
+        raise ValueError("successful run requires artifact identities")
+    artifact_pins = []
+    for artifact in artifacts:
+        if not isinstance(artifact, dict):
+            raise ValueError("invalid artifact identity")
+        name, size, checksum = (
+            artifact.get("file"), artifact.get("bytes"), artifact.get("sha256"))
+        if (not isinstance(name, str) or not name
+                or not isinstance(size, int) or isinstance(size, bool) or size < 0
+                or not isinstance(checksum, str)
+                or re.fullmatch(r"[0-9a-f]{64}", checksum) is None):
+            raise ValueError("invalid artifact identity")
+        artifact_pins.append((name, size, checksum))
+    if len({item[0] for item in artifact_pins}) != len(artifact_pins):
+        raise ValueError("duplicate artifact identity")
+
+    return json.dumps(
+        {"environment": environment, "hardware": stable_hardware,
+         "artifacts": sorted(artifact_pins)},
+        sort_keys=True, separators=(",", ":"), allow_nan=False,
     )
 
 
@@ -54,6 +138,7 @@ def summarize(directory, sanitize=False):
     """Validate the complete batch before any optional publication rewrite."""
     groups = defaultdict(list)
     signatures = {}
+    cohort_signatures = {}
     repetitions = set()
     records = []
     # Include dense, GM/M0 supplemental MoE and future explicitly named run cells.
@@ -75,6 +160,10 @@ def summarize(directory, sanitize=False):
             raise ValueError(f"missing status: {path.name}")
         if result["status"] == "success":
             validate_success(result)
+            cohort = cohort_signature(result)
+            if cell in cohort_signatures and cohort != cohort_signatures[cell]:
+                raise ValueError(f"incompatible measurement cohort: {cell}")
+            cohort_signatures[cell] = cohort
         records.append((path, result))
 
     inputs = []

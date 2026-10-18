@@ -82,3 +82,20 @@ that those runtime cases ran.
 Mattycodes69's co-owner/internal #10 dispositions and #37/#38 receipts remain
 open. Existing #11 -> #25 and #11 -> #33 receipts above retain their original
 direction and scope; this new receipt does not accept other pending rows.
+
+## #61 measurement intake proposal (2026-10-18)
+
+Live #10/#61 co-owners are @Mattycodes69 and @appletechie. The
+[#10 disposition](gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18)
+offers the 15 existing dense observations as note-only accounting evidence,
+retained in `research/market/measurements/`, and specifies a proposed future
+build-bound ResourceEstimate intake path. Both co-owners' dispositions remain
+required. There is no new ResourceEstimate, empirical calibration or coverage
+waiver. Missing headroom/eligibility remains unknown for review.
+
+[Zwright8's #61 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
+accepts #7/#11 interfaces only, at its stated revision. It does not accept #10's
+new proposal or replace appletechie's #7 / Mattycodes69's #11 responses. The
+existing #10 -> #31 receipt above remains unchanged; #9/#11/#39 dispositions
+remain required, including all live co-owners. This scoped note does not refresh
+unrelated handoffs or take over #59's canonical market ledgers.
