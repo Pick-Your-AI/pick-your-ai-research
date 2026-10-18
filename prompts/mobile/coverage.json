@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "note": "Publication acceptance baseline, not a live tracker or implementation evidence. Reconcile each issue before execution. Exact source acceptance/steps and output boundaries retained; no assigned owners invented.",
+  "note": "Publication acceptance baseline, not a live tracker or implementation evidence. Reconcile each issue before execution. Exact source acceptance/steps and output boundaries retained; no assigned owners invented. Current acceptance destinations use acceptance-placements.json; captured source and review text remain historical.",
   "issues": [
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#1",
@@ -1319,7 +1319,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/01.01.md",
       "acceptance_path": "docs/delivery/android/work-packages/01.01.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "product decision authority and Android technical lead",
@@ -1369,7 +1369,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#53",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/53",
       "source_node_id": "I_kwDOVM-woc8AAAABX1Qxrw",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0002"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#21",
@@ -1519,7 +1520,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/14.01.md",
       "acceptance_path": "docs/delivery/android/work-packages/14.01.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "security/privacy reviewer and affected service owner",
@@ -1566,7 +1567,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#56",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/56",
       "source_node_id": "I_kwDOVM-woc8AAAABX1QzgA",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0001"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#24",
@@ -1584,7 +1586,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/01.02.md",
       "acceptance_path": "docs/delivery/android/work-packages/01.02.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "product decision authority and Android technical lead",
@@ -1636,7 +1638,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#57",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/57",
       "source_node_id": "I_kwDOVM-woc8AAAABX1Q7Bg",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0002"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#25",
@@ -1654,7 +1657,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/01.05.md",
       "acceptance_path": "docs/delivery/android/work-packages/01.05.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "product decision authority and Android technical lead",
@@ -1706,7 +1709,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#58",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/58",
       "source_node_id": "I_kwDOVM-woc8AAAABX1Q7kw",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0003"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#26",
@@ -2259,7 +2263,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/01.03.md",
       "acceptance_path": "docs/delivery/android/work-packages/01.03.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "product decision authority and Android technical lead",
@@ -2311,7 +2315,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#67",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/67",
       "source_node_id": "I_kwDOVM-woc8AAAABX1RBSQ",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0002"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#35",
@@ -2329,7 +2334,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/01.04.md",
       "acceptance_path": "docs/delivery/android/work-packages/01.04.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "product decision authority and Android technical lead",
@@ -2381,7 +2386,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#68",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/68",
       "source_node_id": "I_kwDOVM-woc8AAAABX1RB7w",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0005"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#36",
@@ -3149,7 +3155,7 @@
       "launch": "README.md",
       "acceptance_output": "docs/delivery/android/work-packages/01.06.md",
       "acceptance_path": "docs/delivery/android/work-packages/01.06.md",
-      "acceptance_repository": "Pick-Your-AI/pickyour.ai",
+      "acceptance_repository": "Pick-Your-AI/pick-your-ai-android",
       "placement_decision": "Pick-Your-AI/pick-your-ai-android#34",
       "service_decision": "Pick-Your-AI/pick-your-ai-android#35",
       "review_roles": "product decision authority and Android technical lead",
@@ -3201,7 +3207,8 @@
       "previous_issue": "Pick-Your-AI/pickyour.ai#80",
       "previous_url": "https://github.com/Pick-Your-AI/pickyour.ai/issues/80",
       "source_node_id": "I_kwDOVM-woc8AAAABX1RIjA",
-      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs."
+      "source_note": "Source timestamp is the pre-transfer snapshot; hash covers the reference-reconciled body excluding prompt/migration handoffs.",
+      "acceptance_placement_amendment": "android-adr-0004"
     },
     {
       "issue": "Pick-Your-AI/pick-your-ai-android#48",
