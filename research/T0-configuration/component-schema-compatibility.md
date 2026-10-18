@@ -268,6 +268,14 @@ The quantities and labels in this section are synthetic fixtures, never catalog 
 
 ## Proposed T5 routing inventory
 
+The context rows above also have [executable synthetic CTX-01/02 cases](../../tests/test_context_budget.py)
+and a [test-only arithmetic prototype](../../tests/context_budget_prototype.py).
+They distinguish shared and separate budgets, upper-bound decisions, missing
+operands, exact-route applicability and native-limit fallback. These exercise the
+existing research proposal; they do not choose CD-11's wire encoding, release a
+ruleset, establish a KV-memory fit or migrate real saved builds. See the
+[context proposal's scope](../T1-model-selection/rules/context-fit.md#executable-synthetic-cases-cd-11).
+
 This routing synthesis comes from the merged T5 README and component notes, inspected 2026-10-17. [@zwright8's #126 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323) accepts it with the constraints below. It accepts routing for review, not new enums, evidence truth, legal permission or execution.
 
 | T5 input | Proposed family or contract decision | Remaining acceptance |
