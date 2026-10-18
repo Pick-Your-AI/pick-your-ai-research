@@ -71,6 +71,81 @@ class HandoffAuditValidation(unittest.TestCase):
         load = lambda name: read_json(BASE / name)
         validate(load('handoffs.json'), load('handoff-audit-readback.json'), load('audit.json'))
 
+    def response_copies(self):
+        return [
+            ('ledger ' + response['role'], response)
+            for row in self.ledger for response in row.get('responses', [])
+        ] + [
+            ('readback ' + response['role'], response)
+            for response in self.readback['new_scoped_responses']
+        ]
+
+    def test_required_response_text_rejects_nontext_and_blank_values_in_each_copy(self):
+        fields = ('reviewer', 'url', 'scope', 'retained_unknowns_and_next_action',
+                  'submitted_at', 'commit_basis')
+        for location, response in self.response_copies():
+            for field in fields:
+                original = response[field]
+                for value in (True, False, 1, 1.5, None, [], {}, ['text'],
+                              {'text': 'value'}, '', ' \t\r\n', '\u2003'):
+                    with self.subTest(location=location, field=field, value=value):
+                        response[field] = value
+                        try:
+                            with self.assertRaisesRegex(
+                                    HandoffValidationError, field + ' must be nonempty text'):
+                                self.check()
+                        finally:
+                            response[field] = original
+
+    def test_required_response_text_cannot_be_omitted_from_either_copy(self):
+        for location, response in self.response_copies():
+            for field in ('reviewer', 'url', 'scope', 'retained_unknowns_and_next_action',
+                          'submitted_at', 'commit_basis'):
+                with self.subTest(location=location, field=field):
+                    original = response.pop(field)
+                    try:
+                        with self.assertRaisesRegex(
+                                HandoffValidationError, field + ' must be nonempty text'):
+                            self.check()
+                    finally:
+                        response[field] = original
+
+    def test_required_text_preserves_unicode_spacing_and_explicitly_unknown_commit(self):
+        for _, response in self.response_copies():
+            for field in ('scope', 'retained_unknowns_and_next_action', 'commit_basis'):
+                response[field] = '  Étude — 未確認; follow-up remains open. \n'
+            self.assertIsNone(response['reviewed_commit'])
+        before = deepcopy((self.ledger, self.readback, self.audit))
+        self.check()
+        self.assertEqual((self.ledger, self.readback, self.audit), before)
+
+    def test_cli_rejects_matching_nontext_handoff_fields_in_copied_canonical_records(self):
+        originals = {name: (BASE / name).read_text(encoding='utf-8') for name in (
+            'handoffs.json', 'handoff-audit-readback.json', 'audit.json')}
+        for optimized in (False, True):
+            control = self.run_cli(originals, optimized)
+            self.assertEqual(control.returncode, 0, control.stderr)
+            self.assertIn('Handoff audit integrity OK', control.stdout)
+            for field in ('scope', 'retained_unknowns_and_next_action', 'commit_basis'):
+                for value in (True, 1, ['synthetic text'], {'synthetic': 'text'}, '   '):
+                    with self.subTest(field=field, value=value, optimized=optimized):
+                        documents = {name: json.loads(text) for name, text in originals.items()}
+                        row = next(row for row in documents['handoffs.json'] if row.get('responses'))
+                        response = row['responses'][0]
+                        copied = next(item for item in documents['handoff-audit-readback.json']['new_scoped_responses']
+                                      if item['market_issue'] == row['market_issue'] and
+                                      item['consumer_issue'] == row['consumer_issue'] and
+                                      item['url'] == response['url'])
+                        # Keep both recorded copies identical: equality alone
+                        # must not certify malformed scope/unknowns/basis text.
+                        response[field] = deepcopy(value)
+                        copied[field] = deepcopy(value)
+                        result = self.run_cli({name: json.dumps(data) for name, data in documents.items()}, optimized)
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn(field + ' must be nonempty text', result.stderr)
+                        self.assertNotIn('Handoff audit integrity OK', result.stdout)
+        self.assertEqual({name: (BASE / name).read_text(encoding='utf-8') for name in originals}, originals)
+
     def test_classified_issue_must_exist_in_the_captured_snapshot(self):
         self.audit['issues'][0]['number'] = max(
             row['number'] for row in self.readback['issues']) + 1
