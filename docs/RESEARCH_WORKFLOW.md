@@ -37,6 +37,7 @@ python -m unittest discover -s contracts/v1/tests -v
 python -m unittest discover -s tests -v
 python scripts/validate_research.py
 python scripts/validate_market_research.py
+python scripts/validate_handoff_audit.py
 python prompts/mobile/validate_prompts.py
 ```
 
@@ -63,7 +64,7 @@ access, retain their original text. This checks the two existing fields without
 rewriting source or recheck records; a well-formed date/status does not establish
 successful retrieval, freshness, source truth or receiving acceptance.
 
-The market backlog's issue numbers and specified parent numbers must be positive JSON integers. Boolean or floating-point aliases cannot identify an issue; only an absent or null parent means no parent. Its six priority factors follow the existing [ordinal 1–5 rubric](market-research/research-methodology.md#priority-rubric): each is an integer or null. The total must be a JSON number matching the unchanged weighted calculation, or null when any factor is unknown. Booleans cannot stand in for a numeric total. These checks preserve the recorded graph and score shape; they do not assess the scoring judgments or establish issue completion.
+The market backlog's issue numbers and specified parent numbers must be positive JSON integers. Boolean or floating-point aliases cannot identify an issue; only an absent or null parent means no parent. Its six priority factors follow the existing [ordinal 1–5 rubric](market-research/research-methodology.md#priority-rubric): each is a JSON integer token or null. The total must be a JSON number matching the unchanged weighted calculation, or null when any factor is unknown. Its original numeric token must equal that result exactly; float rounding cannot conceal a fractional difference. Numerically equivalent decimal or exponent spellings remain valid for the total, while factors retain their integer-token requirement. Booleans cannot stand in for a numeric total. These checks preserve the recorded graph and score shape; they do not assess the scoring judgments or establish issue completion.
 
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.
 
@@ -98,6 +99,12 @@ Issue and pull-request identities in the audit, snapshot, handoff pairs and nati
 parent/child/blocker references must be positive JSON integers. Booleans and
 floating-point aliases cannot match an integer identity through Python equality.
 This identity check does not change numeric fields in unrelated evidence metadata.
+
+Native parent/sub-issue links must be reciprocal, contain no repeated child IDs,
+and form an acyclic hierarchy. The validator checks these captured relationships
+without reordering or rewriting the snapshot. Separate information handoffs and
+`blocked_by` links are not treated as parent edges. This offline consistency
+check does not fetch live GitHub relationships or establish issue completion.
 
 Technical audit classifications must reference captured issue IDs without
 repeating an issue. They may cover a subset of the captured issues; this check

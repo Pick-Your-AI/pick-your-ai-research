@@ -147,6 +147,32 @@ can supply a nested object/array value; absent members or indices become
 `missing`. Malformed pointer/index syntax and scalar traversal are errors.
 Duplicate JSON keys and nonfinite numbers are rejected before normalization.
 
+**Numeric parser boundary (2026-10-18):** actual synthetic probes of the
+accepted `be60732a` reader showed `1.0000000000000000000001` and
+`0.999999999999999999999999` reaching a predicate as `1.0` after satisfying
+integer bounds fixed at one. `9007199254740993.0` also satisfied a maximum of
+9007199254740992 after rounding. The [Python 3.12 JSON decoder](https://docs.python.org/3.12/library/json.html#json.JSONDecoder)
+normally converts decimal/exponent tokens to floats; its `parse_float` hook
+provides the original token. JSON Schema's [numeric data model](https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-00#section-4.2.1)
+does not impose that binary-float precision limit (sources checked 2026-10-18).
+
+This bounded reader now rejects unsupported numeric precision during parsing,
+before a field schema or value predicate can interpret a rounded answer.
+Decimal/exponent tokens must be finite and retain the same mathematical value
+when compared with the float's shortest decimal readback. A whole-valued float
+must also equal the original integer exactly: `1e23` has the expected printed
+readback but its binary value is a different integer. Original integer tokens
+continue to use Python integers; this imposes no new 53-bit integer limit.
+Supported spellings such as `1.0`, `1e0`, `0.1` and `1.2500` keep their existing
+float values/types, while numeric-looking strings remain strings. This is an
+explicit parser representation limit, not arbitrary-precision arithmetic or a
+new rule for valid historical v1 records. The original input bytes, sidecar
+schema, caller field schemas and typed predicate/outcome interfaces are unchanged.
+The [eight raw-number regression methods](../../tests/test_t0_answer_numeric_precision.py)
+cover schema-boundary false passes, underflow, large integer preservation,
+nested values and the terminal rule boundary, including actual API executions
+in normal and optimized Python.
+
 **Original Boolean/None rule boundary:** compatibility predicates receive an unresolved result for
 all non-provided states, including unknown applicability. Recommendation
 rules use the known-answer gate specified in #81 and therefore skip unresolved
@@ -312,7 +338,10 @@ prerequisite is unchanged by this synthetic normalization experiment.
 The [normalized prototype](../../tests/support_membership_prototype.py) and
 [regression cases](../../tests/test_support_membership.py) exercise the
 [adopted completeness policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927),
-checked against the actual owner review on 2026-10-18. The unchanged frozen
+checked against the actual owner review on 2026-10-18 and corrected for
+[the requested-inventory constraints in the owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407).
+The [bounded correction claim](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6250948765)
+changes completeness constraints 1 and 2 only. The unchanged frozen
 evaluator's `contains` and `intersects` return false for an absent member;
 those Boolean operations alone cannot tell an incomplete research inventory
 from an exhaustive negative claim. The synthetic cases reproduce that gap.
@@ -333,13 +362,40 @@ marker, merge independent support dimensions, or resolve catalog sources.
 | Evidence known outside the query scope, or eligibility unresolved | `unknown` for an applicable compatibility query; an ineligible source is not evidence of incompatibility |
 
 A singleton query models `contains`; alternative accepted formats use an
-`any` query like `intersects`. One documented alternative passes that membership
-check, while failure requires negative evidence for every alternative. An
-`all` query requires every requested member and fails on a known counterexample;
-unresolved rows remain visible in either mode. These internal query names and
-reason strings do not settle DSL syntax. The experiment requires a nonempty
-applicable query; a known irrelevant rule is explicitly `skipped`, while missing
-requirements/applicability remain `unknown`.
+`any` query like `intersects`. Requested-inventory completeness is a separate,
+caller-qualified fact, independent of publisher-inventory exhaustiveness.
+Neither list presence, source ID nor a catalog digest establishes either fact.
+
+| Applicable requested set | `any` reduction | `all` reduction |
+| --- | --- | --- |
+| At least one undisputed positive member | `pass`, even if other requested alternatives are unknown or the requested set is incomplete | Other members still matter; this witness alone cannot establish `pass` |
+| At least one undisputed negative member | Other alternatives still matter; this counterexample alone cannot establish `fail` | `fail`, even if other requested members are unknown or the requested set is incomplete |
+| Nonempty set, every member negative | `fail` only with independently eligible `requested_complete: true`; otherwise reasoned `unknown` | `fail` from the known counterexample |
+| Nonempty set, every member positive | `pass` from a known witness | `pass` only with independently eligible `requested_complete: true`; otherwise reasoned `unknown` |
+| Known empty requested set, including explicitly complete empty sets | `unknown / requirement_empty`, with no asserted member findings | `unknown / requirement_empty`, with no asserted member findings |
+
+Where a definitive reduction needs requested completeness, a qualified `false`
+yields `unknown / requested_set_incomplete`; an unresolved or unqualified marker
+yields `unknown / requested_completeness_unknown`. Existing per-member outcomes,
+reasons, ordering and disputes remain visible. Completeness cannot cure an
+unmarked omission or an equal-rank dispute. These internal query names and
+reason strings do not settle DSL syntax. A known irrelevant rule remains
+`skipped`; missing requirements or applicability remain `unknown`. The normalized
+API requires an actual `frozenset` of nonblank strings (or `None` for unknown),
+rejects bare strings and malformed collections before shortcuts, and preserves
+literal case and spacing without coercion.
+
+The correction has retained prechange observations at main
+`8df56f1d056bfd5d8ca8fbe88d7c70ab19a2ecea`, reducer blob
+`4983904b98a83889df44bae0581a947f279793f6`. Without any requested-completeness
+operand, an all-negative ANY example returned `fail`, an all-positive ALL
+example returned `pass`, both empty quantifiers raised `ValueError`, and the
+bare string `"gguf"` incorrectly passed against the character set `{"f", "g", "u"}`
+with findings `f, g, g, u`. A positive ANY witness was also recorded as a control
+that must continue to pass. The 3,868-byte original probe record has SHA-256
+`aeac453c492249afd884ba4bd107e6465b1b4d42b96d1ef77e30bd4c5233e8be`.
+The focused regression cases retain each counterexample and its corrected
+outcome; explicit complete controls still permit the legitimate verdicts.
 
 A member passing documents only that scoped support claim, with the source
 identity retained. It does not establish joint architecture/backend/quantization
@@ -353,14 +409,20 @@ separate. Frozen v1 and #42's prerequisite are unchanged.
 
 ### CD-3 typed support query and result candidate (2026-10-18)
 
-**Selected research design:** retain the accepted membership reducer and add
+**Selected research design:** bind the corrected membership reducer through
 closed `x_t0_support_query` / `x_t0_support_result` envelopes at proposal version
-`cd3-0.1`. The [query schema and `$defs/result`](../../tests/fixtures/support-membership-binding.schema.json),
+`cd3-0.2`. This is an explicit successor research candidate to historical
+`cd3-0.1`, not a reinterpretation or implicit migration of retained old bytes.
+The synthetic query version advances from `0.1.0` to `0.2.0`, so its scoped CD-1
+paths change too. The unchanged claim cohort retains its own `0.1.0` version.
+This reader rejects old or unsupported proposal versions; a current query
+cannot reuse answers stored under the prior query-version paths.
+The [query schema and `$defs/result`](../../tests/fixtures/support-membership-binding.schema.json),
 [reader and result verifier](../../tests/support_membership_binding_prototype.py),
 [query](../../tests/fixtures/support-membership-binding.json),
 [CD-1 answers](../../tests/fixtures/support-membership-answers.json),
 [result](../../tests/fixtures/support-membership-result.json) and
-[25 focused regression methods](../../tests/test_support_membership_binding.py)
+[focused binding regression cases](../../tests/test_support_membership_binding.py)
 make this exact candidate reviewable. This chooses an encoding; it does not
 claim that the normalized-mechanics receipt also adopted this new wire format.
 
@@ -371,11 +433,12 @@ claim that the normalized-mechanics receipt also adopted this new wire format.
 | Evidence cohort | Stable ID and opaque version identifying the already normalized, scoped and ranked claim cohort. Neither field supplies a publisher URL, access date, completeness or source permission |
 | Answer identity | SHA-256 of the complete original CD-1 file, including unrelated answers and whitespace. Field paths use `/support_checks/{selection_id}/{query_id}/{query_version}/{cohort_id}/{cohort_version}/{field}` with each literal token escaped through CD-1's pointer rules |
 | `applies_when` | A provided Boolean or a distinct unresolved CD-1 state. Only a caller-qualified provided `false` skips a rule |
-| `requested` | Provided nonempty list of unique, nonempty literal strings, or an unresolved CD-1 state. Values are case sensitive, untrimmed and uncoerced; they carry no numeric unit or implicit vocabulary mapping |
+| `requested` | Provided list of unique, nonblank literal strings, possibly empty, or an unresolved CD-1 state. An empty list is a known empty request with an unknown verdict, distinct from an unresolved answer. Values are case sensitive, untrimmed and uncoerced; they carry no numeric unit or implicit vocabulary mapping |
+| `requested_complete` | Provided Boolean or distinct unresolved CD-1 state. Its own caller qualification must be `true` before the value can establish requested-inventory completeness; a provided list, source label or publisher `exhaustive` marker cannot supply it |
 | `supported` / `unsupported` | Provided unique string lists, possibly empty, or unresolved CD-1 states. The former is a positive inventory; the latter records explicit equal-rank negative claims in this cohort |
 | `exhaustive` | Provided Boolean or unresolved CD-1 state, separate from source eligibility. Only a known positive inventory plus eligible `true` completeness can support an absence-based negative |
-| Caller qualification | Exact Boolean or unresolved selection activation, plus independently qualified applicability, requested values and cohort. Each omitted qualification is unresolved for that invocation; an answer's `source` label cannot qualify itself |
-| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context, every operand's state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. Evidence label remains `unverified`; severity stays on the versioned query |
+| Caller qualification | Exact Boolean or unresolved selection activation, plus four independently qualified input groups: applicability, requested values, requested completeness and cohort. Each omitted qualification is unresolved for that invocation; an answer's `source` label cannot qualify itself. Requested-completeness qualification is necessary only for the verdicts that require a complete requested set |
+| Result | Exact query/answer hashes, query/scope/cohort identities, caller evaluation context including all four qualifications, all six operands' state/value/source/source path, and the reducer's outcome/reason/source ID/disputed flag/all sorted member findings. The existing `unverified` label behavior is retained with its unresolved policy boundary below; severity stays on the versioned query |
 
 **The negative-claim readiness decision is explicit.** The accepted reducer
 requires a concrete set of explicit negative claims. This encoding therefore
@@ -390,19 +453,30 @@ possible exhaustive-absence verdict until the cohort's negative inventory is
 recorded. It never converts an unresolved answer into an empty set.
 
 The positive inventory has a different existing reducer contract: it can be
-missing. An explicit eligible unsupported member may still fail with a missing
-positive inventory; a missing positive inventory cannot become an empty
-exhaustive inventory. Documented positives require no completeness marker.
-Equal-rank positive/negative claims remain disputed and unknown. ANY preserves
+missing. An explicit eligible unsupported member still supplies a negative
+finding with a missing positive inventory. It can fail ALL directly; failing
+ANY also requires a complete requested inventory and negative findings for all
+alternatives. A missing positive inventory cannot become an empty exhaustive
+inventory. A documented positive finding requires no completeness marker;
+passing ALL additionally requires a complete requested inventory. Equal-rank
+positive/negative claims remain disputed and unknown. ANY preserves
 its other unresolved rows when one member passes; ALL preserves them when a
 known counterexample fails. The committed synthetic ANY example contains one
 documented member, one unmarked omission and one equal-rank dispute. Its pass
 is scoped membership only, with `disputed: true` and `unverified` preserved.
+The example explicitly records a synthetic complete-request fact under its new
+query-version path; that marker is not inferred from the frozen catalog or
+claim lists. An unresolved or ineligible requested-completeness marker does not
+block ANY's positive witness or ALL's negative counterexample. Its original
+state/value/source/path and caller qualification remain in every result,
+including when the verdict does not depend on completeness.
 
 Provided values are validated before any disabled/applicability/eligibility
-shortcut. Known empty requirements, malformed lists, duplicate decoded JSON
-keys, non-finite numbers, invalid Unicode scalars, ambiguous parent/child paths
-and malformed identities are input errors. Unresolved parent states propagate;
+shortcut. Malformed lists or Boolean markers, duplicate decoded JSON keys,
+non-finite numbers, invalid Unicode scalars, ambiguous parent/child paths and
+malformed identities are input errors. A valid provided empty request reaches
+its explicit unknown disposition instead of raising an input error.
+Unresolved parent states propagate;
 a provided object can supply grouped fields and retains its exact source path.
 Valid but mismatched selected scope is unknown, never automatic incompatibility.
 Disabled and unresolved activation have separate skipped/unknown dispositions.
@@ -412,8 +486,10 @@ digest guards reject terminal controls across the complete value.
 **Result consumption:** schema validation checks shape only. `verify_result`
 recomputes from the retained query/answers and the **caller's** selected scope,
 activation and eligibility inputs, then compares every reported field. A
-self-reported eligible flag, changed source/version/hash, removed disputed row
-or changed outcome cannot validate itself. Result JSON formatting may vary;
+self-reported eligible flag, changed requested-completeness state/value, changed
+source/version/hash, removed disputed row or changed outcome cannot validate
+itself, even when the mutation leaves the membership verdict unchanged.
+Result JSON formatting may vary;
 the original query and answer byte identities cannot. Returned data is detached
 from the reader. This is a consistency check, not a signature or evidence grade.
 
@@ -427,9 +503,17 @@ This format can name canonical API, managed or self-hosted component scopes,
 but a kind, digest or matching label proves no joint tuple support, activation,
 rights, currency, residency, runtime fit or independent verification.
 
-The new test-only files and this decision supplement leave the accepted
-CD-1 normalizer, CD-3 reducer, CD-2/CD-6/CD-7 work, frozen `contracts/v1`, measured
-artifacts and recorded receiving receipts unchanged. #40's tynamite/zwright8
+**Remaining evidence-label constraint:** completeness constraint 5 in the
+owner disposition is not resolved by this correction. The prototype's existing
+constant `unverified` label remains even where no check has run; that behavior
+must not be claimed as accepted evidence grading. Source/date/rank admission,
+real rule adapters (including `rule.precision.engine` and
+`rule.engine.model.format`) and frozen-rule adoption remain separate work.
+
+This bounded correction changes the existing test-only CD-3 reducer, binding,
+fixtures and regression cases. It leaves the accepted CD-1 normalizer,
+CD-2/CD-6/CD-7 work, frozen `contracts/v1`, measured artifacts and recorded
+receiving receipts unchanged. #40's tynamite/zwright8
 review owns successor adoption; #41 owns actual evidence qualification with
 the affected component owner. Real source adapters, final ruleset dispatch,
 migration and the remaining listed handoffs retain their own concrete work.
@@ -1257,6 +1341,17 @@ behavior and resource-confidence handling.
 | `evaluation_failed` | The unchanged reference evaluator cannot evaluate these retained inputs or emit a conforming report. Original findings remain available in their retained bytes. |
 | `report_mismatch` | A report was generated, but its complete typed JSON differs from the retained report, including ordered findings, summaries, identity, timestamp or numeric representation. |
 | `reproduced` | The complete generated report matches. Historical `invalid` or `indeterminate` remains that outcome; reproduction does not make it valid or current. |
+
+**Unavailable-reader retention correction (2026-10-18):** the original replay
+candidate returned `profile_unavailable` before resolving input bindings. With
+the evaluator file absent, the result had no report binding even when the exact
+pinned historical report remained in the archive. Reader failure now preserves
+all independently resolved data bindings and their diagnostics. The result keeps
+`profile_unavailable` as its status and lists the evaluator issue first, followed
+by any missing, digest-mismatched or cross-record identity issues. A resolved
+report binding retains its original bytes; a missing or tampered report retains
+its own unresolved status and no bytes. No evaluator instance runs on this path,
+and no generated report, replacement input or validity claim is created.
 
 Malformed JSON, invalid schemas, duplicate immutable keys and manifest/build/
 sidecar binding errors fail explicitly as value errors before evaluation.

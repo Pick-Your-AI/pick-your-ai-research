@@ -10,8 +10,10 @@ The typed terminal rule boundary retains explicit answer policy and reasons.
 from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from enum import StrEnum
 import json
+import math
 from pathlib import Path
 import re
 
@@ -212,11 +214,30 @@ def unique_object(pairs):
     return result
 
 
+def finite_float(token):
+    """Keep the existing float API only for the supported decimal precision."""
+    number = float(token)
+    if not math.isfinite(number):
+        raise ValueError("non-finite CD-1 answer number")
+    try:
+        original = Decimal(token)
+    except InvalidOperation as error:
+        raise ValueError("unsupported CD-1 numeric precision") from error
+    # Ordinary decimal fields retain floats (for example, 0.1), but their
+    # shortest decimal readback must denote the original token's value.
+    # Whole-valued floats must additionally retain the exact integer: 1e23
+    # prints as 1e+23 despite representing a different integral value.
+    if (not original.is_finite() or original != Decimal(str(number)) or
+            (number.is_integer() and original != int(number))):
+        raise ValueError("unsupported CD-1 numeric precision")
+    return number
+
+
 class AnswerIndex:
     def __init__(self, raw):
         if isinstance(raw, bytes):
             raw = raw.decode("utf-8")
-        document = json.loads(raw, object_pairs_hook=unique_object)
+        document = json.loads(raw, object_pairs_hook=unique_object, parse_float=finite_float)
         # Reject accepted-by-Python NaN/Infinity and overflowing JSON numbers.
         json.dumps(document, allow_nan=False)
         try:

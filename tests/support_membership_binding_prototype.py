@@ -3,7 +3,7 @@
 The caller establishes selection activation, exact catalog/configuration scope
 and separately eligible applicability, requirements and evidence. Recorded
 hashes and source labels do not authenticate any of those facts. This wrapper
-does not change the accepted membership reducer or the frozen v1 contracts.
+uses the corrected requested-set completeness reducer; frozen v1 is unchanged.
 """
 
 from copy import deepcopy
@@ -33,11 +33,12 @@ SCOPE = Draft202012Validator(definition("scope"))
 FIELDS = {
     "applies_when": {"type": "boolean"},
     "requested": definition("requirement_values"),
+    "requested_complete": {"type": "boolean"},
     "supported": definition("values"),
     "unsupported": definition("values"),
     "exhaustive": {"type": "boolean"},
 }
-ELIGIBILITY = ("applies_when", "requested", "cohort")
+ELIGIBILITY = ("applies_when", "requested", "requested_complete", "cohort")
 
 
 def digest(raw):
@@ -131,7 +132,7 @@ class SupportQueryRecord:
         if eligible_inputs is None:
             eligible_inputs = {}
         if type(eligible_inputs) is not dict or set(eligible_inputs) - set(ELIGIBILITY):
-            raise ValueError("eligibility must name only applicability, requested or cohort inputs")
+            raise ValueError("eligibility must name only applicability, requested values/completeness or cohort inputs")
         if any(value is not None and type(value) is not bool for value in eligible_inputs.values()):
             raise ValueError("eligibility must be exact Boolean or unresolved")
         eligible = {field: eligible_inputs.get(field) for field in ELIGIBILITY}
@@ -166,6 +167,8 @@ class SupportQueryRecord:
             decision = eligibility_failure("requested")
         elif known("requested") is None:
             decision = uncertain("requirement_unknown")
+        elif not known("requested"):
+            decision = uncertain("requirement_empty")
         elif eligible["cohort"] is not True:
             decision = eligibility_failure("cohort")
         elif known("unsupported") is None:
@@ -178,9 +181,11 @@ class SupportQueryRecord:
                          None if supported is None else frozenset(supported),
                          known("exhaustive"), frozenset(known("unsupported"))),
                 Requirement(proposal["query"]["requirement"]),
+                requested_complete=(known("requested_complete")
+                                    if eligible["requested_complete"] is True else None),
             )
         result = {"x_t0_support_result": {
-            "proposal_version": "cd3-0.1",
+            "proposal_version": "cd3-0.2",
             "binding_sha256": digest(self._binding_bytes),
             "answer_states_sha256": digest(self._answer_bytes),
             "query": deepcopy(proposal["query"]),

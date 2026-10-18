@@ -2,6 +2,7 @@
 import json
 import math
 from datetime import date
+from decimal import Decimal
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -16,6 +17,19 @@ class MarketValidationError(ValueError):
 def require(condition, message):
     if not condition:
         raise MarketValidationError(message)
+
+
+def validate_priority(item, tokens):
+    scores = item['scores']
+    require(isinstance(scores, list) and len(scores) == 6 and
+            all(v is None or (type(v) is int and 1 <= v <= 5) for v in scores),
+            'backlog scores must be six ordinal JSON integers from 1 to 5 or null')
+    expected = None if None in scores else round(sum(a*b for a,b in zip(scores, (.25,.20,.20,.15,.1,.1))), 2)
+    actual = item['score']
+    require((actual is None if expected is None else
+             type(actual) in (int, float) and actual == expected and
+             Decimal(tokens['score']) == Decimal(str(expected))),
+            'incorrect priority arithmetic')
 
 
 def validate_http_url(value, label):
@@ -52,9 +66,17 @@ def read(name):
         require(math.isfinite(number), f'{name}: JSON number exceeds finite numeric range')
         return number
 
-    return json.loads((BASE / name).read_text(encoding='utf-8'),
-                      object_pairs_hook=unique_object,
-                      parse_constant=reject_constant, parse_float=finite_float)
+    text = (BASE / name).read_text(encoding='utf-8')
+    document = json.loads(text, object_pairs_hook=unique_object,
+                          parse_constant=reject_constant, parse_float=finite_float)
+    if name == 'research-backlog.json':
+        # The strict parse above rejects ambiguity first. Keep exact numeric
+        # tokens from that same text solely for checking priority totals; all
+        # other consumers retain the original decoded values and types.
+        tokens = json.loads(text, parse_float=str)
+        for item, token_item in zip(document, tokens):
+            validate_priority(item, token_item)
+    return document
 
 
 def validate_integrations(integrations, product_ids, source_ids):
@@ -221,15 +243,6 @@ def validate():
                     'deliverable', 'steps', 'priority_rationale', 'next_action'):
             require(item.get(key), (item['number'], key))
         require((BASE / item['deliverable']).exists(), item['deliverable'])
-        scores = item['scores']
-        require(isinstance(scores, list) and len(scores) == 6 and
-                all(v is None or (type(v) is int and 1 <= v <= 5) for v in scores),
-                'backlog scores must be six ordinal JSON integers from 1 to 5 or null')
-        expected = None if None in scores else round(sum(a*b for a,b in zip(scores, (.25,.20,.20,.15,.1,.1))), 2)
-        actual = item['score']
-        require((actual is None if expected is None else
-                 type(actual) in (int, float) and actual == expected),
-                'incorrect priority arithmetic')
         if item.get('parent_number') is not None:
             require(item['parent_number'] in numbers, 'market integrity check failed')
             parents[item['number']] = item['parent_number']
