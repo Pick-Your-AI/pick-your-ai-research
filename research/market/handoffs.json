@@ -2433,7 +2433,7 @@
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Accepted with constraints under delegated engineering receiving review",
-    "requested_action": "Use the dated HF per-replica/minute and RunPod volume/tier observations conditionally. No selected-region inventory, account quota, startup duration, live capacity or service equivalence is supplied. Display rate, accrual cadence, credit admission and invoice rounding remain distinct; preserve unresolved RunPod details.",
+    "requested_action": "Use the dated HF replica/minute and RunPod tier inputs with the explicit cloud-class, selected volume/GPU placement and transfer-path limits. No region inventory, quota, startup, capacity or service equivalence is established.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "receiving_review_status": "not_yet_confirmed",
@@ -2468,6 +2468,20 @@
         "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the stated research input, not another issue's completion, source-use permission, deployment eligibility, service equivalence or measured runtime evidence.",
         "scope": "conditional hosting observations",
         "retained_unknowns_and_next_action": "Use the dated HF per-replica/minute and RunPod volume/tier observations conditionally. No selected-region inventory, account quota, startup duration, live capacity or service equivalence is supplied. Display rate, accrual cadence, credit admission and invoice rounding remain distinct; preserve unresolved RunPod details."
+      },
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "CompleteDotTech (delegated engineering reviewer as stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T11:37:13Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/317#pullrequestreview-5562769687",
+        "reviewed_commit": "adcce4d02e342c12ba30e2ea93ae2d9f46eb3b7f",
+        "reviewed_artifact_git_blob": "4497487b37640d1a4bb524ae52016925abd9439e",
+        "commit_basis": "The actual PR review is anchored to the exact published one-file placement clarification and identifies its note blob. It preserves the earlier 39-value arithmetic receipt through an independent comparison of unchanged numeric tokens in 62 retained table rows, freshly rereads the RunPod volume conditions, and does not claim a new Python run or independent Community JSON-LD retrieval. The receipt/ledger amendment receives its own final review.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual source and technical receiving review under the user's project engineering delegation, as stated in the anchored receipt. No response is attributed to an absent assignee. The earlier #199 integration and 6249212654 source/receiving receipts keep their own distinct inputs, roles and limits.",
+        "scope": "conditional hosting observations with cloud-class and data-path limits",
+        "retained_unknowns_and_next_action": "Use the dated HF replica/minute and RunPod tier inputs with the explicit cloud-class, selected volume/GPU placement and transfer-path limits. No region inventory, quota, startup, capacity or service equivalence is established."
       }
     ]
   },
@@ -2482,7 +2496,7 @@
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Accepted with constraints under delegated engineering receiving review",
-    "requested_action": "Retain the one-off/recurring separation, once-per-billing-scope allowances and explicit unpriced meters. Both examples remain partial and cannot pass a complete-coverage budget gate or establish a cheapest/equivalent service. No new meter, currency/FX default, global rounding policy, Pricebook or ResourceEstimate is adopted.",
+    "requested_action": "Retain the one-off/recurring split and once-per-scope allowances. Both scenarios remain partial component subtotals; no complete-budget pass, cheapest-option finding, measured savings, new meter, Pricebook or global rounding/FX policy follows.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "receiving_review_status": "not_yet_confirmed",
@@ -2517,6 +2531,20 @@
         "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the stated research input, not another issue's completion, source-use permission, deployment eligibility, service equivalence or measured runtime evidence.",
         "scope": "partial-cost arithmetic and uncovered-meter inventory",
         "retained_unknowns_and_next_action": "Retain the one-off/recurring separation, once-per-billing-scope allowances and explicit unpriced meters. Both examples remain partial and cannot pass a complete-coverage budget gate or establish a cheapest/equivalent service. No new meter, currency/FX default, global rounding policy, Pricebook or ResourceEstimate is adopted."
+      },
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "CompleteDotTech (delegated engineering reviewer as stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T11:37:13Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/317#pullrequestreview-5562769687",
+        "reviewed_commit": "adcce4d02e342c12ba30e2ea93ae2d9f46eb3b7f",
+        "reviewed_artifact_git_blob": "4497487b37640d1a4bb524ae52016925abd9439e",
+        "commit_basis": "The actual PR review is anchored to the exact published one-file placement clarification and identifies its note blob. It preserves the earlier 39-value arithmetic receipt through an independent comparison of unchanged numeric tokens in 62 retained table rows, freshly rereads the RunPod volume conditions, and does not claim a new Python run or independent Community JSON-LD retrieval. The receipt/ledger amendment receives its own final review.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual source and technical receiving review under the user's project engineering delegation, as stated in the anchored receipt. No response is attributed to an absent assignee. The earlier #199 integration and 6249212654 source/receiving receipts keep their own distinct inputs, roles and limits.",
+        "scope": "preserved partial arithmetic and expanded uncovered-cost inventory",
+        "retained_unknowns_and_next_action": "Retain the one-off/recurring split and once-per-scope allowances. Both scenarios remain partial component subtotals; no complete-budget pass, cheapest-option finding, measured savings, new meter, Pricebook or global rounding/FX policy follows."
       }
     ]
   },
@@ -2531,7 +2559,7 @@
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
     "acceptance": "Accepted with constraints under delegated engineering receiving review",
-    "requested_action": "Source-checked facts remain unverified in v1. Retain historical pins only where rights permit, and review current eligibility separately. Preserve withdrawal of the unaccepted TTL and #60 source-use exclusions. No automatic saved-build rewrite or extra retrieval/display/redistribution right follows.",
+    "requested_action": "Preserve source-use exclusions and the absence of a new TTL. Source-checked remains unverified; qualified historical retention and current eligibility stay separate. Do not automatically rewrite saved builds or infer added retrieval, display or redistribution rights.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "receiving_review_status": "not_yet_confirmed",
@@ -2566,6 +2594,20 @@
         "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the stated research input, not another issue's completion, source-use permission, deployment eligibility, service equivalence or measured runtime evidence.",
         "scope": "dated-source, failed-refresh and event-driven drift treatment",
         "retained_unknowns_and_next_action": "Source-checked facts remain unverified in v1. Retain historical pins only where rights permit, and review current eligibility separately. Preserve withdrawal of the unaccepted TTL and #60 source-use exclusions. No automatic saved-build rewrite or extra retrieval/display/redistribution right follows."
+      },
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "CompleteDotTech (delegated engineering reviewer as stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T11:37:13Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/pull/317#pullrequestreview-5562769687",
+        "reviewed_commit": "adcce4d02e342c12ba30e2ea93ae2d9f46eb3b7f",
+        "reviewed_artifact_git_blob": "4497487b37640d1a4bb524ae52016925abd9439e",
+        "commit_basis": "The actual PR review is anchored to the exact published one-file placement clarification and identifies its note blob. It preserves the earlier 39-value arithmetic receipt through an independent comparison of unchanged numeric tokens in 62 retained table rows, freshly rereads the RunPod volume conditions, and does not claim a new Python run or independent Community JSON-LD retrieval. The receipt/ledger amendment receives its own final review.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual source and technical receiving review under the user's project engineering delegation, as stated in the anchored receipt. No response is attributed to an absent assignee. The earlier #199 integration and 6249212654 source/receiving receipts keep their own distinct inputs, roles and limits.",
+        "scope": "dated-source, failed-refresh and event-based drift treatment for the clarified scenarios",
+        "retained_unknowns_and_next_action": "Preserve source-use exclusions and the absence of a new TTL. Source-checked remains unverified; qualified historical retention and current eligibility stay separate. Do not automatically rewrite saved builds or infer added retrieval, display or redistribution rights."
       }
     ]
   },
