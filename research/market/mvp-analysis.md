@@ -2,7 +2,7 @@
 
 Issue: [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) (MR-11). Parent: #47. Repository-state refresh: 2026-10-18; original source access dates remain attached to their evidence.
 
-Status: **Narrowed next-validation recommendation accepted in the actual independent coordinator/evidence and eight receiving dispositions; final source review and canonical delivery pending.** The recommendation selects a research comparison, with the remaining product advantages explicitly unproved. Actual PR and issue receipts determine acceptance and delivery.
+Status: **Bounded next-validation research accepted and delivered through #322; this supplemental history/source/receipt reconciliation requires its own final review and delivery.** The recommendation selects a research comparison, with the remaining product advantages explicitly unproved. Actual PR and issue receipts determine acceptance and delivery.
 
 ## Current narrowed recommendation (2026-10-18)
 
@@ -28,8 +28,9 @@ reviews candidate blob `6cdc379b6c0ca8d4d376827fc9ec0d428b8f4fab` and selects th
 bounded comparison under the user's express delegation of project engineering
 decisions. It accepts the reasoning, the narrowed #79 input, unchanged
 D-57-1/2/3 and all eight receiving scopes below. These are the reviewer's actual
-in-session decisions, not statements attributed to absent assignees. Final
-published-source review, current checks and canonical delivery remain required.
+in-session decisions, not statements attributed to absent assignees. This
+supplemental reconciliation requires final published-source review, current
+checks and canonical delivery.
 
 ### Accepted inputs and their limits
 
@@ -59,7 +60,9 @@ published-source review, current checks and canonical delivery remain required.
   competitor/whole-runtime pairs; no calibrated whole-runtime error bound
   follows. The [actual #64 evidence and #9/#39/#41 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654)
   accepts the dated arithmetic and incomplete-quote finding. Its canonical
-  note/ledger amendment and final delivery were still pending at this readback.
+  note/ledger amendment and final delivery were still pending at that earlier
+  input readback. The later [#317 canonical pricing amendment](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/a8e73247b54fee46555c757b19f0be9aed776258)
+  now delivers the separately reviewed placement and receiving correction.
   Both cost scenarios remain partial; this input adds no current quote,
   cheapest-service finding or measured service equivalence.
 
@@ -145,14 +148,78 @@ snapshot.
 | Keep recommendation separate from implementation authorization | The selected record comparison and its use/extend/narrow/stop outcomes | This research decision is not a product launch, deployment, outreach or paid-study decision. |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Exact accepted input revisions/receipts, explicit analyst/hypothesis labels and the actual independent evidence decision | Final published-source review must confirm the accepted reasoning is preserved. |
 | Relevant technical owners review handoffs; unresolved decisions are named. | Linked actual coordinator/evidence and all eight receiving decisions, including the narrowed #79 disposition | Preserve each stated boundary and actual reviewer attribution; individual consumer issues retain their own acceptance gates. |
-| Repository checks pass; reviewer accepts the evidence before Done. | Current PR checks, independent final source review and canonical delivery/readback | #66 is satisfied; this accepted disposition still requires final reviewed delivery before #58 closes. |
+| Repository checks pass; reviewer accepts the evidence before Done. | Current PR checks, independent final source review and canonical delivery/readback | #66 is satisfied and #58's accepted #322 completion is recorded below; this supplemental reconciliation retains its own final review/checks/delivery gate. |
+
+### Accepted delivery and current reconciliation
+
+[#322](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/322) delivered the
+bounded research recommendation at signed main
+`584a96e9df6069efde5529316591aec3dd1265a3`, with MVP blob
+`9e481872278cb9954e89787a482f7106af034380`. The [actual completed-delivery
+receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6249608172)
+records the seven unchanged criteria, accepted #66 prerequisite, independent
+evidence/receiving/final source reviews and successful main validation. #58 was
+closed completed on 2026-10-18 at 11:55:01Z; that accepted outcome and receipt
+remain historical facts. This amendment consolidates the separately reviewed
+#324 history-preserving presentation and later receipt with the delivered
+#322 source and ledger. It changes no accepted validation choice, empirical
+requirement, source-use boundary or receiving issue's completion.
+
+### Consolidation of the separately reviewed #322 contribution
+
+The [earlier actual #58 decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6249256373)
+reviewed source `78b6fbb4f08f63b8fdff32ebf3e96a0cd620b1e0`, tree
+`a39f030076777d3042d3be679ea8106266de7aad`, and MVP blob
+`274bf332f10e40b0622d2ac77b7f5c4dc9e7b543`. Its first instance is public,
+non-sensitive, single-user text inference; this is compatible with the dense,
+single-device self-hosted and separately identified API alternatives selected
+above. Its prospective D57 decisions retain the same unchanged rules and their
+separate future-study scopes. Both actual review attributions are preserved;
+neither is a response from an absent assignee.
+
+The following seven-source section is retained verbatim from [#322's reviewed
+source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/7f3a9833b29d6c36918ccc27e6e9665e2c83c22b/research/market/mvp-analysis.md).
+Its [independent final source review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/322#pullrequestreview-5562814234)
+and the [separate #324 final source review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/324#pullrequestreview-5562816503)
+retain their exact source revisions; neither alone accepts this combined
+amendment. The current writer also reread all seven linked primary documents
+on 2026-10-18 and found the carried documentary statements supported, without
+executing a product or changing an earlier access date or evidence grade.
+
+The accompanying [canonical ledger amendment](handoffs.json) preserves #322's
+fourteen distinct post-cutoff reviews across eleven existing pairs and appends
+the later receipt's eight #58 dispositions separately. All previous review
+fields, assignees and the historical audit counts remain unchanged. The
+accepted #313 differentiation document is byte-identical. Final independent
+review of this supplemental source, current checks and canonical delivery
+remain required. The accepted #322/#58 completion is preserved; #59 and all
+consumer/empirical issues retain their own criteria.
+
+## Bounded primary-source recheck for this decision
+
+Access date: **2026-10-18**. These are seven publisher-document inspections, not new product runs, an exhaustive market audit, a full matrix re-grade or permission to ingest data. Confidence is high that the cited pages document the described feature; correctness, field-level reconstruction and scenario sufficiency remain untested. Mutable documentation is identified by URL and date unless a version is stated. Source-use eligibility remains governed by [#60](rights-validation.md); short factual paraphrases and links here do not approve commercial reuse.
+
+| Source / publisher | Documented counterexample and explainability | Evidence class and limit |
+| --- | --- | --- |
+| [llmfit README](https://github.com/AlexsJones/llmfit), AlexsJones project, current default-branch page | Documents JSON system-profile/recommendation output, model information exposing estimate inputs and verification commands, and local benchmark measurement. Assumption disclosure is already part of a competing workflow. | PD for documented commands; publisher claims about estimator grounding are not independently reproduced. No exact version-pinned full decision record was round-tripped. |
+| [Dify Manage Apps](https://docs.dify.ai/en/cloud/use-dify/workspace/app-management), Dify, page modified 2026-07-29; DSL described as v0.6+ | Documents YAML export of app/node configuration, model parameters, prompts and knowledge connections. The actual knowledge data, third-party tool keys and logs are excluded; secret environment variables have a separate inclusion choice. | PD. An export can preserve substantial configuration. These documented exclusions do not imply that it cannot carry the required decision fields; D-57-3 must test that. No export was executed here. |
+| [n8n export/import](https://docs.n8n.io/build/manage-workflows/export-and-import.md), n8n, current documentation | Documents workflow JSON export/import and preview `.n8np` packages carrying folders, projects and references. JSON can retain credential names/IDs and imported authentication headers, so the comparison must account for explicit redaction. | PD. Preview packaging is version-sensitive. Neither successful reconstruction nor safe sharing is established by the documentation alone. |
+| [SkyPilot YAML](https://docs.skypilot.ai/en/latest/reference/yaml-spec.html), SkyPilot, current `latest` reference | Specifies resource requirements, setup/run commands, mounts, infrastructure alternatives and ordering. It can express important deployment choices and an hourly cost ceiling. | PD. Defaults, environment and exact artifact pins still need inspection in an actual record; a resource cost ceiling does not establish full-bill coverage or a compatibility pass. |
+| [LocalScore About](https://www.localscore.ai/about), LocalScore / Mozilla Builders | Documents an open benchmark and optional public result submission, with prompt speed, generation speed and time to first token across fixed prompt/output workloads. | PD. Workload labels such as document Q&A concern this benchmark's workload shape; they are not evidence of an end-to-end retrieval test. No current results were reproduced. |
+| [Rapid-MLX leaderboard](https://rapidmlx.com/leaderboard), Rapid-MLX | Describes a fixed-run protocol and separate treatment of older protocol versions instead of mixing them into current medians; submissions include environment/package metadata. | PD for the stated protocol. This remains a strong history/version counterexample; a model alias alone is not an immutable weight revision, and individual result completeness was not audited. |
+| [MetriLLM methodology](https://metrillm.dev/methodology), MetriLLM | Describes local quality categories plus performance measurements, model/environment profiles and a run hash; says submitted runs are not curated. | PD/VC. The documented scope is broader than throughput alone. Hashing identifies a record; it does not independently validate its execution, grading or comparability. |
+
+The historical provenance table in [differentiation.md](differentiation.md) remains the 2026-10-16 snapshot. Its then-pending [#87](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/87) re-grade actually merged as `eaa279472e958e97631e16b0501af406fe7da6ea`; none of its old cells is silently upgraded by this recheck. Generated explanation, disclosed estimator assumptions, reproducible artifact identity, measured accuracy and reuse permission remain distinct kinds of evidence.
+
+These seven checks were independently reviewed as part of the paired notes at source `78b6fbb4f08f63b8fdff32ebf3e96a0cd620b1e0` in the [#57 evidence receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57#issuecomment-6249255630) and [#58 receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58#issuecomment-6249256373). The separately delivered #313 differentiation note and its own review remain unchanged; relocating this already reviewed supporting table does not replace that accepted contribution or claim delivery of the alternative #57 draft.
 
 ## Historical recommendation before accepted #299/#304/#313 evidence
 
 The following sections preserve the earlier recommendation and reconciliation
 verbatim, including then-open gates, ratings and thresholds awaiting decisions.
 Those status statements describe their historical checkpoint; the current
-dated recommendation above governs the accepted input and remaining #58 review.
+dated recommendation and delivery receipts above govern the accepted input
+and this supplemental reconciliation.
 
 Status: **draft recommendation for validation only.** It is not implementation, build, deployment or outreach authorization, and it is not an accepted MVP choice. #58 is natively blocked by [#66](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66) and cannot be accepted, nor closed, before #66 is resolved through the accepted workflow. Validation approval, evidence acceptance and product implementation authorization are three separate decisions; this note requests none of them on anyone's behalf.
 

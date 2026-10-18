@@ -153,9 +153,19 @@ def validate():
     source_ids = {s['id'] for s in sources}
     require(len(source_ids) == len(sources), 'duplicate source IDs')
     validate_integrations(read('integrations.json'), ids, source_ids)
-    for source in sources:
+    for index, source in enumerate(sources):
         validate_http_url(source.get('url'), 'source URL')
-        require(source['access_date'] and source['access_status'], 'market integrity check failed')
+        label = f'sources[{index}]'
+        for field in ('access_date', 'access_status'):
+            value = source.get(field)
+            require(isinstance(value, str) and value.strip(),
+                    f'{label}: requires nonempty {field}')
+        try:
+            accessed = date.fromisoformat(source['access_date'])
+        except ValueError as error:
+            raise MarketValidationError(f'{label}: invalid access_date') from error
+        require(accessed.isoformat() == source['access_date'],
+                f'{label}: access_date must use YYYY-MM-DD')
     for competitor in competitors:
         require(set(competitor['source_ids']) <= source_ids, 'market integrity check failed')
         require(competitor['last_verification'] and competitor['limitations'], 'market integrity check failed')

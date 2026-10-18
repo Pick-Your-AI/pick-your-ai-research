@@ -56,6 +56,13 @@ Catalog and price provenance URLs and evidence-manifest locators reject whitespa
 
 The market integrity reader applies the same duplicate-key, non-finite-number and numeric-overflow rejection to its five inputs: `competitors.json`, `sources.json`, `features.json`, `research-backlog.json` and `integrations.json`. It rejects ambiguous raw JSON before interpreting the market evidence or priority records, including under optimized Python.
 
+Each top-level source-register record also requires nonempty text for
+`access_date` and `access_status`. Its access date must be an actual calendar
+date in `YYYY-MM-DD` form. Free-form statuses, including blocked or unverified
+access, retain their original text. This checks the two existing fields without
+rewriting source or recheck records; a well-formed date/status does not establish
+successful retrieval, freshness, source truth or receiving acceptance.
+
 The market backlog's issue numbers and specified parent numbers must be positive JSON integers. Boolean or floating-point aliases cannot identify an issue; only an absent or null parent means no parent. Its six priority factors follow the existing [ordinal 1–5 rubric](market-research/research-methodology.md#priority-rubric): each is an integer or null. The total must be a JSON number matching the unchanged weighted calculation, or null when any factor is unknown. Booleans cannot stand in for a numeric total. These checks preserve the recorded graph and score shape; they do not assess the scoring judgments or establish issue completion.
 
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.

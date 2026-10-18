@@ -333,6 +333,54 @@ class MarketValidation(unittest.TestCase):
             data['features.json']['cells'][0]['evidence_url'] = url
         return data
 
+    def assert_invalid_source_metadata(self, field, value, *, missing=False):
+        data = deepcopy(self.data)
+        if missing:
+            del data['sources.json'][0][field]
+        else:
+            data['sources.json'][0][field] = value
+        for optimized in (False, True):
+            with self.subTest(field=field, value=value, missing=missing, optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn('sources[0]', result.stderr)
+                self.assertIn(field, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_source_access_metadata_requires_nonempty_text(self):
+        for field in ('access_date', 'access_status'):
+            self.assert_invalid_source_metadata(field, None, missing=True)
+            for value in (None, '', ' \t\u2003', True, False, 0, 1, 1.5,
+                          [], ['synthetic'], {}, {'synthetic': 'record'}):
+                self.assert_invalid_source_metadata(field, value)
+
+    def test_source_access_date_requires_canonical_calendar_date(self):
+        for value in ('2026-02-30', '2023-02-29', '1900-02-29', '0000-01-01',
+                      '20261018', '2026-W42-7', '2026-10-18T00:00:00Z',
+                      '2026-1-8', 'yesterday', '\uff12\uff10\uff12\uff16-\uff11\uff10-\uff11\uff18',
+                      '2026-10-18\n', '2026-10-18\x00'):
+            self.assert_invalid_source_metadata('access_date', value)
+
+    def test_source_metadata_preserves_valid_dates_statuses_and_original_bytes(self):
+        for access_date, status in (('0001-01-01', 'unverified-access-blocked'),
+                                    ('1900-02-28', 'partial / manually retained'),
+                                    ('2000-02-29', ' retrieved \u2003'),
+                                    ('2024-02-29', '\u672a\u78ba\u8a8d')):
+            data = deepcopy(self.data)
+            data['sources.json'][0].update(
+                access_date=access_date, access_status=status,
+                rechecks=[{'claim': 'Synthetic retained singular claim'},
+                          {'claims': [{'claim': 'Synthetic retained array claim'}]}])
+            for optimized in (False, True):
+                with self.subTest(access_date=access_date, status=status, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Market integrity OK', result.stdout)
+                    for name, document in data.items():
+                        self.assertEqual((self.base / name).read_bytes(),
+                                         json.dumps(document).encode('utf-8'))
+
     def test_source_url_requires_text_and_credential_free_http_shape(self):
         for url in (None, '', '   ', [], 1, 'file:///synthetic', '/synthetic',
                     'https:///synthetic', 'https://user:password@example.com/synthetic',
