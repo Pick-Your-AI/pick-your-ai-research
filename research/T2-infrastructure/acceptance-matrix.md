@@ -27,7 +27,7 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 10.6 | Comparison fields defined with type, unit, and evidence requirement | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Artifact criterion satisfied: 19 typed field groups specify units, evidence and unknowns; the current 20-record intake preserves H100/MI300X as note-only and keeps native precision separate from joint execution |
 | 10.7 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [gpu-compute.md](gpu-compute.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Artifact criterion satisfied: fixed severity, outcome, evidence status and applicability remain distinct; sourced premises and synthetic examples are separated from independently verified joint compatibility |
 | 10.8 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [gpu-compute.md](gpu-compute.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Artifact criterion satisfied for bounded documented findings: C01â€“C22 and the RTX 4090/A100/P4de supplements retain primary sources, dates, versions, units and conditions; no new source access or hardware result is inferred |
-| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Current-scope receiving review pending: historical #9/#11/#31 receipts and both actual #39 responses remain linked; the required unapplied-headroom disclosure is integrated. The changed H100/MI300X availability still needs its own receiving disposition, without reassignment of an earlier receipt |
+| 10.9 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #9/#11 @Mattycodes69, #31 @appletechie, #39 @PUSHINGSQUARES | Receiving criterion satisfied by the [actual delegated project-engineering review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107), posted by @CompleteDotTech at `8a6b8a67`: all four #9/#11/#31/#39 scopes receive the current retained subset, explicit withdrawals and implemented headroom condition. Earlier authors, revisions and limits are preserved; final amendment review and canonical delivery remain pending |
 | 10.10 | Open questions recorded with a named follow-up owner | [gpu-compute.md](gpu-compute.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Artifact criterion satisfied: named follow-up owners cover actual remaining model/engine, native-precision, future-estimate, rights and runtime questions |
 | 11.1 | Support matrix keyed by engine version with sources | [inference-engine.md](inference-engine.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Artifact criterion satisfied: three examined releases and three historical rows with scoped sources; no runtime certification |
 | 11.2 | Rules in the #40 format, including `unknown` for unverified combinations | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Artifact criterion satisfied: shared proposal template and E27 owner decisions; unknown for missing eligible evidence, with documented outcomes/evidence status distinct; executable approval separate |
@@ -118,12 +118,16 @@ and #10 remains open for the named semantic and receiving decisions.
 
 The [dated compute assessment](gpu-compute.md#compute-research-artifact-assessment--2026-10-18)
 reviews the literal ten criteria after the accepted #301 intake correction.
-Nine artifact criteria are satisfied; 10.9 retains the concrete current-scope
-receiving review. The intake count is 20 (five hosts, seven storage items, three
+Nine artifact criteria are satisfied; 10.9 is supported by the
+[actual current-scope delegated review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107)
+of published `8a6b8a67`, tree `38cda613ed05c30adf9fdb34cd2d0584866de414`.
+The intake count is 20 (five hosts, seven storage items, three
 accelerators, two profiles and three engines); no removed ID is restored.
 The earlier continuation paragraphs retain their historical review scope and
 are not additional calibration or future-ResourceEstimate closure criteria.
 The actual #39 narrowing is now integrated as explicit unapplied-headroom
-disclosures, with L37/L38 visible but not totalled. This records documentary
-integration, not a new receipt from an earlier author, a runtime result or a
-change to an issue checkbox or Project field.
+disclosures, with L37/L38 visible but not totalled. The new review is attributed
+to the coordinating engineer under the user's project delegation, with every
+earlier receipt retained at its own scope. Final source review, current CI,
+canonical merge and issue/Project reconciliation remain pending; this text
+changes no runtime result, issue checkbox or Project field.

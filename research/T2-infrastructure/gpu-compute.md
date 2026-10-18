@@ -262,7 +262,10 @@ The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-r
 ## Compute research artifact assessment — 2026-10-18
 
 The nine artifact criteria below are satisfied by this bounded research record;
-the current-scope receiving condition in **10.9 remains open**. The literal issue
+the current-scope receiving condition in **10.9 is satisfied** by the
+[actual delegated project-engineering review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107).
+Final source review, current CI, canonical merge and issue/Project
+reconciliation remain pending. The literal issue
 criteria are retained in the [acceptance matrix](acceptance-matrix.md), and the
 [handoff ledger](handoffs.md) keeps each actual author, direction and reviewed
 revision. This assessment does not change a source-check date, a catalog fact,
@@ -304,13 +307,18 @@ also implement the [#9 → #39 exclusion condition](https://github.com/Pick-Your
 without inferring free traffic or adding either estimate to the totals.
 
 The historical #9/#11/#31 receipts and both #39 responses keep their actual
-scope. Applying the #39 display condition does not fabricate a later response
-from its author. In particular, the changed H100/MI300X availability still needs
-a current receiving review for the affected reuse interfaces; the original
-hardware-reuse receipt does not accept that later correction. Once this exact
-scope has an actual reviewed disposition, assess 10.9 against that evidence.
-No additional generic calibration, future-estimate-placement or all-coassignee
-approval requirement is added to the issue's ten research criteria.
+scope. The new receiving review was posted by `CompleteDotTech` as the
+coordinating engineer under the user's express project delegation. It reviews
+published `8a6b8a67019a7abbddd66be59a9d14f8cf9a592f`, tree
+`38cda613ed05c30adf9fdb34cd2d0584866de414`, based on accepted main `387e3ff`.
+It accepts the current hardware/profile inputs and explicit withdrawals for
+#9/#11/#31, confirms the implemented #39 headroom condition, and separately
+checks the related #9 → #39 exclusions. These are actual current dispositions;
+they are not responses attributed to an absent assignee or extensions of an
+earlier author's review. The [four receiving rows](handoffs.md#required-consuming-owner-confirmations)
+retain each consumer's limits. No additional generic calibration,
+future-estimate-placement or all-coassignee approval requirement is added to
+the issue's ten research criteria.
 
 ## Acceptance assessment and validation
 
