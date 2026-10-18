@@ -752,8 +752,8 @@
     ],
     "artifact": "research/market/pcpartpicker.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted as hypotheses",
-    "requested_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+    "acceptance": "Accepted with constraints on 2026-10-18 as hypothesis-only questionnaire and decision-record inputs, preserving distinct axes, answer/preset states, stage quantities and partial cost coverage.",
+    "requested_action": "Ask about actual outcomes before methods; preserve explicit optional intent, actual typed-profile answers, editable attributed presets, demand versus sequence/admission inputs, once-per-stage serialized input and native units. Adopt no task-to-tier default, sibling/global fallback, implicit aggregation, numerical price, quality/fit result or native profile through this UX study.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -764,7 +764,26 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session engineering receiving decision under the user's delegated project authority; not an absent assignee's response, new PCPartPicker observation, source-rights grant, native execution or whole-consumer acceptance.",
+        "reviewed_commit": "d9370e6be479dec947020f0b279da905d381c982",
+        "reviewed_tree": "6263f3a205bdd729dfdd19c9b24a0918b7375f0e",
+        "reviewed_source_location": "Prepared local hypothesis-only candidate; normal canonical publication and qualification were still pending at the time of the actual receipt.",
+        "reviewed_input_main_commit": "5dd6e1c2174033a279325eb8fb445a0c4a694587",
+        "reviewed_artifact_git_blob": "527bc9acc2cc17f3b28fec8250dda44f0b5893b1",
+        "reviewer": "ChatGPT (actual in-session Android engineering receiving reviewer)",
+        "reviewed_consumer_git_blob": "b9691e48704a5ffa35db7741ad1d26a93f6a3187",
+        "scope": "Accept H1/H3/H5 as questionnaire and decision-record design inputs. The reviewer read task/interaction/modality/capability boundaries, the complete field dictionary and answer/preset policy, downstream/optional mapping and scoped CD-5 0.1/0.2 identity, assembled-input, quantity, state and aggregation limits.",
+        "retained_unknowns_and_next_action": "Preserve missing/unknown/withheld/not-applicable/provided states under the actual selected profile; ordinary string unknown does not acquire typed frozen semantics. Keep requests in flight distinct from sequences/admission, count history/memory/retrieval once per complete stage input and generated reasoning/label tokens as output, preserve native image/time units, and infer no global/sibling fallback, attempt multiplier, period conversion or stage sum. Partial active costs stay unknown, while inactive/non-generating paths do not fabricate zero-priced workloads. No PC behavior, usability, participant, workload default, numerical price, measurement, native CD-5 adoption or whole-issue completion.",
+        "submitted_at": "2026-10-18T20:57:42Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51#issuecomment-6255059868"
+      }
+    ]
   },
   {
     "market_issue": 51,
@@ -776,8 +795,8 @@
     ],
     "artifact": "research/market/pcpartpicker.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted as hypotheses",
-    "requested_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+    "acceptance": "Accepted with constraints on 2026-10-18 as hypothesis-only serving-relationship, mode-explanation and conditional-cost context, preserving operator/capacity evidence and unknown classification.",
+    "requested_action": "Use actual serving operator/capacity and exact component/route relationships; retain ambiguous bindings and unknown components. Keep training versus serving, full fine-tuned artifacts versus inherited adapters, billing versus mode, and original versus current identities distinct. Adopt no frozen hybrid repair, per-component wire, pooled resource default, isolation/rights result, latest substitution or zero total cost.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -788,7 +807,26 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session engineering receiving decision under the user's delegated project authority; not an absent assignee's response, new PCPartPicker observation, source-rights grant, native execution or whole-consumer acceptance.",
+        "reviewed_commit": "d9370e6be479dec947020f0b279da905d381c982",
+        "reviewed_tree": "6263f3a205bdd729dfdd19c9b24a0918b7375f0e",
+        "reviewed_source_location": "Prepared local hypothesis-only candidate; normal canonical publication and qualification were still pending at the time of the actual receipt.",
+        "reviewed_input_main_commit": "5dd6e1c2174033a279325eb8fb445a0c4a694587",
+        "reviewed_artifact_git_blob": "527bc9acc2cc17f3b28fec8250dda44f0b5893b1",
+        "reviewer": "ChatGPT (actual in-session Android engineering receiving reviewer)",
+        "reviewed_consumer_git_blob": "7d88a23348768dfaab9630f6194bc3971bbfcbae",
+        "scope": "Accept H1/H4/H5 as component-relationship, mode-explanation and conditional-cost context. The reviewer read the classification test, pairwise boundaries, serving-unit/relationship definitions, field dictionary, data-handling limits, function/mode matrix, pricing separation and open-contract boundaries.",
+        "retained_unknowns_and_next_action": "Project classification requires actual operator and capacity; API transport, weights availability, customer cloud, billing or vendor labels alone cannot supply mode. Preserve unresolved serving bindings, full-artifact versus inherited-adapter scope and training outside this serving test. Unknown serving components cannot become a known aggregate mode; no frozen build-level hybrid repair, per-component release, memory/sequence/allocation default, isolation/residency/source-rights or working-service evidence follows. Historical pins have no latest substitution, and owned hardware without a usage charge is not zero total cost; totals retain actual quantity/period/currency/coverage requirements. No new vendor/runtime observation or whole-issue completion.",
+        "submitted_at": "2026-10-18T20:57:42Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51#issuecomment-6255059868"
+      }
+    ]
   },
   {
     "market_issue": 51,
@@ -800,8 +838,8 @@
     ],
     "artifact": "research/market/pcpartpicker.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted as hypotheses",
-    "requested_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+    "acceptance": "Accepted with constraints on 2026-10-18 as hypothesis-only rule-explanation and exact-profile history inputs; actual finding scope replaces the universal two-selection proposal.",
+    "requested_action": "Use actual rule/profile, affected IDs when present, fixed severity, outcome and qualified evidence. Preserve profile-specific applicability, unknowns and required checks; adopt no new frozen field, activation, latest fallback or shared lifecycle through this UX study.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -812,7 +850,29 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session engineering receiving decision under the user's delegated project authority; not an absent assignee's response, new PCPartPicker observation, source-rights grant, native execution or whole-consumer acceptance.",
+        "reviewed_commit": "d9370e6be479dec947020f0b279da905d381c982",
+        "reviewed_tree": "6263f3a205bdd729dfdd19c9b24a0918b7375f0e",
+        "reviewed_source_location": "Prepared local hypothesis-only candidate; normal canonical publication and qualification were still pending at the time of the actual receipt.",
+        "reviewed_input_main_commit": "5dd6e1c2174033a279325eb8fb445a0c4a694587",
+        "reviewed_artifact_git_blob": "527bc9acc2cc17f3b28fec8250dda44f0b5893b1",
+        "reviewer": "ChatGPT (actual in-session compatibility and central-contract receiving engineer)",
+        "reviewed_consumer_git_blob": "890541d819b0da3940651f4517e52466f7f16e6b",
+        "reviewed_additional_input_git_blobs": {
+          "contracts/v1/schemas/evaluation-report.schema.json": "77875a71a6b7440d5228a1b9880c2651c5bae20f"
+        },
+        "scope": "Accept H2/H3 as documentary design inputs for the actual rule, affected scope, fixed severity, recorded outcome, responsible reason/input and provenance. Narrow the historical universal two-selection requirement to the actual involved selections, if any. Preserve selected CD-1 applicability and unknown reasons and the distinct CD-7 consumer, projection and replay profiles.",
+        "retained_unknowns_and_next_action": "Rule version and provenance come from the actual selected ruleset/profile and available evidence; no new frozen field, fabricated second selection, input rejection promoted to a rule finding, latest substitution, activation default or successor schema/migration. Optional omission does not waive required-presence or cross-component checks. No new PCPartPicker, runtime, source-use, economic or shared-service result; #40/#42 and client completion remain separate.",
+        "submitted_at": "2026-10-18T20:33:12Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51#issuecomment-6254813441"
+      }
+    ]
   },
   {
     "market_issue": 51,
@@ -824,8 +884,8 @@
     ],
     "artifact": "research/market/pcpartpicker.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Accepted as hypotheses",
-    "requested_action": "Authenticated walkthrough remains open; use publicly viewable Completed Builds as an allowed starting point.",
+    "acceptance": "Accepted with constraints on 2026-10-18 as hypothesis-only comparison/revisit inputs, preserving exact profiles, optional states, private/shared boundaries and conditional-cost coverage.",
+    "requested_action": "Use only the documentary comparison and revisit hypotheses; preserve exact identities, unavailable pins, actual profile requirements, recipient/redaction/retention and cost-comparability limits. Neither a proposed URL nor a retained report proves a share service or reproducibility; any later exercised claim needs its own authorized evidence.",
     "ownership_observed_on": "2026-10-18",
     "owner_review": {
       "reviewer": "tynamite",
@@ -836,7 +896,29 @@
       "submitted_at": "2026-10-16T16:28:32Z",
       "reviewed_commit": "6511dea2a5102b13df1e47378a31f31230ecb494"
     },
-    "receiving_review_status": "scoped_response_recorded"
+    "receiving_review_status": "scoped_response_recorded",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "posted_through_github_account": "CompleteDotTech",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual in-session engineering receiving decision under the user's delegated project authority; not an absent assignee's response, new PCPartPicker observation, source-rights grant, native execution or whole-consumer acceptance.",
+        "reviewed_commit": "d9370e6be479dec947020f0b279da905d381c982",
+        "reviewed_tree": "6263f3a205bdd729dfdd19c9b24a0918b7375f0e",
+        "reviewed_source_location": "Prepared local hypothesis-only candidate; normal canonical publication and qualification were still pending at the time of the actual receipt.",
+        "reviewed_input_main_commit": "5dd6e1c2174033a279325eb8fb445a0c4a694587",
+        "reviewed_artifact_git_blob": "527bc9acc2cc17f3b28fec8250dda44f0b5893b1",
+        "reviewer": "ChatGPT (actual in-session Android engineering receiving reviewer)",
+        "reviewed_consumer_git_blob": "98af34c75cf0fabeaea13e8d2fd28c7e174b9f20",
+        "reviewed_additional_input_git_blobs": {
+          "contracts/v1/schemas/evaluation-report.schema.json": "77875a71a6b7440d5228a1b9880c2651c5bae20f"
+        },
+        "scope": "Accept H1/H4/H5 as documentary comparison and revisit hypotheses, with actual kind/role identity, explicit optional states, immutable original versus current candidate, declared exact consumer/projection/replay profiles, and private draft/private archive/authorized shared-projection separation. The H2 actual-selection narrowing is sound.",
+        "retained_unknowns_and_next_action": "Keep required foundation/cross-component checks, unavailable historical pins without latest substitution, actual reader/evaluator and input requirements, recipient/redaction/retention/display-rights limits and conditional cost units/quantities/currency/period/version/coverage. The dated Android profile retains the complete current envelope and represented history, not every predecessor serialization or a shared export. No working share URL, PCPartPicker behavior, native/runtime replay, current price, complete TCO or user-value result; #42 completion remains separate.",
+        "submitted_at": "2026-10-18T20:26:52Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51#issuecomment-6254748868"
+      }
+    ]
   },
   {
     "market_issue": 52,
