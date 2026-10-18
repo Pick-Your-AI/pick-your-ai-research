@@ -624,7 +624,7 @@ None (Recommendation 7).
 
 ## Open questions and handoffs
 
-Each question has one accountable issue (its assignee is the owner); others are consulted. Contract design questions are listed separately as CDs. Q8 and Q9 point to issues that had no assignee set when checked on 2026-10-16; their owners are to be confirmed in owner review.
+Each question has one accountable issue (its assignee is the owner); others are consulted. Contract design questions are listed separately as CDs. Q8 and Q9 ownership was refreshed from live issue assignees on 2026-10-18: [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52) is assigned to @appletechie/@PUSHINGSQUARES and [#48](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48) to @Mattycodes69/@appletechie. This records routing, not receiving acceptance.
 
 | # | Question | Accountable | Consulted |
 | --- | --- | --- | --- |
@@ -635,8 +635,8 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q5 | Does a fit record carry quality impact, or only memory and speed? | #36 | #11 |
 | Q6 | Where do fit reports live, and under what licence? | #41 | #40 |
 | Q7 | Should existing community datasets (D36–D41) be linked or imported, and do their terms allow it? | #41 | #60 |
-| Q8 | Do the proposed incentives work? | #52 (no assignee set) | — |
-| Q9 | How do the existing community projects change the differentiation case? | #48 (no assignee set) | #57 |
+| Q8 | Do the proposed incentives work? | #52 (@appletechie, @PUSHINGSQUARES) | — |
+| Q9 | How do the existing community projects change the differentiation case? | #48 (@Mattycodes69, @appletechie) | #57 |
 | Q10 | How are hybrid builds saved, shared and compared? | #42 | — |
 | Q11 | What remains after a report or its attribution is deleted (nothing, a tombstone, or aggregate statistics), and how long are reports and raw logs kept? | #41 | #60 |
 
@@ -666,7 +666,7 @@ The response retains operator/capacity mode classification and the training/serv
 | Rules in the shared format; hypotheses separated | [Compatibility proposals](#compatibility-proposals) | Revised: common template fields; split rules state their scope; evidence moved to EV-1 |
 | Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; vLLM CPU documentation conflict resolved by #41's conflict order |
 | Handoffs confirmed | [Recorded dispositions](#recorded-receiving-dispositions) | Partial, scoped receipts only |
-| Open questions with owners | [Open questions](#open-questions-and-handoffs) | Partly met: Q8 and Q9 point to issues with no assignee set |
+| Open questions with owners | [Open questions](#open-questions-and-handoffs) | Accountable issues identified; Q8/Q9 live assignees recorded 2026-10-18. Receiving dispositions remain separate |
 | Decision record merged | PR #81 | Merged research; remaining criteria and handoffs separate |
 
 ## Evidence
