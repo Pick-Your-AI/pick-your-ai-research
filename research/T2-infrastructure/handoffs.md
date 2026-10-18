@@ -6,7 +6,7 @@ The original continuation audit re-read the scoped and consuming issue comments 
 
 ## Receipt reconciliation (2026-10-18)
 
-Live issue comments confirm the T4/T5 receipts and Mattycodes69's explicit [Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225), [Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057) and [Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677) dispositions against main `9344f99325510adfe678382a4672246d028e87bc`. Hosting has scoped receipts for #10/#27/#31 (three of seven required interfaces), Compute for #9/#11/#31 (three of four), and Engine for #10/#25/#33 (three of five at that earlier readback). #28 is an additional Hosting boundary receipt, not an eighth original dependency. Other receiving-owner and co-owner decisions remain separate. No reverse-direction T5 acceptance, runtime result, headroom default or final rule approval follows.
+Live issue comments confirm the T4/T5 receipts and Mattycodes69's explicit [Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225), [Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057) and [Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677) dispositions against main `9344f99325510adfe678382a4672246d028e87bc`. At that earlier readback Hosting had scoped receipts for #10/#27/#31 (three of seven required interfaces), Compute for #9/#11/#31 (three of four), and Engine for #10/#25/#33 (three of five at that earlier readback). #28 is an additional Hosting boundary receipt, not an eighth original dependency. Other receiving-owner and co-owner decisions remain separate. No reverse-direction T5 acceptance, runtime result, headroom default or final rule approval follows.
 
 A later 2026-10-18 [@appletechie receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428), reviewing main `66b46d4`, covers #11 → #37 as **accept, integration pending** and #11 → #38 as **narrow** to labels/evidence inputs pending exact-release signal reconciliation. Those are additional scoped responses, not full integration or @PUSHINGSQUARES's disposition. The [#10 co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) separately accepts #11 → #10 with constraints. The lifecycle recommendation and exact reviewed revisions are in [the engine record](inference-engine.md#version-retention-and-bounded-candidate-recommendation--2026-10-18); @zwright8's recorded concurrence does not supply @Mattycodes69's or #42's receiving decision.
 
@@ -16,11 +16,11 @@ A later 2026-10-18 [@appletechie receipt](https://github.com/Pick-Your-AI/pick-y
 | --- | --- | --- | --- | --- |
 | #9 | #10 | @Mattycodes69, @appletechie | Hosting IDs, EC2 profile binding, regional availability unknowns | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057): dated EC2 host/profile binding; stock/quota unknown |
 | #9 | #14 | @zabyxc01, @PUSHINGSQUARES | Managed embedding endpoint hosting category and residency boundary | Pending |
-| #9 | #15 | @zabyxc01, @appletechie | Vector DB hosting and infrastructure storage boundary; product evaluation retained by #15 | Pending |
+| #9 | #15 | @zabyxc01, @appletechie | Vector DB hosting and infrastructure storage boundary; product evaluation retained by #15 | [@appletechie accepts boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; @zabyxc01 substantive disposition separate |
 | #9 | #27 | @CompleteDotTech, @tynamite | MCP server hosting/network category; transport and tool semantics retained by #27 | [Accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072) |
 | #9 | #31 | @tynamite, @appletechie | Host/storage IDs, availability and billing constraints; training sizing retained by #31 | [Accepted](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274): reuse existing host/storage IDs; missing SKU records remain separate |
-| #9 | #37 | @appletechie, @PUSHINGSQUARES | Deployment responsibility, artifacts, network and region constraints | Pending |
-| #9 | #39 | @appletechie, @PUSHINGSQUARES | Dated price units, conditional rates, storage/egress exclusions | Pending |
+| #9 | #37 | @appletechie, @PUSHINGSQUARES | Deployment responsibility, artifacts, network and region constraints | [@appletechie accepts, integration pending](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; hosting rule-ID integration and @PUSHINGSQUARES scope separate |
+| #9 | #39 | @appletechie, @PUSHINGSQUARES | Dated price units, conditional rates, storage/egress exclusions | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), main `66b46d4`; preserve units and uncovered costs. @PUSHINGSQUARES and invoice-rounding decisions separate |
 | #10 | #9 | @Mattycodes69, @appletechie | Distinct accelerator vs provisionable compute-profile catalog IDs | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): accelerator/profile separation; no free-memory or workload-fit claim |
 | #10 | #11 | @zwright8, @Mattycodes69 | Backend/precision and per-device memory assumptions; no universal GPU fit | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): per-device inputs and capacity/support separation; no pooled VRAM |
 | #10 | #31 | @tynamite, @appletechie | Reuse accelerator catalog; independent training-specific memory/time estimates | [Accepted](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484): reuse existing accelerators/profile; training estimates remain independent |
@@ -102,3 +102,14 @@ accepts #7/#11 interfaces only, at its stated revision. It does not accept #10's
 new proposal or replace appletechie's #7 / Mattycodes69's #11 responses. The
 existing #10 -> #31 receipt above remains unchanged. Mattycodes69's #9/#11 interface receipts are now linked above; #39 and other co-owner dispositions remain separate. These interface receipts do not accept the headroom/measurement proposal. This scoped note does not refresh
 unrelated handoffs or take over #59's canonical market ledgers.
+
+
+## #9 regional-scope and billing continuation (2026-10-18)
+
+The [hosting record](hosting.md#proposed-initial-regional-scope-and-expansion-gates-2026-10-18)
+now proposes bounded initial samples and evidence-led expansion, separates
+public offering from account access/AZ capacity, and rechecks regional and
+Runpod billing/placement documentation as H34–H37. No rate or catalog changes
+follow. appletechie's #15/#37/#39 responses above retain their `66b46d4` scope,
+with product/integration and other co-owner decisions separate. Both #9 owners
+still decide the regional recommendation; #39 must resolve invoice semantics.
