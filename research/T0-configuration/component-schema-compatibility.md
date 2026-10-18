@@ -367,6 +367,67 @@ This corrects visibility in the existing test-only reader. It adds no wire
 field/state, default, evidence qualification, preset policy or successor
 adoption. The other CD-1 constraints and full #40/#42 criteria remain open.
 
+### CD-1 explicit preset attribution candidate (2026-10-18)
+
+Constraint 6 in [the #40 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a constrained `preset:<name>` source and an explicit assumption flag.
+The original `cd1-0.1` schema admits arbitrary nonblank source text and has no
+assumption member. The separate [0.2 schema](../../tests/fixtures/t0-answer-attribution.schema.json),
+[synthetic example](../../tests/fixtures/t0-answer-attribution.json),
+[reader](../../tests/t0_answer_attribution_prototype.py) and
+[regressions](../../tests/test_t0_answer_attribution.py) provide an explicit
+opt-in candidate. Original 0.1 schemas, fixtures, readers and callers retain
+their historical meaning; neither reader silently accepts the other version.
+
+Every 0.2 `provided` record must include an exact Boolean `assumption`. Its
+optional `source` must be `preset:<name>`, where this bounded candidate permits
+a 1–64-character ASCII name starting with a letter or digit and continuing with
+letters, digits, dots, underscores or hyphens. Whitespace, trailing control
+characters, URLs and arbitrary source labels are rejected. Broader preset-name
+vocabulary requires an explicit later candidate. Unresolved records retain the
+existing four states and cannot carry a value, source or assumption flag.
+
+`assumption: true` and `assumption: false` remain the caller's distinct explicit
+declarations. The reader infers neither from a source name, a missing source,
+the value's truthiness or another record. Both flags are valid with or without
+a preset source: preserving the origin does not determine whether the caller
+currently declares the value an assumption. Neither flag, nor a syntactically
+valid source, establishes accuracy, confirmation, eligible evidence, publisher
+identity or receiving-owner acceptance. No implicit false/default is supplied.
+
+The reader retains the original UTF-8 bytes. After strict 0.2 admission, it uses
+a private 0.1-shaped in-memory view only to reuse current pointer traversal,
+field validation and answer-state mechanics. That view is not an exported
+artifact, a changed identity or a migration of retained bytes. A provided
+nested value inherits its actual recorded ancestor's source and assumption;
+a missing member or unresolved answer receives no provided attribution.
+Current parent-visibility and overlap behavior is reused unchanged.
+
+The accepted original-token precision guard from [#359](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/359)
+also runs at this candidate's first JSON parse, before any private view is
+serialized. Otherwise an underflowed or excess-precision raw token could be
+rounded first and the downstream reader would see only the replacement number.
+Synthetic controls reject those tokens even in unread nested values before the
+normalizer is called, while preserving supported decimal/exponent values and
+exact JSON integers with their original bytes and explicit attribution.
+
+The typed predicate preserves the explicit flag/source through safe negation.
+The separate terminal wrapper keeps them alongside the unchanged typed rule
+finding and its causal source path, using only the callback actually responsible
+for the result. An unevaluated assertion is not called to obtain metadata.
+Fixed severity, unknown/skipped policy and lazy value validation remain with
+the existing rule evaluator; a false assumption flag cannot turn unresolved
+predicate evidence into a pass. This wrapper rejects callbacks that have
+already discarded attribution. Existing lossy adapters and consumers are not
+silently upgraded to the candidate.
+
+The synthetic cases cover both Boolean flags, absent sources, invalid/missing
+flags, whole-string source admission, original-byte preservation, exact nested
+causes, unresolved states, safe negation and both terminal policies. This
+addresses the test-only attribution mechanics of constraint 6. It changes no
+frozen v1 field, source grade, preset registry, field vocabulary or production
+wire format; successor adoption and the complete #40/#42 criteria remain open.
+
 ### CD-3 synthetic support-membership experiment (2026-10-18)
 
 The [normalized prototype](../../tests/support_membership_prototype.py) and

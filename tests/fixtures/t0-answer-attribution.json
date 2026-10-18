@@ -1,0 +1,27 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.2",
+    "answers": {
+      "/synthetic/workload/requests": {
+        "state": "provided",
+        "value": {"count": 0},
+        "source": "preset:synthetic-zero-demand",
+        "assumption": true
+      },
+      "/synthetic/workload/network": {
+        "state": "provided",
+        "value": "air_gapped",
+        "source": "preset:synthetic-offline",
+        "assumption": false
+      },
+      "/synthetic/workload/external_access": {
+        "state": "provided",
+        "value": false,
+        "assumption": false
+      },
+      "/synthetic/workload/organization": {"state": "withheld"},
+      "/synthetic/workload/budget": {"state": "unknown"},
+      "/synthetic/workload/training": {"state": "not_applicable"}
+    }
+  }
+}
