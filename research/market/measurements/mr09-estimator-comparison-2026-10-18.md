@@ -140,6 +140,20 @@ error. Its source identity differs from the archived executed runner; a future
 execution records its own source hash and timestamps rather than rewriting the
 historical comparison ledger. Offline tests recompute the unchanged finite pairs
 with the guarded helper and verify the historical source against its recorded hash.
+
+The comparator's current intake also rejects repeated decoded JSON keys,
+non-finite constants and numeric overflow in estimator/catalog outputs and
+measurement inputs. All six retained D1/D2 measurement files are parsed and
+their native counts checked before creating an output directory or invoking an
+external tool. Active-sequence, geometry and context counts require exact
+integers; booleans and equal-valued floats do not stand in for those counts.
+Each measurement hash is calculated from the same bytes that were parsed.
+The [offline mutation regressions](../../../tests/test_mr09_comparator_inputs.py)
+preserve source files and reject an invalid final measurement before execution.
+This is a representation and eligibility correction, with no estimator or GPU
+rerun; the historical executed runner, original observations and comparison
+ledger remain unchanged. It adds no empirical pair or receiving-owner receipt.
+
 Download the external artifacts using the exact manifest locators; extract
 `llmfit.exe` from the official checked archive. Place the ModelFit engine beside
 `data/models.json`; place llmfit's pinned `hf_models.json` in the artifact root.
