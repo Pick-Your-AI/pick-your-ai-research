@@ -2602,11 +2602,28 @@
     ],
     "artifact": "research/market/substitute-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints for workload constraint and alternative-adoption research by delegated project engineering",
+    "requested_action": "Retain original hard requirements separately from the generated local-model and offline-after-setup relaxations; require explicit user adoption of a changed candidate. No workload wire field or actual user acceptance is inferred.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session coordinating engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:40:31Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238",
+        "reviewed_commit": null,
+        "reviewed_artifact_git_blob": "fbaff0a01df683fd7444769118d18ba0f2d5a473",
+        "reviewed_artifact_delivery_commit": "49896b41b6e0add6f333406112e8d009e7ad9ee6",
+        "commit_basis": "The actual receipt identifies the exact canonical note blob and supporting capture hashes, not a full repository commit or tree. This blob was delivered by #227 and remains unchanged through acceptance input main 3d395801742461aa82ac31a21857ec6f8d0270fb; the amendment receives separate current validation and review.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. The decision accepts only the stated research input, not another issue's completion, a released contract, runtime evidence, source-use permission or production acceptance.",
+        "scope": "workload constraint and alternative-adoption research",
+        "retained_unknowns_and_next_action": "Retain original hard requirements separately from the generated local-model and offline-after-setup relaxations; require explicit user adoption of a changed candidate. No workload wire field or actual user acceptance is inferred."
+      }
+    ]
   },
   {
     "market_issue": 66,
@@ -2618,11 +2635,28 @@
     ],
     "artifact": "research/market/substitute-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints for bounded conflict-explanation evidence by delegated project engineering",
+    "requested_action": "Treat the observed contradiction explanation as UX evidence only. Exact eligible component/configuration evidence remains required for compatibility, and missing evidence stays unresolved. Frozen v1 and successor-release decisions are unchanged.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session coordinating engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:40:31Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238",
+        "reviewed_commit": null,
+        "reviewed_artifact_git_blob": "fbaff0a01df683fd7444769118d18ba0f2d5a473",
+        "reviewed_artifact_delivery_commit": "49896b41b6e0add6f333406112e8d009e7ad9ee6",
+        "commit_basis": "The actual receipt identifies the exact canonical note blob and supporting capture hashes, not a full repository commit or tree. This blob was delivered by #227 and remains unchanged through acceptance input main 3d395801742461aa82ac31a21857ec6f8d0270fb; the amendment receives separate current validation and review.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. The decision accepts only the stated research input, not another issue's completion, a released contract, runtime evidence, source-use permission or production acceptance.",
+        "scope": "bounded conflict-explanation evidence",
+        "retained_unknowns_and_next_action": "Treat the observed contradiction explanation as UX evidence only. Exact eligible component/configuration evidence remains required for compatibility, and missing evidence stays unresolved. Frozen v1 and successor-release decisions are unchanged."
+      }
+    ]
   },
   {
     "market_issue": 66,
@@ -2634,10 +2668,27 @@
     ],
     "artifact": "research/market/substitute-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Not yet confirmed",
-    "requested_action": "Accept, reject or narrow this declared validation handoff; author planning and merge state do not supply a receiving decision.",
+    "acceptance": "Accepted with constraints for saved-configuration comparison within the tested guest flow by delegated project engineering",
+    "requested_action": "Preserve inputs, selected identities/settings/links, version locks and revision-bound reports; adoption creates a new revision. No global absence of export is inferred. Sharing sensitivity, persistence implementation and the substantive #40 prerequisite remain separate.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
-    "receiving_review_status": "not_yet_confirmed"
+    "receiving_review_status": "not_yet_confirmed",
+    "post_snapshot_reviews": [
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "ChatGPT (in-session coordinating engineering reviewer)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T10:40:31Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66#issuecomment-6248861238",
+        "reviewed_commit": null,
+        "reviewed_artifact_git_blob": "fbaff0a01df683fd7444769118d18ba0f2d5a473",
+        "reviewed_artifact_delivery_commit": "49896b41b6e0add6f333406112e8d009e7ad9ee6",
+        "commit_basis": "The actual receipt identifies the exact canonical note blob and supporting capture hashes, not a full repository commit or tree. This blob was delivered by #227 and remains unchanged through acceptance input main 3d395801742461aa82ac31a21857ec6f8d0270fb; the amendment receives separate current validation and review.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. The decision accepts only the stated research input, not another issue's completion, a released contract, runtime evidence, source-use permission or production acceptance.",
+        "scope": "saved-configuration comparison within the tested guest flow",
+        "retained_unknowns_and_next_action": "Preserve inputs, selected identities/settings/links, version locks and revision-bound reports; adoption creates a new revision. No global absence of export is inferred. Sharing sensitivity, persistence implementation and the substantive #40 prerequisite remain separate."
+      }
+    ]
   }
 ]
