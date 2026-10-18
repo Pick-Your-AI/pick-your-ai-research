@@ -945,7 +945,7 @@ There is no HTTP endpoint or network retrieval in this experiment.
 | `content_digest_mismatch` | Retained bytes disagree with the pin; return no artifact. Preserve this observed failure even when a producer also reports unavailability or revocation. |
 | `native_revision_unsupported` | A positive revision exceeds signed 64-bit range. Omit the numeric revision and artifact; retain the original request/sidecar for inspection. Never round, truncate, wrap or reinterpret it as a missing pin. |
 | `artifact_too_large` / `artifact_structure_unsupported` | Bytes fail the receiving profile; return no artifact and retain independent outcomes for the other artifact. |
-| `artifact_representation_unsupported` | The descriptor's capture timestamp is outside the new ASCII profile, even if the frozen timestamp format checker admits its Unicode decimal digits. Return no artifact; frozen-v1 validation remains unchanged. |
+| `artifact_representation_unsupported` | The capture timestamp or a declared artifact ID/reference is outside the explicit consumer profile below. Return no artifact; retain the original bytes and independent artifact outcomes. Frozen-v1 validation remains unchanged. |
 | `revoked` / `temporarily_unavailable` | An external producer adapter explicitly withholds this exact kind/ID/revision. The fixture adapter can represent these dispositions; it does not discover revocation or implement a publisher. |
 | Per-artifact `resolved` | Exact bytes, frozen structure and this artifact identity agree. This conveys no price eligibility, capability or publication/source-use approval. |
 | Selection outcomes | Preserve `not_enabled`, `snapshot_unresolved`, `selected_version_absent`, `selected_kind_mismatch` and `resolved`. Only a resolved selection carries its exact ID/version/kind reference. |
@@ -977,9 +977,9 @@ The pair's deterministic `identity` is the SHA-256 of the ASCII bytes
 the `catalog_snapshot` and `pricebook` descriptors. Sort every object key
 lexicographically, use no insignificant whitespace or escaped solidus (`\/`),
 encode JSON integers without a decimal/exponent, and preserve descriptor strings unchanged. All
-descriptor fields in this profile have ASCII values; the new descriptor schema
-explicitly restricts `captured_at` to ASCII in addition to the frozen timestamp
-format. This binds both artifacts
+descriptor fields in this profile have ASCII values; the consumer explicitly
+checks `captured_at` against the supported timestamp profile below, independently
+of optional JSON Schema format support. This binds both artifacts
 and their metadata in fixed roles. It is an integrity identity, not a publisher
 release identity, signature or publication receipt.
 
@@ -1055,6 +1055,43 @@ native integer bounds, raw JSON ambiguity, resource limits and cross-catalog
 rate rejection. Run `python -m unittest discover -s tests -p
 test_t0_cd7_consumer.py -v`. #40 and #42 remain open for their remaining
 contract/migration, replay and receiving requirements.
+
+#### CD-7 timestamp and ID admission correction (2026-10-18)
+
+The [#40 owner's constrained disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+identified an ASCII-only date check and incomplete ID anchors. The bounded
+consumer now checks both advertised capture strings and the received original
+artifact's `captured_at`, using the existing intake timestamp parser without
+optional format-checker packages. Its explicit RFC 3339 subset requires an ASCII
+Gregorian date with years `0001`–`9999`, seconds `00`–`59`, `T`/`t`, and either
+`Z`/`z` or a numeric offset through `23:59`. Fractional seconds retain every digit;
+neither strings nor original bytes are normalized. Valid leap-second spellings
+remain explicitly unsupported by this profile. See [RFC 3339 sections 4.3, 5.6
+and 5.7](https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6), checked
+2026-10-18. This is a representation check: it does not compare capture times,
+establish freshness or interpret an unknown local offset as a new source fact.
+
+A private consumer validation view adds complete-string bounds wherever the
+frozen schemas already declare their entity-ID or selection-ID pattern,
+including inlined catalog references. The frozen schema objects and files are
+unchanged. Untyped extension fields named `id` or `captured_at` keep their
+original values; they are not mistaken for declared contract fields.
+
+A newline-suffixed rate ID is now withheld as
+`artifact_representation_unsupported` before membership or result encoding.
+The pair stays `incomplete`, the other artifact remains inspectable and no Build
+verdict is produced. A well-formed rate referring to another catalog still
+returns `rate_catalog_mismatch` with its exact unmatched ID. Invalid declared
+Build IDs reject as `invalid_cd7_input`; malformed envelope selection IDs reject
+as `malformed_envelope`. No ID is stripped or repaired.
+
+The added offline regressions disable optional format checks, exercise invalid
+calendar/offset and trailing-byte cases at both receiving points, preserve
+supported fractional/offset strings and byte identities, and retain all original
+wire fixtures. These are test-only admission corrections to the existing
+candidate. The historical receiving receipts above retain their original source
+scope; this correction does not adopt a successor interface, implement migration
+M1–M5, qualify source use or supply native-owner acceptance.
 
 ### CD-7 historical reference replay candidate (2026-10-18)
 
