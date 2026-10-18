@@ -1728,6 +1728,32 @@ report binding retains its original bytes; a missing or tampered report retains
 its own unresolved status and no bytes. No evaluator instance runs on this path,
 and no generated report, replacement input or validity claim is created.
 
+**Independent retained-report association correction (2026-10-18):** a later
+synthetic probe at accepted `1b3143c` found that an unavailable catalog could
+conceal an independently checkable report mismatch. The same explicitly pinned
+report for a different build produced `build_identity_mismatch` when the other
+inputs existed, but only the catalog's unavailable diagnostic when that catalog
+was removed. Its byte-bound report binding remained available in both cases.
+
+Every return path now checks an independently resolved report's build ID,
+revision and five historical lock fields against the retained build. Existing
+`build_identity_mismatch` and `build_lock_mismatch` diagnostics remain visible
+alongside an unavailable pin, artifact, digest or evaluator. Existing failure
+precedence stays intact, duplicate diagnostics are not appended, and no
+evaluator runs merely to establish these associations. An unavailable or
+digest-mismatched report supplies no association assertion from unbound bytes.
+
+The [eight synthetic regression methods](../../tests/test_t0_replay_association_retention.py)
+include the actual original missing-diagnostic cases, unchanged complete-input
+failures, all five report locks, both build identity fields, absent pins,
+digest/profile failures, matching reports and an unrelated unselected report.
+All retained bytes and historical findings remain unchanged. A binding's
+`resolved` status still describes exact-key and byte resolution; consumers must
+also inspect the association diagnostics before presenting those bytes as the
+historical report for the requested revision. This is a prerequisite for the
+unresolved-state view in [CD-7 constraint 2](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407),
+not that view, a released migration, native acceptance or completion of #40/#42.
+
 Malformed JSON, invalid schemas, duplicate immutable keys and manifest/build/
 sidecar binding errors fail explicitly as value errors before evaluation.
 The candidate reuses the CD-7 strict Unicode/JSON and depth/node boundaries,
