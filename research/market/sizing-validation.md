@@ -174,6 +174,20 @@ The historical dense and supplemental GM1 instruments and observations are
 unchanged; their existing summary/integrity checks remain required. This checks
 representation integrity and supplies no new measurement or source validation.
 
+### Ambiguous NVIDIA CSV columns (2026-10-18)
+
+An offline synthetic check of the summarizer at
+[`31d7dfc6`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/31d7dfc615d38cea963efcda563d3370100f5a72/scripts/mr09_summarize.py)
+found that duplicate CSV column names could hide conflicting NVIDIA driver
+identities and incorrectly combine two successful records into one cohort.
+Column names are now trimmed and checked for duplicates or empty names before
+any row is converted to a dictionary. Identical repeated values, quoted or
+whitespace-varied names and duplicate optional columns are also rejected.
+Synthetic regressions retain both input records and an existing summary on
+rejection, with and without sanitization; uniquely named reordered columns
+remain valid. Historical instruments, observations and summaries are unchanged.
+This validates input representation, not the truth of reported device identity.
+
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
 - [x] Vary context cache precision and concurrency (dense D1–D5; MoE variation remains a gap)
