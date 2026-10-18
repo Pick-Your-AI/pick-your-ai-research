@@ -20,6 +20,39 @@ its protocol and Bedrock input do not establish completed interoperability tests
 The live #10 owner still decides ResourceEstimate placement/consumption. Preserve
 the #59 single writer for updating canonical handoff dispositions and attribution.
 
+## Current #10/#61 continuation map (2026-10-18)
+
+This addendum supersedes the historical zero-receipt/main-merge gaps below for
+this pair only. It records a proposal, not new evidence acceptance. Current
+#10/#61 co-owners are @Mattycodes69 and @appletechie; @CompleteDotTech coordinates
+experiment scope and evidence review. See the
+[coverage disposition](sizing-validation.md#coverage-and-authority-disposition-2026-10-18)
+and [#10 decision](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18).
+
+| #61 live criterion (unchanged) | Current support | Remaining gate |
+| --- | --- | --- |
+| Design dense and MoE measurement matrix | Pinned design; executed cells separated from plans | Owner design review; missing architecture/topology work remains |
+| Vary context cache precision and concurrency | Dense D1–D5 observations | Missing MoE variations and boundary coverage; no waiver |
+| Measure peak allocated and reserved memory | Six phases in 15 dense observations | Missing architecture/per-rank evidence and human validity review |
+| Report error bounds and failures without universal fit claims | Failure/mismatch categories and bounded layout check | Zero matched competitor/runtime pairs; numerical error range unavailable; comparable inputs and reviewed tolerance needed |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Pinned source/result ledger and limitations | Coordinator evidence, reproducibility and reuse review |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Zwright8's scoped #7/#11 interface receipt | Other co-owner responses; #10 headroom/note-only consumption/future placement proposal awaits disposition |
+| Repository checks pass; reviewer accepts the evidence before Done. | This contribution is submitted for current-revision workflow and review | Current-head validation and required human review; no Done claim |
+
+The proposed headroom policy requires an explicit per-device scenario fraction
+and capacity basis, rather than adopting 10% or 20% as a universal default.
+Existing #61 records stay in `research/market/measurements/`; the proposed
+future ResourceEstimate path accepts only real build-bound estimates after
+owner agreement and explicit matching-schema validation. No raw measurement is
+renamed to an estimate metric, no build IDs are fabricated, and no frozen schema
+is changed.
+
+Full empirical scope is retained. A changed acceptance scope requires an
+explicit co-owner/coordinator disposition naming the exact deferred cells and
+claims. This continuation performs no new GPU run, download or hardware probe.
+Canonical market handoff ledgers remain with #59's writer; the linked receipt
+does not accept another co-owner's scope or the newly proposed #10 decisions.
+
 ## Historical submission record — 2026-10-16
 
 The remainder preserves the original #79/#80 snapshot, acceptance matrix, validation
