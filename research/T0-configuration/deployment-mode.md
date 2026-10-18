@@ -1,7 +1,7 @@
 # T0: Deployment Mode
 
 Issue: #3 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `a222013`) · Kinds: `deployment_mode`
-Status: draft, revision 5 (aligned with the owner positions posted on #75 and #88) · Last researched: 2026-10-16
+Status: draft, revision 6 (aligned with the owner positions posted on #75 and #88; D-R6 owner clarification reconciled 2026-10-18) · Last researched: 2026-10-16
 Deliverable path: `research/T0-configuration/deployment-mode.md` · Companion note: [`research/T0-configuration/workload-use-case.md`](workload-use-case.md)
 
 Labels used in this note:
@@ -66,7 +66,7 @@ For each component that serves a model or retrieval, who runs it, where, and on 
 
 Tools, MCP servers, storage and monitoring don't decide the mode. They are still checked for isolation (W-R8 in the companion note) and residency (D-R6).
 
-**The mode applies to serving components only.** Training and fine-tuning runs are out of its scope; T5 classifies them (#30–#33). A serverless fine-tuning service is therefore not "API" under this test. Only the fine-tuned model it produces, once served, gets a mode.
+**The mode applies to serving components only.** Training and fine-tuning runs are out of its scope; T5 classifies them (#30–#33). A serverless fine-tuning service is therefore not "API" under this test. Only the fine-tuned model it produces, once served, gets a mode. Training services and rented training compute that receive data still participate in the separate [D-R6 residency check](#d-r6-residency-covers-processing-and-storage-across-the-data-flows); their exclusion from mode does not exclude their data flows.
 
 **Build-level mode:**
 - If every serving component has the same mode, the build has that mode.
@@ -521,6 +521,7 @@ Air-gap isolation is checked by W-R8 in the companion note. The version and migr
   - build `/workload/residency/processing` and `/workload/residency/storage`;
   - every selected component's locations (`data_terms` for provider-operated components, `hardware_location` for owned or rented hardware);
   - every enabled `external_connections` entry with `carries_workload_data: true`, resolved through `destinations`.
+- **Training coverage:** the [actual T0 owner decision of 2026-10-18](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6252011942) includes every component or destination that receives workload or training data, including managed training services and rented training compute, whether or not it has a serving mode. The [subsequent #40 → #3 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6254660533) retains that boundary. A serving-only connection inventory cannot establish that training data has no external destination. Coverage of those transfers remains a representation requirement for #40/CD-4; this clarification does not introduce a v1 field or change the `carries_workload_data` field definition.
 - **Applies when:** evaluated separately for each dimension. A dimension whose value is `none` is skipped. An unresolved dimension is `unknown`.
 - **Assertion:** for each constrained dimension, every location of every component and destination in the data flow is contained in the allowed set. Containment follows the jurisdiction hierarchy, for example a subdivision within a country (CD-9).
 - **Missing data:**
@@ -534,6 +535,8 @@ Air-gap isolation is checked by W-R8 in the companion note. The version and migr
   - Fail: an offering that stores data in-region but processes it elsewhere (D19).
   - Fail: evaluating a fine-tuned model on Foundry's `Developer` deployment type with a processing constraint. D16 says it processes in any Azure region, with no data-residency guarantee.
   - Unknown: a telemetry destination with no locations.
+  - Fail (synthetic): a self-hosted serving build sends training data to a managed training service whose processing location is known to be outside the processing constraint. The training service does not change the serving mode; its processing location still fails D-R6.
+  - Unknown (synthetic): rented training compute receives data, but its location for a constrained dimension is not recorded. Excluding the training run from mode does not make that residency check pass or skip it.
   - Skipped: both dimensions are `none`.
 
 ### D-R7a CPU meets the engine build's required instruction sets
