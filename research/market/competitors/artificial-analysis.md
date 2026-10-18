@@ -1,5 +1,20 @@
 # Artificial Analysis — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains the historical documented hosted-model/provider comparison.
+The 2026-10-18 recommender-page extraction exposed navigation/footer only;
+neither the inputs nor generated output were reverified. That limitation is
+not evidence of missing functionality. The accepted [#60 restriction](../rights-validation.md)
+keeps the proposed product's data use excluded without the necessary consent.
+No dataset, recommendation or performance measurement was obtained here.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `artificial-analysis`. Classification: Partial competitor, Benchmark provider, Data source (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

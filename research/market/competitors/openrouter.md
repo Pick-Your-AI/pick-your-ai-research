@@ -1,5 +1,20 @@
 # OpenRouter — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+adds a 2026-10-18 [routing-documentation](https://openrouter.ai/docs/guides/routing/provider-selection)
+read: support requirements, fallback order, hard price filters and soft
+performance preferences are distinct. They are not an executed route, complete
+bill or performance guarantee. The accepted [#60 source-use restriction](../rights-validation.md)
+still applies; public API documentation does not authorize this project's
+automated collection. No provider request or data endpoint was called.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `openrouter`. Classification: Partial competitor, Infrastructure provider, Data source (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

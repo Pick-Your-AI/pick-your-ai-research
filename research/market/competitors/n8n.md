@@ -1,5 +1,20 @@
 # n8n — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+uses the accepted [#324 source supplement](../mvp-analysis.md#bounded-primary-source-recheck-for-this-decision):
+workflow JSON and preview project packaging have distinct scopes.
+Credential names/IDs and imported cURL headers can carry sensitive context;
+export is not proof of safe sharing. JSON plus version control remains a
+serious D-57-3 record alternative. No workflow/export was executed, and hosted
+access or the code licence does not settle every exported-content use.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `n8n`. Classification: Adjacent competitor, Substitute workflow (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

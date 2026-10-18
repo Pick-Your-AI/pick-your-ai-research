@@ -1,5 +1,20 @@
 # Hugging Face Hub — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+uses the 2026-10-18 [model-card documentation](https://huggingface.co/docs/hub/model-cards)
+to distinguish publisher-authored README/YAML declarations from independent
+measurements. Repository identity and licence metadata are useful discovery
+inputs; model-card text, weights and third-party results retain their own
+conditions under [#60](../rights-validation.md). No hardware filtering,
+inference or full configuration reconstruction was exercised here.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `hugging-face`. Classification: Partial competitor, Data source, Infrastructure provider (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

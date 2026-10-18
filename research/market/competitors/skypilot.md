@@ -1,5 +1,20 @@
 # SkyPilot — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+uses the accepted [#324 source supplement](../mvp-analysis.md#bounded-primary-source-recheck-for-this-decision):
+resource alternatives/order, mounts and setup/run commands can preserve
+meaningful deployment decisions. The documented hourly resource-price ceiling
+is not whole-bill coverage. Defaults, exact pins and environment still need
+scenario review; YAML is a serious record alternative, without an executed
+deployment, capacity guarantee or compatibility finding.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `skypilot`. Classification: Substitute workflow, Open-source integration candidate (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

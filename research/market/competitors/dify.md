@@ -1,5 +1,20 @@
 # Dify — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+uses the accepted [#324 source supplement](../mvp-analysis.md#bounded-primary-source-recheck-for-this-decision):
+DSL documents substantial configuration export. Excluded knowledge contents,
+tool keys and logs are distinct from the optional secret-environment export
+choice. Neither an adequate reconstruction nor a safe-public-export guarantee
+was demonstrated. The format remains a serious D-57-3 alternative; hosted
+access, modified code terms and third-party/exported content rights stay separate.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `dify`. Classification: Adjacent competitor, Substitute workflow (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

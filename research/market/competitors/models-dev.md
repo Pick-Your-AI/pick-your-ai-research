@@ -1,5 +1,20 @@
 # Models.dev — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+records a 2026-10-18 [publisher documentation](https://models.dev/) read:
+canonical model metadata, provider-specific records, documented exports and
+SDK snapshots are distinct. No endpoint payload or model/provider claim was
+independently verified. The repository MIT condition and [#60](../rights-validation.md)
+integration boundary remain separate from measured capability or artifact
+rights; the historical table's unobserved fields do not prove permanent absence.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `models-dev`. Classification: Data source, Open-source integration candidate, Partial competitor (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

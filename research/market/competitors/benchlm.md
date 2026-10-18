@@ -1,5 +1,22 @@
 # BenchLM — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains the documented selector as a serious narrow substitute while keeping
+[#48's actual catalog classification](../competitors.json). No shortlist was
+generated. Documented answer URLs re-evaluate current data; an editorial stack
+page does not demonstrate joint compatibility or immutable reconstruction.
+The accepted [#60 material/use decision](../rights-validation.md) preserves
+the separate display/feed agreement requirement. Historical source counts,
+method versions and proposed classification changes below are not refreshed
+or adopted by this review.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `benchlm`. Classification: Partial competitor, Benchmark provider, Data source (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |
