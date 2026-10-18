@@ -1,5 +1,20 @@
 # llmfit — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains this documented single-machine fit/quantization substitute.
+Accepted [#48](../mr01-acceptance.md) and [#60](../rights-validation.md)
+keep the upstream repository and llmfit.org website boundaries distinct.
+Repository MIT terms do not establish site/model rights or measured runtime
+accuracy. The documented outputs remain estimates; no CLI or hardware test
+was run in this reconciliation.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `llmfit`. Classification: Partial competitor, Open-source integration candidate (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

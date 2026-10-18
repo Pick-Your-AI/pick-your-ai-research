@@ -1,5 +1,25 @@
 # CanIRun.ai — device-first model discovery
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains this separate partial competitor under accepted [#48](../mr01-acceptance.md)
+and the bounded [#125/#66](../substitute-validation.md) Iris Xe observation.
+The [README at 73ddc80a](https://github.com/midudev/canirun.ai/blob/73ddc80a44e1e2ffcbd5f92d6b2df04b23dfd983/README.md),
+read 2026-10-18, documents ranking, estimated fit, JSON interfaces and tier-list
+image export; these were not executed here. Its MIT statement must be retained
+alongside #48's missing root LICENSE/no-detected-licence finding and separate
+third-party material. The earlier “no licence file” shorthand is not a claim
+about every file or a complete rights decision. Legal operator, deployed
+revision, detection accuracy and runtime performance remain unestablished.
+The old checklist below is historical; #49's cell decisions and #41's
+intended-use review retain their own scopes.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Draft intake, accessed 2026-10-16. Research: #48/#49/#50; scenario validation: #66. Live GitHub assignees remain authoritative.
 
 ## Source and boundary

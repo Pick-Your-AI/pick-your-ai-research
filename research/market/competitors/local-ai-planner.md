@@ -1,5 +1,19 @@
 # Local AI VRAM Calculator / GPU Planner — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains the planner as a documented narrow local-hardware alternative in
+[#48's selected set](../mr01-acceptance.md). Historical form/estimate
+observations are not executed inference, calibrated memory or a complete
+local/API cost comparison. Source identity and reuse questions retain their
+recorded limits; no new product session or rights grant is claimed.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `local-ai-planner`. Classification: Partial competitor (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

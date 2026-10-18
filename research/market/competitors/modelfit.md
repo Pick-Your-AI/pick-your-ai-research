@@ -1,5 +1,23 @@
 # ModelFit — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains the exact #125 session limitation and completed [#66](../substitute-validation.md)
+input. An unavailable CPU-only Windows choice in that interface is not
+universal CPU incompatibility. The public page was read on 2026-10-18 only for
+the documented device/setup/result flow, output channels and estimate framing;
+no CLI, data endpoint or recommendation was run. The accepted [#60 mirror
+review](../rights-validation.md#ten-source-material-check-and-modelfit-resolution--2026-10-18)
+separates CC BY 4.0 dataset, MIT code and upstream rights. All relevant
+integration approval remains withheld; the historical reuse suggestion below
+does not authorize intake or validate memory/speed estimates.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `modelfit`. Classification: Direct competitor, Data source, Open-source integration candidate (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

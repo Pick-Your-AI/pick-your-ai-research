@@ -1,5 +1,22 @@
 # Harness Bench — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+retains paper v2 and site-suite release identities separately.
+Accepted [#60](../rights-validation.md) distinguishes the licensed paper from
+the separate repository task/code/trajectory collection: the bounded root check
+found no repository-wide grant, not that every nested file lacks a licence.
+That unestablished reuse stays excluded. Historical “no build save/share”
+wording describes the inspected surface, not a universal absence claim.
+[#62](../benchmark-validation.md) comparability and reproducibility limits
+remain; no task, benchmark or result reconstruction ran here.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `harness-bench`. Classification: Benchmark provider, Open-source integration candidate (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |

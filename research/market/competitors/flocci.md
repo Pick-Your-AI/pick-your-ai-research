@@ -1,5 +1,24 @@
 # Flocci Ask / Stack Builder — competitor profile
 
+## 2026-10-18 review reconciliation
+
+The [current fourteen-profile review](README.md#2026-10-18-current-profile-review)
+uses completed [#66](../substitute-validation.md), including its accepted
+2026-10-18 guest observation. That response detected the offline/hosted-model
+conflict, proposed a local alternative and included optional RAGFlow
+verification. The earlier “no evaluation step” finding describes only the
+earlier six-component response. The tested save path retained a Docling
+bookmark, not the generated configuration context; other exports/tiers remain
+unknown. Useful advice is observed; runtime fit and satisfaction of the original
+contradictory conjunction are not. The historical proposed #66 work below is
+not a new unresolved child gate. Unestablished catalog rights remain excluded
+for any unapproved product use.
+
+## Historical profile retained
+
+The following dated record is unchanged; current interpretation is above.
+
+
 Status: draft for owner review ([#50](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50)). Entity ID: `flocci`. Classification: Direct competitor, Data source (analyst judgement). Evidence classes are defined in the [index](README.md#evidence-classes).
 
 | Field | Value |
