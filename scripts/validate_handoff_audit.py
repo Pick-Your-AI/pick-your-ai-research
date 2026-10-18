@@ -79,8 +79,22 @@ def validate_identity_numbers(ledger, readback, audit):
             number(value, 'related pull request')
 
 
+def validate_response_text(response, label):
+    """Require recorded text without normalizing it or certifying its truth."""
+    for field in ('reviewer', 'url', 'scope', 'retained_unknowns_and_next_action',
+                  'submitted_at', 'commit_basis'):
+        value = response.get(field)
+        require(isinstance(value, str) and value.strip(),
+                f'{label}: {field} must be nonempty text')
+
+
 def validate(ledger, readback, audit):
     validate_identity_numbers(ledger, readback, audit)
+    for row in ledger:
+        for response in row.get('responses', []):
+            validate_response_text(response, 'ledger response')
+    for response in readback['new_scoped_responses']:
+        validate_response_text(response, 'readback response')
     issues = {issue['number']: issue for issue in readback['issues']}
     require(len(issues) == len(readback['issues']), 'duplicate snapshot issue')
     classified_numbers = [issue['number'] for issue in audit['issues']]
@@ -121,11 +135,9 @@ def validate(ledger, readback, audit):
             if response['role'] == 'receiving_owner':
                 require(response['reviewer'] in row['consumer_owner'],
                         f'{pair}: response is not from a receiving assignee')
-            require(response['url'] and response['scope'] and
-                    response['retained_unknowns_and_next_action'] and
-                    response['submitted_at'] <= readback['snapshot_cutoff_utc'],
-                    f'{pair}: incomplete or post-cutoff receipt')
-            require('reviewed_commit' in response and response['commit_basis'],
+            require(response['submitted_at'] <= readback['snapshot_cutoff_utc'],
+                    f'{pair}: post-cutoff receipt')
+            require('reviewed_commit' in response,
                     f'{pair}: reviewed SHA must be explicit or explicitly unknown')
             actual_responses.append({**response, 'market_issue': pair[0],
                                      'consumer_issue': pair[1]})
