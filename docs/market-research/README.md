@@ -12,4 +12,6 @@ Mission: validate or falsify demand for a dependency-aware AI stack builder. Mar
 
 All findings are initial drafts. Machine-readable market notes are not component catalog proposals. See the methodology before interpreting confidence, completeness or scores.
 
-Latest intake: [CanIRun.ai](../../research/market/competitors/canirun-ai.md), 2026-10-16, routed through #48/#49/#50/#66. Current catalog: 33 entities, 14 profiles, 1,584 matrix cells. Owner review and scenario testing remain pending.
+Historical intake: [CanIRun.ai](../../research/market/competitors/canirun-ai.md), 2026-10-16, routed through #48/#49/#50/#66. That intake recorded 33 entities, 14 profiles and 1,584 matrix cells.
+
+Current catalog data includes the [six community fit-report resources](competitive-landscape.md): **39 entities, 14 profiles and 1,872 matrix cells**. The expansion adds 288 Unknown cells and no profiles. It remains a separate proposal under #48/#49; the earlier 33-entity receiving decisions retain their original revision and scope. These totals describe coverage, not evidence-grade promotion, product execution or source-use permission.

@@ -17350,6 +17350,2886 @@
       "verification_method": "Not verified",
       "access_date": "2026-10-16",
       "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localscore",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "localmaxxing",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "rapid-mlx",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "metrillm",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "openbenchmarking-llama-cpp",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "llama-cpp-perf-threads",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the #48 catalog entry; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-10-16",
+      "evidence_grade": "Unverified"
     }
   ]
 }
