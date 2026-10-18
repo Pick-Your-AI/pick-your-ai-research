@@ -1,6 +1,6 @@
 # Monetization and neutral recommendations
 
-Status: research proposal for [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54); all sources accessed 2026-10-16. Desk research only: no accounts, quotes, agreements, outreach or willingness-to-pay data. Confidence overall: Low.
+Status: research proposal for [#54](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54). The original observations below retain their 2026-10-16 access date; section 8 records a separate, bounded 2026-10-18 offer readback. Desk research only: no accounts, quotes, agreements, outreach or willingness-to-pay data. Confidence overall: Low.
 
 This note compares business-model **structure**. It records no prices, rates, fees, discounts or allowances. Monetary rates belong in dated pricebooks only when complete units and conditions exist ([`docs/RESEARCH_WORKFLOW.md`](../../docs/RESEARCH_WORKFLOW.md)); price freshness and total-cost scenarios are owned by [#64](pricing-validation.md), and pricing/cost semantics by [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39). Country, taxes, discounts, storage, egress, idle capacity, support and commitment terms must be evaluated for an actual quote.
 
@@ -116,15 +116,60 @@ Rejection conditions: #63 meets the subscription disconfirmation criteria above,
 
 Handoffs: #39 (no price units or semantics are proposed here; confirm no conflict with #64), #41 (display/redistribution licensing and disclosure controls; tynamite accepted the earlier #54 → #41 row in the PR #67 review), #63 (section 6 proposal), #58 (consumes the recommendation). Unresolved: #39 disposition; #63 acceptance of the protocol; legal review of section 4 applicability; Capterra and G2 paid-placement terms.
 
+## 8. Commercial-offer readback, 2026-10-18
+
+This readback covers the four public pages named in #54's Sources, not every
+source in this note. Publisher: the organization named in each row. Access date:
+2026-10-18 for each linked page. Version: the unversioned public offer displayed
+on that date, not a selected software release or executed contract. Region:
+unauthenticated English-language pages; no country selector, regional checkout,
+tax treatment or negotiated quote was tested. Evidence grade: Primary
+documentation of advertised offer structure, not an independent measurement of
+billing, demand or neutrality. Confidence: Medium for the displayed structure;
+durability and actual customer outcomes remain unknown. No rates, monetary
+allowances or numerical quotas are copied.
+
+| Publisher / exact primary page | Structure read directly | Boundary retained |
+| --- | --- | --- |
+| BenchLM, [Data access](https://benchlm.ai/data/access) | Free, Data Pro and Research share one account allowance across REST, MCP and connected apps. Paid access increases reads and retained-history access. Coverage checks are separate from data reads. | Research removes the history-age cap on eligible retained records; it does not fill missing history. The page separates query/internal-analysis plans from separately agreed commercial display and redistribution scope. Paying for access supplies no display permission here. |
+| OpenRouter, [Pricing](https://openrouter.ai/pricing) | Standard and Business use prepaid credits; the page places their platform fee on credit purchase and describes model input/output-token billing separately. Enterprise uses contract terms. BYOK inference is billed directly by the provider, with a separate platform-fee condition beyond an allowance. | These are distinct charging events, not a single universal per-request markup. The page's billing assertions were read, not reproduced. No provider price, platform rate or bill is imported into this note or a Pricebook. |
+| LangGenius / Dify, [Pricing](https://dify.ai/pricing) | Cloud lists Sandbox, Professional and Team; the paid workspace offers have monthly/annual selection, member limits and model-dependent message credits. After those credits are used, the page describes switching to the user's own API key. Self-hosted Community and custom Enterprise are separate offers. | Workspace access, member limits and model consumption are separate axes. The pricing page's Community description is not a new license grant; the older license analysis is not refreshed by this page check. No inference cost or production entitlement is established. |
+| n8n, [Plans and pricing](https://n8n.io/pricing/) | The headline basis remains monthly workflow executions with unlimited users/workflows. Starter/Pro are hosted; Business is self-hosted and Enterprise can be hosted or self-hosted. Assistant credits are described separately from workflow executions, including a different self-hosted BYOK path. | The page also advertises an affiliate program. Neither its commission terms nor recommendation neutrality was tested. Execution, Assistant-credit and upstream-model charges must not be collapsed into one hypothetical usage unit or treated as a per-seat subscription. |
+
+**Decision implications (analyst hypotheses, not measured outcomes):** Keep the
+section 7 team-subscription recommendation conditional. An access subscription
+could fund shared review/history while leaving scoring independent, but the
+BenchLM boundary means source-display costs/permissions still need #41/#60's
+actual source-specific disposition. A subscription does not buy those rights.
+The OpenRouter, Dify and n8n structures illustrate why a proposed usage product
+must name its charging event and upstream obligations before #39 can assess it;
+they do not establish our unit economics. Referral remains a separately
+disclosed option under section 3's conflict analysis, rather than an inferred
+neutral or profitable fallback. #63 still owns evidence of willingness to pay;
+no participant was contacted and no paid-demand inference is added.
+
+**Receiving and remaining decisions:** @appletechie retains the co-owner and
+#64 freshness/scenario slice; this readback does not refresh its captured rates
+or modify `pricing-validation.md`. #39's monetization handoff is still pending
+an explicit owner disposition; no relevant #54/#64 response was present in its
+live discussion at this check. The earlier #41 receipt keeps its original
+artifact/scope and is not silently transferred to this addition. Request
+@tynamite / @PUSHINGSQUARES to assess the new access-versus-display boundary in
+their actual #41 scope, and @CompleteDotTech to review this bounded source
+readback. #48's source register and #59's canonical handoff ledger remain with
+their existing writers. The seven live #54 criteria, unresolved legal
+applicability questions, untested neutrality controls and conditional
+recommendation remain unchanged; #54 stays open.
+
 ## Acceptance map (#54)
 
 | Criterion | Section | Status |
 | --- | --- | --- |
 | Compare subscription and referral models | 1, 2, 7 | Drafted; awaiting reviewer |
-| Review commercial offers without inventing rates | 2 | Drafted; no rates recorded |
+| Review commercial offers without inventing rates | 2, 8 | Original observations retained; four dated primary-page structures rechecked without rates; independent review pending |
 | Assess neutrality conflicts | 3, 4 | Drafted; legal applicability needs review |
 | Propose willingness-to-pay validation | 6 | Proposed to #63; not run |
-| Every significant conclusion linked to evidence or explicit hypothesis | All | Self-checked; reviewer to confirm |
+| Every significant conclusion linked to evidence or explicit hypothesis | All | Section 8 links each new structure to its exact primary page and marks its decision implications as hypotheses; reviewer to confirm |
 | Technical owners review handoffs; unresolved decisions named | 7 | #41 prior acceptance; #39 pending |
 | Repository checks pass; reviewer accepts evidence | — | Checks run locally; reviewer acceptance pending |
 
