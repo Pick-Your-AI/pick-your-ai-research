@@ -1,0 +1,82 @@
+{
+  "checked_utc": "2026-10-18T07:08:34.298890+00:00",
+  "source_anchor": {
+    "packages": [
+      "mcp==2.3.0",
+      "mcp-types==2.3.0"
+    ],
+    "commit": "2118f14f8a19bc158d8a1cf90af58d85d187f849"
+  },
+  "scope": "SDK package and installed-source identity; no catalog server or framework tuple qualification",
+  "packages": [
+    {
+      "package": "mcp",
+      "version": "1.30.0",
+      "wheel": "mcp-1.30.0-py3-none-any.whl",
+      "sha256": "666edb5009503e1047c9d60346a756f94b261f05cc2625f23d41c728ffc484d0",
+      "size_bytes": 234581,
+      "installed_python_files_compared": 110,
+      "all_installed_python_files_match_wheel": true
+    },
+    {
+      "package": "mcp",
+      "version": "2.3.0",
+      "wheel": "mcp-2.3.0-py3-none-any.whl",
+      "sha256": "dd0c44c089d16453e8ae31a3877a0054d7a2314caaa81f5e0541b9b1734b2377",
+      "size_bytes": 368664,
+      "installed_python_files_compared": 124,
+      "all_installed_python_files_match_wheel": true
+    },
+    {
+      "package": "mcp-types",
+      "version": "2.3.0",
+      "wheel": "mcp_types-2.3.0-py3-none-any.whl",
+      "sha256": "968efdbdaedfab06adae40d378a34395f1090c5921d4be3c9cde283aaf76d91d",
+      "size_bytes": 69108,
+      "installed_python_files_compared": 8,
+      "all_installed_python_files_match_wheel": true
+    }
+  ],
+  "source_files": [
+    {
+      "wheel": "mcp_types-2.3.0-py3-none-any.whl",
+      "path": "mcp_types/version.py",
+      "sha256": "e244c0bb0dda774b50af4a2f1a2145be6511794fdfd63e6a6c7afe60ee62e51e",
+      "git_blob_sha1": "e2f7e1ac86e453e3fa7ea04a7626d5c7225695e1",
+      "installed_bytes_match_wheel": true
+    },
+    {
+      "wheel": "mcp-2.3.0-py3-none-any.whl",
+      "path": "mcp/client/client.py",
+      "sha256": "36c91f9dcfff52dcf2a4736db6d570f874d7958806f68331ff2bae3b29639031",
+      "git_blob_sha1": "8c7d372431219c1e60b6e14fd94e80b58efc10f2",
+      "installed_bytes_match_wheel": true
+    },
+    {
+      "wheel": "mcp-2.3.0-py3-none-any.whl",
+      "path": "mcp/client/_probe.py",
+      "sha256": "dc5f25886fcff0ab3e59a4302d58378974ae629f0beed77a3bdad25351622192",
+      "git_blob_sha1": "0e46ae57d98b69f48f5da9e0cc1eaa185763cd3d",
+      "installed_bytes_match_wheel": true
+    },
+    {
+      "wheel": "mcp-1.30.0-py3-none-any.whl",
+      "path": "mcp/shared/version.py",
+      "sha256": "18ac0ce561c0c1dd839ababb4f2ac01c41968533bff54289254982efdd4970c9",
+      "git_blob_sha1": "d2a1e462d42f9a349578b0987c7de38c6a86764f",
+      "installed_bytes_match_wheel": true
+    }
+  ],
+  "dependency_locks": [
+    {
+      "file": "requirements-v1.txt",
+      "sha256": "fdd77b7e9a4004acfc436ab09e81d53352d56a04af9c9076f16e4d6e61190594",
+      "source": "Actual isolated pip installation report; Linux x86_64 CPython 3.12.14"
+    },
+    {
+      "file": "requirements-v2.txt",
+      "sha256": "edf13fd6ddafe86a2fd8a325fa9cb8d5b94546a980e30d46b7e374d4dbc25349",
+      "source": "Actual isolated pip installation report; Linux x86_64 CPython 3.12.14"
+    }
+  ]
+}

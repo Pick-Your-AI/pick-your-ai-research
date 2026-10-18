@@ -1,0 +1,9 @@
+{
+  "id": "t4-mcp-230-wheel",
+  "uri": "https://files.pythonhosted.org/packages/20/d7/4a2878f128df729db3ca04e71bfce26405cc2e0c9ebe19c592feeb4c61b9/mcp-2.3.0-py3-none-any.whl",
+  "version": "2.3.0",
+  "sha256": "dd0c44c089d16453e8ae31a3877a0054d7a2314caaa81f5e0541b9b1734b2377",
+  "access": "Public exact PyPI wheel accessed and downloaded 2026-10-18. SHA-256 and byte size matched the versioned PyPI JSON metadata; local package installed only in an isolated temporary experiment environment.",
+  "description": "Official mcp 2.3.0 wheel used for the bounded synthetic local stdio protocol observation. Package identity is distinct from vendor-server compatibility.",
+  "rights": "Publisher package metadata identifies MIT. Wheel and third-party source are not redistributed in Git; source anchors and small synthetic-peer observation are retained."
+}

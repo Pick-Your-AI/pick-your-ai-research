@@ -49,6 +49,88 @@ class ComparatorInputTests(unittest.TestCase):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 MODULE.compare_payload(self.plan, run, "prefill")
 
+    def test_configured_sequence_count_matches_observed_native_count(self):
+        for value in (True, 1.0, "1", None, 0, -1, 2):
+            run = copy.deepcopy(self.run)
+            run["configuration"]["active_sequences"] = value
+            for point in ("prefill", "terminal"):
+                with self.subTest(value=value, point=point), self.assertRaises(ValueError):
+                    MODULE.measured_payload(run, point)
+
+    def assert_preflight_rejected(self, mutate, message, *, optimized=False):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            records = root / "measurements"
+            records.mkdir()
+            for cell in ("D1", "D2"):
+                for rep in (1, 2, 3):
+                    name = f"mr09-{cell}-r{rep}.json"
+                    (records / name).write_bytes((MEASUREMENTS / name).read_bytes())
+            mutate(records)
+            originals = {p.name: p.read_bytes() for p in records.iterdir()}
+            output = root / "new-comparison"
+            argv = [str(SCRIPT), "--artifact-dir", str(root / "absent-artifacts"),
+                    "--measurements", str(records), "--output-dir", str(output)]
+            with patch.object(sys, "argv", argv), \
+                    patch.object(MODULE.subprocess, "run") as run_tool, \
+                    patch.object(MODULE.subprocess, "check_output") as check_tool:
+                with self.assertRaisesRegex(ValueError, message):
+                    MODULE.main()
+                run_tool.assert_not_called()
+                check_tool.assert_not_called()
+            if optimized:
+                result = subprocess.run([sys.executable, "-O", *argv], capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn("ValueError: " + message, result.stderr)
+            self.assertFalse(output.exists())
+            self.assertEqual(originals, {p.name: p.read_bytes() for p in records.iterdir()})
+
+    @staticmethod
+    def mutate_last_record(records, group, field, value):
+        path = records / "mr09-D2-r3.json"
+        run = json.loads(path.read_bytes())
+        target = run if group is None else run[group]
+        target[field] = value
+        path.write_text(json.dumps(run), encoding="utf-8")
+
+    def test_retained_filename_binds_exact_cell_and_repetition(self):
+        for field, values in (("cell", ("D1", "D3", 2, True, None)),
+                              ("repetition", (1, 2, 3.0, True, "3", None))):
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    self.assert_preflight_rejected(
+                        lambda records: self.mutate_last_record(records, None, field, value),
+                        "measurement identity differs", optimized=True)
+
+    def test_copied_observation_cannot_acquire_six_sample_identities(self):
+        def duplicate(records):
+            for path in records.iterdir():
+                path.write_bytes(self.raw)
+        self.assert_preflight_rejected(duplicate, "measurement identity differs", optimized=True)
+
+    def test_fixed_cell_contexts_reject_unsupported_or_swapped_plan_lengths(self):
+        for field, values in (("prompt_per_sequence", (1024, 256, 2080)),
+                              ("cache_tokens_per_sequence", (1024, 288, 2048))):
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    self.assert_preflight_rejected(
+                        lambda records: self.mutate_last_record(records, "actual_tokens", field, value),
+                        "observed context differs", optimized=True)
+
+    def test_declared_workload_counts_and_concurrency_fail_before_execution(self):
+        fields = (("configuration", "prompt_tokens_per_sequence", (256, 2048.0, True)),
+                  ("configuration", "decode_forwards_per_sequence", (0, 64, 32.0, True)),
+                  ("actual_tokens", "decode_forwards_per_sequence", (0, 64, 32.0, True)),
+                  ("configuration", "active_sequences", (2, 1.0, True)))
+        for group, field, values in fields:
+            for value in values:
+                message = ("only single-sequence" if field == "active_sequences"
+                           else "declared context counts differ")
+                with self.subTest(group=group, field=field, value=value):
+                    self.assert_preflight_rejected(
+                        lambda records: self.mutate_last_record(records, group, field, value),
+                        message, optimized=True)
+
     def test_geometry_requires_integers(self):
         for field in ("layers", "kv_heads", "head_dim"):
             run = copy.deepcopy(self.run)
