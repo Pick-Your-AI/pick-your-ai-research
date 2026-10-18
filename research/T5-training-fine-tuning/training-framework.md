@@ -7,13 +7,13 @@ Status: ready for review · Last researched: 2026-10-16
 
 Can the selected model be customised, and with which method and tool?
 
-The answer depends on three joint facts: the base model's license and weight access (#6), the provider's offering (#5), and the framework or service that implements the method. This note covers all three deployment modes:
+The answer depends on three joint facts: the base model's license and weight access (#6), the provider's offering (#5), and the framework or service that implements the method. This note compares three training channels:
 
-- **API:** first-party model APIs (OpenAI, Gemini API, Anthropic, Mistral, Cohere). Customisation is hosted, and the artifact cannot leave the provider.
-- **Managed:** cloud fine-tuning services (Vertex AI, Bedrock, Microsoft Foundry, Together, Fireworks). Some return downloadable weights or adapters.
-- **Self-hosted:** open frameworks run on user compute (TRL, PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NVIDIA NeMo stack, torchtune).
+- **First-party training API:** model APIs (OpenAI, Gemini API, Anthropic, Mistral, Cohere). Customisation is hosted, and the artifact cannot leave the provider.
+- **Managed training service:** cloud fine-tuning services (Vertex AI, Bedrock, Microsoft Foundry, Together, Fireworks). Some return downloadable weights or adapters.
+- **User-operated training framework:** open frameworks run on user compute (TRL, PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NVIDIA NeMo stack, torchtune).
 
-These three labels group **training channels**, not deployment modes. T0's deployment mode (#3) decides the mode by who operates the *serving* runtime and on what capacity ([PR #81](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81), pending), and that definition governs serving. A fine-tuned model's serving mode follows T0, not the channel used to train it. For example, a LoRA trained on Together, downloaded as an adapter and served with its matching base model on user-operated compute would be T0 "Self-hosted", even though it is listed above as a managed training channel ([Together deployment documentation](https://docs.together.ai/docs/fine-tuning/deployment#run-locally), accessed 2026-10-17). T0 defines no mode for a training run; see K-08 in #31.
+These channel labels do not determine the serving deployment mode. T0's deployment mode (#3) decides the mode by who operates the *serving* runtime and on what capacity ([PR #81](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/81), merged), and that definition governs serving. A fine-tuned model's serving mode follows T0, not the channel used to train it. For example, a LoRA trained on Together, downloaded as an adapter and served with its matching base model on user-operated compute would be T0 "Self-hosted", even though its training channel above is a managed training service ([Together deployment documentation](https://docs.together.ai/docs/fine-tuning/deployment#run-locally), accessed 2026-10-17). T0 defines no mode for a training run; see K-08 in #31.
 
 Compute sizing (#31) and dataset preparation (#32) are out of scope.
 

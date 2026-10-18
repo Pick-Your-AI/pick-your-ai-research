@@ -105,13 +105,13 @@ These are proposals. Nothing under `contracts/` was changed.
 
 ## Dependency and handoff matrix
 
-External outgoing handoffs below remain pending. Requests are consolidated for T3 and T6, with each receiving issue named; a request is not acceptance. [Internal T4 receiving-owner dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509) accept the framework/tool/MCP/memory interfaces with explicit constraints; they do not fill missing product facts or approve #40 schemas.
+External outgoing handoffs below are partially received; unresolved rows remain pending. Requests are consolidated for T3 and T6, with each receiving issue named; a request is not acceptance. [Internal T4 receiving-owner dispositions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509) accept the framework/tool/MCP/memory interfaces with explicit constraints; they do not fill missing product facts or approve #40 schemas.
 
 | From | To | Information handed over | Owner | Status |
 | --- | --- | --- | --- | --- |
-| #25 | #6 AI Model | Populate `supports_tool_calling` and `supports_json_schema` per model and API surface, including reasoning-effort conditions | @zwright8, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6#issuecomment-6233367351) |
-| #25 | #11 Inference Engine | Tool-calling prerequisites per engine (vLLM parser flags, Ollama `tool_choice` gap) | @zwright8, @Mattycodes69 | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334) |
-| #28 | #7 Context Window | Memory and history tokens must fit `requested_context_tokens`; proposed injected-token metric | @zwright8, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6233367558) |
+| #25 | #6 AI Model | Populate `supports_tool_calling` and `supports_json_schema` per model and API surface, including reasoning-effort conditions | @zwright8, @PUSHINGSQUARES | [Accepted with constraints by @zwright8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6#issuecomment-6242697096) at `7acbefb`; @PUSHINGSQUARES co-owner response remains separate |
+| #25 | #11 Inference Engine | Tool-calling prerequisites per engine (vLLM parser flags, Ollama `tool_choice` gap) | @zwright8, @Mattycodes69 | [Accepted with constraints by @zwright8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6242698282) at `7acbefb`; @Mattycodes69 co-owner/internal dispositions remain open |
+| #28 | #7 Context Window | Memory and history tokens must fit `requested_context_tokens`; proposed injected-token metric | @zwright8, @appletechie | [Accepted with constraints by @zwright8](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6242697652) at `7acbefb`; @appletechie co-owner response and #10 KV agreement remain separate |
 | #27, #28 | #9 Hosting | Self-hosted MCP hosting categories and egress field; relational, object and file memory reuse `storage` | @Mattycodes69, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072) |
 | #26, #28 | #13 Knowledge Base | Shared provider identity for ingestion vs actions; memory reuses knowledge storage semantics | @tynamite, @zabyxc01 | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13#issuecomment-6233368471) |
 | #28 | #15 Vector Database | Vector-backed memory reuses the selected vector database (role `memory`) | @zabyxc01, @appletechie | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13#issuecomment-6233368471) |
@@ -125,6 +125,10 @@ External outgoing handoffs below remain pending. Requests are consolidated for T
 | all | #41 Data Freshness | Versioning of hosted services; grading of vendor docs and JavaScript-rendered pages | @tynamite, @PUSHINGSQUARES | Pending — [request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6233369204) |
 
 
+### Later scoped T1 receipts (2026-10-18 readback)
+
+The three @zwright8 receipts above review main `7acbefbf4e4e700231e88be272bc89e3a73dde15`. They accept model capabilities only at offering/API/request scope, full assembled-input accounting with reservations and recounts, and engine prerequisites at the exact versioned request tuple. None certifies runtime execution, accepts every co-owner’s scope, or approves new frozen-v1 fields. The remaining rows keep their earlier snapshot; a request is still not acceptance.
+
 ### Reconciliation with merged T2 research
 
 T4's receiving-owner dispositions are now explicit:
@@ -133,7 +137,7 @@ T4's receiving-owner dispositions are now explicit:
 - **#9 -> #28:** [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6233323072): T2 supplies infrastructure storage; T4 retains memory scope, consent, retention and deletion. Storage choice is not proof of ACLs or erasure.
 - **#11 -> #25:** [accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334): tool/parser/schema/API support is conditional on the complete versioned request tuple. [Synthetic consumer cases](../../tests/fixtures/t4-engine-consumer.md) specify future checks; no engine run is certified by those examples.
 
-These are directional acknowledgments. The reciprocal #9/#11 requests in the table above still need their receiving owners' decisions. The [T2 ledger](../T2-infrastructure/handoffs.md) links the actual T4 receipts.
+These are directional acknowledgments. The reciprocal #9 request remains pending; the #11 row now records @zwright8’s scoped receipt while retaining @Mattycodes69’s outstanding disposition. The [T2 ledger](../T2-infrastructure/handoffs.md) links the actual T4 receipts.
 
 ## Data-source provenance
 

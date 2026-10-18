@@ -51,6 +51,33 @@ class MigrationCases(unittest.TestCase):
                       {'id': 'b', 'kind': 'fine_tuned_model', 'artifact_type': 'adapter', 'base_id': 'a'}]
         self.assertEqual(component_modes(components), ({'b': 'unknown', 'a': 'unknown'}, 'unknown'))
 
+    def test_adapter_does_not_inherit_unrelated_serving_deployment(self):
+        # #81 deployment-mode.md: adapters inherit a base model deployment.
+        # v1 spec_fine_tuned_model.base_model_ref also names catalog kind model.
+        for kind in ('vector_database', 'embedding_model', 'inference_engine'):
+            for reverse in (False, True):
+                with self.subTest(kind=kind, reverse=reverse):
+                    components = [
+                        {'id': 'base', 'kind': kind, 'deployment': {
+                            'runtime_operator': 'provider', 'capacity': 'shared'}},
+                        {'id': 'adapter', 'kind': 'fine_tuned_model',
+                         'artifact_type': 'adapter', 'base_id': 'base'}]
+                    modes, overall = component_modes(
+                        list(reversed(components)) if reverse else components)
+                    self.assertEqual(modes['adapter'], 'unknown')
+                    self.assertEqual(overall, 'unknown')
+
+    def test_adapter_disabled_base_is_unknown_in_any_order(self):
+        for reverse in (False, True):
+            components = [
+                {'id': 'base', 'kind': 'model', 'enabled': False,
+                 'deployment': {'runtime_operator': 'self'}},
+                {'id': 'adapter', 'kind': 'fine_tuned_model',
+                 'artifact_type': 'adapter', 'base_id': 'base'}]
+            self.assertEqual(component_modes(
+                list(reversed(components)) if reverse else components),
+                ({'adapter': 'unknown'}, 'unknown'))
+
     def test_v1_historical_evaluation_unchanged(self):
         sys.path.insert(0, str(ROOT / 'contracts/v1/reference'))
         from evaluate import Evaluator

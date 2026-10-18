@@ -1,7 +1,7 @@
 # RAG and retrieval backends
 
 Issue: [#16](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16) · Contract: 1.0.0 · Kinds: `rag_pipeline`
-Status: draft for owner review (@zabyxc01); consuming-owner handoffs pending · Last researched: 2026-10-17
+Status: draft for owner review (@zabyxc01); consuming-owner handoffs pending · Last researched: 2026-10-18 (targeted supplement; older source dates retained)
 
 ## User decision
 
@@ -61,7 +61,7 @@ Licences and versions were taken from the GitHub repository API on 2026-10-17 (l
 
 **Deployment modes.** API (OpenAI file search, Cohere Rerank), managed (Azure AI Search, Bedrock Knowledge Bases) and self-hosted (engines, libraries, BGE weights) are all represented. Managed offerings of Elasticsearch, OpenSearch and Vespa exist but were not evaluated. Managed vector-database services belong to #15.
 
-Elastic's subscriptions page lists "Field- and document-level security" and "Reciprocal Rank Fusion (RRF) for hybrid search", but the tier assignment could not be read from the text, so the **tier needed for DLS and RRF is unknown** (R04). A builder must not assume that either feature is available under the free default distribution.
+Elastic's subscription matrix text alone did not resolve DLS/RRF tiers (R04). The [pinned-code supplement](#source-gap-resolution-2026-10-18) now identifies the v9.5.5 feature gates: Platinum for DLS/FLS and Enterprise for RRF. These are code-level requirements, not a claim about an account's entitlement or Cloud plan.
 
 ## Permission enforcement points
 
@@ -225,4 +225,36 @@ None of these handoffs is confirmed. The drafter is a co-assignee on #7, #15, #3
 | #41 @tynamite, @PUSHINGSQUARES | Elastic tier evidence; refresh window for preview features | Pending |
 | #65 @zabyxc01, @appletechie, @itisSomeone | Bedrock hybrid fallback as a concrete interoperability claim to test | Pending |
 
-Other open evidence: the Elastic subscription tier for DLS and RRF (R04); Cohere Rerank input limits (R23); whether GraphRAG has any permission story (R13/R14); and whether Bedrock and OpenAI filters can serve as security boundaries (R12, R19).
+The supplement below resolves specific source gaps without certifying deployed authorization. Remaining work: account-specific entitlement, model-specific rerank query/context ceilings, concrete GraphRAG authorization integration, and caller-bound Bedrock/OpenAI filtering tests. #16 owners retain these follow-ups; #65 retains its active experiment.
+
+
+## Source-gap resolution (2026-10-18)
+
+All entries below are primary documentation or source inspection, not executed behavior or independent measurements. They supplement the earlier candidate table; no default-backend or receiving-owner decision is implied.
+
+### Reranker input boundaries
+
+Cohere's [v2 Rerank reference](https://docs.cohere.com/v2/reference/rerank) (R27, mutable documentation, accessed 2026-10-18) documents `POST /v2/rerank`: more than 1,000 documents is discouraged for performance, not stated as a hard rejection threshold. `max_tokens_per_doc` defaults to 4,096 and longer documents are truncated. `top_n` controls returned results, not how many documents are supplied. These endpoint parameters do not establish each model's query-plus-document context ceiling. Keep the selected model/tokenizer and actual truncation setting with the evaluation configuration; an important passage outside the retained text cannot be recovered by asking for more returned results (project inference). Remaining model-specific ceilings belong to #16/#14; price units to #39.
+
+### Elastic feature entitlement
+
+R28 — Elasticsearch v9.5.5, commit `48acba663b09e70b115dd879329141506c377890`, source checked 2026-10-18:
+
+- [SecurityField.java](https://github.com/elastic/elasticsearch/blob/48acba663b09e70b115dd879329141506c377890/x-pack/plugin/core/src/main/java/org/elasticsearch/xpack/core/security/SecurityField.java) declares `DOCUMENT_LEVEL_SECURITY_FEATURE` and `FIELD_LEVEL_SECURITY_FEATURE` with minimum operation mode `PLATINUM`.
+- [RRFRankPlugin.java](https://github.com/elastic/elasticsearch/blob/48acba663b09e70b115dd879329141506c377890/x-pack/plugin/rank-rrf/src/main/java/org/elasticsearch/xpack/rank/rrf/RRFRankPlugin.java) declares `RANK_RRF_FEATURE` with `ENTERPRISE`; [RRFRetrieverBuilder.java](https://github.com/elastic/elasticsearch/blob/48acba663b09e70b115dd879329141506c377890/x-pack/plugin/rank-rrf/src/main/java/org/elasticsearch/xpack/rank/rrf/RRFRetrieverBuilder.java) checks that feature against the shared license state when parsing the retriever.
+
+Do not infer feature entitlement from source-code availability or the top-level license choice. Check the selected distribution/version and active license separately; trial and hosted-plan entitlements need their own evidence. This settles the pinned implementation's gate, without inventing a subscription price or assuming a Cloud plan matches it.
+
+### GraphRAG derived-data authorization
+
+R29 — GraphRAG v3.3.0, commit `5faaaf4f5685fa2056fa8c3bf9342cb089f2942f`, [global search implementation](https://github.com/microsoft/graphrag/blob/5faaaf4f5685fa2056fa8c3bf9342cb089f2942f/packages/graphrag/graphrag/query/structured_search/global_search/search.py), inspected 2026-10-18. Its search entry point receives a query and conversation history, builds context through the supplied context builder, and maps over community summaries before reduction. This inspected path does not itself establish an authenticated caller-to-document ACL check. This is a scoped observation, not proof that every GraphRAG integration lacks authorization.
+
+Proposed integration requirement: restrict derived entities, relationships and community reports as well as source chunks before any model call. Filtering citations after generation cannot remove information already summarized across private documents. Use separately authorized graph artifacts or a reviewed context builder with permission propagation; until that implementation and leakage tests exist, shared mixed-permission graph retrieval remains authorization-unknown. #16 owns the integration decision with #13/#35; this note performs no #65 experiment.
+
+### Hosted filters and trusted authorization
+
+R30 — AWS [knowledge-base service-role permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-permissions.html), mutable guide accessed 2026-10-18. AWS states that ingestion uses the role bound to the knowledge base; a data-source manager can ingest locations that role can read and query them without holding S3 permissions. Restricting the service role and privileged ingestion actions is therefore separate from authorizing an application's end user. R12's request metadata filters and implicit model-generated filters establish selection mechanisms, not caller identity or source ACL inheritance.
+
+R31 — OpenAI [file-search guide](https://developers.openai.com/api/docs/guides/tools-file-search), Responses API, mutable guide accessed 2026-10-18. The application supplies `vector_store_ids` and optional file-attribute `filters`. The demonstrated category filter is a search predicate; it is not evidence of an authenticated user-to-file permission check.
+
+Proposed policy for both services: the trusted application authenticates the caller, authorizes the requested store/knowledge base and operation, derives mandatory ACL scope from trusted metadata, and intersects optional user search constraints with it. Do not let user input or model-generated filters replace mandatory scope. Missing ACL metadata, an untrusted filter, an unauthorized store, or stale permission state must block protected retrieval pending review. Validate revocation and mixed-permission cases before claiming P2 enforcement. A service credential's ability to retrieve data does not by itself authorize the end user. This is an engineering policy proposal; deployed security remains unverified and receiving-owner decisions remain pending.

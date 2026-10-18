@@ -59,7 +59,7 @@ How does the builder represent every component, and decide, explain and recomput
 | Price classification | CTX-04 | #39 owns rates; budget checks use the higher tier when estimates straddle |
 | Agent capability and trust | T4 framework, tool, MCP and memory rules (24 v1-valid proposals plus contract-dependent ones) | One severity per rule; queue disposition only, accepted on #40; credential-binding ambiguity gives `unknown` (CD-6) |
 
-**For @zwright8 review:** confirm, narrow or reject the proposed T5 routing inventory below for #68/#76/#77; no disposition is inferred.
+**Recorded T5 routing disposition:** [@zwright8 accepted the routing with constraints in #126](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323). The inventory below preserves the remaining source-specific receiving decisions; queue acceptance is not approval of fields, rights or executable rules.
 
 ## Contract decisions
 
@@ -175,7 +175,7 @@ These are proposed acceptance examples, not measured configurations or a migrati
 
 The [synthetic fixtures](../../tests/fixtures/t0-migration.json) encode M1–M5 and additional boundary cases. The [test-only projection prototype](../../tests/t0_migration_prototype.py) takes already-normalized eligible fixture facts in `x_t0_migration_inputs`, preserves original historical bytes and emits a separate `x_t0_migration_projection`. It does not parse arbitrary real selections, resolve source conflicts or publish a next-version schema. Null means missing fixture evidence, not a contract answer encoding.
 
-Run `python -m unittest discover -s tests -p test_t0_migration.py -v`. The tests cover all operator/capacity pairs, unknown dominance, non-serving/disabled components, adapter inheritance and missing/cyclic bases, duplicate IDs, conflicting workload copies including zero, absent snapshot/pricebook revisions, and unchanged v1 historical evaluator findings. They are synthetic semantics checks, not runtime measurements or validation of a released migration adapter. Actual snapshot resolution and dual-ruleset evaluation remain future versioned implementation.
+Run `python -m unittest discover -s tests -p test_t0_migration.py -v`. The tests cover all operator/capacity pairs, unknown dominance, non-serving/disabled components, adapter inheritance and missing/cyclic/disabled bases, rejection of unrelated serving kinds as adapter bases, duplicate IDs, conflicting workload copies including zero, absent snapshot/pricebook revisions, and unchanged v1 historical evaluator findings. They are synthetic semantics checks, not runtime measurements or validation of a released migration adapter. Actual snapshot resolution and dual-ruleset evaluation remain future versioned implementation.
 
 ## Worked rule examples for receiving-owner review
 
@@ -193,7 +193,7 @@ The quantities and labels in this section are synthetic fixtures, never catalog 
 
 ## Proposed T5 routing inventory
 
-This is an initial routing synthesis from the merged T5 README and component notes, inspected 2026-10-17; it does not accept their hypotheses or replace @zwright8's triage disposition.
+This routing synthesis comes from the merged T5 README and component notes, inspected 2026-10-17. [@zwright8's #126 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323) accepts it with the constraints below. It accepts routing for review, not new enums, evidence truth, legal permission or execution.
 
 | T5 input | Proposed family or contract decision | Remaining acceptance |
 | --- | --- | --- |

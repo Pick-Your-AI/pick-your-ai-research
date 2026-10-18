@@ -640,7 +640,19 @@ Each question has one accountable issue (its assignee is the owner); others are 
 | Q6 | Which protocols and metrics can a `quality_target` use? | #36 | #11 |
 | Q7 | How should several workloads sharing one machine be represented? | #42 | #10 |
 
-Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #28, #30, #31, #32, #33, #35, #36, #39, #40, #41, #42, #62. #30, #31 and #32 consume the deferred organisation attestations (CD-12).
+### Recorded receiving dispositions
+
+The [#2 handoff request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6238501766) names each receiving scope. [@zwright8's response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6242696067), reviewed against main `7acbefbf4e4e700231e88be272bc89e3a73dde15`, accepts the following **only within that named consumer/co-owner scope**:
+
+| Consumer | Accepted scope and retained constraint |
+| --- | --- |
+| #6 | Task/modality/output-format filters scoped to exact model/offering/request evidence; a filter match proves no workload result |
+| #7 | Full assembled input and separate generation reserve; thinking counted once, independent budgets preserved, non-token tasks not forced into token fields |
+| #11 | Decoding expansion, active sequences, engine and hardware/placement scope; queued requests are not resident sequences and context fit is not memory fit |
+| #30 | Customisation and organisation answers are permission-check inputs, not permission to train; #31/#32 retain their own decisions |
+| #40 | W-R1–W-R10 and CD-1–CD-12 accepted into the proposal/versioning process, not a released schema or ruleset |
+
+This receipt does not cover the later W-R11 memory correction or replace other co-assignees' responses. Remaining receiving/co-owner scopes include #3, #10, #13, #16, #28, #31, #32, #33, #35, #36, #39, #41, #42 and #62, plus the unrepresented co-owner scopes in accepted rows. #30/#31/#32 consume CD-12 attestations separately. No reverse-direction acceptance or issue completion is inferred.
 
 ## Acceptance criteria coverage
 
@@ -654,9 +666,9 @@ Handoffs to confirm (none confirmed yet): #3, #6, #7, #10, #11, #13, #16, #28, #
 | Comparison fields | [Field dictionary](#field-dictionary), W-R7 | Revised: evidence checked by type (EV-1); conflicting eligible results resolved by #41's conflict order; remaining items recorded as CDs |
 | Rules in the shared format; hypotheses separated | [Compatibility proposals](#compatibility-proposals) | Revised: common template fields; fine-tuned stages in W-R1 |
 | Primary sources with access dates | [Evidence](#evidence) | Revised: contract cited as adopted; E23 re-checked |
-| Handoffs confirmed | [Open questions](#open-questions-and-handoffs) | Open |
+| Handoffs confirmed | [Recorded dispositions](#recorded-receiving-dispositions) | Partial, scoped receipts only |
 | Open questions with owners | [Open questions](#open-questions-and-handoffs) | Reviewer: met |
-| Decision record merged | — | Open |
+| Decision record merged | PR #81; memory correction PR #129 | Merged research; remaining criteria and handoffs separate |
 
 ## Evidence
 
