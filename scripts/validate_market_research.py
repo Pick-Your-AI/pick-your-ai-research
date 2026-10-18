@@ -50,6 +50,25 @@ def validate_http_url(value, label):
     require(url.username is None and url.password is None, f'credentials in {label}')
 
 
+def validate_deliverable(value, label):
+    """Require a real file within the resolved market root, preserving its path."""
+    require(isinstance(value, str) and value.strip(),
+            f'{label}: requires a nonempty relative file path')
+    path = Path(value)
+    require(not path.is_absolute(), f'{label}: requires a relative file path')
+    try:
+        root = BASE.resolve(strict=True)
+        target = (root / path).resolve(strict=True)
+        require(target.is_relative_to(root),
+                f'{label}: resolved path must remain within research/market')
+        require(target.is_file(), f'{label}: requires an existing file')
+    except MarketValidationError:
+        raise
+    except (OSError, RuntimeError, ValueError) as error:
+        raise MarketValidationError(
+            f'{label}: requires an existing file with a resolvable path') from error
+
+
 def validate_source_rechecks(source):
     """Validate both retained claim shapes without certifying their statements."""
     label = f"source {source['id']}: rechecks"
@@ -305,9 +324,10 @@ def validate():
     parents = {}
     for item in backlog:
         for key in ('question', 'owner', 'workstream', 'priority', 'readiness', 'status',
-                    'deliverable', 'steps', 'priority_rationale', 'next_action'):
+                    'steps', 'priority_rationale', 'next_action'):
             require(item.get(key), (item['number'], key))
-        require((BASE / item['deliverable']).exists(), item['deliverable'])
+        validate_deliverable(item.get('deliverable'),
+                             f'backlog #{item["number"]}: deliverable')
         if item.get('parent_number') is not None:
             require(item['parent_number'] in numbers, 'market integrity check failed')
             parents[item['number']] = item['parent_number']

@@ -30,7 +30,7 @@ Serving support matrices are owned by #11, and evaluation methodology by #36. Th
 | --- | --- | --- | --- | --- |
 | PEFT LoRA adapter | `safetensors` / `true` | TRL+PEFT, Axolotl, Unsloth, LLaMA-Factory, ms-swift, NeMo; Together and Fireworks downloads (#30) | Exact base model (id + revision); engine with LoRA support; rank and target modules within engine limits | V1, V4, G2 |
 | Merged full weights | `safetensors` / `false` | PEFT `merge_and_unload()`, framework export commands (#30) | An engine supporting the resulting architecture, format and precision; memory requires the resulting tensor shapes, dtype and serving workload | V1, V11 |
-| GGUF (merged) | `gguf` / `false` | Axolotl, Unsloth natively; llama.cpp converters (#30 F34) | llama.cpp-family engines; vLLM support is experimental | V5, V6 |
+| GGUF (merged) | `gguf` / `false` | Framework export workflows and llama.cpp converters; Axolotl's audited route delegates conversion and requires eligible merged input (#30 R4). No universal or executed conversion is established | Exact resulting architecture, tensors, quantization and engine import path must qualify; vLLM's recorded GGUF support is experimental | V5, V6; #30 R4 |
 | GGUF LoRA adapter | `gguf` / `true` | llama.cpp `convert_lora_to_gguf.py` | llama.cpp with the matching base GGUF; **not** Ollama ≥0.34.1 | V5, V7 |
 | Provider-hosted | `api_only` / n/a | OpenAI, Vertex Gemini tuning, Bedrock customisation, Foundry (OpenAI models) | The provider's endpoint; lifecycle tied to the provider | V13–V17 |
 
@@ -211,9 +211,9 @@ Not priced here:
 ## Recommendation and rationale
 
 1. **Keep the adapter and, where supported, a merged checkpoint**, pinned to the base's full commit SHA.
-   - Adapters are small and portable across vLLM, SGLang, TensorRT-LLM, Together and Fireworks.
+   - Retaining the adapter preserves a separate candidate for engines/providers with an eligible exact base, adapter variant, rank, tensor mapping and deployment path. The recorded support rows do not establish interchangeability across every vLLM, SGLang, TensorRT-LLM, Together or Fireworks configuration.
    - A supported merge can remove the need for dynamic adapter support, but it is not a universal serving format. Check the resulting architecture, tokenizer, precision and engine/provider import requirements; GGUF conversion or another target-specific export may still be required. PEFT documents methods/settings that cannot merge and loss of adapter-management functions after `merge_and_unload()` (V11). No serving tuple is qualified by this recommendation alone.
-2. **Merge into the 16-bit base, then quantise.** PEFT warns that merging into 4- or 8-bit weights changes generations (V11).
+2. **Where the selected method and quantization support merging, consider the 16-bit base before target quantization.** This is A-06's project inference from the documented rounding warning, not a universal PEFT recommendation. Unsupported merges remain unsupported, and the resulting artifact still needs its own conversion/import and serving checks (V11; #30 R2/R4).
 3. **Avoid adding tokens** unless required. Added tokens block adapter serving on most engines and providers (A-03).
 4. **Prefer portable managed paths** (Vertex open models, Together, Fireworks) unless lock-in is acceptable. Show the lifecycle risk for OpenAI and Foundry fine-tunes (A-12, A-13).
 5. **Record provenance:**
@@ -231,7 +231,11 @@ Not priced here:
 
 ## Structured artifacts
 
-No CatalogItem proposals. A `fine_tuned_model` is specific to the user and produced by a run. Its references must resolve to catalog items that do not exist yet: a `model` (#6), a `training_dataset` (#32), and `training_framework` items (proposed in #30 / PR #68). The reusable facts here belong to:
+No `fine_tuned_model` CatalogItem is proposed: this record supplies no actual user-specific training run, resulting artifact or complete lineage.
+
+**Repository inventory reconciliation, 2026-10-18:** the accepted proposal directory already contains two `model` records ([GPT-5.4](../../catalog/proposals/t1-model-gpt54-openai.json) and [Sonnet 5.5](../../catalog/proposals/t1-model-sonnet55-anthropic.json)) and the four `training_framework` records for [TRL](../../catalog/proposals/training_framework-trl.json), [PEFT](../../catalog/proposals/training_framework-peft.json), [Axolotl](../../catalog/proposals/training_framework-axolotl.json) and [Unsloth](../../catalog/proposals/training_framework-unsloth.json). It contains no `training_dataset` or `fine_tuned_model` proposal. The two model proposals have API access modes; their existence does not qualify either as an eligible training base or supply weight access, account entitlement, artifact export, rights or evaluation. The earlier blanket assertion that model/framework records do not exist is withdrawn.
+
+An actual artifact still needs type-correct `base_model_ref`, `training_framework_ref` and `training_dataset_ref` targets, the exact compatible base/artifact lineage and the applicable rights, governance, export, serving and evaluation evidence. Catalog ID existence and schema validity do not establish those facts, nor do v1 ID-only references pin an upstream checkpoint revision. No existing proposal or frozen field is changed by this inventory correction. The reusable facts here belong to:
 - `inference_engine` items, owned by #11. The engine facts above are a handoff, not proposals from this issue.
 - the proposed `fine_tuned_model` fields, sent to #40.
 
