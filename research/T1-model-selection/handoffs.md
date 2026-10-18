@@ -14,7 +14,7 @@ Ownership snapshot: 2026-10-16, preserved from live GitHub assignees. Central re
 | #6 -> #11 | @Mattycodes69 | Model/format/precision/architecture and exact engine/backend tuple; no universal format-fit claim | Pending |
 | #6 -> #16 | @zabyxc01 | Model modalities/capabilities/context and version boundaries; no claim of retrieval quality | Pending |
 | #6 -> #25 | @CompleteDotTech | Vendor-reported tool calling vs exercised workflow, API surface/engine conditions, unknown optional flags | Pending |
-| #6 -> #30 | @appletechie | Confirm license/weight-access fields sufficient: repository/revision, license text, restrictions, derivative lineage, offering eligibility | Pending; explicit #6 acceptance gate |
+| #6 -> #30 | @appletechie | License/weight-access sufficiency: repository/revision, licence text, restrictions, derivative lineage, offering eligibility and separate NOTICE presence | [Sufficient with constraints, narrowed by #30](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30#issuecomment-6245639699), 2026-10-18; reviewed artifact named, exact reviewed SHA not supplied. Normalized identifier resolution, obligation answers/inheritance and NOTICE treatment remain explicit; the [Qwen inventory](artifact-notices.md) addresses one distribution only. No broad permission or issue completion follows. |
 | #6 -> #35 | @PUSHINGSQUARES | Modality/tool/schema claims and license/terms restrictions; no safety approval implied | Pending |
 | #6 -> #36 | @PUSHINGSQUARES | Version-pinned candidates, evidence grades, no fabricated benchmarks, comparable quality protocol only when a workload quality target is selected | Pending |
 | #6 -> #39 | @PUSHINGSQUARES | API item-version refs versus self-hosted unknown compute/operational costs | Pending |
