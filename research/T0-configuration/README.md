@@ -28,7 +28,7 @@ Follow [#41's label mapping](catalog-data-sources.md#mapping-evidence-labels-to-
 
 | Consumer | Interface to confirm | Remaining acceptance |
 | --- | --- | --- |
-| T1 / #5–#7 | Workload modality, route identity, tokenizer and input/output budget semantics | Exact receiving-owner dispositions; a published context cap does not establish measured runtime capacity; a missing cap leaves context fit unknown |
+| T1 / #5–#7 | Workload modality, route identity, tokenizer and input/output budget semantics | Exact receiving-owner dispositions; documented context limits do not establish measured runtime capacity, which requires separate evidence |
 | T2 / #9–#11 | Operator/capacity, hardware placement and request-to-sequence admission | Hardware/runtime evidence and capacity-policy decisions |
 | T3 / #13–#16 | Knowledge activation, access boundaries and retrieval budget | Source/embedding/store records and owner receipts |
 | T4 / #25–#28 | Actions, memory need, credential relationships and multi-selection semantics | W-R11 is a recommendation; required persistence and CD-13 still need central versioned review |
