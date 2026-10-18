@@ -1,0 +1,79 @@
+{
+  "commit": "e4cf085520ea7286af77abf938d645c610ef1580",
+  "files": [
+    {
+      "bytes": 9723,
+      "git_blob": "1b5ec8b78e237b5c3b3d812a7c0a6589d0f7161d",
+      "path": "LICENSE",
+      "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/LICENSE"
+    },
+    {
+      "bytes": 1803,
+      "git_blob": "49e488d065fc338dda30b23b2382f5375998bba4",
+      "path": "apps/docs-ai-search/README.md",
+      "sha256": "2cbfabaf23407bdeea3b4f55e6e60788c6b6d5b7ad87a6665c949f6031da4f54",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/apps/docs-ai-search/README.md"
+    },
+    {
+      "bytes": 566,
+      "git_blob": "8798c111f63dd661af3a9c5c578338f4ccdf5319",
+      "path": "apps/docs-ai-search/package.json",
+      "sha256": "f7273303c1e056b7b0d3b93ebb2789aa9ee8f6ca786604b00bb66ae4960829a4",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/apps/docs-ai-search/package.json"
+    },
+    {
+      "bytes": 755,
+      "git_blob": "bd3b89ba0fbd0d3bc6c927c242a1e878153ead07",
+      "path": "apps/docs-ai-search/src/docs-ai-search.app.ts",
+      "sha256": "dc34a903a3c3705afac9228c98a8ca7ded52d05ce73e9dddeaf8ece18364f32f",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/apps/docs-ai-search/src/docs-ai-search.app.ts"
+    },
+    {
+      "bytes": 312,
+      "git_blob": "ca3d4b2540ae569d53a754ede8d3fad4069a974b",
+      "path": "apps/docs-ai-search/src/docs-ai-search.context.ts",
+      "sha256": "a6d7f6c1318493281af8b52d39fcd76f9b362e13de99d89209abbd1b27610c3f",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/apps/docs-ai-search/src/docs-ai-search.context.ts"
+    },
+    {
+      "bytes": 3775,
+      "git_blob": "66fd2b8497f7d39ceccb787588fbff373e96067c",
+      "path": "packages/mcp-common/src/mcp-app.ts",
+      "sha256": "a47cd7c9a1198307f9a52a5b4979c3598054f4f1f4c4651e9f9f7d2ea6d7d45a",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/packages/mcp-common/src/mcp-app.ts"
+    },
+    {
+      "bytes": 9261,
+      "git_blob": "071bfe49234418e95ba03df17bd7077414420b98",
+      "path": "packages/mcp-common/src/server.ts",
+      "sha256": "8650485c8b2ebb16c06fe867bd04d5fc46ad875a880788d72a3c7dd879b579da",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/packages/mcp-common/src/server.ts"
+    },
+    {
+      "bytes": 6024,
+      "git_blob": "947a3cc3b34ea0ce6bb8bae81cccb8756ab7aa6c",
+      "path": "packages/mcp-common/src/shared-tools/docs-ai-search.tools.ts",
+      "sha256": "9c9c5b38051adc8538bcc4aa514054e8ec6ee25f2c0bcab1864d631a257f2071",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/packages/mcp-common/src/shared-tools/docs-ai-search.tools.ts"
+    },
+    {
+      "bytes": 1401,
+      "git_blob": "d3518f963bfe8896ea779f5c778a210756991731",
+      "path": "packages/mcp-common/src/transport-migration.ts",
+      "sha256": "1cbc93a40ac67786f9bb893540bdd08cdbb6c65b55c07b6e2b5508901193c8ab",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/packages/mcp-common/src/transport-migration.ts"
+    },
+    {
+      "bytes": 1907,
+      "git_blob": "72924224859b36daa48cf20db975769f5b8b2309",
+      "path": "server.json",
+      "sha256": "54b06da73b453f02c74d625eb4c270aaee2386b65fea21c3bf4fed67c9fcd3f4",
+      "url": "https://raw.githubusercontent.com/cloudflare/mcp-server-cloudflare/e4cf085520ea7286af77abf938d645c610ef1580/server.json"
+    }
+  ],
+  "repository": "https://github.com/cloudflare/mcp-server-cloudflare",
+  "source_checked_on": "2026-10-18",
+  "tree": "b6b2aa67cd932bf2b11692a34779389ccaaf05a6",
+  "verification": "Each raw file was hashed as a Git blob and matched against the immutable, nontruncated GitHub tree; a second engineer independently repeated the commit/tree/blob comparison. This is not deployed-revision evidence."
+}
