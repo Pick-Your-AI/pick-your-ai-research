@@ -11,8 +11,6 @@ The builder answers this per build. The answer depends on which optional workstr
 
 Mode labels follow [merged #81](../T0-configuration/deployment-mode.md): classify each serving control by its operator and capacity. Provider-operated shared moderation/guardrail endpoints are API; dedicated or reserved serving is managed; user-operated engines are self-hosted. Cloud provider name and desktop/CLI form alone do not decide the mode.
 
-Provider configuration follow-up, checked 2026-10-18: Google Cloud's Vertex / Agent Platform documentation gives `gemini-3.5-flash` and subsequent models a default of `OFF` for configurable harm filters, which disables their blocking and metadata. `BLOCK_NONE` returns scores while disabling blocking. Separate non-configurable CSAM/SPII filters remain. Record the exact model and category settings before crediting a provider control; absent configurable-filter metadata cannot establish a safe response. See [F03 and the retained #120 alternatives](sibling-reconciliation.md).
-
 ## Candidate options
 
 ### Control catalog
@@ -268,6 +266,6 @@ Review correction, source checked 2026-10-17: [Qdrant multitenancy](https://qdra
 
 Refs #120, #35, #38. Source checked 2026-10-18; not independently reproduced. This retains the focused finding from the comparison PR without replacing G-R19's Gemini API scope.
 
-Google Cloud's [Safety and content filters](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/configure-safety-filters) page states that `OFF` is the configurable harm-block threshold default for `gemini-3.5-flash` and subsequent models. In that setting, configurable response blocking and its metadata are absent. This is not a statement that every safety control is disabled: the page separately describes non-configurable CSAM/PII protections and SPII response termination. Its configurable filters follow model versions, not an independently versioned filter release.
+Google Cloud's [Safety and content filters](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/configure-safety-filters) page states that `OFF` is the configurable harm-block threshold default for `gemini-3.5-flash` and subsequent models. In that setting, configurable response blocking and its metadata are absent. This is not a statement that every safety control is disabled: the page separately describes non-configurable CSAM/PII protections and SPII response termination. Its configurable filters follow model versions, not an independently versioned filter release. `BLOCK_NONE` disables blocking but returns scores; [F03](sibling-reconciliation.md) separately scopes the Gemini API defaults and error telemetry.
 
 Receiving implication for #35/#38: record the exact Google Cloud model/version and configured threshold before interpreting absent harm scores or block events. Missing metadata is not a measured zero harm rate or evidence that a request was safe. Explicit threshold selection and telemetry interpretation remain proposed receiving decisions, not an adopted ruleset or account-level test. The source is mutable; recheck it when the model or service configuration changes.
