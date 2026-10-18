@@ -86,6 +86,18 @@ Reading: the API token-charge subtotals are below the dedicated endpoint compute
 - A8 R2 operations within the free allowance for low/expected; high 3M Class A and 30M Class B. The Standard free allowance is applied once at its monthly scope and is assumed unused by other work; it is not re-granted per component.
 - Serving: S1 HF L4 band (A3), or S1 local power band (A4).
 
+**Placement and data-path limit (#9):** these are separately priced components,
+not a provisionable deployment. RunPod's [network-volume documentation](https://docs.runpod.io/storage/network-volumes#network-volumes-for-pods),
+rechecked 2026-10-18, restricts native Pod attachment to Secure Cloud and makes
+eligible GPUs depend on the volume's location. The low band's Community Cloud
+compute therefore cannot simply mount the priced network volume. The same
+document describes S3-compatible access, but this scenario does not establish
+that transfer/staging workflow, its time or its additional storage/network
+costs. The Secure bands also need actual volume/GPU placement and the data path
+to HF serving. A current deployment quote must resolve those paths or use a
+separately evidenced alternative; the retained component-rate arithmetic is not
+evidence of deployability.
+
 | Line | Rate | Low | Expected | High |
 | --- | --- | --- | --- | --- |
 | Training GPU | RunPod 4090 note row | 0.92 | 2.41 | 3.07 |
@@ -93,10 +105,10 @@ Reading: the API token-charge subtotals are below the dedicated endpoint compute
 | Artifact storage after 10 GB free | `r2-standard-storage` | 0.00 | 0.15 | 0.60 |
 | R2 Class A / B after free allowance | `r2-standard-class-a/b-request` | 0.00 (A8) | 0.00 (A8) | 9.00 + 7.20 |
 | Serving | `hf-aws-l4-replica-hour` | 128.00 | 288.00 | 576.00 |
-| **First 30-day hosted subtotal** (one-off training plus the stated recurring lines) | | **132.42** | **297.56** | **609.87** |
+| **First 30-day component subtotal** (one-off training plus the stated recurring lines; placement/data path incomplete) | | **132.42** | **297.56** | **609.87** |
 | Local alternative: training + serving power | A4 × EIA | 0.12 + 6.97 = **7.09** | 0.22 + 59.32 = **59.54** | 0.99 + 207.36 = **208.35** |
 
-The one-off training GPU subtotal is $0.92 / $2.41 / $3.07. The selected volume, artifact, request and serving lines total $131.50 / $295.15 / $606.80 for the 30-day period; they recur only while the same quantities and retained-storage assumptions continue. Training is not charged again merely because another billing period starts. Serving is 96.79% of the expected first-period hosted subtotal (288 / 297.56, estimated), a result of these assumptions rather than a universal hosting ratio. The local alternative is again a power-only lower bound. Training excludes setup, data loading, evaluation, retries and minimum increments (T5 caveat). The independently scoped [T6 W5](../T6-deployment-operations/cost-estimate.md#w5-fine-tuning-a-one-off-job-and-continuing-hosting) illustrates Together/Azure provider training and hosting formulas separately; it does not make this RunPod/HF scenario complete.
+The one-off training GPU subtotal is $0.92 / $2.41 / $3.07. The selected volume, artifact, request and serving lines total $131.50 / $295.15 / $606.80 for the 30-day period; they recur only while the same quantities and retained-storage assumptions continue. Training is not charged again merely because another billing period starts. Serving is 96.79% of the expected first-period component subtotal (288 / 297.56, estimated), a result of these assumptions rather than a universal hosting ratio. The local alternative is again a power-only lower bound. Training excludes setup, data loading, evaluation, retries and minimum increments (T5 caveat). The independently scoped [T6 W5](../T6-deployment-operations/cost-estimate.md#w5-fine-tuning-a-one-off-job-and-continuing-hosting) illustrates Together/Azure provider training and hosting formulas separately; it does not make this RunPod/HF scenario complete.
 
 Neither scenario reaches `coverage=complete` under [PRICING_AND_GATES.md](../../contracts/v1/docs/PRICING_AND_GATES.md); `cost.monthly_total_amount` must stay `unknown`.
 
@@ -105,6 +117,7 @@ Neither scenario reaches `coverage=complete` under [PRICING_AND_GATES.md](../../
 | Meter / cost | Where it bites | Status |
 | --- | --- | --- |
 | Idle capacity | HF replicas billed while running/initializing whether or not serving; local box idle draw; RunPod volume billed while compute is stopped | Modelled only by assumption bands A3/A4; no meter for idle vs active |
+| Working-storage placement and data movement | S2 Community/Secure compute, network volume, staging and HF serving | Community Pods cannot natively attach the priced network volume. No end-to-end alternative transfer/staging path is established or priced; Secure volume/GPU placement is also unverified. |
 | Egress | HF endpoint and RunPod transfer; local ISP | No v1 meter; unpriced. R2 states egress free (documented, not a Pricebook line) |
 | Utilization / capacity | Tokens per GPU-hour, replicas needed for A1 | No ResourceEstimate; A5 unverified |
 | Operator time | Local maintenance, endpoint ops | No meter, no sourced rate |
@@ -123,6 +136,7 @@ Recompute both scenarios and recheck the affected source before any recommendati
 - any cited rate, free allowance, multiplier (long context, cache, residency) or billing granularity changes, or a source page stops stating it;
 - a new SKU, GPU type or model snapshot replaces `gpt-5.4-2026-03-05`, `claude-sonnet-5-5`, AWS L4 or RTX 4090, or a catalog item version changes;
 - the region or data-center changes (HF region unbound; RunPod data center; residency/geo endpoints);
+- the RunPod cloud class, volume/GPU attachment or transfer/staging path changes; the S2 low band supplies no native Community-volume attachment;
 - the currency is not USD or a quote needs tax;
 - the workload assumptions A1–A8 move outside their bands, prompts exceed 272K, or a ResourceEstimate/quality run contradicts A5;
 - the Pricebook revision, selected catalog version, eligible evidence for that tuple, applicable rule version or source-use decision changes; or an explicit source validity boundary is reached.
@@ -173,6 +187,35 @@ git diff --check                                    # passed
 A separate Decimal recomputation read the thirteen unchanged Pricebook rates and the stated A1–A8 assumptions. All 37 checked scenario amounts and the expected hosting-share percentage agreed: S1 subtotals, S2 item lines, one-off/recurring/first-period sums and local power sums. It rounded each monetary line half-up to cents before summing, as stated in section 2. The rate-source review in section 1 is distinct from this arithmetic check. Neither test suite nor the calculator establishes runtime performance, source rights, account availability or actual bills; no new provider job was run.
 
 The subsequent reconciliation with [#197](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/197) preserves its 101-pair dated audit and records only the three actual post-snapshot integration decisions. The source and arithmetic review above remains pinned to `c08484c`; [#199's checks](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/199/checks) record validation of the final integrated head. The local results above describe the reviewed source tree.
+
+## 8. Separate source and consumer check — 2026-10-18
+
+The current in-session research engineer independently reread the five primary
+rate sources in section 1 and the two note-only sources, starting from accepted
+main `3d395801742461aa82ac31a21857ec6f8d0270fb`. The thirteen Pricebook amounts
+and material conditions still match. The OpenAI model/pricing Markdown was read
+directly because web text extraction omitted material columns and rejected its
+Markdown content type. RunPod's actual HTML JSON-LD `#gpu-rtx-4090` still names
+the Community and Secure offers separately, with page date `2026-10-08`.
+EIA still publishes the preliminary July 2026 sector averages released on
+2026-09-24; these remain statistical averages, not a user's tariff. No account,
+paid workload or new price record was created.
+
+This source check also found the S2 placement ambiguity clarified above.
+The [hosting record](../T2-infrastructure/hosting.md#infrastructure-storage-comparison)
+already distinguishes Secure Cloud volume attachment, datacenter scope and
+uncertain invoice rounding. The [cost record](../T6-deployment-operations/cost-estimate.md#integration-constraints-from-the-unit-normalisation-draft)
+keeps the selected period, provider billing increments and allowance scope
+explicit. The [source record](../T0-configuration/catalog-data-sources.md#freshness)
+preserves dated facts and scope before recency. The audit can be received as
+conditional component arithmetic and an uncovered-cost inventory within those
+boundaries. It does not adopt the broader #39/#41 draft policies, new meters,
+FX or rounding conventions, or any production eligibility.
+
+The earlier integration reviews and validation remain at their recorded
+revisions. Independent review of this clarification and the current scoped
+#9/#39/#41 receiving decisions must be recorded on its delivery before the
+issue's remaining acceptance is reconciled.
 
 ## Result
 The desk audit is complete for its stated 13-rate inventory and two conditional scenarios. Its finding is that neither scenario is a complete quote and neither proves service equivalence. The independent integration review accepts that bounded result and the three proposed receiving scopes above. The reviewed merge and final CI publish this partial audit; #64 remains open until the separate consuming-owner handoffs are accepted; incomplete quote coverage is the documented result, not an omitted research step. No raw customer data, benchmark artifact or paid API output was collected. Consumers: #9, #39, #41; informational input for #58.
