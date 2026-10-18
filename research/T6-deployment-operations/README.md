@@ -7,6 +7,8 @@ Product question: is the build safe, measurable, deployable, observable, and aff
 
 This summary lists the decisions in the five T6 records, the rules they contribute to [#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), the handoffs that other owners need to confirm, and the open questions. The records are the source; this page only points into them.
 
+The [2026-10-18 sibling reconciliation](sibling-reconciliation.md) preserves the corrected alternative proposals from #113/#115/#116/#118/#120 at immutable revisions and carries four additional findings into the canonical notes. Its supplemental sources are separate from the inventory counts below; PR supersession does not accept a receiving handoff or complete an issue.
+
 ## Records
 
 | issue | record | v1 kind | decision it supports | source-checked rules | hypotheses | evidence rows |

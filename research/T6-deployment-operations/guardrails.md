@@ -11,6 +11,8 @@ The builder answers this per build. The answer depends on which optional workstr
 
 Mode labels follow [merged #81](../T0-configuration/deployment-mode.md): classify each serving control by its operator and capacity. Provider-operated shared moderation/guardrail endpoints are API; dedicated or reserved serving is managed; user-operated engines are self-hosted. Cloud provider name and desktop/CLI form alone do not decide the mode.
 
+Provider configuration follow-up, checked 2026-10-18: Google Cloud's Vertex / Agent Platform documentation gives `gemini-3.5-flash` and subsequent models a default of `OFF` for configurable harm filters, which disables their blocking and metadata. `BLOCK_NONE` returns scores while disabling blocking. Separate non-configurable CSAM/SPII filters remain. Record the exact model and category settings before crediting a provider control; absent configurable-filter metadata cannot establish a safe response. See [F03 and the retained #120 alternatives](sibling-reconciliation.md).
+
 ## Candidate options
 
 ### Control catalog
