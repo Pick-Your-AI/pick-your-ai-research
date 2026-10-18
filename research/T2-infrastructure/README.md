@@ -6,7 +6,7 @@ Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/
 
 Continuation audit on 2026-10-16 re-read live issues, comments, native relationships and the existing PR. Hosting and engine researchers checked source conditions, and an independent compute researcher audited arithmetic. The orchestrator completed compute corrections and shared integration through this existing PR. See [validation.md](validation.md) for corrections and the independent integration review; owner acceptance remains pending.
 
-**Status: records and summary merged; research completion is not claimed.** Consuming-owner confirmations and remaining issue criteria still apply. No product implementation, runtime deployment, provisioning or training job is included.
+**Status: #11 research is complete; #8/#9/#10 retain their remaining acceptance criteria.** [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291), merged as [859f47db88f0d8f1a99899ca9029ce0da19800c8](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/859f47db88f0d8f1a99899ca9029ce0da19800c8), delivered the [final research handoff assessment](inference-engine.md#final-research-handoff-assessment--2026-10-18). All nine original #11 criteria are satisfied by reviewed artifacts and scoped consuming-owner confirmations. This completes the engine research deliverable; product implementation, runtime deployment, provisioning and training remain in their owning scopes.
 
 ## Decision records and artifacts
 
@@ -45,16 +45,16 @@ Rule groups separate fixed-severity constraints from evidence and applicability 
 
 ## Acceptance, handoffs and tracking
 
-The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–#11 and maps it to artifacts, evidence and reviewers. All required owner acknowledgements are in [handoffs.md](handoffs.md): seven from Hosting, four from Compute, five from Engine. The original publication had no receipts. As reconciled on 2026-10-18, Hosting has scoped #10/#27/#31 receipts, Compute #9/#11/#31, and Engine #10/#25/#33. Reciprocal #25 -> #11 is accepted with constraints by both #11 co-owners; #27/#28 -> #9 is accepted with constraints by Mattycodes69 only. A receipt does not accept every co-owner's scope or establish runtime support. The linked ledger records the actual comments.
+The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–#11 and maps it to artifacts, evidence and reviewers. All required receiving interfaces are listed in [handoffs.md](handoffs.md): seven from Hosting, four from Compute, five from Engine. The original publication had no receipts. As reconciled on 2026-10-18, Hosting has scoped #10/#27/#31 receipts, Compute #9/#11/#31, and Engine #10/#25/#33/#37/#38. The final #11 assessment preserves both T6 receipt revisions and #38's explicit narrowing to source/evidence inputs. Reciprocal #25 -> #11 is accepted with constraints by both #11 co-owners; #27/#28 -> #9 is accepted with constraints by both #9 co-owners, with [appletechie's `66b46d4` receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047) retaining its own scope. A receipt does not accept every co-owner's scope or establish runtime support. The linked ledger records the actual comments.
 
 | Issue | Live coassignees (2026-10-18) | Current research state |
 | --- | --- | --- |
 | #8 | @zwright8, @Mattycodes69 | Open; merged summary and records, full child acceptance remains |
-| #9 | @Mattycodes69, @appletechie | Open; four required receiving interfaces unconfirmed; region/billing decisions remain |
+| #9 | @Mattycodes69, @appletechie | Open; remaining #14/#15 receiving decisions and #37/#39 scopes, regional breadth and billing evidence are listed in the live issue |
 | #10 | @Mattycodes69, @appletechie | Open; #39 receipt, other co-owner decisions and measurement/headroom work remain |
-| #11 | @zwright8, @Mattycodes69 | Open; #37/#38 receipts, exact tuple evidence and retention/lifecycle decisions remain |
+| #11 | @zwright8, @Mattycodes69 | Closed as completed on 2026-10-18 through [PR #291](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/291); all nine original research criteria satisfied. Named lifecycle/#42 and runtime follow-ups retain their own scope |
 
-The original Project observations were made on 2026-10-16: `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`, with #8/#10/#11 Critical and #9 High. They are historical, not current board state. Project readback on 2026-10-18 again failed with `INSUFFICIENT_SCOPES` (`read:project` missing); no board write or current value is claimed. Preserve live fields and priorities. An authorized administrator must read current work before any status change; merged partial research alone is insufficient for Done.
+The original Project observations were made on 2026-10-16: `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`, with #8/#10/#11 Critical and #9 High. They are historical, not current board state. An earlier API Project readback on 2026-10-18 failed with `INSUFFICIENT_SCOPES` (`read:project` missing). After #291 merged and #11 closed, a subsequent public [#11 issue-sidebar readback](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11) on the same date showed `Status = Done` in Pick Your AI — AI Builder Research. This records the observed #11 value, not a board write or a readback of other fields/issues. Preserve live fields and priorities; merged partial research alone is insufficient for Done.
 
 Native hierarchy remains #8 → #9/#10/#11. None has a native blocked-by relationship. Scoped issue appendices were corrected to show PR #44 as merged; acceptance wording and ownership were preserved. Related unmerged T5 work was read for handoff context and is not vendor evidence.
 
@@ -72,10 +72,10 @@ See [validation.md](validation.md) for exact checks, independent review findings
 | Confirm hosting/storage boundary and retrieval-consumer requirements | #13/#14/#15/#16 @zabyxc01 |
 | T4 incoming boundaries accepted with constraints; actual tuple specifications/execution remain; #9 co-owner scope separate | #25/#27/#28 @CompleteDotTech |
 | T5 scoped reuse and lineage receipts are recorded; missing records and reverse-direction decisions remain separate | #31/#33 live co-owners in [ledger](handoffs.md) |
-| Confirm deployment/monitoring handoffs and pricing aggregation/unit policy | #37/#38/#39 @PUSHINGSQUARES |
+| Confirm remaining hosting/compute handoffs and pricing aggregation/unit policy | #37/#38/#39 @PUSHINGSQUARES |
 | Read current Project fields with authorized access before any status update; do not replay historical instructions | @Mattycodes69 / organization Project administrator |
 
-Use `Refs #8, #9, #10, #11`. Close no scoped issue until its merged record and full acceptance criteria—including actual owner confirmations—are satisfied; close #8 only after all children and the merged summary meet their gates.
+Use `Refs #8, #9, #10` for remaining partial work and `Refs #11` for any bounded engine follow-up. #11 has completed its original research criteria through #291. Complete each remaining issue only after its own merged record and full acceptance criteria—including actual owner confirmations—are satisfied; #8 still requires completion of #9/#10 and its other parent criteria.
 
 
 2026-10-18 supplement: A100 80GB shared-variant facts, RTX 4090 reference-design facts, the P4de default profile and S3 Standard identity are documented in the existing GPU/hosting records. S3 Standard and the subsequent RTX 4090 precision follow-up have catalog proposals. A100/P4de remain note-only because unresolved precision coverage is unsafe under frozen-v1 membership rules. No rates or measured results are added.
