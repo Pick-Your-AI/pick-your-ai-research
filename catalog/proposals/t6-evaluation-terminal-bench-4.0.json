@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-terminal-bench-v4-resolution",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Terminal-Bench 4.0 task resolution",
+  "version": "4.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published 4.0 edition already present in the research status ledger. It remains distinct from the 2.0 paper and the 2.1 evaluation protocol. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Resolution rate"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.tbench.ai/",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The publisher identifies Terminal-Bench 4.0 and names Resolution rate as its metric, with displayed uncertainty. No displayed model result is copied or independently reproduced."
+    },
+    {
+      "source_uri": "https://www.tbench.ai/run",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The current run guide selects terminal-bench/terminal-bench@4.0.0 using Harbor and requires a GPU-capable sandbox. Offline denotes this finite task assessment, not no-network or local-only operation. The example model, sandbox and five-trial command are documented examples, not our execution or a project-selected configuration."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

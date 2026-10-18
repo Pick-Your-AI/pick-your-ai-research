@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-bfcl-v4-web-search",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "BFCL V4 web-search final-answer evaluation",
+  "version": "V4",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published V4 web-search scoring capability, scoped to its documented normalized final-answer method. Active denotes availability of the named method. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "exact-match"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://gorilla.cs.berkeley.edu/blogs/15_bfcl_v4_web_search.html",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The V4 web-search method checks the final answer by exact match after lowercasing and punctuation removal. The finite task protocol uses search/fetch and tests recovery from injected request failures. This is the web-search subset, not all BFCL AST, execution or multi-turn scoring. Offline denotes a benchmark run, not network isolation; this normalized score cannot certify an original case-sensitive contract payload."
+    },
+    {
+      "source_uri": "https://gorilla.cs.berkeley.edu/leaderboard.html",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The publisher identifies BFCL V4 as the current published benchmark edition at this access. No leaderboard value was copied or independently reproduced."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

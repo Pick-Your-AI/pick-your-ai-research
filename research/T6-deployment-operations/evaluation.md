@@ -303,7 +303,7 @@ A Sonnet 5.5 QC pass on 2026-10-16 re-opened every URL in these rows and in the 
 | E-R64 | cross-provider throughput or cost, tool tokenizers | tokens per second or per task come from a tool tokenizer that differs from the provider's usage counts | warning | LLMPerf counts every provider's tokens with a Llama tokenizer; vLLM's bench code may recount output tokens with a tokenizer (serve.py comment: "this may inflate the output token count slightly"); Artificial Analysis counts tokens for performance benchmarking with OpenAI's tiktoken o200k_base and uses provider-reported counts only for Intelligence Index evaluations | use provider usage tokens for billing-aligned throughput and cost; label tool-counted tokens | E-L5, E-N425 (vLLM serve.py), E-L4 |
 | E-R65 | lm-evaluation-harness Hugging Face path, API-only build | the evaluation plan uses the harness's Hugging Face example path for a build with no local weights or GPU | warning | the README example assumes a CUDA GPU and advises checking sample outputs before generative scoring on closed chat APIs | use an API backend that supports the selected scoring task (F02: likelihood/MCQ tasks need a completion endpoint), with --limit and --log_samples to verify answer extraction first | E-S10; [F02](sibling-reconciliation.md) |
 | E-R66 | ROUGE and BERTScore (Azure rouge_score, Bedrock BERTScore, and any harness that offers them), CNN/DailyMail and XSum references | the reference summaries are the datasets' incidental highlights and the quality target includes faithfulness or relevance | warning | Zhang et al. found the references worse than most systems' outputs and that this lowers metric-to-human correlation (XSum ROUGE-L versus faithfulness, system-level Kendall tau minus 0.27, published); HELM found that "automated evaluations on these datasets largely fail to discriminate differences we observed in model quality" (E-C15) | do not gate on ROUGE or BERTScore alone against these references; use ROUGE as a relative signal inside one model family, add a reference-free faithfulness metric, build references from reviewed task-specific summaries | E-C2, E-C15, E-C1, E-T7 |
-| E-R67 | structured-output modes (OpenAI Structured Outputs, Anthropic structured outputs and strict tools, Gemini responseSchema, Azure OpenAI), extraction and classification targets | the pass criterion is "output parses" or "matches the schema" rather than a comparison of field values with labelled gold | warning | OpenAI: outputs "can still contain mistakes"; Gemini says to validate values in the application (E-C6, Gemini structured-output page); DeepEval's JsonCorrectnessMetric checks the output against a supplied JSON schema and is not an LLM judge (E-N906); Anthropic does not guarantee enum capitalisation and states compliance holds "in most cases" (refusals and max_tokens break it) | report schema-valid rate and field-level accuracy separately; score fields against labelled gold; normalise case before comparing enum labels; count refusals and truncations as failures | E-C4, E-C5, E-C6, E-S3, E-N906 |
+| E-R67 | structured-output modes (OpenAI Structured Outputs, Anthropic structured outputs and strict tools, Gemini responseSchema, Azure OpenAI), extraction and classification targets | the pass criterion is "output parses" or "matches the schema" rather than a comparison of field values with labelled gold | warning | OpenAI: outputs "can still contain mistakes"; Gemini says to validate values in the application (E-C6, Gemini structured-output page); DeepEval 4.3.0 derives its JsonCorrectnessMetric score from validation by the supplied Pydantic model, while an optional explanation of failed validation can use a configured model (E-N1006); Anthropic documents schema-conforming tool inputs with strict true, within its supported subset; JSON Schema 2020-12 enum membership uses value equality, with strings compared codepoint-for-codepoint | validate the original payload unchanged against the selected schema, including case-sensitive string enums; report schema-valid rate and field-level accuracy separately; compare fields with labelled gold under an explicit scoring policy; any semantic-label normalization is a separate declared score and cannot repair or relabel an invalid original payload; count refusals and truncations as failures | E-C4, E-C6, E-S3, E-N906, E-N1003, E-N1004, E-N1005, E-N1006 |
 | E-R68 | ROUGE or BERTScore as sole evidence, summarisation faithfulness target | the build must show that summaries do not add or contradict source facts | error | on SummEval consistency, ROUGE-1 correlated 0.160 and BERTScore 0.110 with humans against 0.507 for G-Eval-4 (published, 2023); Maynez et al. (E-N901) found that "textual entailment measures better correlate with faithfulness than standard metrics" and that ROUGE and BERTScore "fail to correlate with faithful, hallucinated and factual assessments"; HELM scores faithfulness with reference-free metrics (SummaC and QAFactEval, E-C15) | add an NLI or alignment model (SummaC, AlignScore, locally for sensitive data) or an LLM judge (DeepEval alignment, Vertex summarization_quality, Bedrock Faithfulness) and calibrate it on a human-labelled sample before gating | E-C3, E-C2, E-C7, E-C15, E-N901 |
 | E-R69 | Azure Foundry builtin.f1_score, classification label-F1 targets | the build expects the platform "F1 score" to be class-label precision, recall and F1 | warning | Foundry defines its F1 as shared-token overlap between response and ground truth; label-level F1 uses per-class true and false positives with micro, macro or weighted averaging that changes the result (inferred); Bedrock lists its text-classification metric as "Accuracy (Binary accuracy from classification_accuracy_score)" (E-T7, URL corrected to https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets.html) | compute label F1 over exact label matches with the averaging stated; use the platform F1 only for free-text overlap | E-C1, E-T7 |
 | E-R70 | Claude models listed on the define-tools page (Opus 5.5, Sonnet 5.5, Fable 5.1, Mythos 5.1 on the access date), classification or extraction via forced tool_choice | the design forces a classifier tool call with tool_choice any or tool | error | Anthropic's table says any and tool return a 400 error on those models and recommends auto with strict tool use, or structured outputs, for schema-valid results | use structured outputs (output_config.format) or tool_choice auto with strict true; treat a missing tool call or a refusal as an evaluation failure | E-C5 |
@@ -538,7 +538,7 @@ The original evidence rows were opened 2026-10-16; E-N1001 and E-N1002 were open
 | E-C2 | Zhang et al. | https://arxiv.org/pdf/2301.13848 | none | Independent measurement; academic paper on other parties' systems | CNN/DM and XSum references worse than system outputs; XSum ROUGE-L versus faithfulness tau minus 0.27 |
 | E-C3 | Liu et al. (G-Eval) | https://arxiv.org/abs/2303.16634 | v3 2023-05-23 | Independent measurement; G-Eval figure is the authors' own method | SummEval consistency correlations ROUGE-1 0.160, BERTScore 0.110, G-Eval-4 0.507; bias toward LLM text; non-determinism via sampling |
 | E-C4 | OpenAI | https://developers.openai.com/api/docs/guides/structured-outputs | none | Primary documentation | outputs "can still contain mistakes"; 5,000 properties and 10 levels |
-| E-C5 | Anthropic | https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools and https://platform.claude.com/docs/en/build-with-claude/structured-outputs (enum capitalisation; 'in most cases') | none | Primary documentation | tool_choice any and tool return 400 on the listed models; enum capitalisation; "in most cases" |
+| E-C5 | Anthropic | https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools and https://platform.claude.com/docs/en/build-with-claude/structured-outputs | define-tools rechecked 2026-10-18; no publication version shown; structured-outputs retrieval timed out twice in that recheck | Primary documentation, with separate unavailable recheck retained | tool_choice any and tool return 400 on the listed models; the historical enum-capitalisation / "in most cases" summary is not confirmed by this recheck and is withdrawn as E-R67's current basis; E-N1005 supplies the separately retrieved strict-tool scope |
 | E-C6 | Microsoft | https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/structured-outputs | none | Primary documentation | 100 properties, five levels, unsupported constraint keywords; Gemini validation advice at https://ai.google.dev/gemini-api/docs/structured-output (Last updated 2026-10-13 UTC): While output is syntactically correct JSON, always validate values in your application. |
 | E-C7 | Laban et al.; Zha et al. | https://arxiv.org/abs/2111.09525 , https://github.com/yuh-zha/AlignScore , https://github.com/tingofurro/summac (SummaC, Apache-2.0) and https://arxiv.org/abs/2305.16739 (AlignScore, 2023-05-26) | 2021-11-18; 2023-05-26 | Primary documentation; papers' own method and licence statements | NLI-based and alignment-based consistency; licences |
 | E-C8 | Hugging Face (abisee) | https://huggingface.co/datasets/abisee/cnn_dailymail | v3.0.0 | Primary documentation | apache-2.0 card for v1.0.0; splits |
@@ -699,6 +699,10 @@ The original evidence rows were opened 2026-10-16; E-N1001 and E-N1002 were open
 | E-N914 | BigCode project | https://raw.githubusercontent.com/bigcode-project/bigcodebench/main/README.md | repository archived 2026-07-20 (GitHub page) | Primary documentation | "By default, you will use the remote evaluation API to execute the output samples."; "The gradio backend is hosted on the Hugging Face space by default."; execution options e2b, gradio and local; a Docker-Eval image badge but no Docker instructions (cited by E-H13) |
 | E-N1001 | EleutherAI | https://github.com/EleutherAI/lm-evaluation-harness/blob/d6de81643928d653435c431bae19945d41d32520/docs/API_guide.md | commit d6de81643928d653435c431bae19945d41d32520; accessed 2026-10-18 | Primary documentation, source checked | API-backend scoring limitation; no backend or benchmark executed in this reread |
 | E-N1002 | Microsoft | https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/fine-tuning-safety-evaluation | page titled Safety evaluation for fine-tuning (preview); accessed 2026-10-18 | Primary documentation, source checked | automatic pre-training data assessment and pre-deployment model assessment; fixed customer configuration and separate modification-request route |
+| E-N1003 | JSON Schema | https://json-schema.org/draft/2020-12/json-schema-validation#section-6.1.2 | draft 2020-12 validation, section 6.1.2; accessed 2026-10-18 | Primary specification | enum membership requires the original instance value to equal a listed value; no normalization permission is supplied |
+| E-N1004 | JSON Schema | https://json-schema.org/draft/2020-12/json-schema-core#section-4.2.2 | draft 2020-12 core, section 4.2.2; accessed 2026-10-18 | Primary specification | string instance equality compares codepoints; E-R67 separates contract validity from any declared semantic scoring policy |
+| E-N1005 | Anthropic | https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use | page titled Strict tool use; no publication version shown; accessed 2026-10-18 | Primary documentation, source checked | strict true constrains supported tool inputs to the selected input schema; schema conformance alone does not establish correctness against task gold |
+| E-N1006 | Confident AI | https://pypi.org/project/deepeval/4.3.0/ and https://files.pythonhosted.org/packages/63/07/617e549974814727bb2b5f73643d121abef1f9670278e2b22a98eebe61f1/deepeval-4.3.0.tar.gz | version 4.3.0; accessed 2026-10-18; source archive SHA-256 d9d89e00361a08a335cd5e2aa4bb10577e9a711ead8119aff0574b92fcce27b7 | Primary source, archive member checked | deepeval/metrics/json_correctness/json_correctness.py, SHA-256 ea43eed178f8c487845f6e01e5fadb0a8fca1650279b3a763c3db65dd3d08de6: supplied Pydantic model validation determines the binary score; failed-validation explanations can separately use a configured model; no evaluator or model was executed |
 
 Rows that said "as cited in the pack" (E-F14, E-T6, E-T8, E-B13, E-B14, E-L9, E-L10, E-C6 Gemini part, E-K14 system card, E-G13) now all carry URLs, and none still lacks one. E-F14 (ShieldGemma and WildGuard papers and model cards), E-T6 (arXiv 2308.08747), E-T8 (Llama 3.1 model card), E-B13 (arXiv 2310.17623), E-B14 (Claude model IDs page), E-L9 (three Anthropic docs pages), E-L10 (three Google docs pages), E-K14 (Anthropic infrastructure-noise post and the Claude Opus 4.6 System Card PDF) and E-G13 (Krippendorff PDF) carry theirs in the URL column. The E-C6 Gemini part carries https://ai.google.dev/gemini-api/docs/structured-output inside the E-C6 supports cell, and that page also has its own row, E-N203.
 
@@ -733,7 +737,23 @@ The builder should treat evaluation as a per-build plan with four parts: the wor
 
 ## Structured artifacts
 
-None in this pull request. An `evaluation_suite` catalog item needs `metric_names` and `mode` (offline, online or both); the Products and services table supplies these, and catalog proposals are a follow-up. No `quality-evaluation-run` artifact is included: this research ran no evaluation.
+This submission adds 33 source-qualified `evaluation_suite` CatalogItem proposals
+under `catalog/proposals/`. The [catalog qualification companion](evaluation-catalog-qualification.md)
+records all 101 existing comparison rows: 34 supported rows including duplicate
+status references, 47 note-only rows with specific missing identity/source
+bindings, and 20 historical, guidance, dataset or model contexts outside this
+intake. Each proposed record carries its actual version, bounded metric names
+and mode, and claim-level sources with access dates. All new provenance remains
+`unverified`: these are component facts, not user selections, measured evaluation
+runs, data permissions, prices or deployment gates. No `quality-evaluation-run`
+artifact is included because this research ran no evaluation.
+
+The 47 note-only qualifications remain named open questions for the existing
+[#36 owners](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36),
+`appletechie` and `PUSHINGSQUARES`. Their next qualification step is to select the
+exact item/version and source-check the metric/mode scope identified in each
+companion row. These scoped unknowns do not add a personal-approval or
+model-execution requirement to the research acceptance criteria.
 
 ## Framework hooks and evidence completeness (2026-10-18)
 
@@ -758,7 +778,7 @@ separates evaluator telemetry from target/judge settings for #35/#38 review.
 | question | owner | by |
 |---|---|---|
 | Judge-version comparability (E-H14): no page states the general rule; a measurement across judge snapshots would settle it | @PUSHINGSQUARES | next revision |
-| Brand-voice evaluation: no benchmark exists; WritingBench licence and critic availability not checked | @PUSHINGSQUARES | next revision |
+| Brand-voice evaluation: no eligible brand-voice benchmark was established in this record; WritingBench licence and critic availability not checked | @PUSHINGSQUARES | next revision |
 | Anthropic usage policy in force on 2026-10-16 and the red-team authorisation route; OpenAI usage policy (page returned 403) | @PUSHINGSQUARES | before G5 ships as source checked |
 | Eval-dataset retention under zero-retention settings for Vertex and Azure Foundry (no page states it) | @PUSHINGSQUARES to ask the vendors | before G7 ships as source checked |
 | Bedrock evaluation region matrix and per-model judge prices; Azure red-teaming region count (2 versus 5) | @PUSHINGSQUARES | next revision |
@@ -769,19 +789,19 @@ separates evaluator telemetry from target/judge settings for #35/#38 review.
 | Self-hosted judge quality bar and GPU-hour cost inputs | #39 owner for cost; @PUSHINGSQUARES for judge | next revision |
 | Evidence URLs for E-F14, E-T6, E-T8, E-B13, E-B14, E-L9, E-L10, E-C6, E-K14 and E-G13 | Resolved in this draft: every listed Evidence row now supplies a URL; this records locator coverage, not independent reproduction or source-rights acceptance | no follow-up for the locator omission |
 | SWE-bench Verified status (E-H11); WebArena Verified Hard subset size | @PUSHINGSQUARES | next revision |
-| Confirm the rollout-gate handoff: #37 already allocates rollout mechanics to S13/S25/S35/S36/S49/S50, quality decisions to #36 G2/G3/G4, and monitoring thresholds to #38 | #37 owner | before accepting this receiving handoff |
+| Rollout-gate allocation: #37 owns S13/S25/S35/S36/S49/S50, #36 owns quality decisions G2/G3/G4, and #38 owns monitoring thresholds | Resolved for this research interface by the coordinating engineer's delegated receiving decision in [#37 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6254282660) | 2026-10-18; later runtime release acceptance remains separate |
 
 ### Handoffs
 
 | to | what | status |
 |---|---|---|
-| #37 Deployment | gates G1 to G12 with evidence and hypothesis marks; #37 records them in S9/R22 and records the rollout allocation above | pending receiving confirmation |
-| #38 Monitoring | EV-26 online scoring; span-drop rules (E-R18); exporter protocol rule (E-R17); retention rule (E-R19); OTel GenAI conventions in Development status | pending |
+| #37 Deployment | gates G1 to G12 with evidence and hypothesis marks; #37 records them in S9/R22 and records the rollout allocation above | research interface accepted in the coordinating engineer's [delegated receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6254282660); preserve per-build applicability and evidence pins |
+| #38 Monitoring | EV-26 online scoring; span-drop rules (E-R18); exporter protocol rule (E-R17); retention rule (E-R19); OTel GenAI conventions in Development status | research interface accepted in the coordinating engineer's [delegated receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38#issuecomment-6254283671); pin the actual instrumentation and semantic-convention versions, preserve no-data and explicit count/band decisions |
 | #41 Evidence grades | R1–R15 minimum and one-factor semantics already adopted in the merged #41 policy; this record retains them above. Tiers A, B, C and sizing rule E-H5 remain additional proposals; claim-level grades still need review | adopted minimum recorded; additional tier/sizing and claim-level dispositions pending |
 | #40 Schema | 94 source-checked candidates in the shared format at candidate rule revision 0.2; the type enum and evaluator-placement field | pending |
 | #39 Cost | judge-token and evaluation-service price lines; self-hosted GPU-hour as user-supplied | pending |
 | #35 Guardrails | EV-14 and EV-16 as the measurement side of the control catalog; E-R74 cross-references the sandboxed-code-execution control; E-H1 depends on #35 data-boundary rules | pending |
-| #32 Training dataset | `D-20` accepted, narrowed: #36 owns freezing the evaluation set, hashing its items and embedding the canary GUID (G1, E-R44); T5 runs the leakage check against those hashes and records method, hit counts and hashes; E-R44's outcome remains `unknown` with `missing_evidence` and `on_unknown: review` until both are recorded; its fixed severity remains `error` | pending #32 owner confirmation |
+| #32 Training dataset | `D-20` accepted, narrowed: #36 owns freezing the evaluation set, hashing its items and embedding the canary GUID (G1, E-R44); T5 runs the leakage check against those hashes and records method, hit counts and hashes; E-R44's outcome remains `unknown` with `missing_evidence` and `on_unknown: review` until both are recorded; its fixed severity remains `error` | research interface accepted in the coordinating engineer's [delegated receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254284924); the ordered leakage procedure and original D-20 / E-R44 severity distinction remain explicit |
 | #33 Fine-tuned model | `A-20` accepted as an input to G5: a tuned model with no `evaluation_report_ref`, or one whose G5 run failed, is not deployable; G5 already re-runs after any T5 tuning, compares base and tuned weights on the same suite (EV-19, E-R43), and G2 covers capability retention against the base. No acceptable-regression threshold is published (E-H6), so the threshold stays builder-set | pending #33 owner confirmation |
 | #2 T0 | evaluator-placement axis and region-at-provisioning as T0 inputs | pending |
 
@@ -834,3 +854,62 @@ This continuation corrects the two applicability predicates and the price-summar
 - E-I1 billing scope: [Braintrust pricing](https://www.braintrust.dev/pricing) was checked on 2026-10-18 and expressly describes model credits for built-in models used without a customer API key. This is a counterexample to universal customer-key billing, not a fresh review of every platform charge. Other table rows keep their original evidence dates and stated billing unknowns.
 
 The #41 minimum and its original receipt remain accepted in their stated scope. The #37/#38/#32 receiving dispositions, additional tier/sizing proposals, source-use decisions and active T5 reconciliation remain separate.
+
+## 2026-10-18 original-payload validity and completed receiving decisions
+
+The [#6 model-interface input](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36#issuecomment-6254150273)
+correctly distinguishes a case-sensitive frozen payload from a semantic label score.
+E-R67 now requires validating the original payload unchanged. JSON Schema 2020-12
+validation section 6.1.2 and core section 4.2.2 establish the enum/equality basis
+(E-N1003/E-N1004, accessed 2026-10-18). A scoring policy may separately define
+normalization for label comparison, but that derived score cannot convert a
+schema-invalid original into a valid result. The candidate's warning severity and
+the imported v1 contract are unchanged; no model output was generated or rescored.
+
+DeepEval 4.3.0's checked source (E-N1006) calls the supplied Pydantic model's
+`model_validate_json` to determine a 0/1 score. That model's validation policy,
+including any coercion it permits, must be recorded rather than assumed to be
+identical to the selected JSON Schema contract. An optional explanation of failed
+validation can call a configured model; this does not determine the binary score.
+Neither validation nor that explanation alone establishes correctness against
+labelled gold. The archive and exact member were checked without installing or
+running DeepEval or generating an explanation.
+
+The same-day [Gemini structured-output documentation](https://ai.google.dev/gemini-api/docs/structured-output),
+dated 2026-10-13, continues to require application validation of values despite
+schema-shaped output. Anthropic's separately retrieved Strict tool use page
+(E-N1005) documents schema-conforming inputs for supported tools with `strict: true`.
+The re-read Define tools page supports the existing forced-tool limitation but
+does not confirm the historical enum-capitalisation summary. Two attempts to read
+the separate structured-outputs page timed out; those unavailable observations
+are retained as unavailable, and that old summary is withdrawn from E-R67's basis.
+This source correction does not infer that every tool, model or response outcome
+is covered by strict mode. Refusal/truncation handling remains the declared gate
+policy, separate from any claim that useful task output was produced.
+
+The coordinating engineer made the following actual receiving decisions under
+the project user's delegated engineering authority after reviewing the producer
+and consumer records. These receipts identify the actor and bounded interface;
+they do not attribute an absent person's approval or grant deployment/data rights.
+
+| receiving interface | completed disposition and evidence |
+| --- | --- |
+| #36 → #37 | [Receipt 6254282660](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6254282660) accepts G1–G12 applicability through S9/R22 with build/evidence pins and preserves the explicit rollout/quality/monitoring allocation. |
+| #36 → #38 | [Receipt 6254283671](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38#issuecomment-6254283671) accepts EV-26 and E-R17/E-R18/E-R19 with no-data, scored-count, ingestion-delay and explicit threshold/band decisions. G12 pins the installed package, any applicable opt-in, semantic-convention commit and name mapping; every exporter/sink/judge/retention boundary stays distinct. |
+| #36 → #32 | [Receipt 6254284924](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254284924) accepts the frozen set/item hashes/canary and ordered exact-hash, 13-gram, MinHash and semantic-flag procedure. Checkpoint selection remains distinct from held-out evaluation. D-20's warning does not replace E-R44's fixed error or its unknown/review outcome when evidence is missing. |
+| #36 → #41 | The existing [owner receipt 6242306958](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127#issuecomment-6242306958) and [source review 5560766386](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127#pullrequestreview-5560766386) adopt the R1–R15 minimum and one-factor/evidence mapping. The additional tiers and sizing proposals stay separate. |
+
+The [aggregate #36 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36#issuecomment-6254300535)
+links these actual decisions. The other pending handoffs and assigned open
+questions above retain their stated scope; these decisions do not rewrite the
+active #32 or #38 owner's note or turn a research interface into an executed run.
+
+The separate [#41 → #36 receiving receipt 6254392681](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36#issuecomment-6254392681)
+accepts the source-policy packet at `13b11b7eb9a84af200ea9f0577fcb0e5182a4c46`
+for evidence labels and benchmark-source eligibility. It preserves the exact
+experimental tuple, independent-control comparison, failure-versus-unknown
+distinction, and separate source/material/use-rights decision. This reverse
+interface is compatible with the adopted R1–R15 minimum; E-H5 sizing and E-H12
+tiers remain outside that adoption. Its unsigned source publication and actual
+receiving decision do not establish final #41 delivery, wire adoption or a
+measured result.

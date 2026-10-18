@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-livecodebench-v6-codegeneration",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "LiveCodeBench release_v6 code-generation metrics",
+  "version": "release_v6",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Named code-generation edition already declared in the research note, with a pinned inspected implementation. Earlier release_v1 through release_v5 remain historical comparison context. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "pass@1",
+      "pass@5"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/LiveCodeBench/LiveCodeBench/blob/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/README.md",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 10ab6020f51e3cc524860097737a9f84e33d97da, SHA256 ee0029cddc1d9051f35818f3348a4327819a3e35a9e597732519245605195cf6, was read without importing or executing the package. The documented release_v6 covers the named cumulative problem edition. It must be explicitly selected rather than silently using release_latest. The finite generation/evaluation workflow supports offline mode; network downloads or model APIs remain separate."
+    },
+    {
+      "source_uri": "https://github.com/LiveCodeBench/LiveCodeBench/blob/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/benchmarks/code_generation.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob e2e48a73b68c4981dae44356dd4d52df87d9f070, SHA256 0bc93f5a650b55d6a1b54d3db852d80ae64891ece4ff085b2e6b469eb89f8846, was read without importing or executing the package. The dataset loader accepts the explicit release tag and optional inclusive start/end dates. A release name and a reporting date window are different inputs. No dataset was downloaded, deserialized or admitted by this review."
+    },
+    {
+      "source_uri": "https://github.com/LiveCodeBench/LiveCodeBench/blob/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/pass_k_utils.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob a49382f0857448ef494d77a4c6107db952c9823a, SHA256 6af3ee55d40f96fa06fa511bd5e43d94b19604750e82454b4b3c1f45c5199010, was read without importing or executing the package. The exact returned keys include pass@1 and pass@5 only when every represented task has enough samples for k. Success requires all represented test outcomes positive. Missing or insufficient samples do not establish zero, a pass or an independently valid coverage claim."
+    },
+    {
+      "source_uri": "https://github.com/LiveCodeBench/LiveCodeBench/blob/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/lcb_runner/evaluation/compute_code_generation_metrics.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob b8de33ee0631ef0747c3a0d32aa77130ba8659d8, SHA256 073f388cc78bf0eb0ad35eaeb8bb509c0a3664963e5305d2be13d6b6eb6f3d21, was read without importing or executing the package. The batch checker applies timeouts and retains exception metadata. Reproduction needs the exact checker, problem window, samples, resources and timeout settings; no generated code or checker executed here."
+    },
+    {
+      "source_uri": "https://github.com/LiveCodeBench/LiveCodeBench/blob/28fef95ea8c9f7a547c8329f2cd3d32b92c1fa24/LICENSE",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob d3c6d337d2a28958523092bfced9258904135083, SHA256 104099948b78ebc36f2e951b3a7973b956adfa7d39aaec0d1512f97a2686d15d, was read without importing or executing the package. MIT applies to the inspected source code; contest problem and model rights, remote services and costs remain separate."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00",
+  "license": {
+    "spdx_id": "MIT"
+  }
+}

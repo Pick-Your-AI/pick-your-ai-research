@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-garak-detector-counts",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "garak per-detector assessment counts",
+  "version": "0.17.0",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Bounded reporting profile of garak detector assessments. Counts apply to a selected probe/detector and evaluator policy; they are not a universal attack-success rate, a project safety certification or an adopted threshold. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "passed",
+      "fails",
+      "nones",
+      "total_evaluated",
+      "total_processed"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/garak/0.17.0/json",
+      "checked_at": "2026-10-18T19:50:42.112985+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published garak 0.17.0 metadata identifies the source artifact uploaded 2026-09-09T18:55:44.093169Z (yanked=false). Its 1885319-byte download matched publisher SHA256 3d8ddf64964611bc0d46528287cd3c8b9d5d1cedf00116fcc032d66089265edb. pyproject.toml declares Alpha, mapped to preview, and Apache-2.0. No probe, attack, target request, calibration or evaluation was executed; software availability establishes no target-use authorization or safety result."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/7e/6b/17a09e90eb5c92271e4fae34e31b46ec5bbf7f7fb106fcbd1e5a30330476/garak-0.17.0.tar.gz",
+      "checked_at": "2026-10-18T19:50:42.112985+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's garak/evaluators/base.py has SHA256 edd596d3475d72bcba5971e2a6cee4921ed3433a8006ba34d3fa3cf656b64dac. The emitted per-detector record contains all five literal count keys. None detector results are counted separately; evaluated excludes None and processed includes it. Empty evaluation is skipped rather than passed. Threshold and zero-tolerance evaluators are distinct policies, not adopted project gates."
+    },
+    {
+      "source_uri": "https://pypi.org/project/garak/0.17.0/",
+      "checked_at": "2026-10-18T19:50:42.112985+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact README describes a configured CLI probe run followed by per-detector results and JSONL reporting. This supports an offline assessment profile even with API targets; target, probe, detector, sampling and optional calibration must be specified before any meaningful run."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/7e/6b/17a09e90eb5c92271e4fae34e31b46ec5bbf7f7fb106fcbd1e5a30330476/garak-0.17.0.tar.gz",
+      "checked_at": "2026-10-18T19:50:42.112985+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}

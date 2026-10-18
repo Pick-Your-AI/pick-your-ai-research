@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-trulens-agent-metrics",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "TruLens documented agent evaluations",
+  "version": "2.15.0",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Publisher-documented agent evaluation capabilities of the TruLens 2.15.0 metapackage, for arriving traces and offline datasets. This version pins the published capability description; its ranged implementation/provider dependencies do not constitute a reproduced evaluator environment. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "LogicalConsistency",
+      "ExecutionEfficiency",
+      "PlanAdherence",
+      "PlanQuality",
+      "ToolSelection",
+      "ToolCalling",
+      "ToolQuality"
+    ],
+    "mode": "both"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/trulens/2.15.0/json",
+      "checked_at": "2026-10-18T19:50:41.033618+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published trulens 2.15.0 metadata identifies the source artifact uploaded 2026-10-05T13:43:08.568333Z (yanked=false). Its 6838-byte download matched publisher SHA256 e932df6cc1bdc8e5013e8d6cc51b16c0b28c2e08039320c956b6b2d81c9175d7. pyproject.toml and PKG-INFO classify the bundle Alpha, mapped to preview, and identify MIT. Required core, feedback, dashboard, semantic-conventions and compatibility packages have ^2.0 ranges rather than a fully resolved implementation lock."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/49/88/b6157a3df546d3cc09452700a77361f48071e4d35d865d839e207020fa0a/trulens-2.15.0.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.033618+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's README.md has SHA256 3f77472ea563a66629723a582cd6b13d13f16ff86aeeb8d5c1b3efb14ac1f64d. The shipped agent table gives all seven literal metric names. The README explicitly describes evaluations as traces arrive and over datasets afterward, supporting mode both. These documented capabilities were not measured or independently corroborated."
+    },
+    {
+      "source_uri": "https://pypi.org/project/trulens/2.15.0/",
+      "checked_at": "2026-10-18T19:50:41.033618+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact-version README describes inline evaluation and offline batch mode. Additional providers/judges and trace storage require separate configuration; no cloud or private-placement entitlement is inferred."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/49/88/b6157a3df546d3cc09452700a77361f48071e4d35d865d839e207020fa0a/trulens-2.15.0.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.033618+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "MIT"
+  }
+}
