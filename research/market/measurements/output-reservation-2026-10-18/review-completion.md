@@ -27,7 +27,7 @@ submission; this note does not dismiss or approve that review.
 ## Validation and preservation
 
 Python 3.12.14, pinned requirements installed into isolated temporary storage:
-21 contract tests and **339 repository tests passed**, with one Windows
+21 contract tests passed; **339 repository tests completed**, with one Windows
 portable-g++ skip. The original native MSVC CPU selftest and subsequent portable
 CPU review receipts keep their own historical scopes. Research, market,
 handoff-audit and mobile workflow validators passed. Historical setup, native
