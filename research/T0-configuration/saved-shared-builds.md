@@ -213,7 +213,7 @@ When whether a branch is active is itself unknown, invalidate and re-evaluate (V
 
 ## Compatibility proposals
 
-Status labels: **contract-derived** restates behaviour stated in the v1 docs (V5–V8); **hypothesis** is this note's proposal. None is independently reproduced, and none is an approved rule. Most are integrity checks across records (build vs report vs snapshot) that v1's Ruleset expression language can't address, because its references resolve within one build (V12). Where they live is SB-10.
+Status labels: **contract-derived** restates behaviour stated in the v1 docs (V5–V8); **hypothesis** is this note's proposal. These are not approved rules. The bounded historical replay candidate below now exercises selected cross-record checks using synthetic fixtures. Most proposals are integrity checks across records (build vs report vs snapshot) that v1's Ruleset expression language can't address, because its references resolve within one build (V12). Their released placement remains SB-10.
 
 ### SB-R1 Selected versions belong to the locked snapshot (contract-derived)
 
@@ -284,7 +284,26 @@ No prices or capacity figures are recorded. Cost snapshots reference #39's `Cost
 
 ## Structured artifacts
 
-None. A build is user data, not a catalog fact, and no fixture is added. The gaps below must be resolved by #40 before a structured saved-build example is meaningful.
+The [CD-7 historical replay manifest](../../tests/fixtures/t0-historical-replay.json)
+now binds the existing frozen synthetic build, catalog/pricebook sidecar, exact
+ruleset and dependency graph, explicitly supplied resource/cost estimates and
+retained report. The [replay implementation and decision](component-schema-compatibility.md#cd-7-historical-reference-replay-candidate-2026-10-18)
+provide a bounded engineering candidate for historical SB-R1, SB-R2, SB-3, SB-5 and
+SB-10: perform cross-record association checks before the pinned local evaluator,
+including exact catalog ID/version/kind for every enabled selection, then
+compare the complete reproduced report. Disabled selections remain excluded
+from that membership precondition. This does not add user build data
+or a catalog proposal.
+
+Original bytes survive every result. Unavailable or mismatched inputs cannot
+be replaced by current versions, and explicit optional-estimate absence cannot
+select an available estimate. The replay manifest carries the evaluator source
+and schema identities without changing frozen reports or setting the build's
+`lifecycle` to `validated`. A retained historical report and a demonstrated
+reproduction are distinct; an invalid or indeterminate historical result stays
+invalid or indeterminate. Source authenticity/use, current evaluation, released
+report-version fields, sharing storage and actual successor migration remain
+separate decisions. The fixture is synthetic; #42 retains its #40 prerequisite.
 
 ## Open decisions (SB-)
 
