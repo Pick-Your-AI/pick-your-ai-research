@@ -1,0 +1,2172 @@
+{
+  "observed_on": "2026-10-18",
+  "issue_list_completed_at": "2026-10-18T16:21:10Z",
+  "native_relationship_capture_completed_by": "2026-10-18T16:29:51Z",
+  "capture_started_at": null,
+  "classification": "Filtered, non-transactional GitHub REST readback; not a current Project readback or evidence of criterion acceptance",
+  "repository": "Pick-Your-AI/pick-your-ai-research",
+  "artifact_baseline_commit": "85a6ccee1a25aae8c90a6db5370ad9f001be2eb4",
+  "issue_collection_requests": [
+    {
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues?state=all&per_page=100&page=1",
+      "returned_entries": 100
+    },
+    {
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues?state=all&per_page=100&page=2",
+      "returned_entries": 100
+    },
+    {
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues?state=all&per_page=100&page=3",
+      "returned_entries": 100
+    },
+    {
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues?state=all&per_page=100&page=4",
+      "returned_entries": 60
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1",
+      "title": "T0: Configuration",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T11:13:48Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 5,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 2,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2",
+      "title": "T0: Workload / Use Case",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T16:15:32Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 1,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3",
+      "title": "T0: Deployment Mode",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T16:00:48Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 1,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4",
+      "title": "T1: Model Selection",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T11:14:32Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "Mattycodes69"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 3,
+        "completed": 1,
+        "percent_completed": 33
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5",
+      "title": "T1: Model Provider",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:38:07Z",
+      "closed_at": "2026-10-18T15:33:12Z",
+      "assignees": [
+        "zwright8",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research",
+        "topic: pricing"
+      ],
+      "issue_type": null,
+      "parent": 4,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6",
+      "title": "T1: AI Model",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:04:34Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 4,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 7,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7",
+      "title": "T1: Context Window",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:54:05Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 4,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 8,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8",
+      "title": "T2: Infrastructure",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T16:07:38Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "Mattycodes69"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 3,
+        "completed": 3,
+        "percent_completed": 100
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 9,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9",
+      "title": "T2: Hosting",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:53:14Z",
+      "closed_at": "2026-10-18T15:53:14Z",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "topic: pricing"
+      ],
+      "issue_type": null,
+      "parent": 8,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 10,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10",
+      "title": "T2: GPU / Compute",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:17:21Z",
+      "closed_at": "2026-10-18T13:41:40Z",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "topic: compatibility",
+        "topic: pricing"
+      ],
+      "issue_type": null,
+      "parent": 8,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 11,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11",
+      "title": "T2: Inference Engine",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:17:23Z",
+      "closed_at": "2026-10-18T09:51:31Z",
+      "assignees": [
+        "zwright8",
+        "Mattycodes69"
+      ],
+      "labels": [
+        "type: research",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 8,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 12,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12",
+      "title": "T3: Knowledge & Retrieval",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T11:49:47Z",
+      "closed_at": null,
+      "assignees": [
+        "Mattycodes69",
+        "zabyxc01"
+      ],
+      "labels": [
+        "type: workstream",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 4,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 13,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13",
+      "title": "T3: Knowledge Base",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T11:50:21Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "zabyxc01"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: data-governance"
+      ],
+      "issue_type": null,
+      "parent": 12,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 14,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14",
+      "title": "T3: Embedding Model",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T13:32:43Z",
+      "closed_at": null,
+      "assignees": [
+        "zabyxc01",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 12,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 15,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15",
+      "title": "T3: Vector Database",
+      "state": "open",
+      "state_reason": "reopened",
+      "updated_at": "2026-10-18T13:33:04Z",
+      "closed_at": null,
+      "assignees": [
+        "zabyxc01",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": 12,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 16,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16",
+      "title": "T3: RAG & Retrieval Backends",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T13:33:23Z",
+      "closed_at": null,
+      "assignees": [
+        "zabyxc01",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": 12,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 24,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24",
+      "title": "T4: Agents & Integrations",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T13:33:44Z",
+      "closed_at": null,
+      "assignees": [
+        "CompleteDotTech",
+        "appletechie"
+      ],
+      "labels": [
+        "type: workstream",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 4,
+        "completed": 3,
+        "percent_completed": 75
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 25,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25",
+      "title": "T4: Agent Framework",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:41:11Z",
+      "closed_at": null,
+      "assignees": [
+        "CompleteDotTech",
+        "Mattycodes69"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": 24,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 26,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26",
+      "title": "T4: Tools & APIs",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:17:28Z",
+      "closed_at": "2026-10-18T11:38:22Z",
+      "assignees": [
+        "CompleteDotTech",
+        "zwright8"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": 24,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 27,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27",
+      "title": "T4: MCP Servers",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:46:15Z",
+      "closed_at": "2026-10-18T15:44:39Z",
+      "assignees": [
+        "CompleteDotTech",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 24,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 28,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/28",
+      "title": "T4: Agent Memory",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:17:33Z",
+      "closed_at": "2026-10-18T14:29:38Z",
+      "assignees": [
+        "CompleteDotTech",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: data-governance"
+      ],
+      "issue_type": null,
+      "parent": 24,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 29,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29",
+      "title": "T5: Training & Fine-Tuning",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:17:35Z",
+      "closed_at": null,
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: workstream",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 4,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 30,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30",
+      "title": "T5: Training Framework",
+      "state": "open",
+      "state_reason": "reopened",
+      "updated_at": "2026-10-18T15:17:37Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability"
+      ],
+      "issue_type": null,
+      "parent": 29,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 31,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31",
+      "title": "T5: Training Compute",
+      "state": "open",
+      "state_reason": "reopened",
+      "updated_at": "2026-10-18T15:31:53Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: pricing"
+      ],
+      "issue_type": null,
+      "parent": 29,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 32,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32",
+      "title": "T5: Training Dataset",
+      "state": "open",
+      "state_reason": "reopened",
+      "updated_at": "2026-10-18T15:48:47Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: data-governance"
+      ],
+      "issue_type": null,
+      "parent": 29,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 33,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33",
+      "title": "T5: Fine-Tuned Model",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:58:02Z",
+      "closed_at": null,
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 29,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 34,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34",
+      "title": "T6: Deployment & Operations",
+      "state": "open",
+      "state_reason": "reopened",
+      "updated_at": "2026-10-18T06:50:06Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: workstream"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 5,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 35,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35",
+      "title": "T6: Guardrails",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:27:46Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 34,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 36,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36",
+      "title": "T6: Evaluation",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T06:50:15Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 34,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 37,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37",
+      "title": "T6: Deployment",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:28:20Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 34,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 38,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38",
+      "title": "T6: Monitoring",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:49:31Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 34,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 39,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39",
+      "title": "T6: Cost Estimate",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:52:51Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "topic: pricing"
+      ],
+      "issue_type": null,
+      "parent": 34,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 40,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40",
+      "title": "T0: Component Schema & Compatibility Rules",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T16:05:23Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "tynamite"
+      ],
+      "labels": [
+        "type: research",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 1,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 1,
+        "total_blocking": 1
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 41,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41",
+      "title": "T0: Catalog Data Sources & Freshness",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:17:54Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "topic: pricing",
+        "topic: data-governance"
+      ],
+      "issue_type": null,
+      "parent": 1,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 42,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42",
+      "title": "T0: Saved, Shared & Compared Builds",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:17:56Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 1,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 1,
+        "total_blocked_by": 1,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": null
+    },
+    {
+      "number": 47,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47",
+      "title": "Market Research Program — Pick Your AI",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T12:24:03Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": null,
+      "sub_issues_summary": {
+        "total": 12,
+        "completed": 9,
+        "percent_completed": 75
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#1 T0: Configuration](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/1), [#4 T1: Model Selection](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/4), [#8 T2: Infrastructure](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/8), [#12 T3: Knowledge & Retrieval](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12), [#24 T4: Agents & Integrations](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24), [#29 T5: Training & Fine-Tuning](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29), [#34 T6: Deployment & Operations](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 48,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48",
+      "title": "MR-01 — Competitive Landscape Discovery",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T12:34:41Z",
+      "closed_at": "2026-10-18T12:34:40Z",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#6 T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 49,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49",
+      "title": "MR-02 — Competitive Feature Matrix",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T16:17:49Z",
+      "closed_at": "2026-10-18T16:17:49Z",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#6 T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6), [#7 T1: Context Window](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#16 T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#27 T4: MCP Servers](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27), [#33 T5: Fine-Tuned Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33), [#36 T6: Evaluation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 50,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50",
+      "title": "MR-03 — Competitor Deep Dives",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:09:13Z",
+      "closed_at": "2026-10-18T15:09:13Z",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 1,
+        "completed": 1,
+        "percent_completed": 100
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#6 T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 51,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/51",
+      "title": "MR-04 — PCPartPicker Product Experience",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T14:06:00Z",
+      "closed_at": null,
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "question",
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#3 T0: Deployment Mode](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 52,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52",
+      "title": "MR-05 — Customer Research & Personas",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T13:51:02Z",
+      "closed_at": "2026-10-18T13:51:02Z",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 1,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#3 T0: Deployment Mode](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3), [#16 T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 53,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/53",
+      "title": "MR-06 — Market Size, Demand & Trends",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T15:10:42Z",
+      "closed_at": "2026-10-18T14:44:47Z",
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 54,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/54",
+      "title": "MR-07 — Pricing & Monetization",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T13:04:49Z",
+      "closed_at": "2026-10-18T13:00:14Z",
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 1,
+        "completed": 1,
+        "percent_completed": 100
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 55,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/55",
+      "title": "MR-08 — Data Sources & Integration Opportunities",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T10:38:48Z",
+      "closed_at": "2026-10-18T10:38:47Z",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "topic: data-governance"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 1,
+        "completed": 1,
+        "percent_completed": 100
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#5 T1: Model Provider](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5), [#6 T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6), [#9 T2: Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9), [#27 T4: MCP Servers](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 56,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56",
+      "title": "MR-09 — Technical Feasibility",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T06:50:02Z",
+      "closed_at": null,
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 3,
+        "completed": 1,
+        "percent_completed": 33
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#7 T1: Context Window](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#11 T2: Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11), [#16 T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#27 T4: MCP Servers](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27), [#33 T5: Fine-Tuned Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33), [#36 T6: Evaluation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 57,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/57",
+      "title": "MR-10 — Competitive Differentiation",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T11:19:53Z",
+      "closed_at": "2026-10-18T11:19:53Z",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 1,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 58,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58",
+      "title": "MR-11 — MVP Definition & Prioritization",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T11:55:01Z",
+      "closed_at": "2026-10-18T11:55:01Z",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 1,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#3 T0: Deployment Mode](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3), [#6 T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#11 T2: Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 59,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59",
+      "title": "MR-12 — Research Quality, Synthesis & Handoffs",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T15:45:44Z",
+      "closed_at": null,
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 47,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#3 T0: Deployment Mode](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3), [#5 T1: Model Provider](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5), [#6 T1: AI Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6), [#7 T1: Context Window](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7), [#9 T2: Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#11 T2: Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11), [#16 T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#26 T4: Tools & APIs](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26), [#27 T4: MCP Servers](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27), [#33 T5: Fine-Tuned Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33), [#36 T6: Evaluation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36), [#37 T6: Deployment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 60,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60",
+      "title": "MR-08: Validate commercial display and redistribution rights",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T10:38:30Z",
+      "closed_at": "2026-10-18T10:38:30Z",
+      "assignees": [
+        "tynamite",
+        "appletechie"
+      ],
+      "labels": [
+        "type: research",
+        "topic: data-governance"
+      ],
+      "issue_type": null,
+      "parent": 55,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 61,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61",
+      "title": "MR-09: Validate GPU sizing against pinned runtime measurements",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T07:32:48Z",
+      "closed_at": null,
+      "assignees": [
+        "Mattycodes69",
+        "appletechie"
+      ],
+      "labels": [
+        "question",
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 56,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#7 T1: Context Window](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7), [#10 T2: GPU / Compute](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10), [#11 T2: Inference Engine](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 62,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62",
+      "title": "MR-09: Validate benchmark comparability and harness effects",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-18T05:14:55Z",
+      "closed_at": null,
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 56,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#36 T6: Evaluation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 63,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63",
+      "title": "MR-05: Validate customer demand and willingness to pay",
+      "state": "open",
+      "state_reason": null,
+      "updated_at": "2026-10-17T12:19:18Z",
+      "closed_at": null,
+      "assignees": [
+        "zwright8",
+        "appletechie"
+      ],
+      "labels": [
+        "question",
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 52,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#3 T0: Deployment Mode](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 64,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
+      "title": "MR-07: Validate price freshness and total-cost scenarios",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T12:06:32Z",
+      "closed_at": "2026-10-18T12:06:31Z",
+      "assignees": [
+        "appletechie",
+        "PUSHINGSQUARES"
+      ],
+      "labels": [
+        "type: research",
+        "topic: pricing"
+      ],
+      "issue_type": null,
+      "parent": 54,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#9 T2: Hosting](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9), [#39 T6: Cost Estimate](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39), [#41 T0: Catalog Data Sources & Freshness](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 65,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/65",
+      "title": "MR-09: Review RAG interoperability market claims",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T13:57:38Z",
+      "closed_at": "2026-10-18T13:52:56Z",
+      "assignees": [
+        "zabyxc01",
+        "appletechie",
+        "itisSomeone"
+      ],
+      "labels": [
+        "type: research",
+        "optional capability",
+        "topic: compatibility"
+      ],
+      "issue_type": null,
+      "parent": 56,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 0
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#14 T3: Embedding Model](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14), [#15 T3: Vector Database](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15), [#16 T3: RAG & Retrieval Backends](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16), [#25 T4: Agent Framework](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/25), [#27 T4: MCP Servers](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/27). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    },
+    {
+      "number": 66,
+      "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/66",
+      "title": "MR-03: Test direct stack-builder substitutes",
+      "state": "closed",
+      "state_reason": "completed",
+      "updated_at": "2026-10-18T12:20:12Z",
+      "closed_at": "2026-10-18T10:55:53Z",
+      "assignees": [
+        "tynamite",
+        "itisSomeone"
+      ],
+      "labels": [
+        "type: research"
+      ],
+      "issue_type": null,
+      "parent": 50,
+      "sub_issues_summary": {
+        "total": 0,
+        "completed": 0,
+        "percent_completed": 0
+      },
+      "issue_dependencies_summary": {
+        "blocked_by": 0,
+        "total_blocked_by": 0,
+        "blocking": 0,
+        "total_blocking": 2
+      },
+      "declared_cross_project_handoff_line": "- **Cross-project handoffs (Project #1 consumers; information/review, not blockers):** [#2 T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2), [#40 T0: Component Schema & Compatibility Rules](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40), [#42 T0: Saved, Shared & Compared Builds](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42). Consuming owners accept or narrow these in [`handoffs.md`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/main/research/market/handoffs.md)."
+    }
+  ],
+  "native_relationship_reads": [
+    {
+      "issue": 56,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/56/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 61,
+          "state": "open",
+          "parent": 56
+        },
+        {
+          "number": 62,
+          "state": "open",
+          "parent": 56
+        },
+        {
+          "number": 65,
+          "state": "closed",
+          "parent": 56
+        }
+      ]
+    },
+    {
+      "issue": 55,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/55/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 60,
+          "state": "closed",
+          "parent": 55
+        }
+      ]
+    },
+    {
+      "issue": 54,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/54/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 64,
+          "state": "closed",
+          "parent": 54
+        }
+      ]
+    },
+    {
+      "issue": 52,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/52/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 63,
+          "state": "open",
+          "parent": 52
+        }
+      ]
+    },
+    {
+      "issue": 50,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/50/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 66,
+          "state": "closed",
+          "parent": 50
+        }
+      ]
+    },
+    {
+      "issue": 47,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/47/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 48,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 49,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 50,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 51,
+          "state": "open",
+          "parent": 47
+        },
+        {
+          "number": 52,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 53,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 54,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 55,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 56,
+          "state": "open",
+          "parent": 47
+        },
+        {
+          "number": 57,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 58,
+          "state": "closed",
+          "parent": 47
+        },
+        {
+          "number": 59,
+          "state": "open",
+          "parent": 47
+        }
+      ]
+    },
+    {
+      "issue": 34,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/34/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 35,
+          "state": "open",
+          "parent": 34
+        },
+        {
+          "number": 36,
+          "state": "open",
+          "parent": 34
+        },
+        {
+          "number": 37,
+          "state": "open",
+          "parent": 34
+        },
+        {
+          "number": 38,
+          "state": "open",
+          "parent": 34
+        },
+        {
+          "number": 39,
+          "state": "open",
+          "parent": 34
+        }
+      ]
+    },
+    {
+      "issue": 29,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/29/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 30,
+          "state": "open",
+          "parent": 29
+        },
+        {
+          "number": 31,
+          "state": "open",
+          "parent": 29
+        },
+        {
+          "number": 32,
+          "state": "open",
+          "parent": 29
+        },
+        {
+          "number": 33,
+          "state": "open",
+          "parent": 29
+        }
+      ]
+    },
+    {
+      "issue": 24,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/24/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 25,
+          "state": "open",
+          "parent": 24
+        },
+        {
+          "number": 26,
+          "state": "closed",
+          "parent": 24
+        },
+        {
+          "number": 27,
+          "state": "closed",
+          "parent": 24
+        },
+        {
+          "number": 28,
+          "state": "closed",
+          "parent": 24
+        }
+      ]
+    },
+    {
+      "issue": 12,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/12/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 13,
+          "state": "open",
+          "parent": 12
+        },
+        {
+          "number": 14,
+          "state": "open",
+          "parent": 12
+        },
+        {
+          "number": 15,
+          "state": "open",
+          "parent": 12
+        },
+        {
+          "number": 16,
+          "state": "open",
+          "parent": 12
+        }
+      ]
+    },
+    {
+      "issue": 8,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/8/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 9,
+          "state": "closed",
+          "parent": 8
+        },
+        {
+          "number": 10,
+          "state": "closed",
+          "parent": 8
+        },
+        {
+          "number": 11,
+          "state": "closed",
+          "parent": 8
+        }
+      ]
+    },
+    {
+      "issue": 4,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/4/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 5,
+          "state": "closed",
+          "parent": 4
+        },
+        {
+          "number": 6,
+          "state": "open",
+          "parent": 4
+        },
+        {
+          "number": 7,
+          "state": "open",
+          "parent": 4
+        }
+      ]
+    },
+    {
+      "issue": 1,
+      "relationship": "children",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/1/sub_issues?per_page=100",
+      "items": [
+        {
+          "number": 2,
+          "state": "open",
+          "parent": 1
+        },
+        {
+          "number": 3,
+          "state": "open",
+          "parent": 1
+        },
+        {
+          "number": 40,
+          "state": "open",
+          "parent": 1
+        },
+        {
+          "number": 41,
+          "state": "open",
+          "parent": 1
+        },
+        {
+          "number": 42,
+          "state": "open",
+          "parent": 1
+        }
+      ]
+    },
+    {
+      "issue": 58,
+      "relationship": "blocked_by",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/58/dependencies/blocked_by?per_page=100",
+      "items": [
+        {
+          "number": 66,
+          "state": "closed",
+          "parent": 50
+        }
+      ]
+    },
+    {
+      "issue": 57,
+      "relationship": "blocked_by",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/57/dependencies/blocked_by?per_page=100",
+      "items": [
+        {
+          "number": 66,
+          "state": "closed",
+          "parent": 50
+        }
+      ]
+    },
+    {
+      "issue": 42,
+      "relationship": "blocked_by",
+      "url": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/42/dependencies/blocked_by?per_page=100",
+      "items": [
+        {
+          "number": 40,
+          "state": "open",
+          "parent": 1
+        }
+      ]
+    }
+  ],
+  "project_attempts": [
+    {
+      "url": "https://github.com/orgs/Pick-Your-AI/projects/1/views/2",
+      "observed_on": "2026-10-18",
+      "result": "unavailable",
+      "error": "DisabledError / Failed to fetch",
+      "fields_returned": false
+    },
+    {
+      "url": "https://github.com/orgs/Pick-Your-AI/projects/2/views/13?filterQuery=59",
+      "observed_on": "2026-10-18",
+      "result": "unavailable",
+      "error": "DisabledError / Failed to fetch",
+      "fields_returned": false
+    }
+  ],
+  "limitations": [
+    "The collection and native relationship endpoints were read separately. No transactional or precisely started snapshot is claimed. Completion times are retained with their actual known precision.",
+    "The complete four-page issue collection included pull requests, which were excluded from the 55 issue records. The recorded fields are a filtered readback, not the full API response.",
+    "GitHub issue state, native relationship summaries, labels and assignees are distinct from Project fields. No current Project item/field/option IDs or values were returned or modified.",
+    "Earlier 2026-10-18T02:50:05Z readback and separately dated Project observation remain preserved in handoff-audit-readback.json. Later closed issue states do not backdate that snapshot or independently prove acceptance.",
+    "No source/vendor/product, participant, hardware, runtime, pricing or rights verification is performed by these metadata reads."
+  ],
+  "qa_results": {
+    "issue_count": 55,
+    "technical_issue_count": 35,
+    "market_issue_count": 20,
+    "issue_state_counts": {
+      "open": 35,
+      "closed": 20
+    },
+    "native_parent_count": 13,
+    "native_child_edge_count": 47,
+    "native_parent_child_reciprocal": true,
+    "native_parent_graph_acyclic": true,
+    "technical_labels_and_optional_scope_match": true,
+    "all_assignees_present_and_distinct": true,
+    "declared_handoff_pairs": 98,
+    "declared_pairs_unchanged_from_cutoff": true,
+    "ledger_receiving_assignees_match": true,
+    "ownership_changes_since_cutoff": [],
+    "parent_changes_since_cutoff": [],
+    "label_changes_since_cutoff": [],
+    "native_blocked_by_edges": [
+      [
+        42,
+        40
+      ],
+      [
+        57,
+        66
+      ],
+      [
+        58,
+        66
+      ]
+    ],
+    "open_native_blocker_edges": [
+      [
+        42,
+        40
+      ]
+    ],
+    "closed_issue_ids": [
+      5,
+      9,
+      10,
+      11,
+      26,
+      27,
+      28,
+      48,
+      49,
+      50,
+      52,
+      53,
+      54,
+      55,
+      57,
+      58,
+      60,
+      64,
+      65,
+      66
+    ]
+  }
+}
