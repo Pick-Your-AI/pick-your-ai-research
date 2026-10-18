@@ -1,5 +1,25 @@
 # MR-02 acceptance and evidence audit
 
+## Memory-boundary correction — 2026-10-18
+
+Prepared from accepted research main `387e3ff639fc65c125ccd1716507acc2ae43c3bc`, matrix blob `a5e6a0887516b47cd7077a2b7471622cced8f73b`. The later sections retain their literal historical revision, counts, owners and validation; they are not rewritten as current acceptance.
+
+The existing `canirun-ai` / `vram_ram` cell had status Documented, although its own basis describes device memory capacities and explicitly separates them from model memory requirements. The unchanged dimension test requires a requirement for a pinned model/runtime configuration, with units and assumptions. Available device capacity is not partial evidence of that required quantity. The current repair sets this one cell to Unknown and updates its limitation; the previous source identity, URL, access date, reading method, documentary grade, confidence and capacity observation remain exact as historical context.
+
+| Classification | Before this correction | After this correction |
+| --- | --- | --- |
+| Complete matrix | 33 entities × 48 dimensions = 1,584 cells | Unchanged |
+| Documented / Unknown | 123 / 1,461 | 122 / 1,462 |
+| Exercised / Unsupported | 0 / 0 | Unchanged |
+| CanIRun.ai Documented / Unknown | 3 / 45 | 2 / 46 |
+| Other cells and capability-test definitions | 1,583 other cells; 48 tests | Exact preservation required |
+
+This resolves the specific memory-cell mismatch identified in the earlier [shared-file agreement](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/49#issuecomment-6245977192), without adding the six separately staged discovery candidates or their 288 cells. Their catalog/source integration remains a distinct #48 decision. No current source retrieval, product test, model sizing, source-use permission, capability absence or matrix-wide evidence acceptance is asserted by this repair.
+
+The scope supports the #10 distinction between hardware capacity and a model/runtime memory requirement. Actual independent review of this changed cell and guide remains required before delivery; it is not a substitute for the other #49 receiving decisions or review of the remaining supported claims. The completed #66 research may inform a separately reviewed matrix update; its observations are not relabelled as this author's execution and no Flocci grade changes here. All source-register, catalog, canonical handoff, frozen-contract and issue/Project metadata remain outside this patch.
+
+Required checks, exact current-head review and normal canonical delivery are recorded in the contribution's PR. Until those checks and the remaining literal #49 criteria and receiving decisions are met, #49 remains open.
+
 ## Delivery and evidence readback — 2026-10-18
 
 Readback basis: research main `ac5e5844dd1cd01366a1b51a0054afa71a340aca` and GitHub
