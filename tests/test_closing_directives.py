@@ -61,3 +61,28 @@ class ClosingDirectivesTests(unittest.TestCase):
 
     def test_fenced_directives_are_not_standalone(self):
         self.assertTrue(closing.check_text('```\nCloses #34\n```', ['#34']))
+
+    def test_blank_lines_do_not_end_fenced_context(self):
+        for fence in ['```', '~~~', '```text', '~~~text']:
+            with self.subTest(fence=fence):
+                text = f'{fence}\n\nCloses #34\n\n{fence[:3]}'
+                self.assertEqual(closing.check_text(text, ['#34']), [(3, '#34')])
+
+    def test_indented_directives_are_not_plain_lines(self):
+        for indentation in [' ', '   ', '    ', '\t']:
+            with self.subTest(indentation=indentation):
+                self.assertTrue(closing.check_text(indentation + 'Closes #34', ['#34']))
+
+    def test_mismatched_or_short_fence_does_not_end_context(self):
+        for closing_fence in ['~~~', '```', '````not-a-close']:
+            with self.subTest(closing_fence=closing_fence):
+                text = f'````\n\n{closing_fence}\n\nCloses #34'
+                self.assertEqual(closing.check_text(text, ['#34']), [(5, '#34')])
+
+    def test_unclosed_fence_keeps_later_paragraphs_protected(self):
+        text = '```text\n\nExample.\n\nCloses #34\n\nFixes #35'
+        self.assertEqual(closing.check_text(text, ['#34', '#35']), [(5, '#34'), (7, '#35')])
+
+    def test_closed_fence_allows_later_plain_directive(self):
+        text = '  ~~~text\n\nCloses #34\n\n  ~~~~\n\nFixes #35'
+        self.assertEqual(closing.check_text(text, ['#34', '#35']), [(3, '#34')])
