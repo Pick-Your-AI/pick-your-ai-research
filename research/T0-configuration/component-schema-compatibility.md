@@ -800,6 +800,75 @@ requirements, real activation resolution, the disabled-alternative decision,
 structured wire rejections, CD-1/CD-6 binding and affected-owner adoption remain
 separate. Frozen v1 and #42's substantive #40 prerequisite are unchanged.
 
+### CD-13 structured identity rejection proposal (2026-10-18)
+
+Constraint 3 in the [#40 mechanics disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+requires a reason-coded rejection result. Three actual synthetic probes of the
+accepted `79960b7` reducer produce a plain `ValueError`: duplicate selection IDs,
+two enabled selections sharing a role, and a disabled alternative sharing that
+role. All three correctly reject before any predicate. The missing piece is a
+machine-readable rejection boundary, not a change to those identity decisions.
+
+The [explicit result boundary](../../tests/selection_result_prototype.py),
+[candidate result schema](../../tests/fixtures/selection-result.schema.json) and
+[synthetic regressions](../../tests/test_selection_result.py) propose
+`cd13-result-0.1`. The caller must select this exact version; there is no implicit
+version, older-result reinterpretation or migration. The envelope explicitly
+pins `identity_policy: strict_build_wide`. This is a separate test-only proposal
+over normalized Python selections and a rule, not adoption of a final wire,
+Build reader, ruleset or native adapter.
+
+| Boundary result | Meaning |
+| --- | --- |
+| `status: rejected`, `phase: identity_preflight`, `reason_code: duplicate_selection_id` | One normalized selection ID appears more than once, including across kinds or disabled entries; the diagnostic retains that exact ID |
+| `status: rejected`, `phase: identity_preflight`, `reason_code: ambiguous_selection_role` | More than one selection has the same kind and role under the strict build-wide policy; the diagnostic retains that exact kind/role pair |
+| `status: evaluated` with the existing rule result | Identity preflight completed and the unchanged universal reducer returned its fixed severity, outcome, reason and individually attributed findings |
+
+A rejection retains the supplied rule ID and its fixed severity but has **no
+rule outcome or findings**. It is not a compatibility failure, an unknown
+evidence finding or an inapplicability skip. The two envelope branches reject
+extra fields and cannot combine a rejection with an evaluated result. The
+schema defines the proposed shape only: it does not authenticate a result or
+prove that its reported reason follows from any retained input.
+
+The shared preflight now raises a typed `IdentityPreflightError` carrying its
+reason and conflicting identity. It remains a `ValueError` subclass and keeps
+the exact original message text for existing Python callers. Identity checks,
+their order and the first encountered rejection are unchanged. This proposal
+does not promise an exhaustive conflict list or a canonical first conflict when
+several independent defects are reordered. Disabled and unrelated-kind entries
+still participate; roles remain scoped to kind. The separately reserved
+enabled-role policy needs its own explicit selection and review and cannot
+silently change this result version.
+
+Only the preflight call is inside the rejection handler. Rule evaluation runs
+outside it. A callback's `ValueError`, even one deliberately using the new typed
+exception, remains an execution error; a non-normalized predicate return still
+raises. No exception message or partially accumulated finding is emitted as a
+result. The boundary checks its Python argument shape, normalized identity text,
+exact Boolean activation and fixed severity before preflight. Unsupported
+versions and malformed Python calls remain API errors, not identity findings.
+This bounded shape check supplies no canonical Build/schema/reference validation,
+selection inventory completeness, source eligibility or truth of a callback.
+Those remain independently established caller preconditions.
+
+For valid inputs, every applicability/assertion truth pair, empty or disabled
+scope, all-inapplicable scope, counterexample and unresolved row retains the
+original reducer's result. Findings retain stable selection-ID order. Inputs
+are not rewritten, and returned documents do not share mutable findings across
+calls. The required-presence mode and existing typed binding retain their
+current APIs and policy; required absence is still distinct from universal
+empty-scope skipping.
+
+The regression cases exercise both rejection codes, disabled/other-kind
+ambiguity, all activation pairs and input orders, callback isolation, strict
+version selection, malformed Python arguments and mutually exclusive schema
+branches. Existing callers' exception compatibility and required-presence
+behavior have explicit controls. These are synthetic mechanics checks only.
+Frozen v1 is unchanged. A full untrusted-input reader, adopted result wire,
+source-bound verification, affected-owner integration and #42's substantive
+#40 prerequisite remain separate.
+
 ### CD-13 typed selection binding proposal (2026-10-18)
 
 The [versioned sidecar schema](../../tests/fixtures/selection-binding.schema.json),
