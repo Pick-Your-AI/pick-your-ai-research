@@ -81,6 +81,82 @@ class MarketValidation(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
 
+    def done_backlog(self):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0].update(
+            status='Done', completion_evidence={
+                'accepted_commit': 'synthetic-accepted-commit',
+                'review_url': 'https://example.com/synthetic-review',
+                'handoff_acceptance': 'Synthetic receiving decision; no actual acceptance.',
+            })
+        return data
+
+    def assert_invalid_completion(self, completion, expected):
+        data = self.done_backlog()
+        data['research-backlog.json'][0]['completion_evidence'] = completion
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn('backlog #1: Done requires recorded acceptance evidence',
+                              result.stderr)
+                self.assertIn(expected, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_done_completion_requires_an_object(self):
+        for value in (None, True, 1, 1.25, [], ['receipt'], '', 'receipt'):
+            with self.subTest(value=value):
+                self.assert_invalid_completion(value, 'requires an object')
+
+    def test_done_completion_requires_each_recorded_text_field(self):
+        baseline = self.done_backlog()['research-backlog.json'][0]['completion_evidence']
+        for field in ('accepted_commit', 'review_url', 'handoff_acceptance'):
+            missing = deepcopy(baseline)
+            missing.pop(field)
+            self.assert_invalid_completion(missing, field + ' must be nonempty text')
+            for value in (None, True, False, 1, 1.25, [], ['receipt'],
+                          {}, {'receipt': 'unsupported'}, '', ' \t\n'):
+                completion = deepcopy(baseline)
+                completion[field] = value
+                with self.subTest(field=field, value=value):
+                    self.assert_invalid_completion(completion,
+                                                   field + ' must be nonempty text')
+
+    def test_done_review_reference_uses_existing_http_url_checks(self):
+        baseline = self.done_backlog()['research-backlog.json'][0]['completion_evidence']
+        for value in ('receipt', 'file:///synthetic-review',
+                      'https://user:password@example.com/review',
+                      'https://example.com:invalid/review',
+                      'https://example.com/review\n'):
+            completion = deepcopy(baseline)
+            completion['review_url'] = value
+            with self.subTest(value=value):
+                self.assert_invalid_completion(completion, 'review_url')
+
+    def test_done_completion_preserves_valid_record_text_without_certifying_it(self):
+        data = self.done_backlog()
+        completion = data['research-backlog.json'][0]['completion_evidence']
+        completion['accepted_commit'] = '  synthetic short identity  '
+        completion['handoff_acceptance'] += '\nRetained scope and unknowns.\n'
+        completion['extra_context'] = {'synthetic': True}
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn('Market integrity OK', result.stdout)
+                self.assertEqual((self.base / 'research-backlog.json').read_text(),
+                                 json.dumps(data['research-backlog.json']))
+
+    def test_incomplete_completion_remains_allowed_before_done(self):
+        for value in (None, {}, {'review_url': 'unknown'}):
+            data = deepcopy(self.data)
+            data['research-backlog.json'][0]['completion_evidence'] = value
+            for optimized in (False, True):
+                with self.subTest(value=value, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
     def assert_invalid_deliverable(self, value, error_text):
         data = deepcopy(self.data)
         data['research-backlog.json'][0]['deliverable'] = value
