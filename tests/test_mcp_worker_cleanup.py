@@ -86,6 +86,8 @@ class WorkerCleanupTests(unittest.TestCase):
             worker = Path(temporary) / "worker.py"
             peer = "import json,os,pathlib,runpy,signal,sys,time;"
             if separate_session:
+                # Startup can exceed the cleanup budget before the lifetime guard exists.
+                peer += "time.sleep(2.25);"
                 peer += f"runpy.run_path({str(PROBE.SELF)!r})['bind_parent_lifetime'](int(sys.argv[1]));"
             peer += "signal.signal(signal.SIGTERM,signal.SIG_IGN);"
             peer += f"pathlib.Path({str(ready)!r}).write_text(json.dumps({{'pid':os.getpid(),'parent':os.getppid(),'group':os.getpgrp()}}));time.sleep(60)"
@@ -99,9 +101,32 @@ class WorkerCleanupTests(unittest.TestCase):
                                         stderr=subprocess.DEVNULL, start_new_session=True)
             try:
                 original = PROBE.run_worker
+                communicate = subprocess.Popen.communicate
+
+                def after_peer_ready(process, *args, **kwargs):
+                    # The assertion below is about cleanup after a real peer has
+                    # installed its guard, not a two-second interpreter startup.
+                    startup_deadline = time.monotonic() + 15
+                    while time.monotonic() < startup_deadline:
+                        try:
+                            owned = json.loads(record.read_text())
+                            established = json.loads(ready.read_text())
+                        except (FileNotFoundError, json.JSONDecodeError):
+                            if process.poll() is not None:
+                                self.fail("Fixture worker exited before peer readiness")
+                            time.sleep(0.02)
+                            continue
+                        self.assertEqual(owned["worker"], process.pid)
+                        self.assertEqual(established["pid"], owned["peer"])
+                        self.assertEqual(established["parent"], process.pid)
+                        self.assertEqual(established["group"], owned["peer"] if separate_session else process.pid)
+                        return communicate(process, *args, **kwargs)
+                    self.fail("Fixture peer did not establish readiness within the startup budget")
+
                 def short_deadline(command, environment):
                     return original(command, environment, timeout=2)
                 with patch.object(PROBE, "SELF", worker), patch.object(PROBE, "CASES", PROBE.CASES[:1]), \
+                        patch.object(subprocess.Popen, "communicate", after_peer_ready), \
                         patch.object(PROBE, "run_worker", side_effect=short_deadline), \
                         self.assertRaises(subprocess.TimeoutExpired):
                     PROBE.observe(sys.executable, sys.executable)
