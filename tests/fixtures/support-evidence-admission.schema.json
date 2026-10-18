@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:pick-your-ai:cd3-evidence:0.1",
+  "title": "Synthetic CD-3 scoped source evidence and result",
+  "description": "Explicit test-only evidence carrier over cd3-0.3. Source records and dates do not establish source qualification, rights, currency or a grade.",
+  "type": "object",
+  "required": ["x_t0_support_evidence"],
+  "additionalProperties": false,
+  "properties": {"x_t0_support_evidence": {"$ref": "#/$defs/evidence"}},
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "required": ["proposal_version", "binding_sha256", "query", "scope", "cohort", "sources"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd3-evidence-0.1"},
+        "binding_sha256": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/digest"},
+        "query": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/query"},
+        "scope": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/scope"},
+        "cohort": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/reference"},
+        "sources": {"type": "array", "minItems": 1, "maxItems": 32, "items": {"$ref": "#/$defs/source"}}
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["id", "revision", "source_uri", "checked_at"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/id"},
+        "revision": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/text"},
+        "source_uri": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "checked_at": {"type": "string", "minLength": 1, "maxLength": 200}
+      }
+    },
+    "qualification": {"type": ["boolean", "null"]},
+    "digest_or_null": {"anyOf": [{"type": "null"}, {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/digest"}]},
+    "result": {
+      "type": "object",
+      "required": ["x_t0_support_evidence_result"],
+      "additionalProperties": false,
+      "properties": {
+        "x_t0_support_evidence_result": {
+          "type": "object",
+          "required": ["proposal_version", "evidence_sha256", "evidence", "admission", "membership"],
+          "additionalProperties": false,
+          "properties": {
+            "proposal_version": {"const": "cd3-evidence-0.1"},
+            "evidence_sha256": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/digest"},
+            "evidence": {"$ref": "#/$defs/evidence"},
+            "admission": {
+              "type": "object",
+              "required": ["qualified_evidence_sha256", "source_qualified", "requested_eligible_inputs", "reason"],
+              "additionalProperties": false,
+              "properties": {
+                "qualified_evidence_sha256": {"$ref": "#/$defs/digest_or_null"},
+                "source_qualified": {"$ref": "#/$defs/qualification"},
+                "requested_eligible_inputs": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/result/properties/x_t0_support_result/properties/evaluation/properties/eligible_inputs"},
+                "reason": {"enum": ["source_receipt_missing", "source_receipt_mismatch", "source_qualification_unresolved", "source_ineligible", "source_qualified"]}
+              }
+            },
+            "membership": {"$ref": "urn:pick-your-ai:cd3-binding:0.3#/$defs/result"}
+          }
+        }
+      }
+    }
+  }
+}
