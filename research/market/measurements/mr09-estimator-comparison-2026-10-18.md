@@ -18,7 +18,7 @@ receiving-owner review. Assignments, triage, #59 ledgers and v1 are unchanged.
 | --- | --- | --- |
 | llmfit v1.1.17, commit `9781270c1cd907971ce071517041edb55702b3ff`; official Windows binary | Six unmodified `plan` executions for exact `HuggingFaceTB/SmolLM2-135M-Instruct`, BF16 weight override, contexts 256/288/2,048/2,080 with FP16 KV; additional q4_0 probes at 2,048/2,080 | Four native KV component estimates can be checked against D1/D2 payload snapshots; total hardware requirement and q4_0 are excluded from numerical runtime error |
 | ModelFit CLI `@wecko-ai/modelfit` 1.5.3, commit `8c1df5f00e8f21edd0f0c7b4a12230b838e0b433` | Execute unmodified `getRecommendations` with pinned 156-record dataset and recorded GPU capacity; exact 135M matches = 0, related entry = SmolLM2 360M | Missing exact model and API workload/runtime inputs; no replacement model, no numerical error |
-| Local AI Planner, Logarithmic Spirals deployed page, author's browser inspection dated 2026-10-18 | Author reports expanding Advanced Options/Custom Model Data and reading runtime, precision and context controls; no retained capture locator or independent corroboration is supplied | Author-reported runtimes GGUF/llama.cpp or MLX, minimum selectable context 4,096 and no visible admitted-sequence input; independent confirmation remains pending. No exact estimate executed and no numerical error |
+| Local AI Planner, Logarithmic Spirals deployed page, author's browser inspection at 05:57 UTC on 2026-10-18 | Author reports expanding Advanced Options/Custom Model Data and reading runtime, precision and context controls; that original report has no retained capture locator | Author-reported runtimes GGUF/llama.cpp or MLX, minimum selectable context 4,096 and no visible admitted-sequence input; the separately dated reviewer receipt below corroborates visible options at 06:16 UTC. No exact estimate executed and no numerical error |
 
 All six llmfit commands returned JSON with exit 0. Full outputs are retained in
 [the execution directory](estimator-comparison-2026-10-18/); exact arguments,
@@ -37,8 +37,8 @@ hardware requirements using a planning formula and a fixed runtime allowance;
 it neither pins this Transformers/safetensors artifact nor emits a PyTorch
 phase-peak prediction. ModelFit's port lacks artifact revision, runtime, context,
 KV layout and admitted concurrency arguments. The author's Planner report supplies
-no matching estimate, and its transient control facts still await independent
-corroboration. These are quantity/input mismatches or missing evidence, not proof
+no matching estimate; the separate reviewer observation below corroborates
+visible controls only. These are quantity/input mismatches or missing evidence, not proof
 that either an estimator or model failed.
 Neither a `Perfect` fit label nor an estimated TPS is independently validated.
 Today's free-capacity fields in llmfit output are read-only discovery samples,
@@ -97,13 +97,37 @@ Local LLM Hardware Compatibility Dataset, [modelfit.io](https://modelfit.io/),
 CC BY 4.0. Only bounded execution facts are retained, no dataset redistribution.
 
 [Planner browser observation](estimator-comparison-2026-10-18/planner-observation.json)
-records the author's inspected controls, pending independent corroboration or an
-accessible retained capture. Direct HTTP retrieval of the page and historical
+retains the original 05:57 author report and its evidence qualification, without
+an original-session capture. Direct HTTP retrieval of the page and historical
 asset returned 403; the browser page was accessible without challenge solving or
 authentication. No fresh bundle hash is available and the old bundle identity is
 not claimed reverified. No unseen API capability is inferred from visible controls.
 The historical bundle analysis remains historical. This inspection neither
 forces unsupported values into the page nor substitutes a 4,096-token result.
+
+### Separate reviewer observation — 2026-10-18, 06:16 UTC
+
+A separate in-session reviewer, posting as @CompleteDotTech, subsequently
+[recorded a direct observation](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/252#issuecomment-6246511494)
+at **06:16:46 UTC**, with capture completed at **06:17:56 UTC**. That receipt
+reports the same two runtime options, the context selector beginning at 4,096,
+the native F16 KV option and no visible admitted-sequence control among the
+expanded panels. The bounded DOM capture contains the option lists; the two
+screenshots show surrounding controls, not rendered dropdown option lists.
+
+| Capture retained outside Git by the reporting reviewer | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `planner252-independent-controls-20261018.json` | 6,074 | `817a774c9f0d79134794886bdb174a7fab1d07b39d2b8cb10871dcdc86581272` |
+| `planner252-controls-overview-20261018.jpg` | 92,224 | `016bae63f357e781878feee5ffd207d69972d38578c2e1066f0fa6719acaea50` |
+| `planner252-context-options-20261018.jpg` | 72,416 | `2f6aac90c63f3319cb7d035983003a920364f4bbfb5ddf1f1113971e32b386fb` |
+
+The linked receipt supplies its observation and capture identities; this note
+does not claim another browser replay or independent inspection of those files.
+It corroborates the visible controls at the later date, without reconstructing
+the author's earlier session, verifying its HTTP 403s, refreshing a deployed
+bundle hash or producing a matching estimate. No protected asset, model import,
+configuration change or inference is attributed to that later inspection.
+Neither receipt establishes named receiving-owner acceptance or empirical fit.
 
 ## Reproduction, evidence and next gate
 
@@ -138,7 +162,7 @@ pinned KV component and matched payload quantities enter this comparison.
 | --- | --- |
 | AlexsJones: [v1.1.17 release](https://github.com/AlexsJones/llmfit/releases/tag/v1.1.17), [models.rs](https://github.com/AlexsJones/llmfit/blob/9781270c1cd907971ce071517041edb55702b3ff/llmfit-core/src/models.rs#L1426), [catalog](https://github.com/AlexsJones/llmfit/blob/9781270c1cd907971ce071517041edb55702b3ff/llmfit-core/data/hf_models.json) | Primary pinned code/metadata plus actual binary output. High confidence in inspected unit/layout arithmetic; predictive peak accuracy unverified. MIT code, dataset/model rights separate; source/binary/data remain external. [Archive manifest](../../../evidence/mr09-llmfit-v1117-windows.json), [catalog manifest](../../../evidence/mr09-llmfit-v1117-catalog.json). |
 | Wecko-ai / ModelFit: [engine](https://github.com/Wecko-ai/modelfit/blob/8c1df5f00e8f21edd0f0c7b4a12230b838e0b433/src/engine.mjs), [data](https://github.com/Wecko-ai/modelfit/blob/8c1df5f00e8f21edd0f0c7b4a12230b838e0b433/src/data/models.json) | Unmodified local CLI execution, distinct from web release. High confidence in bounded output/model absence at this pin; unverified predictive accuracy. MIT code / attributed CC BY 4.0 dataset. [Engine manifest](../../../evidence/mr09-modelfit-v153-engine.json), [data manifest](../../../evidence/mr09-modelfit-v153-data.json). |
-| Logarithmic Spirals: [deployed planner](https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/) | Author-reported interactive controls, pending an accessible capture or independent reviewer corroboration; no independently established confidence in the transient options, immutable deployed-code pin or output reproduction. Other interfaces/rights remain unknown. Link and bounded report, no bundle or source text redistributed. |
+| Logarithmic Spirals: [deployed planner](https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/) | Original 05:57 author report plus the separate 06:16 reviewer receipt above, limited to visible-control corroboration; no immutable deployed-code pin or output reproduction. Other interfaces/rights remain unknown. Link and bounded report, no bundle or source text redistributed. |
 | Project: original [protocol](mr09-protocol-2026-10-16.md), [D1/D2 runtime observations](./) | Actual project GPU measurements dated 2026-10-16, exact model/runtime/artifact and code pins retained. High confidence in stored counters, subject to their shared-device/pilot caveats and human validity review. No new GPU measurements here. |
 
 Next whole-runtime gate: #61 co-owners and #10/#11 must agree a specific estimator
