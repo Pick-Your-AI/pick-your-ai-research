@@ -64,6 +64,15 @@
       "region": "Global public pages; no regional offering or currency quote certified.",
       "reuse_rights": "Original analytical paraphrases and links only. No permission to republish third-party datasets, screenshots or source text is inferred; #41/#60 approval needed for downstream display/redistribution.",
       "publisher": "Resolve each cell evidence_id in sources.json; claim-level evidence_url refines the source without changing its shared registration."
+    },
+    "public-docs-2026-10-18-mr02-explanation": {
+      "access_date": "2026-10-18",
+      "version": "Published result marked October 14, 2026, for GPT-OSS 20B MXFP4 / NVIDIA GeForce RTX 4060 Ti; software/runtime versions and underlying model bytes unpinned.",
+      "plan": "Public unauthenticated reading; subscription entitlements not tested.",
+      "access_mode": "Primary web text inspection of an existing result; no interactive recommendation, model inference, hardware run, deployment or paid access.",
+      "region": "Public web result; no regional availability, currency quote or benchmark configuration certified.",
+      "reuse_rights": "Original analytical paraphrase and link only. This review grants no dataset, screenshot or publisher-text redistribution and changes no #41/#60 material-use decision.",
+      "publisher": "ModelFit; existing src-modelfit registration, with a more precise claim URL and the original record retained in mr02-acceptance.md."
     }
   },
   "capability_tests": {
@@ -3407,7 +3416,7 @@
     {
       "product_id": "artificial-analysis",
       "feature": "explanation",
-      "status": "Documented",
+      "status": "Unknown",
       "evidence_ids": [
         "src-artificial-analysis"
       ],
@@ -3417,7 +3426,7 @@
       "evidence_grade": "Vendor claim",
       "evidence_url": "https://artificialanalysis.ai/",
       "confidence": "Medium for the stated documentary boundary; execution unverified",
-      "limitations": "P records only the basis above; it does not pass the full capability test or certify compatibility, performance, persistence, price accuracy or rights.",
+      "limitations": "Classification reviewed 2026-10-18: the retained source basis describes recommendation priorities, not a documented reason returned with a recommendation. The linked public material inspected in this review does not establish that narrower output. Unknown preserves the original source observation and does not assert that explanations are unavailable; a documented reason field, explanation UI or worked result could resolve it.",
       "audit_scope": "public-docs-2026-10-16"
     },
     {
@@ -7493,14 +7502,14 @@
       "evidence_ids": [
         "src-modelfit"
       ],
-      "basis": "Site describes hardware-fit recommendations with speed/quality estimates; rationale output was not exercised.",
-      "verification_method": "Primary page read 2026-10-16; documentation/claim inspection only; bounded execution test not performed.",
-      "access_date": "2026-10-16",
+      "basis": "A published GPT-OSS 20B / RTX 4060 Ti result connects its fit assessment to weights versus usable VRAM and attaches workload-specific speed/context reasons. These are vendor estimates, not reproduced findings.",
+      "verification_method": "Primary published result read 2026-10-18; reason-bearing text inspection only; no interactive recommendation, model or hardware execution.",
+      "access_date": "2026-10-18",
       "evidence_grade": "Vendor claim",
-      "evidence_url": "https://modelfit.io/",
-      "confidence": "Medium for the stated documentary boundary; execution unverified",
-      "limitations": "P records only the basis above; it does not pass the full capability test or certify compatibility, performance, persistence, price accuracy or rights.",
-      "audit_scope": "public-docs-2026-10-16"
+      "evidence_url": "https://modelfit.io/can-i-run/gpt-oss-20b-on-rtx-4060-ti/",
+      "confidence": "Medium for existence of the documented explanation; its correctness and execution are unverified",
+      "limitations": "Documents a reason-bearing result only. The same page contains inconsistent fit/context statements, so this review does not accept numerical correctness, feasibility or workload thresholds. Its public result is dated October 14, 2026; it is not this session's runtime observation. The original October 16 homepage-based record is retained in mr02-acceptance.md.",
+      "audit_scope": "public-docs-2026-10-18-mr02-explanation"
     },
     {
       "product_id": "modelfit",
