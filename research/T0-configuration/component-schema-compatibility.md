@@ -522,9 +522,69 @@ The context rows above also have [executable synthetic CTX-01/02 cases](../../te
 and a [test-only arithmetic prototype](../../tests/context_budget_prototype.py).
 They distinguish shared and separate budgets, upper-bound decisions, missing
 operands, exact-route applicability and native-limit fallback. These exercise the
-existing research proposal; they do not choose CD-11's wire encoding, release a
-ruleset, establish a KV-memory fit or migrate real saved builds. See the
+existing research proposal; the bounded encoding candidate below adds typed
+input and route binding without releasing a ruleset, establishing a KV-memory
+fit or migrating real saved builds. See the
 [context proposal's scope](../T1-model-selection/rules/context-fit.md#executable-synthetic-cases-cd-11).
+
+### CD-11 typed context and exact route binding candidate (2026-10-18)
+
+**Decision for review:** use the [CD-1 answer encoding](../../tests/fixtures/t0-answer-states.schema.json)
+for context operands and a separate versioned binding to their original bytes.
+Keep shared and independent vendor caps explicit. A route-specific record is
+complete in its own scope; missing operands cannot borrow limits from another
+route or silently inherit a model-native value. CTX-02's separately evidenced
+native-limit fallback remains a prior normalization decision, not something
+this reader can establish from a missing extension field.
+
+The [synthetic binding schema](../../tests/fixtures/context-budget-binding.schema.json),
+[binding example](../../tests/fixtures/context-budget-binding.json),
+[answer example](../../tests/fixtures/context-budget-answers.json),
+[reader](../../tests/context_budget_binding_prototype.py) and
+[regressions](../../tests/test_context_budget_binding.py) choose these shapes:
+
+| Field or answer path | Known value and scope | Unresolved or inapplicable behavior |
+| --- | --- | --- |
+| `x_t0_context_budget.proposal_version` | Literal `cd11-0.1`; synthetic candidate only | Unsupported shapes reject before predicates |
+| `scope` | Exact selection ID, model/route/tokenizer ID and version pairs, operation ID, and SHA-256 of the normalized route settings bytes | Active scope is supplied by a separately reviewed resolver. Any mismatch or missing active scope gives `unknown`; a digest or matching label does not authenticate an artifact or source |
+| `answer_states_sha256` | SHA-256 of the complete original CD-1 answer document, including whitespace | A different document rejects; no reserialization or last-value-wins parsing repairs its identity |
+| `/context/semantics` | `shared` or `separate` | Unknown is an answer state, not a third capability enum value. Known input/output violations remain visible while combined applicability is unresolved |
+| `/context/input_tokens` | Positive integer `lower` and `upper`, ordered; bounded count of the complete assembled request for the bound tokenizer | Missing, withheld or unknown counts remain unresolved. This derived interval is distinct from workload `mean`/`max`; assembly must already include history and injected memory exactly once |
+| `/context/reserved_output_tokens` | Integer ≥ 0; includes all generated tokens covered by the reservation | Missing or not-applicable output is not zero. This candidate covers a generating operation; it does not infer the activation of embedding-only or other non-generating operations |
+| `/context/output_cap_tokens` | Integer ≥ 0 in the same route scope | An unresolved cap prevents an unconditional fit pass; known violations of other caps remain visible |
+| `/context/shared_cap_tokens` | Positive integer shared vendor window when semantics are shared | Separate semantics skips the combined predicate and rejects a simultaneously provided shared vendor window; it never invents one by adding separate caps |
+| `/context/input_cap_tokens` | Positive integer independent or additional input cap | Separate semantics requires this operand. For an optional additional cap under shared semantics, explicit `not_applicable` means no added predicate; omission, unknown and withheld add an unknown predicate |
+| `/context/policy_total_cap_tokens` | Integer ≥ 0 user policy ceiling on input plus reserved output; distinct from vendor caps | Explicit `not_applicable` means no selected policy ceiling. Omission, unknown and withheld do not silently mean unconstrained |
+
+All counts require JSON integer tokens, excluding Boolean and integral-float
+aliases. Bounds, namespace/version, duplicate JSON keys, nonfinite numbers,
+identifiers and scope shapes are validated before any applicability skip. The
+CD-1 normalizer retains unresolved parent states and answer provenance; an
+unresolved context parent cannot become a collection of zero-valued operands.
+
+The caller separately supplies exact Boolean or unresolved activation and
+source-eligibility dispositions. Only explicit disabled activation skips the
+screen. Ineligible or unresolved evidence yields unknown even if unadmitted
+numbers would fail; it is not evidence of unsupported capability. Passing true
+does not cause this experiment to verify a publisher fact: actual source,
+version, configuration, tokenizer/count completeness and rights review remain
+with #7/#40/#41 and the selected route's receiving owners.
+
+The existing CTX arithmetic decides from upper bounds, retains lower-bound
+findings and reports `may_not_fit` for an uncertain violation. Known zero output
+and a zero user ceiling retain their numeric meanings. The synthetic 7,000-input,
+2,000-output case fails an 8,000 shared window but passes separate 8,000-input and
+4,000-output caps. It adds no KV-memory, runtime, quality or throughput result.
+Returned scope and answer values are detached, and both original documents are
+retained. No source request, model execution, catalog change or file publication
+is performed by the reader.
+
+This chooses a concrete CD-11 wire candidate and composes the reviewed CD-1 and
+CTX mechanics for technical and affected-owner review. Final catalog/selection
+extraction, support/source conflict resolution, extension normalization,
+successor schema/ruleset and migration remain separate. Frozen v1 is unchanged;
+#40 and #42's substantive contract prerequisite remain open. Run
+`python -m unittest discover -s tests -p test_context_budget_binding.py -v`.
 
 ## Proposed T5 routing inventory
 

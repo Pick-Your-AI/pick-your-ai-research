@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic CD-11 context and answer binding",
+  "description": "Research candidate only; not a released contract or source admission mechanism.",
+  "type": "object",
+  "required": ["x_t0_context_budget"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_context_budget": {
+      "type": "object",
+      "required": ["proposal_version", "scope", "answer_states_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd11-0.1"},
+        "scope": {"$ref": "#/$defs/scope"},
+        "answer_states_sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]",
+      "not": {"pattern": "[^a-z0-9._:-]"}
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "\\S",
+      "not": {"pattern": "[\u0000-\u001f\u007f]"}
+    },
+    "digest": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "not": {"pattern": "[^a-f0-9]"}
+    },
+    "reference": {
+      "type": "object",
+      "required": ["id", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "version": {"$ref": "#/$defs/version"}
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["selection_id", "model", "route", "operation", "tokenizer", "settings_sha256"],
+      "additionalProperties": false,
+      "properties": {
+        "selection_id": {"$ref": "#/$defs/id"},
+        "model": {"$ref": "#/$defs/reference"},
+        "route": {"$ref": "#/$defs/reference"},
+        "operation": {"$ref": "#/$defs/id"},
+        "tokenizer": {"$ref": "#/$defs/reference"},
+        "settings_sha256": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

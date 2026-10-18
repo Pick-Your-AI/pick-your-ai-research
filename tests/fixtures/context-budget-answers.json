@@ -1,0 +1,18 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/context/semantics": {"state": "provided", "value": "shared"},
+      "/context/input_tokens": {
+        "state": "provided",
+        "value": {"lower": 7000, "upper": 7000},
+        "source": "synthetic:complete-request-count-including-history-and-injected-memory"
+      },
+      "/context/reserved_output_tokens": {"state": "provided", "value": 2000},
+      "/context/output_cap_tokens": {"state": "provided", "value": 4000},
+      "/context/shared_cap_tokens": {"state": "provided", "value": 8000},
+      "/context/input_cap_tokens": {"state": "not_applicable"},
+      "/context/policy_total_cap_tokens": {"state": "not_applicable"}
+    }
+  }
+}
