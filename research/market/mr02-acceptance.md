@@ -10,9 +10,10 @@ runs under both normal and optimized Python; the historical instruction below
 about Python assertions no longer applies.
 
 Issue #49 remains open. Delivery and structural validation do not settle claim
-truth or receiving-owner acceptance. The [2026-10-18 scoped disposition on #59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59)
-narrows #49's T5 use to information only and leaves independent taxonomy/claim
-acceptance separate from author integration. Consult live issue comments and the
+truth or receiving-owner acceptance. The [2026-10-17 T5 disposition on #59](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6230504818)
+narrows #49's T5 use to information only. The separate
+[2026-10-17 author-integration disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6242699859)
+leaves independent taxonomy/claim acceptance pending. Consult live issue comments and the
 existing #59 writer's handoff ledger for exact recipients and revisions.
 
 ## Historical submission record — 2026-10-16
