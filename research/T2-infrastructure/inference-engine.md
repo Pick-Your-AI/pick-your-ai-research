@@ -1,7 +1,7 @@
 # Inference engine: release-scoped serving support
 
 Issue: #11 · Contract: 1.0.0 · Kind: `inference_engine`
-Status: partial research and central corrections merged in #75/#101; scoped receipts reconciled; runtime tuples remain unverified
+Status: all nine literal research criteria assessed as satisfied; merged records and scoped receiving receipts linked below; runtime tuples remain unverified
 Last vendor research: 2026-10-16 (main matrix); 2026-10-18 (build supplement; lifecycle source recheck) · Owner-decision reconciliation: 2026-10-18 · Research owners: @Mattycodes69, @zwright8 (live GitHub assignees)
 
 ## User decision
@@ -269,10 +269,10 @@ Follow-up validation on **2026-10-17**, Python **3.12.14**: the shared runtime's
 | Comparison fields defined with type, unit and evidence requirement | Comparison-fields table | Research artifact criterion satisfied: 15 field groups define types, units or non-numeric semantics, and evidence requirements; canonical fields are distinguished from note-only proposals. |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Proposed rules, sourced premises, evidence status | Research artifact criterion satisfied: fixed severities, outcomes, applicability, unknown policy and synthetic examples are explicit. The proposals make no independently verified joint-compatibility claim. |
 | Every factual/numeric claim primary-sourced with access date and relevant conditions | Claim-source matrices and dated evidence table; build supplement | Research artifact criterion satisfied for the bounded documentation findings: E01–E28/H01–H09 and the separately dated supplement preserve primary locators, versions, access dates and claim conditions. No fresh vendor measurement or blanket source recheck is claimed by this criterion audit. |
-| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table; dated T6 receipt below | Scoped #10/#25/#33 receipts linked. Appletechie's #37/#38 response retains `66b46d4`; PUSHINGSQUARES's later `9192d5d` response confirms the delivered #37 research map with constraints and narrows #38 to evidence inputs. Final criterion assessment must preserve each receipt's scope; no runtime or another owner's acceptance is inferred. |
+| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table; dated T6 receipt and final assessment below | Satisfied within the agreed research interfaces: all five required consumers have an actual linked receiving-owner confirmation. Appletechie's #37/#38 response retains `66b46d4`; PUSHINGSQUARES's later `9192d5d` response confirms the delivered #37 research map with constraints and accepts the narrowed #38 evidence inputs. No runtime or another owner's acceptance is inferred. |
 | Open questions recorded with named follow-up owner | Open-decision table | Research artifact criterion satisfied: retention, exact tuples, plugins/builds, lineage, context, managed-version disclosure and source policy each have named follow-up owners. Recording a question does not accept the owner's decision. |
 
-This issue remains open pending final assessment of the scoped receiving evidence. The #246 source integration is delivered, and the later PUSHINGSQUARES response below records its #37 confirmation and #38 narrowing without rewriting appletechie's earlier response. Mattycodes69's retention/lifecycle concurrence and #42's receiving decision are still recorded as unresolved decisions. Exact installed tuples and a versioned executable ruleset remain future work in their owning scopes; the literal research criteria above require documented evidence, proposals and handoffs, and do not add an engine-execution requirement. The merged supplement does not certify an installed tuple. GitHub checklists and Project values must follow the reviewed criterion assessment and actual receiving evidence; this attribution correction does not change them.
+The final assessment below finds the receiving criterion satisfied within the actual agreed research interfaces. The #246 source integration is delivered, and PUSHINGSQUARES's response records its #37 confirmation and #38 narrowing without rewriting appletechie's earlier response. Mattycodes69's retention/lifecycle concurrence and #42's receiving decision remain recorded as unresolved decisions. Exact installed tuples and a versioned executable ruleset remain future work in their owning scopes; the literal research criteria above require documented evidence, proposals and handoffs, and do not add an engine-execution requirement. GitHub checklists, closure and Project values must follow the reviewed final assessment; an inaccessible Project field must be reported rather than represented as updated.
 
 ### Criterion and integration audit — 2026-10-18
 
@@ -280,8 +280,8 @@ The nine live #11 criteria were checked against main
 `227f44049444fd77bac083dd65bd7e7b461f31bf`, the current record, the shared rule
 template and actual linked owner responses. The eight artifact criteria above are
 supplied by the merged record and its reviewed corrections. The consuming-owner
-criterion remains pending; this assessment is not a new receipt from another
-owner or permission to close #11.
+criterion remained pending at that audit; its later disposition is recorded in
+the final assessment below. The earlier audit supplied no new receiving receipt.
 
 [#246](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/246), merged as
 `1ab7bf9715c577dfec05e0d2d90b853e0d3c7d2a`, supplies the
@@ -311,11 +311,53 @@ The receipt explicitly identifies these as consuming co-owner research
 dispositions, not an independent runtime check or completion of #11/#37/#38.
 It supersedes statements that PUSHINGSQUARES has supplied no #37/#38 response;
 it does not broaden the earlier appletechie pin or convert source mapping into
-metric exposition. The existing owners should assess criterion11.8 against these
-actual scoped receipts and identify any precise remaining handoff requirement.
-No new execution requirement, source fact, lifecycle adoption or closure is
-introduced by recording the response. The canonical market #59 ledger and all
-issue metadata remain with their existing owners.
+metric exposition. The receipt reconciliation in [#285](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/285)
+left the criterion disposition for the separate final assessment below. Recording
+the response introduced no new execution requirement, source fact or lifecycle
+adoption. The canonical market #59 ledger remains with its existing owners.
+
+### Final research criterion assessment — 2026-10-18
+
+The live issue's only unchecked research criterion was 11.8: each handoff listed
+under Dependencies must be confirmed by the consuming issue's owner with a
+linked comment or review. Its downstream-consumer list is exactly #10, #25,
+#33, #37 and #38. The original comments and their authors were read directly,
+then compared with the current consuming-issue assignees and the merged records
+at `b7c3056c1d99bcc2661d590e5cc790ecc5225641`.
+
+| Required direction | Actual receiving-owner evidence | Criterion disposition and preserved limit |
+| --- | --- | --- |
+| #11 → #10 | [Mattycodes69, 6245205057](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057); [appletechie, 6245668221](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) | Confirmed with constraints: exact-release sizing inputs, separate dtype/adapter roles and per-device capacity. Historical estimates do not establish support for a changed release. |
+| #11 → #25 | [CompleteDotTech, 6233323334](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334) | Confirmed with constraints: the complete conditional request/runtime tuple is the agreed research interface. Missing eligible evidence remains unknown; synthetic consumer specifications do not certify execution. |
+| #11 → #33 | [appletechie, 6230482684](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684) | Confirmed with the recorded tokenizer/template narrowing: artifact and immutable lineage responsibilities are agreed, while actual engine acceptance remains tuple-specific. |
+| #11 → #37 | [PUSHINGSQUARES, 6247689868](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6247689868), checking `9192d5d`; [appletechie's earlier receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428), checking `66b46d4` | Confirmed with constraints after #246 delivered the ENGINE map. The later owner identifies the S45/R30 engine-route mapping; selected-service build and runtime evidence remain separate. |
+| #11 → #38 | [PUSHINGSQUARES, 6247689868](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6247689868), aligned with [appletechie's earlier narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245668428) | Confirmed as the expressly accepted, narrowed source/evidence inputs: version/build/config are record fields, not required metric labels. Actual `_total` exposition needs a scrape; missing series are unavailable; new llama.cpp signal IDs wait for a selected build. |
+
+Criterion **11.8 is satisfied** by these actual consuming-owner agreements. In
+particular, the #38 response explicitly accepts the evidence inputs with a
+specified narrowing; requiring a live scrape before acknowledging that research
+handoff would add a runtime condition to the literal criterion. This assessment
+does not restate an in-session reviewer as a consuming owner or infer approval
+from shared assignment. Each linked receipt retains its own author, revision,
+direction and limits.
+
+The other eight literal criteria were already assessed in merged
+[#266](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/266), with
+[independent review 5561924936](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/266#pullrequestreview-5561924936).
+The attribution correction in #285 has also merged with
+[independent review 5562309268](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/285#pullrequestreview-5562309268).
+Together, the merged artifacts and the five receiving interfaces support
+completion of the existing research deliverable after review of this final
+assessment. All original criterion wording remains unchanged.
+
+The named follow-ups above remain visible under criterion 11.9. Mattycodes69's
+lifecycle concurrence and #42's retention representation are unresolved; #42 is
+not an additional entry in #11's required downstream list. This assessment does
+not decide them. Selected tuple execution, actual metrics, successor-contract
+adoption and the full #37/#38/#40/#42 criteria keep their existing owners and
+evidence requirements. Completion of #11 does not complete the T2 parent or the
+builder. Project state must be read back separately and any access limitation
+reported explicitly.
 
 ### Lifecycle and receipt follow-up validation — 2026-10-18
 

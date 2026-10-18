@@ -77,7 +77,18 @@ At the original publication snapshot, [PR #75](https://github.com/Pick-Your-AI/p
 
 ## Closure gates
 
-All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff above must have an actual consuming-owner acknowledgement, and all issue acceptance criteria must be satisfied. Until then use `Refs #n`, leave #8–#11 open, and report any Project update limitation explicitly.
+All three decision records and the T2 summary merged in #75; the focused corrections #100/#101/#103 and S3 supplement #158 also merged. These delivery gates are complete; no repeated merge is required. Every required handoff must have an actual consuming-owner acknowledgement, and each issue's own acceptance criteria must be satisfied before its closure. #8/#9/#10 retain their remaining gates; their state does not add a dependency to #11. Report any Project update limitation explicitly.
+
+The [final #11 assessment](inference-engine.md#final-research-criterion-assessment--2026-10-18)
+accounts for all five required #11 consumers using the actual comments above.
+Their confirmations satisfy criterion 11.8 within the agreed research interfaces,
+including #38's expressly accepted narrowing to source/evidence inputs. The
+earlier #266 audit supplied the eight artifact criteria; #285 reconciled the
+later T6 receipt. Together these support completion of #11's existing research
+deliverable after review of the final assessment. This neither broadens a
+receipt into runtime acceptance nor supplies another co-owner's decision. Named
+lifecycle/#42 follow-ups remain recorded; the parent and receiving issues retain
+their own completion requirements.
 
 
 ## Reciprocal engine receipt (2026-10-18)

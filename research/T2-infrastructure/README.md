@@ -6,7 +6,7 @@ Submission: [PR #75](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/
 
 Continuation audit on 2026-10-16 re-read live issues, comments, native relationships and the existing PR. Hosting and engine researchers checked source conditions, and an independent compute researcher audited arithmetic. The orchestrator completed compute corrections and shared integration through this existing PR. See [validation.md](validation.md) for corrections and the independent integration review; owner acceptance remains pending.
 
-**Status: records and summary merged; research completion is not claimed.** Consuming-owner confirmations and remaining issue criteria still apply. No product implementation, runtime deployment, provisioning or training job is included.
+**Status: records and summary merged; full T2 workstream completion remains open.** The [final #11 assessment](inference-engine.md#final-research-criterion-assessment--2026-10-18) finds all nine literal engine research criteria satisfied by merged artifacts and actual receiving-owner agreements. #8/#9/#10 retain their remaining criteria. No product implementation, runtime deployment, provisioning or training job is included.
 
 ## Decision records and artifacts
 
@@ -45,14 +45,14 @@ Rule groups separate fixed-severity constraints from evidence and applicability 
 
 ## Acceptance, handoffs and tracking
 
-The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–#11 and maps it to artifacts, evidence and reviewers. All required owner acknowledgements are in [handoffs.md](handoffs.md): seven from Hosting, four from Compute, five from Engine. The original publication had no receipts. As reconciled on 2026-10-18, Hosting has scoped #10/#27/#31 receipts, Compute #9/#11/#31, and Engine #10/#25/#33. Reciprocal #25 -> #11 is accepted with constraints by both #11 co-owners; #27/#28 -> #9 is accepted with constraints by Mattycodes69 only. A receipt does not accept every co-owner's scope or establish runtime support. The linked ledger records the actual comments.
+The [acceptance matrix](acceptance-matrix.md) preserves every criterion in #8–#11 and maps it to artifacts, evidence and reviewers. Required receiving interfaces are listed in [handoffs.md](handoffs.md): seven from Hosting, four from Compute, five from Engine. The original publication had no receipts. The later ledger preserves each scoped Hosting/Compute response and all five Engine confirmations: #10/#25/#33/#37/#38. The final #11 assessment includes PUSHINGSQUARES's `9192d5d` response and the separate earlier appletechie pin; #38 accepts source/evidence inputs with explicit narrowing. Reciprocal #25 -> #11 is accepted with constraints by both #11 co-owners; #27/#28 -> #9 is accepted with constraints by Mattycodes69 only. A receipt does not accept every co-owner's scope or establish runtime support. The linked ledger records the actual comments.
 
 | Issue | Live coassignees (2026-10-18) | Current research state |
 | --- | --- | --- |
 | #8 | @zwright8, @Mattycodes69 | Open; merged summary and records, full child acceptance remains |
 | #9 | @Mattycodes69, @appletechie | Open; four required receiving interfaces unconfirmed; region/billing decisions remain |
 | #10 | @Mattycodes69, @appletechie | Open; #39 receipt, other co-owner decisions and measurement/headroom work remain |
-| #11 | @zwright8, @Mattycodes69 | Open; #37/#38 receipts, exact tuple evidence and retention/lifecycle decisions remain |
+| #11 | @zwright8, @Mattycodes69 | All nine literal research criteria assessed as satisfied; final review/merge and GitHub closure follow this assessment. Runtime tuples and named lifecycle/#42 follow-ups keep their existing limits |
 
 The original Project observations were made on 2026-10-16: `Backlog`, `Tier = T2 Infrastructure`, `Readiness = Ready`, with #8/#10/#11 Critical and #9 High. They are historical, not current board state. Project readback on 2026-10-18 again failed with `INSUFFICIENT_SCOPES` (`read:project` missing); no board write or current value is claimed. Preserve live fields and priorities. An authorized administrator must read current work before any status change; merged partial research alone is insufficient for Done.
 
@@ -72,10 +72,10 @@ See [validation.md](validation.md) for exact checks, independent review findings
 | Confirm hosting/storage boundary and retrieval-consumer requirements | #13/#14/#15/#16 @zabyxc01 |
 | T4 incoming boundaries accepted with constraints; actual tuple specifications/execution remain; #9 co-owner scope separate | #25/#27/#28 @CompleteDotTech |
 | T5 scoped reuse and lineage receipts are recorded; missing records and reverse-direction decisions remain separate | #31/#33 live co-owners in [ledger](handoffs.md) |
-| Confirm deployment/monitoring handoffs and pricing aggregation/unit policy | #37/#38/#39 @PUSHINGSQUARES |
+| Engine research inputs for #37/#38 are confirmed within the recorded constraints; other T2 handoffs, selected-service evidence and pricing aggregation/unit policy remain separate | #37/#38/#39 @PUSHINGSQUARES |
 | Read current Project fields with authorized access before any status update; do not replay historical instructions | @Mattycodes69 / organization Project administrator |
 
-Use `Refs #8, #9, #10, #11`. Close no scoped issue until its merged record and full acceptance criteria—including actual owner confirmations—are satisfied; close #8 only after all children and the merged summary meet their gates.
+Use `Refs` for partial contributions. The final #11 assessment supports its research closure after independent review and ordinary merge; preserve the other issues' unmet criteria and report Project access limits. Close #8 only after all children and the merged summary meet their own gates.
 
 
 2026-10-18 supplement: A100 80GB shared-variant facts, RTX 4090 reference-design facts, the P4de default profile and S3 Standard identity are documented in the existing GPU/hosting records. S3 Standard and the subsequent RTX 4090 precision follow-up have catalog proposals. A100/P4de remain note-only because unresolved precision coverage is unsafe under frozen-v1 membership rules. No rates or measured results are added.
