@@ -2,7 +2,50 @@
 
 Research date: 2026-10-16. Branch: `codex/mr09-feasibility-validation`. Base: PR #67 commit `075653aa4c0682c976ea9486d7d549d667118530`. Validation belongs to this submission; earlier #67/#75 results are historical inputs only.
 
-## Environment and commands
+## Estimator comparison validation — 2026-10-18
+
+Branch `codex/issue61-estimator-comparisons`, base main
+`b9694364b6f0a3d1e9c6b37189cc007778fc54bc`. This dated addendum covers the new
+estimator runner, six llmfit outputs, ModelFit output, browser observation,
+12 component pairs and updated decision notes. It does not incorporate the
+separate pending #251 GPU evidence. Historical validation below remains dated.
+
+Used bundled Python **3.12.14**, Node **v25.9.0**, and the pinned external binary,
+engine and metadata identities recorded in the comparison ledger. Ran the
+workflow dependency installation with `-r requirements-research.txt --target
+$TASK_VALIDATION_DEPS`; set PYTHONPATH to that existing isolated dependency
+directory. Existing-target warnings did not replace or change installed packages.
+
+| Command / check | Result |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt --target $TASK_VALIDATION_DEPS` | Passed |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
+| `python -m unittest discover -s tests -v` | 226 passed, including eight new comparison eligibility/integrity tests |
+| `python scripts/validate_research.py` | 74 catalog proposals, 3 pricebooks and external evidence metadata passed |
+| `python scripts/validate_market_research.py` | 33 entities, 1,584 cells and 20 issues passed |
+| `python scripts/validate_handoff_audit.py` | 101 rows / 98 declared pairs passed; ledgers unchanged |
+| `python prompts/mobile/validate_prompts.py` | 2 Projects, 258 issues, 36 epic prompts, 906 criteria and 880 steps passed |
+| `git diff --check` | Passed |
+
+New offline tests check GiB conversion only for the named KV field, context and
+geometry/revision rejection, active2/Quanto exclusions, positive denominators,
+nonzero-error arithmetic, existing-output preservation and recomputation of all
+12 committed component pairs with source/result hashes. Synthetic mutations stay
+in tests and produce no research observations. Tests do not execute an estimator,
+download an artifact or use a GPU. Actual estimator execution is recorded
+separately with its command/code/output pins.
+
+Quality review checked local note targets, retained source attribution and
+separated native storage-width agreement from a whole-runtime prediction.
+No GPU counters, original runtime source/protocol/summary, contract or shared
+handoff ledger changed. Task-owned external artifacts were removed with a
+checked cleanup receipt. Record-shape/hash checks do not certify source rights,
+physical measurements, artifact/runtime equivalence, fresh deployment identity,
+fit accuracy or human acceptance. #61 co-owners/coordinator and #7/#10/#11
+receivers must review those matters; whole-runtime pairs remain zero and no
+decision tolerance or issue completion is claimed.
+
+## Historical environment and commands — 2026-10-16
 
 Windows / PowerShell, from the `Pick-Your-AI/pick-your-ai-research` repository root (`$REPO` in sanitized execution records). Repository `.venv\Scripts\python.exe` is **Python 3.12.14**, isolated from the default Python 3.14.3. Prepend `.venv\Scripts` to PATH in the current shell so the exact required `python` commands select 3.12.14. Dependencies were already installed at the pinned versions; the installation command was nevertheless run for this submission.
 

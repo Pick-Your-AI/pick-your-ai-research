@@ -1,6 +1,6 @@
 # MR-09: Validate GPU sizing against pinned runtime measurements
 
-Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
+Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-18. Live Project fields are authoritative; this note does not change them.
 
 ## Question
 Where do planning estimates fail under real runtime conditions?
@@ -18,14 +18,16 @@ device, reservation, download or cost authorization. Sources inspected on 2026-1
 [Zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
 and the committed protocols/results at main
 `ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999`. No hardware probe, inference,
-weights download, paid compute or new device authorization was performed here.
+weights download, paid compute or new device authorization was performed for that
+hardware checklist. The separate estimator continuation below records later
+read-only tool execution/discovery; it launches no GPU inference.
 
 | Gate | Available evidence | Exact remaining action / accountable owner |
 | --- | --- | --- |
 | Dense observations | D1–D5: five configurations, three fresh-process runs each; separate allocated/reserved counters | #61 co-owners and coordinator review the bounded observations and provenance caveats |
 | MoE variations | Pinned OLMoE matrix and separate Granite profiles; no recorded MoE execution | @Mattycodes69/@appletechie identify an authorized envelope and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
 | Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
-| Comparable estimator errors | Zero matching competitor/runtime pairs | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
+| Comparable estimator errors | Zero whole-runtime pairs; 12 bounded native KV component checks in the dated comparison | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
 | Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
 | ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
 
@@ -227,7 +229,29 @@ number is a guarantee of future allocation success. No other process is
 evicted or altered. Per-phase CUDA-reported free values are observations, not
 additional headroom or demanded KV memory.
 
-## Comparison target and error discipline
+## Executed estimator comparisons — 2026-10-18
+
+The [dated comparison record](measurements/mr09-estimator-comparison-2026-10-18.md)
+adds six actual llmfit v1.1.17 plans, one pinned ModelFit CLI engine audit and a
+current Local AI Planner control inspection. Its [hashed output/pair ledger](measurements/estimator-comparison-2026-10-18/comparison.json)
+checks **12 native two-byte KV component pairs** from D1/D2 prefill/terminal
+snapshots: all signed/absolute/relative differences are zero. These are four
+deterministic estimates paired to six existing processes, two snapshots each;
+they establish storage arithmetic agreement only. FP16 estimates and BF16 tensors
+share a two-byte storage width; their numerical/runtime behavior is not equated.
+Only llmfit's KV field is converted from GiB, as established by its pinned code.
+
+**Whole-runtime/peak-allocated pairs remain zero**, with no numerical total-memory
+error range or accepted tolerance. llmfit's hardware requirement is a different
+quantity; ModelFit has no exact 135M match or workload/runtime arguments; the
+planner's visible context/runtime choices cannot express these runs. Two q4_0
+plans are retained as mismatches with Quanto INT4, with no invented error.
+D3 active2, D4/D5 cache layout, MoE and multi-GPU comparisons remain open. No new
+GPU run, weights download, ResourceEstimate or scope waiver is supplied here.
+[PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) is separate
+pending MoE evidence and is not included in this main-based comparison.
+
+## Historical comparison target and error discipline — 2026-10-16
 
 The existing PR #75 sizing arithmetic at
 `9e66622a4b2698a9305274f05da9c15ae5d90b8c` remains a Qwen-specific,

@@ -1,0 +1,32 @@
+{
+  "classification": "dated interactive browser control inspection; no matching planner estimate executed",
+  "observed_utc": "2026-10-18T05:57:48.319605+00:00",
+  "publisher": "Logarithmic Spirals",
+  "page_url": "https://logarithmicspirals.com/tools/local-ai-vram-calculator-gpu-planner/",
+  "method": "Opened deployed page in browser; expanded Advanced Options and Custom Model Data; read native selection controls",
+  "runtime_options": [
+    "GGUF / llama.cpp",
+    "MLX"
+  ],
+  "context_token_options": [
+    4096,
+    8192,
+    16384,
+    32768,
+    65536,
+    131072,
+    262144
+  ],
+  "model_quantization_full_precision_option": "F16",
+  "native_kv_option": "F16",
+  "custom_model_input": "Public Hugging Face model URL or repo ID; no pinned model added in this inspection",
+  "whole_runtime_disposition": "missing_inputs: no visible Transformers runtime, context256/288/2048/2080 or active-sequence input in inspected controls",
+  "numeric_error": null,
+  "fresh_bundle_hash": null,
+  "limits": [
+    "Direct HTTP page and historical asset URL returned 403; browser page was accessible without authentication or challenge solving",
+    "No deployed bundle bytes or historical asset hash reverified in this pass",
+    "No hidden state, DOM manipulation or custom replacement formula used to manufacture unsupported inputs",
+    "This observation describes inspected controls only, not proof that every product interface lacks the inputs"
+  ]
+}
