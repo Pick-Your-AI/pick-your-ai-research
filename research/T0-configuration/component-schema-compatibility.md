@@ -129,6 +129,56 @@ CD-1 to CD-12 are defined in #81 (`deployment-mode.md`, "Open contract decisions
 | --- | --- | --- |
 | CD-13 | Rules over several selections of one kind: a quantifier over all enabled selections, and semantic rejection of duplicate `primary` roles before evaluation, so that "not selected", "not relevant" and "not yet known" are not collapsed into `skipped` (T4 finding 1; CD-1) | #40 |
 
+### CD-13 synthetic selection experiment (2026-10-18)
+
+[The normalized prototype](../../tests/selection_quantifier_prototype.py) and
+[its regression cases](../../tests/test_selection_quantifier.py) make the
+[accepted queue item](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523)
+reviewable without choosing a quantifier wire syntax. The experiment uses only
+synthetic selections and Boolean/unknown predicate facts. It does not resolve
+real catalog evidence, publish executable compatibility rules or release a
+contract version.
+
+The baseline counterexample is reproduced against the unchanged
+[`Evaluator.selected` and `exists` implementation](../../contracts/v1/reference/evaluate.py).
+With one enabled primary tool and no enabled framework, the historical
+`rule.agent.tools.framework` fails. Adding a second enabled primary tool makes
+the selection reference ambiguous, `exists` false and the rule `skipped`.
+That historical rule is used only to expose the selection bug: the experiment
+does not reinstate its framework requirement; W-R3 still permits tool or MCP
+execution without a framework.
+
+The prototype's proposed execution order is:
+
+1. Check selection identities and `(kind, role)` uniqueness across the build
+   before running any rule predicate. This is the identity slice of the frozen
+   [validation protocol](../../contracts/v1/docs/AGENT_PROTOCOL.md#validation-layers--mandatory-in-order),
+   which also requires other schema/reference checks outside this experiment.
+   Duplicate primary roles are therefore a semantic input error, never a
+   `skipped` finding. Other duplicate roles are rejected too; roles are scoped
+   to kind. Disabled selections retain their identities and roles, so disabling
+   a duplicate does not make the ambiguous build valid.
+2. Evaluate every enabled selection of the rule's kind, including non-primary
+   roles. Keep each selection's finding. A known false applicability predicate
+   yields `skipped`; unknown applicability yields `unknown` without evaluating
+   its assertion. A known applicable rule with missing eligible assertion
+   evidence also yields `unknown`.
+3. Summarize the universal check as `fail` when any applicable selection fails,
+   otherwise `unknown` when any selection is unresolved, otherwise `pass` when
+   at least one applicable selection passes. No enabled selection, or an
+   entirely inapplicable scope, is `skipped`; their reason/row details remain
+   distinct. A failed universal check retains other selections' unknown rows.
+   Rule severity stays fixed and separate from every outcome.
+
+The cases also cover a scope with no primary role, mixed kinds, disabled
+selections, a counterexample in each input order, duplicate IDs, a duplicate in
+an unrelated kind, and rejection of non-normalized predicate values. Empty
+scope is not a vacuous compatibility pass; required-component cardinality
+still belongs to the preceding activation layer. These checks establish only
+the proposed mechanics. CD-1 answer states, CD-3 evidence resolution/result
+encoding, CD-13 DSL syntax, affected-owner review and the versioned adapter /
+ruleset remain open; #42's prerequisite is unchanged.
+
 Routing from the reviews:
 
 | Source | Decision | Routed to |
