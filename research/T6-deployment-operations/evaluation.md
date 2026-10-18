@@ -356,6 +356,22 @@ Required fields per displayed number: benchmark name and version; harness or sca
 | B reproducible with caveats | public harness but version-sensitive, judge-dependent, or run on a provider variant; fields present | number with interval, version string and a caveat line; never a gate | MTEB (version), SWE-bench (release), tau2 (v1.0.1, simulator), Terminal-Bench, BFCL, HELM Capabilities (Turbo variants), Epoch, Artificial Analysis, LiveBench (release date) |
 | C indicative only | private data, confidential judge, pre-release testing, retired source, or fields missing | label only ("indicative", "vendor-reported, harness unknown", "retired source"); no ranking, no threshold, no gate | AILuminate official grade, Scale SEAL private sets, LMArena, RTEB private part, Open LLM Leaderboard archive, any vendor-reported score without a harness version (E-R49) |
 
+### Alignment with the adopted #41 evidence policy
+
+The [merged #41 policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels) already adopts the R1–R15 reproducibility tuple from [#115 at `9f403b4`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/9f403b4252ad646fd1f75f73da2ce4fc02bb7991/research/T6-deployment-operations/evaluation.md#benchmark-reproducibility-criteria). That adopted minimum applies to this record's displayed comparisons in addition to the fields above:
+
+| Adopted field | Required detail retained when applying this record |
+|---|---|
+| R1–R3: evaluation, task/data and model identities | Suite version/commit, task configuration and dataset revision/content hash, exact model snapshot |
+| R4–R6: runtime, inference and hosting | Provider route or engine **and version**; precision/quantization, **context limit**, chat template; hardware device/count or relevant API region |
+| R7–R9: prompt, sampling and load | Prompt/few-shot format and harness version, temperature/seed/run count, concurrency **and arrival process** |
+| R10–R12: metric, measurement and uncertainty | Exact metric/aggregation/percentile; budgets/timeouts/turn limits/**cache state**; standard error or interval **with its dependence model** |
+| R13–R15: date, source and limitations | Actual **measurement date**, not only access/publication date; primary URL **and claim-level evidence grade**; contamination status, judge identity and excluded items |
+
+For a one-factor comparison, exactly one independent experimental control may differ. Count precision/quantization, context limit and chat template separately rather than treating their bundled R5 field as one control. Source identity, measurement date and uncertainty are evidence metadata, not additional experimental factors. A known incomplete protocol or known multiple-control change presented as comparable is `fail` with an explanatory reason; use `unknown` only where the necessary evidence cannot be determined. This applies the existing #41 policy and does not create a new executable rule or infer a benchmark result.
+
+Tiers A–C and their boundaries remain this record's E-H12 proposal; they do not replace the adopted tuple or grant reuse rights. Apply [#60's source-by-use decisions](../market/rights-validation.md) separately before displaying any score. In particular, a tier B example involving Artificial Analysis is a methodological classification, not permission to use its data in this product. Keep unavailable fields unknown; do not synthesize missing run metadata.
+
 Run-to-run determinism of hosted APIs at temperature 0 (seed, fingerprint, batch-dependent nondeterminism) was not researched in this pass and is an open question; until it is, tier A for API-mode numbers means "re-run within the reported interval", not bit-identical.
 
 ## Deployment gates handed to #37
@@ -737,7 +753,7 @@ None in this pull request. An `evaluation_suite` catalog item needs `metric_name
 |---|---|---|
 | #37 Deployment | gates G1 to G12 with evidence and hypothesis marks; rollout gates flagged as a scope question | pending |
 | #38 Monitoring | EV-26 online scoring; span-drop rules (E-R18); exporter protocol rule (E-R17); retention rule (E-R19); OTel GenAI conventions in Development status | pending |
-| #41 Evidence grades | reproducibility fields and tiers A, B, C; number labels published or estimated; sizing rule E-H5 | pending |
+| #41 Evidence grades | R1–R15 minimum and one-factor semantics already adopted in the merged #41 policy; this record retains them above. Tiers A, B, C and sizing rule E-H5 remain additional proposals; claim-level grades still need review | adopted minimum recorded; additional tier/sizing and claim-level dispositions pending |
 | #40 Schema | 92 source-checked candidates in the shared format at candidate rule revision 0.2; the type enum and evaluator-placement field | pending |
 | #39 Cost | judge-token and evaluation-service price lines; self-hosted GPU-hour as user-supplied | pending |
 | #35 Guardrails | EV-14 and EV-16 as the measurement side of the control catalog; E-R74 cross-references the sandboxed-code-execution control; E-H1 depends on #35 data-boundary rules | pending |
