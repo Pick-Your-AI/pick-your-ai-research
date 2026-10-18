@@ -2193,3 +2193,736 @@ This routing synthesis comes from the merged T5 README and component notes, insp
 | A-13 deployment lifecycle; A-20 evaluation gate | Lifecycle to #37; gate to #36, with references in the shared rule record | #36/#37 dispositions remain separate from #40 schema routing |
 
 No T5 candidate is promoted into the executable baseline by this inventory. Field and fixture implementation remains a next-version proposal requiring affected-owner review.
+
+## Current research decision and receiving packet — 2026-10-18
+
+**Status: prepared for current-source and directional receiving review.** This
+continuation uses accepted main [cae31f324f827cdeb73548b72cafd392dd777dfa](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/cae31f324f827cdeb73548b72cafd392dd777dfa).
+The preceding record is retained in full. Its earlier "open", "proposed",
+"reserved" and execution statements describe their own checkpoints; the dated
+dispositions below identify what has since been received or delivered. This
+packet itself supplies no response on behalf of a consumer.
+
+The research choice remains option B: retain the adopted frozen v1 interchange
+and historical evaluation, and develop explicitly versioned successor proposals
+with typed inputs, scoped evidence and an explicit migration. The issue asks
+for the representation, rule and recomputation **research decision**. Its
+literal scope excludes UI design and rule-engine implementation. A completed
+research example need not execute a production model, service or native client;
+a genuinely unresolved field, policy or receiving decision still needs its
+stated review. The [adoption record](../../contracts/v1/ADOPTION.md), current
+[research workflow](../../docs/RESEARCH_WORKFLOW.md) and
+[rule proposal template](../../templates/rule-proposal.md) remain the governing
+boundaries.
+
+### Minimum comparison fields: exact current mapping
+
+This table addresses all twelve minimum comparison fields in the
+[original #40 issue](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40).
+It refines the conceptual names against the actual imported
+[CatalogItem](../../contracts/v1/schemas/catalog-item.schema.json),
+[common definitions](../../contracts/v1/schemas/common.schema.json),
+[Ruleset](../../contracts/v1/schemas/ruleset.schema.json),
+[CatalogSnapshot](../../contracts/v1/schemas/catalog-snapshot.schema.json) and
+[EvaluationReport](../../contracts/v1/schemas/evaluation-report.schema.json)
+inspected at the accepted revision above on 2026-10-18. The larger component
+dictionary remains a registry of proposed category fields with its own
+per-field source requirements.
+
+| Issue comparison field | Type, location and unit | Evidence and missing-value treatment |
+| --- | --- | --- |
+| entity_id | CatalogItem.id is the common canonical identifier string with the declared 3–120-character grammar. Receiving profiles separately enforce full-string identity. It is an identity, with no physical unit. Selection identity and selected catalog identity are separate. | Resolve the exact selected item/version in the declared snapshot. A matching name or ID alone supplies no capability, source permission or version match. |
+| category | CatalogItem.kind is one of the canonical registry's string values; tier is the separate tier field. Neither is a numeric quantity. | Use the [component registry](../../contracts/v1/schemas/component-registry.json) and the kind-specific schema. A product name or provider name cannot choose a different kind or infer deployment mode. |
+| version / snapshot | CatalogItem.version is a nonempty string, not a required SemVer. CatalogSnapshot has a canonical ID and integer revision ≥ 1. Build selections retain catalog_item_id and catalog_item_version; CD-7 separately proposes exact revision/digest pins. No physical unit. | Keep publisher release/commit/alias identity and snapshot capture distinct. Current one-version-per-ID intake stays in force. A missing exact revision is unresolved, never a request to select the newest artifact. |
+| lifecycle status | CatalogItem.status is active, preview, deprecated or retired; a categorical value without a physical unit. | Retain source/date and exact item/offering/version coverage. Deprecation, availability and support are separate predicates. Omission from an incomplete snapshot cannot establish retirement; source use remains a separate #41/#60 decision. |
+| valid_from / valid_to | These are conceptual temporal coverage bounds, not fields currently present on every CatalogItem. Existing snapshot captured_at, item updated_at and provenance checked_at are timestamp strings with different meanings. Price rates separately use valid_from and optional valid_until. | Do not turn observation/publication dates into effective validity bounds. Retain a publisher's stated interval where the applicable record supports it; an unestablished bound stays unestablished. Version-pinned facts do not gain a TTL, and current-state facts retain their dated scope under #41. A general claim-window encoding remains an explicit CD-7/#41 follow-up. |
+| source refs (see #41) | CatalogItem.provenance is a nonempty array of records containing checked_at and verification_status, with source_uri and notes supported by the common definition. Submission policy separately requires a public HTTP(S) source URI for new catalog/price provenance. References and grade labels have no physical unit; dates retain their timestamp meaning. | Preserve primary URL, access date, version and relevant conditions. The frozen schema alone does not require or authenticate every source URI. Rule proposals carry claim-level sources in the note; frozen rule objects have no universal per-rule provenance field. The CD-3 carrier records dated scoped sources and caller qualification without performing that review. |
+| rule_id | Each Ruleset.rules entry has a common canonical identifier string. No physical unit. | An ID identifies a rule within its exact ruleset version. Keep historical identity and source definition; do not interpret a later same-named rule as the historical one. |
+| rule participants | Frozen expression operands identify build/catalog/selection scope and a pointer, with kind, role or selection_id where applicable. affected_kinds is a nonempty unique kind list for affected scope; it is not a complete relationship join. These are identities and paths, without physical units. | Record participating selections, roles, fields and relationships explicitly in the research template. Identity/role ambiguity rejects in the applicable preflight; missing eligible operands stay unknown. CD-6/CD-13 retain broader relationship and multi-kind binding decisions. |
+| severity | One fixed enum value: info, warning or error. No physical unit. | Severity comes from the reviewed versioned rule, independently of pass/fail/unknown/skipped and any evidence label. A different required severity calls for a distinct rule or versioned decision. |
+| explanation | Frozen rule message and remediation are nonempty strings; report findings retain their rule outcome and any supplied evidence context. Text has no physical unit. | Explain the actual known violation, unresolved input, inapplicability or rejection. CD-1 typed reasons preserve missing, unknown, withheld and not-applicable causes; a generic Boolean adapter cannot claim that richer output. |
+| suggested correction | Frozen rule remediation and the research template's correction are text, without a physical unit. | Offer a changed selection, evidence request or explicit policy choice with its prerequisites. A suggested replacement is not a silent selection edit, a new entitlement or proof of compatibility. |
+| rule version | Ruleset.version uses the imported SemVer-shaped string. Individual frozen rules have no version field; the research decision versions the ruleset and its changelog. A prototype's own proposal/rule version identifies that selected experiment only. No physical unit. | Build locks pin ruleset ID/version, and retained replay also binds content/evaluator identities. A rule change does not rewrite earlier findings. A successor result or migration must state its exact version; unsupported dispatch remains explicit. |
+
+The source/grade rules above use the actual
+[#75 interim-policy adoption](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)
+and the current [#41 record](catalog-data-sources.md). That dated review's
+historical sizing suggestions are not current headroom defaults: current
+[compute research](../T2-infrastructure/gpu-compute.md) and the accepted
+[context/KV interface](../T1-model-selection/context-window.md#current-kv-cache-handoff-to-10)
+require explicit reserve and matching expansion/allocation/residency. This
+continuation adds no price, measured value, vendor capability or source-access
+claim.
+
+### Current semantics and finite contract follow-ups
+
+The [12:20 owner disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6249840407)
+separates accepted normalized mechanics from field, wire, ruleset and migration
+adoption. The [16:00 ledger](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252011763)
+also distinguishes owner-checked constraints from delivered source awaiting
+that owner's reread. Both distinctions are retained here. "Delivered" below
+describes the contribution; it does not manufacture an owner "Closed" decision.
+
+| Decision | Current research content and actual disposition | Finite remaining decision / accountable issue |
+| --- | --- | --- |
+| CD-1 answer states | Five distinct states, exact pointer/source causes, safe typed negation and state-specific terminal reasons are recorded. Known-value schema admission, withheld-parent visibility and the explicit 0.2 preset-attribution candidate are delivered. An unresolved value never acquires a default or evidence grade. | #40 selects the successor field/reader/result representation with #2/#3/#42; preserve explicit opt-in versions and actual assumption/source attribution. Existing 0.1 callers are not silently upgraded. |
+| CD-2 memory placement | Per-rank and per-pool accounting, device instances, co-residency and placement remain the declared design scope. [6251561799](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251561799) reserves the normalized physical-pool proposal. | The canonical #40 writer and #10 complete and review that exact candidate. No competing implementation, pooled nominal VRAM, inherited headroom default or measured residency is supplied here. |
+| CD-3 evidence and support | Requested completeness, explicit/exhaustive negatives, unmarked omission, disputes and qualified checked-only labels have concrete mechanics. [#372](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/372) delivered the source/date carrier and the two actual frozen-rule gates at signed 3085e1f7; the [C3](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252536259) and [C4](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6252523637) receipts retain actual source/test identities. | #41 with #40/#10/#62 owns actual source/rank/protocol qualification and comparable result evidence; #40 owns successor binding/adoption. The two explicit APIs remain separate: joint delivery did not wire them together or establish per-member source attribution. |
+| CD-4 isolation | The typed endpoint, runtime-connection and exact-artifact inventory candidate makes W-R8's scoped known failure, unknown coverage and known non-applicability reviewable. | #40 with #2/#3/#9/#37 reviews the representation and actual boundary/evidence integration. Provider operation or a network label cannot prove physical isolation. |
+| CD-5 stage workload | The workload note's explicit stage inputs separate requests, units, input/output applicability and readiness; its later corrections retain strict numeric/identity admission. Current context research separately receives complete input and sequence/allocation distinctions. | #40 with #10/#7/#39 owns exact successor stage/association fields and any aggregation rule. Means/maxima are not uncertainty intervals; stage peaks and retries are not an inferred simultaneous workload. |
+| CD-6 relationships | Explicit credential-source selection has a bounded exact-byte candidate. Model/base/adapter, mount/fetch, provider, hardware and licence-condition relationships retain the wider documented scope. | #40 with #6/#11/#13/#30/#33/#35 decides the complete relationship/role and inheritance representation. Catalog/reference presence does not establish effective authorization, lineage, export rights or the actual serving tuple. |
+| CD-7 versioning and migration | M1–M5 research semantics were accepted in [#126 review5560506323](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323); [5560765303](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560765303) resolved the earlier legacy-mode inference objection. Exact pins, bounded native interchange, historical replay and unresolved-record diagnostics now have separate delivered proposals. | #40/#42 with #41/#39 still decide successor dispatch, full M1–M5 migration and historical/current views. The separate [constraint-5 reservation6253669705](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6253669705) / [#383](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/383) owns configuration-only projection and report-association work; its current-source review and delivery remain with that writer. |
+| CD-8 community evidence | Independence and qualification remain distinct from a source label, reporter identity or repeated observation. Existing #41 policy and dated evidence boundaries govern the research. | #41 defines reporter/execution independence, admitted comparison protocols and any policy allowing community evidence to decide a verdict, with #10/#36/#62. No numerical promotion threshold is invented. |
+| CD-9 jurisdiction | The #41 hierarchy and exact provider-region mapping candidate preserves source, scheme/version and scoped containment; unresolved or ambiguous mapping stays unknown. | #41 with #9/#40 decides current qualified mappings and successor bindings. A region name, geographic hierarchy or valid mapping input is not residence, legal applicability or actual data-location evidence. |
+| CD-10 non-model runtimes | The deployment matrix explicitly leaves non-model service requirements separate from model-engine CPU/ISA predicates. | #40 with #11/#15 defines source-backed requirements for the selected non-model service/operation. A vector database or other service does not inherit an inference-engine requirement from its kind alone. |
+| CD-11 context | Shared versus separate input/output semantics, native fallback and exact route/tokenizer/settings binding have research examples and a typed candidate. Accepted #378 supplies the current complete-request, KV and cost receiving record. | #40 with #7 retains exact source/field normalization and successor adoption; #10 owns matching cache geometry, admission/residency and actual resource evidence. Context fit does not establish KV capacity. |
+| CD-12 organisation attestations | The dictionary names jurisdiction, EU-market placement, lawful-basis, revenue and monthly-active-user questions, with sensitive provenance and condition scope; it does not settle the full type/aggregation/wire representation. | #40 with #30/#31/#32 decides exact condition/subject/period reuse and types. #42 preserves non-transfer on sharing/forking. A technical representation does not supply a legal assessment or another organisation's answer. |
+| CD-13 selection and required presence | Universal all-enabled findings, required-presence pass/fail/unknown and typed identity rejections retain different meanings. The actual 16:00 owner ledger accepts the explicitly stated strict build-wide role policy for this prototype. The optional disabled-role experiment is [parked and released](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251969365). | #40 retains strict identity behavior and its explicit result profile. Earlier paragraphs that call the disabled-role option reserved/open are historical; no policy rewrite is required for that accepted choice. Real per-component applicability, multi-kind rules, CD-1/CD-6 integration and final result-wire adoption remain separate. |
+
+The generic research rule format is already usable for a proposed source,
+rights or freshness predicate: state participants and pointers, applicability,
+one assertion and its evidence, one fixed severity, missing-data policy,
+explanation/remediation, dependencies, all outcome examples and version impact.
+Its review is distinct from executing a source adapter or adopting an expression
+language. A successful identity or shape check establishes that bounded check;
+compatibility, evidence eligibility and permission retain their own predicates.
+
+### Directional receiving packets
+
+The original issue declares information inputs from #2/#3, bidirectional
+compatibility with #6/#10/#11, and the ten downstream consumers below. The
+directions must remain visible. The
+[#75 #2/#3 and T2-C01–C06 disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)
+and [#126 T1/#40 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126#pullrequestreview-5560506323)
+already receive their specified inputs and examples; a component's later
+source revision still retains its own scope. The
+[#14-to-#40 receipt6253659087](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14#issuecomment-6253659087)
+and [#62-to-#40 receipt6253421648](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6253421648)
+are incoming decisions, not approval of the reverse direction.
+
+Each row supplies the current #40 input to assess against the linked consumer
+record. These links identify the receiving source; they do not claim that this
+author completed every consumer's source audit. A current receiving decision
+must identify its actual producer and consumer revision, accept/narrow/reject
+the concrete input and retain any required change. The project's delegated
+technical reviewers may make those decisions under the user's authorization,
+with their real attribution; an absent co-assignee's personal response is never
+invented. No row below is marked accepted before that review.
+
+| Packet / direction | Concrete #40 research input | Receiving question and retained boundary |
+| --- | --- | --- |
+| H40-42 / #40 → [#42 saved/shared builds](saved-shared-builds.md) | Five answer states and preset attribution; exact selection/item/version and original-byte pins; rule/report identity; separate historical replay and current evaluation; explicit successor migration and projection profiles. | Receive the documented immutable-history, unknown/withheld and exact-association semantics. Identify any remaining SB-1–SB-8/SB-10 type or policy decision needed by the research build record. The configuration-only #383 candidate is not the complete historical/current share view; retention/share access and organisation-attestation non-transfer remain #42 decisions. Its substantive #40 prerequisite stays until the actual contract decision is reviewed. |
+| H40-39 / #40 → [#39 cost estimate](../T6-deployment-operations/cost-estimate.md) | Exact item/version/operation, separately qualified stage quantity/unit, currency/time/rate conditions, explicit assumptions, Pricebook/revision association, fixed severity and reasoned unresolved coverage. | Receive those identity/quantity/outcome interfaces without converting an absent quantity or price into zero. #39 decides meters, default preview versus explicit budget currency, regional eligibility, FX, rounding and aggregation; #41 separately qualifies source/date/use. Preserve unpriced lines, one-off versus operating scopes and dated historical quotes. |
+| H40-5 / #40 → [#5 model provider](../T1-model-selection/model-provider.md) | Stable publisher/operator/offering and item/version identities; per-component operator/capacity mode; source/scope and structured support predicates; field/rule contribution format. | Confirm the shared base and research rule format can carry the provider's actual route/account/service distinctions. A provider ID, billing class, listed model or available API supplies no unrecorded account entitlement, mode or cross-route capability. Richer route/wire fields remain explicit proposals. |
+| H40-6 / #40 → [#6 AI model](../T1-model-selection/ai-model.md) | Exact model/artifact/version and offering scope; support completeness and conflicting evidence; separate applicability and fixed severity; references for base, weights, tokenizer and licence conditions. | Receive the model-facing research representation and the accepted worked examples. Keep positive scoped evidence, explicit negatives and unmarked omissions distinct. Exact serving tuple, weight-access/licence and derivative obligations remain separately qualified, with CD-6's unresolved lineage representation explicit. |
+| H40-7 / #40 → [#7 context window](../T1-model-selection/context-window.md) | Typed answer causes, complete-request input versus output reservation, shared/separate limits, exact route/tokenizer/settings binding and the CD-5/CD-11 candidate boundaries. | Receive those research inputs against the accepted #378 assembly/KV/cost record. Preserve native fallback, known counterexamples alongside unknowns, separate request/sequence/uncertainty meanings and complete-request recount. No generic token ratio or context pass establishes KV, quality or billing. |
+| H40-10 / #40 → [#10 GPU/compute](../T2-infrastructure/gpu-compute.md) | Per-rank/per-pool memory family, eligible conservative bounds, original assumptions/source identity, component applicability, CD-2 placement and CD-5 stage inputs. | Receive the representation and unknown/failure rules with actual allocation/residency, units and reserve kept explicit. Accepting research mechanics adds no pooled capacity, universal headroom, calibrated estimate or new empirical requirement to completed #10 research. Review the canonical CD-2 candidate in its own source turn. |
+| H40-11 / #40 → [#11 inference engine](../T2-infrastructure/inference-engine.md) | Joint support tuple, requested versus publisher completeness, explicitly negative/exhaustive evidence, exact selection and artifact references, reasoned missing operands and the two named support-rule experiments. | Receive the source-scoped membership/rule interfaces. Preserve engine/build/backend/kernel, model/tokenizer/template/quantization/adapter and request conditions; no Cartesian capability inference. The retained frozen evaluator and explicit experiments have different dispatch, and documentation does not certify a running tuple. |
+| H40-14 / #40 → [#14 embedding model](../T3-knowledge-retrieval/embedding-model.md) | Typed scoped catalog and selection identities, conservative eligible limits, exact request/operation references, universal versus required-presence modes and shared proposal/result semantics. | Receive the common representation while the active embedding writer retains query/document profile and index-generation proposals. Equal vector width cannot supply model/profile/normalization compatibility or source permission. The actual EMB→#40 receipt stays distinct from this reverse review. |
+| H40-15 / #40 → [#15 vector database](../T3-knowledge-retrieval/vector-database.md) | Exact selection/reference identity, scoped source facts, fixed outcome/severity/unknown policy, relationship/path proposal routing and the explicit CD-10 non-model-runtime boundary. | Receive the base/rule format for the actual selected collection/index/operation and required-versus-optional path. Backend capacity, query/document representation, metric/order, authorization and erasure claims need their own evidence. Preserve the active vector-note writer and any genuinely missing CD-6/CD-10 path field. |
+| H40-33 / #40 → [#33 fine-tuned model](../T5-training-fine-tuning/fine-tuned-model.md) | Versioned artifact identity, base/adapter/merged distinction, source and inherited-condition references, all-enabled/required-presence outcomes and explicit lineage/migration proposals. | Receive the research representation with exact base/tokenizer/template and exported-artifact identity. A link, format, merge operation or model-family label grants no rights or serving/evaluation pass. #33/#11/#30/#32/#36 keep actual lineage, obligations, support and evaluation decisions; optional T5 remains optional. |
+
+The CD-5 [#7](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6249961699),
+[#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6249962343)
+and [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6249963035)
+delivery comments are review inputs, not substituted consumer approvals. The
+actual [#7 → #10 KV receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6253262636)
+and [#7 → #39 cost receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6253295884)
+retain their own direction and revised source. Likewise, #383's projection
+review, bounded native interchange acceptance and historical replay receipts
+do not by themselves complete H40-42. The canonical market handoff ledger and
+its active writer remain separate; this appendix does not create, rewrite or
+count a market receipt.
+
+### Literal #40 research acceptance map
+
+All twelve criterion texts below are retained from the live issue. This is a
+current evidence/remaining-action map for review, not an automatic checklist or
+closure instruction.
+
+| Original criterion | Current research evidence and remaining action |
+| --- | --- |
+| Schema document with field types and examples | Frozen base mapping, consolidated component dictionary, exact minimum-field table and versioned typed examples above. The selected research representation and finite unresolved field choices need the current packet's independent/receiving assessment; production implementation is outside this criterion. |
+| Worked rule examples spanning T1/T2 (model ↔ engine format, model ↔ GPU memory, context ↔ KV cache) including `unknown` handling | Seven examples explicitly accepted from the T1/#40 scope in review5560506323, with the migration objection resolved in5560765303. Typed context and actual frozen support-rule experiments add separately attributed examples. Context versus KV evidence stays separate. |
+| Documented approach to cycles and recomputation | The existing pure-rule and dependency-trigger method states how selection, link, catalog, evidence, policy and ruleset changes invalidate a view without modifying selections. A dependency cycle does not require an execution cycle. |
+| Rule and catalog versioning approach | Exact ruleset/catalog identities, ruleset-level versioning, retained original readers/findings and additive/replacement migration plan with M1–M5. CD-7 successor dispatch and the wider release have their own concrete decisions; no latest fallback is introduced. |
+| Contribution format that component issues can follow | Existing shared rule template and contribution section specify participants, fields, applicability/assertion/source, fixed severity, unknown policy, correction, dependencies, outcome examples and version impact. |
+| Decision record merged at `research/T0-configuration/component-schema-compatibility.md` following the research method | The original reviewed record and subsequent contributions are delivered at this path. This current appendix still needs its ordinary independent review and protected delivery. Prior partial merges remain partial receipts. |
+| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | The retained alternatives and #81 component-mode classification cover provider/shared, provider/dedicated or reserved and customer-operated cases, with hybrid/unknown derivation and remote/local predicate applicability explicit. |
+| Comparison fields defined with type, unit, and evidence requirement | The minimum-field table above covers all twelve original base/rule fields, including temporal and non-quantity meanings and absent frozen fields; companion dictionaries retain category-specific evidence requirements. |
+| Rule format, severities, and `unknown` handling documented with examples | Existing fixed severity versus outcome, typed answer reasons, required versus optional scope, explicit completeness/conflicts and checked-only label mechanics. Current strict-role acceptance is reconciled without changing behavior. |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | The prior claim-source audit and dated companion ledgers remain attributed; this appendix uses exact contract/project sources inspected on 2026-10-18 and adds no vendor measurement or new price. Actual test/measurement/source-read records keep their original revisions and limits. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Existing incoming and narrowly scoped receipts are identified above. H40-42/39/5/6/7/10/11/14/15/33 require their actual current directional decisions before this criterion can be accepted. No request, same-author integration or reverse receipt substitutes for them. |
+| Open questions recorded with a named follow-up owner | The finite CD table and owner map below identify each remaining field/policy/evidence/release decision. The independent assessment must retain any genuinely unresolved research choice rather than treating every future implementation task as an extra acceptance criterion. |
+
+### Follow-up ownership and review boundary
+
+Live issue readback on 2026-10-18 preserves **@tynamite / @zwright8 for #40**,
+**@tynamite / @PUSHINGSQUARES for #41**, and **@tynamite / @appletechie for #42**.
+The in-session coordinating engineer performs the delegated technical review
+with that role stated explicitly; this does not rename an assignee or invent a
+personal response.
+
+- **#40, @tynamite / @zwright8:** select the remaining CD-1/CD-6/CD-10/CD-12
+  research representations, reconcile the exact versioned candidates and the
+  reciprocal #6/#10/#11 inputs, and assess this twelve-criterion record. The
+  canonical CD-2 source owner and #383 projection owner keep their active work.
+- **#41, @tynamite / @PUSHINGSQUARES:** source eligibility, date/scope/conflict
+  qualification, community independence and jurisdiction/source-use policy;
+  consult the actual affected component issue for the claim. #39 retains
+  pricing-unit, currency/region, temporal eligibility and aggregation decisions.
+- **#42, @tynamite / @appletechie, with #40:** saved/share record choices,
+  non-transferable attestations, explicit fork/projection and migration,
+  historical/current views and retention. A complete research disposition can
+  leave implementation in its owning scope; an unresolved required record
+  choice must be named before removing the substantive prerequisite.
+
+Final review must identify the exact amended source and each actual receiving
+decision, preserve historical outcomes and source rights, and follow the normal
+current-source validation and issue-closure checks. No version release, native
+activation, publisher permission, measured fit or future test result follows
+from the status wording in this appendix.
+
+## Selected research representations for CD-1, CD-6, CD-10 and CD-12 — 2026-10-18
+
+**Decision for independent and receiving review:** select the four representations
+below as the research design, rather than leave their types and relationships
+undecided. This continuation uses current accepted
+[a219392b64f82849b00f7da373b13661518354c4](https://github.com/Pick-Your-AI/pick-your-ai-research/tree/a219392b64f82849b00f7da373b13661518354c4);
+the answer/credential candidates, workload/deployment dictionaries, model,
+vector-service and frozen-contract inputs cited here are unchanged from the
+preceding packet's accepted source. They were inspected on 2026-10-18. This is
+a project representation choice, with synthetic examples, and adds no vendor
+fact, legal conclusion, measurement or grant.
+
+The local assessment checkpoint `93ada1ee012c6a55bc889f0c0311bf1d90acf116`
+remains retained. For these four choices, this section supplies the specific
+decision that its earlier remaining-action rows requested. Current independent
+review and actual affected receiving decisions are still required. Research
+acceptance records these selected semantics; a future contract/ruleset release
+separately assigns and validates successor JSON locations and readers. Existing
+v1 fields, readers, bytes and historical findings keep their exact meaning.
+CD-2 placement remains with its canonical writer. The separately reviewed
+[#383](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/383) is now delivered
+at the accepted revision above: its configuration-only share/fork profile and
+retained-report association diagnostics keep their actual source/review/test
+receipts. The earlier packet's active-reservation wording describes its prior
+checkpoint. Delivery does not adopt a full migration or shared historical/current
+view, and this continuation does not change that code or claim a new execution.
+
+### Alternatives and selected design
+
+| Decision | Alternatives considered | Selected research representation and reason |
+| --- | --- | --- |
+| CD-1 | Nullable/sentinel domain values; a wrapper on every nested domain field; a separate pointer-indexed answer map | Use the explicit `cd1-0.2` indexed five-state and attribution design, with typed predicate/result handling. It preserves literal user data, partial disclosure and original causal paths without rewriting domain objects or inferring an assumption flag. |
+| CD-6 | Infer relationships from catalog names/roles; duplicate bindings inside each deployment object; maintain one explicit directed selection-link graph | Keep one link graph, with explicit semantic role and operation scope in the successor representation. Use exact artifact, inventory and condition identities to qualify links. Graph identity, runtime composition, source support and authorization remain separate checks. |
+| CD-10 | Apply model-engine requirements to every service; rely on a service kind/deployment label; bind requirements to the actual service runtime and operation | Use an exact service-runtime requirement profile. Required platform/feature checks and recommended features have separate fixed-severity rules. A provider-opaque runtime and a customer-supplied runtime have different applicable evidence, without guessing from a product name. |
+| CD-12 | Copy answers into every licence condition; maintain one unscoped organisation cache; retain private typed facts with explicit condition bindings | Use a build-owned attestation registry, reusable only for the same subject, fact definition and temporal/use scope. Condition answers point to those facts and separately qualified grants. Reuse never implies automatic aggregation, consent or transfer to another organisation. |
+
+The logical field names below specify a research schema, not additional members
+accepted by frozen v1. In particular, the existing Build link object rejects
+extra fields, and none of these tables changes that validator. A published
+successor must carry an explicit profile/version and preserve unsupported-reader
+and incomplete-migration states, rather than attempt best-effort v1 parsing.
+
+### Shared identity and value types
+
+| Type | Definition and admission rule |
+| --- | --- |
+| Selection reference | Exact build ID/revision and selection ID; resolve the selected catalog ID/version/kind under the retained snapshot identity. References have no physical unit. A matching display name, another version or the sole available item is not a substitute. |
+| Artifact/source reference | Record namespace, repository or catalog identity, exact revision/version, record path or local evidence ID, and the retained digest when required by CD-7. A digest establishes byte agreement only; #41 still qualifies source scope, date, grade and use. |
+| Operation key | Nonempty canonical identifier owned by the component's documented operation profile, such as a particular query or training/serving operation. An unsupported operation key remains an explicit profile gap; it does not activate a similarly named model rule. |
+| Typed answer | The five CD-1 states over the field's declared type. Only `provided` carries a value; explicit attribution and the field schema remain required. False, zero, empty collections and nullable values retain their declared type and never become missing by truthiness. |
+| Money | The existing common money research shape: a nonnegative base-10 decimal string and explicit currency, without binary-float conversion. Its existing decimal vocabulary allows up to twelve fractional digits. Unsupported precision or a value outside this chosen profile is rejected without rounding/clamping; a different revenue definition requiring another type needs an explicit field profile. No exchange rate or currency default is supplied. |
+| Count | A nonnegative whole count, represented in this research design by a canonical base-10 integer string without a sign, fraction, exponent or redundant leading zero. This prevents loss before validation in an inexact-number parser. It is a proposed attestation encoding, not a rewrite of existing integer fields or a claim that every consumer already reads it. |
+| Calendar window | Explicit start date, exclusive end date and the applicable calendar/time-zone definition; start must precede end. An as-of instant is a distinct tagged temporal scope. Observation time, a reporting month and a release-relative reference period are not interchangeable. |
+
+The [common definitions](../../contracts/v1/schemas/common.schema.json),
+[current CD-1 attribution candidate](../../tests/fixtures/t0-answer-attribution.schema.json)
+and [exact artifact reader](../../tests/t0_revision_lock_prototype.py) are the
+existing project inputs for these distinctions. The
+[Android integer receiving observation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6254042968)
+is separately attributed evidence that a particular JavaScript parse path lost
+numeric identity before validation; it is not a new execution by this appendix
+or a claim about every production consumer.
+
+### CD-1: select the indexed 0.2 answer and attributed result model
+
+The research answer store is the current `x_t0_answer_states` index with
+`proposal_version: "cd1-0.2"`, as defined by the
+[attribution schema](../../tests/fixtures/t0-answer-attribution.schema.json) and
+[reader](../../tests/t0_answer_attribution_prototype.py). Non-root JSON Pointers
+address a logical answer tree. Each `provided` entry has its declared `value`
+and an exact Boolean `assumption`; optional `source` is the existing bounded
+`preset:<name>` vocabulary. The other entries are exactly `unknown`, `missing`,
+`withheld` and `not_applicable`, with no value or provided attribution.
+General source evidence belongs in its scoped evidence record; a preset source
+string is not repurposed as a publisher URL, grade or authorization token.
+
+The selection includes the current known-value schema admission, original-token
+precision guard, overlap rejection and withheld-parent witness behavior. An
+unrecorded parent with a withheld descendant retains that actual cause;
+partially provided children are not assembled into an invented known object.
+Use a provided object only when that whole object is available; otherwise index
+its separately disclosed leaves. Exact/ancestor/descendant lookup and the
+deterministic original-pointer witness retain the implemented candidate's
+meaning. Every value predicate still receives a value validated against an
+explicit admitted field schema. A free-text literal "unknown" remains text;
+an in-band unknown marker in a finite known-value vocabulary is not admitted.
+
+The selected result boundary is the typed predicate and attributed terminal
+finding, not implicit Boolean truth testing. Negation happens before final
+lowering. Compatibility with unresolved applicability stays unknown;
+recommendation applicability uses the explicit known-answer gate. A declared
+not-applicable answer does not alone prove every dependent rule inapplicable.
+Fixed severity, reason/source path, any actually used attribution and the
+selection's own activation/presence result remain distinct.
+
+**Migration decision:** continue to read retained 0.1 records with their original
+profile. A 0.1 `provided` value without an explicit assumption declaration
+cannot silently acquire `assumption: false`; an arbitrary old source string
+cannot be dropped or recast as a preset. Preserve the original record and mark
+the new projection's missing attribution decision unresolved until explicitly
+supplied. Omission in a legacy record supplies no invented withholding reason.
+This defines the conversion decision, without performing a migration or
+silently upgrading existing callers.
+
+The delivered `cd7-projection-0.1` profile retains its existing answer reader and
+public/omitted-field representation. Selecting the attributed 0.2 research model
+does not reinterpret its old provided records, add flags to its hashes or claim
+that a current CD-7/native reader already implements this future mapping.
+
+### CD-6: select one qualified link graph and explicit condition answers
+
+The [deployment relationship proposal](deployment-mode.md#per-component-mode-and-relationships-decision-proposal)
+already chooses selection links as the relationship representation. Retain that
+choice. A successor link has the existing ID/from/to/relation identity plus
+a semantic role and an explicit operation scope where a role is operation
+dependent. These are link roles, distinct from the existing selection-role
+preflight. Do not store a second authoritative engine, host or base link in the
+deployment object.
+
+| Relationship use | Selected link/reference and cardinality | Required interpretation |
+| --- | --- | --- |
+| Host | `runs_on` from the service/model selection to its host, role `host`; one resolved host for the applicable deployment/operation | Several candidates without explicit scope disambiguation are `unknown/ambiguous_binding`. A required host known not selected fails the owning configuration predicate; an unresolved inventory is unknown. |
+| Devices | `runs_on` links with role `device`, with all participating device selections retained | Add an explicit `selection_id` identity association to each proposed physical `hardware.devices[]` record, alongside its existing unique `device_id`. One instance maps to one device selection; distinct instances may select the same catalog SKU. A nominal count, SKU or shared pool ID cannot invent that map. Byte placement and shared-pool arithmetic remain CD-2. |
+| Serving engine | `served_by` with role `serving_engine` for the exact operation; one resolved engine where that operation requires one | An unrelated engine selection or an unqualified second edge cannot satisfy the relation. Known wrong-kind/disabled required targets are configuration failures; unresolved exact versions retain their own unknown result. |
+| Base lineage | `derived_from`, role `base_artifact`, retaining exact selected artifact identities and source lineage | An adapter's selected base must agree with the catalog's stated `base_model_ref` identity. Known disagreement fails the consistency predicate. ID agreement is necessary but insufficient when the source still lacks the actual base revision; no version is inferred. Multiple unresolved bases or a cyclic adapter path remain unresolved with their causes. |
+| Speculative draft | `feeds` from the draft to the target, role `speculative_draft`, bound to the exact operation/engine configuration | Use this explicit direction and role; a general `feeds` edge is not a draft binding. The initial operation profile requires one target per draft binding. Exact draft-target/engine support still needs its own scoped source tuple. |
+| Data access | Existing `reads_from`, `stored_in` or other appropriate declared relation with an explicit input/output role; qualified access metadata records read-only/read-write intent, provisioning/runtime lifecycle and mount/fetch/API method where relevant | Intent is not effective access. Each method has its own actual storage/connection/source conditions. Do not infer a mount from a URL or elevate an opaque reference into a read/write grant. An unsupported method remains a typed profile gap for #13/#15/#35. |
+| Credential source | Retain the existing `cd6-0.1` explicit direct/integration/model_provider/none choice and exact `provided_by` target link | The [credential sidecar](../../tests/fixtures/t0-credential-bindings.schema.json) remains the chosen bounded credential-binding candidate; it is not replaced with role inference. Direct versus inherited reference conflicts, missing pins and unsupported metadata keep their existing results. No secret string enters general findings or a share projection. |
+
+All IDs and primitive types are admitted before lookup. Duplicate identities,
+malformed references and dangling explicit link endpoints are input errors;
+competing semantically possible links retain all candidates and an ambiguity
+result rather than being chosen by array order. Known empty required scope,
+unanswered scope and an optional inapplicable relation retain separate results.
+The general graph may have legitimate cycles: rules read an immutable selected
+graph and recompute affected views without mutating the selection set. A
+lineage traversal uses a visited set and returns an explicit unresolved cycle;
+it cannot recurse indefinitely or substitute a newer base.
+
+**Runtime composition decision:** an adapter participates with its exact base
+and that base's serving tuple; both selected artifacts' applicable requirements
+remain visible. A full or merged fine-tuned artifact has its own support facts,
+format and serving tuple. Its provenance edge does not copy all base capabilities
+or prove an adapter loader can serve the merged output. Model/base/tokenizer/
+template/quantization/adapter conditions remain a joint source-qualified tuple,
+not a Cartesian product of capability lists. The
+[fine-tuned artifact comparison](../T5-training-fine-tuning/fine-tuned-model.md#comparison-fields)
+and [framework permission/technical separation](../T5-training-fine-tuning/training-framework.md#permission-rules-model-license--requested-methods)
+supply the owning research inputs.
+
+**Condition storage decision:** keep `licence_answers` at the logical build root,
+beside `workload` and its organisation answer registry, rather than editing catalog facts.
+Each answer binds the subject selection to a source condition identity:
+originating catalog/artifact ID and exact version, terms/evidence revision and
+local `condition_id`. A bare condition ID is not globally unique. An
+eligibility answer is a typed `met`/`not_met` value; an obligation answer is
+typed `acknowledged`/`not_acknowledged`. CD-1 carries unresolved states outside
+those vocabularies. Condition references and the CD-12 fact references are
+separate from the answer itself.
+
+Traverse qualified base lineage to retain potentially applicable inherited
+conditions, including across provider-operated serving. The link supplies
+provenance, not a legal conclusion that every condition applies to every act or
+derived artifact. Use the exact selected terms, activity, licensee and derivative
+assessment from #30/#33; keep unresolved applicability unknown. An eligibility
+`grant_ref` is a private reference to separately assessed grant evidence,
+allowed only on eligibility answers. Its presence is never a bypass: the
+assessment must cover this subject, condition, activity and period. It does not
+acknowledge unrelated obligations or demonstrate technical access. These choices
+refine the earlier blanket shorthand in D-R2 with the current
+[selected-terms boundaries](../T5-training-fine-tuning/training-framework.md#permission-rules-model-license--requested-methods);
+they do not decide new legal facts.
+
+### CD-10: select scoped requirements for the actual service runtime
+
+A non-model service such as a vector database has a **service-runtime requirement
+record**, bound to the selected service ID/version, runtime build/distribution,
+operation and deployment. Its logical home is the service's source-qualified
+requirement profile plus the selected deployment's actual observations. Keep
+requirements and observed capacity separate; no catalog kind is itself a
+runtime requirement.
+
+| Requirement input | Selected type and evidence boundary |
+| --- | --- |
+| Subject and runtime | Exact selection/artifact references and operation key. Runtime version/build/options are stated when they affect the claim; a catalog family name cannot substitute for a selected distribution. |
+| Execution responsibility | Reuse the existing per-component `runtime_operator`, `runtime_supplied_by` and capacity fields. Do not create a competing mode field. Who operates a host and who supplies a runtime remain different facts. |
+| Platform tuple | Typed OS/platform, architecture/ABI and any required accelerator/backend identity, each under its declared field vocabulary and exact source scope. Exact versions/conditions remain attached. A free-text or unsupported version requirement is retained unresolved until its component's field/predicate mapping is explicit. |
+| Required features | Scoped feature identifiers such as ISA features, with an explicit known requirement inventory. All required features must be satisfied. An absent requirements record is not an empty requirement set; an observed feature list cannot be treated as exhaustive without its own qualification. |
+| Recommended features | A separate scoped feature set, evaluated by a distinct fixed-warning rule. Recommendations cannot be merged into the required-error predicate or change its severity on unknown. |
+| Resource and operation requirements | Explicit references to the component's typed memory/storage/concurrency/transport/index-operation predicates. The relevant #10/#15/#39 records retain units, allocation and evidence; this field does not implement a new resource estimator or interpret arbitrary prose. |
+| Source and observations | Qualified scoped evidence for each requirement and the actual matched host/runtime observation. Documentary support, published limits, estimates and measurements keep their own grades. Missing actual resource/support evidence remains unknown. |
+
+The initial platform/support family uses the existing CD-3 scoped membership
+and completeness semantics. The required-feature family checks all explicitly
+required features against the eligible observed platform; recommended features
+use their separate predicate. These research types use the existing typed
+predicate families. A requirement outside those families is an
+explicit component-schema contribution, retaining unknown evaluation until
+mapped; it is not silently ignored or mislabeled not applicable.
+
+**Applicability decision:** inspect the selected component and operation. For
+a customer-supplied/self-operated runtime, its actual host/runtime prerequisites
+are applicable. For a provider-operated, provider-supplied opaque service, a
+customer-device ISA check is inapplicable; the actual service's offered operation,
+account/region eligibility, connections and other known requirements remain
+separate applicable predicates. When responsibility or the required boundary
+cannot be established, applicability is unknown, not skipped. A model running
+inside a larger service is checked as its actual selected model/engine component;
+the non-model service does not acquire D-R7a/b merely from its kind.
+
+A known absent required capability from complete applicable evidence fails its
+fixed-error rule; a missing/incomplete observation is unknown. A known absent
+recommended feature fails its separate warning rule. Positive documented support
+can pass that scoped predicate while retaining unverified where appropriate;
+none of those outcomes proves a running service, a retrieval-quality result or
+capacity. The [vector service record](../T3-knowledge-retrieval/vector-database.md)
+continues to own its selected index/operation, representation, metric/order,
+authorization, deletion and resource evidence. This resolves how to represent
+its runtime requirements without taking over that note's active completion work.
+
+### CD-12: select private scoped attestations and explicit reuse
+
+Use a private build-owned registry at the **logical**
+`workload.organisation.attestations` location, with build-owned
+`licence_answers` referencing it. These are proposed successor locations,
+not fields accepted by frozen Build. The registry is an evidence/answer store,
+not a global account-profile default.
+
+| Attestation field | Selected type and meaning |
+| --- | --- |
+| `attestation_id` | Unique canonical identity within the retained build/revision. A later correction has a new revision and preserves the earlier answer. |
+| `fact_kind` | Establishment jurisdiction, EU market placement, lawful-basis reference, revenue or monthly active users. Each kind selects exactly one value schema below. |
+| `subject_ref` | Exact private organisation/licensee/account identity, as the applicable fact definition requires. Affiliated entities or an account are not silently identical to the whole organisation. |
+| `definition_ref` | Exact claim/measurement or attestation definition, including the source condition where it defines entity coverage, revenue basis or user-count semantics. Two definitions with the same short label need an explicit equivalence decision before reuse. |
+| `use_scope` | Explicit applicable model/system, dataset/version, processing purpose, product/service or entity set as required by that definition. An absent scope is unresolved, not universal. |
+| `temporal_scope` | Tagged calendar window or as-of instant. Record the period the condition actually asks about, including a release-relative reference when relevant; do not replace it with the current month or the attestation's capture date. |
+| `answer` | CD-1 typed answer over the chosen value schema, preserving explicit source/assumption declaration and every unresolved state. A hypothetical preset is not a completed organisation attestation. |
+| `attested_at`, `attested_by_ref` | Explicit observation/statement time and private declarant reference. They preserve attribution, not independent verification or legal authority. Do not infer them from the viewer or repository operator. |
+| `evidence_refs` | Private, scoped references to supporting records/assessments. An opaque ID or supplied URL is not automatically fetched, authenticated or treated as a grant. |
+| Condition bindings | Explicit build-owned links from the exact source condition/subject selection to the chosen attestation ID/revision, with any independently qualified derivation recorded. No first-match or last-write-wins selection. |
+
+| Fact kind | Provided value type | Meaning that must remain separate |
+| --- | --- | --- |
+| Establishment jurisdiction | Exact jurisdiction code under its declared scheme/version, using the #41/CD-9 reference convention | Establishment of the specified licensee; not data residency, the researcher's location or a legal applicability verdict. Multiple relevant establishments require explicit scoped records rather than an invented principal country. |
+| EU market placement | Exact Boolean for the named system/model and act | A user attestation about that scope, not a universal status for every product or a complete provider-duty assessment. |
+| Lawful-basis reference | Opaque private assessment/reference identity for the exact dataset/version, processing purpose and subject | Presence retains the cited assessment; it does not establish lawfulness or infer consent from a data category. #32 and the responsible dataset/source rights/privacy assessor retain the actual assessment and source conditions. |
+| Revenue | Money value plus the exact entity set, definition and reporting period above | Preserve amount, currency and the selected gross/net/other definition. No zero default, FX, annualisation, affiliate sum or reuse of a differently scoped total. |
+| Monthly active users | Exact Count plus the definition's product/entity coverage and monthly window | Preserve the counting/deduplication definition. Counts from products, accounts or months cannot be added or compared to another condition without an explicit justified derivation. |
+
+**Reuse and aggregation decision:** a condition may reuse a recorded answer only
+after the complete subject/definition/use/temporal binding matches its request.
+An already assessed equivalent definition can be referenced explicitly; a
+matching label, value or organisation ID is insufficient. Direct attestation
+is the default source for this registry, not an automatically computed total.
+No generic sum, maximum, currency conversion or time extrapolation is adopted.
+If an owning condition requires aggregation, record a separate derived fact
+with the exact input fact revisions, coverage, deduplication/overlap treatment,
+units, period and rule identity. Until that derivation is qualified, the
+dependent condition is unknown; the existing component facts remain available.
+
+A provided answer with `assumption: false` preserves that declaration only.
+It is not independently verified and cannot qualify its own grant or legal
+applicability. An assumed scenario can be compared as a labeled scenario, but
+cannot stand in for the required actual attestation. Eligibility and obligation
+findings still use their fixed rule, source conditions and explicit answer/grant
+qualification; numerical comparison alone does not authorize the activity.
+
+**Privacy/migration decision:** retain the existing
+[#42 non-transfer rule](saved-shared-builds.md#field-sensitivity-for-shared-links-and-exports).
+Organisation attestations, private condition/grant references and their values
+are never included in a share and are never copied on fork. A recipient's
+withheld/unanswered input remains unresolved until supplied for the recipient's
+own scope. Private retained history may preserve an old scoped answer where
+permitted; that does not make it current, transferable or authorized for public
+disclosure. Migration must not turn a legacy unscoped organisation value into
+a scoped current attestation or invent its subject, period or declarant.
+
+### Synthetic decision examples for the selected representations
+
+These examples define expected research behavior. They are not executed fixtures,
+source measurements, user attestations, permissions or receiving decisions.
+
+| Case | Explicit illustrative input | Expected bounded result |
+| --- | --- | --- |
+| R40-01 | A memory need is explicitly unknown, then its typed predicate is negated | Still unknown with its original cause. A Boolean negation cannot turn the unresolved answer into pass. |
+| R40-02 | A schema-permitted zero demand is provided with `assumption: true` and `source: "preset:demo"` | Preserve zero and the explicit editable assumption. It is not missing and gains no checked/verified badge from its source label. |
+| R40-03 | A retained 0.1 provided answer has no assumption declaration and a non-preset source | Preserve the original profile/bytes; the 0.2 projection's attribution choice is unresolved. No false flag or source deletion is invented. |
+| R40-04 | An adapter's exact declared base identity differs from the selected `derived_from` target | Known consistency failure; neither catalog name similarity nor a newer available base repairs it. |
+| R40-05 | Two possible engine links share the same component/operation without a disambiguating role | Unknown ambiguous binding with both retained candidates; no array-order selection. |
+| R40-06 | A merged fine-tune retains a base lineage link but lacks its own selected engine support evidence | Unknown support for that output tuple. Provenance does not copy the base's capability matrix. |
+| R40-07 | A storage link declares read/write intent and an opaque credential reference | Retain the requested binding; actual access/grant qualification remains separate and may be unknown. |
+| R40-08 | A user-supplied service build requires feature `demo_feature_a`; its complete matched observation explicitly lacks it | Fail the required-feature rule at its fixed error severity. This proves the known mismatch, not a measured service crash. |
+| R40-09 | A provider-supplied opaque vector service is selected, with responsibility known | A customer-device ISA rule is skipped; the service's operation/account/connection checks still run under their own applicability and evidence. |
+| R40-10 | An exact service requirement's feature is absent from an unmarked observed subset | Unknown, not a negative manufactured from incomplete coverage. |
+| R40-11 | Two conditions request the same synthetic subject/definition/month/currency and explicitly bind the same revenue fact | Reuse that fact for the two scoped questions; each condition still has its own threshold/grant/obligation assessment. |
+| R40-12 | A second condition requests affiliates or a different month from the available MAU record | Unknown until the requested scope is supplied or an explicit derivation is qualified; no sum or current-month substitution. |
+| R40-13 | A condition references a grant without evidence that it covers this subject and activity | Unknown grant qualification; the reference's existence cannot make eligibility pass or acknowledge another obligation. |
+| R40-14 | A private build with revenue and lawful-basis attestations is shared and forked | Neither attestation transfers. The recipient supplies its own applicable answers; retained private history is unchanged. |
+
+### What this selection resolves and what receiving review must decide
+
+This chooses the answer/attribution representation, one relationship authority
+with concrete role/cardinality and lineage rules, the non-model runtime
+requirement families, and the location/type/reuse rules for the five attestation
+facts. New component-specific claim definitions and actual observations remain
+in their owning research; they are not additional unresolved alternatives to
+these base representations.
+
+The existing directional packets now include these explicit choices:
+H40-5/6/11/33 receive relationship and condition scope; H40-7/10 receive typed
+answers and exact resource/runtime bindings; H40-14/15 receive service-operation
+and data-access boundaries; H40-39 receives exact quantity/currency/period
+references; H40-42 receives the selected answer/attestation and immutable-history
+boundaries. #2/#3 retain the workload/deployment inputs, and actual #30/#31/#32/#35
+receiving review must assess the scoped condition/attestation/access interfaces.
+No receipt for those choices is claimed by listing them.
+
+The final research disposition must record which of these choices the actual
+reviewers accept or require changing. A concrete remaining required choice must
+be named and resolved rather than hidden under a future implementation label.
+Conversely, a new frozen schema, production reader, general interpreter, selected
+vendor agreement, provider account, physical deployment or empirical test is
+not manufactured as a prerequisite for this documentation-only representation
+decision. Normal source review, current validation and the issue's literal
+directional acceptance criteria still govern delivery and completion.
+
+## Reviewed representation and receiving disposition — 2026-10-18
+
+**Status: the four selected research representations have independent source
+review and actual directional receiving decisions.** This continuation records
+those decisions and the literal research criteria; ordinary current-main
+composition, final source review, required validation and protected delivery
+remain the delivery gates. It does not mark an issue complete by itself.
+
+The reviewed producer is the [corrected source-only
+packet](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/45b20960cbc4652fb3341c977a025821c96595f9/research/T0-configuration/component-schema-compatibility.md)
+at `45b20960cbc4652fb3341c977a025821c96595f9`, tree
+`8f61e2845e6f3a73e5afc8215efe2720bf95765b`, note blob
+`375506eea95bd7fc30883c0e4f2a2f5496f77cfd`. That unsigned publication preserved
+the original remote `9916c1705367279f5dffbfdf522176e7236be6c4` checkpoint;
+the local `93ada1ee012c6a55bc889f0c0311bf1d90acf116`,
+`97c4f23bab41f2823041521ce31482b177185b88` and corrected
+`9e494d184ecbd955da5e94d560ff797fd7f267cc` checkpoints remain retained.
+The complete corrected producer text precedes this appendix without a rewrite.
+Earlier pending/remaining-action statements describe their dated checkpoints;
+the dispositions here supply the later decisions.
+
+The coordinating reviewer independently read the complete 189-line assessment,
+326-line selection and exact one-line assessment-ownership correction, checked
+the relevant frozen definitions/readers, and performed the ten downstream
+consumer reviews below. The packet author separately read the six additional
+consumer interfaces and their material owner instructions. Each linked receipt
+is an actual delegated project engineering decision with an exact producer and
+consumer identity, not a response attributed to an absent named assignee.
+The source-only publication and these document reviews are not test executions,
+vendor checks, legal grants or a released successor contract.
+
+### Accepted choices and preserved conditions
+
+| Selected research choice | Current disposition |
+| --- | --- |
+| CD-1 answer and attribution | Accept the explicit `cd1-0.2` pointer-indexed five-state representation, provided-value/assumption admission and bounded preset attribution. Existing `cd1-0.1` bytes and reader behavior retain their original profile; no projection invents an assumption flag, source or value. Typed unresolved causes survive until their applicable terminal policy. #2's recommendation applicability remains distinct from compatibility evaluation. |
+| CD-6 relationships and condition answers | Accept one directed selection graph with the stated semantic role, operation scope, exact identities and cardinalities; retain the explicit credential-choice profile. Catalog/reference existence, graph integrity, technical support and actual authority remain separate. Adapters bind their exact base/serving tuple; full or merged outputs require their own facts. A condition answer or grant locator cannot determine legal applicability, acknowledge another obligation or override a technical false. |
+| CD-10 non-model runtime requirements | Accept the actual selected non-model service/runtime build and operation profile, with source-qualified requirements and explicit runtime responsibility. Required and recommended families keep distinct fixed severities. A service kind or customer cloud account does not fabricate an engine, local ISA requirement, feature inventory or evidence of support. |
+| CD-12 private scoped facts | Accept the build-owned registry and exact subject/definition/use/period reuse for jurisdiction, model/system market placement, lawful-basis assessment, revenue and MAU. Private attestations and grants do not transfer on sharing/forking. #32 and the responsible dataset/source rights/privacy assessor retain the assessment; #31 receives only its configuration/compute-quantity interface and consumes no CD-12 attestation. Other source-specific condition questions remain explicit rather than being inferred from these five fact kinds. |
+
+The receivers requested no further alternative to these four selected base
+representations. Their conditions are part of the acceptance, including
+unknown evidence, exact selected terms and scopes, non-transferable private
+facts, and the distinction between a research representation and an actual
+permission, capability or deployment. The [lawful-basis owner
+instruction](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804)
+and [training-residency clarification](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6252011942)
+remain operative: personal training dataset/source scope governs that
+assessment; training is outside serving-mode membership but destinations that
+receive training data still participate in D-R6.
+
+### Ten literal downstream handoffs
+
+Every row below receives the corrected producer identified above. These ten
+consumer reads are pinned to accepted
+`c9ed2d15523c66b57202639ec03b5f9fe886f1ef`; their full blob identities and
+scope remain in the linked receipts. Later receiving composition must retain
+subsequent accepted source, rather than relabel these reads as a newer audit.
+
+| Direction / exact consumer blob | Actual receiving decision and retained boundary |
+| --- | --- |
+| H40-42 / #40 → #42; `98af34c75cf0fabeaea13e8d2fd28c7e174b9f20` | [Accepted — 6254602552](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254602552). Five-state attribution, exact pins and report association, immutable history, explicit projection profiles and private-fact non-transfer are received. The configuration-only #383 reader is not a complete implementation of the shared/historical view. #42 retains retention, share access, export/replay implementation and its other criteria; its live #40 delivery prerequisite is not removed by this receipt alone. |
+| H40-39 / #40 → #39; `6405fd07b1465178c82bcfeab18d13990ad2836e` | [Accepted — 6254603370](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6254603370). Exact operation, separately qualified quantity/unit, Decimal money/currency, period and immutable pricebook/revision association. Missing lines stay unpriced; the USD preview does not supply a user's budget answer. Meters, eligible rates, rounding, allocation, aggregation and FX remain #39 policy. |
+| H40-5 / #40 → #5; `719b072daf2d213024bde7fd6816e5387389c131` | [Accepted — 6254604068](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/5#issuecomment-6254604068). Exact publisher/distributor/operator/offering and route/account identities, one graph authority and the scoped credential choice. Provider/API/billing labels supply no missing entitlement, runtime responsibility or cross-route capability. |
+| H40-6 / #40 → #6; `652bee45b1d72e2c883cbcb3457e47baecfcde29` | [Accepted — 6254604724](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/6#issuecomment-6254604724). Exact artifact/route and joint support tuple; positive, explicit negative and unmarked omission remain distinct. CD-6 resolves the earlier lineage alternative while keeping technical capability, selected terms and source-qualified condition answers independent. Non-token families retain their own task/shape semantics. |
+| H40-7 / #40 → #7; `5384081104cc2d872a4173138fc00a00c115c072` | [Accepted — 6254605318](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/7#issuecomment-6254605318). Complete serialized input, exact route/tokenizer/settings and once-counted output/thinking reservation; selected cap, native limit, mean/max and uncertainty remain distinct. Recount after a transform or new tool/retrieval round; context fit supplies no KV, quality, billing or execution result. |
+| H40-10 / #40 → #10; `32f2e8a48f69c51e3517a15e28dbc162eda6b725` | [Accepted — 6254605905](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6254605905). Exact hardware instance/selection, qualified conservative bounds, typed causes and stage bindings. CD-2's canonical owner retains byte placement and pool arithmetic. No device count, nominal SKU or accepted type invents pooled capacity, a universal reserve, calibration or a new empirical prerequisite for completed #10 research. |
+| H40-11 / #40 → #11; `7c3e45b4b4a1d68676cf9fa31fc529432c1aacf4` | [Accepted — 6254606510](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6254606510). Exact engine/build/backend/kernel/artifact/request tuple and operation-scoped engine link. Publisher inventory and requested completeness stay independent; ANY/ALL preserve eligible witnesses, violations and unresolved members. Required presence differs from all-enabled findings; experiments and frozen dispatch retain their own versions. |
+| H40-14 / #40 → #14; `2e7831ced848c5c12d1520c35b86c5bce5d2fcdb` | [Accepted — 6254607131](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14#issuecomment-6254607131). Exact query/document role, operation, index field/namespace and population generation. Width equality, backend/type capacity, compatible encoder profiles, normalization/operator/score scale and content policy remain separate; the earlier reverse EMB receipt keeps its direction. |
+| H40-15 / #40 → #15; `e9850147fcf58fe14d8e753c7b577108a2760196` | [Accepted — 6254607941](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/15#issuecomment-6254607941). Exact collection/index/named field/namespace/operation, real service-runtime profile and qualified requirements. Capacity, encoder/generation compatibility, score interpretation, actual principal/resource/action authority and scoped serving/deletion lifecycle remain distinct. No kind, filter, credential or transport creates permission or a universal limit/TTL. |
+| H40-33 / #40 → #33; `dc5cb3c7718aad4c49b2263ddd649bf7be575ec9` | [Accepted — 6254608662](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6254608662). Exact base/adapter/export and serving tuple. The existing modality-inheritance case keeps full base commit, no added tokens and no embedding change through `modules_to_save`; JSON-schema support is rechecked on the actual route. Lineage, selected legal conditions and technical/evaluation facts remain separate; optional T5 stays optional. |
+
+### Six additional condition, workload and deployment interfaces
+
+These consumer reads receive the same corrected producer and are pinned to
+accepted `cceaa676ab34e02941d8dc7aa552c9a70a7251ba`. All six blobs were
+independently compared with the inspection at
+`c9ed2d15523c66b57202639ec03b5f9fe886f1ef` and are byte-for-byte unchanged.
+Their complete issue/comment inventories were refreshed; the public receipts
+retain the actual source-read limits and earlier owner attributions.
+
+| Direction / exact consumer blob | Actual receiving decision and retained boundary |
+| --- | --- |
+| #40 → #30; `c3cfc458fcd9272fc0b4f969ccef131f7eae7e07` | [Accepted with scoped conditions — 6254653703](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30#issuecomment-6254653703). CD-1/CD-6/CD-12 supply the H6 representation for actual enabled training participants, selected terms and condition facts. Teacher/student remain separate, F-23 requires the complete technical tuple and F-20 keeps its corrected historical Bedrock scope. Five attestation kinds do not answer every licence question. The current closed research disposition of #30 is preserved. |
+| #40 → #31; `e20e49ce3e078847e37ceeffb2eb2cdf7f2885cf` | [Accepted with narrowed scope — 6254657215](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31#issuecomment-6254657215). CD-1 and relevant CD-6 configuration/quantity bindings only; current K-rules consume no CD-12 attestation. Exact trainer/device/allocation, per-device memory and non-overlapping phases stay explicit. No missing managed profile, fit, duration, calibration, meter or price is fabricated. The active compute/cost writer retains its work. |
+| #40 → #32; `af0fc0772759410c6d63baf1b96e0dc1ff316674` | [Accepted with scoped conditions — 6254657922](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254657922). Exact dataset/source version, purpose, subject, operation and actual assessment; personal training data governs lawful-basis applicability and EU placement names model versus system. Frozen flags and JSONL are insufficient evidence by themselves. Preserve current E-R44 error policy and the actual H3/evaluation receipts; the component reconciliation writer remains separate. |
+| #40 → #35; `62eac8a99b407e3063a4ed0c10196ac442988bd0` | [Accepted with scoped conditions — 6254658636](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6254658636). Answers, resource/operation/credential intent, real runtime requirements and applicable private licence facts are inputs. W-R4 selection remains a weak recommendation; G-series control evidence, violation-style predicates, exact tool approval, deletion layers and key-state bindings remain their own checks. No blanket rule adoption or security certification follows. |
+| #40 → #2; `b9691e48704a5ffa35db7741ad1d26a93f6a3187` | [Accepted with scoped conditions — 6254659633](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6254659633). Build-owned answers, attributed editable assumptions, exact device/stage/condition scope and private fact reuse. Recommendation applicability remains separate from unresolved compatibility. The later W-R11 owner conditions retain the light declaration recommendation, separate stronger recovery boundary, eligible checked-only evidence and the designated home for the verbose recovery candidate; this receipt does not claim those follow-up edits occurred. |
+| #40 → #3; `7d88a23348768dfaab9630f6194bc3971bbfcbae` | [Accepted with scoped conditions — 6254660533](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6254660533). Qualified deployment graph, licence-answer distinctions, actual runtime responsibility and private fact scope. Training destinations remain in D-R6 without changing serving-mode membership. A missing condition inventory or unqualified grant stays unknown; only qualified complete absence can justify no applicable conditions. Lineage is not a legal derivative assessment. |
+
+### Incoming evidence and directions retained
+
+The [actual #41 → #40 receipt
+6254387986](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6254387986)
+receives the source-policy packet at
+`13b11b7eb9a84af200ea9f0577fcb0e5182a4c46`, blob
+`c7d36a3c6c5ff305080867ec98763019d5e365bb`, against the then-current
+#40 record at `e9159891422bb33046433ef1229c498861b218e7`. It accepts the
+four claim-level research grades and DS-R1–DS-R5 as shared-template proposals:
+source eligibility, requested completeness, ANY/ALL contributors, known
+source-use mismatch, unresolved binding and checked-only evidence keep their
+different meanings. This does not add a frozen provenance enum, default TTL,
+rights grant or historical rewrite. The finite source/material/use decisions
+from #60 remain binding.
+
+The [#15 → #40 R4 receipt
+6254104576](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6254104576)
+receives `vector-database-decision/0.2.0` at source
+`4438baf70cc3fce1ee63d09ef8a24308d6dd6613`, exact note blob
+`e9850147fcf58fe14d8e753c7b577108a2760196`. Its VDB-01–VDB-04 shared
+rule format, field/outcome and source-completeness acceptance is distinct from
+the H40-15 reverse receipt. VC-01–VC-14 remain synthetic reasoning fixtures.
+
+The earlier #75 #2/#3 and T2 disposition, #126 T1/#40 worked examples, and
+the incoming #14 and #62 receipts cited above retain their real directions and
+review scope. The [Android exact-number receiving observation
+6254042968](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6254042968)
+retains its own reference pin and native/interface follow-up; it is neither a
+fresh execution here nor acceptance of a changed frozen numeric meaning.
+No outgoing packet, reverse receipt or linked implementation is counted as an
+unrecorded market handoff.
+
+### CD-2 remains an explicit research decision
+
+The sixteen receipts above do **not** adopt the normalized physical-pool and
+co-residency representation. At inspected accepted main
+`cceaa676ab34e02941d8dc7aa552c9a70a7251ba`, the deployment dictionary still
+leaves byte allocation to CD-2, and W-R6 explicitly counts `on_demand`
+components as resident until CD-2 defines co-residency scenarios. The complete
+57-line [memory screen](../T2-infrastructure/compute/memory_screen.py), blob
+`dc332df651f6e0ae3a2abda210b526ff7585258d`, compares already supplied bounds
+for one matching domain; it explicitly leaves adapters, runtime/workspace,
+co-residency and demand-versus-pool accounting upstream. That bounded screen
+does not choose the missing allocation representation.
+
+The [original CD-2 claim6246869445](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6246869445)
+and [resumed canonical claim6251561799](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251561799)
+own that specific research choice: a versioned synthetic encoding binding
+resident byte allocations to unique physical pools and declared device/rank
+consumers, explicit co-residency and completeness, once-only shared-pool/reserve
+accounting, separate pool failures and unresolved evidence. The resumed claim
+describes four prepared fixture/prototype/test files plus its explanatory
+section, with current validation and independent receiving still required
+before publication; it supplies no affected-owner adoption.
+
+The unresolved item is the exact normalized representation and its actual
+research disposition, **not merely a missing production implementation**.
+H40-10 receives the common types and exact associations while explicitly
+preserving this allocation question. The canonical CD-2 author, #40 and #10
+must review that concrete candidate and record acceptance or a required
+correction. No competing implementation is introduced here, and no current
+hardware measurement is required to review a synthetic research encoding.
+Whole-issue completion remains unassessed while this substantive question and
+the final delivery gates are open.
+
+### Literal twelve-criterion disposition after receiving review
+
+The criterion text is unchanged from the original issue. The table records
+what this research revision supplies and what must be demonstrated by its
+ordinary delivery receipt; it does not convert document text into a merge,
+validation result or response from another person.
+
+| Original criterion | Reviewed research evidence and delivery obligation |
+| --- | --- |
+| Schema document with field types and examples | The original frozen-base mapping, component dictionary and exact twelve-field type/unit/evidence table are retained. The four concrete selected representations, fourteen explicitly synthetic cases, independent source assessment and sixteen actual receiving decisions supply their choice/receiving record. No additional alternative to these four choices was requested; CD-2's separate normalized allocation/co-residency representation still requires its actual research disposition above. |
+| Worked rule examples spanning T1/T2 (model ↔ engine format, model ↔ GPU memory, context ↔ KV cache) including `unknown` handling | The seven examples retain actual #126 reviews5560506323/5560765303; current typed support/context and resource boundaries are received by H40-6/7/10/11. Original code/test observations remain pinned to their executions; neither a new measurement nor a production engine is invented. |
+| Documented approach to cycles and recomputation | The retained pure-rule, dependency and invalidation method covers changes to selections, links, catalog/evidence, policy and ruleset without mutating selections. The selected graph preserves cycle/ambiguity causes and exact references; it does not turn a dependency cycle into recursive mutation or a latest-value lookup. |
+| Rule and catalog versioning approach | Exact catalog/ruleset/record identities, retained original readers/findings and M1–M5 additive/replacement migration remain the research approach. Explicit CD-1 and CD-7 profile boundaries and H40-42's immutable-history acceptance preserve old bytes and outcomes; the full successor release and implementation remain separately versioned work. |
+| Contribution format that component issues can follow | The existing shared template covers participants/fields, applicability, assertion, evidence, fixed severity, unknown policy, explanation/remediation, dependencies, outcomes and version impact. Actual H41-40, VDB R4 and the downstream receipts demonstrate its research intake without adopting an arbitrary runtime expression language. |
+| Decision record merged at `research/T0-configuration/component-schema-compatibility.md` following the research method | Earlier record revisions are delivered at this path. This continuation has the explicit choices and receiving record ready for final current-source review and protected delivery. Fulfilment for the new revision requires its actual accepted merge and post-main validation receipt; a source-only branch does not satisfy that delivery evidence. |
+| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Retained alternatives and per-component runtime/operator/capacity classification cover provider/shared, provider/dedicated or reserved, customer-operated, hybrid and unknown cases. H40-5/10/11/15 and #2/#3 preserve actual runtime responsibility and predicate applicability; training's out-of-mode status does not exempt its data locations. |
+| Comparison fields defined with type, unit, and evidence requirement | All twelve minimum base/rule fields remain explicitly mapped, including conceptual temporal/rule-version fields absent from frozen v1. The selected typed answers, graph scope, runtime profiles and exact private Money/Count/period definitions add the reviewed choices; category-specific factual qualifications remain with the actual component/source. |
+| Rule format, severities, and `unknown` handling documented with examples | Fixed severity versus outcome, typed unresolved causes, required presence versus all-enabled, requested versus source completeness, ANY/ALL evidence, disputes and checked-only labels remain separate. The fourteen synthetic cases and receiving conditions preserve both known failures and unresolved rows; strict role policy and original profile meanings are unchanged. |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | The retained claim-source audits and companion ledgers keep their original attributions. This appendix uses exact project sources and receiving comments read on 2026-10-18; it adds no vendor price, measurement, legal conclusion or newly executed result. All older source, test and fixture evidence retains its own version and limitations. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | All ten literal downstream directions now have linked actual delegated receiving decisions against the corrected producer; the six additional affected interfaces and original incoming/reciprocal receipts retain separate directions. The narrower #31 decision is recorded explicitly. No request, same-author producer review or absent named person's response is substituted for a receiver decision. |
+| Open questions recorded with a named follow-up owner | The original CD register and the concrete ownership boundaries below remain visible. The four selected representations now have actual source/receiving disposition. CD-2 remains a genuine normalized-representation question with its canonical author and #40/#10 review; remaining source qualification, component predicates, wire/readers/migration and delivery retain their own owners. Whole-issue completion is not inferred from the sixteen receipts. |
+
+### Remaining work with its actual owner and scope
+
+- **#40 with #10 and the canonical CD-2 writer:** review and dispose of the exact
+  normalized allocation/co-residency representation described above. Retain the
+  per-rank/per-pool and device/selection boundaries. H40-10 accepts the shared
+  base representation; it does not resolve that research question, take over
+  its source, create calibrated resource evidence or waive its required review.
+- **#40 with #41/#39 and the affected component issue:** qualify real source
+  facts, date/scope/completeness/rank and selected source-use conditions; retain
+  the versioned CD-3/CD-4/CD-5/CD-9/CD-11 candidate and result boundaries. A
+  carrier, source pointer or successful shape check supplies no actual source
+  qualification, geography, measured resource or price.
+- **#40 with #42 and native consumers:** assign and validate any successor
+  field/ruleset/reader release, retained-history dispatch and migration. Preserve
+  the accepted #383 configuration-only projection and report-association
+  continuation in the receiving tree. Its bounded delivery is distinct from a
+  full shared/historical implementation, and #42 retains access/retention and
+  its own remaining research/delivery criteria.
+- **#2/#28/#40:** retain the later W-R11 recommendation/recovery and document-home
+  conditions at [6252162416](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6252162416).
+  This base representation receipt does not assert the existing follow-up
+  implementation or relocation has happened.
+- **#30/#32 and the responsible dataset/source rights/privacy assessor, with
+  #33/#35 as applicable:** retain exact selected terms, assessed activity and
+  source conditions, actual data/evaluation/control evidence and non-transferable
+  private facts. #31 retains configuration and compute quantities; it acquires
+  no attestation or legal-assessment duty from the older broad owner row.
+- **The current coordinating reviewer and canonical #40/#41 note writers:**
+  compose both reviewed documentation slices with current accepted main,
+  preserve every unrelated path and historical checkpoint, obtain the normal
+  current-head review and required gates, and record actual merge/post-main
+  evidence before changing issue completion or removing a substantive delivery
+  prerequisite. The named issue assignees and active component/market writers
+  retain their existing roles.
+
+These are explicit boundaries of the reviewed research decisions and their
+remaining delivery or follow-up work. They do not create a new production,
+account, paid-job or empirical requirement for a documentation criterion, and
+they do not waive any actual unresolved required research choice, source review
+or current delivery gate.
