@@ -16959,7 +16959,7 @@
     {
       "product_id": "canirun-ai",
       "feature": "vram_ram",
-      "status": "Documented",
+      "status": "Unknown",
       "evidence_ids": [
         "src-canirun-ai"
       ],
@@ -16969,7 +16969,7 @@
       "evidence_grade": "Vendor claim",
       "evidence_url": "https://www.canirun.ai/devices",
       "confidence": "Medium for the stated documentary boundary; execution unverified",
-      "limitations": "P records only the basis above; it does not pass the full capability test or certify compatibility, performance, persistence, price accuracy or rights.",
+      "limitations": "The retained historical device-capacity observation does not establish a model/runtime memory requirement. Unknown records missing evidence for that dimension, not absence of the product capability; no new product run, source check or reuse permission is supplied.",
       "audit_scope": "public-docs-2026-10-16"
     },
     {
