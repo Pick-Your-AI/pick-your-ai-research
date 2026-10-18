@@ -36,7 +36,7 @@ Continuation audit: all **32 criteria** were compared verbatim against fresh #8â
 | 11.5 | Comparison fields defined with type, unit, and evidence requirement | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 | 11.6 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | [inference-engine.md](inference-engine.md) compatibility proposals; [contract-proposals.md](contract-proposals.md) | #40 @tynamite; @Mattycodes69 | Prepared; owner review pending |
 | 11.7 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | [inference-engine.md](inference-engine.md) evidence table and claim references | #41 @tynamite; @Mattycodes69 | Prepared; owner review pending |
-| 11.8 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #25 @CompleteDotTech, #33 @appletechie, #37/#38 @PUSHINGSQUARES | Partial scoped receipts: #10/#25/#33; #37/#38 pending; other co-owner scope separate |
+| 11.8 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | [handoffs.md](handoffs.md); linked owner acknowledgements required | @Mattycodes69; #10 @Mattycodes69, #25 @CompleteDotTech, #33 @appletechie, #37/#38 @PUSHINGSQUARES | Scoped #10/#25/#33 receipts; appletechie accepts #37 with integration pending and narrows #38 to inputs (linked in the engine record); PUSHINGSQUARES and other co-owner scopes remain separate |
 | 11.9 | Open questions recorded with a named follow-up owner | [inference-engine.md](inference-engine.md) | @Mattycodes69; @CompleteDotTech (repository default reviewer) | Prepared; owner review pending |
 
 ## Baseline and tracking audit
@@ -65,3 +65,8 @@ No acceptance criterion, assignee, native relationship or Project value changes.
 ## Scoped interface reconciliation (2026-10-18)
 
 Live owners: #8/#11 @zwright8 and @Mattycodes69; #9/#10 @Mattycodes69 and @appletechie. The [ledger](handoffs.md) credits each actual receipt author without treating it as approval by every co-owner. Existing merged record gates are complete; remaining full acceptance criteria stay open. Project readback again returned `INSUFFICIENT_SCOPES` for `read:project`; no board values are claimed or changed.
+
+
+## Scoped #11 lifecycle continuation (2026-10-18)
+
+The [engine record](inference-engine.md#version-retention-and-bounded-candidate-recommendation--2026-10-18) now records zwright8's actual retention/candidate receipt and proposes the matching bounded recommendation for Mattycodes69's review. It defines reference-based retention and new-release research triggers, preserves single-version-per-ID intake, and names #42's receiving owners. This prepares 11.4/11.9 without claiming their acceptance. A separately dated TGI lifecycle source check leaves the main matrix and catalog dates intact. For 11.8, appletechie's deployment/monitoring responses keep their reviewed revision, direction and integration limits; other owners' decisions are not inferred. No runtime tuple, support window, security certification or versioned executable rule is approved by this update.
