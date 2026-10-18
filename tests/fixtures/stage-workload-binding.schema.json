@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CD-5 per-stage workload candidate",
+  "description": "Synthetic research input; not a released contract, execution plan or evidence-admission mechanism.",
+  "type": "object",
+  "required": ["x_t0_stage_workload"],
+  "additionalProperties": false,
+  "properties": {
+    "x_t0_stage_workload": {
+      "type": "object",
+      "required": ["proposal_version", "build_sha256", "answer_states_sha256", "inventory_id", "stages"],
+      "additionalProperties": false,
+      "properties": {
+        "proposal_version": {"const": "cd5-0.1"},
+        "build_sha256": {"$ref": "#/$defs/digest"},
+        "answer_states_sha256": {"$ref": "#/$defs/digest"},
+        "inventory_id": {"$ref": "#/$defs/identity"},
+        "stages": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {"$ref": "#/$defs/stage"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identity": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z0-9]",
+      "not": {"pattern": "[^A-Za-z0-9._:-]"}
+    },
+    "digest": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "not": {"pattern": "[^a-f0-9]"}
+    },
+    "reference": {
+      "type": "object",
+      "required": ["id", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "version": {"$ref": "#/$defs/version"}
+      }
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "\\S",
+      "not": {"pattern": "[\\u0000-\\u001f\\u007f]"}
+    },
+    "native_units": {
+      "type": "array",
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {"enum": ["images_per_request", "audio_seconds", "video_seconds"]}
+    },
+    "stage": {
+      "type": "object",
+      "required": ["id", "selection_id", "operation", "configuration_id", "tokenizer", "native_input_units", "native_output_units"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"$ref": "#/$defs/identity"},
+        "selection_id": {"$ref": "#/$defs/identity"},
+        "operation": {"$ref": "#/$defs/reference"},
+        "configuration_id": {"$ref": "#/$defs/identity"},
+        "tokenizer": {
+          "oneOf": [{"$ref": "#/$defs/reference"}, {"type": "null"}]
+        },
+        "native_input_units": {"$ref": "#/$defs/native_units"},
+        "native_output_units": {"$ref": "#/$defs/native_units"}
+      }
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9223372036854775807
+    },
+    "decimal": {
+      "type": "string",
+      "maxLength": 38,
+      "pattern": "^(?:0|[1-9][0-9]{0,18})(?:\\.[0-9]{1,18})?$",
+      "not": {"pattern": "[^0-9.]"}
+    }
+  }
+}

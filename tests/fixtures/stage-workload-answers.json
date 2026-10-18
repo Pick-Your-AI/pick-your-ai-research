@@ -1,0 +1,265 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/inventories/68d50e0c24ea245614c19f694c3d3dd5ee5c65ff4a7ca19ccab3caef61763654/complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/requests": {
+        "state": "provided",
+        "value": {
+          "count": 1000,
+          "period": "day"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/peak_concurrency": {
+        "state": "provided",
+        "value": 3,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/input_uses_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/output_generates_tokens": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "20.5",
+          "max": 128
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/retrieve/70a3516a11bae87b1025efdd42caffabace492b2ac953ae083ecde23639c6fec/output_tokens": {
+        "state": "not_applicable"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/requests": {
+        "state": "provided",
+        "value": {
+          "count": 1000,
+          "period": "day"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/peak_concurrency": {
+        "state": "provided",
+        "value": 2,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/input_uses_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/output_generates_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "4096.125",
+          "max": 8000
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/draft/30720f3cf964755dd28ce0ab8d6ee2cda3d26ed439f7a0d017acdbebd97ce42a/output_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "500.5",
+          "max": 2000
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/requests": {
+        "state": "provided",
+        "value": {
+          "count": 2000,
+          "period": "day"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/peak_concurrency": {
+        "state": "provided",
+        "value": 4,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/input_uses_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/output_generates_tokens": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "200.25",
+          "max": 1024
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/classify/b71a1744fe6f420e3108753038cbfd655b898fbb47ced0e2fe19926bacb62170/output_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "1.5",
+          "max": 8
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/active": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/scope_confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/native_input_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/native_output_units_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/requests": {
+        "state": "provided",
+        "value": {
+          "count": 0,
+          "period": "month"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/peak_concurrency": {
+        "state": "provided",
+        "value": 1,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/input_uses_tokens": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/output_generates_tokens": {
+        "state": "provided",
+        "value": false,
+        "source": "synthetic:fixture-only"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/input_tokens": {
+        "state": "not_applicable"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/output_tokens": {
+        "state": "not_applicable"
+      },
+      "/stage_workloads/1a597cf20a5bd736949ec08be10995e5ef4139a901387f356842a8dcdfec20ef/fixture.pipeline.1/stages/audio-score/9e6a3e3213d31e5b2f0239227c21d5c5ecf4c25e6667c38ab7637168a23e7b38/native_input_units/audio_seconds": {
+        "state": "provided",
+        "value": {
+          "mean": "1.500",
+          "max": "3.25"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/workload/requests": {
+        "state": "provided",
+        "value": {
+          "count": 777777,
+          "period": "month"
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/workload/input_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "2222",
+          "max": 2222
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/workload/output_tokens": {
+        "state": "provided",
+        "value": {
+          "mean": "999",
+          "max": 999
+        },
+        "source": "synthetic:fixture-only"
+      }
+    }
+  }
+}
