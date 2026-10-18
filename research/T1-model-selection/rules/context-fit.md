@@ -44,6 +44,9 @@ flag a straddling failure as `may_not_fit` even if another cap is unknown, prese
 unknown when only some required predicates pass. A known violated cap can fail
 even when another operand is missing. A definite lower-bound violation suppresses
 the uncertainty-only flag. Separate-budget combined checks are skipped.
+An explicitly evidenced input cap is checked even while shared-versus-separate
+budget semantics remain unknown. A fitting input cap cannot make that unknown
+combined predicate pass; a violated cap retains the same fail/uncertainty rules.
 Explicit policy ceilings remain additional proposed predicates, not vendor limits.
 
 The runtime-limit cases exercise native fallback and a lower known runtime ceiling.
