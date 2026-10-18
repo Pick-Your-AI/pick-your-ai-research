@@ -15,6 +15,8 @@ Labels used in this note:
 
 This partial design record can proceed through ordinary PR review and merge while the contract prerequisite remains open. Recording the proposal gives #40 and the other receiving issues concrete semantics to review. It does not adopt the SB or CD field shapes, release a successor contract, activate a consumer, or supply pending receiving-owner acceptance. #40 and #42 remain open, and #42 retains its #40 prerequisite. The earlier draft-hold reviews remain historical records; this decision changes only the order in which the partial proposal may merge, not the requirements for completing the issues.
 
+The sequencing change is recorded at [f56b0fc](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/f56b0fcdb34d91e1751edc3b4cd44dba9bc04960), with independent reviews [5561898533](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5561898533) and [5561921315](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5561921315) submitted before [squash merge 649f5870](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/649f5870e9729ec1aaf1b5f07e9290ce0f777833). These reviews concern publication of this partial record and retain the receiving-owner gates; they do not replace the earlier revision-specific reviews or the scoped #41 receipt.
+
 ## Summary
 
 - **A saved build is an immutable `BuildSnapshot` revision plus the derived records that cite that revision.** Every edit creates a new revision; old revisions are kept (V5). The v1 locks already pin the catalog snapshot, ruleset version and dependency graph revision (V1).
@@ -321,7 +323,7 @@ The #41 invalidation-policy handoff above is confirmed. Other receiving-owner di
 | Sharing and privacy rules | Sharing; Field sensitivity | Drafted; retention open (SB-9) |
 | Comparison semantics with examples | Comparison | Drafted, including required-foundation and optional-tier boundary cases |
 | Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states | Drafted on the interim policy |
-| Decision record merged | Proposal sequencing decision | Partial record proposed for merge; #42 completion remains blocked by #40 |
+| Decision record merged | Proposal sequencing decision | Partial record merged in [#114](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114); #42 completion remains blocked by #40 |
 | Deployment modes covered | Candidate options; Comparison | Covered using #81's merged definitions |
 | Comparison fields with type, unit, evidence | Comparison fields | Drafted |
 | Rules in #40 format; verified vs hypotheses | Compatibility proposals | Contract-derived vs hypothesis labelled; none reproduced |
