@@ -745,6 +745,66 @@ class MarketValidation(unittest.TestCase):
         records.append(child)
         self.assert_invalid_backlog(records, 'cyclic parent links')
 
+    def completion_backlog(self, statuses, parents):
+        records = []
+        for number, (status, parent) in enumerate(zip(statuses, parents), 1):
+            item = deepcopy(self.data['research-backlog.json'][0])
+            item.update(number=number, status=status, parent_number=parent)
+            if status == 'Done':
+                item['completion_evidence'] = {
+                    'accepted_commit': 'synthetic accepted commit',
+                    'review_url': 'https://example.com/synthetic-review',
+                    'handoff_acceptance': 'Synthetic fixture, not real acceptance',
+                }
+            records.append(item)
+        return records
+
+    def test_done_parent_rejects_each_unfinished_child_status(self):
+        for status in ('Backlog', 'Ready', 'In Progress', 'In Review', 'Blocked'):
+            with self.subTest(child_status=status):
+                records = self.completion_backlog(['Done', status], [None, 1])
+                self.assert_invalid_backlog(
+                    records, 'backlog #1: Done requires recorded child #2 to be Done')
+
+    def test_done_ancestors_do_not_hide_unfinished_grandchildren(self):
+        records = self.completion_backlog(
+            ['Done', 'Done', 'In Progress'], [None, 1, 2])
+        self.assert_invalid_backlog(
+            records, 'backlog #2: Done requires recorded child #3 to be Done')
+
+    def test_done_parent_child_check_is_independent_of_record_order(self):
+        records = self.completion_backlog(['Done', 'Blocked'], [None, 1])
+        self.assert_invalid_backlog(
+            list(reversed(records)),
+            'backlog #1: Done requires recorded child #2 to be Done')
+
+    def test_completed_and_independent_incomplete_trees_remain_valid(self):
+        cases = (
+            (['Done'], [None]),
+            (['Done', 'Done', 'Done'], [None, 1, 2]),
+            (['Done', 'Done', 'In Progress', 'Blocked'], [None, 1, None, 3]),
+            (['In Progress', 'Done', 'Blocked'], [None, 1, 1]),
+        )
+        for statuses, parents in cases:
+            for reverse in (False, True):
+                data = deepcopy(self.data)
+                records = self.completion_backlog(statuses, parents)
+                data['research-backlog.json'] = records[::-1] if reverse else records
+                for optimized in (False, True):
+                    with self.subTest(statuses=statuses, reverse=reverse,
+                                      optimized=optimized):
+                        result = self.run_validator(data, optimized)
+                        self.assertEqual(result.returncode, 0, result.stderr)
+                        self.assertIn('Market integrity OK', result.stdout)
+                        for name, value in data.items():
+                            self.assertEqual((self.base / name).read_text(),
+                                             json.dumps(value))
+
+    def test_done_child_still_requires_its_own_acceptance_evidence(self):
+        records = self.completion_backlog(['Done', 'Done'], [None, 1])
+        del records[1]['completion_evidence']
+        self.assert_invalid_backlog(records, 'Done requires recorded acceptance evidence')
+
     def test_invalid_inputs_fail_in_both_modes(self):
         cases = []
         data = deepcopy(self.data)

@@ -341,6 +341,11 @@ def validate():
             require(current not in seen, 'cyclic parent links')
             seen.add(current)
             current = parents[current]
+    by_number = {item['number']: item for item in backlog}
+    for child, parent in parents.items():
+        require(by_number[parent]['status'] != 'Done' or
+                by_number[child]['status'] == 'Done',
+                f'backlog #{parent}: Done requires recorded child #{child} to be Done')
     print(f'Market integrity OK: {len(ids)} entities, {len(pairs)} cells, {len(backlog)} issues')
 
 
