@@ -1,7 +1,9 @@
 # Apple/iOS application delivery plan
 
+Mobile planning issues now live in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`. See the [migration record](../prompts/mobile/MIGRATION.md). Repository creation resolves location only; framework, modules and service placement remain gated. Existing acceptance-record paths are preserved. Historical snapshots below do not override the live migration.
+
 Published delivery structure: [Project #5](https://github.com/orgs/Pick-Your-AI/projects/5),
-[program #163](https://github.com/Pick-Your-AI/pickyour.ai/issues/163).
+[program Pick-Your-AI/pick-your-ai-apple#1](https://github.com/Pick-Your-AI/pick-your-ai-apple/issues/1).
 The [issue index and triage record](APPLE_DELIVERY_TRACKING.md) records the publication
 snapshot and structural conventions. GitHub owns current status, ownership and native
 relationships. Planning publication does not establish application implementation.
@@ -249,17 +251,17 @@ triage metadata; add an existing issue or a distinct integration task as appropr
 
 | Work | Canonical coordination point | Apple plan consumers |
 | --- | --- | --- |
-| Shared schemas, rules, versioned API changes | [Research #40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | 03, 05, 09 |
-| Source policy, evidence and freshness | [Research #41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) and [#60](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60) | 04, 07, 17 |
-| Pricing semantics | [Research #39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | 05.4, 10 |
-| Saved/shared build semantics | [Research #42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | 05.3, 05.5, 11, 12 |
-| Real catalog/pricebook integration | [Website #15](https://github.com/Pick-Your-AI/pickyour.ai/issues/15) | 04.6, 05.9 |
-| Capacity evidence and read API | [Website #16](https://github.com/Pick-Your-AI/pickyour.ai/issues/16), [Research #10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | 05.6, 09.4 |
-| Persistent accounts and shared builds | [Website #17](https://github.com/Pick-Your-AI/pickyour.ai/issues/17) | 05.3, 05.5, 05.7, 11 |
-| Canonical display labels | [Website #18](https://github.com/Pick-Your-AI/pickyour.ai/issues/18) | 03.1, 06.6 |
-| Incomplete versus incompatible presentation | [Website #31](https://github.com/Pick-Your-AI/pickyour.ai/issues/31) | 06.4, 08.5, 09.3 |
-| Current visual direction | [Website #32](https://github.com/Pick-Your-AI/pickyour.ai/issues/32) and [#33](https://github.com/Pick-Your-AI/pickyour.ai/issues/33) | 06 |
-| Product and market decisions | [Research #47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47), [#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | 01, 18 |
+| Shared schemas, rules, versioned API changes | [Research Pick-Your-AI/pick-your-ai-research#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40) | 03, 05, 09 |
+| Source policy, evidence and freshness | [Research Pick-Your-AI/pick-your-ai-research#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) and [Pick-Your-AI/pick-your-ai-research#60](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60) | 04, 07, 17 |
+| Pricing semantics | [Research Pick-Your-AI/pick-your-ai-research#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | 05.4, 10 |
+| Saved/shared build semantics | [Research Pick-Your-AI/pick-your-ai-research#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42) | 05.3, 05.5, 11, 12 |
+| Real catalog/pricebook integration | [Website Pick-Your-AI/pickyour.ai#15](https://github.com/Pick-Your-AI/pickyour.ai/issues/15) | 04.6, 05.9 |
+| Capacity evidence and read API | [Website Pick-Your-AI/pickyour.ai#16](https://github.com/Pick-Your-AI/pickyour.ai/issues/16), [Research Pick-Your-AI/pick-your-ai-research#10](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10) | 05.6, 09.4 |
+| Persistent accounts and shared builds | [Website Pick-Your-AI/pickyour.ai#17](https://github.com/Pick-Your-AI/pickyour.ai/issues/17) | 05.3, 05.5, 05.7, 11 |
+| Canonical display labels | [Website Pick-Your-AI/pickyour.ai#18](https://github.com/Pick-Your-AI/pickyour.ai/issues/18) | 03.1, 06.6 |
+| Incomplete versus incompatible presentation | [Website Pick-Your-AI/pickyour.ai#31](https://github.com/Pick-Your-AI/pickyour.ai/issues/31) | 06.4, 08.5, 09.3 |
+| Current visual direction | [Website Pick-Your-AI/pickyour.ai#32](https://github.com/Pick-Your-AI/pickyour.ai/issues/32) and [Pick-Your-AI/pickyour.ai#33](https://github.com/Pick-Your-AI/pickyour.ai/issues/33) | 06 |
+| Product and market decisions | [Research Pick-Your-AI/pick-your-ai-research#47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47), [Pick-Your-AI/pick-your-ai-research#58](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/58) | 01, 18 |
 
 Epics 03–05 and shared parts of 09–12 and 17 should consume one governed service/data
 implementation across Apple, Android and web. Each client still needs its own adapter,
