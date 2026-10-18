@@ -1,0 +1,195 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/workload/residency/processing": {
+        "state": "provided",
+        "value": {
+          "mode": "restricted",
+          "allowed": [
+            {
+              "kind": "jurisdiction",
+              "id": "synthetic-country-a",
+              "descriptor_sha256": "6b0c347615332d5e52168d98467d72e3b3bddac1aaedd8e0e5cb57c962320e36"
+            }
+          ]
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/workload/residency/storage": {
+        "state": "provided",
+        "value": {
+          "mode": "restricted",
+          "allowed": [
+            {
+              "kind": "jurisdiction",
+              "id": "synthetic-country-a",
+              "descriptor_sha256": "6b0c347615332d5e52168d98467d72e3b3bddac1aaedd8e0e5cb57c962320e36"
+            }
+          ]
+        },
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-a-east/10b50d2e842fff4216a354236b0f5adc226f569f4ce63ccd2940174c402d82e3/exists": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-a-east/10b50d2e842fff4216a354236b0f5adc226f569f4ce63ccd2940174c402d82e3/parents_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-a-east/10b50d2e842fff4216a354236b0f5adc226f569f4ce63ccd2940174c402d82e3/parent/synthetic-country-a": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-a-north/121f0783916d8c0679a1119f14639ac2285f55aceb47152212622a4d2d5d1629/exists": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-a-north/121f0783916d8c0679a1119f14639ac2285f55aceb47152212622a4d2d5d1629/parents_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-a-north/121f0783916d8c0679a1119f14639ac2285f55aceb47152212622a4d2d5d1629/parent/synthetic-country-a": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-b-north/179c7160417043789c460142d49c06dce16b71d5aa9b726c5b1ca8ba0058f01c/exists": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-b-north/179c7160417043789c460142d49c06dce16b71d5aa9b726c5b1ca8ba0058f01c/parents_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-b-north/179c7160417043789c460142d49c06dce16b71d5aa9b726c5b1ca8ba0058f01c/parent/synthetic-country-b": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-country-a/6b0c347615332d5e52168d98467d72e3b3bddac1aaedd8e0e5cb57c962320e36/exists": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-country-a/6b0c347615332d5e52168d98467d72e3b3bddac1aaedd8e0e5cb57c962320e36/parents_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-country-b/d3d4a5806c64eb61bf747bc9af343e6a15bf52cdcec1c3ac1d09c5b8f1d40c7d/exists": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/jurisdiction/synthetic-country-b/d3d4a5806c64eb61bf747bc9af343e6a15bf52cdcec1c3ac1d09c5b8f1d40c7d/parents_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/group/synthetic-group-a/e4a1fc8e77d6ccb742889364abd662ae9c68f0d8d19b2f0fd432b901b4fab048/members_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/group/synthetic-group-a/e4a1fc8e77d6ccb742889364abd662ae9c68f0d8d19b2f0fd432b901b4fab048/member/synthetic-country-a": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/group/synthetic-group-ab/b732ddd4b25b41a4562cd41540e2c86ccaa9feb6a4b6be43e59b40868fa7953a/members_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/group/synthetic-group-ab/b732ddd4b25b41a4562cd41540e2c86ccaa9feb6a4b6be43e59b40868fa7953a/member/synthetic-country-a": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/group/synthetic-group-ab/b732ddd4b25b41a4562cd41540e2c86ccaa9feb6a4b6be43e59b40868fa7953a/member/synthetic-country-b": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/group/synthetic-empty-group/2195bfeda3671fb2a06174007931d40dfe0dc16fe77e033a220229cb29d1566d/members_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/disjoint/synthetic-a-b-disjoint/3baf310aa7f43f2ef391846ca29c79530200cb2bdcaea892c18d331bb3d2d4c4/confirmed": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/region/synthetic-processing-map/576f274ef928811ec9152a7f8c952e811fbad70c5c95880bcd8b0ca64348cdd0/locations_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/region/synthetic-processing-map/576f274ef928811ec9152a7f8c952e811fbad70c5c95880bcd8b0ca64348cdd0/location/synthetic-a-north": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/region/synthetic-storage-map/ccbbc2f6b41cffddb0b4c062a1e85ed6ddce838e6c0fccff81b7b394f8cd0e83/locations_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/region/synthetic-storage-map/ccbbc2f6b41cffddb0b4c062a1e85ed6ddce838e6c0fccff81b7b394f8cd0e83/location/synthetic-country-b": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/region/synthetic-other-provider-map/a835bd3ef10e9442470780c52e66212a963d2dbb4e391948a0c49d5113dbedea/locations_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/region/synthetic-other-provider-map/a835bd3ef10e9442470780c52e66212a963d2dbb4e391948a0c49d5113dbedea/location/synthetic-country-b": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/query/synthetic-processing-query/274f58b044e3eeb65f6a22abcc17dda856439b6d4d05f04667e76db2c549575d/locations_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/query/synthetic-processing-query/274f58b044e3eeb65f6a22abcc17dda856439b6d4d05f04667e76db2c549575d/location/f6b692106eee4cbe1bb07cfcf2819e889ad8ed086cc63438959607ceddb651bb": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/query/synthetic-storage-query/d211a70994f169e2842e9eb03656f373542c9e6e060dc9b75052dda783a22045/locations_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/query/synthetic-storage-query/d211a70994f169e2842e9eb03656f373542c9e6e060dc9b75052dda783a22045/location/34d8a46295f9374c3398ac315a52223ff95a9eaf02eb84078c2fd1d219d96649": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/query/synthetic-local-query/6d83d2b2289cee749e308c2e7896c729b0fb12fb177e7e4f024497d60e8e353f/locations_complete": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      },
+      "/cd9/query/synthetic-local-query/6d83d2b2289cee749e308c2e7896c729b0fb12fb177e7e4f024497d60e8e353f/location/24785422c406bbd1301ea47ac3677012f7dda7de482cbd32622c62abb887e67e": {
+        "state": "provided",
+        "value": true,
+        "source": "synthetic:fixture-only"
+      }
+    }
+  }
+}
