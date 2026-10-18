@@ -569,7 +569,7 @@ These affect throughput and plan selection, not price per call.
 | Shared provider identity and `provided_by` link between `data_source` and `integration`; union-of-scopes review when one OAuth client serves ingestion and actions | handoff to #13 · @zabyxc01 |
 | Rate-limit and failure-mode signals (`Retry-After`, `x-ratelimit-*`, `Stripe-Rate-Limited-Reason`, in-band tool errors) for monitoring | handoff to #38 · @PUSHINGSQUARES |
 | Evidence policy for summarising fetchers and pages that render tables in JavaScript (Slack tiers, GitHub permissions) | #41 · @tynamite |
-| Remaining source decisions: exact Stripe refund-operation RAK resource mapping; E2B distribution artifact/dependency terms beyond the pinned SDK source | #26 · @CompleteDotTech |
+| Remaining source decisions: exact Stripe refund-operation RAK resource mapping; E2B resolved dependency terms, applicable notice delivery and intended redistribution scope. B55 below records the exact wheel's bytes, metadata and internal inventory; it does not settle those remaining uses | #26 · @CompleteDotTech |
 
 [Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
 
@@ -656,3 +656,41 @@ This audit preserves the nine literal research acceptance criteria from [#26](ht
 | #26 → #39 Cost Estimate | Preserve published billing units and unknown costs; link the dated tool pricebook with its conditions; route unsupported meters and the tool dependency edge through #40 | The same two actual owners accept the units/unknown-cost principles. [Merged #229](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/229) supplies the requested #70/#72 links and four explicit memory-cost omissions in [the receiving cost record](../T6-deployment-operations/cost-estimate.md#t4-cost-coverage-follow-up-2026-10-18-partial-research). Final review must assess those delivered coverage corrections without treating the earlier comments as approval of a later revision. No current vendor rate, scenario total or complete #39 is inferred. |
 
 The wider T4 handoff matrix also tracks #13 shared provider identity, #38 telemetry and #40/#41 governance. These remain at their named owners for the scoped follow-on work. In particular, the [#40 queue receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) accepts proposed work for central review; it is not permission to edit frozen v1. The [#41 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857) preserves claim-level evidence, dated current-state observations and source-specific rights. Neither contract implementation nor a universal API integration approval is an additional research criterion for #26.
+
+## E2B distribution-artifact readback (2026-10-18)
+
+**B55 — Primary publisher artifact and package metadata, source checked / unverified.** On **2026-10-18**, the versioned [PyPI metadata for `e2b` 2.56.0](https://pypi.org/pypi/e2b/2.56.0/json) and its exact [Python wheel](https://files.pythonhosted.org/packages/58/ec/17bee489c285b555a83a3360da1e4eeedaf7c5c767de4038cf9503104faa/e2b-2.56.0-py3-none-any.whl) were fetched over public HTTPS. The [external-artifact manifest](../../evidence/t4-e2b-2560-wheel.json) retains the stable locator and digest; the wheel is not committed. This supplements B49's earlier source-only check with an inspection of actual distribution bytes. No package installation, dependency resolution, SDK execution or hosted sandbox request was performed.
+
+| Field | Published or locally observed value | Basis and limit |
+| --- | --- | --- |
+| Artifact | `e2b-2.56.0-py3-none-any.whl`, **400,291 bytes** | Locally downloaded byte count matches the versioned PyPI file metadata |
+| SHA-256 | `acfb77c56a33daf1542362cab8048f062b578dffe7a48f32f87a4a3e0bef1e14` | Locally calculated digest matches PyPI; this is artifact identity, not independent product verification |
+| Published upload time | `2026-10-13T15:01:53.831164Z` | PyPI's file metadata; the access date remains 2026-10-18 |
+| Embedded package metadata | `Metadata-Version: 2.4`, `Name: e2b`, `Version: 2.56.0`, `Requires-Python: >=3.11`, `License-Expression: MIT` | Read from `e2b-2.56.0.dist-info/METADATA`; declarations do not prove runtime compatibility or legal scope for other materials |
+| Embedded metadata SHA-256 | `3c5750a022682587e48967666c8868bc561594897f2f6ec708a56db17bcc9ea2` | Digest of the exact uncompressed `METADATA` bytes |
+| ZIP inventory | **285** unique entries: **245** regular files and **40** directories | Local archive inspection; no duplicate member names |
+| `RECORD` inventory | **245** unique rows cover exactly the **245** regular files | All **244** populated SHA-256/base64url digest and byte-size pairs match the corresponding members; the `RECORD` self-row has empty digest and size |
+| License-file observations | No `License-File` header; no regular member basename containing `LICENSE`, `LICENCE`, `NOTICE` or `COPYING`, case-insensitively | An exact metadata/filename observation, not a claim that the software has no license or that redistribution is forbidden |
+
+**Method and reproducibility.** Download the manifest's exact URI, compare its SHA-256 and byte count with the versioned PyPI metadata, then inspect it as a ZIP without importing its code. Read `METADATA` and CSV `RECORD`, reject duplicate paths, compare the full regular-file set with the record paths, and recompute each listed member's SHA-256 using unpadded URL-safe base64 plus its uncompressed byte length. The only unhashed row observed was `RECORD` itself. The [PyPA wheel specification](https://packaging.python.org/en/latest/specifications/binary-distribution-format/#the-dist-info-directory), checked 2026-10-18, supplies the format reference. These checks establish internal consistency of the inspected bytes; they do not authenticate a build process or assess package behavior.
+
+The embedded `Requires-Dist` fields declare the following **12 direct dependency ranges**, copied here as an inventory rather than a resolved environment:
+
+```text
+python-dateutil>=2.8.2
+wcmatch>=10.1,<12
+protobuf-py>=0.1.1,<0.2
+httpx>=0.27.0,<1.0.0
+h2>=4.4.1,<5
+attrs>=23.2.0
+packaging>=24.1
+typing-extensions>=4.10.0
+rich>=14.0.0
+connectrpc>=0.11.1,<0.12
+pyqwest>=0.12.0,<0.13
+e2b-dockerfile-utils>=0.1.0,<0.2
+```
+
+**Source and intended-use boundary.** B49's package-local [MIT license at source commit `62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3`](https://github.com/e2b-dev/E2B/blob/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/LICENSE) was re-read on 2026-10-18 (Git blob `4aa6529d102d71d5410904a4331efeb8bac3e968`). It identifies FOUNDRYLABS, INC. and requires the copyright and permission notices to accompany copies or substantial portions. Agreement between the source-package version and wheel metadata does not establish that this wheel was built from that commit; no build-source attestation was examined. The metadata declaration and filename search do not determine notice coverage under every packaging or distribution arrangement.
+
+The exact-wheel inspection gap is now narrowed to the observations above. **#26 · @CompleteDotTech** retains the source-specific follow-up: identify the actual target environment and resolved dependency artifacts, review their applicable terms and notice delivery, and assess the precise intended redistribution use under #41's evidence/intake policy. No dependency version, transitive closure, hosted-service/workload term or redistribution permission is inferred from the SDK's MIT declaration. The completed [#60 ten-source market audit](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60) keeps its own accepted scope; this readback neither extends that audit to E2B nor reopens it. The original B33/B49 observations and the nine #26 acceptance criteria remain historical evidence and unchanged criteria, respectively.

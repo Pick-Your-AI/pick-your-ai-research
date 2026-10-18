@@ -2432,8 +2432,8 @@
     ],
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Independent integration scope accepted with constraints; consuming-owner acceptance pending",
-    "requested_action": "Consuming owner: accept, reject or narrow this research input. T2 retains selected-region availability, startup and actual capacity evidence.",
+    "acceptance": "Accepted with constraints under delegated engineering receiving review",
+    "requested_action": "Use the dated HF per-replica/minute and RunPod volume/tier observations conditionally. No selected-region inventory, account quota, startup duration, live capacity or service equivalence is supplied. Display rate, accrual cadence, credit admission and invoice rounding remain distinct; preserve unresolved RunPod details.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "receiving_review_status": "not_yet_confirmed",
@@ -2449,6 +2449,25 @@
         "scope": "HF per-replica/minute and RunPod volume/tier source observations; retain unknown region, quota, startup and service equivalence.",
         "retained_unknowns_and_next_action": "T2 retains selected-region availability, startup and actual capacity evidence.",
         "authority": "The user expressly delegated project-focused engineering decisions. This is the actual independent integration review, not a response attributed to a named assignee who did not post one. The separate consuming-owner acceptance requirement remains pending."
+      },
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "CompleteDotTech (delegated engineering reviewer as stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T11:14:18Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654",
+        "reviewed_commit": "8dfec2d58661232f5128f954cf2b5840450732a8",
+        "reviewed_artifact_git_blob": "f0c2c16b9a1d49e5cb1bd2f947f1113414a80f57",
+        "unchanged_through_receipt_main": "19de6ee8301487ff70cbf5ec2ac539f4b481a628",
+        "reviewed_pricebook_git_blobs": [
+          "fca24888caa132c73a47c27c79b94f82c3709084",
+          "bd960e1827a0750a4e92eab978128ca11a26ccd4"
+        ],
+        "commit_basis": "The actual receipt explicitly identifies the canonical pricing note at 8dfec2d and its exact blob, the two Pricebook blobs, and their unchanged state through fetched main 19de6ee. The later placement clarification and receiving-record amendment receive their own current source review; this record does not attribute that later revision to the earlier receipt.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the stated research input, not another issue's completion, source-use permission, deployment eligibility, service equivalence or measured runtime evidence.",
+        "scope": "conditional hosting observations",
+        "retained_unknowns_and_next_action": "Use the dated HF per-replica/minute and RunPod volume/tier observations conditionally. No selected-region inventory, account quota, startup duration, live capacity or service equivalence is supplied. Display rate, accrual cadence, credit admission and invoice rounding remain distinct; preserve unresolved RunPod details."
       }
     ]
   },
@@ -2462,8 +2481,8 @@
     ],
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Independent integration scope accepted with constraints; consuming-owner acceptance pending",
-    "requested_action": "Consuming owner: accept, reject or narrow this research input. #39 retains meters, aggregation/rounding, commitments and selected-workload quantity decisions.",
+    "acceptance": "Accepted with constraints under delegated engineering receiving review",
+    "requested_action": "Retain the one-off/recurring separation, once-per-billing-scope allowances and explicit unpriced meters. Both examples remain partial and cannot pass a complete-coverage budget gate or establish a cheapest/equivalent service. No new meter, currency/FX default, global rounding policy, Pricebook or ResourceEstimate is adopted.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "receiving_review_status": "not_yet_confirmed",
@@ -2479,6 +2498,25 @@
         "scope": "37-check arithmetic audit, one-off/recurring split, scoped allowances and uncovered-meter inventory; partial subtotals cannot pass complete-coverage budget gates.",
         "retained_unknowns_and_next_action": "#39 retains meters, aggregation/rounding, commitments and selected-workload quantity decisions.",
         "authority": "The user expressly delegated project-focused engineering decisions. This is the actual independent integration review, not a response attributed to a named assignee who did not post one. The separate consuming-owner acceptance requirement remains pending."
+      },
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "CompleteDotTech (delegated engineering reviewer as stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T11:14:18Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654",
+        "reviewed_commit": "8dfec2d58661232f5128f954cf2b5840450732a8",
+        "reviewed_artifact_git_blob": "f0c2c16b9a1d49e5cb1bd2f947f1113414a80f57",
+        "unchanged_through_receipt_main": "19de6ee8301487ff70cbf5ec2ac539f4b481a628",
+        "reviewed_pricebook_git_blobs": [
+          "fca24888caa132c73a47c27c79b94f82c3709084",
+          "bd960e1827a0750a4e92eab978128ca11a26ccd4"
+        ],
+        "commit_basis": "The actual receipt explicitly identifies the canonical pricing note at 8dfec2d and its exact blob, the two Pricebook blobs, and their unchanged state through fetched main 19de6ee. The later placement clarification and receiving-record amendment receive their own current source review; this record does not attribute that later revision to the earlier receipt.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the stated research input, not another issue's completion, source-use permission, deployment eligibility, service equivalence or measured runtime evidence.",
+        "scope": "partial-cost arithmetic and uncovered-meter inventory",
+        "retained_unknowns_and_next_action": "Retain the one-off/recurring separation, once-per-billing-scope allowances and explicit unpriced meters. Both examples remain partial and cannot pass a complete-coverage budget gate or establish a cheapest/equivalent service. No new meter, currency/FX default, global rounding policy, Pricebook or ResourceEstimate is adopted."
       }
     ]
   },
@@ -2492,8 +2530,8 @@
     ],
     "artifact": "research/market/pricing-validation.md",
     "relationship": "Cross-tier handoff / information input",
-    "acceptance": "Independent integration scope accepted with constraints; consuming-owner acceptance pending",
-    "requested_action": "Consuming owner: accept, reject or narrow this research input. #41/#60 retain conflict policy and source-use rights; no new retrieval, display or redistribution rights.",
+    "acceptance": "Accepted with constraints under delegated engineering receiving review",
+    "requested_action": "Source-checked facts remain unverified in v1. Retain historical pins only where rights permit, and review current eligibility separately. Preserve withdrawal of the unaccepted TTL and #60 source-use exclusions. No automatic saved-build rewrite or extra retrieval/display/redistribution right follows.",
     "ownership_observed_on": "2026-10-18",
     "declaration_url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64",
     "receiving_review_status": "not_yet_confirmed",
@@ -2509,6 +2547,25 @@
         "scope": "Dated source checking, failed-fetch/drift treatment and withdrawal of the unaccepted automatic 30-day TTL; retain historical pins and v1 unverified source status.",
         "retained_unknowns_and_next_action": "#41/#60 retain conflict policy and source-use rights; no new retrieval, display or redistribution rights.",
         "authority": "The user expressly delegated project-focused engineering decisions. This is the actual independent integration review, not a response attributed to a named assignee who did not post one. The separate consuming-owner acceptance requirement remains pending."
+      },
+      {
+        "role": "delegated_project_engineering_receiving",
+        "reviewer": "CompleteDotTech (delegated engineering reviewer as stated in the receipt)",
+        "posted_through_github_account": "CompleteDotTech",
+        "submitted_at": "2026-10-18T11:14:18Z",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/64#issuecomment-6249212654",
+        "reviewed_commit": "8dfec2d58661232f5128f954cf2b5840450732a8",
+        "reviewed_artifact_git_blob": "f0c2c16b9a1d49e5cb1bd2f947f1113414a80f57",
+        "unchanged_through_receipt_main": "19de6ee8301487ff70cbf5ec2ac539f4b481a628",
+        "reviewed_pricebook_git_blobs": [
+          "fca24888caa132c73a47c27c79b94f82c3709084",
+          "bd960e1827a0750a4e92eab978128ca11a26ccd4"
+        ],
+        "commit_basis": "The actual receipt explicitly identifies the canonical pricing note at 8dfec2d and its exact blob, the two Pricebook blobs, and their unchanged state through fetched main 19de6ee. The later placement clarification and receiving-record amendment receive their own current source review; this record does not attribute that later revision to the earlier receipt.",
+        "disposition": "accepted_with_constraints",
+        "authority": "Actual independent technical receiving review under the user's express project engineering mandate. No response is attributed to an unparticipating assignee. This accepts only the stated research input, not another issue's completion, source-use permission, deployment eligibility, service equivalence or measured runtime evidence.",
+        "scope": "dated-source, failed-refresh and event-driven drift treatment",
+        "retained_unknowns_and_next_action": "Source-checked facts remain unverified in v1. Retain historical pins only where rights permit, and review current eligibility separately. Preserve withdrawal of the unaccepted TTL and #60 source-use exclusions. No automatic saved-build rewrite or extra retrieval/display/redistribution right follows."
       }
     ]
   },
