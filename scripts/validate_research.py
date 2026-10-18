@@ -81,7 +81,8 @@ def locator_parts(uri):
 def public_source(uri):
     try:
         value = locator_parts(uri)
-        host = (value.hostname or '').removesuffix('.')
+        # Normalize Unicode hostname forms before reserved-domain/IP checks.
+        host = (value.hostname or '').encode('idna').decode('ascii').removesuffix('.')
         reserved = host in {'example.com', 'example.org', 'example.net', 'localhost'} or any(
             host.endswith(s) for s in ('.example', '.invalid', '.test', '.localhost', '.example.com', '.example.org', '.example.net'))
         if (value.scheme not in {'http', 'https'} or not host or reserved

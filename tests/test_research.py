@@ -212,6 +212,9 @@ class Intake(unittest.TestCase):
             '127.1', '2130706433', '0177.0.0.1', '0x7f000001', '0x7f.0.0.1',
             '0x', '0X', '0x.0.0.1',
             '127%2e0%2e0%2e1', '[fe80::1%25eth0]',
+            '１２７.０.０.１', '127。0。0。1', '127．0．0．1', '127｡0｡0｡1',
+            '０ｘ７ｆ０００００１', 'ｌｏｃａｌｈｏｓｔ', 'ｅｘａｍｐｌｅ.com',
+            'example。org', 'host。test',
         )
         rate = {'id': 'test.rate', 'catalog_item_id': self.item['id'],
                 'catalog_item_version': '1', 'meter': 'request',
@@ -234,6 +237,8 @@ class Intake(unittest.TestCase):
         for uri in ('https://8.8.8.8/claim', 'http://1.1.1.1:80/claim',
                     'https://8.8.8.8./claim', 'https://[2606:4700:4700::1111]/claim',
                     'https://[::ffff:8.8.8.8]/claim',
+                    'https://８.８.８.８/claim', 'https://8.8.8.8。/claim',
+                    'https://bücher.de/claim',
                     'https://github.com./Pick-Your-AI/pick-your-ai-research'):
             with self.subTest(uri=uri):
                 item = copy.deepcopy(self.item)
