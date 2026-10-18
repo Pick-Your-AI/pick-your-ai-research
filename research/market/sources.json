@@ -921,6 +921,39 @@
         "rights": "No data reuse permission established; terms not accessible.",
         "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken.",
         "method": "Public web-tool extraction, which can be cached; no workflow/API/compute execution."
+      },
+      {
+        "review_scope": "current-main integration correction",
+        "access_date": "2026-10-18",
+        "access_status": "public primary terms retrieved; earlier /terms retrieval failure retained separately",
+        "version": "Terms last updated 2026-06-05; /en/terms read 2026-10-18. Original home/privacy retrieval details remain in the preceding recheck.",
+        "region": "Public service terms; not a regional price quote or service-availability guarantee",
+        "confidence": "Medium for publisher documentation; independent ownership and intended-use acceptance remain unresolved",
+        "reviewed_urls": [
+          {
+            "url": "https://gpus.io/en/terms",
+            "publisher": "GPUs.io / Peak Technologies, Inc. (publisher attribution)",
+            "access_status": "retrieved"
+          }
+        ],
+        "claims": [
+          {
+            "claim": "Publisher terms name Peak Technologies, Inc. as the website/API operator and document paid API access.",
+            "evidence_class": "Primary documentation",
+            "url": "https://gpus.io/en/terms",
+            "publisher": "GPUs.io / Peak Technologies, Inc. (publisher attribution)"
+          },
+          {
+            "claim": "Sections 5–7 keep competition, redistribution and attribution constraints separate from paid API access. A subscription is not blanket permission.",
+            "evidence_class": "Primary documentation",
+            "url": "https://gpus.io/en/terms",
+            "publisher": "GPUs.io / Peak Technologies, Inc. (publisher attribution)"
+          }
+        ],
+        "operator_statement": "Peak Technologies, Inc., as named by the publisher terms; corporate identity and ownership not independently verified.",
+        "rights": "Apply the source/material/use assessment and proposed current-product exclusion in research/market/rights-validation.md; intended-use acceptance remains pending #60/#41/#39.",
+        "limitations": "Documentary correction only. No API call, data ingestion, rate verification or independent legal-entity check. Prior failed requests remain in the preceding recheck.",
+        "method": "Read-only public terms extraction and reconciliation with merged research; source claims are publisher documentation."
       }
     ]
   },

@@ -1111,7 +1111,7 @@
     "id": "gpus-io",
     "name": "GPUs.io",
     "website": "https://gpus.io/",
-    "organization": "GPUs.io brand; legal entity still unconfirmed. Privacy footer links @boxhock but that alone does not establish operator identity.",
+    "organization": "Publisher terms name Peak Technologies, Inc.; independent legal-entity/ownership verification remains incomplete.",
     "classifications": [
       "Partial competitor",
       "Data source"
@@ -1131,8 +1131,8 @@
       ]
     },
     "deployment_support": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence. Recheck blocked by a 403 bot challenge.",
-    "apis_and_integrations": "Unknown: not established by reviewed primary evidence (accessed 2026-10-16); missing documentation is not absence.",
-    "licensing": "Listing reuse and affiliate terms unverified.",
+    "apis_and_integrations": "Paid API is documented in the separately dated /en/terms recheck; access was not exercised.",
+    "licensing": "See the current source/use assessment and proposed current-product exclusion in research/market/rights-validation.md (#60); paid API access does not supply unrestricted reuse approval.",
     "source_ids": [
       "src-gpus-io",
       "src-gpus-io-recheck"
@@ -1160,19 +1160,21 @@
     "discovery_review": {
       "access_date": "2026-10-18",
       "canonical_url": "https://gpus.io/",
-      "operator": "GPUs.io brand; legal entity still unconfirmed. Privacy footer links @boxhock but that alone does not establish operator identity.",
+      "operator": "Publisher terms name Peak Technologies, Inc.; independent legal-entity/ownership verification remains incomplete.",
       "product_scope": "Cloud GPU comparison; current static home also advertises model-to-GPU discovery.",
-      "version": "Unversioned home accessed 2026-10-18 redirects /en; privacy last updated 2026-01-27, cached by web tool seven months earlier.",
+      "version": "Original home/privacy retrieval details remain in the first dated source recheck; the separate /en/terms correction read 2026-10-18 records terms last updated 2026-06-05.",
       "source_ids": [
         "src-gpus-io",
         "src-gpus-io-recheck"
       ],
-      "evidence_locator": "src-gpus-io / rechecks / 2026-10-18",
+      "evidence_locator": "src-gpus-io / rechecks / 2026-10-18 (original observation and current-main integration correction)",
       "status": "Source-checked documentary scope; behavior and unknown operators unverified",
-      "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken.",
+      "limitations": "Historical 2026-10-16 anonymous HTTP 403 remains valid prior observation; fresh cached/static retrieval does not prove live table/API accessibility or bypass the historical block. No prices taken. Current-main integration separately rechecked /en/terms; see the second dated source recheck and rights-validation.md.",
       "updated_fields": [
         "organization",
         "capabilities",
+        "apis_and_integrations",
+        "licensing",
         "limitations"
       ]
     }
