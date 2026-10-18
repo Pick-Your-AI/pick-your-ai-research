@@ -101,6 +101,49 @@ The [CD-7 synthetic fixtures](../../tests/fixtures/t0-migration.json) and [proje
 7. **Applicability is per component.** Rules key on the component's deployment mode (operator and capacity, #81), not the build-level `deployment_mode`.
 8. **`on_unknown`:** `review` for evidence-dependent rules; `block` only where proceeding is unsafe (for example air-gap isolation, W-R8); `defer` for recommendations.
 
+### CD-3 synthetic support-membership experiment (2026-10-18)
+
+The [normalized prototype](../../tests/support_membership_prototype.py) and
+[regression cases](../../tests/test_support_membership.py) exercise the
+[adopted completeness policy](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927),
+checked against the actual owner review on 2026-10-18. The unchanged frozen
+evaluator's `contains` and `intersects` return false for an absent member;
+those Boolean operations alone cannot tell an incomplete research inventory
+from an exhaustive negative claim. The synthetic cases reproduce that gap.
+
+The input represents an already normalized and scoped publisher-evidence
+cohort. Actual source inspection, selected version/configuration/condition
+matching, and #41's scope/date/authority ordering must happen first. The
+prototype does not derive eligibility from a nonempty list or its completeness
+marker, merge independent support dimensions, or resolve catalog sources.
+
+| Eligible evidence for a requested value | Proposed member result |
+| --- | --- |
+| Documented supported member, without an equal-rank opposite claim | `pass`, evidence still `unverified`; exhaustiveness is unnecessary for this positive claim |
+| Explicit unsupported statement, without an equal-rank opposite claim | `fail`; an exhaustive inventory is unnecessary for this negative claim |
+| Absent from a known list whose scoped source is exhaustive | `fail` |
+| Absent from an unmarked/non-exhaustive list, or the list itself is missing | `unknown`; a missing list is not a known empty exhaustive list |
+| Opposite yes/no claims still equally ranked after the preceding review | `unknown`, flagged disputed; a stronger requirement must already have superseded a weaker capability listing under #41 |
+| Evidence known outside the query scope, or eligibility unresolved | `unknown` for an applicable compatibility query; an ineligible source is not evidence of incompatibility |
+
+A singleton query models `contains`; alternative accepted formats use an
+`any` query like `intersects`. One documented alternative passes that membership
+check, while failure requires negative evidence for every alternative. An
+`all` query requires every requested member and fails on a known counterexample;
+unresolved rows remain visible in either mode. These internal query names and
+reason strings do not settle DSL syntax. The experiment requires a nonempty
+applicable query; a known irrelevant rule is explicitly `skipped`, while missing
+requirements/applicability remain `unknown`.
+
+A member passing documents only that scoped support claim, with the source
+identity retained. It does not establish joint architecture/backend/quantization
+support, runtime execution, memory fit, an offering's allowed residency, or
+independent verification. [T2's direct-loader completeness exception and its
+unmarked support lists](../T2-infrastructure/inference-engine.md#release-keyed-artifact-and-hardware-matrix)
+retain their original source/release scopes. CD-1/CD-3 wire shapes, conflict
+resolution over real sources, affected-owner adoption and the versioned
+ruleset/adapter remain open; frozen v1 and #42's prerequisite are unchanged.
+
 ## Rule families (decided, pending a versioned ruleset)
 
 | Family | Merges | Notes |
