@@ -37,7 +37,7 @@ class ClosingDirectivesTests(unittest.TestCase):
             self.assertTrue(closing.check_text('Fixes ' + target, ['#34']))
 
     def test_quotes_code_and_markdown_are_conservatively_flagged(self):
-        for text in ['> Closes #34', '`Closes #34`', '**Closes** #34', 'Closes: `#34`']:
+        for text in ['> Closes #34', '`Closes #34`', '**Closes** #34', '_Closes_ #34', '__Closes__ #34', 'Closes: `#34`']:
             self.assertTrue(closing.check_text(text, ['#34']))
 
     def test_multiline_keyword_and_target(self):
@@ -48,3 +48,16 @@ class ClosingDirectivesTests(unittest.TestCase):
 
     def test_ordinary_prose_without_reference(self):
         self.assertEqual(closing.check_text('Close the review loop; fixed formatting.'), [])
+
+    def test_adjacent_negation_or_range_cannot_be_allowlisted(self):
+        for text in ['does not\nclose #34', 'Closes #34\n–#39', 'Closes #34\nthrough #39']:
+            self.assertTrue(closing.check_text(text, ['#34']))
+        self.assertEqual(closing.check_text('Accepted evidence.\n\nCloses #34', ['#34']), [])
+
+    def test_link_wrappers_are_flagged(self):
+        for text in ['Closes [#34](https://github.com/owner/repo/issues/34)',
+                     'Closes <https://github.com/owner/repo/issues/34>']:
+            self.assertTrue(closing.check_text(text))
+
+    def test_fenced_directives_are_not_standalone(self):
+        self.assertTrue(closing.check_text('```\nCloses #34\n```', ['#34']))

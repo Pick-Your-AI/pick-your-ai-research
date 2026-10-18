@@ -5,7 +5,7 @@ import re
 
 KEYWORD = r"(?:close[sd]?|fix(?:es|ed)?|resolve[sd]?)"
 TARGET = r"(?:[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)?#[1-9][0-9]*|https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/issues/[1-9][0-9]*"
-CANDIDATE = re.compile(rf"\b{KEYWORD}\b[\s:*`_]*(?P<target>{TARGET})", re.I)
+CANDIDATE = re.compile(rf"(?<![A-Za-z0-9]){KEYWORD}(?![A-Za-z0-9])[\s:*`_\[<]*(?P<target>{TARGET})", re.I)
 EXPLICIT = re.compile(rf"{KEYWORD}:?\s+(?P<target>{TARGET})", re.I)
 
 
@@ -17,13 +17,19 @@ def check_text(text, allowed=()):
     """
     allowed = set(allowed)
     errors = []
-    for match in CANDIDATE.finditer(text):
-        start = text.rfind('\n', 0, match.start()) + 1
-        end = text.find('\n', match.end())
-        line = text[start:end if end >= 0 else len(text)].strip()
-        explicit = EXPLICIT.fullmatch(line)
-        if explicit is None or explicit.group('target') not in allowed:
-            errors.append((text.count('\n', 0, match.start()) + 1, match.group('target')))
+    offset = 0
+    for paragraph in re.split(r"\n[ \t]*\n", text):
+        start = text.find(paragraph, offset)
+        offset = start + len(paragraph)
+        directives = [EXPLICIT.fullmatch(line.strip()) for line in paragraph.splitlines()]
+        intentional = bool(directives) and all(
+            directive is not None and directive.group('target') in allowed
+            for directive in directives
+        )
+        if not intentional:
+            for match in CANDIDATE.finditer(paragraph):
+                line = text.count('\n', 0, start + match.start()) + 1
+                errors.append((line, match.group('target')))
     return errors
 
 
