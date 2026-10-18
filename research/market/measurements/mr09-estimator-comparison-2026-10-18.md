@@ -4,9 +4,11 @@ Refs #61. Partial research, pending co-owner/coordinator evidence review.
 This continuation executes third-party estimators against **existing** pinned
 SmolLM2 observations; it launches no model inference and downloads no weights.
 Base main: `b9694364b6f0a3d1e9c6b37189cc007778fc54bc`.
-[PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) remains a
-separate, unmerged MoE evidence contribution at this readback; no GM1 result is
-included or claimed accepted here. Live #61 co-owners remain @Mattycodes69 and
+[PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) was initially a
+separate open MoE contribution; it merged during this continuation at main
+`2ecfa005a93b3944e6832bdb6a168d535e5efca6`. Integration preserves that cohort
+unchanged. No GM1 result enters this estimator-pair set or is claimed accepted
+by this contribution. Live #61 co-owners remain @Mattycodes69 and
 @appletechie; @CompleteDotTech retains evidence/scope review. #7/#10/#11 retain
 receiving-owner review. Assignments, triage, #59 ledgers and v1 are unchanged.
 

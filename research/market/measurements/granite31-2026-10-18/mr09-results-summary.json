@@ -1,0 +1,241 @@
+{
+  "classification": "summary of real model inference; no universal fit/error bounds",
+  "status_counts": {
+    "success": 3
+  },
+  "run_count": 3,
+  "measured_script_hashes": [
+    "338ebb6a197712b655c5c2f69d6b1dbc0a51265455773b58c32ea2bc87c13974"
+  ],
+  "protocol_hashes": [
+    "c053ef264bf9064854a4abdcc626ea749eb12dd2bcca00219b4a087a8174f904"
+  ],
+  "comparable_competitor_error_pairs": 0,
+  "native_kv_errors_scope": "formula versus tensor-payload layout sanity check only; no competitor/runtime calibration",
+  "cells": {
+    "GM1": {
+      "status_counts": {
+        "success": 3
+      },
+      "phases": {
+        "baseline": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          }
+        },
+        "loading": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 2669257728,
+            "median": 2669257728,
+            "max": 2669257728
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 2675965952,
+            "median": 2675965952,
+            "max": 2675965952
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 2669257728,
+            "median": 2669257728,
+            "max": 2669257728
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 2675965952,
+            "median": 2675965952,
+            "max": 2675965952
+          }
+        },
+        "warmup": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 2686198272,
+            "median": 2686198272,
+            "max": 2686198272
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 2707423232,
+            "median": 2707423232,
+            "max": 2707423232
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 2681073664,
+            "median": 2681073664,
+            "max": 2681073664
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 2707423232,
+            "median": 2707423232,
+            "max": 2707423232
+          }
+        },
+        "prefill": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 2711454720,
+            "median": 2711454720,
+            "max": 2711454720
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 2740977664,
+            "median": 2740977664,
+            "max": 2740977664
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 2690461696,
+            "median": 2690461696,
+            "max": 2690461696
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 2740977664,
+            "median": 2740977664,
+            "max": 2740977664
+          }
+        },
+        "decode": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 2697602048,
+            "median": 2697602048,
+            "max": 2697602048
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 2740977664,
+            "median": 2740977664,
+            "max": 2740977664
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 2691935744,
+            "median": 2691935744,
+            "max": 2691935744
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 2740977664,
+            "median": 2740977664,
+            "max": 2740977664
+          }
+        },
+        "steady_state": {
+          "peak_allocated_bytes": {
+            "n": 3,
+            "min": 2691935744,
+            "median": 2691935744,
+            "max": 2691935744
+          },
+          "peak_reserved_bytes": {
+            "n": 3,
+            "min": 2740977664,
+            "median": 2740977664,
+            "max": 2740977664
+          },
+          "current_allocated_bytes": {
+            "n": 3,
+            "min": 2691935744,
+            "median": 2691935744,
+            "max": 2691935744
+          },
+          "current_reserved_bytes": {
+            "n": 3,
+            "min": 2740977664,
+            "median": 2740977664,
+            "max": 2740977664
+          }
+        }
+      },
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "model_id": "ibm-granite/granite-3.1-1b-a400m-instruct",
+      "revision": "0da7a48b0276d500ce5922fd2b33944091fc6c09",
+      "script_sha256": "338ebb6a197712b655c5c2f69d6b1dbc0a51265455773b58c32ea2bc87c13974",
+      "protocol_sha256": "c053ef264bf9064854a4abdcc626ea749eb12dd2bcca00219b4a087a8174f904",
+      "configuration": {
+        "weight_dtype": "bfloat16",
+        "weight_quantization": "none",
+        "kv_cache": "bf16",
+        "prompt_tokens_per_sequence": 256,
+        "decode_forwards_per_sequence": 32,
+        "active_sequences": 1,
+        "queued_requests": 0,
+        "seed": 6109,
+        "attention_backend": "sdpa",
+        "graph_capture": false,
+        "compile": false,
+        "device_map": {
+          "": "cuda:0"
+        },
+        "offload": false,
+        "tensor_parallel_size": 1,
+        "pipeline_parallel_size": 1
+      },
+      "initial_cuda_reported_free_bytes": {
+        "n": 3,
+        "min": 15769534464,
+        "median": 15769534464,
+        "max": 15769534464
+      },
+      "native_kv_prefill_payload_bytes": {
+        "n": 3,
+        "min": 12582912,
+        "median": 12582912,
+        "max": 12582912
+      },
+      "int4_kv_prefill_payload_bytes": {
+        "n": 0,
+        "min": null,
+        "median": null,
+        "max": null
+      },
+      "failures": []
+    }
+  },
+  "input_checksums": [
+    {
+      "file": "mr09-GM1-r1.json",
+      "sha256": "39032779029e7ec171ef47750168dc7caf8da054d2c88216d42b81ee4d0e0134"
+    },
+    {
+      "file": "mr09-GM1-r2.json",
+      "sha256": "4938ce9c0198fe3c1095b025db860f10ee06a95daff51fa9278b564b2610ba8f"
+    },
+    {
+      "file": "mr09-GM1-r3.json",
+      "sha256": "f5d81beb57710c31959309e025b2dff015150039e01fb8e42045f42789603ca0"
+    }
+  ]
+}

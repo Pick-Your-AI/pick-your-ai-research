@@ -7,8 +7,11 @@ Research date: 2026-10-16. Branch: `codex/mr09-feasibility-validation`. Base: PR
 Branch `codex/issue61-estimator-comparisons`, base main
 `b9694364b6f0a3d1e9c6b37189cc007778fc54bc`. This dated addendum covers the new
 estimator runner, six llmfit outputs, ModelFit output, browser observation,
-12 component pairs and updated decision notes. It does not incorporate the
-separate pending #251 GPU evidence. Historical validation below remains dated.
+12 component pairs and updated decision notes. The final integration at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`
+retains #251 GPU evidence unchanged and outside this estimator-pair set.
+The full required suite and all validators were rerun after resolving the three
+note conflicts; upstream tests account for the increased integrated count.
+Historical validation below remains dated.
 
 Used bundled Python **3.12.14**, Node **v25.9.0**, and the pinned external binary,
 engine and metadata identities recorded in the comparison ledger. Ran the
@@ -20,7 +23,7 @@ directory. Existing-target warnings did not replace or change installed packages
 | --- | --- |
 | `python -m pip install -r requirements-research.txt --target $TASK_VALIDATION_DEPS` | Passed |
 | `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
-| `python -m unittest discover -s tests -v` | 226 passed, including eight new comparison eligibility/integrity tests |
+| `python -m unittest discover -s tests -v` initially, `-q` after integration | 226 initially; 247 passed after integration, including eight new comparison eligibility/integrity tests |
 | `python scripts/validate_research.py` | 74 catalog proposals, 3 pricebooks and external evidence metadata passed |
 | `python scripts/validate_market_research.py` | 33 entities, 1,584 cells and 20 issues passed |
 | `python scripts/validate_handoff_audit.py` | 101 rows / 98 declared pairs passed; ledgers unchanged |
@@ -44,6 +47,48 @@ physical measurements, artifact/runtime equivalence, fresh deployment identity,
 fit accuracy or human acceptance. #61 co-owners/coordinator and #7/#10/#11
 receivers must review those matters; whole-runtime pairs remain zero and no
 decision tolerance or issue completion is claimed.
+
+## Supplemental GM1 validation — 2026-10-18
+
+Branch: `codex/issue61-sizing-validation`, based on main
+`61d549d76b894c1e5d8ac4229abf892d162da935`. This addendum applies to the
+separate GM1 instrument, three real result records, summary and updated notes.
+Historical 2026-10-16 validation below remains a dated record.
+
+Validation used bundled Python **3.12.14** on Windows/PowerShell. Ran the
+workflow's dependency installation with `-r requirements-research.txt --target
+$TASK_VALIDATION_DEPS`; set PYTHONPATH to that isolated temporary dependency
+directory. This does not modify the existing CUDA environment. The experiment
+itself used Python **3.12.11** and the package versions in each observation.
+
+All workflow commands were executed from the repository root:
+
+| Check | Result |
+| --- | --- |
+| `python -m pip install -r requirements-research.txt --target $TASK_VALIDATION_DEPS` | Passed; pinned requirements installed |
+| `python -m unittest discover -s contracts/v1/tests -v` | 21 passed |
+| `python -m unittest discover -s tests -v` | 213 passed, including five new guard/record-integrity tests |
+| `python scripts/validate_research.py` | 74 catalog proposals, 3 pricebooks and external evidence metadata passed |
+| `python scripts/validate_market_research.py` | 33 entities, 1,584 cells and 20 issues passed |
+| `python scripts/validate_handoff_audit.py` | 101 rows / 98 declared pairs passed; no handoff ledger edited |
+| `python prompts/mobile/validate_prompts.py` | 2 Projects, 258 issues, 36 epic prompts, 906 criteria and 880 steps passed |
+| `git diff --check` | Passed |
+
+The summary validates all six phases, recorded workload/cohort pins, finite
+allocator counters and unique repetitions; record-integrity tests recompute the
+summary and source/protocol/artifact pins. Guard tests use synthetic temporary
+files and execute no GPU work or downloads. Real measurements are separately
+identified in `measurements/granite31-2026-10-18/`. The unchanged dense cohort
+continues to pass its existing integrity tests. Automated shape/hash checks do
+not reproduce physical execution or establish estimator accuracy, source rights,
+independence, whole-device capacity or receiving-owner acceptance.
+
+Quality review retained the system/CUDA free-memory disagreement, driver change,
+shared-device limits, administrative wrapper failure and sample-size limits.
+Temporary model artifact cleanup is recorded without personal paths. Required
+human review: #61 co-owners plus coordinator for evidence validity/coverage;
+#7/#10/#11 consumers for their precise handoff scopes. No numerical competitor
+error range, ResourceEstimate, issue completion or human approval is claimed.
 
 ## Historical environment and commands — 2026-10-16
 
