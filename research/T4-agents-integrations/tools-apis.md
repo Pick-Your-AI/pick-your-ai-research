@@ -569,7 +569,7 @@ These affect throughput and plan selection, not price per call.
 | Shared provider identity and `provided_by` link between `data_source` and `integration`; union-of-scopes review when one OAuth client serves ingestion and actions | handoff to #13 · @zabyxc01 |
 | Rate-limit and failure-mode signals (`Retry-After`, `x-ratelimit-*`, `Stripe-Rate-Limited-Reason`, in-band tool errors) for monitoring | handoff to #38 · @PUSHINGSQUARES |
 | Evidence policy for summarising fetchers and pages that render tables in JavaScript (Slack tiers, GitHub permissions) | #41 · @tynamite |
-| Remaining source decisions: exact Stripe refund-operation RAK resource mapping; E2B resolved dependency terms, applicable notice delivery and intended redistribution scope. B54 below records the exact wheel's bytes, metadata and internal inventory; it does not settle those remaining uses | #26 · @CompleteDotTech |
+| Remaining source decisions: exact Stripe refund-operation RAK resource mapping; E2B resolved dependency terms, applicable notice delivery and intended redistribution scope. B55 below records the exact wheel's bytes, metadata and internal inventory; it does not settle those remaining uses | #26 · @CompleteDotTech |
 
 [Internal T4 interfaces are accepted with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509); external receiving-owner decisions remain pending in the [workstream matrix](README.md#dependency-and-handoff-matrix).
 
@@ -659,7 +659,7 @@ The wider T4 handoff matrix also tracks #13 shared provider identity, #38 teleme
 
 ## E2B distribution-artifact readback (2026-10-18)
 
-**B54 — Primary publisher artifact and package metadata, source checked / unverified.** On **2026-10-18**, the versioned [PyPI metadata for `e2b` 2.56.0](https://pypi.org/pypi/e2b/2.56.0/json) and its exact [Python wheel](https://files.pythonhosted.org/packages/58/ec/17bee489c285b555a83a3360da1e4eeedaf7c5c767de4038cf9503104faa/e2b-2.56.0-py3-none-any.whl) were fetched over public HTTPS. The [external-artifact manifest](../../evidence/t4-e2b-2560-wheel.json) retains the stable locator and digest; the wheel is not committed. This supplements B49's earlier source-only check with an inspection of actual distribution bytes. No package installation, dependency resolution, SDK execution or hosted sandbox request was performed.
+**B55 — Primary publisher artifact and package metadata, source checked / unverified.** On **2026-10-18**, the versioned [PyPI metadata for `e2b` 2.56.0](https://pypi.org/pypi/e2b/2.56.0/json) and its exact [Python wheel](https://files.pythonhosted.org/packages/58/ec/17bee489c285b555a83a3360da1e4eeedaf7c5c767de4038cf9503104faa/e2b-2.56.0-py3-none-any.whl) were fetched over public HTTPS. The [external-artifact manifest](../../evidence/t4-e2b-2560-wheel.json) retains the stable locator and digest; the wheel is not committed. This supplements B49's earlier source-only check with an inspection of actual distribution bytes. No package installation, dependency resolution, SDK execution or hosted sandbox request was performed.
 
 | Field | Published or locally observed value | Basis and limit |
 | --- | --- | --- |
