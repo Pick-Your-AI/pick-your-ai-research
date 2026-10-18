@@ -271,7 +271,7 @@ Both estimates and their component lines may still be shown, labelled with price
 
 ## Pricing and capacity
 
-No prices or capacity figures are recorded. Cost snapshots reference #39's `CostEstimate` semantics (V8); historical estimates are kept and labelled with their pricebook's `captured_at`. Whether historical prices may be shown at all depends on each source's #60 display decision (P4); for example GPUs.io values are permitted only inside a build's cost estimate, through the paid API, with attribution.
+No prices or capacity figures are recorded. Cost snapshots reference #39's `CostEstimate` semantics (V8); historical estimates are kept and labelled with their pricebook's `captured_at`. Whether historical prices may be shown at all depends on each source's applicable #60 display and export decision. The current product decision excludes GPUs.io API retrieval, display and export, including saved/shared build cost views (P8). The paid API and attribution conditions recorded in P4 do not establish eligibility for this product. Reconsider only on a specific permitted-use basis covering this product and a new #39/#41/#60 review.
 
 ## Recommendation and rationale
 
@@ -377,5 +377,6 @@ The #41 invalidation-policy handoff above is confirmed. Other receiving-owner di
 | P5 | `research/market/pcpartpicker.md` (H4; requirement 4) | 2026-10-17 | 2026-10-16 | Project research (hypotheses) | PCPartPicker pages not fetched; robots.txt disallows AI agents. Save/share flows unobserved. |
 | P6 | `research/T5-training-fine-tuning/README.md` (T5 rules `skipped` when removed) | 2026-10-17 | `main` at `f297ac5` | Project research | — |
 | P7 | `prompts/T0.md` Track E on PR #74 (`docs/maintainer-research-prompts`) | 2026-10-17 | unmerged | Project guidance | Guidance, not acceptance |
+| P8 | [#60 scoped receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771), delivered by [PR #299](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/299); [accepted source-use record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3d395801742461aa82ac31a21857ec6f8d0270fb/research/market/rights-validation.md) | 2026-10-18 | Accepted main `3d395801742461aa82ac31a21857ec6f8d0270fb` | Project engineering receiving decision | Current GPUs.io API/display/export exclusion supersedes the historical P4 consumer guidance; no new permission, production integration approval or #42 contract adoption |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; the contract decisions and #42 prerequisite remain open.
