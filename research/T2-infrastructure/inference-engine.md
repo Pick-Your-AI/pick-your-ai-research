@@ -1,8 +1,8 @@
 # Inference engine: release-scoped serving support
 
 Issue: #11 · Contract: 1.0.0 · Kind: `inference_engine`
-Status: merged partial research; central owner follow-ups incorporated for review; compatibility remains unverified
-Last vendor research: 2026-10-16 · Owner-decision reconciliation: 2026-10-17 · Research owners: @Mattycodes69, @zwright8 (live GitHub assignees)
+Status: partial research and central corrections merged in #75/#101; scoped receipts reconciled; runtime tuples remain unverified
+Last vendor research: 2026-10-16 · Owner-decision reconciliation: 2026-10-18 · Research owners: @Mattycodes69, @zwright8 (live GitHub assignees)
 
 ## User decision
 
@@ -171,7 +171,7 @@ GPU weight/KV/runtime sizing, precision overhead, tensor-parallel memory placeme
 
 Use vLLM as the first GPU-serving candidate for a documented supported tuple, and llama.cpp as the first CPU/edge/GGUF candidate; treat this as a **research recommendation**, pending workload requirements and corroboration. Their documented feature sets explain the split [E02, E05, E11–E14]. Keep TGI visible for existing/managed environments while warning new-build reviewers about its published maintenance mode [E20]. No universal winner or latency/throughput ranking is established.
 
-For agents (#25), obtain a consumer acceptance set for tool modes, parallel-call limiting, streaming deltas/IDs, tool-result round trips, strict schema behavior, errors and cancellation. Engine support for emitting a tool call does not itself execute a tool or provide MCP authorization. For RAG (#16/#7), preserve tokenizer/chat-template context accounting, output reservation, truncation behavior, and separate generation/embedding/reranking models. Retrieval, citations and ACL enforcement remain with T3. These are proposed handoff requirements, not already-agreed product requirements.
+For agents (#25), the reciprocal owner receipts below accept the conditional interface and [FC-1–FC-6 baseline consumer specification](../../tests/fixtures/t4-engine-consumer.md), covering tool modes, parallel-call limiting, streaming deltas/IDs, tool-result round trips and strict schema behavior. The specification now also distinguishes a constrained tool envelope from argument-schema enforcement and adds FC-7 for incomplete/error/cancellation behavior, as requested in the co-owner disposition. These synthetic cases are specifications, not executed results; concrete runtime tuples and evidence placement remain to be agreed with #11/#36. Engine support for emitting a tool call does not itself execute a tool or provide MCP authorization. For RAG (#16/#7), preserve tokenizer/chat-template context accounting, output reservation, truncation behavior, and separate generation/embedding/reranking models. Retrieval, citations and ACL enforcement remain with T3; those retrieval handoffs still require their own dispositions.
 
 For deployment (#37), carry an immutable artifact/build/plugin inventory, exact API contract, model/adapter access terms, protected administrative endpoints, and model-specific loading checks. vLLM explicitly warns that API-key authentication does not cover every endpoint [E06], and dynamic/remote LoRA management has separate risk conditions [E09]. For monitoring (#38), request queue/TTFT/decode/end-to-end timing, token/concurrency/cache pressure, load/parser/schema failures, and separate startup versus steady-state signals; thresholds must come from #2 and #10, not invented constants. Do not log retrieved text, prompts or tool arguments merely to count these events; #38 owns its privacy/retention decision.
 
@@ -194,15 +194,19 @@ This follow-up corrects all **11 provenance entries** across the three engine pr
 
 ## Open questions and handoffs
 
-The live issue readback on 2026-10-17 preserves #11 coassignees @Mattycodes69 and @zwright8. The five consumer requests below remain without receiving-owner acknowledgements in this reconciliation. E27 supplies central #3/#40/#41 decisions, not acceptance by these consumers. Shared ownership by the same assignee does not count as an acknowledgment.
+The 2026-10-18 live issue/comment readback preserves #11 coassignees @Mattycodes69 and @zwright8. Scoped receiving-owner receipts now exist for #10, #25 and #33; #37/#38 remain pending. The links below record the actual commenter and direction, without treating shared assignment, E27 central decisions or an incoming receipt as another owner's acceptance. Vendor-source access dates and the historical validation paragraphs remain unchanged.
 
-| Required #11 consumer | Live owner | Concrete handoff / required confirmation | State |
+| Required #11 consumer | Live assignees | Concrete handoff / required confirmation | State |
 | --- | --- | --- | --- |
-| #10 GPU / Compute | @Mattycodes69 | Accept exact-release hardware/kernel caveats, adapter/KV inputs and non-pooling assumption for sizing. Reconcile v0.31.0 CUDA minimum against historical v0.10.2 estimates. | Pending owner acknowledgment |
-| #25 Agent Framework | @CompleteDotTech | Accept conditional tool/schema/API contract, propose consumer request/response fixtures and required endpoints. | Pending owner acknowledgment |
-| #33 Fine-Tuned Model | @appletechie | Confirm adapter vs merged artifact semantics, immutable base/tokenizer lineage, rank/layout/targets and provider lock-in treatment. | Pending owner acknowledgment |
-| #37 Deployment | @PUSHINGSQUARES | Accept version/build/plugin pins, model/adapter loading checks and admin endpoint exposure constraints. | Pending owner acknowledgment |
-| #38 Monitoring | @PUSHINGSQUARES | Accept release-specific signal mapping and measurement/privacy inputs; define thresholds from workload evidence. | Pending owner acknowledgment |
+| #10 GPU / Compute | @Mattycodes69, @appletechie | Accept exact-release hardware/kernel caveats, adapter/KV inputs and non-pooling assumption for sizing. Reconcile v0.31.0 CUDA minimum against historical v0.10.2 estimates. | [Accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245205057), from that co-owner's scope; no @appletechie agreement inferred. Historical calculations remain pinned; a fit screen does not establish engine support or an SLO. |
+| #25 Agent Framework | @CompleteDotTech, @Mattycodes69 | Accept conditional tool/schema/API contract, propose consumer request/response fixtures and required endpoints. | [Accepted with constraints by @CompleteDotTech](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6233323334): preserve the complete request/runtime tuple; synthetic consumer specifications do not certify execution. |
+| #33 Fine-Tuned Model | @appletechie, @Mattycodes69 | Confirm adapter vs merged artifact semantics, immutable base/tokenizer lineage, rank/layout/targets and provider lock-in treatment. | [Accepted with tokenizer/template narrowing by @appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684): #33 records added tokens and training template; #32 owns the training-data template; #11 determines engine support. |
+| #37 Deployment | @appletechie, @PUSHINGSQUARES | Accept version/build/plugin pins, model/adapter loading checks and admin endpoint exposure constraints. | Pending owner acknowledgment |
+| #38 Monitoring | @appletechie, @PUSHINGSQUARES | Accept release-specific signal mapping and measurement/privacy inputs; define thresholds from workload evidence. | Pending owner acknowledgment |
+
+For the reciprocal **#25 → #11** direction, [@zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6242698282) and [@Mattycodes69's co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677) each accept with constraints. Preserve engine/build/plugins/backend, model/tokenizer revisions, quantization and adapter/base lineage, template/parser, endpoint, request controls/`tool_choice`, strictness/schema/grammar, streaming/parallel behavior and decoding mode. T4 supplies consumer specifications; #11 retains support evidence and execution scope. Unsupported controls stay scoped exclusions and missing eligible evidence stays unknown. Historical minimum-version or Ollama statements are not adopted as current T2 support or a new candidate selection. FC-5/FC-7 below the linked baseline address the requested additional specification details; no runtime case was executed here.
+
+For **#10 → #11**, [@Mattycodes69 accepts with constraints from the receiving-owner scope](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): reuse distinct accelerator/profile IDs, per-device allocation and named uncertainty without pooling nominal VRAM. Carry exact artifact/quantization/kernel/backend/build, driver/topology and per-rank KV/adapter placement. Expanded resident sequence demand and engine admission must share a domain; unknown admission or geometry remains explicit. Capacity screens remain separate from engine support and SLO evidence. Changed releases/configurations require eligible scoped evidence; @appletechie's #10 co-owner scope is not inferred.
 
 | Open decision / missing evidence | Follow-up owner and issue | Impact / independent work |
 | --- | --- | --- |
@@ -228,12 +232,12 @@ Follow-up validation on **2026-10-17**, Python **3.12.14**: the shared runtime's
 | --- | --- | --- |
 | Support matrix keyed by engine version with sources | Current/historical matrices, E01–E25/H01–H09 | Authored; bounded documented support, unverified combinations explicit; owner evidence review pending |
 | Rules in the #40 format, including `unknown` for unverified combinations | `rules/engine-compatibility.md` | Authored; proposed/unverified; #40 acceptance pending |
-| Decision record merged at `research/T2-infrastructure/inference-engine.md` following research method | This template-based record; PR #75 | Original partial record merged; this owner-decision follow-up still requires review and merge |
+| Decision record merged at `research/T2-infrastructure/inference-engine.md` following research method | This template-based record; PRs #75/#101 | Original record and central corrections merged; no repeated merge is required for this delivery criterion. Full issue acceptance remains separate. |
 | Candidate set covers relevant API / managed / self-hosted modes or explains non-applicability | Deployment-mode table and version exposure conditions | Authored; owner review pending |
 | Comparison fields defined with type, unit and evidence requirement | Comparison-fields table | Authored; canonical versus note-only fields distinguished |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Proposed rules, sourced premises, evidence status | Authored; no verified joint compatibility rule claimed |
 | Every factual/numeric claim primary-sourced with access date and relevant conditions | Claim-source matrices and dated evidence table | Source inspection completed for cited findings; no runtime measurements; independent evidence review pending |
-| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table | Unsatisfied: five acknowledgments pending |
+| Each downstream handoff confirmed by consuming owner, linked | Required-consumer table | Partially received: scoped #10/#25/#33 receipts linked; #37/#38 acknowledgments remain pending. |
 | Open questions recorded with named follow-up owner | Open-decision table | Authored; owner decisions remain open |
 
-This issue is not complete: the follow-up needs reviewed merge and five consuming-owner handoffs remain required. The main orchestrator owns PRs, GitHub checklists/Project status and the workstream summary.
+This issue remains open: #37/#38 receiving-owner decisions, exact tuple evidence, retention/lifecycle choices and central executable-rule approval remain unresolved. The merged records and three scoped consumer receipts do not complete every acceptance criterion. The main orchestrator owns PRs, GitHub checklists/Project status and the workstream summary.
