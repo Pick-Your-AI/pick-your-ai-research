@@ -1,7 +1,7 @@
 # T0: Workload / Use Case
 
 Issue: #2 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `a222013`) · Kinds: `workload`
-Status: draft, revision 6 (CD-5 stage-workload candidate; receiving/adoption pending) · External research: 2026-10-16 · Candidate updated: 2026-10-18
+Status: draft, revision 7 (CD-5 0.2 owner-constraint candidate; receiving/adoption pending) · External research: 2026-10-16 · Candidate updated: 2026-10-18
 Deliverable path: `research/T0-configuration/workload-use-case.md` · Companion note: [`research/T0-configuration/deployment-mode.md`](deployment-mode.md)
 
 Labels used in this note:
@@ -882,3 +882,226 @@ current catalog/pricebooks, market ledgers, existing criteria or owner receipts.
 The candidate addresses CD-5 representation and executable normalization;
 actual source qualification, successor/native integration and receiving
 acceptance remain separate work.
+
+## CD-5 0.2 constraint follow-up (2026-10-18)
+
+**Proposal for the existing queue.** The [#40 co-owner review of 0.1](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/329#pullrequestreview-5562996766)
+accepted its mechanics into the queue with seven corrections and the retained
+Q8 question. That receipt names source `6b4f0ff53511b2b872321bb469efd3b1aab95384`;
+it does not adopt a field, wire format or migration. This separately versioned
+`cd5-0.2` candidate implements those corrections on accepted baseline
+`dff6b480c437761c56cf60d6aa9999b2abfb3462`. The complete 0.1 section above,
+its schema, prototype, three input documents and 36 tests remain historical
+witnesses. The 0.2 definitions below supersede the affected 0.1 candidate
+mechanics for this follow-up only. Frozen v1 and other CD candidates are unchanged.
+
+The new artifacts are the [0.2 schema](../../tests/fixtures/stage-workload-binding-v02.schema.json),
+[binding](../../tests/fixtures/stage-workload-binding-v02.json),
+[Build variant](../../tests/fixtures/stage-workload-build-v02.json),
+[scoped answers](../../tests/fixtures/stage-workload-answers-v02.json),
+[reader](../../tests/stage_workload_constraints_prototype.py) and
+[focused cases](../../tests/test_stage_workload_constraints.py).
+They are synthetic, test-only project design work. The earlier E-series
+external observations are not refreshed; no provider, native execution,
+actual stage association or receiving-owner acceptance is inferred.
+
+### State reasons and independent stage rejection
+
+Each normalized metric retains its answer state, original source path and
+source document. `unknown`, `missing` and `withheld` have distinct reasons
+`answer_unknown`, `answer_missing` and `answer_withheld`. A provided fact with
+false or absent eligibility instead has `evidence_ineligible` or
+`evidence_unresolved`; its supplied value is retained in the answer record but
+is not presented as an eligible metric. Qualified `requests: not_applicable`
+means that request counting does not apply. It can coexist with other complete
+stage inputs and is neither an invented zero nor an incomplete request fact.
+
+The test-only `rule_gate` makes the dependent-rule policy explicit:
+
+| Normalized input | Compatibility rule | Recommendation rule | Qualification |
+| --- | --- | --- | --- |
+| `incomplete` or local `rejected` | `unknown` | `skipped` | Keep the input's reason; rejection is not a compatibility failure. |
+| `not_applicable` or `inactive` | `skipped` | `skipped` | Known irrelevance or inactivity supplies no numeric default. |
+| `ready` | Predicate still required | Predicate still required | `outcome: None` and `predicate_not_evaluated`; readiness cannot become a pass. |
+
+The caller supplies a fixed `info`, `warning` or `error` severity independently
+of that outcome. This helper maps an individual required input or stage; a
+consumer combining several inputs still needs its reviewed rule and aggregation
+policy. It does not replace the separately owned CD-1 rule boundary or claim
+that its wire representation has been adopted.
+
+Binding uses unique `selection_id` only. Multiple enabled or disabled
+selections with the same kind/role no longer create ambiguity. An unknown or
+duplicated selection ID rejects only the referring stages. Duplicate stage IDs
+retain every original array position and reject each duplicate. A malformed
+descriptor has a bounded `invalid_stage_descriptor` result with its array
+position and no invented identity; a valid descriptor's rejection retains a
+copy of that scope. `Problem` records identify the reason, document and field
+path. Other stages continue to normalize. The inventory remains incomplete
+while any declared stage is rejected or incomplete, even when independent
+stages are ready.
+
+Provided scalar/length syntax and the three qualified consistency comparisons
+below are checked before inactive gates. Invalid known data cannot disappear
+because its stage or selected component is disabled. A malformed global
+envelope, original-byte hash mismatch, malformed CD-1 document or Build outside
+the frozen schema still prevents reading the record; these errors cannot be
+assigned truthfully to one stage. A malformed inventory-completeness value
+instead produces an inventory rejection while preserving independently valid
+stage results.
+
+### Inherited definitions, precedence and serving scope
+
+Stage lengths use the existing [profile definitions](#field-dictionary):
+
+- Stage input is the complete assembled input to that invocation. History,
+  injected memory and retrieved context count **once**, inside that stage's
+  input mean/maximum. A memory budget is a portion of this assembled input,
+  never another amount to add above its maximum. Passing an upstream result
+  into a later stage needs the later stage's own assembled-input evidence.
+- Stage output includes every generated token, including reasoning/thinking
+  tokens hidden from the user. A generative JSON label remains token output;
+  the task label cannot make it not applicable.
+- Profile `turns` describes requests within a conversation (`single` or `multi`).
+  It does not multiply a stage's supplied requests or lengths, assert that all
+  stages execute on every turn, or restrict cross-conversation persistent
+  memory. Multi-turn history already belongs inside each assembled input.
+- Whether a stage's request count includes every retry, speculative attempt
+  and fan-out invocation remains an explicit **open counting-basis decision**
+  for #2/#16 with #40 and #10. The qualifier must document the basis of each
+  supplied count; this candidate derives no attempt multiplier or graph
+  execution schedule. A rate basis of day/month is not a dated observation
+  window and authorizes no period conversion.
+
+For a consumer choosing this stage-based profile, eligible stage load answers
+are its exclusive source of stage request counts and lengths. The consumer
+must not also count `objectives` workload averages, `/workload/*`, `/pipeline`,
+links or sibling values as another copy of the same demand. An absent stage
+load stays unresolved; there is no precedence fallback. The explicit Build
+`objectives.max_concurrency` and selected model `settings.max_output_tokens`
+are upper constraints used only for the comparisons below, not extra load
+records, defaults or independently verified serving capacity. Missing bounds
+do not become unlimited-capacity evidence or authorize a fit result.
+
+Eligible serving selections are `model`, `embedding_model`, `vector_database`
+and full-serving `fine_tuned_model`. An `inference_engine` or another kind
+cannot become a serving stage even when inactive. For a fine-tuned selection,
+the existing `use_adapter: true` rejects the stage; an absent setting leaves
+serving mode unresolved; `false` only permits the full-model candidate path.
+The source qualifier must still establish the actual full artifact and
+operation. No catalog lookup, adapter classification or capability inference
+is performed by these fixtures.
+
+### Typed tokenizer assumptions and identity
+
+The descriptor's `tokenizer_assumption` is a CD-1 answer, replacing 0.1's
+overloaded `tokenizer: null`. It is the sole tokenizer authority in 0.2;
+same-named values or inherited parent answers in the separate CD-1 document
+cannot override it. The reader reuses the unchanged CD-1 answer decoder and
+reports the original binding-document array/field path as its source. Its
+eligibility remains independently keyed to the complete scoped answer path.
+
+| Provided value or answer state | Candidate treatment |
+| --- | --- |
+| `{basis: tokenizer, reference: {id, version}, assumption: true}` | Preserve the exact tokenizer reference and explicit assumption. |
+| `{basis: model, reference: {id, version}, assumption: true}` | Preserve the exact model reference as the caller's token-count assumption. |
+| `{basis: model_native, assumption: true}` | Use the exact selected model/embedding/full-model catalog ID and version as an explicit assumption. Missing/invalid references and vector storage cannot invent a native model. |
+| `unknown`, `missing`, `withheld` | Preserve the distinct unresolved state; a token-using stage needs a usable assumption. |
+| `not_applicable` | A token-using stage remains incomplete with `tokenizer_required_but_not_applicable`. |
+
+When both input token use and output token generation are independently
+qualified false, the operation needs no tokenizer. The result records
+`tokenizer_not_required_for_operation`, keeps the original answer state, and
+does not invent a tokenizer reference or convert native units. Otherwise a
+provided assumption still needs its own eligibility; a source label or valid
+reference shape does not establish real tokenization support. Bare strings,
+null, false assumptions and Boolean/numeric aliases are rejected locally.
+Exact reference versions retain meaningful spaces and suffixes.
+
+The descriptor digest now uses the explicit `cd5-0.2\n` prefix and canonical
+sorted-key compact JSON, preserving array order, non-ASCII text and Boolean
+types. Numeric values are not admitted in valid descriptor fields. Complete
+original Build/answer/binding hashes remain byte-for-byte identities. Inventory
+coverage hashes the sorted complete descriptor encodings, including duplicate
+or malformed entries, so no rejected row silently disappears from its scope.
+Stage reordering preserves coverage identity and implies no execution order.
+Changing a tokenizer state, operation, configuration, native-unit list or
+Build requires newly scoped facts and actual association confirmation.
+
+Escaped lone UTF-16 surrogates can occur in otherwise valid UTF-8 JSON. They
+are outside this candidate's accepted descriptor text: IDs already have ASCII
+bounds, and version/source text rejects unpaired surrogate code units. Inventory
+hashing retains such malformed rows using their JSON escapes before returning
+the local descriptor rejection. This does not rewrite the retained input bytes
+or change any valid descriptor's UTF-8 hash. Valid non-ASCII text and escaped
+surrogate pairs that decode to a Unicode scalar preserve the existing identity;
+a lone surrogate cannot alias a string containing its literal escape text.
+
+### Explicit conflicts and aggregation prerequisites
+
+The 0.2 stage peak is an exact nonnegative integer. This is a versioned
+candidate change from 0.1's positive peak, allowing a caller to supply an
+explicit zero peak for known idle demand. Zero is never substituted for a
+missing value. All earlier integer/decimal bounds and separate native-unit
+semantics remain.
+
+Three conflicts now produce local `rejected` stages: qualified zero requests
+with a positive peak; a qualified output maximum above the selected model's
+explicit output bound; and a qualified stage peak above the Build's explicit
+maximum. Multiple conflicts are retained together. Ineligible facts remain
+unresolved instead of creating an asserted conflict. This is consistency
+checking of supplied inputs, separate from source verification or a fit rule.
+
+Before any W-R6 aggregation, a successor carrier must name at least the
+following facts. These names are proposed research handoff names, **not fields
+admitted by the 0.2 schema**:
+
+| Prospective carrier | Required scope and evidence | Receiving dependency |
+| --- | --- | --- |
+| `admission_domain_id` | Exact engine instance, replica or explicitly shared scheduler, bound to the serving selection, engine build and stage configuration. A service-wide ID cannot stand in for a per-replica domain. | #10/CD-2 and #11 |
+| `live_sequences_per_request` | Independently qualified per-stage decoding expansion in that domain, including simultaneously live beams/samples and KV retention semantics. An operation name or returned-output count supplies no default expansion. | #10/CD-2 and #11 |
+| Stage-to-domain allocation and overlap | The routing allocation of stage request demand and which stage envelopes can coexist. Independent stage maxima cannot simply be added. | #2/#16 with #10/CD-2 |
+| Domain sequence-admission bound | An applicable bound on all resident KV-holding sequences, or an explicit unknown state under W-R6's existing expanded-demand fallback. A scheduler step limit is insufficient by itself. | #11 with #10/CD-2 |
+
+The [existing W-R6 arithmetic and qualifications](#w-r6-components-resident-together-fit-each-memory-pool)
+remain authoritative for that separate proposal. This candidate computes none
+of those expansions, allocations, totals, memory envelopes or cost estimates.
+Q8 remains open with #40/#42: hashing the entire Build intentionally means
+even a rename invalidates the old fact keys. Sidecar projection, migration,
+copy/fork behavior and named receiving-owner adoption need separate decisions;
+the test authoring helpers that reissue fictional answers are not migrations.
+
+### Actual synthetic validation boundary
+
+The retained 0.1 focused suite passed all 36 methods on the inspected baseline.
+Eight additional owner-boundary witness methods then exercised the original
+reader: its run contained those eight methods plus the imported 36 legacy
+methods (44 total), with eight assertion failures and two errors. The state
+reason test had multiple failing subcases. The errors exposed whole-inventory
+rejection for a same-role disabled alternative and a malformed inactive stage.
+Other failures exposed the generic reasons, not-applicable request handling,
+inference-engine stage and three unflagged conflicts.
+
+The new cases include that original false-ready control without altering its
+inputs. The separate 0.2 positive Build explicitly changes the fixture's Build
+concurrency cap from 2 to 4 and model output cap from 512 to 2000; the audio
+stage explicitly supplies peak 0 alongside its known monthly request count 0.
+The new scoped answer keys and typed tokenizer assumptions are authored anew.
+This explains the passing control without disguising a change to old evidence.
+
+Run the focused methods in ordinary and optimized Python with
+`python -m unittest tests.test_stage_workload_constraints -v` and
+`python -O -m unittest tests.test_stage_workload_constraints -v`.
+The initial 0.2 checkpoint `6f645627a947802a7b1ff1ba8205def25c2843a7` passed
+37 focused methods with no skips (5.825 s ordinary; 5.463 s optimized).
+Independent review then exposed the escaped-surrogate hashing defect described
+above. Three added regression methods reproduced eight error subcases on that
+checkpoint while the valid non-ASCII/paired control passed. After the correction,
+all 40 focused methods passed with no skips (7.433 s ordinary; 9.100 s optimized).
+They cover separate state/rule policies, unique ID binding, local malformed
+stage rejection, serving scope, exact typed tokenizer assumptions, qualified
+conflicts, no fallback, original-byte identity and preserved sibling results.
+The full repository gates and exact independent/receiving review receipts
+belong to the delivery PR. These checks establish synthetic CPU mechanics;
+actual source qualification, counting-basis agreement, successor/native
+adoption and the broader #2/#40/#42/#59 criteria remain open.
