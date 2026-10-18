@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-ragas-collections",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Ragas batch RAG metric collections",
+  "version": "0.4.3",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Bounded dataset-scoring profile of the published Ragas 0.4.3 collections. Active denotes release availability only; the observed default-branch commit 298b68274234c060deacab3cf5fb52aa3a20e885 is dated 2026-02-24T07:47:18Z and makes no active-maintenance or support claim. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "faithfulness",
+      "answer_relevancy",
+      "context_recall",
+      "context_precision_with_reference",
+      "context_precision_without_reference"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/pyproject.toml",
+      "checked_at": "2026-10-18T20:02:03.418837+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 28c2d172d529c33f1db8bbf235282758070d103d (SHA256 11b24f8114f922ea5d028d65dffabd941e2d11fc732d499afdcfe0e20a998101) was read at the pinned publisher commit. Exact release packaging and source license reference; the Apache-2.0 identifier is supported by the accompanying LICENSE. No dependency resolution or runtime compatibility was reproduced."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/metrics/collections/faithfulness/metric.py",
+      "checked_at": "2026-10-18T20:02:03.797543+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 6220f0616750aca43565e09a741916629c4d4f20 (SHA256 f3850ad76e173c932dff09464489934f7df7c499a8e43b178cd69f339511965d) was read at the pinned publisher commit. The literal name faithfulness measures support in retrieved context through a judge; it is not a general truth guarantee."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/metrics/collections/answer_relevancy/metric.py",
+      "checked_at": "2026-10-18T20:02:03.857948+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob e7eef0557782f3405829a17ddcc99cffd06a74d8 (SHA256 b766cc2520696d05b092f2725e37c7bb61f39510a8655e287b4166c5030309c1) was read at the pinned publisher commit. The literal name answer_relevancy uses LLM question generation and embeddings; their identity, data flow and costs remain separate inputs."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/metrics/collections/context_recall/metric.py",
+      "checked_at": "2026-10-18T20:02:04.003126+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 8719f0d63834aa02be790107288e45b3a8051a4e (SHA256 31d992eff2a163e4ed109977826386576a669599b2cbd247b49301de62b84358) was read at the pinned publisher commit. The literal name context_recall requires a reference; no reference dataset was selected."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/metrics/collections/context_precision/metric.py",
+      "checked_at": "2026-10-18T20:02:04.141355+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob ea196a9d52a8f5db692ffaa0a8d14d4bc1df7829 (SHA256 14854b05af2e30e540b54e3e748ca405a877965b86cea1d1023957cc0c08eecc) was read at the pinned publisher commit. The literal names context_precision_with_reference and context_precision_without_reference denote distinct policies. The latter uses the generated response, not an invented ground-truth reference."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/metrics/collections/base.py",
+      "checked_at": "2026-10-18T20:31:59.791417+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 2c48e562039c9839fcb97840240b22596ddebc88 (SHA256 92e1fac17953d10a931227045daa8277bcc66f11b90535da5b45d706079de679) was read at the pinned publisher commit. The modern collections BaseMetric inherits SimpleBaseMetric. Its batch_score wraps abatch_score, and it requires explicit modern LLM and embedding components where the particular collection defines them. This supports finite batch evaluation; it does not imply a default judge or network isolation."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/metrics/base.py",
+      "checked_at": "2026-10-18T20:31:59.791417+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob ada9bcfd3cedde34dc550d8293d066a925e49664 (SHA256 d31061944d727d4aeac057661111afeca38e07e1418edd0c6cb08905fb813bf6) was read at the pinned publisher commit. SimpleBaseMetric.abatch_score gathers the selected collection metric ascore calls over the input list. This profile does not use legacy evaluate/aevaluate defaults or its raise_exceptions/NaN policy. No package, provider, embedding or evaluation ran; unmeasured scores, usage and costs remain unknown."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/src/ragas/_analytics.py",
+      "checked_at": "2026-10-18T20:02:04.433949+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 341cc4efd94cd68d59be44c7db68477f6474c2fb (SHA256 9619946dc7aaa1e60f30e4f3cbac56010bd47cedc5e3d6e256e1c27e9e45a679) was read at the pinned publisher commit. Usage analytics can post externally unless RAGAS_DO_NOT_TRACK=true. No package/model ran; offline does not imply no network."
+    },
+    {
+      "source_uri": "https://github.com/vibrantlabsai/ragas/blob/4ecab384fda829ca50bec3f07cc49589d756e172/LICENSE",
+      "checked_at": "2026-10-18T20:02:03.530987+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 8bcca742ae3458aa4e74d0133d51a248df16f23b (SHA256 664b930830f291c2936ab30bcd6ef9ca6c9c7384cc475ae0c526156a27d5a6c6) was read at the pinned publisher commit. Apache-2.0 source license; billing remains unknown for operational use. No optional rights Boolean, data license, hosted service entitlement or all-in zero cost is inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T20:31:59.791417+00:00",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}

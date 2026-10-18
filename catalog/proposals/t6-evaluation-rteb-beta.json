@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-rteb-beta-retrieval",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "RTEB beta retrieval metric scope",
+  "version": "beta",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Publisher-named beta edition with a bounded publicly supported retrieval metric. The captured implementation commit is not a claim of a stable package release. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "ndcg_at_10"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/embeddings-benchmark/mteb/blob/1bdc6f646015c1956ce179a6af7fa7cfe920b852/mteb/benchmarks/benchmarks/rteb_benchmarks.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob de1f7e9da5bff567fec429ba215e4ed6b6c2bcb7, SHA256 5bc45a27923d1b429ac3d499a83944bf107a81025e7999829b9b85d382cf8004, was read without importing or executing the package. RTEB(beta) is the literal named benchmark and includes AILAStatutes. Beta maps to preview. The definition combines open and closed tasks and notes the private-column removal; no access to closed tasks or their results is claimed."
+    },
+    {
+      "source_uri": "https://github.com/embeddings-benchmark/mteb/blob/1bdc6f646015c1956ce179a6af7fa7cfe920b852/mteb/tasks/retrieval/eng/aila_statutes_retrieval.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 70358dfebd563bd12bcac8f33140cc981df6e276, SHA256 408eaad75b24043c62fa3c47e0ebda623d21d42779eaabe00f4ac1cd9b279942, was read without importing or executing the package. The included public task selects main_score ndcg_at_10. This establishes a concrete metric in the named benchmark without asserting an all-task score or admitting external data."
+    },
+    {
+      "source_uri": "https://github.com/embeddings-benchmark/mteb/blob/1bdc6f646015c1956ce179a6af7fa7cfe920b852/mteb/_evaluators/retrieval_metrics.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob b9801689aacb7a90dca103fcaee472b456641909, SHA256 e1438f788f846464f81c5a6317c37a43686bc881dff72c64af69f61e9efb3b1a, was read without importing or executing the package. The retrieval implementation emits ndcg_at_10 from NDCG cut at ten. Query, relevance, filtering and aggregation configuration remain part of any later result; this is not an aggregate score for every benchmark task."
+    },
+    {
+      "source_uri": "https://github.com/embeddings-benchmark/mteb/blob/1bdc6f646015c1956ce179a6af7fa7cfe920b852/mteb/_evaluators/retrieval_evaluator.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob fd2020a68b1c3176464bdfcbf22ecbff75f71a76, SHA256 5bc77f02ec4a780b1be3abca455b5a5228beec949a65fe7a55f7d0ba79b5fe3d, was read without importing or executing the package. Finite corpus indexing, query search and relevance evaluation support the scoped offline batch interpretation. Optional identical-ID removal and model behavior must be retained in a measured run."
+    },
+    {
+      "source_uri": "https://github.com/embeddings-benchmark/mteb/blob/1bdc6f646015c1956ce179a6af7fa7cfe920b852/docs/get_started/usage/running_the_evaluation.md",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 2593459a896795bf496b571454e404fd31fa236c, SHA256 18713f6a49fbe74a0ca3080c30dcf212a40c54942717b8433bb5c02fcd70de45, was read without importing or executing the package. The documented batch workflow downloads selected tasks and evaluates a specified model. Offline does not mean no network, and a cached result is not a new execution."
+    },
+    {
+      "source_uri": "https://github.com/embeddings-benchmark/mteb/blob/1bdc6f646015c1956ce179a6af7fa7cfe920b852/LICENSE",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64, SHA256 c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4, was read without importing or executing the package. Apache-2.0 applies to this source code. Separate corpus, model and service rights and operational cost remain unknown."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}

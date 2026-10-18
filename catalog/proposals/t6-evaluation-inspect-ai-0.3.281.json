@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-inspect-ai-offline",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Inspect AI offline text-match scoring",
+  "version": "0.3.281",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Bounded offline scoring profile of Inspect AI at publisher commit 44ff4188232418ead18467596909272850483951. The listed accuracy metric is provided by its text-match scorer; this is a component capability, not a selected dataset, configured evaluation, measured result or deployment gate. Model inference, execution infrastructure and any separate services are outside the unresolved billing classification. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "accuracy"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "MIT"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/project/inspect-ai/0.3.281/",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S1: exact inspect-ai 0.3.281 release page reports the 2026-10-15 release, UK AI Security Institute authorship and Beta classifier. Its published artifact provenance names commit 44ff4188232418ead18467596909272850483951. Publisher metadata was read; no distribution was installed or independently reproduced."
+    },
+    {
+      "source_uri": "https://api.github.com/repos/UKGovernmentBEIS/inspect_ai/git/ref/tags/0.3.281",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S2: actual public tag readback resolves 0.3.281 to commit 44ff4188232418ead18467596909272850483951, matching the PyPI-published provenance. This pins the researched source; it is not a latest-release or installed-artifact claim."
+    },
+    {
+      "source_uri": "https://github.com/UKGovernmentBEIS/inspect_ai/blob/44ff4188232418ead18467596909272850483951/pyproject.toml",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S3: exact blob 9be59f8dc0c037f866d02c9428d0ad78279d99b8 declares Development Status :: 4 - Beta. The catalog conservatively maps that explicit publisher maturity to preview; it does not claim general availability. Fetched through the public Git blob API and byte-verified against the pinned tree."
+    },
+    {
+      "source_uri": "https://github.com/UKGovernmentBEIS/inspect_ai/blob/44ff4188232418ead18467596909272850483951/docs/scorers.qmd",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S4: exact blob 1fd50d42bd3ec120d53c923c8a735446c9849e71 describes target-based scoring, metric aggregation and the offline scoring workflow. This profile records the evidenced offline path; remote model inference does not make it live-production online evaluation, and no claim excludes other Inspect capabilities."
+    },
+    {
+      "source_uri": "https://github.com/UKGovernmentBEIS/inspect_ai/blob/44ff4188232418ead18467596909272850483951/src/inspect_ai/scorer/_match.py",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S5: exact blob 5fead8ae39b7d2fcdfdecad33fbe31a86b38667c registers the match scorer with accuracy and stderr. metric_names is a deliberate accuracy-only capability subset, not an exhaustive list of every Inspect scorer or reducer. Matching options and target content remain evaluation-plan inputs. The source defaults are location=end, ignore_case=true and numeric=false. These score-policy options do not certify the original case-sensitive schema payload or repair an invalid contract."
+    },
+    {
+      "source_uri": "https://github.com/UKGovernmentBEIS/inspect_ai/blob/44ff4188232418ead18467596909272850483951/src/inspect_ai/scorer/_metrics/accuracy.py",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S6: exact blob d05dede9e62b7c9fdfb1d080bcb75f2e1ef42fc3 implements the named accuracy aggregation. Its empty-score branch returns 0; that value alone is not a measured failure, a meaningful empty-cohort score or evidence for a deployment decision. Sample counts, mapping, dataset, baseline and threshold remain separate. Source read only; no scorer or evaluation was executed."
+    },
+    {
+      "source_uri": "https://github.com/UKGovernmentBEIS/inspect_ai/blob/44ff4188232418ead18467596909272850483951/LICENSE",
+      "checked_at": "2026-10-18T19:40:33Z",
+      "verification_status": "unverified",
+      "notes": "IS-S7: exact blob 72fc87742ef8a944fab4f28fe6231696c62f2fa4 contains the MIT License. Only the SPDX identifier is recorded; no optional use-rights Boolean, dataset permission, model permission or zero operating-cost claim is inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T19:41:25Z"
+}

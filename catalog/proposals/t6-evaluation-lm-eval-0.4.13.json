@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-lm-eval-likelihood",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "lm-eval likelihood and multiple-choice metrics",
+  "version": "0.4.13",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "A bounded source-only profile of registered likelihood and multiple-choice metrics. It establishes neither a selected task/backend nor a measured result, universal backend support, configured deployment gate or dataset entitlement. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "acc",
+      "acc_norm",
+      "perplexity"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "MIT"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/lm_eval/0.4.13/json",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact published version 0.4.13 was source checked. The retained source distribution is 3471075 bytes, SHA256 f592269f21a5e173d7993ae01267f61fc84be393cee1f51779e3e104a70c967e, uploaded 2026-08-31T20:42:39.438675Z; its original bytes were rehashed before this proposal. Publisher Alpha classification is conservatively mapped to preview; an ordinary release tag does not erase it. No package was installed or imported, and no model, judge, test or evaluation ran."
+    },
+    {
+      "source_uri": "https://github.com/EleutherAI/lm-evaluation-harness/releases/tag/v0.4.13",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Publisher release was non-draft and non-prerelease, published 2026-08-31T20:42:30Z; its tag resolves to ddd67220430a2470529f25fd5c05a576ca1057a0. Versioned selected source files were byte-compared with the hashed source distribution. This is source checking, not independent reproduction of metric outcomes."
+    },
+    {
+      "source_uri": "https://github.com/EleutherAI/lm-evaluation-harness/blob/ddd67220430a2470529f25fd5c05a576ca1057a0/lm_eval/api/metrics.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 00146f42324769ad8abc6106d26273ece6799fdc, SHA256 f4794761c3f53fc036336e79c65dca355ea26a8d4cb00b27155ea2ab4846dbb2, was read at ddd67220430a2470529f25fd5c05a576ca1057a0. Exact registrations at api/metrics.py:176-193 and282-290 retain native literal names; acc/acc_norm use mean and are higher-is-better, perplexity aggregates loglikelihood by exp(-mean) and is lower-is-better. This list is a bounded supported subset, not all framework metrics. Likelihood/MCQ scoring requires a selected backend that supplies the relevant likelihoods; generative scoring is a separate route."
+    },
+    {
+      "source_uri": "https://github.com/EleutherAI/lm-evaluation-harness/blob/ddd67220430a2470529f25fd5c05a576ca1057a0/lm_eval/evaluator.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 2251597c304fb160ccb3204173e07a4df9de2c89, SHA256 628120153cf24471ead0789106e5c18b02855a7cc77a9aa5da8069fdeab57ed5, was read at ddd67220430a2470529f25fd5c05a576ca1057a0. simple_evaluate accepts an explicit task list, sample/limit settings and batch size; evaluate builds requests, executes model requests, then task.process_results. README describes selected-task batch evaluation and saved outputs. That documented batch workflow supports mode=offline; it does not mean no model/API/network traffic."
+    },
+    {
+      "source_uri": "https://github.com/EleutherAI/lm-evaluation-harness/blob/ddd67220430a2470529f25fd5c05a576ca1057a0/LICENSE.md",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 12e6063183935e876e232db276568baf4954b492, SHA256 a806e42547620dffbc2ec0333322c8b3523b4af11e059be14ef81aa5b1ae021f, was read at ddd67220430a2470529f25fd5c05a576ca1057a0. Only the project SPDX license identifier is recorded. Dependencies, datasets, model and judge usage, compute, hosting and support have separate terms and costs; no free total evaluation cost or pricebook rate is inferred. The metrics module separately retains an Apache-2.0 attribution for its exact-match port; the project license is not a universal dependency or dataset license."
+    }
+  ],
+  "updated_at": "2026-10-18T20:22:02Z"
+}

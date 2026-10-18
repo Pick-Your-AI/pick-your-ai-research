@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-opencompass-basic",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "OpenCompass batch accuracy and perplexity",
+  "version": "0.5.4",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Bounded OpenCompass batch profile using AccEvaluator and AveragePPLEvaluator result keys. Accuracy is on the implementation's percentage scale; average_ppl is the arithmetic mean of supplied perplexities, not the separate token-normalized evaluator. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "accuracy",
+      "average_ppl"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/opencompass/__init__.py",
+      "checked_at": "2026-10-18T20:02:04.718360+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 19283fe51be42abb8c694e927f29057eb3f78875 (SHA256 61862932c0b701cb6b2a7a21c8e41366103a8b864674872009e90d675ff4de5a) was read at the pinned publisher commit. Declares exact version 0.5.4. Active means the published version is available, not a current support, compatibility or fitness warranty."
+    },
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/opencompass/openicl/icl_evaluator/icl_hf_evaluator.py",
+      "checked_at": "2026-10-18T20:02:04.988559+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 8a6960df90cf49360e7491ccaf5f60b14b053835 (SHA256 4e237537e0fbe2aed18f4f262e22c1da356c8ddc55cb17eb9316383bee5bd3fc) was read at the pinned publisher commit. AccEvaluator selects the included accuracy metric and scales its result by 100. This does not make it interchangeable with a fraction-scale metric or establish a score."
+    },
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/opencompass/openicl/icl_evaluator/hf_metrics/accuracy.py",
+      "checked_at": "2026-10-18T20:02:05.038952+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob aa5a07328844b225fd78c7ad106c91bab1f2a8e7 (SHA256 13c80a4b9777ae25ced377fc1fb74be243653fe233ddc711388c34918f5f63e4) was read at the pinned publisher commit. The included metric supplies the literal accuracy result key. Dataset, model output and aggregation policy remain run inputs."
+    },
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/opencompass/openicl/icl_evaluator/icl_misc_evaluator.py",
+      "checked_at": "2026-10-18T20:02:05.230959+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob fbb12209ea6bda074bf0b9eb230a843282ba1c50 (SHA256 5fbc95567a3915d24894097eed96cad44f478d0853b8a3ac88a90798f8578f8a) was read at the pinned publisher commit. AveragePPLEvaluator returns average_ppl using an arithmetic mean. AverageInferencePPLEvaluator uses a different token-length aggregation and is excluded from this profile."
+    },
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/docs/en/get_started/quick_start.md",
+      "checked_at": "2026-10-18T20:02:05.315556+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 537c7ac9135670b21a215204df0db9274869a013 (SHA256 e7ac1ab5831e97a8d5b68038bb2ce9f1d53238e960e9cae73be3854af098d946) was read at the pinned publisher commit. Configure, inference, evaluation and visualization form the scoped offline/batch workflow. The guide normally assumes network access and model downloads; no benchmark/model was run here."
+    },
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/docs/en/advanced_guides/llm_judge.md",
+      "checked_at": "2026-10-18T20:02:05.382295+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob f27b34daabd0e4fb71d1208c71c083e5a4d228be (SHA256 3c3fcee69c5e2c37066b21f828876a0773859760a6314cb52c69733adac64162) was read at the pinned publisher commit. Other configurations can use a provider API or a locally served judge. This basic profile establishes neither judge placement nor a provider entitlement, operating cost, benchmark threshold or deployment gate."
+    },
+    {
+      "source_uri": "https://github.com/open-compass/opencompass/blob/20586a24844c5289155d658d641ee8c1e7f8fbf5/LICENSE",
+      "checked_at": "2026-10-18T20:02:04.623603+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 2921c35b9cd19403701a3cfff34431b70020a844 (SHA256 ba92da766daca067645bd126edb60c63ff55079316bacc91d4831e61fed6d7b0) was read at the pinned publisher commit. Exact source declares Apache-2.0; only that identifier is recorded. No dataset/model rights or free compute follows."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}

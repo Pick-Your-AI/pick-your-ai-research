@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-aiperf-streaming-latency",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "NVIDIA AIPerf streaming latency profile",
+  "version": "0.13.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "AIPerf record-based streaming latency capabilities. TTFT includes the first content response, TTFO waits for non-reasoning output, and ITL uses the documented decode-window calculation. Internal nanoseconds and displayed milliseconds remain distinct; no endpoint benchmark was run. This source-only capability profile supplies no measured result, dataset/model rights, hosted service entitlement or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "time_to_first_token",
+      "time_to_first_output_token",
+      "inter_token_latency"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "Apache-2.0"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/aiperf/0.13.0/json",
+      "checked_at": "2026-10-18T20:02:36.341923+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact aiperf 0.13.0 metadata identifies an unyanked bdist_wheel uploaded 2026-09-24T01:21:49.468952Z. The original 6763175-byte archive was downloaded and matched publisher SHA256 a20100fd127f1d10ea45d4946b1658a186030e86770344c80dfd256a60192f34. Active records availability of this published artifact, not latest-version, active feature development, compatibility, performance or production fitness. No package/model was installed or executed."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/37/13/1f4a02dfe54158ae99b8ae2c0d3d593d2ed4d37b04ea983ee764c2719561/aiperf-0.13.0-py3-none-any.whl",
+      "checked_at": "2026-10-18T20:02:36.341923+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member aiperf/metrics/types/ttft_metric.py has SHA256 c7387399f5bcef3e2be6b066756dee0fcface22d6d1211817ed0f3986bfaad3c. Literal tag time_to_first_token is first content-response timestamp minus request start. No content raises NoMetricValue and reversed timestamps raise ValueError. Its streaming-only flag and failed-request percentile inclusion are part of the selected source policy, not a p95 result."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/37/13/1f4a02dfe54158ae99b8ae2c0d3d593d2ed4d37b04ea983ee764c2719561/aiperf-0.13.0-py3-none-any.whl",
+      "checked_at": "2026-10-18T20:02:36.341923+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member aiperf/metrics/types/time_to_first_output_token_metric.py has SHA256 aacca5ddf1b90f57e98190ab7ff5df8392e0d39e4984c238438d2beb92083383. Literal tag time_to_first_output_token waits for a nonempty non-reasoning text/content/tool-call output. It differs from TTFT for reasoning responses; missing qualifying output raises NoMetricValue, not a zero latency."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/37/13/1f4a02dfe54158ae99b8ae2c0d3d593d2ed4d37b04ea983ee764c2719561/aiperf-0.13.0-py3-none-any.whl",
+      "checked_at": "2026-10-18T20:02:36.341923+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member aiperf/metrics/types/inter_token_latency_metric.py has SHA256 756bb7817fb5ad2bd9d7331d964a0da00386ad32725623601c88509f6559a3e9. Literal tag inter_token_latency divides request latency minus TTFT by output tokens after the first content chunk. It uses per-chunk usage when supplied and falls back to OSL-1 when absent or inconsistent; OSL<2 has no value. This per-record average is not a distribution of every token gap."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/37/13/1f4a02dfe54158ae99b8ae2c0d3d593d2ed4d37b04ea983ee764c2719561/aiperf-0.13.0-py3-none-any.whl",
+      "checked_at": "2026-10-18T20:02:36.341923+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive member aiperf-0.13.0.dist-info/METADATA has SHA256 79c5292a641af211c79c22f2c52e15f92989f313e224a7a6e73dfb79a27f3bd1. The published wheel identifies version 0.13.0 and Apache-2.0. Its README describes a finite configured aiperf profile run against a serving endpoint followed by reports, supporting offline benchmark mode. Live display/telemetry does not imply passive production evaluation. The publisher example expressly is not an official benchmark; none of its numbers is adopted here. No wheel was installed or imported."
+    }
+  ],
+  "updated_at": "2026-10-18T20:07:31Z"
+}

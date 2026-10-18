@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-terminal-bench-v21-aa-protocol",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Terminal-Bench 2.1 Artificial Analysis protocol",
+  "version": "2.1",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Available explicitly scoped downstream evaluation protocol for the already-declared 2.1 edition. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "pass@1"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The declared 2.1 protocol tests all tasks over three repeats and averages pass@1. It is superseded within the Intelligence Index but retained in the Coding Index. This profile does not make it interchangeable with the 2.0 paper or 4.0."
+    },
+    {
+      "source_uri": "https://www.tbench.ai/benchmarks",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The original publisher separately lists Terminal-Bench 2.1 as a released edition."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

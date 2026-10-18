@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-ailuminate-v1-official",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "AILuminate v1.0 official benchmark assessment",
+  "version": "1.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Available official v1.0 benchmark capability with the publisher-defined online assessment path. Active means method availability, not an independently checked safety result. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "violating-response percentage"
+    ],
+    "mode": "online"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://ailuminate.mlcommons.org/benchmarks/general_purpose_ai_chat/1.0-en_us-official-ensemble",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The selected official English single-turn edition assesses the fraction of responses violating each hazard definition and combines assessment into benchmark grades. violating-response percentage is an explicit catalog label for that documented quantity, not a claimed API field. It assesses the submitted system, not a universal guarantee that an underlying model is safe."
+    },
+    {
+      "source_uri": "https://mlcommons.org/ailuminate/safety-technical-users/",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The publisher explicitly calls Official evaluation Online, using hidden prompts and a private evaluator ensemble. mode=online follows that named delivery path; it does not claim production monitoring or access to private inputs. Offline Practice and its open reference evaluator are different paths and are not substituted for the Official result."
+    },
+    {
+      "source_uri": "https://mlcommons.org/2024/12/mlcommons-ailuminate-v1-0-release/",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The publisher announced v1.0 availability. No submission, evaluator access, grade, certification, data permission or operational pricing was obtained."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}
