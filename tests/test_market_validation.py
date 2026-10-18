@@ -27,6 +27,30 @@ class MarketValidation(unittest.TestCase):
                                   'last_verification': '2026-10-18', 'limitations': 'Synthetic fixture'}],
             'sources.json': [{'id': 'synthetic-source', 'url': 'https://example.com/synthetic',
                               'access_date': '2026-10-18', 'access_status': 'synthetic'}],
+            'integrations.json': [{
+                'product_id': 'synthetic-product', 'investigation_rank': 1,
+                'access': 'Synthetic documented access', 'rights': 'Synthetic unknown rights',
+                'maintenance': 'Synthetic estimate', 'next_action': 'Review synthetic scope',
+                'source_ids': ['synthetic-source'], 'review_owner': 'fixture',
+                'consumer_issue': 41, 'status': 'Not approved for integration',
+                'access_date': '2026-10-16', 'last_checked': '2026-10-16',
+                'terms_urls': ['https://example.com/synthetic-terms'],
+                'update_cadence': 'Unknown; no service guarantee',
+                'rights_evidence_grade': 'Synthetic fixture',
+                'reuse_permitted': {use: {'value': 'unknown',
+                    'conditions': 'No source-use approval in synthetic input',
+                    'basis': 'Synthetic unresolved material scope'}
+                    for use in ('automated_retrieval', 'internal_research', 'display', 'redistribution')},
+                'research_assessment': {
+                    'assessment_date': '2026-10-18', 'scope': 'Synthetic analyst assessment',
+                    'ranking_rationale': 'Synthetic research priority, not product approval',
+                    'maintenance_evidence_class': 'Estimate',
+                    'maintenance_basis': 'Synthetic assumptions, not measured effort',
+                    'code_material_scope': 'Synthetic code licence not established',
+                    'data_material_scope': 'Synthetic data licence separately unknown',
+                    'unresolved_decisions': 'Synthetic receiver reviews exact use',
+                },
+            }],
             'features.json': {'definitions': {'feature': {}},
                               'capability_tests': {'feature': {'scenario': 'Synthetic input',
                                   'pass_observable': 'Synthetic output',
@@ -55,6 +79,168 @@ class MarketValidation(unittest.TestCase):
                 result = self.run_validator(self.data, optimized)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
+
+    def assert_invalid_integration(self, records, error_text):
+        data = deepcopy(self.data)
+        data['integrations.json'] = records
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn(error_text, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_integration_shortlist_requires_known_distinct_products_and_ranks(self):
+        baseline = self.data['integrations.json']
+        for records in (None, {}, [], [None]):
+            with self.subTest(records=records):
+                self.assert_invalid_integration(records, 'integrations')
+        for product in (None, '', 'unknown-product'):
+            records = deepcopy(baseline)
+            records[0]['product_id'] = product
+            self.assert_invalid_integration(records, 'product_id')
+        self.assert_invalid_integration(baseline + deepcopy(baseline), 'duplicate product_id')
+        for rank in (None, True, 0, -1, 1.0, '1', 2):
+            records = deepcopy(baseline)
+            records[0]['investigation_rank'] = rank
+            with self.subTest(rank=rank):
+                self.assert_invalid_integration(records, 'investigation_rank')
+
+    def test_two_integrations_need_distinct_contiguous_ranks(self):
+        for rank, valid in ((1, False), (2, True), (3, False)):
+            data = deepcopy(self.data)
+            product = deepcopy(data['competitors.json'][0])
+            product['id'] = 'second-synthetic-product'
+            data['competitors.json'].append(product)
+            cell = deepcopy(data['features.json']['cells'][0])
+            cell['product_id'] = product['id']
+            data['features.json']['cells'].append(cell)
+            record = deepcopy(data['integrations.json'][0])
+            record.update(product_id=product['id'], investigation_rank=rank)
+            data['integrations.json'].append(record)
+            for optimized in (False, True):
+                with self.subTest(rank=rank, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    if valid:
+                        self.assertEqual(result.returncode, 0, result.stderr)
+                    else:
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn('investigation_rank', result.stderr)
+
+    def test_integration_references_and_terms_are_checked(self):
+        for field, values in (
+            ('source_ids', (None, [], [None], ['missing'], ['synthetic-source'] * 2)),
+            ('terms_urls', (None, [], [None], ['file:///synthetic'],
+                            ['https://user:password@example.com/terms'],
+                            ['https://example.com/terms'] * 2)),
+            ('consumer_issue', (None, True, 0, 1.0, '41')),
+        ):
+            for value in values:
+                with self.subTest(field=field, value=value):
+                    records = deepcopy(self.data['integrations.json'])
+                    records[0][field] = value
+                    self.assert_invalid_integration(records, field)
+
+    def test_integration_metadata_and_independent_dates_are_required(self):
+        for field in ('access', 'rights', 'maintenance', 'next_action', 'review_owner',
+                      'update_cadence', 'rights_evidence_grade'):
+            for value in (None, '', '   ', []):
+                records = deepcopy(self.data['integrations.json'])
+                records[0][field] = value
+                with self.subTest(field=field, value=value):
+                    self.assert_invalid_integration(records, field)
+        for field in ('access_date', 'last_checked'):
+            for value in (None, '2026-02-30', '20261018', '2026-10-18T00:00:00Z'):
+                records = deepcopy(self.data['integrations.json'])
+                records[0][field] = value
+                with self.subTest(field=field, value=value):
+                    self.assert_invalid_integration(records, field)
+
+    def test_integration_use_matrix_cannot_gain_unsupported_approval(self):
+        for status in (None, '', 'Approved for integration', True):
+            records = deepcopy(self.data['integrations.json'])
+            records[0]['status'] = status
+            self.assert_invalid_integration(records, 'status')
+        for matrix in (None, [], {}, {'display': {'value': 'yes'}}):
+            records = deepcopy(self.data['integrations.json'])
+            records[0]['reuse_permitted'] = matrix
+            self.assert_invalid_integration(records, 'reuse_permitted')
+        for use in self.data['integrations.json'][0]['reuse_permitted']:
+            for mutation in (None, {'value': 'approved'}, {'value': True},
+                             {'value': 'yes', 'conditions': '', 'basis': 'Synthetic'},
+                             {'value': 'no', 'conditions': 'Synthetic', 'basis': ''}):
+                records = deepcopy(self.data['integrations.json'])
+                records[0]['reuse_permitted'][use] = mutation
+                with self.subTest(use=use, mutation=mutation):
+                    self.assert_invalid_integration(records, f'reuse_permitted.{use}')
+
+    def test_conditional_use_and_unknown_rights_do_not_approve_integration(self):
+        for value in ('yes', 'no', 'unclear', 'unknown'):
+            data = deepcopy(self.data)
+            for decision in data['integrations.json'][0]['reuse_permitted'].values():
+                decision['value'] = value
+            for optimized in (False, True):
+                with self.subTest(value=value, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertEqual(data['integrations.json'][0]['status'],
+                                     'Not approved for integration')
+
+    def test_product_exclusion_remains_distinct_from_conditional_source_permission(self):
+        data = deepcopy(self.data)
+        data['integrations.json'][0]['reuse_permitted']['display']['value'] = 'yes'
+        exclusion = {'disposition': 'exclude_from_current_product_scope',
+                     'status': 'Synthetic proposal', 'basis': 'Synthetic source/use distinction',
+                     'reconsideration': 'Synthetic scoped review',
+                     'automated_product_retrieval': False, 'commercial_display': False,
+                     'redistribution': False}
+        data['integrations.json'][0]['project_use_decision'] = exclusion
+        for optimized in (False, True):
+            result = self.run_validator(data, optimized)
+            self.assertEqual(result.returncode, 0, result.stderr)
+        for field in ('automated_product_retrieval', 'commercial_display', 'redistribution'):
+            for value in (None, True, 0, 'false'):
+                records = deepcopy(data['integrations.json'])
+                records[0]['project_use_decision'][field] = value
+                with self.subTest(field=field, value=value):
+                    self.assert_invalid_integration(records, field)
+        for mutation in (None, [], {'disposition': 'approve_for_product_scope'},
+                         {**exclusion, 'basis': ''}):
+            records = deepcopy(data['integrations.json'])
+            records[0]['project_use_decision'] = mutation
+            self.assert_invalid_integration(records, 'project_use_decision')
+
+    def test_integration_assessment_separates_materials_and_estimated_maintenance(self):
+        for field in self.data['integrations.json'][0]['research_assessment']:
+            for value in (None, '', []):
+                records = deepcopy(self.data['integrations.json'])
+                records[0]['research_assessment'][field] = value
+                with self.subTest(field=field, value=value):
+                    self.assert_invalid_integration(records, field)
+        for value in ('20260230', '2026-02-30', '2026-10-18T00:00:00Z'):
+            records = deepcopy(self.data['integrations.json'])
+            records[0]['research_assessment']['assessment_date'] = value
+            self.assert_invalid_integration(records, 'assessment_date')
+        records = deepcopy(self.data['integrations.json'])
+        records[0]['research_assessment']['maintenance_evidence_class'] = 'Measured'
+        self.assert_invalid_integration(records, 'maintenance_evidence_class')
+
+    def test_integration_json_duplicates_and_nonfinite_values_are_rejected(self):
+        original = json.dumps(self.data['integrations.json'])
+        cases = ((original.replace('"investigation_rank": 1',
+                    '"investigation_rank": 2, "investigation_rank": 1'), 'duplicate JSON object key'),
+                 (original.replace('"value": "unknown"',
+                    r'"\u0076alue": "yes", "value": "unknown"', 1), 'duplicate JSON object key'),
+                 (original.replace('"investigation_rank": 1',
+                    '"investigation_rank": NaN'), 'non-finite'))
+        for raw, error in cases:
+            for optimized in (False, True):
+                with self.subTest(error=error, optimized=optimized):
+                    result = self.run_validator(self.data, optimized, {'integrations.json': raw})
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn(error, result.stderr)
+                    self.assertNotIn('Market integrity OK', result.stdout)
 
     def supported_claim(self):
         data = deepcopy(self.data)
