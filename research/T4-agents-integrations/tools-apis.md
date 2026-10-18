@@ -13,13 +13,13 @@ A proposed constraint may pass on eligible, versioned documentation while its ev
 
 Which external actions and data APIs can the agent call, and with what permissions, risks and costs?
 
-This note defines the metadata every tool entry needs, a side-effect and risk classification, which tools need approval by default, and how tool and API usage feeds cost. It does not enumerate APIs. It verifies 13 representative candidates from primary documentation to test the schema.
+This note defines the metadata every tool entry needs, a side-effect and risk classification, which tools need approval by default, and how tool and API usage feeds cost. Its 16 representative candidate rows use primary documentation to examine the metadata; they are source-checked findings, not independently verified product behaviour. AWS IAM supplies a separate principles row.
 
 **Out of scope:** MCP transport and server packaging (#27), and knowledge ingestion connectors (#13). MCP *tool annotations* are used here only as evidence for risk classification.
 
 ### Deployment modes
 
-A tool's deployment mode decides where the call executes, where egress happens, and who holds the credential. It does not decide whether the tool exists.
+The tool execution arrangements below describe where a call executes, where egress happens, and who holds the credential. They do not set the build's deployment mode: the accepted [operator/capacity vocabulary](../../prompts/SHARED.md#workstream-and-handoff-boundaries) assigns that mode from serving components, not tools. A managed SaaS tool can therefore accompany an API, managed or self-hosted model without itself making the build hybrid.
 
 | Mode | What runs where | Examples source-checked here | Consequence for the builder |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@ Proposed values for a future `category` field (now `/tags` by convention). Categ
 
 | Category id | Covers | Typical default risk class | Source-checked (unverified) example in this note |
 | --- | --- | --- | --- |
-| `http_request` | Generic HTTP/API request tools where the target is configured or model-chosen | write (unknown target) | — (n8n HTTP-style flows, by reference) |
+| `http_request` | Generic HTTP/API request tools where the target is configured or model-chosen | unknown until allowed targets and operations are bounded; use the conservative approval default | — (n8n HTTP-style flows, by reference) |
 | `search_browse` | Web search, page fetch, headless browsing | read_only, open world | Anthropic web search/fetch, Brave Search |
 | `database` | SQL or NoSQL query and mutation | read_only (with a read-only role) or write | PostgreSQL |
 | `file_document` | File storage, documents, spreadsheets | read_only or write | Google Drive |
@@ -90,8 +90,8 @@ A provider API is **not** one tool. Evidence shows that one credential or scope 
 Therefore:
 1. Model one `tool` item per operation family whose side-effect class is uniform, e.g. `tool.github.issues-read` (read_only) and `tool.github.issues-write` (write).
 2. Model the provider connection once as an `integration` (`integration.github.rest-api`). It holds the endpoint, credential and rate limit, and lists its families in `associated_tool_refs`. That catalog list does not bind a tool selection to a particular integration selection or implement credential inheritance; the proposed binding semantics are in T4-B6 below.
-3. Guardrails (#35) can then allow the read family automatically and gate the write family, even though the provider issues one token.
-4. Scope checks alone cannot separate families that share a scope (Slack `chat:write`). The guardrail must enforce by **operation**, not only by scope (handoff to #35).
+3. Guardrails (#35) can allow a reviewed read family and gate the write family only when the actual invocation boundary enforces that split. Keep the credential outside model-controlled arguments and arbitrary tool code; bind the allowed method, endpoint, resource and operation to the reviewed family. A descriptive tool name or catalog entry does not restrict the upstream token.
+4. Scope checks alone cannot separate families that share a scope (Slack `chat:write`). The guardrail must enforce by **operation**, not only by scope (handoff to #35). If the caller can bypass that boundary, choose another endpoint or access the raw credential, assess every reachable operation. An unproved boundary cannot justify downgrading the risk class. This is a research control requirement; the catalog and the frozen v1 rule examples do not implement it.
 
 ### `tool` vs `integration` in v1
 
@@ -241,11 +241,11 @@ The schema states that "all properties in `ToolAnnotations` are **hints**", that
 | `read_only` | No state change in any system. It may still read private data or reach the open web | GitHub list issues; Slack `conversations.history`; web search/fetch; Postgres SELECT under a read-only role | `read_only` | `readOnlyHint: true` | none (auto) | read-only permission level (GitHub "read", `drive.readonly`); read-only DB role, not just a read-only transaction |
 | `write` | Changes state in the caller's own resources, additive or reversible by another API call | GitHub create issue; Gmail `messages.trash` | `mutating` | `readOnlyHint: false`, `destructiveHint: false` | policy allowlist + audit log; no per-call human approval | narrowest write permission (GitHub "Issues: write" only) |
 | `high_impact` | Reversible in principle, but with immediate effects on other people, shared spaces, spend or infrastructure | Slack `chat.postMessage` (seen at once by others); E2B sandbox (arbitrary code, per-second spend, egress); cloud resource changes | `mutating` | `readOnlyHint: false`, `openWorldHint: true` | **human approval by default** (guardrail `escalate`), which may be relaxed per tool by policy | dedicated credential; domain and egress allowlist; spend cap |
-| `irreversible` | Cannot be undone through any API once executed | Gmail `messages.delete` ("cannot be undone"); Gmail `messages.send`; Stripe refund (cancel only briefly, Dashboard only); Slack `chat.delete` | `mutating` | `destructiveHint: true`, `idempotentHint: false` | **human approval always**; dry-run or preview; idempotency key where available | separate credential per family; restricted keys (Stripe RAK, agent-tagged keys with approval rules, B27); never the broad scope (`https://mail.google.com/`) |
+| `irreversible` | Cannot be undone through any API once executed | Gmail `messages.delete` ("cannot be undone"); Gmail `messages.send`; Stripe refund (cancel only briefly, Dashboard only); Slack `chat.delete` | `mutating` | `destructiveHint: true`, `idempotentHint: false` | **human approval always**; dry-run or preview; idempotency key where available | dedicated credential boundary; narrowest provider-supported permissions and an enforced operation allowlist. Gmail permanent deletion requires the broad full-mail scope: exclude that operation when this scope is unacceptable; see the dated B50/B51 correction below. Stripe RAK resource mapping remains explicitly unresolved (B48) |
 
 **Classification rules:**
-1. Classify by the *worst* operation reachable with the item's granted scopes, not by its name. A tool holding `chat:write` can delete its own messages (B14).
-2. Unknown classifies as `irreversible` until reviewed. This mirrors the MCP defaults.
+1. Classify by the *worst* operation reachable through the actual credential and invocation boundary, not by the item's name. A raw `chat:write` token can permit both posting and deletion (B52/B53); a family-specific classification requires the enforced restriction described above. Required catalog scopes are prerequisites, not proof of the actual token's permissions or of enforcement.
+2. Unknown uses the `irreversible` approval default until reviewed; retain the unknown evidence explicitly. This is a conservative project policy, not an MCP-defined risk enum or a claim that every unknown operation is factually irreversible.
 3. An inbound integration (webhook) inherits the worst class of the workflow it triggers (n8n). If that is unknown, use `irreversible`.
 4. `read_only` + `is_networked` + private data is an exfiltration path. The Anthropic web fetch docs warn of "data exfiltration risks" when untrusted input meets sensitive data (B6). MCP advises showing tool inputs "to avoid malicious or accidental data exfiltration" (B1). This needs a guardrail regardless of side effect (rule `rule.t4.tool.network.exfiltration`).
 
@@ -515,7 +515,7 @@ These affect throughput and plan selection, not price per call.
 3. **Default approvals.** `read_only` auto; `write` policy-allowlisted with audit; `high_impact` human approval by default; `irreversible` human approval always. Require an idempotency key for retries where the provider documents one (Stripe).
 4. **Least privilege by default.**
    - GitHub fine-grained tokens limited to the needed repository permission.
-   - Google `drive.file` / `gmail.send` rather than Restricted scopes.
+   - Google `drive.file` for the applicable file workflow and `gmail.send` for sending. For message removal, prefer `messages.trash` with its documented `gmail.modify` option when that meets the user's need. Permanent deletion has a different mandatory scope and must be omitted when the policy rejects it; do not invent a narrower permission (B50/B51).
    - Stripe restricted, agent-tagged keys.
    - Postgres roles with only `SELECT` (or `pg_read_all_data`). Do not rely on `default_transaction_read_only`, which only sets the default for new transactions (B35).
    - AWS temporary role credentials and permissions boundaries.
@@ -539,7 +539,7 @@ These affect throughput and plan selection, not price per call.
 
 **Not proposed, with reasons:**
 - Slack: the Web API has no upstream version string to pin.
-- Google Drive: API version and quotas not fetched.
+- Google Drive: the original API-version/quota gap is supplemented by B44; no complete, reviewed catalog proposal was added by that quota readback.
 - PostgreSQL: no v1 `protocol` value fits the Postgres wire protocol (`http`, `grpc`, `cli`, `embedded`, `mcp`).
 - OpenAI code interpreter: price not extracted.
 
@@ -615,3 +615,44 @@ B48 — Stripe, [Restricted API keys](https://docs.stripe.com/keys/restricted-ap
 ### E2B package-local license scope
 
 B49 — E2B source at commit `62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3`: the package-local [Python SDK LICENSE](https://raw.githubusercontent.com/e2b-dev/E2B/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/LICENSE) declares MIT; adjacent [pyproject.toml](https://raw.githubusercontent.com/e2b-dev/E2B/62a17dfc3f11439d1d06bfb9bb515eadc5adfcd3/packages/python-sdk/pyproject.toml) declares package `e2b` version **2.56.0** and MIT. This supplies the missing package-local source evidence behind B31, rather than applying the root repository license to every subpackage. B33's historical root-file observation remains recorded. No wheel or dependency bundle was inspected; this finding does not decide terms for hosted sandboxes, infrastructure, dependencies, user workloads or a redistributed artifact. #60 retains publication-scope review.
+
+## Permission and operation-boundary correction (2026-10-18)
+
+The following primary pages were opened on **2026-10-18** with the web text extractor. Their findings are **Primary documentation, source checked / unverified**. No account token, message operation, credential inspection or runtime enforcement test was performed. Original B13/B14/B21 capture dates remain historical.
+
+| ID | Primary source and version | Bounded finding |
+| --- | --- | --- |
+| B50 | Google, [users.messages.delete](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/delete), Gmail API v1; page updated 2026-04-15 | Permanent deletion requires `https://mail.google.com/`; the method is irreversible and Google recommends the trash operation instead. No narrower permission is listed for permanent deletion. |
+| B51 | Google, [users.messages.trash](https://developers.google.com/workspace/gmail/api/reference/rest/v1/users.messages/trash), Gmail API v1; page updated 2026-04-15 | Moving a message to trash permits either full-mail scope or `https://www.googleapis.com/auth/gmail.modify`. This source does not establish that a particular credential has either scope. |
+| B52 | Slack, [chat.postMessage](https://docs.slack.dev/reference/methods/chat.postMessage/), mutable Web API method page | Both documented bot and user token forms require `chat:write` to post. A scope prerequisite does not identify the application operation that the caller intended to authorize. |
+| B53 | Slack, [chat.delete](https://docs.slack.dev/reference/methods/chat.delete/), mutable Web API method page | The same scope permits deletion subject to actor permissions: a bot can delete its own messages, and a user token is limited by that user's deletion rights. |
+
+**Project decision for the research interface:** use the narrowest permission the provider actually supports for the selected operation. Prefer trash when it meets the removal requirement. If permanent deletion is required, show its full-mail permission and irreversible approval requirement together; if that permission is unacceptable, omit the operation. Approval cannot manufacture a narrower OAuth scope, and possession of the scope is not approval for every operation it enables.
+
+The earlier blanket instruction to never use full-mail scope contradicted the permanent-delete candidate and is superseded by this explicit choice. The taxonomy continues to classify operation families, with the actual enforced invocation boundary determining which operations are reachable. A shared connection is compatible with different family approvals only while the caller cannot bypass the operation/resource restrictions or extract the credential. Unknown enforcement stays unknown and uses the conservative approval default. These are proposed control requirements for #35/#40, not evidence that v1 or any selected product implements them.
+
+## Criterion and receiving-interface audit (2026-10-18)
+
+This audit preserves the nine literal research acceptance criteria from [#26](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/26). It separates completion of this bounded research deliverable from adoption of a versioned ruleset, production integration and completion of its consumers. The artifact assessment is prepared for independent review; the final receiving decision and delivered revision must be linked before issue closure.
+
+| ID | Acceptance criterion (unchanged) | Artifact or receipt and its scope |
+| --- | --- | --- |
+| 26.1 | Tool metadata schema | `tool`/`integration` mapping, minimum metadata and typed comparison fields above; eight tool and two integration proposals under `catalog/proposals/t4b-*.json`. Missing v1 concepts remain explicit note-only proposals. |
+| 26.2 | Side-effect / risk classification handed to #35 | Four classes and operation-level approval defaults above. [PUSHINGSQUARES's receiving response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930) accepts those inputs, and [appletechie confirms the risk-class row](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021). The dated scope/enforcement correction sharpens that boundary without claiming an implemented control. |
+| 26.3 | Decision record merged at `research/T4-agents-integrations/tools-apis.md` following the research method | Original record delivered in [#70](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/70), with later evidence, credential and source-gap corrections retained. This continuation still needs its reviewed merge. |
+| 26.4 | Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Sixteen candidate rows cover provider-hosted tools, managed APIs and self-hosted backends. The deployment section now explicitly preserves the accepted serving-component definition of build mode. |
+| 26.5 | Comparison fields defined with type, unit, and evidence requirement | Comparison-field table supplies identifiers, versions, authentication, permission strings, scoped rate dimensions, risk, failures, pricing and provenance. Unsupported quota or currency conversions remain unknown/note-only. |
+| 26.6 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Ten v1-shaped JSON proposals retain applicability, assertions, severity, missing-input handling, evidence and remediation; policy hypotheses and required contract changes are separate. The withdrawn credential rule remains withdrawn. No independently verified joint product rule is claimed. |
+| 26.7 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | B1–B41 retain the original 2026-10-16 observations; B42–B53 carry separately dated readbacks. Candidate/pricing tables link their evidence and retain platform, unit, currency and missing-source limits. The single pricebook keeps its own dated, version-bound USD request rate. This is a citation/claim-scope assessment, not a blanket recheck of every source or a measured capability claim. |
+| 26.8 | Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | The three declared consumers are #27, #35 and #39. Their precise directions, existing receipts and remaining receiving assessment are below. No reverse-direction receipt is counted as forward acceptance. |
+| 26.9 | Open questions recorded with a named follow-up owner | The open-questions table names #35/#38/#39/#40/#41 and source-specific owners. Incomplete Stripe refund RAK mapping and E2B distribution terms stay unknown. Follow-on contract, runtime and source-use decisions are not relabelled completed. |
+
+### Declared downstream interfaces
+
+| Direction | Required research interface | Existing evidence and final-review boundary |
+| --- | --- | --- |
+| #26 → #27 MCP Servers | Operation-level tool identities and risk classes; annotations are review inputs rather than authority; a server's tool mapping needs sourced identities | The [internal receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/24#issuecomment-6233347509) explicitly accepts **#27 → #26** only for this pair. The reverse direction needs an actual receiving review of this record and [the MCP record's tool boundary](mcp-servers.md#open-questions-and-handoffs); this audit does not infer it. |
+| #26 → #35 Guardrails | Risk classes, approval defaults, operation-level enforcement, credential and exfiltration boundaries | [PUSHINGSQUARES](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6240050930) accepts the risk/default input; [appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6245652021) confirms that row. Their MCP-description, memory-deletion and configured-key follow-ups retain their separate scopes. The dated permission correction is included in this continuation's independent review. |
+| #26 → #39 Cost Estimate | Preserve published billing units and unknown costs; link the dated tool pricebook with its conditions; route unsupported meters and the tool dependency edge through #40 | The same two actual owners accept the units/unknown-cost principles. [Merged #229](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/229) supplies the requested #70/#72 links and four explicit memory-cost omissions in [the receiving cost record](../T6-deployment-operations/cost-estimate.md#t4-cost-coverage-follow-up-2026-10-18-partial-research). Final review must assess those delivered coverage corrections without treating the earlier comments as approval of a later revision. No current vendor rate, scenario total or complete #39 is inferred. |
+
+The wider T4 handoff matrix also tracks #13 shared provider identity, #38 telemetry and #40/#41 governance. These remain at their named owners for the scoped follow-on work. In particular, the [#40 queue receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6242626523) accepts proposed work for central review; it is not permission to edit frozen v1. The [#41 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6242626857) preserves claim-level evidence, dated current-state observations and source-specific rights. Neither contract implementation nor a universal API integration approval is an additional research criterion for #26.
