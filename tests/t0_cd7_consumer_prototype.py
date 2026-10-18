@@ -4,6 +4,7 @@ Reuse the exact-byte archive from CD-7. A complete pair here means immutable
 identity and catalog/rate membership only; source use remains unqualified.
 """
 
+from copy import deepcopy
 from dataclasses import replace
 import json
 from pathlib import Path
@@ -16,7 +17,7 @@ from t0_revision_lock_prototype import (
     ARTIFACT_SCHEMAS, PIN_SCHEMA, SnapshotArchive, decode, digest,
     validate_document,
 )
-from validate_research import SCHEMAS
+from validate_research import SCHEMAS, price_instant
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "cd7-consumer-0.1"
@@ -26,11 +27,40 @@ MAX_ARTIFACT_BYTES = 64 * 1024 * 1024
 MAX_ENVELOPE_BYTES = 64 * 1024
 MAX_DEPTH, MAX_NODES = 48, 16384
 SCHEMA = json.loads((ROOT / "tests/fixtures/t0-cd7-consumer.schema.json").read_text())
+# Add whole-string bounds only where a frozen schema declares one of these two
+# ID patterns. Catalog reference fields also inline the entity pattern. This
+# private validation view never rewrites a frozen schema or an artifact value.
+ID_PATTERNS = {
+    "^[a-z][a-z0-9._:-]{2,119}$": "[^a-z0-9._:-]",
+    "^[a-z][a-z0-9_-]{2,79}$": "[^a-z0-9_-]",
+}
+
+
+def identity_profile(schema):
+    schema = deepcopy(schema)
+    pending = [schema]
+    while pending:
+        node = pending.pop()
+        if isinstance(node, dict):
+            pattern = node.get("pattern")
+            if isinstance(pattern, str) and pattern in ID_PATTERNS:
+                node.setdefault("allOf", []).append({"not": {"pattern": ID_PATTERNS[pattern]}})
+            pending.extend(node.values())
+        elif isinstance(node, list):
+            pending.extend(node)
+    return schema
+
+
+PROFILE_SCHEMAS = {name: identity_profile(schema) for name, schema in SCHEMAS.items()}
 REGISTRY = Registry().with_resources(
-    [(schema["$id"], Resource.from_contents(schema)) for schema in SCHEMAS.values()]
+    [(schema["$id"], Resource.from_contents(schema)) for schema in PROFILE_SCHEMAS.values()]
     + [("urn:pick-your-ai:cd7-pins:0.1", Resource.from_contents(PIN_SCHEMA))]
 )
 VALIDATOR = Draft202012Validator(SCHEMA, registry=REGISTRY, format_checker=FormatChecker())
+DOCUMENT_VALIDATORS = {
+    name: Draft202012Validator(PROFILE_SCHEMAS[name], registry=REGISTRY)
+    for name in (*ARTIFACT_SCHEMAS.values(), "build.schema.json")
+}
 
 
 class ConsumerError(ValueError):
@@ -77,6 +107,22 @@ def bounded_json(raw, byte_limit):
     return value
 
 
+def capture_timestamp(value):
+    """Check the explicit ASCII Gregorian/RFC-3339 subset without format extras."""
+    try:
+        # Reuse the existing intake profile: years 0001..9999, seconds 00..59,
+        # explicit offset, arbitrary fractional digits, and no normalization.
+        price_instant(value)
+    except (TypeError, ValueError) as error:
+        raise ConsumerError("artifact_representation_unsupported") from error
+
+
+def artifact_fields(document, kind):
+    capture_timestamp(document["captured_at"])
+    if any(DOCUMENT_VALIDATORS[ARTIFACT_SCHEMAS[kind]].iter_errors(document)):
+        raise ConsumerError("artifact_representation_unsupported")
+
+
 def wire(raw, wrapper):
     value = bounded_json(raw, MAX_ENVELOPE_BYTES)
     if not isinstance(value, dict) or not isinstance(value.get(wrapper), dict):
@@ -95,8 +141,8 @@ def wire(raw, wrapper):
                     raise ConsumerError("integer_representation_unsupported")
                 if key == "schema_version" and entry != "1.0.0":
                     raise ConsumerError("unsupported_schema_version")
-                if key == "captured_at" and isinstance(entry, str) and not entry.isascii():
-                    raise ConsumerError("artifact_representation_unsupported")
+                if key == "captured_at" and isinstance(entry, str):
+                    capture_timestamp(entry)
             pending.extend(child.values())
         elif isinstance(child, list):
             pending.extend(child)
@@ -154,8 +200,7 @@ def _binding(binding, limit, dispositions):
     if binding.raw is not None:
         try:
             document = bounded_json(binding.raw, limit)
-            if not document["captured_at"].isascii():
-                raise ConsumerError("artifact_representation_unsupported")
+            artifact_fields(document, binding.kind)
         except ConsumerError as error:
             status = ("artifact_too_large" if error.code == "byte_limit_exceeded"
                       else "artifact_representation_unsupported" if error.code == "artifact_representation_unsupported"
@@ -191,6 +236,8 @@ def inspect(archive, request_bytes, build_bytes, sidecar_bytes=None, *, disposit
     except (ValueError, UnicodeError, RecursionError) as error:
         raise ConsumerError("invalid_cd7_input") from error
     build = decode(build_bytes)
+    if any(DOCUMENT_VALIDATORS["build.schema.json"].iter_errors(build)):
+        raise ConsumerError("invalid_cd7_input")
     if build["revision"] > MAX_REVISION or build["locks"]["dependency_graph_revision"] > MAX_REVISION:
         raise ConsumerError("native_revision_unsupported")
     catalog, catalog_result = _binding(resolution.catalog_snapshot, packet["max_artifact_bytes"], dispositions)
@@ -260,8 +307,7 @@ def verify_complete_pair(response_bytes, request_bytes, build_bytes, sidecar_byt
             raise ConsumerError("invalid_artifact_document") from error
         if document["revision"] > MAX_REVISION:
             raise ConsumerError("native_revision_unsupported")
-        if not document["captured_at"].isascii():
-            raise ConsumerError("artifact_representation_unsupported")
+        artifact_fields(document, kind)
     try:
         archive = SnapshotArchive(list(artifacts.items()))
     except ValueError as error:
