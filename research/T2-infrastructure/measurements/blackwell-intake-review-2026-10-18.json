@@ -1,0 +1,128 @@
+{
+  "record_type": "research_intake_disposition",
+  "reviewed_at": "2026-10-18T22:53:32Z",
+  "original_contributor_commit": "63aac7598a441f364b7701fa5d86e9c8cb47a65a",
+  "original_contributor": "MrTrenchTrucker",
+  "public_review_uri": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6256134314",
+  "reported_observations": {
+    "path": "research/T2-infrastructure/measurements/rtx-pro-4000-blackwell-sff-measurements-2026-10-18.json",
+    "bytes": 4161,
+    "sha256": "ced1b304b69773b781190036d153ba3e96daf3f13f3638b7e820fb58dc4b5689",
+    "git_blob": "f26fe59a53b4d2914a4dd5bbf21ed4ecbdfde05c",
+    "preservation": "Original submitted bytes retained unchanged. The embedded executed status and metric labels are the contributor's report, not an independent execution or admission receipt.",
+    "evidence_disposition": "unverified_contributor_report",
+    "eligible_whole_runtime_peak_pairs": 0,
+    "missing": [
+      "Exact engine source/build and binary hashes",
+      "Exact model/config/tokenizer/converted-artifact revisions and hashes",
+      "Complete workload and phase/sampling protocol with original timestamped outputs",
+      "Whole-runtime peak allocated and reserved measurements with repetitions",
+      "Semantically matched pinned llmfit, ModelFit and Planner estimator results"
+    ],
+    "interpretation": "Reported per-PID loaded/generation memory samples and per-scenario timing only. Largest device in a sample is not a temporal peak. Different-model timings do not isolate CPU-offload cost."
+  },
+  "resource_estimate_submission": {
+    "source_uri": "https://github.com/MrTrenchTrucker/pick-your-ai-research/blob/63aac7598a441f364b7701fa5d86e9c8cb47a65a/research/T2-infrastructure/measurements/resource-estimate-rtx-pro-4000-blackwell-sff-2026-10-18.json",
+    "bytes": 5521,
+    "sha256": "5e437784aeca238ee192e14caa3db3fdc1e03de45364122edfa1fd1e13fe642a",
+    "git_blob": "c0568985efa5a30c17254f9016c9747d6229df92",
+    "disposition": "not_admitted",
+    "current_runtime_artifact_submitted": false,
+    "reasons": [
+      "No demonstrated matching real BuildSnapshot or exact scenario-specific selections",
+      "Unsupported calibrated grade: M1 residual is fitted to M1 and M3 share is taken from M3",
+      "Reported process-memory samples do not establish the required peak quantities or independent validated error interval"
+    ],
+    "preservation": "Original file remains in the retained contributor commit. It is omitted from the current tree; this disposition record is not a ResourceEstimate."
+  },
+  "precision_correction": {
+    "original_source_uri": "https://github.com/MrTrenchTrucker/pick-your-ai-research/blob/63aac7598a441f364b7701fa5d86e9c8cb47a65a/research/T2-infrastructure/measurements/precision-reference-blackwell-2026-10-18.json",
+    "original_sha256": "34b3b7ee01f9362f58c3c4428d1a63588b0c4255d48a61603c3772c9b5ee8542",
+    "current_disposition": "Corrected against the directly read current primary table; separate FP6 column and CC10.0 FP64 Tensor support preserved."
+  },
+  "catalog_originals": [
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5060-2026-10-18.json",
+      "bytes": 3179,
+      "sha256": "9564b17a2e7f7e16fade34dc8088e1268c8b119cc40c4cde41748a51b8e7ef36",
+      "git_blob": "47661f2b0d7c6ca783c8ca7e92afbb1e06a94026"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5060-ti-16gb-2026-10-18.json",
+      "bytes": 3331,
+      "sha256": "3339d97c6b9e58a664f14125828e62a38cca9f02f3cd2d31c92ed09f1939140f",
+      "git_blob": "c04891b49fd2f74f273b403eab27ba1b49293914"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5060-ti-8gb-2026-10-18.json",
+      "bytes": 3325,
+      "sha256": "4225080ed70e3f632647801971e745fb1dec36392d57c667e832c88706bad0ab",
+      "git_blob": "5439c28b015624e895761afb9ee13a7af75ba230"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5070-2026-10-18.json",
+      "bytes": 3175,
+      "sha256": "d9398e37ece08fd90a9f23e2075345b162d1852d370ccc6e377f4c3ada614525",
+      "git_blob": "a99bb9e5dd306a1e5b32ecdba99a7017ed2b6e65"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5070-ti-2026-10-18.json",
+      "bytes": 2971,
+      "sha256": "23a9ac402c715666c1a80ae5b2f5db055d4ba54116da7e05c232936bee923a24",
+      "git_blob": "33fb4580ca333f93fe8257c0d025fa3158673013"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5080-2026-10-18.json",
+      "bytes": 2997,
+      "sha256": "ba4a8a804b65ae21fb543cf89dc48250d0c1265534da36b55adfd7bb57f5477d",
+      "git_blob": "7e7d4fbb9702a485d53fc2b42b86628850c7335e"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-geforce-rtx-5090-2026-10-18.json",
+      "bytes": 3018,
+      "sha256": "f6d7d3dceacb9d0ad058910c2114b5f89ef9db938c601c920b590199a0e343a1",
+      "git_blob": "104de36dc6e5dfd368121c2ba73b82052c5b0bc5"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-rtx-pro-2000-blackwell-2026-10-18.json",
+      "bytes": 2826,
+      "sha256": "2c50ce5c7c5d451b5eee91013712f363d4c922e3a5fd3315f78211710010b7eb",
+      "git_blob": "c868033aede0340e976f55991813d86c9ce32e50"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-rtx-pro-4000-blackwell-2026-10-18.json",
+      "bytes": 2827,
+      "sha256": "b59cb6d3c4d408f360c725e4713f4bff44db27f662e0ed7ca188e7d95dcf06b3",
+      "git_blob": "38c62d6b068f590dbc2f1e1f767c830e1d402020"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-rtx-pro-4000-blackwell-sff-2026-10-18.json",
+      "bytes": 2468,
+      "sha256": "c6b3ccf53cb23076eb04aeb80246cdb57938e57554ca8ad2bf65c1473f8299e4",
+      "git_blob": "9eaa7d9f379c670386eb5ce342aaa9f958fb1b35"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-rtx-pro-5000-blackwell-48gb-2026-10-18.json",
+      "bytes": 3790,
+      "sha256": "20c431fbbc8690bdf585c0deab0d595ed22c09822436958c2fd1327580728055",
+      "git_blob": "93a33ff3dc7f003258cfd246499855bc4280823e"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-rtx-pro-5000-blackwell-72gb-2026-10-18.json",
+      "bytes": 3790,
+      "sha256": "fe247268ccf6beb42c775abe17e57b02dd73c4f41e3b1235c571b3bdad5326fe",
+      "git_blob": "3812042401a7959a49462200c01a8c137c1621a2"
+    },
+    {
+      "path": "catalog/proposals/t2-compute-nvidia-rtx-pro-6000-blackwell-workstation-2026-10-18.json",
+      "bytes": 2610,
+      "sha256": "efbd2f150085682c198b6def68550858e1a3cdb52cfc778488051349f35fd863",
+      "git_blob": "191fccff5c5bbfe799a565a4121330818d7acaca"
+    }
+  ],
+  "boundaries": [
+    "The existing accepted #381 future-intake location is preserved; it does not admit these submitted records.",
+    "No synthetic BuildSnapshot, missing measurement, model pin, independent verification, confidence interval, price, live capacity or issue acceptance is fabricated.",
+    "No existing accepted record, frozen-v1 field, rule or empirical pair count is changed by this intake review."
+  ]
+}
