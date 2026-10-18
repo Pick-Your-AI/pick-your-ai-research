@@ -2483,7 +2483,7 @@
     ],
     "limitations": [
       "Added from the #48 staged list; matrix cells are Unknown pending #49 grading. No benchmark submitted, CLI run or result reproduced.",
-      "Submission requires sign-in and an API key; robots.txt disallows leaderboard and run pages, which were not inspected."
+      "Submission requires sign-in and an API key; robots.txt disallows leaderboard pages, which were not inspected."
     ],
     "discovery_review": {
       "access_date": "2026-10-16",
@@ -2496,7 +2496,7 @@
       ],
       "evidence_locator": "src-localmaxxing",
       "status": "Source-checked documentary scope from the staged #48 record; behavior not exercised",
-      "limitations": "Submission requires sign-in and an API key; robots.txt disallows leaderboard and run pages, which were not inspected.",
+      "limitations": "Submission requires sign-in and an API key; robots.txt disallows leaderboard pages, which were not inspected.",
       "updated_fields": []
     }
   },
