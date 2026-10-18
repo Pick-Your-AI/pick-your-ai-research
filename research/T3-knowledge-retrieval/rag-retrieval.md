@@ -19,7 +19,7 @@ Wording follows the interim #41 definition from the [PR #75 review](https://gith
 | --- | --- | --- | --- |
 | Query processing | Rewrite, decompose or route the query; derive metadata filters | #16 (decisions), #25 for agentic retrieval | Bedrock query decomposition can issue multiple queries (R12). LangChain distinguishes 2-step, agentic and hybrid RAG; agentic RAG lets the LLM decide when to retrieve, so latency varies (R16). |
 | Retrieval | Keyword, vector, hybrid, graph or direct lookup | #16; vector product #15; embeddings #14 | See the decision guide. |
-| Permission enforcement | Restrict candidates to the caller's readable documents | #16 (enforcement point); #13 (ACL metadata and sync) | See [Permission enforcement](#permission-enforcement-points). |
+| Permission enforcement | Bind the authenticated caller to the resource/read action and mandatory scope before model or tool exposure | #16 (enforcement point); #13 (ACL metadata and sync) | See [Permission enforcement](#permission-enforcement-points); a service credential or optional search filter is insufficient. |
 | Fusion and reranking | Merge result lists (RRF), then optionally rerank with a cross-encoder | #16; reranker model identity needs a contract decision (#40) | RRF score is a sum of 1/(rank_constant + rank); Elasticsearch's default `rank_constant` is 60 (R03). |
 | Context assembly | Order, deduplicate, truncate or drop chunks; attach source identifiers | #16 with #7 budget rules | Position matters: performance "can degrade significantly when changing the position of relevant information" (R22). |
 | Citation | Return source pointers with the answer | #16; display with the builder | See [Citations](#citations). |
@@ -72,10 +72,12 @@ Ranked from the earliest to the latest point in the pipeline. The ranking is a p
 | P1. Source-native, at query time | Azure token in `x-ms-query-source-authorization`, compared with synchronised ACL, RBAC or Purview metadata (R11, preview) | Engine-managed | Changes in the source system "are only reflected in search results after that metadata is synchronized to the index" (R11). Freshness lag is a leak window. |
 | P2. Index pre-filter | Elasticsearch kNN `filter` (R01); OpenSearch efficient filtering (R08); Azure security filters (R11); PostgreSQL RLS (R07); Vespa default pre-filtering (R15) | Yes, when enough matches exist (R01, R08) | The filter is only as current and complete as the ACL fields #13 propagates. In the Azure filter pattern, the principal "is just a string" with no authentication (R11). |
 | P3. Engine post-filter | Filters outside the kNN clause (R01); pgvector after an approximate scan (R05); OpenSearch post-filtering (R08) | **No.** Fewer than k results, even when enough matches exist (R01, R05, R08) | Recall loss for restricted users. Still secure if applied before results leave the engine (hypothesis). |
-| P4. Application post-filter before assembly | The application drops unauthorised hits | No | Scores, counts, facets or snippets can leak if exposed before trimming (hypothesis). Azure lists performance as a benefit of native filtering over post-query trimming (R11, vendor claim). |
+| P4. Application post-filter before model/tool exposure | The trusted application drops unauthorised hits before any reranker/model call, agent tool response or other exposure outside its authorized boundary | No | Scores, counts, facets, snippets, traces or shared caches can leak if exposed before trimming (hypothesis). Azure lists performance as a benefit of native filtering over post-query trimming (R11, vendor claim). |
 | P5. After generation, or none | — | — | **Always fails** RAG-02. Unauthorised text would already be in the model's context. |
 
 **ACL propagation (handed to #13).** Chunking must copy document permissions to every chunk. Azure states that with a chunking skillset, ACL fields "move from indexer field mappings to index projections", and that without projecting labels to each chunk row, "chunk-level references aren't filtered" (R11). Engine DLS controls reads, not writes (R01, R09). OpenSearch advises that users with DLS roles should not have write access (R09). In Elasticsearch, alias filters act as pre-filters (R01).
+
+**Receiving-review clarification (2026-10-18).** The stage names above locate enforcement; they do not establish caller authorization. [RAG-02](rules/retrieval-rules.md#rag-02-caller-authorization-precedes-model-and-tool-exposure) now carries the R29–R31 supplement's trusted caller/store/action binding, non-replaceable mandatory scope and derived-artifact coverage into its assertion and synthetic counterexamples. A known wrong-tenant filter fails even when the index applies that filter correctly. Missing binding or permission-revision evidence remains unknown and blocks protected retrieval. This is a proposed engineering policy for #40/#35, not a deployed security result.
 
 ## Citations
 
@@ -119,7 +121,7 @@ Anthropic states that its citations "are guaranteed to contain valid pointers to
 [rules/retrieval-rules.md](rules/retrieval-rules.md) defines RAG-01 to RAG-06 in the #40 format, with outcome separate from severity and unknown never passing:
 
 - RAG-01: retrieved upper bound fits the input budget. `error`.
-- RAG-02: permission enforcement happens before context assembly. `error`.
+- RAG-02: caller authorization precedes model and tool exposure. `error`.
 - RAG-03: a reranker is identified and its input limit is respected. `warning`.
 - RAG-04: requested hybrid mode is honoured by the backend. `warning`.
 - RAG-05: filtered approximate search can return fewer than k results. `warning`.
@@ -207,7 +209,7 @@ All entries were accessed on 2026-10-17. Grades: PD = primary documentation, VC 
 
 ## Open questions and handoffs
 
-None of these handoffs is confirmed. The drafter is a co-assignee on #7, #15, #35, #36 and #39. That authorship is not an independent consuming-owner acknowledgement, so the other co-owner of each issue must confirm.
+The T4 component owner's bounded receiving decisions for #25/#28 are linked below; other receiving and co-owner dispositions remain separate. The drafter is a co-assignee on #7, #15, #35, #36 and #39. That authorship is not an independent consuming-owner acknowledgement, so the other co-owner of each issue must confirm.
 
 | To / owner | Request | Status |
 | --- | --- | --- |
@@ -216,8 +218,8 @@ None of these handoffs is confirmed. The drafter is a co-assignee on #7, #15, #3
 | #13 @tynamite, @zabyxc01 | ACL metadata per chunk, sync lag, rights; whether `acl_enforced` implies P1/P2 | Pending |
 | #14 @zabyxc01, @PUSHINGSQUARES | Embedding tokenizer vs generation tokenizer for chunk budgets; reranker as a separate model | Pending |
 | #15 @zabyxc01, @appletechie (Stormxftw offered draft) | Filtered ANN shortfall and pre/post-filter support per product; no product evaluation here | Pending |
-| #25 @CompleteDotTech, @Mattycodes69 | Retrieval as a tool vs a 2-step pipeline (PR #69 `rule.t4.rag.integration`) | Pending |
-| #28 @CompleteDotTech, @PUSHINGSQUARES | Retrieval-backed memory reuses this guide; memory semantics stay with #28 (PR #72) | Pending |
+| #25 @CompleteDotTech, @Mattycodes69 | Retrieval as a tool vs a 2-step pipeline (PR #69 `rule.t4.rag.integration`) | [Accepted with constraints for T4's component-owner scope](../T4-agents-integrations/agent-framework.md#t3-retrieval-receiving-review-2026-10-18); @Mattycodes69's separate scope remains pending |
+| #28 @CompleteDotTech, @PUSHINGSQUARES | Retrieval-backed memory reuses this guide; memory semantics stay with #28 (PR #72) | [Accepted with constraints for T4's component-owner scope](../T4-agents-integrations/agent-memory.md#t3-storage-and-retrieval-receiving-review-2026-10-18); @PUSHINGSQUARES's separate scope remains pending |
 | #35 @appletechie, @PUSHINGSQUARES | Retrieval-target guardrails: prompt injection in retrieved text; least-privilege SQL | Pending |
 | #36 @appletechie, @PUSHINGSQUARES | Adopt the metric list, leakage test set and per-stage latency | Pending |
 | #39 @appletechie, @PUSHINGSQUARES | Price units for search, rerank and graph indexing | Pending |

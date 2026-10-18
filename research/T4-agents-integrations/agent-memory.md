@@ -475,6 +475,18 @@ Catalog proposals (all `kind: memory_store`, `tier: T4`, validated):
 - Graphiti: graph backing has no enum value.
 - Anthropic memory tool: storage is application-defined.
 
+## T3 storage and retrieval receiving review (2026-10-18)
+
+T4/#28 accepts the bounded [#15 storage interface](../T3-knowledge-retrieval/vector-database.md) and [#16 retrieval interface](../T3-knowledge-retrieval/rag-retrieval.md) for the T4 component owner's consuming scope, with these constraints. The decision uses the project owner's delegated authority; @PUSHINGSQUARES's separate co-owner scope and the T3 owners' decisions remain distinct.
+
+- Reference the actual selected store/index and memory role rather than introducing duplicate storage product records. The presence of any primary vector database is insufficient: its configured representation, dimensions, metric, normalization and authorized namespace must fit this memory use. Reusing a storage product does not establish shared permissions or compatible embedding spaces.
+- Receive VDB-01's index/type-specific admission, VDB-02's resource-and-action authorization, and VDB-03's source-to-derived deletion lineage as proposed constraints. Software-level optional fields such as `supports_acl` and `regions` stay absent or unknown without eligible deployment/configuration evidence. No region, isolation guarantee, entitlement or operational price follows from the software catalog alone.
+- Retrieval-backed memory inherits [RAG-02's trusted principal and mandatory scope](../T3-knowledge-retrieval/rules/retrieval-rules.md#rag-02-caller-authorization-precedes-model-and-tool-exposure) before model or tool exposure, including permission-bearing summaries and graph artifacts. Read permission does not grant write, delete or administrative permission. A successful query does not establish consent to persist its result.
+- #28 retains memory purpose/scope, consent, retention and deletion semantics. Vector invisibility or a database acknowledgement does not establish removal from history, checkpoints, summaries, caches or backups. Preserve per-layer evidence and unknowns; the scoped Mem0 reproduction is not a complete-erasure guarantee.
+- Apply the [framework receiving review's complete-input accounting](agent-framework.md#t3-retrieval-receiving-review-2026-10-18). Retrieval and memory labels must not charge the same assembled tokens twice; repeated text actually present in the input still consumes tokens each time. Keyword, exact-key and session-only memory do not acquire a vector-database requirement through this handoff.
+
+This accepts T4's incoming interface only. T3's response to T4's outgoing role/ACL/region request, #40's versioned links and evidence operands, #35/#38 policy and purge coverage, and deployment/interoperability measurements remain separate. No new frozen-v1 field or production configuration is adopted.
+
 ## Open questions and handoffs
 
 | Question | Follow-up issue / owner |

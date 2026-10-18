@@ -63,7 +63,7 @@ All read 2026-10-18. Primary documentation, source checked only; mutable pages a
 
 ## Recommendation, handoffs and remaining acceptance
 
-Start with the required retrieval/access contract, then compare operational burden and measured quality. Dedicated storage is an option, not an obligatory T3 component. #16 owners decide the not-needed criteria; #14 owns representation/metric compatibility; #28 owns vector-backed memory semantics; #39 owns meters and rates; #9 owns hosting/recovery evidence; #35 owns policy enforcement. All receiving dispositions remain pending.
+Start with the required retrieval/access contract, then compare operational burden and measured quality. Dedicated storage is an option, not an obligatory T3 component. #16 owners decide the not-needed criteria; #14 owns representation/metric compatibility; #28 owns vector-backed memory semantics; #39 owns meters and rates; #9 owns hosting/recovery evidence; #35 owns policy enforcement. [T4's component-owner scope of #28 accepts the bounded storage interface with constraints](../T4-agents-integrations/agent-memory.md#t3-storage-and-retrieval-receiving-review-2026-10-18); its separate co-owner and other receiving dispositions remain pending. That incoming acceptance is not T3's reply to the outgoing memory-role/ACL/region request.
 
 @zabyxc01/@appletechie retain candidate/ACL decisions. Before completion, pin actual product releases/offerings, obtain complete dimension/index/filter and license/price evidence, and record consumer acceptance. The pgvector software CatalogItem below contains only sourced required fields and scoped license facts; no Pricebook is invented. This bounded draft does not replace or claim completion of the active #65 interoperability validation.
 
