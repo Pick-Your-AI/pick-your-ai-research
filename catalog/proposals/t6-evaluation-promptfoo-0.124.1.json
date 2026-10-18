@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-promptfoo-community",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Promptfoo Community batch assertions",
+  "version": "0.124.1",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Configured batch/CI assertion profile of Promptfoo Community software. The free classification is limited to that software plan; target inference, judges, hosted infrastructure, remote generation and Enterprise are excluded. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "equals",
+      "contains",
+      "is-json",
+      "rouge-n",
+      "bleu",
+      "latency",
+      "cost",
+      "llm-rubric",
+      "context-recall",
+      "context-relevance",
+      "context-faithfulness"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/package.json",
+      "checked_at": "2026-10-18T20:02:02.059720+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob c42cf62b53c8adb25e2a5a0c6d775da4d09eca0c (SHA256 1f88f2f383feeee5ea79b84070fa77ff722f5467819477088120f22e6fe3e1bd) was read at the pinned publisher commit. Declares version 0.124.1, MIT and Node >=22.22.0. Active denotes this published version being available, not latest-version, general availability, maintenance, security or suitability certification."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/src/assertions/index.ts",
+      "checked_at": "2026-10-18T20:02:03.028235+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 4fd0ebafd2088d9515e430b7cab11bdb0c2a118d (SHA256 d26ae31e6bc404e73a2ff131df30caf0715b647ce5a5e59d399d82d1ecea2e9f) was read at the pinned publisher commit. The listed identifiers are assertion-handler capabilities. They are not a measured score, interchangeable metric definition or a configured release threshold; model-graded assertions need an explicitly chosen grading policy."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/site/docs/intro.md",
+      "checked_at": "2026-10-18T20:02:02.272304+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 45c6efa4e9b94b397e2892745fd446e280024efa (SHA256 5a33a4d00d665564c195e70e87025606370fc26b2b0d527a03b5b354f4813bb5) was read at the pinned publisher commit. The configured test-case evaluation workflow supports the scoped offline/batch interpretation. This does not establish online production monitoring in Community or prohibit network calls."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/site/src/pages/pricing.tsx",
+      "checked_at": "2026-10-18T20:02:02.070526+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob cf83ef5fe1c740d907d53906bed6172d2fd7343e (SHA256 755a1b799dd7846a3f5076a84a569fabca89391fc7077c62226303576b644bfe) was read at the pinned publisher commit. The pinned Community plan says free and includes LLM evaluation with local/self-host use. Enterprise is custom-priced and its continuous monitoring does not become a Community entitlement. No zero-cost inference or Pricebook line follows."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/site/docs/configuration/telemetry.md",
+      "checked_at": "2026-10-18T20:02:02.816250+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob c458ffd152372b2b0756923f3c14ff661c77c026 (SHA256 7fbf3da17598906bd95cbd80c845640ea890aabe75d4d014452823798bde4278) was read at the pinned publisher commit. Usage telemetry and npm update checks are on by default; documented opt-outs do not prove they were used. No package or evaluation ran here."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/src/assertions/cost.ts",
+      "checked_at": "2026-10-18T20:02:03.193827+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob e57cdf2109f021691b44237063df9b46530fca9e (SHA256 a407b3af18f953bd5cc6bc12d766344aa83713647f1a6da258c603f035b50e23) was read at the pinned publisher commit. The cost assertion requires provider-returned cost; missing cost is an error. The threshold-free named measurement rejects negative/non-finite values. Unknown cost is not zero."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/src/assertions/latency.ts",
+      "checked_at": "2026-10-18T20:02:03.479719+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 60aaba33fbcad2bb1d5d43cee7788b32d942bed8 (SHA256 36b4d071be738afc05553d5268f66147a3595d9745a1c8fa8a7fa67a8f9b31e9) was read at the pinned publisher commit. Latency uses milliseconds and rejects cached results. No latency was measured here."
+    },
+    {
+      "source_uri": "https://github.com/promptfoo/promptfoo/blob/421e7959642c5d4cc1c983259a268de1c6f847b9/LICENSE",
+      "checked_at": "2026-10-18T20:02:02.003207+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob af3fa111d9303b3041d225fb851534e50a4bbec2 (SHA256 bf813686553f451e1b833fbd827488aee49b60b189626915bf3108d10b754e44) was read at the pinned publisher commit. Only the MIT SPDX identifier is recorded. Model-graded configuration can select graders from credentials when not explicitly pinned; no model/data rights or isolated placement follows from this license."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "MIT"
+  }
+}

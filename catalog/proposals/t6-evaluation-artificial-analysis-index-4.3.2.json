@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-artificial-analysis-intelligence-index",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Artificial Analysis Intelligence Index method",
+  "version": "4.3.2",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Published composite methodology, not a licensed score feed, hosted evaluator entitlement or reproduced model ranking. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Artificial Analysis Intelligence Index"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "The page names v4.3.2 and defines a weighted combination of ten evaluations across four categories. Offline denotes finite benchmark assessment, not network isolation. Private tasks, scoring access, data reuse and actual results are not obtained by reading this public method."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

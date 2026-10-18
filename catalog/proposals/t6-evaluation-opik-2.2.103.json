@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-opik-equals",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Opik configurable equality scoring",
+  "version": "2.2.103",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Opik Equals capability in the dataset evaluation workflow. The default compares str-converted, lowercased values; case_sensitive=true changes that policy. These comparison options cannot repair or validate an original case-sensitive contract payload. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "equals_metric"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/opik/2.2.103/json",
+      "checked_at": "2026-10-18T19:50:41.658805+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published opik 2.2.103 metadata identifies the source artifact uploaded 2026-10-16T10:17:27.520697Z (yanked=false). Its 1407548-byte download matched publisher SHA256 8508e7a283b0adc0fc69afd9091ac700d97d0d1c7b15c7662e9fcb66d33f5036. The exact metadata classifies Pre-Alpha, mapped to preview, and declares Apache 2.0. No inference is made about hosted-service readiness or entitlement."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/86/3c/6c333820950da7bcad9aa63b80a1145da5ae5122d0bc0d8c0493a52dc682/opik-2.2.103.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.658805+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's src/opik/evaluation/metrics/heuristics/equals.py has SHA256 97d801fee4aa695c1a1d516b6cabf2abfda1e59435105ee4b2b9217895d21e26. The literal default name is equals_metric, not equals. None inputs raise MetricComputationError. Non-None inputs are converted with str(), lowercased unless case_sensitive=true, and compared to produce 1/0. Tracking defaults true."
+    },
+    {
+      "source_uri": "https://pypi.org/project/opik/2.2.103/",
+      "checked_at": "2026-10-18T19:50:41.658805+00:00",
+      "verification_status": "unverified",
+      "notes": "src/opik/evaluation/evaluator.py evaluate accepts a dataset, task and scoring metrics, supporting the scoped offline profile. It creates an experiment through the configured client and tracks an analytics event. Tolerated metric failures remain failed score results excluded from aggregation, not zero scores."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/86/3c/6c333820950da7bcad9aa63b80a1145da5ae5122d0bc0d8c0493a52dc682/opik-2.2.103.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.658805+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}

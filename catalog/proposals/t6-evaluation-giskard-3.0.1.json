@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-giskard-checks",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Giskard documented batch checks",
+  "version": "3.0.1",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Batch Scenario/Suite capability profile documented by Giskard 3.0.1. The metapackage delegates to a ranged giskard-checks dependency; its publisher-documented names do not claim a completely pinned implementation or optional scan/red-team packages. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Groundedness",
+      "Conformity",
+      "LLMJudge"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/giskard/3.0.1/json",
+      "checked_at": "2026-10-18T19:50:41.115021+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published giskard 3.0.1 metadata identifies the source artifact uploaded 2026-10-02T01:29:28.047191Z (yanked=false). Its 12193-byte download matched publisher SHA256 5f2d5901eb4a59e394ab93c9604acdf2a36a3e17e29ebc659f2e96a4b41dbab1. The exact metapackage metadata classifies Beta, mapped to preview, and declares Apache Software License 2.0. Describing split packages as stable does not override the bundle maturity; subpackage licenses are not generalized from this root SPDX label."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/b7/c0/93b1dcb7b47c142d9406234dd53718516887827f6a6c9b9e2aa9a8a1e4c3/giskard-3.0.1.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.115021+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's README.md has SHA256 d9e0da4e684ea8f7959448b4362ade0f0762eadbbf1ec0060eb1dbaf532cd531. The shipped README names Groundedness, Conformity and LLMJudge and demonstrates Scenario execution. Groundedness needs a provider extra/key and defaults to openai/gpt-4o-mini. Optional scanning and legacy v2 APIs are excluded."
+    },
+    {
+      "source_uri": "https://pypi.org/project/giskard/3.0.1/",
+      "checked_at": "2026-10-18T19:50:41.115021+00:00",
+      "verification_status": "unverified",
+      "notes": "Scenario/Suite batch execution supports offline mode; online production monitoring is not established. Required giskard-checks>=1.0.5,<2 must be resolved with provider/configuration versions for reproducibility."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/b7/c0/93b1dcb7b47c142d9406234dd53718516887827f6a6c9b9e2aa9a8a1e4c3/giskard-3.0.1.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.115021+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}

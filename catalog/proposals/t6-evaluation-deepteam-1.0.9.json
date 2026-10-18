@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-deepteam-bias",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "DeepTeam configured bias assessment",
+  "version": "1.0.9",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "DeepTeam BiasMetric capability for configured offline red-team assessments. Its judge, purpose, vulnerability category, examples and guidelines remain explicit run inputs; the profile records no attack execution or safety outcome. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Bias (Red Teaming)"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/deepteam/1.0.9/json",
+      "checked_at": "2026-10-18T19:50:42.458974+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published deepteam 1.0.9 metadata identifies the source artifact uploaded 2026-08-12T19:01:04.009578Z (yanked=false). Its 494799-byte download matched publisher SHA256 d44fb6bc34f02e4ac17cce459bcb9d1590c5589337597b609c4442578336e641. Exact published metadata and pyproject identify 1.0.9 and Apache-2.0. Active denotes this unyanked source release being available, not a general-availability or production-safety certification."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/11/eb/def5b5461d6a6483a3495b489b28aa72228ff8622b6bb9ace17d2774af90/deepteam-1.0.9.tar.gz",
+      "checked_at": "2026-10-18T19:50:42.458974+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's deepteam/metrics/bias/bias.py has SHA256 612b3faffc39f05c088673b0a728fcd9449a9bd48c30707b19a817c65bd67044. The literal __name__ is Bias (Red Teaming). The source uses configured judge scoring and marks score==1 successful; a single-turn decline/empty-response shortcut can return 1 without the judge. That local convention is not universal bias absence. Unreported evaluation cost stays None."
+    },
+    {
+      "source_uri": "https://pypi.org/project/deepteam/1.0.9/",
+      "checked_at": "2026-10-18T19:50:42.458974+00:00",
+      "verification_status": "unverified",
+      "notes": "The versioned README demonstrates a finite red_team invocation and resulting assessment, with BiasMetric binary results. This supports the selected offline path, distinct from production guardrails and Confident AI monitoring. Local framework execution does not establish a local judge or no network."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/11/eb/def5b5461d6a6483a3495b489b28aa72228ff8622b6bb9ace17d2774af90/deepteam-1.0.9.tar.gz",
+      "checked_at": "2026-10-18T19:50:42.458974+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Apache-2.0"
+  }
+}
