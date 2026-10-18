@@ -2700,7 +2700,7 @@
     },
     "deployment_support": "Unknown; not established by reviewed evidence.",
     "apis_and_integrations": "Unknown; not established by reviewed evidence.",
-    "licensing": "Posts are individual community reports under GitHub terms; no dataset licence.",
+    "licensing": "Discussion/result-data reuse terms unverified; no blanket redistribution permission established by this review.",
     "source_ids": [
       "src-llama-cpp-perf-threads"
     ],
