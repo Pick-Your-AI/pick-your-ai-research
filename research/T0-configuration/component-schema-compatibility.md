@@ -147,6 +147,32 @@ can supply a nested object/array value; absent members or indices become
 `missing`. Malformed pointer/index syntax and scalar traversal are errors.
 Duplicate JSON keys and nonfinite numbers are rejected before normalization.
 
+**Numeric parser boundary (2026-10-18):** actual synthetic probes of the
+accepted `be60732a` reader showed `1.0000000000000000000001` and
+`0.999999999999999999999999` reaching a predicate as `1.0` after satisfying
+integer bounds fixed at one. `9007199254740993.0` also satisfied a maximum of
+9007199254740992 after rounding. The [Python 3.12 JSON decoder](https://docs.python.org/3.12/library/json.html#json.JSONDecoder)
+normally converts decimal/exponent tokens to floats; its `parse_float` hook
+provides the original token. JSON Schema's [numeric data model](https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-00#section-4.2.1)
+does not impose that binary-float precision limit (sources checked 2026-10-18).
+
+This bounded reader now rejects unsupported numeric precision during parsing,
+before a field schema or value predicate can interpret a rounded answer.
+Decimal/exponent tokens must be finite and retain the same mathematical value
+when compared with the float's shortest decimal readback. A whole-valued float
+must also equal the original integer exactly: `1e23` has the expected printed
+readback but its binary value is a different integer. Original integer tokens
+continue to use Python integers; this imposes no new 53-bit integer limit.
+Supported spellings such as `1.0`, `1e0`, `0.1` and `1.2500` keep their existing
+float values/types, while numeric-looking strings remain strings. This is an
+explicit parser representation limit, not arbitrary-precision arithmetic or a
+new rule for valid historical v1 records. The original input bytes, sidecar
+schema, caller field schemas and typed predicate/outcome interfaces are unchanged.
+The [eight raw-number regression methods](../../tests/test_t0_answer_numeric_precision.py)
+cover schema-boundary false passes, underflow, large integer preservation,
+nested values and the terminal rule boundary, including actual API executions
+in normal and optimized Python.
+
 **Original Boolean/None rule boundary:** compatibility predicates receive an unresolved result for
 all non-provided states, including unknown applicability. Recommendation
 rules use the known-answer gate specified in #81 and therefore skip unresolved
