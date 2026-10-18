@@ -254,3 +254,17 @@ These are actual in-session engineering decisions under delegated project author
 Only the four corresponding current Markdown summaries change above, followed by this separately dated section. Every other earlier line and the complete #47 program-intake section remain unchanged. Earlier statements of exact-prefix preservation and 111 later records describe their own delivered checkpoints, not a claim that this later four-row amendment existed then. No producer/consumer pair, assignee, native relationship, source record, schema or Project field is added or changed.
 
 The [current #51 record](pcpartpicker.md#review-and-delivery-record) separates the actual `d937` author run (21 contract tests, 1,014 repository tests and four validators) from this later receipt amendment, independent final-source review, accepted-main composition and canonical delivery. Final issue reconciliation requires the latter evidence; the four intakes do not claim broader #2/#3/#40/#42 completion, a D-57 parity result or a new empirical/participant study. A later observed-workflow claim needs its own authorized scope and actual evidence.
+
+
+## Current Project QA routing — 2026-10-18
+
+The [dated public Project audit](../../docs/market-research/audit.md#public-project-qa-and-current-reconciliation--2026-10-18) and [exact capture](project-qa-2026-10-18-2152.json) add metadata evidence without changing any of the 101 ordered mappings or their 115 existing later records. All original owner-review objects, cutoff responses and the 44/55/2 snapshot remain exact. These are coordination/QA receipts, not additional scientific consumer decisions or absent-assignee responses.
+
+| Actual receipt | Scope indexed here |
+| --- | --- |
+| [6254963300](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6254963300) | Other research controller's separately timed public REST discovery and later readback; its observations are not relabeled as this author's execution. |
+| [6255435332](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6255435332) | Root 5dcf's nine original Status-only UI writes and independent reloads, including nonpersisting attempts and the subsequently identified #52 parent-policy omission. |
+| [6255646287](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52#issuecomment-6255646287) / [routing 6255646921](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6255646921) | Actual #52 reopen/In Progress correction with all seven desk criteria and #63 preserved; final scope is eight Done corrections plus #52 open/In Progress. The earlier ninth write remains historical. |
+| [6255676129](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6255676129) | Concrete #51 item/field/expected-option proposal for Done/Ready after accepted option (c) and signed #404. It is a proposal awaiting actual guarded action/readback, not a saved-value receipt. |
+
+The earlier [#59 executive-use intake 6254040913](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6254040913) remains a real decision about its original input. This later dated metadata update is offered to the same #47-owned synthesis scope; no new program decision, source-rights approval, experiment or whole-consumer completion is inferred.
