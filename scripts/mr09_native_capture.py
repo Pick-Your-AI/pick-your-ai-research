@@ -77,6 +77,12 @@ def validate_capture(record):
         raise ValueError("native complete event ordering drift")
     data=capture["data"]
     interval=managed_snapshot_interval({**data,"metric":"managed_device_buffers_snapshot","no_alloc":effective["no_alloc"]})
+    device=next(r for r in data["rows"] if r["kind"]=="device")
+    for key in ("total","free"):
+        if type(device.get(key)) is not int or device[key]<0:
+            raise ValueError("invalid native capture device capacity")
+    if device["total"]!=probe["driver_total_bytes"]//2**20 or device["free"]>device["total"]:
+        raise ValueError("native capture device capacity mismatch")
     live=caps["before_capture"]["live_bytes"]
     if not interval[0]<=live<=interval[1]: raise ValueError("native reported buffers do not reconcile with admission ledger")
     if "offloaded 31/31 layers to GPU" not in record["stderr"]: raise ValueError("missing effective layer placement evidence")
@@ -89,7 +95,7 @@ def validate_capture(record):
     outputs=output_setting("n_outputs_max",256)
     per_seq=output_setting("n_outputs_max_per_seq",1)
     return {"exact_admitted_live_buffer_bytes":live,"native_self_byte_interval":list(interval),
-            "native_device_row":next(r for r in data["rows"] if r["kind"]=="device"),
+            "native_device_row":device,
             "cap_bytes":caps["before_capture"]["cap_bytes"],"peak_admitted_bytes":caps["before_capture"]["peak_admitted_bytes"],
             "initialization_graph_dispatches":caps["before_capture"]["graph_denials"]-caps["after_probe"]["graph_denials"],
             "cleanup_live_bytes":caps["after_cleanup"]["live_bytes"],
@@ -145,11 +151,12 @@ def validate_preflight(screen,record,hardware):
             raise ValueError("stale preflight or run beyond launcher deadline")
     except (TypeError,KeyError) as error:
         raise ValueError("invalid preflight/run time") from error
+    return times[0],times[2]
 
 
 def summarize(directory):
     build=strict_json(directory/"build-loader-v2.json")
-    observations=[];cohort=None
+    observations=[];cohort=None;previous_finished=None
     for rep in (1,2,3):
         path=directory/f"init-r{rep}.json";record=strict_json(path)
         require_bindings(record, {
@@ -167,7 +174,12 @@ def summarize(directory):
         if sha(directory/"runtime-artifacts.json")!=record["runtime_artifact_ledger_sha256"]: raise ValueError("runtime artifact drift")
         capture_result=validate_capture(record)
         hardware=driver_readback(record["driver_csv"])
-        validate_preflight(strict_json(directory/record["preflight_file"]),record,hardware)
+        observed,finished=validate_preflight(strict_json(directory/record["preflight_file"]),record,hardware)
+        # Each recorded screen belongs to a fresh serial process; a later
+        # repetition cannot reuse a screen from an unfinished earlier trial.
+        if previous_finished is not None and observed<=previous_finished:
+            raise ValueError("native serial trial chronology drift")
+        previous_finished=finished
         native_probe=next(e for e in [loads(line) for line in record["stdout"].splitlines() if line.strip()] if e.get("mr09_event")=="qualification")
         # WDDM/CUDA and nvidia-smi totals have different rounding; allow at most 1 MiB.
         total=native_probe["driver_total_bytes"]

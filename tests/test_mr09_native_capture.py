@@ -152,6 +152,50 @@ class NativeCaptureTests(unittest.TestCase):
             self.mutate_event("mr09_event","qualification",field,value)
             with self.subTest(field=field,value=value),self.assertRaises(ValueError): capture.validate_capture(self.record)
 
+    def test_native_capture_capacity_matches_discovery(self):
+        for field,value in (("total",1),("total",16302.0),("total",True),
+                            ("free",-1),("free",20000),("free",14717.0)):
+            with self.subTest(field=field,value=value),tempfile.TemporaryDirectory() as temp:
+                dest=Path(temp)/"copy";shutil.copytree(DIRECTORY,dest)
+                path=dest/"init-r1.json";record=json.loads(path.read_text())
+                events=[json.loads(line) for line in record["stdout"].splitlines()]
+                event=next(e for e in events if e.get("type")=="fit_memory_breakdown")
+                event["data"]["rows"][0][field]=value
+                record["stdout"]="\n".join(json.dumps(e) for e in events)+"\n"
+                path.write_text(json.dumps(record))
+                before={p.name:p.read_bytes() for p in dest.glob('init-*.json')}
+                with self.assertRaises(ValueError): capture.summarize(dest)
+                with self.assertRaises(ValueError): capture.publish(dest,Path(temp)/"archive")
+                self.assertEqual(before,{p.name:p.read_bytes() for p in dest.glob('init-*.json')})
+                self.assertFalse((Path(temp)/"archive").exists())
+
+    def test_rehashed_overlapping_trials_cannot_count_as_serial(self):
+        for mode in ("overlap","reused_screen"):
+            with self.subTest(mode=mode),tempfile.TemporaryDirectory() as temp:
+                dest=Path(temp)/"copy";shutil.copytree(DIRECTORY,dest)
+                first=json.loads((dest/"init-r1.json").read_text())
+                path=dest/"init-r2.json";second=json.loads(path.read_text())
+                preflight=dest/second["preflight_file"]
+                screen=json.loads(preflight.read_text())
+                if mode=="overlap":
+                    screen["observed_utc"]=json.loads((dest/"init-r1-preflight.json").read_text())["observed_utc"]
+                    second["started_utc"]=first["started_utc"]
+                    second["finished_utc"]=first["finished_utc"]
+                else:
+                    # Still within the existing 30-second freshness bound, but
+                    # obtained before the preceding child had finished.
+                    screen["observed_utc"]=first["started_utc"]
+                    second["started_utc"]="2026-10-18T06:45:50+00:00"
+                    second["finished_utc"]="2026-10-18T06:45:51+00:00"
+                preflight.write_text(json.dumps(screen))
+                second["preflight_sha256"]=capture.sha(preflight)
+                path.write_text(json.dumps(second))
+                before={p.name:p.read_bytes() for p in dest.glob('init-*.json')}
+                with self.assertRaises(ValueError): capture.summarize(dest)
+                with self.assertRaises(ValueError): capture.publish(dest,Path(temp)/"archive")
+                self.assertEqual(before,{p.name:p.read_bytes() for p in dest.glob('init-*.json')})
+                self.assertFalse((Path(temp)/"archive").exists())
+
     def test_native_quota_portable_cpu_selftest(self):
         compiler=shutil.which("g++")
         if not compiler: self.skipTest("portable compiler absent; MSVC execution separately recorded")
