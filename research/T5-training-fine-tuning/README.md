@@ -114,7 +114,7 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 
 #33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature` and `base_notice_file_present` (needed by A-18c), plus revision-pinned catalog references.
 
-## Outgoing handoffs (none confirmed)
+## Outgoing handoffs and receiving decisions
 
 | Handoff | From | To | Owner |
 | --- | --- | --- | --- |
@@ -123,11 +123,14 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 | Adapter and format support facts for `inference_engine` items | #33 | #11 | @Mattycodes69 |
 | Training vs retrieval rights boundary; `data_source` for training sources | #32 | #13 | @zabyxc01 |
 | Leakage method and eval-set freeze; pre-deployment evaluation gate | #32, #33 | #36 | @PUSHINGSQUARES |
+| Dataset/source identity, preparation/template lineage, governance evidence and evaluation linkage | #32 | #33 | @Mattycodes69, @appletechie; current delegated engineering disposition below |
 | Training price normalisation; post-training hosting next to training cost | #31, #33 | #39 | @PUSHINGSQUARES |
 | Fine-tune lifecycle at deployment (OpenAI shutdown with base; Foundry 15-day deletion) | #33 | #37 | @PUSHINGSQUARES |
 | User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @tynamite |
 | Rule format and contract changes; "competing model" policy | all | #40 | @tynamite |
 | Evidence grading (checked vs verified), price freshness | all | #41 | @tynamite |
+
+The [actual #36 owner response](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142) accepts D-20 with narrowing and A-20 as an input. #32's [dated reconciliation](training-dataset.md#receiving-reconciliation-2026-10-18) applies the frozen-set ownership split and records the [actual CompleteDotTech delegated engineering decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6251984559) on the [#32 → #33 artifact intake](fine-tuned-model.md#training-dataset-intake-32--33-2026-10-18). The latter receives identity, provenance and evidence requirements; it does not supply training/evaluation execution, legal approval or final contract adoption. Independent source review, merged delivery and whole-issue completion require their own evidence. Other directions in this table keep their own receiving gates.
 
 Incoming T2 boundaries have separate receiving-owner receipts: [#9 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274), [#10 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484), and [#11 → #33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684). These accept reuse of existing records and narrow tokenizer/template ownership; they do not accept the reverse-direction requests in this table or supply missing catalog records. The receipts were read back on 2026-10-18.
 

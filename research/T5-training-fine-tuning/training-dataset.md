@@ -241,7 +241,7 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 | D-17 | personal data, no memorisation / re-identification test | Model presumed not anonymous; data subject rights reach weights | unknown / warning | R8, R10 | source checked (guidance) |
 | D-18 | user-interaction data, GPAI provider | Must be disclosed in the training summary | pass / warning | R4 | source checked |
 | D-19 | hosting-site licence label is the only licence evidence | Label alone is not sufficient | unknown / warning | R24 | source checked (2023 Hub snapshot) |
-| D-20 | `held_out_test_set` = true, no recorded leakage check against #36's eval set | Leakage not established | unknown / warning | T11–T13 | policy proposal, needs agreement with #36 |
+| D-20 | `held_out_test_set` = true, no recorded leakage check against #36's eval set | Leakage not established | unknown / warning | T11–T13 | policy proposal; [#36 protocol accepted with narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142); versioned #40 field/rule adoption pending |
 | D-21 | eval-only source (e.g. a benchmark) included in training data | Excluded | fail / error | T11, T12, T15 | source checked |
 | D-22 | format ∉ the selected framework/service formats (table above) | Incompatible | fail / error | T30–T38 | source checked per row; v1 has no format field |
 
@@ -262,7 +262,7 @@ Minimum procedure for a training dataset (rights first, then preparation):
    - Run a PII scan with Presidio configured for the relevant countries, and add datatrove `PIIFormatter` for emails and IPs.
    - Manually review a sample, because recall is not guaranteed.
    - Set `privacy_approved` only after these steps.
-3. **Freeze the eval set first** (agreed with #36). Hash every item and embed the canary GUID.
+3. **Receive the evaluation set frozen by #36 before tuning.** #36 owns freezing the set, hashing every item and embedding the canary GUID; T5 uses that identified set for step 6 and records the method, hit counts and eval-set hashes. This applies [PUSHINGSQUARES's actual narrowed D-20 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142), retained in [G1 and E-R44](../T6-deployment-operations/evaluation.md#handoffs).
 4. **Validate the format.** Check the schema for the selected target and render it through the target chat template with an EOS check (T35, T39).
 5. **Deduplicate within training data.** Exact hash, then MinHash (datatrove 5-gram 14×8, or threshold ≈0.7) (T2, T5, T6).
 6. **Check leakage against the frozen eval set**, in order:
@@ -290,7 +290,7 @@ Before submitting `data_source` proposals from S1, agree with #13 and #40 on:
 
 | Question | Follow-up issue / owner |
 | --- | --- |
-| Agree the leakage-check method (steps 3 and 6) and who freezes the eval set | #36 · @PUSHINGSQUARES |
+| Apply the recorded D-20 protocol: #36 freezes/hashes the evaluation set and embeds the canary; T5 records its leakage method, hit counts and eval-set hashes. The receiving decision is reconciled below; actual execution remains unestablished | #36 · @PUSHINGSQUARES; #32 · @appletechie |
 | Training vs retrieval rights boundary (C1–C4, C8, C11, C13 differ); shared `data_source` kind or a separate one | #13 · @zabyxc01 |
 | v1 fields: `format`, split counts and unit, dedup method, leakage method and hit counts, lineage URI; per-source licence and opt-out fields on `data_source`; replace the single `license_verified` / `privacy_approved` booleans with evidence references | #40 · @tynamite |
 | Who records the user attestations D-01, D-16 and D-18 need (EU market, compute, lawful basis)? | #2 / #3 · @tynamite |
@@ -299,4 +299,12 @@ Before submitting `data_source` proposals from S1, agree with #13 and #40 on:
 | Format requirements consumed from #30 | #30 · @appletechie (PR #68) |
 | Evidence grading for court rulings and secondary legal reporting | #41 · @tynamite |
 
-None of the handoffs above is confirmed yet.
+### Receiving reconciliation (2026-10-18)
+
+The [actual #36 receiving decision by PUSHINGSQUARES](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142), reviewing `ef0e4af`, **accepts D-20 with narrowing**: #36 owns the frozen evaluation set, item hashes and canary; T5 owns the checks against it and the method/hit-count/hash record. The accepted [evaluation record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/c2bdd82ca727aefe14ca47aa50fb90c08a8ce2fe/research/T6-deployment-operations/evaluation.md#handoffs), blob `171a16b97f526160804f6261b6b1b7fb60b430aa`, implements that split in G1 and E-R44. This supersedes the earlier blanket statement that no handoff was confirmed. It does not imply that a check ran or that any dataset is free of leakage.
+
+The [recorded CompleteDotTech coordinating engineering decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6251984559), under the user's explicit project delegation and with an independent in-session read of the producer and consumers, confirms this protocol as sufficient for #32's documented leakage-method interface. It also **accepts the #32 → #33 dataset/artifact intake with constraints** recorded in [the artifact decision](fine-tuned-model.md#training-dataset-intake-32--33-2026-10-18). This is a new project engineering disposition, not a statement attributed to @appletechie, @PUSHINGSQUARES or @Mattycodes69. Their original reviews, assignees and remaining scopes are preserved.
+
+Reviewed inputs were this note at accepted main `c2bdd82ca727aefe14ca47aa50fb90c08a8ce2fe`, blob `af0fc0772759410c6d63baf1b96e0dc1ff316674`, and the artifact record at that same commit, blob `dc5cb3c7718aad4c49b2263ddd649bf7be575ec9`. The current reconciliation changes ownership/status explanations; it preserves the rights checklist, format and evidence tables, D-01–D-22 predicates/outcomes/severities and historical sources, source access dates and the leakage-check sequence. No source is promoted to independently verified evidence.
+
+For #32, these are the two declared downstream directions: #33 and #36, with the actual receiving decisions linked above. The receiving comments, independent source review, merged delivery and whole-issue criterion assessment are separate evidence; this reconciliation does not declare issue completion. The remaining questions above retain their named follow-up owners. No corpus, training run, legal approval, schema adoption or #33/#36 completion is supplied by this review.
