@@ -84,3 +84,21 @@ Start with the required retrieval/access contract, then compare operational burd
 - [Publisher release tag](https://github.com/pgvector/pgvector/tree/v0.8.7)
 
 The v1 proposal intentionally omits optional `max_dimensions`, `supports_acl`, `supports_hybrid_search`, `regions` and `hosting_ref`: a single product-wide dimensional ceiling loses the distinction above; the remaining properties require deployment/configuration evidence. The three canonical metrics are supported members, not a claim that other publisher metrics do not exist. No pricebook or hosting reference is fabricated. #40 owns richer index/type bounds, #14/#16 consume scoring/index semantics, #9 owns the actual database deployment, #35 owns trusted access enforcement and #39 owns operational cost. Their dispositions remain pending; this proposal does not complete #15.
+
+## Pinned Qdrant and Chroma software candidates (2026-10-18)
+
+The following are source-checked self-operated releases, not cloud offerings or measured deployments. Their required v1 metric fields are supported, so the [Qdrant](../../catalog/proposals/t3-vector-database-qdrant.json) and [Chroma](../../catalog/proposals/t3-vector-database-chroma.json) proposals no longer depend on mutable documentation alone. Optional deployment-wide fields remain omitted rather than guessed. Both pinned LICENSE files declare Apache-2.0; `free` describes software licensing, not operational cost or hosted-service prices.
+
+| Candidate / revision | Sourced facts and decision consequence |
+| --- | --- |
+| Qdrant 1.19.2 / `016542aa5deb6c66380bb137badf73d54f742bde` | `Distance` supports Cosine, Euclid, Dot and Manhattan. `VectorParams.size` validates 1–65,536 for dense-vector configuration; this is not a universal sparse/multivector bound or evidence of practical capacity. Each named vector's configured width must still match its encoder |
+| Qdrant access model at that revision | Collection roles distinguish read, read/write and point read/write access. The legacy `payload` constraint is deprecated and its validator rejects supplied values. Do not copy older payload-constrained credential examples as a current authorization guarantee. VDB-02 still requires trusted resource scope and action permission for the actual runtime |
+| Chroma 1.5.9 / `11f3c7435e71024aa0a2b53710a28d3289d922d1` | The pinned code maps `l2`, `cosine`, `ip` to metric families. Its scalar L2 path returns squared Euclidean distance; IP returns `1 - dot`. These monotone score transforms do not give cross-store scores shared units. Retain transform and normalization in the retrieval contract before applying thresholds |
+| Chroma configuration at that revision | HNSW and SPANN settings are alternatives; the parser rejects supplying both. A configuration type does not establish a hosted plan's availability, tenant enforcement or universal dimensional ceiling |
+
+Pinned sources, all read 2026-10-18:
+
+- Qdrant [release](https://github.com/qdrant/qdrant/releases/tag/v1.19.2), [distance types](https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/lib/segment/src/types.rs), [vector parameters](https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/lib/collection/src/operations/types.rs), [access-role definitions](https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/lib/storage/src/rbac/mod.rs), [license](https://github.com/qdrant/qdrant/blob/016542aa5deb6c66380bb137badf73d54f742bde/LICENSE).
+- Chroma [release](https://github.com/chroma-core/chroma/releases/tag/1.5.9), [distance implementation](https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/rust/distance/src/types.rs), [collection configuration](https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/chromadb/api/collection_configuration.py), [license](https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/LICENSE).
+
+No runtime assertion is promoted to independently verified. #14/#16 receive the dimension and score-transform constraints; #35 receives the release-specific access warning; #9/#39 retain hosted offering, region, recovery and operational meters. These are bounded evidence additions; the owners' receiving dispositions remain outstanding.
