@@ -1,5 +1,7 @@
 # Mobile maintainer execution prompts
 
+Mobile planning issues now live in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`. See the [migration record](MIGRATION.md). Repository creation resolves location only; framework, modules and service placement remain gated. Existing acceptance-record paths are preserved. Historical snapshots below do not override the live migration.
+
 Proposed execution guidance for the existing [Android Project 4](https://github.com/orgs/Pick-Your-AI/projects/4) and [Apple/iOS Project 5](https://github.com/orgs/Pick-Your-AI/projects/5). Publishing or reviewing these files does not launch either campaign, assign work, change readiness, or satisfy delivery acceptance. This revision must be reviewed before being represented as accepted guidance.
 
 [Publication PR and revision status](PUBLICATION.md). The PR remains unmerged; issue and Project sections pin the exact pushed revision.
@@ -9,8 +11,8 @@ This set adapts the inspection → ownership → prerequisites → implementatio
 | Entry point | Coverage |
 | --- | --- |
 | [SHARED.md](SHARED.md) | Common ownership, governance, evidence, delivery and completion rules |
-| [ANDROID.md](ANDROID.md) / [Android epics](android/README.md) | Pick-Your-AI/pickyour.ai#34 and its native hierarchy |
-| [APPLE.md](APPLE.md) / [Apple epics](apple/README.md) | Pick-Your-AI/pickyour.ai#163 and its native hierarchy |
+| [ANDROID.md](ANDROID.md) / [Android epics](android/README.md) | Pick-Your-AI/pick-your-ai-android#1 and its native hierarchy |
+| [APPLE.md](APPLE.md) / [Apple epics](apple/README.md) | Pick-Your-AI/pick-your-ai-apple#1 and its native hierarchy |
 | [INDEX.md](INDEX.md) | Every covered issue, prompt, acceptance record/output and receiving handoff |
 | [coverage.json](coverage.json) | Exact issue acceptance/steps, validation, native prerequisites, input references and source identity |
 | [project-fields.json](project-fields.json) | Separate field IDs/options and membership baseline for both Projects |
@@ -36,7 +38,7 @@ Paste exactly one platform instruction only when a full-program execution mandat
 ```text
 Read applicable AGENTS.md, contribution, governance and architecture instructions.
 Read prompts/mobile/SHARED.md, prompts/mobile/ANDROID.md and prompts/mobile/INDEX.md.
-Coordinate the existing Pick-Your-AI/pickyour.ai#34 program in Project 4 only within
+Coordinate the existing Pick-Your-AI/pick-your-ai-android#1 program in Project 4 only within
 my granted execution authority. Refresh live issues, native hierarchy, assignees,
 Project fields, prerequisites, decisions, linked PRs and active runs. Reuse existing
 owners and canonical shared work. Use the scoped epic prompts for assigned slices.
@@ -51,7 +53,7 @@ evidence states; do not claim completion from prompt publication or partial PRs.
 ```text
 Read applicable AGENTS.md, contribution, governance and architecture instructions.
 Read prompts/mobile/SHARED.md, prompts/mobile/APPLE.md and prompts/mobile/INDEX.md.
-Coordinate the existing Pick-Your-AI/pickyour.ai#163 program in Project 5 only within
+Coordinate the existing Pick-Your-AI/pick-your-ai-apple#1 program in Project 5 only within
 my granted execution authority. Refresh live issues, native hierarchy, assignees,
 Project fields, prerequisites, decisions, linked PRs and active runs. Reuse existing
 owners and canonical website/Android services; Apple owns its client integration.
@@ -71,7 +73,7 @@ Choose the epic in INDEX.md and replace the platform/prompt/issue placeholders. 
 Read applicable repository instructions, prompts/mobile/SHARED.md,
 prompts/mobile/<ANDROID-or-APPLE>.md and
 prompts/mobile/<android-or-apple>/epic-<NN>.md.
-Execute only Pick-Your-AI/pickyour.ai#<EPIC_NUMBER> and its actually assigned native
+Execute only Pick-Your-AI/<MOBILE_REPOSITORY>#<EPIC_NUMBER> and its actually assigned native
 work packages within my existing authority. Refresh live scope, assignees,
 prerequisites, decisions, Project fields and active work; coordinate with its owner.
 Apply every indexed acceptance criterion and required receiving handoff. Preserve
@@ -81,7 +83,7 @@ another epic or duplicate controller. Report unmet ownership, input, decision an
 access gates accurately after completing independent authorized work.
 ```
 
-Concrete epic choices: Android `android/epic-12.md`, `ANDROID.md`, Pick-Your-AI/pickyour.ai#46; Apple `apple/epic-12.md`, `APPLE.md`, Pick-Your-AI/pickyour.ai#175. Choose only one.
+Concrete epic choices: Android `android/epic-12.md`, `ANDROID.md`, Pick-Your-AI/pick-your-ai-android#13; Apple `apple/epic-12.md`, `APPLE.md`, Pick-Your-AI/pick-your-ai-apple#13. Choose only one.
 
 ## Launch one assigned work package
 
@@ -90,7 +92,7 @@ Select its row in INDEX.md and replace the placeholders. A missing assignee rema
 ```text
 Read applicable repository instructions, prompts/mobile/SHARED.md,
 prompts/mobile/<ANDROID-or-APPLE>.md and the applicable epic prompt from INDEX.md.
-Execute only assigned Pick-Your-AI/pickyour.ai#<WORK_PACKAGE_NUMBER> and its agreed
+Execute only assigned Pick-Your-AI/<MOBILE_REPOSITORY>#<WORK_PACKAGE_NUMBER> and its agreed
 handoffs within my granted authority. The epic's other rows are context only.
 Refresh the issue's full body/comments, actual assignees, native prerequisites,
 accepted placement/scope decisions, linked PRs and active work before editing.
@@ -100,7 +102,7 @@ validate, obtain receiving review and publish a scoped PR; follow my actual merg
 and release limits. Complete independent authorized work, then report exact gaps.
 ```
 
-Examples of index lookup, not assignments: Android Pick-Your-AI/pickyour.ai#100 uses `ANDROID.md` and `android/epic-12.md`; Apple Pick-Your-AI/pickyour.ai#248 uses `APPLE.md` and `apple/epic-12.md`.
+Examples of index lookup, not assignments: Android Pick-Your-AI/pick-your-ai-android#67 uses `ANDROID.md` and `android/epic-12.md`; Apple Pick-Your-AI/pick-your-ai-apple#86 uses `APPLE.md` and `apple/epic-12.md`.
 
 ## Maintain and republish
 

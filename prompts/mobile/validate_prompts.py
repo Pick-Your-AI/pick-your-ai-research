@@ -28,13 +28,14 @@ def checklist(text):
 def validate(audit_dir=None):
     records = json.loads((ROOT / 'coverage.json').read_text(encoding='utf-8'))['issues']
     projects = json.loads((ROOT / 'project-fields.json').read_text(encoding='utf-8'))['projects']
-    by_number = {r['number']: r for r in records}
-    assert len(by_number) == len(records), 'Duplicate issue mappings'
+    by_issue = {r['issue']: r for r in records}
+    by_url = {r['url']: r for r in records}
+    assert len(by_issue) == len(records), 'Duplicate issue mappings'
     index = (ROOT / 'INDEX.md').read_text(encoding='utf-8')
     for p in projects:
-        members = {r['number'] for r in records if r['project'] == p['project']}
+        members = {r['issue'] for r in records if r['project'] == p['project']}
         assert members == set(p['issues']), 'Project coverage mismatch'
-        assert by_number[p['program']]['level'] == 'Program'
+        assert by_issue[p['program']]['level'] == 'Program'
         fields = {f['name']: f for f in p['fields']}
         assert len({f['id'] for f in p['fields']}) == len(p['fields'])
         for r in records:
@@ -44,31 +45,40 @@ def validate(audit_dir=None):
                 field_name = 'Acceptance Gate' if key == 'acceptance Gate' else key.title()
                 assert value in {o['name'] for o in fields[field_name]['options']}
     for r in records:
-        n = r['number']
-        assert r['issue'] == f'Pick-Your-AI/pickyour.ai#{n}'
-        assert r['url'] == f'https://github.com/Pick-Your-AI/pickyour.ai/issues/{n}'
-        assert index.count(f'id="issue-{n}"') == 1
+        n = r['issue']
+        assert r['issue'] == f"{r['repository']}#{r['number']}"
+        assert r['url'] == f"https://github.com/{r['repository']}/issues/{r['number']}"
+        assert index.count(f'id="issue-{r["platform"]}-{r["number"]}"') == 1
         assert r['acceptance_criteria'] and r['validation'] and r['delivery_review_boundary']
         assert r['review_roles'] and r['acceptance_output']
         for field in ['prompt', 'shared', 'launch']:
             assert (ROOT / r[field]).is_file(), (n, field)
         if r['level'] != 'Program':
-            parent = by_number[r['parent']]
+            parent = by_issue[r['parent']]
             assert n in parent['children'], ('parent mismatch', n)
             assert parent['platform'] == r['platform']
         for child in r['children']:
-            assert by_number[child]['parent'] == n
+            assert by_issue[child]['parent'] == n
         if r['level'] == 'Feature':
-            assert r['prompt'] == by_number[r['parent']]['prompt']
+            assert r['prompt'] == by_issue[r['parent']]['prompt']
             assert r['implementation_steps'], n
             assert r['url'] in (ROOT / r['prompt']).read_text(encoding='utf-8')
         if r['acceptance_path']:
             assert r['acceptance_repository'] == 'Pick-Your-AI/pickyour.ai'
             assert f'`{r["acceptance_path"]}`' in r['delivery_review_boundary']
         else:
-            assert r['platform'] == 'apple' and r['placement_decision'] == 184
+            assert r['platform'] == 'apple' and r['placement_decision'].startswith('Pick-Your-AI/pick-your-ai-apple#')
         for url in r['native_prerequisites'] + r['handoff_references']:
             assert re.fullmatch(r'https://github.com/Pick-Your-AI/[\w.-]+/issues/\d+', url), url
+
+    migration = json.loads((ROOT / 'issue-migration.json').read_text(encoding='utf-8'))['issues']
+    assert len({m['old_url'] for m in migration}) == len(records)
+    assert {m['new_url'] for m in migration} == set(by_url)
+    for m in migration:
+        r = by_url[m['new_url']]
+        assert r['previous_url'] == m['old_url']
+        assert r['repository'] == m['repository']
+        assert r['number'] == m['new_number']
 
     # Cycles among covered native prerequisites are invalid; information links are excluded.
     visiting, visited = set(), set()
@@ -78,13 +88,12 @@ def validate(audit_dir=None):
         if n in visited:
             return
         visiting.add(n)
-        for url in by_number[n]['native_prerequisites']:
-            dep = int(url.rsplit('/', 1)[1])
-            if dep in by_number:
-                visit(dep)
+        for url in by_issue[n]['native_prerequisites']:
+            if url in by_url:
+                visit(by_url[url]['issue'])
         visiting.remove(n)
         visited.add(n)
-    for n in by_number:
+    for n in by_issue:
         visit(n)
 
     for path in ROOT.rglob('*.md'):
@@ -105,17 +114,18 @@ def validate(audit_dir=None):
 
     if audit_dir:
         audit = Path(audit_dir)
-        live = {i['number']: i for i in json.loads((audit / 'issues.json').read_text(encoding='utf-8'))}
+        live = {i['url']: i for i in json.loads((audit / 'issues.json').read_text(encoding='utf-8'))}
         for r in records:
-            issue = live[r['number']]
+            issue = live[r['url']]
             sec = sections(issue['body'])
-            # Strip only this publication's handoff block when checking a later readback.
-            body = re.sub(r'\n\n<!-- mobile-maintainer-prompts:start -->.*?<!-- mobile-maintainer-prompts:end -->\n?', '', issue['body'], flags=re.S)
-            assert hashlib.sha256(body.encode()).hexdigest() == r['source_body_sha256'], ('source changed; review needed', r['number'])
+            body = issue['body']
+            for marker in ['mobile-maintainer-prompts', 'mobile-issue-migration']:
+                body = re.sub(r'\n*<!-- ' + marker + r':start -->.*?<!-- ' + marker + r':end -->\n?', '', body, flags=re.S)
+            assert hashlib.sha256(body.rstrip().encode()).hexdigest() == r['source_body_sha256'], ('source changed; review needed', r['issue'])
             assert checklist(sec['Acceptance criteria']) == r['acceptance_criteria']
             assert checklist(sec.get('Implementation subtasks', '')) == r['implementation_steps']
-            assert (issue['parent']['number'] if issue['parent'] else None) == r['parent']
-            assert {i['number'] for i in issue['subIssues']['nodes']} == set(r['children'])
+            assert (by_url[issue['parent']['url']]['issue'] if issue['parent'] else None) == r['parent']
+            assert {by_url[i['url']]['issue'] for i in issue['subIssues']['nodes']} == set(r['children'])
             assert {i['url'] for i in issue['blockedBy']['nodes']} == set(r['native_prerequisites'])
             assert [a['login'] for a in issue['assignees']['nodes']] == r['assignees']
             for connection in ['subIssues', 'blockedBy', 'comments']:
@@ -124,10 +134,10 @@ def validate(audit_dir=None):
             number = p['project']
             items = json.loads((audit / f'items{number}.json').read_text(encoding='utf-8'))
             assert items['totalCount'] == len(items['items'])
-            assert {i['content']['number'] for i in items['items']} == set(p['issues'])
+            assert {f"{i['content']['repository']}#{i['content']['number']}" for i in items['items']} == set(p['issues'])
             assert json.loads((audit / f'fields{number}.json').read_text(encoding='utf-8'))['fields'] == p['fields']
             for item in items['items']:
-                r = by_number[item['content']['number']]
+                r = by_issue[f"{item['content']['repository']}#{item['content']['number']}"]
                 assert all(item.get(k) == v for k, v in r['project_fields'].items())
     print(f'PASS: {len(projects)} Projects, {len(records)} issues, '
           f'{sum(r["level"] == "Epic" for r in records)} epic prompts, '
