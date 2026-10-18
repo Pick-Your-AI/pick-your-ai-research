@@ -40,7 +40,17 @@
     },
     "update_cadence": "Continuous; repository last pushed 2026-10-16",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "First investigate the core provider/model mapping: the recorded machine-readable repository offers broad catalogue coverage and a stated notice-preserving reuse basis. This is a research sequencing judgment, not a quality or accuracy score.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from alias/provider identity reconciliation and changing modality fields in the existing record; no ingestion effort, update SLA or error rate was measured.",
+      "code_material_scope": "The recorded MIT repository licence covers code in that repository; it is not a licence to third-party provider services, branding or model binaries.",
+      "data_material_scope": "Keep the repository compilation and its notices distinct from original provider claims, upstream measurements and other material with its own terms. A catalogue entry is not verified provider capability or a current price quote.",
+      "unresolved_decisions": "#5/#6 own exact provider/model identity and capability reconciliation; #41/#60 review the proposed material and use before any integration."
+    }
   },
   {
     "product_id": "modelfit",
@@ -84,7 +94,17 @@
     },
     "update_cadence": "Dataset page shows 'Updated 2026-10-13'; GitHub mirror last pushed 2026-10-16",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Next investigate the existing model-fit dataset because it can inform the core capacity decision and its dataset licence is stated separately from the CLI. Estimated memory still requires a matched validation study.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from model identity mapping, estimator assumptions and mirror consistency; no import, maintenance workload or estimator accuracy was measured.",
+      "code_material_scope": "The recorded MIT statement applies to the CLI; it does not supply the dataset licence.",
+      "data_material_scope": "The recorded CC BY 4.0 dataset scope requires attribution, licence link and change indication. Preserve the distinction from third-party benchmark sources, model files and website content; dataset memory figures remain estimates.",
+      "unresolved_decisions": "#60 retains the exact mirror/licence-scope check; #10/#61 own any matched estimator comparison and #41 owns intake policy."
+    }
   },
   {
     "product_id": "llmfit",
@@ -127,7 +147,17 @@
     },
     "update_cadence": "Frequent; repository last pushed 2026-10-15, MODELS.md updated 2026-08-30",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Investigate the repository estimator after the dataset source to compare an inspectable local estimation approach. Repository identity and hardware assumptions must remain separate from the similarly named seed website.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from hardware/backend versioning, quantization inputs and calibration needs; installation and repeated update work were not measured in this assessment.",
+      "code_material_scope": "The recorded MIT licence applies to the AlexsJones repository and its notices, not to the independently unconfirmed llmfit.org operator.",
+      "data_material_scope": "Keep the repository compilation separate from seed-website content, model binaries and upstream benchmark material. Neither a code licence nor a fitted capacity claim establishes measurement quality.",
+      "unresolved_decisions": "#48 retains seed/upstream identity scope, #60 the material-use boundary, and #10/#61 estimator calibration; #41 reviews any intake."
+    }
   },
   {
     "product_id": "openrouter",
@@ -170,7 +200,17 @@
     },
     "update_cadence": "Continuous (live catalogue)",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Investigate the core provider-metadata restriction early because a documented API can otherwise be mistaken for collection permission. Its rank prioritizes resolving that exclusion, not recommending this feed for ingestion.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from provider endpoint, billing and modality variation; no API synchronization, rate-limit behavior or maintenance effort was measured.",
+      "code_material_scope": "No service-code reuse is proposed or established by the model API documentation or service terms recorded here.",
+      "data_material_scope": "Treat model/provider API metadata as service material subject to the recorded terms. API availability does not override the automated-copying restriction or grant commercial republication.",
+      "unresolved_decisions": "#41/#60 retain the excluded automated use unless an applicable permitted-use basis is reviewed; #5 can prefer separately reviewed original-provider evidence."
+    }
   },
   {
     "product_id": "mcp-registry",
@@ -215,7 +255,17 @@
     },
     "update_cadence": "Continuous; repository last pushed 2026-10-14",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Investigate the optional integration discovery feed after the core model sources: its recorded downstream-registry design directly addresses metadata distribution, while every server still needs its own trust and compatibility review.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from publisher assertion changes, removed/updated listings and annotation separation; no live API polling or service reliability was measured.",
+      "code_material_scope": "Retain the recorded Apache-2.0/legacy MIT code distinction and CC BY 4.0 documentation conditions. Registry code licensing does not relicense server packages.",
+      "data_material_scope": "The recorded ecosystem/design documents supply the stated downstream metadata ETL/cache/display basis. Keep registry metadata, project annotations, documentation and server code/binaries as distinct materials.",
+      "unresolved_decisions": "#27 owns discovery/trust interpretation and exact service/version behavior; #41/#60 retain applicable metadata-use and notice review."
+    }
   },
   {
     "product_id": "hugging-face",
@@ -258,7 +308,17 @@
     },
     "update_cadence": "Continuous; pin revisions",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Investigate the public repository identity layer as a complementary source after the earlier mappings. Repository-by-repository content scope makes it unsuitable as one uniformly licensed bulk feed.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from mutable cards, aliases, gated artifacts and repository revisions; no synchronization workload, availability or update guarantee was measured.",
+      "code_material_scope": "No uniform licence to Hub service code or all hosted repository code follows from the Hub terms; each code repository retains its own declared scope.",
+      "data_material_scope": "Preserve the recorded factual-identifier intake boundary separately from model-card text, weights, datasets and other repository files. Check each material licence and gated-access condition before use.",
+      "unresolved_decisions": "#5/#6 retain exact identifier/revision and artifact distinctions; #41/#60 own any expanded material/use decision."
+    }
   },
   {
     "product_id": "artificial-analysis",
@@ -303,7 +363,17 @@
     },
     "update_cadence": "Continuous",
     "rights_evidence_grade": "Primary documentation",
-    "last_checked": "2026-10-16"
+    "last_checked": "2026-10-16",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Review the benchmark-source restriction before considering paid or free API access. Its documented selection-guidance restriction makes agreement-dependent data a later candidate than the initial source mappings.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from changing indices, benchmark conditions and model coverage; no API maintenance, reproducibility or accuracy study was performed.",
+      "code_material_scope": "No licence to service implementation code is established or needed for the currently excluded data-feed proposal.",
+      "data_material_scope": "Website content and Data Platform outputs retain their separately recorded terms. A free API tier does not waive the recorded selection-guidance restriction or provide a downstream redistribution grant.",
+      "unresolved_decisions": "#41/#60 retain the exclusion unless a specific permitted-use basis is established; the coordinator decides whether pursuing consent has value, and #36/#62 own comparability."
+    }
   },
   {
     "product_id": "benchlm",
@@ -348,7 +418,17 @@
     "update_cadence": "Continuous; history depth depends on plan",
     "rights_evidence_grade": "Primary documentation",
     "last_checked": "2026-10-18",
-    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed."
+    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed.",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Review the aggregate benchmark feed after the earlier source candidates because its recorded commercial display/feed agreement requirement remains distinct from its internal analysis access plans.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from mixed upstream sources, licence lineage and snapshot history; no paid plan, live feed, historical-depth verification or maintenance workload was measured.",
+      "code_material_scope": "No service-code licence is established by access to BenchLM outputs or an internal-analysis plan.",
+      "data_material_scope": "Separate BenchLM-owned outputs and compiled feeds from independently licensed original-publisher results and separately permitted quotations/embeds. Preserve the recorded display/redistribution agreement requirement.",
+      "unresolved_decisions": "#60/#41 retain source/material/use review; #36/#62 own benchmark comparability and #58 decides whether this agreement-dependent source is needed."
+    }
   },
   {
     "product_id": "harness-bench",
@@ -395,7 +475,17 @@
     "update_cadence": "Repository updated 2026-10-09 (Harness-Bench 3.0); paper v2 revised 2026-10-15",
     "rights_evidence_grade": "Primary documentation",
     "last_checked": "2026-10-18",
-    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed."
+    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed.",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Investigate this narrower evaluation source after general metadata feeds: the licensed paper and separately unlicensed repository support different research uses and neither supplies a universal model-quality feed.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from suite/version identity, missing evaluation pins and controlled reproduction requirements; no benchmark execution or maintenance workload was measured.",
+      "code_material_scope": "No repository-wide licence was found in the recorded bounded b8d89634c6f445fcc68ceb6744a59bef6cdf4863 audit. Do not attach the paper licence to repository task or code files.",
+      "data_material_scope": "Keep CC BY 4.0 paper v2 material within its attribution/version/notice scope, separate from repository tasks, trajectories and catalogue files. A paper licence does not establish comparable benchmark evidence.",
+      "unresolved_decisions": "#60/#41 own the retained material-use boundary; #36/#62 retain model/grader pins, statistical limits and any future experiment."
+    }
   },
   {
     "product_id": "gpus-io",
@@ -448,6 +538,16 @@
       "redistribution": false,
       "reconsideration": "Specific permitted-use basis covering the proposed product, then new #39/#41/#60 review"
     },
-    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed."
+    "recheck_scope": "Bounded terms/material-scope recheck only. Initial discovery/access fields retain their 2026-10-16 observation; no account, dataset acquisition, integration or current-price validation was performed.",
+    "research_assessment": {
+      "assessment_date": "2026-10-18",
+      "scope": "Analyst assessment of the existing dated inventory, source register and rights-validation record at research main 2f307a10ef98a8c7c711ef28ba35c6246d36f9fd. Retains the existing investigation order; not a fresh terms/API check, empirical score, source-use approval or service guarantee. Source observations retain their own dates and references.",
+      "ranking_rationale": "Keep this candidate last for current product investigation because the proposed product exclusion addresses its competition restriction and original-provider prices offer a separately reviewable path. Rank does not establish legal eligibility.",
+      "maintenance_evidence_class": "Estimate",
+      "maintenance_basis": "Estimate from spot availability, location and price-unit changes; the historical page timestamp is an observation, not an update SLA or measured maintenance cost.",
+      "code_material_scope": "No licence to the service implementation code follows from paid API access; code reuse is not proposed.",
+      "data_material_scope": "Paid API data, attributed display and bulk redistribution have distinct recorded conditions. Preserve the proposed exclusion of current product retrieval/display/export; a build estimate is not a stated exemption from the competition clause.",
+      "unresolved_decisions": "#39/#41/#60 retain the exact exclusion and any later permitted-use review. #9/#39 should use separately reviewed original-provider facts and rates."
+    }
   }
 ]

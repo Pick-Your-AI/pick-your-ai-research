@@ -57,6 +57,94 @@ def read(name):
                       parse_constant=reject_constant, parse_float=finite_float)
 
 
+def validate_integrations(integrations, product_ids, source_ids):
+    """Check the research shortlist; these records cannot approve product use."""
+    require(isinstance(integrations, list) and integrations,
+            'integrations: requires a nonempty list')
+    products, ranks = set(), set()
+    uses = {'automated_retrieval', 'internal_research', 'display', 'redistribution'}
+
+    def text_field(record, field, label):
+        value = record.get(field)
+        require(isinstance(value, str) and value.strip(),
+                f'{label}: requires nonempty {field}')
+        return value
+
+    def date_field(record, field, label):
+        value = text_field(record, field, label)
+        try:
+            parsed = date.fromisoformat(value)
+        except ValueError as error:
+            raise MarketValidationError(f'{label}: invalid {field}') from error
+        require(parsed.isoformat() == value, f'{label}: {field} must use YYYY-MM-DD')
+
+    def text_list(record, field, label):
+        values = record.get(field)
+        require(isinstance(values, list) and values and
+                all(isinstance(value, str) and value.strip() for value in values),
+                f'{label}: requires nonempty text list {field}')
+        require(len(set(values)) == len(values), f'{label}: duplicate {field}')
+        return values
+
+    for index, record in enumerate(integrations):
+        label = f'integrations[{index}]'
+        require(isinstance(record, dict), f'{label}: requires an object')
+        product = text_field(record, 'product_id', label)
+        require(product in product_ids, f'{label}: unknown product_id {product}')
+        require(product not in products, f'{label}: duplicate product_id {product}')
+        products.add(product)
+        rank = record.get('investigation_rank')
+        require(type(rank) is int and rank > 0,
+                f'{label}: investigation_rank must be a positive integer')
+        require(rank not in ranks, f'{label}: duplicate investigation_rank')
+        ranks.add(rank)
+        for field in ('access', 'rights', 'maintenance', 'next_action',
+                      'review_owner', 'update_cadence', 'rights_evidence_grade'):
+            text_field(record, field, label)
+        require(record.get('status') == 'Not approved for integration',
+                f'{label}: shortlist status must remain Not approved for integration')
+        require(type(record.get('consumer_issue')) is int and record['consumer_issue'] > 0,
+                f'{label}: consumer_issue must be a positive integer')
+        for field in ('access_date', 'last_checked'):
+            date_field(record, field, label)
+        references = text_list(record, 'source_ids', label)
+        require(set(references) <= source_ids, f'{label}: unknown source_ids')
+        for url in text_list(record, 'terms_urls', label):
+            validate_http_url(url, f'{label}: terms_urls')
+        permissions = record.get('reuse_permitted')
+        require(isinstance(permissions, dict) and set(permissions) == uses,
+                f'{label}: reuse_permitted must cover exactly the four intended uses')
+        for use, decision in permissions.items():
+            use_label = f'{label}: reuse_permitted.{use}'
+            require(isinstance(decision, dict), f'{use_label}: requires an object')
+            require(decision.get('value') in ('yes', 'no', 'unclear', 'unknown'),
+                    f'{use_label}: unsupported value')
+            for field in ('conditions', 'basis'):
+                text_field(decision, field, use_label)
+        if 'project_use_decision' in record:
+            exclusion = record['project_use_decision']
+            exclusion_label = f'{label}: project_use_decision'
+            require(isinstance(exclusion, dict), f'{exclusion_label}: requires an object')
+            require(exclusion.get('disposition') == 'exclude_from_current_product_scope',
+                    f'{exclusion_label}: only the recorded product exclusion is supported')
+            for field in ('status', 'basis', 'reconsideration'):
+                text_field(exclusion, field, exclusion_label)
+            for field in ('automated_product_retrieval', 'commercial_display', 'redistribution'):
+                require(exclusion.get(field) is False,
+                        f'{exclusion_label}: exclusion requires {field} to be false')
+        assessment = record.get('research_assessment')
+        require(isinstance(assessment, dict), f'{label}: requires research_assessment')
+        assessment_label = f'{label}: research_assessment'
+        date_field(assessment, 'assessment_date', assessment_label)
+        for field in ('scope', 'ranking_rationale', 'maintenance_basis',
+                      'code_material_scope', 'data_material_scope', 'unresolved_decisions'):
+            text_field(assessment, field, assessment_label)
+        require(assessment.get('maintenance_evidence_class') == 'Estimate',
+                f'{assessment_label}: maintenance_evidence_class must be Estimate')
+    require(ranks == set(range(1, len(integrations) + 1)),
+            'integrations: investigation_rank must form 1 through shortlist size')
+
+
 def validate():
     competitors, sources, matrix, backlog = (read(n) for n in
         ('competitors.json', 'sources.json', 'features.json', 'research-backlog.json'))
@@ -64,6 +152,7 @@ def validate():
     require(len(ids) == len(competitors), 'duplicate competitor IDs')
     source_ids = {s['id'] for s in sources}
     require(len(source_ids) == len(sources), 'duplicate source IDs')
+    validate_integrations(read('integrations.json'), ids, source_ids)
     for source in sources:
         validate_http_url(source.get('url'), 'source URL')
         require(source['access_date'] and source['access_status'], 'market integrity check failed')

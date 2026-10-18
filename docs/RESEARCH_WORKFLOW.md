@@ -50,7 +50,7 @@ CI runs the same checks. It validates schemas, import integrity, generator consi
 
 Catalog and price provenance URLs and evidence-manifest locators reject whitespace, raw ASCII control characters, user information (including empty credential syntax), and invalid specified ports. Validation checks the original string before parsing: Python's [URL parser](https://docs.python.org/3.12/library/urllib.parse.html#urllib.parse.urlsplit) (checked 2026-10-18) can strip control characters and defers port validation until the port property is read. Public provenance remains HTTP(S); external manifests remain stable HTTPS/S3/GS locators without queries or fragments. These syntax checks perform no network access or source/rights verification.
 
-The market integrity reader applies the same duplicate-key, non-finite-number and numeric-overflow rejection to its four inputs: `competitors.json`, `sources.json`, `features.json` and `research-backlog.json`. It rejects ambiguous raw JSON before interpreting the market evidence or priority records, including under optimized Python.
+The market integrity reader applies the same duplicate-key, non-finite-number and numeric-overflow rejection to its five inputs: `competitors.json`, `sources.json`, `features.json`, `research-backlog.json` and `integrations.json`. It rejects ambiguous raw JSON before interpreting the market evidence or priority records, including under optimized Python.
 
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.
 
@@ -68,6 +68,24 @@ repeating an issue. They may cover a subset of the captured issues; this check
 does not create classifications or establish current receiving-owner acceptance.
 
 The public-provenance shape check requires an IP literal's globally reachable classification and excludes multicast, reserved and deprecated IPv6 site-local addresses. This conservative intake also excludes reserved translation-prefix literals. IPv4-mapped IPv6 literals use the embedded address's classification. Domain hosts pass through UTS #46 compatibility mapping and IDNA label validation from pinned `idna==3.20` before the reserved-domain and IP checks; bracketed IPv6 literals retain their separate address check. Python's standard-library IDNA2003 codec alone misses some mappings, including segmented digits and modifier letters that browsers normalize to loopback or reserved hosts. Valid internationalized publisher names remain eligible, while malformed labels, ambiguous legacy numeric hosts, percent-encoded or interface-scoped hosts, and hostnames containing a backslash are rejected. See the [pinned package documentation](https://pypi.org/project/idna/3.20/) and [Unicode UTS #46 processing](https://www.unicode.org/reports/tr46/) (checked 2026-10-18). This is a conservative offline intake check, not a complete browser URL implementation: DNS names still require an actual public-access and source-evidence review, and an accepted IP shape does not establish that a publisher or document exists there. The stricter label check supplies no DNS resolution, connection or redirect protection.
+
+The market validator also reads `research/market/integrations.json`. Its research
+shortlist must reference existing competitor/source IDs, use distinct positive
+integer investigation ranks covering the shortlist, and retain dated access and
+rights observations, governing HTTP(S) terms links, and all four intended-use
+decisions with their conditions and basis. The shortlist remains `Not approved
+for integration`: a conditional source permission is separate from product
+eligibility. A recorded current-product exclusion must keep retrieval, display
+and redistribution disabled. These checks establish record integrity, not legal
+permission, source freshness or a receiving owner's acceptance.
+
+Each shortlist row's `research_assessment` explains its investigation priority,
+estimated maintenance assumptions, separate code/data material boundaries and
+named unresolved decisions. Its assessment date is the analyst-review date;
+`access_date` and `last_checked` retain their actual source-check scope. A new
+assessment does not refresh terms or turn an estimate into a measurement. These
+are market research notes, not a new frozen contract, runtime entitlement or
+integration approval format.
 
 ## Review and ownership
 
