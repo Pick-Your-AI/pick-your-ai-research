@@ -1,12 +1,78 @@
 # MR-09: Validate GPU sizing against pinned runtime measurements
 
-Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Owner: @Mattycodes69. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
+Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
 
 ## Question
 Where do planning estimates fail under real runtime conditions?
 
 ## Starting evidence
 [technical-feasibility.md](technical-feasibility.md). This note is not a new canonical component catalog or completed competitor-estimator validation.
+
+## Coverage and authority disposition (2026-10-18)
+
+**Retain the full empirical acceptance scope.** This continuation is a bounded
+accounting/evidence contribution; it does not waive MoE, topology or comparable
+estimator requirements. Sources inspected on 2026-10-18:
+[live #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61),
+[Zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
+and the committed protocols/results at main
+`ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999`. No hardware probe, inference,
+weights download, paid compute or new device authorization was performed here.
+
+| Gate | Available evidence | Exact remaining action / accountable owner |
+| --- | --- | --- |
+| Dense observations | D1–D5: five configurations, three fresh-process runs each; separate allocated/reserved counters | #61 co-owners and coordinator review the bounded observations and provenance caveats |
+| MoE variations | Pinned OLMoE matrix and separate Granite profiles; no recorded MoE execution | @Mattycodes69/@appletechie identify an authorized envelope and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
+| Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
+| Comparable estimator errors | Zero matching competitor/runtime pairs | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
+| Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
+| ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
+
+The prior spare-local-capacity-only constraint and GPU/RAM/disk/process caps
+remain in force. The 2026-10-16 Granite3.1 failure is a historical observation,
+not a current hardware reservation or a new availability measurement. Paid
+compute, another device, or a different capacity envelope needs explicit
+authorization. Capacity failure is not evidence of model/runtime incompatibility.
+
+An alternative narrowing decision must name the retained question, exact
+deferred/removed cells and comparison claims, approvers and reviewed revision,
+and the acceptance criteria it changes. It requires the live #61 co-owners and
+coordinator's explicit disposition; a general PR approval or the #7/#11 interface
+receipt does not supply it. Until then the full criteria remain open.
+
+Zwright8's receipt accepts actual prompt/cache/predicted lengths, active-sequence
+versus queued-request accounting, runtime pins and separate allocator phases for
+#7/#11. It supplies no new run or error bound. Appletechie's #7 and Mattycodes69's
+#11 co-owner responses remain distinct. #10's new consumption/placement proposal
+is ready for its co-owners' review, not an already accepted handoff. Preserve
+#59's single writer for `handoffs.md`/`handoffs.json`.
+
+## Offline evidence integrity and continuation guard (2026-10-18)
+
+An independent read-only audit at main
+`ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999` matched all 15 result-file
+SHA-256 values to the committed summary, matched instrument/protocol hashes to
+the recorded sources, and independently recomputed all 480 phase/counter
+`n/min/median/max` summary fields. It found no mismatch. It checked phase
+uniqueness and allocator inequalities and found a consistent recorded
+environment/hardware/artifact cohort. This was in-memory file/hash arithmetic,
+not Python execution, new inference, current hardware inventory or validation
+of downloaded model bytes. Original pilot/preflight caveats remain below.
+
+The audit found a continuation defect: the summarizer's existing grouping pins
+covered model/code/protocol/configuration but could pool successful repetitions
+with changed environment, device conditions or artifact contents. The updated
+[summarizer](../../scripts/mr09_summarize.py) compares recorded runtime/package,
+allocator/device/driver and artifact identity pins before any optional
+sanitization writes. It permits changing free-memory observations, timings,
+artifact-list order and publication metadata. Early failures without discovery
+metadata remain recorded and excluded from numerical aggregates.
+
+The [regression tests](../../tests/test_mr09_measure.py) cover mismatched cohorts,
+allowed availability variation, early failures and unchanged reproduction of the
+committed summary. These checks do not establish physical-device UUID identity,
+artifact truth, estimator comparability or empirical calibration. The original
+measurement instrument, dated protocol, raw observations and summary are unchanged.
 
 ## Protocol and acceptance
 - [x] Design dense and MoE measurement matrix
@@ -17,7 +83,7 @@ Where do planning estimates fail under real runtime conditions?
 - [ ] Obtain affected-owner review and accepted handoff.
 
 ## Next action
-Finish the bounded matrix and the separately recorded coverage gaps; obtain context, sizing and runtime-owner review. The original protocol checklist remains above, with completion claimed only where supported below.
+Review the headroom/note-only consumption proposal and identify authorized capacity plus comparable estimator quantities before new experiments. Retain the full missing MoE/topology/comparison work unless the accountable owners explicitly narrow it. The original protocol checklist remains above, with completion claimed only where supported below.
 
 ## Result
 Partial real GPU inference has been executed. This does not complete independent validation of competitor sizing estimates or establish universal fit. No raw customer content, paid API output, weights or raw datasets are committed. Consumers: #7, #10, #11.
@@ -290,9 +356,9 @@ preserved by the wrapper; use a fresh output directory for independent replicati
 
 | Consumer | Finding offered | Receiving owner | Disposition / unresolved next action |
 | --- | --- | --- | --- |
-| #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | Live owner recorded in [handoffs.md](handoffs.md) | Pending human review; confirm context-policy assumptions and untested boundaries |
-| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | Live owner recorded in [handoffs.md](handoffs.md) | Pending human review; agree calibration targets and future ResourceEstimate consumer/placement |
-| #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | Live owner recorded in [handoffs.md](handoffs.md) | Pending human review; accept instrumentation scope and required runtime extensions |
+| #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | @zwright8, @appletechie | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of accounting interface only; appletechie's disposition and empirical acceptance remain pending |
+| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | @Mattycodes69, @appletechie | [Note-only consumption and future placement proposed](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); both owners' dispositions remain pending |
+| #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | @zwright8, @Mattycodes69 | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of runtime accounting interface only; Mattycodes69's disposition and empirical acceptance remain pending |
 
 No ResourceEstimate, canonical catalog item, Pricebook or compatibility boolean
 is manufactured. #40 remains the review entry for any contract/rule change;
