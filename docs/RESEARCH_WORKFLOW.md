@@ -79,6 +79,14 @@ access remain valid. These checks do not retrieve the URLs, authenticate the
 metadata, judge claim support or evidence grades, establish freshness or grant
 source-use permission.
 
+Each market backlog `status` must be one of the seven recorded
+[market workflow options](../research/market/project-configuration.json): `Inbox`,
+`Triage`, `Ready`, `In Progress`, `In Review`, `Blocked` or `Done`. Missing values,
+non-text values, unknown names and case or whitespace variants are rejected
+without normalization. The existing `Done` acceptance-evidence check still
+applies. This validates the recorded status vocabulary; it does not fetch or
+change live Project values or establish that a task deserves its status.
+
 The market backlog's issue numbers and specified parent numbers must be positive JSON integers. Boolean or floating-point aliases cannot identify an issue; only an absent or null parent means no parent. Its six priority factors follow the existing [ordinal 1–5 rubric](market-research/research-methodology.md#priority-rubric): each is a JSON integer token or null. The total must be a JSON number matching the unchanged weighted calculation, or null when any factor is unknown. Its original numeric token must equal that result exactly; float rounding cannot conceal a fractional difference. Numerically equivalent decimal or exponent spellings remain valid for the total, while factors retain their integer-token requirement. Booleans cannot stand in for a numeric total. These checks preserve the recorded graph and score shape; they do not assess the scoring judgments or establish issue completion.
 
 Each backlog `deliverable` must also be nonempty path text relative to
