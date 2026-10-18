@@ -102,3 +102,23 @@ Pinned sources, all read 2026-10-18:
 - Chroma [release](https://github.com/chroma-core/chroma/releases/tag/1.5.9), [distance implementation](https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/rust/distance/src/types.rs), [collection configuration](https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/chromadb/api/collection_configuration.py), [license](https://github.com/chroma-core/chroma/blob/11f3c7435e71024aa0a2b53710a28d3289d922d1/LICENSE).
 
 No runtime assertion is promoted to independently verified. #14/#16 receive the dimension and score-transform constraints; #35 receives the release-specific access warning; #9/#39 retain hosted offering, region, recovery and operational meters. These are bounded evidence additions; the owners' receiving dispositions remain outstanding.
+
+
+## Hosted scaling and pricing-unit comparison (2026-10-18)
+
+Primary publisher documentation, source checked on 2026-10-18. These are offering-specific operating models and meters, not measured capacity or normalized prices. Cloud offering documentation is mutable; it is separate from the pinned open-source releases above.
+
+| Offering | Published scaling model | Pricing units and cost boundary |
+| --- | --- | --- |
+| Pinecone serverless | Provider-managed serverless indexes; storage and compute are separated. Dedicated read nodes are a distinct capacity choice [V7] | Read units (RU), write units (WU), GB of index storage per month, and GB returned on in-scope reads. Imports, backup/restore, embedding and reranking are separately metered [V8]. RU is not universally one query: namespace size affects query units. Plan minimums/allowances and dedicated-read-node rules must be selected before calculating cost |
+| Qdrant Cloud Standard | Dedicated cluster resources with vertical and horizontal scaling [V9] | CPU, memory and disk resource usage; billed monthly for previous usage [V10]. Exact rate and resource/time granularity require the chosen cluster/cloud/region calculator quote; no per-query meter is inferred. Free-tier topology is not the Standard production topology |
+| Chroma Cloud Starter/Team | Publisher describes the cloud service as serverless; usage grows with operations/data [V11] | GiB written, GiB stored per month, TiB queried, GiB returned, plus the selected plan's monthly base fee/credits. Enterprise dedicated/single-tenant and BYOC offerings require separate terms. Customer-set or service-set usage limits can pause service; serverless does not mean unlimited throughput |
+| PostgreSQL + pgvector, self-operated | Capacity is the selected PostgreSQL host/storage/replication configuration | Extension software rights do not price hosting, storage, backup, replicas or operations. No specific managed PostgreSQL offering is selected here, so inventing a hosted rate would conflate software and service |
+
+- V7 — Pinecone [architecture](https://docs.pinecone.io/guides/core-concepts/architecture).
+- V8 — Pinecone [cost model](https://docs.pinecone.io/guides/manage-cost/understanding-cost).
+- V9 — Qdrant [Cloud pricing/offering comparison](https://qdrant.tech/pricing/).
+- V10 — Qdrant [billing and payments](https://qdrant.tech/documentation/cloud-pricing-payments/).
+- V11 — Chroma [pricing and plan conditions](https://www.trychroma.com/pricing).
+
+No vector-service rate is normalized here: region/currency/rate selection remains explicit before a #39 Pricebook. Keep publisher GB, GiB and TiB units distinct; do not equate a read unit with a returned byte, an embedding token or a reserved CPU. A provider-operated serverless offering and a provider-operated dedicated cluster have different capacity commitments under T0; API transport alone does not classify deployment mode. Benchmark the selected plan/configuration before claiming recall, latency or sustainable throughput. #9/#39 receive this operational/meter comparison; receiving dispositions remain pending.
