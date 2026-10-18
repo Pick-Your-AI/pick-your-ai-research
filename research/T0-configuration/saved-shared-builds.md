@@ -258,7 +258,7 @@ Lean: (b), because co-resident memory can only be checked where all resident com
 | #60 rights decision changes to "no" | #41/#60 per-source decision (P4) | Affected values are hidden in every view, including historical and shared views, because showing them is display | Values withheld |
 | Mode or optional tier switched | Activation conditions (V5) | Re-evaluate required and cross-component rules; only predicates with actually false applicability become `skipped` | Not evaluated |
 | Successor contract published | Available contract version differs from this revision's pinned `schema_version` | Preserve original bytes, locks, reader and historical findings; an explicitly adopted migration creates a new revision under CD-7 | New contract available; Current evaluation unavailable if the new path is unsupported. Original reproducibility changes only if its actual dependencies are missing |
-| Withheld input on a fork | SB-8 | Dependent rules `unknown` | Prompt to answer |
+| Withheld input on a fork | SB-8 | New evaluation follows existing missing-input and applicability behavior, including SB-R5 | Prompt to answer |
 
 When whether a branch is active is itself unknown, invalidate and re-evaluate (V5).
 
