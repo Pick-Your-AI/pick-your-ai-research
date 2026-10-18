@@ -13,7 +13,7 @@ import subprocess
 import sys
 import tempfile
 
-from mr09_native_capture import driver_readback
+from mr09_native_capture import driver_readback, PREFLIGHT_THRESHOLDS
 
 MODEL = "SmolLM2-135M-Instruct-f16.gguf"
 MODEL_SHA = "f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57"
@@ -59,7 +59,10 @@ def main():
         if checksum(runtime/item["file"])!=item["sha256"]: parser.error("runtime artifact drift: "+item["file"])
     subprocess.run([sys.executable,"scripts/mr09_preflight.py","--profile","granite31","--temporary-dir",str(args.temporary_dir),"--output",str(preflight)],check=True,capture_output=True,text=True)
     screen=json.loads(preflight.read_text())
-    if not all(screen["guards"].values()): raise RuntimeError("fresh spare-capacity guard failed; no launch")
+    guards=screen.get("guards") if type(screen) is dict else None
+    if (type(guards) is not dict or set(guards)!=set(PREFLIGHT_THRESHOLDS)
+            or any(value is not True for value in guards.values())):
+        raise RuntimeError("fresh spare-capacity guard failed; no launch")
     # Freeze the admitted identities before execution, so later file/telemetry
     # errors cannot prevent retention of a completed or timed-out child.
     identities={"harness_sha256":harness_sha,"harness_git_ref":build["harness_git_ref"],

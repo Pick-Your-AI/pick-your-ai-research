@@ -21,6 +21,7 @@ finally:
 
 DRIVER_CSV = ('name,driver_version,memory.total [MiB],memory.free [MiB]\n'
               'Synthetic GPU,synthetic-driver,16303 MiB,10134 MiB\n')
+DEFAULT_PREFLIGHT = object()
 
 
 class NativeLauncherTests(unittest.TestCase):
@@ -45,8 +46,14 @@ class NativeLauncherTests(unittest.TestCase):
         self.child_stdout = f"synthetic child stdout {self.model}\n"
         self.child_stderr = f"synthetic child stderr {self.runtime}\n"
 
-    def exercise(self, *, code=0, child_timeout=False, driver=DRIVER_CSV):
+    def exercise(self, *, code=0, child_timeout=False, driver=DRIVER_CSV,
+                 preflight_screen=DEFAULT_PREFLIGHT, reject_preflight=False):
         original_checksum, original_stat = launcher.checksum, Path.stat
+        screen = preflight_screen if preflight_screen is not DEFAULT_PREFLIGHT else {"guards": {
+            "nvidia_smi_free_mib": True,
+            "available_host_ram_bytes": True,
+            "temporary_volume_free_bytes": True,
+        }}
 
         def checksum(path):
             return {
@@ -61,11 +68,7 @@ class NativeLauncherTests(unittest.TestCase):
 
         def run(argv, **kwargs):
             if argv[1] == "scripts/mr09_preflight.py":
-                self.preflight.write_text(json.dumps({"guards": {
-                    "nvidia_smi_free_mib": True,
-                    "available_host_ram_bytes": True,
-                    "temporary_volume_free_bytes": True,
-                }}))
+                self.preflight.write_text(json.dumps(screen))
                 return subprocess.CompletedProcess(argv, 0, "", "")
             self.assertEqual(argv, [str(self.base / "native-init.exe"), str(self.runtime), "2136809472", str(self.model)])
             self.assertEqual(kwargs["timeout"], 90)
@@ -96,7 +99,17 @@ class NativeLauncherTests(unittest.TestCase):
               mock.patch.object(launcher.subprocess, "check_output", side_effect=query) as telemetry,
               mock.patch.object(sys, "argv", ["synthetic-launcher", "--temporary-dir", str(self.base), "--repetition", "1"]),
               contextlib.redirect_stdout(io.StringIO())):
-            returned = launcher.main()
+            if reject_preflight:
+                with self.assertRaisesRegex(RuntimeError, "fresh spare-capacity guard failed; no launch"):
+                    launcher.main()
+            else:
+                returned = launcher.main()
+        if reject_preflight:
+            self.assertEqual(native.call_count, 1, "only the capacity screen may run")
+            telemetry.assert_not_called()
+            self.assertFalse(self.output.exists(), "no child observation may be manufactured")
+            self.assertEqual(json.loads(self.preflight.read_text()), screen)
+            return
         self.assertEqual(native.call_count, 2, "one preflight and one child, with no retry")
         self.assertEqual(telemetry.call_count, 1)
         result = json.loads(self.output.read_text())
@@ -186,6 +199,29 @@ class NativeLauncherTests(unittest.TestCase):
         checksum.assert_not_called()
         run.assert_not_called()
         self.assertEqual(self.output.read_bytes(), original)
+
+    def test_preflight_requires_every_named_guard_and_literal_true_before_launch(self):
+        good = {
+            "nvidia_smi_free_mib": True,
+            "available_host_ram_bytes": True,
+            "temporary_volume_free_bytes": True,
+        }
+        invalid = [{}, {"guards": {}}, {"guards": {"unrelated": True}},
+                   {"guards": {**good, "unexpected": True}}]
+        invalid.extend((None, [], True, "true", 1))
+        invalid.extend({"guards": value} for value in (None, [], True, "true"))
+        for key in good:
+            invalid.append({"guards": {name: value for name, value in good.items() if name != key}})
+            for value in (1, 1.0, "false", [True], False, None):
+                invalid.append({"guards": {**good, key: value}})
+        for screen in invalid:
+            with self.subTest(screen=screen):
+                self.reset_observation()
+                self.exercise(preflight_screen=screen, reject_preflight=True)
+        self.reset_observation()
+        returned, record = self.exercise(preflight_screen={"guards": good})
+        self.assertEqual(returned, 0)
+        self.assertEqual(record["native_status"], "completed")
 
     def test_executed_launcher_remains_bound_to_all_historical_captures(self):
         directory = ROOT / capture.DIRECTORY

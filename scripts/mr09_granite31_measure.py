@@ -342,7 +342,11 @@ def main() -> int:
                     "--profile", "granite31", "--temporary-dir", str(args.model_dir.parent),
                     "--output", str(preflight_path)], check=True)
     preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if not all(preflight.get("guards", {}).values()) or not preflight.get("guards"):
+    guards = preflight.get("guards") if type(preflight) is dict else None
+    required_guards = {"nvidia_smi_free_mib", "available_host_ram_bytes",
+                       "temporary_volume_free_bytes"}
+    if (type(guards) is not dict or set(guards) != required_guards
+            or any(value is not True for value in guards.values())):
         raise RuntimeError("unchanged spare-capacity guards failed; no download/run")
     result = prepare(args.model_dir) if args.prepare else measurement(args)
     result["fresh_preflight"] = preflight

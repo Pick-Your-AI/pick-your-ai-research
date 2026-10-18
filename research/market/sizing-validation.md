@@ -409,7 +409,7 @@ not 18 repetitions of one experiment. Full #61 acceptance remains open.
 
 Evidence: [passing capacity screen](measurements/mr09-granite31-preflight-2026-10-18.json),
 [unchanged pre-execution protocol](measurements/mr09-granite31-protocol-2026-10-16.md),
-[separate instrument](../../scripts/mr09_granite31_measure.py),
+[executed instrument](measurements/granite31-2026-10-18/mr09_granite31_measure.executed.py),
 [three result files and summary](measurements/granite31-2026-10-18/),
 [artifact ledger](measurements/granite31-2026-10-18/mr09-granite31-artifacts.json)
 and [external artifact manifest](../../evidence/mr09-granite31-1b-a400m-instruct.json).
@@ -471,6 +471,16 @@ its JSON device-map key is empty. That recorded observation was retained and
 validated; the wrapper readback used `ConvertFrom-Json -AsHashtable` for
 repetitions 2 and 3. No observation was rerun, instrument changed or limit
 increased. The instrument and protocol hashes are recorded in each result.
+
+The linked executed instrument preserves the exact source used for these three
+observations, SHA-256
+`338ebb6a197712b655c5c2f69d6b1dbc0a51265455773b58c32ea2bc87c13974`.
+The [active launcher](../../scripts/mr09_granite31_measure.py) now requires the
+complete three-key capacity screen with literal Boolean `true` values before
+either preparation or measurement. This guard correction adds no observation
+and leaves the recorded source hashes and results unchanged. The commands below
+use the maintained launcher; any future execution needs its own source hash and
+execution evidence.
 
 Reproduction requires the named authorized spare-capacity envelope and existing
 pinned CUDA runtime; the following commands are a recipe, not fresh permission:
