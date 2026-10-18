@@ -45,6 +45,11 @@ That v0.10.2 table is historical. The separately inspected v0.31.0 table retains
 
 The AWS profile is a documented offer in `us-east-1`, not a live account capacity check. The regional launch source is historical and current account quota, Availability Zone offering, driver-visible memory, tenancy and capacity remain unknown. Recheck them during #37's deployment research; no instance was provisioned. RAM, free host memory, disk and loading peaks require separate checks; enough VRAM alone is insufficient.
 
+The H100 SXM and MI300X rows remain sourced research candidates. Their incomplete
+precision lists are now [note-only](#incomplete-precision-intake-correction-2026-10-18),
+so neither identity is a current catalog-reference target. This changes intake
+eligibility, not the published hardware observations above.
+
 The current vLLM optimization guide recommends at least `2 + N` physical CPU cores for its described single-server layout (C21). With one GPU, that is three cores, above this profile's documented two default cores. This is a published performance warning for that layout, not proof the VM cannot execute inference. It reinforces why this record is a provisionable candidate rather than a validated SLO recommendation; #11/#37 must review the selected process/CPU configuration.
 
 ## Comparison fields
@@ -227,8 +232,9 @@ Adopt separate physical and host-profile identities, exact unit conversions, byt
 ## Structured artifacts
 
 - [L40S CatalogItem](../../catalog/proposals/t2-compute-nvidia-l40s-2026-10-16.json)
-- [H100 SXM CatalogItem](../../catalog/proposals/t2-compute-nvidia-h100-sxm-2026-10-16.json)
-- [MI300X CatalogItem](../../catalog/proposals/t2-compute-amd-mi300x-2026-10-16.json)
+- [RTX 4090 CatalogItem](../../catalog/proposals/t2-compute-nvidia-geforce-rtx-4090-2026-10-18.json)
+- [A100 80GB CatalogItem](../../catalog/proposals/t2-compute-nvidia-a100-80gb-2026-10-18.json) and [P4de profile](../../catalog/proposals/t2-compute-aws-p4de-24xlarge-us-east-1-2026-10-18.json), with the separate scoped native-precision assessment below
+- [H100 SXM and MI300X note-only candidates](#incomplete-precision-intake-correction-2026-10-18), with the original sourced facts and immutable prior proposal identities retained
 - [AWS regional compute profile](../../catalog/proposals/t2-compute-aws-g6e-xlarge-us-east-1-2026-10-16.json), resolving `aws-ec2` from #9's same submission
 - [Sizing calculation script](compute/sizing_examples.py); [proposed rules](rules/compute-capacity.md)
 
@@ -236,14 +242,14 @@ No model weights, source PDFs, raw benchmark datasets, large downloads or new ex
 
 ## Open questions and handoffs
 
-The table retains its 2026-10-16 input questions, with live owners, directional receipts and the separate #10/#61 proposal state refreshed on 2026-10-18. Required consumers #9/#11/#31 have scoped receipts; appletechie now supplies a constrained #39 co-owner response, while PUSHINGSQUARES's own disposition remains pending. Interface acceptance does not decide headroom, calibration, measurement scope or ResourceEstimate placement, and does not accept another co-owner's scope. A proposal or review request is not confirmation.
+The table retains its 2026-10-16 input questions, with live owners, directional receipts and the separate #10/#61 proposal state refreshed on 2026-10-18. Required consumers #9/#11/#31 have scoped historical receipts; appletechie supplies a constrained #39 response, and PUSHINGSQUARES's later narrowing identifies the still-missing headroom input in the cost model. The changed H100/MI300X intake eligibility needs its own receiving review; earlier hardware-reuse receipts are not approval of that correction. Interface acceptance does not decide calibration, measurement scope or ResourceEstimate placement, and does not accept another co-owner's scope. A proposal or review request is not confirmation.
 
 | Follow-up / exact question | Responsible issue / owner | Impact / handoff state |
 | --- | --- | --- |
 | Accept accelerator/profile boundary, physical core interpretation, historical region scope and unknown stock? | #9, @Mattycodes69 / @appletechie | [#10 -> #9 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245204225): preserve distinct IDs/units and regional offering versus deployability; [@appletechie separately accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6245668047), reviewing main `66b46d4`: preserve IDs, source/normalized units and offering versus deployability |
 | Confirm current v0.31.0 versus historical v0.10.2 constraints, per-rank KV/adapter placement and engine-version invalidation? | #11, @zwright8 / @Mattycodes69 | [#10 -> #11 accepted with constraints by @Mattycodes69](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6245204677): exact tuple, per-device allocation/topology, resident demand/admission and uncertainty; no pooled VRAM, inherited results or SLO assertion |
 | Reuse these physical IDs without treating inference capacity as training memory/time? | #31, @tynamite / @appletechie | [Accepted hardware-reuse boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484); missing records and training estimates remain separate |
-| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @appletechie / @PUSHINGSQUARES | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewing main `66b46d4`: quantity bounds and explicit concurrency/utilization/headroom, not price noise; @PUSHINGSQUARES's disposition remains separate |
+| Accept GB conversion, scenario bounds, replica/device count and absent throughput instead of inferred token economics? | #39, @appletechie / @PUSHINGSQUARES | [@appletechie accepts with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221), reviewing main `66b46d4`. [@PUSHINGSQUARES narrows](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6247689665), checking `9192d5d`: quantity/utilization boundaries are documented, but #39 has no headroom term; capacity lines must disclose **headroom not applied** until an explicit input is adopted. Neither response calibrates a reserve or creates a ResourceEstimate |
 | Approve exact tensor/artifact revision and context policy; provide resident tensors and model-specific cache geometry? | #6, @zwright8 / @PUSHINGSQUARES; #7, @zwright8 / @appletechie | Informational compatibility handoff pending; calculations remain conditional |
 | Confirm adapter versus merged-checkpoint lineage, target modules, rank and simultaneous residency? | #33, @Mattycodes69 / @appletechie | [@appletechie accepts with narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221): #33 supplies artifact lineage/rank/targets/variant/added-token tensors; resident adapter count is #11/#37 configuration, not an artifact fact |
 | Accept explicit scenario headroom and note-only #61 consumption, with future build-bound placement? | #10, @Mattycodes69 and @appletechie; #61 co-owners and coordinator for experiment scope | [@appletechie accepts explicit headroom and note-only observations with constraints](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221); Mattycodes69's disposition and future placement remain open. No universal reserve, calibration or ResourceEstimate emitted |
@@ -265,7 +271,7 @@ The [#10 receiving-owner comment](https://github.com/Pick-Your-AI/pick-your-ai-r
 | Comparison fields defined with type, unit, evidence requirement | Comparison table | Supplied |
 | Compatibility rules/warnings shared format; verified rules separated from hypotheses | Rule classifications and examples | Supplied as proposals; central review pending |
 | Every factual/numeric claim primary source + access date and relevant conditions | C01–C22; source-mapped catalog provenance; derived formulas | Prepared for independent evidence review; source rendering and unit conflicts disclosed |
-| Each handoff confirmed by consuming issue owner with link | Handoff table | Scoped #9/#11/#31 receipts plus appletechie's constrained #39 response; PUSHINGSQUARES's scope remains pending. Mattycodes69's methodology decision, calibration, full #61 evidence and future placement remain separate |
+| Each handoff confirmed by consuming issue owner with link | Handoff table | Historical #9/#11/#31 receipts and both actual #39 responses are linked. PUSHINGSQUARES identifies unapplied headroom, and changed H100/MI300X intake eligibility needs receiving review. Methodology, calibration, full #61 evidence and future placement remain separate |
 | Open questions with named follow-up owner | Table above | Supplied |
 
 Validation is recorded by the integrating orchestrator after all same-submission host references exist. Required baseline commands remain `pip install -r requirements-research.txt`, contract tests, research tests and `scripts/validate_research.py` under Python 3.12. In addition, run the sizing script and explicitly validate `contracts/v1/examples/resource-estimate.json` against its schema. No validation pass alone establishes source accuracy, fit, rights, current supply, compatibility approval or consuming-owner acceptance.
@@ -392,3 +398,66 @@ The PDF source text and HTML rows were inspected. No new local source copy,
 immutable content hash or source-redistribution permission is claimed. This
 follow-up adds two catalog proposals and this research assessment; it changes no
 rule, pricebook, frozen contract, shared handoff ledger or issue acceptance state.
+
+## Incomplete precision intake correction (2026-10-18)
+
+Independent review at accepted main
+`ce388d7d4d38539eeccc5a0a8e740e74a17d96d2` reproduced the known
+[executable-consumption limit](README.md#contributions-for-40-review) for two
+actual proposals. H100 SXM and MI300X each recorded six positively sourced
+native arithmetic precisions and omitted `int4`. Their provenance explicitly
+described those lists as subsets. Frozen v1 requires `/spec/precisions`, and
+`rule.precision.accelerator` compares that list directly with the model
+selection's `/settings/precision`. It does not read list completeness,
+provenance eligibility or distinct artifact/storage/compute dtypes.
+
+Two independently reproduced, schema-valid synthetic builds used the unchanged
+historical proposals and selected `int4`. The unchanged frozen evaluator
+returned `fail/error`, overall `invalid` and readiness `blocked` in both cases,
+including with the original `unverified` provenance. This establishes reader
+behavior only. It establishes neither native INT4 support nor an actual engine
+failure. The proposed COMPUTE-02 unknown handling and prose consumption gate
+do not change those frozen bytes.
+
+Both incomplete proposals are therefore withdrawn from **current intake**.
+Their factual rows, source dates, unit conflicts and limitations remain above;
+the exact prior bytes remain in Git:
+
+| Note-only identity / version | Preserved prior proposal | Historical blob |
+| --- | --- | --- |
+| `nvidia-h100-sxm` / `2026-10-16` | [H100 SXM at the reviewed revision](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ce388d7d4d38539eeccc5a0a8e740e74a17d96d2/catalog/proposals/t2-compute-nvidia-h100-sxm-2026-10-16.json) | `202f7cf61b5ea46e34b933b759aa7e37e18f5948` |
+| `amd-mi300x` / `2026-10-16` | [MI300X at the reviewed revision](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ce388d7d4d38539eeccc5a0a8e740e74a17d96d2/catalog/proposals/t2-compute-amd-mi300x-2026-10-16.json) | `510f0087c3fa29c51ad30a4e0f337304f7c68400` |
+
+The correction applies the documented note-only gate while native-precision
+coverage remains incomplete. It neither inserts an unsupported precision nor
+removes a required field to satisfy validation. L40S and RTX 4090 retain positive
+evidence for all seven v1 enum values. The accepted [A100/P4de follow-up](#a100-and-p4de-precision-and-profile-follow-up--2026-10-18)
+now gives A100 six positive values and a scoped native-FP8 exclusion, with its
+companion profile. Those records, the L40S/RTX 4090 records and the L40S EC2
+profile are unchanged. Complete native-precision coverage still does not
+establish joint artifact/engine/runtime compatibility.
+
+A current catalog/pricebook reference audit found no structured dependent
+reference to either withdrawn ID. The existing T5 availability statements are
+updated to preserve the hardware facts as research inputs without offering a
+missing catalog target. The publication inventory remains pinned to its
+original `7115e77` tree and is unchanged. Older receiving receipts and saved
+historical bytes are preserved; they do not approve this new intake disposition
+or justify rewriting a historical outcome.
+
+The coordinator rechecked C01/C02/C03 hardware tables, C06/C07 CPU/RAM/disk
+allocation, C11's exact config and 15,231,233,024-byte tensor index, C16's
+historical Qwen benchmark rows/conditions, and C20/C21's pinned v0.31.0 source
+on 2026-10-18. These were source reads and arithmetic review, with no weights
+download or device execution. The original capture dates remain unchanged.
+The separate arithmetic reviewer passed all eight explicit-reserve cases and
+the historical sizing assertions. No source read supplies missing precision
+scope, rights, allocatable memory, calibration or an SLO.
+
+Before these identities return to intake, #10 and #11 must specify which dtype
+the claim describes and its exact evidence scope, and #40 must reconcile
+complete-list/explicit-negative semantics with the selected artifact and engine
+tuple. A versioned reader/ruleset needs its own reviewed migration and affected
+consumer decisions. #31's current hardware-reuse statement also needs review
+of this changed availability. These are named follow-ups; this correction does
+not complete #10 or waive #61's empirical criteria.

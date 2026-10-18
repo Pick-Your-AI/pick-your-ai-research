@@ -17,8 +17,8 @@ The [2026-10-18 sibling reconciliation](sibling-reconciliation.md) preserves the
 | [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 94 | 13 | 292 |
 | [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 90 | 21 | 222 |
 | [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 286 |
-| [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 43 | 11 | 202 |
-| | total | | | 334 | 73 | 1,032 |
+| [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 45 | 11 | 202 |
+| | total | | | 336 | 73 | 1,032 |
 
 The original #121 submission records a QC pass that re-opened its cited URLs and applied the corrections in the records. The 2026-10-18 follow-ups rechecked their added findings and pricing inputs; they do not claim a new reread of every older source. The counts above describe the current rule, hypothesis and evidence tables; inline primary-source links and linked evidence appendices are additional references. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy). Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. These records do not supply a T6 runtime experiment. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set; automated recomputation of the scenarios is arithmetic validation.
 
@@ -70,7 +70,7 @@ The original #121 submission records a QC pass that re-opened its cited URLs and
 | #36 Evaluation | 94 candidates (original IDs plus explicit suffixed splits) | 13 candidates (including explicit splits) |
 | #37 Deployment | 90 candidates (original IDs plus explicit suffixed splits) | 21 candidates (including explicit splits) |
 | #38 Monitoring | 71 candidates (original IDs plus explicit suffixed splits) | 25 candidates (including explicit splits) |
-| #39 Cost Estimate | 43 candidates (original IDs plus explicit suffixed splits) | 11 candidates (including explicit splits) |
+| #39 Cost Estimate | 45 candidates (original IDs plus explicit suffixed splits) | 11 candidates (including explicit splits) |
 
 Conditional severity cells have been replaced with fixed severities and explicit applicability/outcome semantics. Suffixed candidates preserve the separate conditions; #40 still reviews adoption.
 
