@@ -112,6 +112,33 @@ def public_source(uri):
         return False
 
 
+def price_instant(value):
+    """Return an exact ordering key for the supported intake timestamp profile."""
+    match = re.fullmatch(
+        r'([0-9]{4})-([0-9]{2})-([0-9]{2})[Tt]'
+        r'([0-9]{2}):([0-9]{2}):([0-9]{2})'
+        r'(?:\.([0-9]+))?([Zz]|[+-][0-9]{2}:[0-9]{2})', value)
+    if match is None:
+        raise ValueError('unsupported timestamp representation')
+    year, month, day, hour, minute, second = map(int, match.groups()[:6])
+    # Validate calendar/time fields without sending fractional digits through
+    # datetime's microsecond precision or converting to a bounded UTC datetime.
+    ordinal = datetime(year, month, day, hour, minute, second).toordinal()
+    fraction, zone = match.groups()[6:]
+    offset = 0
+    if zone not in {'Z', 'z'}:
+        offset_hour, offset_minute = int(zone[1:3]), int(zone[4:6])
+        if offset_hour > 23 or offset_minute > 59:
+            raise ValueError('unsupported timestamp offset')
+        offset = (offset_hour * 60 + offset_minute) * 60
+        if zone[0] == '-':
+            offset = -offset
+    seconds = ordinal * 86400 + hour * 3600 + minute * 60 + second - offset
+    # Trailing-zero removal makes equal fractions identical. Lexical comparison
+    # of the remaining ASCII digits preserves every supplied fractional digit.
+    return seconds, (fraction or '').rstrip('0')
+
+
 def intake_errors(catalog, pricebooks):
     errors = []
     items = {}
@@ -161,7 +188,17 @@ def intake_errors(catalog, pricebooks):
                 errors.append(f'{ident}: catalog ID/version does not resolve')
             if not public_source(rate['provenance'].get('source_uri')):
                 errors.append(f'{ident}: rate needs a real public source URL')
-            if rate.get('valid_until') and datetime.fromisoformat(rate['valid_until'].upper().replace('Z', '+00:00')) <= datetime.fromisoformat(rate['valid_from'].upper().replace('Z', '+00:00')):
+            instants = {}
+            for field in ('valid_from', 'valid_until'):
+                if field in rate:
+                    try:
+                        instants[field] = price_instant(rate[field])
+                    except ValueError:
+                        errors.append(f'{ident}: {field} needs an ASCII timestamp with year '
+                                      '0001-9999, seconds 00-59, and Z or a numeric offset '
+                                      'for intake ordering')
+            if ('valid_from' in instants and 'valid_until' in instants
+                    and instants['valid_until'] <= instants['valid_from']):
                 errors.append(f'{ident}: valid_until must follow valid_from')
     return errors
 

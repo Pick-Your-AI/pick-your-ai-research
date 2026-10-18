@@ -11,7 +11,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from validate_research import CONTRACT, KINDS, REFERENCES, SCHEMAS, intake_errors, validate_tree
+from validate_research import CONTRACT, KINDS, REFERENCES, SCHEMAS, intake_errors, schema_errors, validate_tree
 
 
 class ContractAdoption(unittest.TestCase):
@@ -226,6 +226,105 @@ class Intake(unittest.TestCase):
                 rate['valid_until'] = end
                 self.assertIn('test.rate: valid_until must follow valid_from',
                               intake_errors([self.item], [book]))
+
+    def _write_price_validity(self, root, start, end):
+        self._write_locator_submission(root, 'price', self.item['provenance'][0]['source_uri'])
+        path = root / 'pricing/proposals/prices.json'
+        book = json.loads(path.read_text(encoding='utf-8'))
+        book['rates'][0]['valid_from'] = start
+        if end is not None:
+            book['rates'][0]['valid_until'] = end
+        # These pass the frozen-schema step under the pinned dependencies;
+        # the explicit intake ordering boundary is separate.
+        self.assertEqual(schema_errors(book, SCHEMAS['pricebook.schema.json']), [])
+        path.write_text(json.dumps(book), encoding='utf-8')
+        return path
+
+    def test_price_validity_preserves_fractional_precision_and_offset_order(self):
+        base = '2026-10-16T09:00:00'
+        cases = (
+            (base + '.0000001Z', base + '.0000002Z', True),
+            (base + '.' + '1' * 80 + '1Z', base + '.' + '1' * 80 + '2Z', True),
+            (base + '.1Z', base + '.1000000000000000000Z', False),
+            (base + '.0000002Z', base + '.0000001Z', False),
+            ('2026-10-16t10:00:00.0000001+01:00', base + '.0000002z', True),
+            ('2026-10-15T23:30:00.0000001-09:30', base + '.0000002Z', True),
+            ('2026-10-15T23:30:00-09:30', base + 'Z', False),
+            ('2026-10-16T23:59:59.999999999Z', '2026-10-17T00:00:00Z', True),
+            ('0001-01-01T00:00:00+23:59', '0001-01-01T00:00:00Z', True),
+            ('9999-12-31T23:59:59-23:59', '9999-12-31T23:59:59Z', False),
+            (base + '.0000001Z', None, True),
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for start, end, valid in cases:
+                with self.subTest(start=start, end=end):
+                    path = self._write_price_validity(root, start, end)
+                    original = path.read_bytes()
+                    errors = validate_tree(root)[0]
+                    if valid:
+                        self.assertEqual(errors, [])
+                    else:
+                        self.assertIn('test.rate: valid_until must follow valid_from', errors)
+                    self.assertEqual(path.read_bytes(), original)
+
+    def test_price_validity_reports_unsupported_frozen_valid_timestamps(self):
+        representations = ('\u0662\u0660\u0662\u0666-10-16T09:00:00Z',
+                           '2026-10-16T09:00:00.\u0661Z',
+                           '2026-10-16T09:00:00+01:\u0663\u0660',
+                           '2016-12-31T23:59:60Z')
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for value in representations:
+                cases = (('valid_from', value, '2026-10-17T09:00:00Z'),
+                         ('valid_until', '2026-10-16T09:00:00Z', value),
+                         ('valid_from', value, None))
+                for field, start, end in cases:
+                    with self.subTest(field=field, value=value, end=end):
+                        path = self._write_price_validity(root, start, end)
+                        original = path.read_bytes()
+                        errors = validate_tree(root)[0]
+                        self.assertTrue(any(f'test.rate: {field} needs an ASCII timestamp' in e
+                                            for e in errors), errors)
+                        self.assertEqual(path.read_bytes(), original)
+
+    def test_cli_price_validity_diagnostics_and_exact_order_under_optimization(self):
+        cases = (
+            ('2026-10-16t09:00:00z', '2026-10-17t09:00:00z', None),
+            ('2026-10-16T09:00:00.0000001Z', '2026-10-16T09:00:00.0000002Z', None),
+            ('2026-10-15T23:30:00.0000001-09:30', '2026-10-16T09:00:00.0000002Z', None),
+            ('2026-10-16T09:00:00.' + '1' * 80 + '1Z',
+             '2026-10-16T09:00:00.' + '1' * 80 + '2Z', None),
+            ('2026-10-15T23:30:00-09:30', '2026-10-16T09:00:00Z', 'valid_until must follow'),
+            ('2026-10-16T09:00:00.0000002Z', '2026-10-16T09:00:00.0000001Z', 'valid_until must follow'),
+            ('\u0662\u0660\u0662\u0666-10-16T09:00:00Z', '2026-10-17T09:00:00Z', 'valid_from needs an ASCII timestamp'),
+            ('2026-10-16T09:00:00Z', '2026-10-17T09:00:00.\u0661Z', 'valid_until needs an ASCII timestamp'),
+            ('2016-12-31T23:59:59Z', '2016-12-31T23:59:60Z', 'valid_until needs an ASCII timestamp'),
+            ('2016-12-31T23:59:60Z', None, 'valid_from needs an ASCII timestamp'),
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            shutil.copytree(CONTRACT, root / 'contracts/v1',
+                            ignore=shutil.ignore_patterns('__pycache__'))
+            (root / 'schemas').mkdir()
+            shutil.copy2(ROOT / 'schemas/evidence-manifest.schema.json', root / 'schemas')
+            (root / 'scripts').mkdir()
+            script = root / 'scripts/validate_research.py'
+            shutil.copy2(ROOT / 'scripts/validate_research.py', script)
+            for optimized in (False, True):
+                command = [sys.executable, *(['-O'] if optimized else []), str(script)]
+                for start, end, diagnostic in cases:
+                    with self.subTest(optimized=optimized, start=start, end=end):
+                        path = self._write_price_validity(root, start, end)
+                        original = path.read_bytes()
+                        result = subprocess.run(command, capture_output=True, text=True, check=False)
+                        self.assertEqual(result.stderr, '')
+                        self.assertEqual(result.returncode, 0 if diagnostic is None else 1)
+                        if diagnostic is None:
+                            self.assertIn('Validated 1 catalog proposals and 1 pricebooks', result.stdout)
+                        else:
+                            self.assertIn('INVALID: test.rate: ' + diagnostic, result.stdout)
+                        self.assertEqual(path.read_bytes(), original)
 
     def test_nonpublic_ip_provenance_rejected_for_catalog_and_prices(self):
         hosts = (
