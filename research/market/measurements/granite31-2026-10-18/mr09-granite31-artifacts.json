@@ -1,0 +1,76 @@
+{
+  "model_id": "ibm-granite/granite-3.1-1b-a400m-instruct",
+  "revision": "0da7a48b0276d500ce5922fd2b33944091fc6c09",
+  "license": "Apache-2.0",
+  "license_source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/blob/0da7a48b0276d500ce5922fd2b33944091fc6c09/README.md",
+  "reuse": "publisher labels Apache-2.0; weights not redistributed",
+  "publisher": "IBM Granite",
+  "access_date": "2026-10-18",
+  "evidence_class": "pinned publisher metadata plus local hash/size checks",
+  "model_format": "safetensors",
+  "artifacts": [
+    {
+      "file": "config.json",
+      "bytes": 889,
+      "sha256": "f1b64813debfabeb9cc20f1a13ed8248da6774fe54e532d19912d4b3f2ab335d",
+      "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/config.json"
+    },
+    {
+      "file": "generation_config.json",
+      "bytes": 132,
+      "sha256": "df006c64ad35b18712527cb5130a7a13a4d8a7c5c23653feea59be88e2e2a4ca",
+      "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/generation_config.json"
+    },
+    {
+      "file": "tokenizer.json",
+      "bytes": 3475806,
+      "sha256": "ed944c0b3d71e2d651a5ba0f8e7b350faff30031c8e3353de70b12b9c1bf5654",
+      "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/tokenizer.json"
+    },
+    {
+      "file": "tokenizer_config.json",
+      "bytes": 8072,
+      "sha256": "ab17e0d532ecf47e9d8451939dd81f25dd98c5fba4b6742584549bbf9c1f06b9",
+      "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/tokenizer_config.json"
+    },
+    {
+      "file": "special_tokens_map.json",
+      "bytes": 701,
+      "sha256": "596d752bf46f5cace1f6826b52ed7d913347a4eea0ecce8ab2f869471ca40369",
+      "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/special_tokens_map.json"
+    },
+    {
+      "file": "model.safetensors",
+      "bytes": 2669283096,
+      "sha256": "ac02591061f1344027a7e7b11dbb4143f75f166c47dc09b742f5de3ab1dde1d1",
+      "source_url": "https://huggingface.co/ibm-granite/granite-3.1-1b-a400m-instruct/resolve/0da7a48b0276d500ce5922fd2b33944091fc6c09/model.safetensors"
+    }
+  ],
+  "fresh_preflight": {
+    "classification": "read-only capacity screen; not inference or a fit guarantee",
+    "profile": "granite31",
+    "observed_utc": "2026-10-18T05:44:22.417182+00:00",
+    "thresholds": {
+      "nvidia_smi_free_mib": 4096,
+      "available_host_ram_bytes": 12884901888,
+      "temporary_volume_free_bytes": 6412308016
+    },
+    "methods": [
+      "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+      "Windows kernel32 GlobalMemoryStatusEx.ullAvailPhys",
+      "Python shutil.disk_usage(temporary_dir).free"
+    ],
+    "observed": {
+      "nvidia_smi_free_mib": 7894,
+      "available_host_ram_bytes": 27303043072,
+      "temporary_volume_free_bytes": 22266114048
+    },
+    "guards": {
+      "nvidia_smi_free_mib": true,
+      "available_host_ram_bytes": true,
+      "temporary_volume_free_bytes": true
+    },
+    "status": "admitted_to_download_screen_only",
+    "reason": "all screens satisfied; recheck before inference"
+  }
+}

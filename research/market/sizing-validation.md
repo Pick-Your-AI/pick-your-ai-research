@@ -1,6 +1,6 @@
 # MR-09: Validate GPU sizing against pinned runtime measurements
 
-Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-16. Live Project fields are authoritative; this note does not change them.
+Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-18. Live Project fields are authoritative; this note does not change them.
 
 ## Question
 Where do planning estimates fail under real runtime conditions?
@@ -17,13 +17,15 @@ device, reservation, download or cost authorization. Sources inspected on 2026-1
 [live #61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61),
 [Zwright8's scoped receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281)
 and the committed protocols/results at main
-`ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999`. No hardware probe, inference,
-weights download, paid compute or new device authorization was performed here.
+`ecd5f66d758e8bf89eafbeacfe8eae87ce9b4999`. The hardware checklist below was
+prepared without execution; the separately dated GM1 continuation now records
+fresh preflight, pinned download and three bounded local runs under the existing
+spare-capacity authorization. No paid compute or new device was used.
 
 | Gate | Available evidence | Exact remaining action / accountable owner |
 | --- | --- | --- |
 | Dense observations | D1–D5: five configurations, three fresh-process runs each; separate allocated/reserved counters | #61 co-owners and coordinator review the bounded observations and provenance caveats |
-| MoE variations | Pinned OLMoE matrix and separate Granite profiles; no recorded MoE execution | @Mattycodes69/@appletechie identify an authorized envelope and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
+| MoE variations | Three supplemental GM1 runs; pinned OLMoE matrix remains unexecuted | @Mattycodes69/@appletechie identify an authorized envelope for remaining cells and rerun unchanged preflight guards before any download; short Granite alone does not replace the varied OLMoE matrix |
 | Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
 | Comparable estimator errors | Zero matching competitor/runtime pairs | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
 | Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
@@ -44,8 +46,10 @@ receipt does not supply it. Until then the full criteria remain open.
 Zwright8's receipt accepts actual prompt/cache/predicted lengths, active-sequence
 versus queued-request accounting, runtime pins and separate allocator phases for
 #7/#11. It supplies no new run or error bound. Appletechie's #7 and Mattycodes69's
-#11 co-owner responses remain distinct. #10's new consumption/placement proposal
-is ready for its co-owners' review, not an already accepted handoff. Preserve
+#11 co-owner responses remain distinct. [Appletechie's #10 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221)
+accepts the note-only placement policy and explicit headroom methodology at reviewed
+main `66b46d4`; it explicitly accepts no runtime result, these new GM1 observations, another co-owner's scope
+or future ResourceEstimate placement. Preserve
 #59's single writer for `handoffs.md`/`handoffs.json`.
 
 ## Hardware required for full-scope continuation (2026-10-18)
@@ -64,7 +68,7 @@ or measured fit claims. GiB = 2^30 bytes; MiB = 2^20 bytes.
 | Coverage | Hardware and preserved limits | What is still needed |
 | --- | --- | --- |
 | D1–D5 dense reproduction | Original single RTX 5070 Ti / pinned CUDA runtime; [dense wrapper](../../scripts/mr09_run_matrix.ps1) requires one valid `nvidia-smi` sample and at least 2,048 MiB free before each run; the runner separately requires CUDA-reported free >=2 GiB. [Original protocol](measurements/mr09-protocol-2026-10-16.md) caps this process at min(2 GiB, 12.5% of reported device memory) | Fresh safe spare-capacity check and temporary artifact storage before any rerun; prior observations are already recorded, so rerunning them does not fill missing MoE/topology/comparison cells |
-| Supplemental Granite3.1 GM1 | [Separate short-case protocol](measurements/mr09-granite31-protocol-2026-10-16.md): GPU free >=4,096 MiB; available physical host RAM >=12 GiB; temporary-volume free >=6,412,308,016 bytes; own allocator cap <=3 GiB. Recheck GPU guard before each of three serial fresh processes | A current passing preflight on the authorized spare device. GM1 is supplemental short MoE coverage only; it does not replace M1–M4 |
+| Supplemental Granite3.1 GM1 | [Separate short-case protocol](measurements/mr09-granite31-protocol-2026-10-16.md): GPU free >=4,096 MiB; available physical host RAM >=12 GiB; temporary-volume free >=6,412,308,016 bytes; own allocator cap <=3 GiB. Recheck GPU guard before each of three serial fresh processes | Completed three bounded runs in the dated GM1 continuation below after fresh passing guards. GM1 is supplemental short MoE coverage only; it does not replace M1–M4 |
 | OLMoE M1–M4 | [Pinned plan](measurements/mr09-moe-plan.json): BF16 resident weight tensors alone are 13,838,323,712 bytes. M1/M2: prompts 256/2,048, active1, BF16 KV; M3: prompt2,048, active2, BF16 KV; M4: prompt2,048, active1, INT4 if supported | Named authorized GPU allocation and reviewed process cap covering all resident experts, cache, prefill/routing workspace, allocator/context and explicit reserve. The existing 2 GiB dense cap cannot admit these weights. Full-resident and separately pinned offload designs are distinct scenarios |
 | Long-context boundary | [Original protocol](measurements/mr09-protocol-2026-10-16.md) defers a larger 8,192-total-position boundary to a reserved session | Review the exact model/prompt/cache/predicted lengths with #7 and establish a safe device/host envelope before adding this cell. Pinned OLMoE has only 4,096 positions; do not apply the 8,192 boundary to it or deliberately cause contention/OOM on the shared device |
 | G1 multi-GPU/per-rank | [Original matrix](measurements/mr09-protocol-2026-10-16.md): same pinned dense/MoE, prompt2,048, active2, native BF16 KV, 32 decode forwards; at least two authorized GPUs and an explicit per-rank placement/topology plan | Name each device and allocation, interconnect, parallelism strategy, runtime/backend and per-rank memory budget. Add separately hashed multi-rank instrumentation/protocol: the existing wrapper and [runner](../../scripts/mr09_measure.py) accept exactly one visible device and do not execute G1 |
@@ -95,7 +99,7 @@ the session uses existing spare local capacity or a newly approved reservation.
 A second device, larger reservation/cap or paid compute needs explicit
 authorization; this hardware checklist provides none of those permissions.
 Keep pre-existing workloads untouched. No new probe, download or experiment
-was performed to prepare this hardware checklist.
+was performed to prepare this hardware checklist; the separate GM1 continuation below records subsequent execution.
 
 ## Offline evidence integrity and continuation guard (2026-10-18)
 
@@ -139,7 +143,7 @@ measurement instrument, dated protocol, raw observations and summary are unchang
 - [ ] Obtain affected-owner review and accepted handoff.
 
 ## Next action
-Review the headroom/note-only consumption proposal and identify authorized capacity plus comparable estimator quantities before new experiments. Retain the full missing MoE/topology/comparison work unless the accountable owners explicitly narrow it. The original protocol checklist remains above, with completion claimed only where supported below.
+Review the new GM1 evidence, reconcile scoped receiving receipts and identify authorized capacity plus comparable estimator quantities before further experiments. Retain the full missing MoE/topology/comparison work unless the accountable owners explicitly narrow it. The original protocol checklist remains above, with completion claimed only where supported below.
 
 ## Result
 Partial real GPU inference has been executed. This does not complete independent validation of competitor sizing estimates or establish universal fit. No raw customer content, paid API output, weights or raw datasets are committed. Consumers: #7, #10, #11.
@@ -233,7 +237,109 @@ quantity as denominator; failures and mismatches have no fabricated errors.
 No coordinator-approved MVP tolerance exists. Observed sample extremes may
 be reported, but cannot be described as guaranteed bounds.
 
-## Executed dense results — 15 real runs
+## Supplemental GM1 execution — 2026-10-18
+
+**Three successful fresh-process runs of one short MoE configuration**, in
+addition to the historical 15 dense observations. These are separate cohorts,
+not 18 repetitions of one experiment. Full #61 acceptance remains open.
+
+Evidence: [passing capacity screen](measurements/mr09-granite31-preflight-2026-10-18.json),
+[unchanged pre-execution protocol](measurements/mr09-granite31-protocol-2026-10-16.md),
+[separate instrument](../../scripts/mr09_granite31_measure.py),
+[three result files and summary](measurements/granite31-2026-10-18/),
+[artifact ledger](measurements/granite31-2026-10-18/mr09-granite31-artifacts.json)
+and [external artifact manifest](../../evidence/mr09-granite31-1b-a400m-instruct.json).
+Access/measurement date: 2026-10-18. Evidence class: independent project allocator
+observations; pinned publisher architecture/license metadata and local artifact
+hash checks are separate support. Confidence is high for these recorded counters
+and low for generalizing beyond this exact workload; human validity/reuse review
+remains pending. No model weights, output text or user content are redistributed.
+
+The pinned IBM Granite `granite-3.1-1b-a400m-instruct` revision is
+`0da7a48b0276d500ce5922fd2b33944091fc6c09`. Downloaded safetensors were
+2,669,283,096 bytes, SHA-256
+`ac02591061f1344027a7e7b11dbb4143f75f166c47dc09b742f5de3ab1dde1d1`,
+matching pinned publisher metadata before loading. Actual parameter elements:
+1,334,628,352. All resident experts are included; active parameters alone do not
+represent the resident weight allocation. The source locator, six file hashes,
+size checks and publisher Apache-2.0 label are recorded in the linked manifests.
+
+GM1 uses BF16 weights/native BF16 KV, 256 actual prompt tokens, one active
+sequence, zero queued requests, 32 decode forwards, 33 greedy predictions and
+288 terminal cache positions. SDPA/eager, seed 6109, TP1/PP1, no offload,
+compilation or graph capture. Each process retains the protocol's **3 GiB
+allocator cap**. The initial and every per-process screen passed unchanged
+GPU >=4,096 MiB, available RAM >=12 GiB and temporary disk >=6,412,308,016-byte
+guards. The instrument also checks CUDA free >=4 GiB before loading. No existing
+workload was stopped and no guard/cap was relaxed.
+
+Runtime: Python 3.12.11, PyTorch 2.10.0+cu130/CUDA build 13.0,
+Transformers 5.0.0, Accelerate 1.13.0, Safetensors 0.7.0, NumPy 2.4.1,
+Hugging Face Hub 1.3.5 and Tokenizers 0.22.2. One RTX 5070 Ti, native allocator,
+driver **610.88**. The older dense driver was 595.97: these observations are
+summarized in their own directory and never pooled with that cohort.
+Both system GPU and CUDA memory samples are retained. For example, repetition 1
+records 7,435 MiB free from `nvidia-smi` while CUDA reports 15,769,534,464 free
+bytes. These disagree on this shared Windows device; neither is evidence of an
+exclusive reservation, whole-device peak or safely available capacity for a
+larger case. Passing guards is a bounded admission screen, not a fit guarantee.
+
+| Phase | Peak allocated bytes, min / median / max (n=3) | Peak reserved bytes, min / median / max (n=3) |
+| --- | --- | --- |
+| Baseline | 0 / 0 / 0 | 0 / 0 / 0 |
+| Loading | 2,669,257,728 / 2,669,257,728 / 2,669,257,728 | 2,675,965,952 / 2,675,965,952 / 2,675,965,952 |
+| Warmup | 2,686,198,272 / 2,686,198,272 / 2,686,198,272 | 2,707,423,232 / 2,707,423,232 / 2,707,423,232 |
+| Prefill | 2,711,454,720 / 2,711,454,720 / 2,711,454,720 | 2,740,977,664 / 2,740,977,664 / 2,740,977,664 |
+| Decode | 2,697,602,048 / 2,697,602,048 / 2,697,602,048 | 2,740,977,664 / 2,740,977,664 / 2,740,977,664 |
+| Steady state | 2,691,935,744 / 2,691,935,744 / 2,691,935,744 | 2,740,977,664 / 2,740,977,664 / 2,740,977,664 |
+
+Identical extrema across three repetitions describe these samples only; they
+are not a statistical confidence interval or universal bound. All three record
+12,582,912 bytes of prefill KV payload and 14,155,776 terminal KV bytes. The
+prefill geometry calculation matches the tensor payload (zero byte difference);
+this excludes allocator/workspace/runtime costs and is **not** a competitor
+sizing error. GM1 runtime failures/OOMs: zero. Comparable competitor/runtime
+pairs across this contribution: **zero**. No accepted error threshold or
+numerical competitor-error range is available.
+
+An administrative shell readback failed after successful repetition 1 because
+its JSON device-map key is empty. That recorded observation was retained and
+validated; the wrapper readback used `ConvertFrom-Json -AsHashtable` for
+repetitions 2 and 3. No observation was rerun, instrument changed or limit
+increased. The instrument and protocol hashes are recorded in each result.
+
+Reproduction requires the named authorized spare-capacity envelope and existing
+pinned CUDA runtime; the following commands are a recipe, not fresh permission:
+
+```powershell
+# $CudaPython: pinned external Python; $ModelDir: fresh external task directory.
+# $OutputDir: fresh result directory. Stop after any non-success or guard failure.
+& $CudaPython scripts/mr09_granite31_measure.py --prepare --model-dir $ModelDir --output "$OutputDir/mr09-granite31-artifacts.json"
+if ($LASTEXITCODE -ne 0) { throw 'Preparation failed; stop' }
+foreach ($rep in 1..3) {
+  $resultPath = "$OutputDir/mr09-GM1-r$rep.json"
+  & $CudaPython scripts/mr09_granite31_measure.py --model-dir $ModelDir --output $resultPath --repetition $rep
+  if ($LASTEXITCODE -ne 0) { throw 'Run failed; stop' }
+  $result = Get-Content -Raw -LiteralPath $resultPath | ConvertFrom-Json -AsHashtable
+  if ($result.status -ne 'success') { throw 'Non-success; stop without retry' }
+}
+python scripts/mr09_summarize.py --directory $OutputDir --sanitize
+```
+
+Temporary task-owned weights/config/tokenizer files were removed after the
+experiment; [cleanup receipt](measurements/granite31-2026-10-18/cleanup.json)
+records the checked scope, byte/file counts and absent session directory.
+Existing CUDA packages and unrelated artifacts were left intact. Published
+results remove local filesystem paths and hardware UUIDs; pins/counters remain.
+
+The varied OLMoE M1–M4, longer boundary, MoE INT4/concurrency, multi-GPU/per-rank
+and matched llmfit/ModelFit/Local AI Planner comparisons remain unexecuted. This
+single short cell supplies no waiver, approved tolerance, new device/cost
+permission, ResourceEstimate, or compatibility rule. #7/#10/#11 owners and the
+coordinator must review this new evidence separately from their earlier scoped
+receipts. Frozen v1 and #59's handoff ledgers are unchanged.
+
+## Historical executed dense results — 15 real runs (2026-10-16)
 
 D1–D5 each completed three fresh-process repetitions: **15 successful real GPU
 inference runs, zero observed loading/prefill/decode OOM and zero model-runtime
@@ -286,7 +392,7 @@ during decode. A weight-plus-demanded-cache number alone cannot substitute for
 these runtime-specific counters. No unsafe-fit or conservative-fit frequency
 is claimed because there is no matching estimator prediction cohort.
 
-## Remaining architecture and access coverage
+## Historical access screens and remaining architecture coverage
 
 The user requested spare local capacity only. The first
 [supplemental trained Granite3.0 MoE plan](measurements/mr09-moe-supplement-2026-10-16.md)
@@ -306,9 +412,11 @@ No weights were downloaded or MoE inference claimed at that screen. The single
 [final availability screen](measurements/mr09-granite31-preflight-final.json)
 after independent review, at 14:06:50 UTC, still failed the same GPU guard:
 3,935 MiB free against 4,096 MiB required. Host RAM 17,015,889,920 bytes and
-disk 7,418,503,168 bytes passed. Both failed Granite3.1 records are preserved;
-no further GPU checks or MoE attempts are made in this submission. No workloads
-were evicted and no Granite weights were downloaded.
+disk 7,418,503,168 bytes passed. Both historical failed Granite3.1 records are preserved;
+no further GPU checks or MoE attempts were made in that 2026-10-16 submission. No workloads
+were evicted and no Granite weights were downloaded in that historical session.
+The separate 2026-10-18 GM1 execution above supersedes the no-execution state
+for this short supplemental cell only.
 
 The selected OLMoE context/cache/concurrency matrix remains unexecuted, and
 Granite3.1's prepared short-case profile cannot stand in for its
@@ -413,7 +521,7 @@ preserved by the wrapper; use a fresh output directory for independent replicati
 | Consumer | Finding offered | Receiving owner | Disposition / unresolved next action |
 | --- | --- | --- | --- |
 | #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | @zwright8, @appletechie | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of accounting interface only; appletechie's disposition and empirical acceptance remain pending |
-| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | @Mattycodes69, @appletechie | [Note-only consumption and future placement proposed](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); both owners' dispositions remain pending |
+| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | @Mattycodes69, @appletechie | [Appletechie scoped acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) for the earlier note-only policy/headroom methodology; no runtime-result acceptance; new GM1 evidence, other co-owner disposition and future placement remain pending |
 | #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | @zwright8, @Mattycodes69 | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of runtime accounting interface only; Mattycodes69's disposition and empirical acceptance remain pending |
 
 No ResourceEstimate, canonical catalog item, Pricebook or compatibility boolean
