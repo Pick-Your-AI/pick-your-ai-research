@@ -71,6 +71,44 @@ class HandoffAuditValidation(unittest.TestCase):
         load = lambda name: read_json(BASE / name)
         validate(load('handoffs.json'), load('handoff-audit-readback.json'), load('audit.json'))
 
+    def test_classified_issue_must_exist_in_the_captured_snapshot(self):
+        self.audit['issues'][0]['number'] = max(
+            row['number'] for row in self.readback['issues']) + 1
+        with self.assertRaisesRegex(HandoffValidationError, 'uncaptured issue'):
+            self.check()
+
+    def test_duplicate_classified_issue_cannot_inflate_the_audit(self):
+        self.audit['issues'].append(deepcopy(self.audit['issues'][0]))
+        with self.assertRaisesRegex(HandoffValidationError, 'duplicate classified issue'):
+            self.check()
+
+    def test_cli_rejects_uncaptured_and_duplicate_classifications_in_real_record_copies(self):
+        # Copy the committed audit inputs into the existing disposable CLI
+        # harness. Only a copied classification changes; no source receipt,
+        # assignment, hierarchy or canonical record is rewritten.
+        originals = {name: (BASE / name).read_text(encoding='utf-8') for name in (
+            'handoffs.json', 'handoff-audit-readback.json', 'audit.json')}
+        readback = json.loads(originals['handoff-audit-readback.json'])
+        audit = json.loads(originals['audit.json'])
+        uncaptured = deepcopy(audit)
+        uncaptured['issues'][0]['number'] = max(
+            row['number'] for row in readback['issues']) + 1
+        duplicate = deepcopy(audit)
+        duplicate['issues'].append(deepcopy(duplicate['issues'][0]))
+        for optimized in (False, True):
+            control = self.run_cli(originals, optimized)
+            self.assertEqual(control.returncode, 0, control.stderr)
+            self.assertIn('Handoff audit integrity OK', control.stdout)
+            for diagnostic, altered in (
+                    ('uncaptured issue', uncaptured),
+                    ('duplicate classified issue', duplicate)):
+                with self.subTest(diagnostic=diagnostic, optimized=optimized):
+                    documents = {**originals, 'audit.json': json.dumps(altered)}
+                    result = self.run_cli(documents, optimized)
+                    self.assertNotEqual(result.returncode, 0, result.stdout)
+                    self.assertIn(diagnostic, result.stderr)
+                    self.assertNotIn('Handoff audit integrity OK', result.stdout)
+
     def identifier_locations(self):
         parent, child = self.readback['issues'][:2]
         parent['sub_issues'] = [child['number']]
