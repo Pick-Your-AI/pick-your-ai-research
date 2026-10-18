@@ -1,0 +1,15 @@
+{
+  "x_t0_answer_states": {
+    "proposal_version": "cd1-0.1",
+    "answers": {
+      "/selection_checks/sel_tool/rule.fixture.cd13/0.1.0/applies_when": {
+        "state": "provided", "value": true,
+        "source": "synthetic:normalized-applicability"
+      },
+      "/selection_checks/sel_tool/rule.fixture.cd13/0.1.0/assertion": {
+        "state": "provided", "value": true,
+        "source": "synthetic:normalized-assertion"
+      }
+    }
+  }
+}
