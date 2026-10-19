@@ -3,6 +3,7 @@ import copy
 import errno
 import importlib.util
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -208,6 +209,39 @@ class NativeCaptureTests(unittest.TestCase):
             self.assertEqual(result["concurrent_admissions"],16000)
             self.assertEqual(result["boundary_denials"],2)
             self.assertEqual(result["final_live_bytes"],0)
+
+
+class NativeCaptureCLITests(unittest.TestCase):
+    def run_cli(self,directory):
+        # subprocess.run kills and reaps only its child if the deadline expires.
+        return subprocess.run(
+            [sys.executable,"-B",str(ROOT/"scripts/mr09_native_capture.py"),
+             "--directory",str(directory)],
+            cwd=ROOT,capture_output=True,text=True,timeout=5,check=False)
+
+    def test_read_only_cli_accepts_committed_regular_inputs(self):
+        result=self.run_cli(DIRECTORY)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(result.stderr,"")
+        self.assertEqual(json.loads(result.stdout),{
+            "initialization_trials":3,"accepted_estimator_pairs":0,
+            "exact_live_buffer_bytes":[334511360,334511360,334511360]})
+
+    @unittest.skipUnless(hasattr(os,"mkfifo"),"FIFO creation is unavailable")
+    def test_read_only_cli_rejects_fifo_inputs_without_a_writer(self):
+        names=("build-loader-v2.json","runtime-artifacts.json",
+               *(f"init-r{rep}.json" for rep in (1,2,3)),
+               *(f"init-r{rep}-preflight.json" for rep in (1,2,3)))
+        for name in names:
+            with self.subTest(input=name),tempfile.TemporaryDirectory() as temp:
+                directory=Path(temp)/"inputs";shutil.copytree(DIRECTORY,directory)
+                path=directory/name
+                path.unlink()
+                os.mkfifo(path)
+                result=self.run_cli(directory)
+                self.assertNotEqual(result.returncode,0)
+                self.assertEqual(result.stdout,"")
+                self.assertIn("regular native capture input required: "+name,result.stderr)
 
 class NativePublicationTests(unittest.TestCase):
     """Synthetic publication state/faults; no new native observation is created."""

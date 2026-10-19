@@ -18,6 +18,7 @@ from decimal import Decimal, InvalidOperation
 import hashlib
 import io
 import json
+import math
 from pathlib import Path
 import platform
 import re
@@ -109,6 +110,9 @@ UNIT_COLUMNS = {
     "memory.total [MiB]": "MiB", "clocks.current.sm [MHz]": "MHz",
     "clocks.current.memory [MHz]": "MHz",
 }
+# These columns also feed descriptive float statistics or excluded-row output.
+# Exact-only limit/count/selection comparisons continue to use Decimal.
+FLOAT_COLUMNS = {"power.draw [W]", "utilization.gpu [%]", "memory.used [MiB]"}
 
 
 def unit_violations(rows):
@@ -118,6 +122,7 @@ def unit_violations(rows):
     followed by one space and exactly the unit text the header declares:
     no other unit, no missing unit, no extra text. Row width and duplicate
     header names are checked earlier, on the raw rows, by shape_violations.
+    Columns also used as floats must remain finite after that conversion.
     """
     problems = []
     if not rows:
@@ -131,6 +136,10 @@ def unit_violations(rows):
             if not pattern.fullmatch(row.get(column, "")):
                 problems.append("row %d column %r: %r is not a number followed by ' %s'"
                                 % (number_, column, row.get(column), unit))
+                break
+            if column in FLOAT_COLUMNS and not math.isfinite(number(row[column])):
+                problems.append("row %d column %r cannot be represented as a finite float"
+                                % (number_, column))
                 break
     return problems
 
@@ -194,7 +203,8 @@ def strict_equal(actual, recorded):
     """Equality that never lets a boolean stand in for a number (1 == True in Python).
 
     Lists and dicts are compared element by element; 1 and 1.0 still match, a
-    string never matches a number.
+    string never matches a number. Numeric comparison normalizes the actual
+    float without rounding an exact parsed recorded number to binary64.
     """
     if isinstance(actual, bool) != isinstance(recorded, bool):
         return False
@@ -202,6 +212,9 @@ def strict_equal(actual, recorded):
         return actual.keys() == recorded.keys() and all(strict_equal(actual[k], recorded[k]) for k in actual)
     if isinstance(actual, (list, tuple)) and isinstance(recorded, (list, tuple)):
         return len(actual) == len(recorded) and all(strict_equal(a, r) for a, r in zip(actual, recorded))
+    if isinstance(actual, (int, float, Decimal)) and not isinstance(actual, bool):
+        actual_number = exact(actual)
+        return actual_number is not None and actual_number == exact(recorded)
     return actual == recorded
 
 
@@ -249,6 +262,9 @@ class Results:
                                   "recomputed %r, record %r" % (actual, recorded)))
 
     def close(self, name, actual, recorded):
+        if not math.isfinite(actual):
+            self.check(name, lambda: (False, "arithmetic result is not finite: %r" % actual))
+            return  # Keep the failed result out of strict JSON output.
         self.values[name] = actual
         self.check(name, lambda: (not isinstance(recorded, bool) and not isinstance(actual, bool)
                                   and abs(actual - recorded) <= TOLERANCE_W + 1e-12,
@@ -347,7 +363,7 @@ def check_record(record, captures, exact_record=None):
     res.count("idle.excluded_rows_listed", len(excluded["rows"]), exact_idle["excluded_rows"]["count"])
     actual_rows = [{"utilization_pct": number(r["utilization.gpu [%]"]), "memory_used_mib": number(r["memory.used [MiB]"]),
                     "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])} for r in later]
-    res.equal("idle.excluded_rows", actual_rows, excluded["rows"])
+    res.equal("idle.excluded_rows", actual_rows, exact_idle["excluded_rows"]["rows"])
 
     # High-utilization series.
     limit = exact(exact_card["power_limit_w"])  # exact Decimal; None if not a number

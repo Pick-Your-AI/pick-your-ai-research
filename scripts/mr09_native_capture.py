@@ -16,7 +16,20 @@ from mr09_total_memory_setup import managed_snapshot_interval, strict_json, requ
 
 DIRECTORY=Path("research/market/measurements/native-qualification-2026-10-18")
 
-def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def read_regular(path):
+    # Inspect FIFOs without waiting for a writer, then admit the opened file
+    # descriptor so replacing the path cannot bypass the regular-file check.
+    flags=os.O_RDONLY|getattr(os,"O_BINARY",0)|getattr(os,"O_NONBLOCK",0)
+    descriptor=os.open(path,flags)
+    try:
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise ValueError("regular native capture input required: "+path.name)
+        with os.fdopen(descriptor,"rb",closefd=False) as stream:
+            return stream.read()
+    finally:
+        os.close(descriptor)
+
+def sha(path): return hashlib.sha256(read_regular(path)).hexdigest()
 
 def loads(text):
     def unique(pairs):
@@ -31,6 +44,9 @@ def loads(text):
         if not math.isfinite(number): raise ValueError("overflowing native JSON number")
         return number
     return json.loads(text,object_pairs_hook=unique,parse_constant=invalid,parse_float=finite)
+
+def read_json(path):
+    return loads(read_regular(path).decode("utf-8"))
 
 def validate_capture(record):
     if (type(record.get("exit_code")) is not int or record["exit_code"]!=0
@@ -159,10 +175,10 @@ def validate_preflight(screen,record,hardware):
 
 
 def summarize(directory):
-    build=strict_json(directory/"build-loader-v2.json")
+    build=read_json(directory/"build-loader-v2.json")
     observations=[];cohort=None;previous_finished=None
     for rep in (1,2,3):
-        path=directory/f"init-r{rep}.json";record=strict_json(path)
+        path=directory/f"init-r{rep}.json";record=read_json(path)
         require_bindings(record, {
             "argv":["$NATIVE_INIT","$RUNTIME_DIR","2136809472","$GGUF_FILE"],
             "harness_sha256":"07c2f8587b58a6dbe557d7e7f395f765ec03c18122386f6456333338f832f09e",
@@ -178,7 +194,7 @@ def summarize(directory):
         if sha(directory/"runtime-artifacts.json")!=record["runtime_artifact_ledger_sha256"]: raise ValueError("runtime artifact drift")
         capture_result=validate_capture(record)
         hardware=driver_readback(record["driver_csv"])
-        observed,finished=validate_preflight(strict_json(directory/record["preflight_file"]),record,hardware)
+        observed,finished=validate_preflight(read_json(directory/record["preflight_file"]),record,hardware)
         # Each recorded screen belongs to a fresh serial process; a later
         # repetition cannot reuse a screen from an unfinished earlier trial.
         if previous_finished is not None and observed<=previous_finished:
