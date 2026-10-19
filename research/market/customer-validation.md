@@ -234,6 +234,61 @@ The five-unit analysis minima are independent of D-12's unchanged three-person p
 
 **Remaining operational decisions:** D-01, D-02, D-05 to D-10 and D-16 still need their actual values and approval. These selections supply no controller/contact, permitted channel, jurisdiction/lawful basis, private store/access, retention execution, incentive, interviewer, consent or participant. No contact or fieldwork is approved and all four original operational/empirical issue criteria remain incomplete.
 
+## Additional instrument decision D-05 — 2026-10-19
+
+The coordinating engineer selects **unpaid participation for this remote pilot** under the user's delegated project authority, for independent review and ordinary research delivery. This is a deliberate prospective compensation design, not an inference that an unknown budget or research cost is zero. It supersedes only the earlier D-05 pending statements and optional incentive placeholders; the original alternatives remain historical options. The eight earlier instrument choices, Q-1 to Q-5, complete hypothetical cards and source/receiving records retain their exact scope.
+
+| D-05 field | Selected design value |
+| --- | --- |
+| Incentive type | None: no cash, gift card, donation, reimbursement, product access, discount, credit, prize or other participation reward. No travel, purchase or paid account is required by this remote instrument. |
+| Amount | Zero offered participant compensation, selected explicitly for this pilot. This is not a project budget, an observed expense total or a claim that participation has no time or connection cost. |
+| Currency | Not applicable because the instrument offers no payment; no currency or exchange-rate assumption is introduced. |
+| Skipping, stopping or withdrawing | No reward is conditioned on answering, completing an interview, retaining data or giving a favorable response. No project charge, repayment or reward forfeiture is imposed for skipping, stopping or withdrawing. This prospective choice does not cancel any separate existing promise. |
+
+Use only recruitment arrangements compatible with unpaid participation. A panel or channel whose actual terms require participant compensation cannot be used with this instrument; the paid-panel option described in section 1 is therefore not selected by D-05. D-02 still needs actual permitted channels and their current requirements. If a different compensation arrangement is needed, record and review a dated D-05 change before offering it; do not improvise rewards during recruitment or after seeing answers. This section creates no account, spending authorization, participant agreement or channel permission.
+
+For the eventual reviewed outreach and consent materials, replace the incentive placeholder with this disclosure:
+
+> Participation is voluntary and unpaid. The project provides no payment, gift, reimbursement, donation or product-access reward for taking part. You may skip questions, stop, or withdraw under the consent terms without a project charge or losing a reward.
+
+Keep the existing 45-minute estimate visible and make the unpaid terms clear before a person chooses to take part. Remove the conditional incentive-payment promise and payment-purpose wording from the eventual consent draft; collect no incentive-payment administration details, such as bank, tax or donation-beneficiary information, for this unpaid instrument. Actual scheduling, consent and withdrawal data still require D-06 to D-10. The participant-facing drafts remain unapproved and must not be sent with placeholders or conflicting terms. The unpaid interview is separate from P1/F1's hypothetical product offers; past behavior and spend still precede those cards, with no researcher-supplied product price.
+
+**Reasoned recruitment limitation:** an unpaid 45-minute pilot may favor enthusiasts and people with time to volunteer, and may make the payer, approver and segment coverage harder to attain. This is an anticipated selection risk, not an observed recruitment result. Preserve every quota and valid-unit minimum; report deficits and unknowns rather than relaxing coverage after seeing responses. Participation without compensation is neither evidence of willingness to pay for a product nor a price of zero. D-12's aggregate-only disclosure and all withdrawal/retention constraints remain unchanged.
+
+**Remaining operational decisions:** D-01, D-02, D-06 to D-10 and D-16 still need their actual values and review. Selecting D-05 supplies no controller/contact, jurisdiction or lawful basis, private store/access arrangement, retention execution, interviewer, participant or consent. It authorizes no contact or fieldwork; all four original operational/empirical issue criteria remain incomplete.
+
+## Additional instrument decisions D-08 and D-10 — 2026-10-19
+
+The coordinating engineer selects the following audience and retention design under the user's delegated project authority, for independent review and ordinary research delivery. These choices supersede only earlier pending D-08/D-10 statements and the section 4 retention proposals. The nine earlier instrument decisions, including D-05's unpaid remote pilot, remain unchanged. This is a selected protocol design, not an assertion that a controller, storage service, participant, lawful basis, deletion capability or recruitment permission exists.
+
+### D-08: participant audience
+
+Limit this first pilot to people whose usual residence and physical location at the interview are both within the **fifty United States or the District of Columbia**. Territories, EU/UK locations and other countries are outside this pilot's selected audience. Use a direct Yes / No / Not sure self-attestation for the residence-and-location condition; a negative or uncertain response does not qualify. Do not infer location from citizenship, language, currency, IP address or an employer, and collect no identity document or precise location to establish this instrument rule. D-17's separate at-least-18 self-attestation remains unchanged.
+
+This is a practical first-cohort boundary alongside the existing hypothetical USD/workspace/month card. It does not show that every eligible person buys in USD, understands that card or has purchasing authority; all D-15 eligibility and comprehension gates still apply. It excludes other markets from the sample and supports no claim about their demand or the representativeness of this US sample. The ten-segment, role and no-recent-decision quotas and four-channel feasibility constraint remain unchanged; no available participant or approved channel is inferred.
+
+Country-level audience selection is not a legal-capacity or applicable-law determination. D-06/D-07 must still establish the actual controller, contact and applicable participant/location requirements, and D-09 must resolve the real platform and processing arrangements. Before contact, the reviewed operational screener must establish whatever additional jurisdiction information those decisions actually require while minimizing collected detail. A participant cannot be admitted merely because the country-level condition is met. No jurisdiction-specific rights wording, lawful basis or channel permission is selected here.
+
+### D-10: finite private-data deadlines
+
+Replace the issue-closure-dependent section 4 dates with the finite maxima below. Record each actual deadline in UTC in the approved private system when the first relevant record is collected; later messages, repeated sessions, copying, analysis or an open issue do not reset its original clock. A calendar-day interval ends at the same UTC time of day after the stated number of dates. These are operational design maxima, not required legal retention periods; delete sooner when the purpose ends or an applicable approved requirement calls for it.
+
+| Material | Selected latest deletion time |
+| --- | --- |
+| Opt-in contact and screener records when no interview starts | Thirty calendar days after first collection, or seven calendar days after an attributable decline, ineligibility determination or withdrawal, whichever is earlier. An unanswered invitation or scheduled session does not extend the deadline. |
+| Interview participant's contact/identity linkage, consent record, private notes, codes and participant-linked analysis | Ninety calendar days after the first interview starts, capped at one hundred and twenty calendar days after the first opt-in record was collected, whichever is earlier. Partial or repeated sessions share the first clock. Keep only the minimum linkage needed for the approved consent/withdrawal process; erase scheduling copies when scheduling ends. |
+| An attributable withdrawal under the eventually reviewed withdrawal method | Stop further use immediately and delete the participant's private contribution and linkage within seven calendar days, or the original applicable deadline, whichever is earlier. The operational package must resolve the actual request channel and identity checks before contact; no verification process is assumed to exist here. |
+| Researcher recordings, automated transcripts and incentive-payment administration records | Do not create them under the unchanged D-11/D-05 choices. Discovery of an unintended copy is a handling failure to resolve under the actual operational process, not a new retention allowance. |
+| Public output | Retain only the D-12-reviewed aggregate release at its actual historical scope. The public Git record may persist; there is no promise to erase copies already obtained by others. No private row, P-ID-linked account or quotation becomes public through expiry. |
+
+The same private-data maximum covers every controlled copy: live storage, local exports, caches, version history, trash and provider backups. Before any collection, D-09 must identify the actual stores and access list and demonstrate how their deletion or expiry controls can meet these deadlines, including backups. Encryption, an access restriction or deletion from a visible folder is not by itself verification that every copy has expired. A service with an unknown or incompatible backup/retention policy cannot be selected without a reviewed protocol change before use. This section executes no deletion and certifies no existing platform.
+
+Before deleting a withdrawn or expired contribution, remove it from any continuing private analysis and recompute the affected participant/decision/buying-unit counts, numerators and denominators from still-eligible evidence under D-04/D-13. Do not convert it to zero, a negative answer or an additional independent unit. A previously cleared aggregate release retains its dated cutoff and disclosure scope; it does not authorize a new participant-level analysis after the supporting private rows expire. Reassess identifying combinations and related totals before any later public release. The older consent/outreach blocks remain unapproved historical drafts; the eventual participant-facing version must state the actual dates and the retained-public-aggregate limit before consent.
+
+Record completion or failure in a nonidentifying process receipt describing the policy version, copy classes checked and actual deletion/expiry outcome, with disclosure review before any public use. Keep no participant identifiers, content, recoverable linkage or per-person hashes in a longer-lived receipt to evade these limits. A missed deletion target is a recorded failure: stop new collection and resolve the actual copies and operational plan; do not silently extend retention or claim deletion. Any genuinely applicable conflicting requirement must be resolved in the operational review before collection, rather than inferred or waived by this instrument.
+
+**Remaining operational decisions:** D-01, D-02, D-06, D-07, D-09 and D-16 still need their actual values and review. D-08 selects an audience and D-10 selects a schedule; neither supplies a controller/contact, lawful basis, allowed channel, actual store/access arrangement, interviewer, consent or participant. No contact, recruitment, interview or willingness-to-pay execution is approved. All four original operational/empirical issue criteria remain incomplete.
+
 ## 8. Decisions required from coordinator before any contact
 
 Project engineering decisions can be recorded under the user's delegated authority; no reply from an absent assignee is created or required merely to review this instrument. The operational package still needs actual controller/contact details, storage/access arrangements, applicable channel/participant permissions and a recorded recruitment/consent decision. A technical receiving review cannot invent those facts or a participant's consent. The checked rows below are selected only at the scope of the dated instrument decisions above. Every unchecked row still needs its real value and scope; partial design selection does not approve the package.
@@ -242,12 +297,12 @@ Project engineering decisions can be recorded under the user's delegated authori
 - [ ] D-02 Which recruitment channels are allowed (section 1); Reddit stays blocked until its rules are read and recorded.
 - [x] D-03 Recall window N months for screener question 2.
 - [x] D-04 Quotas Q-1 to Q-5 and the participant/decision/buyer denominators (approve or replace).
-- [ ] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
+- [x] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
 - [ ] D-06 Controller identity and the contact address in consent and outreach.
 - [ ] D-07 Lawful basis (consent, legitimate interests with a documented assessment, or other) and the rights text.
-- [ ] D-08 Which participant jurisdictions are in scope (EU, UK, US, other).
+- [x] D-08 Which participant jurisdictions are in scope (EU, UK, US, other).
 - [ ] D-09 Private storage location, encryption, and the named access list.
-- [ ] D-10 Retention and deletion deadlines (approve or replace the section 4 proposals).
+- [x] D-10 Retention and deletion deadlines (approve or replace the section 4 proposals).
 - [x] D-11 Whether audio and/or video recording is offered at all.
 - [x] D-12 Minimum reported cell size (proposal: 3) and review of identifying combinations/quotes.
 - [x] D-13 Values, denominators and minimum valid response counts for pilot flags T-1 to T-5, set before the first interview.
@@ -265,7 +320,7 @@ Project engineering decisions can be recorded under the user's delegated authori
 | Capture current alternatives and recent decisions | Not started; instrument in #52 guide |
 | Test willingness to pay without leading questions | Not started; module proposed |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis | Met for this package: no demand conclusion is drawn |
-| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; eight bounded instrument decisions are selected above, and every remaining operational value/permission is unresolved |
+| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; eleven bounded instrument decisions are selected above, and every remaining operational value/permission is unresolved |
 | Repository checks pass; reviewer accepts the evidence before Done | Technical instrument review accepted at prepared `1a1324d`; final amendment checks and canonical delivery remain required, with no fieldwork acceptance |
 
 ## Result
