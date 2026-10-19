@@ -298,6 +298,25 @@ def edit_cell(name, column, new, data_row=1):
     return mutate
 
 
+def extra_cell(name):
+    """Append an unheaded cell to one data row."""
+    def mutate(record, captures):
+        lines = captures[name].decode().split("\n")
+        lines[1] += ", 1"
+        captures[name] = "\n".join(lines).encode()
+        return record, captures
+    return mutate
+
+
+def duplicate_header(name):
+    """Give the second power.draw column's slot the name of the first (same width)."""
+    def mutate(record, captures):
+        text = captures[name].decode()
+        captures[name] = text.replace("power.limit [W]", "power.draw [W]", 1).encode()
+        return record, captures
+    return mutate
+
+
 def drop_first(rows):
     return rows[1:]
 
@@ -318,6 +337,8 @@ CORRUPTING_CASES = {
     IDLE_FILE + ".no_gpu_uuid_string": edit_capture(IDLE_FILE, "REDACTED", "GPU-SYNTHETIC-ID"),
     A_FILE + ".uuid_column_redacted": edit_capture(A_FILE, "REDACTED", "NOT-REDACTED"),
     IDLE_FILE + ".uuid_column_redacted": edit_capture(IDLE_FILE, "REDACTED", "NOT-REDACTED"),
+    A_FILE + ".csv_shape": extra_cell(A_FILE),
+    IDLE_FILE + ".csv_shape": duplicate_header(IDLE_FILE),
     A_FILE + ".cell_units": edit_cell(A_FILE, "power.draw [W]", "2.00 kW"),
     IDLE_FILE + ".cell_units": edit_cell(IDLE_FILE, "memory.used [MiB]", "10 GiB"),
     A_FILE + ".device_identities": edit_capture(A_FILE, "FAKE:01.0", "FAKE:09.0"),
@@ -410,6 +431,147 @@ class EveryCheckHasACorruptingCase(SyntheticBase):
 
     def test_uncorrupted_fixture_fails_nothing(self):
         self.assertEqual(failing(self.record, self.captures), set())
+
+
+class ExactCountsAndShape(SyntheticBase):
+    """Slice 7: exact above-limit count, exact recorded counts, strict CSV shape."""
+
+    def run_texts(self, record_text=None, captures=None):
+        captures = captures or self.captures
+        with tempfile.TemporaryDirectory() as tmp:
+            for name, data in captures.items():
+                (Path(tmp) / name).write_bytes(data)
+            record = Path(tmp) / "record.json"
+            record.write_text(record_text if record_text is not None else SYNTHETIC_RECORD.read_text())
+            result = CHECKER.run(tmp, record, pins=synthetic_pins(captures))
+        return {c["check"] for c in result["checks"] if not c["passed"]}
+
+    # --- G: above_limit is counted on exact decimals --------------------
+    def limit_captures(self, draws):
+        """Series SYN_A_index_1 with limit 5.20 W and the given selected draws."""
+        text = self.captures[A_FILE].decode()
+        lines = text.split("\n")
+        header = [c.strip() for c in lines[0].split(",")]
+        k = 0
+        for n, line in enumerate(lines[1:], 1):
+            cells = line.split(",")
+            if len(cells) == len(header):
+                cells[header.index("power.limit [W]")] = " 5.20 W"
+                if cells[1].strip() == "1" and k < len(draws):
+                    cells[header.index("power.draw [W]")] = " " + draws[k] + " W"; k += 1
+                lines[n] = ",".join(cells)
+        captures = dict(self.captures); captures[A_FILE] = "\n".join(lines).encode()
+        return captures
+
+    def limit_record(self, count, limit="5.20"):
+        record = SYNTHETIC_RECORD.read_text().replace('"power_limit_w": 5.0', '"power_limit_w": %s' % limit, 1)
+        data = json.loads(record)
+        want = data["load"]["series"]["SYN_A_index_1"]["samples_above_limit"]
+        key = '"SYN_A_index_1": {'
+        i = record.index(key); j = record.index('"samples_above_limit": %d' % want, i)
+        return record[:j] + '"samples_above_limit": %s' % count + record[j + len('"samples_above_limit": %d' % want):]
+
+    def failed_ignoring_stats(self, text, captures):
+        return {f for f in self.run_texts(text, captures)
+                if f.endswith("SYN_A_index_1.above_limit")}
+
+    def test_strict_count_is_two_not_one(self):
+        draws = ["3.00", "5.200000000000000001", "7.00"]
+        captures = self.limit_captures(draws)
+        self.assertEqual(self.failed_ignoring_stats(self.limit_record(2), captures), set())
+        self.assertEqual(self.failed_ignoring_stats(self.limit_record(1), captures), {"series.SYN_A_index_1.above_limit"})
+
+    def test_at_limit_and_just_below_are_not_counted(self):
+        for draws in (["3.00", "5.20", "7.00"], ["3.00", "5.199999999999999999", "7.00"]):
+            with self.subTest(draws=draws):
+                captures = self.limit_captures(draws)
+                self.assertEqual(self.failed_ignoring_stats(self.limit_record(1), captures), set())
+                self.assertEqual(self.failed_ignoring_stats(self.limit_record(2), captures), {"series.SYN_A_index_1.above_limit"})
+
+    def test_non_number_limit_fails_the_count_cleanly(self):
+        record = self.mutated_record()
+        record["card"]["power_limit_w"] = True
+        self.assertIn("series.SYN_A_index_1.above_limit", failing(record, self.captures))
+
+    # --- H: recorded counts keep their exact written value ---------------
+    def count_text(self, key, written):
+        text = SYNTHETIC_RECORD.read_text()
+        needle = '"%s": ' % key
+        i = text.index(needle)
+        j = i + len(needle)
+        end = j
+        while text[end] in "0123456789.": end += 1
+        return text[:j] + written + text[end:]
+
+    def test_non_integral_counts_beyond_binary64_fail_end_to_end(self):
+        # Each written value is the TRUE count plus 1e-18: binary64 rounds it back
+        # to the true count, so a float comparison accepts it.
+        for written in ("3.000000000000000001", "2.999999999999999999"):
+            self.assertEqual(float(written), 3.0)
+        cases = (("samples_total", "3.000000000000000001", "series.SYN_A_index_0.total"),
+                 ("samples_used", "2.000000000000000001", "series.SYN_A_index_0.samples_used"),
+                 ("samples_excluded_below_80pct", "1.000000000000000001", "series.SYN_A_index_0.excluded_count"),
+                 ("samples", "3.000000000000000001", "idle.samples"),
+                 ("count", "2.000000000000000001", "idle.excluded_count"))
+        for key, written, check in cases:
+            with self.subTest(key=key):
+                text = self.count_text(key, written)
+                self.assertNotEqual(text, SYNTHETIC_RECORD.read_text())
+                self.assertIn(check, self.run_texts(text))
+        with self.subTest(key="samples_above_limit"):
+            # series SYN_A_index_1 has the true count 1
+            text = self.limit_record("1.000000000000000001", limit="5.0")
+            self.assertIn("series.SYN_A_index_1.above_limit", self.run_texts(text))
+
+    def test_float_and_int_spellings_of_the_same_count_stay_equal(self):
+        for written in ("3", "3.0", "3.00"):
+            with self.subTest(written=written):
+                self.assertEqual(self.run_texts(self.count_text("samples_total", written)), set())
+
+    def test_boolean_and_string_counts_fail(self):
+        for bad in (True, "3"):
+            with self.subTest(bad=bad):
+                record = self.mutated_record()
+                record["load"]["series"]["SYN_A_index_0"]["samples_total"] = bad
+                self.assertIn("series.SYN_A_index_0.total", failing(record, self.captures))
+
+    def test_count_value_unit(self):
+        D = CHECKER.Decimal
+        self.assertEqual([CHECKER.count_value(v) for v in (2, 2.0, D("2"), D("2.0"))], [2, 2, 2, 2])
+        for bad in (True, False, 2.5, D("2.000000000000000001"), float("nan"), float("inf"), "2", None, D("NaN")):
+            with self.subTest(bad=bad):
+                self.assertIsNone(CHECKER.count_value(bad))
+
+    # --- I: CSV shape before the lossy zip -------------------------------
+    def test_extra_unheaded_cell_fails_the_run(self):
+        captures = dict(self.captures); text = captures[A_FILE].decode().split("\n")
+        text[2] += ", 99"; captures[A_FILE] = "\n".join(text).encode()
+        self.assertEqual(failing(self.record, captures), {A_FILE + ".csv_shape"})
+        self.assertIn(A_FILE + ".csv_shape", self.run_texts(None, captures))
+
+    def test_duplicate_header_fails_the_run(self):
+        captures = dict(self.captures)
+        captures[A_FILE] = captures[A_FILE].decode().replace("power.limit [W]", "power.draw [W]", 1).encode()
+        self.assertEqual(failing(self.record, captures), {A_FILE + ".csv_shape"})
+        self.assertIn(A_FILE + ".csv_shape", self.run_texts(None, captures))
+
+    def test_short_and_empty_rows_fail_without_a_crash(self):
+        lines = self.captures[A_FILE].decode().split("\n")
+        for label, row in (("short", ",".join(lines[1].split(",")[:5])), ("blank-cells", ",,,")):
+            with self.subTest(case=label):
+                mutated = list(lines); mutated[1] = row
+                captures = dict(self.captures); captures[A_FILE] = "\n".join(mutated).encode()
+                self.assertEqual(failing(self.record, captures), {A_FILE + ".csv_shape"})
+
+    def test_shape_failure_stops_before_any_value_is_used(self):
+        captures = dict(self.captures); text = captures[A_FILE].decode().split("\n")
+        text[1] += ", 1"; captures[A_FILE] = "\n".join(text).encode()
+        result = CHECKER.check_record(self.record, captures)
+        self.assertEqual({c["check"] for c in result.checks}, {A_FILE + ".csv_shape", IDLE_FILE + ".csv_shape"})
+
+    def test_clean_fixture_has_no_shape_problem(self):
+        for name in SYNTHETIC_FILES:
+            self.assertEqual(CHECKER.shape_violations(self.captures[name]), [])
 
 
 class ExactNumbers(SyntheticBase):
@@ -549,7 +711,7 @@ class UnitsAreEnforced(SyntheticBase):
         lines = self.captures[A_FILE].decode().split("\n")
         lines[1] = ",".join(lines[1].split(",")[:10])
         captures = dict(self.captures, **{A_FILE: "\n".join(lines).encode()})
-        self.assertEqual(failing(self.record, captures), {A_FILE + ".cell_units"})
+        self.assertEqual(failing(self.record, captures), {A_FILE + ".csv_shape"})
 
     def test_untouched_fixture_has_no_unit_problem(self):
         for name in SYNTHETIC_FILES:

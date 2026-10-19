@@ -76,6 +76,26 @@ def parse_csv(data):
     return [dict(zip(header, [cell.strip() for cell in row])) for row in reader]
 
 
+def shape_violations(data):
+    """Problems in the CSV's own shape, found on the raw rows before any mapping.
+
+    parse_csv maps cells to headers with zip, which silently drops extra
+    unheaded cells and lets a repeated header name overwrite an earlier column.
+    So: header names must be unique and every row must have exactly as many
+    cells as the header.
+    """
+    reader = csv.reader(io.StringIO(data.decode("utf-8"), newline=""))
+    header = [cell.strip() for cell in next(reader, [])]
+    problems = []
+    repeated = sorted({h for h in header if header.count(h) > 1})
+    if repeated:
+        problems.append("duplicate header names: %s" % ", ".join(repr(h) for h in repeated))
+    for number_, row in enumerate(reader, 1):
+        if len(row) != len(header):
+            problems.append("row %d has %d cells, header has %d" % (number_, len(row), len(header)))
+    return problems
+
+
 def column_unit(column):
     """The unit text a header such as 'power.draw [W]' declares, or None."""
     match = re.search(r" \[([^\]]+)\]$", column)
@@ -96,8 +116,8 @@ def unit_violations(rows):
 
     Every unit column must exist, and every cell in it must be one number
     followed by one space and exactly the unit text the header declares:
-    no other unit, no missing unit, no extra text. Rows must be as wide as the
-    header (parse_csv keeps only cells that have a header).
+    no other unit, no missing unit, no extra text. Row width and duplicate
+    header names are checked earlier, on the raw rows, by shape_violations.
     """
     problems = []
     if not rows:
@@ -185,6 +205,19 @@ def strict_equal(actual, recorded):
     return actual == recorded
 
 
+def count_value(recorded):
+    """The integer a recorded count stands for, or None if it is not an integer value."""
+    if isinstance(recorded, bool):
+        return None
+    if isinstance(recorded, int):
+        return recorded
+    if isinstance(recorded, float):
+        return int(recorded) if recorded - recorded == 0 and recorded == int(recorded) else None
+    if isinstance(recorded, Decimal):
+        return int(recorded) if recorded.is_finite() and recorded == recorded.to_integral_value() else None
+    return None
+
+
 class Results:
     """Collect named checks; an unexpected error is a failed check, not a crash."""
 
@@ -203,6 +236,17 @@ class Results:
     def equal(self, name, actual, recorded):
         self.values[name] = actual
         self.check(name, lambda: (strict_equal(actual, recorded), "recomputed %r, record %r" % (actual, recorded)))
+
+    def count(self, name, actual, recorded):
+        """A recomputed integer count against a recorded count, exactly.
+
+        The recorded value must be an actual integer value: 2 and 2.0 are the
+        same count, 2.000000000000000001 and True are not counts at all.
+        """
+        self.values[name] = actual
+        wanted = count_value(recorded)
+        self.check(name, lambda: (wanted is not None and actual == wanted,
+                                  "recomputed %r, record %r" % (actual, recorded)))
 
     def close(self, name, actual, recorded):
         self.values[name] = actual
@@ -224,7 +268,13 @@ def check_record(record, captures, exact_record=None):
     exact_record = record if exact_record is None else exact_record
     exact_card, exact_idle = exact_record["card"], exact_record["idle"]
 
-    # Units and column shape are checked before any value is read.
+    # CSV shape, then units, are checked before any value is read.
+    shape_problems = {name: shape_violations(data) for name, data in captures.items()}
+    for name in captures:
+        res.check(name + ".csv_shape",
+                  lambda p=shape_problems[name]: (not p, "; ".join(p[:3]) + (" ..." if len(p) > 3 else "")))
+    if any(shape_problems.values()):
+        return res  # the mapping to columns cannot be trusted
     unit_problems = {name: unit_violations(rows[name]) for name in captures}
     for name in captures:
         res.check(name + ".cell_units",
@@ -271,7 +321,7 @@ def check_record(record, captures, exact_record=None):
         return res  # nothing to recompute; the failed check above is the result
     device = [r for r in idle_rows if r["index"] == idx]
     res.equal("idle.device_pci", sorted({r["pci.bus_id"] for r in device}), [pci])
-    res.equal("idle.samples", len(run), idle["samples"])
+    res.count("idle.samples", len(run), exact_idle["samples"])
     res.equal("idle.predicate_pstate", sorted({r["pstate"] for r in run}), [idle["pstate"]])
     res.check("idle.predicate_memory",
               lambda: ({cell_decimal(r["memory.used [MiB]"]) for r in run} == {exact(exact_idle["memory_used_mib"])},
@@ -293,25 +343,26 @@ def check_record(record, captures, exact_record=None):
                                         "record %r, file clock text %r" % (reported[k], r["timestamp"])))
     later = device[len(run):]
     excluded = idle["excluded_rows"]
-    res.equal("idle.excluded_count", len(later), excluded["count"])
-    res.equal("idle.excluded_rows_listed", len(excluded["rows"]), excluded["count"])
+    res.count("idle.excluded_count", len(later), exact_idle["excluded_rows"]["count"])
+    res.count("idle.excluded_rows_listed", len(excluded["rows"]), exact_idle["excluded_rows"]["count"])
     actual_rows = [{"utilization_pct": number(r["utilization.gpu [%]"]), "memory_used_mib": number(r["memory.used [MiB]"]),
                     "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])} for r in later]
     res.equal("idle.excluded_rows", actual_rows, excluded["rows"])
 
     # High-utilization series.
-    limit = card["power_limit_w"]  # float use only: counting samples above it
+    limit = exact(exact_card["power_limit_w"])  # exact Decimal; None if not a number
     series_rows, means, maxima = {}, [], []
     for name, rec in record["load"]["series"].items():
+        exact_rec = exact_record["load"]["series"][name]
         d_rows = [r for r in rows[rec["source_file"]] if r["index"] == rec["device"]["index"]]
         series_rows[name] = d_rows
         res.equal("series.%s.device_pci" % name, sorted({r["pci.bus_id"] for r in d_rows}), [rec["device"]["pci_bus_id"]])
         qualifying = [r for r in d_rows if number(r["utilization.gpu [%]"]) >= LOAD_UTILIZATION_PCT]
         below = [r for r in d_rows if number(r["utilization.gpu [%]"]) < LOAD_UTILIZATION_PCT]
         p = [number(r["power.draw [W]"]) for r in qualifying]
-        res.equal("series.%s.total" % name, len(d_rows), rec["samples_total"])
-        res.equal("series.%s.excluded_count" % name, len(below), rec["samples_excluded_below_80pct"])
-        res.equal("series.%s.samples_used" % name, len(qualifying), rec["samples_used"])
+        res.count("series.%s.total" % name, len(d_rows), exact_rec["samples_total"])
+        res.count("series.%s.excluded_count" % name, len(below), exact_rec["samples_excluded_below_80pct"])
+        res.count("series.%s.samples_used" % name, len(qualifying), exact_rec["samples_used"])
         for which, row, key in (("first", d_rows[0], "first_sample_reported_utc"), ("last", d_rows[-1], "last_sample_reported_utc")):
             res.check("series.%s.boundary_%s" % (name, which),
                       lambda r=row, k=key, rc=rec: (clock(rc[k], REPORTED_TIME_FORMAT) == clock(r["timestamp"], CSV_TIME_FORMAT),
@@ -319,9 +370,9 @@ def check_record(record, captures, exact_record=None):
         res.close("series.%s.min" % name, min(p), rec["min_w"])
         res.close("series.%s.mean" % name, statistics.mean(p), rec["mean_w"])
         res.close("series.%s.max" % name, max(p), rec["max_w"])
-        above = (sum(x > limit for x in p)
-                 if isinstance(limit, (int, float)) and not isinstance(limit, bool) else None)
-        res.equal("series.%s.above_limit" % name, above, rec["samples_above_limit"])
+        above = (sum(cell_decimal(r["power.draw [W]"]) > limit for r in qualifying)
+                 if limit is not None else None)
+        res.count("series.%s.above_limit" % name, above, exact_rec["samples_above_limit"])
         means.append(statistics.mean(p))
         maxima.append(max(p))
     all_rows = [r for rs in series_rows.values() for r in rs]
