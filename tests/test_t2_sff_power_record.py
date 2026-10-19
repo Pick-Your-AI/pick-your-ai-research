@@ -676,6 +676,46 @@ class ExactNumbers(SyntheticBase):
             result = CHECKER.run(tmp, record, pins=pins)
         return {c["check"] for c in result["checks"] if not c["passed"]}
 
+    def excluded_number_text(self, row_index, field, written, record=None):
+        record = deepcopy(self.record if record is None else record)
+        marker = "SYNTHETIC_EXCLUDED_NUMBER_TOKEN"
+        record["idle"]["excluded_rows"]["rows"][row_index][field] = marker
+        text = json.dumps(record)
+        self.assertEqual(text.count(json.dumps(marker)), 1)
+        return text.replace(json.dumps(marker), written, 1)
+
+    def test_every_excluded_number_keeps_its_written_precision(self):
+        for row_index, row in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for field in ("utilization_pct", "memory_used_mib", "power_draw_w"):
+                original = Decimal(str(row[field]))
+                for delta in (Decimal("1e-18"), Decimal("-1e-18")):
+                    changed = original + delta
+                    self.assertNotEqual(changed, original)
+                    self.assertEqual(float(changed), float(original))
+                    for written in (format(changed, "f"), format(changed, "e")):
+                        with self.subTest(row=row_index, field=field, written=written):
+                            text = self.excluded_number_text(row_index, field, written)
+                            self.assertEqual(self.run_record_text(text), {"idle.excluded_rows"})
+
+    def test_equivalent_excluded_number_spellings_remain_equal(self):
+        for row_index, row in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for field in ("utilization_pct", "memory_used_mib", "power_draw_w"):
+                original = Decimal(str(row[field]))
+                for written in (format(original, "f"), format(original, ".6f"), format(original, "e")):
+                    with self.subTest(row=row_index, field=field, written=written):
+                        text = self.excluded_number_text(row_index, field, written)
+                        self.assertEqual(self.run_record_text(text), set())
+        # A fractional value's binary float is not the same Decimal object value;
+        # ordinary equivalent report numbers still need to compare successfully.
+        self.assertNotEqual(4.1, Decimal("4.1"))
+        record = self.mutated_record()
+        record["idle"]["excluded_rows"]["rows"][0]["power_draw_w"] = 4.1
+        captures = self.mutated_captures(IDLE_FILE, ", 4.00 W, 5.00 W,", ", 4.10 W, 5.00 W,")
+        for written in ("4.1", "4.1000", "41e-1"):
+            with self.subTest(fractional_power=written):
+                text = self.excluded_number_text(0, "power_draw_w", written, record)
+                self.assertEqual(self.run_record_text(text, captures), set())
+
     def test_boolean_idle_utilization_is_not_zero(self):
         for bad in (False, True):
             with self.subTest(bad=bad):
