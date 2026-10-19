@@ -1,0 +1,203 @@
+{
+  "record_type": "per_device_power_observations",
+  "classification": "Per-device driver-reported power series for NVIDIA RTX PRO 4000 Blackwell SFF Edition devices at two distinct index/PCI identities in each published capture. Low-activity and high-utilization filters are stated; workload context is contributor-reported and unpinned. No sum, pooled workload, multi-device scaling, specification, TDP, fit or capacity claim.",
+  "status": "contributor_reported_execution",
+  "evidence_disposition": "unverified_contributor_report",
+  "card": {
+    "name": "NVIDIA RTX PRO 4000 Blackwell SFF Edition",
+    "driver": "580.126.09",
+    "vbios": "98.03.AA.00.02",
+    "power_limit_w": 70.0,
+    "power_min_limit_w": 60.0,
+    "power_max_limit_w": 70.0,
+    "power_limit_source": "nvidia-smi power.limit, power.min_limit and power.max_limit columns, identical in every row of both files (driver-reported)",
+    "datasheet_total_board_power_w": 70,
+    "datasheet": {
+      "uri": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/professional-desktop-gpus/rtx-pro-4000-sff/workstation-datasheet-blackwell-rtx-pro-4000-sff-nvidia-us-4016700.pdf",
+      "quote": "Power Consumption Total board power: 70 W",
+      "access_date": "2026-10-19",
+      "evidence_grade": "Primary documentation (vendor specification value; not independently reproduced here)"
+    },
+    "scope": "Common model, driver, VBIOS and power-limit fields reported in both captures; not one physical-card identity. Each series is bound to its source file, device index and PCI address. UUIDs are redacted, so stable physical identity across captures is not independently established."
+  },
+  "idle": {
+    "evidence_grade": "Unverified contributor telemetry; summary statistics are reproducible from the published CSVs. No independently witnessed acquisition or calibrated physical power measurement is established.",
+    "scope": "The IDLE capture device at index 0 and PCI address 00000000:01:00.0, selected by low-activity telemetry. The contributor reports no resident model; utilization, memory and P-state columns alone do not establish that context.",
+    "qualifying_rows_rule": "first consecutive rows of GPU index 0 in the IDLE file with utilization 0 percent, memory used exactly 244 MiB and pstate P5 in every row",
+    "samples": 86,
+    "sampling": "Contributor-reported nvidia-smi --query-gpu CSV sampling request at 1 Hz. The actual timestamp text is retained; acquisition method, exact cadence and timezone are not independently established.",
+    "pstate": "P5",
+    "utilization_pct": 0,
+    "memory_used_mib": 244,
+    "power_draw_w": {
+      "min": 7.15,
+      "mean": 7.76,
+      "median": 7.82,
+      "max": 8.02
+    },
+    "source_file": "raw-capture-IDLE-20261019T000959Z.csv",
+    "excluded_rows": {
+      "count": 4,
+      "rule": "The four later index-0 rows no longer satisfy the selected 0-percent utilization, exactly 244-MiB memory and P5 predicate. Their utilization is 0-2 percent, memory 258-723 MiB and P-state P0; they are excluded from the selected low-activity statistics.",
+      "rows": [
+        {
+          "utilization_pct": 0.0,
+          "memory_used_mib": 420.0,
+          "pstate": "P0",
+          "power_draw_w": 11.15
+        },
+        {
+          "utilization_pct": 2.0,
+          "memory_used_mib": 275.0,
+          "pstate": "P0",
+          "power_draw_w": 16.81
+        },
+        {
+          "utilization_pct": 1.0,
+          "memory_used_mib": 258.0,
+          "pstate": "P0",
+          "power_draw_w": 17.17
+        },
+        {
+          "utilization_pct": 2.0,
+          "memory_used_mib": 723.0,
+          "pstate": "P0",
+          "power_draw_w": 16.85
+        }
+      ],
+      "reported_context": "The contributor describes model loading during these later rows. Those telemetry columns alone do not establish model loading."
+    },
+    "device": {
+      "index": "0",
+      "pci_bus_id": "00000000:01:00.0"
+    },
+    "first_sample_reported_utc": "2026-10-19T00:09:59.353Z",
+    "last_sample_reported_utc": "2026-10-19T00:11:24.691Z"
+  },
+  "load": {
+    "evidence_grade": "Unverified contributor telemetry; summary statistics are reproducible from the published CSVs. No independently witnessed acquisition or calibrated physical power measurement is established.",
+    "wording": "High-utilization per-device telemetry; the contributor describes inference load, which these columns alone do not establish.",
+    "qualifying_rows_rule": "Rows with utilization 80 percent or higher, one series per source file and reported device index/PCI address.",
+    "series": {
+      "A_gpu_index_0": {
+        "samples_total": 90,
+        "samples_used": 71,
+        "samples_excluded_below_80pct": 19,
+        "min_w": 58.1,
+        "mean_w": 69.23,
+        "max_w": 70.84,
+        "samples_above_limit": 27,
+        "source_file": "raw-capture-A-20261018T235741Z.csv",
+        "device": {
+          "index": "0",
+          "pci_bus_id": "00000000:01:00.0"
+        },
+        "first_sample_reported_utc": "2026-10-18T23:57:41.168Z",
+        "last_sample_reported_utc": "2026-10-18T23:59:10.535Z"
+      },
+      "A_gpu_index_1": {
+        "samples_total": 90,
+        "samples_used": 90,
+        "samples_excluded_below_80pct": 0,
+        "min_w": 61.3,
+        "mean_w": 69.9,
+        "max_w": 70.16,
+        "samples_above_limit": 39,
+        "source_file": "raw-capture-A-20261018T235741Z.csv",
+        "device": {
+          "index": "1",
+          "pci_bus_id": "00000000:05:00.0"
+        },
+        "first_sample_reported_utc": "2026-10-18T23:57:41.195Z",
+        "last_sample_reported_utc": "2026-10-18T23:59:10.537Z"
+      },
+      "IDLE_gpu_index_1": {
+        "samples_total": 90,
+        "samples_used": 89,
+        "samples_excluded_below_80pct": 1,
+        "min_w": 66.1,
+        "mean_w": 69.92,
+        "max_w": 71.25,
+        "samples_above_limit": 43,
+        "source_file": "raw-capture-IDLE-20261019T000959Z.csv",
+        "device": {
+          "index": "1",
+          "pci_bus_id": "00000000:05:00.0"
+        },
+        "first_sample_reported_utc": "2026-10-19T00:09:59.362Z",
+        "last_sample_reported_utc": "2026-10-19T00:11:28.715Z"
+      }
+    },
+    "range_of_series_means_w": {
+      "low": 69.23,
+      "high": 69.92,
+      "note": "range of per-series means across the three series; reported as a range, not as one number"
+    },
+    "max_sample_w": 71.25,
+    "above_limit_note": "Individual driver-reported power.draw samples numerically exceed the 70.00 W driver-reported power.limit (maximum reported sample 71.25 W). This comparison does not establish calibrated physical overshoot or a tested board-power limit.",
+    "workload_pinned": false,
+    "model_pinned": false,
+    "engine_pinned": false,
+    "not_a_spec": "The contributor describes inference on a shared host, but workload, model and engine are unpinned and that context is not independently established. These are filtered per-device telemetry statistics, not a specification, TDP, fit or capacity result."
+  },
+  "raw_evidence": {
+    "directory": "not stored in this repository; each file is identified by its evidence manifest id",
+    "files": [
+      {
+        "manifest_id": "power-raw-capture-IDLE",
+        "sha256": "607163c0349a88ff07aa2646eb7f6ed01ef84e5b808d517724b019667a5147f9",
+        "bytes": 38266,
+        "original_sha256": "34406e29239515d3a1001eefaa53a1a4666f85e0ae5d547ad19aee61c9ae15be"
+      },
+      {
+        "manifest_id": "power-raw-capture-A",
+        "sha256": "81302e7ddcd3ba97170b426d0f192952e8fc029c2133fa110dac943d5ee9cf5f",
+        "bytes": 38786,
+        "original_sha256": "0ee9cd7c093426ac78b907f3ee60505345da532c615dd79b70e3ed1d527778f9"
+      }
+    ],
+    "preservation": "The contributor reports replacing only each uuid column value with REDACTED and retaining all other original bytes. The original unredacted captures were not accessed in this review, so that transformation is not independently verified. This correction preserves both already-published CSV files exactly.",
+    "redaction": "Contributor-reported UUID-only redaction; original_sha256 values are declarations for the unavailable unredacted captures, not independently recomputed hashes.",
+    "original_capture_hashes_verified": false,
+    "published_hash_scope": "The two sha256 and byte-length entries identify the published CSV files. Recomputing them does not verify the separately declared original_sha256 values."
+  },
+  "method": "The real-data recomputation is the standalone scripts/check_t2_sff_power_artifacts.py run with --artifact-dir on the published CSV bytes; it checks both file lengths and SHA-256 before any parse, then recomputes statistics (csv module, comparisons within 0.01 W of the reported two-decimal values), row filters and explicit per-series identities. tests/test_t2_sff_power_record.py runs the same checker code on synthetic fixtures and corrupted controls, plus record and pin structure checks, in CI; it does not read the real captures. Original capture hashes, workload attribution, UTC conversion and physical calibration are not verified by those checks.",
+  "not_included": [
+    "engine commit or build",
+    "model artifact pin",
+    "per-process power attribution for the load series",
+    "workload definition for the load series",
+    "repeated runs"
+  ],
+  "interpretation": "The selected low-activity series is IDLE/index 0; the three high-utilization series are A/index 0, A/index 1 and IDLE/index 1. Each has its own reported PCI identity and source file. The range describes per-series means without pooling or summing devices. Model residency and inference/model-loading context remain contributor reports. No tested limit or sizing input follows.",
+  "notes": "Per-device figures and published-file arithmetic only. This unverified contributor report is not an admitted evidence item, creates no ResourceEstimate, is not an eligible #61 empirical pair and does not reopen #10.",
+  "reported_observed_utc": {
+    "idle_window_start": "2026-10-19T00:09:59.353Z",
+    "idle_window_end": "2026-10-19T00:11:24.691Z",
+    "load_series_first_sample": "2026-10-18T23:57:41.168Z",
+    "load_series_last_sample": "2026-10-19T00:11:28.715Z"
+  },
+  "timestamp_provenance": "The contributor labels these times as UTC. Raw CSV timestamp text contains no timezone or offset; that UTC attribution and the acquisition clock are not independently verified. Reported UTC strings are retained separately from the unchanged published timestamp text.",
+  "context_verification": {
+    "workload_verified": false,
+    "model_residency_verified": false,
+    "utc_timezone_verified": false,
+    "physical_power_calibration_verified": false
+  },
+  "observed_device_identifiers": [
+    {
+      "index": "0",
+      "pci_bus_id": "00000000:01:00.0"
+    },
+    {
+      "index": "1",
+      "pci_bus_id": "00000000:05:00.0"
+    }
+  ],
+  "aggregation": {
+    "unit": "per-device series",
+    "pooled_across_devices": false,
+    "summed_across_devices": false,
+    "cross_device_scaling_claim": false
+  }
+}

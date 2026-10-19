@@ -1,0 +1,7 @@
+timestamp, index, name, pci.bus_id, uuid, driver_version, vbios_version, power.draw [W], power.limit [W], power.min_limit [W], power.max_limit [W], utilization.gpu [%], memory.used [MiB], memory.total [MiB], pstate, clocks.current.sm [MHz], clocks.current.memory [MHz]
+2000/01/01 00:10:01.000, 0, SYNTHETIC TEST DEVICE, FAKE:00.0, REDACTED, 0.0.0, 0.0.0, 2.00 W, 5.00 W, 1.00 W, 9.00 W, 100 %, 10 MiB, 100 MiB, P0, 1 MHz, 1 MHz
+2000/01/01 00:10:01.500, 1, SYNTHETIC TEST DEVICE, FAKE:01.0, REDACTED, 0.0.0, 0.0.0, 3.00 W, 5.00 W, 1.00 W, 9.00 W, 100 %, 10 MiB, 100 MiB, P0, 1 MHz, 1 MHz
+2000/01/01 00:10:02.000, 0, SYNTHETIC TEST DEVICE, FAKE:00.0, REDACTED, 0.0.0, 0.0.0, 4.00 W, 5.00 W, 1.00 W, 9.00 W, 100 %, 10 MiB, 100 MiB, P0, 1 MHz, 1 MHz
+2000/01/01 00:10:02.500, 1, SYNTHETIC TEST DEVICE, FAKE:01.0, REDACTED, 0.0.0, 0.0.0, 5.00 W, 5.00 W, 1.00 W, 9.00 W, 100 %, 10 MiB, 100 MiB, P0, 1 MHz, 1 MHz
+2000/01/01 00:10:03.000, 0, SYNTHETIC TEST DEVICE, FAKE:00.0, REDACTED, 0.0.0, 0.0.0, 1.00 W, 5.00 W, 1.00 W, 9.00 W, 10 %, 10 MiB, 100 MiB, P0, 1 MHz, 1 MHz
+2000/01/01 00:10:03.500, 1, SYNTHETIC TEST DEVICE, FAKE:01.0, REDACTED, 0.0.0, 0.0.0, 7.00 W, 5.00 W, 1.00 W, 9.00 W, 100 %, 10 MiB, 100 MiB, P0, 1 MHz, 1 MHz
