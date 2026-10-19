@@ -199,9 +199,16 @@ class MarketValidation(unittest.TestCase):
         for value in ('missing.md', 'missing/../note.md', 'null\x00byte.md'):
             self.assert_invalid_deliverable(value, 'resolvable path')
 
-    def create_test_symlink(self, path, target):
+    def test_deliverable_parent_traversal_requires_real_directories(self):
+        (self.base / 'nested').mkdir()
+        (self.base / 'nested' / 'child.md').write_text('Synthetic file, not a directory.\n')
+        for value in ('missing/../nested/../note.md', 'note.md/../note.md',
+                      'nested/child.md/../../note.md'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
+    def create_test_symlink(self, path, target, *, target_is_directory=False):
         try:
-            path.symlink_to(target)
+            path.symlink_to(target, target_is_directory=target_is_directory)
         except NotImplementedError:
             self.skipTest('symbolic links are unavailable on this platform')
         except OSError as error:
@@ -219,6 +226,14 @@ class MarketValidation(unittest.TestCase):
     def test_deliverable_accepts_internal_symlink_without_rewriting_input(self):
         self.create_test_symlink(self.base / 'local-link.md', 'note.md')
         self.assert_valid_deliverable('local-link.md')
+
+    def test_deliverable_parent_traversal_follows_internal_directory_symlink(self):
+        target = self.base / 'nested' / 'child'
+        target.mkdir(parents=True)
+        self.create_test_symlink(self.base / 'directory-link', target,
+                                 target_is_directory=True)
+        # Resolve the link before '..'; lexical cancellation would leave the root.
+        self.assert_valid_deliverable('directory-link/../../note.md')
 
     def assert_valid_deliverable(self, value):
         data = deepcopy(self.data)
