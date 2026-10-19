@@ -1,12 +1,67 @@
 # MR-09: Validate GPU sizing against pinned runtime measurements
 
-Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-18): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-18. Live Project fields are authoritative; this note does not change them.
+Issue: [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61). Live co-owners (refreshed 2026-10-19): @Mattycodes69 and @appletechie. Status: empirical partial research; evidence and handoff acceptance pending. Last researched: 2026-10-19. Live Project fields are authoritative; this note does not change them.
 
 ## Question
 Where do planning estimates fail under real runtime conditions?
 
 ## Starting evidence
 [technical-feasibility.md](technical-feasibility.md). This note is not a new canonical component catalog or completed competitor-estimator validation.
+
+## Spare-local H1 initialization comparison — 2026-10-19
+
+The user authorized a fresh hardware check and the first comparable local
+measurement using spare capacity only. [Read-only inventory](measurements/local-comparison-2026-10-19/inventory.json)
+and the [fresh preparation screen](measurements/local-comparison-2026-10-19/preparation-preflight.json)
+record one RTX 5070 Ti / driver 610.88, about 10.6 GiB free GPU memory, 32.8 GiB
+available host RAM and 27.3 GiB temporary disk at 06:47 UTC. The host also reports
+an [i7-10700K](measurements/local-comparison-2026-10-19/cpu.json), 16 logical CPUs
+and 68,608,233,472 physical RAM bytes. These are observations, not reservations.
+OLMoE's 13,838,323,712-byte resident weights exceed both this session's observed
+spare GPU capacity and the retained cap on managed device buffers; those cells stay unexecuted.
+
+[PR #476](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/476)
+records the [fixed H1 protocol](measurements/local-comparison-2026-10-19/protocol.md):
+the pinned SmolLM2 F16 GGUF and b11669 runtime, context 256, batch/ubatch 128,
+sequence capacity 1, initialization only. All resource guards, managed allocation
+cap and graph refusal remain. The exact source preceded the new build.
+[Validation](measurements/local-comparison-2026-10-19/validation.md) separates
+passing contract/validator/launcher/hosted checks from two original Windows
+suite errors. No workloads, power settings, drivers or inference packages changed.
+
+The [separate D61-02 package #474](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/474)
+at `7e97353beffaad7945189a1b953ad4b4f5a3aa56` was reproduced as a separately
+identified Windows build. Its H1 prediction was frozen and committed before
+three serial fresh-process model/context initializations. The [results](measurements/local-comparison-2026-10-19/results.md)
+and [exact summary](measurements/local-comparison-2026-10-19/comparison-summary.json)
+record **300,885,760 predicted bytes** against the primary native interval
+**[300,941,312,301,989,887] bytes** in every trial: an observed underestimate of
+approximately **0.01846–0.36562%**. The corroborating exact ledger is
+301,674,752 bytes in each trial, with zero tracked bytes after cleanup.
+
+This supplies one configuration and three technically matched supplemental
+observations. The [dated receiving review5568505386](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/476#pullrequestreview-5568505386)
+accepted those three observations at exact source `df877a7030849fca939cc7e257be972100006e45`
+as **supplemental, note-only initialization-buffer evidence** for the bounded
+interfaces from #61 to #7, #10 and #11. It is an actual delegated in-session Research
+engineering disposition, not a named historical co-owner's reply or acceptance
+of the runnable contribution. The original thirteen-file freeze's omitted four
+delegated guard bindings remain an explicit historical limitation.
+Accepted pairs and whole-runtime peak pairs remain zero. No model graph,
+warmup, prompt or generation ran. Fresh guards passed before each child; no
+workload eviction, power/driver change, paid compute or additional device was
+used. The supplemental snapshot cannot replace the original whole-runtime peak
+question or other empirical criteria. The review admits no tolerance,
+ResourceEstimate, wider context/cache/concurrency coverage or ordinary-runtime
+equivalence. No owner, checkbox or Project value is edited. Later prospective
+admission/source corrections retain their separate source and execution review.
+Older zero-count statements below retain their dated cohort scope.
+
+Future fixed-H1 cohorts must use the separate
+[prospective admission launcher](measurements/h1-prospective-admission.md),
+which reserves and retains every attempt and requires the complete reviewed
+source/prediction closure before hardware. The captured launcher, freeze and
+observations above remain historical records with their original review limits.
 
 ## Coverage and authority disposition (2026-10-18)
 

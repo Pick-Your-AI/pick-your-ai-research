@@ -1,0 +1,27 @@
+{
+  "classification": "read-only capacity screen; not inference or a fit guarantee",
+  "profile": "granite31",
+  "observed_utc": "2026-10-19T07:12:47.611535+00:00",
+  "thresholds": {
+    "nvidia_smi_free_mib": 4096,
+    "available_host_ram_bytes": 12884901888,
+    "temporary_volume_free_bytes": 6412308016
+  },
+  "methods": [
+    "nvidia-smi --query-gpu=memory.free --format=csv,noheader,nounits",
+    "Windows kernel32 GlobalMemoryStatusEx.ullAvailPhys",
+    "Python shutil.disk_usage(temporary_dir).free"
+  ],
+  "observed": {
+    "nvidia_smi_free_mib": 8508,
+    "available_host_ram_bytes": 25191645184,
+    "temporary_volume_free_bytes": 27579523072
+  },
+  "guards": {
+    "nvidia_smi_free_mib": true,
+    "available_host_ram_bytes": true,
+    "temporary_volume_free_bytes": true
+  },
+  "status": "admitted_to_download_screen_only",
+  "reason": "all screens satisfied; recheck before inference"
+}

@@ -1,0 +1,53 @@
+{
+  "classification": "actual CPU-only H1 prediction; frozen before native observation",
+  "started_utc": "2026-10-19T07:10:55.778307+00:00",
+  "finished_utc": "2026-10-19T07:10:56.925452+00:00",
+  "exit_code": 0,
+  "argv": [
+    "$EXPERIMENTAL_ESTIMATOR",
+    "--sha256",
+    "f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57",
+    "--profile",
+    {
+      "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+      "stage": "completed-initialization-before-free",
+      "allocation": "allocated",
+      "placement": "single-CUDA0-all-layers",
+      "output_backend": "CUDA0",
+      "host_readback": "host",
+      "embeddings": "disabled",
+      "backend_samplers": "disabled",
+      "flash_attention": "disabled",
+      "mmap": "enabled",
+      "kv_offload": "enabled",
+      "operation_offload": "enabled",
+      "cache_key": "f16",
+      "cache_value": "f16",
+      "context_size": 256,
+      "logical_batch_size": 128,
+      "physical_batch_size": 128,
+      "sequence_capacity": 1,
+      "outputs_max": 128,
+      "outputs_max_per_sequence": 1
+    }
+  ],
+  "stdin": "same pinned regular GGUF file",
+  "estimator_package_commit": "7e97353beffaad7945189a1b953ad4b4f5a3aa56",
+  "candidate_executable_sha256": "00dedf6a4ca646e93552adaf56f8fdd754003c9d1440b5905c8128bbaa437b3c",
+  "raw_prediction_sha256": "cc2d3fd7c9cb05875c6925583893c32665fc84905adb9e081769317a3c619021",
+  "managed_device_estimate_bytes": 300885760,
+  "extraction_terms_bytes": {
+    "footprint": 0,
+    "weight.input": 0,
+    "weight.compute": 212474880,
+    "weight.computeOverridden": 0,
+    "weight.output": 56625408,
+    "kvCache.key": 2949120,
+    "kvCache.value": 2949120,
+    "computation.footprint": 0,
+    "computation.input": 426496,
+    "computation.max_graph_output": 25460736
+  },
+  "aggregation_basis": "Pinned SummarizeItem(true,0,0) non-UMA CUDA0 total; no platform allowance, host terms or parameter-count substitution",
+  "native_execution": "unexecuted"
+}

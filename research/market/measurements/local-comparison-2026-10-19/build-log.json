@@ -1,0 +1,6 @@
+{
+  "classification": "lossless JSON serialization of sanitized original compiler output",
+  "original_utf8_bytes": 937,
+  "original_sha256": "8d8c3ca624ab02105d51ddf30bc5df59bde1716cbf4867261f42c8966bddbcaa",
+  "text": "**********************************************************************\n** Visual Studio 2019 Developer Command Prompt v16.11.33\n** Copyright (c) 2021 Microsoft Corporation\n**********************************************************************\n[vcvarsall.bat] Environment initialized for: 'x64'\nmr09_native_h1.cpp\nMicrosoft (R) Incremental Linker Version 14.29.30153.0\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\n/out:$TASK_TEMP\\native-init.exe \nmr09_native_h1.obj \nmr09_quota_selftest.cpp\nMicrosoft (R) Incremental Linker Version 14.29.30153.0\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\n/out:$TASK_TEMP\\quota-selftest.exe \nmr09_quota_selftest.obj \nMicrosoft (R) C/C++ Optimizing Compiler Version 19.29.30153 for x64\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\nMicrosoft (R) C/C++ Optimizing Compiler Version 19.29.30153 for x64\nCopyright (C) Microsoft Corporation.  All rights reserved.\n\n"
+}

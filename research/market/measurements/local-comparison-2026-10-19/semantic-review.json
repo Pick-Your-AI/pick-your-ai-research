@@ -1,0 +1,40 @@
+{
+  "classification": "in-session source/control review; no named receiving-owner acceptance",
+  "candidate_commit": "7e97353beffaad7945189a1b953ad4b4f5a3aa56",
+  "reviewed_profile": {
+    "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+    "stage": "completed-initialization-before-free",
+    "allocation": "allocated",
+    "placement": "single-CUDA0-all-layers",
+    "output_backend": "CUDA0",
+    "host_readback": "host",
+    "embeddings": "disabled",
+    "backend_samplers": "disabled",
+    "flash_attention": "disabled",
+    "mmap": "enabled",
+    "kv_offload": "enabled",
+    "operation_offload": "enabled",
+    "cache_key": "f16",
+    "cache_value": "f16",
+    "context_size": 256,
+    "logical_batch_size": 128,
+    "physical_batch_size": 128,
+    "sequence_capacity": 1,
+    "outputs_max": 128,
+    "outputs_max_per_sequence": 1
+  },
+  "disposition": "No blocking H1 declared-control/quantity mismatch found by root and independent comparison reviewer; actual native readback still required",
+  "native_scope": "instrumented initialization default managed CUDA0 buffers; extra buffer types disabled, graph compute refused, no inference",
+  "exclusions": [
+    "host mapped/readback/compute buffers",
+    "opaque CUDA/library/context allocations",
+    "transient and inference/VMM peaks",
+    "ordinary uninstrumented copy-path equivalence"
+  ],
+  "limitations": [
+    "upstream graph allocator/lifetime approximations remain predictive assumptions",
+    "no upstream release accuracy attribution",
+    "no threshold, fit, ResourceEstimate or whole-runtime peak claim",
+    "named owner evidence/quantity acceptance pending"
+  ]
+}

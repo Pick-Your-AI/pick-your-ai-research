@@ -1,0 +1,21 @@
+{
+  "classification": "separate actual process-local UTF-8 check; no mobile/system edit",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "prompts/mobile",
+    "-p",
+    "test_migrate_references.py",
+    "-v"
+  ],
+  "methods": 14,
+  "passed": 14,
+  "exit_code": 0,
+  "original_log_bytes": 2304,
+  "original_log_sha256": "4fc196219f052051bd6d6d643e066a193e45f0ab2f3806991112c7b965896eb7"
+}

@@ -1,0 +1,22 @@
+{
+  "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "stage": "completed-initialization-before-free",
+  "allocation": "allocated",
+  "placement": "single-CUDA0-all-layers",
+  "output_backend": "CUDA0",
+  "host_readback": "host",
+  "embeddings": "disabled",
+  "backend_samplers": "disabled",
+  "flash_attention": "disabled",
+  "mmap": "enabled",
+  "kv_offload": "enabled",
+  "operation_offload": "enabled",
+  "cache_key": "f16",
+  "cache_value": "f16",
+  "context_size": 256,
+  "logical_batch_size": 128,
+  "physical_batch_size": 128,
+  "sequence_capacity": 1,
+  "outputs_max": 128,
+  "outputs_max_per_sequence": 1
+}

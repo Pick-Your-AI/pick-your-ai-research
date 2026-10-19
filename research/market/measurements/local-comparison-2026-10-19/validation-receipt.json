@@ -1,0 +1,83 @@
+{
+  "classification": "actual local research checks; native experiment and source truth remain separate",
+  "source_head": "86c19ef828f4fa6a48ea5138b834d8317f87d304",
+  "commands": [
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "contracts/v1/tests",
+        "-v"
+      ],
+      "started_utc": "2026-10-19T06:51:21.263630+00:00",
+      "exit_code": 0,
+      "log_sha256": "ca6e4a9d0acc9324a0baf8e6673644786bf5c63436b1fd502f61da32471509d7",
+      "log_bytes": 2681,
+      "summary": "est_contract.TestSchema.test_registry_same_kinds_tier_and_selection_settings) ... ok\ntest_secret_reference_required_and_cleartext_rejected (test_contract.TestSchema.test_secret_reference_required_and_cleartext_rejected) ... ok\ntest_stale_cost_estimate_is_unknown_not_pass (test_contract.TestSchema.test_stale_cost_estimate_is_unknown_not_pass) ... ok\ntest_unestimated_vram_is_unknown_and_blocks (test_contract.TestSchema.test_unestimated_vram_is_unknown_and_blocks) ... ok\ntest_untrusted_resource_estimate_does_not_pass (test_contract.TestSchema.test_untrusted_resource_estimate_does_not_pass) ... ok\n\n----------------------------------------------------------------------\nRan 21 tests in 0.637s\n\nOK\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "started_utc": "2026-10-19T06:51:22.255194+00:00",
+      "exit_code": 1,
+      "log_sha256": "fbe3d18717db218cc12ff335ebcbe94b6e9f6c2f34f8ec52efa52a51e33d74b3",
+      "log_bytes": 217070,
+      "summary": "e_run (test_t2_sff_power_record.UnitsAreEnforced.test_wrong_unit_in_every_unit_column_fails_the_run) ... ok\ntest_absent_or_disabled_t4_does_not_activate_proposals (test_t4_optionality.T4Optionality.test_absent_or_disabled_t4_does_not_activate_proposals) ... ok\ntest_evaluated_and_rounded_overflow_fail_before_export (test_t6_cost_scenarios.CostScenarioTests.test_evaluated_and_rounded_overflow_fail_before_export) ... ok\ntest_expression_restrictions (test_t6_cost_scenarios.CostScenarioTests.test_expression_restrictions) ... ok\ntest_mismatch_fails (test_t6_cost_scenarios.CostScenarioTests.test_mismatch_fails) ... ok\ntest_nonfinite_expectations_fail (test_t6_cost_scenarios.CostScenarioTests.test_nonfinite_expectations_fail) ... ok\ntest_overflowing_json_number_fails (test_t6_cost_scenarios.CostScenarioTests.test_overflowing_json_number_fails) ... ok\ntest_published_scenario_arithmetic (test_t6_cost_scenarios.CostScenarioTests.test_published_scenario_arithmetic) ... ok\ntest_rounding_is_half_up (test_t6_cost_scenarios.CostScenarioTests.test_rounding_is_half_up) ... ok\ntest_observations_bind_exact_fixture_bytes_and_complete_panel (test_token_count_evidence.TokenCountEvidence.test_observations_bind_exact_fixture_bytes_and_complete_panel) ... ok\ntest_recorded_text_units_and_residuals_reconcile (test_token_count_evidence.TokenCountEvidence.test_recorded_text_units_and_residuals_reconcile) ... ok\ntest_tokenizer_identity_matches_external_manifest (test_token_count_evidence.TokenCountEvidence.test_tokenizer_identity_matches_external_manifest) ... ok\ntest_cases_match_the_documented_rule (test_wr6_sequence_accounting.WR6SequenceAccounting.test_cases_match_the_documented_rule) ... ok\ntest_fixture_is_synthetic (test_wr6_sequence_accounting.WR6SequenceAccounting.test_fixture_is_synthetic) ... ok\n\n======================================================================\nERROR: test_tracking_references_keep_review_and_service_meaning (mobile_reference_regressions.ReferenceMigrationTests.test_tracking_references_keep_review_and_service_meaning)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"$REPO\\prompts\\mobile\\test_migrate_references.py\", line 98, in test_tracking_references_keep_review_and_service_meaning\n    'docs/APPLE_DELIVERY_TRACKING.md').read_text()\n                                       ^^^^^^^^^^^\n  File \"$USER_HOME\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\pathlib.py\", line 1028, in read_text\n    return f.read()\n           ^^^^^^^^\n  File \"$USER_HOME\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\encodings\\cp1252.py\", line 23, in decode\n    return codecs.charmap_decode(input,self.errors,decoding_table)[0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeDecodeError: 'charmap' codec can't decode byte 0x90 in position 4781: character maps to <undefined>\n\n======================================================================\nERROR: test_publication_faults_under_aliased_temporary_root (test_mr09_native_capture.NativePublicationTests.test_publication_faults_under_aliased_temporary_root)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"$REPO\\tests\\test_mr09_native_capture.py\", line 368, in test_publication_faults_under_aliased_temporary_root\n    alias.symlink_to(real,target_is_directory=True)\n  File \"$USER_HOME\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\Lib\\pathlib.py\", line 1386, in symlink_to\n    os.symlink(target, self, target_is_directory)\nOSError: [WinError 1314] A required privilege is not held by the client: '$USER_HOME\\\\AppData\\\\Local\\\\Temp\\\\tmprvdzb3ou\\\\real' -> '$USER_HOME\\\\AppData\\\\Local\\\\Temp\\\\tmprvdzb3ou\\\\alias'\n\n----------------------------------------------------------------------\nRan 1216 tests in 532.178s\n\nFAILED (errors=2, skipped=8)\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/validate_research.py"
+      ],
+      "started_utc": "2026-10-19T07:00:16.165994+00:00",
+      "exit_code": 0,
+      "log_sha256": "cf4fcc9b7245354172c1062395e3245e2f66abee7a851e6dce14e93ce850f717",
+      "log_bytes": 117,
+      "summary": "Validated 124 catalog proposals and 3 pricebooks plus external evidence metadata. Evidence review is still required.\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/validate_market_research.py"
+      ],
+      "started_utc": "2026-10-19T07:00:17.008907+00:00",
+      "exit_code": 0,
+      "log_sha256": "8606696baf5e3472072b17dc1fbe598c80009a7ebbab07a2cabace64f9ec9fa6",
+      "log_bytes": 56,
+      "summary": "Market integrity OK: 39 entities, 1872 cells, 20 issues\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/validate_handoff_audit.py"
+      ],
+      "started_utc": "2026-10-19T07:00:17.241289+00:00",
+      "exit_code": 0,
+      "log_sha256": "99fa42b990d803b1881f00a54d69ce0547131beec6f7707fa0b35cef38fe2964",
+      "log_bytes": 88,
+      "summary": "Handoff audit integrity OK: 101 rows; 98 declared pairs; human acceptance not certified\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "prompts/mobile/validate_prompts.py"
+      ],
+      "started_utc": "2026-10-19T07:00:17.351036+00:00",
+      "exit_code": 0,
+      "log_sha256": "7c3464218006b6e8ebfaa4782eb46a2f12c67939a3423548ba1c2c2e1d606246",
+      "log_bytes": 296,
+      "summary": "PASS: 2 Projects, 258 issues, 36 epic prompts, 906 criteria, 880 steps; mappings, paths, local links, field vocabulary and prerequisite DAG; 7 accepted placement coordinates\nNot certified: source truth, rights/freshness, application behavior, devices, store/release state or reviewer acceptance.\n"
+    }
+  ],
+  "readable_copy_redaction": "Local home/repository/task paths in traceback summaries replaced by placeholders; original execution log hashes and counts retained."
+}

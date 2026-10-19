@@ -1,0 +1,10 @@
+{
+  "classification": "Task-only cleanup after capture and independent evidence verification",
+  "recorded_utc": "2026-10-19T07:29:51.1921683Z",
+  "target": "$TASK_TEMP/mr09-local-comparison-20261019",
+  "scope": "Only this task-created model, runtime/SDK archives, extracted binaries/headers, compiler/module caches, isolated validation environment and original transient logs; installed MSVC, inference environments, drivers and unrelated workloads unchanged",
+  "removed_files": 17144,
+  "removed_bytes": 2050616677,
+  "target_exists_after": false,
+  "retained": "Published sanitized captures, exact preflight bytes, frozen predictions, source/build manifests, original small CPU log bytes, original validation log hashes and reviewed results"
+}

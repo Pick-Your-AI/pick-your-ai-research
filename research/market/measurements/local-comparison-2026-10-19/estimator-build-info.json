@@ -1,0 +1,9 @@
+{
+  "classification": "Readable path-redacted copy of recorded Windows estimator build metadata; not GPU evidence",
+  "original_bytes": 1136,
+  "original_sha256": "a75166432ae81c68fa48a3c6a7771bbab082548acd558959e44e4d704ffe237d",
+  "text": "$TASK_TEMP\\estimator-windows-build\\mr09-init-estimate.exe: go1.22.9\n\tpath\tgithub.com/gpustack/gguf-parser-go/cmd/mr09-init-estimate\n\tmod\tgithub.com/gpustack/gguf-parser-go\t(devel)\t\n\tdep\tgithub.com/henvic/httpretty\tv0.1.4\th1:Jo7uwIRWVFxkqOnErcoYfH90o3ddQyVrSANeS4cxYmU=\n\tdep\tgithub.com/json-iterator/go\tv1.1.12\th1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=\n\tdep\tgithub.com/modern-go/concurrent\tv0.0.0-20180306012644-bacd9c7ef1dd\th1:TRLaZ9cD/w8PVh93nsPXa1VrQ6jlwL5oN8l14QlcNfg=\n\tdep\tgithub.com/modern-go/reflect2\tv1.0.2\th1:xBagoLtFs94CBntxluKeaWgTMpvLxC4ur3nMaC9Gz0M=\n\tdep\tgithub.com/smallnest/ringbuffer\tv0.0.0-20241116012123-461381446e3d\th1:3VwvTjiRPA7cqtgOWddEL+JrcijMlXUmj99c/6YyZoY=\n\tdep\tgolang.org/x/crypto\tv0.29.0\th1:L5SG1JTTXupVV3n6sUqMTeWbjAyfPwoda2DLX8J8FrQ=\n\tdep\tgolang.org/x/exp\tv0.0.0-20241108190413-2d47ceb2692f\th1:XdNn9LlyWAhLVp6P/i8QYBW+hlyhrhei9uErw2B5GJo=\n\tdep\tgolang.org/x/sync\tv0.9.0\th1:fEo0HyrW1GIgZdpbhCRO0PkJajUS5H9IFUztCgEo2jQ=\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=windows\n\tbuild\tGOAMD64=v1\n",
+  "text_utf8_bytes": 1073,
+  "text_utf8_sha256": "90fb62aec7f2e719b4dd6415ee95819ca5249a25d08861c3a6e0a44b012dbf3a",
+  "source_copy_attribution": "The original_bytes and original_sha256 fields preserve recorded original-output metadata; they do not bind the redacted text above. The original raw bytes are not embedded and cannot be reconstructed from this copy."
+}
