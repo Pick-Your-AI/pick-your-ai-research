@@ -234,6 +234,29 @@ The five-unit analysis minima are independent of D-12's unchanged three-person p
 
 **Remaining operational decisions:** D-01, D-02, D-05 to D-10 and D-16 still need their actual values and approval. These selections supply no controller/contact, permitted channel, jurisdiction/lawful basis, private store/access, retention execution, incentive, interviewer, consent or participant. No contact or fieldwork is approved and all four original operational/empirical issue criteria remain incomplete.
 
+## Additional instrument decision D-05 — 2026-10-19
+
+The coordinating engineer selects **unpaid participation for this remote pilot** under the user's delegated project authority, for independent review and ordinary research delivery. This is a deliberate prospective compensation design, not an inference that an unknown budget or research cost is zero. It supersedes only the earlier D-05 pending statements and optional incentive placeholders; the original alternatives remain historical options. The eight earlier instrument choices, Q-1 to Q-5, complete hypothetical cards and source/receiving records retain their exact scope.
+
+| D-05 field | Selected design value |
+| --- | --- |
+| Incentive type | None: no cash, gift card, donation, reimbursement, product access, discount, credit, prize or other participation reward. No travel, purchase or paid account is required by this remote instrument. |
+| Amount | Zero offered participant compensation, selected explicitly for this pilot. This is not a project budget, an observed expense total or a claim that participation has no time or connection cost. |
+| Currency | Not applicable because the instrument offers no payment; no currency or exchange-rate assumption is introduced. |
+| Skipping, stopping or withdrawing | No reward is conditioned on answering, completing an interview, retaining data or giving a favorable response. No project charge, repayment or reward forfeiture is imposed for skipping, stopping or withdrawing. This prospective choice does not cancel any separate existing promise. |
+
+Use only recruitment arrangements compatible with unpaid participation. A panel or channel whose actual terms require participant compensation cannot be used with this instrument; the paid-panel option described in section 1 is therefore not selected by D-05. D-02 still needs actual permitted channels and their current requirements. If a different compensation arrangement is needed, record and review a dated D-05 change before offering it; do not improvise rewards during recruitment or after seeing answers. This section creates no account, spending authorization, participant agreement or channel permission.
+
+For the eventual reviewed outreach and consent materials, replace the incentive placeholder with this disclosure:
+
+> Participation is voluntary and unpaid. The project provides no payment, gift, reimbursement, donation or product-access reward for taking part. You may skip questions, stop, or withdraw under the consent terms without a project charge or losing a reward.
+
+Keep the existing 45-minute estimate visible and make the unpaid terms clear before a person chooses to take part. Remove the conditional incentive-payment promise and payment-purpose wording from the eventual consent draft; collect no incentive-payment administration details, such as bank, tax or donation-beneficiary information, for this unpaid instrument. Actual scheduling, consent and withdrawal data still require D-06 to D-10. The participant-facing drafts remain unapproved and must not be sent with placeholders or conflicting terms. The unpaid interview is separate from P1/F1's hypothetical product offers; past behavior and spend still precede those cards, with no researcher-supplied product price.
+
+**Reasoned recruitment limitation:** an unpaid 45-minute pilot may favor enthusiasts and people with time to volunteer, and may make the payer, approver and segment coverage harder to attain. This is an anticipated selection risk, not an observed recruitment result. Preserve every quota and valid-unit minimum; report deficits and unknowns rather than relaxing coverage after seeing responses. Participation without compensation is neither evidence of willingness to pay for a product nor a price of zero. D-12's aggregate-only disclosure and all withdrawal/retention constraints remain unchanged.
+
+**Remaining operational decisions:** D-01, D-02, D-06 to D-10 and D-16 still need their actual values and review. Selecting D-05 supplies no controller/contact, jurisdiction or lawful basis, private store/access arrangement, retention execution, interviewer, participant or consent. It authorizes no contact or fieldwork; all four original operational/empirical issue criteria remain incomplete.
+
 ## 8. Decisions required from coordinator before any contact
 
 Project engineering decisions can be recorded under the user's delegated authority; no reply from an absent assignee is created or required merely to review this instrument. The operational package still needs actual controller/contact details, storage/access arrangements, applicable channel/participant permissions and a recorded recruitment/consent decision. A technical receiving review cannot invent those facts or a participant's consent. The checked rows below are selected only at the scope of the dated instrument decisions above. Every unchecked row still needs its real value and scope; partial design selection does not approve the package.
@@ -242,7 +265,7 @@ Project engineering decisions can be recorded under the user's delegated authori
 - [ ] D-02 Which recruitment channels are allowed (section 1); Reddit stays blocked until its rules are read and recorded.
 - [x] D-03 Recall window N months for screener question 2.
 - [x] D-04 Quotas Q-1 to Q-5 and the participant/decision/buyer denominators (approve or replace).
-- [ ] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
+- [x] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
 - [ ] D-06 Controller identity and the contact address in consent and outreach.
 - [ ] D-07 Lawful basis (consent, legitimate interests with a documented assessment, or other) and the rights text.
 - [ ] D-08 Which participant jurisdictions are in scope (EU, UK, US, other).
@@ -265,7 +288,7 @@ Project engineering decisions can be recorded under the user's delegated authori
 | Capture current alternatives and recent decisions | Not started; instrument in #52 guide |
 | Test willingness to pay without leading questions | Not started; module proposed |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis | Met for this package: no demand conclusion is drawn |
-| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; eight bounded instrument decisions are selected above, and every remaining operational value/permission is unresolved |
+| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; nine bounded instrument decisions are selected above, and every remaining operational value/permission is unresolved |
 | Repository checks pass; reviewer accepts the evidence before Done | Technical instrument review accepted at prepared `1a1324d`; final amendment checks and canonical delivery remain required, with no fieldwork acceptance |
 
 ## Result
