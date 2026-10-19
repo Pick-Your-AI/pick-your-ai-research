@@ -19,9 +19,11 @@ import hashlib
 import io
 import json
 import math
+import os
 from pathlib import Path
 import platform
 import re
+import stat
 import statistics
 import sys
 
@@ -50,6 +52,37 @@ def sha256_hex(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def read_regular_file(path, label, expected_bytes=None):
+    """Read the admitted descriptor, retaining binary bytes and a size bound.
+
+    A pathname can change after a metadata check. O_NONBLOCK prevents a FIFO
+    substituted before open from waiting for a writer; fstat admits only the
+    opened regular file. The extra byte detects growth after that size check.
+    """
+    path = Path(path)
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NONBLOCK", 0)
+    try:
+        descriptor = os.open(path, flags)
+    except (FileNotFoundError, NotADirectoryError) as error:
+        raise ArtifactError(label + " missing: " + path.name) from error
+    except OSError as error:
+        raise ArtifactError(label + " could not be opened: " + path.name) from error
+    try:
+        metadata = os.fstat(descriptor)
+        if not stat.S_ISREG(metadata.st_mode):
+            raise ArtifactError(label + " is not a regular file: " + path.name)
+        size = metadata.st_size if expected_bytes is None else expected_bytes
+        if metadata.st_size != size:
+            raise ArtifactError(label + " size mismatch: " + path.name)
+        with os.fdopen(descriptor, "rb", closefd=False) as stream:
+            data = stream.read(size + 1)
+        if len(data) != size:
+            raise ArtifactError(label + " size mismatch: " + path.name)
+        return data
+    finally:
+        os.close(descriptor)
+
+
 def verify_artifacts(directory, pins=PINS):
     """Return {name: bytes} for every pinned file; parse nothing.
 
@@ -60,11 +93,7 @@ def verify_artifacts(directory, pins=PINS):
     contents = {}
     for name, pin in pins.items():
         path = directory / name
-        if not path.is_file():
-            raise ArtifactError("external artifact missing: " + name)
-        data = path.read_bytes()
-        if len(data) != pin["bytes"]:
-            raise ArtifactError("external artifact size mismatch: " + name)
+        data = read_regular_file(path, "external artifact", pin["bytes"])
         if sha256_hex(data) != pin["sha256"]:
             raise ArtifactError("external artifact hash mismatch: " + name)
         contents[name] = data
@@ -418,7 +447,7 @@ def check_record(record, captures, exact_record=None):
 def run(artifact_dir, record_path=DEFAULT_RECORD, pins=None):
     """Verify inputs first, then check. Raises ArtifactError before any parse."""
     contents = verify_artifacts(artifact_dir, PINS if pins is None else pins)
-    record_bytes = Path(record_path).read_bytes()
+    record_bytes = read_regular_file(record_path, "record")
     res = check_record(json.loads(record_bytes), contents,
                        exact_record=json.loads(record_bytes, parse_float=Decimal))
     failed = res.failed()
