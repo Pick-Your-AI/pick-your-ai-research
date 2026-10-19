@@ -1,0 +1,43 @@
+{
+  "classification": "new H1 initialization-only build; synthetic CPU quota test; no GPU execution",
+  "recorded_utc": "2026-10-19T06:49:35.530169+00:00",
+  "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+  "compiler": "MSVC C/C++ 19.29.30153 for x64; existing VS2019 Build Tools",
+  "compiler_flags": [
+    "/std:c++17",
+    "/EHsc",
+    "/O2",
+    "/MD",
+    "/UNDEBUG"
+  ],
+  "harness_git_ref": "52c783e7d5ea32d43f240d1e72dab1b510b832a9",
+  "source_files": {
+    "research/market/measurements/native/mr09_native_h1.cpp": "8664ec5f3492bed1769a96353c19f467f2d603ea0eb30ccd12e4802b3478055f",
+    "research/market/measurements/native/mr09_quota.hpp": "4e133fd88df1df35eff4e65c9296f9823df0fcae3a7f607132f87944b1ff582b",
+    "tests/native/mr09_quota_selftest.cpp": "37e623c1ac85ba3830ed7d7382152b21fb9fabdc19e216d054c6d1115f5a02b2"
+  },
+  "external_header_sha256": {
+    "ggml-alloc.h": "d114067f9099c4a0e2bbc0625c676d4894d9cf0ea27168ee072c7de0e71bb51d",
+    "ggml-backend-impl.h": "4e861c8e23d3d7b0d99d8e0836e68564af58f8597d75d7bbb732857d7a632fa7",
+    "ggml-backend.h": "0e5e8e1f16d11ebbf501e38bc6705d79eee819b5f0b17476533f2100ed9674e2",
+    "ggml-cpu.h": "316279e004cdeb8e6ef78599acb602bf79a8abdf897fed9fd1914808c1518c6e",
+    "ggml-opt.h": "3586de1bc8a934b5c72339e2b6937b0641e8f149b512231e666f67de0736eea2",
+    "ggml.h": "475beaa7e959be8c383279d9ce9d5191f37426e6b338270cfb12b26a798129d3",
+    "gguf.h": "e56714aab702e5ce62ee587a409643c08f7e93e8fbb77f48ef7cc85075f96fa4",
+    "llama.h": "961430f89e2553dbcd99e3e6c59826af9ec143f05911520c74f804d986ff3cd2"
+  },
+  "executables": {
+    "native-init.exe": "19bc3077df2137bddd30b7fff3189a4d6e2a462faab9f1f83d0e0cfed1188083",
+    "quota-selftest.exe": "e2c521fa91060aecb4c4674f6f07c3f219992b825cba0245140e2abe1fabf060"
+  },
+  "outputs_outside_git": true,
+  "effective_tuple": {
+    "context": 256,
+    "batch": 128,
+    "ubatch": 128,
+    "sequences": 1
+  },
+  "source_identity_note": "harness_git_ref must contain the exact source_files entries; parent receipt is not accepted as source identity",
+  "linker": "14.29.30153.0",
+  "toolchain_directory_version": "14.29.30133"
+}

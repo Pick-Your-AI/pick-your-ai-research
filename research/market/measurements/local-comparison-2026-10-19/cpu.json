@@ -1,0 +1,5 @@
+{
+  "classification": "read-only local hardware metadata",
+  "source": "Windows HKLM HARDWARE DESCRIPTION System CentralProcessor 0 ProcessorNameString",
+  "processor_name": "Intel(R) Core(TM) i7-10700K CPU @ 3.80GHz"
+}

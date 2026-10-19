@@ -1,0 +1,32 @@
+{
+  "classification": "verified task-local runtime/model/header preparation; no GPU executable launched",
+  "completed_utc": "2026-10-19T06:48:46.604702+00:00",
+  "runtime_artifact_ledger_sha256": "d788e18ba59ab6f210c1ceb61599f39269440a774664c8f515ffca9a7041cfcd",
+  "model_sha256": "f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57",
+  "downloaded_archives": [
+    {
+      "file": "llama-b11669-bin-win-cuda-13.4-x64.zip",
+      "source_url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-win-cuda-13.4-x64.zip",
+      "bytes": 154582227,
+      "sha256": "3b92d5c064f5032e603e531d3ec8961f3bd6613e5dfad047399a92dec8e95dbc"
+    },
+    {
+      "file": "cudart-llama-bin-win-cuda-13.4-x64.zip",
+      "source_url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/cudart-llama-bin-win-cuda-13.4-x64.zip",
+      "bytes": 423535356,
+      "sha256": "738f8c251ac22b70c3ae6f83a10cf222725df0395246a2cf58f32bdb85fbe668"
+    }
+  ],
+  "header_sha256": {
+    "ggml-alloc.h": "d114067f9099c4a0e2bbc0625c676d4894d9cf0ea27168ee072c7de0e71bb51d",
+    "ggml-backend-impl.h": "4e861c8e23d3d7b0d99d8e0836e68564af58f8597d75d7bbb732857d7a632fa7",
+    "ggml-backend.h": "0e5e8e1f16d11ebbf501e38bc6705d79eee819b5f0b17476533f2100ed9674e2",
+    "ggml-cpu.h": "316279e004cdeb8e6ef78599acb602bf79a8abdf897fed9fd1914808c1518c6e",
+    "ggml-opt.h": "3586de1bc8a934b5c72339e2b6937b0641e8f149b512231e666f67de0736eea2",
+    "ggml.h": "475beaa7e959be8c383279d9ce9d5191f37426e6b338270cfb12b26a798129d3",
+    "gguf.h": "e56714aab702e5ce62ee587a409643c08f7e93e8fbb77f48ef7cc85075f96fa4",
+    "llama.h": "961430f89e2553dbcd99e3e6c59826af9ec143f05911520c74f804d986ff3cd2"
+  },
+  "temporary_location": "$TASK_TEMP",
+  "existing_packages_changed": false
+}
