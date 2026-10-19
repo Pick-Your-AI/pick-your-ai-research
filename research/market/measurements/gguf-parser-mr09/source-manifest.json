@@ -1,5 +1,5 @@
 {
-  "identity": "gguf-parser-go-v0.26.4+mr09-output.1-experimental",
+  "identity": "gguf-parser-go-v0.26.4+mr09-output.2-experimental",
   "status": "CPU-only source preparation; native comparison not performed",
   "upstream_repository": "https://github.com/gpustack/gguf-parser-go",
   "upstream_commit": "637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
@@ -7,11 +7,11 @@
   "runtime_commit": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
   "license": "MIT; unmodified upstream license accompanies the derivative",
   "package_sha256": {
-    "research/market/measurements/gguf-parser-mr09/derivative.patch": "2c7da808922f4447a2d269253898f8560adcde70b20466268532eb8e98bd57b3",
+    "research/market/measurements/gguf-parser-mr09/derivative.patch": "f614dc7d0ae2494abf45825188e083aa211b9e209c5d5d3ed9c3e64d1232e7c3",
     "research/market/measurements/gguf-parser-mr09/LICENSE.upstream": "70f19edd9a53e7e452a95006d072f88507e14087819e11836b03ad74303fb630",
-    "tests/native/mr09_output_semantic_test.go": "45e8487031f49b22f92cae35176601f2a060864293355e5f26b34085401b824d",
+    "tests/native/mr09_output_semantic_test.go": "7ff59a8b33063b7a0686c665b06e882585bbcbc6a74983d630fe754049f50a40",
     "scripts/mr09_prepare_estimator.py": "be2ff1ab9315953727f3078a4526b05847fcd01971d539a061252456ff13e89d",
     "tests/native/mr09_original_semantic_test.go": "a695ced8a2dd0dc0cac4e98cf7cb6d4ca5d9060a128b704e6ad0e4c655d3d794",
-    "tests/native/mr09_cli_admission.py": "8a9d67897de66ad63f8fc4c9ffa422c6e645e5ea77d8dfd493b3a3c5555a8d8b"
+    "tests/native/mr09_cli_admission.py": "458ea9f04a585fb9339d0e469e01b67a8831f3e41be7321dde05271912a8d0f8"
   }
 }

@@ -114,6 +114,14 @@ raw output. Those identities are currently unavailable because no correction
 is implemented. Default-inferred controls must be echoed with their pinned
 source basis; missing/mismatched controls cannot be treated as a match.
 
+**Source revision note — 2026-10-19:** The preceding paragraph records the
+pre-implementation proposal. The [current derivative source](gguf-parser-mr09/README.md)
+uses `gguf-parser-go-v0.26.4+mr09-output.2-experimental` for the split-count
+allocation correction. Historical `.1` packages and predictions retain their
+original identities and receipts. A `.2` build and any future prediction need
+their own exact pins; the pair-admission and empirical requirements below remain
+unchanged.
+
 Before actual comparison, proposed synthetic CPU tests should distinguish
 one-row host readback from 256-row graph reservation, preserve the global versus
 per-sequence distinction without samplers, and reject the wrong output backend,
