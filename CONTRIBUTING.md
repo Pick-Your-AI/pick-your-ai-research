@@ -47,7 +47,7 @@ GitHub **Assignees** are the source of truth for ownership. Do not duplicate own
 
 Early contributors push branches named `contrib/<your-login>/<topic>` to this repository; other contributors work from a fork. Every pull request into `main` needs one approval from someone other than its author, and only maintainers merge. The [organization contributing rules](https://github.com/Pick-Your-AI/.github/blob/main/CONTRIBUTING.md) define roles, credentials and enforcement.
 
-Access follows the organization's team hierarchy. The `Research` parent team has Triage, which lets members label and triage issues and pull requests but not push. Write comes from the child teams `Builder`, `Funding, Grants & Sustainability` and `Market & Competitive Intelligence`, and Admin comes only from `Research Lead Maintainers`. Early Contributors have Write for their `contrib/<your-login>/<topic>` branches. Only the Lead Maintainers change team membership.
+Access follows the organization's team hierarchy. The `Research` parent team has Triage, which lets members label and triage issues and pull requests but not push. Write comes from the child teams `Builder`, `Funding, Grants & Sustainability` and `Market & Competitive Intelligence`, and the `Research Lead Maintainers` team receives an Admin grant. Early Contributors have Write for their `contrib/<your-login>/<topic>` branches. Only the Lead Maintainers change team membership.
 
 ## Deliverables
 
