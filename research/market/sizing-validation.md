@@ -8,6 +8,35 @@ Where do planning estimates fail under real runtime conditions?
 ## Starting evidence
 [technical-feasibility.md](technical-feasibility.md). This note is not a new canonical component catalog or completed competitor-estimator validation.
 
+## Prospective spare-local H1 continuation — 2026-10-19
+
+The user authorized a fresh hardware check and the first comparable local
+measurement using spare capacity only. [Read-only inventory](measurements/local-comparison-2026-10-19/inventory.json)
+and the [fresh preparation screen](measurements/local-comparison-2026-10-19/preparation-preflight.json)
+record one RTX 5070 Ti / driver 610.88, about 10.6 GiB free GPU memory, 32.8 GiB
+available host RAM and 27.3 GiB temporary disk at 06:47 UTC. The host also reports
+an [i7-10700K](measurements/local-comparison-2026-10-19/cpu.json), 16 logical CPUs
+and 68,608,233,472 physical RAM bytes. These are observations, not reservations.
+OLMoE's 13,838,323,712-byte resident weights exceed both this session's observed
+spare GPU capacity and the retained native process cap; those cells stay unexecuted.
+
+[Draft #472](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/472)
+prepares the [fixed H1 protocol](measurements/local-comparison-2026-10-19/protocol.md):
+the pinned SmolLM2 F16 GGUF and b11669 runtime, context 256, batch/ubatch 128,
+sequence capacity 1, initialization only. All resource guards, managed allocation
+cap and graph refusal remain. The exact source preceded the new build.
+[Validation](measurements/local-comparison-2026-10-19/validation.md) separates
+passing contract/validator/launcher/hosted checks from two original Windows
+suite errors. No workloads, power settings, drivers or inference packages changed.
+
+At this preparation checkpoint no H1 model capture or estimator pair exists.
+The [separate D61-02 implementation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6261021727)
+must provide a real source/build/command/control binding for semantic review and
+prediction freeze before new native observation. The supplemental managed-buffer
+snapshot cannot replace the original whole-runtime peak question or other
+empirical criteria. Named receiving acceptance, tolerance and ResourceEstimate
+boundaries are unchanged; no owner, checkbox or Project value is edited.
+
 ## Coverage and authority disposition (2026-10-18)
 
 **Retain the full empirical acceptance scope recorded in the live issue.**
