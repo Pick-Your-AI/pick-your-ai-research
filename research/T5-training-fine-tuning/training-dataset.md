@@ -116,21 +116,22 @@ The audit is useful as a candidate pool for `data_source` proposals. It is **not
 
 ## Comparison fields
 
-These cover the CatalogItem envelope plus `spec_training_dataset`. The issue's conceptual fields map as follows:
-- `source` → `data_source_refs`
-- `rights basis` → `license_verified` plus the note
-- `PII handling` → `privacy_approved`
-- `leakage check` → `held_out_test_set` plus the note
-- `format`, `split`, `lineage record` and `dedup method` have no v1 field; see Open questions.
+These cover the CatalogItem envelope plus `spec_training_dataset`. The [frozen CatalogItem](../../contracts/v1/schemas/catalog-item.schema.json) requires the dataset's own `version`; within `spec_training_dataset`, only `data_source_refs` and `data_classification` are required. `example_count`, `license_verified`, `privacy_approved` and `held_out_test_set` are optional. The issue's conceptual fields map as follows:
+- `source` → `data_source_refs`; retain exact upstream versions and source → transformation → dataset lineage in scoped evidence. The reference strings themselves do not bind each upstream revision.
+- `rights basis` and `PII handling` → separate per-source, intended-use assessments; the optional `license_verified` and `privacy_approved` fields record declarations subject to the existing governance policy, not the underlying evidence or a provenance grade.
+- `leakage check` → a separate result tied to the exact training dataset and frozen evaluation snapshot. The optional `held_out_test_set` Boolean encodes no method, hit counts or evaluation-set hashes and is not an executed leakage result.
+- `format`, `split`, `lineage record` and `dedup method` have no dedicated v1 catalog-spec field; see the note-only rows and dated receiving reconciliation below. The existing selection split fractions remain distinct from these source/group, count and lineage records.
+
+The separate illustrative `rule.training.dataset.governance` applies to the enabled `training_dataset` selection in role `primary`, reads its selected catalog item's `license_verified` and `privacy_approved` flags and requires both to be true, with fixed `error` severity and `on_unknown: block`. Structural schema validity and that predicate do not inspect the supporting assessments. See the [frozen rule](../../contracts/v1/examples/ruleset.json) and [actual reader](../../contracts/v1/reference/evaluate.py). Keep absent catalog inputs absent and retain unresolved assessments as evidence gaps; do not invent false, zero or approval. The frozen reader’s existing applicability and outcome behavior remains unchanged.
 
 | Field / JSON pointer | Type and unit | Candidate finding | Evidence ID | Conditions / unknowns |
 | --- | --- | --- | --- | --- |
-| `/spec/data_source_refs` | array of `data_source` catalog IDs, min 1 | One item per upstream source, not per aggregate | — | `data_source` is a T3 kind (#13); these training sources need the same kind with training-specific provenance |
+| `/spec/data_source_refs` | array of unique `data_source` catalog IDs, min 1 | One item per upstream source, not per aggregate | — | Shared T3 source identity is accepted through #13; retain separately qualified training-use evidence and exact upstream revisions/lineage, which these ID strings do not encode |
 | `/spec/data_classification` | enum `public, internal, confidential, restricted` | Highest classification of any included source | — | — |
 | `/spec/example_count` | integer ≥0, examples after filtering | Evidence-backed starting range 50–1,000 curated examples | T34, T30, T40, T41 | Range is task-dependent |
-| `/spec/license_verified` | boolean | True only when C10–C14 pass per source, not per aggregate | R16–R24 | v1 cannot record *which* basis was verified |
-| `/spec/privacy_approved` | boolean | True only when C7–C9 pass and the PII scan is recorded | R8–R11, T1 | Boolean hides jurisdiction and LIA reference |
-| `/spec/held_out_test_set` | boolean | True only when leakage checks ran against the frozen eval set | T11–T16 | Does not record method or hit counts |
+| `/spec/license_verified` | optional boolean | Declared assessment result; supporting per-source training-use evidence stays separate | R16–R24 | The frozen Boolean does not encode which basis or use scope was assessed, grant rights, or award a provenance grade |
+| `/spec/privacy_approved` | optional boolean | Declared assessment result; supporting per-source privacy evidence stays separate | R8–R11, T1 | The Boolean does not encode the exact dataset/version, subject, purpose, jurisdiction or lawful-basis assessment; a PII scan alone is insufficient |
+| `/spec/held_out_test_set` | optional boolean | Does not itself establish that the leakage procedure ran | T11–T16 | Retain method, hit counts and evaluation-set hashes in a separate record for the exact training dataset and frozen evaluation snapshot |
 | `format` (note only) | enum proposal: `chat_messages_jsonl`, `prompt_completion_jsonl`, `preference_jsonl`, `alpaca`, `sharegpt`, `gemini_contents_jsonl`, `raw_text`, `tokenized_parquet` | see format table | T30–T38 | Shared with the #30 proposal |
 | `split` (note only) | train / validation / test counts; split unit (`row`, `group`, `source`) | Split by source or group, not by row | T31, T42 | — |
 | `dedup method` (note only) | enum proposal: `none`, `exact_hash`, `minhash`, `semantic` + parameters | exact + MinHash minimum | T2, T6, T7 | — |
@@ -241,7 +242,7 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 | D-17 | personal data, no memorisation / re-identification test | Model presumed not anonymous; data subject rights reach weights | unknown / warning | R8, R10 | source checked (guidance) |
 | D-18 | user-interaction data, GPAI provider | Must be disclosed in the training summary | pass / warning | R4 | source checked |
 | D-19 | hosting-site licence label is the only licence evidence | Label alone is not sufficient | unknown / warning | R24 | source checked (2023 Hub snapshot) |
-| D-20 | `held_out_test_set` = true, no recorded leakage check against #36's eval set | Leakage not established | unknown / warning | T11–T13 | policy proposal, needs agreement with #36 |
+| D-20 | `held_out_test_set` = true, no recorded leakage check against #36's eval set | Leakage not established | unknown / warning | T11–T13 | policy proposal; interface accepted with narrowing by #36, preserving E-R44 (see dated receiving reconciliation below) |
 | D-21 | eval-only source (e.g. a benchmark) included in training data | Excluded | fail / error | T11, T12, T15 | source checked |
 | D-22 | format ∉ the selected framework/service formats (table above) | Incompatible | fail / error | T30–T38 | source checked per row; v1 has no format field |
 
@@ -380,8 +381,8 @@ Minimum procedure for a training dataset (rights first, then preparation):
    - Run a PII scan with Presidio configured for the relevant countries, and add datatrove `PIIFormatter` for emails and IPs.
    - Manually review a sample, because recall is not guaranteed.
    - Set `privacy_approved` only after these steps.
-3. **Freeze the eval set first** (agreed with #36). Hash every item and embed the canary GUID.
-4. **Validate the format.** Check the schema for the selected target and render it through the target chat template with an EOS check (T35, T39).
+3. **#36 freezes the eval set before tuning**, hashes every item and embeds the canary GUID; T5 receives that exact identity for its check. This is the narrowed agreement recorded in [6232138142](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142), with separate reverse intake [6254284924](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254284924).
+4. **Validate the format.** Check the schema for the exact selected trainer/loader and version, objective, required fields, tokenizer/processor/chat-template revision and loss-mask/packing configuration; record any explicit transformation and its preparation lineage. Render through the target chat template with an EOS check (T35, T39). These are the received [#30 → #32 H3 requirements](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6253128737); a JSONL/Parquet filename or framework label alone is insufficient.
 5. **Deduplicate within training data.** Exact hash, then MinHash (datatrove 5-gram 14×8, or threshold ≈0.7) (T2, T5, T6).
 6. **Check leakage against the frozen eval set**, in order:
    - exact hash;
@@ -390,21 +391,21 @@ Minimum procedure for a training dataset (rights first, then preparation):
    - embedding top-k plus LLM judge for flagged items.
 
    Drop hits and log the counts (T11–T13). No method proves the absence of leakage.
-7. **Split by source or group**, so near-duplicates cannot straddle splits. Keep a separate final test set (T31, T42).
+7. **Split by source or group**, so near-duplicates cannot straddle splits. Keep the reported-score held-out set separate from both tuning and checkpoint selection, as #36 EV-18 requires (T31, T42; [reverse intake6254284924](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254284924)).
 8. **Quantity and knowledge.** Start with 50–1,000 curated examples (T34, T40, T41). Avoid training on facts the base model does not know: Gekhman et al. found such examples increase hallucination roughly linearly once fitted (T43). Route new facts to RAG (#16).
 9. **Lineage.** Publish a dataset card plus a Croissant 1.1 / RAI record listing sources, filters, tool versions, thresholds, removal counts and eval-set hashes (T20, T21).
 
-Why: v1 reduces governance to two booleans, so the builder can only be as safe as the evidence behind them. The checklist makes each boolean traceable, and the procedure gives #36 a leakage method it can agree to.
+Why: the frozen governance predicate reads two Booleans without inspecting the underlying assessment. Keep the qualified source evidence separate from the declaration. The narrowed #32/#36 procedure is already agreed; actual dataset preparation, leakage results and selected-model gates still need their own evidence. D-20's proposed missing-check warning does not downgrade E-R44's fixed `error` severity: known overlap in the training data of the model being scored is its failure condition, while missing eligible evidence remains `unknown` with `on_unknown: review`. That interpretation does not replace the separate frozen governance block. No method or zero-hit result proves universal absence of contamination.
 
 ## Structured artifacts
 
-No CatalogItem proposals in this draft. A `training_dataset` item is specific to a user's data, so the reusable catalog facts are the upstream `data_source` items. `data_source` is a T3 kind (#13), whose `spec_data_source` has no licence, terms or opt-out fields; those live only in `provenance`.
+No CatalogItem proposals in this draft. It does not identify a complete public `training_dataset` proposal; the upstream `data_source` candidates remain subject to public-intake requirements and per-source review. The [actual #13 → #32 decision6254882527](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254882527) accepts the existing shared `data_source` identity with separate purpose-specific training-use disposition and source → transformation → dataset lineage. Retrieval permission does not supply training permission or complete a catalog proposal.
 
-Before submitting `data_source` proposals from S1, agree with #13 and #40 on:
-1. whether training sources share the `data_source` kind with RAG sources;
-2. where licence and opt-out status go.
+`spec_data_source` has no dedicated licence, terms or crawl-time opt-out fields. The common [CatalogItem envelope](../../contracts/v1/schemas/catalog-item.schema.json) nevertheless permits an optional `license` object, with optional `spdx_id`, `commercial_use_allowed` and `self_hosting_allowed` members. Thus licence facts do not live only in provenance. Neither that envelope nor [free-text provenance notes](../../contracts/v1/schemas/common.schema.json) provide a typed, purpose-specific training-use grant or privacy assessment. Retain actual supporting evidence and conditions; route any stronger representation through #40. Source access, licence labels, PII scans and governance Booleans cannot establish permission themselves.
 
 ## Open questions and handoffs
+
+The following table retains the original 2026-10-16 questions and attribution. The dated reconciliation below updates the received interfaces and attestation boundary; the unchanged legal-source and shortlist follow-ups retain their owners.
 
 | Question | Follow-up issue / owner |
 | --- | --- |
@@ -417,4 +418,19 @@ Before submitting `data_source` proposals from S1, agree with #13 and #40 on:
 | Format requirements consumed from #30 | #30 · @appletechie (PR #68) |
 | Evidence grading for court rulings and secondary legal reporting | #41 · @tynamite |
 
-None of the handoffs above is confirmed yet.
+### Received-interface reconciliation — 2026-10-19
+
+The blanket unconfirmed status from the original note is superseded by the actual bounded decisions below. This is a dated source/receipt reconciliation, not a new legal-source recheck, dataset approval, training run or measurement. Historical access dates and claims in the R/T/S register are unchanged. Each receipt retains its own original reviewed revision, author and scope; the later #424 artifact/central-note delivery does not retroactively extend those reviews.
+
+| Actual direction | Existing decision | Original decision date and retained scope |
+| --- | --- | --- |
+| #32 → #36 | [6232138142](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142) | 2026-10-17 09:11:24 UTC. PUSHINGSQUARES accepted narrowed D-20 at ef0e4af: #36 owns the freeze/hashes/canary; T5 owns the check and retained methods/counts/set hashes. |
+| #32 → #33 | [6251984559](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6251984559) | 2026-10-18 15:58:02 UTC. Delegated intake at c2bdd82c for exact dataset/source identity, per-source governance, preparation/template lineage and the narrowed leakage protocol. Reference strings alone do not bind revisions; its associated source correction requires reviewed delivery. |
+| #30 → #32 | [6253128737](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6253128737) | 2026-10-18 17:48:57 UTC. H3 supplies exact trainer/loader/version, objective, required fields, tokenizer/processor/template and loss-mask/packing requirements. No actual dataset transformation or governance approval follows from format compatibility. |
+| #36 → #32 | [6254284924](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254284924) | 2026-10-18 19:40:50 UTC. Reverse frozen-set/leakage intake, including held-out versus checkpoint-selection separation and E-R44's error/unknown boundary. This is distinct from the older #32 → #36 decision. |
+| #40 → #32 | [6254657922](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254657922) | 2026-10-18 20:18:04 UTC. CD-12 keeps the actual assessment with #32 and the responsible dataset/source rights/privacy assessor, bound to exact dataset/source version, purpose, subject and operation; #40 owns representation. |
+| #13 → #32 | [6254882527](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254882527) | 2026-10-18 20:40:00 UTC. Shared data_source identity with separate training-use disposition and actual source/transformation lineage; no inherited permission. |
+
+**Current attestation ownership:** the D-01/D-16/D-18 question above is now qualified by the actual CD-12 receiving decision. #32 and the responsible dataset/source rights/privacy assessor retain the assessment and source conditions; #40 owns the representation. Generic #2/#3 serving-workload categories or an EU label do not establish the legal answer. Reuse an attestation only for the same fact definition, entity, period and use scope, or an explicitly qualified derivation; private attestations/grants do not transfer on sharing or forking.
+
+**Preserved acceptance boundary:** these are the actual authors' decisions, not new statements attributed to absent co-assignees. Reverse receipts are not invented outgoing acceptance. The existing four-note writer retains producer/consumer reconciliation; the separately reserved D-01/D-14 interpretation retains its own scope. Remaining D-series source/format review and all ten original #32 criteria still require their actual disposition. No frozen rule/schema, production gate, source-use grant, legal finding or complete #32 acceptance is adopted by this correction.
