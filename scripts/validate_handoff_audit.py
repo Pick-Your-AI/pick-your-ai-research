@@ -106,6 +106,21 @@ def validate_response_text(response, label):
         value = response.get(field)
         require(isinstance(value, str) and value.strip(),
                 f'{label}: {field} must be nonempty text')
+    validate_reviewed_commit(response, label)
+
+
+def validate_reviewed_commit(response, label):
+    """Keep full SHA-1 identity distinct from an explicitly unknown commit."""
+    require('reviewed_commit' in response,
+            f'{label}: reviewed_commit must be explicit or explicitly unknown')
+    value = response['reviewed_commit']
+    require(value is None or (type(value) is str and
+            re.fullmatch(r'[0-9a-fA-F]{40}', value) is not None),
+            f'{label}: reviewed_commit must be a full 40-character hexadecimal SHA or null')
+    if value is None:
+        basis = response.get('commit_basis')
+        require(isinstance(basis, str) and basis.strip(),
+                f'{label}: unknown reviewed_commit requires nonempty commit_basis text')
 
 
 def response_identity(response):
@@ -125,6 +140,8 @@ def validate_distinct_responses(responses, label):
 def validate(ledger, readback, audit):
     validate_identity_numbers(ledger, readback, audit)
     for row in ledger:
+        if 'owner_review' in row:
+            validate_reviewed_commit(row['owner_review'], 'ledger historical review')
         for response in row.get('responses', []):
             validate_response_text(response, 'ledger response')
         pair = (row['market_issue'], row['consumer_issue'])
@@ -153,6 +170,7 @@ def validate(ledger, readback, audit):
             'audit and readback base commit differ')
     for row in readback['historical_owner_reviews']:
         pair = (row['market_issue'], row['consumer_issue'])
+        validate_reviewed_commit(row['owner_review'], f'{pair}: readback historical review')
         submitted = audit_instant(row['owner_review'].get('submitted_at'),
                                   f'{pair}: historical receipt')
         require(submitted <= cutoff, f'{pair}: post-cutoff receipt')
@@ -182,8 +200,6 @@ def validate(ledger, readback, audit):
             submitted = audit_instant(response.get('submitted_at'),
                                       f'{pair}: scoped receipt')
             require(submitted <= cutoff, f'{pair}: post-cutoff receipt')
-            require('reviewed_commit' in response,
-                    f'{pair}: reviewed SHA must be explicit or explicitly unknown')
             actual_responses.append({**response, 'market_issue': pair[0],
                                      'consumer_issue': pair[1]})
     require(sorted(map(response_identity, actual_responses)) ==
