@@ -33,7 +33,7 @@ The source status column says whether a source is binding law, regulator guidanc
 | C3 | Public training-content summary on the AI Office template. Fine-tuners list only their fine-tuning data. Scraped data lists the top 10% of domains (SMEs: top 5% or 1,000). User-interaction data must be disclosed | EU, GPAI provider; legacy models by 2 Aug 2027 | R1 (Art. 53(1)(d)), R4 | Law plus mandatory template | Yes: training only |
 | C4 | The open-source exemption (Art. 53(2)) does **not** remove C2 or C3 | EU | R1 | Law | — |
 | C5 | Machine-readable TDM opt-outs recorded at crawl time: robots.txt (RFC 9309), TDMRep (`tdm-reservation: 1`, `/.well-known/tdmrep.json`). No paywall circumvention, no piracy domains | EU commercial TDM (Art. 4); Code of Practice signatories | R5, R6, R26 | Law (DSM Art. 4(3)); TDMRep is a W3C Community Group report, not a W3C standard; Code is voluntary | Same crawl-time opt-out; whether inference display counts as TDM is unclear |
-| C6 | Natural-language-only reservations. OLG Hamburg held that the reservation on the claimant's site was not machine-readable, judged by the state of technology in 2021 (when the photo was downloaded). It left open whether natural-language text can qualify once machines can interpret it reliably. Not final: appeal to the BGH allowed (BGH I ZR 281/25, pending, per a secondary docket listing) | DE / EU | R7, R26 | Appeal-court ruling, not final | Same |
+| C6 | Natural-language-only reservations. OLG Hamburg held that the reservation on the claimant's site was not machine-readable, judged by the state of technology in 2021 (when the photo was downloaded). It left open whether natural-language text can qualify once machines can interpret it reliably. The cited 10 Dec 2025 judgment allowed appeal; this record does not establish a later appellate case identity or disposition | DE / EU | R7, R26 | Dated appeal-court ruling; later status not qualified here | Same |
 | C7 | GDPR lawful basis, usually legitimate interest. Three-step test plus mitigations (honour objections, opt-out lists, exclude sensitive sources) | EU/EEA personal data | R8, R9 | Regulator guidance | Partly: development and deployment are separate purposes |
 | C8 | Model anonymity: both extraction and query-based disclosure must be "insignificant". If not, GDPR applies to the weights, including data subject rights. CNIL expects documented re-identification testing | EU personal data | R8, R10 | Guidance | **Yes, sharply**: RAG records can be deleted one by one, memorised weights cannot |
 | C9 | UK: legitimate interest is "the sole available lawful basis" for web-scraped training | UK | R11 | Consultation outcome | Partly |
@@ -81,38 +81,24 @@ The HF chat-templating docs add two rules:
 - Use `add_generation_prompt=False` for training.
 - When re-tokenising rendered text, use `add_special_tokens=False` to avoid a duplicate BOS or EOS (T39).
 
-### Source shortlist (secondary input)
+### Historical shortlist excluded from operative evidence
 
-The owner supplied an internal audit of 165 newly found free training sources, `new_free_ai_sources_found_2026-10-16.csv`. It is part of a 279-source shortlist and is not committed here. Each row carries a licence, an access status and a training-rights decision.
+The originally reported private shortlist and Hub metadata recheck remain
+preserved in the [immutable accepted source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/c2b8386dc059d51ac42ecdb3feaa0f998c5a613d/research/T5-training-fine-tuning/training-dataset.md#source-shortlist-secondary-input)
+and [first 0.3 source checkpoint](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/23b842756f0c854f2a478bd1cb7de22ccb9b5a71/research/T5-training-fine-tuning/training-dataset.md#source-shortlist-secondary-input).
+Their underlying audit file and individual recheck records are not retained
+with this decision record. The reported totals, match/discrepancy figures,
+distribution and candidate-specific licence/access/training-rights conclusions
+are therefore withdrawn from its operative findings. The archived statements
+receive no new primary-source verification or inferred evidence grade.
 
-The audit's own notes say no dataset download was tested and 6 rows rest on search snippets. On 2026-10-16 I re-checked every Hugging Face-hosted row (137 of 165) against the Hub API (`/api/datasets/<id>`, `cardData.license` and `gated`):
-
-- **118 of 137** licences match the Hub metadata.
-- **12 of the 19 non-matches are mixed-licence aggregates or have no Hub licence field.** The audit records these correctly as mixed or none.
-- **7 substantive discrepancies:**
-
-| Source | Audit licence / decision | Hub metadata (2026-10-16) | Effect |
-| --- | --- | --- | --- |
-| SRC-0327 Code Alpaca 20k | "CC (unspecified)"; restricted (model-output terms) | `cc-by-4.0` | Licence is clearer than recorded; the model-output restriction still applies |
-| SRC-0310 MultiLegalPile | Mixed; CC BY-SA on commercial variant | `cc-by-nc-sa-4.0` on the main card | Treat as non-commercial unless the commercial variant is selected explicitly |
-| SRC-0363 Infinity-Instruct | Apache tag conflicts with an academic-only disclaimer | `cc-by-sa-4.0`, gated (auto) | Licence differs from the audit; ShareAlike applies; access is gated |
-| SRC-0401 HellaSwag | MIT; evaluation only | no Hub licence | MIT not supported by Hub metadata; evaluation-only decision unaffected |
-| SRC-0397 Arena-Hard-Auto | Not verified; evaluation only | `apache-2.0` | Evaluation-only decision unaffected |
-| SRC-0457 APIGen-MT-5k | Gated | not gated | Access differs; non-commercial decision unaffected |
-| SRC-0320 StarCoderData, SRC-0361 LIMA | Access "Not verified" | gated (auto) | Access is gated |
-
-Distribution of the audit's training-rights decisions across the 165 rows:
-
-| Decision | Rows |
-| --- | --- |
-| Permits commercial use, but upstream rights must be confirmed | 71 |
-| Restricted by model-output terms | 30 |
-| Evaluation only | 20 |
-| Non-commercial | 18 |
-| Custom terms needing review | 16 |
-| Undetermined | 10 |
-
-The audit is useful as a candidate pool for `data_source` proposals. It is **not** evidence of training rights by itself (C12, C14): even its "commercial" rows cover the compilation only.
+This section selects no source product and supplies no qualified rights,
+licence or access result. The actual candidate set remains the rights/privacy
+checklist, preparation tools and framework-format targets above, supported by
+their dated R/T references. A future #32/#13 source proposal needs its own
+claim-level primary URLs, access observations, exact source/version/use scope
+and responsible rights assessment. No replacement audit, count or permission
+is invented to fill the unavailable evidence.
 
 ## Comparison fields
 
@@ -140,7 +126,7 @@ The separate illustrative `rule.training.dataset.governance` applies to the enab
 
 ## Evidence
 
-All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it.
+The R/T register retains the access observations recorded on 2026-10-16 and their original source qualifications. Interpret their grades under the [accepted #41 policy](../T0-configuration/catalog-data-sources.md); source checking alone is not independent verification. This correction does not refresh those access dates or certify a current legal/source position. S1/S2 are archival references only, as stated below.
 
 ### Rights and privacy (R)
 
@@ -153,7 +139,7 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | R4 | European Commission, https://digital-strategy.ec.europa.eu/en/library/explanatory-notice-and-template-public-summary-training-content-general-purpose-ai-models | 2026-10-16 | 24 Jul 2025 | Primary documentation | — |
 | R5 | European Commission, GPAI Code of Practice, Copyright chapter, https://ec.europa.eu/newsroom/dae/redirection/document/118115 (linked from https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai) | 2026-10-16 | 10 Jul 2025; Measures 1.2(1), 1.3(1) | Primary documentation | Voluntary code |
 | R6 | W3C TDMRep CG, https://www.w3.org/community/reports/tdmrep/CG-FINAL-tdmrep-20240510/ | 2026-10-16 | 10 May 2024 | Primary documentation | Community Group report, not a W3C standard |
-| R7 | Hanseatisches OLG press release, https://justiz.hamburg.de/gerichte/oberlandesgericht/gerichtspressestelle/ki-und-urheberrecht-hanseatisches-oberlandesgericht-weist-berufung-zurueck-1126528 ; judgment text 5 U 104/24 (redacted), https://www.itm.nrw/wp-content/uploads/2025/12/5-u-104-24.pdf | 2026-10-16 | 10 Dec 2025; judgment pp. 19–20, tenor 4 | Primary documentation | Judgment PDF hosted by a university institute, not the court; BGH case number from dejure.org (secondary) |
+| R7 | Hanseatisches OLG press release, https://justiz.hamburg.de/gerichte/oberlandesgericht/gerichtspressestelle/ki-und-urheberrecht-hanseatisches-oberlandesgericht-weist-berufung-zurueck-1126528 ; judgment text 5 U 104/24 (redacted), https://www.itm.nrw/wp-content/uploads/2025/12/5-u-104-24.pdf | 2026-10-16 | 10 Dec 2025; judgment pp. 19–20, tenor 4 | Primary documentation | Judgment PDF hosted by a university institute, not the court; secondary case-number reporting is retained only in the archived source and supplies no admitted later appellate finding |
 | R8 | EDPB, https://www.edpb.europa.eu/system/files/2024-12/edpb_opinion_202428_ai-models_en.pdf | 2026-10-16 | Opinion 28/2024, 18 Dec 2024 | Primary documentation | — |
 | R9 | CNIL, https://www.cnil.fr/fr/base-legale-interet-legitime-developpement-systeme | 2026-10-16 | 19 Jun 2025 | Primary documentation | French |
 | R10 | CNIL, https://www.cnil.fr/fr/ia-analyser-le-statut-dun-modele-dia-au-regard-du-rgpd | 2026-10-16 | 22 Jul 2025 | Primary documentation | French |
@@ -210,12 +196,16 @@ All entries accessed on 2026-10-16. Grades follow the interim policy in `docs/RE
 | T42 | Hugging Face, https://huggingface.co/docs/datasets/process#split | 2026-10-16 | — | Primary documentation | — |
 | T43 | Gekhman et al., https://arxiv.org/abs/2405.05904 | 2026-10-16 | EMNLP 2024 | Independent measurement | PaLM 2-S, closed-book QA |
 
-### Secondary input (S)
+### S1/S2 archival references, not admitted evidence
 
-| ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
-| --- | --- | --- | --- | --- | --- |
-| S1 | Internal source audit supplied by the workstream owner, `new_free_ai_sources_found_2026-10-16.csv` (165 rows; not committed) | 2026-10-16 | — | Estimate (secondary compilation) | No download tests; 6 rows from search snippets only. Re-checked against S2 |
-| S2 | Hugging Face Hub API, `https://huggingface.co/api/datasets/<id>` for 137 rows of S1 | 2026-10-16 | — | Primary documentation | Hub metadata reflects the uploader's declaration (see C14) |
+S1 and S2 identify the historical private compilation and reported Hub recheck
+in the [archived record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/c2b8386dc059d51ac42ecdb3feaa0f998c5a613d/research/T5-training-fine-tuning/training-dataset.md#secondary-input-s).
+The unavailable compilation and templated API reference do not supply the
+claim-level records needed to qualify that reported audit. They are not
+operative source entries, assigned new evidence grades or inputs to this
+record's dataset/rights conclusions. Future actual candidates require the
+primary-source intake above; the original reported observations remain in
+their immutable history.
 
 ## Compatibility proposals
 
@@ -228,7 +218,7 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 | D-03 | open-source licence, EU, GPAI provider | Art. 53(2) does not exempt (c) or (d) | pass / warning | R1 | source checked |
 | D-04 | `data_source` crawl record, EU commercial | No recorded robots.txt / TDMRep status at crawl time | unknown / error | R1, R5, R6, R26 | source checked |
 | D-05 | same | Recorded reservation (`tdm-reservation: 1` or robots disallow) | fail / error | R5, R6 | source checked |
-| D-06 | same | Natural-language-only reservation | unknown / warning | R7, R26 | source checked: OLG Hamburg left the question open and judged by 2021 technology; BGH appeal pending |
+| D-06 | same | Natural-language-only reservation | unknown / warning | R7, R26 | source checked for the dated OLG Hamburg judgment, which left the question open and judged by 2021 technology; later appellate status is not qualified |
 | D-07 | source on a piracy or shadow-library list | Excluded | fail / error | R5, R12, R13 | source checked |
 | D-08 | source licence = CC BY-NC or BY-NC-SA, commercial training or deployment | NC covers all stages | fail / error (unknown if an exception or fair use applies) | R16 | source checked |
 | D-09 | source licence = CC BY-SA, weights published | ShareAlike may attach to weights where permission is needed | pass / warning | R16 | source checked |
@@ -371,10 +361,12 @@ This additive companion supplies the eight comparison fields and the twenty
 historical D-series concerns outside D-01/D-14 in the
 [shared rule format](../../templates/rule-proposal.md). It uses the eight
 [decided outcome rules](../T0-configuration/component-schema-compatibility.md#rule-format-and-outcome-semantics-decided).
-The complete original note, all R/T/S entries, the historical D rows and the
-delivered D-01/D-14 interpretation 0.2 remain unchanged. No external source was
-newly retrieved for this companion; their recorded access dates and limitations
-are retained. A future consumer must explicitly select and review this proposed
+The complete original note was retained in the [first 0.3 source checkpoint](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/23b842756f0c854f2a478bd1cb7de22ccb9b5a71/research/T5-training-fine-tuning/training-dataset.md).
+This successor preserves that immutable history while withdrawing the
+unsupported shortlist/recheck findings and unqualified secondary appeal status
+from the operative record as described above. The reviewed field/profile content,
+R/T access dates and delivered D-01/D-14 interpretation 0.2 remain unchanged. No
+external source was newly retrieved; no archived claim gains verification. A future consumer must explicitly select and review this proposed
 version. This is neither a new frozen schema/ruleset nor a dataset, legal,
 privacy, production-readiness or whole-issue acceptance.
 
@@ -778,7 +770,7 @@ while the original statements remain attributable to their original revision.
 | R20–R23 and historical D-12–D-15 output shorthand | Match each actual generator/output, subject, agreement/licence revision and use independently. R22's archived/unreadable-live-page limitation remains exact. Weights licences and historical labels cannot grant universal output use or establish a uniform notice obligation. |
 | R8–R11 and D-16/D-17 guidance shorthand | Actual privacy basis, controls, anonymity and legal applicability come only from the relevant scoped responsible assessment and eligible evidence. Missing LIA, opt-out, tests or links are unresolved evidence, not an automatically selected basis or anonymity presumption. R11's unreviewed update limit remains. |
 | R24 hosting audit | Retain its 2023 snapshot as the historical caution; no current-population error rate or fresh inspection is claimed. |
-| S1 and S2 | S1's uncommitted 165-row secondary compilation is unavailable here, includes the recorded snippet-only limit and is not evidence for a current qualified candidate or normative rule answer. The dated S2 uploader metadata does not establish primary rights evidence. A future actual public candidate needs its own source-qualified intake; no shortlist is fabricated to complete a field. |
+| S1 and S2 | The unavailable compilation and reported metadata recheck are historical references, not admitted source findings. Their counts and source-specific conclusions are withdrawn from the operative record, with the complete original report preserved in the immutable links above. A future public candidate needs its own claim-level primary evidence and scoped assessment; neither archival labels nor uploader metadata alone supply rights. |
 | T-method and format evidence | Methods, versions and original measured populations retain their bounds. Synthetic examples here do not reproduce those papers, execute preparation, establish an actual leakage result or exhaust current trainer support. |
 
 The six actual directional receipts in the received-interface reconciliation
@@ -840,7 +832,7 @@ No CatalogItem proposals in this draft. It does not identify a complete public `
 
 ## Open questions and handoffs
 
-The following table retains the original 2026-10-16 questions and attribution. The dated reconciliation below updates the received interfaces and attestation boundary; the unchanged legal-source and shortlist follow-ups retain their owners.
+The following table retains the original 2026-10-16 question scopes and attribution, with the appellate follow-up now stated without the unqualified secondary identifier/status preserved in the archived source. The dated reconciliation below updates the received interfaces and attestation boundary; the legal-source and future-candidate follow-ups retain their original owners.
 
 | Question | Follow-up issue / owner |
 | --- | --- |
@@ -848,14 +840,14 @@ The following table retains the original 2026-10-16 questions and attribution. T
 | Training vs retrieval rights boundary (C1–C4, C8, C11, C13 differ); shared `data_source` kind or a separate one | #13 · @zabyxc01 |
 | v1 fields: `format`, split counts and unit, dedup method, leakage method and hit counts, lineage URI; per-source licence and opt-out fields on `data_source`; replace the single `license_verified` / `privacy_approved` booleans with evidence references | #40 · @tynamite |
 | Who records the user attestations D-01, D-16 and D-18 need (EU market, compute, lawful basis)? | #2 / #3 · @tynamite |
-| Primary text for the BGH appeal (I ZR 281/25) once decided; scope of the Bartz appeal notices | #32 · @appletechie |
+| Primary follow-up to the appeal allowed by R7: establish any later appellate case identity and disposition before relying on it; qualify the scope of the Bartz appeal notices | #32 · @appletechie |
 | Which of the S1 shortlist to propose as `data_source` items, after per-source verification | #32 · @appletechie, with #13 |
 | Format requirements consumed from #30 | #30 · @appletechie (PR #68) |
 | Evidence grading for court rulings and secondary legal reporting | #41 · @tynamite |
 
 ### Received-interface reconciliation — 2026-10-19
 
-The blanket unconfirmed status from the original note is superseded by the actual bounded decisions below. This is a dated source/receipt reconciliation, not a new legal-source recheck, dataset approval, training run or measurement. Historical access dates and claims in the R/T/S register are unchanged. Each receipt retains its own original reviewed revision, author and scope; the later #424 artifact/central-note delivery does not retroactively extend those reviews.
+The blanket unconfirmed status from the original note is superseded by the actual bounded decisions below. This is a dated source/receipt reconciliation, not a new legal-source recheck, dataset approval, training run or measurement. That receiving correction did not recheck or refresh the historical R/T/S record; the later operative-evidence withdrawal above retains the original statements in immutable history. Each receipt retains its own original reviewed revision, author and scope; the later #424 artifact/central-note delivery does not retroactively extend those reviews.
 
 | Actual direction | Existing decision | Original decision date and retained scope |
 | --- | --- | --- |
