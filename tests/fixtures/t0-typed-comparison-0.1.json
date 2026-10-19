@@ -1,0 +1,736 @@
+{
+  "fixture_version": "0.1",
+  "profile": "typed-comparison/0.1",
+  "classification": "synthetic_test_only",
+  "frozen_reference_sha256": "092c8a99495f9b5ae960df40b27e33f15eefe6d1a7cd80119658fdc79ada1a5a",
+  "cases": [
+    {
+      "name": "residual-bool-equality",
+      "operator": "eq",
+      "left_json": "true",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "residual-nested-container-equality",
+      "operator": "eq",
+      "left_json": "[{\"a\":[true,1]}]",
+      "right_json": "[{\"a\":[1,1]}]",
+      "expected": "unknown"
+    },
+    {
+      "name": "residual-nested-containment",
+      "operator": "contains",
+      "left_json": "[{\"a\":[true]}]",
+      "right_json": "{\"a\":[1]}",
+      "expected": "unknown"
+    },
+    {
+      "name": "residual-subset",
+      "operator": "subset_of",
+      "left_json": "[true,1,null]",
+      "right_json": "[1,null]",
+      "expected": "unknown"
+    },
+    {
+      "name": "bool-list-membership",
+      "operator": "contains",
+      "left_json": "[1]",
+      "right_json": "true",
+      "expected": "unknown"
+    },
+    {
+      "name": "bool-number-ne-preserves-unknown",
+      "operator": "ne",
+      "left_json": "true",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "false-is-not-numeric-zero",
+      "operator": "eq",
+      "left_json": "false",
+      "right_json": "0",
+      "expected": "unknown"
+    },
+    {
+      "name": "boolean-same",
+      "operator": "eq",
+      "left_json": "true",
+      "right_json": "true",
+      "expected": "true"
+    },
+    {
+      "name": "boolean-different",
+      "operator": "eq",
+      "left_json": "true",
+      "right_json": "false",
+      "expected": "false"
+    },
+    {
+      "name": "boolean-ne",
+      "operator": "ne",
+      "left_json": "false",
+      "right_json": "true",
+      "expected": "true"
+    },
+    {
+      "name": "known-null-same",
+      "operator": "eq",
+      "left_json": "null",
+      "right_json": "null",
+      "expected": "true"
+    },
+    {
+      "name": "known-null-other-domain",
+      "operator": "eq",
+      "left_json": "null",
+      "right_json": "false",
+      "expected": "unknown"
+    },
+    {
+      "name": "unresolved-left",
+      "operator": "eq",
+      "left_json": null,
+      "right_json": "null",
+      "expected": "unknown"
+    },
+    {
+      "name": "unresolved-right",
+      "operator": "eq",
+      "left_json": "null",
+      "right_json": null,
+      "expected": "unknown"
+    },
+    {
+      "name": "unresolved-both",
+      "operator": "eq",
+      "left_json": null,
+      "right_json": null,
+      "expected": "unknown"
+    },
+    {
+      "name": "numeric-string-normalization",
+      "operator": "eq",
+      "left_json": "\"1.2300\"",
+      "right_json": "1.23",
+      "expected": "true"
+    },
+    {
+      "name": "numeric-different",
+      "operator": "ne",
+      "left_json": "1",
+      "right_json": "2",
+      "expected": "true"
+    },
+    {
+      "name": "numeric-lt",
+      "operator": "lt",
+      "left_json": "2",
+      "right_json": "3",
+      "expected": "true"
+    },
+    {
+      "name": "numeric-lte-equal",
+      "operator": "lte",
+      "left_json": "9007199254740993",
+      "right_json": "9007199254740993",
+      "expected": "true"
+    },
+    {
+      "name": "negative-small-exact",
+      "operator": "lt",
+      "left_json": "-1e-13",
+      "right_json": "0",
+      "expected": "true"
+    },
+    {
+      "name": "positive-small-exact",
+      "operator": "gt",
+      "left_json": "1e-13",
+      "right_json": "0",
+      "expected": "true"
+    },
+    {
+      "name": "tiny-numbers-distinct",
+      "operator": "eq",
+      "left_json": "1e-13",
+      "right_json": "2e-13",
+      "expected": "false"
+    },
+    {
+      "name": "large-scientific-exact",
+      "operator": "gt",
+      "left_json": "1e21",
+      "right_json": "0",
+      "expected": "true"
+    },
+    {
+      "name": "fraction-never-rounded-to-integer",
+      "operator": "ne",
+      "left_json": "9007199254740992.1",
+      "right_json": "9007199254740992",
+      "expected": "true"
+    },
+    {
+      "name": "large-integers-distinct",
+      "operator": "eq",
+      "left_json": "9007199254740992",
+      "right_json": "9007199254740993",
+      "expected": "false"
+    },
+    {
+      "name": "upper-exponent-bound",
+      "operator": "gt",
+      "left_json": "1e1000",
+      "right_json": "9e999",
+      "expected": "true"
+    },
+    {
+      "name": "lower-exponent-bound",
+      "operator": "lt",
+      "left_json": "1e-1000",
+      "right_json": "1e-999",
+      "expected": "true"
+    },
+    {
+      "name": "large-decimal-lexeme",
+      "operator": "eq",
+      "left_json": "\"999999999999999999999999999999999999.123456789012\"",
+      "right_json": "999999999999999999999999999999999999.123456789012",
+      "expected": "true"
+    },
+    {
+      "name": "decimal-trailing-zeroes",
+      "operator": "eq",
+      "left_json": "\"0.100000000000\"",
+      "right_json": "0.1",
+      "expected": "true"
+    },
+    {
+      "name": "decimal-zero",
+      "operator": "eq",
+      "left_json": "\"0.000000\"",
+      "right_json": "0",
+      "expected": "true"
+    },
+    {
+      "name": "scientific-string-plain-domain",
+      "operator": "eq",
+      "left_json": "\"1e3\"",
+      "right_json": "1000",
+      "expected": "unknown"
+    },
+    {
+      "name": "leading-zero-string-plain-domain",
+      "operator": "eq",
+      "left_json": "\"01\"",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "terminal-lf-string-plain-domain",
+      "operator": "eq",
+      "left_json": "\"1\\n\"",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "unicode-digit-string-plain-domain",
+      "operator": "eq",
+      "left_json": "\"\u0661\"",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "negative-string-plain-domain",
+      "operator": "eq",
+      "left_json": "\"-1\"",
+      "right_json": "-1",
+      "expected": "unknown"
+    },
+    {
+      "name": "thirteen-fraction-string-plain-domain",
+      "operator": "eq",
+      "left_json": "\"1.0000000000000\"",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "nan-text-remains-plain-text",
+      "operator": "eq",
+      "left_json": "\"NaN\"",
+      "right_json": "\"NaN\"",
+      "expected": "true"
+    },
+    {
+      "name": "plain-string-same",
+      "operator": "eq",
+      "left_json": "\"word\"",
+      "right_json": "\"word\"",
+      "expected": "true"
+    },
+    {
+      "name": "plain-string-different",
+      "operator": "eq",
+      "left_json": "\"word\"",
+      "right_json": "\"other\"",
+      "expected": "false"
+    },
+    {
+      "name": "plain-string-ne",
+      "operator": "ne",
+      "left_json": "\"word\"",
+      "right_json": "\"other\"",
+      "expected": "true"
+    },
+    {
+      "name": "numeric-and-plain-string-domains",
+      "operator": "eq",
+      "left_json": "\"1\"",
+      "right_json": "\"word\"",
+      "expected": "unknown"
+    },
+    {
+      "name": "canonical-and-noncanonical-string-domains",
+      "operator": "eq",
+      "left_json": "\"1\"",
+      "right_json": "\"01\"",
+      "expected": "unknown"
+    },
+    {
+      "name": "plain-domain-ne-preserves-unknown",
+      "operator": "ne",
+      "left_json": "\"01\"",
+      "right_json": "\"1\"",
+      "expected": "unknown"
+    },
+    {
+      "name": "boolean-ordering-unknown",
+      "operator": "lt",
+      "left_json": "false",
+      "right_json": "true",
+      "expected": "unknown"
+    },
+    {
+      "name": "numeric-gte-equal",
+      "operator": "gte",
+      "left_json": "1.00",
+      "right_json": "\"1\"",
+      "expected": "true"
+    },
+    {
+      "name": "numeric-gt-equal",
+      "operator": "gt",
+      "left_json": "1",
+      "right_json": "1",
+      "expected": "false"
+    },
+    {
+      "name": "direct-empty-container-equality",
+      "operator": "eq",
+      "left_json": "[]",
+      "right_json": "[]",
+      "expected": "unknown"
+    },
+    {
+      "name": "direct-object-equality",
+      "operator": "eq",
+      "left_json": "{\"a\":1}",
+      "right_json": "{\"a\":1}",
+      "expected": "unknown"
+    },
+    {
+      "name": "direct-container-ne",
+      "operator": "ne",
+      "left_json": "[]",
+      "right_json": "[]",
+      "expected": "unknown"
+    },
+    {
+      "name": "direct-container-shape-does-not-decide",
+      "operator": "eq",
+      "left_json": "[1]",
+      "right_json": "[]",
+      "expected": "unknown"
+    },
+    {
+      "name": "container-ordering-unknown",
+      "operator": "lt",
+      "left_json": "[]",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "member-match-dominates-unknown",
+      "operator": "contains",
+      "left_json": "[true,1]",
+      "right_json": "1",
+      "expected": "true"
+    },
+    {
+      "name": "member-match-dominates-after-permutation",
+      "operator": "contains",
+      "left_json": "[1,true]",
+      "right_json": "1",
+      "expected": "true"
+    },
+    {
+      "name": "member-unmatched-with-incomparable",
+      "operator": "contains",
+      "left_json": "[true,2]",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "member-proven-absence",
+      "operator": "contains",
+      "left_json": "[2,3]",
+      "right_json": "1",
+      "expected": "false"
+    },
+    {
+      "name": "member-array-length-mismatch",
+      "operator": "contains",
+      "left_json": "[[1,2]]",
+      "right_json": "[1]",
+      "expected": "false"
+    },
+    {
+      "name": "member-object-key-mismatch",
+      "operator": "contains",
+      "left_json": "[{\"a\":true}]",
+      "right_json": "{\"b\":1}",
+      "expected": "false"
+    },
+    {
+      "name": "member-object-key-order-irrelevant",
+      "operator": "contains",
+      "left_json": "[{\"a\":1,\"b\":\"x\"}]",
+      "right_json": "{\"b\":\"x\",\"a\":1}",
+      "expected": "true"
+    },
+    {
+      "name": "member-object-false-dominates-unknown",
+      "operator": "contains",
+      "left_json": "[{\"a\":true,\"b\":0}]",
+      "right_json": "{\"a\":1,\"b\":1}",
+      "expected": "false"
+    },
+    {
+      "name": "member-array-false-dominates-unknown",
+      "operator": "contains",
+      "left_json": "[[true,0]]",
+      "right_json": "[1,1]",
+      "expected": "false"
+    },
+    {
+      "name": "member-array-order-significant",
+      "operator": "contains",
+      "left_json": "[[1,2]]",
+      "right_json": "[2,1]",
+      "expected": "false"
+    },
+    {
+      "name": "member-array-duplicates-preserved",
+      "operator": "contains",
+      "left_json": "[[1,1]]",
+      "right_json": "[1]",
+      "expected": "false"
+    },
+    {
+      "name": "recursive-numeric-string-normalization",
+      "operator": "contains",
+      "left_json": "[[\"1\"]]",
+      "right_json": "[1]",
+      "expected": "true"
+    },
+    {
+      "name": "direct-numeric-string-array-remains-unknown",
+      "operator": "eq",
+      "left_json": "[\"1\"]",
+      "right_json": "[1]",
+      "expected": "unknown"
+    },
+    {
+      "name": "nested-boolean-number-unknown",
+      "operator": "contains",
+      "left_json": "[[true]]",
+      "right_json": "[1]",
+      "expected": "unknown"
+    },
+    {
+      "name": "array-object-domains-unknown",
+      "operator": "contains",
+      "left_json": "[[]]",
+      "right_json": "{}",
+      "expected": "unknown"
+    },
+    {
+      "name": "container-scalar-domains-unknown",
+      "operator": "contains",
+      "left_json": "[[]]",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "scalar-container-domains-unknown",
+      "operator": "contains",
+      "left_json": "[1]",
+      "right_json": "[]",
+      "expected": "unknown"
+    },
+    {
+      "name": "nested-empty-arrays-equal",
+      "operator": "contains",
+      "left_json": "[[]]",
+      "right_json": "[]",
+      "expected": "true"
+    },
+    {
+      "name": "nested-empty-objects-equal",
+      "operator": "contains",
+      "left_json": "[{}]",
+      "right_json": "{}",
+      "expected": "true"
+    },
+    {
+      "name": "substring-positive",
+      "operator": "contains",
+      "left_json": "\"abc\"",
+      "right_json": "\"bc\"",
+      "expected": "true"
+    },
+    {
+      "name": "substring-numeric-looking-text",
+      "operator": "contains",
+      "left_json": "\"12003\"",
+      "right_json": "\"00\"",
+      "expected": "true"
+    },
+    {
+      "name": "substring-never-numeric-normalizes",
+      "operator": "contains",
+      "left_json": "\"100\"",
+      "right_json": "\"1.0\"",
+      "expected": "false"
+    },
+    {
+      "name": "substring-empty-needle",
+      "operator": "contains",
+      "left_json": "\"abc\"",
+      "right_json": "\"\"",
+      "expected": "true"
+    },
+    {
+      "name": "substring-in-order",
+      "operator": "in",
+      "left_json": "\"bc\"",
+      "right_json": "\"abc\"",
+      "expected": "true"
+    },
+    {
+      "name": "substring-reversed-order",
+      "operator": "contains",
+      "left_json": "\"bc\"",
+      "right_json": "\"abc\"",
+      "expected": "false"
+    },
+    {
+      "name": "substring-other-domain-unknown",
+      "operator": "contains",
+      "left_json": "\"123\"",
+      "right_json": "23",
+      "expected": "unknown"
+    },
+    {
+      "name": "membership-missing-container",
+      "operator": "contains",
+      "left_json": null,
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "object-is-not-a-membership-list",
+      "operator": "contains",
+      "left_json": "{\"a\":1}",
+      "right_json": "\"a\"",
+      "expected": "unknown"
+    },
+    {
+      "name": "array-in-order",
+      "operator": "in",
+      "left_json": "1",
+      "right_json": "[1,2]",
+      "expected": "true"
+    },
+    {
+      "name": "in-non-container-unknown",
+      "operator": "in",
+      "left_json": "1",
+      "right_json": "2",
+      "expected": "unknown"
+    },
+    {
+      "name": "empty-list-contains-false",
+      "operator": "contains",
+      "left_json": "[]",
+      "right_json": "1",
+      "expected": "false"
+    },
+    {
+      "name": "empty-list-unresolved-item-unknown",
+      "operator": "contains",
+      "left_json": "[]",
+      "right_json": null,
+      "expected": "unknown"
+    },
+    {
+      "name": "empty-intersection",
+      "operator": "intersects",
+      "left_json": "[]",
+      "right_json": "[]",
+      "expected": "false"
+    },
+    {
+      "name": "empty-subset",
+      "operator": "subset_of",
+      "left_json": "[]",
+      "right_json": "[]",
+      "expected": "true"
+    },
+    {
+      "name": "empty-left-subset",
+      "operator": "subset_of",
+      "left_json": "[]",
+      "right_json": "[1]",
+      "expected": "true"
+    },
+    {
+      "name": "nonempty-left-empty-right-subset",
+      "operator": "subset_of",
+      "left_json": "[1]",
+      "right_json": "[]",
+      "expected": "false"
+    },
+    {
+      "name": "set-common-item",
+      "operator": "intersects",
+      "left_json": "[1,2]",
+      "right_json": "[2,3]",
+      "expected": "true"
+    },
+    {
+      "name": "set-known-match-dominates-unknown",
+      "operator": "intersects",
+      "left_json": "[true,1]",
+      "right_json": "[1]",
+      "expected": "true"
+    },
+    {
+      "name": "set-incomparable-without-known-match",
+      "operator": "intersects",
+      "left_json": "[true,2]",
+      "right_json": "[1]",
+      "expected": "unknown"
+    },
+    {
+      "name": "set-proven-disjoint",
+      "operator": "intersects",
+      "left_json": "[2]",
+      "right_json": "[1]",
+      "expected": "false"
+    },
+    {
+      "name": "subset-duplicate-left-membership",
+      "operator": "subset_of",
+      "left_json": "[1,1]",
+      "right_json": "[1]",
+      "expected": "true"
+    },
+    {
+      "name": "subset-known-false-dominates-unknown",
+      "operator": "subset_of",
+      "left_json": "[true,2]",
+      "right_json": "[1]",
+      "expected": "false"
+    },
+    {
+      "name": "subset-incomparable-only",
+      "operator": "subset_of",
+      "left_json": "[true]",
+      "right_json": "[1]",
+      "expected": "unknown"
+    },
+    {
+      "name": "subset-known-and-unknown",
+      "operator": "subset_of",
+      "left_json": "[true,1]",
+      "right_json": "[true]",
+      "expected": "unknown"
+    },
+    {
+      "name": "set-recursive-normalization",
+      "operator": "intersects",
+      "left_json": "[{\"a\":1}]",
+      "right_json": "[{\"a\":\"1\"}]",
+      "expected": "true"
+    },
+    {
+      "name": "subset-container-domain-expansion",
+      "operator": "subset_of",
+      "left_json": "[[]]",
+      "right_json": "[[]]",
+      "expected": "true"
+    },
+    {
+      "name": "set-container-domain-mismatch",
+      "operator": "intersects",
+      "left_json": "[[]]",
+      "right_json": "[{}]",
+      "expected": "unknown"
+    },
+    {
+      "name": "set-requires-both-arrays",
+      "operator": "subset_of",
+      "left_json": "[1]",
+      "right_json": "1",
+      "expected": "unknown"
+    },
+    {
+      "name": "subset-unresolved-left",
+      "operator": "subset_of",
+      "left_json": null,
+      "right_json": "[]",
+      "expected": "unknown"
+    },
+    {
+      "name": "intersection-unresolved-right",
+      "operator": "intersects",
+      "left_json": "[]",
+      "right_json": null,
+      "expected": "unknown"
+    },
+    {
+      "name": "intersects-symmetric-mixed-domains",
+      "operator": "intersects",
+      "left_json": "[1]",
+      "right_json": "[true,2]",
+      "expected": "unknown"
+    },
+    {
+      "name": "unicode-scalar-string-equality",
+      "operator": "eq",
+      "left_json": "\"\ud834\udd1e\"",
+      "right_json": "\"\\ud834\\udd1e\"",
+      "expected": "true"
+    },
+    {
+      "name": "unicode-normalization-not-implied",
+      "operator": "eq",
+      "left_json": "\"\u00e9\"",
+      "right_json": "\"e\\u0301\"",
+      "expected": "false"
+    }
+  ]
+}
