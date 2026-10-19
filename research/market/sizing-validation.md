@@ -20,8 +20,8 @@ and 68,608,233,472 physical RAM bytes. These are observations, not reservations.
 OLMoE's 13,838,323,712-byte resident weights exceed both this session's observed
 spare GPU capacity and the retained cap on managed device buffers; those cells stay unexecuted.
 
-[PR #472](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/472)
-delivers the [fixed H1 protocol](measurements/local-comparison-2026-10-19/protocol.md):
+[PR #476](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/476)
+records the [fixed H1 protocol](measurements/local-comparison-2026-10-19/protocol.md):
 the pinned SmolLM2 F16 GGUF and b11669 runtime, context 256, batch/ubatch 128,
 sequence capacity 1, initialization only. All resource guards, managed allocation
 cap and graph refusal remain. The exact source preceded the new build.

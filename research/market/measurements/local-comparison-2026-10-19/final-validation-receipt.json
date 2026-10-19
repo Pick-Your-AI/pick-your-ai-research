@@ -1,0 +1,96 @@
+{
+  "classification": "actual final local checks; process-local PYTHONUTF8=1; original Windows failures preserved separately",
+  "source_head": "a7e58171c2627f4bb0ba615fb25dd0e9ffe9b9c7",
+  "environment": {
+    "PYTHONUTF8": "1"
+  },
+  "commands": [
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "contracts/v1/tests",
+        "-v"
+      ],
+      "started_utc": "2026-10-19T07:19:18.739559+00:00",
+      "exit_code": 0,
+      "log_sha256": "27dc00de5d8987533efefbe6174bfd5f497123e1f424728c63b80a597c0216af",
+      "log_bytes": 2707,
+      "summary": "ct.TestSchema.test_registry_same_kinds_tier_and_selection_settings) ... ok\r\ntest_secret_reference_required_and_cleartext_rejected (test_contract.TestSchema.test_secret_reference_required_and_cleartext_rejected) ... ok\r\ntest_stale_cost_estimate_is_unknown_not_pass (test_contract.TestSchema.test_stale_cost_estimate_is_unknown_not_pass) ... ok\r\ntest_unestimated_vram_is_unknown_and_blocks (test_contract.TestSchema.test_unestimated_vram_is_unknown_and_blocks) ... ok\r\ntest_untrusted_resource_estimate_does_not_pass (test_contract.TestSchema.test_untrusted_resource_estimate_does_not_pass) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 21 tests in 0.730s\r\n\r\nOK\r\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "started_utc": "2026-10-19T07:19:19.858462+00:00",
+      "exit_code": 0,
+      "log_sha256": "0f0336452457f179f2369beaef849108777ba3d89d8370a0f92f23103165b171",
+      "log_bytes": 216300,
+      "summary": "complete_panel) ... ok\r\ntest_recorded_text_units_and_residuals_reconcile (test_token_count_evidence.TokenCountEvidence.test_recorded_text_units_and_residuals_reconcile) ... ok\r\ntest_tokenizer_identity_matches_external_manifest (test_token_count_evidence.TokenCountEvidence.test_tokenizer_identity_matches_external_manifest) ... ok\r\ntest_cases_match_the_documented_rule (test_wr6_sequence_accounting.WR6SequenceAccounting.test_cases_match_the_documented_rule) ... ok\r\ntest_fixture_is_synthetic (test_wr6_sequence_accounting.WR6SequenceAccounting.test_fixture_is_synthetic) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 1216 tests in 499.109s\r\n\r\nOK (skipped=9)\r\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/validate_research.py"
+      ],
+      "started_utc": "2026-10-19T07:27:39.782262+00:00",
+      "exit_code": 0,
+      "log_sha256": "3b05dc2c4414a16d1d0e3a673ea43a93f093f7cc95ecfe3d5b08f4152a7f4924",
+      "log_bytes": 118,
+      "summary": "Validated 124 catalog proposals and 3 pricebooks plus external evidence metadata. Evidence review is still required.\r\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/validate_market_research.py"
+      ],
+      "started_utc": "2026-10-19T07:27:40.340465+00:00",
+      "exit_code": 0,
+      "log_sha256": "7e37034755144fec9a79909895527b6d2da1fb45254baf19bd75ec30378c0b61",
+      "log_bytes": 57,
+      "summary": "Market integrity OK: 39 entities, 1872 cells, 20 issues\r\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/validate_handoff_audit.py"
+      ],
+      "started_utc": "2026-10-19T07:27:40.505974+00:00",
+      "exit_code": 0,
+      "log_sha256": "4d7d9d1cb08ee5d7b64494bc1a1d4c89b70042e90af1f34eba6482471aa00ba2",
+      "log_bytes": 89,
+      "summary": "Handoff audit integrity OK: 101 rows; 98 declared pairs; human acceptance not certified\r\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "prompts/mobile/validate_prompts.py"
+      ],
+      "started_utc": "2026-10-19T07:27:40.645650+00:00",
+      "exit_code": 0,
+      "log_sha256": "8d826ee575929e92c31bacc1c314dace0a828d407a9c84fbb7ab3a03cbfe661b",
+      "log_bytes": 298,
+      "summary": "PASS: 2 Projects, 258 issues, 36 epic prompts, 906 criteria, 880 steps; mappings, paths, local links, field vocabulary and prerequisite DAG; 7 accepted placement coordinates\r\nNot certified: source truth, rights/freshness, application behavior, devices, store/release state or reviewer acceptance.\r\n"
+    },
+    {
+      "command": [
+        "$VALIDATION_PYTHON",
+        "scripts/mr09_local_compare_report.py"
+      ],
+      "started_utc": "2026-10-19T07:27:41.434755+00:00",
+      "exit_code": 0,
+      "log_sha256": "a5c170371d87344082c1170f0b56f8b029d47416944e6856fd04ae0416e0575d",
+      "log_bytes": 4289,
+      "summary": "2,\r\n      \"corroborating_ledger_signed_relative_percent_exact\": \"-308200/1178417\"\r\n    }\r\n  ],\r\n  \"exact_ledger_live_bytes_min_median_max\": [\r\n    301674752,\r\n    301674752,\r\n    301674752\r\n  ],\r\n  \"tolerance\": null,\r\n  \"fit_verdict\": null,\r\n  \"limits\": [\r\n    \"instrumented initialization only; host buffers and opaque CUDA/library/context memory excluded\",\r\n    \"native self interval is primary; exact ledger is corroboration\",\r\n    \"three repetitions of one configuration do not establish universal bounds\",\r\n    \"experimental project derivative; no accuracy claim for unmodified upstream release\",\r\n    \"no inference, whole-runtime peaks, new named-owner acceptance or ResourceEstimate\"\r\n  ]\r\n}\r\n"
+    }
+  ]
+}
