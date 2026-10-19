@@ -1000,6 +1000,75 @@ class ArtifactGate(SyntheticBase):
             self.assertEqual(code, 0)
             self.assertTrue(json.loads(out.read_text())["all_passed"])
 
+
+    def test_cli_power_float_boundary_and_overflow_keep_structured_output(self):
+        largest = float.fromhex("0x1.fffffffffffffp+1023")
+        for token, expected_code in (("9" * 400, 1), (format(largest, ".0f"), 0)):
+            with self.subTest(expected_code=expected_code):
+                captures = self.mutated_captures(A_FILE, "2.00 W", token + " W")
+                record = self.mutated_record()
+                if expected_code == 0:
+                    # Selected power is [largest, 4]: these are mathematical
+                    # expectations rounded to the descriptive float domain.
+                    series = record["load"]["series"]["SYN_A_index_0"]
+                    series.update(min_w=4.0, mean_w=largest / 2, max_w=largest,
+                                  samples_above_limit=1)
+                    record["load"]["range_of_series_means_w"] = {"low": 5.0, "high": largest / 2}
+                    record["load"]["max_sample_w"] = largest
+                with tempfile.TemporaryDirectory() as tmp, mock.patch("sys.stdout"):
+                    self.stage(tmp, overrides=captures)
+                    record_path, out = Path(tmp) / "record.json", Path(tmp) / "result.json"
+                    record_path.write_text(json.dumps(record))
+                    with mock.patch.object(CHECKER, "PINS", synthetic_pins(captures)):
+                        code = CHECKER.main(["--artifact-dir", tmp, "--record", str(record_path),
+                                             "--output", str(out)])
+                    result = json.loads(out.read_text())
+                self.assertEqual(code, expected_code)
+                self.assertEqual(result["all_passed"], expected_code == 0)
+                json.dumps(result, allow_nan=False)
+                failed = {c["check"]: c["detail"] for c in result["checks"] if not c["passed"]}
+                if expected_code:
+                    self.assertEqual(set(failed), {A_FILE + ".cell_units"})
+                    self.assertIn("finite float", failed[A_FILE + ".cell_units"])
+                    self.assertEqual(result["recomputed"], {})
+                else:
+                    self.assertEqual(failed, {})
+                    self.assertEqual(result["recomputed"]["series.SYN_A_index_0.max"], largest)
+
+    def test_cli_finite_pair_median_overflow_is_a_named_arithmetic_failure(self):
+        largest = float.fromhex("0x1.fffffffffffffp+1023")
+        token = format(largest, ".0f") + " W"
+        captures = self.mutated_captures(IDLE_FILE, "1.00 W", token)
+        captures[IDLE_FILE] = captures[IDLE_FILE].replace(b"2.00 W", token.encode(), 1)
+        # Stop the idle run after two finite values. Their intermediate median
+        # sum overflows even though each individual conversion is finite.
+        captures[IDLE_FILE] = captures[IDLE_FILE].replace(
+            b"3.00 W, 5.00 W, 1.00 W, 9.00 W, 0 %, 10 MiB, 100 MiB, P5",
+            b"3.00 W, 5.00 W, 1.00 W, 9.00 W, 0 %, 10 MiB, 100 MiB, P0", 1)
+        record = self.mutated_record()
+        record["idle"]["samples"] = 2
+        record["idle"]["power_draw_w"] = dict.fromkeys(("min", "mean", "median", "max"), largest)
+        record["idle"]["last_sample_reported_utc"] = "2000-01-01T00:00:02.000Z"
+        record["reported_observed_utc"]["idle_window_end"] = "2000-01-01T00:00:02.000Z"
+        record["idle"]["excluded_rows"]["count"] = 3
+        record["idle"]["excluded_rows"]["rows"].insert(
+            0, {"utilization_pct": 0.0, "memory_used_mib": 10.0, "pstate": "P0", "power_draw_w": 3.0})
+        with tempfile.TemporaryDirectory() as tmp, mock.patch("sys.stdout"):
+            self.stage(tmp, overrides=captures)
+            record_path, out = Path(tmp) / "record.json", Path(tmp) / "result.json"
+            record_path.write_text(json.dumps(record))
+            with mock.patch.object(CHECKER, "PINS", synthetic_pins(captures)):
+                code = CHECKER.main(["--artifact-dir", tmp, "--record", str(record_path),
+                                     "--output", str(out)])
+            result = json.loads(out.read_text())
+        self.assertEqual(code, 1)
+        failed = {c["check"]: c["detail"] for c in result["checks"] if not c["passed"]}
+        self.assertEqual(set(failed), {"idle.power_median"})
+        self.assertIn("arithmetic result is not finite", failed["idle.power_median"])
+        self.assertNotIn("idle.power_median", result["recomputed"])
+        self.assertEqual(result["recomputed"]["idle.power_max"], largest)
+        json.dumps(result, allow_nan=False)
+
     def test_real_pins_name_the_published_redacted_files(self):
         self.assertEqual(set(CHECKER.PINS), {A_NAME, IDLE_NAME})
         for pin in CHECKER.PINS.values():
