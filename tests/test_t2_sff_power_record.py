@@ -6,6 +6,7 @@ These checks do not verify acquisition, workload, timezone, original captures
 or calibrated physical power.
 """
 import csv
+from datetime import datetime
 import hashlib
 import json
 import re
@@ -61,11 +62,22 @@ class PowerRecordTests(unittest.TestCase):
         self.assertAlmostEqual(actual, expected, delta=TOLERANCE_W,
                                msg="%s: recomputed %s, record says %s" % (label, actual, expected))
 
+    def assertReportedTimestampMatchesRow(self, reported, row):
+        # Compare clock text only. The contributor's literal Z label is not
+        # evidence that the offset-free capture was acquired in UTC.
+        self.assertEqual(datetime.strptime(reported, "%Y-%m-%dT%H:%M:%S.%fZ"),
+                         datetime.strptime(row["timestamp"], "%Y/%m/%d %H:%M:%S.%f"))
+
     def test_idle_statistics_recompute_from_csv(self):
         run = idle_run(self.idle_rows)
         power = [number(r["power.draw [W]"]) for r in run]
         rec = self.record["idle"]
         self.assertEqual(len(run), rec["samples"], "idle sample count")
+        self.assertReportedTimestampMatchesRow(rec["first_sample_reported_utc"], run[0])
+        self.assertReportedTimestampMatchesRow(rec["last_sample_reported_utc"], run[-1])
+        reported = self.record["reported_observed_utc"]
+        self.assertReportedTimestampMatchesRow(reported["idle_window_start"], run[0])
+        self.assertReportedTimestampMatchesRow(reported["idle_window_end"], run[-1])
         self.assertClose(min(power), rec["power_draw_w"]["min"], "idle min")
         self.assertClose(statistics.mean(power), rec["power_draw_w"]["mean"], "idle mean")
         self.assertClose(statistics.median(power), rec["power_draw_w"]["median"], "idle median")
@@ -95,12 +107,33 @@ class PowerRecordTests(unittest.TestCase):
         for name, (rows, index) in sources.items():
             power = load_powers(rows, index)
             rec = self.record["load"]["series"][name]
+            device_rows = [r for r in rows if r["index"] == index]
+            excluded = [r for r in device_rows
+                        if number(r["utilization.gpu [%]"]) < 80]
+            self.assertEqual(len(device_rows), rec["samples_total"], name + " total")
+            self.assertEqual(len(excluded), rec["samples_excluded_below_80pct"],
+                             name + " excluded")
+            # The recorded boundaries describe the full per-device capture,
+            # while the power statistics use only the qualifying rows.
+            self.assertReportedTimestampMatchesRow(
+                rec["first_sample_reported_utc"], device_rows[0])
+            self.assertReportedTimestampMatchesRow(
+                rec["last_sample_reported_utc"], device_rows[-1])
             self.assertEqual(len(power), rec["samples_used"], name + " samples used")
             self.assertClose(min(power), rec["min_w"], name + " min")
             self.assertClose(statistics.mean(power), rec["mean_w"], name + " mean")
             self.assertClose(max(power), rec["max_w"], name + " max")
             self.assertEqual(sum(p > 70.0 for p in power), rec["samples_above_limit"], name + " above limit")
             means.append(statistics.mean(power))
+        all_series_rows = [r for rows, index in sources.values()
+                           for r in rows if r["index"] == index]
+        reported = self.record["reported_observed_utc"]
+        self.assertReportedTimestampMatchesRow(
+            reported["load_series_first_sample"],
+            min(all_series_rows, key=lambda r: r["timestamp"]))
+        self.assertReportedTimestampMatchesRow(
+            reported["load_series_last_sample"],
+            max(all_series_rows, key=lambda r: r["timestamp"]))
         rng = self.record["load"]["range_of_series_means_w"]
         self.assertClose(min(means), rng["low"], "load range low")
         self.assertClose(max(means), rng["high"], "load range high")
