@@ -13,11 +13,15 @@ The [actual #30 reconciliation](https://github.com/Pick-Your-AI/pick-your-ai-res
 
 **Artifact summary reconciliation, 2026-10-19:** the artifact section below now follows the exact [#449 delivered record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/201aa8ea927fa35c4794f939f99f18e39dfdafb4/research/T5-training-fine-tuning/fine-tuned-model.md), including the #418/#424 source qualifications and `fine-tuned-artifact-rule-interpretation/0.3.0`. This is a summary of those reviewed decisions, not a new provider, engine, legal-source or measured-quality campaign. Their original access dates, release pins, evidence grades, research-only representations and actual receiving limits remain in the component record.
 
+**Dataset summary reconciliation, 2026-10-19:** [#456's delivered Dataset record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/7d6a3b81abc4fcebafecd34e54c49c0e78432277/research/T5-training-fine-tuning/training-dataset.md) supplies the eight-field evidence map and the twenty remaining D concerns in shared format, alongside the delivered D-01/D-14 interpretation 0.2. It withdraws the unavailable private shortlist/recheck findings and unqualified later-appellate identity/status from operative evidence. Their original statements remain in immutable source history; no replacement audit, primary-source check, access date, evidence grade or rights conclusion is introduced by this summary. Component and parent completion remain the actual issue decisions, separate from the merged representation.
+
+**Parent handoff reconciliation, 2026-10-19 04:50 UTC:** the actual [delegated aggregate decision6259851201](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/29#issuecomment-6259851201) accepts the two boundaries listed in #29 against the current source and six original directional decisions. T1 supplies the scoped model and managed-service facts; T5 owns training and artifact definition; T2 owns selected hardware/engine serving; T6 owns selected evaluation thresholds and actual evidence. Each original reviewer, source, direction and limit stays attached to its own receipt. The parent's second criterion is now checked; its summary criterion was already accepted through [#454](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/454). Fresh native readback retains #30/#31/#33 closed/completed and #32 open/reopened, so the first criterion and #29 remain open. The checked parent handoff criterion covers those two literal #29 boundaries; it does not accept every broader request in the outgoing table, whose individual scopes and outstanding decisions remain as recorded. The pending Dataset child-completion assessment is separate from this summary correction.
+
 | Component | Issue | Decision record | PR | Structured proposals |
 | --- | --- | --- | --- | --- |
 | Training Framework | #30 | [training-framework.md](training-framework.md) | #68 (merged) | 4 `training_framework` proposals ([`catalog/proposals/training_framework-*.json`](../../catalog/proposals/)), all provenance `unverified` |
 | Training Compute | #31 | [training-compute.md](training-compute.md) | #77 (merged) | none (see blockers) |
-| Training Dataset | #32 | [training-dataset.md](training-dataset.md) | #76 (merged) | none (see blockers) |
+| Training Dataset | #32 | [training-dataset.md](training-dataset.md) | #76, #451, #456 (merged) | none; future source-specific intake remains separate |
 | Fine-Tuned Model | #33 | [fine-tuned-model.md](fine-tuned-model.md) | #84 (merged) | none (user-specific artifact) |
 
 ## Scope and optionality
@@ -59,8 +63,7 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ### Training dataset (#32)
 
-- **Rights and privacy checklist (C1–C15):** EU AI Act Art. 53 and the GPAI modifier threshold, DSM Art. 4(3) machine-readable opt-outs, GDPR (EDPB, CNIL, ICO), US fair-use rulings, Creative Commons and ODC licence scope, and provider output terms.
-  - Each item states where training rights differ from retrieval rights (#13).
+- **Rights and privacy checklist (C1–C15):** its dated legal, regulatory and provider inputs accompany the exact source, included subset, actor, use, jurisdiction and period. The actual scoped assessment supplies the answer; licence names, uploader metadata, governance Booleans and record availability do not establish permission, privacy approval or anonymity. Training and retrieval keep separate purpose-specific dispositions with #13.
 - **Preparation procedure:**
   1. Freeze the eval set (with #36).
   2. Validate the format.
@@ -69,7 +72,9 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
   5. Check leakage in layers: exact, 13-gram, MinHash, then embedding plus LLM judge.
   6. Split by source.
   7. Record lineage (Croissant 1.1 / RAI).
-- **Source audit:** the owner's 165-source shortlist was re-checked against the Hugging Face API. 118 of 137 licences match, and 7 substantive discrepancies are recorded.
+- **Eight comparison fields:** source, rights basis, format, split, PII handling, lineage record, dedup method and leakage check have explicit types, units and evidence requirements in the [delivered field map](training-dataset.md#eight-field-evidence-map-and-d-series-companion-03). Bind the actual selected dataset and every included upstream source/revision, preparation edge, participant, intended operation and period. The companion supplies research evidence beside the frozen fields; it does not add JSON members or turn an ID-only reference into complete lineage.
+- **Leakage and trainer interfaces:** #36 owns the evaluation freeze, hashes and canary; T5 owns the ordered check and its methods, counts and set hashes. D-20 concerns availability of that eligible exact record, which can contain an adverse finding while E-R44 independently fails with fixed error severity. D-22 uses the actual trainer/loader/version, objective, tokenizer/template and mask/packing contract; a missing row in the finite comparison is unresolved support evidence. Neither a held-out Boolean nor a method list proves clean data, measured quality or permission.
+- **Historical shortlist:** the unavailable S1/S2 audit and reported recheck counts, distributions and candidate-specific licence/access conclusions are [withdrawn from operative findings](training-dataset.md#historical-shortlist-excluded-from-operative-evidence). The original report remains in immutable c2b/23b history. A future actual source proposal needs its own primary evidence, exact source/version/use and responsible assessment; this summary supplies no replacement audit.
 
 ### Fine-tuned model (#33)
 
@@ -90,7 +95,7 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ## Rules contributed to #40
 
-**Evidence labels.** The component registers retain their original source dates and the interim #41 policy recorded in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Reading primary documentation supports only its stated scope; a passing research assertion or repository test does not reproduce a selected training, export or serving result. The current framework proposal additionally defines exact participants, evidence admission, fixed severity and `on_unknown: review` in its [shared evaluation envelope](training-framework.md#shared-participant-and-evaluation-envelope). Those proposal semantics do not adopt a new frozen rule or grant deployment permission.
+**Evidence labels.** The component registers retain their original source dates and the historical convention in the [#75 owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927); interpret their labels under the [accepted #41 policy](../T0-configuration/catalog-data-sources.md#mapping-evidence-labels-to-frozen-v1). Reading primary documentation supports only its stated scope; a passing research assertion or repository test does not reproduce a selected training, export or serving result. The current framework proposal additionally defines exact participants, evidence admission, fixed severity and `on_unknown: review` in its [shared evaluation envelope](training-framework.md#shared-participant-and-evaluation-envelope). Those proposal semantics do not adopt a new frozen rule or grant deployment permission.
 
 The table counts research identities and points to their current evidence boundaries. The original summary's aggregate of 67 source-checked rules is superseded by the revised F-series assertions; it must not be used as a current evidence total.
 
@@ -98,7 +103,7 @@ The table counts research identities and points to their current evidence bounda
 | --- | --- | --- | --- |
 | F-01 – F-24 | #30 | 24 | `training-framework-decision/0.2.0` replaces the original assertions. Each row distinguishes scoped source checks, historical leads, project policy and unresolved selected-use facts; no aggregate source-checked count is assigned here |
 | K-01 – K-09 | #31 | 9 | `training-compute-decision/0.2.0` supplies the shared participant/configuration/evidence envelope, fixed severity and four outcomes. K-02's headroom remains a project proposal; qualified bounds, missing facts, explicit contradictions, joint support and requested calibration retain distinct outcomes. No aggregate source-checked or measured-result count is assigned here |
-| D-01 – D-22 | #32 | 22 | The component register labels 21 source checked; D-20 is leakage policy with #36. Checked source conditions do not establish an actual dataset's rights, privacy or absence of leakage |
+| D-01 – D-22 | #32 | 22 | Delivered D-01/D-14 interpretation 0.2 and the [0.3 field/profile companion](training-dataset.md#eight-field-evidence-map-and-d-series-companion-03) cover all twenty remaining concerns: six advisories, six evidence-status concerns and eight constraints. Each retains exact participant/evidence scope, fixed severity, explicit unknown handling and synthetic examples. Evidence availability can retain an adverse result; D-20 does not clear E-R44 or the separate frozen governance error/unknown-block predicate. No aggregate source-checked or permission count is assigned here |
 | A-01 – A-20 (A-18 split into A-18a, A-18b, A-18c) | #33 | 22 | The historical register and its labels remain intact. The five corrected 0.2.0 interpretations plus [0.3.0's remaining seventeen concerns](fine-tuned-model.md#complete-a-series-proposal-mapping--research-interpretation-030) provide the full shared proposal format: eleven additional constraints and six advisories, with exact participant/evidence boundaries and fixed severity. Synthetic examples and project inferences remain labeled; this is no executable adoption or new measured result |
 
 There are 77 research rule identities. This count establishes neither executable rule adoption nor independent reproduction; #40 owns adoption and versioned migration. Historical saved results retain their original rule/version/evidence identities.
@@ -138,6 +143,8 @@ The table retains the requested boundaries. The bounded #31 → #39 quantity/uni
 
 The [amended #31 → #39 receiving decision 6255117285](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6255117285) separately accepts the revised compute note's quantity, unit, capacity and uncertainty boundaries against the unchanged `cost-estimate.md` blob `6405fd07b1465178c82bcfeab18d13990ad2836e`. It preserves the earlier receipt and its original source identity. It supplies neither a current quote, observed performance, new meter, rights or entitlement, nor completion of #39.
 
+**Dataset received interfaces:** the [six-row dated reconciliation](training-dataset.md#received-interface-reconciliation--2026-10-19) records #32 → #36, #32 → #33, #30 → #32, #36 → #32, #40 → #32 and #13 → #32 with their actual reviewers, source revisions and dates. The directions remain distinct: #30 supplies the trainer contract, #36 supplies the frozen-set requirements, #40 supplies representation and #32's responsible assessor supplies the scoped answer, while #13 shares source identity without inherited training permission. The [current corrected-source Artifact intake5566913920](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/456#pullrequestreview-5566913920) accepts the unchanged field/profile interface at de61/74d; it does not enlarge the six historical receipts or certify an actual dataset, source right, evaluation result or executable successor.
+
 **#33 → #10/#11/#36/#37: actual scoped receipts.** The [GPU/Compute intake6255801883](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6255801883) receives exact tensor/storage/configuration inputs; the [Engine intake6255802511](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6255802511) retains its three-candidate joint-support scope. [PUSHINGSQUARES's historical A-20 → G5 decision6232138142](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142) is separate from the [reciprocal #36 → #33 requirements6255762046](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6255762046). The [two expressly distinguished Deployment directions6255762785](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6255762785) preserve exact loaded identity, applicable evaluation and rehearsed rollback. The classic FAQ's more-than-15-day/no-named-calls condition deletes the deployment while retaining the model; it is not a universal Foundry policy or an observed deletion. Each receipt keeps its original reviewer, source, direction and constraints; the later #449 completion review does not retroactively repin it. These inputs supply no fit result, executed quality gate, account/rights grant, broader engine inventory or new serving-cost decision.
 
 Incoming T2 boundaries have separate receiving-owner receipts: [#9 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274), [historical #10 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484), and [#11 → #33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684). The later [actual #10 → #31 decision 6250287107](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107) receives the current L40S/RTX 4090/A100 and G6e/P4de subset while retaining H100 SXM/MI300X as note-only. These decisions retain their individual revisions and constraints, including tokenizer/template ownership; they do not accept reverse-direction requests or supply missing catalog records. The two later decisions were read back on 2026-10-18; the earlier receipts retain the prior recorded readback.
@@ -151,7 +158,7 @@ T2 proposals merged in #75 originally supplied three accelerator records. The [2
 | Artifact | Blocked by |
 | --- | --- |
 | `training_compute` items, training Pricebooks, ResourceEstimates | #31 proposes no `training_compute` item and no Pricebook or ResourceEstimate. Missing current records: `compute_profile` for every priced SKU except `aws-ec2-g6e-xlarge-us-east-1` and `aws-ec2-p4de-24xlarge-us-east-1` (#10), and `accelerator` for H100 SXM and MI300X pending precision scope (#10/#40); RTX 4090 identity is supplied by `nvidia-geforce-rtx-4090` version `2026-10-18` without a profile/rate binding, `hosting_platform` for Google Cloud, Azure, Lambda and CoreWeave (#9). Unresolved fields and meters: peak dense TFLOP/s per accelerator, training-token, job-minimum, training-hour and model-storage meters, optional `compute_profile_ref` for managed services, a training-memory ResourceEstimate metric (#40), and whether a multi-GPU instance-hour price maps to `gpu_hour` per GPU or per instance (#39) |
-| `data_source` items from the source audit | `spec_data_source` has no licence, terms or opt-out fields; agreement needed with #13 and #40 |
+| Future source-specific `data_source` proposals | The earlier shortlist/recheck is archival, not an admitted candidate pool. Each future proposal needs its own primary evidence and exact source/version/use assessment. The shared #13 identity and #40 representation/assessor boundaries are already received; richer licence, terms and opt-out evidence still has no frozen `spec_data_source` fields and needs its own versioned adoption |
 | Managed `training_framework` items | `backends` required but not user-visible for managed services (#40) |
 | `fine_tuned_model` items | User-specific; references require `model` and `training_dataset` items, and A-18c needs the proposed `base_notice_file_present` fact (#40, #6) |
 
@@ -162,7 +169,7 @@ None of these is a native GitHub blocker; they are information dependencies unde
 | Question | Owner |
 | --- | --- |
 | What counts as a "competing model" under provider output terms (F-17, D-12–D-14) | #40 · @tynamite |
-| BGH appeal I ZR 281/25 on natural-language TDM reservations (pending) | #32 · @appletechie |
+| Establish any later appellate case identity and disposition following the appeal allowed by the dated R7 judgment before relying on it; qualify the Bartz appeal-notice scope from primary evidence | #32 · @appletechie |
 | Mistral Forge licensing and weight export (not public) | #30 · @appletechie |
 | ONNX export for any training framework | #30 · @appletechie |
 | Calibrate the documented GRPO/distillation phase and allocation models for a concrete workload; calibrate the Qwen3-8B example with a dry run | #31 · @appletechie |
@@ -171,14 +178,12 @@ None of these is a native GitHub blocker; they are information dependencies unde
 
 ## Secondary inputs
 
-The workstream owner supplied two internal documents, used as leads and re-checked against primary sources; neither is committed:
-- a 165-row free training-source audit;
-- a local training-methods guide.
+The historical private training-source compilation and reported Hub recheck are preserved in the Dataset record's immutable source links. Their underlying audit and claim-level records are unavailable here, so the counts, discrepancies, distribution and source-specific conclusions are withdrawn from operative evidence. No current primary-source check, grade or eligible candidate is inferred from those archived statements.
 
-Where they disagreed with primary sources, the notes say so. For example, the guide's 8-bit Adam memory figure is refuted (#31).
+The separate local training-methods guide remains a historical lead in #31. Its disagreements, including the guide's 8-bit Adam memory figure, retain the compute note's actual source and accounting qualification. This Dataset correction neither supplies that private document nor broadens its original check.
 
 ## Workstream done when
 
 - [ ] #30–#33 closed with merged decision records meeting their acceptance criteria (the four records are merged; research completion and remaining handoffs are recorded separately in each component issue)
-- [ ] Handoffs above confirmed by the consuming owners
-- [ ] This summary merged, with rules contributed to #40 and open questions current
+- [x] Handoffs above confirmed by the consuming owners
+- [x] This summary merged, with rules contributed to #40 and open questions current
