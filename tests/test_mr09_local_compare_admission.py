@@ -41,7 +41,9 @@ class ProspectiveAdmissionTests(unittest.TestCase):
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
-        self.base = Path(temp.name)
+        # Production resolves ROOT and admitted paths; keep every fixture and
+        # mock in that physical namespace when the temporary parent is aliased.
+        self.base = Path(temp.name).resolve()
         self.root = self.base / "reviewed-repository"
         self.root.mkdir()
         self.temporary = self.base / "synthetic-runtime"
@@ -650,6 +652,42 @@ raise AssertionError('witness must never complete a native run')
             self.assertEqual(admission.main(), 1)
         self.assertEqual(json.loads(output.getvalue()), {"status": "admission_failed", "error_type": "CalledProcessError"})
         self.assertEqual(error.getvalue(), "")
+
+
+class AdmissionTemporaryRootTests(unittest.TestCase):
+    def test_original_admission_guards_under_aliased_temporary_root(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp).resolve()
+            physical = base / "physical"
+            physical.mkdir()
+            alias = base / "alias"
+            try:
+                alias.symlink_to(physical, target_is_directory=True)
+            except OSError as error:
+                if os.name == "nt" and getattr(error, "winerror", None) == 1314:
+                    self.skipTest("directory symlink fixture unavailable "
+                                  "(Windows privilege not held; winerror 1314)")
+                raise
+            self.assertNotEqual(alias, alias.resolve())
+            self.assertEqual(alias.resolve(), physical)
+            methods = (
+                "test_complete_future_packet_runs_real_admission_and_three_serial_mocked_trials",
+                "test_each_missing_guard_packet_or_package_binding_stops_before_hardware",
+                "test_failed_preflight_never_reaches_mocked_native_child",
+                "test_wrong_driver_and_initial_query_exception_are_durable_without_child",
+                "test_failed_native_result_stays_retained_and_blocks_every_later_repetition",
+            )
+            # Run the original assertions with fresh fixtures through the same
+            # directory-alias condition that /var supplies on macOS. Each case
+            # retains its own cleanup and unconfigured-external-call rejection.
+            with mock.patch.object(tempfile, "tempdir", str(alias)):
+                for method in methods:
+                    with self.subTest(admission_case=method):
+                        result = unittest.TestResult()
+                        ProspectiveAdmissionTests(method).run(result)
+                        self.assertEqual(result.testsRun, 1)
+                        self.assertEqual(result.skipped, [])
+                        self.assertTrue(result.wasSuccessful(), result.failures + result.errors)
 
 
 if __name__ == "__main__":
