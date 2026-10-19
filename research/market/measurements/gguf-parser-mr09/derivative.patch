@@ -75,7 +75,7 @@ index 3591ad6..399b1a6 100644
  		SDCOffloadLayers                *uint64
 diff --git a/file_estimate_mr09.go b/file_estimate_mr09.go
 new file mode 100644
-index 0000000..cdda6cb
+index 0000000..26bfad4
 --- /dev/null
 +++ b/file_estimate_mr09.go
 @@ -0,0 +1,252 @@
@@ -322,7 +322,7 @@ index 0000000..cdda6cb
 +		return result, fmt.Errorf("effective estimator placement or context drift")
 +	}
 +	return MR09InitBufferEstimate{
-+		Identity:       "gguf-parser-go-v0.26.4+mr09-output.1-experimental",
++		Identity:       "gguf-parser-go-v0.26.4+mr09-output.2-experimental",
 +		UpstreamCommit: "637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
 +		ArtifactSHA256: actualSHA256, ArtifactBytes: uint64(len(data)), Profile: p,
 +		HostReadbackRows:   p.SequenceCapacity,
@@ -435,3 +435,24 @@ index 0000000..ac31302
 +		os.Exit(1)
 +	}
 +}
+diff --git a/file.go b/file.go
+index 45f0bd56cf16e53f3f2f3ecca65eef029f673af5..22d2c9e22840dcb491981df205e75ee617a8d6ef 100644
+--- a/file.go
++++ b/file.go
+@@ -441,13 +441,9 @@
+ 
+ 		// tensor infos
+ 		if gf.TensorInfos == nil {
+-			tc, ok := gf.Header.MetadataKV.Get("split.tensors.count")
+-			if ok {
+-				gf.TensorInfos = make(GGUFTensorInfos, 0, anyx.Number[int](tc.Value))
+-			} else {
+-				// avoid preallocating with tensorCount (could be huge); start empty and append
+-				gf.TensorInfos = make(GGUFTensorInfos, 0)
+-			}
++			// Do not reserve from split.tensors.count. Append only the actual
++			// tensor records read from each file's bounded header count.
++			gf.TensorInfos = make(GGUFTensorInfos, 0)
+ 		}
+ 		{
+ 			rd := _GGUFTensorInfoReader{_GGUFReader: rd}

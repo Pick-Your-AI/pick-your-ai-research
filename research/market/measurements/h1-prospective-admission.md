@@ -55,7 +55,12 @@ reviewable preparation record; the launcher does not reproduce the CPU build,
 authenticate a review author, or turn a self-authored review JSON into approval.
 
 The prediction must name the pinned SmolLM2 artifact, experimental estimator
-identity and upstream revision. All 20 H1 profile fields are exact and typed:
+identity `gguf-parser-go-v0.26.4+mr09-output.2-experimental` and upstream revision.
+This maintained prospective identity follows the reviewed parser correction in
+[#483](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/483). It requires
+a separate future prediction and coherent preparation/build/source packet; the
+captured `.1` prediction and its offline report retain their historical identity.
+All 20 H1 profile fields are exact and typed:
 for example, integer sequence capacity `1` cannot be replaced by `true` or
 `1.0`. Declared controls and estimate placement must agree. The prediction must
 contain the host plus CUDA0 estimate, complete nonnegative integer CUDA0 byte
@@ -123,11 +128,15 @@ python -m unittest discover -s tests -p test_mr09_local_compare_admission.py -v
 python -m unittest discover -s tests -p test_mr09_local_compare_run.py -v
 ```
 
-The prospective tests copy the reviewed source/package bytes and replay the
-existing CPU prediction as a clearly labeled temporary fixture. They use tiny
-non-executable runtime/model stand-ins, explicit model/ledger pin substitutions
-and mocked driver/preflight/native responses. They exercise the real admission
-and result validators. Separate Python child processes prove the exclusive
+The prospective tests copy the reviewed current source/package bytes and replay
+only the historical prediction's numerical/control terms in a separately labeled
+synthetic current-package packet. Synthetic preparation, build and review keys
+and a tiny non-executable estimator stand-in carry no historical execution or
+approval claim. The tests preserve every historical file, retain exact numeric
+fixture terms, and reject mixed historical/current package identities or hashes.
+They use tiny non-executable runtime/model stand-ins, explicit model/ledger pin
+substitutions and mocked driver/preflight/native responses. They exercise the
+real admission and result validators. Separate Python child processes prove the exclusive
 claim and persistent fences after hard process exits; those witnesses cannot
 invoke a model, estimator, GPU command or native binary. No synthetic fixture
 is committed to the measurement directory or promoted as research evidence.

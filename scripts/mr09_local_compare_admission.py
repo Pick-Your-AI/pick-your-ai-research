@@ -39,7 +39,7 @@ PACKET_FILES = frozenset({
     "estimator-profile.json", "estimator-prediction.json", "prediction-receipt.json",
     "estimator-manifest.json", "semantic-review.json",
 })
-ESTIMATOR_ID = "gguf-parser-go-v0.26.4+mr09-output.1-experimental"
+ESTIMATOR_ID = "gguf-parser-go-v0.26.4+mr09-output.2-experimental"
 UPSTREAM_COMMIT = "637cd9a7a03993ab30ace3c53dd8af5c37f46a94"
 UPSTREAM_TREE = "4b67ed5331cbd40639db36890f8453c61ac604b7"
 H1_PROFILE = {

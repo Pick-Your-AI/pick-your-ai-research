@@ -14,7 +14,10 @@ def main():
     parser.add_argument("--temporary-dir", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--profile", choices=("granite30", "granite31"), default="granite30")
+    parser.add_argument("--preserve-output", action="store_true", help="require a fresh output path and preserve existing observations")
     args = parser.parse_args()
+    if args.preserve_output and (args.output.exists() or args.output.is_symlink()):
+        parser.error("output exists; preserve observations and choose a fresh path")
     disk_threshold = 12 * 2**30 if args.profile == "granite30" else 2 * 2_669_283_096 + 2**30
     result = {"classification": "read-only capacity screen; not inference or a fit guarantee",
               "profile": args.profile,
@@ -48,7 +51,15 @@ def main():
     except Exception as error:
         result["status"] = "unexecuted"
         result["reason"] = type(error).__name__ + ": " + str(error)
-    args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    serialized = json.dumps(result, indent=2) + "\n"
+    if args.preserve_output:
+        try:
+            with args.output.open("x", encoding="utf-8") as output:
+                output.write(serialized)
+        except FileExistsError:
+            parser.error("output exists; preserve observations and choose a fresh path")
+    else:
+        args.output.write_text(serialized, encoding="utf-8")
     print(json.dumps(result, indent=2))
 
 

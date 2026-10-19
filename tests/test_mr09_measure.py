@@ -13,6 +13,8 @@ import sys
 import unittest
 from unittest.mock import patch
 
+from mr09_fixture_support import symlink_or_skip
+
 SPEC = importlib.util.spec_from_file_location("mr09_measure", Path(__file__).resolve().parents[1] / "scripts/mr09_measure.py")
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
@@ -66,6 +68,141 @@ def write_synthetic_run(root, run, suffix=None):
     path = root / f"mr09-{run['cell']}-r{name}.json"
     path.write_text(json.dumps(run), encoding="utf-8")
     return path
+
+
+class MeasurementOutputPreservationTests(unittest.TestCase):
+    """Exercise the real CLI boundary using offline actions, never model execution."""
+
+    def test_existing_output_rejects_both_actions_without_changing_observations(self):
+        for prepare in (False, True):
+            for kind in ("file", "directory", "symlink", "dangling_symlink"):
+                with self.subTest(prepare=prepare, kind=kind), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    output, model = root / "result.json", root / "model"
+                    retained = root / "retained.json"
+                    original = b"synthetic prior dense observation\n"
+                    if kind == "file":
+                        output.write_bytes(original)
+                    elif kind == "directory":
+                        output.mkdir()
+                        (output / "retained.json").write_bytes(original)
+                    else:
+                        if kind == "symlink":
+                            retained.write_bytes(original)
+                        symlink_or_skip(output, retained)
+                    before = {str(path.relative_to(root)): path.read_bytes()
+                              for path in root.rglob("*") if path.is_file() and not path.is_symlink()}
+                    argv = ["mr09_measure.py", "--model-dir", str(model), "--output", str(output)]
+                    if prepare:
+                        argv.append("--prepare")
+                    error = io.StringIO()
+                    with (patch.object(sys, "argv", argv),
+                          patch.object(MODULE, "prepare", return_value={"classification": "synthetic fixture"}) as download,
+                          patch.object(MODULE, "measurement", return_value={"status": "success", "classification": "synthetic fixture"}) as measure,
+                          patch.object(MODULE.subprocess, "run") as child,
+                          patch.object(MODULE.urllib.request, "urlopen") as network,
+                          contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(error)):
+                        with self.assertRaises(SystemExit) as stopped:
+                            MODULE.main()
+                        self.assertEqual(stopped.exception.code, 2)
+                        download.assert_not_called()
+                        measure.assert_not_called()
+                        child.assert_not_called()
+                        network.assert_not_called()
+                    self.assertIn("output exists; preserve observations and choose a fresh path", error.getvalue())
+                    self.assertNotIn("Traceback", error.getvalue())
+                    self.assertFalse(model.exists())
+                    self.assertEqual({str(path.relative_to(root)): path.read_bytes()
+                                      for path in root.rglob("*") if path.is_file() and not path.is_symlink()}, before)
+                    if kind in ("symlink", "dangling_symlink"):
+                        self.assertTrue(output.is_symlink())
+                        self.assertEqual(output.readlink(), retained)
+                    elif kind == "directory":
+                        self.assertTrue(output.is_dir())
+                    else:
+                        self.assertEqual(output.read_bytes(), original)
+
+    def test_output_arriving_during_either_action_is_preserved_without_success_output(self):
+        for prepare in (False, True):
+            with self.subTest(prepare=prepare), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                output, model = root / "result.json", root / "model"
+                original = b"synthetic observation arriving during the action\n"
+
+                def action(*args):
+                    output.write_bytes(original)
+                    return {"status": "success", "classification": "synthetic action fixture"}
+
+                argv = ["mr09_measure.py", "--model-dir", str(model), "--output", str(output)]
+                if prepare:
+                    argv.append("--prepare")
+                stdout, stderr = io.StringIO(), io.StringIO()
+                with (patch.object(sys, "argv", argv),
+                      patch.object(MODULE, "prepare", side_effect=action) as download,
+                      patch.object(MODULE, "measurement", side_effect=action) as measure,
+                      patch.object(MODULE.subprocess, "run") as child,
+                      patch.object(MODULE.urllib.request, "urlopen") as network,
+                      contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr)):
+                    with self.assertRaises(SystemExit) as stopped:
+                        MODULE.main()
+                    self.assertEqual(stopped.exception.code, 2)
+                    self.assertEqual(download.call_count, int(prepare))
+                    self.assertEqual(measure.call_count, int(not prepare))
+                    child.assert_not_called()
+                    network.assert_not_called()
+                self.assertEqual(output.read_bytes(), original)
+                self.assertEqual(stdout.getvalue(), "")
+                self.assertIn("output exists; preserve observations and choose a fresh path", stderr.getvalue())
+                self.assertNotIn("Traceback", stderr.getvalue())
+                self.assertFalse(model.exists())
+
+    def test_failed_output_serialization_does_not_create_a_result(self):
+        for prepare in (False, True):
+            with self.subTest(prepare=prepare), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                output, model = root / "fresh" / "result.json", root / "model"
+                invalid = {"classification": "synthetic serialization failure", "invalid": float("nan")}
+                argv = ["mr09_measure.py", "--model-dir", str(model), "--output", str(output)]
+                if prepare:
+                    argv.append("--prepare")
+                stdout = io.StringIO()
+                with (patch.object(sys, "argv", argv),
+                      patch.object(MODULE, "prepare", return_value=invalid),
+                      patch.object(MODULE, "measurement", return_value=invalid),
+                      patch.object(MODULE.subprocess, "run") as child,
+                      patch.object(MODULE.urllib.request, "urlopen") as network,
+                      contextlib.redirect_stdout(stdout)):
+                    with self.assertRaises(ValueError):
+                        MODULE.main()
+                    child.assert_not_called()
+                    network.assert_not_called()
+                self.assertFalse(output.exists())
+                self.assertEqual(stdout.getvalue(), "")
+                self.assertFalse(model.exists())
+
+    def test_fresh_output_preserves_prepare_and_measurement_recovery(self):
+        for prepare in (False, True):
+            with self.subTest(prepare=prepare), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                output, model = root / "fresh" / "result.json", root / "model"
+                prepared = {"classification": "synthetic preparation fixture"}
+                measured = {"status": "success", "classification": "synthetic measurement fixture"}
+                argv = ["mr09_measure.py", "--model-dir", str(model), "--output", str(output)]
+                if prepare:
+                    argv.append("--prepare")
+                with (patch.object(sys, "argv", argv),
+                      patch.object(MODULE, "prepare", return_value=prepared) as download,
+                      patch.object(MODULE, "measurement", return_value=measured) as measure,
+                      patch.object(MODULE.subprocess, "run") as child,
+                      patch.object(MODULE.urllib.request, "urlopen") as network,
+                      contextlib.redirect_stdout(io.StringIO())):
+                    self.assertEqual(MODULE.main(), 0)
+                    self.assertEqual(download.call_count, int(prepare))
+                    self.assertEqual(measure.call_count, int(not prepare))
+                    child.assert_not_called()
+                    network.assert_not_called()
+                self.assertEqual(json.loads(output.read_text()), prepared if prepare else measured)
+                self.assertFalse(model.exists(), "offline actions create no model artifacts")
 
 
 class MeasurementArithmeticTests(unittest.TestCase):
@@ -280,6 +417,13 @@ class MeasurementArithmeticTests(unittest.TestCase):
         root = Path(__file__).resolve().parents[1] / "research/market/measurements"
         expected = json.loads(
             (root / "mr09-results-summary.json").read_text(encoding="utf-8"))
+        executed_sha = hashlib.sha256((root / "mr09_measure.executed.py").read_bytes()).hexdigest()
+        self.assertEqual(executed_sha, "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8")
+        self.assertEqual(expected["measured_script_hashes"], [executed_sha])
+        self.assertEqual(expected["run_count"], 15)
+        for item in expected["input_checksums"]:
+            run = json.loads((root / item["file"]).read_text(encoding="utf-8"))
+            self.assertEqual(run["script_sha256"], executed_sha)
         before = {
             item["file"]: hashlib.sha256((root / item["file"]).read_bytes()).hexdigest()
             for item in expected["input_checksums"]}

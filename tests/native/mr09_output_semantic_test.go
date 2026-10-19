@@ -290,3 +290,136 @@ func TestMR09RejectArtifactDrift(t *testing.T) {
 		})
 	}
 }
+
+// These parser regressions use complete tiny synthetic files, never model
+// weights. They do not execute a large positive split-count allocation.
+func TestMR09SplitTensorCountDoesNotReserveHint(t *testing.T) {
+	f := mr09SyntheticFile()
+	const hint uint64 = 4096
+	f.Header.MetadataKV = append(f.Header.MetadataKV, GGUFMetadataKV{
+		Key: "split.tensors.count", ValueType: GGUFMetadataValueTypeUint64, Value: hint,
+	})
+	data := mr09GGUF(t, f)
+	got, err := parseGGUFFile([]_GGUFFileReadSeeker{{ReadSeeker: bytes.NewReader(data), Size: int64(len(data))}}, _GGUFReadOptions{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got.Header.TensorCount != uint64(len(f.TensorInfos)) || len(got.TensorInfos) != len(f.TensorInfos) {
+		t.Fatal("split metadata replaced the actual tensor count")
+	}
+	for i, want := range f.TensorInfos {
+		if got.TensorInfos[i].Name != want.Name {
+			t.Fatalf("tensor order changed at %d", i)
+		}
+	}
+	kv, ok := got.Header.MetadataKV.Get("split.tensors.count")
+	if !ok || kv.ValueType != GGUFMetadataValueTypeUint64 || kv.ValueUint64() != hint {
+		t.Fatal("split metadata was not preserved")
+	}
+	// The old path reserves exactly 4096 records, a finite small allocation.
+	// Do not prescribe the capacity chosen by ordinary append growth.
+	if uint64(cap(got.TensorInfos)) >= hint {
+		t.Fatalf("untrusted split hint reserved %d slots for %d actual tensors", cap(got.TensorInfos), len(got.TensorInfos))
+	}
+}
+
+func TestMR09SplitTensorCountCannotPanicOnNegativeConversion(t *testing.T) {
+	hint := ^uint64(0)
+	// The exact legacy uint64-to-int conversion must be negative before this
+	// case enters the parser. It can only reach an invalid negative capacity,
+	// never a positive large backing-array request, on the old implementation.
+	if int(hint) != -1 {
+		t.Fatal("safe negative-capacity fixture requires int(maxuint64) == -1")
+	}
+	f := mr09SyntheticFile()
+	f.Header.MetadataKV = append(f.Header.MetadataKV, GGUFMetadataKV{
+		Key: "split.tensors.count", ValueType: GGUFMetadataValueTypeUint64, Value: hint,
+	})
+	data := mr09GGUF(t, f)
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			t.Fatalf("split metadata reached an invalid allocation: %v", recovered)
+		}
+	}()
+	got, err := parseGGUFFile([]_GGUFFileReadSeeker{{ReadSeeker: bytes.NewReader(data), Size: int64(len(data))}}, _GGUFReadOptions{})
+	if err != nil {
+		// A controlled rejection is also safe; malformed metadata need not be
+		// promoted to an admissible artifact to satisfy this regression.
+		return
+	}
+	if got.Header.TensorCount != uint64(len(f.TensorInfos)) || len(got.TensorInfos) != len(f.TensorInfos) {
+		t.Fatal("split metadata replaced the actual tensor count")
+	}
+}
+
+func TestMR09SplitTensorCountPreservesShardAppend(t *testing.T) {
+	whole := mr09SyntheticFile()
+	var readers []_GGUFFileReadSeeker
+	var singles []*GGUFFile
+	var expected GGUFTensorInfos
+	var size, modelSize GGUFBytesScalar
+	var parameters GGUFParametersScalar
+	for shard := 0; shard < 2; shard++ {
+		f := mr09SyntheticFile()
+		half := len(f.TensorInfos) / 2
+		f.TensorInfos = f.TensorInfos[shard*half : (shard+1)*half]
+		f.Header.MetadataKV = append(f.Header.MetadataKV,
+			GGUFMetadataKV{Key: "split.count", ValueType: GGUFMetadataValueTypeUint16, Value: uint16(2)},
+			GGUFMetadataKV{Key: "split.no", ValueType: GGUFMetadataValueTypeUint16, Value: uint16(shard)},
+			GGUFMetadataKV{Key: "split.tensors.count", ValueType: GGUFMetadataValueTypeUint64, Value: uint64(len(whole.TensorInfos))},
+		)
+		data := mr09GGUF(t, f)
+		single, err := parseGGUFFile([]_GGUFFileReadSeeker{{ReadSeeker: bytes.NewReader(data), Size: int64(len(data))}}, _GGUFReadOptions{})
+		if err != nil {
+			t.Fatal(err)
+		}
+		singles = append(singles, single)
+		expected = append(expected, single.TensorInfos...)
+		size += single.Size
+		modelSize += single.ModelSize
+		parameters += single.ModelParameters
+		// A fresh reader is required: the independent single-file read above
+		// has consumed its own reader. Preserve the supplied shard order.
+		readers = append(readers, _GGUFFileReadSeeker{ReadSeeker: bytes.NewReader(data), Size: int64(len(data))})
+	}
+	got, err := parseGGUFFile(readers, _GGUFReadOptions{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got.Header.TensorCount != uint64(len(whole.TensorInfos)) || len(got.TensorInfos) != len(whole.TensorInfos) {
+		t.Fatal("shard tensor count changed")
+	}
+	for i, want := range whole.TensorInfos {
+		if got.TensorInfos[i].Name != want.Name {
+			t.Fatalf("shard tensor order changed at %d", i)
+		}
+	}
+	wantJSON, err := json.Marshal(expected)
+	if err != nil {
+		t.Fatal(err)
+	}
+	gotJSON, err := json.Marshal(got.TensorInfos)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(gotJSON, wantJSON) {
+		t.Fatal("combined tensor records differ from the independently parsed shards")
+	}
+	if got.Size != size || got.ModelSize != modelSize || got.ModelParameters != parameters ||
+		len(got.SplitSizes) != 2 || len(got.SplitModelSizes) != 2 ||
+		len(got.SplitPaddings) != 2 || len(got.SplitTensorDataStartOffsets) != 2 {
+		t.Fatal("shard aggregate size or bookkeeping changed")
+	}
+	for i, single := range singles {
+		if got.SplitSizes[i] != single.Size || got.SplitModelSizes[i] != single.ModelSize ||
+			got.SplitPaddings[i] != single.Padding || got.SplitTensorDataStartOffsets[i] != single.TensorDataStartOffset {
+			t.Fatalf("shard offsets or sizes changed at %d", i)
+		}
+	}
+	if got.Header.MetadataKVCount != uint64(len(got.Header.MetadataKV)) {
+		t.Fatal("shard metadata count changed")
+	}
+	if _, ok := got.Header.MetadataKV.Get("split.no"); ok {
+		t.Fatal("per-shard number unexpectedly retained in the combined metadata")
+	}
+}

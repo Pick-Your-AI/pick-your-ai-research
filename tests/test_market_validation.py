@@ -2,6 +2,7 @@
 from copy import deepcopy
 import importlib.util
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -206,6 +207,18 @@ class MarketValidation(unittest.TestCase):
                       'nested/child.md/../../note.md'):
             self.assert_invalid_deliverable(value, 'resolvable path')
 
+    @unittest.skipUnless(os.name == 'posix', 'POSIX directory-suffix lookup semantics')
+    def test_deliverable_rejects_file_directory_suffixes(self):
+        for value in ('note.md/', 'note.md/.', 'note.md//.', 'note.md/./'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
+    @unittest.skipUnless(os.name == 'posix', 'POSIX directory-suffix lookup semantics')
+    def test_deliverable_rejects_internal_file_link_directory_suffixes(self):
+        self.create_test_symlink(self.base / 'local-link.md', 'note.md')
+        for value in ('local-link.md/', 'local-link.md/.',
+                      'local-link.md//.', 'local-link.md/./'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
     def create_test_symlink(self, path, target, *, target_is_directory=False):
         try:
             path.symlink_to(target, target_is_directory=target_is_directory)
@@ -219,13 +232,15 @@ class MarketValidation(unittest.TestCase):
     def test_deliverable_accepts_existing_local_paths_without_rewriting_input(self):
         (self.base / 'nested').mkdir()
         (self.base / 'nested' / 'scoped note.md').write_text('Synthetic nested note.\n')
-        for value in ('note.md', 'nested/scoped note.md',
-                      'nested/../note.md'):
+        for value in ('note.md', './note.md', 'nested/scoped note.md',
+                      'nested/./scoped note.md', 'nested//scoped note.md',
+                      'nested/../note.md', 'nested/.././note.md'):
             self.assert_valid_deliverable(value)
 
     def test_deliverable_accepts_internal_symlink_without_rewriting_input(self):
         self.create_test_symlink(self.base / 'local-link.md', 'note.md')
-        self.assert_valid_deliverable('local-link.md')
+        for value in ('local-link.md', './local-link.md'):
+            self.assert_valid_deliverable(value)
 
     def test_deliverable_parent_traversal_follows_internal_directory_symlink(self):
         target = self.base / 'nested' / 'child'
@@ -233,7 +248,9 @@ class MarketValidation(unittest.TestCase):
         self.create_test_symlink(self.base / 'directory-link', target,
                                  target_is_directory=True)
         # Resolve the link before '..'; lexical cancellation would leave the root.
-        self.assert_valid_deliverable('directory-link/../../note.md')
+        for value in ('directory-link/../../note.md',
+                      'directory-link/./../../note.md'):
+            self.assert_valid_deliverable(value)
 
     def assert_valid_deliverable(self, value):
         data = deepcopy(self.data)

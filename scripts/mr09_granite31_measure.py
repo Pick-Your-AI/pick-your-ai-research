@@ -12,9 +12,11 @@ import hashlib
 import importlib.metadata
 import json
 import math
+import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import time
 import traceback
 import urllib.request
@@ -65,6 +67,41 @@ def classify_failure(error: Exception, phase: str, is_oom: bool = False) -> str:
 def write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+def publish_result(path: Path, encoded: str) -> None:
+    """Retain a completed result before attempting publication without replacement."""
+    temporary = None
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        descriptor, name = tempfile.mkstemp(prefix=".mr09-unpublished-", suffix=".json", dir=path.parent)
+        temporary = Path(name)
+        try:
+            stream = os.fdopen(descriptor, "w", encoding="utf-8", newline="\n")
+        except BaseException:
+            os.close(descriptor)
+            raise
+        with stream:
+            if stream.write(encoded) != len(encoded):
+                raise OSError("short result write")
+            stream.flush()
+            os.fsync(stream.fileno())
+    except OSError as error:
+        retained = (f"unconfirmed file retained at {temporary}" if temporary is not None
+                    else "no recovery file was created")
+        raise RuntimeError("result persistence failed; no complete recovery record is confirmed; "
+                           + retained + "; no retry") from error
+    try:
+        os.link(temporary, path)
+    except OSError as error:
+        reason = ("output exists; preserve observations and choose a fresh path" if isinstance(error, FileExistsError)
+                  else f"result publication failed for {path}")
+        raise RuntimeError(reason + f"; complete unpublished result retained at {temporary}; no retry") from error
+    try:
+        temporary.unlink(missing_ok=True)
+    except OSError as error:
+        raise RuntimeError(f"result was published at {path}; complete duplicate retained at {temporary}; "
+                           "cleanup failed; no retry") from error
 
 
 def sanitized(value, args):
@@ -335,20 +372,28 @@ def main() -> int:
     args = parser.parse_args()
     if args.prompt_tokens != 256 or args.decode_tokens != 32 or args.repetition not in (1, 2, 3):
         parser.error("supplemental protocol permits GM1 prompt256/active1/BF16,decode32,repetitions1..3")
-    if args.output.exists():
-        parser.error("output exists; preserve observations and choose a fresh directory")
+    if args.output.exists() or args.output.is_symlink():
+        parser.error("output exists; preserve observations and choose a fresh path")
     preflight_path = args.model_dir.parent / f"granite31-preflight-{args.repetition}.json"
     subprocess.run([sys.executable, str(Path(__file__).with_name("mr09_preflight.py")),
                     "--profile", "granite31", "--temporary-dir", str(args.model_dir.parent),
                     "--output", str(preflight_path)], check=True)
     preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if not all(preflight.get("guards", {}).values()) or not preflight.get("guards"):
+    guards = preflight.get("guards") if type(preflight) is dict else None
+    required_guards = {"nvidia_smi_free_mib", "available_host_ram_bytes",
+                       "temporary_volume_free_bytes"}
+    if (type(guards) is not dict or set(guards) != required_guards
+            or any(value is not True for value in guards.values())):
         raise RuntimeError("unchanged spare-capacity guards failed; no download/run")
     result = prepare(args.model_dir) if args.prepare else measurement(args)
     result["fresh_preflight"] = preflight
     if not args.prepare:
         result["dense_instrument_source_sha256"] = sha256_file(Path(__file__).with_name("mr09_measure.py"))
-    write_json(args.output, sanitized(result, args))
+    encoded = json.dumps(sanitized(result, args), indent=2, allow_nan=False) + "\n"
+    try:
+        publish_result(args.output, encoded)
+    except RuntimeError as error:
+        parser.error(str(error))
     print(json.dumps({"output": str(args.output), "status": result.get("status", "prepared"),
                       "failure": result.get("failure")}, indent=2))
     return 0 if result.get("status", "prepared") in ("success", "prepared", "unsupported", "unexecuted") else 1
