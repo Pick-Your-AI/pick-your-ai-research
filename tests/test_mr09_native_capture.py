@@ -367,6 +367,9 @@ class NativePublicationTests(unittest.TestCase):
             try:
                 alias.symlink_to(real,target_is_directory=True)
             except OSError as error:
+                if os.name=="nt" and getattr(error,"winerror",None)==1314:
+                    self.skipTest("directory symlink creation is unavailable "
+                                  "(Windows privilege not held; winerror 1314)")
                 if error.errno in (errno.EPERM,errno.EACCES,errno.ENOSYS):
                     self.skipTest("directory symlink creation is unavailable")
                 raise
