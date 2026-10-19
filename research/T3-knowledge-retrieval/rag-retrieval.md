@@ -11,7 +11,7 @@ Boundaries follow [DEPENDENCIES.md](../../docs/DEPENDENCIES.md). #16 owns the ba
 
 RAG is an optional capability ([#12](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12)). An evidenced build without retrieval needs no retrieval diagnostic. The current proposals mechanically skip without an enabled `rag_pipeline`; that is an implementation limitation for a tool-only retrieval path, not an authorization or compatibility exemption. The accepted #14/#15 interface requires the existing bound-pipeline route until #40 adopts and implements explicit actual-path binding. Inventory the chosen path: a framework name or an omitted selection does not establish that retrieval, embeddings or a vector leg are absent.
 
-Wording follows the interim #41 definition from the [PR #75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75). **Source checked** means the claim was confirmed against the cited primary source on its access date. Nothing here is **verified**, meaning independently reproduced. No connector, index, reranker or API was exercised, and no paid API or account was used.
+Wording follows the [accepted #41 evidence policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels), retaining the [historical PR #75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75). **Source checked** means the claim was confirmed against the cited primary source on its access date. Nothing here is **verified**, meaning independently reproduced. No connector, index, reranker or API was exercised, and no paid API or account was used.
 
 ## Pipeline stages
 

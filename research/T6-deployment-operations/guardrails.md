@@ -196,7 +196,7 @@ G-H9 and G-H9b’s single `regulated` proxy is **not adopted**. The project inst
 These original evidence rows are retained byte for byte with their actual source access and version/date claims. Their old grading, negative conclusions and “not opened” notes are historical, not a fresh readback or current source-admission result. In particular **E10’s mirror is secondary**; use official E31 for the current Article 14 claim. Current capability corrections and their sources follow this ledger. No historical publisher accuracy, price or runtime example is promoted into independent measurement.
 
 
-Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it: **Primary documentation**, **Vendor claim**, **Independent measurement**, **Estimate**. A row read from a mirror or another route says so in its grade. The full per-page extracts, including caveats not repeated above, sit in the maintainer's workspace evidence packs; this record carries every URL it relies on.
+Grades follow `docs/RESEARCH_METHOD.md` and the [accepted #41 evidence policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels): **Primary documentation**, **Vendor claim**, **Independent measurement**, **Estimate**. A row read from a mirror or another route says so in its grade. The full per-page extracts, including caveats not repeated above, sit in the maintainer's workspace evidence packs; this record carries every URL it relies on.
 
 | id | publisher | title or page | URL | version or page date | evidence grade | used by |
 |---|---|---|---|---|---|---|
