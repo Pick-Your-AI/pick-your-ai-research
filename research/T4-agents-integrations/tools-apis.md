@@ -171,7 +171,7 @@ Mapped to v1 JSON pointers. "Note only" means v1 cannot express it.
 
 ## Evidence
 
-Original B1–B41 entries accessed on 2026-10-16; dated follow-up entries below retain their own access dates. Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
+Original B1–B41 entries accessed on 2026-10-16; dated follow-up entries below retain their own access dates. Grades follow `docs/RESEARCH_METHOD.md` and the [accepted #41 evidence policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels); the dated owner adoption above remains historical. Fetched with WebFetch (a summarising fetcher) or with curl for raw files and package registries. WebFetch summaries were checked against quoted text where possible.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |
