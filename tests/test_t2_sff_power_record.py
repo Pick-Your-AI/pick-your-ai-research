@@ -285,6 +285,19 @@ def edit_capture(name, old, new, count=1):
     return mutate
 
 
+def edit_cell(name, column, new, data_row=1):
+    """Replace one cell (by header name) of one data row of a synthetic capture."""
+    def mutate(record, captures):
+        lines = captures[name].decode().split("\n")
+        header = [c.strip() for c in lines[0].split(",")]
+        cells = lines[data_row].split(",")
+        cells[header.index(column)] = " " + new
+        lines[data_row] = ",".join(cells)
+        captures[name] = "\n".join(lines).encode()
+        return record, captures
+    return mutate
+
+
 def drop_first(rows):
     return rows[1:]
 
@@ -305,6 +318,8 @@ CORRUPTING_CASES = {
     IDLE_FILE + ".no_gpu_uuid_string": edit_capture(IDLE_FILE, "REDACTED", "GPU-SYNTHETIC-ID"),
     A_FILE + ".uuid_column_redacted": edit_capture(A_FILE, "REDACTED", "NOT-REDACTED"),
     IDLE_FILE + ".uuid_column_redacted": edit_capture(IDLE_FILE, "REDACTED", "NOT-REDACTED"),
+    A_FILE + ".cell_units": edit_cell(A_FILE, "power.draw [W]", "2.00 kW"),
+    IDLE_FILE + ".cell_units": edit_cell(IDLE_FILE, "memory.used [MiB]", "10 GiB"),
     A_FILE + ".device_identities": edit_capture(A_FILE, "FAKE:01.0", "FAKE:09.0"),
     IDLE_FILE + ".device_identities": edit_capture(IDLE_FILE, "FAKE:01.0", "FAKE:09.0"),
     "limits_identity.power_limit": set_record(("card", "power_limit_w"), plus_one),
@@ -397,6 +412,187 @@ class EveryCheckHasACorruptingCase(SyntheticBase):
         self.assertEqual(failing(self.record, self.captures), set())
 
 
+class ExactNumbers(SyntheticBase):
+    """Recorded numbers are compared exactly: no bool-as-0, no truncation, no binary64."""
+
+    def run_record_text(self, text, captures=None):
+        captures = captures or self.captures
+        pins = synthetic_pins(captures)
+        with tempfile.TemporaryDirectory() as tmp:
+            for name, data in captures.items():
+                (Path(tmp) / name).write_bytes(data)
+            record = Path(tmp) / "record.json"
+            record.write_text(text)
+            result = CHECKER.run(tmp, record, pins=pins)
+        return {c["check"] for c in result["checks"] if not c["passed"]}
+
+    def test_boolean_idle_utilization_is_not_zero(self):
+        for bad in (False, True):
+            with self.subTest(bad=bad):
+                record = self.mutated_record()
+                record["idle"]["utilization_pct"] = bad
+                self.assertEqual(failing(record, self.captures), {"idle.nonempty_run"})
+
+    def test_boolean_idle_memory_is_not_a_number(self):
+        record = self.mutated_record()
+        record["idle"]["memory_used_mib"] = True
+        self.assertEqual(failing(record, self.captures), {"idle.nonempty_run"})
+
+    def test_fractional_idle_memory_is_not_truncated(self):
+        for bad in (10.5, 10.9, 10.0001):
+            with self.subTest(bad=bad):
+                record = self.mutated_record()
+                record["idle"]["memory_used_mib"] = bad
+                self.assertEqual(failing(record, self.captures), {"idle.nonempty_run"})
+
+    def test_fractional_idle_utilization_is_not_truncated(self):
+        record = self.mutated_record()
+        record["idle"]["utilization_pct"] = 0.5
+        self.assertEqual(failing(record, self.captures), {"idle.nonempty_run"})
+
+    def test_whole_number_predicates_still_pass_as_int_or_float(self):
+        record = self.mutated_record()
+        record["idle"]["memory_used_mib"] = 10.0
+        record["idle"]["utilization_pct"] = 0.0
+        self.assertEqual(failing(record, self.captures), set())
+
+    def test_limit_beyond_binary64_is_seen_through_the_cli_path(self):
+        text = SYNTHETIC_RECORD.read_text()
+        self.assertEqual(float("5.0000000000000001"), 5.0)  # float cannot tell
+        for key in ("power_limit_w", "power_min_limit_w", "power_max_limit_w"):
+            with self.subTest(key=key):
+                value = {"power_limit_w": "5.0", "power_min_limit_w": "1.0", "power_max_limit_w": "9.0"}[key]
+                needle = '"%s": %s' % (key, value)
+                self.assertEqual(text.count(needle), 1, needle)
+                bad = text.replace(needle, '"%s": %s0000000000000001' % (key, value))
+                self.assertEqual(self.run_record_text(bad), {"limits_identity." + key.replace("_w", "").replace("power_limit", "power_limit")})
+
+    def test_same_value_written_differently_is_equal(self):
+        text = SYNTHETIC_RECORD.read_text().replace('"power_limit_w": 5.0', '"power_limit_w": 5.00', 1)
+        self.assertEqual(self.run_record_text(text), set())
+
+    def test_high_precision_csv_value_is_compared_exactly(self):
+        captures = dict(self.captures)
+        for name in SYNTHETIC_FILES:
+            captures[name] = captures[name].decode().replace("5.00 W, 1.00 W", "5.0000000000000001 W, 1.00 W").encode()
+        self.assertEqual(self.run_record_text(SYNTHETIC_RECORD.read_text(), captures),
+                         {"limits_identity.power_limit"})
+
+    def test_bad_unit_in_a_row_later_excluded_by_selection_fails_cell_units(self):
+        # The idle run ends before these rows; their units are still checked.
+        excluded = self.captures[IDLE_FILE].decode()
+        self.assertIn(", 1 %, 20 MiB,", excluded)
+        for old, new in ((", 1 %, 20 MiB,", ", 1 bananas, 20 MiB,"), (", 1 %, 20 MiB,", ", 1 %, 20 GiB,"),
+                         (", 4.00 W, 5.00 W,", ", 4.00 kW, 5.00 W,")):
+            with self.subTest(change=new):
+                captures = self.mutated_captures(IDLE_FILE, old, new)
+                self.assertEqual(failing(self.record, captures), {IDLE_FILE + ".cell_units"})
+
+
+class UnitsAreEnforced(SyntheticBase):
+    """Every numeric cell carries exactly the unit its header declares."""
+
+    UNIT_COLUMNS = {
+        "power.draw [W]": ("W", "2.00 kW"), "power.limit [W]": ("W", "5.00 kW"),
+        "power.min_limit [W]": ("W", "1.00 mW"), "power.max_limit [W]": ("W", "9.00 kW"),
+        "utilization.gpu [%]": ("%", "100 bananas"), "memory.used [MiB]": ("MiB", "10 GiB"),
+        "memory.total [MiB]": ("MiB", "100 GiB"), "clocks.current.sm [MHz]": ("MHz", "1 GHz"),
+        "clocks.current.memory [MHz]": ("MHz", "1 GHz"),
+    }
+
+    def run_with(self, name, mutation):
+        record, captures = mutation(deepcopy(self.record), dict(self.captures))
+        return failing(record, captures)
+
+    def test_unit_column_list_matches_the_header(self):
+        header = self.captures[A_FILE].decode().split("\n")[0].split(",")
+        declared = {c.strip() for c in header if CHECKER.column_unit(c.strip())}
+        self.assertEqual(declared, set(self.UNIT_COLUMNS))
+        self.assertEqual(declared, set(CHECKER.UNIT_COLUMNS))
+        for column, (unit, _bad) in self.UNIT_COLUMNS.items():
+            self.assertEqual(CHECKER.UNIT_COLUMNS[column], unit)
+
+    def test_wrong_unit_in_every_unit_column_fails_the_run(self):
+        for name in SYNTHETIC_FILES:
+            for column, (_unit, bad) in self.UNIT_COLUMNS.items():
+                with self.subTest(file=name, column=column):
+                    self.assertEqual(self.run_with(name, edit_cell(name, column, bad)), {name + ".cell_units"})
+
+    def test_missing_unit_extra_text_and_bad_spacing_fail(self):
+        for label, bad in (("missing unit", "2.00"), ("extra text", "2.00 W extra"),
+                           ("lowercase", "2.00 w"), ("two spaces", "2.00  W"),
+                           ("empty", ""), ("not a number", "abc W"), ("nan", "nan W")):
+            with self.subTest(case=label):
+                self.assertEqual(self.run_with(A_FILE, edit_cell(A_FILE, "power.draw [W]", bad)),
+                                 {A_FILE + ".cell_units"})
+
+    def test_reported_cases_each_fail(self):
+        # idle draw 1.00 W -> 1.00 kW; load utilization 100 % -> 100 bananas;
+        # excluded idle memory 20 MiB -> 20 GiB. All three used to pass.
+        self.assertEqual(self.run_with(IDLE_FILE, edit_capture(IDLE_FILE, "1.00 W", "1.00 kW")), {IDLE_FILE + ".cell_units"})
+        self.assertEqual(self.run_with(A_FILE, edit_capture(A_FILE, "100 %", "100 bananas")), {A_FILE + ".cell_units"})
+        self.assertEqual(self.run_with(IDLE_FILE, edit_capture(IDLE_FILE, "20 MiB", "20 GiB")), {IDLE_FILE + ".cell_units"})
+
+    def test_unit_check_runs_before_values_are_used(self):
+        # A cell that cannot be read as a number must fail a check, not crash.
+        result = CHECKER.check_record(self.record, self.mutated_captures(
+            A_FILE, "2.00 W", "garbage"))
+        self.assertEqual({c["check"] for c in result.failed()}, {A_FILE + ".cell_units"})
+        self.assertNotIn("idle.power_mean", result.values)
+
+    def test_missing_unit_column_fails_instead_of_crashing(self):
+        text = self.captures[A_FILE].decode().replace("memory.used [MiB]", "memory.used")
+        captures = dict(self.captures, **{A_FILE: text.encode()})
+        self.assertEqual(failing(self.record, captures), {A_FILE + ".cell_units"})
+
+    def test_short_row_fails(self):
+        lines = self.captures[A_FILE].decode().split("\n")
+        lines[1] = ",".join(lines[1].split(",")[:10])
+        captures = dict(self.captures, **{A_FILE: "\n".join(lines).encode()})
+        self.assertEqual(failing(self.record, captures), {A_FILE + ".cell_units"})
+
+    def test_untouched_fixture_has_no_unit_problem(self):
+        for name in SYNTHETIC_FILES:
+            self.assertEqual(CHECKER.unit_violations(CHECKER.parse_csv(self.captures[name])), [])
+
+
+class DriverLimitsAreExact(SyntheticBase):
+    LIMITS = (("limits_identity.power_limit", "power_limit_w"),
+              ("limits_identity.power_min_limit", "power_min_limit_w"),
+              ("limits_identity.power_max_limit", "power_max_limit_w"))
+
+    def test_a_sub_tolerance_drift_on_each_limit_fails_its_own_check(self):
+        for check, key in self.LIMITS:
+            for drift in (0.004, -0.004, 0.0001):
+                with self.subTest(check=check, drift=drift):
+                    record = self.mutated_record()
+                    record["card"][key] += drift
+                    failed = failing(record, self.captures)
+                    self.assertIn(check, failed)
+                    # power_limit_w also feeds the above-limit counts; nothing else may fail.
+                    self.assertTrue(all(f == check or f.endswith(".above_limit") for f in failed), failed)
+
+    def test_boolean_and_string_limits_fail(self):
+        for check, key in self.LIMITS:
+            for bad in (True, str(self.record["card"][key])):
+                with self.subTest(check=check, bad=bad):
+                    record = self.mutated_record()
+                    record["card"][key] = bad
+                    self.assertIn(check, failing(record, self.captures))
+
+    def test_whole_number_limit_as_int_still_passes(self):
+        record = self.mutated_record()
+        for _check, key in self.LIMITS:
+            record["card"][key] = int(record["card"][key])
+        self.assertEqual(failing(record, self.captures), set())
+
+    def test_series_statistics_keep_their_tolerance(self):
+        record = self.mutated_record()
+        record["idle"]["power_draw_w"]["mean"] = 2.005
+        record["load"]["series"]["SYN_A_index_0"]["mean_w"] = 3.005
+        self.assertEqual(failing(record, self.captures), set())
+
+
 class ArtifactGate(SyntheticBase):
     """Missing and mismatched inputs are rejected before any parsing."""
 
@@ -479,6 +675,40 @@ class ArtifactGate(SyntheticBase):
             with self.assertRaises(SystemExit):
                 CHECKER.main(["--artifact-dir", tmp, "--output", str(out)])
             self.assertEqual(out.read_text(), "keep")
+
+    def test_cli_preserves_an_output_created_during_validation(self):
+        # Another writer creates the output after main's early existence check,
+        # while validation runs. main must refuse and leave those bytes alone.
+        pins = synthetic_pins(self.captures)
+        with tempfile.TemporaryDirectory() as tmp, mock.patch("sys.stderr"):
+            self.stage(tmp)
+            out = Path(tmp) / "result.json"
+            sentinel = b"completed evidence from the competing writer\n"
+            real_run = CHECKER.run
+
+            def run_then_compete(*args, **kwargs):
+                result = real_run(*args, **kwargs)
+                out.write_bytes(sentinel)
+                return result
+
+            with mock.patch.object(CHECKER, "PINS", pins), \
+                    mock.patch.object(CHECKER, "run", side_effect=run_then_compete):
+                with self.assertRaises(SystemExit) as raised:
+                    CHECKER.main(["--artifact-dir", tmp, "--record", str(SYNTHETIC_RECORD),
+                                  "--output", str(out)])
+            self.assertEqual(raised.exception.code, 2)
+            self.assertEqual(out.read_bytes(), sentinel)
+
+    def test_cli_creates_a_new_output_file_exactly_once(self):
+        pins = synthetic_pins(self.captures)
+        with tempfile.TemporaryDirectory() as tmp, mock.patch("sys.stdout"):
+            self.stage(tmp)
+            out = Path(tmp) / "result.json"
+            with mock.patch.object(CHECKER, "PINS", pins):
+                code = CHECKER.main(["--artifact-dir", tmp, "--record", str(SYNTHETIC_RECORD),
+                                     "--output", str(out)])
+            self.assertEqual(code, 0)
+            self.assertTrue(json.loads(out.read_text())["all_passed"])
 
     def test_real_pins_name_the_published_redacted_files(self):
         self.assertEqual(set(CHECKER.PINS), {A_NAME, IDLE_NAME})

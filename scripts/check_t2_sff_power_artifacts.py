@@ -14,11 +14,13 @@ from __future__ import annotations
 import argparse
 import csv
 from datetime import datetime
+from decimal import Decimal, InvalidOperation
 import hashlib
 import io
 import json
 from pathlib import Path
 import platform
+import re
 import statistics
 import sys
 
@@ -74,6 +76,45 @@ def parse_csv(data):
     return [dict(zip(header, [cell.strip() for cell in row])) for row in reader]
 
 
+def column_unit(column):
+    """The unit text a header such as 'power.draw [W]' declares, or None."""
+    match = re.search(r" \[([^\]]+)\]$", column)
+    return match.group(1) if match else None
+
+
+# Every column of the published captures that carries a number plus a unit.
+UNIT_COLUMNS = {
+    "power.draw [W]": "W", "power.limit [W]": "W", "power.min_limit [W]": "W",
+    "power.max_limit [W]": "W", "utilization.gpu [%]": "%", "memory.used [MiB]": "MiB",
+    "memory.total [MiB]": "MiB", "clocks.current.sm [MHz]": "MHz",
+    "clocks.current.memory [MHz]": "MHz",
+}
+
+
+def unit_violations(rows):
+    """Problems that make a capture unusable, found before any value is used.
+
+    Every unit column must exist, and every cell in it must be one number
+    followed by one space and exactly the unit text the header declares:
+    no other unit, no missing unit, no extra text. Rows must be as wide as the
+    header (parse_csv keeps only cells that have a header).
+    """
+    problems = []
+    if not rows:
+        return ["no data rows"]
+    for column, unit in UNIT_COLUMNS.items():
+        if column not in rows[0]:
+            problems.append("missing column %r" % column)
+            continue
+        pattern = re.compile(r"-?[0-9]+(?:\.[0-9]+)?" + re.escape(" " + unit))
+        for number_, row in enumerate(rows, 1):
+            if not pattern.fullmatch(row.get(column, "")):
+                problems.append("row %d column %r: %r is not a number followed by ' %s'"
+                                % (number_, column, row.get(column), unit))
+                break
+    return problems
+
+
 def number(cell):
     return float(cell.split()[0])
 
@@ -82,12 +123,46 @@ def clock(text, fmt):
     return datetime.strptime(text, fmt)
 
 
+def cell_decimal(cell):
+    """The exact decimal value of a cell's number (the unit was validated before)."""
+    return Decimal(cell.split()[0])
+
+
+def exact(value):
+    """A recorded number as an exact Decimal, or None if it is not a real number.
+
+    A boolean is not a number. A float is taken by its shortest repr, so a record
+    parsed with parse_float=Decimal (which keeps every written digit) and a plain
+    float give the same value when no digits were lost.
+    """
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, Decimal):
+        return value if value.is_finite() else None
+    if isinstance(value, int):
+        return Decimal(value)
+    if isinstance(value, float):
+        try:
+            result = Decimal(repr(value))
+        except InvalidOperation:
+            return None
+        return result if result.is_finite() else None
+    return None
+
+
 def idle_run(rows, index, utilization, memory_mib, pstate):
-    """Leading rows of one device that all satisfy the low-activity predicate."""
+    """Leading rows of one device that all satisfy the low-activity predicate.
+
+    The recorded utilization and memory are compared as exact decimals against
+    the numbers the CSV declares: a boolean is not a number, and 20.5 MiB is not
+    20 MiB.
+    """
+    want_util, want_mem = exact(utilization), exact(memory_mib)
     run = []
     for row in (r for r in rows if r["index"] == index):
-        if (number(row["utilization.gpu [%]"]) == utilization
-                and row["memory.used [MiB]"] == "%d MiB" % memory_mib
+        if (want_util is not None and want_mem is not None
+                and cell_decimal(row["utilization.gpu [%]"]) == want_util
+                and cell_decimal(row["memory.used [MiB]"]) == want_mem
                 and row["pstate"] == pstate):
             run.append(row)
         else:
@@ -139,11 +214,23 @@ class Results:
         return [c for c in self.checks if not c["passed"]]
 
 
-def check_record(record, captures):
+def check_record(record, captures, exact_record=None):
     """Recompute and compare. `captures` maps file name -> raw bytes."""
     res = Results()
     rows = {name: parse_csv(data) for name, data in captures.items()}
     card = record["card"]
+    # exact_record is the same record parsed with parse_float=Decimal, so the
+    # digits written in the JSON survive; without it the parsed values are used.
+    exact_record = record if exact_record is None else exact_record
+    exact_card, exact_idle = exact_record["card"], exact_record["idle"]
+
+    # Units and column shape are checked before any value is read.
+    unit_problems = {name: unit_violations(rows[name]) for name in captures}
+    for name in captures:
+        res.check(name + ".cell_units",
+                  lambda p=unit_problems[name]: (not p, "; ".join(p[:3]) + (" ..." if len(p) > 3 else "")))
+    if any(unit_problems.values()):
+        return res  # no value from a capture with a bad unit is used
 
     for name, data in captures.items():
         res.check(name + ".no_gpu_uuid_string", lambda d=data: (b"GPU-" not in d, "a GPU- string is present" if b"GPU-" in d else ""))
@@ -155,22 +242,30 @@ def check_record(record, captures):
         observed = {(r["index"], r["pci.bus_id"]) for r in rows[name]}
         res.check(name + ".device_identities", lambda o=observed: (o == declared, "file %r, record %r" % (sorted(o), sorted(declared))))
     every = [r for rs in rows.values() for r in rs]
-    for label, column, key, fmt in (
-            ("power_limit", "power.limit [W]", "power_limit_w", "%.2f W"),
-            ("power_min_limit", "power.min_limit [W]", "power_min_limit_w", "%.2f W"),
-            ("power_max_limit", "power.max_limit [W]", "power_max_limit_w", "%.2f W"),
-            ("driver", "driver_version", "driver", "%s"),
-            ("vbios", "vbios_version", "vbios", "%s"),
-            ("name", "name", "name", "%s")):
+    # The driver limits are compared as numbers, exactly: no rounding or
+    # formatting of the recorded value first.
+    for label, column, key in (
+            ("power_limit", "power.limit [W]", "power_limit_w"),
+            ("power_min_limit", "power.min_limit [W]", "power_min_limit_w"),
+            ("power_max_limit", "power.max_limit [W]", "power_max_limit_w")):
         res.check("limits_identity." + label,
-                  lambda c=column, k=key, f=fmt: ({r[c] for r in every} == {f % card[k]},
-                                                  "file %r, record %r" % (sorted({r[c] for r in every}), f % card[k])))
+                  lambda c=column, k=key: (
+                      exact(exact_card[k]) is not None
+                      and {cell_decimal(r[c]) for r in every} == {exact(exact_card[k])},
+                      "file %s, record %r" % (sorted(str(cell_decimal(r[c])) for r in every)[:3], exact_card[k])))
+    for label, column, key in (
+            ("driver", "driver_version", "driver"),
+            ("vbios", "vbios_version", "vbios"),
+            ("name", "name", "name")):
+        res.check("limits_identity." + label,
+                  lambda c=column, k=key: ({r[c] for r in every} == {card[k]},
+                                           "file %r, record %r" % (sorted({r[c] for r in every}), card[k])))
 
     # Low-activity series.
     idle = record["idle"]
     idle_rows = rows[idle["source_file"]]
     idx, pci = idle["device"]["index"], idle["device"]["pci_bus_id"]
-    run = idle_run(idle_rows, idx, idle["utilization_pct"], idle["memory_used_mib"], idle["pstate"])
+    run = idle_run(idle_rows, idx, exact_idle["utilization_pct"], exact_idle["memory_used_mib"], idle["pstate"])
     res.check("idle.nonempty_run", lambda: (bool(run), "no rows satisfy the selected predicate"))
     if not run:
         return res  # nothing to recompute; the failed check above is the result
@@ -178,8 +273,12 @@ def check_record(record, captures):
     res.equal("idle.device_pci", sorted({r["pci.bus_id"] for r in device}), [pci])
     res.equal("idle.samples", len(run), idle["samples"])
     res.equal("idle.predicate_pstate", sorted({r["pstate"] for r in run}), [idle["pstate"]])
-    res.equal("idle.predicate_memory", sorted({r["memory.used [MiB]"] for r in run}), ["%d MiB" % idle["memory_used_mib"]])
-    res.equal("idle.predicate_utilization", sorted({number(r["utilization.gpu [%]"]) for r in run}), [float(idle["utilization_pct"])])
+    res.check("idle.predicate_memory",
+              lambda: ({cell_decimal(r["memory.used [MiB]"]) for r in run} == {exact(exact_idle["memory_used_mib"])},
+                       "file %s, record %r" % (sorted({r["memory.used [MiB]"] for r in run}), exact_idle["memory_used_mib"])))
+    res.check("idle.predicate_utilization",
+              lambda: ({cell_decimal(r["utilization.gpu [%]"]) for r in run} == {exact(exact_idle["utilization_pct"])},
+                       "file %s, record %r" % (sorted({r["utilization.gpu [%]"] for r in run}), exact_idle["utilization_pct"])))
     power = [number(r["power.draw [W]"]) for r in run]
     for stat, fn in (("min", min), ("mean", statistics.mean), ("median", statistics.median), ("max", max)):
         res.close("idle.power_" + stat, fn(power), idle["power_draw_w"][stat])
@@ -201,7 +300,7 @@ def check_record(record, captures):
     res.equal("idle.excluded_rows", actual_rows, excluded["rows"])
 
     # High-utilization series.
-    limit = card["power_limit_w"]
+    limit = card["power_limit_w"]  # float use only: counting samples above it
     series_rows, means, maxima = {}, [], []
     for name, rec in record["load"]["series"].items():
         d_rows = [r for r in rows[rec["source_file"]] if r["index"] == rec["device"]["index"]]
@@ -220,7 +319,9 @@ def check_record(record, captures):
         res.close("series.%s.min" % name, min(p), rec["min_w"])
         res.close("series.%s.mean" % name, statistics.mean(p), rec["mean_w"])
         res.close("series.%s.max" % name, max(p), rec["max_w"])
-        res.equal("series.%s.above_limit" % name, sum(x > limit for x in p), rec["samples_above_limit"])
+        above = (sum(x > limit for x in p)
+                 if isinstance(limit, (int, float)) and not isinstance(limit, bool) else None)
+        res.equal("series.%s.above_limit" % name, above, rec["samples_above_limit"])
         means.append(statistics.mean(p))
         maxima.append(max(p))
     all_rows = [r for rs in series_rows.values() for r in rs]
@@ -240,7 +341,8 @@ def run(artifact_dir, record_path=DEFAULT_RECORD, pins=None):
     """Verify inputs first, then check. Raises ArtifactError before any parse."""
     contents = verify_artifacts(artifact_dir, PINS if pins is None else pins)
     record_bytes = Path(record_path).read_bytes()
-    res = check_record(json.loads(record_bytes), contents)
+    res = check_record(json.loads(record_bytes), contents,
+                       exact_record=json.loads(record_bytes, parse_float=Decimal))
     failed = res.failed()
     return {
         "classification": "real-artifact execution of check_t2_sff_power_artifacts.py on supplied files; "
@@ -272,7 +374,11 @@ def main(argv=None):
         parser.error(str(error))
     text = json.dumps(result, indent=2, allow_nan=False) + "\n"
     if args.output:
-        args.output.write_text(text, encoding="utf-8", newline="\n")
+        try:
+            with args.output.open("x", encoding="utf-8", newline="\n") as output:
+                output.write(text)
+        except FileExistsError:
+            parser.error("output exists; never overwrite evidence: " + args.output.name)
     print(text, end="")
     return 0 if result["all_passed"] else 1
 
