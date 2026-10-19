@@ -340,8 +340,16 @@ def main() -> int:
     args = parser.parse_args()
     if args.prompt_tokens not in (256, 2048) or args.decode_tokens != 32 or args.repetition not in (1, 2, 3):
         parser.error("protocol permits prompt256/2048,decode32,repetitions1..3")
+    if args.output.exists() or args.output.is_symlink():
+        parser.error("output exists; preserve observations and choose a fresh path")
     result = prepare(args.model_dir) if args.prepare else measurement(args)
-    write_json(args.output, sanitized(result, args))
+    encoded = json.dumps(sanitized(result, args), indent=2, allow_nan=False) + "\n"
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with args.output.open("x", encoding="utf-8") as output:
+            output.write(encoded)
+    except FileExistsError:
+        parser.error("output exists; preserve observations and choose a fresh path")
     print(json.dumps({"output": str(args.output), "status": result.get("status", "prepared"),
                       "failure": result.get("failure")}, indent=2))
     return 0 if result.get("status", "prepared") in ("success", "prepared", "unsupported", "unexecuted") else 1
