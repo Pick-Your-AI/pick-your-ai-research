@@ -811,3 +811,24 @@ still go through versioned #40 review. This supersedes the earlier outstanding
 placement question only. It does not attribute another co-owner's response,
 rerun a GPU/corpus/source check, alter #10's accepted research closure, waive the
 remaining #61 empirical criteria or complete #61.
+
+
+## Experimental initialization estimator source preparation — 2026-10-19
+
+Under the actual [D61-02 scoped decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6249525648),
+the [experimental derivative package](measurements/gguf-parser-mr09/README.md)
+provides an opt-in correction to the pinned upstream estimator, its unchanged MIT
+license, complete source pins, original and corrected synthetic CPU fixtures, and
+a repeatable offline preparation command. It keeps initial host readback rows
+separate from global device output-graph capacity and preserves the ordinary
+upstream API and original default estimates. All synthetic inputs remain tests.
+
+The preparation verifies the literal upstream tree and cached dependency bytes,
+retains actual compiler/build/dependency/executable identities and records CPU
+regression and CLI admission output before any future comparison. This is
+experimental source preparation, with no new native observation, accepted
+estimator/runtime pair, fitted additive correction, tolerance, headroom rule or
+ResourceEstimate. The [comparison specification](measurements/mr09-comparison-spec-2026-10-18.md)
+still governs prospective held-out inputs, native evidence and acceptance; the
+original whole-runtime, named-comparator and remaining empirical criteria stay
+open.

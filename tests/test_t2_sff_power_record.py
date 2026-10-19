@@ -779,6 +779,125 @@ class ExactNumbers(SyntheticBase):
                 self.assertEqual(failing(self.record, captures), {IDLE_FILE + ".cell_units"})
 
 
+class ExcludedRowsAreExact(SyntheticBase):
+    """Compare original excluded-row digits; these files are invented fixtures."""
+
+    FIELDS = (("utilization_pct", "utilization.gpu [%]", "%"),
+              ("memory_used_mib", "memory.used [MiB]", "MiB"),
+              ("power_draw_w", "power.draw [W]", "W"))
+    DATA_ROWS = (7, 9)  # The two device-0 rows after the synthetic idle run.
+
+    def record_text(self, row, key, token):
+        record = self.mutated_record()
+        marker = "EXCLUDED_NUMERIC_TOKEN"
+        record["idle"]["excluded_rows"]["rows"][row][key] = marker
+        text = json.dumps(record)
+        quoted = json.dumps(marker)
+        self.assertEqual(text.count(quoted), 1)
+        return text.replace(quoted, token, 1)
+
+    def changed_capture(self, row, column, unit, token):
+        _record, captures = edit_cell(
+            IDLE_FILE, column, token + " " + unit, data_row=self.DATA_ROWS[row])(
+                self.mutated_record(), dict(self.captures))
+        return captures
+
+    def result_for(self, text, captures=None):
+        captures = self.captures if captures is None else captures
+        with tempfile.TemporaryDirectory() as tmp:
+            for name, data in captures.items():
+                (Path(tmp) / name).write_bytes(data)
+            path = Path(tmp) / "synthetic-record.json"
+            path.write_text(text, encoding="utf-8")
+            result = CHECKER.run(tmp, path, pins=synthetic_pins(captures))
+        # Exact comparison must not put Decimal objects into the JSON report.
+        json.dumps(result, allow_nan=False)
+        return result
+
+    def failures_for(self, text, captures=None):
+        return {c["check"] for c in self.result_for(text, captures)["checks"]
+                if not c["passed"]}
+
+    def test_record_excluded_digits_beyond_binary64_fail(self):
+        for row, original in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for key, _column, _unit in self.FIELDS:
+                for drift in (Decimal("1e-18"), Decimal("-1e-18")):
+                    with self.subTest(row=row, key=key, drift=str(drift)):
+                        written = str(Decimal(str(original[key])) + drift)
+                        self.assertEqual(float(written), original[key])
+                        self.assertNotEqual(Decimal(written), Decimal(str(original[key])))
+                        text = self.record_text(row, key, written)
+                        self.assertEqual(json.loads(text), self.record)
+                        self.assertEqual(self.failures_for(text), {"idle.excluded_rows"})
+
+    def test_csv_excluded_digits_beyond_binary64_fail(self):
+        for row, original in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for key, column, unit in self.FIELDS:
+                for drift in (Decimal("1e-18"), Decimal("-1e-18")):
+                    with self.subTest(row=row, key=key, drift=str(drift)):
+                        written = str(Decimal(str(original[key])) + drift)
+                        self.assertEqual(float(written), original[key])
+                        captures = self.changed_capture(row, column, unit, written)
+                        self.assertEqual(self.failures_for(SYNTHETIC_RECORD.read_text(), captures),
+                                         {"idle.excluded_rows"})
+
+    def test_matching_high_precision_excluded_values_pass_and_serialize(self):
+        for row, original in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for key, column, unit in self.FIELDS:
+                with self.subTest(row=row, key=key):
+                    written = str(Decimal(str(original[key])) + Decimal("1e-18"))
+                    captures = self.changed_capture(row, column, unit, written)
+                    result = self.result_for(self.record_text(row, key, written), captures)
+                    self.assertTrue(result["all_passed"], result["checks"])
+                    self.assertEqual(result["checks_failed"], 0)
+
+    def test_equivalent_excluded_integer_decimal_and_exponent_tokens_pass(self):
+        for row, original in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for key, _column, _unit in self.FIELDS:
+                integer = str(int(original[key]))
+                for token in (integer, integer + ".0", integer + ".00", integer + "e0"):
+                    with self.subTest(row=row, key=key, token=token):
+                        self.assertEqual(self.failures_for(self.record_text(row, key, token)), set())
+
+    def test_ordinary_fractional_float_callers_still_pass(self):
+        record, captures = self.mutated_record(), dict(self.captures)
+        for row in range(len(self.DATA_ROWS)):
+            for key, column, unit in self.FIELDS:
+                record["idle"]["excluded_rows"]["rows"][row][key] = 0.1
+                record, captures = edit_cell(
+                    IDLE_FILE, column, "0.10 " + unit, data_row=self.DATA_ROWS[row])(
+                        record, captures)
+        self.assertEqual(failing(record, captures), set())
+        self.assertEqual(self.failures_for(json.dumps(record), captures), set())
+
+    def test_excluded_booleans_strings_null_and_nonfinite_numbers_fail(self):
+        for row, original in enumerate(self.record["idle"]["excluded_rows"]["rows"]):
+            for key, _column, _unit in self.FIELDS:
+                for bad in (True, False, str(original[key]), None,
+                            float("nan"), float("inf"), float("-inf")):
+                    with self.subTest(row=row, key=key, bad=repr(bad)):
+                        record = self.mutated_record()
+                        record["idle"]["excluded_rows"]["rows"][row][key] = bad
+                        self.assertEqual(failing(record, self.captures), {"idle.excluded_rows"})
+                        self.assertEqual(self.failures_for(json.dumps(record)), {"idle.excluded_rows"})
+
+    def test_excluded_row_keys_and_pstate_remain_required(self):
+        for row in range(len(self.DATA_ROWS)):
+            for change in ("missing", "extra", "pstate", "not_an_object"):
+                with self.subTest(row=row, change=change):
+                    record = self.mutated_record()
+                    rows = record["idle"]["excluded_rows"]["rows"]
+                    if change == "missing":
+                        del rows[row]["memory_used_mib"]
+                    elif change == "extra":
+                        rows[row]["extra"] = "unrecorded"
+                    elif change == "pstate":
+                        rows[row]["pstate"] = "P5"
+                    else:
+                        rows[row] = "not a row object"
+                    self.assertEqual(self.failures_for(json.dumps(record)), {"idle.excluded_rows"})
+
+
 class UnitsAreEnforced(SyntheticBase):
     """Every numeric cell carries exactly the unit its header declares."""
 

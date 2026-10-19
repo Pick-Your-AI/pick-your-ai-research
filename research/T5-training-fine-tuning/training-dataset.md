@@ -755,6 +755,155 @@ policy and migration fields above; no required shared-template field is omitted.
 | Failing example | Actual contract requires a particular record field and qualified validation establishes that it is absent from the prepared records → `fail / error` with the specific incompatibility. |
 | Unknown / non-applicable example | Format is absent only from the nine-row research table, with no exhaustive contract → `unknown / error`. Qualified actual configuration has no training preparation for this trainer → `skipped / error`. |
 
+#### Shared synthetic disputed-evidence examples
+
+These are **invented paper examples** for the twenty interpretation 0.3 profiles
+above, not executed fixtures, observations of a dataset, legal/source assertions
+or new receiving decisions. The example labels below are not additional D rules
+or accepted wire fields. They leave interpretation 0.2 D-01/D-14, each existing
+profile, its fixed severity, `on_unknown: review`, evidence grade and future
+adoption/migration boundary unchanged. In particular, the six advisory and six
+evidence-status profiles still have no failure branch.
+
+Use the existing [#41 DS-R3 procedure](../T0-configuration/catalog-data-sources.md#ds-r3-preserve-the-resolved-interpretation-and-dispute)
+and its [five-step order](../T0-configuration/catalog-data-sources.md#conflict-resolution):
+normalize equivalent representations; resolve scope; then version/effective date;
+then authority; then, for equal-rank comparable numbers, the conservative value
+in the actual rule's direction. A genuine equal-rank opposite yes/no pair stays
+unresolved and disputed. Do not manufacture a negative Boolean as a conservative
+choice. A newer fetch cannot make an out-of-scope claim eligible. Unknown
+competitor inventory or eligibility remains unknown rather than an assumed tie.
+
+Each paper case starts with the exact primary-dataset selection/catalog binding
+and the row's additional participants established. For illustration, call them
+selection `paper-dataset`, catalog revision `paper-dataset-r1`, included source
+`paper-source` at revision `paper-source-r1`, subset `paper-subset`, subject
+`paper-subject` and training operation `paper-training-r1`. Additional model,
+record, trainer, requirement and assessment identifiers below are equally
+invented and explicitly bound to that same use. The pair in each case has an
+established complete competitor inventory, the same relevant version and covered
+effective period, and eligible sources of equal rank unless a variant explicitly
+changes that assumption. These assumptions are part of the paper assignment;
+a label, link, digest or assertion does not establish them for a real selection.
+
+For every pair retain both reference labels, their exact operand/scope, raw and
+normalized answers, eligibility and rank, the deciding step (or equal-rank
+Boolean tie), any winning/excluded/superseded reference, and the dependent D
+outcome and reason. With no winner, retain both as unresolved. Keep the dispute
+metadata and existing evidence grade; `disputed` is not a fifth outcome. A pass
+or skip of the conflict-resolution procedure is not copied to the dependent D
+rule. Its own applicability, assertion or availability still decides among
+`pass`, `fail`, `unknown` and `skipped`. Established false applicability can skip
+only that concern; an unresolved required binding cannot. A qualified independent
+failure remains a failure while its unrelated or undecided facts remain visible.
+
+**Family A — a notice needs its actual applicability facts.** For D-10, the exact
+source/use and required attribution location `paper-card-r1` are established;
+there is no other decisive status evidence. `A-present` says the required
+attribution is present and `A-absent` says it is absent in that same revision.
+Both are eligible, equally ranked observations of that one Boolean. Normalization,
+scope, version/date and authority leave the pair tied; step 5 cannot choose a
+Boolean. D-10 is therefore `unknown / warning`, with the pair disputed: absence
+is required to trigger this particular notice and is not established. Neither
+claim becomes an invented finding about an actual model card.
+
+- In the **A-scope variant**, change only `A-present` to an explicitly different
+  card revision. Record its exclusion at step 2 and retain `A-absent` as the
+  eligible status evidence for the selected revision. D-10 is `pass / warning`
+  for emitting the known unmet-attribution notice; the requirement stays unmet.
+- In the **A-separate-fact variant**, use D-03 with its actual non-exemption
+  context independently established by `A-context`. `A-doc-met` and
+  `A-doc-unmet` instead tie on whether a documentary requirement is satisfied.
+  That disagreement is retained but is not D-03's notice-applicability operand:
+  D-03 remains `pass / warning` for its scoped notice. D-01 retains its own
+  documentary outcome; no compliance conclusion or D-01 outcome is assigned here.
+
+**Family E — availability is separate from the content of available evidence.**
+For D-19, the exact hosting entry, upstream source/revision, included subset and
+use are established. The underlying rights evidence and both scoped assessment
+records `E-permitted` and `E-restricted` are independently available and eligible;
+their actual coverage of the required population is established. Their opposed
+answers about whether this intended use is permitted remain equally ranked after
+the #41 steps. D-19 is `pass / warning` solely for the established availability,
+retaining both answers, the unresolved substantive dispute and all limitations.
+That pass supplies neither permission nor a satisfied rights/privacy condition,
+and it sets no `license_verified`, `privacy_approved` or governance override.
+
+In the **E-coverage variant**, remove the independent proof that the required
+record covers the selected revision/subset. The only remaining, equally ranked
+coverage observations `E-covers` and `E-other-scope` say respectively that it does
+and does not cover that exact required scope; there is no other qualified
+availability witness. The needed record's eligibility/coverage is now unresolved,
+so D-19 is `unknown / warning`, retaining that disputed evidence. This variant
+cannot undo an independently established complete availability witness from the
+first assignment: it explicitly replaces that premise. Missing or unmarked
+population coverage must not become a complete empty or complete covered set.
+
+**Family C — a necessary constraint fact can be disputed without erasing another
+failure.** For D-22, the actual `paper-trainer-r1` / `paper-loader-r1` operation,
+objective, preparation revision and examined records are established. Records
+lack `paper_field_f`. `C-required` and `C-optional` are equally ranked, eligible
+contract statements for this same version and operation: they disagree on
+whether that field is mandatory. All other applicable contract requirements
+are qualified satisfied, with no independent failure. After the five steps,
+the necessary Boolean remains tied: D-22 is `unknown / error`, retaining both
+references and the missing-field observation. The missing field is not a known
+incompatibility until its actual required status is established; absence from
+the finite nine-row research table supplies no such status or completeness.
+
+- In the **C-authority variant**, keep the exact shared scope, version and date,
+  but explicitly qualify `C-required` as the publisher's stated requirement
+  and `C-optional` as its capability listing. Step 4 selects the requirement;
+  retain the other reference and deciding step. The known absent required field
+  now establishes `fail / error`, with the resolution/dispute metadata required
+  by #41 retained. This is an invented authority assignment, not an observation
+  of any trainer's documentation.
+- In the **C-independent-failure variant**, keep the original unresolved pair
+  and add separately qualified applicable requirement `C-required-g`, whose
+  required `paper_field_g` is affirmatively absent under `C-record-g`. D-22 is
+  `fail / error` from that exact independent witness, retaining the unresolved
+  `paper_field_f` requirement and both disputed references. No complete-evidence
+  claim follows from the failure. The same short-circuit applies only where the
+  mapped rule's actual predicate/aggregation admits that independent witness;
+  it does not add requirements or borrow a failure from a different D concern.
+
+The following exhaustive map substitutes the stated operand into its shared
+family while keeping every other needed input qualified as in the original
+profile. For a necessary-fact tie, assume no independent decisive answer or
+failure unless the control explicitly supplies one. An established false
+applicability uses the original `skipped` case; every unresolved outcome keeps
+`on_unknown: review`. These bindings are accompanying paper evidence, not new
+JSON pointers or rules. All twelve existing reasoned not-applicable failing
+examples remain valid.
+
+| Existing D identity / fixed severity | Exact disputed operand and family assignment | Dependent result and scope that must survive |
+| --- | --- | --- |
+| D-02 / `info` | **A:** the actual actor/modification scope is covered versus not covered by the identified guidance's below-threshold notice; the compatible-unit comparison itself is already known below the threshold. | Needed notice context tied → `unknown / info`. Numeric disagreements must instead use #41's actual numeric ordering, not this Boolean example. Neither arithmetic nor notice delivery decides or exhausts actor obligations. |
+| D-03 / `warning` | **A:** the particular open-source/GPAI/actor non-exemption context applies versus does not apply. **A-separate-fact** instead disputes documentary satisfaction after that context is known. | Needed context tied → `unknown / warning`; a dispute only about satisfaction leaves the established notice `pass / warning`. D-01's independent answer is retained. |
+| D-04 / `error` | **E:** available exact crawl-time records disagree on reservation present versus absent. **E-coverage** instead disputes whether the needed record covers the actual source/subset and crawl time. | Established eligible record availability → `pass / error`, retaining the status dispute; unresolved required record binding → `unknown / error`. Neither result decides the separate D-05 condition or invents a no-reservation answer. |
+| D-05 / `error` | **C:** the qualified applicable reservation condition is satisfied by this exact use/allowance versus affirmatively unmet. The condition's applicability and source/crawl/use/subject binding are established. | Necessary satisfaction tie → `unknown / error`; a raw reservation string is not a qualified unmet-condition witness. Only an independently established failure of the actual scoped predicate can decide failure. |
+| D-06 / `warning` | **E:** available responsible assessments disagree on treatment of the same natural-language reservation for the same source/use/period. **E-coverage** instead disputes whether an assessment covers that required scope. | Established assessment availability → `pass / warning`, with the treatment dispute retained; unresolved required coverage → `unknown / warning`. Historical R7 or an unreviewed appeal cannot resolve another period's condition. |
+| D-07 / `error` | **C:** the exact included source/subset qualifies as a match versus a non-match to the selected exclusion policy/list revision; no other failure is established in the tie case. | Needed match tie → `unknown / error`. A different independently qualified included-source exclusion witness can still establish this screen's `fail / error`, retaining the disputed member and incomplete coverage. No court finding is inferred. |
+| D-08 / `error` | **C:** the actual commercial use satisfies the applicable NC condition through the qualified allowance versus the responsible assessment establishes that it does not; source/licence/use/subject scope is fixed. | Necessary condition tie → `unknown / error`, not a presumed no-exception failure. The claim pair does not select a legal exception or supply a cross-use grant. |
+| D-09 / `warning` | **A:** the actual source/use/weights-publication scope requires this qualified possible-ShareAlike notice versus lies outside that notice context. | Needed notice-context tie → `unknown / warning`. Once context is independently known, a dispute merely about satisfaction is retained without removing the notice's `pass / warning`; permission, attachment and fulfillment remain separate. |
+| D-10 / `warning` | **A:** required attribution is present versus absent in the exact relevant card/location revision, with the requirement independently established. | Unresolved absence → `unknown / warning`. The A-scope winner establishing actual absence yields only `pass / warning` for the warning, preserving the unmet attribution. |
+| D-11 / `warning` | **E:** available per-item or expressly scoped subset assessments disagree on training-use rights for the same included material. **E-coverage** instead disputes the required population/member coverage, with no complete coverage witness. | Established eligible coverage/availability → `pass / warning` with adverse or disputed content retained; unresolved necessary member coverage → `unknown / warning`. An aggregate database licence never fills missing item evidence. |
+| D-12 / `error` | **C:** the identified Anthropic-output condition is satisfied versus unmet for the exact included output revision/subset, training activity, contracting subject and agreement revision. | Necessary satisfaction tie → `unknown / error`; a known failure still needs its qualified covered-condition witness. The example supplies no current terms or another subject/provider's permission. |
+| D-13 / `error` | **C:** the independently identified Gemini-output condition is satisfied versus unmet for its own exact included outputs, activity, subject and agreement revision. | Necessary satisfaction tie → `unknown / error`. A D-12 answer or exception cannot break this pair's tie or supply a missing agreement revision. |
+| D-15 / `info` | **A:** the sole scoped assessments disagree on whether this exact generator/output subset/subject/use is covered by the identified output-use notice context; the weights licence alone does not resolve it. | Needed output-use/notice-context tie → `unknown / info`. When a qualified assessment and notice context are established, retain its favorable, adverse or conditional conclusion and actual requirements; notice fulfillment is not this advisory's failure branch. No uniform grant or NOTICE obligation is introduced. |
+| D-16 / `error` | **C:** an actually assessed required control A is satisfied versus unmet for the exact processing/source/subject/purpose/period; the responsible assessment itself supplies the requirement. | Tie on the only undecided necessary control, with the rest satisfied → `unknown / error`. A different qualified required control B that is affirmatively unmet preserves `fail / error`, with A disputed. No universal LIA, opt-out or lawful basis is chosen. |
+| D-17 / `warning` | **E:** available exact model/data/population/method assessments disagree on anonymity or re-identification conclusions. **E-coverage** instead disputes whether their evidence covers the required model revision and examined population. | Established eligible assessment/evidence availability → `pass / warning` with the dispute retained; unresolved required binding → `unknown / warning`. Neither outcome presumes anonymity or clears D-16/privacy obligations. |
+| D-18 / `warning` | **A:** the actual included interaction source/actor/use is subject versus not subject to the identified disclosure notice condition. A dispute only about satisfaction uses **A-separate-fact** once applicability is established. | Needed inclusion/actor/requirement context tied → `unknown / warning`; a known applicable notice remains `pass / warning` while unmet or disputed satisfaction and D-01's own result remain visible. |
+| D-19 / `warning` | **E:** available underlying rights evidence/assessments disagree on the intended use's permission for the exact hosting entry/upstream revision/subset. **E-coverage** instead disputes the necessary record's source/subset coverage. | Established underlying availability → `pass / warning` with unresolved substantive rights; unresolved required coverage → `unknown / warning`. The hosting label is never the missing grant or assessment. |
+| D-20 / `warning` | **E:** available records for the same model/preparation, frozen evaluation set/hashes and method scope disagree on whether a reported candidate is a qualified overlap. **E-coverage** instead disputes the record's necessary model/set/preparation binding. | Established eligible check-record availability → `pass / warning`, retaining both observations and raw methods/counts/limits; unresolved required binding → `unknown / warning`. E-R44 still independently resolves its actual overlap predicate at fixed `error`; an independently qualified overlap witness is not erased or cleared by D-20. |
+| D-21 / `error` | **C:** known included material is versus is not qualified evaluation-only for the exact scored-model relationship; the membership and relationship themselves are established. | Necessary role tie → `unknown / error` if no other decisive witness exists. Another independently qualified included evaluation-only member preserves `fail / error`; a complete exclusion pass still needs the original complete membership/role coverage. |
+| D-22 / `error` | **C:** the actual exact trainer/loader contract requires versus does not require a field absent from these prepared records. The authority and independent-failure variants above name their distinct additional premises. | Equal-rank requirement tie → `unknown / error`; qualified authority resolution or an independent known required-field failure can establish `fail / error`. Finite-table omission, unknown support or a framework label does not create a failure. |
+
+These shared assignments supply reviewable conflict pairs and dependent outcomes
+for each of the twenty profiles without changing the original source premises,
+severities, consumers or migration decisions. They add no new evidence grade,
+attestation, permissions determination, evaluation measurement or executed test.
+
 #### Dated source limits and the remaining completion assessment
 
 This is a concrete documentary representation; it does not recertify the source
