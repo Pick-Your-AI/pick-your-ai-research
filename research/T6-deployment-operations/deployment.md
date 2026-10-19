@@ -102,7 +102,7 @@ The proposed planning sequences below include the eligible steps for each servin
 | managed | S1, S2, S3, S4, S15, S26, S5, S16, S6, S7, S8, S19, S28, S20, S29, S27, S17, S18, S21, S22, S23, S24, S9, S10, S30, S31, S32, S33, S34, S11, S12, S25, S35, S36, S13, S14 | retain the selected provider's identity, model/version, region, retention, quota and feature prerequisites as well as deployment-object steps. S30 needs actual reserved capacity, not merely the managed label. The S36 doubled-capacity inference applies only to two equal-sized live provisioned units; it is not an API charge or a universal rollback cost. |
 | self-hosted | S1, S2, S3, S38, S39, S4, S5, S6, S7, S40, S41, S42, S43, S8, S44, S45, S46, S47, S48, S9, S10, S11, S12, S49, S50, S13, S51, S14 | the image digest, the weights commit hash and the engine arguments are the pins; rollback needs the previous revision and its weights kept (S50) |
 
-The single-host case (Docker or systemd on one GPU box, no Kubernetes) follows the same order but S46, S49 and S50 have no opened source for restart policy, health checks or rollback; see Open questions.
+**Historical scope (initial 2026-10-16 pass):** The single-host case (Docker or systemd on one GPU box, no Kubernetes) follows the same order but S46, S49 and S50 have no opened source for restart policy, health checks or rollback; see Open questions. **Current cross-reference (2026-10-19):** the later [single-host supplement](#single-host-runtime-readiness-2026-10-19) supplies its scoped Docker/systemd source mechanics; selected-runtime readiness and rollback still require their own build evidence.
 
 ### Selected-offering applicability recheck — 2026-10-18
 
@@ -643,6 +643,8 @@ The four linked decisions record actual research intake **into #37** by delegate
 
 The #9/#11 historical co-owner dispositions, later source corrections and other incoming/outgoing handoffs retain their original scope. In particular, these incoming receipts do not supply the separate #37 → #38 acceptance still requested above. Target configuration, credentials, invocation, rollback, egress and runtime enforcement require their own evidence for a future build; no deployment or release approval is recorded here. Whole #37 research completion still requires its original criteria and actual required handoffs.
 
+**Current research-status reference (2026-10-19):** the later [completion assessment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6258475240) records the actual research disposition after this historical intake summary. Preserve each cited actor and receipt's scope; that disposition does not execute a build. The subsequently requested [common-format companion](#common-format-companion--2026-10-19-proposed-revision-1) below is a separate proposed representation awaiting its actual central review.
+
 #### Recorded reciprocal artifact and lifecycle decisions — 2026-10-18
 
 [Receipt 6255762785](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6255762785) records two distinct technical interface decisions by the coordinating engineer through CompleteDotTech under delegated project authority. The named human assignees and their historical replies retain their identities. Both source notes are fixed at signed accepted main `bf453fcfd8bf501fca6ef10e6eb5414b3d5f2101`: Fine-Tuned Model blob `fd05e2eb3017ec89837b02e62d5890b8f291d561` and Deployment blob `5f04bffd036d0deee00d983b5375cebf6c2ecfad`. The receipt's complete conditions govern these original objects without extending acceptance to later revisions.
@@ -934,3 +936,679 @@ The source author directly read the OpenAI, Microsoft and AWS pages below on 202
 | D-N1014 | Microsoft, [Limited access for Foundry Models sold by Azure](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/openai/limited-access), accessed 2026-10-19; page displays updated 2026-05-19 | Modified Guardrails and/or abuse monitoring require the stated eligibility and approval; access is limited to customers/partners managed by an account team or an eligible program, with additional requirements and potentially stricter model criteria. Availability of an application route is not actual approval or a no-human-review/zero-retention guarantee. The currently displayed date does not replace historical D-T14's recorded observation. |
 
 **Project readiness decision:** match each required retention and human-review property to the exact protected data, actual layer, lifecycle and earliest effect. A specifically evidenced provider exception can establish eligibility only within its actual conditions; it does not waive the user's requirement. A newly agreed relaxation is a new requirement, never a pass of the unchanged original constraint. Preserve a known incompatibility as a negative result and unresolved scope, effective configuration or exception evidence as unknown. This reconciliation does not claim that any deployment currently satisfies those checks, supply the separate #38 source handoff, alter D-R59/D-H20 or close #37.
+
+
+## Common-format companion — 2026-10-19, proposed revision 1
+
+This companion makes the retained candidate revision 0.2 register reviewable in
+the [current #40 contribution format](../T0-configuration/component-schema-compatibility.md#contribution-format)
+and [rule proposal template](../../templates/rule-proposal.md). It is a proposed
+research representation, supplied after the actual
+[research completion assessment](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6258475240)
+and the [additional format review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6258522357).
+It neither reverses that recorded issue action nor claims central acceptance of
+this new companion. The existing T6 controller and original assignees retain
+their roles.
+
+The source basis is accepted `c2b8386dc059d51ac42ecdb3feaa0f998c5a613d`:
+the preceding Deployment note is blob `08c3dacf4ce574071a4ce88a13509be42ace5f38`,
+the central note is `31c05b9782d584faf4ecb8eae07fcbba97693729`, and the rule template
+is `380bcdb40f2a1d1d02ec6ddffe367729763ed526`. This is a document-inspection date,
+not a new vendor-access or measurement date. All 90 D-R rows, all 21 retained
+D-H rows, their three suffixed D-R identities and the retired D-H5/D-H18/D-H19
+identities keep their original text, fixed severity, source, date and status.
+Each mapping below inherits that exact row's explanation, remediation and
+evidence references; it does not replace their qualifications.
+
+### Input objects, identity and pointer notation
+
+The following object roots are separate documents, not fields added to a Build.
+A pointer is relative to its named object. Resolve a selection by its actual
+`id`, `kind` and within-kind `role`, then use the selected item's exact
+`catalog_item_id` and `catalog_item_version` from the locked catalog snapshot.
+Do not choose the first item of a kind, resolve “latest”, assume a primary role,
+or confuse a publisher with the operator serving the selected model.
+
+| Root | Existing object and exact pointer examples | Binding limit |
+| --- | --- | --- |
+| B | [Build](../../contracts/v1/schemas/build.schema.json): `/id`, `/revision`, `/locks/catalog_snapshot_id`, `/locks/ruleset_id`, `/locks/ruleset_version`, `/locks/dependency_graph_id`, `/locks/dependency_graph_revision`; `/objectives/region`, `/objectives/data_classification`, `/objectives/monthly_budget_amount` and `/objectives/currency` | Bind the whole selected revision and its locks. Region or sensitivity does not supply a legal domicile, retention requirement, permission or per-component mode. |
+| S | One [Selection](../../contracts/v1/schemas/selection.schema.json): `/id`, `/kind`, `/role`, `/enabled`, `/catalog_item_id`, `/catalog_item_version` and the kind-specific settings below | An absent optional component is different from an unresolved required participant. The actual operation determines applicability; registry activation labels do not erase an API-mode prerequisite. |
+| C | Its exact [CatalogItem](../../contracts/v1/schemas/catalog-item.schema.json): `/id`, `/kind`, `/version`, `/status`, `/provenance` and the kind-specific `/spec` below | A catalog status or researched list is not a complete selected-offering lifecycle, permission or capability inventory. Existing provenance labels retain their historical meaning under #41. |
+| M | [DeploymentManifest](../../contracts/v1/schemas/deployment-manifest.schema.json): `/build_id`, `/build_revision`, `/deployment_target_selection_id`, `/compatibility_report_id`, `/quality_run_id`, `/resource_estimate_id`, `/cost_estimate_id`, `/approvals`, `/rollout_strategy` and optional `/rollback_artifact_uri` | A reference must resolve to the matching artifact and scope. Manifest shape, approval text or an old rollback URI does not establish an approved, available or rehearsed release. |
+| E | [EvaluationReport](../../contracts/v1/schemas/evaluation-report.schema.json): `/build_id`, `/build_revision` and its catalog/ruleset/dependency pins; `/findings` | Preserve the producing profile, original outcomes and exact Build association. A report for another revision cannot satisfy this revision's predicate. |
+| P | **Proposed note-only input record** described below: `/binding`, `/scope` and `/facts` | No frozen object, validator or runtime currently consumes this proposed record. Do not insert it into v1 `settings`, treat `extensions` as adoption, or manufacture an input to fill an absent pointer. |
+
+P is instantiated separately for each proposed rule assessment and exact operation.
+Its proposed `/binding` contains the Build ID/revision and locks, the rule ID and
+companion revision, and each participating selection's ID/kind/actual role and
+catalog ID/version. Its proposed `/scope` records the actual operator, offering,
+route/protocol, model/runtime release, account/project/workspace, region, feature,
+data layer, lifecycle and intended-use/time interval **where applicable to that
+rule**. An explicit evidenced non-applicable dimension is different from a
+missing one. Credential and private account/rights facts are represented by
+qualified metadata references, never secret values or public copies of private
+attestations.
+
+Each proposed fact is `{value, evidence_refs}` at
+`P:/facts/<group>/<field>`. The dictionary's `group.field` abbreviation therefore
+names the exact proposed value pointer `/facts/group/field/value`; for example,
+`life.retirement_at` means `P:/facts/life/retirement_at/value`. The corresponding
+`/evidence_refs` array identifies the eligible source/observation and its actual
+scope, source version, access/effective/observation date, grade and any superseded
+or disputed evidence. Those are proposed carriers for the accepted #41 policy,
+not a new evidence grade. Unknown/withheld/not-yet-researched operands keep their
+CD-1 reason and have no asserted value. Omission is never silently false, zero,
+an empty supported set or an inherited default.
+
+Types below are proposed logical types: **text** is nonempty exact text;
+**bool** is an evidenced true or false; **count** is a nonnegative integer;
+**decimal** is an exact finite decimal string; **set** is an identity-distinct
+array of text, with completeness qualified separately. **time** retains its
+date-versus-instant precision and timezone/calendar basis; compare it only when
+the operands admit the same justified ordering. **quantity** carries an exact
+decimal amount, explicit unit, period/currency when relevant, and matching scope;
+there is no implicit FX, period conversion, calendar duration or aggregation.
+**refs** is a set of exact artifact/selection/configuration references with their
+versions or revisions and evidence, not a Boolean certification.
+
+### Participant roles and existing v1 operands
+
+The short names are local semantic aliases. They do not prescribe a Selection's
+`role` string. Bind every participating instance separately, retaining its
+actual role and explicit Build links. A listed alternative kind is resolved
+explicitly, not accepted as an interchangeable component.
+
+| Alias | Canonical kind or operational role | Existing pointers usable when present; facts still required separately |
+| --- | --- | --- |
+| W | `workload` and B objectives; #2 | S `/settings/concurrency`, `/settings/requests_per_day`, `/settings/avg_input_tokens`, `/settings/avg_output_tokens`, `/settings/latency_budget_ms`. These do not encode a peak TPM/RPM, full operating horizon, revenue, MAU or legal role. |
+| DM | `deployment_mode`; #3 | C `/spec/mode`; the accepted per-serving-component operator/capacity interpretation still needs scoped P facts. A frozen build-level mode is not that missing binding. |
+| MP | `model_provider`; #5 | S `/settings/api_base_url`, `/settings/region`, `/settings/credential_ref`; C `/spec/supported_auth`, `/spec/supported_regions`. A credential reference is opaque, not effective authority. |
+| MD | `model`; #6/#7 | C `/spec/provider_ref`, `/spec/context_window_tokens`, `/spec/max_output_tokens`, `/spec/model_formats`, `/spec/license_ref`; S `/settings/max_output_tokens`, `/settings/precision`, `/settings/weights_uri`. A license reference is not a grant or a legal applicability assessment. |
+| HP | `hosting_platform`; #9 | S `/settings/region`, `/settings/network_isolation`, `/settings/account_ref`; C `/spec/hosting_type`, `/spec/regions`. A platform or region label does not establish operator/capacity, isolation or entitlement. |
+| HW | `accelerator` and/or `compute_profile`; #10 | Bind each kind separately. Accelerator C `/spec/model_name`, `/spec/backends` and S `/settings/device_count`; compute C `/spec/region` and S `/settings/instances`. Driver, device class and available surge capacity need actual scoped facts. |
+| IE | `inference_engine`; #11 | C `/spec/backends`, `/spec/model_formats`, `/spec/supported_precisions`; S `/settings/tensor_parallel_size`, `/settings/max_batch_tokens`, `/settings/precision`, `/settings/quantization`. These are not all runtime flags or a loader/health guarantee. |
+| ST | `storage`; #9 | C `/spec/storage_type`, `/spec/region`, `/spec/encryption_at_rest`. Product capability does not prove the selected cache, encryption or retained artifact. |
+| KB | `knowledge_base`; #13 | C `/spec/data_source_refs`; retained corpus and index revision/ACL/rollback facts need P and their actual source. |
+| EM | `embedding_model`; #14 | C `/spec/embedding_dimensions` and `/spec/provider_ref`; S `/settings/output_dimensions` and `/settings/region`. Bind index-time and query-time instances separately. |
+| VD | `vector_database`; #15 | S `/settings/index_dimension`, `/settings/similarity_metric`, `/settings/index_name`, `/settings/region`. These do not identify the actual collection state, named-vector migration or complete re-embedding result. |
+| RP | `rag_pipeline`; #16 | Exact S/C identities and explicit links to the selected knowledge/retrieval components; operational versions remain separate. |
+| AF | `agent_framework`; #25 | Exact S/C identities; actual runtime, SDK, protocol, operation and authorization are P facts. |
+| TO | `tool`, `integration` or `mcp_server`; #26/#27 | Preserve the actual kind. MCP S `/settings/endpoint`, `/settings/credential_ref`, `/settings/read_only` where selected. A provider-hosted feature is an operation of its selected component, not a new “feature” kind. |
+| MS | `memory_store`; #28 | Exact S/C identity and explicit storage links. Actual retention and feature eligibility cannot be inferred from the kind. |
+| TF | `training_framework` and/or `training_compute`; #30/#31 | Bind each kind separately; selected method, job phase and serving capacity remain distinct. |
+| FM | `fine_tuned_model`; #33 | C `/spec/base_model_ref`, `/spec/artifact_format`, `/spec/adapter_only`; S `/settings/use_adapter`, `/settings/artifact_uri`, `/settings/revision`. Base and derived identities, training-job cutoff and inference shutdown remain separate. |
+| GR | `guardrail`; #35 | C `/spec/targets`, `/spec/policies`, `/spec/enforcement`; S `/settings/enforcement` and `/settings/failure_action`. Presence is not assignment to the effective request. |
+| EV | `evaluation_suite` and its actual result references; #36 | C `/spec/metric_names`, `/spec/mode`; S `/settings/gate_required`. The suite catalog is not G1–G12 execution or acceptance. |
+| DT | `deployment_target` when selected, and the actual planned release/operation; #37 | C `/spec/target_type`; S `/settings/environment`, `/settings/region`, `/settings/replicas_min`, `/settings/replicas_max`. An API operation may have no separate deployment object; keep its scoped P binding without inventing a DT selection. |
+| MON | `monitoring_stack` and actual collector/alert configuration; #38 | C `/spec/signals`, `/spec/exporter`; S `/settings/sample_rate`, `/settings/retention_days`. Configuration is not a delivered signal or tested alert. |
+| COST | `cost_policy` and exact estimate/rate/quantity inputs; #39 | C `/spec/default_currency`; B budget amount/currency. A policy or partial quote does not establish complete cost or granted quota. |
+| OP | Runtime/delivery identity, credentials, IaC, image, prompt registry, release manifest or legal/account assessment attached to the participating selections | These are operational roles, **not new catalog kinds**. Use the actual v1 reference where available and the separately proposed P facts below. Do not invent a catalog item for every credential, prompt or assessment. |
+
+All mappings consume B/S/C identity and scoped eligible evidence even when those
+common operands are not repeated. Their data dependencies are directed from the
+listed input facts and selection bindings to that rule's finding, then to #37's
+applicable readiness assessment and any qualified downstream #38 observation.
+The named extra consumers below identify changed-result review/recomputation,
+not new GitHub blockers or blanket acceptance of this companion.
+
+### Proposed fact dictionary and contract impact
+
+Every field in this dictionary is a **proposed P value**, unless the preceding
+table explicitly supplies an existing v1 pointer. A semantically similar v1
+value may seed only its matching narrow question; a documented normalization
+must retain the original pointer and cannot invent scope, evidence or defaults.
+The migration codes after the dictionary are inherited by every row using that
+group.
+
+
+#### life — migration L
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `life.go_live` | time | Planned start of the bound operation. |
+| `life.horizon_end` | time | Builder-selected end of the operating horizon; retain the original duration/calendar derivation. |
+| `life.retirement_at` | time | Qualified shutdown instant/date for this selected serving operator and model release. |
+| `life.retirement_floor` | time | Published earliest possible retirement, explicitly a floor rather than a promised availability end. |
+| `life.training_cutoff` | time | Last eligible time for the selected new training job, separate from inference shutdown. |
+| `life.deployment_retirement_at` | time | Serving-deployment shutdown bound, separate from the training cutoff. |
+| `life.legacy_status` | text | Qualified lifecycle state for the exact base model and operation. |
+| `life.custom_created_at` | time | Actual customization time used by a qualified offering eligibility rule. |
+| `life.rollback_start` | time | Planned rollback availability window start. |
+| `life.rollback_end` | time | Planned rollback availability window end. |
+| `life.target_state` | text | Observed exact rollback target state, distinguishing live deployment, retained artifact, retired and deleted. |
+| `life.migration_at` | time | Planned migration completion with its exact gate references; planning does not prove execution. |
+| `life.no_call_duration` | quantity | Elapsed time with a complete scoped observation of no relevant completions/chat-completions calls; not merely missing logs. |
+| `life.deprecation_listed` | bool | Whether the exact model ID is in an eligible scoped deprecation record; an unmarked omitted list entry supplies no false value. |
+| `life.replacement_job_at` | time | Planned time when a replacement fine-tuning job must be created, if such a job is actually required. |
+| `life.replacement_job_required` | bool | Whether the actual rollback plan requires creating a replacement fine-tuning job. |
+| `life.migration_plan_refs` | refs | The qualified complete inspected migration-plan inventory, allowing an evidenced empty inventory without inventing a missing date. |
+| `life.lifecycle_inventory_refs` | refs | The qualified inspected lifecycle plan and its explicitly required date entries; record a known omitted entry separately from unresearched lifecycle evidence. |
+
+#### pin — migration L
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `pin.model_reference` | text | Configured model reference, retaining the literal ID. |
+| `pin.reference_semantics` | text | Eligible documented interpretation of this exact bound model/image reference: immutable revision, moving alias/tag or unresolved semantics; never inferred from spelling alone. |
+| `pin.upgrade_option` | text | Observed effective platform upgrade option, including evidenced unset, distinct from an unexamined setting. |
+| `pin.iac_model_version_present` | bool | Whether the inspected exact IaC configuration explicitly contains a model version. |
+| `pin.iac_upgrade_explicit` | bool | Whether that IaC explicitly sets its upgrade option rather than relying on its provider default. |
+| `pin.sdk_lock_refs` | refs | Exact dependency lockfile entries binding the deployed SDK and version. |
+| `pin.image_reference` | text | Configured container reference, preserving tag or digest syntax and its qualified resolution. |
+| `pin.artifact_revision_refs` | refs | Exact model, adapter, index, prompt or tool revisions actually selected; each retains its role. |
+
+#### quota — migration Q
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `quota.demand` | quantity | Declared peak or period demand in the same unit and scoped account/endpoint period as the compared limit. |
+| `quota.granted_limit` | quantity | Effective eligible quota/spend limit for that exact account, region, model and operation. |
+| `quota.estimate_scope_matches` | bool | Whether the retained cost/quota inputs name the actual selected endpoint and residency scope. |
+| `quota.spend_cap_reached` | bool | Observed cap state for the bound account and period. |
+| `quota.retries_enabled` | bool | Actual applicable SDK retry setting, not assumed from another SDK version. |
+| `quota.requested_output` | count | Configured/requested output-token reservation for the selected operation. |
+| `quota.expected_output_threshold` | count | Builder-selected warning threshold for expected output; no invented universal ratio. |
+| `quota.burndown_factor` | decimal | Qualified model/route burndown multiplier. |
+| `quota.reservation_matches` | bool | Whether an actual provisioned reservation matches deployment type, region and scope. |
+| `quota.deployment_exists` | bool | Whether the actual matching provisioned deployment exists at purchase time. |
+| `quota.commitment_selected` | bool | Whether the inspected purchase selects the evidenced term commitment. |
+| `quota.load_result_refs` | refs | Exact qualified G6/load results used for this deployment decision. |
+| `quota.grant_confirmed` | bool | Whether an eligible scoped grant is confirmed; a request is not a grant. |
+| `quota.allocation_matches` | bool | Whether that grant is allocated to this actual deployment and quota dimensions. |
+| `quota.automatic_increase_assumed` | bool | Whether the proposal relies on a future automatic quota increase. |
+| `quota.budget_alert_refs` | refs | Actual configured budget alert references, separate from a cap and delivery tests. |
+
+#### auth — migration A
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `auth.production` | bool | Whether the exact operation/credential is used in production. |
+| `auth.project_binding_count` | count | Number of actual projects/workspaces served by the credential, from a qualified complete binding inventory. |
+| `auth.application_restricted` | bool | Effective application restriction on the selected standard API key. |
+| `auth.api_restricted` | bool | Effective API restriction on that key. |
+| `auth.method` | text | Effective authentication method for the selected operation. |
+| `auth.role_ids` | set | Actual effective role identities; complete eligible inventory needed for an absence claim. |
+| `auth.required_action` | text | Exact model-family/action authorization required by the intended call. |
+| `auth.authorized_actions` | set | Effective actions at the called resource scope, including applicable denies; not merely role-name resemblance. |
+| `auth.local_auth_disabled` | bool | Observed local-auth control state. |
+| `auth.old_keys_rejected` | bool | Actual scoped old-key rejection observation, after any qualified propagation interval. |
+| `auth.cutover_observation_refs` | refs | Cutover observation sequence with times and operation, not an immediate toggle readback. |
+| `auth.federation_configured` | bool | Selected federation configuration state. |
+| `auth.api_key_environment_present` | bool | Observed applicable API-key environment variable presence without retaining its secret value. |
+| `auth.credential_class` | text | Qualified credential class, such as long-term, personal or legacy, for the exact issuer. |
+| `auth.identity_platform_supported` | bool | Qualified Pod Identity platform eligibility for the selected platform, not a generic Kubernetes label. |
+| `auth.secrets_provider_supported` | bool | Qualified selected secrets-provider/platform eligibility. |
+| `auth.secret_build_channels` | set | Actual build channels carrying secrets, retaining only sanitized metadata. |
+| `auth.environment_binding_count` | count | Number of distinct environments sharing the selected key/workspace/vault in the complete assessed inventory. |
+| `auth.secrets_encrypted` | bool | Actual selected cluster's at-rest encryption configuration. |
+| `auth.workload_secret_verbs` | set | Effective secret permissions for the workload, including list/watch where granted. |
+| `auth.endpoint_isolation_claimed` | bool | Whether the design relies on endpoint-specific IAM isolation. |
+| `auth.endpoint_isolation_supported` | bool | Qualified platform support for that exact isolation scope. |
+| `auth.network_reachable` | bool | Actual reachability at the assessed network boundary. |
+| `auth.additional_access_controls` | set | Independently identified controls beyond the runtime API-key switch. |
+| `auth.narrow_runtime_role_sufficient` | bool | Whether a qualified narrow role covers this workload's actual runtime actions. |
+
+#### feature — migration F
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `feature.requested` | set | Explicitly requested operations/features at the bound route. |
+| `feature.supported` | set | Qualified supported operations for the exact offering/version; completeness is not implied by a list. |
+| `feature.supported_complete` | bool | Whether that inventory is explicitly exhaustive for the assessed feature and scope. |
+| `feature.required` | bool | Whether the particular requested feature is required for this build. |
+| `feature.substitute_refs` | refs | Qualified actually selected substitutes satisfying the same intended operation; an idea is not a substitute. |
+| `feature.new_training_job` | bool | Whether the operation creates a new fine-tuning job. |
+| `feature.new_provisioned_throughput` | bool | Whether it creates a new provisioned-throughput deployment. |
+| `feature.cross_region_profile` | bool | Whether the request selects a cross-region inference profile. |
+| `feature.model_route_region_eligible` | bool | Qualified exact model/deployment-type/region eligibility, retaining its exhaustive-list or explicit support basis. |
+| `feature.import_eligible` | bool | Qualified import envelope result with separately retained region, feature, architecture, format and size operands. |
+| `feature.import_operand_refs` | refs | Exact import artifact/constraint operands supporting import_eligible; context advice is separate. |
+| `feature.import_context` | count | Actual imported model maximum context in tokens. |
+| `feature.import_context_boundary` | count | Qualified exact interpretation of the retained advisory 128K boundary; unresolved notation stays unknown. |
+| `feature.custom_on_demand_eligible` | bool | Qualified model/region/creation-date eligibility for this selected custom on-demand operation. |
+| `feature.guardrail_scope` | set | Exact content locations screened by the selected effective guardrail configuration. |
+| `feature.sla_requested` | bool | Whether the build relies on a stated SLA for this operation/metric. |
+| `feature.sla_scope_eligible` | bool | Qualified exact model/route/deployment-type/metric coverage of that stated SLA. |
+| `feature.rollback_mechanism_supported` | bool | Qualified exact platform/container/strategy support for the assumed automatic rollback mechanism. |
+| `feature.shadow_requested` | bool | Explicit requested optional shadow/mirror operation; it is never an inferred universal prerequisite. |
+| `feature.shadow_procedure_refs` | refs | Qualified procedure for the exact offering, protocol and routing operation. |
+| `feature.shadow_supported` | bool | What that qualified exact procedure establishes about the requested operation; absence of a procedure supplies no false value. |
+| `feature.required_operational_properties` | set | Explicitly required pinning, residency or readiness properties for the selected route. |
+| `feature.qualified_operational_properties` | set | Eligible documented/observed properties for that exact route, preserving unknowns and disputed support. |
+| `feature.training_method` | text | Actual selected full-rank or parameter-efficient customization method, separately qualified from artifact naming and serving capacity. |
+
+#### rollout — migration D
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `rollout.production` | bool | Whether this release operation is production. |
+| `rollout.strategy` | text | Actual selected rollout/upgrade strategy. |
+| `rollout.rollback_document_refs` | refs | Documented exact rollback or fix-forward procedure and version. |
+| `rollout.rollback_rehearsal_refs` | refs | Eligible rehearsal evidence for that same procedure and selected revision. |
+| `rollout.automatic_rollback_required` | bool | Explicit builder requirement for automatic rollback. |
+| `rollout.alarm_refs` | refs | Actual pre-existing scoped alarms needed by the chosen rollout mechanism. |
+| `rollout.variant_names_preserved` | bool | Whether the update retains the platform variant identities it needs. |
+| `rollout.minimum_replicas` | count | Actual effective minimum replicas, preserving the source setting. |
+| `rollout.scale_to_zero` | bool | Whether the exact serving deployment enables scale-to-zero. |
+| `rollout.surge_gpus` | count | Actually available spare GPUs for the selected upgrade, separate from theoretical cluster capacity. |
+| `rollout.guardrail_assignment_matches` | bool | Whether deployment, agent override and request policy identifier resolve to the intended guardrail revision. |
+| `rollout.requested_manifest_refs` | refs | Qualified complete inventory of applicable release entries expected by the proposed D-H2 mapping. |
+| `rollout.recorded_manifest_refs` | refs | Actual recorded entries and their exact bindings, including an evidenced missing/wrong applicable entry. |
+| `rollout.manifest_mapping_complete` | bool | Whether the reviewed proposed field mapping and applicable component inventory are complete; cannot be assumed from v1 shape. |
+| `rollout.gates` | set | Actual gates used by the staged rollout, each linked to its specific result elsewhere. |
+| `rollout.pod_template_changed` | bool | Whether this selected configuration update changes the Pod template. |
+| `rollout.runtime_config_change` | bool | Whether the operation changes ConfigMap, remote config or runtime-fetched content. |
+| `rollout.activation_procedure_refs` | refs | Qualified evidence for the actual configuration activation/reload procedure, separate from a template diff. |
+| `rollout.rollback_binding_matches` | bool | Whether the exact query/embed/prompt/generator tuple and index/alias tuple match the planned rollback target. |
+| `rollout.automatic_mechanism_assumed` | bool | Whether the plan actually assumes canary/baking/alarm rollback for this exact endpoint/container/strategy tuple. |
+
+#### artifact — migration R
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `artifact.gated_download_at_start` | bool | Whether the deployment fetches access-gated weights during pod startup. |
+| `artifact.prefetched_cache_refs` | refs | Exact locally available checksummed artifact cache and permission binding. |
+| `artifact.formats` | set | Actual available selected artifact formats, not all formats supported by a product. |
+| `artifact.loader_fallbacks` | set | Actual loader fallback paths and their configured approval status. |
+| `artifact.pickle_approved` | bool | Explicit scoped approval for any retained pickle execution path; absence is not approval. |
+| `artifact.trust_basis` | set | Assertions actually relied on as a sufficient safety/fit basis, such as scan, badge or signature. |
+| `artifact.independent_gate_refs` | refs | Matching independent artifact/fit/safety evaluation evidence; a signature is not that result. |
+| `artifact.complete_bundle_bytes` | count | Measured complete uncompressed deployed bundle byte count; partial weight or compressed size is not this operand. |
+| `artifact.bundle_cap_bytes` | count | Qualified plan/route cap in the same complete uncompressed byte basis. |
+| `artifact.registry_region` | text | Actual container registry location. |
+| `artifact.registry_multiregional` | bool | Whether that registry is a multi-region repository. |
+| `artifact.deployment_region` | text | Actual endpoint deployment region. |
+| `artifact.adapter_base_id` | text | Actual adapter metadata's base identity. |
+| `artifact.adapter_base_version` | text | Actual adapter metadata's exact base version. |
+| `artifact.selected_base_id` | text | Selected serving base identity. |
+| `artifact.selected_base_version` | text | Selected serving base version. |
+| `artifact.manifest_refs` | refs | Actual bound artifact/image/index/tool/prompt manifests and their revisions. |
+| `artifact.lambda_operand_refs` | refs | Exact image expansion, platform limit, device/runtime and storage operands; do not substitute an image name or compressed size. |
+
+#### runtime — migration R
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `runtime.driver_version` | text | Actual host driver release, compared with the evidenced version relation rather than lexical string order. |
+| `runtime.minimum_driver` | text | Qualified minimum for the selected image's CUDA major/runtime. |
+| `runtime.forward_compatible_class` | bool | Whether the actual GPU is in the qualified forward-compatibility class for this exact case. |
+| `runtime.compatibility_package_refs` | refs | Selected applicable compatibility package/image instructions; class membership alone is not a whole-runtime pass. |
+| `runtime.max_model_length` | count | Actual engine max-model-len setting. |
+| `runtime.model_config_length` | count | Exact model configuration length admitted by the selected engine. |
+| `runtime.traffic_probe` | text | Actual probe endpoint used to admit traffic. |
+| `runtime.readiness_endpoint` | text | Qualified readiness endpoint for the exact runtime version. |
+| `runtime.startup_failure_threshold` | count | Actual startup-probe failure threshold. |
+| `runtime.startup_period` | quantity | Actual startup-probe period. |
+| `runtime.cold_start_bound` | quantity | Eligible observed/planned cold-start bound in the same time unit and scope. |
+| `runtime.gpu_capability` | decimal | Actual qualified GPU compute capability. |
+| `runtime.quantization_mode` | text | Actual selected kernel/quantization mode. |
+| `runtime.gpu_architecture` | text | Actual GPU architecture identity. |
+| `runtime.readiness_only_health` | bool | Whether traffic admission relies only on generic health without the required served identity check. |
+| `runtime.served_identity_refs` | refs | Actual model/adapter generation identity responses and their binding. |
+| `runtime.strict_readiness` | bool | Actual selected Triton strict-readiness setting; archived source cannot establish current semantics. |
+| `runtime.multi_model` | bool | Whether this exact runtime serves multiple models. |
+| `runtime.parallelism` | count | Actual applicable concurrent-generation setting, without inferring a default. |
+| `runtime.long_rag_or_agent_context` | bool | Explicit workload characterization used by the retained hypothesis, not a resource estimate. |
+| `runtime.lambda_eligible` | bool | Qualified exact expanded-image/device/runtime eligibility backed by artifact.lambda_operand_refs. |
+
+#### embedding — migration E
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `embedding.index_model_id` | text | Exact model that produced the stored corpus vectors. |
+| `embedding.query_model_id` | text | Exact model producing query vectors. |
+| `embedding.reembedding_refs` | refs | Complete corpus re-embedding evidence and the actual resulting index revision; a planned job is insufficient. |
+| `embedding.output_dimensions` | count | Actual produced vector dimension, where present normalized from its exact S/C pointer. |
+| `embedding.index_dimensions` | count | Actual selected index/named-vector dimension, not another index on the same service. |
+| `embedding.named_vector_addition` | bool | Whether this operation adds a named vector to an existing collection. |
+| `embedding.clean_rollback_required` | bool | Explicit builder requirement for the assessed rollback. |
+| `embedding.pair_equivalence_refs` | refs | Eligible proof for this exact query/index embedding pair and intended similarity operation. |
+
+#### prompt — migration P
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `prompt.label_rollback` | bool | Whether this rollback changes a prompt registry label. |
+| `prompt.cache_ttl` | quantity | Actual applicable SDK prompt cache TTL with explicit time unit. |
+| `prompt.payload_bytes` | count | Actual payload bytes under the exact platform accounting basis. |
+| `prompt.payload_cap_bytes` | count | Qualified cap in that same per-variable, aggregate-environment or object scope. |
+| `prompt.payload_scope` | text | The exact accounting scope used for both payload operands; no mixing per-variable and aggregate limits. |
+| `prompt.mutable_runtime_config` | bool | Whether the production prompt/tool/model configuration can change through the stated mutable channel. |
+| `prompt.immutable_config_refs` | refs | Exact selected configuration version or immutable registry reference, separate from a mutable label. |
+| `prompt.client_side_variations` | bool | Whether the actual flag configuration exposes prompt/model variations to the client. |
+| `prompt.storage_decision_ref` | text | Named explicit project storage decision if one exists; this companion does not supply a default. |
+| `prompt.payload_in_environment` | bool | Whether the selected transfer operation stores this payload in the assessed environment-variable accounting scope. |
+| `prompt.large_payload_threshold_bytes` | count | Explicit builder-supplied proposed warning threshold defining large for D-R58; no default, no inference from the platform hard cap. |
+
+#### privacy — migration S
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `privacy.zero_retention_required` | bool | Actual unchanged T0 requirement for this scope and data layer. |
+| `privacy.stateful_features` | set | Actual hosted stateful operations; each keeps its feature/layer eligibility distinction. |
+| `privacy.project_mode` | text | Observed applicable mantle project mode, including explicit inherit; inapplicable on runtime. |
+| `privacy.account_mode` | text | Observed regional account mode, including explicit inherit. |
+| `privacy.model_default_mode` | text | Qualified exact model default mode. |
+| `privacy.effective_mode` | text | Traceable first non-inherit eligible mode for this route; no per-model runtime readback is invented. |
+| `privacy.allowed_modes` | set | Qualified exact model/account allowed modes, with eligible scope and completeness. |
+| `privacy.mode_resolution_refs` | refs | Original project/account/model observations and the route-aware resolution trace. |
+| `privacy.unpaid_service` | bool | Whether this exact Gemini operation uses the unpaid service. |
+| `privacy.end_user_jurisdictions` | set | Actual assessed end-user jurisdictions, distinct from hosting region and organization domicile. |
+| `privacy.modified_controls_required` | bool | Explicit required abuse-monitoring/guardrail modification. |
+| `privacy.account_managed` | bool | Actual relevant account-management status. |
+| `privacy.program_eligible` | bool | Qualified eligibility for the exact relevant modification program; missing criteria remain unknown. |
+| `privacy.non_us_residency_required` | bool | Explicit OpenAI residency requirement outside the US. |
+| `privacy.monitoring_approval_refs` | refs | Actual scoped abuse-monitoring-controls approval references. |
+| `privacy.retention_amendment_refs` | refs | Actual executed scoped amendment references, without publishing private contents. |
+
+#### rights — migration S
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `rights.release_basis_refs` | refs | Exact license release and legal applicability assessment, including entity/affiliate/time aggregation basis. |
+| `rights.monthly_active_users` | quantity | Qualified relevant prior-calendar-month MAU with the license's legal entity/affiliate basis; not request volume. |
+| `rights.monthly_revenue` | quantity | Qualified monthly revenue with explicit currency and legal scope; no implicit FX. |
+| `rights.grant_refs` | refs | Eligible actual written license/grant for this entity, artifact and intended use, with its scope and limitations. |
+| `rights.intended_use` | text | Actual assessed research, production, revenue or hosted-commercial use under the selected terms. |
+| `rights.entity_domicile` | text | Qualified legal domicile or principal place as required by the actual license, separate from deployment region. |
+| `rights.end_user_exception` | bool | Qualified applicability of the retained end-user exception. |
+| `rights.ai_notice_present` | bool | Actual user-facing AI disclosure for the assessed operation. |
+| `rights.ai_notice_applicable` | bool | Qualified legal role/use/date applicability; an EU region label alone is insufficient. |
+| `rights.commitment_relied_on` | bool | Whether the build relies on the specified copyright commitment. |
+| `rights.required_mitigations` | set | Qualified complete mitigations required by that scoped commitment. |
+| `rights.implemented_mitigations` | set | Actual assessed matching mitigations, bound to exact configuration/evaluation. |
+| `rights.nim_license_resolution_refs` | refs | Exact container/offering and written clarification resolving the retained conflicting production-license claims. |
+
+#### observe — migration D
+
+| Proposed P field | Type | Exact question / scope limit |
+| --- | --- | --- |
+| `observe.defined_collectors` | set | Actual configured exporter/health-extension identities. |
+| `observe.enabled_collectors` | set | Actual service pipeline/extension identities that are enabled. |
+| `observe.configuration_complete` | bool | Whether the inspected collector and service configuration inventory is complete. |
+| `observe.health_monitoring_refs` | refs | Actual configured workload health monitoring, separate from successful signal/alert delivery. |
+| `observe.health_monitoring_before_traffic` | bool | Whether the project-selected pre-traffic ordering is actually met. |
+| `observe.request_evidence_refs` | refs | Scoped observations used by a specific rule, preserving absence-of-observation versus an evidenced negative. |
+
+### Scope, unknowns and fixed outcome policy
+
+The proposed P scope keys are explicit: `/scope/operator_id`,
+`/scope/offering_id`, `/scope/route_id`, `/scope/protocol`,
+`/scope/capacity_mode`, `/scope/operation`, `/scope/model_release_id`,
+`/scope/runtime_release_id`, `/scope/account_id`, `/scope/project_id`,
+`/scope/workspace_id`, `/scope/region`, `/scope/feature_id`,
+`/scope/data_layer`, `/scope/environment`, `/scope/intended_use` and
+`/scope/lifecycle` are **text** under the definitions above when applicable;
+`/scope/interval/start` and `/scope/interval/end` are **time**. Each is bound to
+its eligible evidence and the actual participating selection(s). Opaque IDs and
+sanitized references can identify private scope without disclosing credentials.
+Inapplicable project scope on bedrock-runtime, for example, is explicit; it
+cannot be populated by a mantle project observation. These are proposed logical
+keys, not additions to any frozen v1 object.
+
+The following envelope applies to every mapping and keeps severity separate
+from outcome. It inherits the retained candidate register's `on_unknown: review`;
+it does not weaken a consumer's independently adopted safety or permission gate.
+
+| Condition in the assessment | Proposed outcome and retained information |
+| --- | --- |
+| All required scoped inputs and eligible evidence establish the positive assertion | `pass` for this one predicate, with the original fixed severity. A documentation-based pass remains unverified unless eligible independent evidence establishes otherwise. |
+| Eligible evidence establishes the predicate's violation | `fail` with the same fixed severity and a field-specific reason/witness. Keep a known decisive violation even when another independent operand is unresolved; do not silently promote the complete build. |
+| Applicability, binding, a required operand or qualifying evidence is unresolved | `unknown` with its specific missing/withheld/not-yet-researched/unresolved-conflict reason and the next evidence/owner action. A missing input is not false, zero, a default setting, an unsupported capability or an empty inventory. |
+| The actual operation is known not to meet that row's applicability | `skipped` with its non-applicability reason. A missing selection, uninspected optional setting or unknown requested operation is not enough to skip. |
+| Eligible sources disagree | First normalize claim and units, then operator/offering/role/region/feature scope, version/effective date and authority using #41. Keep every original source and disposition. A genuine equal-rank yes/no tie stays `unknown` and disputed. A qualified equal-rank numeric disagreement uses the conservative eligible bound and retains a disputed flag; disputed is not a fifth outcome. |
+| An eligible estimated range straddles the relevant upper limit | Assess the conservative bound as prescribed by #41, retain the estimate/range and flags, and report `fail` where that bound exceeds the limit. Do not turn an estimate into an independently measured exact fact. |
+
+Existence and absence assertions use a qualified inspected inventory. A complete
+release record that explicitly omits a required entry can establish a violation;
+an uninspected record or an unmarked product list cannot. A partially complete
+inventory may establish a specific qualified counterexample, while the rest
+remains unknown; it cannot establish overall completeness. D-H2 additionally
+requires an applicable field mapping before an entry can be called required.
+Boolean fields ending in `_eligible`, `_supported` or `_matches` summarize
+independently retained scoped operands or observations. They must never be
+populated from this rule's own result, a bare document/artifact ID, an unmarked
+omission or a successful JSON parse. Their evidence references must expose the
+actual comparison or explicit qualified support/exclusion for review.
+
+### Version and migration rule inherited by every mapping
+
+Every row below has **candidate version 0.2 / companion revision 1**. Each
+inherits migration **I** and the dictionary-family codes for every input it
+uses. These codes are local note labels, not new CD decisions, catalog kinds or
+rule-engine operators. Thus an input such as `life.retirement_at` explicitly
+carries **I + L**, and a row combining `privacy.*` with `life.*` carries
+**I + S + L**. The mapping table records its full union.
+
+| Code | Proposed contract need and migration boundary |
+| --- | --- |
+| I | Preserve original Build/Selection/Catalog identities, locks, actual semantic roles and existing explicit links. Use the accepted central CD-1 answer/evidence distinctions and CD-6 relationship interpretation only where actually adopted. No v1 default, synthesized selection or implicit first-of-kind binding is introduced. |
+| L | Add a reviewed logical carrier for exact lifecycle dates/floors, reference semantics, observed upgrade/IaC settings and operation-specific migration windows. Retain the source version and date; recompute only the affected bound release when relevant evidence changes. |
+| Q | Propose scoped quota/demand/commitment/allocation and budget-alert inputs with explicit units, periods and grant/result references. Existing workload averages and budget values do not synthesize peak limits or approved capacity. |
+| A | Propose effective runtime/delivery identity, credential binding, actual permissions and cutover observations. Keep credential values private and preserve separate runtime and delivery authority; a metadata reference grants nothing. |
+| F | Propose exact offering/method/route capability and requirement inputs, with exhaustive-inventory qualification and underlying constraint operands. A catalog capability list is not an assumed complete entitlement or operation record. |
+| D | Propose actual rollout, manifest-entry, assignment and monitoring-configuration observations. Existing Manifest/EvaluationReport references are reused by exact binding where present; their shapes do not prove a complete release or native execution. |
+| R | Propose selected image/artifact/runtime/hardware and measured size/probe operands. Retain the central CD-10 non-model runtime boundary, exact engine version and the existing loader qualifications. No structural or documentation check claims a native fit. |
+| E | Propose actual index/query embedding, dimensions, corpus migration and rollback tuple bindings. Keep index-time and query-time roles and revisions separate; a same-kind selection does not prove the stored vectors' identity. |
+| P | Propose prompt/config delivery, cache and payload-policy inputs. The warning threshold is explicitly builder supplied and the prompt-storage choice remains deferred to the named follow-up below. |
+| S | Propose scoped retention/abuse-mode, legal-entity/use and actual rights/approval inputs. Preserve unchanged T0 requirements, feature/data-layer distinctions and the central CD-12 private scoped-attestation boundary; neither a proposed value nor a successful rule grants authority. |
+
+Before any executable adoption, the actual #40 receiving controller must review
+the proposed pointers, types, missing-value policy, rule interpretation and
+migration. A frozen-schema extension needs an explicit new compatible contract
+version or separately adopted adapter; do not put P into v1 `settings` or
+`extensions` and call it migrated. An executable rule also needs a separately
+reviewed ruleset identity/version and its real consumer/evidence tests. Preserve
+all old catalog, Build, rule, report and finding bytes. A historical 0.1/0.2
+finding cannot be relabeled as this companion or recomputed silently. Retain
+both source identities, any explicit mapping/loss, and the new assessment
+reference; refresh only when its actual input scope changes.
+
+### Exhaustive candidate and hypothesis mapping
+
+The **roles and inputs** column names the data dependencies; identity and scoped
+evidence from B/S/C/P are always also required. Every row sends its finding to
+the applicable #37 readiness assessment, and only a qualified applicable
+observation to #38; the last column lists additional consumers to notify or
+recompute. These are directed data dependencies, not new issue dependencies.
+
+Each row inherits the preceding unknown/skipped/conflict envelope and its
+original explanation, remediation, evidence and fixed severity. Its P/F cell is
+a **synthetic worked witness**, never a source observation or test execution.
+For each mapping, an unresolved required input from its input cell instantiates
+the unknown case; a known false condition from its applicability cell
+instantiates the skipped case. The concrete expanded examples below show those
+operations, complete versus incomplete inventories and conflicting evidence.
+
+For the D-H mappings, even a synthetically decidable predicate is **not an
+adopted production rule**. The original unresolved evidence and proposal status
+remain authoritative. The companion makes the question and hypothetical
+outcome reviewable; it does not supply the missing vendor evidence, central
+decision or measurement. In particular, D-H2 and D-H9 are explicitly proposed
+positive completeness and optional-support interpretations, not blind
+negations of their historical positive condition text. D-H7/D-H10/D-H21 expose
+the scoped rights/capability/fit evidence the retained question needs rather
+than inventing a blanket license or runtime prohibition.
+
+#### All 90 retained D-R candidates
+
+| ID · fixed severity | Roles and proposed inputs | Applicability | Positive assertion, with retained limits | Synthetic P / F witness | Version / migration | Additional consumers |
+| --- | --- | --- | --- | --- | --- | --- |
+| `D-R1` · warning | MD HP EV; `pin.model_reference`, `pin.reference_semantics` | A selected Anthropic pre-4.6, Gemini or Mistral reference has eligible alias semantics in the retained row's scope. | The configured reference is not an evidenced moving alias; spelling alone cannot classify it. | P: model-v7 resolves to a qualified immutable revision. F: model-latest is evidenced to repoint. | 0.2 / 1; I+L | #36 #39 |
+| `D-R2` · error | MD W HP; `life.go_live`, `life.horizon_end`, `life.retirement_at` | A pinned model has a qualified retirement date for the serving operator and a declared operating horizon. | Retirement is not before the horizon end; a pass establishes only this date relation, not lifetime availability. | P: end day 20, retirement day 21. F: end day 20, retirement day 19; all dates share the qualified calendar. | 0.2 / 1; I+L | #36 |
+| `D-R3` · warning | MD W HP; `life.horizon_end`, `life.retirement_floor`, `life.go_live` | Only a qualified not-sooner-than retirement floor is available for the selected model. | The floor does not fall inside the planned operating horizon; even a pass cannot turn a floor into a promised lifetime. | P: horizon ends day 20, floor day 21. F: floor day 19 lies in the horizon. | 0.2 / 1; I+L | #36 |
+| `D-R4` · warning | MD HP; `life.retirement_at`, `life.retirement_floor` | A lifecycle date is being used for the actual selected serving operation. | Its evidence names the actual serving operator and offering, not merely the model publisher or another host. | P: host-A request uses host-A date. F: host-A request relies only on host-B date. | 0.2 / 1; I+L | #36 |
+| `D-R5` · warning | MD HP EV; `pin.upgrade_option` | The exact operation uses the retained Azure Standard deployment upgrade mechanism. | Its observed option is not OnceNewDefaultVersionAvailable. | P: observed OnceCurrentVersionExpired. F: observed OnceNewDefaultVersionAvailable; this predicate does not approve the alternative. | 0.2 / 1; I+L | #36 |
+| `D-R6` · warning | MD HP EV; `pin.upgrade_option` | The same scoped Azure Standard mechanism applies and its setting was actually inspected. | The option is neither OnceCurrentVersionExpired nor evidenced unset; unexamined is unknown. | P: explicit NoAutoUpgrade. F: inspected configuration is unset. | 0.2 / 1; I+L | #36 |
+| `D-R7` · warning | MD HP EV; `pin.upgrade_option`, `life.migration_at`, `life.retirement_at`, `life.migration_plan_refs` | The observed Azure option is NoAutoUpgrade and retirement is qualified. | A migration is planned before retirement, retaining its gate dependencies without claiming them executed. | P: migration day 18, retirement day 20. F: confirmed no migration plan before day 20. | 0.2 / 1; I+L | #36 |
+| `D-R8` · warning | MD HP OP; `pin.iac_model_version_present`, `pin.iac_upgrade_explicit` | The inspected resource is azurerm_cognitive_deployment in the exact Terraform provider/configuration version. | Both model version and upgrade option are explicit; the IaC provider default is distinct from the platform default. | P: both present. F: model.version absent despite an explicit upgrade option. | 0.2 / 1; I+L | #36 |
+| `D-R9` · warning | W HP COST EV; `quota.estimate_scope_matches` | A residency-pinned endpoint is used by the cost/quota or G6 budget assessment. | Inputs correspond to that selected endpoint and residency scope, including a qualified applicable uplift, rather than global figures. | P: scoped endpoint inputs. F: global-only quote used for the regional endpoint. | 0.2 / 1; I+Q | #39 #36 |
+| `D-R10` · warning | W MP COST; `quota.demand`, `quota.granted_limit` | A declared TPM, RPM or monthly-spend demand has a matching qualified account-tier limit. | Demand does not exceed that limit in the same dimension, period and scope; evaluate each dimension separately. | P: 100 requests/min against 100. F: 101 against 100; daily average cannot stand in for peak demand. | 0.2 / 1; I+Q | #39 |
+| `D-R11` · warning | MP OP MON; `quota.spend_cap_reached`, `quota.retries_enabled` | The retained Anthropic spend-cap and applicable SDK retry behavior are in scope. | A reached spend cap is not paired with enabled automatic retries. | P: reached=true, retries=false. F: reached=true, retries=true. | 0.2 / 1; I+Q | #38 #39 |
+| `D-R12` · warning | MD HP COST EV; `quota.requested_output`, `quota.expected_output_threshold`, `quota.burndown_factor` | The exact request uses bedrock-runtime; mantle is outside this predicate. | Requested output is not above the builder-set warning threshold and the qualified burndown factor is not above 1. | P: 80 against a chosen 100-token threshold, factor 1. F: 120 against 100, or factor 2. | 0.2 / 1; I+Q | #36 #39 |
+| `D-R13` · error | TO HP; `feature.requested`, `feature.supported`, `feature.supported_complete`, `feature.required`, `feature.substitute_refs` | A scoped Claude-on-Bedrock feature is required and no qualified selected substitute satisfies it. | The required feature is supported; a known exhaustive omission or explicit unsupported statement can fail, an unmarked list cannot. | P: requested operation explicitly supported. F: required operation explicitly unsupported and no substitute. | 0.2 / 1; F+I | #25 #26 #35 |
+| `D-R13b` · warning | TO HP; `feature.requested`, `feature.supported`, `feature.supported_complete`, `feature.required`, `feature.substitute_refs` | The same feature is optional or has a qualified selected substitute; this is the separate warning branch. | The requested feature is supported; the substitute changes applicability/severity branch, not the original host capability. | P: supported optional operation. F: unsupported optional operation, even when its alternate route is qualified. | 0.2 / 1; F+I | #25 #26 #35 |
+| `D-R14` · error | TF FM MD HP; `life.legacy_status`, `feature.new_training_job`, `feature.new_provisioned_throughput` | A selected Bedrock base model and intended creation operation have qualified lifecycle evidence. | A Legacy base is not used for a new fine-tuning job or new provisioned-throughput purchase; the retained pre-Legacy custom on-demand case stays separate. | P: Legacy base with neither new operation. F: Legacy base plus new training job. | 0.2 / 1; F+I+L | #30 #33 #39 |
+| `D-R15` · warning | FM MD HP; `life.training_cutoff`, `life.deployment_retirement_at`, `life.lifecycle_inventory_refs` | The build plans the retained Azure fine-tuned deployment route. | The plan records separately qualified training and deployment retirement dates; an actually inspected omitted entry can fail, unresearched dates stay unknown. | P: two scoped dates retained. F: complete inspected plan records only a base-model inference date. | 0.2 / 1; I+L | #30 #33 |
+| `D-R16` · warning | W OP MP; `auth.production`, `auth.project_binding_count` | The selected credential is used in production and its project/workspace binding inventory is qualified. | It is bound to exactly one project/workspace for the assessed operation. | P: count 1. F: count 2; unknown inventory does not become count 0. | 0.2 / 1; A+I | #35 |
+| `D-R17` · error | MP OP; `auth.credential_class`, `auth.application_restricted`, `auth.api_restricted` | The selected credential is a Gemini standard API key in the retained route. | Both effective application and API restrictions are present. | P: both true. F: application restriction false with API restriction true. | 0.2 / 1; A+I | #35 |
+| `D-R18` · error | AF EV OP HP; `auth.method` | The operation uses the scoped Foundry agents or evaluations service. | Its authentication method is not an API key; the selected alternative still needs its own authorization assessment. | P: qualified token identity. F: API-key authentication for the selected operation. | 0.2 / 1; A+I | #25 #35 #36 |
+| `D-R19` · warning | OP HP; `auth.role_ids` | The identity is an Azure runtime identity and the actual effective role inventory is qualified. | It does not hold a retained broad Contributor role for the runtime scope. | P: scoped runtime role without Contributor. F: actual effective Contributor role. | 0.2 / 1; A+I | #35 |
+| `D-R20` · error | MP MD OP HP; `auth.required_action`, `auth.authorized_actions` | The intended Azure call's model family, resource and effective authority are known. | The effective allowed actions cover the exact call, considering scoped denies; role labels alone are insufficient. | P: action predict-B covered. F: only family-A action is authorized for a family-B call. | 0.2 / 1; A+I | #35 |
+| `D-R21` · warning | OP DT HP; `auth.local_auth_disabled`, `auth.old_keys_rejected`, `auth.cutover_observation_refs` | The Azure operation disables local authentication as a credential cutover. | The old credentials are actually rejected under a qualified observation sequence, rather than judging success immediately from the toggle. | P: timed old-key rejection retained. F: actual still-accepted old key, or a complete cutover record judged only at the toggle. | 0.2 / 1; A+I | #35 #38 |
+| `D-R22` · warning | MP OP; `auth.federation_configured`, `auth.api_key_environment_present` | The selected Anthropic client has federation configured. | The applicable ANTHROPIC_API_KEY environment variable is not also present. | P: federation true, variable absent. F: federation true, variable present; no secret value is retained. | 0.2 / 1; A+I | #35 |
+| `D-R23` · warning | MP OP; `auth.production`, `auth.credential_class` | The selected operation is production Bedrock authentication. | It does not use the retained long-term API-key credential class. | P: qualified non-long-term runtime credentials. F: production long-term API key. | 0.2 / 1; A+I | #35 |
+| `D-R24` · warning | MP OP; `auth.production`, `auth.credential_class` | The credential is used for a production Anthropic operation. | It is not a shared personal or legacy-workspace key in the retained classification. | P: dedicated current scoped credential. F: shared personal credential. | 0.2 / 1; A+I | #35 |
+| `D-R25` · error | HP HW OP; `auth.identity_platform_supported`, `auth.secrets_provider_supported` | EKS Pod Identity or the selected secrets provider is required by the actual platform operation. | Each requested mechanism is explicitly supported on that platform; the retained Fargate and other exclusions are assessed separately. | P: both requested mechanisms qualified supported. F: requested Pod Identity on explicitly excluded Fargate. | 0.2 / 1; A+I | #9 #35 |
+| `D-R26` · warning | OP DT; `auth.secret_build_channels` | The selected Docker build consumes secrets and its actual build channels are inspected. | No secret travels through ARG or ENV in that build. | P: qualified secret-mount channel only. F: a secret passed through ARG. | 0.2 / 1; A+I | #35 |
+| `D-R27` · warning | OP DT; `auth.environment_binding_count` | The key, workspace or vault has a qualified environment-binding inventory. | The assessed identity is not shared across multiple environments. | P: production only, count 1. F: staging and production, count 2. | 0.2 / 1; A+I | #35 |
+| `D-R28` · warning | HP OP; `auth.secrets_encrypted`, `auth.workload_secret_verbs` | The assessed Kubernetes Secrets configuration and workload authorization apply. | Secrets are encrypted at rest and the workload lacks list/watch permissions in the assessed scope. | P: encryption true, get-only for the qualified object. F: encryption false or actual list permission. | 0.2 / 1; A+I | #35 |
+| `D-R29` · warning | HP DT COST; `quota.deployment_exists`, `quota.reservation_matches` | The operation purchases the retained Azure provisioned reservation. | The matching deployment already exists and reservation type, region and scope match it. | P: deployment exists and all dimensions match. F: reservation purchased before the deployment exists. | 0.2 / 1; I+Q | #39 |
+| `D-R30` · error | W MD HP; `feature.model_route_region_eligible` | The selected Azure model, deployment type and region have a qualified offered-combination inventory. | The actual triple is eligible; a complete scoped omission or explicit exclusion can fail, mere absence from an unmarked page stays unknown. | P: model-A/type-X/region-R is listed. F: the exact triple is excluded by the exhaustive scoped inventory. | 0.2 / 1; F+I | #6 #9 |
+| `D-R31` · warning | HP EV COST; `quota.commitment_selected`, `quota.load_result_refs`, `quota.grant_confirmed` | The selected Bedrock purchase carries the retained one- or six-month commitment. | A qualified matching G6/load test has passed and the exact model-unit quota is granted before commitment; a matching reference alone is insufficient. | P: matching passed load result and confirmed grant. F: a matching failed load test despite granted quota, or a known ungranted request. | 0.2 / 1; I+Q | #36 #39 |
+| `D-R32` · error | W DM HP; `feature.cross_region_profile` | The selected request uses Bedrock provisioned throughput, including the actual existing capacity mode. | It does not also select a cross-region inference profile; new-purchase status alone must not determine applicability. | P: same-region provisioned route. F: provisioned request plus cross-region profile. | 0.2 / 1; F+I | #3 #9 |
+| `D-R33` · warning | MD KB FM DT EV; `rollout.rollback_document_refs`, `rollout.rollback_rehearsal_refs` | The build is about to launch the assessed component revision. | A documented rollback or fix-forward procedure has a matching eligible rehearsal; target lifetime/availability remains a separate predicate. | P: procedure p7 and same-scope rehearsal r7. F: complete release inventory has a plan but no rehearsal. | 0.2 / 1; D+I | #36 #38 |
+| `D-R34` · error | HP DT W; `rollout.strategy`, `rollout.automatic_rollback_required`, `rollout.automatic_mechanism_assumed`, `feature.rollback_mechanism_supported` | The assessed SageMaker staged rollout explicitly requires automatic rollback. | Any assumed canary/baking/alarm-rollback mechanism is supported for the exact endpoint/container/strategy tuple; known retained exclusions cannot satisfy that assumption. | P: qualified supported tuple. F: required assumed mechanism on explicitly excluded Marketplace/Inf1 or rolling serverless/multi-variant tuple. | 0.2 / 1; D+F+I | #36 #38 |
+| `D-R34b` · warning | HP DT W; `rollout.strategy`, `rollout.automatic_rollback_required`, `rollout.automatic_mechanism_assumed`, `feature.rollback_mechanism_supported` | The same SageMaker staged rollout explicitly does not require automatic rollback; an unknown requirement cannot select this branch. | The assumed mechanism is supported; choosing an independent manual procedure requires its own evidence and does not rewrite the platform capability. | P: supported assumed tuple. F: excluded assumed tuple with automatic requirement=false. | 0.2 / 1; D+F+I | #36 #38 |
+| `D-R35` · warning | HP DT MON; `rollout.strategy`, `rollout.alarm_refs`, `rollout.variant_names_preserved` | The selected SageMaker update is canary, linear or rolling. | Required alarms already exist and relevant variant names remain the same. | P: alarm a7 pre-exists and variant blue remains blue. F: new configuration changes blue to green. | 0.2 / 1; D+I | #38 |
+| `D-R36` · warning | HP DT W; `rollout.production`, `rollout.minimum_replicas` | The actual Vertex endpoint is production. | Its effective minimum replicas is not zero; this alone establishes no latency target. | P: minimum 1. F: minimum 0. | 0.2 / 1; D+I | #36 #38 |
+| `D-R37` · warning | HP DT W; `rollout.scale_to_zero` | The assessed endpoint uses the retained SageMaker scale-to-zero offering. | Scale-to-zero is not enabled; do not add a production-only restriction absent from the original condition. | P: scale_to_zero=false. F: scale_to_zero=true. | 0.2 / 1; D+I | #36 #38 |
+| `D-R38` · warning | HP DT W; `rollout.scale_to_zero` | The endpoint is the retained Hugging Face Inference Endpoint offering. | Scale-to-zero is not enabled; any accepted cold-start window remains a separate decision. | P: false. F: true, even if a later plan may accept its measured window. | 0.2 / 1; D+I | #36 #38 |
+| `D-R39` · warning | HP DT W; `rollout.production`, `rollout.scale_to_zero` | The actual Databricks Model Serving endpoint is production. | Scale-to-zero is not enabled. | P: production with scale_to_zero=false. F: production with scale_to_zero=true. | 0.2 / 1; D+I | #36 #38 |
+| `D-R40` · error | OP HP; `auth.endpoint_isolation_claimed`, `auth.endpoint_isolation_supported` | The actual Vertex runtime access plan and its isolation assumptions are assessed. | The plan does not rely on per-endpoint IAM bindings in the retained unsupported scope; project isolation is a different scope. | P: separate qualified projects provide the intended isolation. F: the plan relies on endpoint-specific bindings. | 0.2 / 1; A+I | #35 |
+| `D-R41` · warning | MD HP COST EV; `pin.model_reference`, `life.deprecation_listed` | The selected Workers AI model ID has eligible changelog lifecycle evidence. | The exact ID is not on the qualified deprecation list; an announced alias does not prove that alias actually took effect. | P: evidenced current ID outside a complete scoped list. F: exact ID listed for deprecation. | 0.2 / 1; I+L | #36 #39 |
+| `D-R42` · warning | GR TO HP; `feature.requested`, `feature.guardrail_scope` | The selected Bedrock Converse guardrailConfig is relied on to screen tool material. | No tool-result, tool-definition or tool-argument coverage is attributed to it beyond its qualified scope. | P: guardrail relied on only for qualified text scope. F: tool-result screening attributed to guardrailConfig. | 0.2 / 1; F+I | #35 #36 |
+| `D-R43` · error | FM HP OP; `feature.import_eligible`, `feature.import_operand_refs` | The operation is the retained Bedrock Custom Model Import route. | Every applicable listed region, feature, model-type, file-size and format constraint is satisfied by retained operands; import_eligible is their qualified result, never this rule's own output. | P: exact format and size operands meet all scoped constraints. F: one qualified file-size limit is exceeded, regardless of another unresolved operand. | 0.2 / 1; F+I | #30 #33 #11 |
+| `D-R43b` · warning | FM HP; `feature.import_context`, `feature.import_context_boundary` | The same import route's advisory maximum-context statement applies and its 128K notation is qualified. | Actual context is strictly below the qualified boundary; this stays warning-severity advice separate from D-R43's hard constraints. | P: boundary minus one token. F: exactly the boundary; unresolved K interpretation remains unknown. | 0.2 / 1; F+I | #4 #33 |
+| `D-R44` · error | FM HP; `life.custom_created_at`, `feature.custom_on_demand_eligible` | The intended operation is the scoped Bedrock custom-model on-demand deployment. | The exact model, region and creation-date combination satisfies the retained offering inventory, including the 2025-07-16 cutoff. | P: listed model/region at the admitted cutoff. F: same tuple customized before the cutoff. | 0.2 / 1; F+I+L | #30 #33 #39 |
+| `D-R45` · warning | MD ST IE; `artifact.gated_download_at_start`, `artifact.prefetched_cache_refs` | The selected artifact has gated Hugging Face access and is used at pod start or scale-out. | Startup does not depend on a gated download without an available pinned, checksum-verified prefetched cache. | P: exact cached revision and checksum bound. F: startup fetch with qualified empty cache inventory. | 0.2 / 1; I+R | #11 #35 #38 |
+| `D-R46` · error | IE HW; `runtime.driver_version`, `runtime.minimum_driver`, `runtime.forward_compatible_class`, `runtime.compatibility_package_refs` | The exact NVIDIA driver, image CUDA major and GPU class fall in the retained compatibility scope. | The minimum driver relation holds or the GPU belongs to the qualified forward-compatibility class; that narrow clause does not prove the required package/image configuration works. | P: minimum driver met. F: driver below qualified minimum and GPU outside eligible classes. | 0.2 / 1; I+R | #10 #11 #36 |
+| `D-R47` · error | MD IE; `runtime.max_model_length`, `runtime.model_config_length` | The vLLM max-model-len setting and exact selected model config are known. | Engine length does not exceed that model-config length. | P: 4096 against 4096. F: 4097 against 4096. | 0.2 / 1; I+R | #4 #11 |
+| `D-R48` · warning | IE DT; `runtime.traffic_probe`, `runtime.readiness_endpoint` | The selected NIM traffic gate uses the retained runtime probe semantics. | The live endpoint /v1/health/live is not used to admit traffic in place of qualified readiness. | P: traffic uses qualified /v1/health/ready. F: traffic uses /v1/health/live. | 0.2 / 1; I+R | #36 #38 |
+| `D-R49` · warning | DT IE MD; `runtime.startup_failure_threshold`, `runtime.startup_period`, `runtime.cold_start_bound` | A Kubernetes startup probe governs this model/runtime cold start. | The threshold-times-period window is at least the qualified cold-start bound in one time unit; retain uncertainty and conservative bounds. | P: 3 × 10 seconds against 30. F: 3 × 10 seconds against 31. | 0.2 / 1; I+R | #36 #38 |
+| `D-R50` · warning | IE W GR; `auth.network_reachable`, `auth.additional_access_controls` | A network-reachable vLLM server is relying on its --api-key switch. | That switch is not the only actual access control; an evidenced configured control still needs its own effectiveness checks. | P: qualified gateway control also present. F: complete control inventory contains only --api-key. | 0.2 / 1; A+I | #35 |
+| `D-R51` · warning | DT HW; `rollout.strategy`, `rollout.surge_gpus` | The actual upgrade uses Kubernetes RollingUpdate or RayService NewCluster. | There are spare GPUs for the assessed upgrade; this preserves the original zero-spare predicate without changing its historical remediation or inventing a surge-sizing formula. | P: one evidenced spare GPU. F: zero; a pass does not prove enough capacity for every replica. | 0.2 / 1; D+I | #10 #36 #39 |
+| `D-R52` · warning | IE HW MD EV; `runtime.quantization_mode`, `runtime.gpu_capability`, `runtime.gpu_architecture` | The actual method is FP8 compute or Marlin MXFP4 in the retained hardware table. | FP8 compute has capability at least 8.9, and Marlin MXFP4 is not selected on Turing; weight-only FP8 is distinct. | P: FP8 compute at 8.9. F: FP8 compute at 8.8, or Marlin MXFP4 on Turing. | 0.2 / 1; I+R | #10 #11 #36 |
+| `D-R53` · warning | IE DT; `pin.artifact_revision_refs` | The engine is selected for an explicitly new build. | The selected engine is not the retained maintenance-mode TGI offering; existing deployments are outside this particular new-build assertion. | P: new build selects another qualified engine. F: new build selects TGI. | 0.2 / 1; I+L | #11 |
+| `D-R54` · warning | MD FM IE; `artifact.formats`, `artifact.loader_fallbacks`, `artifact.pickle_approved` | The assessed weights and actual selected-engine loading path are known. | The artifact is not pickle-only and the loader has no unapproved pickle fallback; a qualified GGUF path remains an alternative to Safetensors. | P: pinned GGUF path without pickle fallback. F: Safetensors present but loader can fall back to unapproved pickle. | 0.2 / 1; I+R | #11 #33 #35 |
+| `D-R55` · warning | MD FM IE OP; `artifact.trust_basis`, `artifact.independent_gate_refs` | The release makes an artifact-safety claim using Hub scan or commit-badge information. | A scan or verified-commit badge is not treated as sufficient proof of safety; absence of such reliance is different from proving safety. | P: scan is retained only as a signal. F: scan alone is asserted to establish safe loading. | 0.2 / 1; I+R | #35 #36 |
+| `D-R56` · warning | MD FM EV; `artifact.trust_basis`, `artifact.independent_gate_refs` | The release relies on a valid model signature. | The signature is used for its integrity/origin claim rather than as evidence of model fit or deployment safety. | P: signature checks bytes while independent gates retain their own outcomes. F: signature validity itself is called a quality/safety pass. | 0.2 / 1; I+R | #35 #36 |
+| `D-R57` · warning | IE OP DT; `pin.image_reference`, `pin.reference_semantics` | The actual deployed container reference has qualified tag/digest semantics. | It is not a moving tag; a literal version-like tag is not automatically immutable. | P: qualified digest-bound image. F: actual image uses an evidenced moving latest tag. | 0.2 / 1; I+L | #11 #36 |
+| `D-R58` · warning | OP TO EV DT; `prompt.payload_in_environment`, `prompt.payload_bytes`, `prompt.large_payload_threshold_bytes`, `prompt.payload_cap_bytes`, `prompt.payload_scope` | A prompt, tool schema or evaluation payload is stored in an environment-variable scope from the retained platforms. | Under this explicitly proposed interpretation of the unquantified word large, bytes do not exceed a builder-declared warning threshold; no threshold is defaulted or conflated with the hard platform cap. | P: 80 bytes against chosen warning threshold 100. F: 120 against 100, even if an independently qualified cap is 200; absent threshold is unknown. | 0.2 / 1; I+P | #25 #26 #36 |
+| `D-R59` · error | MD FM DT; `artifact.complete_bundle_bytes`, `artifact.bundle_cap_bytes` | Model weights are bundled into the exact selected Worker and the complete uncompressed byte basis is qualified. | Complete bundle bytes are at most the applicable evidenced cap; other runtime/readiness constraints remain separate. | P: 100 bytes against synthetic cap 100. F: 101 against 100; a 60-byte compressed file supplies neither result. | 0.2 / 1; I+R | #10 #11 #36 |
+| `D-R60` · error | OP HP DT W; `artifact.registry_region`, `artifact.registry_multiregional`, `artifact.deployment_region` | The selected Vertex operation uses the custom Artifact Registry container route. | The registry is regional and its region equals the endpoint region. | P: regional R to endpoint R. F: multi-region registry, or regional S to R. | 0.2 / 1; I+R | #9 |
+| `D-R61` · error | EM VD KB; `embedding.index_model_id`, `embedding.query_model_id`, `embedding.reembedding_refs` | The operation migrates the retained gemini-embedding-001 corpus to gemini-embedding-2. | A complete matching corpus re-embedding result exists for the new actual index revision. | P: all corpus entries are bound to the completed new-space index. F: confirmed old-space corpus reused without re-embedding. | 0.2 / 1; E+I | #14 #15 #36 |
+| `D-R62` · error | EM VD; `embedding.output_dimensions`, `embedding.index_dimensions` | The actual produced vector and selected index/named-vector configuration are dimension-scoped as in the retained proposal. | Produced dimension equals that actual configuration's dimension; preserve the original Qdrant/pgvector hard-source and Pinecone advisory qualifications. | P: 768 equals 768. F: 768 into the assessed 384-dimension configuration. | 0.2 / 1; E+I | #14 #15 |
+| `D-R63` · warning | VD EM DT; `embedding.named_vector_addition`, `embedding.clean_rollback_required` | The selected Weaviate migration needs a clean rollback. | It does not add a named vector to the existing collection in the retained irreversible-addition case. | P: new separate collection. F: addition to existing collection with clean rollback required. | 0.2 / 1; E+I | #15 #36 |
+| `D-R64` · warning | OP DT MON; `prompt.label_rollback`, `prompt.cache_ttl` | The selected prompt rollback moves a registry label while clients use the applicable SDK cache. | That label rollback is not combined with a nonzero TTL; this predicate supplies no actual rollback-duration measurement. | P: label rollback and TTL 0 seconds. F: label rollback and TTL 60 seconds. | 0.2 / 1; I+P | #25 #36 #38 |
+| `D-R65` · warning | FM MD DT; `life.rollback_start`, `life.rollback_end`, `life.retirement_at`, `life.training_cutoff`, `life.replacement_job_at`, `life.replacement_job_required` | The rollback uses the retained OpenAI fine-tuned model/base relationship. | The base does not shut down inside the rollback window, and any needed replacement job does not fall beyond the qualified job-creation cutoff under that source's boundary semantics. | P: shutdown after the window and replacement before cutoff. F: replacement required after the cutoff even if an existing deployment still serves. | 0.2 / 1; I+L | #30 #33 #36 |
+| `D-R66` · error | MP MD W HP; `privacy.project_mode`, `privacy.account_mode`, `privacy.model_default_mode`, `privacy.effective_mode`, `privacy.allowed_modes`, `privacy.mode_resolution_refs` | The exact Bedrock model/account requires the retained allowed-mode assessment for this route and region. | The effective mode is not an excluded none/default value. Resolve first non-inherit applicable project, account, then model default; project scope exists only on mantle. Preserve unchanged T0 requirements separately. | P: mantle project aws_review overrides account none and is allowed. F: effective none excluded by qualified allowed_modes; a runtime account readback alone cannot invent a per-model signal. | 0.2 / 1; I+S | #35 #38 |
+| `D-R67` · warning | W KB VD TF FM MS; `privacy.zero_retention_required`, `privacy.stateful_features` | The build promises zero retention for the assessed hosted operation. | The promise is not paired with a hosted stateful feature from the retained scope. This remains the original warning to inspect per-feature/layer eligibility, not a blanket retention verdict or an exception to S18/R12. | P: complete assessed feature inventory has none. F: such a hosted stateful feature is selected; no retention permission follows from this warning. | 0.2 / 1; I+S | #35 #28 |
+| `D-R68` · error | MP W; `privacy.unpaid_service`, `privacy.end_user_jurisdictions` | The selected Gemini API serves the assessed end users. | An unpaid operation does not serve users in the retained EEA/UK/Switzerland scope; endpoint region cannot substitute for user jurisdiction. | P: paid operation for those users. F: unpaid operation with an evidenced affected user jurisdiction. | 0.2 / 1; I+S | #35 |
+| `D-R69` · error | W GR HP; `privacy.modified_controls_required`, `privacy.account_managed`, `privacy.program_eligible` | The actual T0 requirement requests the retained Azure modified monitoring or guardrail controls. | The relevant account is managed or qualifies under the exact eligible program; a missing program criterion stays unknown. | P: qualified account-managed status. F: account-managed=false and qualified program-eligible=false. | 0.2 / 1; I+S | #35 |
+| `D-R70` · error | MD OP W; `rights.release_basis_refs`, `rights.monthly_active_users`, `rights.grant_refs` | The actual selected Llama version and legal assessment make the retained release-date/affiliate threshold applicable. | Qualified prior-calendar-month MAU is at most 700 million, or an eligible actual Meta grant covers this entity/version/use; a pending request is not a grant. | P: 700 million on the qualified basis. F: 700 million plus one, with confirmed no applicable grant. | 0.2 / 1; I+S | #6 #35 |
+| `D-R71` · error | MD OP; `rights.release_basis_refs`, `rights.monthly_active_users`, `rights.grant_refs` | The exact Qwen2.5 artifact is governed by the retained Qwen LICENSE AGREEMENT. | Qualified MAU is at most 100 million, or an actual eligible separate license covers the selected use. | P: exactly 100 million. F: above 100 million with a complete rights record showing no grant. | 0.2 / 1; I+S | #6 #35 |
+| `D-R72` · error | MD OP; `rights.release_basis_refs`, `rights.monthly_revenue`, `rights.grant_refs` | The actual Mistral artifact/use is governed by the retained Modified MIT threshold. | Monthly revenue on the qualified legal/currency basis is at most 20 million USD, or a scoped actual commercial license exists; a different currency is not silently converted. | P: exactly USD 20 million/month. F: USD 20 million plus one/month and no applicable grant. | 0.2 / 1; I+S | #6 #35 |
+| `D-R73` · error | MD OP; `rights.release_basis_refs`, `rights.intended_use` | The selected weights are actually under the retained MRL or MNPL terms. | The use is within their qualified permitted research/non-production scope, rather than production, revenue-generating or hosted-commercial use; a separately granted offering needs its own exact scope. | P: qualified permitted non-production evaluation. F: revenue-generating hosted weights under those unchanged terms. | 0.2 / 1; I+S | #6 #35 |
+| `D-R74` · error | MD OP; `rights.release_basis_refs`, `rights.entity_domicile`, `rights.end_user_exception` | The actual model is multimodal Llama 3.2 and the licensee/use legal role is qualified. | The licensee is outside the retained EU domicile/principal-place restriction or the actual end-user exception applies; hosting region supplies neither fact. | P: qualified end-user exception for the actual product use. F: EU-domiciled direct licensee without that exception. | 0.2 / 1; I+S | #6 #35 |
+| `D-R75` · warning | MD HP EV W; `feature.sla_requested`, `feature.sla_scope_eligible` | The build relies on the retained Vertex Gemini SLA for a specific operation or metric. | That exact feature/model/endpoint/capacity/protocol/metric is covered; uptime scope cannot establish the separate latency objective. | P: qualified covered tuple. F: grounding or an out-of-scope latency operation presented as covered. | 0.2 / 1; F+I | #36 |
+| `D-R76` · warning | HP W; `feature.sla_requested`, `feature.sla_scope_eligible` | The build relies on an Azure SLA for the assessed deployment type and metric. | The reliance does not claim an SLA for Developer or a real-time SLA for Batch in the retained scope. | P: qualified covered type/metric. F: Batch operation claimed to have the real-time SLA. | 0.2 / 1; F+I | #36 |
+| `D-R77` · warning | AF W OP; `life.go_live`, `rights.ai_notice_applicable`, `rights.ai_notice_present` | The actual EU chat/agent interaction and legal role/date fall under the retained after-2026-08-02 disclosure statement. | The applicable AI notice is present. Unresolved legal role/date applicability stays unknown and is not inferred from an EU region. | P: applicable interaction has the notice. F: applicable interaction after the date lacks it; the separate marking grace period is not substituted. | 0.2 / 1; I+L+S | #25 #35 |
+| `D-R78` · warning | GR EV OP HP; `rights.commitment_relied_on`, `rights.required_mitigations`, `rights.implemented_mitigations` | The build relies on the selected Azure Customer Copyright Commitment. | The actual implemented mitigations include every qualified applicable required mitigation, with exact metaprompt, filter and evaluation bindings. | P: all four scoped requirements matched. F: confirmed missing retained evaluation while other mitigations are present. | 0.2 / 1; I+S | #35 #36 |
+| `D-R79` · error | FM MD HP IE; `artifact.adapter_base_id`, `artifact.adapter_base_version`, `artifact.selected_base_id`, `artifact.selected_base_version` | The selected LoRA deployment is the recorded Azure Foundry Managed Compute preview route. Another route requires its own evidence and otherwise remains unknown, not a universal pass. | Adapter training-base ID and version exactly equal the selected serving-base ID and version. | P: base-A/v7 equals base-A/v7. F: base-A/v6 versus base-A/v7; similar names are insufficient. | 0.2 / 1; I+R | #30 #33 #11 |
+| `D-R80` · warning | MON OP; `observe.defined_collectors`, `observe.enabled_collectors`, `observe.configuration_complete` | An exporter or health extension is configured in the actual OpenTelemetry configuration. | Every assessed configured exporter/extension is enabled in its applicable service pipeline/extension list; delivered telemetry is a separate check. | P: exporter e7 is configured and enabled. F: complete configuration defines e7 but omits it from service. | 0.2 / 1; D+I | #38 |
+| `D-R81` · warning | MON DT; `rollout.production`, `observe.health_monitoring_refs`, `observe.health_monitoring_before_traffic` | The release is about to take its first production traffic. | Workload-health monitoring exists; retain the original explicitly project-proposed pre-traffic ordering without attributing that ordering to the cited vendor. | P: scoped monitoring configured before traffic. F: complete release record defers all workload-health monitoring until afterward. | 0.2 / 1; D+I | #38 |
+| `D-R82` · warning | GR AF HP DT; `rollout.guardrail_assignment_matches`, `artifact.manifest_refs` | The selected Azure deployment, agent or request is expected to use the intended guardrail. | Effective deployment assignment, agent override and any request x-policy-id resolve to that exact intended policy revision. | P: effective request resolves to intended g7. F: request header selects g8 despite deployment g7. | 0.2 / 1; D+I+R | #35 #36 #38 |
+| `D-R83` · warning | HP DT COST; `quota.grant_confirmed`, `quota.allocation_matches`, `quota.automatic_increase_assumed` | The build relies on scoped provider quota/capacity for the traffic-taking deployment. | The confirmed grant is allocated to the exact deployment dimensions and no increase is assumed automatic; a subscription grant or another region is insufficient. | P: matching granted allocation without assumed increase. F: subscription-level grant has no matching deployment allocation. | 0.2 / 1; I+Q | #39 #38 |
+| `D-R84` · error | MD OP; `rights.release_basis_refs`, `rights.entity_domicile`, `rights.end_user_exception` | The actual model is multimodal Llama 4 and its licensee/use legal role is qualified. | The retained EU domicile/principal-place restriction does not apply, or the actual end-user exception does; retain the legal-role review requirement. | P: qualified applicable end-user exception. F: EU direct licensee without it; an EU server alone is not the predicate. | 0.2 / 1; I+S | #6 #35 |
+| `D-R85` · warning | OP HP; `auth.role_ids`, `auth.narrow_runtime_role_sufficient` | The actual Vertex runtime identity and its runtime actions are assessed. | It does not hold the broad roles/aiplatform.user in place of the qualified predict-only role. Preserve the original project-level interpretation and unresolved endpoint-wording conflict. | P: predict-only custom runtime role. F: broad roles/aiplatform.user; no provider confirmation of binding level is invented. | 0.2 / 1; A+I | #35 |
+| `D-R86` · warning | W MP OP; `privacy.non_us_residency_required`, `privacy.monitoring_approval_refs`, `privacy.retention_amendment_refs` | The build requires OpenAI residency outside the US on the selected offering. | Both actual scoped approval and executed amendment are on file; existence checks cannot invent eligibility where the recorded criteria were unreadable. | P: two qualified matching executed records. F: inspected complete record has approval but no executed amendment. | 0.2 / 1; I+S | #35 #39 |
+| `D-R87` · warning | FM HP DT MON; `life.rollback_start`, `life.rollback_end`, `life.no_call_duration`, `life.target_state`, `observe.request_evidence_refs` | The rollback target is the retained classic Foundry fine-tuned deployment, not every Foundry route. | Its evidenced interval without relevant calls does not exceed 15 days. Deployment deletion and the separately retained customized model/redeployment path remain distinct. | P: exactly 15 days. F: more than 15 days under complete scoped call evidence; absent logs do not establish inactivity. | 0.2 / 1; D+I+L | #33 #36 #38 |
+
+#### All 21 retained D-H hypotheses
+
+| ID · fixed severity | Roles and proposed inputs | Applicability | Positive assertion, with retained limits | Synthetic P / F witness | Version / migration | Additional consumers |
+| --- | --- | --- | --- | --- | --- | --- |
+| `D-H1` · warning | IE DT MD FM; `runtime.readiness_only_health`, `runtime.served_identity_refs` | A vLLM, TGI or SGLang traffic gate is assessed for the exact runtime/model/adapter. | Proposed assertion: generic health alone is not treated as proof of the required served identity and generation; actual runtime semantics must be qualified. | Hypothetical P: scoped generation response names model-A/adapter-v7. F: admitted traffic relies solely on generic health with qualified absence of that proof. | 0.2 / 1; I+R | #11 #36 #38 |
+| `D-H2` · warning | W DM MP MD HP HW IE ST KB EM VD RP AF TO MS TF FM GR EV DT MON OP; `rollout.requested_manifest_refs`, `rollout.recorded_manifest_refs`, `rollout.manifest_mapping_complete`, `artifact.manifest_refs` | An actual release is being assessed and its applicable component inventory and proposed field mapping are qualified. | Positive proposed completeness assertion: each applicable T0 declaration, T1 ID/revision, T2 identity/image digest, T3 index, T4 tool, T5 artifact, guardrail, gate result and monitoring entry is present and correctly bound. Never negate completeness itself. | Hypothetical P: every applicable expected exact entry matches. F: one qualified applicable image digest is missing or bound to another revision. Unknown inventory or mapping remains unknown. | 0.2 / 1; D+I+R | #40 #35 #36 #38 |
+| `D-H3` · warning | MP AF OP; `pin.sdk_lock_refs` | The actual provider SDK dependency is used in this deployment. | Proposed assertion: its exact deployed SDK version is pinned in the inspected lockfile; API protocol version is a separate operand. | Hypothetical P: sdk-X 1.2.3 is bound by the complete lock. F: a known unpinned SDK dependency; a missing lockfile inspection stays unknown. | 0.2 / 1; I+L | #11 #25 #36 |
+| `D-H4` · error | EM VD KB; `embedding.index_model_id`, `embedding.query_model_id`, `embedding.pair_equivalence_refs` | The assessed pair is outside D-R61's specifically researched Gemini migration pair. | Retained candidate assertion: query-time and index-time model identities agree. Eligible pair evidence must qualify the incompatibility claim before adoption; a differing pair alone is not an actual production error. | Hypothetical P: embed-A on both sides. F: embed-A versus embed-B under a future qualified incompatible-pair policy; eligible equivalence would require explicit proposal revision. | 0.2 / 1; E+I | #14 #15 #36 |
+| `D-H6` · warning | GR HP; `pin.artifact_revision_refs` | The exact Bedrock invoke selects a guardrail version. | Retained candidate assertion: the referenced version is numbered rather than DRAFT. Current documented acceptance of DRAFT is preserved; it does not prove this hypothesis should be activated. | Hypothetical P: selected version 7. F: selected DRAFT under an explicitly adopted future version-pinning policy; current outcome remains unresolved. | 0.2 / 1; I+L | #35 #36 |
+| `D-H7` · warning | IE W OP; `rights.nim_license_resolution_refs`, `rights.grant_refs` | The exact no-charge NIM container/tag is proposed to serve real end users. | Proposed scoped-rights assertion: qualified exact offering and written terms permit that intended production use. Do not resolve the recorded FAQ/Offerings conflict by a generic page date. | Hypothetical P: exact written clarification permits the bound use. F: exact clarification excludes it; unresolved competing claims produce unknown, not a purchased-license assumption. | 0.2 / 1; I+S | #11 #35 #39 |
+| `D-H8` · warning | DT EV MON; `rollout.strategy`, `rollout.gates` | The staged strategy is a canary or guarded rollout. | Retained candidate assertion: its actual gate set is not limited to latency and error rate; no universal quality threshold or executed quality result is invented. | Hypothetical P: scoped quality gate plus operational gates. F: complete gate inventory contains only latency/error-rate checks. | 0.2 / 1; D+I | #36 #38 |
+| `D-H9` · warning | MP DT OP; `feature.shadow_requested`, `feature.shadow_procedure_refs`, `feature.shadow_supported` | The builder explicitly requests the optional exact shadow/mirror operation. A known false request skips; an unresolved request is unknown. | Positive proposed support assertion: a qualified procedure for the exact offering, protocol and routing operation supports what was requested. Mirroring is not a prerequisite and grants no traffic, credential or privacy authority. | Hypothetical P: eligible exact procedure supports the requested operation. F: that qualified procedure explicitly excludes it. No procedure is unknown; no requested shadowing is skipped. | 0.2 / 1; F+I | #9 #25 #35 #36 #38 |
+| `D-H10` · warning | MD HP W DT; `feature.required_operational_properties`, `feature.qualified_operational_properties`, `feature.supported_complete` | The selected Workers AI operation explicitly needs pinning, residency or readiness properties. | Proposed support assertion: each required property has qualified support for that exact route. Omission from the pages previously opened is not evidence of unsupported capability. | Hypothetical P: each requested property explicitly supported. F: one required property explicitly excluded by qualified scoped evidence; the recorded page gap stays unknown. | 0.2 / 1; F+I | #6 #9 #35 #36 |
+| `D-H11` · warning | MON HP COST DT; `quota.budget_alert_refs` | A selected Azure, AWS or Google cloud-account launch is assessed. | Retained candidate assertion: an actual scoped budget alert exists before launch. An alert is not a spending cap, enforcement guarantee or proven delivery. | Hypothetical P: bound pre-launch alert configuration. F: complete inspected account record has no budget alert. | 0.2 / 1; I+Q | #38 #39 |
+| `D-H12` · error | EM VD OP DT; `rollout.rollback_binding_matches`, `artifact.manifest_refs`, `embedding.index_model_id`, `embedding.query_model_id` | The rollback changes the query/embed/prompt/generator tuple or its index/alias tuple. | Retained candidate assertion: both sides of the restored tuple are matched to the intended rollback revision; neither an index name nor one unchanged model ID proves that binding. | Hypothetical P: old query tuple and its matching old index alias. F: old query tuple with alias still pointing at the new-space index. | 0.2 / 1; D+E+I+R | #14 #15 #25 #36 |
+| `D-H13` · warning | OP DT EV; `prompt.mutable_runtime_config`, `prompt.immutable_config_refs` | Production prompt/tool/model configuration is edited through a UI, environment or runtime-fetched channel. | Retained candidate assertion: the served configuration has an explicit version ID or qualified label-to-revision binding. A mutable label does not itself make its resolved bytes immutable. | Hypothetical P: actual served config-v7 is retained. F: complete inspected mutable configuration has neither a version nor label binding. | 0.2 / 1; I+P | #25 #26 #36 |
+| `D-H14` · warning | OP AF TO; `prompt.client_side_variations` | Prompt or model configuration is carried in feature-flag variations. | Retained candidate assertion: those variations are not evaluated through the client-side SDK in the hypothesized exposure case. Do not infer a secret classification or a confirmed provider disclosure. | Hypothetical P: assessed variations remain on the server-side path. F: actual prompt variations are served to the client-side SDK under a future qualified exposure policy. | 0.2 / 1; I+P | #25 #35 |
+| `D-H15` · warning | DT OP; `rollout.runtime_config_change`, `rollout.pod_template_changed`, `rollout.activation_procedure_refs` | A prompt/model/retrieval change uses the assessed Kubernetes/Argo/Flagger delivery route. | Retained candidate assertion: the configuration change is not applied outside the Pod template in this hypothesized rollout gap. Preserve actual activation evidence separately; no template change does not mean no runtime effect. | Hypothetical P: selected change is in the Pod template. F: ConfigMap/runtime change is outside it under a future qualified same-controller policy. | 0.2 / 1; D+I | #11 #25 #36 #38 |
+| `D-H16` · warning | IE DT; `runtime.strict_readiness`, `runtime.multi_model` | The selected Triton repository is multi-model. | Retained candidate assertion: strict-readiness is not false. The archived 0.9.0 source cannot establish current-version semantics or a current production finding. | Hypothetical P: strict=true on the bound multi-model configuration. F: strict=false with a future qualified same-version predicate. | 0.2 / 1; I+R | #11 #36 #38 |
+| `D-H17` · warning | IE RP AF HW; `runtime.parallelism`, `runtime.long_rag_or_agent_context` | Ollama serves the declared long retrieved or agent context in this assessment. | Retained candidate assertion: parallelism does not exceed 1 in that hypothesized memory-risk case; no default, memory formula or measured fit follows from this comparison. | Hypothetical P: explicit parallelism 1. F: explicit 2 with declared long context under a future qualified policy; missing actual settings stay unknown. | 0.2 / 1; I+R | #10 #11 #36 |
+| `D-H20` · warning | TF FM MD HP COST; `feature.training_method`, `feature.custom_on_demand_eligible`, `life.custom_created_at` | The selected Bedrock customized model has an established method, model, region, customization date and actual capacity mode. | Proposed assertion in the already recorded method-qualified scope: full-rank does not select on-demand, while parameter-efficient on-demand satisfies its exact eligible tuple. Preserve the later C-R42 qualification and unadopted status. | Hypothetical P: qualified parameter-efficient eligible on-demand tuple. F: full-rank on-demand, or an explicitly ineligible parameter-efficient tuple; no generic all-fine-tunes PT mandate. | 0.2 / 1; F+I+L | #30 #33 #39 |
+| `D-H21` · warning | IE HP HW OP; `artifact.lambda_operand_refs`, `runtime.lambda_eligible` | The exact vLLM or TGI image is proposed for Lambda. | Proposed scoped-fit assertion: its complete expanded-image, device and runtime requirements fit the exact offering. An image brand or compressed Hub size cannot determine this predicate. | Hypothetical P: all exact expanded-image/runtime operands qualified as fitting. F: a qualified uncompressed image limit exceeded; current unmeasured expansion and missing device support remain unknown. | 0.2 / 1; I+R | #10 #11 #36 |
+| `D-H22` · warning | MD MP DT; `life.target_state`, `life.rollback_start`, `life.rollback_end`, `life.retirement_at`, `rollout.rollback_document_refs` | The planned API rollback reverts to a previous model ID still live at the window start. | Retained candidate assertion: that ID does not retire within the declared rollback window; an unverified rollback procedure remains a separate evidence gap. | Hypothetical P: retirement after the window. F: retirement inside it despite live status at the start. | 0.2 / 1; D+I+L | #6 #36 #38 |
+| `D-H23` · error | MD VD FM DT; `life.target_state`, `artifact.manifest_refs` | An exact declared rollback target is assessed for launch. | Retained candidate assertion: that target is not already retired or deleted. A deleted deployment and a retained redeployable model are distinct objects; this does not prove recovery impossible. | Hypothetical P: exact target remains live. F: target is evidenced deleted; any retained-artifact redeploy path requires its own plan and rehearsal. | 0.2 / 1; I+L+R | #33 #36 #38 |
+| `D-H24` · warning | MD MP EV; `pin.model_reference`, `pin.reference_semantics` | The selected OpenAI model reference is assessed for revision pinning; literal name shape alone does not qualify movement semantics. | Retained candidate assertion: deployment uses a qualified pinned snapshot. Actual alias movement/notice semantics remain unestablished; do not import D-R1's other-provider evidence. | Hypothetical P: qualified dated snapshot selected. F: a bare name under a future qualified moving-alias policy; current name spelling alone gives no production failure. | 0.2 / 1; I+L | #6 #36 #39 |
+
+### Expanded synthetic outcome examples
+
+These examples use fictional operands, sources and release labels. They are
+worked reasoning cases for review, **not executed tests, vendor discoveries,
+eligible evidence or deployment results**. Unless stated otherwise, assume the
+same exact Build/revision/locks, roles, operation and scope throughout one case.
+“Qualified” in a hypothetical example describes its assumed input; it does not
+upgrade any historical row or the current D-H evidence.
+
+| Example | Scoped inputs and reasoning | Result of the proposed assessment |
+| --- | --- | --- |
+| X1 — pass at equality, D-R59 | Bundled weights are applicable. `artifact.complete_bundle_bytes = 100` and `artifact.bundle_cap_bytes = 100`, both on the same complete uncompressed-byte basis. | `pass`, fixed `error` severity, for this size relation only. Startup, loader, memory, rights and readiness are not assessed by this comparison. |
+| X2 — decisive failure, D-R59 | The same bound bundle measures 101 bytes against the synthetic cap 100. A separate startup measurement is unavailable. | `fail`, fixed `error` severity, with the 101 > 100 witness. The independent missing startup result is preserved; it cannot erase the size violation. |
+| X3 — unknown, D-R59 | The only observation is a 60-byte compressed weight file. No complete uncompressed bundle observation exists, although a 100-byte cap is qualified. | `unknown` with missing eligible total-size evidence and `on_unknown: review`. Neither 60 nor zero is substituted for the missing total. |
+| X4 — skipped, D-R59 | The exact selected operation uses the hosted API and bundles no model weights into a Worker. The operation inventory establishes that absence. | `skipped` with the known non-applicability reason. Merely lacking a bundle-size field would instead produce X3. |
+| X5 — numeric conflict, D-R10 | Same account/model/region/period has two equally authoritative eligible limit records, 100 and 120 requests/minute, with no scope/version/date discriminator. Demand is 110 in that exact unit and period. | Use the conservative 100 bound: `fail` / `warning`, retaining both records and `disputed`. Do not average to 110, discard the disagreement or create a fifth outcome. |
+| X6 — yes/no conflict, D-H9 | Shadowing is explicitly requested. Two equally ranked eligible procedures for the identical offering/protocol/route contradict each other on that operation, and #41 cannot resolve the conflict. | `unknown` / `warning` and disputed. A newer unrelated offering page cannot resolve the tie. No traffic is mirrored and no permission is inferred. |
+| X7 — estimated interval, D-R10 | Eligible demand evidence is an estimated interval 90–110 requests/minute; matching granted limit is 100. Retain the interval and estimated status while selecting the conservative upper amount 110 for this comparison. | `fail` / `warning` with the conservative-bound and estimated flags. This is not a measured 110 or proof of any actual request volume. |
+| X8 — partial versus complete inventory, D-R13 / D-R13b | Feature F is requested and required. An unmarked supported-feature list omits F: this is unresolved. If a qualified exhaustive same-scope inventory explicitly omits F, with no selected substitute, the counterexample is established. If F is explicitly optional, the separate D-R13b branch applies instead. | Respectively `unknown` / `error`, hypothetical `fail` / `error`, and hypothetical `fail` / `warning`. Fixed severity belongs to its row; it is never changed inside D-R13. |
+| X9 — positive completeness, D-H2 | The applicable inventory and proposed mapping are qualified. Expected image digest belongs to release r7, but the recorded entry binds r6. Other recorded entries are correct. If the inventory/mapping itself is unresolved, the missing association cannot be declared a complete release mapping. | Hypothetical `fail` / `warning` for the known wrong applicable binding; `unknown` when its requiredness or mapping cannot be established. A fully matched qualified inventory yields hypothetical `pass`. Completeness itself is never the failing condition. |
+| X10 — optional shadow support, D-H9 | Requested=false from the actual operation declaration: no procedure is needed for this predicate. Requested=true with no eligible exact procedure: the question is unresolved. Requested=true plus an exact supporting procedure or exact explicit incompatibility gives the two decidable hypothetical branches. | Respectively `skipped`, `unknown`, hypothetical `pass` or hypothetical `fail`, always the same fixed `warning` severity. The request does not bypass traffic, credentials, privacy or live-change authority. |
+| X11 — proposed size policy, D-R58 | Environment-variable transfer is selected. Payload 120 bytes and qualified hard cap 200 do not answer what “large” means. If the builder explicitly supplies the proposed warning threshold 100, the warning relation becomes decidable. | Without the threshold: `unknown`, not skipped or pass. With threshold 100: hypothetical `fail` / `warning` even though the separate hard cap is not exceeded. This example chooses no project-wide default. |
+| X12 — effective-mode precedence, D-R66 | On mantle, a qualified project value aws_review overrides account none; the exact model/account allows aws_review. On a different runtime request, only a regional account readback exists and no eligible model-specific allowed-modes evidence is available. | First request: hypothetical `pass` for D-R66's narrow excluded-none/default predicate; unchanged no-human-review or retention requirements remain separately unresolved or incompatible as their own evidence dictates. Second request: `unknown`. Never copy mantle project state to runtime or treat this pass as a waived requirement. |
+| X13 — evidence scope, D-R2 / D-R4 | The build serves through operator A, but its only supplied retirement date is explicitly for operator B. A's actual retirement remains unresearched. The plan nevertheless relies on B's date as A's lifecycle evidence. | D-R2 remains `unknown` for the missing eligible A date; D-R4 has the known wrong-operator reliance witness. These are different concerns, not contradictory outcomes. |
+| X14 — private rights evidence, D-R70 | Above-threshold qualified MAU needs the actual selected entity/version/use grant. A private attestation for another Build/entity is supplied, or the relevant rights record is withheld. | Reject the mismatched binding as evidence for this assessment and retain `unknown` with its scoped reason when no eligible grant/absence evidence remains. A confirmed complete same-scope record with no required grant supplies the separate hypothetical failure. A reference's existence never transfers the grant. |
+| X15 — branch-specific inputs, D-R65 | The plan explicitly needs no replacement fine-tuning job, but it does use an existing fine-tuned rollback target. Its qualified base retirement clears the rollback window. | The absent replacement-job date is explicitly inapplicable to that branch, not fabricated. The existing-target lifecycle relation may hypothetically pass. If whether a new job is needed is unresolved, that branch remains unknown. |
+
+Input lists therefore describe the row's possible dependencies, not a demand to
+invent every listed value in every branch. Actual branch applicability decides
+which operands are required. A known decisive violation can coexist with other
+unknown findings; only a qualified complete scope can support an overall
+completeness claim. These examples leave all real D-H rules unadopted and their
+retained evidence gaps unchanged.
+
+### Prompt storage and receiving action
+
+The earlier proposal to use reviewed repository files plus a content hash, with
+a registry where one already exists, remains an explicit decision request for
+the #37 owners **PUSHINGSQUARES and appletechie before actual build-readiness
+use**. This companion does not choose that default, purchase a registry or
+convert a mutable label into an immutable artifact. If an actual decision is
+made, `prompt.storage_decision_ref` binds its scoped record and version; absent
+that decision, the named follow-up is a valid deferred research-design item.
+D-H13, D-R58 and D-R64 expose versioning, transfer size and cache behavior without
+settling where the project must store prompts.
+
+The proposed receiving packet is this single note, its unchanged historical
+register, the typed pointer/role dictionary, all 111 mappings and the synthetic
+examples. The actual #40 controller can review and explicitly accept, amend or
+decline these research representations, with #41 retaining evidence-policy
+authority and the existing T6 controller retaining its parent-completion
+scope. In particular, D-H2, D-H7, D-H9, D-H10 and D-H21 need the stated proposed
+interpretations reviewed, and D-R58 needs the explicit no-default threshold
+interpretation reviewed. The other mappings retain their original narrow
+predicate and evidence qualifications. None is enabled by this document.
+
+No schema, contract, ruleset, evidence register, source date, grade, historical
+review, fixed severity, hypothesis, named ownership or live issue state is
+changed by the companion. Actual vendor/account eligibility, artifacts,
+training, deployments, rehearsals, traffic tests, monitoring delivery and
+production approvals remain their own source and execution requirements.
