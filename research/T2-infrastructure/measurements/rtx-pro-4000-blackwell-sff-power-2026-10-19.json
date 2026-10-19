@@ -141,16 +141,16 @@
     "not_a_spec": "The contributor describes inference on a shared host, but workload, model and engine are unpinned and that context is not independently established. These are filtered per-device telemetry statistics, not a specification, TDP, fit or capacity result."
   },
   "raw_evidence": {
-    "directory": "research/T2-infrastructure/measurements/raw/",
+    "directory": "not stored in this repository; each file is identified by its evidence manifest id",
     "files": [
       {
-        "path": "research/T2-infrastructure/measurements/raw/raw-capture-IDLE-20261019T000959Z.csv",
+        "manifest_id": "power-raw-capture-IDLE",
         "sha256": "607163c0349a88ff07aa2646eb7f6ed01ef84e5b808d517724b019667a5147f9",
         "bytes": 38266,
         "original_sha256": "34406e29239515d3a1001eefaa53a1a4666f85e0ae5d547ad19aee61c9ae15be"
       },
       {
-        "path": "research/T2-infrastructure/measurements/raw/raw-capture-A-20261018T235741Z.csv",
+        "manifest_id": "power-raw-capture-A",
         "sha256": "81302e7ddcd3ba97170b426d0f192952e8fc029c2133fa110dac943d5ee9cf5f",
         "bytes": 38786,
         "original_sha256": "0ee9cd7c093426ac78b907f3ee60505345da532c615dd79b70e3ed1d527778f9"

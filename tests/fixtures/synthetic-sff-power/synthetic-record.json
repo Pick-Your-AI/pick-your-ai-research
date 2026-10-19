@@ -1,0 +1,120 @@
+{
+  "synthetic": "Clearly synthetic fixture: invented values, not a measurement and not research evidence.",
+  "card": {
+    "name": "SYNTHETIC TEST DEVICE",
+    "driver": "0.0.0",
+    "vbios": "0.0.0",
+    "power_limit_w": 5.0,
+    "power_min_limit_w": 1.0,
+    "power_max_limit_w": 9.0
+  },
+  "observed_device_identifiers": [
+    {
+      "index": "0",
+      "pci_bus_id": "FAKE:00.0"
+    },
+    {
+      "index": "1",
+      "pci_bus_id": "FAKE:01.0"
+    }
+  ],
+  "reported_observed_utc": {
+    "idle_window_start": "2000-01-01T00:00:01.000Z",
+    "idle_window_end": "2000-01-01T00:00:03.000Z",
+    "load_series_first_sample": "2000-01-01T00:00:01.500Z",
+    "load_series_last_sample": "2000-01-01T00:10:03.500Z"
+  },
+  "idle": {
+    "source_file": "synthetic-capture-IDLE.csv",
+    "device": {
+      "index": "0",
+      "pci_bus_id": "FAKE:00.0"
+    },
+    "pstate": "P5",
+    "utilization_pct": 0,
+    "memory_used_mib": 10,
+    "samples": 3,
+    "power_draw_w": {
+      "min": 1.0,
+      "mean": 2.0,
+      "median": 2.0,
+      "max": 3.0
+    },
+    "first_sample_reported_utc": "2000-01-01T00:00:01.000Z",
+    "last_sample_reported_utc": "2000-01-01T00:00:03.000Z",
+    "excluded_rows": {
+      "count": 2,
+      "rows": [
+        {
+          "utilization_pct": 1.0,
+          "memory_used_mib": 20.0,
+          "pstate": "P0",
+          "power_draw_w": 4.0
+        },
+        {
+          "utilization_pct": 3.0,
+          "memory_used_mib": 30.0,
+          "pstate": "P0",
+          "power_draw_w": 5.0
+        }
+      ]
+    }
+  },
+  "load": {
+    "series": {
+      "SYN_A_index_0": {
+        "samples_total": 3,
+        "samples_used": 2,
+        "samples_excluded_below_80pct": 1,
+        "min_w": 2.0,
+        "mean_w": 3.0,
+        "max_w": 4.0,
+        "samples_above_limit": 0,
+        "source_file": "synthetic-capture-A.csv",
+        "device": {
+          "index": "0",
+          "pci_bus_id": "FAKE:00.0"
+        },
+        "first_sample_reported_utc": "2000-01-01T00:10:01.000Z",
+        "last_sample_reported_utc": "2000-01-01T00:10:03.000Z"
+      },
+      "SYN_A_index_1": {
+        "samples_total": 3,
+        "samples_used": 3,
+        "samples_excluded_below_80pct": 0,
+        "min_w": 3.0,
+        "mean_w": 5.0,
+        "max_w": 7.0,
+        "samples_above_limit": 1,
+        "source_file": "synthetic-capture-A.csv",
+        "device": {
+          "index": "1",
+          "pci_bus_id": "FAKE:01.0"
+        },
+        "first_sample_reported_utc": "2000-01-01T00:10:01.500Z",
+        "last_sample_reported_utc": "2000-01-01T00:10:03.500Z"
+      },
+      "SYN_IDLE_index_1": {
+        "samples_total": 4,
+        "samples_used": 3,
+        "samples_excluded_below_80pct": 1,
+        "min_w": 6.0,
+        "mean_w": 8.0,
+        "max_w": 10.0,
+        "samples_above_limit": 3,
+        "source_file": "synthetic-capture-IDLE.csv",
+        "device": {
+          "index": "1",
+          "pci_bus_id": "FAKE:01.0"
+        },
+        "first_sample_reported_utc": "2000-01-01T00:00:01.500Z",
+        "last_sample_reported_utc": "2000-01-01T00:00:04.500Z"
+      }
+    },
+    "range_of_series_means_w": {
+      "low": 3.0,
+      "high": 8.0
+    },
+    "max_sample_w": 10.0
+  }
+}
