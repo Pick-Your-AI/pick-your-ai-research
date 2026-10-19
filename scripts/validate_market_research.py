@@ -1,6 +1,7 @@
 """Check market-note integrity, not truth, rights, benchmark quality or acceptance."""
 import json
 import math
+import os
 from datetime import date
 from decimal import Decimal
 from pathlib import Path
@@ -58,6 +59,9 @@ def validate_deliverable(value, label):
     require(not path.is_absolute(), f'{label}: requires a relative file path')
     try:
         root = BASE.resolve(strict=True)
+        # Preserve directory requirements in the recorded spelling, including
+        # trailing separators and '.' components that Path.parts removes.
+        os.stat(os.path.join(root, value))
         target = root
         for part in path.parts:
             # Check each traversed directory before resolving a later '..'.
