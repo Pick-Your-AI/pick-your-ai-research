@@ -9,6 +9,7 @@ file. The checks never verify acquisition, workload, timezone, the original
 unredacted captures or calibrated physical power.
 """
 from copy import deepcopy
+from decimal import Decimal
 import importlib.util
 import json
 from pathlib import Path
@@ -572,6 +573,93 @@ class ExactCountsAndShape(SyntheticBase):
     def test_clean_fixture_has_no_shape_problem(self):
         for name in SYNTHETIC_FILES:
             self.assertEqual(CHECKER.shape_violations(self.captures[name]), [])
+
+
+class LoadThresholdIsExact(SyntheticBase):
+    """The 80 % load selection compares exact decimals, for each series."""
+
+    JUST_BELOW = "79.999999999999999999"
+    ABOVE = "80.000000000000000001"
+    # series -> (file, device index, which qualifying row of that device to change)
+    TARGETS = {"SYN_A_index_0": (A_FILE, "0", 0), "SYN_A_index_1": (A_FILE, "1", 1),
+               "SYN_IDLE_index_1": (IDLE_FILE, "1", 0)}
+
+    def with_util(self, series, value):
+        name, device, nth = self.TARGETS[series]
+        lines = self.captures[name].decode().split("\n")
+        header = [c.strip() for c in lines[0].split(",")]
+        seen = 0
+        for n, line in enumerate(lines[1:], 1):
+            cells = line.split(",")
+            if len(cells) != len(header) or cells[header.index("index")].strip() != device:
+                continue
+            util = Decimal(cells[header.index("utilization.gpu [%]")].split()[0])
+            if util >= 80:
+                if seen == nth:
+                    cells[header.index("utilization.gpu [%]")] = " %s %%" % value
+                    lines[n] = ",".join(cells)
+                    break
+                seen += 1
+        else:
+            self.fail("no row to change")
+        captures = dict(self.captures)
+        captures[name] = "\n".join(lines).encode()
+        return captures
+
+    def expected_record(self, captures):
+        """An independent oracle: the record the exact selection implies."""
+        record = deepcopy(self.record)
+        means, maxima = [], []
+        limit = Decimal(str(record["card"]["power_limit_w"]))
+        for name, rec in record["load"]["series"].items():
+            file, device, _ = self.TARGETS[name]
+            header, *body = [[c.strip() for c in l.split(",")] for l in captures[file].decode().split("\n") if l]
+            d = [dict(zip(header, r)) for r in body if r[header.index("index")] == device]
+            used = [Decimal(r["power.draw [W]"].split()[0]) for r in d
+                    if Decimal(r["utilization.gpu [%]"].split()[0]) >= 80]
+            rec["samples_used"] = len(used)
+            rec["samples_excluded_below_80pct"] = len(d) - len(used)
+            rec["min_w"], rec["max_w"] = float(min(used)), float(max(used))
+            rec["mean_w"] = float(sum(used) / len(used))
+            rec["samples_above_limit"] = sum(x > limit for x in used)
+            means.append(rec["mean_w"]); maxima.append(rec["max_w"])
+        record["load"]["range_of_series_means_w"] = {"low": min(means), "high": max(means)}
+        record["load"]["max_sample_w"] = max(maxima)
+        return record
+
+    def run_with(self, record, captures):
+        return ExactNumbers.run_record_text(self, json.dumps(record), captures)
+
+    def test_oracle_reproduces_the_untouched_record(self):
+        for series in self.TARGETS:
+            self.assertEqual(self.expected_record(self.captures)["load"], self.record["load"], series)
+
+    def test_just_below_80_is_not_selected_in_every_series(self):
+        for series in self.TARGETS:
+            with self.subTest(series=series):
+                captures = self.with_util(series, self.JUST_BELOW)
+                self.assertEqual(float(self.JUST_BELOW), 80.0)
+                # unchanged record: the old (float) selection would accept it
+                failed = self.run_with(self.record, captures)
+                self.assertIn("series.%s.samples_used" % series, failed)
+                self.assertIn("series.%s.excluded_count" % series, failed)
+                # correctly adjusted record passes everything
+                self.assertEqual(self.run_with(self.expected_record(captures), captures), set())
+
+    def test_exactly_80_and_just_above_80_stay_qualifying(self):
+        for value in ("80", "80.0", self.ABOVE):
+            for series in self.TARGETS:
+                with self.subTest(series=series, value=value):
+                    captures = self.with_util(series, value)
+                    self.assertEqual(self.run_with(self.record, captures), set())
+                    self.assertEqual(self.expected_record(captures)["load"], self.record["load"])
+
+    def test_selection_never_compares_a_utilization_float_to_the_threshold(self):
+        import inspect
+        source = inspect.getsource(CHECKER.check_record)
+        for line in source.splitlines():
+            if "LOAD_UTILIZATION_PCT" in line or "threshold" in line:
+                self.assertNotIn("number(", line)
 
 
 class ExactNumbers(SyntheticBase):

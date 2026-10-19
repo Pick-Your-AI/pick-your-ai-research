@@ -357,8 +357,11 @@ def check_record(record, captures, exact_record=None):
         d_rows = [r for r in rows[rec["source_file"]] if r["index"] == rec["device"]["index"]]
         series_rows[name] = d_rows
         res.equal("series.%s.device_pci" % name, sorted({r["pci.bus_id"] for r in d_rows}), [rec["device"]["pci_bus_id"]])
-        qualifying = [r for r in d_rows if number(r["utilization.gpu [%]"]) >= LOAD_UTILIZATION_PCT]
-        below = [r for r in d_rows if number(r["utilization.gpu [%]"]) < LOAD_UTILIZATION_PCT]
+        # The selection is a discrete count: compare exact decimals, never floats
+        # (79.999999999999999999 % is below 80 even though float() rounds it to 80).
+        threshold = Decimal(LOAD_UTILIZATION_PCT)
+        qualifying = [r for r in d_rows if cell_decimal(r["utilization.gpu [%]"]) >= threshold]
+        below = [r for r in d_rows if cell_decimal(r["utilization.gpu [%]"]) < threshold]
         p = [number(r["power.draw [W]"]) for r in qualifying]
         res.count("series.%s.total" % name, len(d_rows), exact_rec["samples_total"])
         res.count("series.%s.excluded_count" % name, len(below), exact_rec["samples_excluded_below_80pct"])
