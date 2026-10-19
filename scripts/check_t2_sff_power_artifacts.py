@@ -95,6 +95,21 @@ def idle_run(rows, index, utilization, memory_mib, pstate):
     return run
 
 
+def strict_equal(actual, recorded):
+    """Equality that never lets a boolean stand in for a number (1 == True in Python).
+
+    Lists and dicts are compared element by element; 1 and 1.0 still match, a
+    string never matches a number.
+    """
+    if isinstance(actual, bool) != isinstance(recorded, bool):
+        return False
+    if isinstance(actual, dict) and isinstance(recorded, dict):
+        return actual.keys() == recorded.keys() and all(strict_equal(actual[k], recorded[k]) for k in actual)
+    if isinstance(actual, (list, tuple)) and isinstance(recorded, (list, tuple)):
+        return len(actual) == len(recorded) and all(strict_equal(a, r) for a, r in zip(actual, recorded))
+    return actual == recorded
+
+
 class Results:
     """Collect named checks; an unexpected error is a failed check, not a crash."""
 
@@ -112,11 +127,12 @@ class Results:
 
     def equal(self, name, actual, recorded):
         self.values[name] = actual
-        self.check(name, lambda: (actual == recorded, "recomputed %r, record %r" % (actual, recorded)))
+        self.check(name, lambda: (strict_equal(actual, recorded), "recomputed %r, record %r" % (actual, recorded)))
 
     def close(self, name, actual, recorded):
         self.values[name] = actual
-        self.check(name, lambda: (abs(actual - recorded) <= TOLERANCE_W + 1e-12,
+        self.check(name, lambda: (not isinstance(recorded, bool) and not isinstance(actual, bool)
+                                  and abs(actual - recorded) <= TOLERANCE_W + 1e-12,
                                   "recomputed %r, record %r" % (actual, recorded)))
 
     def failed(self):

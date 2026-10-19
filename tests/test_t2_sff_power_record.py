@@ -223,6 +223,40 @@ class CorruptedControls(SyntheticBase):
         self.assertEqual(set(failed), {"idle.nonempty_run"})
         self.assertIn("no rows satisfy", failed["idle.nonempty_run"])
 
+    def test_boolean_is_not_accepted_as_an_integer_count(self):
+        # samples_excluded_below_80pct is 1 in the fixture; True == 1 in Python.
+        record = self.mutated_record()
+        series = record["load"]["series"]["SYN_A_index_0"]
+        self.assertEqual(series["samples_excluded_below_80pct"], 1)
+        series["samples_excluded_below_80pct"] = True
+        self.assertEqual(failing(record, self.captures), {"series.SYN_A_index_0.excluded_count"})
+
+    def test_boolean_is_not_accepted_inside_an_excluded_row(self):
+        # utilization_pct is 1.0 in the fixture; True == 1.0 in Python.
+        record = self.mutated_record()
+        row = record["idle"]["excluded_rows"]["rows"][0]
+        self.assertEqual(row["utilization_pct"], 1.0)
+        row["utilization_pct"] = True
+        self.assertEqual(failing(record, self.captures), {"idle.excluded_rows"})
+
+    def test_string_is_not_accepted_as_a_number(self):
+        record = self.mutated_record()
+        record["load"]["series"]["SYN_A_index_0"]["samples_excluded_below_80pct"] = "1"
+        record["idle"]["samples"] = "3"
+        self.assertEqual(failing(record, self.captures),
+                         {"series.SYN_A_index_0.excluded_count", "idle.samples"})
+
+    def test_boolean_is_not_accepted_by_the_tolerance_comparison(self):
+        record = self.mutated_record()
+        record["idle"]["power_draw_w"]["min"] = True   # recomputed min is 1.0
+        self.assertEqual(failing(record, self.captures), {"idle.power_min"})
+
+    def test_whole_number_float_and_int_still_match(self):
+        record = self.mutated_record()
+        record["load"]["series"]["SYN_A_index_0"]["samples_excluded_below_80pct"] = 1.0
+        record["idle"]["excluded_rows"]["rows"][0]["utilization_pct"] = 1
+        self.assertEqual(failing(record, self.captures), set())
+
     def test_malformed_record_fails_a_check_instead_of_crashing(self):
         record = self.mutated_record()
         record["idle"]["first_sample_reported_utc"] = "not a time"

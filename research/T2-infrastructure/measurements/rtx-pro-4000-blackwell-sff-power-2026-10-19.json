@@ -161,7 +161,7 @@
     "original_capture_hashes_verified": false,
     "published_hash_scope": "The two sha256 and byte-length entries identify the published CSV files. Recomputing them does not verify the separately declared original_sha256 values."
   },
-  "method": "Statistics are recomputed from the published CSV files by tests/test_t2_sff_power_record.py (csv module, comparisons within 0.01 W of the reported two-decimal values). Tests verify published hashes, row filters and explicit per-series identities. Original capture hashes, workload attribution, UTC conversion and physical calibration are not verified by those checks.",
+  "method": "The real-data recomputation is the standalone scripts/check_t2_sff_power_artifacts.py run with --artifact-dir on the published CSV bytes; it checks both file lengths and SHA-256 before any parse, then recomputes statistics (csv module, comparisons within 0.01 W of the reported two-decimal values), row filters and explicit per-series identities. tests/test_t2_sff_power_record.py runs the same checker code on synthetic fixtures and corrupted controls, plus record and pin structure checks, in CI; it does not read the real captures. Original capture hashes, workload attribution, UTC conversion and physical calibration are not verified by those checks.",
   "not_included": [
     "engine commit or build",
     "model artifact pin",
