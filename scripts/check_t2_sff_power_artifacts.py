@@ -18,6 +18,7 @@ from decimal import Decimal, InvalidOperation
 import hashlib
 import io
 import json
+import math
 from pathlib import Path
 import platform
 import re
@@ -109,6 +110,9 @@ UNIT_COLUMNS = {
     "memory.total [MiB]": "MiB", "clocks.current.sm [MHz]": "MHz",
     "clocks.current.memory [MHz]": "MHz",
 }
+# These columns also feed descriptive float statistics or excluded-row output.
+# Exact-only limit/count/selection comparisons continue to use Decimal.
+FLOAT_COLUMNS = {"power.draw [W]", "utilization.gpu [%]", "memory.used [MiB]"}
 
 
 def unit_violations(rows):
@@ -118,6 +122,7 @@ def unit_violations(rows):
     followed by one space and exactly the unit text the header declares:
     no other unit, no missing unit, no extra text. Row width and duplicate
     header names are checked earlier, on the raw rows, by shape_violations.
+    Columns also used as floats must remain finite after that conversion.
     """
     problems = []
     if not rows:
@@ -131,6 +136,10 @@ def unit_violations(rows):
             if not pattern.fullmatch(row.get(column, "")):
                 problems.append("row %d column %r: %r is not a number followed by ' %s'"
                                 % (number_, column, row.get(column), unit))
+                break
+            if column in FLOAT_COLUMNS and not math.isfinite(number(row[column])):
+                problems.append("row %d column %r cannot be represented as a finite float"
+                                % (number_, column))
                 break
     return problems
 
@@ -249,6 +258,9 @@ class Results:
                                   "recomputed %r, record %r" % (actual, recorded)))
 
     def close(self, name, actual, recorded):
+        if not math.isfinite(actual):
+            self.check(name, lambda: (False, "arithmetic result is not finite: %r" % actual))
+            return  # Keep the failed result out of strict JSON output.
         self.values[name] = actual
         self.check(name, lambda: (not isinstance(recorded, bool) and not isinstance(actual, bool)
                                   and abs(actual - recorded) <= TOLERANCE_W + 1e-12,
