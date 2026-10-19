@@ -322,6 +322,58 @@ EXEMPT = {
 }
 
 
+class NumericUnitsAndLimits(SyntheticBase):
+    def test_wrong_units_are_rejected_in_all_consumed_columns(self):
+        cases = (
+            (IDLE_FILE, "1.00 W, 5.00 W", "1.00 kW, 5.00 W"),
+            (A_FILE, "100 %, 10 MiB", "100 bananas, 10 MiB"),
+            (IDLE_FILE, "20 MiB, 100 MiB", "20 GiB, 100 MiB"),
+            (A_FILE, "5.00 W, 1.00 W", "5.00 kW, 1.00 W"),
+            (A_FILE, "1.00 W, 9.00 W", "1.00 kW, 9.00 W"),
+            (A_FILE, "9.00 W, 100 %", "9.00 kW, 100 %"),
+            # This draw belongs to a row below the utilization threshold.
+            (A_FILE, "1.00 W, 5.00 W", "1.00 kW, 5.00 W"),
+        )
+        for name, old, new in cases:
+            with self.subTest(file=name, corruption=new):
+                captures = self.mutated_captures(name, old, new)
+                with self.assertRaisesRegex(CHECKER.ArtifactError, "CSV row"):
+                    CHECKER.check_record(self.record, captures)
+
+    def test_nonfinite_or_malformed_numeric_cells_are_rejected(self):
+        for cell in ("nan W", "inf W", "-inf W", "2.00", "2.00 W extra", "2.00 bananas", "9" * 400 + " W"):
+            with self.subTest(cell=cell):
+                captures = self.mutated_captures(A_FILE, "2.00 W, 5.00 W", cell + ", 5.00 W")
+                with self.assertRaises(CHECKER.ArtifactError):
+                    CHECKER.check_record(self.record, captures)
+
+    def test_power_limit_cells_retain_decimal_precision_beyond_binary64(self):
+        original = "5.00 W, 1.00 W, 9.00 W"
+        cases = (
+            ("power_limit", "5.0000000000000001 W, 1.00 W, 9.00 W"),
+            ("power_min_limit", "5.00 W, 1.0000000000000001 W, 9.00 W"),
+            ("power_max_limit", "5.00 W, 1.00 W, 9.0000000000000001 W"),
+        )
+        for label, replacement in cases:
+            with self.subTest(limit=label):
+                captures = {}
+                for name, data in self.captures.items():
+                    text = data.decode()
+                    self.assertIn(original, text)
+                    captures[name] = text.replace(original, replacement).encode()
+                self.assertIn("limits_identity." + label, failing(self.record, captures))
+
+    def test_power_limits_compare_exact_numeric_values_without_rounding(self):
+        for label in ("power_limit", "power_min_limit", "power_max_limit"):
+            key = label + "_w"
+            baseline = self.record["card"][key]
+            for value in (baseline + 0.004, baseline - 0.004, True, float("nan"), float("inf")):
+                with self.subTest(field=key, value=value):
+                    record = self.mutated_record()
+                    record["card"][key] = value
+                    self.assertIn("limits_identity." + label, failing(record, self.captures))
+
+
 class EveryCheckHasACorruptingCase(SyntheticBase):
     """Each check the checker emits must be able to fail, on its own name."""
 
@@ -427,6 +479,36 @@ class ArtifactGate(SyntheticBase):
             with self.assertRaises(CHECKER.ArtifactError):
                 CHECKER.run(tmp, SYNTHETIC_RECORD, pins=synthetic_pins(self.captures))
             parser.assert_not_called()
+
+    def test_run_preserves_literal_json_power_limit_precision(self):
+        cases = (("power_limit", "5.0", "5.0000000000000001"),
+                 ("power_min_limit", "1.0", "1.0000000000000001"),
+                 ("power_max_limit", "9.0", "9.0000000000000001"))
+        with tempfile.TemporaryDirectory() as tmp:
+            self.stage(tmp)
+            record_path = Path(tmp) / "record.json"
+            for label, original, replacement in cases:
+                with self.subTest(limit=label):
+                    source = SYNTHETIC_RECORD.read_text()
+                    token = '"%s_w": %s' % (label, original)
+                    self.assertIn(token, source)
+                    record_path.write_text(source.replace(token, '"%s_w": %s' % (label, replacement), 1))
+                    result = CHECKER.run(tmp, record_path, pins=synthetic_pins(self.captures))
+                    self.assertFalse(result["all_passed"])
+                    self.assertIn("limits_identity." + label,
+                                  {c["check"] for c in result["checks"] if not c["passed"]})
+
+    def test_cli_rejects_pinned_wrong_units_without_writing_a_result(self):
+        captures = self.mutated_captures(A_FILE, "100 %, 10 MiB", "100 bananas, 10 MiB")
+        with tempfile.TemporaryDirectory() as tmp, mock.patch("sys.stderr"):
+            self.stage(tmp, overrides=captures)
+            out = Path(tmp) / "result.json"
+            with mock.patch.object(CHECKER, "PINS", synthetic_pins(captures)):
+                with self.assertRaises(SystemExit) as raised:
+                    CHECKER.main(["--artifact-dir", tmp, "--record", str(SYNTHETIC_RECORD),
+                                  "--output", str(out)])
+            self.assertEqual(raised.exception.code, 2)
+            self.assertFalse(out.exists())
 
     def test_cli_requires_artifact_dir_and_rejects_an_empty_one(self):
         with self.assertRaises(SystemExit) as raised, mock.patch("sys.stderr"):

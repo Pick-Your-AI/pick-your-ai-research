@@ -14,9 +14,12 @@ from __future__ import annotations
 import argparse
 import csv
 from datetime import datetime
+from decimal import Decimal
 import hashlib
 import io
 import json
+import math
+import re
 from pathlib import Path
 import platform
 import statistics
@@ -37,10 +40,18 @@ TOLERANCE_W = 0.01
 LOAD_UTILIZATION_PCT = 80
 CSV_TIME_FORMAT = "%Y/%m/%d %H:%M:%S.%f"
 REPORTED_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
+CSV_UNITS = {
+    "power.draw [W]": "W",
+    "power.limit [W]": "W",
+    "power.min_limit [W]": "W",
+    "power.max_limit [W]": "W",
+    "utilization.gpu [%]": "%",
+    "memory.used [MiB]": "MiB",
+}
 
 
 class ArtifactError(Exception):
-    """An input file is missing, the wrong size, or does not match its pin."""
+    """An input file is missing, does not match its pin, or is malformed."""
 
 
 def sha256_hex(data):
@@ -71,11 +82,39 @@ def verify_artifacts(directory, pins=PINS):
 def parse_csv(data):
     reader = csv.reader(io.StringIO(data.decode("utf-8"), newline=""))
     header = [cell.strip() for cell in next(reader)]
-    return [dict(zip(header, [cell.strip() for cell in row])) for row in reader]
+    rows = [dict(zip(header, [cell.strip() for cell in row])) for row in reader]
+    # Validate every consumed numeric column, including rows later excluded by
+    # a selection. A correct numeric prefix cannot excuse an incorrect unit.
+    for row_index, row in enumerate(rows, start=2):
+        for column, unit in CSV_UNITS.items():
+            try:
+                number(row.get(column), unit)
+            except ArtifactError as error:
+                raise ArtifactError("CSV row %d, %s: %s" % (row_index, column, error)) from error
+    return rows
 
 
-def number(cell):
-    return float(cell.split()[0])
+def decimal_number(cell, unit):
+    match = re.fullmatch(r"([+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)) " + re.escape(unit), cell or "")
+    if match is None:
+        raise ArtifactError("expected a decimal value in %s, got %r" % (unit, cell))
+    return Decimal(match.group(1))
+
+
+def number(cell, unit):
+    value = float(decimal_number(cell, unit))
+    if not math.isfinite(value):
+        raise ArtifactError("expected a finite value in %s, got %r" % (unit, cell))
+    return value
+
+
+def declared_limit(value):
+    if type(value) not in (int, float, Decimal):
+        raise ValueError("a driver limit must be a finite numeric declaration")
+    exact = Decimal(str(value))
+    if not exact.is_finite():
+        raise ValueError("a driver limit must be a finite numeric declaration")
+    return exact
 
 
 def clock(text, fmt):
@@ -86,7 +125,7 @@ def idle_run(rows, index, utilization, memory_mib, pstate):
     """Leading rows of one device that all satisfy the low-activity predicate."""
     run = []
     for row in (r for r in rows if r["index"] == index):
-        if (number(row["utilization.gpu [%]"]) == utilization
+        if (number(row["utilization.gpu [%]"], "%") == utilization
                 and row["memory.used [MiB]"] == "%d MiB" % memory_mib
                 and row["pstate"] == pstate):
             run.append(row)
@@ -139,10 +178,15 @@ def check_record(record, captures):
         observed = {(r["index"], r["pci.bus_id"]) for r in rows[name]}
         res.check(name + ".device_identities", lambda o=observed: (o == declared, "file %r, record %r" % (sorted(o), sorted(declared))))
     every = [r for rs in rows.values() for r in rs]
+    for label, column, key in (
+            ("power_limit", "power.limit [W]", "power_limit_w"),
+            ("power_min_limit", "power.min_limit [W]", "power_min_limit_w"),
+            ("power_max_limit", "power.max_limit [W]", "power_max_limit_w")):
+        res.check("limits_identity." + label,
+                  lambda c=column, k=key: ({decimal_number(r[c], "W") for r in every} == {declared_limit(card[k])},
+                                          "file %r W, record %r W" %
+                                          (sorted({decimal_number(r[c], "W") for r in every}), card[k])))
     for label, column, key, fmt in (
-            ("power_limit", "power.limit [W]", "power_limit_w", "%.2f W"),
-            ("power_min_limit", "power.min_limit [W]", "power_min_limit_w", "%.2f W"),
-            ("power_max_limit", "power.max_limit [W]", "power_max_limit_w", "%.2f W"),
             ("driver", "driver_version", "driver", "%s"),
             ("vbios", "vbios_version", "vbios", "%s"),
             ("name", "name", "name", "%s")):
@@ -163,8 +207,8 @@ def check_record(record, captures):
     res.equal("idle.samples", len(run), idle["samples"])
     res.equal("idle.predicate_pstate", sorted({r["pstate"] for r in run}), [idle["pstate"]])
     res.equal("idle.predicate_memory", sorted({r["memory.used [MiB]"] for r in run}), ["%d MiB" % idle["memory_used_mib"]])
-    res.equal("idle.predicate_utilization", sorted({number(r["utilization.gpu [%]"]) for r in run}), [float(idle["utilization_pct"])])
-    power = [number(r["power.draw [W]"]) for r in run]
+    res.equal("idle.predicate_utilization", sorted({number(r["utilization.gpu [%]"], "%") for r in run}), [float(idle["utilization_pct"])])
+    power = [number(r["power.draw [W]"], "W") for r in run]
     for stat, fn in (("min", min), ("mean", statistics.mean), ("median", statistics.median), ("max", max)):
         res.close("idle.power_" + stat, fn(power), idle["power_draw_w"][stat])
     for which, row, key in (("first", run[0], "first_sample_reported_utc"), ("last", run[-1], "last_sample_reported_utc")):
@@ -180,8 +224,8 @@ def check_record(record, captures):
     excluded = idle["excluded_rows"]
     res.equal("idle.excluded_count", len(later), excluded["count"])
     res.equal("idle.excluded_rows_listed", len(excluded["rows"]), excluded["count"])
-    actual_rows = [{"utilization_pct": number(r["utilization.gpu [%]"]), "memory_used_mib": number(r["memory.used [MiB]"]),
-                    "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])} for r in later]
+    actual_rows = [{"utilization_pct": number(r["utilization.gpu [%]"], "%"), "memory_used_mib": number(r["memory.used [MiB]"], "MiB"),
+                    "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"], "W")} for r in later]
     res.equal("idle.excluded_rows", actual_rows, excluded["rows"])
 
     # High-utilization series.
@@ -191,9 +235,9 @@ def check_record(record, captures):
         d_rows = [r for r in rows[rec["source_file"]] if r["index"] == rec["device"]["index"]]
         series_rows[name] = d_rows
         res.equal("series.%s.device_pci" % name, sorted({r["pci.bus_id"] for r in d_rows}), [rec["device"]["pci_bus_id"]])
-        qualifying = [r for r in d_rows if number(r["utilization.gpu [%]"]) >= LOAD_UTILIZATION_PCT]
-        below = [r for r in d_rows if number(r["utilization.gpu [%]"]) < LOAD_UTILIZATION_PCT]
-        p = [number(r["power.draw [W]"]) for r in qualifying]
+        qualifying = [r for r in d_rows if number(r["utilization.gpu [%]"], "%") >= LOAD_UTILIZATION_PCT]
+        below = [r for r in d_rows if number(r["utilization.gpu [%]"], "%") < LOAD_UTILIZATION_PCT]
+        p = [number(r["power.draw [W]"], "W") for r in qualifying]
         res.equal("series.%s.total" % name, len(d_rows), rec["samples_total"])
         res.equal("series.%s.excluded_count" % name, len(below), rec["samples_excluded_below_80pct"])
         res.equal("series.%s.samples_used" % name, len(qualifying), rec["samples_used"])
@@ -224,7 +268,13 @@ def run(artifact_dir, record_path=DEFAULT_RECORD, pins=None):
     """Verify inputs first, then check. Raises ArtifactError before any parse."""
     contents = verify_artifacts(artifact_dir, PINS if pins is None else pins)
     record_bytes = Path(record_path).read_bytes()
-    res = check_record(json.loads(record_bytes), contents)
+    record = json.loads(record_bytes)
+    # Retain literal JSON precision for exact driver-limit identity. Statistics
+    # deliberately keep their existing float arithmetic and 0.01 W tolerance.
+    literal_card = json.loads(record_bytes, parse_float=Decimal)["card"]
+    for key in ("power_limit_w", "power_min_limit_w", "power_max_limit_w"):
+        record["card"][key] = literal_card[key]
+    res = check_record(record, contents)
     failed = res.failed()
     return {
         "classification": "real-artifact execution of check_t2_sff_power_artifacts.py on supplied files; "
