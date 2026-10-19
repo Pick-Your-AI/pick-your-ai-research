@@ -1,5 +1,89 @@
 # MR-09 acceptance and remaining gates
 
+## Current acceptance map — 2026-10-19
+
+This checkpoint reconciles the live #56/#61/#62 criteria and the delivered H1
+source at accepted main
+[`daac1dae7348c8f4f1011c85979068c8ba6c1489`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/daac1dae7348c8f4f1011c85979068c8ba6c1489),
+tree `c81b9483d4685b75b18a6ba8a48728e2249a1773`. The issue, discussion,
+open-PR and main readbacks on 2026-10-19 through 10:51 UTC found the accepted
+decisions below and no competing writer for this reconciliation. This section
+records existing acceptance; it supplies no new experiment, receiving decision,
+source-use permission or Project-field verification. Every earlier byte below
+is retained. References there to “current” or “pending” retain their original
+dated scope where this checkpoint records a later disposition.
+
+### #61: four accepted criteria, three empirical criteria still open
+
+The seven criterion texts below match the live issue. The
+[matrix-design review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6257173769)
+and [applied readback](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6257197531)
+accept the existing prospective design at
+`d26887e8839cb2b2a8ada9dca62a170948fb64af`. They resolve the design-review
+request in the earlier continuation map; they do not execute its missing cells.
+
+| Live #61 criterion | Recorded state | Evidence and remaining boundary |
+| --- | --- | --- |
+| Design dense and MoE measurement matrix | Accepted | The actual design review covers the retained D1–D5/M1–M4 protocol and concrete MoE plan. G1/per-rank instrumentation, capacity and unexecuted variations remain execution work, without reopening the accepted design or waiving those cases. |
+| Vary context cache precision and concurrency | Open | The historical dense and short GM1 cohorts remain separate. The H1 supplement is three initialization observations of one fixed configuration; it adds no populated-cache, prompt/generation or broader context/concurrency coverage. |
+| Measure peak allocated and reserved memory | Open | Retain the actual dense/GM1 phase counters. H1 observes managed initialization buffers, excluding host/opaque memory and transient/inference peaks; it cannot complete the required peak or architecture/per-rank coverage. |
+| Report error bounds and failures without universal fit claims | Open | The H1 underestimate is descriptive within its fixed quantity/profile. Accepted competitor/runtime pairs and whole-runtime peak comparison pairs remain zero. No fitted tolerance, statistical confidence interval, whole-runtime error bound or universal fit is supplied. |
+| Deliverable links every significant conclusion to evidence or an explicit hypothesis. | Accepted for the bounded documented package | The [canonical sizing note](sizing-validation.md), retained source/result records and [H1 receiving review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/476#pullrequestreview-5568505386) bind claims and limitations. This does not promote synthetic CPU fixtures or source checks to physical observations. |
+| Relevant technical owners review handoffs; unresolved decisions are named. | Accepted within the recorded receiving scopes | Preserve the earlier producer-specific decisions below and the separately dated H1 #7/#10/#11 intake. These delegated in-session decisions do not invent a named historical co-owner's reply, broaden a consumer's acceptance or admit a ResourceEstimate. |
+| Repository checks pass; reviewer accepts the evidence before Done. | Accepted for the delivered bounded contributions | The [#476 delivery and original post-main qualification](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6265013227) records actual source, reviews and execution. Those results retain their own revisions; this documentation amendment still needs its own required checks and independent review. The three empirical criteria prevent whole-issue completion. |
+
+### Delivered H1 supplement and prospective controls
+
+The [H1 section](sizing-validation.md#spare-local-h1-initialization-comparison--2026-10-19)
+now records the actual
+[supplemental receiving decision at `df877a7030849fca939cc7e257be972100006e45`](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/476#pullrequestreview-5568505386).
+It accepts three recorded observations of one fixed configuration as note-only
+initialization-buffer evidence, with no whole-runtime calibration or ordinary
+runtime equivalence. The original experimental `.1` prediction, Windows build,
+thirteen-file freeze and captures retain their own identities, chronology and
+historical guard-binding limitation. Earlier initialization qualification and
+the later H1 comparison are distinct cohorts, not six H1 repetitions.
+
+[PR #476's canonical delivery](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/476#issuecomment-6264144863)
+also includes the separately reviewed
+[prospective admission protocol](measurements/h1-prospective-admission.md).
+A future fixed-H1 cohort needs a new reviewed freeze, complete guard/source and
+prediction bindings, the maintained `.2` estimator identity, exclusive attempt
+reservation and retained terminal outcomes. These source controls record no
+new prediction or native execution and do not repair or relabel the historical
+`.1` freeze. All existing spare-capacity guards and other-workload protections
+remain. The adopted future
+`research/T2-infrastructure/compute/resource-estimates/` intake still admits
+**zero current ResourceEstimate records**.
+
+### Parent and benchmark boundaries
+
+The [#56 method review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6257381410)
+and [current-triage readback](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6259453424)
+record all seven literal parent method criteria as accepted within their stated
+scope. **#56 remains open:** its actual child-completion rule still requires
+#61 and #62, while #65 is closed/completed. Do not request the already delivered
+method or #65 acceptance again, or treat the parent method assessment as the
+missing experiments.
+
+**#62 remains open for its one unchecked criterion, “Pin models harnesses
+budgets and task versions.”** Its six other criteria and five bounded receiving
+decisions remain accepted. The
+[09:00 publisher recheck](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6263637038)
+obtained no new evaluated-model/grader or published-run binding; the later
+[publisher request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6265127831)
+records a request, not receipt of those identities. This checkpoint does not
+repeat that outreach or claim a new publisher audit. The existing no-replication
+decision and source-use limits remain; replication cost is not applicable,
+not a measured zero.
+
+The next #61 work consumes the accepted design and completes only actually
+authorized, capacity-qualified measurement/comparison cells with their stated
+review requirements. The existing #62 publisher route retains its missing-input
+work. This reconciliation changes no issue checkbox, assignee, native
+relationship, historical handoff ledger, frozen contract, measurement or
+Project value. It does not close #56, #61 or #62.
+
 ## Producer-specific receiving reconciliation — 2026-10-18
 
 This current addendum records actual scoped technical decisions against accepted research main `745e58704262aa7b0c755794f820ec1372b24395` and the separately identified prepared `1a1324d` clarification. It supersedes the earlier pending-receipt, ResourceEstimate-location and child-status assertions below only where the actual dated evidence supports a change. Earlier authors, review inputs, counter observations, test results and all historical acceptance matrices remain intact; the full 2026-10-16 submission record is preserved verbatim.
