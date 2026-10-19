@@ -1,0 +1,8 @@
+{
+  "classification": "Cleanup of the temporary pinned dependency used for current-main receiving checks",
+  "target": "$REPO/.venv/mr09-receiving-idna",
+  "removed_files": 29,
+  "removed_bytes": 626357,
+  "target_exists_after": false,
+  "existing_environments_changed": false
+}

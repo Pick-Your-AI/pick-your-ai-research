@@ -86,3 +86,19 @@ and all frozen/measured bytes are preserved; no main merge, approval or issue
 completion is implied. Reviewer and named receiving-owner acceptance remain
 outstanding. Original non-sensitive CPU test log bytes are retained in the four
 published base64 fields; readable traceback paths are explicitly redacted.
+
+## Current-main receiving carry
+
+Accepted main advanced to `7d5b98a` while this PR was being packaged. An ordinary
+merge at `1079353` retained both exact-path Git attribute rules, the accepted
+estimator packet #474 and the separate power/Dataset/Deployment contribution
+#471. The only conflict was the two independent attribute additions; no frozen
+prediction, native source, measurement or original preflight byte changed.
+
+On that composition, all101 affected power-checker methods, all four validators
+and offline H1 reproduction passed. The [receiving receipt](receiving-validation-receipt.json)
+keeps those bounded checks separate from the earlier complete suite. The tiny
+task-only pinned idna dependency folder used for these checks was then removed
+with a separate [cleanup readback](receiving-cleanup.json). No whole-suite result
+is relabeled as this later composition. Current hosted checks and named-owner
+evidence review retain their own status and identity.

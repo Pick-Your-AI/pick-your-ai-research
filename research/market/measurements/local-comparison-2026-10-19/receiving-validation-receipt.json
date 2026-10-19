@@ -1,0 +1,83 @@
+{
+  "classification": "affected checks after current-main attribute reconciliation; earlier full-suite identity remains separate",
+  "source_head": "107935363ea7573e6f54c3032ad16602a27c53de",
+  "environment": {
+    "PYTHONUTF8": "1",
+    "temporary_idna_version": "3.20"
+  },
+  "commands": [
+    {
+      "command": [
+        "$RESEARCH_PYTHON",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_t2_sff_power_record.py",
+        "-v"
+      ],
+      "started_utc": "2026-10-19T07:36:00.714488+00:00",
+      "exit_code": 0,
+      "log_sha256": "658a542712c37b1ca6e3766a2b81d4e6e5b566c96b37d2ca5f5fa4cc7695bf2e",
+      "log_bytes": 14720,
+      "summary": "est_short_row_fails) ... ok\r\ntest_unit_check_runs_before_values_are_used (test_t2_sff_power_record.UnitsAreEnforced.test_unit_check_runs_before_values_are_used) ... ok\r\ntest_unit_column_list_matches_the_header (test_t2_sff_power_record.UnitsAreEnforced.test_unit_column_list_matches_the_header) ... ok\r\ntest_untouched_fixture_has_no_unit_problem (test_t2_sff_power_record.UnitsAreEnforced.test_untouched_fixture_has_no_unit_problem) ... ok\r\ntest_wrong_unit_in_every_unit_column_fails_the_run (test_t2_sff_power_record.UnitsAreEnforced.test_wrong_unit_in_every_unit_column_fails_the_run) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 101 tests in 4.457s\r\n\r\nOK\r\n"
+    },
+    {
+      "command": [
+        "$RESEARCH_PYTHON",
+        "scripts/validate_research.py"
+      ],
+      "started_utc": "2026-10-19T07:36:05.718543+00:00",
+      "exit_code": 0,
+      "log_sha256": "3b05dc2c4414a16d1d0e3a673ea43a93f093f7cc95ecfe3d5b08f4152a7f4924",
+      "log_bytes": 118,
+      "summary": "Validated 124 catalog proposals and 3 pricebooks plus external evidence metadata. Evidence review is still required.\r\n"
+    },
+    {
+      "command": [
+        "$RESEARCH_PYTHON",
+        "scripts/validate_market_research.py"
+      ],
+      "started_utc": "2026-10-19T07:36:06.348767+00:00",
+      "exit_code": 0,
+      "log_sha256": "7e37034755144fec9a79909895527b6d2da1fb45254baf19bd75ec30378c0b61",
+      "log_bytes": 57,
+      "summary": "Market integrity OK: 39 entities, 1872 cells, 20 issues\r\n"
+    },
+    {
+      "command": [
+        "$RESEARCH_PYTHON",
+        "scripts/validate_handoff_audit.py"
+      ],
+      "started_utc": "2026-10-19T07:36:06.521900+00:00",
+      "exit_code": 0,
+      "log_sha256": "4d7d9d1cb08ee5d7b64494bc1a1d4c89b70042e90af1f34eba6482471aa00ba2",
+      "log_bytes": 89,
+      "summary": "Handoff audit integrity OK: 101 rows; 98 declared pairs; human acceptance not certified\r\n"
+    },
+    {
+      "command": [
+        "$RESEARCH_PYTHON",
+        "prompts/mobile/validate_prompts.py"
+      ],
+      "started_utc": "2026-10-19T07:36:06.666848+00:00",
+      "exit_code": 0,
+      "log_sha256": "8d826ee575929e92c31bacc1c314dace0a828d407a9c84fbb7ab3a03cbfe661b",
+      "log_bytes": 298,
+      "summary": "PASS: 2 Projects, 258 issues, 36 epic prompts, 906 criteria, 880 steps; mappings, paths, local links, field vocabulary and prerequisite DAG; 7 accepted placement coordinates\r\nNot certified: source truth, rights/freshness, application behavior, devices, store/release state or reviewer acceptance.\r\n"
+    },
+    {
+      "command": [
+        "$RESEARCH_PYTHON",
+        "scripts/mr09_local_compare_report.py"
+      ],
+      "started_utc": "2026-10-19T07:36:07.482775+00:00",
+      "exit_code": 0,
+      "log_sha256": "a5c170371d87344082c1170f0b56f8b029d47416944e6856fd04ae0416e0575d",
+      "log_bytes": 4289,
+      "summary": "2,\r\n      \"corroborating_ledger_signed_relative_percent_exact\": \"-308200/1178417\"\r\n    }\r\n  ],\r\n  \"exact_ledger_live_bytes_min_median_max\": [\r\n    301674752,\r\n    301674752,\r\n    301674752\r\n  ],\r\n  \"tolerance\": null,\r\n  \"fit_verdict\": null,\r\n  \"limits\": [\r\n    \"instrumented initialization only; host buffers and opaque CUDA/library/context memory excluded\",\r\n    \"native self interval is primary; exact ledger is corroboration\",\r\n    \"three repetitions of one configuration do not establish universal bounds\",\r\n    \"experimental project derivative; no accuracy claim for unmodified upstream release\",\r\n    \"no inference, whole-runtime peaks, new named-owner acceptance or ResourceEstimate\"\r\n  ]\r\n}\r\n"
+    }
+  ]
+}
