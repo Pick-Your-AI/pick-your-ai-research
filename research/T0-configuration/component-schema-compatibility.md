@@ -20,7 +20,7 @@ How does the builder represent every component, and decide, explain and recomput
 
 ## What v1 already provides
 
-- **Catalog item:** `id`, `kind`, `tier`, `name`, `version`, `status`, `billing_class`, `spec`, `license`, `provenance`, `updated_at` (required), plus `description`, `tags` and `extensions`. This covers #40's minimum fields for entity ID, category (`kind`, `tier`), version, lifecycle status and source references (`provenance`). `valid_from`/`valid_to` have no direct field (versioning, below).
+- **Catalog item:** `schema_version`, `id`, `kind`, `tier`, `name`, `version`, `status`, `billing_class`, `spec`, `provenance`, `updated_at` (required), plus optional `description`, `tags`, `license` and `extensions`. This covers #40's minimum fields for entity ID, category (`kind`, `tier`), version, lifecycle status and source references (`provenance`). `valid_from`/`valid_to` have no direct field (versioning, below).
 - **Build:** `selections`, `links` (typed relations such as `runs_on`, `served_by`, `stored_in`, `provided_by`, `derived_from`), `objectives`, `policy`, `locks`, `revision`.
 - **Rule:** `id`, `severity` (`error`/`warning`/`info`), `applies_when`, `assert`, `on_unknown` (`block`/`review`/`defer`), `message`, `remediation`, `affected_kinds`. A ruleset has `id`, `version` and `published_at`; individual rules carry no version.
 - **Also:** `catalog-snapshot` (captured items with a revision) and `dependency-graph` (edges with a revision).

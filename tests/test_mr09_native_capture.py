@@ -326,6 +326,29 @@ class NativePublicationTests(unittest.TestCase):
                 capture.publish(directory,Path(temp)/"retry-archive")
                 self.assert_published(directory)
 
+    def test_publication_faults_under_aliased_temporary_root(self):
+        with tempfile.TemporaryDirectory() as temp:
+            real=Path(temp)/"real";real.mkdir()
+            alias=Path(temp)/"alias"
+            try:
+                alias.symlink_to(real,target_is_directory=True)
+            except OSError as error:
+                if error.errno in (errno.EPERM,errno.EACCES,errno.ENOSYS):
+                    self.skipTest("directory symlink creation is unavailable")
+                raise
+            self.assertNotEqual(alias,alias.resolve())
+            cases=(
+                "test_replacement_failure_restores_bytes_modes_and_summary_presence",
+                "test_final_readback_failure_removes_new_summary_and_restores_preflights",
+                "test_rollback_failure_retains_archive_and_local_recovery_bytes",
+            )
+            # Exercise every existing fault/restoration assertion with the
+            # same symlinked-root condition that /var supplies on macOS.
+            with mock.patch.object(tempfile,"tempdir",str(alias)):
+                for name in cases:
+                    with self.subTest(fault_sequence=name):
+                        getattr(self,name)()
+
     def test_replacement_failure_restores_bytes_modes_and_summary_presence(self):
         targets=[*(f"init-r{rep}.json" for rep in (1,2,3)),
                  *(f"init-r{rep}-preflight.json" for rep in (1,2,3)),"qualification-summary.json"]
@@ -337,7 +360,7 @@ class NativePublicationTests(unittest.TestCase):
                     before=self.inputs(directory);archive=Path(temp)/"archive"
                     replace=capture.os.replace
                     def fail(source,dest):
-                        if Path(source).parent.name=="prepared" and Path(dest)==directory/target:
+                        if Path(source).parent.name=="prepared" and Path(dest)==directory.resolve()/target:
                             raise OSError(errno.EIO,"synthetic input replacement failure")
                         return replace(source,dest)
                     with mock.patch.object(capture.os,"replace",fail),self.assertRaises(OSError):
@@ -355,7 +378,7 @@ class NativePublicationTests(unittest.TestCase):
             read=Path.read_bytes;failed=False
             def fail(path):
                 nonlocal failed
-                if not failed and path==directory/"qualification-summary.json" and path.exists():
+                if not failed and path==directory.resolve()/"qualification-summary.json" and path.exists():
                     failed=True
                     raise OSError(errno.EIO,"synthetic final readback failure")
                 return read(path)
@@ -374,9 +397,9 @@ class NativePublicationTests(unittest.TestCase):
             replace=capture.os.replace
             def fail(source,dest):
                 source=Path(source);dest=Path(dest)
-                if source.parent.name=="prepared" and dest==directory/"init-r2.json":
+                if source.parent.name=="prepared" and dest==directory.resolve()/"init-r2.json":
                     raise OSError(errno.EIO,"synthetic publication failure")
-                if source.parent.name=="originals" and dest==directory/"init-r1.json":
+                if source.parent.name=="originals" and dest==directory.resolve()/"init-r1.json":
                     raise OSError(errno.EACCES,"synthetic rollback failure")
                 return replace(source,dest)
             with mock.patch.object(capture.os,"replace",fail),self.assertRaises(capture.PublicationRecoveryRequired) as caught:
