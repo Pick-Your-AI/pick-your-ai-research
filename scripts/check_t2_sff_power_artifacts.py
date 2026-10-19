@@ -194,7 +194,8 @@ def strict_equal(actual, recorded):
     """Equality that never lets a boolean stand in for a number (1 == True in Python).
 
     Lists and dicts are compared element by element; 1 and 1.0 still match, a
-    string never matches a number.
+    string never matches a number. Numeric comparison normalizes the actual
+    float without rounding an exact parsed recorded number to binary64.
     """
     if isinstance(actual, bool) != isinstance(recorded, bool):
         return False
@@ -202,6 +203,9 @@ def strict_equal(actual, recorded):
         return actual.keys() == recorded.keys() and all(strict_equal(actual[k], recorded[k]) for k in actual)
     if isinstance(actual, (list, tuple)) and isinstance(recorded, (list, tuple)):
         return len(actual) == len(recorded) and all(strict_equal(a, r) for a, r in zip(actual, recorded))
+    if isinstance(actual, (int, float, Decimal)) and not isinstance(actual, bool):
+        actual_number = exact(actual)
+        return actual_number is not None and actual_number == exact(recorded)
     return actual == recorded
 
 
@@ -347,7 +351,7 @@ def check_record(record, captures, exact_record=None):
     res.count("idle.excluded_rows_listed", len(excluded["rows"]), exact_idle["excluded_rows"]["count"])
     actual_rows = [{"utilization_pct": number(r["utilization.gpu [%]"]), "memory_used_mib": number(r["memory.used [MiB]"]),
                     "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])} for r in later]
-    res.equal("idle.excluded_rows", actual_rows, excluded["rows"])
+    res.equal("idle.excluded_rows", actual_rows, exact_idle["excluded_rows"]["rows"])
 
     # High-utilization series.
     limit = exact(exact_card["power_limit_w"])  # exact Decimal; None if not a number
