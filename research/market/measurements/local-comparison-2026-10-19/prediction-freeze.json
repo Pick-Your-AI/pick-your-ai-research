@@ -1,0 +1,22 @@
+{
+  "classification": "prospective H1 prediction and source/control freeze; not acceptance",
+  "observed_utc": "2026-10-19T07:10:56.951244+00:00",
+  "prediction_file": "research/market/measurements/local-comparison-2026-10-19/estimator-prediction.json",
+  "files": {
+    "scripts/mr09_local_compare_run.py": "6027d57b5d902955245defd19cbdf937be8b1b3a8b1cc7d6eefcea8e7b97c40a",
+    "research/market/measurements/native/mr09_native_h1.cpp": "8664ec5f3492bed1769a96353c19f467f2d603ea0eb30ccd12e4802b3478055f",
+    "research/market/measurements/native/mr09_quota.hpp": "4e133fd88df1df35eff4e65c9296f9823df0fcae3a7f607132f87944b1ff582b",
+    "research/market/measurements/local-comparison-2026-10-19/build.json": "1784b4aefd3523d18b0ebf56a955cc32ef6f11712d6fb0f0c6d2b2643b933ef9",
+    "research/market/measurements/local-comparison-2026-10-19/runtime-artifacts.json": "d788e18ba59ab6f210c1ceb61599f39269440a774664c8f515ffca9a7041cfcd",
+    "research/market/measurements/local-comparison-2026-10-19/protocol.md": "ed3c50c77996443c3318c03d1611343d328001dd4e4ab1361763d62037d9aeed",
+    "research/market/measurements/local-comparison-2026-10-19/estimator-source-preparation.json": "856fe6c665072e651b4db336c967892a686be839d0e81d11835c06ad94ce26fd",
+    "research/market/measurements/local-comparison-2026-10-19/estimator-windows-adaptation.json": "0a993dd6cb232fef4a58a4650e9b3201125b00133ba3ba3d067d031c2f618dba",
+    "research/market/measurements/local-comparison-2026-10-19/estimator-profile.json": "8d72be667b9bc9efd1ebaf42d6c898e8cda30d41f777ef26b2730dd400baac54",
+    "research/market/measurements/local-comparison-2026-10-19/estimator-prediction.json": "cc2d3fd7c9cb05875c6925583893c32665fc84905adb9e081769317a3c619021",
+    "research/market/measurements/local-comparison-2026-10-19/prediction-receipt.json": "7d775cde271f1c0c386034cac0ed266798f331dd45571801d099c15588656936",
+    "research/market/measurements/local-comparison-2026-10-19/estimator-manifest.json": "feabc1cd21821987b1bb29eec06fcf8a125505fc132bc61b44c1443a616add7f",
+    "research/market/measurements/local-comparison-2026-10-19/semantic-review.json": "eb8105dde9eb2a48053668b93ca013fdd7b16d062202188dbd8d1a46da015af9"
+  },
+  "managed_device_estimate_bytes": 300885760,
+  "native_model_observations_before_freeze": 0
+}

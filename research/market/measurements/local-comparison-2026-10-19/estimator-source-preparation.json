@@ -1,0 +1,26 @@
+{
+  "classification": "task-private estimator source/compiler preparation; no GPU execution",
+  "recorded_utc": "2026-10-19T07:07:58.444664+00:00",
+  "package_commit": "7e97353beffaad7945189a1b953ad4b4f5a3aa56",
+  "package_sha256": {
+    "research/market/measurements/gguf-parser-mr09/LICENSE.upstream": "70f19edd9a53e7e452a95006d072f88507e14087819e11836b03ad74303fb630",
+    "research/market/measurements/gguf-parser-mr09/README.md": "06f2545025300598cc7ef608c0dbe67d3f1ceaece14d0b8bf30bd81f215fd759",
+    "research/market/measurements/gguf-parser-mr09/derivative.patch": "2c7da808922f4447a2d269253898f8560adcde70b20466268532eb8e98bd57b3",
+    "research/market/measurements/gguf-parser-mr09/source-manifest.json": "e822048a767294bc6384bcbffadc7ca10ab5d3c970aa45740b464eacbd869553",
+    "scripts/mr09_prepare_estimator.py": "be2ff1ab9315953727f3078a4526b05847fcd01971d539a061252456ff13e89d",
+    "tests/native/mr09_cli_admission.py": "8a9d67897de66ad63f8fc4c9ffa422c6e645e5ea77d8dfd493b3a3c5555a8d8b",
+    "tests/native/mr09_original_semantic_test.go": "a695ced8a2dd0dc0cac4e98cf7cb6d4ca5d9060a128b704e6ad0e4c655d3d794",
+    "tests/native/mr09_output_semantic_test.go": "45e8487031f49b22f92cae35176601f2a060864293355e5f26b34085401b824d"
+  },
+  "go_sdk": {
+    "filename": "go1.22.9.windows-amd64.zip",
+    "os": "windows",
+    "arch": "amd64",
+    "version": "go1.22.9",
+    "sha256": "2b7480239dc42867761c51ba653d8190ac55e99b41b0ff751224f87984c8421b",
+    "size": 76278634,
+    "kind": "archive"
+  },
+  "sdk_source": "https://go.dev/dl/",
+  "upstream_commit": "637cd9a7a03993ab30ace3c53dd8af5c37f46a94"
+}

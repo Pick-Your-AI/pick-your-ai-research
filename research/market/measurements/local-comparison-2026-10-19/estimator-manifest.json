@@ -1,0 +1,103 @@
+{
+  "classification": "actual new Windows CPU build; sanitized copy of original manifest",
+  "original_manifest_bytes": 4635,
+  "original_manifest_sha256": "6042c4c1cbaadea05b5a2f60e8df0b714f8be4b895cd664783193c81af3037fe",
+  "manifest": {
+    "status": "experimental CPU build; no native comparison",
+    "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "python_optimization": 1,
+    "upstream_commit": "637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
+    "upstream_tree": "4b67ed5331cbd40639db36890f8453c61ac604b7",
+    "verified_upstream_leaves": 92,
+    "package_sha256": {
+      "research/market/measurements/gguf-parser-mr09/derivative.patch": "2c7da808922f4447a2d269253898f8560adcde70b20466268532eb8e98bd57b3",
+      "research/market/measurements/gguf-parser-mr09/LICENSE.upstream": "70f19edd9a53e7e452a95006d072f88507e14087819e11836b03ad74303fb630",
+      "tests/native/mr09_output_semantic_test.go": "45e8487031f49b22f92cae35176601f2a060864293355e5f26b34085401b824d",
+      "scripts/mr09_prepare_estimator.py": "be2ff1ab9315953727f3078a4526b05847fcd01971d539a061252456ff13e89d",
+      "tests/native/mr09_original_semantic_test.go": "a695ced8a2dd0dc0cac4e98cf7cb6d4ca5d9060a128b704e6ad0e4c655d3d794",
+      "tests/native/mr09_cli_admission.py": "8a9d67897de66ad63f8fc4c9ffa422c6e645e5ea77d8dfd493b3a3c5555a8d8b"
+    },
+    "go_version": "go version go1.22.9 windows/amd64",
+    "go_executable_sha256": "44ff06eca62e0d17c201dd64f638c1c5e90a68a6efeb01369c44c72adab9cffb",
+    "module_verify_log_sha256": "b4537ed75f533f993f371954de47e42a793b8e5b0587577de7e27fb3e50696bd",
+    "binary_build_info_sha256": "a75166432ae81c68fa48a3c6a7771bbab082548acd558959e44e4d704ffe237d",
+    "go_mod_sha256": "d5c635735884844fe390d8a46735a8b1e7aa559b6347438ebb94c2321a2d48ab",
+    "go_sum_sha256": "2dcb785da6b158db3d9857a4297acd0f3a7babcee9966249ff1e893af77f71d9",
+    "commands": [
+      [
+        "$TASK_TEMP\\go-sdk\\go\\bin\\go.exe",
+        "mod",
+        "verify"
+      ],
+      [
+        "$TASK_TEMP\\go-sdk\\go\\bin\\go.exe",
+        "test",
+        "-p",
+        "1",
+        "-count=1",
+        "-run",
+        "^TestMR09(OriginalSemanticFixture|DefaultBehaviorReceipt)$",
+        "-v",
+        "."
+      ],
+      [
+        "$TASK_TEMP\\go-sdk\\go\\bin\\go.exe",
+        "test",
+        "-p",
+        "1",
+        "-count=1",
+        "-run",
+        "^TestMR09",
+        "-v",
+        "."
+      ],
+      [
+        "$TASK_TEMP\\go-sdk\\go\\bin\\go.exe",
+        "build",
+        "-p",
+        "1",
+        "-buildvcs=false",
+        "-o",
+        "$TASK_TEMP\\estimator-windows-build\\mr09-init-estimate.exe",
+        "./cmd/mr09-init-estimate"
+      ],
+      [
+        "$TASK_TEMP\\go-sdk\\go\\bin\\go.exe",
+        "version",
+        "-m",
+        "$TASK_TEMP\\estimator-windows-build\\mr09-init-estimate.exe"
+      ],
+      [
+        "$REPO\\.venv\\Scripts\\python.exe",
+        "$TASK_TEMP\\estimator-package\\tests\\native\\mr09_cli_admission.py",
+        "--binary",
+        "$TASK_TEMP\\estimator-windows-build\\mr09-init-estimate.exe"
+      ]
+    ],
+    "effective_build_environment": {
+      "GOTOOLCHAIN": "local",
+      "GOWORK": "off",
+      "GOENV": "off",
+      "GOROOT": "$TASK_TEMP\\go-sdk\\go",
+      "GOEXPERIMENT": "",
+      "GOMAXPROCS": "2",
+      "GOFLAGS": "",
+      "CGO_ENABLED": "0",
+      "GOPRIVATE": "",
+      "GONOPROXY": "",
+      "GONOSUMDB": "",
+      "GOVCS": "*:off",
+      "GOSUMDB": "sum.golang.org",
+      "GOPROXY": "https://proxy.golang.org",
+      "GOMODCACHE": "$TASK_TEMP\\go-mod-cache",
+      "GOCACHE": "$TASK_TEMP\\go-build-cache",
+      "GOOS": "windows",
+      "GOARCH": "amd64"
+    },
+    "candidate_executable_sha256": "00dedf6a4ca646e93552adaf56f8fdd754003c9d1440b5905c8128bbaa437b3c",
+    "candidate_executable_bytes": 8215040,
+    "original_red_log_sha256": "47fc22ad4429a81fbb715f5ca966008fa0123631e6eb6cbc3a0e108920179a08",
+    "cli_admission_sha256": "79c2917620abd2cdca88924119256d6a0cb0e1b4c7e9521e2aef5d624f4ecbc1",
+    "cpu_test_log_sha256": "159fb96074e1115a7b48c3a8de13f7f134522f34858aaa748ccef4355051e915"
+  }
+}
