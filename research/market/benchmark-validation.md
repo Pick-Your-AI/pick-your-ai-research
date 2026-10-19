@@ -245,3 +245,90 @@ The coordinating in-session engineer's [actual four-scope receipt 6253421648](ht
 | #41 | Dated claim, comparable evidence and reproduced evidence remain distinct under accepted #60 material/use policy | Paper permission is not task/code/result permission or proof of statistical quality; no fresh licence or integration grant |
 
 **Adopted engineering decision: no replication under #62.** A future #36 experiment is separate work with its actual protocol, rights, resources and result placement. H1 remains untested, not falsified. Missing immutable publisher model snapshots and result-to-grader bindings keep #62 open. These receipts accept the offered technical inputs; they do not supply final-amendment validation, Project-field QA or canonical delivery.
+
+## Contamination and task-overlap continuation — 2026-10-18
+
+This is a new source inspection under [coordination receipt 6256574606](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62#issuecomment-6256574606), after the earlier receiving decisions. It resolves the earlier *uninspected multimodal metadata* limitation at the same publisher revision. The preceding 47,499 bytes, including the original checklists, source dates and five receiving scopes, are retained unchanged; none of those historical reviews is relabelled as a review of this continuation. The first live criterion still lacks evaluated-model and published-run bindings.
+
+### Inputs and method
+
+The publisher's main ref was directly read at `b8d89634c6f445fcc68ceb6744a59bef6cdf4863`. Its [complete recursive tree](https://api.github.com/repos/Qihoo360/harness-bench/git/trees/b8d89634c6f445fcc68ceb6744a59bef6cdf4863?recursive=1) contained **10,834 entries**, with `truncated: false`. The read-only input set comprised all **26 `task.yaml` files and 26 `design.md` files** under [the pinned multimodal directory](https://github.com/Qihoo360/harness-bench/tree/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/multimodal-tasks), the four locks below, the general CSV, both multimodal READMEs, the suite's `multimodal26.yaml` and `release.yaml` manifests, the release-policy note and the lock-verifier source: **63 exact files**. Four initial reads preceded a 59-file bulk read at **23:38:09–23:38:17Z**; those times identify that bulk read, not every input. The two empty archive manifests were read separately later on the same date, bringing the inspected metadata total to **65 files**.
+
+For every retrieved file, its UTF-8 byte length and Git blob SHA-1 were independently recomputed against the pinned tree entry. The initial 63-file local capture is 2,334,935 bytes with SHA-256 `6621dd972ad96e9188ffae0b1ec5ca6378bb7bf2f3196df1b02811ad0b9b0ac5`; the two archive records are separate. These checks identify the bytes inspected. The raw capture, task descriptions, answers and reference implementations are not added to this repository.
+
+The lock comparison reads unique JSON object keys, checks the declared task count against the distinct task-ID keys, checks both digest fields' syntax, then compares sets and the two declared digests at each shared ID. It does **not** recompute task-content locks from complete task packages. The [current verifier source](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/tools/task_maintenance/verify_task_set_lock.py) was read, not executed. No publisher Python, Docker image, model, grader, browser scenario or benchmark was run.
+
+### Available release locks: identity overlap and declared hash agreement
+
+All four records declare schema version 1 and the same hash-policy names: `runner_v1_excludes_reference_cache_and_llm_rubric` for definitions and `snapshot_v1_includes_hidden_files_excludes_cache_and_llm_rubric` for complete packages. Equal policy labels do not prove which implementation produced an older lock or that the old package bytes were retained.
+
+| Inspected lock at the pinned publisher commit | Declared tasks | Exact Git blob |
+| --- | ---: | --- |
+| [standard237.lock.json](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/standard237.lock.json) | 237 | `74776584da46b7141d9c192282eda659d14d1fb2` |
+| [standard254.lock.json](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/standard254.lock.json) | 254 | `2df5aa5e5551f9f2e5c9f3c9441e3df803fb02c6` |
+| [standard274.release-v1.lock.json](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/standard274.release-v1.lock.json) | 274 | `83a81164f60617d9ffe5c1df2155b45254fbc98d` |
+| [multimodal26.lock.json](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/suites/multimodal26/catalog/multimodal26.lock.json) | 26 | `b22201fee9deaa62c77c386ce3f1387fdefb56dd` |
+
+The multimodal lock declares task-ID SHA-256 `5764149e9f2a01d882aa53bab2f441249334a1a1eeaa45ce6d69e0b3a5074fb4` and manifest SHA-256 `d0a37bb3e4dc6550a6599b013d7677e53630d44fa5cd39bd93dbb60641018342`. The inspected [multimodal26.yaml](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/suites/multimodal26/catalog/multimodal26.yaml) has the latter exact byte hash. These identify this available release, not the inputs of a published model run.
+
+| Left / right lock | Shared full task IDs | Left only | Right only | Shared IDs with equal declared definition hash | Shared IDs with equal declared complete-package hash |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 237 / 254 general | 237 | 0 | 17 | 237 | 237 |
+| 254 / 274 general | 254 | 0 | 20 | 0 | 0 |
+| 237 / 274 general | 237 | 0 | 37 | 0 | 0 |
+| 274 general / 26 multimodal | 0 | 274 | 26 | 0 | 0 |
+
+Thus the 254/274 records disagree on **both declared digests for all 254 shared IDs**. A comparison cannot assume that those records differ only by adding 20 tasks. This is a demonstrated difference in the lock declarations; the audit has not established the particular task edits, reproduced the old hashing process, or matched either lock to a published result. The 237 matching declarations in the 237/254 pair are likewise not a repeated-run observation. No equal declared definition or package digest was found between the general 274 and multimodal 26 locks, including when IDs were ignored; that still does not prove semantic independence.
+
+The current [general archive manifest](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/archive0.yaml) and [multimodal archive manifest](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/suites/multimodal26/catalog/archive0.yaml) both declare zero tasks and empty ID lists. The general manifest says older packages remain in Git history; that statement does not supply the original 106-task membership/content lock. This pass did not inspect a historical 106-task package collection. Its exact overlap with either later suite remains **unknown**. The numeric prefix of a single task name, or the locally reused 001–026 prefixes, is not a task-set identity.
+
+### Multimodal source and selection metadata
+
+Every inspected multimodal YAML declares `provenance.origin: handcrafted_synthetic`, `real_user_log_derived: false`, a single source label FE-201 through FE-226, and `difficulty: hard`. Its full task ID matches exactly one of the 26 lock entries. These are publisher declarations, not independently verified origin, training-rights or leakage attestations. None of the FE labels occurs in the general CSV's source-label set; label disjointness does not establish semantic or statistical independence.
+
+The following map covers every inspected YAML/design pair. Paths are `multimodal-tasks/<task ID>/task.yaml` and `design.md` at the immutable commit above. “Pending” records an explicit pending human-validation statement in that design note; absence of that statement in another note is not proof of completed review.
+
+| Full task ID | Declared source label | Design-note scope inspected |
+| --- | --- | --- |
+| 001-creator-revenue-dashboard | FE-201 | Synthetic source/design card; human validation pending |
+| 002-studio-task-board | FE-202 | Synthetic source/design card; human validation pending |
+| 003-pet-care-game | FE-203 | Synthetic source/design card; human validation pending |
+| 004-incident-command-console | FE-204 | Synthetic source/design card; human validation pending |
+| 005-research-lab-site | FE-205 | Synthetic source/design card; human validation pending |
+| 006-appointment-finder-ui | FE-206 | Synthetic source/design card; human validation pending |
+| 007-budget-planning-workspace | FE-207 | Synthetic source/design card; human validation pending |
+| 008-media-timeline-editor | FE-208 | Replacement-prototype interaction design |
+| 009-course-builder-app | FE-209 | Replacement-prototype interaction design |
+| 010-support-ticket-router | FE-210 | Synthetic source/design card; human validation pending |
+| 011-local-data-explorer | FE-211 | Synthetic source/design card; human validation pending |
+| 012-policy-diff-viewer | FE-212 | Synthetic source/design card; human validation pending |
+| 013-kanban-build-repair | FE-213 | Replacement-prototype interaction design |
+| 014-accessibility-retrofit | FE-214 | Replacement-prototype interaction design |
+| 015-responsive-redesign | FE-215 | Replacement-prototype interaction design |
+| 016-feature-flag-admin | FE-216 | Synthetic source/design card; human validation pending |
+| 017-travel-itinerary-planner | FE-217 | Replacement-prototype interaction design |
+| 018-scientific-simulation-controls | FE-218 | Synthetic source/design card; human validation pending |
+| 019-portfolio-reference-rebuild | FE-219 | Synthetic source/design card; human validation pending |
+| 020-form-builder-validation | FE-220 | Replacement-prototype interaction design |
+| 021-choropleth-map-selection | FE-221 | Synthetic image task; answer-bearing visual facts in design text |
+| 022-waveform-audio-cue-editor | FE-222 | Synthetic image task; answer-bearing visual facts in design text |
+| 023-spreadsheet-grid-formula | FE-223 | Synthetic image task; answer-bearing visual facts in design text |
+| 024-image-pair-diff-annotation | FE-224 | Synthetic image task; answer-bearing visual facts in design text |
+| 025-network-graph-explorer | FE-225 | Synthetic image task; answer-bearing visual facts in design text |
+| 026-wysiwyg-print-preview | FE-226 | Synthetic image task; answer-bearing visual facts in design text |
+
+The counts are **13 explicit pending design cards, seven replacement-prototype notes and six image-task notes**. They describe the notes inspected, not validated benchmark strata. In particular, the same-commit [multimodal README's difficulty table](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/multimodal-tasks/README.md#difficulty-distribution) says **four easy, nine medium and 13 hard**, while all 26 YAMLs say hard. This discrepancy remains unresolved; neither representation is adopted here as an empirically validated difficulty classification. A later sampling design must specify its actual selection fields and resolve or disclose the conflict.
+
+### Shared sources and public answer-bearing material
+
+The independently read [general task CSV](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/catalog/task_catalog.csv), Git blob `ce7e067da4fb820953b8ccfd5be1a8703ad13d27`, contains 274 unique IDs matching the current general lock. Its origin counts remain **212 public-workflow adaptations, 42 handcrafted synthetic and 20 adapted synthetic**. Splitting `source_ids` on the literal `|` separator, discarding empty tokens and counting each label at most once per task yields **320 distinct labels, 67 labels used by multiple tasks, and a maximum of 31 tasks for SQLITE-TRANSACTIONS**. Reused documentation/workflow labels are concrete leads for a dependence audit. They are not measured covariance, validated clusters, independent sample counts or proof of contamination; distinct labels can still describe related tasks.
+
+The public tree includes `tests/cases.yaml`, `tests/test_outcome.py`, both `tests/ground_truth/frontend_contract.json` and `ground_truth.json`, and `tests/reference/web/src/App.tsx` under **all 26 multimodal packages**. This is an exact path-presence observation; those oracle/reference file bodies were not separately fetched or exercised in this pass. More directly, the six inspected design notes for 021–026 expose answer-bearing visual facts in plain text. This note records that exposure surface without copying the answers. The [README's vision-gated description](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/multimodal-tasks/README.md#vision-gated-tasks-021-026) concerns which facts are available in the evaluated workspace's PNG versus hidden data. The separate [release policy](https://github.com/Qihoo360/harness-bench/blob/b8d89634c6f445fcc68ceb6744a59bef6cdf4863/docs/PUBLIC_RELEASE_POLICY.md) distinguishes the complete collaborator repository from allowlisted result bundles and evaluated-agent inputs. Neither process description establishes that a particular evaluated backend never encountered the public design material.
+
+**Exposure remains unknown for every evaluated model.** This read establishes public availability of the inspected material on this date, not its first public date, ingestion into a training corpus, a provider's training cutoff, a model's access during a published run, or a measured leakage effect. No clean-contamination verdict, compromised-result verdict or corrected benchmark score follows. Public source availability and runtime workspace isolation answer different questions.
+
+### Current research disposition and remaining work
+
+This continuation supplies the previously missing multimodal source-card inspection and concrete comparisons among the four available locks. Under [the #62 prompt's contamination/overlap scope](../../prompts/market/issue-062.md), the offered result is a bounded desk assessment of available overlap/exposure evidence and explicit unverifiable limits. The original 106-task content, actual model exposure and result-level dependence remain unknown; unknown is a documented audit result, not an absence claim. The new source/arithmetic findings require their own independent review and normal current-source validation/delivery before the live contamination/overlap criterion is reconciled.
+
+The first live criterion remains **unmet**: no immutable evaluated provider/model or local weight/quantization identity, published-run-to-task/harness/settings binding, or published-result-to-grader revision was obtained. The separately required paired task/run outcomes and dependence information for G3 also remain unavailable. Current task/source metadata cannot supply these facts. The adopted **no replication under #62** decision, the original five technical receiving scopes and #41/#60's distinct paper versus repository material/use boundaries remain unchanged. This continuation creates no quality record, ranking, runtime gate, source-use permission, paid experiment or whole-issue completion.
