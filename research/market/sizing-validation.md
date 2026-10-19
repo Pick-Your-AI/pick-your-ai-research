@@ -49,6 +49,12 @@ question or other empirical criteria. Named receiving acceptance, tolerance and
 ResourceEstimate boundaries are unchanged; no owner, checkbox or Project value
 is edited. Older zero-count statements below retain their dated cohort scope.
 
+Future fixed-H1 cohorts must use the separate
+[prospective admission launcher](measurements/h1-prospective-admission.md),
+which reserves and retains every attempt and requires the complete reviewed
+source/prediction closure before hardware. The captured launcher, freeze and
+observations above remain historical records with their original review limits.
+
 ## Coverage and authority disposition (2026-10-18)
 
 **Retain the full empirical acceptance scope recorded in the live issue.**
