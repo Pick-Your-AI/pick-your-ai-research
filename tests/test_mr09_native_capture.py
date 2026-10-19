@@ -332,7 +332,7 @@ class NativePublicationTests(unittest.TestCase):
         for present in (False,True):
             for target in targets:
                 with self.subTest(summary_present=present,target=target),tempfile.TemporaryDirectory() as temp:
-                    directory=Path(temp)/"inputs";self.prepare(directory,summary=present)
+                    directory=Path(temp).resolve()/"inputs";self.prepare(directory,summary=present)
                     (directory/"init-r1-preflight.json").chmod(0o640)
                     before=self.inputs(directory);archive=Path(temp)/"archive"
                     replace=capture.os.replace
@@ -350,7 +350,7 @@ class NativePublicationTests(unittest.TestCase):
 
     def test_final_readback_failure_removes_new_summary_and_restores_preflights(self):
         with tempfile.TemporaryDirectory() as temp:
-            directory=Path(temp)/"inputs";self.prepare(directory,summary=False)
+            directory=Path(temp).resolve()/"inputs";self.prepare(directory,summary=False)
             before=self.inputs(directory);archive=Path(temp)/"archive"
             read=Path.read_bytes;failed=False
             def fail(path):
@@ -369,7 +369,7 @@ class NativePublicationTests(unittest.TestCase):
 
     def test_rollback_failure_retains_archive_and_local_recovery_bytes(self):
         with tempfile.TemporaryDirectory() as temp:
-            directory=Path(temp)/"inputs";self.prepare(directory)
+            directory=Path(temp).resolve()/"inputs";self.prepare(directory)
             before=self.inputs(directory);archive=Path(temp)/"archive"
             replace=capture.os.replace
             def fail(source,dest):
