@@ -12,9 +12,11 @@ import hashlib
 import importlib.metadata
 import json
 import math
+import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import time
 import traceback
 import urllib.request
@@ -65,6 +67,41 @@ def classify_failure(error: Exception, phase: str, is_oom: bool = False) -> str:
 def write_json(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+def publish_result(path: Path, encoded: str) -> None:
+    """Retain a completed result before attempting publication without replacement."""
+    temporary = None
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        descriptor, name = tempfile.mkstemp(prefix=".mr09-unpublished-", suffix=".json", dir=path.parent)
+        temporary = Path(name)
+        try:
+            stream = os.fdopen(descriptor, "w", encoding="utf-8", newline="\n")
+        except BaseException:
+            os.close(descriptor)
+            raise
+        with stream:
+            if stream.write(encoded) != len(encoded):
+                raise OSError("short result write")
+            stream.flush()
+            os.fsync(stream.fileno())
+    except OSError as error:
+        retained = (f"unconfirmed file retained at {temporary}" if temporary is not None
+                    else "no recovery file was created")
+        raise RuntimeError("result persistence failed; no complete recovery record is confirmed; "
+                           + retained + "; no retry") from error
+    try:
+        os.link(temporary, path)
+    except OSError as error:
+        reason = ("output exists; preserve observations and choose a fresh path" if isinstance(error, FileExistsError)
+                  else f"result publication failed for {path}")
+        raise RuntimeError(reason + f"; complete unpublished result retained at {temporary}; no retry") from error
+    try:
+        temporary.unlink(missing_ok=True)
+    except OSError as error:
+        raise RuntimeError(f"result was published at {path}; complete duplicate retained at {temporary}; "
+                           "cleanup failed; no retry") from error
 
 
 def sanitized(value, args):
@@ -344,12 +381,10 @@ def main() -> int:
         parser.error("output exists; preserve observations and choose a fresh path")
     result = prepare(args.model_dir) if args.prepare else measurement(args)
     encoded = json.dumps(sanitized(result, args), indent=2, allow_nan=False) + "\n"
-    args.output.parent.mkdir(parents=True, exist_ok=True)
     try:
-        with args.output.open("x", encoding="utf-8") as output:
-            output.write(encoded)
-    except FileExistsError:
-        parser.error("output exists; preserve observations and choose a fresh path")
+        publish_result(args.output, encoded)
+    except RuntimeError as error:
+        parser.error(str(error))
     print(json.dumps({"output": str(args.output), "status": result.get("status", "prepared"),
                       "failure": result.get("failure")}, indent=2))
     return 0 if result.get("status", "prepared") in ("success", "prepared", "unsupported", "unexecuted") else 1

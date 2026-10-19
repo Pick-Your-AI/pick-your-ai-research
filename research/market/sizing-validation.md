@@ -691,17 +691,34 @@ The [executed runner](measurements/mr09_measure.executed.py) retains those exact
 source bytes, alongside the original dated protocol.
 The execution timestamp and package/hardware conditions are in each file.
 
-The [active dense launcher](../../scripts/mr09_measure.py) now rejects an occupied
-output path before either preparation or measurement. Its final result uses
-exclusive file creation, so an observation arriving during the action is also
-preserved; either collision returns the existing command-line error status 2
-without printing a success receipt. Serialization finishes before creating the
-new result file. The artifact-manifest writer and measurement computation remain
-unchanged. Offline direct-entry regressions cover both actions, existing files,
-directories and symlinks, a result arriving during execution, serialization
-failure and fresh-output recovery. These corrections add no measurements. The
-15 dense records and three Granite3.1 dense-source references remain bound to the
-archived hash above; future executions record the maintained launcher's own hash.
+The [active dense launcher](../../scripts/mr09_measure.py) and
+[Granite launcher](../../scripts/mr09_granite31_measure.py) reject an occupied
+output path before either preparation or measurement. After an action completes,
+its sanitized result is serialized before file creation, written to a unique
+adjacent `.mr09-unpublished-*.json` file, flushed and fsynced. Only then does a
+no-replace hard link publish the requested result name. A late collision preserves
+both the occupying entry and the complete unpublished success/failure record;
+its diagnostic identifies the recovery path and returns command-line error
+status 2 without a success receipt or automatic retry. Other publication errors,
+including unsupported hard links, retain the same recovery file and stop; there
+is no overwrite fallback. Recovery names stay outside the summary tool's
+`mr09-*-r*.json` discovery pattern and need explicit inspection/recovery rather
+than being counted as another observation.
+
+A persistence error before that completed write/flush/fsync boundary reports
+that no complete recovery record is confirmed, identifying the unconfirmed file
+or stating that no file was created. If publication succeeds but removing the
+extra recovery name fails, the diagnostic explicitly identifies the published
+result and retained complete duplicate, then stops without retry. This handles
+reported I/O failures; it does not claim crash/power-loss atomicity or durable
+directory metadata. The artifact-manifest writer, measurement computation and
+fresh-result status behavior remain unchanged. Offline direct-entry regressions
+cover both actions, occupied files/directories/links, late collisions, sanitized
+success/failure retention, incomplete persistence, publication/cleanup failures
+and fresh-output recovery. These corrections add no measurements. The 15 dense
+records and three Granite3.1 dense-source references remain bound to the archived
+hash above; future executions record the maintained launcher's own hash, which
+also covers its self-contained publication helper.
 
 D1-r1 is a direct-run pilot retained in the three-repetition D1 cohort because
 its model/configuration/instrument source matches the later repetitions. It
