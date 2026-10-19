@@ -43,6 +43,10 @@ GitHub **Assignees** are the source of truth for ownership. Do not duplicate own
 | T5 Training & Fine-Tuning (optional) | @appletechie |
 | T6 Deployment & Operations | @PUSHINGSQUARES |
 
+## Access, branches and reviews
+
+Early contributors push branches named `contrib/<your-login>/<topic>` to this repository; other contributors work from a fork. Every pull request into `main` needs one approval from someone other than its author, and only maintainers merge. The [organization contributing rules](https://github.com/Pick-Your-AI/.github/blob/main/CONTRIBUTING.md) define roles, credentials and enforcement.
+
 ## Deliverables
 
 - Put decision records at `research/<workstream-slug>/<component-slug>.md`. The exact path is in each issue's Deliverable section, e.g. `research/T2-infrastructure/gpu-compute.md`.
