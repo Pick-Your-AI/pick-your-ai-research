@@ -1,7 +1,7 @@
 # T0: Saved, Shared & Compared Builds
 
 Issue: #42 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `f297ac5`) · Kinds: `BuildSnapshot`, `Selection`, `CatalogSnapshot` (with `EvaluationReport`, `CostEstimate`, `Pricebook`, `Ruleset`, `DependencyGraph`, `Event` as referenced records)
-Status: decision record delivered; central research interface received, with specifically requested owner follow-ups outstanding (P18–P23) · Last researched: 2026-10-19 · Guidance: PR #74 Track E (P7)
+Status: research decision record delivered; dated current receiving decisions and their coordinating sufficiency assessment are recorded below (P24–P28), separately from the earlier named requests and final delivery checks · Last researched: 2026-10-19 · Guidance: PR #74 Track E (P7)
 Deliverable path: `research/T0-configuration/saved-shared-builds.md`
 
 Labels used in this note:
@@ -193,7 +193,7 @@ Default treatment. "Opt-in" means the owner explicitly includes the group for th
 | Fit-protocol workload lengths, concurrency and arrival process | Actual protocol/run evidence | Obtain from the actual executed protocol and run evidence, with independent view/purpose eligibility; never prefill from the origin's business-volume inputs | Configured protocol inputs and observations retain their different meanings (P18) |
 | Catalog workload preset | Preset reference and assumption provenance | Transfer only the exact eligible preset reference, labelled assumed; user-entered values retain their opt-in class | No latest fallback, expansion of withheld fields or default represented as a recipient answer (P18) |
 | Report findings, evidence, results and summaries; estimate lines, assumptions and warnings; projection/export metadata | Derived | Only where the field's contents and derived meaning are eligible for this view | Restrictions apply beyond `observed`; text, outcomes, associations and aggregates can disclose an excluded input or restricted assertion |
-| Catalog-sourced values (prices, benchmark figures) in findings or cost lines | Third-party data | Only where #60 grants commercial display (P4) | A share to the public is display |
+| Catalog-sourced values (prices, benchmark figures) in findings or cost lines | Third-party data | Only where the applicable #60 decision permits the actual material and intended display or redistribution use, with its conditions (P8, P15) | A public share is display; an export does not inherit display-only permission. |
 
 The account-capacity rule follows the same scope distinction as organisation
 attestations. A selected offering whose eligible published terms fix both its
@@ -639,7 +639,7 @@ common-format companion, with SB-9 received only as a proposal for #42's owners.
 | --- | --- | --- | --- |
 | SB-1 | The CD-1 typed answer and explicit provided-value attribution representation is received in P10. Remaining build-assumption mapping includes presets and FX/tax assumptions with their actual sources; receipt does not add fields to v1 | #40 | #81 (CD-1), #39 |
 | SB-2 | Receive the explicit positive revision beside the catalog ID selected by the CD-7 exact-pin candidate (P11); do not assume an ID is unique per revision or infer a latest/sole artifact. Released representation and consumer integration remain with #40 | #40 | #41 |
-| SB-3 | Receive the CD-7 explicit pricebook revision and historical manifest association candidate (P11). P13 records engineering acceptance of the snapshot/comparison interface; requested named #39 owner confirmation remains outstanding (P19). Calculation policy and complete/current coverage retain their own evidence. Final versioned Build/CostEstimate association remains #40 integration | #40 | #39 |
+| SB-3 | Receive the CD-7 explicit pricebook revision and historical manifest association candidate (P11). P13 retains the original snapshot/comparison intake; P26 receives the current interface and P28 records its coordinating sufficiency, separately from P19's historical named request. Calculation policy and complete/current coverage retain their own evidence. Final versioned Build/CostEstimate association remains #40 integration | #40 | #39 |
 | SB-4 | Select the separate share record and explicit access/pinned-or-following/revocation semantics in Sharing; it does not mutate a saved revision or grant source rights. #42 owns the policy; #40 owns its future versioned representation | #40 | product owner (#42 assignees) |
 | SB-5 | Derive displayed state from exactly associated reports and their supported evaluator/profile. A stored `lifecycle: validated` claim cannot certify current eligibility or deployment readiness. CD-7 replay supplies a bounded evaluator-binding candidate; final representation remains #40 | #40 | — |
 | SB-6 | Select a new Build ID/revision 1 with the source ID/revision as separately qualified lineage; no copied private attestations, withheld inputs or approvals. Wire placement remains #40; access and lifecycle limits are in Sharing and SB-9 | #40 | #42 assignees |
@@ -654,10 +654,10 @@ common-format companion, with SB-9 received only as a proposal for #42's owners.
 | --- | --- | --- |
 | #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted (P10), with selected representations delivered by #403 (P11). #40's research prerequisite is completed (P21). P22 separately receives the final #431 SB mappings, complete projection and dated common-format policy completions as a bounded research interface; released representation and consumer implementation retain their own review |
 | #41 | Confirm the invalidation table and the separate retained/current/disclosure boundaries | Original interim scope confirmed by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384). The actual delegated H41-42 receiving decision on 2026-10-18 accepts the later scoped interface (P9); no arbitrary TTL or whole sharing/migration policy is adopted |
-| #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | Engineering receiving decision recorded in P13. Named consuming-owner confirmation requested from @appletechie / @PUSHINGSQUARES in P19 remains outstanding; final versioned integration and unadopted cost policy stay separate |
-| #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | Engineering receiving decision recorded in P14. Named consuming-owner confirmation requested from @appletechie / @PUSHINGSQUARES in P19 remains outstanding; no deployment approval or execution |
-| #81 (#2/#3) | Incoming workload/mode inputs and the separate reverse share/report-prefill interface; Q7 is SB-7 | P12 records incoming intake; P16/P17 retain the separate engineering reverse decisions. P18 records @tynamite's named reverse acceptance with constraints at `03e347b4`, implemented in this follow-up without claiming a review of the later source. The requested independent producer read by @appletechie remains separate |
-| #60 | #42 → #60: qualify historical/shared/exported views after a relevant material, use or permission change | Engineering receiving decision recorded in P15. Named consuming-owner confirmation requested from @appletechie / @tynamite in P19 remains outstanding; no blanket history deletion, retention grant or new source permission |
+| #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | P13 retains the original intake; P26 accepts the current interface with constraints, including delivery of the corrected material/use-qualified disclosure row and P28 records its sufficiency under the current engineering delegation. P19's named request is preserved as history, without a reply attributed to @appletechie / @PUSHINGSQUARES. Final versioned integration and unadopted cost policy stay separate |
+| #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | P14 retains the original intake; P25 accepts the current interface with constraints and P28 records its sufficiency under the current engineering delegation. P19's named request is preserved as history, without a reply attributed to @appletechie / @PUSHINGSQUARES. No deployment approval or execution follows |
+| #81 (#2/#3) | Incoming workload/mode inputs and the separate reverse share/report-prefill interface; Q7 is SB-7 | P12 records incoming intake; P16/P17 retain the separate engineering reverse decisions. P18 is @tynamite's named reverse acceptance with constraints at `03e347b4`. P24 independently verifies the five implemented constraints in the current producer; P28 records that review's sufficiency. The actual reviewer is the in-session Apple engineer, without a reply attributed to @appletechie |
+| #60 | #42 → #60: qualify historical/shared/exported views after a relevant material, use or permission change | P15 retains the original intake; P27 accepts the current interface with constraints, conditional on delivery of the corrected display/export permission row and P28 records its sufficiency under the current engineering delegation. P19's named request is preserved as history, without a reply attributed to @appletechie / @tynamite. No blanket history deletion, retention grant or new source permission follows |
 | #51 | PCPartPicker save and share flows remain unobserved (P5); this note doesn't rely on them | Informational |
 
 The original #41 invalidation-policy handoff and the later H41-42 scope are
@@ -699,7 +699,7 @@ removed the #40 prerequisite; its later actual research completion is recorded
 in P21. P22 supplies the actual later receiving decision for this new packet,
 without reattributing it to either historical receipt.
 
-### Current receiving and delivery reconciliation — 2026-10-19
+### Earlier receiving and delivery reconciliation — 2026-10-19
 
 The earlier P9/P10 statements that their sources were unsigned and unmerged
 describe the time of those receipts. They remain historical facts. The selected
@@ -785,7 +785,7 @@ retroactively accept the later common-format companion's policy completions.
 The already completed #2/#3 research records retain their own original
 acceptance; this additional intake neither reopens them nor completes #42.
 
-### Named-owner review and current follow-up — 2026-10-19
+### Named-owner review and follow-up recorded for #431 — 2026-10-19
 
 P19 is @tynamite's actual #42 co-owner review of source
 03e347b44b8d03bc2e9abda10a97b43cfcd430c8. Its text accepts the research
@@ -860,6 +860,63 @@ read, grant source rights, serialize new fields, adopt a runtime adapter or
 migrate frozen v1. Named follow-up questions and any future implementation
 retain their stated owners and scope.
 
+### Current receiving decisions and coordinating sufficiency — 2026-10-19
+
+The following are actual current reviews of the accepted Saved Builds note,
+separate from the earlier P13–P19 source identities and named requests. The
+reviewed producer is `7ec5742529997fbb466a8bdafc8d9379f476ca4b` (118,240 UTF-8
+bytes, SHA-256 `59cbb50a0a7e8e1bec2acef747d0f395328cda631e7ebe7beda026b725a136e8`)
+as reviewed for P24/P26/P27 at signed accepted main
+`0009c66a611abc02d6bde2821efe8b4905606bad`, tree
+`d7115e3e7bf1056a9fccbd2ade7693b913821276`. P25 has its own actual
+`05270b91b746dc828390ad4fd44f6597fe651405` /
+`bbf1c90fbe13fd13d20226f40e7b70b75e99bc3d` source read at 04:02:30 UTC.
+The later complete-tree readback at
+signed `528c46b35bbd9cb180eaf20958adaacf3f7e8798`, tree
+`b367aa327516aa0362784a594e9c737a06550ee1`, preserves the literal receiving
+inputs. This later source-preservation check does not relabel an earlier read
+or repository execution.
+
+| Actual review / time | Actual reviewer and input scope | Accepted interface and retained limits |
+| --- | --- | --- |
+| [P24 / 6259327497](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6259327497) · 03:58:20 UTC | In-session Apple engineer; bounded Saved Builds prefill/disclosure/fork/mode interface against Workload `d8e86c8794ce175020e3457e62cba86c124f82ca` and Deployment Mode `8d64fcc0bf16222b0ed3e06dc53c396e525c0741` | All five implemented P18 constraints are present: actual-run versus origin identities, profile-specific essentials, the recipient's own account capacity, explicitly assumed pinned presets, and the received per-component classification/reverse citation. P18's named author and earlier source remain historical; this is not a reply from @appletechie or a new complete-note/vendor/runtime audit. |
+| [P25 / 6259463607](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6259463607) · 04:11:06 UTC | Actual coordinating deployment decision, supported by an independent in-session Apple interface read at `05270b91`; Saved Builds `7ec57425`, Deployment `08c3dacf4ce574071a4ce88a13509be42ace5f38`, complete frozen manifest and pricing/gates, with a separate 04:10:02 UTC `528c46b3` preservation guard | Accept with constraints exact Build/revision/target and applicable records/locks; historical/current and fork identity; independently required approvals and full G1–G12 applicability; effective offering/account/control evidence; and actual rollout/rollback qualification. The receipt's independent read covers the receiver's complete R1–R36 table, comparison fields, revision 0.2, readiness and current lifecycle/retention context. It neither certifies the separately owned 90-rule follow-up nor the remaining display/export correction. No unpublished duplicate review is substituted. |
+| [P26 / 6260214302](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6260214302) · 05:15:49 UTC | In-session Research engineer; complete Saved Builds producer and bounded Cost Estimate method `dc97759ed922326ddf8d270e1861f627725a5a31`; complete pricing/gates and CostEstimate/Pricebook schemas, relevant source-policy interface | Accept with constraints each side's exact Build/selection/Pricebook associations, native units, workload/period/charge basis, conditional eligibility and coverage. Historical compatibility replay may consume an eligible retained estimate; recalculation needs the actual quantities, rates, allocation/rounding/calculation policy and implementation. Current candidates remain separate. Disclosure acceptance is conditional on reviewed delivery of the corrected Shared / exported row above. No latest substitution, zero for missing cost, reserve/fit inference, FX/default adoption or new price intake follows. |
+| [P27 / 6260217715](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6260217715) · 05:16:06 UTC | In-session Research engineer; complete Saved Builds and Rights Validation `2fb0aa8d4c51448f111dbc82a8123206646f61c6`, all ten integration decisions `159766a48d7ec4460cbdc327dd5033d9f1b137a7`, and source-policy interface `c862112312d45bbe13b9e9261b8f83ee581cafa6` | Accept with constraints the actual material/use/purpose/recipient-view qualification, including nested values, derived findings and counts. Retained bytes supply no disclosure permission, and partial views inherit no full-artifact binding or grade. Relevant changes do not automatically cancel every historical grant or permit later use. Acceptance is conditional on reviewed delivery of the corrected Shared / exported row above. All ten product statuses and the three false GPUs.io flags remain unchanged; revocation, deletion, purge, lineage and independently permitted forks remain distinct. |
+
+The actual [source finding6259351017](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6259351017), also recorded in P25, identified the earlier Shared / exported catalog-value row's display-only wording. This amendment changes only its permission and explanation cells to require the applicable decision for the actual material and intended display or redistribution use, with its conditions (P8/P15). An export inherits no display-only permission. The complete-projection policy and all historical evidence rows remain unchanged; this is a precise documentary correction, not a new rights grant.
+
+P26 and P27 expressly condition their disclosure intake on reviewed delivery of that exact correction. The changed row is present in this candidate, while actual reviewed source delivery and final main qualification remain required before treating that condition as fulfilled. P25's exact saved-revision/own-approval acceptance retains its separately stated source-use limit.
+
+The separate coordinating decision [P28 / 6260273948](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6260273948) at 05:20:47 UTC accepts these
+actual current reviews under the user's engineering delegation for the literal
+research handoff criterion. It does not claim that the people named in P18 or
+P19 replied, change the assignee fields, or backdate any acceptance. The earlier
+requests, their then-outstanding state and their exact source pins remain in
+the historical sections above. P24 supplies the requested independent producer
+integrity review; P25–P27 supply the three current outgoing technical intakes.
+Incoming P9/P10/P12, reverse P16–P18 and central P22 retain their own directions
+and limits. No incoming receipt is silently reversed.
+
+The Research engineer read the complete current producer; its cost-policy read
+was limited to the sections and rows named in P26, while the rights note,
+ten integration decisions and named frozen gates/schemas were read completely.
+The coordinating and Apple engineers retain the bounded methods actually
+specified in their own receipts. These reviews add no vendor or legal-source
+refresh, hardware/native/runtime execution, new released contract, source-use
+grant, numerical estimate or deployment approval. Original source, execution
+and contributor attributions remain separate.
+
+SB-9 and P20's numeric periods remain proposals. Artifact-class retention,
+deletion completion, residual copies and permitted fork survival keep their
+named follow-up owners before a hosted promise. The Track E research acceptance
+requires resolved **or documented** retention questions; these current reviews
+do not adopt a numeric policy or report implemented storage behavior. The exact
+amendment's source review, configured validation, ordinary delivery and actual
+main readback remain separate from receiving sufficiency. The final issue
+assessment must use those real results; this note does not itself mutate issue
+checkboxes, state or Project fields.
+
 ## Acceptance criteria coverage
 
 The following first column preserves all eleven literal issue criteria. This is
@@ -874,10 +931,10 @@ issue completion. Research acceptance does not require implementing the builder.
 | Invalidation triggers (from #41) and resulting user-visible states | Invalidation triggers; corrected Revisit states; P9/P11 | Actual #41 input received and delivered. Equal references alone no longer imply current eligibility, disclosure permission or reproduction. |
 | Decision record merged at `research/T0-configuration/saved-shared-builds.md` following the research method | Proposal sequencing; current delivery reconciliation; P23 | Original #114 and later #396/#412/#397 contributions are delivered. P23 records the reviewed #431 source, actual signed main 73403ebd and original post-main verification. This establishes the record's delivery, not whole-#42 completion. |
 | Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Candidate options; Deployment modes covered; Comparison; P12 | API, managed and self-hosted serving plus hybrid composition covered with their separate historical-v1 and researched per-component representations. |
-| Comparison fields defined with type, unit, and evidence requirement | Comparison fields; frozen field mapping; SB-R3 and P13 | Types, units, evidence and comparison basis recorded; missing quantities, cost coverage or calculation policy do not become invented values. |
+| Comparison fields defined with type, unit, and evidence requirement | Comparison fields; frozen field mapping; SB-R3, P13 and P26 | Types, units, evidence and comparison basis recorded; missing quantities, cost coverage or calculation policy do not become invented values. |
 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; complete common-format companion; CD-7 historical candidate; P10/P11/P22 | Original SB identities and contract-derived/hypothesis labels are retained. P22 receives the actual template mapping and dated policy completions, including SB-R5's consumer-owned operand policy. Hand-worked synthetic cases and bounded historical replay retain their own scope; neither is independent vendor verification or a released successor ruleset. |
-| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P23 | Primary contract/external references retain actual access dates and scopes. P22/P23 add actual project receiving and original-delivery evidence at their stated pins and times; this reconciliation introduces no new vendor measurement, price or licence claim. |
-| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; receiving and named-owner reconciliation; P22/P23 | Actual engineering receipts retain their directions and pins. P18 supplies named reverse acceptance with constraints at `03e347b4`. P22 settles the central packet; P23 records delivery. The specifically requested named confirmations for #37/#39 (@appletechie / @PUSHINGSQUARES) and #60 (@appletechie / @tynamite), and P18's independent producer read, remain outstanding. No additional assignee unanimity is inferred. |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P28 | Primary contract/external references retain actual access dates and scopes. P24–P28 add only actual current project reviews and the separately attributed coordinating decision; this reconciliation introduces no new vendor measurement, price or licence claim. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; P9/P10/P12/P16–P18/P22; current reviews P24–P27 and coordinating decision P28 | P25/P26/P27 receive the current #37/#39/#60 interfaces, and P24 supplies the independent producer review of the implemented P18 constraints. P28 accepts these actual decisions under the current engineering delegation for this literal research handoff criterion. The original named requests and earlier receipts remain historical; no absent person's reply, assignee reassignment, unanimity requirement, SB-9 numeric adoption or implementation acceptance is inferred. Final source/delivery and issue assessment remain separately evidenced. |
 | Open questions recorded with a named follow-up owner | Open decisions (SB-); SB-9 accountable follow-up | All remaining decisions have accountable workstreams; retention periods/deletion completion are documented with @tynamite/@appletechie and #41/#40 consultation. |
 
 ## Evidence
@@ -923,6 +980,11 @@ issue completion. Research acceptance does not require implementing the builder.
 | P21 | [Actual #40 completion review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257213742), [independent criterion support](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257194682), and [#42 prerequisite update](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257241193) | 2026-10-19 | #429 delivered 449a29be1752a3c545709da466c7d53fc18fef73; #40 closed/completed at 00:41:11 UTC, read back on 2026-10-19 | Project engineering completion decision and actual issue state | Root read the original receipts and issue state; no new full central-source/test audit, named-assignee approval, successor release, acceptance of the new #431 packet or whole-#42 completion |
 | P22 | [Actual central #42 → #40 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257566405) and [receiving notice on #42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257585573) | 2026-10-19 | Submitted 01:14:33 UTC; final producer 473995df, delivered 73403ebd, note b7c4e086; exact central/template/gate basis recorded above | Actual delegated central engineering receiving decision: accept the bounded research interface with stated conditions | Receives SB mappings, complete projection and companion draft 1 policy completions; SB-9 only as proposed. No absent named-assignee reply, successor release, implementation, numeric retention adoption or whole-#42 completion |
 | P23 | [Reviewed #431 delivery and original post-main verification](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257698095), [signed delivered commit](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/73403ebd91437a4bf718ccf9b3857f955e16732f) and [original main run](https://github.com/Pick-Your-AI/pick-your-ai-research/actions/runs/39183951002/job/117842338982) | 2026-10-19 | Merged 01:08:18 UTC; tree b6bbd22e521a729a4408530e1cb13f641c06ae57; actual prepared a41e6dab and delivered 73403ebd | Project source/delivery evidence and original workflow output, individually read and parsed | Same 1,122 unique passing methods and four validator results at the exact delivered tree; no failed/error/skipped methods. Repository checks do not certify source truth, owner acceptance or later-source execution |
+| P24 | [P24 / 6259327497](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6259327497) | 2026-10-19 | Submitted 03:58:20 UTC; producer 7ec57425 and exact Workload/Deployment Mode leaves at 0009c66a | Actual in-session Apple engineering producer-integrity review | Five implemented P18 interface constraints received; no named-assignee reply, complete-note/vendor/runtime audit, numeric retention adoption or whole-#42 completion |
+| P25 | [P25 / 6259463607](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6259463607) | 2026-10-19 | Submitted 04:11:06 UTC; actual 05270b91 source and separate 04:10:02 UTC 528c guard; producer 7ec57425 and Deployment 08c3dacf | Actual coordinating deployment intake supported by independent in-session Apple interface review | Exact revision/target, independently qualified evidence/approvals, effective deployment and rollback/lifecycle gates; excludes the separate 90-rule follow-up and display/export correction. No deployment execution, named reply or SB-9 numeric adoption |
+| P26 | [P26 / 6260214302](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6260214302) | 2026-10-19 | Submitted 05:15:49 UTC; producer 7ec57425 and Cost Estimate dc97759e with exact source/gate/schema pins | Actual delegated cost receiving decision: accept with constraints | Historical/current/quantity/calculation/coverage distinctions; disclosure conditional on reviewed delivery of the exact display/export correction; P13 and the reverse #39 → #42 receipt remain separate. No new rate, cost estimate, runtime execution or policy default |
+| P27 | [P27 / 6260217715](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6260217715) | 2026-10-19 | Submitted 05:16:06 UTC; producer 7ec57425, rights 2fb0aa8d, integrations 159766a4 and source policy c8621123 | Actual delegated source-use receiving decision: accept with constraints | Actual material/use/view and retained-history boundaries, conditional on reviewed delivery of the exact display/export correction; no new permission, source audit, blanket history deletion, operating retention guarantee or SB-9 numeric adoption |
+| P28 | [P28 / 6260273948](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6260273948) | 2026-10-19 | Submitted 05:20:47 UTC; separately receives the four literal P24–P27 reviews | Actual coordinating decision on research handoff sufficiency | Current engineering delegation and actual roles stated explicitly; original P18/P19 named requests preserved. No absent person's reply, changed criterion text, implementation acceptance or automatic source/delivery/whole-issue completion |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; those contract decisions and the #42 prerequisite remained open at that sequencing decision. P21 records #40's later actual research completion. P22 supplies the separate later #431 receiving decision and P23 its reviewed delivery; none is retroactively attributed to this historical disposition.
 
