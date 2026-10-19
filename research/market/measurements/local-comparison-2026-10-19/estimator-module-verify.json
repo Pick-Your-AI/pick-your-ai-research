@@ -2,5 +2,7 @@
   "classification": "lossless sanitized actual CPU build/test output; not GPU evidence",
   "original_bytes": 21,
   "original_sha256": "b4537ed75f533f993f371954de47e42a793b8e5b0587577de7e27fb3e50696bd",
-  "text": "all modules verified\n"
+  "text": "all modules verified\n",
+  "original_bytes_base64": "YWxsIG1vZHVsZXMgdmVyaWZpZWQK",
+  "text_copy_normalization": "UTF-8 readable text; universal-newline normalization; original bytes retained separately in base64"
 }

@@ -1,0 +1,122 @@
+{
+  "classification": "one prospective H1 configuration, three descriptive supplemental comparisons; receiving acceptance pending",
+  "metric": "managed_device_buffers_snapshot",
+  "configuration_count": 1,
+  "fresh_process_observations": 3,
+  "technical_matched_pairs": 3,
+  "accepted_pairs": 0,
+  "whole_runtime_peak_pairs": 0,
+  "predicted_managed_device_bytes": 300885760,
+  "observations": [
+    {
+      "file": "H1-r1.json",
+      "sha256": "b91b890b93e001f84ca9fb0607bc3413fbf6697cf8f2a413793b3d4c378c17ea",
+      "started_utc": "2026-10-19T07:12:16.249619+00:00",
+      "finished_utc": "2026-10-19T07:12:17.522868+00:00",
+      "exact_admitted_live_buffer_bytes": 301674752,
+      "native_self_byte_interval": [
+        300941312,
+        301989887
+      ],
+      "cap_bytes": 2136809472,
+      "cleanup_live_bytes": 0,
+      "model_graph_dispatches": 0,
+      "predicted_managed_device_bytes": 300885760,
+      "primary_error_interval": {
+        "signed_bytes": [
+          -1104127,
+          -55552
+        ],
+        "absolute_bytes": [
+          55552,
+          1104127
+        ],
+        "signed_relative_percent_exact": [
+          "-110412700/301989887",
+          "-775/41984"
+        ],
+        "scope": "measurement rounding interval only; no tolerance/pass/fail or universal bound"
+      },
+      "corroborating_ledger_signed_error_bytes": -788992,
+      "corroborating_ledger_signed_relative_percent_exact": "-308200/1178417"
+    },
+    {
+      "file": "H1-r2.json",
+      "sha256": "0ab44cdcc2ba46596fc00af602f894736eb37fcaa8b9c53f0a71b49ee3a0ce47",
+      "started_utc": "2026-10-19T07:12:43.887261+00:00",
+      "finished_utc": "2026-10-19T07:12:44.575248+00:00",
+      "exact_admitted_live_buffer_bytes": 301674752,
+      "native_self_byte_interval": [
+        300941312,
+        301989887
+      ],
+      "cap_bytes": 2136809472,
+      "cleanup_live_bytes": 0,
+      "model_graph_dispatches": 0,
+      "predicted_managed_device_bytes": 300885760,
+      "primary_error_interval": {
+        "signed_bytes": [
+          -1104127,
+          -55552
+        ],
+        "absolute_bytes": [
+          55552,
+          1104127
+        ],
+        "signed_relative_percent_exact": [
+          "-110412700/301989887",
+          "-775/41984"
+        ],
+        "scope": "measurement rounding interval only; no tolerance/pass/fail or universal bound"
+      },
+      "corroborating_ledger_signed_error_bytes": -788992,
+      "corroborating_ledger_signed_relative_percent_exact": "-308200/1178417"
+    },
+    {
+      "file": "H1-r3.json",
+      "sha256": "5d15507a1e35ca2a74767958bc582ab6a6d42ca41aa8f67d9dd044671d7fceba",
+      "started_utc": "2026-10-19T07:12:47.723649+00:00",
+      "finished_utc": "2026-10-19T07:12:48.426404+00:00",
+      "exact_admitted_live_buffer_bytes": 301674752,
+      "native_self_byte_interval": [
+        300941312,
+        301989887
+      ],
+      "cap_bytes": 2136809472,
+      "cleanup_live_bytes": 0,
+      "model_graph_dispatches": 0,
+      "predicted_managed_device_bytes": 300885760,
+      "primary_error_interval": {
+        "signed_bytes": [
+          -1104127,
+          -55552
+        ],
+        "absolute_bytes": [
+          55552,
+          1104127
+        ],
+        "signed_relative_percent_exact": [
+          "-110412700/301989887",
+          "-775/41984"
+        ],
+        "scope": "measurement rounding interval only; no tolerance/pass/fail or universal bound"
+      },
+      "corroborating_ledger_signed_error_bytes": -788992,
+      "corroborating_ledger_signed_relative_percent_exact": "-308200/1178417"
+    }
+  ],
+  "exact_ledger_live_bytes_min_median_max": [
+    301674752,
+    301674752,
+    301674752
+  ],
+  "tolerance": null,
+  "fit_verdict": null,
+  "limits": [
+    "instrumented initialization only; host buffers and opaque CUDA/library/context memory excluded",
+    "native self interval is primary; exact ledger is corroboration",
+    "three repetitions of one configuration do not establish universal bounds",
+    "experimental project derivative; no accuracy claim for unmodified upstream release",
+    "no inference, whole-runtime peaks, new named-owner acceptance or ResourceEstimate"
+  ]
+}
