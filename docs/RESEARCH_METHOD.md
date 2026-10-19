@@ -16,12 +16,14 @@ Avoid presenting model performance, context limits, GPU fit, or price as univers
 
 ## Evidence grades
 
-Until [#41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41) finalises the policy, label each claim with one of:
+Use the [accepted #41 policy](../research/T0-configuration/catalog-data-sources.md#evidence-grades-and-labels) ([completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6256107246)) to grade each claim separately:
 
 - **Primary documentation:** publisher's own docs, pricing page, model card, license, or specification.
 - **Vendor claim:** a performance or capability statement by the vendor that has not been independently reproduced.
 - **Independent measurement:** a published, reproducible measurement with stated conditions.
 - **Estimate:** derived by this project; show the method and assumptions.
+
+For provenance, apply [#41's mapping to frozen v1](../research/T0-configuration/catalog-data-sources.md#mapping-evidence-labels-to-frozen-v1). New source-checked claims without independent corroboration use `unverified`; new `verified` entries need linked independent corroboration or reproduction described in the note. Preserve historical labels and their evidence; do not mass-relabel records or change frozen enums.
 
 ## Completion criteria
 
