@@ -1,0 +1,103 @@
+{
+  "classification": "real inference measurements on 2x NVIDIA RTX PRO 4000 Blackwell SFF (24 GiB each, sm_120, 70 W); per-PID VRAM isolation, background services subtracted; not a universal fit or SLO guarantee",
+  "status": "executed",
+  "observed_utc": "2026-10-18T07:20:00Z",
+  "card": {
+    "name": "NVIDIA RTX PRO 4000 Blackwell SFF Edition",
+    "compute_cap": "12.0",
+    "sm_arch": "sm_120",
+    "vram_mib": 24467,
+    "vram_decimal_gb": 25.656,
+    "board_power_w": 70,
+    "driver": "580.126.09",
+    "count": 2
+  },
+  "engine": {
+    "binary": "llama.cpp llama-server",
+    "flags": "--flash-attn off (sm_120 flash-attn segfault), default f16 KV, --jinja",
+    "prompt": "fixed 129-token completion, temperature 0.0",
+    "isolation": "nvidia-smi --query-compute-apps=pid,used_memory,gpu_uuid filtered to the measurement llama-server PID; background PIDs (live whitehat on GPU0 + Ornith sub-agent on GPU1) subtracted"
+  },
+  "scenarios": {
+    "M1_dense_fit": {
+      "model": "Qwen3 4B Instruct Awq",
+      "arch": "qwen3",
+      "quant": "Q4_K_M (file_type 15)",
+      "file_decimal_gb": 2.491,
+      "is_dense": true,
+      "kv_per_token_f16_bytes": 147456,
+      "knobs": "-ngl 999 --ctx-size 2048, GPU 0",
+      "observed": {
+        "vram_loaded_mib": 3078,
+        "vram_gen_mib": 3088,
+        "vram_gen_decimal_gb": 3.238,
+        "vram_per_gpu_mib": { "0": 3088 },
+        "ttft_s": 0.131,
+        "itl_s": 0.0344,
+        "tokens_per_second": 28.4,
+        "load_s": 8.0
+      }
+    },
+    "M2_moe_offload": {
+      "model": "Qwen-Agentworld-35B-A3B",
+      "arch": "qwen35moe",
+      "quant": "Q4_K_M (file_type 15)",
+      "file_decimal_gb": 22.314,
+      "is_hybrid_ssm_moe": true,
+      "expert_count": 256,
+      "expert_used_count": 8,
+      "full_attention_interval": 4,
+      "routed_expert_decimal_gb": 19.636,
+      "shared_expert_decimal_gb": 0.134,
+      "non_expert_decimal_gb": 2.544,
+      "moe_offload_candidate_decimal_gb": 19.770,
+      "knobs": "-ngl 999 --cpu-moe --ctx-size 1024, GPU 0",
+      "observed": {
+        "vram_loaded_mib": 2994,
+        "vram_gen_mib": 3004,
+        "vram_gen_decimal_gb": 3.150,
+        "vram_per_gpu_mib": { "0": 3004 },
+        "host_ram_delta_gb": 8.4,
+        "host_ram_note": "observed RSS / mmap page-cache, NOT a resident copy and NOT a prediction",
+        "ttft_s": 1.737,
+        "itl_s": 0.1252,
+        "tokens_per_second": 7.3,
+        "load_s": 26.0
+      }
+    },
+    "M3_multigpu": {
+      "model": "Qwen3 4B Instruct Awq",
+      "arch": "qwen3",
+      "quant": "Q4_K_M (file_type 15)",
+      "file_decimal_gb": 2.491,
+      "is_dense": true,
+      "knobs": "-ngl 999 --ctx-size 2048 --dev 0,1 --split-mode layer",
+      "observed": {
+        "vram_loaded_mib": 3578,
+        "vram_gen_mib": 3598,
+        "vram_pool_decimal_gb": 3.773,
+        "vram_per_gpu_mib": { "0": 2096, "1": 1502 },
+        "vram_peak_per_device_mib": 2096,
+        "vram_peak_per_device_decimal_gb": 2.198,
+        "split_ratio": "58.3 / 41.7 (not 50/50)",
+        "ttft_s": 0.151,
+        "itl_s": 0.0417,
+        "tokens_per_second": 23.5,
+        "load_s": 6.0
+      }
+    }
+  },
+  "raw_per_pid_nvidia_smi": {
+    "M1_dense_fit": { "loaded": { "0": 3078 }, "gen": { "0": 3088 }, "background_pids_subtracted": [36295, 40021] },
+    "M2_moe_offload": { "loaded": { "0": 2994 }, "gen": { "0": 3004 }, "background_pids_subtracted": [36295, 40021] },
+    "M3_multigpu": { "loaded": { "0": 2086, "1": 1492 }, "gen": { "0": 2096, "1": 1502 }, "background_pids_subtracted": [36295, 40021] }
+  },
+  "guards": {
+    "port_free_before_launch": true,
+    "model_loaded_via_v1_models": true,
+    "per_pid_isolation": true,
+    "background_subtracted": true,
+    "flash_attn_off": true
+  },
+  "notes": "Decimal GB (10^9) is canonical per #40. GiB values (3.016 / 3.514 / 2.934) are the same readings in binary units; this file reports decimal GB. The M2 model is a hybrid SSM+MoE (full_attention_interval=4), so its per-token KV grows ~4x slower than a dense model at equal depth; --cpu-moe resident VRAM is 3.150 decimal GB because routed+shared experts (19.770 decimal GB) are offloaded to host RAM."
+}

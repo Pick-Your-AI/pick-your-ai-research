@@ -6,8 +6,12 @@ import io
 import math
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
+import shutil
+import stat
+import tempfile
 from mr09_total_memory_setup import managed_snapshot_interval, strict_json, require_bindings
 
 DIRECTORY=Path("research/market/measurements/native-qualification-2026-10-18")
@@ -196,32 +200,158 @@ def summarize(directory):
             "not_qualified":["graph execution/VMM scratch pools","opaque CUDA/library allocations or physical process-wide cap","inference/throughput/whole-process peaks","accepted estimator scope/error tolerance"],
             "initialization_trials":3,"accepted_estimator_pairs":0,"whole_process_peak_pairs":0,"observations":observations}
 
+class PublicationRecoveryRequired(RuntimeError):
+    """Publication and rollback both failed; retain the original recovery bytes."""
+
+    def __init__(self, archive, staging_directory, unrestored_files):
+        self.archive=archive
+        self.staging_directory=staging_directory
+        self.unrestored_files=tuple(unrestored_files)
+        super().__init__(
+            "publication rollback incomplete; original cohort retained at "
+            f"{archive}; recovery files retained at {staging_directory}; "
+            "unrestored files: "+", ".join(unrestored_files))
+
+
+class PublicationCleanupRequired(RuntimeError):
+    """The input outcome is known, but temporary recovery files remain."""
+
+    def __init__(self, archive, staging_directory, publication_completed):
+        self.archive=archive
+        self.staging_directory=staging_directory
+        self.publication_completed=publication_completed
+        outcome="publication completed and verified" if publication_completed else "publication inputs unchanged or restored"
+        super().__init__(outcome+f"; staging cleanup failed at {staging_directory}; archive path: {archive}")
+
+
 def publish(directory,archive):
-    # Validate all records before publication; no failed/partial cohort is rewritten.
-    originals={p:p.read_bytes() for p in [directory/f"init-r{r}.json" for r in (1,2,3)]}
-    summarize(directory)
-    if any("publication" in loads(raw.decode("utf-8")) for raw in originals.values()):
-        raise ValueError("already published; preserve the original publication receipt")
+    """Publish one exclusively owned cohort with recovery for handled failures.
+
+    Prepare and validate a byte snapshot, then archive every original before
+    replacing inputs. Individual replacements are atomic; the complete cohort
+    is not a crash-atomic transaction. Concurrent writers are not supported.
+    Cleanup failure reports whether publication completed; incomplete rollback
+    instead retains both the archive and staging directory for explicit recovery.
+    """
+    directory=directory.resolve(strict=True)
     repo=Path(__file__).resolve().parents[1]
-    if archive.exists() or archive.resolve().is_relative_to(repo): raise ValueError("fresh external archive directory required")
-    archive.mkdir()
-    for path,raw in originals.items():
-        (archive/path.name).write_bytes(raw)
-        record=loads(raw.decode("utf-8"))
-        pattern=r"^llama_graph_n_input_tensors: input tensor .* is used by node .*"
-        lines=record["stderr"].splitlines(keepends=True)
-        retained=[line for line in lines if not re.fullmatch(pattern,line.rstrip("\n\r"))]
-        record["publication"]={"omitted_diagnostic_pattern":pattern,"omitted_lines":len(lines)-len(retained),
-            "original_sanitized_stderr_sha256":hashlib.sha256(record["stderr"].encode()).hexdigest(),
-            "scope":"omit repetitive input-tensor graph diagnostics only; retain events, phase counters, placement, errors and warnings"}
-        record["stderr"]="".join(retained)
-        preflight=directory/record["preflight_file"]
-        preflight.write_text(json.dumps(strict_json(preflight),indent=2)+"\n",encoding="utf-8",newline="\n")
-        record["preflight_sha256"]=sha(preflight)
-        path.write_text(json.dumps(record,indent=2,allow_nan=False)+"\n",encoding="utf-8",newline="\n")
-    summary=summarize(directory)
-    (directory/"qualification-summary.json").write_text(json.dumps(summary,indent=2)+"\n",encoding="utf-8",newline="\n")
-    return summary
+    if (archive.exists() or archive.is_symlink()
+            or archive.resolve().is_relative_to(repo)
+            or archive.resolve().is_relative_to(directory)):
+        raise ValueError("fresh external archive directory required")
+    records=[f"init-r{r}.json" for r in (1,2,3)]
+    preflights=[f"init-r{r}-preflight.json" for r in (1,2,3)]
+    summary_name="qualification-summary.json"
+    names=["build-loader-v2.json","runtime-artifacts.json",*records,*preflights,summary_name]
+
+    def read_original(name):
+        path=directory/name
+        try:
+            info=path.lstat()
+        except FileNotFoundError:
+            if name==summary_name: return None
+            raise
+        if not stat.S_ISREG(info.st_mode):
+            raise ValueError("regular publication input required: "+name)
+        return path.read_bytes(),stat.S_IMODE(info.st_mode)
+
+    originals={name:read_original(name) for name in names}
+
+    def unchanged():
+        if any(read_original(name)!=original for name,original in originals.items()):
+            raise ValueError("publication inputs changed after snapshot")
+
+    def encoded(record):
+        return (json.dumps(record,indent=2,allow_nan=False)+"\n").encode("utf-8")
+
+    staging=Path(tempfile.mkdtemp(prefix=".mr09-publication-",dir=directory))
+    retain_staging=False
+    publication_completed=False
+    try:
+        prepared=staging/"prepared";prepared.mkdir()
+        backups=staging/"originals";backups.mkdir()
+        for name,original in originals.items():
+            if original is None: continue
+            raw,mode=original
+            (prepared/name).write_bytes(raw)
+            (backups/name).write_bytes(raw)
+            os.chmod(backups/name,mode)
+        # Validate the captured bytes, not a second read of changing live files.
+        summarize(prepared)
+        if any("publication" in loads(originals[name][0].decode("utf-8")) for name in records):
+            raise ValueError("already published; preserve the original publication receipt")
+        outputs={}
+        for name in records:
+            record=loads(originals[name][0].decode("utf-8"))
+            pattern=r"^llama_graph_n_input_tensors: input tensor .* is used by node .*"
+            lines=record["stderr"].splitlines(keepends=True)
+            retained=[line for line in lines if not re.fullmatch(pattern,line.rstrip("\n\r"))]
+            record["publication"]={"omitted_diagnostic_pattern":pattern,"omitted_lines":len(lines)-len(retained),
+                "original_sanitized_stderr_sha256":hashlib.sha256(record["stderr"].encode()).hexdigest(),
+                "scope":"omit repetitive input-tensor graph diagnostics only; retain events, phase counters, placement, errors and warnings"}
+            record["stderr"]="".join(retained)
+            preflight=record["preflight_file"]
+            outputs[preflight]=encoded(strict_json(prepared/preflight))
+            (prepared/preflight).write_bytes(outputs[preflight])
+            record["preflight_sha256"]=hashlib.sha256(outputs[preflight]).hexdigest()
+            outputs[name]=encoded(record)
+            (prepared/name).write_bytes(outputs[name])
+        summary=summarize(prepared)
+        outputs[summary_name]=encoded(summary)
+        (prepared/summary_name).write_bytes(outputs[summary_name])
+        output_modes={}
+        for name in outputs:
+            os.chmod(prepared/name,originals[name][1] if originals[name] is not None else 0o644)
+            output_modes[name]=stat.S_IMODE((prepared/name).stat().st_mode)
+            if originals[name] is not None and output_modes[name]!=originals[name][1]:
+                raise ValueError("original publication mode cannot be preserved: "+name)
+        # A new summary has no original mode to preserve. Verify the actual
+        # staged mode; some filesystems do not support every requested POSIX bit.
+        unchanged()
+        archive.mkdir(mode=0o700)
+        for name,original in originals.items():
+            if original is None: continue
+            (archive/name).write_bytes(original[0])
+            if (archive/name).read_bytes()!=original[0]:
+                raise ValueError("original publication archive is incomplete: "+name)
+        # No input has been replaced if preparation or any archival write fails.
+        unchanged()
+        attempted=[]
+        try:
+            for name in outputs:
+                attempted.append(name)
+                os.replace(prepared/name,directory/name)
+            for name in names:
+                expected=originals[name]
+                if name in outputs:
+                    expected=(outputs[name],output_modes[name])
+                if read_original(name)!=expected:
+                    raise ValueError("published cohort differs from prepared bytes: "+name)
+        except BaseException as error:
+            unrestored=[]
+            for name in reversed(attempted):
+                try:
+                    if read_original(name)==originals[name]: continue
+                    if originals[name] is None:
+                        (directory/name).unlink(missing_ok=True)
+                    else:
+                        os.replace(backups/name,directory/name)
+                    if read_original(name)!=originals[name]:
+                        raise ValueError("restored input differs from original")
+                except BaseException:
+                    unrestored.append(name)
+            if unrestored:
+                retain_staging=True
+                raise PublicationRecoveryRequired(archive,staging,unrestored) from error
+            raise
+        publication_completed=True
+        return summary
+    finally:
+        if not retain_staging:
+            try:
+                shutil.rmtree(staging)
+            except OSError as error:
+                raise PublicationCleanupRequired(archive,staging,publication_completed) from error
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)

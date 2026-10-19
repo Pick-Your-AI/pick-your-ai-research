@@ -1,6 +1,6 @@
 # T3: Knowledge & Retrieval
 
-Issue: #12 · Assignees: @Mattycodes69, @zabyxc01 · Status: component decisions delivered; workstream acceptance under review · Updated: 2026-10-18
+Issue: #12 · Assignees: @Mattycodes69, @zabyxc01 · Status: research complete ([workstream acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12#issuecomment-6256396687)) · Updated: 2026-10-18
 
 T3 is optional in a build. Knowledge access does not inherently require embeddings or a vector database. The workload's declared knowledge need and chosen retrieval method determine which components apply; missing evidence remains unknown.
 
@@ -50,4 +50,4 @@ These are research proposals for #40. Conceptual operands need a versioned repre
 
 These are the linked reviewers' actual component-level receiving decisions on their stated source revisions. This summary records them without extending their scope, attributing replies to absent assignees or treating incoming and outgoing directions as interchangeable.
 
-The conditional architecture choices above are decided research inputs. Selected source instances, multimodal representations, backend configuration, permission propagation, workload quality and eligible cost evidence retain the [named follow-up owners](rag-retrieval.md#outgoing-review-packet-and-named-follow-ups). Parent #12 still requires all children to meet their own criteria and close, confirmation of its workstream handoffs, and this merged summary. This update changes no child criterion or Project status and does not itself complete #12.
+The conditional architecture choices above are decided research inputs. Selected source instances, multimodal representations, backend configuration, permission propagation, workload quality and eligible cost evidence retain the [named follow-up owners](rag-retrieval.md#outgoing-review-packet-and-named-follow-ups). [Parent #12 is complete](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/12#issuecomment-6256396687): all four child decision records meet their research criteria, the four research ownership interfaces listed in #12 are accepted with their stated constraints, and the merged summary records the decisions, rules and open questions. Its completion receipt retains the delivered revision, independent review and default-branch validation. The named consumer follow-ups remain separately scoped.

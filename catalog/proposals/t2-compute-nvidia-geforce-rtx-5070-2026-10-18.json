@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "id": "nvidia-geforce-rtx-5070",
+  "kind": "accelerator",
+  "tier": "T2",
+  "name": "NVIDIA GeForce RTX 5070 (reference specifications)",
+  "version": "2026-10-18",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Dated hardware specification proposal. Native arithmetic precision coverage is explained in the linked research note; stored quantization and joint engine/artifact support require separate evidence. Advertised memory and rated power do not establish free allocation, operating power, fit, throughput, availability or price.",
+  "spec": {
+    "accelerator_type": "gpu",
+    "vendor": "NVIDIA",
+    "model_name": "GeForce RTX 5070",
+    "vram_gb": 12,
+    "backends": [
+      "cuda"
+    ],
+    "precisions": [
+      "fp32",
+      "tf32",
+      "bf16",
+      "fp16",
+      "fp8",
+      "int8"
+    ],
+    "rated_power_w": 250,
+    "interconnect": "pcie"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://www.nvidia.com/en-us/geforce/graphics-cards/compare/",
+      "checked_at": "2026-10-18T22:53:32Z",
+      "verification_status": "unverified",
+      "notes": "Corresponding reference-design column: advertised memory, total graphics power and PCIe. Manufacturer variants can differ."
+    },
+    {
+      "source_uri": "https://developer.nvidia.com/cuda/gpus",
+      "checked_at": "2026-10-18T22:53:32Z",
+      "verification_status": "unverified",
+      "notes": "Named family/variant is listed at compute capability12.0."
+    },
+    {
+      "source_uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+      "checked_at": "2026-10-18T22:53:32Z",
+      "verification_status": "unverified",
+      "notes": "Tables30/33: native precision coverage; see the research assessment."
+    }
+  ],
+  "updated_at": "2026-10-18T22:53:32Z"
+}

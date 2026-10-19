@@ -348,6 +348,168 @@ Historical compatibility replay consumes the exact retained cost estimate; it do
 - **Example:** a share withholds `data_classification`; on the fork, the rule reading `/objectives/data_classification` (V13) is `unknown`, not `pass`.
 - **Dependency:** CD-1's typed answer states; v1's evaluator treats the string `"unknown"` as a known value (P1), so a withheld marker must not be a string sentinel.
 
+## Common-format companion for SB-R1–SB-R5
+
+**Status:** research proposal for #40 review. **Research revision:** 2026-10-19,
+companion draft 1. This maps the existing rules to the actual
+[rule proposal template](../../templates/rule-proposal.md) and the central
+[rule format and outcome semantics](component-schema-compatibility.md#rule-format-and-outcome-semantics-decided).
+It introduces no new wire fields, selectors, frozen-profile changes or released
+ruleset. References to a rule's existing pointers incorporate its literal list.
+The original rule text, identifiers and evidence labels remain above.
+
+Where an original rule leaves applicability or an outcome unspecified, this
+companion proposes a completion for central disposition; it is not a claim
+that the completion is already frozen-contract behavior. In particular,
+SB-R3's binding-failure finding and review policy below are research proposals.
+The original contract-derived labels identify their source basis, not
+independent vendor verification or acceptance of every proposed completion.
+
+SB-R1, SB-R2, SB-R3, SB-R4a and SB-R4b each keep one fixed severity.
+**SB-R5 is the shared withheld-operand policy consumed by specific rules. It
+does not emit a separate finding with a severity that varies by consumer.**
+
+### Participants, applicability and assertions
+
+| ID | Participants, roles and pointers | Applicability | Single assertion and supporting evidence | Fixed severity and unknown policy |
+| --- | --- | --- | --- | --- |
+| SB-R1 | The Build supplies its locked catalog reference; each enabled Selection supplies the selected item ID/version; the exact locked CatalogSnapshot supplies membership evidence. Use the original SB-R1 selection, lock and membership pointers. | Each enabled Selection whose membership in the locked snapshot is evaluated. Disabled selections skip. | The selected ID/version is present in that exact locked snapshot. Identify the resolved snapshot and matching entry, or establish absence within that snapshot. Membership does not establish a capability or permission. | error. Known absence fails. An unavailable or unresolved required snapshot gives unknown; on_unknown: block. |
+| SB-R2 | The Build supplies its id, revision and existing locks. The EvaluationReport supplies the original SB-R2 build_id, build_revision and required report-association pointers. | A view or receiving operation proposes to use a report as the result for a specified Build revision. A requested but unresolved report remains applicable. No report display/use requested: this display assessment skips, without waiving another consumer's mandatory report prerequisite. | Every required report association matches this exact Build ID, revision and locks. Record the actual compared identities and unresolved prerequisites. | warning. A proven mismatch fails; in its absence, a missing report or unresolved required association gives unknown; on_unknown: review. Retain an unrelated missing prerequisite as supporting detail or a separately scoped assessment, without erasing a proven mismatch. |
+| SB-R3 | Each Build supplies its own id/revision, lock and applicable budget/context. Each CostEstimate supplies its original SB-R3 build_id, build_revision, pricebook_id, currency, coverage and period_days pointers. Identify the stated operation, its time/scope and currency counterpart. Each estimate binds independently to its own Build. | A budget assessment or cost comparison is requested. Assess each estimate for its own stated operation; neither requested: skip. Comparison applicability is separately scoped to the pair, as specified below. | The estimate is usable for that stated cost operation with the required association, quote coverage, time/scope, currency and period basis. Evidence identifies each prerequisite; the operation and outcome precedence below distinguish binding integrity, V8 quote eligibility and pair comparability. | warning. Proposed binding failure and on_unknown: review follow the explicit precedence below. The frozen V8 derived metric and budget rule retain their own unknown classification, applicability and fixed severity. This is never itself a budget-exceeded verdict. |
+| SB-R4a | The enabled Selection/Build supply the original selected identity; a separately identified current catalog item supplies the original SB-R4a status pointer. #41 supplies evidence-resolution policy. | Current-view review of an enabled selection. Disabled selections or historical-only display skip. Established absence skips deprecation and is handled by SB-R4b; unresolved presence/status remains unknown. | The resolved current item is not deprecated. Identify the item, status, publication/scope and applicable source resolution. A retired item's narrow deprecation pass cannot suppress SB-R4b's availability error or establish usability. | warning. Deprecated fails; another resolved known status passes this predicate only. Unresolved required presence/status gives unknown; on_unknown: review. |
+| SB-R4b | The same selected identity and current catalog participants as SB-R4a, with the original presence/status evidence. An absence claim requires a qualified exhaustive snapshot for the exact relevant scope. | Current-view review of an enabled selection. Disabled selections or historical-only display skip. | The item is present and not retired within the qualified scope. Active, preview or deprecated satisfies this availability predicate; retired or established absence does not. | error. Retired or established absence fails. Incomplete, unavailable or unresolved required evidence gives unknown; on_unknown: review. Preview-specific information remains a separate #40 question. |
+| SB-R5 | The recipient's new Build/answers and each consuming rule's own participant pointers. Withheld operands use the received CD-1 representation; no private field, attestation or excluded derivation supplies an operand. | A specific rule evaluates the recipient's new inputs and encounters a withheld operand. This does not re-evaluate or rewrite a read-only historical report. | Operand policy: preserve the unresolved operand and follow that consumer's actual applicability, assertion and unknown behavior. Withholding supplies no affirmative fact or default value. | No standalone finding or severity. Each consuming rule keeps its own fixed severity and on_unknown policy. Do not place an "unknown" string in a typed value field. |
+
+### SB-R3 operation scope and outcome precedence
+
+Estimate eligibility is assessed for the stated operation and its applicable
+time and scope. Present-day rate eligibility is not retroactively imposed on
+historical compatibility replay. A retained estimate can support that replay
+with the retained inputs required for that historical compatibility evaluation,
+even when its rates are no longer current today.
+This establishes neither separate cost recalculation nor current budget
+eligibility. A newly published pricebook can support a separately labelled
+candidate; it never silently becomes the saved revision's locked pricebook.
+
+An assessment identifies one estimate, its claimed Build/revision and its
+requested operation. A pair comparison additionally identifies both estimates
+and the basis being compared. Its comparability disposition is not a
+replacement for either estimate's binding or eligibility assessment.
+
+1. **Binding integrity:** a directly proven false claim that an estimate belongs
+   to the stated Build/revision or exact required locked record produces the
+   proposed SB-R3 fail/warning display finding. Retain unrelated unresolved
+   prerequisites as supporting detail or separately scoped assessments. A
+   correctly associated historical record is not falsely bound merely because
+   a successor or newer pricebook exists.
+2. **Quote eligibility:** absent a proven binding violation, an essential
+   unresolved prerequisite or a V8-defined stale/partial condition gives
+   unknown/warning. Passing requires the applicable prerequisites to be
+   established. V8's existing stale-input classification controls the frozen
+   derived metric and budget rule: this proposed cross-record display finding
+   does not convert their unknown to fail, pass or a budget-exceeded result.
+   If a discrepancy is only staleness under V8, do not relabel it as a false
+   binding. Stored coverage and original findings remain unchanged.
+3. **Currency and period counterparts:** a budget assessment compares its
+   estimate to that Build's budget currency and exact V8 30-day quote basis.
+   A pair comparison compares the two estimates' currencies, periods and
+   relevant charge bases. A USD estimate eligible for its USD budget does not
+   lose that eligibility because a separate comparison includes a EUR estimate.
+   An independently applicable budget rule still evaluates only under its own
+   actual prerequisites. A skipped comparison does not authorize budget
+   arithmetic; the budget rule's own prerequisites must hold.
+4. **Pair comparability:** known incompatible currencies or charge/period bases
+   make that comparison skipped with the not-comparable reason. Unknown
+   required comparability inputs remain unknown. Neither disposition erases
+   a proven binding failure on one estimate. No implicit FX, period conversion,
+   amortization or one-off/recurring combination is introduced. "Select a
+   comparable basis" means obtain the permitted matching inputs; it does not
+   change frozen v1's exact 30-day monthly budget requirement.
+
+These are proposed research assessments, not new serialized assessment fields
+or released finding identities. #40 must settle their final representation and
+review the indicated policy completions before adoption. A skipped comparison,
+an eligibility pass and a historical association each retain their limited
+meaning.
+
+### Explanation, remediation and dependencies
+
+| ID | Explanation and remediation | Dependency edges and affected consumers |
+| --- | --- | --- |
+| SB-R1 | Explain which selected identity could not be established in which locked snapshot. Restore eligible access to that exact snapshot, or explicitly adopt a new revision with appropriate selections/locks. Do not silently repin or substitute a current item. | Frozen Build/Selection/catalog identity and snapshot resolution; SB-2/CD-7 revision disambiguation. Saved-build review and downstream evaluation consume membership, which supplies no deployment approval or source-use permission. |
+| SB-R2 | Explain the actual report identity and the mismatched or unavailable association. Preserve the original under its actual identity where disclosure permits. Resolve the intended report and pins, or obtain correctly associated evidence for the appropriate revision; never edit a foreign record's identity to make it fit. | Frozen Build/report associations, report resolution and disclosure eligibility. Historical/current views and receiving consumers retain their stronger mandatory report and deployment gates. |
+| SB-R3 | Explain the exact association, coverage, time/scope, currency or period limitation for the stated operation. Obtain eligible, complete, correctly associated inputs and preserve pricebook dates and qualifications. Keep one-off and recurring amounts separate, perform no implicit FX or period conversion, and preserve V8's 30-day monthly budget basis. | Frozen cost/pricebook associations, V8, #39 cost semantics, #41 quote evidence and the independently defined budget rule. Cost display, comparison and budget consumers cannot infer a budget pass from partial/stale evidence or this display predicate. |
+| SB-R4a | Identify the deprecated item and current evidence. Offer a reviewed replacement proposal; never automatically swap the saved selection. Preserve the original revision and historical findings. | #41 evidence resolution and SB-R4b presence treatment. Current-view review and proposed revisions do not rewrite historical results. |
+| SB-R4b | Explain the exact scope establishing retirement/absence, or name the unresolved prerequisite. Verify current evidence or offer an explicitly revised selection. Do not generalize scoped absence to every offering or target. | Current catalog scope/completeness and #41. Current-view review does not establish live target access, credentials or deployment readiness. |
+| SB-R5 | Explain the missing prerequisite using only eligible information; obtain the recipient's own applicable answer. Do not recover withheld values through messages, IDs, summaries or derived disclosures, or copy private attestations. | Received CD-1 representation, #40 representation decisions and each actual consuming rule. New recipient evaluations remain separate from permitted historical findings. |
+
+### Synthetic examples
+
+These are hand-worked proposed cases, not executed tests, measurements or
+implementation qualification.
+
+| ID | Pass | Fail | Unknown | Non-applicable / skipped |
+| --- | --- | --- | --- | --- |
+| SB-R1 | Enabled item X at version 2 is present in the resolved locked snapshot. | That exact ID/version is absent from the resolved locked snapshot. | The exact required snapshot cannot be resolved. | Selection disabled. |
+| SB-R2 | A report for Build B revision 4 matches every required B/4 lock. | A B/3 or C/4 report is presented as B/4, or a required lock is known to differ. | The requested B/4 report or a required association cannot be resolved; this does not prove that no historical evaluation occurred. | No report display/use requested; no mandatory receiving prerequisite is thereby satisfied. |
+| SB-R3 | Each estimate establishes the required inputs for its own stated operation. An eligible pair has comparable currency/period/basis. This is not a budget verdict. | An estimate for C/4 is presented as B/4's estimate: proposed binding fail/warning, while any frozen budget metric follows its existing unknown policy for unusable inputs. | A correctly associated quote is stale for the current operation, or required coverage/evidence is partial or unresolved. Permitted historical amounts may remain displayable. | Neither budget nor comparison requested; or known currency/basis incompatibility makes the separately scoped pair comparison not comparable. No implicit FX or conversion occurs. |
+| SB-R4a | Active, preview or retired is not deprecated; a retired item still fails SB-R4b. | Current item explicitly deprecated. | Current status or presence unresolved. | Disabled selection, historical-only display, or established absence handled by SB-R4b. |
+| SB-R4b | Qualified current evidence establishes active, preview or deprecated status. | Qualified evidence establishes retirement or absence in the exact exhaustive scope. | Source incomplete/unavailable or required status/presence unresolved. | Disabled selection or historical-only display. |
+| SB-R5 | A consuming rule's own assertion passes on sufficient eligible operands; no SB-R5 finding is emitted. | That rule's own assertion fails under its existing fixed severity; SB-R5 does not change it. | Known session/persistent-memory need plus withheld implementation gives W-R11 unknown/warning/defer. | W-R11's unresolved activating need skips that recommendation; this is not a universal policy for withheld operands. |
+
+Intersecting cases preserve assessment scope and deterministic precedence:
+
+- An exact original estimate whose rates expired after the historical evaluation
+  may still support that historical evaluation. Historical compatibility replay
+  consumes the retained estimate without recalculating it. A current budget
+  attempt requires its own eligible quote. Separately reproducing historical
+  cost arithmetic requires the original quantities, applicable rates and
+  calculation-policy basis; it does not replace the retained estimate.
+- A foreign-Build estimate plus a missing unrelated quote prerequisite keeps
+  the proposed binding failure and the unresolved detail. An additional
+  incompatible comparison currency does not erase either.
+- A complete, eligible 30-day USD estimate can be evaluated against its own USD
+  budget while a USD/EUR pair comparison is not comparable. Neither that
+  comparison nor the display predicate decides whether the USD budget passes.
+- Retired yields the narrow SB-R4a pass/warning and the independent SB-R4b
+  fail/error. Deprecation and availability are not one interchangeable verdict.
+
+### Conflicting evidence
+
+Follow #41's existing resolution sequence: normalize the claim, establish
+scope and version/date, compare authority, and apply its conservative treatment
+where equally ranked numeric evidence is applicable. Do not average
+categorical statuses, identities or currencies.
+
+- SB-R1: if competing evidence prevents resolution of the exact locked snapshot,
+  retain the dispute and give unknown/block. Once resolved, known absence
+  within that snapshot remains a failure.
+- SB-R2: directly observed unequal record identities are a mismatch, not an
+  evidence vote. Unresolved reference resolution can remain unknown without
+  erasing a separately known mismatch.
+- SB-R3: unresolved applicable rate disputes prevent establishing quote
+  eligibility under #41. They do not rewrite an immutable estimate's recorded
+  coverage or historical finding. Currency differences are a comparability
+  limitation, not a reason to average or convert them.
+- SB-R4a/b: genuinely tied categorical status/presence evidence stays unknown,
+  with the dispute retained in eligible explanation/evidence. Different scope,
+  a newer publication or lower authority is not automatically an equal-rank tie.
+- SB-R5: withholding is an unavailable operand, not itself conflicting evidence.
+  An actual dispute follows the consuming rule and #41.
+
+Disputed describes the evidence condition using the existing representation.
+It introduces no additional finding outcome or typed-value sentinel.
+
+### Version and migration boundary
+
+Every row carries this section's dated research proposal revision, not a
+released rule, schema or implemented ruleset version. Existing reports keep
+their producing versions and original outcomes; this companion does not relabel
+or migrate them. Future #40 acceptance must identify the actual accepted
+version and any required reader/migration behavior before implementation uses
+it. An unsupported path remains a qualified limitation; it authorizes no
+silent conversion, latest-input substitution or historical rewriting.
+
 ## Pricing and capacity
 
 No prices or capacity figures are recorded. Cost snapshots reference #39's `CostEstimate` semantics (V8); historical estimates are kept and labelled with their pricebook's `captured_at`. Whether historical prices may be shown at all depends on each source's applicable #60 display and export decision. The current product decision excludes GPUs.io API retrieval, display and export, including saved/shared build cost views (P8). The paid API and attribution conditions recorded in P4 do not establish eligibility for this product. Reconsider only on a specific permitted-use basis covering this product and a new #39/#41/#60 review.
@@ -412,7 +574,7 @@ released wire format is not a new prerequisite for research acceptance.
 | #41 | Confirm the invalidation table and the separate retained/current/disclosure boundaries | Original interim scope confirmed by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384). The actual delegated H41-42 receiving decision on 2026-10-18 accepts the later scoped interface (P9); no arbitrary TTL or whole sharing/migration policy is adopted |
 | #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | Accepted with constraints in actual receipt P13; final #40 wire integration and unadopted cost policy remain separate |
 | #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | Accepted with constraints in actual receipt P14; no deployment approval or execution |
-| #81 (#2/#3) | Incoming workload/mode inputs and the separate reverse share/report-prefill interface; Q7 is SB-7 | Actual #2 → #42 and #3 → #42 intake recorded in P12. They accept one primary workload, private non-transfer and complete projection qualification at their pins. The reverse #42 → #2/#3 disposition on this reconciled note remains a separately named receiving task |
+| #81 (#2/#3) | Incoming workload/mode inputs and the separate reverse share/report-prefill interface; Q7 is SB-7 | Actual #2 → #42 and #3 → #42 intake is recorded in P12. New reverse #42 → #2 and #42 → #3 decisions receive the reconciled source at their own pins (P16/P17), preserving one primary workload, private non-transfer, complete projection and fit-report qualification. |
 | #60 | #42 → #60: qualify historical/shared/exported views after a relevant material, use or permission change | Accepted with constraints in actual receipt P15; no blanket history deletion, retention grant or new source permission |
 | #51 | PCPartPicker save and share flows remain unobserved (P5); this note doesn't rely on them | Informational |
 
@@ -499,11 +661,33 @@ assignee, full-vendor re-audit or new test run is attributed to those reviews.
 | [#42 → #60 / 6256566108](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6256566108) | Rights blob `2fb0aa8d4c51448f111dbc82a8123206646f61c6` | Material/use-qualified complete projections, retained-history limits and current exclusions. Relevant changes require qualification without automatically cancelling every historical grant or permitting every later use. |
 
 These decisions receive the existing producer at the stated blob. Independent
-review and delivery of this reconciliation remain separate. The remaining
-named receiving work is **#40's disposition of the reconciled SB choices and
-complete projection**, and **the reverse #42 → #2/#3 configuration/report-prefill
-interface**. #42's current assignees coordinate those scopes with the respective
-issue owners; the incoming P9/P10/P12 receipts are not silently reversed.
+review and delivery of this reconciliation remain separate. The new reverse
+configuration/report-prefill decisions below are separately recorded; the incoming P9/P10/P12 receipts are not silently reversed. The
+remaining named receiving work is **#40's disposition of the reconciled SB
+choices, complete projection and common-format companion**. #42's current
+assignees coordinate that scope with the central owners; its live #40
+prerequisite and this amendment's actual reviewed delivery remain separate.
+
+On 2026-10-19, the complete producer at PR #431 source
+`03e347b44b8d03bc2e9abda10a97b43cfcd430c8`, note blob
+`c576628557274c611f52ad36c8de8c27281ec8bb`, was received in the two reverse
+interfaces below. The root engineer read that complete producer and the
+consumer sections named in each receipt; an in-session peer independently
+assessed those supplied interfaces. Fresh complete-tree readback at accepted
+`ec29b802ff1a3c8a2f1e89384a0c4dc9b89c8a60` confirmed the exact consumer
+leaves originally inspected at `45b8fe1c`. These are actual delegated project
+engineering decisions through CompleteDotTech, without an absent assignee's
+reply, full-consumer/vendor audit or execution claim.
+
+| Direction / receipt | Exact consumer leaf | Accepted scope and retained limit |
+| --- | --- | --- |
+| [#42 → #2 / 6256878974](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6256878974) | Workload `d8e86c8794ce175020e3457e62cba86c124f82ca` | One primary workload, own Build/revision associations, independent fork inputs and specific W-R11/CD-12 scopes. No cross-build co-residency, invented quantities or fit evidence. |
+| [#42 → #3 / 6256879792](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6256879792) | Deployment mode `8d64fcc0bf16222b0ed3e06dc53c396e525c0741` | Exact historical association, current EV-1 eligibility, complete disclosure and prefill-only reporting. No inferred measurement, consent, community admission or purge/retention guarantee. |
+
+These receipts accept their exact producer interface. They do not
+retroactively accept the later common-format companion's policy completions.
+The already completed #2/#3 research records retain their own original
+acceptance; this additional intake neither reopens them nor completes #42.
 
 ## Acceptance criteria coverage
 
@@ -520,9 +704,9 @@ issue completion. Research acceptance does not require implementing the builder.
 | Decision record merged at `research/T0-configuration/saved-shared-builds.md` following the research method | Proposal sequencing; current delivery reconciliation | Original #114 and later #396/#412/#397 contributions are delivered. This amendment's actual reviewed main delivery must be recorded on its PR; #42 is not completed by this table. |
 | Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Candidate options; Deployment modes covered; Comparison; P12 | API, managed and self-hosted serving plus hybrid composition covered with their separate historical-v1 and researched per-component representations. |
 | Comparison fields defined with type, unit, and evidence requirement | Comparison fields; frozen field mapping; SB-R3 and P13 | Types, units, evidence and comparison basis recorded; missing quantities, cost coverage or calculation policy do not become invented values. |
-| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; CD-7 historical candidate; P10/P11 | Original SB rule identities and contract-derived/hypothesis labels retained. Synthetic historical replay is bounded evidence, not independent vendor verification or a released successor rule format. Required-field mapping to the actual common research format still needs #40 disposition. |
-| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P15 | Primary contract/external references retain actual access dates and scopes. New content records project choices and exact receiving/source evidence; it introduces no new vendor measurement, price or licence claim. |
-| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; current receiving reconciliation | P9/P10/P12 and actual outgoing P13–P15 received at their stated directions. Final #40 disposition and reverse #42 → #2/#3 review remain explicitly outstanding. |
+| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; CD-7 historical candidate; P10/P11 | Original SB rule identities and contract-derived/hypothesis labels retained. Synthetic historical replay is bounded evidence, not independent vendor verification or a released successor rule format. The common-format companion maps every actual template field, separates SB-R5's operand policy, and supplies synthetic applicability/outcome/dispute cases and a research revision. Its explicitly proposed completions still need #40 disposition. |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P17 | Primary contract/external references retain actual access dates and scopes. New content records project choices and exact receiving/source evidence; it introduces no new vendor measurement, price or licence claim. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; current receiving reconciliation | P9/P10/P12 and outgoing P13–P17 are received at their stated directions and exact pins. Final #40 disposition, the live prerequisite and actual reviewed delivery remain explicitly outstanding. |
 | Open questions recorded with a named follow-up owner | Open decisions (SB-); SB-9 accountable follow-up | All remaining decisions have accountable workstreams; retention periods/deletion completion are documented with @tynamite/@appletechie and #41/#40 consultation. |
 
 ## Evidence
@@ -560,6 +744,8 @@ issue completion. Research acceptance does not require implementing the builder.
 | P13 | [#42 → #39 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6256564986) | 2026-10-18 | Producer/consumer at `45b8fe1c`, exact blobs in reconciliation above | Project engineering receiving decision | Bounded snapshot/cost/comparison interface; no refreshed vendor rates, adopted FX defaults or production estimator |
 | P14 | [#42 → #37 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6256565553) | 2026-10-18 | Producer/consumer at `45b8fe1c`, exact blobs above; frozen manifest and gates read | Project engineering receiving decision | Pinned revision and actual approvals; schema conformance or historical evidence is not deployment approval |
 | P15 | [#42 → #60 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6256566108) | 2026-10-18 | Producer/consumer at `45b8fe1c`, exact blobs above | Project engineering receiving decision | Complete-view qualification consumes existing project exclusions; no new primary terms check, publisher grant or retention duration |
+| P16 | [#42 → #2 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6256878974) | 2026-10-19 | Producer `03e347b4` / saved leaf `c5766285`; consumer `d8e86c87`, confirmed at accepted `ec29b802` | Project engineering receiving decision | Bounded workload/share/fork interface; no execution, named-assignee reply, released schema or retroactive common-format acceptance |
+| P17 | [#42 → #3 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6256879792) | 2026-10-19 | Producer `03e347b4` / saved leaf `c5766285`; consumer `8d64fcc0`, confirmed at accepted `ec29b802` | Project engineering receiving decision | Bounded comparison/report-prefill interface; no measurement, consent, new source permission or retroactive common-format acceptance |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; the contract decisions and #42 prerequisite remain open.
 
