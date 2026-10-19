@@ -1,3 +1,4 @@
 * text=auto eol=lf
 # Preserve the exact bytes recorded in the upstream import manifest.
 contracts/v1/** -text
+research/market/measurements/gguf-parser-mr09/derivative.patch -whitespace
