@@ -1,0 +1,25 @@
+{
+  "classification": "read-only local capacity observations; no reservation or fit guarantee",
+  "observed_utc": "2026-10-19T06:47:22.946237+00:00",
+  "logical_cpu_count": 16,
+  "processor_identifier": "Intel64 Family 6 Model 165 Stepping 5, GenuineIntel",
+  "host_ram_total_bytes": 68608233472,
+  "host_ram_available_bytes": 35371692032,
+  "temporary_disk_free_bytes": 29352468480,
+  "gpu_samples": [
+    {
+      "observed_utc": "2026-10-19T06:47:20.791715+00:00",
+      "csv": "index, name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB], utilization.gpu [%], power.draw [W], power.limit [W]\n0, NVIDIA GeForce RTX 5070 Ti, 610.88, 16303 MiB, 5138 MiB, 10860 MiB, 15 %, 50.48 W, 300.00 W"
+    },
+    {
+      "observed_utc": "2026-10-19T06:47:21.876658+00:00",
+      "csv": "index, name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB], utilization.gpu [%], power.draw [W], power.limit [W]\n0, NVIDIA GeForce RTX 5070 Ti, 610.88, 16303 MiB, 5134 MiB, 10864 MiB, 16 %, 49.76 W, 300.00 W"
+    },
+    {
+      "observed_utc": "2026-10-19T06:47:22.946237+00:00",
+      "csv": "index, name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB], utilization.gpu [%], power.draw [W], power.limit [W]\n0, NVIDIA GeForce RTX 5070 Ti, 610.88, 16303 MiB, 5134 MiB, 10864 MiB, 14 %, 49.40 W, 300.00 W"
+    }
+  ],
+  "workload_changes": false,
+  "power_limit_changes": false
+}
