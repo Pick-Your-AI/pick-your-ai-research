@@ -245,6 +245,124 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 | D-21 | eval-only source (e.g. a benchmark) included in training data | Excluded | fail / error | T11, T12, T15 | source checked |
 | D-22 | format ∉ the selected framework/service formats (table above) | Incompatible | fail / error | T30–T38 | source checked per row; v1 has no format field |
 
+### D-series outcome interpretation 0.2
+
+**Status: prospective research interpretation of D-01 and D-14 only.** This
+subsection uses the [shared rule template](../../templates/rule-proposal.md) and
+the accepted [fixed-severity/outcome policy](../T0-configuration/component-schema-compatibility.md#rule-format-and-outcome-semantics-decided).
+It preserves the historical rows above, their evidence dates and their source
+limitations. It does not adopt a ruleset, change frozen dispatch, certify a
+dataset, or decide actual rights/privacy applicability. The two rules' original
+shorthand remains attributable to its original revision.
+
+Project sources checked for this interpretation on 2026-10-19 are the shared
+policy/template, [frozen governance rule](../../contracts/v1/baseline/core-ruleset.json),
+[selection schema](../../contracts/v1/schemas/selection.schema.json),
+[CatalogItem schema](../../contracts/v1/schemas/catalog-item.schema.json) and
+[reference evaluator](../../contracts/v1/reference/evaluate.py). The external
+R1–R4 and R22 entries retain their original access dates and qualifications;
+this interpretation is not a fresh legal-source or current-terms check.
+
+#### Common binding, evidence and outcome boundary
+
+The frozen `rule.training.dataset.governance` selects enabled
+`training_dataset` role `primary`, reads selection `/id`, then the same selected
+catalog's `/spec/license_verified` and `/spec/privacy_approved`. It keeps fixed
+`error` severity and `on_unknown: block`. Its original `exists` reader treats an
+unresolved operand as false; that historical behavior is unchanged here. The
+later required-presence research path is separate, with its own declared scope.
+
+For these two prospective interpretations, identify the exact primary dataset
+selection by `/id`, `/kind`, `/role`, `/catalog_item_id` and
+`/catalog_item_version`, and match the catalog's `/id` and `/version`. Retain the
+accepted complete-input identity checks and strict role policy. Do not choose an
+arbitrary match, widen `primary` to every dataset, or invent a primary selection
+for an upstream source. Resolve each relevant `/spec/data_source_refs` member
+to its actual source identity and separately qualified revision, included
+records, transformation, subject, intended use and operation. An ID-only
+reference, a declared version or a governance Boolean cannot supply those facts.
+
+The applicability and assertion facts below are accompanying research evidence,
+not newly available frozen JSON fields. Each has its own declared fact definition
+and exact source/subject/use/period binding. A qualified exact Boolean answer is
+distinct from a missing, withheld, unknown or otherwise unresolved CD-1 answer.
+A legal/source assessment and its attestation keep the actual responsible
+assessor's attribution under [CD-12](../T0-configuration/component-schema-compatibility.md#selected-research-representations-for-cd-1-cd-6-cd-10-and-cd-12--2026-10-18).
+Neither this rule proposal nor a technically valid attestation supplies that
+assessment. A fact from another source, dataset revision, subject, operation or
+terms version is not silently reused.
+
+Both interpretations use **fixed `error` severity for every outcome** and propose
+`on_unknown: review` for their unresolved evidence. This is research review
+handling, not a readiness grant or a replacement for the independent frozen
+governance block. A passing error rule is not a failure. A blocking unknown
+elsewhere remains unknown; it must not be rewritten as a known false fact.
+
+An established false applicability yields `skipped`; unresolved applicability
+yields `unknown`, even when some document links or flags are present. A known
+absence of an applicable optional training activity is different from an
+unresolved required dataset/activity binding. Missing or withheld evidence is
+never converted into an empty complete inventory, a negative assessment or a
+permission. Apply the accepted evidence scope/conflict policy before evaluating
+an assertion, and retain the participating evidence and unresolved reasons.
+A result resting on checked-only evidence retains its `unverified` qualification;
+the fixed severity is independent of that qualification.
+
+#### D-01: the qualified C2/C3 documentary requirements
+
+| Shared-format field | Interpretation |
+| --- | --- |
+| Participants, roles and fields | The common exact primary-dataset/source binding plus the actual training operation, modified and base-model identities, relevant actor/act/market assessment and qualified compute comparison. Carry each additional participant's explicit selection ID and declared role; do not infer a model or compute participant from a name. Policy/summary applicability and satisfaction are note-only scoped evidence; v1 supplies no JSON pointers for them. |
+| Applicability | The responsible source-scoped assessment establishes that the particular C2 and C3 requirements described by D-01 apply to this actor, modification and activity. R1–R4 and the recorded compute comparison remain inputs to that assessment. The one-third comparison, a build-level EU flag or a deployment label alone does not decide it. A different applicable obligation retains its own condition and assessment. |
+| Assertion and evidence | Both the actual copyright-policy requirement and the actual training-summary requirement are satisfied for that same assessment scope. Record each qualified answer and its evidence separately. A document URI does not establish that the relevant requirement is satisfied, and an unanswered field does not establish that the document does not exist. Preserve R1–R4's source-checked and non-binding-guidance limitations. |
+| Severity and missing data | Fixed `error`; proposed `on_unknown: review`. With applicability established, both answers true give `pass`; a qualified false answer gives `fail` with its known unmet-requirement witness, even if the other answer remains unresolved. Otherwise unresolved required evidence gives `unknown`. False applicability gives `skipped`; unresolved applicability gives `unknown`. |
+| Explanation and remediation | Identify the exact known unmet requirement or unresolved assessment/evidence and its scope. Obtain or correct that particular documentary evidence or the responsible applicability assessment. A fail is failure of this stated requirement, not an adjudication of illegality; a pass supplies no general training permission, privacy approval or dataset-readiness result. |
+| Dependencies and affected consumers | #31/#30 supply only their actual compute/configuration/framework facts. #32 and the responsible dataset/source assessor retain source and rights/privacy assessment; #33 receives scoped dataset/lineage evidence. #40's CD-1/CD-12 retain typed answers and scoped attestations. The existing receiving decisions and broader four-note reconciliation keep their own authorship and scope. |
+| Version and migration | This is D-01's explicitly prospective interpretation 0.2. A future consumer must select and review its version and applicability; the original D-01 row, frozen governance rule, previously stored findings and original readers are not rewritten. No new v1 field or universal compatibility flag is introduced. |
+
+**Clearly synthetic, reasoned examples; no dataset, legal determination or test
+execution is represented by these cases:**
+
+| Case | Qualified research inputs | Outcome / fixed severity and limit |
+| --- | --- | --- |
+| D01-P | Applicability established; policy requirement satisfied; summary requirement satisfied | `pass / error` for these two documentary requirements only. |
+| D01-F | Applicability established; policy requirement affirmatively assessed as unmet; summary satisfied | `fail / error`, retaining the known policy witness. |
+| D01-FU | Applicability established; policy requirement affirmatively assessed as unmet; summary answer withheld | `fail / error` from the qualified policy witness; retain the separate withheld reason, without claiming complete evidence. |
+| D01-U | Applicability established; policy satisfied; summary answer missing | `unknown / error`; no known document-absence finding is manufactured. |
+| D01-AU | Compute/market data or both document links exist, but the actual applicability assessment is unresolved | `unknown / error`; links and arithmetic do not establish applicability. |
+| D01-NA | The responsible scoped assessment establishes that this particular pair of D-01 obligations does not apply | `skipped / error` for D-01; other actual obligations and governance checks remain separate. |
+
+#### D-14: the qualified source/use exception condition
+
+| Shared-format field | Interpretation |
+| --- | --- |
+| Participants, roles and fields | The common primary-dataset binding and **one qualified upstream source/use/terms scope**: exact `data_source` identity and separately qualified revision, included output subset and preparation lineage, intended training activity, contracting subject and applicable agreement/condition. `/spec/data_source_refs` establishes only the catalog-ID association. Generator/model-family names, a true flag or the dataset's aggregate label do not supply the missing scope. |
+| Applicability | The responsible assessment establishes that the covered OpenAI outputs and actual proposed activity fall within the identified competing-model restriction's source/use/agreement scope. A complete qualified finding of no covered source/use can make this narrow condition non-applicable. Unknown inclusion, purpose, applicable terms or agreement binding remains unresolved; an incomplete source inventory is not evidence of absence. |
+| Assertion and evidence | The applicable condition's exception is affirmatively established for that same source, use, subject and terms version. R22 retains only its documented historical archived-snapshot scope and the original unreadable-live-page limitation. This proposal neither asserts the contents of current OpenAI terms nor decides that any real activity qualifies for an exception. |
+| Severity and missing data | Fixed `error`; proposed `on_unknown: review`. Established applicability plus a qualified exception gives `pass / error`; established applicability plus a qualified determination that no exception applies gives `fail / error`. Missing, withheld or unqualified exception evidence gives `unknown / error`. Established non-applicability gives `skipped / error`. A changed terms version without eligible assertion evidence is unresolved, not an automatic exception or skip. |
+| Explanation and remediation | Identify the exact source/use condition, applicable terms and qualified answer or unresolved reason. Obtain the scoped source/use assessment and its supporting evidence before relying on the exception. A pass clears only this condition for this scope; it does not approve the dataset as a whole, grant a licence, establish another provider's permission or replace independent rights/privacy checks. |
+| Dependencies and affected consumers | #13/#32 retain shared source identity, training-purpose lineage and rights assessment; #33 receives only the qualified dataset/artifact interface. CD-1 preserves unresolved reasons, CD-6 the exact condition/participant binding and CD-12 the actual scoped attestation. Existing #36 leakage evidence and governance rules remain independent. |
+| Version and migration | This is D-14's explicitly prospective interpretation 0.2. The historical outcome-dependent severity shorthand is retained above as history; this new interpretation keeps error fixed. Future versioned adoption must identify this interpretation and its evidence scope. No stored result, original reader, v1 field or currently dispatched rule is changed. |
+
+**Clearly synthetic, reasoned examples; these are not current-terms findings,
+dataset approvals or executed tests:**
+
+| Case | Qualified research inputs | Outcome / fixed severity and limit |
+| --- | --- | --- |
+| D14-P | Covered source/use/terms applicability established; the exact exception affirmatively qualified | `pass / error` for that condition, retaining any checked-only `unverified` qualification. |
+| D14-F | Applicability established; the qualified assessment explicitly determines no exception applies | `fail / error` for that condition. |
+| D14-U | Applicability established; exception answer missing or withheld | `unknown / error`; model resemblance or a missing answer is not an exception decision. |
+| D14-NA | Complete qualified source/use evidence establishes no covered outputs or activity | `skipped / error` for D-14 only, not a general rights pass. |
+| D14-V | Archived R22 text is available, but no qualified binding to the selected changed terms exists | `unknown / error`; do not transplant the historical exception. |
+| D14-S | An exception attestation belongs to a different dataset revision, subject or operation | `unknown / error`; preserve the mismatch and obtain the correctly scoped evidence. |
+
+The [existing four-note reconciliation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6251890646)
+retains D-20/E-R44, the actual receiving summaries and the wider completion work.
+[The exact-section coordination](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6257519378)
+covers only this additive D-01/D-14 interpretation. These two bounded
+shared-format proposals do not by themselves complete all 22 D-series rows,
+the remaining literal #32 research criteria, or the overall T5 workstream.
+
 ## Pricing and capacity
 
 Not applicable. Dataset preparation costs (PII scanning, LLM-judge decontamination calls, synthetic generation) are compute or API costs, priced by #31 and #39. LLM-judge decontamination needs one judge call per flagged train/eval pair; it is not priced here.
