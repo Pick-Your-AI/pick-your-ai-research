@@ -10,6 +10,8 @@ from types import SimpleNamespace
 import unittest
 from unittest import mock
 
+from mr09_fixture_support import symlink_or_skip
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 try:
@@ -26,6 +28,11 @@ class PreflightOutputPreservationTests(unittest.TestCase):
             output = directory / "synthetic-screen.json"
             target = directory / "synthetic-link-target.json"
             original = b'{"synthetic":"retained original screen"}\n'
+            prepared_link = directory / "synthetic-pending-link"
+            if occupied in ("live_symlink", "dangling_symlink"):
+                # Capability skips must happen outside the producer's broad
+                # error handler, while the output still arrives at its hook.
+                symlink_or_skip(prepared_link, target)
 
             def occupy():
                 if occupied == "file":
@@ -36,7 +43,9 @@ class PreflightOutputPreservationTests(unittest.TestCase):
                 else:
                     if occupied == "live_symlink":
                         target.write_bytes(original)
-                    output.symlink_to(target)
+                    self.assertFalse(output.exists() or output.is_symlink(),
+                                     "synthetic arrival must not overwrite a prior entry")
+                    prepared_link.rename(output)
 
             if occupied and not arrival:
                 occupy()

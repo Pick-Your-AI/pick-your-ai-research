@@ -13,6 +13,8 @@ import sys
 import unittest
 from unittest.mock import patch
 
+from mr09_fixture_support import symlink_or_skip
+
 SPEC = importlib.util.spec_from_file_location("mr09_measure", Path(__file__).resolve().parents[1] / "scripts/mr09_measure.py")
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
@@ -87,7 +89,7 @@ class MeasurementOutputPreservationTests(unittest.TestCase):
                     else:
                         if kind == "symlink":
                             retained.write_bytes(original)
-                        output.symlink_to(retained)
+                        symlink_or_skip(output, retained)
                     before = {str(path.relative_to(root)): path.read_bytes()
                               for path in root.rglob("*") if path.is_file() and not path.is_symlink()}
                     argv = ["mr09_measure.py", "--model-dir", str(model), "--output", str(output)]
