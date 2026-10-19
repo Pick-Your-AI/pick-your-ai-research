@@ -35,9 +35,13 @@ def summarize(directory=DIRECTORY):
     if (device['remote'] is not False or type(device['position']) is not int
             or device['position'] != 0 or device['handleOutputLayer'] is not True):
         raise ValueError('device placement drift')
+    # Validate both raw operands before max can discard either one.
+    graph, output = device['computation']['graph'], device['computation']['output']
+    if any(type(value) is not int or not 0 <= value < 2**64 for value in (graph, output)):
+        raise ValueError('exact integer byte terms required')
     terms = [device['footprint'], *[device['weight'][key] for key in ('input','compute','computeOverridden','output')],
              device['kvCache']['key'], device['kvCache']['value'], device['computation']['footprint'],
-             device['computation']['input'], max(device['computation']['graph'], device['computation']['output'])]
+             device['computation']['input'], max(graph, output)]
     if any(type(value) is not int or not 0 <= value < 2**64 for value in terms):
         raise ValueError('exact integer byte terms required')
     estimate = sum(terms)
