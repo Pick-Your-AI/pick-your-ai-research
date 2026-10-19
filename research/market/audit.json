@@ -1038,5 +1038,321 @@
       ]
     },
     "limitations": "Project field-option IDs and hidden fields were not audited; see separately timestamped public UI readback."
-  }
+  },
+  "post_snapshot_audits": [
+    {
+      "reviewed_on": "2026-10-18",
+      "artifact_baseline_commit": "85a6ccee1a25aae8c90a6db5370ad9f001be2eb4",
+      "classification": "Repository evidence/metadata continuation; not a fresh vendor, product, experiment or participant observation",
+      "readback": "research/market/audit-readback-2026-10-18-1621.json",
+      "readback_sha256": "010f03b49140885d0fb2539070f305f4bce1fd9e9bfb716afbb331b855af3e2d",
+      "issue_list_completed_at": "2026-10-18T16:21:10Z",
+      "native_relationship_capture_completed_by": "2026-10-18T16:29:51Z",
+      "evidence_audit": "docs/market-research/audit.md#current-continuation--2026-10-18-after-the-1621-issue-readback",
+      "risk_register": "research/market/risk-register.md#current-decisions-after-the-1621-readback--2026-10-18",
+      "pinned_reference_inputs": {
+        "docs/market-research/audit.md": "ca19ad935fec7e1cbe20eccb28c241ca92d59949",
+        "research/market/competitors.json": "83464bb659b0c33c0fef4af439c812b38f1cff14",
+        "research/market/sources.json": "b151438ded6b84db23cccd70ced9182464748134",
+        "research/market/mr01-acceptance.md": "73af68229a577cd3f7b78e410049a1ba763cf125",
+        "research/market/features.json": "b511e2e895bd75bbaf7d2bf7d15f196d4f753b04",
+        "research/market/feature-matrix.md": "0dccc6b15c10005f9cb22022a39e434cf129965f",
+        "research/market/mr02-acceptance.md": "3151b839be44ca896c5eb8346dd2c65a8e9461bf",
+        "research/market/competitors/README.md": "1656e8b963eb14db51e1fbc943cc65f65a640229",
+        "research/market/pcpartpicker.md": "b377b823d9316b65ddc5850a0fd82f387110fc69",
+        "research/market/customers.md": "03e36d4fee2c4ca389505041deac33d6bcf5ace7",
+        "research/market/market-sizing.md": "cda20184709967af324ac994679010c49a284064",
+        "research/market/monetization.md": "3baf64e0aca6c9190bc6012fde5cc62e3fe9baf8",
+        "research/market/integrations.json": "159766a48d7ec4460cbdc327dd5033d9f1b137a7",
+        "research/market/rights-validation.md": "2fb0aa8d4c51448f111dbc82a8123206646f61c6",
+        "research/market/technical-feasibility.md": "3c6502f8fde84dd5b41544741ac552331d4aecad",
+        "research/market/sizing-validation.md": "98dbe4e65d4e4f32cf026d9103de6e9a77fa480d",
+        "research/market/mr09-acceptance.md": "71a289a8e86af57aee25a52da8991f13397a8262",
+        "research/market/benchmark-validation.md": "1ab917cda860cabfce5d2280475613fd1ae11f61",
+        "research/market/customer-validation.md": "497b61ddee00218ac1ed7cfa94a528fd667900d3",
+        "research/market/pricing-validation.md": "615de5ff2f447b265a0631217bba62e80b757c73",
+        "research/market/rag-validation.md": "63d1cf38648e1e5d017b9b1e380672117a036395",
+        "research/market/rag-bge-qdrant-source-comparison.md": "efd8ee8ac8671bf57df02cf425a5740bd7781161",
+        "research/market/differentiation.md": "02632ffe22d18a8f50d90a3abb798914485d5181",
+        "research/market/mvp-analysis.md": "aa04388e7d050a4ec9a4c08ed370da49c74ee0f8",
+        "research/market/substitute-validation.md": "a8956ac7c412571e421cfe464a4db4934d9df009",
+        "research/market/synthesis.md": "370a5a142a91759d654f59a6ba2ffaef3b63f2f9",
+        "research/T2-infrastructure/gpu-compute.md": "32f2e8a48f69c51e3517a15e28dbc162eda6b725"
+      },
+      "input_scope": "Indexes the accepted source notes/receipts and exact baseline identities used for this continuation. It is not a claim that this author freshly reran every experiment or reread every original vendor page/profile line.",
+      "metadata_qa": {
+        "issue_count": 55,
+        "technical_issue_count": 35,
+        "market_issue_count": 20,
+        "issue_state_counts": {
+          "open": 35,
+          "closed": 20
+        },
+        "native_parent_count": 13,
+        "native_child_edge_count": 47,
+        "native_parent_child_reciprocal": true,
+        "native_parent_graph_acyclic": true,
+        "technical_labels_and_optional_scope_match": true,
+        "all_assignees_present_and_distinct": true,
+        "declared_handoff_pairs": 98,
+        "declared_pairs_unchanged_from_cutoff": true,
+        "ledger_receiving_assignees_match": true,
+        "ownership_changes_since_cutoff": [],
+        "parent_changes_since_cutoff": [],
+        "label_changes_since_cutoff": [],
+        "native_blocked_by_edges": [
+          [
+            42,
+            40
+          ],
+          [
+            57,
+            66
+          ],
+          [
+            58,
+            66
+          ]
+        ],
+        "open_native_blocker_edges": [
+          [
+            42,
+            40
+          ]
+        ],
+        "closed_issue_ids": [
+          5,
+          9,
+          10,
+          11,
+          26,
+          27,
+          28,
+          48,
+          49,
+          50,
+          52,
+          53,
+          54,
+          55,
+          57,
+          58,
+          60,
+          64,
+          65,
+          66
+        ]
+      },
+      "project_status": "Unavailable in this continuation: both public retrieval attempts returned DisabledError / Failed to fetch; no current values or option IDs observed and no fields changed.",
+      "historical_preservation": {
+        "original_audit_fields": "unchanged",
+        "ordered_handoff_pairs": 101,
+        "cutoff_owner_review_objects": 28,
+        "cutoff_response_records": 22,
+        "preexisting_post_snapshot_reviews": 65,
+        "receiving_review_status_counts": {
+          "scoped_response_recorded": 44,
+          "not_yet_confirmed": 55,
+          "author_integration_only": 2
+        },
+        "original_current_audit_acceptance_pending": 19
+      },
+      "appended_receipts": [
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/48#issuecomment-6249724402",
+          "submitted_at": "2026-10-18T12:07:37Z",
+          "market_issue": 48,
+          "consumers": [
+            6,
+            10,
+            25,
+            41
+          ],
+          "scope": "Four actual narrowed discovery/method/material-use intakes; prepared note and input main are separately pinned in the ledger."
+        },
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/50#issuecomment-6250241594",
+          "submitted_at": "2026-10-18T13:03:01Z",
+          "market_issue": 50,
+          "consumers": [
+            6,
+            10,
+            25,
+            39,
+            41
+          ],
+          "scope": "Five actual narrowed profile/identity/quantity/method/rights intakes; candidate index and input main are separately pinned in the ledger."
+        },
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6248409055",
+          "submitted_at": "2026-10-18T09:47:37Z",
+          "market_issue": 59,
+          "consumers": [
+            25,
+            26,
+            27
+          ],
+          "reviewed_commit": "af1a23847759913e9449bb5df425b56e84d39689",
+          "scope": "Three actual constrained dated-audit intakes only; this new continuation is not accepted by that earlier receipt."
+        },
+        {
+          "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6252720208",
+          "submitted_at": "2026-10-18T17:09:48Z",
+          "market_issue": 59,
+          "consumers": [
+            2,
+            3,
+            5,
+            6,
+            7,
+            9,
+            10,
+            11,
+            16,
+            25,
+            26,
+            27,
+            33,
+            36,
+            37,
+            39,
+            40,
+            41,
+            42
+          ],
+          "reviewed_commit": "9bd175cc3bd710ea31b956dd560beb1cf3929fe9",
+          "reviewed_commit_location": "local_preparation",
+          "reviewed_composition_commit": "a8cbadc8fe662c8aca1d6534e8b326c26c067d80",
+          "reviewed_composition_location": "local_preparation",
+          "scope": "Nineteen actual current audit/context intakes with seven bounded scope groups; no receiving implementation, unavailable Project or whole-issue acceptance."
+        }
+      ],
+      "post_snapshot_review_record_count": 96,
+      "source_record_dates": {
+        "source_records": 58,
+        "original_access_dates": {
+          "2026-10-16": 57,
+          "2026-10-17": 1
+        },
+        "records_with_separate_rechecks": 41,
+        "separate_rechecks": 48,
+        "new_vendor_access_in_this_audit": false,
+        "source_dates_modified": false,
+        "blanket_ttl_adopted": false
+      },
+      "current_audit_receiving": {
+        "status": "accepted_with_constraints",
+        "url": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/59#issuecomment-6252720208",
+        "submitted_at": "2026-10-18T17:09:48Z",
+        "posted_through_github_account": "CompleteDotTech",
+        "role": "Actual in-session coordinating and receiving engineer under express project delegation; no absent-assignee attribution",
+        "consumers": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          16,
+          25,
+          26,
+          27,
+          33,
+          36,
+          37,
+          39,
+          40,
+          41,
+          42
+        ],
+        "groups": [
+          {
+            "consumers": [
+              2,
+              3
+            ],
+            "scope": "population, scenario and completed-desk-scope context",
+            "limits": "Preserve #53 → #2's rejection. Adopt no workload default, deployment choice, reachable-market estimate, willingness-to-pay or demand claim."
+          },
+          {
+            "consumers": [
+              5,
+              6,
+              7,
+              9,
+              10,
+              11
+            ],
+            "scope": "dated discovery, provider/model identity, capacity/requirement, context/concurrency/quantity and independently dated empirical-cohort context",
+            "limits": "Adopt no capability, calibrated ResourceEstimate, memory/headroom bound, hardware reservation, execution gate waiver or source grant."
+          },
+          {
+            "consumers": [
+              16
+            ],
+            "scope": "documentary connector/configuration and authorization-gap context",
+            "limits": "Keep the HYBRID source conflict unresolved; accept no production tuple, corpus permission, successful retrieval or access-control result."
+          },
+          {
+            "consumers": [
+              25,
+              26,
+              27
+            ],
+            "scope": "current audit mapping, attribution and material/package/API/inspection-versus-execution context",
+            "limits": "Preserve the earlier af1a2384 review separately. Adopt no framework requirement, installed integration, caller-safety claim, MCP compatibility or production admission."
+          },
+          {
+            "consumers": [
+              33
+            ],
+            "scope": "separately dated current T5 documentary slice and actual intake context",
+            "limits": "Preserve historical counts. Adopt no training/serving artifact, lineage, dataset right or expansion of optional T5 into the MVP."
+          },
+          {
+            "consumers": [
+              36,
+              37,
+              39
+            ],
+            "scope": "benchmark-identity/uncertainty gaps, evaluation-versus-execution distinctions, pricing eligibility/coverage and prospective comparison-method context",
+            "limits": "Adopt no evaluation result, threshold/ranking, deployment gate, normalized supplier rate, full bill, savings, service equivalence or default FX/region policy."
+          },
+          {
+            "consumers": [
+              40,
+              41,
+              42
+            ],
+            "scope": "frozen/shared-boundary, exact-revision integrity, source/use/date and narrowly observed save/export context",
+            "limits": "Adopt no frozen-v1 edit, publication receipt, source qualification, real-data promotion, redaction authority or complete native-lifecycle claim."
+          }
+        ],
+        "reviewed_local_preparation": "9bd175cc3bd710ea31b956dd560beb1cf3929fe9",
+        "reviewed_local_tree": "b604acac81856bbf874fcea31d07de70019ec99f",
+        "reviewed_local_composition": "a8cbadc8fe662c8aca1d6534e8b326c26c067d80",
+        "reviewed_local_composition_tree": "2d8d590d9f4fdef80f34923db8b94ca72464fd36",
+        "reviewed_main_commit": "f897e98a72583c8d43df7e3982b57f1a42c5079b",
+        "reviewed_six_blobs": {
+          "docs/market-research/audit.md": "f00bb6302ef4c96091b07660ea4a1ff0585fdfda",
+          "research/market/audit-readback-2026-10-18-1621.json": "e2f3fac9cd472ddced03a3dd9d9c19a2a8b549c4",
+          "research/market/audit.json": "97327e0e6bb4d2c12cd855d3d2101b93d4a64cfe",
+          "research/market/handoffs.json": "c79ba9a85e703997a39b7a7063bc0431f04912c7",
+          "research/market/handoffs.md": "0a2ef76f46091a2e55294d25051fa5ea06f33864",
+          "research/market/risk-register.md": "1420bd014c2db595c7fbad774e23748ed856a180"
+        },
+        "historical_af1a2384_receipt_scope": "The three earlier T4 decisions remain attached to their original artifact revision.",
+        "limits": "No fresh vendor, product, experiment, participant or rights observation; no Project synchronization, source/production grant or completion of receiving implementations or whole #59. Final published source and actual gates retain separate identities."
+      },
+      "executive_synthesis": {
+        "owner_issue": 47,
+        "path": "research/market/synthesis.md",
+        "reviewed_blob": "370a5a142a91759d654f59a6ba2ffaef3b63f2f9",
+        "status": "Existing accepted 8df56f1 snapshot preserved; concrete current-count/scope/state update offered in the audit, with no new overall program decision or edit to the existing writer’s source."
+      },
+      "validation_status": "Exact candidate repository validation and independent evidence/intake review are recorded in delivery receipts; not inferred from this metadata object."
+    }
+  ]
 }

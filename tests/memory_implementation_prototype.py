@@ -1,14 +1,16 @@
-"""Versioned synthetic M1/W-R11 evaluation over caller-qualified memory facts.
+"""Versioned synthetic declaration and recovery checks for W-R11 and M1.
 
 This normalized Python interface is not a frozen Build reader, wire format,
 catalog resolver or evidence authenticator. The caller must validate the full
-Build/references, establish the complete selection inventory, resolve source
-conflicts, and qualify each fact for the exact declared configuration and
-recovery requirement. No kind or backing label supplies a recovery fact.
+Build/references and establish the complete selection inventory. For M1, the
+caller also resolves source conflicts and qualifies each fact for the exact
+declared configuration and recovery requirement. No kind or backing label
+supplies a recovery fact.
 
-The existential implementation requirement is separate from all-enabled
-selection rules, authorization, retention and deletion checks. Its pass is
-only a witness for the stated recovery scope, never a whole-build verdict.
+W-R11 asks whether an active implementation is declared for the stated need.
+M1 separately checks caller-qualified recovery evidence. Both remain separate
+from all-enabled selection rules, authorization, retention and deletion. A
+recommendation pass supplies no recovery evidence or whole-build verdict.
 """
 
 from dataclasses import dataclass
@@ -26,7 +28,7 @@ from tests.t0_answer_state_prototype import (
 )
 
 
-PROPOSAL_VERSION = "memory-implementation/0.1.0"
+PROPOSAL_VERSION = "memory-implementation/0.2.0"
 
 
 def _text(value, label):
@@ -70,8 +72,9 @@ class RecoveryEvidence:
     Keys identify the requirement (including purpose/subject/recovery boundary
     and revision), selected configuration and retained-layer inventory. They
     are not content, URLs or a declaration that the evidence is authentic.
-    Eligibility is separately qualified by the caller; the evidence identifier
-    alone supplies no eligibility. A negative fact may be a scoped
+    Eligibility is separately qualified under #41 by the caller; eligible
+    publisher documentation need not be reproduced. The evidence identifier
+    alone supplies no eligibility or verification. A negative fact may be a scoped
     counterexample without a complete layer inventory; a positive needs one.
     """
 
@@ -103,10 +106,12 @@ class RecoveryEvidence:
 class MemoryImplementation:
     """A declared path, with actual selected owner only where one exists.
 
-    Application-owned implementations have no invented selection. Framework
-    and store owners bind an exact selection of that kind. Related resources
-    belong in the reviewed configuration identity; M2/authorization and other
-    per-selection checks are independent of this requirement witness.
+    An application-owned path is active by explicit declaration, with no
+    invented selection. Framework and store paths bind the exact selected
+    owner's enablement. Each path is declared for this record's stated need.
+    Related resources belong in the reviewed configuration identity;
+    M2/authorization and other per-selection checks are independent of this
+    requirement witness.
     """
 
     id: str
@@ -141,8 +146,9 @@ class MemoryRequirementRecord:
 
     Provided need is none/session/persistent. Provided requirement is an exact
     caller-reviewed recovery-scope key. Provided declaration is a tuple of
-    MemoryImplementation records; only an independently qualified complete
-    declaration can prove that an absent witness cannot exist outside it.
+    MemoryImplementation records for this need. W-R11 checks only declared
+    active paths. M1 needs qualified complete coverage before absence can
+    disprove an implementation outside that tuple.
     """
 
     proposal_version: str
@@ -296,11 +302,11 @@ def _evaluate_implementation(item, need, requirement, by_id):
 def evaluate_memory_requirement(record, *, policy):
     """Evaluate a scoped existential requirement, retaining every path finding.
 
-    W-R11's recommendation skips an unresolved need answer. M1's compatibility
-    check retains it as unknown. Once the need is known, required inputs remain
-    unknown instead of becoming a recommendation skip. Known complete absence
-    fails before an unrelated missing recovery-scope operand. Positive witness
-    does not require exhaustive alternative paths; negative absence does.
+    W-R11 skips an unresolved need and checks only declared active paths when
+    the need is known. M1 retains unresolved need and recovery operands as
+    unknown. A provided declaration with no active path fails W-R11 directly;
+    M1 requires qualified complete coverage before concluding absence. M1's
+    positive recovery witness does not require exhaustive alternative paths.
     """
     by_id = _preflight(record)
     if type(policy) is not RulePolicy:
@@ -337,6 +343,20 @@ def evaluate_memory_requirement(record, *, policy):
             item for item in items
             if item.owner_selection_id is None or by_id[item.owner_selection_id].enabled
         )
+        if policy is RulePolicy.RECOMMENDATION:
+            active_ids = {item.id for item in active}
+            findings = tuple(
+                _finding(
+                    item,
+                    Outcome.PASS if item.id in active_ids else Outcome.SKIPPED,
+                    "active_implementation_declared" if item.id in active_ids else "owner_selection_disabled",
+                    PredicateResult(State.PROVIDED, item.id in active_ids, declaration.source_path),
+                )
+                for item in items
+            )
+            reason = "memory_implementation_declared" if active else "memory_implementation_not_declared"
+            responsible_state, source_path = State.PROVIDED, declaration.source_path
+            return PredicateResult(State.PROVIDED, bool(active), source_path)
         complete = record.declaration_complete.compatibility_value() is True
         if not active:
             findings = tuple(

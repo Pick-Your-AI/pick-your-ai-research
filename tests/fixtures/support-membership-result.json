@@ -1,11 +1,11 @@
 {
   "x_t0_support_result": {
-    "proposal_version": "cd3-0.2",
-    "binding_sha256": "85e42f289161a80a8429e5e274a666cbec80d5ef9482d631850e912041fc3fab",
-    "answer_states_sha256": "ad30edd8bd2be3848ebe8ea38735937b48e5feacb2298d50e19836365f5c0570",
+    "proposal_version": "cd3-0.3",
+    "binding_sha256": "048d155833e519bc9ea64d87c96d226edd47e7964fb40cdf4ef6368a42a43680",
+    "answer_states_sha256": "fb118167ec6f19c73aee0d5195ca659b51a14116827b79fd28f6efa867284dce",
     "query": {
       "id": "rule.fixture.engine.formats",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "requirement": "any",
       "severity": "error"
     },
@@ -42,14 +42,15 @@
         "requested": true,
         "requested_complete": true,
         "cohort": true
-      }
+      },
+      "cohort_checked_only": null
     },
     "inputs": {
       "applies_when": {
         "state": "provided",
         "value": true,
         "source": "synthetic:normalized-request",
-        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.2.0/cohort.fixture.engine.formats/0.1.0/applies_when"
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/applies_when"
       },
       "requested": {
         "state": "provided",
@@ -59,13 +60,13 @@
           "future-format"
         ],
         "source": "synthetic:normalized-request",
-        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.2.0/cohort.fixture.engine.formats/0.1.0/requested"
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/requested"
       },
       "requested_complete": {
         "state": "provided",
         "value": true,
         "source": "synthetic:complete-request-inventory",
-        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.2.0/cohort.fixture.engine.formats/0.1.0/requested_complete"
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/requested_complete"
       },
       "supported": {
         "state": "provided",
@@ -74,7 +75,7 @@
           "gguf"
         ],
         "source": "synthetic:reviewed-cohort",
-        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.2.0/cohort.fixture.engine.formats/0.1.0/supported"
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/supported"
       },
       "unsupported": {
         "state": "provided",
@@ -82,13 +83,13 @@
           "gguf"
         ],
         "source": "synthetic:reviewed-cohort",
-        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.2.0/cohort.fixture.engine.formats/0.1.0/unsupported"
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/unsupported"
       },
       "exhaustive": {
         "state": "provided",
         "value": false,
         "source": "synthetic:reviewed-cohort",
-        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.2.0/cohort.fixture.engine.formats/0.1.0/exhaustive"
+        "source_path": "/support_checks/sel_inference_engine/rule.fixture.engine.formats/0.3.0/cohort.fixture.engine.formats/0.1.0/exhaustive"
       }
     },
     "decision": {
@@ -116,7 +117,7 @@
         }
       ],
       "disputed": true,
-      "evidence_label": "unverified"
+      "evidence_label": null
     }
   }
 }

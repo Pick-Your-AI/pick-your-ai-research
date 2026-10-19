@@ -66,6 +66,29 @@ class Result:
     findings: tuple[Finding, ...]
 
 
+class IdentityPreflightError(ValueError):
+    """A typed identity rejection; historical ValueError callers still work.
+
+    The diagnostic fields contain only the conflicting normalized identity.
+    Exception messages remain diagnostic text, never a result parsing API.
+    """
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        reason_code: str,
+        selection_id: str | None = None,
+        kind: str | None = None,
+        role: str | None = None,
+    ) -> None:
+        super().__init__(message)
+        self.reason_code = reason_code
+        self.selection_id = selection_id
+        self.kind = kind
+        self.role = role
+
+
 def validate_identities(selections: tuple[SelectionIdentity, ...]) -> None:
     """Apply the frozen protocol's build-wide identity/role precondition.
 
@@ -77,11 +100,20 @@ def validate_identities(selections: tuple[SelectionIdentity, ...]) -> None:
     roles: set[tuple[str, str]] = set()
     for selection in selections:
         if selection.id in identities:
-            raise ValueError(f"duplicate selection id: {selection.id}")
+            raise IdentityPreflightError(
+                f"duplicate selection id: {selection.id}",
+                reason_code="duplicate_selection_id",
+                selection_id=selection.id,
+            )
         identities.add(selection.id)
         key = (selection.kind, selection.role)
         if key in roles:
-            raise ValueError(f"ambiguous kind/role: {selection.kind}/{selection.role}")
+            raise IdentityPreflightError(
+                f"ambiguous kind/role: {selection.kind}/{selection.role}",
+                reason_code="ambiguous_selection_role",
+                kind=selection.kind,
+                role=selection.role,
+            )
         roles.add(key)
 
 

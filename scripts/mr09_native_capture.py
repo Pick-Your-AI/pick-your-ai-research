@@ -11,6 +11,7 @@ import re
 from mr09_total_memory_setup import managed_snapshot_interval, strict_json, require_bindings
 
 DIRECTORY=Path("research/market/measurements/native-qualification-2026-10-18")
+RUNTIME_ARTIFACT_LEDGER_SHA256="d788e18ba59ab6f210c1ceb61599f39269440a774664c8f515ffca9a7041cfcd"
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -165,7 +166,7 @@ def summarize(directory):
             "harness_git_ref":"7805816b3b59f973ec9e87a03b8c807511641700",
             "launcher_sha256":"6a645f212c3b947789345dc739d88d554f3e083021db3cc0f7abfebc8ff1f8b8",
             "model_sha256":"f535f83ec568d040f88ddc04a199fa6da90923bbb41d4dcaed02caa924d6ef57",
-            "runtime_artifact_ledger_sha256":"d788e18ba59ab6f210c1ceb61599f39269440a774664c8f515ffca9a7041cfcd",
+            "runtime_artifact_ledger_sha256":RUNTIME_ARTIFACT_LEDGER_SHA256,
             "preflight_file":f"init-r{rep}-preflight.json",
         }, "native capture pins")
         if type(record["repetition"]) is not int or record["repetition"]!=rep: raise ValueError("wrong repetition")

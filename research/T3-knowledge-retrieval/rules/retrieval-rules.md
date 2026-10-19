@@ -4,20 +4,24 @@ Issue: #16 · Contract review: #40 · Status: proposed
 
 Evidence IDs refer to [rag-retrieval.md](../rag-retrieval.md). These proposals are not an approved Ruleset. `pass`/`fail`/`unknown`/`skipped` are outcomes; `info`/`warning`/`error` are severities and are fixed per rule. An unknown outcome never counts as a pass. Every rule is `skipped` when no enabled `rag_pipeline` selection exists. The examples are synthetic.
 
-Evidence basis per rule: **source checked** means the mechanism in the assertion is documented in a cited primary source. **Hypothesis** means it is project reasoning awaiting #36 or #40 evidence.
+Evidence basis per rule: **source checked** means the mechanism in the assertion is documented in a cited primary source. **Hypothesis** means it is project reasoning awaiting #36 or #40 evidence. Revision `rag-retrieval-decision/0.2.0` makes the project decisions and qualified source boundaries explicit; it remains research, not an adopted Ruleset or runtime result.
+
+**Common receiving boundary.** Validate the selected path, component/reference identities and applicable operation before evaluating a rule. A known counterexample to an all-required assertion fails even when another operand is unknown; a pass needs every required operand in the qualified scope. Missing, disputed or ineligible evidence stays unknown, and an omission from an incomplete support list is not an explicit negative. Preserve fixed severity and each rule's unknown policy. The existing no-`rag_pipeline` gate above is a real implementation limitation: tool-only retrieval must use the accepted bound-pipeline route until #40 adopts and implements explicit actual-path binding. It does not exempt that path from EMB/VDB, caller authorization or complete-request accounting. The [accepted #14 input](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/14#issuecomment-6253659087) and [#15 R1 input](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/387#pullrequestreview-5564586116) retain this condition. An evidenced build with no retrieval skips these retrieval proposals; an undisclosed path is not evidence of absence.
+
+RAG-01 retains its accepted counting text below. Its fixed `on_unknown: block` applies to a tokenizer mismatch as well: the parenthetical `review` describes the remediation, not a second or weaker unknown policy.
 
 ## RAG-01: retrieved upper bound fits the input budget
 
-- Participating kinds, roles, and JSON pointers: `rag_pipeline` primary `/settings/max_chunks` (M); `knowledge_base` primary `/settings/chunk_size_tokens` (S); `context_policy` primary `/settings/requested_context_tokens` (P). Tokenizer identity for S is a research operand pending #40 (gap G5).
+- Participating kinds, roles, and JSON pointers: `rag_pipeline` primary `/settings/max_chunks` (M); `knowledge_base` primary `/settings/chunk_size_tokens` (S); `context_policy` primary `/settings/requested_context_tokens` (configured input allowance P). The complete request count/bound used by CTX-01 is distinct from P in this screen. Tokenizer identity for S and serialization-specific overhead H are research operands pending #40 (gap G5).
 - Applicability condition: enabled `rag_pipeline` with a `context_policy` selection.
-- Assertion and source evidence: M × S + H ≤ P. H is the per-chunk citation/header overhead × M, and is 0 only if it has been measured as 0. This is necessary, not sufficient. CTX-01 (#7) on the complete assembled input remains authoritative. Basis: arithmetic on #7's definition of P, which includes retrieved text. Source checked against [context-window.md](../../T1-model-selection/context-window.md).
+- Assertion and source evidence: M × S + H ≤ P. M and S must be applicable enforced generation-tokenizer/template bounds; their product bounds retrieved payload only. H bounds all retrieval-related citation/header overhead in the applicable serialization; a per-chunk overhead × M is usable only when it supplies that bound. H is 0 only if measured as 0 for this serialization. Independent fragment counts do not automatically establish an assembled bound. This is a necessary subtotal screen, not sufficient for full request fit. CTX-01 (#7) separately evaluates the complete serialized input count or eligible bound, output reservation and applicable route/model limits. Basis: the actual [#7 → #16 counting receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/16#issuecomment-6253273759), read on 2026-10-18, and [context-window.md](../../T1-model-selection/context-window.md). This propagates that research decision without a new tokenizer execution or policy adoption.
 - Severity: `error`.
-- Missing-data behaviour: M, S or P absent → `unknown`, `on_unknown: block`. If S was counted with a tokenizer other than the generation model's, the outcome is `unknown` (`review`) until recounted.
+- Missing-data behaviour: M, S, H or P absent or without an eligible bound → `unknown`, `on_unknown: block`; missing overhead cannot become zero. If S was counted with a tokenizer other than the generation model's, the outcome is `unknown` (`review`) until recounted. An unevidenced serialization boundary also leaves the screen unresolved.
 - Explanation and remediation: report M, S, H and P. Lower `max_chunks` or chunk size, or raise P after CTX-01 passes. Do not truncate silently.
 - Dependency edges and affected consumers: #13 chunking, #14 tokenizer, #7 fit, #39 token cost, #28 memory budget.
-- Passing example: M=5, S=400, H=5×20, P=8,000 → 2,100 ≤ 8,000.
+- Passing example: M=5, S=400, H=5×20, P=8,000 → 2,100 ≤ 8,000 for this retrieval subtotal only. A separately counted complete request of 8,200 still exceeds the input allowance; no full-fit pass follows from the subtotal.
 - Failing example: M=20, S=512, H=0 (measured), P=8,000 → 10,240 > 8,000.
-- Unknown / non-applicable: S counted with the embedding tokenizer only → unknown. No `rag_pipeline` selection → skipped.
+- Unknown / non-applicable: S counted with the embedding tokenizer only, unknown H, or a missing bound for the actual serialization → unknown. No `rag_pipeline` selection → skipped.
 - Version and migration impact: needs a tokenizer-identity operand and an H operand. The existing v1 fields are unchanged.
 
 ## RAG-02: caller authorization precedes model and tool exposure
@@ -37,56 +41,56 @@ Evidence basis per rule: **source checked** means the mechanism in the assertion
 
 ## RAG-03: a reranker is identified and its input limit is respected
 
-- Participating kinds, roles, and JSON pointers: `rag_pipeline` `/settings/rerank_enabled`, `/spec/supports_rerank`. Reranker identity and input limit L have no v1 operand (G4).
+- Participating kinds, roles, and JSON pointers: `rag_pipeline` `/settings/rerank_enabled`, `/spec/supports_rerank`. Exact reranker model/route/runtime, tokenizer and query/document template, applicable item/query/pair/batch limits, and required-content/truncation policy are note-only operands (G4). An embedding or generation tokenizer is not the reranker tokenizer by implication.
 - Applicability condition: `rerank_enabled=true`.
-- Assertion and source evidence: `supports_rerank=true`, a reranker is identified, and S plus query tokens ≤ L. Source checked: cross-encoders take question and document together, and the BGE example truncates at `max_length=512` (R24). Cohere limits are not on the overview page (R23).
-- Severity: `warning`. Over-limit input is truncated and loses content (hypothesis).
-- Missing-data behaviour: missing L or reranker identity → `unknown`, `on_unknown: review`.
-- Explanation and remediation: show the truncated share. Use smaller chunks or a reranker with a larger evidenced limit.
+- Assertion and source evidence: the selected pipeline supports the selected reranker, its complete encoded query/document input including framing fits every applicable limit, and the configured transformations preserve the workload's required content. A jointly counted input or eligible serialization-specific bound is required; independently counted fragments do not automatically compose. R24's BGE example sets `max_length=512` on a tokenized pair, without establishing a model-wide maximum. R27's Cohere v2 per-document parameter is separate from R32/R33's model context, query and chunking descriptions. Their unresolved table/route discrepancies cannot certify a selected configuration. A known unsupported path, excessive applicable bound or required-content loss fails; an automatic successful truncation is not a full-content pass.
+- Severity: `warning`. Truncation, chunking, rejection and their effect on retained content depend on the selected route/configuration; no universal behavior is asserted.
+- Missing-data behaviour: missing eligible identity, tokenizer/template accounting, applicable limit, or required-content/truncation disposition → `unknown`, `on_unknown: review`. A known violation remains failure despite another unknown.
+- Explanation and remediation: report the actual selected limits, count/bound and retained/lost content evidence. Show a truncated share only when its numerator, denominator and counting unit are known. Rechunk, select an evidenced larger-limit path, or obtain an explicit workload content-loss decision and evaluate that configuration; do not silently discard required text.
 - Dependency edges and affected consumers: #14 (separate model selection), #11 serving, #39 cost.
-- Passing example: S=300, query 30 tokens, L=512.
-- Failing example: S=1,024, L=512.
-- Unknown / non-applicable: an API reranker with an undocumented limit → unknown. `rerank_enabled=false` → skipped.
-- Version and migration impact: needs a reranker reference (a `model` role or a new kind) via #40.
+- Passing example: synthetic selected profile with jointly accounted document/query/framing components 300/30/5, total 335 under its evidenced 512 limit, all other request limits satisfied and required content retained. These numbers are not a BGE runtime observation.
+- Failing example: a synthetic complete pair is 552 tokens against its applicable 512 limit; or required evidence is in a suffix the configured truncation removes. A per-document 480-token pass does not repair the joint-input failure.
+- Unknown / non-applicable: a known document limit with unknown query/framing or unresolved selected-model limits → unknown. `rerank_enabled=false` → skipped.
+- Version and migration impact: needs a reranker reference (a `model` role or a new kind), role-specific encoding and request-policy operands via #40; frozen v1 is unchanged.
 
 ## RAG-04: requested hybrid mode is honoured by the backend
 
-- Participating kinds, roles, and JSON pointers: `rag_pipeline` `/spec/retrieval_mode`; backend store identity (`vector_database` or managed service).
+- Participating kinds, roles, and JSON pointers: `rag_pipeline` `/spec/retrieval_mode`; actual backend/store, selected service operation, API/adapter version, text/vector fields and query configuration. The richer operation/support record is note-only; `vector_database` `/spec/supports_hybrid_search` alone cannot identify the running query.
 - Applicability condition: `retrieval_mode=hybrid`.
-- Assertion and source evidence: the selected backend documents hybrid support for this store configuration. Source checked: Bedrock falls back to semantic search unless the store is RDS, OpenSearch Serverless or MongoDB with a filterable text field (R12). Azure, Elasticsearch and Haystack document hybrid paths (R10, R01, R18).
+- Assertion and source evidence: eligible evidence establishes hybrid support for the exact selected operation/store/configuration, with both retrieval legs and fusion bound to the plan. R12's Bedrock guide and R34's API reference list different supported stores; this source conflict is recorded in the note, not generalized into an observed fallback or universal negative. Azure, Elasticsearch and Haystack document their own hybrid paths (R10, R01, R18); those names alone do not certify an arbitrary integration. An eligible explicit incompatibility or observed semantic-only result for a required hybrid plan fails.
 - Severity: `warning`.
-- Missing-data behaviour: backend support undocumented → `unknown`, `on_unknown: review`.
-- Explanation and remediation: report the actual mode that will run. Change the store or the mode.
-- Dependency edges and affected consumers: #15, #65 interoperability tests.
-- Passing example: Bedrock KB on OpenSearch Serverless with a filterable text field, HYBRID requested.
-- Failing example: Bedrock KB on a store outside the documented list, HYBRID requested.
-- Unknown / non-applicable: an unlisted framework integration → unknown. Mode `keyword` → skipped.
+- Missing-data behaviour: missing eligible support or selected operation/configuration, unresolved source conflict, or an omission from an incomplete list → `unknown`, `on_unknown: review`.
+- Explanation and remediation: distinguish requested mode, documented support and any actually observed mode. Pin the operation and store, resolve the conflicting evidence, or select a separately qualified plan. Do not report an unexecuted API response as the mode that ran.
+- Dependency edges and affected consumers: #15, #36 selected-plan validation; #65's completed interoperability desk input retains its original scope.
+- Passing example: synthetic configuration bound to the documented OpenSearch Serverless/filterable-text hybrid path, with eligible evidence for the selected API operation and both legs; this is a support-screen pass, not an executed request.
+- Failing example: synthetic exact operation has an eligible explicit `hybrid_supported=false` while hybrid is required; another product's positive capability does not repair it.
+- Unknown / non-applicable: an RDS/MongoDB configuration whose only evidence is the unresolved R12/R34 disagreement, or an unlisted framework integration → unknown. Mode `keyword` → skipped.
 - Version and migration impact: needs a backend-capability operand; `vector_database` `/spec/supports_hybrid_search` partly covers it.
 
 ## RAG-05: filtered approximate search can return fewer than k results
 
-- Participating kinds, roles, and JSON pointers: `rag_pipeline` `/settings/top_k`; proposed E (RAG-02); backend filter strategy.
-- Applicability condition: dense or hybrid retrieval with metadata or ACL filters.
-- Assertion and source evidence: the filter is applied during the search (pre-filter or efficient filtering), or iterative/expanded scanning is enabled. Otherwise the outcome is `fail`. Source checked: R01, R05 (iterative scans since pgvector 0.8.0), R08, R15.
-- Severity: `warning`. Correctness is unaffected; recall drops for restricted users.
-- Missing-data behaviour: filter strategy undocumented → `unknown`, `on_unknown: review`.
-- Explanation and remediation: report the possible shortfall. Use the kNN `filter`, efficient filtering or iterative scans, or partition per tenant (R05).
+- Participating kinds, roles, and JSON pointers: `rag_pipeline` `/settings/top_k`; exact backend/query/filter strategy, selected ANN effort/scan bounds and eligible candidate-population evidence. Enforcement point E (RAG-02) locates the filter but does not prove its authority or retrieval coverage.
+- Applicability condition: dense or hybrid retrieval with metadata or ACL filters on a selected approximate or candidate-limited vector search. An evidenced exhaustive exact plan that filters the eligible population before final top-k selection, without an earlier candidate cutoff, skips this shortfall-risk screen. An unknown search method is unresolved, not assumed exact.
+- Assertion and source evidence: an applicable documented mitigation for filtered candidate shortfall is actually configured on this query path: pre/efficient filtering, iterative/expanded scanning, or a separately qualified partitioned plan. R01 distinguishes filters inside and outside the kNN search. R35's pinned pgvector source says iterative scans stop when enough results are found **or** configured scan/probe limits are reached; strict distance order does not establish perfect recall. R08/R15 retain their own engine-specific conditions. A known unmitigated post-scan plan fails this configuration screen. A pass establishes the selected mitigation, not returned k, measured recall, answer correctness or authorization.
+- Severity: `warning`. Missing candidates can change answer coverage and correctness; RAG-02 separately governs unauthorized exposure.
+- Missing-data behaviour: undocumented or unbound query/filter/mitigation configuration → `unknown`, `on_unknown: review`. Absent measurement leaves quality/shortfall results unknown even when this configuration screen passes.
+- Explanation and remediation: report possible shortfall and the selected search-effort limits. Compare permitted candidate population, actual returned count and relevance metrics under #36's protocol. Consider the applicable engine's prefilter, iterative scan or partitioning, retaining cost/latency and authorization review.
 - Dependency edges and affected consumers: #15, #36 (shortfall metric).
-- Passing example: Elasticsearch kNN with an ACL `filter` inside the kNN clause.
-- Failing example: an ACL filter outside the kNN clause, k=10.
-- Unknown / non-applicable: no filters → skipped.
-- Version and migration impact: needs a filter-strategy operand.
+- Passing example: synthetic Elasticsearch query binds its mandatory filter inside the documented kNN clause; the configuration screen passes while workload recall and RAG-02 authority remain separate. A configured bounded iterative scan can likewise pass without promising k results.
+- Failing example: synthetic k=10 post-scan filter with no applicable mitigation. This flags shortfall risk; it does not prove a particular query returned fewer results.
+- Unknown / non-applicable: search method, strategy or query binding unknown → unknown; an evidenced unfiltered path or exhaustive exact plan without an earlier candidate cutoff → skipped. Skipping this risk screen does not skip #36 returned-count/relevance evaluation or RAG-02 authorization.
+- Version and migration impact: needs filter-strategy, query/configuration and separate measurement operands; no frozen-v1 schema change.
 
 ## RAG-06: citations are required but unsupported
 
-- Participating kinds, roles, and JSON pointers: a workload/build citation requirement (no v1 field); proposed citation level C ∈ {`none`, `document_id`, `span`, `page`} (G5).
+- Participating kinds, roles, and JSON pointers: workload citation requirement and proposed citation level C ∈ {`none`, `document_id`, `span`, `page`} (G5), plus exact model/route, input format, citation settings, requested output format and source/chunk revision mapping. These are note-only request operands.
 - Applicability condition: the user requires source attribution.
-- Assertion and source evidence: C ≠ `none`, and C meets the required level. Source checked: R19, R25, R12. Pointer validity (R25) is not evidence of support; that is measured by #36.
+- Assertion and source evidence: the selected request composition supports the required attribution granularity and preserves resolvable source identities through every permitted transform. Granularities are requirements, not an assumed total ordering between page and character/block spans. R19/R12/R25 document different output forms. R36 documents that Anthropic citation-enabled document/search-result inputs cannot be combined with `output_config.format` structured output; qualify that exact request combination, not the whole provider or every tool/output path. An eligible unsupported composition or insufficient granularity fails. Valid pointers do not establish semantic support, completeness, factual accuracy or source authorization; #36 evaluates those separately.
 - Severity: `warning`.
-- Missing-data behaviour: C unknown → `unknown`, `on_unknown: review`.
-- Explanation and remediation: pick a pipeline or API that returns source pointers, and preserve chunk identity through context assembly.
+- Missing-data behaviour: missing eligible request/format/granularity support or source identity mapping → `unknown`, `on_unknown: review`.
+- Explanation and remediation: select a qualified model/route/input/output composition, preserve document and chunk revision identities after dropping/reordering/transformation, and validate pointer resolution separately from claim support. Do not fabricate a span or page for a source format that cannot supply it.
 - Dependency edges and affected consumers: #36, #25 (agent output), builder display.
-- Passing example: required `document_id`; the API returns `file_citation` with `file_id`.
-- Failing example: required `span`; the pipeline returns only answer text.
-- Unknown / non-applicable: no citation requirement → skipped.
-- Version and migration impact: new workload and pipeline operands via #40.
+- Passing example: synthetic eligible request requires document attribution and supplies a resolvable file identifier bound to the actual source revision; pointer support passes while claim-support evaluation remains separate.
+- Failing example: span attribution is required but only plain answer text is available; or the exact R36 incompatible structured-output/citation combination is selected.
+- Unknown / non-applicable: the chosen document format or model route lacks eligible support evidence → unknown. No citation requirement → skipped.
+- Version and migration impact: new workload, source-mapping and request-composition operands via #40; this proposal adopts no wire representation.

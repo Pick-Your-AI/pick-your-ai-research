@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-terminal-bench-resolution",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Terminal-Bench task resolution",
+  "version": "2.0",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "A source-only profile of the published Terminal-Bench 2.0 outcome metric. Benchmark edition, agent scaffold, task subset, container/runtime resources and trials must remain distinct in any later measured claim. No agent, oracle, model or benchmark was executed and no builder threshold or deployment gate is adopted. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Task resolution rate"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/harbor-framework/terminal-bench-2/blob/2fd12b88aafdd04a52c298e3940bcb189f9766d6/README.md",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact publisher README blob a46b155b419a15add0aab7fe8e51f0f64a9404d8 at 2fd12b88aafdd04a52c298e3940bcb189f9766d6 names Terminal-Bench 2.0 and the terminal-bench@2.0 dataset selector for finite Harbor container runs. This supports the offline batch interpretation, not no-network execution. The current repository was observed unarchived and not disabled; active describes published availability only. The README’s example commands were read, not executed."
+    },
+    {
+      "source_uri": "https://arxiv.org/html/2601.11868v1",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "The paper names Task resolution rate and evaluates outcomes by tests on the final container state. Its at-least-five trials and 95% confidence intervals describe the authors’ reporting protocol, not an adopted builder minimum. Internet access is permitted, and external resources and runtime enforcement can affect comparability. No published model score is imported as our own evidence."
+    },
+    {
+      "source_uri": "https://www.tbench.ai/news/announcement-2-0",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "This is the publisher’s named 2.0 release context. This proposal lists the published method, not a claim that 2.0 is the newest edition, that future dependencies remain available, or that benchmark data or model use is permitted for a particular workload. Operational billing remains unknown."
+    }
+  ],
+  "updated_at": "2026-10-18T20:22:02Z"
+}

@@ -19,11 +19,11 @@ The sequencing change is recorded at [f56b0fc](https://github.com/Pick-Your-AI/p
 
 ## Summary
 
-- **A saved build is an immutable `BuildSnapshot` revision plus the derived records that cite that revision.** Every edit creates a new revision; old revisions are kept (V5). The v1 locks already pin the catalog snapshot, ruleset version and dependency graph revision (V1).
+- **A saved build is an immutable `BuildSnapshot` revision plus the derived records that cite that revision.** Every edit creates a new revision (V5); old revisions remain distinct where retention is permitted, subject to the unresolved SB-9 policy. The v1 locks already pin the catalog snapshot, ruleset version and dependency graph revision (V1).
 - **Two validity views, never merged.** *Historical validity* is the `EvaluationReport` produced under the build's own locks. *Current validity* is a fresh evaluation of the same selections against the currently published catalog snapshot, ruleset and pricebook. A revisit shows both and the per-rule differences. Neither overwrites the other, and nothing in the user's selections changes without consent (V5, V6).
-- **Sharing stores the build server-side behind an opaque link and shares a redacted projection.** Credentials references, endpoints, free text, budgets, residency, data classification and organisation attestations are withheld by default. A recipient who forks gets the withheld inputs as unanswered, so the rules that read them give `unknown`, never `pass`.
+- **Sharing stores the build server-side behind an opaque link and shares a redacted projection.** Credentials references, endpoints, free text, budgets, residency, data classification and organisation attestations are withheld by default. A recipient who forks receives withheld inputs as unanswered and supplies its own applicable answers; the new evaluation follows the existing missing-input, applicability and SB-R5 behavior.
 - **Comparisons align selections by kind and role and show "not comparable" with the reason** when currency, pricing period, workload, ruleset version, evidence protocol or cost coverage differ. Modes are compared per serving component using #81's merged definitions (P1).
-- **Time alone never invalidates a build.** Under the #41 interim policy, version-pinned facts don't expire and current-state facts are shown "as of" their access date with no TTL (P3). Invalidation comes from publications: a new catalog snapshot, ruleset version, dependency graph revision or pricebook; a lifecycle change; a #60 rights decision; or a build edit.
+- **A new release or elapsed time alone does not invalidate an immutable selected snapshot.** Under the #41 interim policy, version-pinned facts don't expire and current-state facts are shown "as of" their access date with no arbitrary TTL (P3). Publications can prompt a separate current evaluation; selected-input changes, source corrections or retractions, explicit validity conditions, rights decisions and build edits retain their specific effects. Historical reproducibility, current recommendation eligibility and permission to disclose are separate questions in the accepted H41-42 receiving scope (P9).
 - **v1 gaps** (visibility, validation state, assumptions, cost snapshot link, snapshot revision lock, fork lineage, withheld-input state, multi-workload builds) are recorded as SB-1 to SB-10. No schema is patched.
 
 ## User decision
@@ -80,7 +80,7 @@ All four modes appear in the comparison semantics. Mode is a per-serving-compone
 
 ### What makes a build reproducible (Proposal)
 
-Re-evaluation of (build id, revision) yields the same findings when all of these are pinned and retrievable: every selection's `catalog_item_id` + `catalog_item_version`, its settings and links, the build inputs, the catalog snapshot (id and revision, SB-2), the ruleset id + version, the dependency graph id + revision, the pricebook id + revision (SB-3), the evaluator version (SB-5), and any external evidence the rules consumed, such as resource estimates, pinned by their own versions (V7). If any of these is gone, the historical report is still shown, labelled "cannot be reproduced: <missing record>".
+Re-evaluation of (build id, revision) yields the same findings when all of these are pinned and retrievable: every selection's `catalog_item_id` + `catalog_item_version`, its settings and links, the build inputs, the catalog snapshot (id and revision, SB-2), the ruleset id + version, the dependency graph id + revision, the pricebook id + revision (SB-3), the evaluator version (SB-5), and any external evidence the rules consumed, such as resource estimates, pinned by their own versions (V7). If a required replay input is unavailable, reproduction cannot be claimed. A permitted historical projection may remain available with a permitted explanation of the missing prerequisite; the explanation must not reveal a private locator or an excluded value. Applicable rights restrictions still govern historical and shared views (P8, P9). Retaining inputs and actually demonstrating reproduction remain distinct.
 
 ### Derived records
 
@@ -112,8 +112,8 @@ States are derived on read, not stored. More than one can apply.
 | Component unavailable | The selected item is `retired`, or an exhaustive current snapshot establishes absence for its exact item/version scope | SB-R4b `fail/error`, with the evidence scope |
 | Availability unknown | Snapshot retrieval, lifecycle evidence or item/version coverage is unresolved | SB-R4b `unknown/error`, not an unavailable claim; omission from an incomplete list proves no retirement |
 | Prices as of | Always for current-state facts | "Prices as of <captured_at>". A newer pricebook or a rate past `valid_until` makes the old estimate historical, not current |
-| Values withheld | A #60 decision removes display rights, or a share withheld an input | The finding's outcome without the value, and the reason |
-| Cannot be reproduced | A pinned record is missing | Historical result labelled accordingly |
+| Values withheld | A #60 decision removes display rights, or a share withheld an input | Only independently permitted historical outcomes or other content; a generic withholding notice when the outcome, association or reason would itself disclose restricted information |
+| Cannot be reproduced | A required pinned record is missing | Permitted historical projection with a permitted explanation of the unavailable prerequisite |
 | New contract available | A successor contract is published while this revision still pins its original schema | Preserve the original bytes, historical findings and reproducibility under the retained reader; offer an explicit migration as a new revision |
 | Current evaluation unavailable | The proposed current evaluation needs an unsupported contract/ruleset or an unavailable migration | Show the historical result with its original version and explain the unavailable current path; do not mark the historical result irreproducible solely because a successor exists |
 
@@ -129,7 +129,7 @@ States are derived on read, not stored. More than one can apply.
 | Access modes | `private` (owner only); `unlisted` (anyone with the token); `public` (listed and discoverable). Organisation-scoped sharing needs accounts and is out of scope. Mode is a property of the share, not of the build, so changing it doesn't create a build revision (SB-4). |
 | Read-only vs fork | Every share is read-only. Fork creates a new build id at revision 1 with a lineage pointer to the source (id, revision) (SB-6). Withheld inputs arrive unanswered; attestations are never copied. |
 | Revocation | Revoking a token stops access to the projection. Copies already exported or forked are outside control and the share flow says so. |
-| What the viewer sees | Both validity views; the lock dates; "as of" price dates; which fields were withheld |
+| What the viewer sees | Permitted projections of both validity views and their dates; permitted withholding notices rather than private field names or values |
 | Retention | Open product decision (SB-9) |
 
 ### Field sensitivity for shared links and exports
@@ -150,10 +150,61 @@ Default treatment. "Opt-in" means the owner explicitly includes the group for th
 | #81 `hardware.devices[]` model names and memory | Configuration | Included | #81 already excludes serial numbers and hostnames (P1) |
 | #81 CD-12 organisation attestations (establishment jurisdiction, EU market placement, lawful basis, revenue, MAU), `licence_answers` (with `grant_ref`), zero-retention or account approvals in `data_terms` conditions | Organisation attestation | Never, and never copied on fork | An attestation is made by one organisation about itself; it can't transfer to the recipient |
 | #81 `destinations[].host`, `external_connections` | Infrastructure | Included without hosts | Mode and residency findings stay explainable |
-| `EvaluationReport.findings[].evidence[].observed` | Derived | Included, unless it echoes a withheld input | The observed value would leak the input |
+| Report findings, evidence, results and summaries; estimate lines, assumptions and warnings; projection/export metadata | Derived | Only where the field's contents and derived meaning are eligible for this view | Restrictions apply beyond `observed`; text, outcomes, associations and aggregates can disclose an excluded input or restricted assertion |
 | Catalog-sourced values (prices, benchmark figures) in findings or cost lines | Third-party data | Only where #60 grants commercial display (P4) | A share to the public is display |
 
-**Withheld is not unknown, but evaluates like it (SB-8).** A viewer of a share sees the historical findings the owner's inputs produced, with withheld values hidden. A fork has no value for the withheld inputs, so rules that read them give `unknown` (CD-1's "not yet known" in #81 terms), and the recipient is prompted to answer. A withheld input never evaluates as `pass`, and it is never filled with a default.
+### Disclosure across complete projections (proposal, 2026-10-18)
+
+The sensitivity table applies to the complete historical, shared or exported
+projection. Removing an `observed` value alone is insufficient if a finding's
+`code`, `message`, `remediation`, `selection_ids`, evidence `path`, `expected` or
+`source_version` still discloses the same excluded information. The same review
+applies to report outcomes, `result`, `deployment_readiness` and summary counts,
+and to estimate quantities, amounts, assumptions, warnings and identifiers
+(field locations: V10). The restriction covers a derived assertion as well as a
+verbatim copy. An included configuration field is not an unrestricted channel
+for private identifiers or free text.
+
+**Proposed boundary:** release only fields whose contents and meaning have been
+reviewed as eligible for that projection. Unclassified extensions, new fields
+and unreviewed nested content remain withheld until that projection's disclosure
+mapping is reviewed. An opt-in input group does not authorize secret locators,
+organisation attestations or excluded third-party data. If a finding's outcome
+or association itself discloses restricted information, withhold that finding
+with a generic notice; do not merely remove its evidence value. Historical
+outcomes whose disclosure is permitted retain their original meaning. Do not
+turn a historical `pass` into `unknown` to represent redaction.
+
+A projected subset must be labelled as incomplete. Original report-level
+results or counts may accompany it only when separately eligible for disclosure,
+and must be identified as the original report's summary, not a summary of the
+visible subset. Otherwise withhold them too. Do not recompute the subset and
+present it as the producer's complete result, complete coverage or a new
+evaluation. A generic notice must itself avoid revealing a private identifier,
+excluded value or restricted assertion. Use a notice for the projection rather
+than one placeholder per hidden finding if placeholders would reveal a
+restricted count or association.
+
+Where retention remains permitted, the original artifact remains separate from
+the served projection. Redaction does not rewrite its historical findings or
+establish complete deletion, and retained bytes do not grant disclosure rights.
+The redacted serialization must not be presented as an unchanged, schema-valid
+original report or inherit its byte binding, signature or evidence qualification.
+A released projection/withheld representation remains a #40 decision under
+SB-4, SB-5, SB-8 and SB-10. Applicable withdrawal and deletion requirements remain
+in force; this proposal grants no unlimited retention and leaves SB-9 open.
+
+**Synthetic review cases, not executed redactor tests:** a hidden workload count
+repeated in a finding message is still excluded; a warning or cost quantity that
+reveals a withheld budget must also be withheld. An organisation-attestation
+finding may require withholding its code/outcome and an affected summary, even
+with empty evidence. A separately permitted catalog compatibility outcome may
+remain visible despite another withheld finding. In each case the permitted
+historical record and a recipient's new evaluation retain different identities.
+These examples describe the proposal; they do not qualify an implemented
+redactor, source-use permission or a successor wire format.
+
+**Withheld remains distinct from unknown (SB-8).** A viewer may see the historical findings the owner's inputs produced only to the extent their disclosure is permitted under the boundary above. A fork has no value for withheld inputs. Its new evaluation applies the existing missing-input and applicability behavior, including SB-R5's recommendation-only behavior, and prompts the recipient for applicable answers. Withholding supplies no affirmative evidence of a pass and authorizes no default. The historical projection is not the fork's new evaluation.
 
 ### Comparison (Proposal)
 
@@ -207,7 +258,7 @@ Lean: (b), because co-resident memory can only be checked where all resident com
 | #60 rights decision changes to "no" | #41/#60 per-source decision (P4) | Affected values are hidden in every view, including historical and shared views, because showing them is display | Values withheld |
 | Mode or optional tier switched | Activation conditions (V5) | Re-evaluate required and cross-component rules; only predicates with actually false applicability become `skipped` | Not evaluated |
 | Successor contract published | Available contract version differs from this revision's pinned `schema_version` | Preserve original bytes, locks, reader and historical findings; an explicitly adopted migration creates a new revision under CD-7 | New contract available; Current evaluation unavailable if the new path is unsupported. Original reproducibility changes only if its actual dependencies are missing |
-| Withheld input on a fork | SB-8 | Dependent rules `unknown` | Prompt to answer |
+| Withheld input on a fork | SB-8 | New evaluation follows existing missing-input and applicability behavior, including SB-R5 | Prompt to answer |
 
 When whether a branch is active is itself unknown, invalidate and re-evaluate (V5).
 
@@ -264,7 +315,7 @@ Both estimates and their component lines may still be shown, labelled with price
 ### SB-R5 Withheld inputs leave dependent rules unresolved (hypothesis)
 
 - **Applies when:** a forked build has an input withheld at share time (SB-8).
-- **Assertion:** any rule operand that resolves to a withheld input is unresolved, so the rule is `unknown`. A recommendation-only rule follows #81's policy and is `skipped` (P1).
+- **Assertion:** any rule operand that resolves to a withheld input is unresolved. A fork's new evaluation follows the dependent rule's own applicability, assertion and unknown policy. Recommendation-only rules skip when their activating need is unresolved; withholding an assertion operand does not itself skip an applicable recommendation. Under the [W-R11 continuation in #401](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/401), a withheld memory need skips the recommendation, but a known `session` or `persistent` need with a withheld implementation declaration gives `unknown`, with fixed `warning`/`defer`. Historical P1 records, retained reader profiles and original findings keep their own revisions and semantics.
 - **Severity:** the dependent rule's own. `on_unknown` per that rule.
 - **Example:** a share withholds `data_classification`; on the fork, the rule reading `/objectives/data_classification` (V13) is `unknown`, not `pass`.
 - **Dependency:** CD-1's typed answer states; v1's evaluator treats the string `"unknown"` as a known value (P1), so a withheld marker must not be a string sentinel.
@@ -277,9 +328,9 @@ No prices or capacity figures are recorded. Cost snapshots reference #39's `Cost
 
 1. Adopt option C: immutable revisions with separate historical and current validity, and derived revisit states.
 2. Share by opaque, revocable link to a redacted projection of one revision; apply the sensitivity table to shares and exports alike.
-3. Never copy organisation attestations; forks receive withheld inputs as unanswered, evaluated as `unknown`.
+3. Never copy organisation attestations; forks receive withheld inputs as unanswered and apply the existing missing-input, applicability and SB-R5 behavior.
 4. Compare by (kind, role) with explicit "not comparable" reasons; never sum across currencies, charge bases or one-off/operating scopes.
-5. Invalidate on publications and rights decisions, not on elapsed time, until #41 adopts a TTL.
+5. Keep historical reproducibility, current eligibility and disclosure separate. Publications can prompt a current evaluation; apply selected-input, correction, validity and rights events to their actual scope without inventing a TTL or invalidating history solely because a successor exists (P9).
 6. Route SB-1 to SB-10 and SB-R1 to SB-R5 to #40 rather than extending v1 locally.
 
 ## Structured artifacts
@@ -307,16 +358,21 @@ separate decisions. The fixture is synthetic; #42 retains its #40 prerequisite.
 
 ## Open decisions (SB-)
 
+The table retains the original SB identities. Rows marked received record the
+accepted base research choice and name its remaining integration scope; they do
+not reopen that choice as an undecided alternative. A future implementation or
+released wire format is not a new prerequisite for research acceptance.
+
 | ID | Decision | Accountable | Consulted |
 | --- | --- | --- | --- |
-| SB-1 | A typed `assumptions` record: presets, defaulted values, unanswered inputs, FX/tax assumptions, each with source | #40 | #81 (CD-1), #39 |
+| SB-1 | The CD-1 typed answer and explicit provided-value attribution representation is received in P10. Remaining build-assumption mapping includes presets and FX/tax assumptions with their actual sources; receipt does not add fields to v1 | #40 | #81 (CD-1), #39 |
 | SB-2 | Lock the catalog snapshot `revision`, or require snapshot ids to be unique per revision | #40 | #41 |
 | SB-3 | Link a build revision to its cost snapshot: pricebook `revision` in `locks`, and how the build references its `CostEstimate` | #40 | #39 |
 | SB-4 | Visibility as a separate share record (token, access mode, pinned or following revision, created/revoked dates) rather than a build field | #40 | product owner (#42 assignees) |
 | SB-5 | Validation state is derived from reports, not stored; meaning of `lifecycle: validated`; recording the evaluator version in reports | #40 | — |
 | SB-6 | Fork lineage: source build id and revision on the new build | #40 | — |
 | SB-7 | Several workloads sharing one machine (#81 Q7) | #40 | #10, #81 |
-| SB-8 | A `withheld` answer state, distinct from `unknown` and `missing`, for shared and forked builds | #40 (with CD-1) | #81 |
+| SB-8 | The five-state CD-1 research representation, including distinct `withheld`, is received in P10. Apply its exact profile and migration boundary to the separately reviewed share/fork projection; do not reinterpret the delivered 0.1 reader | #40 (with CD-1) | #81 |
 | SB-9 | Retention of shared links and revisions: expiry, effect of owner deletion, survival of forks | product owner (#42 assignees) | #41 (data governance) |
 | SB-10 | Where cross-record integrity checks (SB-R1 to SB-R3) live: Ruleset, evaluator preconditions or a separate validator | #40 | — |
 
@@ -324,30 +380,65 @@ separate decisions. The fixture is synthetic; #42 retains its #40 prerequisite.
 
 | Handoff | What is asked | Status |
 | --- | --- | --- |
-| #40 | Accept, narrow or reject SB-1 to SB-8, SB-10 and SB-R1 to SB-R5; confirm the build record mapping | Pending; #42 stays blocked by #40 |
-| #41 | Confirm the invalidation table against the interim policy; a future TTL decision would add a time trigger | Confirmed for this scope by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384); no TTL adopted |
+| #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted on 2026-10-18 (P10). Producer delivery, remaining SB decisions and the complete projection retain separate gates; #42's live #40 prerequisite remains |
+| #41 | Confirm the invalidation table and the separate retained/current/disclosure boundaries | Original interim scope confirmed by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384). The actual delegated H41-42 receiving decision on 2026-10-18 accepts the later scoped interface (P9); no arbitrary TTL or whole sharing/migration policy is adopted |
 | #39 | Confirm SB-3 and the cost comparison rules (currency, period, charge basis, one-off vs operating) | Pending |
 | #37 | A "deploy from saved build" path must use the pinned revision and its own approvals (V8) | Pending |
 | #81 (#2/#3) | Q7 answered as SB-7 (open); per-component mode, `/workload`, attestations and the "report from a saved build" pre-fill (P1, deployment-mode.md "Report from a build") consume the share redaction: a pre-filled fit report must take the configuration key only, never withheld inputs | Pending |
 | #60 | Confirm that rights changes hide values in historical and shared views | Pending |
 | #51 | PCPartPicker save and share flows remain unobserved (P5); this note doesn't rely on them | Informational |
 
-The #41 invalidation-policy handoff above is confirmed. Other receiving-owner dispositions remain pending; #40 routing and the merge of its partial record in #126 do not complete #40 or remove the #42 prerequisite.
+The original #41 invalidation-policy handoff and the later H41-42 scope are
+confirmed. The [actual H41-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254389540)
+reviewed proposed source `13b11b7eb9a84af200ea9f0577fcb0e5182a4c46`, note blob
+`c7d36a3c6c5ff305080867ec98763019d5e365bb`. At that receipt the source was unsigned
+and unmerged; the receipt itself establishes no producer delivery or validation
+result. It accepts selected-input change events, corrections/retractions,
+current-state eligibility and source-use boundaries, including preserved
+permitted history after failed refresh and withheld values after a rights
+exclusion. It keeps secrets, private condition/grant references and organisation
+attestations out of share/fork, and does not treat CD-7 configuration-only work
+as a blanket sharing/history migration.
+
+This was an actual delegated engineering receiving decision, not a reply
+attributed to another named assignee. The new proposal covering all fields above
+is separately offered for review; it is not retroactively attributed to P9.
+
+The subsequent [actual H40-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254602552)
+accepts the selected research representation at proposed source
+`45b20960cbc4652fb3341c977a025821c96595f9`, note blob
+`375506eea95bd7fc30883c0e4f2a2f5496f77cfd` (P10). It receives the pointer-indexed
+five answer states with explicit provided-value attribution, exact
+Build/revision/selection/catalog and rule/report identities, immutable original
+bytes and explicitly versioned successor projections. These accepted base
+choices are not reopened as missing alternatives by the SB table.
+
+Retained 0.1 records stay in their original profile: a new projection cannot
+invent `assumption: false`, discard an old source, copy a current value or supply
+a missing identity. Private scoped organisation attestations and condition/grant
+references do not transfer through share/fork; the recipient supplies its own
+applicable answers. The configuration-only #383 reader is not a complete shared
+historical/current view. This actual delegated research intake supplies neither
+producer delivery nor another named person's response; the source was unsigned
+and unmerged at the receipt. It does not retrospectively accept this note's new
+disclosure proposal. Other receiving decisions, retention, share access and the
+remaining SB mapping/projection work stay separate. The live #40 prerequisite
+is not removed by either source-only receipt.
 
 ## Acceptance criteria coverage
 
 | Criterion | Where | Status |
 | --- | --- | --- |
-| Build record definition referencing #40 schema | Build record definition | Drafted against v1; gaps routed to #40 |
-| Sharing and privacy rules | Sharing; Field sensitivity | Drafted; retention open (SB-9) |
+| Build record definition referencing #40 schema | Build record definition; H40-42 receipt | v1 mapping retained; selected base research representations received in P10, with remaining SB work and producer delivery separate |
+| Sharing and privacy rules | Sharing; Field sensitivity; Disclosure across complete projections | Disclosure across all fields proposed for review; retention open (SB-9) |
 | Comparison semantics with examples | Comparison | Drafted, including required-foundation and optional-tier boundary cases |
-| Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states | Drafted on the interim policy |
+| Invalidation triggers (from #41) and user-visible states | Invalidation triggers; Revisit states; H41-42 receipt | Original interim scope and later retained/current/disclosure interface received; no whole-issue or implementation acceptance |
 | Decision record merged | Proposal sequencing decision | Partial record merged in [#114](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114); #42 completion remains blocked by #40 |
 | Deployment modes covered | Candidate options; Comparison | Covered using #81's merged definitions |
 | Comparison fields with type, unit, evidence | Comparison fields | Drafted |
 | Rules in #40 format; verified vs hypotheses | Compatibility proposals | Contract-derived vs hypothesis labelled; none reproduced |
 | Primary sources with access dates | Evidence | Done for the claims made |
-| Handoffs confirmed by owners | Open questions and handoffs | #41 invalidation scope confirmed; other handoffs pending |
+| Handoffs confirmed by owners | Open questions and handoffs | Original #41 invalidation scope and actual delegated H41-42/H40-42 scopes confirmed; other handoffs pending |
 | Open questions with named owner | Open decisions | Done |
 
 ## Evidence
@@ -378,5 +469,56 @@ The #41 invalidation-policy handoff above is confirmed. Other receiving-owner di
 | P6 | `research/T5-training-fine-tuning/README.md` (T5 rules `skipped` when removed) | 2026-10-17 | `main` at `f297ac5` | Project research | — |
 | P7 | `prompts/T0.md` Track E on PR #74 (`docs/maintainer-research-prompts`) | 2026-10-17 | unmerged | Project guidance | Guidance, not acceptance |
 | P8 | [#60 scoped receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6248616771), delivered by [PR #299](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/299); [accepted source-use record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/3d395801742461aa82ac31a21857ec6f8d0270fb/research/market/rights-validation.md) | 2026-10-18 | Accepted main `3d395801742461aa82ac31a21857ec6f8d0270fb` | Project engineering receiving decision | Current GPUs.io API/display/export exclusion supersedes the historical P4 consumer guidance; no new permission, production integration approval or #42 contract adoption |
+| P9 | [Actual H41-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254389540); [reviewed producer source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/13b11b7eb9a84af200ea9f0577fcb0e5182a4c46/research/T0-configuration/catalog-data-sources.md) | 2026-10-18 | Proposed source `13b11b7e`, note blob `c7d36a3c`; receipt submitted 2026-10-18 19:51:29 UTC | Project engineering receiving decision | Accepts the stated saved-build event/current/disclosure interface; unsigned source at receipt, no producer-delivery claim, attribution to absent people, whole-issue completion or blanket sharing/history migration |
+| P10 | [Actual H40-42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6254602552); [reviewed producer source](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/45b20960cbc4652fb3341c977a025821c96595f9/research/T0-configuration/component-schema-compatibility.md) | 2026-10-18 | Proposed source `45b20960`, note blob `375506ee`; receipt submitted 2026-10-18 20:12:44 UTC | Project engineering receiving decision | Accepts the stated base research representations and conditions; unsigned source at receipt, no producer-delivery, complete shared/history implementation, new disclosure-proposal acceptance or #42 completion claim |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; the contract decisions and #42 prerequisite remain open.
+
+## Retained input association diagnostics (2026-10-18)
+
+The local [historical replay prototype](../../tests/t0_historical_replay_prototype.py)
+now retains independently checkable associations for all selected historical
+inputs when another input prevents reproduction. This extends the retained-report
+correction delivered in [#383](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/383)
+to the existing SB-2/SB-3 and SB-R2 identity checks. It changes neither the frozen
+schemas nor the replay manifest/profile or existing reason-code vocabulary.
+
+Actual synthetic probes on accepted
+[`a219392b`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/a219392b64f82849b00f7da373b13661518354c4)
+showed that all eight complete-input controls exposed their known mismatch:
+resource/cost Build ID or revision, and ruleset/graph lock ID or version/revision.
+Removing only the unrelated catalog hid all eight diagnoses, although each
+affected artifact still resolved to its exact manifest-bound bytes. No evaluator
+callback ran and no original input bytes changed. The expanded
+[regression matrix](../../tests/test_t0_saved_input_associations.py) also covers
+selection, rate, missing-sidecar, digest, reader-profile and unselected-artifact
+boundaries. These are synthetic source observations, not measured estimates or
+observations of a saved-build UI.
+
+| Association | Inputs needed to establish a mismatch |
+| --- | --- |
+| Ruleset ID/version; graph ID/revision | The original Build locks and the independently resolved ruleset or graph |
+| Resource, cost and report Build ID/revision; report locks | The original Build and the independently resolved derived record |
+| Resource selection IDs; priced/unpriced cost selection IDs | The original Build selections and the independently resolved estimate |
+| Cost Pricebook ID | The original Build's Pricebook lock and the independently resolved cost; an absent optional lock cannot admit a retained cost |
+| Cost rate ID, selected item/version and meter | The independently resolved cost, original Build selections and exact resolved Pricebook matching the cost's Pricebook ID |
+| Rate-to-catalog membership | Both exact resolved Pricebook and catalog |
+
+Unavailable, unpinned, digest-mismatched or explicitly unsupplied records cannot
+supply association claims. An unrelated newer or foreign archived record cannot
+replace them. In particular, a missing Pricebook leaves rate comparisons
+unavailable; it does not hide a selection ID or Pricebook-lock disagreement
+already established from the original Build and exact cost bytes. All available
+diagnostics are emitted once. Existing input-availability, digest, selection and
+reader-profile status precedence remains; a mismatch still prevents evaluation.
+
+Original Build, sidecar, manifest, estimates and report bytes remain unchanged.
+A resolved content binding means the selected bytes were recovered; the separate
+association diagnostic explains why those bytes do not support this saved Build.
+It does not establish numerical accuracy, current price or capacity eligibility,
+source authenticity, source-use permission or a new compatibility result. Current
+consumer presentation, retained-report storage, successor migration and the
+remaining SB/CD receiving decisions keep their existing owners and scope. The
+separately delivered #377 diagnostic view remains its original controller's work;
+this correction adds no replacement view or callback protocol. #40 and #42
+acceptance remains open.

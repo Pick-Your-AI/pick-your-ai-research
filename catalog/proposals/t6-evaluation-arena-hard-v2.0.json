@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-arena-hard-v2-preference",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Arena-Hard v2.0 preference scoring",
+  "version": "v2.0",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "Publisher-designated preview edition, scoped to its available preference-scoring method. The score label is not a new independently defined metric or a measured benchmark result. This is a source-only capability proposal. No evaluation, dataset admission, model/data permission, price quote or deployment gate is established. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "Scores (%)"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://github.com/lmarena/arena-hard-auto/blob/196f6b826783b3da7310e361a805fa36f0be83f3/README.md",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob f3445b6200ed7ceefaeb333ba3655edf9324937d, SHA256 f0563c344399179df0fb7abbb2503762b0446584ace78039f1f792058e0ab0dc, was read without importing or executing the package. The publisher explicitly calls Arena-Hard v2.0 a preview. Batch answers and pairwise judging support offline evaluation, not network isolation. Version 0.1 appears as a past leaderboard, not an alias for this edition."
+    },
+    {
+      "source_uri": "https://github.com/lmarena/arena-hard-auto/blob/196f6b826783b3da7310e361a805fa36f0be83f3/config/arena-hard-v2.0.yaml",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob a3096afaf0f05a6f57cf6ce1336a1b8dadf99029, SHA256 ee68e5c6ac98a79720bf11014fc3f7fc3c3e5899153b3b08efe3db0e174215a0, was read without importing or executing the package. The v2.0 configuration pins a benchmark name and judge settings. Source-named endpoints are not verified as presently callable, and no one judge/configuration is a general project recommendation."
+    },
+    {
+      "source_uri": "https://github.com/lmarena/arena-hard-auto/blob/196f6b826783b3da7310e361a805fa36f0be83f3/show_result.py",
+      "checked_at": "2026-10-18T20:35:59.905411+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact source blob aa9f2a2bcb28e7ce82496dc9bfca412a1ff2e386, SHA256 5da0fa30a807a150da37e97811c2bc248959015eedb884d9d471e894c8bf90c6, was read without importing or executing the package. Scores (%) is the literal displayed preference-score label. The method uses swapped comparisons and weights strong preference; missing judgments are dropped and reported. Optional style-control flags are separate from the default path. Its 0.05/0.95 bootstrap quantiles must not be described as a 95-percent interval. Judge, category, retained comparison count and bootstrap settings remain required result context."
+    }
+  ],
+  "updated_at": "2026-10-18T20:35:59.905411+00:00"
+}

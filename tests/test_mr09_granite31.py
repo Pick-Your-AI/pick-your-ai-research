@@ -8,6 +8,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -116,6 +117,166 @@ class SupplementalProtocolGuards(unittest.TestCase):
             self.assertEqual(output.read_text(), "synthetic existing observation")
 
 
+class SupplementalOutputPreservation(unittest.TestCase):
+    """Exercise the actual final-result boundary with offline actions only."""
+
+    @contextlib.contextmanager
+    def boundary(self, root, output, *, prepare, preflight_hook=None,
+                 action_hook=None, invalid_result=False):
+        model = root / "model"
+        preflight = root / "granite31-preflight-1.json"
+        screen = {"guards": {"nvidia_smi_free_mib": True,
+                             "available_host_ram_bytes": True,
+                             "temporary_volume_free_bytes": True}}
+        result = {"classification": "synthetic result fixture",
+                  "recorded_path": str(model), "literal": "retained\nvalue"}
+        if not prepare:
+            result["status"] = "success"
+        if invalid_result:
+            result["invalid"] = float("nan")
+
+        def run(argv, **kwargs):
+            self.assertEqual(Path(argv[1]).name, "mr09_preflight.py")
+            self.assertTrue(kwargs["check"])
+            preflight.write_text(json.dumps(screen), encoding="utf-8")
+            if preflight_hook:
+                preflight_hook()
+            return subprocess.CompletedProcess(argv, 0)
+
+        def action(*args):
+            if action_hook:
+                action_hook()
+            return result
+
+        argv = [str(SCRIPT), "--model-dir", str(model), "--output", str(output)]
+        if prepare:
+            argv.append("--prepare")
+        stdout, stderr = io.StringIO(), io.StringIO()
+        with (patch.object(sys, "argv", argv),
+              patch.object(MODULE.subprocess, "run", side_effect=run) as capacity,
+              patch.object(MODULE, "prepare", side_effect=action) as download,
+              patch.object(MODULE, "measurement", side_effect=action) as measurement,
+              patch.object(MODULE.urllib.request, "urlopen") as network,
+              contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr)):
+            yield SimpleNamespace(capacity=capacity, download=download,
+                                  measurement=measurement, stdout=stdout,
+                                  stderr=stderr, preflight=preflight, screen=screen)
+            network.assert_not_called()
+        self.assertFalse(model.exists(), "no actual model or download is part of this test")
+
+    def create_entry(self, output, kind):
+        retained = output.with_name("retained.json")
+        original = b"synthetic immutable Granite observation\n"
+        if kind == "file":
+            output.write_bytes(original)
+        elif kind == "directory":
+            output.mkdir()
+            (output / "retained.json").write_bytes(original)
+        else:
+            if kind == "symlink":
+                retained.write_bytes(original)
+            output.symlink_to(retained)
+
+        def unchanged():
+            if kind == "file":
+                self.assertEqual(output.read_bytes(), original)
+            elif kind == "directory":
+                self.assertTrue(output.is_dir())
+                self.assertEqual(list(output.iterdir()), [output / "retained.json"])
+                self.assertEqual((output / "retained.json").read_bytes(), original)
+            else:
+                self.assertTrue(output.is_symlink())
+                self.assertEqual(output.readlink(), retained)
+                if kind == "symlink":
+                    self.assertEqual(retained.read_bytes(), original)
+                else:
+                    self.assertFalse(retained.exists())
+        return unchanged
+
+    def assert_rejected(self, boundary):
+        with self.assertRaises(SystemExit) as stopped:
+            MODULE.main()
+        self.assertEqual(stopped.exception.code, 2)
+        self.assertIn("output exists; preserve observations", boundary.stderr.getvalue())
+        self.assertNotIn("Traceback", boundary.stderr.getvalue())
+        self.assertEqual(boundary.stdout.getvalue(), "")
+
+    def test_existing_result_entries_stop_preflight_and_both_actions_without_mutation(self):
+        for prepare in (False, True):
+            for kind in ("file", "directory", "symlink", "dangling_symlink"):
+                with self.subTest(prepare=prepare, kind=kind), tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary)
+                    output = root / "result.json"
+                    unchanged = self.create_entry(output, kind)
+                    with self.boundary(root, output, prepare=prepare) as boundary:
+                        self.assert_rejected(boundary)
+                        boundary.capacity.assert_not_called()
+                        boundary.download.assert_not_called()
+                        boundary.measurement.assert_not_called()
+                        self.assertFalse(boundary.preflight.exists())
+                    unchanged()
+
+    def test_result_arriving_during_preflight_or_either_action_is_preserved(self):
+        for prepare in (False, True):
+            for stage in ("preflight", "action"):
+                for kind in ("file", "directory", "symlink", "dangling_symlink"):
+                    with self.subTest(prepare=prepare, stage=stage, kind=kind), tempfile.TemporaryDirectory() as temporary:
+                        root = Path(temporary)
+                        output = root / "result.json"
+                        checks = []
+
+                        def arrival():
+                            checks.append(self.create_entry(output, kind))
+
+                        hook = {"preflight_hook" if stage == "preflight" else "action_hook": arrival}
+                        with self.boundary(root, output, prepare=prepare, **hook) as boundary:
+                            self.assert_rejected(boundary)
+                            self.assertEqual(boundary.capacity.call_count, 1)
+                            self.assertEqual(boundary.download.call_count, int(prepare))
+                            self.assertEqual(boundary.measurement.call_count, int(not prepare))
+                            self.assertEqual(json.loads(boundary.preflight.read_text()), boundary.screen)
+                        self.assertEqual(len(checks), 1)
+                        checks[0]()
+
+    def test_invalid_result_serialization_does_not_reserve_a_result_path(self):
+        for prepare in (False, True):
+            with self.subTest(prepare=prepare), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                output = root / "fresh" / "result.json"
+                with self.boundary(root, output, prepare=prepare, invalid_result=True) as boundary:
+                    with self.assertRaises(ValueError):
+                        MODULE.main()
+                    self.assertEqual(boundary.capacity.call_count, 1)
+                    self.assertEqual(boundary.download.call_count, int(prepare))
+                    self.assertEqual(boundary.measurement.call_count, int(not prepare))
+                    self.assertEqual(boundary.stdout.getvalue(), "")
+                self.assertFalse(output.exists())
+                self.assertFalse(output.parent.exists())
+
+    def test_fresh_result_keeps_both_actions_sanitization_preflight_and_source_binding(self):
+        for prepare in (False, True):
+            with self.subTest(prepare=prepare), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                output = root / "fresh" / "result.json"
+                with self.boundary(root, output, prepare=prepare) as boundary:
+                    self.assertEqual(MODULE.main(), 0)
+                    self.assertEqual(boundary.capacity.call_count, 1)
+                    self.assertEqual(boundary.download.call_count, int(prepare))
+                    self.assertEqual(boundary.measurement.call_count, int(not prepare))
+                    expected = {"classification": "synthetic result fixture",
+                                "recorded_path": "$MODEL_DIR", "literal": "retained\nvalue",
+                                "fresh_preflight": boundary.screen}
+                    if not prepare:
+                        expected["status"] = "success"
+                        expected["dense_instrument_source_sha256"] = hashlib.sha256(
+                            SCRIPT.with_name("mr09_measure.py").read_bytes()).hexdigest()
+                    self.assertEqual(json.loads(output.read_text()), expected)
+                    self.assertTrue(output.read_bytes().endswith(b"\n"))
+                    self.assertEqual(json.loads(boundary.stdout.getvalue()), {
+                        "output": str(output), "status": "prepared" if prepare else "success", "failure": None})
+                    self.assertEqual(boundary.stderr.getvalue(), "")
+
+
 class CommittedGM1Integrity(unittest.TestCase):
     """Validate recorded evidence without executing or manufacturing observations."""
     def test_real_cohort_pins_guards_artifacts_and_summary(self):
@@ -140,11 +301,14 @@ class CommittedGM1Integrity(unittest.TestCase):
         executed_sha = hashlib.sha256(executed.read_bytes()).hexdigest()
         self.assertEqual(executed_sha, "338ebb6a197712b655c5c2f69d6b1dbc0a51265455773b58c32ea2bc87c13974")
         self.assertNotEqual(hashlib.sha256(SCRIPT.read_bytes()).hexdigest(), executed_sha)
+        dense_executed = repo / "research/market/measurements/mr09_measure.executed.py"
+        dense_executed_sha = hashlib.sha256(dense_executed.read_bytes()).hexdigest()
+        self.assertEqual(dense_executed_sha, "d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8")
         for rep in (1, 2, 3):
             run = json.loads((directory / f"mr09-GM1-r{rep}.json").read_text())
             self.assertEqual(run["script_sha256"], executed_sha)
             self.assertEqual(run["protocol_sha256"], hashlib.sha256(protocol.read_bytes()).hexdigest())
-            self.assertEqual(run["dense_instrument_source_sha256"], hashlib.sha256((repo / "scripts/mr09_measure.py").read_bytes()).hexdigest())
+            self.assertEqual(run["dense_instrument_source_sha256"], dense_executed_sha)
             self.assertEqual(run["model_id"], MODULE.MODEL_ID)
             self.assertEqual(run["revision"], MODULE.REVISION)
             self.assertEqual(run["cell"], "GM1")

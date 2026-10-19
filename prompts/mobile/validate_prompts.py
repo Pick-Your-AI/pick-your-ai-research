@@ -11,6 +11,8 @@ import re
 from pathlib import Path
 from urllib.parse import unquote
 
+from acceptance_placements import read_json, validate_placements
+
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent.parent
 
@@ -26,12 +28,14 @@ def checklist(text):
 
 
 def validate(audit_dir=None):
-    records = json.loads((ROOT / 'coverage.json').read_text(encoding='utf-8'))['issues']
+    records = read_json(ROOT / 'coverage.json')['issues']
     projects = json.loads((ROOT / 'project-fields.json').read_text(encoding='utf-8'))['projects']
     by_issue = {r['issue']: r for r in records}
     by_url = {r['url']: r for r in records}
     assert len(by_issue) == len(records), 'Duplicate issue mappings'
     index = (ROOT / 'INDEX.md').read_text(encoding='utf-8')
+    placements = validate_placements(read_json(ROOT / 'acceptance-placements.json'),
+                                     records, index)
     for p in projects:
         members = {r['issue'] for r in records if r['project'] == p['project']}
         assert members == set(p['issues']), 'Project coverage mismatch'
@@ -64,7 +68,6 @@ def validate(audit_dir=None):
             assert r['implementation_steps'], n
             assert r['url'] in (ROOT / r['prompt']).read_text(encoding='utf-8')
         if r['acceptance_path']:
-            assert r['acceptance_repository'] == 'Pick-Your-AI/pickyour.ai'
             assert f'`{r["acceptance_path"]}`' in r['delivery_review_boundary']
         else:
             assert r['platform'] == 'apple' and r['placement_decision'].startswith('Pick-Your-AI/pick-your-ai-apple#')
@@ -143,7 +146,8 @@ def validate(audit_dir=None):
           f'{sum(r["level"] == "Epic" for r in records)} epic prompts, '
           f'{sum(len(r["acceptance_criteria"]) for r in records)} criteria, '
           f'{sum(len(r["implementation_steps"]) for r in records)} steps; '
-          'mappings, paths, local links, field vocabulary and prerequisite DAG')
+          f'mappings, paths, local links, field vocabulary and prerequisite DAG; '
+          f'{placements} accepted placement coordinates')
     if audit_dir:
         print('PASS: exact acceptance/steps, source, ownership, hierarchy, prerequisites and Project snapshot comparison')
     print('Not certified: source truth, rights/freshness, application behavior, devices, store/release state or reviewer acceptance.')

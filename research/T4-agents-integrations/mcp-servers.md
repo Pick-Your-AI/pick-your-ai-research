@@ -1206,8 +1206,32 @@ a subreaper. The standard research requirements and automatic CI do not install
 the optional SDK environments. No vendor endpoint, authentication or catalog
 qualification is added by this correction.
 
-The #25/#27 next step is to bind a selected client/framework, server artifact,
+### Lifecycle fixture startup boundary (2026-10-18)
+
+A later required repository run exposed a separate test-fixture error: the
+two-second timeout could kill the worker before its independently sessioned peer
+finished importing the observer and wrote its post-guard readiness record. The
+test then errored on the absent readiness file. A deliberate 2.25-second peer
+startup delay reproduced that error through the actual `observe()` path; this
+does not demonstrate a failure of the unchanged observer's cleanup implementation.
+
+The offline regression now gives fixture startup a bounded 15-second budget and
+checks the recorded worker/peer/parent/group identities before starting the
+existing two-second cleanup deadline. The separate-session case retains that
+delayed-start control. The actual timeout must still kill the owned peer with
+`SIGKILL`, reap its worker, permit reaping of the adopted peer and leave the
+unrelated sentinel running. Readiness failure remains a test failure, and the
+existing owned-child cleanup and restored subreaper state remain required.
+
+This changes the test fixture, not `run_worker()`, the observer's normal
+20-second worker budget, the pinned SDK replay or any server-compatibility claim.
+The original failed run and delayed-start control remain distinct from the
+corrected lifecycle tests; no SDK exchange is newly attributed to this repair.
+
+The selected-tuple follow-up for #25/#27 is to bind a client/framework, server artifact,
 transport and authentication configuration to an eligible actual exchange.
 This local experiment supplies no such vendor tuple and does not infer the
 capabilities of servers from their SDK dependency. External receiving-owner
-dispositions and complete issue acceptance remain open.
+dispositions retain their actual scopes in the
+[research completion assessment](#research-completion-assessment-2026-10-18);
+that completed research does not qualify unexamined runtime configurations.

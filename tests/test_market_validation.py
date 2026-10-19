@@ -81,6 +81,156 @@ class MarketValidation(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertIn('Market integrity OK: 1 entities, 1 cells, 1 issues', result.stdout)
 
+    def done_backlog(self):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0].update(
+            status='Done', completion_evidence={
+                'accepted_commit': 'synthetic-accepted-commit',
+                'review_url': 'https://example.com/synthetic-review',
+                'handoff_acceptance': 'Synthetic receiving decision; no actual acceptance.',
+            })
+        return data
+
+    def assert_invalid_completion(self, completion, expected):
+        data = self.done_backlog()
+        data['research-backlog.json'][0]['completion_evidence'] = completion
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn('backlog #1: Done requires recorded acceptance evidence',
+                              result.stderr)
+                self.assertIn(expected, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_done_completion_requires_an_object(self):
+        for value in (None, True, 1, 1.25, [], ['receipt'], '', 'receipt'):
+            with self.subTest(value=value):
+                self.assert_invalid_completion(value, 'requires an object')
+
+    def test_done_completion_requires_each_recorded_text_field(self):
+        baseline = self.done_backlog()['research-backlog.json'][0]['completion_evidence']
+        for field in ('accepted_commit', 'review_url', 'handoff_acceptance'):
+            missing = deepcopy(baseline)
+            missing.pop(field)
+            self.assert_invalid_completion(missing, field + ' must be nonempty text')
+            for value in (None, True, False, 1, 1.25, [], ['receipt'],
+                          {}, {'receipt': 'unsupported'}, '', ' \t\n'):
+                completion = deepcopy(baseline)
+                completion[field] = value
+                with self.subTest(field=field, value=value):
+                    self.assert_invalid_completion(completion,
+                                                   field + ' must be nonempty text')
+
+    def test_done_review_reference_uses_existing_http_url_checks(self):
+        baseline = self.done_backlog()['research-backlog.json'][0]['completion_evidence']
+        for value in ('receipt', 'file:///synthetic-review',
+                      'https://user:password@example.com/review',
+                      'https://example.com:invalid/review',
+                      'https://example.com/review\n'):
+            completion = deepcopy(baseline)
+            completion['review_url'] = value
+            with self.subTest(value=value):
+                self.assert_invalid_completion(completion, 'review_url')
+
+    def test_done_completion_preserves_valid_record_text_without_certifying_it(self):
+        data = self.done_backlog()
+        completion = data['research-backlog.json'][0]['completion_evidence']
+        completion['accepted_commit'] = '  synthetic short identity  '
+        completion['handoff_acceptance'] += '\nRetained scope and unknowns.\n'
+        completion['extra_context'] = {'synthetic': True}
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn('Market integrity OK', result.stdout)
+                self.assertEqual((self.base / 'research-backlog.json').read_text(),
+                                 json.dumps(data['research-backlog.json']))
+
+    def test_incomplete_completion_remains_allowed_before_done(self):
+        for value in (None, {}, {'review_url': 'unknown'}):
+            data = deepcopy(self.data)
+            data['research-backlog.json'][0]['completion_evidence'] = value
+            for optimized in (False, True):
+                with self.subTest(value=value, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+
+    def assert_invalid_deliverable(self, value, error_text):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0]['deliverable'] = value
+        for optimized in (False, True):
+            with self.subTest(value=value, optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertNotEqual(result.returncode, 0, result.stdout)
+                self.assertIn('MarketValidationError', result.stderr)
+                self.assertIn('backlog #1: deliverable', result.stderr)
+                self.assertIn(error_text, result.stderr)
+                self.assertNotIn('Market integrity OK', result.stdout)
+
+    def test_deliverable_requires_nonempty_path_text(self):
+        for value in (None, True, 1, 1.25, [], {}, '', ' \t\n'):
+            self.assert_invalid_deliverable(value, 'nonempty relative file path')
+
+    def test_deliverable_rejects_directories_and_absolute_or_escaping_files(self):
+        (self.base / 'nested').mkdir()
+        outside = self.root / 'outside-note.md'
+        outside.write_text('Synthetic file outside the market directory.\n')
+        for value in ('.', 'nested'):
+            self.assert_invalid_deliverable(value, 'requires an existing file')
+        for value in (str(self.base / 'note.md'), str(outside)):
+            self.assert_invalid_deliverable(value, 'requires a relative file path')
+        self.assert_invalid_deliverable('../../outside-note.md',
+                                        'must remain within research/market')
+
+    def test_deliverable_rejects_external_and_unresolvable_symlinks(self):
+        outside = self.root / 'outside-note.md'
+        outside.write_text('Synthetic external symlink target.\n')
+        self.create_test_symlink(self.base / 'outside-link.md', outside)
+        self.assert_invalid_deliverable('outside-link.md',
+                                        'must remain within research/market')
+        (self.base / 'broken-link.md').symlink_to('missing.md')
+        (self.base / 'loop-link.md').symlink_to('loop-link.md')
+        for value in ('broken-link.md', 'loop-link.md'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
+    def test_deliverable_rejects_missing_and_invalid_paths(self):
+        for value in ('missing.md', 'missing/../note.md', 'null\x00byte.md'):
+            self.assert_invalid_deliverable(value, 'resolvable path')
+
+    def create_test_symlink(self, path, target):
+        try:
+            path.symlink_to(target)
+        except NotImplementedError:
+            self.skipTest('symbolic links are unavailable on this platform')
+        except OSError as error:
+            if sys.platform == 'win32' and error.winerror in (5, 50, 1314):
+                self.skipTest('this Windows environment cannot create symbolic links')
+            raise
+
+    def test_deliverable_accepts_existing_local_paths_without_rewriting_input(self):
+        (self.base / 'nested').mkdir()
+        (self.base / 'nested' / 'scoped note.md').write_text('Synthetic nested note.\n')
+        for value in ('note.md', 'nested/scoped note.md',
+                      'nested/../note.md'):
+            self.assert_valid_deliverable(value)
+
+    def test_deliverable_accepts_internal_symlink_without_rewriting_input(self):
+        self.create_test_symlink(self.base / 'local-link.md', 'note.md')
+        self.assert_valid_deliverable('local-link.md')
+
+    def assert_valid_deliverable(self, value):
+        data = deepcopy(self.data)
+        data['research-backlog.json'][0]['deliverable'] = value
+        for optimized in (False, True):
+            with self.subTest(value=value, optimized=optimized):
+                result = self.run_validator(data, optimized)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn('Market integrity OK', result.stdout)
+                self.assertEqual((self.base / 'research-backlog.json').read_text(),
+                                 json.dumps(data['research-backlog.json']))
+
     def assert_invalid_integration(self, records, error_text):
         data = deepcopy(self.data)
         data['integrations.json'] = records
@@ -514,6 +664,48 @@ class MarketValidation(unittest.TestCase):
                 self.assertIn(error_text, result.stderr)
                 self.assertNotIn('Market integrity OK', result.stdout)
 
+    def test_backlog_status_requires_present_text(self):
+        baseline = self.data['research-backlog.json']
+        for value in (None, True, False, 0, 1, 1.0, [], ['Done'], {}, {'status': 'Done'}):
+            with self.subTest(status=value):
+                records = deepcopy(baseline)
+                records[0]['status'] = value
+                self.assert_invalid_backlog(records, 'backlog #1: status must be')
+        records = deepcopy(baseline)
+        del records[0]['status']
+        self.assert_invalid_backlog(records, 'backlog #1: status must be')
+
+    def test_backlog_status_rejects_unknown_and_normalized_aliases(self):
+        baseline = self.data['research-backlog.json']
+        for value in ('', ' \t\n', 'done', 'DONE', 'Done ', ' Done',
+                      'In progress', 'In Review\n', 'Completed', 'Backlog',
+                      'Done\u200b', 'In\u00a0Progress'):
+            with self.subTest(status=value):
+                records = deepcopy(baseline)
+                records[0]['status'] = value
+                self.assert_invalid_backlog(records, 'backlog #1: status must be')
+
+    def test_backlog_status_accepts_all_market_options_without_rewriting_input(self):
+        # Inbox and Triage are market intake states, unlike technical Backlog.
+        for status in ('Inbox', 'Triage', 'Ready', 'In Progress',
+                       'In Review', 'Blocked', 'Done'):
+            data = deepcopy(self.data)
+            item = data['research-backlog.json'][0]
+            item['status'] = status
+            if status == 'Done':
+                item['completion_evidence'] = {
+                    'accepted_commit': 'Synthetic accepted revision',
+                    'review_url': 'https://example.com/synthetic-review',
+                    'handoff_acceptance': 'Synthetic acceptance record',
+                }
+            for optimized in (False, True):
+                with self.subTest(status=status, optimized=optimized):
+                    result = self.run_validator(data, optimized)
+                    self.assertEqual(result.returncode, 0, result.stderr)
+                    self.assertIn('Market integrity OK', result.stdout)
+                    for name, value in data.items():
+                        self.assertEqual((self.base / name).read_text(), json.dumps(value))
+
     def test_backlog_issue_numbers_are_positive_json_integers(self):
         baseline = self.data['research-backlog.json']
         for value in (True, False, 0, -1, 1.0, 1.5, '1', '', None):
@@ -670,6 +862,66 @@ class MarketValidation(unittest.TestCase):
         child.update(number=2, parent_number=1)
         records.append(child)
         self.assert_invalid_backlog(records, 'cyclic parent links')
+
+    def completion_backlog(self, statuses, parents):
+        records = []
+        for number, (status, parent) in enumerate(zip(statuses, parents), 1):
+            item = deepcopy(self.data['research-backlog.json'][0])
+            item.update(number=number, status=status, parent_number=parent)
+            if status == 'Done':
+                item['completion_evidence'] = {
+                    'accepted_commit': 'synthetic accepted commit',
+                    'review_url': 'https://example.com/synthetic-review',
+                    'handoff_acceptance': 'Synthetic fixture, not real acceptance',
+                }
+            records.append(item)
+        return records
+
+    def test_done_parent_rejects_each_unfinished_child_status(self):
+        for status in ('Inbox', 'Triage', 'Ready', 'In Progress', 'In Review', 'Blocked'):
+            with self.subTest(child_status=status):
+                records = self.completion_backlog(['Done', status], [None, 1])
+                self.assert_invalid_backlog(
+                    records, 'backlog #1: Done requires recorded child #2 to be Done')
+
+    def test_done_ancestors_do_not_hide_unfinished_grandchildren(self):
+        records = self.completion_backlog(
+            ['Done', 'Done', 'In Progress'], [None, 1, 2])
+        self.assert_invalid_backlog(
+            records, 'backlog #2: Done requires recorded child #3 to be Done')
+
+    def test_done_parent_child_check_is_independent_of_record_order(self):
+        records = self.completion_backlog(['Done', 'Blocked'], [None, 1])
+        self.assert_invalid_backlog(
+            list(reversed(records)),
+            'backlog #1: Done requires recorded child #2 to be Done')
+
+    def test_completed_and_independent_incomplete_trees_remain_valid(self):
+        cases = (
+            (['Done'], [None]),
+            (['Done', 'Done', 'Done'], [None, 1, 2]),
+            (['Done', 'Done', 'In Progress', 'Blocked'], [None, 1, None, 3]),
+            (['In Progress', 'Done', 'Blocked'], [None, 1, 1]),
+        )
+        for statuses, parents in cases:
+            for reverse in (False, True):
+                data = deepcopy(self.data)
+                records = self.completion_backlog(statuses, parents)
+                data['research-backlog.json'] = records[::-1] if reverse else records
+                for optimized in (False, True):
+                    with self.subTest(statuses=statuses, reverse=reverse,
+                                      optimized=optimized):
+                        result = self.run_validator(data, optimized)
+                        self.assertEqual(result.returncode, 0, result.stderr)
+                        self.assertIn('Market integrity OK', result.stdout)
+                        for name, value in data.items():
+                            self.assertEqual((self.base / name).read_text(),
+                                             json.dumps(value))
+
+    def test_done_child_still_requires_its_own_acceptance_evidence(self):
+        records = self.completion_backlog(['Done', 'Done'], [None, 1])
+        del records[1]['completion_evidence']
+        self.assert_invalid_backlog(records, 'Done requires recorded acceptance evidence')
 
     def test_invalid_inputs_fail_in_both_modes(self):
         cases = []

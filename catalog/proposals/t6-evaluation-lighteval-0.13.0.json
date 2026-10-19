@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-lighteval-basic",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Lighteval matching and likelihood metrics",
+  "version": "0.13.0",
+  "status": "preview",
+  "billing_class": "unknown",
+  "description": "A bounded source-only profile of native emitted matching and likelihood metrics in the batch evaluator. String matching is a score policy, not evidence that an original payload satisfied a case-sensitive schema. No measured result, selected dataset or deployment gate is supplied. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "acc",
+      "em",
+      "word_perplexity"
+    ],
+    "mode": "offline"
+  },
+  "license": {
+    "spdx_id": "MIT"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/lighteval/0.13.0/json",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact published version 0.13.0 was source checked. The retained source distribution is 425931 bytes, SHA256 156ae469a9ea472f2a08ac5c6b0f06a44de2a097b91149c9da3a23e8d793b345, uploaded 2025-11-24T15:54:16.553738Z; its original bytes were rehashed before this proposal. Publisher Alpha classification is conservatively mapped to preview; an ordinary release tag does not erase it. No package was installed or imported, and no model, judge, test or evaluation ran."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/lighteval/releases/tag/v0.13.0",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Publisher release was non-draft and non-prerelease, published 2025-11-24T15:57:33Z; its tag resolves to 7c1cd62716b0a198a630c26d781430c54726cd02. Versioned selected source files were byte-compared with the hashed source distribution. This is source checking, not independent reproduction of metric outcomes."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/lighteval/blob/7c1cd62716b0a198a630c26d781430c54726cd02/src/lighteval/metrics/metrics.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 82cfbb706fa6dfc2446e8bc900e29775e7fa592a, SHA256 da6b47582747d0e282f0f65e5800a56cb6a4102a6a450835ab45a312d65be5e0, was read at 7c1cd62716b0a198a630c26d781430c54726cd02. Exact Metrics definitions expose acc under logprob scoring, em through ExactMatches(strip_strings=True), and word_perplexity through the word-weighted perplexity corpus metric. em is the actual output name, not the enum identifier exact_match. No schema-validity meaning is assigned to this string-matching score."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/lighteval/blob/7c1cd62716b0a198a630c26d781430c54726cd02/src/lighteval/pipeline.py",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 1f5da9c146039b2652ed86450b5e8e570fc39f4d, SHA256 644bd0def1dfc0e8a258be455954da40c8603df5110fb52a89da1ea10fcd8fa7, was read at 7c1cd62716b0a198a630c26d781430c54726cd02. Pipeline loads chosen task datasets/docs, constructs model requests, computes per-task metrics and aggregates results; README shows explicit tasks/max_samples and saved detailed results. This is a documented offline/batch evaluation path even when the selected model uses a hosted endpoint or a model judge."
+    },
+    {
+      "source_uri": "https://github.com/huggingface/lighteval/blob/7c1cd62716b0a198a630c26d781430c54726cd02/LICENSE",
+      "checked_at": "2026-10-18T20:22:02Z",
+      "verification_status": "unverified",
+      "notes": "Exact source blob 5e9693e35ec7ea0f8a759594f4f76752c2eaa9dd, SHA256 b4f939c0e5ce513b22a42b233294b56c226a27936e7708f51ed137c602e8eb0f, was read at 7c1cd62716b0a198a630c26d781430c54726cd02. Only the project SPDX license identifier is recorded. Dependencies, datasets, model and judge usage, compute, hosting and support have separate terms and costs; no free total evaluation cost or pricebook rate is inferred."
+    }
+  ],
+  "updated_at": "2026-10-18T20:22:02Z"
+}

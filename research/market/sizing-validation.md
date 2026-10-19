@@ -29,7 +29,7 @@ spare-capacity authorization. No paid compute or new device was used.
 | Multi-GPU/per-rank coverage | Designed case; no second authorized device or executed topology | #61 co-owners with @CompleteDotTech identify authorized devices and per-rank instrumentation before execution |
 | Comparable estimator errors | Zero whole-runtime pairs; 12 bounded native KV component checks in the dated comparison | #61 co-owners pin matching estimator/model/runtime/quantity inputs first; coordinator and #10 agree the decision tolerance before testing it; report observed errors without inventing an accepted threshold |
 | Headroom | Dense allocator counters and historical availability samples | #10 co-owners review [explicit scenario reserve](../T2-infrastructure/gpu-compute.md#headroom-and-measurement-handoff-disposition-2026-10-18); no universal percentage or whole-device calibration follows from these runs |
-| ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | Offer observations as note-only #10 evidence; future build-bound estimates use the [proposed intake](../T2-infrastructure/compute/resource-estimates/README.md) only after owner agreement |
+| ResourceEstimate consumption | No real BuildSnapshot/selection binding; no measured allocator metric in v1 | The separately dated [17:50:17Z receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632) accepts note-only #10 intake and adopts the [future research location](../T2-infrastructure/compute/resource-estimates/README.md) under its existing gates; zero current ResourceEstimate records are admitted |
 
 The prior spare-local-capacity-only constraint and GPU/RAM/disk/process caps
 remain in force. The 2026-10-16 Granite3.1 failure is a historical observation,
@@ -132,7 +132,8 @@ The [regression tests](../../tests/test_mr09_measure.py) cover mismatched cohort
 allowed availability variation, early failures and unchanged reproduction of the
 committed summary. These checks do not establish physical-device UUID identity,
 artifact truth, estimator comparability or empirical calibration. The original
-measurement instrument, dated protocol, raw observations and summary are unchanged.
+[executed measurement instrument](measurements/mr09_measure.executed.py), dated
+protocol, raw observations and summary are preserved.
 
 ### Counter and comparison intake boundary (2026-10-18)
 
@@ -141,7 +142,7 @@ An offline review of the summarizer at
 reproduced two input-validation failures using synthetic test records: arbitrary
 `error_comparisons` lengths could be reported as comparable competitor pairs,
 and a nonnumeric optional KV payload could become a byte statistic. The
-[`current instrument`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/09fc94e08075ce0180a77e62dfcda767abb74d48/scripts/mr09_measure.py)
+[`instrument inspected at that commit`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/09fc94e08075ce0180a77e62dfcda767abb74d48/scripts/mr09_measure.py)
 initializes an empty comparison list and implements no competitor intake.
 Inspected 2026-10-18; these are code findings, not new empirical observations.
 
@@ -300,6 +301,45 @@ readback, three captures, publication filtering and cleanup receipt are retained
 Original preparation records, dense/GM1 evidence, v1 and receiving-owner gates
 are unchanged; these observations do not provide acceptance or a scope waiver.
 
+### Prospective native output preservation
+
+The [maintained native launcher](../../scripts/mr09_native_qualify.py) now rejects
+an occupied result or preflight path, including a dangling symbolic link, before
+artifact admission or execution. It requests the shared capacity screen's new
+`--preserve-output` mode. That mode rejects an occupied path before capacity
+queries and exclusively creates its fully serialized result, so a path created
+during the queries is also preserved. The [shared screen](../../scripts/mr09_preflight.py)
+keeps its existing overwrite behavior when this option is absent; callers that
+intentionally refresh a capacity screen retain that behavior.
+
+After a child completes, fails or times out, the launcher serializes and fsyncs
+its pending-telemetry capture in a unique file beside the intended result. Its
+first publication uses a no-replace hard link. If the destination appeared while
+the child was running, or the filesystem refuses that publication, the original
+destination remains intact and the complete child capture remains in the unique
+`init-rN.json.unpublished-*.json` file named by the error. The launcher stops
+before driver telemetry or a retry. This unpublished record remains pending or
+failed and is rejected by the capture validator. Successful first publication
+removes the extra temporary name; the later telemetry update retains the existing
+fsynced temporary-file and atomic-replacement behavior, including preservation
+of the first capture if that update fails.
+
+Python 3.12 documents [`os.link`](https://docs.python.org/3.12/library/os.html#os.link)
+on Unix and Windows (checked 2026-10-18). Actual filesystem support remains a
+runtime requirement; a publication failure retains the unpublished capture and
+has no overwrite fallback. These changes were exercised using direct CLI calls
+with CPU-only artifact, child, Windows-memory and driver doubles, including early
+and late path collisions, unsupported linking, default-screen refresh and valid
+recovery. They do not record a Windows, native or accelerator execution.
+
+All historical observations, preflight JSON, source archives, artifact pins and
+numeric results are unchanged. The native cohort still binds the original
+archived launcher. The [preflight source inspected before this correction](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/36e774d5fdafcaf51af8139703bb52a57e629bb2/scripts/mr09_preflight.py)
+is pinned for source review; the records contain preflight-result hashes, without
+a preflight-script execution hash, so this link does not establish which producer
+source was executed. The maintained launcher's changed identities do not join the
+old cohort or supply new qualification, calibration or receiving-owner acceptance.
+
 ## Output-reservation matching audit — 2026-10-18
 
 The [pinned output audit](measurements/output-reservation-2026-10-18/matching.md)
@@ -369,6 +409,33 @@ D3 active2, D4/D5 cache layout, MoE and multi-GPU comparisons remain open. No ne
 GPU run, weights download, ResourceEstimate or scope waiver is supplied here.
 [PR #251](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/251) merged separately at main `2ecfa005a93b3944e6832bdb6a168d535e5efca6`; its GM1
 observations remain a separate cohort and are not used in this estimator comparison.
+
+### Comparator numeric integrity — 2026-10-18
+
+The current [comparison reader](../../scripts/mr09_compare_estimators.py) retains
+the original value of decimal and exponent JSON numbers before admitting a
+measured payload or converting GiB to bytes. Positive integral representations,
+including values wider than binary64's consecutive-integer range, retain every
+byte. A fractional value cannot acquire an integral value through float rounding
+or intermediate multiplication. GiB scaling uses exact rational arithmetic;
+the signed and absolute byte differences are integer calculations. The relative
+percentage remains a floating-point presentation of that difference.
+
+The existing finite-number intake gate, Boolean rejection and integer-token
+requirements for context, geometry, repetition and sequence counts remain in
+force. Decimal exponents outside the reader's representable range are rejected
+with a controlled diagnostic. Unrelated catalog and Node-audit metadata retain
+their previous float representation, including recorded device capacity at
+the Node decimal-GB boundary. New estimator-plan files preserve the
+validated captured JSON so their numeric values and source hashes are not
+changed by serialization.
+
+These are synthetic integrity regressions in
+[`test_mr09_payload_precision.py`](../../tests/test_mr09_payload_precision.py),
+including failure before artifact access and controlled CLI publication. They
+add no estimator or GPU execution, empirical pair, tolerance or receiving-owner
+acceptance. The historical executed script, measurements, plan files, hashes,
+timestamps and twelve recorded component comparisons remain unchanged.
 
 ## Historical comparison target and error discipline — 2026-10-16
 
@@ -607,8 +674,21 @@ All 15 dense runs record runner SHA-256
 `d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8`
 and protocol SHA-256
 `d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735`.
-The unchanged runner and original dated protocol are retained in this submission.
+The [executed runner](measurements/mr09_measure.executed.py) retains those exact
+source bytes, alongside the original dated protocol.
 The execution timestamp and package/hardware conditions are in each file.
+
+The [active dense launcher](../../scripts/mr09_measure.py) now rejects an occupied
+output path before either preparation or measurement. Its final result uses
+exclusive file creation, so an observation arriving during the action is also
+preserved; either collision returns the existing command-line error status 2
+without printing a success receipt. Serialization finishes before creating the
+new result file. The artifact-manifest writer and measurement computation remain
+unchanged. Offline direct-entry regressions cover both actions, existing files,
+directories and symlinks, a result arriving during execution, serialization
+failure and fresh-output recovery. These corrections add no measurements. The
+15 dense records and three Granite3.1 dense-source references remain bound to the
+archived hash above; future executions record the maintained launcher's own hash.
 
 D1-r1 is a direct-run pilot retained in the three-repetition D1 cohort because
 its model/configuration/instrument source matches the later repetitions. It
@@ -677,8 +757,10 @@ The summary derives minima/medians/maxima and input checksums from individual
 run records; it omits failed measurements from numerical aggregates and
 preserves failure categories. Published outputs replace private filesystem
 locators with named placeholders and omit hardware UUIDs; measurement counters,
-conditions and hashes are unchanged. Existing completed result files are
-preserved by the wrapper; use a fresh output directory for independent replication.
+conditions and hashes are unchanged. The wrapper skips existing completed result
+files, and direct launcher calls reject occupied output paths and preserve files
+that appear before final publication. Use a fresh output directory for independent
+replication.
 
 | Evidence | Publisher / locator | Access / version | Class and confidence | Limits and reuse |
 | --- | --- | --- | --- | --- |
@@ -695,15 +777,48 @@ preserved by the wrapper; use a fresh output directory for independent replicati
 | Consumer | Finding offered | Receiving owner | Disposition / unresolved next action |
 | --- | --- | --- | --- |
 | #7 | Actual prompt/cache/predicted-token counts, context and active concurrency differ from queue length | @zwright8, @appletechie | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of accounting interface only; appletechie's disposition and empirical acceptance remain pending |
-| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable competitor pairs | @Mattycodes69, @appletechie | [Appletechie scoped acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) for the earlier note-only policy/headroom methodology; no runtime-result acceptance; new GM1 evidence, other co-owner disposition and future placement remain pending |
+| #10 | Allocated/reserved phase peaks and KV-payload observations, with zero comparable whole-runtime competitor pairs | @Mattycodes69, @appletechie | The [earlier co-owner receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6245668221) retains its original note-only policy/headroom scope. The [actual in-session technical review at 17:50:17Z](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632) accepts the current note-only accounting input and future ResourceEstimate location under real build/selection/unit/evidence gates, admitting zero current records; empirical coverage and calibration remain incomplete |
 | #11 | Exact Transformers/CUDA/allocator pins, supported or failed optional cache backend and phase reset procedure | @zwright8, @Mattycodes69 | [Zwright8 narrowed acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6242699281) of runtime accounting interface only; Mattycodes69's disposition and empirical acceptance remain pending |
 
 No ResourceEstimate, canonical catalog item, Pricebook or compatibility boolean
 is manufactured. #40 remains the review entry for any contract/rule change;
-v1 is unchanged. Agent reproducibility review can identify defects and support
-the submission; it does not accept the above owner handoffs. #61 remains open
+v1 is unchanged. Reproducibility or publication review alone does not accept
+every handoff; actual delegated receiving decisions retain their stated input
+and scope. #61 remains open
 until its coverage, relevant evidence review and acceptance gates are met.
 Automation checks structure, unit arithmetic, failure handling and consistency;
 human reviewers still assess experimental validity, source accuracy, reuse
 rights, freshness, completeness and evidence acceptance. The integrated
 submission validation report records the repository checks separately.
+
+## Current note-only receiving and placement decision — 2026-10-18
+
+The [actual #61 → #10 technical receiving receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/56#issuecomment-6253141632),
+posted at **17:50:17Z** through `CompleteDotTech`, records the in-session Apple
+engineering specialist's own delegated decision. Its literal reviewed input is
+accepted `745e58704262aa7b0c755794f820ec1372b24395`, this note blob
+`98dbe4e65d4e4f32cf026d9103de6e9a77fa480d`, feasibility blob
+`3c6502f8fde84dd5b41544741ac552331d4aecad` and acceptance-record blob
+`71a289a8e86af57aee25a52da8991f13397a8262`. The current receipt amendment requires
+its own source review and delivery; it is not the source of that earlier review.
+
+The decision accepts **note-only accounting evidence** while retaining fifteen
+dense observations, three separate GM1 observations, twelve two-byte native KV
+component pairs and three initialization-buffer observations as distinct cohorts.
+Allocated memory is contained in reserved memory, and the two must not be summed.
+Equal two-byte storage widths and cache-payload agreement do not establish equal
+runtime behaviour or whole-runtime calibration. Initialization-buffer counters
+exclude graph dispatch/inference and opaque context/library allocations. The
+output-reservation mismatch and zero matching peak-allocated competitor pairs
+remain explicit; no universal reserve, fit guarantee or error interval follows.
+
+The future `research/T2-infrastructure/compute/resource-estimates/` location is
+now adopted under its explicit real-build/selection, unit, schema and evidence
+gates. **No present record is admitted.** Existing observations remain in
+`research/market/measurements/`; unbound arithmetic remains notes/scripts;
+synthetic examples remain tests. New allocator metrics, intervals and topology
+semantics, including the proposed total-sum versus maximum-rank convention,
+still go through versioned #40 review. This supersedes the earlier outstanding
+placement question only. It does not attribute another co-owner's response,
+rerun a GPU/corpus/source check, alter #10's accepted research closure, waive the
+remaining #61 empirical criteria or complete #61.

@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "id": "evaluation-phoenix-exact-match",
+  "kind": "evaluation_suite",
+  "tier": "T6",
+  "name": "Phoenix Evals exact string matching",
+  "version": "3.9.2",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Code-evaluator profile of arize-phoenix-evals 3.9.2 comparing supplied output and expected strings without normalization. This SDK profile is separate from Phoenix Cloud and Arize AX service offerings. This is a source-only component capability profile, not a dataset selection, measured result, model or data permission, contract-validity result or deployment gate. See research/T6-deployment-operations/evaluation.md.",
+  "spec": {
+    "metric_names": [
+      "exact_match"
+    ],
+    "mode": "offline"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://pypi.org/pypi/arize-phoenix-evals/3.9.2/json",
+      "checked_at": "2026-10-18T19:50:41.558270+00:00",
+      "verification_status": "unverified",
+      "notes": "Exact published arize-phoenix-evals 3.9.2 metadata identifies the source artifact uploaded 2026-10-09T15:29:37.269222Z (yanked=false). Its 111197-byte download matched publisher SHA256 c9310f82ace418dd239701aa188230014184462d86d82dc59ebbfd6f0caed321. pyproject.toml declares version 3.9.2 and Elastic-2.0. Active describes the unyanked published artifact, not a support or production-fitness claim. This source-available license is not relabeled as an unrestricted OSS entitlement."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/fc/56/dd0762bdc9c5b04dc281740fef6f30c3682106a35544dda3e707285d2450/arize_phoenix_evals-3.9.2.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.558270+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact archive's src/phoenix/evals/metrics/exact_match.py has SHA256 0f80e10314f3deea4226c986c05d2ab49d8fb1767f9465758bf5f7a08e2d9c5a. The registered exact_match code evaluator returns 1 only for output==expected, otherwise 0; its docstring explicitly excludes text normalization. The name and function are exported by the metric collection."
+    },
+    {
+      "source_uri": "https://pypi.org/project/arize-phoenix-evals/3.9.2/",
+      "checked_at": "2026-10-18T19:50:41.558270+00:00",
+      "verification_status": "unverified",
+      "notes": "The exact README demonstrates supplied-record evaluation and synchronous/asynchronous dataframe evaluation. This supports a bounded offline profile; other evaluators use model SDKs and OpenTelemetry instrumentation, so no network-isolation claim is made."
+    },
+    {
+      "source_uri": "https://files.pythonhosted.org/packages/fc/56/dd0762bdc9c5b04dc281740fef6f30c3682106a35544dda3e707285d2450/arize_phoenix_evals-3.9.2.tar.gz",
+      "checked_at": "2026-10-18T19:50:41.558270+00:00",
+      "verification_status": "unverified",
+      "notes": "The original archive and named source files were inspected without installing, importing, building or running the package or any model. The mode is a bounded interpretation of the documented evaluation workflow, not a network-isolation claim. Operational billing remains unknown; no free model/judge/hosting entitlement, optional rights Boolean or complete dependency/runtime reproduction is asserted."
+    }
+  ],
+  "updated_at": "2026-10-18T20:04:44Z",
+  "license": {
+    "spdx_id": "Elastic-2.0"
+  }
+}

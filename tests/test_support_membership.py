@@ -19,7 +19,7 @@ class SupportMembershipCases(unittest.TestCase):
                     frozenset({"gguf"}), replace(SOURCE, exhaustive=complete)
                 )
                 self.assertEqual(result.outcome, Outcome.PASS)
-                self.assertEqual(result.evidence_label, "unverified")
+                self.assertIsNone(result.evidence_label)
                 self.assertEqual(result.source_id, SOURCE.source_id)
 
     def test_unmarked_omission_is_unknown_instead_of_unsupported(self):

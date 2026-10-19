@@ -1,7 +1,7 @@
 # T6 Monitoring
 
 Issue: [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) · Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Kinds: `monitoring_stack` · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
-Status: ready for review · Last researched: 2026-10-16 · Access date for every source in this record: 2026-10-16. Candidate rule revision 0.2 (for #40 review).
+Status: partial research; Evaluation receiving interface accepted with conditions · Initial source pass: 2026-10-16; separately dated follow-ups retain their own access dates. Candidate rule revision 0.2 remains for #40 review.
 
 ## User decision
 
@@ -34,7 +34,7 @@ Every signal carries one alert class. The class decides who is told and how fast
 
 1. No opened source publishes a threshold for LLM quality, safety, refusal or cost alerts. Every threshold in this record is derived from a T0 target, published with its source, taken from the #36 baseline, or builder-set. The published numbers are platform limits, tool defaults and starting-point guidance: Azure PTU utilisation at or above 100 percent throttles (M-M1); llm-d alert defaults (M-S1); the Bedrock output-tokens-per-second alarm starting point of 80 percent of baseline (M-M11); Google budget defaults of 50, 90 and 100 percent (M-C4); LiteLLM `threshold_crossed` at 85 and 95 percent (M-C22); SRE Workbook burn rates of 14.4, 6 and 1 (M-O3); the AgentCore online-evaluation console sampling default of 10 percent (M-Q7); and Foundry's agent-dashboard investigation levels of 10 seconds and 95 percent (M-Q2). No number in this record is measured.
 2. Billing data lags the spend it reports, and most budget alerts only notify. Published delays: Anthropic usage and cost "typically" within 5 minutes (M-A1); Azure cost data typically available within 8 to 24 hours for EA and MCA subscriptions and up to 72 hours for pay-as-you-go (M-A30), with budgets evaluated every 24 hours (M-C3); AWS Budgets updated up to three times a day (M-A2); Google budget notifications multiple times per day (M-C4). No opened page states the OpenAI usage or cost delay (M-H20). Provider-side stops exist at the OpenAI organization and project hard limits (M-A4, M-A28), the Anthropic tier cap and workspace limits (M-A5, M-C12), the Gemini API monthly spend caps (M-A31), Cloudflare spend limits (M-C25) and gateway budgets (M-C5, M-C27); AWS Budgets can run an IAM or SCP action (M-C17); Azure OpenAI has no hard limit (M-R6, M-C21). Real-time budget alerts are therefore computed in-process from tokens times price (SG56) and reconciled against the billing reports.
-3. The OpenTelemetry GenAI conventions have no release. Every document in the `semantic-conventions-genai` repository is Status Development and the changelog shows only an Unreleased section (M-O4); a breaking change has already merged to main: the `gen_ai.client.token.usage` histogram is replaced by per-direction, per-operation histograms (`gen_ai.client.inference.operation.input_tokens` and `.output_tokens`), with new `gen_ai.client.inference.usage.*` counters added alongside (M-O5 and the 374 enhancement fragment, M-N301). #36 G12 asks for "a pinned convention version". With no release to pin, this record proposes to the #36 owner a reading of G12, not a new gate: pin the instrumentation package version, the `OTEL_SEMCONV_STABILITY_OPT_IN` value where the package has one (the deprecated `opentelemetry-instrumentation-openai-v2`, M-O18; its replacement uses the latest experimental conventions unconditionally, M-N311), the `semantic-conventions-genai` commit read here (`f3c6d0c9bb66`, committed 2026-10-14), and a rename map from builder metric names to `gen_ai.*` names (SG148, M-R36).
+3. In the retained source pass, the OpenTelemetry GenAI conventions have no release. Every document in the `semantic-conventions-genai` repository is Status Development and the changelog shows only an Unreleased section (M-O4); a breaking change has already merged to main: the `gen_ai.client.token.usage` histogram is replaced by per-direction, per-operation histograms (`gen_ai.client.inference.operation.input_tokens` and `.output_tokens`), with new `gen_ai.client.inference.usage.*` counters added alongside (M-O5 and the 374 enhancement fragment, M-N301). #36 G12 asks for "a pinned convention version". For this retained source snapshot, the [actual Evaluation receiving decision](#evaluation-receiving-decision-2026-10-18) accepts this interpretation of G12: pin the instrumentation package version, the `OTEL_SEMCONV_STABILITY_OPT_IN` value where the package has one (the deprecated `opentelemetry-instrumentation-openai-v2`, M-O18; its replacement uses the latest experimental conventions unconditionally, M-N311), the `semantic-conventions-genai` commit read here (`f3c6d0c9bb66`, committed 2026-10-14), and a rename map from builder metric names to `gen_ai.*` names (SG148, M-R36). This records the accepted research interface, not a newly released convention or an observed deployment configuration.
 4. Content-capture defaults disagree across tools, so the same build can leak prompts through one exporter and not another. OpenTelemetry GenAI instrumentation captures no content by default (`NO_CONTENT`, M-O6); OpenInference hide flags default to False, so content is captured (M-O7); the OpenAI Agents SDK includes sensitive data by default (M-X1); Cloudflare AI Gateway logs are on by default and can include the prompt and response (M-M2); Anthropic's OpenTelemetry export defaults to metadata only (M-L1). The [OpenLLMetry source follow-up](#post-121-source-reconciliation-openllmetry-trace-content) adds its content-on default and selective workflow/context overrides (F01, checked 2026-10-18). The content-capture audit (SG147/P1) checks every exporter and effective override; a global flag alone does not establish what was exported.
 
 ## Candidate options
@@ -850,7 +850,7 @@ Watch the minimum catalog for the build's mode, page only on symptoms, and audit
 2. Measure latency at the client. Platform latency metrics differ in start point and statistic, and several cannot evidence a percentile (Percentile availability table). The client histogram works in every mode.
 3. Compute spend in-process and reconcile later. Billing reports lag by minutes to over a day and most budgets only notify (M-R4, M-R5).
 4. Treat content capture, provider payload logging and retention as audited state (P1 to P4); sink region is audited (P5) and ticketed when an observed region leaves the permitted set (SG22, SG37). The defaults disagree, so one audit covers every exporter.
-5. Pin the telemetry conventions as finding 3 proposes for #36 G12, and smoke-test every metric name after an engine or instrumentation upgrade (M-R29, M-R37).
+5. Apply the accepted G12 interpretation in finding 3 and the [dated receiving decision](#evaluation-receiving-decision-2026-10-18); smoke-test every metric name after an engine or instrumentation upgrade (M-R29, M-R37). The receipt does not stand in for that actual configuration and readback.
 
 ### Minimum catalog per mode
 
@@ -867,7 +867,70 @@ Rationale. The catalog covers each component and mode with published names where
 
 ## Structured artifacts
 
-None in this pull request. A `monitoring_stack` catalog item needs `signals` from the v1 enum (latency, errors, token_usage, gpu_utilization, quality, drift, cost, traces, security). The signal catalog here is finer (165 signals), so mapping each signal to that enum is a follow-up for review with #40.
+### Native vLLM metric profile (2026-10-18)
+
+The [vLLM v0.31.0 monitoring proposal](../../catalog/proposals/t6-monitoring-vllm-v0.31.0.json)
+adds the native V1 engine metric producer as a `monitoring_stack` candidate. It
+uses the same release/source identity as the existing
+[inference-engine proposal](../../catalog/proposals/t2-engine-vllm-v0.31.0.json).
+The source tag was rechecked as `db9527a46873454610df6dbedf79a36d6bf1a7f6`
+[VM-S1]. This identifies the researched release, not the latest release or an
+installed binary. Catalog status `active` records this research candidate.
+
+This is a conservative mapping into the existing v1 fields. The finer SG catalog,
+remaining enum mappings and existing M-R/M-H clauses keep their present scope;
+this addition creates no compatibility rule, signal ID or contract extension.
+
+| Catalog field | Existing signal / exact source registration | Type and unit / evidence | Scope retained |
+| --- | --- | --- | --- |
+| `signals: latency` | SG70: `vllm:time_to_first_token_seconds`; SG71: `vllm:inter_token_latency_seconds`, `vllm:request_time_per_output_token_seconds`; SG72: `vllm:e2e_request_latency_seconds`, `vllm:request_queue_time_seconds` | Prometheus histograms; seconds [VM-S2] | Individual inter-token observations and per-request mean time per output token are different distributions. Engine request/WAITING time does not include an application's complete network/client path. |
+| `signals: token_usage` | SG75: `vllm:prompt_tokens`, `vllm:generation_tokens` | Prometheus counters; tokens, incremented from the respective iteration-stat fields [VM-S2] | These are registered counter bases. Confirm actual exposition names, including `_total`, for the selected endpoint. Do not infer invoice units, computed-only prompt work or measured serving capacity. |
+| `exporter: prometheus` | Native `PrometheusStatLogger` and the API server's documented `/metrics` endpoint | Prometheus client constructors and published exposition example [VM-S2, VM-S3] | This identifies the native interface. It supplies no external collector version, scrape interval, successful scrape or wrapper equivalence. |
+| `license.spdx_id: Apache-2.0` | Pinned source license; matching SPDX header in the logger | Publisher's software license declaration [VM-S2, VM-S4] | Model, service and collected-telemetry rights remain separate; no permission booleans are added. |
+
+The logger attaches `model_name` and `engine` labels to these registrations
+[VM-S2]. A label is not an immutable model or deployment identity. The selected
+deployment still needs its exact engine/build, configuration, wrapper/exporter,
+label policy and observed series, as described in the
+[engine receiving record](engine-input-integration.md#selected-service-evidence-needed-by-38).
+Collection windows and counter resets must be retained before deriving rates;
+unavailable series remain unknown rather than measured zero. No universal
+threshold or collection-overhead estimate is introduced.
+
+This candidate covers the native producer in the researched self-hosted engine
+path. A provider-operated API or managed wrapper needs its own identity and
+metric-exposure evidence; the same engine name does not establish this profile.
+Monitoring does not select a build's serving mode. The item also supplies no
+executable v1 association to a selected inference engine; deployment association
+remains an explicit receiving input.
+
+The admitted `signals` are a supported subset, not a complete capability list.
+In particular, SG74's KV-cache occupancy is not `gpu_utilization`; this proposal
+does not reinterpret memory occupancy as device compute utilization. Other signal
+families remain outside this bounded mapping. `billing_class` stays `unknown`,
+and `pii_redaction` and `retention_days` are omitted because this source check
+does not establish those properties for a selected collection path. Neither
+missing field means false, zero retention or permission to collect content.
+
+#### Primary-source readback
+
+All four sources below were accessed on **2026-10-18**. Evidence class: primary
+publisher source/documentation; catalog provenance remains `unverified` because
+no engine, container or metrics scrape was run. Git blob IDs identify inspected
+source bytes and do not establish runtime behavior or source-use approval.
+
+| ID | Primary source | Readback identity / claim |
+| --- | --- | --- |
+| VM-S1 | [v0.31.0 tag reference](https://api.github.com/repos/vllm-project/vllm/git/ref/tags/v0.31.0) | Observed tag target: source commit `db9527a46873454610df6dbedf79a36d6bf1a7f6`. |
+| VM-S2 | [V1 metrics logger](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/vllm/v1/metrics/loggers.py) | Git blob `26a4142df9f1023f8d43633b30b85adf745eba41`; constructor classes, named registrations, labels and record paths. |
+| VM-S3 | [Metrics guide](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/usage/metrics.md) | Git blob `8254a7f4207e5304d606c69956680e4b4e317bea`; endpoint/exposition and deprecation policy. Its generated sections are not treated as a complete metric inventory. |
+| VM-S4 | [Software license](https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE) | Git blob `261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64`; Apache-2.0 declaration for this software source. |
+
+The #38 co-owners (@appletechie, @PUSHINGSQUARES) retain the candidate's receiving
+decision and the outstanding threshold, content/privacy and retention choices.
+Selected runtime and deployment evidence remain with the #11/#37 handoffs.
+This structured submission is partial research evidence; it does not complete
+#38 or imply acceptance of later changes by an earlier receiving reviewer.
 
 ## Pinned framework telemetry controls (2026-10-18)
 
@@ -887,6 +950,21 @@ receiving #38/#35 owners still need to adopt or narrow this input and obtain
 deployment-specific measurements. No fixed signal threshold, retention period,
 price, runtime acceptance or executable contract is introduced.
 
+## Evaluation receiving decision (2026-10-18)
+
+The [actual #36 → #38 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38#issuecomment-6254283671), posted by CompleteDotTech at 2026-10-18T19:40:43Z, accepts EV-26 and the concrete G12 interpretation with the conditions below. This is the coordinating engineer's actual decision under the user's project delegation; it does not attribute a response to absent named assignees or change their ownership.
+
+The receipt identifies the Evaluation producer delivered through [#382](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/382), signed commit `8e4219102615eb8595a5674e8f8d11aa5e4d06b0`, and exact note blob `11e6e7362adb495dd4f789423704a4ef9f5c7fbb`. It reviewed this Monitoring note at blob `8d74b516e2aa997e786b09aa27186aeeac6eacc9`, including SG131–SG152, TH12 and P1–P12. This amendment records that completed receiving decision without extending its source or execution scope.
+
+| Accepted interface | Conditions retained in this record |
+| --- | --- |
+| G12 convention identity / SG148 | Record the actual instrumentation package version, its opt-in value **where that package exposes one**, the retained semantic-conventions commit and the name map. Do not invent a release tag or an opt-in variable for a package that has none. The specific deployment still needs the actual configuration and metric-name readback. |
+| EV-26 online scores / SG131–SG140 | Keep each score's metric, unit and evaluated-item scope, sampling/scoring delay, scored-item count, emitted-versus-ingested spans and smoke-trace readback. A paused evaluator, empty eligible cohort or missing evidence is no-data; it supplies neither a zero score nor a passing quality result. |
+| TH12 baseline and alert evidence | Receive the #36 quality/safety baseline with an explicitly selected band and minimum scored count. Published defaults and investigation hints remain distinct from builder decisions. M-H7/M-H24 coverage and ingest assumptions, and the drift proposals, retain their hypothesis status. |
+| G7/G12 and P1–P12 privacy/retention | Include every exporter and effective content-capture override. Judge placement, sink region, retention and retained baseline artifacts are separate inputs. Metadata-only metrics cannot prove that another exporter or judge avoided content. |
+
+The G12 interpretation is therefore received rather than awaiting the same decision again. Selected thresholds, actual exporter behavior, eligible rate/retention facts, rights and deployed monitoring still require their separately scoped evidence. The other #16/#25/#28 inputs and the remaining handoffs below keep their own review state. No signal row, fixed severity, threshold, source-register observation, CatalogItem or frozen contract is changed by this receipt propagation; no model, exporter, service or monitoring stack was executed for it. Broader #38 research completion remains separate.
+
 ## Open questions and handoffs
 
 ### Open questions
@@ -895,7 +973,7 @@ price, runtime acceptance or executable contract is introduced.
 |---|---|---|
 | Add T0 fields for availability objective, SLO window, data-freshness tolerance, retention floor and ceiling, budget hard-stop flag and high-risk status; settle the data-classification enum | TH8 to TH10, M-R6, M-R70 and M-H13 cannot be evaluated without them | #2 owner |
 | Accept the placement rules (platform metrics in T2, response fields in T1), the alert-class enum and the threshold-source enum | they shape the #40 schema fields | #40 owner |
-| Confirm the reading of #36 G12 that finding 3 proposes (instrumentation version, opt-in value where the package has one, convention commit, rename map) | the conventions have no release to pin | #36 owners (@PUSHINGSQUARES, @appletechie) |
+| Apply the [received G12 interpretation](#evaluation-receiving-decision-2026-10-18) to the selected instrumentation and retain its actual configuration/name-map readback | the research interpretation is accepted; a selected deployment's pins, optional opt-in and emitted names remain unevidenced until captured | #38 owners (@PUSHINGSQUARES, @appletechie), with #36 retaining baseline/retention requirements |
 | Say which guardrail errors the build alerts on (SG125, M-H23), and add a rule for Vertex Grounding with Google Maps or Google Search under zero retention | #35 already has the control `guardrail-failure-mode` and rule G-R12 (an enforcing guardrail wired detect-only or fail-open) and lists Bedrock service-error behaviour as unknown; no #35 rule covers Vertex Grounding with Google Maps or Google Search | #35 owners (@PUSHINGSQUARES, @appletechie) |
 | Confirm the #37 handoff coverage and read #37 D-H11 as source checked for "budget alerts exist and only notify" | closes the #37 to #38 handoff | #37 owners (@PUSHINGSQUARES, @appletechie) |
 | Supply prices per token class, hosting meters and GPU hourly rates, with currency and date | SG56, SG91, SG119 and SG55 need them | #39 owner |
@@ -911,7 +989,7 @@ price, runtime acceptance or executable contract is introduced.
 |---|---|---|
 | #2 (T0) | the new fields in Open questions; every T0 field now maps to signals | TH1 to TH10 |
 | #35 | Maps and Search grounding under zero retention; which guardrail errors the build alerts on (the control `guardrail-failure-mode` and G-R12 already exist); guardrail signal rows; P1 relies on G-R27 | SG120 to SG130, M-H23, P1 |
-| #36 | the reading of G12 proposed in finding 3; EV-26 online scoring rows; span ingest against emit beside E-R18; sampling and coverage method | SG131 to SG139, SG141, SG148, M-H24, M-H7 |
+| #36 | [Accepted scoped receiving decision](#evaluation-receiving-decision-2026-10-18): G12 interpretation, EV-26 scores and retained span-ingest/sampling/privacy conditions; actual measurements and hypothesis adoption remain separate | SG131 to SG139, SG141, SG148, M-H24, M-H7 |
 | #37 | coverage of the fourteen handed signals; gate signals for S11, S34, R24, R26 and R33; D-H11 reading | #37 handoff coverage table, SG160 to SG165, SG78, SG140, SG154 |
 | #39 | price inputs and currency handling for in-process spend and self-hosted cost | SG56, SG91, SG119, SG55, M-R7 |
 | #40 | alert-class and threshold-source enums; rules whose participants are not T0 fields yet | Comparison fields; Compatibility proposals (71 M-R rows in Source checked, 25 M-H rows in Hypotheses) |
