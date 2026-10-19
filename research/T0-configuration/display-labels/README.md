@@ -1,18 +1,42 @@
-# Component display labels proposal
+# Component display labels
 
-Refs research #40 and [website #18](https://github.com/Pick-Your-AI/pickyour.ai/issues/18). Status: proposed; #40 owner agreement and consumer acceptance remain pending.
+Refs research #40 and [website #18](https://github.com/Pick-Your-AI/pick-your-ai-website/issues/18).
 
-[v0.1.0.json](v0.1.0.json) supplies distinct English display names for all 29 canonical kinds, including the four pairs that share research issues. It retains the website's existing kind names at the immutable `source_url` recorded in the file, inspected 2026-10-18, to avoid an incidental naming change while moving the data to shared ownership. The names are project presentation text, not researched vendor claims.
+## Accepted English sidecar: 1.0.0
 
-The sidecar is outside frozen v1. Its version is independent of `registry_version`; `registry_sha256` binds the exact registry bytes. Keys are canonical kind identifiers. Values are display text only: never persist labels as IDs, derive capability/activation from a label, or replace the registry with this file. Tier titles, summaries, slugs and grammatical helpers remain consumer presentation code; they are not hidden in the kind-label map.
+[v1.0.0.json](v1.0.0.json) is the English presentation sidecar selected by the
+[2026-10-19 central engineering decision](../component-schema-compatibility.md#display-label-sidecar-decision--2026-10-19).
+Its 29 names exactly preserve the original proposal and the website's existing
+names at the immutable `source_url` in the accepted file. They include distinct
+names for the four pairs that share research issues. These are project
+presentation names, not researched vendor claims or compatibility policy.
+
+The artifact stays outside frozen `contracts/v1/`. `sidecar_version` identifies
+this presentation release; it is independent of `registry_version` and does not
+release a successor schema or API. `registry_sha256` binds the exact registry
+bytes. Keys remain canonical identifiers. Never persist labels as IDs, infer
+capability or activation from a name, or replace the registry with this file.
+Tier titles, summaries, slugs and grammatical helpers remain consumer code.
 
 ## Consumer handoff
 
-1. #40 owners @tynamite/@zwright8 review the label set and sidecar/version policy; affected consumers confirm their naming needs. A passing coverage test does not establish this acceptance.
-2. Once accepted, publish a new accepted sidecar revision with its decision receipt and pin its Git commit and SHA-256 in the consuming repository. Keep the proposal revision available as history. No runtime download URL or publication service is implied.
-3. A consumer importing the accepted artifact checks `registry_version`, `registry_sha256`, exact kind-key coverage, locale and sidecar version before replacing its local kind-label table. Its existing application tests still run. Unknown locale/version or registry mismatch must not silently substitute a different naming contract.
-4. Record separate receiving receipts for website, Android and Apple. Website #18 still needs the actual import and removal of the duplicated `KIND_LABELS` table. A proposal merge does not satisfy that criterion. Consumer-only tier labels/helpers can remain even if the kind table moves to the sidecar; the website owner decides module layout.
+1. Pin the accepted artifact's exact Git commit, path and SHA-256 in the receiving repository. Import its bytes unchanged; no runtime download or publication service is required or implied.
+2. Check `status: accepted`, `registry_version`, the SHA-256 of the actual registry bytes, exact kind-key coverage, nonempty/distinct text, locale `en` and supported `sidecar_version: 1.0.0`. Reject an unsupported locale/version, a proposal or a registry mismatch; do not silently choose a fallback contract.
+3. Keep the verification in normal client checks and run the existing application tests. Website #18 requires an actual import and removal of its duplicated kind-label table and `labels.ts` module. Consumer-only tier labels/helpers can move to a separate module.
+4. Record actual receiving receipts separately for website, Android and Apple. The central decision accepts the shared artifact; it does not claim any client has imported, tested or delivered it.
 
-Additions/removals of canonical kinds need a new registry contract first. Corrections or translations use a new sidecar revision; an accepted revision must not be silently overwritten. This proposed English artifact makes no locale fallback choice.
+Changes to the canonical kind set require a registry contract first. Corrections
+or translations require a new immutable sidecar revision and consumer review;
+never silently overwrite an accepted revision. This English release establishes
+no locale fallback and changes none of the frozen versioning or identifier rules.
 
-Run `python -m unittest discover -s tests -p test_component_display_labels.py -v`. The test checks registry identity, complete/distinct labels and the explicit proposal boundary. It does not certify owner acceptance or a client integration.
+## Preserved proposal
+
+[v0.1.0.json](v0.1.0.json) remains byte-for-byte the 2026-10-18 proposal, including
+its `status: proposed`, independent version and original source URL. It is not
+retroactively accepted. The new decision and release above are separately dated.
+
+Run `python -m unittest discover -s tests -p test_component_display_labels.py -v`.
+These structural checks verify both registry bindings, complete/distinct names,
+version/status boundaries and unchanged names. They do not supply an independent
+review, client integration or vendor evidence.
