@@ -403,7 +403,7 @@ For the Foundry route covered by E-N1002, record the provider's pre-training dat
 
 ## Evidence
 
-The original evidence rows were opened 2026-10-16; E-N1001 and E-N1002 were opened 2026-10-18. "page date" is the last-updated date, version or notice date shown on the page; "none" means the page shows none. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it: **Primary documentation**, **Vendor claim**, **Independent measurement**, **Estimate**.
+The original evidence rows were opened 2026-10-16; E-N1001 and E-N1002 were opened 2026-10-18. "page date" is the last-updated date, version or notice date shown on the page; "none" means the page shows none. Grades follow `docs/RESEARCH_METHOD.md` and the [accepted #41 evidence policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels): **Primary documentation**, **Vendor claim**, **Independent measurement**, **Estimate**.
 
 | id | publisher | URL | page date | evidence grade | supports |
 |---|---|---|---|---|---|

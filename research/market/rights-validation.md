@@ -17,7 +17,7 @@ Can the shortlisted data be displayed or redistributed commercially?
 
 ## Decision rule
 
-- The publisher's own licence or terms decide. A stated limitation beats a capability listing from the same publisher; for example, a terms clause against automated copying beats the existence of a public API (#41 interim conflict order, step 4).
+- The publisher's own licence or terms decide. A stated limitation beats a capability listing from the same publisher; for example, a terms clause against automated copying beats the existence of a public API ([accepted #41 conflict order](../T0-configuration/catalog-data-sources.md#conflict-resolution), step 4).
 - Where no applicable licence or terms grant is established, commercial display and redistribution are **no for the project's current intake**. This is a conservative project exclusion, not a finding that missing documentation proves a legal prohibition; the unestablished legal scope remains unknown.
 - **Unclear** describes existing terms whose applicable scope is ambiguous. A project exclusion can still be chosen while that legal question is unresolved; it does not turn the unknown into a publisher prohibition or a permission grant.
 - A licence on a compilation covers that compilation. Upstream measurements keep their own rights.

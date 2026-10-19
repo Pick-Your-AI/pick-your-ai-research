@@ -1,0 +1,9 @@
+{
+  "id": "power-raw-capture-A",
+  "uri": "https://raw.githubusercontent.com/MrTrenchTrucker/rtx-pro-4000-sff-power-captures/aec4010a823298848f946ef8f00fefb3eeb8ca11/captures/raw-capture-A-20261018T235741Z.csv",
+  "version": "commit aec4010a823298848f946ef8f00fefb3eeb8ca11",
+  "sha256": "81302e7ddcd3ba97170b426d0f192952e8fc029c2133fa110dac943d5ee9cf5f",
+  "access": "Public, no authentication. Plain HTTPS GET of a commit-pinned raw URL on the contributor's GitHub repository MrTrenchTrucker/rtx-pro-4000-sff-power-captures. The commit hash is part of the path, so the bytes at this URL cannot change. Downloaded back from this URL on 2026-10-19 and the SHA-256 and byte count below matched.",
+  "description": "nvidia-smi 1 Hz CSV capture (load series source), two RTX PRO 4000 Blackwell SFF devices (index 0 at PCI 00000000:01:00.0, index 1 at 00000000:05:00.0), 90 rows each; 38786 bytes. The UUID column of the published bytes is the literal text REDACTED in every data row (verifiable from the published bytes). That the unavailable originals were changed only in that column is a contributor statement, not independently verified. Capture method, UTC label and workload are contributor-reported, not independently verified.",
+  "rights": "CC0 1.0 Universal public domain dedication by the contributor (see LICENSE in the same repository at the same commit: https://github.com/MrTrenchTrucker/rtx-pro-4000-sff-power-captures/blob/aec4010a823298848f946ef8f00fefb3eeb8ca11/LICENSE). Anyone may copy, modify, distribute and use the file without conditions."
+}

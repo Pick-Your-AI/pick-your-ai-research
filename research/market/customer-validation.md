@@ -2,7 +2,7 @@
 
 Issue: [#63](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63). Parent: [#52](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52). Live issue assignees checked on 2026-10-18: @zwright8 and @appletechie; @CompleteDotTech is the program coordinator. Status: **protocol preparation only; validation has not started.** The original package recorded readiness as Awaiting Decision; this amendment does not certify current Project fields. Evidence availability score: unknown (not zero).
 
-No one has been contacted, no community has been posted to, no account was created and no personal data was collected. Nothing in this note may be used for outreach until the coordinator records each decision in [Decisions required](#8-decisions-required-from-coordinator-before-any-contact). Every number below marked **proposal** is for the coordinator to approve, change or reject; none is an accepted threshold.
+No one has been contacted, no community has been posted to, no account was created and no personal data was collected. Nothing in this note may be used for outreach until the coordinator records each decision in [Decisions required](#8-decisions-required-from-coordinator-before-any-contact). Numbers marked **proposal** retain that status unless the dated [instrument decisions](#instrument-decisions--2026-10-19) explicitly select them. Selected instrument values are design choices, not validated market thresholds, implemented product limits or permission to start fieldwork.
 
 ## Question
 Do target users repeatedly face multi-component AI configuration decisions, and does an actual buyer value paying to improve them?
@@ -45,13 +45,13 @@ Amount and currency are **coordinator decisions (D-05)**; none is proposed here.
 - Charity donation in the participant's name.
 - Not recommended: early or free access to the product, because it rewards positive concept reactions and creates a relationship that biases Part D.
 
-## 2. Screener and quotas (proposal)
+## 2. Screener and quotas (selected D-04 design)
 
-The screener is in [customers.md](customers.md#screener). Each participant gets one primary segment, any secondary segments, and a role code from screener question 3 (user, recommender, approver, payer or none).
+The screener is in [customers.md](customers.md#screener). Each participant gets one primary segment, any secondary segments, and all applicable role flags from screener question 3 (user, recommender, approver, payer or none).
 
-Proposed quotas (Q-1 to Q-5), all subject to D-04:
+D-04 selects the following Q-1 to Q-5 coverage values. The [counting and feasibility rules](#additional-instrument-decisions-d-04-and-d-13--2026-10-19) define their use; no recruitment channel is approved by selecting a quota.
 
-| ID | Proposal | Rationale |
+| ID | Selected coverage value | Rationale |
 | --- | --- | --- |
 | Q-1 | At least 2 participants per primary segment (20 minimum) | Covers all ten segments; the draft covered three |
 | Q-2 | At least 6 participants who paid for or controlled the budget for an AI tool or service | Buyer evidence cannot come from users only |
@@ -129,15 +129,15 @@ Keep the participant, the described decision and the purchasing unit separate. S
 
 ### Descriptive signals for revising this pilot
 
-Thresholds are named but **not set**. D-13 must fix each descriptive threshold, minimum valid response count and denominator before the first interview, including how the no-decision and incomplete-response cases are handled. These are pilot-triage choices, not validated market cutoffs. The purposive quota sample cannot establish population demand, reach, recurring-use prevalence, paid conversion or market rejection. Paid-concept flags must also keep #54's separate eligible-buyer/comprehension denominators and proposed minimum-response rule.
+D-13 selects the exact half thresholds and minimum of five valid response units below, with the [counting, missingness and equality rules](#additional-instrument-decisions-d-04-and-d-13--2026-10-19) fixed before any interview. These are pilot-triage choices, not validated market cutoffs. The purposive quota sample cannot establish population demand, reach, recurring-use prevalence, paid conversion or market rejection. Paid-concept flags keep #54's separate eligible-buyer/comprehension denominators; D-13 selects their five-unit directional-review minimum independently of D-12's disclosure floor.
 
 | ID | Possible pilot signal | Denominator and interpretation boundary | Threshold |
 | --- | --- | --- | --- |
-| T-1 | Few participants report a decision in the window | Participants with a valid window/decision response, including valid no-decision answers; unknown recall remains separate | Share below `T-1` |
-| T-2 | Few report an earlier similar decision | Respondents with a recent decision and a valid answer about an earlier similar decision; this does not measure future recurrence | Share below `T-2` |
-| T-3 | Decisions involve only one known component type | Distinct described decisions with enough component detail to classify them; unknown components are not silently counted as absent | Share above `T-3` |
-| T-4 | Participants report neither monetary spend nor time spent on the decision | Distinct decisions with valid money and time answers; untracked or unknown time/spend is excluded from this numerator and reported separately | Share above `T-4` |
-| T-5 | Existing alternatives suffice by the participant's account | Distinct decisions with known alternatives and a valid sufficiency response; retain reuse of existing hardware and a decision to buy nothing | Share above `T-5` |
+| T-1 | Few participants report a decision in the window | Participants with a valid window/decision response, including valid no-decision answers; unknown recall remains separate | `2k < n`, with `n >= 5` |
+| T-2 | Few report an earlier similar decision | Respondents with a recent decision and a valid answer about an earlier similar decision; this does not measure future recurrence | `2k < n`, with `n >= 5` |
+| T-3 | Decisions involve only one known component type | Distinct described decisions with enough component detail to classify them; unknown components are not silently counted as absent | `2k > n`, with `n >= 5` |
+| T-4 | Participants report neither monetary spend nor time spent on the decision | Distinct decisions with valid money and time answers; untracked or unknown time/spend is excluded from this numerator and reported separately | `2k > n`, with `n >= 5` |
+| T-5 | Existing alternatives suffice by the participant's account | Distinct decisions with known alternatives and a valid sufficiency response; retain reuse of existing hardware and a decision to buy nothing | `2k > n`, with `n >= 5` |
 | T-6 | A buyer and user describe different needs | Role accounts linked to the same actual decision where available; unrelated user and buyer answers do not establish within-team disagreement | Qualitative review |
 
 Results are reported by segment and role only where cells meet D-12 and the disclosure review. Report channel bias, missing segments and incomplete modules. A failed or misunderstood prototype task calls for instrument/prototype revision; it does not by itself reject the underlying value proposition. Without an actual fixed baseline/prototype task, success criteria and order plan, collect concept reactions only and report no task-performance improvement. Stated intent, reported past behaviour, directly observed tasks and actual transactions remain separate evidence classes.
@@ -159,38 +159,168 @@ Reporting: keep stated price perceptions, reported past spend, directly observed
 
 The four prompts retain #54's explicit method limit: the original Van Westendorp and Newton–Miller–Smith papers remain unread, so this is not a validated PSM instrument or a purchase/revenue estimate. The present exploratory design chooses open questions; it does not establish that every method showing a price is invalid. Adopting a different pricing experiment requires its own declared offer, sequence, sampling and interpretation. The proposed free and paid models can each remain unqualified; failed task comprehension is separate from demand, and reduced trust after commission disclosure can support neutrality concerns rather than refute their value.
 
+## Instrument decisions — 2026-10-19
+
+The coordinating ChatGPT engineer selects the six decisions below under the user's delegated project authority, for independent review and ordinary research delivery. These are present **instrument-design decisions**; no answer is attributed to an absent assignee. They consume the accepted [#54 design, sections 6–7](monetization.md#6-proposed-willingness-to-pay-validation-handoff-to-63) and preserve the actual [#63 technical intake](#actual-prospective-technical-intake--2026-10-18). The original source-check dates and historical receipt remain unchanged.
+
+**Fieldwork is still not approved.** D-01, D-02, D-05–D-10 and D-16 remain unresolved. The additional D-04/D-13 design selections below do not resolve these operational facts. In particular, these choices supply no real controller/contact, lawful basis, eligible jurisdiction, private store/access list, channel permission, retention execution, incentive or interviewer. All four operational/empirical issue criteria remain unchecked. Complete the remaining decisions and their actual review before applying this instrument to a participant; no public recruitment form, mailing or contact is created here.
+
+| Decision | Selected design value | Reason and limit |
+| --- | --- | --- |
+| D-03: recall window | Use **six calendar months before the interview** for the existing screener's N-month placeholder. Keep Yes, No and Not sure. Preserve uncertainty when a person cannot place a decision in that window; do not replace missing recall with no decision. | Fixes a common elicitation window while retaining recent and no-decision accounts. Six months is this design choice, not an empirically validated recall interval or a recurrence estimate. Record the actual private interview/window dates only after the operational package is approved. |
+| D-11: recordings | **Written notes only.** Researchers create no audio/video recording, automated transcript, screenshot or screen recording. Before any session, verify that the selected platform's recording/transcription features are disabled; if that cannot be established, do not start that session. | Reduces the material collected; it does not certify that an unselected platform has no processing, metadata or retention. The real platform, private note store, access and deletion controls still require D-09/D-10 review. Live voice/video transport is not classified as absent personal-data processing. |
+| D-12: disclosure | **No public participant-level rows, P-ID-linked accounts or quotations in this pilot.** Public output is aggregate-only after disclosure review, with a minimum of **three distinct participants per reported cell**. Suppress or combine smaller cells and related totals where they would reveal the suppressed cell. | Adopts the existing three-person proposal as one disclosure floor, not an anonymity guarantee. Review combinations across tables and prior releases. D-13 separately selects five valid response units for directional pilot flags, using each module's declared denominator; that analysis minimum is not this three-person public-disclosure floor. Three people describing one purchase do not supply three independent buyer decisions. |
+| D-14: concept cards | Freeze the two hypothetical cards below as **MR63-P1-2026-10-19** and **MR63-F1-2026-10-19**. Change the card identifier and analysis cell if its benefit, limits, buyer, currency, period or worked scenario changes. | Resolves the incomplete-card gate for this defined instrument. No feature, plan, commercial licence, service availability, supplier price or production billing unit is adopted. These are fictional offers for future concept questions, not saleable products. |
+| D-15: modules | Use both cards for concept/comprehension questions. Use the four open paid-price prompts **only** for an actual eligible payer who understands the complete P1 card and can answer in its stated USD/workspace/month unit. Ask F1 only disclosure/trust/workflow questions. | Retains the accepted #54 sequence and design limits. Record ineligible, misunderstood, skipped and unknown cases separately; provide no proxy payer amount, currency conversion, competitor price anchor or free-offer price point. No validated PSM, purchase or revenue estimate follows. |
+| D-17: age | Include **adults who self-attest that they are at least 18**; do not collect identity documents for this check. A missing or negative attestation is ineligible for this instrument. | Selects a research inclusion rule. This is not a jurisdiction-specific legal capacity determination; D-07/D-08 must still resolve the actual participant/legal scope. |
+
+### Frozen hypothetical concept cards
+
+Read the hypothetical status and the entire applicable card before its comprehension questions. Do not substitute the current app, a live plan or an incomplete feature list. Every count or duration in these cards is a **design choice**, not a measured need, implementation capability, cost estimate or validated demand threshold.
+
+| Card field | P1: hypothetical private team workspace | F1: hypothetical referral-funded free core |
+| --- | --- | --- |
+| Status and purpose | An imagined future paid collaboration offer; nothing is being sold or provisioned. | An imagined future free comparison offer; nothing is being provisioned or referred for payment in this research. |
+| Benefits | One private workspace for shared versioned builds, evidence/source-revision links, side-by-side comparison history and review comments. | The neutral comparison core, evidence/source-revision links and ranking explanations. Paid collaboration features in P1 are excluded. |
+| Member and build scope | Up to **five named members** in the one workspace and **100 current saved build records**. Compare **two saved builds at a time**. | A single person's comparison of **two hypothetical build options** in the worked scenario. No team membership, private team workspace, shared review comments or retained collaboration history is included. |
+| History and support | **90 calendar days of comparison/change history** for the current saved records. Included support is public self-service documentation only; no dedicated human support, response-time promise, consulting or SLA. | No retained team history. Included support is public self-service documentation only; no dedicated human support, response-time promise, consulting or SLA. |
+| Content and rights boundary | The team's own entered selections/comments plus eligible public catalog metadata and source/evidence links, subject to actual material/use rights review. No copied third-party datasets, weights, restricted evidence, private source attachments or implied training/redistribution permission. | Eligible public catalog metadata and source/evidence links, subject to the same actual material/use review. No third-party dataset/weight redistribution or private source attachments. Public reachability is not permission. |
+| Buyer and question unit | The participant's actual buying team/organization. Price questions use **USD per workspace per month** for the stated existing team size. No amount is shown or charged, and answers from another currency/unit are not converted or pooled. | No user charge. Disclosed paid referral links and separately labelled sponsor slots are optional; a commission-free presentation remains available without charge. Payment never changes organic ordering or eligibility. No price-perception questions apply. |
+| Exclusions | No inference execution, model-provider credits, third-party data redistribution rights, custom services, availability/security certification or operational-readiness guarantee. | The same inference, credit, rights, custom-service and readiness exclusions; no P1 collaboration bundle. No actual partner agreement or commission revenue is assumed. |
+| Worked use case | An invented four-person team records three options for one configuration decision, compares two at a time, follows the source-revision links, and comments on why it would retain or reject an option. It can revisit that comparison within the card's stated history. No actual team, catalog eligibility, recommendation quality or saving is observed. | An invented individual compares two options for one configuration decision and explains the evidence/ordering and any paid relationship. They can choose the commission-free presentation or an existing alternative. No actual purchaser, recommendation quality or referral conversion is observed. |
+
+The finite member/build/history choices make P1's offer evaluable at one declared scope; they are not a conclusion about the right commercial limits or the cost of operating it. F1 retains #54's free neutrality controls and separate paid-placement disclosure. Different benefits mean P1/F1 answers cannot isolate a price effect, and neither card creates an authorized source-use entitlement.
+
+### Application to the existing draft instrument
+
+Use the six-month placeholder in the unchanged #52 screener. Retain its no-recent-decision branch, roles and unknown answers. After actual consent, a note-taker may read back a paraphrase to check understanding, but must not request employer records or make a recording. Internal P-IDs may still link approved private notes; the public aggregate-only rule prevents releasing those rows or linking their quotations. No quote-consent box is used for this pilot.
+
+The selected written-notes-only and aggregate-only rules take precedence over the older recording, public P-ID and quotation proposals in sections 4–5. Where section 5 asks to always report sample, role, channel, exclusion or withdrawal counts, preserve exact counts in the approved private analysis but withhold unsafe public counts and any related totals, percentages or summaries that would reveal them. Mark a withheld count as withheld, not zero or an exact small-cell range. Apply the same review across tables and prior releases; the three-person floor alone does not establish anonymity.
+
+The consent and outreach blocks above remain **unapproved historical drafts**. For an eventual reviewed participant-facing version, replace their optional-recording and anonymous-quotation passages with the written-notes-only and aggregate-only scope, and remove the audio/video and quotation boxes. Do not send either draft with placeholders or conflicting recording/reporting language. This decision does not certify the remaining consent, controller, jurisdiction, withdrawal or platform terms.
+
+Preserve past behaviour/spend and actual purchasing authority questions **before** either card. Before fieldwork, freeze a P1-then-F1 / F1-then-P1 alternating sequence by planned interview slot; retain each planned and actually exposed order, including missed or withdrawn slots, without silently resequencing completed interviews. This is counterbalancing for the instrument, not random sampling or proof that order effects are absent. Keep the same card version in each analysis cell.
+
+Ask the participant to explain each card's benefits, exclusions, unit and commercial relationship before proceeding. The price module is omitted for a nonpayer, incomplete comprehension or inability to evaluate the specified unit; record the reason without assigning a price of zero. Do not invent a local-currency card, inference, payment, purchase, return, task-performance improvement or willingness-to-pay finding. Until there is a separately approved fixed task/prototype instrument, this phase collects concept reactions only; the baseline/prototype task row remains untested.
+
+The additional D-04/D-13 selections below fix the recruitment coverage design and pilot flags/minimum valid denominators before any interview. The selected reporting floor does not make the two-per-segment proposal reportable, validate any market threshold or resolve the required independent-decision count. Recruitment/consent approval, actual participants, current-alternative accounts and paid-price execution remain absent.
+
+## Additional instrument decisions D-04 and D-13 — 2026-10-19
+
+The coordinating engineer selects these two instrument choices under the user's delegated project authority, for independent review and ordinary research delivery. They complete D-04/D-13 design selection only. The original six selected decisions, complete hypothetical cards, actual technical receipts and source-check dates retain their scope. All values below are **pilot-design choices**, not measured demand, a powered sample, market cutoffs or fieldwork permission.
+
+### D-04: coverage, roles and counting units
+
+Adopt the Q-1 to Q-5 values in section 2: at least two participants in each of the ten primary segments (at least twenty overall), six payer/budget-control participants, four nonpaying approvers, four explicit no-recent-decision participants, and at most 30% from one channel. These retain the existing qualitative breadth and disconfirming-case targets; they do not make the cohort representative.
+
+- **Participant denominator N:** count each consenting, in-scope person once after an interview starts and only while their contribution remains eligible for retention. Include partial interviews, valid no-decision accounts and unknown answers in N; record their module completeness separately. Repeated sessions add no person. Scheduled, declined, ineligible, nonconsenting and withdrawn cases do not fill quotas; preserve only the separate counts permitted by the eventual operational/withdrawal terms. A withdrawal never becomes a negative answer.
+- **Segments and roles:** assign one primary segment from the unchanged #52 ten-segment map and retain secondary matches without adding people. Retain a none-of-these or unclassified response in N without filling a named-segment quota. Use all actually reported role flags from #52 screener question 3, which is multi-select. Do not infer a buyer or approver from a title, segment or employer. Q-2 needs a reported payer or budget-control role in the actual recent decision. Q-3 needs a reported approval/rejection role in that decision with neither payment nor budget control; unknown authority fills neither role quota. Other quotas may overlap, so their counts are not added to N. Q-4 requires an explicit valid No within the selected six-month window; Not sure is separate.
+- **Decision and buying units:** use the most recent described decision for the decision-level pilot flags, preserving earlier accounts for the separate recurrence question. Link accounts of the same actual decision using only permitted context. Count that decision once; do not request employer records or invent an identity to deduplicate it. If accounts may refer to the same decision but linkage or a relevant answer cannot be resolved, keep the qualitative uncertainty and exclude the unresolved unit from that flag's valid denominator. Multiple participants, role accounts or interviews about one purchase do not create independent buyer decisions. Participant quota completion supplies no paid-module eligibility or number of independent price responses.
+- **Channel cap:** record one recruitment-channel category per participant, using the applicable row of section 1 and the actual route into recruitment. Repeated posts, subreddits, servers or referrers within one category do not become new channels. With c participants from a category, Q-5 requires the exact integer comparison `10c <= 3N`; do not round percentages. At N = 20 the maximum is six per category. The cap therefore needs at least four actually approved categories; this selects none of them. An unknown route stays in N with a separate count and leaves Q-5 unassessed. If the approved channels or actual operational capacity cannot meet these targets, revise and review D-04 before contact; do not fabricate a channel, exceed an authorization or relax the cap after seeing answers.
+
+Record each quota's attained count and any deficit. An incomplete cohort remains incomplete; do not replace unknown roles, missing segments or no-decision cases to manufacture coverage. All private and public counts remain subject to D-09/D-10 and the unchanged D-12 disclosure rules. Two participants per segment never authorize a public two-person cell.
+
+### D-13: exact pilot flags and response minima
+
+For each T-1 to T-5 row, n is the number of **valid units in that row's existing denominator** and k the units meeting its stated condition. Specifically, T-1 k counts valid Yes answers to the recent-decision question; T-2 k counts valid Yes answers to the earlier-similar-decision question. T-1 and T-2 count participants; T-3 to T-5 count distinct described decisions. A repeat account can contribute no second decision unit. A T-3 decision needs enough component detail to distinguish exactly one type from multiple types; unknown components are not absent. T-4 needs explicit valid money and time answers, with a numerator only when both are explicitly none/zero. T-5 retains sufficient existing alternatives, reuse and no-purchase outcomes as valid responses.
+
+Select a minimum of **five valid units per flag**. This is an explicit design floor for a small qualitative pilot, replacing an undefined minimum; it is not a confidence, precision or power guarantee. With n below five, including n = 0, record **insufficient valid responses**, show permitted counts and make no directional flag judgment. With n at least five, T-1/T-2 trigger only when `2k < n`, and T-3/T-4/T-5 only when `2k > n`. Exact equality is untriggered. A sufficient denominator and an untriggered flag never establish demand, future recurrence, conversion, retention or a successful product.
+
+Preserve each module's eligible, exposed, valid, skipped, unknown, excluded and withdrawn states and counts, including overlaps explained by the sampling/withdrawal record; do not sum overlapping counts as a partition. Exclude withdrawn or otherwise no-longer-retainable contributions from every flag's valid n and k. A linked decision remains eligible only when permitted, nonwithdrawn evidence independently supports its required inputs and answer. A valid no-decision response belongs in T-1. T-2 additionally requires a recent decision and a valid earlier-decision answer. Missing, untracked or conflicting inputs do not become zero or a favorable response. No decision-level flag includes an unresolved duplicate or an unclassifiable outcome. Public counts, fractions and related totals are withheld where D-12 requires it, without replacing a withheld value with zero.
+
+For #54's directional paid-benefit and referral-path pilot flags, select the same **five valid independent units** as a separate analysis choice in place of its proposed three-response minimum. Retain its own row-specific units and exact **at least half** comparison (`2k >= n`): eligible independent buyer decisions with an understood complete paid card and valid benefit answer for the paid flag; distinct recent decisions with known outcome/channel for the path flag. These are separate from T-1 to T-5. Price-perception answers keep their complete card/version, actual eligible buying unit, USD/workspace/month and comprehension conditions; several people from one buying decision supply at most one independent unit, and unresolved conflicting accounts yield no single invented price. No currency/card pooling, proxy payer amount, optimal price, revenue or market-size estimate follows.
+
+The five-unit analysis minima are independent of D-12's unchanged three-person public-disclosure floor: meeting either does not meet the other. #54's any-observed-comprehension-failure rule still triggers instrument review at any sample size; its trust reasons remain qualitative. T-6 remains qualitative review of linked role accounts. The unselected baseline/prototype task comparison stays untested. A descriptive flag calls for reviewing this instrument or pilot scope; it does not automatically reject a value proposition or authorize another experiment.
+
+**Remaining operational decisions:** D-01, D-02, D-05 to D-10 and D-16 still need their actual values and approval. These selections supply no controller/contact, permitted channel, jurisdiction/lawful basis, private store/access, retention execution, incentive, interviewer, consent or participant. No contact or fieldwork is approved and all four original operational/empirical issue criteria remain incomplete.
+
+## Additional instrument decision D-05 — 2026-10-19
+
+The coordinating engineer selects **unpaid participation for this remote pilot** under the user's delegated project authority, for independent review and ordinary research delivery. This is a deliberate prospective compensation design, not an inference that an unknown budget or research cost is zero. It supersedes only the earlier D-05 pending statements and optional incentive placeholders; the original alternatives remain historical options. The eight earlier instrument choices, Q-1 to Q-5, complete hypothetical cards and source/receiving records retain their exact scope.
+
+| D-05 field | Selected design value |
+| --- | --- |
+| Incentive type | None: no cash, gift card, donation, reimbursement, product access, discount, credit, prize or other participation reward. No travel, purchase or paid account is required by this remote instrument. |
+| Amount | Zero offered participant compensation, selected explicitly for this pilot. This is not a project budget, an observed expense total or a claim that participation has no time or connection cost. |
+| Currency | Not applicable because the instrument offers no payment; no currency or exchange-rate assumption is introduced. |
+| Skipping, stopping or withdrawing | No reward is conditioned on answering, completing an interview, retaining data or giving a favorable response. No project charge, repayment or reward forfeiture is imposed for skipping, stopping or withdrawing. This prospective choice does not cancel any separate existing promise. |
+
+Use only recruitment arrangements compatible with unpaid participation. A panel or channel whose actual terms require participant compensation cannot be used with this instrument; the paid-panel option described in section 1 is therefore not selected by D-05. D-02 still needs actual permitted channels and their current requirements. If a different compensation arrangement is needed, record and review a dated D-05 change before offering it; do not improvise rewards during recruitment or after seeing answers. This section creates no account, spending authorization, participant agreement or channel permission.
+
+For the eventual reviewed outreach and consent materials, replace the incentive placeholder with this disclosure:
+
+> Participation is voluntary and unpaid. The project provides no payment, gift, reimbursement, donation or product-access reward for taking part. You may skip questions, stop, or withdraw under the consent terms without a project charge or losing a reward.
+
+Keep the existing 45-minute estimate visible and make the unpaid terms clear before a person chooses to take part. Remove the conditional incentive-payment promise and payment-purpose wording from the eventual consent draft; collect no incentive-payment administration details, such as bank, tax or donation-beneficiary information, for this unpaid instrument. Actual scheduling, consent and withdrawal data still require D-06 to D-10. The participant-facing drafts remain unapproved and must not be sent with placeholders or conflicting terms. The unpaid interview is separate from P1/F1's hypothetical product offers; past behavior and spend still precede those cards, with no researcher-supplied product price.
+
+**Reasoned recruitment limitation:** an unpaid 45-minute pilot may favor enthusiasts and people with time to volunteer, and may make the payer, approver and segment coverage harder to attain. This is an anticipated selection risk, not an observed recruitment result. Preserve every quota and valid-unit minimum; report deficits and unknowns rather than relaxing coverage after seeing responses. Participation without compensation is neither evidence of willingness to pay for a product nor a price of zero. D-12's aggregate-only disclosure and all withdrawal/retention constraints remain unchanged.
+
+**Remaining operational decisions:** D-01, D-02, D-06 to D-10 and D-16 still need their actual values and review. Selecting D-05 supplies no controller/contact, jurisdiction or lawful basis, private store/access arrangement, retention execution, interviewer, participant or consent. It authorizes no contact or fieldwork; all four original operational/empirical issue criteria remain incomplete.
+
+## Additional instrument decisions D-08 and D-10 — 2026-10-19
+
+The coordinating engineer selects the following audience and retention design under the user's delegated project authority, for independent review and ordinary research delivery. These choices supersede only earlier pending D-08/D-10 statements and the section 4 retention proposals. The nine earlier instrument decisions, including D-05's unpaid remote pilot, remain unchanged. This is a selected protocol design, not an assertion that a controller, storage service, participant, lawful basis, deletion capability or recruitment permission exists.
+
+### D-08: participant audience
+
+Limit this first pilot to people whose usual residence and physical location at the interview are both within the **fifty United States or the District of Columbia**. Territories, EU/UK locations and other countries are outside this pilot's selected audience. Use a direct Yes / No / Not sure self-attestation for the residence-and-location condition; a negative or uncertain response does not qualify. Do not infer location from citizenship, language, currency, IP address or an employer, and collect no identity document or precise location to establish this instrument rule. D-17's separate at-least-18 self-attestation remains unchanged.
+
+This is a practical first-cohort boundary alongside the existing hypothetical USD/workspace/month card. It does not show that every eligible person buys in USD, understands that card or has purchasing authority; all D-15 eligibility and comprehension gates still apply. It excludes other markets from the sample and supports no claim about their demand or the representativeness of this US sample. The ten-segment, role and no-recent-decision quotas and four-channel feasibility constraint remain unchanged; no available participant or approved channel is inferred.
+
+Country-level audience selection is not a legal-capacity or applicable-law determination. D-06/D-07 must still establish the actual controller, contact and applicable participant/location requirements, and D-09 must resolve the real platform and processing arrangements. Before contact, the reviewed operational screener must establish whatever additional jurisdiction information those decisions actually require while minimizing collected detail. A participant cannot be admitted merely because the country-level condition is met. No jurisdiction-specific rights wording, lawful basis or channel permission is selected here.
+
+### D-10: finite private-data deadlines
+
+Replace the issue-closure-dependent section 4 dates with the finite maxima below. Record each actual deadline in UTC in the approved private system when the first relevant record is collected; later messages, repeated sessions, copying, analysis or an open issue do not reset its original clock. A calendar-day interval ends at the same UTC time of day after the stated number of dates. These are operational design maxima, not required legal retention periods; delete sooner when the purpose ends or an applicable approved requirement calls for it.
+
+| Material | Selected latest deletion time |
+| --- | --- |
+| Opt-in contact and screener records when no interview starts | Thirty calendar days after first collection, or seven calendar days after an attributable decline, ineligibility determination or withdrawal, whichever is earlier. An unanswered invitation or scheduled session does not extend the deadline. |
+| Interview participant's contact/identity linkage, consent record, private notes, codes and participant-linked analysis | Ninety calendar days after the first interview starts, capped at one hundred and twenty calendar days after the first opt-in record was collected, whichever is earlier. Partial or repeated sessions share the first clock. Keep only the minimum linkage needed for the approved consent/withdrawal process; erase scheduling copies when scheduling ends. |
+| An attributable withdrawal under the eventually reviewed withdrawal method | Stop further use immediately and delete the participant's private contribution and linkage within seven calendar days, or the original applicable deadline, whichever is earlier. The operational package must resolve the actual request channel and identity checks before contact; no verification process is assumed to exist here. |
+| Researcher recordings, automated transcripts and incentive-payment administration records | Do not create them under the unchanged D-11/D-05 choices. Discovery of an unintended copy is a handling failure to resolve under the actual operational process, not a new retention allowance. |
+| Public output | Retain only the D-12-reviewed aggregate release at its actual historical scope. The public Git record may persist; there is no promise to erase copies already obtained by others. No private row, P-ID-linked account or quotation becomes public through expiry. |
+
+The same private-data maximum covers every controlled copy: live storage, local exports, caches, version history, trash and provider backups. Before any collection, D-09 must identify the actual stores and access list and demonstrate how their deletion or expiry controls can meet these deadlines, including backups. Encryption, an access restriction or deletion from a visible folder is not by itself verification that every copy has expired. A service with an unknown or incompatible backup/retention policy cannot be selected without a reviewed protocol change before use. This section executes no deletion and certifies no existing platform.
+
+Before deleting a withdrawn or expired contribution, remove it from any continuing private analysis and recompute the affected participant/decision/buying-unit counts, numerators and denominators from still-eligible evidence under D-04/D-13. Do not convert it to zero, a negative answer or an additional independent unit. A previously cleared aggregate release retains its dated cutoff and disclosure scope; it does not authorize a new participant-level analysis after the supporting private rows expire. Reassess identifying combinations and related totals before any later public release. The older consent/outreach blocks remain unapproved historical drafts; the eventual participant-facing version must state the actual dates and the retained-public-aggregate limit before consent.
+
+Record completion or failure in a nonidentifying process receipt describing the policy version, copy classes checked and actual deletion/expiry outcome, with disclosure review before any public use. Keep no participant identifiers, content, recoverable linkage or per-person hashes in a longer-lived receipt to evade these limits. A missed deletion target is a recorded failure: stop new collection and resolve the actual copies and operational plan; do not silently extend retention or claim deletion. Any genuinely applicable conflicting requirement must be resolved in the operational review before collection, rather than inferred or waived by this instrument.
+
+**Remaining operational decisions:** D-01, D-02, D-06, D-07, D-09 and D-16 still need their actual values and review. D-08 selects an audience and D-10 selects a schedule; neither supplies a controller/contact, lawful basis, allowed channel, actual store/access arrangement, interviewer, consent or participant. No contact, recruitment, interview or willingness-to-pay execution is approved. All four original operational/empirical issue criteria remain incomplete.
+
 ## 8. Decisions required from coordinator before any contact
 
-Project engineering decisions can be recorded under the user's delegated authority; no reply from an absent assignee is created or required merely to review this instrument. The operational package still needs actual controller/contact details, storage/access arrangements, applicable channel/participant permissions and a recorded recruitment/consent decision. A technical receiving review cannot invent those facts or a participant's consent. The checklist below remains unselected unless an explicit later decision records its value and scope.
+Project engineering decisions can be recorded under the user's delegated authority; no reply from an absent assignee is created or required merely to review this instrument. The operational package still needs actual controller/contact details, storage/access arrangements, applicable channel/participant permissions and a recorded recruitment/consent decision. A technical receiving review cannot invent those facts or a participant's consent. The checked rows below are selected only at the scope of the dated instrument decisions above. Every unchecked row still needs its real value and scope; partial design selection does not approve the package.
 
 - [ ] D-01 Approve, change or reject this package as a whole.
 - [ ] D-02 Which recruitment channels are allowed (section 1); Reddit stays blocked until its rules are read and recorded.
-- [ ] D-03 Recall window N months for screener question 2.
-- [ ] D-04 Quotas Q-1 to Q-5 and the participant/decision/buyer denominators (approve or replace).
-- [ ] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
+- [x] D-03 Recall window N months for screener question 2.
+- [x] D-04 Quotas Q-1 to Q-5 and the participant/decision/buyer denominators (approve or replace).
+- [x] D-05 Incentive type, amount, currency and whether it is paid on withdrawal.
 - [ ] D-06 Controller identity and the contact address in consent and outreach.
 - [ ] D-07 Lawful basis (consent, legitimate interests with a documented assessment, or other) and the rights text.
-- [ ] D-08 Which participant jurisdictions are in scope (EU, UK, US, other).
+- [x] D-08 Which participant jurisdictions are in scope (EU, UK, US, other).
 - [ ] D-09 Private storage location, encryption, and the named access list.
-- [ ] D-10 Retention and deletion deadlines (approve or replace the section 4 proposals).
-- [ ] D-11 Whether audio and/or video recording is offered at all.
-- [ ] D-12 Minimum reported cell size (proposal: 3) and review of identifying combinations/quotes.
-- [ ] D-13 Values, denominators and minimum valid response counts for pilot flags T-1 to T-5, set before the first interview.
-- [ ] D-14 The complete versioned benefit/buyer/currency/period card for Part D, or a decision to omit Part D; incomplete cards receive no price questions.
-- [ ] D-15 Whether the paid-payer price module and distinct free-concept questions are used, under the accepted #54 design limits.
+- [x] D-10 Retention and deletion deadlines (approve or replace the section 4 proposals).
+- [x] D-11 Whether audio and/or video recording is offered at all.
+- [x] D-12 Minimum reported cell size (proposal: 3) and review of identifying combinations/quotes.
+- [x] D-13 Values, denominators and minimum valid response counts for pilot flags T-1 to T-5, set before the first interview.
+- [x] D-14 The complete versioned benefit/buyer/currency/period card for Part D, or a decision to omit Part D; incomplete cards receive no price questions.
+- [x] D-15 Whether the paid-payer price module and distinct free-concept questions are used, under the accepted #54 design limits.
 - [ ] D-16 Who interviews, and how interviewer conflicts of interest are disclosed.
-- [ ] D-17 Minimum participant age (consent draft assumes 18+).
+- [x] D-17 Minimum participant age (consent draft assumes 18+).
 
 ## Acceptance status
 
 | Live criterion | Status |
 | --- | --- |
 | Approve recruitment and consent protocol | Package prepared; approval not given |
-| Recruit across distinct buyer roles | Not started; quota proposal only |
+| Recruit across distinct buyer roles | Not started; D-04 coverage design selected, no participants recruited |
 | Capture current alternatives and recent decisions | Not started; instrument in #52 guide |
 | Test willingness to pay without leading questions | Not started; module proposed |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis | Met for this package: no demand conclusion is drawn |
-| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; D-01–D-17 operational values remain unselected |
+| Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; eleven bounded instrument decisions are selected above, and every remaining operational value/permission is unresolved |
 | Repository checks pass; reviewer accepts the evidence before Done | Technical instrument review accepted at prepared `1a1324d`; final amendment checks and canonical delivery remain required, with no fieldwork acceptance |
 
 ## Result

@@ -127,6 +127,16 @@ string do not satisfy these fields. Validation preserves the original text and
 permits an explicitly unknown `reviewed_commit` with a nonempty basis; it does
 not certify the statement, source URL, timestamp or receiving decision.
 
+The cutoff scoped responses and historical `owner_review` records require an
+explicit `reviewed_commit` in each ledger/readback copy: either a full
+40-character ASCII hexadecimal SHA-1 commit ID, matching this repository's
+recorded Git object format, or JSON `null` with nonempty `commit_basis` text.
+Missing fields, other JSON types, blanks, abbreviated IDs and malformed hashes
+cannot stand in for either state. Valid spelling and letter case remain
+unchanged; existing historical full-ID records need no new basis field.
+This check neither resolves the commit nor authenticates its review, and does
+not reinterpret the separately recorded post-snapshot decisions.
+
 An identical scoped response cannot be recorded more than once for the same
 producer/consumer pair. The ledger and readback are checked separately before
 totals are compared. Different handoff pairs and distinct scoped records may

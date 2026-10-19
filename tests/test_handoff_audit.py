@@ -120,6 +120,121 @@ class HandoffAuditValidation(unittest.TestCase):
         self.check()
         self.assertEqual((self.ledger, self.readback, self.audit), before)
 
+    def reviewed_commit_pairs(self):
+        return [
+            ('author response', self.ledger[1]['responses'][0],
+             self.readback['new_scoped_responses'][0]),
+            ('receiving response', self.ledger[2]['responses'][0],
+             self.readback['new_scoped_responses'][1]),
+            ('historical review', self.ledger[0]['owner_review'],
+             self.readback['historical_owner_reviews'][0]['owner_review'])]
+
+    def test_reviewed_commit_shape_is_checked_in_each_record_copy(self):
+        invalid = (False, 1, 1.0, [], {}, '', ' \t\n', 'a' * 7,
+                   'a' * 64, 'g' * 40, 'a' * 40 + '\n', 'ａ' * 40)
+        for label, ledger, readback in self.reviewed_commit_pairs():
+            for location, record in (('ledger', ledger), ('readback', readback)):
+                original = record['reviewed_commit']
+                for value in invalid:
+                    with self.subTest(kind=label, location=location, value=value):
+                        record['reviewed_commit'] = deepcopy(value)
+                        try:
+                            with self.assertRaisesRegex(HandoffValidationError, 'reviewed_commit'):
+                                self.check()
+                        finally:
+                            record['reviewed_commit'] = original
+
+    def test_matching_malformed_reviewed_commits_cannot_certify_audit_identity(self):
+        for label, ledger, readback in self.reviewed_commit_pairs():
+            originals = (ledger['reviewed_commit'], readback['reviewed_commit'])
+            for value in (False, 1, [], {}, '', 'a' * 7, 'g' * 40, 'a' * 40 + '\n'):
+                with self.subTest(kind=label, value=value):
+                    ledger['reviewed_commit'] = deepcopy(value)
+                    readback['reviewed_commit'] = deepcopy(value)
+                    try:
+                        with self.assertRaisesRegex(HandoffValidationError, 'reviewed_commit'):
+                            self.check()
+                    finally:
+                        ledger['reviewed_commit'], readback['reviewed_commit'] = originals
+
+    def test_reviewed_commit_presence_is_required_in_each_copy(self):
+        for label, ledger, readback in self.reviewed_commit_pairs():
+            for location, record in (('ledger', ledger), ('readback', readback)):
+                with self.subTest(kind=label, location=location):
+                    original = record.pop('reviewed_commit')
+                    try:
+                        with self.assertRaisesRegex(HandoffValidationError, 'reviewed_commit'):
+                            self.check()
+                    finally:
+                        record['reviewed_commit'] = original
+
+    def test_known_and_unknown_reviewed_commits_preserve_original_representations(self):
+        for value in ('0123456789abcdef' * 2 + '01234567',
+                      '0123456789AbCdEf' * 2 + '01234567', None):
+            with self.subTest(value=value):
+                self.setUp()
+                for _, ledger, readback in self.reviewed_commit_pairs():
+                    for record in (ledger, readback):
+                        record['reviewed_commit'] = value
+                        if value is None:
+                            record['commit_basis'] = '  未確認 — source names no commit. \n'
+                before = deepcopy((self.ledger, self.readback, self.audit))
+                self.check()
+                self.assertEqual((self.ledger, self.readback, self.audit), before)
+        # Existing historical full-SHA records need no new invented basis.
+        self.setUp()
+        self.assertNotIn('commit_basis', self.ledger[0]['owner_review'])
+        self.check()
+
+    def test_unknown_historical_commit_requires_a_recorded_nonempty_basis(self):
+        for basis in (None, False, 1, [], {}, '', ' \t\n'):
+            with self.subTest(basis=basis):
+                self.setUp()
+                for record in (self.ledger[0]['owner_review'],
+                               self.readback['historical_owner_reviews'][0]['owner_review']):
+                    record['reviewed_commit'] = None
+                    record['commit_basis'] = deepcopy(basis)
+                with self.assertRaisesRegex(HandoffValidationError, 'commit_basis'):
+                    self.check()
+        self.setUp()
+        for record in (self.ledger[0]['owner_review'],
+                       self.readback['historical_owner_reviews'][0]['owner_review']):
+            record['reviewed_commit'] = None
+        with self.assertRaisesRegex(HandoffValidationError, 'commit_basis'):
+            self.check()
+
+    def test_cli_rejects_matching_reviewed_commit_corruption_in_both_modes(self):
+        originals = {name: (BASE / name).read_text(encoding='utf-8') for name in (
+            'handoffs.json', 'handoff-audit-readback.json', 'audit.json')}
+        for optimized in (False, True):
+            control = self.run_cli(originals, optimized)
+            self.assertEqual(control.returncode, 0, control.stderr)
+            self.assertIn('Handoff audit integrity OK', control.stdout)
+            for kind in ('scoped', 'historical'):
+                for value in (False, {}, 'a' * 40 + '\n'):
+                    with self.subTest(kind=kind, value=value, optimized=optimized):
+                        documents = {name: json.loads(text) for name, text in originals.items()}
+                        if kind == 'scoped':
+                            row = next(row for row in documents['handoffs.json'] if row.get('responses'))
+                            record = row['responses'][0]
+                            copied = next(item for item in documents['handoff-audit-readback.json']['new_scoped_responses']
+                                          if (item['market_issue'], item['consumer_issue'], item['url']) ==
+                                          (row['market_issue'], row['consumer_issue'], record['url']))
+                        else:
+                            row = next(row for row in documents['handoffs.json'] if 'owner_review' in row)
+                            record = row['owner_review']
+                            copied_row = next(item for item in documents['handoff-audit-readback.json']['historical_owner_reviews']
+                                              if (item['market_issue'], item['consumer_issue']) ==
+                                              (row['market_issue'], row['consumer_issue']))
+                            copied = copied_row['owner_review']
+                        record['reviewed_commit'] = deepcopy(value)
+                        copied['reviewed_commit'] = deepcopy(value)
+                        result = self.run_cli({name: json.dumps(data) for name, data in documents.items()}, optimized)
+                        self.assertNotEqual(result.returncode, 0, result.stdout)
+                        self.assertIn('reviewed_commit', result.stderr)
+                        self.assertNotIn('Handoff audit integrity OK', result.stdout)
+        self.assertEqual({name: (BASE / name).read_text(encoding='utf-8') for name in originals}, originals)
+
     def test_cli_rejects_matching_nontext_handoff_fields_in_copied_canonical_records(self):
         originals = {name: (BASE / name).read_text(encoding='utf-8') for name in (
             'handoffs.json', 'handoff-audit-readback.json', 'audit.json')}

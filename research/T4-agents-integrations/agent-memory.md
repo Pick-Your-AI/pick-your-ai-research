@@ -729,7 +729,7 @@ This is a coherent research-completion candidate, not a request to close #13/#15
 
 ## Evidence
 
-Access dates are per entry (D1–D56: 2026-10-16; D57–D58: 2026-10-17; D59–D74: 2026-10-18). Grades follow `docs/RESEARCH_METHOD.md` and the adopted #41 interim policy above. "Wheel source" means file names and source text read from the published wheel, without executing it.
+Access dates are per entry (D1–D56: 2026-10-16; D57–D58: 2026-10-17; D59–D74: 2026-10-18). Grades follow `docs/RESEARCH_METHOD.md` and the [accepted #41 evidence policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels); the dated owner adoption above remains historical. "Wheel source" means file names and source text read from the published wheel, without executing it.
 
 | ID | Publisher and URL | Access date | Version / region | Evidence grade | Limitations / reuse terms |
 | --- | --- | --- | --- | --- | --- |

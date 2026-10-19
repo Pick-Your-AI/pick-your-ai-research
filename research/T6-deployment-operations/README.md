@@ -1,7 +1,7 @@
 # T6 Deployment & Operations
 
 Workstream: [#34](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) · Contract: 1.0.0 · Owners: @PUSHINGSQUARES, @appletechie (issue assignees)
-Status: five decision records merged through [#121](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121), with rule-semantics corrections merged through [#190](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/190); component-issue acceptance and handoffs remain under review. Last researched: 2026-10-18. Original source sweeps: 2026-10-16/17; source additions and the W5 illustration were checked on 2026-10-18 as identified in each record.
+Status: all five child decision records are research-complete: Guardrails (#35) through [#413](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/413), Evaluation (#36) through [#402](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/402), Deployment (#37) through [#447](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/447), Monitoring (#38) through [#442](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/442) and Cost Estimate (#39) through [#436](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/436). The parent workstream (#34) remains open pending reviewed summary delivery, actual-main validation and final issue/Project reconciliation. Summary reconciled: 2026-10-19. Original source sweeps: 2026-10-16/17; source additions and the W5 illustration were checked on 2026-10-18 as identified in each record. This summary reconciliation does not refresh those source dates.
 
 Product question: is the build safe, measurable, deployable, observable, and affordable?
 
@@ -13,25 +13,29 @@ The [2026-10-18 sibling reconciliation](sibling-reconciliation.md) preserves the
 
 | issue | record | v1 kind | decision it supports | source-checked rules | hypotheses | evidence rows |
 |---|---|---|---|---|---|---|
-| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 36 | 3 | 30 |
-| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 94 | 13 | 292 |
+| [#35](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35) | [Guardrails](guardrails.md) | `guardrail` | Which safety, security and policy controls should this build include, and what does the builder show when one is missing? | 36 | 3 | 55 |
+| [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) | [Evaluation](evaluation.md) | `evaluation_suite` | How will the user know whether the build meets its quality, safety, latency and cost targets? | 94 | 13 | 296 |
 | [#37](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37) | [Deployment](deployment.md) | `deployment_target` | What does it take to ship this build, and is it ready? | 90 | 21 | 222 |
 | [#38](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38) | [Monitoring](monitoring.md) | `monitoring_stack` | Which signals must be watched once the build runs? | 71 | 25 | 286 |
 | [#39](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39) | [Cost Estimate](cost-estimate.md) | `cost_policy` | What will this build cost, under stated assumptions, and with what uncertainty? | 45 | 11 | 202 |
-| | total | | | 336 | 73 | 1,032 |
+| | total | | | 336 | 73 | 1,061 |
 
-The original #121 submission records a QC pass that re-opened its cited URLs and applied the corrections in the records. The 2026-10-18 follow-ups rechecked their added findings and pricing inputs; they do not claim a new reread of every older source. The counts above describe the current rule, hypothesis and evidence tables; inline primary-source links and linked evidence appendices are additional references. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md` (#41 owns the final policy). Where a row mixes types, or a page was not opened or was read from a mirror, the grade says so. These records do not supply a T6 runtime experiment. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set; automated recomputation of the scenarios is arithmetic validation.
+The original #121 submission records a QC pass that re-opened its cited URLs and applied the corrections in the records. The 2026-10-18 follow-ups rechecked their added findings and pricing inputs; they do not claim a new reread of every older source. The counts above reconcile Guardrails' E1–E55 inventory to #413 and Evaluation's evidence rows to #402; other component counts retain their recorded summary scope. Inline primary-source links and linked evidence appendices are additional references. The [accepted #41 evidence policy](../T0-configuration/catalog-data-sources.md#evidence-grades-and-labels), completed in [receipt 6256107246](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6256107246), grades each claim and distinguishes a checked citation from independently reproduced evidence. Existing row labels, access dates and unresolved source/use conditions retain their original scope; this summary does not regrade or re-certify them. These records do not supply a T6 runtime experiment. Figures are published (copied from a dated source), estimated (derived here, with the formula shown) or builder-set; automated recomputation of the scenarios is arithmetic validation.
 
 ## Decisions
 
 ### #35 Guardrails
 
-- A catalog of controls plus compatibility rules, not a recommended product. No single product covers the catalog; for example, harm classifiers lack injection and PII detection (G-R18).
-- A baseline of controls applies to every build. Further controls apply when T3 retrieval or T4 tools and agents are active.
-- A missing control is a rule result, shown in the build's risk review. A `warning` can be accepted with a reason saved in the build (#42). A failed `error` rule blocks the build until the selection changes. An `unknown` result is shown with its open question and owner, never as a pass.
-- Controls that the platform supplies in API or managed mode are shown as provided by the platform, with their source (G-R19).
+**Research complete:** [#413](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/413) delivered the reviewed record at signed [`0d2e34d7`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/0d2e34d76cc6ac3e56165b7e72f4bbe0b8b87cb2). The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6256149374) maps all nine original criteria and the actual R1–R6 receiving decisions. Selected-control execution, effectiveness, source-use permission and versioned builder adoption retain their separate evidence requirements.
+
+- The control catalog maps 33 duties to the actual selected implementation, surface, operator and configuration. A catalog label or a documented capability does not establish enabled coverage.
+- The editable project baseline assesses each build's applicable hazards and responsibilities, with additional retrieval, tool/agent and memory requirements when those paths are active. It does not require every build to buy a classifier or select a `guardrail` item.
+- Show each scoped result with its fixed severity, outcome, evidence reason and follow-up owner. A saved warning acknowledgement preserves the warning/failure and does not waive a separate error or unknown-policy block; a passing error-severity assertion is not a block. Missing or unqualified evidence remains distinct from a known failure. These are the [reviewed display and policy semantics](guardrails.md#recommendation-policy-and-missing-control-display).
+- Bind each control's configuration and observation responsibility to its actual operator and selected offering across API, managed and self-hosted paths. Documented availability, effective configuration and observed enforcement remain separate; a provider or mode label supplies none of the latter evidence.
 
 ### #36 Evaluation
+
+**Research complete:** [#402](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/402) delivered the reviewed record and closed [#36](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36) at signed [`bf453fcf`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/bf453fcfd8bf501fca6ef10e6eb5414b3d5f2101). The [catalog qualification companion](evaluation-catalog-qualification.md) accounts for all 101 comparison rows and links 33 source-qualified `evaluation_suite` proposals. All new provenance remains `unverified`; no evaluator or model was run. Additional tier/sizing proposals and the named note-only questions retain their scope. Other T6 component issues and the parent workstream retain their own completion criteria.
 
 - Evaluation is a per-build plan with four parts: the workload row, the safety pair, a latency-and-cost measurement, and a regression gate on a dataset the user owns.
 - No primary source gives a recommended pass threshold, so every threshold is builder-set.
@@ -40,12 +44,16 @@ The original #121 submission records a QC pass that re-opened its cited URLs and
 
 ### #37 Deployment
 
+**Research complete:** [#447](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/447) delivered the reviewed record at signed [`ffe64042`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/ffe6404271c50c6ee4f44043e0d52a842df6afba), exact Deployment blob `08c3dacf4ce574071a4ce88a13509be42ace5f38`. The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6258475240) maps all nine original criteria, the corrected D-R59/D-R66 and retention predicates, and the actual #37 → #38 interface whose source conditions are delivered in #442. #37 closed on 2026-10-19. Selected-target launch configuration, runtime observations, rights/account applicability, additional source coverage and versioned rule adoption retain the named follow-up owners; research completion is not deployment readiness.
+
 - Mode follows the serving-component decision in [T0](../T0-configuration/deployment-mode.md), merged through #81: user-operated serving is `self_hosted`; provider-operated dedicated or reserved capacity is `managed`; provider-operated shared capacity is `api`. Billing units and customer-owned deployment objects do not determine mode. Hyperscaler on-demand/shared inference is `api`; dedicated endpoints and provisioned throughput are `managed`. Training runs do not set serving mode. Select the actual offering/capacity rather than inferring a mode from the provider name.
 - Order of work runs from T0 through terms, identity, pins, the mode's platform steps, gates, monitoring and rollback, and only then traffic (S1 to S13).
 - Default to a runtime identity in every mode, and to the pin that cannot move: a snapshot id (API), an explicit deployment version (managed), or an image digest plus a weights commit hash (self-hosted).
 - Rollout mechanics belong to #37; promotion criteria belong to #36 and #38. Readiness rows show one of pass, fail, not applicable, unknown or not measured.
 
 ### #38 Monitoring
+
+**Research complete:** [#442](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/442) delivered the reviewed record at signed [`e009fc0e`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/e009fc0edbb1821c045db036c5ae263921291c4d). The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38#issuecomment-6258005170) maps all nine original criteria and the actual R1–R7 receiving decisions; #38 closed on 2026-10-19. Signal availability, effective collection configuration, observed alert delivery, retention and source-use eligibility remain separately qualified. No installation, scrape, operational SLO result or new wire field follows from research completion.
 
 - Page on three things only: SLO burn on client-measured latency and errors, a spend stop that is rejecting requests, and a serving pool with no ready endpoints.
 - Measure latency at the client, because platform latency metrics differ in start point and statistic. Compute spend in-process and reconcile it with billing later, because billing lags by minutes to over a day.
@@ -54,15 +62,17 @@ The original #121 submission records a QC pass that re-opened its cited URLs and
 
 ### #39 Cost Estimate
 
+**Research complete:** [#436](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/436) delivered the reviewed record at signed [`9a4fa8af`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/9a4fa8afe71136611bdab50b824700777d39397d). The [completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6257325094) maps all ten original criteria and the actual [#39 → #42 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257029583), whose corrected-source delivery condition is now satisfied. Current price eligibility, complete priced coverage, calibrated sizing and source-use permission remain separately qualified; #40/SB-3 representation and #42 implementation/adoption retain their own gates.
+
 - Keep every price as published and derive normalised per-unit prices with the factor recorded (30 unit rows, U1 to U30).
 - Build low, expected and high from quantities and builder-set drivers, with prices fixed. On the reference workload the API estimate spans 4.3 times (W1: 6,700 to 29,000 USD a month).
 - Show capacity next to its utilisation and break-even. Peak-sized Azure provisioned throughput runs at about a third of its capacity, so reserved PTUs cost about 3 times pay-as-you-go and hourly PTUs about 8.5 times (W2).
-- Price in USD, display in the T0 currency, exclude tax and date every price. The operations lines from #35 to #38 add 9 to 22 percent to an API build (W4).
+- Match each price to its actual offering, meter, source currency, region, effective period and account/plan conditions, under the [accepted #41 → #39 receiving boundary](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6254388872). An unanswered budget currency stays unknown; the USD preview supplies no source-currency, FX-rate or region default. Historical conversion and reference-region proposals require their own qualified policy before use. Retain the stated tax treatment and date each price. The operations lines from #35 to #38 add 9 to 22 percent in the recorded API scenario (W4), rather than defining a general overhead rate.
 - W5 separates provider-specific fine-tuning quantities and minimums from subsequent hosting, including a stated 30-day period. Every worked-scenario figure is re-computed by [`cost-scenarios.py`](cost-scenarios.py) from [`cost-estimate.scenarios.json`](cost-estimate.scenarios.json).
 
 ## Rules contributed to #40
 
-**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). The condition describes the violation: known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. Only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); both PRs are merged partial decision records. Their scoped owner decisions apply, while open #40/#41 acceptance and next-version adoption remain separate.
+**Rule interpretation (candidate revision 0.2).** Each row has one fixed v1 severity (`error`, `warning` or `info`), separate from outcome (`pass`, `fail`, `unknown`, `skipped`). For retained violation-form rows, a known applicable violation is `fail`; known absence of that violation is `pass`; non-applicability is `skipped` with `not_applicable`; missing eligible inputs are `unknown` with `missing_evidence` and `on_unknown: review`. Current positive-assertion profiles retain their recorded applicability and reason semantics; [Guardrails](guardrails.md#evaluation-and-representation-rules) converts violation predicates through typed negation before terminal evaluation. Resolve conflicts using #41's scope, version/date and authority order before taking the conservative equal-rank numeric value, flagged disputed. In source-conflict resolution, only missing eligible evidence or genuine unresolved ties yield `unknown`; conflict alone does not. Hypotheses remain unaccepted and cannot drive production verdicts. Suffixed rows split the old condition; the unsuffixed ID is retained for its stated scope. No frozen schema or executable ruleset changes. See merged [T0 modes and evidence policy](../T0-configuration/deployment-mode.md), [#126 rule review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/126) and [#127 evidence review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127); those original partial records retain their scoped decisions. #41's research policy is complete through [#403](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/403); #40's research record is complete in [receipt 6257213742](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257213742); remaining component-specific proposal disposition and versioned representation/rule integration retain their own acceptance requirements.
 
 | record | source-checked rules | hypotheses |
 |---|---|---|
@@ -78,9 +88,25 @@ Missing ids were retired while drafting or during QC: a hypothesis became a sour
 
 The records also hand #40 these enums and fields: the guardrail category and failure-behaviour enums (#35), the evaluation type enum and the evaluator-placement field (#36), the adopted serving-mode definition (#37), and the alert-class and threshold-source enums (#38).
 
-## Handoffs awaiting confirmation
+## Handoffs and receiving status
 
-#34 is done only when the affected owners confirm these.
+#34 is done only when the affected owners confirm its workstream handoffs and the remaining child criteria are complete. Guardrails' [R1–R6 receiving record](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/35#issuecomment-6256149374) covers its three literal #36/#37/#38 directions and additional #40/#2/#39/#41 interfaces. Evaluation's four declared downstream interfaces have scoped receiving decisions: [#37 gates and rollout allocation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6254282660), [#38 online scoring and G12](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38#issuecomment-6254283671), [#32 frozen evaluation inputs and leakage evidence](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/32#issuecomment-6254284924), and [#41's adopted reproducibility minimum](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127#issuecomment-6242306958). These receipts preserve their actual revisions and conditions; the remaining cross-component requests and additional proposals below are separate.
+
+### Three parent workstream boundaries — 2026-10-19
+
+The live [#34 issue](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34) declares the three boundaries below. This dated reconciliation addresses those responsibility and receiving interfaces. It does not treat the broader component requests in the retained table below as one completed handoff, or replace any component's actual source/receiving history and selected-target follow-ups.
+
+Inputs are the accepted records at [`ffe64042`](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/ffe6404271c50c6ee4f44043e0d52a842df6afba): [cost](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ffe6404271c50c6ee4f44043e0d52a842df6afba/research/T6-deployment-operations/cost-estimate.md), [evaluation](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ffe6404271c50c6ee4f44043e0d52a842df6afba/research/T6-deployment-operations/evaluation.md), [workload](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ffe6404271c50c6ee4f44043e0d52a842df6afba/research/T0-configuration/workload-use-case.md) and [evidence policy](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/ffe6404271c50c6ee4f44043e0d52a842df6afba/research/T0-configuration/catalog-data-sources.md). Their exact Git blobs are respectively `dc97759ed922326ddf8d270e1861f627725a5a31`, `b50e59f03ead7799944ee82b94fc31a2fd93a7dc`, `d8e86c8794ce175020e3457e62cba86c124f82ca` and `c862112312d45bbe13b9e9261b8f83ee581cafa6`. Earlier receipts below retain their own input revisions and reviewer attributions; this is a current method/receipt review, not a repeated vendor-source audit.
+
+| Parent boundary | Accepted method and actual receiving evidence | Limits retained |
+| --- | --- | --- |
+| H34-1: #39 owns pricing units, aggregation and uncertainty; component issues supply prices; #41 governs provenance and freshness | The completed #39 record retains each component's dated price and conditions, records its unit conversion and workload quantity, and separates one-off from recurring periods and scenario uncertainty. Its [current receiving reconciliation](cost-estimate.md#actual-incoming-decisions-and-their-retained-scope) indexes the actual component interfaces. [#41 → #39 receipt 6254388872](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6254388872) explicitly accepts eligible selected-offering rates under the evidence policy. This confirms responsibility for the method; supplying a price remains with its actual component/source. | Keep exact item/version, meter, currency, region, date, account conditions and source-use eligibility. Unknown required quantities are not sized; missing eligible rates are not priced. Neither becomes zero or a complete budget result. No preview currency, FX, region, throughput calibration or complete catalog coverage is adopted. |
+| H34-2: #36 owns evaluation methodology, including reproducibility of benchmark comparisons cited in catalogs | The completed #36 record separates workload evaluations, safety checks, latency/cost observations and regression decisions, with exact R1–R15 comparison inputs. [#36 → #41 receipt 6242306958](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/127#issuecomment-6242306958) adopts the reproducibility minimum and one independent control; the [current #41 → #36 decision 6254392681](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36#issuecomment-6254392681) confirms its use with claim-level eligibility. | Published scores remain selection priors unless an eligible actual run supports the intended comparison. Keep dataset/task, model/runtime, prompt/precision/context, attempts/load, metric/reducer, uncertainty, date and claim grade. Missing eligible evidence remains unknown; known incomparable tuples cannot support a ranking. The additional tier/sizing proposals, numerical thresholds and any executable quality gate require their own decisions. |
+| H34-3: #2 supplies workload targets; #36 evaluates against those targets | The current workload record preserves primary workload and independent axes, declared target/answer states and the W-R10 evaluation interface. Actual [#2 co-owner receipt 6245701804](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804) and [#36/#39 co-owner receipt 6247690142](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6247690142) accept the narrowed evaluation and quantity interfaces; the [#2 completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6256591575) retains their scopes. | Builder-set targets, presets, tool defaults and measured outcomes remain distinct. Use the actual metric direction, workload/dataset and serving tuple; keep judge identity and human agreement where required. Requests in flight are not arrival rate or resident sequences; input assembly and disjoint billable output classes must not double count. Unknown quality evidence does not satisfy a target, and the target itself supplies no measurement. |
+
+**Actual parent-level confirmation:** [receipt 6258627271](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/34#issuecomment-6258627271), posted on 2026-10-19 at 02:53:21 UTC, records the coordinating in-session engineer's independent review of the four exact method inputs, all five earlier cited receiving bodies, the initial summary and its Deployment-completion successor. H34-1, H34-2 and H34-3 are accepted within their stated research scope. This is that engineer's actual delegated disposition, not a new reply attributed to the named historical assignees. Source rights, selected-build implementation, additional #40 fields/rules and deployment execution retain their own requirements. Reviewed summary delivery, configured validation and current issue/Project reconciliation remain separate from this source/receiving decision.
+
+### Retained component-level requests
 
 | to | what T6 hands over | from |
 |---|---|---|
@@ -95,16 +121,14 @@ The records also hand #40 these enums and fields: the guardrail category and fai
 
 Grouped by who can answer them. Every record has an owner column in its Open questions table; #35 to #37 also record when an answer is needed. Issue-owner references resolve to the live GitHub assignees and do not reassign work. Each record's table retains the question and its details.
 
-**#2 owner**
-- Add the T0 fields listed under Handoffs (#35, #37, #38, #39).
-
 **#40 owner**
+- Use the [completed #2 workload record](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6256591575) and its accepted receiving interfaces as the input basis. Additional T6 fields remain proposals for explicit versioned #40 adoption and selected-build implementation; #2's research completion does not install them.
 - Serving mode is decided by merged #81; apply the per-component definition above.
 - Accept the placement rules, the alert-class enum and the threshold-source enum (#38).
 - Review the candidate rule splits and reason codes through #40; fixed severity is already the required convention, not an open choice.
 
 **#41 owner**
-- The final evidence-grade policy. Every evidence row carries an interim grade under `docs/RESEARCH_METHOD.md`; #41 confirms them, including whether vendor accuracy claims may be displayed (#35, #37, #38).
+- Apply the completed #41 claim-level grading, source eligibility, freshness and permitted-use policy to each selected fact or price. Vendor accuracy claims, independent reproduction and permission to display remain separately qualified; policy completion does not grant rights or refresh a component's evidence.
 - Sizing rule for evaluation sets and reproducibility tier boundaries (#36).
 - Apply the [#60 source-specific reuse decisions](../market/rights-validation.md) to AWS/Azure price reuse (#39); keep unaddressed rights questions with #60/#41. No broader redistribution permission is implied.
 
@@ -112,8 +136,7 @@ Grouped by who can answer them. Every record has an owner column in its Open que
 - Re-evaluation on changed pricebook, snapshot, ruleset, rights decision or build edits (#42); prices retain as-of dates, without a time-window expiry.
 
 **Maintainers**
-- The default currency and region: USD pricing, T0 budget currency for display, and a region fallback (#39).
-- Confirm the rollout scope split: mechanics in #37, promotion criteria in #36 and #38 (#37).
+- Any currency conversion or region-selection policy beyond the accepted #41/#39 interface needs explicit #39/#40 review, including eligible source, date, direction, rounding and fee/tax treatment. Missing currency or region evidence cannot be supplied by a preview preference or historical reference-region example.
 - Which prompt storage pattern the builder defaults to (#37).
 
 **Legal reviewer named by the #34 owner**
@@ -129,12 +152,12 @@ Grouped by who can answer them. Every record has an owner column in its Open que
 
 **Answered by a later record**
 - Guardrail pricing units (#35) are normalised in #39 (L56 to L60).
-- Price inputs for in-process spend (#38) are supplied by #39 (catalog T1 and T2, FX policy, snapshot fields).
-- Rollout gates (#36) are scoped in #37 ("Rollout gates: the scope decision #36 asked for"), pending the maintainers' confirmation above.
+- Pricing and measurement interfaces for in-process spend (#38) are accepted in the [#39 → #38 priced-input decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/38#issuecomment-6256810734) and the separate [#38 → #39 accounting-input decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6256811740). Their scoped meter, currency, billing-window and coverage requirements preserve missing quantities and rates. No conversion policy, default currency or region, or complete catalog coverage is adopted.
+- Rollout-gate allocation is accepted for Evaluation's research interface in [#37 receipt 6254282660](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6254282660): #37 owns rollout mechanics, #36 owns quality decisions and #38 owns monitoring thresholds. Actual deployment/release acceptance remains separate.
 - Evidence rows "as cited in the pack" (#36) now all carry URLs (#36 Evidence).
 
 ## Workstream done when
 
-- [ ] All sub-issues are closed with merged decision records: the five canonical records are merged through #121, and #190 merged the rule-semantics corrections. The component issues remain open while their remaining acceptance criteria and handoffs are reconciled; a merged record alone does not close an issue.
-- [ ] The handoffs above are confirmed by the affected workstream owners.
+- [x] All sub-issues are closed with merged decision records: #35 is research-complete through #413, #36 through #402, #37 through #447, #38 through #442 and #39 through #436. The actual #37 completion receipt above and the 2026-10-19 native child readback confirm all five are closed; their selected-build and source-use limits remain separate.
+- [x] The handoffs above are confirmed by the affected workstream owners: the three literal parent boundaries H34-1–H34-3 have the actual scoped confirmation in receipt 6258627271. Broader component requests retain their separately recorded dispositions and follow-ups.
 - [x] A workstream summary at `research/T6-deployment-operations/README.md` lists decisions, rules contributed to #40, and open questions (this page).

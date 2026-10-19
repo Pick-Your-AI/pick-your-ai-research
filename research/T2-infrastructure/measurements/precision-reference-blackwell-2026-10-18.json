@@ -1,0 +1,79 @@
+{
+  "record_type": "source_checked_precision_note",
+  "accessed_at": "2026-10-18T22:53:32Z",
+  "verification_status": "unverified",
+  "source_uri": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+  "source_scope": "CUDA Programming Guide, Tables30 and33; page dated2026-09-10. Paraphrased source assessment, not a quotation.",
+  "compute_caps": {
+    "10.0": {
+      "tensor_core_input_types": [
+        "fp64",
+        "tf32",
+        "bf16",
+        "fp16",
+        "fp8",
+        "fp6",
+        "fp4",
+        "int8"
+      ],
+      "int4_tensor_input_listed": false
+    },
+    "10.3": {
+      "tensor_core_input_types": [
+        "tf32",
+        "bf16",
+        "fp16",
+        "fp8",
+        "fp6",
+        "fp4",
+        "int8"
+      ],
+      "int4_tensor_input_listed": false
+    },
+    "12.x": {
+      "tensor_core_input_types": [
+        "tf32",
+        "bf16",
+        "fp16",
+        "fp8",
+        "fp6",
+        "fp4",
+        "int8"
+      ],
+      "int4_tensor_input_listed": false
+    }
+  },
+  "native_fp32_scope": "Non-Tensor FP32 arithmetic is separately documented; FP32 is not a Table33 Tensor input.",
+  "v1_precisions": [
+    "fp32",
+    "tf32",
+    "bf16",
+    "fp16",
+    "fp8",
+    "int8"
+  ],
+  "v1_mapping": "FP4, FP6 and FP64 have no frozen-v1 enum slots. Floating FP4 is not integer INT4. FP6 has its own table column.",
+  "card_mapping_source_uri": "https://developer.nvidia.com/cuda/gpus",
+  "proposed_card_compute_capability": "12.0",
+  "proposed_card_ids": [
+    "nvidia-geforce-rtx-5060",
+    "nvidia-geforce-rtx-5060-ti-16gb",
+    "nvidia-geforce-rtx-5060-ti-8gb",
+    "nvidia-geforce-rtx-5070",
+    "nvidia-geforce-rtx-5070-ti",
+    "nvidia-geforce-rtx-5080",
+    "nvidia-geforce-rtx-5090",
+    "nvidia-rtx-pro-2000-blackwell",
+    "nvidia-rtx-pro-4000-blackwell",
+    "nvidia-rtx-pro-4000-blackwell-sff",
+    "nvidia-rtx-pro-5000-blackwell-48gb",
+    "nvidia-rtx-pro-5000-blackwell-72gb",
+    "nvidia-rtx-pro-6000-blackwell-workstation"
+  ],
+  "other_source_mappings": {
+    "nvidia-b200": "10.0",
+    "nvidia-b300": "10.3"
+  },
+  "unqualified_mapping": "No B100 mapping or B-series catalog item is submitted here.",
+  "interpretation_limit": "Native arithmetic coverage does not prove a stored quantization, converter, kernel, engine, driver or runtime tuple. This note changes no frozen schema or evaluator."
+}

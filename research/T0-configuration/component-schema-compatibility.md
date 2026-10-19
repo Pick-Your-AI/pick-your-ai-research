@@ -20,7 +20,7 @@ How does the builder represent every component, and decide, explain and recomput
 
 ## What v1 already provides
 
-- **Catalog item:** `id`, `kind`, `tier`, `name`, `version`, `status`, `billing_class`, `spec`, `license`, `provenance`, `updated_at` (required), plus `description`, `tags` and `extensions`. This covers #40's minimum fields for entity ID, category (`kind`, `tier`), version, lifecycle status and source references (`provenance`). `valid_from`/`valid_to` have no direct field (versioning, below).
+- **Catalog item:** `schema_version`, `id`, `kind`, `tier`, `name`, `version`, `status`, `billing_class`, `spec`, `provenance`, `updated_at` (required), plus optional `description`, `tags`, `license` and `extensions`. This covers #40's minimum fields for entity ID, category (`kind`, `tier`), version, lifecycle status and source references (`provenance`). `valid_from`/`valid_to` have no direct field (versioning, below).
 - **Build:** `selections`, `links` (typed relations such as `runs_on`, `served_by`, `stored_in`, `provided_by`, `derived_from`), `objectives`, `policy`, `locks`, `revision`.
 - **Rule:** `id`, `severity` (`error`/`warning`/`info`), `applies_when`, `assert`, `on_unknown` (`block`/`review`/`defer`), `message`, `remediation`, `affected_kinds`. A ruleset has `id`, `version` and `published_at`; individual rules carry no version.
 - **Also:** `catalog-snapshot` (captured items with a revision) and `dependency-graph` (edges with a revision).
@@ -2926,3 +2926,305 @@ remaining delivery or follow-up work. They do not create a new production,
 account, paid-job or empirical requirement for a documentation criterion, and
 they do not waive any actual unresolved required research choice, source review
 or current delivery gate.
+
+## CD-2 explicit physical-pool accounting decision — 2026-10-18
+
+**Status:** engineering selection prepared for independent source and affected
+consumer review. This is a prospective research representation, named
+`cd2-physical-pools/0.1.0`; no existing schema, reader, Ruleset or runtime accepts
+that tag merely because it appears here. Its eventual receiving and delivery
+record must be appended separately. The earlier CD-2 unresolved-status section
+remains an accurate record of what the #403 packet had not yet decided.
+
+### Scope, source and preserved contributor work
+
+This decision makes the normalized accounting choice concrete. It does not
+adopt the four unpublished fixture/prototype/test files described in
+[claim6251561799](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6251561799).
+That claim, [its original reservation6246869445](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6246869445),
+and the [immutable-checkpoint request6254818212](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6254818212)
+retain their author and scope. No timed expiry rule was found in the current
+contributor/workflow instructions; none is invented here. The separate
+[one-note coordination6256307406](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6256307406)
+reserves this additive documentary decision and its review, without a main hold
+or ownership of those four files. A later supplied checkpoint must be compared
+with the actual decision and reviewed on its own merits.
+
+The following project inputs were inspected on 2026-10-18 at accepted main
+`0659dac2a439893b7765048c1ef7c8442ba6cb25`. The canonical note before this
+continuation is blob `8ee5a7b7a960ae63c073c996cfdc73b80d939e7c`. These are
+source/contract observations, not a fresh vendor, hardware or execution audit.
+
+| Input | Exact source and relevant boundary |
+| --- | --- |
+| Workload W-R6 and CD-5 | [workload-use-case.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T0-configuration/workload-use-case.md), blob `7b39b1ce03697d7bca4f87c75984f8851a6fddf2`: one physical pool, once-only reserve, eligible evidence, all-resident fallback, and exact request/sequence/admission/stage scope. |
+| Deployment placement | [deployment-mode.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T0-configuration/deployment-mode.md), blob `8d64fcc0bf16222b0ed3e06dc53c396e525c0741`: relationships remain `build.links`; typed whole/layer/expert/tensor shares do not supply byte allocations. |
+| #10 screen and rules | [memory_screen.py](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T2-infrastructure/compute/memory_screen.py), blob `dc332df651f6e0ae3a2abda210b526ff7585258d`, and [compute-capacity.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T2-infrastructure/rules/compute-capacity.md), blob `e9813b80dfd638fdb8f3b8a1e96a57420a069d15`: already qualified same-domain bounds, explicit headroom, separate per-rank limits and conditional capacity outcomes. |
+| #10 receiving interface | [gpu-compute.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T2-infrastructure/gpu-compute.md), blob `32f2e8a48f69c51e3517a15e28dbc162eda6b725`, and [H40-10 receipt6254605905](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6254605905): distinct actual devices, demand/pool responsibility, uncertainty and no automatic pooling or calibrated ResourceEstimate. |
+| #11 engine interface | [inference-engine.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T2-infrastructure/inference-engine.md), blob `7c3e45b4b4a1d68676cf9fa31fc529432c1aacf4`: exact build/backend/parallelism, offload, adapter/KV placement and admission; a capacity screen supplies no engine-support verdict. |
+| #7 context interface | [context-window.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T1-model-selection/context-window.md), blob `5384081104cc2d872a4173138fc00a00c115c072`, and [context-fit.md](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T1-model-selection/rules/context-fit.md), blob `ab4fb08f1a64c607a918c2aef02d60e93e322a91`: context/route limits and native fallback remain separate from KV geometry, allocation and capacity. |
+| Contract boundary | [T2 contract proposals](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/research/T2-infrastructure/contract-proposals.md), blob `1a03a710f2febe7575eacf2e67a6e1172ae57a1d`, and [frozen ResourceEstimate](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/0659dac2a439893b7765048c1ef7c8442ba6cb25/contracts/v1/schemas/resource-estimate.schema.json), blob `9dbafa69f59f8667a4e124ec34d8df17606c8f2e`: scalar v1 metrics do not encode this pool/scenario ledger; bounds are scenario assumptions, not statistical confidence intervals. |
+
+### Alternatives and selected representation
+
+| Alternative | Disposition and reason |
+| --- | --- |
+| Retain only device capacities and typed deployment shares | Preserve these existing inputs. They identify requested placement but leave storage, co-residency and reserve domains unresolved. They cannot supply the normalized CD-2 answer by themselves. |
+| Divide a global estimate by device count, sum advertised VRAM, or infer bytes from a layer/expert/tensor share | Do not select. These operations manufacture an allocation, usable capacity or topology that the input does not establish. Equal SKUs, device counts and model artifact identities are insufficient. |
+| Use one global peak scalar for a build | Do not select as the normalized representation. It cannot retain a failed individual pool, a per-rank ceiling, a host offload charge or unified-memory aliasing. A source scalar may remain evidence within its exact original domain. |
+| Explicit physical pools, unique storage charges, qualified consumers and explicit residency coverage | **Selected for this research decision.** Keep physical storage ownership separate from logical consumers, compare every applicable capacity domain, and require source-qualified completeness before a pass. The representation records a supplied plan; it does not search for or execute one. |
+
+The selected profile has two explicit coverage modes: `conservative_all_resident`
+and `qualified_scenarios`. A caller must select the new profile and its mode;
+there is no inferred profile or mode. Inputs without the profile retain W-R6's
+existing conservative treatment of both `always` and `on_demand` components as
+resident. No existing result, native reader or saved artifact is reinterpreted.
+
+### Typed logical fields
+
+These are the proposed logical field names and constraints. They are sufficient
+to specify the research encoding; an executable schema, parser and adapter are
+separate versioned deliverables. `ID` means nonempty text within an explicitly
+named identity scope, not a catalog name substituted for an actual instance.
+`ByteCount` is logically an exact nonnegative integer number of bytes. Its
+**selected serialization is a canonical unsigned base-10 integer string**: the
+ASCII string `0`, or an ASCII digit `1`–`9` followed by zero or more ASCII
+digits. Parse and calculate with arbitrary-precision integers, never through
+binary floating point. Signs, fractions, exponent notation, redundant leading
+zeros, whitespace, non-ASCII digits, Boolean values and JSON-number substitutes
+are rejected in these new ByteCount fields. This reuses the selected Count
+vocabulary above without changing any frozen numeric field or old helper input.
+Source quantities keep their original value, unit, method and rounding record.
+Lower bounds round down and upper bounds round up when conversion needs rounding;
+the resulting exact byte count uses the selected string encoding.
+
+An `Answer<T>` uses the selected CD-1 terminal states and attribution: `provided`
+contains a T; `missing`, `unknown`, `withheld` and `not_applicable` retain their
+distinct causes. No unresolved answer is a zero, an empty set or a supplied
+value. A required applicable capacity cannot be skipped merely because its
+answer is `not_applicable`. Source eligibility, completeness, conflict rank and
+checked-only labels remain the separate CD-3/#41 decisions.
+
+| Field / record | Type and required meaning |
+| --- | --- |
+| `profile` | Exact tag `cd2-physical-pools/0.1.0`; interpretation is version-bound. |
+| `basis` | Exact Build ID and positive integer revision plus an immutable reference to the retained complete Build content. Include exact input references for hardware inventory, selections/settings/links, deployment, workload/stages, engine builds and the source/qualification policy used. An ID/revision pair without its actual retained content does not establish a matching basis. |
+| `component_scope[]` | Actual selected component/operation and `Answer<applicable \| inapplicable>` for the local capacity predicate, with the exact responsibility, placement and source basis. Known opaque provider internals do not require invented customer devices. Unresolved required placement or responsibility remains unknown, not an empty applicable set. |
+| `devices[]` | Unique primary `device_id`; `selection_id: Answer<ID>` for its exact CD-6 selection; and `local_pool_id: Answer<ID>`, with scoped inventory evidence. Several actual devices may share one physical pool; several instances may select the same catalog SKU. Neither association is inferred from SKU, position or count. |
+| `pools[]` | Unique primary `pool_id`, exact physical address-space / partition / tenancy scope, local `device_ids: Answer<set<ID>>`, an `Answer<capacity>` and `Answer<ByteCount>` reserve. The capacity contains `basis: before_reserve \| after_reserve` and `lower_bytes: ByteCount`, with retained source and qualification references. Provided device/pool memberships must agree in both directions. Pool disjointness or aliasing must be established, not asserted by two different string IDs. |
+| `consumers[]` | Unique primary `consumer_id`; exact component/operation and device references as typed answers. `runtime_binding` is an answer over two explicit alternatives: `model_engine` references the actual inference-engine selection/build and operation; `service_runtime` references the selected CD-10 non-model service-runtime record, distribution/build and operation. Retain applicable runtime-instance, replica, rank, admission-domain and stage identities. Non-model services acquire no fictitious inference-engine selection. A genuinely non-applicable role differs from a required unresolved one; service-wide demand cannot silently become per-replica demand. |
+| `allocations[]` | Unique primary `allocation_id` for one non-overlapping physical storage charge; `pool_id: Answer<ID>` and `consumer_ids: Answer<nonempty set<ID>>`. A qualified charge has exactly one owning pool and resolved consumers. Retain the memory term/extent, physical identity, method and evidence references. Terms may include weights, adapters, KV, workspace/runtime and transfer/load transients. Their completeness and lifetime are runtime/scenario-specific, not inferred from these labels or from the component placement label. |
+| `coverage_mode` | `conservative_all_resident` or `qualified_scenarios`, explicitly selected and retained as an assumption. The second mode requires an independently qualified exhaustive residency/transition envelope for the requested scope. |
+| `scenarios[]` | Unique `scenario_id` and exact workload/runtime/stage envelope. Each scenario retains the required placed-component inventory and a complete set of allocation-residency rows for its scoped charges; missing rows remain unresolved. The conservative mode has one explicit upper envelope; the qualified mode may have several evidenced envelopes. |
+| Scenario allocation row | Exactly one `(scenario_id, allocation_id)` pair; `residency: Answer<resident \| excluded>`; and, when resident, `live_upper_bytes: Answer<ByteCount>` with optional supplied lower bound not exceeding that upper bound. Preserve source/assumption/eligibility references per row. A supplied exclusion needs its own scoped lifetime/transition evidence; it is not a supplied zero allocation or permission to omit an always-placed component. |
+| `rank_limits[]` | Every applicable independent rank/engine-allocation ceiling, with unique `limit_id`, exact consumer/domain and already qualified demand-upper/capacity-lower/reserve-basis inputs. Whole-buffer membership can be derived from named charges only if that ceiling's accounting definition supports it; otherwise retain a separately qualified bound or unknown. This does not create additional physical capacity. |
+| `coverage_assessments` | Scoped records for the required consumer inventory, memory terms/charges, physical-pool map, independent ceilings and scenario/transition coverage. Retain the qualification decision, evidence and unresolved causes. A `complete` assertion or well-formed reference is an input claim, never self-authenticating proof of completeness. |
+
+Primary record IDs are required nonempty text, unique within their declared
+complete inventories. Factual references retain their typed answer state; a
+provided reference must resolve to the pinned scope, while an unresolved one
+stays unresolved. Whenever both sides are provided, `device.local_pool_id = p`
+and membership in `p.device_ids` must agree reciprocally. A contradictory
+provided map, repeated membership or dangling provided ID is rejected; an
+unknown counterpart prevents map qualification rather than being filled from
+the other side. Reciprocal strings still do not prove physical aliasing or
+disjointness. Lower/upper bounds are ordered, and a repeated pair or
+contradictory physical identity is rejected before any applicability or outcome
+shortcut. Preserve the current strict CD-13 identity/role and required-presence
+paths; this profile supplies no more permissive role policy. Well-formed but
+unresolved source scope, physical aliasing, allocation, confidence or coverage
+produces unknown reasons. It is not malformed merely because a fact is missing.
+Invalid structure is a diagnostic, not a compatibility pass or synthetic fail.
+
+### Physical charge and host-offload semantics
+
+Count a physical allocation once in its owning pool and scenario, even when
+several qualified consumers refer to it. A shared model file, matching content
+hash, equal byte amount, common catalog selection or common pool ID does not
+establish one shared in-memory allocation. Known distinct copies have distinct
+charges. Overlapping extents must be normalized into qualified non-overlapping
+charges or remain unresolved; they cannot be silently deduplicated by amount.
+
+Each logical consumer names its actual device, but its storage need not be in
+that device's local pool. For example, an explicitly qualified GPU consumer may
+use a host-pool offload buffer. Charge the host bytes to the host pool and any
+device copy to the device pool. Pin transfer/staging and load/unload transients
+when they can coexist. This accounting relationship neither adds a `runs_on`
+link nor proves supported access, offload, zero-copy, bandwidth or lifetime.
+Those actual runtime/backend/placement predicates remain #11/#3 or the
+selected CD-10 service-runtime inputs. Unknown access
+or copy/residency behavior remains visible even if a supplied numeric screen
+passes. Unified memory is one qualified physical pool, not CPU capacity plus
+GPU capacity counted twice.
+
+A per-rank or engine quota is an additional independently scoped constraint.
+It is not another disjoint pool that can be added to physical capacity. A shared
+buffer's charge against such a quota depends on that quota's actual accounting
+definition; it is not automatically divided among consumers or counted in full
+for each rank. TP/PP/EP/DP labels identify a proposed plan but do not supply its
+per-rank byte allocations. Missing rank mapping or applicable limits prevents
+an overall pass while retaining already established pool failures.
+
+### Reserve and exact comparison
+
+For scenario s and physical pool p, let D(s,p) be the sum of the eligible
+`live_upper_bytes` for unique resident charges in that pool. Let C(p) be its
+qualified `capacity.lower_bytes` and R(p) its explicitly supplied reserve upper
+bound. Use exact integer arithmetic and the declared capacity basis:
+
+| Capacity basis | Required conditional screen |
+| --- | --- |
+| `before_reserve` | `D(s,p) + R(p) <= C(p)`; add the pool reserve once, not once per consumer, device, charge or scenario result. Each scenario is a separate comparison, not a sum across time. |
+| `after_reserve` | `D(s,p) <= C(p)`; C already denotes the qualified reduced budget. Retain R and its source/method for traceability; do not subtract it again. The record must establish which reservation the reduced capacity already includes. |
+
+The same basis distinction applies independently to any rank/engine ceiling;
+it does not authorize an additional subtraction from the same physical budget.
+An unknown reserve, capacity basis, deduction scope or required qualification
+stays unknown. `R = 0` is valid only when explicitly supplied; no default reserve
+or headroom percentage is selected. An advertised capacity is not an allocatable
+or free-memory measurement; the recorded capacity scope limits the conclusion.
+
+An explicit headroom fraction may be normalized only with its actual reference
+capacity and exact conversion record. For integer C and exact `0 <= h < 1`, a
+before-reserve comparison with integral D is equivalently
+`D <= floor(C * (1 - h))`, or `D + ceil(C * h) <= C`. Record that rounding and
+the original h; do not reconstruct an asserted headroom policy from two bounds.
+Other already reduced bounds retain their actual source basis rather than being
+forced into this conversion.
+
+The existing 57-line #10 helper is unchanged: it requires positive capacity,
+an explicit finite Decimal headroom below one, declared reserve basis and
+caller-established confidence/domain eligibility. It computes its one-domain
+comparison with exact Fraction arithmetic. A prospective zero usable budget
+is representable here: positive demand fails its conditional screen, while a
+known zero demand can pass that budget predicate if all required scope and
+coverage are established. Such a zero-capacity record is **outside that helper's
+current accepted input domain**. No execution or adapter for it is claimed.
+For before-reserve input, R greater than C fails even with D zero; no clamp hides
+an over-reserved budget. A new adapter requires its own implementation/review
+and cannot silently relax or relabel the old helper's validation.
+
+### Residency, evidence and result policy
+
+In `conservative_all_resident`, retain every placed resident component and its
+qualified charges, including `on_demand`, as one explicit conservative upper
+envelope. Record that assumption. This is not a claim that all independent
+stage peaks were observed simultaneously. Independent stage maxima do not
+supply the routing, simultaneous request allocation or memory inventory needed
+to qualify that envelope; those remain the existing CD-5/W-R6 inputs.
+
+In `qualified_scenarios`, every component whose exact placement is `always`
+remains in the required component inventory of every applicable scenario. Its
+weights, KV, workspace and transient buffers need not have one identical
+lifetime: each charge retains its own independently qualified residency, byte
+bound and transition evidence. There is no allocation-level `always` field
+and no lifetime inferred solely from a component label. Excluding an
+`on_demand` component or any temporary charge requires actual scoped lifecycle
+and transition evidence; no charge exclusion may silently remove an always
+component. Omitted cold-load, retained KV, overlapping stages or
+transfer buffers may invalidate the claimed coverage. Proving every listed
+row passes does not prove the scenario list exhaustive. Missing coverage keeps
+the overall screen unknown even when the supplied row results pass. If an
+exhaustive scenario assessment is unavailable, a separately and explicitly
+selected, fully qualified conservative envelope may be evaluated; the reader
+must not silently change mode or hide the unresolved original result.
+
+Memory bounds use the existing W-R6 request-to-sequence and EV-1 policy. Expand
+the exact decoding demand before applying an applicable sequence admission
+cap; the cap must bound all resident KV. Unknown admission may retain the
+existing qualified expanded-demand fallback, not an assumed one sequence per
+request. Memory precision/layout, context maxima, replicas, rank placement,
+sharing and overhead keep their own evidence and assumptions. Source rank is
+resolved before an equal-rank conservative maximum; an ineligible measurement
+cannot displace an eligible estimate merely because it is called measured.
+
+Preserve W-R6's fixed `error` severity and `on_unknown: review`. For each required
+pool/scenario and independent limit, retain outcome, participating charge IDs,
+exact bounds/reserve, assumptions, source/qualification/conflict references and
+all unresolved causes. A conservative upper-bound failure is labelled **may
+not fit under the supplied bounds**; it does not prove a measured OOM. A pass is
+conditional capacity arithmetic, not engine support, quality, SLO or measured
+fit. Checked-only evidence receives the existing scoped unverified label only
+where the result depends on it; structural eligibility is no evidence upgrade.
+
+A qualified failing required row remains fail alongside unknown rows elsewhere.
+A known, identity-disjoint resident subset whose conservative upper charges
+already exceed the supplied budget is a failing screen witness under this same
+upper-bound policy; additional unresolved nonnegative charges cannot rescue
+that policy comparison. Retain those missing charges and the limited witness.
+Unresolved aliasing, residency or evidence needed for that witness prevents it
+from becoming a fail. Aggregate fail if a required qualified witness fails;
+otherwise unknown if any required value, scope or coverage is unresolved; pass
+only when all required comparisons and coverage qualify. Within this profile,
+skipped requires established non-applicability or a qualified absence of any
+applicable placement in the requested scope. A missing or unknown required
+placement, runtime responsibility, device or pool is unknown; an empty ledger
+cannot supply either a pass or that skip. For an established opaque provider
+component, the local-device/KV predicate is inapplicable, while undocumented
+remote capacity stays unknown and known service predicates remain separate.
+An exposed managed allocation uses its actual qualified scope. This explicit
+profile does not alter unprofiled W-R6, including its documented no-placement
+case or conservative treatment of `on_demand`.
+
+Changes to the exact Build, selections/links, devices/pools, artifact/engine,
+decoding/admission/stages, reserve, policy or evidence invalidate the dependent
+receipt. Stable labels cannot rebind old bytes or findings to a new basis.
+Retain original IDs and source order for audit; any canonical diagnostic order
+must be explicitly defined by the eventual reader. Reordering a valid ledger
+must not change its arithmetic or invent a different physical identity.
+
+### Synthetic worked cases for the selected decision
+
+These are hand-worked research examples, not fixture executions, allocations,
+hardware measurements or engine-support claims. In this table U is exactly
+1,000,000,000 bytes. All provided facts, evidence eligibility and complete scopes
+are hypothetical except where a row explicitly leaves one unresolved.
+
+| Case | Explicit inputs | Expected research disposition |
+| --- | --- | --- |
+| CD2-E1 Separate terms in one pool | Before-reserve C=24U, R=2U; resident charges 14U and 6U | D+R=22U; conditional pass. The two components do not each receive a fresh 2U reserve. |
+| CD2-E2 Pool over upper-bound budget | C=24U, R=0; distinct resident charges 18U and 8U | 26U>24U; fail, may not fit. |
+| CD2-E3 Unified physical memory | CPU charge18U and GPU charge8U belong to the same qualified 24U pool, R=0 | 26U>24U; fail. Two device records do not create 48U capacity. |
+| CD2-E4 Separate pool failure survives | Two disjoint 24U pools, R=0; demands30U and6U respectively | First pool fails; second passes. The combined36U does not pass against an invented48U pool. |
+| CD2-E5 Real sharing versus copies | C=20U, R=2U; one qualified physical8U allocation has two consumers, plus a separate6U charge | Shared case16U total passes. If the two8U buffers are established distinct copies, 24U total fails; equal contents or amounts do not deduplicate them. |
+| CD2-E6 Once-only reduced reserve | Before-reserve C=24U/R=2U/D=22U, or after-reserve C=22U with the same recorded reservation/D=22U | Both budget predicates pass at equality. The after-reserve case does not subtract another2U. |
+| CD2-E7 Known zero budget | After-reserve C=0 bytes with explicit reserve trace; D=1 byte, or D=0 with complete qualified scope | Positive demand fails; zero demand can pass this predicate. Both cases remain outside the unchanged #10 helper's positive-capacity domain. |
+| CD2-E8 Explicit residency choice | C=24U/R=4U; two on-demand components have distinct qualified14U and8U charges. Conservative mode includes both | Conservative26U fails. A separately qualified exhaustive scenario set that proves mutual exclusion, including transitions, has18U and12U comparisons that pass. A statement that the two requests usually run serially is insufficient. |
+| CD2-E9 Incomplete scenario set | Every supplied scenario fits, but retained-KV or transition coverage is unresolved | Keep those row passes and overall unknown. Their success is not evidence that no omitted peak exists. |
+| CD2-E10 Known fail and unknown | One qualified pool has30U demand against24U; another placed component has a missing allocation bound | Retain first-pool fail and the missing-bound unknown; overall fail under the required-constraint policy, without a whole-build measured-fit conclusion. |
+| CD2-E11 Host offload | GPU-local12U/16U budget; distinct host18U in a32U pool with4U reserve; both copies and lifetime known | Numeric pool screens pass at12U and22U. Unknown engine access remains a separate unknown; it is not certified by the arithmetic. |
+| CD2-E12 Transfer overlap | Same host case, plus a distinct coexisting16U staging charge | Host38U exceeds32U, so fail. Treating transfer/load as automatically nonresident would miss this conditional failure. |
+| CD2-E13 Replica and rank scope | Two replicated14U physical buffers in one24U pool; no actual shared-storage identity | 28U fails; a shared artifact identity does not share storage. A separate per-rank quota must also retain its actual membership/byte accounting, not an equal split. |
+| CD2-E14 Missing is not zero | One required resident charge is `withheld` or `unknown`; another is explicitly provided0 bytes | Preserve the withheld/unknown reason and the real zero distinctly. In the absence of an independent failing witness, overall unknown. |
+| CD2-E15 Structure before shortcut | Duplicate allocation ID, repeated scenario/allocation pair, Boolean/JSON-number byte token, dangling provided consumer reference or contradictory provided device/pool membership, even if another pool is over budget | Reject the malformed input before outcome shortcuts; do not hide it behind a fail or skipped result. Unestablished physical aliasing or an unknown membership counterpart in otherwise well-formed evidence remains unknown instead. |
+| CD2-E16 Exact scope and separate constraints | A passing byte bound belongs to another engine/build/replica, or a context limit passes while the required KV geometry is unknown | The mismatched bound is ineligible and allocation stays unknown; a passing context predicate does not manufacture memory eligibility or a fit result. |
+| CD2-E17 Exact byte-token identity | Provided after-reserve budget `"9007199254740992"`; demand `"9007199254740993"`; explicit reserve trace and complete qualified scope | The demand exceeds the budget by exactly one byte and fails. An intervening binary-float parse cannot erase that difference. `"00"`, `"+1"`, `"1e3"` and numeric `1` are not valid ByteCount tokens. |
+| CD2-E18 Component, runtime and applicability | An always-placed vector service has a qualified CD-10 runtime, resident index charge and independently evidenced temporary-workspace lifetimes; a separate provider component has established opaque internals | Retain the service in every applicable scenario without forcing all its buffers to share one lifetime or inventing an inference-engine selection. The opaque component supplies no local device or pool. Unknown required placement for another local component remains unknown, not an opaque-service skip. |
+
+### Receiving and migration obligations
+
+The selected representation requires actual bounded dispositions against its
+fixed source. Existing H40 base-field receipts and the closed #10 research issue
+remain valid for their recorded scopes; they are not silently enlarged into
+acceptance of this new allocation decision. Required receiving review covers:
+
+| Consumer | Concrete question for this decision |
+| --- | --- |
+| #10 | Accept or correct physical-pool ownership, exact charge aggregation, reserve basis, conservative bound outcomes, independent rank limits and the explicit zero-budget/helper boundary. This does not reopen its completed hardware research or require a new empirical result. |
+| #11 | Accept or correct consumer/rank/replica/admission identity, offload/copy/lifetime accounting and the separation of memory bounds from engine/backend support. No engine capability or measured residency is supplied by this record. |
+| #7 | Accept or correct the separation of exact context/route limits from qualified KV geometry, sequence demand and placement; retain native fallback and the existing conservative context policy. |
+| #2 / #3 | Accept or correct exact workload/stage and selection/device bindings, all-resident preservation, scenario completeness, transition scope and physical-pool applicability across exposed API/managed/self-hosted components. Opaque capacity remains opaque; missing placement is not fabricated. |
+
+No consumer note is edited by this one-path decision. The actual reviewer,
+source pin, conditions and retained unknowns must be recorded in each receiving
+receipt; no reply is attributed to an absent assignee. The earlier four-file
+author retains that implementation and may supply its existing checkpoint for
+comparison. A distinct wire/schema/adapter release must name its version,
+source fixtures, validation and affected-reader acceptance. It must preserve
+all frozen v1 bytes and historical result dispatch, and may not put pool/scenario
+fields into a scalar ResourceEstimate or invent a Build ID to satisfy it.
+
+No #40 checkbox, #42 prerequisite or native API decision is changed by this
+draft. The concrete research choice can be assessed independently of a future
+runtime, but source review, actual receiving disposition and protected delivery
+remain real gates before its acceptance or a new whole-issue assessment.

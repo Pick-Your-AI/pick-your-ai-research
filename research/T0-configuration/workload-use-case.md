@@ -1,7 +1,7 @@
 # T0: Workload / Use Case
 
 Issue: #2 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `a222013`) · Kinds: `workload`
-Status: draft, revision 9 (W-R11 declaration recommendation; memory-implementation 0.2 candidate; CD-5 0.2 candidate retained; receiving/adoption pending) · External research: 2026-10-16 · Candidate updated: 2026-10-18
+Status: research decision record, revision 10 (scoped receiving reconciliation; W-R11 and CD-5 candidates retained; versioned adoption separate) · External research: 2026-10-16 · Record updated: 2026-10-18
 Deliverable path: `research/T0-configuration/workload-use-case.md` · Companion note: [`research/T0-configuration/deployment-mode.md`](deployment-mode.md)
 
 Labels used in this note:
@@ -183,7 +183,7 @@ The proposed location is a `workload` object owned by the build (Recommendation 
 | `data_classification` | v1 enum | Level definitions open (Q1) | Always | User input | `objectives.data_classification` (C5) |
 | `data_categories` | set of `personal_data`, `special_category`; or exactly `none` / `unknown` | Exclusive values as stated | Always | Definitions per E23 | — |
 | `residency.processing`, `residency.storage` | each: a list of jurisdiction codes, or `none` (unconstrained), or `unknown` | Evaluated independently (D-R6 in the companion note); codes per ISO 3166 (E25); containment hierarchy and named groups to be set by #41 (CD-9) | Always | User input | `objectives.region` (one string) |
-| `organisation.jurisdiction` | ISO 3166 code where the licensee organisation is established, or `unknown` | Distinct from `residency`, which records where data goes. Deferred attestation: answered once and reused across licence conditions (CD-12) | When a selected licence or policy conditions on the licensee's establishment | User attestation; rules owned by #30 | — |
+| `organisation.jurisdiction` | ISO 3166 code where the licensee organisation is established, or `unknown` | Distinct from `residency`, which records where data goes. Deferred attestation (CD-12): reuse only for the same applicable licensee/subject, condition definition and assessment period; an answer or grant locator alone supplies no permission | When a selected licence or policy conditions on the licensee's establishment | User attestation; rules owned by #30 | — |
 | `organisation.eu_market_placement` | boolean, or `unknown`: whether the user places the explicitly identified model or system on the EU market; D-01's subject is the modified model | Deferred attestation (CD-12); bind the answer to the assessed subject and condition before reuse | When #32's D-01, D-03 or D-18 needs an EU-market-placement answer | User attestation; rules owned by #32; #31 supplies training-compute quantities only | — |
 | `organisation.lawful_basis_ref` | reference to the lawful basis or legitimate-interest assessment for personal data in the selected `training_dataset`/`data_source`, or `unknown` | Deferred attestation (CD-12); applicability follows the selected training dataset/source, independently of serving-workload `data_categories` | When #32's D-16 applies to personal data in the selected `training_dataset`/`data_source` | User attestation; rules owned by #32 | — |
 | `budgets` | list of `{amount: decimal ≥ 0, currency: ISO 4217 alpha code, period: one_off \| month \| year, scope: hardware \| operating \| total}` | An empty list means no budget constraint | Always | Currency per E24 | `objectives.monthly_budget_amount` |
@@ -331,7 +331,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 - Each rule has one fixed severity, as the ruleset schema requires (C10).
 - A known violation is `fail`. Ineligible or missing evidence leaves the dependent value unresolved, so the outcome is `unknown`. Eligible evidence that conflicts is resolved by #41's conflict order (EV-1 in the companion note); `unknown` remains only for genuine ties.
 - Examples are synthetic.
-- None of these rules is approved or executable yet. All of them need CD-1 and the new fields. The evidence-based rules (W-R6, W-R7, W-R10) also need CD-3 and CD-8.
+- W-R1–W-R11 remain research proposals relative to the frozen baseline. The separately versioned CD-5 and memory/W-R11 candidates below exercise bounded mechanics; they do not publish these rules as a production ruleset. Successor input/adapter adoption remains with #40; evidence-based W-R6/W-R7/W-R10 also require the applicable CD-3/CD-8 eligibility and policy scope.
 
 **Template fields.** Each proposal covers the fields of the repository's rule-proposal template (C9). Fields that are the same for every rule are stated once here rather than repeated:
 - **Severity and missing-data policy:** the table below.
@@ -390,6 +390,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 - **Missing data:** `skipped` if `knowledge` is unresolved; `unknown` if a referenced selection doesn't resolve.
 - **Remediation:** add T3, or declare and justify an alternative (#7, #16).
 - **Dependencies:** #7, #13, #16.
+- **Receiving scope:** the [actual #16 narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804) requires a `long_context` justification to establish that the whole permitted corpus fits CTX-01 with output reserved, and that every reader may see that corpus or trusted ACL subsetting occurs before assembly. A `direct_lookup` making live calls is a T4 tool. This recommendation's implementation/justification pass is not permission enforcement, complete input fit or retrieval quality; #13/#16/#35 and #7/#36 retain those separate checks.
 - **Examples:**
   - Pass: documents through a RAG pipeline, plus structured lookup through a tool.
   - Pass: documents through `long_context`, plus `direct_lookup`, each justified.
@@ -417,6 +418,7 @@ All rules are hypotheses for #40 review, using the v1 separation of severity (`i
 - **Missing data:** `skipped`.
 - **Remediation:** add a guardrail.
 - **Dependencies:** #35. If #35 wants `error` in production, that is a separate production-only rule, not a conditional severity.
+- **Coverage:** retain this weak any-`guardrail` selection check, as both [appletechie](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804) and [PUSHINGSQUARES](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6247690142) require. A selected item proves no write-action coverage or effective authorization. #35's hitl/confirmation and other selected-surface controls keep their actual predicates; G-R1 requires untrusted content entering context while a write tool is callable. W-R4 remains even when those different control predicates do not apply. Missing policy inputs stay unknown for the controls that require them.
 - **Examples:**
   - Pass: a guardrail is selected.
   - Fail: none is selected.
@@ -483,7 +485,7 @@ The following are **synthetic arithmetic illustrations**, not measurements or en
 | Missing both inputs | `R = 1`, `E` unknown | Unknown | Unknown |
 | Missing scope allocation | Service demand known; per-replica `R` unknown | Per-replica `A = 8` | Unknown until routing/load allocation is recorded |
 
-Handoff to #11: document decoding mode, live sequence expansion, admission units/domain, whole-request scheduling and KV retention semantics for the exact engine build. Handoff to #10: use that expansion and matching request allocation to derive `D` and `S`, then size KV at maximum lengths with placement, sharing assumptions, overhead and confidence recorded. These remain proposed inputs under CD-2/CD-3; neither handoff is confirmed here.
+Handoff to #11: document decoding mode, live sequence expansion, admission units/domain, whole-request scheduling and KV retention semantics for the exact engine build. Handoff to #10: use that expansion and matching request allocation to derive `D` and `S`, then size KV at maximum lengths with placement, sharing assumptions, overhead and confidence recorded. These remain proposed inputs under CD-2/CD-3. This paragraph records the original request; the actual #10/#11 receiving rows are retained in the current reconciliation below, with their exact expansion, allocation and evidence conditions.
 
 ### W-R7 Performance evidence matches the configuration and workload
 
@@ -545,18 +547,18 @@ Handoff to #11: document decoding mode, live sequence expansion, admission units
 
 ### W-R10 Quality target backed by comparable evidence
 
-- **Roles and pointers:** `/workload/quality_target`; evaluation results. v1's measured-results schema records the evaluation suite selection, evaluator version, dataset revision and sample size (C11).
+- **Roles and pointers:** `/workload/quality_target`; evaluation results. v1's measured-results schema records the evaluation suite selection, evaluator version, dataset revision and sample size (C11); those fields alone do not encode the complete comparison envelope.
 - **Applies when:** a quality target is set and an artifact is selected.
-- **Assertion:** there is a result for the selected artifact (and engine build, where it matters) that:
-  - was produced under the target's `protocol_id`, meaning the same suite, evaluator version, dataset revision and prompt protocol as `reference_result_id`;
-  - has an adequate sample size;
-  - shows degradation within `max_degradation`, in the metric's direction and units, under #36's uncertainty and acceptance policy.
+- **Assertion:** there is an eligible result for the exact selected artifact/configuration (and engine or provider route where applicable) that:
+  - was produced under the target's `protocol_id` and declared reference/candidate comparison, with the full [R1–R15 envelope adopted by #41](../T6-deployment-operations/evaluation.md#alignment-with-the-adopted-41-evidence-policy): exact suite/harness/task/data and model/runtime identities, precision/context/template, prompts/decoding/load, metric/budgets/cache state, uncertainty/dependence model, measurement date/source/limitations and applicable judge or agent/task-lock scope;
+  - records sample size and uncertainty and meets the explicitly applicable acceptance policy. The general sample-sizing rule E-H5 and tier boundaries E-H12 remain proposals; neither supplies an adopted universal minimum or an automatic quality pass;
+  - shows degradation within the builder-set `max_degradation`, in the metric's direction and units, under #36's applicable uncertainty and acceptance policy.
 
-  Bit-width is never used as a proxy.
-- **Missing data:** `unknown` when no result was produced under the target's protocol, including when the only results come from different protocols. Eligible results under the same protocol that disagree are decided on the conservative one, the larger degradation, and the result is flagged as disputed.
-- **Remediation:** evaluate the selected artifact under the target's protocol, choose another artifact, or relax the target.
-- **Dependencies:** #36; CD-3.
-- **Examples:**
+  The reference and candidate identities remain explicit; a one-factor comparison permits only its declared independent control to differ. Precision/quantization, context limit and chat template are separate controls, while source identity, measurement date and uncertainty are evidence metadata. Scores do not automatically transfer from quantised or provider-modified variants. Judged gates require the pinned judge and human-agreement sample under G3. Bit-width is never a quality proxy.
+- **Missing data:** `unknown` when no eligible result exists under the target's protocol or a required acceptance-policy/evidence input is unresolved, including when only different-protocol results exist. This is separate from #41's failure for a known incomplete or multiple-control comparison presented as comparable; such a claim cannot witness a W-R10 pass. Apply #41's normalization, scope, version/date and authority order before choosing the conservative degradation among equal-ranked eligible results and flagging that result disputed.
+- **Remediation:** evaluate the selected artifact under the qualified target protocol, supply the applicable uncertainty/acceptance policy, choose another artifact, or relax the target.
+- **Dependencies:** #36; CD-3. The actual [appletechie acceptance](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804) and [PUSHINGSQUARES qualification](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6247690142) retain the full protocol, builder-set thresholds and E-H5/E-H12 boundary.
+- **Examples (synthetic, assuming eligible comparisons and the stated acceptance policy; no measured quality):**
   - Pass: a 0.4-point drop against a 1-point allowance, under the same protocol.
   - Fail: a 3-point drop under the same protocol.
   - Fail, flagged as disputed: two results under the same protocol, with 0.4-point and 1.5-point drops against a 1-point allowance.
@@ -578,7 +580,7 @@ The [memory record](../T4-agents-integrations/agent-memory.md#memory-implementat
 
 ## Open contract decisions
 
-These are recorded as decisions for #40 and #41 rather than solved here. The full list is in the companion note; the ones this note depends on are:
+This is the original routing register for #40/#41; the full list is in the companion note. The current reconciliation below distinguishes received research choices and delivered test candidates from remaining policy, selected-configuration evidence and successor integration. The accountable issue retains those boundaries:
 
 | ID | Decision | Accountable |
 | --- | --- | --- |
@@ -631,6 +633,8 @@ Each question has one accountable issue (its assignee is the owner); others are 
 
 ### Recorded receiving dispositions
 
+This section preserves the earlier source-pinned receipts and their scope. The separately dated reconciliation below records the current original-criterion assessment and additional receiving decisions; later source delivery is not retroactively attributed to these earlier reviewers.
+
 The [#2 handoff request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6238501766) names each receiving scope. [@zwright8's response](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6242696067), reviewed against main `7acbefbf4e4e700231e88be272bc89e3a73dde15`, accepts the following **only within that named consumer/co-owner scope**:
 
 | Consumer | Accepted scope and retained constraint |
@@ -646,6 +650,8 @@ This receipt does not cover the later W-R11 memory correction or replace other c
 The subsequent [@appletechie narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804), retained in the [2026-10-18 #40 → #2 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6254659633), governs the CD-12 dictionary above. #30 and #32 consume the applicable attestations; #31 consumes W-R5 and supplies training-compute quantities, with no CD-12 attestation. #32's EU-market answer identifies the model or system being assessed, and its lawful-basis applicability follows the selected personal training dataset/source rather than serving-workload `data_categories`. These are scoped receiving constraints; they introduce no frozen wire fields, permission grant or new receiving-owner acceptance.
 
 ## Acceptance criteria coverage
+
+This prior assessment is retained as history. The current reconciliation below maps all eleven literal original criteria and their actual receiving/delivery gates.
 
 | Criterion (issue #2) | Where | Status |
 | --- | --- | --- |
@@ -663,7 +669,7 @@ The subsequent [@appletechie narrowing](https://github.com/Pick-Your-AI/pick-you
 
 ## Evidence
 
-All sources were accessed on 2026-10-16. Relative "updated" labels are not used as versions. No prices are recorded.
+The C/E source inventory below retains its original 2026-10-16 access dates. Later project decisions and synthetic candidate receipts keep their separately stated dates and source versions. Relative "updated" labels are not used as versions. No prices are recorded.
 
 **Contract (v1, adopted in PR #44).** Links are pinned to the inspected revision `a222013c1f0106159132564d05e5d24666ad6342`. Its file tree is identical to the merge commit `9769fcd9ea380b1211669b2753181c7782444178`. C- entries are Primary documentation.
 
@@ -1093,3 +1099,96 @@ The full repository gates and exact independent/receiving review receipts
 belong to the delivery PR. These checks establish synthetic CPU mechanics;
 actual source qualification, counting-basis agreement, successor/native
 adoption and the broader #2/#40/#42/#59 criteria remain open.
+
+## Current research decision and acceptance reconciliation — 2026-10-18
+
+This separately dated record reconciles the original #2 criteria and actual receiving decisions. The audit starts from signed main `680c73c5cb1a6030fc53b4c5e952618de78b029f`, with this note at blob `9a6028c2d23a38854211a4e0ae54905a3747f1b0`. The original C1–C11/E1–E25 inventory and its 2026-10-16 observations remain below their original date; the CD-5 0.1/0.2 appendices and their actual synthetic receipts keep their source versions. This reconciliation introduces project decisions and source-qualified receiving context, not a new vendor check, price, measured workload, source-use grant or released wire format.
+
+**Selected research decision.** Use the independent, build-owned profile (option B), with one primary workload and separate task/turn/interaction/modality/capability axes. Presets are optional, attributed, visible and editable; unknown answers have no silent defaults. The same profile applies to API, managed and self-hosted serving. Per-component operator/capacity classification belongs to the companion record. Method choices and model capability claims remain downstream; `precision_preference` is an explicit preference, not evidence of quality. Multi-workload sharing of physical hardware retains Q7/SB-7 rather than an inferred pooled fit result.
+
+The actual [#2 owner conditions](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6252162416) and [#401 delivery](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/401) settle the light W-R11 recommendation at this research/test boundary. W-R11 accepts an identified active declaration; M1 separately assesses the actual recovery requirement, implementation/configuration and layers. Eligible publisher documentation may support an M1 pass while labelled unverified. Recovery evidence is not a front-door workload question. The earlier [#129 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/129#pullrequestreview-5560780253), [#28 M1/R5 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/345#pullrequestreview-5563361404), later #2 owner reply and #401 source reviews keep their actual order and attribution.
+
+### Original minimum comparison fields
+
+Known-value types and ranges remain in the complete field dictionary; CD-1 represents answer state separately. A source/selection ID binds the applicable object only after resolution and evidence qualification. The richer dictionary, CD-5 candidates and downstream inputs do not add frozen-v1 fields.
+
+| Original minimum field | Chosen representation, units and range | Evidence and unknown boundary |
+| --- | --- | --- |
+| `workload_type` | Primary `task` plus distinct secondary-task set; `other` requires its bounded description. Turns, interaction and output axes are independent | User requirement; model support and workload evaluation are separate. Unknown task is not a default task or a catalog capability |
+| `modalities_in / modalities_out` | Separate nonempty sets of the v1 modality vocabulary; output free/JSON/JSON Schema with its declared schema when required | User requirement, checked against exact model/offering/route and actual stage support. Incomplete support lists cannot establish a negative |
+| `latency target (percentile, unit)` | Positive integer milliseconds by TTFT/TPOT/end-to-end metric, percentile 50/90/95/99, at most one target per metric | User target or attributed editable preset; no universal numeric latency default. Exact configuration/load/streaming/cache/region and uncertainty qualify an observed comparison |
+| `throughput / concurrency` | Positive decimal throughput with explicit unit and aggregate/per-request scope; peak concurrency is integer requests in flight ≥ 1 | Requests are not KV-holding sequences or a request rate. W-R6 needs matching decoding expansion, admission/allocation and retained-state scope; missing evidence stays unknown |
+| `volume (requests and tokens per period)` | Nonnegative integer request count per day/month; per-request token means are decimals and maxima integers. Preserve output/thinking and native image/audio/video units separately | A per-period token/cost quantity is an explicit derivation from the applicable scoped workload and billable classes, not a fabricated input or sample. Complete assembled input and generation reserve count each actual token occurrence once |
+| `data classification` | Existing v1 classification enum, plus separate personal/special-category need vocabulary with exclusive none/unknown | User posture, not proof of rights, lawfulness or enforcement. Level definitions and additional #35 policy axes retain named owners; a missing requirement cannot be assumed false |
+| `residency constraint` | Independent processing/storage jurisdiction-code lists, explicit unconstrained `none`, or unresolved state | User constraint; actual destination/operator/location and CD-9 mapping evidence are separate. Establishment jurisdiction does not state where data goes |
+| `budget (amount, currency, period)` | Nonnegative decimal amount, ISO currency, one-off/month/year period and hardware/operating/total scope; provided empty list is unconstrained | User constraint, not a quote. Missing currency/period does not default; C-R44/C-R45 keep one-off and recurring comparisons separate and incomplete coverage out of budget-pass |
+| `capability flags` | Knowledge needs per capability; actions none/read-only/write; customisation none/prompt-only/fine-tune; memory none/session/persistent with a declared implementation | Recommendation applicability is explicit. W-R2–W-R5/W-R11 passes do not establish authorization, selected-control effectiveness, recovery or measured quality; independent compatibility rules continue |
+
+### Actual receiving directions and source qualification
+
+The [original request](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6238501766) is broader than the seven consumers literally listed in the issue. The original [zwright8 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6242696067) reviewed `7acbefbf4e4e700231e88be272bc89e3a73dde15` on 2026-10-17; [appletechie's narrowing](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6245701804) reviewed `e41aa5d` on 2026-10-18; [PUSHINGSQUARES' three-row decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6247690142) reviewed `9192d5d` later that day. They retain their named co-owner limits and explicit non-independent authorship where stated. They are not retroactively reviews of this amendment.
+
+The six RW-03/RW-13/RW-28/RW-40/RW-41/RW-42 decisions below are actual receiving comments recorded on 2026-10-18 by the ChatGPT research agent, working through the CompleteDotTech account under delegated project engineering authority, after the coordinating engineer's independent source/scope cross-check. Their exact posted bodies were read back. They retain the original full audit at `680c73c5cb1a6030fc53b4c5e952618de78b029f` and explicitly qualify the later reviewed producer/consumer changes; they do not attribute a response to an absent assignee. Final amendment review, required validation and main delivery remain necessary before whole #2 completion. The actual [#40 → #2 receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2#issuecomment-6254659633) remains the reverse direction: it accepted proposed source `45b20960cbc4652fb3341c977a025821c96595f9` / central blob `375506eea95bd7fc30883c0e4f2a2f5496f77cfd` against the then-current workload, without claiming producer delivery or the later #401 edit.
+
+| Declared #2 downstream consumer | Actual historical or present delegated receiving decision | Required bounded interpretation |
+| --- | --- | --- |
+| #3 Deployment Mode | Accepted [RW-03](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/3#issuecomment-6256107305); reviewed companion blob `8d64fcc0bf16222b0ed3e06dc53c396e525c0741` is delivered by [#409](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/409) | Workload requirements constrain actual serving components and destinations; operator/capacity chooses mode. Processing/storage, context, physical fit, quality, training and private condition-bound answers stay distinct |
+| #6 AI Model | zwright8's accepted #6 row in 6242696067 | Task/modality/output filters use exact model/offering/request support; a filter match is not a workload result or transferred variant score |
+| #7 Context Window | Accepted #7 rows in 6242696067 and 6245701804 | Full assembled input, route tokenizer/template and generation/thinking reserve once; independent input/output/combined constraints remain separate and native non-token work is not forced into token fields |
+| #10 GPU / Compute | appletechie's accepted #10 row in 6245701804 | Expanded sequence demand, matching per-replica allocation/admission and actual physical pools; reserve/headroom alias counted once. Unknown expansion or allocation stays unknown |
+| #36 Evaluation | Accepted W-R10 and narrowed Q5 in 6245701804, confirmed/qualified in 6247690142 | Full R1–R15 tuple, separate precision/context/template controls, pinned judge/human-agreement sample where required, builder-set degradation; E-H5 sizing/E-H12 tiers are not adopted. No numeric latency defaults |
+| #39 Cost Estimate | Narrowed accepted #39 inputs in 6245701804 and 6247690142; audit-base cost blob `6405fd07b1465178c82bcfeab18d13990ad2836e` and later [#414](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/414) blob `6df5e3c30e1bef38a6a75b576e7eaa889262338e` retain C-R44/C-R45 | Requests/lengths/budgets accepted; one-off and recurring totals separate without an adopted amortisation policy. Partial/unknown coverage cannot pass a budget gate. Cache share, length-tier distribution and peak-to-mean rate remain labelled builder-set drivers |
+| #40 Component Schema & Compatibility | Original routing in 6242696067 plus accepted [RW-40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6256109516) for the defined current input | W-R1–W-R11, typed requirements, exact scope and fixed outcomes enter versioned review. Preserve CD-5 and memory candidate versions, private scoped CD-12, actual support/evidence qualification and frozen v1; no reversed receipt or automatic runtime adoption |
+
+| Broader original or subsequent receiving scope | Actual historical or present delegated receiving decision | Scope retained |
+| --- | --- | --- |
+| #11 Inference Engine | zwright8's accepted #11 row in 6242696067 | Exact engine/launch configuration, decoding expansion, active sequences, whole-request scheduling and retained KV. Context fit is not memory fit; queued requests are not resident sequences |
+| #13 Knowledge Base | Accepted [RW-13](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/13#issuecomment-6256108075) against delivered blob `0167ca2faa2487b9e327d8f1982087ffad8d4e30` | Per-capability knowledge declaration, actual source/path/action and separate lifecycle controls; no invented vector product, source rights or complete inventory |
+| #16 RAG & Retrieval | appletechie's accepted #16 row in 6245701804 | Whole permitted corpus plus output reserve for long context; every reader authorized or ACL subsetting before assembly; live direct lookup is a T4 tool. W-R2 is not permission or retrieval-quality evidence |
+| #28 Agent Memory | Actual #2 owner conditions 6252162416 and delivered #401; accepted [RW-28](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/28#issuecomment-6256108681) for current incoming scope | W-R11 declaration is separate from M1 recovery; exact configuration/eligible publisher evidence can establish a scoped unverified M1 result. The 0.1 history and 0.2 candidate stay versioned and attributed |
+| #30 Training Framework | Accepted #30 rows in 6242696067 and 6245701804 | W-R5 is not training permission; F-series condition checks remain per checkpoint. Organisation establishment is separate from data residency |
+| #31 Training Compute | Narrowed #31 row in 6245701804 | W-R5 only, no compute-fit implication or CD-12 attestation. #31 supplies the training-compute quantity to #32's D-01 |
+| #32 Training Dataset | Narrowed #32 row in 6245701804, preserved by reverse 6254659633 and #401 | EU placement binds the assessed model/system; lawful-basis applicability follows the selected personal training dataset/source rather than serving `data_categories`. The research input supplies no actual legal basis, permission or dataset use |
+| #33 Fine-Tuned Model | Accepted #33 row in 6245701804 | Exact base ID/full revision and unchanged token/embedding scope qualify inheritance; route-specific JSON support is rechecked and provider-locked capabilities remain documented. Unresolved effective support stays unknown |
+| #35 Guardrails | Narrowed #35 rows in 6245701804 and 6247690142 | Preserve W-R4 as the weak any-guardrail selection warning. Actual untrusted-content/write and other control predicates are separate; missing regulated/tenancy/language/retention/review/telemetry/key requirements stay unknown |
+| #41 Catalog Sources & Freshness | Accepted [RW-41](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41#issuecomment-6256110168) with original policy blob `36de8d2c699491a1935f79d6dd83660c90b51dbb` and later #403 blob `c862112312d45bbe13b9e9261b8f83ee581cafa6` separately read; Evaluation blob `b50e59f03ead7799944ee82b94fc31a2fd93a7dc` unchanged | Actual scope/version/date/authority order, eligible uncertainty, full comparison identity and claim grades; community trust labels, sample/tier proposals and source/material/use permissions stay separate |
+| #42 Saved, Shared & Compared Builds | Historical provisional #114 scope in 6245701804; accepted [RW-42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6256110870) with original saved-build blob `6bb5f07ffc3ae31af1108e1aa43e5544d3173bbd` and later #412 blob `ac67867b5b6f677403b797879e1804af7fda3b9a` separately read | Original bytes/results versus eligible current/share projections; no transferred private attestations/grants, inferred default, replay input or complete summary. Q7/SB-7 and the actual #40 prerequisite remain |
+| #62 Harness Comparability | Narrowed #62 row in 6245701804 | Exact harness, agent budget, grader, task content lock and immutable model snapshot; no serving measurement or “at least as demanding” transfer. #61/#10 retain service-level measurements |
+
+Consumer sources at the original audit base were read for the material accepted boundaries: the complete knowledge record; memory M1–M8/current 0.2; deployment classification/D-R2/D-R6/EV-1; central dictionary/outcome/candidate and migration scope; evidence policy; Evaluation's R1–R15/E-H5/G3/G6; Cost's C-R44/C-R45; and Saved Builds' complete disclosure/replay/comparison policy. The author subsequently read the complete incoming #403 central/evidence continuations, the exact #412 workload/Saved correction, both #406 retrieval-policy deltas and the later #414 Cost clarification. The actual RW receipts retain the first full-read pins and the later guard at `c02a731e541f16925b68d43b9137afb53cbfaa5a`: workload `7b39b1ce03697d7bca4f87c75984f8851a6fddf2`, central `8ee5a7b7a960ae63c073c996cfdc73b80d939e7c`, evidence `c862112312d45bbe13b9e9261b8f83ee581cafa6` and Saved `ac67867b5b6f677403b797879e1804af7fda3b9a`. The immediate pre-post guard at `0d2e34d76cc6ac3e56165b7e72f4bbe0b8b87cb2` found those producer/consumer blobs, Knowledge, Memory, Deployment Mode and Evaluation unchanged; its Cost change is separately qualified in the table. The incoming #412 recommendation-policy paragraph is retained byte-for-byte. #403's research choices and #406's scoped policy are delivered with their own receipts; CD-2's research decision, successor integration and each consumer's other criteria remain separate. The #397 and T6 controllers retain their authored paths. No original source date or absent co-owner's review is repinned.
+
+### All eleven original research criteria
+
+| Literal original acceptance criterion | Decision-record evidence and completion boundary |
+| --- | --- |
+| Taxonomy with definitions and boundary examples | Output-based primary/secondary tasks, independent turns/interaction/modalities/capability axes, mixed-task boundaries and `other` handling; chosen independent profile above |
+| Mapping table: each input → downstream filters, rules, or evaluation criteria it drives | Complete original mapping plus the minimum-field and directional receiving tables; recommendation inputs stay separate from effective support, safety, quality and operational evidence |
+| Each input has a type, unit, allowed range, and `unknown` handling | Original complete known-value dictionary and answer-state policy; exact counters, decimal means, token/non-token units and versioned CD-5 candidates. Missing values and future typed policy inputs remain unresolved, not fabricated |
+| Activation rules for T3/T4/T5 | Per-capability W-R2–W-R5 and W-R11; selected optional paths retain their independent controls. No mandatory vector/memory/training product is inferred from a task label |
+| Decision record merged at `research/T0-configuration/workload-use-case.md` following the research method | Original #81/#129 and subsequent scoped contributions including #401 are delivered. This one-note reconciliation requires independent review, required validation, normal current-main delivery and its actual final receipt before whole #2 completion |
+| Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Same chosen profile across all serving modes, explicit per-component mode boundary and mode-appropriate W-R7 evidence; local-first emphasis is a project choice, not a claimed universal method advantage |
+| Comparison fields defined with type, unit, and evidence requirement | Nine original minimum groups mapped above, all detailed dictionary entries and EV-1/W-R7/W-R10 evidence scope; quantity assumptions are not measured facts or prices |
+| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Unchanged fixed W-R1–W-R11 policy table; explicit applicability/assertion/unknown/remediation/dependencies; actual central rule policy and separately versioned synthetic candidates. All W-R design assertions remain proposals, with source checked evidence distinguished from independent verification |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Original C1–C11/E1–E25 source inventory and claim links retain dates, versions and limitations; policy, presets, arithmetic and synthetic cases are labelled. This amendment cites dated primary project decisions and exact delivered sources; it introduces no new vendor number or price |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | The seven declared directions above are mapped to their actual named historical or present delegated receiving decisions, and the broader original request is reconciled. All six RW decisions are reviewed, posted and linked with their exact source guards and limits. Original co-owner attributions remain explicit; routing, a reverse receipt or a green check does not substitute for receiving acceptance |
+| Open questions recorded with a named follow-up owner | Existing Q1–Q8 retained with current named owners below; explicit initial decisions are separated from selected-configuration evidence, additional policy and successor integration |
+
+### Named follow-ups and already-made decisions
+
+These are the remaining application/configuration, policy or versioned integration questions. They do not undo the initial workload-profile decision or require a fabricated customer workload to complete this research record. Assignee names were read from the live issues on 2026-10-18; the cited issues remain the accountable records.
+
+| Scope | Current decision and finite follow-up | Accountable owner and consultation |
+| --- | --- | --- |
+| Q1 classification levels | Preserve the existing vocabulary; define the actual policy mapping before applying a level-dependent control. A missing definition is unknown | @zwright8 / @tynamite, #40; consult @appletechie / @PUSHINGSQUARES, #35 |
+| Q2 long context versus retrieval | The accepted alternative requires complete permitted-corpus context fit and reader authorization. Actual corpus/KV cost, transformations and quality still qualify the selected path; no universal token threshold | @zabyxc01 / @appletechie, #16; consult @zwright8 / @appletechie, #7 |
+| Q3 embedding-only representation | Operation determines token-generation applicability; choose the successor foundation/cardinality representation without mislabelling a generative JSON classifier as token-free | @zwright8 / @tynamite, #40; consult @zabyxc01 / @PUSHINGSQUARES, #14 |
+| Q4 load presets and conversions | Presets are attributed editable assumptions. Calibrate a chosen workload/tokenizer and keep word/native-unit conversions labelled estimates | @Mattycodes69 / @appletechie, #10; consult @appletechie / @PUSHINGSQUARES, #39 |
+| Q5 latency defaults | **Research decision: no numeric default supplied.** User targets and explicitly sourced editable presets are allowed; exact streamed/cache-off/target-region/load evidence is required for the concerned measurement | @appletechie / @PUSHINGSQUARES, #36; consult #10/#11 |
+| Q6 quality protocols and metrics | Adopted R1–R15 identity and builder-set metric/degradation apply; judge agreement, uncertainty and any additional sizing/tier policy require their actual qualified scope | @appletechie / @PUSHINGSQUARES, #36; consult #11 and @tynamite / @PUSHINGSQUARES, #41 |
+| Q7 multiple workloads sharing hardware | **Initial choice: one primary workload per build.** SB-7 carries future shared-hardware representation; no cross-build co-residency is inferred | @tynamite / @appletechie, #42; central representation @zwright8 / @tynamite, #40, with #10 |
+| Q8 CD-5 integration | Preserve exact 0.1/0.2 candidates, stage/operation binding, counts and complete-assembly scope. Choose an explicit successor/native adapter and obtain actual workload evidence before relying on its fit result | @zwright8 / @tynamite, #40; consult #2/#7/#10/#16/#39/#42 |
+| #35 additional workload-policy inputs | Regulated status, tenancy, language, zero retention, no human review, no outbound telemetry and customer-managed keys need reviewed typed inputs and actual applicable values; existing controls remain unknown where required evidence is absent | @tynamite / @appletechie, #2, with @appletechie / @PUSHINGSQUARES, #35 and #40 |
+| #36 evaluator placement and provisioning | Receive an evaluator-specific deployment/placement profile and actual provisioned region; a model's serving mode/location is insufficient for a separate judge, trace or evaluation service | @tynamite / @appletechie, #2, with @appletechie / @PUSHINGSQUARES, #36 and #40 |
+| #39 extra cost drivers | Cacheable-prefix share, prompt-length tier distribution and peak-to-mean request rate remain explicit builder-set scenario drivers until their quantity roles get reviewed fields. No invented rate from in-flight concurrency or priced zero from missing data | @tynamite / @appletechie, #2, with @appletechie / @PUSHINGSQUARES, #39 and #40 |
+
+Whole #2 completion is an actual reviewed research/delivery decision recorded on the issue after the source and receiving gates above are met. It does not assert that the builder implements this profile, that every consumer issue is complete, that a research/test candidate is a released contract, or that an empirical result, private attestation or source-use right has been supplied.
