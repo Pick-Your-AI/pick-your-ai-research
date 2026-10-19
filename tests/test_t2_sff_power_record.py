@@ -1,234 +1,314 @@
-"""Check the per-card power record against its raw nvidia-smi captures.
+"""Synthetic regressions for the explicit SFF capture-integrity checker.
 
-Claim-to-source integrity only: the record's numbers must be reproducible from
-the stored CSV files, and every series must retain its capture/device identity.
-These checks do not verify acquisition, workload, timezone, original captures
-or calibrated physical power.
+Every CSV row below is generated test data, never contributor telemetry or
+hardware evidence. CI needs no raw captures, downloads, network or GPU. Actual
+capture checks require a separate explicit --artifact-dir execution and receipt.
 """
+import copy
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 import hashlib
+import importlib.util
+import io
 import json
-import re
 from pathlib import Path
-import statistics
+import subprocess
+import sys
+import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-MEASUREMENTS = ROOT / "research/T2-infrastructure/measurements"
-RECORD = MEASUREMENTS / "rtx-pro-4000-blackwell-sff-power-2026-10-19.json"
-IDLE_CSV = MEASUREMENTS / "raw/raw-capture-IDLE-20261019T000959Z.csv"
-LOAD_CSV = MEASUREMENTS / "raw/raw-capture-A-20261018T235741Z.csv"
-TOLERANCE_W = 0.01
+SCRIPT = ROOT / "scripts/check_t2_sff_power_record.py"
+SPEC = importlib.util.spec_from_file_location("sff_power_integrity", SCRIPT)
+CHECKER = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(CHECKER)
 
 
-def read_rows(path):
-    with open(path, newline="") as handle:
-        reader = csv.reader(handle)
-        header = [cell.strip() for cell in next(reader)]
-        return [dict(zip(header, [cell.strip() for cell in row])) for row in reader]
-
-
-def number(cell):
-    return float(cell.split()[0])
-
-
-def idle_run(rows):
-    """Leading rows of GPU 0 with 0 % utilization, 244 MiB and pstate P5."""
-    run = []
-    for row in (r for r in rows if r["index"] == "0"):
-        if (number(row["utilization.gpu [%]"]) == 0
-                and row["memory.used [MiB]"] == "244 MiB" and row["pstate"] == "P5"):
-            run.append(row)
-        else:
-            break
-    return run
-
-
-def load_powers(rows, index):
-    return [number(r["power.draw [W]"]) for r in rows
-            if r["index"] == index and number(r["utilization.gpu [%]"]) >= 80]
+def synthetic_capture(idle):
+    """Two synthetic devices, 90 rows each; constants make expectations explicit."""
+    output = io.StringIO(newline="")
+    fields = ["timestamp", "index", "name", "uuid", "pci.bus_id", "driver_version",
+              "vbios_version", "power.draw [W]", "power.limit [W]", "power.min_limit [W]",
+              "power.max_limit [W]", "utilization.gpu [%]", "memory.used [MiB]", "pstate"]
+    writer = csv.DictWriter(output, fieldnames=fields)
+    writer.writeheader()
+    start = datetime(2001, 1, 1) if idle else datetime(2000, 12, 31, 23)
+    for sample in range(90):
+        for index in range(2):
+            power, utilization, memory, pstate = 70, 80, 1000, "P0"
+            if idle and index == 0:
+                power, utilization, memory, pstate = ((5, 0, 244, "P5") if sample < 86
+                                                      else (10, 1, 300, "P0"))
+            elif idle:
+                power, utilization = (60, 80) if sample < 89 else (4, 0)
+            elif index == 0:
+                power, utilization = (80, 80) if sample < 71 else (2, 0)
+            stamp = start + timedelta(seconds=sample, milliseconds=index)
+            writer.writerow({
+                "timestamp": stamp.strftime("%Y/%m/%d %H:%M:%S.%f")[:-3],
+                "index": str(index), "name": "SYNTHETIC test device",
+                "uuid": "REDACTED", "pci.bus_id": "00000000:01:00.0" if index == 0 else "00000000:05:00.0",
+                "driver_version": "synthetic-driver", "vbios_version": "synthetic-vbios",
+                "power.draw [W]": f"{power:.2f} W", "power.limit [W]": "70.00 W",
+                "power.min_limit [W]": "60.00 W", "power.max_limit [W]": "70.00 W",
+                "utilization.gpu [%]": f"{utilization} %", "memory.used [MiB]": f"{memory} MiB",
+                "pstate": pstate,
+            })
+    return output.getvalue().encode("utf-8")
 
 
 class PowerRecordTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.text = RECORD.read_text()
-        cls.record = json.loads(cls.text)
-        cls.idle_rows = read_rows(IDLE_CSV)
-        cls.load_rows = read_rows(LOAD_CSV)
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="synthetic-sff-power-")
+        self.addCleanup(self.temp.cleanup)
+        self.directory = Path(self.temp.name)
+        self.record_path = self.directory / "synthetic-record.json"
+        self.record = json.loads(CHECKER.RECORD.read_text())
+        self.record["fixture_kind"] = "generated synthetic input; never research evidence"
+        self.record["card"].update(name="SYNTHETIC test device", driver="synthetic-driver", vbios="synthetic-vbios")
+        idle = self.record["idle"]
+        idle["power_draw_w"] = dict(min=5, mean=5, median=5, max=5)
+        idle["excluded_rows"]["rows"] = [dict(utilization_pct=1, memory_used_mib=300,
+                                               pstate="P0", power_draw_w=10) for _ in range(4)]
+        idle["first_sample_reported_utc"] = "2001-01-01T00:00:00.000Z"
+        idle["last_sample_reported_utc"] = "2001-01-01T00:01:25.000Z"
+        self.record["reported_observed_utc"] = {
+            "idle_window_start": "2001-01-01T00:00:00.000Z",
+            "idle_window_end": "2001-01-01T00:01:25.000Z",
+            "load_series_first_sample": "2000-12-31T23:00:00.000Z",
+            "load_series_last_sample": "2001-01-01T00:01:29.001Z",
+        }
+        load = self.record["load"]
+        load["range_of_series_means_w"].update(low=60, high=80)
+        load["max_sample_w"] = 80
+        for name, power, above, first, last in (
+            ("A_gpu_index_0", 80, 71, "2000-12-31T23:00:00.000Z", "2000-12-31T23:01:29.000Z"),
+            ("A_gpu_index_1", 70, 0, "2000-12-31T23:00:00.001Z", "2000-12-31T23:01:29.001Z"),
+            ("IDLE_gpu_index_1", 60, 0, "2001-01-01T00:00:00.001Z", "2001-01-01T00:01:29.001Z"),
+        ):
+            load["series"][name].update(min_w=power, mean_w=power, max_w=power,
+                                        samples_above_limit=above,
+                                        first_sample_reported_utc=first, last_sample_reported_utc=last)
+        for entry in self.record["raw_evidence"]["files"]:
+            data = synthetic_capture(entry["path"] == CHECKER.IDLE_NAME)
+            (self.directory / entry["path"]).write_bytes(data)
+            entry.update(bytes=len(data), sha256=hashlib.sha256(data).hexdigest(),
+                         original_sha256="0" * 64,
+                         original_repository_path="synthetic-only/" + entry["path"])
+        self.record["raw_evidence"]["preservation"] = "Generated synthetic fixture; no original capture exists."
+        self.save()
 
-    def assertClose(self, actual, expected, label):
-        self.assertAlmostEqual(actual, expected, delta=TOLERANCE_W,
-                               msg="%s: recomputed %s, record says %s" % (label, actual, expected))
+    def save(self):
+        self.record_path.write_text(json.dumps(self.record, indent=2) + "\n")
 
-    def assertReportedTimestampMatchesRow(self, reported, row):
-        # Compare clock text only. The contributor's literal Z label is not
-        # evidence that the offset-free capture was acquired in UTC.
-        self.assertEqual(datetime.strptime(reported, "%Y-%m-%dT%H:%M:%S.%fZ"),
-                         datetime.strptime(row["timestamp"], "%Y/%m/%d %H:%M:%S.%f"))
+    def verify(self):
+        return CHECKER.verify_record(self.record_path, self.directory)
 
-    def test_idle_statistics_recompute_from_csv(self):
-        run = idle_run(self.idle_rows)
-        power = [number(r["power.draw [W]"]) for r in run]
-        rec = self.record["idle"]
-        self.assertEqual(len(run), rec["samples"], "idle sample count")
-        self.assertReportedTimestampMatchesRow(rec["first_sample_reported_utc"], run[0])
-        self.assertReportedTimestampMatchesRow(rec["last_sample_reported_utc"], run[-1])
-        reported = self.record["reported_observed_utc"]
-        self.assertReportedTimestampMatchesRow(reported["idle_window_start"], run[0])
-        self.assertReportedTimestampMatchesRow(reported["idle_window_end"], run[-1])
-        self.assertClose(min(power), rec["power_draw_w"]["min"], "idle min")
-        self.assertClose(statistics.mean(power), rec["power_draw_w"]["mean"], "idle mean")
-        self.assertClose(statistics.median(power), rec["power_draw_w"]["median"], "idle median")
-        self.assertClose(max(power), rec["power_draw_w"]["max"], "idle max")
+    def repin_synthetic_bytes(self, name, data):
+        (self.directory / name).write_bytes(data)
+        entry = next(item for item in self.record["raw_evidence"]["files"] if item["path"] == name)
+        entry.update(bytes=len(data), sha256=hashlib.sha256(data).hexdigest())
+        self.save()
 
-    def test_idle_filter_and_excluded_rows_match_telemetry(self):
-        run = idle_run(self.idle_rows)
-        self.assertTrue(run)
-        self.assertEqual({r["pstate"] for r in run}, {"P5"})
-        self.assertEqual({r["memory.used [MiB]"] for r in run}, {"244 MiB"})
-        excluded = self.record["idle"]["excluded_rows"]
-        gpu0 = [r for r in self.idle_rows if r["index"] == "0"]
-        self.assertEqual(len(gpu0) - len(run), excluded["count"], "excluded row count")
-        self.assertEqual(len(excluded["rows"]), excluded["count"])
-        self.assertEqual({number(r["utilization.gpu [%]"]) for r in run}, {0.0})
-        actual = [{"utilization_pct": number(r["utilization.gpu [%]"]),
-                   "memory_used_mib": number(r["memory.used [MiB]"]),
-                   "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])}
-                  for r in gpu0[len(run):]]
-        self.assertEqual(actual, excluded["rows"])
+    def test_synthetic_controls_execute_all_ten_original_integrity_groups(self):
+        receipt = self.verify()
+        self.assertEqual(receipt["status"], "passed")
+        self.assertEqual(len(receipt["integrity_checks"]), 10)
+        self.assertEqual(len(receipt["artifacts"]), 2)
+        self.assertIn("arithmetic only", receipt["scope"])
+        self.assertEqual(receipt["record_sha256"], hashlib.sha256(self.record_path.read_bytes()).hexdigest())
 
-    def test_load_series_recompute_from_csv(self):
-        sources = {"A_gpu_index_0": (self.load_rows, "0"),
-                   "A_gpu_index_1": (self.load_rows, "1"),
-                   "IDLE_gpu_index_1": (self.idle_rows, "1")}
-        means = []
-        for name, (rows, index) in sources.items():
-            power = load_powers(rows, index)
-            rec = self.record["load"]["series"][name]
-            device_rows = [r for r in rows if r["index"] == index]
-            excluded = [r for r in device_rows
-                        if number(r["utilization.gpu [%]"]) < 80]
-            self.assertEqual(len(device_rows), rec["samples_total"], name + " total")
-            self.assertEqual(len(excluded), rec["samples_excluded_below_80pct"],
-                             name + " excluded")
-            # The recorded boundaries describe the full per-device capture,
-            # while the power statistics use only the qualifying rows.
-            self.assertReportedTimestampMatchesRow(
-                rec["first_sample_reported_utc"], device_rows[0])
-            self.assertReportedTimestampMatchesRow(
-                rec["last_sample_reported_utc"], device_rows[-1])
-            self.assertEqual(len(power), rec["samples_used"], name + " samples used")
-            self.assertClose(min(power), rec["min_w"], name + " min")
-            self.assertClose(statistics.mean(power), rec["mean_w"], name + " mean")
-            self.assertClose(max(power), rec["max_w"], name + " max")
-            self.assertEqual(sum(p > 70.0 for p in power), rec["samples_above_limit"], name + " above limit")
-            means.append(statistics.mean(power))
-        all_series_rows = [r for rows, index in sources.values()
-                           for r in rows if r["index"] == index]
-        reported = self.record["reported_observed_utc"]
-        self.assertReportedTimestampMatchesRow(
-            reported["load_series_first_sample"],
-            min(all_series_rows, key=lambda r: r["timestamp"]))
-        self.assertReportedTimestampMatchesRow(
-            reported["load_series_last_sample"],
-            max(all_series_rows, key=lambda r: r["timestamp"]))
-        rng = self.record["load"]["range_of_series_means_w"]
-        self.assertClose(min(means), rng["low"], "load range low")
-        self.assertClose(max(means), rng["high"], "load range high")
-        every = [p for rows, index in sources.values() for p in load_powers(rows, index)]
-        self.assertClose(max(every), self.record["load"]["max_sample_w"], "load max sample")
+    def test_missing_capture_fails_before_any_csv_parsing(self):
+        (self.directory / CHECKER.LOAD_NAME).unlink()
+        with patch.object(CHECKER, "read_rows", side_effect=AssertionError("CSV parser ran")):
+            with self.assertRaisesRegex(ValueError, "regular supplied capture file"):
+                self.verify()
 
-    def test_limits_and_identity_match_csv(self):
-        rows = self.idle_rows + self.load_rows
-        card = self.record["card"]
-        self.assertEqual({r["power.limit [W]"] for r in rows}, {"%.2f W" % card["power_limit_w"]})
-        self.assertEqual({r["power.min_limit [W]"] for r in rows}, {"%.2f W" % card["power_min_limit_w"]})
-        self.assertEqual({r["power.max_limit [W]"] for r in rows}, {"%.2f W" % card["power_max_limit_w"]})
-        self.assertEqual({r["driver_version"] for r in rows}, {card["driver"]})
-        self.assertEqual({r["vbios_version"] for r in rows}, {card["vbios"]})
-        self.assertEqual({r["name"] for r in rows}, {card["name"]})
+    def test_hash_mismatch_fails_before_any_csv_parsing(self):
+        path = self.directory / CHECKER.LOAD_NAME
+        data = path.read_bytes()
+        path.write_bytes(data[:-1] + b" ")
+        with patch.object(CHECKER, "read_rows", side_effect=AssertionError("CSV parser ran")):
+            with self.assertRaisesRegex(ValueError, "SHA-256"):
+                self.verify()
 
-    def test_csv_hashes_match_record(self):
-        listed = {Path(f["path"]).name: f["sha256"] for f in self.record["raw_evidence"]["files"]}
-        for path in (IDLE_CSV, LOAD_CSV):
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
-            self.assertEqual(digest, listed[path.name], "sha256 of " + path.name)
-        self.assertEqual(len(listed), 2)
+    def test_byte_length_mismatch_fails_before_any_csv_parsing(self):
+        with (self.directory / CHECKER.IDLE_NAME).open("ab") as handle:
+            handle.write(b"extra")
+        with patch.object(CHECKER, "read_rows", side_effect=AssertionError("CSV parser ran")):
+            with self.assertRaisesRegex(ValueError, "byte length mismatch"):
+                self.verify()
 
-    def test_published_csvs_carry_no_gpu_uuid(self):
-        for path in (IDLE_CSV, LOAD_CSV):
-            text = path.read_text()
-            self.assertNotIn("GPU-", text, "GPU uuid left in " + path.name)
-            rows = read_rows(path)
-            self.assertEqual(len(rows), 180, path.name)
-            self.assertEqual({r["uuid"] for r in rows}, {"REDACTED"}, path.name)
+    def test_missing_explicit_directory_never_falls_back_to_repository_captures(self):
+        with self.assertRaises(OSError):
+            CHECKER.verify_record(self.record_path, self.directory / "absent")
+        result = subprocess.run([sys.executable, str(SCRIPT), "--record", str(self.record_path)],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("--artifact-dir", result.stderr)
+        self.assertEqual(result.stdout, "")
 
-    def test_redaction_is_declared_with_original_hashes(self):
-        raw = self.record["raw_evidence"]
-        self.assertIs(raw["original_capture_hashes_verified"], False)
-        # A formatted digest is a declaration; these bytes are not available here.
-        self.assertTrue(raw["published_hash_scope"])
-        self.assertTrue(raw["redaction"])
-        for entry in raw["files"]:
-            self.assertRegex(entry["original_sha256"], r"^[0-9a-f]{64}$")
-            self.assertNotEqual(entry["original_sha256"], entry["sha256"])
-            self.assertEqual(entry["bytes"], (ROOT / entry["path"]).stat().st_size, entry["path"])
+    def test_duplicate_or_escaping_capture_entries_are_rejected(self):
+        original = copy.deepcopy(self.record)
+        for bad in (self.record["raw_evidence"]["files"][0]["path"], "../capture.csv", "/capture.csv"):
+            with self.subTest(path=bad):
+                self.record = copy.deepcopy(original)
+                self.record["raw_evidence"]["files"][1]["path"] = bad
+                self.save()
+                with self.assertRaisesRegex(ValueError, "distinct expected basenames"):
+                    self.verify()
 
-    def test_datasheet_power_matches_quote_and_driver_limit(self):
-        card = self.record["card"]
-        quoted = re.findall(r"(\d+)\s*W\b", card["datasheet"]["quote"])
-        self.assertEqual(len(quoted), 1, "datasheet quote must hold exactly one 'N W' figure")
-        self.assertEqual(card["datasheet_total_board_power_w"], int(quoted[0]), "datasheet figure vs quote")
-        self.assertEqual(card["datasheet_total_board_power_w"], card["power_limit_w"], "datasheet figure vs driver limit")
+    def test_symlink_is_not_admitted_as_a_supplied_regular_capture(self):
+        path = self.directory / CHECKER.LOAD_NAME
+        renamed = path.with_suffix(".saved")
+        path.rename(renamed)
+        path.symlink_to(renamed)
+        with self.assertRaisesRegex(ValueError, "regular supplied capture file"):
+            self.verify()
 
-    def test_series_bind_to_actual_capture_and_device_without_aggregation(self):
-        captures = {IDLE_CSV.name: self.idle_rows, LOAD_CSV.name: self.load_rows}
-        observed = {("0", "00000000:01:00.0"), ("1", "00000000:05:00.0")}
-        for rows in captures.values():
-            self.assertEqual({(r["index"], r["pci.bus_id"]) for r in rows}, observed)
-        declared = {(d["index"], d["pci_bus_id"])
-                    for d in self.record["observed_device_identifiers"]}
-        self.assertEqual(declared, observed)
-        expected = {"A_gpu_index_0": (LOAD_CSV.name, "0"),
-                    "A_gpu_index_1": (LOAD_CSV.name, "1"),
-                    "IDLE_gpu_index_1": (IDLE_CSV.name, "1")}
-        self.assertEqual(set(self.record["load"]["series"]), set(expected))
-        for name, (filename, index) in expected.items():
-            series = self.record["load"]["series"][name]
-            self.assertEqual(series["source_file"], filename)
-            self.assertEqual(series["device"]["index"], index)
-        entries = [self.record["idle"], *self.record["load"]["series"].values()]
-        self.assertEqual(self.record["idle"]["source_file"], IDLE_CSV.name)
-        self.assertEqual(self.record["idle"]["device"]["index"], "0")
-        for entry in entries:
-            rows = [r for r in captures[entry["source_file"]]
-                    if r["index"] == entry["device"]["index"]]
-            self.assertTrue(rows)
-            self.assertEqual({r["pci.bus_id"] for r in rows},
-                             {entry["device"]["pci_bus_id"]})
-        aggregation = self.record["aggregation"]
-        self.assertEqual(aggregation["unit"], "per-device series")
-        for key in ("pooled_across_devices", "summed_across_devices",
-                    "cross_device_scaling_claim"):
-            self.assertIs(aggregation[key], False, key)
+    def test_duplicate_json_keys_and_nonfinite_numbers_are_rejected(self):
+        original = self.record_path.read_text()
+        for replacement in ('"samples": 87, "samples": 86', '"samples": NaN', '"samples": 1e9999'):
+            with self.subTest(replacement=replacement):
+                self.record_path.write_text(original.replace('"samples": 86', replacement, 1))
+                with self.assertRaisesRegex(ValueError, "duplicate|non-finite|finite numeric"):
+                    self.verify()
 
-    def test_record_states_observed_wording_and_status(self):
-        self.assertEqual(self.record["evidence_disposition"], "unverified_contributor_report")
-        self.assertEqual(self.record["status"], "contributor_reported_execution")
-        for key in ("workload_verified", "model_residency_verified",
-                    "utc_timezone_verified", "physical_power_calibration_verified"):
-            self.assertIs(self.record["context_verification"][key], False, key)
-        self.assertNotIn("observed_utc", self.record)
-        self.assertTrue(self.record["timestamp_provenance"])
-        for section in [self.record["idle"], *self.record["load"]["series"].values()]:
-            self.assertNotIn("first_sample_utc", section)
-            self.assertNotIn("last_sample_utc", section)
-            self.assertTrue(section["first_sample_reported_utc"])
-            self.assertTrue(section["last_sample_reported_utc"])
-        for key in ("workload_pinned", "model_pinned", "engine_pinned"):
-            self.assertIs(self.record["load"][key], False, key)
+    def test_all_recorded_clock_boundaries_reject_false_clock_text(self):
+        original = copy.deepcopy(self.record)
+        paths = [("reported_observed_utc", key) for key in self.record["reported_observed_utc"]]
+        paths += [("idle", key) for key in ("first_sample_reported_utc", "last_sample_reported_utc")]
+        paths += [("load", "series", name, key) for name in self.record["load"]["series"]
+                  for key in ("first_sample_reported_utc", "last_sample_reported_utc")]
+        for path in paths:
+            with self.subTest(path=path):
+                self.record = copy.deepcopy(original)
+                target = self.record
+                for key in path[:-1]:
+                    target = target[key]
+                target[path[-1]] = "1999-01-01T00:00:00.000Z"
+                self.save()
+                with self.assertRaises(ValueError):
+                    self.verify()
+
+    def test_total_used_excluded_and_above_limit_counts_are_checked(self):
+        original = copy.deepcopy(self.record)
+        paths = [("idle", "samples"), ("idle", "excluded_rows", "count")]
+        paths += [("load", "series", name, key) for name in self.record["load"]["series"]
+                  for key in ("samples_total", "samples_used", "samples_excluded_below_80pct", "samples_above_limit")]
+        for path in paths:
+            with self.subTest(path=path):
+                self.record = copy.deepcopy(original)
+                target = self.record
+                for key in path[:-1]:
+                    target = target[key]
+                target[path[-1]] += 1
+                self.save()
+                with self.assertRaises(ValueError):
+                    self.verify()
+
+    def test_count_aliases_cannot_pass_python_boolean_or_decimal_equality(self):
+        for value in (False, 0.0):
+            with self.subTest(value=value):
+                self.record["load"]["series"]["A_gpu_index_1"]["samples_excluded_below_80pct"] = value
+                self.save()
+                with self.assertRaisesRegex(ValueError, "integer tokens"):
+                    self.verify()
+
+    def test_every_excluded_idle_value_is_checked(self):
+        original = copy.deepcopy(self.record)
+        for row in range(4):
+            for key, wrong in (("utilization_pct", 99), ("memory_used_mib", 999),
+                               ("power_draw_w", 999), ("pstate", "P9")):
+                with self.subTest(row=row, key=key):
+                    self.record = copy.deepcopy(original)
+                    self.record["idle"]["excluded_rows"]["rows"][row][key] = wrong
+                    self.save()
+                    with self.assertRaises(ValueError):
+                        self.verify()
+
+    def test_wrong_statistics_and_device_or_capture_bindings_are_rejected(self):
+        for path, value in ((("idle", "power_draw_w", "mean"), 999),
+                            (("load", "series", "A_gpu_index_0", "device", "index"), "1"),
+                            (("load", "series", "A_gpu_index_1", "device", "pci_bus_id"), "wrong"),
+                            (("load", "series", "IDLE_gpu_index_1", "source_file"), CHECKER.LOAD_NAME)):
+            with self.subTest(path=path):
+                original = copy.deepcopy(self.record)
+                target = self.record
+                for key in path[:-1]:
+                    target = target[key]
+                target[path[-1]] = value
+                self.save()
+                with self.assertRaises(ValueError):
+                    self.verify()
+                self.record = original
+
+    def test_verified_context_or_cross_device_aggregation_is_not_invented(self):
+        for section, key in (("context_verification", "utc_timezone_verified"),
+                             ("context_verification", "workload_verified"),
+                             ("aggregation", "summed_across_devices")):
+            with self.subTest(section=section, key=key):
+                self.record[section][key] = True
+                self.save()
+                with self.assertRaises(ValueError):
+                    self.verify()
+                self.record[section][key] = False
+
+    def test_hash_checked_csv_still_rejects_duplicate_headers_and_short_rows(self):
+        original = (self.directory / CHECKER.IDLE_NAME).read_bytes()
+        corruptions = [original.replace(b"driver_version", b"index", 1),
+                       original.replace(b",synthetic-driver", b"", 1)]
+        for data in corruptions:
+            with self.subTest(data=data[:100]):
+                self.repin_synthetic_bytes(CHECKER.IDLE_NAME, data)
+                with self.assertRaisesRegex(ValueError, "headers|column count"):
+                    self.verify()
+
+    def test_every_numeric_column_requires_its_actual_unit(self):
+        cases = (
+            (CHECKER.IDLE_NAME, b"5.00 W", b"5.00 kW"),
+            (CHECKER.LOAD_NAME, b"80 %", b"80 bananas"),
+            (CHECKER.IDLE_NAME, b"300 MiB", b"300 GiB"),
+        )
+        originals = {name: (self.directory / name).read_bytes() for name in (CHECKER.IDLE_NAME, CHECKER.LOAD_NAME)}
+        for name, original, wrong in cases:
+            with self.subTest(name=name, wrong=wrong):
+                for restore_name, data in originals.items():
+                    self.repin_synthetic_bytes(restore_name, data)
+                self.repin_synthetic_bytes(name, originals[name].replace(original, wrong, 1))
+                with self.assertRaisesRegex(ValueError, "exact .* unit"):
+                    self.verify()
+
+    def test_displayed_idle_summary_matches_the_selected_rows(self):
+        original = copy.deepcopy(self.record)
+        for key, value in (("pstate", "P0"), ("utilization_pct", 99),
+                           ("memory_used_mib", 999), ("utilization_pct", False)):
+            with self.subTest(key=key, value=value):
+                self.record = copy.deepcopy(original)
+                self.record["idle"][key] = value
+                self.save()
+                with self.assertRaises(ValueError):
+                    self.verify()
+
+    def test_limit_records_cannot_round_into_matching_display_values(self):
+        original = copy.deepcopy(self.record)
+        for field, value in (("power_min_limit_w", 60.004), ("power_max_limit_w", 70.004)):
+            with self.subTest(field=field):
+                self.record = copy.deepcopy(original)
+                self.record["card"][field] = value
+                self.save()
+                with self.assertRaises(ValueError):
+                    self.verify()
+
+    def test_explicit_cli_returns_only_input_bound_integrity_result(self):
+        result = subprocess.run([sys.executable, str(SCRIPT), "--record", str(self.record_path),
+                                 "--artifact-dir", str(self.directory)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        receipt = json.loads(result.stdout)
+        self.assertEqual(receipt["status"], "passed")
+        self.assertEqual(len(receipt["integrity_checks"]), 10)
+        self.assertIn("No acquisition", receipt["limits"])
 
 
 if __name__ == "__main__":

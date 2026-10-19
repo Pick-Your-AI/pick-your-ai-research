@@ -141,27 +141,30 @@
     "not_a_spec": "The contributor describes inference on a shared host, but workload, model and engine are unpinned and that context is not independently established. These are filtered per-device telemetry statistics, not a specification, TDP, fit or capacity result."
   },
   "raw_evidence": {
-    "directory": "research/T2-infrastructure/measurements/raw/",
     "files": [
       {
-        "path": "research/T2-infrastructure/measurements/raw/raw-capture-IDLE-20261019T000959Z.csv",
+        "path": "raw-capture-IDLE-20261019T000959Z.csv",
         "sha256": "607163c0349a88ff07aa2646eb7f6ed01ef84e5b808d517724b019667a5147f9",
         "bytes": 38266,
-        "original_sha256": "34406e29239515d3a1001eefaa53a1a4666f85e0ae5d547ad19aee61c9ae15be"
+        "original_sha256": "34406e29239515d3a1001eefaa53a1a4666f85e0ae5d547ad19aee61c9ae15be",
+        "original_repository_path": "research/T2-infrastructure/measurements/raw/raw-capture-IDLE-20261019T000959Z.csv"
       },
       {
-        "path": "research/T2-infrastructure/measurements/raw/raw-capture-A-20261018T235741Z.csv",
+        "path": "raw-capture-A-20261018T235741Z.csv",
         "sha256": "81302e7ddcd3ba97170b426d0f192952e8fc029c2133fa110dac943d5ee9cf5f",
         "bytes": 38786,
-        "original_sha256": "0ee9cd7c093426ac78b907f3ee60505345da532c615dd79b70e3ed1d527778f9"
+        "original_sha256": "0ee9cd7c093426ac78b907f3ee60505345da532c615dd79b70e3ed1d527778f9",
+        "original_repository_path": "research/T2-infrastructure/measurements/raw/raw-capture-A-20261018T235741Z.csv"
       }
     ],
-    "preservation": "The contributor reports replacing only each uuid column value with REDACTED and retaining all other original bytes. The original unredacted captures were not accessed in this review, so that transformation is not independently verified. This correction preserves both already-published CSV files exactly.",
+    "preservation": "The contributor reports replacing only each uuid column value with REDACTED and retaining all other original bytes. The original unredacted captures were not accessed in this review, so that transformation is not independently verified. Both published capture hashes and byte lengths are preserved. The original contribution remains in Git history; the current source tree excludes the raw captures. Stable external publication, manifests and access/rights verification remain pending.",
     "redaction": "Contributor-reported UUID-only redaction; original_sha256 values are declarations for the unavailable unredacted captures, not independently recomputed hashes.",
     "original_capture_hashes_verified": false,
-    "published_hash_scope": "The two sha256 and byte-length entries identify the published CSV files. Recomputing them does not verify the separately declared original_sha256 values."
+    "published_hash_scope": "The two sha256 and byte-length entries identify the published CSV files. Recomputing them does not verify the separately declared original_sha256 values.",
+    "storage_status": "external_publication_pending",
+    "verification_input": "An explicit --artifact-dir containing exactly the listed capture basenames. No repository capture discovery or automatic download."
   },
-  "method": "Statistics are recomputed from the published CSV files by tests/test_t2_sff_power_record.py (csv module, comparisons within 0.01 W of the reported two-decimal values). Tests verify published hashes, row filters and explicit per-series identities. Original capture hashes, workload attribution, UTC conversion and physical calibration are not verified by those checks.",
+  "method": "Run python scripts/check_t2_sff_power_record.py --artifact-dir <explicit-directory> against the two exact published captures. It rejects missing files and byte-length/SHA-256 mismatches before parsing CSV, then executes the preserved ten integrity groups, including per-device identities, row filters, all reported boundary clock text, complete/excluded counts and every excluded idle-row value. Statistics retain the original 0.01 W tolerance for reported two-decimal values. tests/test_t2_sff_power_record.py uses generated synthetic captures and corrupted controls against this same checker; a synthetic CI pass does not recompute the actual contributor captures. Original capture hashes, workload attribution, UTC conversion, physical calibration and external placement/rights are not verified by these checks.",
   "not_included": [
     "engine commit or build",
     "model artifact pin",
