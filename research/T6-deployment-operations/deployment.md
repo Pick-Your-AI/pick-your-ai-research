@@ -597,7 +597,7 @@ None in this pull request. A `deployment_target` catalog item needs `target_type
 | The Llama 3.2 and Llama 4 EU multimodal clauses withhold the Section 1(a) rights from EU-domiciled licensees but not from end users of a product or service that incorporates the model; where a built system falls in that split (D-R74, D-R84) | #37 owner with legal review | before #37 merges |
 | The Anthropic usage policy page shows "Effective November 12, 2026"; which version is in force on the access date | #37 owner | before 2026-11-12 |
 | NIM production licence: two NVIDIA pages disagree (D-H7) | #37 owner, with NVIDIA in writing | before any NIM build ships |
-| Single-host Docker or systemd deployments: restart policy, health checks and rollback have no opened source | #37 owner | next research pass |
+| Single-host Docker/systemd source mechanics are recorded in the [2026-10-19 supplement](#single-host-runtime-readiness-2026-10-19); selected runtime versions, probe meaning, failure handling and compatible rollback state still need build-specific evidence | #37 owner with #11 and #38 | selected-build review |
 | Third-party open-weight API hosts (Together, Fireworks, Groq, DeepInfra) and gateways (LiteLLM, Cloudflare AI Gateway, OpenRouter): mode, fallback and deprecations were not covered | #37 owner | next research pass |
 | Network path controls (Private Link, VPC endpoints, Private Service Connect) and platform request logging for API and managed modes were not opened | #37 owner, #35 owner | next research pass |
 | T3 vector-store readiness (capacity, backup, replicas, credentials) and T4 tool timeouts, retries and idempotency (SDK retries can repeat a side-effecting call) | T3 owner, T4 owner | before #37 merges |
@@ -809,3 +809,111 @@ assessment, #13/#28 data semantics, #39 billing evidence and real deployment
 observables. No credentials, network settings, permissions, provider accounts or
 artifacts are changed. Receiving review of this integration and remaining
 co-owner scopes stay pending; #37 and #9 remain open.
+
+## Single-host runtime readiness (2026-10-19)
+
+This supplement covers a Linux host controlled by the build operator using
+standalone Docker/Compose or systemd. It supplies sources for the previously
+unresearched restart, health and rollback question. The selected component's
+operator/capacity still determines serving mode; a local gateway does not change
+the mode of a separately hosted model. Swarm and Kubernetes behavior is outside
+this source pass. S46/R29/R32 retain their platform-specific predicates, and
+D-H1's unresolved engine-readiness claims remain hypotheses.
+
+### Primary sources and version scope
+
+Every source below was opened on **2026-10-19**. The evidence grade is **Primary
+documentation**, source checked and not independently reproduced. Docker's
+rolling documentation is pinned to documentation commit
+`31d174d090fd7111ca2199ed54a3978e0d4ac74d`; the systemd rolling manuals displayed
+**systemd 262**, with the cited sections also read in source commit
+`7f4df15d194b36ae4782d677bfea6af566a86a25`. Those documentation snapshots do not
+identify an installed runtime or certify a distribution's version support.
+Version thresholds below are published conditions. No runtime duration, retry
+budget, availability or recovery time was measured in this pass; prices,
+currency and pricing regions are not applicable.
+
+| ID | Publisher and primary page | Pinned document and sections read |
+| --- | --- | --- |
+| D-N1001 | Docker, [Start containers automatically](https://docs.docker.com/engine/containers/start-containers-automatically/) | [Source](https://github.com/docker/docs/blob/31d174d090fd7111ca2199ed54a3978e0d4ac74d/content/manuals/engine/containers/start-containers-automatically.md): restart policies, manual stops and host process managers |
+| D-N1002 | Docker / Moby BuildKit, [Dockerfile HEALTHCHECK](https://docs.docker.com/reference/dockerfile/#healthcheck) | [Vendored source](https://github.com/docker/docs/blob/31d174d090fd7111ca2199ed54a3978e0d4ac74d/_vendor/github.com/moby/buildkit/frontend/dockerfile/docs/reference.md#healthcheck): health state, initialization timing and probe output |
+| D-N1003 | Docker, [Compose service dependencies](https://docs.docker.com/reference/compose-file/services/#depends_on) | [Source](https://github.com/docker/docs/blob/31d174d090fd7111ca2199ed54a3978e0d4ac74d/content/reference/compose-file/services.md#depends_on): short/long dependency syntax and explicit restart scope |
+| D-N1004 | Docker, [compose up](https://docs.docker.com/reference/cli/docker/compose/up/) | [Vendored CLI reference](https://github.com/docker/docs/blob/31d174d090fd7111ca2199ed54a3978e0d4ac74d/_vendor/github.com/docker/compose/v5/docs/reference/docker_compose_up.yaml): recreation, mounted volumes and wait options |
+| D-N1005 | systemd project, [systemd.service](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html) | [Source](https://github.com/systemd/systemd/blob/7f4df15d194b36ae4782d677bfea6af566a86a25/man/systemd.service.xml): Type, NotifyAccess, Restart, RestartSec and WatchdogSec |
+| D-N1006 | systemd project, [systemd.unit](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html) | [Source](https://github.com/systemd/systemd/blob/7f4df15d194b36ae4782d677bfea6af566a86a25/man/systemd.unit.xml): ordering versus requirements and start limits |
+| D-N1007 | systemd project, [systemctl](https://www.freedesktop.org/software/systemd/man/latest/systemctl.html) | [Source](https://github.com/systemd/systemd/blob/7f4df15d194b36ae4782d677bfea6af566a86a25/man/systemctl.xml): show, cat, daemon-reload and revert |
+
+### Documented mechanics
+
+| Mechanism | Scoped finding |
+| --- | --- |
+| Docker restart authority | Restart policies respond to container exits or daemon restart under their individual conditions. `on-failure` requires a nonzero exit and does not restart a container merely because the daemon restarts. A manual stop suppresses `always` until the daemon or container is restarted; `unless-stopped` retains the stopped state across daemon restart. Docker warns against combining its container restart policy with a host process manager for that container (D-N1001). |
+| Docker health status | `HEALTHCHECK` reports health separately from container running state. During `start-period`, failures are ignored until a first success; subsequent failures then count even within that period. `--start-interval` requires Engine **25.0 or later** (published). Probe output is retained for inspection and health changes emit events (D-N1002). These mechanics do not determine whether a selected engine's probe proves loaded-model readiness. |
+| Compose dependencies | Short `depends_on` syntax waits for startup, not health. `service_healthy` waits for the dependency's health check before starting its consumer. Dependency-level `restart: true`, introduced in Compose **2.17.0** (published), applies to explicit Compose operations and excludes automatic restart by the container runtime after a crash (D-N1003). |
+| systemd activation and watchdog | `Type=simple` considers the unit started after fork; `Type=exec` waits for a successful `execve()`. `Type=notify` requires supported notification behavior and accepted `READY=1` under `NotifyAccess`. An enabled `WatchdogSec` expects periodic `WATCHDOG=1`; it is a notification protocol, not an HTTP probe. `Restart` controls eligible exit/timeout recovery with its exceptions; `RestartSec` sets the delay. A manager-initiated stop does not itself trigger that automatic restart (D-N1005). |
+| systemd dependencies and limits | `After` supplies ordering, separately from requirement dependencies such as `Wants` or `Requires`. What counts as finished startup depends on the unit's startup semantics. `StartLimitIntervalSec` and `StartLimitBurst` can stop further automatic restart attempts; later eligible manual, timer or socket activation can resume them. Expiry of the interval alone is not evidence of recovery (D-N1006). |
+| Recreation and configuration reversion | `compose up` recreates a changed image/configuration while preserving mounted volumes; `--wait` waits for services to be running or healthy (D-N1004). `systemctl revert` removes drop-ins, removes local overrides when a vendor unit exists, and can unmask a unit. `daemon-reload` reloads manager configuration; `cat` shows files on disk, which can differ from loaded configuration, while `show` exposes configuration and runtime properties (D-N1007). |
+
+**Restart source limit:** D-N1001 publishes a **10-second** successful-start
+prerequisite, yet its foreground restart example includes **five one-second
+sleeps**. These published details do not resolve initial-failure behavior for a
+selected Engine version. No runtime threshold or recovery was reproduced;
+retain that qualification when assessing its actual restart path.
+
+**Inference for the standalone scope:** health status alone is not documented
+here as a traffic-removal or container-restart actuator. Likewise, dependency
+startup, process execution, a watchdog heartbeat or a completed wait command
+does not establish the selected model's serving readiness. Record the actual
+probe contract and the component that reacts to failure. The Docker warning
+concerns competing supervisors for the same container; it does not prohibit
+systemd from managing the Docker daemon itself.
+
+**Rollback inference:** preserving a volume or restoring vendor unit settings
+does not establish recovery of the previous application release or data state.
+Retain S12/R25's coherent rollback or fix-forward plan. A previous image/binary,
+model or adapter, prompt/configuration, retrieval index and persistent data
+schema may need distinct retained identities and compatibility or restore
+evidence. Reverting unit overrides could also discard required local settings;
+it is not this record's proposed application-rollback procedure.
+
+### Proposed selected-build records and existing checks
+
+These are note-level evidence conventions, not new frozen fields, rule IDs,
+severities or universal numerical defaults. They explain how to apply the
+existing checks to an applicable single-host route; they do not turn the
+Kubernetes-only R29/R32 checks into Docker or systemd checks.
+Known inapplicability retains its reason; missing evidence stays unknown, and
+documented absence of a required capability is not a skipped optional check.
+
+| Existing checks | Proposed comparison record: type, unit and evidence |
+| --- | --- |
+| S41/S42/S44: runtime and release | Text/version references for the selected host OS, Engine/Compose or systemd package, image/binary and model/adapter pins, effective configuration and unit drop-ins. Record the boot activation path and which component owns container/service restarts. Readbacks must identify the actual selected target; a documentation version is insufficient. |
+| S46: initialization and serving | Probe command/endpoint and authorized principal as text; tested meaning and result as evidence references; configured durations in seconds and retry limits as counts. Record actual cold-start and first-serving observations separately. A process or dependency check cannot substitute for the selected model/adapter check; D-H1 and the deep-check proposal retain their original limits. |
+| S11/R24 and S47/R31: failure visibility | References to the selected restart/notification policy, health events, exhausted-restart state and actual monitoring/alert observations. Identify any gateway or supervisor action separately from the signal. Because D-N1002 records probe output, apply #35/#38's existing access, retention and sanitization requirements before capture or export. |
+| S8/S12/S42/S43/S50 and R25: recovery | A set of exact release and persistent-state references, plus the rehearsal result for that target and the compatible restoration or fix-forward path. Record applicable previous image/binary, weights, adapter, prompt/config, index and data schema, and retained access to them. Missing state compatibility stays unresolved even if the old executable starts. |
+| S9/R20/R22/R23/R25: build-bound results | Evidence references and observation timestamps for the actual revision/target, applicable identity, smoke/load, Evaluation and rollback checks. Durations are measured seconds only when observed; an unperformed check remains unperformed. Required G1–G12 applicability comes from #36, and Monitoring owns its actual thresholds and routes. |
+
+### Hand-worked review examples
+
+These are reasoning examples, not executed fixtures, measurements or evidence
+that a deployment passed:
+
+- A running container whose probe reports unhealthy has not established serving
+  readiness. A configured restart policy alone does not demonstrate a response
+  to that health event.
+- A healthy Compose dependency while the selected model is still loading meets
+  only the dependency condition; the model readiness question remains separate.
+- A successful `Type=exec` start followed by a failed inference request proves
+  process launch, not a successful serving check.
+- Restoring an old image while retaining incompatible migrated data restores
+  only one release component; R25 cannot be reported as a rehearsed pass.
+
+The source-retrieval question is now covered for these mechanisms. **Selected
+build readiness remains a separate evaluation**, not a new requirement to run
+a deployment before this documentary supplement can be reviewed. #37 with #11
+owns the selected runtime/probe and release-state follow-up; #38 owns the
+observable health/recovery interface and alert policy; #35 retains data and
+access controls, and #36 retains exact-build Evaluation gates. Existing intake
+receipts keep their original source scope and do not automatically accept this
+later supplement. Full #37 acceptance, other open questions and #40 adoption
+remain separate.
