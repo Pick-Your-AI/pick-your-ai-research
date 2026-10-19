@@ -12,6 +12,8 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
+from mr09_fixture_support import symlink_or_skip
+
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts/mr09_granite31_measure.py"
 SPEC = importlib.util.spec_from_file_location("mr09_granite31", SCRIPT)
 MODULE = importlib.util.module_from_spec(SPEC)
@@ -175,7 +177,7 @@ class SupplementalOutputPreservation(unittest.TestCase):
         else:
             if kind == "symlink":
                 retained.write_bytes(original)
-            output.symlink_to(retained)
+            symlink_or_skip(output, retained)
 
         def unchanged():
             if kind == "file":

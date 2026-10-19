@@ -12,6 +12,8 @@ from types import SimpleNamespace
 import unittest
 from unittest import mock
 
+from mr09_fixture_support import symlink_or_skip
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 try:
@@ -324,6 +326,11 @@ class NativeOutputPublicationTests(unittest.TestCase):
                       **{runtime / item["file"]: item["sha256"] for item in runtime_files}}
             original = b'{"synthetic":"retained original observation"}\n'
             occupied_path = preflight if arrival in ("early_preflight", "before_preflight", "during_preflight") else output
+            prepared_link = directory / "synthetic-pending-link"
+            if arrival and kind in ("live_symlink", "dangling_symlink"):
+                # Prepare before launcher/producer exception handlers; expose
+                # the same link only at the existing early or delayed hook.
+                symlink_or_skip(prepared_link, target)
 
             def occupy():
                 if kind == "file":
@@ -334,7 +341,9 @@ class NativeOutputPublicationTests(unittest.TestCase):
                 else:
                     if kind == "live_symlink":
                         target.write_bytes(original)
-                    occupied_path.symlink_to(target)
+                    self.assertFalse(occupied_path.exists() or occupied_path.is_symlink(),
+                                     "synthetic arrival must not overwrite a prior entry")
+                    prepared_link.rename(occupied_path)
 
             if arrival in ("early_output", "early_preflight"):
                 occupy()
