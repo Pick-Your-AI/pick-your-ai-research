@@ -102,7 +102,7 @@ States are derived on read, not stored. More than one can apply.
 
 | State | Condition | What the viewer sees |
 | --- | --- | --- |
-| Published references unchanged | The compared publication identities equal the saved locks, and the retained report has this exact Build ID/revision and required lock associations | Permitted historical result with its original dates. Reference equality alone establishes neither current eligibility, successful reproduction nor disclosure permission |
+| Published references unchanged | The compared publication identities equal the saved locks, and the retained report has this exact Build ID/revision and required lock associations | Permitted historical result with its original dates; separately show the as-of date when the publication identities were compared. Reference equality alone establishes neither current eligibility, successful reproduction nor disclosure permission |
 | Report unavailable or unassociated | No report is resolved for this exact Build ID/revision and its required lock associations | Evaluation for this revision is not established. Preserve any original report with its actual association/availability explanation; do not infer that no historical evaluation occurred |
 | Newer data available | A newer catalog snapshot, ruleset version, graph revision or pricebook exists | Permitted historical result with its lock dates; offer a separately qualified current candidate, or explain why that evaluation is unavailable |
 | Result changed | Current findings differ from historical findings for any rule | The per-rule diff; changes to `fail` or `unknown` listed first |
@@ -130,17 +130,17 @@ States are derived on read, not stored. More than one can apply.
 | Read-only vs fork | Every share is read-only. Fork creates a new build id at revision 1 with a lineage pointer to the source (id, revision) (SB-6). Withheld inputs arrive unanswered; attestations are never copied. |
 | Revocation | Revoking a token stops future access through that token. It does not prove physical deletion or erase already exported copies or independently permitted forks; the lifecycle boundaries below apply. |
 | What the viewer sees | Permitted projections of both validity views and their dates; permitted withholding notices rather than private field names or values |
-| Retention | Lifecycle semantics selected below; numeric periods and deletion-completion policy remain documented and owned under SB-9. No default retention period is adopted. |
+| Retention | Lifecycle semantics proposed below await the #42 co-owners' disposition; numeric periods and deletion-completion policy remain documented and owned under SB-9. No default retention period is adopted. |
 
-### Retention and access lifecycle (SB-9 research decision, 2026-10-18)
+### Retention and access lifecycle (SB-9 proposed for the #42 owners, 2026-10-18)
 
 The issue asks for a documented retention question; it does not require an
-invented universal duration. This decision separates the lifecycle events now
+invented universal duration. This proposal separates the lifecycle events now
 so the remaining policy can be reviewed before a hosted service promises
 permanence, expiry or deletion. These are project design choices, not observed
 storage behavior or a new source licence.
 
-| Event or artifact class | Selected research behavior | Remaining policy/evidence |
+| Event or artifact class | Proposed research behavior | Remaining policy/evidence |
 | --- | --- | --- |
 | Share expiry or revocation | Stop future access through the expired/revoked token. Never recycle it for another target. While active, a deliberately following share retains its disclosed revision policy. | Actual expiry duration, token/revocation-record lifetime and enforcement implementation |
 | Owner deletion | Stop serving the owner's deleted revisions and associated shares. A deletion request, access denial and completed physical purge are distinct events. | Completion deadline, backups/residual copies, any independently applicable retention basis and evidence of actual purge |
@@ -563,7 +563,7 @@ released wire format is not a new prerequisite for research acceptance.
 | SB-6 | Select a new Build ID/revision 1 with the source ID/revision as separately qualified lineage; no copied private attestations, withheld inputs or approvals. Wire placement remains #40; access and lifecycle limits are in Sharing and SB-9 | #40 | #42 assignees |
 | SB-7 | The initial research choice is one primary workload per build (P12). A later multi-workload model and complete physical co-residency accounting stay with #40/#10; grouping or comparing builds cannot establish combined fit | #40 | #10, #81 |
 | SB-8 | The five-state CD-1 research representation, including distinct `withheld`, is received in P10. Apply its exact profile and migration boundary to the separately reviewed share/fork projection; do not reinterpret the delivered 0.1 reader | #40 (with CD-1) | #81 |
-| SB-9 | Lifecycle meanings selected above; concrete artifact-class durations, deletion completion/residuals and permitted fork survival remain documented follow-up decisions before a hosted retention promise | product owner (@tynamite, @appletechie; #42) | #41 (data governance), #40 (representation) |
+| SB-9 | Lifecycle semantics proposed above await @tynamite and @appletechie disposition; concrete artifact-class durations, deletion completion/residuals and permitted fork survival remain documented follow-up decisions before a hosted retention promise | product owner (@tynamite, @appletechie; #42) | #41 (data governance), #40 (representation) |
 | SB-10 | Receive the CD-7 historical wrapper preflight as the bounded research placement for exact cross-record checks (P11). Preserve the frozen evaluator and original findings; production/successor placement remains #40 integration | #40 | — |
 
 ## Open questions and handoffs
@@ -572,10 +572,10 @@ released wire format is not a new prerequisite for research acceptance.
 | --- | --- | --- |
 | #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted (P10), with selected representations delivered by #403 (P11). Remaining central disposition of this SB reconciliation and the complete projection stays separate; #42's live #40 prerequisite remains |
 | #41 | Confirm the invalidation table and the separate retained/current/disclosure boundaries | Original interim scope confirmed by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384). The actual delegated H41-42 receiving decision on 2026-10-18 accepts the later scoped interface (P9); no arbitrary TTL or whole sharing/migration policy is adopted |
-| #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | Accepted with constraints in actual receipt P13; final #40 wire integration and unadopted cost policy remain separate |
-| #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | Accepted with constraints in actual receipt P14; no deployment approval or execution |
+| #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | Engineering receipt P13 accepts the scoped interface with constraints; consuming-owner confirmation from @appletechie/@PUSHINGSQUARES remains outstanding. Final #40 wire integration and unadopted cost policy remain separate |
+| #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | Engineering receipt P14 accepts the scoped interface with constraints; consuming-owner confirmation from @appletechie/@PUSHINGSQUARES remains outstanding. No deployment approval or execution |
 | #81 (#2/#3) | Incoming workload/mode inputs and the separate reverse share/report-prefill interface; Q7 is SB-7 | Actual #2 → #42 and #3 → #42 intake is recorded in P12. New reverse #42 → #2 and #42 → #3 decisions receive the reconciled source at their own pins (P16/P17), preserving one primary workload, private non-transfer, complete projection and fit-report qualification. |
-| #60 | #42 → #60: qualify historical/shared/exported views after a relevant material, use or permission change | Accepted with constraints in actual receipt P15; no blanket history deletion, retention grant or new source permission |
+| #60 | #42 → #60: qualify historical/shared/exported views after a relevant material, use or permission change | Engineering receipt P15 accepts the scoped interface with constraints; consuming-owner confirmation from @appletechie/@tynamite remains outstanding. No blanket history deletion, retention grant or new source permission |
 | #51 | PCPartPicker save and share flows remain unobserved (P5); this note doesn't rely on them | Informational |
 
 The original #41 invalidation-policy handoff and the later H41-42 scope are
@@ -662,11 +662,15 @@ assignee, full-vendor re-audit or new test run is attributed to those reviews.
 
 These decisions receive the existing producer at the stated blob. Independent
 review and delivery of this reconciliation remain separate. The new reverse
-configuration/report-prefill decisions below are separately recorded; the incoming P9/P10/P12 receipts are not silently reversed. The
-remaining named receiving work is **#40's disposition of the reconciled SB
-choices, complete projection and common-format companion**. #42's current
-assignees coordinate that scope with the central owners; its live #40
-prerequisite and this amendment's actual reviewed delivery remain separate.
+configuration/report-prefill decisions below are separately recorded; the
+incoming P9/P10/P12 receipts are not silently reversed. P13–P15 retain their
+engineering receiving scope. The consuming-owner confirmations requested in
+[tynamite's co-owner review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/431#pullrequestreview-5565750151)
+remain outstanding from @appletechie/@PUSHINGSQUARES for #39/#37 and
+@appletechie/@tynamite for #60. **#40's disposition of the reconciled SB
+choices, complete projection and common-format companion** also remains.
+#42's current assignees coordinate that scope with the central owners; its live
+#40 prerequisite and this amendment's actual reviewed delivery remain separate.
 
 On 2026-10-19, the complete producer at PR #431 source
 `03e347b44b8d03bc2e9abda10a97b43cfcd430c8`, note blob
@@ -698,7 +702,7 @@ issue completion. Research acceptance does not require implementing the builder.
 | Literal issue criterion | Evidence location | Current disposition |
 | --- | --- | --- |
 | Build record definition referencing #40 schema | Build record definition; SB-1–SB-10; P10/P11 | Frozen mapping and selected research choices documented; final central SB/projection disposition and the live #40 prerequisite remain. |
-| Sharing and privacy rules | Sharing; complete projection; SB-9 lifecycle decision | Access, fork, disclosure and lifecycle semantics documented. Numeric retention questions have named owners; this amendment needs its own review and delivery. |
+| Sharing and privacy rules | Sharing; complete projection; SB-9 lifecycle proposal | Access, fork and disclosure semantics are documented; the SB-9 lifecycle proposal awaits the #42 co-owners' disposition. Numeric retention questions have named owners; this amendment needs its own review and delivery. |
 | Comparison semantics with examples | Comparison and its synthetic examples; SB-R3 | Mode, workload, rule/protocol and cost-basis distinctions are explicit; historical display, new evaluation and cost recomputation remain separate claims. |
 | Invalidation triggers (from #41) and resulting user-visible states | Invalidation triggers; corrected Revisit states; P9/P11 | Actual #41 input received and delivered. Equal references alone no longer imply current eligibility, disclosure permission or reproduction. |
 | Decision record merged at `research/T0-configuration/saved-shared-builds.md` following the research method | Proposal sequencing; current delivery reconciliation | Original #114 and later #396/#412/#397 contributions are delivered. This amendment's actual reviewed main delivery must be recorded on its PR; #42 is not completed by this table. |
@@ -706,7 +710,7 @@ issue completion. Research acceptance does not require implementing the builder.
 | Comparison fields defined with type, unit, and evidence requirement | Comparison fields; frozen field mapping; SB-R3 and P13 | Types, units, evidence and comparison basis recorded; missing quantities, cost coverage or calculation policy do not become invented values. |
 | Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; CD-7 historical candidate; P10/P11 | Original SB rule identities and contract-derived/hypothesis labels retained. Synthetic historical replay is bounded evidence, not independent vendor verification or a released successor rule format. The common-format companion maps every actual template field, separates SB-R5's operand policy, and supplies synthetic applicability/outcome/dispute cases and a research revision. Its explicitly proposed completions still need #40 disposition. |
 | Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P17 | Primary contract/external references retain actual access dates and scopes. New content records project choices and exact receiving/source evidence; it introduces no new vendor measurement, price or licence claim. |
-| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; current receiving reconciliation | P9/P10/P12 and outgoing P13–P17 are received at their stated directions and exact pins. Final #40 disposition, the live prerequisite and actual reviewed delivery remain explicitly outstanding. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; current receiving reconciliation | P9/P10/P12 and outgoing engineering receipts P13–P17 retain their stated directions and exact pins. Named consuming-owner confirmations for #39/#37 (@appletechie/@PUSHINGSQUARES) and #60 (@appletechie/@tynamite) remain outstanding, alongside final #40 disposition, the live prerequisite and actual reviewed delivery. Engineering receipts do not supply those owner confirmations. |
 | Open questions recorded with a named follow-up owner | Open decisions (SB-); SB-9 accountable follow-up | All remaining decisions have accountable workstreams; retention periods/deletion completion are documented with @tynamite/@appletechie and #41/#40 consultation. |
 
 ## Evidence
