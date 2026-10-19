@@ -1,19 +1,19 @@
 # T0: Saved, Shared & Compared Builds
 
 Issue: #42 · Contract: v1 1.0.0 (adopted in PR #44; inspected at `f297ac5`) · Kinds: `BuildSnapshot`, `Selection`, `CatalogSnapshot` (with `EvaluationReport`, `CostEstimate`, `Pricebook`, `Ruleset`, `DependencyGraph`, `Event` as referenced records)
-Status: partial research proposal; #40 research prerequisite completed, with #42's own receiving and delivery decisions outstanding (P18–P21) · Last researched: 2026-10-19 · Guidance: PR #74 Track E (P7)
+Status: decision record delivered; central research interface received, with specifically requested owner follow-ups outstanding (P18–P23) · Last researched: 2026-10-19 · Guidance: PR #74 Track E (P7)
 Deliverable path: `research/T0-configuration/saved-shared-builds.md`
 
 Labels used in this note:
 - **V** IDs cite the v1 contract in this repository; **X** IDs cite external primary sources; **P** IDs cite project decisions and drafts.
 - **SB-n** IDs retain this note's research decisions and remaining integration questions, routed to #40 unless stated. They are separate from #81's CD-1 to CD-12, which this note references but does not renumber, extend or settle.
-- **SB-Rn** IDs are rule proposals for #40 review.
+- **SB-Rn** IDs retain the original rule proposals. P22 records reception of their dated common-format research companion; no executable successor ruleset is released.
 - **Proposal:** a design choice made in this note, not a sourced fact.
 - "Source checked" means the claim was compared with the cited source on its access date. The separately labelled synthetic historical-replay experiments exercise their exact supported profiles; they do not establish independently measured vendor behavior or upgrade documentary claims to reproduced evidence (P3, P9).
 
 ## Proposal sequencing decision — 2026-10-18 (historical state)
 
-The 2026-10-18 sequencing decision allowed this partial design record to proceed through ordinary PR review and merge while the contract prerequisite was open, giving #40 and the other receiving issues concrete semantics to review. Publishing the proposal does not adopt SB or CD field shapes, release a successor contract, activate a consumer, or supply pending receiving-owner acceptance. At that decision, #40 and #42 remained open and #42 retained its #40 prerequisite. The earlier draft-hold reviews remain historical records; the decision changed only the order in which the partial proposal could merge, not the issues' completion requirements. P21 records the later actual completion of #40.
+The 2026-10-18 sequencing decision allowed this partial design record to proceed through ordinary PR review and merge while the contract prerequisite was open, giving #40 and the other receiving issues concrete semantics to review. Publishing the proposal does not adopt SB or CD field shapes, release a successor contract, activate a consumer, or supply pending receiving-owner acceptance. At that decision, #40 and #42 remained open and #42 retained its #40 prerequisite. The earlier draft-hold reviews remain historical records; the decision changed only the order in which the partial proposal could merge, not the issues' completion requirements. P21 records the later actual completion of #40; P22 and P23 separately record this note's later central intake and reviewed delivery.
 
 The sequencing change is recorded at [f56b0fc](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/f56b0fcdb34d91e1751edc3b4cd44dba9bc04960), with independent reviews [5561898533](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5561898533) and [5561921315](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5561921315) submitted before [squash merge 649f5870](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/649f5870e9729ec1aaf1b5f07e9290ce0f777833). These reviews concern publication of this partial record and retain the receiving-owner gates; they do not replace the earlier revision-specific reviews or the scoped #41 receipt.
 
@@ -631,7 +631,9 @@ separate decisions. The fixture is synthetic; #42 retains its #40 prerequisite.
 The table retains the original SB identities. Rows marked received record the
 accepted base research choice and name its remaining integration scope; they do
 not reopen that choice as an undecided alternative. A future implementation or
-released wire format is not a new prerequisite for research acceptance.
+released wire format is not a new prerequisite for research acceptance. P22
+subsequently receives this register's bounded research mapping and dated
+common-format companion, with SB-9 received only as a proposal for #42's owners.
 
 | ID | Decision | Accountable | Consulted |
 | --- | --- | --- | --- |
@@ -650,7 +652,7 @@ released wire format is not a new prerequisite for research acceptance.
 
 | Handoff | What is asked | Status |
 | --- | --- | --- |
-| #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted (P10), with selected representations delivered by #403 (P11). #40's research prerequisite is completed (P21); disposition of this new SB/projection/common-format packet remains a separate requested receiving decision |
+| #40 | Receive selected answer/attribution, exact identity, immutable-history and private-attestation representations; reconcile remaining SB mappings and integrity proposals | Actual H40-42 receiving scope accepted (P10), with selected representations delivered by #403 (P11). #40's research prerequisite is completed (P21). P22 separately receives the final #431 SB mappings, complete projection and dated common-format policy completions as a bounded research interface; released representation and consumer implementation retain their own review |
 | #41 | Confirm the invalidation table and the separate retained/current/disclosure boundaries | Original interim scope confirmed by @tynamite in [review 5558408384](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/114#pullrequestreview-5558408384). The actual delegated H41-42 receiving decision on 2026-10-18 accepts the later scoped interface (P9); no arbitrary TTL or whole sharing/migration policy is adopted |
 | #39 | #42 → #39: SB-3 snapshot and comparison input (currency, period, charge basis, one-off vs operating) | Engineering receiving decision recorded in P13. Named consuming-owner confirmation requested from @appletechie / @PUSHINGSQUARES in P19 remains outstanding; final versioned integration and unadopted cost policy stay separate |
 | #37 | #42 → #37: a "deploy from saved build" path uses the exact pinned revision and its own actual approvals (V8) | Engineering receiving decision recorded in P14. Named consuming-owner confirmation requested from @appletechie / @PUSHINGSQUARES in P19 remains outstanding; no deployment approval or execution |
@@ -694,7 +696,8 @@ and unmerged at the receipt. It does not retrospectively accept this note's new
 disclosure proposal. Other receiving decisions, retention, share access and the
 remaining SB mapping/projection work stay separate. Neither source-only receipt
 removed the #40 prerequisite; its later actual research completion is recorded
-in P21 and leaves this new packet's disposition separate.
+in P21. P22 supplies the actual later receiving decision for this new packet,
+without reattributing it to either historical receipt.
 
 ### Current receiving and delivery reconciliation — 2026-10-19
 
@@ -711,8 +714,10 @@ The actual twelve-criterion completion review and the closed/completed issue
 readback on 2026-10-19 establish #40's research completion (P21).
 That prerequisite is satisfied; its native relationship history is retained.
 The coordinating engineer read the original completion receipts and issue
-state; that is not a new full central-source or execution audit. Completion of #40 does not accept
-the later #431 packet, release a successor contract or complete #42.
+state; that is not a new full central-source or execution audit. Completion of
+#40 did not itself accept the later #431 packet. P22 records that separate
+central intake and P23 the actual producer delivery; neither releases a
+successor contract or declares whole-#42 completion.
 
 The complete-projection correction was delivered by #396, the dependent-rule
 applicability clarification by #412, and retained-association diagnostics by
@@ -751,13 +756,13 @@ These engineering decisions receive the existing producer at the stated blob;
 they are not replaced or withdrawn by the later review. P19 explicitly requests
 named consuming-owner confirmations for #37/#39 from @appletechie /
 @PUSHINGSQUARES and for #60 from @appletechie / @tynamite. Those confirmations
-remain outstanding alongside **the requested central disposition of the
-reconciled SB choices, complete projection and common-format companion**.
-#40's research completion (P21) does not supply that later receiving reply.
+remain outstanding. **The separate central disposition of the reconciled SB
+choices, complete projection and common-format companion is now received in
+P22**; it was not inferred from #40's research completion (P21).
 The reverse configuration/report-prefill decisions below retain their own
 directions and source pins; incoming P9/P10/P12 receipts are not silently
 reversed. #42's current assignees coordinate these remaining decisions, the
-requested independent producer read and this amendment's reviewed delivery.
+requested independent producer read. P23 records the reviewed #431 delivery.
 
 On 2026-10-19, the complete producer at PR #431 source
 `03e347b44b8d03bc2e9abda10a97b43cfcd430c8`, note blob
@@ -785,7 +790,7 @@ acceptance; this additional intake neither reopens them nor completes #42.
 P19 is @tynamite's actual #42 co-owner review of source
 03e347b44b8d03bc2e9abda10a97b43cfcd430c8. Its text accepts the research
 proposal with constraints; GitHub records its formal state as COMMENTED.
-This follow-up applies the requested SB-9 proposal labels, explicit outstanding
+The delivered #431 follow-up applies the requested SB-9 proposal labels, explicit outstanding
 named consuming-owner confirmations and actual reference-comparison timestamp.
 
 P18 is the separate actual reverse #42 → #2/#3 receiving review by @tynamite,
@@ -801,8 +806,59 @@ P19's requested consuming-owner confirmations remain explicit above. The
 co-owner stated that the reverse review would not hold this partial PR; this
 reconciliation does not introduce a blanket new merge restriction. SB-9's
 numeric choices remain the separate unadopted P20 proposal pending an actual
-owner disposition. The remaining central packet, reviewed delivery and eleven
-criteria retain their own evidence; no absent person's reply is inferred.
+owner disposition. The central packet and reviewed #431 delivery are now
+recorded in P22/P23. Each of the eleven criteria retains its own evidence;
+no absent person's reply is inferred.
+
+### Actual delivered record and central intake — 2026-10-19
+
+The final #431 producer `473995df3e95f551a9b573d068ef1c9c441136ec` was
+delivered to main as signed
+`73403ebd91437a4bf718ccf9b3857f955e16732f` at 01:08:18 UTC (P23).
+Its note blob `b7c4e0867acaaafd88023125447ecf1a5f3fc781` is
+112,643 UTF-8 bytes, SHA-256
+`fa205db0995712eb98162d7769720a5102d93b17916e3b778dee3be082a538b6`.
+The exact delivered tree `b6bbd22e521a729a4408530e1cb13f641c06ae57`
+matches the actual tested PR preparation. The original post-main output records
+21 contract and 1,101 repository tests: the same 1,122 unique passing methods,
+with zero failures, errors or skips, and the same four validator results.
+P23 links the original run, source/prepared reviews and output hashes; those
+executions concern that exact delivered tree, not a later reconciliation.
+
+At 01:14:33 UTC, the actual #42 → #40 receiving decision (P22) accepted the
+bounded final producer's SB mappings, complete-projection policy and
+**2026-10-19 companion draft 1**. It explicitly settles that companion's
+research policy completions: exact membership and report binding, separate
+SB-R3 association/display and frozen V8 cost/budget behavior, scoped
+SB-R4a/SB-R4b applicability, and SB-R5's consumer-owned withheld-operand policy.
+The companion's original proposal wording describes its submitted revision;
+this later receipt supplies its central research disposition without rewriting
+the original rule identities, cases or historical evidence.
+
+The received scope preserves five answer states and explicit assumptions,
+exact Build/revision/required-lock identity, immutable history and separately
+qualified current candidates. Complete projections must qualify fields and
+derived meaning for the actual material, purpose and view; redaction does not
+inherit the complete artifact's binding, signature, qualification or total.
+Original calculation reproduction needs its own quantities, eligible rates and
+calculation/allocation/rounding basis. The receipt receives the corrected
+recipient-run, account-capacity and assumed-preset interface. It receives SB-9
+only **as a proposal for the #42 owners**, adopting no numeric period or hosted
+retention promise.
+
+The actual receiving basis is central note blob
+`d3d53f3c135556a3bd227e8008dceb9f08676749`, complete rule template
+`380bcdb40f2a1d1d02ec6ddffe367729763ed526` and frozen pricing/gates
+`1e9e64ffe1138ffab456fd8b39c832d9f41e11ea` at the receipt's stated source.
+Its independently attributed source and semantic reads supply that decision;
+they are not new runtime, vendor, retention or installed-native tests.
+No later central edit is retroactively included in those source pins.
+
+P22 supplies the requested central research intake. It does not supply the
+P19-requested named #37/#39/#60 confirmations or P18's independent producer
+read, grant source rights, serialize new fields, adopt a runtime adapter or
+migrate frozen v1. Named follow-up questions and any future implementation
+retain their stated owners and scope.
 
 ## Acceptance criteria coverage
 
@@ -812,16 +868,16 @@ issue completion. Research acceptance does not require implementing the builder.
 
 | Literal issue criterion | Evidence location | Current disposition |
 | --- | --- | --- |
-| Build record definition referencing #40 schema | Build record definition; SB-1–SB-10; P10/P11/P21 | Frozen mapping and selected research choices documented. #40's research prerequisite is completed; the new SB/projection/common-format packet still needs its own central disposition. |
-| Sharing and privacy rules | Sharing; complete projection; SB-9 proposal; P18–P20 | Access, fork, disclosure and proposed lifecycle semantics are documented. SB-9 remains proposed for the #42 owners, including P20's unadopted numeric choices; this amendment needs its own review and delivery. |
+| Build record definition referencing #40 schema | Build record definition; SB-1–SB-10; P10/P11/P21/P22 | Frozen mapping and selected research choices documented. #40's research prerequisite is completed, and P22 receives the final bounded SB/projection/common-format research interface. |
+| Sharing and privacy rules | Sharing; complete projection; SB-9 proposal; P18–P23 | Access, fork and disclosure semantics are documented, centrally received in P22 and delivered in P23. SB-9 remains proposed for the #42 owners, including P20's unadopted numeric choices and named follow-up; no hosted retention promise is inferred. |
 | Comparison semantics with examples | Comparison and its synthetic examples; SB-R3 | Mode, workload, rule/protocol and cost-basis distinctions are explicit; historical display, new evaluation and cost recomputation remain separate claims. |
 | Invalidation triggers (from #41) and resulting user-visible states | Invalidation triggers; corrected Revisit states; P9/P11 | Actual #41 input received and delivered. Equal references alone no longer imply current eligibility, disclosure permission or reproduction. |
-| Decision record merged at `research/T0-configuration/saved-shared-builds.md` following the research method | Proposal sequencing; current delivery reconciliation | Original #114 and later #396/#412/#397 contributions are delivered. This amendment's actual reviewed main delivery must be recorded on its PR; #42 is not completed by this table. |
+| Decision record merged at `research/T0-configuration/saved-shared-builds.md` following the research method | Proposal sequencing; current delivery reconciliation; P23 | Original #114 and later #396/#412/#397 contributions are delivered. P23 records the reviewed #431 source, actual signed main 73403ebd and original post-main verification. This establishes the record's delivery, not whole-#42 completion. |
 | Candidate set covers the relevant deployment modes (API / managed / self-hosted) or states why a mode does not apply | Candidate options; Deployment modes covered; Comparison; P12 | API, managed and self-hosted serving plus hybrid composition covered with their separate historical-v1 and researched per-component representations. |
 | Comparison fields defined with type, unit, and evidence requirement | Comparison fields; frozen field mapping; SB-R3 and P13 | Types, units, evidence and comparison basis recorded; missing quantities, cost coverage or calculation policy do not become invented values. |
-| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; CD-7 historical candidate; P10/P11 | Original SB rule identities and contract-derived/hypothesis labels retained. Synthetic historical replay is bounded evidence, not independent vendor verification or a released successor rule format. The common-format companion maps every actual template field, separates SB-R5's operand policy, and supplies synthetic applicability/outcome/dispute cases and a research revision. Its explicitly proposed completions still need #40 disposition. |
-| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P21 | Primary contract/external references retain actual access dates and scopes. New content records project proposals and actual receiving/source evidence; it introduces no new vendor measurement, price or licence claim. |
-| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; receiving and named-owner reconciliation | Actual engineering receipts P9/P10/P12–P17 retain their directions and pins. P18 supplies named reverse acceptance with constraints at `03e347b4`. The P19-requested named confirmations for #37/#39 (@appletechie / @PUSHINGSQUARES) and #60 (@appletechie / @tynamite), P18's independent producer read, the new central packet's disposition and this amendment's reviewed delivery remain outstanding. #40's research completion is separately recorded in P21. |
+| Compatibility rules and warnings use the shared format from #40; verified rules are separated from hypotheses | Compatibility proposals; complete common-format companion; CD-7 historical candidate; P10/P11/P22 | Original SB identities and contract-derived/hypothesis labels are retained. P22 receives the actual template mapping and dated policy completions, including SB-R5's consumer-owned operand policy. Hand-worked synthetic cases and bounded historical replay retain their own scope; neither is independent vendor verification or a released successor ruleset. |
+| Every factual or numeric claim cites a primary source with access date (and version / region / currency where relevant) | Evidence V1–V13, X1–X3, P1–P23 | Primary contract/external references retain actual access dates and scopes. P22/P23 add actual project receiving and original-delivery evidence at their stated pins and times; this reconciliation introduces no new vendor measurement, price or licence claim. |
+| Each handoff listed under Dependencies is confirmed by the consuming issue's owner (link the comment or PR review) | Open questions and handoffs; receiving and named-owner reconciliation; P22/P23 | Actual engineering receipts retain their directions and pins. P18 supplies named reverse acceptance with constraints at `03e347b4`. P22 settles the central packet; P23 records delivery. The specifically requested named confirmations for #37/#39 (@appletechie / @PUSHINGSQUARES) and #60 (@appletechie / @tynamite), and P18's independent producer read, remain outstanding. No additional assignee unanimity is inferred. |
 | Open questions recorded with a named follow-up owner | Open decisions (SB-); SB-9 accountable follow-up | All remaining decisions have accountable workstreams; retention periods/deletion completion are documented with @tynamite/@appletechie and #41/#40 consultation. |
 
 ## Evidence
@@ -865,8 +921,10 @@ issue completion. Research acceptance does not require implementing the builder.
 | P19 | [Actual #42 co-owner PR review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/431#pullrequestreview-5565750151) | 2026-10-19 | Submitted 00:04:39 UTC on 03e347b44b8d03bc2e9abda10a97b43cfcd430c8 | Named co-owner review; text accepts with constraints; formal state COMMENTED | SB-9 proposal status, requested named consuming-owner confirmations and comparison as-of date; no formal APPROVED vote, numeric adoption or review of this later amendment |
 | P20 | [SB-9 numeric retention proposal](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6256905325) | 2026-10-19 | Submitted 00:11:57 UTC; proposer @tynamite, stated deadline end of 2026-10-23 UTC | Unadopted project policy proposal | Actual owner disposition and stated governance qualifications remain; deadline or silence is not a receiving receipt, adopted default, operating promise or observed storage behavior |
 | P21 | [Actual #40 completion review](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257213742), [independent criterion support](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257194682), and [#42 prerequisite update](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257241193) | 2026-10-19 | #429 delivered 449a29be1752a3c545709da466c7d53fc18fef73; #40 closed/completed at 00:41:11 UTC, read back on 2026-10-19 | Project engineering completion decision and actual issue state | Root read the original receipts and issue state; no new full central-source/test audit, named-assignee approval, successor release, acceptance of the new #431 packet or whole-#42 completion |
+| P22 | [Actual central #42 → #40 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6257566405) and [receiving notice on #42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257585573) | 2026-10-19 | Submitted 01:14:33 UTC; final producer 473995df, delivered 73403ebd, note b7c4e086; exact central/template/gate basis recorded above | Actual delegated central engineering receiving decision: accept the bounded research interface with stated conditions | Receives SB mappings, complete projection and companion draft 1 policy completions; SB-9 only as proposed. No absent named-assignee reply, successor release, implementation, numeric retention adoption or whole-#42 completion |
+| P23 | [Reviewed #431 delivery and original post-main verification](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6257698095), [signed delivered commit](https://github.com/Pick-Your-AI/pick-your-ai-research/commit/73403ebd91437a4bf718ccf9b3857f955e16732f) and [original main run](https://github.com/Pick-Your-AI/pick-your-ai-research/actions/runs/39183951002/job/117842338982) | 2026-10-19 | Merged 01:08:18 UTC; tree b6bbd22e521a729a4408530e1cb13f641c06ae57; actual prepared a41e6dab and delivered 73403ebd | Project source/delivery evidence and original workflow output, individually read and parsed | Same 1,122 unique passing methods and four validator results at the exact delivered tree; no failed/error/skipped methods. Repository checks do not certify source truth, owner acceptance or later-source execution |
 
-Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; those contract decisions and the #42 prerequisite remained open at that sequencing decision. P21 records #40's later actual research completion; the new #431 receiving packet remains separate.
+Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; those contract decisions and the #42 prerequisite remained open at that sequencing decision. P21 records #40's later actual research completion. P22 supplies the separate later #431 receiving decision and P23 its reviewed delivery; none is retroactively attributed to this historical disposition.
 
 ## Retained input association diagnostics (2026-10-18)
 
