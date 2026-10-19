@@ -262,6 +262,7 @@ class ReplayArchive:
             raise ReplayError("manifest_sidecar_mismatch")
 
         profile_issues = []
+        selection_issues = ()
         association_issues = ()
 
         def result(status, issues=(), bindings=(), generated=None):
@@ -269,7 +270,7 @@ class ReplayArchive:
             # An unavailable reader must not erase exact historical records
             # or diagnostics established from independently pinned artifacts.
             issues = list(issues)
-            for issue in association_issues:
+            for issue in (*selection_issues, *association_issues):
                 if issue not in issues:
                     issues.append(issue)
             if profile_issues:
@@ -295,6 +296,12 @@ class ReplayArchive:
         else:
             bindings.append(ReplayBinding("pricebook", "not_supplied"))
         bindings.extend(self._bind(kind, packet["inputs"][kind]) for kind in INPUT_SCHEMAS)
+        # Exact Build/catalog membership is independently known even when a
+        # different retained input is unavailable. An unresolved catalog can
+        # supply no membership assertion; its binding already records why.
+        selection_issues = [("selection:" + selection.selection_id, selection.status)
+                            for selection in resolution.selections
+                            if selection.status not in {"resolved", "not_enabled", "snapshot_unresolved"}]
         association_issues = _retained_input_issues(build, bindings)
         issues = [(binding.kind, binding.status) for binding in bindings
                   if binding.status not in {"resolved", "not_supplied"}]
@@ -302,9 +309,6 @@ class ReplayArchive:
             status = ("input_digest_mismatch" if any(code == "content_digest_mismatch"
                       for _, code in issues) else "inputs_unavailable")
             return result(status, issues, bindings)
-        selection_issues = [("selection:" + selection.selection_id, selection.status)
-                            for selection in resolution.selections
-                            if selection.status not in {"resolved", "not_enabled"}]
         if selection_issues:
             # Some frozen metrics index catalog entries by ID alone, and
             # unused kinds may produce no finding for an absent/wrong item.
