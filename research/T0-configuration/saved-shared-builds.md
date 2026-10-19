@@ -50,7 +50,7 @@ What should a saved or shared build contain, how are builds compared, and what h
 
 ### Deployment modes covered
 
-All four modes appear in the comparison semantics. Mode is the operator-plus-capacity classification of each serving component under the merged D-R1 definition. If any required component's mode is unresolved, the aggregate is `unknown`. Otherwise, it has their common mode when all agree and is `hybrid` when they do not all agree (P1, P12, P18). v1 instead has one `deployment_mode` selection with `cardinality: one` (V9). The accepted #3 → #42 receipt (P12) supplies the researched per-component definition. Versioned representation and migration remain with #40/CD-7; the definition is not an undecided mode choice or a new frozen-v1 field.
+All four modes appear in the comparison semantics. Mode is the operator-plus-capacity classification of each serving component under the received [classification test](deployment-mode.md#the-classification-test). If any required component's mode is unresolved, the aggregate is `unknown`. Otherwise, it has their common mode when all agree and is `hybrid` when they do not all agree (P1, P12, P18). v1 instead has one `deployment_mode` selection with `cardinality: one` (V9). The accepted #3 → #42 receipt (P12) supplies the researched per-component definition. Versioned representation and migration remain with #40/CD-7; the definition is not an undecided mode choice or a new frozen-v1 field.
 
 ## Build record definition
 
@@ -323,7 +323,7 @@ For example, `rule.required.foundation` always applies: a build missing its prim
 | Field | Type and unit | Source | Comparable when | Evidence requirement |
 | --- | --- | --- | --- | --- |
 | Selection per (kind, role) | `catalog_item_id` + `catalog_item_version` | `Selection` | Always | Pinned snapshot |
-| Mode per serving component | enum `api`, `managed`, `self_hosted`, `unknown`; build: plus `hybrid` | Per-component operator-plus-capacity definition and D-R1 in [Deployment Mode](deployment-mode.md), received in P12 and named reverse review P18 | Compare eligible classifications; `unknown` if any required component mode is unresolved; otherwise their common mode when all agree, or `hybrid` when they do not all agree | Evidence for the actual offering/account scope; historical v1 `deployment_mode` does not supply component mode, and billing belongs only to cost comparison |
+| Mode per serving component | enum `api`, `managed`, `self_hosted`, `unknown`; build: plus `hybrid` | Per-component operator-plus-capacity [classification test](deployment-mode.md#the-classification-test), received in P12 and named reverse review P18 | Compare eligible classifications; `unknown` if any required component mode is unresolved; otherwise their common mode when all agree, or `hybrid` when they do not all agree | Evidence for the actual offering/account scope; historical v1 `deployment_mode` does not supply component mode, and billing belongs only to cost comparison |
 | Compatibility result | `EvaluationReport.result` enum, plus counts from `summary` | `EvaluationReport` | Both reports use the same ruleset id and version; otherwise offer a separately qualified current evaluation | Each report matches the compared Build ID/revision and its required locks; a different-lock candidate is separate evidence |
 | Per-rule finding | outcome × severity | `findings[]` | Same `rule_id` and ruleset version | As above |
 | Total cost | `money` (`decimal` string + ISO 4217), per `period_days` | `CostEstimate.total` | Same currency (v1 has no FX policy, V8), same `period_days`, same workload inputs, both `coverage: complete` | Pricebook dates shown; `partial`/`unknown` coverage shown as "incomplete" |
@@ -792,7 +792,7 @@ P18 is the separate actual reverse #42 → #2/#3 receiving review by @tynamite,
 who also co-owns producer #42. It accepts with constraints the same 03e347
 producer against the consumer notes at accepted 170f0f7. The prefill sensitivity
 rows, actual-run section, account-capacity rule, assumed preset treatment and
-D-R1 comparison citation above implement its five requests. P16/P17 remain the
+comparison citation to the classification test above implement its five requests. P16/P17 remain the
 earlier engineering reviews, not substitutes for this named disposition.
 
 Neither receipt is relabelled as a review of this later amendment. P18's
