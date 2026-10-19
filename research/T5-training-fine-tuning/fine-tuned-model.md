@@ -132,7 +132,7 @@ The following rows summarize recorded source conditions at their stated dates. T
 
 ## Evidence
 
-Entries accessed on 2026-10-16 unless a later re-check is recorded in the row. Grades follow the interim policy in `docs/RESEARCH_METHOD.md` until #41 finalises it. Engine facts come from release-tagged sources.
+Entries accessed on 2026-10-16 unless a later re-check is recorded in the row. Grades follow `docs/RESEARCH_METHOD.md` and the [accepted #41 source policy](../T0-configuration/catalog-data-sources.md). Engine facts come from release-tagged sources.
 
 ### Serving (V)
 
@@ -221,7 +221,7 @@ These rules are proposed for review by #40 using the [rule proposal template](..
 
 Use the dated interpretations below when reading the historical register. Missing facts required to decide applicability or an applicable assertion remain `unknown`; established non-applicability can be `skipped`. A known applicable violation does not become a pass, or disappear because another input is missing.
 
-"Source checked" in the Status column means the cited primary text was read on its access date and supports the assertion. It follows the interim "checked" definition in the owner's adopted #41 policy ([#75 review](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927)). Nothing here is independently verified (reproduced or confirmed by a second source), and a result that passes on checked evidence stays unverified. Licence rules state a document's conditions; whether they apply to a particular artifact is a legal question this note does not decide.
+"Source checked" in the Status column means the cited primary text was read on its access date and supports the assertion. It follows the checked/verified distinction in the [accepted #41 source policy](../T0-configuration/catalog-data-sources.md), retaining its [historical #75 owner adoption](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/75#pullrequestreview-5550616927). Nothing here is independently verified (reproduced or confirmed by a second source), and a result that passes on checked evidence stays unverified. Licence rules state a document's conditions; whether they apply to a particular artifact is a legal question this note does not decide.
 
 | Rule | Participating fields | Assertion | Outcome / severity | Evidence | Status |
 | --- | --- | --- | --- | --- | --- |
