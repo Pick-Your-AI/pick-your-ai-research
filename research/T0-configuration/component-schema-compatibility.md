@@ -3228,3 +3228,43 @@ No #40 checkbox, #42 prerequisite or native API decision is changed by this
 draft. The concrete research choice can be assessed independently of a future
 runtime, but source review, actual receiving disposition and protected delivery
 remain real gates before its acceptance or a new whole-issue assessment.
+
+## Display-label sidecar decision — 2026-10-19
+
+Refs [website #18](https://github.com/Pick-Your-AI/pick-your-ai-website/issues/18).
+This is a new project engineering decision under the user's current delegation,
+recorded by the in-session research/website contributor. It is not inferred from
+this research issue's earlier completion or attributed to an absent assignee.
+Independent source review and ordinary PR delivery remain separately recorded;
+existing assignees and their earlier decisions are preserved.
+
+**Decision:** accept the 29 existing English kind names and the independently
+versioned [display sidecar 1.0.0](display-labels/v1.0.0.json). Its complete map
+matches both the preserved [0.1.0 proposal](display-labels/v0.1.0.json) and the
+[website's current label table](https://github.com/Pick-Your-AI/pick-your-ai-website/blob/e72d147b28e4ad3b60cd5ce5332979552d0396fc/src/contracts/labels.ts),
+inspected 2026-10-19. The four pairs of kinds that share research issue titles
+retain distinct names. These names are project presentation text; this decision
+asserts no researched vendor facts, scientific results or new compatibility rule.
+
+| Aspect | Accepted scope |
+| --- | --- |
+| Artifact identity | Exact Git revision, path and byte SHA-256 pinned by each consumer; accepted versions are immutable |
+| Registry binding | `registry_version: 1.0.0` and SHA-256 `cd60070e912a60504f605f2fd9f86c64520160cce7f4184c8ea200209c6b1918` bind the unchanged canonical registry |
+| Sidecar version and locale | `sidecar_version: 1.0.0`, `status: accepted`, English `locale: en`; reject unsupported versions/locales rather than inventing a fallback |
+| Key and value contract | Exactly the registry's 29 canonical kind keys; distinct, trimmed, nonempty display strings; no identifier or activation inference from labels |
+| Future changes | A new immutable sidecar revision and affected-consumer review; a changed canonical kind set first requires the appropriate registry contract |
+| Consumer-only text | Tier titles, descriptions, slugs and grammatical helpers remain local presentation concerns |
+| Release boundary | This sidecar is outside frozen `contracts/v1/` and releases no successor schema, ruleset, API, service endpoint or registry version |
+
+The original `v0.1.0.json` remains unchanged and proposed. Accepting this new
+artifact does not relabel that earlier proposal or claim that a test supplied
+an owner decision. The source URL records the already used names, not a runtime
+download dependency.
+
+Website #18 remains responsible for the actual pinned import, registry/locale/
+version checks, removal of the duplicated kind table and `labels.ts` module,
+normal application validation, independent receiving review and delivery.
+Apple and Android retain separate consumer implementation and receiving
+receipts. Their names are not declared changed or adopted merely by this shared
+decision. The [consumer handoff](display-labels/README.md) gives the complete
+admission and versioning policy.
