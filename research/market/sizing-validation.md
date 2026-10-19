@@ -928,3 +928,22 @@ ResourceEstimate. The [comparison specification](measurements/mr09-comparison-sp
 still governs prospective held-out inputs, native evidence and acceptance; the
 original whole-runtime, named-comparator and remaining empirical criteria stay
 open.
+
+## OLMoE immutable artifact and copy preparation — 2026-10-19
+
+The [dated OLMoE companion plan](measurements/mr09-olmoe-artifact-copy-plan-2026-10-19.md)
+records all three publisher-declared shard lengths/checksums and six loading
+metadata files at the original immutable model revision. It adds a closed
+research-only schema, external shard manifests and an offline consistency
+checker. No weight shard or tokenizer payload was downloaded, and publisher
+LFS checksums are explicitly distinct from local weight verification.
+
+The selected future loader disables asynchronous materialization, converts on
+CPU before a single-device move, and explicitly chooses eager experts. Its
+28 GiB available-storage and 32 GiB available-host screens are derived from
+complete artifact copies, stored parameters and documented engineering
+allowances; they are not observed peaks or fit guarantees. M1–M4 remain
+unexecuted, with M4 cache bytes, GPU workspace/cap, device authorization and
+future executable identity unresolved. This source preparation leaves the
+original plan, measurements, frozen v1 contracts and remaining #61 empirical
+acceptance criteria intact.

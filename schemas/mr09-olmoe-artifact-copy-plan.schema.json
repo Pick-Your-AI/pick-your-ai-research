@@ -1,0 +1,701 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MR09 OLMoE offline artifact and copy plan; separate from frozen AI Builder contracts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "classification",
+    "access_date",
+    "model",
+    "metadata_observation",
+    "weight_shards",
+    "metadata_files",
+    "geometry",
+    "totals",
+    "loader",
+    "screens",
+    "cells",
+    "retained_unknowns",
+    "execution_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "mr09-olmoe-artifact-copy-plan/v1"
+    },
+    "classification": {
+      "const": "selected_offline_design_not_executed"
+    },
+    "access_date": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "minLength": 10,
+      "maxLength": 10
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "revision",
+        "format",
+        "weight_dtype",
+        "weight_quantization",
+        "license_label"
+      ],
+      "properties": {
+        "id": {
+          "const": "allenai/OLMoE-1B-7B-0924-Instruct"
+        },
+        "revision": {
+          "const": "7f1c97f440f06ce36705e4f2b843edb5925f4498"
+        },
+        "format": {
+          "const": "safetensors"
+        },
+        "weight_dtype": {
+          "const": "bfloat16"
+        },
+        "weight_quantization": {
+          "const": "none"
+        },
+        "license_label": {
+          "const": "Apache-2.0"
+        }
+      }
+    },
+    "metadata_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "api_url",
+        "api_observed_at",
+        "api_bytes",
+        "api_sha256",
+        "model_card_url",
+        "model_card_bytes",
+        "model_card_sha256",
+        "weights_downloaded",
+        "tokenizer_payload_downloaded"
+      ],
+      "properties": {
+        "api_url": {
+          "const": "https://huggingface.co/api/models/allenai/OLMoE-1B-7B-0924-Instruct/revision/7f1c97f440f06ce36705e4f2b843edb5925f4498?blobs=true"
+        },
+        "api_observed_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "api_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "api_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "model_card_url": {
+          "const": "https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/blob/7f1c97f440f06ce36705e4f2b843edb5925f4498/README.md"
+        },
+        "model_card_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "model_card_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "minLength": 64,
+          "maxLength": 64
+        },
+        "weights_downloaded": {
+          "const": false
+        },
+        "tokenizer_payload_downloaded": {
+          "const": false
+        }
+      }
+    },
+    "weight_shards": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "file",
+          "bytes",
+          "publisher_sha256",
+          "publisher_pointer_git_blob",
+          "checksum_scope",
+          "external_manifest"
+        ],
+        "properties": {
+          "file": {
+            "enum": [
+              "model-00001-of-00003.safetensors",
+              "model-00002-of-00003.safetensors",
+              "model-00003-of-00003.safetensors"
+            ]
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "publisher_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "minLength": 64,
+            "maxLength": 64
+          },
+          "publisher_pointer_git_blob": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$",
+            "minLength": 40,
+            "maxLength": 40
+          },
+          "checksum_scope": {
+            "const": "publisher_lfs_metadata_not_downloaded"
+          },
+          "external_manifest": {
+            "enum": [
+              "mr09-olmoe-0924-instruct-shard-01.json",
+              "mr09-olmoe-0924-instruct-shard-02.json",
+              "mr09-olmoe-0924-instruct-shard-03.json"
+            ]
+          }
+        }
+      },
+      "uniqueItems": true
+    },
+    "metadata_files": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "file",
+          "bytes",
+          "publisher_git_blob",
+          "observed_sha256",
+          "observation"
+        ],
+        "properties": {
+          "file": {
+            "enum": [
+              "config.json",
+              "generation_config.json",
+              "model.safetensors.index.json",
+              "special_tokens_map.json",
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ]
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "publisher_git_blob": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$",
+            "minLength": 40,
+            "maxLength": 40
+          },
+          "observed_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$",
+                "minLength": 64,
+                "maxLength": 64
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "observation": {
+            "enum": [
+              "small_file_read_and_git_blob_matched",
+              "publisher_git_metadata_only"
+            ]
+          }
+        }
+      },
+      "uniqueItems": true
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layers",
+        "hidden_size",
+        "attention_heads",
+        "kv_heads",
+        "head_dim",
+        "experts",
+        "experts_per_token",
+        "intermediate_size",
+        "vocabulary_size",
+        "max_positions"
+      ],
+      "properties": {
+        "layers": {
+          "const": 16,
+          "type": "integer"
+        },
+        "hidden_size": {
+          "const": 2048,
+          "type": "integer"
+        },
+        "attention_heads": {
+          "const": 16,
+          "type": "integer"
+        },
+        "kv_heads": {
+          "const": 16,
+          "type": "integer"
+        },
+        "head_dim": {
+          "const": 128,
+          "type": "integer"
+        },
+        "experts": {
+          "const": 64,
+          "type": "integer"
+        },
+        "experts_per_token": {
+          "const": 8,
+          "type": "integer"
+        },
+        "intermediate_size": {
+          "const": 1024,
+          "type": "integer"
+        },
+        "vocabulary_size": {
+          "const": 50304,
+          "type": "integer"
+        },
+        "max_positions": {
+          "const": 4096,
+          "type": "integer"
+        }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stored_parameter_elements",
+        "index_tensor_count",
+        "expert_projection_tensor_count",
+        "tensor_payload_bytes",
+        "weight_file_bytes",
+        "file_header_overhead_bytes",
+        "metadata_file_bytes",
+        "load_artifact_bytes",
+        "largest_shard_bytes"
+      ],
+      "properties": {
+        "stored_parameter_elements": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "index_tensor_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "expert_projection_tensor_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "tensor_payload_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "weight_file_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "file_header_overhead_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "metadata_file_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "load_artifact_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "largest_shard_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        }
+      }
+    },
+    "loader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python",
+        "torch",
+        "transformers",
+        "safetensors",
+        "transformers_source_commit",
+        "placement",
+        "post_load_target",
+        "inference_offload",
+        "visible_device_count",
+        "download_strategy",
+        "runtime_source_scope",
+        "source_files",
+        "environment",
+        "from_pretrained"
+      ],
+      "properties": {
+        "python": {
+          "const": "3.12.11"
+        },
+        "torch": {
+          "const": "2.10.0+cu130"
+        },
+        "transformers": {
+          "const": "5.0.0"
+        },
+        "safetensors": {
+          "const": "0.7.0"
+        },
+        "transformers_source_commit": {
+          "const": "08810b1e278938278c50153ee1edfd7a20a759da"
+        },
+        "placement": {
+          "const": "meta_initialization_cpu_conversion_then_cuda0"
+        },
+        "post_load_target": {
+          "const": "cuda:0"
+        },
+        "inference_offload": {
+          "const": false
+        },
+        "visible_device_count": {
+          "const": 1,
+          "type": "integer"
+        },
+        "download_strategy": {
+          "const": "fixed_allowlist_serial_same_volume_partial_then_rename_no_hub_cache"
+        },
+        "runtime_source_scope": {
+          "const": "Pinned upstream source review for a future loader; not verification of the historical installed wheel."
+        },
+        "source_files": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "bytes",
+              "sha256",
+              "git_blob"
+            ],
+            "properties": {
+              "path": {
+                "enum": [
+                  "src/transformers/modeling_utils.py",
+                  "src/transformers/core_model_loading.py",
+                  "src/transformers/conversion_mapping.py",
+                  "src/transformers/models/olmoe/modeling_olmoe.py",
+                  "src/transformers/models/olmoe/configuration_olmoe.py"
+                ]
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 18446744073709551615
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$",
+                "minLength": 64,
+                "maxLength": 64
+              },
+              "git_blob": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{40}$",
+                "minLength": 40,
+                "maxLength": 40
+              }
+            }
+          },
+          "uniqueItems": true
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "HF_DEACTIVATE_ASYNC_LOAD",
+            "HF_HUB_OFFLINE"
+          ],
+          "properties": {
+            "HF_DEACTIVATE_ASYNC_LOAD": {
+              "const": "1"
+            },
+            "HF_HUB_OFFLINE": {
+              "const": "1"
+            }
+          }
+        },
+        "from_pretrained": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "local_files_only",
+            "use_safetensors",
+            "trust_remote_code",
+            "dtype",
+            "attn_implementation",
+            "experts_implementation",
+            "device_map"
+          ],
+          "properties": {
+            "local_files_only": {
+              "const": true
+            },
+            "use_safetensors": {
+              "const": true
+            },
+            "trust_remote_code": {
+              "const": false
+            },
+            "dtype": {
+              "const": "bfloat16"
+            },
+            "attn_implementation": {
+              "const": "sdpa"
+            },
+            "experts_implementation": {
+              "const": "eager"
+            },
+            "device_map": {
+              "const": null
+            }
+          }
+        }
+      }
+    },
+    "screens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "complete_artifact_copies",
+        "storage_reserve_bytes",
+        "storage_budget_bytes",
+        "minimum_available_storage_bytes",
+        "host_file_mapping_allowance_bytes",
+        "host_parameter_allowance_bytes",
+        "host_conversion_allowance_bytes",
+        "host_process_reserve_bytes",
+        "host_budget_bytes",
+        "minimum_available_host_bytes",
+        "gpu_process_cap_bytes",
+        "gpu_workspace_allowance_bytes",
+        "authorized_device_receipt",
+        "future_runner_sha256"
+      ],
+      "properties": {
+        "classification": {
+          "const": "engineering_allowances_not_measured_peaks"
+        },
+        "complete_artifact_copies": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "storage_reserve_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "storage_budget_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "minimum_available_storage_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "host_file_mapping_allowance_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "host_parameter_allowance_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "host_conversion_allowance_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "host_process_reserve_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "host_budget_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "minimum_available_host_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 18446744073709551615
+        },
+        "gpu_process_cap_bytes": {
+          "const": null
+        },
+        "gpu_workspace_allowance_bytes": {
+          "const": null
+        },
+        "authorized_device_receipt": {
+          "const": null
+        },
+        "future_runner_sha256": {
+          "const": null
+        }
+      }
+    },
+    "cells": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "prompt_tokens",
+          "decode_forwards",
+          "active_sequences",
+          "kv_cache",
+          "terminal_cache_positions_per_sequence",
+          "derived_bf16_kv_payload_bytes",
+          "derived_weights_plus_kv_floor_bytes",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "M1",
+              "M2",
+              "M3",
+              "M4"
+            ]
+          },
+          "prompt_tokens": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "decode_forwards": {
+            "const": 32,
+            "type": "integer"
+          },
+          "active_sequences": {
+            "enum": [
+              1,
+              2
+            ]
+          },
+          "kv_cache": {
+            "enum": [
+              "bf16",
+              "int4_if_supported"
+            ]
+          },
+          "terminal_cache_positions_per_sequence": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 18446744073709551615
+          },
+          "derived_bf16_kv_payload_bytes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "derived_weights_plus_kv_floor_bytes": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "const": "unexecuted"
+          }
+        }
+      },
+      "uniqueItems": true
+    },
+    "retained_unknowns": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "enum": [
+          "actual_host_peak",
+          "actual_gpu_workspace_and_peak",
+          "authorized_device_and_process_cap",
+          "future_runner_and_installed_runtime_identity",
+          "weight_bytes_and_local_checksums",
+          "int4_cache_backend_support",
+          "multi_gpu_topology",
+          "matched_estimator_error_acceptance"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "execution_status": {
+      "const": "unexecuted"
+    }
+  }
+}
