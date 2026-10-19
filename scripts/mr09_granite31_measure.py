@@ -335,20 +335,30 @@ def main() -> int:
     args = parser.parse_args()
     if args.prompt_tokens != 256 or args.decode_tokens != 32 or args.repetition not in (1, 2, 3):
         parser.error("supplemental protocol permits GM1 prompt256/active1/BF16,decode32,repetitions1..3")
-    if args.output.exists():
-        parser.error("output exists; preserve observations and choose a fresh directory")
+    if args.output.exists() or args.output.is_symlink():
+        parser.error("output exists; preserve observations and choose a fresh path")
     preflight_path = args.model_dir.parent / f"granite31-preflight-{args.repetition}.json"
     subprocess.run([sys.executable, str(Path(__file__).with_name("mr09_preflight.py")),
                     "--profile", "granite31", "--temporary-dir", str(args.model_dir.parent),
                     "--output", str(preflight_path)], check=True)
     preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
-    if not all(preflight.get("guards", {}).values()) or not preflight.get("guards"):
+    guards = preflight.get("guards") if type(preflight) is dict else None
+    required_guards = {"nvidia_smi_free_mib", "available_host_ram_bytes",
+                       "temporary_volume_free_bytes"}
+    if (type(guards) is not dict or set(guards) != required_guards
+            or any(value is not True for value in guards.values())):
         raise RuntimeError("unchanged spare-capacity guards failed; no download/run")
     result = prepare(args.model_dir) if args.prepare else measurement(args)
     result["fresh_preflight"] = preflight
     if not args.prepare:
         result["dense_instrument_source_sha256"] = sha256_file(Path(__file__).with_name("mr09_measure.py"))
-    write_json(args.output, sanitized(result, args))
+    encoded = json.dumps(sanitized(result, args), indent=2, allow_nan=False) + "\n"
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        with args.output.open("x", encoding="utf-8") as output:
+            output.write(encoded)
+    except FileExistsError:
+        parser.error("output exists; preserve observations and choose a fresh path")
     print(json.dumps({"output": str(args.output), "status": result.get("status", "prepared"),
                       "failure": result.get("failure")}, indent=2))
     return 0 if result.get("status", "prepared") in ("success", "prepared", "unsupported", "unexecuted") else 1

@@ -1,0 +1,127 @@
+name: MR09 estimator CPU validation
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/mr09-estimator-validation.yml'
+      - 'research/market/measurements/gguf-parser-mr09/**'
+      - 'scripts/mr09_prepare_estimator.py'
+      - 'tests/native/mr09_output_semantic_test.go'
+      - 'tests/native/mr09_original_semantic_test.go'
+      - 'tests/native/mr09_cli_admission.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mr09-estimator-validation.yml'
+      - 'research/market/measurements/gguf-parser-mr09/**'
+      - 'scripts/mr09_prepare_estimator.py'
+      - 'tests/native/mr09_output_semantic_test.go'
+      - 'tests/native/mr09_original_semantic_test.go'
+      - 'tests/native/mr09_cli_admission.py'
+permissions:
+  contents: read
+jobs:
+  cpu-semantics:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Check out the immutable parser source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: gpustack/gguf-parser-go
+          ref: 637cd9a7a03993ab30ace3c53dd8af5c37f46a94
+          path: .mr09-upstream
+          persist-credentials: false
+      - name: Verify and unpack the pinned Go compiler
+        shell: bash
+        run: |
+          compiler_archive="$RUNNER_TEMP/mr09-go1.22.9.linux-amd64.tar.gz"
+          curl --fail --location --connect-timeout 15 --max-time 180 --max-filesize 70000000 \
+            --output "$compiler_archive" https://go.dev/dl/go1.22.9.linux-amd64.tar.gz
+          # Official Go release checksum, checked at https://go.dev/dl/ on 2026-10-19.
+          printf '%s  %s\n' 84a8f05b7b969d8acfcaf194ce9298ad5d3ddbfc7034930c280006b5c85a574c "$compiler_archive" | sha256sum --check --strict
+          mkdir "$RUNNER_TEMP/mr09-toolchain"
+          tar -xzf "$compiler_archive" -C "$RUNNER_TEMP/mr09-toolchain"
+      - name: Run the bounded CPU preparation and CLI checks
+        run: |
+          python scripts/mr09_prepare_estimator.py \
+            --upstream "$GITHUB_WORKSPACE/.mr09-upstream" \
+            --go "$RUNNER_TEMP/mr09-toolchain/go/bin/go" \
+            --output-dir "$RUNNER_TEMP/mr09-cpu" \
+            --module-cache "$RUNNER_TEMP/mr09-module-cache" \
+            --build-cache "$RUNNER_TEMP/mr09-build-cache" \
+            --allow-module-download
+      - name: Verify cached modules and the original allocation control
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import re
+          import shutil
+          import subprocess
+
+          output = Path(os.environ['RUNNER_TEMP']) / 'mr09-cpu'
+          receipt = json.loads((output / 'candidate-manifest.json').read_text())
+          env = os.environ | receipt['effective_build_environment']
+          env.update(GOPROXY='off', GOSUMDB='off')
+          compiler = str(Path(env['GOROOT']) / 'bin/go')
+          with (output / 'cached-module-verify.log').open('wb') as log:
+              subprocess.run([compiler, 'mod', 'verify'], cwd=output / 'source',
+                             env=env, stdout=log, stderr=subprocess.STDOUT,
+                             check=True, timeout=60)
+
+          # Change only file.go in a separate copy of the prepared derivative.
+          # This is a causal counterfactual, not a historical .1 build or receipt.
+          original = (Path(os.environ['GITHUB_WORKSPACE']) / '.mr09-upstream/file.go').read_bytes()
+          blob = hashlib.sha1(b'blob ' + str(len(original)).encode() + b'\0' + original).hexdigest()
+          if blob != '45f0bd56cf16e53f3f2f3ecca65eef029f673af5':
+              raise RuntimeError('original parser identity mismatch')
+          control = output / 'original-allocation-control'
+          shutil.copytree(output / 'source', control)
+          (control / 'file.go').write_bytes(original)
+          command = [compiler, 'test', '-p', '1', '-count=1', '-run',
+                     '^TestMR09SplitTensorCount', '-v', '.']
+          with (output / 'original-allocation-control.log').open('wb') as log:
+              result = subprocess.run(command, cwd=control, env=env, stdout=log,
+                                      stderr=subprocess.STDOUT, timeout=120)
+          actual = (output / 'original-allocation-control.log').read_text()
+          expected = [
+              'TestMR09SplitTensorCountDoesNotReserveHint',
+              'TestMR09SplitTensorCountCannotPanicOnNegativeConversion',
+          ]
+          if (result.returncode != 1
+                  or re.findall(r'^--- FAIL: (\S+)', actual, re.M) != expected
+                  or re.findall(r'^--- PASS: (\S+)', actual, re.M)
+                  != ['TestMR09SplitTensorCountPreservesShardAppend']
+                  or 'untrusted split hint reserved 4096 slots' not in actual
+                  or 'split metadata reached an invalid allocation:' not in actual):
+              raise RuntimeError('bounded allocation control did not reproduce the two selected failures')
+          print('Verified cached modules and two bounded original-allocation failures; honest shards passed.')
+          PY
+      - name: Preserve original CPU check output in the job log
+        if: always()
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import sys
+
+          output = Path(os.environ['RUNNER_TEMP']) / 'mr09-cpu'
+          for name in ('module-verify.log', 'original-red.log', 'cpu-tests.log',
+                       'build.log', 'binary-build-info.log', 'cli-admission.json',
+                       'candidate-manifest.json', 'cached-module-verify.log',
+                       'original-allocation-control.log'):
+              path = output / name
+              if path.is_file():
+                  print(f'::group::{name}', flush=True)
+                  sys.stdout.buffer.write(path.read_bytes())
+                  sys.stdout.buffer.flush()
+                  print('\n::endgroup::', flush=True)
+          PY

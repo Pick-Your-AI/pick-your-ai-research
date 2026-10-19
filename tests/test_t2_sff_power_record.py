@@ -12,6 +12,7 @@ from copy import deepcopy
 from decimal import Decimal
 import importlib.util
 import json
+import os
 from pathlib import Path
 import re
 import tempfile
@@ -1031,6 +1032,153 @@ class ArtifactGate(SyntheticBase):
             with self.assertRaisesRegex(CHECKER.ArtifactError, "missing: synthetic-capture-IDLE.csv"):
                 CHECKER.run(tmp, SYNTHETIC_RECORD, pins=pins)
             parser.assert_not_called()
+
+    @unittest.skipUnless(hasattr(os, "mkfifo"), "requires POSIX FIFOs")
+    def test_fifo_replacement_and_record_fifo_fail_without_blocking_cli(self):
+        import subprocess
+        import sys
+
+        # Exercise the real CLI in a bounded child. The pathname hook models
+        # the old positive stat; the open hook supplies the same replacement
+        # when admission correctly starts with an opened descriptor instead.
+        program = r'''
+import importlib.util, json, os, sys
+from pathlib import Path
+spec = importlib.util.spec_from_file_location("power_fifo_child", sys.argv[1])
+checker = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(checker)
+directory, record, target = Path(sys.argv[2]), Path(sys.argv[3]), Path(sys.argv[4])
+checker.PINS = json.loads(sys.argv[5])
+real_is_file, real_open = Path.is_file, os.open
+replaced = False
+def replace():
+    global replaced
+    if not replaced:
+        target.unlink()
+        os.mkfifo(target)
+        replaced = True
+def is_file_then_replace(path):
+    result = real_is_file(path)
+    if path == target and result:
+        replace()
+    return result
+def open_after_replacement(path, *args, **kwargs):
+    if Path(path) == target:
+        replace()
+    return real_open(path, *args, **kwargs)
+def forbidden_parse(*args):
+    raise AssertionError("parsed before all input admission completed")
+checker.parse_csv = forbidden_parse
+if target == record:
+    replace()  # A supplied record FIFO must also be rejected before reading.
+Path.is_file, os.open = is_file_then_replace, open_after_replacement
+try:
+    raise SystemExit(checker.main(["--artifact-dir", str(directory), "--record", str(record)]))
+finally:
+    Path.is_file, os.open = real_is_file, real_open
+'''
+        for target_name in (*SYNTHETIC_FILES, "record.json"):
+            with self.subTest(target=target_name), tempfile.TemporaryDirectory() as tmp:
+                self.stage(tmp)
+                record = Path(tmp) / "record.json"
+                record.write_bytes(SYNTHETIC_RECORD.read_bytes())
+                try:
+                    result = subprocess.run(
+                        [sys.executable, "-c", program, str(SPEC.origin), tmp, str(record),
+                         str(Path(tmp) / target_name), json.dumps(synthetic_pins(self.captures))],
+                        capture_output=True, text=True, timeout=3)
+                except subprocess.TimeoutExpired:
+                    self.fail("input admission blocked on a FIFO; the bounded child was killed and reaped")
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertIn("not a regular file: " + target_name, result.stderr)
+                self.assertEqual(result.stdout, "")
+
+    def test_capture_and_record_directories_reject_before_parsing(self):
+        for name in (SYNTHETIC_FILES[0], "record.json"):
+            with self.subTest(name=name), tempfile.TemporaryDirectory() as tmp, self.guard_parse() as parser:
+                self.stage(tmp)
+                record = Path(tmp) / "record.json"
+                record.write_bytes(SYNTHETIC_RECORD.read_bytes())
+                target = Path(tmp) / name
+                target.unlink()
+                target.mkdir()
+                with self.assertRaises(CHECKER.ArtifactError):
+                    CHECKER.run(tmp, record, pins=synthetic_pins(self.captures))
+                parser.assert_not_called()
+
+    def test_declared_size_rejects_before_read_and_closes_opened_descriptor(self):
+        pins = synthetic_pins(self.captures)
+        for difference in (-1, 1):
+            with self.subTest(difference=difference), tempfile.TemporaryDirectory() as tmp:
+                self.stage(tmp)
+                changed_pins = deepcopy(pins)
+                changed_pins[SYNTHETIC_FILES[0]]["bytes"] += difference
+                real_open = os.open
+                descriptors = []
+                def remember_open(*args, **kwargs):
+                    descriptor = real_open(*args, **kwargs)
+                    descriptors.append(descriptor)
+                    return descriptor
+                with mock.patch("os.open", side_effect=remember_open), \
+                        mock.patch("os.fdopen", side_effect=AssertionError("read before size admission")), \
+                        self.guard_parse() as parser:
+                    with self.assertRaisesRegex(CHECKER.ArtifactError, "size mismatch"):
+                        CHECKER.run(tmp, SYNTHETIC_RECORD, pins=changed_pins)
+                self.assertEqual(len(descriptors), 1)
+                with self.assertRaises(OSError):
+                    os.fstat(descriptors[0])
+                parser.assert_not_called()
+                self.assertEqual(CHECKER.verify_artifacts(tmp, pins), self.captures)
+
+    def test_growth_after_descriptor_size_check_is_bounded_and_rejected(self):
+        payload = b"clearly synthetic binary bytes\r\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "synthetic.csv"
+            path.write_bytes(payload)
+            real_fstat, real_fdopen = os.fstat, os.fdopen
+            read_sizes = []
+            def grow_after_stat(descriptor):
+                metadata = real_fstat(descriptor)
+                with path.open("ab") as writer:
+                    writer.write(b"x" * 4096)
+                return metadata
+            class ObservedReader:
+                def __init__(self, stream):
+                    self.stream = stream
+                def __enter__(self):
+                    return self
+                def __exit__(self, *args):
+                    self.stream.close()
+                def read(self, size):
+                    data = self.stream.read(size)
+                    read_sizes.append((size, len(data)))
+                    return data
+            def observe_reader(*args, **kwargs):
+                return ObservedReader(real_fdopen(*args, **kwargs))
+            with mock.patch("os.fstat", side_effect=grow_after_stat), \
+                    mock.patch("os.fdopen", side_effect=observe_reader):
+                with self.assertRaisesRegex(CHECKER.ArtifactError, "size mismatch"):
+                    CHECKER.verify_artifacts(tmp, synthetic_pins({path.name: payload}))
+            self.assertEqual(read_sizes, [(len(payload) + 1, len(payload) + 1)])
+
+    def test_binary_bytes_and_regular_symlink_alias_are_preserved(self):
+        payload = b"synthetic binary control\r\n\x00\xff\r\n"
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "synthetic.csv"
+            path.write_bytes(payload)
+            self.assertEqual(CHECKER.verify_artifacts(tmp, synthetic_pins({path.name: payload})),
+                             {path.name: payload})
+            alias = Path(tmp) / "alias.csv"
+            try:
+                alias.symlink_to(path.name)
+            except OSError as error:
+                import errno
+                if (error.errno in (errno.EPERM, errno.EACCES, errno.ENOSYS)
+                        or os.name == "nt" and getattr(error, "winerror", None) == 1314):
+                    self.skipTest("symlink creation is unavailable")
+                raise
+            self.assertEqual(CHECKER.verify_artifacts(tmp, synthetic_pins({alias.name: payload})),
+                             {alias.name: payload})
 
     def test_hash_mismatch_same_size_rejected_before_parsing(self):
         pins = synthetic_pins(self.captures)

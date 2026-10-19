@@ -1,5 +1,6 @@
 """Synthetic launcher failures; no native child, driver query or model is run."""
 import contextlib
+import copy
 import hashlib
 import io
 import json
@@ -16,11 +17,13 @@ sys.path.insert(0, str(ROOT / "scripts"))
 try:
     import mr09_native_qualify as launcher
     import mr09_native_capture as capture
+    import mr09_preflight as preflight_cli
 finally:
     sys.path.pop(0)
 
 DRIVER_CSV = ('name,driver_version,memory.total [MiB],memory.free [MiB]\n'
               'Synthetic GPU,synthetic-driver,16303 MiB,10134 MiB\n')
+DEFAULT_PREFLIGHT = object()
 
 
 class NativeLauncherTests(unittest.TestCase):
@@ -39,20 +42,31 @@ class NativeLauncherTests(unittest.TestCase):
             "executables": {"native-init.exe": "a" * 64},
             "harness_git_ref": "b" * 40,
         }))
-        (self.directory / "runtime-artifacts.json").write_text(json.dumps({
-            "files": [{"file": "synthetic.dll", "sha256": "c" * 64}],
-        }))
+        self.runtime_ledger_bytes = (ROOT / launcher.DIRECTORY / "runtime-artifacts.json").read_bytes()
+        self.runtime_artifacts = json.loads(self.runtime_ledger_bytes)["files"]
+        (self.directory / "runtime-artifacts.json").write_bytes(self.runtime_ledger_bytes)
         self.child_stdout = f"synthetic child stdout {self.model}\n"
         self.child_stderr = f"synthetic child stderr {self.runtime}\n"
 
-    def exercise(self, *, code=0, child_timeout=False, driver=DRIVER_CSV):
+    def exercise(self, *, code=0, child_timeout=False, driver=DRIVER_CSV,
+                 preflight_screen=DEFAULT_PREFLIGHT, reject_preflight=False,
+                 reject_runtime_ledger=False, mutate_ledger_after_checks=False):
         original_checksum, original_stat = launcher.checksum, Path.stat
+        runtime_pins = {self.runtime / item["file"]: item["sha256"] for item in self.runtime_artifacts}
+        checked_runtime = []
+        screen = preflight_screen if preflight_screen is not DEFAULT_PREFLIGHT else {"guards": {
+            "nvidia_smi_free_mib": True,
+            "available_host_ram_bytes": True,
+            "temporary_volume_free_bytes": True,
+        }}
 
         def checksum(path):
+            if path.parent == self.runtime:
+                checked_runtime.append(path.name)
             return {
                 self.base / "native-init.exe": "a" * 64,
                 self.model: launcher.MODEL_SHA,
-                self.runtime / "synthetic.dll": "c" * 64,
+                **runtime_pins,
             }.get(path) or original_checksum(path)
 
         def stat(path, *args, **kwargs):
@@ -61,11 +75,9 @@ class NativeLauncherTests(unittest.TestCase):
 
         def run(argv, **kwargs):
             if argv[1] == "scripts/mr09_preflight.py":
-                self.preflight.write_text(json.dumps({"guards": {
-                    "nvidia_smi_free_mib": True,
-                    "available_host_ram_bytes": True,
-                    "temporary_volume_free_bytes": True,
-                }}))
+                self.preflight.write_text(json.dumps(screen))
+                if mutate_ledger_after_checks:
+                    (self.directory / "runtime-artifacts.json").write_text('{"files": []}')
                 return subprocess.CompletedProcess(argv, 0, "", "")
             self.assertEqual(argv, [str(self.base / "native-init.exe"), str(self.runtime), "2136809472", str(self.model)])
             self.assertEqual(kwargs["timeout"], 90)
@@ -95,8 +107,32 @@ class NativeLauncherTests(unittest.TestCase):
               mock.patch.object(launcher.subprocess, "run", side_effect=run) as native,
               mock.patch.object(launcher.subprocess, "check_output", side_effect=query) as telemetry,
               mock.patch.object(sys, "argv", ["synthetic-launcher", "--temporary-dir", str(self.base), "--repetition", "1"]),
-              contextlib.redirect_stdout(io.StringIO())):
-            returned = launcher.main()
+              contextlib.redirect_stdout(io.StringIO()),
+              contextlib.redirect_stderr(io.StringIO()) as diagnostics):
+            if reject_runtime_ledger:
+                with self.assertRaises(SystemExit) as rejected:
+                    launcher.main()
+                self.assertEqual(rejected.exception.code, 2)
+                self.assertIn("pinned runtime artifact ledger mismatch; no launch", diagnostics.getvalue())
+            elif reject_preflight:
+                with self.assertRaisesRegex(RuntimeError, "fresh spare-capacity guard failed; no launch"):
+                    launcher.main()
+            else:
+                returned = launcher.main()
+        if reject_runtime_ledger:
+            native.assert_not_called()
+            telemetry.assert_not_called()
+            self.assertEqual(checked_runtime, [], "reject the ledger before trusting any listed runtime identity")
+            self.assertFalse(self.preflight.exists())
+            self.assertFalse(self.output.exists())
+            return
+        self.assertEqual(checked_runtime, [item["file"] for item in self.runtime_artifacts])
+        if reject_preflight:
+            self.assertEqual(native.call_count, 1, "only the capacity screen may run")
+            telemetry.assert_not_called()
+            self.assertFalse(self.output.exists(), "no child observation may be manufactured")
+            self.assertEqual(json.loads(self.preflight.read_text()), screen)
+            return
         self.assertEqual(native.call_count, 2, "one preflight and one child, with no retry")
         self.assertEqual(telemetry.call_count, 1)
         result = json.loads(self.output.read_text())
@@ -117,6 +153,53 @@ class NativeLauncherTests(unittest.TestCase):
         self.assertEqual(record["driver_readback"]["status"], "failed")
         with self.assertRaisesRegex(ValueError, "successful initialization-only"):
             capture.validate_capture(record)
+
+    def test_runtime_ledger_rejects_every_unpinned_shape_inventory_and_identity_before_launch(self):
+        ledger = json.loads(self.runtime_ledger_bytes)
+        invalid = [None, [], True, 1, "synthetic", {},
+                   *({"files": value} for value in ([], {}, "", None))]
+        for index in range(len(ledger["files"])):
+            changed = copy.deepcopy(ledger)
+            changed["files"].pop(index)
+            invalid.append(changed)
+        for change in ("duplicate", "extra", "bytes", "hash", "archive", "metadata"):
+            changed = copy.deepcopy(ledger)
+            if change == "duplicate":
+                changed["files"].append(copy.deepcopy(changed["files"][0]))
+            elif change == "extra":
+                changed["files"].append({"file": "synthetic-unexpected.dll", "bytes": 1, "sha256": "f" * 64})
+            elif change == "bytes":
+                changed["files"][0]["bytes"] += 1
+            elif change == "hash":
+                changed["files"][0]["sha256"] = "f" * 64
+            elif change == "archive":
+                changed["archives"][0]["source_url"] = "https://example.invalid/synthetic-fixture"
+            else:
+                changed["synthetic-unreviewed-metadata"] = True
+            invalid.append(changed)
+        raw_cases = [json.dumps(value).encode() for value in invalid]
+        raw_cases.extend((json.dumps(ledger).encode(), b'{"files": [], "files": []}', b'not JSON'))
+        manifest = self.directory / "runtime-artifacts.json"
+        for index, raw in enumerate(raw_cases):
+            with self.subTest(case=index):
+                self.reset_observation()
+                manifest.write_bytes(raw)
+                self.exercise(reject_runtime_ledger=True)
+                self.assertEqual(manifest.read_bytes(), raw)
+
+    def test_exact_retained_runtime_ledger_checks_the_complete_inventory_before_launch(self):
+        self.assertEqual(hashlib.sha256(self.runtime_ledger_bytes).hexdigest(),
+                         "d788e18ba59ab6f210c1ceb61599f39269440a774664c8f515ffca9a7041cfcd")
+        returned, record = self.exercise()
+        self.assertEqual(returned, 0)
+        self.assertEqual(record["runtime_artifact_ledger_sha256"], hashlib.sha256(self.runtime_ledger_bytes).hexdigest())
+        self.assertEqual((self.directory / "runtime-artifacts.json").read_bytes(), self.runtime_ledger_bytes)
+
+    def test_admitted_runtime_ledger_identity_survives_later_ledger_file_change(self):
+        returned, record = self.exercise(mutate_ledger_after_checks=True)
+        self.assertEqual(returned, 0)
+        self.assertEqual(record["runtime_artifact_ledger_sha256"], hashlib.sha256(self.runtime_ledger_bytes).hexdigest())
+        self.assertNotEqual((self.directory / "runtime-artifacts.json").read_bytes(), self.runtime_ledger_bytes)
 
     def test_completed_and_failed_children_survive_driver_command_failure(self):
         for code in (0, 7):
@@ -187,6 +270,29 @@ class NativeLauncherTests(unittest.TestCase):
         run.assert_not_called()
         self.assertEqual(self.output.read_bytes(), original)
 
+    def test_preflight_requires_every_named_guard_and_literal_true_before_launch(self):
+        good = {
+            "nvidia_smi_free_mib": True,
+            "available_host_ram_bytes": True,
+            "temporary_volume_free_bytes": True,
+        }
+        invalid = [{}, {"guards": {}}, {"guards": {"unrelated": True}},
+                   {"guards": {**good, "unexpected": True}}]
+        invalid.extend((None, [], True, "true", 1))
+        invalid.extend({"guards": value} for value in (None, [], True, "true"))
+        for key in good:
+            invalid.append({"guards": {name: value for name, value in good.items() if name != key}})
+            for value in (1, 1.0, "false", [True], False, None):
+                invalid.append({"guards": {**good, key: value}})
+        for screen in invalid:
+            with self.subTest(screen=screen):
+                self.reset_observation()
+                self.exercise(preflight_screen=screen, reject_preflight=True)
+        self.reset_observation()
+        returned, record = self.exercise(preflight_screen={"guards": good})
+        self.assertEqual(returned, 0)
+        self.assertEqual(record["native_status"], "completed")
+
     def test_executed_launcher_remains_bound_to_all_historical_captures(self):
         directory = ROOT / capture.DIRECTORY
         historical = directory / "mr09_native_qualify.executed.py"
@@ -195,6 +301,222 @@ class NativeLauncherTests(unittest.TestCase):
         for repetition in (1, 2, 3):
             self.assertEqual(json.loads((directory / f"init-r{repetition}.json").read_text())["launcher_sha256"], digest)
         self.assertNotEqual(hashlib.sha256((ROOT / "scripts/mr09_native_qualify.py").read_bytes()).hexdigest(), digest)
+
+
+class NativeOutputPublicationTests(unittest.TestCase):
+    def exercise(self, *, arrival=None, kind="file", code=0, child_timeout=False,
+                 link_failure=False):
+        with tempfile.TemporaryDirectory() as temporary:
+            base = Path(temporary)
+            directory, runtime = base / "records", base / "runtime"
+            directory.mkdir()
+            runtime.mkdir()
+            output, preflight = directory / "init-r1.json", directory / "init-r1-preflight.json"
+            target = directory / "synthetic-link-target.json"
+            model = base / launcher.MODEL
+            (directory / "build-loader-v2.json").write_text(json.dumps({
+                "executables": {"native-init.exe": "a" * 64}, "harness_git_ref": "b" * 40,
+            }))
+            ledger = (ROOT / launcher.DIRECTORY / "runtime-artifacts.json").read_bytes()
+            (directory / "runtime-artifacts.json").write_bytes(ledger)
+            runtime_files = json.loads(ledger)["files"]
+            hashes = {base / "native-init.exe": "a" * 64, model: launcher.MODEL_SHA,
+                      **{runtime / item["file"]: item["sha256"] for item in runtime_files}}
+            original = b'{"synthetic":"retained original observation"}\n'
+            occupied_path = preflight if arrival in ("early_preflight", "before_preflight", "during_preflight") else output
+
+            def occupy():
+                if kind == "file":
+                    occupied_path.write_bytes(original)
+                elif kind == "directory":
+                    occupied_path.mkdir()
+                    (occupied_path / "retained.json").write_bytes(original)
+                else:
+                    if kind == "live_symlink":
+                        target.write_bytes(original)
+                    occupied_path.symlink_to(target)
+
+            if arrival in ("early_output", "early_preflight"):
+                occupy()
+            calls = {"preflight": 0, "capacity": 0, "child": 0, "driver": 0}
+            checked_runtime = []
+            original_checksum, original_stat = launcher.checksum, Path.stat
+            original_link, original_fsync, original_replace = launcher.os.link, launcher.os.fsync, launcher.os.replace
+
+            def checksum(path):
+                if path.parent == runtime:
+                    checked_runtime.append(path.name)
+                return hashes[path] if path in hashes else original_checksum(path)
+
+            def stat(path, *args, **kwargs):
+                return SimpleNamespace(st_size=270885952) if path == model else original_stat(path, *args, **kwargs)
+
+            def memory(pointer):
+                pointer._obj.ullAvailPhys = 64 * 2**30
+                return 1
+
+            def run(argv, **kwargs):
+                if argv[0] == "nvidia-smi":
+                    calls["capacity"] += 1
+                    self.assertEqual(kwargs["timeout"], 30)
+                    if arrival == "during_preflight":
+                        occupy()
+                    return subprocess.CompletedProcess(argv, 0, "8192\n", "")
+                if argv[1] == "scripts/mr09_preflight.py":
+                    calls["preflight"] += 1
+                    if arrival == "before_preflight":
+                        occupy()
+                    screen_stdout, screen_stderr = io.StringIO(), io.StringIO()
+                    with (mock.patch.object(sys, "argv", [argv[1], *argv[2:]]),
+                          contextlib.redirect_stdout(screen_stdout), contextlib.redirect_stderr(screen_stderr)):
+                        try:
+                            preflight_cli.main()
+                        except SystemExit as error:
+                            raise subprocess.CalledProcessError(error.code, argv, screen_stdout.getvalue(), screen_stderr.getvalue()) from error
+                    return subprocess.CompletedProcess(argv, 0, screen_stdout.getvalue(), screen_stderr.getvalue())
+                calls["child"] += 1
+                self.assertEqual(argv, [str(base / "native-init.exe"), str(runtime), "2136809472", str(model)])
+                self.assertEqual(kwargs["timeout"], 90)
+                if arrival == "during_child":
+                    occupy()
+                if child_timeout:
+                    raise subprocess.TimeoutExpired(argv, 90, output=b"synthetic child stdout", stderr=b"synthetic child stderr")
+                return subprocess.CompletedProcess(argv, code, "synthetic child stdout", "synthetic child stderr")
+
+            def link(source, destination):
+                retained = json.loads(Path(source).read_text())
+                self.assertEqual(destination, output)
+                self.assertEqual(synced.call_count, 1, "fully flush the first child capture before publishing")
+                self.assertEqual(retained["driver_readback"]["status"], "pending")
+                self.assertEqual(retained["exit_code"], -1 if child_timeout else code)
+                self.assertEqual(calls["driver"], 0)
+                if link_failure:
+                    raise OSError("synthetic filesystem does not support hard links")
+                return original_link(source, destination)
+
+            def driver(argv, **kwargs):
+                calls["driver"] += 1
+                self.assertEqual(kwargs["timeout"], 10)
+                self.assertEqual(json.loads(output.read_text())["driver_readback"]["status"], "pending")
+                return DRIVER_CSV
+
+            stdout, stderr = io.StringIO(), io.StringIO()
+            returned, failure = None, None
+            with (mock.patch.object(launcher, "DIRECTORY", directory),
+                  mock.patch.object(launcher, "checksum", side_effect=checksum),
+                  mock.patch.object(Path, "stat", new=stat),
+                  mock.patch.object(launcher.subprocess, "run", side_effect=run),
+                  mock.patch.object(launcher.subprocess, "check_output", side_effect=driver),
+                  mock.patch.object(preflight_cli.ctypes, "windll", SimpleNamespace(kernel32=SimpleNamespace(GlobalMemoryStatusEx=memory)), create=True),
+                  mock.patch.object(preflight_cli.shutil, "disk_usage", return_value=SimpleNamespace(free=128 * 2**30)),
+                  mock.patch.object(launcher.os, "link", side_effect=link) as linked,
+                  mock.patch.object(launcher.os, "fsync", wraps=original_fsync) as synced,
+                  mock.patch.object(launcher.os, "replace", wraps=original_replace) as replaced,
+                  mock.patch.object(sys, "argv", ["synthetic-launcher", "--temporary-dir", str(base), "--repetition", "1"]),
+                  contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr)):
+                try:
+                    returned = launcher.main()
+                except (SystemExit, RuntimeError, OSError, subprocess.CalledProcessError) as error:
+                    failure = error
+            preserved = False
+            if arrival:
+                if kind == "directory":
+                    preserved = occupied_path.is_dir() and (occupied_path / "retained.json").read_bytes() == original
+                elif kind in ("live_symlink", "dangling_symlink"):
+                    preserved = (occupied_path.is_symlink() and occupied_path.readlink() == target
+                                 and (target.read_bytes() == original if kind == "live_symlink" else not target.exists()))
+                else:
+                    preserved = occupied_path.is_file() and occupied_path.read_bytes() == original
+            unpublished = {path.name: json.loads(path.read_text()) for path in directory.glob("init-r1.json.unpublished-*.json")}
+            return {"returned": returned, "failure": failure, "calls": calls,
+                    "preserved": preserved, "unpublished": unpublished,
+                    "output_exists": output.exists() or output.is_symlink(),
+                    "output": json.loads(output.read_text()) if output.is_file() else None,
+                    "stdout": stdout.getvalue(), "stderr": stderr.getvalue(),
+                    "link_calls": linked.call_count, "replace_calls": replaced.call_count,
+                    "fsync_calls": synced.call_count, "checked_runtime": checked_runtime,
+                    "expected_runtime": [item["file"] for item in runtime_files],
+                    "temporary_files": list(directory.glob("*.tmp")), "model_exists": model.exists()}
+
+    def test_existing_result_or_preflight_paths_reject_before_any_launch(self):
+        for arrival in ("early_output", "early_preflight"):
+            for kind in ("file", "directory", "live_symlink", "dangling_symlink"):
+                with self.subTest(arrival=arrival, kind=kind):
+                    result = self.exercise(arrival=arrival, kind=kind)
+                    self.assertIsInstance(result["failure"], SystemExit)
+                    self.assertEqual(result["failure"].code, 2)
+                    self.assertTrue(result["preserved"])
+                    self.assertEqual(result["calls"], {"preflight": 0, "capacity": 0, "child": 0, "driver": 0})
+                    self.assertEqual(result["checked_runtime"], [])
+                    self.assertEqual(result["unpublished"], {})
+                    self.assertEqual(result["stdout"], "")
+
+    def test_preflight_paths_arriving_after_launcher_admission_stop_before_child(self):
+        for arrival in ("before_preflight", "during_preflight"):
+            for kind in ("file", "directory", "live_symlink", "dangling_symlink"):
+                with self.subTest(arrival=arrival, kind=kind):
+                    result = self.exercise(arrival=arrival, kind=kind)
+                    self.assertIsInstance(result["failure"], subprocess.CalledProcessError)
+                    self.assertEqual(result["failure"].returncode, 2)
+                    self.assertIn("output exists; preserve observations and choose a fresh path", result["failure"].stderr)
+                    self.assertTrue(result["preserved"])
+                    self.assertEqual(result["calls"], {"preflight": 1, "capacity": int(arrival == "during_preflight"), "child": 0, "driver": 0})
+                    self.assertEqual(result["checked_runtime"], result["expected_runtime"])
+                    self.assertFalse(result["output_exists"])
+                    self.assertEqual(result["unpublished"], {})
+                    self.assertEqual(result["stdout"], "")
+
+    def assert_unpublished(self, result, code, child_timeout):
+        self.assertIsInstance(result["failure"], RuntimeError)
+        self.assertIn("complete unpublished child capture retained", str(result["failure"]))
+        self.assertIn("no telemetry or retry", str(result["failure"]))
+        self.assertEqual(result["calls"], {"preflight": 1, "capacity": 1, "child": 1, "driver": 0})
+        self.assertEqual(len(result["unpublished"]), 1)
+        name, record = next(iter(result["unpublished"].items()))
+        self.assertIn(name, str(result["failure"]))
+        self.assertEqual(record["stdout"], "synthetic child stdout")
+        self.assertIn("synthetic child stderr", record["stderr"])
+        self.assertEqual(record["exit_code"], -1 if child_timeout else code)
+        self.assertEqual(record["driver_readback"]["status"], "pending")
+        self.assertEqual(record["native_status"], "timed_out" if child_timeout else ("completed" if code == 0 else "failed"))
+        self.assertNotEqual(record["status"], "native_initialization_completed")
+        with self.assertRaisesRegex(ValueError, "successful initialization-only"):
+            capture.validate_capture(record)
+        self.assertEqual(record["runtime_artifact_ledger_sha256"], launcher.RUNTIME_ARTIFACT_LEDGER_SHA256)
+        self.assertEqual(result["checked_runtime"], result["expected_runtime"])
+        self.assertEqual((result["link_calls"], result["replace_calls"], result["fsync_calls"]), (1, 0, 1))
+        self.assertEqual(result["stdout"], "")
+        self.assertEqual(result["temporary_files"], [])
+        self.assertFalse(result["model_exists"])
+
+    def test_result_arriving_during_child_preserves_both_observations_and_stops_telemetry(self):
+        for kind in ("file", "directory", "live_symlink", "dangling_symlink"):
+            for code, timeout in ((0, False), (7, False), (0, True)):
+                with self.subTest(kind=kind, code=code, timeout=timeout):
+                    result = self.exercise(arrival="during_child", kind=kind, code=code, child_timeout=timeout)
+                    self.assert_unpublished(result, code, timeout)
+                    self.assertTrue(result["preserved"])
+
+    def test_unsupported_first_publication_retains_the_complete_child_without_fallback(self):
+        for code, timeout in ((0, False), (7, False), (0, True)):
+            with self.subTest(code=code, timeout=timeout):
+                result = self.exercise(code=code, child_timeout=timeout, link_failure=True)
+                self.assert_unpublished(result, code, timeout)
+                self.assertFalse(result["output_exists"])
+
+    def test_fresh_paths_recover_with_one_exclusive_publication_and_one_atomic_update(self):
+        for code, timeout in ((0, False), (7, False), (0, True)):
+            with self.subTest(code=code, timeout=timeout):
+                result = self.exercise(code=code, child_timeout=timeout)
+                self.assertIsNone(result["failure"])
+                self.assertEqual(result["returned"], 0 if code == 0 and not timeout else 1)
+                self.assertEqual(result["calls"], {"preflight": 1, "capacity": 1, "child": 1, "driver": 1})
+                self.assertEqual((result["link_calls"], result["replace_calls"], result["fsync_calls"]), (1, 1, 2))
+                self.assertEqual(result["output"]["driver_readback"]["status"], "completed")
+                self.assertEqual(result["checked_runtime"], result["expected_runtime"])
+                self.assertEqual(result["unpublished"], {})
+                self.assertEqual(result["temporary_files"], [])
+                self.assertFalse(result["model_exists"])
 
 
 if __name__ == "__main__":

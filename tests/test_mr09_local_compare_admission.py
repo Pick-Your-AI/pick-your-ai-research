@@ -1,9 +1,11 @@
 """CPU-only prospective H1 admission tests; no estimator, model or GPU executes.
 
-The fixture copies the reviewed source and prediction packet, creates tiny
-non-executable stand-ins, and substitutes only the pinned model size/hash,
-runtime-ledger pin and all external driver/preflight/native responses. Separate
-Python processes exercise durable fences without ever reaching those responses.
+The fixture copies the reviewed current source, replays historical numerical
+terms only, and builds a separately labeled synthetic current-package packet.
+Tiny non-executable stand-ins and explicit model/ledger pin substitutions keep
+every driver/preflight/native response mocked. No historical record is changed
+or presented as a current estimator execution. Separate Python processes exercise
+durable fences without ever reaching those responses.
 """
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager, ExitStack
@@ -50,6 +52,8 @@ class ProspectiveAdmissionTests(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(SOURCE_ROOT / relative, target)
         (self.temporary / "native-init.exe").write_bytes(b"synthetic executable; never execute")
+        self.estimator = self.temporary / "synthetic-estimator.exe"
+        self.estimator.write_bytes(b"synthetic estimator; never execute")
         (self.temporary / "runtime").mkdir()
         (self.temporary / "runtime/fixture.dll").write_bytes(b"synthetic runtime; never load")
         self.model = self.temporary / kernel.MODEL
@@ -82,18 +86,52 @@ class ProspectiveAdmissionTests(unittest.TestCase):
         self.serial += 1
         directory = self.root / "records" / f"synthetic-cohort-{self.serial}"
         directory.mkdir(parents=True)
-        for name in admission.PACKET_FILES:
-            shutil.copyfile(HISTORICAL / name, directory / name)
+        classification = "synthetic prospective H1 packet fixture; no estimator, model or GPU execution"
+        (directory / "protocol.md").write_text(
+            "# Synthetic future H1 fixture\n\nNo prediction or native execution.\n", encoding="utf-8")
         build = {"runtime_commit": kernel.RUNTIME_COMMIT, "harness_git_ref": "a" * 40,
                  "source_files": {name: self.original_sha(self.root / name) for name in kernel.REQUIRED_SOURCES},
                  "executables": {"native-init.exe": self.original_sha(self.temporary / "native-init.exe")}}
         self.save(directory / "build.json", build)
         self.save(directory / "runtime-artifacts.json", {"files": [
             {"file": "fixture.dll", "sha256": self.original_sha(self.temporary / "runtime/fixture.dll")} ]})
-        # This is a test replay of retained CPU output, not a new prediction.
-        receipt = kernel.read_json(directory / "prediction-receipt.json")
+        source_manifest = kernel.read_json(self.root / admission.PACKAGE / "source-manifest.json")
+        self.assertEqual(source_manifest["identity"], admission.ESTIMATOR_ID)
+        package_commit = "c" * 40  # Synthetic join key, not a real source/review attribution.
+        package_hashes = {name: self.original_sha(self.root / name) for name in admission.PACKAGE_SOURCES}
+        candidate_sha = self.original_sha(self.estimator)
+        self.save(directory / "estimator-source-preparation.json", {
+            "classification": classification, "package_commit": package_commit,
+            "upstream_commit": admission.UPSTREAM_COMMIT, "package_sha256": package_hashes})
+        self.save(directory / "estimator-manifest.json", {
+            "classification": classification, "manifest": {
+                "upstream_commit": admission.UPSTREAM_COMMIT, "upstream_tree": admission.UPSTREAM_TREE,
+                "package_sha256": source_manifest["package_sha256"],
+                "candidate_executable_sha256": candidate_sha,
+                "candidate_executable_bytes": self.estimator.stat().st_size}})
+        # The preparation script itself is unchanged by the .2 parser fix.
+        # This copied adaptation is a test input, not another preparation run.
+        adaptation = kernel.read_json(HISTORICAL / "estimator-windows-adaptation.json")
+        adaptation["classification"] = classification
+        self.save(directory / "estimator-windows-adaptation.json", adaptation)
+        self.save(directory / "semantic-review.json", {
+            "classification": classification, "candidate_commit": package_commit,
+            "reviewed_profile": admission.H1_PROFILE,
+            "disposition": "synthetic boundary-test declaration; no real source/build approval"})
+        self.save(directory / "estimator-profile.json", admission.H1_PROFILE)
+        # Replay only the existing numerical/control fixture. The current
+        # identity and synthetic receipt are not historical .2 predictions.
+        prediction = kernel.read_json(HISTORICAL / "estimator-prediction.json")
+        prediction.update(classification=classification, identity=admission.ESTIMATOR_ID)
+        self.save(directory / "estimator-prediction.json", prediction)
+        receipt = kernel.read_json(HISTORICAL / "prediction-receipt.json")
         frozen = datetime.now(timezone.utc) - timedelta(seconds=2)
-        receipt.update(classification="synthetic CPU test fixture; no execution",
+        receipt.update(classification=classification,
+                       estimator_package_commit=package_commit,
+                       candidate_executable_sha256=candidate_sha,
+                       raw_prediction_sha256=self.original_sha(directory / "estimator-prediction.json"),
+                       stdin="synthetic fixture input; no estimator read",
+                       aggregation_basis="retained .1 numerical fixture terms; no current estimator execution",
                        started_utc=(frozen - timedelta(seconds=2)).isoformat(),
                        finished_utc=(frozen - timedelta(seconds=1)).isoformat())
         self.save(directory / "prediction-receipt.json", receipt)
@@ -228,6 +266,27 @@ class ProspectiveAdmissionTests(unittest.TestCase):
         self.children.assert_not_called()
         self.queries.assert_not_called()
 
+    def test_historical_package_hashes_cannot_be_retagged_as_current(self):
+        # Keep the current synthetic prediction identity and valid freeze,
+        # but insert coherent old preparation/build/review identities. Old
+        # package hashes must still fail before any external call.
+        old = {}
+        for name in ("estimator-source-preparation.json", "estimator-manifest.json", "semantic-review.json"):
+            value = kernel.read_json(HISTORICAL / name)
+            value["classification"] = "synthetic negative replay of historical package metadata"
+            old[name] = value
+            self.save(self.directory / name, value)
+        receipt = kernel.read_json(self.directory / "prediction-receipt.json")
+        receipt.update(estimator_package_commit=old["estimator-source-preparation.json"]["package_commit"],
+                       candidate_executable_sha256=old["estimator-manifest.json"]["manifest"]["candidate_executable_sha256"])
+        self.save(self.directory / "prediction-receipt.json", receipt)
+        self.refreeze()
+        with self.assertRaisesRegex(ValueError, "not completely bound"):
+            admission.run(self.temporary, 1, self.directory)
+        self.assert_failed_and_blocked(phase="source_closure", error_type="ValueError")
+        self.children.assert_not_called()
+        self.queries.assert_not_called()
+
     def test_typed_profile_prediction_identity_and_controls_are_required(self):
         mutations = [
             ("estimator-profile.json", lambda p: p.update(sequence_capacity=True)),
@@ -235,6 +294,7 @@ class ProspectiveAdmissionTests(unittest.TestCase):
             ("estimator-profile.json", lambda p: p.update(context_size=512)),
             ("estimator-prediction.json", lambda p: p["declared_profile"].update(cache_key="q8_0")),
             ("estimator-prediction.json", lambda p: p.update(identity="upstream-release")),
+            ("estimator-prediction.json", lambda p: p.update(identity="gguf-parser-go-v0.26.4+mr09-output.1-experimental")),
             ("estimator-prediction.json", lambda p: p.update(upstream_commit="b" * 40)),
             ("estimator-prediction.json", lambda p: p.update(artifact_sha256="b" * 64)),
             ("estimator-prediction.json", lambda p: p.update(artifact_bytes=270885952.0)),

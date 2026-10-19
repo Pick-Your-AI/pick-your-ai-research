@@ -179,7 +179,8 @@ The [regression tests](../../tests/test_mr09_measure.py) cover mismatched cohort
 allowed availability variation, early failures and unchanged reproduction of the
 committed summary. These checks do not establish physical-device UUID identity,
 artifact truth, estimator comparability or empirical calibration. The original
-measurement instrument, dated protocol, raw observations and summary are unchanged.
+[executed measurement instrument](measurements/mr09_measure.executed.py), dated
+protocol, raw observations and summary are preserved.
 
 ### Counter and comparison intake boundary (2026-10-18)
 
@@ -188,7 +189,7 @@ An offline review of the summarizer at
 reproduced two input-validation failures using synthetic test records: arbitrary
 `error_comparisons` lengths could be reported as comparable competitor pairs,
 and a nonnumeric optional KV payload could become a byte statistic. The
-[`current instrument`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/09fc94e08075ce0180a77e62dfcda767abb74d48/scripts/mr09_measure.py)
+[`instrument inspected at that commit`](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/09fc94e08075ce0180a77e62dfcda767abb74d48/scripts/mr09_measure.py)
 initializes an empty comparison list and implements no competitor intake.
 Inspected 2026-10-18; these are code findings, not new empirical observations.
 
@@ -360,6 +361,45 @@ readback, three captures, publication filtering and cleanup receipt are retained
 Original preparation records, dense/GM1 evidence, v1 and receiving-owner gates
 are unchanged; these observations do not provide acceptance or a scope waiver.
 
+### Prospective native output preservation
+
+The [maintained native launcher](../../scripts/mr09_native_qualify.py) now rejects
+an occupied result or preflight path, including a dangling symbolic link, before
+artifact admission or execution. It requests the shared capacity screen's new
+`--preserve-output` mode. That mode rejects an occupied path before capacity
+queries and exclusively creates its fully serialized result, so a path created
+during the queries is also preserved. The [shared screen](../../scripts/mr09_preflight.py)
+keeps its existing overwrite behavior when this option is absent; callers that
+intentionally refresh a capacity screen retain that behavior.
+
+After a child completes, fails or times out, the launcher serializes and fsyncs
+its pending-telemetry capture in a unique file beside the intended result. Its
+first publication uses a no-replace hard link. If the destination appeared while
+the child was running, or the filesystem refuses that publication, the original
+destination remains intact and the complete child capture remains in the unique
+`init-rN.json.unpublished-*.json` file named by the error. The launcher stops
+before driver telemetry or a retry. This unpublished record remains pending or
+failed and is rejected by the capture validator. Successful first publication
+removes the extra temporary name; the later telemetry update retains the existing
+fsynced temporary-file and atomic-replacement behavior, including preservation
+of the first capture if that update fails.
+
+Python 3.12 documents [`os.link`](https://docs.python.org/3.12/library/os.html#os.link)
+on Unix and Windows (checked 2026-10-18). Actual filesystem support remains a
+runtime requirement; a publication failure retains the unpublished capture and
+has no overwrite fallback. These changes were exercised using direct CLI calls
+with CPU-only artifact, child, Windows-memory and driver doubles, including early
+and late path collisions, unsupported linking, default-screen refresh and valid
+recovery. They do not record a Windows, native or accelerator execution.
+
+All historical observations, preflight JSON, source archives, artifact pins and
+numeric results are unchanged. The native cohort still binds the original
+archived launcher. The [preflight source inspected before this correction](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/36e774d5fdafcaf51af8139703bb52a57e629bb2/scripts/mr09_preflight.py)
+is pinned for source review; the records contain preflight-result hashes, without
+a preflight-script execution hash, so this link does not establish which producer
+source was executed. The maintained launcher's changed identities do not join the
+old cohort or supply new qualification, calibration or receiving-owner acceptance.
+
 ## Output-reservation matching audit — 2026-10-18
 
 The [pinned output audit](measurements/output-reservation-2026-10-18/matching.md)
@@ -496,7 +536,7 @@ not 18 repetitions of one experiment. Full #61 acceptance remains open.
 
 Evidence: [passing capacity screen](measurements/mr09-granite31-preflight-2026-10-18.json),
 [unchanged pre-execution protocol](measurements/mr09-granite31-protocol-2026-10-16.md),
-[separate instrument](../../scripts/mr09_granite31_measure.py),
+[executed instrument](measurements/granite31-2026-10-18/mr09_granite31_measure.executed.py),
 [three result files and summary](measurements/granite31-2026-10-18/),
 [artifact ledger](measurements/granite31-2026-10-18/mr09-granite31-artifacts.json)
 and [external artifact manifest](../../evidence/mr09-granite31-1b-a400m-instruct.json).
@@ -558,6 +598,16 @@ its JSON device-map key is empty. That recorded observation was retained and
 validated; the wrapper readback used `ConvertFrom-Json -AsHashtable` for
 repetitions 2 and 3. No observation was rerun, instrument changed or limit
 increased. The instrument and protocol hashes are recorded in each result.
+
+The linked executed instrument preserves the exact source used for these three
+observations, SHA-256
+`338ebb6a197712b655c5c2f69d6b1dbc0a51265455773b58c32ea2bc87c13974`.
+The [active launcher](../../scripts/mr09_granite31_measure.py) now requires the
+complete three-key capacity screen with literal Boolean `true` values before
+either preparation or measurement. This guard correction adds no observation
+and leaves the recorded source hashes and results unchanged. The commands below
+use the maintained launcher; any future execution needs its own source hash and
+execution evidence.
 
 Reproduction requires the named authorized spare-capacity envelope and existing
 pinned CUDA runtime; the following commands are a recipe, not fresh permission:
@@ -684,8 +734,21 @@ All 15 dense runs record runner SHA-256
 `d33c45c5d13a93816cb71175b73ec35938805c99b3e3969fe73eae86c83ccfe8`
 and protocol SHA-256
 `d0e64816de896d19d764ff5a1302e8ee7b9678e098f8929886fa6c239a4c0735`.
-The unchanged runner and original dated protocol are retained in this submission.
+The [executed runner](measurements/mr09_measure.executed.py) retains those exact
+source bytes, alongside the original dated protocol.
 The execution timestamp and package/hardware conditions are in each file.
+
+The [active dense launcher](../../scripts/mr09_measure.py) now rejects an occupied
+output path before either preparation or measurement. Its final result uses
+exclusive file creation, so an observation arriving during the action is also
+preserved; either collision returns the existing command-line error status 2
+without printing a success receipt. Serialization finishes before creating the
+new result file. The artifact-manifest writer and measurement computation remain
+unchanged. Offline direct-entry regressions cover both actions, existing files,
+directories and symlinks, a result arriving during execution, serialization
+failure and fresh-output recovery. These corrections add no measurements. The
+15 dense records and three Granite3.1 dense-source references remain bound to the
+archived hash above; future executions record the maintained launcher's own hash.
 
 D1-r1 is a direct-run pilot retained in the three-repetition D1 cohort because
 its model/configuration/instrument source matches the later repetitions. It
@@ -754,8 +817,10 @@ The summary derives minima/medians/maxima and input checksums from individual
 run records; it omits failed measurements from numerical aggregates and
 preserves failure categories. Published outputs replace private filesystem
 locators with named placeholders and omit hardware UUIDs; measurement counters,
-conditions and hashes are unchanged. Existing completed result files are
-preserved by the wrapper; use a fresh output directory for independent replication.
+conditions and hashes are unchanged. The wrapper skips existing completed result
+files, and direct launcher calls reject occupied output paths and preserve files
+that appear before final publication. Use a fresh output directory for independent
+replication.
 
 | Evidence | Publisher / locator | Access / version | Class and confidence | Limits and reuse |
 | --- | --- | --- | --- | --- |

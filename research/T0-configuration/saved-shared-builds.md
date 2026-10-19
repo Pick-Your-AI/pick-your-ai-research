@@ -147,7 +147,7 @@ complete-projection restrictions, forbidden forked values or source-use limits.
 | Share expiry or revocation | Stop future access through the expired/revoked token. Never recycle it for another target. While active, a deliberately following share retains its disclosed revision policy. | Actual expiry duration, token/revocation-record lifetime and enforcement implementation |
 | Owner deletion | Stop serving the owner's deleted revisions and associated shares. A deletion request, access denial and completed physical purge are distinct events. | Completion deadline, backups/residual copies, any independently applicable retention basis and evidence of actual purge |
 | Retained payload, token, audit and lineage records | Apply a separate purpose and permitted retention policy to each class. A revocation marker need not retain the full private payload, and its identities or associations can themselves be restricted. | Concrete durations, triggers, access and deletion policy for each class |
-| Independent fork | Keep its new Build ID/revision and own lifecycle. Origin deletion does not automatically erase independently permitted fork content; source identity or token possession supplies no continuing permission. Private attestations and withheld values never transfer. | Permitted content and lineage after the relevant rights or deletion event; no guarantee of perpetual fork survival |
+| Independent fork | Keep its new Build ID/revision and own lifecycle. Origin deletion does not automatically erase independently permitted fork content; source identity or token possession supplies no continuing permission. An applicable #60 denial immediately excludes the affected material and disclosing derived assertions from every served view, including a fork's historical/shared view; continued display cannot await a purge or another qualification review. Private attestations and withheld values never transfer. | Physical purge, any permitted retained original and lineage handling are separately qualified after the relevant rights or deletion event; no guarantee of perpetual fork survival or adopted duration (P29) |
 | External export | Explain the limits of control over a copy already delivered. Revoking a hosted link neither recalls that file nor creates a new right to retain or redistribute it. | The actual recipient/use conditions; no promise of remotely erasing an uncontrolled copy |
 | Replay prerequisite becomes unavailable or unusable | Retain only permitted history and qualify the missing prerequisite. Some prerequisites prevent evaluator execution entirely. Never substitute latest inputs, relabel a partial projection as the original artifact, or rewrite a historical outcome. | Whether each original input remains available, usable and permitted under its actual profile |
 
@@ -187,6 +187,10 @@ Default treatment. "Opt-in" means the owner explicitly includes the group for th
 | #81 `hardware.devices[]` model names and memory | Origin configuration | Included as the origin's configuration; never copied as the reporter's actual device or placement | #81 already excludes serial numbers and hostnames (P1); a fit report needs its own applicable run identity (P18) |
 | #81 CD-12 organisation attestations (establishment jurisdiction, EU market placement, lawful basis, revenue, MAU), `licence_answers` (with `grant_ref`), zero-retention or account approvals in `data_terms` conditions | Organisation attestation | Never, and never copied on fork | An attestation is made by one organisation about itself; it can't transfer to the recipient |
 | Origin-specific private, dedicated or reserved capacity arrangements | Account-specific capacity | Any independently eligible display is labelled as the origin's fact; the fork's capacity is unanswered and its component mode is `unknown` until the recipient establishes its own | Published offering terms can fix operator and capacity for that offering/scope; merely offering a dedicated option does not establish an account's selection (P18) |
+| Private training/run lineage and adapter configuration, including origin-supplied proposed `base_model_revision`, adapter rank, targets and configuration evidence | Private training provenance | Never, and never copied on fork | This class concerns the origin's private job/artifact evidence. Separately eligible published catalog facts retain their own classification; they do not prove which base or settings a private job used |
+| Dataset, training-job and lineage-record locators supplied by the origin, including private paths, object locations and account-scoped artifact identifiers | Private data/artifact access identifier | Never, and never copied on fork | A separately eligible catalog source ID is not the origin's dataset location or access grant; do not place a withheld locator in a label, link, finding or derived summary |
+| Dataset/source-scoped consent, rights, privacy or documentary attestations and their private condition/grant references | Private scoped attestation | Never, and never copied on fork | The recipient needs its own applicable, correctly scoped evidence. A D-01 document URI or inherited origin answer establishes neither applicability nor satisfaction |
+| Established origin-account availability of a provider-held fine-tune | Account-specific artifact availability | Any independently eligible display remains the origin's fact; fork availability is unresolved until the recipient establishes its own exact artifact/account/operation association | Capacity and artifact access are separate. Neither an `api_only` label nor a provider name proves universal account lock, export prohibition or recipient eligibility |
 | #81 `destinations[].host`, `external_connections` | Infrastructure | Included without hosts | Mode and residency findings stay explainable |
 | Engine/launch settings beyond the eligible IDs/pins above; decoding method, KV-cache precision and admission limits | Unclassified fit-run settings | Withheld from origin prefill; the harness records actual-run settings it can detect under the applicable evidence profile | Detection supplies no disclosure permission; missing applicable essential CD-3 keys leave a report unqualified (P18) |
 | Reporter device, OS, driver and NUMA/placement | Actual run identity | Obtain from the recipient's actual run detection or confirmation where its profile permits; do not copy the origin's hardware record | Distinguish selected target, detected facts and recipient declarations; unknown provider hardware cannot be replaced by the API client's device (P18) |
@@ -205,6 +209,61 @@ prove which arrangement an account selected. An origin-specific arrangement
 remains the origin's fact; its recipient must supply their own capacity before
 that component's mode can become known. Neither route transfers a private
 attestation, licence answer, grant reference or zero-retention approval (P18).
+
+### Training lineage and recipient artifact availability (response to P29)
+
+This clarification applies the disclosure boundary to the T5 interface; it does
+not add fields to frozen v1. The [Fine-tuned Model participant bindings and
+A-05/A-11/A-15 interpretations](../T5-training-fine-tuning/fine-tuned-model.md#participant-role-and-evidence-bindings)
+distinguish the artifact, its actual served base, original training lineage and
+selected account/operation. The [Dataset D-01 interpretation](../T5-training-fine-tuning/training-dataset.md#d-01-the-qualified-c2c3-documentary-requirements)
+and CD-12 keep each responsible assessment's actual subject, revision, purpose,
+period and attribution. This note selects disclosure treatment for those inputs;
+it supplies no new technical or legal assessment.
+
+**Fork lineage and model lineage are different.** SB-6's source Build ID/revision
+records the fork relationship only. It cannot establish the trained artifact's
+base revision, configuration, dataset or original job. Retain any permitted
+original lineage evidence in its separately controlled source record. Do not
+copy private evidence through a share/export/fork or replace it with a later
+resolved base, the catalog record version, an assumed default or an empty
+complete inventory. A separately eligible public catalog fact can describe
+that catalog item; it does not bind the origin's private job to the item.
+
+For a private user-trained artifact without an existing valid catalog
+association, the missing artifact/base-lineage representation remains an
+explicit SB-1/#40 integration question. Do not fabricate a CatalogItem, catalog
+ID or version, or hide private lineage in a name, free-text field or unreviewed
+extension to make the frozen Build appear complete. P10/P11's accepted
+provided-value attribution is the research basis for separately labelled
+assumptions and origin facts; the exact released projection mapping still needs
+its own versioned integration. No new answer state or frozen wire field is
+selected here.
+
+A recipient's **new evaluation** follows the selected concern's actual
+applicability and evidence, including the T5 common known-failure precedence:
+
+| Concern | Result of the recipient's actual evidence boundary |
+| --- | --- |
+| A-05 base association | An applicable separate adapter/base association with unresolved required identity or revision remains `unknown / error` when no eligible known violation is established. A qualified base mismatch remains `fail / error`, even if another operand is unavailable. An evidenced full artifact with no separate served adapter/base association can be `skipped / error` for this concern only. |
+| A-15 immutable original lineage | Required original base-lineage evidence withheld or otherwise unavailable leaves the concern `unknown / error` when no eligible known violation remains. A qualified violation of the immutable-pin requirement remains `fail / error`; evidenced non-applicability is `skipped / error`. A later name resolution cannot repair the original job's missing pin. |
+| A-11 access/export requirement | Qualify the recipient's exact artifact, account, intended operation and destination. An established exclusive endpoint-only artifact fails an applicable portable-weight requirement; undocumented export stays unknown. An evidenced endpoint-only requirement can make that export concern non-applicable without proving recipient access or deployment readiness. |
+
+These are reasoned disclosure/interface examples, not executed rules or actual
+artifact findings. T5's proposed `on_unknown: review` and each fixed severity
+remain distinct from the independent frozen blocking rules. Withheld adapter
+rank concerns A-04's actual operands; it is not itself proof of an A-05 or A-15
+lineage failure. Known non-applicability is not inferred merely because a share
+omits evidence. Historical findings retain their original meanings and exact
+associations; disclosure redaction cannot relabel them as this new evaluation.
+
+An origin-account capacity answer does not establish who may use its trained
+artifact. Retain the recipient's unresolved availability independently of its
+component mode, and obtain the recipient's own applicable access and provenance
+evidence without copying an origin approval. An eligible published offering
+description is not an origin account's artifact entitlement. Complete-projection
+review also covers any outcome, association or count that would disclose one of
+the private T5 inputs above.
 
 ### Disclosure across complete projections (proposal, 2026-10-18)
 
@@ -917,6 +976,43 @@ main readback remain separate from receiving sufficiency. The final issue
 assessment must use those real results; this note does not itself mutate issue
 checkboxes, state or Project fields.
 
+### Subsequent T5 and lifecycle review — 2026-10-19
+
+P29 is the actual appletechie interface review at delivered producer
+`31ac26c95e43908602a17bb4a8964adbc26cf131`, note
+`3e4a67aafd5fba569ab68ed603a72dd3d232e406`. The author disclosed original #114
+authorship, limited independence to the interface review, and reported no test,
+source/rights/vendor refresh, CI qualification or issue-state verification.
+The five P18 constraints and SB-9's structure were accepted with the explicitly
+stated limits; no numeric retention period was adopted.
+
+The present engineering clarification receives the concrete T5 and fork-display
+findings. It explicitly classifies private training provenance, dataset
+locators and scoped attestations, separates origin-account artifact availability
+from capacity, and preserves the actual A-05/A-11/A-15 outcome semantics.
+The supporting current T5 source was read at accepted
+`7d5b98ad53a3c92ac5b4e7c049d3f5197e1f28ec`; these interpretations keep their
+original source dates and proposal limits. P29's suggested unknown results are
+qualified by each concern's actual applicability and any established violation;
+they do not replace a known failure or assert that every omitted input is
+required. Public eligible catalog facts keep their separate classification.
+
+P29's quoted "qualification review, not an automatic purge" wording belongs to
+the external P20 proposal, not the delivered note's independent-fork row. The
+clarified row makes the existing #60 denial effective for all served views
+without waiting for purge; actual physical deletion, residual copies and any
+permitted retained original remain separate decisions. The original comments
+and permitted historical reports are not rewritten. Token renewal/non-reuse,
+revocation-record retention, backup restoration and deletion-completion evidence
+remain SB-9/#41/#40 follow-ups before a hosted promise; no duration, legal
+conclusion or implementation is supplied.
+
+This is a later bounded source clarification, not a reversal of the completed
+research acceptance recorded in [6261594584](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6261594584).
+All eleven literal criteria, earlier dated receiving decisions, original
+assignees and native relationships retain their scope. Its source review,
+configured validation and ordinary delivery require their own actual records.
+
 ## Acceptance criteria coverage
 
 The following first column preserves all eleven literal issue criteria. This is
@@ -985,6 +1081,7 @@ issue completion. Research acceptance does not require implementing the builder.
 | P26 | [P26 / 6260214302](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6260214302) | 2026-10-19 | Submitted 05:15:49 UTC; producer 7ec57425 and Cost Estimate dc97759e with exact source/gate/schema pins | Actual delegated cost receiving decision: accept with constraints | Historical/current/quantity/calculation/coverage distinctions; disclosure conditional on reviewed delivery of the exact display/export correction; P13 and the reverse #39 → #42 receipt remain separate. No new rate, cost estimate, runtime execution or policy default |
 | P27 | [P27 / 6260217715](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60#issuecomment-6260217715) | 2026-10-19 | Submitted 05:16:06 UTC; producer 7ec57425, rights 2fb0aa8d, integrations 159766a4 and source policy c8621123 | Actual delegated source-use receiving decision: accept with constraints | Actual material/use/view and retained-history boundaries, conditional on reviewed delivery of the exact display/export correction; no new permission, source audit, blanket history deletion, operating retention guarantee or SB-9 numeric adoption |
 | P28 | [P28 / 6260273948](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6260273948) | 2026-10-19 | Submitted 05:20:47 UTC; separately receives the four literal P24–P27 reviews | Actual coordinating decision on research handoff sufficiency | Current engineering delegation and actual roles stated explicitly; original P18/P19 named requests preserved. No absent person's reply, changed criterion text, implementation acceptance or automatic source/delivery/whole-issue completion |
+| P29 | [Actual T5/SB-9 interface review6261613750](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42#issuecomment-6261613750) | 2026-10-19 | Created 07:01:45 UTC; updated 07:01:56 UTC; producer 31ac26c9, note 3e4a67aa | Actual appletechie interface review; original #114 authorship expressly disclosed | Five P18 constraints and lifecycle classes accepted with limits; T5 classification and fork-display findings received above. No numeric adoption, execution, rights/vendor refresh, CI qualification or independent source authorship claimed |
 
 Historical review disposition (2026-10-17): #41 confirmed the invalidation-event handoff. #40 has routed SB-1 to SB-10 and SB-R1 to SB-R5 for review; SB-8 is decided together with CD-1 answer states. Routing did not settle those schema decisions, and the PR remained a draft blocked by #40 at that time. The 2026-10-18 sequencing decision above supersedes that proposal-only merge hold; those contract decisions and the #42 prerequisite remained open at that sequencing decision. P21 records #40's later actual research completion. P22 supplies the separate later #431 receiving decision and P23 its reviewed delivery; none is retroactively attributed to this historical disposition.
 

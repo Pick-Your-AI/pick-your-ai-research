@@ -1,6 +1,6 @@
 # Experimental MR-09 initialization estimator
 
-This is the minimal project derivative selected by [D61-02](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6249525648). It patches GPUStack gguf-parser-go v0.26.4 at `637cd9a7a03993ab30ace3c53dd8af5c37f46a94`; the complete source tree, patch, tests, dependency files and upstream MIT license have explicit pins. The [comparison specification](../mr09-comparison-spec-2026-10-18.md) retains the original upstream estimate as unmatched. This preparation provides CPU semantics tests, not a native measurement or accepted estimator comparison.
+This is the minimal project derivative selected by [D61-02](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6249525648), with current bundle/output identity `gguf-parser-go-v0.26.4+mr09-output.2-experimental`. It patches GPUStack gguf-parser-go v0.26.4 at `637cd9a7a03993ab30ace3c53dd8af5c37f46a94`; the complete source tree, patch, tests, dependency files and upstream MIT license have explicit pins. The [comparison specification](../mr09-comparison-spec-2026-10-18.md) retains the original upstream estimate as unmatched. This preparation provides CPU semantics tests, not a native measurement or accepted estimator comparison.
 
 ## Scoped change
 
@@ -8,9 +8,19 @@ The new API requires an explicit `MR09InitBufferProfile` and hashes and parses t
 
 For the pinned llama.cpp runtime `620d2225cc436ab0b001e3200e590e3b286ef9ab`, initial host logits readback has `sequence_capacity` rows. The output graph has `min(context_size, physical_batch_size, outputs_max)` rows and belongs to the output weight's CUDA0 backend. The per-sequence output maximum remains distinct from the global maximum. H3 retains total context 512, sequence capacity 2, per-sequence context 256 and zero declared populated cache, active requests and generated tokens. Those zero values describe the selected initialization stage; they are not observed telemetry.
 
-The ordinary upstream API remains unchanged when the profile is absent. Complete JSON hashes preserve its development/H1/H2/H3 estimates. Existing `Footprint + Input + max(Compute, Output)` aggregation, graph allocator/lifetime approximations, CPU-mapped embedding terms, wrapper/copy exclusions and all non-output calculations remain unchanged. No additive correction is fitted to the historical native total. This estimator still needs prospective held-out observations, an independently selected tolerance and explicit receiving review before any accepted comparison.
+The ordinary `EstimateLLaMACppRun` calculations remain unchanged when the profile is absent. Complete JSON hashes preserve its development/H1/H2/H3 estimates. Existing `Footprint + Input + max(Compute, Output)` aggregation, graph allocator/lifetime approximations, CPU-mapped embedding terms, wrapper/copy exclusions and all non-output calculations remain unchanged. No additive correction is fitted to the historical native total. This estimator still needs prospective held-out observations, an independently selected tolerance and explicit receiving review before any accepted comparison.
+
+## Parser allocation correction in revision .2
+
+The parser no longer reserves tensor-record storage from the untrusted `split.tensors.count` metadata value. It retains that metadata and appends the actual tensor records read from each file's bounded header count. This also preserves the general parser's shard order, counts, offsets and sizes; it does not add a multi-file interface to the single-file MR09 API.
+
+The added synthetic regressions use a finite 4,096-slot hint, an all-ones unsigned value whose checked conversion is negative before the legacy allocation, and two honest tiny shards. They never request a positive billion-slot allocation. This correction removes that specific unchecked reservation; it is not a process-memory cap or proof that every malformed GGUF is supported safely.
+
+The output mathematics and declared profile remain unchanged. Revision .2 requires its own package, executable and prediction identities. Historical `.1` packages, measurements, predictions and frozen receipts retain their original bytes and hashes; their qualification does not transfer to a new build.
 
 ## Reproduce CPU preparation
+
+The [CPU validation workflow](../../../../.github/workflows/mr09-estimator-validation.yml) runs when this package, its preparation script or its native fixtures change. It verifies the official Go 1.22.9 archive checksum and immutable upstream source, then runs the same bounded preparation and CLI checks. A separate copy restores only the original parser file for a causal control: the two bounded allocation regressions must fail and honest shard assembly must pass. This control is not a historical `.1` build. Original logs and the current build manifest remain in the job output; no model or GPU workload is run.
 
 Use Python 3.12+, Git, a local checkout containing the exact upstream commit and Go 1.22.9. No model weights are required. Run from this research repository:
 

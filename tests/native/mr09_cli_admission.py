@@ -80,7 +80,8 @@ def main():
                 raise AssertionError((name,run.returncode,expected,run.stdout,run.stderr))
             if expected == 0:
                 value=json.loads(run.stdout)
-                if (value['host_readback_rows'] != 1 or value['graph_output_rows'] != 256
+                if (value['identity'] != 'gguf-parser-go-v0.26.4+mr09-output.2-experimental'
+                        or value['host_readback_rows'] != 1 or value['graph_output_rows'] != 256
                         or value['estimate']['devices'][1]['computation']['output'] != 24576
                         or value['artifact_sha256'] != digest or value['artifact_bytes'] != len(data)):
                     raise AssertionError(('successful CLI output drift', value))
