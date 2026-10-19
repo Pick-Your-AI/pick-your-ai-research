@@ -1,0 +1,160 @@
+{
+  "record_type": "per_card_power_observation",
+  "classification": "per-card power draw of one NVIDIA RTX PRO 4000 Blackwell SFF Edition: an idle reading and a load range observed under inference load; workload not pinned; not a specification, not a TDP, not a fit or capacity claim",
+  "status": "executed",
+  "evidence_disposition": "unverified_contributor_report",
+  "observed_utc": {
+    "idle_window_start": "2026-10-19T00:09:59.353Z",
+    "idle_window_end": "2026-10-19T00:11:24.691Z",
+    "load_series_first_sample": "2026-10-18T23:57:41.168Z",
+    "load_series_last_sample": "2026-10-19T00:11:28.715Z"
+  },
+  "card": {
+    "name": "NVIDIA RTX PRO 4000 Blackwell SFF Edition",
+    "driver": "580.126.09",
+    "vbios": "98.03.AA.00.02",
+    "power_limit_w": 70.0,
+    "power_min_limit_w": 60.0,
+    "power_max_limit_w": 70.0,
+    "power_limit_source": "nvidia-smi power.limit, power.min_limit and power.max_limit columns, identical in every row of both files (driver-reported)",
+    "datasheet_total_board_power_w": 70,
+    "datasheet": {
+      "uri": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/professional-desktop-gpus/rtx-pro-4000-sff/workstation-datasheet-blackwell-rtx-pro-4000-sff-nvidia-us-4016700.pdf",
+      "quote": "Power Consumption Total board power: 70 W",
+      "access_date": "2026-10-19",
+      "evidence_grade": "Primary documentation (vendor specification value; not independently reproduced here)"
+    }
+  },
+  "idle": {
+    "evidence_grade": "Independent measurement (self-collected nvidia-smi readings; method stated below); the summary statistics are derived by this project from those readings",
+    "scope": "one card, no model resident",
+    "qualifying_rows_rule": "first consecutive rows of GPU index 0 in the IDLE file with utilization 0 percent, memory used exactly 244 MiB and pstate P5 in every row",
+    "samples": 86,
+    "sampling": "nvidia-smi --query-gpu CSV, 1 Hz",
+    "pstate": "P5",
+    "utilization_pct": 0,
+    "memory_used_mib": 244,
+    "power_draw_w": {
+      "min": 7.15,
+      "mean": 7.76,
+      "median": 7.82,
+      "max": 8.02
+    },
+    "first_sample_utc": "2026-10-19T00:09:59.353Z",
+    "last_sample_utc": "2026-10-19T00:11:24.691Z",
+    "source_file": "raw-capture-IDLE-20261019T000959Z.csv",
+    "excluded_rows": {
+      "count": 4,
+      "rule": "the four rows after the idle run are not idle: the card began loading a model (utilization 0-2 percent, memory 258-723 MiB, pstate P0); they are excluded from the idle figure and never mixed into it",
+      "rows": [
+        {
+          "utilization_pct": 0.0,
+          "memory_used_mib": 420.0,
+          "pstate": "P0",
+          "power_draw_w": 11.15
+        },
+        {
+          "utilization_pct": 2.0,
+          "memory_used_mib": 275.0,
+          "pstate": "P0",
+          "power_draw_w": 16.81
+        },
+        {
+          "utilization_pct": 1.0,
+          "memory_used_mib": 258.0,
+          "pstate": "P0",
+          "power_draw_w": 17.17
+        },
+        {
+          "utilization_pct": 2.0,
+          "memory_used_mib": 723.0,
+          "pstate": "P0",
+          "power_draw_w": 16.85
+        }
+      ]
+    }
+  },
+  "load": {
+    "evidence_grade": "Independent measurement (self-collected nvidia-smi readings; method stated below); the summary statistics are derived by this project from those readings",
+    "wording": "observed under inference load",
+    "qualifying_rows_rule": "rows with utilization 80 percent or higher, one series per card per file",
+    "series": {
+      "A_gpu_index_0": {
+        "samples_total": 90,
+        "samples_used": 71,
+        "samples_excluded_below_80pct": 19,
+        "min_w": 58.1,
+        "mean_w": 69.23,
+        "max_w": 70.84,
+        "samples_above_limit": 27,
+        "first_sample_utc": "2026-10-18T23:57:41.168Z",
+        "last_sample_utc": "2026-10-18T23:59:10.535Z",
+        "source_file": "raw-capture-A-20261018T235741Z.csv"
+      },
+      "A_gpu_index_1": {
+        "samples_total": 90,
+        "samples_used": 90,
+        "samples_excluded_below_80pct": 0,
+        "min_w": 61.3,
+        "mean_w": 69.9,
+        "max_w": 70.16,
+        "samples_above_limit": 39,
+        "first_sample_utc": "2026-10-18T23:57:41.195Z",
+        "last_sample_utc": "2026-10-18T23:59:10.537Z",
+        "source_file": "raw-capture-A-20261018T235741Z.csv"
+      },
+      "IDLE_gpu_index_1": {
+        "samples_total": 90,
+        "samples_used": 89,
+        "samples_excluded_below_80pct": 1,
+        "min_w": 66.1,
+        "mean_w": 69.92,
+        "max_w": 71.25,
+        "samples_above_limit": 43,
+        "first_sample_utc": "2026-10-19T00:09:59.362Z",
+        "last_sample_utc": "2026-10-19T00:11:28.715Z",
+        "source_file": "raw-capture-IDLE-20261019T000959Z.csv"
+      }
+    },
+    "range_of_series_means_w": {
+      "low": 69.23,
+      "high": 69.92,
+      "note": "range of per-series means across the three series; reported as a range, not as one number"
+    },
+    "max_sample_w": 71.25,
+    "above_limit_note": "individual samples exceed the 70.00 W driver-reported power limit (maximum sample 71.25 W); the board draws slightly above the limit for single samples",
+    "workload_pinned": false,
+    "model_pinned": false,
+    "engine_pinned": false,
+    "not_a_spec": "the load range is observed under inference load on a shared host whose workload, model and engine were not pinned; it is not a specification, not a TDP, and not a fit or capacity claim"
+  },
+  "raw_evidence": {
+    "directory": "research/T2-infrastructure/measurements/raw/",
+    "files": [
+      {
+        "path": "research/T2-infrastructure/measurements/raw/raw-capture-IDLE-20261019T000959Z.csv",
+        "sha256": "607163c0349a88ff07aa2646eb7f6ed01ef84e5b808d517724b019667a5147f9",
+        "bytes": 38266,
+        "original_sha256": "34406e29239515d3a1001eefaa53a1a4666f85e0ae5d547ad19aee61c9ae15be"
+      },
+      {
+        "path": "research/T2-infrastructure/measurements/raw/raw-capture-A-20261018T235741Z.csv",
+        "sha256": "81302e7ddcd3ba97170b426d0f192952e8fc029c2133fa110dac943d5ee9cf5f",
+        "bytes": 38786,
+        "original_sha256": "0ee9cd7c093426ac78b907f3ee60505345da532c615dd79b70e3ed1d527778f9"
+      }
+    ],
+    "preservation": "published files are the captures with the uuid column value replaced by REDACTED in every data row; header, other columns, PCI bus ids and line endings are unchanged",
+    "redaction": "uuid column replaced with REDACTED; no other change; original_sha256 is the hash of the unredacted capture"
+  },
+  "method": "Statistics recomputed from the raw CSV files by tests/test_t2_sff_power_record.py (csv module, values rounded to two decimals); the test asserts agreement with this record within 0.01 W and checks both sha256 values. Timestamps are those recorded in the files.",
+  "not_included": [
+    "engine commit or build",
+    "model artifact pin",
+    "per-process power attribution for the load series",
+    "workload definition for the load series",
+    "repeated runs"
+  ],
+  "interpretation": "Idle: power draw of one card with no model resident, in pstate P5. Load: power draw observed under inference load, as a range of per-series means with the maximum sample. Neither is a tested limit or a sizing input.",
+  "notes": "Per-card figures only. Only the measured and derived values above are recorded; this record is not an admitted evidence item and no resource estimate is derived from it."
+}
