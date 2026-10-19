@@ -1,8 +1,9 @@
 """Check the per-card power record against its raw nvidia-smi captures.
 
 Claim-to-source integrity only: the record's numbers must be reproducible from
-the stored CSV files, the files must be the ones the record names, and the
-record must carry none of the banned wording.
+the stored CSV files, and every series must retain its capture/device identity.
+These checks do not verify acquisition, workload, timezone, original captures
+or calibrated physical power.
 """
 import csv
 import hashlib
@@ -18,7 +19,6 @@ RECORD = MEASUREMENTS / "rtx-pro-4000-blackwell-sff-power-2026-10-19.json"
 IDLE_CSV = MEASUREMENTS / "raw/raw-capture-IDLE-20261019T000959Z.csv"
 LOAD_CSV = MEASUREMENTS / "raw/raw-capture-A-20261018T235741Z.csv"
 TOLERANCE_W = 0.01
-BANNED = ["2x", "dual-card", "two-card"]
 
 
 def read_rows(path):
@@ -71,7 +71,7 @@ class PowerRecordTests(unittest.TestCase):
         self.assertClose(statistics.median(power), rec["power_draw_w"]["median"], "idle median")
         self.assertClose(max(power), rec["power_draw_w"]["max"], "idle max")
 
-    def test_idle_rows_never_include_a_loading_model(self):
+    def test_idle_filter_and_excluded_rows_match_telemetry(self):
         run = idle_run(self.idle_rows)
         self.assertTrue(run)
         self.assertEqual({r["pstate"] for r in run}, {"P5"})
@@ -80,6 +80,12 @@ class PowerRecordTests(unittest.TestCase):
         gpu0 = [r for r in self.idle_rows if r["index"] == "0"]
         self.assertEqual(len(gpu0) - len(run), excluded["count"], "excluded row count")
         self.assertEqual(len(excluded["rows"]), excluded["count"])
+        self.assertEqual({number(r["utilization.gpu [%]"]) for r in run}, {0.0})
+        actual = [{"utilization_pct": number(r["utilization.gpu [%]"]),
+                   "memory_used_mib": number(r["memory.used [MiB]"]),
+                   "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])}
+                  for r in gpu0[len(run):]]
+        self.assertEqual(actual, excluded["rows"])
 
     def test_load_series_recompute_from_csv(self):
         sources = {"A_gpu_index_0": (self.load_rows, "0"),
@@ -128,9 +134,10 @@ class PowerRecordTests(unittest.TestCase):
 
     def test_redaction_is_declared_with_original_hashes(self):
         raw = self.record["raw_evidence"]
-        self.assertEqual(raw["redaction"], "uuid column replaced with REDACTED; no other change; "
-                         "original_sha256 is the hash of the unredacted capture")
-        self.assertNotIn("byte for byte", raw["preservation"])
+        self.assertIs(raw["original_capture_hashes_verified"], False)
+        # A formatted digest is a declaration; these bytes are not available here.
+        self.assertTrue(raw["published_hash_scope"])
+        self.assertTrue(raw["redaction"])
         for entry in raw["files"]:
             self.assertRegex(entry["original_sha256"], r"^[0-9a-f]{64}$")
             self.assertNotEqual(entry["original_sha256"], entry["sha256"])
@@ -143,13 +150,50 @@ class PowerRecordTests(unittest.TestCase):
         self.assertEqual(card["datasheet_total_board_power_w"], int(quoted[0]), "datasheet figure vs quote")
         self.assertEqual(card["datasheet_total_board_power_w"], card["power_limit_w"], "datasheet figure vs driver limit")
 
-    def test_record_carries_no_banned_wording(self):
-        for word in BANNED:
-            self.assertNotIn(word, self.text, "banned wording in power record: " + word)
+    def test_series_bind_to_actual_capture_and_device_without_aggregation(self):
+        captures = {IDLE_CSV.name: self.idle_rows, LOAD_CSV.name: self.load_rows}
+        observed = {("0", "00000000:01:00.0"), ("1", "00000000:05:00.0")}
+        for rows in captures.values():
+            self.assertEqual({(r["index"], r["pci.bus_id"]) for r in rows}, observed)
+        declared = {(d["index"], d["pci_bus_id"])
+                    for d in self.record["observed_device_identifiers"]}
+        self.assertEqual(declared, observed)
+        expected = {"A_gpu_index_0": (LOAD_CSV.name, "0"),
+                    "A_gpu_index_1": (LOAD_CSV.name, "1"),
+                    "IDLE_gpu_index_1": (IDLE_CSV.name, "1")}
+        self.assertEqual(set(self.record["load"]["series"]), set(expected))
+        for name, (filename, index) in expected.items():
+            series = self.record["load"]["series"][name]
+            self.assertEqual(series["source_file"], filename)
+            self.assertEqual(series["device"]["index"], index)
+        entries = [self.record["idle"], *self.record["load"]["series"].values()]
+        self.assertEqual(self.record["idle"]["source_file"], IDLE_CSV.name)
+        self.assertEqual(self.record["idle"]["device"]["index"], "0")
+        for entry in entries:
+            rows = [r for r in captures[entry["source_file"]]
+                    if r["index"] == entry["device"]["index"]]
+            self.assertTrue(rows)
+            self.assertEqual({r["pci.bus_id"] for r in rows},
+                             {entry["device"]["pci_bus_id"]})
+        aggregation = self.record["aggregation"]
+        self.assertEqual(aggregation["unit"], "per-device series")
+        for key in ("pooled_across_devices", "summed_across_devices",
+                    "cross_device_scaling_claim"):
+            self.assertIs(aggregation[key], False, key)
 
     def test_record_states_observed_wording_and_status(self):
         self.assertEqual(self.record["evidence_disposition"], "unverified_contributor_report")
-        self.assertEqual(self.record["load"]["wording"], "observed under inference load")
+        self.assertEqual(self.record["status"], "contributor_reported_execution")
+        for key in ("workload_verified", "model_residency_verified",
+                    "utc_timezone_verified", "physical_power_calibration_verified"):
+            self.assertIs(self.record["context_verification"][key], False, key)
+        self.assertNotIn("observed_utc", self.record)
+        self.assertTrue(self.record["timestamp_provenance"])
+        for section in [self.record["idle"], *self.record["load"]["series"].values()]:
+            self.assertNotIn("first_sample_utc", section)
+            self.assertNotIn("last_sample_utc", section)
+            self.assertTrue(section["first_sample_reported_utc"])
+            self.assertTrue(section["last_sample_reported_utc"])
         for key in ("workload_pinned", "model_pinned", "engine_pinned"):
             self.assertIs(self.record["load"][key], False, key)
 
