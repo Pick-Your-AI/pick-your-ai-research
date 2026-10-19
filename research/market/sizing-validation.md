@@ -280,6 +280,19 @@ comparison target; their scopes are preserved. See the specification for the
 remaining #61/#7/#10/#11/coordinator dispositions. Frozen v1 and every historical
 CPU/native evidence file remain unchanged.
 
+## Comparison review readback — 2026-10-19
+
+PR #321 merged after bounded source review with no blocking source finding.
+The [dated decision readback](measurements/mr09-comparison-dispositions-2026-10-19.md)
+records CompleteDotTech's explicit coordinator dispositions on D61-01–D61-05:
+accept the supplemental track and experimental preparation, narrow the metric's
+host/exclusion boundary, preserve capacity distinctions and prospective prediction
+freeze, and leave tolerance unset. Separately named candidate/protocol responses
+remain pending; coordinator direction is not attributed to absent owners.
+The next preparation step is a minimal source correction with synthetic CPU
+regressions. No correction, new prediction, native experiment or accepted pair
+is added here; the original peak-memory requirements and #61 remain open.
+
 ## Native initialization qualification — 2026-10-18
 
 The [native cap/CUDA/capture continuation](measurements/native-qualification-2026-10-18/qualification.md)
