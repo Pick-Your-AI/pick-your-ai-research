@@ -18,7 +18,7 @@ available host RAM and 27.3 GiB temporary disk at 06:47 UTC. The host also repor
 an [i7-10700K](measurements/local-comparison-2026-10-19/cpu.json), 16 logical CPUs
 and 68,608,233,472 physical RAM bytes. These are observations, not reservations.
 OLMoE's 13,838,323,712-byte resident weights exceed both this session's observed
-spare GPU capacity and the retained native process cap; those cells stay unexecuted.
+spare GPU capacity and the retained cap on managed device buffers; those cells stay unexecuted.
 
 [PR #472](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/472)
 delivers the [fixed H1 protocol](measurements/local-comparison-2026-10-19/protocol.md):
