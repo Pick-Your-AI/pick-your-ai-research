@@ -9,7 +9,9 @@ This is the workstream summary for T5. It consolidates the four component decisi
 
 The four component records are merged into `main` (#68, #76, #77, #84). Merging this summary does not complete the T5 workstream or its component issues, confirm any handoff, or close any issue. Acceptance stays with the issue owners.
 
-The [actual #30 reconciliation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30#issuecomment-6253889603) records its research completion at 19:02:53 UTC on 2026-10-18, after the scoped #380 correction. For #31–#33 and the parent workstream, use the live issue records and cited receiving decisions to determine research completion and remaining work; this summary supplies no additional issue acceptance.
+The [actual #30 reconciliation](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/30#issuecomment-6253889603) records its research completion at 19:02:53 UTC on 2026-10-18, after the scoped #380 correction. The [#31 completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/31#issuecomment-6255596160) and [#33 ten-criterion completion receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6258532242) record their separately reviewed deliveries and actual post-main checks. As of 2026-10-19, #32 remains open on its existing canonical continuation; the parent workstream is not complete. These links retain their original source and reviewer attribution and supply no new component or parent acceptance.
+
+**Artifact summary reconciliation, 2026-10-19:** the artifact section below now follows the exact [#449 delivered record](https://github.com/Pick-Your-AI/pick-your-ai-research/blob/201aa8ea927fa35c4794f939f99f18e39dfdafb4/research/T5-training-fine-tuning/fine-tuned-model.md), including the #418/#424 source qualifications and `fine-tuned-artifact-rule-interpretation/0.3.0`. This is a summary of those reviewed decisions, not a new provider, engine, legal-source or measured-quality campaign. Their original access dates, release pins, evidence grades, research-only representations and actual receiving limits remain in the component record.
 
 | Component | Issue | Decision record | PR | Structured proposals |
 | --- | --- | --- | --- | --- |
@@ -71,21 +73,20 @@ The T5 rule proposals (F-, K-, D- and A-series) are written to apply only when a
 
 ### Fine-tuned model (#33)
 
-- **Artifact type:** adapter, merged weights, GGUF or provider-hosted. Serving compatibility depends on format, adapter vs merged, base id and revision, rank and target modules, PEFT variant, base quantisation and added tokens.
-- **Changes since common guidance:**
-  - Ollama no longer accepts LoRA adapters (v0.34.1+).
-  - TGI is archived.
-  - Together and Fireworks serve adapters only on dedicated or on-demand deployments.
+- **Artifact identity and serving mode:** identify the actual adapter, full/merged or converted weights, or provider-held result; keep exact artifact/base revisions, training method, tokenizer/template, saved tensors and transformation lineage. API / managed / self-hosted mode follows the actual operator and capacity arrangement, not the training channel, billing or downloadable packaging. An adapter inherits its served base's mode ([artifact definitions and fields](fine-tuned-model.md#comparison-fields)).
+- **Selected release and route evidence:**
+  - The exact inspected Ollama sources retain adapter conversion at v0.34.0 and reject adapter requests/GGUF adapter inputs at v0.34.1 and v0.40.5. This records those releases and the removal boundary, without asserting every intervening or future release (artifact V7-R).
+  - TGI's v3.3.7 source documents maintenance mode and startup LoRA loading; the repository API was observed archived on the recorded 2026-10-18 check. This is maintenance and source evidence, not a new serving result (V4-R).
+  - Together and Fireworks requirements apply to the actual job output, base, adapter and selected deployment. Export form, access, merge eligibility, capacity and destination support remain separate; documentation does not establish a particular account's entitlement or a successful relocation (V12–V13 and the dated provider clarification).
   - Apache-2.0 notice duties are conditional, not blanket: §4(a) licence copy, §4(b) change notices on modified files, and §4(d) NOTICE attributions only if the base distribution includes a NOTICE file (A-18a to A-18c).
 - **Recommendation:**
   - Keep the adapter and, where the exact method and quantization support it, a merged checkpoint, pinned to the base's full commit SHA. Merging loses PEFT-specific adapter management and does not qualify the resulting architecture, tokenizer, precision or serving/import tuple (artifact V11; framework R2).
   - Merging into the 16-bit base before target quantization is the note's conditional project inference, not a universal PEFT recommendation. A supported merge, any subsequent conversion and serving compatibility require separate checks (artifact A-06/V11).
-  - Avoid adding tokens.
-- **Evaluation gate for #36:**
-  - Safety regression vs the base: 10 adversarial examples took GPT-3.5 Turbo from 1.8% to 88.8% harmfulness.
-  - A training-data harm screen.
-  - Capability retention.
-  - Task gain.
+  - Record actual token/vocabulary changes, saved modules and tensor layout, then apply the selected converter or loader's evidenced operands. The vLLM saved-module, SGLang effective-vocabulary, llama.cpp converter-tensor and Fireworks target/live-merge conditions are different. A generic `added_tokens` flag is not a cross-engine verdict; any alternate merge/export and resulting serving tuple need their own qualification (V1-R/V3-R/V6-R/V13-R; A-03).
+- **Quality evidence and evaluation gate for #36:**
+  - Keep compatibility findings in the frozen EvaluationReport distinct from measured QualityEvaluationRun evidence. The proposed measured-quality locator needs the actual artifact/served-configuration association, evaluator/suite/dataset revisions, observations, selected thresholds and applicable same-suite base comparison; a URI or status alone supplies none of those facts ([evidence roles](fine-tuned-model.md#compatibility-and-measured-quality-evidence)).
+  - The historical Q1 example used GPT-3.5-Turbo-0613, five epochs on ten Anthropic red-team demonstrations, and 330 policy-oriented prompts across eleven categories. Its GPT-4 score-5 rate changed from 1.8% to 88.8%, with the base/tuned comparison using the same system prompt. This motivates the proposed regression gate; it neither measures the selected artifact nor predicts current-service behavior ([artifact Q1 and rationale](fine-tuned-model.md#recommendation-and-rationale)).
+  - Preserve separate pre-training data and post-training model assessments, capability retention, target-task gain and exact artifact/provenance conditions. #36 retains G1/G2/G4/G5/G9, suite/threshold selection and change-triggered reevaluation. Provider screens and a compatibility pass do not establish those measured gates or deployment readiness.
 
 ## Rules contributed to #40
 
@@ -98,7 +99,7 @@ The table counts research identities and points to their current evidence bounda
 | F-01 – F-24 | #30 | 24 | `training-framework-decision/0.2.0` replaces the original assertions. Each row distinguishes scoped source checks, historical leads, project policy and unresolved selected-use facts; no aggregate source-checked count is assigned here |
 | K-01 – K-09 | #31 | 9 | `training-compute-decision/0.2.0` supplies the shared participant/configuration/evidence envelope, fixed severity and four outcomes. K-02's headroom remains a project proposal; qualified bounds, missing facts, explicit contradictions, joint support and requested calibration retain distinct outcomes. No aggregate source-checked or measured-result count is assigned here |
 | D-01 – D-22 | #32 | 22 | The component register labels 21 source checked; D-20 is leakage policy with #36. Checked source conditions do not establish an actual dataset's rights, privacy or absence of leakage |
-| A-01 – A-20 (A-18 split into A-18a, A-18b, A-18c) | #33 | 22 | The component register labels 20 source checked, retaining A-06's inference; A-13 has classic-FAQ scope and A-20 is a proposed evaluation gate with #36 |
+| A-01 – A-20 (A-18 split into A-18a, A-18b, A-18c) | #33 | 22 | The historical register and its labels remain intact. The five corrected 0.2.0 interpretations plus [0.3.0's remaining seventeen concerns](fine-tuned-model.md#complete-a-series-proposal-mapping--research-interpretation-030) provide the full shared proposal format: eleven additional constraints and six advisories, with exact participant/evidence boundaries and fixed severity. Synthetic examples and project inferences remain labeled; this is no executable adoption or new measured result |
 
 There are 77 research rule identities. This count establishes neither executable rule adoption nor independent reproduction; #40 owns adoption and versioned migration. Historical saved results retain their original rule/version/evidence identities.
 
@@ -114,7 +115,7 @@ Contract-change proposals are consolidated in the #40 comment of 2026-10-16:
 - a training-memory ResourceEstimate metric;
 - `training_dataset` and `data_source` provenance fields replacing the governance booleans.
 
-#33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, `method`, `evaluation_report_ref`, `signature` and `base_notice_file_present` (needed by A-18c), plus revision-pinned catalog references.
+#33 adds: `base_model_revision`, adapter rank / target modules / PEFT variant / `modules_to_save`, `base_quantization`, `added_tokens`, actual training `method`, `evaluation_report_ref` for compatibility findings, a separate exact artifact/configuration association for measured QualityEvaluationRun evidence, `signature` and `base_notice_file_present` (needed by A-18c), plus revision-pinned catalog references. These remain note-only/versioned proposals where frozen v1 has no field; no richer association or measured result is invented.
 
 ## Outgoing handoffs and recorded dispositions
 
@@ -128,7 +129,7 @@ The table retains the requested boundaries. The bounded #31 → #39 quantity/uni
 | Training vs retrieval rights boundary; `data_source` for training sources | #32 | #13 | @zabyxc01 |
 | Leakage method and eval-set freeze; pre-deployment evaluation gate | #32, #33 | #36 | @PUSHINGSQUARES |
 | Training price normalisation; post-training hosting next to training cost | #31, #33 | #39 | @PUSHINGSQUARES |
-| Fine-tune lifecycle at deployment (OpenAI shutdown with base; Foundry 15-day deletion) | #33 | #37 | @PUSHINGSQUARES |
+| Selected fine-tune/base-snapshot shutdown and the Foundry classic-FAQ idle-deployment condition, with the model retained | #33 | #37 | @PUSHINGSQUARES |
 | User attestations (EU market, revenue, MAU, residency, lawful basis) | #30, #32 | #2, #3 | @tynamite |
 | Rule format and contract changes; "competing model" policy | all | #40 | @tynamite |
 | Evidence grading (checked vs verified), price freshness | all | #41 | @tynamite |
@@ -136,6 +137,8 @@ The table retains the requested boundaries. The bounded #31 → #39 quantity/uni
 **#31 → #39: accepted with constraints.** The [actual receiving decision 6251932295](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6251932295), at 15:52:51 UTC on 2026-10-18, accepts quantity, unit and uncertainty inputs at its exact recorded source. It preserves provider/model/method scope, distinct per-1K/per-1M divisors, provider-specific evaluation billing, a minimum charged once, instance-hour versus GPU-hour units, disjoint allocation lifetimes, separate one-off/recurring periods and unpriced unknowns. It does not adopt a meter, validate every historical quote, accept #33's separate serving handoff or supply #42 snapshot acceptance. See the [compute record's bounded dispositions](training-compute.md#bounded-receiving-dispositions--2026-10-18) for the reviewed revisions and checks. The decision is the actual in-session review under delegated project authority, not a statement by an absent named co-assignee.
 
 The [amended #31 → #39 receiving decision 6255117285](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/39#issuecomment-6255117285) separately accepts the revised compute note's quantity, unit, capacity and uncertainty boundaries against the unchanged `cost-estimate.md` blob `6405fd07b1465178c82bcfeab18d13990ad2836e`. It preserves the earlier receipt and its original source identity. It supplies neither a current quote, observed performance, new meter, rights or entitlement, nor completion of #39.
+
+**#33 → #10/#11/#36/#37: actual scoped receipts.** The [GPU/Compute intake6255801883](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6255801883) receives exact tensor/storage/configuration inputs; the [Engine intake6255802511](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6255802511) retains its three-candidate joint-support scope. [PUSHINGSQUARES's historical A-20 → G5 decision6232138142](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/121#issuecomment-6232138142) is separate from the [reciprocal #36 → #33 requirements6255762046](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/33#issuecomment-6255762046). The [two expressly distinguished Deployment directions6255762785](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/37#issuecomment-6255762785) preserve exact loaded identity, applicable evaluation and rehearsed rollback. The classic FAQ's more-than-15-day/no-named-calls condition deletes the deployment while retaining the model; it is not a universal Foundry policy or an observed deletion. Each receipt keeps its original reviewer, source, direction and constraints; the later #449 completion review does not retroactively repin it. These inputs supply no fit result, executed quality gate, account/rights grant, broader engine inventory or new serving-cost decision.
 
 Incoming T2 boundaries have separate receiving-owner receipts: [#9 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/9#issuecomment-6230482274), [historical #10 → #31](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6230482484), and [#11 → #33](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/11#issuecomment-6230482684). The later [actual #10 → #31 decision 6250287107](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/10#issuecomment-6250287107) receives the current L40S/RTX 4090/A100 and G6e/P4de subset while retaining H100 SXM/MI300X as note-only. These decisions retain their individual revisions and constraints, including tokenizer/template ownership; they do not accept reverse-direction requests or supply missing catalog records. The two later decisions were read back on 2026-10-18; the earlier receipts retain the prior recorded readback.
 
