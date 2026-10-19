@@ -58,7 +58,13 @@ def validate_deliverable(value, label):
     require(not path.is_absolute(), f'{label}: requires a relative file path')
     try:
         root = BASE.resolve(strict=True)
-        target = (root / path).resolve(strict=True)
+        target = root
+        for part in path.parts:
+            # Check each traversed directory before resolving a later '..'.
+            # Whole-path normalization can otherwise erase a missing component.
+            require(target.is_dir(),
+                    f'{label}: requires an existing file with a resolvable path')
+            target = (target / part).resolve(strict=True)
         require(target.is_relative_to(root),
                 f'{label}: resolved path must remain within research/market')
         require(target.is_file(), f'{label}: requires an existing file')

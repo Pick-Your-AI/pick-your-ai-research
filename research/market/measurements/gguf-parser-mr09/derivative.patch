@@ -1,0 +1,437 @@
+diff --git a/file_estimate__llamacpp.go b/file_estimate__llamacpp.go
+index ce1e5e4..f0366df 100644
+--- a/file_estimate__llamacpp.go
++++ b/file_estimate__llamacpp.go
+@@ -914,6 +914,9 @@ func (gf *GGUFFile) estimateLLaMACppRunInModel(o *_GGUFRunEstimateOptions, a *GG
+ 		nTokens = min(nContext, uint64(*o.LMCPhysicalBatchSize))
+ 		nBatch = nTokens
+ 		nOutputs = nTokens
++		if o.LMCInitOutputProfile != nil {
++			nOutputs = min(nTokens, uint64(o.LMCInitOutputProfile.OutputsMax))
++		}
+ 		nSeq = uint64(ptr.Deref(o.ParallelSize, 1))
+ 		nKV = nContext
+ 		if a.buildsMemorylessGraph() {
+@@ -956,6 +959,11 @@ func (gf *GGUFFile) estimateLLaMACppRunInModel(o *_GGUFRunEstimateOptions, a *GG
+ 		if a.AttentionCausal {
+ 			ob += a.VocabularyLength * nOutputs * 4 /* float32 size */
+ 		}
++		if o.LMCInitOutputProfile != nil {
++			// b11669 initializes host readback with n_seq_max rows and no
++			// embedding output. The independently reserved graph rows stay above.
++			ob = a.VocabularyLength * uint64(o.LMCInitOutputProfile.SequenceCapacity) * 4
++		}
+ 		// A speculator head scores every position it proposes, so llama.cpp reserves
+ 		// the full vocabulary by batch tensor on the device that holds the head. The
+ 		// host placement above is correct only for a decoder reserved with
+@@ -1463,19 +1471,23 @@ func (gf *GGUFFile) estimateLLaMACppRunInModel(o *_GGUFRunEstimateOptions, a *GG
+ 		}
+ 		// Finally, get the usage of output layer.
+ 		if a.AttentionCausal {
++			outputRows := nTokens
++			if o.LMCInitOutputProfile != nil {
++				outputRows = nOutputs
++			}
+ 			var outInc uint64
+ 			if a.AttentionRecurrent {
+ 				outInc += inpSMask + inpSSeq
+ 			}
+ 			if l, ok := opLs.Get("output_norm.weight"); ok {
+-				rs := GGMLTypeF32.RowSizeOf([]uint64{l.Dimensions[l.NDimensions-1], nTokens})
++				rs := GGMLTypeF32.RowSizeOf([]uint64{l.Dimensions[l.NDimensions-1], outputRows})
+ 				outInc += rs
+ 			}
+ 			if l, ok := opLs.Get("output.weight"); ok {
+-				rs := GGMLTypeF32.RowSizeOf([]uint64{l.Dimensions[l.NDimensions-1], nTokens})
++				rs := GGMLTypeF32.RowSizeOf([]uint64{l.Dimensions[l.NDimensions-1], outputRows})
+ 				outInc += rs
+ 			} else if l, ok := ipLs.Get("token_embd.weight"); ok {
+-				rs := GGMLTypeF32.RowSizeOf([]uint64{l.Dimensions[l.NDimensions-1], nTokens})
++				rs := GGMLTypeF32.RowSizeOf([]uint64{l.Dimensions[l.NDimensions-1], outputRows})
+ 				outInc += rs
+ 			}
+ 			// Host, for the same reason as the output buffer above: what the output
+@@ -1489,7 +1501,7 @@ func (gf *GGUFFile) estimateLLaMACppRunInModel(o *_GGUFRunEstimateOptions, a *GG
+ 			// but a draft head emits logits at every position and the projection runs
+ 			// on the device that holds it.
+ 			outDev := 0
+-			if a.emitsLogitsAtEveryPosition() {
++			if a.emitsLogitsAtEveryPosition() || o.LMCInitOutputProfile != nil {
+ 				outDev = idxOutputDevice
+ 			}
+ 			e.Devices[outDev].Computation.Output += GGUFBytesScalar(outInc)
+diff --git a/file_estimate_option.go b/file_estimate_option.go
+index 3591ad6..399b1a6 100644
+--- a/file_estimate_option.go
++++ b/file_estimate_option.go
+@@ -39,6 +39,8 @@ type (
+ 		LMCProjector                      *LLaMACppRunEstimate
+ 		LMCDrafter                        *LLaMACppRunEstimate
+ 		LMCAdapters                       []LLaMACppRunEstimate
++		// Opt-in experimental initialization semantics; nil preserves upstream behavior.
++		LMCInitOutputProfile *MR09InitBufferProfile
+ 
+ 		// StableDiffusionCpp (SDC) specific
+ 		SDCOffloadLayers                *uint64
+diff --git a/file_estimate_mr09.go b/file_estimate_mr09.go
+new file mode 100644
+index 0000000..cdda6cb
+--- /dev/null
++++ b/file_estimate_mr09.go
+@@ -0,0 +1,252 @@
++package gguf_parser
++
++import (
++	"bytes"
++	"crypto/sha256"
++	"encoding/hex"
++	"fmt"
++	"slices"
++	"strings"
++)
++
++// MR09InitBufferProfile selects the experimental initialization-only output
++// semantics of llama.cpp b11669. Every switch is explicit: an omitted string is
++// unsupported rather than an inferred match. These are declared controls, not
++// measurements or evidence that the caller actually ran the native tuple.
++type MR09InitBufferProfile struct {
++	RuntimeCommit         string `json:"runtime_commit"`
++	Stage                 string `json:"stage"`
++	Allocation            string `json:"allocation"`
++	Placement             string `json:"placement"`
++	OutputBackend         string `json:"output_backend"`
++	HostReadback          string `json:"host_readback"`
++	Embeddings            string `json:"embeddings"`
++	BackendSamplers       string `json:"backend_samplers"`
++	FlashAttention        string `json:"flash_attention"`
++	MMap                  string `json:"mmap"`
++	KVOffload             string `json:"kv_offload"`
++	OperationOffload      string `json:"operation_offload"`
++	CacheKey              string `json:"cache_key"`
++	CacheValue            string `json:"cache_value"`
++	ContextSize           uint32 `json:"context_size"`
++	LogicalBatchSize      uint32 `json:"logical_batch_size"`
++	PhysicalBatchSize     uint32 `json:"physical_batch_size"`
++	SequenceCapacity      uint32 `json:"sequence_capacity"`
++	OutputsMax            uint32 `json:"outputs_max"`
++	OutputsMaxPerSequence uint32 `json:"outputs_max_per_sequence"`
++}
++
++// MR09InitBufferEstimate retains the unsummarized upstream allocation model.
++// Its graph allocator/lifetime approximations are unchanged. It is neither an
++// exact native buffer prediction nor an admitted/accepted empirical pair.
++type MR09InitBufferEstimate struct {
++	Identity                string                `json:"identity"`
++	UpstreamCommit          string                `json:"upstream_commit"`
++	ArtifactSHA256          string                `json:"artifact_sha256"`
++	ArtifactBytes           uint64                `json:"artifact_bytes"`
++	Profile                 MR09InitBufferProfile `json:"declared_profile"`
++	HostReadbackRows        uint32                `json:"host_readback_rows"`
++	GraphOutputRows         uint32                `json:"graph_output_rows"`
++	PerSequenceContext      uint32                `json:"per_sequence_context"`
++	DeclaredPopulatedCache  uint32                `json:"declared_populated_cache_positions"`
++	DeclaredActiveRequests  uint32                `json:"declared_active_requests"`
++	DeclaredGeneratedTokens uint32                `json:"declared_generated_tokens"`
++	Estimate                LLaMACppRunEstimate   `json:"estimate"`
++}
++
++func (p MR09InitBufferProfile) validate() error {
++	for _, c := range [][3]string{
++		{"runtime_commit", p.RuntimeCommit, "620d2225cc436ab0b001e3200e590e3b286ef9ab"},
++		{"stage", p.Stage, "completed-initialization-before-free"},
++		{"allocation", p.Allocation, "allocated"},
++		{"placement", p.Placement, "single-CUDA0-all-layers"},
++		{"output_backend", p.OutputBackend, "CUDA0"},
++		{"host_readback", p.HostReadback, "host"},
++		{"embeddings", p.Embeddings, "disabled"},
++		{"backend_samplers", p.BackendSamplers, "disabled"},
++		{"flash_attention", p.FlashAttention, "disabled"},
++		{"mmap", p.MMap, "enabled"},
++		{"kv_offload", p.KVOffload, "enabled"},
++		{"operation_offload", p.OperationOffload, "enabled"},
++		{"cache_key", p.CacheKey, "f16"},
++		{"cache_value", p.CacheValue, "f16"},
++	} {
++		if c[1] != c[2] {
++			return fmt.Errorf("unsupported or missing %s", c[0])
++		}
++	}
++	if p.ContextSize < 32 || p.ContextSize > 2048 || p.ContextSize%32 != 0 ||
++		p.LogicalBatchSize < 32 || p.LogicalBatchSize > 256 ||
++		p.PhysicalBatchSize == 0 || p.PhysicalBatchSize > p.LogicalBatchSize ||
++		p.SequenceCapacity == 0 || p.SequenceCapacity > 2 ||
++		p.ContextSize%p.SequenceCapacity != 0 ||
++		p.OutputsMax == 0 || p.OutputsMax > p.LogicalBatchSize ||
++		p.OutputsMaxPerSequence != 1 {
++		return fmt.Errorf("unsupported or unresolved context/batch/output/sequence capacities")
++	}
++	return nil
++}
++
++// EstimateMR09InitBuffers hashes and parses the same private byte snapshot.
++// It performs no network access, model execution, backend allocation or device
++// discovery. expectedSHA256 must come from the caller's separately pinned
++// artifact record; a successful comparison does not authenticate that record.
++// This first experimental profile supports only bounded ordinary dense llama
++// F16 matrices (F32 vectors permitted) and the explicit controls above.
++func EstimateMR09InitBuffers(input []byte, expectedSHA256 string, p MR09InitBufferProfile) (result MR09InitBufferEstimate, err error) {
++	// The pinned general parser has legacy panic paths for wrongly typed
++	// metadata. This optional bounded entry point returns an error instead.
++	defer func() {
++		if r := recover(); r != nil {
++			result = MR09InitBufferEstimate{}
++			err = fmt.Errorf("unsupported malformed artifact: %v", r)
++		}
++	}()
++	if err := p.validate(); err != nil {
++		return result, err
++	}
++	if len(input) == 0 || len(input) > 512*1024*1024 {
++		return result, fmt.Errorf("unsupported artifact size")
++	}
++	data := bytes.Clone(input)
++	hash := sha256.Sum256(data)
++	actualSHA256 := hex.EncodeToString(hash[:])
++	if expectedSHA256 != actualSHA256 {
++		return result, fmt.Errorf("artifact SHA-256 mismatch")
++	}
++	f, err := parseGGUFFile([]_GGUFFileReadSeeker{{ReadSeeker: bytes.NewReader(data), Size: int64(len(data))}}, _GGUFReadOptions{})
++	if err != nil {
++		return result, fmt.Errorf("parse bound artifact: %w", err)
++	}
++	seen := map[string]bool{}
++	for _, kv := range f.Header.MetadataKV {
++		if seen[kv.Key] {
++			return result, fmt.Errorf("duplicate metadata key %q", kv.Key)
++		}
++		seen[kv.Key] = true
++		if strings.HasPrefix(kv.Key, "llama.") && (strings.Contains(kv.Key, "expert") || strings.Contains(kv.Key, "lora") || strings.HasSuffix(kv.Key, "_mla") || strings.Contains(kv.Key, "shared_kv") || strings.Contains(kv.Key, "nextn")) {
++			return result, fmt.Errorf("unsupported specialized metadata %q", kv.Key)
++		}
++	}
++	if !seen["general.architecture"] {
++		return result, fmt.Errorf("missing architecture identity")
++	}
++	for _, limit := range []struct {
++		key string
++		max uint32
++	}{
++		{"llama.context_length", 1048576}, {"llama.embedding_length", 8192},
++		{"llama.block_count", 64}, {"llama.feed_forward_length", 32768},
++		{"llama.attention.head_count", 256},
++	} {
++		kv, ok := f.Header.MetadataKV.Get(limit.key)
++		if !ok || kv.ValueType != GGUFMetadataValueTypeUint32 || kv.ValueUint32() == 0 || kv.ValueUint32() > limit.max {
++			return result, fmt.Errorf("unsupported or missing metadata %q", limit.key)
++		}
++	}
++	for _, key := range []string{"llama.attention.head_count_kv", "llama.attention.key_length", "llama.attention.value_length"} {
++		if kv, ok := f.Header.MetadataKV.Get(key); ok && (kv.ValueType != GGUFMetadataValueTypeUint32 || kv.ValueUint32() == 0 || kv.ValueUint32() > 8192) {
++			return result, fmt.Errorf("unsupported attention metadata %q", key)
++		}
++	}
++	a := f.Architecture()
++	if a.Type != "model" || a.Architecture != "llama" || !a.AttentionCausal ||
++		a.AttentionRecurrent || a.AttentionHybrid || a.ExpertCount != 0 || a.ExpertUsedCount != 0 ||
++		a.usesSlidingWindowAttention() || a.BlockCount == 0 || a.BlockCount > 64 ||
++		a.EmbeddingLength == 0 || a.EmbeddingLength > 8192 ||
++		a.VocabularyLength == 0 || a.VocabularyLength > 262144 ||
++		a.MaximumContextLength < uint64(p.ContextSize) || f.ModelSize == 0 || f.Size < f.ModelSize {
++		return result, fmt.Errorf("unsupported artifact architecture or dimensions")
++	}
++	if a.AttentionHeadCountKV == 0 || a.AttentionHeadCountKV > a.AttentionHeadCount ||
++		a.AttentionHeadCount%a.AttentionHeadCountKV != 0 || len(a.AttentionHeadCountKVs) != 0 ||
++		a.AttentionKeyLength == 0 || a.AttentionValueLength == 0 ||
++		uint64(a.AttentionKeyLength)*a.AttentionHeadCount != a.EmbeddingLength ||
++		uint64(a.AttentionValueLength)*a.AttentionHeadCount != a.EmbeddingLength || a.NextNPredictLayers != 0 {
++		return result, fmt.Errorf("unsupported attention or output-head dimensions")
++	}
++	expected := map[string][]uint64{
++		"token_embd.weight":  {a.EmbeddingLength, a.VocabularyLength},
++		"output_norm.weight": {a.EmbeddingLength},
++		"output.weight":      {a.EmbeddingLength, a.VocabularyLength},
++	}
++	for layer := uint64(0); layer < a.BlockCount; layer++ {
++		for name, dims := range map[string][]uint64{
++			"attn_norm.weight": {a.EmbeddingLength}, "ffn_norm.weight": {a.EmbeddingLength},
++			"attn_q.weight":      {a.EmbeddingLength, a.EmbeddingLength},
++			"attn_k.weight":      {a.EmbeddingLength, uint64(a.AttentionKeyLength) * a.AttentionHeadCountKV},
++			"attn_v.weight":      {a.EmbeddingLength, uint64(a.AttentionValueLength) * a.AttentionHeadCountKV},
++			"attn_output.weight": {a.EmbeddingLength, a.EmbeddingLength},
++			"ffn_gate.weight":    {a.EmbeddingLength, a.FeedForwardLength[layer]},
++			"ffn_up.weight":      {a.EmbeddingLength, a.FeedForwardLength[layer]},
++			"ffn_down.weight":    {a.FeedForwardLength[layer], a.EmbeddingLength},
++		} {
++			expected[fmt.Sprintf("blk.%d.%s", layer, name)] = dims
++		}
++	}
++	seen = map[string]bool{}
++	type interval struct{ start, end uint64 }
++	ranges := make([]interval, 0, len(f.TensorInfos))
++	for _, tensor := range f.TensorInfos {
++		if seen[tensor.Name] {
++			return result, fmt.Errorf("duplicate tensor %q", tensor.Name)
++		}
++		seen[tensor.Name] = true
++		if dims, ok := expected[tensor.Name]; !ok || !slices.Equal(dims, tensor.Dimensions) {
++			return result, fmt.Errorf("unsupported or inconsistent tensor shape %q", tensor.Name)
++		}
++		if tensor.NDimensions == 0 || tensor.NDimensions > 2 || len(tensor.Dimensions) != int(tensor.NDimensions) ||
++			(tensor.Type != GGMLTypeF16 && !(tensor.Type == GGMLTypeF32 && tensor.NDimensions == 1)) {
++			return result, fmt.Errorf("unsupported tensor layout %q", tensor.Name)
++		}
++		for _, dim := range tensor.Dimensions {
++			if dim == 0 || dim > 262144 {
++				return result, fmt.Errorf("unsupported tensor dimension %q", tensor.Name)
++			}
++		}
++		if f.TensorDataStartOffset < 0 || tensor.Offset > uint64(f.ModelSize) || tensor.Bytes() > uint64(f.ModelSize)-tensor.Offset {
++			return result, fmt.Errorf("tensor extends beyond bound artifact %q", tensor.Name)
++		}
++		ranges = append(ranges, interval{tensor.Offset, tensor.Offset + tensor.Bytes()})
++	}
++	for name := range expected {
++		if name != "output.weight" && !seen[name] {
++			return result, fmt.Errorf("missing ordinary llama tensor %q", name)
++		}
++	}
++	slices.SortFunc(ranges, func(a, b interval) int {
++		if a.start < b.start {
++			return -1
++		}
++		if a.start > b.start {
++			return 1
++		}
++		return 0
++	})
++	for i := 1; i < len(ranges); i++ {
++		if ranges[i].start < ranges[i-1].end {
++			return result, fmt.Errorf("overlapping tensor payloads")
++		}
++	}
++	e := f.EstimateLLaMACppRun(
++		WithLLaMACppContextSize(int32(p.ContextSize)),
++		WithLLaMACppLogicalBatchSize(int32(p.LogicalBatchSize)),
++		WithLLaMACppPhysicalBatchSize(int32(p.PhysicalBatchSize)),
++		WithParallelSize(int32(p.SequenceCapacity)),
++		WithLLaMACppOffloadLayers(a.BlockCount+1),
++		WithLLaMACppSplitMode(LLaMACppSplitModeNone),
++		func(o *_GGUFRunEstimateOptions) { o.LMCInitOutputProfile = &p },
++	)
++	if len(e.Devices) != 2 || !e.FullOffloaded || !e.Devices[1].HandleOutputLayer || e.ContextSize != uint64(p.ContextSize) {
++		return result, fmt.Errorf("effective estimator placement or context drift")
++	}
++	return MR09InitBufferEstimate{
++		Identity:       "gguf-parser-go-v0.26.4+mr09-output.1-experimental",
++		UpstreamCommit: "637cd9a7a03993ab30ace3c53dd8af5c37f46a94",
++		ArtifactSHA256: actualSHA256, ArtifactBytes: uint64(len(data)), Profile: p,
++		HostReadbackRows:   p.SequenceCapacity,
++		GraphOutputRows:    min(p.ContextSize, p.PhysicalBatchSize, p.OutputsMax),
++		PerSequenceContext: p.ContextSize / p.SequenceCapacity,
++		Estimate:           e,
++	}, nil
++}
+diff --git a/cmd/mr09-init-estimate/main.go b/cmd/mr09-init-estimate/main.go
+new file mode 100644
+index 0000000..ac31302
+--- /dev/null
++++ b/cmd/mr09-init-estimate/main.go
+@@ -0,0 +1,98 @@
++// Experimental project derivative; upstream MIT terms accompany its patch.
++package main
++
++import (
++	"bytes"
++	"encoding/json"
++	"flag"
++	"fmt"
++	parser "github.com/gpustack/gguf-parser-go"
++	"io"
++	"os"
++	"reflect"
++)
++
++func profile(raw string) (parser.MR09InitBufferProfile, error) {
++	var p parser.MR09InitBufferProfile
++	d := json.NewDecoder(bytes.NewBufferString(raw))
++	token, err := d.Token()
++	if err != nil || token != json.Delim('{') {
++		return p, fmt.Errorf("profile must be one object")
++	}
++	fields := map[string]json.RawMessage{}
++	exact := map[string]bool{}
++	pt := reflect.TypeOf(p)
++	for i := 0; i < pt.NumField(); i++ {
++		exact[pt.Field(i).Tag.Get("json")] = true
++	}
++	for d.More() {
++		token, err = d.Token()
++		if err != nil {
++			return p, err
++		}
++		key, ok := token.(string)
++		if !ok {
++			return p, fmt.Errorf("invalid profile key")
++		}
++		if !exact[key] {
++			return p, fmt.Errorf("unknown or aliased profile field %q", key)
++		}
++		if _, exists := fields[key]; exists {
++			return p, fmt.Errorf("duplicate profile field %q", key)
++		}
++		var value json.RawMessage
++		if err = d.Decode(&value); err != nil {
++			return p, err
++		}
++		fields[key] = value
++	}
++	if _, err = d.Token(); err != nil {
++		return p, err
++	}
++	if _, err = d.Token(); err != io.EOF {
++		return p, fmt.Errorf("profile has trailing content")
++	}
++	b, err := json.Marshal(fields)
++	if err != nil {
++		return p, err
++	}
++	d = json.NewDecoder(bytes.NewReader(b))
++	d.DisallowUnknownFields()
++	err = d.Decode(&p)
++	return p, err
++}
++
++func run() error {
++	pin := flag.String("sha256", "", "independently pinned artifact SHA-256")
++	raw := flag.String("profile", "", "complete explicit MR09 initialization profile JSON")
++	flag.Parse()
++	if flag.NArg() != 0 {
++		return fmt.Errorf("unexpected positional arguments")
++	}
++	p, err := profile(*raw)
++	if err != nil {
++		return err
++	}
++	info, err := os.Stdin.Stat()
++	if err != nil {
++		return err
++	}
++	if !info.Mode().IsRegular() || info.Size() < 1 || info.Size() > 512*1024*1024 {
++		return fmt.Errorf("stdin must be a nonempty regular GGUF file of at most 512 MiB")
++	}
++	data, err := io.ReadAll(io.LimitReader(os.Stdin, 512*1024*1024+1))
++	if err != nil {
++		return err
++	}
++	result, err := parser.EstimateMR09InitBuffers(data, *pin, p)
++	if err != nil {
++		return err
++	}
++	return json.NewEncoder(os.Stdout).Encode(result)
++}
++func main() {
++	if err := run(); err != nil {
++		json.NewEncoder(os.Stderr).Encode(map[string]string{"error": err.Error()})
++		os.Exit(1)
++	}
++}

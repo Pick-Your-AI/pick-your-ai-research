@@ -363,7 +363,15 @@ def check_record(record, captures, exact_record=None):
     res.count("idle.excluded_rows_listed", len(excluded["rows"]), exact_idle["excluded_rows"]["count"])
     actual_rows = [{"utilization_pct": number(r["utilization.gpu [%]"]), "memory_used_mib": number(r["memory.used [MiB]"]),
                     "pstate": r["pstate"], "power_draw_w": number(r["power.draw [W]"])} for r in later]
-    res.equal("idle.excluded_rows", actual_rows, exact_idle["excluded_rows"]["rows"])
+    # Preserve the JSON-safe display; validation uses the original CSV and JSON
+    # decimal values rather than the rounded display numbers.
+    exact_rows = [{"utilization_pct": cell_decimal(r["utilization.gpu [%]"]),
+                   "memory_used_mib": cell_decimal(r["memory.used [MiB]"]),
+                   "pstate": r["pstate"], "power_draw_w": cell_decimal(r["power.draw [W]"])} for r in later]
+    res.values["idle.excluded_rows"] = actual_rows
+    res.check("idle.excluded_rows",
+              lambda: (strict_equal(exact_rows, exact_idle["excluded_rows"]["rows"]),
+                       "recomputed %r, record %r" % (exact_rows, exact_idle["excluded_rows"]["rows"])))
 
     # High-utilization series.
     limit = exact(exact_card["power_limit_w"])  # exact Decimal; None if not a number
