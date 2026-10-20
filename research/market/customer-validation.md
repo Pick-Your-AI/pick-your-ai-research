@@ -323,7 +323,7 @@ Project engineering decisions can be recorded under the user's delegated authori
 | Test willingness to pay without leading questions | Not started; module proposed |
 | Deliverable links every significant conclusion to evidence or an explicit hypothesis | Met for this package: no demand conclusion is drawn |
 | Relevant technical owners review handoffs; unresolved decisions are named | Actual prospective #2/#3/#39 intakes accepted with narrowing in the dated receipt below; eleven bounded instrument decisions are selected above, and every remaining operational value/permission is unresolved |
-| Repository checks pass; reviewer accepts the evidence before Done | Technical instrument review accepted at prepared `1a1324d`; final amendment checks and canonical delivery remain required, with no fieldwork acceptance |
+| Repository checks pass; reviewer accepts the evidence before Done | Technical instrument review accepted at prepared `1a1324d`; subsequent amendment checks and canonical delivery are recorded in the [#467 delivery receipt](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6261843749) and [#63 reconciliation for #467/#477](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6263333823), with no operational or fieldwork acceptance |
 
 ## Result
 No customer fieldwork validation has been completed. The prospective technical design has the scoped receiving review below; no participant data, raw customer data, benchmark artifact or paid API output exists. Actual future results retain separate intake requirements for #52, #58, #2, #3 and #39.

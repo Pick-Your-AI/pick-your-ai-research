@@ -3268,3 +3268,232 @@ Apple and Android retain separate consumer implementation and receiving
 receipts. Their names are not declared changed or adopted merely by this shared
 decision. The [consumer handoff](display-labels/README.md) gives the complete
 admission and versioning policy.
+
+## CD-7 typed comparison research profile — 2026-10-19
+
+### Decision and exact scope
+
+**Select `typed-comparison/0.1` for a separate, opt-in, test-only comparison
+experiment.** This is a new project engineering decision under the user's
+standing delegation, developed by the in-session Research and Android reviewers.
+It resolves the concrete type/domain choice requested in
+[#40 receiving packet 6267989073](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40#issuecomment-6267989073).
+The reviewed source, actual executions and ordinary PR delivery retain their
+own identities. No reply or approval is attributed to an absent assignee.
+
+The [prototype](../../tests/t0_typed_comparison_prototype.py),
+[fixed synthetic vectors](../../tests/fixtures/t0-typed-comparison-0.1.json) and
+[admission/semantic tests](../../tests/test_t0_typed_comparison.py) specify this
+bounded research interface. They are outside frozen `contracts/v1/`, are not an
+application evaluator and do not install a new default. This profile has no
+authority to issue an EvaluationReport, classify a real product, authenticate
+source evidence or certify compatibility.
+
+The choice is a **versioned semantic change**, not a correction silently applied
+to every reader of ruleset schema `1.0.0`. Boolean/number comparability, direct
+container equality, recursive numeric normalization and nested set elements all
+have explicit meanings here. An eventual released interpreter must carry an
+explicit profile/version binding and receive its own complete-report and affected
+consumer review. A ruleset's schema version alone cannot select this experiment.
+
+### Why a separate profile is necessary
+
+The [frozen operator prose](../../contracts/v1/docs/DEPENDENCIES.md#operators)
+declares comparable scalar equality and numeric decimal normalization. It does
+not define recursive container equality or Boolean-to-number comparability.
+The [unchanged Python reference](../../contracts/v1/reference/evaluate.py)
+excludes Boolean values from its numeric helper but subsequently uses Python
+equality, membership and sets. Consequently its recorded behavior can equate
+`true` with `1`, including nested values; set operations can also encounter
+unhashable container elements. These observations do not by themselves define a
+language-neutral successor policy.
+
+The existing [Android diagnostic evaluator](https://github.com/Pick-Your-AI/pick-your-ai-android/blob/08f32b1127e7a8029000193e7916cb0a78ca88f0/core/src/main/kotlin/ai/pickyour/core/evaluation/FrozenDiagnosticEvaluator.kt)
+deliberately reproduces those historical Python outcomes. Its retained profile
+also supplies compatible-options callers; changing its equality helper would
+change more than a fixture harness. The
+[original Android/TypeScript comparison](https://github.com/Pick-Your-AI/pick-your-ai-android/issues/49#issuecomment-6266380541)
+records the four residual disagreements, while the
+[bounded numeric repair receipt](https://github.com/Pick-Your-AI/pick-your-ai-android/issues/49#issuecomment-6267611752)
+explicitly leaves their Boolean/container meanings unsettled. These project
+sources and their stated scopes were inspected on **2026-10-19**. No new vendor
+claim, measured capacity, participant observation or external research result is
+asserted by this decision.
+
+The alternatives considered were preserving host-language equality for every
+future evaluator, changing the frozen interpreter in place, rejecting all
+container elements, and defining a separately named typed relation. The first
+would perpetuate accidental type aliases; the second would rewrite historical
+meaning. Rejecting all container elements would avoid a domain expansion but
+would leave the requested nested membership policy unresolved. The selected
+profile defines that expansion explicitly and keeps the old interpreter intact.
+
+### Admission precedes comparison
+
+The prototype takes an exact profile identifier, an operator and two original
+UTF-8 JSON byte strings. A Python `None` argument represents an unresolved
+operand; the bytes `b'null'` represent the known JSON null value. Those states
+cannot substitute for one another. This function-level experiment introduces no
+new serialized Build, answer-state, Ruleset or EvaluationReport field.
+
+Both supplied values receive complete strict admission before any unresolved,
+empty-container or decisive-result shortcut. Duplicate object keys, malformed
+UTF-8/JSON, non-finite numbers, escaped lone surrogates, host floating-point
+arguments and exceeded resource budgets reject. An unsupported profile/operator
+also rejects. These are malformed or unsupported requests, not an `unknown`
+compatibility finding. Well-formed operands outside a particular operator's
+comparison domain instead produce `unknown` as defined below.
+
+JSON integer tokens are parsed as exact integers and fractional/exponent tokens
+as exact decimals from their original text. Comparison introduces no binary
+float or ambient decimal-context rounding. The implementation declares finite
+byte, depth, node, numeric-token/exponent and comparison-work budgets for this
+test profile, with these fixed maxima:
+
+| Resource | `typed-comparison/0.1` maximum |
+| --- | --- |
+| Original UTF-8 bytes | 65,536 per supplied operand |
+| Container nesting | 32 levels; a scalar root has depth zero |
+| JSON values and object keys | 10,000 nodes per operand |
+| String or object-key length | 4,096 Unicode scalar values |
+| JSON number token or canonical numeric string | 128 characters in the original numeric lexeme or decoded canonical numeric-string value, respectively |
+| Numeric exponent | Absolute value at most 1,000 for the supplied JSON exponent and resulting decimal scale |
+| Total work per comparison attempt | 200,000 deterministic units, including both preflight and comparison work |
+
+Before lexical preflight, each supplied operand reserves one work unit per
+decoded original-text character, including whitespace and escape spellings.
+For a canonical numeric string, quotes and JSON escapes are outside its decoded
+numeric-character count; their original spellings still consume bytes and work.
+Admission and comparison then charge their declared node, string and numeric
+work against the same attempt budget. Substring work additionally reserves
+`(haystack scalars + 1) * (needle scalars + 1)` units before scanning.
+Test callers may tighten a limit but cannot raise a cap; an
+exponent limit of zero is valid. A limit failure rejects the whole attempt.
+These deterministic budgets constrain the experiment; they are not elapsed-time
+or memory-use measurements. Its tests cover each limit and ensure an unrelated known result
+cannot hide an inadmissible supplied operand. These are experiment limits, not
+new frozen-contract or production transport limits.
+
+### Scalar relation
+
+`eq` and `ne` accept comparable scalar values only. Scalar equality is defined
+in this order:
+
+| Operand domains | Selected equality |
+| --- | --- |
+| Two numeric values | Exact numeric equality. Numeric values include admitted JSON number tokens and strings matching the original whole-string unsigned decimal grammar, with at most twelve fractional digits. |
+| Two Booleans | Boolean identity; `true` and `false` are distinct. Neither is numeric. |
+| Two known nulls | Equal. A known null and an unresolved operand remain different states. |
+| Two remaining strings | Exact character-sequence equality, without case, whitespace or Unicode normalization. |
+| Different scalar domains | `unknown`, including Boolean/number and known null/non-null pairs. |
+| Either operand is an array or object | `unknown`; this profile does not expand direct `eq` or `ne` to containers. |
+
+The existing full-match decimal grammar does not accept signs, exponent strings,
+leading zeros or terminal whitespace. A quoted `"1e0"` remains a string; the JSON
+number token `1e0` is numeric. Canonical numeric strings belong to the numeric
+domain independently of the other operand; other strings remain strings. Thus
+`eq("1", "word")` and `eq("1", "01")` are unknown, while
+`eq("word", "other")` is false. `ne` negates a known scalar result and
+preserves `unknown`. It cannot convert incomparability into a proven difference.
+`lt`, `lte`, `gt` and `gte` remain numeric-only and return `unknown` for incompatible
+well-formed operands. No ordering of Booleans, strings or containers is inferred.
+
+### Recursive element relation and membership
+
+Array membership uses a separate **recursive element equality**. Its scalar
+leaves use the scalar relation above. Two arrays compare in order: different
+lengths are false; equal lengths use three-valued conjunction of corresponding
+elements. Two objects require the same exact key set, independent of key order;
+different key sets are false, and equal key sets use the conjunction of matching
+values. Object keys are literal strings and are never numerically normalized.
+Different value domains, including array versus object or a container versus a
+scalar, are `unknown`.
+
+For this relation, a known false child dominates an unrelated unknown child;
+otherwise an unknown child prevents true. The complete input still must have
+passed admission. A short-circuit result supplies no exemption from parsing or
+resource limits. There is no host-language object identity, Boolean/integer
+alias or requirement that a container element be hashable.
+
+Recursive use of scalar numeric normalization is intentional. For example,
+`contains([["1"]], [1])` is true, even though the old Python recursive relation
+does not normalize such nested strings. Direct `eq(["1"], [1])` remains unknown
+because direct container equality is outside this profile's scalar domain. This
+asymmetry follows the separately declared operator domains; it must not emerge
+accidentally from a language's generic equality helper.
+
+| Operator and domain | Selected operation |
+| --- | --- |
+| `contains(array, item)` | Three-valued ANY of recursive element comparisons with each array member. |
+| `in(item, array)` | The same operation with explicit reversed operand order. |
+| `contains(string, string)` / `in(string, string)` | Literal substring membership with the declared operand order. Numeric-looking strings remain text here; a non-string item is unknown. |
+| `intersects(array, array)` | Three-valued ANY across recursive comparisons of the two arrays' members. |
+| `subset_of(array, array)` | Three-valued ALL of each left member's ANY membership in the right array. Duplicate members do not create a multiplicity requirement. |
+| Other well-formed container domains | Unknown. Objects are permitted as array elements but are not an implicit set of keys or values. |
+
+ANY returns true when a known matching candidate exists, even if another
+candidate is incomparable. With no true candidate it returns unknown if any
+candidate is unknown, and false otherwise. ALL returns false if any member is
+known false, unknown if none is false and at least one is unknown, and true
+otherwise. Thus an empty membership or intersection is false, while the empty
+left subset is true. A non-array set operand is unknown even if the other array
+is empty. Unresolved top-level operands remain unknown after supplied-value
+admission; absence cannot supply an empty set.
+
+### Fixed synthetic decision examples
+
+These are selected policy outcomes, not observations of an installed consumer.
+The executable corpus retains named cases for these decisions and their
+positive, negative, shape and exact-number controls. The companion test file
+adds malformed-input and resource-budget controls.
+
+| Expression | `typed-comparison/0.1` | Reason |
+| --- | --- | --- |
+| `eq(true, 1)` / `ne(true, 1)` | unknown / unknown | Incompatible scalar domains. |
+| `contains([1], true)` | unknown | Incomparability does not establish exclusion. |
+| `contains([true, 1], 1)` | true | A same-domain match dominates an unrelated unknown comparison. |
+| `eq([{"a": [true, 1]}], [{"a": [1, 1]}])` | unknown | Direct container equality is outside the scalar domain. |
+| `contains([{"a": [true]}], {"a": [1]})` | unknown | Recursive Boolean/number comparison stays unknown. |
+| `subset_of([true, 1, null], [1, null])` | unknown | Known matches for `1` and null cannot resolve the Boolean member. |
+| `eq([], [])` / `contains([[]], [])` | unknown / true | Distinct direct-scalar and recursive-element domains. |
+| `contains([["1"]], [1])` | true | Explicit recursive exact decimal normalization. |
+| `contains([[1, true]], [2, 1])` | false | Known first-element inequality dominates the second element's unknown. |
+| `contains([[]], {})` | unknown | Different container domains. |
+| `contains([{"a": 1}], {"b": 1})` | false | Same object domain with different key sets. |
+| `subset_of([], [])` / `intersects([], [])` | true / false | Declared empty-set identities after admission. |
+| `contains("10", "1")` / `contains("10", 1)` | true / unknown | Substring membership does not coerce numbers to text. |
+| `eq(9007199254740992, 9007199254740993)` | false | Original exact numbers differ by one. |
+| `eq(null, null)` / equality with an unresolved operand | true / unknown | Known null is not missing evidence. |
+
+### Historical preservation and consumer handoff
+
+The entire frozen-v1 subtree, its original operator corpus and the earlier
+canonical-note prefix remain unchanged. Research's
+`frozen-v1-reference-py312-decimal28` replay continues to require its original
+evaluator/schema/source bindings. Android's
+`local-retained-frozen-v1-no-external-evidence/1` profile, its 26 diagnostic
+goldens, 17 complete configuration reports and current compatible-options
+callers retain their existing dispatch and outcomes. The four original
+Boolean/container examples remain pass in that historical reference profile;
+they become unknown only when explicitly evaluated by this new experiment.
+No earlier report, execution label, hash binding or observed consumer mismatch
+is relabelled as a success for the new policy.
+
+The in-session Android reviewer accepts the proposed type/domain and immutable
+history boundary for this **test-only research profile** and identified the
+recursive string-normalization and container-domain decisions made explicit
+above. This records actual engineering review, not a native implementation or an
+absent owner's response. Independent review of the complete implementation and
+vectors, recorded execution and ordinary delivery remain attached to the PR.
+
+[Android #49](https://github.com/Pick-Your-AI/pick-your-ai-android/issues/49) retains
+the task of publishing and validating complete language-neutral conformance and
+migration expectations against the actual reference consumers. This research
+choice supplies a concrete successor meaning for that work; it does not make
+the current TypeScript consumer agree, replace an existing harness profile or
+complete the issue. Apple and website receivers must make their own explicit
+version/dispatch choice and execute matching full-report fixtures before any
+claim of shared implementation parity. [#42](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/42)
+retains the established historical/current projection and migration boundaries.
+Existing issue closure, assignees, native relationships and acceptance-record
+locations are unchanged by this additional decision.

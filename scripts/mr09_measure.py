@@ -106,10 +106,14 @@ def publish_result(path: Path, encoded: str) -> None:
 
 def sanitized(value, args):
     """Retain executable/package pins while avoiding personal filesystem locators."""
-    replacements = [(str(args.model_dir.resolve()), "$MODEL_DIR"),
-                    (str(Path(__file__).resolve().parents[1]), "$REPO"),
-                    (str(Path(sys.executable).resolve()), "$CUDA_PYTHON"),
-                    (str(Path.home()), "$USER_HOME")]
+    # Runtime errors can retain the caller's alias instead of the resolved path.
+    # Remove the longer spelling first when an alias contains the canonical path.
+    model_paths = sorted({str(args.model_dir.absolute()), str(args.model_dir.resolve())},
+                         key=len, reverse=True)
+    replacements = [(path, "$MODEL_DIR") for path in model_paths] + [
+        (str(Path(__file__).resolve().parents[1]), "$REPO"),
+        (str(Path(sys.executable).resolve()), "$CUDA_PYTHON"),
+        (str(Path.home()), "$USER_HOME")]
     if isinstance(value, str):
         for old, new in replacements:
             value = value.replace(old, new).replace(old.replace("\\", "/"), new)

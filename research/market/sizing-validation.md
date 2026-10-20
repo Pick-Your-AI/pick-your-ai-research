@@ -156,6 +156,96 @@ authorization; this hardware checklist provides none of those permissions.
 Keep pre-existing workloads untouched. No new probe, download or experiment
 was performed to prepare this hardware checklist; the separate GM1 continuation below records subsequent execution.
 
+## OLMoE artifact metadata for storage preparation — 2026-10-20
+
+This bounded continuation supplies publisher-declared shard identities for the
+existing M1–M4 model, `allenai/OLMoE-1B-7B-0924-Instruct` at revision
+`7f1c97f440f06ce36705e4f2b843edb5925f4498`. It addresses the artifact-size/hash
+preparation question in the hardware section above. The earlier
+[planned-coverage record](measurements/mr09-moe-plan.json) retains its original
+2026-10-16 access date and then-unretrieved shard-hash statement. Neither that
+historical record nor any protocol, runtime, observation or acceptance counter
+is rewritten by this metadata readback.
+
+**Evidence class and access:** Ai2/allenai primary publisher metadata served by
+Hugging Face, read on 2026-10-20. The pinned-revision
+[API response](https://huggingface.co/api/models/allenai/OLMoE-1B-7B-0924-Instruct/revision/7f1c97f440f06ce36705e4f2b843edb5925f4498?blobs=true)
+returned HTTP 200 at 03:10:32 UTC and identified that exact model and revision.
+The pinned index and three Git-LFS pointer files returned HTTP 200 at 03:11:50
+UTC. Only those metadata bytes were fetched; no weight shard was downloaded or
+independently hashed. Cross-checking two publisher representations is metadata
+consistency evidence, not independent verification of the model contents.
+
+| Shard (link retrieves its small Git-LFS pointer) | Publisher-declared shard bytes | Publisher-declared LFS SHA-256 of the weight file |
+| --- | ---: | --- |
+| [model-00001-of-00003.safetensors](https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/raw/7f1c97f440f06ce36705e4f2b843edb5925f4498/model-00001-of-00003.safetensors) | 4,997,744,872 | `6c79ac0487c3f23e8ee3d38752197d1e4a1a39d6c1438ec5fd7862874bb19321` |
+| [model-00002-of-00003.safetensors](https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/raw/7f1c97f440f06ce36705e4f2b843edb5925f4498/model-00002-of-00003.safetensors) | 4,997,235,176 | `b58ca7a9f28f35d76b56b0ec40fc46c356fd84ccf078083b251a3ad6a2da9a35` |
+| [model-00003-of-00003.safetensors](https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/raw/7f1c97f440f06ce36705e4f2b843edb5925f4498/model-00003-of-00003.safetensors) | 3,843,741,912 | `e93653ed509223e63eabae6f72ac8ea5a41115c5c7785574b9b2068ca0961c45` |
+
+Each retrieved pointer is 135 bytes. Its literal `oid sha256` and `size` match
+the API's corresponding LFS declaration and file length. Computing Git's blob
+SHA-1 over each actual pointer gives, in table order,
+`bbdd8063dade779552e52d13690ea56f32fe818b`,
+`d4a977ed0a9a4956bcfb9d984deb148ce0f8f758` and
+`4ee37977d58f61be56c5134a367f2d8a13f8bff4`, all matching the API's `blobId`.
+These are identities of the **pointer files**, not independently computed
+hashes of the multi-gigabyte weight files.
+
+The [pinned weight index](https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/raw/7f1c97f440f06ce36705e4f2b843edb5925f4498/model.safetensors.index.json)
+is 287,214 retrieved bytes. Its computed Git blob ID
+`4c7929b85bfb7ebfeb83cfd2398a4fe0ecfdf90e` matches the API, and all 3,219
+`weight_map` entries refer to exactly the three shard names above. Its declared
+`metadata.total_size` remains **13,838,323,712 tensor bytes**. The sum of the
+three declared shard-file lengths is **13,838,721,960 bytes**, or **398,248 bytes
+more** than that tensor total. This difference does not measure GPU overhead,
+host allocation or loader peak memory.
+
+The same API response declares these additional file lengths. Only the index
+was independently read and byte-counted in this continuation; the other five
+lengths below remain publisher declarations.
+
+| Additional selected file | Declared bytes |
+| --- | ---: |
+| `config.json` | 759 |
+| `generation_config.json` | 120 |
+| `model.safetensors.index.json` | 287,214 |
+| `special_tokens_map.json` | 433 |
+| `tokenizer.json` | 2,115,598 |
+| `tokenizer_config.json` | 5,986 |
+| **Additional file total** | **2,410,110** |
+
+Together, the three shard files and these six other files have declared logical
+lengths totaling **13,841,132,070 bytes**. This is an input-file accounting
+baseline, **not an admitted download plan or sufficient disk guard**. It excludes
+filesystem allocation overhead, caches, staging or simultaneous copies, incomplete
+downloads, additional required source/license files, dependencies, result artifacts
+and cleanup headroom. Actual storage requirements depend on a separately reviewed
+retrieval and retention strategy. Host-RAM minima, simultaneous loader copies,
+runtime/backend support and the GPU envelope remain unestablished; file lengths
+cannot determine them. The existing smaller-profile guards must not be reused or
+lowered for OLMoE.
+
+For exact reproduction of this metadata check, request the pinned API URL above,
+verify its model/revision and each file's declaration, fetch only the linked raw
+index and pointers, and compare their Git blob identities and pointer fields.
+The actual response SHA-256 values retained for this read were
+`7ddb8aea77c0e462e696ca723d032f29d0d9713b27449238a0e4504947f035ef`
+for the 3,843-byte API response and
+`0e2e1e0d8d357ac7af817cff28410c3dbad398f060c517a433e4076b2aae5579`
+for the index. The API response is a dated observation: unrelated service metadata
+may change even when its selected Git revision does not. The raw Git blob checks
+bind the pointer/index contents separately. Any later authorized weight download
+must verify the actual files against the declared sizes and SHA-256 values before
+using them as runtime evidence; a publisher pointer is not that verification.
+
+The [co-owner's existing hardware disposition](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6272422316)
+still supplies no experiment device. This addition selects no allocation,
+process cap, loader/offload design, narrowing option, numerical tolerance or
+ResourceEstimate. It grants no new source-use permission and redistributes no
+weight contents. **All three empirical #61 criteria remain open**, including
+the varied OLMoE and topology coverage and qualified peak/error measurements;
+the parent #56 gate and existing receiving decisions keep their stated scopes.
+
 ## Offline evidence integrity and continuation guard (2026-10-18)
 
 An independent read-only audit at main
