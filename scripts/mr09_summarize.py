@@ -4,6 +4,7 @@ import argparse
 import csv
 from collections import Counter, defaultdict
 import hashlib
+import io
 import json
 from pathlib import Path
 import re
@@ -87,7 +88,7 @@ def cohort_signature(run):
     if not isinstance(smi, str) or not smi:
         raise ValueError("successful run requires NVIDIA driver/device pins")
     try:
-        smi_reader = csv.DictReader(smi.splitlines())
+        smi_reader = csv.DictReader(io.StringIO(smi, newline=""), strict=True)
         headers = [key.strip() for key in (smi_reader.fieldnames or [])]
         if not headers or any(not key for key in headers) or len(set(headers)) != len(headers):
             raise ValueError("NVIDIA driver/device pin columns must be unique and nonempty")
