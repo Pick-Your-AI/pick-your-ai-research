@@ -1,0 +1,9 @@
+{
+  "id": "mr09-olmoe-0924-instruct-shard-01",
+  "uri": "https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/resolve/7f1c97f440f06ce36705e4f2b843edb5925f4498/model-00001-of-00003.safetensors",
+  "version": "7f1c97f440f06ce36705e4f2b843edb5925f4498",
+  "sha256": "6c79ac0487c3f23e8ee3d38752197d1e4a1a39d6c1438ec5fd7862874bb19321",
+  "access": "Public ungated immutable Hugging Face locator. Publisher metadata was read on 2026-10-19; this shard was not downloaded. An eventual authorized reader must verify the complete file length and SHA-256 before loading it.",
+  "description": "Planned OLMoE BF16 weight shard 1/3. The publisher LFS metadata declares 4997744872 bytes and the recorded SHA-256. These are source-checked metadata, not a local checksum observation or an executed model result. The separate artifact/copy plan retains the complete three-shard and six-metadata-file inventory.",
+  "rights": "The publisher model card at https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/blob/7f1c97f440f06ce36705e4f2b843edb5925f4498/README.md labels the pinned model Apache-2.0. Only small metadata and project-derived planning are submitted; no weights or model-card text are redistributed. A checksum grants no additional access or reuse rights."
+}

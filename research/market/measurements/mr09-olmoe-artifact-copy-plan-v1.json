@@ -1,0 +1,249 @@
+{
+  "schema_version": "mr09-olmoe-artifact-copy-plan/v1",
+  "classification": "selected_offline_design_not_executed",
+  "access_date": "2026-10-19",
+  "model": {
+    "id": "allenai/OLMoE-1B-7B-0924-Instruct",
+    "revision": "7f1c97f440f06ce36705e4f2b843edb5925f4498",
+    "format": "safetensors",
+    "weight_dtype": "bfloat16",
+    "weight_quantization": "none",
+    "license_label": "Apache-2.0"
+  },
+  "metadata_observation": {
+    "api_url": "https://huggingface.co/api/models/allenai/OLMoE-1B-7B-0924-Instruct/revision/7f1c97f440f06ce36705e4f2b843edb5925f4498?blobs=true",
+    "api_observed_at": "2026-10-19T18:14:16.779205+00:00",
+    "api_bytes": 3843,
+    "api_sha256": "7ddb8aea77c0e462e696ca723d032f29d0d9713b27449238a0e4504947f035ef",
+    "model_card_url": "https://huggingface.co/allenai/OLMoE-1B-7B-0924-Instruct/blob/7f1c97f440f06ce36705e4f2b843edb5925f4498/README.md",
+    "model_card_bytes": 6550,
+    "model_card_sha256": "06977ee73bcc71eaa8c6c2cf6a01f6f0b1a10aa8ed2777cc4c275b24215df696",
+    "weights_downloaded": false,
+    "tokenizer_payload_downloaded": false
+  },
+  "weight_shards": [
+    {
+      "file": "model-00001-of-00003.safetensors",
+      "bytes": 4997744872,
+      "publisher_sha256": "6c79ac0487c3f23e8ee3d38752197d1e4a1a39d6c1438ec5fd7862874bb19321",
+      "publisher_pointer_git_blob": "bbdd8063dade779552e52d13690ea56f32fe818b",
+      "checksum_scope": "publisher_lfs_metadata_not_downloaded",
+      "external_manifest": "mr09-olmoe-0924-instruct-shard-01.json"
+    },
+    {
+      "file": "model-00002-of-00003.safetensors",
+      "bytes": 4997235176,
+      "publisher_sha256": "b58ca7a9f28f35d76b56b0ec40fc46c356fd84ccf078083b251a3ad6a2da9a35",
+      "publisher_pointer_git_blob": "d4a977ed0a9a4956bcfb9d984deb148ce0f8f758",
+      "checksum_scope": "publisher_lfs_metadata_not_downloaded",
+      "external_manifest": "mr09-olmoe-0924-instruct-shard-02.json"
+    },
+    {
+      "file": "model-00003-of-00003.safetensors",
+      "bytes": 3843741912,
+      "publisher_sha256": "e93653ed509223e63eabae6f72ac8ea5a41115c5c7785574b9b2068ca0961c45",
+      "publisher_pointer_git_blob": "4ee37977d58f61be56c5134a367f2d8a13f8bff4",
+      "checksum_scope": "publisher_lfs_metadata_not_downloaded",
+      "external_manifest": "mr09-olmoe-0924-instruct-shard-03.json"
+    }
+  ],
+  "metadata_files": [
+    {
+      "file": "config.json",
+      "bytes": 759,
+      "publisher_git_blob": "8296bac29761be1b785df8d7392ed4d3cb27aef5",
+      "observed_sha256": "42ea6f5fe31e9243290ba3c348a4ad615b88a6fbc6e10544e21a87b6dff5da6c",
+      "observation": "small_file_read_and_git_blob_matched"
+    },
+    {
+      "file": "generation_config.json",
+      "bytes": 120,
+      "publisher_git_blob": "fc46ea816c5fbd0318028eac1f3b8a42c91d0ccf",
+      "observed_sha256": "77cf3f0caaa5e6d6972d910c70ca03f64fc47eccb4374082bdc8fc7b2c524a45",
+      "observation": "small_file_read_and_git_blob_matched"
+    },
+    {
+      "file": "model.safetensors.index.json",
+      "bytes": 287214,
+      "publisher_git_blob": "4c7929b85bfb7ebfeb83cfd2398a4fe0ecfdf90e",
+      "observed_sha256": "0e2e1e0d8d357ac7af817cff28410c3dbad398f060c517a433e4076b2aae5579",
+      "observation": "small_file_read_and_git_blob_matched"
+    },
+    {
+      "file": "special_tokens_map.json",
+      "bytes": 433,
+      "publisher_git_blob": "108aab149afcfafa3ccb86547bb19e9287befdcf",
+      "observed_sha256": "cf22141a130514760f6280166b8d1c9a56610578188aad0790eb6eaf6ea1eb08",
+      "observation": "small_file_read_and_git_blob_matched"
+    },
+    {
+      "file": "tokenizer.json",
+      "bytes": 2115598,
+      "publisher_git_blob": "0344bb8175515e3b085931f6686bacbebbb2cefb",
+      "observed_sha256": null,
+      "observation": "publisher_git_metadata_only"
+    },
+    {
+      "file": "tokenizer_config.json",
+      "bytes": 5986,
+      "publisher_git_blob": "defc06798403251a9045bd43e97852d27a0f8e9b",
+      "observed_sha256": "d3079f9c26a02fd28ee8d9bdfea4e96da7f5e803e06707ec8d1511acaaac7864",
+      "observation": "small_file_read_and_git_blob_matched"
+    }
+  ],
+  "geometry": {
+    "layers": 16,
+    "hidden_size": 2048,
+    "attention_heads": 16,
+    "kv_heads": 16,
+    "head_dim": 128,
+    "experts": 64,
+    "experts_per_token": 8,
+    "intermediate_size": 1024,
+    "vocabulary_size": 50304,
+    "max_positions": 4096
+  },
+  "totals": {
+    "stored_parameter_elements": 6919161856,
+    "index_tensor_count": 3219,
+    "expert_projection_tensor_count": 3072,
+    "tensor_payload_bytes": 13838323712,
+    "weight_file_bytes": 13838721960,
+    "file_header_overhead_bytes": 398248,
+    "metadata_file_bytes": 2410110,
+    "load_artifact_bytes": 13841132070,
+    "largest_shard_bytes": 4997744872
+  },
+  "loader": {
+    "python": "3.12.11",
+    "torch": "2.10.0+cu130",
+    "transformers": "5.0.0",
+    "safetensors": "0.7.0",
+    "transformers_source_commit": "08810b1e278938278c50153ee1edfd7a20a759da",
+    "source_files": [
+      {
+        "path": "src/transformers/modeling_utils.py",
+        "bytes": 244035,
+        "sha256": "35351f241c32a961cfe55deb6d95944b2432d7d8ba11248a4d02b2937230cdf3",
+        "git_blob": "c58f547e3e9033484321fd9e897702d4a1ffce2c"
+      },
+      {
+        "path": "src/transformers/core_model_loading.py",
+        "bytes": 58065,
+        "sha256": "c406920983e66704c387a05c3349a8ee466da86870aae849984b969b583b6b0f",
+        "git_blob": "467a549c3fdd5527d1be6dff92d877c2b1569efd"
+      },
+      {
+        "path": "src/transformers/conversion_mapping.py",
+        "bytes": 15669,
+        "sha256": "b3bd63aeb76917be17bcd3b63113dedd4b21d8334a7c18f6f04702b3db643671",
+        "git_blob": "5feeecbd0f2184d48264644cdb572f278cad9ac6"
+      },
+      {
+        "path": "src/transformers/models/olmoe/modeling_olmoe.py",
+        "bytes": 31811,
+        "sha256": "028a3e6037f2d598c13584ce353e25630ad8a629f36504f3fc8c29efcb6ecf8e",
+        "git_blob": "1acc5be9b4a44e19fd3703e90b2eb96579552daf"
+      },
+      {
+        "path": "src/transformers/models/olmoe/configuration_olmoe.py",
+        "bytes": 8578,
+        "sha256": "faee8446e76ef8f592b0e0d3c1594a1a5ccd728e4099fa55b0067c6da55b8420",
+        "git_blob": "e87e5b3b93b27587350f5be2f3c47fa8d2b75d70"
+      }
+    ],
+    "placement": "meta_initialization_cpu_conversion_then_cuda0",
+    "environment": {
+      "HF_DEACTIVATE_ASYNC_LOAD": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "from_pretrained": {
+      "local_files_only": true,
+      "use_safetensors": true,
+      "trust_remote_code": false,
+      "dtype": "bfloat16",
+      "attn_implementation": "sdpa",
+      "experts_implementation": "eager",
+      "device_map": null
+    },
+    "post_load_target": "cuda:0",
+    "inference_offload": false,
+    "visible_device_count": 1,
+    "download_strategy": "fixed_allowlist_serial_same_volume_partial_then_rename_no_hub_cache",
+    "runtime_source_scope": "Pinned upstream source review for a future loader; not verification of the historical installed wheel."
+  },
+  "screens": {
+    "classification": "engineering_allowances_not_measured_peaks",
+    "complete_artifact_copies": 2,
+    "storage_reserve_bytes": 2147483648,
+    "storage_budget_bytes": 29829747788,
+    "minimum_available_storage_bytes": 30064771072,
+    "host_file_mapping_allowance_bytes": 13838721960,
+    "host_parameter_allowance_bytes": 13838323712,
+    "host_conversion_allowance_bytes": 536870912,
+    "host_process_reserve_bytes": 4294967296,
+    "host_budget_bytes": 32508883880,
+    "minimum_available_host_bytes": 34359738368,
+    "gpu_process_cap_bytes": null,
+    "gpu_workspace_allowance_bytes": null,
+    "authorized_device_receipt": null,
+    "future_runner_sha256": null
+  },
+  "cells": [
+    {
+      "id": "M1",
+      "prompt_tokens": 256,
+      "decode_forwards": 32,
+      "active_sequences": 1,
+      "kv_cache": "bf16",
+      "terminal_cache_positions_per_sequence": 288,
+      "derived_bf16_kv_payload_bytes": 37748736,
+      "derived_weights_plus_kv_floor_bytes": 13876072448,
+      "status": "unexecuted"
+    },
+    {
+      "id": "M2",
+      "prompt_tokens": 2048,
+      "decode_forwards": 32,
+      "active_sequences": 1,
+      "kv_cache": "bf16",
+      "terminal_cache_positions_per_sequence": 2080,
+      "derived_bf16_kv_payload_bytes": 272629760,
+      "derived_weights_plus_kv_floor_bytes": 14110953472,
+      "status": "unexecuted"
+    },
+    {
+      "id": "M3",
+      "prompt_tokens": 2048,
+      "decode_forwards": 32,
+      "active_sequences": 2,
+      "kv_cache": "bf16",
+      "terminal_cache_positions_per_sequence": 2080,
+      "derived_bf16_kv_payload_bytes": 545259520,
+      "derived_weights_plus_kv_floor_bytes": 14383583232,
+      "status": "unexecuted"
+    },
+    {
+      "id": "M4",
+      "prompt_tokens": 2048,
+      "decode_forwards": 32,
+      "active_sequences": 1,
+      "kv_cache": "int4_if_supported",
+      "terminal_cache_positions_per_sequence": 2080,
+      "derived_bf16_kv_payload_bytes": null,
+      "derived_weights_plus_kv_floor_bytes": null,
+      "status": "unexecuted"
+    }
+  ],
+  "retained_unknowns": [
+    "actual_host_peak",
+    "actual_gpu_workspace_and_peak",
+    "authorized_device_and_process_cap",
+    "future_runner_and_installed_runtime_identity",
+    "weight_bytes_and_local_checksums",
+    "int4_cache_backend_support",
+    "multi_gpu_topology",
+    "matched_estimator_error_acceptance"
+  ],
+  "execution_status": "unexecuted"
+}
