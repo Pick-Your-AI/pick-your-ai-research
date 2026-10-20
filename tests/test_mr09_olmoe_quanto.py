@@ -15,6 +15,8 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
+from mr09_fixture_support import symlink_or_skip
+
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 import mr09_olmoe_quanto as q
@@ -366,10 +368,11 @@ class QuantoTests(unittest.TestCase):
         target.write_bytes(b"broken\n")
         with self.assertRaisesRegex(ValueError, "pinned upstream"):
             q._source_digest(target, 7, digest)
-        link = self.root / "link.py"
-        link.symlink_to(target)
-        with self.assertRaisesRegex(ValueError, "length/type"):
-            q._source_digest(link, 7, digest)
+        with self.subTest(fixture="symlink"):
+            link = self.root / "link.py"
+            symlink_or_skip(link, target)
+            with self.assertRaisesRegex(ValueError, "length/type"):
+                q._source_digest(link, 7, digest)
 
     @unittest.skipUnless(hasattr(os, "mkfifo") and hasattr(os, "O_NONBLOCK"), "POSIX FIFO boundary")
     def test_actual_fifo_substitution_is_nonblocking_and_rejected_before_read(self):
