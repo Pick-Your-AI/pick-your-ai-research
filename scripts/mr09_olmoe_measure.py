@@ -1,4 +1,4 @@
-"""Prospective, local-only OLMoE M1-M3 measurement preparation.
+"""Prospective, local-only OLMoE M1-M4 measurement preparation.
 
 No ML library is imported by plan, admission parsing, or runtime identity reads.
 The accepted plan is not device authorization. A concrete, separately reviewed
@@ -43,8 +43,16 @@ DEVICE_KEYS = {
 }
 
 
-def source_identity() -> dict:
-    return {name: artifacts.sha256_file(Path(__file__).with_name(name)) for name in SCRIPTS}
+def m4_support():
+    # Preserve the v1 path: the optional helper imports no ML, and is only needed
+    # for M4 plan/runtime/admission/measurement preparation.
+    import mr09_olmoe_quanto
+    return mr09_olmoe_quanto
+
+
+def source_identity(cell_name: str = "M1") -> dict:
+    selected = SCRIPTS + ("mr09_olmoe_quanto.py",) if cell_name == "M4" else SCRIPTS
+    return {name: artifacts.sha256_file(Path(__file__).with_name(name)) for name in selected}
 
 
 def exact(left, right) -> bool:
@@ -52,7 +60,7 @@ def exact(left, right) -> bool:
         right, sort_keys=True, allow_nan=False)
 
 
-def runtime_identity(plan: dict) -> dict:
+def runtime_identity(plan: dict, cell_name: str = "M1") -> dict:
     """Bind observed package metadata and the five actual installed loader sources.
 
     RECORD hashes identify distribution manifests, not a complete audit of every
@@ -81,23 +89,36 @@ def runtime_identity(plan: dict) -> dict:
         if digest != item["sha256"]:
             raise ValueError("installed loader source differs from selected upstream")
         sources[item["path"]] = digest
-    return {"python": platform.python_version(),
-            "python_executable_sha256": artifacts.sha256_file(Path(sys.executable).resolve()),
-            "versions": versions, "distribution_records_sha256": records,
-            "transformers_sources_sha256": sources}
+    result = {"python": platform.python_version(),
+              "python_executable_sha256": artifacts.sha256_file(Path(sys.executable).resolve()),
+              "versions": versions, "distribution_records_sha256": records,
+              "transformers_sources_sha256": sources}
+    if cell_name == "M4":
+        result["m4_backend"] = m4_support().runtime_identity()
+    return result
 
 
 def cell_spec(plan: dict, cell: str) -> dict:
-    if cell not in ("M1", "M2", "M3"):
-        raise NotImplementedError("only M1-M3 BF16 are prepared; M4 and multi-GPU remain unexecuted")
-    return next(item for item in plan["cells"] if item["id"] == cell)
+    if cell not in ("M1", "M2", "M3", "M4"):
+        raise NotImplementedError("only fixed M1-M4 cells are prepared; no multi-GPU or workload substitution")
+    selected = next(item for item in plan["cells"] if item["id"] == cell)
+    if cell == "M4":
+        m4_support().validate_cell(selected)
+    return selected
+
+
+def required_capacity(plan: dict, cell: dict, device: dict) -> int:
+    if cell["id"] == "M4":
+        return m4_support().required_capacity(plan, device)
+    return cell["derived_weights_plus_kv_floor_bytes"] + device["gpu_workspace_allowance_bytes"]
 
 
 def validate_admission(value: dict, plan: dict, cell: dict, repetition: int,
                        runtime: dict, output: Path, now: datetime | None = None) -> dict:
     if type(value) is not dict or set(value) != ADMISSION_KEYS:
         raise ValueError("closed OLMoE admission fields required")
-    if value["schema_version"] != "mr09-olmoe-run-admission/v1":
+    version = m4_support().SCHEMA if cell["id"] == "M4" else "mr09-olmoe-run-admission/v1"
+    if value["schema_version"] != version:
         raise ValueError("unsupported admission version")
     artifacts.reference(value["authorization_reference"])
     for key, wanted in (("model_id", artifacts.MODEL_ID), ("revision", artifacts.REVISION),
@@ -111,7 +132,7 @@ def validate_admission(value: dict, plan: dict, cell: dict, repetition: int,
         raise ValueError("admission repetition mismatch")
     if output.name != f"{cell['id']}-r{repetition}.json":
         raise ValueError("output must name the declared cell and repetition")
-    if not exact(value["scripts_sha256"], source_identity()) or not exact(value["runtime"], runtime):
+    if not exact(value["scripts_sha256"], source_identity(cell["id"])) or not exact(value["runtime"], runtime):
         raise ValueError("admission must bind actual scripts, executable and installed runtime identity")
     expiry = value["valid_until_utc"]
     if (type(expiry) is not str
@@ -121,16 +142,16 @@ def validate_admission(value: dict, plan: dict, cell: dict, repetition: int,
     if (now or datetime.now(timezone.utc)) >= deadline:
         raise ValueError("admission expired; no load or automatic renewal")
     device = value["device"]
-    if type(device) is not dict or set(device) != DEVICE_KEYS:
+    device_keys = DEVICE_KEYS | {"gpu_cache_allowance_bytes"} if cell["id"] == "M4" else DEVICE_KEYS
+    if type(device) is not dict or set(device) != device_keys:
         raise ValueError("complete closed device admission required")
     if (type(device["uuid"]) is not str
             or not re.fullmatch(r"GPU-[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", device["uuid"])):
         raise ValueError("one concrete full GPU UUID required; no index, MIG or device list")
-    for name in DEVICE_KEYS - {"uuid"}:
+    for name in device_keys - {"uuid"}:
         if type(device[name]) is not int or not 0 < device[name] < 2 ** 64:
             raise ValueError("explicit positive integer byte capacity required: " + name)
-    if (device["gpu_allocator_cap_bytes"]
-            < cell["derived_weights_plus_kv_floor_bytes"] + device["gpu_workspace_allowance_bytes"]):
+    if device["gpu_allocator_cap_bytes"] < required_capacity(plan, cell, device):
         raise ValueError("allocator cap is below declared payload plus workspace allowance")
     if device["gpu_allocator_cap_bytes"] + device["gpu_spare_bytes"] > device["driver_total_bytes"]:
         raise ValueError("declared cap and spare capacity exceed the device")
@@ -201,9 +222,10 @@ def preflight(plan: dict, device: dict, directory: Path) -> dict:
             "scope": "fresh physical host/whole GPU availability; not process peaks, container quota or fit assurance"}
 
 
-def prepare_environment(device: dict) -> None:
+def prepare_environment(device: dict, cell_name: str = "M1") -> None:
+    prefixes = ("torch", "transformers", "optimum.quanto") if cell_name == "M4" else ("torch", "transformers")
     if any(name == prefix or name.startswith(prefix + ".")
-           for name in sys.modules for prefix in ("torch", "transformers")):
+           for name in sys.modules for prefix in prefixes):
         raise ValueError("fresh process required; ML libraries must not already be imported")
     settings = {"HF_DEACTIVATE_ASYNC_LOAD": "1", "HF_HUB_OFFLINE": "1",
                 "CUDA_VISIBLE_DEVICES": device["uuid"]}
@@ -255,8 +277,14 @@ def cache_payload(cache, torch) -> int:
     return result
 
 
-def exercise(model, tokenizer, torch, cache_factory, cell: dict, begin, snapshot) -> dict:
+def exercise(model, tokenizer, torch, cache_factory, cell: dict, begin, snapshot,
+             observe_quantized=None) -> dict:
     """The historical prompt +32 forwards contract, with a fresh cache after warmup."""
+    quantized = cell["id"] == "M4"
+    if quantized:
+        m4_support().validate_cell(cell)
+    if quantized != (observe_quantized is not None):
+        raise ValueError("M4 requires its separate retained physical-storage observer")
     tokens = tokenizer.encode(WORDS, add_special_tokens=False)
     if (not tokens or any(type(token) is not int or not 0 <= token < 50304 for token in tokens)):
         raise ValueError("valid nonempty selected tokenizer output required")
@@ -278,10 +306,13 @@ def exercise(model, tokenizer, torch, cache_factory, cell: dict, begin, snapshot
         next_token = output.logits[:, -1].argmax(dim=-1, keepdim=True)
         snapshot("prefill", started)
         del output
-        observed_prefill = cache_payload(cache, torch)
-        estimate_prefill = kv_payload_bytes(16, 16, 128, cell["prompt_tokens"], cell["active_sequences"], 2)
-        if int(cache.get_seq_length()) != cell["prompt_tokens"] or observed_prefill != estimate_prefill:
-            raise ValueError("observed prefill cache geometry differs from selected cell")
+        if quantized:
+            observe_quantized(cache, "prefill", cell["prompt_tokens"])
+        else:
+            observed_prefill = cache_payload(cache, torch)
+            estimate_prefill = kv_payload_bytes(16, 16, 128, cell["prompt_tokens"], cell["active_sequences"], 2)
+            if int(cache.get_seq_length()) != cell["prompt_tokens"] or observed_prefill != estimate_prefill:
+                raise ValueError("observed prefill cache geometry differs from selected cell")
         started = begin("decode")
         for _ in range(cell["decode_forwards"]):
             output = model(input_ids=next_token, past_key_values=cache, use_cache=True, logits_to_keep=1)
@@ -289,13 +320,16 @@ def exercise(model, tokenizer, torch, cache_factory, cell: dict, begin, snapshot
             del output
         snapshot("decode", started)
         terminal = int(cache.get_seq_length())
-        observed_terminal = cache_payload(cache, torch)
-        if (terminal != cell["terminal_cache_positions_per_sequence"]
-                or observed_terminal != cell["derived_bf16_kv_payload_bytes"]):
-            raise ValueError("observed terminal cache differs from prompt plus 32 forwards")
+        if quantized:
+            observe_quantized(cache, "post_decode", terminal)
+        else:
+            observed_terminal = cache_payload(cache, torch)
+            if (terminal != cell["terminal_cache_positions_per_sequence"]
+                    or observed_terminal != cell["derived_bf16_kv_payload_bytes"]):
+                raise ValueError("observed terminal cache differs from prompt plus 32 forwards")
         started = begin("steady_state")
         snapshot("steady_state", started)
-    return {
+    result = {
         "workload": {"text": WORDS, "add_special_tokens": False,
                      "prompt_token_ids_sha256": hashlib.sha256(json.dumps(prompt).encode()).hexdigest(),
                      "generation": "greedy argmax without EOS early stop; no generated text retained"},
@@ -305,11 +339,17 @@ def exercise(model, tokenizer, torch, cache_factory, cell: dict, begin, snapshot
                           "greedy_tokens_produced_per_sequence": cell["decode_forwards"] + 1,
                           "cache_tokens_per_sequence": terminal,
                           "active_sequences": inputs.shape[0], "queued_requests": 0},
-        "native_kv_prefill_payload": {"measured_bytes": observed_prefill, "estimated_bytes": estimate_prefill,
-                                      "errors": errors(estimate_prefill, observed_prefill)},
-        "native_kv_steady_payload_bytes": observed_terminal,
-        "comparison_scope": "native KV tensor payload only; no competitor estimator or whole-process comparison",
     }
+    if quantized:
+        result["comparison_scope"] = "actual unique quantized cache backing storage; no BF16 or estimator comparison"
+    else:
+        result.update({
+            "native_kv_prefill_payload": {"measured_bytes": observed_prefill, "estimated_bytes": estimate_prefill,
+                                          "errors": errors(estimate_prefill, observed_prefill)},
+            "native_kv_steady_payload_bytes": observed_terminal,
+            "comparison_scope": "native KV tensor payload only; no competitor estimator or whole-process comparison",
+        })
+    return result
 
 
 def native_allocator_fraction(cap: int, property_total: int) -> tuple[float, int]:
@@ -355,7 +395,7 @@ def measure(directory: Path, plan: dict, cell: dict, device: dict, result: dict)
         raise NotImplementedError("only the native PyTorch allocator is prepared for this limit")
     fraction, effective = native_allocator_fraction(
         device["gpu_allocator_cap_bytes"], properties.total_memory)
-    if effective < cell["derived_weights_plus_kv_floor_bytes"] + device["gpu_workspace_allowance_bytes"]:
+    if effective < required_capacity(plan, cell, device):
         raise ValueError("effective allocator ceiling falls below declared payload/workspace")
     torch.cuda.set_per_process_memory_fraction(fraction, 0)
     torch.manual_seed(6109)
@@ -387,6 +427,11 @@ def measure(directory: Path, plan: dict, cell: dict, device: dict, result: dict)
             "host_peak_bytes": None,
         })
 
+    backend = m4_support().load_backend() if cell["id"] == "M4" else None
+    if backend is not None:
+        result["quantized_cache"] = {"profile": dict(m4_support().PROFILE), "observations": [],
+                                     "allowance_scope": "reviewed retained cache budget; not a prediction of transient fit"}
+
     started = begin("baseline")
     snapshot("baseline", started)
     started = begin("cpu_loading")
@@ -398,8 +443,15 @@ def measure(directory: Path, plan: dict, cell: dict, device: dict, result: dict)
     started = begin("gpu_loading")
     model.to("cuda:0")
     snapshot("gpu_loading", started)
-    result.update(exercise(model, tokenizer, torch, lambda: DynamicCache(config=model.config),
-                           cell, begin, snapshot))
+    if backend is None:
+        result.update(exercise(model, tokenizer, torch, lambda: DynamicCache(config=model.config),
+                               cell, begin, snapshot))
+    else:
+        def observe(cache, phase, positions):
+            m4_support().retain_observation(result["quantized_cache"]["observations"], cache, torch,
+                                            backend, phase, positions, device["gpu_cache_allowance_bytes"])
+        result.update(exercise(model, tokenizer, torch, lambda: m4_support().new_cache(backend, model.config),
+                               cell, begin, snapshot, observe_quantized=observe))
     result["status"] = "measurement_completed_pending_evidence_review"
 
 
@@ -409,7 +461,7 @@ def run(directory: Path, admission_path: Path, output: Path, cell_name: str, rep
     directory = artifacts.external_directory(directory)
     output = artifacts.fresh_output(output, directory)
     admission, admission_sha = artifacts.read_control(admission_path)
-    runtime = runtime_identity(plan)
+    runtime = runtime_identity(plan, cell_name)
     device = validate_admission(admission, plan, cell, repetition, runtime, output)
     claim = {"attempt_id": str(uuid.uuid4()), "cell": cell_name, "repetition": repetition,
              "started_utc": datetime.now(timezone.utc).isoformat(),
@@ -418,7 +470,7 @@ def run(directory: Path, admission_path: Path, output: Path, cell_name: str, rep
     with artifacts.reservation(pending, claim):
         result = {**claim, "classification": "prospective MR09 observation; pending independent evidence review",
                   "status": "unexecuted", "model_id": artifacts.MODEL_ID, "revision": artifacts.REVISION,
-                  "plan_sha256": artifacts.PLAN_SHA256, "scripts_sha256": source_identity(),
+                  "plan_sha256": artifacts.PLAN_SHA256, "scripts_sha256": source_identity(cell_name),
                   "runtime": runtime, "cell": cell_name, "repetition": repetition,
                   "configuration": {key: value for key, value in cell.items() if key != "status"},
                   "selected_loader": plan["loader"], "phases": [], "current_phase": "artifact_verification",
@@ -437,9 +489,9 @@ def run(directory: Path, admission_path: Path, output: Path, cell_name: str, rep
             _, current_admission_sha = artifacts.read_control(admission_path)
             if current_admission_sha != admission_sha:
                 raise ValueError("admission bytes changed during artifact verification")
-            current_runtime = runtime_identity(plan)
+            current_runtime = runtime_identity(plan, cell_name)
             validate_admission(admission, plan, cell, repetition, current_runtime, output)
-            prepare_environment(device)
+            prepare_environment(device, cell_name)
             result["current_phase"] = "runtime_import"
             measure(directory, plan, cell, device, result)
         except Exception as error:
@@ -449,6 +501,8 @@ def run(directory: Path, admission_path: Path, output: Path, cell_name: str, rep
                                 "unsupported" if isinstance(error, (ImportError, NotImplementedError))
                                 else "unexecuted" if phase in ("artifact_verification", "preflight", "admission_recheck", "runtime_import")
                                 else "runtime_error")
+            if cell_name == "M4" and isinstance(error, m4_support().CacheAllowanceExceeded):
+                result["status"] = "cache_allowance_exceeded"
             result["failure"] = {"phase": phase, "type": type(error).__name__}
         result["finished_utc"] = datetime.now(timezone.utc).isoformat()
         publish_result(output, json.dumps(result, indent=2, allow_nan=False) + "\n")
@@ -467,15 +521,21 @@ def main(argv=None) -> int:
     try:
         plan = artifacts.load_plan()
         if args.operation == "plan":
-            print(json.dumps({"status": "unexecuted", "plan_sha256": artifacts.PLAN_SHA256,
-                              "scripts_sha256": source_identity(), "cells": plan["cells"],
-                              "admission_fields": sorted(ADMISSION_KEYS),
-                              "device_fields": sorted(DEVICE_KEYS),
-                              "runtime_identity": "inspect-runtime in the separately installed pinned environment",
-                              "unknowns": plan["retained_unknowns"]}, indent=2))
+            result = {"status": "unexecuted", "plan_sha256": artifacts.PLAN_SHA256,
+                      "scripts_sha256": source_identity(args.cell), "cells": plan["cells"],
+                      "admission_fields": sorted(ADMISSION_KEYS), "device_fields": sorted(DEVICE_KEYS),
+                      "runtime_identity": "inspect-runtime in the separately installed pinned environment",
+                      "unknowns": plan["retained_unknowns"]}
+            if args.cell == "M4":
+                result.update(admission_version=m4_support().SCHEMA,
+                              device_fields=sorted(DEVICE_KEYS | {"gpu_cache_allowance_bytes"}),
+                              cache_profile=dict(m4_support().PROFILE),
+                              optional_backend={m4_support().DISTRIBUTION: m4_support().VERSION})
+            print(json.dumps(result, indent=2))
             return 0
         if args.operation == "inspect-runtime":
-            print(json.dumps(runtime_identity(plan), indent=2))
+            cell_spec(plan, args.cell)
+            print(json.dumps(runtime_identity(plan, args.cell), indent=2))
             return 0
         cell_spec(plan, args.cell)
         if any(value is None for value in (args.model_dir, args.admission, args.output)):
@@ -485,7 +545,7 @@ def main(argv=None) -> int:
                           "repetition": result["repetition"], "failure": result.get("failure")}))
         return 0 if result["status"] == "measurement_completed_pending_evidence_review" else 1
     except NotImplementedError:
-        print(json.dumps({"status": "unsupported", "reason": "M4 and multi-GPU remain unexecuted; no substitute"}))
+        print(json.dumps({"status": "unsupported", "reason": "selected cell or runtime is unsupported; no substitute or multi-GPU execution"}))
         return 0
     except (ValueError, OSError, RuntimeError, importlib.metadata.PackageNotFoundError) as error:
         print(json.dumps({"status": "operation_error", "error_type": type(error).__name__,

@@ -132,7 +132,7 @@ class MeasureTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="olmoe-run-synthetic-")
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.directory = self.root / "model"
         self.directory.mkdir()
         self.output = self.root / "M1-r1.json"
@@ -239,7 +239,11 @@ class MeasureTests(unittest.TestCase):
                               cell["terminal_cache_positions_per_sequence"],
                               cell["derived_bf16_kv_payload_bytes"]), values)
             self.assertEqual(cell["decode_forwards"], 32)
-        for name in ("M4", "G1", "D1", "M5"):
+        m4 = m.cell_spec(self.plan, "M4")
+        self.assertIsNone(m4["derived_bf16_kv_payload_bytes"])
+        self.assertIsNone(m4["derived_weights_plus_kv_floor_bytes"])
+        self.assertEqual((m4["prompt_tokens"], m4["decode_forwards"], m4["active_sequences"]), (2048, 32, 1))
+        for name in ("G1", "D1", "M5"):
             with self.subTest(name=name), self.assertRaises(NotImplementedError):
                 m.cell_spec(self.plan, name)
 
@@ -455,7 +459,7 @@ runpy.run_module("mr09_olmoe_measure", run_name="__main__")
 '''
         for arguments, code, status in (
                 (["plan"], 0, "unexecuted"),
-                (["run", "--cell", "M4"], 0, "unsupported"),
+                (["run", "--cell", "M4"], 1, "operation_error"),
                 (["run", "--cell", "G1"], 0, "unsupported"),
                 (["run"], 1, "operation_error")):
             with self.subTest(arguments=arguments):
@@ -577,6 +581,284 @@ runpy.run_module("mr09_olmoe_measure", run_name="__main__")
         for cap, total in ((True, 10), (1.0, 10), (0, 10), (10, 10), (11, 10)):
             with self.subTest(invalid=(cap, total)), self.assertRaises(ValueError):
                 m.native_allocator_fraction(cap, total)
+
+
+
+class M4Model(Model):
+    def __init__(self, plan, failure=None):
+        super().__init__(plan)
+        self.failure = failure
+
+    def __call__(self, *, input_ids, past_key_values, use_cache, logits_to_keep):
+        assert use_cache is True and logits_to_keep == 1
+        before = past_key_values.get_seq_length()
+        self.calls.append((input_ids.shape, past_key_values, before))
+        if self.failure is not None and before >= 2048:
+            raise self.failure("synthetic later decode failure")
+        past_key_values.append(input_ids.shape[1])
+        return SimpleNamespace(logits=Logits(input_ids.shape[0]))
+
+
+class M4MeasureTests(unittest.TestCase):
+    def setUp(self):
+        import test_mr09_olmoe_quanto as fixtures
+        self.fixtures = fixtures
+        self.q = m.m4_support()
+        self.plan = a.load_plan()
+        self.cell = m.cell_spec(self.plan, "M4")
+        self.temporary = tempfile.TemporaryDirectory(prefix="olmoe-m4-run-synthetic-")
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name).resolve()
+        self.directory = self.root / "model"
+        self.directory.mkdir()
+        self.output = self.root / "M4-r1.json"
+        self.runtime = {"classification": "synthetic identity; no actual installed ML",
+                        "m4_backend": {"version": "0.2.7", "source_files_sha256": {"synthetic": "bound"}}}
+        self.device = {"uuid": UUID, "driver_total_bytes": 48 * m.GIB,
+                       "gpu_allocator_cap_bytes": 16 * m.GIB,
+                       "gpu_workspace_allowance_bytes": m.GIB,
+                       "gpu_spare_bytes": 2 * m.GIB, "gpu_cache_allowance_bytes": 256 * 2 ** 20}
+
+    def admission(self):
+        return {"schema_version": "mr09-olmoe-run-admission/v2",
+                "authorization_reference": "synthetic M4 fixture, not a hardware admission",
+                "valid_until_utc": "2099-01-01T00:00:00Z",
+                "model_id": a.MODEL_ID, "revision": a.REVISION, "plan_sha256": a.PLAN_SHA256,
+                "scripts_sha256": m.source_identity("M4"), "runtime": copy.deepcopy(self.runtime),
+                "cell": "M4", "repetition": 1, "output_file": "M4-r1.json",
+                "device": copy.deepcopy(self.device)}
+
+    def admit(self, value):
+        return m.validate_admission(value, self.plan, self.cell, 1, self.runtime, self.output, now=NOW)
+
+    def modules(self, model):
+        torch = fake_torch()
+        for name, value in vars(self.fixtures.tensor_api()).items(): setattr(torch, name, value)
+        tokenizer = SimpleNamespace(encode=lambda *args, **kwargs: [1, 2, 3, 4, 5])
+        dynamic = Mock(side_effect=AssertionError("M4 must not use a BF16 fallback"))
+        transformers = SimpleNamespace(
+            AutoTokenizer=SimpleNamespace(from_pretrained=Mock(return_value=tokenizer)),
+            AutoModelForCausalLM=SimpleNamespace(from_pretrained=Mock(return_value=model)), DynamicCache=dynamic)
+        return torch, transformers
+
+    def synthetic_run(self, model):
+        admission = self.root / "admission.json"
+        admission.write_text(json.dumps(self.admission()))
+        torch, transformers = self.modules(model)
+        with patch.object(m, "runtime_identity", return_value=self.runtime), \
+                patch.object(a, "verify", return_value={"classification": "synthetic offline artifact result"}), \
+                patch.object(m, "preflight", return_value={"guards": {"synthetic": True}}), \
+                patch.object(m, "prepare_environment"), \
+                patch.object(self.q, "load_backend", return_value=self.fixtures.backend()), \
+                patch.dict(sys.modules, {"torch": torch, "transformers": transformers}):
+            result = m.run(self.directory, admission, self.output, "M4", 1)
+        self.assertEqual(json.loads(self.output.read_text()), result)
+        transformers.DynamicCache.assert_not_called()
+        return result
+
+    def test_m4_v2_admission_requires_extra_source_and_explicit_cache_allowance(self):
+        admission = self.admission()
+        original = copy.deepcopy(admission)
+        self.assertEqual(self.admit(admission), self.device)
+        self.assertEqual(admission, original)
+        self.assertEqual(set(m.source_identity()), set(m.SCRIPTS))
+        self.assertEqual(set(m.source_identity("M3")), set(m.SCRIPTS))
+        self.assertEqual(set(m.source_identity("M4")), set(m.SCRIPTS) | {"mr09_olmoe_quanto.py"})
+        self.assertEqual(m.RUNTIME_NAMES, ("torch", "transformers", "safetensors"))
+        self.assertNotIn("gpu_cache_allowance_bytes", m.DEVICE_KEYS)
+        self.assertIsNone(self.cell["derived_weights_plus_kv_floor_bytes"])
+        self.assertIsNone(self.plan["screens"]["gpu_process_cap_bytes"])
+
+    def test_v1_m4_and_v2_bf16_cells_are_rejected_without_schema_alias(self):
+        value = self.admission()
+        value["schema_version"] = "mr09-olmoe-run-admission/v1"
+        with self.assertRaisesRegex(ValueError, "version"): self.admit(value)
+        value = self.admission()
+        for name in ("M1", "M2", "M3"):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "version"):
+                m.validate_admission(value, self.plan, m.cell_spec(self.plan, name), 1,
+                                     self.runtime, self.root / f"{name}-r1.json", now=NOW)
+
+    def test_m4_cache_allowance_has_no_missing_boolean_float_zero_or_extra_field(self):
+        for invalid in (None, True, False, 1.0, 0, -1, 2 ** 64):
+            value = self.admission()
+            value["device"]["gpu_cache_allowance_bytes"] = invalid
+            with self.subTest(invalid=invalid), self.assertRaises(ValueError): self.admit(value)
+        for change in (lambda v: v["device"].pop("gpu_cache_allowance_bytes"),
+                       lambda v: v["device"].update(inferred_cache_bytes=1),
+                       lambda v: v.update(cache_profile={"nbits": 2}),
+                       lambda v: v["scripts_sha256"].pop("mr09_olmoe_quanto.py"),
+                       lambda v: v["runtime"]["m4_backend"].update(version="0.2.8")):
+            value = self.admission()
+            change(value)
+            with self.assertRaises(ValueError): self.admit(value)
+
+    def test_m4_requested_cap_uses_weights_plus_reviewed_cache_and_workspace(self):
+        value = self.admission()
+        required = 13838323712 + 256 * 2 ** 20 + m.GIB
+        value["device"]["gpu_allocator_cap_bytes"] = required
+        self.assertEqual(self.admit(value)["gpu_allocator_cap_bytes"], required)
+        value["device"]["gpu_allocator_cap_bytes"] -= 1
+        with self.assertRaisesRegex(ValueError, "payload plus workspace"): self.admit(value)
+        value = self.admission()
+        value["device"]["gpu_cache_allowance_bytes"] = 2 * m.GIB
+        value["device"]["gpu_allocator_cap_bytes"] = 13838323712 + m.GIB + 256 * 2 ** 20
+        with self.assertRaisesRegex(ValueError, "payload plus workspace"): self.admit(value)
+
+    def test_m4_rounded_effective_cap_is_rechecked_before_backend_or_model_load(self):
+        torch, transformers = self.modules(M4Model(self.plan))
+        required = 13838323712 + self.device["gpu_cache_allowance_bytes"] + m.GIB
+        with patch.dict(sys.modules, {"torch": torch, "transformers": transformers}), \
+                patch.object(m, "native_allocator_fraction", return_value=(0.3, required - 1)), \
+                patch.object(self.q, "load_backend") as backend, \
+                self.assertRaisesRegex(ValueError, "effective allocator"):
+            m.measure(self.directory, self.plan, self.cell, self.device, {"phases": []})
+        backend.assert_not_called()
+        transformers.AutoTokenizer.from_pretrained.assert_not_called()
+        transformers.AutoModelForCausalLM.from_pretrained.assert_not_called()
+        self.assertEqual(torch.cuda.fractions, [])
+
+    def test_m4_retains_shared_driver_context_and_property_cap_domains(self):
+        torch, transformers = self.modules(M4Model(self.plan))
+        property_total, context_total = 48 * m.GIB + 1048576, 48 * m.GIB - 4096
+        torch.cuda.mem_get_info = lambda index=0: (40 * m.GIB, context_total)
+        torch.cuda.get_device_properties = lambda index: SimpleNamespace(
+            uuid=SimpleNamespace(bytes=list(uuid.UUID(UUID[4:]).bytes)), total_memory=property_total)
+        result = {"phases": []}
+        with patch.dict(sys.modules, {"torch": torch, "transformers": transformers}), \
+                patch.object(self.q, "load_backend", return_value=self.fixtures.backend()):
+            m.measure(self.directory, self.plan, self.cell, self.device, result)
+        self.assertEqual(result["cuda_context_observation"]["total_bytes"], context_total)
+        self.assertEqual(result["allocator"]["device_property_total_bytes"], property_total)
+        self.assertEqual(result["allocator"]["fraction"], 16 * m.GIB / property_total)
+        self.assertLessEqual(result["allocator"]["effective_limit_bytes"], 16 * m.GIB)
+        self.assertTrue(all(p["cuda_context_total_bytes"] == context_total for p in result["phases"]))
+        self.assertIsNone(result["host_peak_bytes"])
+        self.assertIsNone(result["whole_process_gpu_peak_bytes"])
+
+    def test_full_m4_synthetic_run_keeps_warmup_and_2080_positions_without_bf16_comparison(self):
+        model = M4Model(self.plan)
+        result = self.synthetic_run(model)
+        self.assertEqual(result["status"], "measurement_completed_pending_evidence_review")
+        self.assertEqual(result["actual_tokens"], {
+            "prompt_per_sequence": 2048, "decode_forwards_per_sequence": 32,
+            "greedy_tokens_produced_per_sequence": 33, "cache_tokens_per_sequence": 2080,
+            "active_sequences": 1, "queued_requests": 0})
+        self.assertEqual(len(model.calls), 35)
+        self.assertEqual([c[0] for c in model.calls[:3]], [(1, 64), (1, 1), (1, 2048)])
+        self.assertIs(model.calls[0][1], model.calls[1][1])
+        self.assertIsNot(model.calls[1][1], model.calls[2][1])
+        self.assertEqual(model.calls[2][2], 0)
+        self.assertTrue(all(c[0] == (1, 1) for c in model.calls[3:]))
+        samples = result["quantized_cache"]["observations"]
+        self.assertEqual([p["phase"] for p in samples], ["prefill", "post_decode"])
+        self.assertEqual([p["total_unique_backing_bytes"] for p in samples], [75497472, 79691776])
+        self.assertTrue(all(p["within_allowance"] for p in samples))
+        for key in ("native_kv_prefill_payload", "native_kv_steady_payload_bytes", "estimated_bytes", "errors"):
+            self.assertNotIn(key, result)
+        self.assertNotIn('"estimated_bytes"', json.dumps(result))
+        self.assertIsNone(result["configuration"]["derived_bf16_kv_payload_bytes"])
+        self.assertEqual([p["phase"] for p in result["phases"]],
+                         ["baseline", "cpu_loading", "gpu_loading", "warmup", "prefill", "decode", "steady_state"])
+
+    def test_prefill_allowance_breach_publishes_actual_bytes_and_stops_before_decode(self):
+        self.device["gpu_cache_allowance_bytes"] = 75497471
+        model = M4Model(self.plan)
+        result = self.synthetic_run(model)
+        self.assertEqual(result["status"], "cache_allowance_exceeded")
+        self.assertEqual(result["failure"], {"phase": "prefill", "type": "CacheAllowanceExceeded"})
+        self.assertEqual(len(model.calls), 3)
+        samples = result["quantized_cache"]["observations"]
+        self.assertEqual(len(samples), 1)
+        self.assertEqual(samples[0]["total_unique_backing_bytes"], 75497472)
+        self.assertEqual(samples[0]["reviewed_allowance_bytes"], 75497471)
+        self.assertFalse(samples[0]["within_allowance"])
+        self.assertNotIn("actual_tokens", result)
+
+    def test_post_decode_allowance_breach_retains_both_complete_observations(self):
+        self.device["gpu_cache_allowance_bytes"] = 75497472
+        model = M4Model(self.plan)
+        result = self.synthetic_run(model)
+        self.assertEqual(result["status"], "cache_allowance_exceeded")
+        self.assertEqual(result["failure"]["phase"], "decode")
+        samples = result["quantized_cache"]["observations"]
+        self.assertEqual([s["within_allowance"] for s in samples], [True, False])
+        self.assertEqual(samples[1]["total_unique_backing_bytes"], 79691776)
+        self.assertEqual(len(model.calls), 35)
+        self.assertNotIn("steady_state", [p["phase"] for p in result["phases"]])
+
+    def test_later_decode_oom_publishes_the_earlier_actual_cache_sample(self):
+        model = M4Model(self.plan, MemoryError)
+        result = self.synthetic_run(model)
+        self.assertEqual(result["status"], "OOM_decode")
+        self.assertEqual(result["failure"]["phase"], "decode")
+        samples = result["quantized_cache"]["observations"]
+        self.assertEqual(len(samples), 1)
+        self.assertEqual(samples[0]["phase"], "prefill")
+        self.assertEqual(samples[0]["total_unique_backing_bytes"], 75497472)
+        self.assertTrue(samples[0]["within_allowance"])
+
+    def test_missing_backend_is_unsupported_before_cpu_model_loading(self):
+        torch, transformers = self.modules(M4Model(self.plan))
+        with patch.dict(sys.modules, {"torch": torch, "transformers": transformers}), \
+                patch.object(self.q, "load_backend", side_effect=ImportError("synthetic absent backend")), \
+                self.assertRaises(ImportError):
+            m.measure(self.directory, self.plan, self.cell, self.device, {"phases": []})
+        transformers.AutoTokenizer.from_pretrained.assert_not_called()
+        transformers.AutoModelForCausalLM.from_pretrained.assert_not_called()
+
+    def test_m4_rechecks_optional_runtime_identity_after_artifact_hashing(self):
+        admission = self.root / "admission.json"
+        admission.write_text(json.dumps(self.admission()))
+        changed = copy.deepcopy(self.runtime)
+        changed["m4_backend"]["source_files_sha256"]["synthetic"] = "changed"
+        with patch.object(m, "runtime_identity", side_effect=[self.runtime, changed]) as identity, \
+                patch.object(a, "verify", return_value={"classification": "synthetic"}), \
+                patch.object(m, "preflight", return_value={"guards": {"synthetic": True}}), \
+                patch.object(m, "measure") as measured, patch.object(m, "prepare_environment") as environment:
+            result = m.run(self.directory, admission, self.output, "M4", 1)
+        self.assertEqual(result["status"], "unexecuted")
+        self.assertEqual(result["failure"]["phase"], "admission_recheck")
+        self.assertEqual([call.args[1] for call in identity.call_args_list], ["M4", "M4"])
+        measured.assert_not_called()
+        environment.assert_not_called()
+
+    def test_preimported_quanto_is_rejected_without_environment_mutation(self):
+        with patch.dict(sys.modules, {"optimum.quanto": SimpleNamespace()}), \
+                patch.dict(os.environ, {}, clear=True):
+            with self.assertRaisesRegex(ValueError, "fresh process"):
+                m.prepare_environment(self.device, "M4")
+            self.assertEqual(dict(os.environ), {})
+        with patch.dict(os.environ, {}, clear=True):
+            m.prepare_environment(self.device, "M4")
+            self.assertEqual(os.environ["CUDA_VISIBLE_DEVICES"], UUID)
+
+    def test_m4_cannot_omit_storage_observer_or_reuse_it_for_a_bf16_cell(self):
+        for name, observer in (("M4", None), ("M1", lambda *args: None)):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, "physical-storage observer"):
+                m.exercise(None, None, None, None, m.cell_spec(self.plan, name), None, None,
+                           observe_quantized=observer)
+
+    def test_default_runtime_metadata_shape_stays_v1_and_m4_identity_is_optional(self):
+        plan = copy.deepcopy(self.plan)
+        plan["loader"]["source_files"] = []
+        record = self.root / "RECORD"
+        record.write_bytes(b"synthetic distribution manifest")
+        distributions = {name: SimpleNamespace(
+            version=plan["loader"][name], files=[PurePosixPath(f"{name}.dist-info/RECORD")],
+            locate_file=lambda name: record) for name in m.RUNTIME_NAMES}
+        with patch.object(m.platform, "python_version", return_value="3.12.11"), \
+                patch.object(m.importlib.metadata, "distribution", side_effect=distributions.__getitem__), \
+                patch.object(self.q, "runtime_identity", return_value={"synthetic": "optional"}) as optional:
+            original = m.runtime_identity(plan)
+            self.assertEqual(set(original), {"python", "python_executable_sha256", "versions",
+                                            "distribution_records_sha256", "transformers_sources_sha256"})
+            self.assertEqual(m.runtime_identity(plan, "M3"), original)
+            optional.assert_not_called()
+            m4 = m.runtime_identity(plan, "M4")
+            self.assertEqual(m4.pop("m4_backend"), {"synthetic": "optional"})
+            self.assertEqual(m4, original)
+            optional.assert_called_once_with()
 
 
 if __name__ == "__main__":
