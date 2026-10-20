@@ -18,6 +18,7 @@ from unittest.mock import patch
 SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 import mr09_olmoe_artifacts as a
+from mr09_fixture_support import symlink_or_skip
 
 
 def metadata_spec(name, data, *, prior=True):
@@ -113,19 +114,26 @@ class ArtifactTests(unittest.TestCase):
     def test_nonregular_artifact_is_rejected_without_following_symlink(self):
         real = self.root / "original"
         real.write_bytes(self.data)
-        link = self.model / "tokenizer.json"
-        link.symlink_to(real)
-        with self.assertRaisesRegex(ValueError, "regular artifact"):
-            a.verify_file(link, self.spec)
-        self.assertEqual(real.read_bytes(), self.data)
+        with self.subTest(fixture="symlink"):
+            link = self.model / "tokenizer.json"
+            symlink_or_skip(link, real)
+            with self.assertRaisesRegex(ValueError, "regular artifact"):
+                a.verify_file(link, self.spec)
+        with self.subTest(kind="file"):
+            self.assertEqual(real.read_bytes(), self.data)
 
     def test_symlink_component_and_repository_destinations_are_rejected(self):
-        alias = self.root / "alias"
-        alias.symlink_to(self.model, target_is_directory=True)
-        for path in (alias, alias / "nested", SCRIPTS.parent / "weights"):
-            with self.subTest(path=path), self.assertRaises(ValueError):
-                a.external_directory(path, create=True)
-        self.assertFalse((SCRIPTS.parent / "weights").exists())
+        with self.subTest(fixture="symlink"):
+            alias = self.root / "alias"
+            # The existing target determines the link type on Windows.
+            symlink_or_skip(alias, self.model)
+            for path in (alias, alias / "nested"):
+                with self.subTest(path=path), self.assertRaises(ValueError):
+                    a.external_directory(path, create=True)
+        with self.subTest(kind="repository"):
+            with self.assertRaises(ValueError):
+                a.external_directory(SCRIPTS.parent / "weights", create=True)
+            self.assertFalse((SCRIPTS.parent / "weights").exists())
 
     def test_complete_transfer_publishes_only_verified_bytes_without_extra_copy(self):
         opener = Opener([Response(self.data, lengths=[str(len(self.data))])])
