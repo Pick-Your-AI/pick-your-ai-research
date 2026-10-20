@@ -132,7 +132,7 @@ class MeasureTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="olmoe-run-synthetic-")
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.directory = self.root / "model"
         self.directory.mkdir()
         self.output = self.root / "M1-r1.json"
@@ -608,7 +608,7 @@ class M4MeasureTests(unittest.TestCase):
         self.cell = m.cell_spec(self.plan, "M4")
         self.temporary = tempfile.TemporaryDirectory(prefix="olmoe-m4-run-synthetic-")
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.directory = self.root / "model"
         self.directory.mkdir()
         self.output = self.root / "M4-r1.json"
