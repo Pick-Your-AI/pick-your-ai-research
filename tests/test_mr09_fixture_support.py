@@ -75,6 +75,38 @@ class SymlinkFixtureCapabilities(unittest.TestCase):
                 self.assertTrue(all("synthetic unrelated fixture error" in traceback
                                     for _, traceback in result.errors))
 
+    def test_quanto_source_fixture_skips_only_windows_privilege_error(self):
+        name = ("test_mr09_olmoe_quanto.QuantoTests."
+                "test_source_reader_rejects_symlink_length_and_same_length_corruption")
+        cases = (("nt", 1314), ("nt", 5), ("nt", 87), ("nt", None), ("posix", 1314))
+        for platform, winerror in cases:
+            with self.subTest(platform=platform, winerror=winerror):
+                error = OSError("synthetic source-fixture capability error")
+                if winerror is not None:
+                    error.winerror = winerror
+                suite = unittest.defaultTestLoader.loadTestsFromName(name)
+                result = FixtureResult()
+                with (patch.object(fixtures, "os", SimpleNamespace(name=platform)),
+                      patch.object(Path, "symlink_to", side_effect=error) as creation):
+                    suite.run(result)
+                self.assertEqual(result.testsRun, 1)
+                creation.assert_called_once()
+                self.assertEqual(result.failures, [])
+                if platform == "nt" and winerror == 1314:
+                    self.assertTrue(result.wasSuccessful(), result.errors + result.failures)
+                    self.assertEqual(len(result.skipped), 1)
+                    self.assertIn("winerror 1314", result.skipped[0][1])
+                    self.assertIn("fixture='symlink'", result.skipped[0][0].id())
+                else:
+                    self.assertFalse(result.wasSuccessful())
+                    self.assertEqual(len(result.errors), 1)
+                    self.assertIn("fixture='symlink'", result.errors[0][0].id())
+                    self.assertIn("synthetic source-fixture capability error",
+                                  result.errors[0][1])
+                    self.assertEqual(result.skipped, [])
+                self.assertEqual(len(result.successful_subtests), 1)
+                self.assertIn("kind='file'", result.successful_subtests[0])
+
     def test_unrelated_creation_exceptions_are_reraised_unchanged(self):
         cases = (("nt", 5), ("nt", 87), ("nt", None), ("posix", 1314))
         for platform, winerror in cases:

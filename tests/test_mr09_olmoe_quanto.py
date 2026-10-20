@@ -362,12 +362,13 @@ class QuantoTests(unittest.TestCase):
         target = self.root / "source.py"
         target.write_bytes(b"source\n")
         digest = hashlib.sha256(target.read_bytes()).hexdigest()
-        self.assertEqual(q._source_digest(target, 7, digest), digest)
-        with self.assertRaisesRegex(ValueError, "length/type"):
-            q._source_digest(target, 8, digest)
-        target.write_bytes(b"broken\n")
-        with self.assertRaisesRegex(ValueError, "pinned upstream"):
-            q._source_digest(target, 7, digest)
+        with self.subTest(kind="file"):
+            self.assertEqual(q._source_digest(target, 7, digest), digest)
+            with self.assertRaisesRegex(ValueError, "length/type"):
+                q._source_digest(target, 8, digest)
+            target.write_bytes(b"broken\n")
+            with self.assertRaisesRegex(ValueError, "pinned upstream"):
+                q._source_digest(target, 7, digest)
         with self.subTest(fixture="symlink"):
             link = self.root / "link.py"
             symlink_or_skip(link, target)
