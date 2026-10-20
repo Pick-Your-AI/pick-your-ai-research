@@ -54,7 +54,7 @@ class ArtifactTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="olmoe-artifact-synthetic-")
         self.addCleanup(self.temporary.cleanup)
-        self.root = Path(self.temporary.name)
+        self.root = Path(self.temporary.name).resolve()
         self.model = self.root / "model"
         self.model.mkdir()
         self.data = b'{"synthetic":"metadata"}\n'
