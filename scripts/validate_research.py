@@ -3,6 +3,7 @@ import json
 import math
 import re
 from datetime import datetime
+from decimal import Decimal, InvalidOperation
 from ipaddress import ip_address
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -43,8 +44,8 @@ def schema_errors(payload, schema):
     return [f"/{'/'.join(map(str, e.absolute_path))}: {e.message}" for e in validator.iter_errors(payload)]
 
 
-def intake_json(text):
-    """Decode an unambiguous JSON submission without non-finite numbers."""
+def intake_json(text, *, exact_numbers=False):
+    """Decode unambiguous JSON, optionally preserving proposal numeric values."""
     def unique_object(pairs):
         result = {}
         for key, value in pairs:
@@ -60,7 +61,23 @@ def intake_json(text):
         number = float(value)
         if not math.isfinite(number):
             raise ValueError('JSON number exceeds finite numeric range')
-        return number
+        if not exact_numbers:
+            return number
+        # Zero has an exact value even when its exponent exceeds Decimal's range.
+        mantissa = value.lower().split('e', 1)[0]
+        if not any(digit in '123456789' for digit in mantissa):
+            return 0
+        try:
+            exact = Decimal(value)
+        except InvalidOperation as exc:
+            raise ValueError('JSON number exceeds exact decimal range') from exc
+        if not exact.is_finite():
+            raise ValueError('JSON number exceeds exact decimal range')
+        # Inspect digits rather than rounding through the active Decimal context.
+        parts = exact.as_tuple()
+        if parts.exponent >= 0 or not any(parts.digits[parts.exponent:]):
+            return int(exact)
+        return exact
 
     return json.loads(text, object_pairs_hook=unique_object,
                       parse_constant=reject_constant, parse_float=finite_float)
@@ -209,7 +226,7 @@ def validate_tree(root=ROOT):
         values = []
         for path in sorted((root / relative).rglob('*.json')):
             try:
-                values.append(intake_json(path.read_text(encoding='utf-8')))
+                values.append(intake_json(path.read_text(encoding='utf-8'), exact_numbers=True))
             except (ValueError, OSError) as exc:
                 errors.append(f'{path}: {exc}')
         return values
