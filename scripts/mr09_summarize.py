@@ -103,6 +103,8 @@ def cohort_signature(run):
     if len(smi_rows) != hardware["count"] or any(
             any(not row.get(key) for key in smi_fields) for row in smi_rows):
         raise ValueError("successful run requires NVIDIA driver/device pins")
+    if len({row["index"] for row in smi_rows}) != len(smi_rows):
+        raise ValueError("duplicate NVIDIA device index")
     device_pins = sorted(tuple(row[key] for key in smi_fields) for row in smi_rows)
     stable_hardware = {
         key: hardware[key] for key in
