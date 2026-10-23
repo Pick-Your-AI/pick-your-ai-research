@@ -1,0 +1,102 @@
+name: Link applications research program
+on:
+  push:
+    branches: [contrib/CompleteDotTech/applications-parent-509-20261023]
+    paths: [.github/workflows/link-applications-program-509.yml]
+permissions:
+  issues: write
+concurrency:
+  group: applications-parent-509
+  cancel-in-progress: false
+jobs:
+  link:
+    if: github.repository == 'Pick-Your-AI/pick-your-ai-research' && github.actor == 'CompleteDotTech'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Attach one native child without replacing any parent
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          from pathlib import Path
+          import urllib.error
+          import urllib.request
+
+          REPO = 'Pick-Your-AI/pick-your-ai-research'
+          PARENT = 509
+          CHILD = 5991773559
+          CHILD_URL = 'https://github.com/Pick-Your-AI/pick-your-ai-applications/issues/1'
+          ROOT = f'https://api.github.com/repos/{REPO}/issues/{PARENT}'
+          receipt = {'parent_url': f'https://github.com/{REPO}/issues/{PARENT}', 'child_url': CHILD_URL,
+                     'external_parent_verified': False, 'change': None, 'access_changed': False}
+
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *args, **kwargs):
+                  raise RuntimeError('Unexpected redirect refused')
+
+          def api(suffix='', payload=None):
+              if payload is not None and (suffix != '/sub_issues' or payload != {'sub_issue_id': CHILD, 'replace_parent': False}):
+                  raise RuntimeError('Mutation outside authorized one-edge scope')
+              request = urllib.request.Request(ROOT + suffix,
+                  data=None if payload is None else json.dumps(payload).encode(),
+                  headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                           'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json',
+                           'X-GitHub-Api-Version': '2022-11-28'},
+                  method='GET' if payload is None else 'POST')
+              with urllib.request.build_opener(NoRedirect).open(request, timeout=30) as response:
+                  return json.load(response)
+
+          def child_present():
+              for page in range(1, 6):
+                  children = api(f'/sub_issues?per_page=100&page={page}')
+                  for child in children:
+                      if child['id'] == CHILD:
+                          if child['html_url'] != CHILD_URL:
+                              raise RuntimeError('Child identity mismatch')
+                          return True
+                  if len(children) < 100:
+                      return False
+              raise RuntimeError('Sub-issue pagination exceeded scoped bounds')
+
+          try:
+              if os.environ.get('GITHUB_REPOSITORY') != REPO:
+                  raise RuntimeError('Wrong repository')
+              before = api()
+              if before['number'] != PARENT or 'pull_request' in before:
+                  raise RuntimeError('Parent identity mismatch')
+              if child_present():
+                  receipt['change'] = 'existing_relationship_preserved'
+              else:
+                  api('/sub_issues', {'sub_issue_id': CHILD, 'replace_parent': False})
+                  receipt['change'] = 'native_relationship_added'
+              if not child_present():
+                  raise RuntimeError('Native relationship missing at readback')
+              after = api()
+              for key in ('title', 'body', 'state', 'labels', 'assignees', 'milestone'):
+                  if before[key] != after[key]:
+                      raise RuntimeError(f'Concurrent parent {key} change observed; inspect without overwriting')
+              receipt['external_parent_verified'] = True
+              receipt['parent_content_and_triage_preserved'] = True
+          except urllib.error.HTTPError as exc:
+              receipt['error'] = f'GitHub returned HTTP {exc.code}; no retries, replacement, or permission changes attempted'
+              raise RuntimeError(receipt['error']) from None
+          except Exception as exc:
+              receipt['error'] = str(exc)
+              raise
+          finally:
+              receipt['observed_at'] = dt.datetime.now(dt.timezone.utc).isoformat()
+              Path('applications-parent-receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
+              print(json.dumps(receipt, indent=2))
+          PY
+      - name: Retain exact native-parent result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: applications-parent-509-receipt
+          path: applications-parent-receipt.json
+          if-no-files-found: error
+          retention-days: 30
