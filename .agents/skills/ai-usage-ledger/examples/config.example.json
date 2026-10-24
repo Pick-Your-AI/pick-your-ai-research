@@ -1,0 +1,34 @@
+{
+  "_comment": "What ledger.py init writes to ~/.ai-usage-ledger/config.json (override the directory with AI_USAGE_LEDGER_HOME). Every value can be changed with `ledger.py init` again or `--set key=value`; extra_hosts survive manifest regeneration.",
+  "version": 1,
+  "initialized_at": "2026-09-09T14:00:00+00:00",
+  "home": "/home/<you>/.ai-usage-ledger",
+  "store": {"kind": "sqlite", "path": "/home/<you>/.ai-usage-ledger/ledger.sqlite"},
+  "workdir": "/home/<you>/.ai-usage-ledger/ledger",
+  "timezone": "America/New_York",
+  "theme": "system",
+  "branding": {
+    "name": "CompleteTech",
+    "eyebrow": "COMPLETETECH LLC",
+    "tagline": "Innovation at Every Integration",
+    "contact": "complete.tech · Timothy.Gregg@complete.tech",
+    "logo": "<skill>/assets/logo.png",
+    "accent": "#1E3A8A",
+    "footer": "CompleteTech LLC · Innovation at Every Integration · complete.tech",
+    "light": {"bg": "#F8FAFC", "surface": "#FFFFFF", "surface-2": "#EEF2FF", "ink": "#0F172A", "ink-2": "#1E293B", "ink-3": "#64748B", "line": "#E2E8F0", "line-2": "#CBD5E1"},
+    "dark": {"bg": "#0F172A", "surface": "#1E293B", "surface-2": "#273449", "ink": "#F1F5F9", "ink-2": "#CBD5E1", "ink-3": "#94A3B8", "line": "#334155", "line-2": "#475569"}
+  },
+  "detect": {"all_profiles": true, "wsl": true, "on_every_run": true},
+  "accounts": {"from_credentials": true, "identifiable": false},
+  "pricing_path": "/home/<you>/.ai-usage-ledger/pricing.json",
+  "accounts_path": "/home/<you>/.ai-usage-ledger/accounts.json",
+  "report_config_path": "/home/<you>/.ai-usage-ledger/report_config.json",
+  "manifest_path": "/home/<you>/.ai-usage-ledger/manifest.json",
+  "package_prefix": "AI_Usage_Ledger",
+  "anonymize": {"on_every_run": false, "salt": "<32 hex characters generated at onboarding; keep private>"},
+  "archive": {"raw_logs": true, "compress": true, "path": "/home/<you>/.ai-usage-ledger/archive"},
+  "schedule": {"frequency": "daily", "time": "03:00", "weekday": "mon", "expires": null, "installed_at": "2026-09-09T14:00:30+00:00", "consent": "/home/<you>/.ai-usage-ledger/schedule-consent.json"},
+  "extra_hosts": [
+    {"name": "train", "kind": "ssh", "ssh": "<you>@train.example.net", "python": "python3", "claude_roots": ["~/.claude"], "codex_roots": ["~/.codex"]}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "_comment": "Account registry for the synthetic fixtures. Two subscription accounts and usage-based tools; every rule is a documented example, not a real identity. There is deliberately no catch-all rule: the fixture tools without a rule (cline, aider, kimi, vibe, continue, pi, codebuff) land in the `unattributed` row so the pipeline exercises that path.",
+  "accounts": {
+    "codex:example": {"provider": "openai", "label": "example@example.com", "emails": ["example@example.com"], "chatgpt_account_id_prefix": "00000000", "orgs": ["Personal"], "plan": "ChatGPT Pro", "monthly_usd": 200, "evidence": "fixture"},
+    "claude:example": {"provider": "anthropic", "label": "example@example.com", "emails": ["example@example.com"], "plan": "Claude Max 20x", "monthly_usd": 200, "evidence": "fixture"},
+    "gemini:example": {"provider": "google", "label": "Gemini CLI (Code Assist)", "plan": "Gemini Code Assist", "monthly_usd": 0, "evidence": "fixture"},
+    "other:usage-based": {"provider": "mixed", "label": "Other tools (API keys)", "plan": "usage-based", "monthly_usd": 0, "evidence": "fixture"}
+  },
+  "rules": [
+    {"when": {"tool": "codex", "plan": "self_serve_business_usage_based"}, "account": "other:usage-based", "billing": "usage-based", "confidence": "high", "why": "plan stamped on the call"},
+    {"when": {"tool": "codex"}, "account": "codex:example", "billing": "subscription", "confidence": "high", "why": "single login on the fixture host"},
+    {"when": {"tool": "claude-code"}, "account": "claude:example", "billing": "subscription", "confidence": "high", "why": "single login on the fixture host"},
+    {"when": {"tool": "gemini-cli"}, "account": "gemini:example", "billing": "subscription", "confidence": "high", "why": "fixture"}
+  ]
+}

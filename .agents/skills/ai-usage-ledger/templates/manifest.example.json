@@ -1,0 +1,131 @@
+{
+  "_comment": "Copy to your working directory as manifest.json and edit. Paths are as seen by the host that runs the scan. Every list may be empty. Remove hosts you do not have.",
+  "_privacy": "What each host section collects: every *_roots entry is a directory tree of agent transcripts and session logs that the scanners read in full (timestamps, models, token counts, project paths, session ids; prompt text only when prompts.capture is on); codex_sqlite, claude_stats_cache and opencode_dbs are the tools' own counters and databases; openclaw_roots are gateway session logs. A 'local' host reads this profile; 'share' reads another profile or drive (only one you own or are authorised to audit, see references/discovery.md Boundaries); 'wsl' runs the scanner inside the named distro; 'ssh' copies fixed scanner commands to the named host and pulls the results back, never with sudo. Credential files (auth.json, .claude.json, .credentials.json) are not listed here and are opened only when accounts.from_credentials is on, pseudonymously unless accounts.identifiable is on. The raw files are copied into the archive only when archive.raw_logs is on. Everything stays on this machine; before sharing any output build the anonymised copy (ledger.py run --anonymize) and run ledger.py publish-check on it. Remove any host or root you are not authorised to read and record it as an exclusion instead.",
+  "workdir": ".",
+  "snapshot_date": null,
+  "timezone": "America/New_York",
+  "package_prefix": "AI_Usage_Ledger",
+  "pricing": "pricing.json",
+  "accounts": "accounts.json",
+  "report_config": "report_config.json",
+  "package_accounts": false,
+  "capture_prompts": false,
+  "package_paths": false,
+  "study_url": "",
+  "hosts": [
+    {
+      "name": "windows",
+      "kind": "local",
+      "claude_roots": [
+        "C:/Users/<you>/.claude"
+      ],
+      "codex_roots": [
+        "C:/Users/<you>/.codex"
+      ],
+      "copilot_roots": [
+        "C:/Users/<you>/.copilot"
+      ],
+      "codex_sqlite": "C:/Users/<you>/.codex/state_5.sqlite",
+      "claude_stats_cache": "C:/Users/<you>/.claude/stats-cache.json",
+      "gemini_roots": [
+        "C:/Users/<you>/.gemini/tmp"
+      ],
+      "cline_roots": [
+        "cline=C:/Users/<you>/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev",
+        "roo-code=C:/Users/<you>/AppData/Roaming/Code/User/globalStorage/rooveterinaryinc.roo-cline"
+      ],
+      "aider_roots": [
+        "C:/Users/<you>/projects"
+      ],
+      "continue_roots": [
+        "C:/Users/<you>/.continue"
+      ],
+      "generic_roots": [
+        "codebuff=C:/Users/<you>/.config/manicode"
+      ]
+    },
+    {
+      "name": "wsl-ubuntu",
+      "kind": "wsl",
+      "distro": "Ubuntu",
+      "python": "python3",
+      "claude_roots": [
+        "/home/<you>/.claude"
+      ],
+      "codex_roots": [
+        "/home/<you>/.codex"
+      ],
+      "copilot_roots": [
+        "/home/<you>/.copilot"
+      ],
+      "opencode_dbs": [
+        "/home/<you>/.local/share/opencode/opencode.db"
+      ],
+      "codex_sqlite": "/home/<you>/.codex/state_5.sqlite",
+      "claude_stats_cache": "/home/<you>/.claude/stats-cache.json",
+      "share_fallback": "//wsl$/Ubuntu",
+      "gemini_roots": [
+        "/home/<you>/.gemini/tmp"
+      ],
+      "kimi_roots": [
+        "/home/<you>/.kimi"
+      ],
+      "pi_roots": [
+        "/home/<you>/.pi/agent/sessions"
+      ],
+      "vibe_roots": [
+        "/home/<you>/.vibe"
+      ],
+      "qwen_roots": [
+        "/home/<you>/.qwen/history"
+      ],
+      "generic_roots": [
+        "droid=/home/<you>/.factory/sessions",
+        "amp=/home/<you>/.local/share/amp"
+      ]
+    },
+    {
+      "name": "mac",
+      "kind": "local",
+      "_comment": "run the pipeline on the Mac itself, or use kind ssh from another machine",
+      "claude_roots": [
+        "/Users/<you>/.claude"
+      ],
+      "codex_roots": [
+        "/Users/<you>/.codex"
+      ],
+      "codex_sqlite": "/Users/<you>/.codex/state_5.sqlite",
+      "claude_stats_cache": "/Users/<you>/.claude/stats-cache.json"
+    },
+    {
+      "name": "server",
+      "kind": "ssh",
+      "ssh": "user@server.example",
+      "python": "python3",
+      "remote_tmp": "/tmp/ai-usage-ledger",
+      "claude_roots": [
+        "/home/user/.claude"
+      ],
+      "codex_roots": [
+        "/home/user/.codex"
+      ],
+      "openclaw_roots": [
+        "/srv/openclaw/config"
+      ],
+      "codex_sqlite": "/home/user/.codex/state_5.sqlite"
+    },
+    {
+      "name": "old-profile-backup",
+      "kind": "share",
+      "claude_roots": [
+        "G:/Users/<old>/.claude"
+      ],
+      "codex_roots": [
+        "G:/Users/<old>/.codex"
+      ],
+      "codex_sqlite": "G:/Users/<old>/.codex/state_5.sqlite",
+      "claude_stats_cache": "G:/Users/<old>/.claude/stats-cache.json"
+    }
+  ],
+  "_roots": "Root keys per host: claude_roots, codex_roots, copilot_roots, opencode_dbs, openclaw_roots, gemini_roots, qwen_roots, kimi_roots, vibe_roots, continue_roots, pi_roots, aider_roots (directory trees searched for .aider.chat.history.md), cline_roots ('<tool>=<globalStorage dir>' for cline, roo-code, kilo-code), generic_roots ('<tool>=<dir>' best-effort usage sniffing)."
+}

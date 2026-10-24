@@ -1,0 +1,974 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 72c84f7..83cf664 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -17,6 +17,8 @@ jobs:
+           node-version: 22
+           cache: pnpm
+       - run: pnpm install --frozen-lockfile
++      - run: pnpm exec tsc --project tsconfig.usage-ledger.json --noEmit
++      - run: pnpm test:usage-ledger
+       - run: pnpm build
+ 
+   docker:
+diff --git a/README.md b/README.md
+index a726d0e..af7b5e1 100644
+--- a/README.md
++++ b/README.md
+@@ -509,3 +509,7 @@ pnpm start:web      # Web UI mode (port 3141)
+ Apache 2.0 — see [LICENSE](LICENSE) for details.
+ 
+ Copyright 2025 Muse Mesh.
++
++## Optional usage ledger
++
++[CompleteTech usage ledger integration](docs/usage-ledger.md) exports metadata-only model usage with opt-in collection and supports separately consented reports through the existing MCP client.
+diff --git a/docs/usage-ledger.md b/docs/usage-ledger.md
+new file mode 100644
+index 0000000..f3b390a
+--- /dev/null
++++ b/docs/usage-ledger.md
+@@ -0,0 +1,65 @@
++# Opt-in CompleteTech usage ledger
++
++Muse can export metadata-only usage through the public OpenAI-compatible provider
++fetch hook. CLI agent steps, compaction, memory extraction and the separate web
++chat route are instrumented. Collection is disabled by default; disabled mode
++returns the original fetch function and does not create files. The existing UI
++cost tracker remains unchanged and is not treated as a reported charge.
++
++The companion implementation and complete operator guide are in
++`CompleteTech-LLC/ai-usage-ledger-skill`, `references/muse-mesh.md`. Its Python
++standard-library MCP server uses Muse's existing `mcpServers` configuration;
++there is no additional Muse plugin framework or model provider dependency.
++
++Example `.mu.json` section, after reviewing the companion ledger's disclosure and
++consent requirements (API keys continue to use Muse's existing configuration):
++
++```json
++{
++  "usageLedger": {
++    "enabled": true,
++    "directory": "/absolute/private/mu-usage",
++    "sourceId": "workstation-mu",
++    "provider": "my-gateway",
++    "includeIdentifiers": false
++  }
++}
++```
++
++The source/provider label is operator supplied, not inferred from an endpoint or
++model name. The returned model and raw usage envelope are preferred to SDK zero
++fills. Missing counts remain null. The standard OpenAI-chat protocol has no
++separate cache-write count. `reportedChargeCurrency: "USD"` additionally permits
++reading an explicitly confirmed gateway `usage.cost` field; do not enable it
++without confirming that field's meaning. It is not an invoice or a list-price
++estimate. No prompt, completion, tool input/output, key, header, URL, request body
++or raw error is persisted. Existing Muse audit logs are outside this adapter and
++must be configured separately.
++
++Native response IDs are HMAC pseudonyms using an owner-only `.identity-key`, with
++persistent pre-request UUIDs as a fallback. `.source.json` prevents silently
++changing source/provider/privacy mode in a populated directory. Restore a lost
++key rather than regenerating it; stable identity is essential to replay safety.
++Each attempt writes a durable start marker and an atomic final file. A missing
++final is unfinished coverage, not zero usage. A bounded 256-write metadata queue
++retries temporary local write failures while allowing the model to continue;
++process termination before durable capture remains an explicit coverage gap.
++
++Collection, ledger import and MCP reporting are separate opt-ins. Giving usage
++reports to an MCP client may also give them to that client's remote model; local
++capture alone does not authorize this. The reporting server reads only approved
++source records; scan tools require additional explicit authorization and accept
++no path or configuration arguments. Read the companion guide before enabling
++personal data collection or reporting. POSIX directories/files must be 0700/0600;
++Windows operators must apply account-restricted ACLs.
++
++Run `pnpm test:usage-ledger` for native fixtures. Set `MU_LEDGER_REPO` to a local
++ledger checkout to enable the real Muse/SDK/SQLite/MCP end-to-end test; it is skipped
++without that environment variable. `PYTHON` can select the Python executable.
++`pnpm exec tsc --noEmit -p tsconfig.usage-ledger.json` checks production and test
++code. All verification uses deterministic local fixtures, not live providers.
++
++Disable with `usageLedger.enabled: false` or `MU_USAGE_LEDGER_DISABLED=true`.
++Remove the ledger MCP server entry and revoke reporting/import consent separately.
++Existing evidence and keys are not automatically deleted. This integration
++creates no schedule, background daemon or external data collector.
+diff --git a/package.json b/package.json
+index 27642be..cd4ee2d 100644
+--- a/package.json
++++ b/package.json
+@@ -14,7 +14,8 @@
+     "build": "pnpm build:web && tsup src/index.ts --format esm",
+     "start": "node dist/index.js",
+     "start:web": "MU_BOT_WEB_UI_ENABLED=true node dist/index.js",
+-    "serve": "MU_BOT_WEB_UI_ENABLED=true tsx src/index.ts"
++    "serve": "MU_BOT_WEB_UI_ENABLED=true tsx src/index.ts",
++    "test:usage-ledger": "node --import tsx --test tests/usage-ledger*.test.ts"
+   },
+   "keywords": [],
+   "author": "Kush",
+diff --git a/src/agent.ts b/src/agent.ts
+index 108e9b9..1e65b06 100644
+--- a/src/agent.ts
++++ b/src/agent.ts
+@@ -1,3 +1,4 @@
++import { UsageLedger } from './usage-ledger.js';
+ import { streamText, stepCountIs, type ToolSet } from 'ai';
+ import { createOpenAI } from '@ai-sdk/openai';
+ import type { MuConfig } from './config.js';
+@@ -11,10 +12,11 @@ import { buildMemoryContext, extractSessionMemory, addMemoryEntry, saveMemoryEnt
+ 
+ // ── Model Provider ─────────────────────────────────────────────────
+ 
+-function createModel(config: MuConfig) {
++function createModel(config: MuConfig, usageLedger: UsageLedger) {
+   const provider = createOpenAI({
+     baseURL: config.apiBaseUrl,
+     apiKey: config.apiKey,
++    fetch: usageLedger.wrapFetch(),
+   });
+   return provider.chat(config.model);
+ }
+@@ -36,7 +38,8 @@ export interface AgentCallbacks {
+ // ── Agent Factory ──────────────────────────────────────────────────
+ 
+ export function createAgent(config: MuConfig, tools: ToolSet, logger: MuLogger) {
+-  const model = createModel(config);
++  const usageLedger = new UsageLedger(config.usageLedger, logger.sessionId, config.model, message => logger.error(message));
++  const model = createModel(config, usageLedger);
+   const costTracker = createCostTracker(config.model, config.costLimitUsd);
+ 
+   // Persistent message history for multi-turn conversations
+@@ -50,70 +53,73 @@ export function createAgent(config: MuConfig, tools: ToolSet, logger: MuLogger)
+     },
+ 
+     async extractMemories(sessionId: string) {
+-      if (conversationHistory.length < 4) return; // Too short to extract from
+-      try {
+-        const entries = await extractSessionMemory(conversationHistory, model, sessionId);
+-        if (entries.length > 0) {
+-          const cwd = process.cwd();
+-          const existing = loadMemoryEntries(cwd);
+-          saveMemoryEntries(cwd, [...existing, ...entries]);
+-          logger.info(`Extracted ${entries.length} memory entries from session`);
++      return usageLedger.run('memory', async () => {
++        if (conversationHistory.length < 4) return; // Too short to extract from
++        try {
++          const entries = await extractSessionMemory(conversationHistory, model, sessionId);
++          if (entries.length > 0) {
++            const cwd = process.cwd();
++            const existing = loadMemoryEntries(cwd);
++            saveMemoryEntries(cwd, [...existing, ...entries]);
++            logger.info(`Extracted ${entries.length} memory entries from session`);
++          }
++        } catch (err: any) {
++          logger.debug(`Memory extraction failed: ${err.message}`);
+         }
+-      } catch (err: any) {
+-        logger.debug(`Memory extraction failed: ${err.message}`);
+-      }
++      }).finally(() => usageLedger.flush());
+     },
+ 
+     async generate(prompt: string, callbacks?: AgentCallbacks) {
+-      // ── Phase 1: Pre-processing ────────────────────────────────
+-
+-      // Memory injection: build context from MEMORY.md + stored entries
+-      const cwd = process.cwd();
+-      const memoryContext = buildMemoryContext(cwd, prompt);
+-      const systemContent = [config.systemPrompt ?? '', memoryContext].filter(Boolean).join('\n\n');
++      return usageLedger.run('agent', async () => {
++        // ── Phase 1: Pre-processing ────────────────────────────────
++
++        // Memory injection: build context from MEMORY.md + stored entries
++        const cwd = process.cwd();
++        const memoryContext = buildMemoryContext(cwd, prompt);
++        const systemContent = [config.systemPrompt ?? '', memoryContext].filter(Boolean).join('\n\n');
++
++        // Compaction: check if conversation history is getting too long
++        if (conversationHistory.length > 0) {
++          const allMessages: CompactableMessage[] = [
++            { role: 'system', content: systemContent },
++            ...conversationHistory as CompactableMessage[],
++          ];
++          const action = shouldCompact(allMessages, config.model);
++          if (action === 'summarize') {
++            logger.info('Context nearing limit — compacting conversation…');
++            const compacted = await compactConversation(allMessages, model);
++            // Replace history with compacted version (drop system, it gets re-added)
++            conversationHistory = compacted.filter(m => m.role !== 'system').map(m => ({ role: m.role, content: m.content }));
++          } else if (action === 'reset') {
++            logger.info('Context at limit — resetting conversation with key facts…');
++            const reset = await resetConversation(allMessages, model);
++            conversationHistory = reset.filter(m => m.role !== 'system').map(m => ({ role: m.role, content: m.content }));
++          }
++        }
+ 
+-      // Compaction: check if conversation history is getting too long
+-      if (conversationHistory.length > 0) {
+-        const allMessages: CompactableMessage[] = [
++        // Build messages: system + history + new user message
++        const messages: any[] = [
+           { role: 'system', content: systemContent },
+-          ...conversationHistory as CompactableMessage[],
++          ...conversationHistory,
++          { role: 'user', content: prompt },
+         ];
+-        const action = shouldCompact(allMessages, config.model);
+-        if (action === 'summarize') {
+-          logger.info('Context nearing limit — compacting conversation…');
+-          const compacted = await compactConversation(allMessages, model);
+-          // Replace history with compacted version (drop system, it gets re-added)
+-          conversationHistory = compacted.filter(m => m.role !== 'system').map(m => ({ role: m.role, content: m.content }));
+-        } else if (action === 'reset') {
+-          logger.info('Context at limit — resetting conversation with key facts…');
+-          const reset = await resetConversation(allMessages, model);
+-          conversationHistory = reset.filter(m => m.role !== 'system').map(m => ({ role: m.role, content: m.content }));
+-        }
+-      }
+ 
+-      // Build messages: system + history + new user message
+-      const messages: any[] = [
+-        { role: 'system', content: systemContent },
+-        ...conversationHistory,
+-        { role: 'user', content: prompt },
+-      ];
+-
+-      const doStream = () => streamText({
+-        model,
+-        messages,
+-        tools,
+-        temperature: config.temperature,
+-        abortSignal: callbacks?.signal,
+-        stopWhen: stepCountIs(config.maxSteps),
+-        experimental_repairToolCall: async ({ toolCall, error }: any) => {
+-          logger.debug(`Repairing malformed tool call for ${toolCall.toolName}: ${error.message}`);
+-          try {
+-            const fixed = lenientJsonParse((toolCall as any).args);
+-            return { ...toolCall, args: JSON.stringify(fixed) };
+-          } catch {
+-            return null;
+-          }
+-        },
++        const doStream = () => streamText({
++          model,
++          messages,
++          tools,
++          temperature: config.temperature,
++          abortSignal: callbacks?.signal,
++          stopWhen: stepCountIs(config.maxSteps),
++          experimental_repairToolCall: async ({ toolCall, error }: any) => {
++            logger.debug(`Repairing malformed tool call for ${toolCall.toolName}: ${error.message}`);
++            try {
++              const fixed = lenientJsonParse((toolCall as any).args);
++              return { ...toolCall, args: JSON.stringify(fixed) };
++            } catch {
++              return null;
++            }
++          },
+       });
+ 
+       // Wrap in retry for transient API errors
+@@ -216,6 +222,7 @@ export function createAgent(config: MuConfig, tools: ToolSet, logger: MuLogger)
+         finishReason: finalFinishReason,
+         costTracker,
+       };
++      }).finally(() => usageLedger.flush());
+     },
+   };
+ }
+diff --git a/src/config.ts b/src/config.ts
+index 297e4f5..385648c 100644
+--- a/src/config.ts
++++ b/src/config.ts
+@@ -24,6 +24,15 @@ const ConfigSchema = z.object({
+   costLimitUsd: z.number().default(0),
+   systemPrompt: z.string().optional(),
+   systemPromptFile: z.string().optional(),
++  usageLedger: z.object({
++    enabled: z.boolean().default(false),
++    directory: z.string().optional(),
++    sourceId: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/).optional(),
++    provider: z.string().regex(/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/).optional(),
++    includeIdentifiers: z.boolean().default(false),
++    reportedChargeCurrency: z.literal('USD').optional(),
++  }).refine(v => !v.enabled || Boolean(v.directory && v.sourceId && v.provider),
++    'Enabled usage collection requires directory, sourceId and provider').optional(),
+   mcpServers: z.array(z.object({
+     name: z.string(),
+     transport: z.enum(['stdio', 'sse', 'http']),
+diff --git a/src/mcp/client.ts b/src/mcp/client.ts
+index a5786cb..56423ea 100644
+--- a/src/mcp/client.ts
++++ b/src/mcp/client.ts
+@@ -9,6 +9,7 @@ import type { MuLogger } from '../logger.js';
+ export async function loadMCPTools(
+   config: MuConfig,
+   logger: MuLogger,
++  registerClose?: (close: () => Promise<void>) => void,
+ ): Promise<Record<string, any>> {
+   const tools: Record<string, any> = {};
+   const servers = config.mcpServers ?? [];
+@@ -35,7 +36,10 @@ export async function loadMCPTools(
+       }
+ 
+       const client = await experimental_createMCPClient({ transport });
+-      const serverTools = await client.tools();
++      let serverTools;
++      try { serverTools = await client.tools(); }
++      catch (error) { await client.close(); throw error; }
++      registerClose?.(() => client.close());
+ 
+       // Namespace MCP tools to avoid collisions
+       for (const [name, tool] of Object.entries(serverTools)) {
+diff --git a/src/usage-ledger.ts b/src/usage-ledger.ts
+new file mode 100644
+index 0000000..3705a63
+--- /dev/null
++++ b/src/usage-ledger.ts
+@@ -0,0 +1,244 @@
++/** Opt-in, metadata-only usage export at the public OpenAI-compatible fetch boundary. */
++import { AsyncLocalStorage } from 'node:async_hooks';
++import { createHmac, randomBytes, randomUUID } from 'node:crypto';
++import { closeSync, existsSync, fsyncSync, lstatSync, mkdirSync, openSync, readFileSync, readdirSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
++import { isAbsolute, join, resolve } from 'node:path';
++import type { MuConfig } from './config.js';
++
++export type UsageLedgerOptions = NonNullable<MuConfig['usageLedger']>;
++type Scope = { runId: string; operation: string; ordinal: number };
++type Json = Record<string, unknown>;
++const LIMIT = 1024 * 1024;
++const object = (value: unknown): Json => value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Json : {};
++const text = (value: unknown): string | null => typeof value === 'string' && value.length > 0 && value.length <= 256 && !/[\x00-\x1f\x7f]/.test(value) ? value : null;
++const count = (value: unknown): number | null => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : null;
++
++/** No prompts, response text, URLs, headers or error messages enter this record. */
++export class UsageLedger {
++  private readonly scopes = new AsyncLocalStorage<Scope>();
++  private readonly pending = new Map<string, () => Json>();
++  private key?: Buffer;
++  private warned = false;
++  private readonly fallback: Scope = { runId: randomUUID(), operation: 'unscoped', ordinal: 0 };
++
++  constructor(private readonly options: UsageLedgerOptions | undefined, private readonly sessionId: string,
++    private readonly configuredModel: string, private readonly warn: (message: string) => void = () => {}) {}
++
++  run<T>(operation: 'agent' | 'memory' | 'web', fn: () => T): T {
++    if (!this.enabled()) return fn();
++    return this.scopes.run({ runId: randomUUID(), operation, ordinal: 0 }, fn);
++  }
++
++  private enabled(): boolean {
++    return this.options?.enabled === true && process.env.MU_USAGE_LEDGER_DISABLED !== 'true';
++  }
++
++  private warning(): void {
++    if (!this.warned) {
++      this.warned = true;
++      try { this.warn('Usage ledger export unavailable; agent operation continues. Check the local usage directory.'); } catch {}
++    }
++  }
++
++  private directory(): string {
++    const dir = this.options?.directory;
++    if (!dir || !isAbsolute(dir) || !this.options?.sourceId || !this.options?.provider) throw new Error('configuration');
++    // Refuse symlink components; require an owner-only leaf directory.
++    let current = resolve(dir);
++    while (current !== resolve(current, '..')) {
++      if (existsSync(current) && lstatSync(current).isSymbolicLink()) throw new Error('symlink');
++      current = resolve(current, '..');
++    }
++    mkdirSync(dir, { recursive: true, mode: 0o700 });
++    const st = lstatSync(dir);
++    if (!st.isDirectory() || (process.platform !== 'win32' && ((st.mode & 0o077) !== 0 || st.uid !== process.getuid?.()))) throw new Error('permissions');
++    const marker = { schema: 'mu-source/1', source_id: this.options.sourceId, provider: this.options.provider,
++      id_mode: this.options.includeIdentifiers === true ? 'literal' : 'hmac-sha256' };
++    const markerPath = join(dir, '.source.json');
++    try {
++      const fd = openSync(markerPath, 'wx', 0o600);
++      try { writeFileSync(fd, JSON.stringify(marker)); fsyncSync(fd); } finally { closeSync(fd); }
++    } catch (err) { if ((err as NodeJS.ErrnoException).code !== 'EEXIST') throw err; }
++    const markerStat = lstatSync(markerPath);
++    if (!markerStat.isFile() || markerStat.isSymbolicLink() || markerStat.size > 1024 ||
++      (process.platform !== 'win32' && ((markerStat.mode & 0o077) || markerStat.uid !== process.getuid?.()))) throw new Error('source marker');
++    const saved = JSON.parse(readFileSync(markerPath, 'utf8'));
++    if (Object.entries(marker).some(([key, value]) => saved[key] !== value)) throw new Error('source identity changed');
++    return dir;
++  }
++
++  private identity(value: string | null): string | null {
++    if (value === null) return null;
++    if (this.options?.includeIdentifiers === true) return value;
++    if (!this.key) {
++      const directory = this.directory();
++      const path = join(directory, '.identity-key');
++      if (!existsSync(path) && readdirSync(directory).some(name => /\.(usage|started)\.json$/.test(name))) {
++        throw new Error('restore the original identity key; never silently re-key an existing source');
++      }
++      try {
++        const fd = openSync(path, 'wx', 0o600);
++        try { writeFileSync(fd, randomBytes(32)); fsyncSync(fd); } finally { closeSync(fd); }
++      } catch (err) { if ((err as NodeJS.ErrnoException).code !== 'EEXIST') throw err; }
++      const stat = lstatSync(path);
++      if (!stat.isFile() || stat.isSymbolicLink() || stat.size !== 32 ||
++        (process.platform !== 'win32' && ((stat.mode & 0o077) || stat.uid !== process.getuid?.()))) throw new Error('key permissions or size');
++      const key = readFileSync(path);
++      if (key.length !== 32) throw new Error('key size');
++      this.key = key;
++    }
++    return createHmac('sha256', this.key).update(value).digest('hex');
++  }
++
++  private persist(name: string, record: Json): void {
++    const dir = this.directory();
++    const target = join(dir, name);
++    const temp = join(dir, `.${randomUUID()}.tmp`);
++    let fd: number | undefined;
++    try {
++      fd = openSync(temp, 'wx', 0o600);
++      writeFileSync(fd, JSON.stringify(record) + '\n');
++      fsyncSync(fd); closeSync(fd); fd = undefined;
++      renameSync(temp, target);
++      // POSIX directory fsync makes the rename durable. Windows does not support it.
++      if (process.platform !== 'win32') {
++        const dfd = openSync(dir, 'r');
++        try { fsyncSync(dfd); } finally { closeSync(dfd); }
++      }
++    } finally {
++      if (fd !== undefined) closeSync(fd);
++      try { unlinkSync(temp); } catch {}
++    }
++  }
++
++  /** Retry only metadata already captured in this process; never reissue a model request. */
++  flush(): void {
++    if (!this.enabled()) return;
++    for (const [name, record] of this.pending) {
++      try { this.persist(name, record()); this.pending.delete(name); this.warned = false; }
++      catch { this.warning(); break; }
++    }
++  }
++
++  private save(name: string, record: () => Json): void {
++    try { this.persist(name, record()); this.warned = false; }
++    catch {
++      // Bound memory. Start markers remain as coverage evidence if final persistence fails.
++      if (this.pending.size < 256 || this.pending.has(name)) this.pending.set(name, record);
++      this.warning();
++    }
++  }
++
++  /** Supported provider fetch injection; disabled mode returns the original function unchanged. */
++  wrapFetch(base: typeof globalThis.fetch = globalThis.fetch): typeof globalThis.fetch {
++    if (!this.enabled()) return base;
++    return async (url, init) => {
++      if (!this.enabled()) return base(url, init);
++      this.flush();
++      const scope = this.scopes.getStore() ?? this.fallback;
++      const id = randomUUID();
++      const ordinal = ++scope.ordinal;
++      const started = new Date().toISOString();
++      const common = (): Json => ({
++        schema: 'mu-usage/1', source_id: this.options!.sourceId, provider: this.options!.provider,
++        configured_model: this.configuredModel, invocation_id: id, session_id: this.identity(this.sessionId), run_id: this.identity(scope.runId),
++        operation: scope.operation, invocation_ordinal: ordinal, retry_of: null,
++        started_at: started, id_mode: this.options!.includeIdentifiers === true ? 'literal' : 'hmac-sha256',
++      });
++      this.save(`${id}.started.json`, () => ({ ...common(), status: 'started' }));
++      let model = this.configuredModel, responseId: string | null = null, timestamp: string | null = null;
++      let usage: Json = {}, completed = false, invalid = false, observed = false;
++      const capture = (data: unknown) => {
++        if (completed) return;
++        const d = object(data);
++        const nativeId = text(d.id);
++        if (nativeId) {
++          if (responseId !== null && responseId !== nativeId) invalid = true;
++          else responseId = nativeId;
++        }
++        model = text(d.model) ?? model;
++        if (typeof d.created === 'number' && Number.isFinite(d.created)) {
++          const date = new Date(d.created * 1000);
++          if (Number.isFinite(date.getTime())) timestamp = date.toISOString();
++        }
++        if (d.usage != null) { usage = object(d.usage); observed = true; }
++      };
++      const finish = (status: 'completed' | 'failed' | 'cancelled' | 'interrupted', httpStatus?: number) => {
++        if (completed) return;
++        completed = true;
++        const detail = object(usage.prompt_tokens_details);
++        const outputDetail = object(usage.completion_tokens_details);
++        for (const value of [usage.prompt_tokens, usage.completion_tokens, usage.total_tokens,
++          detail.cached_tokens, outputDetail.reasoning_tokens]) {
++          if (value != null && count(value) === null) invalid = true;
++        }
++        const observedResponseId = responseId;
++        const amount = usage.cost;
++        const charge = this.options?.reportedChargeCurrency === 'USD' && typeof amount === 'number' && Number.isFinite(amount) && amount >= 0 ? amount : null;
++        const record: Json = {
++          status, http_status: httpStatus ?? null, model,
++          timestamp: timestamp ?? started, timestamp_source: timestamp ? 'provider_created' : 'local_request_start',
++          usage_source: observed ? 'openai_chat_response_usage' : 'unavailable',
++          input_tokens: count(usage.prompt_tokens), output_tokens: count(usage.completion_tokens),
++          total_tokens: count(usage.total_tokens), cache_read_tokens: count(detail.cached_tokens),
++          cache_write_tokens: null, reasoning_tokens: count(outputDetail.reasoning_tokens),
++          input_semantics: 'openai-chat', capture_incomplete: invalid,
++          reported_charge_usd: charge, charge_source: charge === null ? null : 'gateway_usage_cost',
++        };
++        this.save(`${id}.usage.json`, () => ({ ...common(), ...record, response_id: this.identity(observedResponseId) }));
++        // The start marker is retained intentionally; scanners ignore it when a final exists.
++      };
++      let response: Response;
++      try { response = await base(url, init); }
++      catch (error) { finish(init?.signal?.aborted ? 'cancelled' : 'failed'); throw error; }
++      if (!response.body) { finish(response.ok ? 'completed' : 'failed', response.status); return response; }
++      const reader = response.body.getReader();
++      const decoder = new TextDecoder();
++      const sse = response.headers.get('content-type')?.includes('text/event-stream') === true;
++      let buffer = '', dataLines: string[] = [], dataSize = 0, oversize = false, doneFrame = false;
++      const consume = (chunk: string, eof = false) => {
++        buffer += chunk;
++        if (sse) {
++          let newline: number;
++          while ((newline = buffer.indexOf('\n')) >= 0) {
++            const line = buffer.slice(0, newline).replace(/\r$/, ''); buffer = buffer.slice(newline + 1);
++            if (line === '') {
++              const value = dataLines.join('\n'); dataLines = []; dataSize = 0;
++              if (!oversize && value === '[DONE]') doneFrame = true;
++              else if (!oversize && value) { try { capture(JSON.parse(value)); } catch { invalid = true; } }
++              oversize = false;
++            } else if (line.startsWith('data:')) {
++              dataSize += line.length;
++              if (dataSize <= LIMIT && !oversize) dataLines.push(line.slice(5).replace(/^ /, ''));
++              else { dataLines = []; oversize = true; invalid = true; }
++            }
++          }
++          if (buffer.length > LIMIT) { buffer = ''; oversize = true; invalid = true; }
++          if (eof && (buffer.trim() || dataLines.length)) invalid = true;
++        } else {
++          if (buffer.length > LIMIT) { buffer = ''; oversize = true; invalid = true; }
++          if (eof && !oversize) { try { capture(JSON.parse(buffer)); } catch { invalid = true; } }
++        }
++      };
++      return new Response(new ReadableStream<Uint8Array>({
++        async pull(controller) {
++          try {
++            const next = await reader.read();
++            if (next.done) {
++              consume(decoder.decode(), true);
++              finish(!response.ok ? 'failed' : (sse && !doneFrame) ? 'interrupted' : 'completed', response.status);
++              reader.releaseLock(); controller.close();
++            } else { consume(decoder.decode(next.value, { stream: true })); controller.enqueue(next.value); }
++          } catch (error) {
++            finish(init?.signal?.aborted ? 'cancelled' : 'interrupted', response.status);
++            controller.error(error);
++          }
++        },
++        async cancel(reason) {
++          finish('cancelled', response.status);
++          try { await reader.cancel(reason); } finally { reader.releaseLock(); }
++        },
++      }), { status: response.status, statusText: response.statusText, headers: response.headers });
++    };
++  }
++}
+diff --git a/src/web/server.ts b/src/web/server.ts
+index ff3b4cb..65d889f 100644
+--- a/src/web/server.ts
++++ b/src/web/server.ts
+@@ -1,3 +1,4 @@
++import { UsageLedger } from '../usage-ledger.js';
+ import { Hono } from 'hono';
+ import { cors } from 'hono/cors';
+ import { serve } from '@hono/node-server';
+@@ -196,10 +197,11 @@ export function createWebServer(config: MuConfig, tools: ToolSet, logger: MuLogg
+     // Intercept fetch to capture cost & rate-limit headers from gateway
+     let capturedCost = { cost: 0, costDetails: {} as Record<string, number> };
+ 
++    const usageLedger = new UsageLedger(config.usageLedger, reqLogger.sessionId, selectedModel, message => reqLogger.error(message));
+     const provider = createOpenAI({
+       baseURL: config.apiBaseUrl,
+       apiKey: config.apiKey,
+-      fetch: async (url, options) => {
++      fetch: usageLedger.wrapFetch(async (url, options) => {
+         const res = await globalThis.fetch(url as any, options as any);
+ 
+         // Capture rate-limit headers
+@@ -245,7 +247,7 @@ export function createWebServer(config: MuConfig, tools: ToolSet, logger: MuLogg
+           },
+         });
+         return new Response(stream, { status: res.status, statusText: res.statusText, headers: res.headers });
+-      },
++      }),
+     });
+     const model = provider.chat(selectedModel);
+ 
+@@ -253,7 +255,7 @@ export function createWebServer(config: MuConfig, tools: ToolSet, logger: MuLogg
+     let stepCount = 0;
+ 
+     let streamError: Error | null = null;
+-    const result = streamText({
++    const result = await usageLedger.run('web', async () => streamText({
+       model,
+       system: config.systemPrompt ?? '',
+       messages: await convertToModelMessages(trimMessagesForContext(messages, selectedModel)),
+@@ -283,8 +285,9 @@ export function createWebServer(config: MuConfig, tools: ToolSet, logger: MuLogg
+         const totalTokens = ((usage as any)?.inputTokens ?? 0) + ((usage as any)?.outputTokens ?? 0);
+         reqLogger.log(sessionEndEvent(stepCount, totalTokens, Date.now() - startTime));
+         setRequestLogger(null);
++        usageLedger.flush();
+       },
+-    });
++    }));
+ 
+     return result.toUIMessageStreamResponse({
+       messageMetadata: ({ part }) => {
+diff --git a/tests/usage-ledger-e2e.test.ts b/tests/usage-ledger-e2e.test.ts
+new file mode 100644
+index 0000000..2120fd5
+--- /dev/null
++++ b/tests/usage-ledger-e2e.test.ts
+@@ -0,0 +1,117 @@
++/** Real Muse + pinned AI SDK + loopback deterministic provider + real Python MCP. */
++import assert from 'node:assert/strict';
++import test from 'node:test';
++import { createServer } from 'node:http';
++import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
++import { tmpdir } from 'node:os';
++import { resolve, join } from 'node:path';
++import { execFileSync } from 'node:child_process';
++
++const ledgerRoot = process.env.MU_LEDGER_REPO;
++test('Muse agent → native usage → ledger import → Muse MCP reports → replay; CLI, web and helper coverage',
++  { skip: !ledgerRoot, timeout: 30000 }, async t => {
++    const root = mkdtempSync(join(tmpdir(), 'mu-ledger-e2e-'));
++    const oldHome = process.env.HOME, oldCwd = process.cwd();
++    process.env.HOME = root; process.chdir(root);
++    t.after(() => { process.chdir(oldCwd); process.env.HOME = oldHome; rmSync(root, { recursive: true, force: true }); });
++    // Dynamic imports after HOME isolation: Muse memory/session modules resolve it at import time.
++    const { createAgent } = await import('../src/agent.js');
++    const { createWebServer } = await import('../src/web/server.js');
++    const { loadConfig } = await import('../src/config.js');
++    const { createLogger } = await import('../src/logger.js');
++    const { loadMCPTools } = await import('../src/mcp/client.js');
++    const { UsageLedger } = await import('../src/usage-ledger.js');
++    const { createOpenAI } = await import('@ai-sdk/openai');
++    const { compactConversation, resetConversation } = await import('../src/compaction/index.js');
++    let nativeId = 'agent-response', requestCount = 0, failNext = false;
++    const server = createServer(async (req, res) => {
++      let body = ''; for await (const chunk of req) body += chunk;
++      const request = JSON.parse(body); requestCount++;
++      if (failNext) { failNext = false; res.writeHead(429, { 'content-type': 'application/json' }); res.end(JSON.stringify({ error: { message: 'fixture retry', type: 'rate_limit' } })); return; }
++      const data = { id: nativeId, object: 'chat.completion', created: 1791806400, model: 'fixture-model',
++        choices: [{ index: 0, message: { role: 'assistant', content: '[]' }, finish_reason: 'stop' }],
++        usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120,
++          prompt_tokens_details: { cached_tokens: 40 }, completion_tokens_details: { reasoning_tokens: 5 }, cost: 0.015 } };
++      if (!request.stream) { res.writeHead(200, { 'content-type': 'application/json' }); res.end(JSON.stringify(data)); return; }
++      res.writeHead(200, { 'content-type': 'text/event-stream' });
++      res.write('data: ' + JSON.stringify({ ...data, usage: undefined, choices: [{ index: 0, delta: { role: 'assistant', content: 'fixture reply' }, finish_reason: null }] }) + '\n\n');
++      res.write('data: ' + JSON.stringify({ ...data, choices: [{ index: 0, delta: {}, finish_reason: 'stop' }] }) + '\n\n');
++      res.end('data: [DONE]\n\n');
++    });
++    await new Promise<void>(done => server.listen(0, '127.0.0.1', done));
++    t.after(() => new Promise<void>(done => server.close(() => done())));
++    const address = server.address() as { port: number };
++    const spool = join(root, 'usage');
++    const muPath = join(root, '.mu.json');
++    const ledgerConfig = join(root, 'ledger-config.json');
++    const pricing = join(root, 'pricing.json');
++    writeFileSync(pricing, JSON.stringify({ _as_of: 'synthetic-only', models: { 'fixture-model': {
++      input: 2, cache_read: 0.5, cache_write_5m: 3, cache_write_1h: 4, output: 8 } } }), { mode: 0o600 });
++    const ledger = { version: 3, store: { kind: 'sqlite', path: join(root, 'ledger.sqlite') }, pricing_path: pricing,
++      muse_mesh: { version: 1, collection_enabled: true, collection_consent: 'local-usage-metadata',
++        reporting_enabled: true, reporting_consent: 'share-usage-aggregates', allow_scan: false,
++        sources: [{ id: 'fixture-mu', provider: 'fixture-gateway', path: spool }] } };
++    writeFileSync(ledgerConfig, JSON.stringify(ledger), { mode: 0o600 });
++    const python = process.env.PYTHON ?? 'python3';
++    const settings = { apiKey: 'fixture-only-not-a-secret', apiBaseUrl: `http://127.0.0.1:${address.port}/v1`,
++      model: 'fixture-model', maxSteps: 3, systemPrompt: 'Fixture only', logLevel: 'quiet', outputFormat: 'json', logToFile: false,
++      usageLedger: { enabled: true, sourceId: 'fixture-mu', provider: 'fixture-gateway', directory: spool, reportedChargeCurrency: 'USD' },
++      mcpServers: [{ name: 'ledger', transport: 'stdio', config: { command: python,
++        args: [resolve(ledgerRoot!, 'scripts/ledger_mcp.py'), '--config', ledgerConfig] } }] };
++    writeFileSync(muPath, JSON.stringify(settings), { mode: 0o600 });
++    const config = loadConfig({ config: muPath });
++    const logger = createLogger(config);
++    const agent = createAgent(config, {}, logger);
++    const answer = await agent.generate('PRIVATE-FIXTURE-PROMPT');
++    assert.equal(answer.text, 'fixture reply');
++    const scan = () => JSON.parse(execFileSync(python, [resolve(ledgerRoot!, 'scripts/muse_usage.py'), 'scan', '--config', ledgerConfig], { encoding: 'utf8', timeout: 10000 }));
++    const first = scan(); assert.equal(first.added, 1);
++    const closers: Array<() => Promise<void>> = [];
++    t.after(async () => { for (const close of closers) await close(); });
++    const tools = await loadMCPTools(config, logger, close => closers.push(close));
++    assert.equal(Object.keys(tools).length, 6);
++    assert.ok(!('mcp__ledger__ledger_scan_sources' in tools));
++    const invoke = async (name: string, args = {}) => {
++      const value = await tools['mcp__ledger__' + name].execute(args, { toolCallId: 'fixture-tool', messages: [] });
++      assert.equal(value.isError, false, JSON.stringify(value));
++      return JSON.parse(value.content[0].text);
++    };
++    const before = await invoke('ledger_usage_summary');
++    assert.deepEqual([before.rows[0].input_tokens, before.rows[0].input_uncached, before.rows[0].cache_read,
++      before.rows[0].output, before.rows[0].total], [100, 60, 40, 20, 120]);
++    const price = await invoke('ledger_cost_breakdown');
++    assert.equal(price.observed_reported_charge_usd, 0.015);
++    assert.equal(price.api_equivalent_usd, 0.0003);
++    await agent.generate('A replay with the same deterministic native response ID');
++    const replay = scan(); assert.equal(replay.added, 0); assert.equal(replay.skipped, 2);
++    assert.deepEqual(await invoke('ledger_usage_summary'), before);
++    // Existing memory extraction actually calls generateText using the instrumented shared model.
++    nativeId = 'memory-response'; await agent.extractMemories(logger.sessionId); assert.equal(scan().added, 1);
++    // Web has a separate model boundary; invoke the actual Hono route, not a simulated wrapper.
++    nativeId = 'web-response';
++    const { app } = createWebServer(config, {}, logger);
++    const webResponse = await app.request('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' },
++      body: JSON.stringify({ messages: [{ id: 'user-1', role: 'user', parts: [{ type: 'text', text: 'PRIVATE-WEB-PROMPT' }] }] }) });
++    assert.equal(webResponse.status, 200); await webResponse.text(); assert.equal(scan().added, 1);
++    // Exercise both helper functions with the same supported provider fetch interface.
++    const usage = new UsageLedger(config.usageLedger, logger.sessionId, config.model);
++    const model = createOpenAI({ baseURL: config.apiBaseUrl, apiKey: config.apiKey, fetch: usage.wrapFetch() }).chat(config.model);
++    nativeId = 'compact-response';
++    await compactConversation(Array.from({ length: 6 }, () => ({ role: 'user' as const, content: 'fixture' })), model);
++    nativeId = 'reset-response'; await resetConversation([{ role: 'user', content: 'fixture' }], model);
++    assert.equal(scan().added, 2);
++    // A real AI SDK transport retry creates a failed attempt plus one billable response.
++    nativeId = 'retry-response'; failNext = true; await agent.generate('Fixture SDK retry');
++    const retried = scan(); assert.equal(retried.added, 2);
++    const after = await invoke('ledger_usage_summary');
++    assert.equal(after.rows[0].calls, 7); assert.equal(after.rows[0].total, 720);
++    assert.equal(after.rows[0].missing_total_records, 1);
++    const records = readdirSync(spool).filter(n => n.endsWith('.usage.json')).map(n => JSON.parse(readFileSync(join(spool, n), 'utf8')));
++    assert.ok(records.some(r => r.operation === 'web'));
++    assert.ok(records.some(r => r.operation === 'memory'));
++    assert.ok(!JSON.stringify(records).includes('PRIVATE'));
++    const receipt = { verification: 'deterministic-loopback-fixture; no live provider', first_import: first,
++      initial_summary: before, replay_import: replay, initial_cost: price, final_summary: after,
++      native_requests: requestCount, native_final_records: records.length, native_source_commit: 'e537b757c112557f5256b3397523a6772d768697' };
++    if (process.env.MU_LEDGER_EVIDENCE) writeFileSync(process.env.MU_LEDGER_EVIDENCE, JSON.stringify(receipt, null, 2) + '\n');
++  });
+diff --git a/tests/usage-ledger.test.ts b/tests/usage-ledger.test.ts
+new file mode 100644
+index 0000000..d0d3d6e
+--- /dev/null
++++ b/tests/usage-ledger.test.ts
+@@ -0,0 +1,203 @@
++import assert from 'node:assert/strict';
++import test from 'node:test';
++import { mkdtempSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync, statSync } from 'node:fs';
++import { join } from 'node:path';
++import { tmpdir } from 'node:os';
++import { UsageLedger, type UsageLedgerOptions } from '../src/usage-ledger.js';
++
++const raw = (extra = {}) => ({ id: 'native-response', model: 'actual-model', created: 1791806400,
++  choices: [{ message: { role: 'assistant', content: 'PRIVATE-COMPLETION' }, finish_reason: 'stop', index: 0 }],
++  usage: { prompt_tokens: 100, completion_tokens: 20, total_tokens: 120,
++    prompt_tokens_details: { cached_tokens: 40 }, completion_tokens_details: { reasoning_tokens: 5 }, cost: 0.015 }, ...extra });
++function setup(t: any, options: Partial<UsageLedgerOptions> = {}) {
++  const root = mkdtempSync(join(tmpdir(), 'mu-ledger-test-'));
++  t.after(() => rmSync(root, { force: true, recursive: true }));
++  const directory = join(root, 'usage');
++  const config: UsageLedgerOptions = { enabled: true, directory, sourceId: 'fixture', provider: 'fixture-gateway',
++    includeIdentifiers: false, reportedChargeCurrency: 'USD', ...options };
++  const warnings: string[] = [];
++  return { root, directory, config, warnings,
++    recorder: new UsageLedger(config, 'PRIVATE-SESSION', 'requested-model', value => warnings.push(value)),
++    records: () => readdirSync(directory).filter(p => p.endsWith('.usage.json')).map(p => JSON.parse(readFileSync(join(directory, p), 'utf8'))) };
++}
++const jsonFetch = (data: unknown, status = 200): typeof fetch => async () => new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json' } });
++function sseFetch(data: string, size = 7): typeof fetch {
++  return async () => new Response(new ReadableStream({ start(controller) {
++    const bytes = new TextEncoder().encode(data);
++    for (let i = 0; i < bytes.length; i += size) controller.enqueue(bytes.slice(i, i + size));
++    controller.close();
++  }}), { headers: { 'content-type': 'text/event-stream' } });
++}
++
++test('disabled collection is exactly the original fetch and creates no directory', async t => {
++  const x = setup(t, { enabled: false });
++  const original = jsonFetch(raw());
++  assert.equal(x.recorder.wrapFetch(original), original);
++  await (await original('http://fixture')).text();
++  assert.deepEqual(readdirSync(x.root), []);
++});
++
++test('JSON response preserves actual model, nullable evidence, charge and private IDs', async t => {
++  const x = setup(t);
++  const response = await x.recorder.run('agent', () => x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture', { headers: { Authorization: 'PRIVATE-KEY' } }));
++  assert.deepEqual(await response.json(), raw());
++  const [event] = x.records();
++  assert.equal(event.input_tokens, 100); assert.equal(event.output_tokens, 20);
++  assert.equal(event.cache_read_tokens, 40); assert.equal(event.cache_write_tokens, null);
++  assert.equal(event.reasoning_tokens, 5); assert.equal(event.reported_charge_usd, 0.015);
++  assert.equal(event.model, 'actual-model'); assert.equal(event.configured_model, 'requested-model');
++  assert.match(event.response_id, /^[a-f0-9]{64}$/);
++  assert.equal(event.operation, 'agent');
++  assert.ok(!JSON.stringify(event).includes('PRIVATE'));
++  for (const file of readdirSync(x.directory)) {
++    if (file.endsWith('.json')) assert.ok(!readFileSync(join(x.directory, file), 'utf8').includes('PRIVATE'));
++    if (process.platform !== 'win32') assert.equal(statSync(join(x.directory, file)).mode & 0o077, 0);
++  }
++});
++
++test('SSE fragmented UTF-8, comments, CRLF and final usage remain byte-for-byte transparent', async t => {
++  const x = setup(t);
++  const body = ': heartbeat\r\n\r\ndata: ' + JSON.stringify(raw({ choices: [{ delta: { content: 'héllo 🌍' }, index: 0 }] })) + '\r\n\r\ndata: [DONE]\r\n\r\n';
++  const response = await x.recorder.wrapFetch(sseFetch(body, 1))('http://fixture');
++  assert.equal(await response.text(), body);
++  assert.equal(x.records()[0].status, 'completed');
++  assert.equal(x.records()[0].capture_incomplete, false);
++  assert.equal(x.records()[0].total_tokens, 120);
++});
++
++test('missing counts are not filled with SDK defaults', async t => {
++  const x = setup(t);
++  await (await x.recorder.wrapFetch(jsonFetch(raw({ usage: { completion_tokens: 7 } })))('http://fixture')).text();
++  const event = x.records()[0];
++  assert.equal(event.input_tokens, null); assert.equal(event.output_tokens, 7);
++  assert.equal(event.cache_read_tokens, null); assert.equal(event.total_tokens, null);
++  assert.equal(event.reported_charge_usd, null);
++});
++
++test('an absent usage envelope remains unavailable', async t => {
++  const x = setup(t);
++  await (await x.recorder.wrapFetch(jsonFetch(raw({ usage: undefined })))('http://fixture')).text();
++  assert.equal(x.records()[0].usage_source, 'unavailable');
++  assert.equal(x.records()[0].input_tokens, null);
++});
++
++test('gateway charge needs explicit USD mapping; no new price estimator exists', async t => {
++  const x = setup(t, { reportedChargeCurrency: undefined });
++  await (await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  assert.equal(x.records()[0].reported_charge_usd, null);
++});
++
++test('run-scoped attempts preserve retry identity without guessing retry groups', async t => {
++  const x = setup(t);
++  await x.recorder.run('agent', async () => {
++    await assert.rejects(() => x.recorder.wrapFetch(async () => { throw new Error('PRIVATE-NETWORK-ERROR'); })('http://fixture'));
++    await (await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  });
++  const rows = x.records().sort((a, b) => a.invocation_ordinal - b.invocation_ordinal);
++  assert.equal(rows.length, 2); assert.equal(rows[0].status, 'failed'); assert.equal(rows[0].input_tokens, null);
++  assert.equal(rows[0].run_id, rows[1].run_id); assert.equal(rows[1].invocation_ordinal, 2);
++  assert.equal(rows[1].retry_of, null); assert.ok(!JSON.stringify(rows).includes('PRIVATE'));
++});
++
++test('same response replay gets same persistent pseudonym across recorder instances', async t => {
++  const x = setup(t);
++  for (const recorder of [x.recorder, new UsageLedger(x.config, 'different-session', 'requested-model')]) {
++    await (await recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  }
++  const [a, b] = x.records();
++  assert.equal(a.response_id, b.response_id); assert.notEqual(a.invocation_id, b.invocation_id);
++});
++
++test('concurrent requests isolate sessions and runs', async t => {
++  const x = setup(t);
++  await Promise.all(Array.from({ length: 16 }, (_, i) => x.recorder.run('agent', async () => {
++    await (await x.recorder.wrapFetch(jsonFetch(raw({ id: `response-${i}` })))('http://fixture')).text();
++  })));
++  const rows = x.records();
++  assert.equal(rows.length, 16); assert.equal(new Set(rows.map(r => r.run_id)).size, 16);
++  assert.equal(new Set(rows.map(r => r.session_id)).size, 1);
++  assert.ok(rows.every(r => r.invocation_ordinal === 1));
++});
++
++test('interrupted SSE retains observed usage and absence of completion marker', async t => {
++  const x = setup(t);
++  await (await x.recorder.wrapFetch(sseFetch('data: ' + JSON.stringify(raw()) + '\n\n'))('http://fixture')).text();
++  assert.equal(x.records()[0].status, 'interrupted');
++  assert.equal(x.records()[0].input_tokens, 100);
++});
++
++test('stream cancellation records a terminal attempt and cancels upstream', async t => {
++  const x = setup(t);
++  let cancelled = false;
++  const f: typeof fetch = async () => new Response(new ReadableStream({ cancel() { cancelled = true; } }), { headers: { 'content-type': 'text/event-stream' } });
++  const response = await x.recorder.wrapFetch(f)('http://fixture');
++  await response.body!.cancel();
++  assert.equal(cancelled, true); assert.equal(x.records()[0].status, 'cancelled');
++});
++
++test('HTTP failures preserve original response and never persist error bodies', async t => {
++  const x = setup(t);
++  const response = await x.recorder.wrapFetch(jsonFetch({ error: { message: 'PRIVATE-ERROR' } }, 429))('http://fixture');
++  assert.equal(response.status, 429); assert.match(await response.text(), /PRIVATE-ERROR/);
++  assert.equal(x.records()[0].status, 'failed'); assert.equal(x.records()[0].http_status, 429);
++  assert.ok(!JSON.stringify(x.records()).includes('PRIVATE'));
++});
++
++test('storage failure is fail-open and buffered metadata recovers without reissuing usage', async t => {
++  const x = setup(t);
++  writeFileSync(x.directory, 'block directory creation');
++  const response = await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture');
++  assert.deepEqual(await response.json(), raw()); assert.equal(x.warnings.length, 1);
++  rmSync(x.directory); mkdirSync(x.directory, { mode: 0o700 });
++  x.recorder.flush();
++  assert.equal(x.records().length, 1); assert.equal(x.records()[0].input_tokens, 100);
++  assert.match(x.records()[0].response_id, /^[a-f0-9]{64}$/);
++});
++
++test('oversized or malformed telemetry cannot break the model response', async t => {
++  const x = setup(t);
++  const body = 'data: ' + 'x'.repeat(1024 * 1024 + 5) + '\n\ndata: [DONE]\n\n';
++  assert.equal(await (await x.recorder.wrapFetch(sseFetch(body, 8192))('http://fixture')).text(), body);
++  assert.equal(x.records()[0].capture_incomplete, true);
++});
++
++test('literal identifiers require explicit opt-in', async t => {
++  const x = setup(t, { includeIdentifiers: true });
++  await (await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  assert.equal(x.records()[0].response_id, 'native-response');
++  assert.equal(x.records()[0].id_mode, 'literal');
++});
++
++test('missing persistent identity key never silently creates a new deduplication namespace', async t => {
++  const x = setup(t);
++  await (await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  rmSync(join(x.directory, '.identity-key'));
++  const restarted = new UsageLedger(x.config, 'another-session', 'requested-model', value => x.warnings.push(value));
++  await (await restarted.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  assert.equal(x.records().length, 1);
++  assert.ok(x.warnings.length > 0);
++});
++
++test('changing source/provider or privacy mode cannot silently reuse a populated directory', async t => {
++  const x = setup(t);
++  await (await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  const changed = new UsageLedger({ ...x.config, includeIdentifiers: true }, 'session', 'requested-model', value => x.warnings.push(value));
++  await (await changed.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  assert.equal(x.records().length, 1);
++  assert.ok(x.warnings.length > 0);
++});
++
++test('a truncated identity key is never cached; restoring it recovers the original namespace', async t => {
++  const x = setup(t);
++  await (await x.recorder.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  const keyPath = join(x.directory, '.identity-key');
++  const original = readFileSync(keyPath);
++  writeFileSync(keyPath, '');
++  const restarted = new UsageLedger(x.config, 'session', 'requested-model', value => x.warnings.push(value));
++  for (let i = 0; i < 2; i++) await (await restarted.wrapFetch(jsonFetch(raw()))('http://fixture')).text();
++  assert.equal(x.records().length, 1);
++  writeFileSync(keyPath, original);
++  restarted.flush();
++  assert.equal(x.records().length, 3);
++  assert.equal(new Set(x.records().map(event => event.response_id)).size, 1);
++});
+diff --git a/tsconfig.usage-ledger.json b/tsconfig.usage-ledger.json
+new file mode 100644
+index 0000000..ec82fba
+--- /dev/null
++++ b/tsconfig.usage-ledger.json
+@@ -0,0 +1,11 @@
++{
++  "extends": "./tsconfig.json",
++  "compilerOptions": {
++    "rootDir": ".",
++    "noEmit": true
++  },
++  "include": [
++    "src/**/*.ts",
++    "tests/usage-ledger*.test.ts"
++  ]
++}

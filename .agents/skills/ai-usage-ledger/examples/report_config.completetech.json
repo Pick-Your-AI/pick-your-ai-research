@@ -1,0 +1,53 @@
+{
+  "title": "AI coding-agent usage: token volume, caching and cost study",
+  "html_title": "Agent Usage Study",
+  "dashboard_title": "Agent Token Ledger",
+  "prices_as_of": "2026-09-07",
+  "claude_primary_host": "windows",
+  "hosts": {
+    "windows": "Windows 11 workstation profile",
+    "wsl-ubuntu": "WSL2 Ubuntu distro on the same workstation",
+    "server": "Ubuntu lab server (SSH)",
+    "old-profile-backup": "offline copy of the previous machine's profile"
+  },
+  "excluded_sources": [
+    "**Claude desktop app and claude.ai** leave no local transcript.",
+    "**Antigravity / Gemini** stores conversations as protobuf blobs without token fields."
+  ],
+  "extra_limitations": [],
+  "dashboard_excluded_note": "Not counted: Claude desktop and claude.ai chats, Antigravity conversations, and any host without SSH access.",
+  "branding": {
+    "name": "CompleteTech",
+    "eyebrow": "COMPLETETECH LLC",
+    "tagline": "Innovation at Every Integration",
+    "contact": "complete.tech · Timothy.Gregg@complete.tech",
+    "logo": "assets/logo.png",
+    "accent": "#1E3A8A",
+    "footer": "CompleteTech LLC · Innovation at Every Integration · complete.tech",
+    "google_fonts_url": "",
+    "font_display": "",
+    "font_body": "",
+    "font_mono": "",
+    "light": {
+      "bg": "#F8FAFC",
+      "surface": "#FFFFFF",
+      "surface-2": "#EEF2FF",
+      "ink": "#0F172A",
+      "ink-2": "#1E293B",
+      "ink-3": "#64748B",
+      "line": "#E2E8F0",
+      "line-2": "#CBD5E1"
+    },
+    "dark": {
+      "bg": "#0F172A",
+      "surface": "#1E293B",
+      "surface-2": "#273449",
+      "ink": "#F1F5F9",
+      "ink-2": "#CBD5E1",
+      "ink-3": "#94A3B8",
+      "line": "#334155",
+      "line-2": "#475569"
+    },
+    "extra_css": ""
+  }
+}

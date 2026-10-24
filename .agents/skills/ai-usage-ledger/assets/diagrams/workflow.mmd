@@ -1,0 +1,21 @@
+flowchart LR
+  O[First use: onboarding<br/>brand, theme, store, hosts] --> P[(Preferences<br/>config.json + store)]
+  A[Detect harnesses per OS<br/>profiles, drives, WSL, SSH] --> B[Manifest, pricing, accounts draft]
+  P --> A
+  B --> C[Scan each host]
+  C --> S[(Append-only store<br/>SQLite / JSON / CSV)]
+  S --> D[Merge, price, attribute]
+  D --> E{Validated?}
+  E -->|No| F[Fix rules, run --no-scan]
+  F --> D
+  E -->|Yes| G[Dashboard, study package, ledger documents]
+  G --> H[Anonymised copy for publication]
+  T[Scheduled refresh<br/>Task Scheduler / cron] --> A
+  classDef source fill:#eef6ff,stroke:#3778c2,color:#102a43;
+  classDef gate fill:#fff7e6,stroke:#c97a12,color:#3d2600;
+  classDef output fill:#eefaf0,stroke:#2f8f46,color:#12351d;
+  classDef store fill:#f3eefc,stroke:#6b46c1,color:#2a1a4d;
+  class O,A,B,C,D source;
+  class E gate;
+  class F,G,H output;
+  class P,S,T store;

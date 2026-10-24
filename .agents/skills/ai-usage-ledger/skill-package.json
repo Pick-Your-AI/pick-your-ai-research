@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "family": "completetech-skills",
+  "repository": "CompleteTech-LLC/ai-usage-ledger-skill",
+  "skill_name": "ai-usage-ledger",
+  "kind": "usage-ledger",
+  "entrypoints": ["scripts/ledger.py", "scripts/run_pipeline.py", "scripts/render_ledger_doc.py"],
+  "example_inputs": ["examples/manifest.fixtures.json", "examples/accounts.fixtures.json", "examples/report_config.completetech.json", "templates/pricing.json"],
+  "network_mode": "operator-selected-hosts",
+  "private": false
+}

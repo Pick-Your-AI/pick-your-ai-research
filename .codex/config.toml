@@ -1,0 +1,5 @@
+[mcp_servers.cloudflare]
+url = "https://mcp.cloudflare.com/mcp"
+
+[mcp_servers.godaddy]
+url = "https://api.godaddy.com/v1/domains/mcp"

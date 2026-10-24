@@ -1,0 +1,69 @@
+name: Muse native usage and MCP
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.12', '3.13']
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ledger
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: muse-mesh/mu
+          ref: e537b757c112557f5256b3397523a6772d768697
+          path: mu
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Existing Python store and MCP contracts
+        working-directory: ledger
+        run: |
+          python -m unittest discover -s tests -p 'test_muse_usage.py' -v
+          python -m unittest discover -s tests -p 'test_ledger_mcp.py' -v
+          python scripts/muse_usage.py --help
+          python scripts/ledger_mcp.py --help
+      - name: Apply version-bound companion patch
+        working-directory: mu
+        run: |
+          test "$(git rev-parse HEAD)" = e537b757c112557f5256b3397523a6772d768697
+          git apply --check ../ledger/integrations/muse-mesh/mu.patch.txt
+          git apply ../ledger/integrations/muse-mesh/mu.patch.txt
+          git diff --check
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: mu/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Native dependencies, TypeScript and build
+        working-directory: mu
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec tsc --project tsconfig.usage-ledger.json --noEmit
+          pnpm build
+      - name: Native unit tests and real Muse-to-MCP fixture interaction
+        working-directory: mu
+        env:
+          MU_LEDGER_REPO: ${{ github.workspace }}/ledger
+          MU_LEDGER_EVIDENCE: ${{ runner.temp }}/muse-e2e.json
+          PYTHON: python
+        run: pnpm test:usage-ledger
+      - uses: actions/upload-artifact@v4
+        with:
+          name: muse-e2e-python-${{ matrix.python }}
+          path: ${{ runner.temp }}/muse-e2e.json
+          if-no-files-found: error

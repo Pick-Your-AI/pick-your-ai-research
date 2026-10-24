@@ -1,0 +1,26 @@
+{
+  "_comment": "Runs the pipeline over the synthetic fixtures produced by tests/make_fixtures.py. Paths are relative to this file; outputs land under tests/out/pipeline.",
+  "workdir": "../tests/out/pipeline",
+  "snapshot_date": "2026-09-09",
+  "timezone": "America/New_York",
+  "package_prefix": "Example_Ledger",
+  "pricing": "../templates/pricing.json",
+  "accounts": "accounts.fixtures.json",
+  "report_config": "report_config.completetech.json",
+  "hosts": [
+    {
+      "name": "fixture",
+      "kind": "local",
+      "claude_roots": ["../tests/fixtures/claude"],
+      "codex_roots": ["../tests/fixtures/codex"],
+      "gemini_roots": ["../tests/fixtures/gemini"],
+      "cline_roots": ["cline=../tests/fixtures/cline"],
+      "aider_roots": ["../tests/fixtures/aider"],
+      "kimi_roots": ["../tests/fixtures/kimi"],
+      "vibe_roots": ["../tests/fixtures/vibe"],
+      "continue_roots": ["../tests/fixtures/continue"],
+      "pi_roots": ["../tests/fixtures/pi"],
+      "generic_roots": ["codebuff=../tests/fixtures/generic"]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+name: mini-SWE native integration
+on:
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - 'tests/test*mini_swe*.py'
+      - '.github/workflows/mini-swe-integration.yml'
+  push:
+    paths:
+      - 'scripts/**'
+      - 'tests/test*mini_swe*.py'
+      - '.github/workflows/mini-swe-integration.yml'
+permissions:
+  contents: read
+jobs:
+  native-adapters:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MSWEA_SILENT_STARTUP: '1'
+      MSWEA_MODEL_RETRY_STOP_AFTER_ATTEMPT: '2'
+      PORTKEY_API_KEY: synthetic-not-a-provider-key
+      LITELLM_LOCAL_MODEL_COST_MAP: 'True'
+    steps:
+      - name: Configure isolated test paths
+        run: |
+          echo "MSWEA_GLOBAL_CONFIG_DIR=$RUNNER_TEMP/mini-swe-test-config" >> "$GITHUB_ENV"
+          echo "MINI_SWE_TEST_RECEIPTS=$RUNNER_TEMP/mini-swe-receipts" >> "$GITHUB_ENV"
+          mkdir -p "$RUNNER_TEMP/mini-swe-receipts"
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: SWE-agent/mini-swe-agent
+          ref: 04d809ceab9df28f9adaed044884180159172930
+          path: .native-mini
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test-only dependencies (no ledger runtime dependency change)
+        run: python -m pip install -e .native-mini 'litellm==1.96.0' portkey-ai pytest
+      - name: Exercise actual adapters and deterministic agent run (localhost only)
+        run: |
+          python -m pytest tests/test_mini_swe_native.py -v --junitxml="${MINI_SWE_TEST_RECEIPTS}/native.xml"
+          python -m pip freeze > "${MINI_SWE_TEST_RECEIPTS}/environment.txt"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mini-swe-reconciliation
+          path: ${{ runner.temp }}/mini-swe-receipts
+          if-no-files-found: warn

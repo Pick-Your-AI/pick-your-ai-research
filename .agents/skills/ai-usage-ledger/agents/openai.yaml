@@ -1,0 +1,7 @@
+interface:
+  display_name: "AI Usage Ledger Skill"
+  short_description: "Compile, price and attribute local AI agent usage"
+  default_prompt: "Use $ai-usage-ledger: before the first onboarding relay the SKILL.md Before You Start table (this skill reads agent transcripts and tool databases on this machine and on hosts I name, keeps a durable local ledger under ~/.ai-usage-ledger and the working directory, reaches other profiles, WSL distros and SSH hosts only when I enable or name them, and captures prompt text or credential-derived account claims only when I opt in); on first use ask me for branding, theme, storage backend (sqlite/json/csv), whether to refresh on a schedule, whether to keep an anonymised copy and whether to archive the raw log files, then run the onboarding; then detect every AI coding-agent log in my profile and on the hosts I named, append new calls to the ledger store, price them at list API rates by account, render the branded dashboard and study package, offer the ledger documents (statement, memo, brief) from the catalog, and answer any specific question about usage with `ledger.py query`."
+
+policy:
+  allow_implicit_invocation: false

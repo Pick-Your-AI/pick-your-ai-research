@@ -1,0 +1,23 @@
+name: Package contract
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  validate-package:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test the package contract
+        run: python -m unittest discover -s tests -p 'test_package_*.py' -v
+      - name: Validate the full checkout
+        run: python scripts/validate_package.py

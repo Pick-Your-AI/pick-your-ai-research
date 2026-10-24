@@ -1,0 +1,48 @@
+{
+  "_comment": "Environment-specific prose for build_report.py and build_dashboard.py. Everything here is optional.",
+  "title": "Personal AI coding-agent usage: token volume, caching and cost study",
+  "html_title": "Agent Usage Study",
+  "dashboard_title": "Agent Token Ledger",
+  "prices_as_of": "YYYY-MM-DD",
+  "claude_primary_host": "windows",
+  "study_url": "",
+  "hosts": {
+    "windows": "Windows profile C:\\Users\\<you> (this workstation)",
+    "wsl-ubuntu": "WSL2 Ubuntu distro, /home/<you> (same workstation)",
+    "server": "server.example (Linux, user <user>)"
+  },
+  "excluded_sources": [
+    "**<host or tool>**: <why it was examined and not counted>",
+    "**Claude desktop app and claude.ai** leave no local transcript.",
+    "**Antigravity / Gemini** stores conversations as protobuf blobs without token fields."
+  ],
+  "extra_limitations": [
+    "**<anything specific to this environment>**"
+  ],
+  "dashboard_excluded_note": "Not counted: <one sentence per excluded source>.",
+  "reproduce_intro": "All scripts are standard-library Python 3.8+. Scans run on each host (natively where possible), then one report step merges them.",
+  "reproduce_commands": [
+    "python scripts/run_pipeline.py --manifest manifest.json",
+    "python scripts/run_pipeline.py --manifest manifest.json --only report,analyze,build"
+  ],
+  "branding": {
+    "_comment": "All optional. logo is a local image file (inlined as a data URI) or a data: URI; a remote https logo and google_fonts_url are used only when allow_external_resources is true. accent must be a CSS colour; light/dark override any CSS token (bg, surface, surface-2, ink, ink-2, ink-3, line, line-2, codex, claude, copilot, opencode, openclaw, seq1..seq7) with a plain CSS value; fonts name locally installed faces; extra_css is appended only when unsafe_extra_css is true and may not contain </, @import or url(). Text values are HTML-escaped.",
+    "name": "Your Studio",
+    "logo": "",
+    "accent": "#0b7a75",
+    "footer": "Prepared by Your Studio \u00b7 confidential",
+    "allow_external_resources": false,
+    "unsafe_extra_css": false,
+    "google_fonts_url": "",
+    "font_display": "",
+    "font_body": "",
+    "font_mono": "",
+    "light": {
+      "bg": "#f7f9f8"
+    },
+    "dark": {
+      "bg": "#101413"
+    },
+    "extra_css": ""
+  }
+}

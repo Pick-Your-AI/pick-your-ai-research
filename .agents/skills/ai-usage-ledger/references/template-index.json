@@ -1,0 +1,20 @@
+{
+  "_comment": "Machine-readable index of references/ledger-document-catalog.md, used by scripts/render_ledger_doc.py. stage groups the audience; type is the document shape; scope names the extra --var the template focuses on.",
+  "templates": [
+    {"id": "executive-summary", "stage": "reporting", "type": "summary", "title": "Agent usage: executive summary"},
+    {"id": "monthly-usage-statement", "stage": "reporting", "type": "statement", "scope": "month", "title": "Agent usage statement"},
+    {"id": "quarterly-usage-review", "stage": "reporting", "type": "review", "title": "Quarterly agent usage review"},
+    {"id": "account-statement", "stage": "reporting", "type": "statement", "scope": "account", "title": "Account statement"},
+    {"id": "subscription-vs-api-memo", "stage": "finance", "type": "memo", "title": "Subscriptions versus API list price"},
+    {"id": "subscription-renewal-recommendation", "stage": "finance", "type": "recommendation", "scope": "account", "title": "Subscription renewal recommendation"},
+    {"id": "cache-savings-brief", "stage": "finance", "type": "brief", "title": "Cache savings brief"},
+    {"id": "budget-forecast-memo", "stage": "finance", "type": "forecast", "title": "Budget forecast: agent usage"},
+    {"id": "project-cost-allocation", "stage": "finance", "type": "allocation", "scope": "project", "title": "Project cost allocation"},
+    {"id": "client-billing-evidence-summary", "stage": "billing", "type": "evidence", "scope": "project", "title": "Usage evidence for billing"},
+    {"id": "model-mix-report", "stage": "engineering", "type": "report", "title": "Model mix report"},
+    {"id": "tool-adoption-summary", "stage": "engineering", "type": "summary", "title": "Tool adoption summary"},
+    {"id": "host-inventory-report", "stage": "operations", "type": "inventory", "title": "Host and log inventory"},
+    {"id": "data-quality-and-exclusions-note", "stage": "quality", "type": "note", "title": "Data quality and exclusions"},
+    {"id": "correction-notice", "stage": "quality", "type": "notice", "title": "Correction notice"}
+  ]
+}

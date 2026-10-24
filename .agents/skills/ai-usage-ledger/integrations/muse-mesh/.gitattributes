@@ -1,0 +1,2 @@
+# Unified patches intentionally contain single-space context lines.
+mu.patch.txt -whitespace

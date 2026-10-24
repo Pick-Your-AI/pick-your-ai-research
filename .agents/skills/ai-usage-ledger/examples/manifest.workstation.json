@@ -1,0 +1,56 @@
+{
+  "_comment": "Example: a Windows workstation with a WSL distro, a lab server over SSH and an old-profile backup drive. Replace <you>, <old> and the server address; delete hosts you do not have.",
+  "workdir": ".",
+  "snapshot_date": null,
+  "timezone": "America/New_York",
+  "package_prefix": "AI_Usage_Ledger",
+  "pricing": "pricing.json",
+  "accounts": "accounts.json",
+  "report_config": "report_config.completetech.json",
+  "study_url": "",
+  "hosts": [
+    {
+      "name": "windows",
+      "kind": "local",
+      "claude_roots": ["C:/Users/<you>/.claude"],
+      "codex_roots": ["C:/Users/<you>/.codex"],
+      "copilot_roots": ["C:/Users/<you>/.copilot"],
+      "gemini_roots": ["C:/Users/<you>/.gemini/tmp"],
+      "cline_roots": ["cline=C:/Users/<you>/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev"],
+      "codex_sqlite": "C:/Users/<you>/.codex/state_5.sqlite",
+      "claude_stats_cache": "C:/Users/<you>/.claude/stats-cache.json"
+    },
+    {
+      "name": "wsl-ubuntu",
+      "kind": "wsl",
+      "distro": "Ubuntu",
+      "python": "python3",
+      "claude_roots": ["/home/<you>/.claude"],
+      "codex_roots": ["/home/<you>/.codex"],
+      "copilot_roots": ["/home/<you>/.copilot"],
+      "opencode_dbs": ["/home/<you>/.local/share/opencode/opencode.db"],
+      "codex_sqlite": "/home/<you>/.codex/state_5.sqlite",
+      "claude_stats_cache": "/home/<you>/.claude/stats-cache.json",
+      "share_fallback": "//wsl$/Ubuntu"
+    },
+    {
+      "name": "server",
+      "kind": "ssh",
+      "ssh": "user@server.example",
+      "python": "python3",
+      "remote_tmp": "/tmp/ai-usage-ledger",
+      "claude_roots": ["/home/user/.claude"],
+      "codex_roots": ["/home/user/.codex"],
+      "openclaw_roots": ["/srv/openclaw/config"],
+      "codex_sqlite": "/home/user/.codex/state_5.sqlite"
+    },
+    {
+      "name": "old-profile-backup",
+      "kind": "share",
+      "claude_roots": ["G:/Users/<old>/.claude"],
+      "codex_roots": ["G:/Users/<old>/.codex"],
+      "codex_sqlite": "G:/Users/<old>/.codex/state_5.sqlite",
+      "claude_stats_cache": "G:/Users/<old>/.claude/stats-cache.json"
+    }
+  ]
+}

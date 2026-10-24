@@ -1,0 +1,11 @@
+# The ledger pipeline, store, onboarding, detection, anonymiser, scheduler and Markdown/HTML document renderer
+# (scripts/*.py) are standard-library Python 3.8+ and have no runtime dependencies.
+# Quality validation (scripts/validate_quality.py) needs:
+pyyaml==6.0.3
+ruff==0.14.0
+# Optional: branded PDF and DOCX ledger documents (scripts/render_pdf.py, `ledger.py doc --pdf --docx`)
+reportlab==4.5.1
+python-docx==1.2.0
+# Optional: PNG preview of a PDF document (`--png`)
+pypdfium2==5.8.0
+pillow==12.2.0
