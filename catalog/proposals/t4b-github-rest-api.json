@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "id": "integration.github.rest-api",
+  "kind": "integration",
+  "tier": "T4",
+  "name": "GitHub REST API",
+  "version": "2026-03-10",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Provider-level connection to the GitHub REST API. Holds one credential and endpoint; operation families are separate tool items.",
+  "tags": [
+    "developer-platform",
+    "github"
+  ],
+  "spec": {
+    "integration_type": "api",
+    "auth_methods": [
+      "api_key"
+    ],
+    "associated_tool_refs": [
+      "tool.github.issues-read",
+      "tool.github.issues-write"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://docs.github.com/en/rest/issues/issues",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports API version 2026-03-10 and the issues operation families referenced by associated_tool_refs. required_scopes uses this project's notation '<fine-grained permission>:<access>' for the GitHub fine-grained token permission named on the endpoint page; auth_methods api_key represents a fine-grained personal access token (bearer token). OAuth app and GitHub App installation tokens were not verified today and are omitted."
+    },
+    {
+      "source_uri": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "rate_limit_per_minute omitted: limits are per hour (5,000/h) plus 900 points/min secondary, not a single per-minute number."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z"
+}

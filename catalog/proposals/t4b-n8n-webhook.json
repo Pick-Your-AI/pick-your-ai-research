@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "id": "integration.n8n.webhook",
+  "kind": "integration",
+  "tier": "T4",
+  "name": "n8n Webhook trigger",
+  "version": "2.43.7",
+  "status": "active",
+  "billing_class": "unknown",
+  "description": "Inbound webhook trigger that starts an n8n workflow; the workflow's downstream actions determine the real side effects.",
+  "tags": [
+    "workflow-automation",
+    "webhook"
+  ],
+  "spec": {
+    "integration_type": "webhook",
+    "auth_methods": [
+      "none",
+      "api_key"
+    ]
+  },
+  "provenance": [
+    {
+      "source_uri": "https://registry.npmjs.org/n8n",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports version 2.43.7 (npm latest, published 2026-10-16); package license field 'SEE LICENSE IN LICENSE.md'."
+    },
+    {
+      "source_uri": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Supports Webhook node authentication options None, Basic auth, Header auth, JWT auth (api_key represents Header auth; Basic and JWT have no v1 enum value), IP allowlist, test vs production URLs, 16MB max payload."
+    },
+    {
+      "source_uri": "https://raw.githubusercontent.com/n8n-io/n8n/master/LICENSE.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Sustainable Use License 1.0 plus enterprise .ee files; not an SPDX license, so no license block."
+    },
+    {
+      "source_uri": "https://n8n.io/pricing/",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "Cloud billing unit is monthly workflow executions (EUR); billing_class left unknown because self-hosted and cloud differ."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "extensions": {
+    "x_side_effect_class": "unknown"
+  }
+}

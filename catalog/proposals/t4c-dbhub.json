@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "id": "mcp_server.dbhub",
+  "kind": "mcp_server",
+  "tier": "T4",
+  "name": "DBHub (Bytebase) database MCP server",
+  "version": "1.5.0",
+  "status": "active",
+  "billing_class": "free",
+  "description": "Multi-database MCP server (PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, SQLite) with read-only mode, row limits and query timeouts. Runs over stdio or an HTTP transport selected by --transport; v1 records stdio only.",
+  "tags": [
+    "local",
+    "self-hosted",
+    "database",
+    "sql"
+  ],
+  "spec": {
+    "transport": "stdio",
+    "auth_methods": [
+      "none"
+    ],
+    "trust_level": "trusted_external"
+  },
+  "provenance": [
+    {
+      "source_uri": "https://registry.npmjs.org/@bytebase/dbhub",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "npm latest 1.5.0 published 2026-10-09, license MIT, mcpName io.github.bytebase/dbhub. Supports version."
+    },
+    {
+      "source_uri": "https://github.com/bytebase/dbhub/blob/main/README.md",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "README: '--transport stdio' and '--transport http --port 8080'; guardrails read-only mode, row limiting, query timeout; SSH tunnelling and TLS to the database. No client-to-server authentication documented, recorded as auth none (database credentials go in the DSN, not MCP auth). trust_level is a t4c research suggestion, not a security approval: trusted_external = maintained by the vendor whose API it fronts or by a named organisation, with publisher identity checked against the official MCP Registry namespace or the vendor's own docs; it does not make returned content trusted (see note, #35)."
+    },
+    {
+      "source_uri": "https://github.com/bytebase/dbhub/blob/main/LICENSE",
+      "checked_at": "2026-10-16T12:00:00Z",
+      "verification_status": "unverified",
+      "notes": "LICENSE is the MIT License. Supports license."
+    }
+  ],
+  "updated_at": "2026-10-17T02:17:46Z",
+  "license": {
+    "spdx_id": "MIT",
+    "commercial_use_allowed": true,
+    "self_hosting_allowed": true
+  }
+}
