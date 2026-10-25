@@ -89,6 +89,14 @@ class LocalCompareReporterTests(unittest.TestCase):
         self.assertIsNone(result["tolerance"])
         self.assertIsNone(result["fit_verdict"])
 
+    @contextmanager
+    def copied_captured_cohort(self):
+        """Copy receipts for synthetic mutation; use all real report checks."""
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary) / "synthetic-cohort"
+            shutil.copytree(ROOT / COHORT, directory)
+            yield directory
+
     def test_captured_cohort_report_remains_byte_exact_without_native_calls(self):
         expected = (ROOT / COHORT / "comparison-summary.json").read_bytes()
         with mock.patch("subprocess.Popen", side_effect=AssertionError("no child permitted")):
@@ -177,6 +185,55 @@ class LocalCompareReporterTests(unittest.TestCase):
         with self.cohort({}, estimate=TOTAL + 1) as directory:
             with self.assertRaisesRegex(ValueError, "prediction aggregation drift"):
                 reporter.summarize(directory)
+
+    def test_native_receipt_rejects_boolean_and_float_aliases_in_every_trial(self):
+        for repetition in (1, 2, 3):
+            for field in ("exact_admitted_live_buffer_bytes", "native_self_byte_interval",
+                          "cap_bytes", "cleanup_live_bytes", "model_graph_dispatches"):
+                aliases = ("float", "bool") if field in ("cleanup_live_bytes", "model_graph_dispatches") else ("float",)
+                for alias in aliases:
+                    with self.subTest(repetition=repetition, field=field, alias=alias):
+                        with self.copied_captured_cohort() as directory:
+                            path = directory / f"H1-r{repetition}.json"
+                            record = reporter.read_json(path)
+                            value = record["native_validation"][field]
+                            record["native_validation"][field] = (
+                                False if alias == "bool" else
+                                [float(item) for item in value] if isinstance(value, list) else float(value))
+                            path.write_text(json.dumps(record), encoding="utf-8")
+                            with self.assertRaisesRegex(ValueError, "native validation receipt drift"):
+                                reporter.summarize(directory)
+
+    def test_native_receipt_member_order_is_irrelevant_and_correction_recovers(self):
+        with self.copied_captured_cohort() as directory:
+            path = directory / "H1-r1.json"
+            original = reporter.read_json(path)
+            reordered = dict(original)
+            reordered["native_validation"] = dict(reversed(list(original["native_validation"].items())))
+            path.write_text(json.dumps(reordered), encoding="utf-8")
+            self.assert_estimate(directory, TOTAL)
+            changed = reporter.read_json(path)
+            changed["native_validation"]["cleanup_live_bytes"] = False
+            path.write_text(json.dumps(changed), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "native validation receipt drift"):
+                reporter.summarize(directory)
+            path.write_text(json.dumps(reordered), encoding="utf-8")
+            self.assert_estimate(directory, TOTAL)
+
+    def test_native_receipt_structure_and_interval_order_still_reject(self):
+        for change in ("missing", "extra", "interval_order"):
+            with self.subTest(change=change), self.copied_captured_cohort() as directory:
+                path = directory / "H1-r1.json"
+                record = reporter.read_json(path)
+                if change == "missing":
+                    del record["native_validation"]["cleanup_live_bytes"]
+                elif change == "extra":
+                    record["native_validation"]["extra"] = 0
+                else:
+                    record["native_validation"]["native_self_byte_interval"].reverse()
+                path.write_text(json.dumps(record), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "native validation receipt drift"):
+                    reporter.summarize(directory)
 
 
 if __name__ == "__main__":
