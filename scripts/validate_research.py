@@ -220,6 +220,99 @@ def intake_errors(catalog, pricebooks):
     return errors
 
 
+def model_inventory_errors(root):
+    """Check the existing T1 notes and source links, without certifying claims."""
+    directory = root / 'research/T1-model-selection'
+    # Minimal submission trees need not include the separate T1 notes collection.
+    if not directory.exists():
+        return []
+    errors = []
+    documents = {}
+    for name in ('inventory', 'sources'):
+        path = directory / f'model-research-{name}.json'
+        try:
+            document = intake_json(path.read_text(encoding='utf-8'))
+            if not isinstance(document, dict):
+                raise ValueError('expected an object')
+            documents[name] = document
+        except (ValueError, OSError) as exc:
+            errors.append(f'{path}: {exc}')
+
+    def text(value):
+        return isinstance(value, str) and bool(value.strip())
+
+    def fields(record, names, label):
+        for name in names:
+            if not text(record.get(name)):
+                errors.append(f'{label}/{name}: needs nonempty text')
+
+    def date(value, label):
+        try:
+            if not isinstance(value, str) or not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', value):
+                raise ValueError('expected YYYY-MM-DD')
+            datetime.strptime(value, '%Y-%m-%d')
+        except ValueError:
+            errors.append(f'{label}: needs a real YYYY-MM-DD date')
+
+    def strings(value, label):
+        if not isinstance(value, list) or not value or any(not text(v) for v in value):
+            errors.append(f'{label}: needs a nonempty array of nonempty text')
+            return []
+        if len(set(value)) != len(value):
+            errors.append(f'{label}: repeated entry')
+        return value
+
+    def rows(document, key, label):
+        value = document.get(key)
+        if not isinstance(value, list) or not value:
+            errors.append(f'{label}/{key}: needs a nonempty array')
+            return []
+        result = []
+        for index, record in enumerate(value):
+            row_label = f'{label}/{key}/{index}'
+            if not isinstance(record, dict):
+                errors.append(f'{row_label}: expected an object')
+            else:
+                result.append((record, row_label))
+        return result
+
+    source_ids = set()
+    if 'sources' in documents:
+        source_doc = documents['sources']
+        fields(source_doc, ('format', 'status', 'policy'), 'model sources')
+        if source_doc.get('format') != 'research-source-register':
+            errors.append('model sources/format: expected research-source-register')
+        for source, label in rows(source_doc, 'sources', 'model sources'):
+            fields(source, ('id', 'publisher', 'evidence_grade', 'observer_group', 'verification'), label)
+            ident = source.get('id')
+            if text(ident):
+                if ident in source_ids:
+                    errors.append(f'{label}/id: duplicate source ID {ident}')
+                source_ids.add(ident)
+            date(source.get('accessed_on'), f'{label}/accessed_on')
+            for url in strings(source.get('urls'), f'{label}/urls'):
+                try:
+                    parts = locator_parts(url)
+                    if parts.scheme not in {'http', 'https'} or not parts.hostname:
+                        raise ValueError('expected HTTP(S) URL with hostname')
+                except ValueError as exc:
+                    errors.append(f'{label}/urls: {exc}')
+    if 'inventory' in documents:
+        inventory = documents['inventory']
+        fields(inventory, ('format', 'status', 'scope'), 'model inventory')
+        if inventory.get('format') != 'research-notes-not-catalog':
+            errors.append('model inventory/format: expected research-notes-not-catalog')
+        date(inventory.get('accessed_on'), 'model inventory/accessed_on')
+        for record, label in rows(inventory, 'records', 'model inventory'):
+            fields(record, ('model', 'publisher', 'input_output', 'access', 'license_evidence',
+                            'selection_caveat', 'artifact_type'), label)
+            strings(record.get('task_families'), f'{label}/task_families')
+            for ident in strings(record.get('source_ids'), f'{label}/source_ids'):
+                if 'sources' in documents and ident not in source_ids:
+                    errors.append(f'{label}/source_ids: unresolved source ID {ident}')
+    return errors
+
+
 def validate_tree(root=ROOT):
     errors = []
     def load_tree(relative):
@@ -250,6 +343,7 @@ def validate_tree(root=ROOT):
             valid = False
         if not valid:
             errors.append(f"{manifest['id']}: use a stable https/s3/gs locator without credentials, query, or fragment")
+    errors.extend(model_inventory_errors(root))
     return errors, len(catalog), len(prices)
 
 
