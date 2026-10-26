@@ -19,10 +19,12 @@ class ResearchCoverageTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.write('contracts/v1/schemas/component-registry.json',
-                   {'kinds': {'model': {}, 'tool': {}, 'storage': {}}})
+                   {'kinds': {kind: {'tier': 'T0', 'cardinality': 'many',
+                                     'activation': 'optional', 'notes': 'Synthetic kind.'}
+                              for kind in ('model', 'tool', 'storage')}})
         self.write('catalog/proposals/model.json', {'kind': 'model'})
         self.write('catalog/proposals/tool.json', {'kind': 'tool'})
-        self.write('pricing/proposals/prices.json', {'rates': [{}, {}]})
+        self.write('pricing/proposals/prices.json', {'rates': [{'id': 'a'}, {'id': 'b'}]})
         self.write('research/market/competitors.json', [{'id': 'synthetic'}])
         self.features = {'definitions': {'a': 'A', 'b': 'B'}, 'cells': [
             {'product_id': 'synthetic', 'feature': 'a', 'status': 'Documented'},
@@ -66,7 +68,7 @@ class ResearchCoverageTests(unittest.TestCase):
 
     def test_nested_proposals_and_pricebooks_match_intake_discovery(self):
         self.write('catalog/proposals/nested/second-model.json', {'kind': 'model'})
-        self.write('pricing/proposals/nested/second-book.json', {'rates': [{}]})
+        self.write('pricing/proposals/nested/second-book.json', {'rates': [{'id': 'a'}]})
         result = coverage.snapshot(self.root)
         self.assertEqual(result['catalog']['proposals_by_kind']['model'], 2)
         self.assertEqual(result['pricing'], {'pricebook_count': 2, 'rate_count': 3})
@@ -107,6 +109,58 @@ class ResearchCoverageTests(unittest.TestCase):
         self.write('research/market/competitors.json', [{'id': 'synthetic'}, {'id': 'synthetic'}])
         with self.assertRaisesRegex(ValueError, 'duplicate market product'):
             coverage.snapshot(self.root)
+
+    def test_malformed_denominator_shapes_are_rejected(self):
+        cases = {
+            'contracts/v1/schemas/component-registry.json': [
+                {'kinds': value} for value in ([], ['model'], {}, {'': {}},
+                    {'model': {}}, {'model': None}, {'  ': {}}, {'model': 'description'},
+                    {'model': {'tier': 'T0', 'cardinality': 'many',
+                               'activation': 'optional', 'notes': '  '}})],
+            'research/market/competitors.json': [
+                [], {}, ['synthetic'], [{}], [{'id': ''}], [{'id': '  '}],
+                [{'id': 1}], [{'id': True}], [{'id': []}]],
+            'pricing/proposals/prices.json': [
+                {'rates': value} for value in ({}, ['a'], [{}], [{'id': ''}],
+                    [{'id': '  '}], [{'id': False}], [{'id': []}],
+                    [{'id': 'a'}, {'id': 'a'}])],
+            'research/market/features.json': [
+                {'definitions': value, 'cells': []} for value in (
+                    {}, [], ['a'], {'': 'A'}, {'  ': 'A'}, {'a': ''},
+                    {'a': '  '}, {'a': None}, {'a': {}}, {'a': False})],
+        }
+        for name, values in cases.items():
+            original = (self.root / name).read_bytes()
+            for value in values:
+                with self.subTest(name=name, value=value):
+                    self.write(name, value)
+                    with self.assertRaises(ValueError):
+                        coverage.snapshot(self.root)
+            (self.root / name).write_bytes(original)
+
+    def test_kind_definition_requires_each_recorded_text_field(self):
+        definition = {'tier': 'T0', 'cardinality': 'many',
+                      'activation': 'optional', 'notes': 'Synthetic kind.'}
+        for field in definition:
+            for invalid in (None, False, 1, [], {}, '', '  '):
+                with self.subTest(field=field, invalid=invalid):
+                    value = dict(definition, **{field: invalid})
+                    self.write('contracts/v1/schemas/component-registry.json',
+                               {'kinds': {'model': value}})
+                    with self.assertRaisesRegex(ValueError, 'kind definition'):
+                        coverage.snapshot(self.root)
+            value = dict(definition)
+            del value[field]
+            self.write('contracts/v1/schemas/component-registry.json',
+                       {'kinds': {'model': value}})
+            with self.assertRaisesRegex(ValueError, 'kind definition'):
+                coverage.snapshot(self.root)
+
+    def test_empty_rates_remain_valid_and_ids_are_scoped_to_each_book(self):
+        self.write('pricing/proposals/empty.json', {'rates': []})
+        self.write('pricing/proposals/another.json', {'rates': [{'id': 'a'}]})
+        self.assertEqual(coverage.snapshot(self.root)['pricing'],
+                         {'pricebook_count': 3, 'rate_count': 3})
 
     def test_check_command_detects_stale_input(self):
         path = self.root / 'snapshot.json'
