@@ -85,7 +85,8 @@ def summarize(directory=DIRECTORY):
         for key in ('driver_preflight_csv','driver_csv'):
             matching_driver(record[key])
         values = validate_h1(record)
-        if values != record['native_validation']:
+        if (json.dumps(values, sort_keys=True, allow_nan=False)
+                != json.dumps(record['native_validation'], sort_keys=True, allow_nan=False)):
             raise ValueError('native validation receipt drift')
         interval = values['native_self_byte_interval']
         live = values['exact_admitted_live_buffer_bytes']
