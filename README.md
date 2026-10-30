@@ -117,3 +117,8 @@ For market prompt changes, also run `python prompts/market/validate_prompts.py`.
 [Vision](docs/vision.md) · [Architecture](docs/architecture.md) · [Governance](docs/governance.md) · [Roadmap](docs/roadmap.md)
 
 PCPartPicker informs the selection flow, compatibility feedback, and price comparison. Pick Your AI develops its own design, wording, data model, and implementation. Research should cite primary sources for product facts, prices, licenses, and benchmark claims.
+
+## Contributor routing
+
+For a blocked decision, use [the repository routing procedure](CONTRIBUTING.md#routing-decisions).
+Start with the existing issue and its accepted owner; preserve its scope and evidence requirements.
