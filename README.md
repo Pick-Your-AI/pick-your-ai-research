@@ -1,4 +1,32 @@
+<!-- showcase:banner:start -->
+<p align="center">
+  <img src="docs/images/banner.png" alt="pick-your-ai-research by Pick Your AI" width="100%">
+</p>
+<!-- showcase:banner:end -->
+
+<!-- showcase:nav:start -->
+**Pick Your AI** · [All repositories](https://github.com/Pick-Your-AI) · [Docs](docs/) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
+<!-- showcase:nav:end -->
+
+<div align="center">
+
 # Pick Your AI research
+
+<!-- showcase:badges:start -->
+![Language Python](https://img.shields.io/badge/language-Python-115E59)
+![Type Workspace](https://img.shields.io/badge/type-Workspace-0F766E)
+![License MIT](https://img.shields.io/badge/license-MIT-64748B)
+<!-- showcase:badges:end -->
+
+<!-- showcase:tagline:start -->
+**Research and shared data contracts for Pick Your AI: component catalogs, compatibility rules, pricing, and evidence for AI stacks.**
+<!-- showcase:tagline:end -->
+
+</div>
+
+---
+
+## About
 
 Mobile planning issues now live in `Pick-Your-AI/pick-your-ai-android` and `Pick-Your-AI/pick-your-ai-apple`. See the [migration record](prompts/mobile/MIGRATION.md). Repository creation resolves location only; framework, modules and service placement remain gated. Existing acceptance-record paths are preserved. Historical snapshots below do not override the live migration.
 
@@ -6,7 +34,9 @@ Research for an AI system builder inspired by [PCPartPicker](https://pcpartpicke
 
 [Technical research Project](https://github.com/orgs/Pick-Your-AI/projects/1) · [Market research Project](https://github.com/orgs/Pick-Your-AI/projects/2) · [Issues](https://github.com/Pick-Your-AI/pick-your-ai-research/issues) · [Organization](https://github.com/Pick-Your-AI)
 
-## Start here
+## Notes
+
+### Start here
 
 1. Find your assigned issue in the relevant Project. Read its scope, acceptance criteria, deliverable path, and existing PRs before starting.
 2. Follow the [research submission workflow](docs/RESEARCH_WORKFLOW.md) and [research method](docs/RESEARCH_METHOD.md). Use the [research note template](templates/research-note.md) to record findings, sources, dates, conditions, and unknowns.
@@ -17,7 +47,7 @@ Client implementers: use the [pinned consumer handoff](docs/CONSUMER_HANDOFF.md)
 
 Keep incomplete findings in notes. Never invent a required value to satisfy a schema. The contract's examples are synthetic; passing validation does not verify vendor claims or establish production readiness. Propose contract changes through [Pick-Your-AI/pick-your-ai-research#40](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/40); see [contract adoption and limitations](contracts/v1/ADOPTION.md).
 
-## Research programs
+### Research programs
 
 ### Technical components — Project 1
 
@@ -83,7 +113,7 @@ The dedicated [pick-your-ai-leaderboard repository](https://github.com/Pick-Your
 
 Metric definitions and correction rules belong to the leaderboard repository. Source links and coverage limitations must accompany recognition; unavailable activity is not zero, and activity counts do not establish research quality or acceptance. Research deliverables, ownership, contracts, and evidence review continue to follow this repository's workflow. Leaderboard implementation belongs in its dedicated repository and links to existing research instead of duplicating it.
 
-## Where submissions go
+### Where submissions go
 
 | Material | Location |
 | --- | --- |
@@ -96,7 +126,7 @@ Metric definitions and correction rules belong to the leaderboard repository. So
 
 Store raw datasets, model weights, recordings, private documents, and credentials outside this public repository. Record stable locations, versions, rights, and checksums in evidence manifests where appropriate. Consult the issue and its PR for draft deliverables that have not yet reached `main`.
 
-## Validate a contribution
+### Validate a contribution
 
 From the repository root with Python 3.12:
 
@@ -112,8 +142,12 @@ python prompts/mobile/validate_prompts.py
 
 For market prompt changes, also run `python prompts/market/validate_prompts.py`. Follow any additional checks required by the affected issue. Automation validates structure and references; reviewers assess source accuracy, evidence quality, rights, and handoff acceptance.
 
-## Project background
+### Project background
 
 [Vision](docs/vision.md) · [Architecture](docs/architecture.md) · [Governance](docs/governance.md) · [Roadmap](docs/roadmap.md)
 
 PCPartPicker informs the selection flow, compatibility feedback, and price comparison. Pick Your AI develops its own design, wording, data model, and implementation. Research should cite primary sources for product facts, prices, licenses, and benchmark claims.
+
+## License
+
+Code and documentation are licensed under the MIT License; see `LICENSE`. Pick Your AI names and logos are reserved and are not licensed for reuse except to identify this project.

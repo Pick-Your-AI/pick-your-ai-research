@@ -1,0 +1,7 @@
+# Content overrides for the showcase banner and card (colours and fonts come from the skill's brand data).
+for: Pick-Your-AI/pick-your-ai-research
+icon: assets/icon.png
+subtitle: "Catalogs, compatibility rules and pricing evidence"
+chips:
+  key: ["Contract 1.0.0"]
+  attrs: ["JSON Schema", "Python"]
