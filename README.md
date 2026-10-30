@@ -151,3 +151,8 @@ PCPartPicker informs the selection flow, compatibility feedback, and price compa
 ## License
 
 Code and documentation are licensed under the MIT License; see `LICENSE`.
+
+## Contributor routing
+
+For a blocked decision, use [the repository routing procedure](CONTRIBUTING.md#routing-decisions).
+Start with the existing issue and its accepted owner; preserve its scope and evidence requirements.
