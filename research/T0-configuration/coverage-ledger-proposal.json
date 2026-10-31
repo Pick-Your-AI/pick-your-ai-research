@@ -30,7 +30,7 @@
       "classification": "existing_partial",
       "canonical_kinds": [],
       "evidence_paths": ["docs/PUBLICATION_ELIGIBILITY_HANDOFF.md", "research/T0-configuration/catalog-data-sources.md"],
-      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-website/issues/15"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-website/issues/15", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60"],
       "next_action": "Review source, material, field and intended use for an exact projection."
     },
     {
@@ -46,7 +46,7 @@
       "classification": "existing_partial",
       "canonical_kinds": ["evaluation_suite"],
       "evidence_paths": ["research/market/sizing-validation.md", "research/market/benchmark-validation.md"],
-      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36"],
       "next_action": "Resolve missing protocol and measurement inputs within the existing experimental scope."
     },
     {
@@ -68,7 +68,7 @@
       "classification": "existing_partial",
       "canonical_kinds": [],
       "evidence_paths": ["research/market/customer-validation.md", "research/market/synthesis.md"],
-      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47"],
       "next_action": "Obtain applicable protocol and participant authorization; separate directory and builder hypotheses."
     },
     {
@@ -92,7 +92,7 @@
       "canonical_kinds": ["training_dataset", "evaluation_suite"],
       "evidence_paths": ["research/T5-training-fine-tuning/training-dataset.md", "research/T6-deployment-operations/evaluation.md"],
       "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-datasets/issues/1"],
-      "next_action": "Agree dataset, revision and split identity; separate directory metadata, execution and redistribution."
+      "next_action": "Deferred; outside Stage 0. No work is routed to this broad-corpus track unless affected owners later agree."
     },
     {
       "gap_id": "G12",
@@ -100,7 +100,7 @@
       "canonical_kinds": ["tool", "integration"],
       "evidence_paths": ["research/T4-agents-integrations/tools-apis.md", "research/market/competitors.json"],
       "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-applications/issues/1"],
-      "next_action": "Review application-product versus callable-interface identity and cross-links."
+      "next_action": "Deferred; outside Stage 0. No work is routed to this broad-corpus track unless affected owners later agree."
     },
     {
       "gap_id": "G13",
@@ -108,7 +108,7 @@
       "canonical_kinds": [],
       "evidence_paths": ["docs/RESEARCH_METHOD.md"],
       "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-papers/issues/1"],
-      "next_action": "Agree scholarly work, revision, method and artifact identities and permitted metadata scope."
+      "next_action": "Deferred; outside Stage 0. No work is routed to this broad-corpus track unless affected owners later agree."
     },
     {
       "gap_id": "G14",
