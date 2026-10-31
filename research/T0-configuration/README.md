@@ -4,6 +4,12 @@ Issue: #1 · Assignees: @tynamite, @appletechie · Status: partial workstream su
 
 T0 describes the user's workload, serving modes and the shared evidence/build model. A merged research proposal does not change frozen v1 or establish implementation readiness.
 
+The [Stage 0 coverage and entity-boundary proposal](coverage-ledger-proposal.md)
+records #47's NARROW product-validation decision as governing. #509's broad
+near-exhaustive reference corpus is outside Stage 0 unless affected owners later
+agree. @appletechie recorded that reconciliation from their side; other affected
+owner decisions remain open.
+
 ## Decisions and record status
 
 The issue states below were read on **2026-10-19 at 01:00 UTC**. Completion rows cite the original dated receiving receipts and their declared authority. Each linked acceptance or delivery record retains its original source, review and execution identity. Research issue completion and live Project status are separate observations.

@@ -1,0 +1,150 @@
+{
+  "status": "proposal",
+  "parent_issue": "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/509",
+  "scope": "Routing index for G01-G18, not an entity inventory or coverage measurement",
+  "decision_record": "research/T0-configuration/coverage-ledger-proposal.md",
+  "repository_basis": "da3d320e239a6d37a933963230f2eb3643d1d5c4",
+  "relationship_observed_on": "2026-10-25",
+  "relationship_source": "https://api.github.com/repos/Pick-Your-AI/pick-your-ai-research/issues/509/sub_issues",
+  "classification_scope": "Proposed gap outcome, not repository existence, issue status or owner acceptance",
+  "canonical_kinds_meaning": "Existing component research touchpoints; no direct mapping or complete CatalogItem is implied",
+  "measurements_state": "not_measured",
+  "measurements": {},
+  "tracks": [
+    {
+      "gap_id": "G01",
+      "classification": "existing_partial",
+      "canonical_kinds": [],
+      "evidence_paths": ["docs/CONTRACT_MAPPING.md", "research/market/synthesis.md"],
+      "next_action": "Agree reference entity units and cohort boundaries while preserving the NARROW product-validation decision."
+    },
+    {
+      "gap_id": "G02",
+      "classification": "existing_partial",
+      "canonical_kinds": ["model_provider", "model", "context_policy", "embedding_model", "fine_tuned_model"],
+      "evidence_paths": ["research/T1-model-selection/model-taxonomy.md", "research/T1-model-selection/model-research-inventory.json"],
+      "next_action": "Crosswalk selected candidate identities to family, release, artifact and offering; retain unresolved required fields."
+    },
+    {
+      "gap_id": "G03",
+      "classification": "existing_partial",
+      "canonical_kinds": [],
+      "evidence_paths": ["docs/PUBLICATION_ELIGIBILITY_HANDOFF.md", "research/T0-configuration/catalog-data-sources.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-website/issues/15", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/41", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/60"],
+      "next_action": "Review source, material, field and intended use for an exact projection."
+    },
+    {
+      "gap_id": "G04",
+      "classification": "production_handoff",
+      "canonical_kinds": [],
+      "evidence_paths": ["docs/PUBLICATION_ELIGIBILITY_HANDOFF.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-catalog-pipeline/issues/1"],
+      "next_action": "Agree permitted-source custody and a bounded release, withdrawal and consumer pilot."
+    },
+    {
+      "gap_id": "G05",
+      "classification": "existing_partial",
+      "canonical_kinds": ["evaluation_suite"],
+      "evidence_paths": ["research/market/sizing-validation.md", "research/market/benchmark-validation.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/62", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/36"],
+      "next_action": "Resolve missing protocol and measurement inputs within the existing experimental scope."
+    },
+    {
+      "gap_id": "G06",
+      "classification": "existing_partial",
+      "canonical_kinds": ["accelerator", "compute_profile", "inference_engine"],
+      "evidence_paths": ["research/T2-infrastructure/gpu-compute.md", "research/T2-infrastructure/inference-engine.md"],
+      "next_action": "Choose a missing device/runtime cohort without discarding existing MI300X note evidence."
+    },
+    {
+      "gap_id": "G07",
+      "classification": "existing_partial",
+      "canonical_kinds": [],
+      "evidence_paths": ["research/market/competitors.json", "research/market/feature-matrix.md"],
+      "next_action": "Source-check a bounded material-alternative cohort; retain Unknown where evidence is absent."
+    },
+    {
+      "gap_id": "G08",
+      "classification": "existing_partial",
+      "canonical_kinds": [],
+      "evidence_paths": ["research/market/customer-validation.md", "research/market/synthesis.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/52", "https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47"],
+      "next_action": "Obtain applicable protocol and participant authorization; separate directory and builder hypotheses."
+    },
+    {
+      "gap_id": "G09",
+      "classification": "production_handoff",
+      "canonical_kinds": [],
+      "evidence_paths": ["docs/PUBLICATION_ELIGIBILITY_HANDOFF.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-website/issues/24", "https://github.com/Pick-Your-AI/pick-your-ai-website/issues/15"],
+      "next_action": "Agree reference-page fields, eligible projection and website receiving checks."
+    },
+    {
+      "gap_id": "G10",
+      "classification": "existing_partial",
+      "canonical_kinds": ["model_provider", "model", "context_policy", "hosting_platform", "cost_policy"],
+      "evidence_paths": ["research/T1-model-selection/model-provider.md", "research/T2-infrastructure/hosting.md", "research/T6-deployment-operations/cost-estimate.md"],
+      "next_action": "Pin offering, region, plan and interval; keep rates separate from cost policies."
+    },
+    {
+      "gap_id": "G11",
+      "classification": "net_new",
+      "canonical_kinds": ["training_dataset", "evaluation_suite"],
+      "evidence_paths": ["research/T5-training-fine-tuning/training-dataset.md", "research/T6-deployment-operations/evaluation.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-datasets/issues/1"],
+      "next_action": "Deferred; outside Stage 0. No work is routed to this broad-corpus track unless affected owners later agree."
+    },
+    {
+      "gap_id": "G12",
+      "classification": "net_new",
+      "canonical_kinds": ["tool", "integration"],
+      "evidence_paths": ["research/T4-agents-integrations/tools-apis.md", "research/market/competitors.json"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-applications/issues/1"],
+      "next_action": "Deferred; outside Stage 0. No work is routed to this broad-corpus track unless affected owners later agree."
+    },
+    {
+      "gap_id": "G13",
+      "classification": "net_new",
+      "canonical_kinds": [],
+      "evidence_paths": ["docs/RESEARCH_METHOD.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-papers/issues/1"],
+      "next_action": "Deferred; outside Stage 0. No work is routed to this broad-corpus track unless affected owners later agree."
+    },
+    {
+      "gap_id": "G14",
+      "classification": "existing_partial",
+      "canonical_kinds": ["agent_framework", "tool", "mcp_server", "memory_store", "integration"],
+      "evidence_paths": ["research/T4-agents-integrations/README.md"],
+      "next_action": "Choose one versioned transport, auth and operation cohort; listing does not grant trust."
+    },
+    {
+      "gap_id": "G15",
+      "classification": "existing_partial",
+      "canonical_kinds": ["workload", "model"],
+      "evidence_paths": ["research/T0-configuration/workload-use-case.md", "research/T1-model-selection/model-taxonomy.md"],
+      "next_action": "Declare one task, language and geography cohort with suitability evidence."
+    },
+    {
+      "gap_id": "G16",
+      "classification": "existing_partial",
+      "canonical_kinds": ["guardrail", "monitoring_stack", "training_dataset"],
+      "evidence_paths": ["research/T6-deployment-operations/guardrails.md", "research/T6-deployment-operations/monitoring.md"],
+      "next_action": "Define dated jurisdiction, control and incident claims without compliance endorsement."
+    },
+    {
+      "gap_id": "G17",
+      "classification": "existing_partial",
+      "canonical_kinds": ["cost_policy", "accelerator", "compute_profile"],
+      "evidence_paths": ["research/T6-deployment-operations/cost-estimate.md", "research/T2-infrastructure/gpu-compute.md"],
+      "next_action": "Choose a conditioned scenario separating measured energy, sourced rates and estimates."
+    },
+    {
+      "gap_id": "G18",
+      "classification": "production_handoff",
+      "canonical_kinds": [],
+      "evidence_paths": ["research/T0-configuration/workload-use-case.md"],
+      "related_issues": ["https://github.com/Pick-Your-AI/pick-your-ai-website/issues/24"],
+      "next_action": "Choose an evidence-linked guide and agree editorial and consumer acceptance criteria."
+    }
+  ]
+}
