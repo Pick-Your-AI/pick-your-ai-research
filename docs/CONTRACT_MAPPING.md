@@ -2,6 +2,10 @@
 
 The existing issues cover all 29 canonical kinds. This mapping proposes artifact coverage; live GitHub assignees remain the ownership authority. No new component issues or assignment changes are needed.
 
+The [repository coverage snapshot](../research/coverage/README.md) separately
+counts actual proposal files per kind and recorded market feature statuses.
+Issue coverage here does not establish populated proposals or publication eligibility.
+
 | Tier | Canonical kind | Research issue |
 | --- | --- | --- |
 | T0 | `workload` | [#2: T0: Workload / Use Case](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/2) |
