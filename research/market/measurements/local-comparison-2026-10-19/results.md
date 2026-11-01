@@ -168,3 +168,21 @@ removed only the explicitly verified task directory:17,144 files/2,050,616,677
 bytes, with target absence read back. No model, executable, SDK, header cache or
 temporary validation environment remains from this session. Existing installed
 toolchains, inference environments, drivers and unrelated workloads were preserved.
+
+## Offline receipt type correction — 2026-10-25
+
+The offline report now compares the recomputed native-validation receipt with
+JSON-type-sensitive equality. Its integer byte counters, interval endpoints and
+zero cleanup/dispatch counters cannot be replaced by Boolean or floating-point
+aliases. Object-member order remains irrelevant, while array order, field
+presence and values remain part of the receipt identity.
+
+A synthetic copy of this cohort reproduced the previous false match through
+the ordinary `summarize()` API: changing only the copied first trial's
+`cleanup_live_bytes` to `false` and `model_graph_dispatches` to `0.0` still produced
+three technical pairs. No integrity, native-readback or chronology check was
+mocked or disabled. The regression tests alter only temporary copies and also
+exercise all three trial positions, reordered members and correction/retry.
+The existing historical report remains byte-identical; captured inputs, native
+traces, source freezes and launchers are unchanged. This software correction
+adds no measurement, accepted pair, fit decision or empirical criterion result.

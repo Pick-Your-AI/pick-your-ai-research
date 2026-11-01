@@ -1,0 +1,83 @@
+{
+ "config_sha256": "bd2386d654a06b2602ae9a379db613a44b7718a69e59e596c1aa59b3a6519e56",
+ "fingerprint": "3b6c3b73a6aa6e23fc9b8fa42bc8170565ed7f18d42188f6e1f4d39bbc398a5d",
+ "inputs": {
+  "description": "Research and shared data contracts for Pick Your AI: component catalogs, compatibility rules, pricing, and evidence for AI stacks.",
+  "icon_sha256": "1c85656b6c379e85728069f711dca36fc332d286575dfd2325de4d7cad77bcb6",
+  "language": "Python",
+  "license": "MIT",
+  "override_sha256": "89ab609b7f1a1497a8746e3cbcb9dcedf89c333cd7cab60d4987eaba74a699d2",
+  "owner": "Pick-Your-AI",
+  "repo": "pick-your-ai-research",
+  "topics": [
+   "ai",
+   "ai-infrastructure",
+   "ai-stack",
+   "compatibility",
+   "json-schema",
+   "llm",
+   "pcpartpicker",
+   "pick-your-ai",
+   "pricing",
+   "research"
+  ],
+  "type": "workspace",
+  "visibility": "public"
+ },
+ "outputs": {
+  "banner.png": {
+   "bytes": 75048,
+   "chips": [
+    {
+     "box": [
+      520,
+      241.5,
+      156.9,
+      38
+     ],
+     "kind": "key",
+     "source": "override",
+     "text": "Contract 1.0.0"
+    },
+    {
+     "box": [
+      688.9,
+      241.5,
+      160.7,
+      38
+     ],
+     "kind": "attr",
+     "source": "override",
+     "text": "JSON Schema"
+    },
+    {
+     "box": [
+      861.6,
+      241.5,
+      96.1,
+      38
+     ],
+     "kind": "attr",
+     "source": "override",
+     "text": "Python"
+    }
+   ],
+   "icon_source": "override",
+   "px": [
+    2560,
+    720
+   ],
+   "repository_id": 1421934086,
+   "scale": 2,
+   "sha256": "1833e7351c96619ad321d5d8f65eac3be6273c2af192674665e9798c1fe52a61"
+  },
+  "card.svg": {
+   "bytes": 22513,
+   "repository_id": 1421934086,
+   "sha256": "43188b45e5db1a6cdb83b98bad298020a79f04e0da43e42a7f81a9ee38075baa"
+  }
+ },
+ "schema": 1,
+ "skill_version": "1.0.0",
+ "standard": "ct-std-v1"
+}

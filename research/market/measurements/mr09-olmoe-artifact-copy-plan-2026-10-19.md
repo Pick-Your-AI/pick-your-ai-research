@@ -334,3 +334,140 @@ The normal repository discovery includes these tests. The issue's real weight
 verification, independent installed-runtime/hardware admission, host and GPU
 peaks, optional-cache support, multi-GPU evidence and matched estimator/runtime
 receiving review remain outstanding.
+
+## 2026-10-20 fixed M4 source preparation
+
+This later appendix adds a prospective M4 path to
+[mr09_olmoe_measure.py](../../../scripts/mr09_olmoe_measure.py), with the separate
+[mr09_olmoe_quanto.py](../../../scripts/mr09_olmoe_quanto.py) helper. It updates the
+earlier appendix's statement that M4 source preparation is unavailable. The dated
+machine plan, its null M4 payload/floor, original artifact inventory, historical
+instruments, and M1–M3 v1 admission/result shapes are preserved. This contribution
+contains software and offline tests only. Actual optional-cache support, fit,
+model execution and the issue's empirical acceptance remain unestablished.
+
+### Exact optional backend and workload
+
+M4 uses the same pinned OLMoE model and local BF16/SDPA/eager-expert loader. The
+workload is one sequence with 2,048 prompt tokens and 32 one-token decode forward
+calls, producing 33 greedy predictions and 2,080 cache positions. A separate
+64-token prefill and one decode call warm the model; that cache and its outputs
+are released before a fresh measured cache. The last prediction does not add a
+2,081st cache position. No model, prompt length, sequence count, dtype or backend
+substitution is available through admission.
+
+The selected optional dependency is `optimum-quanto==0.2.7`, alongside the
+already pinned Python, Torch, Transformers and safetensors environment. It must
+be prepared separately; this runner never installs it. M4 explicitly constructs
+`QuantizedCache` with backend `quanto`, `nbits=4`, key/value axes `0`, group size
+`64` and residual length `128`. These are fixed source settings, not admission
+options. An unavailable or incompatible backend fails without a BF16 fallback.
+The v1 M1–M3 metadata/script maps do not acquire a Quanto dependency.
+
+The source interpretation was checked on 2026-10-20 against these immutable
+primary sources:
+
+| Primary source | Bound preparation decision |
+| --- | --- |
+| [Transformers cache implementation at 08810b1e](https://github.com/huggingface/transformers/blob/08810b1e278938278c50153ee1edfd7a20a759da/src/transformers/cache_utils.py) | Exact constructor, sixteen per-layer caches, cumulative token accounting, quantized prefix and ordinary residual storage |
+| [Pinned OLMoE model implementation](https://github.com/huggingface/transformers/blob/08810b1e278938278c50153ee1edfd7a20a759da/src/transformers/models/olmoe/modeling_olmoe.py) | Supplied cache is retained and receives each layer's K/V updates |
+| [Quanto 0.2.7 weight layout at 089d86ef](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/weights/qbits.py) | Exact generic `WeightQBitsTensor`; the fixed four-dimensional/group-64 profile does not select the two-dimensional/group-128 optimized layouts |
+| [PackedTensor](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/packed.py), [QBitsTensor](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/qbits.py) and [QTensor dispatch](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/qtensor.py) | Physical leaf traversal; generic wrapper operations may unpack or dequantize and are excluded from observation |
+| [Grouping](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/grouped.py), [affine optimizer](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/optimizers/affine_optimizer.py), [maximum optimizer](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/tensor/optimizers/max_optimizer.py) and [quantization](https://github.com/huggingface/optimum-quanto/blob/089d86ef7954996440ca770b678be353d7a7d6cd/optimum/quanto/library/quantize.py) | Fixed grouped packed data plus separate BF16 scales and shifts |
+
+The helper stores exact byte lengths and SHA-256 values for fifteen selected
+cache/backend source files, including the relevant entry points. M4 runtime
+inspection checks those actual installed files and the optional distribution's
+version and `RECORD` digest without importing an ML package. The existing five
+installed loader sources, executable hash and runtime manifests are still bound.
+These checks identify the selected source/metadata; they do not audit every
+installed binary, transitive dependency, kernel or possible import-path change,
+and do not prove that the backend runs on a particular device.
+
+### M4-only v2 admission
+
+M4 requires `mr09-olmoe-run-admission/v2`. Its outer field set remains the one
+listed above, but its script map also binds `mr09_olmoe_quanto.py`, its runtime
+object includes the complete `m4_backend` inspection, and its closed device
+object additionally requires `gpu_cache_allowance_bytes`. The cache allowance
+must be an explicit positive integer from the separately reviewed hardware
+admission. It is neither a default nor a calculated quarter of the BF16 cache.
+M4 rejects v1 admissions; M1–M3 continue to require v1 and reject v2 or the extra
+device field. No historical admission becomes authorization for this new cell.
+
+Both the requested allocator cap and the effective integer cap after the pinned
+native allocator's floating-point conversion must cover:
+
+    13,838,323,712 stored-weight bytes + explicit cache allowance + explicit workspace allowance
+
+The cap/spare, driver availability, CUDA-context and device-property checks keep
+their distinct domains and existing source interpretation. Neither the cache
+allowance nor the workspace allowance is inferred from available VRAM. Passing
+them does not establish transient fit: the backend dequantizes a prefix and
+constructs concatenation intermediates during forwarding. The historical M4
+floor stays null. The existing native allocator limit is still not a
+whole-process GPU cap.
+
+The admission, scripts, optional backend metadata/source hashes and expiry are
+rechecked after complete artifact verification and before ML imports. The same
+single admitted GPU UUID, offline/sequential environment, fresh output and
+nonreplacement publication controls apply. A preimported Quanto package is
+also rejected for M4. There is no automatic admission renewal or extra-device
+fallback.
+
+    python scripts/mr09_olmoe_measure.py plan --cell M4
+    python scripts/mr09_olmoe_measure.py inspect-runtime --cell M4
+    python scripts/mr09_olmoe_measure.py run --cell M4 --repetition 1 --model-dir /external/olmoe --admission /external/m4-admission.json --output /external/observations/M4-r1.json
+
+These are prospective commands. The repository supplies none of the device,
+allowance, rights or hardware reservation inputs needed for a real run.
+
+### Physical cache observations and failure scope
+
+M4 records a `quantized_cache` profile and an ordered `observations` array at
+`prefill` and `post_decode`. Each sample validates all sixteen layers and both
+K/V tensors per layer, their fixed backend settings, device `cuda:0`, cumulative
+length, and logical shapes. The quantized prefix remains `[1,16,2048,128]` at
+both samples. The ordinary BF16 residual is exactly shape `[0]` after prefill and
+`[1,16,32,128]` after decode. This cell never reaches the 128-token residual
+flush boundary.
+
+The observer reads metadata on the exact `WeightQBitsTensor` and `PackedTensor`
+classes, then inspects only ordinary tensor leaves: packed uint8 data, BF16
+scales, BF16 shifts and BF16 residual. It calls `untyped_storage().nbytes()` on
+those plain leaves and counts each complete backing allocation once across the
+entire cache sample, using device, backing pointer and byte extent internally.
+No pointer is serialized. The identity set resets for each sample. Larger
+backing storage is counted in full even when a tensor view uses fewer bytes;
+within-component aliases count once. An unexpected nonempty alias across
+components, inconsistent extent, unknown wrapper or missing layout is
+unsupported, with no partial byte total presented as a complete observation.
+
+Each successful sample records `component_bytes`, `unique_backing_storages`,
+`plain_tensor_references`, `total_unique_backing_bytes`, the explicit reviewed
+allowance, and whether the observed retained cache is within that allowance.
+These are actual tensor backing capacities at the named sample, separate from
+allocator allocated/reserved values, allocator peaks, driver observations and
+CUDA-context snapshots. They exclude Python objects, allocator pools and
+transient workspace. Logical BF16 wrapper size is not a physical-byte result.
+M4 emits no native-BF16 cache comparison, estimated-cache value or estimator
+error; the existing configuration nulls remain null.
+
+A completed sample is appended to the retained result before checking its
+allowance or performing later forwards. An excess stops with
+`cache_allowance_exceeded`, preserves the actual measured bytes and does not
+increase the allowance. A later caught decode OOM or unsupported layout keeps
+the earlier complete sample when the final failure result is published. This
+is in-memory prefix retention followed by the existing final result publication,
+not per-phase durability against process termination. A killed process can
+leave only its pending marker; no completed observation is inferred from it.
+
+The additional tests use synthetic package/source files and tensor/cache
+stand-ins without ML imports, weights or GPU allocations. They cover v1/v2
+isolation, both admission-cap boundaries, exact token attendance, actual backing
+extent and alias handling, fixed layout rejection, optional source drift, and
+retained observations on budget/decode failures. The ordinary repository test
+discovery includes both M4 test modules. These software checks do not establish
+CUDA/Quanto runtime compatibility or supply the missing real repetitions,
+independent hardware/runtime admission, G1 topology, 8,192-token boundary,
+matched estimator comparison, or receiving acceptance for #61/#56.
