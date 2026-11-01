@@ -2,8 +2,10 @@
 import argparse
 from datetime import date, datetime, timedelta
 import json
+import os
 from pathlib import Path
 import re
+import stat
 import sys
 
 from jsonschema import Draft202012Validator
@@ -25,8 +27,16 @@ def strict_json(path):
     """Integer tokens only, unique object keys, strict UTF-8 and bounded input."""
     path = Path(path)
     require(path.is_file(), f"not a regular JSON file: {path}")
-    with path.open("rb") as source:
-        raw = source.read(MAX_JSON_BYTES + 1)
+    # A pathname check alone cannot exclude a replacement FIFO before open.
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_BINARY", 0)
+                         | getattr(os, "O_NONBLOCK", 0))
+    try:
+        require(stat.S_ISREG(os.fstat(descriptor).st_mode),
+                f"not a regular JSON file: {path}")
+        with os.fdopen(descriptor, "rb", closefd=False) as source:
+            raw = source.read(MAX_JSON_BYTES + 1)
+    finally:
+        os.close(descriptor)
     require(len(raw) <= MAX_JSON_BYTES, f"JSON exceeds {MAX_JSON_BYTES} bytes: {path}")
 
     def object_pairs(pairs):
