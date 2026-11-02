@@ -6,7 +6,7 @@ Issue: [#47](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47) (`
 
 - Closed/completed (all on 2026-10-18): MR-01–04, MR-06–08 and MR-10–12, plus validation children #60, #64, #65 and #66. Open: **MR-05 (#52, child #63), MR-09 (#56, children #61 and #62)** and program issue #47.
 - #52's own seven criteria are all checked; it stays open only because its child #63 (participant work) is unperformed. #56's seven criteria are all checked; it stays open for children #61 and #62.
-- Program disposition on record: **NARROW** to the accepted #58 decision-record comparison ([synthesis.md](synthesis.md), [#47 comment 6254035935](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47#issuecomment-6254035935), delivered via [#389](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/389)). #47 shows 5 of 6 listed criteria evidenced; the first (coordinate twelve workstreams and independent validations) stays open.
+- Program disposition on record: **NARROW** to the accepted #58 decision-record comparison ([synthesis.md](synthesis.md), [#47 comment 6254035935](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/47#issuecomment-6254035935), delivered via [#389](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/389)). #47 shows 6 of 7 checklist criteria checked (6/7, live issue re-read 2026-11-01); the first (coordinate twelve workstreams and independent validations) stays open.
 - No new research, source retrieval, price capture, experiment or participant contact was performed to write this note.
 
 ## Five invalidation gates (state per synthesis.md)
@@ -44,7 +44,7 @@ Catalog and pricing proposals under [catalog/proposals/](../../catalog/proposals
 
 1. #61: three empirical criteria (vary context/cache precision/concurrency; measure peak allocated and reserved memory; report error bounds). Needs authorised hardware. Plan: [execution-plan-61-draft.md](execution-plan-61-draft.md).
 2. #62: the literal criterion "Pin models, harnesses, budgets and task versions" stays open until the publisher supplies evaluated model/grader identities and immutable run bindings. No replication is selected.
-3. #63: blocked (see progress notes). No recruitment or contact.
+3. #63: D-01/02/06/07/09/16 approved, outreach not approved ([owner-decision comment 2026-11-01](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/63#issuecomment-6564695884); see progress notes). No recruitment or contact.
 4. #47: first criterion plus the program-level close depend on 1-3. Coordinator review of the narrowed comparison itself is a separate, unperformed step.
 
 ## Caveats

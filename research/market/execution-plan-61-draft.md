@@ -4,7 +4,7 @@ Refs [#61](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61) (par
 
 ## Spend and hardware decision (Andrew, 2026-11-01)
 
-Recorded 2026-11-01 14:12 PT and 14:13 PT from Andrew (owner): **no paid GPU, rental, cloud or hardware purchase for #61; use existing hardware only, and test on his Mac Studio.** Planned spend is **$0**. DEV-B (purchased/rented GPU), DEV-C (second device or multi-GPU rental) and any provider-charged storage or egress are therefore **not pursued**. **No run of any kind starts on the Mac Studio (or any device) until this plan is complete and Andrew gives an explicit go-ahead for the runs.**
+Recorded 2026-11-01 14:12 PT and 14:13 PT from Andrew (owner): **no paid GPU, rental, cloud or hardware purchase for #61; use existing hardware only, and test on his Mac Studio.** Planned spend is **$0**. Source: Andrew's message to Techie, 2026-11-01 2:13 PM PT: "For the GPU use my mac studio to test it on". DEV-B (purchased/rented GPU), DEV-C (second device or multi-GPU rental) and any provider-charged storage or egress are therefore **not pursued**. **No run of any kind starts on the Mac Studio (or any device) until this plan is complete and Andrew gives an explicit go-ahead for the runs.**
 
 **Approval markers.** Paid compute and hardware purchases were declined on 2026-11-01 (see above); items formerly tagged **[NEEDS ANDREW'S YES]** are now marked **[DECLINED: $0]**. Runs on the Mac Studio are tagged **[WAITS FOR ANDREW'S GO-AHEAD]**. Items that only use already-owned spare local capacity are tagged **[NEEDS OWNER AUTHORISATION]**: #61 requires a named host/session owner and run/stop conditions, and the 2026-10-19 spare-capacity authorisation covered only the H1 cell. Nothing in this plan authorises either.
 
