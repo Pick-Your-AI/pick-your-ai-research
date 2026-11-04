@@ -55,3 +55,15 @@ review, verify published results, and report any remaining blockers.
 ```
 
 Research owners should hand off evidence of outdated public claims to the existing organization-maintenance issue. They should not start a separate maintenance run as part of their research assignment.
+
+## Dynamic organization routing
+
+[ORGANIZATION_ROUTING.md](ORGANIZATION_ROUTING.md) is the complete implementation prompt for [organization issue #17](https://github.com/Pick-Your-AI/.github/issues/17): the governed role mapping, live resolver, generated directory, automatic refresh, contributor and agent entrypoints, verification, and protected delivery. It reuses the existing naming work and keeps separate governance decisions separate. Reading or editing the prompt does not execute it.
+
+```text
+Read AGENTS.md and the current repository contribution instructions.
+Then read prompts/ORGANIZATION_ROUTING.md and execute its assignment for
+Pick-Your-AI/.github#17 within my existing authority. Refresh live issue,
+PR, team, repository and policy state first. Reuse existing work, preserve
+required independent review, and continue through verified completion.
+```

@@ -22,3 +22,15 @@ roles and failed or stale lookups explicitly; do not infer accepted ownership fr
 membership or access. Preserve the existing assignee, local gates and private-reporting
 boundaries. Central links depend on the governance change merging; no automatic
 routing, permission change or recurring job is enabled by these instructions.
+
+## Review policy for Codex and Claude
+
+Apply this policy to Pick Your AI reviews, including related repositories reviewed from this workspace.
+
+- For greenfield work, favor approving a useful, bounded contribution with constructive, non-blocking suggestions. Do not turn optional refinements, future hardening, incomplete neighboring work, or editorial preferences into approval gates.
+- Encourage sound planning and architecture: clear component responsibilities, consistent data and state definitions, explicit interfaces and dependencies, usable handoffs, and testable acceptance criteria. Suggest concrete improvements without requiring an entire future system in the current PR.
+- Request changes when a demonstrated, serious correctness, security, data-integrity, or architectural defect makes accepting the contribution unsafe or defeats its central purpose. Malice is not required for a real blocker. Explain the consequence and why it cannot reasonably be deferred; do not rubber-stamp known blockers or bypass required checks and independent review.
+- When GitHub publication is authorized, provide a formal Approve or Request changes decision, not only a conversation comment. Put actionable suggestions inline on the exact reviewed revision, tag the contributor, and use GitHub suggestion blocks where a replacement is concrete. Clearly label non-blocking advice.
+- Reviewers do not edit files, commit, push, merge, or implement their suggestions unless the user separately requests those actions. Use the requested reviewer model; do not substitute another model silently.
+- Distinguish approval of the bounded PR from completion of its parent issues, receiving handoffs, deployment, or broader research acceptance. State what was inspected and what tests or runtime/VM checks were not performed.
+- Search existing discussions before drafting. Verify the live head, submitted review state, contributor mentions, and inline suggestion ranges after posting. If a broader earlier critique is reassessed as non-blocking, say so explicitly in the formal review.
