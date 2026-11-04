@@ -2735,5 +2735,56 @@
       "limitations": "Kernel throughput only; individual reports, not independent measurements.",
       "updated_fields": []
     }
+  },
+  {
+    "id": "dub-io",
+    "name": "Dub",
+    "website": "https://www.dub.io/",
+    "organization": "Dub brand; legal operator unnamed in terms (page states Sydney, Australia; terms select Australian law)",
+    "classifications": [
+      "Unclassified research lead"
+    ],
+    "classification_basis": "Maintainer-supplied URL recorded 2026-11-03 for review. The reviewed pages describe an AI blog generator and show no AI stack, model or hardware selection, so no competitor, benchmark or data-source class is asserted. Relevance to Pick Your AI is an open question for the MR-01 owner.",
+    "target_users": "Bloggers and site owners who want to launch, grow and monetize a blog or niche community",
+    "capabilities": "Documented scope (not exercised): Hosted blog platform that generates and publishes AI articles for a niche, with review-before-publish, memberships, newsletters and site translation.",
+    "documented_features": [],
+    "pricing": {
+      "summary": "Monthly tiers shown from $0 (5 articles) to $50 (500 articles); currency denomination not stated.",
+      "rates": null,
+      "region": "not a price quote",
+      "source_urls": [
+        "https://www.dub.io/"
+      ]
+    },
+    "deployment_support": "Hosted service with custom-domain support (documented); self-hosting not established by reviewed evidence.",
+    "apis_and_integrations": "Vendor page names Stripe, third-party sign-in such as Google, and AdSense/Amazon affiliate setups; no public API is mentioned. None exercised.",
+    "licensing": "Reuse, scraping and generated-content ownership are not addressed in the reviewed terms; no redistribution permission established.",
+    "source_ids": [
+      "src-dub-io"
+    ],
+    "last_verification": "2026-11-03",
+    "confidence": "Low",
+    "applicable_tiers": [],
+    "related_issues": [
+      48
+    ],
+    "limitations": [
+      "Added as an unreviewed research lead; all matrix cells are Unknown pending #49 grading. No account created and no article generated.",
+      "The terms also use the name \"Dub.co\"; any relationship to other products using that name was not checked."
+    ],
+    "discovery_review": {
+      "access_date": "2026-11-03",
+      "canonical_url": "https://www.dub.io/",
+      "operator": "Dub brand; legal entity not stated",
+      "product_scope": "AI blog generation and hosting with community and monetization features.",
+      "version": "Unversioned public pages as retrieved 2026-11-03; terms show no last-updated date.",
+      "source_ids": [
+        "src-dub-io"
+      ],
+      "evidence_locator": "src-dub-io",
+      "status": "Source-checked documentary scope; relevance not reviewed and behavior not exercised",
+      "limitations": "Public home page and terms only; vendor statements are not independent verification.",
+      "updated_fields": []
+    }
   }
 ]
