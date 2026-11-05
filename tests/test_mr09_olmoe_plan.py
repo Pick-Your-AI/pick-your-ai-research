@@ -234,6 +234,85 @@ class OLMoEPlanTests(unittest.TestCase):
                 with self.subTest(index=index), self.assertRaises(ValueError):
                     CHECKER.strict_json(path)
 
+    def test_regular_symlink_preserves_json_admission_and_byte_limit(self):
+        from mr09_fixture_support import symlink_or_skip
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            target = root / "synthetic-plan-target.json"
+            alias = root / "synthetic-plan-alias.json"
+            original = b'{"nested":{"value":1}}\r\n'
+            target.write_bytes(original)
+            symlink_or_skip(alias, target)
+            self.assertEqual(CHECKER.strict_json(alias), {"nested": {"value": 1}})
+            self.assertEqual(target.read_bytes(), original)
+            self.assertTrue(alias.is_symlink())
+            for invalid in (b'{"nested":{"value":1,"value":2}}',
+                            b" " * (CHECKER.MAX_JSON_BYTES + 1)):
+                target.write_bytes(invalid)
+                with self.subTest(raw_bytes=len(invalid)), self.assertRaises(ValueError):
+                    CHECKER.strict_json(alias)
+                self.assertEqual(target.read_bytes(), invalid)
+
+    @unittest.skipUnless(os.name == "posix" and hasattr(os, "mkfifo") and
+                         hasattr(os, "O_NONBLOCK"), "requires POSIX FIFO support")
+    def test_actual_cli_rejects_fifo_paths_before_reading_without_blocking(self):
+        # Every FIFO read stays in a child, including the already-present control.
+        # run() kills and waits for only that child if its bounded timeout expires.
+        child = r"""
+import os
+from pathlib import Path
+import runpy
+import sys
+from unittest import mock
+
+script, candidate = (Path(value) for value in sys.argv[1:3])
+mode = sys.argv[3]
+marker = "synthetic-fifo-ready:" + mode
+original_is_file = Path.is_file
+
+if mode == "initial":
+    candidate.unlink()
+    os.mkfifo(candidate)
+    print(marker, file=sys.stderr, flush=True)
+elif mode != "replacement":
+    raise ValueError("unknown synthetic FIFO mode")
+
+def replace_after_check(path):
+    regular = original_is_file(path)
+    if mode == "replacement" and path == candidate and regular:
+        path.unlink()
+        os.mkfifo(path)
+        print(marker, file=sys.stderr, flush=True)
+    return regular
+
+sys.argv = [str(script), "--plan", str(candidate)]
+with mock.patch.object(Path, "is_file", new=replace_after_check):
+    runpy.run_path(str(script), run_name="__main__")
+"""
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve()
+            for mode in ("initial", "replacement"):
+                with self.subTest(mode=mode):
+                    candidate = root / ("synthetic-" + mode + "-plan.json")
+                    candidate.write_bytes((ROOT / CHECKER.PLAN).read_bytes())
+                    command = [sys.executable, "-c", child, str(SCRIPT), str(candidate), mode]
+                    marker = "synthetic-fifo-ready:" + mode
+                    try:
+                        result = subprocess.run(command, cwd=root, text=True, encoding="utf-8",
+                                                capture_output=True, timeout=5)
+                    except subprocess.TimeoutExpired as error:
+                        captured = error.stderr or b""
+                        if isinstance(captured, bytes):
+                            captured = captured.decode("utf-8", errors="replace")
+                        self.assertIn(marker, captured, "child did not reach the synthetic FIFO")
+                        self.fail("reader blocked after the confirmed synthetic FIFO setup; "
+                                  "the bounded child was killed and reaped")
+                    self.assertIn(marker, result.stderr, "child did not reach the synthetic FIFO")
+                    self.assertEqual(result.returncode, 1, result.stderr)
+                    self.assertIn("INVALID: not a regular JSON file", result.stderr)
+                    self.assertEqual(result.stdout, "")
+
     def test_actual_cli_retains_semantic_checks_under_python_optimization(self):
         with tempfile.TemporaryDirectory() as directory:
             candidate = copy.deepcopy(self.plan)
