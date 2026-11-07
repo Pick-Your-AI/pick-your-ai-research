@@ -20,5 +20,8 @@ and the [canonical escalation guide](https://github.com/Pick-Your-AI/.github/blo
 Refresh private routing evidence before choosing a recipient. Report unresolved
 roles and failed or stale lookups explicitly; do not infer accepted ownership from
 membership or access. Preserve the existing assignee, local gates and private-reporting
-boundaries. Central links depend on the governance change merging; no automatic
-routing, permission change or recurring job is enabled by these instructions.
+boundaries. The organization governance change (Pick-Your-AI/.github#23)
+merged on 2026-10-30. Published policy alone does not establish a fresh private
+snapshot, effective access, accepted operational ownership, active tooling or
+an authorized recipient. No automatic routing, permission change or recurring
+job is enabled by these instructions.
