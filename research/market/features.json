@@ -20230,6 +20230,486 @@
       "verification_method": "Not verified",
       "access_date": "2026-10-16",
       "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "natural_language",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "guided_selection",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "model_search",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "model_compare",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "hardware_fit",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "deployment_modes",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "constraints",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "explanation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "model_versions",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "hardware_catalog",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "vram_ram",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "cpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "quantization",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "context",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "kv_cache",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "concurrency",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "inference_engine",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "multi_gpu",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "hosting",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "knowledge_base",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "embeddings",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "vector_db",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "rag",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "agents",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "tool_calling",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "mcp",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "memory",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "integrations",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "fine_tuning",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "training_data",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "training_compute",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "training_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "fine_tuned_deploy",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "deployment",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "guardrails",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "benchmarks",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "harness_eval",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "evaluation",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "monitoring",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "api_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "hosting_pricing",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "hardware_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "recurring_cost",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "tco",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "saved",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "share",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "export",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
+    },
+    {
+      "product_id": "dub-io",
+      "feature": "api_access",
+      "status": "Unknown",
+      "evidence_ids": [],
+      "basis": "Not established by reviewed evidence; no inference from silence. Added with the 2026-11-03 research lead; grading left to #49.",
+      "verification_method": "Not verified",
+      "access_date": "2026-11-03",
+      "evidence_grade": "Unverified"
     }
   ]
 }
