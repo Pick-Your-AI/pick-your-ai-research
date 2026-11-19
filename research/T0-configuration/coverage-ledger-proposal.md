@@ -1,5 +1,14 @@
 # Stage 0 coverage and entity boundaries — proposal
 
+## Current reconciliation — 2026-11-19
+
+The T1 inventory/source validation contribution [#512](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/512) is merged in accepted main `d58106750bb76f72c270653993edf808f29c49bb`. It checks record/source integrity; the G02 canonical family/release/artifact/offering crosswalk remains unfinished. The historical source and relationship observations below keep their original cutoffs.
+
+The [Applications H01 receiving decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/509#issuecomment-7014669653) accepts the separately scoped Applications research boundary at producer `63d8ada68c3dbf807d94b94f53ffa26c6bb8b214` with explicit conditions. These retain distinct product/component identities, the stricter separate-module admission test, no double counting, lifecycle/unknown distinctions and the U1–U4 follow-up venues. The receipt records the actual delegated reviewer and does not attribute acceptance to absent owners.
+
+This bounded receiving decision leaves G12 outside this repository's Stage 0 implementation scope. It starts no crosswalk, corpus import, pilot or publication, changes no frozen builder kind, and preserves #47's accepted NARROW direction and H14 attribution/no-bulk-copy conditions. Remaining cohort, identity, rights and receiving decisions below remain separate. Neither this proposal nor H01 completes #509.
+
+
 Issue: [#509](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/509) · Status: proposed, awaiting affected-owner review
 
 ## User decision and scope
@@ -85,7 +94,7 @@ Classifications describe the scoped work below, not issue status or owner agreem
 | Gap | Primary class | Existing evidence / canonical route | Proposed next bounded decision |
 | --- | --- | --- | --- |
 | G01 Scope, ontology, quality | Existing partial | This proposal; #40/#41; [#47 synthesis](../market/synthesis.md) | Agree entity units, cohort boundary and distinct reference/product purposes |
-| G02 Model identity crosswalk | Existing partial | [T1 taxonomy](../T1-model-selection/model-taxonomy.md), [inventory](../T1-model-selection/model-research-inventory.json); #5–#7 | Crosswalk selected rows to family/release/artifact/offer without filling unknown fields; inventory validation is a separate active contribution |
+| G02 Model identity crosswalk | Existing partial | [T1 taxonomy](../T1-model-selection/model-taxonomy.md), [inventory](../T1-model-selection/model-research-inventory.json); #5–#7 | Crosswalk selected rows to family/release/artifact/offer without filling unknown fields; [#512](https://github.com/Pick-Your-AI/pick-your-ai-research/pull/512) delivered inventory/source integrity validation, not identity resolution |
 | G03 Field/use publication decisions | Existing partial | [Publication handoff](../../docs/PUBLICATION_ELIGIBILITY_HANDOFF.md), #41/#60; website #15 | Review one exact field-level projection and each intended use; retain exclusions |
 | G04 Ingestion/publication operations | Production handoff | [Pipeline program](https://github.com/Pick-Your-AI/pick-your-ai-catalog-pipeline/issues/1); #41; website #15 | Accept a permitted source, custody and exact release/withdrawal/consumer pilot |
 | G05 Qualified measurement/comparison | Existing partial | [Sizing validation](../market/sizing-validation.md), [benchmark validation](../market/benchmark-validation.md); #61/#62/#36 | Resolve missing protocol/measurement inputs within existing experimental scope |

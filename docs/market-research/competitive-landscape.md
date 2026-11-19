@@ -1,6 +1,6 @@
 # Competitive landscape
 
-The inventory contains 39 distinct products/resources, including all 22 original named candidates, ten original additional resources, CanIRun.ai and the six community fit-report resources added below. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
+The inventory contains 40 distinct products/resources, including all 22 original named candidates, ten original additional resources, CanIRun.ai, the six community fit-report resources and the unreviewed Dub research lead added below. Counts are not market shares. Classification is analytical, not a claim that each product is a complete end-to-end competitor.
 
 The [MR-01 acceptance and selection record](../../research/market/mr01-acceptance.md) contains the merged five-seed audit, current fourteen-profile working list, revision-scoped reviews and remaining owner decisions. The [2026-10-18 follow-up](../../research/market/mr01-acceptance.md#2026-10-18-catalog-and-summary-reconciliation) reconciles CanIRun.ai documentary fields and pins the llmfit upstream identity check. Older observations below retain their stated dates; document publication does not supply issue acceptance.
 
@@ -121,3 +121,7 @@ Excluded from deep dives: Arena and LLM Stats (leaderboards overlapping Artifici
 [CanIRun.ai devices](https://www.canirun.ai/devices) is recorded as `canirun-ai`, a partial competitor for device-first local model selection. It is operated by GitHub user midudev, per the `midudev/canirun.ai` repository whose homepage is canirun.ai (legal entity unconfirmed). It is a separate record from CanRun (`canrunllm.com`) and CanItRun (`canitrun.dev`); ownership relationships to those are unknown. The repository README describes hardware-detected, per-use-case recommendations, which makes it a direct-substitute candidate pending #66. See the [dated profile](../../research/market/competitors/canirun-ai.md). #48 owns intake, #49 its 48 matrix cells, #50 the profile and #66 scenario testing. This adds a fourteenth profile within the 10–15 target; it does not establish a full-stack substitute or data reuse permission.
 
 The [2026-10-18 #48 reconciliation](../../research/market/mr01-acceptance.md#2026-10-18-catalog-and-summary-reconciliation) records the later pinned README/footer/API-route evidence. The original directory and #125 browser observations retain their dates and limits; documented API shapes do not establish live availability or fit accuracy.
+
+## Dub research lead (2026-11-03)
+
+[Dub](https://www.dub.io/) is recorded as `dub-io` with the class "Unclassified research lead". It was supplied as a research topic without a stated purpose. Its [home page](https://www.dub.io/) and [terms](https://dub.io/terms-of-service) describe AI blog generation and hosting, and show no AI stack, model or hardware selection, so this record asserts no competitor, benchmark or data-source class. All 48 matrix cells are `Unknown` pending #49 grading. The MR-01 owner should decide whether it is relevant, for example as an adjacent content-marketing or AI-application example, or should be removed.

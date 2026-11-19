@@ -2895,5 +2895,20 @@
     "version": "arXiv v1 HTML, inspected 2026-10-17",
     "region": "Not applicable",
     "confidence": "Medium"
+  },
+  {
+    "id": "src-dub-io",
+    "url": "https://www.dub.io/",
+    "supporting_urls": [
+      "https://dub.io/terms-of-service"
+    ],
+    "publisher": "Dub",
+    "access_date": "2026-11-03",
+    "access_status": "retrieved",
+    "evidence_grade": "Primary documentation",
+    "limitations": "Public home page and terms inspection only; vendor statements, not independent verification. Silence on AI stack selection is not treated as a negative capability finding.",
+    "version": "Unversioned public pages retrieved 2026-11-03; terms show no last-updated date",
+    "region": "Global website; terms select Australian law; not a regional rate quote",
+    "confidence": "Low"
   }
 ]

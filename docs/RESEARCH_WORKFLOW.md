@@ -120,6 +120,22 @@ Every non-Unknown feature cell also needs its existing claim-level fields: `basi
 
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
 
+The submission validator also checks the existing T1 model research inventory
+and source register under `research/T1-model-selection`. When that notes directory
+is present, both `model-research-inventory.json` and `model-research-sources.json`
+must be readable, unambiguous JSON objects. Their existing record fields must
+retain nonempty text, real `YYYY-MM-DD` access dates, and nonempty text arrays for
+task families, source IDs and source URLs. Source IDs must be unique; every
+inventory source reference must resolve, with no repeated entries within an
+array. Source URLs receive the existing HTTP(S) syntax checks without fetching.
+Minimal proposal-only trees without the T1 notes directory remain supported.
+
+These checks preserve the `research-notes-not-catalog` boundary and do not
+interpret free-form unknowns, artifact types or verification labels as facts.
+They do not deduplicate model names, establish exact release identities, create
+the #509 canonical crosswalk, refresh source dates, or grant publication rights.
+Source checking, independent verification and owner acceptance remain separate.
+
 The handoff audit validator checks consistency among `handoffs.json`, `handoff-audit-readback.json` and `audit.json`. Its reader first rejects duplicate JSON object keys, non-finite constants and numeric overflow in all three files, including under optimized Python. It then rejects duplicate snapshot issue IDs, pull-request IDs, declared handoff pairs and historical review pairs before relying on their indexed identities. Conflicting entries cannot be silently discarded to obtain a passing audit. These checks preserve recorded attribution; they do not fetch live GitHub state or establish receiving-owner acceptance.
 
 Each scoped response in both the ledger and readback must retain nonempty text

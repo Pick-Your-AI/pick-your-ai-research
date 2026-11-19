@@ -23,3 +23,13 @@ Missing facts / unpriced scope / contract-change proposals:
 Use `Refs #n` for partial research. Use `Closes #n` only when the issue's full acceptance criteria are met.
 
 The issue's live assignee owns acceptance. CODEOWNERS routes file reviews; it does not reassign issues. Keep draft findings and unresolved handoffs explicit.
+
+## Routing context (optional)
+
+<!-- Only for an unresolved decision; reuse information above. See CONTRIBUTING.md,
+Routing decisions. Keep private rosters and security details out of this template. -->
+
+- Decision needed:
+- Current responsible role:
+- Prior disposition:
+- Proposed next recipient:
