@@ -1,0 +1,18 @@
+{
+  "format": "t1-identity-crosswalk-v1",
+  "status": "partial-research-not-catalog",
+  "basis_commit": "d58106750bb76f72c270653993edf808f29c49bb",
+  "assessed_on": "2026-11-19",
+  "scope": "Closed cohort of the 248 already committed T1 candidate rows; no new candidate discovery, vendor retrieval, rights grant or release qualification.",
+  "row_count": 248,
+  "inputs": {
+    "research/T1-model-selection/model-research-inventory.json": "9efd6e7f3684b9c2ef4ba444b2a8a3b64ace32d4147293f3aebde87f05ef524b",
+    "research/T1-model-selection/model-research-sources.json": "22edf4ee638fd0b6377fec56a8dac4376529c6a16454e7856a5f085edb700417",
+    "research/T1-model-selection/language-models.md": "ad3fa6766f5359f48cdd502cbb359f17f93b63e50d082f4a4f21592302eb1ccc",
+    "research/T1-model-selection/perception-models.md": "bddbfe977e5db331224be203e68e485859e14971df6261f2d33be1358a061c84",
+    "research/T1-model-selection/retrieval-models.md": "72a59c29d0f00fb061e51de8ff0dae53653b69e5957747a5d84cef421b7ea7bf",
+    "research/T1-model-selection/generative-media-models.md": "35a915a1cd5031d4263b7c84cb487049038c83ac303cdc9e340892438af149d4",
+    "research/T1-model-selection/audio-models.md": "a1459919d9ce7b1219b52d5632aef28fd8796184268639b0b9baa21050e08fb4",
+    "research/T1-model-selection/specialized-models.md": "75a687bb04ebe000ad2e88c233bfbe8c7957d2eb5e206c45f797f0f1bb5d4401"
+  }
+}
