@@ -1,5 +1,13 @@
 # MR-09 acceptance and remaining gates
 
+## Full-scope reconciliation — 2026-11-19
+
+The [coordinator's recorded scope decision](https://github.com/Pick-Your-AI/pick-your-ai-research/issues/61#issuecomment-6367324704) selects **A: retain the full scope of #61**. OLMoE M1–M4, long-context and G1 multi-GPU/per-rank coverage remain required; G1 is unmet, not implicitly deferred or narrowed. The decision supplies no specific device, paid compute, download or experiment authorization. Authorized devices/allocations, responsible operator, host/storage/process limits, compatible long-context workload, topology/per-rank instrumentation, matched estimator quantities and #10's decision tolerance remain separate missing inputs. Private host or operational details belong outside public Git.
+
+A generic Apple-silicon path in the [draft readiness plan](execution-plan-61-draft.md) is an unverified option, not adopted hardware or runtime evidence. A payload floor does not establish headroom or fit. H1's prospective admission launcher supports its H1 CUDA case only; M1–M4 and G1 need independently reviewed backend-specific measurement and admission controls before any separately authorized execution. No model or real-host execution is permitted in the current task.
+
+All seven #56 method criteria and #65's bounded outcome remain accepted; #56 stays open under its native #61/#62 child gate. #61's three empirical criteria remain incomplete. #62's six accepted desk criteria and five receiving decisions remain accepted; only the literal model/harness/budget/task pinning criterion stays unchecked. A 2026-11-19 GitHub-only read of the [existing publisher request](https://github.com/Qihoo360/harness-bench/issues/2#issuecomment-6265127285) returned no later identity answer; it is not a refreshed website/paper audit or replication. All earlier criteria, checkbox values, receipts, source dates and evidence below remain unchanged at their original cutoffs. This reconciliation supplies no new approval, operational value, empirical pair or Project readback.
+
 ## Current acceptance map — 2026-10-19
 
 This checkpoint reconciles the live #56/#61/#62 criteria and the delivered H1
