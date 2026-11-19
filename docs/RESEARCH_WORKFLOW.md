@@ -49,6 +49,28 @@ python contracts/v1/reference/validate_payload.py contracts/v1/schemas/catalog-i
 
 CI runs the same checks. It validates schemas, import integrity, generator consistency, canonical-kind coverage, local catalog references, exact price references, duplicate IDs, public provenance URL shape, date ordering, and external-artifact metadata. It rejects reserved fixture IDs/example domains in real proposals. Catalog, pricebook and evidence JSON must have unique object keys at every level; conflicting or repeated keys are rejected before schema validation rather than silently choosing a value. Non-finite numeric literals and numbers that overflow the intake's finite numeric range are also rejected. This stricter submission parsing does not change the frozen v1 contract. It does not fetch sources, verify remote hashes or rights, establish freshness, prove claims, or guarantee secrets are absent. Reviewers must check those matters and compare prior revisions for unintended fact changes.
 
+### Updating the bounded coverage snapshot
+
+After intentional changes to `catalog/proposals/**/*.json`,
+`pricing/proposals/**/*.json`, `contracts/v1/schemas/component-registry.json`,
+`research/market/competitors.json` or `research/market/features.json`, including
+changes received from another branch, regenerate the snapshot:
+
+```bash
+python scripts/research_coverage.py > research/coverage/repository-snapshot.json
+python scripts/research_coverage.py --check research/coverage/repository-snapshot.json
+python -m unittest discover -s tests -p test_research_coverage.py -v
+```
+
+Review the input changes and snapshot diff together. Update the summary counts in
+`research/coverage/README.md` when needed, then run the full research workflow.
+Commit the updated snapshot with its inputs. Changed hashes require review even
+when counts stay the same; keep the stale-snapshot guard enabled. These bounded
+counts and hashes establish local reproducibility, not source accuracy, rights,
+freshness, owner acceptance or production coverage.
+
+### Intake validation details
+
 Proposal loading preserves the original numeric value for integer checks, schema bounds, and pricebook revision identity. Integral decimal and exponent spellings remain valid where the schema permits an integer; rounding cannot make a fractional value valid or collapse two distinct revisions. The existing finite-range guard and integer-token limit remain in place. A nonzero decimal token whose exponent cannot be represented exactly is rejected as an input-admission error, even if a binary float would underflow to zero; all-zero spellings retain their exact zero value. This mode applies only to catalog, pricebook, and evidence proposal loading. Shared prototype readers retain their existing default numeric types and lexical identity checks. The current reached schemas use integer bounds and no `multipleOf`; new numeric keywords or fractional schema thresholds require a separate compatibility review.
 
 Price validity ordering supports ASCII timestamps with Gregorian years `0001` through `9999`, seconds `00` through `59`, uppercase or lowercase `T`/`Z`, and numeric offsets through `23:59` in either direction. It compares whole UTC seconds and the full fractional digit sequence without rounding or truncating to microseconds. Offset-equivalent timestamps and fractions differing only in trailing zeros are equal, so they cannot define a positive validity interval. Numeric offsets are subtracted from local time; see [RFC 3339 sections 4.2 and 5.6](https://www.rfc-editor.org/rfc/rfc3339.html#section-4.2) (checked 2026-10-18). The original timestamp strings and submission bytes are preserved.
@@ -119,6 +141,22 @@ acceptance evidence or change any issue or Project status.
 Every non-Unknown feature cell also needs its existing claim-level fields: `basis`, `verification_method`, `evidence_grade`, `evidence_url`, `access_date`, `confidence`, `limitations` and `audit_scope`, in addition to resolvable `evidence_ids`. These must be nonempty text; both the source-register and exact claim URLs must use HTTP(S) with a hostname, without credentials, whitespace or raw ASCII control characters, and with a valid port when specified. Shared URL checks inspect the original string as well as the parsed fields so parser normalization cannot conceal invalid control bytes. The claim access date must be an actual calendar date in `YYYY-MM-DD` form. Unknown cells may remain incomplete. These checks enforce record shape, not source support, freshness, rights, evidence-grade correctness or completion of the feature's bounded test.
 
 The 21 original tests exercise the synthetic contract examples. They are not a substitute for the separate submission validator. Arbitrary resource/evaluation JSON files are not automatically ingested by this validator; add explicit validation coverage in their PR.
+
+The submission validator also checks the existing T1 model research inventory
+and source register under `research/T1-model-selection`. When that notes directory
+is present, both `model-research-inventory.json` and `model-research-sources.json`
+must be readable, unambiguous JSON objects. Their existing record fields must
+retain nonempty text, real `YYYY-MM-DD` access dates, and nonempty text arrays for
+task families, source IDs and source URLs. Source IDs must be unique; every
+inventory source reference must resolve, with no repeated entries within an
+array. Source URLs receive the existing HTTP(S) syntax checks without fetching.
+Minimal proposal-only trees without the T1 notes directory remain supported.
+
+These checks preserve the `research-notes-not-catalog` boundary and do not
+interpret free-form unknowns, artifact types or verification labels as facts.
+They do not deduplicate model names, establish exact release identities, create
+the #509 canonical crosswalk, refresh source dates, or grant publication rights.
+Source checking, independent verification and owner acceptance remain separate.
 
 The handoff audit validator checks consistency among `handoffs.json`, `handoff-audit-readback.json` and `audit.json`. Its reader first rejects duplicate JSON object keys, non-finite constants and numeric overflow in all three files, including under optimized Python. It then rejects duplicate snapshot issue IDs, pull-request IDs, declared handoff pairs and historical review pairs before relying on their indexed identities. Conflicting entries cannot be silently discarded to obtain a passing audit. These checks preserve recorded attribution; they do not fetch live GitHub state or establish receiving-owner acceptance.
 

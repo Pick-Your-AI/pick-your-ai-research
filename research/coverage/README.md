@@ -13,8 +13,8 @@ add entities, resolve model aliases or change the frozen builder contract.
 - SHA-256 hashes of the exact input bytes, including every counted proposal file.
 
 The current inputs yield 124 catalog proposals across 19 of 29 builder kinds,
-three pricebooks containing 14 rates, and 1,872 cells (39 products × 48 features):
-121 Documented and 1,751 Unknown. Exercised and Unsupported both have zero cells.
+three pricebooks containing 14 rates, and 1,920 cells (40 products × 48 features):
+121 Documented and 1,799 Unknown. Exercised and Unsupported both have zero cells.
 A zero proposal count does not mean the kind lacks a research decision record;
 the [contract mapping](../../docs/CONTRACT_MAPPING.md) covers all 29 kinds.
 Proposal files are not deduplicated ecosystem entities. A Documented cell is not
@@ -39,6 +39,15 @@ input change, regenerate and review the new counts and hashes:
 ```bash
 python scripts/research_coverage.py > research/coverage/repository-snapshot.json
 ```
+
+Regenerate after intentional changes to `catalog/proposals/**/*.json`,
+`pricing/proposals/**/*.json`, `contracts/v1/schemas/component-registry.json`,
+`research/market/competitors.json` or `research/market/features.json`, including
+changes received from another branch. Review the input changes and snapshot diff
+together, update the summary counts above when needed, then rerun `--check` and
+the focused tests before the full research workflow. Commit the updated snapshot
+with its inputs; a changed hash alone still requires review even when counts stay
+the same. Keep this guard enabled rather than ignoring a stale snapshot.
 
 Missing, duplicate or unknown matrix cells fail instead of shrinking the
 denominator. Unknown status names, duplicate product identities, unknown catalog

@@ -15,6 +15,7 @@ Missing facts / unpriced scope / contract-change proposals:
 ## Validation and review
 
 - [ ] Ran the validation commands in docs/RESEARCH_WORKFLOW.md
+- [ ] If coverage inputs changed, regenerated `research/coverage/repository-snapshot.json`, reviewed its input hashes/counts, updated the coverage README when needed, and ran the documented snapshot check
 - [ ] Included any additional issue-specific checks (for market prompt edits: `python prompts/market/validate_prompts.py`)
 - [ ] Checked claim-level evidence and dates; synthetic examples are not research findings
 - [ ] Checked public files for private content and credential-bearing URLs
@@ -23,3 +24,13 @@ Missing facts / unpriced scope / contract-change proposals:
 Use `Refs #n` for partial research. Use `Closes #n` only when the issue's full acceptance criteria are met.
 
 The issue's live assignee owns acceptance. CODEOWNERS routes file reviews; it does not reassign issues. Keep draft findings and unresolved handoffs explicit.
+
+## Routing context (optional)
+
+<!-- Only for an unresolved decision; reuse information above. See CONTRIBUTING.md,
+Routing decisions. Keep private rosters and security details out of this template. -->
+
+- Decision needed:
+- Current responsible role:
+- Prior disposition:
+- Proposed next recipient:

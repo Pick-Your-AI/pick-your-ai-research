@@ -42,14 +42,14 @@
     "rate_count": 14
   },
   "market": {
-    "product_count": 39,
+    "product_count": 40,
     "feature_count": 48,
-    "cell_count": 1872,
+    "cell_count": 1920,
     "cells_by_status": {
       "Exercised": 0,
       "Documented": 121,
       "Unsupported": 0,
-      "Unknown": 1751
+      "Unknown": 1799
     }
   },
   "unmeasured": [
@@ -186,7 +186,7 @@
     "pricing/proposals/t1-api-2026-10-16.json": "e44edc4e4e188b582b7de66df41c5df4c3f2d655325c39c202fd8178ebf06056",
     "pricing/proposals/t2-hosting-2026-10-16.json": "6c6df4fd70486c2f09fac8a8ff2dec6bb75c834a292c2a21819e9722608357fa",
     "pricing/proposals/t4b-anthropic-web-search.json": "71f902ad0d1c3351f58b5e7b3e324f6889d077981772af4a142aafa064cb5b29",
-    "research/market/competitors.json": "766ab2d937166edb6a39f546eaa7997a8d5795a14ce3af9ee573085ad18e561f",
-    "research/market/features.json": "4712d18c4705f62206e08670c389dfcf3b344fe9119a55a1219385e7b6c690f9"
+    "research/market/competitors.json": "c08619874b61c6ae5fcf271a4916c502d052ad8838fe09047d9703af443cb3e5",
+    "research/market/features.json": "0b4fdb175cc29ff65b62f5daa6b49d30e7131249bbc2eb2ba27b4ef15202deb6"
   }
 }

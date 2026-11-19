@@ -45,3 +45,11 @@ body:
       description: Proposed assignee, workstream, six scores or unknown, override reason, next action and phase limit. Project fields must be set before Ready.
     validations:
       required: true
+  - type: textarea
+    id: routing_context
+    attributes:
+      label: Routing context (optional)
+      description: Only for an unresolved decision. Reuse answers above; do not include private rosters or security details. See CONTRIBUTING.md, Routing decisions.
+      placeholder: "Decision needed; current responsible role; prior disposition; proposed next recipient."
+    validations:
+      required: false
